@@ -1,7 +1,5 @@
 package com.marklynch.script.trigger;
 
-import com.marklynch.Game;
-
 public class ScriptTriggerTurnStart extends ScriptTrigger {
 
 	public final static String[] editableAttributes = { "name", "turn", "factionIndex" };
@@ -21,9 +19,10 @@ public class ScriptTriggerTurnStart extends ScriptTrigger {
 
 	@Override
 	public boolean checkTrigger() {
-		if (Game.level.turn == turn && Game.level.currentFactionMovingIndex == factionIndex) {
-			return true;
-		}
+		// if (Game.level.turn == turn && Game.level.currentFactionMovingIndex
+		// == factionIndex) {
+		// return true;
+		// }
 
 		return false;
 	}

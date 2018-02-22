@@ -107,7 +107,7 @@ public class ActionCastDouse extends Action {
 		}
 
 		if (performer == Game.level.player)
-			Game.level.endTurn();
+			Game.level.endPlayerTurn();
 	}
 
 	@Override

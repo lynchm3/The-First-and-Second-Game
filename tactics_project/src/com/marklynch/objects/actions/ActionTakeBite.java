@@ -45,7 +45,7 @@ public class ActionTakeBite extends Action {
 		}
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
-			Game.level.endTurn();
+			Game.level.endPlayerTurn();
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

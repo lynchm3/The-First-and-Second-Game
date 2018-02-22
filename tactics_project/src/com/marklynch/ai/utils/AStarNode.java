@@ -1,7 +1,7 @@
 package com.marklynch.ai.utils;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;

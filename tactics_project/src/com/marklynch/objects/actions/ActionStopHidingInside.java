@@ -54,7 +54,7 @@ public class ActionStopHidingInside extends Action {
 			sound.play();
 
 		if (performer == Game.level.player)
-			Game.level.endTurn();
+			Game.level.endPlayerTurn();
 
 	}
 

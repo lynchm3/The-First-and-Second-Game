@@ -193,6 +193,8 @@ public class Actor extends GameObject {
 
 	public void init(int gold, GameObject[] mustHaves, GameObject[] mightHaves) {
 
+		Game.level.actors.add(this);
+
 		if (bed != null)
 			this.bedGUID = bed.guid;
 		if (bed != null)
@@ -715,11 +717,6 @@ public class Actor extends GameObject {
 	public Button getButtonFromMousePosition(float alteredMouseX, float alteredMouseY) {
 
 		return null;
-	}
-
-	public void unselected() {
-		// Game.level.removeWalkingHighlight();
-		// Game.level.removeWeaponsThatCanAttackHighlight();
 	}
 
 	public void weaponButtonClicked(Weapon weapon) {

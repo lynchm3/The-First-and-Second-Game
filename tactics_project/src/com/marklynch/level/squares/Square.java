@@ -934,9 +934,9 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public boolean includableInPath(Actor actor, AStarNode goalNode) {
-
-		if (actor == Game.level.player && !this.seenByPlayer)
-			return true;
+		Game.includableInPath++;
+		// if (actor == Game.level.player && !this.seenByPlayer)
+		// return true;
 
 		if (this == goalNode)
 			return true;
@@ -961,6 +961,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	@Override
 	public List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, AStarNode goalNode) {
+		Game.getNeighborsThatCanBeMovedTo++;
+		Game.getAllNeighbourSquaresThatCanBeMovedTo++;
 		ArrayList<Square> squares = new ArrayList<Square>();
 
 		for (Square square : neighbors) {
@@ -973,6 +975,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	@Override
 	public float getEstimatedCost(AStarNode node) {
+		Game.getEstimatedCost++;
 		return this.straightLineDistanceTo(node) + node.cost - 1;
 	}
 

@@ -56,7 +56,6 @@ public class Mort extends Actor {
 		setInstances(actor);
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
 
-		actor.init(gold, mustHaves, mightHaves);
 		return actor;
 	}
 

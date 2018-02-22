@@ -499,8 +499,8 @@ public class QuestSmallGame extends Quest {
 	@Override
 	public boolean update(Actor actor) {
 
-		if (1 == 1)
-			return false;
+		// if (1 == 1)
+		// return false;
 
 		if (resolved)
 			return false;

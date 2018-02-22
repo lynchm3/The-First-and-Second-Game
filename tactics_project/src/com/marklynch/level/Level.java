@@ -110,6 +110,7 @@ public class Level {
 	public static transient QuestList fullQuestList = new QuestList();
 	public static transient MarkerList markerList = new MarkerList();
 	public static transient FactionList factions = new FactionList();
+	public static transient ArrayList<Actor> actors = new ArrayList<Actor>();
 	public static transient GameOver gameOver = new GameOver();
 	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
 
@@ -143,8 +144,8 @@ public class Level {
 
 	public transient static int turn = 1;
 	// public ArrayList<Faction> factions;
-	public transient Faction currentFactionMoving;
-	public transient int currentFactionMovingIndex;
+	// public transient Faction currentFactionMoving;
+	// public transient int currentFactionMovingIndex;
 	public transient Stack<Move> undoList;
 	public ActivityLogger activityLogger;
 	public QuickBar quickBar;
@@ -1212,10 +1213,8 @@ public class Level {
 		Game.font2.drawString(100, 100, "NICE LOOKING FONTS!", org.newdawn.slick.Color.green);
 
 		// Turn text
-		if (currentFactionMoving != null) {
-			TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, null,
-					new Object[] { "TURN " + turn });
-		}
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, null,
+				new Object[] { "TURN " + turn });
 
 		// Zoom
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 100, Integer.MAX_VALUE, true, null,
@@ -1300,6 +1299,9 @@ public class Level {
 	// ArrayList<Action>();
 
 	public static long lastUpdate = 0;
+	int lastActorUpdatedIndex = -1;
+	boolean aiTurn = false;
+	int timeToMoveAll = 200;// ms
 
 	public void update(int delta) {
 		lastUpdate = System.currentTimeMillis();
@@ -1435,11 +1437,44 @@ public class Level {
 			Player.playerTargetSquare = Player.playerTargetActor.squareGameObjectIsOn;
 		}
 
-		if (currentFactionMoving != factions.player && (!Game.level.player.animationsBlockingAI())) {
-			currentFactionMoving.update(delta);
-		} else if (Game.level.player.primaryAnimation.completed && Game.level.player.playerTargetAction != null
-				&& Game.level.player.playerTargetAction.recheck()
-				&& Game.level.player.playerTargetAction.checkRange()) {
+		if (aiTurn) {
+			int amountOfAiToUpdate = actors.size() * (delta / timeToMoveAll);
+			int start = lastActorUpdatedIndex + 1;
+			int end = start + amountOfAiToUpdate;
+			if (end >= actors.size())
+				end = actors.size() - 1;
+			for (int i = start; i <= end; i++) {
+				Actor actor = actors.get(i);
+				Game.level.activeActor = actor;
+				actor.update(delta);
+			}
+			lastActorUpdatedIndex = end;
+			if (lastActorUpdatedIndex == (actors.size() - 1)) {
+				lastActorUpdatedIndex = -1;
+				startPlayerTurn();
+				aiTurn = false;
+			}
+
+			ArrayList<Actor> deadActors = new ArrayList<Actor>();
+			for (Actor actor : actors) {
+				if (actor.remainingHealth <= 0)
+					deadActors.add(actor);
+			}
+
+			actors.removeAll(deadActors);
+		}
+
+		// 60FPS = 16ms
+		// 30FPS = 33ms
+
+		// if (currentFactionMoving != factions.player &&
+		// (!Game.level.player.animationsBlockingAI())) {
+		// currentFactionMoving.update(delta);
+		// }
+		else if (Game.level.player.primaryAnimation.completed && Game.level.player.playerTargetAction != null
+				&& Game.level.player.playerTargetAction.recheck() && Game.level.player.playerTargetAction.checkRange())
+
+		{
 			Game.level.player.playerTargetAction.perform();
 			pausePlayer();
 		} else if (player.playerTargetActor != null && player.straightLineDistanceTo(Player.playerTargetSquare) <= 2) {
@@ -1852,113 +1887,76 @@ public class Level {
 
 	}
 
-	public void endTurn() {
-		addRemoveObjectToFromGround();
-		// this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving,
-		// " ended turn " + this.turn }));
+	public void startPlayerTurn() {
+		this.turn++;
+		loggedThisTurn = false;
 
-		// Pre end turn
-		if (currentFactionMovingIndex == 0) {
-
-			changeTime(20);
-			// secondString;
-
-			// If hiding in a place, add it's effects
-			if (player.hidingPlace != null) {
-				for (Effect effect : player.hidingPlace.effectsFromInteracting) {
-					player.addEffect(effect.makeCopy(player.hidingPlace, player));
-				}
-			}
-
-			player.activateEffects();
-
-			// Update player inventory
-			ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
-			for (GameObject gameObjectInInventory : player.inventory.getGameObjects()) {
-				gameObjectInInventory.update(0);
-				if (gameObjectInInventory.remainingHealth <= 0) {
-					toRemove.add(gameObjectInInventory);
-				}
-			}
-			for (GameObject gameObject : toRemove) {
-				// if (gameObject.destroyedBy instanceof EffectBurning) {
-				// player.inventory.replace(gameObject,
-				// Templates.ASH.makeCopy(null, player));
-				// } else {
-				player.inventory.remove(gameObject);
-				// }
-			}
-
-			// notifications.clear();
-
-			for (Quest quest : fullQuestList)
-				quest.update();
-
+		Game.level.activeActor = player;
+		if (player.peekSquare != null) {
+			player.calculateVisibleSquares(player.peekSquare);
+		} else {
+			player.calculateVisibleSquares(Game.level.activeActor.squareGameObjectIsOn);
 		}
+		player.discoveryCheck();
 
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				actor.distanceMovedThisTurn = 0;
-				actor.hasAttackedThisTurn = false;
-				// actor.wasSwappedWithThisTurn = false;
+		ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>();
+		for (GameObject gameObject : player.getAttackers()) {
+			if (gameObject.remainingHealth <= 0) {
+				attackersToRemoveFromList.add(gameObject);
 			}
 		}
 
-		// removeWalkingHighlight();
-		// removeWeaponsThatCanAttackHighlight();
-
-		if (activeActor != null)
-			activeActor.unselected();
-		activeActor = null;
-		currentFactionMovingIndex++;
-		if (currentFactionMovingIndex >= factions.size())
-			currentFactionMovingIndex = 0;
-
-		while (factions.get(currentFactionMovingIndex).actors.size() == 0) {
-			currentFactionMovingIndex++;
-			if (currentFactionMovingIndex >= factions.size()) {
-				currentFactionMovingIndex = 0;
-			}
+		for (GameObject actor : attackersToRemoveFromList) {
+			player.getAttackers().remove(actor);
 		}
 
-		currentFactionMoving = factions.get(currentFactionMovingIndex);
-		if (currentFactionMovingIndex == 0) {
-			this.turn++;
-			loggedThisTurn = false;
-
-			Game.level.activeActor = player;
-			// Game.level.activeActor.equippedWeapon =
-			// Game.level.activeActor.getWeaponsInInventory().get(0);
-			// Actor.calculateReachableSquares();
-			if (player.peekSquare != null) {
-				player.calculateVisibleSquares(player.peekSquare);
-			} else {
-				player.calculateVisibleSquares(Game.level.activeActor.squareGameObjectIsOn);
-			}
-			player.discoveryCheck();
-
-			ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>();
-			for (GameObject gameObject : player.getAttackers()) {
-				if (gameObject.remainingHealth <= 0) {
-					attackersToRemoveFromList.add(gameObject);
-				}
-			}
-
-			for (GameObject actor : attackersToRemoveFromList) {
-				player.getAttackers().remove(actor);
-			}
-
-			player.clearActions();
+		player.clearActions();
+		for (GameObject inanimateObject : inanimateObjectsOnGround) {
+			inanimateObject.update(0);
 		}
 
 		undoList.clear();
+	}
 
-		if (activeActor == player) {
-			for (GameObject inanimateObject : inanimateObjectsOnGround) {
-				inanimateObject.update(0);
+	public void endPlayerTurn() {
+
+		changeTime(20);
+		// secondString;
+
+		// If hiding in a place, add it's effects
+		if (player.hidingPlace != null) {
+			for (Effect effect : player.hidingPlace.effectsFromInteracting) {
+				player.addEffect(effect.makeCopy(player.hidingPlace, player));
 			}
 		}
 
+		player.activateEffects();
+
+		// Update player inventory
+		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+		for (GameObject gameObjectInInventory : player.inventory.getGameObjects()) {
+			gameObjectInInventory.update(0);
+			if (gameObjectInInventory.remainingHealth <= 0) {
+				toRemove.add(gameObjectInInventory);
+			}
+		}
+		for (GameObject gameObject : toRemove) {
+			player.inventory.remove(gameObject);
+		}
+
+		for (Quest quest : fullQuestList)
+			quest.update();
+
+		for (Actor actor : actors) {
+			actor.distanceMovedThisTurn = 0;
+			actor.hasAttackedThisTurn = false;
+			// actor.wasSwappedWithThisTurn = false;
+		}
+
+		activeActor = null;
+		aiTurn = true;
+
+		undoList.clear();
 	}
 
 	public void addRemoveObjectToFromGround() {

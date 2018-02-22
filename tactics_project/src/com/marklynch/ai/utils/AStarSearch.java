@@ -35,6 +35,7 @@ public class AStarSearch {
 	 * Construct the path, not including the start node.
 	 */
 	protected LinkedList<AStarNode> constructPath(AStarNode node) {
+		Game.constructPath++;
 		LinkedList<AStarNode> path = new LinkedList<AStarNode>();
 		while (node.pathParent != null) {
 			path.addFirst(node);
@@ -49,12 +50,13 @@ public class AStarSearch {
 	 */
 
 	public LinkedList<AStarNode> findPath(Actor actor, AStarNode startNode, AStarNode goalNode, int maxCount) {
+		Game.findPath++;
 
 		AStarNode bestNodeFound = null;
 		float bestPathFoundDistanceToTarget = Integer.MAX_VALUE;
 
 		PriorityList openList = new PriorityList();
-		LinkedList closedList = new LinkedList();
+		LinkedList<AStarNode> closedList = new LinkedList();
 
 		startNode.costFromStart = 0;
 		startNode.estimatedCostToGoal = startNode.getEstimatedCost(goalNode);
@@ -65,7 +67,7 @@ public class AStarSearch {
 		while (!openList.isEmpty() && count < maxCount) {
 			AStarNode node = (AStarNode) openList.removeFirst();
 			if (node == goalNode) {
-				// construct the path from start to goal
+				// we've reached the goal node!
 				return constructPath(goalNode);
 			}
 

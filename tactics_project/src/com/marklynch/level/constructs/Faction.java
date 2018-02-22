@@ -7,12 +7,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.objects.units.Actor;
-
 import com.marklynch.utils.Texture;
 
 public class Faction {
@@ -81,20 +79,9 @@ public class Faction {
 		long start = System.currentTimeMillis();
 
 		for (int i = 0; i < actors.size(); i++) {
-			Actor actor = actors.get(i);
-			Game.level.activeActor = actor;
-			actor.update(delta);
 		}
 
-		ArrayList<Actor> deadActors = new ArrayList<Actor>();
-		for (Actor actor : actors) {
-			if (actor.remainingHealth <= 0)
-				deadActors.add(actor);
-		}
-
-		actors.removeAll(deadActors);
-
-		Game.level.endTurn();
+		// Game.level.endTurn();
 	}
 
 	// public void updateFORBATTLE(int delta) {

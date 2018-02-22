@@ -1045,6 +1045,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public int straightLineDistanceTo(Square square) {
+		Game.straightLineDistanceTo++;
 
 		return straightLineDistanceBetween(this.squareGameObjectIsOn, square);
 	}

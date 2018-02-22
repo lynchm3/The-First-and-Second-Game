@@ -36,6 +36,14 @@ import mdesl.test.Util;
 
 public class Game {
 
+	public static int includableInPath;
+	public static int findPath;
+	public static int constructPath;
+	public static int getEstimatedCost;
+	public static int straightLineDistanceTo;
+	public static int getAllNeighbourSquaresThatCanBeMovedTo;
+	public static int getNeighborsThatCanBeMovedTo;
+
 	// DEBUG
 	public static boolean fullVisiblity = false;
 	public static boolean redHighlightOnRestrictedSquares = false;
@@ -218,8 +226,25 @@ public class Game {
 				resize();
 			}
 
-			if (!paused)
+			if (!paused) {
+				System.out.println("Game.includableInPath = " + Game.includableInPath);
+				System.out.println("Game.findPath = " + Game.findPath);
+				System.out.println("Game.constructPath = " + Game.constructPath);
+				System.out.println("Game.getEstimatedCost = " + Game.getEstimatedCost);
+				System.out.println("Game.straightLineDistanceTo = " + Game.straightLineDistanceTo);
+				System.out.println(
+						"Game.getAllNeighbourSquaresThatCanBeMovedTo = " + Game.getAllNeighbourSquaresThatCanBeMovedTo);
+				System.out.println("Game.getNeighborsThatCanBeMovedTo = " + Game.getNeighborsThatCanBeMovedTo);
+
+				Game.includableInPath = 0;
+				Game.findPath = 0;
+				Game.constructPath = 0;
+				Game.getEstimatedCost = 0;
+				Game.straightLineDistanceTo = 0;
+				Game.getAllNeighbourSquaresThatCanBeMovedTo = 0;
+				Game.getNeighborsThatCanBeMovedTo = 0;
 				update(delta);
+			}
 
 			// if (!displayActive && wasActive)
 			// drawInactive();

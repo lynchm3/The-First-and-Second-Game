@@ -49,7 +49,7 @@ public class ActionSmash extends Action {
 			sound.play();
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
-			Game.level.endTurn();
+			Game.level.endPlayerTurn();
 
 		if (actor != null) {
 			if (!legal) {

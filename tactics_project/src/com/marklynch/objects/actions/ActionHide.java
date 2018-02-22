@@ -71,7 +71,7 @@ public class ActionHide extends Action {
 			sound.play();
 
 		if (actionMove != null && performer == Game.level.player && Game.level.activeActor == Game.level.player)
-			Game.level.endTurn();
+			Game.level.endPlayerTurn();
 	}
 
 	@Override

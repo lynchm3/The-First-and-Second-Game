@@ -172,7 +172,6 @@ public class RockGolem extends Monster {
 
 		this.roomLivingIn = roomLivingIn;
 
-		actor.init(0, mustHaves, mightHaves);
 		return actor;
 	}
 

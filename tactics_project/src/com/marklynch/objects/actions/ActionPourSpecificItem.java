@@ -90,7 +90,7 @@ public class ActionPourSpecificItem extends Action {
 		}
 
 		if (performer == Game.level.player)
-			Game.level.endTurn();
+			Game.level.endPlayerTurn();
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

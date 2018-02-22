@@ -78,7 +78,7 @@ public class ActionTeleportSwap extends Action {
 			sound.play();
 
 		if (endTurn && performer == Game.level.player && Game.level.activeActor == Game.level.player)
-			Game.level.endTurn();
+			Game.level.endPlayerTurn();
 
 		trespassingCheck(this, performer, teleportee.squareGameObjectIsOn);
 

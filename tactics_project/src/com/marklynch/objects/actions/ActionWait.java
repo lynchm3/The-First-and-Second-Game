@@ -41,7 +41,7 @@ public class ActionWait extends Action {
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
 			performer.primaryAnimation = new AnimationWait();
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
-			Game.level.endTurn();
+			Game.level.endPlayerTurn();
 
 		trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 

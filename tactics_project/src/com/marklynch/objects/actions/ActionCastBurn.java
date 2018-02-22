@@ -99,7 +99,7 @@ public class ActionCastBurn extends Action {
 		}
 
 		if (performer == Game.level.player)
-			Game.level.endTurn();
+			Game.level.endPlayerTurn();
 	}
 
 	@Override
