@@ -91,7 +91,7 @@ public class ActionTeleportSwap extends Action {
 		Square originalSquare = gameObject.squareGameObjectIsOn;
 		GameObject gameObjectInTheWay = null;
 		if (!gameObject.canShareSquare)
-			gameObjectInTheWay = square.inventory.getGameObjectThatCantShareSquare();
+			gameObjectInTheWay = square.inventory.gameObjectThatCantShareSquare;
 
 		gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
 		gameObject.squareGameObjectIsOn = square;

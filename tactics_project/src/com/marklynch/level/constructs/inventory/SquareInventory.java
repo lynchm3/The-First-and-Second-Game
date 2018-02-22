@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
@@ -13,6 +14,11 @@ import com.marklynch.objects.units.Actor;
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
 
 	public transient Square square;
+
+	public boolean canShareSquare = true;
+	public GameObject gameObjectThatCantShareSquare = null;
+	public Actor actorThatCantShareSquare = null;
+	public Door door = null;
 
 	@Override
 	public void postLoad1() {
@@ -58,6 +64,14 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 			updateStacks();
 			matchStacksToSquares();
+
+			canShareSquare = canShareSquare();
+			gameObjectThatCantShareSquare = getGameObjectThatCantShareSquare1();
+			if (gameObjectThatCantShareSquare instanceof Actor)
+				actorThatCantShareSquare = (Actor) gameObjectThatCantShareSquare;
+			else
+				actorThatCantShareSquare = null;
+			door = (Door) getGameObjectOfClass(Door.class);
 		}
 	}
 
@@ -65,14 +79,39 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public int remove(GameObject gameObject) {
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
+
+			square.calculatePathCost();
+			square.calculatePathCostForPlayer();
+
+			updateStacks();
+			matchStacksToSquares();
+			canShareSquare = canShareSquare();
+			gameObjectThatCantShareSquare = getGameObjectThatCantShareSquare1();
+			if (gameObjectThatCantShareSquare instanceof Actor)
+				actorThatCantShareSquare = (Actor) gameObjectThatCantShareSquare;
+			else
+				actorThatCantShareSquare = null;
+			door = (Door) getGameObjectOfClass(Door.class);
 		}
-
-		square.calculatePathCost();
-		square.calculatePathCostForPlayer();
-
-		updateStacks();
-		matchStacksToSquares();
 		return -1;
+	}
+
+	private boolean canShareSquare() {
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject != null && !gameObject.canShareSquare)
+				return false;
+		}
+		return true;
+	}
+
+	public boolean canBeMovedTo() {
+		if (canShareSquare) {
+			return true;
+		} else {
+			if (contains(Actor.class))
+				return true;
+		}
+		return false;
 	}
 
 	public ArrayList<GameObject> getGameObjectsThatFitInInventory() {

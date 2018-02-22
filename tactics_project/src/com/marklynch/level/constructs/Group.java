@@ -3,7 +3,6 @@ package com.marklynch.level.constructs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.ArrayList;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.quest.Quest;
@@ -18,7 +17,7 @@ public class Group {
 
 	public String name;
 	protected transient ArrayList<Actor> members;
-	protected transient Actor leader;
+	public transient Actor leader;
 	protected transient Square targetSquare;
 	protected transient ArrayList<GameObject> attackers;
 	public transient Quest quest;
@@ -91,7 +90,7 @@ public class Group {
 				for (int i = 1; i <= maxDistanceFromLeader; i++) {
 					ArrayList<Square> squaresISquareAway = leader.getAllSquaresAtDistance(i);
 					for (Square square : squaresISquareAway) {
-						if (square.inventory.canShareSquare()
+						if (square.inventory.canShareSquare
 								&& square.structureSquareIsIn == leader.squareGameObjectIsOn.structureSquareIsIn
 								&& !targetSquares.contains(square)) {
 							possibleSquares.add(square);

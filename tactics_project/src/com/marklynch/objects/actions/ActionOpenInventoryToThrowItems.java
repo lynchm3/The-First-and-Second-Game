@@ -28,7 +28,7 @@ public class ActionOpenInventoryToThrowItems extends Action {
 		this.target = target;
 		if (target instanceof Square) {
 			targetSquare = (Square) target;
-			targetGameObject = targetSquare.inventory.getGameObjectThatCantShareSquare();
+			targetGameObject = targetSquare.inventory.gameObjectThatCantShareSquare;
 		} else if (target instanceof GameObject) {
 			targetGameObject = (GameObject) target;
 			targetSquare = targetGameObject.squareGameObjectIsOn;

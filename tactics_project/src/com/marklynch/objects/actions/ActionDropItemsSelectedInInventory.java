@@ -69,7 +69,7 @@ public class ActionDropItemsSelectedInInventory extends Action {
 
 		}
 
-		if (!square.inventory.canShareSquare() && !object.canShareSquare) {
+		if (!square.inventory.canShareSquare && !object.canShareSquare) {
 			actionName = ACTION_NAME + " " + object.name + " (no space)";
 			return false;
 		}

@@ -61,12 +61,12 @@ public class ActionMove extends Action {
 		}
 
 		Square oldSquare = actor.squareGameObjectIsOn;
-		GameObject gameObjectInTheWay = squareToMoveTo.inventory.getGameObjectThatCantShareSquare();
+		GameObject gameObjectInTheWay = squareToMoveTo.inventory.gameObjectThatCantShareSquare;
 
 		Actor actorInTheWay = null;
 
 		if (gameObjectInTheWay instanceof Actor)
-			actorInTheWay = (Actor) squareToMoveTo.inventory.getGameObjectThatCantShareSquare();
+			actorInTheWay = (Actor) squareToMoveTo.inventory.gameObjectThatCantShareSquare;
 
 		if (actorInTheWay == Game.level.player) {
 			return;
@@ -172,7 +172,7 @@ public class ActionMove extends Action {
 		// return false;
 		// }
 
-		GameObject objectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
+		GameObject objectInTheWay = target.inventory.gameObjectThatCantShareSquare;
 
 		if (objectInTheWay instanceof Actor) {
 			Actor actorInTheWay = (Actor) objectInTheWay;

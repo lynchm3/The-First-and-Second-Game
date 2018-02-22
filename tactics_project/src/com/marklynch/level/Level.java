@@ -5,7 +5,6 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
-import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Matrix4f;
@@ -1469,10 +1468,10 @@ public class Level {
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
 			if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null
 					|| Player.playerPathToMove.squares.size() == 0) {
-				if (!player.playerTargetSquare.inventory.canShareSquare()) {
+				if (!player.playerTargetSquare.inventory.canShareSquare) {
 
 					Object[] objects = new Object[] { "Theres a ",
-							player.playerTargetSquare.inventory.getGameObjectThatCantShareSquare(), " there!" };
+							player.playerTargetSquare.inventory.gameObjectThatCantShareSquare, " there!" };
 					notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 					Game.level.logOnScreen(new ActivityLog(objects));
 				} else {
@@ -1501,7 +1500,7 @@ public class Level {
 
 			if (!action.enabled) {
 				Object[] objects = new Object[] { "Path blocked by ",
-						squareToMoveTo.inventory.getGameObjectThatCantShareSquare(), "!" };
+						squareToMoveTo.inventory.gameObjectThatCantShareSquare, "!" };
 				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
 				pausePlayer();

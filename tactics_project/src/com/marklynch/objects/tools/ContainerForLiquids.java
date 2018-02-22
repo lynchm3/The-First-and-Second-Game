@@ -62,7 +62,7 @@ public class ContainerForLiquids extends Tool {
 					&& this.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1) {
 				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid
 						- 1][this.squareGameObjectIsOn.yInGrid];
-				if (!squareForGlass.inventory.canShareSquare()) {
+				if (!squareForGlass.inventory.canShareSquare) {
 					squareForGlass = null;
 				}
 			}
@@ -70,7 +70,7 @@ public class ContainerForLiquids extends Tool {
 					&& this.squareGameObjectIsOn.xInGrid > 0) {
 				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid
 						+ 1][this.squareGameObjectIsOn.yInGrid];
-				if (!squareForGlass.inventory.canShareSquare()) {
+				if (!squareForGlass.inventory.canShareSquare) {
 					squareForGlass = null;
 				}
 			}
@@ -78,7 +78,7 @@ public class ContainerForLiquids extends Tool {
 					&& this.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1) {
 				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid][this.squareGameObjectIsOn.yInGrid
 						- 1];
-				if (!squareForGlass.inventory.canShareSquare()) {
+				if (!squareForGlass.inventory.canShareSquare) {
 					squareForGlass = null;
 				}
 			}
@@ -86,7 +86,7 @@ public class ContainerForLiquids extends Tool {
 					&& this.squareGameObjectIsOn.yInGrid > 0) {
 				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid][this.squareGameObjectIsOn.yInGrid
 						+ 1];
-				if (!squareForGlass.inventory.canShareSquare()) {
+				if (!squareForGlass.inventory.canShareSquare) {
 					squareForGlass = null;
 				}
 			}

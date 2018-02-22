@@ -52,7 +52,7 @@ public class AIRoutineUtils {
 
 			if ((!mustBeOutdoors || mustBeOutdoors && randomSquare.structureSquareIsIn == null)
 					&& currentActorPathToThisSquare != null && currentActorPathToThisSquare.travelCost < maxDistance
-					&& randomSquare.inventory.canShareSquare()
+					&& randomSquare.inventory.canShareSquare
 					&& Game.level.activeActor.aiRoutine.squareInBounds(randomSquare)) {
 
 				return randomSquare;

@@ -147,7 +147,7 @@ public class ActionDropItems extends VariableQtyAction {
 
 		}
 
-		if (!square.inventory.canShareSquare() && !objects[0].canShareSquare) {
+		if (!square.inventory.canShareSquare && !objects[0].canShareSquare) {
 			actionName = ACTION_NAME + " " + objects[0].name + " (no space)";
 			return false;
 		}

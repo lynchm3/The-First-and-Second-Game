@@ -26,7 +26,6 @@ import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Discoverable;
-import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.MapMarker;
@@ -641,7 +640,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 
 		if (targetGameObject == null) {
-			targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+			targetGameObject = this.inventory.gameObjectThatCantShareSquare;
 		}
 
 		if (targetGameObject != null) {
@@ -760,7 +759,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public Action getSecondaryActionForTheSquareOrObject(Actor performer) {
 
-		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+		GameObject targetGameObject = this.inventory.gameObjectThatCantShareSquare;
 		if (targetGameObject != null) {
 			return targetGameObject.getSecondaryActionPerformedOnThisInWorld(performer);
 		}
@@ -802,7 +801,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			}
 		}
 
-		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+		GameObject targetGameObject = this.inventory.gameObjectThatCantShareSquare;
 		if (targetGameObject != null && targetGameObject.attackable) {
 			return new ActionAttack(performer, targetGameObject);
 		}
@@ -942,26 +941,21 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (this == goalNode)
 			return true;
 
-		if (inventory.canShareSquare()) {
-
-			GameObject gameObjectDoor = inventory.getGameObjectOfClass(Door.class);
-			if (gameObjectDoor instanceof Door) {
-				Door door = (Door) gameObjectDoor;
-				if (!actor.canOpenDoors) {
+		// grand
+		if (inventory.canShareSquare) {
+			// doors
+			if (inventory.door != null) {
+				if (!inventory.door.open && !actor.canOpenDoors) {
 					return false;
-				} else if (door.isLocked() && !actor.hasKeyForDoor(door)) {
+				} else if (inventory.door.locked && !actor.hasKeyForDoor(inventory.door)) {
+					return false;
 				} else {
 					return true;
 				}
-			} else {
-				return true;
 			}
-		} else {
-
-			GameObject gameObjectThatCantShareSquare = inventory.getGameObjectThatCantShareSquare();
-
-			if (gameObjectThatCantShareSquare instanceof Actor)
-				return true;
+			return true;
+		} else if (inventory.actorThatCantShareSquare != null) {
+			return true;
 		}
 		return false;
 	}

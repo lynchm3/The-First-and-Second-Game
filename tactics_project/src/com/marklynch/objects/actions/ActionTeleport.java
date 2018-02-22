@@ -34,7 +34,7 @@ public class ActionTeleport extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		if (!teleportee.canShareSquare)
-			gameObjectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
+			gameObjectInTheWay = target.inventory.gameObjectThatCantShareSquare;
 		legal = checkLegality();
 		sound = createSound();
 		movement = true;

@@ -73,7 +73,7 @@ public class ActionClose extends Action {
 			}
 		}
 
-		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.canShareSquare() == false) {
+		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.canShareSquare == false) {
 			disabledReason = "Doorway blocked";
 			actionName = ACTION_NAME_BLOCKED;
 		}

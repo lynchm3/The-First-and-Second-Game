@@ -771,13 +771,13 @@ public class Editor {
 				// } else if (editorState == EDITOR_STATE.ADD_ACTOR) {
 				// addNewActorToSquare(square);
 			} else if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
-				if (!this.selectedGameObject.canShareSquare && !square.inventory.canShareSquare()) {
-					swapGameObjects(this.selectedGameObject, square.inventory.getGameObjectThatCantShareSquare());
+				if (!this.selectedGameObject.canShareSquare && !square.inventory.canShareSquare) {
+					swapGameObjects(this.selectedGameObject, square.inventory.gameObjectThatCantShareSquare);
 				} else {
 					moveGameObject(this.selectedGameObject, square);
 				}
 			}
-		} else if (square.inventory.canShareSquare()) {
+		} else if (square.inventory.canShareSquare) {
 			// Something on the square, but can share the space
 			if (editorState == EDITOR_STATE.DEFAULT || editorState == EDITOR_STATE.SETTINGS_CHANGE) {
 				this.clearSelectedObject();
@@ -802,7 +802,7 @@ public class Editor {
 				if (this.selectedGameObject.canShareSquare) {
 					moveGameObject(this.selectedGameObject, square);
 				} else {
-					swapGameObjects(this.selectedGameObject, square.inventory.getGameObjectThatCantShareSquare());
+					swapGameObjects(this.selectedGameObject, square.inventory.gameObjectThatCantShareSquare);
 				}
 			}
 		}
@@ -840,7 +840,7 @@ public class Editor {
 
 	public void attemptToAddNewObjectToSquare(Square square) {
 
-		boolean canBePlaceOnGround = gameObject.canShareSquare || square.inventory.canShareSquare();
+		boolean canBePlaceOnGround = gameObject.canShareSquare || square.inventory.canShareSquare;
 		boolean canBePlacedInAnInventory = square.inventory.hasGameObjectsThatCanContainOtherObjects();
 
 		if (!canBePlacedInAnInventory && canBePlaceOnGround) {

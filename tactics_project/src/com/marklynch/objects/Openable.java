@@ -13,7 +13,7 @@ import com.marklynch.objects.units.Actor;
 public abstract class Openable extends GameObject implements SwitchListener {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	protected boolean open = false;
+	public boolean open = false;
 	public Key[] keys;
 	public boolean locked;
 	public String baseName;

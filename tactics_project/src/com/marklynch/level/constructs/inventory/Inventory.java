@@ -7,7 +7,6 @@ import java.util.HashMap;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
-import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
@@ -1023,59 +1022,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return null;
 	}
 
-	public boolean canShareSquare() {
-		for (GameObject gameObject : gameObjects) {
-			if (gameObject != null && !gameObject.canShareSquare)
-				return false;
-		}
-		return true;
-	}
-
-	public boolean canBeMovedTo() {
-		if (canShareSquare()) {
-			return true;
-		} else {
-			if (contains(Actor.class))
-				return true;
-		}
-		return false;
-	}
-
-	public boolean isPassable(Actor forActor) {
-		for (GameObject gameObject : gameObjects) {
-
-			// Can't go through group leader
-			if (forActor.group != null && forActor.group.getLeader() == gameObject)
-				return false;
-
-			// Can't go through player
-			if (gameObject == Game.level.player)
-				return false;
-
-			// Can't got through impassable objects
-			if (!gameObject.canShareSquare && !(gameObject instanceof Door) && !(gameObject instanceof Actor))
-				return false;
-
-			// Can't go through locked doors u dont have the key for
-			if (gameObject instanceof Door) {
-				Door door = (Door) gameObject;
-				if (door.locked && !forActor.hasKeyForDoor(door)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
-	public boolean isPassable(GameObject forGameObject) {
-
-		if (forGameObject instanceof Actor)
-			return isPassable((Actor) forGameObject);
-
-		return this.canShareSquare();
-	}
-
-	public GameObject getGameObjectThatCantShareSquare() {
+	public GameObject getGameObjectThatCantShareSquare1() {
 		for (GameObject gameObject : gameObjects) {
 			if (!gameObject.canShareSquare)
 				return gameObject;
