@@ -978,12 +978,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		return squares;
 	}
 
-	// @Override
-	// public float getCost(AStarNode node) {
-	//
-	// return node.cost;
-	// }
-
 	@Override
 	public float getEstimatedCost(AStarNode node) {
 		return this.straightLineDistanceTo(node) + node.cost - 1;

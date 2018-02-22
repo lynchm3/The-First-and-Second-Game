@@ -8,7 +8,6 @@ public class AIPath {
 	public ArrayList<Square> squares;
 	public int travelCost;
 	public boolean complete = false;
-	public boolean maxedOut = false;
 
 	public AIPath() {
 		squares = new ArrayList<Square>();

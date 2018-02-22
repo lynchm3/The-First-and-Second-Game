@@ -288,21 +288,9 @@ public class Actor extends GameObject {
 
 	public AIPath getPathTo(Square target) {
 
-		// if (this instanceof Hunter && this == this.group.getLeader()) {
-		// System.out.println(this + " getPathTo " + target);
-		// System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
-		// // Thread.currentThread().getStackTrace();
-		// }
-
 		if (target == null) {
 			return null;
 		}
-
-		// if (this instanceof Player && !target.seenByPlayer) {
-		//
-		// } else if (target.inventory.canBeMovedTo() == false) {
-		// return null;
-		// }
 
 		// ASTARSEACH.FINDPATH
 		int maxPathSize = aiMaxPathSize;
@@ -326,8 +314,7 @@ public class Actor extends GameObject {
 			}
 
 			AIPath path = new AIPath(squarePath, squarePath.size(), completePath);
-			if (AStarSearch.maxedOut)
-				path.maxedOut = true;
+
 			return path;
 		}
 
