@@ -172,6 +172,10 @@ public class ActionMove extends Action {
 		// return false;
 		// }
 
+		if (!performer.canSeeSquare(target)) {
+			return true;
+		}
+
 		GameObject objectInTheWay = target.inventory.gameObjectThatCantShareSquare;
 
 		if (objectInTheWay instanceof Actor) {

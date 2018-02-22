@@ -44,6 +44,7 @@ public class Notification {
 	Object target;
 
 	public Notification(Object[] objects, NotificationType type, Object target) {
+
 		this.objects = objects;
 		this.type = type;
 		this.target = target;

@@ -941,7 +941,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (this == goalNode)
 			return true;
 
-		// grand
 		if (inventory.canShareSquare) {
 			// doors
 			if (inventory.door != null) {
