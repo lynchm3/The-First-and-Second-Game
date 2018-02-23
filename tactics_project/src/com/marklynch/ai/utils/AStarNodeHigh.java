@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.marklynch.level.squares.Square;
+//import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 /**
@@ -11,9 +12,9 @@ import com.marklynch.objects.units.Actor;
  * A* search algorithm. The AStarNode class should be subclassed to provide
  * searching capability.
  */
-public abstract class AStarNode implements Comparable {
+public abstract class AStarNodeHigh implements Comparable {
 
-	AStarNode pathParent;
+	AStarNodeHigh pathParent;
 	float costFromStart;
 	float estimatedCostToGoal;
 
@@ -30,7 +31,7 @@ public abstract class AStarNode implements Comparable {
 	public ArrayList<Square> neighbors;
 
 	// added by me
-	public int straightLineDistanceTo(AStarNode otherNode) {
+	public int straightLineDistanceTo(AStarNodeHigh otherNode) {
 		return Math.abs(otherNode.xInGrid - this.xInGrid) + Math.abs(otherNode.yInGrid - this.yInGrid);
 	}
 
@@ -41,7 +42,7 @@ public abstract class AStarNode implements Comparable {
 	@Override
 	public int compareTo(Object other) {
 		float thisValue = this.getCost();
-		float otherValue = ((AStarNode) other).getCost();
+		float otherValue = ((AStarNodeHigh) other).getCost();
 
 		float v = thisValue - otherValue;
 		return (v > 0) ? 1 : (v < 0) ? -1 : 0; // sign function
@@ -58,10 +59,9 @@ public abstract class AStarNode implements Comparable {
 	 * estimated cost should never exceed the true cost. The better the
 	 * estimate, the more effecient the search.
 	 */
-	public abstract float getEstimatedCost(AStarNode node);
+	public abstract float getEstimatedCost(AStarNodeHigh node);
 
 	public List getNeighborsThatCanBeMovedTo(Actor actor) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -70,5 +70,5 @@ public abstract class AStarNode implements Comparable {
 	 * 
 	 * @param goalNode
 	 */
-	public abstract List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, AStarNode goalNode);
+	public abstract List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, AStarNodeHigh goalNode);
 }

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.marklynch.Game;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 /**
@@ -11,7 +12,7 @@ import com.marklynch.objects.units.Actor;
  * A* search algorithm. The AStarNode class should be subclassed to provide
  * searching capability.
  */
-public class AStarSearch {
+public class AStarSearchSquare {
 
 	/**
 	 * A simple priority list, also called a priority queue. Objects in the list
@@ -34,9 +35,9 @@ public class AStarSearch {
 	/**
 	 * Construct the path, not including the start node.
 	 */
-	protected LinkedList<AStarNode> constructPath(AStarNode node) {
+	protected LinkedList<Square> constructPath(Square node) {
 		Game.constructPath++;
-		LinkedList<AStarNode> path = new LinkedList<AStarNode>();
+		LinkedList<Square> path = new LinkedList<Square>();
 		while (node.pathParent != null) {
 			path.addFirst(node);
 			node = node.pathParent;
@@ -49,14 +50,14 @@ public class AStarSearch {
 	 * is returned, or null if the path is not found.
 	 */
 
-	public LinkedList<AStarNode> findPath(Actor actor, AStarNode startNode, AStarNode goalNode, int maxCount) {
+	public LinkedList<Square> findPath(Actor actor, Square startNode, Square goalNode, int maxCount) {
 		Game.findPath++;
 
-		AStarNode bestNodeFound = null;
+		Square bestNodeFound = null;
 		float bestPathFoundDistanceToTarget = Integer.MAX_VALUE;
 
 		PriorityList openList = new PriorityList();
-		LinkedList<AStarNode> closedList = new LinkedList();
+		LinkedList<Square> closedList = new LinkedList();
 
 		startNode.costFromStart = 0;
 		startNode.estimatedCostToGoal = startNode.getEstimatedCost(goalNode);
@@ -65,7 +66,7 @@ public class AStarSearch {
 
 		int count = 0;
 		while (!openList.isEmpty() && count < maxCount) {
-			AStarNode node = (AStarNode) openList.removeFirst();
+			Square node = (Square) openList.removeFirst();
 			if (node == goalNode) {
 				// we've reached the goal node!
 				return constructPath(goalNode);
@@ -73,7 +74,7 @@ public class AStarSearch {
 
 			List neighbors = node.getAllNeighbourSquaresThatCanBeMovedTo(actor, goalNode);
 			for (int i = 0; i < neighbors.size(); i++) {
-				AStarNode neighborNode = (AStarNode) neighbors.get(i);
+				Square neighborNode = (Square) neighbors.get(i);
 				boolean isOpen = openList.contains(neighborNode);
 				boolean isClosed = closedList.contains(neighborNode);
 				float costFromStart = node.costFromStart;

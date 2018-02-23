@@ -4,14 +4,12 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
 import org.lwjgl.input.Keyboard;
 
 import com.marklynch.Game;
-import com.marklynch.ai.utils.AStarNode;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Sound;
@@ -57,7 +55,7 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class Square extends AStarNode implements ActionableInWorld, InventoryParent {
+public class Square implements ActionableInWorld, InventoryParent, Comparable<Square> {
 
 	public String guid = UUID.randomUUID().toString();
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
@@ -100,9 +98,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public static Texture SOUND_TEXTURE;
 
 	public transient boolean showingDialogs = false;
-	// public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
-
-	public transient static PathComparator pathComparator;
 
 	public transient Area areaSquareIsIn;
 	public transient Structure structureSquareIsIn;
@@ -117,6 +112,23 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public boolean restricted;
 	public String name;
 	public boolean flash;
+
+	// path finding
+	public Square pathParent;
+	public float costFromStart;
+	public float estimatedCostToGoal;
+
+	// added by me
+	public float cost = 1;
+	public float costForPlayer = 1;
+
+	public int xInGrid;
+	public int yInGrid;
+
+	public float xInGridPixels;
+	public float yInGridPixels;
+
+	public ArrayList<Square> neighbors;
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory,
 			boolean restricted, Actor... owners) {
@@ -600,28 +612,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	}
 
-	public class PathComparator implements Comparator<ArrayList<Square>> {
-
-		@Override
-		public int compare(ArrayList<Square> path1, ArrayList<Square> path2) {
-
-			int path1Distance = 0;
-			for (Square squareInPath : path1)
-				path1Distance += squareInPath.travelCost;
-
-			int path2Distance = 0;
-			for (Square squareInPath : path2)
-				path2Distance += squareInPath.travelCost;
-
-			if (path1Distance < path2Distance)
-				return -1;
-			if (path1Distance > path2Distance)
-				return 1;
-			return 0;
-		}
-
-	}
-
 	@Override
 	public String toString() {
 		return "" + this.xInGrid + "," + this.yInGrid;
@@ -933,52 +923,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		return yInGridPixels + Game.HALF_SQUARE_HEIGHT;
 	}
 
-	public boolean includableInPath(Actor actor, AStarNode goalNode) {
-		Game.includableInPath++;
-		// if (actor == Game.level.player && !this.seenByPlayer)
-		// return true;
-
-		if (this == goalNode)
-			return true;
-
-		if (inventory.canShareSquare) {
-			// doors
-			if (inventory.door != null) {
-				if (!inventory.door.open && !actor.canOpenDoors) {
-					return false;
-				} else if (inventory.door.locked && !actor.hasKeyForDoor(inventory.door)) {
-					return false;
-				} else {
-					return true;
-				}
-			}
-			return true;
-		} else if (inventory.actorThatCantShareSquare != null) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, AStarNode goalNode) {
-		Game.getNeighborsThatCanBeMovedTo++;
-		Game.getAllNeighbourSquaresThatCanBeMovedTo++;
-		ArrayList<Square> squares = new ArrayList<Square>();
-
-		for (Square square : neighbors) {
-			if (square.includableInPath(actor, goalNode)) {
-				squares.add(square);
-			}
-		}
-		return squares;
-	}
-
-	@Override
-	public float getEstimatedCost(AStarNode node) {
-		Game.getEstimatedCost++;
-		return this.straightLineDistanceTo(node) + node.cost - 1;
-	}
-
 	public ArrayList<Square> getAllSquaresAtDistance(float distance) {
 		ArrayList<Square> squares = new ArrayList<Square>();
 		if (distance == 0) {
@@ -1095,4 +1039,73 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		else
 			costForPlayer = 1;
 	}
+
+	// PATH FINDING
+
+	// added by me
+	public int straightLineDistanceTo(Square otherNode) {
+		return Math.abs(otherNode.xInGrid - this.xInGrid) + Math.abs(otherNode.yInGrid - this.yInGrid);
+	}
+
+	public float getCost() {
+		return costFromStart + estimatedCostToGoal;
+	}
+
+	@Override
+	public int compareTo(Square other) {
+		float thisValue = this.getCost();
+		float otherValue = other.getCost();
+
+		float v = thisValue - otherValue;
+		return (v > 0) ? 1 : (v < 0) ? -1 : 0; // sign function
+	}
+
+	public List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, Square goalNode) {
+		Game.getNeighborsThatCanBeMovedTo++;
+		Game.getAllNeighbourSquaresThatCanBeMovedTo++;
+		ArrayList<Square> squares = new ArrayList<Square>();
+
+		for (Square square : neighbors) {
+			if (square.includableInPath(actor, goalNode)) {
+				squares.add(square);
+			}
+		}
+		return squares;
+	}
+
+	public float getEstimatedCost(Square node) {
+		Game.getEstimatedCost++;
+		return this.straightLineDistanceTo(node) + node.cost - 1;
+	}
+
+	public List getNeighborsThatCanBeMovedTo(Actor actor) {
+		return null;
+	}
+
+	public boolean includableInPath(Actor actor, Square goalNode) {
+		Game.includableInPath++;
+		// if (actor == Game.level.player && !this.seenByPlayer)
+		// return true;
+
+		if (this == goalNode)
+			return true;
+
+		if (inventory.canShareSquare) {
+			// doors
+			if (inventory.door != null) {
+				if (!inventory.door.open && !actor.canOpenDoors) {
+					return false;
+				} else if (inventory.door.locked && !actor.hasKeyForDoor(inventory.door)) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+			return true;
+		} else if (inventory.actorThatCantShareSquare != null) {
+			return true;
+		}
+		return false;
+	}
+	/// END PATH FINDING
 }

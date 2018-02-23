@@ -9,8 +9,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.ai.utils.AIPath;
-import com.marklynch.ai.utils.AStarNode;
-import com.marklynch.ai.utils.AStarSearch;
+import com.marklynch.ai.utils.AStarSearchSquare;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Crime;
@@ -300,14 +299,14 @@ public class Actor extends GameObject {
 			maxPathSize = 1000;
 		}
 
-		LinkedList<AStarNode> aStarNodesPath = new AStarSearch().findPath(this, this.squareGameObjectIsOn, target,
+		LinkedList<Square> aStarNodesPath = new AStarSearchSquare().findPath(this, this.squareGameObjectIsOn, target,
 				maxPathSize);
 
 		if (aStarNodesPath != null) {
 			ArrayList<Square> squarePath = new ArrayList<Square>();
 
-			for (AStarNode aStarNode : aStarNodesPath) {
-				squarePath.add((Square) aStarNode);
+			for (Square aStarNode : aStarNodesPath) {
+				squarePath.add(aStarNode);
 			}
 
 			boolean completePath = false;
