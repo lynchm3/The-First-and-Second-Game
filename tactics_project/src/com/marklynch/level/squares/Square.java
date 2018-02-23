@@ -114,11 +114,12 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public boolean flash;
 
 	// path finding
+	public ArrayList<Node> nodes;
+
 	public Square pathParent;
 	public float costFromStart;
 	public float estimatedCostToGoal;
 
-	// added by me
 	public float cost = 1;
 	public float costForPlayer = 1;
 
@@ -129,6 +130,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public float yInGridPixels;
 
 	public ArrayList<Square> neighbors;
+	// end path finding
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory,
 			boolean restricted, Actor... owners) {
@@ -1022,6 +1024,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		return true;
 	}
 
+	// PATH FINDING
+
 	public void calculatePathCost() {
 		// if (!inventory.canShareSquare())
 		// cost = 999;
@@ -1039,8 +1043,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		else
 			costForPlayer = 1;
 	}
-
-	// PATH FINDING
 
 	// added by me
 	public int straightLineDistanceTo(Square otherNode) {

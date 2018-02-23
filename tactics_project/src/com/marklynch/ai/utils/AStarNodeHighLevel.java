@@ -12,9 +12,9 @@ import com.marklynch.objects.units.Actor;
  * A* search algorithm. The AStarNode class should be subclassed to provide
  * searching capability.
  */
-public abstract class AStarNodeHigh implements Comparable {
+public abstract class AStarNodeHighLevel implements Comparable {
 
-	AStarNodeHigh pathParent;
+	AStarNodeHighLevel pathParent;
 	float costFromStart;
 	float estimatedCostToGoal;
 
@@ -31,7 +31,7 @@ public abstract class AStarNodeHigh implements Comparable {
 	public ArrayList<Square> neighbors;
 
 	// added by me
-	public int straightLineDistanceTo(AStarNodeHigh otherNode) {
+	public int straightLineDistanceTo(AStarNodeHighLevel otherNode) {
 		return Math.abs(otherNode.xInGrid - this.xInGrid) + Math.abs(otherNode.yInGrid - this.yInGrid);
 	}
 
@@ -42,7 +42,7 @@ public abstract class AStarNodeHigh implements Comparable {
 	@Override
 	public int compareTo(Object other) {
 		float thisValue = this.getCost();
-		float otherValue = ((AStarNodeHigh) other).getCost();
+		float otherValue = ((AStarNodeHighLevel) other).getCost();
 
 		float v = thisValue - otherValue;
 		return (v > 0) ? 1 : (v < 0) ? -1 : 0; // sign function
@@ -59,7 +59,7 @@ public abstract class AStarNodeHigh implements Comparable {
 	 * estimated cost should never exceed the true cost. The better the
 	 * estimate, the more effecient the search.
 	 */
-	public abstract float getEstimatedCost(AStarNodeHigh node);
+	public abstract float getEstimatedCost(AStarNodeHighLevel node);
 
 	public List getNeighborsThatCanBeMovedTo(Actor actor) {
 		return null;
@@ -70,5 +70,5 @@ public abstract class AStarNodeHigh implements Comparable {
 	 * 
 	 * @param goalNode
 	 */
-	public abstract List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, AStarNodeHigh goalNode);
+	public abstract List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, AStarNodeHighLevel goalNode);
 }
