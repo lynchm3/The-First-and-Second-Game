@@ -1115,9 +1115,6 @@ public class Level {
 				// }
 			}
 
-			
-			LINK ROOMS TO NODES THE SAME WAY U LINK AREAS
-			
 		}
 
 		if (popupMenuActions.size() == 1) {

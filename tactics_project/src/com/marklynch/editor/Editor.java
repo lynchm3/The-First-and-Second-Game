@@ -35,6 +35,8 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.enchantment.EnhancementFireDamage;
 import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.squares.Node;
+import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Sign;
@@ -499,9 +501,10 @@ public class Editor {
 
 		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>();
 		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 6, 1, false,
-				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })), new RoomPart(6, 1, 10, 4)));
+				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })),
+				new Node[] { Nodes.townShopInner, Nodes.townShopOuter }, new RoomPart(6, 1, 10, 4)));
 		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 12, 1, true, new ArrayList<Actor>(),
-				new RoomPart(12, 1, 16, 4)));
+				new Node[] { Nodes.townShopInner }, new RoomPart(12, 1, 16, 4)));
 		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
 		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5, false));
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,

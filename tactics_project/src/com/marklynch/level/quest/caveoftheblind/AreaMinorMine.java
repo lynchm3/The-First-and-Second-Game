@@ -11,6 +11,8 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.journal.AreaList;
+import com.marklynch.level.squares.Node;
+import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
@@ -38,10 +40,10 @@ public class AreaMinorMine {
 		mineSections.add(new StructureSection("Minor Mine", 280, 76, 307, 97, false));
 
 		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, new ArrayList<Actor>(),
-				new RoomPart(281, 77, 306, 91), new RoomPart(292, 92, 306, 96)));
+				new Node[] { Nodes.minorMine }, new RoomPart(281, 77, 306, 91), new RoomPart(292, 92, 306, 96)));
 
 		StructureRoom shopRoom = new StructureRoom("What's Mine is Yours*", 281, 93, false, new ArrayList<Actor>(),
-				new RoomPart(281, 93, 290, 96));
+				new Node[] { Nodes.minorMine }, new RoomPart(281, 93, 290, 96));
 		rooms.add(shopRoom);
 
 		// entry to mine

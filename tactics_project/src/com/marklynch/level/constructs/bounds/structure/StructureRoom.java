@@ -1,8 +1,10 @@
 package com.marklynch.level.constructs.bounds.structure;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.marklynch.Game;
+import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
@@ -16,26 +18,28 @@ public class StructureRoom {
 	public boolean seenByPlayer = false;
 	public Structure structure;
 	public int level = 0;
+	public ArrayList<Node> nodes;
 
 	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList,
-			RoomPart... roomParts) {
-		this(name, x, y, restricted, ownersArrayList, 0, true, roomParts);
+			Node[] nodes, RoomPart... roomParts) {
+		this(name, x, y, restricted, ownersArrayList, 0, true, nodes, roomParts);
 	}
 
 	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList, int level,
-			RoomPart... roomParts) {
-		this(name, x, y, restricted, ownersArrayList, level, true, roomParts);
+			Node[] nodes, RoomPart... roomParts) {
+		this(name, x, y, restricted, ownersArrayList, level, true, nodes, roomParts);
 
 	}
 
 	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList, int level,
-			boolean doesNothing, RoomPart[] roomParts) {
+			boolean doesNothing, Node[] nodes, RoomPart[] roomParts) {
 		super();
 		this.name = name;
 		this.x = x;
 		this.y = y;
 		this.level = level;
 		this.roomParts = roomParts;// Floor squares
+		this.nodes = new ArrayList<>(Arrays.asList(nodes));
 		for (RoomPart roomPart : this.roomParts) {
 			for (int i = roomPart.gridX1; i <= roomPart.gridX2; i++) {
 				for (int j = roomPart.gridY1; j <= roomPart.gridY2; j++) {
@@ -54,6 +58,10 @@ public class StructureRoom {
 			for (Square square : squares) {
 				square.owners = ownersArrayList;
 			}
+		}
+
+		for (Square square : squares) {
+			square.nodes = this.nodes;
 		}
 
 	}

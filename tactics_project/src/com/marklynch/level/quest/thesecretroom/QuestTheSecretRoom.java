@@ -10,6 +10,8 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.squares.Node;
+import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
@@ -42,7 +44,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Front room
 		StructureRoom livingRoom = new StructureRoom("Living Room", 22, 31, false, new ArrayList<Actor>(),
-				new RoomPart(22, 31, 28, 35));
+				new Node[] { Nodes.dungeonHouseOuter }, new RoomPart(22, 31, 28, 35));
 		structureRooms.add(livingRoom);
 
 		// Front room decorative walls
@@ -64,7 +66,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Back room
 		StructureRoom backRoom = new StructureRoom("GameObjectroom", 20, 37, false, new ArrayList<Actor>(), 4,
-				new RoomPart(20, 37, 35, 45));
+				new Node[] { Nodes.dungeonHouseOuter }, new RoomPart(20, 37, 35, 45));
 		structureRooms.add(backRoom);
 
 		// back room decorative walls

@@ -19,6 +19,8 @@ import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.squares.Node;
+import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
@@ -233,7 +235,7 @@ public class QuestSmallGame extends Quest {
 				.add(Templates.DOOR.makeCopy("Door", Game.level.squares[105][12], false, false, false, hunterBrent));
 		ArrayList<StructureRoom> lodgeRooms = new ArrayList<StructureRoom>();
 		lodgeRooms.add(new StructureRoom("Hunting Lodge", 107, 9, false, new ArrayList<Actor>(),
-				new RoomPart(106, 10, 110, 14)));
+				new Node[] { Nodes.lodgeEntrance }, new RoomPart(106, 10, 110, 14)));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
 		lodgeSections.add(new StructureSection("Hunting Lodge", 105, 9, 111, 15, false));
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeRooms, new ArrayList<StructurePath>(),

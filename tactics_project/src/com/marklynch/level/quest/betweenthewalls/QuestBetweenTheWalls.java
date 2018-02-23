@@ -12,6 +12,8 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.constructs.requirementtomeet.StatRequirementToMeet;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.squares.Node;
+import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
@@ -46,7 +48,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Front room
 		StructureRoom frontRoom = new StructureRoom("Front Room", 42, 20, false, new ArrayList<Actor>(),
-				new RoomPart(42, 20, 55, 26));
+				new Node[] { Nodes.wallsHouseOuter }, new RoomPart(42, 20, 55, 26));
 		structureRooms.add(frontRoom);
 
 		// Front room decorative walls
@@ -66,7 +68,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// GameObjectroom room
 		StructureRoom bedRoom = new StructureRoom("GameObjectroom", 42, 30, false, new ArrayList<Actor>(),
-				new RoomPart(42, 30, 53, 34));
+				new Node[] { Nodes.wallsHouseOuter }, new RoomPart(42, 30, 53, 34));
 		structureRooms.add(bedRoom);
 
 		// GameObjectroom decorative walls
@@ -95,7 +97,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Hidden room
 		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", 42, 36, false, new ArrayList<Actor>(), 4,
-				new RoomPart(42, 36, 55, 37));
+				new Node[] { Nodes.wallsHouseOuter }, new RoomPart(42, 36, 55, 37));
 		structureRooms.add(hiddenRoom);
 
 		// Path west entrance to west atrium

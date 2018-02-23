@@ -11,6 +11,8 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.squares.Node;
+import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -113,7 +115,8 @@ public class QuestThePigs extends Quest {
 		pigPenFeatures.add(gate);
 
 		penSection = new StructureSection("Pen", 28, 72, 46, 82, false, larry);
-		penRoom = new StructureRoom("Pen", 29, 73, false, new ArrayList<Actor>(), new RoomPart(29, 73, 45, 81));
+		penRoom = new StructureRoom("Pen", 29, 73, false, new ArrayList<Actor>(), new Node[] { Nodes.farmInnerBend },
+				new RoomPart(29, 73, 45, 81));
 
 		pigPenSections.add(penSection);
 		pigPenRooms.add(penRoom);
@@ -148,13 +151,13 @@ public class QuestThePigs extends Quest {
 		farmHouseFrontSection = new StructureSection("Farm House", 12, 69, 24, 74, false, farmer);
 		farmHouseBackSection = new StructureSection("Farm House", 2, 75, 24, 85, false, farmer);
 		farmHouseFrontRoom = new StructureRoom("Kitchen", 13, 70, false, new ArrayList<Actor>(),
-				new RoomPart(13, 70, 23, 74));
+				new Node[] { Nodes.farmInnerBend }, new RoomPart(13, 70, 23, 74));
 		farmHouseHallRoom = new StructureRoom("Hall", 3, 76, false, new ArrayList<Actor>(),
-				new RoomPart(3, 76, 23, 77));
+				new Node[] { Nodes.farmInnerBend }, new RoomPart(3, 76, 23, 77));
 		farmHouseGameObjectroom = new StructureRoom("GameObjectroom", 3, 79, false, new ArrayList<Actor>(),
-				new RoomPart(3, 79, 17, 84));
+				new Node[] { Nodes.farmInnerBend }, new RoomPart(3, 79, 17, 84));
 		farmHouseStorageRoom = new StructureRoom("Storage", 19, 79, false, new ArrayList<Actor>(),
-				new RoomPart(19, 79, 23, 84));
+				new Node[] { Nodes.farmInnerBend }, new RoomPart(19, 79, 23, 84));
 
 		farmHouseSections.add(farmHouseFrontSection);
 		farmHouseSections.add(farmHouseBackSection);
