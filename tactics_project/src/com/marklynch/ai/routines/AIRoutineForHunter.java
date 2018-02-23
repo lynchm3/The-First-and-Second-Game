@@ -134,8 +134,8 @@ public class AIRoutineForHunter extends AIRoutine {
 			this.actor.followersShouldFollow = true;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfAttacking(100, false, true, false, false, false, true, 0,
-					AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
+			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, true, 0,
+					false, AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
 					TinyNeutralWildAnimal.class);
 			if (target == null) {
 				AIRoutineUtils.moveTowards(actor.area.centreSuqare);
