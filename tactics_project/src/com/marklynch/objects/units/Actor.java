@@ -9,6 +9,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.ai.utils.AIPath;
+import com.marklynch.ai.utils.AStarSearchHighLevel;
 import com.marklynch.ai.utils.AStarSearchSquare;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
@@ -20,6 +21,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -288,6 +290,80 @@ public class Actor extends GameObject {
 	public final static int aiMaxPathSize = 400;
 
 	public AIPath getPathTo(Square target) {
+		if (this == Level.player) {
+			System.out.println("-------------------- ");
+		}
+
+		if (this == Level.player) {
+			System.out.println("current square = " + this.squareGameObjectIsOn);
+			System.out.println("target square = " + target);
+		}
+
+		if (target == null) {
+			return null;
+		}
+
+		// Share a node, just walk straight
+		for (Node node1 : this.squareGameObjectIsOn.nodes) {
+			for (Node node2 : target.nodes) {
+				if (this == Level.player) {
+					System.out.println("node 1 = " + node1.name + ", node2 = " + node2.name);
+				}
+				if (node1 == node2) {
+					if (this == Level.player) {
+						System.out.println(
+								"Goind straight to squares - node 1 = " + node1.name + ", node2 = " + node2.name);
+					}
+					return getPathAtSquareLevel(target);
+				}
+			}
+		}
+
+		// ASTARSEACH.FINDPATH
+		int maxPathSize = 1000;
+		float bestCost = Float.MAX_VALUE;
+		LinkedList<Node> aStarNodesPath = null;
+
+		for (Node node1 : this.squareGameObjectIsOn.nodes) {
+			for (Node node2 : target.nodes) {
+				LinkedList<Node> tempAStarNodesPath = new AStarSearchHighLevel().findPath(this, node1, node2,
+						maxPathSize);
+				if (this == Level.player) {
+					System.out.println("tempAStarNodesPath = " + tempAStarNodesPath);
+					for (Node node : tempAStarNodesPath) {
+						System.out.println("node = " + node);
+						System.out.println("node.name = " + node.name);
+					}
+
+				}
+
+				if (tempAStarNodesPath != null && tempAStarNodesPath.size() != 0) {
+					float thisCost = tempAStarNodesPath.getLast().getCost();
+					if (thisCost < bestCost) {
+						aStarNodesPath = tempAStarNodesPath;
+						bestCost = thisCost;
+					}
+				}
+			}
+		}
+
+		if (aStarNodesPath == null || aStarNodesPath.size() == 0) {
+			if (this == Level.player) {
+				System.out.println("aStarNodesPath is null or empty, returning");
+			}
+			return null;
+		}
+
+		if (this == Level.player) {
+			System.out.println("target node name = " + aStarNodesPath.getFirst().name);
+			System.out.println("target node square = " + aStarNodesPath.getFirst().square);
+		}
+
+		return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
+
+	}
+
+	public AIPath getPathAtSquareLevel(Square target) {
 
 		if (target == null) {
 			return null;

@@ -29,6 +29,7 @@ public class Node implements Comparable<Node> {
 	// end path finding
 
 	public Node(String name, Square square) {
+		this.name = name;
 		this.square = square;
 		this.xInGrid = square.xInGrid;
 		this.yInGrid = square.yInGrid;

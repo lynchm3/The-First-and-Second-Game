@@ -69,6 +69,7 @@ public class AStarSearchHighLevel {
 			Node node = (Node) openList.removeFirst();
 			if (node == goalNode) {
 				// we've reached the goal node!
+
 				return constructPath(goalNode);
 			}
 
