@@ -131,6 +131,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public ArrayList<Square> neighbors;
 	// end path finding
+	public Node node;
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory,
 			boolean restricted, Actor... owners) {

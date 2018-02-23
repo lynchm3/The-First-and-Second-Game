@@ -33,6 +33,7 @@ public class Node implements Comparable<Node> {
 		this.square = square;
 		this.xInGrid = square.xInGrid;
 		this.yInGrid = square.yInGrid;
+		square.node = this;
 	}
 
 	// PATH FINDING

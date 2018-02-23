@@ -288,6 +288,7 @@ public class Actor extends GameObject {
 	}
 
 	public final static int aiMaxPathSize = 400;
+	Node lastNodeReached = null;
 
 	public AIPath getPathTo(Square target) {
 		if (this == Level.player) {
@@ -317,18 +318,22 @@ public class Actor extends GameObject {
 						System.out.println(
 								"Goind straight to squares - node 1 = " + node1.name + ", node2 = " + node2.name);
 					}
+					lastNodeReached = null;
 					return getPathAtSquareLevel(target);
 				}
 			}
 		}
-
-		int closestNodeDistance = Integer.MAX_VALUE;
-		Node closestNode = null;
-		for (Node node : this.squareGameObjectIsOn.nodes) {
-			int tempDistance = straightLineDistanceBetween(this.squareGameObjectIsOn, node.square);
-			if (tempDistance < closestNodeDistance) {
-				closestNode = node;
-				closestNodeDistance = tempDistance;
+		if (this.squareGameObjectIsOn.node != null) {
+			lastNodeReached = squareGameObjectIsOn.node;
+		} else if (lastNodeReached == null) {
+			int closestNodeDistance = Integer.MAX_VALUE;
+			// Node closestNode = null;
+			for (Node node : this.squareGameObjectIsOn.nodes) {
+				int tempDistance = straightLineDistanceBetween(this.squareGameObjectIsOn, node.square);
+				if (tempDistance < closestNodeDistance) {
+					lastNodeReached = node;
+					closestNodeDistance = tempDistance;
+				}
 			}
 		}
 
@@ -339,7 +344,7 @@ public class Actor extends GameObject {
 
 		// for (Node node1 : this.squareGameObjectIsOn.nodes) {
 		for (Node node2 : target.nodes) {
-			LinkedList<Node> tempAStarNodesPath = new AStarSearchHighLevel().findPath(this, closestNode, node2,
+			LinkedList<Node> tempAStarNodesPath = new AStarSearchHighLevel().findPath(this, lastNodeReached, node2,
 					maxPathSize);
 			if (this == Level.player) {
 				System.out.println("tempAStarNodesPath = " + tempAStarNodesPath);
@@ -364,7 +369,7 @@ public class Actor extends GameObject {
 			if (this == Level.player) {
 				System.out.println("aStarNodesPath is null or empty, returning");
 			}
-			return null;
+			return getPathAtSquareLevel(target);
 		}
 
 		if (this == Level.player) {
