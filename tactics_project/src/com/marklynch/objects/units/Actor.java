@@ -303,6 +303,9 @@ public class Actor extends GameObject {
 			return null;
 		}
 
+		// if(straightLineDistanceBetween(this.squareGameObjectIsOn,
+		// targetSquare))
+
 		// Share a node, just walk straight
 		for (Node node1 : this.squareGameObjectIsOn.nodes) {
 			for (Node node2 : target.nodes) {
@@ -319,33 +322,43 @@ public class Actor extends GameObject {
 			}
 		}
 
+		int closestNodeDistance = Integer.MAX_VALUE;
+		Node closestNode = null;
+		for (Node node : this.squareGameObjectIsOn.nodes) {
+			int tempDistance = straightLineDistanceBetween(this.squareGameObjectIsOn, node.square);
+			if (tempDistance < closestNodeDistance) {
+				closestNode = node;
+				closestNodeDistance = tempDistance;
+			}
+		}
+
 		// ASTARSEACH.FINDPATH
 		int maxPathSize = 1000;
 		float bestCost = Float.MAX_VALUE;
 		LinkedList<Node> aStarNodesPath = null;
 
-		for (Node node1 : this.squareGameObjectIsOn.nodes) {
-			for (Node node2 : target.nodes) {
-				LinkedList<Node> tempAStarNodesPath = new AStarSearchHighLevel().findPath(this, node1, node2,
-						maxPathSize);
-				if (this == Level.player) {
-					System.out.println("tempAStarNodesPath = " + tempAStarNodesPath);
-					for (Node node : tempAStarNodesPath) {
-						System.out.println("node = " + node);
-						System.out.println("node.name = " + node.name);
-					}
-
+		// for (Node node1 : this.squareGameObjectIsOn.nodes) {
+		for (Node node2 : target.nodes) {
+			LinkedList<Node> tempAStarNodesPath = new AStarSearchHighLevel().findPath(this, closestNode, node2,
+					maxPathSize);
+			if (this == Level.player) {
+				System.out.println("tempAStarNodesPath = " + tempAStarNodesPath);
+				for (Node node : tempAStarNodesPath) {
+					System.out.println("node = " + node);
+					System.out.println("node.name = " + node.name);
 				}
 
-				if (tempAStarNodesPath != null && tempAStarNodesPath.size() != 0) {
-					float thisCost = tempAStarNodesPath.getLast().getCost();
-					if (thisCost < bestCost) {
-						aStarNodesPath = tempAStarNodesPath;
-						bestCost = thisCost;
-					}
+			}
+
+			if (tempAStarNodesPath != null && tempAStarNodesPath.size() != 0) {
+				float thisCost = tempAStarNodesPath.getLast().getCost();
+				if (thisCost < bestCost) {
+					aStarNodesPath = tempAStarNodesPath;
+					bestCost = thisCost;
 				}
 			}
 		}
+		// }
 
 		if (aStarNodesPath == null || aStarNodesPath.size() == 0) {
 			if (this == Level.player) {

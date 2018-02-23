@@ -513,7 +513,7 @@ public class Editor {
 				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(joesShop);
 
-		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
+		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[6][6], joesShop.name + " sign",
 				new Object[] { joesShop.name }, trader);
 		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[0][0], "Wanter Poster",
 				new ArrayList<Crime>(), trader);
