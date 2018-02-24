@@ -29,6 +29,7 @@ public class AIRoutineForHunter extends AIRoutine {
 
 	@Override
 	public void update() {
+
 		aiRoutineStart();
 
 		if (Game.level.hour > 20 || Game.level.hour < 6) {
@@ -148,7 +149,7 @@ public class AIRoutineForHunter extends AIRoutine {
 					} else {
 						boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
 						if (!attackedAnimal) {
-							AIRoutineUtils.moveTowardsTargetToAttack(target);
+							AIRoutineUtils.moveTowards(target);
 						}
 					}
 				}

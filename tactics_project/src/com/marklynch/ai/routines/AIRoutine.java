@@ -311,7 +311,7 @@ public abstract class AIRoutine {
 						// If you can't attack preference 1 target, move towards
 						// them
 						if (!attacked) {
-							moved = AIRoutineUtils.moveTowardsTargetToAttack(target);
+							moved = AIRoutineUtils.moveTowards(target);
 							if (moved)
 								break;
 						}

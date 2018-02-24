@@ -22,8 +22,6 @@ import com.marklynch.objects.actions.ActionSkin;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActiontTakeAll;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Fight;
-import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineUtils {
 
@@ -333,142 +331,6 @@ public class AIRoutineUtils {
 
 	}
 
-	public static GameObject getNearestAttacker(ArrayList<Actor> attackers) {
-		GameObject result = null;
-		int costToBest = Integer.MAX_VALUE;
-
-		for (Actor actor : attackers) {
-			Square square = calculateSquareToMoveToToAttackTarget(actor);
-			AIPath path = Game.level.activeActor.getPathTo(square);
-			if (path != null && path.complete && path.travelCost < costToBest) {
-				result = actor;
-				costToBest = path.travelCost;
-			}
-		}
-
-		return result;
-
-	}
-
-	public GameObject getNearestEnemy() {
-		GameObject result = null;
-
-		Square squareToMoveTo = null;
-		int costToBest = Integer.MAX_VALUE;
-
-		// TODO
-		// currently if there's no path it crashes
-		// also... stay still fi ur already at the best part :P, issue (need to
-		// know ideal distance for this one though)
-		// is, its not in target's list of paths
-		// ehhhhhhhhhh.... if it's not fully reachable then just go
-		// closest as the crow flies?
-		// also... have ideal distance (for ranged VS melee for e.g.) (this is
-		// weapon distance, not travel distance)
-
-		// 1. create list of enemies
-		for (Faction faction : Game.level.factions) {
-			if (faction != Game.level.activeActor.faction
-					&& Game.level.activeActor.faction.relationships.get(faction).relationship < 0) {
-				for (Actor actor : faction.actors) {
-					Square square = calculateSquareToMoveToToAttackTarget(actor);
-					AIPath path = Game.level.activeActor.getPathTo(square);
-					if (path != null && path.complete && path.travelCost < costToBest) {
-						result = actor;
-						costToBest = path.travelCost;
-					}
-				}
-			}
-		}
-
-		return result;
-
-	}
-
-	public static boolean moveTowardsTargetToAttack(GameObject target) {
-
-		// TODO
-		// currently if there's no path it crashes
-		// also... stay still fi ur already at the best part :P, issue (need to
-		// know ideal distance for this one though)
-		// is, its not in target's list of paths
-		// ehhhhhhhhhh.... if it's not fully reachable then just go
-		// closest as the crow flies?
-		// also... have ideal distance (for ranged VS melee for e.g.) (this is
-		// weapon distance, not travel distance)
-
-		// MOVE TOWARDS A POINT
-		// get as close to the point as possible
-		// with as few moves as possible
-
-		// ArrayList<Integer> idealWeaponDistances = new ArrayList<Integer>();
-		// idealWeaponDistances.add(2);
-
-		// TODO this needs to be calculated based on
-		// weapons available and the taret and their weapons
-		// TODO what if we're stuck being closed than ideal distance, need to
-		// run through this, and there could be a list of ideal distances......
-		// :/
-		// TODO ideal weapon distance could be on the other side of an object...
-		// need to factor this in when choosing a good square :/, when talking
-		// about targets squares I need to make list of attack squares, this
-		// shit is heavy
-
-		// if (!Game.level.activeActor.canSeeGameObject(target)) {
-		// return moveTowardsSquareToBeAdjacent(target);
-		// }
-
-		Square squareToMoveTo = calculateSquareToMoveToToAttackTarget(target);
-
-		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	// public static boolean moveTowardsTargetToBeOn(GameObject target) {
-	//
-	// // TODO
-	// // currently if there's no path it crashes
-	// // also... stay still fi ur already at the best part :P, issue (need to
-	// // know ideal distance for this one though)
-	// // is, its not in target's list of paths
-	// // ehhhhhhhhhh.... if it's not fully reachable then just go
-	// // closest as the crow flies?
-	// // also... have ideal distance (for ranged VS melee for e.g.) (this is
-	// // weapon distance, not travel distance)
-	//
-	// // MOVE TOWARDS A POINT
-	// // get as close to the point as possible
-	// // with as few moves as possible
-	//
-	// // ArrayList<Integer> idealWeaponDistances = new ArrayList<Integer>();
-	// // idealWeaponDistances.add(2);
-	//
-	// // TODO this needs to be calculated based on
-	// // weapons available and the taret and their weapons
-	// // TODO what if we're stuck being closed than ideal distance, need to
-	// // run through this, and there could be a list of ideal distances......
-	// // :/
-	// // TODO ideal weapon distance could be on the other side of an object...
-	// // need to factor this in when choosing a good square :/, when talking
-	// // about targets squares I need to make list of attack squares, this
-	// // shit is heavy
-	//
-	// Square squareToMoveTo =
-	// calculateSquareToMoveToToBeWithinXSquaresToTarget(target.squareGameObjectIsOn,
-	// 0f);
-	//
-	// if (squareToMoveTo != null) {
-	// new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
-	// return true;
-	// } else {
-	// return false;
-	// }
-	// }
-
 	public static boolean escapeFromAttacker(GameObject target) {
 
 		boolean moved = false;
@@ -574,155 +436,6 @@ public class AIRoutineUtils {
 	// }
 	// }
 
-	public boolean moveTowardsOptimalEnemyToAttack() {
-
-		int turnsToBest = Integer.MAX_VALUE;
-		ArrayList<Actor> bestTargetsBasedOnTurnsToReach = new ArrayList<Actor>();
-
-		// TODO
-		// currently if there's no path it crashes
-		// also... stay still fi ur already at the best part :P, issue (need to
-		// know ideal distance for this one though)
-		// is, its not in target's list of paths
-		// ehhhhhhhhhh.... if it's not fully reachable then just go
-		// closest as the crow flies?
-		// also... have ideal distance (for ranged VS melee for e.g.) (this is
-		// weapon distance, not travel distance)
-
-		// 1. create list of enemies reachable within lowest possible turns
-		for (Faction faction : Game.level.factions) {
-			if (faction != Game.level.activeActor.faction
-					&& Game.level.activeActor.faction.relationships.get(faction).relationship < 0) {
-				for (Actor actor : faction.actors) {
-					Square square = calculateSquareToMoveToToAttackTarget(actor);
-					AIPath path = Game.level.activeActor.getPathTo(square);
-
-					if (path != null && path.complete) {
-						int turns = path.travelCost / Game.level.activeActor.travelDistance;
-						if (turns < turnsToBest) {
-							bestTargetsBasedOnTurnsToReach.clear();
-							bestTargetsBasedOnTurnsToReach.add(actor);
-							turnsToBest = turns;
-						} else if (square != null && turns == turnsToBest) {
-							bestTargetsBasedOnTurnsToReach.add(actor);
-						}
-					}
-				}
-			}
-		}
-
-		// 2. pick which is the best
-		ArrayList<Fight> fights = new ArrayList<Fight>();
-		for (Actor actor : bestTargetsBasedOnTurnsToReach) {
-			for (GameObject gameObject : Game.level.activeActor.inventory.getGameObjects()) {
-				if (gameObject instanceof Weapon) {
-					Weapon weapon = (Weapon) gameObject;
-					for (float range = weapon.getEffectiveMinRange(); range <= weapon.getEffectiveMaxRange(); range++) {
-						Fight fight = new Fight(Game.level.activeActor, weapon, actor,
-								actor.bestCounterWeapon(Game.level.activeActor, weapon, range), range);
-						fights.add(fight);
-					}
-				}
-
-			}
-		}
-
-		fights.sort(new Fight.FightComparator());
-
-		// ArrayList<Integer> idealWeaponDistances = new ArrayList<Integer>();
-		// idealWeaponDistances.add(2);
-
-		// TODO this needs to be calculated based on
-		// weapons available and the taret and their weapons
-		// TODO what if we're stuck being closed than ideal distance, need to
-		// run through this, and there could be a list of ideal distances......
-		// :/
-		// TODO ideal weapon distance could be on the other side of an object...
-		// need to factor this in when choosing a good square :/, when talking
-		// about targets squares I need to make list of attack squares, this
-		// shit is heavy
-		Square squareToMoveTo = null;
-		if (fights.size() > 0)
-			squareToMoveTo = calculateSquareToMoveToToAttackTarget(fights.get(0).defender);
-
-		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public static Square calculateSquareToMoveToToAttackTarget(GameObject target) {
-
-		AIPath pathToSquare = getBestPathToAttackTarget(target);
-
-		if (pathToSquare == null) {
-			return null;
-		}
-
-		if (pathToSquare.travelCost == 0) {
-			return Game.level.activeActor.squareGameObjectIsOn;
-		}
-
-		Game.level.activeActor.path = pathToSquare;
-		return getSquareToMoveAlongPath(pathToSquare);
-
-	}
-
-	public static AIPath getBestPathToAttackTarget(GameObject target) {
-
-		if (target.squareGameObjectIsOn == null)
-			return null;
-
-		ArrayList<Float> idealWeaponDistances = Game.level.activeActor.calculateIdealDistanceFromTargetToAttack(target);
-
-		ArrayList<Square> squaresAtSpecifiedDistanceToTarget = new ArrayList<Square>();
-		int bestTravelCostFound = Integer.MAX_VALUE;
-		AIPath pathToSquare = null;
-		for (int i = 0; i < idealWeaponDistances.size(); i++) {
-
-			// WAS TRYING TO STOP THEM ATTACKING PEOPLE IN DIFFERENT BUILDINGS,
-			// DIDNT WORK, AND WAS STUPID COZ DOORWAYS
-			// MAYBE ONLY WHEN DISTANCE > 1
-
-			// Check if we're already at this distance
-			if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
-					.get(i) && Game.level.activeActor.canSeeGameObject(target)) {
-				return new AIPath();
-			}
-
-			squaresAtSpecifiedDistanceToTarget = target.getAllSquaresAtDistance(idealWeaponDistances.get(i));
-
-			// squaresAtSpecifiedDistanceToTarget
-
-			// TODO picking which of these squares is the best is an interesting
-			// issue.
-			// Reachable is best.
-			// if There's multiple reachable then safest out of them is best :P
-			// OR somewhere u can attack someone from is the best... i dunno :D
-
-			for (Square squareAtSpecifiedDistanceToTarget : squaresAtSpecifiedDistanceToTarget) {
-				AIPath currentActorPathToThisSquare = Game.level.activeActor
-						.getPathTo(squareAtSpecifiedDistanceToTarget);
-				if (Game.level.activeActor.canSeeGameObjectFromSpecificSquare(squareAtSpecifiedDistanceToTarget, target)
-						&& currentActorPathToThisSquare != null
-						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
-					pathToSquare = currentActorPathToThisSquare;
-					bestTravelCostFound = pathToSquare.travelCost;
-				}
-			}
-
-			if (pathToSquare != null)
-				break;
-
-		}
-
-		Game.level.activeActor.path = pathToSquare;
-		return pathToSquare;
-
-	}
-
 	public static Square calculateSquareToMoveToToBeWithinXSquaresToTarget(Square square, float maxDistance) {
 
 		ArrayList<Float> idealDistances = new ArrayList<Float>();
@@ -799,17 +512,21 @@ public class AIRoutineUtils {
 
 	public static boolean moveTowardsTargetSquare(Square square) {
 
+		if (square == null)
+			return true;
+
 		if (Game.level.activeActor.squareGameObjectIsOn == square)
 			return true;
 
-		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
+		AIPath path = Game.level.activeActor.getPathTo(square);
 
-		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
+		if (path == null || path.squares.size() == 0 || path.squares.get(0) == null)
 			return true;
-		} else {
-			return false;
-		}
+
+		new ActionMove(Game.level.activeActor, path.squares.get(0), true).perform();
+
+		return true;
+
 	}
 
 	public static Square calculateSquareToMoveToForTargetSquare(Square square) {
@@ -1045,17 +762,8 @@ public class AIRoutineUtils {
 				return 1;
 			}
 
-			AIPath pathA = getBestPathToAttackTarget(a);
-			int travelCostA = Integer.MAX_VALUE;
-			if (pathA != null)
-				travelCostA = pathA.travelCost;
-
-			AIPath pathB = getBestPathToAttackTarget(b);
-			int travelCostB = Integer.MAX_VALUE;
-			if (pathB != null)
-				travelCostB = pathB.travelCost;
-
-			return travelCostA - travelCostB;
+			return Game.level.activeActor.straightLineDistanceTo(a.squareGameObjectIsOn)
+					- Game.level.activeActor.straightLineDistanceTo(b.squareGameObjectIsOn);
 		}
 	};
 

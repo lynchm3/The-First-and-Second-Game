@@ -291,6 +291,15 @@ public class Actor extends GameObject {
 	Node lastNodeReached = null;
 
 	public AIPath getPathTo(Square target) {
+
+		for (StackTraceElement s : Thread.currentThread().getStackTrace()) {
+			System.out.println(s);
+
+		}
+
+		System.out.println("");
+
+		pathCount++;
 		// if (this == Level.player) {
 		// System.out.println("-------------------- ");
 		// }
@@ -821,8 +830,12 @@ public class Actor extends GameObject {
 		equippedWeaponGUID = this.equipped.guid;
 	}
 
+	public static int pathCount = 0;
+
 	@Override
 	public void update(int delta) {
+
+		pathCount = 0;
 
 		clearActions();
 
@@ -855,6 +868,7 @@ public class Actor extends GameObject {
 			}
 		}
 		super.update(delta);
+		System.out.println(this + " pathCount = " + pathCount);
 	}
 
 	private void addAttackerIfVisible(GameObject potentialAttacker) {

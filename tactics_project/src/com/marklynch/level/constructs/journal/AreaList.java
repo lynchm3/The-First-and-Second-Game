@@ -18,9 +18,9 @@ public class AreaList extends ArrayList<Quest> {
 	public static Area innerTownForest;
 	public static Area mines;
 
-	Color colorR = new Color(1f, 0f, 0f, 0.2f);
-	Color colorG = new Color(0f, 1f, 0f, 0.2f);
-	Color colorB = new Color(0f, 0f, 1f, 0.2f);
+	Color colorR = new Color(1f, 0f, 0f, 0.05f);
+	Color colorG = new Color(0f, 1f, 0f, 0.05f);
+	Color colorB = new Color(0f, 0f, 1f, 0.05f);
 
 	public AreaList() {
 

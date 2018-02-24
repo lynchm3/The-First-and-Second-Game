@@ -91,7 +91,7 @@ public class Blind extends Monster {
 
 		Blind actor = new Blind();
 		setInstances(actor);
-		super.setAttributesForCopy(name, actor, square, faction, null, 0, mustHaves, mightHaves, area);
+		super.setAttributesForCopy("Blind", actor, square, faction, null, 0, mustHaves, mightHaves, area);
 
 		actor.roomLivingIn = roomLivingIn;
 		return actor;
