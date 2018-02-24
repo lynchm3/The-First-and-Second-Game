@@ -212,9 +212,10 @@ public class Actor extends GameObject {
 			this.faction.actors.add(this);
 		}
 
-		if (gold <= 0)
+		if (gold <= 0 && this instanceof Human)
 			gold = 1;
-		inventory.add(Templates.GOLD.makeCopy(null, this, gold));
+		if (gold > 0)
+			inventory.add(Templates.GOLD.makeCopy(null, this, gold));
 
 		this.lastSquare = this.squareGameObjectIsOn;
 
@@ -291,15 +292,6 @@ public class Actor extends GameObject {
 	Node lastNodeReached = null;
 
 	public AIPath getPathTo(Square target) {
-
-		for (StackTraceElement s : Thread.currentThread().getStackTrace()) {
-			System.out.println(s);
-
-		}
-
-		System.out.println("");
-
-		pathCount++;
 		// if (this == Level.player) {
 		// System.out.println("-------------------- ");
 		// }
@@ -830,12 +822,8 @@ public class Actor extends GameObject {
 		equippedWeaponGUID = this.equipped.guid;
 	}
 
-	public static int pathCount = 0;
-
 	@Override
 	public void update(int delta) {
-
-		pathCount = 0;
 
 		clearActions();
 
@@ -868,7 +856,6 @@ public class Actor extends GameObject {
 			}
 		}
 		super.update(delta);
-		System.out.println(this + " pathCount = " + pathCount);
 	}
 
 	private void addAttackerIfVisible(GameObject potentialAttacker) {

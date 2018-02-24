@@ -39,7 +39,7 @@ public class TemplatesAnimals {
 		Templates.RAT.title = "Rat";
 		Templates.RAT.level = 1;
 		Templates.RAT.pierceDamage = 2;
-		Templates.RAT.totalHealth = Templates.RAT.remainingHealth = 100;
+		Templates.RAT.totalHealth = Templates.RAT.remainingHealth = 5;
 		Templates.RAT.strength = 10;
 		Templates.RAT.dexterity = 10;
 		Templates.RAT.intelligence = 10;
@@ -60,7 +60,7 @@ public class TemplatesAnimals {
 		Templates.RABBIT.title = "Rabbit";
 		Templates.RABBIT.level = 1;
 		Templates.RABBIT.pierceDamage = 1;
-		Templates.RABBIT.totalHealth = Templates.RABBIT.remainingHealth = 100;
+		Templates.RABBIT.totalHealth = Templates.RABBIT.remainingHealth = 10;
 		Templates.RABBIT.strength = 10;
 		Templates.RABBIT.dexterity = 10;
 		Templates.RABBIT.intelligence = 10;
@@ -79,7 +79,7 @@ public class TemplatesAnimals {
 		Templates.BABY_RABBIT.title = "Baby Rabbit";
 		Templates.BABY_RABBIT.level = 1;
 		Templates.BABY_RABBIT.pierceDamage = 1;
-		Templates.BABY_RABBIT.totalHealth = Templates.BABY_RABBIT.remainingHealth = 100;
+		Templates.BABY_RABBIT.totalHealth = Templates.BABY_RABBIT.remainingHealth = 5;
 		Templates.BABY_RABBIT.strength = 10;
 		Templates.BABY_RABBIT.dexterity = 10;
 		Templates.BABY_RABBIT.intelligence = 10;
@@ -100,7 +100,7 @@ public class TemplatesAnimals {
 		Templates.FOX.title = "Fox";
 		Templates.FOX.level = 1;
 		Templates.FOX.pierceDamage = 6;
-		Templates.FOX.totalHealth = Templates.FOX.remainingHealth = 100;
+		Templates.FOX.totalHealth = Templates.FOX.remainingHealth = 15;
 		Templates.FOX.strength = 10;
 		Templates.FOX.dexterity = 10;
 		Templates.FOX.intelligence = 10;
@@ -119,7 +119,7 @@ public class TemplatesAnimals {
 		Templates.WOLF.title = "Wolf";
 		Templates.WOLF.level = 1;
 		Templates.WOLF.pierceDamage = 10;
-		Templates.WOLF.totalHealth = Templates.WOLF.remainingHealth = 100;
+		Templates.WOLF.totalHealth = Templates.WOLF.remainingHealth = 20;
 		Templates.WOLF.strength = 10;
 		Templates.WOLF.dexterity = 10;
 		Templates.WOLF.intelligence = 10;
@@ -139,7 +139,7 @@ public class TemplatesAnimals {
 		Templates.FISH.title = "Fish";
 		Templates.FISH.level = 1;
 		Templates.FISH.slashDamage = 1;
-		Templates.FISH.totalHealth = Templates.FISH.remainingHealth = 100;
+		Templates.FISH.totalHealth = Templates.FISH.remainingHealth = 5;
 		Templates.FISH.strength = 1;
 		Templates.FISH.dexterity = 1;
 		Templates.FISH.intelligence = 1;

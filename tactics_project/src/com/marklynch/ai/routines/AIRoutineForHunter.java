@@ -3,6 +3,9 @@ package com.marklynch.ai.routines;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Gold;
+import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
@@ -25,6 +28,8 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		super(actor);
 		aiType = AI_TYPE.FIGHTER;
+		requiredEquipmentTemplateIds.add(Templates.HUNTING_BOW.templateId);
+		requiredEquipmentTemplateIds.add(Templates.HUNTING_KNIFE.templateId);
 	}
 
 	@Override
@@ -128,6 +133,11 @@ public class AIRoutineForHunter extends AIRoutine {
 			return;
 		}
 
+		if (replenishEquipment()) {
+			this.actor.followersShouldFollow = true;
+			return;
+		}
+
 		// Go about your business
 		if (state == STATE.HUNTING)
 
@@ -137,7 +147,7 @@ public class AIRoutineForHunter extends AIRoutine {
 			// if (target == null)
 			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, true, 0,
 					false, AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
-					TinyNeutralWildAnimal.class);
+					TinyNeutralWildAnimal.class, MeatChunk.class, Gold.class);
 			if (target == null) {
 				AIRoutineUtils.moveTowards(actor.area.centreSuqare);
 			} else {

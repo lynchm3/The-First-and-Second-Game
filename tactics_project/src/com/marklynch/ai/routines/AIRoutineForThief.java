@@ -5,7 +5,9 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Gold;
 import com.marklynch.objects.Junk;
+import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
@@ -95,7 +97,7 @@ public class AIRoutineForThief extends AIRoutine {
 		// 1. pick up loot on ground, even if owned, all specific stuff, no
 		// stupid generic game object
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(18f, true, false, true, false, false, true,
-				0, false, Weapon.class, Armor.class, Food.class, Junk.class);
+				0, false, Weapon.class, Armor.class, Food.class, Junk.class, MeatChunk.class, Gold.class);
 		if (loot != null) {
 			if (loot.owner != null && loot.owner != actor)
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;

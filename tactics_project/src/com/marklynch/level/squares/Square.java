@@ -725,7 +725,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public Color getPixel(Texture texture, int x, int y) {
 
-		if (texture == null)
+		if (texture == null || texture.pixels == null)
 			return null;
 		// in method
 		if (x < 0 || y < 0)

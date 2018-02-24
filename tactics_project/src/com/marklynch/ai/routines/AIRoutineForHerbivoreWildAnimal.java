@@ -2,7 +2,6 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.actions.ActionStopHidingInside;
@@ -72,20 +71,25 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		if (deferToGroupLeader())
 			return;
 
-		// 1. eat food on ground
-		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				false, false, 0, false, Food.class);
-		if (food != null) {
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
-			this.actor.thoughtBubbleImageTextureObject = food.imageTexture;
-			boolean pickedUpLoot = AIRoutineUtils.eatTarget(food);
-			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
-			} else {
-
-			}
+		if (eatFoodOnGround())
 			return;
-		}
+
+		// 1. eat food on ground
+		// GameObject food = target =
+		// AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false,
+		// true, false,
+		// false, false, 0, false, Food.class);
+		// if (food != null) {
+		// this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
+		// this.actor.thoughtBubbleImageTextureObject = food.imageTexture;
+		// boolean pickedUpLoot = AIRoutineUtils.eatTarget(food);
+		// if (!pickedUpLoot) {
+		// AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+		// } else {
+		//
+		// }
+		// return;
+		// }
 
 		// Defer to quest
 		if (deferToQuest())

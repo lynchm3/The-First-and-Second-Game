@@ -24,8 +24,10 @@ import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Gold;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Junk;
+import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.WantedPoster;
@@ -1089,7 +1091,7 @@ public abstract class AIRoutine {
 	public boolean lootFromGround() {
 		// Pick up loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, false, true, true,
-				10, false, Junk.class, Food.class, Weapon.class, Armor.class);
+				10, false, Junk.class, Food.class, Weapon.class, Armor.class, MeatChunk.class, Gold.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
@@ -1337,7 +1339,7 @@ public abstract class AIRoutine {
 			AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 			// AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
 		} else {
-			for (GameObject tradersGameObject : target.inventory.gameObjects) {
+			for (GameObject tradersGameObject : (ArrayList<GameObject>) target.inventory.gameObjects.clone()) {
 				for (Integer requiredTemplateId : (ArrayList<Integer>) equipmentNeeded.clone()) {
 					if (tradersGameObject.toSell == true && tradersGameObject.templateId == requiredTemplateId) {
 						new ActionBuyItems(actor, target, tradersGameObject).perform();
@@ -1358,6 +1360,10 @@ public abstract class AIRoutine {
 				GameObject cheatGameObject = null;
 				if (requiredTemplateId == Templates.PICKAXE.templateId) {
 					cheatGameObject = Templates.PICKAXE.makeCopy(null, null);
+				} else if (requiredTemplateId == Templates.HUNTING_BOW.templateId) {
+					cheatGameObject = Templates.HUNTING_BOW.makeCopy(null, null);
+				} else if (requiredTemplateId == Templates.HUNTING_KNIFE.templateId) {
+					cheatGameObject = Templates.HUNTING_KNIFE.makeCopy(null, null);
 				}
 
 				target.inventory.add(cheatGameObject);

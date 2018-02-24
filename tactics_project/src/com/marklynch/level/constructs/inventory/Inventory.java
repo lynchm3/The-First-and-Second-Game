@@ -661,6 +661,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public void add(GameObject gameObject, int index) {
 		if (!gameObjects.contains(gameObject)) {
 
+			// Farmer went to buy knife
+			// then got null pointer at the next line there...
+
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null) {
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
