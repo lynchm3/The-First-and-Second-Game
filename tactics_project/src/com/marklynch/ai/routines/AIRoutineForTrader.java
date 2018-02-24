@@ -44,10 +44,6 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (runSleepRoutine())
 			return;
 
-		// Update wanted poster
-		if (updateWantedPosterRoutine(trader.wantedPoster))
-			return;
-
 		// Crime reaction
 		if (runCrimeReactionRoutine())
 			return;

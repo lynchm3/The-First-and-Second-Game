@@ -7,6 +7,8 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Storage;
+import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
@@ -24,6 +26,9 @@ public class Area {
 	public int level;
 	public Color color;
 	public ArrayList<Node> nodes;
+
+	public Storage lostAndFound;
+	public WantedPoster wantedPoster;
 
 	public Area(String name, String imageString, Texture squareTexture, int gridX1, int gridY1, int gridX2, int gridY2,
 			int level, Color color, Node... nodes) {

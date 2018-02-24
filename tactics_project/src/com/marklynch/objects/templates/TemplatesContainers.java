@@ -61,6 +61,22 @@ public class TemplatesContainers {
 		Templates.CRATE.bluntDamage = 4;
 		Templates.CRATE.flipYAxisInMirror = false;
 
+		Templates.LOST_AND_FOUND = new Storage();
+		Templates.LOST_AND_FOUND.name = "Lost and Found";
+		Templates.LOST_AND_FOUND.baseName = "Lost and Found";
+		Templates.LOST_AND_FOUND.chestClosedTexture = ResourceUtils.getGlobalImage("crate.png", true);
+		Templates.LOST_AND_FOUND.chestOpenTexture = ResourceUtils.getGlobalImage("crate_open.png", true);
+		Templates.LOST_AND_FOUND.totalHealth = Templates.LOST_AND_FOUND.remainingHealth = 120;
+		Templates.LOST_AND_FOUND.stackable = false;
+		Templates.LOST_AND_FOUND.fireResistance = -50f;
+		Templates.LOST_AND_FOUND.weight = 160f;
+		Templates.LOST_AND_FOUND.value = 40;
+		Templates.LOST_AND_FOUND.anchorX = 0;
+		Templates.LOST_AND_FOUND.anchorY = 0;
+		Templates.LOST_AND_FOUND.templateId = GameObject.generateNewTemplateId();
+		Templates.LOST_AND_FOUND.bluntDamage = 4;
+		Templates.LOST_AND_FOUND.flipYAxisInMirror = false;
+
 	}
 
 }

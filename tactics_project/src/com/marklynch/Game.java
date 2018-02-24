@@ -281,19 +281,20 @@ public class Game {
 
 	public void init() {
 		// Level
-		if (editorMode)
-			editor = new Editor();
-		else {
-			level = new Level(10, 10);
-
-			level.fullQuestList.makeQuests();
-
-			for (int i = 0; i < Game.level.squares.length; i++) {
-				for (int j = 0; j < Game.level.squares[0].length; j++) {
-					Game.level.squares[i][j].afterContructor();
-				}
-			}
-		}
+		// if (editorMode)
+		editor = new Editor();
+		// else {
+		// level = new Level(10, 10);
+		//
+		// level.fullQuestList.makeQuests();
+		// AreaList.buildAreas();
+		//
+		// for (int i = 0; i < Game.level.squares.length; i++) {
+		// for (int j = 0; j < Game.level.squares[0].length; j++) {
+		// Game.level.squares[i][j].afterContructor();
+		// }
+		// }
+		// }
 
 		// LWJGLRenderer renderer = null;
 		// try {

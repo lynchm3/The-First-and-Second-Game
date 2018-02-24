@@ -13,7 +13,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.Sign;
-import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -24,7 +23,7 @@ public class Trader extends Human implements Comparator<GameObject> {
 	public StructureRoom shopRoom;
 	// public StructureRoom shop;
 	public Sign shopSign;
-	public WantedPoster wantedPoster;
+	// public WantedPoster wantedPoster;
 	public Weapon broom;
 
 	public Trader() {

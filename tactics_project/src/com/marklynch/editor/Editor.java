@@ -2,7 +2,6 @@ package com.marklynch.editor;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.lwjgl.input.Mouse;
 
@@ -25,36 +24,23 @@ import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
-import com.marklynch.level.constructs.bounds.structure.Structure;
-import com.marklynch.level.constructs.bounds.structure.StructurePath;
-import com.marklynch.level.constructs.bounds.structure.StructureRoom;
-import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
-import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.enchantment.EnhancementFireDamage;
 import com.marklynch.level.constructs.inventory.Inventory;
-import com.marklynch.level.squares.Node;
-import com.marklynch.level.squares.Nodes;
+import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Sign;
 import com.marklynch.objects.ThoughtBubbles;
-import com.marklynch.objects.Wall;
-import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
-import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.script.ScriptEvent;
-import com.marklynch.script.ScriptEventSpeech;
 import com.marklynch.script.trigger.ScriptTrigger;
-import com.marklynch.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.ui.EditorToast;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
@@ -179,6 +165,7 @@ public class Editor {
 		generateTestObjects();
 
 		Game.level.fullQuestList.makeQuests();
+		AreaList.buildAreas();
 
 		// TABS
 		String tabText = "LEVEL";
@@ -420,21 +407,9 @@ public class Editor {
 
 		new Templates();
 
-		Templates.MIRROR.makeCopy(Game.level.squares[27][31], null);
-		// Templates.MIRROR.makeCopy(Game.level.squares[1][4], null);
-		// Templates.MIRROR.makeCopy(Game.level.squares[2][4], null);
-		// Templates.MIRROR.makeCopy(Game.level.squares[3][4], null);
-		// Templates.MIRROR.makeCopy(Game.level.squares[4][4], null);
-
 		// Add player
-		// West Security
 		Player player = Templates.PLAYER.makeCopy("You", Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
 				Level.factions.player, null, 100, new GameObject[] {}, new GameObject[] {}, null);
-		// player.getEffectiveBluntDamage()
-		// Morts Mine
-		// Actor player =
-		// Templates.Player.makeCopy(Game.level.squares[80][39],
-		// Game.level.factions.player, null);
 		Game.level.player = player;
 		Weapon playersHuntingBow = Templates.HUNTING_BOW.makeCopy(null, player);
 		playersHuntingBow.enhancement = new EnhancementFireDamage();
@@ -486,65 +461,6 @@ public class Editor {
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 
-		// Trader Joe
-		Trader trader = Templates.TRADER.makeCopy("Trader Joe", Game.level.squares[7][1],
-				Game.level.factions.townsPeople, null, 10000, new GameObject[] {}, new GameObject[] {}, null);
-		Templates.HATCHET.makeCopy(Game.level.squares[3][3], trader);
-		// Joe's shop
-		ArrayList<Square> entranceSquares = new ArrayList<Square>(
-				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
-
-		ArrayList<GameObject> shopFeatures = new ArrayList<GameObject>();
-		shopFeatures.add(Templates.DOOR.makeCopy("Shop Door", Game.level.squares[5][4], false, false, false, trader));
-		shopFeatures.add(
-				Templates.DOOR.makeCopy("Private Quarters Door", Game.level.squares[11][4], false, true, true, trader));
-
-		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>();
-		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 6, 1, false,
-				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })),
-				new Node[] { Nodes.townShopInner, Nodes.townShopOuter }, new RoomPart(6, 1, 10, 4)));
-		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 12, 1, true, new ArrayList<Actor>(),
-				new Node[] { Nodes.townShopInner }, new RoomPart(12, 1, 16, 4)));
-		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
-		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5, false));
-		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
-				new ArrayList<StructurePath>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -100,
-				-100 + 868, true, trader, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL,
-				Square.STONE_TEXTURE, 2);
-		Game.level.structures.add(joesShop);
-
-		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[6][6], joesShop.name + " sign",
-				new Object[] { joesShop.name }, trader);
-		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[0][0], "Wanter Poster",
-				new ArrayList<Crime>(), trader);
-		trader.inventory.add(Templates.KATANA.makeCopy(null, null));
-		trader.inventory.add(Templates.HATCHET.makeCopy(null, null));
-		trader.inventory.add(Templates.HUNTING_BOW.makeCopy(null, null));
-		Templates.SHOP_COUNTER.makeCopy(Game.level.squares[7][1], null);
-
-		trader.shopRoom = shopAtriums.get(0);
-		trader.shopSign = joesShopSign;
-		trader.wantedPoster = wantedPoster;
-		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();
-		// doorLocations2.add(Game.level.squares[7][9]);
-		// // doorLocations2.add(Game.level.squares[11][9]);
-		// Game.level.structures.add(new Building("Hunting Lodge", 7, 7, 11, 11,
-		// doorLocations2));
-
-		// Add a game object
-		Templates.DUMPSTER.makeCopy(Game.level.squares[4][2], null);
-		Templates.FUR.makeCopy(Game.level.squares[0][7], null);
-		Templates.MUSHROOM.makeCopy(Game.level.squares[0][8], null);
-		Templates.TREE.makeCopy(Game.level.squares[1][2], null);
-		Templates.TREE.makeCopy(Game.level.squares[14][8], null);
-		Templates.TREE.makeCopy(Game.level.squares[19][3], null);
-		Templates.TREE.makeCopy(Game.level.squares[18][13], null);
-		Templates.TREE.makeCopy(Game.level.squares[9][16], null);
-		Templates.TREE.makeCopy(Game.level.squares[12][8], null);
-		Templates.TREE.makeCopy(Game.level.squares[27][3], null);
-		Templates.TREE.makeCopy(Game.level.squares[23][5], null);
-		Templates.BUSH.makeCopy(Game.level.squares[17][19], null);
-
 		// relationships
 		Game.level.factions.player.relationships.put(Game.level.factions.get(1),
 				new FactionRelationship(-100, Game.level.factions.player, Game.level.factions.get(1)));
@@ -557,68 +473,6 @@ public class Editor {
 
 		// Script
 
-		// SpeechPart 1
-		ArrayList<Actor> speechActors1 = new ArrayList<Actor>();
-		speechActors1.add(Game.level.player);
-		speechActors1.add(Game.level.factions.get(1).actors.get(0));
-		ArrayList<Float> speechPositions1 = new ArrayList<Float>();
-		speechPositions1.add(0f);
-		speechPositions1.add(0f);
-		ArrayList<Boolean> speechDirections1 = new ArrayList<Boolean>();
-		speechDirections1.add(true);
-		speechDirections1.add(false);
-
-		ArrayList<String> arrayList1 = new ArrayList();
-		arrayList1.add("HI, THIS IS SCRIPTED SPEECH :D");
-
-		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(speechActors1, speechPositions1,
-				speechDirections1, Game.level.player, arrayList1);
-
-		// SpeechPart 2
-		ArrayList<Actor> speechActors2 = new ArrayList<Actor>();
-		speechActors2.add(Game.level.player);
-		speechActors2.add(Game.level.factions.get(1).actors.get(0));
-		ArrayList<Float> speechPositions2 = new ArrayList<Float>();
-		speechPositions2.add(0f);
-		speechPositions2.add(0f);
-		ArrayList<Boolean> speechDirections2 = new ArrayList<Boolean>();
-		speechDirections2.add(true);
-		speechDirections2.add(false);
-
-		ArrayList<String> arrayList2 = new ArrayList();
-		arrayList2.add("HI, PT2 OF THIS TALK");
-
-		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(speechActors2, speechPositions2,
-				speechDirections2, Game.level.player, arrayList2);
-
-		ArrayList<ScriptEventSpeech.SpeechPart> speechParts = new ArrayList<ScriptEventSpeech.SpeechPart>();
-		speechParts.add(speechPart1_1.makeCopy());
-		speechParts.add(speechPart1_2.makeCopy());
-		ScriptTrigger scriptTriggerActorSelected = new ScriptTriggerActorSelected(Game.level.player);
-		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true, speechParts, scriptTriggerActorSelected);
-
-		// Game.level.script.scriptTriggers.add(new ScriptTriggerTurnStart(1,
-		// 0));
-		// Game.level.script.scriptTriggers.add(scriptTriggerActorSelected);
-		// Game.level.script.speechParts.add(speechPart1_1);
-		// Game.level.script.speechParts.add(speechPart1_2);
-		// Game.level.ais.add(new AIRoutineTargetObject(gameObject));
-		// Game.level.ais.get(0).name = "attackDumpster";
-		// Game.level.ais.add(new AIRoutineTargetObject(actor0));
-		// Game.level.ais.get(1).name = "attackPlayer";
-		//
-		// ScriptEventSetAI scriptEventSetAIAttackDumpster = new
-		// ScriptEventSetAI(false,
-		// Game.level.script.scriptTriggers.get(0).makeCopy(), actor1,
-		// Game.level.ais.get(0).makeCopy());
-		//
-		// ArrayList<ScriptEvent> scriptEvents = new ArrayList<ScriptEvent>();
-		// // scriptEvents.add(scriptEventSpeech1);
-		// scriptEvents.add(scriptEventSetAIAttackDumpster);
-		// scriptEvents.add(scriptEventSpeech1);
-		//
-		// Game.level.script.scriptEvents = scriptEvents;
-		// script.activateScriptEvent();
 	}
 
 	public void update(int delta) {

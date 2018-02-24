@@ -232,6 +232,8 @@ public class Templates {
 
 	public static Storage CRATE;
 
+	public static Storage LOST_AND_FOUND;
+
 	public static RemoteDoor FALSE_WALL;;
 
 	public static Key KEY;
