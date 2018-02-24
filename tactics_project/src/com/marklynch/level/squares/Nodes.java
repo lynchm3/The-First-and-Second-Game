@@ -46,7 +46,7 @@ public class Nodes {
 		townShopCrossRoads = new Node("Town Shop Crossroads", squares[4][21]);
 		nodes.add(townShopCrossRoads);
 
-		townCenter = new Node("Town Center", squares[24][22]);
+		townCenter = new Node("Town Center", squares[24][21]);
 		nodes.add(townCenter);
 
 		dungeonHouseOuter = new Node("Dungeon House", squares[24][30]);
@@ -139,12 +139,14 @@ public class Nodes {
 
 	}
 
+	public static Color color = new Color(1, 1, 1, 0.5f);
+
 	public static void draw() {
 		for (Node node : nodes) {
-			QuadUtils.drawQuad(Color.PINK, node.square.xInGridPixels, node.square.yInGridPixels,
+			QuadUtils.drawQuad(color, node.square.xInGridPixels, node.square.yInGridPixels,
 					node.square.xInGridPixels + Game.SQUARE_WIDTH, node.square.yInGridPixels + Game.SQUARE_HEIGHT);
 			for (Node neighbor : node.neighbors) {
-				LineUtils.drawLine(Color.PINK, node.square.xInGridPixels, node.square.yInGridPixels,
+				LineUtils.drawLine(color, node.square.xInGridPixels, node.square.yInGridPixels,
 						neighbor.square.xInGridPixels + Game.SQUARE_WIDTH,
 						neighbor.square.yInGridPixels + Game.SQUARE_HEIGHT, 10);
 			}

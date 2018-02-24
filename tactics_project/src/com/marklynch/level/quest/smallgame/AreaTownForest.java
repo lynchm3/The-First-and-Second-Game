@@ -3,7 +3,6 @@ package com.marklynch.level.quest.smallgame;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
-import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.power.PowerPoisonBlast;
 import com.marklynch.level.squares.Square;
@@ -11,17 +10,8 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.Texture;
 
-public class AreaTownForest extends Area {
-
-	// public static Area area;
-
-	public AreaTownForest(String name, String imageString, Texture squareTexture, int gridX1, int gridY1, int gridX2,
-			int gridY2, int level) {
-		super(name, imageString, squareTexture, gridX1, gridY1, gridX2, gridY2, level);
-		// TODO Auto-generated constructor stub
-	}
+public class AreaTownForest {
 
 	public static void createForest() {
 

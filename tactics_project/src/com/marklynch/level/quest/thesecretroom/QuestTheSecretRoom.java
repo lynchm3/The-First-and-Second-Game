@@ -97,7 +97,7 @@ public class QuestTheSecretRoom extends Quest {
 		Templates.BUSH.makeCopy(Game.level.squares[25][29], null);
 
 		// TownSquare Well 24,21
-		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[24][21], null);
+		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[23][20], null);
 
 		// Town square pavement
 		Path townSquare = new Path(Game.level.squares[23][19], Game.level.squares[24][19], Game.level.squares[25][19],

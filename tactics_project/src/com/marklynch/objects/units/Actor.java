@@ -291,14 +291,14 @@ public class Actor extends GameObject {
 	Node lastNodeReached = null;
 
 	public AIPath getPathTo(Square target) {
-		if (this == Level.player) {
-			System.out.println("-------------------- ");
-		}
-
-		if (this == Level.player) {
-			System.out.println("current square = " + this.squareGameObjectIsOn);
-			System.out.println("target square = " + target);
-		}
+		// if (this == Level.player) {
+		// System.out.println("-------------------- ");
+		// }
+		//
+		// if (this == Level.player) {
+		// System.out.println("current square = " + this.squareGameObjectIsOn);
+		// System.out.println("target square = " + target);
+		// }
 
 		if (target == null) {
 			return null;
@@ -310,14 +310,16 @@ public class Actor extends GameObject {
 		// Share a node, just walk straight
 		for (Node node1 : this.squareGameObjectIsOn.nodes) {
 			for (Node node2 : target.nodes) {
-				if (this == Level.player) {
-					System.out.println("node 1 = " + node1.name + ", node2 = " + node2.name);
-				}
+				// if (this == Level.player) {
+				// System.out.println("node 1 = " + node1.name + ", node2 = " +
+				// node2.name);
+				// }
 				if (node1 == node2) {
-					if (this == Level.player) {
-						System.out.println(
-								"Goind straight to squares - node 1 = " + node1.name + ", node2 = " + node2.name);
-					}
+					// if (this == Level.player) {
+					// System.out.println(
+					// "Goind straight to squares - node 1 = " + node1.name + ",
+					// node2 = " + node2.name);
+					// }
 					lastNodeReached = null;
 					return getPathAtSquareLevel(target);
 				}
@@ -346,14 +348,14 @@ public class Actor extends GameObject {
 		for (Node node2 : target.nodes) {
 			LinkedList<Node> tempAStarNodesPath = new AStarSearchHighLevel().findPath(this, lastNodeReached, node2,
 					maxPathSize);
-			if (this == Level.player) {
-				System.out.println("tempAStarNodesPath = " + tempAStarNodesPath);
-				for (Node node : tempAStarNodesPath) {
-					System.out.println("node = " + node);
-					System.out.println("node.name = " + node.name);
-				}
-
-			}
+			// if (this == Level.player) {
+			// System.out.println("tempAStarNodesPath = " + tempAStarNodesPath);
+			// for (Node node : tempAStarNodesPath) {
+			// System.out.println("node = " + node);
+			// System.out.println("node.name = " + node.name);
+			// }
+			//
+			// }
 
 			if (tempAStarNodesPath != null && tempAStarNodesPath.size() != 0) {
 				float thisCost = tempAStarNodesPath.getLast().getCost();
@@ -366,16 +368,18 @@ public class Actor extends GameObject {
 		// }
 
 		if (aStarNodesPath == null || aStarNodesPath.size() == 0) {
-			if (this == Level.player) {
-				System.out.println("aStarNodesPath is null or empty, returning");
-			}
+			// if (this == Level.player) {
+			// System.out.println("aStarNodesPath is null or empty, returning");
+			// }
 			return getPathAtSquareLevel(target);
 		}
 
-		if (this == Level.player) {
-			System.out.println("target node name = " + aStarNodesPath.getFirst().name);
-			System.out.println("target node square = " + aStarNodesPath.getFirst().square);
-		}
+		// if (this == Level.player) {
+		// System.out.println("target node name = " +
+		// aStarNodesPath.getFirst().name);
+		// System.out.println("target node square = " +
+		// aStarNodesPath.getFirst().square);
+		// }
 
 		return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
 

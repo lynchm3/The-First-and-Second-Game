@@ -1122,6 +1122,7 @@ public class Level {
 		}
 
 		Nodes.draw();
+		AreaList.draw();
 
 		Game.flush();
 		Matrix4f view = Game.activeBatch.getViewMatrix();
