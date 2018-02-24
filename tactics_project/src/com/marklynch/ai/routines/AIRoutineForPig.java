@@ -76,7 +76,7 @@ public class AIRoutineForPig extends AIRoutine {
 		// Move about a bit
 		if (targetSquare != null) {
 			boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-			if (pig.squareGameObjectIsOn == targetSquare || pig.getPathTo(targetSquare) == null)
+			if (pig.squareGameObjectIsOn == targetSquare || !moved)
 				targetSquare = null;
 			if (moved)
 				return;

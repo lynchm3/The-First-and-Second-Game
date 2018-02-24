@@ -94,8 +94,7 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		// Move about a bit
 		if (targetSquare != null) {
 			boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-			if (friendlyWildAnimal.squareGameObjectIsOn == targetSquare
-					|| friendlyWildAnimal.getPathTo(targetSquare) == null)
+			if (friendlyWildAnimal.squareGameObjectIsOn == targetSquare || !moved)
 				targetSquare = null;
 			if (moved)
 				return;

@@ -87,8 +87,8 @@ public class AIRoutineForTrader extends AIRoutine {
 				if (trader.equipped != trader.broom && trader.inventory.contains(trader.broom))
 					trader.equip(trader.broom);
 				if (targetSquare != null) {
-					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-					if (trader.squareGameObjectIsOn == targetSquare || trader.getPathTo(targetSquare) == null)
+					boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+					if (trader.squareGameObjectIsOn == targetSquare || !moved)
 						targetSquare = null;
 				} else if (trader.squareGameObjectIsOn.structureRoomSquareIsIn != trader.shopRoom) {
 					targetSquare = AIRoutineUtils.getRandomSquareInRoom(trader.shopRoom);

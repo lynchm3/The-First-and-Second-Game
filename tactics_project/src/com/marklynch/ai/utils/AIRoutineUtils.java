@@ -46,10 +46,12 @@ public class AIRoutineUtils {
 
 			randomSquare = squaresInRange.get((int) (Math.random() * (squaresInRange.size() - 1)));
 
-			AIPath currentActorPathToThisSquare = Game.level.activeActor.getPathTo(randomSquare);
+			// AIPath currentActorPathToThisSquare =
+			// Game.level.activeActor.getPathTo(randomSquare);
 
 			if ((!mustBeOutdoors || mustBeOutdoors && randomSquare.structureSquareIsIn == null)
-					&& currentActorPathToThisSquare != null && currentActorPathToThisSquare.travelCost < maxDistance
+					// && currentActorPathToThisSquare != null &&
+					// currentActorPathToThisSquare.travelCost < maxDistance
 					&& randomSquare.inventory.canShareSquare
 					&& Game.level.activeActor.aiRoutine.squareInBounds(randomSquare)) {
 
