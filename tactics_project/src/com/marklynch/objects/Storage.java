@@ -14,6 +14,7 @@ public class Storage extends Openable {
 	public Texture chestOpenTexture;
 	public Texture chestClosedTexture;
 	public String imagePathWhenOpen;
+	public ArrayList<Actor> ownersOfContents = new ArrayList<Actor>();
 
 	public Storage() {
 		super();
@@ -104,6 +105,13 @@ public class Storage extends Openable {
 			this.name = baseName + " (empty)";
 		else
 			this.name = baseName;
+
+		ownersOfContents.clear();
+		for (GameObject gameObject : inventory.gameObjects) {
+			if (gameObject.owner != null && !ownersOfContents.contains(gameObject.owner)) {
+				ownersOfContents.add(gameObject.owner);
+			}
+		}
 	}
 
 	public Storage makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {

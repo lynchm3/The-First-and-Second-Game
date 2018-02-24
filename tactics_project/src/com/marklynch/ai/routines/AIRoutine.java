@@ -1439,20 +1439,24 @@ public abstract class AIRoutine {
 
 		Storage lostAndFound = actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound;
 
-		ArrayList<GameObject> gameObjectsToPickUp = new ArrayList<GameObject>();
-		for (GameObject gameObject : lostAndFound.inventory.gameObjects) {
-			if (gameObject.owner == actor) {
-				gameObjectsToPickUp.add(gameObject);
-			}
-		}
-
-		if (gameObjectsToPickUp.size() == 0)
+		if (!lostAndFound.ownersOfContents.contains(actor))
 			return false;
 
 		this.actor.thoughtBubbleImageTextureObject = lostAndFound.chestClosedTexture;
 		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("left.png", false);
 
 		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
+
+			ArrayList<GameObject> gameObjectsToPickUp = new ArrayList<GameObject>();
+			for (GameObject gameObject : lostAndFound.inventory.gameObjects) {
+				if (gameObject.owner == actor) {
+					gameObjectsToPickUp.add(gameObject);
+				}
+			}
+
+			if (gameObjectsToPickUp.size() == 0)
+				return false;
+
 			new ActionTakeItems(actor, lostAndFound, gameObjectsToPickUp).perform();
 			return true;
 		} else {
