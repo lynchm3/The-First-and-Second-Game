@@ -1427,7 +1427,7 @@ public abstract class AIRoutine {
 		if (gameObjectsToDropOff.size() == 0)
 			return false;
 
-		this.actor.thoughtBubbleImageTextureObject = lostAndFound.imageTexture;
+		this.actor.thoughtBubbleImageTextureObject = lostAndFound.chestClosedTexture;
 		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("right.png", false);
 
 		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
@@ -1440,7 +1440,31 @@ public abstract class AIRoutine {
 
 	// Pick up from lost and found
 	public boolean pickUpFromLostAndFoundRoutine() {
-		return false;
+
+		if (actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound == null)
+			return false;
+
+		Storage lostAndFound = actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound;
+
+		ArrayList<GameObject> gameObjectsToPickUp = new ArrayList<GameObject>();
+		for (GameObject gameObject : lostAndFound.inventory.gameObjects) {
+			if (gameObject.owner == actor) {
+				gameObjectsToPickUp.add(gameObject);
+			}
+		}
+
+		if (gameObjectsToPickUp.size() == 0)
+			return false;
+
+		this.actor.thoughtBubbleImageTextureObject = lostAndFound.chestClosedTexture;
+		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("left.png", false);
+
+		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
+			new ActionTakeItems(actor, lostAndFound, gameObjectsToPickUp).perform();
+			return true;
+		} else {
+			return AIRoutineUtils.moveTowards(lostAndFound.squareGameObjectIsOn);
+		}
 	}
 
 	public abstract AIRoutine getInstance(Actor actor);
