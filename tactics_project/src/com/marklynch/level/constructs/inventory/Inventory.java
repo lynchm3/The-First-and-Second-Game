@@ -695,6 +695,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			// Add to this inventory's list of game objects
 			gameObjects.add(gameObject);
+
+			if (this.parent instanceof Actor && gameObject.owner != null && gameObject.owner != this.parent)
+				((Actor) parent).gameObjectsInInventoryThatBelongToAnother.add(gameObject);
+
 			gameObject.inventoryThatHoldsThisObject = this;
 
 			// this.sort(inventorySortBy);
@@ -730,6 +734,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				Actor actor = (Actor) parent;
 				if (actor.equipped == gameObject)
 					actor.equipped = null;
+				actor.gameObjectsInInventoryThatBelongToAnother.remove(gameObject);
 			}
 
 			gameObjects.remove(gameObject);

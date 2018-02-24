@@ -172,6 +172,8 @@ public class Actor extends GameObject {
 
 	public Area area;
 
+	public ArrayList<GameObject> gameObjectsInInventoryThatBelongToAnother = new ArrayList<GameObject>();
+
 	public Actor() {
 
 		super();

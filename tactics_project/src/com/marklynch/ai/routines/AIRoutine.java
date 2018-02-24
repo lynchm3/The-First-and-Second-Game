@@ -1415,23 +1415,16 @@ public abstract class AIRoutine {
 		if (actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound == null)
 			return false;
 
-		Storage lostAndFound = actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound;
-
-		ArrayList<GameObject> gameObjectsToDropOff = new ArrayList<GameObject>();
-		for (GameObject gameObject : actor.inventory.gameObjects) {
-			if (gameObject.owner != null && gameObject.owner != actor) {
-				gameObjectsToDropOff.add(gameObject);
-			}
-		}
-
-		if (gameObjectsToDropOff.size() == 0)
+		if (actor.gameObjectsInInventoryThatBelongToAnother.size() == 0)
 			return false;
+
+		Storage lostAndFound = actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound;
 
 		this.actor.thoughtBubbleImageTextureObject = lostAndFound.chestClosedTexture;
 		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("right.png", false);
 
 		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
-			new ActionGiveItems(actor, lostAndFound, false, gameObjectsToDropOff).perform();
+			new ActionGiveItems(actor, lostAndFound, false, actor.gameObjectsInInventoryThatBelongToAnother).perform();
 			return true;
 		} else {
 			return AIRoutineUtils.moveTowards(lostAndFound.squareGameObjectIsOn);
