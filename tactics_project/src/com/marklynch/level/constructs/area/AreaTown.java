@@ -11,6 +11,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.journal.AreaList;
+import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
@@ -32,7 +33,14 @@ public class AreaTown {
 		// Trader Joe
 		Trader trader = Templates.TRADER.makeCopy("Trader Joe", Game.level.squares[7][1],
 				Game.level.factions.townsPeople, null, 10000, new GameObject[] {}, new GameObject[] {}, null);
-		Templates.HATCHET.makeCopy(Game.level.squares[3][3], trader);
+
+		// Some ground hatchets
+		Templates.HATCHET.makeCopy(Game.level.squares[3][3], QuestList.questSmallGame.hunterBrent);
+		Templates.HATCHET.makeCopy(Game.level.squares[3][6], QuestList.questSmallGame.hunterBrent);
+		Templates.HATCHET.makeCopy(Game.level.squares[5][6], Game.level.player);
+		Templates.HATCHET.makeCopy(Game.level.squares[1][6], Game.level.player);
+		Templates.BLOOD.makeCopy(Game.level.squares[5][6], null);
+
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));

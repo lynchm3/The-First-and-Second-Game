@@ -293,12 +293,6 @@ public class QuestSmallGame extends Quest {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);
 
-		// Some ground hatchets
-		Templates.HATCHET.makeCopy(Game.level.squares[3][6], Game.level.player);
-		Templates.HATCHET.makeCopy(Game.level.squares[5][6], Game.level.player);
-		Templates.BLOOD.makeCopy(Game.level.squares[5][6], Game.level.player);
-		Templates.HATCHET.makeCopy(Game.level.squares[1][6], Game.level.player);
-
 		hunterPack = new Group("Hunting Party", hunterBrent, hunterBront1, hunterBront2, hunterBront3, hunterBront4,
 				hunterBront5, hunterBront6);
 

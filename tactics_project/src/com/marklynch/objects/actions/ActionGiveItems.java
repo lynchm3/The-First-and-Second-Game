@@ -96,7 +96,7 @@ public class ActionGiveItems extends VariableQtyAction {
 			performer.inventory.remove(object);
 
 			receiver.inventory.add(object);
-			if (receiver instanceof Actor) {
+			if (receiver instanceof Actor && !logAsTake) {
 				object.owner = (Actor) receiver;
 			}
 		}

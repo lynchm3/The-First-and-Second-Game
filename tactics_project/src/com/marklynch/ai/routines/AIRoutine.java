@@ -29,6 +29,7 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.SmallHidingPlace;
+import com.marklynch.objects.Storage;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.actions.Action;
@@ -1394,7 +1395,7 @@ public abstract class AIRoutine {
 
 		this.actor.activityDescription = "Updating Wanted Poater";
 		this.actor.thoughtBubbleImageTextureObject = wantedPoster.imageTexture;
-		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("write.png", false);
+		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("action_write.png", false);
 
 		if (actor.straightLineDistanceTo(wantedPoster.squareGameObjectIsOn) < 2) {
 			wantedPoster.updateCrimes(
@@ -1407,6 +1408,39 @@ public abstract class AIRoutine {
 			return AIRoutineUtils.moveTowards(wantedPoster.squareGameObjectIsOn);
 		}
 
+	}
+
+	public boolean dropOffToLostAndFoundRoutine() {
+
+		if (actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound == null)
+			return false;
+
+		Storage lostAndFound = actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound;
+
+		ArrayList<GameObject> gameObjectsToDropOff = new ArrayList<GameObject>();
+		for (GameObject gameObject : actor.inventory.gameObjects) {
+			if (gameObject.owner != null && gameObject.owner != actor) {
+				gameObjectsToDropOff.add(gameObject);
+			}
+		}
+
+		if (gameObjectsToDropOff.size() == 0)
+			return false;
+
+		this.actor.thoughtBubbleImageTextureObject = lostAndFound.imageTexture;
+		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("right.png", false);
+
+		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
+			new ActionGiveItems(actor, lostAndFound, false, gameObjectsToDropOff).perform();
+			return true;
+		} else {
+			return AIRoutineUtils.moveTowards(lostAndFound.squareGameObjectIsOn);
+		}
+	}
+
+	// Pick up from lost and found
+	public boolean pickUpFromLostAndFoundRoutine() {
+		return false;
 	}
 
 	public abstract AIRoutine getInstance(Actor actor);

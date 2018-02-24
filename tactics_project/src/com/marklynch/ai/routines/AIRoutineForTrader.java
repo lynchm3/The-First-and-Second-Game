@@ -56,24 +56,44 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (runEscapeCooldown(true))
 			return;
 
-		// Update wanted poster
-		if (updateWantedPosterRoutine())
+		// Search
+		if (runSearchRoutine()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
-		// Door maintenance routine
-		if (runDoorRoutine())
+		// Search cooldown
+		if (runSearchCooldown()) {
+			this.actor.followersShouldFollow = true;
+			return;
+		}
+
+		// Loot from ground
+		if (lootFromGround())
 			return;
 
 		// Defer to group leader
 		if (deferToGroupLeader())
 			return;
 
-		// Loot from ground
-		if (lootFromGround())
-			return;
-
 		// Defer to quest
 		if (deferToQuest())
+			return;
+
+		// Update wanted poster
+		if (updateWantedPosterRoutine())
+			return;
+
+		// Update wanted poster
+		if (dropOffToLostAndFoundRoutine())
+			return;
+
+		// Pick up from lost and found
+		if (pickUpFromLostAndFoundRoutine())
+			return;
+
+		// Door maintenance routine
+		if (runDoorRoutine())
 			return;
 
 		// Shopkeeper AI 1 - hang in shop

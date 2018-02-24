@@ -99,16 +99,6 @@ public class AIRoutineForHunter extends AIRoutine {
 			return;
 		}
 
-		// Update wanted poster
-		if (updateWantedPosterRoutine())
-			return;
-
-		// Door maintenance routine
-		if (runDoorRoutine()) {
-			this.actor.followersShouldFollow = true;
-			return;
-		}
-
 		// Defer to group leader
 		if (deferToGroupLeader()) {
 			this.actor.followersShouldFollow = true;
@@ -127,6 +117,24 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		// Defer to quest
 		if (deferToQuest()) {
+			this.actor.followersShouldFollow = true;
+			return;
+		}
+
+		// Update wanted poster
+		if (updateWantedPosterRoutine())
+			return;
+
+		// Update wanted poster
+		if (dropOffToLostAndFoundRoutine())
+			return;
+
+		// Pick up from lost and found
+		if (pickUpFromLostAndFoundRoutine())
+			return;
+
+		// Door maintenance routine
+		if (runDoorRoutine()) {
 			this.actor.followersShouldFollow = true;
 			return;
 		}

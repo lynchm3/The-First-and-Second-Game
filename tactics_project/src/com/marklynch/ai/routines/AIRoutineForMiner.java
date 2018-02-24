@@ -95,16 +95,6 @@ public class AIRoutineForMiner extends AIRoutine {
 			return;
 		}
 
-		// Update wanted poster
-		if (updateWantedPosterRoutine())
-			return;
-
-		// Door maintenance routine
-		if (runDoorRoutine()) {
-			this.actor.followersShouldFollow = true;
-			return;
-		}
-
 		// Defer to group leader
 		if (deferToGroupLeader())
 			return;
@@ -112,6 +102,24 @@ public class AIRoutineForMiner extends AIRoutine {
 		// Defer to quest
 		if (deferToQuest())
 			return;
+
+		// Update wanted poster
+		if (updateWantedPosterRoutine())
+			return;
+
+		// Update wanted poster
+		if (dropOffToLostAndFoundRoutine())
+			return;
+
+		// Pick up from lost and found
+		if (pickUpFromLostAndFoundRoutine())
+			return;
+
+		// Door maintenance routine
+		if (runDoorRoutine()) {
+			this.actor.followersShouldFollow = true;
+			return;
+		}
 
 		// Sell items
 		if (sellItems()) {
