@@ -56,6 +56,10 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (runEscapeCooldown(true))
 			return;
 
+		// Update wanted poster
+		if (updateWantedPosterRoutine())
+			return;
+
 		// Door maintenance routine
 		if (runDoorRoutine())
 			return;

@@ -90,7 +90,6 @@ public class AreaMinorMine {
 
 		trader.shopRoom = shopRoom;
 		trader.shopSign = shopSign;
-		trader.wantedPoster = null;
 
 	}
 

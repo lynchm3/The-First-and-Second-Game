@@ -95,6 +95,10 @@ public class AIRoutineForMiner extends AIRoutine {
 			return;
 		}
 
+		// Update wanted poster
+		if (updateWantedPosterRoutine())
+			return;
+
 		// Door maintenance routine
 		if (runDoorRoutine()) {
 			this.actor.followersShouldFollow = true;

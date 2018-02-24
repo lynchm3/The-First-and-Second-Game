@@ -1380,7 +1380,11 @@ public abstract class AIRoutine {
 		return true;
 	}
 
-	public boolean updateWantedPosterRoutine(WantedPoster wantedPoster) {
+	public boolean updateWantedPosterRoutine() {
+
+		WantedPoster wantedPoster = actor.squareGameObjectIsOn.areaSquareIsIn.wantedPoster;
+		if (wantedPoster == null)
+			return false;
 
 		if (actor.highestAccumulatedUnresolvedCrimeSeverity == 0)
 			return false;
