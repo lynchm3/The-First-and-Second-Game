@@ -1393,6 +1393,8 @@ public abstract class AIRoutine {
 			return false;
 
 		this.actor.activityDescription = "Updating Wanted Poater";
+		this.actor.thoughtBubbleImageTextureObject = wantedPoster.imageTexture;
+		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("write.png", false);
 
 		if (actor.straightLineDistanceTo(wantedPoster.squareGameObjectIsOn) < 2) {
 			wantedPoster.updateCrimes(
