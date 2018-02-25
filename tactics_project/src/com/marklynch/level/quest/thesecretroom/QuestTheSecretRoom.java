@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Path;
 import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
@@ -28,7 +29,7 @@ public class QuestTheSecretRoom extends Quest {
 		name = "THE SECRET ROOM";
 
 		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>();
-		ArrayList<GameObject> structureFeatures = new ArrayList<GameObject>();
+		ArrayList<StructureFeature> structureFeatures = new ArrayList<StructureFeature>();
 		ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>();
 		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>();
 		ArrayList<StructureRoom> structureRooms = new ArrayList<StructureRoom>();
@@ -39,8 +40,9 @@ public class QuestTheSecretRoom extends Quest {
 		structureSections.add(new StructureSection("A Cozy Place", 21, 30, 29, 36, false));
 
 		// Front door
-		structureFeatures
-				.add(Templates.DOOR.makeCopy("Front Door", Game.level.squares[24][30], false, false, false, null));
+		structureFeatures.add(new StructureFeature(
+				Templates.DOOR.makeCopy("Front Door", Game.level.squares[24][30], false, false, false, null),
+				Nodes.dungeonHouseOuter));
 
 		// Front room
 		StructureRoom livingRoom = new StructureRoom("Living Room", 22, 31, false, new ArrayList<Actor>(),
@@ -62,10 +64,10 @@ public class QuestTheSecretRoom extends Quest {
 
 		// False wall
 		RemoteDoor falseWall = Templates.FALSE_WALL.makeCopy("Wall", Game.level.squares[22][36], false, null);
-		structureFeatures.add(falseWall);
+		structureFeatures.add(new StructureFeature(falseWall, Nodes.dungeonHouseOuter));
 
 		// Back room
-		StructureRoom backRoom = new StructureRoom("GameObjectroom", 20, 37, false, new ArrayList<Actor>(), 4,
+		StructureRoom backRoom = new StructureRoom("Back room", 20, 37, false, new ArrayList<Actor>(), 4,
 				new Node[] { Nodes.dungeonHouseOuter }, new RoomPart(20, 37, 35, 45));
 		structureRooms.add(backRoom);
 

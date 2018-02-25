@@ -9,6 +9,7 @@ import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
@@ -230,9 +231,10 @@ public class QuestSmallGame extends Quest {
 		hunter = hunterBrent;
 
 		// Hunting lodge
-		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
-		lodgeFeatures
-				.add(Templates.DOOR.makeCopy("Door", Game.level.squares[105][12], false, false, false, hunterBrent));
+		ArrayList<StructureFeature> lodgeFeatures = new ArrayList<StructureFeature>();
+		lodgeFeatures.add(new StructureFeature(
+				Templates.DOOR.makeCopy("Door", Game.level.squares[105][12], false, false, false, hunterBrent),
+				Nodes.lodgeEntrance));
 		ArrayList<StructureRoom> lodgeRooms = new ArrayList<StructureRoom>();
 		lodgeRooms.add(new StructureRoom("Hunting Lodge", 107, 9, false, new ArrayList<Actor>(),
 				new Node[] { Nodes.lodgeEntrance }, new RoomPart(106, 10, 110, 14)));

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
@@ -45,10 +46,13 @@ public class AreaTown {
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
 
-		ArrayList<GameObject> shopFeatures = new ArrayList<GameObject>();
-		shopFeatures.add(Templates.DOOR.makeCopy("Shop Door", Game.level.squares[5][4], false, false, false, trader));
-		shopFeatures.add(
-				Templates.DOOR.makeCopy("Private Quarters Door", Game.level.squares[11][4], false, true, true, trader));
+		ArrayList<StructureFeature> shopFeatures = new ArrayList<StructureFeature>();
+		shopFeatures.add(new StructureFeature(
+				Templates.DOOR.makeCopy("Shop Door", Game.level.squares[5][4], false, false, false, trader),
+				Nodes.townShopOuter));
+		shopFeatures.add(new StructureFeature(
+				Templates.DOOR.makeCopy("Private Quarters Door", Game.level.squares[11][4], false, true, true, trader),
+				Nodes.townShopInner));
 
 		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>();
 		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 6, 1, false,

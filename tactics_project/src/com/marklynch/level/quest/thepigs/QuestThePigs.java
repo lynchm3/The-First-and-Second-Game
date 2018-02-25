@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
@@ -104,7 +105,7 @@ public class QuestThePigs extends Quest {
 
 		// Pig pen
 		ArrayList<Wall> pigPenWalls = new ArrayList<Wall>();
-		ArrayList<GameObject> pigPenFeatures = new ArrayList<GameObject>();
+		ArrayList<StructureFeature> pigPenFeatures = new ArrayList<StructureFeature>();
 		ArrayList<StructurePath> pigPenPaths = new ArrayList<StructurePath>();
 		ArrayList<StructureSection> pigPenSections = new ArrayList<StructureSection>();
 		ArrayList<StructureRoom> pigPenRooms = new ArrayList<StructureRoom>();
@@ -112,7 +113,7 @@ public class QuestThePigs extends Quest {
 
 		// gate
 		Door gate = Templates.GATE.makeCopy("Gate", Game.level.squares[32][72], false, true, false, farmer);
-		pigPenFeatures.add(gate);
+		pigPenFeatures.add(new StructureFeature(gate, Nodes.farmInnerBend));
 
 		penSection = new StructureSection("Pen", 28, 72, 46, 82, false, larry);
 		penRoom = new StructureRoom("Pen", 29, 73, false, new ArrayList<Actor>(), new Node[] { Nodes.farmInnerBend },
@@ -127,7 +128,7 @@ public class QuestThePigs extends Quest {
 
 		// Farm house 2,69 -> 24,85
 		ArrayList<Wall> farmHouseWalls = new ArrayList<Wall>();
-		ArrayList<GameObject> farmHouseFeatures = new ArrayList<GameObject>();
+		ArrayList<StructureFeature> farmHouseFeatures = new ArrayList<StructureFeature>();
 		ArrayList<StructurePath> farmHousePaths = new ArrayList<StructurePath>();
 		ArrayList<StructureSection> farmHouseSections = new ArrayList<StructureSection>();
 		ArrayList<StructureRoom> farmHouseRooms = new ArrayList<StructureRoom>();
@@ -136,17 +137,17 @@ public class QuestThePigs extends Quest {
 		// Farm house door
 		Door farmHouseFrontDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[18][69], false, false, false,
 				farmer);
-		farmHouseFeatures.add(farmHouseFrontDoor);
+		farmHouseFeatures.add(new StructureFeature(farmHouseFrontDoor, Nodes.farmInnerBend));
 		Door farmHouseHallDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[18][75], true, true, true, farmer);
-		farmHouseFeatures.add(farmHouseHallDoor);
+		farmHouseFeatures.add(new StructureFeature(farmHouseHallDoor, Nodes.farmInnerBend));
 		Door farmHouseStorageDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][78], true, true, true,
 				farmer);
-		farmHouseFeatures.add(farmHouseStorageDoor);
+		farmHouseFeatures.add(new StructureFeature(farmHouseStorageDoor, Nodes.farmInnerBend));
 		Door farmHouseGameObjectroomDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[17][78], true, true, true,
 				farmer);
-		farmHouseFeatures.add(farmHouseGameObjectroomDoor);
+		farmHouseFeatures.add(new StructureFeature(farmHouseGameObjectroomDoor, Nodes.farmInnerBend));
 		Door farmHouseBackDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][85], true, true, true, farmer);
-		farmHouseFeatures.add(farmHouseBackDoor);
+		farmHouseFeatures.add(new StructureFeature(farmHouseBackDoor, Nodes.farmInnerBend));
 
 		farmHouseFrontSection = new StructureSection("Farm House", 12, 69, 24, 74, false, farmer);
 		farmHouseBackSection = new StructureSection("Farm House", 2, 75, 24, 85, false, farmer);

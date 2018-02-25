@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Path;
 import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
@@ -32,7 +33,7 @@ public class QuestBetweenTheWalls extends Quest {
 		name = "BETWEEN THE WALLS";
 
 		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>();
-		ArrayList<GameObject> structureFeatures = new ArrayList<GameObject>();
+		ArrayList<StructureFeature> structureFeatures = new ArrayList<StructureFeature>();
 		ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>();
 		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>();
 		ArrayList<StructureRoom> structureRooms = new ArrayList<StructureRoom>();
@@ -43,8 +44,9 @@ public class QuestBetweenTheWalls extends Quest {
 		structureSections.add(new StructureSection("A Lovely House", 41, 19, 56, 28, false));
 
 		// Front door
-		structureFeatures
-				.add(Templates.DOOR.makeCopy("Front Door", Game.level.squares[41][21], false, false, false, null));
+		structureFeatures.add(new StructureFeature(
+				Templates.DOOR.makeCopy("Front Door", Game.level.squares[41][21], false, false, false, null),
+				Nodes.dungeonHouseOuter));
 
 		// Front room
 		StructureRoom frontRoom = new StructureRoom("Front Room", 42, 20, false, new ArrayList<Actor>(),
@@ -62,8 +64,11 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// GameObjectroom door
 		structurePaths.add(new StructurePath("Front Room", false, new ArrayList(), Game.level.squares[42][27]));
-		structureFeatures
-				.add(Templates.DOOR.makeCopy("Bedroom Door", Game.level.squares[42][28], false, true, true, null));
+		structureFeatures.add(new StructureFeature(
+				Templates.DOOR.makeCopy("Bedroom Door", Game.level.squares[42][28], false, true, true, null),
+				Nodes.dungeonHouseOuter));
+		Game.level.squares[42][28].nodes.clear();
+		Game.level.squares[42][28].nodes.add(Nodes.dungeonHouseOuter);
 		structurePaths.add(new StructurePath("GameObjectroom", false, new ArrayList(), Game.level.squares[42][29]));
 
 		// GameObjectroom room
@@ -89,7 +94,9 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// False wall
 		RemoteDoor falseWall = Templates.FALSE_WALL.makeCopy("Wall", Game.level.squares[52][27], false, null);
-		structureFeatures.add(falseWall);
+		structureFeatures.add(new StructureFeature(falseWall, Nodes.dungeonHouseOuter));
+		Game.level.squares[52][27].nodes.clear();
+		Game.level.squares[52][27].nodes.add(Nodes.dungeonHouseOuter);
 
 		// Rat
 		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.rats, null, new GameObject[] {},

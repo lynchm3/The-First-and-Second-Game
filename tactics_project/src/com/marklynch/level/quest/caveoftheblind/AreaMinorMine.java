@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
@@ -31,7 +32,7 @@ public class AreaMinorMine {
 		// 280, 87
 
 		ArrayList<Wall> extraWalls = new ArrayList<Wall>();
-		ArrayList<GameObject> mineFeatures = new ArrayList<GameObject>();
+		ArrayList<StructureFeature> mineFeatures = new ArrayList<StructureFeature>();
 		ArrayList<StructurePath> minePaths = new ArrayList<StructurePath>();
 		ArrayList<StructureSection> mineSections = new ArrayList<StructureSection>();
 		ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>();

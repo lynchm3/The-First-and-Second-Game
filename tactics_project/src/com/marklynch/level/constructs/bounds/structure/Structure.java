@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
@@ -32,7 +31,7 @@ public class Structure {
 	boolean showOnMap = false;
 
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
-			ArrayList<StructurePath> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
+			ArrayList<StructurePath> paths, ArrayList<StructureFeature> features, ArrayList<Square> entrances,
 			String imageTexturePath, int overlayX1, int overlayY1, int overlayX2, int overlayY2,
 			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls,
 			Wall wallTemplate, Texture imageTexture, int level) {
@@ -63,9 +62,10 @@ public class Structure {
 		}
 
 		// Feature squares
-		for (GameObject feature : features) {
-			floorSquares.add(feature.squareGameObjectIsOn);
-			featureSquares.add(feature.squareGameObjectIsOn);
+		for (StructureFeature feature : features) {
+			floorSquares.add(feature.gameObject.squareGameObjectIsOn);
+			featureSquares.add(feature.gameObject.squareGameObjectIsOn);
+			feature.gameObject.squareGameObjectIsOn.nodes = feature.nodes;
 		}
 
 		// Floor squares
@@ -103,8 +103,7 @@ public class Structure {
 					if (!floorSquares.contains(Game.level.squares[i][j])
 							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
 
-						wallsInCave.add(
-								wallTemplate.makeCopy(Game.level.squares[i][j], this.owner));
+						wallsInCave.add(wallTemplate.makeCopy(Game.level.squares[i][j], this.owner));
 						wallSquares.add(Game.level.squares[i][j]);
 					}
 					if (!squaresToRemove.contains(Game.level.squares[i][j])) {

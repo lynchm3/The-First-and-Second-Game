@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
@@ -200,7 +201,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public void makeCave() {
 		ArrayList<Wall> extraWalls = new ArrayList<Wall>();
-		ArrayList<GameObject> caveFeatures = new ArrayList<GameObject>();
+		ArrayList<StructureFeature> caveFeatures = new ArrayList<StructureFeature>();
 		ArrayList<StructurePath> cavePaths = new ArrayList<StructurePath>();
 		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
 		ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>();
@@ -248,14 +249,22 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[252][9], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[259][5], null));
 		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[253][9], null);
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[254][10], null));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[255][10], null));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[256][10], null));
-		caveFeatures.add(Templates.WEAK_WOODEN_DOOR.makeCopy("Security Door", Game.level.squares[257][10], true, true,
-				true, null, mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class)));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[258][10], null));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[259][10], null));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[260][10], null));
+		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[254][10], null),
+				Nodes.caveOfTheBlindWest));
+		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[255][10], null),
+				Nodes.caveOfTheBlindWest));
+		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[256][10], null),
+				Nodes.caveOfTheBlindWest));
+		caveFeatures.add(new StructureFeature(
+				Templates.WEAK_WOODEN_DOOR.makeCopy("Security Door", Game.level.squares[257][10], true, true, true,
+						null, mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class)),
+				Nodes.caveOfTheBlindWest));
+		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[258][10], null),
+				Nodes.caveOfTheBlindWest));
+		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[259][10], null),
+				Nodes.caveOfTheBlindWest));
+		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[260][10], null),
+				Nodes.caveOfTheBlindWest));
 		Templates.TABLE.makeCopy(Game.level.squares[258][9], null);
 		Templates.DOCUMENTS.makeCopy(Game.level.squares[258][9], "Ingoing/Outgoing",
 				new Object[] {
@@ -611,12 +620,12 @@ public class QuestCaveOfTheBlind extends Quest {
 		mortsGameRoomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, true, true,
 				mort, mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
 		mort.mortsRoomDoorway = mortsGameRoomDoor.squareGameObjectIsOn;
-		caveFeatures.add(mortsGameRoomDoor);
+		caveFeatures.add(new StructureFeature(mortsGameRoomDoor, Nodes.caveOfTheBlindWest));
 		mort.aiRoutine.squareBounds.add(mort.mortsRoomDoorway);
 		mortsStoreroomDoor = Templates.DOOR.makeCopy("Vault Door", Game.level.squares[264][40], true, true, true, mort,
 				mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
 		mort.mortsVaultDoorway = mortsStoreroomDoor.squareGameObjectIsOn;
-		caveFeatures.add(mortsStoreroomDoor);
+		caveFeatures.add(new StructureFeature(mortsStoreroomDoor, Nodes.caveOfTheBlindWest));
 
 		// Path Dining room to equipment room
 		cavePaths.add(new StructurePath("Dining Room <-> Equipment", false, new ArrayList<Actor>(),
