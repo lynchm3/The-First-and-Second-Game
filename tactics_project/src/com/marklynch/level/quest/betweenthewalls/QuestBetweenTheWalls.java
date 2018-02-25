@@ -63,13 +63,15 @@ public class QuestBetweenTheWalls extends Quest {
 		structureSections.add(new StructureSection("A Lovely House", 41, 28, 56, 38, false));
 
 		// GameObjectroom door
-		structurePaths.add(new StructurePath("Front Room", false, new ArrayList(), Game.level.squares[42][27]));
+		structurePaths.add(new StructurePath("Front Room", false, new ArrayList(), new Node[] { Nodes.wallsHouseOuter },
+				Game.level.squares[42][27]));
 		structureFeatures.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Bedroom Door", Game.level.squares[42][28], false, true, true, null),
 				Nodes.dungeonHouseOuter));
 		Game.level.squares[42][28].nodes.clear();
 		Game.level.squares[42][28].nodes.add(Nodes.dungeonHouseOuter);
-		structurePaths.add(new StructurePath("GameObjectroom", false, new ArrayList(), Game.level.squares[42][29]));
+		structurePaths.add(new StructurePath("GameObjectroom", false, new ArrayList(),
+				new Node[] { Nodes.wallsHouseOuter }, Game.level.squares[42][29]));
 
 		// GameObjectroom room
 		StructureRoom bedRoom = new StructureRoom("GameObjectroom", 42, 30, false, new ArrayList<Actor>(),
@@ -83,13 +85,13 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Path between the walls
 		StructurePath pathBetweenTheWalls = new StructurePath("Between the walls", false, new ArrayList(),
-				Game.level.squares[44][28], Game.level.squares[45][28], Game.level.squares[46][28],
-				Game.level.squares[47][28], Game.level.squares[48][28], Game.level.squares[49][28],
-				Game.level.squares[50][28], Game.level.squares[51][28], Game.level.squares[52][28],
-				Game.level.squares[53][28], Game.level.squares[54][28], Game.level.squares[55][28],
-				Game.level.squares[55][29], Game.level.squares[55][30], Game.level.squares[55][31],
-				Game.level.squares[55][32], Game.level.squares[55][33], Game.level.squares[55][34],
-				Game.level.squares[55][35]);
+				new Node[] { Nodes.wallsHouseOuter }, Game.level.squares[44][28], Game.level.squares[45][28],
+				Game.level.squares[46][28], Game.level.squares[47][28], Game.level.squares[48][28],
+				Game.level.squares[49][28], Game.level.squares[50][28], Game.level.squares[51][28],
+				Game.level.squares[52][28], Game.level.squares[53][28], Game.level.squares[54][28],
+				Game.level.squares[55][28], Game.level.squares[55][29], Game.level.squares[55][30],
+				Game.level.squares[55][31], Game.level.squares[55][32], Game.level.squares[55][33],
+				Game.level.squares[55][34], Game.level.squares[55][35]);
 		structurePaths.add(pathBetweenTheWalls);
 
 		// False wall

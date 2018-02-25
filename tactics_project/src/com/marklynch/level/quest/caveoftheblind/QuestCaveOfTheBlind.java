@@ -216,8 +216,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Path west entrance to west atrium
 		cavePaths.add(new StructurePath("West Entrance <-> West Atrium", false, new ArrayList<Actor>(),
-				Game.level.squares[238][15], Game.level.squares[239][15], Game.level.squares[240][15],
-				Game.level.squares[241][15], Game.level.squares[242][15]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[238][15], Game.level.squares[239][15],
+				Game.level.squares[240][15], Game.level.squares[241][15], Game.level.squares[242][15]));
 
 		// West atrium section
 		caveSections.add(new StructureSection("Mort & Mort Mining", 241, 14, 249, 19, false));
@@ -235,8 +235,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Path West Atrium to West Security
 		cavePaths.add(new StructurePath("West Atrium <-> West Security", false, new ArrayList<Actor>(),
-				Game.level.squares[248][7], Game.level.squares[249][7], Game.level.squares[250][7],
-				Game.level.squares[251][7]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[248][7], Game.level.squares[249][7],
+				Game.level.squares[250][7], Game.level.squares[251][7]));
 
 		// West Security section
 		caveSections.add(new StructureSection("Mort & Mort Mining", 244, 0, 262, 18, false));
@@ -275,10 +275,10 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// West Security to outer mine y 17 -> 21 55+56x
 		cavePaths.add(new StructurePath("West Security <-> Outer Mine", false, new ArrayList<Actor>(),
-				Game.level.squares[255][17], Game.level.squares[255][18], Game.level.squares[255][19],
-				Game.level.squares[255][20], Game.level.squares[255][21], Game.level.squares[256][17],
-				Game.level.squares[256][18], Game.level.squares[256][19], Game.level.squares[256][20],
-				Game.level.squares[256][21]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[255][17], Game.level.squares[255][18],
+				Game.level.squares[255][19], Game.level.squares[255][20], Game.level.squares[255][21],
+				Game.level.squares[256][17], Game.level.squares[256][18], Game.level.squares[256][19],
+				Game.level.squares[256][20], Game.level.squares[256][21]));
 
 		// Outer mine section
 		caveSections.add(new StructureSection("Mort & Mort Mining", 245, 19, 274, 37, false));
@@ -297,11 +297,11 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Path outer mine to rec room
 		cavePaths.add(new StructurePath("Outer Mine <-> Rec Room", false, new ArrayList<Actor>(),
-				Game.level.squares[267][36], Game.level.squares[268][36], Game.level.squares[269][36],
-				Game.level.squares[270][36], Game.level.squares[270][35], Game.level.squares[270][34],
-				Game.level.squares[270][33], Game.level.squares[270][32], Game.level.squares[270][31],
-				Game.level.squares[271][31], Game.level.squares[272][31], Game.level.squares[273][31],
-				Game.level.squares[274][31], Game.level.squares[275][31]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[267][36], Game.level.squares[268][36],
+				Game.level.squares[269][36], Game.level.squares[270][36], Game.level.squares[270][35],
+				Game.level.squares[270][34], Game.level.squares[270][33], Game.level.squares[270][32],
+				Game.level.squares[270][31], Game.level.squares[271][31], Game.level.squares[272][31],
+				Game.level.squares[273][31], Game.level.squares[274][31], Game.level.squares[275][31]));
 
 		// Rec room section
 		caveSections.add(new StructureSection("Mort & Mort Mining", 275, 25, 291, 33, false));
@@ -319,22 +319,22 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveSections.add(new StructureSection("Mort & Mort Mining", 275, 2, 293, 10, false));
 
 		// Path rec room to dungeon
-		cavePaths.add(
-				new StructurePath("Rec Room <-> Dungeon", false, new ArrayList<Actor>(), Game.level.squares[291][26],
-						Game.level.squares[292][26], Game.level.squares[293][26], Game.level.squares[294][26],
-						Game.level.squares[295][26], Game.level.squares[295][25], Game.level.squares[295][24],
-						Game.level.squares[295][23], Game.level.squares[295][22], Game.level.squares[295][21],
-						Game.level.squares[295][20], Game.level.squares[295][19], Game.level.squares[295][18],
-						Game.level.squares[295][17], Game.level.squares[295][16], Game.level.squares[295][15],
-						Game.level.squares[295][14], Game.level.squares[295][13], Game.level.squares[295][12],
-						Game.level.squares[295][11], Game.level.squares[295][10], Game.level.squares[295][9],
-						Game.level.squares[294][9], Game.level.squares[293][9], Game.level.squares[292][9],
-						Game.level.squares[291][9], Game.level.squares[290][9], Game.level.squares[289][9],
-						Game.level.squares[288][9], Game.level.squares[287][9], Game.level.squares[286][9],
-						Game.level.squares[285][9], Game.level.squares[284][9], Game.level.squares[283][9],
-						Game.level.squares[282][9], Game.level.squares[281][9], Game.level.squares[280][9],
-						Game.level.squares[279][9], Game.level.squares[278][9], Game.level.squares[277][9],
-						Game.level.squares[276][9], Game.level.squares[275][9], Game.level.squares[274][9]));
+		cavePaths.add(new StructurePath("Rec Room <-> Dungeon", false, new ArrayList<Actor>(),
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[291][26], Game.level.squares[292][26],
+				Game.level.squares[293][26], Game.level.squares[294][26], Game.level.squares[295][26],
+				Game.level.squares[295][25], Game.level.squares[295][24], Game.level.squares[295][23],
+				Game.level.squares[295][22], Game.level.squares[295][21], Game.level.squares[295][20],
+				Game.level.squares[295][19], Game.level.squares[295][18], Game.level.squares[295][17],
+				Game.level.squares[295][16], Game.level.squares[295][15], Game.level.squares[295][14],
+				Game.level.squares[295][13], Game.level.squares[295][12], Game.level.squares[295][11],
+				Game.level.squares[295][10], Game.level.squares[295][9], Game.level.squares[294][9],
+				Game.level.squares[293][9], Game.level.squares[292][9], Game.level.squares[291][9],
+				Game.level.squares[290][9], Game.level.squares[289][9], Game.level.squares[288][9],
+				Game.level.squares[287][9], Game.level.squares[286][9], Game.level.squares[285][9],
+				Game.level.squares[284][9], Game.level.squares[283][9], Game.level.squares[282][9],
+				Game.level.squares[281][9], Game.level.squares[280][9], Game.level.squares[279][9],
+				Game.level.squares[278][9], Game.level.squares[277][9], Game.level.squares[276][9],
+				Game.level.squares[275][9], Game.level.squares[274][9]));
 
 		// Dungeon section
 		caveSections.add(new StructureSection("Mort & Mort Mining", 263, 2, 274, 18, false));
@@ -353,8 +353,9 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Path rec room to toilet
 		cavePaths.add(new StructurePath("Rec Room <-> Latrine", false, new ArrayList<Actor>(),
-				Game.level.squares[291][28], Game.level.squares[292][28], Game.level.squares[293][28],
-				Game.level.squares[294][28], Game.level.squares[295][28], Game.level.squares[296][28]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[291][28], Game.level.squares[292][28],
+				Game.level.squares[293][28], Game.level.squares[294][28], Game.level.squares[295][28],
+				Game.level.squares[296][28]));
 
 		// Toilet section
 		caveSections.add(new StructureSection("Latrine", 292, 20, 305, 33, false));
@@ -373,8 +374,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		// DROP_HOLE
 
 		// Path rec room to Caved In Corridor
-		cavePaths.add(
-				new StructurePath("Caved In Corridor", false, new ArrayList<Actor>(), Game.level.squares[289][33]));
+		cavePaths.add(new StructurePath("Caved In Corridor", false, new ArrayList<Actor>(),
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[289][33]));
 
 		// Caved In Corridor section
 		caveSections.add(new StructureSection("Mort & Mort Mining", 288, 33, 297, 37, false));
@@ -403,12 +404,12 @@ public class QuestCaveOfTheBlind extends Quest {
 				Game.level.factions.rockGolems, caveIn, new GameObject[] {}, new GameObject[] {});
 
 		// Path Caved In Corridor to dining room
-		cavePaths.add(new StructurePath("Caved In Corridor", false, new ArrayList<Actor>(), Game.level.squares[295][37],
-				Game.level.squares[295][38]));
+		cavePaths.add(new StructurePath("Caved In Corridor", false, new ArrayList<Actor>(),
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[295][37], Game.level.squares[295][38]));
 
 		// Path inner mine to dining room
 		cavePaths.add(new StructurePath("Inner Mine <-> Dining Room", false, new ArrayList<Actor>(),
-				Game.level.squares[287][46], Game.level.squares[288][46]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[287][46], Game.level.squares[288][46]));
 
 		// Dining room section
 		caveSections.add(new StructureSection("Dining Room", 288, 38, 299, 55, false));
@@ -499,10 +500,10 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Path rec room to quarters
 		cavePaths.add(new StructurePath("Rec Room <-> Quarters", false, new ArrayList<Actor>(),
-				Game.level.squares[283][25], Game.level.squares[283][25]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[283][25], Game.level.squares[283][25]));
 
 		cavePaths.add(new StructurePath("Rec Room <-> Quarters", false, new ArrayList<Actor>(),
-				Game.level.squares[283][24], Game.level.squares[283][25]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[283][24], Game.level.squares[283][25]));
 
 		// Section Quarters
 		caveSections.add(new StructureSection("Mort & Mort Mining", 275, 11, 293, 24, false));
@@ -552,7 +553,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Path rec room to quarters
 		cavePaths.add(new StructurePath("Rec Room <-> Inner Mine", false, new ArrayList<Actor>(),
-				Game.level.squares[285][33], Game.level.squares[285][34]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[285][33], Game.level.squares[285][34]));
 
 		// Morts Mine Section
 		caveSections.add(new StructureSection("Mort & Mort Mining", 273, 34, 287, 50, false));
@@ -629,12 +630,13 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Path Dining room to equipment room
 		cavePaths.add(new StructurePath("Dining Room <-> Equipment", false, new ArrayList<Actor>(),
-				Game.level.squares[286][51], Game.level.squares[287][51], Game.level.squares[288][51]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[286][51], Game.level.squares[287][51],
+				Game.level.squares[288][51]));
 
 		// Path Inner Mine to Equipment room
 		cavePaths.add(new StructurePath("Inner Mine <-> Equipment", false, new ArrayList<Actor>(),
-				Game.level.squares[285][50], Game.level.squares[285][51], Game.level.squares[284][51],
-				Game.level.squares[284][50], Game.level.squares[284][49]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[285][50], Game.level.squares[285][51],
+				Game.level.squares[284][51], Game.level.squares[284][50], Game.level.squares[284][49]));
 
 		// Equipment section
 		caveSections.add(new StructureSection("Equipment", 274, 51, 287, 58, false));
@@ -649,7 +651,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Path Dining Room <-> Kitchen
 		cavePaths.add(new StructurePath("Dining Room <-> Kitchen", false, new ArrayList<Actor>(),
-				Game.level.squares[293][55], Game.level.squares[293][56], Game.level.squares[293][57]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[293][55], Game.level.squares[293][56],
+				Game.level.squares[293][57]));
 
 		// Kitchen section
 		caveSections.add(new StructureSection("Kitchen", 280, 56, 310, 75, false));
@@ -665,8 +668,9 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Path Dining Room <-> East Security
 		cavePaths.add(new StructurePath("Dining Room <-> East Security", false, new ArrayList<Actor>(),
-				Game.level.squares[298][51], Game.level.squares[299][51], Game.level.squares[299][52],
-				Game.level.squares[299][53], Game.level.squares[300][53], Game.level.squares[301][53]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[298][51], Game.level.squares[299][51],
+				Game.level.squares[299][52], Game.level.squares[299][53], Game.level.squares[300][53],
+				Game.level.squares[301][53]));
 
 		// East Security section
 		caveSections.add(new StructureSection("East Security", 299, 43, 315, 56, false));
@@ -682,8 +686,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// East Security <-> East Atrium
 		cavePaths.add(new StructurePath("East Security <-> East Atrium", false, new ArrayList<Actor>(),
-				Game.level.squares[307][45], Game.level.squares[308][45], Game.level.squares[309][45],
-				Game.level.squares[310][45]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[307][45], Game.level.squares[308][45],
+				Game.level.squares[309][45], Game.level.squares[310][45]));
 
 		// East Atrium Section
 		caveSections.add(new StructureSection("East Atrium", 308, 36, 317, 46, false));
@@ -699,7 +703,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// East Atrium <-> East Entrance
 		cavePaths.add(new StructurePath("East Atrium <-> East Entrance", false, new ArrayList<Actor>(),
-				Game.level.squares[315][34], Game.level.squares[315][35], Game.level.squares[315][36]));
+				new Node[] { Nodes.caveOfTheBlindWest }, Game.level.squares[315][34], Game.level.squares[315][35],
+				Game.level.squares[315][36]));
 
 		// East Entrance
 		caveSections.add(new StructureSection("East Entrance", 307, 20, 321, 35, false));
