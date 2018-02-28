@@ -36,6 +36,11 @@ public class Node implements Comparable<Node> {
 		square.node = this;
 	}
 
+	@Override
+	public String toString() {
+		return "Node [name=" + name + ", square=" + square + "]";
+	}
+
 	// PATH FINDING
 	public int straightLineDistanceTo(Node otherNode) {
 		return Math.abs(otherNode.xInGrid - this.xInGrid) + Math.abs(otherNode.yInGrid - this.yInGrid);

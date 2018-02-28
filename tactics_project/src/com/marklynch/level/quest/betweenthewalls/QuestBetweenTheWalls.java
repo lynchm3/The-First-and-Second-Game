@@ -68,8 +68,6 @@ public class QuestBetweenTheWalls extends Quest {
 		structureFeatures.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Bedroom Door", Game.level.squares[42][28], false, true, true, null),
 				Nodes.wallsHouseOuter));
-		Game.level.squares[42][28].nodes.clear();
-		Game.level.squares[42][28].nodes.add(Nodes.wallsHouseOuter);
 		structurePaths.add(new StructurePath("GameObjectroom", false, new ArrayList(),
 				new Node[] { Nodes.wallsHouseOuter }, Game.level.squares[42][29]));
 

@@ -94,7 +94,7 @@ public class ActiontTakeAll extends Action {
 			disabledReason = actionOpen.disabledReason;
 			return actionOpen.check();
 		}
-		return false;
+		return true;
 	}
 
 	@Override

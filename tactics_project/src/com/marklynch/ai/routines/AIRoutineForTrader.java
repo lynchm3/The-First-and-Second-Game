@@ -97,13 +97,10 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (runDoorRoutine())
 			return;
 
-		System.out.println("A");
-
 		// Shopkeeper AI 1 - hang in shop
 		if (shopkeepState == SHOPKEEP_STATE.SHOPKEEPING)
 
 		{
-			System.out.println("B Templates.GOLD.imageTexture = " + Templates.GOLD.imageTexture);
 			actor.thoughtBubbleImageTextureObject = Templates.GOLD.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOPKEEPING;
 			if (!trader.isPlayerInTheShop() && trader.getTextForSign() != null)
@@ -129,7 +126,6 @@ public class AIRoutineForTrader extends AIRoutine {
 
 		// Shopkeeper AI 2 - update sign
 		if (shopkeepState == SHOPKEEP_STATE.UPDATING_SIGN) {
-			System.out.println("C");
 			Object[] textForSign = trader.getTextForSign();
 			if (textForSign == null) {
 				shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
