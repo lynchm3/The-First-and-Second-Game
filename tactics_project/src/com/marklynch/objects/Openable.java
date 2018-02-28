@@ -40,7 +40,6 @@ public abstract class Openable extends GameObject implements SwitchListener {
 
 	public void lock() {
 		this.name = baseName + " (locked)";
-		System.out.println("locked called");
 		Utils.printStackTrace();
 		locked = true;
 	}
@@ -62,9 +61,6 @@ public abstract class Openable extends GameObject implements SwitchListener {
 		this.name = openable.baseName = baseName;
 		if (locked)
 			this.name = baseName + " (locked)";
-		System.out
-				.println("openable.makeCopy end this.locked  = " + this.locked + ", squareGameObjectIson = " + square);
-		System.out.println("openable.makeCopy end this.name  = " + this.name + ", squareGameObjectIson = " + square);
 
 	}
 

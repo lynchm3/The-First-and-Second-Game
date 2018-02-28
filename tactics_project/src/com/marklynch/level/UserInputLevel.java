@@ -457,6 +457,8 @@ public class UserInputLevel {
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
 
+		System.out.println("interactWith");
+
 		if (Game.level.activeActor != Game.level.player)
 			return;
 
@@ -488,8 +490,6 @@ public class UserInputLevel {
 
 		if (action != null && !action.enabled) {
 			// System.out.println("enabled = false");
-
-			System.out.println("action = " + action);
 			Game.level.addNotification(new Notification(new Object[] { action.disabledReason },
 					Notification.NotificationType.ACTION_DISABLED, null));
 			// new Toast(new Object[] { "NOPE" },

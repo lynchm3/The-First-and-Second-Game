@@ -1277,7 +1277,6 @@ public abstract class AIRoutine {
 					return false;
 				} else {
 					action.perform();
-					System.out.println("runDoorRoutine() return true actor = " + this.actor);
 					return true;
 				}
 			}

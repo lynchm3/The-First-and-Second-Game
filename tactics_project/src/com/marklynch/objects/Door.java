@@ -85,8 +85,6 @@ public class Door extends Openable {
 		Door door = new Door();
 		setInstances(door);
 
-		System.out.println("door.makeCopy start locked = " + locked + ", squareGameObjectIson = " + square);
-
 		super.setAttributesForCopy(door, square, locked, owner, keys);
 
 		if (owner != null) {
@@ -96,7 +94,6 @@ public class Door extends Openable {
 		door.blocksLineOfSightWhenClosed = blocksLineOfSight;
 		door.shouldBeClosed = shouldBeClosed;
 		door.shouldBeLocked = shouldBeLocked;
-		System.out.println("door.makeCopy end this.locked = " + this.locked + ", squareGameObjectIson = " + square);
 
 		return door;
 	}

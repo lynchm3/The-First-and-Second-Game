@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.units.Player;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 
@@ -43,9 +45,22 @@ public class PopupMenuSelectAction extends PopupMenu {
 							button.down = false;
 						}
 						highlightedButton.down = true;
-						actions.get(index).perform();
+						System.out.println("actions.get(index).perform();");
+						Action action = actions.get(index);
 						Game.level.popupMenuObjects.clear();
 						Game.level.popupMenuActions.clear();
+
+						if (!(square instanceof InventorySquare) && !action.checkRange()) {
+							if (Game.level.player.onScreen()) {
+								Game.level.cameraFollow = true;
+							}
+							Player.playerTargetAction = action;
+							Player.playerTargetSquare = square;
+							Player.playerFirstMove = true;
+							return;
+						} else {
+							action.perform();
+						}
 					}
 				}
 			};
