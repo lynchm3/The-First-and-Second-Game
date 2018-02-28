@@ -736,6 +736,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		}
 
 		int index = (x + y * texture.getWidth());
+		if (index + 3 >= texture.pixels.length)
+			return null;
 
 		// int r = texture.pixels[index] & 0xFF;
 		// int g = texture.pixels[index + 1] & 0xFF;

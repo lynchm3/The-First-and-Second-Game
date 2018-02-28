@@ -14,6 +14,7 @@ import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.units.TinyNeutralWildAnimal;
+import com.marklynch.utils.Utils;
 
 public class ActionMove extends Action {
 
@@ -41,11 +42,19 @@ public class ActionMove extends Action {
 	@Override
 	public void perform() {
 
+		if (Game.level.activeActor.name.contains("Farmer")) {
+			System.out.println(
+					"Game.level.activeActor.squareGameObjectIsOn  = " + Game.level.activeActor.squareGameObjectIsOn);
+			System.out.println("target = " + target);
+			Utils.printStackTrace();
+		}
+
 		if (!enabled)
 			return;
 
 		if (!checkRange())
 			return;
+
 		moveTo(performer, target);
 	}
 
@@ -173,7 +182,7 @@ public class ActionMove extends Action {
 		// }
 
 		if (!performer.canSeeSquare(target)) {
-			return true;
+			return false;
 		}
 
 		GameObject objectInTheWay = target.inventory.gameObjectThatCantShareSquare;

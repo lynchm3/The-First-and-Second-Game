@@ -283,17 +283,17 @@ public class QuestSmallGame extends Quest {
 		Templates.THIEF.makeCopy("Thief Carl",
 				Game.level.squares[12][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.town);
 
 		Templates.THIEF.makeCopy("Thief Carl",
 				Game.level.squares[11][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.town);
 
 		Templates.THIEF.makeCopy("Thief Carl",
 				Game.level.squares[10][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.town);
 
 		hunterPack = new Group("Hunting Party", hunterBrent, hunterBront1, hunterBront2, hunterBront3, hunterBront4,
 				hunterBront5, hunterBront6);

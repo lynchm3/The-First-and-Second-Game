@@ -220,7 +220,6 @@ public class Level {
 
 		initGrid(this.squares, this.width, this.height);
 		nodes = new Nodes(squares);
-		new AreaList();
 
 		clearNotificationsButton = new LevelButton(0, 0, 100, 20, "end_turn_button.png", "end_turn_button.png", "CLEAR",
 				true, true, Color.BLACK, Color.WHITE, "Clear All Notifications");
@@ -1928,6 +1927,8 @@ public class Level {
 	}
 
 	public void endPlayerTurn() {
+
+		System.out.println("----------------END TURN-----------------");
 
 		changeTime(20);
 		// secondString;

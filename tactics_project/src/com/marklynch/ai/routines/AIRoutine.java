@@ -1029,6 +1029,8 @@ public abstract class AIRoutine {
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()
 				&& this.actor.group.getLeader().followersShouldFollow == true) {
 			if (this.actor.group.update(this.actor)) {
+				this.actor.thoughtBubbleImageTextureAction = this.actor.group.leader.thoughtBubbleImageTextureAction;
+				this.actor.thoughtBubbleImageTextureObject = this.actor.group.leader.thoughtBubbleImageTextureObject;
 				return true;
 			}
 		}
@@ -1310,7 +1312,9 @@ public abstract class AIRoutine {
 
 	public boolean replenishEquipment() {
 
-		sellItems(1);
+		boolean sellItems = sellItems(1);
+		if (sellItems)
+			return true;
 
 		ArrayList<Integer> equipmentNeeded = new ArrayList<Integer>();
 		for (int requiredTemplateId : requiredEquipmentTemplateIds) {

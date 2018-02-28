@@ -1429,6 +1429,7 @@ public class Actor extends GameObject {
 		super.setAttributesForCopy(actor, square, null);
 		actor.name = name;
 		actor.faction = faction;
+
 		actor.area = area;
 		actor.bed = bed;
 		if (bed != null)

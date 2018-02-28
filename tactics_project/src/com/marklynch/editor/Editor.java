@@ -164,6 +164,7 @@ public class Editor {
 
 		generateTestObjects();
 
+		new AreaList();
 		Game.level.fullQuestList.makeQuests();
 		AreaList.buildAreas();
 
