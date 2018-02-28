@@ -1928,7 +1928,7 @@ public class Level {
 	}
 
 	public void endPlayerTurn() {
-		System.out.println("------------------------------");
+		// System.out.println("------------------------------");
 
 		changeTime(20);
 		// secondString;

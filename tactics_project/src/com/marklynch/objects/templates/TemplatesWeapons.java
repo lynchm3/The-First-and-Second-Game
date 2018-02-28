@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -17,6 +19,7 @@ public class TemplatesWeapons {
 		Templates.KATANA.minRange = 1;
 		Templates.KATANA.maxRange = 1;
 		Templates.KATANA.imageTexturePath = "katana.png";
+		Templates.KATANA.imageTexture = getGlobalImage(Templates.KATANA.imageTexturePath, true);
 		Templates.KATANA.totalHealth = Templates.KATANA.remainingHealth = 22;
 		Templates.KATANA.widthRatio = 1f;
 		Templates.KATANA.heightRatio = 1f;
@@ -42,6 +45,7 @@ public class TemplatesWeapons {
 		Templates.CLEAVER.minRange = 1;
 		Templates.CLEAVER.maxRange = 1;
 		Templates.CLEAVER.imageTexturePath = "cleaver.png";
+		Templates.CLEAVER.imageTexture = getGlobalImage(Templates.CLEAVER.imageTexturePath, true);
 		Templates.CLEAVER.totalHealth = Templates.CLEAVER.remainingHealth = 20;
 		Templates.CLEAVER.widthRatio = 1f;
 		Templates.CLEAVER.heightRatio = 1f;
@@ -63,6 +67,7 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.minRange = 1;
 		Templates.HUNTING_BOW.maxRange = 9;
 		Templates.HUNTING_BOW.imageTexturePath = "a2r2.png";
+		Templates.HUNTING_BOW.imageTexture = getGlobalImage(Templates.HUNTING_BOW.imageTexturePath, true);
 		Templates.HUNTING_BOW.totalHealth = Templates.HUNTING_BOW.remainingHealth = 20;
 		Templates.HUNTING_BOW.widthRatio = 1f;
 		Templates.HUNTING_BOW.heightRatio = 1f;

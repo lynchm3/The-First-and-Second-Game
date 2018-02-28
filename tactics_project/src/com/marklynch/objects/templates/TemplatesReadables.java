@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.Sign;
@@ -11,6 +13,7 @@ public class TemplatesReadables {
 		Templates.ROCK_WITH_ETCHING = new Sign();
 		Templates.ROCK_WITH_ETCHING.name = "Rock with Etching";
 		Templates.ROCK_WITH_ETCHING.imageTexturePath = "rock_with_etching.png";
+		Templates.ROCK_WITH_ETCHING.imageTexture = getGlobalImage(Templates.ROCK_WITH_ETCHING.imageTexturePath, true);
 		Templates.ROCK_WITH_ETCHING.totalHealth = Templates.ROCK_WITH_ETCHING.remainingHealth = 200;
 		Templates.ROCK_WITH_ETCHING.widthRatio = 1f;
 		Templates.ROCK_WITH_ETCHING.heightRatio = 1f;
@@ -30,6 +33,7 @@ public class TemplatesReadables {
 		Templates.SCROLL = new Readable();
 		Templates.SCROLL.name = "Scroll";
 		Templates.SCROLL.imageTexturePath = "scroll.png";
+		Templates.SCROLL.imageTexture = getGlobalImage(Templates.SCROLL.imageTexturePath, true);
 		Templates.SCROLL.totalHealth = Templates.SCROLL.remainingHealth = 1;
 		Templates.SCROLL.widthRatio = 1f;
 		Templates.SCROLL.heightRatio = 1f;
@@ -48,6 +52,7 @@ public class TemplatesReadables {
 		Templates.SIGN = new Sign();
 		Templates.SIGN.name = "Sign";
 		Templates.SIGN.imageTexturePath = "SIGN.png";
+		Templates.SIGN.imageTexture = getGlobalImage(Templates.SIGN.imageTexturePath, true);
 		Templates.SIGN.totalHealth = Templates.SIGN.remainingHealth = 100;
 		Templates.SIGN.widthRatio = 1f;
 		Templates.SIGN.heightRatio = 1f;
@@ -67,6 +72,7 @@ public class TemplatesReadables {
 		Templates.WANTED_POSTER = new WantedPoster();
 		Templates.WANTED_POSTER.name = "Wanted Poster";
 		Templates.WANTED_POSTER.imageTexturePath = "wanted_poster.png";
+		Templates.WANTED_POSTER.imageTexture = getGlobalImage(Templates.WANTED_POSTER.imageTexturePath, true);
 		Templates.WANTED_POSTER.totalHealth = Templates.WANTED_POSTER.remainingHealth = 100;
 		Templates.WANTED_POSTER.widthRatio = 1f;
 		Templates.WANTED_POSTER.heightRatio = 1f;
@@ -85,6 +91,7 @@ public class TemplatesReadables {
 		Templates.SIGNPOST = new Sign();
 		Templates.SIGNPOST.name = "Signpost";
 		Templates.SIGNPOST.imageTexturePath = "signpost.png";
+		Templates.SIGNPOST.imageTexture = getGlobalImage(Templates.SIGNPOST.imageTexturePath, true);
 		Templates.SIGNPOST.totalHealth = Templates.SIGNPOST.remainingHealth = 100;
 		Templates.SIGNPOST.widthRatio = 1f;
 		Templates.SIGNPOST.heightRatio = 1.25f;
@@ -104,6 +111,7 @@ public class TemplatesReadables {
 		Templates.DOCUMENTS = new Readable();
 		Templates.DOCUMENTS.name = "Documents";
 		Templates.DOCUMENTS.imageTexturePath = "documents.png";
+		Templates.DOCUMENTS.imageTexture = getGlobalImage(Templates.DOCUMENTS.imageTexturePath, true);
 		Templates.DOCUMENTS.totalHealth = Templates.DOCUMENTS.remainingHealth = 5;
 		Templates.DOCUMENTS.widthRatio = 1f;
 		Templates.DOCUMENTS.heightRatio = 1f;

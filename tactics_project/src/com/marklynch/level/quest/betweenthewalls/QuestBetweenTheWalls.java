@@ -46,7 +46,7 @@ public class QuestBetweenTheWalls extends Quest {
 		// Front door
 		structureFeatures.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Front Door", Game.level.squares[41][21], false, false, false, null),
-				Nodes.dungeonHouseOuter));
+				Nodes.wallsHouseOuter));
 
 		// Front room
 		StructureRoom frontRoom = new StructureRoom("Front Room", 42, 20, false, new ArrayList<Actor>(),
@@ -67,9 +67,9 @@ public class QuestBetweenTheWalls extends Quest {
 				Game.level.squares[42][27]));
 		structureFeatures.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Bedroom Door", Game.level.squares[42][28], false, true, true, null),
-				Nodes.dungeonHouseOuter));
+				Nodes.wallsHouseOuter));
 		Game.level.squares[42][28].nodes.clear();
-		Game.level.squares[42][28].nodes.add(Nodes.dungeonHouseOuter);
+		Game.level.squares[42][28].nodes.add(Nodes.wallsHouseOuter);
 		structurePaths.add(new StructurePath("GameObjectroom", false, new ArrayList(),
 				new Node[] { Nodes.wallsHouseOuter }, Game.level.squares[42][29]));
 
@@ -96,9 +96,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// False wall
 		RemoteDoor falseWall = Templates.FALSE_WALL.makeCopy("Wall", Game.level.squares[52][27], false, null);
-		structureFeatures.add(new StructureFeature(falseWall, Nodes.dungeonHouseOuter));
-		Game.level.squares[52][27].nodes.clear();
-		Game.level.squares[52][27].nodes.add(Nodes.dungeonHouseOuter);
+		structureFeatures.add(new StructureFeature(falseWall, Nodes.wallsHouseOuter));
 
 		// Rat
 		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.rats, null, new GameObject[] {},

@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inspectable;
 
@@ -9,6 +11,7 @@ public class TemplatesInspectables {
 		Templates.PIG_SIGN = new Inspectable();
 		Templates.PIG_SIGN.name = "Piggy Farm";
 		Templates.PIG_SIGN.imageTexturePath = "pig_sign.png";
+		Templates.PIG_SIGN.imageTexture = getGlobalImage(Templates.PIG_SIGN.imageTexturePath, true);
 		Templates.PIG_SIGN.totalHealth = Templates.PIG_SIGN.remainingHealth = 26;
 		Templates.PIG_SIGN.widthRatio = 1f;
 		Templates.PIG_SIGN.heightRatio = 1f;
@@ -27,6 +30,7 @@ public class TemplatesInspectables {
 		Templates.BLOODY_PULP = new Inspectable();
 		Templates.BLOODY_PULP.name = "Bloody Pulp";
 		Templates.BLOODY_PULP.imageTexturePath = "blood.png";
+		Templates.BLOODY_PULP.imageTexture = getGlobalImage(Templates.BLOODY_PULP.imageTexturePath, true);
 		Templates.BLOODY_PULP.totalHealth = Templates.BLOODY_PULP.remainingHealth = 1;
 		Templates.BLOODY_PULP.widthRatio = 1f;
 		Templates.BLOODY_PULP.heightRatio = 1f;
@@ -45,6 +49,7 @@ public class TemplatesInspectables {
 		Templates.BLOOD = new Inspectable();
 		Templates.BLOOD.name = "Blood";
 		Templates.BLOOD.imageTexturePath = "blood.png";
+		Templates.BLOOD.imageTexture = getGlobalImage(Templates.BLOOD.imageTexturePath, true);
 		Templates.BLOOD.totalHealth = Templates.BLOOD.remainingHealth = 1;
 		Templates.BLOOD.widthRatio = 1f;
 		Templates.BLOOD.heightRatio = 1f;
@@ -63,6 +68,7 @@ public class TemplatesInspectables {
 		Templates.DRIED_BLOOD = new Inspectable();
 		Templates.DRIED_BLOOD.name = "Dried Blood";
 		Templates.DRIED_BLOOD.imageTexturePath = "blood.png";
+		Templates.DRIED_BLOOD.imageTexture = getGlobalImage(Templates.DRIED_BLOOD.imageTexturePath, true);
 		Templates.DRIED_BLOOD.totalHealth = Templates.DRIED_BLOOD.remainingHealth = 1;
 		Templates.DRIED_BLOOD.widthRatio = 1f;
 		Templates.DRIED_BLOOD.heightRatio = 1f;
@@ -81,6 +87,7 @@ public class TemplatesInspectables {
 		Templates.GIANT_FOOTPRINT = new Inspectable();
 		Templates.GIANT_FOOTPRINT.name = "Giant Footprint";
 		Templates.GIANT_FOOTPRINT.imageTexturePath = "footprint.png";
+		Templates.GIANT_FOOTPRINT.imageTexture = getGlobalImage(Templates.GIANT_FOOTPRINT.imageTexturePath, true);
 		Templates.GIANT_FOOTPRINT.totalHealth = Templates.GIANT_FOOTPRINT.remainingHealth = 1;
 		Templates.GIANT_FOOTPRINT.widthRatio = 2f;
 		Templates.GIANT_FOOTPRINT.heightRatio = 1.5f;
@@ -99,6 +106,8 @@ public class TemplatesInspectables {
 		Templates.GIANT_FOOTPRINT_LEFT = new Inspectable();
 		Templates.GIANT_FOOTPRINT_LEFT.name = "Giant Footprint";
 		Templates.GIANT_FOOTPRINT_LEFT.imageTexturePath = "footprint_left.png";
+		Templates.GIANT_FOOTPRINT_LEFT.imageTexture = getGlobalImage(Templates.GIANT_FOOTPRINT_LEFT.imageTexturePath,
+				true);
 		Templates.GIANT_FOOTPRINT_LEFT.totalHealth = Templates.GIANT_FOOTPRINT_LEFT.remainingHealth = 1;
 		Templates.GIANT_FOOTPRINT_LEFT.widthRatio = 2f;
 		Templates.GIANT_FOOTPRINT_LEFT.heightRatio = 1.5f;

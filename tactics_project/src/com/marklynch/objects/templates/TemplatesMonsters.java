@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.level.quest.caveoftheblind.AIRoutineForBlind;
 import com.marklynch.level.quest.caveoftheblind.Blind;
@@ -22,6 +24,7 @@ public class TemplatesMonsters {
 		Templates.BLIND.intelligence = 10;
 		Templates.BLIND.endurance = 10;
 		Templates.BLIND.imageTexturePath = "blind.png";
+		Templates.BLIND.imageTexture = getGlobalImage(Templates.BLIND.imageTexturePath, true);
 		Templates.BLIND.heightRatio = 1f;
 		Templates.BLIND.drawOffsetRatioY = 0f;
 		Templates.BLIND.weight = 70f;
@@ -43,6 +46,7 @@ public class TemplatesMonsters {
 		Templates.ROCK_GOLEM.intelligence = 10;
 		Templates.ROCK_GOLEM.endurance = 10;
 		Templates.ROCK_GOLEM.imageTexturePath = "rock_golem_sleeping.png";
+		Templates.ROCK_GOLEM.imageTexture = getGlobalImage(Templates.ROCK_GOLEM.imageTexturePath, true);
 		Templates.ROCK_GOLEM.heightRatio = 1f;
 		Templates.ROCK_GOLEM.drawOffsetRatioY = 1f;
 		Templates.ROCK_GOLEM.weight = 210f;

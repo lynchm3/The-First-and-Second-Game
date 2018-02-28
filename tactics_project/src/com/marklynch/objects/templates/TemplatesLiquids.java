@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -13,6 +15,7 @@ public class TemplatesLiquids {
 		Templates.WATER = new Liquid();
 		Templates.WATER.name = "Water";
 		Templates.WATER.imageTexturePath = "effect_wet.png";
+		Templates.WATER.imageTexture = getGlobalImage(Templates.WATER.imageTexturePath, true);
 		Templates.WATER.totalHealth = Templates.WATER.remainingHealth = 10;
 		Templates.WATER.widthRatio = 0.5f;
 		Templates.WATER.heightRatio = 0.5f;
@@ -35,6 +38,7 @@ public class TemplatesLiquids {
 		Templates.POISON = new Liquid();
 		Templates.POISON.name = "Poison";
 		Templates.POISON.imageTexturePath = "effect_poison.png";
+		Templates.POISON.imageTexture = getGlobalImage(Templates.POISON.imageTexturePath, true);
 		Templates.POISON.totalHealth = Templates.POISON.remainingHealth = 10;
 		Templates.POISON.widthRatio = 0.5f;
 		Templates.POISON.heightRatio = 0.5f;

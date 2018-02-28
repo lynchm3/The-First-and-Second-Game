@@ -128,6 +128,11 @@ public class AIRoutineUtils {
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
 			boolean ignoreQuestObjects, int minimumValue, boolean REMOVETHIS, Class... types) {
 
+		// if (Game.level.activeActor.name.contains("Farmer")) {
+		// System.out.println("getNearest");
+		//
+		// }
+
 		if (maxDistance > Game.level.width + Game.level.height) {
 			maxDistance = Game.level.width + Game.level.height;
 		}
@@ -145,22 +150,67 @@ public class AIRoutineUtils {
 					mustContainObjects, mustBeUnowned, ignoreQuestObjects, minimumValue, types);
 		}
 
+		// if (Game.level.activeActor.name.contains("Farmer")) {
+		// System.out.println("objects.size() = " + objects.size());
+		// for (GameObject g : objects) {
+		// System.out.println("g = " + g);
+		// }
+		// }
+
 		objects.sort(AIRoutineUtils.sortByStraightLineDistance);
 
+		// if (Game.level.activeActor.name.contains("Farmer")) {
+		// System.out.println("After sort");
+		// System.out.println("objects.size() = " + objects.size());
+		// for (GameObject g : objects) {
+		// System.out.println("g = " + g);
+		// }
+		// }
+
 		for (GameObject object : objects) {
+
+			// if (Game.level.activeActor.name.contains("Farmer")) {
+			// System.out.println("object to check = " + object);
+			// }
+
 			int straightLineDistance = Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn);
 			if (straightLineDistance <= maxDistance) {
+				// if (Game.level.activeActor.name.contains("Farmer")) {
+				// System.out.println("object to check +1 = " + object);
+				// }
 
 				if (passesChecks(object, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
 						minimumValue, null, false)) {
-					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn);
+
+					// if (Game.level.activeActor.name.contains("Farmer")) {
+					// System.out.println("object passed checks");
+					// }
+					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn); // HERE
+
+					// if (Game.level.activeActor.name.contains("Farmer")) {
+					// System.out.println("object passed checks");
+					// }
 
 					if (path != null && path.complete) {
 						tempPath = path;
+						// if (Game.level.activeActor.name.contains("Farmer")) {
+						// System.out.println("exit a");
+						// }
 						return object;
 					}
 
-					if (path != null && path.travelCost < bestPathTravelCost && straightLineDistance > 20) {
+					if (path != null && straightLineDistance > 20) {
+						tempPath = path;
+						// if (Game.level.activeActor.name.contains("Farmer")) {
+						// System.out.println("exit b");
+						// }
+						return object;
+					}
+
+					if (path != null && path.travelCost < bestPathTravelCost) {
+						// if (Game.level.activeActor.name.contains("Farmer")) {
+						// System.out.println("exit c");
+						// }
 						bestObject = object;
 						bestPath = path;
 						bestPathTravelCost = path.travelCost;
@@ -775,7 +825,7 @@ public class AIRoutineUtils {
 		public int compare(GameObject a, GameObject b) {
 
 			int distanceA = Game.level.activeActor.straightLineDistanceTo(a.squareGameObjectIsOn);
-			int distanceB = Game.level.activeActor.straightLineDistanceTo(a.squareGameObjectIsOn);
+			int distanceB = Game.level.activeActor.straightLineDistanceTo(b.squareGameObjectIsOn);
 
 			return distanceA - distanceB;
 		}

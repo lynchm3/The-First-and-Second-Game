@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 
@@ -10,6 +12,7 @@ public class TemplatesJunk {
 		Templates.FUR = new Junk();
 		Templates.FUR.name = "Fur";
 		Templates.FUR.imageTexturePath = "fur.png";
+		Templates.FUR.imageTexture = getGlobalImage(Templates.FUR.imageTexturePath, true);
 		Templates.FUR.totalHealth = Templates.FUR.remainingHealth = 21;
 		Templates.FUR.widthRatio = 1f;
 		Templates.FUR.heightRatio = 1f;
@@ -28,6 +31,7 @@ public class TemplatesJunk {
 		Templates.DIRTY_SHEET_3 = new Junk();
 		Templates.DIRTY_SHEET_3.name = "Dirty Sheet";
 		Templates.DIRTY_SHEET_3.imageTexturePath = "dirty_sheet_3.png";
+		Templates.DIRTY_SHEET_3.imageTexture = getGlobalImage(Templates.DIRTY_SHEET_3.imageTexturePath, true);
 		Templates.DIRTY_SHEET_3.totalHealth = Templates.DIRTY_SHEET_3.remainingHealth = 1;
 		Templates.DIRTY_SHEET_3.widthRatio = 0.88f;
 		Templates.DIRTY_SHEET_3.heightRatio = 1f;
@@ -46,6 +50,7 @@ public class TemplatesJunk {
 		Templates.WOOD = new Junk();
 		Templates.WOOD.name = "Wood";
 		Templates.WOOD.imageTexturePath = "wood.png";
+		Templates.WOOD.imageTexture = getGlobalImage(Templates.WOOD.imageTexturePath, true);
 		Templates.WOOD.totalHealth = Templates.WOOD.remainingHealth = 16;
 		Templates.WOOD.widthRatio = 1f;
 		Templates.WOOD.heightRatio = 1f;
@@ -65,6 +70,7 @@ public class TemplatesJunk {
 		Templates.ORE = new Junk();
 		Templates.ORE.name = "Ore";
 		Templates.ORE.imageTexturePath = "ore.png";
+		Templates.ORE.imageTexture = getGlobalImage(Templates.ORE.imageTexturePath, true);
 		Templates.ORE.totalHealth = Templates.ORE.remainingHealth = 1;
 		Templates.ORE.widthRatio = 0.25f;
 		Templates.ORE.heightRatio = 0.25f;

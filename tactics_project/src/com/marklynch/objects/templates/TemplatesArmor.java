@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -16,6 +18,7 @@ public class TemplatesArmor {
 		Templates.HARD_HAT = new Helmet();
 		Templates.HARD_HAT.name = "Hard Hat";
 		Templates.HARD_HAT.imageTexturePath = "hard_hat.png";
+		Templates.HARD_HAT.imageTexture = getGlobalImage(Templates.HARD_HAT.imageTexturePath, true);
 		Templates.HARD_HAT.totalHealth = Templates.HARD_HAT.remainingHealth = 50;
 		Templates.HARD_HAT.widthRatio = 0.25f;
 		Templates.HARD_HAT.heightRatio = 0.12f;
@@ -38,6 +41,7 @@ public class TemplatesArmor {
 		Templates.PINK_HARD_HAT = new Helmet();
 		Templates.PINK_HARD_HAT.name = "Hard Hat";
 		Templates.PINK_HARD_HAT.imageTexturePath = "pink_hard_hat.png";
+		Templates.PINK_HARD_HAT.imageTexture = getGlobalImage(Templates.PINK_HARD_HAT.imageTexturePath, true);
 		Templates.PINK_HARD_HAT.totalHealth = Templates.PINK_HARD_HAT.remainingHealth = 50;
 		Templates.PINK_HARD_HAT.widthRatio = 0.25f;
 		Templates.PINK_HARD_HAT.heightRatio = 0.12f;
@@ -60,6 +64,7 @@ public class TemplatesArmor {
 		Templates.COWBOY_HAT = new Helmet();
 		Templates.COWBOY_HAT.name = "Cowboy Hat";
 		Templates.COWBOY_HAT.imageTexturePath = "cowboy_hat.png";
+		Templates.COWBOY_HAT.imageTexture = getGlobalImage(Templates.COWBOY_HAT.imageTexturePath, true);
 		Templates.COWBOY_HAT.totalHealth = Templates.COWBOY_HAT.remainingHealth = 15;
 		Templates.COWBOY_HAT.widthRatio = 0.5f;
 		Templates.COWBOY_HAT.heightRatio = 0.5f;
@@ -79,6 +84,7 @@ public class TemplatesArmor {
 		Templates.JUMPER = new BodyArmor();
 		Templates.JUMPER.name = "Jumper";
 		Templates.JUMPER.imageTexturePath = "jumper.png";
+		Templates.JUMPER.imageTexture = getGlobalImage(Templates.JUMPER.imageTexturePath, true);
 		Templates.JUMPER.totalHealth = Templates.JUMPER.remainingHealth = 20;
 		Templates.JUMPER.widthRatio = 0.25f;
 		Templates.JUMPER.heightRatio = 0.75f;
@@ -99,6 +105,7 @@ public class TemplatesArmor {
 		Templates.PANTS = new LegArmor();
 		Templates.PANTS.name = "Pants";
 		Templates.PANTS.imageTexturePath = "pants.png";
+		Templates.PANTS.imageTexture = getGlobalImage(Templates.PANTS.imageTexturePath, true);
 		Templates.PANTS.totalHealth = Templates.PANTS.remainingHealth = 20;
 		Templates.PANTS.widthRatio = 0.5f;
 		Templates.PANTS.heightRatio = 1f;

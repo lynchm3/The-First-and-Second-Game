@@ -294,11 +294,9 @@ public class Actor extends GameObject {
 	Node lastNodeReached = null;
 
 	public AIPath getPathTo(Square target) {
-		// if (this == Level.player) {
+		// if (this.name.contains("Farmer")) {
 		// System.out.println("-------------------- ");
-		// }
-		//
-		// if (this == Level.player) {
+		// Utils.printStackTrace();
 		// System.out.println("current square = " + this.squareGameObjectIsOn);
 		// System.out.println("target square = " + target);
 		// }
@@ -307,18 +305,15 @@ public class Actor extends GameObject {
 			return null;
 		}
 
-		// if(straightLineDistanceBetween(this.squareGameObjectIsOn,
-		// targetSquare))
-
 		// Share a node, just walk straight
 		for (Node node1 : this.squareGameObjectIsOn.nodes) {
 			for (Node node2 : target.nodes) {
-				// if (this == Level.player) {
+				// if (this.name.contains("Farmer")) {
 				// System.out.println("node 1 = " + node1.name + ", node2 = " +
 				// node2.name);
 				// }
 				if (node1 == node2) {
-					// if (this == Level.player) {
+					// if (this.name.contains("Farmer")) {
 					// System.out.println(
 					// "Goind straight to squares - node 1 = " + node1.name + ",
 					// node2 = " + node2.name);
@@ -328,6 +323,7 @@ public class Actor extends GameObject {
 				}
 			}
 		}
+
 		if (this.squareGameObjectIsOn.node != null) {
 			lastNodeReached = squareGameObjectIsOn.node;
 		} else if (lastNodeReached == null) {
@@ -351,7 +347,7 @@ public class Actor extends GameObject {
 		for (Node node2 : target.nodes) {
 			LinkedList<Node> tempAStarNodesPath = new AStarSearchHighLevel().findPath(this, lastNodeReached, node2,
 					maxPathSize);
-			// if (this == Level.player) {
+			// if (this.name.contains("Farmer")) {
 			// System.out.println("tempAStarNodesPath = " + tempAStarNodesPath);
 			// for (Node node : tempAStarNodesPath) {
 			// System.out.println("node = " + node);
@@ -371,13 +367,13 @@ public class Actor extends GameObject {
 		// }
 
 		if (aStarNodesPath == null || aStarNodesPath.size() == 0) {
-			// if (this == Level.player) {
+			// if (this.name.contains("Farmer")) {
 			// System.out.println("aStarNodesPath is null or empty, returning");
 			// }
 			return getPathAtSquareLevel(target);
 		}
 
-		// if (this == Level.player) {
+		// if (this.name.contains("Farmer")) {
 		// System.out.println("target node name = " +
 		// aStarNodesPath.getFirst().name);
 		// System.out.println("target node square = " +

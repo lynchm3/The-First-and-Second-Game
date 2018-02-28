@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
@@ -30,6 +32,7 @@ public class TemplatesTools {
 		Templates.BROOM.minRange = 1;
 		Templates.BROOM.maxRange = 1;
 		Templates.BROOM.imageTexturePath = "broom.png";
+		Templates.BROOM.imageTexture = getGlobalImage(Templates.BROOM.imageTexturePath, true);
 		Templates.BROOM.totalHealth = Templates.BROOM.remainingHealth = 20;
 		Templates.BROOM.widthRatio = 1f;
 		Templates.BROOM.heightRatio = 1f;
@@ -56,6 +59,7 @@ public class TemplatesTools {
 		Templates.PICKAXE.minRange = 1;
 		Templates.PICKAXE.maxRange = 1;
 		Templates.PICKAXE.imageTexturePath = "pickaxe.png";
+		Templates.PICKAXE.imageTexture = getGlobalImage(Templates.PICKAXE.imageTexturePath, true);
 		Templates.PICKAXE.totalHealth = Templates.PICKAXE.remainingHealth = 20;
 		Templates.PICKAXE.widthRatio = 1f;
 		Templates.PICKAXE.heightRatio = 1f;
@@ -76,6 +80,7 @@ public class TemplatesTools {
 		Templates.SHOVEL.name = "Shovel";
 		Templates.SHOVEL.slashDamage = 6;
 		Templates.SHOVEL.imageTexturePath = "shovel.png";
+		Templates.SHOVEL.imageTexture = getGlobalImage(Templates.SHOVEL.imageTexturePath, true);
 		Templates.SHOVEL.totalHealth = Templates.SHOVEL.remainingHealth = 27;
 		Templates.SHOVEL.soundWhenHit = 1f;
 		Templates.SHOVEL.soundWhenHitting = 1f;
@@ -92,6 +97,7 @@ public class TemplatesTools {
 		Templates.FISHING_ROD.name = "Fishing Rod";
 		Templates.FISHING_ROD.slashDamage = 4;
 		Templates.FISHING_ROD.imageTexturePath = "fishing_rod.png";
+		Templates.FISHING_ROD.imageTexture = getGlobalImage(Templates.FISHING_ROD.imageTexturePath, true);
 		Templates.FISHING_ROD.totalHealth = Templates.FISHING_ROD.remainingHealth = 16;
 		Templates.FISHING_ROD.soundWhenHit = 1f;
 		Templates.FISHING_ROD.soundWhenHitting = 1f;
@@ -110,6 +116,7 @@ public class TemplatesTools {
 		Templates.HATCHET.minRange = 1;
 		Templates.HATCHET.maxRange = 1;
 		Templates.HATCHET.imageTexturePath = "hatchet.png";
+		Templates.HATCHET.imageTexture = getGlobalImage(Templates.HATCHET.imageTexturePath, true);
 		Templates.HATCHET.totalHealth = Templates.HATCHET.remainingHealth = 20;
 		Templates.HATCHET.widthRatio = 1f;
 		Templates.HATCHET.heightRatio = 1f;
@@ -132,6 +139,7 @@ public class TemplatesTools {
 		Templates.HUNTING_KNIFE.minRange = 1;
 		Templates.HUNTING_KNIFE.maxRange = 1;
 		Templates.HUNTING_KNIFE.imageTexturePath = "hunting_knife.png";
+		Templates.HUNTING_KNIFE.imageTexture = getGlobalImage(Templates.HUNTING_KNIFE.imageTexturePath, true);
 		Templates.HUNTING_KNIFE.totalHealth = Templates.HUNTING_KNIFE.remainingHealth = 25;
 		Templates.HUNTING_KNIFE.widthRatio = 1f;
 		Templates.HUNTING_KNIFE.heightRatio = 1f;
@@ -153,6 +161,7 @@ public class TemplatesTools {
 		Templates.HOE.minRange = 1;
 		Templates.HOE.maxRange = 1;
 		Templates.HOE.imageTexturePath = "hoe.png";
+		Templates.HOE.imageTexture = getGlobalImage(Templates.HOE.imageTexturePath, true);
 		Templates.HOE.totalHealth = Templates.HOE.remainingHealth = 24;
 		Templates.HOE.widthRatio = 1f;
 		Templates.HOE.heightRatio = 1f;
@@ -175,6 +184,7 @@ public class TemplatesTools {
 		Templates.SICKLE.minRange = 1;
 		Templates.SICKLE.maxRange = 1;
 		Templates.SICKLE.imageTexturePath = "sickle.png";
+		Templates.SICKLE.imageTexture = getGlobalImage(Templates.SICKLE.imageTexturePath, true);
 		Templates.SICKLE.totalHealth = Templates.SICKLE.remainingHealth = 22;
 		Templates.SICKLE.widthRatio = 1f;
 		Templates.SICKLE.heightRatio = 1f;
@@ -197,6 +207,7 @@ public class TemplatesTools {
 		Templates.HAMMER.minRange = 1;
 		Templates.HAMMER.maxRange = 1;
 		Templates.HAMMER.imageTexturePath = "hammer.png";
+		Templates.HAMMER.imageTexture = getGlobalImage(Templates.HAMMER.imageTexturePath, true);
 		Templates.HAMMER.totalHealth = Templates.HAMMER.remainingHealth = 36;
 		Templates.HAMMER.widthRatio = 1f;
 		Templates.HAMMER.heightRatio = 1f;
@@ -219,6 +230,7 @@ public class TemplatesTools {
 		Templates.BASKET.minRange = 1;
 		Templates.BASKET.maxRange = 1;
 		Templates.BASKET.imageTexturePath = "basket.png";
+		Templates.BASKET.imageTexture = getGlobalImage(Templates.BASKET.imageTexturePath, true);
 		Templates.BASKET.totalHealth = Templates.BASKET.remainingHealth = 14;
 		Templates.BASKET.widthRatio = 1f;
 		Templates.BASKET.heightRatio = 1f;
@@ -242,6 +254,7 @@ public class TemplatesTools {
 		Templates.WHIP.minRange = 1;
 		Templates.WHIP.maxRange = 1;
 		Templates.WHIP.imageTexturePath = "whip.png";
+		Templates.WHIP.imageTexture = getGlobalImage(Templates.WHIP.imageTexturePath, true);
 		Templates.WHIP.totalHealth = Templates.WHIP.remainingHealth = 19;
 		Templates.WHIP.widthRatio = 1f;
 		Templates.WHIP.heightRatio = 1f;
@@ -263,6 +276,7 @@ public class TemplatesTools {
 		Templates.SERRATED_SPOON.minRange = 1;
 		Templates.SERRATED_SPOON.maxRange = 1;
 		Templates.SERRATED_SPOON.imageTexturePath = "serrated_spoon.png";
+		Templates.SERRATED_SPOON.imageTexture = getGlobalImage(Templates.SERRATED_SPOON.imageTexturePath, true);
 		Templates.SERRATED_SPOON.totalHealth = Templates.SERRATED_SPOON.remainingHealth = 23;
 		Templates.SERRATED_SPOON.widthRatio = 1f;
 		Templates.SERRATED_SPOON.heightRatio = 1f;
@@ -284,6 +298,7 @@ public class TemplatesTools {
 		Templates.DINNER_BELL.minRange = 1;
 		Templates.DINNER_BELL.maxRange = 1;
 		Templates.DINNER_BELL.imageTexturePath = "bell.png";
+		Templates.DINNER_BELL.imageTexture = getGlobalImage(Templates.DINNER_BELL.imageTexturePath, true);
 		Templates.DINNER_BELL.totalHealth = Templates.DINNER_BELL.remainingHealth = 25;
 		Templates.DINNER_BELL.widthRatio = 1f;
 		Templates.DINNER_BELL.heightRatio = 1f;
@@ -306,6 +321,7 @@ public class TemplatesTools {
 		Templates.LANTERN.minRange = 1;
 		Templates.LANTERN.maxRange = 1;
 		Templates.LANTERN.imageTexturePath = "lantern.png";
+		Templates.LANTERN.imageTexture = getGlobalImage(Templates.LANTERN.imageTexturePath, true);
 		Templates.LANTERN.totalHealth = Templates.LANTERN.remainingHealth = 14;
 		Templates.LANTERN.widthRatio = 1f;
 		Templates.LANTERN.heightRatio = 1f;
@@ -328,6 +344,7 @@ public class TemplatesTools {
 		Templates.JAR.minRange = 1;
 		Templates.JAR.maxRange = 1;
 		Templates.JAR.imageTexturePath = "jar.png";
+		Templates.JAR.imageTexture = getGlobalImage(Templates.JAR.imageTexturePath, true);
 		Templates.JAR.totalHealth = Templates.JAR.remainingHealth = 14;
 		Templates.JAR.widthRatio = 0.25f;
 		Templates.JAR.heightRatio = 0.25f;
@@ -352,6 +369,7 @@ public class TemplatesTools {
 		Templates.JAR_OF_WATER.minRange = 1;
 		Templates.JAR_OF_WATER.maxRange = 1;
 		Templates.JAR_OF_WATER.imageTexturePath = "water_jar.png";
+		Templates.JAR_OF_WATER.imageTexture = getGlobalImage(Templates.JAR_OF_WATER.imageTexturePath, true);
 		Templates.JAR_OF_WATER.totalHealth = Templates.JAR_OF_WATER.remainingHealth = 14;
 		Templates.JAR_OF_WATER.widthRatio = 0.25f;
 		Templates.JAR_OF_WATER.heightRatio = 0.25f;

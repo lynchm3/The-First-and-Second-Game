@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.GameObject;
@@ -11,6 +13,7 @@ public class TemplatesCorpses {
 		Templates.CARCASS = new Carcass();
 		Templates.CARCASS.name = "Carcass";
 		Templates.CARCASS.imageTexturePath = "carcass.png";
+		Templates.CARCASS.imageTexture = getGlobalImage(Templates.CARCASS.imageTexturePath, true);
 		Templates.CARCASS.totalHealth = Templates.CARCASS.remainingHealth = 34;
 		Templates.CARCASS.widthRatio = 0.5f;
 		Templates.CARCASS.heightRatio = 0.5f;
@@ -32,6 +35,7 @@ public class TemplatesCorpses {
 		Templates.CORPSE = new Corpse();
 		Templates.CORPSE.name = "Corpse";
 		Templates.CORPSE.imageTexturePath = "carcass.png";
+		Templates.CORPSE.imageTexture = getGlobalImage(Templates.CORPSE.imageTexturePath, true);
 		Templates.CORPSE.totalHealth = Templates.CORPSE.remainingHealth = 32;
 		Templates.CORPSE.widthRatio = 0.5f;
 		Templates.CORPSE.heightRatio = 0.5f;
@@ -53,6 +57,7 @@ public class TemplatesCorpses {
 		Templates.ASH = new GameObject();
 		Templates.ASH.name = "Ash";
 		Templates.ASH.imageTexturePath = "ash.png";
+		Templates.ASH.imageTexture = getGlobalImage(Templates.ASH.imageTexturePath, true);
 		Templates.ASH.totalHealth = Templates.ASH.remainingHealth = 1000;
 		Templates.ASH.widthRatio = 0.5f;
 		Templates.ASH.heightRatio = 0.5f;
@@ -73,6 +78,7 @@ public class TemplatesCorpses {
 		Templates.WOOD_CHIPS = new GameObject();
 		Templates.WOOD_CHIPS.name = "Whood Chips";
 		Templates.WOOD_CHIPS.imageTexturePath = "wood_chips.png";
+		Templates.WOOD_CHIPS.imageTexture = getGlobalImage(Templates.WOOD_CHIPS.imageTexturePath, true);
 		Templates.WOOD_CHIPS.totalHealth = Templates.WOOD_CHIPS.remainingHealth = 16;
 		Templates.WOOD_CHIPS.widthRatio = 0.5f;
 		Templates.WOOD_CHIPS.heightRatio = 0.5f;

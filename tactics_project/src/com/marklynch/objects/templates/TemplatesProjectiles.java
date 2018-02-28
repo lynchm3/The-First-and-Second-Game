@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 
@@ -10,6 +12,7 @@ public class TemplatesProjectiles {
 		Templates.ARROW = new Arrow();
 		Templates.ARROW.name = "Arrow";
 		Templates.ARROW.imageTexturePath = "arrow.png";
+		Templates.ARROW.imageTexture = getGlobalImage(Templates.ARROW.imageTexturePath, true);
 		Templates.ARROW.totalHealth = Templates.ARROW.remainingHealth = 10;
 		Templates.ARROW.widthRatio = 0.32f;
 		Templates.ARROW.heightRatio = 0.16f;
@@ -30,6 +33,7 @@ public class TemplatesProjectiles {
 		Templates.FIRE_BALL = new Arrow();
 		Templates.FIRE_BALL.name = "Fireball";
 		Templates.FIRE_BALL.imageTexturePath = "effect_burn.png";
+		Templates.FIRE_BALL.imageTexture = getGlobalImage(Templates.FIRE_BALL.imageTexturePath, true);
 		Templates.FIRE_BALL.totalHealth = Templates.FIRE_BALL.remainingHealth = 10;
 		Templates.FIRE_BALL.widthRatio = 0.32f;
 		Templates.FIRE_BALL.heightRatio = 0.32f;
@@ -50,6 +54,7 @@ public class TemplatesProjectiles {
 		Templates.WATER_BALL = new Arrow();
 		Templates.WATER_BALL.name = "Waterball";
 		Templates.WATER_BALL.imageTexturePath = "effect_wet.png";
+		Templates.WATER_BALL.imageTexture = getGlobalImage(Templates.WATER_BALL.imageTexturePath, true);
 		Templates.WATER_BALL.totalHealth = Templates.WATER_BALL.remainingHealth = 10;
 		Templates.WATER_BALL.widthRatio = 0.32f;
 		Templates.WATER_BALL.heightRatio = 0.32f;

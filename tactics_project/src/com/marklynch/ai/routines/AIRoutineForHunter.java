@@ -140,7 +140,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// Sell items
-		if (sellItems()) {
+		if (sellItems(10)) {
 			this.actor.followersShouldFollow = true;
 			return;
 		}
@@ -154,6 +154,8 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (state == STATE.HUNTING)
 
 		{
+
+			actor.thoughtBubbleImageTextureObject = Templates.HUNTING_BOW.imageTexture;
 			this.actor.followersShouldFollow = true;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			// if (target == null)
@@ -180,6 +182,8 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+
+			actor.thoughtBubbleImageTextureObject = Templates.BED.imageTexture;
 
 			AIRoutineUtils.goToBedAndSleep();
 		}

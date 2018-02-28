@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.routines.AIRoutineForMiner;
 import com.marklynch.ai.routines.AIRoutineForThief;
@@ -28,6 +30,7 @@ public class TemplatesHumans {
 		Templates.PLAYER.endurance = 10;
 		Templates.PLAYER.bluntDamage = 3;
 		Templates.PLAYER.imageTexturePath = "hero.png";
+		Templates.PLAYER.imageTexture = getGlobalImage(Templates.PLAYER.imageTexturePath, true);
 		Templates.PLAYER.heightRatio = 1.5f;
 		Templates.PLAYER.drawOffsetRatioY = -0.5f;
 		Templates.PLAYER.weight = 90f;
@@ -55,6 +58,7 @@ public class TemplatesHumans {
 		Templates.HUNTER.intelligence = 10;
 		Templates.HUNTER.endurance = 10;
 		Templates.HUNTER.imageTexturePath = "hunter.png";
+		Templates.HUNTER.imageTexture = getGlobalImage(Templates.HUNTER.imageTexturePath, true);
 		Templates.HUNTER.weight = 90f;
 		Templates.HUNTER.handAnchorX = 88f;
 		Templates.HUNTER.handAnchorY = 54f;
@@ -75,6 +79,7 @@ public class TemplatesHumans {
 		Templates.MINER.intelligence = 4;
 		Templates.MINER.endurance = 12;
 		Templates.MINER.imageTexturePath = "hunter.png";
+		Templates.MINER.imageTexture = getGlobalImage(Templates.MINER.imageTexturePath, true);
 		Templates.MINER.weight = 110f;
 		Templates.MINER.handAnchorX = 88f;
 		Templates.MINER.handAnchorY = 54f;
@@ -94,6 +99,7 @@ public class TemplatesHumans {
 		Templates.THIEF.intelligence = 10;
 		Templates.THIEF.endurance = 10;
 		Templates.THIEF.imageTexturePath = "thief.png";
+		Templates.THIEF.imageTexture = getGlobalImage(Templates.THIEF.imageTexturePath, true);
 		Templates.THIEF.weight = 90f;
 		Templates.THIEF.handAnchorX = 88f;
 		Templates.THIEF.handAnchorY = 54f;
@@ -113,6 +119,7 @@ public class TemplatesHumans {
 		Templates.FARMER.intelligence = 10;
 		Templates.FARMER.endurance = 10;
 		Templates.FARMER.imageTexturePath = "farmer.png";
+		Templates.FARMER.imageTexture = getGlobalImage(Templates.FARMER.imageTexturePath, true);
 		Templates.FARMER.weight = 90f;
 		Templates.FARMER.handAnchorX = 88f;
 		Templates.FARMER.handAnchorY = 54f;
@@ -133,6 +140,7 @@ public class TemplatesHumans {
 		Templates.MORT.intelligence = 10;
 		Templates.MORT.endurance = 10;
 		Templates.MORT.imageTexturePath = "farmer.png";
+		Templates.MORT.imageTexture = getGlobalImage(Templates.MORT.imageTexturePath, true);
 		Templates.MORT.weight = 90f;
 		Templates.MORT.handAnchorX = 88f;
 		Templates.MORT.handAnchorY = 54f;
@@ -152,6 +160,7 @@ public class TemplatesHumans {
 		Templates.TRADER.intelligence = 10;
 		Templates.TRADER.endurance = 10;
 		Templates.TRADER.imageTexturePath = "shopkeeper.png";
+		Templates.TRADER.imageTexture = getGlobalImage(Templates.TRADER.imageTexturePath, true);
 		Templates.TRADER.weight = 90f;
 		Templates.TRADER.handAnchorX = 40f;
 		Templates.TRADER.handAnchorY = 96f;

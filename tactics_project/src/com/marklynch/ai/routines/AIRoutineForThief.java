@@ -118,7 +118,7 @@ public class AIRoutineForThief extends AIRoutine {
 			return;
 
 		// Sell items
-		if (sellItems())
+		if (sellItems(10))
 			return;
 
 		// Go about ur business... (move around randomly...)

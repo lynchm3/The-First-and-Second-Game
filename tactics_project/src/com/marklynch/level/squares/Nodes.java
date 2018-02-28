@@ -2,7 +2,10 @@ package com.marklynch.level.squares;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.utils.Color;
+import com.marklynch.utils.LineUtils;
+import com.marklynch.utils.QuadUtils;
 
 public class Nodes {
 
@@ -139,18 +142,15 @@ public class Nodes {
 	public static Color color = new Color(1, 1, 1, 0.5f);
 
 	public static void draw() {
-		// for (Node node : nodes) {
-		// QuadUtils.drawQuad(color, node.square.xInGridPixels,
-		// node.square.yInGridPixels,
-		// node.square.xInGridPixels + Game.SQUARE_WIDTH,
-		// node.square.yInGridPixels + Game.SQUARE_HEIGHT);
-		// for (Node neighbor : node.neighbors) {
-		// LineUtils.drawLine(color, node.square.xInGridPixels,
-		// node.square.yInGridPixels,
-		// neighbor.square.xInGridPixels + Game.SQUARE_WIDTH,
-		// neighbor.square.yInGridPixels + Game.SQUARE_HEIGHT, 10);
-		// }
-		// }
+		for (Node node : nodes) {
+			QuadUtils.drawQuad(color, node.square.xInGridPixels, node.square.yInGridPixels,
+					node.square.xInGridPixels + Game.SQUARE_WIDTH, node.square.yInGridPixels + Game.SQUARE_HEIGHT);
+			for (Node neighbor : node.neighbors) {
+				LineUtils.drawLine(color, node.square.xInGridPixels, node.square.yInGridPixels,
+						neighbor.square.xInGridPixels + Game.SQUARE_WIDTH,
+						neighbor.square.yInGridPixels + Game.SQUARE_HEIGHT, 10);
+			}
+		}
 	}
 
 }

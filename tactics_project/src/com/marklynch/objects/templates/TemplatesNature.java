@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.objects.Discoverable;
@@ -20,6 +22,7 @@ public class TemplatesNature {
 		Templates.TREE = new Tree();
 		Templates.TREE.name = "Tree";
 		Templates.TREE.imageTexturePath = "tree.png";
+		Templates.TREE.imageTexture = getGlobalImage(Templates.TREE.imageTexturePath, true);
 		Templates.TREE.totalHealth = Templates.TREE.remainingHealth = 100;
 		Templates.TREE.widthRatio = 1f;
 		Templates.TREE.heightRatio = 1.5f;
@@ -39,6 +42,7 @@ public class TemplatesNature {
 		Templates.BIG_TREE = new Tree();
 		Templates.BIG_TREE.name = "Big Tree";
 		Templates.BIG_TREE.imageTexturePath = "tree_big" + ".png";
+		Templates.BIG_TREE.imageTexture = getGlobalImage(Templates.BIG_TREE.imageTexturePath, true);
 		Templates.BIG_TREE.totalHealth = Templates.BIG_TREE.remainingHealth = 150;
 		Templates.BIG_TREE.widthRatio = 1.5f;
 		Templates.BIG_TREE.heightRatio = 1.5f;
@@ -58,6 +62,7 @@ public class TemplatesNature {
 		Templates.STUMP = new Stump();
 		Templates.STUMP.name = "Stump";
 		Templates.STUMP.imageTexturePath = "stump.png";
+		Templates.STUMP.imageTexture = getGlobalImage(Templates.STUMP.imageTexturePath, true);
 		Templates.STUMP.totalHealth = Templates.STUMP.remainingHealth = 52;
 		Templates.STUMP.widthRatio = 0.5f;
 		Templates.STUMP.heightRatio = 1f;
@@ -77,6 +82,7 @@ public class TemplatesNature {
 		Templates.BIG_STUMP = new Stump();
 		Templates.BIG_STUMP.name = "";
 		Templates.BIG_STUMP.imageTexturePath = "BIG_STUMP.png";
+		Templates.BIG_STUMP.imageTexture = getGlobalImage(Templates.BIG_STUMP.imageTexturePath, true);
 		Templates.BIG_STUMP.totalHealth = Templates.BIG_STUMP.remainingHealth = 73;
 		Templates.BIG_STUMP.widthRatio = 1f;
 		Templates.BIG_STUMP.heightRatio = 1f;
@@ -96,6 +102,7 @@ public class TemplatesNature {
 		Templates.BUSH = new HidingPlace();
 		Templates.BUSH.name = "Bush";
 		Templates.BUSH.imageTexturePath = "bush.png";
+		Templates.BUSH.imageTexture = getGlobalImage(Templates.BUSH.imageTexturePath, true);
 		Templates.BUSH.totalHealth = Templates.BUSH.remainingHealth = 21;
 		Templates.BUSH.widthRatio = 1f;
 		Templates.BUSH.heightRatio = 1f;
@@ -116,6 +123,7 @@ public class TemplatesNature {
 		Templates.POISON_BUSH = new HidingPlace();
 		Templates.POISON_BUSH.name = "Posion Bush";
 		Templates.POISON_BUSH.imageTexturePath = "bush.png";
+		Templates.POISON_BUSH.imageTexture = getGlobalImage(Templates.POISON_BUSH.imageTexturePath, true);
 		Templates.POISON_BUSH.totalHealth = Templates.POISON_BUSH.remainingHealth = 21;
 		Templates.POISON_BUSH.widthRatio = 1f;
 		Templates.POISON_BUSH.heightRatio = 1f;
@@ -136,6 +144,7 @@ public class TemplatesNature {
 		Templates.LONG_GRASS = new HidingPlace();
 		Templates.LONG_GRASS.name = "Long Grass";
 		Templates.LONG_GRASS.imageTexturePath = "long_grass.png";
+		Templates.LONG_GRASS.imageTexture = getGlobalImage(Templates.LONG_GRASS.imageTexturePath, true);
 		Templates.LONG_GRASS.totalHealth = Templates.LONG_GRASS.remainingHealth = 10;
 		Templates.LONG_GRASS.widthRatio = 1f;
 		Templates.LONG_GRASS.heightRatio = 1f;
@@ -156,6 +165,7 @@ public class TemplatesNature {
 		Templates.WHEAT = new HidingPlace();
 		Templates.WHEAT.name = "Wheat";
 		Templates.WHEAT.imageTexturePath = "wheat.png";
+		Templates.WHEAT.imageTexture = getGlobalImage(Templates.WHEAT.imageTexturePath, true);
 		Templates.WHEAT.totalHealth = Templates.WHEAT.remainingHealth = 11;
 		Templates.WHEAT.widthRatio = 1f;
 		Templates.WHEAT.heightRatio = 1f;
@@ -176,6 +186,7 @@ public class TemplatesNature {
 		Templates.MUSHROOM = new Food();
 		Templates.MUSHROOM.name = "Mushroom";
 		Templates.MUSHROOM.imageTexturePath = "mushroom.png";
+		Templates.MUSHROOM.imageTexture = getGlobalImage(Templates.MUSHROOM.imageTexturePath, true);
 		Templates.MUSHROOM.totalHealth = Templates.MUSHROOM.remainingHealth = 13;
 		Templates.MUSHROOM.widthRatio = 0.5f;
 		Templates.MUSHROOM.heightRatio = 0.5f;
@@ -195,6 +206,7 @@ public class TemplatesNature {
 		Templates.BURROW = new SmallHidingPlace();
 		Templates.BURROW.name = "Burrow";
 		Templates.BURROW.imageTexturePath = "burrow.png";
+		Templates.BURROW.imageTexture = getGlobalImage(Templates.BURROW.imageTexturePath, true);
 		Templates.BURROW.totalHealth = Templates.BURROW.remainingHealth = 32;
 		Templates.BURROW.widthRatio = 0.5f;
 		Templates.BURROW.heightRatio = 0.5f;
@@ -213,6 +225,7 @@ public class TemplatesNature {
 		Templates.MOUND = new Discoverable();
 		Templates.MOUND.name = "Mound of Dirt";
 		Templates.MOUND.imageTexturePath = "mound.png";
+		Templates.MOUND.imageTexture = getGlobalImage(Templates.MOUND.imageTexturePath, true);
 		Templates.MOUND.totalHealth = Templates.MOUND.remainingHealth = 103;
 		Templates.MOUND.widthRatio = 1f;
 		Templates.MOUND.heightRatio = 1f;
@@ -236,6 +249,7 @@ public class TemplatesNature {
 		Templates.APPLE = new Food();
 		Templates.APPLE.name = "Apple";
 		Templates.APPLE.imageTexturePath = "apple.png";
+		Templates.APPLE.imageTexture = getGlobalImage(Templates.APPLE.imageTexturePath, true);
 		Templates.APPLE.totalHealth = Templates.APPLE.remainingHealth = 11;
 		Templates.APPLE.widthRatio = 0.25f;
 		Templates.APPLE.heightRatio = 0.25f;
@@ -256,6 +270,7 @@ public class TemplatesNature {
 		Templates.ROCK = new GameObject();
 		Templates.ROCK.name = "Rock";
 		Templates.ROCK.imageTexturePath = "rock.png";
+		Templates.ROCK.imageTexture = getGlobalImage(Templates.ROCK.imageTexturePath, true);
 		Templates.ROCK.totalHealth = Templates.ROCK.remainingHealth = 51;
 		Templates.ROCK.widthRatio = 0.32f;
 		Templates.ROCK.heightRatio = 0.32f;
@@ -276,6 +291,7 @@ public class TemplatesNature {
 		Templates.VEIN = new Vein();
 		Templates.VEIN.name = "Vein";
 		Templates.VEIN.imageTexturePath = "vein.png";
+		Templates.VEIN.imageTexture = getGlobalImage(Templates.VEIN.imageTexturePath, true);
 		Templates.VEIN.totalHealth = Templates.VEIN.remainingHealth = 1000;
 		Templates.VEIN.widthRatio = 1f;
 		Templates.VEIN.heightRatio = 1f;
@@ -304,6 +320,7 @@ public class TemplatesNature {
 		Templates.MEAT_CHUNK = new MeatChunk();
 		Templates.MEAT_CHUNK.name = "Meat Chunk";
 		Templates.MEAT_CHUNK.imageTexturePath = "meat_chunk.png";
+		Templates.MEAT_CHUNK.imageTexture = getGlobalImage(Templates.MEAT_CHUNK.imageTexturePath, true);
 		Templates.MEAT_CHUNK.totalHealth = Templates.MEAT_CHUNK.remainingHealth = 13;
 		Templates.MEAT_CHUNK.widthRatio = 1f;
 		Templates.MEAT_CHUNK.heightRatio = 1f;

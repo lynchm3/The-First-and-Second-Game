@@ -69,7 +69,7 @@ public class AreaMinorMine {
 				bed, 0,
 				new GameObject[] {
 						/* Templates.PICKAXE.makeCopy(null, null), */Templates.LANTERN.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.townForest);
+				new GameObject[] {}, AreaList.mines);
 
 		// 281, 93
 		// Trader Joe

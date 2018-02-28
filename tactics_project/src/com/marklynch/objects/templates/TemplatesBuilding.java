@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.Fence;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
@@ -11,6 +13,7 @@ public class TemplatesBuilding {
 		Templates.WALL = new Wall();
 		Templates.WALL.name = "Wall";
 		Templates.WALL.imageTexturePath = "wall.png";
+		Templates.WALL.imageTexture = getGlobalImage(Templates.WALL.imageTexturePath, true);
 		Templates.WALL.totalHealth = Templates.WALL.remainingHealth = 1000;
 		Templates.WALL.widthRatio = 1f;
 		Templates.WALL.heightRatio = 1f;
@@ -38,6 +41,7 @@ public class TemplatesBuilding {
 		Templates.FENCE = new Fence();
 		Templates.FENCE.name = "Fence";
 		Templates.FENCE.imageTexturePath = "wall.png";
+		Templates.FENCE.imageTexture = getGlobalImage(Templates.FENCE.imageTexturePath, true);
 		Templates.FENCE.totalHealth = Templates.FENCE.remainingHealth = 100;
 		Templates.FENCE.widthRatio = 1f;
 		Templates.FENCE.heightRatio = 1f;

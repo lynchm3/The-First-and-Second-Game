@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gate;
@@ -13,6 +15,7 @@ public class TemplatesEntrances {
 		Templates.WEAK_WOODEN_DOOR.name = "Weak Wooden Door";
 		Templates.WEAK_WOODEN_DOOR.baseName = "Weak Wooden Door";
 		Templates.WEAK_WOODEN_DOOR.imageTexturePath = "door.png";
+		Templates.WEAK_WOODEN_DOOR.imageTexture = getGlobalImage(Templates.WEAK_WOODEN_DOOR.imageTexturePath, true);
 		Templates.WEAK_WOODEN_DOOR.totalHealth = Templates.WEAK_WOODEN_DOOR.remainingHealth = 25;
 		Templates.WEAK_WOODEN_DOOR.widthRatio = 1f;
 		Templates.WEAK_WOODEN_DOOR.heightRatio = 1f;
@@ -39,6 +42,7 @@ public class TemplatesEntrances {
 		Templates.DOOR.name = "Door";
 		Templates.DOOR.baseName = "Door";
 		Templates.DOOR.imageTexturePath = "door.png";
+		Templates.DOOR.imageTexture = getGlobalImage(Templates.DOOR.imageTexturePath, true);
 		Templates.DOOR.totalHealth = Templates.DOOR.remainingHealth = 160;
 		Templates.DOOR.widthRatio = 1f;
 		Templates.DOOR.heightRatio = 1f;
@@ -65,6 +69,7 @@ public class TemplatesEntrances {
 		Templates.GATE.name = "Gate";
 		Templates.GATE.baseName = "Gate";
 		Templates.GATE.imageTexturePath = "gate.png";
+		Templates.GATE.imageTexture = getGlobalImage(Templates.GATE.imageTexturePath, true);
 		Templates.GATE.totalHealth = Templates.GATE.remainingHealth = 100;
 		Templates.GATE.widthRatio = 1f;
 		Templates.GATE.heightRatio = 1f;
@@ -89,6 +94,7 @@ public class TemplatesEntrances {
 		Templates.FALSE_WALL.name = "Wall";
 		Templates.FALSE_WALL.baseName = "Wall";
 		Templates.FALSE_WALL.imageTexturePath = "wall.png";
+		Templates.FALSE_WALL.imageTexture = getGlobalImage(Templates.FALSE_WALL.imageTexturePath, true);
 		Templates.FALSE_WALL.totalHealth = Templates.FALSE_WALL.remainingHealth = 500;
 		Templates.FALSE_WALL.widthRatio = 1f;
 		Templates.FALSE_WALL.heightRatio = 1f;

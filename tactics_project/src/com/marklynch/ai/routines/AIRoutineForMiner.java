@@ -122,7 +122,7 @@ public class AIRoutineForMiner extends AIRoutine {
 		}
 
 		// Sell items
-		if (sellItems()) {
+		if (sellItems(10)) {
 			this.actor.followersShouldFollow = true;
 			return;
 		}

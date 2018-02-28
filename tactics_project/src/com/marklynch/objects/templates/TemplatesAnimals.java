@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.ai.routines.AIRoutineForCarnivoreNeutralWildAnimal;
 import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
 import com.marklynch.ai.routines.AIRoutineForPig;
@@ -25,6 +27,7 @@ public class TemplatesAnimals {
 		Templates.PIG.intelligence = 10;
 		Templates.PIG.endurance = 10;
 		Templates.PIG.imageTexturePath = "pig.png";
+		Templates.PIG.imageTexture = getGlobalImage(Templates.PIG.imageTexturePath, true);
 		Templates.PIG.heightRatio = 0.25f;
 		Templates.PIG.drawOffsetRatioY = 0.75f;
 		Templates.PIG.weight = 70f;
@@ -45,6 +48,7 @@ public class TemplatesAnimals {
 		Templates.RAT.intelligence = 10;
 		Templates.RAT.endurance = 10;
 		Templates.RAT.imageTexturePath = "rat.png";
+		Templates.RAT.imageTexture = getGlobalImage(Templates.RAT.imageTexturePath, true);
 		Templates.RAT.heightRatio = 0.25f;
 		Templates.RAT.drawOffsetRatioY = 0.75f;
 		Templates.RAT.weight = 70f;
@@ -66,6 +70,7 @@ public class TemplatesAnimals {
 		Templates.RABBIT.intelligence = 10;
 		Templates.RABBIT.endurance = 10;
 		Templates.RABBIT.imageTexturePath = "rabbit.png";
+		Templates.RABBIT.imageTexture = getGlobalImage(Templates.RABBIT.imageTexturePath, true);
 		Templates.RABBIT.widthRatio = 0.5f;
 		Templates.RABBIT.heightRatio = 0.5f;
 		Templates.RABBIT.weight = 10f;
@@ -85,6 +90,7 @@ public class TemplatesAnimals {
 		Templates.BABY_RABBIT.intelligence = 10;
 		Templates.BABY_RABBIT.endurance = 10;
 		Templates.BABY_RABBIT.imageTexturePath = "baby_rabbit.png";
+		Templates.BABY_RABBIT.imageTexture = getGlobalImage(Templates.BABY_RABBIT.imageTexturePath, true);
 		Templates.BABY_RABBIT.widthRatio = 0.25f;
 		Templates.BABY_RABBIT.heightRatio = 0.25f;
 		Templates.BABY_RABBIT.weight = 10f;
@@ -106,6 +112,7 @@ public class TemplatesAnimals {
 		Templates.FOX.intelligence = 10;
 		Templates.FOX.endurance = 10;
 		Templates.FOX.imageTexturePath = "fox.png";
+		Templates.FOX.imageTexture = getGlobalImage(Templates.FOX.imageTexturePath, true);
 		Templates.FOX.widthRatio = 1f;
 		Templates.FOX.heightRatio = 1f;
 		Templates.FOX.weight = 60f;
@@ -125,6 +132,7 @@ public class TemplatesAnimals {
 		Templates.WOLF.intelligence = 10;
 		Templates.WOLF.endurance = 10;
 		Templates.WOLF.imageTexturePath = "wolf_pink.png";
+		Templates.WOLF.imageTexture = getGlobalImage(Templates.WOLF.imageTexturePath, true);
 		Templates.WOLF.widthRatio = 1f;
 		Templates.WOLF.heightRatio = 1f;
 		Templates.WOLF.weight = 80f;
@@ -145,6 +153,7 @@ public class TemplatesAnimals {
 		Templates.FISH.intelligence = 1;
 		Templates.FISH.endurance = 1;
 		Templates.FISH.imageTexturePath = "fish.png";
+		Templates.FISH.imageTexture = getGlobalImage(Templates.FISH.imageTexturePath, true);
 		Templates.FISH.heightRatio = 0.25f;
 		Templates.FISH.drawOffsetRatioY = 0.75f;
 		Templates.FISH.widthRatio = 0.25f;

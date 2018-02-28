@@ -290,7 +290,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void loadImages() {
-		this.imageTexture = getGlobalImage(imageTexturePath, true);
+		// this.imageTexture = getGlobalImage(imageTexturePath, true);
 
 	}
 
@@ -1548,6 +1548,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		gameObject.totalHealth = gameObject.remainingHealth = totalHealth;
 		gameObject.imageTexturePath = imageTexturePath;
+		gameObject.imageTexture = imageTexture;
 		gameObject.widthRatio = widthRatio;
 		gameObject.heightRatio = heightRatio;
 		gameObject.drawOffsetRatioX = drawOffsetRatioX;

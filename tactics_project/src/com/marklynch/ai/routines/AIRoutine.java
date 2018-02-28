@@ -1279,9 +1279,9 @@ public abstract class AIRoutine {
 
 	}
 
-	public boolean sellItems() {
+	public boolean sellItems(int minimumItemsToSell) {
 
-		if (actor.inventory.itemsToSellCount < 10)
+		if (actor.inventory.itemsToSellCount < minimumItemsToSell)
 			return false;
 
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
@@ -1309,6 +1309,9 @@ public abstract class AIRoutine {
 	}
 
 	public boolean replenishEquipment() {
+
+		sellItems(1);
+
 		ArrayList<Integer> equipmentNeeded = new ArrayList<Integer>();
 		for (int requiredTemplateId : requiredEquipmentTemplateIds) {
 			if (!actor.inventory.containsObjectWithTemplateId(requiredTemplateId)) {

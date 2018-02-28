@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.objects.BigGameObject;
 import com.marklynch.objects.GameObject;
 
@@ -10,6 +12,7 @@ public class TemplatesBigObjects {
 		Templates.BARRICADE = new BigGameObject();
 		Templates.BARRICADE.name = "Barricade";
 		Templates.BARRICADE.imageTexturePath = "barricade.png";
+		Templates.BARRICADE.imageTexture = getGlobalImage(Templates.BARRICADE.imageTexturePath, true);
 		Templates.BARRICADE.totalHealth = Templates.BARRICADE.remainingHealth = 100;
 		Templates.BARRICADE.widthRatio = 1f;
 		Templates.BARRICADE.heightRatio = 1f;
@@ -29,6 +32,7 @@ public class TemplatesBigObjects {
 		Templates.BOULDER = new BigGameObject();
 		Templates.BOULDER.name = "Boulder";
 		Templates.BOULDER.imageTexturePath = "boulder.png";
+		Templates.BOULDER.imageTexture = getGlobalImage(Templates.BOULDER.imageTexturePath, true);
 		Templates.BOULDER.totalHealth = Templates.BOULDER.remainingHealth = 1000;
 		Templates.BOULDER.widthRatio = 1f;
 		Templates.BOULDER.heightRatio = 1f;
@@ -48,6 +52,7 @@ public class TemplatesBigObjects {
 		Templates.DUMPSTER = new BigGameObject();
 		Templates.DUMPSTER.name = "Dumpster";
 		Templates.DUMPSTER.imageTexturePath = "skip_with_shadow.png";
+		Templates.DUMPSTER.imageTexture = getGlobalImage(Templates.DUMPSTER.imageTexturePath, true);
 		Templates.DUMPSTER.totalHealth = Templates.DUMPSTER.remainingHealth = 100;
 		Templates.DUMPSTER.widthRatio = 1f;
 		Templates.DUMPSTER.heightRatio = 1f;
@@ -67,6 +72,7 @@ public class TemplatesBigObjects {
 		Templates.TROUGH = new BigGameObject();
 		Templates.TROUGH.name = "Trough";
 		Templates.TROUGH.imageTexturePath = "trough.png";
+		Templates.TROUGH.imageTexture = getGlobalImage(Templates.TROUGH.imageTexturePath, true);
 		Templates.TROUGH.totalHealth = Templates.TROUGH.remainingHealth = 29;
 		Templates.TROUGH.widthRatio = 1f;
 		Templates.TROUGH.heightRatio = 1f;

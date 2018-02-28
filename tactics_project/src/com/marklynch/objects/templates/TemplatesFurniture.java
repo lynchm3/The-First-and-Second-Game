@@ -25,6 +25,7 @@ public class TemplatesFurniture {
 		Templates.BED = new Bed();
 		Templates.BED.name = "Bed";
 		Templates.BED.imageTexturePath = "bed.png";
+		Templates.BED.imageTexture = getGlobalImage(Templates.BED.imageTexturePath, true);
 		Templates.BED.imageTextureCovers = getGlobalImage("bed_covers.png", false);
 		Templates.BED.totalHealth = Templates.BED.remainingHealth = 50;
 		Templates.BED.widthRatio = 1f;
@@ -48,6 +49,7 @@ public class TemplatesFurniture {
 		Templates.MIRROR = new Mirror();
 		Templates.MIRROR.name = "Mirror";
 		Templates.MIRROR.imageTexturePath = "mirror.png";
+		Templates.MIRROR.imageTexture = getGlobalImage(Templates.MIRROR.imageTexturePath, true);
 		Templates.MIRROR.imageTextureFront = getGlobalImage("mirror.png", true);
 		Templates.MIRROR.imageTextureBack = getGlobalImage("mirror_back.png", true);
 		Templates.MIRROR.imageTextureCrack = getGlobalImage("mirror_crack.png", true);
@@ -65,6 +67,7 @@ public class TemplatesFurniture {
 		Templates.SHOP_COUNTER = new BigGameObject();
 		Templates.SHOP_COUNTER.name = "Shop Counter";
 		Templates.SHOP_COUNTER.imageTexturePath = "shop_counter.png";
+		Templates.SHOP_COUNTER.imageTexture = getGlobalImage(Templates.SHOP_COUNTER.imageTexturePath, true);
 		Templates.SHOP_COUNTER.totalHealth = Templates.SHOP_COUNTER.remainingHealth = 50;
 		Templates.SHOP_COUNTER.widthRatio = 1f;
 		Templates.SHOP_COUNTER.heightRatio = 1f;
@@ -84,6 +87,7 @@ public class TemplatesFurniture {
 		Templates.TABLE = new BigGameObject();
 		Templates.TABLE.name = "Table";
 		Templates.TABLE.imageTexturePath = "table.png";
+		Templates.TABLE.imageTexture = getGlobalImage(Templates.TABLE.imageTexturePath, true);
 		Templates.TABLE.totalHealth = Templates.TABLE.remainingHealth = 35;
 		Templates.TABLE.widthRatio = 1f;
 		Templates.TABLE.heightRatio = 1f;
@@ -103,6 +107,7 @@ public class TemplatesFurniture {
 		Templates.CHAIR = new BigGameObject();
 		Templates.CHAIR.name = "Chair";
 		Templates.CHAIR.imageTexturePath = "chair.png";
+		Templates.CHAIR.imageTexture = getGlobalImage(Templates.CHAIR.imageTexturePath, true);
 		Templates.CHAIR.totalHealth = Templates.CHAIR.remainingHealth = 27;
 		Templates.CHAIR.widthRatio = 1f;
 		Templates.CHAIR.heightRatio = 1f;
@@ -122,6 +127,7 @@ public class TemplatesFurniture {
 		Templates.BENCH = new BigGameObject();
 		Templates.BENCH.name = "Bench";
 		Templates.BENCH.imageTexturePath = "bench.png";
+		Templates.BENCH.imageTexture = getGlobalImage(Templates.BENCH.imageTexturePath, true);
 		Templates.BENCH.totalHealth = Templates.BENCH.remainingHealth = 31;
 		Templates.BENCH.widthRatio = 1f;
 		Templates.BENCH.heightRatio = 1f;
@@ -141,6 +147,7 @@ public class TemplatesFurniture {
 		Templates.CHAIR_FALLEN = new BigGameObject();
 		Templates.CHAIR_FALLEN.name = "Chair";
 		Templates.CHAIR_FALLEN.imageTexturePath = "chair_fallen.png";
+		Templates.CHAIR_FALLEN.imageTexture = getGlobalImage(Templates.CHAIR_FALLEN.imageTexturePath, true);
 		Templates.CHAIR_FALLEN.totalHealth = Templates.CHAIR_FALLEN.remainingHealth = 27;
 		Templates.CHAIR_FALLEN.widthRatio = 1f;
 		Templates.CHAIR_FALLEN.heightRatio = 1f;
@@ -159,6 +166,7 @@ public class TemplatesFurniture {
 		Templates.KEY = new Key();
 		Templates.KEY.name = "Key";
 		Templates.KEY.imageTexturePath = "key.png";
+		Templates.KEY.imageTexture = getGlobalImage(Templates.KEY.imageTexturePath, true);
 		Templates.KEY.totalHealth = Templates.KEY.remainingHealth = 10;
 		Templates.KEY.widthRatio = 0.3f;
 		Templates.KEY.heightRatio = 0.3f;
@@ -178,6 +186,7 @@ public class TemplatesFurniture {
 		Templates.PLATE = new Stampable();
 		Templates.PLATE.name = "Plate";
 		Templates.PLATE.imageTexturePath = "plate.png";
+		Templates.PLATE.imageTexture = getGlobalImage(Templates.PLATE.imageTexturePath, true);
 		Templates.PLATE.totalHealth = Templates.PLATE.remainingHealth = 6;
 		Templates.PLATE.widthRatio = 0.5f;
 		Templates.PLATE.heightRatio = 0.5f;
@@ -197,6 +206,7 @@ public class TemplatesFurniture {
 		Templates.BROKEN_PLATE = new Stampable();
 		Templates.BROKEN_PLATE.name = "Broken Plate";
 		Templates.BROKEN_PLATE.imageTexturePath = "broken_plate.png";
+		Templates.BROKEN_PLATE.imageTexture = getGlobalImage(Templates.BROKEN_PLATE.imageTexturePath, true);
 		Templates.BROKEN_PLATE.totalHealth = Templates.BROKEN_PLATE.remainingHealth = 4;
 		Templates.BROKEN_PLATE.widthRatio = 0.5f;
 		Templates.BROKEN_PLATE.heightRatio = 0.5f;
@@ -216,6 +226,7 @@ public class TemplatesFurniture {
 		Templates.DINNER_KNIFE = new GameObject();
 		Templates.DINNER_KNIFE.name = "Dinner Knife";
 		Templates.DINNER_KNIFE.imageTexturePath = "knife.png";
+		Templates.DINNER_KNIFE.imageTexture = getGlobalImage(Templates.DINNER_KNIFE.imageTexturePath, true);
 		Templates.DINNER_KNIFE.totalHealth = Templates.DINNER_KNIFE.remainingHealth = 21;
 		Templates.DINNER_KNIFE.widthRatio = 1f;
 		Templates.DINNER_KNIFE.heightRatio = 1f;
@@ -235,6 +246,7 @@ public class TemplatesFurniture {
 		Templates.DINNER_FORK = new GameObject();
 		Templates.DINNER_FORK.name = "Dinner Fork";
 		Templates.DINNER_FORK.imageTexturePath = "fork.png";
+		Templates.DINNER_FORK.imageTexture = getGlobalImage(Templates.DINNER_FORK.imageTexturePath, true);
 		Templates.DINNER_FORK.totalHealth = Templates.DINNER_FORK.remainingHealth = 12;
 		Templates.DINNER_FORK.widthRatio = 0.5f;
 		Templates.DINNER_FORK.heightRatio = 0.125f;
@@ -254,6 +266,7 @@ public class TemplatesFurniture {
 		Templates.ANTLERS_SWITCH = new Switch();
 		Templates.ANTLERS_SWITCH.name = "Obvious Antlers";
 		Templates.ANTLERS_SWITCH.imageTexturePath = "antlers.png";
+		Templates.ANTLERS_SWITCH.imageTexture = getGlobalImage(Templates.ANTLERS_SWITCH.imageTexturePath, true);
 		Templates.ANTLERS_SWITCH.totalHealth = Templates.ANTLERS_SWITCH.remainingHealth = 36;
 		Templates.ANTLERS_SWITCH.widthRatio = 1f;
 		Templates.ANTLERS_SWITCH.heightRatio = 1f;
@@ -274,6 +287,7 @@ public class TemplatesFurniture {
 		Templates.PRESSURE_PLATE = new PressurePlate();
 		Templates.PRESSURE_PLATE.name = "Pressure Plate";
 		Templates.PRESSURE_PLATE.imageTexturePath = "pressure_plate.png";
+		Templates.PRESSURE_PLATE.imageTexture = getGlobalImage(Templates.PRESSURE_PLATE.imageTexturePath, true);
 		Templates.PRESSURE_PLATE.totalHealth = Templates.PRESSURE_PLATE.remainingHealth = 1;
 		Templates.PRESSURE_PLATE.widthRatio = 1f;
 		Templates.PRESSURE_PLATE.heightRatio = 1f;
@@ -294,6 +308,7 @@ public class TemplatesFurniture {
 		Templates.FURNACE = new Furnace();
 		Templates.FURNACE.name = "FURNACE";
 		Templates.FURNACE.imageTexturePath = "furnace.png";
+		Templates.FURNACE.imageTexture = getGlobalImage(Templates.FURNACE.imageTexturePath, true);
 		Templates.FURNACE.totalHealth = Templates.FURNACE.remainingHealth = 122;
 		Templates.FURNACE.widthRatio = 1f;
 		Templates.FURNACE.heightRatio = 1f;
@@ -312,6 +327,7 @@ public class TemplatesFurniture {
 		Templates.BROKEN_LAMP = new BrokenGlass();
 		Templates.BROKEN_LAMP.name = "Broken Lamp";
 		Templates.BROKEN_LAMP.imageTexturePath = "smashed_glass.png";
+		Templates.BROKEN_LAMP.imageTexture = getGlobalImage(Templates.BROKEN_LAMP.imageTexturePath, true);
 		Templates.BROKEN_LAMP.totalHealth = Templates.BROKEN_LAMP.remainingHealth = 11;
 		Templates.BROKEN_LAMP.widthRatio = 1f;
 		Templates.BROKEN_LAMP.heightRatio = 1f;
@@ -331,6 +347,7 @@ public class TemplatesFurniture {
 		Templates.BROKEN_GLASS = new BrokenGlass();
 		Templates.BROKEN_GLASS.name = "Broken Glass";
 		Templates.BROKEN_GLASS.imageTexturePath = "smashed_glass.png";
+		Templates.BROKEN_GLASS.imageTexture = getGlobalImage(Templates.BROKEN_GLASS.imageTexturePath, true);
 		Templates.BROKEN_GLASS.totalHealth = Templates.BROKEN_GLASS.remainingHealth = 12;
 		Templates.BROKEN_GLASS.widthRatio = 1f;
 		Templates.BROKEN_GLASS.heightRatio = 1f;
@@ -350,6 +367,7 @@ public class TemplatesFurniture {
 		Templates.DROP_HOLE = new Searchable();
 		Templates.DROP_HOLE.name = "Drop Hole";
 		Templates.DROP_HOLE.imageTexturePath = "drop_hole.png";
+		Templates.DROP_HOLE.imageTexture = getGlobalImage(Templates.DROP_HOLE.imageTexturePath, true);
 		Templates.DROP_HOLE.totalHealth = Templates.DROP_HOLE.remainingHealth = 100;
 		Templates.DROP_HOLE.widthRatio = 1f;
 		Templates.DROP_HOLE.heightRatio = 1f;
@@ -369,6 +387,7 @@ public class TemplatesFurniture {
 		Templates.SHELF = new GameObject();
 		Templates.SHELF.name = "Shelf";
 		Templates.SHELF.imageTexturePath = "shelf.png";
+		Templates.SHELF.imageTexture = getGlobalImage(Templates.SHELF.imageTexturePath, true);
 		Templates.SHELF.totalHealth = Templates.SHELF.remainingHealth = 28;
 		Templates.SHELF.widthRatio = 1f;
 		Templates.SHELF.heightRatio = 0.5f;
@@ -387,6 +406,7 @@ public class TemplatesFurniture {
 		Templates.WELL = new WaterSource();
 		Templates.WELL.name = "Well";
 		Templates.WELL.imageTexturePath = "well.png";
+		Templates.WELL.imageTexture = getGlobalImage(Templates.WELL.imageTexturePath, true);
 		Templates.WELL.totalHealth = Templates.WELL.remainingHealth = 138;
 		Templates.WELL.widthRatio = 1.5f;
 		Templates.WELL.heightRatio = 1.5f;
