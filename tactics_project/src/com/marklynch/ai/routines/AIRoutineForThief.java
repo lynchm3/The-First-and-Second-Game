@@ -155,6 +155,7 @@ public class AIRoutineForThief extends AIRoutine {
 			Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(this.actor.getPathTo(targetSquare));
 			if (squareToMoveTo == null) {
 				targetSquare = null;
+
 				this.actor.thoughtBubbleImageTextureObject = getGlobalImage("music.png", false);
 				return;
 			} else {
