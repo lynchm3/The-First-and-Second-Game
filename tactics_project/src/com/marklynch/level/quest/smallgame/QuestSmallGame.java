@@ -280,7 +280,7 @@ public class QuestSmallGame extends Quest {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest);
 
-		Templates.THIEF.makeCopy("Thief Carl",
+		Templates.THIEF.makeCopy("Thief Ed",
 				Game.level.squares[12][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town);
@@ -290,7 +290,7 @@ public class QuestSmallGame extends Quest {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town);
 
-		Templates.THIEF.makeCopy("Thief Carl",
+		Templates.THIEF.makeCopy("Thief Pete",
 				Game.level.squares[10][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town);

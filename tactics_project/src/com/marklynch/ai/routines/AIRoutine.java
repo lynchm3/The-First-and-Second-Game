@@ -1475,6 +1475,18 @@ public abstract class AIRoutine {
 		}
 	}
 
+	protected boolean canSeeActor() {
+		ArrayList<Square> visibleSquares = actor.getAllSquaresWithinDistance(1, actor.sight);
+		for (Square visibleSquare : visibleSquares) {
+			Actor actorOnVisibleSquare = visibleSquare.inventory.actorThatCantShareSquare;
+			if (actorOnVisibleSquare != null && this.actor.canSeeGameObject(actorOnVisibleSquare)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public abstract AIRoutine getInstance(Actor actor);
 
 }

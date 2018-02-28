@@ -1,5 +1,8 @@
 package com.marklynch.ai.routines;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
+import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Corpse;
@@ -10,6 +13,7 @@ import com.marklynch.objects.Junk;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
@@ -39,6 +43,8 @@ public class AIRoutineForThief extends AIRoutine {
 
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
+
+	int theftCooldown = 0;
 
 	public AIRoutineForThief(Actor actor) {
 
@@ -96,21 +102,40 @@ public class AIRoutineForThief extends AIRoutine {
 
 		// 1. pick up loot on ground, even if owned, all specific stuff, no
 		// stupid generic game object
-		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(18f, true, false, true, false, false, true,
-				0, false, Weapon.class, Armor.class, Food.class, Junk.class, MeatChunk.class, Gold.class);
-		if (loot != null) {
-			if (loot.owner != null && loot.owner != actor)
-				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
-			else
-				this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
-			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
-			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
-			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
-			} else {
+		if (theftCooldown <= 0) {
 
+			GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, true, false, true, false, false,
+					true, 0, false, Weapon.class, Armor.class, Food.class, Junk.class, MeatChunk.class, Gold.class);
+			if (loot != null) {
+				if (loot.owner != null && loot.owner != actor)
+					this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
+				else
+					this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+				this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
+
+				int weaponDistance = Game.level.activeActor.straightLineDistanceTo(loot.squareGameObjectIsOn);
+
+				if (weaponDistance > 1) {
+					AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+					return;
+				} else {
+					ActionTakeItems actionTake = new ActionTakeItems(Game.level.activeActor, loot.squareGameObjectIsOn,
+							loot);
+					if (actionTake.legal) {
+						actionTake.perform();
+						return;
+					} else {
+						if (canSeeActor()) {
+							theftCooldown = 100;
+						} else {
+							actionTake.perform();
+							return;
+						}
+					}
+				}
 			}
-			return;
+		} else {
+			theftCooldown--;
 		}
 
 		// Defer to quest
@@ -130,10 +155,12 @@ public class AIRoutineForThief extends AIRoutine {
 			Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(this.actor.getPathTo(targetSquare));
 			if (squareToMoveTo == null) {
 				targetSquare = null;
+				this.actor.thoughtBubbleImageTextureObject = getGlobalImage("music.png", false);
 				return;
 			} else {
 				new ActionMove(this.actor, squareToMoveTo, true).perform();
 				this.actor.activityDescription = ACTIVITY_WANDERING;
+				this.actor.thoughtBubbleImageTextureObject = getGlobalImage("music.png", false);
 				// AIRoutineUtils.moveTo(this.actor, squareToMoveTo);
 				if (this.actor.squareGameObjectIsOn == targetSquare)
 					targetSquare = null;

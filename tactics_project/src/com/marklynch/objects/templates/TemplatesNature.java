@@ -104,6 +104,7 @@ public class TemplatesNature {
 		Templates.BUSH.imageTexturePath = "bush.png";
 		Templates.BUSH.imageTexture = getGlobalImage(Templates.BUSH.imageTexturePath, true);
 		Templates.BUSH.totalHealth = Templates.BUSH.remainingHealth = 21;
+		Templates.BUSH.canShareSquare = true;
 		Templates.BUSH.widthRatio = 1f;
 		Templates.BUSH.heightRatio = 1f;
 		Templates.BUSH.drawOffsetRatioX = 0f;
@@ -125,6 +126,7 @@ public class TemplatesNature {
 		Templates.POISON_BUSH.imageTexturePath = "bush.png";
 		Templates.POISON_BUSH.imageTexture = getGlobalImage(Templates.POISON_BUSH.imageTexturePath, true);
 		Templates.POISON_BUSH.totalHealth = Templates.POISON_BUSH.remainingHealth = 21;
+		Templates.POISON_BUSH.canShareSquare = true;
 		Templates.POISON_BUSH.widthRatio = 1f;
 		Templates.POISON_BUSH.heightRatio = 1f;
 		Templates.POISON_BUSH.drawOffsetRatioX = 0f;

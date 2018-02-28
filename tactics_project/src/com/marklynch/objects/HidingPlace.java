@@ -24,6 +24,7 @@ public class HidingPlace extends Searchable {
 		canContainOtherObjects = true;
 
 		persistsWhenCantBeSeen = true;
+		canShareSquare = true;
 
 	}
 
