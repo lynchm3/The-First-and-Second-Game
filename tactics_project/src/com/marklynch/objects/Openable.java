@@ -9,13 +9,14 @@ import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Utils;
 
 public abstract class Openable extends GameObject implements SwitchListener {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public boolean open = false;
 	public Key[] keys;
-	public boolean locked;
+	public boolean locked = false;
 	public String baseName;
 
 	public Openable() {
@@ -39,6 +40,8 @@ public abstract class Openable extends GameObject implements SwitchListener {
 
 	public void lock() {
 		this.name = baseName + " (locked)";
+		System.out.println("locked called");
+		Utils.printStackTrace();
 		locked = true;
 	}
 
@@ -56,9 +59,12 @@ public abstract class Openable extends GameObject implements SwitchListener {
 		super.setAttributesForCopy(openable, square, owner);
 		openable.keys = keys;
 		openable.locked = locked;
-		openable.baseName = baseName;
+		this.name = openable.baseName = baseName;
 		if (locked)
 			this.name = baseName + " (locked)";
+		System.out
+				.println("openable.makeCopy end this.locked  = " + this.locked + ", squareGameObjectIson = " + square);
+		System.out.println("openable.makeCopy end this.name  = " + this.name + ", squareGameObjectIson = " + square);
 
 	}
 

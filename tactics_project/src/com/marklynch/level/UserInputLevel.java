@@ -489,6 +489,7 @@ public class UserInputLevel {
 		if (action != null && !action.enabled) {
 			// System.out.println("enabled = false");
 
+			System.out.println("action = " + action);
 			Game.level.addNotification(new Notification(new Object[] { action.disabledReason },
 					Notification.NotificationType.ACTION_DISABLED, null));
 			// new Toast(new Object[] { "NOPE" },
