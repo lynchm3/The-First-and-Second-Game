@@ -1316,10 +1316,6 @@ public abstract class AIRoutine {
 
 	public boolean replenishEquipment() {
 
-		boolean sellItems = sellItems(1);
-		if (sellItems)
-			return true;
-
 		ArrayList<Integer> equipmentNeeded = new ArrayList<Integer>();
 		for (int requiredTemplateId : requiredEquipmentTemplateIds) {
 			if (!actor.inventory.containsObjectWithTemplateId(requiredTemplateId)) {
@@ -1330,6 +1326,10 @@ public abstract class AIRoutine {
 		if (equipmentNeeded.size() == 0) {
 			return false;
 		}
+
+		boolean sellItems = sellItems(1);
+		if (sellItems)
+			return true;
 
 		// find nearest shop keeper w/ pickaxe?
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
