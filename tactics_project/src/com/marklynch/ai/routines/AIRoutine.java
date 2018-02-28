@@ -339,6 +339,8 @@ public abstract class AIRoutine {
 		if (moved || attacked) {
 			createSearchLocationsBasedOnVisibleAttackers();
 			this.actor.followersShouldFollow = true;
+			this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
+			this.actor.thoughtBubbleImageTextureAction = getGlobalImage("action_attack.png", false);
 			return true;
 		} else
 			return false;
@@ -390,10 +392,10 @@ public abstract class AIRoutine {
 			// shoutForHelpCooldown = 10;
 			createSearchLocationsBasedOnVisibleAttackers();
 			escapeCooldown = 10;
+			this.actor.thoughtBubbleImageTextureObject = getGlobalImage("help.png", false);
 			return true;
 		} else {
-			runEscapeRoutine();
-			return false;
+			return runEscapeRoutine();
 		}
 	}
 
@@ -444,6 +446,7 @@ public abstract class AIRoutine {
 			escapeCooldown = 10;
 
 			createSearchLocationsBasedOnVisibleAttackers();
+			this.actor.thoughtBubbleImageTextureObject = getGlobalImage("help.png", false);
 			return true;
 		} else {
 			return false;
@@ -492,6 +495,7 @@ public abstract class AIRoutine {
 		}
 
 		createSearchLocationsBasedOnVisibleAttackers();
+		this.actor.thoughtBubbleImageTextureObject = getGlobalImage("help.png", false);
 		return true;
 	}
 

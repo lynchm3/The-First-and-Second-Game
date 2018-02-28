@@ -1320,6 +1320,11 @@ public class Actor extends GameObject {
 
 		}
 
+		if (accumulatedCrimeSeverityWitnessed.get(criminal) >= 10) {
+			this.addAttackerForNearbyFactionMembersIfVisible(criminal);
+			this.addAttackerForThisAndGroupMembers(criminal);
+		}
+
 		// Accumulated severity of unresolved crimes
 		if (accumulatedCrimeSeverityUnresolved.containsKey(criminal)) {
 			accumulatedCrimeSeverityUnresolved.put(criminal,

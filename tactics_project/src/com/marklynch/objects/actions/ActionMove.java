@@ -42,7 +42,7 @@ public class ActionMove extends Action {
 	@Override
 	public void perform() {
 
-		if (Game.level.activeActor.name.contains("Farmer")) {
+		if (Game.level.activeActor.name.contains("Joe")) {
 			System.out.println(
 					"Game.level.activeActor.squareGameObjectIsOn  = " + Game.level.activeActor.squareGameObjectIsOn);
 			System.out.println("target = " + target);

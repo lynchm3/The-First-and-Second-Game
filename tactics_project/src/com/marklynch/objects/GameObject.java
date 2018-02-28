@@ -1407,7 +1407,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	}
 
-	public void addAttacker(GameObject potentialAttacker) {
+	protected void addAttacker(GameObject potentialAttacker) {
 
 		if (potentialAttacker != null && potentialAttacker.remainingHealth > 0
 				&& !this.attackers.contains(potentialAttacker) && potentialAttacker != this) {
