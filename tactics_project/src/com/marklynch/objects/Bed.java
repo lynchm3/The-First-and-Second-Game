@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
@@ -44,6 +45,16 @@ public class Bed extends GameObject {
 		super.setAttributesForCopy(bed, square, owner);
 		bed.imageTextureCovers = imageTextureCovers;
 		return bed;
+	}
+
+	@Override
+	public boolean checkIfDestroyed(Object attacker, Action action) {
+		boolean destroyed = super.checkIfDestroyed(attacker, action);
+		if (destroyed && owner != null && owner.bed == this) {
+			owner.bed = null;
+		}
+
+		return destroyed;
 	}
 
 	@Override

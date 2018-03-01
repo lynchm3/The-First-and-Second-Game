@@ -10,7 +10,6 @@ import com.marklynch.ui.button.Link;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.Utils;
 
 public class Notification {
 
@@ -45,8 +44,6 @@ public class Notification {
 	Object target;
 
 	public Notification(Object[] objects, NotificationType type, Object target) {
-
-		Utils.printStackTrace();
 
 		this.objects = objects;
 		this.type = type;
