@@ -27,8 +27,11 @@ public class Nodes {
 	public static Node minorMine; // 280,87
 
 	public static Node dungeonHouseOuter; // 24,30
+	public static Node dungeonHouseHiddenArea; // 22,36
 
 	public static Node wallsHouseOuter; // 41,21
+	public static Node wallHouseBedroom; // 42,28
+	public static Node wallHouseHiddenArea; // 52,27
 
 	// Farm
 	public static Node farmOuterBend; // 4,62
@@ -52,8 +55,17 @@ public class Nodes {
 		dungeonHouseOuter = new Node("Dungeon House", squares[24][30]);
 		nodes.add(dungeonHouseOuter);
 
+		dungeonHouseHiddenArea = new Node("Dungeon House Secret", squares[22][36]); // 22,36
+		nodes.add(dungeonHouseHiddenArea);
+
 		wallsHouseOuter = new Node("Walls House", squares[41][21]);
 		nodes.add(wallsHouseOuter);
+
+		wallHouseBedroom = new Node("Walls House Bedroom", squares[42][28]);// 42,28
+		nodes.add(wallHouseBedroom);
+
+		wallHouseHiddenArea = new Node("Walls House Secret", squares[52][27]); // 52,27
+		nodes.add(wallHouseHiddenArea);
 
 		townNorth = new Node("Town North", squares[24][18]);
 		nodes.add(townNorth);
@@ -104,8 +116,17 @@ public class Nodes {
 		townCenter.neighbors.add(townNorth);
 
 		dungeonHouseOuter.neighbors.add(townCenter);
+		dungeonHouseOuter.neighbors.add(dungeonHouseHiddenArea);
+
+		dungeonHouseHiddenArea.neighbors.add(dungeonHouseOuter);
 
 		wallsHouseOuter.neighbors.add(townCenter);
+		wallsHouseOuter.neighbors.add(wallHouseBedroom);
+		wallsHouseOuter.neighbors.add(wallHouseHiddenArea);
+
+		wallHouseHiddenArea.neighbors.add(wallsHouseOuter);
+
+		wallHouseBedroom.neighbors.add(wallsHouseOuter);
 
 		townNorth.neighbors.add(townCenter);
 		townNorth.neighbors.add(lodgeJunction);

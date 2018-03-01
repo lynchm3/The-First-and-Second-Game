@@ -46,7 +46,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Front room
 		StructureRoom livingRoom = new StructureRoom("Living Room", 22, 31, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.dungeonHouseOuter }, new RoomPart(22, 31, 28, 35));
+				new Node[] { Nodes.dungeonHouseOuter, Nodes.dungeonHouseHiddenArea }, new RoomPart(22, 31, 28, 35));
 		structureRooms.add(livingRoom);
 
 		// Front room decorative walls
@@ -64,11 +64,11 @@ public class QuestTheSecretRoom extends Quest {
 
 		// False wall
 		RemoteDoor falseWall = Templates.FALSE_WALL.makeCopy("Wall", Game.level.squares[22][36], false, null);
-		structureFeatures.add(new StructureFeature(falseWall, Nodes.dungeonHouseOuter));
+		structureFeatures.add(new StructureFeature(falseWall, Nodes.dungeonHouseHiddenArea));
 
 		// Back room
 		StructureRoom backRoom = new StructureRoom("Back room", 20, 37, false, new ArrayList<Actor>(), 4,
-				new Node[] { Nodes.dungeonHouseOuter }, new RoomPart(20, 37, 35, 45));
+				new Node[] { Nodes.dungeonHouseHiddenArea }, new RoomPart(20, 37, 35, 45));
 		structureRooms.add(backRoom);
 
 		// back room decorative walls
