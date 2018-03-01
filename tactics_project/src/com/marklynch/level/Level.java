@@ -1009,7 +1009,7 @@ public class Level {
 				player.squareGameObjectIsOn.getSquareToLeftOf().drawKey(Square.A_TEXTURE);
 			} else if (!shiftActionHasBeenPressed) {
 				Action secondaryAction = player.squareGameObjectIsOn.getSquareToLeftOf()
-						.getSecondaryActionForTheSquareOrObject(Game.level.player);
+						.getSecondaryActionForTheSquareOrObject(Game.level.player, false);
 				if (secondaryAction != null && secondaryAction.enabled && secondaryAction.legal)
 					player.squareGameObjectIsOn.getSquareToLeftOf().drawKey(Square.SHIFT_A_TEXTURE);
 			}
@@ -1021,7 +1021,7 @@ public class Level {
 				player.squareGameObjectIsOn.getSquareToRightOf().drawKey(Square.D_TEXTURE);
 			} else if (!shiftActionHasBeenPressed) {
 				Action secondaryAction = player.squareGameObjectIsOn.getSquareToRightOf()
-						.getSecondaryActionForTheSquareOrObject(Game.level.player);
+						.getSecondaryActionForTheSquareOrObject(Game.level.player, false);
 				if (secondaryAction != null && secondaryAction.enabled && secondaryAction.legal)
 					player.squareGameObjectIsOn.getSquareToRightOf().drawKey(Square.SHIFT_D_TEXTURE);
 			}
@@ -1033,7 +1033,7 @@ public class Level {
 				player.squareGameObjectIsOn.getSquareAbove().drawKey(Square.W_TEXTURE);
 			} else if (!shiftActionHasBeenPressed) {
 				Action secondaryAction = player.squareGameObjectIsOn.getSquareAbove()
-						.getSecondaryActionForTheSquareOrObject(Game.level.player);
+						.getSecondaryActionForTheSquareOrObject(Game.level.player, false);
 				if (secondaryAction != null && secondaryAction.enabled && secondaryAction.legal)
 					player.squareGameObjectIsOn.getSquareAbove().drawKey(Square.SHIFT_W_TEXTURE);
 			}
@@ -1045,7 +1045,7 @@ public class Level {
 				player.squareGameObjectIsOn.getSquareBelow().drawKey(Square.S_TEXTURE);
 			} else if (!shiftActionHasBeenPressed) {
 				Action secondaryAction = player.squareGameObjectIsOn.getSquareBelow()
-						.getSecondaryActionForTheSquareOrObject(Game.level.player);
+						.getSecondaryActionForTheSquareOrObject(Game.level.player, false);
 				if (secondaryAction != null && secondaryAction.enabled && secondaryAction.legal)
 					player.squareGameObjectIsOn.getSquareBelow().drawKey(Square.SHIFT_S_TEXTURE);
 			}

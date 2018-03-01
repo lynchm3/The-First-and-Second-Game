@@ -457,7 +457,7 @@ public class UserInputLevel {
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
 
-		System.out.println("interactWith");
+		System.out.println("interactWith key = " + key);
 
 		if (Game.level.activeActor != Game.level.player)
 			return;
@@ -480,11 +480,11 @@ public class UserInputLevel {
 
 		if (!openMenu) {
 			if (attack) {
-				action = square.getAttackActionForTheSquareOrObject(Game.level.activeActor);
+				action = square.getAttackActionForTheSquareOrObject(Game.level.activeActor, key != -1);
 			} else if (secondary) {
-				action = square.getSecondaryActionForTheSquareOrObject(Game.level.activeActor);
+				action = square.getSecondaryActionForTheSquareOrObject(Game.level.activeActor, key != -1);
 			} else {
-				action = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
+				action = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor, key != -1);
 			}
 		}
 
@@ -546,6 +546,8 @@ public class UserInputLevel {
 	}
 
 	public static void waitPressed(boolean allowMenuControl, boolean held) {
+
+		System.out.println("waitPressed");
 
 		if (Player.playerTargetSquare != null) {
 			Game.level.pausePlayer();

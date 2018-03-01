@@ -11,6 +11,7 @@ import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Player;
+import com.marklynch.objects.units.Thief;
 import com.marklynch.objects.units.Trader;
 
 public class TemplatesHumans {
@@ -89,7 +90,7 @@ public class TemplatesHumans {
 		Templates.MINER.templateId = GameObject.generateNewTemplateId();
 		Templates.MINER.flipYAxisInMirror = false;
 
-		Templates.THIEF = new Human();
+		Templates.THIEF = new Thief();
 		Templates.THIEF.title = "Thief";
 		Templates.THIEF.level = 1;
 		Templates.THIEF.bluntDamage = 3;

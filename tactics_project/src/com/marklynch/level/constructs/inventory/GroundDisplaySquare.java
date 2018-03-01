@@ -19,7 +19,7 @@ public class GroundDisplaySquare extends InventorySquare {
 	}
 
 	@Override
-	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
+	public Action getDefaultActionForTheSquareOrObject(Actor performer, boolean keyPress) {
 		if (stack.get(0) == null)
 			return null;
 		return new ActionTakeItemsSelectedInInventory(performer, this.stack.get(0).inventoryThatHoldsThisObject.parent,

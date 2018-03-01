@@ -490,19 +490,19 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			}
 		} else {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
-				action = this.getAttackActionForTheSquareOrObject(Game.level.player);
+				action = this.getAttackActionForTheSquareOrObject(Game.level.player, false);
 				// if (action == null || !action.enabled) {
 				// action =
 				// this.getDefaultActionPerformedOnThisInWorld(Game.level.player);
 				// }
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-				action = this.getSecondaryActionForTheSquareOrObject(Game.level.player);
+				action = this.getSecondaryActionForTheSquareOrObject(Game.level.player, false);
 				// if (action == null || !action.enabled) {
 				// action =
 				// this.getSecondaryActionPerformedOnThisInWorld(Game.level.player);
 				// }
 			} else {
-				action = this.getDefaultActionForTheSquareOrObject(Game.level.player);
+				action = this.getDefaultActionForTheSquareOrObject(Game.level.player, false);
 				// System.out.println("action @ a = " + action);
 				// if (action != null)
 				// System.out.println("action.enabled @ b = " + action.enabled);
@@ -621,14 +621,14 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	}
 
-	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
-		if (!seenByPlayer) {
+	public Action getDefaultActionForTheSquareOrObject(Actor performer, boolean keyPress) {
+		if (keyPress == false && !seenByPlayer) {
 			return new ActionMove(performer, this, true);
 		}
 
 		GameObject targetGameObject = null;
 
-		if (Game.gameObjectMouseIsOver != null) {
+		if (keyPress == false && Game.gameObjectMouseIsOver != null) {
 			targetGameObject = Game.gameObjectMouseIsOver;
 		}
 
@@ -752,10 +752,10 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	// mouseXTransformed
 	// mouseYTransformed
 
-	public Action getSecondaryActionForTheSquareOrObject(Actor performer) {
+	public Action getSecondaryActionForTheSquareOrObject(Actor performer, boolean keyPress) {
 
 		GameObject targetGameObject = this.inventory.gameObjectThatCantShareSquare;
-		if (targetGameObject != null) {
+		if (keyPress == false && targetGameObject != null) {
 			return targetGameObject.getSecondaryActionPerformedOnThisInWorld(performer);
 		}
 
@@ -783,12 +783,12 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	}
 
-	public Action getAttackActionForTheSquareOrObject(Actor performer) {
+	public Action getAttackActionForTheSquareOrObject(Actor performer, boolean keyPress) {
 
 		// if (inventory.contains(Game.level.player))
 		// return null;
 
-		if (Game.gameObjectMouseIsOver != null) {
+		if (keyPress == false && Game.gameObjectMouseIsOver != null) {
 			if (Game.gameObjectMouseIsOver.attackable) {
 				return new ActionAttack(performer, Game.gameObjectMouseIsOver);
 			} else {
