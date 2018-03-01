@@ -371,7 +371,13 @@ public class Actor extends GameObject {
 			//
 			// }
 
-			if (tempAStarNodesPath != null && tempAStarNodesPath.size() != 0) {
+			boolean completePath = false;
+			if (tempAStarNodesPath != null && tempAStarNodesPath.size() > 0
+					&& tempAStarNodesPath.get(tempAStarNodesPath.size() - 1) == node2) {
+				completePath = true;
+			}
+
+			if (completePath) {
 				float thisCost = tempAStarNodesPath.getLast().getCost();
 				if (thisCost < bestCost) {
 					aStarNodesPath = tempAStarNodesPath;
@@ -381,12 +387,12 @@ public class Actor extends GameObject {
 		}
 		// }
 
-		if (aStarNodesPath == null || aStarNodesPath.size() == 0) {
-			// if (this == Game.level.player) {
-			// System.out.println("aStarNodesPath is null or empty, returning");
-			// }
-			return getPathAtSquareLevel(target);
-		}
+		// if (aStarNodesPath == null || aStarNodesPath.size() == 0) {
+		// // if (this == Game.level.player) {
+		// // System.out.println("aStarNodesPath is null or empty, returning");
+		// // }
+		// return getPathAtSquareLevel(target);
+		// }
 
 		// if (this == Game.level.player) {
 		// System.out.println("target node name = " +
@@ -394,8 +400,10 @@ public class Actor extends GameObject {
 		// System.out.println("target node square = " +
 		// aStarNodesPath.getFirst().square);
 		// }
+		if (aStarNodesPath != null)
+			return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
 
-		return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
+		return null;
 
 	}
 

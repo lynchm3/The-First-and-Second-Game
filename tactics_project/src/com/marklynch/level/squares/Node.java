@@ -81,7 +81,7 @@ public class Node implements Comparable<Node> {
 	}
 
 	public boolean includableInPath(Actor actor, Node goalNode) {
-		return true;
+		return this.square.includableInPath(actor, goalNode.square);
 	}
 
 	// public void calculateDistanceToNeighbours() {

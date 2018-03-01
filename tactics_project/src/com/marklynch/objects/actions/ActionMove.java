@@ -178,6 +178,15 @@ public class ActionMove extends Action {
 			return true;
 		}
 
+		if (target.inventory.door != null) {
+			if (!target.inventory.door.open
+					&& (!performer.canOpenDoors || target.inventory.door instanceof RemoteDoor)) {
+				return false;
+			} else if (target.inventory.door.locked && !performer.hasKeyForDoor(target.inventory.door)) {
+				return false;
+			}
+		}
+
 		GameObject objectInTheWay = target.inventory.gameObjectThatCantShareSquare;
 
 		if (objectInTheWay instanceof Actor) {
@@ -203,9 +212,7 @@ public class ActionMove extends Action {
 				// tries to move
 				return false;
 			}
-		}
-
-		else if (objectInTheWay != null) {
+		} else if (objectInTheWay != null) {
 			return false;
 		}
 
