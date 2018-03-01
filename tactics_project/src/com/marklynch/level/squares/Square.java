@@ -27,6 +27,7 @@ import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.MapMarker;
+import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.actions.Action;
@@ -1098,7 +1099,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		if (inventory.canShareSquare) {
 			// doors
 			if (inventory.door != null) {
-				if (!inventory.door.open && !actor.canOpenDoors) {
+				if (!inventory.door.open && (!actor.canOpenDoors || inventory.door instanceof RemoteDoor)) {
 					return false;
 				} else if (inventory.door.locked && !actor.hasKeyForDoor(inventory.door)) {
 					return false;

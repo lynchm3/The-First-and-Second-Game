@@ -10,6 +10,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
+import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.RockGolem;
@@ -57,7 +58,7 @@ public class ActionMove extends Action {
 		}
 
 		Door door = (Door) squareToMoveTo.inventory.getGameObjectOfClass(Door.class);
-		if (door != null && door.isOpen() == false) {
+		if (door != null && door.isOpen() == false && !(door instanceof RemoteDoor)) {
 			new ActionOpen(actor, door).perform();
 		}
 
@@ -225,7 +226,7 @@ public class ActionMove extends Action {
 		}
 
 		Door door = (Door) target.inventory.getGameObjectOfClass(Door.class);
-		if (door != null && door.isOpen() == false) {
+		if (door != null && door.isOpen() == false && !(door instanceof RemoteDoor)) {
 			Action open = new ActionOpen(performer, door);
 			if (!open.legal) {
 				return false;
