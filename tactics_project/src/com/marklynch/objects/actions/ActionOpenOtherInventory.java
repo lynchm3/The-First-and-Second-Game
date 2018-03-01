@@ -55,7 +55,7 @@ public class ActionOpenOtherInventory extends Action {
 
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_LOOT);
 			Game.level.player.inventory.otherInventory = target.inventory;
-			target.inventory.squaresX = 900;
+			// target.inventory.squaresX = 900;
 			Game.level.player.inventory.open();
 			Inventory.target = this.target;
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);

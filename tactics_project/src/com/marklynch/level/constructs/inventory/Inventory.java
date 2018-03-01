@@ -75,7 +75,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	protected ArrayList<GameObject> filteredGameObjects = new ArrayList<GameObject>();
 
 	private transient boolean isOpen = false;
-	public transient float squaresX = 500;
+	public transient float squaresX = 0;
 	transient final static float squaresBaseY = 100;
 	public final static float inventoryNamesY = 30f;
 
@@ -854,7 +854,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// return;
 		// }
 
-		resize1();
+		Game.level.openInventories.get(0).resize1();
+		// resize1();
 
 	}
 
@@ -1777,5 +1778,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			animation.update(delta);
 		} else {
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Inventory [parent=" + parent + "]";
 	}
 }
