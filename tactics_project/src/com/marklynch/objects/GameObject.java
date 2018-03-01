@@ -1151,6 +1151,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			if (this.inventoryThatHoldsThisObject != performer.inventory)
 				return new ActionTakeItemsSelectedInInventory(performer, Inventory.target, this);
+			else if (Inventory.target instanceof GameObject)
+				return new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
@@ -1188,11 +1190,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
-			if (this.inventoryThatHoldsThisObject == performer.inventory) {
-				return new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this);
-			} else {
-				return new ActionEquip(Game.level.player, this);
-			}
+			if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
+					|| performer.legArmor == this)
+				return new ActionUnequip(performer, this);
+			else
+				return new ActionEquip(performer, this);
 
 		}
 
