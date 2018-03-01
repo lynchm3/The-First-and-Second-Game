@@ -741,10 +741,10 @@ public class TextUtils {
 
 					if (!action.enabled) {
 						if (action.legal) {
-							TextureUtils.drawTexture(Action.x, x + 10, posY + offsetY + 10, x + 20, posY + offsetY + 20,
+							TextureUtils.drawTexture(Action.textureX, x + 10, posY + offsetY + 10, x + 20, posY + offsetY + 20,
 									Color.RED);
 						} else {
-							TextureUtils.drawTexture(Action.x, x + 10, posY + offsetY + 10, x + 20, posY + offsetY + 20,
+							TextureUtils.drawTexture(Action.textureX, x + 10, posY + offsetY + 10, x + 20, posY + offsetY + 20,
 									Color.WHITE);
 
 						}

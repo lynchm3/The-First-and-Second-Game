@@ -1,7 +1,5 @@
 package com.marklynch.ai.routines;
 
-import static com.marklynch.utils.ResourceUtils.getGlobalImage;
-
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
@@ -12,6 +10,7 @@ import com.marklynch.objects.Gold;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Storage;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActiontTakeAll;
@@ -170,12 +169,12 @@ public class AIRoutineForThief extends AIRoutine {
 			if (squareToMoveTo == null) {
 				targetSquare = null;
 
-				this.actor.thoughtBubbleImageTextureObject = getGlobalImage("music.png", false);
+				this.actor.thoughtBubbleImageTextureObject = Action.textureMusic;
 				return;
 			} else {
 				new ActionMove(this.actor, squareToMoveTo, true).perform();
 				this.actor.activityDescription = ACTIVITY_WANDERING;
-				this.actor.thoughtBubbleImageTextureObject = getGlobalImage("music.png", false);
+				this.actor.thoughtBubbleImageTextureObject = Action.textureMusic;
 				// AIRoutineUtils.moveTo(this.actor, squareToMoveTo);
 				if (this.actor.squareGameObjectIsOn == targetSquare)
 					targetSquare = null;

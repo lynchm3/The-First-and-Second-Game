@@ -121,16 +121,6 @@ public class Editor {
 
 	public Editor() {
 
-		// LOAD THE TEXTURES
-		// File file = new File("res/images/");
-		// File[] listOfFiles = file.listFiles();
-		// for (File imageFile : listOfFiles) {
-		// Texture texture = ResourceUtils.getGlobalImage(imageFile.getName());
-		// if (texture != null) {
-		// textures.add(texture);
-		// }
-		// }
-
 		// LOAD COLORS
 		colors.add(new Color(Color.BLUE));
 		colors.add(new Color(Color.RED));

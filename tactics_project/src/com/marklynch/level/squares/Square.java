@@ -578,7 +578,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public void drawX(boolean onMouse) {
 
 		if (onMouse) {
-			TextureUtils.drawTexture(Action.x, 1f, UserInputLevel.mouseLastX + 16,
+			TextureUtils.drawTexture(Action.textureX, 1f, UserInputLevel.mouseLastX + 16,
 					Game.windowHeight - UserInputLevel.mouseLastY + 16,
 					UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
@@ -586,7 +586,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 			float squarePositionX = xInGridPixels;
 			float squarePositionY = yInGridPixels;
-			TextureUtils.drawTexture(Action.x, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
+			TextureUtils.drawTexture(Action.textureX, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
 					squarePositionY + Game.QUARTER_SQUARE_WIDTH,
 					squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
 					squarePositionY + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);

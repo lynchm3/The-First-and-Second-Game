@@ -16,8 +16,8 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import com.marklynch.Game;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.utils.Color;
-import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
@@ -319,7 +319,7 @@ public class ShadowLight {
 			// System.out.println("Map draw Game.getDragX() = " +
 			// Game.getDragX() + ",
 			// Game.getDragY() = " + Game.getDragY());
-			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("bird.png", false), 3000, 1000, 3000 + 128, 1000 + 128);
+			TextureUtils.drawTexture(Action.textureBird, 3000, 1000, 3000 + 128, 1000 + 128);
 			Game.flush();
 		}
 		////////// END SKY

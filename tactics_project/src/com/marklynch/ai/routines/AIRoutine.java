@@ -1,7 +1,5 @@
 package com.marklynch.ai.routines;
 
-import static com.marklynch.utils.ResourceUtils.getGlobalImage;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -340,7 +338,7 @@ public abstract class AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			this.actor.followersShouldFollow = true;
 			this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
-			this.actor.thoughtBubbleImageTextureAction = getGlobalImage("action_attack.png", false);
+			this.actor.thoughtBubbleImageTextureAction = Action.textureAttack;
 			return true;
 		} else
 			return false;
@@ -392,7 +390,7 @@ public abstract class AIRoutine {
 			// shoutForHelpCooldown = 10;
 			createSearchLocationsBasedOnVisibleAttackers();
 			escapeCooldown = 10;
-			this.actor.thoughtBubbleImageTextureObject = getGlobalImage("help.png", false);
+			this.actor.thoughtBubbleImageTextureObject = Action.textureHelp;
 			return true;
 		} else {
 			return runEscapeRoutine();
@@ -446,7 +444,7 @@ public abstract class AIRoutine {
 			escapeCooldown = 10;
 
 			createSearchLocationsBasedOnVisibleAttackers();
-			this.actor.thoughtBubbleImageTextureObject = getGlobalImage("help.png", false);
+			this.actor.thoughtBubbleImageTextureObject = Action.textureHelp;
 			return true;
 		} else {
 			return false;
@@ -495,7 +493,7 @@ public abstract class AIRoutine {
 		}
 
 		createSearchLocationsBasedOnVisibleAttackers();
-		this.actor.thoughtBubbleImageTextureObject = getGlobalImage("help.png", false);
+		this.actor.thoughtBubbleImageTextureObject = Action.textureHelp;
 		return true;
 	}
 
@@ -1102,7 +1100,7 @@ public abstract class AIRoutine {
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
-			this.actor.thoughtBubbleImageTextureAction = getGlobalImage("left.png", false);
+			this.actor.thoughtBubbleImageTextureAction = Action.textureLeft;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
@@ -1406,7 +1404,7 @@ public abstract class AIRoutine {
 
 		this.actor.activityDescription = "Updating Wanted Poater";
 		this.actor.thoughtBubbleImageTextureObject = wantedPoster.imageTexture;
-		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("action_write.png", false);
+		this.actor.thoughtBubbleImageTextureAction = Action.textureWrite;
 
 		if (actor.straightLineDistanceTo(wantedPoster.squareGameObjectIsOn) < 2) {
 			wantedPoster.updateCrimes(
@@ -1432,7 +1430,7 @@ public abstract class AIRoutine {
 		Storage lostAndFound = actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound;
 
 		this.actor.thoughtBubbleImageTextureObject = lostAndFound.chestClosedTexture;
-		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("right.png", false);
+		this.actor.thoughtBubbleImageTextureAction = Action.textureRight;
 
 		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
 			new ActionGiveItems(actor, lostAndFound, false, actor.gameObjectsInInventoryThatBelongToAnother).perform();
@@ -1454,7 +1452,7 @@ public abstract class AIRoutine {
 			return false;
 
 		this.actor.thoughtBubbleImageTextureObject = lostAndFound.chestClosedTexture;
-		this.actor.thoughtBubbleImageTextureAction = getGlobalImage("left.png", false);
+		this.actor.thoughtBubbleImageTextureAction = Action.textureLeft;
 
 		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
 

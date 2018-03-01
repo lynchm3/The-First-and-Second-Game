@@ -17,9 +17,18 @@ public abstract class Action {
 	public Sound sound;
 	public boolean movement = false;
 	public Texture image;
-	public static Texture x;
+
+	public static Texture textureAttack;
+	public static Texture textureBird;
 	public static Texture textureEllipse;
+	public static Texture textureHelp;
+	public static Texture textureLeft;
+	public static Texture textureMine;
+	public static Texture textureMusic;
+	public static Texture textureRight;
 	public static Texture textureWalk;
+	public static Texture textureWrite;
+	public static Texture textureX;
 
 	public String disabledReason = "";
 
@@ -82,7 +91,8 @@ public abstract class Action {
 
 	public static void loadActionImages() {
 		getGlobalImage("action_add_map_marker.png", false);
-		getGlobalImage("action_attack.png", false);
+		textureAttack = getGlobalImage("action_attack.png", false);
+		textureBird = getGlobalImage("bird.png", false);
 		getGlobalImage("action_blunt.png", false);
 		getGlobalImage("action_burn.png", false);
 		getGlobalImage("action_chop.png", false);
@@ -96,13 +106,15 @@ public abstract class Action {
 		getGlobalImage("action_fill_container.png", false);
 		getGlobalImage("action_give.png", false);
 		getGlobalImage("action_heal.png", false);
+		textureHelp = getGlobalImage("help.png", false);
 		getGlobalImage("action_hide.png", false);
-		getGlobalImage("left.png", false);
+		textureLeft = getGlobalImage("left.png", false);
 		getGlobalImage("action_lock.png", false);
 		getGlobalImage("action_loiter.png", false);
 		getGlobalImage("action_loot_all.png", false);
-		getGlobalImage("action_mine.png", false);
+		textureMine = getGlobalImage("action_mine.png", false);
 		textureWalk = getGlobalImage("action_move.png", false);
+		textureMusic = getGlobalImage("music.png", false);
 		getGlobalImage("action_open.png", false);
 		getGlobalImage("action_pet.png", false);
 		getGlobalImage("action_pierce.png", false);
@@ -113,7 +125,7 @@ public abstract class Action {
 		getGlobalImage("action_put.png", false);// untested
 		getGlobalImage("action_read.png", false);
 		getGlobalImage("action_ring.png", false);
-		getGlobalImage("right.png", false);
+		textureRight = getGlobalImage("right.png", false);
 		getGlobalImage("action_scream.png", false);// untested
 		textureEllipse = getGlobalImage("action_select_object.png", false);
 		getGlobalImage("action_search.png", false);
@@ -132,9 +144,9 @@ public abstract class Action {
 		getGlobalImage("action_trespass.png", false); // untested
 		getGlobalImage("action_unlock.png", false);
 		getGlobalImage("action_use.png", false);
-		getGlobalImage("action_write.png", false); // untested
+		textureWrite = getGlobalImage("action_write.png", false); // untested
 		getGlobalImage("star.png", false);
-		x = getGlobalImage("x.png", false);
+		textureX = getGlobalImage("x.png", false);
 
 	}
 }
