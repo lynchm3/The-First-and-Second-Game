@@ -63,8 +63,11 @@ public class AIRoutineForThief extends AIRoutine {
 		if (runFightRoutine())
 			return;
 
-		// No crime reaction routine coz hes a thief.... altho wat about crims
-		// against him? :P
+		// Crime reaction
+		if (runCrimeReactionRoutine()) {
+			this.actor.followersShouldFollow = true;
+			return;
+		}
 
 		// Search
 		if (runSearchRoutine())
@@ -153,6 +156,10 @@ public class AIRoutineForThief extends AIRoutine {
 
 		// Defer to quest
 		if (deferToQuest())
+			return;
+
+		// Pick up from lost and found
+		if (pickUpFromLostAndFoundRoutine())
 			return;
 
 		// Sell items

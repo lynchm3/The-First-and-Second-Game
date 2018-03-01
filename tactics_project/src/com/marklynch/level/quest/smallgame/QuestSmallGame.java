@@ -32,6 +32,7 @@ import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Human;
+import com.marklynch.objects.units.Thief;
 import com.marklynch.utils.TextUtils;
 
 public class QuestSmallGame extends Quest {
@@ -290,10 +291,12 @@ public class QuestSmallGame extends Quest {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town);
 
-		Templates.THIEF.makeCopy("Thief Pete",
+		Thief t3 = Templates.THIEF.makeCopy("Thief Pete",
 				Game.level.squares[10][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town);
+
+		Templates.HATCHET.makeCopy(Game.level.squares[10][17], t3);
 
 		hunterPack = new Group("Hunting Party", hunterBrent, hunterBront1, hunterBront2, hunterBront3, hunterBront4,
 				hunterBront5, hunterBront6);

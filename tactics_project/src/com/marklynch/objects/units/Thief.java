@@ -3,6 +3,7 @@ package com.marklynch.objects.units;
 import java.util.ArrayList;
 
 import com.marklynch.ai.routines.AIRoutineForThief;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
@@ -41,6 +42,13 @@ public class Thief extends Human {
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
 
 		return actor;
+	}
+
+	@Override
+	public void addWitnessedCrime(Crime crime) {
+		// TODO Auto-generated method stub
+		if (crime.visctim == this)
+			super.addWitnessedCrime(crime);
 	}
 
 }
