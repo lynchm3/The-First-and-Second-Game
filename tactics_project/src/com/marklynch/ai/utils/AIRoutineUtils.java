@@ -191,23 +191,21 @@ public class AIRoutineUtils {
 					// System.out.println("object passed checks");
 					// }
 
-					if (path != null && path.complete) {
+					if (path == null) {
+						Game.level.activeActor.aiRoutine.ignoreList.add(object);
+					} else if (path.complete) {
 						tempPath = path;
 						// if (Game.level.activeActor.name.contains("Farmer")) {
 						// System.out.println("exit a");
 						// }
 						return object;
-					}
-
-					if (path != null && straightLineDistance > 20) {
+					} else if (straightLineDistance > 20) {
 						tempPath = path;
 						// if (Game.level.activeActor.name.contains("Farmer")) {
 						// System.out.println("exit b");
 						// }
 						return object;
-					}
-
-					if (path != null && path.travelCost < bestPathTravelCost) {
+					} else if (path.travelCost < bestPathTravelCost) {
 						// if (Game.level.activeActor.name.contains("Farmer")) {
 						// System.out.println("exit c");
 						// }
@@ -352,6 +350,9 @@ public class AIRoutineUtils {
 
 	public static boolean passesChecks(GameObject gameObject, boolean fitsInInventory, boolean mustContainsObjects,
 			boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue, Class[] classes, boolean DOESNOTHING) {
+
+		if (Game.level.activeActor.aiRoutine.ignoreList.contains(gameObject))
+			return false;
 
 		if (gameObject.value < minimumValue)
 			return false;

@@ -1172,6 +1172,7 @@ public abstract class AIRoutine {
 
 	public Actor actorToKeepTrackOf = null;
 	public Square lastLocationSeenActorToKeepTrackOf = null;
+	public ArrayList<GameObject> ignoreList = new ArrayList<GameObject>();
 
 	// public
 	public boolean keepTrackOf(Actor target) {

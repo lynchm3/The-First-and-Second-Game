@@ -428,6 +428,10 @@ public class Actor extends GameObject {
 
 			AIPath path = new AIPath(squarePath, squarePath.size(), completePath);
 
+			if (completePath == false && straightLineDistanceBetween(this.squareGameObjectIsOn, target) < 20) {
+				return null;
+			}
+
 			return path;
 		}
 
