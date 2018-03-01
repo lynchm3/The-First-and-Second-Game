@@ -14,6 +14,7 @@ import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTakeItems;
+import com.marklynch.objects.actions.ActiontTakeAll;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
@@ -82,27 +83,40 @@ public class AIRoutineForThief extends AIRoutine {
 		if (deferToGroupLeader())
 			return;
 
-		// 1. loot corpses, even if owned
-		GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(18f, false, false, true, true, false,
-				true, 0, false, Corpse.class, Storage.class);
-		if (container != null) {
-			if (container.owner != null && container.owner != actor)
-				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
-			else
-				this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
-			this.actor.thoughtBubbleImageTextureObject = container.imageTexture;
-			boolean lootedCarcass = AIRoutineUtils.lootTarget(container);
-			if (!lootedCarcass) {
-				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
-			} else {
-
-			}
-			return;
-		}
-
-		// 1. pick up loot on ground, even if owned, all specific stuff, no
-		// stupid generic game object
 		if (theftCooldown <= 0) {
+
+			// 1. loot corpses, even if owned
+			GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(18f, false, false, true, true,
+					false, true, 0, false, Corpse.class, Storage.class);
+			if (container != null) {
+				if (container.owner != null && container.owner != actor)
+					this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
+				else
+					this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+				this.actor.thoughtBubbleImageTextureObject = container.imageTexture;
+
+				int weaponDistance = Game.level.activeActor.straightLineDistanceTo(container.squareGameObjectIsOn);
+				if (weaponDistance > 1) {
+					AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+					return;
+				} else {
+					ActiontTakeAll actionTakeAll = new ActiontTakeAll(Game.level.activeActor, container);
+					if (actionTakeAll.legal) {
+						actionTakeAll.perform();
+						return;
+					} else {
+						if (canSeeActor()) {
+							theftCooldown = 100;
+						} else {
+							actionTakeAll.perform();
+							return;
+						}
+					}
+				}
+			}
+
+			// 1. pick up loot on ground, even if owned, all specific stuff, no
+			// stupid generic game object
 
 			GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, true, false, true, false, false,
 					true, 0, false, Weapon.class, Armor.class, Food.class, Junk.class, MeatChunk.class, Gold.class);
