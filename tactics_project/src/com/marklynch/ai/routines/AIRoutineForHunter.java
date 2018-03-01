@@ -164,6 +164,7 @@ public class AIRoutineForHunter extends AIRoutine {
 					TinyNeutralWildAnimal.class, MeatChunk.class, Gold.class);
 			if (target == null) {
 				AIRoutineUtils.moveTowards(actor.area.centreSuqare);
+				return;
 			} else {
 				if (target == null || target.squareGameObjectIsOn == null) {
 					target = null;
@@ -174,6 +175,7 @@ public class AIRoutineForHunter extends AIRoutine {
 						boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
 						if (!attackedAnimal) {
 							AIRoutineUtils.moveTowards(target);
+							return;
 						}
 					}
 				}

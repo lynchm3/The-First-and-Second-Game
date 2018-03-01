@@ -316,7 +316,7 @@ public class QuestSmallGame extends Quest {
 		environmentalistBill = hunterBront2.makeCopy("Enviromentalist Bill",
 				Game.level.squares[105][16], Game.level.factions.townsPeople, null, 83, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.townForest);
 		environmentalistBill.quest = this;
 
 		superWolf = Templates.WOLF.makeCopy("Wolf Queen", Game.level.squares[128][12], Game.level.factions.wolves, null,
