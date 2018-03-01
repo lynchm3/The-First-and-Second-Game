@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Node;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 /**
@@ -50,7 +51,7 @@ public class AStarSearchHighLevel {
 	 * is returned, or null if the path is not found.
 	 */
 
-	public LinkedList<Node> findPath(Actor actor, Node startNode, Node goalNode, int maxCount) {
+	public LinkedList<Node> findPath(Actor actor, Node startNode, Node goalNode, int maxCount, Square goalSquare) {
 		Game.findPath++;
 
 		Node bestNodeFound = null;
@@ -73,7 +74,7 @@ public class AStarSearchHighLevel {
 				return constructPath(goalNode);
 			}
 
-			List neighbors = node.getAllNeighbourNodesThatCanBeMovedTo(actor, goalNode);
+			List neighbors = node.getAllNeighbourNodesThatCanBeMovedTo(actor, goalSquare);
 			for (int i = 0; i < neighbors.size(); i++) {
 				Node neighborNode = (Node) neighbors.get(i);
 				boolean isOpen = openList.contains(neighborNode);

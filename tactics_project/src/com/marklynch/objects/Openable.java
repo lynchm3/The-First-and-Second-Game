@@ -9,7 +9,6 @@ import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.utils.Utils;
 
 public abstract class Openable extends GameObject implements SwitchListener {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
@@ -40,7 +39,6 @@ public abstract class Openable extends GameObject implements SwitchListener {
 
 	public void lock() {
 		this.name = baseName + " (locked)";
-		Utils.printStackTrace();
 		locked = true;
 	}
 

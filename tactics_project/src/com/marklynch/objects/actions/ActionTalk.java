@@ -47,14 +47,13 @@ public class ActionTalk extends Action {
 			conversation = target.getConversation();
 		}
 
-		if (conversation != null) {
-			conversation.currentConversationPart = conversation.openingConversationPart;
-			Game.level.conversation = conversation;
-			Game.level.conversation.updateFlags();
-			ConversationResponseDisplay.updateStandardButtons();
+		if (conversation == null)
+			return;
 
-		}
-
+		conversation.currentConversationPart = conversation.openingConversationPart;
+		Game.level.conversation = conversation;
+		Game.level.conversation.updateFlags();
+		ConversationResponseDisplay.updateStandardButtons();
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();

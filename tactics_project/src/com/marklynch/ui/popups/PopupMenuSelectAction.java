@@ -45,7 +45,6 @@ public class PopupMenuSelectAction extends PopupMenu {
 							button.down = false;
 						}
 						highlightedButton.down = true;
-						System.out.println("actions.get(index).perform();");
 						Action action = actions.get(index);
 						Game.level.popupMenuObjects.clear();
 						Game.level.popupMenuActions.clear();

@@ -59,13 +59,13 @@ public class Node implements Comparable<Node> {
 		return (v > 0) ? 1 : (v < 0) ? -1 : 0; // sign function
 	}
 
-	public List getAllNeighbourNodesThatCanBeMovedTo(Actor actor, Node goalNode) {
+	public List getAllNeighbourNodesThatCanBeMovedTo(Actor actor, Square goalSquare) {
 		Game.getNeighborsThatCanBeMovedTo++;
 		Game.getAllNeighbourSquaresThatCanBeMovedTo++;
 		ArrayList<Node> squares = new ArrayList<Node>();
 
 		for (Node node : neighbors) {
-			if (node.includableInPath(actor, goalNode)) {
+			if (node.includableInPath(actor, goalSquare)) {
 				squares.add(node);
 			}
 		}
@@ -80,8 +80,8 @@ public class Node implements Comparable<Node> {
 		return null;
 	}
 
-	public boolean includableInPath(Actor actor, Node goalNode) {
-		return this.square.includableInPath(actor, goalNode.square);
+	public boolean includableInPath(Actor actor, Square goalSquare) {
+		return this.square.includableInPath(actor, goalSquare);
 	}
 
 	// public void calculateDistanceToNeighbours() {

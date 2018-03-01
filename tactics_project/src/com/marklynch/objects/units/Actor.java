@@ -361,7 +361,7 @@ public class Actor extends GameObject {
 		// for (Node node1 : this.squareGameObjectIsOn.nodes) {
 		for (Node node2 : target.nodes) {
 			LinkedList<Node> tempAStarNodesPath = new AStarSearchHighLevel().findPath(this, lastNodeReached, node2,
-					maxPathSize);
+					maxPathSize, target);
 			// if (this == Game.level.player) {
 			// System.out.println("tempAStarNodesPath = " + tempAStarNodesPath);
 			// for (Node node : tempAStarNodesPath) {

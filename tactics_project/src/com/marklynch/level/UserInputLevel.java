@@ -457,8 +457,6 @@ public class UserInputLevel {
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
 
-		System.out.println("interactWith key = " + key);
-
 		if (Game.level.activeActor != Game.level.player)
 			return;
 
@@ -546,8 +544,6 @@ public class UserInputLevel {
 	}
 
 	public static void waitPressed(boolean allowMenuControl, boolean held) {
-
-		System.out.println("waitPressed");
 
 		if (Player.playerTargetSquare != null) {
 			Game.level.pausePlayer();

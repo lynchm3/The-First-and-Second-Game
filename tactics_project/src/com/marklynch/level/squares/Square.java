@@ -1090,8 +1090,10 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public boolean includableInPath(Actor actor, Square goalNode) {
 		Game.includableInPath++;
-		// if (actor == Game.level.player && !this.seenByPlayer)
-		// return true;
+
+		// if
+		if (actor == Game.level.player && !this.visibleToPlayer)
+			return true;
 
 		if (this == goalNode)
 			return true;
