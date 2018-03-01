@@ -88,7 +88,7 @@ public class AIRoutineForThief extends AIRoutine {
 		if (theftCooldown <= 0) {
 
 			// 1. loot corpses, even if owned
-			GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(18f, false, false, true, true,
+			GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, false, false, true, true,
 					false, true, 0, false, Corpse.class, Storage.class);
 			if (container != null) {
 				if (container.owner != null && container.owner != actor)
