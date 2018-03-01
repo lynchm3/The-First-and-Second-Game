@@ -52,6 +52,7 @@ import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.RockGolem;
+import com.marklynch.objects.units.Thief;
 import com.marklynch.objects.units.TinyNeutralWildAnimal;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.BodyArmor;
@@ -110,7 +111,7 @@ public class Templates {
 	public static Human HUNTER;
 	public static Human MINER;
 
-	public static Human THIEF;
+	public static Thief THIEF;
 
 	public static Human FARMER;
 

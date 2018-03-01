@@ -19,6 +19,7 @@ import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.NonHuman;
+import com.marklynch.objects.units.Thief;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
@@ -1580,6 +1581,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// Special tules for trader
 		if (parent instanceof Trader) {
 			for (GameObject gameObject : gameObjects) {
+
+				if (gameObject.owner != null && gameObject.owner != this.parent)
+					continue;
+
+				if (gameObject instanceof Gold)
+					continue;
+
 				gameObject.toSell = true;
 				itemsToSellCount++;
 			}
@@ -1598,6 +1606,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		for (GameObject gameObject : gameObjects) {
 
 			gameObject.toSell = false;
+
+			if (gameObject.owner != null && gameObject.owner != this.parent && !(gameObject.owner instanceof Thief))
+				continue;
 
 			if (gameObject instanceof Gold)
 				continue;
