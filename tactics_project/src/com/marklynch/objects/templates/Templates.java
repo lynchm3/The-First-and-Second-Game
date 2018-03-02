@@ -154,6 +154,8 @@ public class Templates {
 
 	public static Knife HUNTING_KNIFE;
 
+	public static Weapon SWORD;
+
 	public static Weapon HOE;
 
 	public static Weapon SICKLE;

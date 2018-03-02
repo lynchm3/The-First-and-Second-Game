@@ -39,6 +39,24 @@ public class TemplatesWeapons {
 		Templates.KATANA.anchorY = 85;
 		Templates.KATANA.templateId = GameObject.generateNewTemplateId();
 
+		Templates.SWORD = new Weapon();
+		Templates.SWORD.name = "Sword";
+		Templates.SWORD.slashDamage = 9;
+		Templates.SWORD.pierceDamage = 3;
+		Templates.SWORD.minRange = 1;
+		Templates.SWORD.maxRange = 1;
+		Templates.SWORD.imageTexturePath = "sword.png";
+		Templates.SWORD.imageTexture = getGlobalImage(Templates.SWORD.imageTexturePath, true);
+		Templates.SWORD.totalHealth = Templates.SWORD.remainingHealth = 29;
+		Templates.SWORD.widthRatio = 0.75f;
+		Templates.SWORD.soundWhenHitting = 5f;
+		Templates.SWORD.stackable = true;
+		Templates.SWORD.weight = 25;
+		Templates.SWORD.value = 56;
+		Templates.SWORD.anchorX = 24;
+		Templates.SWORD.anchorY = 101;
+		Templates.SWORD.templateId = GameObject.generateNewTemplateId();
+
 		Templates.CLEAVER = new Weapon();
 		Templates.CLEAVER.name = "Cleaver";
 		Templates.CLEAVER.slashDamage = 7;
