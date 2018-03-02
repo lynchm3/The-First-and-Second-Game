@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.actions.ActionClose;
@@ -9,6 +10,7 @@ import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Utils;
 
 public abstract class Openable extends GameObject implements SwitchListener {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
@@ -39,6 +41,10 @@ public abstract class Openable extends GameObject implements SwitchListener {
 
 	public void lock() {
 		this.name = baseName + " (locked)";
+		if (this.squareGameObjectIsOn == Game.level.squares[105][12]) {
+			System.out.println("this.name c = " + this.name);
+			Utils.printStackTrace();
+		}
 		locked = true;
 	}
 
@@ -56,9 +62,26 @@ public abstract class Openable extends GameObject implements SwitchListener {
 		super.setAttributesForCopy(openable, square, owner);
 		openable.keys = keys;
 		openable.locked = locked;
-		this.name = openable.baseName = baseName;
-		if (locked)
-			this.name = baseName + " (locked)";
+
+		if (square == Game.level.squares[105][12]) {
+			System.out.println("locked = " + locked);
+			System.out.println("this.name = " + this.name);
+			System.out.println("openable.baseName = " + openable.baseName);
+			System.out.println("baseName = " + baseName);
+		}
+
+		openable.baseName = this.baseName;
+		openable.name = openable.baseName;
+
+		if (square == Game.level.squares[105][12]) {
+			System.out.println("openable.name a = " + this.name);
+		}
+		if (openable.locked)
+			openable.name = openable.baseName + " (locked)";
+
+		if (square == Game.level.squares[105][12]) {
+			System.out.println("openable.name b = " + this.name);
+		}
 
 	}
 
