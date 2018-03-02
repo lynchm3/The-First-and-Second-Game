@@ -29,6 +29,7 @@ public abstract class Action {
 	public static Texture textureWalk;
 	public static Texture textureWrite;
 	public static Texture textureX;
+	public static Texture textureSleep;
 
 	public String disabledReason = "";
 
@@ -130,7 +131,7 @@ public abstract class Action {
 		textureEllipse = getGlobalImage("action_select_object.png", false);
 		getGlobalImage("action_search.png", false);
 		getGlobalImage("action_slash.png", false);
-		getGlobalImage("action_sleep.png", false);// untested
+		textureSleep = getGlobalImage("action_sleep.png", false);// untested
 		getGlobalImage("action_smash.png", false);
 		getGlobalImage("action_spot.png", false);// untested
 		getGlobalImage("action_squash.png", false);

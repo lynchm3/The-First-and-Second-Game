@@ -275,6 +275,7 @@ public abstract class AIRoutine {
 		if (actor.sleeping) {
 			this.actor.followersShouldFollow = false;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
+			Game.level.activeActor.thoughtBubbleImageTextureObject = Action.textureSleep;
 			return true;
 		}
 

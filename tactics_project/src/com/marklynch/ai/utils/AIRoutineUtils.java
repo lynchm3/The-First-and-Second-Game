@@ -14,6 +14,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Vein;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionEatItems;
 import com.marklynch.objects.actions.ActionMine;
@@ -855,10 +856,14 @@ public class AIRoutineUtils {
 			if (Game.level.activeActor.squareGameObjectIsOn == Game.level.activeActor.bed.squareGameObjectIsOn) {
 				Game.level.activeActor.sleeping = true;
 				Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
+				Game.level.activeActor.thoughtBubbleImageTextureObject = Action.textureSleep;
 			} else {
 				// boolean s = AIRoutineUtils
 				// .moveTowardsSquareToBeAdjacent(Game.level.activeActor.bed.squareGameObjectIsOn);
 				boolean s = AIRoutineUtils.moveTowards(Game.level.activeActor.bed);
+
+				Game.level.activeActor.thoughtBubbleImageTextureObject = Game.level.activeActor.bed.imageTexture;
+				Game.level.activeActor.thoughtBubbleImageTextureAction = Action.textureSleep;
 			}
 		} else {
 		}
