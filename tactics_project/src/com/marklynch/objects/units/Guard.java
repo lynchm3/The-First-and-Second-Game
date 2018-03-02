@@ -12,8 +12,8 @@ public class Guard extends Human {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	Shift shift;
-	Square[] patrolSquares;
+	public Shift shift;
+	public Square[] patrolSquares;
 
 	public Guard() {
 		super();
@@ -37,12 +37,12 @@ public class Guard extends Human {
 	}
 
 	public Guard makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves, Area area, Square[] patrolSquares, Shift shift) {
+			GameObject[] mightHaves, Area area, Shift shift, Square... patrolSquares) {
 		Guard actor = new Guard();
 		setInstances(actor);
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
-		this.shift = shift;
-		this.patrolSquares = patrolSquares;
+		actor.shift = shift;
+		actor.patrolSquares = patrolSquares;
 		return actor;
 	}
 
@@ -52,17 +52,17 @@ public class Guard extends Human {
 
 	public static class Shift {
 
-		final int workStart;
-		final int workEnd;
-		final int sleepStart;
-		final int sleeptEnd;
+		public final int workStart;
+		public final int workEnd;
+		public final int sleepStart;
+		public final int sleepEnd;
 
 		public Shift(int workStart, int workEnd, int sleepStart, int sleeptEnd) {
 			super();
 			this.workStart = workStart;
 			this.workEnd = workEnd;
 			this.sleepStart = sleepStart;
-			this.sleeptEnd = sleeptEnd;
+			this.sleepEnd = sleeptEnd;
 		}
 	}
 

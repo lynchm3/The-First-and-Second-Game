@@ -2,6 +2,7 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.routines.AIRoutineForMiner;
 import com.marklynch.ai.routines.AIRoutineForThief;
@@ -9,6 +10,7 @@ import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.quest.caveoftheblind.AIRoutineForMort;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.Thief;
@@ -68,6 +70,28 @@ public class TemplatesHumans {
 		Templates.HUNTER.aiRoutine = new AIRoutineForHunter(Templates.HUNTER);
 		Templates.HUNTER.templateId = GameObject.generateNewTemplateId();
 		Templates.HUNTER.flipYAxisInMirror = false;
+
+		Templates.GUARD = new Guard();
+		Templates.GUARD.title = "Guard";
+		Templates.GUARD.level = 10;
+		Templates.GUARD.bluntDamage = 5;
+		Templates.GUARD.totalHealth = Templates.GUARD.remainingHealth = 10;
+		Templates.GUARD.strength = 20;
+		Templates.GUARD.dexterity = 11;
+		Templates.GUARD.intelligence = 13;
+		Templates.GUARD.endurance = 21;
+		Templates.GUARD.imageTexturePath = "guard.png";
+		Templates.GUARD.imageTexture = getGlobalImage(Templates.GUARD.imageTexturePath, true);
+		Templates.GUARD.heightRatio = 1.5f;
+		Templates.GUARD.drawOffsetRatioY = -0.5f;
+		Templates.GUARD.weight = 100f;
+		Templates.GUARD.handAnchorX = 103f;
+		Templates.GUARD.handAnchorY = 101f;
+		Templates.GUARD.canOpenDoors = true;
+		Templates.GUARD.canEquipWeapons = true;
+		Templates.GUARD.aiRoutine = new AIRoutineForGuard(Templates.GUARD);
+		Templates.GUARD.templateId = GameObject.generateNewTemplateId();
+		Templates.GUARD.flipYAxisInMirror = false;
 
 		// General People
 		Templates.MINER = new Human();

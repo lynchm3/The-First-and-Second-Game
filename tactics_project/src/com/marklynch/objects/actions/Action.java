@@ -25,6 +25,7 @@ public abstract class Action {
 	public static Texture textureLeft;
 	public static Texture textureMine;
 	public static Texture textureMusic;
+	public static Texture texturePatrol;
 	public static Texture textureRight;
 	public static Texture textureWalk;
 	public static Texture textureWrite;
@@ -118,6 +119,7 @@ public abstract class Action {
 		textureMusic = getGlobalImage("music.png", false);
 		getGlobalImage("action_open.png", false);
 		getGlobalImage("action_pet.png", false);
+		texturePatrol = getGlobalImage("action_patrol.png", false);
 		getGlobalImage("action_pierce.png", false);
 		getGlobalImage("action_pickpocket_all.png", false);// untested
 		getGlobalImage("action_pick_up.png", false);

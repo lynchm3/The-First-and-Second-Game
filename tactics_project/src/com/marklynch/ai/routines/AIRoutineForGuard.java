@@ -2,19 +2,19 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Gold;
-import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
+import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
-import com.marklynch.objects.units.TinyNeutralWildAnimal;
 
 public class AIRoutineForGuard extends AIRoutine {
 
 	GameObject target;
+	Guard guard;
+	int patrolIndex = 0;
 	// Square squareToMoveTo;
 
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
@@ -35,18 +35,37 @@ public class AIRoutineForGuard extends AIRoutine {
 		super(actor);
 		aiType = AI_TYPE.FIGHTER;
 		requiredEquipmentTemplateIds.add(Templates.SWORD.templateId);
+		guard = (Guard) actor;
 	}
 
 	@Override
 	public void update() {
 
-		aiRoutineStart();
+		// 18:03 patrolling
+		// 00:04 nothing
 
-		if (Game.level.hour > 20 || Game.level.hour < 6) {
+		aiRoutineStart();
+		if (guard.shift.sleepStart > guard.shift.sleepEnd
+				&& (Game.level.hour >= guard.shift.sleepStart || Game.level.hour <= guard.shift.sleepEnd)) {
 			state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+
+		} else if (guard.shift.sleepStart < guard.shift.sleepEnd
+				&& (Game.level.hour >= guard.shift.sleepStart && Game.level.hour <= guard.shift.sleepEnd)) {
+			state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+		} else
+
+		if (guard.shift.workStart > guard.shift.workEnd
+				&& (Game.level.hour >= guard.shift.workStart || Game.level.hour <= guard.shift.workEnd)) {
+			state = STATE.PATROL;
+
+		} else if (guard.shift.workStart < guard.shift.workEnd
+				&& (Game.level.hour >= guard.shift.workStart && Game.level.hour <= guard.shift.workEnd)) {
+			state = STATE.PATROL;
 		} else {
-			state = STATE.HUNTING;
+			state = STATE.FREE_TIME;
 		}
+
+		System.out.println("Game.level.hour = " + Game.level.hour + "State = " + state);
 
 		if (runSleepRoutine())
 			return;
@@ -156,36 +175,17 @@ public class AIRoutineForGuard extends AIRoutine {
 		}
 
 		// Go about your business
-		if (state == STATE.HUNTING)
-
-		{
-
-			actor.thoughtBubbleImageTextureObject = Templates.HUNTING_BOW.imageTexture;
-			this.actor.followersShouldFollow = true;
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, true, 0,
-					false, AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
-					TinyNeutralWildAnimal.class, MeatChunk.class, Gold.class);
-			if (target == null) {
-				AIRoutineUtils.moveTowards(actor.area.centreSuqare);
-				return;
-			} else {
-				if (target == null || target.squareGameObjectIsOn == null) {
-					target = null;
-				} else {
-					this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-					if (target.remainingHealth <= 0) {
-					} else {
-						boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
-						if (!attackedAnimal) {
-							AIRoutineUtils.moveTowards(target);
-							return;
-						}
-					}
+		if (state == STATE.PATROL) {
+			actor.thoughtBubbleImageTextureObject = Action.texturePatrol;
+			Square targetSquare = guard.patrolSquares[patrolIndex];
+			if (guard.squareGameObjectIsOn == targetSquare) {
+				patrolIndex++;
+				if (patrolIndex >= guard.patrolSquares.length) {
+					patrolIndex = 0;
 				}
+				targetSquare = guard.patrolSquares[patrolIndex];
 			}
-
+			AIRoutineUtils.moveTowards(targetSquare);
 		}
 
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {

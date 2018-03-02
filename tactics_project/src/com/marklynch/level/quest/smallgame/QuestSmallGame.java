@@ -31,6 +31,7 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Thief;
 import com.marklynch.utils.TextUtils;
@@ -280,6 +281,10 @@ public class QuestSmallGame extends Quest {
 				Game.level.factions.townsPeople, bront6sBed, 43, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest);
+
+		Templates.GUARD.makeCopy("Guard Paul", Game.level.squares[29][8], Game.level.factions.townsPeople, null, 34,
+				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
+				Guard.dayShift, Game.level.squares[29][8]);
 
 		Templates.THIEF.makeCopy("Thief Ed",
 				Game.level.squares[12][13], Game.level.factions.outsiders, null, 64, new GameObject[] {

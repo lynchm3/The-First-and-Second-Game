@@ -47,6 +47,7 @@ import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
+import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Pig;
@@ -109,6 +110,7 @@ public class Templates {
 
 	// General People
 	public static Human HUNTER;
+	public static Guard GUARD;
 	public static Human MINER;
 
 	public static Thief THIEF;
