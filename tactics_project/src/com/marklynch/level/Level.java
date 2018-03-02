@@ -1919,7 +1919,6 @@ public class Level {
 			player.getAttackers().remove(actor);
 		}
 
-		System.out.println("calling player.update()");
 		player.update(0);
 		for (GameObject inanimateObject : inanimateObjectsOnGround) {
 			inanimateObject.update(0);

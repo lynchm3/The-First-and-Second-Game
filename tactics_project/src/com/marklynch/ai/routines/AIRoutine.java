@@ -193,23 +193,15 @@ public abstract class AIRoutine {
 
 		// Check for sounds to investigate
 		for (Sound sound : this.actor.squareGameObjectIsOn.sounds) {
+
+			// If asleep then sound has to be nearer for detection.
+			if (actor.sleeping && actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness - 2)
+				continue;
+			else
+				actor.sleeping = false;
+
 			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)
 					&& !this.actor.canSeeGameObject(sound.sourcePerformer)) {
-
-				if (actor.name.contains("Lead Hunter Brent")) {
-					System.out.println("actor.sleeping = " + actor.sleeping);
-					System.out.println("actor.straightLineDistanceTo(sound.sourceSquare) = "
-							+ actor.straightLineDistanceTo(sound.sourceSquare));
-					System.out.println("(sound.loudness - 2) = " + (sound.loudness - 2));
-					System.out.println(
-							"(actor.sleeping && actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness - 2) = "
-									+ (actor.sleeping
-											&& actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness - 2));
-				}
-
-				// If asleep then sound has to be nearer for detection.
-				if (actor.sleeping && actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness - 2)
-					continue;
 
 				// Check if sound is in passed in list of classes
 				boolean soundInTypeList = false;
