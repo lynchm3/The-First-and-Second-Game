@@ -1896,6 +1896,7 @@ public class Level {
 	}
 
 	public void startPlayerTurn() {
+		System.out.println("----------------START PLAYER TURN-----------------");
 		this.turn++;
 		loggedThisTurn = false;
 
@@ -1918,7 +1919,8 @@ public class Level {
 			player.getAttackers().remove(actor);
 		}
 
-		player.clearActions();
+		System.out.println("calling player.update()");
+		player.update(0);
 		for (GameObject inanimateObject : inanimateObjectsOnGround) {
 			inanimateObject.update(0);
 		}
@@ -1928,7 +1930,7 @@ public class Level {
 
 	public void endPlayerTurn() {
 
-		System.out.println("----------------END TURN-----------------");
+		System.out.println("----------------END PLAYER TURN-----------------");
 
 		changeTime(20);
 		// secondString;

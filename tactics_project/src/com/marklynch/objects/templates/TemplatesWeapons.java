@@ -26,7 +26,7 @@ public class TemplatesWeapons {
 		Templates.KATANA.drawOffsetRatioX = 0f;
 		Templates.KATANA.drawOffsetRatioY = 0f;
 		Templates.KATANA.soundWhenHit = 1f;
-		Templates.KATANA.soundWhenHitting = 1f;
+		Templates.KATANA.soundWhenHitting = 5f;
 		Templates.KATANA.soundDampening = 1f;
 		Templates.KATANA.stackable = false;
 		Templates.KATANA.waterResistance = 0f;
@@ -74,7 +74,7 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.drawOffsetRatioX = 0f;
 		Templates.HUNTING_BOW.drawOffsetRatioY = 0f;
 		Templates.HUNTING_BOW.soundWhenHit = 1f;
-		Templates.HUNTING_BOW.soundWhenHitting = 1f;
+		Templates.HUNTING_BOW.soundWhenHitting = 5f;
 		Templates.HUNTING_BOW.soundDampening = 1f;
 		Templates.HUNTING_BOW.stackable = false;
 		Templates.HUNTING_BOW.fireResistance = -70f;

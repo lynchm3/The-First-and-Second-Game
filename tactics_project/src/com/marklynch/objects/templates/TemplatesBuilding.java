@@ -19,9 +19,9 @@ public class TemplatesBuilding {
 		Templates.WALL.heightRatio = 1f;
 		Templates.WALL.drawOffsetRatioX = 0f;
 		Templates.WALL.drawOffsetRatioY = 0f;
-		Templates.WALL.soundWhenHit = 1f;
+		Templates.WALL.soundWhenHit = 10f;
 		Templates.WALL.soundWhenHitting = 1f;
-		Templates.WALL.soundDampening = 1f;
+		Templates.WALL.soundDampening = 10f;
 		Templates.WALL.stackable = false;
 		Templates.WALL.weight = 100f;
 		Templates.WALL.value = 24;

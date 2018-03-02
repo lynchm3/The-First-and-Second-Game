@@ -56,6 +56,7 @@ import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
+import com.marklynch.utils.Utils;
 
 public class Actor extends GameObject {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
@@ -196,7 +197,8 @@ public class Actor extends GameObject {
 
 	public void init(int gold, GameObject[] mustHaves, GameObject[] mightHaves) {
 
-		Game.level.actors.add(this);
+		if (!(this instanceof Player))
+			Game.level.actors.add(this);
 
 		if (bed != null)
 			this.bedGUID = bed.guid;

@@ -2,7 +2,6 @@ package com.marklynch.level.constructs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
@@ -32,6 +31,13 @@ public class Sound {
 		// destinationSquares = new ArrayList<Square>();
 		createDestinationSounds();
 
+	}
+
+	@Override
+	public String toString() {
+		return "Sound [sourcePerformer=" + sourcePerformer + ", sourceObject=" + sourceObject + ", sourceSquare="
+				+ sourceSquare + ", destinationSquares=" + destinationSquares + ", loudness=" + loudness + ", legal="
+				+ legal + ", actionType=" + actionType + "]";
 	}
 
 	public void play() {

@@ -184,12 +184,28 @@ public abstract class AIRoutine {
 
 	public void createSearchLocationsBasedOnSounds(Class... classes) {
 
+		if (actor.name.contains("Lead Hunter Brent")) {
+			System.out.println("createSearchLocationsBasedOnSounds()");
+
+		}
+
 		ArrayList<Class> classesArrayList = new ArrayList<Class>(Arrays.asList(classes));
 
 		// Check for sounds to investigate
 		for (Sound sound : this.actor.squareGameObjectIsOn.sounds) {
 			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)
 					&& !this.actor.canSeeGameObject(sound.sourcePerformer)) {
+
+				if (actor.name.contains("Lead Hunter Brent")) {
+					System.out.println("actor.sleeping = " + actor.sleeping);
+					System.out.println("actor.straightLineDistanceTo(sound.sourceSquare) = "
+							+ actor.straightLineDistanceTo(sound.sourceSquare));
+					System.out.println("(sound.loudness - 2) = " + (sound.loudness - 2));
+					System.out.println(
+							"(actor.sleeping && actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness - 2) = "
+									+ (actor.sleeping
+											&& actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness - 2));
+				}
 
 				// If asleep then sound has to be nearer for detection.
 				if (actor.sleeping && actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness - 2)
@@ -211,18 +227,32 @@ public abstract class AIRoutine {
 					if (sound.sourceObject != null && sound.sourceObject.remainingHealth > 0) {
 						this.actor.addAttackerForThisAndGroupMembers(sound.sourceObject);
 					}
+
+					if (actor.name.contains("Lead Hunter Brent")) {
+						System.out.println("actor.sleeping to false @ a");
+
+					}
 					actor.sleeping = false;
 				} else if (!sound.legal) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
+					if (actor.name.contains("Lead Hunter Brent")) {
+						System.out.println("actor.sleeping to false @ b");
+					}
 					actor.sleeping = false;
 				} else if (soundInTypeList == true) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
+					if (actor.name.contains("Lead Hunter Brent")) {
+						System.out.println("actor.sleeping to false @ c");
+					}
 					actor.sleeping = false;
 				} else if (sound.loudness >= 5) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
+					if (actor.name.contains("Lead Hunter Brent")) {
+						System.out.println("actor.sleeping to false @ d");
+					}
 					actor.sleeping = false;
 				}
 
@@ -260,10 +290,10 @@ public abstract class AIRoutine {
 	}
 
 	public boolean runSleepRoutine() {
+
 		if (state != STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
 			actor.sleeping = false;
 			return false;
-
 		}
 
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()
