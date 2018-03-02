@@ -286,6 +286,10 @@ public class QuestSmallGame extends Quest {
 				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
 				Guard.dayShift, Game.level.squares[29][8]);
 
+		Templates.GUARD.makeCopy("Guard John", Game.level.squares[29][12], Game.level.factions.townsPeople, null, 37,
+				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
+				Guard.dayShift, Game.level.squares[4][21], Game.level.squares[32][21]);
+
 		Templates.THIEF.makeCopy("Thief Ed",
 				Game.level.squares[12][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
