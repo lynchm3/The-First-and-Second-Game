@@ -29,7 +29,12 @@ public class AreaTownForest {
 			int randomX = (int) (103 + (113 * Math.random()));
 			int randomY = (int) (3 + (95 * Math.random()));
 
-			if (randomX > 152 && randomX < 167 && randomY > 47 && randomY < 63)
+			// rangers lodge
+			if (randomX >= 129 && randomX <= 133 && randomY >= 33 && randomY <= 37)
+				continue;
+
+			// thieves hut
+			if (randomX >= 113 && randomX <= 117 && randomY >= 52 && randomY <= 56)
 				continue;
 
 			if (Math.random() * maxDiffFromCenterX < Math.abs(randomX - centerX))
@@ -54,6 +59,7 @@ public class AreaTownForest {
 
 		}
 
+		// Cluster of trees in center
 		for (int i = 154; i < 166; i++) {
 			if (Level.squares[i][47].inventory.getGameObjectOfClass(Tree.class) == null) {
 				Templates.BIG_TREE.makeCopy(Level.squares[i][47], null);

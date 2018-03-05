@@ -289,6 +289,7 @@ public class QuestSmallGame extends Quest {
 				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
 				Guard.dayShift, Game.level.squares[4][21], Game.level.squares[32][21]);
 
+		// Thieves and their hut
 		Templates.THIEF.makeCopy("Thief Ed", Game.level.squares[12][13], Game.level.factions.outsiders,
 				Templates.BED.makeCopy(Game.level.squares[116][53], null), 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
@@ -303,6 +304,22 @@ public class QuestSmallGame extends Quest {
 				Templates.BED.makeCopy(Game.level.squares[114][55], null), 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town);
+		ArrayList<Wall> extraWallsThievesHut = new ArrayList<Wall>();
+		ArrayList<StructureFeature> featuresThievesHut = new ArrayList<StructureFeature>();
+		ArrayList<StructurePath> pathsThievesHut = new ArrayList<StructurePath>();
+		ArrayList<StructureSection> sectionsThievesHut = new ArrayList<StructureSection>();
+		ArrayList<StructureRoom> roomsThievesHut = new ArrayList<StructureRoom>();
+		ArrayList<Square> squaresToRemoveThievesHut = new ArrayList<Square>();
+		featuresThievesHut.add(new StructureFeature(
+				Templates.DOOR.makeCopy("Door", Game.level.squares[113][53], false, false, false, null),
+				Nodes.forestNorth));
+		roomsThievesHut.add(new StructureRoom("Hut", 114, 53, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.forestNorth }, new RoomPart(114, 53, 116, 55)));
+		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false));
+		Structure thievesHut = new Structure("Hut", sectionsThievesHut, roomsThievesHut, pathsThievesHut,
+				featuresThievesHut, new ArrayList<Square>(), "map_cave.png", 113, 52, 117, 56, true, null,
+				squaresToRemoveThievesHut, extraWallsThievesHut, Templates.WALL, Square.STONE_TEXTURE, 5);
+		Game.level.structures.add(thievesHut);
 
 		Templates.HATCHET.makeCopy(Game.level.squares[10][17], t3);
 
@@ -330,21 +347,22 @@ public class QuestSmallGame extends Quest {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest);
 		rangerBill.quest = this;
-		ArrayList<Wall> extraWalls = new ArrayList<Wall>();
-		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
-		ArrayList<StructurePath> paths = new ArrayList<StructurePath>();
-		ArrayList<StructureSection> sections = new ArrayList<StructureSection>();
-		ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>();
-		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
-		features.add(new StructureFeature(
+
+		ArrayList<Wall> extraWallsRangersHut = new ArrayList<Wall>();
+		ArrayList<StructureFeature> featuresRangersHut = new ArrayList<StructureFeature>();
+		ArrayList<StructurePath> pathsRangersHut = new ArrayList<StructurePath>();
+		ArrayList<StructureSection> sectionsRangersHut = new ArrayList<StructureSection>();
+		ArrayList<StructureRoom> roomsRangersHut = new ArrayList<StructureRoom>();
+		ArrayList<Square> squaresToRemoveRangersHut = new ArrayList<Square>();
+		featuresRangersHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[133][34], false, false, false, rangerBill),
 				Nodes.forestNorth));
-		rooms.add(new StructureRoom("Ranger's Hut", 130, 34, false, new ArrayList<Actor>(),
+		roomsRangersHut.add(new StructureRoom("Ranger's Hut", 130, 34, false, new ArrayList<Actor>(),
 				new Node[] { Nodes.forestNorth }, new RoomPart(130, 34, 132, 36)));
-		sections.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false));
-		Structure rangerHut = new Structure("Ranger's Hut", sections, rooms, paths, features, new ArrayList<Square>(),
-				"map_cave.png", 129, 33, 133, 37, true, null, squaresToRemove, extraWalls, Templates.WALL,
-				Square.STONE_TEXTURE, 5);
+		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false));
+		Structure rangerHut = new Structure("Ranger's Hut", sectionsRangersHut, roomsRangersHut, pathsRangersHut,
+				featuresRangersHut, new ArrayList<Square>(), "map_cave.png", 129, 33, 133, 37, true, null,
+				squaresToRemoveRangersHut, extraWallsRangersHut, Templates.WALL, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(rangerHut);
 
 		// wolf
