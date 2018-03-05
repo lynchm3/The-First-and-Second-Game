@@ -281,13 +281,35 @@ public class QuestSmallGame extends Quest {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest);
 
-		Templates.GUARD.makeCopy("Guard Paul", Game.level.squares[29][8], Game.level.factions.townsPeople, null, 34,
+		// Guards and their barracks
+		// Structure 74,52 -> 85, 61
+		Templates.GUARD.makeCopy("Guard Paul", Game.level.squares[29][8], Game.level.factions.townsPeople,
+				Templates.BED.makeCopy(Game.level.squares[79][56], null), 34,
 				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
 				Guard.dayShift, Game.level.squares[29][8]);
-
-		Templates.GUARD.makeCopy("Guard John", Game.level.squares[29][12], Game.level.factions.townsPeople, null, 37,
+		Templates.GUARD.makeCopy("Guard John", Game.level.squares[29][12], Game.level.factions.townsPeople,
+				Templates.BED.makeCopy(Game.level.squares[81][56], null), 37,
 				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
 				Guard.dayShift, Game.level.squares[4][21], Game.level.squares[32][21]);
+		ArrayList<Wall> extraWallsBarracks = new ArrayList<Wall>();
+		ArrayList<StructureFeature> featuresBarracks = new ArrayList<StructureFeature>();
+		ArrayList<StructurePath> pathsBarracks = new ArrayList<StructurePath>();
+		ArrayList<StructureSection> sectionsBarracks = new ArrayList<StructureSection>();
+		ArrayList<StructureRoom> roomsBarracks = new ArrayList<StructureRoom>();
+		ArrayList<Square> squaresToRemoveBarracks = new ArrayList<Square>();
+		featuresBarracks.add(new StructureFeature(
+				Templates.DOOR.makeCopy("Door", Game.level.squares[80][52], false, false, false, null),
+				Nodes.townCenter));
+		featuresBarracks.add(new StructureFeature(
+				Templates.DOOR.makeCopy("Door", Game.level.squares[80][61], false, false, false, null),
+				Nodes.townCenter));
+		roomsBarracks.add(new StructureRoom("Barracks", 75, 53, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.townCenter }, new RoomPart(75, 53, 84, 60)));
+		sectionsBarracks.add(new StructureSection("Barracks", 74, 52, 85, 61, false));
+		Structure barracks = new Structure("Barracks", sectionsBarracks, roomsBarracks, pathsBarracks, featuresBarracks,
+				new ArrayList<Square>(), null, 74, 52, 85, 61, true, null, squaresToRemoveBarracks, extraWallsBarracks,
+				Templates.WALL, Square.STONE_TEXTURE, 5);
+		Game.level.structures.add(barracks);
 
 		// Thieves and their hut
 		Templates.THIEF.makeCopy("Thief Ed", Game.level.squares[12][13], Game.level.factions.outsiders,
@@ -317,7 +339,7 @@ public class QuestSmallGame extends Quest {
 				new Node[] { Nodes.forestNorth }, new RoomPart(114, 53, 116, 55)));
 		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false));
 		Structure thievesHut = new Structure("Hut", sectionsThievesHut, roomsThievesHut, pathsThievesHut,
-				featuresThievesHut, new ArrayList<Square>(), "map_cave.png", 113, 52, 117, 56, true, null,
+				featuresThievesHut, new ArrayList<Square>(), null, 113, 52, 117, 56, true, null,
 				squaresToRemoveThievesHut, extraWallsThievesHut, Templates.WALL, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(thievesHut);
 
@@ -361,7 +383,7 @@ public class QuestSmallGame extends Quest {
 				new Node[] { Nodes.forestNorth }, new RoomPart(130, 34, 132, 36)));
 		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false));
 		Structure rangerHut = new Structure("Ranger's Hut", sectionsRangersHut, roomsRangersHut, pathsRangersHut,
-				featuresRangersHut, new ArrayList<Square>(), "map_cave.png", 129, 33, 133, 37, true, null,
+				featuresRangersHut, new ArrayList<Square>(), null, 129, 33, 133, 37, true, null,
 				squaresToRemoveRangersHut, extraWallsRangersHut, Templates.WALL, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(rangerHut);
 
