@@ -1328,8 +1328,8 @@ public abstract class AIRoutine {
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
 				false, false, false, false, 0, false, Trader.class);
 
-		if (target == null || target.sleeping || target.knownCriminals.contains(actor)
-				|| actor.knownCriminals.contains(target)) {
+		if (target == null || target.sleeping || target.aiRoutine.state == STATE.GO_TO_BED_AND_GO_TO_SLEEP
+				|| target.knownCriminals.contains(actor) || actor.knownCriminals.contains(target)) {
 			return false;
 		}
 
@@ -1367,8 +1367,8 @@ public abstract class AIRoutine {
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
 				false, false, false, false, 0, false, Trader.class);
 
-		if (target == null || target.sleeping || target.knownCriminals.contains(actor)
-				|| actor.knownCriminals.contains(target)) {
+		if (target == null || target.sleeping || target.aiRoutine.state == STATE.GO_TO_BED_AND_GO_TO_SLEEP
+				|| target.knownCriminals.contains(actor) || actor.knownCriminals.contains(target)) {
 			return false;
 		}
 
