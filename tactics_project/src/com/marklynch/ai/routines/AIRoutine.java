@@ -1535,6 +1535,9 @@ public abstract class AIRoutine {
 		actor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
 		if (actor.bed != null) {
 			if (actor.squareGameObjectIsOn == actor.bed.squareGameObjectIsOn) {
+
+				if (!actor.sleeping && Game.level.shouldLog(actor))
+					Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " went to sleep" }));
 				actor.sleeping = true;
 				actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 				actor.thoughtBubbleImageTextureObject = Action.textureSleep;
