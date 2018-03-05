@@ -1,5 +1,6 @@
 package com.marklynch.ai.routines;
 
+import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -38,6 +39,12 @@ public class AIRoutineForPig extends AIRoutine {
 	public void update() {
 		aiRoutineStart();
 
+		if (Game.level.hour > 20 || Game.level.hour < 6) {
+			state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+		} else {
+			state = STATE.HUNTING;
+		}
+
 		if (runSleepRoutine())
 			return;
 
@@ -72,19 +79,21 @@ public class AIRoutineForPig extends AIRoutine {
 		if (deferToQuest())
 			return;
 
-		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BEING_A_PIG;
-		// Move about a bit
-		if (targetSquare != null) {
-			boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-			if (pig.squareGameObjectIsOn == targetSquare || !moved)
-				targetSquare = null;
-			if (moved)
-				return;
-		} else {
-			if (Math.random() < 0.05) {
-				targetSquare = AIRoutineUtils.getRandomSquare(0, 5, false);
-				if (AIRoutineUtils.moveTowardsTargetSquare(targetSquare))
+		if (state == STATE.HUNTING) {
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_BEING_A_PIG;
+			// Move about a bit
+			if (targetSquare != null) {
+				boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+				if (pig.squareGameObjectIsOn == targetSquare || !moved)
+					targetSquare = null;
+				if (moved)
 					return;
+			} else {
+				if (Math.random() < 0.05) {
+					targetSquare = AIRoutineUtils.getRandomSquare(0, 5, false);
+					if (AIRoutineUtils.moveTowardsTargetSquare(targetSquare))
+						return;
+				}
 			}
 		}
 

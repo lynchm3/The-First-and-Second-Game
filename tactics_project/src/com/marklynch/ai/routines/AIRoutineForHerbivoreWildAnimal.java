@@ -1,5 +1,6 @@
 package com.marklynch.ai.routines;
 
+import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -38,8 +39,14 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 	@Override
 	public void update() {
 
-		// if (1 == 1)
-		// return;
+		if (Game.level.hour > 20 || Game.level.hour < 6) {
+			state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+		} else {
+			state = STATE.HUNTING;
+		}
+
+		if (runSleepRoutine())
+			return;
 
 		actor.followersShouldFollow = true;
 
@@ -95,19 +102,26 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		if (deferToQuest())
 			return;
 
-		// Move about a bit
-		if (targetSquare != null) {
-			boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-			if (friendlyWildAnimal.squareGameObjectIsOn == targetSquare || !moved)
-				targetSquare = null;
-			if (moved)
-				return;
-		} else {
-			if (Math.random() < 0.05) {
-				targetSquare = AIRoutineUtils.getRandomSquare(0, 5, false);
-				if (AIRoutineUtils.moveTowardsTargetSquare(targetSquare))
+		if (state == STATE.HUNTING) {
+			// Move about a bit
+			if (targetSquare != null) {
+				boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+				if (friendlyWildAnimal.squareGameObjectIsOn == targetSquare || !moved)
+					targetSquare = null;
+				if (moved)
 					return;
+			} else {
+				if (Math.random() < 0.05) {
+					targetSquare = AIRoutineUtils.getRandomSquare(0, 5, false);
+					if (AIRoutineUtils.moveTowardsTargetSquare(targetSquare))
+						return;
+				}
 			}
+		}
+
+		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+
+			goToBedAndSleep();
 		}
 	}
 

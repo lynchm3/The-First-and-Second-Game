@@ -1,5 +1,6 @@
 package com.marklynch.ai.routines;
 
+import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionMove;
@@ -19,6 +20,15 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 	public void update() {
 
 		aiRoutineStart();
+
+		if (Game.level.hour > 20 || Game.level.hour < 6) {
+			state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+		} else {
+			state = STATE.HUNTING;
+		}
+
+		if (runSleepRoutine())
+			return;
 
 		// Fight
 		if (runFightRoutine())
@@ -40,22 +50,29 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 		if (deferToQuest())
 			return;
 
-		// Go about ur business...
-		if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {
-			targetSquare = AIRoutineUtils.getRandomSquare(0, 10, true);
+		if (state == STATE.HUNTING) {
+			// Go about ur business...
+			if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {
+				targetSquare = AIRoutineUtils.getRandomSquare(0, 10, true);
+			}
+
+			if (targetSquare != null) {
+				Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(this.actor.getPathTo(targetSquare));
+				if (squareToMoveTo == null) {
+					targetSquare = null;
+					return;
+				} else {
+					new ActionMove(this.actor, squareToMoveTo, true).perform();
+					// AIRoutineUtils.moveTo(this.actor, squareToMoveTo);
+					if (this.actor.squareGameObjectIsOn == targetSquare)
+						targetSquare = null;
+				}
+			}
 		}
 
-		if (targetSquare != null) {
-			Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(this.actor.getPathTo(targetSquare));
-			if (squareToMoveTo == null) {
-				targetSquare = null;
-				return;
-			} else {
-				new ActionMove(this.actor, squareToMoveTo, true).perform();
-				// AIRoutineUtils.moveTo(this.actor, squareToMoveTo);
-				if (this.actor.squareGameObjectIsOn == targetSquare)
-					targetSquare = null;
-			}
+		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+
+			goToBedAndSleep();
 		}
 
 	}

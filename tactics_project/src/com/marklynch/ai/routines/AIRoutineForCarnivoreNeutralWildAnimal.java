@@ -123,20 +123,20 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 				}
 				return;
 			}
-		}
 
-		// Move about a bit
-		if (targetSquare != null) {
-			boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-			if (wildAnimal.squareGameObjectIsOn == targetSquare || moved == false)
-				targetSquare = null;
-			if (moved)
-				return;
-		} else {
-			if (Math.random() < 0.05) {
-				targetSquare = AIRoutineUtils.getRandomSquare(0, 5, false);
-				if (AIRoutineUtils.moveTowardsTargetSquare(targetSquare))
+			// Move about a bit
+			if (targetSquare != null) {
+				boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+				if (wildAnimal.squareGameObjectIsOn == targetSquare || moved == false)
+					targetSquare = null;
+				if (moved)
 					return;
+			} else {
+				if (Math.random() < 0.05) {
+					targetSquare = AIRoutineUtils.getRandomSquare(0, 5, false);
+					if (AIRoutineUtils.moveTowardsTargetSquare(targetSquare))
+						return;
+				}
 			}
 		}
 

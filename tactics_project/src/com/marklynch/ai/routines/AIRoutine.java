@@ -1530,19 +1530,27 @@ public abstract class AIRoutine {
 		if (actor.bed != null) {
 			if (actor.squareGameObjectIsOn == actor.bed.squareGameObjectIsOn) {
 
-				if (!actor.sleeping && Game.level.shouldLog(actor))
-					Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " went to sleep" }));
-				actor.sleeping = true;
-				ignoreList.clear();
-				actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
-				actor.thoughtBubbleImageTextureObject = Action.textureSleep;
+				sleep();
 			} else {
 				boolean s = AIRoutineUtils.moveTowards(actor.bed);
 				actor.thoughtBubbleImageTextureObject = actor.bed.imageTexture;
 				actor.thoughtBubbleImageTextureAction = Action.textureSleep;
 			}
 		} else {
+			sleep();
+
 		}
+
+	}
+
+	public void sleep() {
+		if (!actor.sleeping && Game.level.shouldLog(actor)) {
+			Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " went to sleep" }));
+			ignoreList.clear();
+		}
+		actor.sleeping = true;
+		actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
+		actor.thoughtBubbleImageTextureObject = Action.textureSleep;
 
 	}
 
