@@ -163,7 +163,7 @@ public class AIRoutineForMiner extends AIRoutine {
 
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
 
-			AIRoutineUtils.goToBedAndSleep();
+			goToBedAndSleep();
 		}
 	}
 

@@ -42,7 +42,6 @@ public abstract class Openable extends GameObject implements SwitchListener {
 	public void lock() {
 		this.name = baseName + " (locked)";
 		if (this.squareGameObjectIsOn == Game.level.squares[105][12]) {
-			System.out.println("this.name c = " + this.name);
 			Utils.printStackTrace();
 		}
 		locked = true;
@@ -63,25 +62,10 @@ public abstract class Openable extends GameObject implements SwitchListener {
 		openable.keys = keys;
 		openable.locked = locked;
 
-		if (square == Game.level.squares[105][12]) {
-			System.out.println("locked = " + locked);
-			System.out.println("this.name = " + this.name);
-			System.out.println("openable.baseName = " + openable.baseName);
-			System.out.println("baseName = " + baseName);
-		}
-
 		openable.baseName = this.baseName;
 		openable.name = openable.baseName;
-
-		if (square == Game.level.squares[105][12]) {
-			System.out.println("openable.name a = " + this.name);
-		}
 		if (openable.locked)
 			openable.name = openable.baseName + " (locked)";
-
-		if (square == Game.level.squares[105][12]) {
-			System.out.println("openable.name b = " + this.name);
-		}
 
 	}
 

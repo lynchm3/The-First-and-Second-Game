@@ -65,8 +65,6 @@ public class AIRoutineForGuard extends AIRoutine {
 			state = STATE.FREE_TIME;
 		}
 
-		System.out.println("Game.level.hour = " + Game.level.hour + "State = " + state);
-
 		if (runSleepRoutine())
 			return;
 
@@ -189,7 +187,7 @@ public class AIRoutineForGuard extends AIRoutine {
 		}
 
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
-			AIRoutineUtils.goToBedAndSleep();
+			goToBedAndSleep();
 		}
 	}
 

@@ -184,7 +184,11 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
-			AIRoutineUtils.goToBedAndSleep();
+
+			if (actor.name.contains("Lead Hunter Brent")) {
+				System.out.println("calling goToBedAndSleep();");
+			}
+			goToBedAndSleep();
 		}
 	}
 

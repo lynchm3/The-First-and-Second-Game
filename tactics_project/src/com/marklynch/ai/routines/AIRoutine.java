@@ -53,6 +53,7 @@ import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.MapUtil;
 
 public abstract class AIRoutine {
@@ -75,6 +76,7 @@ public abstract class AIRoutine {
 	public GameObject searchCooldownActor = null;
 	public int escapeCooldown = 0;
 	public GameObject escapeCooldownAttacker = null;
+	public int wokenUpCountdown = 0;
 
 	enum STATE {
 		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, PATROL, FREE_TIME
@@ -186,7 +188,6 @@ public abstract class AIRoutine {
 
 		if (actor.name.contains("Lead Hunter Brent")) {
 			System.out.println("createSearchLocationsBasedOnSounds()");
-
 		}
 
 		ArrayList<Class> classesArrayList = new ArrayList<Class>(Arrays.asList(classes));
@@ -194,14 +195,23 @@ public abstract class AIRoutine {
 		// Check for sounds to investigate
 		for (Sound sound : this.actor.squareGameObjectIsOn.sounds) {
 
-			// If asleep then sound has to be nearer for detection.
-			if (actor.sleeping && actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness - 2)
+			if (this.actor.canSeeGameObject(sound.sourcePerformer))
 				continue;
-			else
-				actor.sleeping = false;
 
-			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)
-					&& !this.actor.canSeeGameObject(sound.sourcePerformer)) {
+			// If asleep then sound has to be nearer for detection.
+			// if (actor.sleeping &&
+			// actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness
+			// - 2)
+			// continue;
+			// else
+			if (actor.sleeping) {
+				actor.sleeping = false;
+				wokenUpCountdown = 5;
+				if (Game.level.shouldLog(actor))
+					Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " woke up" }));
+			}
+
+			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)) {
 
 				// Check if sound is in passed in list of classes
 				boolean soundInTypeList = false;
@@ -221,31 +231,27 @@ public abstract class AIRoutine {
 					}
 
 					if (actor.name.contains("Lead Hunter Brent")) {
-						System.out.println("actor.sleeping to false @ a");
+						System.out.println("exit @ a");
 
 					}
-					actor.sleeping = false;
 				} else if (!sound.legal) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
 					if (actor.name.contains("Lead Hunter Brent")) {
-						System.out.println("actor.sleeping to false @ b");
+						System.out.println("exit @ b");
 					}
-					actor.sleeping = false;
 				} else if (soundInTypeList == true) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
 					if (actor.name.contains("Lead Hunter Brent")) {
-						System.out.println("actor.sleeping to false @ c");
+						System.out.println("exit @ c");
 					}
-					actor.sleeping = false;
 				} else if (sound.loudness >= 5) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
 					if (actor.name.contains("Lead Hunter Brent")) {
-						System.out.println("actor.sleeping to false @ d");
+						System.out.println("exit @ d");
 					}
-					actor.sleeping = false;
 				}
 
 			}
@@ -284,12 +290,16 @@ public abstract class AIRoutine {
 	public boolean runSleepRoutine() {
 
 		if (state != STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+			if (actor.sleeping && Game.level.shouldLog(actor))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " woke up" }));
 			actor.sleeping = false;
 			return false;
 		}
 
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()
 				&& this.actor.group.getLeader().followersShouldFollow == true) {
+			if (actor.sleeping && Game.level.shouldLog(actor))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " woke up" }));
 			actor.sleeping = false;
 			return false;
 		}
@@ -1191,6 +1201,9 @@ public abstract class AIRoutine {
 		createSearchLocationsBasedOnVisibleAttackers();
 		if (actor.group != null)
 			state = actor.group.getLeader().aiRoutine.state;
+		if (wokenUpCountdown > 0) {
+			wokenUpCountdown--;
+		}
 	}
 
 	public Actor actorToKeepTrackOf = null;
@@ -1497,7 +1510,7 @@ public abstract class AIRoutine {
 		}
 	}
 
-	protected boolean canSeeActor() {
+	protected boolean canSeeAnyone() {
 		ArrayList<Square> visibleSquares = actor.getAllSquaresWithinDistance(1, actor.sight);
 		for (Square visibleSquare : visibleSquares) {
 			Actor actorOnVisibleSquare = visibleSquare.inventory.actorThatCantShareSquare;
@@ -1507,6 +1520,32 @@ public abstract class AIRoutine {
 		}
 
 		return false;
+	}
+
+	final static String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
+
+	public void goToBedAndSleep() {
+
+		if (wokenUpCountdown > 0) {
+			actor.thoughtBubbleImageTextureObject = ThoughtBubbles.ANGRY;
+			return;
+		}
+
+		actor.followersShouldFollow = false;
+		actor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
+		if (actor.bed != null) {
+			if (actor.squareGameObjectIsOn == actor.bed.squareGameObjectIsOn) {
+				actor.sleeping = true;
+				actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
+				actor.thoughtBubbleImageTextureObject = Action.textureSleep;
+			} else {
+				boolean s = AIRoutineUtils.moveTowards(actor.bed);
+				actor.thoughtBubbleImageTextureObject = actor.bed.imageTexture;
+				actor.thoughtBubbleImageTextureAction = Action.textureSleep;
+			}
+		} else {
+		}
+
 	}
 
 	public abstract AIRoutine getInstance(Actor actor);

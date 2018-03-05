@@ -144,7 +144,7 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
 			actor.thoughtBubbleImageTextureObject = Templates.BED.imageTexture;
 
-			AIRoutineUtils.goToBedAndSleep();
+			goToBedAndSleep();
 		}
 	}
 

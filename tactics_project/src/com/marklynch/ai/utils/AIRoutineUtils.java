@@ -14,7 +14,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Vein;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionEatItems;
 import com.marklynch.objects.actions.ActionMine;
@@ -27,8 +26,6 @@ import com.marklynch.objects.units.Actor;
 public class AIRoutineUtils {
 
 	public String name = "AI";
-	final static String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final static String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 
 	public AIRoutineUtils() {
 		name = this.getClass().getSimpleName();
@@ -847,27 +844,5 @@ public class AIRoutineUtils {
 			return travelCostB - travelCostA;
 		}
 	};
-
-	public static void goToBedAndSleep() {
-
-		Game.level.activeActor.followersShouldFollow = false;
-		Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
-		if (Game.level.activeActor.bed != null) {
-			if (Game.level.activeActor.squareGameObjectIsOn == Game.level.activeActor.bed.squareGameObjectIsOn) {
-				Game.level.activeActor.sleeping = true;
-				Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
-				Game.level.activeActor.thoughtBubbleImageTextureObject = Action.textureSleep;
-			} else {
-				// boolean s = AIRoutineUtils
-				// .moveTowardsSquareToBeAdjacent(Game.level.activeActor.bed.squareGameObjectIsOn);
-				boolean s = AIRoutineUtils.moveTowards(Game.level.activeActor.bed);
-
-				Game.level.activeActor.thoughtBubbleImageTextureObject = Game.level.activeActor.bed.imageTexture;
-				Game.level.activeActor.thoughtBubbleImageTextureAction = Action.textureSleep;
-			}
-		} else {
-		}
-
-	}
 
 }

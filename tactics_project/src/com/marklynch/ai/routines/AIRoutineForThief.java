@@ -107,7 +107,7 @@ public class AIRoutineForThief extends AIRoutine {
 						actionTakeAll.perform();
 						return;
 					} else {
-						if (canSeeActor()) {
+						if (canSeeAnyone()) {
 							theftCooldown = 100;
 						} else {
 							actionTakeAll.perform();
@@ -141,7 +141,7 @@ public class AIRoutineForThief extends AIRoutine {
 						actionTake.perform();
 						return;
 					} else {
-						if (canSeeActor()) {
+						if (canSeeAnyone()) {
 							theftCooldown = 100;
 						} else {
 							actionTake.perform();

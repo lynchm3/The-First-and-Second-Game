@@ -56,7 +56,6 @@ import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
-import com.marklynch.utils.Utils;
 
 public class Actor extends GameObject {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
@@ -1053,6 +1052,9 @@ public class Actor extends GameObject {
 
 	public boolean canSeeGameObject(GameObject gameObject) {
 
+		if (sleeping)
+			return false;
+
 		if (canSeeGameObjectFromSpecificSquare(this.squareGameObjectIsOn, gameObject))
 			return true;
 
@@ -1121,7 +1123,10 @@ public class Actor extends GameObject {
 
 		super.attackedBy(attacker, action);
 
+		if (sleeping && Game.level.shouldLog(this))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " woke up" }));
 		sleeping = false;
+
 		removeHidingPlacesFromAttackersList();// prioritize actors
 
 		// update attackers list
