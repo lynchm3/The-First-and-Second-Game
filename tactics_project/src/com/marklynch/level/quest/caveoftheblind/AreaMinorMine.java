@@ -41,17 +41,23 @@ public class AreaMinorMine {
 		mineSections.add(new StructureSection("Minor Mine", 280, 76, 307, 97, false));
 
 		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.minorMine }, new RoomPart(281, 77, 306, 91), new RoomPart(292, 92, 306, 96)));
+				new Node[] { Nodes.minorMine }, new RoomPart(281, 77, 306, 88), new RoomPart(281, 89, 301, 91),
+				new RoomPart(292, 92, 301, 96)));
 
 		StructureRoom shopRoom = new StructureRoom("What's Mine is Yours*", 281, 93, false, new ArrayList<Actor>(),
 				new Node[] { Nodes.minorMine }, new RoomPart(281, 93, 290, 96));
 		rooms.add(shopRoom);
+
+		rooms.add(new StructureRoom("Minor Mine Quarters", 303, 90, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.minorMine }, new RoomPart(303, 90, 306, 96)));
 
 		// entry to mine
 		squaresToRemove.add(Game.level.squares[280][87]);
 
 		// entry to mine shop
 		squaresToRemove.add(Game.level.squares[285][92]);
+		// entry to mine quarters
+		squaresToRemove.add(Game.level.squares[302][91]);
 
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[284][91], null, true, Templates.ORE, 0.1f));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[299][79], null, true, Templates.ORE, 0.1f));
@@ -73,8 +79,8 @@ public class AreaMinorMine {
 
 		// 281, 93
 		// Trader Joe
-		Trader trader = Templates.TRADER.makeCopy("Trader Jake", Game.level.squares[281][93],
-				Game.level.factions.townsPeople, null, 10000,
+		Trader trader = Templates.TRADER.makeCopy("Trader Jake", Game.level.squares[281][94],
+				Game.level.factions.townsPeople, Templates.BED.makeCopy(Game.level.squares[303][95], null), 10000,
 				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),
 						Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),
 						Templates.PICKAXE.makeCopy(null, null) },

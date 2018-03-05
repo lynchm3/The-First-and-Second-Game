@@ -15,8 +15,8 @@ public class ConversationsSmallGame {
 	static QuestSmallGame quest;
 
 	// Conversations for bill
-	public static Conversation conversationEnviromentalistImNotSpying;
-	public static Conversation conversationEnviromentalistSaveTheWolf;
+	public static Conversation conversationRangerImNotSpying;
+	public static Conversation conversationRangerSaveTheWolf;
 
 	// Conversations for hunter
 	public static Conversation conversationHuntersJoinTheHunt;
@@ -157,14 +157,14 @@ public class ConversationsSmallGame {
 		// try it out
 		ConversationPart conversationPartImNotSpying = new ConversationPart(
 				new Object[] { "What? NO! I'm not spying! You're spying!", quest.superWolf, quest.hunterBrent,
-						quest.environmentalistBill },
-				new ConversationResponse[] {}, quest.environmentalistBill, quest);
+						quest.rangerBill },
+				new ConversationResponse[] {}, quest.rangerBill, quest);
 
 		conversationPartImNotSpying.leaveConversationListener = new LeaveConversationListener() {
 
 			@Override
 			public void leave() {
-				quest.addJournalLog(quest.journalLogEnviromentalistWasSpying);
+				quest.addJournalLog(quest.journalLogRangerWasSpying);
 				quest.addObjective(quest.objectiveEnvironmentalist);
 				quest.addObjective(quest.objectiveHunters);
 
@@ -172,7 +172,7 @@ public class ConversationsSmallGame {
 
 		};
 
-		conversationEnviromentalistImNotSpying = new Conversation(conversationPartImNotSpying,
+		conversationRangerImNotSpying = new Conversation(conversationPartImNotSpying,
 				quest.hunterPack.getLeader(), true);
 	}
 
@@ -181,7 +181,7 @@ public class ConversationsSmallGame {
 		ConversationPart conversationPartSaveTheWolf = new ConversationPart(
 				new Object[] {
 						"You can't take part in this. She's not just a normal wolf, she's an intelligent being. Smarter than those knuckleheads that want to mount her on a wall anyway." },
-				new ConversationResponse[] {}, quest.environmentalistBill, quest);
+				new ConversationResponse[] {}, quest.rangerBill, quest);
 		// Would like to use the word sentient or something for the above
 
 		conversationPartSaveTheWolf.leaveConversationListener = new LeaveConversationListener() {
@@ -190,12 +190,12 @@ public class ConversationsSmallGame {
 			public void leave() {
 				quest.addObjective(quest.objectiveEnvironmentalist);
 				for (GameObject gameObject : quest.weaponsBehindLodge) {
-					if (quest.environmentalistBill.inventory.contains(gameObject)) {
-						new ActionGiveItems(quest.environmentalistBill, Game.level.player, false, gameObject).perform();
+					if (quest.rangerBill.inventory.contains(gameObject)) {
+						new ActionGiveItems(quest.rangerBill, Game.level.player, false, gameObject).perform();
 
 					}
 				}
-				if (quest.haveJournalLog(quest.journalLogEnviromentalistWasSpying)) {
+				if (quest.haveJournalLog(quest.journalLogRangerWasSpying)) {
 					quest.addJournalLog(quest.journalLogSaveTheWolfVariant2);
 				} else {
 					quest.addJournalLog(quest.journalLogSaveTheWolfVariant1);
@@ -203,7 +203,7 @@ public class ConversationsSmallGame {
 			}
 
 		};
-		conversationEnviromentalistSaveTheWolf = new Conversation(conversationPartSaveTheWolf,
+		conversationRangerSaveTheWolf = new Conversation(conversationPartSaveTheWolf,
 				quest.hunterPack.getLeader(), true);
 
 	}
@@ -225,7 +225,7 @@ public class ConversationsSmallGame {
 			public void select() {
 				super.select();
 				// Update quest log
-				// Set enviromentalist to come watch
+				// Set ranger to come watch
 				// Hunters on the way
 				quest.addObjective(quest.objectiveWolves);
 				if (Game.level.fullQuestList.questCaveOfTheBlind.started == false) {

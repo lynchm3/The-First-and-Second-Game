@@ -78,7 +78,8 @@ public class QuestThePigs extends Quest {
 
 		// Farmer
 		farmer = Templates.FARMER.makeCopy("Farmer Pete", Game.level.squares[0][15], Game.level.factions.townsPeople,
-				null, 203, new GameObject[] {}, new GameObject[] {}, AreaList.townForest);
+				Templates.BED.makeCopy(Game.level.squares[5][81], null), 203, new GameObject[] {}, new GameObject[] {},
+				AreaList.townForest);
 		farmer.quest = this;
 		hoe = Templates.HOE.makeCopy(null, farmer);
 		farmer.inventory.add(hoe);

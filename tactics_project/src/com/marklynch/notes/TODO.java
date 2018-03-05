@@ -71,7 +71,7 @@ public class TODO {
 	// Use ActionEquip for AI. That's a good one, want to see what they're
 	// equipping
 
-	// Enviromentalist needs to stop spying if u murder all the hunters :P or he
+	// Ranger needs to stop spying if u murder all the hunters :P or he
 	// follows them around everywhere so he'll see the slaughter and have a go @
 	// u
 
@@ -319,7 +319,7 @@ public class TODO {
 	// to bed with them tho.
 	// This is getting over complicated and out of hand :P
 	// The cub could become some sort of guardian spirit for you
-	// The one who helps u is an enviromentalist, teaches u skill "remove
+	// The one who helps u is an ranger, teaches u skill "remove
 	// imbuement" and says "This should come in handy
 	// SHopkeeper nearby sells imbue with fire
 	// The hunting board plan says that super wolf is healed by fire

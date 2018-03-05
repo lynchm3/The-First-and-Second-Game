@@ -181,7 +181,7 @@ public class ConversationForMort extends Conversation {
 			public void select() {
 				super.select();
 				// Update quest log
-				// Set enviromentalist to come watch
+				// Set ranger to come watch
 				// Hunters on the way
 				questCaveOfTheBlind.feedingDemoAvailable = false;
 				questCaveOfTheBlind.mort.performingFeedingDemo = true;

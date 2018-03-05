@@ -93,7 +93,7 @@ public class QuestSmallGame extends Quest {
 
 	// For stealing show a dialogue if u'll get caught doing it.
 
-	// O M F G the enviromentalist wants to enslave super wolf. O M F G
+	// O M F G the ranger wants to enslave super wolf. O M F G
 	// O M F G. And he like tried to get the wolves power before but he was
 	// rejected.
 	// And now that the wolf is weakened after the fight he puts him in an evil
@@ -109,7 +109,7 @@ public class QuestSmallGame extends Quest {
 
 	// SO powerwise - hunters == wolfpack > envirnmentalist.
 
-	// special case if u kill enviromentalist early on :P
+	// special case if u kill ranger early on :P
 
 	// Could lead in to larger overarching story with spirit animals
 
@@ -120,8 +120,8 @@ public class QuestSmallGame extends Quest {
 	// stealing shit + guards nearby + put ownership = hunters on it until ur
 	// told to go get them
 
-	// Make the enviromentalist seem dopey until the end. What do u call an
-	// enviromentalist magic user? Sage? Forest Sage? Woodland sage? Sage is
+	// Make the ranger seem dopey until the end. What do u call an
+	// ranger magic user? Sage? Forest Sage? Woodland sage? Sage is
 	// good, makes him sound benevolent and omniscient.
 
 	// Some sort of reaction from the wolves if u see them before accepting the
@@ -144,7 +144,7 @@ public class QuestSmallGame extends Quest {
 
 	// Actors
 	Group hunterPack;
-	Actor environmentalistBill;
+	Actor rangerBill;
 	Group wolfPack;
 	Actor superWolf;
 	Actor cub;
@@ -176,8 +176,7 @@ public class QuestSmallGame extends Quest {
 			"I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge");
 	JournalLog journalLogSetOffWithHunters = new JournalLog(
 			"I've set off with the hunters towards the creature's lair");
-	JournalLog journalLogEnviromentalistWasSpying = new JournalLog(
-			"I met a strange figure spying on the hunters of Town Lodge");
+	JournalLog journalLogRangerWasSpying = new JournalLog("I met a strange figure spying on the hunters of Town Lodge");
 	JournalLog journalLogSaveTheWolfVariant1 = new JournalLog(
 			"Behind the hunting lodge, where the weapons were meant to be, stood a strange figure. He told me the the hunters' mark is an intelligent being should be spared.");
 	JournalLog journalLogSaveTheWolfVariant2 = new JournalLog(
@@ -290,18 +289,18 @@ public class QuestSmallGame extends Quest {
 				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
 				Guard.dayShift, Game.level.squares[4][21], Game.level.squares[32][21]);
 
-		Templates.THIEF.makeCopy("Thief Ed",
-				Game.level.squares[12][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
+		Templates.THIEF.makeCopy("Thief Ed", Game.level.squares[12][13], Game.level.factions.outsiders,
+				Templates.BED.makeCopy(Game.level.squares[116][53], null), 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town);
 
-		Templates.THIEF.makeCopy("Thief Carl",
-				Game.level.squares[11][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
+		Templates.THIEF.makeCopy("Thief Carl", Game.level.squares[11][13], Game.level.factions.outsiders,
+				Templates.BED.makeCopy(Game.level.squares[116][55], null), 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town);
 
-		Thief t3 = Templates.THIEF.makeCopy("Thief Pete",
-				Game.level.squares[10][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
+		Thief t3 = Templates.THIEF.makeCopy("Thief Pete", Game.level.squares[10][13], Game.level.factions.outsiders,
+				Templates.BED.makeCopy(Game.level.squares[114][55], null), 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town);
 
@@ -325,12 +324,30 @@ public class QuestSmallGame extends Quest {
 		chest.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, null));
 		chest.inventory.add(Templates.GOLD.makeCopy(null, null, 101));
 
-		environmentalistBill = hunterBront2.makeCopy("Enviromentalist Bill",
-				Game.level.squares[105][16], Game.level.factions.townsPeople, null, 83, new GameObject[] {
+		// Ranget + hut
+		rangerBill = hunterBront2.makeCopy("Ranger Bill", Game.level.squares[105][16], Game.level.factions.townsPeople,
+				Templates.BED.makeCopy(Game.level.squares[131][35], null), 83, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest);
-		environmentalistBill.quest = this;
+		rangerBill.quest = this;
+		ArrayList<Wall> extraWalls = new ArrayList<Wall>();
+		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
+		ArrayList<StructurePath> paths = new ArrayList<StructurePath>();
+		ArrayList<StructureSection> sections = new ArrayList<StructureSection>();
+		ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>();
+		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
+		features.add(new StructureFeature(
+				Templates.DOOR.makeCopy("Door", Game.level.squares[133][34], false, false, false, rangerBill),
+				Nodes.forestNorth));
+		rooms.add(new StructureRoom("Ranger's Hut", 130, 34, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.forestNorth }, new RoomPart(130, 34, 132, 36)));
+		sections.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false));
+		Structure rangerHut = new Structure("Ranger's Hut", sections, rooms, paths, features, new ArrayList<Square>(),
+				"map_cave.png", 129, 33, 133, 37, true, null, squaresToRemove, extraWalls, Templates.WALL,
+				Square.STONE_TEXTURE, 5);
+		Game.level.structures.add(rangerHut);
 
+		// wolf
 		superWolf = Templates.WOLF.makeCopy("Wolf Queen", Game.level.squares[128][12], Game.level.factions.wolves, null,
 				new GameObject[] {}, new GameObject[] {}, null);
 		superWolf.powers.add(new PowerSuperPeek(superWolf));
@@ -379,8 +396,7 @@ public class QuestSmallGame extends Quest {
 		allObjectives.add(objectiveWeaponsBehindLodge);
 		objectiveHunters = new Objective("The Hunters", hunterBrent, null, hunterBrent.imageTexture);
 		allObjectives.add(objectiveHunters);
-		objectiveEnvironmentalist = new Objective("Environmentalist", environmentalistBill, null,
-				environmentalistBill.imageTexture);
+		objectiveEnvironmentalist = new Objective("Environmentalist", rangerBill, null, rangerBill.imageTexture);
 		allObjectives.add(objectiveEnvironmentalist);
 
 		ConversationsSmallGame.quest = this;
@@ -516,7 +532,7 @@ public class QuestSmallGame extends Quest {
 			return false;
 		if (hunterPack.contains(actor)) {
 			return updateHunter(actor);
-		} else if (actor == environmentalistBill) {
+		} else if (actor == rangerBill) {
 			return updateEnvironmentalist(actor);
 		} else if (wolfPack.contains(actor)) {
 			return true;
@@ -595,7 +611,7 @@ public class QuestSmallGame extends Quest {
 	private boolean updateEnvironmentalist(Actor actor) {
 		if (haveJournalLog(journalLogSetOffWithHunters)) {
 			// Hunters are on the move, head to wolf
-			if (environmentalistBill.canSeeGameObject(superWolf)) {
+			if (rangerBill.canSeeGameObject(superWolf)) {
 			} else {
 				AIRoutineUtils.moveTowardsTargetSquare(superWolf.squareGameObjectIsOn);
 			}
@@ -609,7 +625,7 @@ public class QuestSmallGame extends Quest {
 
 			actor.activityDescription = ACTIVITY_SAVING_THE_WORLD;
 
-			if (environmentalistBill.squareGameObjectIsOn != squareBehindLodge) {
+			if (rangerBill.squareGameObjectIsOn != squareBehindLodge) {
 				// Move to weapons behind the lodge
 				AIRoutineUtils.moveTowardsTargetSquare(squareBehindLodge);
 			} else {
@@ -638,7 +654,7 @@ public class QuestSmallGame extends Quest {
 			return null;
 		if (hunterPack.contains(actor)) {
 			return getConversationForHunter(actor);
-		} else if (actor == environmentalistBill) {
+		} else if (actor == rangerBill) {
 			return getConversationForEnvironmentalist(actor);
 		} else if (wolfPack.contains(actor)) {
 			return getConversationForWolf(actor);
@@ -661,11 +677,11 @@ public class QuestSmallGame extends Quest {
 	public Conversation getConversationForEnvironmentalist(Actor actor) {
 		// Talking to environmentalist
 		if (!haveJournalLog(journalLogAgreedToJoinHunters)) {
-			return ConversationsSmallGame.conversationEnviromentalistImNotSpying;
+			return ConversationsSmallGame.conversationRangerImNotSpying;
 		} else if (!haveJournalLog(journalLogSaveTheWolfVariant1) && !haveJournalLog(journalLogSaveTheWolfVariant2)) {
-			return ConversationsSmallGame.conversationEnviromentalistSaveTheWolf;
+			return ConversationsSmallGame.conversationRangerSaveTheWolf;
 		}
-		return environmentalistBill.createConversation("...");
+		return rangerBill.createConversation("...");
 	}
 
 	public Conversation getConversationForWolf(Actor actor) {
