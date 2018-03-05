@@ -1533,6 +1533,7 @@ public abstract class AIRoutine {
 				if (!actor.sleeping && Game.level.shouldLog(actor))
 					Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " went to sleep" }));
 				actor.sleeping = true;
+				ignoreList.clear();
 				actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 				actor.thoughtBubbleImageTextureObject = Action.textureSleep;
 			} else {
