@@ -1,5 +1,6 @@
 package com.marklynch.ai.routines;
 
+import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -13,17 +14,11 @@ public class AIRoutineForTrader extends AIRoutine {
 	GameObject target;
 	// Square squareToMoveTo;
 
-	enum SHOPKEEP_STATE {
-		SHOPKEEPING, UPDATING_SIGN, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
-	};
-
 	final String ACTIVITY_DESCRIPTION_SHOPKEEPING = "Shopkeeping";
 	final String ACTIVITY_DESCRIPTION_UPDATING_SIGN = "Updating Shop Sign";
 	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";
-
-	public SHOPKEEP_STATE shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
 
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
@@ -41,6 +36,12 @@ public class AIRoutineForTrader extends AIRoutine {
 	public void update() {
 
 		aiRoutineStart();
+
+		if (Game.level.hour > 20 || Game.level.hour < 6) {
+			state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+		} else {
+			state = STATE.SHOPKEEPING;
+		}
 
 		if (runSleepRoutine())
 			return;
@@ -98,13 +99,13 @@ public class AIRoutineForTrader extends AIRoutine {
 			return;
 
 		// Shopkeeper AI 1 - hang in shop
-		if (shopkeepState == SHOPKEEP_STATE.SHOPKEEPING)
+		if (state == STATE.SHOPKEEPING)
 
 		{
 			actor.thoughtBubbleImageTextureObject = Templates.GOLD.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOPKEEPING;
 			if (!trader.isPlayerInTheShop() && trader.getTextForSign() != null)
-				shopkeepState = SHOPKEEP_STATE.UPDATING_SIGN;
+				state = STATE.UPDATING_SIGN;
 			else {
 				if (trader.equipped != trader.broom && trader.inventory.contains(trader.broom))
 					trader.equip(trader.broom);
@@ -125,16 +126,16 @@ public class AIRoutineForTrader extends AIRoutine {
 		}
 
 		// Shopkeeper AI 2 - update sign
-		if (shopkeepState == SHOPKEEP_STATE.UPDATING_SIGN) {
+		if (state == STATE.UPDATING_SIGN) {
 			Object[] textForSign = trader.getTextForSign();
 			if (textForSign == null) {
-				shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
+				state = STATE.SHOPKEEPING;
 			} else {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_UPDATING_SIGN;
 				this.actor.thoughtBubbleImageTextureObject = trader.shopSign.imageTexture;
 				if (trader.straightLineDistanceTo(trader.shopSign.squareGameObjectIsOn) < 2) {
 					new ActionWrite(trader, trader.shopSign, textForSign).perform();
-					shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
+					state = STATE.SHOPKEEPING;
 				} else {
 					AIRoutineUtils.moveTowards(trader.shopSign.squareGameObjectIsOn);
 				}

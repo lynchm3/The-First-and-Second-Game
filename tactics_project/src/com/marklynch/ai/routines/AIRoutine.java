@@ -79,7 +79,7 @@ public abstract class AIRoutine {
 	public int wokenUpCountdown = 0;
 
 	enum STATE {
-		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, PATROL, FREE_TIME
+		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, PATROL, FREE_TIME, SHOPKEEPING, THIEVING, UPDATING_SIGN
 	};
 
 	public STATE state;
@@ -1328,11 +1328,8 @@ public abstract class AIRoutine {
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
 				false, false, false, false, 0, false, Trader.class);
 
-		if (target == null) {
-			return false;
-		}
-
-		if (target.knownCriminals.contains(actor)) {
+		if (target == null || target.sleeping || target.knownCriminals.contains(actor)
+				|| actor.knownCriminals.contains(target)) {
 			return false;
 		}
 
@@ -1370,12 +1367,9 @@ public abstract class AIRoutine {
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
 				false, false, false, false, 0, false, Trader.class);
 
-		if (target == null) {
-			return true;
-		}
-
-		if (target.knownCriminals.contains(actor)) {
-			return true;
+		if (target == null || target.sleeping || target.knownCriminals.contains(actor)
+				|| actor.knownCriminals.contains(target)) {
+			return false;
 		}
 
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BUYING_EQUIPMENT;
