@@ -59,8 +59,9 @@ public class AreaTown {
 		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 6, 1, false,
 				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })),
 				new Node[] { Nodes.townShopInner, Nodes.townShopOuter }, new RoomPart(6, 1, 10, 4)));
-		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 12, 1, true, new ArrayList<Actor>(),
-				new Node[] { Nodes.townShopInner }, new RoomPart(12, 1, 16, 4)));
+		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 12, 1, true,
+				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })), new Node[] { Nodes.townShopInner },
+				new RoomPart(12, 1, 16, 4)));
 		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
 		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5, false));
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,

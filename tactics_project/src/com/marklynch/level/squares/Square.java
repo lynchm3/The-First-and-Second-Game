@@ -1107,6 +1107,23 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		if (this == goalNode)
 			return true;
 
+		if (actor.name.contains("Joe") && xInGrid == 12 && yInGrid == 4) {
+			System.out.println("a");
+			System.out.println("this.restricted = " + this.restricted);
+			System.out.println("this.owners.contains(actor) = " + this.owners.contains(actor));
+			for (Actor owner : owners) {
+				System.out.println("owner = " + owner);
+			}
+		}
+
+		if (this.restricted && actor != Game.level.player && !this.owners.contains(actor)) {
+			return false;
+		}
+
+		if (actor.name.contains("Joe") && xInGrid == 12 && yInGrid == 4) {
+			System.out.println("b");
+		}
+
 		if (inventory.canShareSquare) {
 			// doors
 			if (inventory.door != null) {
@@ -1122,6 +1139,11 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		} else if (inventory.actorThatCantShareSquare != null) {
 			return true;
 		}
+
+		if (this.restricted && actor != Game.level.player && !this.owners.contains(actor)) {
+			return false;
+		}
+
 		return false;
 	}
 	/// END PATH FINDING
