@@ -90,10 +90,13 @@ public class Door extends Openable {
 		if (owner != null) {
 			owner.doors.add(door);
 		}
-		door.soundDampeningWhenClosed = soundDampening;
+		door.soundDampeningWhenClosed = soundDampeningWhenClosed;
 		door.blocksLineOfSightWhenClosed = blocksLineOfSight;
 		door.shouldBeClosed = shouldBeClosed;
 		door.shouldBeLocked = shouldBeLocked;
+		if (!door.open) {
+			door.soundDampening = door.soundDampeningWhenClosed;
+		}
 
 		return door;
 	}

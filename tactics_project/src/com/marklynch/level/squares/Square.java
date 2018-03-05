@@ -314,6 +314,9 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public void drawSoundHighlight2() {
 
+		if (!this.seenByPlayer)
+			return;
+
 		float squarePositionX = xInGridPixels;
 		float squarePositionY = yInGridPixels;
 
@@ -346,6 +349,9 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public void drawSoundHighlight() {
 
+		if (!this.seenByPlayer)
+			return;
+
 		float squarePositionX = xInGridPixels;
 		float squarePositionY = yInGridPixels;
 
@@ -375,6 +381,9 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	}
 
 	public void drawRedHighlight() {
+
+		if (!this.seenByPlayer)
+			return;
 
 		float squarePositionX = xInGridPixels;
 		float squarePositionY = yInGridPixels;

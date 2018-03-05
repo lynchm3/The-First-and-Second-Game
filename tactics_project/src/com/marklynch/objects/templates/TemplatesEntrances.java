@@ -103,6 +103,7 @@ public class TemplatesEntrances {
 		Templates.FALSE_WALL.soundWhenHit = 1f;
 		Templates.FALSE_WALL.soundWhenHitting = 1f;
 		Templates.FALSE_WALL.soundDampening = 1f;
+		Templates.FALSE_WALL.soundDampeningWhenClosed = 5;
 		Templates.FALSE_WALL.stackable = false;
 		Templates.FALSE_WALL.waterResistance = 0f;
 		Templates.FALSE_WALL.electricResistance = 0f;
@@ -112,7 +113,6 @@ public class TemplatesEntrances {
 		Templates.FALSE_WALL.value = 29;
 		Templates.FALSE_WALL.anchorX = 0;
 		Templates.FALSE_WALL.anchorY = 0;
-		Templates.FALSE_WALL.soundDampeningWhenClosed = 2;
 		Templates.FALSE_WALL.blocksLineOfSightWhenClosed = true;
 		Templates.FALSE_WALL.templateId = GameObject.generateNewTemplateId();
 		Templates.FALSE_WALL.flipYAxisInMirror = false;

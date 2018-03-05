@@ -40,7 +40,7 @@ public class TemplatesBigObjects {
 		Templates.BOULDER.drawOffsetRatioY = 0f;
 		Templates.BOULDER.soundWhenHit = 1f;
 		Templates.BOULDER.soundWhenHitting = 1f;
-		Templates.BOULDER.soundDampening = 1f;
+		Templates.BOULDER.soundDampening = 2f;
 		Templates.BOULDER.stackable = false;
 		Templates.BOULDER.weight = 200f;
 		Templates.BOULDER.value = 17;

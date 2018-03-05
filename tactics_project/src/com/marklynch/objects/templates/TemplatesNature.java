@@ -50,7 +50,7 @@ public class TemplatesNature {
 		Templates.BIG_TREE.drawOffsetRatioY = -0.5f;
 		Templates.BIG_TREE.soundWhenHit = 1f;
 		Templates.BIG_TREE.soundWhenHitting = 1f;
-		Templates.BIG_TREE.soundDampening = 1f;
+		Templates.BIG_TREE.soundDampening = 2f;
 		Templates.BIG_TREE.stackable = false;
 		Templates.BIG_TREE.weight = 200f;
 		Templates.BIG_TREE.value = 13;
@@ -301,7 +301,7 @@ public class TemplatesNature {
 		Templates.VEIN.drawOffsetRatioY = 0f;
 		Templates.VEIN.soundWhenHit = 1f;
 		Templates.VEIN.soundWhenHitting = 1f;
-		Templates.VEIN.soundDampening = 1f;
+		Templates.VEIN.soundDampening = 10f;
 		Templates.VEIN.stackable = false;
 		Templates.VEIN.weight = 1000f;
 		Templates.VEIN.value = 36;

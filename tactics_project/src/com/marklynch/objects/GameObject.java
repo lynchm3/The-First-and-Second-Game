@@ -1557,6 +1557,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.drawOffsetRatioY = drawOffsetRatioY;
 		gameObject.soundWhenHit = soundWhenHit;
 		gameObject.soundWhenHitting = soundWhenHitting;
+		gameObject.soundDampening = soundDampening;
 		gameObject.weight = weight;
 
 		gameObject.slashDamage = slashDamage;
