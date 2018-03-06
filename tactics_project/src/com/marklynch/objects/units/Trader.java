@@ -97,12 +97,15 @@ public class Trader extends Human implements Comparator<GameObject> {
 
 	@Override
 	public Trader makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
-			GameObject[] mustHaves, GameObject[] mightHaves, Area area, int[] requiredEquipmentTemplateIds) {
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area, int[] requiredEquipmentTemplateIds,
+			HOBBY[] hobbies) {
 
 		Trader actor = new Trader();
 		setInstances(actor);
 
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
+		actor.requiredEquipmentTemplateIds = requiredEquipmentTemplateIds;
+		actor.hobbies = hobbies;
 
 		actor.broom = Templates.BROOM.makeCopy(null, null);
 		actor.inventory.add(actor.broom);

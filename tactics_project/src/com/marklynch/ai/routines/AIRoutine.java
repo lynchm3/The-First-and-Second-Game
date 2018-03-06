@@ -2,6 +2,7 @@ package com.marklynch.ai.routines;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
@@ -47,10 +48,14 @@ import com.marklynch.objects.actions.ActionWrite;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Actor.HOBBY;
+import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Pig;
+import com.marklynch.objects.units.TinyNeutralWildAnimal;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
@@ -70,6 +75,7 @@ public abstract class AIRoutine {
 	final String ACTIVITY_DESCRIPTION_BUYING_EQUIPMENT = "Buying equipment";
 	final String ACTIVITY_DESCRIPTION_FEEDING = "Feeding";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
+	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
 
 	public Actor actor;
 	public GameObject target;
@@ -99,8 +105,15 @@ public abstract class AIRoutine {
 	public ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>();
 	public ArrayList<Square> squareBounds = new ArrayList<Square>();
 
+	HOBBY currentHobby = HOBBY.HUNTING;
+
 	public AIRoutine(Actor actor) {
 		this.actor = actor;
+	}
+
+	public static <T extends Enum<?>> T randomEnum(Class<T> clazz) {
+		int x = new Random().nextInt(clazz.getEnumConstants().length);
+		return clazz.getEnumConstants()[x];
 	}
 
 	public void update() {
@@ -1588,6 +1601,48 @@ public abstract class AIRoutine {
 
 	}
 
+	public boolean runHobbyRoutine() {
+		if (currentHobby == HOBBY.HUNTING) {
+			return runHuntingRoutine();
+		}
+		return false;
+	}
+
+	public boolean runHuntingRoutine() {
+
+		actor.thoughtBubbleImageTextureObject = Templates.HUNTING_BOW.imageTexture;
+		this.actor.followersShouldFollow = true;
+		this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
+		// if (target == null)
+		target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, true, 0,
+				false, AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
+				TinyNeutralWildAnimal.class, MeatChunk.class, Gold.class);
+		if (target == null) {
+			AIRoutineUtils.moveTowards(actor.area.centreSuqare);
+			return true;
+		} else {
+			if (target == null || target.squareGameObjectIsOn == null) {
+				target = null;
+			} else {
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
+				if (target.remainingHealth <= 0) {
+				} else {
+					boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
+					if (!attackedAnimal) {
+						AIRoutineUtils.moveTowards(target);
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	public abstract AIRoutine getInstance(Actor actor);
+
+	public HOBBY getRandomHobbyFromActorsHobbies() {
+		int rnd = new Random().nextInt(actor.hobbies.length);
+		return actor.hobbies[rnd];
+	}
 
 }

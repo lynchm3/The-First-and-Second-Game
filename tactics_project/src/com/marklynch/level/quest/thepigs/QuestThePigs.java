@@ -21,6 +21,7 @@ import com.marklynch.objects.Tree;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Actor.HOBBY;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.weapons.Weapon;
@@ -79,7 +80,8 @@ public class QuestThePigs extends Quest {
 		// Farmer
 		farmer = Templates.FARMER.makeCopy("Farmer Pete", Game.level.squares[0][15], Game.level.factions.townsPeople,
 				Templates.BED.makeCopy(Game.level.squares[5][81], null), 203, new GameObject[] {}, new GameObject[] {},
-				AreaList.town, new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId });
+				AreaList.town, new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId },
+				new HOBBY[] { HOBBY.HUNTING });
 		farmer.quest = this;
 		hoe = Templates.HOE.makeCopy(null, farmer);
 		farmer.inventory.add(hoe);

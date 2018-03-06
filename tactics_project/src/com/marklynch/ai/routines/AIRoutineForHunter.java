@@ -1,28 +1,14 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
-import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Gold;
-import com.marklynch.objects.MeatChunk;
-import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
-import com.marklynch.objects.units.TinyNeutralWildAnimal;
 
 public class AIRoutineForHunter extends AIRoutine {
 
 	GameObject target;
 	// Square squareToMoveTo;
-
-	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
-	// final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
-	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
-	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
 
 	public AIRoutineForHunter(Actor actor) {
 
@@ -154,35 +140,12 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		{
 
-			actor.thoughtBubbleImageTextureObject = Templates.HUNTING_BOW.imageTexture;
-			this.actor.followersShouldFollow = true;
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, true, 0,
-					false, AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
-					TinyNeutralWildAnimal.class, MeatChunk.class, Gold.class);
-			if (target == null) {
-				AIRoutineUtils.moveTowards(actor.area.centreSuqare);
-				return;
-			} else {
-				if (target == null || target.squareGameObjectIsOn == null) {
-					target = null;
-				} else {
-					this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-					if (target.remainingHealth <= 0) {
-					} else {
-						boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
-						if (!attackedAnimal) {
-							AIRoutineUtils.moveTowards(target);
-							return;
-						}
-					}
-				}
-			}
+			runHuntingRoutine();
+			return;
 
 		}
 
-		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+		else if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
 
 			if (actor.name.contains("Lead Hunter Brent")) {
 				System.out.println("calling goToBedAndSleep();");

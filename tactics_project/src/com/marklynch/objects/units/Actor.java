@@ -175,6 +175,12 @@ public class Actor extends GameObject {
 
 	public int[] requiredEquipmentTemplateIds = new int[0];
 
+	public static enum HOBBY {
+		FISHING, HUNTING, ARCHERY, SPARRING, BOWLS, BALL_GAMES, EATING, DRINKING, SOCIALISING;
+	}
+
+	public HOBBY hobbies[] = new HOBBY[] {};
+
 	public Actor() {
 
 		super();

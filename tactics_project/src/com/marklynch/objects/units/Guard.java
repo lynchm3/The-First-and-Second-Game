@@ -37,7 +37,8 @@ public class Guard extends Human {
 	}
 
 	public Guard makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves, Area area, Shift shift, Square... patrolSquares) {
+			GameObject[] mightHaves, Area area, int[] requiredEquipmentTemplateIds, HOBBY[] hobbies, Shift shift,
+			Square... patrolSquares) {
 		Guard actor = new Guard();
 		setInstances(actor);
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);

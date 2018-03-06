@@ -61,6 +61,7 @@ public class AIRoutineForGuard extends AIRoutine {
 			state = STATE.PATROL;
 		} else {
 			state = STATE.FREE_TIME;
+			currentHobby = getRandomHobbyFromActorsHobbies();
 		}
 
 		if (runSleepRoutine())
@@ -145,27 +146,8 @@ public class AIRoutineForGuard extends AIRoutine {
 		if (updateWantedPosterRoutine())
 			return;
 
-		// Update wanted poster
-		if (dropOffToLostAndFoundRoutine())
-			return;
-
-		// Pick up from lost and found
-		if (pickUpFromLostAndFoundRoutine())
-			return;
-
 		// Door maintenance routine
 		if (runDoorRoutine()) {
-			this.actor.followersShouldFollow = true;
-			return;
-		}
-
-		// Sell items
-		if (sellItems(10)) {
-			this.actor.followersShouldFollow = true;
-			return;
-		}
-
-		if (replenishEquipment()) {
 			this.actor.followersShouldFollow = true;
 			return;
 		}
@@ -182,9 +164,32 @@ public class AIRoutineForGuard extends AIRoutine {
 				targetSquare = guard.patrolSquares[patrolIndex];
 			}
 			AIRoutineUtils.moveTowards(targetSquare);
-		}
+		} else if (state == STATE.FREE_TIME) {
 
-		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+			// Update wanted poster
+			if (dropOffToLostAndFoundRoutine())
+				return;
+
+			// Pick up from lost and found
+			if (pickUpFromLostAndFoundRoutine())
+				return;
+
+			// Sell items
+			if (sellItems(10)) {
+				this.actor.followersShouldFollow = true;
+				return;
+			}
+
+			if (replenishEquipment()) {
+				this.actor.followersShouldFollow = true;
+				return;
+			}
+
+			if (runHobbyRoutine()) {
+				return;
+			}
+
+		} else if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
 			goToBedAndSleep();
 		}
 	}

@@ -36,10 +36,12 @@ public class Thief extends Human {
 
 	@Override
 	public Thief makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves, Area area, int[] requiredEquipmentTemplateIds) {
+			GameObject[] mightHaves, Area area, int[] requiredEquipmentTemplateIds, HOBBY[] hobbies) {
 		Thief actor = new Thief();
 		setInstances(actor);
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
+		actor.requiredEquipmentTemplateIds = requiredEquipmentTemplateIds;
+		actor.hobbies = hobbies;
 
 		return actor;
 	}

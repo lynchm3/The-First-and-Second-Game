@@ -21,6 +21,7 @@ import com.marklynch.objects.Sign;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Actor.HOBBY;
 import com.marklynch.objects.units.Trader;
 
 public class AreaMinorMine {
@@ -75,7 +76,8 @@ public class AreaMinorMine {
 				bed, 0,
 				new GameObject[] {
 						/* Templates.PICKAXE.makeCopy(null, null), */Templates.LANTERN.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.mines, new int[] { Templates.PICKAXE.templateId });
+				new GameObject[] {}, AreaList.mines, new int[] { Templates.PICKAXE.templateId },
+				new HOBBY[] { HOBBY.HUNTING });
 
 		// 281, 93
 		// Trader Joe
@@ -84,7 +86,7 @@ public class AreaMinorMine {
 				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),
 						Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),
 						Templates.PICKAXE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.mines, new int[] {});
+				new GameObject[] {}, AreaList.mines, new int[] {}, new HOBBY[] { HOBBY.HUNTING });
 
 		Sign shopSign = Templates.SIGN.makeCopy(Game.level.squares[288][91], shopRoom.name + " sign",
 				new Object[] { shopRoom.name }, trader);

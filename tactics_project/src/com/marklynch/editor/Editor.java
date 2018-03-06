@@ -34,6 +34,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Actor.HOBBY;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -400,7 +401,8 @@ public class Editor {
 
 		// Add player
 		Player player = Templates.PLAYER.makeCopy("You", Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
-				Level.factions.player, null, 100, new GameObject[] {}, new GameObject[] {}, null, new int[] {});
+				Level.factions.player, null, 100, new GameObject[] {}, new GameObject[] {}, null, new int[] {},
+				new HOBBY[] { HOBBY.HUNTING });
 		Game.level.player = player;
 		Weapon playersHuntingBow = Templates.HUNTING_BOW.makeCopy(null, player);
 		playersHuntingBow.enhancement = new EnhancementFireDamage();

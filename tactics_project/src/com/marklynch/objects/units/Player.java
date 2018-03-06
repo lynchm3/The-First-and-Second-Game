@@ -93,11 +93,14 @@ public class Player extends Human {
 
 	@Override
 	public Player makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
-			GameObject[] mustHaves, GameObject[] mightHaves, Area area, int[] requiredEquipmentTemplateIds) {
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area, int[] requiredEquipmentTemplateIds,
+			HOBBY[] hobbies) {
 
 		Player actor = new Player();
 		setInstances(actor);
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
+		actor.requiredEquipmentTemplateIds = requiredEquipmentTemplateIds;
+		actor.hobbies = hobbies;
 
 		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(templateId);
 
