@@ -55,6 +55,10 @@ public class AreaList extends ArrayList<Quest> {
 	}
 
 	public static void draw() {
+
+		if (!Game.areaColors)
+			return;
+
 		for (Area area : Level.areas) {
 			QuadUtils.drawQuad(area.color, area.gridX1 * Game.SQUARE_WIDTH, area.gridY1 * Game.SQUARE_HEIGHT,
 					(area.gridX2 + 1) * Game.SQUARE_WIDTH, (area.gridY2 + 1) * Game.SQUARE_HEIGHT);

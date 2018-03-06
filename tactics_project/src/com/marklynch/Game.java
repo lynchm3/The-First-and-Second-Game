@@ -46,6 +46,8 @@ public class Game {
 
 	// DEBUG
 	public static boolean fullVisiblity = false;
+	public static boolean drawNodes = false;
+	public static boolean areaColors = false;
 	public static boolean redHighlightOnRestrictedSquares = false;
 
 	public static boolean showAILines = false;

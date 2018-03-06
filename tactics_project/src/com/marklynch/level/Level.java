@@ -231,19 +231,21 @@ public class Level {
 		});
 
 		Button doNothing2Button = new LevelButton(110f, 40f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"nothing", false, false, Color.BLACK, Color.WHITE, "Nothing to see here");
+				"Area Colors", false, false, Color.BLACK, Color.WHITE, "DEV - Color code areas");
 		doNothing2Button.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				Game.areaColors = !Game.areaColors;
 			}
 		});
 		buttons.add(doNothing2Button);
 
 		Button nothingButton = new LevelButton(220f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"nothing", false, false, Color.BLACK, Color.WHITE, "Nothing to see here");
+				"Show Nodes", false, false, Color.BLACK, Color.WHITE, "DEV - Toggle nodes being drawn");
 		nothingButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				Game.drawNodes = !Game.drawNodes;
 
 			}
 		});

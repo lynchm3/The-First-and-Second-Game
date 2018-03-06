@@ -279,6 +279,9 @@ public class Nodes {
 	public static Color color = new Color(1, 1, 1, 0.5f);
 
 	public static void draw() {
+		if (!Game.drawNodes)
+			return;
+
 		for (Node node : nodes) {
 			QuadUtils.drawQuad(color, node.square.xInGridPixels, node.square.yInGridPixels,
 					node.square.xInGridPixels + Game.SQUARE_WIDTH, node.square.yInGridPixels + Game.SQUARE_HEIGHT);
