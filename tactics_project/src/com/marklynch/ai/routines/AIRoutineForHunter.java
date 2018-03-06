@@ -28,8 +28,7 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		super(actor);
 		aiType = AI_TYPE.FIGHTER;
-		requiredEquipmentTemplateIds.add(Templates.HUNTING_BOW.templateId);
-		requiredEquipmentTemplateIds.add(Templates.HUNTING_KNIFE.templateId);
+
 	}
 
 	@Override

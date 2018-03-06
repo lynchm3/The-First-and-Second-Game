@@ -5,7 +5,6 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
@@ -34,7 +33,6 @@ public class AIRoutineForGuard extends AIRoutine {
 
 		super(actor);
 		aiType = AI_TYPE.FIGHTER;
-		requiredEquipmentTemplateIds.add(Templates.SWORD.templateId);
 		guard = (Guard) actor;
 	}
 

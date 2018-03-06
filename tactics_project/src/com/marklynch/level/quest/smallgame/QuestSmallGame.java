@@ -226,9 +226,11 @@ public class QuestSmallGame extends Quest {
 		// Add lead hunter
 		GameObject brentsBed = Templates.BED.makeCopy(Game.level.squares[110][10], null);
 		hunterBrent = Templates.HUNTER.makeCopy("Lead Hunter Brent", Game.level.squares[105][8],
-				Game.level.factions.townsPeople, brentsBed, 203, new GameObject[] {
-						Templates.HUNTING_BOW.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.townForest);
+				Game.level.factions.townsPeople, brentsBed, 203,
+				new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.townForest,
+				new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId });
 		hunter = hunterBrent;
 
 		// Hunting lodge
@@ -249,37 +251,49 @@ public class QuestSmallGame extends Quest {
 		// Add hunters
 		GameObject brontsBed = Templates.BED.makeCopy(Game.level.squares[108][10], null);
 		Actor hunterBront1 = Templates.HUNTER.makeCopy("Hunter Bront", Game.level.squares[103][7],
-				Game.level.factions.townsPeople, brontsBed, 124, new GameObject[] {
-						Templates.HUNTING_BOW.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.townForest);
+				Game.level.factions.townsPeople, brontsBed, 124,
+				new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.townForest,
+				new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId });
 		GameObject bront2sBed = Templates.BED.makeCopy(Game.level.squares[106][10], null);
 		Human hunterBront2 = Templates.HUNTER.makeCopy("Hunter Brunt", Game.level.squares[103][8],
-				Game.level.factions.townsPeople, bront2sBed, 73, new GameObject[] {
-						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.townForest);
+				Game.level.factions.townsPeople, bront2sBed, 73,
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.townForest,
+				new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId });
 		GameObject bront3sBed = Templates.BED.makeCopy(Game.level.squares[110][12], null);
 		Human hunterBront3 = hunterBront2.makeCopy("Hunter Brant", Game.level.squares[103][9],
-				Game.level.factions.townsPeople, bront3sBed, 30, new GameObject[] {
-						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.townForest);
+				Game.level.factions.townsPeople, bront3sBed, 30,
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.townForest,
+				new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId });
 		// (String name, Square square, Faction faction, GameObject bed, int
 		// gold, GameObject[] mustHaves,
 		// GameObject[] mightHaves, Area area)
 		GameObject bront4sBed = Templates.BED.makeCopy(Game.level.squares[110][14], null);
 		Human hunterBront4 = hunterBront2.makeCopy("Hunter Brint", Game.level.squares[102][7],
-				Game.level.factions.townsPeople, bront4sBed, 83, new GameObject[] {
-						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.townForest);
+				Game.level.factions.townsPeople, bront4sBed, 83,
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.townForest,
+				new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId });
 		GameObject bront5sBed = Templates.BED.makeCopy(Game.level.squares[108][14], null);
 		Human hunterBront5 = hunterBront2.makeCopy("Hunter Brynt", Game.level.squares[102][8],
-				Game.level.factions.townsPeople, bront5sBed, 23, new GameObject[] {
-						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.townForest);
+				Game.level.factions.townsPeople, bront5sBed, 23,
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.townForest,
+				new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId });
 		GameObject bront6sBed = Templates.BED.makeCopy(Game.level.squares[106][14], null);
 		Human hunterBront6 = hunterBront2.makeCopy("Hunter Brint the Younger", Game.level.squares[102][9],
-				Game.level.factions.townsPeople, bront6sBed, 43, new GameObject[] {
-						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.townForest);
+				Game.level.factions.townsPeople, bront6sBed, 43,
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.townForest,
+				new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId });
 
 		// Guards and their barracks
 		// Structure 74,52 -> 85, 61
@@ -313,19 +327,22 @@ public class QuestSmallGame extends Quest {
 
 		// Thieves and their hut
 		Templates.THIEF.makeCopy("Thief Ed", Game.level.squares[12][13], Game.level.factions.outsiders,
-				Templates.BED.makeCopy(Game.level.squares[116][53], null), 64, new GameObject[] {
-						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.town);
+				Templates.BED.makeCopy(Game.level.squares[116][53], null), 64,
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.town, new int[] {});
 
 		Templates.THIEF.makeCopy("Thief Carl", Game.level.squares[11][13], Game.level.factions.outsiders,
-				Templates.BED.makeCopy(Game.level.squares[116][55], null), 64, new GameObject[] {
-						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.town);
+				Templates.BED.makeCopy(Game.level.squares[116][55], null), 64,
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.town, new int[] {});
 
 		Thief t3 = Templates.THIEF.makeCopy("Thief Pete", Game.level.squares[10][13], Game.level.factions.outsiders,
-				Templates.BED.makeCopy(Game.level.squares[114][55], null), 64, new GameObject[] {
-						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.town);
+				Templates.BED.makeCopy(Game.level.squares[114][55], null), 64,
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.town, new int[] {});
 		ArrayList<Wall> extraWallsThievesHut = new ArrayList<Wall>();
 		ArrayList<StructureFeature> featuresThievesHut = new ArrayList<StructureFeature>();
 		ArrayList<StructurePath> pathsThievesHut = new ArrayList<StructurePath>();
@@ -365,9 +382,11 @@ public class QuestSmallGame extends Quest {
 
 		// Ranget + hut
 		rangerBill = hunterBront2.makeCopy("Ranger Bill", Game.level.squares[105][16], Game.level.factions.townsPeople,
-				Templates.BED.makeCopy(Game.level.squares[131][35], null), 83, new GameObject[] {
-						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.townForest);
+				Templates.BED.makeCopy(Game.level.squares[131][35], null), 83,
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null),
+						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.townForest,
+				new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId });
 		rangerBill.quest = this;
 
 		ArrayList<Wall> extraWallsRangersHut = new ArrayList<Wall>();

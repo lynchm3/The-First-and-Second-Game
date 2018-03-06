@@ -25,10 +25,11 @@ public class Human extends Actor {
 	}
 
 	public Human makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves, Area area) {
+			GameObject[] mightHaves, Area area, int[] requiredEquipmentTemplateIds) {
 		Human actor = new Human();
 		setInstances(actor);
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
+		actor.requiredEquipmentTemplateIds = requiredEquipmentTemplateIds;
 
 		return actor;
 	}

@@ -1115,9 +1115,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			return false;
 		}
 
-		if (actor.name.contains("Joe") && xInGrid == 12 && yInGrid == 4) {
-			System.out.println("b");
-		}
+		if (this == goalNode)
+			return true;
 
 		if (inventory.canShareSquare) {
 			// doors
@@ -1133,10 +1132,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			return true;
 		} else if (inventory.actorThatCantShareSquare != null) {
 			return true;
-		}
-
-		if (this.restricted && actor != Game.level.player && !this.owners.contains(actor)) {
-			return false;
 		}
 
 		return false;

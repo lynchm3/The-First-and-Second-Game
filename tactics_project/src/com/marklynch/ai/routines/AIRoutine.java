@@ -99,8 +99,6 @@ public abstract class AIRoutine {
 	public ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>();
 	public ArrayList<Square> squareBounds = new ArrayList<Square>();
 
-	ArrayList<Integer> requiredEquipmentTemplateIds = new ArrayList<Integer>();
-
 	public AIRoutine(Actor actor) {
 		this.actor = actor;
 	}
@@ -1350,7 +1348,7 @@ public abstract class AIRoutine {
 	public boolean replenishEquipment() {
 
 		ArrayList<Integer> equipmentNeeded = new ArrayList<Integer>();
-		for (int requiredTemplateId : requiredEquipmentTemplateIds) {
+		for (int requiredTemplateId : actor.requiredEquipmentTemplateIds) {
 			if (!actor.inventory.containsObjectWithTemplateId(requiredTemplateId)) {
 				equipmentNeeded.add(requiredTemplateId);
 			}
@@ -1391,7 +1389,7 @@ public abstract class AIRoutine {
 			}
 
 			equipmentNeeded.clear();
-			for (int requiredTemplateId : requiredEquipmentTemplateIds) {
+			for (int requiredTemplateId : actor.requiredEquipmentTemplateIds) {
 				if (!actor.inventory.containsObjectWithTemplateId(requiredTemplateId)) {
 					equipmentNeeded.add(requiredTemplateId);
 				}
@@ -1406,6 +1404,8 @@ public abstract class AIRoutine {
 					cheatGameObject = Templates.HUNTING_BOW.makeCopy(null, null);
 				} else if (requiredTemplateId == Templates.HUNTING_KNIFE.templateId) {
 					cheatGameObject = Templates.HUNTING_KNIFE.makeCopy(null, null);
+				} else if (requiredTemplateId == Templates.SWORD.templateId) {
+					cheatGameObject = Templates.SWORD.makeCopy(null, null);
 				}
 
 				target.inventory.add(cheatGameObject);

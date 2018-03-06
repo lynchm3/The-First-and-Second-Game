@@ -34,7 +34,7 @@ public class AreaTown {
 		// Trader Joe
 		Trader trader = Templates.TRADER.makeCopy("Trader Joe", Game.level.squares[7][1],
 				Game.level.factions.townsPeople, Templates.BED.makeCopy(Game.level.squares[16][1], null), 10000,
-				new GameObject[] {}, new GameObject[] {}, null);
+				new GameObject[] {}, new GameObject[] {}, AreaList.town, new int[] {});
 
 		// Some ground hatchets
 		Templates.HATCHET.makeCopy(Game.level.squares[3][3], QuestList.questSmallGame.hunterBrent);

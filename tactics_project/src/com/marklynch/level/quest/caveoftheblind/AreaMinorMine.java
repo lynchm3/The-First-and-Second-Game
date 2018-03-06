@@ -75,7 +75,7 @@ public class AreaMinorMine {
 				bed, 0,
 				new GameObject[] {
 						/* Templates.PICKAXE.makeCopy(null, null), */Templates.LANTERN.makeCopy(null, null) },
-				new GameObject[] {}, AreaList.mines);
+				new GameObject[] {}, AreaList.mines, new int[] { Templates.PICKAXE.templateId });
 
 		// 281, 93
 		// Trader Joe
@@ -84,7 +84,7 @@ public class AreaMinorMine {
 				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),
 						Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),
 						Templates.PICKAXE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.mines, new int[] {});
 
 		Sign shopSign = Templates.SIGN.makeCopy(Game.level.squares[288][91], shopRoom.name + " sign",
 				new Object[] { shopRoom.name }, trader);

@@ -93,7 +93,7 @@ public class Player extends Human {
 
 	@Override
 	public Player makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
-			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area, int[] requiredEquipmentTemplateIds) {
 
 		Player actor = new Player();
 		setInstances(actor);

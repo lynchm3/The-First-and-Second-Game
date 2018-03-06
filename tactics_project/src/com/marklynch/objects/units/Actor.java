@@ -173,6 +173,8 @@ public class Actor extends GameObject {
 
 	public ArrayList<GameObject> gameObjectsInInventoryThatBelongToAnother = new ArrayList<GameObject>();
 
+	public int[] requiredEquipmentTemplateIds = new int[0];
+
 	public Actor() {
 
 		super();

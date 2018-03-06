@@ -400,7 +400,7 @@ public class Editor {
 
 		// Add player
 		Player player = Templates.PLAYER.makeCopy("You", Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
-				Level.factions.player, null, 100, new GameObject[] {}, new GameObject[] {}, null);
+				Level.factions.player, null, 100, new GameObject[] {}, new GameObject[] {}, null, new int[] {});
 		Game.level.player = player;
 		Weapon playersHuntingBow = Templates.HUNTING_BOW.makeCopy(null, player);
 		playersHuntingBow.enhancement = new EnhancementFireDamage();
