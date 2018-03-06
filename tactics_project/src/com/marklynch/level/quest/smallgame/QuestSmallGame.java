@@ -283,10 +283,10 @@ public class QuestSmallGame extends Quest {
 
 		// Guards and their barracks
 		// Structure 74,52 -> 85, 61
-		Templates.GUARD.makeCopy("Guard Paul", Game.level.squares[29][8], Game.level.factions.townsPeople,
+		Templates.GUARD.makeCopy("Guard Paul", Game.level.squares[77][53], Game.level.factions.townsPeople,
 				Templates.BED.makeCopy(Game.level.squares[79][56], null), 34,
 				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
-				Guard.dayShift, Game.level.squares[29][8]);
+				Guard.dayShift, Game.level.squares[77][53]);
 		Templates.GUARD.makeCopy("Guard John", Game.level.squares[29][12], Game.level.factions.townsPeople,
 				Templates.BED.makeCopy(Game.level.squares[81][56], null), 37,
 				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,

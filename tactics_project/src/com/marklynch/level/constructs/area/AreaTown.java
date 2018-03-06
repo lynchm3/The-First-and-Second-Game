@@ -80,7 +80,7 @@ public class AreaTown {
 		AreaList.innerTownForest.wantedPoster = wantedPoster;
 		AreaList.mines.wantedPoster = wantedPoster;
 
-		Storage lostAndFound = Templates.LOST_AND_FOUND.makeCopy("Town Lost and Found", Game.level.squares[28][8],
+		Storage lostAndFound = Templates.LOST_AND_FOUND.makeCopy("Town Lost and Found", Game.level.squares[75][53],
 				false, null);
 		AreaList.town.lostAndFound = lostAndFound;
 		AreaList.townForest.lostAndFound = lostAndFound;

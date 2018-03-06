@@ -39,6 +39,7 @@ public class Crime {
 	// final public static int TYPE.CRIME_ASSAULT = 10;
 
 	private boolean resolved;
+	public boolean reported;
 	public GameObject stolenItems[];
 	public TYPE type;
 	private ArrayList<CrimeListener> crimeListeners = new ArrayList<CrimeListener>();;

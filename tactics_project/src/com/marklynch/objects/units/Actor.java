@@ -1312,6 +1312,9 @@ public class Actor extends GameObject {
 
 		crimesWitnessedUnresolved.add(crime);
 
+		if (this instanceof Guard)
+			crime.reported = true;
+
 		if (!knownCriminals.contains(criminal))
 			knownCriminals.add(criminal);
 

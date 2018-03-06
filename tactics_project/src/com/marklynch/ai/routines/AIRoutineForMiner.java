@@ -103,7 +103,7 @@ public class AIRoutineForMiner extends AIRoutine {
 			return;
 
 		// Update wanted poster
-		if (updateWantedPosterRoutine())
+		if (reportToGuardRoutine())
 			return;
 
 		// Update wanted poster

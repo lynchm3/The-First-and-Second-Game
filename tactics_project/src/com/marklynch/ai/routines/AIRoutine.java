@@ -38,6 +38,7 @@ import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
+import com.marklynch.objects.actions.ActionReportCrime;
 import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActionTalk;
@@ -46,8 +47,8 @@ import com.marklynch.objects.actions.ActionWrite;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
-import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.Trader;
@@ -395,7 +396,7 @@ public abstract class AIRoutine {
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
 
 					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20, false, true,
-							false, false, false, false, 0, false, Human.class);
+							false, false, false, false, 0, false, Guard.class);
 
 					// if (this.actor.canSeeGameObject(actorNearby)) {
 					// } else {
@@ -1446,6 +1447,39 @@ public abstract class AIRoutine {
 			return true;
 		} else {
 			return AIRoutineUtils.moveTowards(wantedPoster.squareGameObjectIsOn);
+		}
+
+	}
+
+	public boolean reportToGuardRoutine() {
+
+		if (actor.highestAccumulatedUnresolvedCrimeSeverity == 0)
+			return false;
+
+		boolean crimesToReport = false;
+		for (Crime crime : actor.crimesWitnessedUnresolved) {
+			if (crime.reported == false) {
+				crimesToReport = true;
+				break;
+			}
+		}
+
+		if (!crimesToReport)
+			return false;
+
+		Guard guardNearby = (Guard) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false,
+				false, false, 0, false, Guard.class);
+
+		if (guardNearby == null)
+			return false;
+
+		this.actor.thoughtBubbleImageTextureObject = guardNearby.imageTexture;
+
+		if (actor.straightLineDistanceTo(guardNearby.squareGameObjectIsOn) < 2) {
+			new ActionReportCrime(actor, guardNearby).perform();
+			return true;
+		} else {
+			return AIRoutineUtils.moveTowards(guardNearby.squareGameObjectIsOn);
 		}
 
 	}

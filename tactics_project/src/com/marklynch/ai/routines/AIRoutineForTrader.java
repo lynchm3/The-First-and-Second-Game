@@ -83,11 +83,7 @@ public class AIRoutineForTrader extends AIRoutine {
 			return;
 
 		// Update wanted poster
-		if (updateWantedPosterRoutine())
-			return;
-
-		// Update wanted poster
-		if (dropOffToLostAndFoundRoutine())
+		if (reportToGuardRoutine())
 			return;
 
 		// Pick up from lost and found

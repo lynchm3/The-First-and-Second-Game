@@ -122,7 +122,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// Update wanted poster
-		if (updateWantedPosterRoutine())
+		if (reportToGuardRoutine())
 			return;
 
 		// Update wanted poster
