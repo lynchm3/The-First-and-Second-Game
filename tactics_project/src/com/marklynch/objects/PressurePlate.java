@@ -41,9 +41,12 @@ public class PressurePlate extends Switch {
 		}
 	}
 
-	@Override
-	public void update(int delta) {
-		super.update(delta);
+	// @Override
+	// public void update(int delta) {
+	// super.update(delta);
+	// }
+
+	public void updateWeight() {
 		if (squareGameObjectIsOn == null)
 			return;
 		int weightOnPlate = 0;
@@ -60,6 +63,7 @@ public class PressurePlate extends Switch {
 			use();
 			pressed = false;
 		}
+
 	}
 
 	public PressurePlate makeCopy(Square square, Actor owner, SwitchListener switchListener, SWITCH_TYPE switchType,

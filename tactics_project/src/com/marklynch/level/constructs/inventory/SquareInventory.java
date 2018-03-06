@@ -7,6 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;
@@ -72,6 +73,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			else
 				actorThatCantShareSquare = null;
 			door = (Door) getGameObjectOfClass(Door.class);
+
+			PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
+			if (pressurePlate != null)
+				pressurePlate.updateWeight();
 		}
 	}
 
@@ -92,6 +97,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			else
 				actorThatCantShareSquare = null;
 			door = (Door) getGameObjectOfClass(Door.class);
+
+			PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
+			if (pressurePlate != null)
+				pressurePlate.updateWeight();
 		}
 		return -1;
 	}
