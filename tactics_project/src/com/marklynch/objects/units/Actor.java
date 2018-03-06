@@ -133,7 +133,6 @@ public class Actor extends GameObject {
 
 	public HashMap<GameObject, Investigation> investigationsMap = new HashMap<GameObject, Investigation>();
 
-	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
 	public ArrayList<Crime> crimesPerformedThisTurn = new ArrayList<Crime>();
 	public ArrayList<Crime> crimesPerformedInLifetime = new ArrayList<Crime>();
 
@@ -1106,15 +1105,9 @@ public class Actor extends GameObject {
 		return null;
 	}
 
+	@Override
 	public void clearActions() {
-		for (Action action : actionsPerformedThisTurn) {
-			if (action.sound != null) {
-				for (Square destinationSquare : action.sound.destinationSquares) {
-					destinationSquare.sounds.remove(action.sound);
-				}
-			}
-		}
-		actionsPerformedThisTurn.clear();
+		super.clearActions();
 		crimesPerformedThisTurn.clear();
 	}
 

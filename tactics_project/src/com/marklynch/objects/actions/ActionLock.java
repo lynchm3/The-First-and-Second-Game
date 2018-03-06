@@ -59,7 +59,6 @@ public class ActionLock extends Action {
 				Game.level.undoList.clear();
 			}
 
-			actor.actionsPerformedThisTurn.add(this);
 		} else {
 
 			if (openable.isOpen())
@@ -72,6 +71,7 @@ public class ActionLock extends Action {
 
 			openable.showPow();
 		}
+		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

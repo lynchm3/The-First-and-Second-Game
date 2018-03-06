@@ -65,8 +65,8 @@ public class ActionUse extends Action {
 
 			trespassingCheck(this, actor, actor.squareGameObjectIsOn);
 
-			actor.actionsPerformedThisTurn.add(this);
 		}
+		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

@@ -59,9 +59,8 @@ public class ActionOpen extends Action {
 				new ActionStopPeeking(Game.level.player).perform();
 			}
 
-			actor.actionsPerformedThisTurn.add(this);
-
 		}
+		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

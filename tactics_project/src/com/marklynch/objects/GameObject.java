@@ -146,6 +146,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public transient Texture imageTexture = null;
 	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
+	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
 
 	// attributes
 	public float remainingHealth = 0;
@@ -719,6 +720,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void update(int delta) {
+
+		if (!(this instanceof Actor))
+			clearActions();
+
 		if (this.remainingHealth > 0) {
 			activateEffects();
 		}
@@ -1349,6 +1354,17 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			}
 		}
 		return true;
+	}
+
+	public void clearActions() {
+		for (Action action : actionsPerformedThisTurn) {
+			if (action.sound != null) {
+				for (Square destinationSquare : action.sound.destinationSquares) {
+					destinationSquare.sounds.remove(action.sound);
+				}
+			}
+		}
+		actionsPerformedThisTurn.clear();
 	}
 
 	public void attackedBy(Object attacker, Action action) {

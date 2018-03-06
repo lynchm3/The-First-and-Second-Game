@@ -54,8 +54,6 @@ public class ActionUnlock extends Action {
 				Game.level.undoList.clear();
 			}
 
-			actor.actionsPerformedThisTurn.add(this);
-
 			if (!legal) {
 				Crime crime = new Crime(this, actor, openable.owner, Crime.TYPE.CRIME_THEFT, key);
 				actor.crimesPerformedThisTurn.add(crime);
@@ -70,6 +68,8 @@ public class ActionUnlock extends Action {
 
 			openable.showPow();
 		}
+
+		performer.actionsPerformedThisTurn.add(this);
 
 		if (sound != null)
 			sound.play();
