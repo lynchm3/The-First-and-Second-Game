@@ -1475,7 +1475,7 @@ public abstract class AIRoutine {
 
 		this.actor.thoughtBubbleImageTextureObject = guardNearby.imageTexture;
 
-		if (actor.straightLineDistanceTo(guardNearby.squareGameObjectIsOn) < 2) {
+		if (actor.straightLineDistanceTo(guardNearby.squareGameObjectIsOn) <= 2) {
 			new ActionReportCrime(actor, guardNearby).perform();
 			return true;
 		} else {
