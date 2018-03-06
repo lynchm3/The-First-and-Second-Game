@@ -793,6 +793,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionMove(performer, this.squareGameObjectIsOn, true);
 		}
 
+		if (this instanceof Door) {
+			if (((Door) this).open) {
+				return new ActionMove(performer, this.squareGameObjectIsOn, true);
+			} else {
+				return new ActionOpen(performer, ((Door) this));
+			}
+		}
+
 		if (this.canContainOtherObjects && !this.canShareSquare)
 			return new ActionOpenOtherInventory(performer, this);
 
@@ -828,10 +836,17 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionOpenInventoryToDropItems(performer, this.squareGameObjectIsOn);
 		}
 
+		if (this instanceof Door) {
+			if (((Door) this).open) {
+				return new ActionClose(performer, ((Door) this));
+			}
+		}
+
 		if (this.canContainOtherObjects && this.inventory.size() > 0)
 			return new ActionOpenOtherInventory(performer, this);
 		if (this.fitsInInventory)
 			return new ActionTakeItems(performer, this.squareGameObjectIsOn, this);
+
 		return null;
 	}
 
