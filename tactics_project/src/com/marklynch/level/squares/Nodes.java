@@ -16,15 +16,9 @@ public class Nodes {
 	public static Node townShopCrossRoads; // 4,21
 	public static Node townCenter; // 24,22
 	public static Node townNorth; // 24,18
-	public static Node townEast; // 111,18
+	public static Node townNorthEast; // 111,18
 	public static Node lodgeJunction; // 104,18
 	public static Node lodgeEntrance; // 105,12
-
-	public static Node forestNorth; // 160,18
-	public static Node forestNorthEast; // 210,18
-
-	public static Node caveOfTheBlindWest; // 224,16
-	public static Node minorMine; // 280,87
 
 	public static Node dungeonHouseOuter; // 24,30
 	public static Node dungeonHouseHiddenArea; // 22,36
@@ -33,9 +27,28 @@ public class Nodes {
 	public static Node wallHouseBedroom; // 42,28
 	public static Node wallHouseHiddenArea; // 52,27
 
+	public static Node barracksNorth; // 80,52
+	public static Node barracksSouth; // 80,61
+
 	// Farm
-	public static Node farmOuterBend; // 4,62
-	public static Node farmInnerBend; // 18,62
+	public static Node farmRoadWest; // 4,62
+	public static Node farmRoadEast; // 18,62
+	public static Node farmEntrance; // 18,62
+	public static Node farmHallway; // 4,62
+	public static Node farmBedroom; // 18,62
+	public static Node farmStorage; // 4,62
+	public static Node farmBackDoor; // 18,62
+	public static Node farmPigPen; // 4,62
+
+	// Forest
+	public static Node forestNorth; // 160,18
+	public static Node forestNorthEast; // 210,18
+	public static Node forestThiefHut; // 210,18
+	public static Node forestRangersHut; // 210,18
+
+	// Mines
+	public static Node caveOfTheBlindWest; // 224,16
+	public static Node minorMine; // 280,87
 
 	public Nodes(Square[][] squares) {
 
@@ -70,8 +83,14 @@ public class Nodes {
 		townNorth = new Node("Town North", squares[24][18]);
 		nodes.add(townNorth);
 
-		townEast = new Node("Town East", squares[111][18]);
-		nodes.add(townEast);
+		townNorthEast = new Node("Town North East", squares[111][18]);
+		nodes.add(townNorthEast);
+
+		barracksNorth = new Node("Barracks North", squares[80][52]);
+		nodes.add(barracksNorth);
+
+		barracksSouth = new Node("Barracks South", squares[80][61]);
+		nodes.add(barracksSouth);
 
 		lodgeJunction = new Node("Lodge Junction", squares[104][18]);
 		nodes.add(lodgeJunction);
@@ -79,11 +98,30 @@ public class Nodes {
 		lodgeEntrance = new Node("Lodge", squares[105][12]);
 		nodes.add(lodgeEntrance);
 
-		farmOuterBend = new Node("Farm Road West", squares[4][62]);
-		nodes.add(farmOuterBend);
+		// Farm
+		farmRoadWest = new Node("Farm Road West", squares[4][62]);
+		nodes.add(farmRoadWest);
 
-		farmInnerBend = new Node("Farm Road", squares[18][62]);
-		nodes.add(farmInnerBend);
+		farmRoadEast = new Node("Farm Road East", squares[18][62]);
+		nodes.add(farmRoadEast);
+
+		farmEntrance = new Node("Farm Entrance", squares[18][69]);
+		nodes.add(farmEntrance);
+
+		farmHallway = new Node("Farm Hallway", squares[18][75]);
+		nodes.add(farmHallway);
+
+		farmBedroom = new Node("Farm Bedroom", squares[17][78]);
+		nodes.add(farmBedroom);
+
+		farmStorage = new Node("Farm Storage", squares[21][78]);
+		nodes.add(farmStorage);
+
+		farmBackDoor = new Node("Farm Back Door", squares[21][85]);
+		nodes.add(farmBackDoor);
+
+		farmPigPen = new Node("Farm Pig Pen", squares[32][72]);
+		nodes.add(farmPigPen);
 
 		// forest
 		forestNorth = new Node("Forest North", squares[160][18]);
@@ -91,6 +129,12 @@ public class Nodes {
 
 		forestNorthEast = new Node("Forest North East", squares[210][18]);
 		nodes.add(forestNorthEast);
+
+		forestThiefHut = new Node("Hut", squares[113][53]);
+		nodes.add(forestThiefHut);
+
+		forestRangersHut = new Node("Forest Ranger's Hut", squares[133][34]);
+		nodes.add(forestRangersHut);
 
 		// Mine
 		caveOfTheBlindWest = new Node("Cave of the Blind West", squares[234][16]);
@@ -108,12 +152,22 @@ public class Nodes {
 
 		townShopCrossRoads.neighbors.add(townShopOuter);
 		townShopCrossRoads.neighbors.add(townCenter);
-		townShopCrossRoads.neighbors.add(farmOuterBend);
+		townShopCrossRoads.neighbors.add(farmRoadWest);
 
 		townCenter.neighbors.add(townShopCrossRoads);
 		townCenter.neighbors.add(dungeonHouseOuter);
 		townCenter.neighbors.add(wallsHouseOuter);
 		townCenter.neighbors.add(townNorth);
+		townCenter.neighbors.add(barracksNorth);
+		townCenter.neighbors.add(barracksSouth);
+
+		barracksNorth.neighbors.add(townCenter);
+		barracksNorth.neighbors.add(barracksSouth);
+		barracksNorth.neighbors.add(forestThiefHut);
+
+		barracksSouth.neighbors.add(townCenter);
+		barracksSouth.neighbors.add(barracksNorth);
+		barracksSouth.neighbors.add(forestThiefHut);
 
 		dungeonHouseOuter.neighbors.add(townCenter);
 		dungeonHouseOuter.neighbors.add(dungeonHouseHiddenArea);
@@ -131,26 +185,60 @@ public class Nodes {
 		townNorth.neighbors.add(townCenter);
 		townNorth.neighbors.add(lodgeJunction);
 
-		lodgeJunction.neighbors.add(townEast);
+		lodgeJunction.neighbors.add(townNorthEast);
 		lodgeJunction.neighbors.add(lodgeEntrance);
 		lodgeJunction.neighbors.add(townNorth);
 
 		lodgeEntrance.neighbors.add(lodgeJunction);
 
-		townEast.neighbors.add(lodgeJunction);
-		townEast.neighbors.add(forestNorth);
+		townNorthEast.neighbors.add(lodgeJunction);
+		townNorthEast.neighbors.add(forestNorth);
+		townNorthEast.neighbors.add(forestThiefHut);
+		townNorthEast.neighbors.add(forestRangersHut);
 
-		farmOuterBend.neighbors.add(townShopCrossRoads);
-		farmOuterBend.neighbors.add(farmInnerBend);
+		// Farm
+		farmRoadWest.neighbors.add(townShopCrossRoads);
+		farmRoadWest.neighbors.add(farmRoadEast);
 
-		farmInnerBend.neighbors.add(farmOuterBend);
+		farmRoadEast.neighbors.add(farmRoadWest);
+		farmRoadEast.neighbors.add(farmEntrance);
+		farmRoadEast.neighbors.add(farmPigPen);
+
+		farmEntrance.neighbors.add(farmRoadEast);
+		farmEntrance.neighbors.add(farmHallway);
+
+		farmHallway.neighbors.add(farmEntrance);
+		farmHallway.neighbors.add(farmBedroom);
+		farmHallway.neighbors.add(farmStorage);
+
+		farmBedroom.neighbors.add(farmHallway);
+
+		farmStorage.neighbors.add(farmHallway);
+		farmStorage.neighbors.add(farmBackDoor);
+
+		farmBackDoor.neighbors.add(farmStorage);
+		farmBackDoor.neighbors.add(farmRoadEast);
+
+		farmPigPen.neighbors.add(farmRoadEast);
 
 		// forest
-		forestNorth.neighbors.add(townEast);
+		forestNorth.neighbors.add(townNorthEast);
 		forestNorth.neighbors.add(forestNorthEast);
+		forestNorth.neighbors.add(forestThiefHut);
+		forestNorth.neighbors.add(forestRangersHut);
 
 		forestNorthEast.neighbors.add(forestNorth);
 		forestNorthEast.neighbors.add(caveOfTheBlindWest);
+
+		forestThiefHut.neighbors.add(forestNorth);
+		forestThiefHut.neighbors.add(townNorthEast);
+		forestThiefHut.neighbors.add(forestRangersHut);
+		forestThiefHut.neighbors.add(barracksNorth);
+		forestThiefHut.neighbors.add(barracksSouth);
+
+		forestRangersHut.neighbors.add(townNorthEast);
+		forestRangersHut.neighbors.add(forestNorth);
+		forestRangersHut.neighbors.add(forestThiefHut);
 
 		// mine
 		caveOfTheBlindWest.neighbors.add(forestNorthEast);

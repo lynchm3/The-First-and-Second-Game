@@ -59,14 +59,14 @@ public class AIRoutineForMort extends AIRoutine {
 		aiRoutineStart();
 
 		// If blind are in mine and getting too close to mgmt door, move to it
-		float mortsDistanceFromGameObjectroomDoor = mort
+		float mortsDistanceFromBedroomDoor = mort
 				.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsGameRoomDoor.squareGameObjectIsOn);
 		if (!retreatedToRoom) {
 			for (Blind blind : mort.questCaveOfTheBlind.blind) {
 				if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
 					float blindDistanceFromMortsRoom = blind
 							.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsGameRoomDoor.squareGameObjectIsOn);
-					if (blindDistanceFromMortsRoom - mortsDistanceFromGameObjectroomDoor < 4) {
+					if (blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor < 4) {
 						Square doorSquare = mort.questCaveOfTheBlind.mortsGameRoomDoor.squareGameObjectIsOn;
 						Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
 						mort.performingFeedingDemo = false;

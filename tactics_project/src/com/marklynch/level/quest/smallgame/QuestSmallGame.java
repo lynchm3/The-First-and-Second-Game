@@ -299,12 +299,12 @@ public class QuestSmallGame extends Quest {
 		ArrayList<Square> squaresToRemoveBarracks = new ArrayList<Square>();
 		featuresBarracks.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[80][52], false, false, false, null),
-				Nodes.townCenter));
+				Nodes.barracksNorth));
 		featuresBarracks.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[80][61], false, false, false, null),
-				Nodes.townCenter));
+				Nodes.barracksSouth));
 		roomsBarracks.add(new StructureRoom("Barracks", 75, 53, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.townCenter }, new RoomPart(75, 53, 84, 60)));
+				new Node[] { Nodes.barracksNorth, Nodes.barracksSouth }, new RoomPart(75, 53, 84, 60)));
 		sectionsBarracks.add(new StructureSection("Barracks", 74, 52, 85, 61, false));
 		Structure barracks = new Structure("Barracks", sectionsBarracks, roomsBarracks, pathsBarracks, featuresBarracks,
 				new ArrayList<Square>(), null, 74, 52, 85, 61, true, null, squaresToRemoveBarracks, extraWallsBarracks,
@@ -334,9 +334,9 @@ public class QuestSmallGame extends Quest {
 		ArrayList<Square> squaresToRemoveThievesHut = new ArrayList<Square>();
 		featuresThievesHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[113][53], false, false, false, null),
-				Nodes.forestNorth));
+				Nodes.forestThiefHut));
 		roomsThievesHut.add(new StructureRoom("Hut", 114, 53, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.forestNorth }, new RoomPart(114, 53, 116, 55)));
+				new Node[] { Nodes.forestThiefHut }, new RoomPart(114, 53, 116, 55)));
 		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false));
 		Structure thievesHut = new Structure("Hut", sectionsThievesHut, roomsThievesHut, pathsThievesHut,
 				featuresThievesHut, new ArrayList<Square>(), null, 113, 52, 117, 56, true, null,
@@ -378,9 +378,9 @@ public class QuestSmallGame extends Quest {
 		ArrayList<Square> squaresToRemoveRangersHut = new ArrayList<Square>();
 		featuresRangersHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[133][34], false, false, false, rangerBill),
-				Nodes.forestNorth));
+				Nodes.forestRangersHut));
 		roomsRangersHut.add(new StructureRoom("Ranger's Hut", 130, 34, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.forestNorth }, new RoomPart(130, 34, 132, 36)));
+				new Node[] { Nodes.forestRangersHut }, new RoomPart(130, 34, 132, 36)));
 		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false));
 		Structure rangerHut = new Structure("Ranger's Hut", sectionsRangersHut, roomsRangersHut, pathsRangersHut,
 				featuresRangersHut, new ArrayList<Square>(), null, 129, 33, 133, 37, true, null,

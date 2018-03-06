@@ -60,10 +60,10 @@ public class QuestBetweenTheWalls extends Quest {
 		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[46][23], null));
 		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[51][23], null));
 
-		// GameObjectroom Section
+		// Bedroom Section
 		structureSections.add(new StructureSection("A Lovely House", 41, 28, 56, 38, false));
 
-		// GameObjectroom door
+		// Bedroom door
 		structurePaths.add(new StructurePath("Front Room", false, new ArrayList(), new Node[] { Nodes.wallsHouseOuter },
 				Game.level.squares[42][27]));
 		structureFeatures.add(new StructureFeature(
@@ -72,12 +72,12 @@ public class QuestBetweenTheWalls extends Quest {
 		structurePaths.add(new StructurePath("Bedroom", false, new ArrayList(), new Node[] { Nodes.wallHouseBedroom },
 				Game.level.squares[42][29]));
 
-		// GameObjectroom room
+		// Bedroom room
 		StructureRoom bedRoom = new StructureRoom("wallHouseBedroom", 42, 30, false, new ArrayList<Actor>(),
 				new Node[] { Nodes.wallHouseBedroom }, new RoomPart(42, 30, 53, 34));
 		structureRooms.add(bedRoom);
 
-		// GameObjectroom decorative walls
+		// Bedroom decorative walls
 		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[53][30], null));
 		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[53][34], null));
 		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[42][34], null));
