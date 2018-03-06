@@ -1007,7 +1007,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (!decorative && this != Game.level.player && attackable)
 			actions.add(new ActionAttack(performer, this));
 
-		if (!decorative && this != Game.level.player && attackable)
+		if (!decorative && this != Game.level.player && attackable && !(this instanceof Wall)
+				&& !(this instanceof Door))
 			actions.add(new ActionTeleportOther(performer, this));
 		// }
 		if (!decorative && this != Game.level.player && this instanceof Actor)
