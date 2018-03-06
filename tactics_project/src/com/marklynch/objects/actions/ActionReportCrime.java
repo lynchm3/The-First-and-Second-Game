@@ -42,7 +42,7 @@ public class ActionReportCrime extends Action {
 
 		for (Crime crime : performer.crimesWitnessedUnresolved) {
 			if (!guard.crimesWitnessedUnresolved.contains(crime)) {
-				guard.crimesWitnessedUnresolved.add(crime);
+				guard.addWitnessedCrime(crime);
 				crime.reported = true;
 			}
 		}
