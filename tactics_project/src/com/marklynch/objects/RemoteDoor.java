@@ -40,6 +40,8 @@ public class RemoteDoor extends Door {
 		open = true;
 
 		soundDampening = 1f;
+
+		name = baseName + " (open)";
 	}
 
 	@Override
@@ -47,6 +49,7 @@ public class RemoteDoor extends Door {
 		open = false;
 		blocksLineOfSight = blocksLineOfSightWhenClosed;
 		soundDampening = soundDampeningWhenClosed;
+		name = baseName;
 	}
 
 	public RemoteDoor makeCopy(String name, Square square, boolean locked, Key... keys) {
