@@ -36,6 +36,7 @@ import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDig;
+import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionEatItems;
 import com.marklynch.objects.actions.ActionEatItemsSelectedInInventory;
@@ -51,7 +52,9 @@ import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionOpen;
+import com.marklynch.objects.actions.ActionOpenInventoryToDropItems;
 import com.marklynch.objects.actions.ActionOpenInventoryToGiveItems;
 import com.marklynch.objects.actions.ActionOpenInventoryToThrowItems;
 import com.marklynch.objects.actions.ActionOpenOtherInventory;
@@ -786,6 +789,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionChop(performer, this);
 		}
 
+		if (this instanceof PressurePlate) {
+			return new ActionMove(performer, this.squareGameObjectIsOn, true);
+		}
+
 		if (this.canContainOtherObjects && !this.canShareSquare)
 			return new ActionOpenOtherInventory(performer, this);
 
@@ -816,10 +823,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionChop(performer, this);
 		}
 
-		// Water Source
-		if (this instanceof WaterSource) {
-			return new ActionFillContainersInInventory(performer, (WaterSource) this);
-			// return new ActionFishing(performer, (WaterSource) this);
+		// Pressure Plate
+		if (this instanceof PressurePlate) {
+			return new ActionOpenInventoryToDropItems(performer, this.squareGameObjectIsOn);
 		}
 
 		if (this.canContainOtherObjects && this.inventory.size() > 0)
@@ -911,7 +917,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Switch
 		if (this instanceof PressurePlate) {
-
+			if (performer.equipped != null)
+				actions.add(new ActionDropItems(performer, this.squareGameObjectIsOn, performer.equipped));
+			actions.add(new ActionOpenInventoryToDropItems(performer, this.squareGameObjectIsOn));
 		} else if (this instanceof Switch) {
 			Switch zwitch = (Switch) this;
 			actions.add(

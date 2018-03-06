@@ -36,6 +36,7 @@ public class ActionDropItems extends VariableQtyAction {
 		if (!check()) {
 			enabled = false;
 		} else {
+
 			actionName = ACTION_NAME + " " + objects[0].name;
 		}
 		legal = checkLegality();
@@ -132,6 +133,10 @@ public class ActionDropItems extends VariableQtyAction {
 
 	@Override
 	public boolean check() {
+
+		if (objects == null || objects.length == 0 || objects[0] == null)
+			return false;
+
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
 			if (!actor.inventory.contains(objects[0]) && actor.equipped != objects[0]) {
