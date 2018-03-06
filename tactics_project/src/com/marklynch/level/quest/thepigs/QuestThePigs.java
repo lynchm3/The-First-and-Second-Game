@@ -139,15 +139,17 @@ public class QuestThePigs extends Quest {
 		Door farmHouseFrontDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[18][69], false, false, false,
 				farmer);
 		farmHouseFeatures.add(new StructureFeature(farmHouseFrontDoor, Nodes.farmEntrance));
-		Door farmHouseHallDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[18][75], true, true, true, farmer);
+		Door farmHouseHallDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[18][75], false, false, false,
+				farmer);
 		farmHouseFeatures.add(new StructureFeature(farmHouseHallDoor, Nodes.farmHallway));
-		Door farmHouseStorageDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][78], true, true, true,
+		Door farmHouseStorageDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][78], false, false, false,
 				farmer);
 		farmHouseFeatures.add(new StructureFeature(farmHouseStorageDoor, Nodes.farmStorage));
-		Door farmHouseBedRoomDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[17][78], true, true, true,
+		Door farmHouseBedRoomDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[17][78], false, false, false,
 				farmer);
 		farmHouseFeatures.add(new StructureFeature(farmHouseBedRoomDoor, Nodes.farmBedroom));
-		Door farmHouseBackDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][85], true, true, true, farmer);
+		Door farmHouseBackDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][85], false, false, false,
+				farmer);
 		farmHouseFeatures.add(new StructureFeature(farmHouseBackDoor, Nodes.farmBackDoor));
 
 		farmHouseFrontSection = new StructureSection("Farm House", 12, 69, 24, 74, false, farmer);

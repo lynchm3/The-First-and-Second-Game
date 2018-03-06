@@ -16,7 +16,9 @@ public class Nodes {
 	public static Node townShopCrossRoads; // 4,21
 	public static Node townCenter; // 24,22
 	public static Node townNorth; // 24,18
-	public static Node townNorthEast; // 111,18
+	public static Node townNorthEast; // 24,18
+	public static Node townEast; // 24,18
+	public static Node townSouthEast; // 24,18
 	public static Node lodgeJunction; // 104,18
 	public static Node lodgeEntrance; // 105,12
 
@@ -41,6 +43,7 @@ public class Nodes {
 	public static Node farmPigPen; // 4,62
 
 	// Forest
+	public static Node forestNorthWest; // 111,18
 	public static Node forestNorth; // 160,18
 	public static Node forestNorthEast; // 210,18
 	public static Node forestThiefHut; // 210,18
@@ -83,8 +86,14 @@ public class Nodes {
 		townNorth = new Node("Town North", squares[24][18]);
 		nodes.add(townNorth);
 
-		townNorthEast = new Node("Town North East", squares[111][18]);
+		townNorthEast = new Node("Town North East", squares[89][19]);
 		nodes.add(townNorthEast);
+
+		townEast = new Node("Town East", squares[89][40]);
+		nodes.add(townEast);
+
+		townSouthEast = new Node("Town South East", squares[89][63]);
+		nodes.add(townSouthEast);
 
 		barracksNorth = new Node("Barracks North", squares[80][52]);
 		nodes.add(barracksNorth);
@@ -124,6 +133,9 @@ public class Nodes {
 		nodes.add(farmPigPen);
 
 		// forest
+		forestNorthWest = new Node("Town North East", squares[111][18]);
+		nodes.add(forestNorthWest);
+
 		forestNorth = new Node("Forest North", squares[160][18]);
 		nodes.add(forestNorth);
 
@@ -158,16 +170,18 @@ public class Nodes {
 		townCenter.neighbors.add(dungeonHouseOuter);
 		townCenter.neighbors.add(wallsHouseOuter);
 		townCenter.neighbors.add(townNorth);
+		townCenter.neighbors.add(townEast);
 		townCenter.neighbors.add(barracksNorth);
 		townCenter.neighbors.add(barracksSouth);
+		townCenter.neighbors.add(farmRoadEast);
 
 		barracksNorth.neighbors.add(townCenter);
 		barracksNorth.neighbors.add(barracksSouth);
-		barracksNorth.neighbors.add(forestThiefHut);
+		barracksNorth.neighbors.add(townEast);
 
 		barracksSouth.neighbors.add(townCenter);
 		barracksSouth.neighbors.add(barracksNorth);
-		barracksSouth.neighbors.add(forestThiefHut);
+		barracksSouth.neighbors.add(townSouthEast);
 
 		dungeonHouseOuter.neighbors.add(townCenter);
 		dungeonHouseOuter.neighbors.add(dungeonHouseHiddenArea);
@@ -183,18 +197,26 @@ public class Nodes {
 		wallHouseBedroom.neighbors.add(wallsHouseOuter);
 
 		townNorth.neighbors.add(townCenter);
-		townNorth.neighbors.add(lodgeJunction);
+		townNorth.neighbors.add(townNorthEast);
 
-		lodgeJunction.neighbors.add(townNorthEast);
+		townNorthEast.neighbors.add(townNorth);
+		townNorthEast.neighbors.add(townEast);
+		townNorthEast.neighbors.add(lodgeJunction);
+
+		townEast.neighbors.add(townCenter);
+		townEast.neighbors.add(townNorthEast);
+		townEast.neighbors.add(townSouthEast);
+		townEast.neighbors.add(barracksNorth);
+
+		townSouthEast.neighbors.add(townEast);
+		townSouthEast.neighbors.add(barracksSouth);
+		townSouthEast.neighbors.add(farmRoadEast);
+
+		lodgeJunction.neighbors.add(forestNorthWest);
 		lodgeJunction.neighbors.add(lodgeEntrance);
-		lodgeJunction.neighbors.add(townNorth);
+		lodgeJunction.neighbors.add(townNorthEast);
 
 		lodgeEntrance.neighbors.add(lodgeJunction);
-
-		townNorthEast.neighbors.add(lodgeJunction);
-		townNorthEast.neighbors.add(forestNorth);
-		townNorthEast.neighbors.add(forestThiefHut);
-		townNorthEast.neighbors.add(forestRangersHut);
 
 		// Farm
 		farmRoadWest.neighbors.add(townShopCrossRoads);
@@ -203,6 +225,9 @@ public class Nodes {
 		farmRoadEast.neighbors.add(farmRoadWest);
 		farmRoadEast.neighbors.add(farmEntrance);
 		farmRoadEast.neighbors.add(farmPigPen);
+		farmRoadEast.neighbors.add(farmBackDoor);
+		farmRoadEast.neighbors.add(townSouthEast);
+		farmRoadEast.neighbors.add(townCenter);
 
 		farmEntrance.neighbors.add(farmRoadEast);
 		farmEntrance.neighbors.add(farmHallway);
@@ -222,7 +247,12 @@ public class Nodes {
 		farmPigPen.neighbors.add(farmRoadEast);
 
 		// forest
-		forestNorth.neighbors.add(townNorthEast);
+		forestNorthWest.neighbors.add(lodgeJunction);
+		forestNorthWest.neighbors.add(forestNorth);
+		forestNorthWest.neighbors.add(forestThiefHut);
+		forestNorthWest.neighbors.add(forestRangersHut);
+
+		forestNorth.neighbors.add(forestNorthWest);
 		forestNorth.neighbors.add(forestNorthEast);
 		forestNorth.neighbors.add(forestThiefHut);
 		forestNorth.neighbors.add(forestRangersHut);
@@ -231,12 +261,10 @@ public class Nodes {
 		forestNorthEast.neighbors.add(caveOfTheBlindWest);
 
 		forestThiefHut.neighbors.add(forestNorth);
-		forestThiefHut.neighbors.add(townNorthEast);
+		forestThiefHut.neighbors.add(forestNorthWest);
 		forestThiefHut.neighbors.add(forestRangersHut);
-		forestThiefHut.neighbors.add(barracksNorth);
-		forestThiefHut.neighbors.add(barracksSouth);
 
-		forestRangersHut.neighbors.add(townNorthEast);
+		forestRangersHut.neighbors.add(forestNorthWest);
 		forestRangersHut.neighbors.add(forestNorth);
 		forestRangersHut.neighbors.add(forestThiefHut);
 
