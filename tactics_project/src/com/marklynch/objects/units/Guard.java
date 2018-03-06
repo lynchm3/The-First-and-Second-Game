@@ -44,6 +44,7 @@ public class Guard extends Human {
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
 		actor.shift = shift;
 		actor.patrolSquares = patrolSquares;
+		actor.hobbies = hobbies;
 		return actor;
 	}
 

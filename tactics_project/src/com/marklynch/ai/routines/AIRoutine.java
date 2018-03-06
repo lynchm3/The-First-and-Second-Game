@@ -1268,6 +1268,9 @@ public abstract class AIRoutine {
 		if (keepInBounds == false)
 			return true;
 
+		if (square == null)
+			return false;
+
 		for (Area area : areaBounds) {
 			if (square.areaSquareIsIn == area) {
 				return true;
