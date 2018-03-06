@@ -1101,7 +1101,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		Game.includableInPath++;
 
 		// if
-		if (actor == Game.level.player && !this.visibleToPlayer)
+		if (actor == Game.level.player && !this.seenByPlayer)
 			return true;
 
 		if (this == goalNode)
