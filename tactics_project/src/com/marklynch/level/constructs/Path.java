@@ -9,6 +9,8 @@ public class Path {
 
 		for (Square square : squares) {
 			square.imageTexture = Square.STONE_TEXTURE;
+			square.calculatePathCost();
+			square.calculatePathCostForPlayer();
 		}
 
 	}
@@ -17,6 +19,8 @@ public class Path {
 		for (int i = x1; i <= x2; i++) {
 			for (int j = y1; j <= y2; j++) {
 				Game.level.squares[i][j].imageTexture = Square.STONE_TEXTURE;
+				Game.level.squares[i][j].calculatePathCost();
+				Game.level.squares[i][j].calculatePathCostForPlayer();
 			}
 		}
 

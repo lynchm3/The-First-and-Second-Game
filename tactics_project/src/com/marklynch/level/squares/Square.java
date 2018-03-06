@@ -1043,18 +1043,22 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		// if (!inventory.canShareSquare())
 		// cost = 999;
 		if (inventory.contains(BrokenGlass.class))
-			cost = 9;
+			cost = 10;
 		else if (inventory.contains(Actor.class))
-			cost = 9;
-		else
+			cost = 10;
+		else if (this.imageTexture == Square.STONE_TEXTURE)
 			cost = 1;
+		else
+			cost = 2;
 	}
 
 	public void calculatePathCostForPlayer() {
 		if (inventory.contains(BrokenGlass.class))
 			costForPlayer = 9;
-		else
+		else if (this.imageTexture == Square.STONE_TEXTURE)
 			costForPlayer = 1;
+		else
+			costForPlayer = 2;
 	}
 
 	// added by me

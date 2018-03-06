@@ -59,6 +59,8 @@ public class Structure {
 		// Entrance squares
 		for (Square entranceSquare : entranceSquares) {
 			entranceSquare.imageTexture = imageTexture;
+			entranceSquare.calculatePathCost();
+			entranceSquare.calculatePathCostForPlayer();
 		}
 
 		// Feature squares
