@@ -796,7 +796,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (this instanceof Door) {
 			if (((Door) this).open) {
 				return new ActionMove(performer, this.squareGameObjectIsOn, true);
-			} else {
+			} else if (!(this instanceof RemoteDoor)) {
 				return new ActionOpen(performer, ((Door) this));
 			}
 		}
@@ -836,7 +836,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionOpenInventoryToDropItems(performer, this.squareGameObjectIsOn);
 		}
 
-		if (this instanceof Door) {
+		if (this instanceof Door && !(this instanceof RemoteDoor)) {
 			if (((Door) this).open) {
 				return new ActionClose(performer, ((Door) this));
 			}
