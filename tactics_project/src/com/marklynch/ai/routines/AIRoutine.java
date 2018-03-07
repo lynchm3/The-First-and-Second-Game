@@ -1335,6 +1335,8 @@ public abstract class AIRoutine {
 					cheatGameObject = Templates.HUNTING_KNIFE.makeCopy(null, null);
 				} else if (requiredTemplateId == Templates.SWORD.templateId) {
 					cheatGameObject = Templates.SWORD.makeCopy(null, null);
+				} else if (requiredTemplateId == Templates.FISHING_ROD.templateId) {
+					cheatGameObject = Templates.FISHING_ROD.makeCopy(null, null);
 				}
 
 				target.inventory.add(cheatGameObject);
