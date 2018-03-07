@@ -1101,7 +1101,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public float getEstimatedCost(Square node) {
 		Game.getEstimatedCost++;
-		return this.straightLineDistanceTo(node) + node.cost - 1;
+		return this.straightLineDistanceTo(node) + this.cost - 1;
 	}
 
 	public List getNeighborsThatCanBeMovedTo(Actor actor) {
