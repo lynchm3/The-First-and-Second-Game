@@ -13,6 +13,7 @@ import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
+import com.marklynch.objects.WaterBody;
 import com.marklynch.utils.ResourceUtils;
 
 public class TemplatesNature {
@@ -338,6 +339,35 @@ public class TemplatesNature {
 		Templates.MEAT_CHUNK.anchorY = 0;
 		Templates.MEAT_CHUNK.templateId = GameObject.generateNewTemplateId();
 		Templates.MEAT_CHUNK.bluntDamage = 2;
+
+		// WATER_BODY
+		Templates.WATER_BODY = new WaterBody();
+		Templates.WATER_BODY.name = "Water";
+		Templates.WATER_BODY.imageTexturePath = "water.png";
+		Templates.WATER_BODY.imageTexture = getGlobalImage(Templates.WATER_BODY.imageTexturePath, true);
+		Templates.WATER_BODY.totalHealth = Templates.WATER_BODY.remainingHealth = 1000;
+		Templates.WATER_BODY.widthRatio = 1f;
+		Templates.WATER_BODY.heightRatio = 1f;
+		Templates.WATER_BODY.drawOffsetRatioX = 0f;
+		Templates.WATER_BODY.drawOffsetRatioY = 0f;
+		Templates.WATER_BODY.soundWhenHit = 1f;
+		Templates.WATER_BODY.soundWhenHitting = 1f;
+		Templates.WATER_BODY.soundDampening = 10f;
+		Templates.WATER_BODY.stackable = false;
+		Templates.WATER_BODY.weight = 1000f;
+		Templates.WATER_BODY.value = 36;
+		Templates.WATER_BODY.anchorX = 0;
+		Templates.WATER_BODY.anchorY = 0;
+		Templates.WATER_BODY.templateId = GameObject.generateNewTemplateId();
+		Templates.WATER_BODY.flipYAxisInMirror = false;
+		Templates.WATER_BODY.slashResistance = 100;
+		Templates.WATER_BODY.bluntResistance = 100;
+		Templates.WATER_BODY.pierceResistance = 100;
+		Templates.WATER_BODY.fireResistance = 100;
+		Templates.WATER_BODY.waterResistance = 100;
+		Templates.WATER_BODY.electricResistance = 100;
+		Templates.WATER_BODY.poisonResistance = 100;
+		Templates.WATER_BODY.bleedingResistance = 100;
 
 	}
 

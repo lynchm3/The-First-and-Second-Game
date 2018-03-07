@@ -766,8 +766,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Water Source
-		if (this instanceof WaterSource) {
-			return new ActionFishing(performer, (WaterSource) this);
+		if (this instanceof WaterBody) {
+			return new ActionFishing(performer, (WaterBody) this);
 			// return new ActionFillContainersInInventory(performer,
 			// (WaterSource) this);
 		}
@@ -801,8 +801,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			}
 		}
 
-		if (this.canContainOtherObjects && !this.canShareSquare)
+		if ((this instanceof Openable) && this.canContainOtherObjects && !(this instanceof Actor)) {
 			return new ActionOpenOtherInventory(performer, this);
+		}
 
 		if (this.fitsInInventory)
 			return new ActionTakeItems(performer, this.squareGameObjectIsOn, this);
@@ -842,8 +843,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			}
 		}
 
-		if (this.canContainOtherObjects && this.inventory.size() > 0)
-			return new ActionOpenOtherInventory(performer, this);
+		// if ((this instanceof Openable) && this.canContainOtherObjects &&
+		// !(this instanceof Actor)) {
+		// return new ActionOpenOtherInventory(performer, this);
+		// }
+
 		if (this.fitsInInventory)
 			return new ActionTakeItems(performer, this.squareGameObjectIsOn, this);
 
@@ -888,7 +892,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// Water Source
 		if (this instanceof WaterSource) {
 			actions.add(new ActionFillContainersInInventory(performer, (WaterSource) this));
-			actions.add(new ActionFishing(performer, (WaterSource) this));
+		}
+
+		// Water Body
+		if (this instanceof WaterBody) {
+			actions.add(new ActionFishing(performer, (WaterBody) this));
 		}
 
 		// Skinnable
@@ -952,7 +960,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Loot
-		if (!decorative && this.canContainOtherObjects && !(this instanceof Actor)) {
+		if ((this instanceof Openable) && this.canContainOtherObjects && !(this instanceof Actor)) {
 			actions.add(new ActionOpenOtherInventory(performer, this));
 		}
 

@@ -1047,8 +1047,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			cost = 10;
 		} else if (this.imageTexture == Square.STONE_TEXTURE) {
 			cost = 1;
-		} else if (this.imageTexture == Square.WATER_TEXTURE) {
-			cost = 5;
+			// } else if (this.imageTexture == Square.WATER_TEXTURE) {
+			// cost = 5;
 		} else {
 			cost = 2;
 		}
@@ -1060,8 +1060,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		else if (this.imageTexture == Square.STONE_TEXTURE) {
 			// System.out.println("STONE TEXTURE!!!!");
 			costForPlayer = 1;
-		} else if (this.imageTexture == Square.WATER_TEXTURE) {
-			cost = 5;
+			// } else if (this.imageTexture == Square.WATER_TEXTURE) {
+			// cost = 5;
 
 		} else
 			costForPlayer = 2;

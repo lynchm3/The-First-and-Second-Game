@@ -37,6 +37,7 @@ import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.WantedPoster;
+import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
@@ -261,6 +262,8 @@ public class Templates {
 	public static Wall FENCE;
 
 	public static Vein VEIN;
+
+	public static WaterBody WATER_BODY;
 
 	public static BigGameObject BOULDER;
 

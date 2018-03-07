@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.WaterSource;
+import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
@@ -19,10 +19,10 @@ public class ActionFishing extends Action {
 	public static final String ACTION_NAME_NEED_FISHING_ROD = ACTION_NAME + " (need fishing rod)";
 
 	Actor performer;
-	WaterSource target;
+	WaterBody target;
 
 	// Default for hostiles
-	public ActionFishing(Actor attacker, WaterSource target) {
+	public ActionFishing(Actor attacker, WaterBody target) {
 		super(ACTION_NAME, "action_fishing.png");
 		this.performer = attacker;
 		this.target = target;
