@@ -28,10 +28,12 @@ import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.WantedPoster;
+import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionBuyItems;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDropItems;
+import com.marklynch.objects.actions.ActionFishing;
 import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLock;
@@ -197,7 +199,7 @@ public abstract class AIRoutine {
 
 		// Go to burrow and hide if can
 		SmallHidingPlace smallHidingPlace = (SmallHidingPlace) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20f,
-				false, false, true, false, false, false, 0, false, SmallHidingPlace.class);
+				false, false, false, false, 0, false, SmallHidingPlace.class);
 		if (smallHidingPlace != null) {
 
 			if (Game.level.activeActor.straightLineDistanceTo(smallHidingPlace.squareGameObjectIsOn) < 2) {
@@ -318,8 +320,8 @@ public abstract class AIRoutine {
 					new ActionShoutForHelp(actor, attacker).perform();
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
 
-					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20, false, true,
-							false, false, false, false, 0, false, Guard.class);
+					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20, false, false,
+							false, false, 0, false, Guard.class);
 
 					// if (this.actor.canSeeGameObject(actorNearby)) {
 					// } else {
@@ -1008,8 +1010,8 @@ public abstract class AIRoutine {
 	public boolean lootCarcass() {
 
 		// 1. loot carcasses
-		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
-				true, 0, false, Carcass.class);
+		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, true, true, true, 0, false,
+				Carcass.class);
 		if (carcass != null) {
 			this.actor.thoughtBubbleImageTextureObject = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
@@ -1031,8 +1033,8 @@ public abstract class AIRoutine {
 			return false;
 
 		// 1. loot carcasses
-		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, false, true,
-				true, 0, false, Carcass.class);
+		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, 0, false,
+				Carcass.class);
 
 		if (carcass != null) {
 
@@ -1052,8 +1054,8 @@ public abstract class AIRoutine {
 
 	public boolean lootFromGround() {
 		// Pick up loot on ground
-		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, false, true, true,
-				10, false, Junk.class, Food.class, Weapon.class, Armor.class, MeatChunk.class, Gold.class);
+		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, true, 10, false,
+				Junk.class, Food.class, Weapon.class, Armor.class, MeatChunk.class, Gold.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
@@ -1071,8 +1073,8 @@ public abstract class AIRoutine {
 	}
 
 	public boolean eatFoodOnGround() {
-		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				false, false, 0, false, Food.class);
+		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, false, false, 0,
+				false, Food.class);
 		if (food != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTextureObject = food.imageTexture;
@@ -1089,8 +1091,8 @@ public abstract class AIRoutine {
 	}
 
 	public boolean eatCarcassOnGround() {
-		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				false, false, 0, false, Carcass.class);
+		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, false, false,
+				0, false, Carcass.class);
 		if (corpse != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTextureObject = corpse.imageTexture;
@@ -1251,8 +1253,8 @@ public abstract class AIRoutine {
 		if (actor.inventory.itemsToSellCount < minimumItemsToSell)
 			return false;
 
-		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
-				false, false, false, false, 0, false, Trader.class);
+		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, false,
+				false, false, 0, false, Trader.class);
 
 		if (target == null || target.sleeping || target.aiRoutine.state == STATE.GO_TO_BED_AND_GO_TO_SLEEP
 				|| target.knownCriminals.contains(actor) || actor.knownCriminals.contains(target)) {
@@ -1290,8 +1292,8 @@ public abstract class AIRoutine {
 			return true;
 
 		// find nearest shop keeper w/ pickaxe?
-		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
-				false, false, false, false, 0, false, Trader.class);
+		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, false,
+				false, false, 0, false, Trader.class);
 
 		if (target == null || target.sleeping || target.aiRoutine.state == STATE.GO_TO_BED_AND_GO_TO_SLEEP
 				|| target.knownCriminals.contains(actor) || actor.knownCriminals.contains(target)) {
@@ -1394,8 +1396,8 @@ public abstract class AIRoutine {
 		if (!crimesToReport)
 			return false;
 
-		Guard guardNearby = (Guard) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false,
-				false, false, 0, false, Guard.class);
+		Guard guardNearby = (Guard) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false, false,
+				0, false, Guard.class);
 
 		if (guardNearby == null)
 			return false;
@@ -1504,11 +1506,36 @@ public abstract class AIRoutine {
 
 	}
 
-	public void sleep() {
-		if (!actor.sleeping && Game.level.shouldLog(actor)) {
-			Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " went to sleep" }));
-			ignoreList.clear();
+	public boolean runFishingRoutine() {
+
+		actor.followersShouldFollow = false;
+
+		WaterBody target = (WaterBody) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false,
+				false, 0, false, WaterBody.class);
+		actor.thoughtBubbleImageTextureObject = Action.textureFishing;
+
+		if (target == null) {
+			return false;
+		} else if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) <= 1) {
+			new ActionFishing(actor, target).perform();
+			return true;
+		} else {
+			boolean moved = AIRoutineUtils.moveTowards(target);
+			return moved;
 		}
+
+	}
+
+	public void sleep() {
+
+		if (!actor.sleeping) {
+			if (Game.level.shouldLog(actor)) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " went to sleep" }));
+			}
+			ignoreList.clear();
+			currentHobby = null;
+		}
+
 		actor.sleeping = true;
 		actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 		actor.thoughtBubbleImageTextureObject = Action.textureSleep;
@@ -1518,6 +1545,8 @@ public abstract class AIRoutine {
 	public boolean runHobbyRoutine() {
 		if (currentHobby == HOBBY.HUNTING) {
 			return runHuntingRoutine();
+		} else if (currentHobby == HOBBY.FISHING) {
+			return runFishingRoutine();
 		}
 		return false;
 	}
@@ -1528,8 +1557,8 @@ public abstract class AIRoutine {
 		this.actor.followersShouldFollow = true;
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 		// if (target == null)
-		target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, true, 0,
-				false, AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
+		target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false, true, 0, false,
+				AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
 				TinyNeutralWildAnimal.class, MeatChunk.class, Gold.class);
 		if (target == null) {
 			AIRoutineUtils.moveTowards(actor.area.centreSuqare);

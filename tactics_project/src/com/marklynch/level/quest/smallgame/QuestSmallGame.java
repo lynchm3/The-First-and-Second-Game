@@ -308,12 +308,12 @@ public class QuestSmallGame extends Quest {
 		Templates.GUARD.makeCopy("Guard Paul", Game.level.squares[77][53], Game.level.factions.townsPeople,
 				Templates.BED.makeCopy(Game.level.squares[79][56], null), 34,
 				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
-				new int[] { Templates.SWORD.templateId }, new HOBBY[] { HOBBY.HUNTING }, Guard.dayShift,
+				new int[] { Templates.SWORD.templateId }, new HOBBY[] { HOBBY.HUNTING, HOBBY.FISHING }, Guard.dayShift,
 				Game.level.squares[77][53]);
 		Templates.GUARD.makeCopy("Guard John", Game.level.squares[29][12], Game.level.factions.townsPeople,
 				Templates.BED.makeCopy(Game.level.squares[81][56], null), 37,
 				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
-				new int[] { Templates.SWORD.templateId }, new HOBBY[] { HOBBY.HUNTING }, Guard.dayShift,
+				new int[] { Templates.SWORD.templateId }, new HOBBY[] { HOBBY.HUNTING, HOBBY.FISHING }, Guard.dayShift,
 				Game.level.squares[4][21], Game.level.squares[32][21]);
 		ArrayList<Wall> extraWallsBarracks = new ArrayList<Wall>();
 		ArrayList<StructureFeature> featuresBarracks = new ArrayList<StructureFeature>();

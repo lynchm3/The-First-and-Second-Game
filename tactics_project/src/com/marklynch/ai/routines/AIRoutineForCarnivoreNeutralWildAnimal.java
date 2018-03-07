@@ -111,8 +111,8 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
 		// 1. attack small animal
 		if (state == STATE.HUNTING) {
-			GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(50f, false, true,
-					false, false, true, true, 0, false, HerbivoreWildAnimal.class);
+			GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(50f, false, false,
+					true, true, 0, false, HerbivoreWildAnimal.class);
 			if (smallWildAnimal != null) {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 				this.actor.thoughtBubbleImageTextureObject = smallWildAnimal.imageTexture;

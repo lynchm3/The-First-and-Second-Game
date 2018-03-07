@@ -1493,7 +1493,7 @@ public class Actor extends GameObject {
 				}
 			}
 
-			if (sound.sourceObject.getClass() == Bell.class && this instanceof Blind) {
+			if (this instanceof Blind && sound.sourceObject != null && sound.sourceObject.getClass() == Bell.class) {
 				Blind blind = (Blind) this;
 				AIRoutineForBlind aiRoutineForBlind = (AIRoutineForBlind) aiRoutine;
 

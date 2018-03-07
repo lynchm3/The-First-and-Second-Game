@@ -123,8 +123,8 @@ public class AIRoutineUtils {
 	}
 
 	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
-			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
-			boolean ignoreQuestObjects, int minimumValue, boolean REMOVETHIS, Class... types) {
+			boolean mustContainObjects, boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumGoldValue,
+			boolean REMOVETHIS, Class... types) {
 
 		// if (Game.level.activeActor.name.contains("Farmer")) {
 		// System.out.println("getNearest");
@@ -144,8 +144,8 @@ public class AIRoutineUtils {
 		}
 
 		if (objects.size() > maxDistance * maxDistance) {
-			return getNearestForPurposeOfBeingAdjacent(maxDistance, fitsInInventory, checkActors, checkInanimateObjects,
-					mustContainObjects, mustBeUnowned, ignoreQuestObjects, minimumValue, types);
+			return getNearestForPurposeOfBeingAdjacent(maxDistance, fitsInInventory, mustContainObjects, mustBeUnowned,
+					ignoreQuestObjects, minimumGoldValue, types);
 		}
 
 		// if (Game.level.activeActor.name.contains("Farmer")) {
@@ -178,7 +178,7 @@ public class AIRoutineUtils {
 				// }
 
 				if (passesChecks(object, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
-						minimumValue, null, false)) {
+						minimumGoldValue, null, false)) {
 
 					// if (Game.level.activeActor.name.contains("Farmer")) {
 					// System.out.println("object passed checks");
@@ -225,9 +225,9 @@ public class AIRoutineUtils {
 
 	}
 
-	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
-			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
-			boolean ignoreQuestObjects, int minimumValue, Class[] classes) {
+	private static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
+			boolean mustContainObjects, boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue,
+			Class[] classes) {
 
 		if (maxDistance > Game.level.width + Game.level.height) {
 			maxDistance = Game.level.width + Game.level.height;

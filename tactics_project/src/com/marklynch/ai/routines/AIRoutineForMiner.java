@@ -136,8 +136,7 @@ public class AIRoutineForMiner extends AIRoutine {
 			this.actor.followersShouldFollow = true;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_MINING;
 			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(30, false, false, true, false, false, true, 0,
-					false, Vein.class);
+			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(30, false, false, false, true, 0, false, Vein.class);
 			if (target == null) {
 				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(actor.area.centreSuqare);
 			} else {

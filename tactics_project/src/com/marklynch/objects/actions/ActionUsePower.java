@@ -158,7 +158,7 @@ public class ActionUsePower extends Action {
 		float loudness = power.loudness;
 
 		if (performer.equipped != null)
-			return new Sound(performer, null, target, loudness, legal, this.getClass());
+			return new Sound(performer, performer, target, loudness, legal, this.getClass());
 		return null;
 	}
 

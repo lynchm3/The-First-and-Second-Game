@@ -95,8 +95,8 @@ public class AIRoutineForThief extends AIRoutine {
 		if (theftCooldown <= 0) {
 
 			// 1. loot corpses, even if owned
-			GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, false, false, true, true,
-					false, true, 0, false, Corpse.class, Storage.class);
+			GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, false, true, false, true,
+					0, false, Corpse.class, Storage.class);
 			if (container != null) {
 				if (container.owner != null && container.owner != actor)
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
@@ -127,8 +127,8 @@ public class AIRoutineForThief extends AIRoutine {
 			// 1. pick up loot on ground, even if owned, all specific stuff, no
 			// stupid generic game object
 
-			GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, true, false, true, false, false,
-					true, 0, false, Weapon.class, Armor.class, Food.class, Junk.class, MeatChunk.class, Gold.class);
+			GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, true, false, false, true, 0,
+					false, Weapon.class, Armor.class, Food.class, Junk.class, MeatChunk.class, Gold.class);
 			if (loot != null) {
 				if (loot.owner != null && loot.owner != actor)
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
