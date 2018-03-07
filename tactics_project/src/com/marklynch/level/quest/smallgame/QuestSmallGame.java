@@ -335,6 +335,12 @@ public class QuestSmallGame extends Quest {
 				Templates.WALL, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(barracks);
 
+		// Fisherman
+		Templates.FISHERMAN.makeCopy("Fisherman Jake", Game.level.squares[100][53], Game.level.factions.townsPeople,
+				null, 38, new GameObject[] { Templates.FISHING_ROD.makeCopy(null, null) }, new GameObject[] {},
+				AreaList.town, new int[] { Templates.FISHING_ROD.templateId },
+				new HOBBY[] { HOBBY.HUNTING, HOBBY.FISHING });
+
 		// Thieves and their hut
 		Templates.THIEF.makeCopy("Thief Ed", Game.level.squares[12][13], Game.level.factions.outsiders,
 				Templates.BED.makeCopy(Game.level.squares[116][53], null), 64,

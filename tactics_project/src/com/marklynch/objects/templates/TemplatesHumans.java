@@ -2,6 +2,7 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.ai.routines.AIRoutineForFisherman;
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.routines.AIRoutineForMiner;
@@ -92,6 +93,28 @@ public class TemplatesHumans {
 		Templates.GUARD.aiRoutine = new AIRoutineForGuard(Templates.GUARD);
 		Templates.GUARD.templateId = GameObject.generateNewTemplateId();
 		Templates.GUARD.flipYAxisInMirror = false;
+
+		Templates.FISHERMAN = new Human();
+		Templates.FISHERMAN.title = "Fisherman";
+		Templates.FISHERMAN.level = 10;
+		Templates.FISHERMAN.bluntDamage = 1;
+		Templates.FISHERMAN.totalHealth = Templates.FISHERMAN.remainingHealth = 10;
+		Templates.FISHERMAN.strength = 6;
+		Templates.FISHERMAN.dexterity = 4;
+		Templates.FISHERMAN.intelligence = 3;
+		Templates.FISHERMAN.endurance = 11;
+		Templates.FISHERMAN.imageTexturePath = "fisherman.png";
+		Templates.FISHERMAN.imageTexture = getGlobalImage(Templates.FISHERMAN.imageTexturePath, true);
+		Templates.FISHERMAN.heightRatio = 1.5f;
+		Templates.FISHERMAN.drawOffsetRatioY = -0.5f;
+		Templates.FISHERMAN.weight = 68f;
+		Templates.FISHERMAN.handAnchorX = 93f;
+		Templates.FISHERMAN.handAnchorY = 166f;
+		Templates.FISHERMAN.canOpenDoors = true;
+		Templates.FISHERMAN.canEquipWeapons = true;
+		Templates.FISHERMAN.aiRoutine = new AIRoutineForFisherman(Templates.FISHERMAN);
+		Templates.FISHERMAN.templateId = GameObject.generateNewTemplateId();
+		Templates.FISHERMAN.flipYAxisInMirror = false;
 
 		// General People
 		Templates.MINER = new Human();
