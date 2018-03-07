@@ -1,6 +1,7 @@
 package com.marklynch.objects.units;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -16,13 +17,17 @@ import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.quest.caveoftheblind.AIRoutineForBlind;
+import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
@@ -38,11 +43,13 @@ import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionSellItems;
+import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -1451,6 +1458,95 @@ public class Actor extends GameObject {
 		}
 
 	}
+
+	protected Class[] soundClassesToReactTo = new Class[] { Weapon.class, BrokenGlass.class };
+
+	public void createSearchLocationsBasedOnSound(Sound sound) {
+
+		ArrayList<Class> classesArrayList = new ArrayList<Class>(Arrays.asList(soundClassesToReactTo));
+
+		if (this.canSeeGameObject(sound.sourcePerformer))
+			return;
+
+		// If asleep then sound has to be nearer for detection.
+		// if (actor.sleeping &&
+		// actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness
+		// - 2)
+		// continue;
+		// else
+		if (this.sleeping) {
+			this.sleeping = false;
+			this.aiRoutine.wokenUpCountdown = 5;
+			if (Game.level.shouldLog(this))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " woke up" }));
+		}
+
+		if (!this.investigationsMap.containsValue(sound.sourceSquare)) {
+
+			// Check if sound is in passed in list of classes
+			boolean soundInTypeList = false;
+			if (sound.sourceObject != null) {
+				for (Class clazz : soundClassesToReactTo) {
+					if (clazz.isInstance(sound.sourceObject)) {
+						soundInTypeList = true;
+					}
+				}
+			}
+
+			if (sound.sourceObject.getClass() == Bell.class && this instanceof Blind) {
+				Blind blind = (Blind) this;
+				AIRoutineForBlind aiRoutineForBlind = (AIRoutineForBlind) aiRoutine;
+
+				if (aiRoutineForBlind.meatChunk == null) {
+					aiRoutineForBlind.bellSound = sound;
+					blind.investigationsMap.clear();
+					aiRoutineForBlind.targetSquare = null;
+				}
+
+			} else if (sound.actionType == ActionShoutForHelp.class) {
+				this.addInvestigation(sound.sourceObject, sound.sourceSquare,
+						Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
+				if (sound.sourceObject != null && sound.sourceObject.remainingHealth > 0) {
+					this.addAttackerForThisAndGroupMembers(sound.sourceObject);
+				}
+
+				if (this.name.contains("Lead Hunter Brent")) {
+					System.out.println("exit @ a");
+
+				}
+			} else if (!sound.legal) {
+				this.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
+						Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
+				if (this.name.contains("Lead Hunter Brent")) {
+					System.out.println("exit @ b");
+				}
+			} else if (soundInTypeList == true) {
+				this.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
+						Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
+				if (this.name.contains("Lead Hunter Brent")) {
+					System.out.println("exit @ c");
+				}
+			} else if (sound.loudness >= 5) {
+				this.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
+						Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
+				if (this.name.contains("Lead Hunter Brent")) {
+					System.out.println("exit @ d");
+				}
+			}
+
+		}
+	}
+
+	// public Sound getSoundFromSourceType(Class clazz) {
+	//
+	// // Check for sounds to investigate
+	// for (Sound sound : this.squareGameObjectIsOn.sounds) {
+	// if (clazz.isInstance(sound.sourceObject)) {
+	// return sound;
+	// }
+	// }
+	// return null;
+	// }
 
 	public void setAttributesForCopy(String name, Actor actor, Square square, Faction faction, GameObject bed, int gold,
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {

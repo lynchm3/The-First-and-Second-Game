@@ -1,7 +1,6 @@
 package com.marklynch.ai.routines;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 import com.marklynch.Game;
@@ -9,7 +8,6 @@ import com.marklynch.ai.utils.AILine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Investigation;
-import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
@@ -18,7 +16,6 @@ import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.conversation.LeaveConversationListener;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
@@ -195,91 +192,6 @@ public abstract class AIRoutine {
 	// }
 	// }
 	// }
-
-	public void createSearchLocationsBasedOnSounds(Class... classes) {
-
-		if (actor.name.contains("Lead Hunter Brent")) {
-			System.out.println("createSearchLocationsBasedOnSounds()");
-		}
-
-		ArrayList<Class> classesArrayList = new ArrayList<Class>(Arrays.asList(classes));
-
-		// Check for sounds to investigate
-		for (Sound sound : this.actor.squareGameObjectIsOn.sounds) {
-
-			if (this.actor.canSeeGameObject(sound.sourcePerformer))
-				continue;
-
-			// If asleep then sound has to be nearer for detection.
-			// if (actor.sleeping &&
-			// actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness
-			// - 2)
-			// continue;
-			// else
-			if (actor.sleeping) {
-				actor.sleeping = false;
-				wokenUpCountdown = 5;
-				if (Game.level.shouldLog(actor))
-					Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " woke up" }));
-			}
-
-			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)) {
-
-				// Check if sound is in passed in list of classes
-				boolean soundInTypeList = false;
-				if (sound.sourceObject != null) {
-					for (Class clazz : classes) {
-						if (clazz.isInstance(sound.sourceObject)) {
-							soundInTypeList = true;
-						}
-					}
-				}
-
-				if (sound.actionType == ActionShoutForHelp.class) {
-					this.actor.addInvestigation(sound.sourceObject, sound.sourceSquare,
-							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
-					if (sound.sourceObject != null && sound.sourceObject.remainingHealth > 0) {
-						this.actor.addAttackerForThisAndGroupMembers(sound.sourceObject);
-					}
-
-					if (actor.name.contains("Lead Hunter Brent")) {
-						System.out.println("exit @ a");
-
-					}
-				} else if (!sound.legal) {
-					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
-							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
-					if (actor.name.contains("Lead Hunter Brent")) {
-						System.out.println("exit @ b");
-					}
-				} else if (soundInTypeList == true) {
-					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
-							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
-					if (actor.name.contains("Lead Hunter Brent")) {
-						System.out.println("exit @ c");
-					}
-				} else if (sound.loudness >= 5) {
-					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
-							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
-					if (actor.name.contains("Lead Hunter Brent")) {
-						System.out.println("exit @ d");
-					}
-				}
-
-			}
-		}
-	}
-
-	public Sound getSoundFromSourceType(Class clazz) {
-
-		// Check for sounds to investigate
-		for (Sound sound : this.actor.squareGameObjectIsOn.sounds) {
-			if (clazz.isInstance(sound.sourceObject)) {
-				return sound;
-			}
-		}
-		return null;
-	}
 
 	public static boolean escapeFromAttackerToSmallHidingPlace(GameObject attacker) {
 
@@ -1204,7 +1116,6 @@ public abstract class AIRoutine {
 		this.actor.activityDescription = null;
 		this.actor.thoughtBubbleImageTextureObject = null;
 		this.actor.thoughtBubbleImageTextureAction = null;
-		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class);
 		if (actor instanceof NonHuman) {
 
 		} else {
@@ -1557,7 +1468,7 @@ public abstract class AIRoutine {
 	protected boolean canSeeAnyone() {
 		ArrayList<Square> visibleSquares = actor.getAllSquaresWithinDistance(1, actor.sight);
 		for (Square visibleSquare : visibleSquares) {
-			Actor actorOnVisibleSquare = visibleSquare.inventory.actorThatCantShareSquare;
+			Actor actorOnVisibleSquare = visibleSquare.inventory.actor;
 			if (actorOnVisibleSquare != null && this.actor.canSeeGameObject(actorOnVisibleSquare)) {
 				return true;
 			}

@@ -42,8 +42,15 @@ public class Sound {
 
 	public void play() {
 		for (Square destinationSquare : destinationSquares) {
-			destinationSquare.sounds.add(this);
+
+			if (destinationSquare.inventory.actor != null) {
+				destinationSquare.inventory.actor.createSearchLocationsBasedOnSound(this);
+			}
+
+			// destinationSquare.sounds.add(this);
 		}
+
+		// ye..
 	}
 
 	HashMap<Square, AIPath> squareToPath = new HashMap<Square, AIPath>();

@@ -1381,13 +1381,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void clearActions() {
-		for (Action action : actionsPerformedThisTurn) {
-			if (action.sound != null) {
-				for (Square destinationSquare : action.sound.destinationSquares) {
-					destinationSquare.sounds.remove(action.sound);
-				}
-			}
-		}
 		actionsPerformedThisTurn.clear();
 	}
 

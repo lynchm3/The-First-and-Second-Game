@@ -5,12 +5,16 @@ import java.util.ArrayList;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionScream;
+import com.marklynch.objects.tools.Bell;
+import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
+import com.marklynch.objects.weapons.Weapon;
 
 public class Blind extends Monster {
 
@@ -20,6 +24,7 @@ public class Blind extends Monster {
 
 	public Blind() {
 		super();
+		soundClassesToReactTo = new Class[] { Bell.class, Tool.class, Weapon.class, BrokenGlass.class };
 		sight = 1;
 	}
 

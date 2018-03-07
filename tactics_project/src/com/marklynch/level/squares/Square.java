@@ -12,7 +12,6 @@ import org.lwjgl.input.Keyboard;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
-import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
@@ -104,8 +103,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public transient Structure structureSquareIsIn;
 	public transient StructureSection structureSectionSquareIsIn;
 	public transient StructureRoom structureRoomSquareIsIn;
-
-	public ArrayList<Sound> sounds = new ArrayList<Sound>();
 
 	public boolean highlight = false;
 
@@ -256,9 +253,9 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
-		if (sounds.size() > 0) {
-			drawRedHighlight();
-		}
+		// if (sounds.size() > 0) {
+		// drawRedHighlight();
+		// }
 
 		if (restricted && Game.redHighlightOnRestrictedSquares) {
 			drawRedHighlight();
@@ -1130,7 +1127,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 				}
 			}
 			return true;
-		} else if (inventory.actorThatCantShareSquare != null) {
+		} else if (inventory.actor != null) {
 			return true;
 		}
 

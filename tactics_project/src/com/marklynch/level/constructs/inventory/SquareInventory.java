@@ -18,7 +18,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 	public boolean canShareSquare = true;
 	public GameObject gameObjectThatCantShareSquare = null;
-	public Actor actorThatCantShareSquare = null;
+	public Actor actor = null;
 	public Door door = null;
 
 	@Override
@@ -69,9 +69,9 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			canShareSquare = canShareSquare();
 			gameObjectThatCantShareSquare = getGameObjectThatCantShareSquare1();
 			if (gameObjectThatCantShareSquare instanceof Actor)
-				actorThatCantShareSquare = (Actor) gameObjectThatCantShareSquare;
+				actor = (Actor) gameObjectThatCantShareSquare;
 			else
-				actorThatCantShareSquare = null;
+				actor = null;
 			door = (Door) getGameObjectOfClass(Door.class);
 
 			PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
@@ -93,9 +93,9 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			canShareSquare = canShareSquare();
 			gameObjectThatCantShareSquare = getGameObjectThatCantShareSquare1();
 			if (gameObjectThatCantShareSquare instanceof Actor)
-				actorThatCantShareSquare = (Actor) gameObjectThatCantShareSquare;
+				actor = (Actor) gameObjectThatCantShareSquare;
 			else
-				actorThatCantShareSquare = null;
+				actor = null;
 			door = (Door) getGameObjectOfClass(Door.class);
 
 			PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
