@@ -195,7 +195,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				targetSquare = null;
 		} else if (blind.squareGameObjectIsOn.structureRoomSquareIsIn != blind.roomLivingIn) {
 			if (blind.roomLivingIn == null) {
-				targetSquare = AIRoutineUtils.getRandomSquare(0, 5, true);
+				targetSquare = AIRoutineUtils.getRandomSquare(0, 5, true, true);
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			} else {
 				targetSquare = AIRoutineUtils.getRandomSquareInRoom(blind.roomLivingIn);
@@ -204,7 +204,7 @@ public class AIRoutineForBlind extends AIRoutine {
 		} else {
 			if (Math.random() < 0.1) {
 				if (blind.roomLivingIn == null) {
-					targetSquare = AIRoutineUtils.getRandomSquare(0, 5, true);
+					targetSquare = AIRoutineUtils.getRandomSquare(0, 5, true, true);
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 				} else {
 					targetSquare = AIRoutineUtils.getRandomSquareInRoom(blind.roomLivingIn);

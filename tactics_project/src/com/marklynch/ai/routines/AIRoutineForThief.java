@@ -11,7 +11,6 @@ import com.marklynch.objects.Junk;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActiontTakeAll;
 import com.marklynch.objects.templates.Templates;
@@ -95,8 +94,8 @@ public class AIRoutineForThief extends AIRoutine {
 		if (theftCooldown <= 0) {
 
 			// 1. loot corpses, even if owned
-			GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, false, true, false, true,
-					0, false, Corpse.class, Storage.class);
+			GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, false, true, false, true, 0,
+					false, Corpse.class, Storage.class);
 			if (container != null) {
 				if (container.owner != null && container.owner != actor)
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
@@ -176,25 +175,14 @@ public class AIRoutineForThief extends AIRoutine {
 		if (state == STATE.THIEVING) {
 			// Go about ur business... (move around randomly...)
 			if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {
-				targetSquare = AIRoutineUtils.getRandomSquare(7, 10, true);
+				targetSquare = AIRoutineUtils.getRandomSquare(7, 10, true, true);
 			}
 
 			if (targetSquare != null) {
-				Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(this.actor.getPathTo(targetSquare));
-				if (squareToMoveTo == null) {
-					targetSquare = null;
 
-					this.actor.thoughtBubbleImageTextureObject = Action.textureMusic;
+				this.actor.thoughtBubbleImageTextureObject = Action.textureMusic;
+				if (AIRoutineUtils.moveTowards(targetSquare))
 					return;
-				} else {
-					new ActionMove(this.actor, squareToMoveTo, true).perform();
-					this.actor.activityDescription = ACTIVITY_WANDERING;
-					this.actor.thoughtBubbleImageTextureObject = Action.textureMusic;
-					// AIRoutineUtils.moveTo(this.actor, squareToMoveTo);
-					if (this.actor.squareGameObjectIsOn == targetSquare)
-						targetSquare = null;
-					return;
-				}
 			}
 		}
 

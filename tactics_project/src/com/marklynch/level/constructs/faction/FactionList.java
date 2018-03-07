@@ -13,7 +13,7 @@ public class FactionList extends ArrayList<Faction> {
 	public Faction blind;
 	public Faction rockGolems;
 	public Faction rats;
-	public Faction buns;
+	public static Faction buns;
 	public Faction foxes;
 	public Faction outsiders;
 

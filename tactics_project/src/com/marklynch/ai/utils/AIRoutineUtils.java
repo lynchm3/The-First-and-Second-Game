@@ -2,6 +2,7 @@ package com.marklynch.ai.utils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
@@ -31,12 +32,19 @@ public class AIRoutineUtils {
 		name = this.getClass().getSimpleName();
 	}
 
-	public static Square getRandomSquare(int minDistance, int maxDistance, boolean mustBeOutdoors) {
+	public static Square getRandomSquare(int minDistance, int maxDistance, boolean mustBeOutdoors,
+			boolean squareMustShare) {
 
 		int attempts = 0;
 		int maxAttempts = 5;
 		Square randomSquare = null;
 		ArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(minDistance, maxDistance);
+
+		Collections.shuffle(squaresInRange);
+
+		if (Game.level.activeActor.name.contains("Fish"))
+			System.out.println("squaresInRange.size() = " + squaresInRange.size());
+
 		if (squaresInRange.size() == 0)
 			return null;
 
@@ -50,7 +58,7 @@ public class AIRoutineUtils {
 			if ((!mustBeOutdoors || mustBeOutdoors && randomSquare.structureSquareIsIn == null)
 					// && currentActorPathToThisSquare != null &&
 					// currentActorPathToThisSquare.travelCost < maxDistance
-					&& randomSquare.inventory.canShareSquare
+					&& (randomSquare.inventory.canShareSquare || !squareMustShare)
 					&& Game.level.activeActor.aiRoutine.squareInBounds(randomSquare)) {
 
 				return randomSquare;

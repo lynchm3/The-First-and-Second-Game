@@ -3,10 +3,12 @@ package com.marklynch.objects.templates;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.ai.routines.AIRoutineForCarnivoreNeutralWildAnimal;
+import com.marklynch.ai.routines.AIRoutineForFish;
 import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
 import com.marklynch.ai.routines.AIRoutineForPig;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
+import com.marklynch.objects.units.Fish;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.TinyNeutralWildAnimal;
@@ -143,7 +145,7 @@ public class TemplatesAnimals {
 		Templates.WOLF.flipYAxisInMirror = false;
 
 		// Friendly Wild animals
-		Templates.FISH = new TinyNeutralWildAnimal();
+		Templates.FISH = new Fish();
 		Templates.FISH.title = "Fish";
 		Templates.FISH.level = 1;
 		Templates.FISH.slashDamage = 1;
@@ -162,7 +164,7 @@ public class TemplatesAnimals {
 		Templates.FISH.canOpenDoors = false;
 		Templates.FISH.canEquipWeapons = false;
 		Templates.FISH.templateId = GameObject.generateNewTemplateId();
-		Templates.FISH.aiRoutine = new AIRoutineForHerbivoreWildAnimal(Templates.FISH);
+		Templates.FISH.aiRoutine = new AIRoutineForFish(Templates.FISH);
 		Templates.FISH.canBePickedUp = true;
 		Templates.FISH.fitsInInventory = true;
 	}

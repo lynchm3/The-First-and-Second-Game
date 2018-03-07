@@ -8,7 +8,6 @@ import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
-import com.marklynch.utils.TextureUtils;
 
 public class WaterBody extends WaterSource {
 
@@ -136,151 +135,177 @@ public class WaterBody extends WaterSource {
 	@Override
 	public void draw1() {
 
-		if (this.remainingHealth <= 0)
-			return;
-		super.draw1();
-
-		if (!Game.fullVisiblity) {
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-		}
-
-		// Draw object
-		if (squareGameObjectIsOn != null) {
-
-			float alpha = 1.0f;
-
-			// 8
-			if (fullWall) {
-				TextureUtils.drawTexture(textureFullWall, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
-			}
-
-			// 7
-			else if (topLeftInnerCorner) {
-				TextureUtils.drawTexture(textureTopLeftInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-
-			}
-
-			else if (topRightInnerCorner) {
-				TextureUtils.drawTexture(textureTopRightInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-
-			}
-
-			else if (bottomRightInnerCorner) {
-				TextureUtils.drawTexture(textureBottomRightInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-
-			}
-
-			else if (bottomLeftInnerCorner) {
-				TextureUtils.drawTexture(textureBottomLeftInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-
-			}
-
-			// 5
-			else if (fullLeftWall) {
-				TextureUtils.drawTexture(textureFullLeftWall, alpha, drawX1, drawY1, drawX2, drawY2);
-			}
-
-			else if (fullRightWall) {
-				TextureUtils.drawTexture(textureFullRightWall, alpha, drawX1, drawY1, drawX2, drawY2);
-			}
-
-			else if (fullTopWall) {
-				TextureUtils.drawTexture(textureFullTopWall, alpha, drawX1, drawY1, drawX2, drawY2);
-			}
-
-			else if (fullBottomWall) {
-				TextureUtils.drawTexture(textureFullBottomWall, alpha, drawX1, drawY1, drawX2, drawY2);
-			}
-
-			// 4
-			else if (cross) {
-				TextureUtils.drawTexture(textureCross, alpha, drawX1, drawY1, drawX2, drawY2);
-
-			}
-
-			// 3
-			else if (topLeftOuterCorner) {
-				TextureUtils.drawTexture(textureTopLeftOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-
-			}
-
-			else if (topRightOuterCorner) {
-				TextureUtils.drawTexture(textureTopRightOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-
-			}
-
-			else if (bottomRightOuterCorner) {
-				TextureUtils.drawTexture(textureBottomRightOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-
-			}
-
-			else if (bottomLeftOuterCorner) {
-				TextureUtils.drawTexture(textureBottomLeftOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-
-			}
-
-			// 2
-			else if (horizontalWall) {
-				TextureUtils.drawTexture(textureHorizontalWall, alpha, drawX1, drawY1, drawX2, drawY2);
-			}
-
-			else if (verticalWall) {
-				TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawY1, drawX2, drawY2);
-			}
-
-			else if (topLeftCorner) {
-				TextureUtils.drawTexture(textureTopLeft, alpha, drawX1, drawY1, drawX2, drawY2);
-			}
-
-			else if (topRightCorner) {
-				TextureUtils.drawTexture(textureTopRight, alpha, drawX1, drawY1, drawX2, drawY2);
-			}
-
-			else if (bottomLeftCorner) {
-				TextureUtils.drawTexture(textureBottomLeft, alpha, drawX1, drawY1, drawX2, drawY2);
-			}
-
-			else if (bottomRightCorner) {
-				TextureUtils.drawTexture(textureBottomRight, alpha, drawX1, drawY1, drawX2, drawY2);
-			}
-
-			// if (connectedTop)
-			// TextureUtils.drawTexture(textureTop, alpha, topDrawX1, topDrawX2,
-			// topDrawY1, topDrawY2);
-			// if (connectedTopRight)
-			// TextureUtils.drawTexture(textureTopRight, alpha, topRightDrawX1,
-			// topRightDrawX2, topRightDrawY1,
-			// topRightDrawY2);
-			// if (connectedRight)
-			// TextureUtils.drawTexture(textureRight, alpha, rightDrawX1,
-			// rightDrawX2, rightDrawY1, rightDrawY2);
-			// if (connectedBottomRight)
-			// TextureUtils.drawTexture(textureBottomRight, alpha,
-			// bottomRightDrawX1, bottomRightDrawX2,
-			// bottomRightDrawY1, bottomRightDrawY2);
-			// if (connectedBottom)
-			// TextureUtils.drawTexture(textureBottom, alpha, bottomDrawX1,
-			// bottomDrawX2, bottomDrawY1, bottomDrawY2);
-			// if (connectedBottomLeft)
-			// TextureUtils.drawTexture(textureBottomLeft, alpha,
-			// bottomLeftDrawX1, bottomLeftDrawX2, bottomLeftDrawY1,
-			// bottomLeftDrawY2);
-			// if (connectedLeft)
-			// TextureUtils.drawTexture(textureLeft, alpha, leftDrawX1,
-			// leftDrawX2, leftDrawY1, leftDrawY2);
-			// if (connectedTopLeft)
-			// TextureUtils.drawTexture(textureTopLeft, alpha, topLeftDrawX1,
-			// topLeftDrawX2, topLeftDrawY1,
-			// topLeftDrawY2);
-
-			Game.flush();
-		}
 	}
+	//
+	// @Override
+	// public void draw2() {
+	//
+	// if (this.remainingHealth <= 0)
+	// return;
+	// super.draw1();
+	//
+	// if (!Game.fullVisiblity) {
+	// if (!this.squareGameObjectIsOn.seenByPlayer)
+	// return;
+	//
+	// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
+	// persistsWhenCantBeSeen == false)
+	// return;
+	// }
+	//
+	// // Draw object
+	// if (squareGameObjectIsOn != null) {
+	//
+	// float alpha = 1.0f;
+	//
+	// // 8
+	// if (fullWall) {
+	// TextureUtils.drawTexture(textureFullWall, alpha, drawX1, drawY1, drawX2,
+	// drawY2);
+	// return;
+	// }
+	//
+	// // 7
+	// else if (topLeftInnerCorner) {
+	// TextureUtils.drawTexture(textureTopLeftInnerCorner, alpha, drawX1,
+	// drawY1, drawX2, drawY2);
+	//
+	// }
+	//
+	// else if (topRightInnerCorner) {
+	// TextureUtils.drawTexture(textureTopRightInnerCorner, alpha, drawX1,
+	// drawY1, drawX2, drawY2);
+	//
+	// }
+	//
+	// else if (bottomRightInnerCorner) {
+	// TextureUtils.drawTexture(textureBottomRightInnerCorner, alpha, drawX1,
+	// drawY1, drawX2, drawY2);
+	//
+	// }
+	//
+	// else if (bottomLeftInnerCorner) {
+	// TextureUtils.drawTexture(textureBottomLeftInnerCorner, alpha, drawX1,
+	// drawY1, drawX2, drawY2);
+	//
+	// }
+	//
+	// // 5
+	// else if (fullLeftWall) {
+	// TextureUtils.drawTexture(textureFullLeftWall, alpha, drawX1, drawY1,
+	// drawX2, drawY2);
+	// }
+	//
+	// else if (fullRightWall) {
+	// TextureUtils.drawTexture(textureFullRightWall, alpha, drawX1, drawY1,
+	// drawX2, drawY2);
+	// }
+	//
+	// else if (fullTopWall) {
+	// TextureUtils.drawTexture(textureFullTopWall, alpha, drawX1, drawY1,
+	// drawX2, drawY2);
+	// }
+	//
+	// else if (fullBottomWall) {
+	// TextureUtils.drawTexture(textureFullBottomWall, alpha, drawX1, drawY1,
+	// drawX2, drawY2);
+	// }
+	//
+	// // 4
+	// else if (cross) {
+	// TextureUtils.drawTexture(textureCross, alpha, drawX1, drawY1, drawX2,
+	// drawY2);
+	//
+	// }
+	//
+	// // 3
+	// else if (topLeftOuterCorner) {
+	// TextureUtils.drawTexture(textureTopLeftOuterCorner, alpha, drawX1,
+	// drawY1, drawX2, drawY2);
+	//
+	// }
+	//
+	// else if (topRightOuterCorner) {
+	// TextureUtils.drawTexture(textureTopRightOuterCorner, alpha, drawX1,
+	// drawY1, drawX2, drawY2);
+	//
+	// }
+	//
+	// else if (bottomRightOuterCorner) {
+	// TextureUtils.drawTexture(textureBottomRightOuterCorner, alpha, drawX1,
+	// drawY1, drawX2, drawY2);
+	//
+	// }
+	//
+	// else if (bottomLeftOuterCorner) {
+	// TextureUtils.drawTexture(textureBottomLeftOuterCorner, alpha, drawX1,
+	// drawY1, drawX2, drawY2);
+	//
+	// }
+	//
+	// // 2
+	// else if (horizontalWall) {
+	// TextureUtils.drawTexture(textureHorizontalWall, alpha, drawX1, drawY1,
+	// drawX2, drawY2);
+	// }
+	//
+	// else if (verticalWall) {
+	// TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawY1,
+	// drawX2, drawY2);
+	// }
+	//
+	// else if (topLeftCorner) {
+	// TextureUtils.drawTexture(textureTopLeft, alpha, drawX1, drawY1, drawX2,
+	// drawY2);
+	// }
+	//
+	// else if (topRightCorner) {
+	// TextureUtils.drawTexture(textureTopRight, alpha, drawX1, drawY1, drawX2,
+	// drawY2);
+	// }
+	//
+	// else if (bottomLeftCorner) {
+	// TextureUtils.drawTexture(textureBottomLeft, alpha, drawX1, drawY1,
+	// drawX2, drawY2);
+	// }
+	//
+	// else if (bottomRightCorner) {
+	// TextureUtils.drawTexture(textureBottomRight, alpha, drawX1, drawY1,
+	// drawX2, drawY2);
+	// }
+	//
+	// // if (connectedTop)
+	// // TextureUtils.drawTexture(textureTop, alpha, topDrawX1, topDrawX2,
+	// // topDrawY1, topDrawY2);
+	// // if (connectedTopRight)
+	// // TextureUtils.drawTexture(textureTopRight, alpha, topRightDrawX1,
+	// // topRightDrawX2, topRightDrawY1,
+	// // topRightDrawY2);
+	// // if (connectedRight)
+	// // TextureUtils.drawTexture(textureRight, alpha, rightDrawX1,
+	// // rightDrawX2, rightDrawY1, rightDrawY2);
+	// // if (connectedBottomRight)
+	// // TextureUtils.drawTexture(textureBottomRight, alpha,
+	// // bottomRightDrawX1, bottomRightDrawX2,
+	// // bottomRightDrawY1, bottomRightDrawY2);
+	// // if (connectedBottom)
+	// // TextureUtils.drawTexture(textureBottom, alpha, bottomDrawX1,
+	// // bottomDrawX2, bottomDrawY1, bottomDrawY2);
+	// // if (connectedBottomLeft)
+	// // TextureUtils.drawTexture(textureBottomLeft, alpha,
+	// // bottomLeftDrawX1, bottomLeftDrawX2, bottomLeftDrawY1,
+	// // bottomLeftDrawY2);
+	// // if (connectedLeft)
+	// // TextureUtils.drawTexture(textureLeft, alpha, leftDrawX1,
+	// // leftDrawX2, leftDrawY1, leftDrawY2);
+	// // if (connectedTopLeft)
+	// // TextureUtils.drawTexture(textureTopLeft, alpha, topLeftDrawX1,
+	// // topLeftDrawX2, topLeftDrawY1,
+	// // topLeftDrawY2);
+	//
+	// Game.flush();
+	// }
+	// }
 
 	@Override
 	public WaterBody makeCopy(Square square, Actor owner) {

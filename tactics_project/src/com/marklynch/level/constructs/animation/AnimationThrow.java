@@ -5,6 +5,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
@@ -104,8 +105,8 @@ public class AnimationThrow extends Animation {
 				projectileObject.landed(shooter, action);
 			}
 
-			if (Game.level.player.inventory.groundDisplay != null)
-				Game.level.player.inventory.groundDisplay.refreshGameObjects();
+			if (Level.player.inventory.groundDisplay != null)
+				Level.player.inventory.groundDisplay.refreshGameObjects();
 
 		} else {
 			x += distanceX;
