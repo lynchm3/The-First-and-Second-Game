@@ -2126,8 +2126,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (remainingHealth < 0)
 			remainingHealth = 0;
 
-		if (attacker != null && thisIsAnAttack == true)
-			attackedBy(attacker, action);
+		if (attacker != null && thisIsAnAttack == true) {
+			if (this instanceof Actor) {
+				Actor actor = (Actor) this;
+				actor.attackedBy(attacker, action);
+			} else {
+				attackedBy(attacker, action);
+			}
+		}
 
 		return totalDamage;
 	}
