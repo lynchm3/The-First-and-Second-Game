@@ -1086,13 +1086,13 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		return (v > 0) ? 1 : (v < 0) ? -1 : 0; // sign function
 	}
 
-	public List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, Square goalNode) {
+	public List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, Square goalSquare) {
 		Game.getNeighborsThatCanBeMovedTo++;
 		Game.getAllNeighbourSquaresThatCanBeMovedTo++;
 		ArrayList<Square> squares = new ArrayList<Square>();
 
 		for (Square square : neighbors) {
-			if (square.includableInPath(actor, goalNode)) {
+			if (square.includableInPath(actor, goalSquare, false)) {
 				squares.add(square);
 			}
 		}
@@ -1108,7 +1108,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		return null;
 	}
 
-	public boolean includableInPath(Actor actor, Square goalNode) {
+	public boolean includableInPath(Actor actor, Square goalSquare, boolean nodeAsking) {
 		Game.includableInPath++;
 
 		// if
@@ -1119,7 +1119,15 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			return false;
 		}
 
-		if (this == goalNode)
+		// Stop path moving in to nodes we dont want (either needs to be linked
+		// to current sqr or target sqr
+		if (!nodeAsking) {
+			if (this.node != null && !goalSquare.nodes.contains(this.node)
+					&& !actor.squareGameObjectIsOn.nodes.contains(this.node))
+				return false;
+		}
+
+		if (this == goalSquare && this.node == null)
 			return true;
 
 		if (inventory.canShareSquare) {

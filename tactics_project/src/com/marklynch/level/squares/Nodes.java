@@ -170,16 +170,16 @@ public class Nodes {
 		townCenter.neighbors.add(dungeonHouseOuter);
 		townCenter.neighbors.add(wallsHouseOuter);
 		townCenter.neighbors.add(townNorth);
-		townCenter.neighbors.add(townEast);
-		townCenter.neighbors.add(barracksNorth);
-		townCenter.neighbors.add(barracksSouth);
-		townCenter.neighbors.add(farmRoadEast);
+		// townCenter.neighbors.add(townEast);
+		// townCenter.neighbors.add(barracksNorth);
+		// townCenter.neighbors.add(barracksSouth);
+		// townCenter.neighbors.add(farmRoadEast);
 
-		barracksNorth.neighbors.add(townCenter);
+		// barracksNorth.neighbors.add(townCenter);
 		barracksNorth.neighbors.add(barracksSouth);
 		barracksNorth.neighbors.add(townEast);
 
-		barracksSouth.neighbors.add(townCenter);
+		// barracksSouth.neighbors.add(townCenter);
 		barracksSouth.neighbors.add(barracksNorth);
 		barracksSouth.neighbors.add(townSouthEast);
 
@@ -203,7 +203,7 @@ public class Nodes {
 		townNorthEast.neighbors.add(townEast);
 		townNorthEast.neighbors.add(lodgeJunction);
 
-		townEast.neighbors.add(townCenter);
+		// townEast.neighbors.add(townCenter);
 		townEast.neighbors.add(townNorthEast);
 		townEast.neighbors.add(townSouthEast);
 		townEast.neighbors.add(barracksNorth);
@@ -227,7 +227,7 @@ public class Nodes {
 		farmRoadEast.neighbors.add(farmPigPen);
 		farmRoadEast.neighbors.add(farmBackDoor);
 		farmRoadEast.neighbors.add(townSouthEast);
-		farmRoadEast.neighbors.add(townCenter);
+		// farmRoadEast.neighbors.add(townCenter);
 
 		farmEntrance.neighbors.add(farmRoadEast);
 		farmEntrance.neighbors.add(farmHallway);
