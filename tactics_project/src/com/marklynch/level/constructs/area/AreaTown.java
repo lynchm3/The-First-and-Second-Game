@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.BodyOfWater;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
@@ -115,6 +116,9 @@ public class AreaTown {
 		Templates.TREE.makeCopy(Game.level.squares[27][3], null);
 		Templates.TREE.makeCopy(Game.level.squares[23][5], null);
 		Templates.BUSH.makeCopy(Game.level.squares[17][19], null);
+
+		new BodyOfWater(105, 30, 110, 37);
+
 	}
 
 }

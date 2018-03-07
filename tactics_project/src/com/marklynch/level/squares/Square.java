@@ -79,6 +79,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public static Texture DARK_GRASS_TEXTURE;
 	public static Texture STONE_TEXTURE;
 	public static Texture MUD_TEXTURE;
+	public static Texture WATER_TEXTURE;
 	public static Texture GREY_TEXTURE;
 	public static Texture WHITE_SQUARE;
 	public static Texture YELLOW_SQUARE;
@@ -190,6 +191,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png", false);
 		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png", false);
 		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png", false);
+		WATER_TEXTURE = ResourceUtils.getGlobalImage("water.png", false);
 		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png", false);
 		WHITE_SQUARE = ResourceUtils.getGlobalImage("white_square.png", false);
 		YELLOW_SQUARE = ResourceUtils.getGlobalImage("yellow_square.png", false);
@@ -1039,15 +1041,17 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public void calculatePathCost() {
 		// if (!inventory.canShareSquare())
 		// cost = 999;
-		if (inventory.contains(BrokenGlass.class))
+		if (inventory.contains(BrokenGlass.class)) {
 			cost = 10;
-		else if (inventory.contains(Actor.class))
+		} else if (inventory.contains(Actor.class)) {
 			cost = 10;
-		else if (this.imageTexture == Square.STONE_TEXTURE) {
-			// System.out.println("STONE TEXTURE!!!!");
+		} else if (this.imageTexture == Square.STONE_TEXTURE) {
 			cost = 1;
-		} else
+		} else if (this.imageTexture == Square.WATER_TEXTURE) {
+			cost = 5;
+		} else {
 			cost = 2;
+		}
 	}
 
 	public void calculatePathCostForPlayer() {
@@ -1056,9 +1060,12 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		else if (this.imageTexture == Square.STONE_TEXTURE) {
 			// System.out.println("STONE TEXTURE!!!!");
 			costForPlayer = 1;
+		} else if (this.imageTexture == Square.WATER_TEXTURE) {
+			cost = 5;
 
 		} else
 			costForPlayer = 2;
+
 	}
 
 	// added by me
