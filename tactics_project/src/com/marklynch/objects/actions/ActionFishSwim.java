@@ -18,7 +18,7 @@ public class ActionFishSwim extends Action {
 	float targetOffsetX = 0;
 	float targetOffsetY = 0;
 
-	public ActionFishSwim(Fish performer, Square target, int targetOffsetX, int targetOffsetY) {
+	public ActionFishSwim(Fish performer, Square target, float targetOffsetX, float targetOffsetY) {
 		super(ACTION_NAME, "action_move.png");
 		this.performer = performer;
 		this.target = target;
@@ -108,11 +108,13 @@ public class ActionFishSwim extends Action {
 		GameObject gameObjectInTheWay = squareToMoveTo.inventory.gameObjectThatCantShareSquare;
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-			performer.primaryAnimation = new AnimationMove(actor.squareGameObjectIsOn, squareToMoveTo);
+			performer.primaryAnimation = new AnimationMove(actor.drawOffsetRatioX * Game.SQUARE_WIDTH,
+					actor.drawOffsetRatioY * Game.SQUARE_HEIGHT, this.targetOffsetX * Game.SQUARE_WIDTH,
+					this.targetOffsetY * Game.SQUARE_HEIGHT);
 
-		move(actor, squareToMoveTo);
-		actor.drawOffsetRatioX = this.targetOffsetX / Game.SQUARE_WIDTH;
-		actor.drawOffsetRatioY = this.targetOffsetY / Game.SQUARE_HEIGHT;
+		// move(actor, squareToMoveTo);
+		actor.drawOffsetRatioX = this.targetOffsetX;
+		actor.drawOffsetRatioY = this.targetOffsetY;
 
 		performer.actionsPerformedThisTurn.add(this);
 

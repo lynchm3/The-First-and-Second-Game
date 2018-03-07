@@ -22,6 +22,21 @@ public class AnimationMove extends Animation {
 
 	}
 
+	public AnimationMove(int startX, int startY, int endX, int endY) {
+
+	}
+
+	public AnimationMove(float startX, float startY, float endX, float endY) {
+		super();
+		durationToReach = 200;
+		// this.startSquare = startSquare;
+		// this.endSquare = endSquare;
+
+		startOffsetX = offsetX = startX - endX;
+		startOffsetY = offsetY = startY - endY;
+		blockAI = false;
+	}
+
 	@Override
 	public void update(double delta) {
 
