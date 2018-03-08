@@ -160,13 +160,36 @@ public class TemplatesAnimals {
 		Templates.FISH.drawOffsetRatioY = 0.75f;
 		Templates.FISH.widthRatio = 0.25f;
 		Templates.FISH.drawOffsetRatioX = 0.75f;
-		Templates.FISH.weight = 10f;
+		Templates.FISH.weight = 2f;
 		Templates.FISH.canOpenDoors = false;
 		Templates.FISH.canEquipWeapons = false;
 		Templates.FISH.templateId = GameObject.generateNewTemplateId();
 		Templates.FISH.aiRoutine = new AIRoutineForFish(Templates.FISH);
 		Templates.FISH.canBePickedUp = true;
 		Templates.FISH.fitsInInventory = true;
+
+		Templates.TURTLE = new Fish();
+		Templates.TURTLE.title = "Turtle";
+		Templates.TURTLE.level = 1;
+		Templates.TURTLE.slashDamage = 1;
+		Templates.TURTLE.totalHealth = Templates.TURTLE.remainingHealth = 5;
+		Templates.TURTLE.strength = 1;
+		Templates.TURTLE.dexterity = 1;
+		Templates.TURTLE.intelligence = 1;
+		Templates.TURTLE.endurance = 1;
+		Templates.TURTLE.imageTexturePath = "turtle.png";
+		Templates.TURTLE.imageTexture = getGlobalImage(Templates.TURTLE.imageTexturePath, true);
+		Templates.TURTLE.heightRatio = 0.25f;
+		Templates.TURTLE.drawOffsetRatioY = 0.75f;
+		Templates.TURTLE.widthRatio = 0.5f;
+		Templates.TURTLE.drawOffsetRatioX = 0.5f;
+		Templates.TURTLE.weight = 4f;
+		Templates.TURTLE.canOpenDoors = false;
+		Templates.TURTLE.canEquipWeapons = false;
+		Templates.TURTLE.templateId = GameObject.generateNewTemplateId();
+		Templates.TURTLE.aiRoutine = new AIRoutineForFish(Templates.TURTLE);
+		Templates.TURTLE.canBePickedUp = true;
+		Templates.TURTLE.fitsInInventory = true;
 	}
 
 }

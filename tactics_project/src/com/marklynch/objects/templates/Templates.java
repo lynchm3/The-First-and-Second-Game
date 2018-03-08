@@ -129,6 +129,7 @@ public class Templates {
 	public static TinyNeutralWildAnimal RAT;
 
 	public static Fish FISH;
+	public static Fish TURTLE;
 
 	public static HerbivoreWildAnimal RABBIT;
 

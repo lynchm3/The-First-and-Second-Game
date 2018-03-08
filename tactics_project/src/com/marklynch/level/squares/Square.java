@@ -1141,14 +1141,22 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 		// Stop path moving in to nodes we dont want (either needs to be linked
 		// to current sqr or target sqr
-		if (!nodeAsking) {
-			if (this.node != null && !goalSquare.nodes.contains(this.node)
-					&& !actor.squareGameObjectIsOn.nodes.contains(this.node))
-				return false;
+
+		if (!nodeAsking && this == goalSquare && actor.straightLineDistanceTo(this) > 1) {
+			return true;
 		}
 
-		if (this == goalSquare && this.node == null)
-			return true;
+		// if (!nodeAsking) {
+		//
+		//
+		//
+		// if (this.node != null && !goalSquare.nodes.contains(this.node)
+		// && !actor.squareGameObjectIsOn.nodes.contains(this.node))
+		// return false;
+		// }
+
+		// if (this == goalSquare && this.node == null)
+		// return true;
 
 		if (inventory.canShareSquare) {
 			// doors

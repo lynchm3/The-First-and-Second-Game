@@ -3,6 +3,7 @@ package com.marklynch.objects;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.faction.FactionList;
@@ -151,8 +152,16 @@ public class WaterBody extends WaterSource {
 		// float appleSizeRatio = (float) (Math.random() * sizeRatio);
 		// System.out.println("maxSizeRatio = " + sizeRatio);
 		// System.out.println("appleSizeRatio = " + appleSizeRatio);
-		Fish fish = Templates.FISH.makeCopy("Fish", this.squareGameObjectIsOn, FactionList.buns, null,
-				new GameObject[] {}, new GameObject[] {}, null);
+		if (new Random().nextBoolean()) {
+
+			Fish fish = Templates.FISH.makeCopy("Fish", this.squareGameObjectIsOn, FactionList.buns, null,
+					new GameObject[] {}, new GameObject[] {}, null);
+		} else {
+
+			Fish turtle = Templates.TURTLE.makeCopy("Turtle", this.squareGameObjectIsOn, FactionList.buns, null,
+					new GameObject[] {}, new GameObject[] {}, null);
+
+		}
 		// fish.widthRatio = sizeRatio;
 		// fish.heightRatio = sizeRatio;
 		// fish.width = Game.SQUARE_WIDTH * fish.widthRatio;
