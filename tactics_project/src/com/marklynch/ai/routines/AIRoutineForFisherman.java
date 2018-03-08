@@ -108,8 +108,16 @@ public class AIRoutineForFisherman extends AIRoutine {
 
 		// Sell items
 		if (sellItems(10)) {
+
+			System.out.println("sell items = true!");
+
 			this.actor.followersShouldFollow = true;
 			return;
+		} else {
+			System.out.println("sell items = false!");
+
+			System.out.println("actor.inventory.itemsToSellCount = " + actor.inventory.itemsToSellCount);
+
 		}
 
 		if (replenishEquipment()) {

@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationTake;
+import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.templates.Templates;
@@ -53,12 +54,9 @@ public class ActionFishing extends Action {
 			Game.level.logOnScreen(
 					new ActivityLog(new Object[] { performer, " went fishing in ", target, " with ", fishingRod }));
 
-		GameObject fish;
-		if (target.owner == null) {
-			fish = Templates.FISH.makeCopy(target.squareGameObjectIsOn, performer);
-		} else {
-			fish = Templates.FISH.makeCopy(target.squareGameObjectIsOn, target.owner);
-		}
+		GameObject fish = Templates.FISH.makeCopy("Fish", target.squareGameObjectIsOn, FactionList.buns, null,
+				new GameObject[] {}, new GameObject[] {}, null);
+		fish.owner = target.owner;
 
 		if (Game.level.openInventories.size() > 0) {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {

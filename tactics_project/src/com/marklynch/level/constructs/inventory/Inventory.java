@@ -17,6 +17,7 @@ import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.VariableQtyAction;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Fish;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Thief;
@@ -1593,7 +1594,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 
 			Trader trader = (Trader) parent;
-			if (trader.broom != null) {
+			if (trader.broom != null && this.contains(trader.broom)) {
 				trader.broom.toSell = false;
 				itemsToSellCount--;
 			}
@@ -1604,6 +1605,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		ArrayList<String> weaponsSeenInInventory = new ArrayList<String>();
 
 		for (GameObject gameObject : gameObjects) {
+
+			if (parent == Game.level.player)
+				System.out.println("toSell, gameObject =  " + gameObject);
 
 			gameObject.toSell = false;
 
@@ -1641,6 +1645,16 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			// Junk
 			if (gameObject instanceof Junk) {
+				gameObject.toSell = true;
+				itemsToSellCount++;
+				continue;
+			}
+
+			// Fish
+			if (gameObject instanceof Fish) {
+
+				System.out.println("FISH IN INVENTORY!!! " + parent);
+
 				gameObject.toSell = true;
 				itemsToSellCount++;
 				continue;

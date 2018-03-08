@@ -37,15 +37,11 @@ public class ActionFishSwim extends Action {
 	@Override
 	public void perform() {
 
-		System.out.println("FISH SWIM a");
-
 		if (!enabled)
 			return;
-		System.out.println("FISH SWIM b");
 
 		if (!checkRange())
 			return;
-		System.out.println("FISH SWIM c");
 
 		moveTo(performer, target);
 
@@ -139,15 +135,12 @@ public class ActionFishSwim extends Action {
 
 	@Override
 	public boolean check() {
-		System.out.println("FISH SWIM check a");
 		if (target == null)
 			return false;
 
-		System.out.println("FISH SWIM check b");
 		if (!target.inventory.contains(WaterBody.class)) {
 			return false;
 		}
-		System.out.println("FISH SWIM check c");
 		return true;
 	}
 
