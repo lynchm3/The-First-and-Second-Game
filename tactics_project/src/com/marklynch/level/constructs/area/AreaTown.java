@@ -121,6 +121,7 @@ public class AreaTown {
 		new BodyOfWater(105, 30, 110, 37);
 		Templates.FISH.makeCopy("Fish", Game.level.squares[107][34], FactionList.buns, null, new GameObject[] {},
 				new GameObject[] {}, null);
+		Templates.CHEST.makeCopy("Chest", Game.level.squares[107][33], false, null);
 
 	}
 

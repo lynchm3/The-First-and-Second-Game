@@ -191,7 +191,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png", false);
 		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png", false);
 		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png", false);
-		WATER_TEXTURE = ResourceUtils.getGlobalImage("water.png", false);
+		WATER_TEXTURE = ResourceUtils.getGlobalImage("water_tile.png", false);
 		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png", false);
 		WHITE_SQUARE = ResourceUtils.getGlobalImage("white_square.png", false);
 		YELLOW_SQUARE = ResourceUtils.getGlobalImage("yellow_square.png", false);
