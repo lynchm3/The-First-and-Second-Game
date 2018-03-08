@@ -47,26 +47,28 @@ public class AIRoutineForFish extends AIRoutine {
 			// false);
 
 			Square newSquare = fish.squareGameObjectIsOn;
+			float maxChange = 0.1f;
 
-			// if (changeX > 0.1 || changeX < 0.1) {
-			// changeX = 0;
-			// }
-			// if (new Random().nextFloat() < 0.2f) {
-			changeX = new Random().nextFloat() * 0.1f;
-			if (new Random().nextBoolean()) {
-				changeX = -changeX;
+			if (changeX > maxChange || changeX < -maxChange) {
+				changeX = 0;
 			}
-			// }
+			if (new Random().nextFloat() < 0.2f) {
+				changeX = new Random().nextFloat() * maxChange;
+				if (new Random().nextBoolean()) {
+					changeX = -changeX;
+				}
+			}
 
-			// if (changeY > 0.1 || changeY < 0.1) {
-			// changeY = 0;
-			// }
-			// if (new Random().nextFloat() < 0.2f) {
-			changeY = new Random().nextFloat() * 0.1f;
-			if (new Random().nextBoolean()) {
-				changeY = -changeY;
+			if (changeY > maxChange || changeY < -maxChange) {
+				changeY = 0;
 			}
-			// }
+
+			if (new Random().nextFloat() < 0.2f) {
+				changeY = new Random().nextFloat() * 0.1f;
+				if (new Random().nextBoolean()) {
+					changeY = -changeY;
+				}
+			}
 
 			if (actor.drawOffsetRatioX + changeX < 0) {
 				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareToLeftOf();

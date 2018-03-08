@@ -660,6 +660,25 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 		ArrayList<GameObject> gameObjectsToCheck = new ArrayList<GameObject>();
 
+		// Y - 1
+		if (yInGrid - 1 > 0) {
+			// sqr @ +1,+1
+			if (xInGrid + 1 < Game.level.squares.length) {
+				if (Game.level.squares[xInGrid + 1][yInGrid + 1].seenByPlayer)
+					gameObjectsToCheck.addAll(Game.level.squares[xInGrid + 1][yInGrid - 1].inventory.gameObjects);
+			}
+
+			// sqr @ 0,+1
+			if (Game.level.squares[xInGrid][yInGrid + 1].seenByPlayer)
+				gameObjectsToCheck.addAll(Game.level.squares[xInGrid][yInGrid - 1].inventory.gameObjects);
+
+			// sqr @ -11,+1
+			if (xInGrid - 1 > 0) {
+				if (Game.level.squares[xInGrid - 1][yInGrid + 1].seenByPlayer)
+					gameObjectsToCheck.addAll(Game.level.squares[xInGrid - 1][yInGrid - 1].inventory.gameObjects);
+			}
+		}
+
 		// sqr @ +1,0
 		if (xInGrid + 1 < Game.level.squares.length) {
 			if (Game.level.squares[xInGrid + 1][yInGrid].seenByPlayer)
@@ -676,6 +695,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 				gameObjectsToCheck.addAll(Game.level.squares[xInGrid - 1][yInGrid].inventory.gameObjects);
 		}
 
+		// Y + 1
 		if (yInGrid + 1 < Game.level.squares[0].length) {
 			// sqr @ +1,+1
 			if (xInGrid + 1 < Game.level.squares.length) {
