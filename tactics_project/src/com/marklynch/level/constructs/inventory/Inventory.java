@@ -1606,9 +1606,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		for (GameObject gameObject : gameObjects) {
 
-			if (parent == Game.level.player)
-				System.out.println("toSell, gameObject =  " + gameObject);
-
 			gameObject.toSell = false;
 
 			if (gameObject.owner != null && gameObject.owner != this.parent && !(gameObject.owner instanceof Thief))
@@ -1652,9 +1649,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			// Fish
 			if (gameObject instanceof Fish) {
-
-				System.out.println("FISH IN INVENTORY!!! " + parent);
-
 				gameObject.toSell = true;
 				itemsToSellCount++;
 				continue;

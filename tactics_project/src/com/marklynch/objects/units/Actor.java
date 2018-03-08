@@ -1509,29 +1509,15 @@ public class Actor extends GameObject {
 				if (sound.sourceObject != null && sound.sourceObject.remainingHealth > 0) {
 					this.addAttackerForThisAndGroupMembers(sound.sourceObject);
 				}
-
-				if (this.name.contains("Lead Hunter Brent")) {
-					System.out.println("exit @ a");
-
-				}
 			} else if (!sound.legal) {
 				this.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 						Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
-				if (this.name.contains("Lead Hunter Brent")) {
-					System.out.println("exit @ b");
-				}
 			} else if (soundInTypeList == true) {
 				this.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 						Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
-				if (this.name.contains("Lead Hunter Brent")) {
-					System.out.println("exit @ c");
-				}
 			} else if (sound.loudness >= 5) {
 				this.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 						Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
-				if (this.name.contains("Lead Hunter Brent")) {
-					System.out.println("exit @ d");
-				}
 			}
 
 		}

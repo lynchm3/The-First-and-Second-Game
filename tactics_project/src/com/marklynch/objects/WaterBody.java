@@ -141,10 +141,7 @@ public class WaterBody extends WaterSource {
 	public void update(int delta) {
 		super.update(delta);
 
-		System.out.println("WaterBody.update()");
-
 		if (this.fish == null && Math.random() > 0.999d) {
-			System.out.println("calling addFish()");
 			this.fish = addFish();
 		}
 	}
@@ -156,8 +153,6 @@ public class WaterBody extends WaterSource {
 		// System.out.println("appleSizeRatio = " + appleSizeRatio);
 		Fish fish = Templates.FISH.makeCopy("Fish", this.squareGameObjectIsOn, FactionList.buns, null,
 				new GameObject[] {}, new GameObject[] {}, null);
-		System.out.println("fish = " + fish);
-
 		// fish.widthRatio = sizeRatio;
 		// fish.heightRatio = sizeRatio;
 		// fish.width = Game.SQUARE_WIDTH * fish.widthRatio;

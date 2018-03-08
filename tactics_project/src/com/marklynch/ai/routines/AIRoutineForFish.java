@@ -77,11 +77,6 @@ public class AIRoutineForFish extends AIRoutine {
 			float halfWidthRatio = (fish.width / Game.SQUARE_WIDTH) / 2f;
 			float halfHeightRatio = (fish.height / Game.SQUARE_HEIGHT) / 2f;
 
-			System.out.println("fish = " + fish);
-			System.out.println("fish.squareGameObjectIsOn = " + fish.squareGameObjectIsOn);
-			System.out.println(
-					"fish.squareGameObjectIsOn.getSquareToLeftOf() = " + fish.squareGameObjectIsOn.getSquareToLeftOf());
-
 			// If we're moving out of water, cancel X
 			if (actor.drawOffsetRatioX + changeX < 0 && (fish.squareGameObjectIsOn.getSquareToLeftOf() == null
 					|| !fish.squareGameObjectIsOn.getSquareToLeftOf().inventory.contains(WaterBody.class))) {

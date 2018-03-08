@@ -61,11 +61,8 @@ public class AIRoutineForGuard extends AIRoutine {
 			state = STATE.PATROL;
 		} else {
 			state = STATE.FREE_TIME;
-			System.out.println("FREE_TIME");
 			if (currentHobby == null) {
-				System.out.println("current hobby is null, picking new one");
 				currentHobby = getRandomHobbyFromActorsHobbies();
-				System.out.println("currentHobby = " + currentHobby);
 			}
 		}
 
