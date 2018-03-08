@@ -83,8 +83,10 @@ import com.marklynch.objects.actions.ActionUntrackMapMarker;
 import com.marklynch.objects.actions.ActionUse;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Fish;
 import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
@@ -316,6 +318,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	Color flashColor = new Color(255f, 255f, 255f, 0.5f);
+	Color underWaterColor = new Color(0.1f, 0.1f, 0.1f, 1f);
 
 	public void draw1() {
 
@@ -370,6 +373,17 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
 						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
 						flashColor, false);
+			} else if (squareGameObjectIsOn.inventory.contains(WaterBody.class) && !(this instanceof Fish)
+					&& !(this instanceof WaterBody)) {
+
+				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
+						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+						underWaterColor, false);
+				TextureUtils.drawTexture(Templates.WATER_BODY.imageTexture, alpha, actorPositionXInPixels,
+						actorPositionYInPixels, actorPositionXInPixels + width, actorPositionYInPixels + height,
+						backwards);
+
+				// squareGameObjectIsOn.inventory.getGameObjectOfClass(WaterBody.class).draw1();
 			}
 
 			if (remainingHealth != totalHealth) {

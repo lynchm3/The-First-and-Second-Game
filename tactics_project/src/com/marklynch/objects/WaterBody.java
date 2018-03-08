@@ -141,7 +141,7 @@ public class WaterBody extends WaterSource {
 	public void update(int delta) {
 		super.update(delta);
 
-		if (this.fish == null && Math.random() > 0.999d) {
+		if (this.fish == null && Math.random() > 0.99d) {
 			this.fish = addFish();
 		}
 	}
