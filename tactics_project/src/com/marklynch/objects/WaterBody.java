@@ -5,8 +5,11 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Fish;
 import com.marklynch.utils.Texture;
 
 public class WaterBody extends WaterSource {
@@ -130,6 +133,57 @@ public class WaterBody extends WaterSource {
 		textureTopRightInnerCorner = getGlobalImage("wall_top_right_corner_inner.png", true);
 		textureBottomRightInnerCorner = getGlobalImage("wall_bottom_right_corner_inner.png", true);
 		textureBottomLeftInnerCorner = getGlobalImage("wall_bottom_left_corner_inner.png", true);
+	}
+
+	public Fish fish;
+
+	@Override
+	public void update(int delta) {
+		super.update(delta);
+
+		System.out.println("WaterBody.update()");
+
+		if (this.fish == null && Math.random() > 0.999d) {
+			System.out.println("calling addFish()");
+			this.fish = addFish();
+		}
+	}
+
+	public Fish addFish() {
+
+		// float appleSizeRatio = (float) (Math.random() * sizeRatio);
+		// System.out.println("maxSizeRatio = " + sizeRatio);
+		// System.out.println("appleSizeRatio = " + appleSizeRatio);
+		Fish fish = Templates.FISH.makeCopy("Fish", this.squareGameObjectIsOn, FactionList.buns, null,
+				new GameObject[] {}, new GameObject[] {}, null);
+		System.out.println("fish = " + fish);
+
+		// fish.widthRatio = sizeRatio;
+		// fish.heightRatio = sizeRatio;
+		// fish.width = Game.SQUARE_WIDTH * fish.widthRatio;
+		// fish.height = Game.SQUARE_HEIGHT * fish.heightRatio;
+		// fish.halfWidth = fish.width / 2;
+		// fish.halfHeight = fish.height / 2;
+
+		// fish.anchorX = 6;
+		// fish.anchorY = 6;
+
+		// float appleDrawOffsetXMax = 0.75f - fish.width / Game.SQUARE_WIDTH;
+		// float appleDrawOffsetXMin = 0.25f;
+		// float appleDrawOffsetYMin = -0.35f;
+		// float appleDrawOffsetYMax = 0.35f;
+
+		// fish.drawOffsetRatioX = appleDrawOffsetXMin
+		// + (float) (Math.random() * (appleDrawOffsetXMax -
+		// appleDrawOffsetXMin));
+		// fish.drawOffsetRatioY = fish.drawOffsetYInTree = appleDrawOffsetYMin
+		// + (float) (Math.random() * (appleDrawOffsetYMax -
+		// appleDrawOffsetYMin));
+
+		// inventory.add(fish);
+
+		return fish;
+
 	}
 
 	@Override
