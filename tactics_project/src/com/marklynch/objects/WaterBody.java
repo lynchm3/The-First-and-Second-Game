@@ -192,12 +192,12 @@ public class WaterBody extends WaterSource {
 
 	@Override
 	public void draw1() {
+		super.draw1();
 
 	}
 
 	@Override
 	public void draw2() {
-		super.draw1();
 		super.draw2();
 	}
 

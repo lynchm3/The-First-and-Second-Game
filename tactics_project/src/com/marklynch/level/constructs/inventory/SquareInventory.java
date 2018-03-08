@@ -8,9 +8,11 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.PressurePlate;
+import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Fish;
 
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
 
@@ -171,6 +173,27 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 	@Override
 	public int compare(GameObject a, GameObject b) {
+
+		if (a instanceof WaterBody && b instanceof WaterBody) {
+			return 0;
+		} else if (a instanceof WaterBody)
+
+		{
+			return 1;
+		} else if (b instanceof WaterBody) {
+			return -1;
+		}
+
+		if (a instanceof Fish && b instanceof Fish) {
+			return 0;
+		} else if (a instanceof Fish)
+
+		{
+			return 1;
+		} else if (b instanceof Fish) {
+			return -1;
+		}
+
 		return (int) (a.height - b.height);
 	}
 
