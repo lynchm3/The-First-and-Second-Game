@@ -317,7 +317,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		screamAudio = ResourceUtils.getGlobalSound("scream.wav");
 	}
 
-	Color flashColor = new Color(255f, 255f, 255f, 0.5f);
+	protected Color flashColor = new Color(255f, 255f, 255f, 0.5f);
 	Color underWaterColor = new Color(0.1f, 0.1f, 0.1f, 1f);
 
 	public void draw1() {

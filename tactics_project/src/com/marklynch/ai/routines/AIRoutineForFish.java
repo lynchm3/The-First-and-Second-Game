@@ -108,20 +108,36 @@ public class AIRoutineForFish extends AIRoutine {
 			if (actor.drawOffsetRatioX + changeX < -halfWidthRatio) {
 
 				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareToLeftOf();
-				newSquare = potentialNewSquare;
-				changeX += 1;
+				if (potentialNewSquare.inventory.contains(Fish.class)) {
+					changeX = 0;
+				} else {
+					newSquare = potentialNewSquare;
+					changeX += 1;
+				}
 			} else if (actor.drawOffsetRatioX + changeX >= 1 - halfWidthRatio) {
 				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareToRightOf();
-				newSquare = potentialNewSquare;
-				changeX -= 1;
+				if (potentialNewSquare.inventory.contains(Fish.class)) {
+					changeX = 0;
+				} else {
+					newSquare = potentialNewSquare;
+					changeX -= 1;
+				}
 			} else if (actor.drawOffsetRatioY + changeY < -halfHeightRatio) {
 				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareAbove();
-				newSquare = potentialNewSquare;
-				changeY += 1;
+				if (potentialNewSquare.inventory.contains(Fish.class)) {
+					changeY = 0;
+				} else {
+					newSquare = potentialNewSquare;
+					changeY += 1;
+				}
 			} else if (actor.drawOffsetRatioY + changeY >= 1 - halfHeightRatio) {
 				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareBelow();
-				newSquare = potentialNewSquare;
-				changeY -= 1;
+				if (potentialNewSquare.inventory.contains(Fish.class)) {
+					changeY = 0;
+				} else {
+					newSquare = potentialNewSquare;
+					changeY -= 1;
+				}
 			}
 
 			new ActionFishSwim(fish, newSquare, actor.drawOffsetRatioX + changeX, actor.drawOffsetRatioY + changeY)
