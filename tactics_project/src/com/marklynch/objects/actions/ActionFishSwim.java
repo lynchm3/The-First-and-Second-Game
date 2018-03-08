@@ -108,9 +108,14 @@ public class ActionFishSwim extends Action {
 		GameObject gameObjectInTheWay = squareToMoveTo.inventory.gameObjectThatCantShareSquare;
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-			performer.primaryAnimation = new AnimationMove(actor.drawOffsetRatioX * Game.SQUARE_WIDTH,
-					actor.drawOffsetRatioY * Game.SQUARE_HEIGHT, this.targetOffsetX * Game.SQUARE_WIDTH,
-					this.targetOffsetY * Game.SQUARE_HEIGHT);
+			performer.primaryAnimation = new AnimationMove(
+					actor.squareGameObjectIsOn.xInGridPixels + actor.drawOffsetRatioX * Game.SQUARE_WIDTH,
+					actor.squareGameObjectIsOn.yInGridPixels + actor.drawOffsetRatioY * Game.SQUARE_HEIGHT,
+					target.xInGridPixels + this.targetOffsetX * Game.SQUARE_WIDTH,
+					target.yInGridPixels + this.targetOffsetY * Game.SQUARE_HEIGHT);
+
+		if (actor.squareGameObjectIsOn != target)
+			target.inventory.add(actor);
 
 		// move(actor, squareToMoveTo);
 		actor.drawOffsetRatioX = this.targetOffsetX;
