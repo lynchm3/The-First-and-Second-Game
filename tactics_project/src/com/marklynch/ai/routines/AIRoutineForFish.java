@@ -2,6 +2,7 @@ package com.marklynch.ai.routines;
 
 import java.util.Random;
 
+import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.WaterBody;
@@ -47,7 +48,7 @@ public class AIRoutineForFish extends AIRoutine {
 			// false);
 
 			Square newSquare = fish.squareGameObjectIsOn;
-			float maxChange = 0.1f;
+			float maxChange = 0.05f;
 
 			if (changeX > maxChange || changeX < -maxChange) {
 				changeX = 0;
@@ -64,13 +65,17 @@ public class AIRoutineForFish extends AIRoutine {
 			}
 
 			if (new Random().nextFloat() < 0.2f) {
-				changeY = new Random().nextFloat() * 0.1f;
+				changeY = new Random().nextFloat() * maxChange;
 				if (new Random().nextBoolean()) {
 					changeY = -changeY;
 				}
 			}
 
-			if (actor.drawOffsetRatioX + changeX < 0) {
+			float halfWidthRatio = (fish.width / Game.SQUARE_WIDTH) / 2f;
+			float halfHeightRatio = (fish.height / Game.SQUARE_HEIGHT) / 2f;
+
+			if (actor.drawOffsetRatioX + changeX < -halfWidthRatio) {
+
 				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareToLeftOf();
 				if (potentialNewSquare == null) {
 					changeX = 0;
@@ -80,7 +85,7 @@ public class AIRoutineForFish extends AIRoutine {
 					newSquare = potentialNewSquare;
 					changeX += 1;
 				}
-			} else if (actor.drawOffsetRatioX + changeX >= 1) {
+			} else if (actor.drawOffsetRatioX + changeX >= 1 - halfWidthRatio) {
 				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareToRightOf();
 				if (potentialNewSquare == null) {
 					changeX = 0;
@@ -90,7 +95,7 @@ public class AIRoutineForFish extends AIRoutine {
 					newSquare = potentialNewSquare;
 					changeX -= 1;
 				}
-			} else if (actor.drawOffsetRatioY + changeY < 0) {
+			} else if (actor.drawOffsetRatioY + changeY < -halfHeightRatio) {
 				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareAbove();
 				if (potentialNewSquare == null) {
 					changeY = 0;
@@ -100,7 +105,7 @@ public class AIRoutineForFish extends AIRoutine {
 					newSquare = potentialNewSquare;
 					changeY += 1;
 				}
-			} else if (actor.drawOffsetRatioY + changeY >= 1) {
+			} else if (actor.drawOffsetRatioY + changeY >= 1 - halfHeightRatio) {
 				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareBelow();
 				if (potentialNewSquare == null) {
 					changeY = 0;
@@ -112,15 +117,6 @@ public class AIRoutineForFish extends AIRoutine {
 				}
 			}
 
-			// targetOffsetX = new Random().nextInt((int) (Game.SQUARE_WIDTH -
-			// fish.width));
-			// targetOffsetY = new Random().nextInt((int) (Game.SQUARE_HEIGHT -
-			// fish.height));
-			// }
-
-			// System.out.println("aiRoutine newSquare = " + newSquare);
-			// System.out.println("aiRoutine targetOffsetX = " + targetOffsetX);
-			// System.out.println("aiRoutine targetOffsetY = " + targetOffsetY);
 			new ActionFishSwim(fish, newSquare, actor.drawOffsetRatioX + changeX, actor.drawOffsetRatioY + changeY)
 					.perform();
 		}
