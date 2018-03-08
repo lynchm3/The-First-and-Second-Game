@@ -17,8 +17,8 @@ public class AIRoutineForFish extends AIRoutine {
 
 	Fish fish;
 	Square targetSquare = null;
-	int targetOffsetX = 0;
-	int targetOffsetY = 0;
+	float changeX = 0;
+	float changeY = 0;
 
 	public AIRoutineForFish(Actor actor) {
 		super(actor);
@@ -48,15 +48,25 @@ public class AIRoutineForFish extends AIRoutine {
 
 			Square newSquare = fish.squareGameObjectIsOn;
 
-			float changeX = new Random().nextFloat() * 0.1f;
+			// if (changeX > 0.1 || changeX < 0.1) {
+			// changeX = 0;
+			// }
+			// if (new Random().nextFloat() < 0.2f) {
+			changeX = new Random().nextFloat() * 0.1f;
 			if (new Random().nextBoolean()) {
 				changeX = -changeX;
 			}
+			// }
 
-			float changeY = new Random().nextFloat() * 0.1f;
+			// if (changeY > 0.1 || changeY < 0.1) {
+			// changeY = 0;
+			// }
+			// if (new Random().nextFloat() < 0.2f) {
+			changeY = new Random().nextFloat() * 0.1f;
 			if (new Random().nextBoolean()) {
 				changeY = -changeY;
 			}
+			// }
 
 			if (actor.drawOffsetRatioX + changeX < 0) {
 				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareToLeftOf();
@@ -106,9 +116,9 @@ public class AIRoutineForFish extends AIRoutine {
 			// fish.height));
 			// }
 
-			System.out.println("aiRoutine newSquare = " + newSquare);
-			System.out.println("aiRoutine targetOffsetX = " + targetOffsetX);
-			System.out.println("aiRoutine targetOffsetY = " + targetOffsetY);
+			// System.out.println("aiRoutine newSquare = " + newSquare);
+			// System.out.println("aiRoutine targetOffsetX = " + targetOffsetX);
+			// System.out.println("aiRoutine targetOffsetY = " + targetOffsetY);
 			new ActionFishSwim(fish, newSquare, actor.drawOffsetRatioX + changeX, actor.drawOffsetRatioY + changeY)
 					.perform();
 		}
