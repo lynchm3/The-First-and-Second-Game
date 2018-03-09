@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.AnimationBubbles;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -32,6 +33,17 @@ public class Fish extends HerbivoreWildAnimal {
 		super.setAttributesForCopy(name, actor, square, faction, bed, 0, mustHaves, mightHaves, area);
 
 		return actor;
+	}
+
+	@Override
+	public void update(int delta) {
+		super.update(delta);
+
+		if (squareGameObjectIsOn != null) {
+			int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
+			int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			this.secondaryAnimations.add(new AnimationBubbles(this, x + 32, y - 64, 0.1f));
+		}
 	}
 
 	@Override

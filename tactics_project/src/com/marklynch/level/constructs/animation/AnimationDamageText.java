@@ -21,12 +21,6 @@ public class AnimationDamageText extends Animation {
 	public float originY = 0;
 	public float targetX = 0;
 	public float targetY = 0;
-	// public float targetOffsetX = 0;
-	// public float targetOffsetY = 0;
-	// public double speedX = 0.1d;
-	// public double speedY = 0.1d;
-	// float distanceToCoverX, distanceToCoverY, distanceCoveredX,
-	// distanceCoveredY;
 	public int damageStringLength;
 	public StringWithColor damageStringWithColor;
 
@@ -40,10 +34,10 @@ public class AnimationDamageText extends Animation {
 
 	Color color;
 
-	public AnimationDamageText(int damage, GameObject taker, float originX, float originY, float speed,
+	public AnimationDamageText(int damage, GameObject targetGameObject, float originX, float originY, float speed,
 			DAMAGE_TYPE damageType, Color color) {
 
-		this.targetGameObject = taker;
+		this.targetGameObject = targetGameObject;
 
 		String damageString = "" + damage;
 		this.damageStringLength = Game.smallFont.getWidth(damageString);
