@@ -42,7 +42,7 @@ public class Fish extends HerbivoreWildAnimal {
 		if (squareGameObjectIsOn != null) {
 			int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 			int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
-			this.secondaryAnimations.add(new AnimationBubbles(this, x + 32, y - 64, 0.1f));
+			this.secondaryAnimations.add(new AnimationBubbles(this, x + 32, y, 0.1f));
 		}
 	}
 

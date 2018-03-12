@@ -54,12 +54,12 @@ public class AnimationBubbles extends Animation {
 
 	@Override
 	public void draw2() {
+		draw();
 
 	}
 
 	@Override
 	public void drawStaticUI() {
-		draw();
 	}
 
 	public void draw() {
@@ -74,16 +74,20 @@ public class AnimationBubbles extends Animation {
 
 		Game.activeBatch.flush();
 
-		float drawPositionX = (Game.halfWindowWidth) + (Game.zoom * inverseSize
-				* (x + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
-		float drawPositionY = (Game.halfWindowHeight) + (Game.zoom * inverseSize
-				* (y + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
+		// float drawPositionX = (Game.halfWindowWidth) + (Game.zoom *
+		// inverseSize
+		// * (x + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth +
+		// Game.getDragXWithOffset()));
+		// float drawPositionY = (Game.halfWindowHeight) + (Game.zoom *
+		// inverseSize
+		// * (y + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight +
+		// Game.getDragYWithOffset()));
 
 		// TextureUtils.drawTexture(texture, 1f, x, y, x + gameObject.width, y +
 		// gameObject.height,
 		// false);
 
-		TextureUtils.drawTexture(texture, 1, drawPositionX - 16, drawPositionY, drawPositionX, drawPositionY + 16);
+		TextureUtils.drawTexture(texture, 1, x, y, x + 16, y + 16);
 
 	}
 
