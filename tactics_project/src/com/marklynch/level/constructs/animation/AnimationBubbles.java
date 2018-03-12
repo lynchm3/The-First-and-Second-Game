@@ -15,7 +15,7 @@ public class AnimationBubbles extends Animation {
 	public GameObject targetGameObject;
 	public float speed = 1f;
 	boolean reachedDestination = false;
-	public Texture texture = Templates.LARGE_ORB.imageTexture;
+	public Texture texture = Templates.BUBBLE.imageTexture;
 	public float size = 0f;
 
 	public AnimationBubbles(GameObject targetGameObject, float originX, float originY, float speed) {
@@ -59,11 +59,11 @@ public class AnimationBubbles extends Animation {
 
 	@Override
 	public void draw1() {
+		draw();
 	}
 
 	@Override
 	public void draw2() {
-		draw();
 
 	}
 

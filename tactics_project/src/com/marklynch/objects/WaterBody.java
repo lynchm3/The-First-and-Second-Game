@@ -142,9 +142,9 @@ public class WaterBody extends WaterSource {
 	public void update(int delta) {
 		super.update(delta);
 
-		// if (this.fish == null && Math.random() > 0.99d) {
-		// this.fish = addFish();
-		// }
+		if (this.fish == null && Math.random() > 0.99d) {
+			this.fish = addFish();
+		}
 	}
 
 	public Fish addFish() {
@@ -192,12 +192,12 @@ public class WaterBody extends WaterSource {
 
 	@Override
 	public void draw1() {
-		super.draw1();
 
 	}
 
 	@Override
 	public void draw2() {
+		super.draw1();
 		super.draw2();
 	}
 

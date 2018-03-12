@@ -106,6 +106,7 @@ public class Templates {
 	public static Orb SMALL_ORB;
 	public static Orb MEDIUM_ORB;
 	public static Orb LARGE_ORB;
+	public static Orb BUBBLE;
 
 	// Player
 	public static Player PLAYER;

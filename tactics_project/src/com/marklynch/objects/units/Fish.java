@@ -39,7 +39,7 @@ public class Fish extends HerbivoreWildAnimal {
 	public void update(int delta) {
 		super.update(delta);
 
-		if (squareGameObjectIsOn != null && delta % 5 == 0) {
+		if (squareGameObjectIsOn != null && delta % 3 == 0) {
 			int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 			int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 			this.secondaryAnimations.add(new AnimationBubbles(this, x + width, y, 0.1f));

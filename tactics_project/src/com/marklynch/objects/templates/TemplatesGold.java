@@ -92,6 +92,26 @@ public class TemplatesGold {
 		Templates.LARGE_ORB.anchorY = 0;
 		Templates.LARGE_ORB.templateId = GameObject.generateNewTemplateId();
 
+		Templates.BUBBLE = new Orb();
+		Templates.BUBBLE.name = "Bubble";
+		Templates.BUBBLE.imageTexturePath = "bubble.png";
+		Templates.BUBBLE.imageTexture = getGlobalImage(Templates.BUBBLE.imageTexturePath, true);
+		Templates.BUBBLE.totalHealth = Templates.BUBBLE.remainingHealth = 1;
+		Templates.BUBBLE.widthRatio = 0.5f;
+		Templates.BUBBLE.heightRatio = 0.5f;
+		Templates.BUBBLE.drawOffsetRatioX = 0f;
+		Templates.BUBBLE.drawOffsetRatioY = 0f;
+		Templates.BUBBLE.soundWhenHit = 1f;
+		Templates.BUBBLE.soundWhenHitting = 1f;
+		Templates.BUBBLE.soundDampening = 1f;
+		Templates.BUBBLE.fireResistance = 100f;
+		Templates.BUBBLE.stackable = false;
+		Templates.BUBBLE.weight = 1f;
+		Templates.BUBBLE.value = 1;
+		Templates.BUBBLE.anchorX = 0;
+		Templates.BUBBLE.anchorY = 0;
+		Templates.BUBBLE.templateId = GameObject.generateNewTemplateId();
+
 	}
 
 }
