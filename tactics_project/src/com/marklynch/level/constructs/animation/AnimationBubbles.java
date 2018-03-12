@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.animation;
 
-import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.Texture;
@@ -17,6 +16,7 @@ public class AnimationBubbles extends Animation {
 	public float speed = 1f;
 	boolean reachedDestination = false;
 	public Texture texture = Templates.LARGE_ORB.imageTexture;
+	public float size = 0f;
 
 	public AnimationBubbles(GameObject targetGameObject, float originX, float originY, float speed) {
 
@@ -24,7 +24,16 @@ public class AnimationBubbles extends Animation {
 
 		this.speed = speed;
 
-		this.x = this.originX = originX;
+		size = (float) (Math.random() * 16d);
+		// if (random < 0.33d) {
+		// texture = Templates.LARGE_ORB.imageTexture;
+		// } else if (random < 0.66d) {
+		// texture = Templates.MEDIUM_ORB.imageTexture;
+		// } else {
+		// texture = Templates.SMALL_ORB.imageTexture;
+		// }
+
+		this.x = this.originX = (float) (originX + Math.random() * 20d - 10d);
 		this.y = this.originY = originY;
 
 		this.durationToReach = 1000f;
@@ -69,10 +78,10 @@ public class AnimationBubbles extends Animation {
 		if (completed)
 			return;
 
-		float size = 2f;
-		float inverseSize = 0.5f;
+		// float size = 2f;
+		// float inverseSize = 0.5f;
 
-		Game.activeBatch.flush();
+		// Game.activeBatch.flush();
 
 		// float drawPositionX = (Game.halfWindowWidth) + (Game.zoom *
 		// inverseSize
@@ -87,7 +96,7 @@ public class AnimationBubbles extends Animation {
 		// gameObject.height,
 		// false);
 
-		TextureUtils.drawTexture(texture, 1, x, y, x + 16, y + 16);
+		TextureUtils.drawTexture(texture, 1, x, y, x + size, y + size);
 
 	}
 
