@@ -311,82 +311,35 @@ public class Actor extends GameObject {
 	Node lastNodeReached = null;
 
 	public AIPath getPathTo(Square target) {
-		// if (this == Game.level.player) {
-		// System.out.println("-------------------- ");
-		// // System.out.println("name = " + name);
-		// // Utils.printStackTrace();
-		// System.out.println("current square = " + this.squareGameObjectIsOn);
-		// System.out.println("target square = " + target);
-		// }
 
 		if (target == null) {
 			return null;
 		}
 
-		// Share a node, just walk straight
 		for (Node node1 : this.squareGameObjectIsOn.nodes) {
 			for (Node node2 : target.nodes) {
-				// if (this == Game.level.player) {
-				// System.out.println("node 1 = " + node1.name + ", node2 = " +
-				// node2.name);
-				// }
 				if (node1 == node2) {
-					// if (this == Game.level.player) {
-					// System.out.println(
-					// "Goind straight to squares - node 1 = " + node1.name + ",
-					// node2 = " + node2.name);
-					// }
 					lastNodeReached = null;
 					return getPathAtSquareLevel(target);
 				}
 			}
 		}
-
-		// ALWAYS RESET NEAREST SQR
-		// MIGHT WORK
-
-		// if (this.squareGameObjectIsOn.node != null) {
-		// lastNodeReached = squareGameObjectIsOn.node;
-		// } else {// if (lastNodeReached == null) {
 		int closestNodeDistance = Integer.MAX_VALUE;
-		// Node closestNode = null;
-		// if (this == Game.level.player) {
-		// System.out.println("this.squareGameObjectIsOn.nodes = " +
-		// this.squareGameObjectIsOn.nodes);
-		// }
 		for (Node node : this.squareGameObjectIsOn.nodes) {
 			int tempDistance = straightLineDistanceBetween(this.squareGameObjectIsOn, node.square);
-			// if (this == Game.level.player) {
-			// System.out.println("checking if nearest node - " + node + ",
-			// tempDistance = " + tempDistance);
-			// }
 			if (tempDistance < closestNodeDistance) {
 				lastNodeReached = node;
 				closestNodeDistance = tempDistance;
 			}
 		}
-		// if (this == Game.level.player) {
-		// System.out.println("lastNodeReached = " + lastNodeReached);
-		// }
-		// }
 
-		// ASTARSEACH.FINDPATH
 		int maxPathSize = 1000;
 		float bestCost = Float.MAX_VALUE;
 		LinkedList<Node> aStarNodesPath = null;
 
-		// for (Node node1 : this.squareGameObjectIsOn.nodes) {
 		for (Node node2 : target.nodes) {
 			LinkedList<Node> tempAStarNodesPath = new AStarSearchHighLevel().findPath(this, lastNodeReached, node2,
 					maxPathSize, target);
-			// if (this == Game.level.player) {
-			// System.out.println("tempAStarNodesPath = " + tempAStarNodesPath);
-			// for (Node node : tempAStarNodesPath) {
-			// System.out.println("node = " + node);
-			// System.out.println("node.name = " + node.name);
-			// }
-			//
-			// }
 
 			boolean completePath = false;
 			if (tempAStarNodesPath != null && tempAStarNodesPath.size() > 0
@@ -402,21 +355,7 @@ public class Actor extends GameObject {
 				}
 			}
 		}
-		// }
 
-		// if (aStarNodesPath == null || aStarNodesPath.size() == 0) {
-		// // if (this == Game.level.player) {
-		// // System.out.println("aStarNodesPath is null or empty, returning");
-		// // }
-		// return getPathAtSquareLevel(target);
-		// }
-
-		// if (this == Game.level.player) {
-		// System.out.println("target node name = " +
-		// aStarNodesPath.getFirst().name);
-		// System.out.println("target node square = " +
-		// aStarNodesPath.getFirst().square);
-		// }
 		if (aStarNodesPath != null)
 			return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
 
@@ -447,7 +386,7 @@ public class Actor extends GameObject {
 			}
 
 			boolean completePath = false;
-			if (squarePath.size() > 0 && squarePath.get(squarePath.size() - 1) == target) {
+			if (squarePath.size() == 0 || squarePath.size() == 1 || squarePath.get(squarePath.size() - 1) == target) {
 				completePath = true;
 			}
 

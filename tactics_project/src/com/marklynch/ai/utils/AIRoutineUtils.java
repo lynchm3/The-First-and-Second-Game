@@ -156,13 +156,6 @@ public class AIRoutineUtils {
 					ignoreQuestObjects, minimumGoldValue, types);
 		}
 
-		// if (Game.level.activeActor.name.contains("Farmer")) {
-		// System.out.println("objects.size() = " + objects.size());
-		// for (GameObject g : objects) {
-		// System.out.println("g = " + g);
-		// }
-		// }
-
 		objects.sort(AIRoutineUtils.sortByStraightLineDistance);
 
 		// if (Game.level.activeActor.name.contains("Farmer")) {
