@@ -122,6 +122,7 @@ public class AreaTown {
 		Templates.FISH.makeCopy("Fish", Game.level.squares[107][34], FactionList.buns, null, new GameObject[] {},
 				new GameObject[] {}, null);
 		Templates.CHEST.makeCopy("Chest", Game.level.squares[107][33], false, null);
+		Templates.CRATE.makeCopy("Crate", Game.level.squares[106][31], false, null);
 
 	}
 

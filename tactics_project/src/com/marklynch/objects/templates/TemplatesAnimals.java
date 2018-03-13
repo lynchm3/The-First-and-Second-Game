@@ -163,6 +163,7 @@ public class TemplatesAnimals {
 		Templates.FISH.weight = 2f;
 		Templates.FISH.canOpenDoors = false;
 		Templates.FISH.canEquipWeapons = false;
+		Templates.FISH.floats = true;
 		Templates.FISH.templateId = GameObject.generateNewTemplateId();
 		Templates.FISH.aiRoutine = new AIRoutineForFish(Templates.FISH);
 		Templates.FISH.canBePickedUp = true;
@@ -186,6 +187,7 @@ public class TemplatesAnimals {
 		Templates.TURTLE.weight = 4f;
 		Templates.TURTLE.canOpenDoors = false;
 		Templates.TURTLE.canEquipWeapons = false;
+		Templates.TURTLE.floats = true;
 		Templates.TURTLE.templateId = GameObject.generateNewTemplateId();
 		Templates.TURTLE.aiRoutine = new AIRoutineForFish(Templates.TURTLE);
 		Templates.TURTLE.canBePickedUp = true;

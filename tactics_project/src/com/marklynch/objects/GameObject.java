@@ -123,6 +123,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean attackable = true;
 	public boolean canBePickedUp = true;
 	public boolean decorative = false;
+	public boolean floats = false;
 
 	public int value = 1;
 	public int turnAcquired = 1;
@@ -439,6 +440,76 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void draw3() {
+
+		if (!floats)
+			return;
+		if (this.remainingHealth <= 0)
+			return;
+		if (squareGameObjectIsOn == null)
+			return;
+		if (hiding)
+			return;
+
+		if (!Game.fullVisiblity) {
+
+			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+				return;
+
+			if (!this.squareGameObjectIsOn.seenByPlayer)
+				return;
+		}
+
+		if (primaryAnimation != null && primaryAnimation.completed == false)
+			primaryAnimation.draw1();
+
+		for (Animation secondaryAnimation : secondaryAnimations)
+			secondaryAnimation.draw1();
+
+		// Draw object
+		if (squareGameObjectIsOn != null) {
+			int actorPositionXInPixels = 0;
+			int actorPositionYInPixels = 0;
+			if (primaryAnimation != null) {
+				actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+						+ Game.SQUARE_WIDTH * drawOffsetRatioX + primaryAnimation.offsetX);
+				actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+						+ Game.SQUARE_HEIGHT * drawOffsetRatioY + primaryAnimation.offsetY);
+			} else {
+				actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+						+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+				actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+						+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+
+			}
+
+			float alpha = 1.0f;
+			if (hiding)
+				alpha = 0.5f;
+
+			float boundsX1 = actorPositionXInPixels;
+			float boundsY1 = actorPositionYInPixels;
+			float boundsX2 = (boundsX1 + width);
+			float boundsY2 = (boundsY1 + halfHeight);
+
+			// GL11.glTexParameteri(target, pname, param);
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + width, actorPositionYInPixels + height, boundsX1, boundsY1, boundsX2,
+					boundsY2, backwards, false);
+
+			// TextureUtils.drawTextureWithinBounds(gameObject.imageTexture,
+			// alpha, actorPositionXInPixels,
+			// actorPositionYInPixels, actorPositionXInPixels +
+			// gameObject.width,
+			// actorPositionYInPixels + gameObject.height, boundsX1, boundsY1,
+			// boundsX2, boundsY2, false,
+			// gameObject.flipYAxisInMirror);
+
+			if (flash || this == Game.gameObjectMouseIsOver) {
+				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
+						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+						flashColor, false);
+			}
+		}
 
 	}
 
@@ -1602,6 +1673,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.name = name;
 		gameObject.squareGameObjectIsOn = square;
 		gameObject.value = value;
+		gameObject.floats = floats;
 
 		gameObject.totalHealth = gameObject.remainingHealth = totalHealth;
 		gameObject.imageTexturePath = imageTexturePath;

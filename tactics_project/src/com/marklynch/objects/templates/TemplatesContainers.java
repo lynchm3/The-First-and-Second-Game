@@ -48,6 +48,7 @@ public class TemplatesContainers {
 		Templates.CRATE.soundWhenHitting = 1f;
 		Templates.CRATE.soundDampening = 1f;
 		Templates.CRATE.stackable = false;
+		Templates.CRATE.floats = true;
 		Templates.CRATE.waterResistance = 0f;
 		Templates.CRATE.fireResistance = -50f;
 		Templates.CRATE.electricResistance = 0f;
