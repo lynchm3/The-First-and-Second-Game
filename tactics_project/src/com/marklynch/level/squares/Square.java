@@ -406,19 +406,12 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	}
 
 	public void drawCursor() {
-		// GL11.glPushMatrix();
-
-		// GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
-		// GL11.glScalef(Game.zoom, Game.zoom, 0);
-		// GL11.glTranslatef(Game.getDragX(), Game.getDragY(), 0);
-		// GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
-		float squarePositionX = xInGridPixels;
-		float squarePositionY = yInGridPixels;
-
-		// System.out.println("VISIBLE");
-		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionY,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
-		// GL11.glPopMatrix();
+		// float squarePositionX = xInGridPixels;
+		// float squarePositionY = yInGridPixels;
+		// TextureUtils.drawTexture(Game.level.gameCursor.cursor,
+		// squarePositionX, squarePositionY,
+		// squarePositionX + Game.SQUARE_WIDTH, squarePositionY +
+		// Game.SQUARE_HEIGHT);
 	}
 
 	public void drawQuestsMarkersForVisibleOnScreenObjectives(Objective objective) {
