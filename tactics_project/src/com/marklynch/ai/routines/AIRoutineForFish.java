@@ -83,8 +83,9 @@ public class AIRoutineForFish extends AIRoutine {
 
 				changeX = 0;
 
-			} else if (actor.drawOffsetRatioX + changeX >= 1 && (fish.squareGameObjectIsOn.getSquareToRightOf() == null
-					|| !fish.squareGameObjectIsOn.getSquareToRightOf().inventory.contains(WaterBody.class))) {
+			} else if (actor.drawOffsetRatioX + changeX >= 1 - fish.widthRatio
+					&& (fish.squareGameObjectIsOn.getSquareToRightOf() == null
+							|| !fish.squareGameObjectIsOn.getSquareToRightOf().inventory.contains(WaterBody.class))) {
 
 				changeX = 0;
 
@@ -96,10 +97,11 @@ public class AIRoutineForFish extends AIRoutine {
 
 				changeY = 0;
 
-			} else if (actor.drawOffsetRatioY + changeY >= 1 && (fish.squareGameObjectIsOn.getSquareBelow() == null
-					|| !fish.squareGameObjectIsOn.getSquareBelow().inventory.contains(WaterBody.class))) {
+			} else if (actor.drawOffsetRatioY + changeY >= 1 - fish.heightRatio
+					&& (fish.squareGameObjectIsOn.getSquareBelow() == null
+							|| !fish.squareGameObjectIsOn.getSquareBelow().inventory.contains(WaterBody.class))) {
 
-				changeX = 0;
+				changeY = 0;
 
 			}
 
