@@ -73,22 +73,27 @@ public class Fish extends HerbivoreWildAnimal {
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {
-
-			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			int actorPositionXInPixels = 0;
+			int actorPositionYInPixels = 0;
 			if (primaryAnimation != null) {
-				actorPositionXInPixels += primaryAnimation.offsetX;
-				actorPositionYInPixels += primaryAnimation.offsetY;
+				actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+						+ Game.SQUARE_WIDTH * drawOffsetRatioX + primaryAnimation.offsetX);
+				actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+						+ Game.SQUARE_HEIGHT * drawOffsetRatioY + primaryAnimation.offsetY);
+			} else {
+				actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+						+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+				actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+						+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+
 			}
 
 			float alpha = 1.0f;
 			if (hiding)
 				alpha = 0.5f;
 
-			float boundsX1 = (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
-			float boundsY1 = (this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			float boundsX1 = actorPositionXInPixels;
+			float boundsY1 = actorPositionYInPixels;
 			float boundsX2 = (boundsX1 + width);
 			float boundsY2 = (boundsY1 + halfHeight);
 
