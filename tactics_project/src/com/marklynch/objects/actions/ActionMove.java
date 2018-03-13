@@ -97,13 +97,14 @@ public class ActionMove extends Action {
 		}
 
 		if (performer == Game.level.player) {
-			if (performer.onScreen()) {
-				if (Game.level.player.playerTargetSquare == null)
-					Game.level.cameraFollow = true;
-				if (Game.level.cameraFollow)
-					Game.level.dragToFollowPlayer();
+			if (Game.level.settingFollowPlayer) {
+				if (performer.onScreen()) {
+					if (Game.level.player.playerTargetSquare == null)
+						Game.level.cameraFollow = true;
+					if (Game.level.cameraFollow)
+						Game.level.dragToFollowPlayer();
+				}
 			}
-
 		}
 
 		performer.actionsPerformedThisTurn.add(this);

@@ -50,7 +50,7 @@ public class PopupMenuSelectAction extends PopupMenu {
 						Game.level.popupMenuActions.clear();
 
 						if (!(square instanceof InventorySquare) && !action.checkRange()) {
-							if (Game.level.player.onScreen()) {
+							if (Game.level.settingFollowPlayer && Game.level.player.onScreen()) {
 								Game.level.cameraFollow = true;
 							}
 							Player.playerTargetAction = action;

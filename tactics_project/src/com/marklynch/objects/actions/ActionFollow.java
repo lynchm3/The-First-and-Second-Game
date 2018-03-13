@@ -32,7 +32,7 @@ public class ActionFollow extends Action {
 
 		Player.playerTargetActor = target;
 
-		if (performer == Game.level.player && Game.level.player.onScreen()) {
+		if (Game.level.settingFollowPlayer && performer == Game.level.player && Game.level.player.onScreen()) {
 			Game.level.cameraFollow = true;
 		}
 		performer.actionsPerformedThisTurn.add(this);

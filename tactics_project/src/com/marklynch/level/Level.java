@@ -172,6 +172,7 @@ public class Level {
 	public Power selectedPower = null;
 
 	public boolean cameraFollow = false;
+	public static boolean settingFollowPlayer = false;
 
 	// java representation of a grid??
 	// 2d array?
@@ -316,6 +317,19 @@ public class Level {
 		});
 		highlightOPathButton.enabled = true;
 		buttons.add(highlightOPathButton);
+
+		Button cameraFollowButton = new LevelButton(880f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"CAM FLLW", false, false, Color.BLACK, Color.WHITE,
+				"SETTING - Whether camera should follow the player");
+		cameraFollowButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.settingFollowPlayer = !Game.level.settingFollowPlayer;
+
+			}
+		});
+		cameraFollowButton.enabled = true;
+		buttons.add(cameraFollowButton);
 
 		Button infernoButton = new LevelButton(110f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
 				"INFERNO", false, false, Color.BLACK, Color.WHITE, "DEV - Cast INFERNO");
@@ -496,7 +510,9 @@ public class Level {
 		centerButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				cameraFollow = true;
+				if (Game.level.settingFollowPlayer) {
+					cameraFollow = true;
+				}
 				centerToSquare = true;
 				squareToCenterTo = Game.level.player.squareGameObjectIsOn;
 			}
