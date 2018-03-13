@@ -146,25 +146,23 @@ public class WaterBody extends WaterSource {
 			fish = null;
 		}
 
-		if (this.fish == null && Math.random() > 0.99d)
-
-		{
+		if (this.fish == null && Math.random() > 0.99d) {
 			this.fish = addFish();
 		}
 	}
 
 	public Fish addFish() {
-
+		Fish fish;
 		// float appleSizeRatio = (float) (Math.random() * sizeRatio);
 		// System.out.println("maxSizeRatio = " + sizeRatio);
 		// System.out.println("appleSizeRatio = " + appleSizeRatio);
 		if (new Random().nextBoolean()) {
 
-			Fish fish = Templates.FISH.makeCopy("Fish", this.squareGameObjectIsOn, FactionList.buns, null,
+			fish = Templates.FISH.makeCopy("Fish", this.squareGameObjectIsOn, FactionList.buns, null,
 					new GameObject[] {}, new GameObject[] {}, null);
 		} else {
 
-			Fish turtle = Templates.TURTLE.makeCopy("Turtle", this.squareGameObjectIsOn, FactionList.buns, null,
+			fish = Templates.TURTLE.makeCopy("Turtle", this.squareGameObjectIsOn, FactionList.buns, null,
 					new GameObject[] {}, new GameObject[] {}, null);
 
 		}
