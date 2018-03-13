@@ -1,5 +1,7 @@
 package com.marklynch.objects.actions;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
@@ -100,12 +102,15 @@ public class ActionFishing extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			actionName = ACTION_NAME_CANT_REACH;
-			return false;
-		}
+		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
 
-		return true;
+		for (GameObject fishingRod : fishingRods) {
+			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= fishingRod.maxRange) {
+				actionName = ACTION_NAME_CANT_REACH;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

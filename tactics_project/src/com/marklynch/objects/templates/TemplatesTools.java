@@ -96,6 +96,7 @@ public class TemplatesTools {
 		Templates.FISHING_ROD = new FishingRod();
 		Templates.FISHING_ROD.name = "Fishing Rod";
 		Templates.FISHING_ROD.slashDamage = 4;
+		Templates.FISHING_ROD.maxRange = 2;
 		Templates.FISHING_ROD.imageTexturePath = "fishing_rod.png";
 		Templates.FISHING_ROD.imageTexture = getGlobalImage(Templates.FISHING_ROD.imageTexturePath, true);
 		Templates.FISHING_ROD.totalHealth = Templates.FISHING_ROD.remainingHealth = 16;
