@@ -1566,7 +1566,7 @@ public abstract class AIRoutine {
 		// if (target == null)
 		target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false, true, 0, false,
 				AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
-				TinyNeutralWildAnimal.class, MeatChunk.class, Gold.class);
+				TinyNeutralWildAnimal.class);
 		if (target == null) {
 			AIRoutineUtils.moveTowards(actor.area.centreSuqare);
 			return true;

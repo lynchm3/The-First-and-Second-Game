@@ -11,7 +11,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.TextureUtils;
 
-public class Fish extends HerbivoreWildAnimal {
+public class Fish extends WildAnimal {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
@@ -25,7 +25,6 @@ public class Fish extends HerbivoreWildAnimal {
 		super.setInstances(gameObject);
 	}
 
-	@Override
 	public Fish makeCopy(String name, Square square, Faction faction, GameObject bed, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 		Fish actor = new Fish();
