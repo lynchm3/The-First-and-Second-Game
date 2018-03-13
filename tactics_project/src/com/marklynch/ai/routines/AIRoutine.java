@@ -1521,7 +1521,7 @@ public abstract class AIRoutine {
 			return false;
 		} else if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) <= 1) {
 			if (target.squareGameObjectIsOn.inventory.contains(WaterBody.class)) {
-				new ActionFishing(actor, target.squareGameObjectIsOn).perform();
+				new ActionFishing(actor, target).perform();
 			} else {
 				new ActionTakeItems(actor, target).perform();
 			}

@@ -4,11 +4,9 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationTake;
-import com.marklynch.level.constructs.faction.FactionList;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.FishingRod;
+import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -19,10 +17,10 @@ public class ActionFishing extends Action {
 	public static final String ACTION_NAME_NEED_FISHING_ROD = ACTION_NAME + " (need fishing rod)";
 
 	Actor performer;
-	Square target;
+	GameObject target;
 
 	// Default for hostiles
-	public ActionFishing(Actor attacker, Square target) {
+	public ActionFishing(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_fishing.png");
 		this.performer = attacker;
 		this.target = target;
@@ -49,23 +47,24 @@ public class ActionFishing extends Action {
 
 		// target.squareGameObjectIsOn.imageTexture = Square.MUD_TEXTURE;
 
-		if (Game.level.shouldLog(performer))
+		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(
-					new ActivityLog(new Object[] { performer, " went fishing at ", target, " with ", fishingRod }));
+					new ActivityLog(new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
 
-		GameObject fish = Templates.FISH.makeCopy("Fish", target, FactionList.buns, null, new GameObject[] {},
-				new GameObject[] {}, null);
+		// GameObject fish = Templates.FISH.makeCopy("Fish",
+		// target.squareGameObjectIsOn, FactionList.buns, null,
+		// new GameObject[] {}, new GameObject[] {}, null);
 		// fish.owner = target.owner;
 
 		if (Game.level.openInventories.size() > 0) {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.secondaryAnimations.add(new AnimationTake(fish, performer, 0, 0, 1f));
+			performer.secondaryAnimations.add(new AnimationTake(target, performer, 0, 0, 1f));
 		}
-		performer.inventory.add(fish);
-		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", fish }));
+		performer.inventory.add(target);
+		if (Game.level.shouldLog(target, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " got ", target }));
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, null, Crime.TYPE.CRIME_THEFT, fish);
+			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, target);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -101,7 +100,7 @@ public class ActionFishing extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target) > 1) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
@@ -111,20 +110,18 @@ public class ActionFishing extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		// if (target.owner != null && target.owner != performer)
-		// return false;
+		if (target.owner != null && target.owner != performer)
+			return false;
 		return true;
 	}
 
 	@Override
 	public Sound createSound() {
-		// Shovel shovel = (Shovel)
-		// performer.inventory.getGameObjectOfClass(Shovel.class);
-		// if (shovel != null) {
-		// float loudness = Math.max(5, shovel.soundWhenHitting);
-		// return new Sound(performer, shovel, target.squareGameObjectIsOn,
-		// loudness, legal, this.getClass());
-		// }
+		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
+		if (shovel != null) {
+			float loudness = Math.max(target.soundWhenHit, shovel.soundWhenHitting);
+			return new Sound(performer, shovel, target.squareGameObjectIsOn, loudness, legal, this.getClass());
+		}
 		return null;
 	}
 

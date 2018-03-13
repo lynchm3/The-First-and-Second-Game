@@ -250,7 +250,6 @@ public class Wall extends GameObject {
 
 	@Override
 	public Wall makeCopy(Square square, Actor owner) {
-		System.out.println("Wall.makeCopy()");
 		Wall wall = new Wall();
 		setInstances(wall);
 		super.setAttributesForCopy(wall, square, owner);
@@ -263,9 +262,6 @@ public class Wall extends GameObject {
 		// wall.drawY2 = (int) (wall.drawY1 + wall.height);
 		// }
 		wall.initWall();
-		System.out.println("wall.squareGameObjectIsOn = " + wall.squareGameObjectIsOn);
-		System.out.println(
-				"wall.squareGameObjectIsOn.inventory.gameObjects = " + wall.squareGameObjectIsOn.inventory.gameObjects);
 		return wall;
 	}
 

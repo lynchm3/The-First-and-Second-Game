@@ -780,10 +780,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Water Source
-		if (this instanceof WaterBody) {
-			return new ActionFishing(performer, this.squareGameObjectIsOn);
-			// return new ActionFillContainersInInventory(performer,
-			// (WaterSource) this);
+		if (!(this instanceof WaterBody) && inventory.contains(WaterBody.class)) {
+			return new ActionFishing(performer, this);
 		}
 
 		if (diggable) {
@@ -909,8 +907,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Water Body
-		if (this instanceof WaterBody) {
-			actions.add(new ActionFishing(performer, this.squareGameObjectIsOn));
+		if (!(this instanceof WaterBody) && inventory.contains(WaterBody.class)) {
+			actions.add(new ActionFishing(performer, this));
 		}
 
 		// Skinnable
