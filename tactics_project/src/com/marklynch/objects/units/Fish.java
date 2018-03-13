@@ -17,6 +17,7 @@ public class Fish extends WildAnimal {
 
 	public Fish() {
 		super();
+		canShareSquare = true;
 	}
 
 	@Override

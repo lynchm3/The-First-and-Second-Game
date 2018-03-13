@@ -780,7 +780,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Water Source
-		if (!(this instanceof WaterBody) && inventory.contains(WaterBody.class)) {
+		if (!(this instanceof WaterBody) && this.squareGameObjectIsOn != null
+				&& this.squareGameObjectIsOn.inventory.contains(WaterBody.class)) {
 			return new ActionFishing(performer, this);
 		}
 
@@ -907,7 +908,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Water Body
-		if (!(this instanceof WaterBody) && inventory.contains(WaterBody.class)) {
+		if (!(this instanceof WaterBody) && this.squareGameObjectIsOn != null
+				&& this.squareGameObjectIsOn.inventory.contains(WaterBody.class)) {
 			actions.add(new ActionFishing(performer, this));
 		}
 

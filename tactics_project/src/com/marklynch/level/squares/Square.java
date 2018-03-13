@@ -29,6 +29,8 @@ import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
+import com.marklynch.objects.Wall;
+import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDropItems;
@@ -660,6 +662,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 		ArrayList<GameObject> gameObjectsToCheck = new ArrayList<GameObject>();
 
+		// GameObject gameObject = null;
+
 		// Y - 1
 		if (yInGrid - 1 > 0) {
 			// sqr @ +1,+1
@@ -721,6 +725,10 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 				Discoverable d = (Discoverable) gameObject;
 				if (!d.discovered)
 					continue;
+			}
+
+			if (gameObject instanceof WaterBody || gameObject instanceof Wall) {
+				continue;
 			}
 
 			if (!gameObject.squareGameObjectIsOn.visibleToPlayer && !gameObject.persistsWhenCantBeSeen)

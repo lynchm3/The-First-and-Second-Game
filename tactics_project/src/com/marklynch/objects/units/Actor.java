@@ -34,8 +34,10 @@ import com.marklynch.objects.Gold;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Openable;
+import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionFishing;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionMove;
@@ -918,26 +920,42 @@ public class Actor extends GameObject {
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 		if (this == Game.level.player) {
 			return new ActionWait(performer, performer.squareGameObjectIsOn);
-		} else if (performer.attackers.contains(this)) {
+		}
+
+		// Water Source
+		if (this.squareGameObjectIsOn != null && this.squareGameObjectIsOn.inventory.contains(WaterBody.class)) {
+			return new ActionFishing(performer, this);
+		}
+
+		if (performer.attackers.contains(this)) {
 			return new ActionAttack(performer, this);
-		} else if (this instanceof RockGolem) {
+		}
+
+		if (this instanceof RockGolem) {
 			RockGolem rockGolem = (RockGolem) this;
 			if (!rockGolem.awake) {
 				return new ActionLift(performer, this);
 			} else {
 				return new ActionAttack(performer, this);
 			}
-		} else if (this instanceof AggressiveWildAnimal) {
+		}
+
+		if (this instanceof AggressiveWildAnimal) {
 			return new ActionAttack(performer, this);
-		} else if (this instanceof Animal) {
+		}
+
+		if (this instanceof Animal) {
 			if (this.getConversation() != null) {
 				return new ActionTalk(performer, this);
 			} else {
 				return new ActionPet(performer, this);
 			}
-		} else if (this instanceof Monster) {
+		}
+
+		if (this instanceof Monster) {
 			return new ActionAttack(performer, this);
 		}
+
 		return new ActionTalk(performer, this);
 	}
 
