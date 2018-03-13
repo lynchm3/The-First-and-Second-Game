@@ -50,6 +50,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.HOBBY;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
+import com.marklynch.objects.units.Fish;
 import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.NonHuman;
@@ -1512,14 +1513,18 @@ public abstract class AIRoutine {
 
 		actor.followersShouldFollow = false;
 
-		WaterBody target = (WaterBody) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false,
-				false, 0, false, WaterBody.class);
+		Fish target = (Fish) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false, false, 0,
+				false, Fish.class);
 		actor.thoughtBubbleImageTextureObject = Action.textureFishing;
 
 		if (target == null) {
 			return false;
 		} else if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) <= 1) {
-			new ActionFishing(actor, target).perform();
+			if (target.squareGameObjectIsOn.inventory.contains(WaterBody.class)) {
+				new ActionFishing(actor, target.squareGameObjectIsOn).perform();
+			} else {
+				new ActionTakeItems(actor, target).perform();
+			}
 			return true;
 		} else {
 			boolean moved = AIRoutineUtils.moveTowards(target);

@@ -781,7 +781,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Water Source
 		if (this instanceof WaterBody) {
-			return new ActionFishing(performer, (WaterBody) this);
+			return new ActionFishing(performer, this.squareGameObjectIsOn);
 			// return new ActionFillContainersInInventory(performer,
 			// (WaterSource) this);
 		}
@@ -910,7 +910,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Water Body
 		if (this instanceof WaterBody) {
-			actions.add(new ActionFishing(performer, (WaterBody) this));
+			actions.add(new ActionFishing(performer, this.squareGameObjectIsOn));
 		}
 
 		// Skinnable
