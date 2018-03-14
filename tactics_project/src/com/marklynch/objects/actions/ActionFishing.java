@@ -54,6 +54,13 @@ public class ActionFishing extends Action {
 			}
 		}
 		performer.equipped = fishingRod;
+
+		if (Math.random() < 0.9) {
+			if (Game.level.shouldLog(target, performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " went fishing for ", target, " with ",
+						fishingRod, " but failed!" }));
+			return;
+		}
 		// (FishingRod)
 		// performer.inventory.getGameObjectOfClass(FishingRod.class);
 
