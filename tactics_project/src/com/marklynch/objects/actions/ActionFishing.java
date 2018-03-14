@@ -42,6 +42,8 @@ public class ActionFishing extends Action {
 		if (!checkRange())
 			return;
 
+		performer.fishingTarget = target;
+
 		FishingRod fishingRod = null;
 		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
 		for (GameObject f : fishingRods) {

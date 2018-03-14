@@ -2,6 +2,7 @@ package com.marklynch.objects.tools;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -34,12 +35,19 @@ public class FishingRod extends Tool {
 		return weapon;
 	}
 
-	public void drawLine(int weaponPositionXInPixels, int weaponPositionYInPixels) {
+	public void drawLine(GameObject fishingTarget, int weaponPositionXInPixels, int weaponPositionYInPixels) {
 
 		float x1 = lineAnchorX + weaponPositionXInPixels;
 		float y1 = lineAnchorY + weaponPositionYInPixels;
-		float x2 = x1 + 100;
-		float y2 = y1 + 100;
+
+		float x2 = (int) (fishingTarget.squareGameObjectIsOn.xInGridPixels
+				+ Game.SQUARE_WIDTH * fishingTarget.drawOffsetRatioX);
+		float y2 = (int) (fishingTarget.squareGameObjectIsOn.yInGridPixels
+				+ Game.SQUARE_HEIGHT * fishingTarget.drawOffsetRatioY);
+		if (primaryAnimation != null) {
+			x2 += fishingTarget.primaryAnimation.offsetX;
+			y2 += fishingTarget.primaryAnimation.offsetY;
+		}
 
 		LineUtils.drawLine(Color.RED, x1, y1, x2, y2, 10);
 	}

@@ -1917,6 +1917,7 @@ public class Level {
 		System.out.println("----------------START PLAYER TURN-----------------");
 		this.turn++;
 		loggedThisTurn = false;
+		player.fishingTarget = null;
 
 		Game.level.activeActor = player;
 		if (player.peekSquare != null) {

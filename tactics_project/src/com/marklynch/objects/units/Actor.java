@@ -184,6 +184,8 @@ public class Actor extends GameObject {
 
 	public int[] requiredEquipmentTemplateIds = new int[0];
 
+	public GameObject fishingTarget;
+
 	public static enum HOBBY {
 		FISHING, HUNTING, ARCHERY, SPARRING, BOWLS, BALL_GAMES, EATING, DRINKING, SOCIALISING;
 	}
@@ -557,9 +559,9 @@ public class Actor extends GameObject {
 					weaponPositionYInPixels, weaponPositionXInPixels + equipped.width,
 					weaponPositionYInPixels + equipped.height);
 
-			if (equipped instanceof FishingRod) {
+			if (fishingTarget != null && equipped instanceof FishingRod) {
 				FishingRod fishingRod = (FishingRod) equipped;
-				fishingRod.drawLine(weaponPositionXInPixels, weaponPositionYInPixels);
+				fishingRod.drawLine(fishingTarget, weaponPositionXInPixels, weaponPositionYInPixels);
 			}
 
 		}
@@ -813,6 +815,7 @@ public class Actor extends GameObject {
 	public void update(int delta) {
 
 		clearActions();
+		fishingTarget = null;
 
 		if (this.remainingHealth > 0) {
 
