@@ -449,6 +449,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return;
 		if (hiding)
 			return;
+		if (!squareGameObjectIsOn.inventory.contains(WaterBody.class))
+			return;
 
 		if (!Game.fullVisiblity) {
 

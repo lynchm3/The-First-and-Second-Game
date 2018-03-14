@@ -62,7 +62,12 @@ public class ActionFishing extends Action {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 			performer.secondaryAnimations.add(new AnimationTake(target, performer, 0, 0, 1f));
 		}
-		performer.inventory.add(target);
+
+		if (target.fitsInInventory) {
+			performer.inventory.add(target);
+		} else {
+			performer.squareGameObjectIsOn.inventory.add(target);
+		}
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " got ", target }));
 		if (!legal) {
