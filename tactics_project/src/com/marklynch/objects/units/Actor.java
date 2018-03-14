@@ -51,6 +51,7 @@ import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Bell;
+import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -555,6 +556,12 @@ public class Actor extends GameObject {
 			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, weaponPositionXInPixels,
 					weaponPositionYInPixels, weaponPositionXInPixels + equipped.width,
 					weaponPositionYInPixels + equipped.height);
+
+			if (equipped instanceof FishingRod) {
+				FishingRod fishingRod = (FishingRod) equipped;
+				fishingRod.drawLine(weaponPositionXInPixels, weaponPositionYInPixels);
+			}
+
 		}
 
 		if (helmet != null && !sleeping) {

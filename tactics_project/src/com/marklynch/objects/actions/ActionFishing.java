@@ -42,7 +42,16 @@ public class ActionFishing extends Action {
 		if (!checkRange())
 			return;
 
-		FishingRod fishingRod = (FishingRod) performer.inventory.getGameObjectOfClass(FishingRod.class);
+		FishingRod fishingRod = null;
+		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
+		for (GameObject f : fishingRods) {
+			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= f.maxRange) {
+				fishingRod = (FishingRod) f;
+			}
+		}
+		performer.equipped = fishingRod;
+		// (FishingRod)
+		// performer.inventory.getGameObjectOfClass(FishingRod.class);
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
@@ -111,10 +120,10 @@ public class ActionFishing extends Action {
 
 		for (GameObject fishingRod : fishingRods) {
 			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= fishingRod.maxRange) {
-				actionName = ACTION_NAME_CANT_REACH;
 				return true;
 			}
 		}
+		actionName = ACTION_NAME_CANT_REACH;
 		return false;
 	}
 
