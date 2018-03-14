@@ -18,6 +18,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.power.Power;
@@ -185,6 +186,7 @@ public class Actor extends GameObject {
 	public int[] requiredEquipmentTemplateIds = new int[0];
 
 	public GameObject fishingTarget;
+	public AnimationTake fishingAnimation;
 
 	public static enum HOBBY {
 		FISHING, HUNTING, ARCHERY, SPARRING, BOWLS, BALL_GAMES, EATING, DRINKING, SOCIALISING;
@@ -561,7 +563,7 @@ public class Actor extends GameObject {
 
 			if (fishingTarget != null && equipped instanceof FishingRod) {
 				FishingRod fishingRod = (FishingRod) equipped;
-				fishingRod.drawLine(this, fishingTarget, weaponPositionXInPixels, weaponPositionYInPixels);
+				fishingRod.drawLine(this, weaponPositionXInPixels, weaponPositionYInPixels);
 			}
 
 		}
@@ -815,7 +817,8 @@ public class Actor extends GameObject {
 	public void update(int delta) {
 
 		clearActions();
-		// fishingTarget = null;
+		fishingTarget = null;
+		fishingAnimation = null;
 
 		if (this.remainingHealth > 0) {
 

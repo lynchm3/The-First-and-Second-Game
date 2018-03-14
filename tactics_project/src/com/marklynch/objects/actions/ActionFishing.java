@@ -78,17 +78,11 @@ public class ActionFishing extends Action {
 		// fish.owner = target.owner;
 		// h
 		if (target.fitsInInventory) {
-			System.out.println("ActionFishing A");
-			System.out.println("Game.level.openInventories.size() = " + Game.level.openInventories.size());
-			System.out.println(
-					"performer.squareGameObjectIsOn.onScreen() = " + performer.squareGameObjectIsOn.onScreen());
-			System.out.println("performer.squareGameObjectIsOn.visibleToPlayer = "
-					+ performer.squareGameObjectIsOn.visibleToPlayer);
+
 			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
 					&& performer.squareGameObjectIsOn.visibleToPlayer) {
-				System.out.println("ActionFishing B");
-
-				performer.secondaryAnimations.add(new AnimationTake(target, performer, 0, 0, 1f));
+				performer.fishingAnimation = new AnimationTake(target, performer, 0, 0, 1f);
+				performer.secondaryAnimations.add(performer.fishingAnimation);
 			}
 			performer.inventory.add(target);
 		} else {
