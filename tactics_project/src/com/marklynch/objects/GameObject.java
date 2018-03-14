@@ -374,7 +374,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
 						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
 						flashColor, false);
-			} else if (squareGameObjectIsOn.inventory.contains(WaterBody.class) && !(this instanceof Fish)
+			} else if (squareGameObjectIsOn.inventory.waterBody != null && !(this instanceof Fish)
 					&& !(this instanceof WaterBody)) {
 
 				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
@@ -441,6 +441,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void draw3() {
 
+		if (squareGameObjectIsOn.inventory.waterBody == null)
+			return;
 		if (!floats)
 			return;
 		if (this.remainingHealth <= 0)
@@ -448,8 +450,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (squareGameObjectIsOn == null)
 			return;
 		if (hiding)
-			return;
-		if (!squareGameObjectIsOn.inventory.contains(WaterBody.class))
 			return;
 
 		if (!Game.fullVisiblity) {
@@ -854,7 +854,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Water Source
 		if (!(this instanceof WaterBody) && this.squareGameObjectIsOn != null
-				&& this.squareGameObjectIsOn.inventory.contains(WaterBody.class)) {
+				&& this.squareGameObjectIsOn.inventory.waterBody != null) {
 			return new ActionFishing(performer, this);
 		}
 
@@ -982,7 +982,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Water Body
 		if (!(this instanceof WaterBody) && this.squareGameObjectIsOn != null
-				&& this.squareGameObjectIsOn.inventory.contains(WaterBody.class)) {
+				&& this.squareGameObjectIsOn.inventory.waterBody != null) {
 			actions.add(new ActionFishing(performer, this));
 		}
 

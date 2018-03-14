@@ -5,7 +5,6 @@ import java.util.Random;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.actions.ActionFishSwim;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fish;
@@ -79,13 +78,13 @@ public class AIRoutineForFish extends AIRoutine {
 
 			// If we're moving out of water, cancel X
 			if (actor.drawOffsetRatioX + changeX < 0 && (fish.squareGameObjectIsOn.getSquareToLeftOf() == null
-					|| !fish.squareGameObjectIsOn.getSquareToLeftOf().inventory.contains(WaterBody.class))) {
+					|| fish.squareGameObjectIsOn.getSquareToLeftOf().inventory.waterBody == null)) {
 
 				changeX = 0;
 
 			} else if (actor.drawOffsetRatioX + changeX >= 1 - fish.widthRatio
 					&& (fish.squareGameObjectIsOn.getSquareToRightOf() == null
-							|| !fish.squareGameObjectIsOn.getSquareToRightOf().inventory.contains(WaterBody.class))) {
+							|| fish.squareGameObjectIsOn.getSquareToRightOf().inventory.waterBody == null)) {
 
 				changeX = 0;
 
@@ -93,13 +92,13 @@ public class AIRoutineForFish extends AIRoutine {
 
 			// If we're moving out of water, cancel Y
 			if (actor.drawOffsetRatioY + changeY < 0 && (fish.squareGameObjectIsOn.getSquareAbove() == null
-					|| !fish.squareGameObjectIsOn.getSquareAbove().inventory.contains(WaterBody.class))) {
+					|| fish.squareGameObjectIsOn.getSquareAbove().inventory.waterBody == null)) {
 
 				changeY = 0;
 
 			} else if (actor.drawOffsetRatioY + changeY >= 1 - fish.heightRatio
 					&& (fish.squareGameObjectIsOn.getSquareBelow() == null
-							|| !fish.squareGameObjectIsOn.getSquareBelow().inventory.contains(WaterBody.class))) {
+							|| fish.squareGameObjectIsOn.getSquareBelow().inventory.waterBody == null)) {
 
 				changeY = 0;
 

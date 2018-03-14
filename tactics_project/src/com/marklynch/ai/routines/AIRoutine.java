@@ -28,7 +28,6 @@ import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.WantedPoster;
-import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionBuyItems;
 import com.marklynch.objects.actions.ActionClose;
@@ -1520,7 +1519,7 @@ public abstract class AIRoutine {
 		if (target == null) {
 			return false;
 		} else if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) <= 1) {
-			if (target.squareGameObjectIsOn.inventory.contains(WaterBody.class)) {
+			if (target.squareGameObjectIsOn.inventory.waterBody != null) {
 				new ActionFishing(actor, target).perform();
 			} else {
 				new ActionTakeItems(actor, target).perform();

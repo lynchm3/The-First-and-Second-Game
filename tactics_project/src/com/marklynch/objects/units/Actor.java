@@ -34,7 +34,6 @@ import com.marklynch.objects.Gold;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Openable;
-import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionFishing;
@@ -862,7 +861,7 @@ public class Actor extends GameObject {
 		}
 
 		// Water Source
-		if (this.squareGameObjectIsOn != null && this.squareGameObjectIsOn.inventory.contains(WaterBody.class)) {
+		if (this.squareGameObjectIsOn != null && this.squareGameObjectIsOn.inventory.waterBody != null) {
 			return new ActionFishing(performer, this);
 		}
 

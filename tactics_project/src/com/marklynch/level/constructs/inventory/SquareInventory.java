@@ -22,6 +22,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public GameObject gameObjectThatCantShareSquare = null;
 	public Actor actor = null;
 	public Door door = null;
+	public WaterBody waterBody = null;
 
 	@Override
 	public void postLoad1() {
@@ -75,6 +76,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			else
 				actor = null;
 			door = (Door) getGameObjectOfClass(Door.class);
+			waterBody = (WaterBody) getGameObjectOfClass(WaterBody.class);
 
 			PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
 			if (pressurePlate != null)
@@ -99,6 +101,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			else
 				actor = null;
 			door = (Door) getGameObjectOfClass(Door.class);
+			waterBody = (WaterBody) getGameObjectOfClass(WaterBody.class);
 
 			PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
 			if (pressurePlate != null)
