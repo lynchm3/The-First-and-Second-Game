@@ -561,7 +561,7 @@ public class Actor extends GameObject {
 
 			if (fishingTarget != null && equipped instanceof FishingRod) {
 				FishingRod fishingRod = (FishingRod) equipped;
-				fishingRod.drawLine(fishingTarget, weaponPositionXInPixels, weaponPositionYInPixels);
+				fishingRod.drawLine(this, fishingTarget, weaponPositionXInPixels, weaponPositionYInPixels);
 			}
 
 		}
@@ -815,7 +815,7 @@ public class Actor extends GameObject {
 	public void update(int delta) {
 
 		clearActions();
-		fishingTarget = null;
+		// fishingTarget = null;
 
 		if (this.remainingHealth > 0) {
 

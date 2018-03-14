@@ -36,7 +36,8 @@ public class FishingRod extends Tool {
 		return weapon;
 	}
 
-	public void drawLine(GameObject fishingTarget, int weaponPositionXInPixels, int weaponPositionYInPixels) {
+	public void drawLine(Actor fisher, GameObject fishingTarget, int weaponPositionXInPixels,
+			int weaponPositionYInPixels) {
 
 		float x1 = lineAnchorX + weaponPositionXInPixels;
 		float y1 = lineAnchorY + weaponPositionYInPixels;
@@ -54,11 +55,18 @@ public class FishingRod extends Tool {
 			LineUtils.drawLine(Color.BLACK, x1, y1, x2, y2, 2);
 		} else {
 
-			if (fishingTarget.secondaryAnimations.size() > 0
-					&& fishingTarget.secondaryAnimations.get(0) instanceof AnimationTake) {
-				AnimationTake animationTake = (AnimationTake) fishingTarget.secondaryAnimations.get(0);
+			// System.out.println("fishingTarget.secondaryAnimations.size() = "
+			// + fishingTarget.secondaryAnimations.size());
+
+			System.out.println("fisher.secondaryAnimations.size() = " + fisher.secondaryAnimations.size());
+			if (fisher.secondaryAnimations.size() > 0)
+				System.out.println("fisher.secondaryAnimations.get(0) = " + fisher.secondaryAnimations.get(0));
+
+			if (fisher.secondaryAnimations.size() > 0 && fisher.secondaryAnimations.get(0) instanceof AnimationTake) {
+				AnimationTake animationTake = (AnimationTake) fisher.secondaryAnimations.get(0);
 				float x2 = animationTake.x + fishingTarget.halfWidth;
 				float y2 = animationTake.y + fishingTarget.halfHeight;
+
 				LineUtils.drawLine(Color.BLACK, x1, y1, x2, y2, 2);
 
 			}

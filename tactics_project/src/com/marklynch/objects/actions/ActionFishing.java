@@ -76,9 +76,8 @@ public class ActionFishing extends Action {
 		// target.squareGameObjectIsOn, FactionList.buns, null,
 		// new GameObject[] {}, new GameObject[] {}, null);
 		// fish.owner = target.owner;
-
+		// h
 		if (target.fitsInInventory) {
-			performer.inventory.add(target);
 			System.out.println("ActionFishing A");
 			System.out.println("Game.level.openInventories.size() = " + Game.level.openInventories.size());
 			System.out.println(
@@ -88,8 +87,10 @@ public class ActionFishing extends Action {
 			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
 					&& performer.squareGameObjectIsOn.visibleToPlayer) {
 				System.out.println("ActionFishing B");
+
 				performer.secondaryAnimations.add(new AnimationTake(target, performer, 0, 0, 1f));
 			}
+			performer.inventory.add(target);
 		} else {
 			Square oldSquare = target.squareGameObjectIsOn;
 			performer.squareGameObjectIsOn.inventory.add(target);

@@ -158,33 +158,9 @@ public class AnimationTake extends Animation {
 	}
 
 	public void draw() {
-
-		// float trailwidth = 2;
-		//
-		// if (gameObject.templateId == Templates.MEDIUM_ORB.templateId)
-		// trailwidth = 4;
-		// if (gameObject.templateId == Templates.MEDIUM_ORB.templateId)
-		// trailwidth = 8;
-		//
-		// for (int i = 2; i < trailLines.size(); i++) {
-		//
-		// LineUtils.drawLine(trailColor2, trailLines.get(i).x1,
-		// trailLines.get(i).y1, trailLines.get(i).x2,
-		// trailLines.get(i).y2, trailwidth * 3);
-		// }
-		//
-		// for (Line trailLine : trailLines) {
-		// LineUtils.drawLine(trailColor1, trailLine.x1, trailLine.y1,
-		// trailLine.x2, trailLine.y2, trailwidth);
-		// }
-
-		// this.targetOffsetX = targetOffsetX;
-		// this.targetOffsetY = targetOffsetY;
-
 		if (!reachedDestination)
 			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
 					false);
-
 	}
 
 	public class Line {
