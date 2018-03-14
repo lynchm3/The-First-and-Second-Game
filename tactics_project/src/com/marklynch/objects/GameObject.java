@@ -92,6 +92,7 @@ import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.Color;
+import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
@@ -497,6 +498,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, boundsX1, boundsY1, boundsX2,
 					boundsY2, backwards, false);
+
+			Color color1 = new Color(1, 144, 255);
+			Color color2 = new Color(9, 114, 255);
+			Color color3 = new Color(18, 111, 236);
+
+			LineUtils.drawLine(color1, boundsX1, boundsY2, boundsX2, boundsY2, 1);
+			LineUtils.drawLine(color2, boundsX1, boundsY2 + 2, boundsX2, boundsY2 + 1, 1);
+			LineUtils.drawLine(color3, boundsX1, boundsY2 + 1, boundsX2, boundsY2 + 2, 1);
 
 			// TextureUtils.drawTextureWithinBounds(gameObject.imageTexture,
 			// alpha, actorPositionXInPixels,
