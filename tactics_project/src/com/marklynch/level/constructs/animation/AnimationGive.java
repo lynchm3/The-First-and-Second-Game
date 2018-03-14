@@ -9,6 +9,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class AnimationGive extends Animation {
 
+	// pass obj person to person, used in buy, sell, give, for show only
+
 	public GameObject giver;
 	public GameObject receiver;
 	float x, y, originX, originY, targetX, targetY, speedX, speedY;

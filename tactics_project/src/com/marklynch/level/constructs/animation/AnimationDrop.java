@@ -15,6 +15,8 @@ public class AnimationDrop extends Animation {
 	public float startOffsetX = 0;
 	public float startOffsetY = 0;
 
+	// Transfer object from person to sqr, for show only, used in drop, primary
+
 	public AnimationDrop(String name, GameObject shooter, Action action, Square targetSquare,
 			GameObject projectileObject, float speed) {
 

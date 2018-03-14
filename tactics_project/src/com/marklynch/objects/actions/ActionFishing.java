@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationMove;
 import com.marklynch.level.constructs.animation.AnimationTake;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
@@ -69,15 +71,19 @@ public class ActionFishing extends Action {
 		// new GameObject[] {}, new GameObject[] {}, null);
 		// fish.owner = target.owner;
 
-		if (Game.level.openInventories.size() > 0) {
-		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.secondaryAnimations.add(new AnimationTake(target, performer, 0, 0, 1f));
-		}
-
 		if (target.fitsInInventory) {
 			performer.inventory.add(target);
+			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
+					&& performer.squareGameObjectIsOn.visibleToPlayer) {
+				performer.secondaryAnimations.add(new AnimationTake(target, performer, 0, 0, 1f));
+			}
 		} else {
+			Square oldSquare = target.squareGameObjectIsOn;
 			performer.squareGameObjectIsOn.inventory.add(target);
+			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
+					&& performer.squareGameObjectIsOn.visibleToPlayer) {
+				target.primaryAnimation = new AnimationMove(oldSquare, performer.squareGameObjectIsOn);
+			}
 		}
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " got ", target }));

@@ -10,6 +10,8 @@ public class AnimationMove extends Animation {
 	public float startOffsetX = 0;
 	public float startOffsetY = 0;
 
+	// for show only, walking actor, primary
+
 	public AnimationMove(Square startSquare, Square endSquare) {
 		super();
 		durationToReach = 200;
