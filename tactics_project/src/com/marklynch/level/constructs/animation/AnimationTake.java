@@ -9,7 +9,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class AnimationTake extends Animation {
 
-	float x, y; // originX, originY, targetX, targetY, speedX, speedY;
+	public float x, y; // originX, originY, targetX, targetY, speedX, speedY;
 	public float originX = 0;
 	public float originY = 0;
 	public float targetX = 0;

@@ -55,14 +55,13 @@ public class ActionFishing extends Action {
 		}
 		performer.equipped = fishingRod;
 
-		if (Math.random() < 0.9) {
-			if (Game.level.shouldLog(target, performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " went fishing for ", target, " with ",
-						fishingRod, " but failed!" }));
-			return;
-		}
-		// (FishingRod)
-		// performer.inventory.getGameObjectOfClass(FishingRod.class);
+		// if (Math.random() < 0.9) {
+		// if (Game.level.shouldLog(target, performer))
+		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "
+		// went fishing for ", target, " with ",
+		// fishingRod, " but failed!" }));
+		// return;
+		// }
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
@@ -80,8 +79,15 @@ public class ActionFishing extends Action {
 
 		if (target.fitsInInventory) {
 			performer.inventory.add(target);
+			System.out.println("ActionFishing A");
+			System.out.println("Game.level.openInventories.size() = " + Game.level.openInventories.size());
+			System.out.println(
+					"performer.squareGameObjectIsOn.onScreen() = " + performer.squareGameObjectIsOn.onScreen());
+			System.out.println("performer.squareGameObjectIsOn.visibleToPlayer = "
+					+ performer.squareGameObjectIsOn.visibleToPlayer);
 			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
 					&& performer.squareGameObjectIsOn.visibleToPlayer) {
+				System.out.println("ActionFishing B");
 				performer.secondaryAnimations.add(new AnimationTake(target, performer, 0, 0, 1f));
 			}
 		} else {

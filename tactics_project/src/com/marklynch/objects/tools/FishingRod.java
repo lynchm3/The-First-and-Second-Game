@@ -3,6 +3,7 @@ package com.marklynch.objects.tools;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -40,16 +41,30 @@ public class FishingRod extends Tool {
 		float x1 = lineAnchorX + weaponPositionXInPixels;
 		float y1 = lineAnchorY + weaponPositionYInPixels;
 
-		float x2 = (int) (fishingTarget.squareGameObjectIsOn.xInGridPixels
-				+ Game.SQUARE_WIDTH * fishingTarget.drawOffsetRatioX + fishingTarget.halfWidth);
-		float y2 = (int) (fishingTarget.squareGameObjectIsOn.yInGridPixels
-				+ Game.SQUARE_HEIGHT * fishingTarget.drawOffsetRatioY + fishingTarget.halfHeight);
-		if (primaryAnimation != null) {
-			x2 += fishingTarget.primaryAnimation.offsetX;
-			y2 += fishingTarget.primaryAnimation.offsetY;
+		if (fishingTarget.squareGameObjectIsOn != null) {
+
+			float x2 = (int) (fishingTarget.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * fishingTarget.drawOffsetRatioX + fishingTarget.halfWidth);
+			float y2 = (int) (fishingTarget.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * fishingTarget.drawOffsetRatioY + fishingTarget.halfHeight);
+			if (primaryAnimation != null) {
+				x2 += fishingTarget.primaryAnimation.offsetX;
+				y2 += fishingTarget.primaryAnimation.offsetY;
+			}
+			LineUtils.drawLine(Color.BLACK, x1, y1, x2, y2, 2);
+		} else {
+
+			if (fishingTarget.secondaryAnimations.size() > 0
+					&& fishingTarget.secondaryAnimations.get(0) instanceof AnimationTake) {
+				AnimationTake animationTake = (AnimationTake) fishingTarget.secondaryAnimations.get(0);
+				float x2 = animationTake.x + fishingTarget.halfWidth;
+				float y2 = animationTake.y + fishingTarget.halfHeight;
+				LineUtils.drawLine(Color.BLACK, x1, y1, x2, y2, 2);
+
+			}
+
 		}
 
-		LineUtils.drawLine(Color.BLACK, x1, y1, x2, y2, 2);
 	}
 
 }
