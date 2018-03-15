@@ -32,7 +32,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionBuyItems;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDropItems;
-import com.marklynch.objects.actions.ActionFishing;
+import com.marklynch.objects.actions.ActionFishingStart;
 import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLock;
@@ -1520,7 +1520,7 @@ public abstract class AIRoutine {
 			return false;
 		} else if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) <= 1) {
 			if (target.squareGameObjectIsOn.inventory.waterBody != null) {
-				new ActionFishing(actor, target).perform();
+				new ActionFishingStart(actor, target).perform();
 			} else {
 				new ActionTakeItems(actor, target).perform();
 			}

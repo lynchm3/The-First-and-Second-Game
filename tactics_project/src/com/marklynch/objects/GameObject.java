@@ -43,7 +43,7 @@ import com.marklynch.objects.actions.ActionEatItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillContainersInInventory;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
-import com.marklynch.objects.actions.ActionFishing;
+import com.marklynch.objects.actions.ActionFishingStart;
 import com.marklynch.objects.actions.ActionFollow;
 import com.marklynch.objects.actions.ActionGiveItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionHide;
@@ -866,7 +866,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// Water Source
 		if (!(this instanceof WaterBody) && this.squareGameObjectIsOn != null
 				&& this.squareGameObjectIsOn.inventory.waterBody != null) {
-			return new ActionFishing(performer, this);
+			return new ActionFishingStart(performer, this);
 		}
 
 		if (diggable) {
@@ -994,7 +994,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// Water Body
 		if (!(this instanceof WaterBody) && this.squareGameObjectIsOn != null
 				&& this.squareGameObjectIsOn.inventory.waterBody != null) {
-			actions.add(new ActionFishing(performer, this));
+			actions.add(new ActionFishingStart(performer, this));
 		}
 
 		// Skinnable

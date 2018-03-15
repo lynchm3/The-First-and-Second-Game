@@ -37,7 +37,7 @@ import com.marklynch.objects.Key;
 import com.marklynch.objects.Openable;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionFishing;
+import com.marklynch.objects.actions.ActionFishingStart;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionMove;
@@ -816,7 +816,13 @@ public class Actor extends GameObject {
 	@Override
 	public void update(int delta) {
 
+		if (this == Game.level.activeActor)
+			return;
+
 		clearActions();
+
+		System.out.println("this = " + this);
+
 		fishingTarget = null;
 		fishingAnimation = null;
 
@@ -875,7 +881,7 @@ public class Actor extends GameObject {
 
 		// Water Source
 		if (this.squareGameObjectIsOn != null && this.squareGameObjectIsOn.inventory.waterBody != null) {
-			return new ActionFishing(performer, this);
+			return new ActionFishingStart(performer, this);
 		}
 
 		if (performer.attackers.contains(this)) {

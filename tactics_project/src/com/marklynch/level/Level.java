@@ -1918,7 +1918,13 @@ public class Level {
 		System.out.println("----------------START PLAYER TURN-----------------");
 		this.turn++;
 		loggedThisTurn = false;
-		player.fishingTarget = null;
+		if (levelMode != LevelMode.LEVEL_FISHING) {
+			if (player.fishingTarget != null) {
+				player.fishingTarget.beingFished = false;
+				player.fishingTarget.primaryAnimation = null;
+				player.fishingTarget = null;
+			}
+		}
 
 		Game.level.activeActor = player;
 		if (player.peekSquare != null) {

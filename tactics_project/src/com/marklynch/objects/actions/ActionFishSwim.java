@@ -137,6 +137,9 @@ public class ActionFishSwim extends Action {
 		if (target == null)
 			return false;
 
+		if (performer.beingFished == true)
+			return false;
+
 		if (target.inventory.waterBody == null) {
 			return false;
 		}
