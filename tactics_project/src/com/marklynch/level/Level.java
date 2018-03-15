@@ -1633,6 +1633,7 @@ public class Level {
 		Player.playerTargetAction = null;
 		Player.playerTargetActor = null;
 		Game.level.highlightPauseButton();
+		levelMode = LevelMode.LEVEL_MODE_NORMAL;
 	}
 
 	public void dragToFollowPlayer() {

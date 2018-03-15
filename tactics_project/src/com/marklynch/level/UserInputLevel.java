@@ -457,16 +457,16 @@ public class UserInputLevel {
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
 
-		if (Game.level.levelMode == LevelMode.LEVEL_FISHING) {
-
-			return;
-		}
-
 		if (Game.level.activeActor != Game.level.player)
 			return;
 
 		if (openMenu)
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+
+		if (Game.level.levelMode == LevelMode.LEVEL_FISHING) {
+
+			return;
+		}
 
 		if (Game.level.levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
 			new ActionTeleport(Game.level.player, Level.teleportee, square, true).perform();

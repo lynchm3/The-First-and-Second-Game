@@ -59,6 +59,7 @@ public class ActionFishingCompleted extends Action {
 
 		if (performer == Game.level.player) {
 			Level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+
 			target.primaryAnimation = null;
 		} else {
 			if (Math.random() < 2) {

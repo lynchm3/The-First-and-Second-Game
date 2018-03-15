@@ -81,7 +81,7 @@ public class ActionFishingContinue extends Action {
 				Player.playerTargetAction = new ActionFishingContinue(performer, target);
 				Player.playerTargetSquare = performer.squareGameObjectIsOn;
 				Player.playerFirstMove = true;
-
+				//
 			}
 		} else {
 			if (Math.random() < 2) {
