@@ -165,10 +165,10 @@ public class Level {
 	public ArrayList<Actor> actorsToRemove = new ArrayList<Actor>();
 
 	public enum LevelMode {
-		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST, LEVEL_SELECT_TELEPORT_SQUARE
+		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST, LEVEL_SELECT_TELEPORT_SQUARE, LEVEL_FISHING
 	}
 
-	public LevelMode levelMode = LevelMode.LEVEL_MODE_NORMAL;
+	public static LevelMode levelMode = LevelMode.LEVEL_MODE_NORMAL;
 	public Power selectedPower = null;
 
 	public boolean cameraFollow = false;
@@ -1091,8 +1091,9 @@ public class Level {
 		}
 
 		if (openInventories.size() == 0 && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
-
-			if (levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
+			if (levelMode == LevelMode.LEVEL_FISHING) {
+				// Game.squareMouseIsOver.drawX(false);
+			} else if (levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
 				Game.squareMouseIsOver.drawX(false);
 			} else if (levelMode == LevelMode.LEVEL_MODE_CAST) {
 

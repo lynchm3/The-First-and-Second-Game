@@ -457,6 +457,11 @@ public class UserInputLevel {
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
 
+		if (Game.level.levelMode == LevelMode.LEVEL_FISHING) {
+
+			return;
+		}
+
 		if (Game.level.activeActor != Game.level.player)
 			return;
 

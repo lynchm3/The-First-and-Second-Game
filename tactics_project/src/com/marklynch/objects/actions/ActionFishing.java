@@ -3,9 +3,12 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
+import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationMove;
+import com.marklynch.level.constructs.animation.AnimationShake;
 import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -55,13 +58,24 @@ public class ActionFishing extends Action {
 		}
 		performer.equipped = fishingRod;
 
-		// if (Math.random() < 0.9) {
-		// if (Game.level.shouldLog(target, performer))
-		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "
-		// went fishing for ", target, " with ",
-		// fishingRod, " but failed!" }));
-		// return;
-		// }
+		if (performer == Game.level.player) {
+			Level.levelMode = LevelMode.LEVEL_FISHING;
+			if (Math.random() < 2) {
+				if (Game.level.shouldLog(target, performer)) {
+					Game.level.logOnScreen(new ActivityLog(
+							new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
+					target.primaryAnimation = new AnimationShake();
+				}
+				return;
+			}
+		} else {
+			if (Math.random() < 2) {
+				if (Game.level.shouldLog(target, performer))
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " went fishing for ", target,
+							" with ", fishingRod, " but failed!" }));
+				return;
+			}
+		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;

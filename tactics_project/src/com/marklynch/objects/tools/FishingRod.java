@@ -50,11 +50,15 @@ public class FishingRod extends Tool {
 				x2 += fisher.fishingTarget.primaryAnimation.offsetX;
 				y2 += fisher.fishingTarget.primaryAnimation.offsetY;
 			}
+
+			// if (x2 > x1)
 			LineUtils.drawLine(Color.BLACK, x1, y1, x2, y2, 2);
+
 		} else {
 			float x2 = fisher.fishingAnimation.x + fisher.fishingTarget.halfWidth;
 			float y2 = fisher.fishingAnimation.y + fisher.fishingTarget.halfHeight;
 
+			// if (x2 > x1)
 			LineUtils.drawLine(Color.BLACK, x1, y1, x2, y2, 2);
 
 		}

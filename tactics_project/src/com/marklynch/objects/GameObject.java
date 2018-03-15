@@ -240,6 +240,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean diggable = false;
 
 	public boolean flipYAxisInMirror = true;
+
+	public boolean beingFished = false;
 	// public static float healthHeightInPixels = Game.SQUARE_HEIGHT;
 
 	// public ArrayList<DestructionListener> destructionListeners = new
@@ -462,8 +464,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return;
 		}
 
-		if (primaryAnimation != null && primaryAnimation.completed == false)
-			primaryAnimation.draw1();
+		// if (primaryAnimation != null && primaryAnimation.completed == false)
+		// primaryAnimation.draw1();
 
 		for (Animation secondaryAnimation : secondaryAnimations)
 			secondaryAnimation.draw1();
