@@ -12,6 +12,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionFishingStart extends Action {
@@ -63,6 +64,9 @@ public class ActionFishingStart extends Action {
 						new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
 				target.primaryAnimation = new AnimationShake();
 			}
+			Player.playerTargetAction = new ActionFishingContinue(performer, target);
+			Player.playerTargetSquare = performer.squareGameObjectIsOn;
+			Player.playerFirstMove = true;
 		} else {
 			if (Math.random() < 2) {
 				if (Game.level.shouldLog(target, performer))

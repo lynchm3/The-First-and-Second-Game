@@ -816,15 +816,14 @@ public class Actor extends GameObject {
 	@Override
 	public void update(int delta) {
 
-		if (this == Game.level.activeActor)
-			return;
-
 		clearActions();
 
-		System.out.println("this = " + this);
+		if (this == Game.level.activeActor && Game.level.levelMode == Level.LevelMode.LEVEL_FISHING) {
 
-		fishingTarget = null;
-		fishingAnimation = null;
+		} else {
+			fishingTarget = null;
+			fishingAnimation = null;
+		}
 
 		if (this.remainingHealth > 0) {
 

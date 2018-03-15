@@ -75,6 +75,7 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.Utils;
 
 public class Level {
 
@@ -1171,6 +1172,7 @@ public class Level {
 
 			if (levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
 			} else if (levelMode == LevelMode.LEVEL_MODE_CAST) {
+			} else if (levelMode == LevelMode.LEVEL_FISHING) {
 			} else {
 				// NORMAL MODE
 
@@ -1489,21 +1491,16 @@ public class Level {
 			}
 
 			actors.removeAll(deadActors);
-		}
-
-		// 60FPS = 16ms
-		// 30FPS = 33ms
-
-		// if (currentFactionMoving != factions.player &&
-		// (!Game.level.player.animationsBlockingAI())) {
-		// currentFactionMoving.update(delta);
-		// }
-		else if (Game.level.player.primaryAnimation.completed && Game.level.player.playerTargetAction != null
+		} else if (Game.level.player.primaryAnimation.completed && Game.level.player.playerTargetAction != null
 				&& Game.level.player.playerTargetAction.recheck() && Game.level.player.playerTargetAction.checkRange())
 
 		{
-			Game.level.player.playerTargetAction.perform();
-			pausePlayer();
+			Action playerActionToPerform = Game.level.player.playerTargetAction;
+			playerActionToPerform.perform();
+			// Game.level.player.playerTargetAction.perform();
+			if (playerActionToPerform == Game.level.player.playerTargetAction) {
+				pausePlayer();
+			}
 		} else if (player.playerTargetActor != null && player.straightLineDistanceTo(Player.playerTargetSquare) <= 2) {
 
 			// Wait if following someone ur beside
@@ -1629,6 +1626,8 @@ public class Level {
 	}
 
 	public static void pausePlayer() {
+		System.out.println("pausePlayer");
+		Utils.printStackTrace();
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;
 		Player.playerTargetAction = null;

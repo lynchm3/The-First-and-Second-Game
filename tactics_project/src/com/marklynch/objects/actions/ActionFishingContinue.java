@@ -7,14 +7,12 @@ import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationMove;
 import com.marklynch.level.constructs.animation.AnimationShake;
-import com.marklynch.level.constructs.animation.AnimationTake;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionFishingContinue extends Action {
@@ -41,6 +39,8 @@ public class ActionFishingContinue extends Action {
 	@Override
 	public void perform() {
 
+		System.out.println("continue.perform()");
+
 		if (!enabled)
 			return;
 
@@ -48,6 +48,7 @@ public class ActionFishingContinue extends Action {
 			return;
 
 		performer.fishingTarget = target;
+		target.beingFished = true;
 
 		FishingRod fishingRod = null;
 		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
@@ -60,55 +61,25 @@ public class ActionFishingContinue extends Action {
 
 		if (performer == Game.level.player) {
 			Level.levelMode = LevelMode.LEVEL_FISHING;
-			if (Math.random() < 2) {
-				if (Game.level.shouldLog(target, performer)) {
-					Game.level.logOnScreen(new ActivityLog(
-							new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
-					target.primaryAnimation = new AnimationShake();
-				}
-				return;
+			if (Game.level.shouldLog(target, performer)) {
+				Game.level.logOnScreen(new ActivityLog(
+						new Object[] { performer, " continued fishing for ", target, " with ", fishingRod }));
+				target.primaryAnimation = new AnimationShake();
 			}
+			Player.playerTargetAction = new ActionFishingContinue(performer, target);
+			Player.playerTargetSquare = performer.squareGameObjectIsOn;
+			Player.playerFirstMove = true;
 		} else {
 			if (Math.random() < 2) {
 				if (Game.level.shouldLog(target, performer))
 					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " went fishing for ", target,
 							" with ", fishingRod, " but failed!" }));
-				return;
 			}
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
-		// target.squareGameObjectIsOn.imageTexture = Square.MUD_TEXTURE;
-
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(
-					new ActivityLog(new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
-
-		// GameObject fish = Templates.FISH.makeCopy("Fish",
-		// target.squareGameObjectIsOn, FactionList.buns, null,
-		// new GameObject[] {}, new GameObject[] {}, null);
-		// fish.owner = target.owner;
-		// h
-		if (target.fitsInInventory) {
-
-			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
-					&& performer.squareGameObjectIsOn.visibleToPlayer) {
-				performer.fishingAnimation = new AnimationTake(target, performer, 0, 0, 1f);
-				performer.secondaryAnimations.add(performer.fishingAnimation);
-			}
-			performer.inventory.add(target);
-		} else {
-			Square oldSquare = target.squareGameObjectIsOn;
-			performer.squareGameObjectIsOn.inventory.add(target);
-			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
-					&& performer.squareGameObjectIsOn.visibleToPlayer) {
-				target.primaryAnimation = new AnimationMove(oldSquare, performer.squareGameObjectIsOn);
-			}
-		}
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " got ", target }));
 		if (!legal) {
 			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, target);
 			this.performer.crimesPerformedThisTurn.add(crime);
@@ -117,8 +88,6 @@ public class ActionFishingContinue extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
-
-		// target.showPow();
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
@@ -133,6 +102,7 @@ public class ActionFishingContinue extends Action {
 
 	@Override
 	public boolean check() {
+		System.out.println("continue.check()");
 
 		if (!performer.inventory.contains(FishingRod.class)) {
 			actionName = ACTION_NAME_NEED_FISHING_ROD;
