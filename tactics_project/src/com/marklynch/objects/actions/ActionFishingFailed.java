@@ -7,10 +7,6 @@ import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationMove;
-import com.marklynch.level.constructs.animation.AnimationShake;
-import com.marklynch.level.constructs.animation.AnimationTake;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
@@ -59,15 +55,8 @@ public class ActionFishingFailed extends Action {
 		performer.equipped = fishingRod;
 
 		if (performer == Game.level.player) {
-			Level.levelMode = LevelMode.LEVEL_FISHING;
-			if (Math.random() < 2) {
-				if (Game.level.shouldLog(target, performer)) {
-					Game.level.logOnScreen(new ActivityLog(
-							new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
-					target.primaryAnimation = new AnimationShake();
-				}
-				return;
-			}
+			Level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+			target.primaryAnimation = null;
 		} else {
 			if (Math.random() < 2) {
 				if (Game.level.shouldLog(target, performer))
@@ -80,35 +69,9 @@ public class ActionFishingFailed extends Action {
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
-		// target.squareGameObjectIsOn.imageTexture = Square.MUD_TEXTURE;
-
 		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(
-					new ActivityLog(new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " failed to catch ", target }));
 
-		// GameObject fish = Templates.FISH.makeCopy("Fish",
-		// target.squareGameObjectIsOn, FactionList.buns, null,
-		// new GameObject[] {}, new GameObject[] {}, null);
-		// fish.owner = target.owner;
-		// h
-		if (target.fitsInInventory) {
-
-			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
-					&& performer.squareGameObjectIsOn.visibleToPlayer) {
-				performer.fishingAnimation = new AnimationTake(target, performer, 0, 0, 1f);
-				performer.secondaryAnimations.add(performer.fishingAnimation);
-			}
-			performer.inventory.add(target);
-		} else {
-			Square oldSquare = target.squareGameObjectIsOn;
-			performer.squareGameObjectIsOn.inventory.add(target);
-			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
-					&& performer.squareGameObjectIsOn.visibleToPlayer) {
-				target.primaryAnimation = new AnimationMove(oldSquare, performer.squareGameObjectIsOn);
-			}
-		}
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " got ", target }));
 		if (!legal) {
 			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, target);
 			this.performer.crimesPerformedThisTurn.add(crime);
@@ -117,8 +80,6 @@ public class ActionFishingFailed extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
-
-		// target.showPow();
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();

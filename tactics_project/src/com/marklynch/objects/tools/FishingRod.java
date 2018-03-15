@@ -40,7 +40,7 @@ public class FishingRod extends Tool {
 		float x1 = lineAnchorX + weaponPositionXInPixels;
 		float y1 = lineAnchorY + weaponPositionYInPixels;
 
-		if (fisher.fishingTarget.squareGameObjectIsOn != null) {
+		if (fisher.fishingTarget.squareGameObjectIsOn != null && fisher.fishingTarget.primaryAnimation != null) {
 
 			float x2 = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
 					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth);
@@ -54,7 +54,7 @@ public class FishingRod extends Tool {
 			// if (x2 > x1)
 			LineUtils.drawLine(Color.BLACK, x1, y1, x2, y2, 2);
 
-		} else {
+		} else if (fisher.fishingAnimation != null) {
 			float x2 = fisher.fishingAnimation.x + fisher.fishingTarget.halfWidth;
 			float y2 = fisher.fishingAnimation.y + fisher.fishingTarget.halfHeight;
 

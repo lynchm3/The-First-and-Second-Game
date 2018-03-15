@@ -66,9 +66,23 @@ public class ActionFishingContinue extends Action {
 						new Object[] { performer, " continued fishing for ", target, " with ", fishingRod }));
 				target.primaryAnimation = new AnimationShake();
 			}
-			Player.playerTargetAction = new ActionFishingContinue(performer, target);
-			Player.playerTargetSquare = performer.squareGameObjectIsOn;
-			Player.playerFirstMove = true;
+			double random = Math.random();
+			if (random > 0.9d) {
+				Player.playerTargetAction = new ActionFishingFailed(performer, target);
+				Player.playerTargetSquare = performer.squareGameObjectIsOn;
+				Player.playerFirstMove = true;
+
+			} else if (random > 0.8d) {
+				Player.playerTargetAction = new ActionFishingCompleted(performer, target);
+				Player.playerTargetSquare = performer.squareGameObjectIsOn;
+				Player.playerFirstMove = true;
+
+			} else {
+				Player.playerTargetAction = new ActionFishingContinue(performer, target);
+				Player.playerTargetSquare = performer.squareGameObjectIsOn;
+				Player.playerFirstMove = true;
+
+			}
 		} else {
 			if (Math.random() < 2) {
 				if (Game.level.shouldLog(target, performer))
