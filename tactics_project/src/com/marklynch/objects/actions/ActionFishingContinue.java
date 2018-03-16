@@ -60,7 +60,7 @@ public class ActionFishingContinue extends Action {
 		performer.equipped = fishingRod;
 
 		if (performer == Game.level.player) {
-			Level.levelMode = LevelMode.LEVEL_FISHING;
+			Level.levelMode = LevelMode.LEVEL_MODE_FISHING;
 			if (Game.level.shouldLog(target, performer)) {
 				Game.level.logOnScreen(new ActivityLog(
 						new Object[] { performer, " continued fishing for ", target, " with ", fishingRod }));

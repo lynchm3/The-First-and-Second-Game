@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionChop;
+import com.marklynch.objects.actions.ActionChopStart;
 import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -178,7 +178,7 @@ public class Tree extends GameObject {
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionChop(performer, this);
+		return new ActionChopStart(performer, this);
 	}
 
 	@Override

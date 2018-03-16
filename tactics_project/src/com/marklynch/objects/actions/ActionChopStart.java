@@ -1,8 +1,11 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
+import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationShake;
 import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
@@ -10,9 +13,10 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionChop extends Action {
+public class ActionChopStart extends Action {
 
 	public static final String ACTION_NAME = "Chop";
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
@@ -22,7 +26,7 @@ public class ActionChop extends Action {
 	GameObject target;
 
 	// Default for hostiles
-	public ActionChop(Actor attacker, GameObject vein) {
+	public ActionChopStart(Actor attacker, GameObject vein) {
 		super(ACTION_NAME, "action_chop.png");
 		this.performer = attacker;
 		this.target = vein;
@@ -42,7 +46,11 @@ public class ActionChop extends Action {
 		if (!checkRange())
 			return;
 
+		performer.choppingTarget = target;
+		target.beingChopped = true;
+
 		Axe axe = (Axe) performer.inventory.getGameObjectOfClass(Axe.class);
+		performer.equipped = axe;
 
 		float damage = target.totalHealth / 4f;
 		target.changeHealth(-damage, null, null);
@@ -53,15 +61,17 @@ public class ActionChop extends Action {
 		if (target.owner != null)
 			oreOwner = target.owner;
 
-		// if (Game.level.shouldLog(target, performer))
-		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "
-		// received ", ore }));
-
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " chopped at ", target, " with ", axe }));
 
+		if (Game.level.shouldLog(target, performer)) {
+			target.primaryAnimation = new AnimationShake();
+		}
+
+		boolean destroyed = target.checkIfDestroyed(performer, this);
+
 		Junk wood = null;
-		if (target.checkIfDestroyed(performer, this)) {
+		if (destroyed) {
 			wood = Templates.WOOD.makeCopy(target.squareGameObjectIsOn, oreOwner);
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
@@ -71,6 +81,23 @@ public class ActionChop extends Action {
 			if (Game.level.shouldLog(target, performer)) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", wood }));
 			}
+
+		} else {
+
+		}
+
+		if (performer == Game.level.player) {
+			if (destroyed) {
+				Level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+				target.primaryAnimation = null;
+			} else {
+				Level.levelMode = LevelMode.LEVEL_MODE_CHOPPING;
+				Player.playerTargetAction = new ActionChopStart(performer, target);
+				Player.playerTargetSquare = performer.squareGameObjectIsOn;
+				Player.playerFirstMove = true;
+
+			}
+		} else {
 
 		}
 

@@ -166,7 +166,7 @@ public class Level {
 	public ArrayList<Actor> actorsToRemove = new ArrayList<Actor>();
 
 	public enum LevelMode {
-		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST, LEVEL_SELECT_TELEPORT_SQUARE, LEVEL_FISHING
+		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST, LEVEL_SELECT_TELEPORT_SQUARE, LEVEL_MODE_FISHING, LEVEL_MODE_CHOPPING, LEVEL_MODE_MINING, LEVEL_MODE_DIGGING
 	}
 
 	public static LevelMode levelMode = LevelMode.LEVEL_MODE_NORMAL;
@@ -1092,7 +1092,8 @@ public class Level {
 		}
 
 		if (openInventories.size() == 0 && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
-			if (levelMode == LevelMode.LEVEL_FISHING) {
+			if (levelMode == LevelMode.LEVEL_MODE_FISHING || levelMode == LevelMode.LEVEL_MODE_CHOPPING
+					|| levelMode == LevelMode.LEVEL_MODE_MINING || levelMode == LevelMode.LEVEL_MODE_DIGGING) {
 				// Game.squareMouseIsOver.drawX(false);
 			} else if (levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
 				Game.squareMouseIsOver.drawX(false);
@@ -1172,7 +1173,7 @@ public class Level {
 
 			if (levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
 			} else if (levelMode == LevelMode.LEVEL_MODE_CAST) {
-			} else if (levelMode == LevelMode.LEVEL_FISHING) {
+			} else if (levelMode == LevelMode.LEVEL_MODE_FISHING) {
 			} else {
 				// NORMAL MODE
 
@@ -1918,11 +1919,29 @@ public class Level {
 		System.out.println("----------------START PLAYER TURN-----------------");
 		this.turn++;
 		loggedThisTurn = false;
-		if (levelMode != LevelMode.LEVEL_FISHING) {
+		if (levelMode != LevelMode.LEVEL_MODE_FISHING) {
 			if (player.fishingTarget != null) {
 				player.fishingTarget.beingFished = false;
 				player.fishingTarget.primaryAnimation = null;
 				player.fishingTarget = null;
+			}
+		} else if (levelMode != LevelMode.LEVEL_MODE_CHOPPING) {
+			if (player.choppingTarget != null) {
+				player.choppingTarget.beingChopped = false;
+				player.choppingTarget.primaryAnimation = null;
+				player.choppingTarget = null;
+			}
+		} else if (levelMode != LevelMode.LEVEL_MODE_MINING) {
+			if (player.miningTarget != null) {
+				player.miningTarget.beingMined = false;
+				player.miningTarget.primaryAnimation = null;
+				player.miningTarget = null;
+			}
+		} else if (levelMode != LevelMode.LEVEL_MODE_DIGGING) {
+			if (player.diggingTarget != null) {
+				player.diggingTarget.beingDigged = false;
+				player.diggingTarget.primaryAnimation = null;
+				player.diggingTarget = null;
 			}
 		}
 

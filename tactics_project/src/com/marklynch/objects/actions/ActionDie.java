@@ -116,7 +116,7 @@ public class ActionDie extends Action {
 
 			if (Game.level.shouldLog(performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", this.image }));
-		} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChop) {
+		} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChopStart) {
 
 			if (Game.level.shouldLog(performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " was chopped down ", this.image }));
@@ -197,7 +197,7 @@ public class ActionDie extends Action {
 				for (GameObject gameObject : (ArrayList<GameObject>) performer.inventory.gameObjects.clone()) {
 					new ActionDropItems(performer, performer.squareGameObjectIsOn, gameObject).perform();
 				}
-			} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChop) {
+			} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChopStart) {
 
 				if (!performer.name.contains("Big")) {
 

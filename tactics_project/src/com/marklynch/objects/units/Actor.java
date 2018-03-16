@@ -187,6 +187,12 @@ public class Actor extends GameObject {
 
 	public GameObject fishingTarget;
 	public AnimationTake fishingAnimation;
+	public GameObject choppingTarget;
+	public AnimationTake choppingAnimation;
+	public GameObject miningTarget;
+	public AnimationTake miningAnimation;
+	public GameObject diggingTarget;
+	public AnimationTake diggingAnimation;
 
 	public static enum HOBBY {
 		FISHING, HUNTING, ARCHERY, SPARRING, BOWLS, BALL_GAMES, EATING, DRINKING, SOCIALISING;
@@ -816,13 +822,28 @@ public class Actor extends GameObject {
 	@Override
 	public void update(int delta) {
 
-		clearActions();
+		if (this != Game.level.player) {
 
-		if (this == Game.level.activeActor && Game.level.levelMode == Level.LevelMode.LEVEL_FISHING) {
-
-		} else {
-			fishingTarget = null;
-			fishingAnimation = null;
+			if (fishingTarget != null) {
+				fishingTarget.beingFished = false;
+				fishingTarget.primaryAnimation = null;
+				fishingTarget = null;
+			}
+			if (choppingTarget != null) {
+				choppingTarget.beingChopped = false;
+				choppingTarget.primaryAnimation = null;
+				choppingTarget = null;
+			}
+			if (miningTarget != null) {
+				miningTarget.beingMined = false;
+				miningTarget.primaryAnimation = null;
+				miningTarget = null;
+			}
+			if (diggingTarget != null) {
+				diggingTarget.beingDigged = false;
+				diggingTarget.primaryAnimation = null;
+				diggingTarget = null;
+			}
 		}
 
 		if (this.remainingHealth > 0) {

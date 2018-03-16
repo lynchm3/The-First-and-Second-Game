@@ -91,7 +91,7 @@ public class ActionDiscover extends Action {
 
 			if (Game.level.shouldLog(performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", this.image }));
-		} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChop) {
+		} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChopStart) {
 
 			if (Game.level.shouldLog(performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " was chopped down ", this.image }));

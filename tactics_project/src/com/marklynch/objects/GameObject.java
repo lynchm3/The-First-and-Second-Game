@@ -32,7 +32,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionBuytemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionChangeAppearance;
-import com.marklynch.objects.actions.ActionChop;
+import com.marklynch.objects.actions.ActionChopStart;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDig;
@@ -242,6 +242,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean flipYAxisInMirror = true;
 
 	public boolean beingFished = false;
+	public boolean beingChopped = false;
+	public boolean beingMined = false;
+	public boolean beingDigged = false;
 	// public static float healthHeightInPixels = Game.SQUARE_HEIGHT;
 
 	// public ArrayList<DestructionListener> destructionListeners = new
@@ -883,7 +886,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (this instanceof Stump || this instanceof Tree) {
-			return new ActionChop(performer, this);
+			return new ActionChopStart(performer, this);
 		}
 
 		if (this instanceof PressurePlate) {
@@ -926,7 +929,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (this instanceof Stump || this instanceof Tree) {
-			return new ActionChop(performer, this);
+			return new ActionChopStart(performer, this);
 		}
 
 		// Pressure Plate
@@ -1028,7 +1031,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Tree and stump
 		if (this instanceof Stump || this instanceof Tree) {
-			actions.add(new ActionChop(performer, this));
+			actions.add(new ActionChopStart(performer, this));
 		}
 
 		// Food
