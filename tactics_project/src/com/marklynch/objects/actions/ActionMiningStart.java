@@ -1,16 +1,20 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
+import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationShake;
 import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionMine extends Action {
+public class ActionMiningStart extends Action {
 
 	public static final String ACTION_NAME = "Mine";
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
@@ -20,7 +24,7 @@ public class ActionMine extends Action {
 	Vein target;
 
 	// Default for hostiles
-	public ActionMine(Actor attacker, Vein vein) {
+	public ActionMiningStart(Actor attacker, Vein vein) {
 		super(ACTION_NAME, "action_mine.png");
 		this.performer = attacker;
 		this.target = vein;
@@ -40,17 +44,27 @@ public class ActionMine extends Action {
 		if (!checkRange())
 			return;
 
+		performer.miningTarget = target;
+		target.beingMined = true;
+
 		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
+		performer.equipped = pickaxe;
 
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
 
+		if (Game.level.shouldLog(target, performer)) {
+			target.primaryAnimation = new AnimationShake();
+		}
+
 		if (!target.infinite) {
 			float damage = target.totalHealth / 4f;
 			target.changeHealth(-damage, null, null);
-			performer.distanceMovedThisTurn = performer.travelDistance;
-			performer.hasAttackedThisTurn = true;
 		}
+		performer.distanceMovedThisTurn = performer.travelDistance;
+		performer.hasAttackedThisTurn = true;
+
+		boolean destroyed = target.checkIfDestroyed(performer, this);
 
 		Junk ore = null;
 		Actor oreOwner = performer;
@@ -79,6 +93,20 @@ public class ActionMine extends Action {
 
 			if (Game.level.shouldLog(target, performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " depleted ", target }));
+		}
+
+		if (performer == Game.level.player) {
+			if (destroyed) {
+				Level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+				target.primaryAnimation = null;
+			} else {
+				Level.levelMode = LevelMode.LEVEL_MODE_MINING;
+				Player.playerTargetAction = new ActionMiningStart(performer, target);
+				Player.playerTargetSquare = performer.squareGameObjectIsOn;
+				Player.playerFirstMove = true;
+			}
+		} else {
+
 		}
 
 		target.showPow();

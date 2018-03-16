@@ -17,7 +17,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionEatItems;
-import com.marklynch.objects.actions.ActionMine;
+import com.marklynch.objects.actions.ActionMiningStart;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionSkin;
 import com.marklynch.objects.actions.ActionTakeItems;
@@ -726,7 +726,7 @@ public class AIRoutineUtils {
 	public static boolean mine(GameObject target) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
 		if (weaponDistance <= 1) {
-			new ActionMine(Game.level.activeActor, (Vein) target).perform();
+			new ActionMiningStart(Game.level.activeActor, (Vein) target).perform();
 			return true;
 		} else {
 			return false;

@@ -16,7 +16,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionChopStart extends Action {
+public class ActionChoppingStart extends Action {
 
 	public static final String ACTION_NAME = "Chop";
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
@@ -26,7 +26,7 @@ public class ActionChopStart extends Action {
 	GameObject target;
 
 	// Default for hostiles
-	public ActionChopStart(Actor attacker, GameObject vein) {
+	public ActionChoppingStart(Actor attacker, GameObject vein) {
 		super(ACTION_NAME, "action_chop.png");
 		this.performer = attacker;
 		this.target = vein;
@@ -92,7 +92,7 @@ public class ActionChopStart extends Action {
 				target.primaryAnimation = null;
 			} else {
 				Level.levelMode = LevelMode.LEVEL_MODE_CHOPPING;
-				Player.playerTargetAction = new ActionChopStart(performer, target);
+				Player.playerTargetAction = new ActionChoppingStart(performer, target);
 				Player.playerTargetSquare = performer.squareGameObjectIsOn;
 				Player.playerFirstMove = true;
 

@@ -32,7 +32,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionBuytemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionChangeAppearance;
-import com.marklynch.objects.actions.ActionChopStart;
+import com.marklynch.objects.actions.ActionChoppingStart;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDig;
@@ -51,7 +51,7 @@ import com.marklynch.objects.actions.ActionInitiateTrade;
 import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionLock;
-import com.marklynch.objects.actions.ActionMine;
+import com.marklynch.objects.actions.ActionMiningStart;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionOpenInventoryToDropItems;
@@ -881,12 +881,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (this instanceof Vein) {
-			Action action = new ActionMine(performer, (Vein) this);
+			Action action = new ActionMiningStart(performer, (Vein) this);
 			return action;
 		}
 
 		if (this instanceof Stump || this instanceof Tree) {
-			return new ActionChopStart(performer, this);
+			return new ActionChoppingStart(performer, this);
 		}
 
 		if (this instanceof PressurePlate) {
@@ -924,12 +924,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (this instanceof Vein) {
-			Action action = new ActionMine(performer, (Vein) this);
+			Action action = new ActionMiningStart(performer, (Vein) this);
 			return action;
 		}
 
 		if (this instanceof Stump || this instanceof Tree) {
-			return new ActionChopStart(performer, this);
+			return new ActionChoppingStart(performer, this);
 		}
 
 		// Pressure Plate
@@ -1031,7 +1031,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Tree and stump
 		if (this instanceof Stump || this instanceof Tree) {
-			actions.add(new ActionChopStart(performer, this));
+			actions.add(new ActionChoppingStart(performer, this));
 		}
 
 		// Food
@@ -1052,7 +1052,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Vein
 		if (this instanceof Vein) {
-			actions.add(new ActionMine(performer, (Vein) this));
+			actions.add(new ActionMiningStart(performer, (Vein) this));
 		}
 
 		// Window
