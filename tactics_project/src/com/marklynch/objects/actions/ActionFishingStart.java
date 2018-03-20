@@ -55,6 +55,9 @@ public class ActionFishingStart extends Action {
 				fishingRod = (FishingRod) f;
 			}
 		}
+
+		if (performer.equipped != fishingRod)
+			performer.equippedBeforePickingUpObject = performer.equipped;
 		performer.equipped = fishingRod;
 
 		if (performer == Game.level.player) {

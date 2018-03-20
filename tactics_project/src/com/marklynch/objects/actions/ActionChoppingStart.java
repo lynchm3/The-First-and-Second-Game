@@ -50,6 +50,8 @@ public class ActionChoppingStart extends Action {
 		target.beingChopped = true;
 
 		Axe axe = (Axe) performer.inventory.getGameObjectOfClass(Axe.class);
+		if (performer.equipped != axe)
+			performer.equippedBeforePickingUpObject = performer.equipped;
 		performer.equipped = axe;
 
 		float damage = target.totalHealth / 4f;
@@ -90,6 +92,10 @@ public class ActionChoppingStart extends Action {
 			if (destroyed) {
 				Level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 				target.primaryAnimation = null;
+				if (performer.equippedBeforePickingUpObject != null) {
+					performer.equipped = performer.equippedBeforePickingUpObject;
+					performer.equippedBeforePickingUpObject = null;
+				}
 			} else {
 				Level.levelMode = LevelMode.LEVEL_MODE_CHOPPING;
 				Player.playerTargetAction = new ActionChoppingStart(performer, target);

@@ -48,6 +48,8 @@ public class ActionMiningStart extends Action {
 		target.beingMined = true;
 
 		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
+		if (performer.equipped != pickaxe)
+			performer.equippedBeforePickingUpObject = performer.equipped;
 		performer.equipped = pickaxe;
 
 		if (Game.level.shouldLog(target, performer))
@@ -99,6 +101,10 @@ public class ActionMiningStart extends Action {
 			if (destroyed) {
 				Level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 				target.primaryAnimation = null;
+				if (performer.equippedBeforePickingUpObject != null) {
+					performer.equipped = performer.equippedBeforePickingUpObject;
+					performer.equippedBeforePickingUpObject = null;
+				}
 			} else {
 				Level.levelMode = LevelMode.LEVEL_MODE_MINING;
 				Player.playerTargetAction = new ActionMiningStart(performer, target);
@@ -123,10 +129,13 @@ public class ActionMiningStart extends Action {
 
 		if (!legal) {
 
-			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, ore);
-			this.performer.crimesPerformedThisTurn.add(crime);
-			this.performer.crimesPerformedInLifetime.add(crime);
-			notifyWitnessesOfCrime(crime);
+			// if(ore !=)
+			if (ore != null) {
+				Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, ore);
+				this.performer.crimesPerformedThisTurn.add(crime);
+				this.performer.crimesPerformedInLifetime.add(crime);
+				notifyWitnessesOfCrime(crime);
+			}
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}

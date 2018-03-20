@@ -59,8 +59,11 @@ public class ActionFishingCompleted extends Action {
 
 		if (performer == Game.level.player) {
 			Level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
-
 			target.primaryAnimation = null;
+			if (performer.equippedBeforePickingUpObject != null) {
+				performer.equipped = performer.equippedBeforePickingUpObject;
+				performer.equippedBeforePickingUpObject = null;
+			}
 		} else {
 			if (Math.random() < 2) {
 				if (Game.level.shouldLog(target, performer))
