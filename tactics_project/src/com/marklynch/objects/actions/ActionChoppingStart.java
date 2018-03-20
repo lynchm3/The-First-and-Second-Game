@@ -90,7 +90,7 @@ public class ActionChoppingStart extends Action {
 
 		if (performer == Game.level.player) {
 			if (destroyed) {
-				Level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+				Level.pausePlayer();
 				target.primaryAnimation = null;
 				if (performer.equippedBeforePickingUpObject != null) {
 					performer.equipped = performer.equippedBeforePickingUpObject;

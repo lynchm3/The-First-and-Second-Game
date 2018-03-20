@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationResponseDisplay;
@@ -50,6 +51,7 @@ public class ActionTalk extends Action {
 		if (conversation == null)
 			return;
 
+		Level.pausePlayer();
 		conversation.currentConversationPart = conversation.openingConversationPart;
 		Game.level.conversation = conversation;
 		Game.level.conversation.updateFlags();

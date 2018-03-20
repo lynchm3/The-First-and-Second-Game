@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
@@ -55,7 +54,7 @@ public class ActionFishingFailed extends Action {
 		performer.equipped = fishingRod;
 
 		if (performer == Game.level.player) {
-			Level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+			Level.pausePlayer();
 			target.primaryAnimation = null;
 		} else {
 			if (Math.random() < 2) {
