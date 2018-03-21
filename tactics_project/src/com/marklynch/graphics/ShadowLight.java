@@ -16,6 +16,7 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level.LevelMode;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
@@ -211,35 +212,29 @@ public class ShadowLight {
 		// 0, 1080);
 		// Game.flush();
 
+		// Draw BG
 		view.setIdentity();
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
 		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
 		view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 		Game.activeBatch.updateUniforms();
+
+		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
+			Game.level.player.draw1();
+			Game.level.player.fishingTarget.draw1();
+			Game.flush();
+			Game.activeBatch.end();
+			return;
+		}
+
 		if (Game.editorMode)
 			Game.level.drawBackground();
 		else
 			Game.level.drawBackground();
 		Game.flush();
-		// lightsFBO.end();
-		// GL11.glDisable(GL_DEPTH_TEST);
 
-		// Draw lights
-		// Game.activeBatch.setColor(1,1,1,1);
-		// Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
-		// Game.activeBatch.getViewMatrix().setIdentity();
-		// Game.activeBatch.updateUniforms();
-		// for (int i = 0; i < lights.size(); i++) {
-		// renderLight(lights.get(i), null);
-		// }
-		// Game.flush();
-
-		// lightsFBO.begin();
-
-		// draw lvl foreground
-		// GL11.glEnable(GL_DEPTH_TEST);
-
+		// Draw foreground
 		if (Game.zoomLevelIndex < Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
 			Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
 			Game.activeBatch.getViewMatrix().setIdentity();
@@ -258,7 +253,6 @@ public class ShadowLight {
 				Game.level.drawForeground();
 			Game.flush();
 		}
-		// GL11.glDisable(GL_DEPTH_TEST);
 
 		// Draw level UI
 		view.setIdentity();

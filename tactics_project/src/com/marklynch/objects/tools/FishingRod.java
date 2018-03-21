@@ -1,15 +1,19 @@
 package com.marklynch.objects.tools;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
+import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.TextureUtils;
+import com.marklynch.utils.Utils;
+import com.marklynch.utils.Utils.Point;
 
 public class FishingRod extends Tool {
 
@@ -39,39 +43,59 @@ public class FishingRod extends Tool {
 
 	public void drawLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels) {
 
-		float lineX1 = lineAnchorX + weaponPositionXInPixels;
-		float lineY1 = lineAnchorY + weaponPositionYInPixels;
+		float fishingLineX1 = lineAnchorX + weaponPositionXInPixels;
+		float fishingLineY1 = lineAnchorY + weaponPositionYInPixels;
 
 		boolean fishingTargetInTheWater = fisher.fishingTarget.squareGameObjectIsOn != null;
 
 		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
 
-			float lineX2 = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
+			// Fishing line
+			float fishX = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
 					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
 					+ fisher.fishingTarget.primaryAnimation.offsetX;
-			float lineY2 = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
+			float fishY = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
 					+ fisher.fishingTarget.primaryAnimation.offsetY;
 
-			LineUtils.drawLine(Color.BLACK, lineX1, lineY1, lineX2, lineY2, 2);
+			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, fishX, fishY, 2);
 
-			float circleX1 = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
-					+ fisher.fishingTarget.primaryAnimation.offsetX - 128;
-			float circleY1 = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
-					+ fisher.fishingTarget.primaryAnimation.offsetY - 128;
-
-			float circleX2 = circleX1 + 256;
-			float circleY2 = circleY1 + 256;
-
+			// Fish circle
+			float radius = 128;
+			float circleCenterX = fishX;
+			float circleCenterY = fishY;
+			float circleX1 = circleCenterX - radius;
+			float circleY1 = circleCenterY - radius;
+			float circleX2 = circleCenterX + radius;
+			float circleY2 = circleCenterY + radius;
 			TextureUtils.drawTexture(GameCursor.circle, 0.5f, circleX1, circleY1, circleX2, circleY2);
+
+			// Line mouse - to - fish
+			// LineUtils.drawLine(Color.RED, fishX, fishY,
+			// UserInputLevel.mouseXTransformed,
+			// UserInputLevel.mouseYTransformed, 5);
+
+			// Mouse circle
+			float mouseCircleRadius = 32;
+			List<Point> intersections = Utils.getCircleLineIntersectionPoint2(
+					new Point(UserInputLevel.mouseXTransformed, UserInputLevel.mouseYTransformed),
+					new Point(fishX, fishY), new Point(fishX, fishY), radius);
+			if (intersections.size() != 0) {
+				float mouseCircleCenterX = intersections.get(0).x;
+				float mouseCircleCenterY = intersections.get(0).y;
+				float mouseCircleX1 = mouseCircleCenterX - mouseCircleRadius;
+				float mouseCircleY1 = mouseCircleCenterY - mouseCircleRadius;
+				float mouseCircleX2 = mouseCircleCenterX + mouseCircleRadius;
+				float mouseCircleY2 = mouseCircleCenterY + mouseCircleRadius;
+				TextureUtils.drawTexture(GameCursor.circle, 0.5f, mouseCircleX1, mouseCircleY1, mouseCircleX2,
+						mouseCircleY2);
+			}
 
 		} else if (fisher.fishingAnimation != null) {
 			float x2 = fisher.fishingAnimation.x + fisher.fishingTarget.halfWidth;
 			float y2 = fisher.fishingAnimation.y + fisher.fishingTarget.halfHeight;
 
-			LineUtils.drawLine(Color.BLACK, lineX1, lineY1, x2, y2, 2);
+			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, x2, y2, 2);
 		}
 
 	}

@@ -1610,59 +1610,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	// (int) (mouseXTransformed / Game.SQUARE_WIDTH); gives u sqr[x][]
 
-	public boolean mouseOver(float mouseXTransformed, float mouseYTransformed) {
-
-		// imageTexture.
-
-		// int x = (int) (mouseXTransformed - this.squareGameObjectIsOn.xInGrid
-		// * Game.SQUARE_WIDTH);
-		// int y = (int) (mouseYTransformed - this.squareGameObjectIsOn.yInGrid
-		// * Game.SQUARE_HEIGHT);
-		//
-		// if (x > imageTexture.getWidth() || y > imageTexture.getHeight()) {
-		// return false;
-		// }
-
-		return false;
-
-		// System.out.println("x = " + x);
-		// System.out.println("y = " + y);
-		// System.out.println("imageTexture.getWidth() = " +
-		// imageTexture.getWidth());
-		// System.out.println("imageTexture.getHeight() = " +
-		// imageTexture.getHeight());
-		//
-		//
-		// GL11.glReadPixels(x, y, 1, 1, format, type, pixels);
-		//
-		// int[] pixels = new int[imageTexture.getWidth() *
-		// imageTexture.getHeight() * 16];
-		// ByteBuffer buffer = ByteBuffer.allocateDirect(imageTexture.getWidth()
-		// * imageTexture.getHeight() * 16);
-		// GL11.glGetTexImage(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA,
-		// GL11.GL_UNSIGNED_BYTE, buffer);
-		// buffer.asIntBuffer().get(pixels);
-		//
-		// Color color;
-		// if (y <= imageTexture.getHeight() && x <= imageTexture.getWidth()) {
-		// int pixel = pixels[y * imageTexture.getWidth() + x];
-		// int r = ((pixel >> 16) & 0xFF); // Red
-		// int g = ((pixel >> 8) & 0xFF); // Green
-		// int b = (pixel & 0xFF); // Blue
-		// int a = ((pixel >> 24) & 0xFF); // Alpha
-		// color = new Color(r, g, b, a);
-		// } else {
-		// color = new Color(0, 0, 0, 1);
-		// }
-		//
-		// System.out.println("Color = " + color);
-		//
-		// // return new Color(r, g, b, a);
-		//
-		// // TODO Auto-generated method stub
-		// return false;
-	}
-
 	public Conversation createConversation(String text) {
 		return Conversation.createConversation(text, this);
 	}
