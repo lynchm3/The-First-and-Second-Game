@@ -38,7 +38,11 @@ public class ActionFishSwim extends Action {
 		if (!checkRange())
 			return;
 
+		// float chanceToSwim = 0.2f;
+
 		float maxChange = 0.05f;
+		if (performer.beingFished)
+			maxChange = 0.5f;
 
 		if (performer.swimmingChangeX > maxChange || performer.swimmingChangeX < -maxChange) {
 			performer.swimmingChangeX = 0;
@@ -176,8 +180,8 @@ public class ActionFishSwim extends Action {
 		// if (target == null)
 		// return false;
 
-		if (performer.beingFished == true)
-			return false;
+		// if (performer.beingFished == true)
+		// return false;
 
 		// if (target.inventory.waterBody == null) {
 		// return false;

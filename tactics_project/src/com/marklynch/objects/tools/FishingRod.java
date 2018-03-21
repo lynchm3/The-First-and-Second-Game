@@ -57,10 +57,10 @@ public class FishingRod extends Tool {
 
 			float circleX1 = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
 					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
-					+ fisher.fishingTarget.primaryAnimation.offsetX * 10 - 128;
+					+ fisher.fishingTarget.primaryAnimation.offsetX - 128;
 			float circleY1 = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
-					+ fisher.fishingTarget.primaryAnimation.offsetY * 10 - 128;
+					+ fisher.fishingTarget.primaryAnimation.offsetY - 128;
 
 			float circleX2 = circleX1 + 256;
 			float circleY2 = circleY1 + 256;

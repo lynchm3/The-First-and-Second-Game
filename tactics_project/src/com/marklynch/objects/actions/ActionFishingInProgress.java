@@ -1,13 +1,10 @@
 package com.marklynch.objects.actions;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationShake;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
@@ -50,21 +47,23 @@ public class ActionFishingInProgress extends Action {
 		performer.fishingTarget = target;
 		target.beingFished = true;
 
-		FishingRod fishingRod = null;
-		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
-		for (GameObject f : fishingRods) {
-			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= f.maxRange) {
-				fishingRod = (FishingRod) f;
-			}
-		}
-		performer.equipped = fishingRod;
+		// FishingRod fishingRod = null;
+		// ArrayList<GameObject> fishingRods =
+		// performer.inventory.getGameObjectsOfClass(FishingRod.class);
+		// for (GameObject f : fishingRods) {
+		// if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <=
+		// f.maxRange) {
+		// fishingRod = (FishingRod) f;
+		// }
+		// }
+		// performer.equipped = fishingRod;
 
 		if (performer == Game.level.player) {
 			Level.levelMode = LevelMode.LEVEL_MODE_FISHING;
 			if (Game.level.shouldLog(target, performer)) {
 				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { performer, " continued fishing for ", target, " with ", fishingRod }));
-				target.primaryAnimation = new AnimationShake();
+						new Object[] { performer, " continued fishing for ", target, " with ", performer.equipped }));
+				// target.primaryAnimation = new AnimationShake();
 			}
 			double random = Math.random();
 			// if (random > 0.9d) {
@@ -88,7 +87,7 @@ public class ActionFishingInProgress extends Action {
 			if (Math.random() < 2) {
 				if (Game.level.shouldLog(target, performer))
 					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " went fishing for ", target,
-							" with ", fishingRod, " but failed!" }));
+							" with ", performer.equipped, " but failed!" }));
 			}
 		}
 
@@ -130,16 +129,19 @@ public class ActionFishingInProgress extends Action {
 
 	@Override
 	public boolean checkRange() {
+		return true;
 
-		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
-
-		for (GameObject fishingRod : fishingRods) {
-			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= fishingRod.maxRange) {
-				return true;
-			}
-		}
-		actionName = ACTION_NAME_CANT_REACH;
-		return false;
+		// ArrayList<GameObject> fishingRods =
+		// performer.inventory.getGameObjectsOfClass(FishingRod.class);
+		//
+		// for (GameObject fishingRod : fishingRods) {
+		// if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <=
+		// fishingRod.maxRange) {
+		// return true;
+		// }
+		// }
+		// actionName = ACTION_NAME_CANT_REACH;
+		// return false;
 	}
 
 	@Override

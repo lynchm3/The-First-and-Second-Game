@@ -7,7 +7,6 @@ import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationShake;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
@@ -66,7 +65,7 @@ public class ActionFishingStart extends Action {
 			if (Game.level.shouldLog(target, performer)) {
 				Game.level.logOnScreen(new ActivityLog(
 						new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
-				target.primaryAnimation = new AnimationShake();
+				// target.primaryAnimation = new AnimationShake();
 			}
 			Player.playerTargetAction = new ActionFishingInProgress(performer, target);
 			Player.playerTargetSquare = performer.squareGameObjectIsOn;

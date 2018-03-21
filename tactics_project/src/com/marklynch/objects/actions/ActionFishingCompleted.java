@@ -1,7 +1,5 @@
 package com.marklynch.objects.actions;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
@@ -47,15 +45,6 @@ public class ActionFishingCompleted extends Action {
 
 		performer.fishingTarget = target;
 
-		FishingRod fishingRod = null;
-		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
-		for (GameObject f : fishingRods) {
-			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= f.maxRange) {
-				fishingRod = (FishingRod) f;
-			}
-		}
-		performer.equipped = fishingRod;
-
 		if (performer == Game.level.player) {
 			Level.pausePlayer();
 			target.primaryAnimation = null;
@@ -67,7 +56,7 @@ public class ActionFishingCompleted extends Action {
 			if (Math.random() < 2) {
 				if (Game.level.shouldLog(target, performer))
 					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " went fishing for ", target,
-							" with ", fishingRod, " but failed!" }));
+							" with ", performer.equipped, " but failed!" }));
 				return;
 			}
 		}
@@ -129,16 +118,19 @@ public class ActionFishingCompleted extends Action {
 
 	@Override
 	public boolean checkRange() {
+		return true;
 
-		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
-
-		for (GameObject fishingRod : fishingRods) {
-			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= fishingRod.maxRange) {
-				return true;
-			}
-		}
-		actionName = ACTION_NAME_CANT_REACH;
-		return false;
+		// ArrayList<GameObject> fishingRods =
+		// performer.inventory.getGameObjectsOfClass(FishingRod.class);
+		//
+		// for (GameObject fishingRod : fishingRods) {
+		// if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <=
+		// fishingRod.maxRange) {
+		// return true;
+		// }
+		// }
+		// actionName = ACTION_NAME_CANT_REACH;
+		// return false;
 	}
 
 	@Override
