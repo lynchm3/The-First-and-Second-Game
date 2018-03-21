@@ -172,7 +172,13 @@ public class ShadowLight {
 
 		Game.activeBatch.begin();
 
-		glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
+			glClearColor(0.15f, 0.55f, 0.83f, 1f);
+			// 38,141,213
+		} else {
+			glClearColor(0.5f, 0.5f, 0.5f, 1f);
+
+		}
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// lightsFBO.begin();
@@ -223,6 +229,10 @@ public class ShadowLight {
 		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
 			Game.level.player.draw1();
 			Game.level.player.fishingTarget.draw1();
+			// Game.level.player.draw2();
+			// Game.level.player.fishingTarget.draw2();
+			// Game.level.player.draw3();
+			// Game.level.player.fishingTarget.draw3();
 			Game.flush();
 			Game.activeBatch.end();
 			return;
