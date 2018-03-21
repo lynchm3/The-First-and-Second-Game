@@ -11,7 +11,7 @@ public class GameCursor {
 	public transient Texture imageTexture3 = null;
 	public transient Texture imageTexture4 = null;
 	public transient Texture cursor = null;
-	public transient Texture circle = null;
+	public static transient Texture circle = null;
 	public transient Texture redArrow = null;
 	public transient Texture yellowArrow = null;
 	public transient Texture blueArrow = null;

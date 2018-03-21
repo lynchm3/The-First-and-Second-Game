@@ -46,6 +46,7 @@ public class ActionFishingStart extends Action {
 			return;
 
 		performer.fishingTarget = target;
+		performer.fishingProgress = 0;
 		target.beingFished = true;
 
 		FishingRod fishingRod = null;
@@ -67,7 +68,7 @@ public class ActionFishingStart extends Action {
 						new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
 				target.primaryAnimation = new AnimationShake();
 			}
-			Player.playerTargetAction = new ActionFishingContinue(performer, target);
+			Player.playerTargetAction = new ActionFishingInProgress(performer, target);
 			Player.playerTargetSquare = performer.squareGameObjectIsOn;
 			Player.playerFirstMove = true;
 		} else {

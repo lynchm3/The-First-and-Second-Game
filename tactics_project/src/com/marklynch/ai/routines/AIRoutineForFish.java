@@ -1,8 +1,5 @@
 package com.marklynch.ai.routines;
 
-import java.util.Random;
-
-import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionFishSwim;
@@ -16,9 +13,9 @@ public class AIRoutineForFish extends AIRoutine {
 	final String ACTIVITY_DESCRIPTION_SWIMMING = "Swimming";
 
 	Fish fish;
-	Square targetSquare = null;
-	float changeX = 0;
-	float changeY = 0;
+
+	public Square targetSquare = null;
+	// hmm
 
 	public AIRoutineForFish(Actor actor) {
 		super(actor);
@@ -44,105 +41,7 @@ public class AIRoutineForFish extends AIRoutine {
 			return;
 
 		if (state == STATE.SWIMMING) {
-			// if (targetSquare == null || targetSquare ==
-			// fish.squareGameObjectIsOn
-			// || !targetSquare.inventory.contains(WaterBody.class)) {
-			// targetSquare = AIRoutineUtils.getRandomSquare(1, 1, false,
-			// false);
-
-			float maxChange = 0.05f;
-
-			if (changeX > maxChange || changeX < -maxChange) {
-				changeX = 0;
-			}
-			if (new Random().nextFloat() < 0.2f) {
-				changeX = new Random().nextFloat() * maxChange;
-				if (new Random().nextBoolean()) {
-					changeX = -changeX;
-				}
-			}
-
-			if (changeY > maxChange || changeY < -maxChange) {
-				changeY = 0;
-			}
-
-			if (new Random().nextFloat() < 0.2f) {
-				changeY = new Random().nextFloat() * maxChange;
-				if (new Random().nextBoolean()) {
-					changeY = -changeY;
-				}
-			}
-
-			float halfWidthRatio = (fish.width / Game.SQUARE_WIDTH) / 2f;
-			float halfHeightRatio = (fish.height / Game.SQUARE_HEIGHT) / 2f;
-
-			// If we're moving out of water, cancel X
-			if (actor.drawOffsetRatioX + changeX < 0 && (fish.squareGameObjectIsOn.getSquareToLeftOf() == null
-					|| fish.squareGameObjectIsOn.getSquareToLeftOf().inventory.waterBody == null)) {
-
-				changeX = 0;
-
-			} else if (actor.drawOffsetRatioX + changeX >= 1 - fish.widthRatio
-					&& (fish.squareGameObjectIsOn.getSquareToRightOf() == null
-							|| fish.squareGameObjectIsOn.getSquareToRightOf().inventory.waterBody == null)) {
-
-				changeX = 0;
-
-			}
-
-			// If we're moving out of water, cancel Y
-			if (actor.drawOffsetRatioY + changeY < 0 && (fish.squareGameObjectIsOn.getSquareAbove() == null
-					|| fish.squareGameObjectIsOn.getSquareAbove().inventory.waterBody == null)) {
-
-				changeY = 0;
-
-			} else if (actor.drawOffsetRatioY + changeY >= 1 - fish.heightRatio
-					&& (fish.squareGameObjectIsOn.getSquareBelow() == null
-							|| fish.squareGameObjectIsOn.getSquareBelow().inventory.waterBody == null)) {
-
-				changeY = 0;
-
-			}
-
-			// Move over to other square if crossed over
-			Square newSquare = fish.squareGameObjectIsOn;
-			if (actor.drawOffsetRatioX + changeX < -halfWidthRatio) {
-
-				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareToLeftOf();
-				if (potentialNewSquare.inventory.contains(Fish.class)) {
-					changeX = 0;
-				} else {
-					newSquare = potentialNewSquare;
-					changeX += 1;
-				}
-			} else if (actor.drawOffsetRatioX + changeX >= 1 - halfWidthRatio) {
-				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareToRightOf();
-				if (potentialNewSquare.inventory.contains(Fish.class)) {
-					changeX = 0;
-				} else {
-					newSquare = potentialNewSquare;
-					changeX -= 1;
-				}
-			} else if (actor.drawOffsetRatioY + changeY < -halfHeightRatio) {
-				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareAbove();
-				if (potentialNewSquare.inventory.contains(Fish.class)) {
-					changeY = 0;
-				} else {
-					newSquare = potentialNewSquare;
-					changeY += 1;
-				}
-			} else if (actor.drawOffsetRatioY + changeY >= 1 - halfHeightRatio) {
-				Square potentialNewSquare = fish.squareGameObjectIsOn.getSquareBelow();
-				if (potentialNewSquare.inventory.contains(Fish.class)) {
-					changeY = 0;
-				} else {
-					newSquare = potentialNewSquare;
-					changeY -= 1;
-				}
-			}
-
-			new ActionFishSwim(fish, newSquare, actor.drawOffsetRatioX + changeX, actor.drawOffsetRatioY + changeY)
-					.perform();
+			new ActionFishSwim(fish).perform();
 		}
 	}
 

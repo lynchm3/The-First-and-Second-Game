@@ -15,7 +15,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionFishingContinue extends Action {
+public class ActionFishingInProgress extends Action {
 
 	public static final String ACTION_NAME = "Fishing";
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
@@ -25,7 +25,7 @@ public class ActionFishingContinue extends Action {
 	GameObject target;
 
 	// Default for hostiles
-	public ActionFishingContinue(Actor attacker, GameObject target) {
+	public ActionFishingInProgress(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_fishing.png");
 		this.performer = attacker;
 		this.target = target;
@@ -67,22 +67,23 @@ public class ActionFishingContinue extends Action {
 				target.primaryAnimation = new AnimationShake();
 			}
 			double random = Math.random();
-			if (random > 0.9d) {
-				Player.playerTargetAction = new ActionFishingFailed(performer, target);
-				Player.playerTargetSquare = performer.squareGameObjectIsOn;
-				Player.playerFirstMove = true;
-
-			} else if (random > 0.8d) {
-				Player.playerTargetAction = new ActionFishingCompleted(performer, target);
-				Player.playerTargetSquare = performer.squareGameObjectIsOn;
-				Player.playerFirstMove = true;
-
-			} else {
-				Player.playerTargetAction = new ActionFishingContinue(performer, target);
-				Player.playerTargetSquare = performer.squareGameObjectIsOn;
-				Player.playerFirstMove = true;
-				//
-			}
+			// if (random > 0.9d) {
+			// Player.playerTargetAction = new ActionFishingFailed(performer,
+			// target);
+			// Player.playerTargetSquare = performer.squareGameObjectIsOn;
+			// Player.playerFirstMove = true;
+			//
+			// } else if (random > 0.8d) {
+			// Player.playerTargetAction = new ActionFishingCompleted(performer,
+			// target);
+			// Player.playerTargetSquare = performer.squareGameObjectIsOn;
+			// Player.playerFirstMove = true;
+			//
+			// } else {
+			Player.playerTargetAction = new ActionFishingInProgress(performer, target);
+			Player.playerTargetSquare = performer.squareGameObjectIsOn;
+			Player.playerFirstMove = true;
+			// }
 		} else {
 			if (Math.random() < 2) {
 				if (Game.level.shouldLog(target, performer))

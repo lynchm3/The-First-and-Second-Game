@@ -1,5 +1,7 @@
 package com.marklynch.objects.actions;
 
+import java.util.Random;
+
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationMove;
@@ -12,17 +14,11 @@ public class ActionFishSwim extends Action {
 
 	public static final String ACTION_NAME = "Swim";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	Fish performer;
-	Square target;
-	float targetOffsetX = 0;
-	float targetOffsetY = 0;
+	Actor performer;
 
-	public ActionFishSwim(Fish performer, Square target, float targetOffsetX, float targetOffsetY) {
+	public ActionFishSwim(Actor performer) {
 		super(ACTION_NAME, "action_move.png");
 		this.performer = performer;
-		this.target = target;
-		this.targetOffsetX = targetOffsetX;
-		this.targetOffsetY = targetOffsetY;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -42,79 +38,122 @@ public class ActionFishSwim extends Action {
 		if (!checkRange())
 			return;
 
-		moveTo(performer, target);
+		float maxChange = 0.05f;
 
-		// float startX = performer.squareGameObjectIsOn.xInGridPixels
-		// + Game.SQUARE_WIDTH * this.performer.drawOffsetRatioX;
-		// float startY = performer.squareGameObjectIsOn.yInGridPixels
-		// + Game.SQUARE_HEIGHT * this.performer.drawOffsetRatioY;
-		//
-		// float endX = target.xInGridPixels + Game.SQUARE_WIDTH *
-		// targetOffsetX;
-		// float endY = target.yInGridPixels + Game.SQUARE_HEIGHT *
-		// targetOffsetY;
-		//
-		// float distanceToCoverX = endX - startX;
-		// float distanceToCoverY = endY - startY;
-		// float totalDistanceToCover = Math.abs(distanceToCoverX) +
-		// Math.abs(distanceToCoverY);
-		//
-		// float speed = 1f;
-		//
-		// float speedX = (distanceToCoverX / totalDistanceToCover) * speed;
-		// float speedY = (distanceToCoverY / totalDistanceToCover) * speed;
-		//
-		// // NOW... to do this turn... FUCK... need the delta...
-		//
-		// float delta = 10f;
-		//
-		// float distanceX = speedX * delta;
-		// float distanceY = speedY * delta;
-		//
-		// performer.drawOffsetRatioX += distanceX / Game.SQUARE_WIDTH;
-		// performer.drawOffsetRatioY += distanceY / Game.SQUARE_HEIGHT;
-		//
-		// float newX = performer.squareGameObjectIsOn.xInGridPixels +
-		// Game.SQUARE_WIDTH * this.performer.drawOffsetRatioX;
-		// float newY = performer.squareGameObjectIsOn.yInGridPixels
-		// + Game.SQUARE_HEIGHT * this.performer.drawOffsetRatioY;
-		//
-		// Square newSquare = Game.level.squares[(int) Math.floor(newX /
-		// Game.SQUARE_WIDTH)][(int) Math
-		// .floor(newY / Game.SQUARE_HEIGHT)];
-		//
-		// if (performer.squareGameObjectIsOn != newSquare) {
-		// Square oldSquare = performer.squareGameObjectIsOn;
-		// newSquare.inventory.add(performer);
-		// performer.drawOffsetRatioX += (oldSquare.xInGrid -
-		// newSquare.xInGrid);
-		// performer.drawOffsetRatioY += (oldSquare.yInGrid -
-		// newSquare.yInGrid);
-		// }
-		//
-		// // IF WHOLLY IN NEW SQR, MOVE IT TO NEW SQUARE, offsets +=1 (or
-		// mostly?)
+		if (performer.swimmingChangeX > maxChange || performer.swimmingChangeX < -maxChange) {
+			performer.swimmingChangeX = 0;
+		}
+		if (new Random().nextFloat() < 0.2f) {
+			performer.swimmingChangeX = new Random().nextFloat() * maxChange;
+			if (new Random().nextBoolean()) {
+				performer.swimmingChangeX = -performer.swimmingChangeX;
+			}
+		}
+
+		if (performer.swimmingChangeY > maxChange || performer.swimmingChangeY < -maxChange) {
+			performer.swimmingChangeY = 0;
+		}
+
+		if (new Random().nextFloat() < 0.2f) {
+			performer.swimmingChangeY = new Random().nextFloat() * maxChange;
+			if (new Random().nextBoolean()) {
+				performer.swimmingChangeY = -performer.swimmingChangeY;
+			}
+		}
+
+		float halfWidthRatio = (performer.width / Game.SQUARE_WIDTH) / 2f;
+		float halfHeightRatio = (performer.height / Game.SQUARE_HEIGHT) / 2f;
+
+		// If we're moving out of water, cancel X
+		if (performer.drawOffsetRatioX + performer.swimmingChangeX < 0
+				&& (performer.squareGameObjectIsOn.getSquareToLeftOf() == null
+						|| performer.squareGameObjectIsOn.getSquareToLeftOf().inventory.waterBody == null)) {
+
+			performer.swimmingChangeX = 0;
+
+		} else if (performer.drawOffsetRatioX + performer.swimmingChangeX >= 1 - performer.widthRatio
+				&& (performer.squareGameObjectIsOn.getSquareToRightOf() == null
+						|| performer.squareGameObjectIsOn.getSquareToRightOf().inventory.waterBody == null)) {
+
+			performer.swimmingChangeX = 0;
+
+		}
+
+		// If we're moving out of water, cancel Y
+		if (performer.drawOffsetRatioY + performer.swimmingChangeY < 0
+				&& (performer.squareGameObjectIsOn.getSquareAbove() == null
+						|| performer.squareGameObjectIsOn.getSquareAbove().inventory.waterBody == null)) {
+
+			performer.swimmingChangeY = 0;
+
+		} else if (performer.drawOffsetRatioY + performer.swimmingChangeY >= 1 - performer.heightRatio
+				&& (performer.squareGameObjectIsOn.getSquareBelow() == null
+						|| performer.squareGameObjectIsOn.getSquareBelow().inventory.waterBody == null)) {
+
+			performer.swimmingChangeY = 0;
+
+		}
+
+		// Move over to other square if crossed over
+		Square newSquare = performer.squareGameObjectIsOn;
+		if (performer.drawOffsetRatioX + performer.swimmingChangeX < -halfWidthRatio) {
+
+			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareToLeftOf();
+			if (potentialNewSquare.inventory.contains(Fish.class)) {
+				performer.swimmingChangeX = 0;
+			} else {
+				newSquare = potentialNewSquare;
+				performer.swimmingChangeX += 1;
+			}
+		} else if (performer.drawOffsetRatioX + performer.swimmingChangeX >= 1 - halfWidthRatio) {
+			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareToRightOf();
+			if (potentialNewSquare.inventory.contains(Fish.class)) {
+				performer.swimmingChangeX = 0;
+			} else {
+				newSquare = potentialNewSquare;
+				performer.swimmingChangeX -= 1;
+			}
+		} else if (performer.drawOffsetRatioY + performer.swimmingChangeY < -halfHeightRatio) {
+			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareAbove();
+			if (potentialNewSquare.inventory.contains(Fish.class)) {
+				performer.swimmingChangeY = 0;
+			} else {
+				newSquare = potentialNewSquare;
+				performer.swimmingChangeY += 1;
+			}
+		} else if (performer.drawOffsetRatioY + performer.swimmingChangeY >= 1 - halfHeightRatio) {
+			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareBelow();
+			if (potentialNewSquare.inventory.contains(Fish.class)) {
+				performer.swimmingChangeY = 0;
+			} else {
+				newSquare = potentialNewSquare;
+				performer.swimmingChangeY -= 1;
+			}
+		}
+
+		moveTo(performer, newSquare, performer.drawOffsetRatioX + performer.swimmingChangeX,
+				performer.drawOffsetRatioY + performer.swimmingChangeY);
 
 	}
 
-	public void moveTo(Actor actor, Square squareToMoveTo) {
+	public void moveTo(Actor actor, Square target, float targetOffsetX, float targetOffsetY) {
 
 		Square oldSquare = actor.squareGameObjectIsOn;
-		GameObject gameObjectInTheWay = squareToMoveTo.inventory.gameObjectThatCantShareSquare;
+		GameObject gameObjectInTheWay = target.inventory.gameObjectThatCantShareSquare;
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
 			performer.primaryAnimation = new AnimationMove(
 					actor.squareGameObjectIsOn.xInGridPixels + actor.drawOffsetRatioX * Game.SQUARE_WIDTH,
 					actor.squareGameObjectIsOn.yInGridPixels + actor.drawOffsetRatioY * Game.SQUARE_HEIGHT,
-					target.xInGridPixels + this.targetOffsetX * Game.SQUARE_WIDTH,
-					target.yInGridPixels + this.targetOffsetY * Game.SQUARE_HEIGHT);
+					target.xInGridPixels + targetOffsetX * Game.SQUARE_WIDTH,
+					target.yInGridPixels + targetOffsetY * Game.SQUARE_HEIGHT);
 
 		if (actor.squareGameObjectIsOn != target)
 			target.inventory.add(actor);
 
 		// move(actor, squareToMoveTo);
-		actor.drawOffsetRatioX = this.targetOffsetX;
-		actor.drawOffsetRatioY = this.targetOffsetY;
+		actor.drawOffsetRatioX = targetOffsetX;
+		actor.drawOffsetRatioY = targetOffsetY;
 
 		performer.actionsPerformedThisTurn.add(this);
 
@@ -134,22 +173,22 @@ public class ActionFishSwim extends Action {
 
 	@Override
 	public boolean check() {
-		if (target == null)
-			return false;
+		// if (target == null)
+		// return false;
 
 		if (performer.beingFished == true)
 			return false;
 
-		if (target.inventory.waterBody == null) {
-			return false;
-		}
+		// if (target.inventory.waterBody == null) {
+		// return false;
+		// }
 		return true;
 	}
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target) > 1)
-			return false;
+		// if (performer.straightLineDistanceTo(target) > 1)
+		// return false;
 		return true;
 	}
 

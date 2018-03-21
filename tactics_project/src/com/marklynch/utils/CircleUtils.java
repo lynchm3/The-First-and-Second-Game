@@ -1,7 +1,6 @@
 package com.marklynch.utils;
 
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
 
 public class CircleUtils {
 

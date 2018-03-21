@@ -3,11 +3,13 @@ package com.marklynch.objects.tools;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.GameCursor;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
+import com.marklynch.utils.TextureUtils;
 
 public class FishingRod extends Tool {
 
@@ -37,30 +39,39 @@ public class FishingRod extends Tool {
 
 	public void drawLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels) {
 
-		float x1 = lineAnchorX + weaponPositionXInPixels;
-		float y1 = lineAnchorY + weaponPositionYInPixels;
+		float lineX1 = lineAnchorX + weaponPositionXInPixels;
+		float lineY1 = lineAnchorY + weaponPositionYInPixels;
 
-		if (fisher.fishingTarget.squareGameObjectIsOn != null && fisher.fishingTarget.primaryAnimation != null) {
+		boolean fishingTargetInTheWater = fisher.fishingTarget.squareGameObjectIsOn != null;
 
-			float x2 = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth);
-			float y2 = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight);
-			if (primaryAnimation != null) {
-				x2 += fisher.fishingTarget.primaryAnimation.offsetX;
-				y2 += fisher.fishingTarget.primaryAnimation.offsetY;
-			}
+		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
 
-			// if (x2 > x1)
-			LineUtils.drawLine(Color.BLACK, x1, y1, x2, y2, 2);
+			float lineX2 = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
+					+ fisher.fishingTarget.primaryAnimation.offsetX;
+			float lineY2 = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
+					+ fisher.fishingTarget.primaryAnimation.offsetY;
+
+			LineUtils.drawLine(Color.BLACK, lineX1, lineY1, lineX2, lineY2, 2);
+
+			float circleX1 = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
+					+ fisher.fishingTarget.primaryAnimation.offsetX * 10 - 128;
+			float circleY1 = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
+					+ fisher.fishingTarget.primaryAnimation.offsetY * 10 - 128;
+
+			float circleX2 = circleX1 + 256;
+			float circleY2 = circleY1 + 256;
+
+			TextureUtils.drawTexture(GameCursor.circle, 0.5f, circleX1, circleY1, circleX2, circleY2);
 
 		} else if (fisher.fishingAnimation != null) {
 			float x2 = fisher.fishingAnimation.x + fisher.fishingTarget.halfWidth;
 			float y2 = fisher.fishingAnimation.y + fisher.fishingTarget.halfHeight;
 
-			// if (x2 > x1)
-			LineUtils.drawLine(Color.BLACK, x1, y1, x2, y2, 2);
-
+			LineUtils.drawLine(Color.BLACK, lineX1, lineY1, x2, y2, 2);
 		}
 
 	}
