@@ -69,7 +69,7 @@ public class FishingRod extends Tool {
 	public float mouseCircleY2;
 
 	// Directions of stuff
-	public final static float maxDirectionChangeInRadiansPerSecond = 0.0872665f;
+	public final static float maxDirectionChangeInRadiansPerSecond = 2f;
 	public final static float maxDirectionChangeInRadiansPerMillisecond = maxDirectionChangeInRadiansPerSecond / 1000f;
 	// degrees
 	public float fishDirectionRadians;
@@ -116,30 +116,60 @@ public class FishingRod extends Tool {
 			fishDirectionRadians = Utils.radianAngleFromLine(new Point(0, 0),
 					new Point(fisher.fishingTarget.swimmingChangeX, fisher.fishingTarget.swimmingChangeY));
 			oppositOfFishDirectionRadians = fishDirectionRadians - 3.14159f;
-			if (oppositOfFishDirectionRadians < 6.28319) {
+			if (oppositOfFishDirectionRadians < 0) {
 				oppositOfFishDirectionRadians += 6.28319;
+			} else if (oppositOfFishDirectionRadians > 6.28319) {
+				oppositOfFishDirectionRadians -= 6.28319;
 			}
 
+			// targetDirectionRadians = fishDirectionRadians;
+			// oppositOfTargetDirectionRadians = oppositOfFishDirectionRadians;
 			// targetDirection
 			if (targetDirectionRadians == -1) {
 				targetDirectionRadians = fishDirectionRadians;
-				oppositOfTargetDirectionRadians = oppositOfFishDirectionRadians;
+				// oppositOfTargetDirectionRadians =
+				// oppositOfFishDirectionRadians;
 			} else {
 				float maxTargetChangeThisUpdate = maxDirectionChangeInRadiansPerMillisecond * delta;
 				float differenceBetweenTargetAndFishAngle = Math.abs(targetDirectionRadians - fishDirectionRadians);
-				System.out.println(maxTargetChangeThisUpdate);
 				if (differenceBetweenTargetAndFishAngle <= maxTargetChangeThisUpdate) {
 					targetDirectionRadians = fishDirectionRadians;
-					oppositOfTargetDirectionRadians = oppositOfFishDirectionRadians;
+					// oppositOfTargetDirectionRadians =
+					// oppositOfFishDirectionRadians;
 				} else {
-					targetDirectionRadians += maxTargetChangeThisUpdate;
-					if (targetDirectionRadians < 6.28319) {
+
+					System.out.println("maxTargetChangeThisUpdate = " + maxTargetChangeThisUpdate);
+
+					if (fishDirectionRadians > targetDirectionRadians) {
+						if (differenceBetweenTargetAndFishAngle < 3.14) {
+
+							targetDirectionRadians += maxTargetChangeThisUpdate;
+						} else {
+							targetDirectionRadians -= maxTargetChangeThisUpdate;
+
+						}
+					} else {
+						if (differenceBetweenTargetAndFishAngle < 3.14) {
+
+							targetDirectionRadians -= maxTargetChangeThisUpdate;
+						} else {
+							targetDirectionRadians += maxTargetChangeThisUpdate;
+
+						}
+					}
+
+					if (targetDirectionRadians < 0) {
 						targetDirectionRadians += 6.28319;
+					} else if (targetDirectionRadians > 6.28319f) {
+						targetDirectionRadians -= 6.28319;
 					}
-					oppositOfTargetDirectionRadians += maxTargetChangeThisUpdate;
-					if (oppositOfTargetDirectionRadians < 6.28319) {
-						oppositOfTargetDirectionRadians += 6.28319;
-					}
+					// oppositOfTargetDirectionRadians +=
+					// maxTargetChangeThisUpdate;
+					// if (oppositOfTargetDirectionRadians < 0) {
+					// oppositOfTargetDirectionRadians += 6.28319;
+					// } else if (oppositOfTargetDirectionRadians > 6.28319) {
+					// oppositOfTargetDirectionRadians -= 6.28319;
+					// }
 				}
 			}
 		}
@@ -162,9 +192,28 @@ public class FishingRod extends Tool {
 			TextureUtils.drawTexture(GameCursor.circle, 0.5f, mouseCircleX1, mouseCircleY1, mouseCircleX2,
 					mouseCircleY2);
 
+			System.out.println("fishDirectionRadians = " + fishDirectionRadians);
+			System.out.println("targetDirectionRadians = " + targetDirectionRadians);
+
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+
+			// Fish direction
+			Game.flush();
+			view.translate(new Vector2f(fishCenterX, fishCenterY));
+			view.rotate(fishDirectionRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			Game.activeBatch.updateUniforms();
+
+			TextureUtils.drawTexture(GameCursor.circleEdgeRed, 0.5f, circleX1, circleY1, circleX2, circleY2);
+
+			Game.flush();
+			view.translate(new Vector2f(fishCenterX, fishCenterY));
+			view.rotate(-fishDirectionRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			Game.activeBatch.updateUniforms();
+
 			// Target direction
 			Game.flush();
-			Matrix4f view = Game.activeBatch.getViewMatrix();
 			view.translate(new Vector2f(fishCenterX, fishCenterY));
 			view.rotate(targetDirectionRadians, new Vector3f(0f, 0f, 1f));
 			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
@@ -179,19 +228,22 @@ public class FishingRod extends Tool {
 			Game.activeBatch.updateUniforms();
 
 			// opposite of Target direction
-			Game.flush();
-			view.translate(new Vector2f(fishCenterX, fishCenterY));
-			view.rotate(oppositOfTargetDirectionRadians, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
-			Game.activeBatch.updateUniforms();
-
-			TextureUtils.drawTexture(GameCursor.circleEdge, 0.5f, circleX1, circleY1, circleX2, circleY2);
-
-			Game.flush();
-			view.translate(new Vector2f(fishCenterX, fishCenterY));
-			view.rotate(-oppositOfTargetDirectionRadians, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
-			Game.activeBatch.updateUniforms();
+			// Game.flush();
+			// view.translate(new Vector2f(fishCenterX, fishCenterY));
+			// view.rotate(oppositOfTargetDirectionRadians, new Vector3f(0f, 0f,
+			// 1f));
+			// view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			// Game.activeBatch.updateUniforms();
+			//
+			// TextureUtils.drawTexture(GameCursor.circleEdge, 0.5f, circleX1,
+			// circleY1, circleX2, circleY2);
+			//
+			// Game.flush();
+			// view.translate(new Vector2f(fishCenterX, fishCenterY));
+			// view.rotate(-oppositOfTargetDirectionRadians, new Vector3f(0f,
+			// 0f, 1f));
+			// view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			// Game.activeBatch.updateUniforms();
 
 		} else if (fisher.fishingAnimation != null) {
 			float x2 = fisher.fishingAnimation.x + fisher.fishingTarget.halfWidth;

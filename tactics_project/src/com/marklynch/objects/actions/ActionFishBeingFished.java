@@ -40,14 +40,13 @@ public class ActionFishBeingFished extends Action {
 			return;
 
 		float maxChange = 0.2f;
-		boolean dontOverlap = false;
 
 		FishingRod fishingRod = (FishingRod) performer.beingFishedBy.equipped;
 
 		if (performer.swimmingChangeX > maxChange || performer.swimmingChangeX < -maxChange) {
-			performer.swimmingChangeX = 0;
+			performer.swimmingChangeX = maxChange;
 		}
-		if (new Random().nextFloat() < 0.2f) {
+		if (new Random().nextFloat() < 0.01f) {
 			performer.swimmingChangeX = new Random().nextFloat() * maxChange;
 			if (new Random().nextBoolean()) {
 				performer.swimmingChangeX = -performer.swimmingChangeX;
@@ -55,10 +54,10 @@ public class ActionFishBeingFished extends Action {
 		}
 
 		if (performer.swimmingChangeY > maxChange || performer.swimmingChangeY < -maxChange) {
-			performer.swimmingChangeY = 0;
+			performer.swimmingChangeY = maxChange;
 		}
 
-		if (new Random().nextFloat() < 0.2f) {
+		if (new Random().nextFloat() < 0.01f) {
 			performer.swimmingChangeY = new Random().nextFloat() * maxChange;
 			if (new Random().nextBoolean()) {
 				performer.swimmingChangeY = -performer.swimmingChangeY;
@@ -73,13 +72,13 @@ public class ActionFishBeingFished extends Action {
 				&& (performer.squareGameObjectIsOn.getSquareToLeftOf() == null
 						|| performer.squareGameObjectIsOn.getSquareToLeftOf().inventory.waterBody == null)) {
 
-			performer.swimmingChangeX = 0;
+			performer.swimmingChangeX = -performer.swimmingChangeX;
 
 		} else if (performer.drawOffsetRatioX + performer.swimmingChangeX >= 1 - performer.widthRatio
 				&& (performer.squareGameObjectIsOn.getSquareToRightOf() == null
 						|| performer.squareGameObjectIsOn.getSquareToRightOf().inventory.waterBody == null)) {
 
-			performer.swimmingChangeX = 0;
+			performer.swimmingChangeX = -performer.swimmingChangeX;
 
 		}
 
@@ -88,55 +87,46 @@ public class ActionFishBeingFished extends Action {
 				&& (performer.squareGameObjectIsOn.getSquareAbove() == null
 						|| performer.squareGameObjectIsOn.getSquareAbove().inventory.waterBody == null)) {
 
-			performer.swimmingChangeY = 0;
+			performer.swimmingChangeY = -performer.swimmingChangeY;
 
 		} else if (performer.drawOffsetRatioY + performer.swimmingChangeY >= 1 - performer.heightRatio
 				&& (performer.squareGameObjectIsOn.getSquareBelow() == null
 						|| performer.squareGameObjectIsOn.getSquareBelow().inventory.waterBody == null)) {
 
-			performer.swimmingChangeY = 0;
+			performer.swimmingChangeY = -performer.swimmingChangeY;
 
 		}
 
 		// Move over to other square if crossed over
 		Square newSquare = performer.squareGameObjectIsOn;
+		float targetOffsetX = performer.swimmingChangeX;
+		float targetOffsetY = performer.swimmingChangeY;
+
 		if (performer.drawOffsetRatioX + performer.swimmingChangeX < -halfWidthRatio) {
 
 			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareToLeftOf();
-			if (dontOverlap && potentialNewSquare.inventory.contains(Fish.class)) {
-				performer.swimmingChangeX = 0;
-			} else {
-				newSquare = potentialNewSquare;
-				performer.swimmingChangeX += 1;
-			}
+
+			newSquare = potentialNewSquare;
+			targetOffsetX += 1;
 		} else if (performer.drawOffsetRatioX + performer.swimmingChangeX >= 1 - halfWidthRatio) {
 			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareToRightOf();
-			if (dontOverlap && potentialNewSquare.inventory.contains(Fish.class)) {
-				performer.swimmingChangeX = 0;
-			} else {
-				newSquare = potentialNewSquare;
-				performer.swimmingChangeX -= 1;
-			}
+
+			newSquare = potentialNewSquare;
+			targetOffsetX -= 1;
 		} else if (performer.drawOffsetRatioY + performer.swimmingChangeY < -halfHeightRatio) {
 			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareAbove();
-			if (dontOverlap && potentialNewSquare.inventory.contains(Fish.class)) {
-				performer.swimmingChangeY = 0;
-			} else {
-				newSquare = potentialNewSquare;
-				performer.swimmingChangeY += 1;
-			}
+
+			newSquare = potentialNewSquare;
+			targetOffsetY += 1;
 		} else if (performer.drawOffsetRatioY + performer.swimmingChangeY >= 1 - halfHeightRatio) {
 			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareBelow();
-			if (dontOverlap && potentialNewSquare.inventory.contains(Fish.class)) {
-				performer.swimmingChangeY = 0;
-			} else {
-				newSquare = potentialNewSquare;
-				performer.swimmingChangeY -= 1;
-			}
+
+			newSquare = potentialNewSquare;
+			targetOffsetY -= 1;
 		}
 
-		moveTo(performer, newSquare, performer.drawOffsetRatioX + performer.swimmingChangeX,
-				performer.drawOffsetRatioY + performer.swimmingChangeY);
+		moveTo(performer, newSquare, performer.drawOffsetRatioX + targetOffsetX,
+				performer.drawOffsetRatioY + targetOffsetY);
 
 	}
 

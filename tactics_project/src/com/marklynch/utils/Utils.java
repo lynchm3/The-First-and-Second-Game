@@ -31,8 +31,10 @@ public class Utils {
 	public static float radianAngleFromLine(Point pointA, Point pointB) {
 		float angle = (float) (Math.atan2(pointA.y - pointB.y, pointA.x - pointB.x));
 
-		if (angle < 6.28319) {
-			angle += 6.28319;
+		if (angle < 0) {
+			angle += 6.28319f;
+		} else if (angle > 6.28319f) {
+			angle -= 6.28319f;
 		}
 
 		return angle;
