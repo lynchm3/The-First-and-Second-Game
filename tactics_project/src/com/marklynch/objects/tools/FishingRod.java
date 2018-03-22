@@ -15,6 +15,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 import com.marklynch.utils.Utils;
 import com.marklynch.utils.Utils.Point;
@@ -45,6 +46,8 @@ public class FishingRod extends Tool {
 		return weapon;
 	}
 
+	float progress = 0.5f;
+
 	boolean fishingTargetInTheWater;
 
 	public float fishingLineX1;
@@ -74,8 +77,9 @@ public class FishingRod extends Tool {
 	// degrees
 	public float fishDirectionRadians;
 	public float oppositOfFishDirectionRadians;
+	public float approximatedFishRadians = -1f;
 	public float targetDirectionRadians = -1f;
-	public float oppositOfTargetDirectionRadians = -1f;
+	public float mouseToFishAngleRadians;
 
 	public void updateLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels, float delta) {
 
@@ -125,53 +129,73 @@ public class FishingRod extends Tool {
 			// targetDirectionRadians = fishDirectionRadians;
 			// oppositOfTargetDirectionRadians = oppositOfFishDirectionRadians;
 			// targetDirection
-			if (targetDirectionRadians == -1) {
-				targetDirectionRadians = fishDirectionRadians;
+			if (approximatedFishRadians == -1) {
+				approximatedFishRadians = fishDirectionRadians;
 				// oppositOfTargetDirectionRadians =
 				// oppositOfFishDirectionRadians;
 			} else {
 				float maxTargetChangeThisUpdate = maxDirectionChangeInRadiansPerMillisecond * delta;
-				float differenceBetweenTargetAndFishAngle = Math.abs(targetDirectionRadians - fishDirectionRadians);
+				float differenceBetweenTargetAndFishAngle = Math.abs(approximatedFishRadians - fishDirectionRadians);
 				if (differenceBetweenTargetAndFishAngle <= maxTargetChangeThisUpdate) {
-					targetDirectionRadians = fishDirectionRadians;
+					approximatedFishRadians = fishDirectionRadians;
 					// oppositOfTargetDirectionRadians =
 					// oppositOfFishDirectionRadians;
 				} else {
 
 					System.out.println("maxTargetChangeThisUpdate = " + maxTargetChangeThisUpdate);
 
-					if (fishDirectionRadians > targetDirectionRadians) {
+					if (fishDirectionRadians > approximatedFishRadians) {
 						if (differenceBetweenTargetAndFishAngle < 3.14) {
 
-							targetDirectionRadians += maxTargetChangeThisUpdate;
+							approximatedFishRadians += maxTargetChangeThisUpdate;
 						} else {
-							targetDirectionRadians -= maxTargetChangeThisUpdate;
+							approximatedFishRadians -= maxTargetChangeThisUpdate;
 
 						}
 					} else {
 						if (differenceBetweenTargetAndFishAngle < 3.14) {
 
-							targetDirectionRadians -= maxTargetChangeThisUpdate;
+							approximatedFishRadians -= maxTargetChangeThisUpdate;
 						} else {
-							targetDirectionRadians += maxTargetChangeThisUpdate;
+							approximatedFishRadians += maxTargetChangeThisUpdate;
 
 						}
 					}
 
+					if (approximatedFishRadians < 0) {
+						approximatedFishRadians += 6.28319;
+					} else if (approximatedFishRadians > 6.28319f) {
+						approximatedFishRadians -= 6.28319;
+					}
+					targetDirectionRadians = approximatedFishRadians - 3.14f;
 					if (targetDirectionRadians < 0) {
 						targetDirectionRadians += 6.28319;
-					} else if (targetDirectionRadians > 6.28319f) {
+					} else if (targetDirectionRadians > 6.28319) {
 						targetDirectionRadians -= 6.28319;
 					}
-					// oppositOfTargetDirectionRadians +=
-					// maxTargetChangeThisUpdate;
-					// if (oppositOfTargetDirectionRadians < 0) {
-					// oppositOfTargetDirectionRadians += 6.28319;
-					// } else if (oppositOfTargetDirectionRadians > 6.28319) {
-					// oppositOfTargetDirectionRadians -= 6.28319;
-					// }
 				}
 			}
+
+			// Mouse angle
+			mouseToFishAngleRadians = Utils.radianAngleFromLine(new Point(fishCenterX, fishCenterY),
+					new Point(UserInputLevel.mouseXTransformed, UserInputLevel.mouseYTransformed));
+
+			boolean withinLimit = false;
+
+			if (Math.abs(mouseToFishAngleRadians - targetDirectionRadians) < 1f) {
+				withinLimit = true;
+			} else if ((Math.abs(mouseToFishAngleRadians + 6.28319) - targetDirectionRadians) < 1f) {
+				withinLimit = true;
+			} else if (Math.abs(mouseToFishAngleRadians - (targetDirectionRadians + 6.28319)) < 1f) {
+				withinLimit = true;
+			}
+
+			if (withinLimit) {
+				progress++;
+			} else {
+				progress--;
+			}
+
 		}
 
 	}
@@ -193,7 +217,7 @@ public class FishingRod extends Tool {
 					mouseCircleY2);
 
 			System.out.println("fishDirectionRadians = " + fishDirectionRadians);
-			System.out.println("targetDirectionRadians = " + targetDirectionRadians);
+			System.out.println("targetDirectionRadians = " + approximatedFishRadians);
 
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 
@@ -227,6 +251,23 @@ public class FishingRod extends Tool {
 			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
 			Game.activeBatch.updateUniforms();
 
+			// Mouse direction
+			Game.flush();
+			view.translate(new Vector2f(fishCenterX, fishCenterY));
+			view.rotate(mouseToFishAngleRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			Game.activeBatch.updateUniforms();
+
+			TextureUtils.drawTexture(GameCursor.circleEdgeGreen, 0.5f, circleX1, circleY1, circleX2, circleY2);
+
+			Game.flush();
+			view.translate(new Vector2f(fishCenterX, fishCenterY));
+			view.rotate(-mouseToFishAngleRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			Game.activeBatch.updateUniforms();
+
+			TextUtils.printTextWithImages(fishCenterX, fishCenterY, Integer.MAX_VALUE, false, null, progress);
+
 			// opposite of Target direction
 			// Game.flush();
 			// view.translate(new Vector2f(fishCenterX, fishCenterY));
@@ -255,8 +296,9 @@ public class FishingRod extends Tool {
 	}
 
 	public void reset() {
+		approximatedFishRadians = -1f;
 		targetDirectionRadians = -1f;
-		oppositOfTargetDirectionRadians = -1f;
+		progress = 0.5f;
 
 	}
 

@@ -46,7 +46,7 @@ public class ActionFishBeingFished extends Action {
 		if (performer.swimmingChangeX > maxChange || performer.swimmingChangeX < -maxChange) {
 			performer.swimmingChangeX = maxChange;
 		}
-		if (new Random().nextFloat() < 0.01f) {
+		if (new Random().nextFloat() < 0.05f) {
 			performer.swimmingChangeX = new Random().nextFloat() * maxChange;
 			if (new Random().nextBoolean()) {
 				performer.swimmingChangeX = -performer.swimmingChangeX;
@@ -57,7 +57,7 @@ public class ActionFishBeingFished extends Action {
 			performer.swimmingChangeY = maxChange;
 		}
 
-		if (new Random().nextFloat() < 0.01f) {
+		if (new Random().nextFloat() < 0.05f) {
 			performer.swimmingChangeY = new Random().nextFloat() * maxChange;
 			if (new Random().nextBoolean()) {
 				performer.swimmingChangeY = -performer.swimmingChangeY;
