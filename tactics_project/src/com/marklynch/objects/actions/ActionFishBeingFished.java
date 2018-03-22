@@ -43,9 +43,37 @@ public class ActionFishBeingFished extends Action {
 
 		FishingRod fishingRod = (FishingRod) performer.beingFishedBy.equipped;
 
-		if (performer.swimmingChangeX > maxChange || performer.swimmingChangeX < -maxChange) {
-			performer.swimmingChangeX = maxChange;
+		float distanceToCoverX;
+		float distanceToCoverY;
+		float speedX;
+		float speedY;
+		float speed = 0.1f;
+
+		distanceToCoverX = performer.beingFishedBy.squareGameObjectIsOn.xInGridPixels
+				- performer.squareGameObjectIsOn.xInGridPixels;
+		distanceToCoverY = performer.beingFishedBy.squareGameObjectIsOn.yInGridPixels
+				- performer.squareGameObjectIsOn.yInGridPixels;
+		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
+
+		speedX = (distanceToCoverX / totalDistanceToCover) * speed;
+		speedY = (distanceToCoverY / totalDistanceToCover) * speed;
+
+		if (fishingRod.progressThisTurn > 0) {
+		} else {
+			speedX = -speedX;
+			speedY = -speedY;
 		}
+		fishingRod.progressThisTurn = 0;
+
+		performer.swimmingChangeX = speedX;
+		performer.swimmingChangeX = speedY;
+
+		if (performer.swimmingChangeX > maxChange) {
+			performer.swimmingChangeX = maxChange;
+		} else if (performer.swimmingChangeX < -maxChange) {
+			performer.swimmingChangeX = -maxChange;
+		}
+
 		if (new Random().nextFloat() < 0.05f) {
 			performer.swimmingChangeX = new Random().nextFloat() * maxChange;
 			if (new Random().nextBoolean()) {
@@ -55,9 +83,11 @@ public class ActionFishBeingFished extends Action {
 
 		if (performer.swimmingChangeY > maxChange || performer.swimmingChangeY < -maxChange) {
 			performer.swimmingChangeY = maxChange;
+		} else if (performer.swimmingChangeY < -maxChange) {
+			performer.swimmingChangeY = -maxChange;
 		}
 
-		if (new Random().nextFloat() < 0.05f) {
+		if (new Random().nextFloat() < 0.2f) {
 			performer.swimmingChangeY = new Random().nextFloat() * maxChange;
 			if (new Random().nextBoolean()) {
 				performer.swimmingChangeY = -performer.swimmingChangeY;

@@ -46,7 +46,8 @@ public class FishingRod extends Tool {
 		return weapon;
 	}
 
-	float progress = 0.5f;
+	public float progress = 0.5f;
+	public float progressThisTurn = 0f;
 
 	boolean fishingTargetInTheWater;
 
@@ -192,8 +193,10 @@ public class FishingRod extends Tool {
 
 			if (withinLimit) {
 				progress++;
+				progressThisTurn++;
 			} else {
 				progress--;
+				progressThisTurn--;
 			}
 
 		}
@@ -266,7 +269,8 @@ public class FishingRod extends Tool {
 			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
 			Game.activeBatch.updateUniforms();
 
-			TextUtils.printTextWithImages(fishCenterX, fishCenterY, Integer.MAX_VALUE, false, null, progress);
+			TextUtils.printTextWithImages(mouseCircleCenterX + 8, mouseCircleCenterY, Integer.MAX_VALUE, false, null,
+					progress);
 
 			// opposite of Target direction
 			// Game.flush();
