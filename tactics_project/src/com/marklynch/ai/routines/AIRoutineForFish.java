@@ -2,6 +2,7 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.ActionFishBeingFished;
 import com.marklynch.objects.actions.ActionFishSwim;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fish;
@@ -41,7 +42,11 @@ public class AIRoutineForFish extends AIRoutine {
 			return;
 
 		if (state == STATE.SWIMMING) {
-			new ActionFishSwim(fish).perform();
+			if (fish.beingFishedBy != null) {
+				new ActionFishBeingFished(fish).perform();
+			} else {
+				new ActionFishSwim(fish).perform();
+			}
 		}
 	}
 

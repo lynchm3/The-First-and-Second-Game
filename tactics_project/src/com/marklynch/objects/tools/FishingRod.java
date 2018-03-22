@@ -45,75 +45,152 @@ public class FishingRod extends Tool {
 		return weapon;
 	}
 
-	public void drawLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels) {
+	boolean fishingTargetInTheWater;
 
-		float fishingLineX1 = lineAnchorX + weaponPositionXInPixels;
-		float fishingLineY1 = lineAnchorY + weaponPositionYInPixels;
+	public float fishingLineX1;
+	public float fishingLineY1;
+
+	public float fishCenterX;
+	public float fishCenterY;
+
+	public final float radius = 128;
+	public float circleX1;
+	public float circleY1;
+	public float circleX2;
+	public float circleY2;
+
+	// Mouse circle
+	public final float mouseCircleRadius = 32;
+	public float mouseCircleCenterX;
+	public float mouseCircleCenterY;
+	public float mouseCircleX1;
+	public float mouseCircleY1;
+	public float mouseCircleX2;
+	public float mouseCircleY2;
+
+	// Directions of stuff
+	public final static float maxDirectionChangeInRadiansPerSecond = 0.0872665f;
+	public final static float maxDirectionChangeInRadiansPerMillisecond = maxDirectionChangeInRadiansPerSecond / 1000f;
+	// degrees
+	public float fishDirectionRadians;
+	public float oppositOfFishDirectionRadians;
+	public float targetDirectionRadians = -1f;
+	public float oppositOfTargetDirectionRadians = -1f;
+
+	public void updateLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels, float delta) {
+
+		fishingTargetInTheWater = fisher.fishingTarget.squareGameObjectIsOn != null;
+
+		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
+			// Line
+			fishingLineX1 = lineAnchorX + weaponPositionXInPixels;
+			fishingLineY1 = lineAnchorY + weaponPositionYInPixels;
+			fishCenterX = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
+					+ fisher.fishingTarget.primaryAnimation.offsetX;
+			fishCenterY = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
+					+ fisher.fishingTarget.primaryAnimation.offsetY;
+
+			// Fish circle
+			circleX1 = fishCenterX - radius;
+			circleY1 = fishCenterY - radius;
+			circleX2 = fishCenterX + radius;
+			circleY2 = fishCenterY + radius;
+
+			// Mouse circle
+			List<Point> intersections = Utils.getCircleLineIntersectionPoint2(
+					new Point(UserInputLevel.mouseXTransformed, UserInputLevel.mouseYTransformed),
+					new Point(fishCenterX, fishCenterY), new Point(fishCenterX, fishCenterY), radius);
+
+			if (intersections.size() != 0) {
+				mouseCircleCenterX = intersections.get(0).x;
+				mouseCircleCenterY = intersections.get(0).y;
+				mouseCircleX1 = mouseCircleCenterX - mouseCircleRadius;
+				mouseCircleY1 = mouseCircleCenterY - mouseCircleRadius;
+				mouseCircleX2 = mouseCircleCenterX + mouseCircleRadius;
+				mouseCircleY2 = mouseCircleCenterY + mouseCircleRadius;
+			}
+
+			// Direction on circle
+			fishDirectionRadians = Utils.radianAngleFromLine(new Point(0, 0),
+					new Point(fisher.fishingTarget.swimmingChangeX, fisher.fishingTarget.swimmingChangeY));
+			oppositOfFishDirectionRadians = fishDirectionRadians - 3.14159f;
+			if (oppositOfFishDirectionRadians < 6.28319) {
+				oppositOfFishDirectionRadians += 6.28319;
+			}
+
+			// targetDirection
+			if (targetDirectionRadians == -1) {
+				targetDirectionRadians = fishDirectionRadians;
+				oppositOfTargetDirectionRadians = oppositOfFishDirectionRadians;
+			} else {
+				float maxTargetChangeThisUpdate = maxDirectionChangeInRadiansPerMillisecond * delta;
+				float differenceBetweenTargetAndFishAngle = Math.abs(targetDirectionRadians - fishDirectionRadians);
+				System.out.println(maxTargetChangeThisUpdate);
+				if (differenceBetweenTargetAndFishAngle <= maxTargetChangeThisUpdate) {
+					targetDirectionRadians = fishDirectionRadians;
+					oppositOfTargetDirectionRadians = oppositOfFishDirectionRadians;
+				} else {
+					targetDirectionRadians += maxTargetChangeThisUpdate;
+					if (targetDirectionRadians < 6.28319) {
+						targetDirectionRadians += 6.28319;
+					}
+					oppositOfTargetDirectionRadians += maxTargetChangeThisUpdate;
+					if (oppositOfTargetDirectionRadians < 6.28319) {
+						oppositOfTargetDirectionRadians += 6.28319;
+					}
+				}
+			}
+		}
+
+	}
+
+	public void drawLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels) {
 
 		boolean fishingTargetInTheWater = fisher.fishingTarget.squareGameObjectIsOn != null;
 
 		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
 
 			// Fishing line
-			float fishCenterX = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
-					+ fisher.fishingTarget.primaryAnimation.offsetX;
-			float fishCenterY = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
-					+ fisher.fishingTarget.primaryAnimation.offsetY;
-
 			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
 
 			// Fish circle
-			float radius = 128;
-			float circleCenterX = fishCenterX;
-			float circleCenterY = fishCenterY;
-			float circleX1 = circleCenterX - radius;
-			float circleY1 = circleCenterY - radius;
-			float circleX2 = circleCenterX + radius;
-			float circleY2 = circleCenterY + radius;
 			TextureUtils.drawTexture(GameCursor.circle, 0.5f, circleX1, circleY1, circleX2, circleY2);
 
-			// Line mouse - to - fish
-			// LineUtils.drawLine(Color.RED, fishX, fishY,
-			// UserInputLevel.mouseXTransformed,
-			// UserInputLevel.mouseYTransformed, 5);
-
 			// Mouse circle
-			float mouseCircleRadius = 32;
-			List<Point> intersections = Utils.getCircleLineIntersectionPoint2(
-					new Point(UserInputLevel.mouseXTransformed, UserInputLevel.mouseYTransformed),
-					new Point(fishCenterX, fishCenterY), new Point(fishCenterX, fishCenterY), radius);
-			if (intersections.size() != 0) {
-				float mouseCircleCenterX = intersections.get(0).x;
-				float mouseCircleCenterY = intersections.get(0).y;
-				float mouseCircleX1 = mouseCircleCenterX - mouseCircleRadius;
-				float mouseCircleY1 = mouseCircleCenterY - mouseCircleRadius;
-				float mouseCircleX2 = mouseCircleCenterX + mouseCircleRadius;
-				float mouseCircleY2 = mouseCircleCenterY + mouseCircleRadius;
-				TextureUtils.drawTexture(GameCursor.circle, 0.5f, mouseCircleX1, mouseCircleY1, mouseCircleX2,
-						mouseCircleY2);
-			}
+			TextureUtils.drawTexture(GameCursor.circle, 0.5f, mouseCircleX1, mouseCircleY1, mouseCircleX2,
+					mouseCircleY2);
 
-			// Direction on circle
-			float fishDirectionRadians = Utils.radianAngleFromLine(new Point(0, 0),
-					new Point(fisher.fishingTarget.swimmingChangeX, fisher.fishingTarget.swimmingChangeY));
-
-			System.out.println("Angle = " + fishDirectionRadians);
-
+			// Target direction
 			Game.flush();
 			Matrix4f view = Game.activeBatch.getViewMatrix();
-			view.translate(new Vector2f(circleCenterX, circleCenterY));
-			view.rotate(fishDirectionRadians, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-circleCenterX, -circleCenterY));
+			view.translate(new Vector2f(fishCenterX, fishCenterY));
+			view.rotate(targetDirectionRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
 			Game.activeBatch.updateUniforms();
 
 			TextureUtils.drawTexture(GameCursor.circleEdge, 0.5f, circleX1, circleY1, circleX2, circleY2);
 
 			Game.flush();
-			view.translate(new Vector2f(circleCenterX, circleCenterY));
-			view.rotate(-fishDirectionRadians, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-circleCenterX, -circleCenterY));
+			view.translate(new Vector2f(fishCenterX, fishCenterY));
+			view.rotate(-targetDirectionRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			Game.activeBatch.updateUniforms();
+
+			// opposite of Target direction
+			Game.flush();
+			view.translate(new Vector2f(fishCenterX, fishCenterY));
+			view.rotate(oppositOfTargetDirectionRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			Game.activeBatch.updateUniforms();
+
+			TextureUtils.drawTexture(GameCursor.circleEdge, 0.5f, circleX1, circleY1, circleX2, circleY2);
+
+			Game.flush();
+			view.translate(new Vector2f(fishCenterX, fishCenterY));
+			view.rotate(-oppositOfTargetDirectionRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
 			Game.activeBatch.updateUniforms();
 
 		} else if (fisher.fishingAnimation != null) {
@@ -122,6 +199,12 @@ public class FishingRod extends Tool {
 
 			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, x2, y2, 2);
 		}
+
+	}
+
+	public void reset() {
+		targetDirectionRadians = -1f;
+		oppositOfTargetDirectionRadians = -1f;
 
 	}
 

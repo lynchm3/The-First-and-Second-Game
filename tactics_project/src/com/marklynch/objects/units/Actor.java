@@ -828,7 +828,7 @@ public class Actor extends GameObject {
 		if (this != Game.level.player) {
 
 			if (fishingTarget != null) {
-				fishingTarget.beingFished = false;
+				fishingTarget.beingFishedBy = null;
 				fishingTarget.primaryAnimation = null;
 				fishingTarget = null;
 			}
@@ -877,7 +877,26 @@ public class Actor extends GameObject {
 				addEffect(effect.makeCopy(hidingPlace, this));
 			}
 		}
+
+		// START FISHING
+		if (fishingTarget != null && equipped instanceof FishingRod) {
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			if (primaryAnimation != null) {
+				actorPositionXInPixels += primaryAnimation.offsetX;
+				actorPositionYInPixels += primaryAnimation.offsetY;
+			}
+			int weaponPositionXInPixels = (int) (actorPositionXInPixels + handAnchorX - equipped.anchorX);
+			int weaponPositionYInPixels = (int) (actorPositionYInPixels + handAnchorY - equipped.anchorY);
+			FishingRod fishingRod = (FishingRod) equipped;
+			fishingRod.updateLine(this, weaponPositionXInPixels, weaponPositionYInPixels, delta);
+		}
+		// END FISHING
+
 		super.update(delta);
+
 	}
 
 	private void addAttackerIfVisible(GameObject potentialAttacker) {

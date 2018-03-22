@@ -231,12 +231,14 @@ public class ShadowLight {
 			// Game.level.player.squareGameObjectIsOn.draw1();
 			Game.level.player.draw1();
 			Game.level.player.fishingTarget.draw1();
+			Game.level.drawUI();
 			// Game.level.player.draw2();
 			// Game.level.player.fishingTarget.draw2();
 			// Game.level.player.draw3();
 			// Game.level.player.fishingTarget.draw3();
 			Game.flush();
 			Game.activeBatch.end();
+
 			return;
 		}
 

@@ -45,7 +45,7 @@ public class ActionFishingInProgress extends Action {
 			return;
 
 		performer.fishingTarget = target;
-		target.beingFished = true;
+		target.beingFishedBy = performer;
 
 		// FishingRod fishingRod = null;
 		// ArrayList<GameObject> fishingRods =

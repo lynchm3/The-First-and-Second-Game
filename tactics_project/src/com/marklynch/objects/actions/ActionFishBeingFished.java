@@ -7,16 +7,17 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationMove;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fish;
 
-public class ActionFishSwim extends Action {
+public class ActionFishBeingFished extends Action {
 
 	public static final String ACTION_NAME = "Swim";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Fish performer;
 
-	public ActionFishSwim(Fish performer) {
+	public ActionFishBeingFished(Fish performer) {
 		super(ACTION_NAME, "action_move.png");
 		this.performer = performer;
 		if (!check()) {
@@ -38,10 +39,10 @@ public class ActionFishSwim extends Action {
 		if (!checkRange())
 			return;
 
-		// float chanceToSwim = 0.2f;
+		float maxChange = 0.2f;
+		boolean dontOverlap = false;
 
-		float maxChange = 0.05f;
-		boolean dontOverlap = true;
+		FishingRod fishingRod = (FishingRod) performer.beingFishedBy.equipped;
 
 		if (performer.swimmingChangeX > maxChange || performer.swimmingChangeX < -maxChange) {
 			performer.swimmingChangeX = 0;

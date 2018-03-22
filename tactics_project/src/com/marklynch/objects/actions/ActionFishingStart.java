@@ -46,7 +46,7 @@ public class ActionFishingStart extends Action {
 
 		performer.fishingTarget = target;
 		performer.fishingProgress = 0;
-		target.beingFished = true;
+		target.beingFishedBy = performer;
 
 		FishingRod fishingRod = null;
 		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);

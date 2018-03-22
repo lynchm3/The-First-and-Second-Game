@@ -1921,7 +1921,7 @@ public class Level {
 		loggedThisTurn = false;
 		if (levelMode != LevelMode.LEVEL_MODE_FISHING) {
 			if (player.fishingTarget != null) {
-				player.fishingTarget.beingFished = false;
+				player.fishingTarget.beingFishedBy = null;
 				player.fishingTarget.primaryAnimation = null;
 				player.fishingTarget = null;
 			}
