@@ -250,6 +250,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	// public ArrayList<DestructionListener> destructionListeners = new
 	// ArrayList<DestructionListener>();
 
+	// Fishing stuff
+	public float swimmingChangeX = 0;
+	public float swimmingChangeY = 0;
+
 	public GameObject() {
 	}
 

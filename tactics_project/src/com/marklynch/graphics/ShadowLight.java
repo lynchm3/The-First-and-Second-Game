@@ -227,6 +227,8 @@ public class ShadowLight {
 		Game.activeBatch.updateUniforms();
 
 		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
+			// if (Game.level.player.squareGameObjectIsOn != null)
+			// Game.level.player.squareGameObjectIsOn.draw1();
 			Game.level.player.draw1();
 			Game.level.player.fishingTarget.draw1();
 			// Game.level.player.draw2();

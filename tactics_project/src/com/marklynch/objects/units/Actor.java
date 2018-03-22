@@ -185,9 +185,7 @@ public class Actor extends GameObject {
 
 	public int[] requiredEquipmentTemplateIds = new int[0];
 
-	// Fishing stuff
-	public float swimmingChangeX = 0;
-	public float swimmingChangeY = 0;
+	// fishing stuff
 	public int fishingProgress;
 	public GameObject fishingTarget;
 	public AnimationTake fishingAnimation;

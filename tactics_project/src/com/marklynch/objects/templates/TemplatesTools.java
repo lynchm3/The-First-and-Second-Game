@@ -96,7 +96,7 @@ public class TemplatesTools {
 		Templates.FISHING_ROD = new FishingRod(); // 93,0
 		Templates.FISHING_ROD.name = "Fishing Rod";
 		Templates.FISHING_ROD.slashDamage = 4;
-		Templates.FISHING_ROD.maxRange = 2;
+		Templates.FISHING_ROD.maxRange = 10;
 		Templates.FISHING_ROD.lineAnchorX = 93;
 		Templates.FISHING_ROD.lineAnchorY = 0;
 		Templates.FISHING_ROD.imageTexturePath = "fishing_rod.png";

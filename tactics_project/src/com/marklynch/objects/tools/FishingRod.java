@@ -3,6 +3,10 @@ package com.marklynch.objects.tools;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.level.UserInputLevel;
@@ -51,19 +55,19 @@ public class FishingRod extends Tool {
 		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
 
 			// Fishing line
-			float fishX = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
+			float fishCenterX = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
 					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
 					+ fisher.fishingTarget.primaryAnimation.offsetX;
-			float fishY = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
+			float fishCenterY = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
 					+ fisher.fishingTarget.primaryAnimation.offsetY;
 
-			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, fishX, fishY, 2);
+			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
 
 			// Fish circle
 			float radius = 128;
-			float circleCenterX = fishX;
-			float circleCenterY = fishY;
+			float circleCenterX = fishCenterX;
+			float circleCenterY = fishCenterY;
 			float circleX1 = circleCenterX - radius;
 			float circleY1 = circleCenterY - radius;
 			float circleX2 = circleCenterX + radius;
@@ -79,7 +83,7 @@ public class FishingRod extends Tool {
 			float mouseCircleRadius = 32;
 			List<Point> intersections = Utils.getCircleLineIntersectionPoint2(
 					new Point(UserInputLevel.mouseXTransformed, UserInputLevel.mouseYTransformed),
-					new Point(fishX, fishY), new Point(fishX, fishY), radius);
+					new Point(fishCenterX, fishCenterY), new Point(fishCenterX, fishCenterY), radius);
 			if (intersections.size() != 0) {
 				float mouseCircleCenterX = intersections.get(0).x;
 				float mouseCircleCenterY = intersections.get(0).y;
@@ -90,6 +94,27 @@ public class FishingRod extends Tool {
 				TextureUtils.drawTexture(GameCursor.circle, 0.5f, mouseCircleX1, mouseCircleY1, mouseCircleX2,
 						mouseCircleY2);
 			}
+
+			// Direction on circle
+			float fishDirectionRadians = Utils.radianAngleFromLine(new Point(0, 0),
+					new Point(fisher.fishingTarget.swimmingChangeX, fisher.fishingTarget.swimmingChangeY));
+
+			System.out.println("Angle = " + fishDirectionRadians);
+
+			Game.flush();
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+			view.translate(new Vector2f(circleCenterX, circleCenterY));
+			view.rotate(fishDirectionRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-circleCenterX, -circleCenterY));
+			Game.activeBatch.updateUniforms();
+
+			TextureUtils.drawTexture(GameCursor.circleEdge, 0.5f, circleX1, circleY1, circleX2, circleY2);
+
+			Game.flush();
+			view.translate(new Vector2f(circleCenterX, circleCenterY));
+			view.rotate(-fishDirectionRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-circleCenterX, -circleCenterY));
+			Game.activeBatch.updateUniforms();
 
 		} else if (fisher.fishingAnimation != null) {
 			float x2 = fisher.fishingAnimation.x + fisher.fishingTarget.halfWidth;
