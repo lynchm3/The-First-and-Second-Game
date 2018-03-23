@@ -225,19 +225,20 @@ public class FishingRod extends Tool {
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 
 			// Fish direction
-			Game.flush();
-			view.translate(new Vector2f(fishCenterX, fishCenterY));
-			view.rotate(fishDirectionRadians, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
-			Game.activeBatch.updateUniforms();
-
-			TextureUtils.drawTexture(GameCursor.circleEdgeRed, 0.5f, circleX1, circleY1, circleX2, circleY2);
-
-			Game.flush();
-			view.translate(new Vector2f(fishCenterX, fishCenterY));
-			view.rotate(-fishDirectionRadians, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
-			Game.activeBatch.updateUniforms();
+			// Game.flush();
+			// view.translate(new Vector2f(fishCenterX, fishCenterY));
+			// view.rotate(fishDirectionRadians, new Vector3f(0f, 0f, 1f));
+			// view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			// Game.activeBatch.updateUniforms();
+			//
+			// TextureUtils.drawTexture(GameCursor.circleEdgeRed, 0.5f,
+			// circleX1, circleY1, circleX2, circleY2);
+			//
+			// Game.flush();
+			// view.translate(new Vector2f(fishCenterX, fishCenterY));
+			// view.rotate(-fishDirectionRadians, new Vector3f(0f, 0f, 1f));
+			// view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			// Game.activeBatch.updateUniforms();
 
 			// Target direction
 			Game.flush();
@@ -255,19 +256,21 @@ public class FishingRod extends Tool {
 			Game.activeBatch.updateUniforms();
 
 			// Mouse direction
-			Game.flush();
-			view.translate(new Vector2f(fishCenterX, fishCenterY));
-			view.rotate(mouseToFishAngleRadians, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
-			Game.activeBatch.updateUniforms();
-
-			TextureUtils.drawTexture(GameCursor.circleEdgeGreen, 0.5f, circleX1, circleY1, circleX2, circleY2);
-
-			Game.flush();
-			view.translate(new Vector2f(fishCenterX, fishCenterY));
-			view.rotate(-mouseToFishAngleRadians, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
-			Game.activeBatch.updateUniforms();
+			// Game.flush();
+			// view.translate(new Vector2f(fishCenterX, fishCenterY));
+			// view.rotate(mouseToFishAngleRadians, new Vector3f(0f, 0f, 1f));
+			// view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			// Game.activeBatch.updateUniforms();
+			//
+			// TextureUtils.drawTexture(GameCursor.circleEdgeGreen, 0.5f,
+			// circleX1, circleY1, circleX2, circleY2);
+			//
+			// Game.flush();
+			// view.translate(new Vector2f(fishCenterX, fishCenterY));
+			// view.rotate(-mouseToFishAngleRadians, new Vector3f(0f, 0f, 1f));
+			// view.translate(new Vector2f(-fishCenterX, -fishCenterY));
+			// Game.activeBatch.updateUniforms();
+			//
 
 			TextUtils.printTextWithImages(mouseCircleCenterX + 8, mouseCircleCenterY, Integer.MAX_VALUE, false, null,
 					progress);

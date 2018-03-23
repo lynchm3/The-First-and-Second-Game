@@ -570,11 +570,6 @@ public class Actor extends GameObject {
 					weaponPositionYInPixels, weaponPositionXInPixels + equipped.width,
 					weaponPositionYInPixels + equipped.height);
 
-			if (fishingTarget != null && equipped instanceof FishingRod) {
-				FishingRod fishingRod = (FishingRod) equipped;
-				fishingRod.drawLine(this, weaponPositionXInPixels, weaponPositionYInPixels);
-			}
-
 		}
 
 		if (helmet != null && !sleeping) {
@@ -613,6 +608,28 @@ public class Actor extends GameObject {
 					legArmorPositionYInPixels + legArmor.height);
 		}
 
+	}
+
+	public void drawFishing() {
+		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+				+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+		if (primaryAnimation != null) {
+			actorPositionXInPixels += primaryAnimation.offsetX;
+			actorPositionYInPixels += primaryAnimation.offsetY;
+		}
+		if (equipped != null && !sleeping) {
+
+			int weaponPositionXInPixels = (int) (actorPositionXInPixels + handAnchorX - equipped.anchorX);
+			int weaponPositionYInPixels = (int) (actorPositionYInPixels + handAnchorY - equipped.anchorY);
+
+			if (fishingTarget != null && equipped instanceof FishingRod) {
+				FishingRod fishingRod = (FishingRod) equipped;
+				fishingRod.drawLine(this, weaponPositionXInPixels, weaponPositionYInPixels);
+			}
+
+		}
 	}
 
 	@Override

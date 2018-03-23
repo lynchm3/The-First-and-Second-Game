@@ -172,13 +172,13 @@ public class ShadowLight {
 
 		Game.activeBatch.begin();
 
-		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
-			glClearColor(0.15f, 0.55f, 0.83f, 1f);
-			// 38,141,213
-		} else {
-			glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		// if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
+		// glClearColor(0.15f, 0.55f, 0.83f, 1f);
+		// // 38,141,213
+		// } else {
+		glClearColor(0.5f, 0.5f, 0.5f, 1f);
 
-		}
+		// }
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// lightsFBO.begin();
@@ -226,22 +226,6 @@ public class ShadowLight {
 		view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 		Game.activeBatch.updateUniforms();
 
-		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
-			// if (Game.level.player.squareGameObjectIsOn != null)
-			// Game.level.player.squareGameObjectIsOn.draw1();
-			Game.level.player.draw1();
-			Game.level.player.fishingTarget.draw1();
-			Game.level.drawUI();
-			// Game.level.player.draw2();
-			// Game.level.player.fishingTarget.draw2();
-			// Game.level.player.draw3();
-			// Game.level.player.fishingTarget.draw3();
-			Game.flush();
-			Game.activeBatch.end();
-
-			return;
-		}
-
 		if (Game.editorMode)
 			Game.level.drawBackground();
 		else
@@ -265,6 +249,13 @@ public class ShadowLight {
 				Game.level.drawForeground();
 			else
 				Game.level.drawForeground();
+			Game.flush();
+		}
+
+		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
+			Game.level.player.drawFishing();
+			Game.level.player.draw1();
+			Game.level.player.fishingTarget.draw1();
 			Game.flush();
 		}
 
