@@ -12,6 +12,7 @@ public class GameCursor {
 	public transient Texture imageTexture4 = null;
 	public transient Texture cursor = null;
 	public static transient Texture circle = null;
+	public static transient Texture circleBlack = null;
 	public static transient Texture circleEdge = null;
 	public static transient Texture circleEdgeRed = null;
 	public static transient Texture circleEdgeGreen = null;
@@ -28,6 +29,7 @@ public class GameCursor {
 		this.imageTexture4 = getGlobalImage("highlight4.png", false);
 		this.cursor = getGlobalImage("cursor.png", false);
 		this.circle = getGlobalImage("circle.png", false);
+		this.circleBlack = getGlobalImage("circle_black.png", false);
 		this.circleEdge = getGlobalImage("circle_edge.png", false);
 		this.circleEdgeRed = getGlobalImage("circle_edge_red.png", false);
 		circleEdgeGreen = getGlobalImage("circle_edge_green.png", false);

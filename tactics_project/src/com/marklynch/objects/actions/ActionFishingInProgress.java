@@ -58,11 +58,12 @@ public class ActionFishingInProgress extends Action {
 
 		if (performer == Game.level.player) {
 			Level.levelMode = LevelMode.LEVEL_MODE_FISHING;
-			if (Game.level.shouldLog(target, performer)) {
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { performer, " continued fishing for ", target, " with ", performer.equipped }));
-				// target.primaryAnimation = new AnimationShake();
-			}
+			// if (Game.level.shouldLog(target, performer)) {
+			// Game.level.logOnScreen(new ActivityLog(
+			// new Object[] { performer, " continued fishing for ", target, "
+			// with ", performer.equipped }));
+			// // target.primaryAnimation = new AnimationShake();
+			// }
 			double random = Math.random();
 			// if (random > 0.9d) {
 			// Player.playerTargetAction = new ActionFishingFailed(performer,

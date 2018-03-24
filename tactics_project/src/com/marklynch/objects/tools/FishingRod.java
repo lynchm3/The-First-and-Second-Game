@@ -57,7 +57,7 @@ public class FishingRod extends Tool {
 	public float fishCenterX;
 	public float fishCenterY;
 
-	public final float radius = 128;
+	public final float fishCircleRadius = 128;
 	public float circleX1;
 	public float circleY1;
 	public float circleX2;
@@ -99,15 +99,15 @@ public class FishingRod extends Tool {
 					+ fisher.fishingTarget.primaryAnimation.offsetY;
 
 			// Fish circle
-			circleX1 = fishCenterX - radius;
-			circleY1 = fishCenterY - radius;
-			circleX2 = fishCenterX + radius;
-			circleY2 = fishCenterY + radius;
+			circleX1 = fishCenterX - fishCircleRadius;
+			circleY1 = fishCenterY - fishCircleRadius;
+			circleX2 = fishCenterX + fishCircleRadius;
+			circleY2 = fishCenterY + fishCircleRadius;
 
 			// Mouse circle
 			List<Point> intersections = Utils.getCircleLineIntersectionPoint2(
 					new Point(UserInputLevel.mouseXTransformed, UserInputLevel.mouseYTransformed),
-					new Point(fishCenterX, fishCenterY), new Point(fishCenterX, fishCenterY), radius);
+					new Point(fishCenterX, fishCenterY), new Point(fishCenterX, fishCenterY), fishCircleRadius);
 
 			if (intersections.size() != 0) {
 				mouseCircleCenterX = intersections.get(0).x;
@@ -214,7 +214,7 @@ public class FishingRod extends Tool {
 		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
 
 			// Fish circle
-			TextureUtils.drawTexture(GameCursor.circle, 0.5f, circleX1, circleY1, circleX2, circleY2);
+			TextureUtils.drawTexture(GameCursor.circleBlack, 0.25f, circleX1, circleY1, circleX2, circleY2);
 
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 
