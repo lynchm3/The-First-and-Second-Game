@@ -44,6 +44,7 @@ public class ActionFishBeingFished extends Action {
 		float maxChange = 0.2f;
 
 		FishingRod fishingRod = (FishingRod) performer.beingFishedBy.equipped;
+		performer.fightingFishingRod = false;
 
 		float distanceToCoverX;
 		float distanceToCoverY;
@@ -78,7 +79,8 @@ public class ActionFishBeingFished extends Action {
 			performer.swimmingChangeX = -maxChange;
 		}
 
-		if (new Random().nextFloat() < 0.05f) {
+		if (new Random().nextFloat() < 0.1f) {
+			performer.fightingFishingRod = true;
 			performer.swimmingChangeX = new Random().nextFloat() * maxChange;
 			if (new Random().nextBoolean()) {
 				performer.swimmingChangeX = -performer.swimmingChangeX;
@@ -91,7 +93,8 @@ public class ActionFishBeingFished extends Action {
 			performer.swimmingChangeY = -maxChange;
 		}
 
-		if (new Random().nextFloat() < 0.05f) {
+		if (new Random().nextFloat() < 0.1f) {
+			performer.fightingFishingRod = true;
 			performer.swimmingChangeY = new Random().nextFloat() * maxChange;
 			if (new Random().nextBoolean()) {
 				performer.swimmingChangeY = -performer.swimmingChangeY;

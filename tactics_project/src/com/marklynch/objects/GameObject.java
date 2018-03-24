@@ -242,6 +242,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean flipYAxisInMirror = true;
 
 	public Actor beingFishedBy = null;
+	public boolean fightingFishingRod = false;
 	public boolean beingChopped = false;
 	public boolean beingMined = false;
 	public boolean beingDigged = false;

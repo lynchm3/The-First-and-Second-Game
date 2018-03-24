@@ -78,7 +78,7 @@ public class FishingRod extends Tool {
 	// degrees
 	public float fishDirectionRadians;
 	public float oppositOfFishDirectionRadians;
-	public float approximatedFishRadians = -1f;
+	public float gradualTarget = -1f;
 	public float targetDirectionRadians = -1f;
 	public float mouseToFishAngleRadians;
 
@@ -127,51 +127,55 @@ public class FishingRod extends Tool {
 				oppositOfFishDirectionRadians -= 6.28319;
 			}
 
+			float absoluteTarget = 0f;
+			if (fisher.fishingTarget.fightingFishingRod) {
+				absoluteTarget = oppositOfFishDirectionRadians;
+			} else {
+				absoluteTarget = fishDirectionRadians;
+
+			}
+
 			// targetDirectionRadians = fishDirectionRadians;
 			// oppositOfTargetDirectionRadians = oppositOfFishDirectionRadians;
 			// targetDirection
-			if (approximatedFishRadians == -1) {
-				approximatedFishRadians = fishDirectionRadians;
+			if (gradualTarget == -1) {
+				gradualTarget = absoluteTarget;
 				// oppositOfTargetDirectionRadians =
 				// oppositOfFishDirectionRadians;
 			} else {
 				float maxTargetChangeThisUpdate = maxDirectionChangeInRadiansPerMillisecond * delta;
-				float differenceBetweenTargetAndFishAngle = Math.abs(approximatedFishRadians - fishDirectionRadians);
+				float differenceBetweenTargetAndFishAngle = Math.abs(gradualTarget - absoluteTarget);
 				if (differenceBetweenTargetAndFishAngle <= maxTargetChangeThisUpdate) {
-					approximatedFishRadians = fishDirectionRadians;
+					gradualTarget = absoluteTarget;
 					// oppositOfTargetDirectionRadians =
 					// oppositOfFishDirectionRadians;
 				} else {
 
-					if (fishDirectionRadians > approximatedFishRadians) {
+					if (absoluteTarget > gradualTarget) {
 						if (differenceBetweenTargetAndFishAngle < 3.14) {
 
-							approximatedFishRadians += maxTargetChangeThisUpdate;
+							gradualTarget += maxTargetChangeThisUpdate;
 						} else {
-							approximatedFishRadians -= maxTargetChangeThisUpdate;
+							gradualTarget -= maxTargetChangeThisUpdate;
 
 						}
 					} else {
 						if (differenceBetweenTargetAndFishAngle < 3.14) {
 
-							approximatedFishRadians -= maxTargetChangeThisUpdate;
+							gradualTarget -= maxTargetChangeThisUpdate;
 						} else {
-							approximatedFishRadians += maxTargetChangeThisUpdate;
+							gradualTarget += maxTargetChangeThisUpdate;
 
 						}
 					}
 
-					if (approximatedFishRadians < 0) {
-						approximatedFishRadians += 6.28319;
-					} else if (approximatedFishRadians > 6.28319f) {
-						approximatedFishRadians -= 6.28319;
+					if (gradualTarget < 0) {
+						gradualTarget += 6.28319;
+					} else if (gradualTarget > 6.28319f) {
+						gradualTarget -= 6.28319;
 					}
-					targetDirectionRadians = approximatedFishRadians - 3.14f;
-					if (targetDirectionRadians < 0) {
-						targetDirectionRadians += 6.28319;
-					} else if (targetDirectionRadians > 6.28319) {
-						targetDirectionRadians -= 6.28319;
-					}
+
+					targetDirectionRadians = gradualTarget;
 				}
 			}
 
@@ -298,7 +302,7 @@ public class FishingRod extends Tool {
 	}
 
 	public void reset() {
-		approximatedFishRadians = -1f;
+		gradualTarget = -1f;
 		targetDirectionRadians = -1f;
 		progress = 0.5f;
 
