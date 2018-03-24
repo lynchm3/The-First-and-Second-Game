@@ -90,6 +90,9 @@ public class WaterBody extends WaterSource {
 	public float quarterWidth = Game.SQUARE_WIDTH / 4;
 	public float quarterHeight = Game.SQUARE_HEIGHT / 4;
 
+	public ArrayList<Texture> textures = new ArrayList<Texture>();
+	public int texturesIndex = 0;
+
 	public WaterBody() {
 		super();
 
@@ -108,6 +111,12 @@ public class WaterBody extends WaterSource {
 		instances.add(gameObject);
 		super.setInstances(gameObject);
 	}
+
+	// @Override
+	// public void updateRealtime(int delta) {
+	// super.updateRealtime(delta);
+	//
+	// }
 
 	public static void loadStaticImages() {
 		textureFullWall = getGlobalImage("wall.png", true);
@@ -142,6 +151,14 @@ public class WaterBody extends WaterSource {
 	public void update(int delta) {
 		super.update(delta);
 
+		System.out.println("updateRealtime");
+		texturesIndex++;
+		if (texturesIndex == textures.size())
+			texturesIndex = 0;
+		System.out.println("updateRealtime texturesIndex = " + texturesIndex);
+		imageTexture = textures.get(texturesIndex);
+		System.out.println("updateRealtime imageTexture = " + imageTexture);
+
 		if (fish != null && fish.squareGameObjectIsOn == null) {
 			fish = null;
 		}
@@ -153,9 +170,6 @@ public class WaterBody extends WaterSource {
 
 	public Fish addFish() {
 		Fish fish;
-		// float appleSizeRatio = (float) (Math.random() * sizeRatio);
-		// System.out.println("maxSizeRatio = " + sizeRatio);
-		// System.out.println("appleSizeRatio = " + appleSizeRatio);
 		if (new Random().nextBoolean()) {
 
 			fish = Templates.FISH.makeCopy("Fish", this.squareGameObjectIsOn, FactionList.buns, null,
@@ -166,29 +180,6 @@ public class WaterBody extends WaterSource {
 					new GameObject[] {}, new GameObject[] {}, null);
 
 		}
-		// fish.widthRatio = sizeRatio;
-		// fish.heightRatio = sizeRatio;
-		// fish.width = Game.SQUARE_WIDTH * fish.widthRatio;
-		// fish.height = Game.SQUARE_HEIGHT * fish.heightRatio;
-		// fish.halfWidth = fish.width / 2;
-		// fish.halfHeight = fish.height / 2;
-
-		// fish.anchorX = 6;
-		// fish.anchorY = 6;
-
-		// float appleDrawOffsetXMax = 0.75f - fish.width / Game.SQUARE_WIDTH;
-		// float appleDrawOffsetXMin = 0.25f;
-		// float appleDrawOffsetYMin = -0.35f;
-		// float appleDrawOffsetYMax = 0.35f;
-
-		// fish.drawOffsetRatioX = appleDrawOffsetXMin
-		// + (float) (Math.random() * (appleDrawOffsetXMax -
-		// appleDrawOffsetXMin));
-		// fish.drawOffsetRatioY = fish.drawOffsetYInTree = appleDrawOffsetYMin
-		// + (float) (Math.random() * (appleDrawOffsetYMax -
-		// appleDrawOffsetYMin));
-
-		// inventory.add(fish);
 
 		return fish;
 
@@ -393,6 +384,14 @@ public class WaterBody extends WaterSource {
 			waterBody.drawY1 = (int) (waterBody.squareGameObjectIsOn.yInGridPixels + waterBody.drawOffsetRatioY);
 			waterBody.drawY2 = (int) (waterBody.drawY1 + waterBody.height);
 		}
+
+		waterBody.textures = this.textures;
+		waterBody.texturesIndex = new Random().nextInt(waterBody.textures.size());
+		waterBody.imageTexture = waterBody.textures.get(texturesIndex);
+
+		System.out.println("makeCopy texturesIndex = " + texturesIndex);
+		System.out.println("makeCopy imageTexture = " + imageTexture);
+
 		return waterBody;
 	}
 

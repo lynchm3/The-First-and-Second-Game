@@ -368,6 +368,10 @@ public class TemplatesNature {
 		Templates.WATER_BODY.electricResistance = 100;
 		Templates.WATER_BODY.poisonResistance = 100;
 		Templates.WATER_BODY.bleedingResistance = 100;
+		Templates.WATER_BODY.textures.add(getGlobalImage(Templates.WATER_BODY.imageTexturePath, true));
+		Templates.WATER_BODY.textures.add(getGlobalImage("water_2.png", true));
+		Templates.WATER_BODY.textures.add(getGlobalImage("water_3.png", true));
+		Templates.WATER_BODY.textures.add(getGlobalImage("water_4.png", true));
 
 	}
 

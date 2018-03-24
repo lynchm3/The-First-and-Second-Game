@@ -42,6 +42,7 @@ public class ActionFishBeingFished extends Action {
 			return;
 
 		float maxChange = 0.2f;
+		float maxShake = 0.02f;
 
 		FishingRod fishingRod = (FishingRod) performer.beingFishedBy.equipped;
 		performer.fightingFishingRod = false;
@@ -63,6 +64,7 @@ public class ActionFishBeingFished extends Action {
 
 		if (fishingRod.progressThisTurn > 0) {
 		} else {
+			performer.fightingFishingRod = true;
 			speedX = -speedX;
 			speedY = -speedY;
 		}
@@ -70,8 +72,17 @@ public class ActionFishBeingFished extends Action {
 		System.out.println("speedX = " + speedX); // -1
 		System.out.println("speedY = " + speedY); // 0
 
-		performer.swimmingChangeX = speedX;
-		performer.swimmingChangeY = speedY;
+		float shakeX = (float) (Math.random() * maxShake);
+		if (new Random().nextBoolean()) {
+			shakeX = -shakeX;
+		}
+		float shakeY = (float) (Math.random() * maxShake);
+		if (new Random().nextBoolean()) {
+			shakeY = -shakeY;
+		}
+
+		performer.swimmingChangeX = speedX + shakeX;
+		performer.swimmingChangeY = speedY + shakeY;
 
 		if (performer.swimmingChangeX > maxChange) {
 			performer.swimmingChangeX = maxChange;

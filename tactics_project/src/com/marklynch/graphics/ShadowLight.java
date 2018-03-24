@@ -19,6 +19,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.utils.Color;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
@@ -246,8 +247,9 @@ public class ShadowLight {
 		}
 
 		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
-			Game.level.player.drawFishing();
+			QuadUtils.drawQuad(Color.BLACK, 0, 0, Game.windowHeight, Game.windowWidth);
 			Game.level.player.draw1();
+			Game.level.player.drawFishing();
 			Game.level.player.fishingTarget.draw1();
 			Game.flush();
 		}
