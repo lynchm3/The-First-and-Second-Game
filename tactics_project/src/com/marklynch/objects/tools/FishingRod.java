@@ -211,13 +211,13 @@ public class FishingRod extends Tool {
 
 		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
 
-			// Fishing line
-			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
-
 			// Fish circle
 			TextureUtils.drawTexture(GameCursor.circle, 0.5f, circleX1, circleY1, circleX2, circleY2);
 
 			Matrix4f view = Game.activeBatch.getViewMatrix();
+
+			// Fishing line
+			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
 
 			// Target direction (circle edge)
 			Game.flush();

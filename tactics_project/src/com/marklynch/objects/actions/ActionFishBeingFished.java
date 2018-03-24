@@ -42,7 +42,7 @@ public class ActionFishBeingFished extends Action {
 			return;
 
 		float maxChange = 0.2f;
-		float maxShake = 0.02f;
+		float maxShake = 0.05f;
 
 		FishingRod fishingRod = (FishingRod) performer.beingFishedBy.equipped;
 		performer.fightingFishingRod = false;
@@ -163,6 +163,14 @@ public class ActionFishBeingFished extends Action {
 			Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
 			Player.playerTargetSquare = performer.squareGameObjectIsOn;
 			Player.playerFirstMove = true;
+		}
+
+		if (totalDistanceToCover < Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH) {
+			System.out.println("FISHING COMPLETED WOO!");
+			Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
+			Player.playerTargetSquare = performer.squareGameObjectIsOn;
+			Player.playerFirstMove = true;
+
 		}
 
 		// Move over to other square if crossed over
