@@ -36,8 +36,6 @@ public class ActionFishingInProgress extends Action {
 	@Override
 	public void perform() {
 
-		System.out.println("continue.perform()");
-
 		if (!enabled)
 			return;
 
@@ -116,7 +114,6 @@ public class ActionFishingInProgress extends Action {
 
 	@Override
 	public boolean check() {
-		System.out.println("continue.check()");
 
 		if (!performer.inventory.contains(FishingRod.class)) {
 			actionName = ACTION_NAME_NEED_FISHING_ROD;

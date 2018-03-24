@@ -42,9 +42,6 @@ public class AIRoutineUtils {
 
 		Collections.shuffle(squaresInRange);
 
-		if (Game.level.activeActor.name.contains("Fish"))
-			System.out.println("squaresInRange.size() = " + squaresInRange.size());
-
 		if (squaresInRange.size() == 0)
 			return null;
 

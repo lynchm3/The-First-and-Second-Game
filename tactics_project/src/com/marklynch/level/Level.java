@@ -1627,7 +1627,6 @@ public class Level {
 	}
 
 	public static void pausePlayer() {
-		System.out.println("pausePlayer");
 		Utils.printStackTrace();
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;

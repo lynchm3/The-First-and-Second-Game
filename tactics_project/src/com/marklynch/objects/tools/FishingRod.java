@@ -143,8 +143,6 @@ public class FishingRod extends Tool {
 					// oppositOfFishDirectionRadians;
 				} else {
 
-					System.out.println("maxTargetChangeThisUpdate = " + maxTargetChangeThisUpdate);
-
 					if (fishDirectionRadians > approximatedFishRadians) {
 						if (differenceBetweenTargetAndFishAngle < 3.14) {
 
@@ -218,9 +216,6 @@ public class FishingRod extends Tool {
 			// Mouse circle
 			TextureUtils.drawTexture(GameCursor.circle, 0.5f, mouseCircleX1, mouseCircleY1, mouseCircleX2,
 					mouseCircleY2);
-
-			System.out.println("fishDirectionRadians = " + fishDirectionRadians);
-			System.out.println("targetDirectionRadians = " + approximatedFishRadians);
 
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 

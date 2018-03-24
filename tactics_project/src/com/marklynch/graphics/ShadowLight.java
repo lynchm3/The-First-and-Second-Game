@@ -211,13 +211,6 @@ public class ShadowLight {
 		Game.activeBatch.setColor(1, 1, 1, 1);
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 
-		// Draw level BG
-
-		// TextureUtils.drawTexture(Game.level.textureUndiscovered, 1f, 0,
-		// 1920,
-		// 0, 1080);
-		// Game.flush();
-
 		// Draw BG
 		view.setIdentity();
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));

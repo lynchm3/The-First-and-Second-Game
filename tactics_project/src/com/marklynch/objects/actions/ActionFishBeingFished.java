@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.Random;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationMove;
 import com.marklynch.level.squares.Square;
@@ -10,6 +11,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fish;
+import com.marklynch.objects.units.Player;
 
 public class ActionFishBeingFished extends Action {
 
@@ -47,7 +49,7 @@ public class ActionFishBeingFished extends Action {
 		float distanceToCoverY;
 		float speedX;
 		float speedY;
-		float speed = 0.1f;
+		float speed = 0.05f;
 
 		distanceToCoverX = performer.beingFishedBy.squareGameObjectIsOn.xInGridPixels
 				- performer.squareGameObjectIsOn.xInGridPixels;
@@ -63,10 +65,12 @@ public class ActionFishBeingFished extends Action {
 			speedX = -speedX;
 			speedY = -speedY;
 		}
-		fishingRod.progressThisTurn = 0;
+
+		System.out.println("speedX = " + speedX); // -1
+		System.out.println("speedY = " + speedY); // 0
 
 		performer.swimmingChangeX = speedX;
-		performer.swimmingChangeX = speedY;
+		performer.swimmingChangeY = speedY;
 
 		if (performer.swimmingChangeX > maxChange) {
 			performer.swimmingChangeX = maxChange;
@@ -87,15 +91,20 @@ public class ActionFishBeingFished extends Action {
 			performer.swimmingChangeY = -maxChange;
 		}
 
-		if (new Random().nextFloat() < 0.2f) {
+		if (new Random().nextFloat() < 0.05f) {
 			performer.swimmingChangeY = new Random().nextFloat() * maxChange;
 			if (new Random().nextBoolean()) {
 				performer.swimmingChangeY = -performer.swimmingChangeY;
 			}
 		}
 
+		System.out.println("performer.swimmingChangeX = " + performer.swimmingChangeX); // -1
+		System.out.println("performer.swimmingChangeY = " + performer.swimmingChangeY); // 0
+
 		float halfWidthRatio = (performer.width / Game.SQUARE_WIDTH) / 2f;
 		float halfHeightRatio = (performer.height / Game.SQUARE_HEIGHT) / 2f;
+
+		boolean hitLand = false;
 
 		// If we're moving out of water, cancel X
 		if (performer.drawOffsetRatioX + performer.swimmingChangeX < 0
@@ -103,12 +112,14 @@ public class ActionFishBeingFished extends Action {
 						|| performer.squareGameObjectIsOn.getSquareToLeftOf().inventory.waterBody == null)) {
 
 			performer.swimmingChangeX = -performer.swimmingChangeX;
+			hitLand = true;
 
 		} else if (performer.drawOffsetRatioX + performer.swimmingChangeX >= 1 - performer.widthRatio
 				&& (performer.squareGameObjectIsOn.getSquareToRightOf() == null
 						|| performer.squareGameObjectIsOn.getSquareToRightOf().inventory.waterBody == null)) {
 
 			performer.swimmingChangeX = -performer.swimmingChangeX;
+			hitLand = true;
 
 		}
 
@@ -118,13 +129,26 @@ public class ActionFishBeingFished extends Action {
 						|| performer.squareGameObjectIsOn.getSquareAbove().inventory.waterBody == null)) {
 
 			performer.swimmingChangeY = -performer.swimmingChangeY;
+			hitLand = true;
 
 		} else if (performer.drawOffsetRatioY + performer.swimmingChangeY >= 1 - performer.heightRatio
 				&& (performer.squareGameObjectIsOn.getSquareBelow() == null
 						|| performer.squareGameObjectIsOn.getSquareBelow().inventory.waterBody == null)) {
 
 			performer.swimmingChangeY = -performer.swimmingChangeY;
+			hitLand = true;
 
+		}
+
+		System.out.println("hitLand = " + hitLand);
+		System.out.println("fishingRod.progressThisTurn = " + fishingRod.progressThisTurn);
+		System.out.println("performer.beingFishedBy = " + performer.beingFishedBy);
+
+		if (hitLand && fishingRod.progressThisTurn > 0 && performer.beingFishedBy == Game.level.player) {
+			System.out.println("FISHING COMPLETED WOO!");
+			Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
+			Player.playerTargetSquare = performer.squareGameObjectIsOn;
+			Player.playerFirstMove = true;
 		}
 
 		// Move over to other square if crossed over
@@ -158,6 +182,7 @@ public class ActionFishBeingFished extends Action {
 		moveTo(performer, newSquare, performer.drawOffsetRatioX + targetOffsetX,
 				performer.drawOffsetRatioY + targetOffsetY);
 
+		fishingRod.progressThisTurn = 0;
 	}
 
 	public void moveTo(Actor actor, Square target, float targetOffsetX, float targetOffsetY) {
