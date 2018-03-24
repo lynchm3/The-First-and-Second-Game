@@ -158,14 +158,20 @@ public class ActionFishBeingFished extends Action {
 		System.out.println("fishingRod.progressThisTurn = " + fishingRod.progressThisTurn);
 		System.out.println("performer.beingFishedBy = " + performer.beingFishedBy);
 
-		if (hitLand && fishingRod.progressThisTurn > 0 && performer.beingFishedBy == Game.level.player) {
+		if (fishingRod.lineDamage >= 1) {
+			System.out.println("FISHING COMPLETED BOO!");
+			Player.playerTargetAction = new ActionFishingFailed(Level.player, performer);
+			Player.playerTargetSquare = performer.squareGameObjectIsOn;
+			Player.playerFirstMove = true;
+
+		} else if (hitLand && fishingRod.progressThisTurn > 0 && performer.beingFishedBy == Game.level.player) {
 			System.out.println("FISHING COMPLETED WOO!");
 			Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
 			Player.playerTargetSquare = performer.squareGameObjectIsOn;
 			Player.playerFirstMove = true;
 		}
 
-		if (totalDistanceToCover < Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH) {
+		else if (totalDistanceToCover < Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH) {
 			System.out.println("FISHING COMPLETED WOO!");
 			Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
 			Player.playerTargetSquare = performer.squareGameObjectIsOn;

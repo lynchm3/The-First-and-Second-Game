@@ -45,6 +45,7 @@ public class FishingRod extends Tool {
 		return weapon;
 	}
 
+	public float lineDamage = 0f;
 	public float progress = 0.5f;
 	public float progressThisTurn = 0f;
 
@@ -197,6 +198,7 @@ public class FishingRod extends Tool {
 				progress++;
 				progressThisTurn++;
 			} else {
+				lineDamage += delta / 10000f;
 				progress--;
 				progressThisTurn--;
 			}
@@ -226,13 +228,12 @@ public class FishingRod extends Tool {
 			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
 			Game.activeBatch.updateUniforms();
 
-			Color color = Color.RED;
-
+			Color edgeColor = Color.RED;
 			if (mouseDistanceToTargetRadians < 1f) {
-				color = new Color(1f, 1f - mouseDistanceToTargetRadians, 1f - mouseDistanceToTargetRadians);
+				edgeColor = new Color(1f, 1f - mouseDistanceToTargetRadians, 1f - mouseDistanceToTargetRadians);
 			}
 
-			TextureUtils.drawTexture(GameCursor.circleEdge, 0.5f, circleX1, circleY1, circleX2, circleY2, color);
+			TextureUtils.drawTexture(GameCursor.circleEdge, 0.75f, circleX1, circleY1, circleX2, circleY2, edgeColor);
 
 			Game.flush();
 			view.translate(new Vector2f(fishCenterX, fishCenterY));
@@ -241,8 +242,20 @@ public class FishingRod extends Tool {
 			Game.activeBatch.updateUniforms();
 
 			// Mouse circle
-			TextureUtils.drawTexture(GameCursor.circle, 1f, mouseCircleX1, mouseCircleY1, mouseCircleX2, mouseCircleY2);
-			TextureUtils.drawTexture(this.imageTexture, 1f, mouseCircleX1, mouseCircleY1, mouseCircleX2, mouseCircleY2);
+
+			float mouseCircleShakeX = (float) (lineDamage * Math.random() * 10f);
+			float mouseCircleShakeY = (float) (lineDamage * Math.random() * 10f);
+
+			Color lineDamageColor = Color.RED;
+			if (lineDamage < 1f) {
+				lineDamageColor = new Color(1f, 1f - lineDamage, 1f - lineDamage);
+			}
+
+			TextureUtils.drawTexture(GameCursor.circle, 0.75f, mouseCircleX1, mouseCircleY1, mouseCircleX2,
+					mouseCircleY2, lineDamageColor);
+			TextureUtils.drawTexture(this.imageTexture, 1f, mouseCircleX1 + mouseCircleShakeX,
+					mouseCircleY1 + mouseCircleShakeY, mouseCircleX2 + mouseCircleShakeX,
+					mouseCircleY2 + mouseCircleShakeY);
 
 			// "progress" text
 			// TextUtils.printTextWithImages(mouseCircleCenterX + 8,
@@ -262,6 +275,7 @@ public class FishingRod extends Tool {
 		gradualTarget = -1f;
 		targetDirectionRadians = -1f;
 		progress = 0.5f;
+		lineDamage = 0f;
 
 	}
 

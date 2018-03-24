@@ -55,6 +55,7 @@ public class ActionFishingStart extends Action {
 				fishingRod = (FishingRod) f;
 			}
 		}
+		fishingRod.reset();
 
 		if (performer.equipped != fishingRod)
 			performer.equippedBeforePickingUpObject = performer.equipped;
