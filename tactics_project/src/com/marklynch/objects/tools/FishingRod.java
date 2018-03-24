@@ -79,6 +79,7 @@ public class FishingRod extends Tool {
 	public float oppositOfFishDirectionRadians;
 	public float gradualTarget = -1f;
 	public float targetDirectionRadians = -1f;
+	public float mouseDistanceToTargetRadians = 0f;
 	public float mouseToFishAngleRadians;
 
 	public void updateLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels, float delta) {
@@ -181,10 +182,10 @@ public class FishingRod extends Tool {
 			// Mouse angle
 			mouseToFishAngleRadians = Utils.radianAngleFromLine(new Point(fishCenterX, fishCenterY),
 					new Point(UserInputLevel.mouseXTransformed, UserInputLevel.mouseYTransformed));
-
+			mouseDistanceToTargetRadians = Math.abs(mouseToFishAngleRadians - targetDirectionRadians);
 			boolean withinLimit = false;
 
-			if (Math.abs(mouseToFishAngleRadians - targetDirectionRadians) < 1f) {
+			if (mouseDistanceToTargetRadians < 1f) {
 				withinLimit = true;
 			} else if ((Math.abs(mouseToFishAngleRadians + 6.28319) - targetDirectionRadians) < 1f) {
 				withinLimit = true;
@@ -218,14 +219,20 @@ public class FishingRod extends Tool {
 
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 
-			// Target direction (circle edge
+			// Target direction (circle edge)
 			Game.flush();
 			view.translate(new Vector2f(fishCenterX, fishCenterY));
 			view.rotate(targetDirectionRadians, new Vector3f(0f, 0f, 1f));
 			view.translate(new Vector2f(-fishCenterX, -fishCenterY));
 			Game.activeBatch.updateUniforms();
 
-			TextureUtils.drawTexture(GameCursor.circleEdge, 0.5f, circleX1, circleY1, circleX2, circleY2);
+			Color color = Color.RED;
+
+			if (mouseDistanceToTargetRadians < 1f) {
+				color = new Color(1f, 1f - mouseDistanceToTargetRadians, 1f - mouseDistanceToTargetRadians);
+			}
+
+			TextureUtils.drawTexture(GameCursor.circleEdge, 0.5f, circleX1, circleY1, circleX2, circleY2, color);
 
 			Game.flush();
 			view.translate(new Vector2f(fishCenterX, fishCenterY));

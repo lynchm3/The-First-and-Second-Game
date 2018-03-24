@@ -198,6 +198,10 @@ public class TextureUtils {
 		drawTexture(texture, 1.0f, x1, y1, x2, y2, 0, 0, 0, 0, false, false, color, false);
 	}
 
+	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2, Color color) {
+		drawTexture(texture, alpha, x1, y1, x2, y2, 0, 0, 0, 0, false, false, color, false);
+	}
+
 	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2) {
 		drawTexture(texture, alpha, x1, y1, x2, y2, false, 0, 0, 0, 0, false, false, false);
 	}
