@@ -73,7 +73,7 @@ public class FishingRod extends Tool {
 	public float mouseCircleY2;
 
 	// Directions of stuff
-	public final static float maxDirectionChangeInRadiansPerSecond = 2f;
+	public final static float maxDirectionChangeInRadiansPerSecond = 1f;
 	public final static float maxDirectionChangeInRadiansPerMillisecond = maxDirectionChangeInRadiansPerSecond / 1000f;
 	// degrees
 	public float fishDirectionRadians;
@@ -243,19 +243,35 @@ public class FishingRod extends Tool {
 
 			// Mouse circle
 
-			float mouseCircleShakeX = (float) (lineDamage * Math.random() * 10f);
-			float mouseCircleShakeY = (float) (lineDamage * Math.random() * 10f);
-
 			Color lineDamageColor = Color.RED;
 			if (lineDamage < 1f) {
 				lineDamageColor = new Color(1f, 1f - lineDamage, 1f - lineDamage);
 			}
 
-			TextureUtils.drawTexture(GameCursor.circle, 0.75f, mouseCircleX1, mouseCircleY1, mouseCircleX2,
-					mouseCircleY2, lineDamageColor);
-			TextureUtils.drawTexture(this.imageTexture, 1f, mouseCircleX1 + mouseCircleShakeX,
-					mouseCircleY1 + mouseCircleShakeY, mouseCircleX2 + mouseCircleShakeX,
-					mouseCircleY2 + mouseCircleShakeY);
+			Game.flush();
+			view.translate(new Vector2f(mouseCircleCenterX, mouseCircleCenterY));
+			view.rotate(mouseToFishAngleRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-mouseCircleCenterX, -mouseCircleCenterY));
+			Game.activeBatch.updateUniforms();
+
+			TextureUtils.drawTexture(GameCursor.circleMouseFishing, 0.75f, mouseCircleX1, mouseCircleY1, mouseCircleX2,
+					mouseCircleY2, edgeColor);
+
+			Game.flush();
+			view.translate(new Vector2f(mouseCircleCenterX, mouseCircleCenterY));
+			view.rotate(-mouseToFishAngleRadians, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-mouseCircleCenterX, -mouseCircleCenterY));
+			Game.activeBatch.updateUniforms();
+
+			// TextureUtils.drawTexture(GameCursor.circleMouseFishing, 0.75f,
+			// mouseCircleX1, mouseCircleY1, mouseCircleX2,
+			// mouseCircleY2, lineDamageColor);
+
+			// TextureUtils.drawTexture(this.imageTexture, 1f, mouseCircleX1 +
+			// mouseCircleShakeX,
+			// mouseCircleY1 + mouseCircleShakeY, mouseCircleX2 +
+			// mouseCircleShakeX,
+			// mouseCircleY2 + mouseCircleShakeY);
 
 			// "progress" text
 			// TextUtils.printTextWithImages(mouseCircleCenterX + 8,
