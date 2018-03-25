@@ -10,11 +10,20 @@ public class AnimationMove extends Animation {
 	public float startOffsetX = 0;
 	public float startOffsetY = 0;
 
+	float quarterDurationToReach;
+	float halfDurationToReach;
+	float threeQuarterDurationToReach;
+
 	// for show only, walking actor, primary
 
 	public AnimationMove(Square startSquare, Square endSquare) {
 		super();
-		durationToReach = 200;
+		durationToReach = 400;
+
+		quarterDurationToReach = durationToReach / 4;
+		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
+		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
+
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
 
@@ -31,9 +40,6 @@ public class AnimationMove extends Animation {
 	public AnimationMove(float startX, float startY, float endX, float endY) {
 		super();
 		durationToReach = 200;
-		// this.startSquare = startSquare;
-		// this.endSquare = endSquare;
-
 		startOffsetX = offsetX = startX - endX;
 		startOffsetY = offsetY = startY - endY;
 		blockAI = false;
@@ -46,7 +52,42 @@ public class AnimationMove extends Animation {
 			return;
 
 		durationSoFar += delta;
-		double progress = durationSoFar / durationToReach;
+
+		// if (durationSoFar < quarterDurationToReach) {
+		// rightShoulderAngle = -leftShoulderAngle;
+		// } else if (durationSoFar < halfDurationToReach) {
+		// leftShoulderAngle = 0.001f * (halfDurationToReach - durationSoFar);
+		// rightShoulderAngle = -leftShoulderAngle;
+		// } else if (durationSoFar < threeQuarterDurationToReach) {
+		// leftShoulderAngle = 0.001f * (halfDurationToReach - durationSoFar);
+		// rightShoulderAngle = -leftShoulderAngle;
+		// } else {
+		// leftShoulderAngle = 0.001f * (durationSoFar - durationToReach);
+		// rightShoulderAngle = -leftShoulderAngle;
+		// }
+
+		float progress = durationSoFar / durationToReach;
+
+		if (phase == 0) {
+			leftShoulderAngle = 0.2f * progress;
+			rightShoulderAngle = -leftShoulderAngle;
+		} else if (phase == 1) {
+			leftShoulderAngle = 0.2f * (1f - progress);
+			rightShoulderAngle = -leftShoulderAngle;
+
+		} else if (phase == 2) {
+			leftShoulderAngle = 0.2f * -progress;
+			rightShoulderAngle = -leftShoulderAngle;
+
+		} else if (phase == 3) {
+			leftShoulderAngle = 0.2f * (progress - 1f);
+			rightShoulderAngle = -leftShoulderAngle;
+
+		}
+
+		leftElbowAngle = -0.1f;
+		rightElbowAngle = -0.1f;
+
 		if (progress >= 1) {
 			completed = true;
 			offsetX = 0;

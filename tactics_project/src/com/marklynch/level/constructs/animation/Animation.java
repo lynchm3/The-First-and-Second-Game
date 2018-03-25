@@ -6,8 +6,14 @@ public abstract class Animation {
 	public float offsetX = 0;
 	public float offsetY = 0;
 
-	public double durationSoFar = 0;
-	public double durationToReach = 200;
+	public float leftShoulderAngle = 0f;
+	public float leftElbowAngle = 0f;
+	public float rightShoulderAngle = 0f;
+	public float rightElbowAngle = 0f;
+
+	public float durationSoFar = 0;
+	public float durationToReach = 200;
+	public int phase = 0;
 
 	public abstract void update(double delta);
 

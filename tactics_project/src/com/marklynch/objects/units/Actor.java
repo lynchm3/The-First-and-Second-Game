@@ -156,13 +156,12 @@ public class Actor extends GameObject {
 	public Texture currentStepTexture = null;
 	public Texture hairImageTexture = null;
 	public Texture armImageTexture = null;
-	public float armY = 53;
+	public float shoulderY = 53;
+	public float elbowY = 85;
 	public float leftArmDrawX = 46;
 	public float leftArmHingeX = 48;
-	public float leftArmAngle = 0f;
 	public float rightArmDrawX = 74;
 	public float rightArmHingeX = 76;
-	public float rightArmAngle = 0f;
 
 	public Texture thoughtBubbleImageTextureObject = null;
 	public Texture thoughtBubbleImageTextureAction = null;
@@ -612,44 +611,80 @@ public class Actor extends GameObject {
 		System.out.println("armImageText = " + armImageTexture);
 		if (armImageTexture != null) {
 
-			leftArmAngle -= 0.1f;
-			rightArmAngle += 0.1f;
+			float leftShoulderAngle = 0f;
+			float rightShoulderAngle = 0f;
+			float leftElbowAngle = 0f;
+			float rightElbowAngle = 0f;
+			if (primaryAnimation != null) {
+
+				leftShoulderAngle = primaryAnimation.leftShoulderAngle;
+				rightShoulderAngle = primaryAnimation.rightShoulderAngle;
+				leftElbowAngle = primaryAnimation.leftElbowAngle;
+				rightElbowAngle = primaryAnimation.rightElbowAngle;
+
+			}
+
+			// arms
+			float shoulderDrawY = actorPositionYInPixels + this.shoulderY;
+			float elbowDrawY = actorPositionYInPixels + this.elbowY;
 
 			// left arm
 			float leftArmDrawX = actorPositionXInPixels + this.leftArmDrawX;
-			float leftArmDrawY = actorPositionYInPixels + this.armY;
 			float leftArmHingeX = actorPositionXInPixels + this.leftArmHingeX;
 
 			// right arm
 			float rightArmDrawX = actorPositionXInPixels + this.rightArmDrawX;
-			float rightArmDrawY = actorPositionYInPixels + this.armY;
 			float rightArmHingeX = actorPositionXInPixels + this.rightArmHingeX;
 
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 
 			Game.flush();
-			view.translate(new Vector2f(leftArmHingeX, leftArmDrawY));
-			view.rotate(leftArmAngle, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-leftArmHingeX, -leftArmDrawY));
+			view.translate(new Vector2f(leftArmHingeX, shoulderDrawY));
+			view.rotate(leftShoulderAngle, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-leftArmHingeX, -shoulderDrawY));
 			Game.activeBatch.updateUniforms();
 
-			TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, leftArmDrawY,
-					leftArmDrawX + armImageTexture.getWidth(), leftArmDrawY + armImageTexture.getHeight());
+			TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, shoulderDrawY,
+					leftArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight());
 
 			Game.flush();
-			view.translate(new Vector2f(leftArmHingeX, leftArmDrawY));
-			view.rotate(-leftArmAngle, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-leftArmHingeX, -leftArmDrawY));
+			view.translate(new Vector2f(leftArmHingeX, elbowDrawY));
+			view.rotate(leftElbowAngle, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-leftArmHingeX, -elbowDrawY));
+			Game.activeBatch.updateUniforms();
+
+			TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, elbowDrawY,
+					leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
+
+			Game.flush();
+			view.translate(new Vector2f(leftArmHingeX, elbowDrawY));
+			view.rotate(-leftElbowAngle, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-leftArmHingeX, -elbowDrawY));
 			Game.activeBatch.updateUniforms();
 
 			Game.flush();
-			view.translate(new Vector2f(rightArmHingeX, rightArmDrawY));
-			view.rotate(rightArmAngle, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-rightArmHingeX, -rightArmDrawY));
+			view.translate(new Vector2f(leftArmHingeX, shoulderDrawY));
+			view.rotate(-leftShoulderAngle, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-leftArmHingeX, -shoulderDrawY));
 			Game.activeBatch.updateUniforms();
 
-			TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, rightArmDrawY,
-					rightArmDrawX + armImageTexture.getWidth(), rightArmDrawY + armImageTexture.getHeight());
+			Game.flush();
+			view.translate(new Vector2f(rightArmHingeX, shoulderDrawY));
+			view.rotate(rightShoulderAngle, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-rightArmHingeX, -shoulderDrawY));
+			Game.activeBatch.updateUniforms();
+
+			TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, shoulderDrawY,
+					rightArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight());
+
+			Game.flush();
+			view.translate(new Vector2f(rightArmHingeX, elbowDrawY));
+			view.rotate(rightElbowAngle, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-rightArmHingeX, -elbowDrawY));
+			Game.activeBatch.updateUniforms();
+
+			TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, elbowDrawY,
+					rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
 
 			// weapon
 			if (equipped != null && !sleeping) {
@@ -667,9 +702,15 @@ public class Actor extends GameObject {
 			}
 
 			Game.flush();
-			view.translate(new Vector2f(rightArmHingeX, rightArmDrawY));
-			view.rotate(-rightArmAngle, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-rightArmHingeX, -rightArmDrawY));
+			view.translate(new Vector2f(rightArmHingeX, elbowDrawY));
+			view.rotate(-rightElbowAngle, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-rightArmHingeX, -elbowDrawY));
+			Game.activeBatch.updateUniforms();
+
+			Game.flush();
+			view.translate(new Vector2f(rightArmHingeX, shoulderDrawY));
+			view.rotate(-rightShoulderAngle, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-rightArmHingeX, -shoulderDrawY));
 			Game.activeBatch.updateUniforms();
 
 		}
@@ -1588,6 +1629,7 @@ public class Actor extends GameObject {
 	}
 
 	protected Class[] soundClassesToReactTo = new Class[] { Weapon.class, BrokenGlass.class };
+	public int walkPhase = 0;
 
 	public void createSearchLocationsBasedOnSound(Sound sound) {
 
