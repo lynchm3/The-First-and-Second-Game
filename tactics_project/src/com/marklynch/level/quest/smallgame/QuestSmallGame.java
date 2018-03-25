@@ -35,6 +35,7 @@ import com.marklynch.objects.units.Actor.HOBBY;
 import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Thief;
+import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.utils.TextUtils;
 
 public class QuestSmallGame extends Quest {
@@ -336,10 +337,13 @@ public class QuestSmallGame extends Quest {
 		Game.level.structures.add(barracks);
 
 		// Fisherman
-		Templates.FISHERMAN.makeCopy("Fisherman Jake", Game.level.squares[103][37], Game.level.factions.townsPeople,
-				null, 38, new GameObject[] { Templates.FISHING_ROD.makeCopy(null, null) }, new GameObject[] {},
-				AreaList.town, new int[] { Templates.FISHING_ROD.templateId },
-				new HOBBY[] { HOBBY.HUNTING, HOBBY.FISHING });
+		Human fishermanJake = Templates.FISHERMAN.makeCopy("Fisherman Jake", Game.level.squares[103][37],
+				Game.level.factions.townsPeople, null, 38,
+				new GameObject[] { Templates.FISHING_ROD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
+				new int[] { Templates.FISHING_ROD.templateId }, new HOBBY[] { HOBBY.HUNTING, HOBBY.FISHING });
+		LegArmor dungarees = Templates.DUNGAREES.makeCopy(null, fishermanJake);
+		fishermanJake.inventory.add(dungarees);
+		fishermanJake.legArmor = dungarees;
 
 		// Thieves and their hut
 		Templates.THIEF.makeCopy("Thief Ed", Game.level.squares[12][13], Game.level.factions.outsiders,

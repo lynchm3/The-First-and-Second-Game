@@ -16,6 +16,7 @@ import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.Thief;
 import com.marklynch.objects.units.Trader;
+import com.marklynch.utils.ResourceUtils;
 
 public class TemplatesHumans {
 
@@ -35,6 +36,7 @@ public class TemplatesHumans {
 		Templates.PLAYER.bluntDamage = 3;
 		Templates.PLAYER.imageTexturePath = "hero.png";
 		Templates.PLAYER.imageTexture = getGlobalImage(Templates.PLAYER.imageTexturePath, true);
+		Templates.PLAYER.hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
 		Templates.PLAYER.heightRatio = 1.5f;
 		Templates.PLAYER.drawOffsetRatioY = -0.5f;
 		Templates.PLAYER.weight = 90f;
@@ -99,13 +101,16 @@ public class TemplatesHumans {
 		Templates.FISHERMAN.dexterity = 4;
 		Templates.FISHERMAN.intelligence = 3;
 		Templates.FISHERMAN.endurance = 11;
-		Templates.FISHERMAN.imageTexturePath = "fisherman.png";
+		Templates.FISHERMAN.imageTexturePath = "hero.png";
 		Templates.FISHERMAN.imageTexture = getGlobalImage(Templates.FISHERMAN.imageTexturePath, true);
+		Templates.FISHERMAN.hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
 		Templates.FISHERMAN.heightRatio = 1.5f;
 		Templates.FISHERMAN.drawOffsetRatioY = -0.5f;
 		Templates.FISHERMAN.weight = 68f;
-		Templates.FISHERMAN.handAnchorX = 93f;
-		Templates.FISHERMAN.handAnchorY = 166f;
+		Templates.FISHERMAN.handAnchorX = 75f;
+		Templates.FISHERMAN.handAnchorY = 127f;
+		Templates.FISHERMAN.headAnchorX = 70f;
+		Templates.FISHERMAN.headAnchorY = 23f;
 		Templates.FISHERMAN.canOpenDoors = true;
 		Templates.FISHERMAN.canEquipWeapons = true;
 		Templates.FISHERMAN.aiRoutine = new AIRoutineForFisherman(Templates.FISHERMAN);

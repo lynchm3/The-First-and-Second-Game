@@ -255,8 +255,8 @@ public class Mirror extends GameObject {
 					helmetPositionYInPixels + actor.helmet.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
 					false);
 		} else if (actor.hairImageTexture != null) {
-			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + actor.headAnchorX - 0);
-			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + actor.headAnchorX - 0);
+			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels);
+			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels);
 			alpha = 1.0f;
 			TextureUtils.drawTextureWithinBounds(actor.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + actor.hairImageTexture.getWidth(),

@@ -603,8 +603,8 @@ public class Actor extends GameObject {
 			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels, helmetPositionYInPixels,
 					helmetPositionXInPixels + helmet.width, helmetPositionYInPixels + helmet.height);
 		} else if (hairImageTexture != null) {
-			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + headAnchorX - 0);
-			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + headAnchorX - 0);
+			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
+			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
@@ -1623,6 +1623,7 @@ public class Actor extends GameObject {
 		actor.headAnchorY = headAnchorY;
 		actor.canOpenDoors = canOpenDoors;
 		actor.canEquipWeapons = canEquipWeapons;
+		actor.hairImageTexture = hairImageTexture;
 		if (aiRoutine != null)
 			actor.aiRoutine = aiRoutine.getInstance(actor);
 		actor.init(gold, mustHaves, mightHaves);

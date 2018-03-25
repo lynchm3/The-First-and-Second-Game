@@ -53,7 +53,6 @@ public class Player extends Human {
 	public long lastUpdateRealtime = 0;
 
 	public Player() {
-		hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
 		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png", false);
 		stepRightTexture = ResourceUtils.getGlobalImage("player_step_right.png", false);
 		powers.add(new PowerBleed(this));
