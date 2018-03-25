@@ -326,6 +326,10 @@ public class Actor extends GameObject {
 	public AIPath getPathTo(Square target) {
 
 		if (target == null) {
+
+			if (Game.level.activeActor.name.contains("Fisher")) {
+				System.out.println("path return null A");
+			}
 			return null;
 		}
 
@@ -372,6 +376,9 @@ public class Actor extends GameObject {
 		if (aStarNodesPath != null)
 			return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
 
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("path return null B");
+		}
 		return null;
 
 	}
@@ -379,6 +386,10 @@ public class Actor extends GameObject {
 	public AIPath getPathAtSquareLevel(Square target) {
 
 		if (target == null) {
+
+			if (Game.level.activeActor.name.contains("Fisher")) {
+				System.out.println("path return null C");
+			}
 			return null;
 		}
 
@@ -405,13 +416,22 @@ public class Actor extends GameObject {
 
 			AIPath path = new AIPath(squarePath, squarePath.size(), completePath);
 
-			if (completePath == false && straightLineDistanceBetween(this.squareGameObjectIsOn, target) < 30) {
-				return null;
-			}
+			// if (completePath == false &&
+			// straightLineDistanceBetween(this.squareGameObjectIsOn, target) <
+			// 30) {
+			//
+			// if (Game.level.activeActor.name.contains("Fisher")) {
+			// System.out.println("path return null D");
+			// }
+			// return null;
+			// }
 
 			return path;
 		}
 
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("path return null E");
+		}
 		return null;
 
 	}

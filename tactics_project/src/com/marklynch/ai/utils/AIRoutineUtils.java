@@ -181,10 +181,10 @@ public class AIRoutineUtils {
 					if (Game.level.activeActor.name.contains("Fisher")) {
 						System.out.println("object passed checks");
 					}
-					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn); // HERE
+					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn);
 
-					if (Game.level.activeActor.name.contains("Farmer")) {
-						System.out.println("object passed checks");
+					if (Game.level.activeActor.name.contains("Fisher")) {
+						System.out.println("Path == " + path + ", object = " + object);
 					}
 
 					if (path == null) {

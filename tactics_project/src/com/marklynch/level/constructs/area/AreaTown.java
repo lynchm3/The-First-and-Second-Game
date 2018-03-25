@@ -12,6 +12,7 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.squares.Node;
@@ -117,15 +118,12 @@ public class AreaTown {
 		Templates.TREE.makeCopy(Game.level.squares[23][5], null);
 		Templates.BUSH.makeCopy(Game.level.squares[17][19], null);
 
-		// new BodyOfWater(105, 30, 110, 37);
-		// Templates.FISH.makeCopy("Fish", Game.level.squares[107][34],
-		// FactionList.buns, null, new GameObject[] {},
-		// new GameObject[] {}, null);
-		// Templates.CHEST.makeCopy("Chest", Game.level.squares[107][33], false,
-		// null);
-		// Templates.CRATE.makeCopy("Crate", Game.level.squares[106][31], false,
-		// null);
-		new BodyOfWater(105, 30, 106, 37);
+		new BodyOfWater(105, 30, 110, 37);
+		Templates.FISH.makeCopy("Fish", Game.level.squares[107][34], FactionList.buns, null, new GameObject[] {},
+				new GameObject[] {}, null);
+		Templates.CHEST.makeCopy("Chest", Game.level.squares[107][33], false, null);
+		Templates.CRATE.makeCopy("Crate", Game.level.squares[106][31], false, null);
+		// new BodyOfWater(105, 30, 106, 37);
 
 	}
 
