@@ -1330,10 +1330,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// Body Armor
 		if (gameObjectToDrawOnPlayersBody != null) {
-			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels
-					+ (Game.level.player.bodyAnchorX - gameObjectToDrawOnPlayersBody.anchorX) * 2);
-			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels
-					+ (Game.level.player.bodyAnchorY - gameObjectToDrawOnPlayersBody.anchorY) * 2);
+			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
+			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
 			TextureUtils.drawTexture(gameObjectToDrawOnPlayersBody.imageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + gameObjectToDrawOnPlayersBody.width * 2,
 					bodyArmorPositionYInPixels + gameObjectToDrawOnPlayersBody.height * 2);
@@ -1341,10 +1339,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// Leg Armor
 		if (gameObjectToDrawOnPlayersLegs != null) {
-			int legArmorPositionXInPixels = (int) (actorPositionXInPixels
-					+ (Game.level.player.legsAnchorX - gameObjectToDrawOnPlayersLegs.anchorX) * 2);
-			int legArmorPositionYInPixels = (int) (actorPositionYInPixels
-					+ (Game.level.player.legsAnchorY - gameObjectToDrawOnPlayersLegs.anchorY) * 2);
+			int legArmorPositionXInPixels = (actorPositionXInPixels);
+			int legArmorPositionYInPixels = (actorPositionYInPixels);
 			TextureUtils.drawTexture(gameObjectToDrawOnPlayersLegs.imageTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + gameObjectToDrawOnPlayersLegs.width * 2,
 					legArmorPositionYInPixels + gameObjectToDrawOnPlayersLegs.height * 2);

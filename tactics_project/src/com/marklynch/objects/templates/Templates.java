@@ -201,6 +201,7 @@ public class Templates {
 
 	// Leg Armor
 	public static LegArmor PANTS;
+	public static LegArmor DUNGAREES;
 
 	// Furniture;
 	public static Bed BED;

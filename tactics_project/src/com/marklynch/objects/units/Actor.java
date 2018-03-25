@@ -127,10 +127,10 @@ public class Actor extends GameObject {
 	public float handAnchorY;
 	public float headAnchorX;
 	public float headAnchorY;
-	public float bodyAnchorX;
-	public float bodyAnchorY;
-	public float legsAnchorX;
-	public float legsAnchorY;
+	// public float bodyAnchorX;
+	// public float bodyAnchorY;
+	// public float legsAnchorX;
+	// public float legsAnchorY;
 
 	public boolean canOpenDoors = false;
 	public boolean canEquipWeapons = false;
@@ -603,8 +603,8 @@ public class Actor extends GameObject {
 			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels, helmetPositionYInPixels,
 					helmetPositionXInPixels + helmet.width, helmetPositionYInPixels + helmet.height);
 		} else if (hairImageTexture != null) {
-			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + bodyAnchorX - 0);
-			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + bodyAnchorY - 0);
+			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + headAnchorX - 0);
+			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + headAnchorX - 0);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
@@ -613,8 +613,8 @@ public class Actor extends GameObject {
 
 		if (bodyArmor != null && !sleeping) {
 
-			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + bodyAnchorX - bodyArmor.anchorX);
-			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + bodyAnchorY - bodyArmor.anchorY);
+			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
+			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
@@ -623,8 +623,8 @@ public class Actor extends GameObject {
 
 		if (legArmor != null && !sleeping) {
 
-			int legArmorPositionXInPixels = (int) (actorPositionXInPixels + legsAnchorX - legArmor.anchorX);
-			int legArmorPositionYInPixels = (int) (actorPositionYInPixels + legsAnchorY - legArmor.anchorY);
+			int legArmorPositionXInPixels = (actorPositionXInPixels);
+			int legArmorPositionYInPixels = (actorPositionYInPixels);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
@@ -1621,10 +1621,6 @@ public class Actor extends GameObject {
 		actor.handAnchorY = handAnchorY;
 		actor.headAnchorX = headAnchorX;
 		actor.headAnchorY = headAnchorY;
-		actor.bodyAnchorX = bodyAnchorX;
-		actor.bodyAnchorY = bodyAnchorY;
-		actor.legsAnchorX = legsAnchorX;
-		actor.legsAnchorY = legsAnchorY;
 		actor.canOpenDoors = canOpenDoors;
 		actor.canEquipWeapons = canEquipWeapons;
 		if (aiRoutine != null)

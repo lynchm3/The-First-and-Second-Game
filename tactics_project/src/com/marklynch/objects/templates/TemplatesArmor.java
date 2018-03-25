@@ -86,8 +86,8 @@ public class TemplatesArmor {
 		Templates.JUMPER.imageTexturePath = "jumper.png";
 		Templates.JUMPER.imageTexture = getGlobalImage(Templates.JUMPER.imageTexturePath, true);
 		Templates.JUMPER.totalHealth = Templates.JUMPER.remainingHealth = 20;
-		Templates.JUMPER.widthRatio = 0.25f;
-		Templates.JUMPER.heightRatio = 0.75f;
+		Templates.JUMPER.widthRatio = 1f;
+		Templates.JUMPER.heightRatio = 1.5f;
 		Templates.JUMPER.drawOffsetRatioX = 0f;
 		Templates.JUMPER.drawOffsetRatioY = 0f;
 		Templates.JUMPER.soundWhenHit = 1f;
@@ -96,8 +96,6 @@ public class TemplatesArmor {
 		Templates.JUMPER.stackable = false;
 		Templates.JUMPER.weight = 14f;
 		Templates.JUMPER.value = 30;
-		Templates.JUMPER.anchorX = 0;
-		Templates.JUMPER.anchorY = 0;
 		Templates.JUMPER.templateId = GameObject.generateNewTemplateId();
 
 		// Leg Armor
@@ -107,8 +105,8 @@ public class TemplatesArmor {
 		Templates.PANTS.imageTexturePath = "pants.png";
 		Templates.PANTS.imageTexture = getGlobalImage(Templates.PANTS.imageTexturePath, true);
 		Templates.PANTS.totalHealth = Templates.PANTS.remainingHealth = 20;
-		Templates.PANTS.widthRatio = 0.5f;
-		Templates.PANTS.heightRatio = 1f;
+		Templates.PANTS.widthRatio = 1f;
+		Templates.PANTS.heightRatio = 1.5f;
 		Templates.PANTS.drawOffsetRatioX = 0f;
 		Templates.PANTS.drawOffsetRatioY = 0f;
 		Templates.PANTS.soundWhenHit = 1f;
@@ -117,9 +115,24 @@ public class TemplatesArmor {
 		Templates.PANTS.stackable = false;
 		Templates.PANTS.weight = 12f;
 		Templates.PANTS.value = 24;
-		Templates.PANTS.anchorX = 0;
-		Templates.PANTS.anchorY = 0;
 		Templates.PANTS.templateId = GameObject.generateNewTemplateId();
+
+		Templates.DUNGAREES = new LegArmor();
+		Templates.DUNGAREES.name = "Dungarees";
+		Templates.DUNGAREES.imageTexturePath = "dungarees.png";
+		Templates.DUNGAREES.imageTexture = getGlobalImage(Templates.DUNGAREES.imageTexturePath, true);
+		Templates.DUNGAREES.totalHealth = Templates.DUNGAREES.remainingHealth = 27;
+		Templates.DUNGAREES.widthRatio = 1f;
+		Templates.DUNGAREES.heightRatio = 1.5f;
+		Templates.DUNGAREES.drawOffsetRatioX = 0f;
+		Templates.DUNGAREES.drawOffsetRatioY = 0f;
+		Templates.DUNGAREES.soundWhenHit = 1f;
+		Templates.DUNGAREES.soundWhenHitting = 1f;
+		Templates.DUNGAREES.soundDampening = 1f;
+		Templates.DUNGAREES.stackable = false;
+		Templates.DUNGAREES.weight = 14f;
+		Templates.DUNGAREES.value = 29;
+		Templates.DUNGAREES.templateId = GameObject.generateNewTemplateId();
 	}
 
 }

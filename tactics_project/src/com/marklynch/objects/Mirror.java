@@ -255,8 +255,8 @@ public class Mirror extends GameObject {
 					helmetPositionYInPixels + actor.helmet.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
 					false);
 		} else if (actor.hairImageTexture != null) {
-			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + actor.bodyAnchorX - 0);
-			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + actor.bodyAnchorY - 0);
+			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + actor.headAnchorX - 0);
+			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + actor.headAnchorX - 0);
 			alpha = 1.0f;
 			TextureUtils.drawTextureWithinBounds(actor.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + actor.hairImageTexture.getWidth(),
@@ -266,10 +266,8 @@ public class Mirror extends GameObject {
 
 		if (actor.bodyArmor != null && !actor.sleeping) {
 
-			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + actor.bodyAnchorX
-					- actor.bodyArmor.anchorX);
-			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + actor.bodyAnchorY
-					- actor.bodyArmor.anchorY);
+			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels);
+			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels);
 			alpha = 1.0f;
 			TextureUtils.drawTextureWithinBounds(actor.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + actor.bodyArmor.width,
@@ -284,8 +282,8 @@ public class Mirror extends GameObject {
 
 		if (actor.legArmor != null && !actor.sleeping) {
 
-			int legArmorPositionXInPixels = (int) (actorPositionXInPixels + actor.legsAnchorX - actor.legArmor.anchorX);
-			int legArmorPositionYInPixels = (int) (actorPositionYInPixels + actor.legsAnchorY - actor.legArmor.anchorY);
+			int legArmorPositionXInPixels = (int) (actorPositionXInPixels);
+			int legArmorPositionYInPixels = (int) (actorPositionYInPixels);
 			alpha = 1.0f;
 			TextureUtils.drawTextureWithinBounds(actor.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + actor.legArmor.width,
