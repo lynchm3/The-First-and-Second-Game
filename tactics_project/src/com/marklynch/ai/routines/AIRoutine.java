@@ -44,6 +44,7 @@ import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrowItem;
 import com.marklynch.objects.actions.ActionWrite;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.HOBBY;
@@ -1512,13 +1513,23 @@ public abstract class AIRoutine {
 
 		actor.followersShouldFollow = false;
 
-		Fish target = (Fish) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false, false, 0,
-				false, Fish.class);
+		Fish target = (Fish) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, true, false, false, false, 0,
+				false, Fish.class); // target is null, wtf
 		actor.thoughtBubbleImageTextureObject = Action.textureFishing;
 
-		if (target == null) {
+		FishingRod fishingRod = null;
+		ArrayList<GameObject> fishingRods = actor.inventory.getGameObjectsOfClass(FishingRod.class);
+		for (GameObject f : fishingRods) {
+			fishingRod = (FishingRod) f;
+		}
+
+		System.out.println("target = " + target);
+		System.out.println("fishingRod  = " + fishingRod);
+		System.out.println("fishingRod.maxRange  = " + fishingRod.maxRange);
+
+		if (target == null || fishingRod == null) {
 			return false;
-		} else if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) <= 1) {
+		} else if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) <= fishingRod.maxRange) {
 			if (target.squareGameObjectIsOn.inventory.waterBody != null) {
 				new ActionFishingStart(actor, target).perform();
 			} else {

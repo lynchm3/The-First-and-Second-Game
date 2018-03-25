@@ -83,20 +83,13 @@ public class FishingRod extends Tool {
 	public float mouseDistanceToTargetRadians = 0f;
 	public float mouseToFishAngleRadians;
 
-	public void updateLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels, float delta) {
-
+	public void updateFishingMinigame(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels,
+			float delta) {
 		fishingTargetInTheWater = fisher.fishingTarget.squareGameObjectIsOn != null;
 
 		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
 			// Line
 			fishingLineX1 = lineAnchorX + weaponPositionXInPixels;
-			fishingLineY1 = lineAnchorY + weaponPositionYInPixels;
-			fishCenterX = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
-					+ fisher.fishingTarget.primaryAnimation.offsetX;
-			fishCenterY = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
-					+ fisher.fishingTarget.primaryAnimation.offsetY;
 
 			// Fish circle
 			circleX1 = fishCenterX - fishCircleRadius;
@@ -204,10 +197,28 @@ public class FishingRod extends Tool {
 			}
 
 		}
+	}
+
+	public void updateLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels, float delta) {
+
+		fishingTargetInTheWater = fisher.fishingTarget.squareGameObjectIsOn != null;
+
+		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
+			// Line
+			fishingLineX1 = lineAnchorX + weaponPositionXInPixels;
+			fishingLineY1 = lineAnchorY + weaponPositionYInPixels;
+			fishCenterX = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
+					+ fisher.fishingTarget.primaryAnimation.offsetX;
+			fishCenterY = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
+					+ fisher.fishingTarget.primaryAnimation.offsetY;
+
+		}
 
 	}
 
-	public void drawLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels) {
+	public void drawFishingMinigame(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels) {
 
 		boolean fishingTargetInTheWater = fisher.fishingTarget.squareGameObjectIsOn != null;
 
@@ -285,6 +296,11 @@ public class FishingRod extends Tool {
 			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, x2, y2, 2);
 		}
 
+	}
+
+	public void drawLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels) {
+		// Fishing line
+		LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
 	}
 
 	public void reset() {

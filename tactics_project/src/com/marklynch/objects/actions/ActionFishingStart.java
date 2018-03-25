@@ -26,6 +26,7 @@ public class ActionFishingStart extends Action {
 	// Default for hostiles
 	public ActionFishingStart(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_fishing.png");
+		System.out.println("ActionFishingStart()");
 		this.performer = attacker;
 		this.target = target;
 		if (!check()) {

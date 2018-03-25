@@ -171,40 +171,40 @@ public class AIRoutineUtils {
 
 			int straightLineDistance = Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn);
 			if (straightLineDistance <= maxDistance) {
-				// if (Game.level.activeActor.name.contains("Farmer")) {
-				// System.out.println("object to check +1 = " + object);
-				// }
+				if (Game.level.activeActor.name.contains("Fisher")) {
+					System.out.println("object to check +1 = " + object);
+				}
 
 				if (passesChecks(object, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
 						minimumGoldValue, null, false)) {
 
-					// if (Game.level.activeActor.name.contains("Farmer")) {
-					// System.out.println("object passed checks");
-					// }
+					if (Game.level.activeActor.name.contains("Fisher")) {
+						System.out.println("object passed checks");
+					}
 					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn); // HERE
 
-					// if (Game.level.activeActor.name.contains("Farmer")) {
-					// System.out.println("object passed checks");
-					// }
+					if (Game.level.activeActor.name.contains("Farmer")) {
+						System.out.println("object passed checks");
+					}
 
 					if (path == null) {
 						Game.level.activeActor.aiRoutine.ignoreList.add(object);
 					} else if (path.complete) {
 						tempPath = path;
-						// if (Game.level.activeActor.name.contains("Farmer")) {
-						// System.out.println("exit a");
-						// }
+						if (Game.level.activeActor.name.contains("Fisher")) {
+							System.out.println("exit a");
+						}
 						return object;
 					} else if (straightLineDistance > 20) {
 						tempPath = path;
-						// if (Game.level.activeActor.name.contains("Farmer")) {
-						// System.out.println("exit b");
-						// }
+						if (Game.level.activeActor.name.contains("Fisher")) {
+							System.out.println("exit b");
+						}
 						return object;
 					} else if (path.travelCost < bestPathTravelCost) {
-						// if (Game.level.activeActor.name.contains("Farmer")) {
-						// System.out.println("exit c");
-						// }
+						if (Game.level.activeActor.name.contains("Fisher")) {
+							System.out.println("exit c");
+						}
 						bestObject = object;
 						bestPath = path;
 						bestPathTravelCost = path.travelCost;
@@ -347,33 +347,66 @@ public class AIRoutineUtils {
 	public static boolean passesChecks(GameObject gameObject, boolean fitsInInventory, boolean mustContainsObjects,
 			boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue, Class[] classes, boolean DOESNOTHING) {
 
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("passesChecks B");
+		}
+
 		if (Game.level.activeActor.aiRoutine.ignoreList.contains(gameObject))
 			return false;
 
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("passesChecks C");
+		}
+
 		if (gameObject.value < minimumValue)
 			return false;
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("passesChecks D");
+		}
 
 		if (ignoreQuestObjects && gameObject.quest != null)
 			return false;
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("passesChecks E");
+		}
 
 		if (mustBeUnowned && gameObject.owner != null)
 			return false;
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("passesChecks F");
+		}
 
 		if (gameObject.remainingHealth <= 0)
 			return false;
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("passesChecks G");
+		}
 
 		if (mustContainsObjects && gameObject.inventory.size() <= 0)
 			return false;
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("passesChecks H");
+		}
 
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
 
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("passesChecks I");
+		}
+
 		if (classes == null || classes.length == 0)
 			return true;
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("passesChecks J");
+		}
 
 		for (Class clazz : classes) {
 			if (clazz == null || clazz.isInstance(gameObject))
 				return true;
+		}
+		if (Game.level.activeActor.name.contains("Fisher")) {
+			System.out.println("passesChecks K");
 		}
 
 		return false;

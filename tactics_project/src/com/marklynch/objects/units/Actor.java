@@ -569,7 +569,10 @@ public class Actor extends GameObject {
 			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, weaponPositionXInPixels,
 					weaponPositionYInPixels, weaponPositionXInPixels + equipped.width,
 					weaponPositionYInPixels + equipped.height);
-
+			if (fishingTarget != null && equipped instanceof FishingRod) {
+				FishingRod fishingRod = (FishingRod) equipped;
+				fishingRod.drawLine(this, weaponPositionXInPixels, weaponPositionYInPixels);
+			}
 		}
 
 		if (helmet != null && !sleeping) {
@@ -626,7 +629,7 @@ public class Actor extends GameObject {
 
 			if (fishingTarget != null && equipped instanceof FishingRod) {
 				FishingRod fishingRod = (FishingRod) equipped;
-				fishingRod.drawLine(this, weaponPositionXInPixels, weaponPositionYInPixels);
+				fishingRod.drawFishingMinigame(this, weaponPositionXInPixels, weaponPositionYInPixels);
 			}
 
 		}
@@ -857,6 +860,9 @@ public class Actor extends GameObject {
 			int weaponPositionYInPixels = (int) (actorPositionYInPixels + handAnchorY - equipped.anchorY);
 			FishingRod fishingRod = (FishingRod) equipped;
 			fishingRod.updateLine(this, weaponPositionXInPixels, weaponPositionYInPixels, delta);
+			if (this == Game.level.player) {
+				fishingRod.updateFishingMinigame(this, weaponPositionXInPixels, weaponPositionYInPixels, delta);
+			}
 		}
 		// END FISHING
 	}

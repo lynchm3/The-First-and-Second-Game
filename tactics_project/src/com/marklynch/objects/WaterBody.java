@@ -151,20 +151,16 @@ public class WaterBody extends WaterSource {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-
-		System.out.println("updateRealtime");
 		texturesIndex++;
 		if (texturesIndex == textures.size())
 			texturesIndex = 0;
-		System.out.println("updateRealtime texturesIndex = " + texturesIndex);
 		imageTexture = textures.get(texturesIndex);
-		System.out.println("updateRealtime imageTexture = " + imageTexture);
 
 		if (fish != null && fish.squareGameObjectIsOn == null) {
 			fish = null;
 		}
 
-		if (this.fish == null && Math.random() > 0.99d) {
+		if (this.fish == null && Math.random() > 0.9d) {
 			this.fish = addFish();
 		}
 	}
@@ -389,9 +385,6 @@ public class WaterBody extends WaterSource {
 		waterBody.textures = this.textures;
 		waterBody.texturesIndex = new Random().nextInt(waterBody.textures.size());
 		waterBody.imageTexture = waterBody.textures.get(texturesIndex);
-
-		System.out.println("makeCopy texturesIndex = " + texturesIndex);
-		System.out.println("makeCopy imageTexture = " + imageTexture);
 
 		return waterBody;
 	}
