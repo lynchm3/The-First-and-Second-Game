@@ -19,6 +19,7 @@ public class ActionFishingStart extends Action {
 	public static final String ACTION_NAME = "Fishing";
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
 	public static final String ACTION_NAME_NEED_FISHING_ROD = ACTION_NAME + " (need fishing rod)";
+	public static final String ACTION_NAME_ALREADY_BEING_FISHED = ACTION_NAME + " (taken)";
 
 	Actor performer;
 	GameObject target;
@@ -62,22 +63,23 @@ public class ActionFishingStart extends Action {
 			performer.equippedBeforePickingUpObject = performer.equipped;
 		performer.equipped = fishingRod;
 
+		if (Game.level.shouldLog(target, performer)) {
+			Game.level.logOnScreen(
+					new ActivityLog(new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
+		}
+
 		if (performer == Game.level.player) {
 			Level.levelMode = LevelMode.LEVEL_MODE_FISHING;
-			if (Game.level.shouldLog(target, performer)) {
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
-				// target.primaryAnimation = new AnimationShake();
-			}
 			Player.playerTargetAction = new ActionFishingInProgress(performer, target);
 			Player.playerTargetSquare = performer.squareGameObjectIsOn;
 			Player.playerFirstMove = true;
 		} else {
-			if (Math.random() < 2) {
-				if (Game.level.shouldLog(target, performer))
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " went fishing for ", target,
-							" with ", fishingRod, " but failed!" }));
-			}
+			// if (Math.random() < 2) {
+			// if (Game.level.shouldLog(target, performer))
+			// Game.level.logOnScreen(new ActivityLog(new Object[] { performer,
+			// " went fishing for ", target,
+			// " with ", fishingRod, " but failed!" }));
+			// }
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
@@ -109,6 +111,12 @@ public class ActionFishingStart extends Action {
 		if (!performer.inventory.contains(FishingRod.class)) {
 			actionName = ACTION_NAME_NEED_FISHING_ROD;
 			disabledReason = "You need a fishing rod";
+			return false;
+		}
+
+		if (target.beingFishedBy != null) {
+			actionName = ACTION_NAME_NEED_FISHING_ROD;
+			disabledReason = "Already being fished";
 			return false;
 		}
 

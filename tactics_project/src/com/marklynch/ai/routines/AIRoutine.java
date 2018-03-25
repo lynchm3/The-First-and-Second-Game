@@ -1511,6 +1511,14 @@ public abstract class AIRoutine {
 
 	public boolean runFishingRoutine() {
 
+		if (actor.fishingTarget != null) {
+			Action action = new ActionFishingStart(actor, actor.fishingTarget);
+			if (action.enabled) {
+				action.perform();
+				return true;
+			}
+		}
+
 		actor.followersShouldFollow = false;
 
 		Fish target = (Fish) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, true, false, false, false, 0,

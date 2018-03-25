@@ -870,29 +870,29 @@ public class Actor extends GameObject {
 	@Override
 	public void update(int delta) {
 
-		if (this != Game.level.player) {
-
-			if (fishingTarget != null) {
-				fishingTarget.beingFishedBy = null;
-				fishingTarget.primaryAnimation = null;
-				fishingTarget = null;
-			}
-			if (choppingTarget != null) {
-				choppingTarget.beingChopped = false;
-				choppingTarget.primaryAnimation = null;
-				choppingTarget = null;
-			}
-			if (miningTarget != null) {
-				miningTarget.beingMined = false;
-				miningTarget.primaryAnimation = null;
-				miningTarget = null;
-			}
-			if (diggingTarget != null) {
-				diggingTarget.beingDigged = false;
-				diggingTarget.primaryAnimation = null;
-				diggingTarget = null;
-			}
-		}
+		// if (this != Game.level.player) {
+		//
+		// if (fishingTarget != null) {
+		// fishingTarget.beingFishedBy = null;
+		// fishingTarget.primaryAnimation = null;
+		// fishingTarget = null;
+		// }
+		// if (choppingTarget != null) {
+		// choppingTarget.beingChopped = false;
+		// choppingTarget.primaryAnimation = null;
+		// choppingTarget = null;
+		// }
+		// if (miningTarget != null) {
+		// miningTarget.beingMined = false;
+		// miningTarget.primaryAnimation = null;
+		// miningTarget = null;
+		// }
+		// if (diggingTarget != null) {
+		// diggingTarget.beingDigged = false;
+		// diggingTarget.primaryAnimation = null;
+		// diggingTarget = null;
+		// }
+		// }
 
 		if (this.remainingHealth > 0) {
 
