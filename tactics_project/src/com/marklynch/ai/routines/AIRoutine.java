@@ -32,6 +32,9 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionBuyItems;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDropItems;
+import com.marklynch.objects.actions.ActionFishingCompleted;
+import com.marklynch.objects.actions.ActionFishingFailed;
+import com.marklynch.objects.actions.ActionFishingInProgress;
 import com.marklynch.objects.actions.ActionFishingStart;
 import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.actions.ActionHideInside;
@@ -1510,9 +1513,20 @@ public abstract class AIRoutine {
 	}
 
 	public boolean runFishingRoutine() {
+		actor.thoughtBubbleImageTextureObject = Action.textureFishing;
 
 		if (actor.fishingTarget != null) {
-			Action action = new ActionFishingStart(actor, actor.fishingTarget);
+
+			FishingRod fishingRod = (FishingRod) actor.equipped;
+			if (fishingRod.caught) {
+				new ActionFishingCompleted(actor, actor.fishingTarget).perform();
+				return true;
+			} else if (fishingRod.lineDamage >= 1) {
+				new ActionFishingFailed(actor, actor.fishingTarget).perform();
+				return true;
+			}
+
+			Action action = new ActionFishingInProgress(actor, actor.fishingTarget);
 			if (action.enabled) {
 				action.perform();
 				return true;
@@ -1523,17 +1537,12 @@ public abstract class AIRoutine {
 
 		Fish target = (Fish) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, true, false, false, false, 0,
 				false, Fish.class); // target is null, wtf
-		actor.thoughtBubbleImageTextureObject = Action.textureFishing;
 
 		FishingRod fishingRod = null;
 		ArrayList<GameObject> fishingRods = actor.inventory.getGameObjectsOfClass(FishingRod.class);
 		for (GameObject f : fishingRods) {
 			fishingRod = (FishingRod) f;
 		}
-
-		System.out.println("target = " + target);
-		System.out.println("fishingRod  = " + fishingRod);
-		System.out.println("fishingRod.maxRange  = " + fishingRod.maxRange);
 
 		if (target == null || fishingRod == null) {
 			return false;

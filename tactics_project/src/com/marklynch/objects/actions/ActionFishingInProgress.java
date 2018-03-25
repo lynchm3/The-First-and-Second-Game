@@ -10,7 +10,6 @@ import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
-import com.marklynch.ui.ActivityLog;
 
 public class ActionFishingInProgress extends Action {
 
@@ -45,49 +44,13 @@ public class ActionFishingInProgress extends Action {
 		performer.fishingTarget = target;
 		target.beingFishedBy = performer;
 
-		// FishingRod fishingRod = null;
-		// ArrayList<GameObject> fishingRods =
-		// performer.inventory.getGameObjectsOfClass(FishingRod.class);
-		// for (GameObject f : fishingRods) {
-		// if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <=
-		// f.maxRange) {
-		// fishingRod = (FishingRod) f;
-		// }
-		// }
-		// performer.equipped = fishingRod;
-
-		if (performer == Game.level.player) {
+		if (performer == Level.player) {
 			Level.levelMode = LevelMode.LEVEL_MODE_FISHING;
-			// if (Game.level.shouldLog(target, performer)) {
-			// Game.level.logOnScreen(new ActivityLog(
-			// new Object[] { performer, " continued fishing for ", target, "
-			// with ", performer.equipped }));
-			// // target.primaryAnimation = new AnimationShake();
-			// }
-			double random = Math.random();
-			// if (random > 0.9d) {
-			// Player.playerTargetAction = new ActionFishingFailed(performer,
-			// target);
-			// Player.playerTargetSquare = performer.squareGameObjectIsOn;
-			// Player.playerFirstMove = true;
-			//
-			// } else if (random > 0.8d) {
-			// Player.playerTargetAction = new ActionFishingCompleted(performer,
-			// target);
-			// Player.playerTargetSquare = performer.squareGameObjectIsOn;
-			// Player.playerFirstMove = true;
-			//
-			// } else {
 			Player.playerTargetAction = new ActionFishingInProgress(performer, target);
 			Player.playerTargetSquare = performer.squareGameObjectIsOn;
 			Player.playerFirstMove = true;
 			// }
 		} else {
-			if (Math.random() < 2) {
-				if (Game.level.shouldLog(target, performer))
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " went fishing for ", target,
-							" with ", performer.equipped, " but failed!" }));
-			}
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
@@ -121,6 +84,9 @@ public class ActionFishingInProgress extends Action {
 			disabledReason = "You need a fishing rod";
 			return false;
 		}
+
+		if (target.remainingHealth <= 0)
+			return false;
 
 		return true;
 	}

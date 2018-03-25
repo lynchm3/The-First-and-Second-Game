@@ -45,22 +45,6 @@ public class ActionFishingCompleted extends Action {
 
 		performer.fishingTarget = target;
 
-		if (performer == Game.level.player) {
-			Level.pausePlayer();
-			target.primaryAnimation = null;
-			if (performer.equippedBeforePickingUpObject != null) {
-				performer.equipped = performer.equippedBeforePickingUpObject;
-				performer.equippedBeforePickingUpObject = null;
-			}
-		} else {
-			if (Math.random() < 2) {
-				if (Game.level.shouldLog(target, performer))
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " went fishing for ", target,
-							" with ", performer.equipped, " but failed!" }));
-				return;
-			}
-		}
-
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
@@ -83,6 +67,21 @@ public class ActionFishingCompleted extends Action {
 
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " caught ", target }));
+
+		FishingRod fishingRod = (FishingRod) performer.equipped;
+		performer.fishingTarget.beingFishedBy = null;
+		performer.fishingTarget = null;
+		fishingRod.reset();
+
+		if (performer == Game.level.player) {
+			Level.pausePlayer();
+			target.primaryAnimation = null;
+			if (performer.equippedBeforePickingUpObject != null) {
+				performer.equipped = performer.equippedBeforePickingUpObject;
+				performer.equippedBeforePickingUpObject = null;
+			}
+		} else {
+		}
 
 		if (!legal) {
 			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, target);

@@ -160,7 +160,7 @@ public class WaterBody extends WaterSource {
 			fish = null;
 		}
 
-		if (this.fish == null && Math.random() > 0.9d) {
+		if (this.fish == null && Math.random() > 0.99d) {
 			this.fish = addFish();
 		}
 	}

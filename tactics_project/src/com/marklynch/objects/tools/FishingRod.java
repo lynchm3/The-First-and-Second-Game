@@ -46,8 +46,8 @@ public class FishingRod extends Tool {
 	}
 
 	public float lineDamage = 0f;
-	public float progress = 0.5f;
 	public float progressThisTurn = 0f;
+	public boolean caught = false;
 
 	boolean fishingTargetInTheWater;
 
@@ -188,11 +188,9 @@ public class FishingRod extends Tool {
 			}
 
 			if (withinLimit) {
-				progress++;
 				progressThisTurn++;
 			} else {
 				lineDamage += delta / 10000f;
-				progress--;
 				progressThisTurn--;
 			}
 
@@ -214,6 +212,14 @@ public class FishingRod extends Tool {
 					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
 					+ fisher.fishingTarget.primaryAnimation.offsetY;
 
+			if (fisher != Game.level.player) {
+				float progressThisUpdate = (float) (Math.random() - 0.5);
+				progressThisTurn += progressThisUpdate;
+				if (progressThisUpdate < 0) {
+					lineDamage += delta / 10000f;
+				}
+
+			}
 		}
 
 	}
@@ -230,7 +236,8 @@ public class FishingRod extends Tool {
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 
 			// Fishing line
-			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
+			Color lineColor = new Color(lineDamage, 0, 0);
+			LineUtils.drawLine(lineColor, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
 
 			// Target direction (circle edge)
 			Game.flush();
@@ -254,11 +261,6 @@ public class FishingRod extends Tool {
 
 			// Mouse circle
 
-			Color lineDamageColor = Color.RED;
-			if (lineDamage < 1f) {
-				lineDamageColor = new Color(1f, 1f - lineDamage, 1f - lineDamage);
-			}
-
 			Game.flush();
 			view.translate(new Vector2f(mouseCircleCenterX, mouseCircleCenterY));
 			view.rotate(mouseToFishAngleRadians, new Vector3f(0f, 0f, 1f));
@@ -274,21 +276,6 @@ public class FishingRod extends Tool {
 			view.translate(new Vector2f(-mouseCircleCenterX, -mouseCircleCenterY));
 			Game.activeBatch.updateUniforms();
 
-			// TextureUtils.drawTexture(GameCursor.circleMouseFishing, 0.75f,
-			// mouseCircleX1, mouseCircleY1, mouseCircleX2,
-			// mouseCircleY2, lineDamageColor);
-
-			// TextureUtils.drawTexture(this.imageTexture, 1f, mouseCircleX1 +
-			// mouseCircleShakeX,
-			// mouseCircleY1 + mouseCircleShakeY, mouseCircleX2 +
-			// mouseCircleShakeX,
-			// mouseCircleY2 + mouseCircleShakeY);
-
-			// "progress" text
-			// TextUtils.printTextWithImages(mouseCircleCenterX + 8,
-			// mouseCircleCenterY, Integer.MAX_VALUE, false, null,
-			// progress);
-
 		} else if (fisher.fishingAnimation != null) {
 			float x2 = fisher.fishingAnimation.x + fisher.fishingTarget.halfWidth;
 			float y2 = fisher.fishingAnimation.y + fisher.fishingTarget.halfHeight;
@@ -300,15 +287,16 @@ public class FishingRod extends Tool {
 
 	public void drawLine(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels) {
 		// Fishing line
-		LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
+		Color lineColor = new Color(lineDamage, 0, 0);
+		LineUtils.drawLine(lineColor, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
 	}
 
 	public void reset() {
 		gradualTarget = -1f;
 		targetDirectionRadians = -1f;
-		progress = 0.5f;
+		progressThisTurn = 0f;
 		lineDamage = 0f;
-
+		caught = false;
 	}
 
 }

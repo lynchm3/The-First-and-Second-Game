@@ -62,7 +62,13 @@ public class ActionFishBeingFished extends Action {
 		speedX = (distanceToCoverX / totalDistanceToCover) * speed;
 		speedY = (distanceToCoverY / totalDistanceToCover) * speed;
 
+		boolean progressThisTurn = false;
 		if (fishingRod.progressThisTurn > 0) {
+			progressThisTurn = true;
+		}
+
+		if (progressThisTurn) {
+
 		} else {
 			performer.fightingFishingRod = true;
 			speedX = -speedX;
@@ -158,25 +164,30 @@ public class ActionFishBeingFished extends Action {
 		System.out.println("fishingRod.progressThisTurn = " + fishingRod.progressThisTurn);
 		System.out.println("performer.beingFishedBy = " + performer.beingFishedBy);
 
-		if (fishingRod.lineDamage >= 1) {
-			System.out.println("FISHING COMPLETED BOO!");
-			Player.playerTargetAction = new ActionFishingFailed(Level.player, performer);
-			Player.playerTargetSquare = performer.squareGameObjectIsOn;
-			Player.playerFirstMove = true;
+		if (performer.beingFishedBy == Game.level.player) {
+			if (fishingRod.lineDamage >= 1) {
+				Player.playerTargetAction = new ActionFishingFailed(Level.player, performer);
+				Player.playerTargetSquare = performer.squareGameObjectIsOn;
+				Player.playerFirstMove = true;
 
-		} else if (hitLand && fishingRod.progressThisTurn > 0 && performer.beingFishedBy == Game.level.player) {
-			System.out.println("FISHING COMPLETED WOO!");
-			Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
-			Player.playerTargetSquare = performer.squareGameObjectIsOn;
-			Player.playerFirstMove = true;
-		}
+			} else if (hitLand && fishingRod.progressThisTurn > 0 && performer.beingFishedBy == Game.level.player) {
+				Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
+				Player.playerTargetSquare = performer.squareGameObjectIsOn;
+				Player.playerFirstMove = true;
+			}
 
-		else if (totalDistanceToCover < Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH) {
-			System.out.println("FISHING COMPLETED WOO!");
-			Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
-			Player.playerTargetSquare = performer.squareGameObjectIsOn;
-			Player.playerFirstMove = true;
+			else if (totalDistanceToCover < Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH) {
+				Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
+				Player.playerTargetSquare = performer.squareGameObjectIsOn;
+				Player.playerFirstMove = true;
 
+			}
+		} else {
+			if (hitLand && fishingRod.progressThisTurn > 0) {
+				fishingRod.caught = true;
+			} else if (totalDistanceToCover < Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH) {
+				fishingRod.caught = true;
+			}
 		}
 
 		// Move over to other square if crossed over
