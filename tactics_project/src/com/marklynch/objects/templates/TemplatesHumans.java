@@ -37,11 +37,12 @@ public class TemplatesHumans {
 		Templates.PLAYER.imageTexturePath = "hero.png";
 		Templates.PLAYER.imageTexture = getGlobalImage(Templates.PLAYER.imageTexturePath, true);
 		Templates.PLAYER.hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
+		Templates.PLAYER.armImageTexture = ResourceUtils.getGlobalImage("arm.png", false);
 		Templates.PLAYER.heightRatio = 1.5f;
 		Templates.PLAYER.drawOffsetRatioY = -0.5f;
 		Templates.PLAYER.weight = 90f;
 		Templates.PLAYER.handAnchorX = 75f;
-		Templates.PLAYER.handAnchorY = 127f;
+		Templates.PLAYER.handAnchorY = 118f;
 		Templates.PLAYER.headAnchorX = 70f;
 		Templates.PLAYER.headAnchorY = 23f;
 		Templates.PLAYER.canOpenDoors = true;
@@ -108,7 +109,7 @@ public class TemplatesHumans {
 		Templates.FISHERMAN.drawOffsetRatioY = -0.5f;
 		Templates.FISHERMAN.weight = 68f;
 		Templates.FISHERMAN.handAnchorX = 75f;
-		Templates.FISHERMAN.handAnchorY = 127f;
+		Templates.PLAYER.handAnchorY = 118f;
 		Templates.FISHERMAN.headAnchorX = 70f;
 		Templates.FISHERMAN.headAnchorY = 23f;
 		Templates.FISHERMAN.canOpenDoors = true;

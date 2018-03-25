@@ -170,7 +170,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public static transient Texture downTexture = null;
 	public static transient Texture leftTexture = null;
 	public static transient Texture rightTexture = null;
-	public static transient Texture armTexture = null;
+	// public static transient Texture armTexture = null;
 	public static transient Texture grassNormalTexture = null;
 	public static transient Texture skipNormalTexture = null;
 
@@ -323,7 +323,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		downTexture = getGlobalImage("down.png", false);
 		leftTexture = getGlobalImage("left.png", false);
 		rightTexture = getGlobalImage("right.png", false);
-		armTexture = getGlobalImage("arm.png", false);
+		// armTexture = getGlobalImage("arm.png", false);
 		grassNormalTexture = getGlobalImage("grass_NRM.png", false);
 		skipNormalTexture = getGlobalImage("skip_with_shadow_NRM.png", false);
 		screamAudio = ResourceUtils.getGlobalSound("scream.wav");
