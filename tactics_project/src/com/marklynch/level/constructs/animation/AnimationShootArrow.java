@@ -12,6 +12,7 @@ public class AnimationShootArrow extends Animation {
 	float quarterDurationToReach;
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
+	boolean backwards = true;
 
 	// for show only, walking actor, primary
 
@@ -20,7 +21,7 @@ public class AnimationShootArrow extends Animation {
 	public AnimationShootArrow(GameObject target) {
 		super();
 		this.target = target;
-		durationToReach = 400;
+		durationToReach = 4000;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -57,24 +58,37 @@ public class AnimationShootArrow extends Animation {
 
 		} else if (progress < 0.5f) {
 
-			// 0.785
-
 			rightShoulderAngle = -1.57f;
 			rightElbowAngle = 0f * progress;
 
 			leftShoulderAngle = -1.57f + ((progress - 0.25f) * 1.57f);
 			leftElbowAngle = -((progress - 0.25f) * 3.14f);
 
-			System.out.println("leftShoulderAngle = " + leftShoulderAngle);
-			System.out.println("leftElbowAngle = " + leftElbowAngle);
+		} else if (progress < 0.75f) {
 
-		} else if (progress > 0.75f) {
+			rightShoulderAngle = -1.57f;
+			rightElbowAngle = 0f;
+
+			leftShoulderAngle = -1.1775f;
+			leftElbowAngle = -0.785f;
+
+		} else {
 
 			rightShoulderAngle = -6.28f * (1f - progress);
 			rightElbowAngle = 0f;
 
 			leftShoulderAngle = -1.1775f * (4 * (1 - progress));
 			leftElbowAngle = -0.785f * (4 * (1 - progress));
+		}
+
+		if (backwards) {
+			float temp = rightShoulderAngle;
+			rightShoulderAngle = -leftShoulderAngle;
+			leftShoulderAngle = -temp;
+
+			temp = rightElbowAngle;
+			rightElbowAngle = -leftElbowAngle;
+			leftElbowAngle = -temp;
 		}
 
 		if (progress >= 1) {

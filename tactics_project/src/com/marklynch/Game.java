@@ -57,12 +57,12 @@ public class Game {
 	// PLAYER START POSITION
 
 	// Shop
-	// public static int playerStartPosX = 3;
-	// public static int playerStartPosY = 3;
+	public static int playerStartPosX = 3;
+	public static int playerStartPosY = 3;
 
 	// Lake
-	public static int playerStartPosX = 103;
-	public static int playerStartPosY = 34;
+	// public static int playerStartPosX = 103;
+	// public static int playerStartPosY = 34;
 
 	// minor mine
 	// public static int playerStartPosX = 292;
