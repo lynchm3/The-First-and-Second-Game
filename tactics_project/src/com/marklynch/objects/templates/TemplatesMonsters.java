@@ -30,8 +30,6 @@ public class TemplatesMonsters {
 		Templates.BLIND.weight = 70f;
 		Templates.BLIND.canOpenDoors = false;
 		Templates.BLIND.canEquipWeapons = true;
-		Templates.BLIND.handAnchorX = 88;
-		Templates.BLIND.handAnchorY = 54;
 		Templates.BLIND.templateId = GameObject.generateNewTemplateId();
 		Templates.BLIND.aiRoutine = new AIRoutineForBlind(Templates.BLIND);
 		Templates.BLIND.flipYAxisInMirror = false;

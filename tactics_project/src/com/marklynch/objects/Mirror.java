@@ -294,8 +294,9 @@ public class Mirror extends GameObject {
 		// weapon
 		if (actor.equipped != null && !actor.sleeping) {
 
-			int weaponPositionXInPixels = (int) (actorPositionXInPixels + actor.handAnchorX - actor.equipped.anchorX);
-			int weaponPositionYInPixels = (int) (actorPositionYInPixels + actor.handAnchorY - actor.equipped.anchorY);
+			int weaponPositionXInPixels = (int) (actorPositionXInPixels + actor.rightArmHingeX
+					- actor.equipped.anchorX);
+			int weaponPositionYInPixels = (int) (actorPositionYInPixels + actor.handY - actor.equipped.anchorY);
 			alpha = 1.0f;
 			TextureUtils.drawTextureWithinBounds(actor.equipped.imageTexture, alpha, weaponPositionXInPixels,
 					weaponPositionYInPixels, weaponPositionXInPixels + actor.equipped.width,

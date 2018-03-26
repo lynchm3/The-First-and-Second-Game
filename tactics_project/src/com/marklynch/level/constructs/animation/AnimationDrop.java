@@ -29,9 +29,9 @@ public class AnimationDrop extends Animation {
 		if (shooter instanceof Actor) {
 			Actor shooterActor = (Actor) shooter;
 			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + shooter.drawOffsetRatioX * Game.SQUARE_WIDTH
-					+ shooterActor.handAnchorX - projectileObject.anchorX);
+					+ shooterActor.rightArmHingeX - projectileObject.anchorX);
 			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + shooter.drawOffsetRatioY * Game.SQUARE_HEIGHT
-					+ shooterActor.handAnchorY - projectileObject.anchorY);
+					+ shooterActor.handY - projectileObject.anchorY);
 		} else if (shooter instanceof Tree && projectileObject instanceof Food) {
 			Food fruit = (Food) projectileObject;
 			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + fruit.drawOffsetRatioX * Game.SQUARE_WIDTH);

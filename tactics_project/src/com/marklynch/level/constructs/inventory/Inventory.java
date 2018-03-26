@@ -1302,9 +1302,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// Object to draw player holding
 		if (gameObjectToDrawInPlayersHand != null) {
 			int weaponPositionXInPixels = (int) (actorPositionXInPixels
-					+ (Game.level.player.handAnchorX - gameObjectToDrawInPlayersHand.anchorX) * 2);
+					+ (Game.level.player.rightArmHingeX - gameObjectToDrawInPlayersHand.anchorX) * 2);
 			int weaponPositionYInPixels = (int) (actorPositionYInPixels
-					+ (Game.level.player.handAnchorY - gameObjectToDrawInPlayersHand.anchorY) * 2);
+					+ (Game.level.player.handY - gameObjectToDrawInPlayersHand.anchorY) * 2);
 			TextureUtils.drawTexture(gameObjectToDrawInPlayersHand.imageTexture, alpha, weaponPositionXInPixels,
 					weaponPositionYInPixels, weaponPositionXInPixels + gameObjectToDrawInPlayersHand.width * 2,
 					weaponPositionYInPixels + gameObjectToDrawInPlayersHand.height * 2);

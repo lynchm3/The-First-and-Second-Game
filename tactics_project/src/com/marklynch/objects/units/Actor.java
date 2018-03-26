@@ -127,8 +127,6 @@ public class Actor extends GameObject {
 	public Helmet helmet;
 	public BodyArmor bodyArmor;
 	public LegArmor legArmor;
-	public float handAnchorX;
-	public float handAnchorY;
 	// public float headAnchorX;
 	// public float headAnchorY;
 	// public float bodyAnchorX;
@@ -158,6 +156,7 @@ public class Actor extends GameObject {
 	public Texture armImageTexture = null;
 	public float shoulderY = 53;
 	public float elbowY = 85;
+	public float handY = 118f;
 	public float leftArmDrawX = 48;
 	public float leftArmHingeX = 50;
 	public float rightArmDrawX = 76;
@@ -686,8 +685,8 @@ public class Actor extends GameObject {
 			// weapon
 			if (equipped != null && !sleeping) {
 
-				int weaponPositionXInPixels = (int) (actorPositionXInPixels + handAnchorX - equipped.anchorX);
-				int weaponPositionYInPixels = (int) (actorPositionYInPixels + handAnchorY - equipped.anchorY);
+				int weaponPositionXInPixels = (int) (rightArmHingeX - equipped.anchorX);
+				int weaponPositionYInPixels = (int) (actorPositionYInPixels + handY - equipped.anchorY);
 				float alpha = 1.0f;
 				TextureUtils.drawTexture(this.equipped.imageTexture, alpha, weaponPositionXInPixels,
 						weaponPositionYInPixels, weaponPositionXInPixels + equipped.width,
@@ -745,8 +744,8 @@ public class Actor extends GameObject {
 		}
 		if (equipped != null && !sleeping) {
 
-			int weaponPositionXInPixels = (int) (actorPositionXInPixels + handAnchorX - equipped.anchorX);
-			int weaponPositionYInPixels = (int) (actorPositionYInPixels + handAnchorY - equipped.anchorY);
+			int weaponPositionXInPixels = (int) (actorPositionXInPixels + rightArmHingeX - equipped.anchorX);
+			int weaponPositionYInPixels = (int) (actorPositionYInPixels + handY - equipped.anchorY);
 
 			if (fishingTarget != null && equipped instanceof FishingRod) {
 				FishingRod fishingRod = (FishingRod) equipped;
@@ -977,8 +976,8 @@ public class Actor extends GameObject {
 				actorPositionXInPixels += primaryAnimation.offsetX;
 				actorPositionYInPixels += primaryAnimation.offsetY;
 			}
-			int weaponPositionXInPixels = (int) (actorPositionXInPixels + handAnchorX - equipped.anchorX);
-			int weaponPositionYInPixels = (int) (actorPositionYInPixels + handAnchorY - equipped.anchorY);
+			int weaponPositionXInPixels = (int) (actorPositionXInPixels + rightArmHingeX - equipped.anchorX);
+			int weaponPositionYInPixels = (int) (actorPositionYInPixels + handY - equipped.anchorY);
 			FishingRod fishingRod = (FishingRod) equipped;
 			fishingRod.updateLine(this, weaponPositionXInPixels, weaponPositionYInPixels, delta);
 			if (this == Game.level.player) {
@@ -1719,8 +1718,6 @@ public class Actor extends GameObject {
 		actor.endurance = endurance;
 		actor.travelDistance = travelDistance;
 		actor.sight = sight;
-		actor.handAnchorX = handAnchorX;
-		actor.handAnchorY = handAnchorY;
 		actor.canOpenDoors = canOpenDoors;
 		actor.canEquipWeapons = canEquipWeapons;
 		actor.hairImageTexture = hairImageTexture;

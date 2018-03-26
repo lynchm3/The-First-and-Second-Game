@@ -41,8 +41,6 @@ public class TemplatesHumans {
 		Templates.PLAYER.heightRatio = 1.5f;
 		Templates.PLAYER.drawOffsetRatioY = -0.5f;
 		Templates.PLAYER.weight = 90f;
-		Templates.PLAYER.handAnchorX = 75f;
-		Templates.PLAYER.handAnchorY = 118f;
 		Templates.PLAYER.canOpenDoors = true;
 		Templates.PLAYER.canEquipWeapons = true;
 		Templates.PLAYER.templateId = GameObject.generateNewTemplateId();
@@ -61,8 +59,6 @@ public class TemplatesHumans {
 		Templates.HUNTER.imageTexturePath = "hunter.png";
 		Templates.HUNTER.imageTexture = getGlobalImage(Templates.HUNTER.imageTexturePath, true);
 		Templates.HUNTER.weight = 90f;
-		Templates.HUNTER.handAnchorX = 88f;
-		Templates.HUNTER.handAnchorY = 54f;
 		Templates.HUNTER.canOpenDoors = true;
 		Templates.HUNTER.canEquipWeapons = true;
 		Templates.HUNTER.aiRoutine = new AIRoutineForHunter(Templates.HUNTER);
@@ -83,8 +79,6 @@ public class TemplatesHumans {
 		Templates.GUARD.heightRatio = 1.5f;
 		Templates.GUARD.drawOffsetRatioY = -0.5f;
 		Templates.GUARD.weight = 100f;
-		Templates.GUARD.handAnchorX = 103f;
-		Templates.GUARD.handAnchorY = 101f;
 		Templates.GUARD.canOpenDoors = true;
 		Templates.GUARD.canEquipWeapons = true;
 		Templates.GUARD.aiRoutine = new AIRoutineForGuard(Templates.GUARD);
@@ -106,8 +100,6 @@ public class TemplatesHumans {
 		Templates.FISHERMAN.heightRatio = 1.5f;
 		Templates.FISHERMAN.drawOffsetRatioY = -0.5f;
 		Templates.FISHERMAN.weight = 68f;
-		Templates.FISHERMAN.handAnchorX = 75f;
-		Templates.PLAYER.handAnchorY = 118f;
 		Templates.FISHERMAN.canOpenDoors = true;
 		Templates.FISHERMAN.canEquipWeapons = true;
 		Templates.FISHERMAN.aiRoutine = new AIRoutineForFisherman(Templates.FISHERMAN);
@@ -127,8 +119,6 @@ public class TemplatesHumans {
 		Templates.MINER.imageTexturePath = "hunter.png";
 		Templates.MINER.imageTexture = getGlobalImage(Templates.MINER.imageTexturePath, true);
 		Templates.MINER.weight = 110f;
-		Templates.MINER.handAnchorX = 88f;
-		Templates.MINER.handAnchorY = 54f;
 		Templates.MINER.canOpenDoors = true;
 		Templates.MINER.canEquipWeapons = true;
 		Templates.MINER.aiRoutine = new AIRoutineForMiner(Templates.MINER);
@@ -147,8 +137,6 @@ public class TemplatesHumans {
 		Templates.THIEF.imageTexturePath = "thief.png";
 		Templates.THIEF.imageTexture = getGlobalImage(Templates.THIEF.imageTexturePath, true);
 		Templates.THIEF.weight = 90f;
-		Templates.THIEF.handAnchorX = 88f;
-		Templates.THIEF.handAnchorY = 54f;
 		Templates.THIEF.canOpenDoors = true;
 		Templates.THIEF.canEquipWeapons = true;
 		Templates.THIEF.aiRoutine = new AIRoutineForThief(Templates.THIEF);
@@ -167,8 +155,6 @@ public class TemplatesHumans {
 		Templates.FARMER.imageTexturePath = "farmer.png";
 		Templates.FARMER.imageTexture = getGlobalImage(Templates.FARMER.imageTexturePath, true);
 		Templates.FARMER.weight = 90f;
-		Templates.FARMER.handAnchorX = 88f;
-		Templates.FARMER.handAnchorY = 54f;
 		Templates.FARMER.canOpenDoors = true;
 		Templates.FARMER.canEquipWeapons = true;
 		Templates.FARMER.aiRoutine = new AIRoutineForHunter(Templates.FARMER);
@@ -188,8 +174,6 @@ public class TemplatesHumans {
 		Templates.MORT.imageTexturePath = "farmer.png";
 		Templates.MORT.imageTexture = getGlobalImage(Templates.MORT.imageTexturePath, true);
 		Templates.MORT.weight = 90f;
-		Templates.MORT.handAnchorX = 88f;
-		Templates.MORT.handAnchorY = 54f;
 		Templates.MORT.canOpenDoors = true;
 		Templates.MORT.canEquipWeapons = true;
 		Templates.MORT.aiRoutine = new AIRoutineForMort(Templates.MORT);
@@ -208,8 +192,6 @@ public class TemplatesHumans {
 		Templates.TRADER.imageTexturePath = "shopkeeper.png";
 		Templates.TRADER.imageTexture = getGlobalImage(Templates.TRADER.imageTexturePath, true);
 		Templates.TRADER.weight = 90f;
-		Templates.TRADER.handAnchorX = 40f;
-		Templates.TRADER.handAnchorY = 96f;
 		Templates.TRADER.canOpenDoors = true;
 		Templates.TRADER.canEquipWeapons = true;
 		Templates.TRADER.aiRoutine = new AIRoutineForTrader(Templates.TRADER);
