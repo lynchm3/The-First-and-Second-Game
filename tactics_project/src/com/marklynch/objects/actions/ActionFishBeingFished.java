@@ -75,9 +75,6 @@ public class ActionFishBeingFished extends Action {
 			speedY = -speedY;
 		}
 
-		System.out.println("speedX = " + speedX); // -1
-		System.out.println("speedY = " + speedY); // 0
-
 		float shakeX = (float) (Math.random() * maxShake);
 		if (new Random().nextBoolean()) {
 			shakeX = -shakeX;
@@ -118,9 +115,6 @@ public class ActionFishBeingFished extends Action {
 			}
 		}
 
-		System.out.println("performer.swimmingChangeX = " + performer.swimmingChangeX); // -1
-		System.out.println("performer.swimmingChangeY = " + performer.swimmingChangeY); // 0
-
 		float halfWidthRatio = (performer.width / Game.SQUARE_WIDTH) / 2f;
 		float halfHeightRatio = (performer.height / Game.SQUARE_HEIGHT) / 2f;
 
@@ -159,10 +153,6 @@ public class ActionFishBeingFished extends Action {
 			hitLand = true;
 
 		}
-
-		System.out.println("hitLand = " + hitLand);
-		System.out.println("fishingRod.progressThisTurn = " + fishingRod.progressThisTurn);
-		System.out.println("performer.beingFishedBy = " + performer.beingFishedBy);
 
 		if (performer.beingFishedBy == Game.level.player) {
 			if (fishingRod.lineDamage >= 1) {

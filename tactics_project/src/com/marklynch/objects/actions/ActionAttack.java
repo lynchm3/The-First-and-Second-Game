@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationShootArrow;
 import com.marklynch.level.constructs.animation.AnimationSlash;
 import com.marklynch.level.constructs.animation.AnimationThrow;
 import com.marklynch.level.constructs.effect.Effect;
@@ -59,12 +60,10 @@ public class ActionAttack extends Action {
 		}
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.primaryAnimation = new AnimationSlash(target);
-			performer.primaryAnimation.phase = performer.walkPhase;
-			performer.walkPhase++;
-			if (performer.walkPhase >= 4) {
-				performer.walkPhase = 0;
-			}
+			if (weapon.maxRange == 1)
+				performer.primaryAnimation = new AnimationSlash(target);
+			else
+				performer.primaryAnimation = new AnimationShootArrow(target);
 		}
 
 		if (target.attackable) {

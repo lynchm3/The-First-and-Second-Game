@@ -98,8 +98,8 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.fireResistance = -70f;
 		Templates.HUNTING_BOW.weight = 26f;
 		Templates.HUNTING_BOW.value = 54;
-		Templates.HUNTING_BOW.anchorX = 86;
-		Templates.HUNTING_BOW.anchorY = 86;
+		Templates.HUNTING_BOW.anchorX = 64;
+		Templates.HUNTING_BOW.anchorY = 112;
 		Templates.HUNTING_BOW.templateId = GameObject.generateNewTemplateId();
 	}
 

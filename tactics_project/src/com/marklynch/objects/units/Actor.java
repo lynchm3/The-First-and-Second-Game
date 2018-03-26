@@ -339,9 +339,6 @@ public class Actor extends GameObject {
 
 		if (target == null) {
 
-			if (Game.level.activeActor.name.contains("Fisher")) {
-				System.out.println("path return null A");
-			}
 			return null;
 		}
 
@@ -388,9 +385,6 @@ public class Actor extends GameObject {
 		if (aStarNodesPath != null)
 			return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
 
-		if (Game.level.activeActor.name.contains("Fisher")) {
-			System.out.println("path return null B");
-		}
 		return null;
 
 	}
@@ -399,9 +393,6 @@ public class Actor extends GameObject {
 
 		if (target == null) {
 
-			if (Game.level.activeActor.name.contains("Fisher")) {
-				System.out.println("path return null C");
-			}
 			return null;
 		}
 
@@ -439,10 +430,6 @@ public class Actor extends GameObject {
 			// }
 
 			return path;
-		}
-
-		if (Game.level.activeActor.name.contains("Fisher")) {
-			System.out.println("path return null E");
 		}
 		return null;
 
@@ -608,7 +595,6 @@ public class Actor extends GameObject {
 					bodyArmorPositionYInPixels + hairImageTexture.getHeight());
 		}
 
-		System.out.println("armImageText = " + armImageTexture);
 		if (armImageTexture != null) {
 
 			float leftShoulderAngle = 0f;

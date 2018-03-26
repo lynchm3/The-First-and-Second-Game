@@ -2,7 +2,7 @@ package com.marklynch.level.constructs.animation;
 
 import com.marklynch.objects.GameObject;
 
-public class AnimationSlash extends Animation {
+public class AnimationShootArrow extends Animation {
 
 	// public Square startSquare;
 	// public Square endSquare;
@@ -17,7 +17,7 @@ public class AnimationSlash extends Animation {
 
 	GameObject target;
 
-	public AnimationSlash(GameObject target) {
+	public AnimationShootArrow(GameObject target) {
 		super();
 		this.target = target;
 		durationToReach = 400;
@@ -47,27 +47,42 @@ public class AnimationSlash extends Animation {
 
 		float progress = durationSoFar / durationToReach;
 
-		if (progress < 0.75f) {
+		if (progress < 0.25f) {
 
-			// leftShoulderAngle = 0.2f * progress;
-			rightShoulderAngle = -3f * progress;
-			rightElbowAngle = -3f * progress;
+			rightShoulderAngle = -6.28f * progress;
+			rightElbowAngle = 0f;
 
-			// leftShoulderAngle = -3f * progress;
-			// leftElbowAngle = -4f * progress;
+			leftShoulderAngle = -6.28f * progress;
+			leftElbowAngle = 0f;
 
-		} else {
-			rightShoulderAngle = -9f * (1f - progress);
-			rightElbowAngle = -9f * (1f - progress);
+		} else if (progress < 0.5f) {
 
-			// leftShoulderAngle = -9f * (1f - progress);
-			// leftElbowAngle = -12f * (1f - progress);
+			// 0.785
+
+			rightShoulderAngle = -1.57f;
+			rightElbowAngle = 0f * progress;
+
+			leftShoulderAngle = -1.57f + ((progress - 0.25f) * 1.57f);
+			leftElbowAngle = -((progress - 0.25f) * 3.14f);
+
+			System.out.println("leftShoulderAngle = " + leftShoulderAngle);
+			System.out.println("leftElbowAngle = " + leftElbowAngle);
+
+		} else if (progress > 0.75f) {
+
+			rightShoulderAngle = -6.28f * (1f - progress);
+			rightElbowAngle = 0f;
+
+			leftShoulderAngle = -1.1775f * (4 * (1 - progress));
+			leftElbowAngle = -0.785f * (4 * (1 - progress));
 		}
 
 		if (progress >= 1) {
 			target.showPow();
 			rightShoulderAngle = 0;
 			rightElbowAngle = 0;
+			leftShoulderAngle = 0;
+			leftElbowAngle = 0;
 			completed = true;
 		} else {
 		}
