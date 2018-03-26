@@ -63,7 +63,7 @@ public class ActionAttack extends Action {
 			if (weapon.maxRange == 1)
 				performer.primaryAnimation = new AnimationSlash(target);
 			else
-				performer.primaryAnimation = new AnimationShootArrow(target);
+				performer.primaryAnimation = new AnimationShootArrow(performer, target);
 		}
 
 		if (target.attackable) {

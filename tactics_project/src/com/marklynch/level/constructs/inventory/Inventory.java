@@ -1312,10 +1312,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// Helmet
 		if (gameObjectToDrawOnPlayersHead != null) {
-			int helmetPositionXInPixels = (int) (actorPositionXInPixels
-					+ (Game.level.player.headAnchorX - gameObjectToDrawOnPlayersHead.anchorX) * 2);
-			int helmetPositionYInPixels = (int) (actorPositionYInPixels
-					+ (Game.level.player.headAnchorY - gameObjectToDrawOnPlayersHead.anchorY) * 2);
+			int helmetPositionXInPixels = (int) (actorPositionXInPixels + (gameObjectToDrawOnPlayersHead.anchorX) * 2);
+			int helmetPositionYInPixels = (int) (actorPositionYInPixels + (gameObjectToDrawOnPlayersHead.anchorY) * 2);
 			TextureUtils.drawTexture(gameObjectToDrawOnPlayersHead.imageTexture, alpha, helmetPositionXInPixels,
 					helmetPositionYInPixels, helmetPositionXInPixels + gameObjectToDrawOnPlayersHead.width * 2,
 					helmetPositionYInPixels + gameObjectToDrawOnPlayersHead.height * 2);

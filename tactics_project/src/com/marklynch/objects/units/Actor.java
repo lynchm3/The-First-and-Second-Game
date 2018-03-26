@@ -129,8 +129,8 @@ public class Actor extends GameObject {
 	public LegArmor legArmor;
 	public float handAnchorX;
 	public float handAnchorY;
-	public float headAnchorX;
-	public float headAnchorY;
+	// public float headAnchorX;
+	// public float headAnchorY;
 	// public float bodyAnchorX;
 	// public float bodyAnchorY;
 	// public float legsAnchorX;
@@ -581,48 +581,21 @@ public class Actor extends GameObject {
 
 		if (helmet != null && !sleeping) {
 
-			int helmetPositionXInPixels = (int) (actorPositionXInPixels + headAnchorX - helmet.anchorX);
-			int helmetPositionYInPixels = (int) (actorPositionYInPixels + headAnchorY - helmet.anchorY);
+			int helmetPositionXInPixels = (actorPositionXInPixels);
+			int helmetPositionYInPixels = (actorPositionYInPixels);
 			float alpha = 1.0f;
-			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels, helmetPositionYInPixels,
-					helmetPositionXInPixels + helmet.width, helmetPositionYInPixels + helmet.height);
 
-			// Matrix4f view = Game.activeBatch.getViewMatrix();
-			// Vector3f flip = new Vector3f(100, 0, 0);
-			// Vector3f unflip = new Vector3f(0.01f, 0, 0);
+			if (backwards) {
+				TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
+						helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,
+						helmetPositionYInPixels + helmet.height, true);
 
-			// Game.activeBatch.flush();
-			// view.translate(new Vector2f(helmetPositionXInPixels +
-			// helmet.width/2, 0));
-			// view.scale(new Vector3f(-1f, 1f, 1f));
-			// Game.activeBatch.updateUniforms();
+			} else {
+				TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
+						helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,
+						helmetPositionYInPixels + helmet.height, false);
 
-			//
-			//
-			// view.translate(new Vector2f(Game.windowWidth / 2,
-			// Game.windowHeight / 2));
-			// view.scale(flip);
-			// view.translate(new Vector2f(-Game.windowWidth / 2,
-			// -Game.windowHeight / 2));
-			//
-
-			// TextureUtils.drawTexture(this.helmet.imageTexture, alpha, 0,
-			// helmetPositionYInPixels, 0 + helmet.width,
-			// helmetPositionYInPixels + helmet.height);
-
-			// Game.activeBatch.flush();
-			// view.translate(new Vector2f(helmetPositionXInPixels +
-			// helmet.width, 0));
-			// view.scale(new Vector3f(-1f, 1f, 1f));
-			// Game.activeBatch.updateUniforms();
-
-			// Game.activeBatch.flush();
-			// view.translate(new Vector2f(Game.windowWidth / 2,
-			// Game.windowHeight / 2));
-			// view.scale(unflip);
-			// view.translate(new Vector2f(-Game.windowWidth / 2,
-			// -Game.windowHeight / 2));
-			// Game.activeBatch.updateUniforms();
+			}
 
 		} else if (hairImageTexture != null) {
 			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
@@ -1748,8 +1721,6 @@ public class Actor extends GameObject {
 		actor.sight = sight;
 		actor.handAnchorX = handAnchorX;
 		actor.handAnchorY = handAnchorY;
-		actor.headAnchorX = headAnchorX;
-		actor.headAnchorY = headAnchorY;
 		actor.canOpenDoors = canOpenDoors;
 		actor.canEquipWeapons = canEquipWeapons;
 		actor.hairImageTexture = hairImageTexture;

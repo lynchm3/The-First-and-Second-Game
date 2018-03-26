@@ -20,8 +20,8 @@ public class TemplatesArmor {
 		Templates.HARD_HAT.imageTexturePath = "hard_hat.png";
 		Templates.HARD_HAT.imageTexture = getGlobalImage(Templates.HARD_HAT.imageTexturePath, true);
 		Templates.HARD_HAT.totalHealth = Templates.HARD_HAT.remainingHealth = 50;
-		Templates.HARD_HAT.widthRatio = 0.25f;
-		Templates.HARD_HAT.heightRatio = 0.12f;
+		Templates.HARD_HAT.widthRatio = 1f;
+		Templates.HARD_HAT.heightRatio = 0.5f;
 		Templates.HARD_HAT.drawOffsetRatioX = 0f;
 		Templates.HARD_HAT.drawOffsetRatioY = 0f;
 		Templates.HARD_HAT.soundWhenHit = 1f;

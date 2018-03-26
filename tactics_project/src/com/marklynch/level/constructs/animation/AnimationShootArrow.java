@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation;
 
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 
 public class AnimationShootArrow extends Animation {
 
@@ -18,10 +19,10 @@ public class AnimationShootArrow extends Animation {
 
 	GameObject target;
 
-	public AnimationShootArrow(GameObject target) {
+	public AnimationShootArrow(Actor performer, GameObject target) {
 		super();
 		this.target = target;
-		durationToReach = 4000;
+		durationToReach = 400;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -34,7 +35,8 @@ public class AnimationShootArrow extends Animation {
 		// this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		// startOffsetY = offsetY = (int) ((this.startSquare.yInGrid -
 		// this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
-		blockAI = false;
+		backwards = performer.backwards;
+		blockAI = true;
 
 	}
 

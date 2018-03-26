@@ -247,8 +247,8 @@ public class Mirror extends GameObject {
 
 		if (actor.helmet != null && !actor.sleeping) {
 
-			int helmetPositionXInPixels = (int) (actorPositionXInPixels + actor.headAnchorX - actor.helmet.anchorX);
-			int helmetPositionYInPixels = (int) (actorPositionYInPixels + actor.headAnchorY - actor.helmet.anchorY);
+			int helmetPositionXInPixels = (int) (actorPositionXInPixels);
+			int helmetPositionYInPixels = (int) (actorPositionYInPixels);
 			alpha = 1.0f;
 			TextureUtils.drawTextureWithinBounds(actor.helmet.imageTexture, alpha, helmetPositionXInPixels,
 					helmetPositionYInPixels, helmetPositionXInPixels + actor.helmet.width,

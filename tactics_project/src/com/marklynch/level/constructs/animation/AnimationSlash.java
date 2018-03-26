@@ -33,7 +33,7 @@ public class AnimationSlash extends Animation {
 		// this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		// startOffsetY = offsetY = (int) ((this.startSquare.yInGrid -
 		// this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
-		blockAI = false;
+		blockAI = true;
 
 	}
 

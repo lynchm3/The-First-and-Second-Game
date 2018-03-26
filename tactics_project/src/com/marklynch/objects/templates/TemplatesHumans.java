@@ -43,8 +43,6 @@ public class TemplatesHumans {
 		Templates.PLAYER.weight = 90f;
 		Templates.PLAYER.handAnchorX = 75f;
 		Templates.PLAYER.handAnchorY = 118f;
-		Templates.PLAYER.headAnchorX = 70f;
-		Templates.PLAYER.headAnchorY = 23f;
 		Templates.PLAYER.canOpenDoors = true;
 		Templates.PLAYER.canEquipWeapons = true;
 		Templates.PLAYER.templateId = GameObject.generateNewTemplateId();
@@ -110,8 +108,6 @@ public class TemplatesHumans {
 		Templates.FISHERMAN.weight = 68f;
 		Templates.FISHERMAN.handAnchorX = 75f;
 		Templates.PLAYER.handAnchorY = 118f;
-		Templates.FISHERMAN.headAnchorX = 70f;
-		Templates.FISHERMAN.headAnchorY = 23f;
 		Templates.FISHERMAN.canOpenDoors = true;
 		Templates.FISHERMAN.canEquipWeapons = true;
 		Templates.FISHERMAN.aiRoutine = new AIRoutineForFisherman(Templates.FISHERMAN);
