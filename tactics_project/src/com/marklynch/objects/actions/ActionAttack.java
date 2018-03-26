@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationSlash;
 import com.marklynch.level.constructs.animation.AnimationThrow;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleeding;
@@ -57,6 +58,15 @@ public class ActionAttack extends Action {
 			weapon = performer;
 		}
 
+		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
+			performer.primaryAnimation = new AnimationSlash(target);
+			performer.primaryAnimation.phase = performer.walkPhase;
+			performer.walkPhase++;
+			if (performer.walkPhase >= 4) {
+				performer.walkPhase = 0;
+			}
+		}
+
 		if (target.attackable) {
 			float damage = target.changeHealth(performer, this, weapon);
 			String attackTypeString;
@@ -91,8 +101,6 @@ public class ActionAttack extends Action {
 				performer.secondaryAnimations.add(new AnimationThrow("Arrow", performer, this, target,
 						target.squareGameObjectIsOn, Templates.ARROW.makeCopy(null, null), 2f, 0f, true));
 		} else {
-			if (target.squareGameObjectIsOn.visibleToPlayer)
-				target.showPow();
 		}
 
 		if (performer.faction == Game.level.factions.player) {
