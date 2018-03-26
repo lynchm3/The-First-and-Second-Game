@@ -158,10 +158,10 @@ public class Actor extends GameObject {
 	public Texture armImageTexture = null;
 	public float shoulderY = 53;
 	public float elbowY = 85;
-	public float leftArmDrawX = 46;
-	public float leftArmHingeX = 48;
-	public float rightArmDrawX = 74;
-	public float rightArmHingeX = 76;
+	public float leftArmDrawX = 48;
+	public float leftArmHingeX = 50;
+	public float rightArmDrawX = 76;
+	public float rightArmHingeX = 78;
 
 	public Texture thoughtBubbleImageTextureObject = null;
 	public Texture thoughtBubbleImageTextureAction = null;
