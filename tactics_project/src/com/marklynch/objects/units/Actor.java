@@ -624,13 +624,11 @@ public class Actor extends GameObject {
 			float shoulderDrawY = actorPositionYInPixels + this.shoulderY;
 			float elbowDrawY = actorPositionYInPixels + this.elbowY;
 
+			backwards = true;
+
 			// left arm
 			float leftArmDrawX = actorPositionXInPixels + this.leftArmDrawX;
 			float leftArmHingeX = actorPositionXInPixels + this.leftArmHingeX;
-
-			// right arm
-			float rightArmDrawX = actorPositionXInPixels + this.rightArmDrawX;
-			float rightArmHingeX = actorPositionXInPixels + this.rightArmHingeX;
 
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 
@@ -651,6 +649,9 @@ public class Actor extends GameObject {
 
 			TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, elbowDrawY,
 					leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
+			if (equipped != null && backwards && !sleeping) {
+				drawWeapon(leftArmHingeX - equipped.anchorX, actorPositionYInPixels + handY - equipped.anchorY);
+			}
 
 			Game.flush();
 			view.translate(new Vector2f(leftArmHingeX, elbowDrawY));
@@ -663,6 +664,10 @@ public class Actor extends GameObject {
 			view.rotate(-leftShoulderAngle, new Vector3f(0f, 0f, 1f));
 			view.translate(new Vector2f(-leftArmHingeX, -shoulderDrawY));
 			Game.activeBatch.updateUniforms();
+
+			// right arm
+			float rightArmDrawX = actorPositionXInPixels + this.rightArmDrawX;
+			float rightArmHingeX = actorPositionXInPixels + this.rightArmHingeX;
 
 			Game.flush();
 			view.translate(new Vector2f(rightArmHingeX, shoulderDrawY));
@@ -682,19 +687,8 @@ public class Actor extends GameObject {
 			TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, elbowDrawY,
 					rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
 
-			// weapon
-			if (equipped != null && !sleeping) {
-
-				int weaponPositionXInPixels = (int) (rightArmHingeX - equipped.anchorX);
-				int weaponPositionYInPixels = (int) (actorPositionYInPixels + handY - equipped.anchorY);
-				float alpha = 1.0f;
-				TextureUtils.drawTexture(this.equipped.imageTexture, alpha, weaponPositionXInPixels,
-						weaponPositionYInPixels, weaponPositionXInPixels + equipped.width,
-						weaponPositionYInPixels + equipped.height);
-				if (fishingTarget != null && equipped instanceof FishingRod) {
-					FishingRod fishingRod = (FishingRod) equipped;
-					fishingRod.drawLine(this, weaponPositionXInPixels, weaponPositionYInPixels);
-				}
+			if (equipped != null && !backwards && !sleeping) {
+				drawWeapon(rightArmHingeX - equipped.anchorX, actorPositionYInPixels + handY - equipped.anchorY);
 			}
 
 			Game.flush();
@@ -731,6 +725,24 @@ public class Actor extends GameObject {
 					legArmorPositionYInPixels + legArmor.height);
 		}
 
+	}
+
+	public void drawWeapon(float x, float y) {
+
+		// weapon
+		float alpha = 1.0f;
+
+		if (backwards) {
+			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, x + equipped.width, y, x, y + equipped.height);
+		} else {
+			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, x, y, x + equipped.width, y + equipped.height);
+
+		}
+
+		if (fishingTarget != null && equipped instanceof FishingRod) {
+			FishingRod fishingRod = (FishingRod) equipped;
+			fishingRod.drawLine(this, x, y);
+		}
 	}
 
 	public void drawFishing() {
