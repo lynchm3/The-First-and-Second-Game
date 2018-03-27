@@ -51,6 +51,12 @@ public class ActionAttack extends Action {
 		if (!checkRange())
 			return;
 
+		if (performer.squareGameObjectIsOn.xInGrid > target.squareGameObjectIsOn.xInGrid) {
+			performer.backwards = true;
+		} else if (performer.squareGameObjectIsOn.xInGrid < target.squareGameObjectIsOn.xInGrid) {
+			performer.backwards = false;
+		}
+
 		// float damage = 1;
 		GameObject weapon = null;
 		if (performer.equipped != null) {
@@ -61,7 +67,7 @@ public class ActionAttack extends Action {
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 			if (weapon.maxRange == 1)
-				performer.primaryAnimation = new AnimationSlash(target);
+				performer.primaryAnimation = new AnimationSlash(performer, target);
 			else
 				performer.primaryAnimation = new AnimationShootArrow(performer, target);
 		}

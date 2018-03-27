@@ -48,6 +48,12 @@ public class ActionMove extends Action {
 		if (!checkRange())
 			return;
 
+		if (performer.squareGameObjectIsOn.xInGrid > target.xInGrid) {
+			performer.backwards = true;
+		} else if (performer.squareGameObjectIsOn.xInGrid < target.xInGrid) {
+			performer.backwards = false;
+		}
+
 		moveTo(performer, target);
 	}
 
@@ -75,7 +81,7 @@ public class ActionMove extends Action {
 		}
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.primaryAnimation = new AnimationMove(actor.squareGameObjectIsOn, squareToMoveTo);
+			performer.primaryAnimation = new AnimationMove(performer, actor.squareGameObjectIsOn, squareToMoveTo);
 			performer.primaryAnimation.phase = performer.walkPhase;
 			performer.walkPhase++;
 			if (performer.walkPhase >= 4) {

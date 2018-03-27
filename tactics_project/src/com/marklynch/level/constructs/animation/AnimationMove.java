@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.animation;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
 
 public class AnimationMove extends Animation {
 
@@ -16,7 +17,7 @@ public class AnimationMove extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationMove(Square startSquare, Square endSquare) {
+	public AnimationMove(GameObject performer, Square startSquare, Square endSquare) {
 		super();
 		durationToReach = 400;
 
@@ -29,6 +30,9 @@ public class AnimationMove extends Animation {
 
 		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
+
+		backwards = performer.backwards;
+
 		blockAI = false;
 
 	}
@@ -68,6 +72,10 @@ public class AnimationMove extends Animation {
 
 		float progress = durationSoFar / durationToReach;
 
+		if (progress >= 1) {
+			progress = 1;
+		}
+
 		if (phase == 0) {
 			leftShoulderAngle = 0.2f * progress;
 			rightShoulderAngle = -leftShoulderAngle;
@@ -87,6 +95,11 @@ public class AnimationMove extends Animation {
 
 		leftElbowAngle = -0.1f;
 		rightElbowAngle = -0.1f;
+
+		if (backwards) {
+
+			reverseAnimtion();
+		}
 
 		if (progress >= 1) {
 			completed = true;

@@ -13,8 +13,6 @@ public class AnimationShootArrow extends Animation {
 	float quarterDurationToReach;
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
-	boolean backwards = true;
-
 	// for show only, walking actor, primary
 
 	GameObject target;
@@ -49,6 +47,10 @@ public class AnimationShootArrow extends Animation {
 		durationSoFar += delta;
 
 		float progress = durationSoFar / durationToReach;
+
+		if (progress >= 1) {
+			progress = 1;
+		}
 
 		if (progress < 0.25f) {
 

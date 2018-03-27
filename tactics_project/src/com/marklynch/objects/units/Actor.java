@@ -624,7 +624,7 @@ public class Actor extends GameObject {
 			float shoulderDrawY = actorPositionYInPixels + this.shoulderY;
 			float elbowDrawY = actorPositionYInPixels + this.elbowY;
 
-			backwards = true;
+			// backwards = true;
 
 			// left arm
 			float leftArmDrawX = actorPositionXInPixels + this.leftArmDrawX;

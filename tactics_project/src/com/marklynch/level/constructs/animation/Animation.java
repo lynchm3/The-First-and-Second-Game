@@ -23,4 +23,18 @@ public abstract class Animation {
 
 	public abstract void drawStaticUI();
 
+	boolean backwards = true;
+
+	protected void reverseAnimtion() {
+
+		float temp = rightShoulderAngle;
+		rightShoulderAngle = -leftShoulderAngle;
+		leftShoulderAngle = -temp;
+
+		temp = rightElbowAngle;
+		rightElbowAngle = -leftElbowAngle;
+		leftElbowAngle = -temp;
+
+	}
+
 }

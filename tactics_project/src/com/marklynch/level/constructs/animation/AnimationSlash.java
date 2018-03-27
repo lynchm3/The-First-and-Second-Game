@@ -17,7 +17,7 @@ public class AnimationSlash extends Animation {
 
 	GameObject target;
 
-	public AnimationSlash(GameObject target) {
+	public AnimationSlash(GameObject performer, GameObject target) {
 		super();
 		this.target = target;
 		durationToReach = 400;
@@ -33,6 +33,9 @@ public class AnimationSlash extends Animation {
 		// this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		// startOffsetY = offsetY = (int) ((this.startSquare.yInGrid -
 		// this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
+
+		backwards = performer.backwards;
+
 		blockAI = true;
 
 	}
@@ -47,21 +50,29 @@ public class AnimationSlash extends Animation {
 
 		float progress = durationSoFar / durationToReach;
 
+		if (progress >= 1) {
+			progress = 1;
+		}
+
 		if (progress < 0.75f) {
 
 			// leftShoulderAngle = 0.2f * progress;
 			rightShoulderAngle = -3f * progress;
 			rightElbowAngle = -3f * progress;
 
-			// leftShoulderAngle = -3f * progress;
-			// leftElbowAngle = -4f * progress;
+			leftShoulderAngle = 0;
+			leftElbowAngle = 0;
 
 		} else {
 			rightShoulderAngle = -9f * (1f - progress);
 			rightElbowAngle = -9f * (1f - progress);
 
-			// leftShoulderAngle = -9f * (1f - progress);
-			// leftElbowAngle = -12f * (1f - progress);
+			leftShoulderAngle = 0;
+			leftElbowAngle = 0;
+		}
+
+		if (backwards) {
+			reverseAnimtion();
 		}
 
 		if (progress >= 1) {
