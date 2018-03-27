@@ -650,7 +650,8 @@ public class Actor extends GameObject {
 			TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, elbowDrawY,
 					leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
 			if (equipped != null && backwards && !sleeping) {
-				drawWeapon(leftArmHingeX - equipped.anchorX, actorPositionYInPixels + handY - equipped.anchorY);
+				drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX),
+						actorPositionYInPixels + handY - equipped.anchorY);
 			}
 
 			Game.flush();
