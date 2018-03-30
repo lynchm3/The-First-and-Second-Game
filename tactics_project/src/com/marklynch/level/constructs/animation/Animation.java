@@ -26,6 +26,7 @@ public abstract class Animation {
 	protected boolean backwards = true;
 
 	public boolean drawEquipped = true;
+	public boolean drawArrowInOffHand = false;
 
 	protected void reverseAnimtion() {
 

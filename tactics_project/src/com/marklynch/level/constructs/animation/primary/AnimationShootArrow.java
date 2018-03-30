@@ -21,7 +21,7 @@ public class AnimationShootArrow extends Animation {
 	public AnimationShootArrow(Actor performer, GameObject target) {
 		super();
 		this.target = target;
-		durationToReach = 400;
+		durationToReach = 2000; // SLOWED IT DOWN HERE
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -36,6 +36,7 @@ public class AnimationShootArrow extends Animation {
 		// this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 		backwards = performer.backwards;
 		blockAI = true;
+		drawArrowInOffHand = true;
 
 	}
 
@@ -63,6 +64,7 @@ public class AnimationShootArrow extends Animation {
 
 		} else if (progress < 0.5f) {
 
+			drawArrowInOffHand = false;
 			rightShoulderAngle = -1.57f;
 			rightElbowAngle = 0f * progress;
 
@@ -71,6 +73,7 @@ public class AnimationShootArrow extends Animation {
 
 		} else if (progress < 0.75f) {
 
+			drawArrowInOffHand = false;
 			rightShoulderAngle = -1.57f;
 			rightElbowAngle = 0f;
 
@@ -79,6 +82,7 @@ public class AnimationShootArrow extends Animation {
 
 		} else {
 
+			drawArrowInOffHand = false;
 			rightShoulderAngle = -6.28f * (1f - progress);
 			rightElbowAngle = 0f;
 
@@ -115,7 +119,8 @@ public class AnimationShootArrow extends Animation {
 
 	@Override
 	public void draw1() {
-		// TODO Auto-generated method stub
+
+		// FUCKFKCKFUCK
 
 	}
 

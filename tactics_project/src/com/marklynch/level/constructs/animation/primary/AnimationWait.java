@@ -36,11 +36,6 @@ public class AnimationWait extends Animation {
 		leftElbowAngle = moveTowardsZero(leftElbowAngle, angleChange);
 		rightElbowAngle = moveTowardsZero(rightElbowAngle, angleChange);
 
-		// if (leftElbowAngle == 0 && rightShoulderAngle == 0 && leftElbowAngle
-		// == 0 && rightElbowAngle == 0)
-		// completed = true;
-		System.out.println("wait update, leftShoulder = " + leftShoulderAngle + ", leftelbow = " + leftElbowAngle);
-
 	}
 
 	private float moveTowardsZero(float angleToChange, float angleChange) {

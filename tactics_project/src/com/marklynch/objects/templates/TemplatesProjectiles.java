@@ -24,8 +24,8 @@ public class TemplatesProjectiles {
 		Templates.ARROW.stackable = false;
 		Templates.ARROW.weight = 2f;
 		Templates.ARROW.value = 9;
-		Templates.ARROW.anchorX = 0;
-		Templates.ARROW.anchorY = 0;
+		Templates.ARROW.anchorX = 8;
+		Templates.ARROW.anchorY = 16;
 		Templates.ARROW.templateId = GameObject.generateNewTemplateId();
 		Templates.ARROW.pierceDamage = 5;
 		Templates.ARROW.flipYAxisInMirror = false;

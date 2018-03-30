@@ -554,11 +554,6 @@ public class Actor extends GameObject {
 	@Override
 	public void draw1() {
 
-		if (this == Game.level.player && primaryAnimation == null) {
-
-			System.out.println("primaryAnimation = " + primaryAnimation);
-		}
-
 		// Don't draw if dead
 		if (this.remainingHealth <= 0)
 			return;
@@ -707,6 +702,11 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-rightArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
 
+		if (equipped != null && backwards && !sleeping) {
+			drawArrow(rightArmHingeX - Templates.ARROW.anchorX,
+					actorPositionYInPixels + handY - Templates.ARROW.anchorY);
+		}
+
 		TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, elbowDrawY,
 				rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
 		if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
@@ -778,7 +778,10 @@ public class Actor extends GameObject {
 		view.rotate(leftElbowAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-leftArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
-
+		if (equipped != null && !backwards && !sleeping) {
+			drawArrow(leftArmHingeX - Templates.ARROW.anchorX,
+					actorPositionYInPixels + handY - Templates.ARROW.anchorY);
+		}
 		TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, elbowDrawY,
 				leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
 		if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
@@ -825,6 +828,32 @@ public class Actor extends GameObject {
 		if (fishingTarget != null && equipped instanceof FishingRod) {
 			FishingRod fishingRod = (FishingRod) equipped;
 			fishingRod.drawLine(this, x, y);
+		}
+	}
+
+	public void drawArrow(float x, float y) {
+
+		System.out.println("drawArrow A");
+
+		if (primaryAnimation != null && primaryAnimation.drawArrowInOffHand == false)
+			return;
+		System.out.println("drawArrow B");
+
+		// weapon
+		float alpha = 1.0f;
+
+		if (backwards) {
+			System.out.println("drawArrow c Templates.ARROW.imageTexture = " + Templates.ARROW.imageTexture
+					+ ", Templates.ARROW.height = " + Templates.ARROW.height);
+			System.out.println(
+					"drawArrow c Templates.ARROW.imageTexture.getWidth() = " + Templates.ARROW.imageTexture.getWidth());
+			TextureUtils.drawTexture(Templates.ARROW.imageTexture, alpha, x + Templates.ARROW.imageTexture.getWidth(),
+					y, x, y + Templates.ARROW.imageTexture.getHeight());
+		} else {
+			System.out.println("drawArrow d = " + Templates.ARROW.imageTexture);
+			TextureUtils.drawTexture(Templates.ARROW.imageTexture, alpha, x, y,
+					x + Templates.ARROW.imageTexture.getWidth(), y + Templates.ARROW.imageTexture.getHeight());
+
 		}
 	}
 
