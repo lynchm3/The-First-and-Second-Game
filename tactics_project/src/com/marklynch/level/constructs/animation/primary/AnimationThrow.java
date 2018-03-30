@@ -22,6 +22,7 @@ public class AnimationThrow extends Animation {
 		super();
 		this.target = target;
 		durationToReach = 400;
+		drawEquipped = false;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -78,6 +79,7 @@ public class AnimationThrow extends Animation {
 
 		if (progress >= 1) {
 			// target.showPow();
+			drawEquipped = true;
 			rightShoulderAngle = 0;
 			rightElbowAngle = 0;
 			completed = true;

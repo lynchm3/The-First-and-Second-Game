@@ -605,6 +605,16 @@ public class Actor extends GameObject {
 					bodyArmorPositionYInPixels + hairImageTexture.getHeight());
 		}
 
+		if (legArmor != null && !sleeping) {
+
+			int legArmorPositionXInPixels = (actorPositionXInPixels);
+			int legArmorPositionYInPixels = (actorPositionYInPixels);
+			float alpha = 1.0f;
+			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
+					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
+					legArmorPositionYInPixels + legArmor.height);
+		}
+
 		if (armImageTexture != null) {
 
 			float leftShoulderAngle = 0f;
@@ -716,19 +726,12 @@ public class Actor extends GameObject {
 					bodyArmorPositionYInPixels + bodyArmor.height);
 		}
 
-		if (legArmor != null && !sleeping) {
-
-			int legArmorPositionXInPixels = (actorPositionXInPixels);
-			int legArmorPositionYInPixels = (actorPositionYInPixels);
-			float alpha = 1.0f;
-			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
-					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
-					legArmorPositionYInPixels + legArmor.height);
-		}
-
 	}
 
 	public void drawWeapon(float x, float y) {
+
+		if (primaryAnimation != null && primaryAnimation.drawEquipped == false)
+			return;
 
 		// weapon
 		float alpha = 1.0f;

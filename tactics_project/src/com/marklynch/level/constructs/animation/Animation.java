@@ -25,6 +25,8 @@ public abstract class Animation {
 
 	protected boolean backwards = true;
 
+	public boolean drawEquipped = true;
+
 	protected void reverseAnimtion() {
 
 		float temp = rightShoulderAngle;
