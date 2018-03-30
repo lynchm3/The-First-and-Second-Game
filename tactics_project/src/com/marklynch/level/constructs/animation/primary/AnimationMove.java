@@ -103,6 +103,31 @@ public class AnimationMove extends Animation {
 		}
 
 		if (progress >= 1) {
+
+			if (phase == 0) {
+				leftShoulderAngle = 0.2f;
+				rightShoulderAngle = -0.2f;
+			} else if (phase == 1) {
+				leftShoulderAngle = 0f;
+				rightShoulderAngle = 0f;
+
+			} else if (phase == 2) {
+				leftShoulderAngle = -0.2f;
+				rightShoulderAngle = 0.2f;
+
+			} else if (phase == 3) {
+				leftShoulderAngle = 0f;
+				rightShoulderAngle = 0f;
+
+			}
+
+			leftElbowAngle = -0.1f;
+			rightElbowAngle = -0.1f;
+
+			if (backwards) {
+
+				reverseAnimtion();
+			}
 			completed = true;
 			offsetX = 0;
 			offsetY = 0;

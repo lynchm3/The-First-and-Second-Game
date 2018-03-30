@@ -614,9 +614,16 @@ public class Actor extends GameObject {
 			int legArmorPositionXInPixels = (actorPositionXInPixels);
 			int legArmorPositionYInPixels = (actorPositionYInPixels);
 			float alpha = 1.0f;
-			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
-					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
-					legArmorPositionYInPixels + legArmor.height);
+			if (backwards) {
+				TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels + legArmor.width,
+						legArmorPositionYInPixels, legArmorPositionXInPixels,
+						legArmorPositionYInPixels + legArmor.height);
+			} else {
+				TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
+						legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
+						legArmorPositionYInPixels + legArmor.height);
+
+			}
 		}
 
 		if (bodyArmor != null && !sleeping) {
@@ -624,9 +631,17 @@ public class Actor extends GameObject {
 			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
 			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
 			float alpha = 1.0f;
-			TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
-					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
-					bodyArmorPositionYInPixels + bodyArmor.height);
+
+			if (backwards) {
+				TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha,
+						bodyArmorPositionXInPixels + bodyArmor.width, bodyArmorPositionYInPixels,
+						bodyArmorPositionXInPixels, bodyArmorPositionYInPixels + bodyArmor.height);
+			} else {
+
+				TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
+						bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
+						bodyArmorPositionYInPixels + bodyArmor.height);
+			}
 		}
 
 		drawFrontArm();
