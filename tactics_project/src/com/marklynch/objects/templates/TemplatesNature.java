@@ -264,8 +264,8 @@ public class TemplatesNature {
 		Templates.APPLE.stackable = false;
 		Templates.APPLE.weight = 5f;
 		Templates.APPLE.value = 15;
-		Templates.APPLE.anchorX = 0;
-		Templates.APPLE.anchorY = 0;
+		Templates.APPLE.anchorX = 16;
+		Templates.APPLE.anchorY = 16;
 		Templates.APPLE.templateId = GameObject.generateNewTemplateId();
 		Templates.APPLE.bluntDamage = 1;
 		Templates.APPLE.flipYAxisInMirror = false;

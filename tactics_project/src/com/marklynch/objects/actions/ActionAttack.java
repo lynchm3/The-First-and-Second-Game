@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationShootArrow;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
-import com.marklynch.level.constructs.animation.secondary.AnimationThrow;
+import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleeding;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -103,7 +103,7 @@ public class ActionAttack extends Action {
 		// shoot projectile
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-				performer.secondaryAnimations.add(new AnimationThrow("Arrow", performer, this, target,
+				performer.secondaryAnimations.add(new AnimationThrown("Arrow", performer, this, target,
 						target.squareGameObjectIsOn, Templates.ARROW.makeCopy(null, null), 2f, 0f, true));
 		} else {
 		}

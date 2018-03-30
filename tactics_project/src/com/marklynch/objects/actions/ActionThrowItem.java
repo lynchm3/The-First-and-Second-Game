@@ -3,7 +3,8 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.secondary.AnimationThrow;
+import com.marklynch.level.constructs.animation.primary.AnimationThrow;
+import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -62,6 +63,17 @@ public class ActionThrowItem extends Action {
 		// / 10f;
 		//
 		// }
+
+		if (performer.squareGameObjectIsOn.xInGrid > targetSquare.xInGrid) {
+			performer.backwards = true;
+		} else if (performer.squareGameObjectIsOn.xInGrid < targetSquare.xInGrid) {
+			performer.backwards = false;
+		}
+
+		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
+			performer.primaryAnimation = new AnimationThrow(performer, targetGameObject);
+		}
+
 		if (targetGameObject != null && targetGameObject.attackable) {
 			float damage = targetGameObject.changeHealth(performer, this, gameObjectToThrow);
 
@@ -86,7 +98,7 @@ public class ActionThrowItem extends Action {
 
 		// shoot projectile
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-			performer.secondaryAnimations.add(new AnimationThrow(gameObjectToThrow.name, performer, this,
+			performer.secondaryAnimations.add(new AnimationThrown(gameObjectToThrow.name, performer, this,
 					targetGameObject, targetSquare, gameObjectToThrow, 1f, 0.5f, true));
 
 		if (performer.equipped == gameObjectToThrow) {

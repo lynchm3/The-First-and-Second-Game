@@ -16,7 +16,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationThrow extends Animation {
+public class AnimationThrown extends Animation {
 
 	public String name;
 	public Actor shooter;
@@ -32,7 +32,7 @@ public class AnimationThrow extends Animation {
 	GameObject projectileObject;
 	float rotationSpeed = 0;
 
-	public AnimationThrow(String name, Actor shooter, Action action, GameObject targetGameObject, Square targetSquare,
+	public AnimationThrown(String name, Actor shooter, Action action, GameObject targetGameObject, Square targetSquare,
 			GameObject projectileObject, float speed, float rotationSpeed, boolean onTarget) {
 
 		if (shooter == Game.level.player) {
