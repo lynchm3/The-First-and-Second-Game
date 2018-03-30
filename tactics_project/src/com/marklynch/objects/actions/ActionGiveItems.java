@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationGive;
+import com.marklynch.level.constructs.animation.secondary.AnimationGive;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;

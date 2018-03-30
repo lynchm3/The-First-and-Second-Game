@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs.animation;
+package com.marklynch.level.constructs.animation.secondary;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
@@ -6,6 +6,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;

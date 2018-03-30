@@ -23,7 +23,7 @@ public abstract class Animation {
 
 	public abstract void drawStaticUI();
 
-	boolean backwards = true;
+	protected boolean backwards = true;
 
 	protected void reverseAnimtion() {
 

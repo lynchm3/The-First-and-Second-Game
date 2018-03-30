@@ -9,7 +9,7 @@ import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.animation.AnimationTake;
+import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.effect.Effect;

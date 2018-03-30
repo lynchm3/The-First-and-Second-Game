@@ -1,5 +1,6 @@
-package com.marklynch.level.constructs.animation;
+package com.marklynch.level.constructs.animation.primary;
 
+import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 

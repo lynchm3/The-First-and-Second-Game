@@ -1,6 +1,7 @@
-package com.marklynch.level.constructs.animation;
+package com.marklynch.level.constructs.animation.secondary;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;

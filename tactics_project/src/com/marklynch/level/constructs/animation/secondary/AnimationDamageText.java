@@ -1,10 +1,11 @@
-package com.marklynch.level.constructs.animation;
+package com.marklynch.level.constructs.animation.secondary;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.inventory.ComparisonDisplay;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObject.DAMAGE_TYPE;

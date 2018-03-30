@@ -3,7 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationThrow;
+import com.marklynch.level.constructs.animation.secondary.AnimationThrow;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;

@@ -2,7 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationWait;
+import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 

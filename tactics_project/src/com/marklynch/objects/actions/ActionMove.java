@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationMove;
+import com.marklynch.level.constructs.animation.primary.AnimationMove;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;

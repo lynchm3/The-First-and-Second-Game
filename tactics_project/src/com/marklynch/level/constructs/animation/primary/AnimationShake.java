@@ -1,4 +1,6 @@
-package com.marklynch.level.constructs.animation;
+package com.marklynch.level.constructs.animation.primary;
+
+import com.marklynch.level.constructs.animation.Animation;
 
 public class AnimationShake extends Animation {
 

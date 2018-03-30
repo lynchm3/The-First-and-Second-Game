@@ -5,7 +5,7 @@ import java.util.Random;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationMove;
+import com.marklynch.level.constructs.animation.primary.AnimationMove;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
