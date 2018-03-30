@@ -6,8 +6,12 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Texture;
 
 public class BodyArmor extends Armor {
+
+	public Texture armUpperTexture;
+	public Texture armLowerTexture;
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
@@ -36,6 +40,8 @@ public class BodyArmor extends Armor {
 		BodyArmor bodyArmor = new BodyArmor();
 		setInstances(bodyArmor);
 		setAttributesForCopy(bodyArmor, square, owner);
+		bodyArmor.armUpperTexture = this.armUpperTexture;
+		bodyArmor.armLowerTexture = this.armLowerTexture;
 		return bodyArmor;
 	}
 }

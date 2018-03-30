@@ -651,6 +651,13 @@ public class Actor extends GameObject {
 			TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, shoulderDrawY,
 					leftArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight());
 
+			if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
+
+				TextureUtils.drawTexture(bodyArmor.armUpperTexture, 1f, leftArmDrawX, shoulderDrawY,
+						leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
+						shoulderDrawY + bodyArmor.armUpperTexture.getHeight());
+			}
+
 			Game.flush();
 			view.translate(new Vector2f(leftArmHingeX, elbowDrawY));
 			view.rotate(leftElbowAngle, new Vector3f(0f, 0f, 1f));
@@ -659,6 +666,13 @@ public class Actor extends GameObject {
 
 			TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, elbowDrawY,
 					leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
+			if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
+
+				TextureUtils.drawTexture(bodyArmor.armLowerTexture, 1f, leftArmDrawX, elbowDrawY,
+						leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
+						elbowDrawY + bodyArmor.armLowerTexture.getHeight());
+			}
+
 			if (equipped != null && backwards && !sleeping) {
 				drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX),
 						actorPositionYInPixels + handY - equipped.anchorY);
@@ -688,6 +702,12 @@ public class Actor extends GameObject {
 
 			TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, shoulderDrawY,
 					rightArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight());
+			if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
+
+				TextureUtils.drawTexture(bodyArmor.armUpperTexture, 1f, rightArmDrawX, shoulderDrawY,
+						rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
+						shoulderDrawY + bodyArmor.armUpperTexture.getHeight());
+			}
 
 			Game.flush();
 			view.translate(new Vector2f(rightArmHingeX, elbowDrawY));
@@ -697,6 +717,11 @@ public class Actor extends GameObject {
 
 			TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, elbowDrawY,
 					rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
+			if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
+				TextureUtils.drawTexture(this.bodyArmor.armLowerTexture, 1f, rightArmDrawX, elbowDrawY,
+						rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
+						elbowDrawY + bodyArmor.armLowerTexture.getHeight());
+			}
 
 			if (equipped != null && !backwards && !sleeping) {
 				drawWeapon(rightArmHingeX - equipped.anchorX, actorPositionYInPixels + handY - equipped.anchorY);

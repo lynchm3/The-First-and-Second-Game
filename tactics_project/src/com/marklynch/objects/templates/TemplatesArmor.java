@@ -85,6 +85,8 @@ public class TemplatesArmor {
 		Templates.JUMPER.name = "Jumper";
 		Templates.JUMPER.imageTexturePath = "jumper.png";
 		Templates.JUMPER.imageTexture = getGlobalImage(Templates.JUMPER.imageTexturePath, true);
+		Templates.JUMPER.armUpperTexture = getGlobalImage("jumper_arm_upper.png", true);
+		Templates.JUMPER.armLowerTexture = getGlobalImage("jumper_arm_lower.png", true);
 		Templates.JUMPER.totalHealth = Templates.JUMPER.remainingHealth = 20;
 		Templates.JUMPER.widthRatio = 1f;
 		Templates.JUMPER.heightRatio = 1.5f;
