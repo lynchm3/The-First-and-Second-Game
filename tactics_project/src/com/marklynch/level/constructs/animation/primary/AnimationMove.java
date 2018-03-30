@@ -20,7 +20,7 @@ public class AnimationMove extends Animation {
 
 	public AnimationMove(GameObject performer, Square startSquare, Square endSquare) {
 		super();
-		durationToReach = 4000;
+		durationToReach = 400;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;

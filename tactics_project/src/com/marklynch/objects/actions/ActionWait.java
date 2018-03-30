@@ -35,6 +35,8 @@ public class ActionWait extends Action {
 
 		performer.actionsPerformedThisTurn.add(this);
 
+		performer.walkPhase = 0;
+
 		if (sound != null)
 			sound.play();
 

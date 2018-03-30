@@ -6,7 +6,7 @@ public class AnimationWait extends Animation {
 
 	public AnimationWait(Animation oldAnimation) {
 		super();
-		durationToReach = 0;
+		durationToReach = 400;
 		blockAI = false;
 
 		if (oldAnimation != null) {
@@ -23,11 +23,11 @@ public class AnimationWait extends Animation {
 		if (completed)
 			return;
 
-		// durationSoFar += delta;
-		// double progress = durationSoFar / durationToReach;
-		// if (progress >= 1) {
-		// completed = true;
-		// }
+		durationSoFar += delta;
+		double progress = durationSoFar / durationToReach;
+		if (progress >= 1) {
+			completed = true;
+		}
 
 		float angleChange = (float) (0.002d * delta);
 
@@ -36,8 +36,9 @@ public class AnimationWait extends Animation {
 		leftElbowAngle = moveTowardsZero(leftElbowAngle, angleChange);
 		rightElbowAngle = moveTowardsZero(rightElbowAngle, angleChange);
 
-		if (leftElbowAngle == 0 && rightShoulderAngle == 0 && leftElbowAngle == 0 && rightElbowAngle == 0)
-			completed = true;
+		// if (leftElbowAngle == 0 && rightShoulderAngle == 0 && leftElbowAngle
+		// == 0 && rightElbowAngle == 0)
+		// completed = true;
 
 	}
 
