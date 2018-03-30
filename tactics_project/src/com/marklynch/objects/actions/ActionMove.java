@@ -81,8 +81,9 @@ public class ActionMove extends Action {
 		}
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.primaryAnimation = new AnimationMove(performer, actor.squareGameObjectIsOn, squareToMoveTo);
-			performer.primaryAnimation.phase = performer.walkPhase;
+			performer.primaryAnimation = new AnimationMove(performer, actor.squareGameObjectIsOn, squareToMoveTo,
+					performer.walkPhase);
+			// performer.primaryAnimation.phase = performer.walkPhase;
 			performer.walkPhase++;
 			if (performer.walkPhase >= 4) {
 				performer.walkPhase = 0;

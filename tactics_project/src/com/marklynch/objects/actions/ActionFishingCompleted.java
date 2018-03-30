@@ -61,7 +61,7 @@ public class ActionFishingCompleted extends Action {
 			performer.squareGameObjectIsOn.inventory.add(target);
 			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
 					&& performer.squareGameObjectIsOn.visibleToPlayer) {
-				target.primaryAnimation = new AnimationMove(target, oldSquare, performer.squareGameObjectIsOn);
+				target.primaryAnimation = new AnimationMove(target, oldSquare, performer.squareGameObjectIsOn, 0);
 			}
 		}
 

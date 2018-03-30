@@ -554,6 +554,11 @@ public class Actor extends GameObject {
 	@Override
 	public void draw1() {
 
+		if (this == Game.level.player && primaryAnimation == null) {
+
+			System.out.println("primaryAnimation = " + primaryAnimation);
+		}
+
 		// Don't draw if dead
 		if (this.remainingHealth <= 0)
 			return;

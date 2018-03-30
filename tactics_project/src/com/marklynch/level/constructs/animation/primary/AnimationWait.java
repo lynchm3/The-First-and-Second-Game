@@ -39,6 +39,7 @@ public class AnimationWait extends Animation {
 		// if (leftElbowAngle == 0 && rightShoulderAngle == 0 && leftElbowAngle
 		// == 0 && rightElbowAngle == 0)
 		// completed = true;
+		System.out.println("wait update, leftShoulder = " + leftShoulderAngle + ", leftelbow = " + leftElbowAngle);
 
 	}
 

@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 
 public class AnimationMove extends Animation {
 
@@ -18,9 +19,9 @@ public class AnimationMove extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationMove(GameObject performer, Square startSquare, Square endSquare) {
+	public AnimationMove(GameObject performer, Square startSquare, Square endSquare, int phase) {
 		super();
-		durationToReach = 400;
+		durationToReach = 4000;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -36,11 +37,13 @@ public class AnimationMove extends Animation {
 
 		blockAI = false;
 
+		this.phase = phase;
 		setAngles(0f);
 	}
 
 	public AnimationMove(int startX, int startY, int endX, int endY) {
 
+		setAngles(0f);
 	}
 
 	public AnimationMove(float startX, float startY, float endX, float endY) {
@@ -49,6 +52,7 @@ public class AnimationMove extends Animation {
 		startOffsetX = offsetX = startX - endX;
 		startOffsetY = offsetY = startY - endY;
 		blockAI = false;
+		setAngles(0f);
 
 	}
 
@@ -89,6 +93,9 @@ public class AnimationMove extends Animation {
 			offsetX = (int) (startOffsetX * (1 - progress));
 			offsetY = (int) (startOffsetY * (1 - progress));
 		}
+
+		if (Game.level.activeActor == Game.level.player)
+			System.out.println("move update, leftShoulder = " + leftShoulderAngle + ", leftelbow = " + leftElbowAngle);
 
 	}
 
