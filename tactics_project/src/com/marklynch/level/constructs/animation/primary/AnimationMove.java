@@ -20,7 +20,7 @@ public class AnimationMove extends Animation {
 
 	public AnimationMove(GameObject performer, Square startSquare, Square endSquare) {
 		super();
-		durationToReach = 400;
+		durationToReach = 4000;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -36,6 +36,7 @@ public class AnimationMove extends Animation {
 
 		blockAI = false;
 
+		setAngles(0f);
 	}
 
 	public AnimationMove(int startX, int startY, int endX, int endY) {
@@ -44,10 +45,11 @@ public class AnimationMove extends Animation {
 
 	public AnimationMove(float startX, float startY, float endX, float endY) {
 		super();
-		durationToReach = 200;
+		durationToReach = 400;
 		startOffsetX = offsetX = startX - endX;
 		startOffsetY = offsetY = startY - endY;
 		blockAI = false;
+
 	}
 
 	@Override
@@ -77,6 +79,21 @@ public class AnimationMove extends Animation {
 			progress = 1;
 		}
 
+		setAngles(progress);
+
+		if (progress >= 1) {
+			completed = true;
+			offsetX = 0;
+			offsetY = 0;
+		} else {
+			offsetX = (int) (startOffsetX * (1 - progress));
+			offsetY = (int) (startOffsetY * (1 - progress));
+		}
+
+	}
+
+	public void setAngles(float progress) {
+
 		if (phase == 0) {
 			leftShoulderAngle = 0.2f * progress;
 			rightShoulderAngle = -leftShoulderAngle;
@@ -100,40 +117,6 @@ public class AnimationMove extends Animation {
 		if (backwards) {
 
 			reverseAnimtion();
-		}
-
-		if (progress >= 1) {
-
-			if (phase == 0) {
-				leftShoulderAngle = 0.2f;
-				rightShoulderAngle = -0.2f;
-			} else if (phase == 1) {
-				leftShoulderAngle = 0f;
-				rightShoulderAngle = 0f;
-
-			} else if (phase == 2) {
-				leftShoulderAngle = -0.2f;
-				rightShoulderAngle = 0.2f;
-
-			} else if (phase == 3) {
-				leftShoulderAngle = 0f;
-				rightShoulderAngle = 0f;
-
-			}
-
-			leftElbowAngle = -0.1f;
-			rightElbowAngle = -0.1f;
-
-			if (backwards) {
-
-				reverseAnimtion();
-			}
-			completed = true;
-			offsetX = 0;
-			offsetY = 0;
-		} else {
-			offsetX = (int) (startOffsetX * (1 - progress));
-			offsetY = (int) (startOffsetY * (1 - progress));
 		}
 
 	}
