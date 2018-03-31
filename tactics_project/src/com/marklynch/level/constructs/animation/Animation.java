@@ -26,9 +26,15 @@ public abstract class Animation {
 	protected boolean backwards = true;
 
 	public boolean drawEquipped = true;
+
+	// Arrow
 	public boolean drawArrowInOffHand = false;
 	public boolean drawArrowInMainHand = false;
 	public float arrowHandleY = 0;
+
+	// Bow string
+	public boolean drawBowString = false;
+	public float bowStringHandleY = 0;
 
 	protected void reverseAnimtion() {
 

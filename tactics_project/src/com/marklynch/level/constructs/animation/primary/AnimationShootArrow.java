@@ -37,7 +37,7 @@ public class AnimationShootArrow extends Animation {
 		backwards = performer.backwards;
 		blockAI = true;
 		drawArrowInOffHand = true;
-		arrowHandleY = 12;
+		arrowHandleY = 24;
 
 	}
 
@@ -55,8 +55,19 @@ public class AnimationShootArrow extends Animation {
 			progress = 1;
 		}
 
+		if (progress < 0.1) {
+			arrowHandleY = 64 - (52 * progress * 10);
+
+		} else if (progress < 0.25f) {
+
+			arrowHandleY = 12;
+		}
+
 		if (progress < 0.25f) {
 
+			// arrowHandleY = 64 - (52 * progress * 4);
+
+			bowStringHandleY = 0;
 			rightShoulderAngle = -6.28f * progress;
 			rightElbowAngle = 0f;
 
@@ -65,6 +76,7 @@ public class AnimationShootArrow extends Animation {
 
 		} else if (progress < 0.5f) {
 
+			bowStringHandleY = (progress - 0.25f) * -32;
 			arrowHandleY = 36 + (progress - 0.25f) * 32;// 12 + 26;
 			drawArrowInOffHand = false;
 			drawArrowInMainHand = true;
@@ -76,6 +88,7 @@ public class AnimationShootArrow extends Animation {
 
 		} else if (progress < 0.75f) {
 
+			bowStringHandleY = 0;
 			drawArrowInOffHand = false;
 			drawArrowInMainHand = false;
 			rightShoulderAngle = -1.57f;

@@ -1,9 +1,5 @@
 package com.marklynch.level.constructs.animation.secondary;
 
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
-
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
@@ -14,7 +10,6 @@ import com.marklynch.objects.Searchable;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
-import com.marklynch.utils.TextureUtils;
 
 public class AnimationThrown extends Animation {
 
@@ -121,23 +116,26 @@ public class AnimationThrown extends Animation {
 
 	@Override
 	public void draw2() {
-		float alpha = 1.0f;
-
-		Game.flush();
-		float radians = (float) Math.toRadians(angle);
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.translate(new Vector2f(x, y));
-		view.rotate(radians, new Vector3f(0f, 0f, 1f));
-		Game.activeBatch.updateUniforms();
-
-		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, 0 - projectileObject.width / 2,
-				0 - projectileObject.height / 2, 0 + projectileObject.width - projectileObject.width / 2,
-				0 + projectileObject.height - projectileObject.height / 2, projectileObject.backwards);
-
-		Game.flush();
-		view.rotate(-radians, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-x, -y));
-		Game.activeBatch.updateUniforms();
+		// float alpha = 1.0f;
+		//
+		// Game.flush();
+		// float radians = (float) Math.toRadians(angle);
+		// Matrix4f view = Game.activeBatch.getViewMatrix();
+		// view.translate(new Vector2f(x, y));
+		// view.rotate(radians, new Vector3f(0f, 0f, 1f));
+		// Game.activeBatch.updateUniforms();
+		//
+		// TextureUtils.drawTexture(projectileObject.imageTexture, alpha, 0 -
+		// projectileObject.width / 2,
+		// 0 - projectileObject.height / 2, 0 + projectileObject.width -
+		// projectileObject.width / 2,
+		// 0 + projectileObject.height - projectileObject.height / 2,
+		// projectileObject.backwards);
+		//
+		// Game.flush();
+		// view.rotate(-radians, new Vector3f(0f, 0f, 1f));
+		// view.translate(new Vector2f(-x, -y));
+		// Game.activeBatch.updateUniforms();
 	}
 
 	@Override
