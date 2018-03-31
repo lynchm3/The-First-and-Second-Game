@@ -68,10 +68,10 @@ public class ActionAttack extends Action {
 			if (weapon.maxRange == 1)
 				performer.primaryAnimation = new AnimationSlash(performer, target);
 			else
-				performer.primaryAnimation = new AnimationShootArrow(performer, target, this);
+				performer.primaryAnimation = new AnimationShootArrow(performer, target, weapon, this);
 		}
 
-		if (target.attackable) {
+		if (weapon.maxRange == 1 && target.attackable) {
 			float damage = target.changeHealth(performer, this, weapon);
 			String attackTypeString;
 			attackTypeString = "attacked ";
@@ -92,8 +92,6 @@ public class ActionAttack extends Action {
 			if (weapon instanceof ContainerForLiquids) {
 				smashContainer((ContainerForLiquids) weapon);
 			}
-
-			// target.attackedBy(performer, this);
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;

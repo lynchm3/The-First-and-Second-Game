@@ -23,13 +23,15 @@ public class AnimationShootArrow extends Animation {
 	Actor performer;
 	Action action;
 	AnimationThrown animationThrown;
+	GameObject weapon;
 
-	public AnimationShootArrow(Actor performer, GameObject target, Action action) {
+	public AnimationShootArrow(Actor performer, GameObject target, GameObject weapon, Action action) {
 		super();
 		// this.performer []
 		this.performer = performer;
 		this.target = target;
 		this.action = action;
+		this.weapon = weapon;
 		durationToReach = 2000; // SLOWED IT DOWN HERE
 
 		quarterDurationToReach = durationToReach / 4;
@@ -99,7 +101,7 @@ public class AnimationShootArrow extends Animation {
 
 			if (animationThrown == null) {
 				animationThrown = new AnimationThrown("Arrow", performer, action, target, target.squareGameObjectIsOn,
-						Templates.ARROW.makeCopy(null, null), 2f, 0f, true);
+						Templates.ARROW.makeCopy(null, null), weapon, 2f, 0f, true);
 				performer.secondaryAnimations.add(animationThrown);
 			}
 
