@@ -64,6 +64,8 @@ public class AnimationThrown extends Animation {
 		else
 			this.x = this.originX = shooter.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH;// shooter.getCenterX();
 
+		projectileObject.backwards = shooter.backwards;
+
 		this.y = this.originY = shooter.actorPositionYInPixels + shooter.shoulderY;// shooter.getCenterY();
 
 		System.out.println("this.x = " + this.x);
@@ -73,6 +75,14 @@ public class AnimationThrown extends Animation {
 				+ this.projectileObject.width / 2;
 		this.targetY = this.targetSquare.yInGridPixels
 				+ Game.HALF_SQUARE_HEIGHT * this.projectileObject.drawOffsetRatioY + this.projectileObject.height / 2;
+
+		if (projectileObject.backwards) {
+
+			targetX += projectileObject.width;
+		} else {
+			targetX -= projectileObject.width;
+		}
+
 		// (int) (this.targetSquare.yInGridPixels
 		// + Game.SQUARE_HEIGHT * this.projectileObject.drawOffsetY)
 
@@ -123,11 +133,19 @@ public class AnimationThrown extends Animation {
 					targetSquare.inventory.add(projectileObject);
 				}
 				projectileObject.landed(shooter, action);
+			} else {
+
+				projectileObject.drawOffsetRatioX = (targetX - targetGameObject.squareGameObjectIsOn.xInGridPixels)
+						/ Game.SQUARE_WIDTH;
+				projectileObject.drawOffsetRatioY = (targetY - targetGameObject.squareGameObjectIsOn.yInGridPixels)
+						/ Game.SQUARE_HEIGHT;
+				targetGameObject.arrows.add((Arrow) projectileObject);
 			}
 
 			if (Level.player.inventory.groundDisplay != null)
 				Level.player.inventory.groundDisplay.refreshGameObjects();
 
+			// Carry out the dmg, attack, logging...
 			if (targetGameObject.attackable) {
 				float damage = targetGameObject.changeHealth(shooter, action, weapon);
 				String attackTypeString;

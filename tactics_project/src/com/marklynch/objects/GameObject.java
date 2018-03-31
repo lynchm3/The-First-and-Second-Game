@@ -255,6 +255,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float swimmingChangeX = 0;
 	public float swimmingChangeY = 0;
 
+	public ArrayList<Arrow> arrows = new ArrayList<Arrow>();
+
 	public GameObject() {
 	}
 
@@ -396,6 +398,31 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 						backwards);
 
 				// squareGameObjectIsOn.inventory.getGameObjectOfClass(WaterBody.class).draw1();
+			}
+
+			for (Arrow arrow : arrows) {
+
+				float arrowWidth = arrow.width;
+				// arrowWidth = -arrowWidth;
+
+				if (arrow.backwards) {
+					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+									- arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+									+ arrow.height);
+				} else {
+					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+									+ arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+									+ arrow.height);
+
+				}
 			}
 
 			if (remainingHealth != totalHealth) {
