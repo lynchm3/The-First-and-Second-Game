@@ -869,7 +869,7 @@ public class Actor extends GameObject {
 		}
 	}
 
-	Color bowStringColor = new Color(0f, 0f, 0f, 0.5f);
+	Color bowStringColor = new Color(0f, 0f, 0f, 0.32f);
 
 	public void drawBowString(float handX, float handY) {
 
