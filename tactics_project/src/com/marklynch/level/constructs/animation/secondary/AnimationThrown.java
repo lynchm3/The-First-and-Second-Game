@@ -72,9 +72,18 @@ public class AnimationThrown extends Animation {
 		System.out.println("this.y = " + this.y);
 
 		this.targetX = this.targetSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH * this.projectileObject.drawOffsetRatioX
-				+ this.projectileObject.width / 2;
+				+ this.projectileObject.width / 2f;
 		this.targetY = this.targetSquare.yInGridPixels
-				+ Game.HALF_SQUARE_HEIGHT * this.projectileObject.drawOffsetRatioY + this.projectileObject.height / 2;
+				+ Game.HALF_SQUARE_HEIGHT * this.projectileObject.drawOffsetRatioY + this.projectileObject.height / 2f;
+
+		System.out.println("this.projectileObject.width = " + this.projectileObject.width);
+		System.out.println("this.projectileObject.drawOffsetRatioX = " + this.projectileObject.drawOffsetRatioX);
+		System.out.println("targetX = " + targetX);
+		// System.out.println("targetX = " + targetX);
+		// System.out.println("targetX = " + targetX);
+
+		this.targetY += Math.random() * 16f;
+		this.targetY -= 8;
 
 		if (projectileObject.backwards) {
 
@@ -135,10 +144,16 @@ public class AnimationThrown extends Animation {
 				projectileObject.landed(shooter, action);
 			} else {
 
-				projectileObject.drawOffsetRatioX = (targetX - targetGameObject.squareGameObjectIsOn.xInGridPixels)
-						/ Game.SQUARE_WIDTH;
-				projectileObject.drawOffsetRatioY = (targetY - targetGameObject.squareGameObjectIsOn.yInGridPixels)
-						/ Game.SQUARE_HEIGHT;
+				// projectileObject.drawOffsetRatioX = (targetX -
+				// targetGameObject.squareGameObjectIsOn.xInGridPixels)
+				// / Game.SQUARE_WIDTH;
+
+				System.out.println("Templates.ARROW.drawOffsetRatioX = " + Templates.ARROW.drawOffsetRatioX);
+				System.out.println("projectileObject.drawOffsetRatioX = " + projectileObject.drawOffsetRatioX);
+
+				// projectileObject.drawOffsetRatioY = (targetY -
+				// targetGameObject.squareGameObjectIsOn.yInGridPixels)
+				// / Game.SQUARE_HEIGHT;
 				targetGameObject.arrows.add((Arrow) projectileObject);
 			}
 

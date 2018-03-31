@@ -405,20 +405,26 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				float arrowWidth = arrow.width;
 				// arrowWidth = -arrowWidth;
 
+				QuadUtils.drawQuad(Color.RED,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX + 10,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY + 10);
+
 				if (arrow.backwards) {
 					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
-							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
 							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-									- arrowWidth,
+									+ arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
 									+ arrow.height);
 				} else {
 					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
-							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
 							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-									+ arrowWidth,
+									- arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
 									+ arrow.height);
 
@@ -1676,6 +1682,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.widthRatio = widthRatio;
 		gameObject.heightRatio = heightRatio;
 		gameObject.drawOffsetRatioX = drawOffsetRatioX;
+		if (gameObject instanceof Arrow) {
+			System.out.println("new ARROW.drawOffsetRatioX = " + Templates.ARROW.drawOffsetRatioX);
+			System.out.println("setAttributesForCopy arrow.drawOffsetRatioX = " + gameObject.drawOffsetRatioX);
+		}
 		gameObject.drawOffsetRatioY = drawOffsetRatioY;
 		gameObject.soundWhenHit = soundWhenHit;
 		gameObject.soundWhenHitting = soundWhenHitting;

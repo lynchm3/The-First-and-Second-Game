@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
+import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.templates.Templates;
@@ -100,8 +101,14 @@ public class AnimationShootArrow extends Animation {
 		} else if (progress < 0.75f) {
 
 			if (animationThrown == null) {
+
+				Arrow arrow = Templates.ARROW.makeCopy(null, null);
+				arrow.drawOffsetRatioX = 0.5f;
+				arrow.drawOffsetRatioY = 0.5f;
+
+				System.out.println("new arrow.drawOffsetRatioX = " + arrow.drawOffsetRatioX);
 				animationThrown = new AnimationThrown("Arrow", performer, action, target, target.squareGameObjectIsOn,
-						Templates.ARROW.makeCopy(null, null), weapon, 2f, 0f, true);
+						arrow, weapon, 2f, 0f, true);
 				performer.secondaryAnimations.add(animationThrown);
 			}
 
