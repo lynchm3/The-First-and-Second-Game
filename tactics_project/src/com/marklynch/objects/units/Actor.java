@@ -702,9 +702,10 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-rightArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
 
-		if (equipped != null && backwards && !sleeping) {
+		if (equipped != null && backwards && !sleeping && primaryAnimation != null
+				&& primaryAnimation.drawArrowInOffHand == true) {
 			drawArrow(rightArmHingeX - Templates.ARROW.anchorX,
-					actorPositionYInPixels + handY - Templates.ARROW.anchorY);
+					actorPositionYInPixels + handY - primaryAnimation.arrowHandleY);
 		}
 
 		TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, elbowDrawY,
@@ -717,6 +718,12 @@ public class Actor extends GameObject {
 
 		if (equipped != null && !backwards && !sleeping) {
 			drawWeapon(rightArmHingeX - equipped.anchorX, actorPositionYInPixels + handY - equipped.anchorY);
+		}
+
+		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
+				&& primaryAnimation.drawArrowInMainHand == true) {
+			drawArrow(rightArmHingeX - Templates.ARROW.anchorX,
+					actorPositionYInPixels + handY - primaryAnimation.arrowHandleY);
 		}
 
 		Game.flush();
@@ -778,10 +785,13 @@ public class Actor extends GameObject {
 		view.rotate(leftElbowAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-leftArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
-		if (equipped != null && !backwards && !sleeping) {
+
+		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
+				&& primaryAnimation.drawArrowInOffHand == true) {
 			drawArrow(leftArmHingeX - Templates.ARROW.anchorX,
-					actorPositionYInPixels + handY - Templates.ARROW.anchorY);
+					actorPositionYInPixels + handY - primaryAnimation.arrowHandleY);
 		}
+
 		TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, elbowDrawY,
 				leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
 		if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
@@ -794,6 +804,11 @@ public class Actor extends GameObject {
 		if (equipped != null && backwards && !sleeping) {
 			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX),
 					actorPositionYInPixels + handY - equipped.anchorY);
+		}
+		if (equipped != null && backwards && !sleeping && primaryAnimation != null
+				&& primaryAnimation.drawArrowInMainHand == true) {
+			drawArrow(leftArmHingeX - Templates.ARROW.anchorX,
+					actorPositionYInPixels + handY - primaryAnimation.arrowHandleY);
 		}
 
 		Game.flush();
@@ -833,24 +848,21 @@ public class Actor extends GameObject {
 
 	public void drawArrow(float x, float y) {
 
-		System.out.println("drawArrow A");
-
-		if (primaryAnimation != null && primaryAnimation.drawArrowInOffHand == false)
-			return;
-		System.out.println("drawArrow B");
+		// System.out.println("drawArrow A");
+		//
+		// if (primaryAnimation != null && primaryAnimation.drawArrowInOffHand
+		// == false)
+		// return;
+		// System.out.println("drawArrow B");
 
 		// weapon
 		float alpha = 1.0f;
 
 		if (backwards) {
-			System.out.println("drawArrow c Templates.ARROW.imageTexture = " + Templates.ARROW.imageTexture
-					+ ", Templates.ARROW.height = " + Templates.ARROW.height);
-			System.out.println(
-					"drawArrow c Templates.ARROW.imageTexture.getWidth() = " + Templates.ARROW.imageTexture.getWidth());
 			TextureUtils.drawTexture(Templates.ARROW.imageTexture, alpha, x + Templates.ARROW.imageTexture.getWidth(),
 					y, x, y + Templates.ARROW.imageTexture.getHeight());
+
 		} else {
-			System.out.println("drawArrow d = " + Templates.ARROW.imageTexture);
 			TextureUtils.drawTexture(Templates.ARROW.imageTexture, alpha, x, y,
 					x + Templates.ARROW.imageTexture.getWidth(), y + Templates.ARROW.imageTexture.getHeight());
 
