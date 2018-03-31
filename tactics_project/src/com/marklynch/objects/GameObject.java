@@ -379,6 +379,41 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (hiding)
 				alpha = 0.5f;
 
+			for (Arrow arrow : arrows) {
+
+				float arrowWidth = arrow.width;
+				// arrowWidth = -arrowWidth;
+
+				// QuadUtils.drawQuad(Color.RED,
+				// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
+				// arrow.drawOffsetRatioX,
+				// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
+				// * arrow.drawOffsetRatioY,
+				// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
+				// arrow.drawOffsetRatioX + 10,
+				// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
+				// * arrow.drawOffsetRatioY + 10);
+
+				if (arrow.backwards) {
+					TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+									+ arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+									+ arrow.height);
+				} else {
+					TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+									- arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+									+ arrow.height);
+
+				}
+			}
+
 			// GL11.glTexParameteri(target, pname, param);
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);

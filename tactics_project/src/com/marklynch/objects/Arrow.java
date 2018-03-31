@@ -11,6 +11,7 @@ public class Arrow extends GameObject {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public Texture textureLoaded;
 	public Texture textureEmbedded;
+	public Texture textureEmbeddedPoint;
 
 	public Arrow() {
 		super();
@@ -29,6 +30,7 @@ public class Arrow extends GameObject {
 		setInstances(arrow);
 		super.setAttributesForCopy(arrow, square, owner);
 		arrow.textureEmbedded = this.textureEmbedded;
+		arrow.textureEmbeddedPoint = this.textureEmbeddedPoint;
 		arrow.textureLoaded = this.textureLoaded;
 		return arrow;
 	}
