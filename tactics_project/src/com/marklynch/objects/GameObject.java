@@ -405,11 +405,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				float arrowWidth = arrow.width;
 				// arrowWidth = -arrowWidth;
 
-				QuadUtils.drawQuad(Color.RED,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX + 10,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY + 10);
+				// QuadUtils.drawQuad(Color.RED,
+				// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
+				// arrow.drawOffsetRatioX,
+				// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
+				// * arrow.drawOffsetRatioY,
+				// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
+				// arrow.drawOffsetRatioX + 10,
+				// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
+				// * arrow.drawOffsetRatioY + 10);
 
 				if (arrow.backwards) {
 					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,

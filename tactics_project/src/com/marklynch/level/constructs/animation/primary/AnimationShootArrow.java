@@ -103,8 +103,8 @@ public class AnimationShootArrow extends Animation {
 			if (animationThrown == null) {
 
 				Arrow arrow = Templates.ARROW.makeCopy(null, null);
-				arrow.drawOffsetRatioX = 0.5f;
-				arrow.drawOffsetRatioY = 0.5f;
+				arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
+				arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
 
 				System.out.println("new arrow.drawOffsetRatioX = " + arrow.drawOffsetRatioX);
 				animationThrown = new AnimationThrown("Arrow", performer, action, target, target.squareGameObjectIsOn,
