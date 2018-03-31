@@ -1,7 +1,10 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
 public class AnimationShootArrow extends Animation {
@@ -17,10 +20,16 @@ public class AnimationShootArrow extends Animation {
 	// for show only, walking actor, primary
 
 	GameObject target;
+	Actor performer;
+	Action action;
+	AnimationThrown animationThrown;
 
-	public AnimationShootArrow(Actor performer, GameObject target) {
+	public AnimationShootArrow(Actor performer, GameObject target, Action action) {
 		super();
+		// this.performer []
+		this.performer = performer;
 		this.target = target;
+		this.action = action;
 		durationToReach = 2000; // SLOWED IT DOWN HERE
 
 		quarterDurationToReach = durationToReach / 4;
@@ -88,6 +97,12 @@ public class AnimationShootArrow extends Animation {
 
 		} else if (progress < 0.75f) {
 
+			if (animationThrown == null) {
+				animationThrown = new AnimationThrown("Arrow", performer, action, target, target.squareGameObjectIsOn,
+						Templates.ARROW.makeCopy(null, null), 2f, 0f, true);
+				performer.secondaryAnimations.add(animationThrown);
+			}
+
 			bowStringHandleY = 0;
 			drawArrowInOffHand = false;
 			drawArrowInMainHand = false;
@@ -119,7 +134,7 @@ public class AnimationShootArrow extends Animation {
 		}
 
 		if (progress >= 1) {
-			target.showPow();
+			// target.showPow();
 			rightShoulderAngle = 0;
 			rightElbowAngle = 0;
 			leftShoulderAngle = 0;

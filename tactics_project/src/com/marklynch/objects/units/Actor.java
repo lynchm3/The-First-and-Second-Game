@@ -549,8 +549,8 @@ public class Actor extends GameObject {
 		return false;
 	}
 
-	int actorPositionXInPixels;
-	int actorPositionYInPixels;
+	public int actorPositionXInPixels;
+	public int actorPositionYInPixels;
 
 	@Override
 	public void draw1() {
@@ -857,13 +857,14 @@ public class Actor extends GameObject {
 		float arrowY = handY - primaryAnimation.arrowHandleY;
 
 		if (backwards) {
-			TextureUtils.drawTexture(Templates.ARROW.imageTexture, alpha,
-					handX + Templates.ARROW.imageTexture.getWidth(), arrowY, handX,
-					arrowY + Templates.ARROW.imageTexture.getHeight());
+			TextureUtils.drawTexture(Templates.ARROW.textureLoaded, alpha,
+					handX + Templates.ARROW.textureLoaded.getWidth(), arrowY, handX,
+					arrowY + Templates.ARROW.textureLoaded.getHeight());
 
 		} else {
-			TextureUtils.drawTexture(Templates.ARROW.imageTexture, alpha, handX, arrowY,
-					handX + Templates.ARROW.imageTexture.getWidth(), arrowY + Templates.ARROW.imageTexture.getHeight());
+			TextureUtils.drawTexture(Templates.ARROW.textureLoaded, alpha, handX, arrowY,
+					handX + Templates.ARROW.textureLoaded.getWidth(),
+					arrowY + Templates.ARROW.textureLoaded.getHeight());
 
 		}
 	}

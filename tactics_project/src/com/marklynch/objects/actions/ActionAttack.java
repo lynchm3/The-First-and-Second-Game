@@ -5,7 +5,6 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationShootArrow;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
-import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleeding;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -69,7 +68,7 @@ public class ActionAttack extends Action {
 			if (weapon.maxRange == 1)
 				performer.primaryAnimation = new AnimationSlash(performer, target);
 			else
-				performer.primaryAnimation = new AnimationShootArrow(performer, target);
+				performer.primaryAnimation = new AnimationShootArrow(performer, target, this);
 		}
 
 		if (target.attackable) {
@@ -101,12 +100,12 @@ public class ActionAttack extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-				performer.secondaryAnimations.add(new AnimationThrown("Arrow", performer, this, target,
-						target.squareGameObjectIsOn, Templates.ARROW.makeCopy(null, null), 2f, 0f, true));
-		} else {
-		}
+		// if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) >
+		// 1) {
+		// if (performer.squareGameObjectIsOn.onScreen() &&
+		// performer.squareGameObjectIsOn.visibleToPlayer)
+		// } else {
+		// }
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();

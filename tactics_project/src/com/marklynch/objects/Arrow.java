@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Texture;
 
 public class Arrow extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public Texture textureLoaded;
 
 	public Arrow() {
 		super();

@@ -13,6 +13,7 @@ public class TemplatesProjectiles {
 		Templates.ARROW.name = "Arrow";
 		Templates.ARROW.imageTexturePath = "arrow.png";
 		Templates.ARROW.imageTexture = getGlobalImage(Templates.ARROW.imageTexturePath, true);
+		Templates.ARROW.textureLoaded = getGlobalImage("arrow_loaded.png", true);
 		Templates.ARROW.totalHealth = Templates.ARROW.remainingHealth = 10;
 		Templates.ARROW.widthRatio = 0.32f;
 		Templates.ARROW.heightRatio = 0.16f;
