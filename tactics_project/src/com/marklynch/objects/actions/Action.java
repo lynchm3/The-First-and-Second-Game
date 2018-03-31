@@ -19,6 +19,7 @@ public abstract class Action {
 	public Texture image;
 
 	public static Texture textureAttack;
+	public static Texture textureBow;
 	public static Texture textureBird;
 	public static Texture textureEllipse;
 	public static Texture textureFishing;
@@ -97,6 +98,7 @@ public abstract class Action {
 		textureAttack = getGlobalImage("action_attack.png", false);
 		textureBird = getGlobalImage("bird.png", false);
 		getGlobalImage("action_blunt.png", false);
+		textureBow = getGlobalImage("action_bow.png", false);
 		getGlobalImage("action_burn.png", false);
 		getGlobalImage("action_chop.png", false);
 		getGlobalImage("action_close.png", false);

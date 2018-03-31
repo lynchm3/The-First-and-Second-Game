@@ -33,6 +33,10 @@ public class ActionAttack extends Action {
 		super(ACTION_NAME, "action_attack.png");
 		this.performer = attacker;
 		this.target = target;
+
+		if (performer.equipped != null && performer.equipped.maxRange > 1)
+			this.image = Action.textureBow;
+
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -58,6 +62,7 @@ public class ActionAttack extends Action {
 
 		// float damage = 1;
 		GameObject weapon = null;
+
 		if (performer.equipped != null) {
 			weapon = performer.equipped;
 		} else {
