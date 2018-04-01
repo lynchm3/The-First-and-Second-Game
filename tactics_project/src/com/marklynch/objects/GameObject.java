@@ -332,7 +332,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	protected Color flashColor = new Color(255f, 255f, 255f, 0.5f);
-	Color underWaterColor = new Color(0.1f, 0.1f, 0.1f, 1f);
+	protected Color underWaterColor = new Color(0.1f, 0.1f, 0.1f, 1f);
 
 	public void draw1() {
 
@@ -499,10 +499,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 						actorPositionYInPixels + healthBarHeightInPixels - 1);
 			}
 
-			if (!(this instanceof Actor)) {
-
-				Game.flush();
-			}
+			Game.flush();
 		}
 	}
 

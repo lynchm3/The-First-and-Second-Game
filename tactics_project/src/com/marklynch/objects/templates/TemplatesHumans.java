@@ -38,6 +38,8 @@ public class TemplatesHumans {
 		Templates.PLAYER.imageTexture = getGlobalImage(Templates.PLAYER.imageTexturePath, true);
 		Templates.PLAYER.hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
 		Templates.PLAYER.armImageTexture = ResourceUtils.getGlobalImage("arm.png", false);
+		Templates.PLAYER.torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", false);
+		Templates.PLAYER.pelvisImageTexture = ResourceUtils.getGlobalImage("hero_lower.png", false);
 		Templates.PLAYER.heightRatio = 1.5f;
 		Templates.PLAYER.drawOffsetRatioY = -0.5f;
 		Templates.PLAYER.weight = 90f;

@@ -22,6 +22,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.effect.Effect;
@@ -32,6 +33,7 @@ import com.marklynch.level.quest.caveoftheblind.AIRoutineForBlind;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Arrow;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -66,6 +68,7 @@ import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -154,6 +157,8 @@ public class Actor extends GameObject {
 	public Texture stepRightTexture = null;
 	public Texture currentStepTexture = null;
 	public Texture hairImageTexture = null;
+
+	// Arms
 	public Texture armImageTexture = null;
 	public float shoulderY = 53;
 	public float elbowY = 85;
@@ -162,6 +167,12 @@ public class Actor extends GameObject {
 	public float leftArmHingeX = 50;
 	public float rightArmDrawX = 76;
 	public float rightArmHingeX = 78;
+
+	// Toro
+	public Texture torsoImageTexture;
+
+	// Pelvis
+	public Texture pelvisImageTexture;
 
 	public Texture thoughtBubbleImageTextureObject = null;
 	public Texture thoughtBubbleImageTextureAction = null;
@@ -579,13 +590,145 @@ public class Actor extends GameObject {
 			actorPositionYInPixels += primaryAnimation.offsetY;
 		}
 
-		super.draw1();
+		if (primaryAnimation != null && primaryAnimation.completed == false)
+			primaryAnimation.draw1();
+
+		for (Animation secondaryAnimation : secondaryAnimations)
+			secondaryAnimation.draw1();
+
+		float alpha = 1.0f;
+
+		// TextureUtils.skipNormals = true;
+
+		if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
+			alpha = 0.5f;
+		if (hiding)
+			alpha = 0.5f;
+
+		for (Arrow arrow : arrows) {
+
+			float arrowWidth = arrow.width;
+
+			if (arrow.backwards) {
+				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								+ arrowWidth,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ arrow.height);
+			} else {
+				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								- arrowWidth,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ arrow.height);
+
+			}
+		}
+
+		// GL11.glTexParameteri(target, pname, param);
+		if (torsoImageTexture == null) {
+			// TextureUtils.drawTexture(imageTexture, alpha,
+			// actorPositionXInPixels, actorPositionYInPixels,
+			// actorPositionXInPixels + width, actorPositionYInPixels + height,
+			// backwards);
+		} else {
+			// TextureUtils.drawTexture(imageTexture, alpha,
+			// actorPositionXInPixels, actorPositionYInPixels,
+			// actorPositionXInPixels + width, actorPositionYInPixels + height,
+			// backwards);
+			TextureUtils.drawTexture(torsoImageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
+			TextureUtils.drawTexture(pelvisImageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
+		}
+
+		if (flash || this == Game.gameObjectMouseIsOver) {
+			TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+					flashColor, false);
+		} else if (squareGameObjectIsOn.inventory.waterBody != null && !(this instanceof Fish)) {
+
+			TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+					underWaterColor, false);
+			TextureUtils.drawTexture(Templates.WATER_BODY.imageTexture, alpha, actorPositionXInPixels,
+					actorPositionYInPixels, actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
+
+			// squareGameObjectIsOn.inventory.getGameObjectOfClass(WaterBody.class).draw1();
+		}
+
+		for (Arrow arrow : arrows) {
+
+			float arrowWidth = arrow.width;
+			// arrowWidth = -arrowWidth;
+
+			// QuadUtils.drawQuad(Color.RED,
+			// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
+			// arrow.drawOffsetRatioX,
+			// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
+			// * arrow.drawOffsetRatioY,
+			// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
+			// arrow.drawOffsetRatioX + 10,
+			// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
+			// * arrow.drawOffsetRatioY + 10);
+
+			if (arrow.backwards) {
+				TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								+ arrowWidth,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ arrow.height);
+			} else {
+				TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								- arrowWidth,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ arrow.height);
+
+			}
+		}
+
+		if (remainingHealth != totalHealth) {
+			// draw sidebar on square
+			float healthPercentage = (remainingHealth) / (totalHealth);
+			float healthBarHeightInPixels = height * healthPercentage;
+			float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+			float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
+			if (primaryAnimation != null) {
+				healthXInPixels += primaryAnimation.offsetX;
+				healthYInPixels += primaryAnimation.offsetY;
+			}
+
+			Color color = Color.YELLOW;
+			if (thoughtsOnPlayer > 50) {
+				color = Color.GREEN;
+			} else if (thoughtsOnPlayer < -50) {
+				color = Color.RED;
+			}
+
+			// White bit under health bar
+			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), actorPositionXInPixels + 1,
+					actorPositionYInPixels + 1, actorPositionXInPixels + healthWidthInPixels - 1,
+					actorPositionYInPixels + height - 1);
+
+			// Colored health bar
+			QuadUtils.drawQuad(color, actorPositionXInPixels + 1, actorPositionYInPixels + 1,
+					actorPositionXInPixels + healthWidthInPixels - 1,
+					actorPositionYInPixels + healthBarHeightInPixels - 1);
+		}
 
 		if (helmet != null && !sleeping) {
 
 			int helmetPositionXInPixels = (actorPositionXInPixels);
 			int helmetPositionYInPixels = (actorPositionYInPixels);
-			float alpha = 1.0f;
 
 			if (backwards) {
 				TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
@@ -602,7 +745,6 @@ public class Actor extends GameObject {
 		} else if (hairImageTexture != null) {
 			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
 			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
-			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
 					bodyArmorPositionYInPixels + hairImageTexture.getHeight());
@@ -614,7 +756,6 @@ public class Actor extends GameObject {
 
 			int legArmorPositionXInPixels = (actorPositionXInPixels);
 			int legArmorPositionYInPixels = (actorPositionYInPixels);
-			float alpha = 1.0f;
 			if (backwards) {
 				TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels + legArmor.width,
 						legArmorPositionYInPixels, legArmorPositionXInPixels,
@@ -631,7 +772,6 @@ public class Actor extends GameObject {
 
 			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
 			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
-			float alpha = 1.0f;
 
 			if (backwards) {
 				TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha,
@@ -1876,6 +2016,8 @@ public class Actor extends GameObject {
 		actor.canEquipWeapons = canEquipWeapons;
 		actor.hairImageTexture = hairImageTexture;
 		actor.armImageTexture = armImageTexture;
+		actor.torsoImageTexture = torsoImageTexture;
+		actor.pelvisImageTexture = pelvisImageTexture;
 		if (aiRoutine != null)
 			actor.aiRoutine = aiRoutine.getInstance(actor);
 		actor.init(gold, mustHaves, mightHaves);
