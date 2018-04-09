@@ -230,7 +230,8 @@ public class QuestSmallGame extends Quest {
 		hunterBrent = Templates.HUNTER.makeCopy("Lead Hunter Brent", Game.level.squares[105][8],
 				Game.level.factions.townsPeople, brentsBed, 203,
 				new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null),
-						Templates.HUNTING_KNIFE.makeCopy(null, null) },
+						Templates.HUNTING_KNIFE.makeCopy(null, null), Templates.JUMPER.makeCopy(null, null),
+						Templates.PANTS.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest,
 				new int[] { Templates.HUNTING_BOW.templateId, Templates.HUNTING_KNIFE.templateId },
 				new HOBBY[] { HOBBY.HUNTING });

@@ -36,10 +36,6 @@ public class TemplatesHumans {
 		Templates.PLAYER.bluntDamage = 3;
 		Templates.PLAYER.imageTexturePath = "hero.png";
 		Templates.PLAYER.imageTexture = getGlobalImage(Templates.PLAYER.imageTexturePath, true);
-		Templates.PLAYER.hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
-		Templates.PLAYER.armImageTexture = ResourceUtils.getGlobalImage("arm.png", false);
-		Templates.PLAYER.torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", false);
-		Templates.PLAYER.pelvisImageTexture = ResourceUtils.getGlobalImage("hero_lower.png", false);
 		Templates.PLAYER.heightRatio = 1.5f;
 		Templates.PLAYER.drawOffsetRatioY = -0.5f;
 		Templates.PLAYER.weight = 90f;
@@ -60,6 +56,8 @@ public class TemplatesHumans {
 		Templates.HUNTER.endurance = 10;
 		Templates.HUNTER.imageTexturePath = "hunter.png";
 		Templates.HUNTER.imageTexture = getGlobalImage(Templates.HUNTER.imageTexturePath, true);
+		Templates.HUNTER.heightRatio = 1.5f;
+		Templates.HUNTER.drawOffsetRatioY = -0.5f;
 		Templates.HUNTER.weight = 90f;
 		Templates.HUNTER.canOpenDoors = true;
 		Templates.HUNTER.canEquipWeapons = true;
@@ -120,6 +118,8 @@ public class TemplatesHumans {
 		Templates.MINER.endurance = 12;
 		Templates.MINER.imageTexturePath = "hunter.png";
 		Templates.MINER.imageTexture = getGlobalImage(Templates.MINER.imageTexturePath, true);
+		Templates.MINER.heightRatio = 1.5f;
+		Templates.MINER.drawOffsetRatioY = -0.5f;
 		Templates.MINER.weight = 110f;
 		Templates.MINER.canOpenDoors = true;
 		Templates.MINER.canEquipWeapons = true;
@@ -138,6 +138,8 @@ public class TemplatesHumans {
 		Templates.THIEF.endurance = 10;
 		Templates.THIEF.imageTexturePath = "thief.png";
 		Templates.THIEF.imageTexture = getGlobalImage(Templates.THIEF.imageTexturePath, true);
+		Templates.THIEF.heightRatio = 1.5f;
+		Templates.THIEF.drawOffsetRatioY = -0.5f;
 		Templates.THIEF.weight = 90f;
 		Templates.THIEF.canOpenDoors = true;
 		Templates.THIEF.canEquipWeapons = true;
@@ -156,6 +158,8 @@ public class TemplatesHumans {
 		Templates.FARMER.endurance = 10;
 		Templates.FARMER.imageTexturePath = "farmer.png";
 		Templates.FARMER.imageTexture = getGlobalImage(Templates.FARMER.imageTexturePath, true);
+		Templates.FARMER.heightRatio = 1.5f;
+		Templates.FARMER.drawOffsetRatioY = -0.5f;
 		Templates.FARMER.weight = 90f;
 		Templates.FARMER.canOpenDoors = true;
 		Templates.FARMER.canEquipWeapons = true;
@@ -175,6 +179,8 @@ public class TemplatesHumans {
 		Templates.MORT.endurance = 10;
 		Templates.MORT.imageTexturePath = "farmer.png";
 		Templates.MORT.imageTexture = getGlobalImage(Templates.MORT.imageTexturePath, true);
+		Templates.MORT.heightRatio = 1.5f;
+		Templates.MORT.drawOffsetRatioY = -0.5f;
 		Templates.MORT.weight = 90f;
 		Templates.MORT.canOpenDoors = true;
 		Templates.MORT.canEquipWeapons = true;
@@ -193,6 +199,8 @@ public class TemplatesHumans {
 		Templates.TRADER.endurance = 10;
 		Templates.TRADER.imageTexturePath = "shopkeeper.png";
 		Templates.TRADER.imageTexture = getGlobalImage(Templates.TRADER.imageTexturePath, true);
+		Templates.TRADER.heightRatio = 1.5f;
+		Templates.TRADER.drawOffsetRatioY = -0.5f;
 		Templates.TRADER.weight = 90f;
 		Templates.TRADER.canOpenDoors = true;
 		Templates.TRADER.canEquipWeapons = true;

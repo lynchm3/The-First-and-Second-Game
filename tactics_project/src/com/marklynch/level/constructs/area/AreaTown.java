@@ -105,7 +105,7 @@ public class AreaTown {
 		// doorLocations2));
 
 		// Add a game object
-		Templates.DUMPSTER.makeCopy(Game.level.squares[4][2], null);
+		// Templates.DUMPSTER.makeCopy(Game.level.squares[4][2], null);
 		Templates.FUR.makeCopy(Game.level.squares[0][7], null);
 		Templates.MUSHROOM.makeCopy(Game.level.squares[0][8], null);
 		Templates.TREE.makeCopy(Game.level.squares[1][2], null);

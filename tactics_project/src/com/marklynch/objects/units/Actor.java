@@ -156,10 +156,10 @@ public class Actor extends GameObject {
 	public Texture stepLeftTexture = null;
 	public Texture stepRightTexture = null;
 	public Texture currentStepTexture = null;
-	public Texture hairImageTexture = null;
+	public Texture hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
 
 	// Arms
-	public Texture armImageTexture = null;
+	public Texture armImageTexture = ResourceUtils.getGlobalImage("arm.png", false);
 	public float shoulderY = 53;
 	public float elbowY = 85;
 	public float handY = 118f;
@@ -169,10 +169,10 @@ public class Actor extends GameObject {
 	public float rightArmHingeX = 78;
 
 	// Toro
-	public Texture torsoImageTexture;
+	public Texture torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", false);
 
 	// Pelvis
-	public Texture pelvisImageTexture;
+	public Texture pelvisImageTexture = ResourceUtils.getGlobalImage("hero_lower.png", false);
 
 	public Texture thoughtBubbleImageTextureObject = null;
 	public Texture thoughtBubbleImageTextureAction = null;
