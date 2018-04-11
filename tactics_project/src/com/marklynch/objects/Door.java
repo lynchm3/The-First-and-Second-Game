@@ -69,6 +69,7 @@ public class Door extends Openable {
 	public void open() {
 		open = true;
 
+		blocksLineOfSight = false;
 		soundDampening = 1f;
 	}
 
@@ -95,7 +96,13 @@ public class Door extends Openable {
 		door.shouldBeClosed = shouldBeClosed;
 		door.shouldBeLocked = shouldBeLocked;
 		if (!door.open) {
-			door.soundDampening = door.soundDampeningWhenClosed;
+			blocksLineOfSight = blocksLineOfSightWhenClosed;
+			soundDampening = soundDampeningWhenClosed;
+		} else {
+
+			blocksLineOfSight = false;
+			soundDampening = 1f;
+
 		}
 
 		return door;
