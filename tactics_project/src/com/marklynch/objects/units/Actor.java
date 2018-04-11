@@ -1108,10 +1108,10 @@ public class Actor extends GameObject {
 
 				int expressionBubbleWidth = 64;
 				int expressionBubbleHeight = 64;
-
-				float expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
-				float expressionBubblePositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetRatioY
-						- 64;
+				float expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGridPixels
+						+ Game.SQUARE_WIDTH * drawOffsetRatioX;
+				float expressionBubblePositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
+						+ Game.SQUARE_WIDTH * drawOffsetRatioY - 64;
 				if (primaryAnimation != null) {
 					expressionBubblePositionXInPixels += primaryAnimation.offsetX;
 					expressionBubblePositionYInPixels += primaryAnimation.offsetY;
@@ -1125,72 +1125,60 @@ public class Actor extends GameObject {
 				TextureUtils.drawTexture(Actor.THOUGHT_BUBBLE_TEXTURE, alphaBubble, expressionBubblePositionXInPixels,
 						expressionBubblePositionYInPixels, expressionBubblePositionXInPixels + expressionBubbleWidth,
 						expressionBubblePositionYInPixels + expressionBubbleHeight);
-			}
 
-			// image in bubble 1
-			if (thoughtBubbleImageTextureObject != null) {
+				// image in bubble 1
+				if (thoughtBubbleImageTextureObject != null) {
 
-				int expressionWidth = 32;
-				int expressionHeight = 32;
-				int realTextureWidth = thoughtBubbleImageTextureObject.getWidth();
-				int realTextureHeight = thoughtBubbleImageTextureObject.getHeight();
-				if (realTextureWidth >= realTextureHeight) {// knife
-					expressionHeight = 32 * realTextureHeight / realTextureWidth;
-				} else {
-					expressionWidth = 32 * realTextureWidth / realTextureHeight;
+					int expressionWidth = 32;
+					int expressionHeight = 32;
+					int realTextureWidth = thoughtBubbleImageTextureObject.getWidth();
+					int realTextureHeight = thoughtBubbleImageTextureObject.getHeight();
+					if (realTextureWidth >= realTextureHeight) {// knife
+						expressionHeight = 32 * realTextureHeight / realTextureWidth;
+					} else {
+						expressionWidth = 32 * realTextureWidth / realTextureHeight;
+					}
+
+					float expressionPositionXInPixels = expressionBubblePositionXInPixels + (32 - expressionWidth / 2);
+					float expressionPositionYInPixels = expressionBubblePositionYInPixels + 32;
+					float alpha = 1.0f;
+
+					// TextureUtils.skipNormals = true;
+
+					if (!this.squareGameObjectIsOn.visibleToPlayer)
+						alpha = 0.5f;
+					TextureUtils.drawTexture(thoughtBubbleImageTextureObject, alpha, expressionPositionXInPixels,
+							expressionPositionYInPixels, expressionPositionXInPixels + expressionWidth,
+							expressionPositionYInPixels + expressionHeight);
+					// TextureUtils.skipNormals = false;
 				}
 
-				float expressionPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels
-						+ (32 - expressionWidth / 2);
-				float expressionPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetRatioY
-						- expressionHeight;
-				if (primaryAnimation != null) {
-					expressionPositionXInPixels += primaryAnimation.offsetX;
-					expressionPositionYInPixels += primaryAnimation.offsetY;
+				// image in bubble 2
+				if (thoughtBubbleImageTextureAction != null) {
+
+					int expressionWidth = 32;
+					int expressionHeight = 32;
+					int realTextureWidth = thoughtBubbleImageTextureAction.getWidth();
+					int realTextureHeight = thoughtBubbleImageTextureAction.getHeight();
+					if (realTextureWidth >= realTextureHeight) {// knife
+						expressionHeight = 32 * realTextureHeight / realTextureWidth;
+					} else {
+						expressionWidth = 32 * realTextureWidth / realTextureHeight;
+					}
+
+					float expressionPositionXInPixels = expressionBubblePositionXInPixels + (32 - expressionWidth / 2);
+					float expressionPositionYInPixels = expressionBubblePositionYInPixels + 32;
+					float alpha = 1.0f;
+
+					// TextureUtils.skipNormals = true;
+
+					if (!this.squareGameObjectIsOn.visibleToPlayer)
+						alpha = 0.5f;
+					TextureUtils.drawTexture(thoughtBubbleImageTextureAction, alpha, expressionPositionXInPixels,
+							expressionPositionYInPixels, expressionPositionXInPixels + expressionWidth / 2,
+							expressionPositionYInPixels + expressionHeight / 2);
+					// TextureUtils.skipNormals = false;
 				}
-				float alpha = 1.0f;
-
-				// TextureUtils.skipNormals = true;
-
-				if (!this.squareGameObjectIsOn.visibleToPlayer)
-					alpha = 0.5f;
-				TextureUtils.drawTexture(thoughtBubbleImageTextureObject, alpha, expressionPositionXInPixels,
-						expressionPositionYInPixels, expressionPositionXInPixels + expressionWidth,
-						expressionPositionYInPixels + expressionHeight);
-				// TextureUtils.skipNormals = false;
-			}
-
-			// image in bubble 2
-			if (thoughtBubbleImageTextureAction != null) {
-
-				int expressionWidth = 32;
-				int expressionHeight = 32;
-				int realTextureWidth = thoughtBubbleImageTextureAction.getWidth();
-				int realTextureHeight = thoughtBubbleImageTextureAction.getHeight();
-				if (realTextureWidth >= realTextureHeight) {// knife
-					expressionHeight = 32 * realTextureHeight / realTextureWidth;
-				} else {
-					expressionWidth = 32 * realTextureWidth / realTextureHeight;
-				}
-
-				float expressionPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels
-						+ (32 - expressionWidth / 2);
-				float expressionPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetRatioY
-						- expressionHeight;
-				if (primaryAnimation != null) {
-					expressionPositionXInPixels += primaryAnimation.offsetX;
-					expressionPositionYInPixels += primaryAnimation.offsetY;
-				}
-				float alpha = 1.0f;
-
-				// TextureUtils.skipNormals = true;
-
-				if (!this.squareGameObjectIsOn.visibleToPlayer)
-					alpha = 0.5f;
-				TextureUtils.drawTexture(thoughtBubbleImageTextureAction, alpha, expressionPositionXInPixels,
-						expressionPositionYInPixels, expressionPositionXInPixels + expressionWidth / 2,
-						expressionPositionYInPixels + expressionHeight / 2);
-				// TextureUtils.skipNormals = false;
 			}
 		}
 		//
