@@ -200,16 +200,8 @@ public class ActionDie extends Action {
 				}
 			} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChoppingStart) {
 
-				if (!performer.name.contains("Big")) {
-
-					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
-							Templates.STUMP.makeCopy(null, null), performer.squareGameObjectIsOn));
-
-				} else {
-
-					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
-							Templates.BIG_STUMP.makeCopy(null, null), performer.squareGameObjectIsOn));
-				}
+				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
+						Templates.STUMP.makeCopy(null, null), performer.squareGameObjectIsOn));
 			} else if (performer instanceof Stump) {
 				if (performer.squareGameObjectIsOn != null) {
 					performer.squareGameObjectIsOn.imageTexture = Square.MUD_TEXTURE;

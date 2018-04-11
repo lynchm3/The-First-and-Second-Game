@@ -414,6 +414,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				}
 			}
 
+			// System.out.println("this = " + this + "..." + this.getClass());
+
 			// GL11.glTexParameteri(target, pname, param);
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);

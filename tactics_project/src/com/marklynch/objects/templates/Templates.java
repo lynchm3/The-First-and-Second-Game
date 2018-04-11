@@ -353,8 +353,6 @@ public class Templates {
 
 	public static Stump STUMP;
 
-	public static Stump BIG_STUMP;
-
 	public static HidingPlace BUSH;
 
 	public static HidingPlace POISON_BUSH;

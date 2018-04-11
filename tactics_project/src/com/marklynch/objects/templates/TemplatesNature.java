@@ -65,9 +65,9 @@ public class TemplatesNature {
 		Templates.STUMP.imageTexturePath = "stump.png";
 		Templates.STUMP.imageTexture = getGlobalImage(Templates.STUMP.imageTexturePath, true);
 		Templates.STUMP.totalHealth = Templates.STUMP.remainingHealth = 52;
-		Templates.STUMP.widthRatio = 0.5f;
+		Templates.STUMP.widthRatio = 1f;
 		Templates.STUMP.heightRatio = 1f;
-		Templates.STUMP.drawOffsetRatioX = 0.25f;
+		Templates.STUMP.drawOffsetRatioX = 0f;
 		Templates.STUMP.drawOffsetRatioY = 0f;
 		Templates.STUMP.soundWhenHit = 1f;
 		Templates.STUMP.soundWhenHitting = 1f;
@@ -79,26 +79,6 @@ public class TemplatesNature {
 		Templates.STUMP.anchorY = 0;
 		Templates.STUMP.templateId = GameObject.generateNewTemplateId();
 		Templates.STUMP.flipYAxisInMirror = false;
-
-		Templates.BIG_STUMP = new Stump();
-		Templates.BIG_STUMP.name = "";
-		Templates.BIG_STUMP.imageTexturePath = "BIG_STUMP.png";
-		Templates.BIG_STUMP.imageTexture = getGlobalImage(Templates.BIG_STUMP.imageTexturePath, true);
-		Templates.BIG_STUMP.totalHealth = Templates.BIG_STUMP.remainingHealth = 73;
-		Templates.BIG_STUMP.widthRatio = 1f;
-		Templates.BIG_STUMP.heightRatio = 1f;
-		Templates.BIG_STUMP.drawOffsetRatioX = 0f;
-		Templates.BIG_STUMP.drawOffsetRatioY = 0f;
-		Templates.BIG_STUMP.soundWhenHit = 1f;
-		Templates.BIG_STUMP.soundWhenHitting = 1f;
-		Templates.BIG_STUMP.soundDampening = 1f;
-		Templates.BIG_STUMP.stackable = false;
-		Templates.BIG_STUMP.weight = 83f;
-		Templates.BIG_STUMP.value = 9;
-		Templates.BIG_STUMP.anchorX = 0;
-		Templates.BIG_STUMP.anchorY = 0;
-		Templates.BIG_STUMP.templateId = GameObject.generateNewTemplateId();
-		Templates.BIG_STUMP.flipYAxisInMirror = false;
 
 		Templates.BUSH = new HidingPlace();
 		Templates.BUSH.name = "Bush";
