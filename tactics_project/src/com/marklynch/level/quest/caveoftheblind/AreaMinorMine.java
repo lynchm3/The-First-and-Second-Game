@@ -80,7 +80,7 @@ public class AreaMinorMine {
 				new HOBBY[] { HOBBY.HUNTING });
 
 		// 281, 93
-		// Trader Joe
+		// Trader Jake
 		Trader trader = Templates.TRADER.makeCopy("Trader Jake", Game.level.squares[281][94],
 				Game.level.factions.townsPeople, Templates.BED.makeCopy(Game.level.squares[303][95], null), 10000,
 				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),

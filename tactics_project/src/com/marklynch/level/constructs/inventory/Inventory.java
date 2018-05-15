@@ -1575,7 +1575,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// Special tules for trader
 		if (parent instanceof Trader) {
+
 			for (GameObject gameObject : gameObjects) {
+
+				Trader trader = (Trader) parent;
+
+				if (gameObject == trader.broom)
+					continue;
 
 				if (gameObject.owner != null && gameObject.owner != this.parent)
 					continue;
@@ -1583,20 +1589,29 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				if (gameObject instanceof Gold)
 					continue;
 
+				if (trader.equipped == gameObject)
+					continue;
+
+				if (trader.bodyArmor == gameObject)
+					continue;
+
+				if (trader.legArmor == gameObject)
+					continue;
+
+				if (trader.helmet == gameObject)
+					continue;
+
 				gameObject.toSell = true;
 				itemsToSellCount++;
 			}
-
-			Trader trader = (Trader) parent;
-			if (trader.broom != null && this.contains(trader.broom)) {
-				trader.broom.toSell = false;
-				itemsToSellCount--;
-			}
-
 			return;
 		}
+
 		// General rules for actors
 		ArrayList<String> weaponsSeenInInventory = new ArrayList<String>();
+		Actor actor = null;
+		if (parent instanceof Actor)
+			actor = (Actor) parent;
 
 		for (GameObject gameObject : gameObjects) {
 
@@ -1611,16 +1626,22 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (gameObject instanceof ContainerForLiquids)
 				continue;
 
+			if (actor != null) {
+				if (actor.equipped == gameObject)
+					continue;
+
+				if (actor.bodyArmor == gameObject)
+					continue;
+
+				if (actor.legArmor == gameObject)
+					continue;
+
+				if (actor.helmet == gameObject)
+					continue;
+			}
+
 			if (this.parent == Game.level.player) {
 				if (gameObject.starred)
-					continue;
-				if (Game.level.player.equipped == gameObject)
-					continue;
-				if (Game.level.player.bodyArmor == gameObject)
-					continue;
-				if (Game.level.player.legArmor == gameObject)
-					continue;
-				if (Game.level.player.helmet == gameObject)
 					continue;
 
 				if (gameObject instanceof Weapon) {
@@ -1658,6 +1679,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				}
 			}
 		}
+
 	}
 
 	public boolean checkIfPlayersWeaponObsolete(GameObject weapon) {

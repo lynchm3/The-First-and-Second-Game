@@ -14,6 +14,8 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.Sign;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.weapons.BodyArmor;
+import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Trader extends Human implements Comparator<GameObject> {
@@ -25,6 +27,8 @@ public class Trader extends Human implements Comparator<GameObject> {
 	public Sign shopSign;
 	// public WantedPoster wantedPoster;
 	public Weapon broom;
+	public BodyArmor apron;
+	public LegArmor pants;
 
 	public Trader() {
 		super();
@@ -110,6 +114,15 @@ public class Trader extends Human implements Comparator<GameObject> {
 		actor.broom = Templates.BROOM.makeCopy(null, null);
 		actor.inventory.add(actor.broom);
 		actor.equip(actor.broom);
+		
+		actor.apron = Templates.APRON.makeCopy(null, null);
+		actor.inventory.add(actor.apron);
+		actor.bodyArmor = actor.apron;
+		
+		actor.pants = Templates.PANTS.makeCopy(null, null);
+		actor.inventory.add(actor.pants);
+		actor.legArmor = actor.pants;
+		
 		return actor;
 	}
 

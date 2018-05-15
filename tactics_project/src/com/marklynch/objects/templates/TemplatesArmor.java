@@ -99,6 +99,19 @@ public class TemplatesArmor {
 		Templates.JUMPER.weight = 14f;
 		Templates.JUMPER.value = 30;
 		Templates.JUMPER.templateId = GameObject.generateNewTemplateId();
+		
+		Templates.APRON = new BodyArmor();
+		Templates.APRON.name = "Apron";
+		Templates.APRON.imageTexturePath = "apron.png";
+		Templates.APRON.imageTexture = getGlobalImage(Templates.APRON.imageTexturePath, true);
+		Templates.APRON.armUpperTexture = getGlobalImage("apron_arm_upper.png", true);
+		Templates.APRON.armLowerTexture = getGlobalImage("apron_arm_lower.png", true);
+		Templates.APRON.totalHealth = Templates.APRON.remainingHealth = 20;
+		Templates.APRON.widthRatio = 1f;
+		Templates.APRON.heightRatio = 1.5f;
+		Templates.APRON.weight = 17f;
+		Templates.APRON.value = 38;
+		Templates.APRON.templateId = GameObject.generateNewTemplateId();
 
 		// Leg Armor
 
