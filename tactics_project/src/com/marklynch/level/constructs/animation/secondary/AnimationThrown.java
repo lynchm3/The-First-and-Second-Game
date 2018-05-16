@@ -136,13 +136,13 @@ public class AnimationThrown extends Animation {
 			if (targetGameObject != null)
 				targetGameObject.showPow();
 			if (!(projectileObject instanceof Arrow)) {
-				if (targetGameObject instanceof Searchable && projectileObject.canShareSquare) {
+				if (targetGameObject != null && targetGameObject instanceof Searchable && projectileObject.canShareSquare) {
 					targetGameObject.inventory.add(projectileObject);
 				} else {
 					targetSquare.inventory.add(projectileObject);
 				}
 				projectileObject.landed(shooter, action);
-			} else {
+			} else if (targetGameObject != null){
 
 				// projectileObject.drawOffsetRatioX = (targetX -
 				// targetGameObject.squareGameObjectIsOn.xInGridPixels)
@@ -154,6 +154,7 @@ public class AnimationThrown extends Animation {
 				// projectileObject.drawOffsetRatioY = (targetY -
 				// targetGameObject.squareGameObjectIsOn.yInGridPixels)
 				// / Game.SQUARE_HEIGHT;
+				
 				targetGameObject.arrows.add((Arrow) projectileObject);
 			}
 
@@ -161,7 +162,7 @@ public class AnimationThrown extends Animation {
 				Level.player.inventory.groundDisplay.refreshGameObjects();
 
 			// Carry out the dmg, attack, logging...
-			if (targetGameObject.attackable) {
+			if (targetGameObject != null && targetGameObject.attackable) {
 				float damage = targetGameObject.changeHealth(shooter, action, weapon);
 				String attackTypeString;
 				attackTypeString = "attacked ";
@@ -226,7 +227,8 @@ public class AnimationThrown extends Animation {
 	}
 
 	public void smashContainer(ContainerForLiquids container) {
-		targetGameObject.squareGameObjectIsOn.inventory.add(container);
+		if(targetGameObject != null)
+			targetGameObject.squareGameObjectIsOn.inventory.add(container);
 		new ActionSmash(shooter, container).perform();
 
 		// Find a square for broken glass and put it there
