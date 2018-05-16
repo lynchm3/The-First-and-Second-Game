@@ -120,12 +120,26 @@ public class TemplatesArmor {
 		Templates.ROBE.armUpperTexture = getGlobalImage("robe_arm_upper.png", true);
 		Templates.ROBE.armLowerTexture = getGlobalImage("robe_arm_lower.png", true);
 		Templates.ROBE.backTexture = getGlobalImage("robe_back.png", true);
-		Templates.ROBE.totalHealth = Templates.ROBE.remainingHealth = 20;
+		Templates.ROBE.totalHealth = Templates.ROBE.remainingHealth = 26;
 		Templates.ROBE.widthRatio = 1f;
 		Templates.ROBE.heightRatio = 1.5f;
-		Templates.ROBE.weight = 17f;
-		Templates.ROBE.value = 38;
+		Templates.ROBE.weight = 21f;
+		Templates.ROBE.value = 46;
 		Templates.ROBE.templateId = GameObject.generateNewTemplateId();
+		
+		Templates.CHAINMAIL = new BodyArmor();
+		Templates.CHAINMAIL.name = "Chainmail";
+		Templates.CHAINMAIL.imageTexturePath = "chainmail.png";
+		Templates.CHAINMAIL.imageTexture = getGlobalImage(Templates.CHAINMAIL.imageTexturePath, true);
+		Templates.CHAINMAIL.armUpperTexture = getGlobalImage("chainmail_arm_upper.png", true);
+		Templates.CHAINMAIL.armLowerTexture = getGlobalImage("chainmail_arm_lower.png", true);
+		Templates.CHAINMAIL.backTexture = getGlobalImage("chainmail_back.png", true);
+		Templates.CHAINMAIL.totalHealth = Templates.CHAINMAIL.remainingHealth = 77;
+		Templates.CHAINMAIL.widthRatio = 1f;
+		Templates.CHAINMAIL.heightRatio = 1.5f;
+		Templates.CHAINMAIL.weight = 75f;
+		Templates.CHAINMAIL.value = 201;
+		Templates.CHAINMAIL.templateId = GameObject.generateNewTemplateId();
 
 		// Leg Armor
 
