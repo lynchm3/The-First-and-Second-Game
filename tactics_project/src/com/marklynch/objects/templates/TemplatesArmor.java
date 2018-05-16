@@ -127,6 +127,21 @@ public class TemplatesArmor {
 		Templates.ROBE.value = 46;
 		Templates.ROBE.templateId = GameObject.generateNewTemplateId();
 		
+		
+		
+		Templates.LEATHERS = new BodyArmor();
+		Templates.LEATHERS.name = "Leathers";
+		Templates.LEATHERS.imageTexturePath = "leathers.png";
+		Templates.LEATHERS.imageTexture = getGlobalImage(Templates.LEATHERS.imageTexturePath, true);
+		Templates.LEATHERS.armUpperTexture = getGlobalImage("leathers_arm_upper.png", true);
+		Templates.LEATHERS.armLowerTexture = getGlobalImage("leathers_arm_lower.png", true);
+		Templates.LEATHERS.totalHealth = Templates.LEATHERS.remainingHealth = 54;
+		Templates.LEATHERS.widthRatio = 1f;
+		Templates.LEATHERS.heightRatio = 1.5f;
+		Templates.LEATHERS.weight = 46f;
+		Templates.LEATHERS.value = 104;
+		Templates.LEATHERS.templateId = GameObject.generateNewTemplateId();
+		
 		Templates.CHAINMAIL = new BodyArmor();
 		Templates.CHAINMAIL.name = "Chainmail";
 		Templates.CHAINMAIL.imageTexturePath = "chainmail.png";

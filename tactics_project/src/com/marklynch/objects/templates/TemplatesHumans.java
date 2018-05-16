@@ -64,6 +64,8 @@ public class TemplatesHumans {
 		Templates.HUNTER.aiRoutine = new AIRoutineForHunter(Templates.HUNTER);
 		Templates.HUNTER.templateId = GameObject.generateNewTemplateId();
 		Templates.HUNTER.flipYAxisInMirror = false;
+		Templates.HUNTER.bodyArmor = Templates.LEATHERS.makeCopy(null, null);
+		Templates.HUNTER.legArmor = Templates.PANTS.makeCopy(null, null);
 
 		Templates.GUARD = new Guard();
 		Templates.GUARD.title = "Guard";

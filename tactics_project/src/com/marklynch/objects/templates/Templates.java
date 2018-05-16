@@ -200,6 +200,7 @@ public class Templates {
 	public static BodyArmor JUMPER;
 	public static BodyArmor APRON;
 	public static BodyArmor ROBE;
+	public static BodyArmor LEATHERS;
 	public static BodyArmor CHAINMAIL;
 
 	// Leg Armor
