@@ -112,6 +112,20 @@ public class TemplatesArmor {
 		Templates.APRON.weight = 17f;
 		Templates.APRON.value = 38;
 		Templates.APRON.templateId = GameObject.generateNewTemplateId();
+		
+		Templates.ROBE = new BodyArmor();
+		Templates.ROBE.name = "Robe";
+		Templates.ROBE.imageTexturePath = "robe.png";
+		Templates.ROBE.imageTexture = getGlobalImage(Templates.ROBE.imageTexturePath, true);
+		Templates.ROBE.armUpperTexture = getGlobalImage("robe_arm_upper.png", true);
+		Templates.ROBE.armLowerTexture = getGlobalImage("robe_arm_lower.png", true);
+		Templates.ROBE.backTexture = getGlobalImage("robe_back.png", true);
+		Templates.ROBE.totalHealth = Templates.ROBE.remainingHealth = 20;
+		Templates.ROBE.widthRatio = 1f;
+		Templates.ROBE.heightRatio = 1.5f;
+		Templates.ROBE.weight = 17f;
+		Templates.ROBE.value = 38;
+		Templates.ROBE.templateId = GameObject.generateNewTemplateId();
 
 		// Leg Armor
 

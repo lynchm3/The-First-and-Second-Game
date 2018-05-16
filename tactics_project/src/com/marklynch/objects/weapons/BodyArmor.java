@@ -12,6 +12,7 @@ public class BodyArmor extends Armor {
 
 	public Texture armUpperTexture;
 	public Texture armLowerTexture;
+	public Texture backTexture;
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
@@ -42,6 +43,7 @@ public class BodyArmor extends Armor {
 		setAttributesForCopy(bodyArmor, square, owner);
 		bodyArmor.armUpperTexture = this.armUpperTexture;
 		bodyArmor.armLowerTexture = this.armLowerTexture;
+		bodyArmor.backTexture = this.backTexture;
 		return bodyArmor;
 	}
 }
