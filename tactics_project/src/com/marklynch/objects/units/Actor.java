@@ -345,30 +345,53 @@ public class Actor extends GameObject {
 
 	public final static int aiMaxPathSize = 400;
 	Node lastNodeReached = null;
+	Square lastPathTarget = null;
 
 	public AIPath getPathTo(Square target) {
 
+		if(name.equals("Guard John"))
+			System.out.println("getPathTo(" + target + ")");
+		//81,56 is Guard John's BED
+		
 		if (target == null) {
-
 			return null;
 		}
 
 		for (Node node1 : this.squareGameObjectIsOn.nodes) {
 			for (Node node2 : target.nodes) {
 				if (node1 == node2) {
+					if(name.equals("Guard John"))
+						System.out.println("current and target square have same nodes, got to square level node = " + node1);
 					lastNodeReached = null;
+					lastPathTarget = target;
 					return getPathAtSquareLevel(target);
 				}
 			}
 		}
-		int closestNodeDistance = Integer.MAX_VALUE;
-		for (Node node : this.squareGameObjectIsOn.nodes) {
-			int tempDistance = straightLineDistanceBetween(this.squareGameObjectIsOn, node.square);
-			if (tempDistance < closestNodeDistance) {
-				lastNodeReached = node;
-				closestNodeDistance = tempDistance;
+
+		if(this.squareGameObjectIsOn.node != null)
+		{
+			lastNodeReached = this.squareGameObjectIsOn.node;
+			if(name.equals("Guard John"))
+				System.out.println("On a node, lastNodeReached has been set to " + lastNodeReached);
+		}else if(lastPathTarget != target)
+		{
+			int closestNodeDistance = Integer.MAX_VALUE;
+			for (Node node : this.squareGameObjectIsOn.nodes) {
+				int tempDistance = straightLineDistanceBetween(this.squareGameObjectIsOn, node.square);
+				if (tempDistance < closestNodeDistance) {
+					lastNodeReached = node;
+					closestNodeDistance = tempDistance;
+				}
 			}
+
+			if(name.equals("Guard John"))
+				System.out.println("New target lastNodeReached has been set to " + lastNodeReached);
 		}
+		
+//		ARE WE ON A NODE!?!?!
+				
+				
 
 		int maxPathSize = 1000;
 		float bestCost = Float.MAX_VALUE;
@@ -394,8 +417,12 @@ public class Actor extends GameObject {
 		}
 
 		if (aStarNodesPath != null)
+		{
+			lastPathTarget = target;
 			return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
+		}
 
+		lastPathTarget = target;
 		return null;
 
 	}
