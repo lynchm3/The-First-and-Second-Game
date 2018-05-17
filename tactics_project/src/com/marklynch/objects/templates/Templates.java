@@ -191,10 +191,10 @@ public class Templates {
 	// ARMOUR
 	// Helmets
 	public static Helmet HARD_HAT;
-
 	public static Helmet PINK_HARD_HAT;
-
 	public static Helmet COWBOY_HAT;
+	public static Helmet HUNTING_CAP;
+	public static Helmet HOOD;
 
 	// Body Armor
 	public static BodyArmor JUMPER;

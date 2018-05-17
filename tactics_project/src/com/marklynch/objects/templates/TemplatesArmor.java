@@ -61,6 +61,19 @@ public class TemplatesArmor {
 		Templates.PINK_HARD_HAT.anchorY = 8;
 		Templates.PINK_HARD_HAT.templateId = GameObject.generateNewTemplateId();
 
+		Templates.HUNTING_CAP = new Helmet();
+		Templates.HUNTING_CAP.name = "Hunting Cap";
+		Templates.HUNTING_CAP.imageTexturePath = "hunting_cap.png";
+		Templates.HUNTING_CAP.imageTexture = getGlobalImage(Templates.HUNTING_CAP.imageTexturePath, true);
+		Templates.HUNTING_CAP.totalHealth = Templates.HUNTING_CAP.remainingHealth = 50;
+		Templates.HUNTING_CAP.widthRatio = 1f;
+		Templates.HUNTING_CAP.heightRatio = 0.5f;
+		Templates.HUNTING_CAP.weight = 5;
+		Templates.HUNTING_CAP.value = 21;
+		Templates.HUNTING_CAP.anchorX = 20;
+		Templates.HUNTING_CAP.anchorY = 8;
+		Templates.HUNTING_CAP.templateId = GameObject.generateNewTemplateId();
+
 		Templates.COWBOY_HAT = new Helmet();
 		Templates.COWBOY_HAT.name = "Cowboy Hat";
 		Templates.COWBOY_HAT.imageTexturePath = "cowboy_hat.png";
@@ -99,7 +112,7 @@ public class TemplatesArmor {
 		Templates.JUMPER.weight = 14f;
 		Templates.JUMPER.value = 30;
 		Templates.JUMPER.templateId = GameObject.generateNewTemplateId();
-		
+
 		Templates.APRON = new BodyArmor();
 		Templates.APRON.name = "Apron";
 		Templates.APRON.imageTexturePath = "apron.png";
@@ -112,7 +125,7 @@ public class TemplatesArmor {
 		Templates.APRON.weight = 17f;
 		Templates.APRON.value = 38;
 		Templates.APRON.templateId = GameObject.generateNewTemplateId();
-		
+
 		Templates.ROBE = new BodyArmor();
 		Templates.ROBE.name = "Robe";
 		Templates.ROBE.imageTexturePath = "robe.png";
@@ -126,9 +139,7 @@ public class TemplatesArmor {
 		Templates.ROBE.weight = 21f;
 		Templates.ROBE.value = 46;
 		Templates.ROBE.templateId = GameObject.generateNewTemplateId();
-		
-		
-		
+
 		Templates.LEATHERS = new BodyArmor();
 		Templates.LEATHERS.name = "Leathers";
 		Templates.LEATHERS.imageTexturePath = "leathers.png";
@@ -141,7 +152,7 @@ public class TemplatesArmor {
 		Templates.LEATHERS.weight = 46f;
 		Templates.LEATHERS.value = 104;
 		Templates.LEATHERS.templateId = GameObject.generateNewTemplateId();
-		
+
 		Templates.CHAINMAIL = new BodyArmor();
 		Templates.CHAINMAIL.name = "Chainmail";
 		Templates.CHAINMAIL.imageTexturePath = "chainmail.png";

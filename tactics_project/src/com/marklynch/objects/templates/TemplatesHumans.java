@@ -53,9 +53,6 @@ public class TemplatesHumans {
 		Templates.HUNTER.dexterity = 10;
 		Templates.HUNTER.intelligence = 10;
 		Templates.HUNTER.endurance = 10;
-		// Templates.HUNTER.imageTexturePath = "hunter.png";
-		// Templates.HUNTER.imageTexture =
-		// getGlobalImage(Templates.HUNTER.imageTexturePath, true);
 		Templates.HUNTER.heightRatio = 1.5f;
 		Templates.HUNTER.drawOffsetRatioY = -0.5f;
 		Templates.HUNTER.weight = 90f;
@@ -66,6 +63,7 @@ public class TemplatesHumans {
 		Templates.HUNTER.flipYAxisInMirror = false;
 		Templates.HUNTER.bodyArmor = Templates.LEATHERS.makeCopy(null, null);
 		Templates.HUNTER.legArmor = Templates.PANTS.makeCopy(null, null);
+		Templates.HUNTER.helmet = Templates.HUNTING_CAP.makeCopy(null, null);
 
 		Templates.GUARD = new Guard();
 		Templates.GUARD.title = "Guard";
@@ -76,9 +74,6 @@ public class TemplatesHumans {
 		Templates.GUARD.dexterity = 11;
 		Templates.GUARD.intelligence = 13;
 		Templates.GUARD.endurance = 21;
-		// Templates.GUARD.imageTexturePath = "guard.png";
-		// Templates.GUARD.imageTexture =
-		// getGlobalImage(Templates.GUARD.imageTexturePath, true);
 		Templates.GUARD.heightRatio = 1.5f;
 		Templates.GUARD.drawOffsetRatioY = -0.5f;
 		Templates.GUARD.weight = 100f;
@@ -152,6 +147,7 @@ public class TemplatesHumans {
 		Templates.THIEF.aiRoutine = new AIRoutineForThief(Templates.THIEF);
 		Templates.THIEF.templateId = GameObject.generateNewTemplateId();
 		Templates.THIEF.flipYAxisInMirror = false;
+		// Templates.THIEF.helmet = Templates.HOOD.makeCopy(null, null);
 
 		Templates.FARMER = new Human();
 		Templates.FARMER.title = "Farmer";
@@ -173,6 +169,10 @@ public class TemplatesHumans {
 		Templates.FARMER.aiRoutine = new AIRoutineForHunter(Templates.FARMER);
 		Templates.FARMER.templateId = GameObject.generateNewTemplateId();
 		Templates.FARMER.flipYAxisInMirror = false;
+		Templates.FARMER.bodyArmor = Templates.LEATHERS.makeCopy(null, null);
+		Templates.FARMER.legArmor = Templates.DUNGAREES.makeCopy(null, null);
+		// Templates.FARMER.helmet = Templates.HUNTING_CAP.makeCopy(null, null);
+		// Templates.FARMER.helmet = Templates.HARD_HAT.makeCopy(null, null);
 
 		// Special People
 		Templates.MORT = new Mort();

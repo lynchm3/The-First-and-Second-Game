@@ -47,6 +47,15 @@ public class Human extends Actor {
 			actor.inventory.add(actor.legArmor);
 		}
 
+		if (helmet != null) {
+			actor.helmet = helmet.makeCopy(null, null);
+			actor.inventory.add(actor.helmet);
+		}
+
+		if (hairImageTexture != null) {
+			actor.hairImageTexture = hairImageTexture;
+		}
+
 		return actor;
 	}
 
