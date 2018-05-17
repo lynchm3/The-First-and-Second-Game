@@ -655,24 +655,25 @@ public class Actor extends GameObject {
 		if (imageTexture != null)
 			super.draw1();
 
-		// GL11.glTexParameteri(target, pname, param);
-		if (torsoImageTexture == null) {
-			// TextureUtils.drawTexture(imageTexture, alpha,
-			// actorPositionXInPixels, actorPositionYInPixels,
-			// actorPositionXInPixels + width, actorPositionYInPixels + height,
-			// backwards);
-		} else {
-			// TextureUtils.drawTexture(imageTexture, alpha,
-			// actorPositionXInPixels, actorPositionYInPixels,
-			// actorPositionXInPixels + width, actorPositionYInPixels + height,
-			// backwards);
+		if (torsoImageTexture != null) {
 			TextureUtils.drawTexture(torsoImageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
+			if (flash || this == Game.gameObjectMouseIsOver) {
+
+				TextureUtils.drawTexture(torsoImageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
+						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+						flashColor, false);
+			}
+		}
+
+		if (pelvisImageTexture != null) {
 			TextureUtils.drawTexture(pelvisImageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
 		}
 
-		if (flash || this == Game.gameObjectMouseIsOver) {
+		if (flash || this == Game.gameObjectMouseIsOver)
+
+		{
 			TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
 					flashColor, false);
@@ -784,7 +785,9 @@ public class Actor extends GameObject {
 
 		drawBackArm();
 
-		if (legArmor != null && !sleeping) {
+		if (legArmor != null && !sleeping)
+
+		{
 
 			int legArmorPositionXInPixels = (actorPositionXInPixels);
 			int legArmorPositionYInPixels = (actorPositionYInPixels);
