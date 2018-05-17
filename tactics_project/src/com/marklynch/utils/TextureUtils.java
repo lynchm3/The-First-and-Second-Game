@@ -27,6 +27,9 @@ public class TextureUtils {
 			float boundsY1, float boundsX2, float boundsY2, boolean backwards, boolean upsideDown, Color color,
 			boolean inBounds) {
 
+		if (texture == null)
+			return;
+
 		float vertexX1 = x1;
 		float vertexY1 = y1;
 		float vertexX2 = x2;

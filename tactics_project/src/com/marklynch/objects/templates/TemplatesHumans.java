@@ -1,7 +1,5 @@
 package com.marklynch.objects.templates;
 
-import static com.marklynch.utils.ResourceUtils.getGlobalImage;
-
 import com.marklynch.ai.routines.AIRoutineForFisherman;
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHunter;
@@ -34,8 +32,9 @@ public class TemplatesHumans {
 		Templates.PLAYER.intelligence = 10;
 		Templates.PLAYER.endurance = 10;
 		Templates.PLAYER.bluntDamage = 3;
-		Templates.PLAYER.imageTexturePath = "hero.png";
-		Templates.PLAYER.imageTexture = getGlobalImage(Templates.PLAYER.imageTexturePath, true);
+		// Templates.PLAYER.imageTexturePath = "hero.png";
+		// Templates.PLAYER.imageTexture =
+		// getGlobalImage(Templates.PLAYER.imageTexturePath, true);
 		Templates.PLAYER.heightRatio = 1.5f;
 		Templates.PLAYER.drawOffsetRatioY = -0.5f;
 		Templates.PLAYER.weight = 90f;
@@ -54,8 +53,9 @@ public class TemplatesHumans {
 		Templates.HUNTER.dexterity = 10;
 		Templates.HUNTER.intelligence = 10;
 		Templates.HUNTER.endurance = 10;
-		Templates.HUNTER.imageTexturePath = "hunter.png";
-		Templates.HUNTER.imageTexture = getGlobalImage(Templates.HUNTER.imageTexturePath, true);
+		// Templates.HUNTER.imageTexturePath = "hunter.png";
+		// Templates.HUNTER.imageTexture =
+		// getGlobalImage(Templates.HUNTER.imageTexturePath, true);
 		Templates.HUNTER.heightRatio = 1.5f;
 		Templates.HUNTER.drawOffsetRatioY = -0.5f;
 		Templates.HUNTER.weight = 90f;
@@ -76,8 +76,9 @@ public class TemplatesHumans {
 		Templates.GUARD.dexterity = 11;
 		Templates.GUARD.intelligence = 13;
 		Templates.GUARD.endurance = 21;
-		Templates.GUARD.imageTexturePath = "guard.png";
-		Templates.GUARD.imageTexture = getGlobalImage(Templates.GUARD.imageTexturePath, true);
+		// Templates.GUARD.imageTexturePath = "guard.png";
+		// Templates.GUARD.imageTexture =
+		// getGlobalImage(Templates.GUARD.imageTexturePath, true);
 		Templates.GUARD.heightRatio = 1.5f;
 		Templates.GUARD.drawOffsetRatioY = -0.5f;
 		Templates.GUARD.weight = 100f;
@@ -96,8 +97,9 @@ public class TemplatesHumans {
 		Templates.FISHERMAN.dexterity = 4;
 		Templates.FISHERMAN.intelligence = 3;
 		Templates.FISHERMAN.endurance = 11;
-		Templates.FISHERMAN.imageTexturePath = "hero.png";
-		Templates.FISHERMAN.imageTexture = getGlobalImage(Templates.FISHERMAN.imageTexturePath, true);
+		// Templates.FISHERMAN.imageTexturePath = "hero.png";
+		// Templates.FISHERMAN.imageTexture =
+		// getGlobalImage(Templates.FISHERMAN.imageTexturePath, true);
 		Templates.FISHERMAN.hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
 		Templates.FISHERMAN.heightRatio = 1.5f;
 		Templates.FISHERMAN.drawOffsetRatioY = -0.5f;
@@ -118,8 +120,9 @@ public class TemplatesHumans {
 		Templates.MINER.dexterity = 5;
 		Templates.MINER.intelligence = 4;
 		Templates.MINER.endurance = 12;
-		Templates.MINER.imageTexturePath = "hunter.png";
-		Templates.MINER.imageTexture = getGlobalImage(Templates.MINER.imageTexturePath, true);
+		// Templates.MINER.imageTexturePath = "hunter.png";
+		// Templates.MINER.imageTexture =
+		// getGlobalImage(Templates.MINER.imageTexturePath, true);
 		Templates.MINER.heightRatio = 1.5f;
 		Templates.MINER.drawOffsetRatioY = -0.5f;
 		Templates.MINER.weight = 110f;
@@ -138,8 +141,9 @@ public class TemplatesHumans {
 		Templates.THIEF.dexterity = 10;
 		Templates.THIEF.intelligence = 10;
 		Templates.THIEF.endurance = 10;
-		Templates.THIEF.imageTexturePath = "thief.png";
-		Templates.THIEF.imageTexture = getGlobalImage(Templates.THIEF.imageTexturePath, true);
+		// Templates.THIEF.imageTexturePath = "thief.png";
+		// Templates.THIEF.imageTexture =
+		// getGlobalImage(Templates.THIEF.imageTexturePath, true);
 		Templates.THIEF.heightRatio = 1.5f;
 		Templates.THIEF.drawOffsetRatioY = -0.5f;
 		Templates.THIEF.weight = 90f;
@@ -158,8 +162,9 @@ public class TemplatesHumans {
 		Templates.FARMER.dexterity = 10;
 		Templates.FARMER.intelligence = 10;
 		Templates.FARMER.endurance = 10;
-		Templates.FARMER.imageTexturePath = "farmer.png";
-		Templates.FARMER.imageTexture = getGlobalImage(Templates.FARMER.imageTexturePath, true);
+		// Templates.FARMER.imageTexturePath = "farmer.png";
+		// Templates.FARMER.imageTexture =
+		// getGlobalImage(Templates.FARMER.imageTexturePath, true);
 		Templates.FARMER.heightRatio = 1.5f;
 		Templates.FARMER.drawOffsetRatioY = -0.5f;
 		Templates.FARMER.weight = 90f;
@@ -179,8 +184,9 @@ public class TemplatesHumans {
 		Templates.MORT.dexterity = 10;
 		Templates.MORT.intelligence = 10;
 		Templates.MORT.endurance = 10;
-		Templates.MORT.imageTexturePath = "farmer.png";
-		Templates.MORT.imageTexture = getGlobalImage(Templates.MORT.imageTexturePath, true);
+		// Templates.MORT.imageTexturePath = "farmer.png";
+		// Templates.MORT.imageTexture = getGlobalImage(Templates.MORT.imageTexturePath,
+		// true);
 		Templates.MORT.heightRatio = 1.5f;
 		Templates.MORT.drawOffsetRatioY = -0.5f;
 		Templates.MORT.weight = 90f;
@@ -199,8 +205,9 @@ public class TemplatesHumans {
 		Templates.TRADER.dexterity = 10;
 		Templates.TRADER.intelligence = 10;
 		Templates.TRADER.endurance = 10;
-		Templates.TRADER.imageTexturePath = "shopkeeper.png";
-		Templates.TRADER.imageTexture = getGlobalImage(Templates.TRADER.imageTexturePath, true);
+		// Templates.TRADER.imageTexturePath = "shopkeeper.png";
+		// Templates.TRADER.imageTexture =
+		// getGlobalImage(Templates.TRADER.imageTexturePath, true);
 		Templates.TRADER.heightRatio = 1.5f;
 		Templates.TRADER.drawOffsetRatioY = -0.5f;
 		Templates.TRADER.weight = 90f;

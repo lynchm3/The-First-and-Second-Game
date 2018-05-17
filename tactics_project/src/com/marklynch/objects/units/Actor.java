@@ -156,10 +156,10 @@ public class Actor extends GameObject {
 	public Texture stepLeftTexture = null;
 	public Texture stepRightTexture = null;
 	public Texture currentStepTexture = null;
-	public Texture hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
+	public Texture hairImageTexture;// = ResourceUtils.getGlobalImage("hair.png", false);
 
 	// Arms
-	public Texture armImageTexture = ResourceUtils.getGlobalImage("arm.png", false);
+	public Texture armImageTexture;// = ResourceUtils.getGlobalImage("arm.png", false);
 	public float shoulderY = 53;
 	public float elbowY = 85;
 	public float handY = 118f;
@@ -169,10 +169,10 @@ public class Actor extends GameObject {
 	public float rightArmHingeX = 78;
 
 	// Toro
-	public Texture torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", false);
+	public Texture torsoImageTexture;// = ResourceUtils.getGlobalImage("hero_upper.png", false);
 
 	// Pelvis
-	public Texture pelvisImageTexture = ResourceUtils.getGlobalImage("hero_lower.png", false);
+	public Texture pelvisImageTexture;// = ResourceUtils.getGlobalImage("hero_lower.png", false);
 
 	public Texture thoughtBubbleImageTextureObject = null;
 	public Texture thoughtBubbleImageTextureAction = null;
@@ -349,10 +349,10 @@ public class Actor extends GameObject {
 
 	public AIPath getPathTo(Square target) {
 
-		if(name.equals("Guard John"))
+		if (name.equals("Guard John"))
 			System.out.println("getPathTo(" + target + ")");
-		//81,56 is Guard John's BED
-		
+		// 81,56 is Guard John's BED
+
 		if (target == null) {
 			return null;
 		}
@@ -360,8 +360,9 @@ public class Actor extends GameObject {
 		for (Node node1 : this.squareGameObjectIsOn.nodes) {
 			for (Node node2 : target.nodes) {
 				if (node1 == node2) {
-					if(name.equals("Guard John"))
-						System.out.println("current and target square have same nodes, got to square level node = " + node1);
+					if (name.equals("Guard John"))
+						System.out.println(
+								"current and target square have same nodes, got to square level node = " + node1);
 					lastNodeReached = null;
 					lastPathTarget = target;
 					return getPathAtSquareLevel(target);
@@ -369,13 +370,11 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if(this.squareGameObjectIsOn.node != null)
-		{
+		if (this.squareGameObjectIsOn.node != null) {
 			lastNodeReached = this.squareGameObjectIsOn.node;
-			if(name.equals("Guard John"))
+			if (name.equals("Guard John"))
 				System.out.println("On a node, lastNodeReached has been set to " + lastNodeReached);
-		}else if(lastPathTarget != target)
-		{
+		} else if (lastPathTarget != target) {
 			int closestNodeDistance = Integer.MAX_VALUE;
 			for (Node node : this.squareGameObjectIsOn.nodes) {
 				int tempDistance = straightLineDistanceBetween(this.squareGameObjectIsOn, node.square);
@@ -385,13 +384,11 @@ public class Actor extends GameObject {
 				}
 			}
 
-			if(name.equals("Guard John"))
+			if (name.equals("Guard John"))
 				System.out.println("New target lastNodeReached has been set to " + lastNodeReached);
 		}
-		
-//		ARE WE ON A NODE!?!?!
-				
-				
+
+		// ARE WE ON A NODE!?!?!
 
 		int maxPathSize = 1000;
 		float bestCost = Float.MAX_VALUE;
@@ -416,8 +413,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (aStarNodesPath != null)
-		{
+		if (aStarNodesPath != null) {
 			lastPathTarget = target;
 			return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
 		}
@@ -656,6 +652,9 @@ public class Actor extends GameObject {
 			}
 		}
 
+		if (imageTexture != null)
+			super.draw1();
+
 		// GL11.glTexParameteri(target, pname, param);
 		if (torsoImageTexture == null) {
 			// TextureUtils.drawTexture(imageTexture, alpha,
@@ -691,17 +690,6 @@ public class Actor extends GameObject {
 		for (Arrow arrow : arrows) {
 
 			float arrowWidth = arrow.width;
-			// arrowWidth = -arrowWidth;
-
-			// QuadUtils.drawQuad(Color.RED,
-			// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
-			// arrow.drawOffsetRatioX,
-			// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
-			// * arrow.drawOffsetRatioY,
-			// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
-			// arrow.drawOffsetRatioX + 10,
-			// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
-			// * arrow.drawOffsetRatioY + 10);
 
 			if (arrow.backwards) {
 				TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
@@ -776,10 +764,8 @@ public class Actor extends GameObject {
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
 					bodyArmorPositionYInPixels + hairImageTexture.getHeight());
 		}
-		
 
-
-		if (bodyArmor != null && bodyArmor.backTexture != null &&  !sleeping) {
+		if (bodyArmor != null && bodyArmor.backTexture != null && !sleeping) {
 
 			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
 			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
