@@ -1152,13 +1152,26 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					- (otherGameObject.height);
 			if (otherGameObject instanceof Actor) {
 				int actorPositionXInPixels = otherInventory.actorX;
-				int actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
-						- (otherGameObject.imageTexture.getHeight()));
-				TextureUtils.drawTexture(otherGameObject.imageTexture, 1f, actorPositionXInPixels,
-						actorPositionYInPixels, actorPositionXInPixels + otherGameObject.width * 2,
-						actorPositionYInPixels + otherGameObject.height * 2, true);
-				TextureUtils.drawTexture(textureBag, 0.5f, otherTextureX, otherTextureY,
-						otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2, true);
+				int actorPositionYInPixels;
+
+				if (otherGameObject.imageTexture != null) {
+					actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
+							- (otherGameObject.imageTexture.getHeight()));
+					TextureUtils.drawTexture(otherGameObject.imageTexture, 1f, actorPositionXInPixels,
+							actorPositionYInPixels, actorPositionXInPixels + otherGameObject.width * 2,
+							actorPositionYInPixels + otherGameObject.height * 2, true);
+				} else {
+					actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
+							- (((Actor) otherGameObject).torsoImageTexture.getHeight()));
+					TextureUtils.drawTexture(((Actor) otherGameObject).torsoImageTexture, 1f, actorPositionXInPixels,
+							actorPositionYInPixels, actorPositionXInPixels + otherGameObject.width * 2,
+							actorPositionYInPixels + otherGameObject.height * 2, true);
+				}
+				float otherBagTextureX = this.squaresX + Inventory.squaresAreaWidth / 2 + textureBag.getWidth();
+				float otherBagTextureY = this.squaresBaseY + Inventory.squaresAreaHeight / 2 - textureBag.getHeight();
+				TextureUtils.drawTexture(textureBag, 0.5f, otherTextureX, otherBagTextureY,
+						otherTextureX + textureBag.getWidth() * 2, otherBagTextureY + textureBag.getHeight() * 2, true);
+
 			} else {
 				TextureUtils.drawTexture(otherGameObject.imageTexture, 0.5f, otherTextureX, otherTextureY,
 						otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2);
@@ -1196,7 +1209,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				}
 				Inventory.buttonLootAll.enabled = true;
 			}
-		} else if (target != null && target instanceof GameObject) {
+		} else if (target != null && target instanceof GameObject)
+
+		{
 			// Not drawing other actor/objects inventory, but draw them
 			GameObject otherGameObject = (GameObject) target;
 			float otherTextureX = squaresX + squaresAreaWidth + Game.SQUARE_WIDTH;
