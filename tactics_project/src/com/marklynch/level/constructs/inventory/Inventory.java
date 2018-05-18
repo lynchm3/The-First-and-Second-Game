@@ -1167,9 +1167,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 							actorPositionYInPixels, actorPositionXInPixels + otherGameObject.width * 2,
 							actorPositionYInPixels + otherGameObject.height * 2, true);
 				}
-				float otherBagTextureX = this.squaresX + Inventory.squaresAreaWidth / 2 + textureBag.getWidth();
+				float otherBagTextureX = otherTextureX;
 				float otherBagTextureY = this.squaresBaseY + Inventory.squaresAreaHeight / 2 - textureBag.getHeight();
-				TextureUtils.drawTexture(textureBag, 0.5f, otherTextureX, otherBagTextureY,
+				TextureUtils.drawTexture(textureBag, 0.5f, otherBagTextureX, otherBagTextureY,
 						otherTextureX + textureBag.getWidth() * 2, otherBagTextureY + textureBag.getHeight() * 2, true);
 
 			} else {
@@ -1304,70 +1304,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (Game.level.player.imageTexture != null) {
 			actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
 					- (Game.level.player.imageTexture.getHeight()));
-			TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels,
-					actorPositionYInPixels, actorPositionXInPixels + actorWidth,
-					actorPositionYInPixels + Game.level.player.height * 2);
 		} else {
 			actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
 					- (Game.level.player.torsoImageTexture.getHeight()));
-			TextureUtils.drawTexture(Game.level.player.torsoImageTexture, alpha, actorPositionXInPixels,
-					actorPositionYInPixels, actorPositionXInPixels + actorWidth,
-					actorPositionYInPixels + Game.level.player.height * 2);
 		}
 
-		GameObject gameObjectToDrawInPlayersHand = null;
-		GameObject gameObjectToDrawOnPlayersHead = Game.level.player.helmet;
-		GameObject gameObjectToDrawOnPlayersBody = Game.level.player.bodyArmor;
-		GameObject gameObjectToDrawOnPlayersLegs = Game.level.player.legArmor;
-
-		if (gameObjectToDrawInPlayersHand == null) {
-			gameObjectToDrawInPlayersHand = Game.level.player.equipped;
-		}
-
-		// Object to draw player holding
-		if (gameObjectToDrawInPlayersHand != null) {
-			int weaponPositionXInPixels = (int) (actorPositionXInPixels
-					+ (Game.level.player.rightArmHingeX - gameObjectToDrawInPlayersHand.anchorX) * 2);
-			int weaponPositionYInPixels = (int) (actorPositionYInPixels
-					+ (Game.level.player.handY - gameObjectToDrawInPlayersHand.anchorY) * 2);
-			TextureUtils.drawTexture(gameObjectToDrawInPlayersHand.imageTexture, alpha, weaponPositionXInPixels,
-					weaponPositionYInPixels, weaponPositionXInPixels + gameObjectToDrawInPlayersHand.width * 2,
-					weaponPositionYInPixels + gameObjectToDrawInPlayersHand.height * 2);
-		}
-
-		// Helmet
-		if (gameObjectToDrawOnPlayersHead != null) {
-			int helmetPositionXInPixels = (int) (actorPositionXInPixels + (gameObjectToDrawOnPlayersHead.anchorX) * 2);
-			int helmetPositionYInPixels = (int) (actorPositionYInPixels + (gameObjectToDrawOnPlayersHead.anchorY) * 2);
-			TextureUtils.drawTexture(gameObjectToDrawOnPlayersHead.imageTexture, alpha, helmetPositionXInPixels,
-					helmetPositionYInPixels, helmetPositionXInPixels + gameObjectToDrawOnPlayersHead.width * 2,
-					helmetPositionYInPixels + gameObjectToDrawOnPlayersHead.height * 2);
-		} else if (Game.level.player.hairImageTexture != null) {
-			int helmetPositionXInPixels = actorPositionXInPixels;
-			int helmetPositionYInPixels = actorPositionYInPixels;
-			TextureUtils.drawTexture(Game.level.player.hairImageTexture, alpha, helmetPositionXInPixels,
-					helmetPositionYInPixels + 1,
-					helmetPositionXInPixels + Game.level.player.hairImageTexture.getWidth() * 2,
-					helmetPositionYInPixels + Game.level.player.hairImageTexture.getHeight() * 2 + 1);
-		}
-
-		// Body Armor
-		if (gameObjectToDrawOnPlayersBody != null) {
-			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
-			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
-			TextureUtils.drawTexture(gameObjectToDrawOnPlayersBody.imageTexture, alpha, bodyArmorPositionXInPixels,
-					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + gameObjectToDrawOnPlayersBody.width * 2,
-					bodyArmorPositionYInPixels + gameObjectToDrawOnPlayersBody.height * 2);
-		}
-
-		// Leg Armor
-		if (gameObjectToDrawOnPlayersLegs != null) {
-			int legArmorPositionXInPixels = (actorPositionXInPixels);
-			int legArmorPositionYInPixels = (actorPositionYInPixels);
-			TextureUtils.drawTexture(gameObjectToDrawOnPlayersLegs.imageTexture, alpha, legArmorPositionXInPixels,
-					legArmorPositionYInPixels, legArmorPositionXInPixels + gameObjectToDrawOnPlayersLegs.width * 2,
-					legArmorPositionYInPixels + gameObjectToDrawOnPlayersLegs.height * 2);
-		}
+		drawActor(Game.level.player, actorPositionXInPixels, actorPositionYInPixels);
 
 		// Weapon comparison
 		if (this.inventorySquareMouseIsOver != null && this.inventorySquareMouseIsOver.stack.get(0) instanceof Weapon) {
@@ -1844,4 +1786,68 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public String toString() {
 		return "Inventory [parent=" + parent + "]";
 	}
+
+	public void drawActor(Actor actor, int x, int y) {
+
+		float alpha = 1.0f;
+		GameObject gameObjectToDrawInPlayersHand = null;
+		GameObject gameObjectToDrawOnPlayersHead = actor.helmet;
+		GameObject gameObjectToDrawOnPlayersBody = actor.bodyArmor;
+		GameObject gameObjectToDrawOnPlayersLegs = actor.legArmor;
+
+		if (gameObjectToDrawInPlayersHand == null) {
+			gameObjectToDrawInPlayersHand = actor.equipped;
+		}
+
+		if (Game.level.player.imageTexture != null) {
+			TextureUtils.drawTexture(actor.imageTexture, alpha, x, y, x + actorWidth, y + actor.height * 2);
+		} else {
+			// torso
+			TextureUtils.drawTexture(actor.torsoImageTexture, alpha, x, y, x + actorWidth, y + actor.height * 2);
+
+			// arms
+
+			// legs
+			TextureUtils.drawTexture(actor.pelvisImageTexture, alpha, x, y, x + actorWidth, y + actor.height * 2);
+		}
+
+		// Object to draw player holding
+		if (gameObjectToDrawInPlayersHand != null) {
+			int weaponPositionXInPixels = (int) (x
+					+ (actor.rightArmHingeX - gameObjectToDrawInPlayersHand.anchorX) * 2);
+			int weaponPositionYInPixels = (int) (y + (actor.handY - gameObjectToDrawInPlayersHand.anchorY) * 2);
+			TextureUtils.drawTexture(gameObjectToDrawInPlayersHand.imageTexture, alpha, weaponPositionXInPixels,
+					weaponPositionYInPixels, weaponPositionXInPixels + gameObjectToDrawInPlayersHand.width * 2,
+					weaponPositionYInPixels + gameObjectToDrawInPlayersHand.height * 2);
+		}
+
+		// Helmet
+		if (gameObjectToDrawOnPlayersHead != null) {
+			TextureUtils.drawTexture(gameObjectToDrawOnPlayersHead.imageTexture, alpha, x, y,
+					x + gameObjectToDrawOnPlayersHead.width * 2, y + gameObjectToDrawOnPlayersHead.height * 2);
+		} else if (actor.hairImageTexture != null) {
+			TextureUtils.drawTexture(actor.hairImageTexture, alpha, x, y + 1, x + actor.hairImageTexture.getWidth() * 2,
+					y + actor.hairImageTexture.getHeight() * 2 + 1);
+		}
+
+		// Body Armor
+		if (gameObjectToDrawOnPlayersBody != null) {
+			int bodyArmorPositionXInPixels = (x);
+			int bodyArmorPositionYInPixels = (y);
+			TextureUtils.drawTexture(gameObjectToDrawOnPlayersBody.imageTexture, alpha, bodyArmorPositionXInPixels,
+					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + gameObjectToDrawOnPlayersBody.width * 2,
+					bodyArmorPositionYInPixels + gameObjectToDrawOnPlayersBody.height * 2);
+		}
+
+		// Leg Armor
+		if (gameObjectToDrawOnPlayersLegs != null) {
+			int legArmorPositionXInPixels = (x);
+			int legArmorPositionYInPixels = (y);
+			TextureUtils.drawTexture(gameObjectToDrawOnPlayersLegs.imageTexture, alpha, legArmorPositionXInPixels,
+					legArmorPositionYInPixels, legArmorPositionXInPixels + gameObjectToDrawOnPlayersLegs.width * 2,
+					legArmorPositionYInPixels + gameObjectToDrawOnPlayersLegs.height * 2);
+		}
+
+	}
+
 }
