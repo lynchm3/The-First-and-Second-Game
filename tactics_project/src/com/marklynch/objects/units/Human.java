@@ -13,10 +13,10 @@ public class Human extends Actor {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public Human() {
-		torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", false);
-		pelvisImageTexture = ResourceUtils.getGlobalImage("hero_lower.png", false);
-		armImageTexture = ResourceUtils.getGlobalImage("arm.png", false);
-		hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
+		torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", true);
+		pelvisImageTexture = ResourceUtils.getGlobalImage("hero_lower.png", true);
+		armImageTexture = ResourceUtils.getGlobalImage("arm.png", true);
+		hairImageTexture = ResourceUtils.getGlobalImage("hair.png", true);
 	}
 
 	@Override

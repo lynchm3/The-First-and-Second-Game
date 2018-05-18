@@ -49,6 +49,7 @@ import com.marklynch.objects.actions.ActionThrowItem;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Human;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.Color;
@@ -742,11 +743,25 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			if (UserInputLevel.mouseXTransformed > x && UserInputLevel.mouseXTransformed < x + gameObject.width
 					&& UserInputLevel.mouseYTransformed > y
 					&& UserInputLevel.mouseYTransformed < y + gameObject.height) {
-				Color color = getPixel(gameObject.imageTexture, (int) (UserInputLevel.mouseXTransformed - x),
-						(int) (UserInputLevel.mouseYTransformed - y));
+				Color color = null;
+				if (gameObject instanceof Human) {
+					Texture torso = ((Human) gameObject).torsoImageTexture;
+					System.out.println("torso.getWidth() = " + torso.getWidth());
+					System.out.println("torso.getHeight() = " + torso.getHeight());
+					color = getPixel(((Human) gameObject).torsoImageTexture,
+							(int) (UserInputLevel.mouseXTransformed - x), (int) (UserInputLevel.mouseYTransformed - y));
+				} else {
+					System.out.println("gameObject.imageTexture.getWidth() = " + gameObject.imageTexture.getWidth());
+					System.out.println("gameObject.imageTexture.getHeight() = " + gameObject.imageTexture.getHeight());
+					color = getPixel(gameObject.imageTexture, (int) (UserInputLevel.mouseXTransformed - x),
+							(int) (UserInputLevel.mouseYTransformed - y));
 
-				if (color != null && color.a > 0)
+				}
+
+				if (color != null && color.a > 0) {
+					System.out.println("Gameobject mouse is over = " + gameObject);
 					return gameObject;
+				}
 			}
 		}
 		return null;
@@ -755,16 +770,20 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public Color getPixel(Texture texture, int x, int y) {
 
+		System.out.println("getPixel a");
 		if (texture == null || texture.pixels == null)
 			return null;
 		// in method
+		System.out.println("getPixel b");
 		if (x < 0 || y < 0)
 			return null;
 
+		System.out.println("getPixel c");
 		if (x > texture.getWidth() - 1 || y > texture.getHeight() - 1) {
 			return null;
 		}
 
+		System.out.println("getPixel d");
 		int index = (x + y * texture.getWidth());
 		if (index + 3 >= texture.pixels.length)
 			return null;
@@ -772,8 +791,10 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		// int r = texture.pixels[index] & 0xFF;
 		// int g = texture.pixels[index + 1] & 0xFF;
 		// int b = texture.pixels[index + 2] & 0xFF;
+		System.out.println("getPixel e");
 		int a = texture.pixels[index + 3] & 0xFF;
 
+		System.out.println("getPixel f");
 		return new Color(0, 0, 0, a);
 	}
 

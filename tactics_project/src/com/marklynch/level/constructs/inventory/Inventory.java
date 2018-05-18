@@ -1284,11 +1284,21 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// Actor
 		int actorPositionXInPixels = this.actorX;
-		int actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
-				- (Game.level.player.imageTexture.getHeight()));
+		int actorPositionYInPixels;
 		float alpha = 1.0f;
-		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-				actorPositionXInPixels + actorWidth, actorPositionYInPixels + Game.level.player.height * 2);
+		if (Game.level.player.imageTexture != null) {
+			actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
+					- (Game.level.player.imageTexture.getHeight()));
+			TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels,
+					actorPositionYInPixels, actorPositionXInPixels + actorWidth,
+					actorPositionYInPixels + Game.level.player.height * 2);
+		} else {
+			actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
+					- (Game.level.player.torsoImageTexture.getHeight()));
+			TextureUtils.drawTexture(Game.level.player.torsoImageTexture, alpha, actorPositionXInPixels,
+					actorPositionYInPixels, actorPositionXInPixels + actorWidth,
+					actorPositionYInPixels + Game.level.player.height * 2);
+		}
 
 		GameObject gameObjectToDrawInPlayersHand = null;
 		GameObject gameObjectToDrawOnPlayersHead = Game.level.player.helmet;
