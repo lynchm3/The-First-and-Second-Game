@@ -58,7 +58,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_NEWEST;
 
 	public enum INVENTORY_FILTER_BY {
-		FILTER_BY_ALL, FILTER_BY_WEAPON, FILTER_BY_FOOD, FILTER_BY_CONTAINER_FOR_LIQUIDS
+		FILTER_BY_ALL, FILTER_BY_WEAPON, FILTER_BY_ARMOR, FILTER_BY_FOOD, FILTER_BY_CONTAINER_FOR_LIQUIDS
 	}
 
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
@@ -117,6 +117,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	// Filter buttons
 	static LevelButton buttonFilterByAll;
 	static LevelButton buttonFilterByWeapon;
+	static LevelButton buttonFilterByArmor;
 	static LevelButton buttonFilterByFood;
 
 	// Empty text
@@ -298,7 +299,17 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		});
 		buttonsFilter.add(buttonFilterByWeapon);
 
-		buttonFilterByFood = new LevelButton(sortButtonX + 300f, squaresY - 30, 100f, 30f, "end_turn_button.png",
+		buttonFilterByArmor = new LevelButton(sortButtonX + 300f, squaresY - 30, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "ARMOR", true, true, Color.BLACK, Color.WHITE, "Show only armor in inventory");
+		buttonFilterByArmor.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				filter(INVENTORY_FILTER_BY.FILTER_BY_ARMOR, false);
+			}
+		});
+		buttonsFilter.add(buttonFilterByArmor);
+
+		buttonFilterByFood = new LevelButton(sortButtonX + 400f, squaresY - 30, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "FOOD", true, true, Color.BLACK, Color.WHITE,
 				"Show only food items in inventory");
 		buttonFilterByFood.setClickListener(new ClickListener() {
@@ -594,6 +605,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			buttonFilterByWeapon.down = true;
 			for (GameObject gameObject : gameObjects) {
 				if (gameObject instanceof Weapon) {
+					filteredGameObjects.add(gameObject);
+				}
+			}
+		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ARMOR) {
+			buttonFilterByArmor.down = true;
+			for (GameObject gameObject : gameObjects) {
+				if (gameObject instanceof Armor) {
 					filteredGameObjects.add(gameObject);
 				}
 			}
