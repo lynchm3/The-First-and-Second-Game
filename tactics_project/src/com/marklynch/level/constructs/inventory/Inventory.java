@@ -190,6 +190,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureStar;
 	public static Texture textureGold;
 	public static Texture textureBackground;
+	public static Texture textureBackgroundTile;
 
 	public TextBox textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0, TextBox.TYPE.ALL);
 	public TextBox textBoxQty = new TextBox(this, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
@@ -694,6 +695,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		textureStar = ResourceUtils.getGlobalImage("star.png", false);
 		textureGold = ResourceUtils.getGlobalImage("gold.png", true);
 		textureBackground = ResourceUtils.getGlobalImage("background.png", false);
+		textureBackgroundTile = ResourceUtils.getGlobalImage("background1.png", false);
 	}
 
 	public GameObject get(int index) {
@@ -1138,8 +1140,14 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// Black cover
 		// QuadUtils.drawQuad(backgroundColor, 0, 0, Game.windowWidth,
 		// Game.windowHeight);
-		TextureUtils.drawTexture(textureBackground, 1f, 0, 0, textureBackground.getWidth(),
-				textureBackground.getHeight());
+		// TextureUtils.drawTextureWithinBounds(textureBackground, 1f, 0, 0,
+		// textureBackground.getWidth(),
+		// textureBackground.getHeight(), 0, topBorderHeight, Game.windowWidth,
+		// Game.windowHeight - bottomBorderHeight, false, false);
+
+		TextureUtils.tileTextureWithinBounds(textureBackgroundTile, 1f, 0, 0, textureBackgroundTile.getWidth(),
+				textureBackgroundTile.getHeight(), 0, topBorderHeight, Game.windowWidth,
+				Game.windowHeight - bottomBorderHeight, false, false);
 
 		// QuadUtils.drawQuad(Color.BLACK, squaresX, this.squaresY, squaresX +
 		// squaresAreaWidth,
@@ -1284,11 +1292,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// Top border black mask
 
-		TextureUtils.drawTextureWithinBounds(textureBackground, 1f, 0, 0, textureBackground.getWidth(),
-				textureBackground.getHeight(), 0, 0, Game.windowWidth, topBorderHeight, false, false);
+		TextureUtils.tileTextureWithinBounds(textureBackgroundTile, 1f, 0, 0, textureBackgroundTile.getWidth(),
+				textureBackgroundTile.getHeight(), 0, 0, Game.windowWidth, topBorderHeight, false, false);
 
-		TextureUtils.drawTextureWithinBounds(textureBackground, 1f, 0, 0, textureBackground.getWidth(),
-				textureBackground.getHeight(), 0, Game.windowHeight - bottomBorderHeight, Game.windowWidth,
+		// Bottom mask
+		TextureUtils.tileTextureWithinBounds(textureBackgroundTile, 1f, 0, 0, textureBackgroundTile.getWidth(),
+				textureBackgroundTile.getHeight(), 0, Game.windowHeight - bottomBorderHeight, Game.windowWidth,
 				Game.windowHeight, false, false);
 
 		// "Search:" text

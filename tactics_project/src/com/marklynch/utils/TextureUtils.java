@@ -227,4 +227,30 @@ public class TextureUtils {
 		drawTexture(texture, alpha, x1, y1, x2, y2, true, boundsX1, boundsY1, boundsX2, boundsY2, backwards, upsideDown,
 				true);
 	}
+
+	public static void tileTextureWithinBounds(Texture texture, float alpha, float x1, float y1, float x2, float y2,
+			float boundsX1, float boundsY1, float boundsX2, float boundsY2, boolean backwards, boolean upsideDown) {
+
+		float tileWidth = x2 - x1;
+		float tileHeight = y2 - y1;
+
+		for (float i = x1; i < boundsX2; i += tileWidth) {
+			System.out.println(", = " + x2 + ", boundsX1 = " + boundsX1);
+			if (i + tileWidth > boundsX1) {
+				// System.out.println("b y1 = " + j + ", boundsY2 = " + boundsY2);
+				for (float j = y1; j < boundsY2; j += tileHeight) {
+					System.out.println("c y2 = " + y2 + ", boundsY1 = " + boundsY1);
+					if (j + tileHeight > boundsY1) {
+						System.out.println("d");
+
+						drawTexture(texture, alpha, i, j, i + tileWidth, j + tileHeight, true, boundsX1, boundsY1,
+								boundsX2, boundsY2, backwards, upsideDown, true);
+					}
+					// System.out.println("b2 y1 = " + y1 + ", boundsY2 = " + boundsY2);
+				}
+			}
+			// System.out.println("z x2 = " + x2 + ", boundsX1 = " + boundsX1);
+		}
+
+	}
 }
