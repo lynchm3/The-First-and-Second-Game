@@ -191,6 +191,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureGold;
 	public static Texture textureBackground;
 	public static Texture textureBackgroundTile;
+	public static Texture textureCornerGradient;
+	public static Texture textureSideGradient;
+	public static Texture textureTopGradient;
 
 	public TextBox textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0, TextBox.TYPE.ALL);
 	public TextBox textBoxQty = new TextBox(this, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
@@ -696,6 +699,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		textureGold = ResourceUtils.getGlobalImage("gold.png", true);
 		textureBackground = ResourceUtils.getGlobalImage("background.png", false);
 		textureBackgroundTile = ResourceUtils.getGlobalImage("background1.png", false);
+		textureCornerGradient = ResourceUtils.getGlobalImage("gradient_corner.png", false);
+		textureSideGradient = ResourceUtils.getGlobalImage("gradient_side.png", false);
+		textureTopGradient = ResourceUtils.getGlobalImage("gradient_top.png", false);
 	}
 
 	public GameObject get(int index) {
@@ -1299,6 +1305,34 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		TextureUtils.tileTextureWithinBounds(textureBackgroundTile, 1f, 0, 0, textureBackgroundTile.getWidth(),
 				textureBackgroundTile.getHeight(), 0, Game.windowHeight - bottomBorderHeight, Game.windowWidth,
 				Game.windowHeight, false, false);
+
+		// corner gradients
+		TextureUtils.drawTexture(textureCornerGradient, 1f, 0, 0, textureCornerGradient.getWidth(),
+				textureCornerGradient.getHeight());
+		TextureUtils.drawTexture(textureCornerGradient, 1f, 0, Game.windowHeight, textureCornerGradient.getWidth(),
+				Game.windowHeight - textureCornerGradient.getHeight());
+		TextureUtils.drawTexture(textureCornerGradient, 1f, Game.windowWidth, 0,
+				Game.windowWidth - textureCornerGradient.getWidth(), textureCornerGradient.getHeight());
+
+		TextureUtils.drawTexture(textureCornerGradient, 1f, Game.windowWidth, Game.windowHeight,
+				Game.windowWidth - textureCornerGradient.getWidth(),
+				Game.windowHeight - textureCornerGradient.getHeight());
+
+		// side gradients
+		// left
+		TextureUtils.drawTexture(textureSideGradient, 1f, 0, textureCornerGradient.getHeight(),
+				textureCornerGradient.getWidth(), Game.windowHeight - textureCornerGradient.getHeight());
+		// top
+		TextureUtils.drawTexture(textureTopGradient, 1f, textureCornerGradient.getWidth(), 0,
+				Game.windowWidth - textureCornerGradient.getWidth(), textureCornerGradient.getHeight());
+		// right
+		TextureUtils.drawTexture(textureSideGradient, 1f, Game.windowWidth, textureCornerGradient.getHeight(),
+				Game.windowWidth - textureCornerGradient.getWidth(),
+				Game.windowHeight - textureCornerGradient.getHeight());
+		// bottom
+		TextureUtils.drawTexture(textureTopGradient, 1f, textureCornerGradient.getWidth(), Game.windowHeight,
+				Game.windowWidth - textureCornerGradient.getWidth(),
+				Game.windowHeight - textureCornerGradient.getHeight());
 
 		// "Search:" text
 		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, new Object[] { stringSearch });
