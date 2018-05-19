@@ -4,6 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -189,16 +190,27 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		return (number & 1) == 0;
 	}
 
+	public static final HashMap<Texture, Color> tileColors = new HashMap<Texture, Color>();
+
 	public static void loadStaticImages() {
 		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png", false);
+		tileColors.put(GRASS_TEXTURE, Color.GREEN);
 		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png", false);
+		tileColors.put(DARK_GRASS_TEXTURE, Color.GREEN);
 		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png", false);
+		tileColors.put(STONE_TEXTURE, Color.GRAY);
 		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png", false);
+		tileColors.put(MUD_TEXTURE, Color.ORANGE);
 		WATER_TEXTURE = ResourceUtils.getGlobalImage("water_tile.png", false);
+		tileColors.put(WATER_TEXTURE, Color.BLUE);
 		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png", false);
+		tileColors.put(GREY_TEXTURE, Color.GRAY);
 		WHITE_SQUARE = ResourceUtils.getGlobalImage("white_square.png", false);
+		tileColors.put(WHITE_SQUARE, Color.WHITE);
 		YELLOW_SQUARE = ResourceUtils.getGlobalImage("yellow_square.png", false);
+		tileColors.put(YELLOW_SQUARE, Color.YELLOW);
 		RED_SQUARE = ResourceUtils.getGlobalImage("red_square.png", false);
+		tileColors.put(RED_SQUARE, Color.RED);
 
 		W_TEXTURE = ResourceUtils.getGlobalImage("w.png", false);
 		A_TEXTURE = ResourceUtils.getGlobalImage("a.png", false);
@@ -255,8 +267,17 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		if (!this.visibleToPlayer)
 			alpha = 0.5f;
 
-		TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX, squarePositionY,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		if (Game.zoomLevelIndex == Game.zoomLevels.length - 1) {
+			if (!this.seenByPlayer) {
+
+			} else {
+				QuadUtils.drawQuad(Square.tileColors.get(textureToDraw), squarePositionX, squarePositionY,
+						squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+			}
+		} else {
+			TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX, squarePositionY,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		}
 
 		// if (sounds.size() > 0) {
 		// drawRedHighlight();
