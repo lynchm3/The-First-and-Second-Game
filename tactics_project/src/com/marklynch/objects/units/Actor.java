@@ -684,6 +684,7 @@ public class Actor extends GameObject {
 		}
 
 		drawLeftLeg(x, y, alpha, highlight);
+		drawRightLeg(x, y, alpha, highlight);
 
 		if (highlight)
 
@@ -1203,6 +1204,114 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(leftArmHingeX, hipDrawY));
 		view.rotate(-leftHipAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-leftArmHingeX, -hipDrawY));
+		Game.activeBatch.updateUniforms();
+
+	}
+
+	public void drawRightLeg(int x, int y, float alpha, boolean highlight) {
+
+		if (legImageTexture == null)
+			return;
+		float rightHipAngle = 0f;
+		float rightKneeAngle = 0f;
+		if (primaryAnimation != null) {
+
+			rightHipAngle = primaryAnimation.rightHipAngle;
+			rightKneeAngle = primaryAnimation.rightKneeAngle;
+
+		}
+
+		// legs
+		float hipDrawY = y + this.hipY;
+		float kneeDrawY = y + this.kneeY;
+
+		// backwards = true;
+
+		// right leg
+		float rightLegDrawX = x + this.rightLegDrawX;
+		float rightLegHingeX = x + this.rightLegHingeX;
+
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		Game.flush();
+		view.translate(new Vector2f(rightLegHingeX, hipDrawY));
+		view.rotate(rightHipAngle, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-rightLegHingeX, -hipDrawY));
+		Game.activeBatch.updateUniforms();
+
+		Game.flush();
+		view.translate(new Vector2f(rightLegHingeX, kneeDrawY));
+		view.rotate(rightKneeAngle, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-rightLegHingeX, -kneeDrawY));
+		Game.activeBatch.updateUniforms();
+
+		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
+				&& primaryAnimation.drawArrowInOffHand == true) {
+			drawArrow(rightLegHingeX - Templates.ARROW.anchorX, y + handY);
+		}
+
+		TextureUtils.drawTexture(this.legImageTexture, alpha, rightLegDrawX, kneeDrawY,
+				rightLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight());
+		if (highlight) {
+			TextureUtils.drawTexture(this.legImageTexture, 0.5f, rightLegDrawX, kneeDrawY,
+					rightLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight(), 0, 0, 0, 0,
+					backwards, false, flashColor, false);
+
+		}
+
+		// if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
+		//
+		// TextureUtils.drawTexture(bodyArmor.armLowerTexture, 1f, rightArmDrawX,
+		// kneeDrawY,
+		// rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
+		// kneeDrawY + bodyArmor.armLowerTexture.getHeight());
+		// if (highlight) {
+		//
+		// TextureUtils.drawTexture(bodyArmor.armLowerTexture, 0.5f, rightArmDrawX,
+		// kneeDrawY,
+		// rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
+		// kneeDrawY + bodyArmor.armLowerTexture.getHeight(), 0, 0, 0, 0, backwards,
+		// false, flashColor,
+		// false);
+		//
+		// }
+		// }
+
+		Game.flush();
+		view.translate(new Vector2f(rightLegHingeX, kneeDrawY));
+		view.rotate(-rightKneeAngle, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-rightLegHingeX, -kneeDrawY));
+		Game.activeBatch.updateUniforms();
+
+		TextureUtils.drawTexture(this.legImageTexture, alpha, rightLegDrawX, hipDrawY,
+				rightLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight());
+		if (highlight) {
+			TextureUtils.drawTexture(this.legImageTexture, 0.5f, rightLegDrawX, hipDrawY,
+					rightLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight(), 0, 0, 0, 0,
+					backwards, false, flashColor, false);
+
+		}
+
+		// if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
+		//
+		// TextureUtils.drawTexture(bodyArmor.armUpperTexture, alpha, rightArmDrawX,
+		// hipDrawY,
+		// rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
+		// hipDrawY + bodyArmor.armUpperTexture.getHeight());
+		// if (highlight) {
+		// TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, rightArmDrawX,
+		// hipDrawY,
+		// rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
+		// hipDrawY + bodyArmor.armUpperTexture.getHeight(), 0, 0, 0, 0, backwards,
+		// false, flashColor,
+		// false);
+		//
+		// }
+		// }
+
+		Game.flush();
+		view.translate(new Vector2f(rightArmHingeX, hipDrawY));
+		view.rotate(-rightHipAngle, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-rightArmHingeX, -hipDrawY));
 		Game.activeBatch.updateUniforms();
 
 	}
