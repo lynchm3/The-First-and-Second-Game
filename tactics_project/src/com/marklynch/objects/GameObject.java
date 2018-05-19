@@ -1486,9 +1486,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public ArrayList<Action> getAllActionsPerformedOnThisInOtherInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new ActionTakeItemsSelectedInInventory(performer, Inventory.target, this));
+		if (!(this.inventoryThatHoldsThisObject.parent instanceof Actor)) {
+			actions.add(new ActionTakeItemsSelectedInInventory(performer, Inventory.target, this));
+			actions.add(new ActionEquip(performer, this));
+		} else if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
+			actions.add(new ActionBuytemsSelectedInInventory(performer, (Actor) Inventory.target, this));
+		}
 
-		actions.add(new ActionEquip(performer, this));
 		return actions;
 	}
 
