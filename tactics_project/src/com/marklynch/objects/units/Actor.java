@@ -654,9 +654,10 @@ public class Actor extends GameObject {
 
 		if (imageTexture != null)
 			super.draw1();
+		else
 
-		drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha, flash || this == Game.gameObjectMouseIsOver,
-				1f);
+			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
+					flash || this == Game.gameObjectMouseIsOver, 1f);
 
 	}
 

@@ -10,11 +10,11 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Human;
 import com.marklynch.ui.button.Link;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 
 public class ConversationPart {
 	public ArrayList<Link> links;
@@ -71,38 +71,55 @@ public class ConversationPart {
 				if (actor == talker)
 					continue;
 
-				float offsetX = -(System.identityHashCode(actor) % Game.halfWindowHeight);// -
-																							// 128f;//
-																							// -64;
-				float offsetY = 0;
+				int offsetX = (int) -(System.identityHashCode(actor) % Game.halfWindowHeight);// -
+																								// 128f;//
+																								// -64;
+				int offsetY = 0;
 
 				if (actor == Game.level.conversation.originalConversationTarget) {
 
 				} else {
-					TextureUtils.drawTexture(actor.imageTexture, 1.0f, 0 + offsetX, Game.halfWindowHeight + offsetY,
-							Game.halfWindowHeight + offsetX, Game.windowHeight + offsetY);
+
+					actor.drawActor(0 + offsetX, (int) Game.halfWindowHeight + offsetY, 1f, false, 2f);
+
+					// TextureUtils.drawTexture(actor.imageTexture, 1.0f, 0 + offsetX,
+					// (int) Game.halfWindowHeight + offsetY, Game.halfWindowHeight + offsetX,
+					// Game.windowHeight + offsetY);
 				}
 
 			}
 
-			if (Game.level.conversation.originalConversationTarget != null
-					&& talker != Game.level.conversation.originalConversationTarget) {
-				float offsetX = -(System.identityHashCode(Game.level.conversation.originalConversationTarget)
-						% Game.halfWindowHeight); // -64;
-				float offsetY = 0;
-				TextureUtils.drawTexture(Game.level.conversation.originalConversationTarget.imageTexture, 0 + offsetX,
-						Game.halfWindowHeight + offsetY, Game.halfWindowHeight + offsetX, Game.windowHeight + offsetY,
-						Color.RED);
+			GameObject originalTarget = Game.level.conversation.originalConversationTarget;
+			if (originalTarget != null && talker != originalTarget) {
+				int offsetX = (int) -(System.identityHashCode(originalTarget) % Game.halfWindowHeight); // -64;
+				int offsetY = 0;
+
+				if (originalTarget instanceof Human) {
+					((Actor) Game.level.conversation.originalConversationTarget).drawActor(0 + offsetX,
+							(int) Game.halfWindowHeight + offsetY, 1f, false, 2f);
+
+				} else {
+					TextureUtils.drawTexture(Game.level.conversation.originalConversationTarget.imageTexture,
+							0 + offsetX, Game.halfWindowHeight + offsetY, Game.halfWindowHeight + offsetX,
+							Game.windowHeight + offsetY, Color.RED);
+				}
 			}
 		}
 
 		// Speaker image
-		TextureUtils.drawTexture(talker.imageTexture, 1.0f, 0, Game.halfWindowHeight, Game.halfWindowHeight,
-				Game.windowHeight);
+		if (talker instanceof Human) {
+			((Actor) talker).drawActor(0, (int) Game.halfWindowHeight, 1f, false, 2f);
+		} else {
+			TextureUtils.drawTexture(talker.imageTexture, 1.0f, 0, Game.halfWindowHeight, Game.halfWindowHeight,
+					Game.windowHeight);
+		}
 
 		// Speker 2 image (player)
-		TextureUtils.drawTexture(Game.level.player.imageTexture, 1.0f, Game.windowWidth, Game.halfWindowHeight,
-				Game.windowWidth - Game.halfWindowHeight, Game.windowHeight);
+		Game.level.player.drawActor((int) (Game.windowWidth - Game.halfWindowHeight), (int) Game.halfWindowHeight, 1f,
+				false, 2f);
+		// TextureUtils.drawTexture(Game.level.player.imageTexture, 1.0f,
+		// Game.windowWidth, Game.halfWindowHeight,
+		// Game.windowWidth - Game.halfWindowHeight, Game.windowHeight);
 
 		windowSelectConversationResponse.draw();
 
