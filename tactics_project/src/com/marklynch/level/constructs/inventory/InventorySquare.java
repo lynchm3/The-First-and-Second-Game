@@ -186,7 +186,7 @@ public class InventorySquare extends Square {
 
 		if (defaultAction != null && defaultAction.image != null) {
 
-			Color color = Color.BLACK;
+			Color color = Color.WHITE;
 			if (defaultAction.legal == false)
 				color = Color.RED;
 			TextureUtils.drawTexture(defaultAction.image, xInPixels + Game.INVENTORY_SQUARE_WIDTH / 2,

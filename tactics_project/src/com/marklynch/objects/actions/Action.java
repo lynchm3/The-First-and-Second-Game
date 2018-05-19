@@ -100,6 +100,7 @@ public abstract class Action {
 		getGlobalImage("action_blunt.png", false);
 		textureBow = getGlobalImage("action_bow.png", false);
 		getGlobalImage("action_burn.png", false);
+		getGlobalImage("action_buy.png", false);
 		getGlobalImage("action_chop.png", false);
 		getGlobalImage("action_close.png", false);
 		getGlobalImage("action_die.png", false);// untested
@@ -136,6 +137,7 @@ public abstract class Action {
 		getGlobalImage("action_scream.png", false);// untested
 		textureEllipse = getGlobalImage("action_select_object.png", false);
 		getGlobalImage("action_search.png", false);
+		getGlobalImage("action_sell.png", false);
 		getGlobalImage("action_slash.png", false);
 		textureSleep = getGlobalImage("action_sleep.png", false);// untested
 		getGlobalImage("action_smash.png", false);
