@@ -11,6 +11,12 @@ public abstract class Animation {
 	public float rightShoulderAngle = 0f;
 	public float rightElbowAngle = 0f;
 
+	// leg stuff
+	public float leftHipAngle = 0;
+	public float leftKneeAngle = 0;
+	public float rightHipAngle = 0;
+	public float rightKneeAngle = 0;
+
 	public float durationSoFar = 0;
 	public float durationToReach = 200;
 	public int phase = 0;

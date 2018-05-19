@@ -98,21 +98,6 @@ public class Actor extends GameObject {
 	public transient int distanceMovedThisTurn = 0;
 	public transient boolean showWeaponButtons = false;
 
-	// buttons
-	// public transient ArrayList<Button> buttons;
-	// public transient AttackButton attackButton = null;
-	// public transient AttackButton pushButton = null;
-	// public transient float buttonsAnimateCurrentTime = 0f;
-	// public final transient float buttonsAnimateMaxTime = 200f;
-
-	// weapon buttons
-	// public transient ArrayList<Button> weaponButtons;
-
-	// Fight preview on hover
-	// public transient boolean showHoverFightPreview = false;
-	// public transient GameObject hoverFightPreviewDefender = null;
-	// public transient ArrayList<Fight> hoverFightPreviewFights;
-
 	public transient AIRoutine aiRoutine;
 
 	public String activityDescription = "";
@@ -131,12 +116,6 @@ public class Actor extends GameObject {
 	public Helmet helmet;
 	public BodyArmor bodyArmor;
 	public LegArmor legArmor;
-	// public float headAnchorX;
-	// public float headAnchorY;
-	// public float bodyAnchorX;
-	// public float bodyAnchorY;
-	// public float legsAnchorX;
-	// public float legsAnchorY;
 
 	public boolean canOpenDoors = false;
 	public boolean canEquipWeapons = false;
@@ -173,6 +152,16 @@ public class Actor extends GameObject {
 
 	// Pelvis
 	public Texture pelvisImageTexture;// = ResourceUtils.getGlobalImage("hero_lower.png", false);
+
+	// legs
+	public Texture legImageTexture;
+	public float hipY = 120;
+	public float kneeY = 156;
+	public float footY = 192f;
+	public float leftLegDrawX = 54;
+	public float leftLegHingeX = 58;
+	public float rightLegDrawX = 66;
+	public float rightLegHingeX = 70;
 
 	public Texture thoughtBubbleImageTextureObject = null;
 	public Texture thoughtBubbleImageTextureAction = null;
@@ -694,6 +683,8 @@ public class Actor extends GameObject {
 			}
 		}
 
+		drawLeftLeg(x, y, alpha, highlight);
+
 		if (highlight)
 
 		{
@@ -1106,6 +1097,114 @@ public class Actor extends GameObject {
 			FishingRod fishingRod = (FishingRod) equipped;
 			fishingRod.drawLine(this, x, y);
 		}
+	}
+
+	public void drawLeftLeg(int x, int y, float alpha, boolean highlight) {
+
+		if (legImageTexture == null)
+			return;
+		float leftHipAngle = 0f;
+		float leftKneeAngle = 0f;
+		if (primaryAnimation != null) {
+
+			leftHipAngle = primaryAnimation.leftHipAngle;
+			leftKneeAngle = primaryAnimation.leftKneeAngle;
+
+		}
+
+		// legs
+		float hipDrawY = y + this.hipY;
+		float kneeDrawY = y + this.kneeY;
+
+		// backwards = true;
+
+		// left leg
+		float leftLegDrawX = x + this.leftLegDrawX;
+		float leftLegHingeX = x + this.leftLegHingeX;
+
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		Game.flush();
+		view.translate(new Vector2f(leftLegHingeX, hipDrawY));
+		view.rotate(leftHipAngle, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-leftLegHingeX, -hipDrawY));
+		Game.activeBatch.updateUniforms();
+
+		Game.flush();
+		view.translate(new Vector2f(leftLegHingeX, kneeDrawY));
+		view.rotate(leftKneeAngle, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-leftLegHingeX, -kneeDrawY));
+		Game.activeBatch.updateUniforms();
+
+		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
+				&& primaryAnimation.drawArrowInOffHand == true) {
+			drawArrow(leftLegHingeX - Templates.ARROW.anchorX, y + handY);
+		}
+
+		TextureUtils.drawTexture(this.legImageTexture, alpha, leftLegDrawX, kneeDrawY,
+				leftLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight());
+		if (highlight) {
+			TextureUtils.drawTexture(this.legImageTexture, 0.5f, leftLegDrawX, kneeDrawY,
+					leftLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight(), 0, 0, 0, 0,
+					backwards, false, flashColor, false);
+
+		}
+
+		// if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
+		//
+		// TextureUtils.drawTexture(bodyArmor.armLowerTexture, 1f, leftArmDrawX,
+		// kneeDrawY,
+		// leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
+		// kneeDrawY + bodyArmor.armLowerTexture.getHeight());
+		// if (highlight) {
+		//
+		// TextureUtils.drawTexture(bodyArmor.armLowerTexture, 0.5f, leftArmDrawX,
+		// kneeDrawY,
+		// leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
+		// kneeDrawY + bodyArmor.armLowerTexture.getHeight(), 0, 0, 0, 0, backwards,
+		// false, flashColor,
+		// false);
+		//
+		// }
+		// }
+
+		Game.flush();
+		view.translate(new Vector2f(leftLegHingeX, kneeDrawY));
+		view.rotate(-leftKneeAngle, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-leftLegHingeX, -kneeDrawY));
+		Game.activeBatch.updateUniforms();
+
+		TextureUtils.drawTexture(this.legImageTexture, alpha, leftLegDrawX, hipDrawY,
+				leftLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight());
+		if (highlight) {
+			TextureUtils.drawTexture(this.legImageTexture, 0.5f, leftLegDrawX, hipDrawY,
+					leftLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight(), 0, 0, 0, 0,
+					backwards, false, flashColor, false);
+
+		}
+
+		// if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
+		//
+		// TextureUtils.drawTexture(bodyArmor.armUpperTexture, alpha, leftArmDrawX,
+		// hipDrawY,
+		// leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
+		// hipDrawY + bodyArmor.armUpperTexture.getHeight());
+		// if (highlight) {
+		// TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, leftArmDrawX,
+		// hipDrawY,
+		// leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
+		// hipDrawY + bodyArmor.armUpperTexture.getHeight(), 0, 0, 0, 0, backwards,
+		// false, flashColor,
+		// false);
+		//
+		// }
+		// }
+
+		Game.flush();
+		view.translate(new Vector2f(leftArmHingeX, hipDrawY));
+		view.rotate(-leftHipAngle, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-leftArmHingeX, -hipDrawY));
+		Game.activeBatch.updateUniforms();
+
 	}
 
 	public void drawArrow(float handX, float handY) {

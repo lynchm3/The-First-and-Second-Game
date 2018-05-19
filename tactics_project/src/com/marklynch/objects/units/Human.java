@@ -16,6 +16,7 @@ public class Human extends Actor {
 		torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", true);
 		pelvisImageTexture = ResourceUtils.getGlobalImage("hero_lower.png", true);
 		armImageTexture = ResourceUtils.getGlobalImage("arm.png", true);
+		legImageTexture = ResourceUtils.getGlobalImage("leg.png", true);
 		hairImageTexture = ResourceUtils.getGlobalImage("hair.png", true);
 	}
 
