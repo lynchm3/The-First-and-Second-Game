@@ -150,7 +150,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	int lengthSearch = Game.smallFont.getWidth(stringSearch);
 
 	// Color beind inventory squares
-	public final static Color inventoryAreaColor = new Color(1f, 1f, 1f, 0.25f);
+	public final static Color inventoryAreaColor = new Color(0f, 0f, 0f, 0.75f);
 
 	// Close button
 	static LevelButton buttonClose;
@@ -189,6 +189,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureBag;
 	public static Texture textureStar;
 	public static Texture textureGold;
+	public static Texture textureBackground;
 
 	public TextBox textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0, TextBox.TYPE.ALL);
 	public TextBox textBoxQty = new TextBox(this, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
@@ -689,9 +690,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		textureDown = ResourceUtils.getGlobalImage("inventory_down.png", false);
 		textureCorner = ResourceUtils.getGlobalImage("inventory_corner.png", false);
 		textureFilter = ResourceUtils.getGlobalImage("filter.png", false);
-		textureBag = ResourceUtils.getGlobalImage("bag.png", false);
+		textureBag = ResourceUtils.getGlobalImage("bag.png", true);
 		textureStar = ResourceUtils.getGlobalImage("star.png", false);
-		textureGold = ResourceUtils.getGlobalImage("gold.png", false);
+		textureGold = ResourceUtils.getGlobalImage("gold.png", true);
+		textureBackground = ResourceUtils.getGlobalImage("background.png", false);
 	}
 
 	public GameObject get(int index) {
@@ -1134,8 +1136,14 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public void drawStaticUI() {
 
 		// Black cover
-		QuadUtils.drawQuad(backgroundColor, 0, 0, Game.windowWidth, Game.windowHeight);
+		// QuadUtils.drawQuad(backgroundColor, 0, 0, Game.windowWidth,
+		// Game.windowHeight);
+		TextureUtils.drawTexture(textureBackground, 1f, 0, 0, textureBackground.getWidth(),
+				textureBackground.getHeight());
 
+		// QuadUtils.drawQuad(Color.BLACK, squaresX, this.squaresY, squaresX +
+		// squaresAreaWidth,
+		// this.squaresY + squaresAreaHeight);
 		drawBorder();
 
 		// Draw bag textureBag
@@ -1275,17 +1283,21 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		// Top border black mask
-		QuadUtils.drawQuad(backgroundColor, 0, 0, Game.windowWidth, topBorderHeight);
 
-		// Bottom border black mask
-		QuadUtils.drawQuad(backgroundColor, 0, Game.windowHeight - bottomBorderHeight, Game.windowWidth,
-				Game.windowHeight);
+		TextureUtils.drawTextureWithinBounds(textureBackground, 1f, 0, 0, textureBackground.getWidth(),
+				textureBackground.getHeight(), 0, 0, Game.windowWidth, topBorderHeight, false, false);
+
+		TextureUtils.drawTextureWithinBounds(textureBackground, 1f, 0, 0, textureBackground.getWidth(),
+				textureBackground.getHeight(), 0, Game.windowHeight - bottomBorderHeight, Game.windowWidth,
+				Game.windowHeight, false, false);
 
 		// "Search:" text
 		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, new Object[] { stringSearch });
 
 		// [SHIFT]
-		if (groundDisplay != null) {
+		if (groundDisplay != null)
+
+		{
 			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null,
 					new Object[] { stringShiftDrop });
 			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
