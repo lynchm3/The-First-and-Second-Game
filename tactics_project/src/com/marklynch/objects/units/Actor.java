@@ -635,19 +635,23 @@ public class Actor extends GameObject {
 			if (arrow.backwards) {
 				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
 						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								+ arrowWidth,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+								+ arrowWidth + primaryAnimation.offsetX,
 						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ arrow.height);
+								+ primaryAnimation.offsetY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								+ primaryAnimation.offsetX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ arrow.height + primaryAnimation.offsetY);
 			} else {
 				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
 						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								- arrowWidth,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+								+ primaryAnimation.offsetX - arrowWidth,
 						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ arrow.height);
+								+ primaryAnimation.offsetY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								+ primaryAnimation.offsetX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ arrow.height + primaryAnimation.offsetY);
 
 			}
 		}
@@ -711,19 +715,23 @@ public class Actor extends GameObject {
 			if (arrow.backwards) {
 				TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
 						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								+ arrowWidth,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+								+ arrowWidth + primaryAnimation.offsetX,
 						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ arrow.height);
+								+ primaryAnimation.offsetY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								+ primaryAnimation.offsetX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ arrow.height + primaryAnimation.offsetY);
 			} else {
 				TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
 						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								- arrowWidth,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+								- arrowWidth + primaryAnimation.offsetX,
 						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ arrow.height);
+								+ primaryAnimation.offsetY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								+ primaryAnimation.offsetX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ arrow.height + primaryAnimation.offsetY);
 
 			}
 		}
