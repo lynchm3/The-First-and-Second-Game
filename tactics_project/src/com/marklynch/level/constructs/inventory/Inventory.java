@@ -58,7 +58,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_NEWEST;
 
 	public enum INVENTORY_FILTER_BY {
-		FILTER_BY_ALL, FILTER_BY_WEAPON, FILTER_BY_ARMOR, FILTER_BY_FOOD, FILTER_BY_CONTAINER_FOR_LIQUIDS
+		FILTER_BY_ALL, FILTER_BY_WEAPON, FILTER_BY_ARMOR, FILTER_BY_EQUIPPED, FILTER_BY_FOOD, FILTER_BY_CONTAINER_FOR_LIQUIDS
 	}
 
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
@@ -118,6 +118,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	static LevelButton buttonFilterByAll;
 	static LevelButton buttonFilterByWeapon;
 	static LevelButton buttonFilterByArmor;
+	static LevelButton buttonFilterByEquipped;
 	static LevelButton buttonFilterByFood;
 
 	// Empty text
@@ -309,7 +310,18 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		});
 		buttonsFilter.add(buttonFilterByArmor);
 
-		buttonFilterByFood = new LevelButton(sortButtonX + 400f, squaresY - 30, 100f, 30f, "end_turn_button.png",
+		buttonFilterByEquipped = new LevelButton(sortButtonX + 400f, squaresY - 30, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "EQUIPPED", true, true, Color.BLACK, Color.WHITE,
+				"Show only equipped items in inventory");
+		buttonFilterByEquipped.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				filter(INVENTORY_FILTER_BY.FILTER_BY_EQUIPPED, false);
+			}
+		});
+		buttonsFilter.add(buttonFilterByEquipped);
+
+		buttonFilterByFood = new LevelButton(sortButtonX + 500f, squaresY - 30, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "FOOD", true, true, Color.BLACK, Color.WHITE,
 				"Show only food items in inventory");
 		buttonFilterByFood.setClickListener(new ClickListener() {
@@ -613,6 +625,18 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			for (GameObject gameObject : gameObjects) {
 				if (gameObject instanceof Armor) {
 					filteredGameObjects.add(gameObject);
+				}
+			}
+		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_EQUIPPED) {
+
+			if (parent instanceof Actor) {
+				Actor actor = (Actor) parent;
+				buttonFilterByEquipped.down = true;
+				for (GameObject gameObject : gameObjects) {
+					if (actor.equipped == gameObject || actor.helmet == gameObject || actor.bodyArmor == gameObject
+							|| actor.legArmor == gameObject) {
+						filteredGameObjects.add(gameObject);
+					}
 				}
 			}
 		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_FOOD) {
