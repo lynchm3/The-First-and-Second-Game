@@ -674,8 +674,7 @@ public class Actor extends GameObject {
 
 		if (torsoImageTexture != null) {
 			TextureUtils.drawTexture(torsoImageTexture, alpha, x, y, x + width, y + height, backwards);
-			if (flash || this == Game.gameObjectMouseIsOver) {
-
+			if (highlight) {
 				TextureUtils.drawTexture(torsoImageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards,
 						false, flashColor, false);
 			}
@@ -683,9 +682,15 @@ public class Actor extends GameObject {
 
 		if (pelvisImageTexture != null) {
 			TextureUtils.drawTexture(pelvisImageTexture, alpha, x, y, x + width, y + height, backwards);
+
+			if (highlight) {
+				TextureUtils.drawTexture(pelvisImageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards,
+						false, flashColor, false);
+
+			}
 		}
 
-		if (flash || this == Game.gameObjectMouseIsOver)
+		if (highlight)
 
 		{
 			TextureUtils.drawTexture(imageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
@@ -754,15 +759,12 @@ public class Actor extends GameObject {
 			int helmetPositionXInPixels = (x);
 			int helmetPositionYInPixels = (y);
 
-			if (backwards) {
-				TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
+			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels, helmetPositionYInPixels,
+					helmetPositionXInPixels + helmet.width, helmetPositionYInPixels + helmet.height, backwards);
+			if (highlight) {
+				TextureUtils.drawTexture(this.helmet.imageTexture, 0.5f, helmetPositionXInPixels,
 						helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,
-						helmetPositionYInPixels + helmet.height, true);
-
-			} else {
-				TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
-						helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,
-						helmetPositionYInPixels + helmet.height, false);
+						helmetPositionYInPixels + helmet.height, 0, 0, 0, 0, backwards, false, flashColor, false);
 
 			}
 
@@ -771,7 +773,14 @@ public class Actor extends GameObject {
 			int bodyArmorPositionYInPixels = (y);
 			TextureUtils.drawTexture(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
-					bodyArmorPositionYInPixels + hairImageTexture.getHeight());
+					bodyArmorPositionYInPixels + hairImageTexture.getHeight(), backwards);
+			if (highlight) {
+				TextureUtils.drawTexture(this.hairImageTexture, 0.5f, bodyArmorPositionXInPixels,
+						bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
+						bodyArmorPositionYInPixels + hairImageTexture.getHeight(), 0, 0, 0, 0, backwards, false,
+						flashColor, false);
+
+			}
 		}
 
 		if (bodyArmor != null && bodyArmor.backTexture != null && !sleeping) {
@@ -779,15 +788,14 @@ public class Actor extends GameObject {
 			int bodyArmorPositionXInPixels = (x);
 			int bodyArmorPositionYInPixels = (y);
 
-			if (backwards) {
-				TextureUtils.drawTexture(this.bodyArmor.backTexture, alpha,
-						bodyArmorPositionXInPixels + bodyArmor.width, bodyArmorPositionYInPixels,
-						bodyArmorPositionXInPixels, bodyArmorPositionYInPixels + bodyArmor.height);
-			} else {
+			TextureUtils.drawTexture(this.bodyArmor.backTexture, alpha, bodyArmorPositionXInPixels,
+					bodyArmorPositionYInPixels + bodyArmor.width, bodyArmorPositionXInPixels,
+					bodyArmorPositionYInPixels + bodyArmor.height, backwards);
+			if (highlight) {
+				TextureUtils.drawTexture(this.bodyArmor.backTexture, 0.5f, bodyArmorPositionXInPixels,
+						bodyArmorPositionYInPixels + bodyArmor.width, bodyArmorPositionXInPixels,
+						bodyArmorPositionYInPixels + bodyArmor.height, 0, 0, 0, 0, backwards, false, flashColor, false);
 
-				TextureUtils.drawTexture(this.bodyArmor.backTexture, alpha, bodyArmorPositionXInPixels,
-						bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
-						bodyArmorPositionYInPixels + bodyArmor.height);
 			}
 		}
 
@@ -799,14 +807,13 @@ public class Actor extends GameObject {
 
 			int legArmorPositionXInPixels = (x);
 			int legArmorPositionYInPixels = (y);
-			if (backwards) {
-				TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels + legArmor.width,
-						legArmorPositionYInPixels, legArmorPositionXInPixels,
-						legArmorPositionYInPixels + legArmor.height);
-			} else {
-				TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
+			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
+					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
+					legArmorPositionYInPixels + legArmor.height, backwards);
+			if (highlight) {
+				TextureUtils.drawTexture(this.legArmor.imageTexture, 0.5f, legArmorPositionXInPixels,
 						legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
-						legArmorPositionYInPixels + legArmor.height);
+						legArmorPositionYInPixels + legArmor.height, 0, 0, 0, 0, backwards, false, flashColor, false);
 
 			}
 		}
@@ -816,15 +823,15 @@ public class Actor extends GameObject {
 			int bodyArmorPositionXInPixels = (x);
 			int bodyArmorPositionYInPixels = (y);
 
-			if (backwards) {
-				TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha,
-						bodyArmorPositionXInPixels + bodyArmor.width, bodyArmorPositionYInPixels,
-						bodyArmorPositionXInPixels, bodyArmorPositionYInPixels + bodyArmor.height);
-			} else {
+			TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
+					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
+					bodyArmorPositionYInPixels + bodyArmor.height, backwards);
 
-				TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
+			if (highlight) {
+				TextureUtils.drawTexture(this.bodyArmor.imageTexture, 0.5f, bodyArmorPositionXInPixels,
 						bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
-						bodyArmorPositionYInPixels + bodyArmor.height);
+						bodyArmorPositionYInPixels + bodyArmor.height, 0, 0, 0, 0, backwards, false, flashColor, false);
+
 			}
 		}
 
@@ -833,12 +840,8 @@ public class Actor extends GameObject {
 		if (scale != 1) {
 			Game.flush();
 			Matrix4f view = Game.activeBatch.getViewMatrix();
-			// view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
-			// view.scale(new Vector3f(1f / scale, 1f / scale, 1f));
 			view.setIdentity();
 			Game.activeBatch.updateUniforms();
-			// view.
-			// view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
 		}
 	}
 
@@ -894,14 +897,27 @@ public class Actor extends GameObject {
 
 		TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, elbowDrawY,
 				rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
+		if (highlight) {
+
+			TextureUtils.drawTexture(this.armImageTexture, 0.5f, rightArmDrawX, elbowDrawY,
+					rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight(), 0, 0, 0, 0,
+					backwards, false, flashColor, false);
+		}
 		if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
 			TextureUtils.drawTexture(this.bodyArmor.armLowerTexture, 1f, rightArmDrawX, elbowDrawY,
 					rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
 					elbowDrawY + bodyArmor.armLowerTexture.getHeight());
+			if (highlight) {
+				TextureUtils.drawTexture(this.bodyArmor.armLowerTexture, 0.5f, rightArmDrawX, elbowDrawY,
+						rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
+						elbowDrawY + bodyArmor.armLowerTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
+						false);
+
+			}
 		}
 
 		if (equipped != null && !backwards && !sleeping) {
-			drawWeapon(rightArmHingeX - equipped.anchorX, y + handY - equipped.anchorY);
+			drawWeapon(rightArmHingeX - equipped.anchorX, y + handY - equipped.anchorY, highlight);
 		}
 
 		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
@@ -919,13 +935,27 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-rightArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, shoulderDrawY,
+		TextureUtils.drawTexture(this.armImageTexture, alpha, rightArmDrawX, shoulderDrawY,
 				rightArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight());
+		if (highlight) {
+			TextureUtils.drawTexture(this.armImageTexture, 0.5f, rightArmDrawX, shoulderDrawY,
+					rightArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight(), 0, 0, 0, 0,
+					backwards, false, flashColor, false);
+
+		}
 		if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
 
 			TextureUtils.drawTexture(bodyArmor.armUpperTexture, 1f, rightArmDrawX, shoulderDrawY,
 					rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
 					shoulderDrawY + bodyArmor.armUpperTexture.getHeight());
+			if (highlight) {
+
+				TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, rightArmDrawX, shoulderDrawY,
+						rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
+						shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
+						false);
+
+			}
 		}
 
 		Game.flush();
@@ -977,17 +1007,31 @@ public class Actor extends GameObject {
 			drawArrow(leftArmHingeX - Templates.ARROW.anchorX, y + handY);
 		}
 
-		TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, elbowDrawY,
+		TextureUtils.drawTexture(this.armImageTexture, alpha, leftArmDrawX, elbowDrawY,
 				leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
+		if (highlight) {
+			TextureUtils.drawTexture(this.armImageTexture, 0.5f, leftArmDrawX, elbowDrawY,
+					leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight(), 0, 0, 0, 0,
+					backwards, false, flashColor, false);
+
+		}
 		if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
 
 			TextureUtils.drawTexture(bodyArmor.armLowerTexture, 1f, leftArmDrawX, elbowDrawY,
 					leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
 					elbowDrawY + bodyArmor.armLowerTexture.getHeight());
+			if (highlight) {
+
+				TextureUtils.drawTexture(bodyArmor.armLowerTexture, 0.5f, leftArmDrawX, elbowDrawY,
+						leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
+						elbowDrawY + bodyArmor.armLowerTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
+						false);
+
+			}
 		}
 
 		if (equipped != null && backwards && !sleeping) {
-			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX), y + handY - equipped.anchorY);
+			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX), y + handY - equipped.anchorY, highlight);
 		}
 		if (equipped != null && backwards && !sleeping && primaryAnimation != null
 				&& primaryAnimation.drawArrowInMainHand == true) {
@@ -1004,14 +1048,27 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-leftArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, shoulderDrawY,
+		TextureUtils.drawTexture(this.armImageTexture, alpha, leftArmDrawX, shoulderDrawY,
 				leftArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight());
+		if (highlight) {
+			TextureUtils.drawTexture(this.armImageTexture, 0.5f, leftArmDrawX, shoulderDrawY,
+					leftArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight(), 0, 0, 0, 0,
+					backwards, false, flashColor, false);
+
+		}
 
 		if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
 
-			TextureUtils.drawTexture(bodyArmor.armUpperTexture, 1f, leftArmDrawX, shoulderDrawY,
+			TextureUtils.drawTexture(bodyArmor.armUpperTexture, alpha, leftArmDrawX, shoulderDrawY,
 					leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
 					shoulderDrawY + bodyArmor.armUpperTexture.getHeight());
+			if (highlight) {
+				TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, leftArmDrawX, shoulderDrawY,
+						leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
+						shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
+						false);
+
+			}
 		}
 
 		Game.flush();
@@ -1022,18 +1079,18 @@ public class Actor extends GameObject {
 
 	}
 
-	public void drawWeapon(float x, float y) {
+	public void drawWeapon(float x, float y, boolean highlight) {
 
 		if (primaryAnimation != null && primaryAnimation.drawEquipped == false)
 			return;
 
 		// weapon
 		float alpha = 1.0f;
-
-		if (backwards) {
-			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, x + equipped.width, y, x, y + equipped.height);
-		} else {
-			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, x, y, x + equipped.width, y + equipped.height);
+		TextureUtils.drawTexture(this.equipped.imageTexture, alpha, x, y, x + equipped.width, y + equipped.height,
+				backwards);
+		if (highlight) {
+			TextureUtils.drawTexture(this.equipped.imageTexture, 0.5f, x, y, x + equipped.width, y + equipped.height, 0,
+					0, 0, 0, backwards, false, flashColor, false);
 
 		}
 

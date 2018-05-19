@@ -745,21 +745,21 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 					&& UserInputLevel.mouseYTransformed < y + gameObject.height) {
 				Color color = null;
 				if (gameObject instanceof Human) {
-					Texture torso = ((Human) gameObject).torsoImageTexture;
-					System.out.println("torso.getWidth() = " + torso.getWidth());
-					System.out.println("torso.getHeight() = " + torso.getHeight());
 					color = getPixel(((Human) gameObject).torsoImageTexture,
 							(int) (UserInputLevel.mouseXTransformed - x), (int) (UserInputLevel.mouseYTransformed - y));
+					if (color == null || color.a == 0) {
+						color = getPixel(((Human) gameObject).pelvisImageTexture,
+								(int) (UserInputLevel.mouseXTransformed - x),
+								(int) (UserInputLevel.mouseYTransformed - y));
+
+					}
 				} else {
-					System.out.println("gameObject.imageTexture.getWidth() = " + gameObject.imageTexture.getWidth());
-					System.out.println("gameObject.imageTexture.getHeight() = " + gameObject.imageTexture.getHeight());
 					color = getPixel(gameObject.imageTexture, (int) (UserInputLevel.mouseXTransformed - x),
 							(int) (UserInputLevel.mouseYTransformed - y));
 
 				}
 
 				if (color != null && color.a > 0) {
-					System.out.println("Gameobject mouse is over = " + gameObject);
 					return gameObject;
 				}
 			}
