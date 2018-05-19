@@ -137,6 +137,24 @@ public class ActionTakeItems extends VariableQtyAction {
 	@Override
 	public boolean check() {
 
+		// Check it's still on the same spot
+		if (targetGameObject != null) {
+			for (GameObject object : objects) {
+				if (!targetGameObject.inventory.contains(object)) {
+					return false;
+				}
+			}
+		}
+
+		// Check it's still on the same spot
+		if (targetSquare != null) {
+			for (GameObject object : objects) {
+				if (!targetSquare.inventory.contains(object)) {
+					return false;
+				}
+			}
+		}
+
 		return true;
 	}
 

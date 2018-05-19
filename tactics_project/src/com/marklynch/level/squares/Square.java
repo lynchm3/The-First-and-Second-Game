@@ -198,7 +198,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png", false);
 		tileColors.put(DARK_GRASS_TEXTURE, Color.GREEN);
 		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png", false);
-		tileColors.put(STONE_TEXTURE, Color.GRAY);
+		tileColors.put(STONE_TEXTURE, Color.LIGHT_GRAY);
 		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png", false);
 		tileColors.put(MUD_TEXTURE, Color.ORANGE);
 		WATER_TEXTURE = ResourceUtils.getGlobalImage("water_tile.png", false);
@@ -683,21 +683,22 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		if (yInGrid - 1 > 0) {
 			// sqr @ +1,+1
 			if (xInGrid + 1 < Game.level.squares.length) {
-				if (Game.level.squares[xInGrid + 1][yInGrid + 1].seenByPlayer)
+				if (Game.level.squares[xInGrid + 1][yInGrid - 1].seenByPlayer)
 					gameObjectsToCheck.addAll(Game.level.squares[xInGrid + 1][yInGrid - 1].inventory.gameObjects);
 			}
 
 			// sqr @ 0,+1
-			if (Game.level.squares[xInGrid][yInGrid + 1].seenByPlayer)
+			if (Game.level.squares[xInGrid][yInGrid - 1].seenByPlayer)
 				gameObjectsToCheck.addAll(Game.level.squares[xInGrid][yInGrid - 1].inventory.gameObjects);
 
 			// sqr @ -11,+1
 			if (xInGrid - 1 > 0) {
-				if (Game.level.squares[xInGrid - 1][yInGrid + 1].seenByPlayer)
+				if (Game.level.squares[xInGrid - 1][yInGrid - 1].seenByPlayer)
 					gameObjectsToCheck.addAll(Game.level.squares[xInGrid - 1][yInGrid - 1].inventory.gameObjects);
 			}
 		}
 
+		// Y+0
 		// sqr @ +1,0
 		if (xInGrid + 1 < Game.level.squares.length) {
 			if (Game.level.squares[xInGrid + 1][yInGrid].seenByPlayer)
@@ -791,20 +792,16 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public Color getPixel(Texture texture, int x, int y) {
 
-		System.out.println("getPixel a");
 		if (texture == null || texture.pixels == null)
 			return null;
 		// in method
-		System.out.println("getPixel b");
 		if (x < 0 || y < 0)
 			return null;
 
-		System.out.println("getPixel c");
 		if (x > texture.getWidth() - 1 || y > texture.getHeight() - 1) {
 			return null;
 		}
 
-		System.out.println("getPixel d");
 		int index = (x + y * texture.getWidth());
 		if (index + 3 >= texture.pixels.length)
 			return null;
@@ -812,10 +809,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		// int r = texture.pixels[index] & 0xFF;
 		// int g = texture.pixels[index + 1] & 0xFF;
 		// int b = texture.pixels[index + 2] & 0xFF;
-		System.out.println("getPixel e");
 		int a = texture.pixels[index + 3] & 0xFF;
 
-		System.out.println("getPixel f");
 		return new Color(0, 0, 0, a);
 	}
 
