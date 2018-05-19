@@ -18,6 +18,7 @@ public class Carcass extends GameObject {
 		fitsInInventory = false;
 
 		canContainOtherObjects = true;
+		showInventoryInGroundDisplay = true;
 
 	}
 

@@ -977,7 +977,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			}
 		}
 
-		if ((this instanceof Openable) && this.canContainOtherObjects && !(this instanceof Actor)) {
+		if (/* (this instanceof Openable) && */this.canContainOtherObjects && !(this instanceof Actor)) {
 			return new ActionOpenOtherInventory(performer, this);
 		}
 
@@ -1137,7 +1137,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Loot
-		if ((this instanceof Openable) && this.canContainOtherObjects && !(this instanceof Actor)) {
+		if (/* (this instanceof Openable) && */ this.canContainOtherObjects && !(this instanceof Actor)) {
 			actions.add(new ActionOpenOtherInventory(performer, this));
 		}
 

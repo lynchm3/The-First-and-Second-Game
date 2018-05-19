@@ -21,6 +21,7 @@ public class Furnace extends Openable {
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = true;
+		showInventoryInGroundDisplay = true;
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
 

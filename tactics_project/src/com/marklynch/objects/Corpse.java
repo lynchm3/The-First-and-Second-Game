@@ -19,6 +19,7 @@ public class Corpse extends GameObject {
 		fitsInInventory = false;
 
 		canContainOtherObjects = true;
+		showInventoryInGroundDisplay = true;
 
 	}
 

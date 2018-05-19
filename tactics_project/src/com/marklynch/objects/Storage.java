@@ -19,10 +19,10 @@ public class Storage extends Openable {
 	public Storage() {
 		super();
 
-		showInventoryInGroundDisplay = true;
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = true;
+		showInventoryInGroundDisplay = true;
 
 	}
 

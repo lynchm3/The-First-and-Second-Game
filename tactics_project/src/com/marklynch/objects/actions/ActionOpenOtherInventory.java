@@ -12,8 +12,8 @@ import com.marklynch.objects.units.Actor;
 
 public class ActionOpenOtherInventory extends Action {
 
-	public static final String ACTION_NAME = "Open";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
+	public static final String ACTION_NAME = "Loot";
+	public static final String ACTION_NAME_2 = "Open";
 
 	Actor performer;
 	GameObject target;
@@ -21,6 +21,8 @@ public class ActionOpenOtherInventory extends Action {
 
 	public ActionOpenOtherInventory(Actor performer, GameObject gameObject) {
 		super(ACTION_NAME, "action_select_object.png");
+		if (gameObject instanceof Openable)
+			this.actionName = ACTION_NAME_2;
 		this.performer = performer;
 		this.target = gameObject;
 		if (target instanceof Openable && !((Openable) gameObject).isOpen()) {
