@@ -1153,20 +1153,14 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (otherGameObject instanceof Actor) {
 				int actorPositionXInPixels = otherInventory.actorX;
 				int actorPositionYInPixels;
-
 				if (otherGameObject.imageTexture != null) {
 					actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
 							- (otherGameObject.imageTexture.getHeight()));
-					TextureUtils.drawTexture(otherGameObject.imageTexture, 1f, actorPositionXInPixels,
-							actorPositionYInPixels, actorPositionXInPixels + otherGameObject.width * 2,
-							actorPositionYInPixels + otherGameObject.height * 2, true);
 				} else {
 					actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
 							- (((Actor) otherGameObject).torsoImageTexture.getHeight()));
-					TextureUtils.drawTexture(((Actor) otherGameObject).torsoImageTexture, 1f, actorPositionXInPixels,
-							actorPositionYInPixels, actorPositionXInPixels + otherGameObject.width * 2,
-							actorPositionYInPixels + otherGameObject.height * 2, true);
 				}
+				drawActor((Actor) otherGameObject, actorPositionXInPixels, actorPositionYInPixels);
 				float otherBagTextureX = otherTextureX;
 				float otherBagTextureY = this.squaresBaseY + Inventory.squaresAreaHeight / 2 - textureBag.getHeight();
 				TextureUtils.drawTexture(textureBag, 0.5f, otherBagTextureX, otherBagTextureY,
@@ -1788,66 +1782,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void drawActor(Actor actor, int x, int y) {
-
-		float alpha = 1.0f;
-		GameObject gameObjectToDrawInPlayersHand = null;
-		GameObject gameObjectToDrawOnPlayersHead = actor.helmet;
-		GameObject gameObjectToDrawOnPlayersBody = actor.bodyArmor;
-		GameObject gameObjectToDrawOnPlayersLegs = actor.legArmor;
-
-		if (gameObjectToDrawInPlayersHand == null) {
-			gameObjectToDrawInPlayersHand = actor.equipped;
-		}
-
-		if (Game.level.player.imageTexture != null) {
-			TextureUtils.drawTexture(actor.imageTexture, alpha, x, y, x + actorWidth, y + actor.height * 2);
-		} else {
-			// torso
-			TextureUtils.drawTexture(actor.torsoImageTexture, alpha, x, y, x + actorWidth, y + actor.height * 2);
-
-			// arms
-
-			// legs
-			TextureUtils.drawTexture(actor.pelvisImageTexture, alpha, x, y, x + actorWidth, y + actor.height * 2);
-		}
-
-		// Object to draw player holding
-		if (gameObjectToDrawInPlayersHand != null) {
-			int weaponPositionXInPixels = (int) (x
-					+ (actor.rightArmHingeX - gameObjectToDrawInPlayersHand.anchorX) * 2);
-			int weaponPositionYInPixels = (int) (y + (actor.handY - gameObjectToDrawInPlayersHand.anchorY) * 2);
-			TextureUtils.drawTexture(gameObjectToDrawInPlayersHand.imageTexture, alpha, weaponPositionXInPixels,
-					weaponPositionYInPixels, weaponPositionXInPixels + gameObjectToDrawInPlayersHand.width * 2,
-					weaponPositionYInPixels + gameObjectToDrawInPlayersHand.height * 2);
-		}
-
-		// Helmet
-		if (gameObjectToDrawOnPlayersHead != null) {
-			TextureUtils.drawTexture(gameObjectToDrawOnPlayersHead.imageTexture, alpha, x, y,
-					x + gameObjectToDrawOnPlayersHead.width * 2, y + gameObjectToDrawOnPlayersHead.height * 2);
-		} else if (actor.hairImageTexture != null) {
-			TextureUtils.drawTexture(actor.hairImageTexture, alpha, x, y + 1, x + actor.hairImageTexture.getWidth() * 2,
-					y + actor.hairImageTexture.getHeight() * 2 + 1);
-		}
-
-		// Body Armor
-		if (gameObjectToDrawOnPlayersBody != null) {
-			int bodyArmorPositionXInPixels = (x);
-			int bodyArmorPositionYInPixels = (y);
-			TextureUtils.drawTexture(gameObjectToDrawOnPlayersBody.imageTexture, alpha, bodyArmorPositionXInPixels,
-					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + gameObjectToDrawOnPlayersBody.width * 2,
-					bodyArmorPositionYInPixels + gameObjectToDrawOnPlayersBody.height * 2);
-		}
-
-		// Leg Armor
-		if (gameObjectToDrawOnPlayersLegs != null) {
-			int legArmorPositionXInPixels = (x);
-			int legArmorPositionYInPixels = (y);
-			TextureUtils.drawTexture(gameObjectToDrawOnPlayersLegs.imageTexture, alpha, legArmorPositionXInPixels,
-					legArmorPositionYInPixels, legArmorPositionXInPixels + gameObjectToDrawOnPlayersLegs.width * 2,
-					legArmorPositionYInPixels + gameObjectToDrawOnPlayersLegs.height * 2);
-		}
-
+		actor.drawActor(x, y, 1, false, 2f);
 	}
 
 }

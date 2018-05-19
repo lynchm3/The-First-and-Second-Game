@@ -655,35 +655,45 @@ public class Actor extends GameObject {
 		if (imageTexture != null)
 			super.draw1();
 
+		drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha, flash || this == Game.gameObjectMouseIsOver,
+				1f);
+
+	}
+
+	public void drawActor(int x, int y, float alpha, boolean highlight, float scale) {
+
+		if (scale != 1) {
+			Game.flush();
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+			view.translate(new Vector2f(x, y));
+			view.scale(new Vector3f(scale, scale, 1f));
+			view.translate(new Vector2f(-x, -y));
+			Game.activeBatch.updateUniforms();
+		}
+
 		if (torsoImageTexture != null) {
-			TextureUtils.drawTexture(torsoImageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
+			TextureUtils.drawTexture(torsoImageTexture, alpha, x, y, x + width, y + height, backwards);
 			if (flash || this == Game.gameObjectMouseIsOver) {
 
-				TextureUtils.drawTexture(torsoImageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
-						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
-						flashColor, false);
+				TextureUtils.drawTexture(torsoImageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards,
+						false, flashColor, false);
 			}
 		}
 
 		if (pelvisImageTexture != null) {
-			TextureUtils.drawTexture(pelvisImageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
+			TextureUtils.drawTexture(pelvisImageTexture, alpha, x, y, x + width, y + height, backwards);
 		}
 
 		if (flash || this == Game.gameObjectMouseIsOver)
 
 		{
-			TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
-					actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+			TextureUtils.drawTexture(imageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
 					flashColor, false);
 		} else if (squareGameObjectIsOn.inventory.waterBody != null && !(this instanceof Fish)) {
 
-			TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
-					actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+			TextureUtils.drawTexture(imageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
 					underWaterColor, false);
-			TextureUtils.drawTexture(Templates.WATER_BODY.imageTexture, alpha, actorPositionXInPixels,
-					actorPositionYInPixels, actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
+			TextureUtils.drawTexture(Templates.WATER_BODY.imageTexture, alpha, x, y, x + width, y + height, backwards);
 
 			// squareGameObjectIsOn.inventory.getGameObjectOfClass(WaterBody.class).draw1();
 		}
@@ -731,20 +741,17 @@ public class Actor extends GameObject {
 			}
 
 			// White bit under health bar
-			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), actorPositionXInPixels + 1,
-					actorPositionYInPixels + 1, actorPositionXInPixels + healthWidthInPixels - 1,
-					actorPositionYInPixels + height - 1);
+			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), x + 1, y + 1, x + healthWidthInPixels - 1,
+					y + height - 1);
 
 			// Colored health bar
-			QuadUtils.drawQuad(color, actorPositionXInPixels + 1, actorPositionYInPixels + 1,
-					actorPositionXInPixels + healthWidthInPixels - 1,
-					actorPositionYInPixels + healthBarHeightInPixels - 1);
+			QuadUtils.drawQuad(color, x + 1, y + 1, x + healthWidthInPixels - 1, y + healthBarHeightInPixels - 1);
 		}
 
 		if (helmet != null && !sleeping) {
 
-			int helmetPositionXInPixels = (actorPositionXInPixels);
-			int helmetPositionYInPixels = (actorPositionYInPixels);
+			int helmetPositionXInPixels = (x);
+			int helmetPositionYInPixels = (y);
 
 			if (backwards) {
 				TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
@@ -759,8 +766,8 @@ public class Actor extends GameObject {
 			}
 
 		} else if (hairImageTexture != null) {
-			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
-			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
+			int bodyArmorPositionXInPixels = (x);
+			int bodyArmorPositionYInPixels = (y);
 			TextureUtils.drawTexture(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
 					bodyArmorPositionYInPixels + hairImageTexture.getHeight());
@@ -768,8 +775,8 @@ public class Actor extends GameObject {
 
 		if (bodyArmor != null && bodyArmor.backTexture != null && !sleeping) {
 
-			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
-			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
+			int bodyArmorPositionXInPixels = (x);
+			int bodyArmorPositionYInPixels = (y);
 
 			if (backwards) {
 				TextureUtils.drawTexture(this.bodyArmor.backTexture, alpha,
@@ -783,14 +790,14 @@ public class Actor extends GameObject {
 			}
 		}
 
-		drawBackArm();
+		drawBackArm(x, y, alpha, highlight);
 
 		if (legArmor != null && !sleeping)
 
 		{
 
-			int legArmorPositionXInPixels = (actorPositionXInPixels);
-			int legArmorPositionYInPixels = (actorPositionYInPixels);
+			int legArmorPositionXInPixels = (x);
+			int legArmorPositionYInPixels = (y);
 			if (backwards) {
 				TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels + legArmor.width,
 						legArmorPositionYInPixels, legArmorPositionXInPixels,
@@ -805,8 +812,8 @@ public class Actor extends GameObject {
 
 		if (bodyArmor != null && !sleeping) {
 
-			int bodyArmorPositionXInPixels = (actorPositionXInPixels);
-			int bodyArmorPositionYInPixels = (actorPositionYInPixels);
+			int bodyArmorPositionXInPixels = (x);
+			int bodyArmorPositionYInPixels = (y);
 
 			if (backwards) {
 				TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha,
@@ -820,31 +827,41 @@ public class Actor extends GameObject {
 			}
 		}
 
-		drawFrontArm();
+		drawFrontArm(x, y, alpha, highlight);
 
+		if (scale != 1) {
+			Game.flush();
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+			// view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+			// view.scale(new Vector3f(1f / scale, 1f / scale, 1f));
+			view.setIdentity();
+			Game.activeBatch.updateUniforms();
+			// view.
+			// view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
+		}
 	}
 
-	public void drawFrontArm() {
+	public void drawFrontArm(int x, int y, float alpha, boolean highlight) {
 		if (backwards)
-			drawRightArm();
+			drawRightArm(x, y, alpha, highlight);
 		else
-			drawLeftArm();
+			drawLeftArm(x, y, alpha, highlight);
 	}
 
-	public void drawBackArm() {
+	public void drawBackArm(int x, int y, float alpha, boolean highlight) {
 		if (backwards)
-			drawLeftArm();
+			drawLeftArm(x, y, alpha, highlight);
 		else
-			drawRightArm();
+			drawRightArm(x, y, alpha, highlight);
 
 	}
 
-	public void drawRightArm() {
+	public void drawRightArm(int x, int y, float alpha, boolean highlight) {
 
 		if (armImageTexture == null)
 			return;
-		float shoulderDrawY = actorPositionYInPixels + this.shoulderY;
-		float elbowDrawY = actorPositionYInPixels + this.elbowY;
+		float shoulderDrawY = y + this.shoulderY;
+		float elbowDrawY = y + this.elbowY;
 		float rightShoulderAngle = 0f;
 		float rightElbowAngle = 0f;
 		if (primaryAnimation != null) {
@@ -853,8 +870,8 @@ public class Actor extends GameObject {
 		}
 
 		// right arm
-		float rightArmDrawX = actorPositionXInPixels + this.rightArmDrawX;
-		float rightArmHingeX = actorPositionXInPixels + this.rightArmHingeX;
+		float rightArmDrawX = x + this.rightArmDrawX;
+		float rightArmHingeX = x + this.rightArmHingeX;
 
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		Game.flush();
@@ -871,7 +888,7 @@ public class Actor extends GameObject {
 
 		if (equipped != null && backwards && !sleeping && primaryAnimation != null
 				&& primaryAnimation.drawArrowInOffHand == true) {
-			drawArrow(rightArmHingeX - Templates.ARROW.anchorX, actorPositionYInPixels + handY);
+			drawArrow(rightArmHingeX - Templates.ARROW.anchorX, y + handY);
 		}
 
 		TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, elbowDrawY,
@@ -883,16 +900,16 @@ public class Actor extends GameObject {
 		}
 
 		if (equipped != null && !backwards && !sleeping) {
-			drawWeapon(rightArmHingeX - equipped.anchorX, actorPositionYInPixels + handY - equipped.anchorY);
+			drawWeapon(rightArmHingeX - equipped.anchorX, y + handY - equipped.anchorY);
 		}
 
 		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
 				&& primaryAnimation.drawArrowInMainHand == true) {
-			drawArrow(rightArmHingeX - Templates.ARROW.anchorX, actorPositionYInPixels + handY);
+			drawArrow(rightArmHingeX - Templates.ARROW.anchorX, y + handY);
 		}
 
 		if (equipped != null && equipped.templateId == Templates.HUNTING_BOW.templateId && !backwards) {
-			drawBowString(rightArmHingeX, actorPositionYInPixels + handY);
+			drawBowString(rightArmHingeX, y + handY);
 		}
 
 		Game.flush();
@@ -918,7 +935,7 @@ public class Actor extends GameObject {
 
 	}
 
-	public void drawLeftArm() {
+	public void drawLeftArm(int x, int y, float alpha, boolean highlight) {
 
 		if (armImageTexture == null)
 			return;
@@ -932,14 +949,14 @@ public class Actor extends GameObject {
 		}
 
 		// arms
-		float shoulderDrawY = actorPositionYInPixels + this.shoulderY;
-		float elbowDrawY = actorPositionYInPixels + this.elbowY;
+		float shoulderDrawY = y + this.shoulderY;
+		float elbowDrawY = y + this.elbowY;
 
 		// backwards = true;
 
 		// left arm
-		float leftArmDrawX = actorPositionXInPixels + this.leftArmDrawX;
-		float leftArmHingeX = actorPositionXInPixels + this.leftArmHingeX;
+		float leftArmDrawX = x + this.leftArmDrawX;
+		float leftArmHingeX = x + this.leftArmHingeX;
 
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		Game.flush();
@@ -956,7 +973,7 @@ public class Actor extends GameObject {
 
 		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
 				&& primaryAnimation.drawArrowInOffHand == true) {
-			drawArrow(leftArmHingeX - Templates.ARROW.anchorX, actorPositionYInPixels + handY);
+			drawArrow(leftArmHingeX - Templates.ARROW.anchorX, y + handY);
 		}
 
 		TextureUtils.drawTexture(this.armImageTexture, 1f, leftArmDrawX, elbowDrawY,
@@ -969,16 +986,15 @@ public class Actor extends GameObject {
 		}
 
 		if (equipped != null && backwards && !sleeping) {
-			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX),
-					actorPositionYInPixels + handY - equipped.anchorY);
+			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX), y + handY - equipped.anchorY);
 		}
 		if (equipped != null && backwards && !sleeping && primaryAnimation != null
 				&& primaryAnimation.drawArrowInMainHand == true) {
-			drawArrow(leftArmHingeX - Templates.ARROW.anchorX, actorPositionYInPixels + handY);
+			drawArrow(leftArmHingeX - Templates.ARROW.anchorX, y + handY);
 		}
 
 		if (equipped != null && equipped.templateId == Templates.HUNTING_BOW.templateId && backwards) {
-			drawBowString(leftArmHingeX, actorPositionYInPixels + handY);
+			drawBowString(leftArmHingeX, y + handY);
 		}
 
 		Game.flush();
