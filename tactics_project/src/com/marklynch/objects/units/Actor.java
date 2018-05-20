@@ -835,6 +835,21 @@ public class Actor extends GameObject {
 			}
 		}
 
+		if (legArmor != null && legArmor.frontTexture != null && !sleeping) {
+
+			int legArmorPositionXInPixels = (x);
+			int legArmorPositionYInPixels = (y);
+			TextureUtils.drawTexture(this.legArmor.frontTexture, alpha, legArmorPositionXInPixels,
+					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
+					legArmorPositionYInPixels + legArmor.height, backwards);
+			if (highlight) {
+				TextureUtils.drawTexture(this.legArmor.frontTexture, 0.5f, legArmorPositionXInPixels,
+						legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
+						legArmorPositionYInPixels + legArmor.height, 0, 0, 0, 0, backwards, false, flashColor, false);
+
+			}
+		}
+
 		drawFrontArm(x, y, alpha, highlight);
 
 		if (scale != 1) {

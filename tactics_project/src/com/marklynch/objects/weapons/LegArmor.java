@@ -17,7 +17,7 @@ public class LegArmor extends Armor {
 
 	public Texture legUpperTexture;
 	public Texture legLowerTexture;
-	public Texture backTexture;
+	public Texture frontTexture;
 
 	public LegArmor() {
 
@@ -43,7 +43,7 @@ public class LegArmor extends Armor {
 		setAttributesForCopy(legArmor, square, owner);
 		legArmor.legUpperTexture = this.legUpperTexture;
 		legArmor.legLowerTexture = this.legLowerTexture;
-		legArmor.backTexture = this.backTexture;
+		legArmor.frontTexture = this.frontTexture;
 		return legArmor;
 	}
 }

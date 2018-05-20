@@ -167,6 +167,7 @@ public class TemplatesArmor {
 		Templates.DUNGAREES.imageTexture = getGlobalImage(Templates.DUNGAREES.imageTexturePath, true);
 		Templates.DUNGAREES.legLowerTexture = getGlobalImage("dungarees_leg_lower.png", true);
 		Templates.DUNGAREES.legUpperTexture = getGlobalImage("dungarees_leg_upper.png", true);
+		Templates.DUNGAREES.frontTexture = getGlobalImage("dungarees_front.png", true);
 		Templates.DUNGAREES.totalHealth = Templates.DUNGAREES.remainingHealth = 27;
 		Templates.DUNGAREES.heightRatio = 1.5f;
 		Templates.DUNGAREES.weight = 14f;
