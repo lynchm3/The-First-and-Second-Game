@@ -9,7 +9,6 @@ import com.marklynch.objects.units.Actor;
 public class ActionGiveItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Give";
-	GameObject performer;
 	GameObject receiver;
 	GameObject object;
 	boolean logAsTake;
@@ -20,7 +19,7 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 		super(ACTION_NAME, "right.png");
 		if (!(receiver instanceof Actor))
 			this.actionName = "Put";
-		this.performer = performer;
+		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.receiver = receiver;
 		this.logAsTake = logAsTake;
 		this.object = object;
@@ -37,6 +36,7 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -45,14 +45,14 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionGiveItems(performer, receiver, logAsTake, object).perform();
+			new ActionGiveItems(gameObjectPerformer, receiver, logAsTake, object).perform();
 		} else {
 			String qtyString = "Enter qty to give";
 			if (!(receiver instanceof Actor)) {
 				qtyString = "Enter qty to put";
 			}
 			Game.level.player.inventory.showQTYDialog(
-					new ActionGiveItems(performer, receiver, logAsTake, object.inventorySquare.stack),
+					new ActionGiveItems(gameObjectPerformer, receiver, logAsTake, object.inventorySquare.stack),
 					inventorySquare.stack.size(), qtyString, 0);
 		}
 	}
@@ -69,7 +69,7 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer instanceof Actor && !((Actor) performer).canSeeSquare(receiver.squareGameObjectIsOn)) {
+		if (gameObjectPerformer instanceof Actor && !((Actor) gameObjectPerformer).canSeeSquare(receiver.squareGameObjectIsOn)) {
 			return false;
 		}
 

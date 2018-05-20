@@ -21,7 +21,7 @@ public class ActionFishBeingFished extends Action {
 
 	public ActionFishBeingFished(Fish performer) {
 		super(ACTION_NAME, "action_move.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -34,12 +34,21 @@ public class ActionFishBeingFished extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
+
+		System.out.println("BEING FISHED BY . PERFORM");
 
 		if (!enabled)
 			return;
 
 		if (!checkRange())
 			return;
+
+		if (performer.beingFishedBy == null || performer.beingFishedBy.remainingHealth <= 0
+				|| performer.beingFishedBy.fishingTarget != performer) {
+			performer.beingFishedBy = null;
+			return;
+		}
 
 		float maxChange = 0.2f;
 		float maxShake = 0.05f;

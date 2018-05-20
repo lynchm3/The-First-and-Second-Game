@@ -257,6 +257,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public ArrayList<Arrow> arrows = new ArrayList<Arrow>();
 
+	public GameObject fishingTarget;
+	public GameObject equipped = null;
+
 	public GameObject() {
 	}
 

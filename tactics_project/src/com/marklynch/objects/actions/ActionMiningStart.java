@@ -26,7 +26,7 @@ public class ActionMiningStart extends Action {
 	// Default for hostiles
 	public ActionMiningStart(Actor attacker, Vein vein) {
 		super(ACTION_NAME, "action_mine.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = vein;
 		if (!check()) {
 			enabled = false;
@@ -36,7 +36,7 @@ public class ActionMiningStart extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

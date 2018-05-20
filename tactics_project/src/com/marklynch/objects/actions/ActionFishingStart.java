@@ -27,7 +27,7 @@ public class ActionFishingStart extends Action {
 	// Default for hostiles
 	public ActionFishingStart(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_fishing.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -37,7 +37,7 @@ public class ActionFishingStart extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

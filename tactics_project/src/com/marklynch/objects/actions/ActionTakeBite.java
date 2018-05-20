@@ -18,7 +18,7 @@ public class ActionTakeBite extends Action {
 	// Default for hostiles
 	public ActionTakeBite(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_take_bite.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -29,7 +29,7 @@ public class ActionTakeBite extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

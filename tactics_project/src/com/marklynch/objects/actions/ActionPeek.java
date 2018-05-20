@@ -18,7 +18,7 @@ public class ActionPeek extends Action {
 
 	public ActionPeek(Actor performer, GameObject object) {
 		super(ACTION_NAME, "action_stop_hiding.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 
 		legal = checkLegality();
@@ -26,7 +26,7 @@ public class ActionPeek extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

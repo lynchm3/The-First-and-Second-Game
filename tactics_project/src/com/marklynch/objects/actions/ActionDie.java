@@ -23,12 +23,11 @@ public class ActionDie extends Action {
 
 	public static final String ACTION_NAME = "Die";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	GameObject performer;
 	Square target;
 
 	public ActionDie(GameObject performer, Square target) {
 		super(ACTION_NAME, "action_die.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -41,6 +40,7 @@ public class ActionDie extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -50,28 +50,28 @@ public class ActionDie extends Action {
 
 		logDeath();
 		createCorpse();
-		if (target.visibleToPlayer && performer instanceof Actor)
-			Game.level.player.addXP(performer.level, performer.squareGameObjectIsOn);
+		if (target.visibleToPlayer && gameObjectPerformer instanceof Actor)
+			Game.level.player.addXP(gameObjectPerformer.level, gameObjectPerformer.squareGameObjectIsOn);
 
 		// Remove from draw/update
-		if (performer != Game.level.player) {
-			if (performer instanceof Actor) {
-				if (performer.squareGameObjectIsOn != null) {
-					Game.level.inanimateObjectsOnGround.remove(performer);
-					performer.squareGameObjectIsOn.inventory.remove(performer);
-				} else if (performer.inventoryThatHoldsThisObject != null) {
-					performer.inventoryThatHoldsThisObject.remove(performer);
+		if (gameObjectPerformer != Game.level.player) {
+			if (gameObjectPerformer instanceof Actor) {
+				if (gameObjectPerformer.squareGameObjectIsOn != null) {
+					Game.level.inanimateObjectsOnGround.remove(gameObjectPerformer);
+					gameObjectPerformer.squareGameObjectIsOn.inventory.remove(gameObjectPerformer);
+				} else if (gameObjectPerformer.inventoryThatHoldsThisObject != null) {
+					gameObjectPerformer.inventoryThatHoldsThisObject.remove(gameObjectPerformer);
 				}
-				Game.level.actorsToRemove.add((Actor) performer);
+				Game.level.actorsToRemove.add((Actor) gameObjectPerformer);
 
 			} else {
-				Game.level.inanimateObjectsOnGroundToRemove.add(performer);
+				Game.level.inanimateObjectsOnGroundToRemove.add(gameObjectPerformer);
 			}
 		}
 
 		// this.faction.actors.remove(this);
-		performer.actionsPerformedThisTurn.add(this);
-		performer.clearActions();
+		gameObjectPerformer.actionsPerformedThisTurn.add(this);
+		gameObjectPerformer.clearActions();
 
 		if (sound != null)
 			sound.play();
@@ -99,121 +99,121 @@ public class ActionDie extends Action {
 
 	public void logDeath() {
 
-		if (performer instanceof RockGolem) {
+		if (gameObjectPerformer instanceof RockGolem) {
 
-			if (Game.level.shouldLog(performer))
+			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer.destroyedBy, " broke ", performer, this.image }));
+						new ActivityLog(new Object[] { gameObjectPerformer.destroyedBy, " broke ", gameObjectPerformer, this.image }));
 
-		} else if (performer instanceof Actor && performer.destroyedBy instanceof EffectBurning) {
+		} else if (gameObjectPerformer instanceof Actor && gameObjectPerformer.destroyedBy instanceof EffectBurning) {
 
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " burned to death ", this.image }));
-		} else if (performer instanceof Vein) {
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " burned to death ", this.image }));
+		} else if (gameObjectPerformer instanceof Vein) {
 
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " was depleted ", this.image }));
-		} else if (performer.destroyedByAction instanceof ActionSmash) {
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " was depleted ", this.image }));
+		} else if (gameObjectPerformer.destroyedByAction instanceof ActionSmash) {
 
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", this.image }));
-		} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChoppingStart) {
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " smashed ", this.image }));
+		} else if (gameObjectPerformer instanceof Tree && gameObjectPerformer.destroyedByAction instanceof ActionChoppingStart) {
 
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " was chopped down ", this.image }));
-		} else if (performer.destroyedBy instanceof EffectBurning) {
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " was chopped down ", this.image }));
+		} else if (gameObjectPerformer.destroyedBy instanceof EffectBurning) {
 
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " burned down ", this.image }));
-		} else if (performer instanceof Actor) {
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " burned down ", this.image }));
+		} else if (gameObjectPerformer instanceof Actor) {
 
-			if (Game.level.shouldLog(performer))
+			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer.destroyedBy, " killed ", performer, this.image }));
+						new ActivityLog(new Object[] { gameObjectPerformer.destroyedBy, " killed ", gameObjectPerformer, this.image }));
 
-		} else if (performer.diggable == true) {
+		} else if (gameObjectPerformer.diggable == true) {
 
 		} else {
 
-			if (Game.level.shouldLog(performer))
+			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { performer.destroyedBy, " destroyed a ", performer, this.image }));
+						new Object[] { gameObjectPerformer.destroyedBy, " destroyed a ", gameObjectPerformer, this.image }));
 
 		}
 	}
 
 	public void createCorpse() {
 
-		if (performer instanceof Actor) {
+		if (gameObjectPerformer instanceof Actor) {
 
 			GameObject body = null;
-			if (performer instanceof RockGolem) {
-				Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
-				Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
-				Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
-				Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
-				Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
-			} else if (performer.destroyedBy instanceof EffectBurning) {
+			if (gameObjectPerformer instanceof RockGolem) {
+				Templates.ORE.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+				Templates.ORE.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+				Templates.ROCK.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+				Templates.ROCK.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+				Templates.ROCK.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+			} else if (gameObjectPerformer.destroyedBy instanceof EffectBurning) {
 				// Death by fire
-				Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
-				for (GameObject gameObject : (ArrayList<GameObject>) performer.inventory.gameObjects.clone()) {
-					new ActionDropItems(performer, performer.squareGameObjectIsOn, gameObject).perform();
+				Templates.ASH.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+				for (GameObject gameObject : (ArrayList<GameObject>) gameObjectPerformer.inventory.gameObjects.clone()) {
+					new ActionDropItems(gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn, gameObject).perform();
 				}
-			} else if (performer.destroyedByAction instanceof ActionSquash) {
+			} else if (gameObjectPerformer.destroyedByAction instanceof ActionSquash) {
 				// Deat by squashing
-				body = Templates.BLOODY_PULP.makeCopy(performer.squareGameObjectIsOn, null);
-				body.name = "Former " + performer.name;
-				body.weight = performer.weight;
-			} else if (performer instanceof AggressiveWildAnimal || performer instanceof HerbivoreWildAnimal) {
+				body = Templates.BLOODY_PULP.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+				body.name = "Former " + gameObjectPerformer.name;
+				body.weight = gameObjectPerformer.weight;
+			} else if (gameObjectPerformer instanceof AggressiveWildAnimal || gameObjectPerformer instanceof HerbivoreWildAnimal) {
 				// Dead animal
-				Templates.BLOOD.makeCopy(performer.squareGameObjectIsOn, null);
-				body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
-						performer.weight);
+				Templates.BLOOD.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+				body = Templates.CARCASS.makeCopy(gameObjectPerformer.name + " carcass", gameObjectPerformer.squareGameObjectIsOn, null,
+						gameObjectPerformer.weight);
 			} else {
-				Templates.BLOOD.makeCopy(performer.squareGameObjectIsOn, null);
-				body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
-						performer.weight);
+				Templates.BLOOD.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+				body = Templates.CORPSE.makeCopy(gameObjectPerformer.name + " corpse", gameObjectPerformer.squareGameObjectIsOn, null,
+						gameObjectPerformer.weight);
 			}
 			if (body != null) {
-				ArrayList<GameObject> gameObjectsInInventory = (ArrayList<GameObject>) performer.inventory
+				ArrayList<GameObject> gameObjectsInInventory = (ArrayList<GameObject>) gameObjectPerformer.inventory
 						.getGameObjects().clone();
 				for (GameObject gameObjectInInventory : gameObjectsInInventory) {
-					performer.inventory.remove(gameObjectInInventory);
+					gameObjectPerformer.inventory.remove(gameObjectInInventory);
 					body.inventory.add(gameObjectInInventory);
 					gameObjectInInventory.owner = null;
 				}
 			}
 		} else {
 			// GameObjects
-			if (performer.destroyedBy instanceof EffectBurning) {
+			if (gameObjectPerformer.destroyedBy instanceof EffectBurning) {
 				// Death by fire
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
-						Templates.ASH.makeCopy(null, null), performer.squareGameObjectIsOn));
-				for (GameObject gameObject : (ArrayList<GameObject>) performer.inventory.gameObjects.clone()) {
-					new ActionDropItems(performer, performer.squareGameObjectIsOn, gameObject).perform();
+						Templates.ASH.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
+				for (GameObject gameObject : (ArrayList<GameObject>) gameObjectPerformer.inventory.gameObjects.clone()) {
+					new ActionDropItems(gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn, gameObject).perform();
 				}
-			} else if (performer.templateId == Templates.CRATE.templateId) {
+			} else if (gameObjectPerformer.templateId == Templates.CRATE.templateId) {
 				// Death by fire
-				Templates.WOOD_CHIPS.makeCopy(performer.squareGameObjectIsOn, null);
-				for (GameObject gameObject : (ArrayList<GameObject>) performer.inventory.gameObjects.clone()) {
-					new ActionDropItems(performer, performer.squareGameObjectIsOn, gameObject).perform();
+				Templates.WOOD_CHIPS.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+				for (GameObject gameObject : (ArrayList<GameObject>) gameObjectPerformer.inventory.gameObjects.clone()) {
+					new ActionDropItems(gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn, gameObject).perform();
 				}
-			} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChoppingStart) {
+			} else if (gameObjectPerformer instanceof Tree && gameObjectPerformer.destroyedByAction instanceof ActionChoppingStart) {
 
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
-						Templates.STUMP.makeCopy(null, null), performer.squareGameObjectIsOn));
-			} else if (performer instanceof Stump) {
-				if (performer.squareGameObjectIsOn != null) {
-					performer.squareGameObjectIsOn.imageTexture = Square.MUD_TEXTURE;
+						Templates.STUMP.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
+			} else if (gameObjectPerformer instanceof Stump) {
+				if (gameObjectPerformer.squareGameObjectIsOn != null) {
+					gameObjectPerformer.squareGameObjectIsOn.imageTexture = Square.MUD_TEXTURE;
 				}
-			} else if (performer instanceof Mirror) {
+			} else if (gameObjectPerformer instanceof Mirror) {
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
-						Templates.BROKEN_GLASS.makeCopy(null, null), performer.squareGameObjectIsOn));
+						Templates.BROKEN_GLASS.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
 			}
 
-			for (GameObject gameObject : performer.inventory.gameObjects) {
+			for (GameObject gameObject : gameObjectPerformer.inventory.gameObjects) {
 				Game.level.inanimateObjectsToAdd
-						.add(new InanimateObjectToAddOrRemove(gameObject, performer.squareGameObjectIsOn));
+						.add(new InanimateObjectToAddOrRemove(gameObject, gameObjectPerformer.squareGameObjectIsOn));
 			}
 
 		}

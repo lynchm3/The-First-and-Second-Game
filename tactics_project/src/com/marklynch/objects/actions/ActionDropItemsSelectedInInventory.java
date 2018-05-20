@@ -10,14 +10,13 @@ import com.marklynch.objects.units.Actor;
 public class ActionDropItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Drop";
-	GameObject performer;
 	Square square;
 	GameObject object;
 	InventorySquare inventorySquare;
 
 	public ActionDropItemsSelectedInInventory(GameObject performer, Square square, GameObject object) {
 		super(ACTION_NAME, "right.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.square = square;
 		this.object = object;
 		this.inventorySquare = object.inventorySquare;
@@ -33,6 +32,7 @@ public class ActionDropItemsSelectedInInventory extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -41,10 +41,10 @@ public class ActionDropItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionDropItems(performer, square, object).perform();
+			new ActionDropItems(gameObjectPerformer, square, object).perform();
 		} else {
 			Game.level.player.inventory.showQTYDialog(
-					new ActionDropItems(performer, square, object.inventorySquare.stack), inventorySquare.stack.size(),
+					new ActionDropItems(gameObjectPerformer, square, object.inventorySquare.stack), inventorySquare.stack.size(),
 					"Enter qty to drop", 0);
 		}
 	}
@@ -55,14 +55,14 @@ public class ActionDropItemsSelectedInInventory extends Action {
 		if (square == null)
 			return false;
 
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.inventory.contains(object)) {
 				actionName = ACTION_NAME + " " + object.name + " (can't reach)";
 				return false;
 			}
 		} else {
-			if (!performer.inventory.contains(object)) {
+			if (!gameObjectPerformer.inventory.contains(object)) {
 				actionName = ACTION_NAME + " " + object.name + " (can't reach)";
 				return false;
 			}
@@ -79,7 +79,7 @@ public class ActionDropItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(square) > 1) {
+		if (gameObjectPerformer.straightLineDistanceTo(square) > 1) {
 			actionName = ACTION_NAME + " " + object.name + " (can't reach)";
 			return false;
 		}

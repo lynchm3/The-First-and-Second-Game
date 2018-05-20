@@ -20,7 +20,7 @@ public class ActionSpot extends Action {
 
 	public ActionSpot(Actor spotter, Object spotted, Square specificSquareSpotted) {
 		super(ACTION_NAME, "action_spot.png");
-		this.performer = spotter;
+		super.gameObjectPerformer = this.performer = spotter;
 		this.spotted = spotted;
 		this.specificSquareSpotted = specificSquareSpotted;
 		legal = checkLegality();
@@ -28,7 +28,7 @@ public class ActionSpot extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

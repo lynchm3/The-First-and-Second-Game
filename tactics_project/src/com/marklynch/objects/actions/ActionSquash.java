@@ -21,7 +21,7 @@ public class ActionSquash extends Action {
 	// Default for hostiles
 	public ActionSquash(Actor attacker, GameObject target, boolean accidental) {
 		super(ACTION_NAME, "action_squash.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		this.accidental = accidental;
 		if (!check()) {
@@ -33,7 +33,7 @@ public class ActionSquash extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

@@ -2,13 +2,18 @@ package com.marklynch.objects.actions;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
+import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
 
 public abstract class Action {
+
+	public GameObject gameObjectPerformer;
 
 	public String actionName;
 	public boolean enabled = true;
@@ -47,7 +52,27 @@ public abstract class Action {
 		this.image = getGlobalImage(imageName, false);
 	}
 
-	public abstract void perform();
+	public void perform() {
+		// Cancel fishing
+		if (gameObjectPerformer.fishingTarget != null && !(this instanceof ActionFishingStart)
+				&& !(this instanceof ActionFishingCompleted) && !(this instanceof ActionFishingInProgress)
+				&& !(this instanceof ActionFishingFailed)) {
+
+			FishingRod fishingRod = (FishingRod) gameObjectPerformer.equipped;
+			// gameObjectPerformer.fishingTarget.primaryAnimation = null;
+			gameObjectPerformer.fishingTarget.beingFishedBy = null;
+			gameObjectPerformer.fishingTarget = null;
+			fishingRod.reset();
+
+			if (gameObjectPerformer == Level.player) {
+				Level.pausePlayer();
+				if (Level.player.equippedBeforePickingUpObject != null) {
+					Level.player.equipped = Level.player.equippedBeforePickingUpObject;
+					Level.player.equippedBeforePickingUpObject = null;
+				}
+			}
+		}
+	}
 
 	public abstract boolean check();
 

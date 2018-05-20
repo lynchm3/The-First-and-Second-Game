@@ -21,7 +21,7 @@ public class ActionTalk extends Action {
 
 	public ActionTalk(Actor talker, Actor target, Conversation conversation) {
 		super(ACTION_NAME, "action_talk.png");
-		this.performer = talker;
+		super.gameObjectPerformer = this.performer = talker;
 		this.target = target;
 		this.conversation = conversation;
 		if (!check()) {
@@ -32,7 +32,7 @@ public class ActionTalk extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

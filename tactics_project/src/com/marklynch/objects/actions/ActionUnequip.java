@@ -16,7 +16,7 @@ public class ActionUnequip extends Action {
 
 	public ActionUnequip(Actor performer, GameObject gameObject) {
 		super(ACTION_NAME, "x.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.gameObject = gameObject;
 		if (!check()) {
 			enabled = false;
@@ -27,7 +27,7 @@ public class ActionUnequip extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

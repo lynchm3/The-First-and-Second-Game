@@ -21,7 +21,7 @@ public class ActionSearch extends Action {
 
 	public ActionSearch(Actor performer, Searchable object) {
 		super(ACTION_NAME, "action_search.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 		if (!check()) {
 			enabled = false;
@@ -32,7 +32,7 @@ public class ActionSearch extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

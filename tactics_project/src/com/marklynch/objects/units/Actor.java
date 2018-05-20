@@ -109,7 +109,6 @@ public class Actor extends GameObject {
 	public transient Faction faction;
 	public String factionGUID = null;
 
-	public GameObject equipped = null;
 	public GameObject equippedBeforePickingUpObject = null;
 	public String equippedWeaponGUID = null;
 
@@ -200,7 +199,6 @@ public class Actor extends GameObject {
 
 	// fishing stuff
 	public int fishingProgress;
-	public GameObject fishingTarget;
 	public AnimationTake fishingAnimation;
 
 	public GameObject choppingTarget;

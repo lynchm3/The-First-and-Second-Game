@@ -15,7 +15,7 @@ public class ActionScream extends Action {
 	// Default for hostiles
 	public ActionScream(Actor attacker) {
 		super(ACTION_NAME, "action_scream.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -25,7 +25,7 @@ public class ActionScream extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

@@ -15,7 +15,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionDropItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Drop";
-	GameObject performer;
 	Square square;
 	GameObject[] objects;
 
@@ -29,7 +28,7 @@ public class ActionDropItems extends VariableQtyAction {
 
 	public ActionDropItems(GameObject performer, Square square, GameObject[] objects, boolean doesnothing) {
 		super(ACTION_NAME, "right.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.square = square;
 		this.objects = objects;
 
@@ -45,6 +44,7 @@ public class ActionDropItems extends VariableQtyAction {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -58,8 +58,8 @@ public class ActionDropItems extends VariableQtyAction {
 			return;
 
 		if (Game.level.openInventories.size() > 0) {
-		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			objects[0].primaryAnimation = new AnimationDrop(objects[0].name, performer, this, square, objects[0], 0.5f);
+		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen() && gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
+			objects[0].primaryAnimation = new AnimationDrop(objects[0].name, gameObjectPerformer, this, square, objects[0], 0.5f);
 		}
 
 		for (int i = 0; i < amountToDrop; i++) {
@@ -68,8 +68,8 @@ public class ActionDropItems extends VariableQtyAction {
 			// if (!performer.inventory.contains(object)) {
 			// }
 
-			if (performer instanceof Actor) {
-				Actor actor = (Actor) performer;
+			if (gameObjectPerformer instanceof Actor) {
+				Actor actor = (Actor) gameObjectPerformer;
 
 				if (actor.equipped == object) {
 					if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
@@ -89,7 +89,7 @@ public class ActionDropItems extends VariableQtyAction {
 					actor.legArmor = null;
 			}
 
-			performer.inventory.remove(object);
+			gameObjectPerformer.inventory.remove(object);
 
 			// if inventory is open, we're not doing animattion, just throw it
 			// on in there
@@ -99,7 +99,7 @@ public class ActionDropItems extends VariableQtyAction {
 				searchable.inventory.add(object);
 			} else {
 
-				if (performer instanceof Actor) {
+				if (gameObjectPerformer instanceof Actor) {
 					square.inventory.add(object);
 				} else {
 					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(object, square));
@@ -111,24 +111,24 @@ public class ActionDropItems extends VariableQtyAction {
 
 		}
 
-		if (Game.level.shouldLog(performer)) {
+		if (Game.level.shouldLog(gameObjectPerformer)) {
 			String amountToDropString = "";
 			if (amountToDrop > 1)
 				amountToDropString = "x" + amountToDrop;
 			Game.level.logOnScreen(
-					new ActivityLog(new Object[] { performer, " dropped ", objects[0], amountToDropString }));
+					new ActivityLog(new Object[] { gameObjectPerformer, " dropped ", objects[0], amountToDropString }));
 		}
 
-		if (performer.inventory.groundDisplay != null)
-			performer.inventory.groundDisplay.refreshGameObjects();
+		if (gameObjectPerformer.inventory.groundDisplay != null)
+			gameObjectPerformer.inventory.groundDisplay.refreshGameObjects();
 
-		performer.actionsPerformedThisTurn.add(this);
+		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 
 		// if (performer == Game.level.player)
 		// Game.level.endTurn();
 
-		if (performer instanceof Actor)
-			trespassingCheck(this, (Actor) performer, performer.squareGameObjectIsOn);
+		if (gameObjectPerformer instanceof Actor)
+			trespassingCheck(this, (Actor) gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn);
 	}
 
 	@Override
@@ -137,14 +137,14 @@ public class ActionDropItems extends VariableQtyAction {
 		if (objects == null || objects.length == 0 || objects[0] == null)
 			return false;
 
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.inventory.contains(objects[0]) && actor.equipped != objects[0]) {
 				actionName = ACTION_NAME + " " + objects[0].name + " (can't reach)";
 				return false;
 			}
 		} else {
-			if (!performer.inventory.contains(objects[0])) {
+			if (!gameObjectPerformer.inventory.contains(objects[0])) {
 				actionName = ACTION_NAME + " " + objects[0].name + " (can't reach)";
 				return false;
 			}
@@ -161,7 +161,7 @@ public class ActionDropItems extends VariableQtyAction {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(square) > 1) {
+		if (gameObjectPerformer.straightLineDistanceTo(square) > 1) {
 			actionName = ACTION_NAME + " " + objects[0].name + " (can't reach)";
 			return false;
 		}

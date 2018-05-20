@@ -16,7 +16,7 @@ public class ActionPin extends Action {
 	// Default for hostiles
 	public ActionPin(Actor reader, Object target) {
 		super(ACTION_NAME, "action_search.png");
-		this.performer = reader;
+		super.gameObjectPerformer = this.performer = reader;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -27,7 +27,7 @@ public class ActionPin extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

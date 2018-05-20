@@ -23,7 +23,7 @@ public class ActionCastBurn extends Action {
 	// Default for hostiles
 	public ActionCastBurn(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_burn.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -36,7 +36,7 @@ public class ActionCastBurn extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

@@ -23,7 +23,7 @@ public class ActionUsePower extends Action {
 	// Default for hostiles
 	public ActionUsePower(Actor attacker, Square target, Power power) {
 		super("Cast " + power.name, "action_attack.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		this.power = power;
 		if (!check()) {
@@ -35,7 +35,7 @@ public class ActionUsePower extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

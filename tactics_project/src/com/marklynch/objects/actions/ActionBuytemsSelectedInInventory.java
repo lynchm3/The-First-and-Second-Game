@@ -17,7 +17,7 @@ public class ActionBuytemsSelectedInInventory extends Action {
 
 	public ActionBuytemsSelectedInInventory(Actor performer, Actor seller, GameObject object) {
 		super(ACTION_NAME, "action_buy.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 		this.seller = seller;
 		this.inventorySquare = object.inventorySquare;
@@ -32,7 +32,7 @@ public class ActionBuytemsSelectedInInventory extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

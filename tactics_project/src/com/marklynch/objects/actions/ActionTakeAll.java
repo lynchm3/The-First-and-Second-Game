@@ -20,7 +20,7 @@ public class ActionTakeAll extends Action {
 
 	public ActionTakeAll(Actor performer, Square square) {
 		super(ACTION_NAME, "action_take_all.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.square = square;
 		if (!check()) {
 			enabled = false;
@@ -31,7 +31,7 @@ public class ActionTakeAll extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

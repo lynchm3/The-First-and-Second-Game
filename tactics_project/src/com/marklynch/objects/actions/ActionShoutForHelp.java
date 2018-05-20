@@ -17,7 +17,7 @@ public class ActionShoutForHelp extends Action {
 	// Default for hostiles
 	public ActionShoutForHelp(Actor performer, GameObject attacker) {
 		super(ACTION_NAME, "action_scream.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.attacker = attacker;
 		if (!check()) {
 			enabled = false;
@@ -28,7 +28,7 @@ public class ActionShoutForHelp extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

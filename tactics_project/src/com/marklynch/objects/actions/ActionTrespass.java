@@ -16,7 +16,7 @@ public class ActionTrespass extends Action {
 
 	public ActionTrespass(Actor mover, Square target, float loudness) {
 		super(ACTION_NAME, "action_trespass.png");
-		this.performer = mover;
+		super.gameObjectPerformer = this.performer = mover;
 		this.target = target;
 		this.loudness = loudness;
 		if (!check()) {
@@ -29,7 +29,7 @@ public class ActionTrespass extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

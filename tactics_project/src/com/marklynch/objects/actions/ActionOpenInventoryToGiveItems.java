@@ -19,7 +19,7 @@ public class ActionOpenInventoryToGiveItems extends Action {
 
 	public ActionOpenInventoryToGiveItems(Actor performer, GameObject gameObject) {
 		super(ACTION_NAME, "action_select_object.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.target = gameObject;
 
 		if (!(target instanceof Actor)) {
@@ -35,7 +35,7 @@ public class ActionOpenInventoryToGiveItems extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

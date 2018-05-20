@@ -20,7 +20,7 @@ public class ActionWrite extends Action {
 
 	public ActionWrite(Actor writer, Readable sign, Object[] text) {
 		super(ACTION_NAME, "action_write.png");
-		this.performer = writer;
+		super.gameObjectPerformer = this.performer = writer;
 		this.sign = sign;
 		this.text = text;
 		if (!check()) {
@@ -32,7 +32,7 @@ public class ActionWrite extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

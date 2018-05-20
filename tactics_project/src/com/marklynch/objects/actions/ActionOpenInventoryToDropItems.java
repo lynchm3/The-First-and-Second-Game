@@ -19,7 +19,7 @@ public class ActionOpenInventoryToDropItems extends Action {
 
 	public ActionOpenInventoryToDropItems(Actor performer, Square target) {
 		super(ACTION_NAME, "action_select_object.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -30,6 +30,7 @@ public class ActionOpenInventoryToDropItems extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

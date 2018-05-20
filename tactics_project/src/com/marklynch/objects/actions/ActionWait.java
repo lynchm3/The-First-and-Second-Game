@@ -15,7 +15,7 @@ public class ActionWait extends Action {
 
 	public ActionWait(Actor loiterer, Square target) {
 		super(ACTION_NAME, "action_loiter.png");
-		this.performer = loiterer;
+		super.gameObjectPerformer = this.performer = loiterer;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -26,7 +26,7 @@ public class ActionWait extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 		if (!enabled)
 			return;
 

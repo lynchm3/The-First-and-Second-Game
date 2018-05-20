@@ -31,7 +31,7 @@ public class ActionEatItems extends VariableQtyAction {
 
 	public ActionEatItems(Actor performer, GameObject[] objects, boolean doesNothing) {
 		super(ACTION_NAME, "action_eat.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.objects = objects;
 		if (!check()) {
 			enabled = false;
@@ -42,7 +42,7 @@ public class ActionEatItems extends VariableQtyAction {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

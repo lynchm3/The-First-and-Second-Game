@@ -16,7 +16,7 @@ public class ActionPet extends Action {
 
 	public ActionPet(Actor performer, GameObject object) {
 		super(ACTION_NAME, "action_pet.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 		if (!check()) {
 			enabled = false;
@@ -26,7 +26,7 @@ public class ActionPet extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

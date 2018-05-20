@@ -22,7 +22,7 @@ public class ActionFillSpecificContainer extends Action {
 	public ActionFillSpecificContainer(Actor performer, WaterSource waterSource,
 			ContainerForLiquids containerForLiquids) {
 		super(ACTION_NAME, "action_fill_container.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.waterSource = waterSource;
 		this.containerForLiquids = containerForLiquids;
 		if (!check()) {
@@ -33,7 +33,7 @@ public class ActionFillSpecificContainer extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

@@ -15,13 +15,12 @@ public class ActionUnlock extends Action {
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
 	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
 
-	GameObject performer;
 	Openable openable;
 
 	// Default for hostiles
 	public ActionUnlock(GameObject unlocker, Openable openable) {
 		super(ACTION_NAME, "action_unlock.png");
-		this.performer = unlocker;
+		super.gameObjectPerformer = this.gameObjectPerformer = unlocker;
 		this.openable = openable;
 		if (!check()) {
 			enabled = false;
@@ -32,6 +31,7 @@ public class ActionUnlock extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -39,14 +39,14 @@ public class ActionUnlock extends Action {
 		if (!checkRange())
 			return;
 
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 			Key key = actor.getKeyFor(openable);
 
 			openable.unlock();
-			if (Game.level.shouldLog(performer))
+			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " unlocked ", openable, " with ", key }));
+						new ActivityLog(new Object[] { gameObjectPerformer, " unlocked ", openable, " with ", key }));
 
 			openable.showPow();
 
@@ -63,13 +63,13 @@ public class ActionUnlock extends Action {
 		} else {
 
 			openable.unlock();
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unlocked ", openable }));
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " unlocked ", openable }));
 
 			openable.showPow();
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
+		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 
 		if (sound != null)
 			sound.play();
@@ -78,8 +78,8 @@ public class ActionUnlock extends Action {
 	@Override
 	public boolean check() {
 
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 
 			if (!actor.hasKeyForDoor(openable)) {
 				actionName = ACTION_NAME_NEED_KEY;
@@ -94,8 +94,8 @@ public class ActionUnlock extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.canSeeGameObject(openable)) {
 				actionName = ACTION_NAME_CANT_REACH;
 				return false;
@@ -111,7 +111,7 @@ public class ActionUnlock extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (openable.owner != null && openable.owner != performer) {
+		if (openable.owner != null && openable.owner != gameObjectPerformer) {
 			return false;
 		}
 		return true;
@@ -119,7 +119,7 @@ public class ActionUnlock extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, openable, openable.squareGameObjectIsOn, 1, legal, this.getClass());
+		return new Sound(gameObjectPerformer, openable, openable.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

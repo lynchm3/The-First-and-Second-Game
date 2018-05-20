@@ -24,7 +24,7 @@ public class ActionCastDouse extends Action {
 	// Default for hostiles
 	public ActionCastDouse(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_douse.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -35,7 +35,7 @@ public class ActionCastDouse extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

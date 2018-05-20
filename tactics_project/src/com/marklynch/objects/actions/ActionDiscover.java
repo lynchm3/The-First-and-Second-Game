@@ -15,12 +15,11 @@ public class ActionDiscover extends Action {
 
 	public static final String ACTION_NAME = "Discover";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	GameObject performer;
 	Discoverable target;
 
 	public ActionDiscover(GameObject performer, Discoverable target) {
 		super(ACTION_NAME, "action_die.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -33,6 +32,7 @@ public class ActionDiscover extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -42,10 +42,10 @@ public class ActionDiscover extends Action {
 
 		target.discovered();
 
-		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " discovered ", target }));
+		if (Game.level.shouldLog(gameObjectPerformer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " discovered ", target }));
 
-		performer.actionsPerformedThisTurn.add(this);
+		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 
 		if (sound != null)
 			sound.play();
@@ -73,43 +73,43 @@ public class ActionDiscover extends Action {
 
 	public void logDeath() {
 
-		if (performer instanceof RockGolem) {
+		if (gameObjectPerformer instanceof RockGolem) {
 
-			if (Game.level.shouldLog(performer))
+			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer.destroyedBy, " broke ", performer, this.image }));
+						new ActivityLog(new Object[] { gameObjectPerformer.destroyedBy, " broke ", gameObjectPerformer, this.image }));
 
-		} else if (performer instanceof Actor && performer.destroyedBy instanceof EffectBurning) {
+		} else if (gameObjectPerformer instanceof Actor && gameObjectPerformer.destroyedBy instanceof EffectBurning) {
 
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " burned to death ", this.image }));
-		} else if (performer instanceof Vein) {
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " burned to death ", this.image }));
+		} else if (gameObjectPerformer instanceof Vein) {
 
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " was depleted ", this.image }));
-		} else if (performer.destroyedByAction instanceof ActionSmash) {
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " was depleted ", this.image }));
+		} else if (gameObjectPerformer.destroyedByAction instanceof ActionSmash) {
 
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", this.image }));
-		} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChoppingStart) {
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " smashed ", this.image }));
+		} else if (gameObjectPerformer instanceof Tree && gameObjectPerformer.destroyedByAction instanceof ActionChoppingStart) {
 
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " was chopped down ", this.image }));
-		} else if (performer.destroyedBy instanceof EffectBurning) {
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " was chopped down ", this.image }));
+		} else if (gameObjectPerformer.destroyedBy instanceof EffectBurning) {
 
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " burned down ", this.image }));
-		} else if (performer instanceof Actor) {
+			if (Game.level.shouldLog(gameObjectPerformer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " burned down ", this.image }));
+		} else if (gameObjectPerformer instanceof Actor) {
 
-			if (Game.level.shouldLog(performer))
+			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer.destroyedBy, " killed ", performer, this.image }));
+						new ActivityLog(new Object[] { gameObjectPerformer.destroyedBy, " killed ", gameObjectPerformer, this.image }));
 
 		} else {
 
-			if (Game.level.shouldLog(performer))
+			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { performer.destroyedBy, " destroyed a ", performer, this.image }));
+						new Object[] { gameObjectPerformer.destroyedBy, " destroyed a ", gameObjectPerformer, this.image }));
 
 		}
 	}

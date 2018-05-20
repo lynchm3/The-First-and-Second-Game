@@ -1964,6 +1964,7 @@ public class Level {
 		}
 
 		player.update(0);
+		// Game.level.activeActor = null;
 		for (GameObject inanimateObject : inanimateObjectsOnGround) {
 			inanimateObject.update(0);
 		}

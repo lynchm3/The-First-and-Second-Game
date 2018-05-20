@@ -25,7 +25,7 @@ public class ActionTeleportSwap extends Action {
 
 	public ActionTeleportSwap(Actor performer, GameObject teleportee, Square target, boolean endTurn) {
 		super(ACTION_NAME, "action_teleport.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.teleportee = teleportee;
 		this.target = target;
 		this.endTurn = endTurn;
@@ -40,7 +40,7 @@ public class ActionTeleportSwap extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

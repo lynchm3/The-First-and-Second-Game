@@ -24,7 +24,7 @@ public class ActionCastPoison extends Action {
 	// Default for hostiles
 	public ActionCastPoison(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_poison.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -35,7 +35,7 @@ public class ActionCastPoison extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

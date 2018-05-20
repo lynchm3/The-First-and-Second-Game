@@ -16,7 +16,7 @@ public class ActionRing extends Action {
 
 	public ActionRing(Actor ringer, GameObject object) {
 		super(ACTION_NAME, "action_ring.png");
-		this.performer = ringer;
+		super.gameObjectPerformer = this.performer = ringer;
 		this.object = object;
 		if (!check()) {
 			enabled = false;
@@ -28,7 +28,7 @@ public class ActionRing extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

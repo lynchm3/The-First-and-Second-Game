@@ -16,13 +16,12 @@ public class ActionLock extends Action {
 	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
 	public static final String ACTION_NAME_BLOCKED = ACTION_NAME + " (blocked)";
 
-	GameObject performer;
 	Openable openable;
 
 	// Default for hostiles
 	public ActionLock(GameObject unlocker, Openable openable) {
 		super(ACTION_NAME, "action_lock.png");
-		this.performer = unlocker;
+		super.gameObjectPerformer = this.gameObjectPerformer = unlocker;
 		this.openable = openable;
 		if (!check()) {
 			enabled = false;
@@ -33,6 +32,7 @@ public class ActionLock extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -40,18 +40,18 @@ public class ActionLock extends Action {
 		if (!checkRange())
 			return;
 
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 			Key key = actor.getKeyFor(openable);
 
 			if (openable.isOpen())
-				new ActionClose(performer, openable).perform();
+				new ActionClose(gameObjectPerformer, openable).perform();
 
 			openable.lock();
 
-			if (Game.level.shouldLog(openable, performer))
+			if (Game.level.shouldLog(openable, gameObjectPerformer))
 				Game.level
-						.logOnScreen(new ActivityLog(new Object[] { performer, " locked ", openable, " with ", key }));
+						.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " locked ", openable, " with ", key }));
 
 			openable.showPow();
 
@@ -62,24 +62,24 @@ public class ActionLock extends Action {
 		} else {
 
 			if (openable.isOpen())
-				new ActionClose(performer, openable).perform();
+				new ActionClose(gameObjectPerformer, openable).perform();
 
 			openable.lock();
 
-			if (performer.squareGameObjectIsOn.visibleToPlayer)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " locked ", openable }));
+			if (gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer)
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " locked ", openable }));
 
 			openable.showPow();
 		}
-		performer.actionsPerformedThisTurn.add(this);
+		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}
 
 	@Override
 	public boolean check() {
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 
 			if (!actor.hasKeyForDoor(openable)) {
 				actionName = ACTION_NAME_NEED_KEY;
@@ -104,8 +104,8 @@ public class ActionLock extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.canSeeGameObject(openable)) {
 				actionName = ACTION_NAME_CANT_REACH;
 				return false;
@@ -126,7 +126,7 @@ public class ActionLock extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, openable, openable.squareGameObjectIsOn, 1, legal, this.getClass());
+		return new Sound(gameObjectPerformer, openable, openable.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

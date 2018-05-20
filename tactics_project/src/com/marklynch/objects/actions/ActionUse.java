@@ -15,7 +15,6 @@ public class ActionUse extends Action {
 	// SPECIAL CASE HERE IF UR ADDING NEW ITEMS, THE ACTION NAME GETS SET IN THE
 	// CONSTRUCTOR
 
-	GameObject performer;
 	Switch switchToUse;
 	String verb;
 	RequirementToMeet[] requirementsToMeet;
@@ -30,7 +29,7 @@ public class ActionUse extends Action {
 		}
 		this.actionName = ACTION_NAME;
 		ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-		this.performer = performer;
+		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.switchToUse = switchToUse;
 		this.verb = verb;
 		this.requirementsToMeet = requirementsToMeet;
@@ -43,6 +42,7 @@ public class ActionUse extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -50,15 +50,15 @@ public class ActionUse extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ", verb, " ", switchToUse }));
+		if (Game.level.shouldLog(gameObjectPerformer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " ", verb, " ", switchToUse }));
 
 		switchToUse.use();
 
 		switchToUse.showPow();
 
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 			if (actor.faction == Game.level.factions.player) {
 				Game.level.undoList.clear();
 			}
@@ -66,15 +66,15 @@ public class ActionUse extends Action {
 			trespassingCheck(this, actor, actor.squareGameObjectIsOn);
 
 		}
-		performer.actionsPerformedThisTurn.add(this);
+		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}
 
 	@Override
 	public boolean check() {
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 
 			boolean requirementsMet = true;
 
@@ -98,14 +98,14 @@ public class ActionUse extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+		if (gameObjectPerformer instanceof Actor) {
+			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.canSeeGameObject(switchToUse)) {
 				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 
-			if (performer.straightLineDistanceTo(switchToUse.squareGameObjectIsOn) != 1) {
+			if (gameObjectPerformer.straightLineDistanceTo(switchToUse.squareGameObjectIsOn) != 1) {
 				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
@@ -121,7 +121,7 @@ public class ActionUse extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, switchToUse, switchToUse.squareGameObjectIsOn, 1, legal, this.getClass());
+		return new Sound(gameObjectPerformer, switchToUse, switchToUse.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

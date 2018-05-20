@@ -16,7 +16,7 @@ public class ActionStopHiding extends Action {
 
 	public ActionStopHiding(Actor performer, HidingPlace object) {
 		super(ACTION_NAME, "action_stop_hiding.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 		if (!check()) {
 			enabled = false;
@@ -26,7 +26,7 @@ public class ActionStopHiding extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

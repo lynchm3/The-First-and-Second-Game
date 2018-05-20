@@ -24,7 +24,7 @@ public class ActionSkin extends Action {
 	// Default for hostiles
 	public ActionSkin(Actor performer, GameObject target) {
 		super(ACTION_NAME, "action_skin.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		actionLootAll = new ActiontTakeAll(performer, target);
 		if (!check()) {
@@ -35,7 +35,7 @@ public class ActionSkin extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

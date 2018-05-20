@@ -28,7 +28,7 @@ public class ActionBuyItems extends VariableQtyAction {
 
 	public ActionBuyItems(Actor performer, Actor target, GameObject[] objects, boolean doesnothing) {
 		super(ACTION_NAME, "action_buy.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		this.objects = objects;
 		if (!check()) {
@@ -40,7 +40,7 @@ public class ActionBuyItems extends VariableQtyAction {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

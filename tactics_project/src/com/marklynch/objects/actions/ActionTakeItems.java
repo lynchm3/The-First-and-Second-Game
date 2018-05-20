@@ -38,7 +38,7 @@ public class ActionTakeItems extends VariableQtyAction {
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
 		super(ACTION_NAME, "left.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		if (this.target instanceof Square)
 			targetSquare = (Square) target;
@@ -62,7 +62,7 @@ public class ActionTakeItems extends VariableQtyAction {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

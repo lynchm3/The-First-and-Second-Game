@@ -27,7 +27,7 @@ public class ActionPourSpecificItem extends Action {
 	// Default for hostiles
 	public ActionPourSpecificItem(Actor performer, Object target, ContainerForLiquids container) {
 		super(ACTION_NAME, "action_pour.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		if (target instanceof Square) {
 			targetSquare = (Square) target;
 			targetGameObject = targetSquare.inventory.gameObjectThatCantShareSquare;
@@ -46,7 +46,7 @@ public class ActionPourSpecificItem extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

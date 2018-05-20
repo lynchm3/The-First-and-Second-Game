@@ -25,7 +25,7 @@ public class ActionThrowItem extends Action {
 	// Default for hostiles
 	public ActionThrowItem(Actor performer, Object target, GameObject gameObjectToThrow) {
 		super(ACTION_NAME, "action_throw.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		if (target instanceof Square) {
 			targetSquare = (Square) target;
 			targetGameObject = targetSquare.inventory.gameObjectThatCantShareSquare;
@@ -44,7 +44,7 @@ public class ActionThrowItem extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

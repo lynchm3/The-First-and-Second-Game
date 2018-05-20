@@ -14,7 +14,6 @@ public class ActionGiveItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Give";
 	public static final String ACTION_NAME_DISABLED = "(can't reach)";
-	GameObject performer;
 	GameObject receiver;
 	GameObject[] objects;
 	boolean logAsTake;
@@ -33,7 +32,7 @@ public class ActionGiveItems extends VariableQtyAction {
 		super(ACTION_NAME, "right.png");
 		if (!(receiver instanceof Actor))
 			this.actionName = "Put";
-		this.performer = performer;
+		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.receiver = receiver;
 		this.objects = objects;
 		this.logAsTake = logAsTake;
@@ -49,6 +48,7 @@ public class ActionGiveItems extends VariableQtyAction {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -62,8 +62,8 @@ public class ActionGiveItems extends VariableQtyAction {
 			return;
 
 		if (Game.level.openInventories.size() > 0) {
-		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.secondaryAnimations.add(new AnimationGive(performer, receiver, objects[0]));
+		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen() && gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
+			gameObjectPerformer.secondaryAnimations.add(new AnimationGive(gameObjectPerformer, receiver, objects[0]));
 		}
 
 		if (receiver instanceof Openable) {
@@ -74,8 +74,8 @@ public class ActionGiveItems extends VariableQtyAction {
 
 			GameObject object = objects[i];
 
-			if (performer instanceof Actor) {
-				Actor actor = (Actor) performer;
+			if (gameObjectPerformer instanceof Actor) {
+				Actor actor = (Actor) gameObjectPerformer;
 				if (actor.equipped == object) {
 					if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
 						actor.equip(actor.equippedBeforePickingUpObject);
@@ -93,7 +93,7 @@ public class ActionGiveItems extends VariableQtyAction {
 				if (actor.legArmor == object)
 					actor.legArmor = null;
 			}
-			performer.inventory.remove(object);
+			gameObjectPerformer.inventory.remove(object);
 
 			if (receiver instanceof Actor && !logAsTake) {
 				object.owner = (Actor) receiver;
@@ -102,19 +102,19 @@ public class ActionGiveItems extends VariableQtyAction {
 			receiver.inventory.add(object);
 		}
 
-		if (Game.level.shouldLog(receiver, performer)) {
+		if (Game.level.shouldLog(receiver, gameObjectPerformer)) {
 			String amountToDropString = "";
 			if (amountToGive > 1)
 				amountToDropString = "x" + amountToGive;
 			if (logAsTake)
 				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { receiver, " took ", objects[0], amountToDropString, " from ", performer }));
+						new Object[] { receiver, " took ", objects[0], amountToDropString, " from ", gameObjectPerformer }));
 			else if (receiver instanceof Actor)
 				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { performer, " gave ", objects[0], amountToDropString, " to ", receiver }));
+						new Object[] { gameObjectPerformer, " gave ", objects[0], amountToDropString, " to ", receiver }));
 			else
 				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { performer, " put ", objects[0], amountToDropString, " in ", receiver }));
+						new Object[] { gameObjectPerformer, " put ", objects[0], amountToDropString, " in ", receiver }));
 		}
 
 		if (sound != null)
@@ -130,7 +130,7 @@ public class ActionGiveItems extends VariableQtyAction {
 	@Override
 	public boolean checkRange() {
 
-		if (performer instanceof Actor && !((Actor) performer).canSeeSquare(receiver.squareGameObjectIsOn)) {
+		if (gameObjectPerformer instanceof Actor && !((Actor) gameObjectPerformer).canSeeSquare(receiver.squareGameObjectIsOn)) {
 			return false;
 		}
 

@@ -19,7 +19,7 @@ public class ActionFillContainersInInventory extends Action {
 
 	public ActionFillContainersInInventory(Actor performer, WaterSource waterSource) {
 		super(ACTION_NAME, "action_select_object.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.waterSource = waterSource;
 		if (!check()) {
 			enabled = false;
@@ -29,7 +29,7 @@ public class ActionFillContainersInInventory extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

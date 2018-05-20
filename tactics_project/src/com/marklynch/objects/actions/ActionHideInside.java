@@ -19,7 +19,7 @@ public class ActionHideInside extends Action {
 
 	public ActionHideInside(Actor performer, SmallHidingPlace object) {
 		super(ACTION_NAME, "action_hide.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 		if (!check()) {
 			enabled = false;
@@ -30,7 +30,7 @@ public class ActionHideInside extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

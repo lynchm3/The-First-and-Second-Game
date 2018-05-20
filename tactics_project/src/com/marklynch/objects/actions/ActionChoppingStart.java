@@ -28,7 +28,7 @@ public class ActionChoppingStart extends Action {
 	// Default for hostiles
 	public ActionChoppingStart(Actor attacker, GameObject vein) {
 		super(ACTION_NAME, "action_chop.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = vein;
 		if (!check()) {
 			enabled = false;
@@ -38,7 +38,7 @@ public class ActionChoppingStart extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

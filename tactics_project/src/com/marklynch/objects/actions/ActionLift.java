@@ -17,7 +17,7 @@ public class ActionLift extends Action {
 
 	public ActionLift(Actor performer, GameObject object) {
 		super(ACTION_NAME, "action_pick_up.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 		if (!check()) {
 			enabled = false;
@@ -27,7 +27,7 @@ public class ActionLift extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

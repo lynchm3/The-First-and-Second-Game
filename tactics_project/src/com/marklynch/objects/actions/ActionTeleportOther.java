@@ -16,7 +16,7 @@ public class ActionTeleportOther extends Action {
 
 	public ActionTeleportOther(Actor performer, GameObject teleportee) {
 		super(ACTION_NAME, "action_teleport.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.teleportee = teleportee;
 		if (!check()) {
 			enabled = false;
@@ -28,7 +28,7 @@ public class ActionTeleportOther extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

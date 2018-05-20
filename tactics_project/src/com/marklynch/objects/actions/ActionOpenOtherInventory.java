@@ -23,7 +23,7 @@ public class ActionOpenOtherInventory extends Action {
 		super(ACTION_NAME, "action_select_object.png");
 		if (gameObject instanceof Openable)
 			this.actionName = ACTION_NAME_2;
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.target = gameObject;
 		if (target instanceof Openable && !((Openable) gameObject).isOpen()) {
 			actionOpen = new ActionOpen(performer, (Openable) gameObject);
@@ -36,7 +36,7 @@ public class ActionOpenOtherInventory extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

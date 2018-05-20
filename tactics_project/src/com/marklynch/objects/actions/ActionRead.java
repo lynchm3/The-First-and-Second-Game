@@ -19,7 +19,7 @@ public class ActionRead extends Action {
 	// Default for hostiles
 	public ActionRead(Actor reader, Readable target) {
 		super(ACTION_NAME, "action_read.png");
-		this.performer = reader;
+		super.gameObjectPerformer = this.performer = reader;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -30,7 +30,7 @@ public class ActionRead extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

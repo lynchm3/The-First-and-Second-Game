@@ -11,16 +11,15 @@ public class ActionSmash extends Action {
 	public static final String ACTION_NAME = "Smash";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
-	GameObject performer;
 	GameObject target;
 	Actor actor;
 
 	// Default for hostiles
 	public ActionSmash(GameObject attacker, GameObject target) {
 		super(ACTION_NAME, "action_smash.png");
-		this.performer = attacker;
-		if (performer instanceof Actor)
-			actor = (Actor) performer;
+		super.gameObjectPerformer = this.gameObjectPerformer = attacker;
+		if (gameObjectPerformer instanceof Actor)
+			actor = (Actor) gameObjectPerformer;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -32,6 +31,7 @@ public class ActionSmash extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -40,14 +40,14 @@ public class ActionSmash extends Action {
 			return;
 
 		target.changeHealth(-target.remainingHealth, null, null);
-		target.checkIfDestroyed(performer, this);
+		target.checkIfDestroyed(gameObjectPerformer, this);
 
-		performer.actionsPerformedThisTurn.add(this);
+		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 
 		if (sound != null)
 			sound.play();
 
-		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
+		if (gameObjectPerformer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();
 
 		if (actor != null) {
@@ -114,7 +114,7 @@ public class ActionSmash extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.owner != null && target.owner != performer)
+		if (target.owner != null && target.owner != gameObjectPerformer)
 			return false;
 		return true;
 	}
@@ -122,8 +122,8 @@ public class ActionSmash extends Action {
 	@Override
 	public Sound createSound() {
 
-		if (performer instanceof Actor)
-			return new Sound(performer, target, target.squareGameObjectIsOn, 20, legal, this.getClass());
+		if (gameObjectPerformer instanceof Actor)
+			return new Sound(gameObjectPerformer, target, target.squareGameObjectIsOn, 20, legal, this.getClass());
 		else
 			return new Sound(null, target, target.squareGameObjectIsOn, 20, legal, this.getClass());
 

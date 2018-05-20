@@ -31,7 +31,7 @@ public class ActionAttack extends Action {
 	// Default for hostiles
 	public ActionAttack(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_attack.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 
 		if (performer.equipped != null && performer.equipped.maxRange > 1)
@@ -47,6 +47,7 @@ public class ActionAttack extends Action {
 
 	@Override
 	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -88,12 +89,13 @@ public class ActionAttack extends Action {
 
 				if (weapon != performer) {
 					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-								target, " with ", weapon, " for " + damage + " damage" }));
+						Game.level.logOnScreen(
+								new ActivityLog(new Object[] { performer, " " + attackTypeString + " ", target,
+										" with ", weapon, " for " + damage + " damage" }));
 				} else {
 					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-								target, " for " + damage + " damage" }));
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer,
+								" " + attackTypeString + " ", target, " for " + damage + " damage" }));
 				}
 			}
 

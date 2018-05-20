@@ -18,7 +18,7 @@ public class ActionFishSwim extends Action {
 
 	public ActionFishSwim(Fish performer) {
 		super(ACTION_NAME, "action_move.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -30,7 +30,7 @@ public class ActionFishSwim extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

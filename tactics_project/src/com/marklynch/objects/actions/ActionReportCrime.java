@@ -18,7 +18,7 @@ public class ActionReportCrime extends Action {
 	// Default for hostiles
 	public ActionReportCrime(Actor performer, Guard guard) {
 		super(ACTION_NAME, "action_scream.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.guard = guard;
 		if (!check()) {
 			enabled = false;
@@ -29,7 +29,7 @@ public class ActionReportCrime extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

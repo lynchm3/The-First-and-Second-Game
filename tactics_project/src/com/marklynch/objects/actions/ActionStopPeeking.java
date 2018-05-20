@@ -14,14 +14,14 @@ public class ActionStopPeeking extends Action {
 
 	public ActionStopPeeking(Actor performer) {
 		super(ACTION_NAME, "action_hide.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

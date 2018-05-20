@@ -21,7 +21,7 @@ public class ActionEquip extends Action {
 
 	public ActionEquip(Actor performer, GameObject gameObject) {
 		super(ACTION_NAME, "left.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.gameObject = gameObject;
 		if (!Game.level.player.inventory.contains(gameObject)) {
 			actionTake = new ActionTakeItems(performer, gameObject.inventoryThatHoldsThisObject.parent, gameObject);
@@ -39,7 +39,7 @@ public class ActionEquip extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

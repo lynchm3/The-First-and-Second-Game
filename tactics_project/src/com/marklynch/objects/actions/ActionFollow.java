@@ -15,14 +15,14 @@ public class ActionFollow extends Action {
 	// Default for hostiles
 	public ActionFollow(Player player, Actor target) {
 		super(ACTION_NAME, "action_move.png");
-		this.performer = player;
+		super.gameObjectPerformer = this.performer = player;
 		this.target = target;
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

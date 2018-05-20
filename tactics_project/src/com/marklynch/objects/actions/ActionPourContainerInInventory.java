@@ -24,7 +24,7 @@ public class ActionPourContainerInInventory extends Action {
 
 	public ActionPourContainerInInventory(Actor performer, Object target) {
 		super(ACTION_NAME, "action_select_object.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		if (target instanceof Square) {
 			targetSquare = (Square) target;
@@ -41,7 +41,7 @@ public class ActionPourContainerInInventory extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

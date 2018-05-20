@@ -22,7 +22,7 @@ public class ActionFishingFailed extends Action {
 	// Default for hostiles
 	public ActionFishingFailed(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_fishing.png");
-		this.performer = attacker;
+		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -32,7 +32,9 @@ public class ActionFishingFailed extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
+		
+		
 
 		if (!enabled)
 			return;

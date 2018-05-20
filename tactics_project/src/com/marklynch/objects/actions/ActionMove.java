@@ -26,7 +26,7 @@ public class ActionMove extends Action {
 
 	public ActionMove(Actor performer, Square target, boolean endTurn) {
 		super(ACTION_NAME, "action_move.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		this.endTurn = endTurn;
 		if (!check()) {
@@ -40,7 +40,7 @@ public class ActionMove extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

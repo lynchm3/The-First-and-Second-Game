@@ -18,14 +18,14 @@ public class ActionInspect extends Action {
 	// Default for hostiles
 	public ActionInspect(Actor reader, GameObject target) {
 		super(ACTION_NAME, "action_search.png");
-		this.performer = reader;
+		super.gameObjectPerformer = this.performer = reader;
 		this.target = target;
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

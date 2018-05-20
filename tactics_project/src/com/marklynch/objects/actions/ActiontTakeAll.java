@@ -21,7 +21,7 @@ public class ActiontTakeAll extends Action {
 
 	public ActiontTakeAll(Actor performer, GameObject container) {
 		super(ACTION_NAME, "action_loot_all.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.container = container;
 		if (container instanceof Openable && !((Openable) container).isOpen()) {
 			actionOpen = new ActionOpen(performer, (Openable) container);
@@ -35,7 +35,7 @@ public class ActiontTakeAll extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

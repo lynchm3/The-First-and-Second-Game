@@ -28,7 +28,7 @@ public class ActionPlaceMapMarker extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;

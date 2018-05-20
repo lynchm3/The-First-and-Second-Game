@@ -20,7 +20,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
 		super(ACTION_NAME, "action_eat.png");
-		this.performer = performer;
+		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 		this.inventorySquare = object.inventorySquare;
 		if (!check()) {
@@ -32,7 +32,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 	}
 
 	@Override
-	public void perform() {
+	public void perform() {super.perform();
 
 		if (!enabled)
 			return;
