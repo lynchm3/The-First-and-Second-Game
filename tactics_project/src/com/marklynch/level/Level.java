@@ -17,6 +17,7 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.constructs.gameover.GameOver;
@@ -113,6 +114,7 @@ public class Level {
 	public static transient Journal journal = new Journal();
 	public static transient QuestList fullQuestList = new QuestList();
 	public static transient MarkerList markerList = new MarkerList();
+	public static transient CharacterScreen characterScreen = new CharacterScreen();
 	public static transient FactionList factions = new FactionList();
 	public static transient ArrayList<Actor> actors = new ArrayList<Actor>();
 	public static transient GameOver gameOver = new GameOver();
@@ -212,6 +214,7 @@ public class Level {
 		Inventory.loadStaticImages();
 		ComparisonDisplay.loadStaticImages();
 		Journal.loadStaticImages();
+		CharacterScreen.loadStaticImages();
 		ActivityLogger.loadStaticImages();
 		GameOver.loadStaticImages();
 
@@ -506,6 +509,18 @@ public class Level {
 		journalButton.enabled = true;
 		buttons.add(journalButton);
 
+		// UI buttons
+		Button characterButton = new LevelButton(110f, 320f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"CHARACTER [C]", false, false, Color.BLACK, Color.WHITE, "View character stats and skills - [C]");
+		characterButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseCharacterScreen();
+			}
+		});
+		characterButton.enabled = true;
+		buttons.add(characterButton);
+
 		centerButton = new LevelButton(110f, 440f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
 				"CENTER [Q]", false, false, Color.BLACK, Color.WHITE, "Center view on self - [Q]");
 		centerButton.setClickListener(new ClickListener() {
@@ -650,6 +665,17 @@ public class Level {
 			journal.close();
 		} else {
 			journal.open();
+			pausePlayer();
+		}
+		closeAllPopups();
+	}
+
+	public void openCloseCharacterScreen() {
+
+		if (characterScreen.showing) {
+			characterScreen.close();
+		} else {
+			characterScreen.open();
 			pausePlayer();
 		}
 		closeAllPopups();
@@ -1298,6 +1324,10 @@ public class Level {
 			journal.drawStaticUI();
 		}
 
+		if (characterScreen.showing) {
+			characterScreen.drawStaticUI();
+		}
+
 		if (gameOver.showing) {
 			gameOver.drawStaticUI();
 		}
@@ -1582,6 +1612,8 @@ public class Level {
 			return;
 		} else if (journal.showing) {
 			return;
+		} else if (characterScreen.showing) {
+			return;
 		} else if (gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -1661,6 +1693,13 @@ public class Level {
 			}
 
 			return null;
+		}
+
+		if (characterScreen.showing) {
+			for (Button button : characterScreen.tabButtons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
 		}
 
 		if (journal.showing) {
@@ -1843,7 +1882,7 @@ public class Level {
 
 	public PinWindow getWindowFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
 
-		if (openInventories.size() != 0 || journal.showing || gameOver.showing)
+		if (openInventories.size() != 0 || journal.showing || gameOver.showing || characterScreen.showing)
 			return null;
 
 		for (int i = pinWindows.size() - 1; i >= 0; i--) {
@@ -2191,6 +2230,8 @@ public class Level {
 	public void resize() {
 		if (openInventories.size() != 0)
 			openInventories.get(0).resize1();
+		if (characterScreen.showing)
+			characterScreen.resize();
 		if (journal.showing)
 			journal.resize();
 		if (gameOver.showing)

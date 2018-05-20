@@ -16,14 +16,13 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
@@ -75,7 +74,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	// public static ArrayList<Link> links;
 	// Close button
 	static LevelButton buttonLog;
-	static String log = "LOG";
+	static String log = "QUESTS";
 	static int logLength = Game.smallFont.getWidth(log);
 	static LevelButton buttonMarkers;
 	static String mapMarkers = "MAP MARKERS";
