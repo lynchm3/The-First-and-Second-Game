@@ -165,6 +165,7 @@ public class Actor extends GameObject {
 
 	public Texture thoughtBubbleImageTextureObject = null;
 	public Texture thoughtBubbleImageTextureAction = null;
+	public Color thoughtBubbleImageTextureActionColor = Color.WHITE;
 	public Square lastSquare = null;
 	public GameObject peekingThrough = null;
 	public Square peekSquare = null;
@@ -1474,6 +1475,9 @@ public class Actor extends GameObject {
 
 					if (!this.squareGameObjectIsOn.visibleToPlayer)
 						alpha = 0.5f;
+
+					// thoughtBubbleImageTextureActionColor
+
 					TextureUtils.drawTexture(thoughtBubbleImageTextureObject, alpha, expressionPositionXInPixels,
 							expressionPositionYInPixels, expressionPositionXInPixels + expressionWidth,
 							expressionPositionYInPixels + expressionHeight);
@@ -1503,7 +1507,7 @@ public class Actor extends GameObject {
 						alpha = 0.5f;
 					TextureUtils.drawTexture(thoughtBubbleImageTextureAction, alpha, expressionPositionXInPixels,
 							expressionPositionYInPixels, expressionPositionXInPixels + expressionWidth / 2,
-							expressionPositionYInPixels + expressionHeight / 2);
+							expressionPositionYInPixels + expressionHeight / 2, thoughtBubbleImageTextureActionColor);
 					// TextureUtils.skipNormals = false;
 				}
 			}

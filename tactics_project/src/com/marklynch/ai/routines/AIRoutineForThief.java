@@ -17,6 +17,7 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.utils.Color;
 
 public class AIRoutineForThief extends AIRoutine {
 	Square targetSquare;
@@ -102,6 +103,10 @@ public class AIRoutineForThief extends AIRoutine {
 				else
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 				this.actor.thoughtBubbleImageTextureObject = container.imageTexture;
+				if (container.owner != null && container.owner != actor) {
+					this.actor.thoughtBubbleImageTextureAction = Action.textureLeft;
+					this.actor.thoughtBubbleImageTextureActionColor = Color.RED;
+				}
 
 				int weaponDistance = Game.level.activeActor.straightLineDistanceTo(container.squareGameObjectIsOn);
 				if (weaponDistance > 1) {
@@ -134,6 +139,10 @@ public class AIRoutineForThief extends AIRoutine {
 				else
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 				this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
+				if (loot.owner != null && loot.owner != actor) {
+					this.actor.thoughtBubbleImageTextureAction = Action.textureLeft;
+					this.actor.thoughtBubbleImageTextureActionColor = Color.RED;
+				}
 
 				int weaponDistance = Game.level.activeActor.straightLineDistanceTo(loot.squareGameObjectIsOn);
 
@@ -181,14 +190,17 @@ public class AIRoutineForThief extends AIRoutine {
 			if (targetSquare != null) {
 
 				this.actor.thoughtBubbleImageTextureObject = Action.textureMusic;
+				this.actor.thoughtBubbleImageTextureAction = null;
+				this.actor.thoughtBubbleImageTextureActionColor = Color.WHITE;
 				if (AIRoutineUtils.moveTowards(targetSquare))
 					return;
 			}
 		}
 
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
-			actor.thoughtBubbleImageTextureObject = Templates.BED.imageTexture;
-
+			this.actor.thoughtBubbleImageTextureObject = Templates.BED.imageTexture;
+			this.actor.thoughtBubbleImageTextureAction = Action.textureSleep;
+			this.actor.thoughtBubbleImageTextureActionColor = Color.WHITE;
 			goToBedAndSleep();
 		}
 	}

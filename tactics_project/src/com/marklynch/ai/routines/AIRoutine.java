@@ -63,6 +63,7 @@ import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.MapUtil;
 
 public abstract class AIRoutine {
@@ -1120,6 +1121,7 @@ public abstract class AIRoutine {
 		this.actor.aiLine = null;
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
+		this.actor.thoughtBubbleImageTextureActionColor = Color.WHITE;
 		this.actor.thoughtBubbleImageTextureObject = null;
 		this.actor.thoughtBubbleImageTextureAction = null;
 		if (actor instanceof NonHuman) {
