@@ -1201,9 +1201,9 @@ public class Actor extends GameObject {
 		// }
 
 		Game.flush();
-		view.translate(new Vector2f(leftArmHingeX, hipDrawY));
+		view.translate(new Vector2f(leftLegHingeX, hipDrawY));
 		view.rotate(-leftHipAngle, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-leftArmHingeX, -hipDrawY));
+		view.translate(new Vector2f(-leftLegHingeX, -hipDrawY));
 		Game.activeBatch.updateUniforms();
 
 	}
@@ -1309,9 +1309,9 @@ public class Actor extends GameObject {
 		// }
 
 		Game.flush();
-		view.translate(new Vector2f(rightArmHingeX, hipDrawY));
+		view.translate(new Vector2f(rightLegHingeX, hipDrawY));
 		view.rotate(-rightHipAngle, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-rightArmHingeX, -hipDrawY));
+		view.translate(new Vector2f(-rightLegHingeX, -hipDrawY));
 		Game.activeBatch.updateUniforms();
 
 	}

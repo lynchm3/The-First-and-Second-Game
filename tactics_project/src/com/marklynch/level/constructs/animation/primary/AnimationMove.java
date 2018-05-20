@@ -32,6 +32,13 @@ public class AnimationMove extends Animation {
 		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
+		if (phase == 0 || phase == 2) {
+			offsetY += 0f;
+		} else {
+			offsetY += 32f;
+
+		}
+
 		backwards = performer.backwards;
 
 		blockAI = false;
@@ -50,6 +57,12 @@ public class AnimationMove extends Animation {
 		durationToReach = 400;
 		startOffsetX = offsetX = startX - endX;
 		startOffsetY = offsetY = startY - endY;
+		if (phase == 0 || phase == 2) {
+			offsetY += 0f;
+		} else {
+			offsetY += 32f;
+
+		}
 		blockAI = false;
 		setAngles(0f);
 
@@ -87,10 +100,22 @@ public class AnimationMove extends Animation {
 		if (progress >= 1) {
 			completed = true;
 			offsetX = 0;
-			offsetY = 0;
+			// offsetY = 0;
+			if (phase == 0 || phase == 2) {
+				offsetY = 32f;
+			} else {
+				offsetY = 0f;
+
+			}
 		} else {
 			offsetX = (int) (startOffsetX * (1 - progress));
 			offsetY = (int) (startOffsetY * (1 - progress));
+			if (phase == 0 || phase == 2) {
+				offsetY += 32f * progress;
+			} else {
+				offsetY += 32f * (1f - progress);
+
+			}
 		}
 	}
 
@@ -99,17 +124,42 @@ public class AnimationMove extends Animation {
 		if (phase == 0) {
 			leftShoulderAngle = 0.2f * progress;
 			rightShoulderAngle = -leftShoulderAngle;
+
+			leftHipAngle = 0.75f * progress;
+			leftKneeAngle = 0.75f * progress;
+
+			rightHipAngle = -1.5f * progress;
+			rightKneeAngle = 1.5f * progress;
+
 		} else if (phase == 1) {
 			leftShoulderAngle = 0.2f * (1f - progress);
 			rightShoulderAngle = -leftShoulderAngle;
+
+			leftHipAngle = 0.75f * (1f - progress);
+			leftKneeAngle = 0.75f * (1f - progress);
+
+			rightHipAngle = -1.5f * (1f - progress);
+			rightKneeAngle = 1.5f * (1f - progress);
 
 		} else if (phase == 2) {
 			leftShoulderAngle = 0.2f * -progress;
 			rightShoulderAngle = -leftShoulderAngle;
 
+			leftHipAngle = -1.5f * progress;
+			leftKneeAngle = 1.5f * progress;
+
+			rightHipAngle = 0.75f * progress;
+			rightKneeAngle = 0.75f * progress;
+
 		} else if (phase == 3) {
 			leftShoulderAngle = 0.2f * (progress - 1f);
 			rightShoulderAngle = -leftShoulderAngle;
+
+			leftHipAngle = -1.5f * (1f - progress);
+			leftKneeAngle = 1.5f * (1f - progress);
+
+			rightHipAngle = 0.75f * (1f - progress);
+			rightKneeAngle = 0.75f * (1f - progress);
 
 		}
 

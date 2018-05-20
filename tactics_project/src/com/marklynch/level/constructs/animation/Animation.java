@@ -52,6 +52,14 @@ public abstract class Animation {
 		rightElbowAngle = -leftElbowAngle;
 		leftElbowAngle = -temp;
 
+		temp = rightHipAngle;
+		rightHipAngle = -leftHipAngle;
+		leftHipAngle = -temp;
+
+		temp = rightKneeAngle;
+		rightKneeAngle = -leftKneeAngle;
+		leftKneeAngle = -temp;
+
 	}
 
 }
