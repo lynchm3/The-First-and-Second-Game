@@ -169,8 +169,8 @@ public class TemplatesHumans {
 		Templates.FARMER.aiRoutine = new AIRoutineForHunter(Templates.FARMER);
 		Templates.FARMER.templateId = GameObject.generateNewTemplateId();
 		Templates.FARMER.flipYAxisInMirror = false;
-		Templates.FARMER.bodyArmor = Templates.LEATHERS.makeCopy(null, null);
-		Templates.FARMER.legArmor = Templates.DUNGAREES.makeCopy(null, null);
+		Templates.FARMER.bodyArmor = null;
+		Templates.FARMER.legArmor = Templates.UNDIES.makeCopy(null, null);
 		// Templates.FARMER.helmet = Templates.HUNTING_CAP.makeCopy(null, null);
 		// Templates.FARMER.helmet = Templates.HARD_HAT.makeCopy(null, null);
 

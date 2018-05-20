@@ -155,16 +155,8 @@ public class TemplatesArmor {
 		Templates.PANTS.imageTexture = getGlobalImage(Templates.PANTS.imageTexturePath, true);
 		Templates.PANTS.legLowerTexture = getGlobalImage("pants_leg_lower.png", true);
 		Templates.PANTS.legUpperTexture = getGlobalImage("pants_leg_upper.png", true);
-		Templates.PANTS.backTexture = null;
 		Templates.PANTS.totalHealth = Templates.PANTS.remainingHealth = 20;
-		Templates.PANTS.widthRatio = 1f;
 		Templates.PANTS.heightRatio = 1.5f;
-		Templates.PANTS.drawOffsetRatioX = 0f;
-		Templates.PANTS.drawOffsetRatioY = 0f;
-		Templates.PANTS.soundWhenHit = 1f;
-		Templates.PANTS.soundWhenHitting = 1f;
-		Templates.PANTS.soundDampening = 1f;
-		Templates.PANTS.stackable = false;
 		Templates.PANTS.weight = 12f;
 		Templates.PANTS.value = 24;
 		Templates.PANTS.templateId = GameObject.generateNewTemplateId();
@@ -175,19 +167,21 @@ public class TemplatesArmor {
 		Templates.DUNGAREES.imageTexture = getGlobalImage(Templates.DUNGAREES.imageTexturePath, true);
 		Templates.DUNGAREES.legLowerTexture = getGlobalImage("dungarees_leg_lower.png", true);
 		Templates.DUNGAREES.legUpperTexture = getGlobalImage("dungarees_leg_upper.png", true);
-		Templates.DUNGAREES.backTexture = null;
 		Templates.DUNGAREES.totalHealth = Templates.DUNGAREES.remainingHealth = 27;
-		Templates.DUNGAREES.widthRatio = 1f;
 		Templates.DUNGAREES.heightRatio = 1.5f;
-		Templates.DUNGAREES.drawOffsetRatioX = 0f;
-		Templates.DUNGAREES.drawOffsetRatioY = 0f;
-		Templates.DUNGAREES.soundWhenHit = 1f;
-		Templates.DUNGAREES.soundWhenHitting = 1f;
-		Templates.DUNGAREES.soundDampening = 1f;
-		Templates.DUNGAREES.stackable = false;
 		Templates.DUNGAREES.weight = 14f;
 		Templates.DUNGAREES.value = 29;
 		Templates.DUNGAREES.templateId = GameObject.generateNewTemplateId();
+
+		Templates.UNDIES = new LegArmor();
+		Templates.UNDIES.name = "Undies";
+		Templates.UNDIES.imageTexturePath = "undies.png";
+		Templates.UNDIES.imageTexture = getGlobalImage(Templates.UNDIES.imageTexturePath, true);
+		Templates.UNDIES.totalHealth = Templates.UNDIES.remainingHealth = 27;
+		Templates.UNDIES.heightRatio = 1.5f;
+		Templates.UNDIES.weight = 14f;
+		Templates.UNDIES.value = 29;
+		Templates.UNDIES.templateId = GameObject.generateNewTemplateId();
 	}
 
 }
