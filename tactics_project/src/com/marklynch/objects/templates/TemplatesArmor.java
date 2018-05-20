@@ -153,6 +153,9 @@ public class TemplatesArmor {
 		Templates.PANTS.name = "Pants";
 		Templates.PANTS.imageTexturePath = "pants.png";
 		Templates.PANTS.imageTexture = getGlobalImage(Templates.PANTS.imageTexturePath, true);
+		Templates.PANTS.legLowerTexture = getGlobalImage("pants_leg_lower.png", true);
+		Templates.PANTS.legUpperTexture = getGlobalImage("pants_leg_upper.png", true);
+		Templates.PANTS.backTexture = null;
 		Templates.PANTS.totalHealth = Templates.PANTS.remainingHealth = 20;
 		Templates.PANTS.widthRatio = 1f;
 		Templates.PANTS.heightRatio = 1.5f;
@@ -170,6 +173,9 @@ public class TemplatesArmor {
 		Templates.DUNGAREES.name = "Dungarees";
 		Templates.DUNGAREES.imageTexturePath = "dungarees.png";
 		Templates.DUNGAREES.imageTexture = getGlobalImage(Templates.DUNGAREES.imageTexturePath, true);
+		Templates.DUNGAREES.legLowerTexture = getGlobalImage("dungarees_leg_lower.png", true);
+		Templates.DUNGAREES.legUpperTexture = getGlobalImage("dungarees_leg_upper.png", true);
+		Templates.DUNGAREES.backTexture = null;
 		Templates.DUNGAREES.totalHealth = Templates.DUNGAREES.remainingHealth = 27;
 		Templates.DUNGAREES.widthRatio = 1f;
 		Templates.DUNGAREES.heightRatio = 1.5f;

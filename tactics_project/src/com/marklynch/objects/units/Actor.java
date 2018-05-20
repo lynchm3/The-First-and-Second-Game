@@ -673,19 +673,6 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (pelvisImageTexture != null) {
-			TextureUtils.drawTexture(pelvisImageTexture, alpha, x, y, x + width, y + height, backwards);
-
-			if (highlight) {
-				TextureUtils.drawTexture(pelvisImageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards,
-						false, flashColor, false);
-
-			}
-		}
-
-		drawLeftLeg(x, y, alpha, highlight);
-		drawRightLeg(x, y, alpha, highlight);
-
 		if (highlight)
 
 		{
@@ -801,9 +788,18 @@ public class Actor extends GameObject {
 
 		drawBackArm(x, y, alpha, highlight);
 
-		if (legArmor != null && !sleeping)
+		// pelvis
+		if (pelvisImageTexture != null) {
+			TextureUtils.drawTexture(pelvisImageTexture, alpha, x, y, x + width, y + height, backwards);
 
-		{
+			if (highlight) {
+				TextureUtils.drawTexture(pelvisImageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards,
+						false, flashColor, false);
+
+			}
+		}
+
+		if (legArmor != null && !sleeping) {
 
 			int legArmorPositionXInPixels = (x);
 			int legArmorPositionYInPixels = (y);
@@ -817,6 +813,9 @@ public class Actor extends GameObject {
 
 			}
 		}
+
+		drawBackLeg(x, y, alpha, highlight);
+		drawFrontLeg(x, y, alpha, highlight);
 
 		if (bodyArmor != null && !sleeping) {
 
@@ -1100,6 +1099,21 @@ public class Actor extends GameObject {
 		}
 	}
 
+	public void drawFrontLeg(int x, int y, float alpha, boolean highlight) {
+		if (backwards)
+			drawRightLeg(x, y, alpha, highlight);
+		else
+			drawLeftLeg(x, y, alpha, highlight);
+	}
+
+	public void drawBackLeg(int x, int y, float alpha, boolean highlight) {
+		if (backwards)
+			drawLeftLeg(x, y, alpha, highlight);
+		else
+			drawRightLeg(x, y, alpha, highlight);
+
+	}
+
 	public void drawLeftLeg(int x, int y, float alpha, boolean highlight) {
 
 		if (legImageTexture == null)
@@ -1150,23 +1164,20 @@ public class Actor extends GameObject {
 
 		}
 
-		// if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
-		//
-		// TextureUtils.drawTexture(bodyArmor.armLowerTexture, 1f, leftArmDrawX,
-		// kneeDrawY,
-		// leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
-		// kneeDrawY + bodyArmor.armLowerTexture.getHeight());
-		// if (highlight) {
-		//
-		// TextureUtils.drawTexture(bodyArmor.armLowerTexture, 0.5f, leftArmDrawX,
-		// kneeDrawY,
-		// leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
-		// kneeDrawY + bodyArmor.armLowerTexture.getHeight(), 0, 0, 0, 0, backwards,
-		// false, flashColor,
-		// false);
-		//
-		// }
-		// }
+		if (legArmor != null && legArmor.legLowerTexture != null) {
+
+			TextureUtils.drawTexture(legArmor.legLowerTexture, 1f, leftLegDrawX, kneeDrawY,
+					leftLegDrawX + legArmor.legLowerTexture.getWidth(),
+					kneeDrawY + legArmor.legLowerTexture.getHeight());
+			if (highlight) {
+
+				TextureUtils.drawTexture(legArmor.legLowerTexture, 0.5f, leftLegDrawX, kneeDrawY,
+						leftLegDrawX + legArmor.legLowerTexture.getWidth(),
+						kneeDrawY + legArmor.legLowerTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
+						false);
+
+			}
+		}
 
 		Game.flush();
 		view.translate(new Vector2f(leftLegHingeX, kneeDrawY));
@@ -1183,22 +1194,19 @@ public class Actor extends GameObject {
 
 		}
 
-		// if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
-		//
-		// TextureUtils.drawTexture(bodyArmor.armUpperTexture, alpha, leftArmDrawX,
-		// hipDrawY,
-		// leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
-		// hipDrawY + bodyArmor.armUpperTexture.getHeight());
-		// if (highlight) {
-		// TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, leftArmDrawX,
-		// hipDrawY,
-		// leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
-		// hipDrawY + bodyArmor.armUpperTexture.getHeight(), 0, 0, 0, 0, backwards,
-		// false, flashColor,
-		// false);
-		//
-		// }
-		// }
+		if (legArmor != null && legArmor.legUpperTexture != null) {
+
+			TextureUtils.drawTexture(legArmor.legUpperTexture, alpha, leftLegDrawX, hipDrawY,
+					leftLegDrawX + legArmor.legUpperTexture.getWidth(),
+					hipDrawY + legArmor.legUpperTexture.getHeight());
+			if (highlight) {
+				TextureUtils.drawTexture(legArmor.legUpperTexture, 0.5f, leftLegDrawX, hipDrawY,
+						leftLegDrawX + legArmor.legUpperTexture.getWidth(),
+						hipDrawY + legArmor.legUpperTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
+						false);
+
+			}
+		}
 
 		Game.flush();
 		view.translate(new Vector2f(leftLegHingeX, hipDrawY));
@@ -1258,23 +1266,20 @@ public class Actor extends GameObject {
 
 		}
 
-		// if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
-		//
-		// TextureUtils.drawTexture(bodyArmor.armLowerTexture, 1f, rightArmDrawX,
-		// kneeDrawY,
-		// rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
-		// kneeDrawY + bodyArmor.armLowerTexture.getHeight());
-		// if (highlight) {
-		//
-		// TextureUtils.drawTexture(bodyArmor.armLowerTexture, 0.5f, rightArmDrawX,
-		// kneeDrawY,
-		// rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
-		// kneeDrawY + bodyArmor.armLowerTexture.getHeight(), 0, 0, 0, 0, backwards,
-		// false, flashColor,
-		// false);
-		//
-		// }
-		// }
+		if (legArmor != null && legArmor.legLowerTexture != null) {
+
+			TextureUtils.drawTexture(legArmor.legLowerTexture, 1f, rightLegDrawX, kneeDrawY,
+					rightLegDrawX + legArmor.legLowerTexture.getWidth(),
+					kneeDrawY + legArmor.legLowerTexture.getHeight());
+			if (highlight) {
+
+				TextureUtils.drawTexture(legArmor.legLowerTexture, 0.5f, rightLegDrawX, kneeDrawY,
+						rightLegDrawX + legArmor.legLowerTexture.getWidth(),
+						kneeDrawY + legArmor.legLowerTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
+						false);
+
+			}
+		}
 
 		Game.flush();
 		view.translate(new Vector2f(rightLegHingeX, kneeDrawY));
@@ -1291,22 +1296,19 @@ public class Actor extends GameObject {
 
 		}
 
-		// if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
-		//
-		// TextureUtils.drawTexture(bodyArmor.armUpperTexture, alpha, rightArmDrawX,
-		// hipDrawY,
-		// rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
-		// hipDrawY + bodyArmor.armUpperTexture.getHeight());
-		// if (highlight) {
-		// TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, rightArmDrawX,
-		// hipDrawY,
-		// rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
-		// hipDrawY + bodyArmor.armUpperTexture.getHeight(), 0, 0, 0, 0, backwards,
-		// false, flashColor,
-		// false);
-		//
-		// }
-		// }
+		if (legArmor != null && legArmor.legUpperTexture != null) {
+
+			TextureUtils.drawTexture(legArmor.legUpperTexture, alpha, rightLegDrawX, hipDrawY,
+					rightLegDrawX + legArmor.legUpperTexture.getWidth(),
+					hipDrawY + legArmor.legUpperTexture.getHeight());
+			if (highlight) {
+				TextureUtils.drawTexture(legArmor.legUpperTexture, 0.5f, rightLegDrawX, hipDrawY,
+						rightLegDrawX + legArmor.legUpperTexture.getWidth(),
+						hipDrawY + legArmor.legUpperTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
+						false);
+
+			}
+		}
 
 		Game.flush();
 		view.translate(new Vector2f(rightLegHingeX, hipDrawY));

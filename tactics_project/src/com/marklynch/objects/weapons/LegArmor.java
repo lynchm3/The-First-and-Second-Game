@@ -6,6 +6,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Texture;
 
 public class LegArmor extends Armor {
 
@@ -13,6 +14,10 @@ public class LegArmor extends Armor {
 	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
 			"totalHealth", "remainingHealth", "owner", "inventory", "showInventory", "fitsInInventory",
 			"canContainOtherObjects" };
+
+	public Texture legUpperTexture;
+	public Texture legLowerTexture;
+	public Texture backTexture;
 
 	public LegArmor() {
 
@@ -36,6 +41,9 @@ public class LegArmor extends Armor {
 		LegArmor legArmor = new LegArmor();
 		setInstances(legArmor);
 		setAttributesForCopy(legArmor, square, owner);
+		legArmor.legUpperTexture = this.legUpperTexture;
+		legArmor.legLowerTexture = this.legLowerTexture;
+		legArmor.backTexture = this.backTexture;
 		return legArmor;
 	}
 }

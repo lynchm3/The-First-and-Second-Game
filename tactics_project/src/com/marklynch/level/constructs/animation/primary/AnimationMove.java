@@ -35,7 +35,7 @@ public class AnimationMove extends Animation {
 		if (phase == 0 || phase == 2) {
 			offsetY += 0f;
 		} else {
-			offsetY += 32f;
+			offsetY += headBob;
 
 		}
 
@@ -60,7 +60,7 @@ public class AnimationMove extends Animation {
 		if (phase == 0 || phase == 2) {
 			offsetY += 0f;
 		} else {
-			offsetY += 32f;
+			offsetY += headBob;
 
 		}
 		blockAI = false;
@@ -102,7 +102,7 @@ public class AnimationMove extends Animation {
 			offsetX = 0;
 			// offsetY = 0;
 			if (phase == 0 || phase == 2) {
-				offsetY = 32f;
+				offsetY = headBob;
 			} else {
 				offsetY = 0f;
 
@@ -111,13 +111,17 @@ public class AnimationMove extends Animation {
 			offsetX = (int) (startOffsetX * (1 - progress));
 			offsetY = (int) (startOffsetY * (1 - progress));
 			if (phase == 0 || phase == 2) {
-				offsetY += 32f * progress;
+				offsetY += headBob * progress;
 			} else {
-				offsetY += 32f * (1f - progress);
+				offsetY += headBob * (1f - progress);
 
 			}
 		}
 	}
+
+	float frontLegBend = 0.35f;
+	float backLegBend = 0.10f;
+	float headBob = 2f;
 
 	public void setAngles(float progress) {
 
@@ -125,41 +129,41 @@ public class AnimationMove extends Animation {
 			leftShoulderAngle = 0.2f * progress;
 			rightShoulderAngle = -leftShoulderAngle;
 
-			leftHipAngle = 0.75f * progress;
-			leftKneeAngle = 0.75f * progress;
+			leftHipAngle = backLegBend * progress;
+			leftKneeAngle = backLegBend * progress;
 
-			rightHipAngle = -1.5f * progress;
-			rightKneeAngle = 1.5f * progress;
+			rightHipAngle = -frontLegBend * progress;
+			rightKneeAngle = frontLegBend * progress;
 
 		} else if (phase == 1) {
 			leftShoulderAngle = 0.2f * (1f - progress);
 			rightShoulderAngle = -leftShoulderAngle;
 
-			leftHipAngle = 0.75f * (1f - progress);
-			leftKneeAngle = 0.75f * (1f - progress);
+			leftHipAngle = backLegBend * (1f - progress);
+			leftKneeAngle = backLegBend * (1f - progress);
 
-			rightHipAngle = -1.5f * (1f - progress);
-			rightKneeAngle = 1.5f * (1f - progress);
+			rightHipAngle = -frontLegBend * (1f - progress);
+			rightKneeAngle = frontLegBend * (1f - progress);
 
 		} else if (phase == 2) {
 			leftShoulderAngle = 0.2f * -progress;
 			rightShoulderAngle = -leftShoulderAngle;
 
-			leftHipAngle = -1.5f * progress;
-			leftKneeAngle = 1.5f * progress;
+			leftHipAngle = -frontLegBend * progress;
+			leftKneeAngle = frontLegBend * progress;
 
-			rightHipAngle = 0.75f * progress;
-			rightKneeAngle = 0.75f * progress;
+			rightHipAngle = backLegBend * progress;
+			rightKneeAngle = backLegBend * progress;
 
 		} else if (phase == 3) {
 			leftShoulderAngle = 0.2f * (progress - 1f);
 			rightShoulderAngle = -leftShoulderAngle;
 
-			leftHipAngle = -1.5f * (1f - progress);
-			leftKneeAngle = 1.5f * (1f - progress);
+			leftHipAngle = -frontLegBend * (1f - progress);
+			leftKneeAngle = frontLegBend * (1f - progress);
 
-			rightHipAngle = 0.75f * (1f - progress);
-			rightKneeAngle = 0.75f * (1f - progress);
+			rightHipAngle = backLegBend * (1f - progress);
+			rightKneeAngle = backLegBend * (1f - progress);
 
 		}
 
