@@ -37,7 +37,8 @@ public class ActionFishingStart extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -52,7 +53,7 @@ public class ActionFishingStart extends Action {
 		FishingRod fishingRod = null;
 		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
 		for (GameObject f : fishingRods) {
-			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= f.maxRange) {
+			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= ((FishingRod) f).fishingRange) {
 				fishingRod = (FishingRod) f;
 			}
 		}
@@ -128,7 +129,8 @@ public class ActionFishingStart extends Action {
 		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
 
 		for (GameObject fishingRod : fishingRods) {
-			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= fishingRod.maxRange) {
+			if (performer
+					.straightLineDistanceTo(target.squareGameObjectIsOn) <= ((FishingRod) fishingRod).fishingRange) {
 				return true;
 			}
 		}

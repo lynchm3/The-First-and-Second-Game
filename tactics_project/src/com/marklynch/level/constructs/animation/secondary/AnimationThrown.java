@@ -68,19 +68,10 @@ public class AnimationThrown extends Animation {
 
 		this.y = this.originY = shooter.actorPositionYInPixels + shooter.shoulderY;// shooter.getCenterY();
 
-		System.out.println("this.x = " + this.x);
-		System.out.println("this.y = " + this.y);
-
 		this.targetX = this.targetSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH * this.projectileObject.drawOffsetRatioX
 				+ this.projectileObject.width / 2f;
 		this.targetY = this.targetSquare.yInGridPixels
 				+ Game.HALF_SQUARE_HEIGHT * this.projectileObject.drawOffsetRatioY + this.projectileObject.height / 2f;
-
-		System.out.println("this.projectileObject.width = " + this.projectileObject.width);
-		System.out.println("this.projectileObject.drawOffsetRatioX = " + this.projectileObject.drawOffsetRatioX);
-		System.out.println("targetX = " + targetX);
-		// System.out.println("targetX = " + targetX);
-		// System.out.println("targetX = " + targetX);
 
 		this.targetY += Math.random() * 16f;
 		this.targetY -= 8;
@@ -136,25 +127,23 @@ public class AnimationThrown extends Animation {
 			if (targetGameObject != null)
 				targetGameObject.showPow();
 			if (!(projectileObject instanceof Arrow)) {
-				if (targetGameObject != null && targetGameObject instanceof Searchable && projectileObject.canShareSquare) {
+				if (targetGameObject != null && targetGameObject instanceof Searchable
+						&& projectileObject.canShareSquare) {
 					targetGameObject.inventory.add(projectileObject);
 				} else {
 					targetSquare.inventory.add(projectileObject);
 				}
 				projectileObject.landed(shooter, action);
-			} else if (targetGameObject != null){
+			} else if (targetGameObject != null) {
 
 				// projectileObject.drawOffsetRatioX = (targetX -
 				// targetGameObject.squareGameObjectIsOn.xInGridPixels)
 				// / Game.SQUARE_WIDTH;
 
-				System.out.println("Templates.ARROW.drawOffsetRatioX = " + Templates.ARROW.drawOffsetRatioX);
-				System.out.println("projectileObject.drawOffsetRatioX = " + projectileObject.drawOffsetRatioX);
-
 				// projectileObject.drawOffsetRatioY = (targetY -
 				// targetGameObject.squareGameObjectIsOn.yInGridPixels)
 				// / Game.SQUARE_HEIGHT;
-				
+
 				targetGameObject.arrows.add((Arrow) projectileObject);
 			}
 
@@ -227,7 +216,7 @@ public class AnimationThrown extends Animation {
 	}
 
 	public void smashContainer(ContainerForLiquids container) {
-		if(targetGameObject != null)
+		if (targetGameObject != null)
 			targetGameObject.squareGameObjectIsOn.inventory.add(container);
 		new ActionSmash(shooter, container).perform();
 

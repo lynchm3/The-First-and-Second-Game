@@ -1548,7 +1548,7 @@ public abstract class AIRoutine {
 
 		if (target == null || fishingRod == null) {
 			return false;
-		} else if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) <= fishingRod.maxRange) {
+		} else if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) <= fishingRod.fishingRange) {
 			if (target.squareGameObjectIsOn.inventory.waterBody != null) {
 				new ActionFishingStart(actor, target).perform();
 			} else {

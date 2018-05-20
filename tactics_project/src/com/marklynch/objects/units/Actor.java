@@ -336,9 +336,6 @@ public class Actor extends GameObject {
 	Square lastPathTarget = null;
 
 	public AIPath getPathTo(Square target) {
-
-		if (name.equals("Guard John"))
-			System.out.println("getPathTo(" + target + ")");
 		// 81,56 is Guard John's BED
 
 		if (target == null) {
@@ -348,9 +345,6 @@ public class Actor extends GameObject {
 		for (Node node1 : this.squareGameObjectIsOn.nodes) {
 			for (Node node2 : target.nodes) {
 				if (node1 == node2) {
-					if (name.equals("Guard John"))
-						System.out.println(
-								"current and target square have same nodes, got to square level node = " + node1);
 					lastNodeReached = null;
 					lastPathTarget = target;
 					return getPathAtSquareLevel(target);
@@ -360,8 +354,6 @@ public class Actor extends GameObject {
 
 		if (this.squareGameObjectIsOn.node != null) {
 			lastNodeReached = this.squareGameObjectIsOn.node;
-			if (name.equals("Guard John"))
-				System.out.println("On a node, lastNodeReached has been set to " + lastNodeReached);
 		} else if (lastPathTarget != target) {
 			int closestNodeDistance = Integer.MAX_VALUE;
 			for (Node node : this.squareGameObjectIsOn.nodes) {
@@ -371,9 +363,6 @@ public class Actor extends GameObject {
 					closestNodeDistance = tempDistance;
 				}
 			}
-
-			if (name.equals("Guard John"))
-				System.out.println("New target lastNodeReached has been set to " + lastNodeReached);
 		}
 
 		// ARE WE ON A NODE!?!?!
@@ -1107,7 +1096,7 @@ public class Actor extends GameObject {
 
 		}
 
-		if (fishingTarget != null && equipped instanceof FishingRod) {
+		if (fishingTarget != null && equipped instanceof FishingRod && this != Level.player) {
 			FishingRod fishingRod = (FishingRod) equipped;
 			fishingRod.drawLine(this, x, y);
 		}

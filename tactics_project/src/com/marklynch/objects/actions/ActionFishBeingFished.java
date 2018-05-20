@@ -36,8 +36,6 @@ public class ActionFishBeingFished extends Action {
 	public void perform() {
 		super.perform();
 
-		System.out.println("BEING FISHED BY . PERFORM");
-
 		if (!enabled)
 			return;
 

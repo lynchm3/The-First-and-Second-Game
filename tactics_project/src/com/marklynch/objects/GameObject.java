@@ -1727,10 +1727,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.widthRatio = widthRatio;
 		gameObject.heightRatio = heightRatio;
 		gameObject.drawOffsetRatioX = drawOffsetRatioX;
-		if (gameObject instanceof Arrow) {
-			System.out.println("new ARROW.drawOffsetRatioX = " + Templates.ARROW.drawOffsetRatioX);
-			System.out.println("setAttributesForCopy arrow.drawOffsetRatioX = " + gameObject.drawOffsetRatioX);
-		}
 		gameObject.drawOffsetRatioY = drawOffsetRatioY;
 		gameObject.soundWhenHit = soundWhenHit;
 		gameObject.soundWhenHitting = soundWhenHitting;

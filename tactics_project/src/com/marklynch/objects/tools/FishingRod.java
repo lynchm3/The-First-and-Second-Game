@@ -9,6 +9,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
+import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -24,8 +25,7 @@ public class FishingRod extends Tool {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public float lineAnchorX = 93;
 	public float lineAnchorY = 0;
-	// public float lineX2;
-	// public float lineY2;
+	public int fishingRange = 1;
 
 	public FishingRod() {
 		super();
@@ -42,6 +42,7 @@ public class FishingRod extends Tool {
 		FishingRod weapon = new FishingRod();
 		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
+		weapon.fishingRange = this.fishingRange;
 		return weapon;
 	}
 
@@ -237,6 +238,8 @@ public class FishingRod extends Tool {
 
 			// Fishing line
 			Color lineColor = new Color(lineDamage, 0, 0);
+			if (fisher == Level.player)
+				System.out.println("draw fishing line 1");
 			LineUtils.drawLine(lineColor, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
 
 			// Target direction (circle edge)
@@ -280,6 +283,8 @@ public class FishingRod extends Tool {
 			float x2 = fisher.fishingAnimation.x + fisher.fishingTarget.halfWidth;
 			float y2 = fisher.fishingAnimation.y + fisher.fishingTarget.halfHeight;
 
+			if (fisher == Level.player)
+				System.out.println("draw fishing line 2");
 			LineUtils.drawLine(Color.BLACK, fishingLineX1, fishingLineY1, x2, y2, 2);
 		}
 
@@ -288,6 +293,10 @@ public class FishingRod extends Tool {
 	public void drawLine(Actor fisher, float weaponPositionXInPixels, float weaponPositionYInPixels) {
 		// Fishing line
 		Color lineColor = new Color(lineDamage, 0, 0);
+
+		if (fisher == Level.player)
+			System.out.println("draw fishing line 3");
+
 		LineUtils.drawLine(lineColor, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
 	}
 
