@@ -1771,100 +1771,122 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public float getEffectiveSlashResistance() {
-		return slashResistance;
+		float result = slashResistance;
+		if (enhancement != null && enhancement.slashResistance != 0)
+			result += enhancement.slashResistance;
+		return result;
 	}
 
 	public String getEffectiveSlashResistanceTooltip() {
-
 		String result = name + " " + slashResistance;
-
 		if (enhancement != null && enhancement.slashResistance != 0)
 			result += " " + enhancement.enhancementName + " " + enhancement.slashResistance;
 		return result;
 	}
 
 	public float getEffectiveBluntResistance() {
-		return bluntResistance;
+		float result = bluntResistance;
+		if (enhancement != null && enhancement.bluntResistance != 0)
+			result += enhancement.bluntResistance;
+		return result;
 	}
 
 	public String getEffectiveBluntResistanceTooltip() {
-		if (enhancement != null)
-			return name + " " + bluntResistance + " + " + enhancement.enhancementName + " "
-					+ enhancement.bluntResistance;
-		return name + " " + bluntResistance;
+		String result = name + " " + bluntResistance;
+		if (enhancement != null && enhancement.bluntResistance != 0)
+			result += " " + enhancement.enhancementName + " " + enhancement.bluntResistance;
+		return result;
 	}
 
 	public float getEffectivePierceResistance() {
-		return pierceResistance;
+		float result = pierceResistance;
+		if (enhancement != null && enhancement.pierceResistance != 0)
+			result += enhancement.pierceResistance;
+		return result;
 	}
 
 	public String getEffectivePierceResistanceTooltip() {
-		if (enhancement != null)
-			return name + " " + pierceResistance + " + " + enhancement.enhancementName + " "
-					+ enhancement.pierceResistance;
-		return name + " " + pierceResistance;
+		String result = name + " " + pierceResistance;
+		if (enhancement != null && enhancement.pierceResistance != 0)
+			result += " " + enhancement.enhancementName + " " + enhancement.pierceResistance;
+		return result;
 	}
 
 	public float getEffectiveFireResistance() {
-		float res = fireResistance;
+		float result = fireResistance;
+		if (enhancement != null && enhancement.fireResistance != 0)
+			result += enhancement.fireResistance;
 		if (isWet()) {
-			res += 50;
+			result += 50;
 		}
 
-		if (res > 100)
-			res = 100;
+		if (result > 100)
+			result = 100;
 
-		return res;
+		return result;
 	}
 
 	public String getEffectiveFireResistanceTooltip() {
-		if (enhancement != null)
-			return name + " " + fireResistance + " + " + enhancement.enhancementName + " " + enhancement.fireResistance;
-		return name + " " + fireResistance;
+		String result = name + " " + fireResistance;
+		if (enhancement != null && enhancement.fireResistance != 0)
+			result += " " + enhancement.enhancementName + " " + enhancement.fireResistance;
+		return result;
 	}
 
 	public float getEffectiveWaterResistance() {
-		return waterResistance;
+		float result = waterResistance;
+		if (enhancement != null && enhancement.waterResistance != 0)
+			result += enhancement.waterResistance;
+		return result;
 	}
 
 	public String getEffectiveWaterResistanceTooltip() {
-		if (enhancement != null)
-			return name + " " + waterResistance + " + " + enhancement.enhancementName + " "
-					+ enhancement.waterResistance;
-		return name + " " + waterResistance;
+		String result = name + " " + waterResistance;
+		if (enhancement != null && enhancement.waterResistance != 0)
+			result += " " + enhancement.enhancementName + " " + enhancement.waterResistance;
+		return result;
 	}
 
 	public float getEffectiveElectricalResistance() {
-		return waterResistance;
+		float result = electricalResistance;
+		if (enhancement != null && enhancement.electricalResistance != 0)
+			result += enhancement.electricalResistance;
+		return result;
 	}
 
 	public String getEffectiveElectricalResistanceTooltip() {
-		if (enhancement != null)
-			return name + " " + electricalResistance + " + " + enhancement.enhancementName + " "
-					+ enhancement.electricalResistance;
-		return name + " " + electricalResistance;
+		String result = name + " " + electricalResistance;
+		if (enhancement != null && enhancement.electricalResistance != 0)
+			result += " " + enhancement.enhancementName + " " + enhancement.electricalResistance;
+		return result;
 	}
 
 	public float getEffectivePoisonResistance() {
-		return poisonResistance;
+		float result = poisonResistance;
+		if (enhancement != null && enhancement.poisonResistance != 0)
+			result += enhancement.poisonResistance;
+		return result;
 	}
 
 	public String getEffectivePoisonResistanceTooltip() {
-		if (enhancement != null)
-			return name + " " + poisonResistance + " + " + enhancement.enhancementName + " "
-					+ enhancement.poisonResistance;
-		return name + " " + poisonResistance;
+		String result = name + " " + poisonResistance;
+		if (enhancement != null && enhancement.poisonResistance != 0)
+			result += " " + enhancement.enhancementName + " " + enhancement.poisonResistance;
+		return result;
 	}
 
 	public float getEffectiveBleedResistance() {
-		return bleedResistance;
+		float result = bleedResistance;
+		if (enhancement != null && enhancement.bleedResistance != 0)
+			result += enhancement.bleedResistance;
+		return result;
 	}
 
 	public String getEffectiveBleedResistanceTooltip() {
-		if (enhancement != null)
-			return name + " " + bleedResistance + " + " + enhancement.enhancementName + " "
-					+ enhancement.bleedResistance;
-		return name + " " + bleedResistance;
+		String result = name + " " + bleedResistance;
+		if (enhancement != null && enhancement.bleedResistance != 0)
+			result += " " + enhancement.enhancementName + " " + enhancement.bleedResistance;
+		return result;
 	}
 
 	public boolean isWet() {
