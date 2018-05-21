@@ -19,30 +19,28 @@ public class Tooltip {
 	ArrayList<Object> text;
 
 	public Tooltip(LevelButton button, Object... text) {
-		// textWithColor = new StringWithColor(text, Color.BLACK);
 		this.text = new ArrayList<Object>(Arrays.asList(text));
-
-		// textWidth = Game.font.getWidth(text);
+		System.out.println("this.text.size() a = " + this.text.size());
 		this.levelButton = button;
-		dimensions = TextUtils.getDimensions(wrapWidth, this.text);
+		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
+		System.out.println("dimensions[0] a = " + dimensions[0]);
+		System.out.println("dimensions[1] a = " + dimensions[1]);
 	}
 
 	public Tooltip(Object[] text, LevelButton button) {
-		// textWithColor = new StringWithColor(text, Color.BLACK);
 		this.text = new ArrayList<Object>(Arrays.asList(text));
-
-		// textWidth = Game.font.getWidth(text);
+		System.out.println("this.text.size() b = " + this.text.size());
 		this.levelButton = button;
-		dimensions = TextUtils.getDimensions(wrapWidth, this.text);
+		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
 	}
 
 	public Tooltip(LevelButton button, ArrayList<Object> text) {
-		// textWithColor = new StringWithColor(text, Color.BLACK);
 		this.text = text;
-
-		// textWidth = Game.font.getWidth(text);
+		System.out.println("this.text.size() c = " + this.text.size());
 		this.levelButton = button;
-		dimensions = TextUtils.getDimensions(wrapWidth, this.text);
+		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
+		System.out.println("dimensions[0] a = " + dimensions[0]);
+		System.out.println("dimensions[1] a = " + dimensions[1]);
 	}
 
 	public void drawStaticUI() {
@@ -91,7 +89,7 @@ public class Tooltip {
 
 			QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
 
-			TextUtils.printTextWithImages(x1, y1, wrapWidth, true, null, this.text);
+			TextUtils.printTextWithImages(this.text, x1, y1, wrapWidth, true, null);
 
 		}
 	}
