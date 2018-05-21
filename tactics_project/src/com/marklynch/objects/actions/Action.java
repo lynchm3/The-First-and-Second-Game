@@ -133,7 +133,7 @@ public abstract class Action {
 		getGlobalImage("action_drop.png", false);
 		getGlobalImage("action_eat.png", false);
 		getGlobalImage("action_equip.png", false);
-		getGlobalImage("action_electric.png", false);
+		getGlobalImage("action_electrical.png", false);
 		getGlobalImage("action_fill_container.png", false);
 		textureFishing = getGlobalImage("action_fishing.png", false);
 		getGlobalImage("action_give.png", false);

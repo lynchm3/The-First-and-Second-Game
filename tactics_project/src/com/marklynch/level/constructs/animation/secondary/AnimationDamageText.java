@@ -70,7 +70,7 @@ public class AnimationDamageText extends Animation {
 		} else if (damageType == DAMAGE_TYPE.POISON) {
 			texture = ComparisonDisplay.imagePosion;
 		} else if (damageType == DAMAGE_TYPE.BLEEDING) {
-			texture = ComparisonDisplay.imageBleeding;
+			texture = ComparisonDisplay.imageBleed;
 		} else if (damageType == DAMAGE_TYPE.HEALING) {
 			texture = ComparisonDisplay.imageHealing;
 		}

@@ -9,12 +9,12 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class EffectBleeding extends Effect {
+public class EffectBleed extends Effect {
 
 	// Template id
 	public int templateId;
 
-	public EffectBleeding(GameObject source, GameObject target, int totalTurns) {
+	public EffectBleed(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " cut by ";
 		this.effectName = "Bleed";
 		this.source = source;
@@ -22,10 +22,10 @@ public class EffectBleeding extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_bleed.png", false);
-		this.bleedingDamage = 5;
+		this.bleedDamage = 5;
 	}
 
-	public EffectBleeding(int totalTurns) {
+	public EffectBleed(int totalTurns) {
 		this(null, null, totalTurns);
 	}
 
@@ -53,8 +53,7 @@ public class EffectBleeding extends Effect {
 	}
 
 	@Override
-	public EffectBleeding makeCopy(GameObject source, GameObject target) {
-		return new EffectBleeding(source, target, totalTurns);
+	public EffectBleed makeCopy(GameObject source, GameObject target) {
+		return new EffectBleed(source, target, totalTurns);
 	}
-
 }

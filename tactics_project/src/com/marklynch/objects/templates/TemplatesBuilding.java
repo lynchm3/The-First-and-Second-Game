@@ -34,9 +34,9 @@ public class TemplatesBuilding {
 		Templates.WALL.pierceResistance = 100;
 		Templates.WALL.fireResistance = 100;
 		Templates.WALL.waterResistance = 100;
-		Templates.WALL.electricResistance = 100;
+		Templates.WALL.electricalResistance = 100;
 		Templates.WALL.poisonResistance = 100;
-		Templates.WALL.bleedingResistance = 100;
+		Templates.WALL.bleedResistance = 100;
 
 		Templates.FENCE = new Fence();
 		Templates.FENCE.name = "Fence";

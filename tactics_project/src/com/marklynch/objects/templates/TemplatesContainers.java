@@ -23,7 +23,7 @@ public class TemplatesContainers {
 		Templates.CHEST.soundDampening = 1f;
 		Templates.CHEST.stackable = false;
 		Templates.CHEST.waterResistance = 0f;
-		Templates.CHEST.electricResistance = 0f;
+		Templates.CHEST.electricalResistance = 0f;
 		Templates.CHEST.poisonResistance = 0f;
 		Templates.CHEST.slashResistance = 0f;
 		Templates.CHEST.weight = 100f;
@@ -51,7 +51,7 @@ public class TemplatesContainers {
 		Templates.CRATE.floats = true;
 		Templates.CRATE.waterResistance = 0f;
 		Templates.CRATE.fireResistance = -50f;
-		Templates.CRATE.electricResistance = 0f;
+		Templates.CRATE.electricalResistance = 0f;
 		Templates.CRATE.poisonResistance = 0f;
 		Templates.CRATE.slashResistance = 0f;
 		Templates.CRATE.weight = 100f;

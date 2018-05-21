@@ -295,9 +295,9 @@ public class TemplatesNature {
 		Templates.VEIN.pierceResistance = 100;
 		Templates.VEIN.fireResistance = 100;
 		Templates.VEIN.waterResistance = 100;
-		Templates.VEIN.electricResistance = 100;
+		Templates.VEIN.electricalResistance = 100;
 		Templates.VEIN.poisonResistance = 100;
-		Templates.VEIN.bleedingResistance = 100;
+		Templates.VEIN.bleedResistance = 100;
 
 		// Food?
 		Templates.MEAT_CHUNK = new MeatChunk();
@@ -345,9 +345,9 @@ public class TemplatesNature {
 		Templates.WATER_BODY.pierceResistance = 100;
 		Templates.WATER_BODY.fireResistance = 100;
 		Templates.WATER_BODY.waterResistance = 100;
-		Templates.WATER_BODY.electricResistance = 100;
+		Templates.WATER_BODY.electricalResistance = 100;
 		Templates.WATER_BODY.poisonResistance = 100;
-		Templates.WATER_BODY.bleedingResistance = 100;
+		Templates.WATER_BODY.bleedResistance = 100;
 		Templates.WATER_BODY.textures.add(getGlobalImage(Templates.WATER_BODY.imageTexturePath, true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_2.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_3.png", true));

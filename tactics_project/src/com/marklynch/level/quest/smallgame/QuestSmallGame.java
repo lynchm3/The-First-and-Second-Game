@@ -442,7 +442,7 @@ public class QuestSmallGame extends Quest {
 		bestiaryKnowledge.pierceResistance = true;
 		bestiaryKnowledge.slashResistance = true;
 		bestiaryKnowledge.poisonResistance = true;
-		bestiaryKnowledge.electricResistance = true;
+		bestiaryKnowledge.electricalResistance = true;
 		bestiaryKnowledge.powers = true;
 
 		Actor wolf2 = Templates.WOLF.makeCopy("Wolf", Game.level.squares[128][11], Game.level.factions.wolves, null,
@@ -506,7 +506,7 @@ public class QuestSmallGame extends Quest {
 					bestiaryKnowledge.pierceResistance = true;
 					bestiaryKnowledge.slashResistance = true;
 					bestiaryKnowledge.poisonResistance = true;
-					bestiaryKnowledge.electricResistance = true;
+					bestiaryKnowledge.electricalResistance = true;
 
 				}
 			}

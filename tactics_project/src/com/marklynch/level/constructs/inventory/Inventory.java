@@ -1770,7 +1770,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					&& otherWeapon.fireDamage >= weapon.fireDamage
 					&& otherWeapon.electricalDamage >= weapon.electricalDamage
 					&& otherWeapon.poisonDamage >= weapon.poisonDamage
-					&& otherWeapon.bleedingDamage >= weapon.bleedingDamage && otherWeapon.healing >= weapon.healing
+					&& otherWeapon.bleedDamage >= weapon.bleedDamage && otherWeapon.healing >= weapon.healing
 					&& otherWeapon.maxRange >= weapon.maxRange && otherWeapon.minRange <= weapon.minRange) {
 				weapon.toSell = true;
 				itemsToSellCount++;
@@ -1793,9 +1793,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			if (armorOFSameTypeInInventory.fireResistance >= armor.fireResistance
 					&& armorOFSameTypeInInventory.waterResistance >= armor.waterResistance
-					&& armorOFSameTypeInInventory.electricResistance >= armor.electricResistance
+					&& armorOFSameTypeInInventory.electricalResistance >= armor.electricalResistance
 					&& armorOFSameTypeInInventory.poisonResistance >= armor.poisonResistance
-					&& armorOFSameTypeInInventory.bleedingResistance >= armor.bleedingResistance
+					&& armorOFSameTypeInInventory.bleedResistance >= armor.bleedResistance
 					&& armorOFSameTypeInInventory.pierceResistance >= armor.pierceResistance
 					&& armorOFSameTypeInInventory.bluntResistance >= armor.bluntResistance
 					&& armorOFSameTypeInInventory.slashResistance >= armor.slashResistance) {

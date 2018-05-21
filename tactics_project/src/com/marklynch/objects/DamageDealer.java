@@ -12,12 +12,30 @@ public interface DamageDealer {
 
 	float getEffectiveWaterDamage();
 
-	float getEffectiveElectricDamage();
+	float getEffectiveElectricalDamage();
 
 	float getEffectivePoisonDamage();
 
 	float getEffectiveHealing();
 
-	float getEffectiveBleedingDamage();
+	float getEffectiveBleedDamage();
+
+	String getEffectiveSlashDamageTooltip();
+
+	String getEffectiveBluntDamageTooltip();
+
+	String getEffectivePierceDamageTooltip();
+
+	String getEffectiveFireDamageTooltip();
+
+	String getEffectiveWaterDamageTooltip();
+
+	String getEffectiveElectricalDamageTooltip();
+
+	String getEffectivePoisonDamageTooltip();
+
+	String getEffectiveHealingTooltip();
+
+	String getEffectiveBleedDamageTooltip();
 
 }

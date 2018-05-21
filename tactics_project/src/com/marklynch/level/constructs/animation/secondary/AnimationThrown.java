@@ -8,7 +8,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectBleeding;
+import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
@@ -240,14 +240,14 @@ public class AnimationThrown extends Animation {
 							gameObject.removeBurningEffect();
 					}
 					if (gameObject instanceof Actor)
-						gameObject.addEffect(new EffectBleeding(shooter, targetGameObject, 5));
+						gameObject.addEffect(new EffectBleed(shooter, targetGameObject, 5));
 				}
 
 			}
 		}
 		for (GameObject gameObject : container.squareGameObjectIsOn.inventory.getGameObjects()) {
 			if (gameObject instanceof Actor)
-				gameObject.addEffect(new EffectBleeding(shooter, targetGameObject, 5));
+				gameObject.addEffect(new EffectBleed(shooter, targetGameObject, 5));
 
 		}
 

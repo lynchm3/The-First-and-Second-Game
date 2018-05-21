@@ -18,7 +18,7 @@ public abstract class Effect implements DamageDealer {
 	public float waterDamage = 0; // water/life
 	public float electricalDamage = 0; // lightning/light/electrical/speed
 	public float poisonDamage = 0;// poison/ground/contaminate/neutralize/slow/corruption
-	public float bleedingDamage = 0;
+	public float bleedDamage = 0;
 	public float healing = 0;
 
 	public String logString;
@@ -107,8 +107,18 @@ public abstract class Effect implements DamageDealer {
 	}
 
 	@Override
+	public String getEffectiveSlashDamageTooltip() {
+		return this.effectName + " " + slashDamage;
+	}
+
+	@Override
 	public float getEffectivePierceDamage() {
 		return pierceDamage;
+	}
+
+	@Override
+	public String getEffectivePierceDamageTooltip() {
+		return this.effectName + " " + pierceDamage;
 	}
 
 	@Override
@@ -117,8 +127,18 @@ public abstract class Effect implements DamageDealer {
 	}
 
 	@Override
+	public String getEffectiveBluntDamageTooltip() {
+		return this.effectName + " " + bluntDamage;
+	}
+
+	@Override
 	public float getEffectiveFireDamage() {
 		return fireDamage;
+	}
+
+	@Override
+	public String getEffectiveFireDamageTooltip() {
+		return this.effectName + " " + fireDamage;
 	}
 
 	@Override
@@ -127,8 +147,18 @@ public abstract class Effect implements DamageDealer {
 	}
 
 	@Override
-	public float getEffectiveElectricDamage() {
+	public String getEffectiveWaterDamageTooltip() {
+		return this.effectName + " " + waterDamage;
+	}
+
+	@Override
+	public float getEffectiveElectricalDamage() {
 		return electricalDamage;
+	}
+
+	@Override
+	public String getEffectiveElectricalDamageTooltip() {
+		return this.effectName + " " + electricalDamage;
 	}
 
 	@Override
@@ -137,12 +167,28 @@ public abstract class Effect implements DamageDealer {
 	}
 
 	@Override
-	public float getEffectiveBleedingDamage() {
+	public String getEffectivePoisonDamageTooltip() {
+		return this.effectName + " " + poisonDamage;
+	}
+
+	@Override
+	public float getEffectiveBleedDamage() {
 		return poisonDamage;
+	}
+
+	@Override
+	public String getEffectiveBleedDamageTooltip() {
+		return this.effectName + " " + poisonDamage;
 	}
 
 	@Override
 	public float getEffectiveHealing() {
 		return healing;
 	}
+
+	@Override
+	public String getEffectiveHealingTooltip() {
+		return this.effectName + " " + healing;
+	}
+
 }

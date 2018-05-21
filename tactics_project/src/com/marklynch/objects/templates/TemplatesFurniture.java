@@ -37,7 +37,7 @@ public class TemplatesFurniture {
 		Templates.BED.soundDampening = 1f;
 		Templates.BED.stackable = false;
 		Templates.BED.waterResistance = 0f;
-		Templates.BED.electricResistance = 0f;
+		Templates.BED.electricalResistance = 0f;
 		Templates.BED.poisonResistance = 0f;
 		Templates.BED.slashResistance = 0f;
 		Templates.BED.weight = 75f;

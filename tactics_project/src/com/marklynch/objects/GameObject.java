@@ -16,7 +16,7 @@ import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectBleeding;
+import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -145,9 +145,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float pierceResistance;
 	public float fireResistance;
 	public float waterResistance;
-	public float electricResistance;
+	public float electricalResistance;
 	public float poisonResistance;
-	public float bleedingResistance;
+	public float bleedResistance;
 
 	public float weight;
 
@@ -225,7 +225,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float waterDamage = 0; // water/life
 	public float electricalDamage = 0; // lightning/light/electrical/speed
 	public float poisonDamage = 0;// poison/ground/contaminate/neutralize/slow/corruption
-	public float bleedingDamage = 0;
+	public float bleedDamage = 0;
 	public float healing = 0;
 	public float minRange = 1;
 	public float maxRange = 1;
@@ -1585,7 +1585,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (remainingHealth <= 0 || !attackable)
 			return;
 
-		if (effectToAdd instanceof EffectBleeding && !(this instanceof Actor))
+		if (effectToAdd instanceof EffectBleed && !(this instanceof Actor))
 			return;
 
 		Effect effectToRemove = null;
@@ -1740,7 +1740,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.waterDamage = waterDamage;
 		gameObject.electricalDamage = electricalDamage;
 		gameObject.poisonDamage = poisonDamage;
-		gameObject.bleedingDamage = bleedingDamage;
+		gameObject.bleedDamage = bleedDamage;
 		gameObject.healing = healing;
 		gameObject.minRange = minRange;
 		gameObject.maxRange = maxRange;
@@ -1750,9 +1750,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.pierceResistance = pierceResistance;
 		gameObject.fireResistance = fireResistance;
 		gameObject.waterResistance = waterResistance;
-		gameObject.electricResistance = electricResistance;
+		gameObject.electricalResistance = electricalResistance;
 		gameObject.poisonResistance = poisonResistance;
-		gameObject.bleedingResistance = bleedingResistance;
+		gameObject.bleedResistance = bleedResistance;
 
 		gameObject.templateId = templateId;
 
@@ -1774,12 +1774,35 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return slashResistance;
 	}
 
+	public String getEffectiveSlashResistanceTooltip() {
+
+		String result = name + " " + slashResistance;
+
+		if (enhancement != null && enhancement.slashResistance != 0)
+			result += " " + enhancement.enhancementName + " " + enhancement.slashResistance;
+		return result;
+	}
+
 	public float getEffectiveBluntResistance() {
 		return bluntResistance;
 	}
 
+	public String getEffectiveBluntResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + bluntResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.bluntResistance;
+		return name + " " + bluntResistance;
+	}
+
 	public float getEffectivePierceResistance() {
 		return pierceResistance;
+	}
+
+	public String getEffectivePierceResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + pierceResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.pierceResistance;
+		return name + " " + pierceResistance;
 	}
 
 	public float getEffectiveFireResistance() {
@@ -1794,20 +1817,54 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return res;
 	}
 
+	public String getEffectiveFireResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + fireResistance + " + " + enhancement.enhancementName + " " + enhancement.fireResistance;
+		return name + " " + fireResistance;
+	}
+
 	public float getEffectiveWaterResistance() {
 		return waterResistance;
+	}
+
+	public String getEffectiveWaterResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + waterResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.waterResistance;
+		return name + " " + waterResistance;
+	}
+
+	public float getEffectiveElectricalResistance() {
+		return waterResistance;
+	}
+
+	public String getEffectiveElectricalResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + electricalResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.electricalResistance;
+		return name + " " + electricalResistance;
 	}
 
 	public float getEffectivePoisonResistance() {
 		return poisonResistance;
 	}
 
-	public float getEffectiveBleedingResistance() {
-		return bleedingResistance;
+	public String getEffectivePoisonResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + poisonResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.poisonResistance;
+		return name + " " + poisonResistance;
 	}
 
-	public float getEffectiveelectricResistance() {
-		return electricResistance;
+	public float getEffectiveBleedResistance() {
+		return bleedResistance;
+	}
+
+	public String getEffectiveBleedResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + bleedResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.bleedResistance;
+		return name + " " + bleedResistance;
 	}
 
 	public boolean isWet() {
@@ -1908,7 +1965,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_BLEEDING_DAMAGE) {
-			return Math.round(otherGameObject.bleedingDamage - this.bleedingDamage);
+			return Math.round(otherGameObject.bleedDamage - this.bleedDamage);
 
 		}
 
@@ -1941,10 +1998,24 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	@Override
+	public String getEffectiveSlashDamageTooltip() {
+		if (enhancement != null)
+			return name + " " + slashDamage + " + " + enhancement.enhancementName + " " + enhancement.slashDamage;
+		return name + " " + slashDamage;
+	}
+
+	@Override
 	public float getEffectivePierceDamage() {
 		if (enhancement != null)
 			return pierceDamage + enhancement.pierceDamage;
 		return pierceDamage;
+	}
+
+	@Override
+	public String getEffectivePierceDamageTooltip() {
+		if (enhancement != null)
+			return name + " " + pierceDamage + " + " + enhancement.enhancementName + " " + enhancement.pierceDamage;
+		return name + " " + pierceDamage;
 	}
 
 	@Override
@@ -1955,10 +2026,24 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	@Override
+	public String getEffectiveBluntDamageTooltip() {
+		if (enhancement != null)
+			return name + " " + bluntDamage + " + " + enhancement.enhancementName + " " + enhancement.bluntDamage;
+		return name + " " + bluntDamage;
+	}
+
+	@Override
 	public float getEffectiveFireDamage() {
 		if (enhancement != null)
 			return fireDamage + enhancement.fireDamage;
 		return fireDamage;
+	}
+
+	@Override
+	public String getEffectiveFireDamageTooltip() {
+		if (enhancement != null)
+			return name + " " + fireDamage + " + " + enhancement.enhancementName + " " + enhancement.fireDamage;
+		return name + " " + fireDamage;
 	}
 
 	@Override
@@ -1969,10 +2054,25 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	@Override
-	public float getEffectiveElectricDamage() {
+	public String getEffectiveWaterDamageTooltip() {
+		if (enhancement != null)
+			return name + " " + waterDamage + " + " + enhancement.enhancementName + " " + enhancement.waterDamage;
+		return name + " " + waterDamage;
+	}
+
+	@Override
+	public float getEffectiveElectricalDamage() {
 		if (enhancement != null)
 			return electricalDamage + enhancement.electricalDamage;
 		return electricalDamage;
+	}
+
+	@Override
+	public String getEffectiveElectricalDamageTooltip() {
+		if (enhancement != null)
+			return name + " " + electricalDamage + " + " + enhancement.enhancementName + " "
+					+ enhancement.electricalDamage;
+		return name + " " + electricalDamage;
 	}
 
 	@Override
@@ -1983,10 +2083,24 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	@Override
-	public float getEffectiveBleedingDamage() {
+	public String getEffectivePoisonDamageTooltip() {
 		if (enhancement != null)
-			return bleedingDamage + enhancement.bleedingDamage;
-		return bleedingDamage;
+			return name + " " + poisonDamage + " + " + enhancement.enhancementName + " " + enhancement.poisonDamage;
+		return name + " " + poisonDamage;
+	}
+
+	@Override
+	public float getEffectiveBleedDamage() {
+		if (enhancement != null)
+			return bleedDamage + enhancement.bleedDamage;
+		return bleedDamage;
+	}
+
+	@Override
+	public String getEffectiveBleedDamageTooltip() {
+		if (enhancement != null)
+			return name + " " + bleedDamage + " + " + enhancement.enhancementName + " " + enhancement.bleedDamage;
+		return name + " " + bleedDamage;
 	}
 
 	@Override
@@ -1994,6 +2108,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (enhancement != null)
 			return healing + enhancement.healing;
 		return healing;
+	}
+
+	@Override
+	public String getEffectiveHealingTooltip() {
+		if (enhancement != null)
+			return name + " " + healing + " + " + enhancement.enhancementName + " " + enhancement.healing;
+		return name + " " + healing;
 	}
 
 	public float getEffectiveMinRange() {
@@ -2004,9 +2125,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return maxRange;
 	}
 
-	public float getTotalDamage() {
+	protected float getTotalDamage() {
 		return slashDamage + pierceDamage + bluntDamage + fireDamage + waterDamage + electricalDamage + poisonDamage
-				+ bleedingDamage;
+				+ bleedDamage;
 	}
 
 	// public float getTotalEffectiveDamage() {
@@ -2168,13 +2289,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			offsetY += 48;
 		}
 
-		// Electric
-		if (damageDealer.getEffectiveElectricDamage() != 0) {
+		// Electrical
+		if (damageDealer.getEffectiveElectricalDamage() != 0) {
 
-			float resistance = (this.getEffectiveelectricResistance() / 100);
-			float resistedDamage = damageDealer.getEffectiveElectricDamage() * resistance;
-			float dmg = damageDealer.getEffectiveElectricDamage() - resistedDamage;
-			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.ELECTRIC, this.getEffectiveelectricResistance());
+			float resistance = (this.getEffectiveElectricalResistance() / 100);
+			float resistedDamage = damageDealer.getEffectiveElectricalDamage() * resistance;
+			float dmg = damageDealer.getEffectiveElectricalDamage() - resistedDamage;
+			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.ELECTRIC, this.getEffectiveElectricalResistance());
 			remainingHealth -= dmg;
 			totalDamage += dmg;
 			if (dmg > 0)
@@ -2182,11 +2303,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			// Update bestiary
 			if (Game.level.shouldLog(this))
-				Game.level.bestiaryKnowledgeCollection.get(this.templateId).electricResistance = true;
+				Game.level.bestiaryKnowledgeCollection.get(this.templateId).electricalResistance = true;
 
 			if (gameObjectAttacker != null)
 				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).electricDamage = true;
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).electricalDamage = true;
 
 			offsetY += 48;
 		}
@@ -2214,13 +2335,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			offsetY += 48;
 		}
 
-		// Bleeding
-		if (damageDealer.getEffectiveBleedingDamage() != 0) {
+		// Bleed
+		if (damageDealer.getEffectiveBleedDamage() != 0) {
 
-			float resistance = (this.getEffectiveBleedingResistance() / 100);
-			float resistedDamage = damageDealer.getEffectiveBleedingDamage() * resistance;
-			float dmg = damageDealer.getEffectiveBleedingDamage() - resistedDamage;
-			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.BLEEDING, this.getEffectiveBleedingResistance());
+			float resistance = (this.getEffectiveBleedResistance() / 100);
+			float resistedDamage = damageDealer.getEffectiveBleedDamage() * resistance;
+			float dmg = damageDealer.getEffectiveBleedDamage() - resistedDamage;
+			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.BLEEDING, this.getEffectiveBleedResistance());
 			remainingHealth -= dmg;
 			totalDamage += dmg;
 			if (dmg > 0)
@@ -2228,11 +2349,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			// Update bestiary
 			if (Game.level.shouldLog(this))
-				Game.level.bestiaryKnowledgeCollection.get(this.templateId).bleedingResistance = true;
+				Game.level.bestiaryKnowledgeCollection.get(this.templateId).bleedResistance = true;
 
 			if (gameObjectAttacker != null)
 				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).bleedingDamage = true;
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).bleedDamage = true;
 
 			offsetY += 48;
 		}

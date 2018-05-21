@@ -462,18 +462,18 @@ public class PinWindow implements Draggable {
 
 		}
 
-		// Electric resistance
+		// Electrical resistance
 
-		TextureUtils.drawTexture(getGlobalImage("action_electric.png", false), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_electrical.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 210, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 210 + 20);
-		if (bestiaryKnowledge.electricResistance) {
+		if (bestiaryKnowledge.electricalResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 210,
-					width - 40, false, null, "Electric ", "" + gameObject.electricResistance);
+					width - 40, false, null, "Electrical ", "" + gameObject.electricalResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 210,
-					width - 40, false, null, "Electric ", unknownStats);
+					width - 40, false, null, "Electrical ", unknownStats);
 
 		}
 
@@ -491,7 +491,7 @@ public class PinWindow implements Draggable {
 
 		}
 
-		// Bleeding resistance
+		// Bleed resistance
 		TextureUtils.drawTexture(getGlobalImage("effect_bleed.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 270, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 270 + 20);

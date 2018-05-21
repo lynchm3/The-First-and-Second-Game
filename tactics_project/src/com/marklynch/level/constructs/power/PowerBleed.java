@@ -4,7 +4,7 @@ import org.lwjgl.util.Point;
 
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectBleeding;
+import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.ResourceUtils;
 
@@ -14,7 +14,7 @@ public class PowerBleed extends Power {
 
 	public PowerBleed(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("effect_bleed.png", false), source,
-				new Effect[] { new EffectBleeding(source, null, 3) }, 5, new Point[] { new Point(0, 0) }, 10, true,
+				new Effect[] { new EffectBleed(source, null, 3) }, 5, new Point[] { new Point(0, 0) }, 10, true,
 				true, Crime.TYPE.CRIME_ASSAULT);
 	}
 }

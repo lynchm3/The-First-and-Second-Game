@@ -357,7 +357,7 @@ public class Notes {
 	 * Highlight an enemies weaknesses when looking at their stats. SEVERE
 	 * WEAKNESS TO FIRE
 	 * 
-	 * OOOO... elemental shit weakness to fire/electricity/shit
+	 * OOOO... elemental shit weakness to fire/electricality/shit
 	 * 
 	 * Bosses need weaknesses too, otherwise all ur concentration on weaknesses
 	 * is bullcrap
@@ -608,7 +608,7 @@ public class Notes {
 	 * 
 	 * 
 	 * Enviromental shit, like setting things on fire, or powering shit up w/
-	 * electricity like in dragon run, where if u have the right person with the
+	 * electricality like in dragon run, where if u have the right person with the
 	 * right ability you can do things u otherwise couldnt...
 	 * 
 	 * Always show health of playas

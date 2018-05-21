@@ -26,7 +26,7 @@ public class TemplatesEntrances {
 		Templates.WEAK_WOODEN_DOOR.soundDampening = 1f;
 		Templates.WEAK_WOODEN_DOOR.stackable = false;
 		Templates.WEAK_WOODEN_DOOR.waterResistance = 0f;
-		Templates.WEAK_WOODEN_DOOR.electricResistance = 0f;
+		Templates.WEAK_WOODEN_DOOR.electricalResistance = 0f;
 		Templates.WEAK_WOODEN_DOOR.poisonResistance = 0f;
 		Templates.WEAK_WOODEN_DOOR.slashResistance = 0f;
 		Templates.WEAK_WOODEN_DOOR.weight = 80f;
@@ -53,7 +53,7 @@ public class TemplatesEntrances {
 		Templates.DOOR.soundDampening = 1f;
 		Templates.DOOR.stackable = false;
 		Templates.DOOR.waterResistance = 0f;
-		Templates.DOOR.electricResistance = 0f;
+		Templates.DOOR.electricalResistance = 0f;
 		Templates.DOOR.poisonResistance = 0f;
 		Templates.DOOR.slashResistance = 0f;
 		Templates.DOOR.weight = 80f;
@@ -80,7 +80,7 @@ public class TemplatesEntrances {
 		Templates.GATE.soundDampening = 1f;
 		Templates.GATE.stackable = false;
 		Templates.GATE.waterResistance = 0f;
-		Templates.GATE.electricResistance = 0f;
+		Templates.GATE.electricalResistance = 0f;
 		Templates.GATE.poisonResistance = 0f;
 		Templates.GATE.slashResistance = 0f;
 		Templates.GATE.weight = 80f;
@@ -106,7 +106,7 @@ public class TemplatesEntrances {
 		Templates.FALSE_WALL.soundDampeningWhenClosed = 5;
 		Templates.FALSE_WALL.stackable = false;
 		Templates.FALSE_WALL.waterResistance = 0f;
-		Templates.FALSE_WALL.electricResistance = 0f;
+		Templates.FALSE_WALL.electricalResistance = 0f;
 		Templates.FALSE_WALL.poisonResistance = 0f;
 		Templates.FALSE_WALL.slashResistance = 0f;
 		Templates.FALSE_WALL.weight = 200f;

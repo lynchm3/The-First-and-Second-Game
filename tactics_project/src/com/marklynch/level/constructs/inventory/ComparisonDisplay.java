@@ -55,7 +55,7 @@ public class ComparisonDisplay {
 	public static Texture imageWater;
 	public static Texture imageElectrical;
 	public static Texture imagePosion;
-	public static Texture imageBleeding;
+	public static Texture imageBleed;
 	public static Texture imageHealing;
 	public static Texture imageRange;
 	public static Texture imageWeight;
@@ -71,9 +71,9 @@ public class ComparisonDisplay {
 		imageBlunt = getGlobalImage("action_blunt.png", false);
 		imageFire = getGlobalImage("action_burn.png", false);
 		imageWater = getGlobalImage("action_douse.png", false);
-		imageElectrical = getGlobalImage("action_electric.png", false);
+		imageElectrical = getGlobalImage("action_electrical.png", false);
 		imagePosion = getGlobalImage("action_poison.png", false);
-		imageBleeding = getGlobalImage("effect_bleed.png", false);
+		imageBleed = getGlobalImage("effect_bleed.png", false);
 		imageHealing = getGlobalImage("action_heal.png", false);
 		imageRange = getGlobalImage("range.png", false);
 		imageWeight = getGlobalImage("weight.png", false);
@@ -316,15 +316,15 @@ public class ComparisonDisplay {
 			currentY += fieldHeight;
 		}
 
-		// Bleeding
-		float equippedBleedingDamage = 0;
+		// Bleed
+		float equippedBleedDamage = 0;
 		if (gameObject1 != null)
-			equippedBleedingDamage = gameObject1.bleedingDamage;
-		if (equippedBleedingDamage != 0 || gameObject2.bleedingDamage != 0) {
-			if (equippedBleedingDamage == gameObject2.bleedingDamage) {
+			equippedBleedDamage = gameObject1.bleedDamage;
+		if (equippedBleedDamage != 0 || gameObject2.bleedDamage != 0) {
+			if (equippedBleedDamage == gameObject2.bleedDamage) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedBleedingDamage < gameObject2.bleedingDamage) {
+			} else if (equippedBleedDamage < gameObject2.bleedDamage) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -332,11 +332,11 @@ public class ComparisonDisplay {
 				color2 = Color.RED;
 			}
 
-			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedBleedingDamage),
+			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedBleedDamage),
 					currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + equippedBleedingDamage, color1) });
+					new Object[] { new StringWithColor("" + equippedBleedDamage, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.bleedingDamage, color2) });
+					new Object[] { new StringWithColor("" + gameObject2.bleedDamage, color2) });
 			TextureUtils.drawTexture(imagePosion, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}

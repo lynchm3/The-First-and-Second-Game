@@ -44,7 +44,7 @@ public class TemplatesTools {
 		Templates.BROOM.stackable = false;
 		Templates.BROOM.fireResistance = -50f;
 		Templates.BROOM.waterResistance = 0f;
-		Templates.BROOM.electricResistance = 0f;
+		Templates.BROOM.electricalResistance = 0f;
 		Templates.BROOM.poisonResistance = 0f;
 		Templates.BROOM.slashResistance = 0f;
 		Templates.BROOM.weight = 15;

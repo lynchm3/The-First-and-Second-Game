@@ -24,9 +24,9 @@ public class BestiaryKnowledge {
 	public boolean pierceResistance;
 	public boolean fireResistance;
 	public boolean waterResistance;
-	public boolean electricResistance;
+	public boolean electricalResistance;
 	public boolean poisonResistance;
-	public boolean bleedingResistance;
+	public boolean bleedResistance;
 
 	// Damage
 	public boolean slashDamage;
@@ -34,9 +34,9 @@ public class BestiaryKnowledge {
 	public boolean pierceDamage;
 	public boolean fireDamage;
 	public boolean waterDamage;
-	public boolean electricDamage;
+	public boolean electricalDamage;
 	public boolean poisonDamage;
-	public boolean bleedingDamage;
+	public boolean bleedDamage;
 	public boolean healing;
 	public boolean range;
 

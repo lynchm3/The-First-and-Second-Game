@@ -7,7 +7,7 @@ import com.marklynch.utils.Texture;
 
 public abstract class Enhancement {
 
-	public String enchantmentName;
+	public String enhancementName = "Enhancement";
 	public Texture imageTexture;
 	public float slashDamage = 0;
 	public float pierceDamage = 0;
@@ -16,8 +16,17 @@ public abstract class Enhancement {
 	public float waterDamage = 0;
 	public float electricalDamage = 0;
 	public float poisonDamage = 0;
-	public float bleedingDamage = 0;
+	public float bleedDamage = 0;
 	public float healing = 0;
+
+	public float slashResistance = 0;
+	public float pierceResistance = 0;
+	public float bluntResistance = 0;
+	public float fireResistance = 0;
+	public float waterResistance = 0;
+	public float electricalResistance = 0;
+	public float poisonResistance = 0;
+	public float bleedResistance = 0;
 
 	public Effect[] effect = {};
 

@@ -122,9 +122,9 @@ public class Player extends Human {
 		bestiaryKnowledge.pierceDamage = true;
 		bestiaryKnowledge.fireDamage = true;
 		bestiaryKnowledge.waterDamage = true;
-		bestiaryKnowledge.electricDamage = true;
+		bestiaryKnowledge.electricalDamage = true;
 		bestiaryKnowledge.poisonDamage = true;
-		bestiaryKnowledge.bleedingDamage = true;
+		bestiaryKnowledge.bleedDamage = true;
 		bestiaryKnowledge.range = true;
 
 		// Resistances
@@ -133,7 +133,7 @@ public class Player extends Human {
 		bestiaryKnowledge.pierceResistance = true;
 		bestiaryKnowledge.fireResistance = true;
 		bestiaryKnowledge.waterResistance = true;
-		bestiaryKnowledge.electricResistance = true;
+		bestiaryKnowledge.electricalResistance = true;
 		bestiaryKnowledge.poisonResistance = true;
 
 		// Powers

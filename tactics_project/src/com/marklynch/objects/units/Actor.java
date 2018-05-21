@@ -2343,4 +2343,285 @@ public class Actor extends GameObject {
 			actor.aiRoutine = aiRoutine.getInstance(actor);
 		actor.init(gold, mustHaves, mightHaves);
 	}
+
+	@Override
+	public float getEffectiveSlashDamage() {
+		if (equipped != null)
+			return equipped.getEffectiveSlashDamage();
+		else
+			return this.slashDamage;
+	}
+
+	@Override
+	public String getEffectiveSlashDamageTooltip() {
+		if (equipped != null)
+			return "(" + equipped.getEffectiveSlashDamageTooltip() + ")";
+		else
+			return "(" + "Unarmed - " + this.slashDamage + ")";
+	}
+
+	@Override
+	public float getEffectiveBluntDamage() {
+		if (equipped != null)
+			return equipped.getEffectiveBluntDamage();
+		else
+			return this.bluntDamage;
+	}
+
+	@Override
+	public String getEffectiveBluntDamageTooltip() {
+		if (equipped != null)
+			return "(" + equipped.getEffectiveBluntDamageTooltip() + ")";
+		else
+			return "(" + "Unarmed - " + this.bluntDamage + ")";
+	}
+
+	@Override
+	public float getEffectivePierceDamage() {
+		if (equipped != null)
+			return equipped.getEffectivePierceDamage();
+		else
+			return this.pierceDamage;
+	}
+
+	@Override
+	public String getEffectivePierceDamageTooltip() {
+		if (equipped != null)
+			return "(" + equipped.getEffectivePierceDamageTooltip() + ")";
+		else
+			return "(" + "Unarmed - " + this.pierceDamage + ")";
+	}
+
+	@Override
+	public float getEffectiveFireDamage() {
+		if (equipped != null)
+			return equipped.getEffectiveFireDamage();
+		else
+			return this.fireDamage;
+	}
+
+	@Override
+	public String getEffectiveFireDamageTooltip() {
+		if (equipped != null)
+			return "(" + equipped.getEffectiveFireDamageTooltip() + ")";
+		else
+			return "(" + "Unarmed - " + this.fireDamage + ")";
+	}
+
+	@Override
+	public float getEffectiveWaterDamage() {
+		if (equipped != null)
+			return equipped.getEffectiveWaterDamage();
+		else
+			return this.waterDamage;
+	}
+
+	@Override
+	public String getEffectiveWaterDamageTooltip() {
+		if (equipped != null)
+			return "(" + equipped.getEffectiveWaterDamageTooltip() + ")";
+		else
+			return "(" + "Unarmed - " + this.waterDamage + ")";
+	}
+
+	@Override
+	public float getEffectiveElectricalDamage() {
+		if (equipped != null)
+			return equipped.getEffectiveElectricalDamage();
+		else
+			return this.electricalDamage;
+	}
+
+	@Override
+	public String getEffectiveElectricalDamageTooltip() {
+		if (equipped != null)
+			return "(" + equipped.getEffectiveElectricalDamageTooltip() + ")";
+		else
+			return "(" + "Unarmed - " + this.electricalDamage + ")";
+	}
+
+	@Override
+	public float getEffectivePoisonDamage() {
+		if (equipped != null)
+			return equipped.getEffectivePoisonDamage();
+		else
+			return this.poisonDamage;
+	}
+
+	@Override
+	public String getEffectivePoisonDamageTooltip() {
+		if (equipped != null)
+			return "(" + equipped.getEffectivePoisonDamageTooltip() + ")";
+		else
+			return "(" + "Unarmed - " + this.poisonDamage + ")";
+	}
+
+	@Override
+	public float getEffectiveBleedDamage() {
+		if (equipped != null)
+			return equipped.getEffectiveBleedDamage();
+		else
+			return this.bleedDamage;
+	}
+
+	@Override
+	public String getEffectiveBleedDamageTooltip() {
+		if (equipped != null)
+			return "(" + equipped.getEffectiveBleedDamageTooltip() + ")";
+		else
+			return "(" + "Unarmed - " + this.bleedDamage + ")";
+	}
+
+	@Override
+	public float getEffectiveHealing() {
+		if (equipped != null)
+			return equipped.getEffectiveHealing();
+		else
+			return this.healing;
+	}
+
+	@Override
+	public String getEffectiveHealingTooltip() {
+		if (equipped != null)
+			return "(" + equipped.getEffectiveHealingTooltip() + ")";
+		else
+			return "(" + "Unarmed - " + this.healing + ")";
+	}
+
+	@Override
+	public float getEffectiveSlashResistance() {
+
+		float result = this.slashResistance;
+		if (equipped != null && equipped.getEffectiveSlashResistance() != 0) {
+			result += equipped.getEffectiveSlashResistance();
+		}
+		if (helmet != null && helmet.getEffectiveSlashResistance() != 0) {
+			result += helmet.getEffectiveSlashResistance();
+		}
+		if (bodyArmor != null && bodyArmor.getEffectiveSlashResistance() != 0) {
+			result += bodyArmor.getEffectiveSlashResistance();
+		}
+		if (legArmor != null && legArmor.getEffectiveSlashResistance() != 0) {
+			result += legArmor.getEffectiveSlashResistance();
+		}
+
+		return result;
+	}
+
+	@Override
+	public String getEffectiveSlashResistanceTooltip() {
+		String result = "(Inherent " + this.slashResistance;
+		if (equipped != null && equipped.getEffectiveSlashResistance() != 0) {
+			result += " + " + equipped.getEffectiveSlashResistanceTooltip();
+		}
+		if (helmet != null && helmet.getEffectiveSlashResistance() != 0) {
+			result += " + " + helmet.getEffectiveSlashResistanceTooltip();
+		}
+		if (bodyArmor != null && bodyArmor.getEffectiveSlashResistance() != 0) {
+			result += " + " + bodyArmor.getEffectiveSlashResistanceTooltip();
+		}
+		if (legArmor != null && legArmor.getEffectiveSlashResistance() != 0) {
+			result += " + " + legArmor.getEffectiveSlashResistanceTooltip();
+		}
+		result += ")";
+		return result;
+	}
+
+	@Override
+	public float getEffectiveBluntResistance() {
+		return bluntResistance;
+	}
+
+	@Override
+	public String getEffectiveBluntResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + bluntResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.bluntResistance;
+		return name + " " + bluntResistance;
+	}
+
+	@Override
+	public float getEffectivePierceResistance() {
+		return pierceResistance;
+	}
+
+	@Override
+	public String getEffectivePierceResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + pierceResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.pierceResistance;
+		return name + " " + pierceResistance;
+	}
+
+	@Override
+	public float getEffectiveFireResistance() {
+		float res = fireResistance;
+		if (isWet()) {
+			res += 50;
+		}
+
+		if (res > 100)
+			res = 100;
+
+		return res;
+	}
+
+	@Override
+	public String getEffectiveFireResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + fireResistance + " + " + enhancement.enhancementName + " " + enhancement.fireResistance;
+		return name + " " + fireResistance;
+	}
+
+	@Override
+	public float getEffectiveWaterResistance() {
+		return waterResistance;
+	}
+
+	@Override
+	public String getEffectiveWaterResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + waterResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.waterResistance;
+		return name + " " + waterResistance;
+	}
+
+	@Override
+	public float getEffectiveElectricalResistance() {
+		return waterResistance;
+	}
+
+	@Override
+	public String getEffectiveElectricalResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + electricalResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.electricalResistance;
+		return name + " " + electricalResistance;
+	}
+
+	@Override
+	public float getEffectivePoisonResistance() {
+		return poisonResistance;
+	}
+
+	@Override
+	public String getEffectivePoisonResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + poisonResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.poisonResistance;
+		return name + " " + poisonResistance;
+	}
+
+	@Override
+	public float getEffectiveBleedResistance() {
+		return bleedResistance;
+	}
+
+	@Override
+	public String getEffectiveBleedResistanceTooltip() {
+		if (enhancement != null)
+			return name + " " + bleedResistance + " + " + enhancement.enhancementName + " "
+					+ enhancement.bleedResistance;
+		return name + " " + bleedResistance;
+	}
 }

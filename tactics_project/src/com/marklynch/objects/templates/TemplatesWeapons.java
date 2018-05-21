@@ -30,7 +30,7 @@ public class TemplatesWeapons {
 		Templates.KATANA.soundDampening = 1f;
 		Templates.KATANA.stackable = false;
 		Templates.KATANA.waterResistance = 0f;
-		Templates.KATANA.electricResistance = 0f;
+		Templates.KATANA.electricalResistance = 0f;
 		Templates.KATANA.poisonResistance = 0f;
 		Templates.KATANA.slashResistance = 0f;
 		Templates.KATANA.weight = 15;
@@ -100,6 +100,7 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.value = 54;
 		Templates.HUNTING_BOW.anchorX = 64;
 		Templates.HUNTING_BOW.anchorY = 112;
+		Templates.HUNTING_BOW.slashResistance = 1;
 		Templates.HUNTING_BOW.templateId = GameObject.generateNewTemplateId();
 	}
 
