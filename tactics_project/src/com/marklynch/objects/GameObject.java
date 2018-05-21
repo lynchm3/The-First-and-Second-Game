@@ -1777,10 +1777,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return result;
 	}
 
-	public String getEffectiveSlashResistanceTooltip() {
-		String result = name + " " + slashResistance;
+	public ArrayList<Object> getEffectiveSlashResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add(name + " " + slashResistance);
 		if (enhancement != null && enhancement.slashResistance != 0)
-			result += " " + enhancement.enhancementName + " " + enhancement.slashResistance;
+			result.add(" " + enhancement.enhancementName + " " + enhancement.slashResistance);
 		return result;
 	}
 

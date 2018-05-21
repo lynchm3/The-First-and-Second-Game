@@ -2509,21 +2509,26 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public String getEffectiveSlashResistanceTooltip() {
-		String result = "(Inherent " + this.slashResistance;
+	public ArrayList<Object> getEffectiveSlashResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+
+		result.add("(Inherent " + this.slashResistance);
 		if (equipped != null && equipped.getEffectiveSlashResistance() != 0) {
-			result += " + " + equipped.getEffectiveSlashResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(equipped.getEffectiveSlashResistanceTooltip());
 		}
 		if (helmet != null && helmet.getEffectiveSlashResistance() != 0) {
-			result += " + " + helmet.getEffectiveSlashResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(helmet.getEffectiveSlashResistanceTooltip());
 		}
 		if (bodyArmor != null && bodyArmor.getEffectiveSlashResistance() != 0) {
-			result += " + " + bodyArmor.getEffectiveSlashResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(bodyArmor.getEffectiveSlashResistanceTooltip());
 		}
 		if (legArmor != null && legArmor.getEffectiveSlashResistance() != 0) {
-			result += " + " + legArmor.getEffectiveSlashResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(legArmor.getEffectiveSlashResistanceTooltip());
 		}
-		result += ")";
 		return result;
 	}
 

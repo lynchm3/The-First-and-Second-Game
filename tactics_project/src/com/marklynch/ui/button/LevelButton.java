@@ -1,5 +1,7 @@
 package com.marklynch.ui.button;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
@@ -28,7 +30,7 @@ public class LevelButton extends Button {
 		this.textParts = new Object[] { new StringWithColor(text, textColor) };
 
 		if (tooltipText != null)
-			this.tooltip = new Tooltip(tooltipText, this);
+			this.tooltip = new Tooltip(this, tooltipText);
 
 		realX = x;
 		if (this.xFromLeft == false)
@@ -107,10 +109,17 @@ public class LevelButton extends Button {
 
 	}
 
-	public void setTooltipText(String tooltipText) {
+	public void setTooltipText(Object... tooltipText) {
 
 		if (tooltipText != null)
-			this.tooltip = new Tooltip(tooltipText, this);
+			this.tooltip = new Tooltip(this, tooltipText);
+
+	}
+
+	public void setTooltipText(ArrayList<Object> tooltipText) {
+
+		if (tooltipText != null)
+			this.tooltip = new Tooltip(this, tooltipText);
 
 	}
 
