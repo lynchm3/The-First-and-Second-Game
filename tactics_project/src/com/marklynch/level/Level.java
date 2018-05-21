@@ -1696,7 +1696,7 @@ public class Level {
 		}
 
 		if (characterScreen.showing) {
-			for (Button button : characterScreen.tabButtons) {
+			for (Button button : characterScreen.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}

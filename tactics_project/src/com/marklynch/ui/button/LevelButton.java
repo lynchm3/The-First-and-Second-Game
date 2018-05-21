@@ -1,11 +1,10 @@
 package com.marklynch.ui.button;
 
 import com.marklynch.Game;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-
-import com.marklynch.utils.Color;
 
 public class LevelButton extends Button {
 
@@ -105,6 +104,13 @@ public class LevelButton extends Button {
 		realY = y;
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
+
+	}
+
+	public void setTooltipText(String tooltipText) {
+
+		if (tooltipText != null)
+			this.tooltip = new Tooltip(tooltipText, this);
 
 	}
 

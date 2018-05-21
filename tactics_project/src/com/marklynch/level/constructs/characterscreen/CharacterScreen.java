@@ -22,6 +22,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 		STATS, SKILLS
 	};
 
+	// High level stats
 	public static String HEALTH = "HEALTH";
 	public static String STRENGTH = "STRENGTH";
 	public static String DEXTERITY = "DEXTERITY";
@@ -33,14 +34,15 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static StringWithColor INTELLIGENCE_WHITE = new StringWithColor(INTELLIGENCE, Color.WHITE);
 	public static StringWithColor ENDURANCE_WHITE = new StringWithColor(ENDURANCE, Color.WHITE);
 
+	// DMG and Healing
 	public static String SLASH_DAMAGE = "SLASH DAMAGE";
 	public static String BLUNT_DAMAGE = "BLUNT DAMAGE";
 	public static String PIERCE_DAMAGE = "PIERCE DAMAGE";
 	public static String FIRE_DAMAGE = "FIRE DAMAGE";
 	public static String WATER_DAMAGE = "WATER DAMAGE";
 	public static String ELECTRICAL_DAMAGE = "ELECTRICAL DAMAGE";
-	public static String POSION_DAMAGE = "POSION DAMAGE";
-	public static String BLEEDING_DAMAGE = "BLEEDING DAMAGE";
+	public static String POISON_DAMAGE = "POISON DAMAGE";
+	public static String BLEED_DAMAGE = "BLEED DAMAGE";
 	public static String HEALING = "HEALING";
 	public static StringWithColor SLASH_DAMAGE_WHITE = new StringWithColor(SLASH_DAMAGE, Color.WHITE);
 	public static StringWithColor BLUNT_DAMAGE_WHITE = new StringWithColor(BLUNT_DAMAGE, Color.WHITE);
@@ -48,26 +50,50 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static StringWithColor FIRE_DAMAGE_WHITE = new StringWithColor(FIRE_DAMAGE, Color.WHITE);
 	public static StringWithColor WATER_DAMAGE_WHITE = new StringWithColor(WATER_DAMAGE, Color.WHITE);
 	public static StringWithColor ELECTRICAL_DAMAGE_WHITE = new StringWithColor(ELECTRICAL_DAMAGE, Color.WHITE);
-	public static StringWithColor POSION_DAMAGE_WHITE = new StringWithColor(POSION_DAMAGE, Color.WHITE);
-	public static StringWithColor BLEEDING_DAMAGE_WHITE = new StringWithColor(BLEEDING_DAMAGE, Color.WHITE);
+	public static StringWithColor POISON_DAMAGE_WHITE = new StringWithColor(POISON_DAMAGE, Color.WHITE);
+	public static StringWithColor BLEED_DAMAGE_WHITE = new StringWithColor(BLEED_DAMAGE, Color.WHITE);
 	public static StringWithColor HEALING_WHITE = new StringWithColor(HEALING, Color.WHITE);
 
+	// Resistances
 	public static String SLASH_RESISTANCE = "SLASH RESISTANCE";
 	public static String BLUNT_RESISTANCE = "BLUNT RESISTANCE";
 	public static String PIERCE_RESISTANCE = "PIERCE RESISTANCE";
 	public static String FIRE_RESISTANCE = "FIRE RESISTANCE";
 	public static String WATER_RESISTANCE = "WATER RESISTANCE";
 	public static String ELECTRICAL_RESISTANCE = "ELECTRICAL RESISTANCE";
-	public static String POSION_RESISTANCE = "POSION RESISTANCE";
-	public static String BLEEDING_RESISTANCE = "BLEEDING RESISTANCE";
+	public static String POISON_RESISTANCE = "POSION RESISTANCE";
+	public static String BLEED_RESISTANCE = "BLEEDING RESISTANCE";
 	public static StringWithColor SLASH_RESISTANCE_WHITE = new StringWithColor(SLASH_RESISTANCE, Color.WHITE);
 	public static StringWithColor BLUNT_RESISTANCE_WHITE = new StringWithColor(BLUNT_RESISTANCE, Color.WHITE);
 	public static StringWithColor PIERCE_RESISTANCE_WHITE = new StringWithColor(PIERCE_RESISTANCE, Color.WHITE);
 	public static StringWithColor FIRE_RESISTANCE_WHITE = new StringWithColor(FIRE_RESISTANCE, Color.WHITE);
 	public static StringWithColor WATER_RESISTANCE_WHITE = new StringWithColor(WATER_RESISTANCE, Color.WHITE);
 	public static StringWithColor ELECTRICAL_RESISTANCE_WHITE = new StringWithColor(ELECTRICAL_RESISTANCE, Color.WHITE);
-	public static StringWithColor POSION_RESISTANCE_WHITE = new StringWithColor(POSION_RESISTANCE, Color.WHITE);
-	public static StringWithColor BLEEDING_RESISTANCE_WHITE = new StringWithColor(BLEEDING_RESISTANCE, Color.WHITE);
+	public static StringWithColor POISON_RESISTANCE_WHITE = new StringWithColor(POISON_RESISTANCE, Color.WHITE);
+	public static StringWithColor BLEED_RESISTANCE_WHITE = new StringWithColor(BLEED_RESISTANCE, Color.WHITE);
+
+	public static LevelButton healthButton;
+	public static LevelButton strengthButton;
+	public static LevelButton dexterityButton;
+	public static LevelButton intelligenceButton;
+	public static LevelButton enduranceButton;
+	public static LevelButton slashDamageButton;
+	public static LevelButton bluntDamageButton;
+	public static LevelButton pierceDamageButton;
+	public static LevelButton fireDamageButton;
+	public static LevelButton waterDamageButton;
+	public static LevelButton electricalDamageButton;
+	public static LevelButton poisonDamageButton;
+	public static LevelButton bleedDamageButton;
+	public static LevelButton healingButton;
+	public static LevelButton slashResistanceButton;
+	public static LevelButton bluntResistanceButton;
+	public static LevelButton pierceResistanceButton;
+	public static LevelButton fireResistanceButton;
+	public static LevelButton waterResistanceButton;
+	public static LevelButton electricalResistanceButton;
+	public static LevelButton poisonResistanceButton;
+	public static LevelButton bleedResistanceButton;
 
 	public static MODE mode = MODE.STATS;
 
@@ -103,11 +129,79 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public ArrayList<Link> markerLinksInJournal = new ArrayList<Link>();
 
 	// Close button
-	public static ArrayList<LevelButton> tabButtons = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 	static LevelButton buttonClose;
 
 	public CharacterScreen() {
 		// resize();
+		healthButton = new LevelButton(0, 0, Game.smallFont.getWidth(HEALTH), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(healthButton);
+		strengthButton = new LevelButton(0, 0, Game.smallFont.getWidth(STRENGTH), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(strengthButton);
+		dexterityButton = new LevelButton(0, 0, Game.smallFont.getWidth(DEXTERITY), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(dexterityButton);
+		intelligenceButton = new LevelButton(0, 0, Game.smallFont.getWidth(INTELLIGENCE), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(intelligenceButton);
+		enduranceButton = new LevelButton(0, 0, Game.smallFont.getWidth(ENDURANCE), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(enduranceButton);
+
+		slashDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(SLASH_DAMAGE), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(slashDamageButton);
+		bluntDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(BLUNT_DAMAGE), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(bluntDamageButton);
+		pierceDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(PIERCE_DAMAGE), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(pierceDamageButton);
+		fireDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(FIRE_DAMAGE), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(fireDamageButton);
+		waterDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(WATER_DAMAGE), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(waterDamageButton);
+		electricalDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(ELECTRICAL_DAMAGE), 30,
+				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(electricalDamageButton);
+		poisonDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(POISON_DAMAGE), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(poisonDamageButton);
+		bleedDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(BLEED_DAMAGE), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(bleedDamageButton);
+		healingButton = new LevelButton(0, 0, Game.smallFont.getWidth(HEALING), 30, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+
+		buttons.add(healingButton);
+		slashResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(SLASH_RESISTANCE), 30,
+				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(slashResistanceButton);
+		bluntResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(BLUNT_RESISTANCE), 30,
+				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(bluntResistanceButton);
+		pierceResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(PIERCE_RESISTANCE), 30,
+				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(pierceResistanceButton);
+		fireResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(FIRE_RESISTANCE), 30,
+				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(fireResistanceButton);
+		waterResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(WATER_RESISTANCE), 30,
+				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(waterResistanceButton);
+		electricalResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(ELECTRICAL_RESISTANCE), 30,
+				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(electricalResistanceButton);
+		poisonResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(POISON_RESISTANCE), 30,
+				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(poisonResistanceButton);
+		bleedResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(BLEED_RESISTANCE), 30,
+				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		buttons.add(bleedResistanceButton);
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "CLOSE", true, false, Color.BLACK, Color.WHITE, null);
@@ -117,7 +211,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 				Game.level.openCloseCharacterScreen();
 			}
 		});
-		tabButtons.add(buttonClose);
+		buttons.add(buttonClose);
 	}
 
 	public static void loadStaticImages() {
@@ -145,6 +239,58 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		bottomBorderHeight = 384;
 
+		int drawStatY = statsY;
+
+		// public static String HEALTH = "HEALTH";
+		drawStatY += statsLineHeight;
+		// public static String STRENGTH = "STRENGTH";
+		drawStatY += statsLineHeight;
+		// public static String DEXTERITY = "DEXTERITY";
+		drawStatY += statsLineHeight;
+		// public static String INTELLIGENCE = "INTELLIGENCE";
+		drawStatY += statsLineHeight;
+		// public static String ENDURANCE = "ENDURANCE";
+		drawStatY += statsLineHeight;
+		drawStatY += statsLineHeight;
+
+		slashDamageButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		bluntDamageButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		pierceDamageButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		fireDamageButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		waterDamageButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		electricalDamageButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		poisonDamageButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		bleedDamageButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		healingButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		drawStatY += statsLineHeight;
+
+		slashResistanceButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		bluntResistanceButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		pierceResistanceButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		fireResistanceButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		waterResistanceButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		electricalResistanceButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		poisonResistanceButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		bleedResistanceButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+		drawStatY += statsLineHeight;
+
 	}
 
 	public void open() {
@@ -160,6 +306,27 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 	public void generateLinks() {
 
+		// healthButton.setTooltipText(Level.player.getEffectiveHealthResistanceTooltip());
+
+		slashDamageButton.setTooltipText(Level.player.getEffectiveSlashDamageTooltip());
+		bluntDamageButton.setTooltipText(Level.player.getEffectiveBluntDamageTooltip());
+		pierceDamageButton.setTooltipText(Level.player.getEffectivePierceDamageTooltip());
+		fireDamageButton.setTooltipText(Level.player.getEffectiveFireDamageTooltip());
+		waterDamageButton.setTooltipText(Level.player.getEffectiveWaterDamageTooltip());
+		electricalDamageButton.setTooltipText(Level.player.getEffectiveElectricalDamageTooltip());
+		poisonDamageButton.setTooltipText(Level.player.getEffectivePoisonDamageTooltip());
+		bleedDamageButton.setTooltipText(Level.player.getEffectiveBleedDamageTooltip());
+		healingButton.setTooltipText(Level.player.getEffectiveHealingTooltip());
+
+		slashResistanceButton.setTooltipText(Level.player.getEffectiveSlashResistanceTooltip());
+		bluntResistanceButton.setTooltipText(Level.player.getEffectiveBluntResistanceTooltip());
+		pierceResistanceButton.setTooltipText(Level.player.getEffectivePierceResistanceTooltip());
+		fireResistanceButton.setTooltipText(Level.player.getEffectiveFireResistanceTooltip());
+		waterResistanceButton.setTooltipText(Level.player.getEffectiveWaterResistanceTooltip());
+		electricalResistanceButton.setTooltipText(Level.player.getEffectiveElectricalResistanceTooltip());
+		poisonResistanceButton.setTooltipText(Level.player.getEffectivePoisonResistanceTooltip());
+		bleedResistanceButton.setTooltipText(Level.player.getEffectiveBleedResistanceTooltip());
+
 	}
 
 	public void close() {
@@ -174,7 +341,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 		QuadUtils.drawQuad(Color.BLACK, 0, 0, Game.windowWidth, Game.windowHeight);
 
 		// Tab Buttons
-		for (Button button : tabButtons) {
+		for (Button button : buttons) {
 			button.draw();
 		}
 
@@ -215,50 +382,48 @@ public class CharacterScreen implements Draggable, Scrollable {
 			// DAMAGE
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, SLASH_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveSlashDamage() + " " + Level.player.getEffectiveSlashDamageTooltip());
+					Level.player.getEffectiveSlashDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, BLUNT_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveBluntDamage() + " " + Level.player.getEffectiveBluntDamageTooltip());
+					Level.player.getEffectiveBluntDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, PIERCE_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectivePierceDamage() + " " + Level.player.getEffectivePierceDamageTooltip());
+					Level.player.getEffectivePierceDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, FIRE_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveFireDamage() + " " + Level.player.getEffectiveFireDamageTooltip());
+					Level.player.getEffectiveFireDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, WATER_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveWaterDamage() + " " + Level.player.getEffectiveWaterDamageTooltip());
+					Level.player.getEffectiveWaterDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					ELECTRICAL_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveElectricalDamage() + " "
-							+ Level.player.getEffectiveElectricalDamageTooltip());
+					Level.player.getEffectiveElectricalDamage());
 			drawStatY += statsLineHeight;
 
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, POSION_DAMAGE_WHITE);
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, POISON_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectivePoisonDamage() + " " + Level.player.getEffectivePoisonDamageTooltip());
+					Level.player.getEffectivePoisonDamage());
 			drawStatY += statsLineHeight;
 
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					BLEEDING_DAMAGE_WHITE);
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, BLEED_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveBleedDamage() + " " + Level.player.getEffectiveBleedDamageTooltip());
+					Level.player.getEffectiveBleedDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, HEALING_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveHealing() + " " + Level.player.getEffectiveHealingTooltip());
+					Level.player.getEffectiveHealing());
 			drawStatY += statsLineHeight;
 			drawStatY += statsLineHeight;
 
@@ -266,56 +431,49 @@ public class CharacterScreen implements Draggable, Scrollable {
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					SLASH_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveSlashResistance() + " "
-							+ Level.player.getEffectiveSlashResistanceTooltip());
+					Level.player.getEffectiveSlashResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					BLUNT_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveBluntResistance() + " "
-							+ Level.player.getEffectiveBluntResistanceTooltip());
+					Level.player.getEffectiveBluntResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					PIERCE_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectivePierceResistance() + " "
-							+ Level.player.getEffectivePierceResistanceTooltip());
+					Level.player.getEffectivePierceResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					FIRE_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveFireResistance() + " " + Level.player.getEffectiveFireResistanceTooltip());
+					Level.player.getEffectiveFireResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					WATER_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveWaterResistance() + " "
-							+ Level.player.getEffectiveWaterResistanceTooltip());
+					Level.player.getEffectiveWaterResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					ELECTRICAL_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveElectricalResistance() + " "
-							+ Level.player.getEffectiveElectricalResistanceTooltip());
+					Level.player.getEffectiveElectricalResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					POSION_RESISTANCE_WHITE);
+					POISON_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectivePoisonResistance() + " "
-							+ Level.player.getEffectivePoisonResistanceTooltip());
+					Level.player.getEffectivePoisonResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					BLEEDING_RESISTANCE_WHITE);
+					BLEED_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveBleedResistance() + " "
-							+ Level.player.getEffectiveBleedResistanceTooltip());
+					Level.player.getEffectiveBleedResistance());
 			drawStatY += statsLineHeight;
 			drawStatY += statsLineHeight;
 
