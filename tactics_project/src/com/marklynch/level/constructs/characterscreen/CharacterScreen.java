@@ -356,26 +356,31 @@ public class CharacterScreen implements Draggable, Scrollable {
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, HEALTH_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.remainingHealth + "/" + Level.player.totalHealth);
+			healthButton.width = Game.smallFont.getWidth(Level.player.remainingHealth + "/" + Level.player.totalHealth);
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, STRENGTH_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.strength);
+			strengthButton.width = Game.smallFont.getWidth("" + Level.player.strength);
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, DEXTERITY_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.dexterity);
+			dexterityButton.width = Game.smallFont.getWidth("" + Level.player.dexterity);
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, INTELLIGENCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.intelligence);
+			intelligenceButton.width = Game.smallFont.getWidth("" + Level.player.intelligence);
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, ENDURANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.endurance);
+			enduranceButton.width = Game.smallFont.getWidth("" + Level.player.endurance);
 			drawStatY += statsLineHeight;
 			drawStatY += statsLineHeight;
 
@@ -383,47 +388,56 @@ public class CharacterScreen implements Draggable, Scrollable {
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, SLASH_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveSlashDamage());
+			slashDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveSlashDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, BLUNT_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveBluntDamage());
+			bluntDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveBluntDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, PIERCE_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectivePierceDamage());
+			pierceDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectivePierceDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, FIRE_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveFireDamage());
+			fireDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveFireDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, WATER_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveWaterDamage());
+			waterDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveWaterDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					ELECTRICAL_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveElectricalDamage());
+			electricalDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveElectricalDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, POISON_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectivePoisonDamage());
+			poisonDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectivePoisonDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, BLEED_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveBleedDamage());
+			bleedDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveBleedDamage());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, HEALING_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveHealing());
+			healingButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveHealing());
 			drawStatY += statsLineHeight;
 			drawStatY += statsLineHeight;
 
@@ -432,48 +446,57 @@ public class CharacterScreen implements Draggable, Scrollable {
 					SLASH_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveSlashResistance());
+			slashResistanceButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveSlashResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					BLUNT_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveBluntResistance());
+			bluntResistanceButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveBluntResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					PIERCE_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectivePierceResistance());
+			pierceResistanceButton.width = Game.smallFont.getWidth("" + Level.player.getEffectivePierceResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					FIRE_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveFireResistance());
+			fireResistanceButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveFireResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					WATER_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveWaterResistance());
+			waterResistanceButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveWaterResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					ELECTRICAL_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveElectricalResistance());
+			electricalResistanceButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveElectricalResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					POISON_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectivePoisonResistance());
+			poisonResistanceButton.width = Game.smallFont.getWidth("" + Level.player.getEffectivePoisonResistance());
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					BLEED_RESISTANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					Level.player.getEffectiveBleedResistance());
+			bleedResistanceButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveBleedResistance());
 			drawStatY += statsLineHeight;
 			drawStatY += statsLineHeight;
 
