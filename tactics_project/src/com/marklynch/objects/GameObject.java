@@ -1792,10 +1792,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return result;
 	}
 
-	public String getEffectiveBluntResistanceTooltip() {
-		String result = name + " " + bluntResistance;
+	public ArrayList<Object> getEffectiveBluntResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add(name + " " + bluntResistance);
 		if (enhancement != null && enhancement.bluntResistance != 0)
-			result += " " + enhancement.enhancementName + " " + enhancement.bluntResistance;
+			result.add(" " + enhancement.enhancementName + " " + enhancement.bluntResistance);
 		return result;
 	}
 
@@ -1806,10 +1807,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return result;
 	}
 
-	public String getEffectivePierceResistanceTooltip() {
-		String result = name + " " + pierceResistance;
+	public ArrayList<Object> getEffectivePierceResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add(name + " " + pierceResistance);
 		if (enhancement != null && enhancement.pierceResistance != 0)
-			result += " " + enhancement.enhancementName + " " + enhancement.pierceResistance;
+			result.add(" " + enhancement.enhancementName + " " + enhancement.pierceResistance);
 		return result;
 	}
 
@@ -1827,10 +1829,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return result;
 	}
 
-	public String getEffectiveFireResistanceTooltip() {
-		String result = name + " " + fireResistance;
+	public ArrayList<Object> getEffectiveFireResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add(name + " " + fireResistance);
 		if (enhancement != null && enhancement.fireResistance != 0)
-			result += " " + enhancement.enhancementName + " " + enhancement.fireResistance;
+			result.add(" " + enhancement.enhancementName + " " + enhancement.fireResistance);
 		return result;
 	}
 
@@ -1841,10 +1844,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return result;
 	}
 
-	public String getEffectiveWaterResistanceTooltip() {
-		String result = name + " " + waterResistance;
+	public ArrayList<Object> getEffectiveWaterResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add(name + " " + waterResistance);
 		if (enhancement != null && enhancement.waterResistance != 0)
-			result += " " + enhancement.enhancementName + " " + enhancement.waterResistance;
+			result.add(" " + enhancement.enhancementName + " " + enhancement.waterResistance);
 		return result;
 	}
 
@@ -1855,10 +1859,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return result;
 	}
 
-	public String getEffectiveElectricalResistanceTooltip() {
-		String result = name + " " + electricalResistance;
+	public ArrayList<Object> getEffectiveElectricalResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add(name + " " + electricalResistance);
 		if (enhancement != null && enhancement.electricalResistance != 0)
-			result += " " + enhancement.enhancementName + " " + enhancement.electricalResistance;
+			result.add(" " + enhancement.enhancementName + " " + enhancement.electricalResistance);
 		return result;
 	}
 
@@ -1869,10 +1874,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return result;
 	}
 
-	public String getEffectivePoisonResistanceTooltip() {
-		String result = name + " " + poisonResistance;
+	public ArrayList<Object> getEffectivePoisonResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add(name + " " + poisonResistance);
 		if (enhancement != null && enhancement.poisonResistance != 0)
-			result += " " + enhancement.enhancementName + " " + enhancement.poisonResistance;
+			result.add(" " + enhancement.enhancementName + " " + enhancement.poisonResistance);
 		return result;
 	}
 
@@ -1883,10 +1889,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return result;
 	}
 
-	public String getEffectiveBleedResistanceTooltip() {
-		String result = name + " " + bleedResistance;
+	public ArrayList<Object> getEffectiveBleedResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add(name + " " + bleedResistance);
 		if (enhancement != null && enhancement.bleedResistance != 0)
-			result += " " + enhancement.enhancementName + " " + enhancement.bleedResistance;
+			result.add(" " + enhancement.enhancementName + " " + enhancement.bleedResistance);
 		return result;
 	}
 

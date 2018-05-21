@@ -2512,7 +2512,7 @@ public class Actor extends GameObject {
 	public ArrayList<Object> getEffectiveSlashResistanceTooltip() {
 		ArrayList<Object> result = new ArrayList<Object>();
 
-		result.add("(Inherent " + this.slashResistance);
+		result.add("Inherent " + this.slashResistance);
 		if (equipped != null && equipped.getEffectiveSlashResistance() != 0) {
 			result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(equipped.getEffectiveSlashResistanceTooltip());
@@ -2553,21 +2553,26 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public String getEffectiveBluntResistanceTooltip() {
-		String result = "(Inherent " + this.bluntResistance;
+	public ArrayList<Object> getEffectiveBluntResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+
+		result.add("Inherent " + this.slashResistance);
 		if (equipped != null && equipped.getEffectiveBluntResistance() != 0) {
-			result += " + " + equipped.getEffectiveBluntResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(equipped.getEffectiveBluntResistanceTooltip());
 		}
 		if (helmet != null && helmet.getEffectiveBluntResistance() != 0) {
-			result += " + " + helmet.getEffectiveBluntResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(helmet.getEffectiveBluntResistanceTooltip());
 		}
 		if (bodyArmor != null && bodyArmor.getEffectiveBluntResistance() != 0) {
-			result += " + " + bodyArmor.getEffectiveBluntResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(bodyArmor.getEffectiveBluntResistanceTooltip());
 		}
 		if (legArmor != null && legArmor.getEffectiveBluntResistance() != 0) {
-			result += " + " + legArmor.getEffectiveBluntResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(legArmor.getEffectiveBluntResistanceTooltip());
 		}
-		result += ")";
 		return result;
 	}
 
@@ -2592,21 +2597,26 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public String getEffectivePierceResistanceTooltip() {
-		String result = "(Inherent " + this.pierceResistance;
+	public ArrayList<Object> getEffectivePierceResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+
+		result.add("Inherent " + this.pierceResistance);
 		if (equipped != null && equipped.getEffectivePierceResistance() != 0) {
-			result += " + " + equipped.getEffectivePierceResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(equipped.getEffectivePierceResistanceTooltip());
 		}
 		if (helmet != null && helmet.getEffectivePierceResistance() != 0) {
-			result += " + " + helmet.getEffectivePierceResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(helmet.getEffectivePierceResistanceTooltip());
 		}
 		if (bodyArmor != null && bodyArmor.getEffectivePierceResistance() != 0) {
-			result += " + " + bodyArmor.getEffectivePierceResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(bodyArmor.getEffectivePierceResistanceTooltip());
 		}
 		if (legArmor != null && legArmor.getEffectivePierceResistance() != 0) {
-			result += " + " + legArmor.getEffectivePierceResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(legArmor.getEffectivePierceResistanceTooltip());
 		}
-		result += ")";
 		return result;
 	}
 
@@ -2638,21 +2648,26 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public String getEffectiveFireResistanceTooltip() {
-		String result = "(Inherent " + this.fireResistance;
+	public ArrayList<Object> getEffectiveFireResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+
+		result.add("Inherent " + this.fireResistance);
 		if (equipped != null && equipped.getEffectiveFireResistance() != 0) {
-			result += " + " + equipped.getEffectiveFireResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(equipped.getEffectiveFireResistanceTooltip());
 		}
 		if (helmet != null && helmet.getEffectiveFireResistance() != 0) {
-			result += " + " + helmet.getEffectiveFireResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(helmet.getEffectiveFireResistanceTooltip());
 		}
 		if (bodyArmor != null && bodyArmor.getEffectiveFireResistance() != 0) {
-			result += " + " + bodyArmor.getEffectiveFireResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(bodyArmor.getEffectiveFireResistanceTooltip());
 		}
 		if (legArmor != null && legArmor.getEffectiveFireResistance() != 0) {
-			result += " + " + legArmor.getEffectiveFireResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(legArmor.getEffectiveFireResistanceTooltip());
 		}
-		result += ")";
 		return result;
 	}
 
@@ -2677,21 +2692,26 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public String getEffectiveWaterResistanceTooltip() {
-		String result = "(Inherent " + this.waterResistance;
+	public ArrayList<Object> getEffectiveWaterResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+
+		result.add("Inherent " + this.bluntResistance);
 		if (equipped != null && equipped.getEffectiveWaterResistance() != 0) {
-			result += " + " + equipped.getEffectiveWaterResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(equipped.getEffectiveWaterResistanceTooltip());
 		}
 		if (helmet != null && helmet.getEffectiveWaterResistance() != 0) {
-			result += " + " + helmet.getEffectiveWaterResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(helmet.getEffectiveWaterResistanceTooltip());
 		}
 		if (bodyArmor != null && bodyArmor.getEffectiveWaterResistance() != 0) {
-			result += " + " + bodyArmor.getEffectiveWaterResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(bodyArmor.getEffectiveWaterResistanceTooltip());
 		}
 		if (legArmor != null && legArmor.getEffectiveWaterResistance() != 0) {
-			result += " + " + legArmor.getEffectiveWaterResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(legArmor.getEffectiveWaterResistanceTooltip());
 		}
-		result += ")";
 		return result;
 	}
 
@@ -2716,21 +2736,26 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public String getEffectiveElectricalResistanceTooltip() {
-		String result = "(Inherent " + this.electricalResistance;
+	public ArrayList<Object> getEffectiveElectricalResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+
+		result.add("Inherent " + this.electricalResistance);
 		if (equipped != null && equipped.getEffectiveElectricalResistance() != 0) {
-			result += " + " + equipped.getEffectiveElectricalResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(equipped.getEffectiveElectricalResistanceTooltip());
 		}
 		if (helmet != null && helmet.getEffectiveElectricalResistance() != 0) {
-			result += " + " + helmet.getEffectiveElectricalResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(helmet.getEffectiveElectricalResistanceTooltip());
 		}
 		if (bodyArmor != null && bodyArmor.getEffectiveElectricalResistance() != 0) {
-			result += " + " + bodyArmor.getEffectiveElectricalResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(bodyArmor.getEffectiveElectricalResistanceTooltip());
 		}
 		if (legArmor != null && legArmor.getEffectiveElectricalResistance() != 0) {
-			result += " + " + legArmor.getEffectiveElectricalResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(legArmor.getEffectiveElectricalResistanceTooltip());
 		}
-		result += ")";
 		return result;
 	}
 
@@ -2755,21 +2780,26 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public String getEffectivePoisonResistanceTooltip() {
-		String result = "(Inherent " + this.poisonResistance;
+	public ArrayList<Object> getEffectivePoisonResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+
+		result.add("Inherent " + this.poisonResistance);
 		if (equipped != null && equipped.getEffectivePoisonResistance() != 0) {
-			result += " + " + equipped.getEffectivePoisonResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(equipped.getEffectivePoisonResistanceTooltip());
 		}
 		if (helmet != null && helmet.getEffectivePoisonResistance() != 0) {
-			result += " + " + helmet.getEffectivePoisonResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(helmet.getEffectivePoisonResistanceTooltip());
 		}
 		if (bodyArmor != null && bodyArmor.getEffectivePoisonResistance() != 0) {
-			result += " + " + bodyArmor.getEffectivePoisonResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(bodyArmor.getEffectivePoisonResistanceTooltip());
 		}
 		if (legArmor != null && legArmor.getEffectivePoisonResistance() != 0) {
-			result += " + " + legArmor.getEffectivePoisonResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(legArmor.getEffectivePoisonResistanceTooltip());
 		}
-		result += ")";
 		return result;
 	}
 
@@ -2794,21 +2824,26 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public String getEffectiveBleedResistanceTooltip() {
-		String result = "(Inherent " + this.bleedResistance;
+	public ArrayList<Object> getEffectiveBleedResistanceTooltip() {
+		ArrayList<Object> result = new ArrayList<Object>();
+
+		result.add("Inherent " + this.bleedResistance);
 		if (equipped != null && equipped.getEffectiveBleedResistance() != 0) {
-			result += " + " + equipped.getEffectiveBleedResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(equipped.getEffectiveBleedResistanceTooltip());
 		}
 		if (helmet != null && helmet.getEffectiveBleedResistance() != 0) {
-			result += " + " + helmet.getEffectiveBleedResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(helmet.getEffectiveBleedResistanceTooltip());
 		}
 		if (bodyArmor != null && bodyArmor.getEffectiveBleedResistance() != 0) {
-			result += " + " + bodyArmor.getEffectiveBleedResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(bodyArmor.getEffectiveBleedResistanceTooltip());
 		}
 		if (legArmor != null && legArmor.getEffectiveBleedResistance() != 0) {
-			result += " + " + legArmor.getEffectiveBleedResistanceTooltip();
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(legArmor.getEffectiveBleedResistanceTooltip());
 		}
-		result += ")";
 		return result;
 	}
 }
