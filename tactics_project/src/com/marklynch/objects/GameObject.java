@@ -110,7 +110,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public int templateId;
 
 	public String name = "";
-	public float totalHealth = 0;
+	public int totalHealth = 0;
 	public String imageTexturePath = null;
 	public transient Square squareGameObjectIsOn = null;
 	public transient InventorySquare inventorySquare = null;
@@ -156,7 +156,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
 
 	// attributes
-	public float remainingHealth = 0;
+	public int remainingHealth = 0;
 	boolean favourite = false;
 	public transient boolean hasAttackedThisTurn = false;
 

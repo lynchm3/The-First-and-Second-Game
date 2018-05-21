@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.characterscreen;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -12,6 +13,8 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.StringWithColor;
+import com.marklynch.utils.TextUtils;
 
 public class CharacterScreen implements Draggable, Scrollable {
 
@@ -19,12 +22,26 @@ public class CharacterScreen implements Draggable, Scrollable {
 		STATS, SKILLS
 	};
 
+	public static String HEALTH = "HEALTH";
+	public static String STRENGTH = "STRENGTH";
+	public static String DEXTERITY = "DEXTERITY";
+	public static String INTELLIGENCE = "INTELLIGENCE";
+	public static String ENDURANCE = "ENDURANCE";
+	public static StringWithColor HEALTH_WHITE = new StringWithColor(HEALTH, Color.WHITE);
+	public static StringWithColor STRENGTH_WHITE = new StringWithColor(STRENGTH, Color.WHITE);
+	public static StringWithColor DEXTERITY_WHITE = new StringWithColor(DEXTERITY, Color.WHITE);
+	public static StringWithColor INTELLIGENCE_WHITE = new StringWithColor(INTELLIGENCE, Color.WHITE);
+	public static StringWithColor ENDURANCE_WHITE = new StringWithColor(ENDURANCE, Color.WHITE);
+
 	public static MODE mode = MODE.STATS;
 
 	public boolean showing = false;
 
-	int listX;
-	int listY;
+	int statsX;
+	int statLabelsX;
+	int statValuesX;
+	int statsY;
+	int statsLineHeight;
 	int listBorder;
 	int listWidth;
 
@@ -72,16 +89,21 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 	public void resize() {
 
+		actorX = 0;
 		actorY = (int) (Game.halfWindowHeight - Game.level.player.height);
 
-		listX = 0;
-		listY = 0;
+		statsX = 200;
+		statLabelsX = statsX;
+		statValuesX = statsX + 100;
+		statsY = 100;
+		statsLineHeight = 30;
+
 		listBorder = 16;
 		listWidth = 300;
 
-		contentX = listX + listWidth + listBorder * 2;
-		contentY = 30;
-		contentBorder = 16;
+		// contentX = listX + listWidth + listBorder * 2;
+		// contentY = 30;
+		// contentBorder = 16;
 
 		listItemHeight = 30;
 
@@ -115,9 +137,6 @@ public class CharacterScreen implements Draggable, Scrollable {
 		// Black cover
 		QuadUtils.drawQuad(Color.BLACK, 0, 0, Game.windowWidth, Game.windowHeight);
 
-		// Content
-		float height = 0;
-
 		// Tab Buttons
 		for (Button button : tabButtons) {
 			button.draw();
@@ -127,6 +146,40 @@ public class CharacterScreen implements Draggable, Scrollable {
 		drawActor(Game.level.player, this.actorX, this.actorY);
 
 		if (mode == MODE.STATS) {
+
+			int drawStatY = statsY;
+
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, HEALTH_WHITE);
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+					Level.player.remainingHealth + "/" + Level.player.totalHealth);
+			drawStatY += statsLineHeight;
+
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, STRENGTH_WHITE);
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+					Level.player.strength);
+			drawStatY += statsLineHeight;
+
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, DEXTERITY_WHITE);
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+					Level.player.dexterity);
+			drawStatY += statsLineHeight;
+
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, INTELLIGENCE_WHITE);
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+					Level.player.intelligence);
+			drawStatY += statsLineHeight;
+
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, ENDURANCE_WHITE);
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+					Level.player.endurance);
+			drawStatY += statsLineHeight;
+
+			// Level.player.remainingHealth;
+			// Level.player.totalHealth;
+			// Level.player.strength;
+			// Level.player.dexterity;
+			// Level.player.intelligence;
+			// Level.player.endurance;
 		}
 	}
 
