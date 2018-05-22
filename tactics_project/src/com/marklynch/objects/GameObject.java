@@ -3,6 +3,7 @@ package com.marklynch.objects;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
@@ -11,10 +12,12 @@ import org.newdawn.slick.openal.Audio;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
+import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectBurning;
@@ -105,6 +108,16 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
 	public String guid = UUID.randomUUID().toString();
+
+	public enum HIGH_LEVEL_STATS {
+		STRENGTH, DEXTERITY, ENDURANCE, INTELLIGENCE
+	};
+
+	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
+
+	// public enum OFFENSIVE_STATS {"PIZZA"}
+	// public enum DEFENSIVE_STATS;
+	// public enum STATS;
 
 	// Template id
 	public int templateId;
@@ -261,6 +274,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public GameObject equipped = null;
 
 	public GameObject() {
+
+		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(CharacterScreen.STRENGTH, 1));
+		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(CharacterScreen.DEXTERITY, 1));
+		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(CharacterScreen.ENDURANCE, 1));
+		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(CharacterScreen.INTELLIGENCE, 1));
 	}
 
 	public void setInstances(GameObject gameObject) {

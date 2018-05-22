@@ -1,17 +1,18 @@
 package com.marklynch.level.constructs.requirementtomeet;
 
+import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.units.Actor;
 
 public class StatRequirementToMeet extends RequirementToMeet {
 
-	public enum Stat {
-		STAT_HP, STAT_STRENGTH
-	}
+	// public enum Stat {
+	// STAT_HP, STAT_STRENGTH
+	// }
 
-	Stat stat;
+	HIGH_LEVEL_STATS stat;
 	float minimumStatLevel;
 
-	public StatRequirementToMeet(Stat stat, float minimumStatLevel) {
+	public StatRequirementToMeet(HIGH_LEVEL_STATS stat, float minimumStatLevel) {
 		super();
 		this.stat = stat;
 		this.minimumStatLevel = minimumStatLevel;
@@ -21,12 +22,7 @@ public class StatRequirementToMeet extends RequirementToMeet {
 	public boolean isRequirementMet(Actor actor) {
 
 		float actorsRelevantStatLevel = 0;
-
-		if (stat == Stat.STAT_HP) {
-			actorsRelevantStatLevel = actor.remainingHealth;
-		} else if (stat == Stat.STAT_STRENGTH) {
-			actorsRelevantStatLevel = actor.getEffectiveStrength();
-		}
+		actorsRelevantStatLevel = actor.getEffectiveHighLevelStat(stat);
 
 		if (actorsRelevantStatLevel >= minimumStatLevel)
 			return true;
@@ -36,9 +32,7 @@ public class StatRequirementToMeet extends RequirementToMeet {
 
 	@Override
 	public String getText() {
-		if (stat == Stat.STAT_HP) {
-			return "[Requires " + minimumStatLevel + " HP]";
-		} else if (stat == Stat.STAT_STRENGTH) {
+		if (stat == HIGH_LEVEL_STATS.STRENGTH) {
 			return "[Requires " + minimumStatLevel + " STRENGTH]";
 		}
 		return "";

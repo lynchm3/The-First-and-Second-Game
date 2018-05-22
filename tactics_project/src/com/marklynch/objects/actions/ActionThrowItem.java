@@ -7,6 +7,7 @@ import com.marklynch.level.constructs.animation.primary.AnimationThrow;
 import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.Monster;
@@ -44,7 +45,8 @@ public class ActionThrowItem extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -166,7 +168,8 @@ public class ActionThrowItem extends Action {
 		if (targetSquare == null && targetGameObject == null)
 			return false;
 
-		float maxDistance = (performer.getEffectiveStrength() * 100) / gameObjectToThrow.weight;
+		float maxDistance = (performer.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH) * 100)
+				/ gameObjectToThrow.weight;
 		if (maxDistance > 10)
 			maxDistance = 10;
 

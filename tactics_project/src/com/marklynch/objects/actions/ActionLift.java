@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -27,7 +28,8 @@ public class ActionLift extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -63,7 +65,7 @@ public class ActionLift extends Action {
 
 	@Override
 	public boolean check() {
-		float maxWeightForPerformer = 50f + performer.getEffectiveStrength() * 10f;
+		float maxWeightForPerformer = 50f + performer.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH) * 10f;
 		if (object.weight > maxWeightForPerformer) {
 			actionName = ACTION_NAME + " (too heavy)";
 			disabledReason = "Too heavy";

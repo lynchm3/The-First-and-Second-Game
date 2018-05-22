@@ -243,7 +243,8 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		// public static String HEALTH = "HEALTH";
 		drawStatY += statsLineHeight;
-		// public static String STRENGTH = "STRENGTH";
+		// public static String highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH,
+		// "STRENGTH";
 		drawStatY += statsLineHeight;
 		// public static String DEXTERITY = "DEXTERITY";
 		drawStatY += statsLineHeight;
@@ -361,26 +362,30 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, STRENGTH_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.strength);
-			strengthButton.width = Game.smallFont.getWidth("" + Level.player.strength);
+					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.STRENGTH));
+			strengthButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.STRENGTH));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, DEXTERITY_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.dexterity);
-			dexterityButton.width = Game.smallFont.getWidth("" + Level.player.dexterity);
+					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.DEXTERITY));
+			dexterityButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.DEXTERITY));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, INTELLIGENCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.intelligence);
-			intelligenceButton.width = Game.smallFont.getWidth("" + Level.player.intelligence);
+					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.INTELLIGENCE));
+			intelligenceButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.INTELLIGENCE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, ENDURANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.endurance);
-			enduranceButton.width = Game.smallFont.getWidth("" + Level.player.endurance);
+					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.ENDURANCE));
+			enduranceButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.ENDURANCE));
 			drawStatY += statsLineHeight;
 			drawStatY += statsLineHeight;
 

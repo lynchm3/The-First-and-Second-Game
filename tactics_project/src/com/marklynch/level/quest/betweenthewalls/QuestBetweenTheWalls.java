@@ -17,6 +17,7 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.Wall;
@@ -121,7 +122,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Antler switch
 		Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[53][19], null, falseWall, Switch.SWITCH_TYPE.OPEN_CLOSE,
-				new RequirementToMeet[] { new StatRequirementToMeet(StatRequirementToMeet.Stat.STAT_STRENGTH, 1) });
+				new RequirementToMeet[] { new StatRequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) });
 
 		// Pressure Plate
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[51][21], null, falseWall, Switch.SWITCH_TYPE.OPEN_CLOSE,

@@ -22,6 +22,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
@@ -87,10 +88,6 @@ public class Actor extends GameObject {
 		UP, RIGHT, DOWN, LEFT
 	}
 
-	public int strength;
-	public int dexterity;
-	public int intelligence;
-	public int endurance;
 	public String title = "";
 	public int travelDistance = 1;
 	public int sight = 10;
@@ -1962,22 +1959,6 @@ public class Actor extends GameObject {
 		}
 	}
 
-	public int getEffectiveStrength() {
-		return strength;
-	}
-
-	public int getEffectiveDexterity() {
-		return dexterity;
-	}
-
-	public int getEffectiveIntelligence() {
-		return intelligence;
-	}
-
-	public int getEffectiveEndurance() {
-		return endurance;
-	}
-
 	public void equip(GameObject gameObject) {
 		if (canEquipWeapons)
 			this.equipped = gameObject;
@@ -2327,10 +2308,11 @@ public class Actor extends GameObject {
 			bed.owner = actor;
 		actor.title = title;
 		actor.level = level;
-		actor.strength = strength;
-		actor.dexterity = dexterity;
-		actor.intelligence = intelligence;
-		actor.endurance = endurance;
+
+		for (HIGH_LEVEL_STATS statKey : this.highLevelStats.keySet()) {
+			actor.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
+		}
+
 		actor.travelDistance = travelDistance;
 		actor.sight = sight;
 		actor.canOpenDoors = canOpenDoors;
@@ -2342,6 +2324,11 @@ public class Actor extends GameObject {
 		if (aiRoutine != null)
 			actor.aiRoutine = aiRoutine.getInstance(actor);
 		actor.init(gold, mustHaves, mightHaves);
+	}
+
+	public float getEffectiveHighLevelStat(HIGH_LEVEL_STATS statType) {
+		Stat stat = highLevelStats.get(statType);
+		return stat.value;
 	}
 
 	@Override

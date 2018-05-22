@@ -8,6 +8,7 @@ import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -335,7 +336,7 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 150, drawPositionX + statsImageX + 20, drawPositionY + statsY + 150 + 20);
 		if (bestiaryKnowledge.strength) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false,
-					null, "STR ", "" + actor.strength);
+					null, "STR ", "" + actor.highLevelStats.get(HIGH_LEVEL_STATS.STRENGTH));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false,
@@ -349,7 +350,7 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 180, drawPositionX + statsImageX + 20, drawPositionY + statsY + 180 + 20);
 		if (bestiaryKnowledge.dexterity) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false,
-					null, "DEX ", "" + actor.dexterity);
+					null, "DEX ", "" + actor.highLevelStats.get(HIGH_LEVEL_STATS.DEXTERITY));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false,
@@ -363,7 +364,7 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 210, drawPositionX + statsImageX + 20, drawPositionY + statsY + 210 + 20);
 		if (bestiaryKnowledge.intelligence) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false,
-					null, "INT ", "" + actor.intelligence);
+					null, "INT ", "" + actor.highLevelStats.get(HIGH_LEVEL_STATS.INTELLIGENCE));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false,
@@ -377,7 +378,7 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 240, drawPositionX + statsImageX + 20, drawPositionY + statsY + 240 + 20);
 		if (bestiaryKnowledge.endurance) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false,
-					null, "END ", "" + actor.endurance);
+					null, "END ", "" + actor.highLevelStats.get(HIGH_LEVEL_STATS.ENDURANCE));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false,
