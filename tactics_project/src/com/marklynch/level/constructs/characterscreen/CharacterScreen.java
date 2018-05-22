@@ -1,9 +1,11 @@
 package com.marklynch.level.constructs.characterscreen;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -33,6 +35,8 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static StringWithColor DEXTERITY_WHITE = new StringWithColor(DEXTERITY, Color.WHITE);
 	public static StringWithColor INTELLIGENCE_WHITE = new StringWithColor(INTELLIGENCE, Color.WHITE);
 	public static StringWithColor ENDURANCE_WHITE = new StringWithColor(ENDURANCE, Color.WHITE);
+	public HashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons = new HashMap<HIGH_LEVEL_STATS, LevelButton>();
+	public HashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new HashMap<HIGH_LEVEL_STATS, String>();
 
 	// DMG and Healing
 	public static String SLASH_DAMAGE = "SLASH DAMAGE";
@@ -73,10 +77,10 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static StringWithColor BLEED_RESISTANCE_WHITE = new StringWithColor(BLEED_RESISTANCE, Color.WHITE);
 
 	public static LevelButton healthButton;
-	public static LevelButton strengthButton;
-	public static LevelButton dexterityButton;
-	public static LevelButton intelligenceButton;
-	public static LevelButton enduranceButton;
+	// public static LevelButton strengthButton;
+	// public static LevelButton dexterityButton;
+	// public static LevelButton intelligenceButton;
+	// public static LevelButton enduranceButton;
 	public static LevelButton slashDamageButton;
 	public static LevelButton bluntDamageButton;
 	public static LevelButton pierceDamageButton;
@@ -137,18 +141,17 @@ public class CharacterScreen implements Draggable, Scrollable {
 		healthButton = new LevelButton(0, 0, Game.smallFont.getWidth(HEALTH), 30, "end_turn_button.png",
 				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
 		buttons.add(healthButton);
-		strengthButton = new LevelButton(0, 0, Game.smallFont.getWidth(STRENGTH), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(strengthButton);
-		dexterityButton = new LevelButton(0, 0, Game.smallFont.getWidth(DEXTERITY), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(dexterityButton);
-		intelligenceButton = new LevelButton(0, 0, Game.smallFont.getWidth(INTELLIGENCE), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(intelligenceButton);
-		enduranceButton = new LevelButton(0, 0, Game.smallFont.getWidth(ENDURANCE), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(enduranceButton);
+		highLevelStatNames.put(HIGH_LEVEL_STATS.STRENGTH, STRENGTH);
+		highLevelStatNames.put(HIGH_LEVEL_STATS.DEXTERITY, DEXTERITY);
+		highLevelStatNames.put(HIGH_LEVEL_STATS.INTELLIGENCE, INTELLIGENCE);
+		highLevelStatNames.put(HIGH_LEVEL_STATS.ENDURANCE, ENDURANCE);
+
+		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+			LevelButton button = new LevelButton(0, 0, Game.smallFont.getWidth(highLevelStatNames.get(statType)), 30,
+					"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+			highLevelStatButtons.put(statType, button);
+			buttons.add(button);
+		}
 
 		slashDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(SLASH_DAMAGE), 30, "end_turn_button.png",
 				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
@@ -241,16 +244,15 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		int drawStatY = statsY;
 
-		// public static String HEALTH = "HEALTH";
+		healthButton.updatePosition(statValuesX, drawStatY);
 		drawStatY += statsLineHeight;
-		// public static String highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH,
-		// "STRENGTH";
+		highLevelStatButtons.get(HIGH_LEVEL_STATS.STRENGTH).updatePosition(statValuesX, drawStatY);
 		drawStatY += statsLineHeight;
-		// public static String DEXTERITY = "DEXTERITY";
+		highLevelStatButtons.get(HIGH_LEVEL_STATS.DEXTERITY).updatePosition(statValuesX, drawStatY);
 		drawStatY += statsLineHeight;
-		// public static String INTELLIGENCE = "INTELLIGENCE";
+		highLevelStatButtons.get(HIGH_LEVEL_STATS.INTELLIGENCE).updatePosition(statValuesX, drawStatY);
 		drawStatY += statsLineHeight;
-		// public static String ENDURANCE = "ENDURANCE";
+		highLevelStatButtons.get(HIGH_LEVEL_STATS.ENDURANCE).updatePosition(statValuesX, drawStatY);
 		drawStatY += statsLineHeight;
 		drawStatY += statsLineHeight;
 
@@ -309,6 +311,11 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		// healthButton.setTooltipText(Level.player.getEffectiveHealthResistanceTooltip());
 
+		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+			highLevelStatButtons.get(statType).setTooltipText(Level.player.getEffectiveHighLevelStatTooltip(statType));
+			System.out.println("Tooltip = " + Level.player.getEffectiveHighLevelStatTooltip(statType));
+		}
+
 		slashDamageButton.setTooltipText(Level.player.getEffectiveSlashDamageTooltip());
 		bluntDamageButton.setTooltipText(Level.player.getEffectiveBluntDamageTooltip());
 		pierceDamageButton.setTooltipText(Level.player.getEffectivePierceDamageTooltip());
@@ -363,28 +370,31 @@ public class CharacterScreen implements Draggable, Scrollable {
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, STRENGTH_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.STRENGTH));
-			strengthButton.width = Game.smallFont
+			highLevelStatButtons.get(HIGH_LEVEL_STATS.STRENGTH).width = Game.smallFont
 					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.STRENGTH));
+			System.out.println("highLevelStatButtons.get(HIGH_LEVEL_STATS.STRENGTH).width = "
+					+ highLevelStatButtons.get(HIGH_LEVEL_STATS.STRENGTH).width);
+
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, DEXTERITY_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.DEXTERITY));
-			dexterityButton.width = Game.smallFont
+			highLevelStatButtons.get(HIGH_LEVEL_STATS.DEXTERITY).width = Game.smallFont
 					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.DEXTERITY));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, INTELLIGENCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.INTELLIGENCE));
-			intelligenceButton.width = Game.smallFont
+			highLevelStatButtons.get(HIGH_LEVEL_STATS.INTELLIGENCE).width = Game.smallFont
 					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.INTELLIGENCE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, ENDURANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.ENDURANCE));
-			enduranceButton.width = Game.smallFont
+			highLevelStatButtons.get(HIGH_LEVEL_STATS.ENDURANCE).width = Game.smallFont
 					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.ENDURANCE));
 			drawStatY += statsLineHeight;
 			drawStatY += statsLineHeight;

@@ -20,27 +20,20 @@ public class Tooltip {
 
 	public Tooltip(LevelButton button, Object... text) {
 		this.text = new ArrayList<Object>(Arrays.asList(text));
-		System.out.println("this.text.size() a = " + this.text.size());
 		this.levelButton = button;
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
-		System.out.println("dimensions[0] a = " + dimensions[0]);
-		System.out.println("dimensions[1] a = " + dimensions[1]);
 	}
 
 	public Tooltip(Object[] text, LevelButton button) {
 		this.text = new ArrayList<Object>(Arrays.asList(text));
-		System.out.println("this.text.size() b = " + this.text.size());
 		this.levelButton = button;
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
 	}
 
 	public Tooltip(LevelButton button, ArrayList<Object> text) {
 		this.text = text;
-		System.out.println("this.text.size() c = " + this.text.size());
 		this.levelButton = button;
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
-		System.out.println("dimensions[0] a = " + dimensions[0]);
-		System.out.println("dimensions[1] a = " + dimensions[1]);
 	}
 
 	public void drawStaticUI() {

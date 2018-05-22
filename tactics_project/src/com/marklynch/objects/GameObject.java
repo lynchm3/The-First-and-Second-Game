@@ -2049,7 +2049,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
 		ArrayList<Object> result = new ArrayList<Object>();
-		result.add("" + highLevelStats.get(statType).value);
+		result.add(name + " " + highLevelStats.get(statType).value);
 		return result;
 	}
 
