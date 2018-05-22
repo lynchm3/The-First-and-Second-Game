@@ -58,6 +58,8 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static StringWithColor POISON_DAMAGE_WHITE = new StringWithColor(POISON_DAMAGE, Color.WHITE);
 	public static StringWithColor BLEED_DAMAGE_WHITE = new StringWithColor(BLEED_DAMAGE, Color.WHITE);
 	public static StringWithColor HEALING_WHITE = new StringWithColor(HEALING, Color.WHITE);
+	public HashMap<OFFENSIVE_STATS, LevelButton> offensiveStatButtons = new HashMap<OFFENSIVE_STATS, LevelButton>();
+	public HashMap<OFFENSIVE_STATS, String> offensiveStatNames = new HashMap<OFFENSIVE_STATS, String>();
 
 	// Resistances
 	public static String SLASH_RESISTANCE = "SLASH RESISTANCE";
@@ -76,29 +78,10 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static StringWithColor ELECTRICAL_RESISTANCE_WHITE = new StringWithColor(ELECTRICAL_RESISTANCE, Color.WHITE);
 	public static StringWithColor POISON_RESISTANCE_WHITE = new StringWithColor(POISON_RESISTANCE, Color.WHITE);
 	public static StringWithColor BLEED_RESISTANCE_WHITE = new StringWithColor(BLEED_RESISTANCE, Color.WHITE);
+	public HashMap<OFFENSIVE_STATS, LevelButton> defensiveStatButtons = new HashMap<OFFENSIVE_STATS, LevelButton>();
+	public HashMap<OFFENSIVE_STATS, String> defensiveStatNames = new HashMap<OFFENSIVE_STATS, String>();
 
 	public static LevelButton healthButton;
-	// public static LevelButton strengthButton;
-	// public static LevelButton dexterityButton;
-	// public static LevelButton intelligenceButton;
-	// public static LevelButton enduranceButton;
-	public static LevelButton slashDamageButton;
-	public static LevelButton bluntDamageButton;
-	public static LevelButton pierceDamageButton;
-	public static LevelButton fireDamageButton;
-	public static LevelButton waterDamageButton;
-	public static LevelButton electricalDamageButton;
-	public static LevelButton poisonDamageButton;
-	public static LevelButton bleedDamageButton;
-	public static LevelButton healingButton;
-	public static LevelButton slashResistanceButton;
-	public static LevelButton bluntResistanceButton;
-	public static LevelButton pierceResistanceButton;
-	public static LevelButton fireResistanceButton;
-	public static LevelButton waterResistanceButton;
-	public static LevelButton electricalResistanceButton;
-	public static LevelButton poisonResistanceButton;
-	public static LevelButton bleedResistanceButton;
 
 	public static MODE mode = MODE.STATS;
 
@@ -147,6 +130,26 @@ public class CharacterScreen implements Draggable, Scrollable {
 		highLevelStatNames.put(HIGH_LEVEL_STATS.INTELLIGENCE, INTELLIGENCE);
 		highLevelStatNames.put(HIGH_LEVEL_STATS.ENDURANCE, ENDURANCE);
 
+		offensiveStatNames.put(OFFENSIVE_STATS.SLASH_DAMAGE, SLASH_DAMAGE);
+		offensiveStatNames.put(OFFENSIVE_STATS.BLUNT_DAMAGE, BLUNT_DAMAGE);
+		offensiveStatNames.put(OFFENSIVE_STATS.PIERCE_DAMAGE, PIERCE_DAMAGE);
+		offensiveStatNames.put(OFFENSIVE_STATS.FIRE_DAMAGE, FIRE_DAMAGE);
+		offensiveStatNames.put(OFFENSIVE_STATS.WATER_DAMAGE, WATER_DAMAGE);
+		offensiveStatNames.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, ELECTRICAL_DAMAGE);
+		offensiveStatNames.put(OFFENSIVE_STATS.POISON_DAMAGE, POISON_DAMAGE);
+		offensiveStatNames.put(OFFENSIVE_STATS.BLEED_DAMAGE, BLEED_DAMAGE);
+		offensiveStatNames.put(OFFENSIVE_STATS.HEALING, HEALING);
+
+		defensiveStatNames.put(OFFENSIVE_STATS.SLASH_DAMAGE, SLASH_DAMAGE);
+		defensiveStatNames.put(OFFENSIVE_STATS.BLUNT_DAMAGE, BLUNT_DAMAGE);
+		defensiveStatNames.put(OFFENSIVE_STATS.PIERCE_DAMAGE, PIERCE_DAMAGE);
+		defensiveStatNames.put(OFFENSIVE_STATS.FIRE_DAMAGE, FIRE_DAMAGE);
+		defensiveStatNames.put(OFFENSIVE_STATS.WATER_DAMAGE, WATER_DAMAGE);
+		defensiveStatNames.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, ELECTRICAL_DAMAGE);
+		defensiveStatNames.put(OFFENSIVE_STATS.POISON_DAMAGE, POISON_DAMAGE);
+		defensiveStatNames.put(OFFENSIVE_STATS.BLEED_DAMAGE, BLEED_DAMAGE);
+		defensiveStatNames.put(OFFENSIVE_STATS.HEALING, HEALING);
+
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			LevelButton button = new LevelButton(0, 0, Game.smallFont.getWidth(highLevelStatNames.get(statType)), 30,
 					"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
@@ -154,58 +157,19 @@ public class CharacterScreen implements Draggable, Scrollable {
 			buttons.add(button);
 		}
 
-		slashDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(SLASH_DAMAGE), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(slashDamageButton);
-		bluntDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(BLUNT_DAMAGE), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(bluntDamageButton);
-		pierceDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(PIERCE_DAMAGE), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(pierceDamageButton);
-		fireDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(FIRE_DAMAGE), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(fireDamageButton);
-		waterDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(WATER_DAMAGE), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(waterDamageButton);
-		electricalDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(ELECTRICAL_DAMAGE), 30,
-				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(electricalDamageButton);
-		poisonDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(POISON_DAMAGE), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(poisonDamageButton);
-		bleedDamageButton = new LevelButton(0, 0, Game.smallFont.getWidth(BLEED_DAMAGE), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(bleedDamageButton);
-		healingButton = new LevelButton(0, 0, Game.smallFont.getWidth(HEALING), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			LevelButton button = new LevelButton(0, 0, Game.smallFont.getWidth(offensiveStatNames.get(statType)), 30,
+					"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+			offensiveStatButtons.put(statType, button);
+			buttons.add(button);
+		}
 
-		buttons.add(healingButton);
-		slashResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(SLASH_RESISTANCE), 30,
-				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(slashResistanceButton);
-		bluntResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(BLUNT_RESISTANCE), 30,
-				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(bluntResistanceButton);
-		pierceResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(PIERCE_RESISTANCE), 30,
-				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(pierceResistanceButton);
-		fireResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(FIRE_RESISTANCE), 30,
-				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(fireResistanceButton);
-		waterResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(WATER_RESISTANCE), 30,
-				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(waterResistanceButton);
-		electricalResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(ELECTRICAL_RESISTANCE), 30,
-				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(electricalResistanceButton);
-		poisonResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(POISON_RESISTANCE), 30,
-				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(poisonResistanceButton);
-		bleedResistanceButton = new LevelButton(0, 0, Game.smallFont.getWidth(BLEED_RESISTANCE), 30,
-				"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		buttons.add(bleedResistanceButton);
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			LevelButton button = new LevelButton(0, 0, Game.smallFont.getWidth(defensiveStatNames.get(statType)), 30,
+					"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+			defensiveStatButtons.put(statType, button);
+			buttons.add(button);
+		}
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "CLOSE", true, false, Color.BLACK, Color.WHITE, null);
@@ -247,54 +211,27 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		healthButton.updatePosition(statValuesX, drawStatY);
 		drawStatY += statsLineHeight;
-		highLevelStatButtons.get(HIGH_LEVEL_STATS.STRENGTH).updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		highLevelStatButtons.get(HIGH_LEVEL_STATS.DEXTERITY).updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		highLevelStatButtons.get(HIGH_LEVEL_STATS.INTELLIGENCE).updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		highLevelStatButtons.get(HIGH_LEVEL_STATS.ENDURANCE).updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
+
+		for (LevelButton button : highLevelStatButtons.values()) {
+			button.updatePosition(statValuesX, drawStatY);
+			drawStatY += statsLineHeight;
+		}
+
 		drawStatY += statsLineHeight;
 
-		slashDamageButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		bluntDamageButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		pierceDamageButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		fireDamageButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		waterDamageButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		electricalDamageButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		poisonDamageButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		bleedDamageButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		healingButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
+		for (LevelButton button : offensiveStatButtons.values()) {
+			button.updatePosition(statValuesX, drawStatY);
+			drawStatY += statsLineHeight;
+		}
+
 		drawStatY += statsLineHeight;
 
-		slashResistanceButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		bluntResistanceButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		pierceResistanceButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		fireResistanceButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		waterResistanceButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		electricalResistanceButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		poisonResistanceButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		bleedResistanceButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-		drawStatY += statsLineHeight;
+		for (LevelButton button : defensiveStatButtons.values()) {
+			button.updatePosition(statValuesX, drawStatY);
+			drawStatY += statsLineHeight;
+		}
 
+		drawStatY += statsLineHeight;
 	}
 
 	public void open() {
@@ -310,38 +247,19 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 	public void generateLinks() {
 
-		// healthButton.setTooltipText(Level.player.getEffectiveHealthResistanceTooltip());
+		// healthButton.setTooltipText(Level.player.getEffectiveHealthTooltip());
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			highLevelStatButtons.get(statType).setTooltipText(Level.player.getEffectiveHighLevelStatTooltip(statType));
 		}
 
-		slashDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.SLASH_DAMAGE));
-		bluntDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.BLUNT_DAMAGE));
-		pierceDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.PIERCE_DAMAGE));
-		fireDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.FIRE_DAMAGE));
-		waterDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.WATER_DAMAGE));
-		electricalDamageButton
-				.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
-		poisonDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.POISON_DAMAGE));
-		bleedDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.BLEED_DAMAGE));
-		healingButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.HEALING));
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			offensiveStatButtons.get(statType).setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(statType));
+		}
 
-		slashResistanceButton
-				.setTooltipText(Level.player.getEffectiveDefensiveStatTooltip(OFFENSIVE_STATS.SLASH_DAMAGE));
-		bluntResistanceButton
-				.setTooltipText(Level.player.getEffectiveDefensiveStatTooltip(OFFENSIVE_STATS.BLUNT_DAMAGE));
-		pierceResistanceButton
-				.setTooltipText(Level.player.getEffectiveDefensiveStatTooltip(OFFENSIVE_STATS.PIERCE_DAMAGE));
-		fireResistanceButton.setTooltipText(Level.player.getEffectiveDefensiveStatTooltip(OFFENSIVE_STATS.FIRE_DAMAGE));
-		waterResistanceButton
-				.setTooltipText(Level.player.getEffectiveDefensiveStatTooltip(OFFENSIVE_STATS.WATER_DAMAGE));
-		electricalResistanceButton
-				.setTooltipText(Level.player.getEffectiveDefensiveStatTooltip(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
-		poisonResistanceButton
-				.setTooltipText(Level.player.getEffectiveDefensiveStatTooltip(OFFENSIVE_STATS.POISON_DAMAGE));
-		bleedResistanceButton
-				.setTooltipText(Level.player.getEffectiveDefensiveStatTooltip(OFFENSIVE_STATS.BLEED_DAMAGE));
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			defensiveStatButtons.get(statType).setTooltipText(Level.player.getEffectiveDefensiveStatTooltip(statType));
+		}
 
 	}
 
@@ -375,165 +293,42 @@ public class CharacterScreen implements Draggable, Scrollable {
 			healthButton.width = Game.smallFont.getWidth(Level.player.remainingHealth + "/" + Level.player.totalHealth);
 			drawStatY += statsLineHeight;
 
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, STRENGTH_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					"" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH));
-			highLevelStatButtons.get(HIGH_LEVEL_STATS.STRENGTH).width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH));
-			drawStatY += statsLineHeight;
+			for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+				TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
+						highLevelStatNames.get(statType));
+				TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+						"" + Level.player.getEffectiveHighLevelStat(statType));
+				highLevelStatButtons.get(statType).width = Game.smallFont
+						.getWidth("" + Level.player.getEffectiveHighLevelStat(statType));
+				drawStatY += statsLineHeight;
+			}
 
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, DEXTERITY_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					"" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.DEXTERITY));
-			highLevelStatButtons.get(HIGH_LEVEL_STATS.DEXTERITY).width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.DEXTERITY));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, INTELLIGENCE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					"" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.INTELLIGENCE));
-			highLevelStatButtons.get(HIGH_LEVEL_STATS.INTELLIGENCE).width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.INTELLIGENCE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, ENDURANCE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					"" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.ENDURANCE));
-			highLevelStatButtons.get(HIGH_LEVEL_STATS.ENDURANCE).width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.ENDURANCE));
-			drawStatY += statsLineHeight;
 			drawStatY += statsLineHeight;
 
 			// DAMAGE
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, SLASH_DAMAGE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE));
-			slashDamageButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE));
-			drawStatY += statsLineHeight;
 
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, BLUNT_DAMAGE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE));
-			bluntDamageButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, PIERCE_DAMAGE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE));
-			pierceDamageButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, FIRE_DAMAGE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE));
-			fireDamageButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, WATER_DAMAGE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE));
-			waterDamageButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					ELECTRICAL_DAMAGE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
-			electricalDamageButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, POISON_DAMAGE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE));
-			poisonDamageButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, BLEED_DAMAGE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE));
-			bleedDamageButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, HEALING_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING));
-			healingButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING));
-			drawStatY += statsLineHeight;
+			for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+				TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
+						offensiveStatNames.get(statType));
+				TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+						"" + Level.player.getEffectiveOffensiveStat(statType));
+				offensiveStatButtons.get(statType).width = Game.smallFont
+						.getWidth("" + Level.player.getEffectiveOffensiveStat(statType));
+				drawStatY += statsLineHeight;
+			}
 			drawStatY += statsLineHeight;
 
 			// RESISTANCES
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					SLASH_RESISTANCE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE));
-			slashResistanceButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE));
-			drawStatY += statsLineHeight;
 
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					BLUNT_RESISTANCE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE));
-			bluntResistanceButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					PIERCE_RESISTANCE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE));
-			pierceResistanceButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					FIRE_RESISTANCE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE));
-			fireResistanceButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					WATER_RESISTANCE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.WATER_DAMAGE));
-			waterResistanceButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.WATER_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					ELECTRICAL_RESISTANCE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
-			electricalResistanceButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					POISON_RESISTANCE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.POISON_DAMAGE));
-			poisonResistanceButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.POISON_DAMAGE));
-			drawStatY += statsLineHeight;
-
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					BLEED_RESISTANCE_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE));
-			bleedResistanceButton.width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE));
-			drawStatY += statsLineHeight;
+			for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+				TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
+						defensiveStatNames.get(statType));
+				TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+						"" + Level.player.getEffectiveDefensiveStat(statType));
+				defensiveStatButtons.get(statType).width = Game.smallFont
+						.getWidth("" + Level.player.getEffectiveDefensiveStat(statType));
+				drawStatY += statsLineHeight;
+			}
 			drawStatY += statsLineHeight;
 
 		}
