@@ -292,14 +292,15 @@ public class TemplatesNature {
 		Templates.VEIN.anchorY = 0;
 		Templates.VEIN.templateId = GameObject.generateNewTemplateId();
 		Templates.VEIN.flipYAxisInMirror = false;
-		Templates.VEIN.slashResistance = 100;
-		Templates.VEIN.bluntResistance = 100;
-		Templates.VEIN.pierceResistance = 100;
-		Templates.VEIN.fireResistance = 100;
-		Templates.VEIN.waterResistance = 100;
-		Templates.VEIN.electricalResistance = 100;
-		Templates.VEIN.poisonResistance = 100;
-		Templates.VEIN.bleedResistance = 100;
+		Templates.VEIN.defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(100));
+		Templates.VEIN.defensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(100));
+		Templates.VEIN.defensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(100));
+		Templates.VEIN.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(100));
+		Templates.VEIN.defensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(100));
+		Templates.VEIN.defensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(100));
+		Templates.VEIN.defensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(100));
+		Templates.VEIN.defensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(100));
+		Templates.VEIN.defensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(100));
 
 		// Food?
 		Templates.MEAT_CHUNK = new MeatChunk();
@@ -320,8 +321,7 @@ public class TemplatesNature {
 		Templates.MEAT_CHUNK.anchorX = 0;
 		Templates.MEAT_CHUNK.anchorY = 0;
 		Templates.MEAT_CHUNK.templateId = GameObject.generateNewTemplateId();
-		Templates.MEAT_CHUNK.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE,
-				new Stat(2));
+		Templates.MEAT_CHUNK.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(2));
 
 		// WATER_BODY
 		Templates.WATER_BODY = new WaterBody();
@@ -343,14 +343,15 @@ public class TemplatesNature {
 		Templates.WATER_BODY.anchorY = 0;
 		Templates.WATER_BODY.templateId = GameObject.generateNewTemplateId();
 		Templates.WATER_BODY.flipYAxisInMirror = false;
-		Templates.WATER_BODY.slashResistance = 100;
-		Templates.WATER_BODY.bluntResistance = 100;
-		Templates.WATER_BODY.pierceResistance = 100;
-		Templates.WATER_BODY.fireResistance = 100;
-		Templates.WATER_BODY.waterResistance = 100;
-		Templates.WATER_BODY.electricalResistance = 100;
-		Templates.WATER_BODY.poisonResistance = 100;
-		Templates.WATER_BODY.bleedResistance = 100;
+		Templates.WATER_BODY.defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(100));
+		Templates.WATER_BODY.defensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(100));
+		Templates.WATER_BODY.defensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(100));
+		Templates.WATER_BODY.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(100));
+		Templates.WATER_BODY.defensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(100));
+		Templates.WATER_BODY.defensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(100));
+		Templates.WATER_BODY.defensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(100));
+		Templates.WATER_BODY.defensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(100));
+		Templates.WATER_BODY.defensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(100));
 		Templates.WATER_BODY.textures.add(getGlobalImage(Templates.WATER_BODY.imageTexturePath, true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_2.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_3.png", true));

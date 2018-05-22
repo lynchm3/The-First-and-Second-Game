@@ -5,6 +5,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
@@ -397,7 +398,8 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 60 + 20);
 		if (bestiaryKnowledge.slashResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
-					width - 40, false, null, "Slash ", "" + gameObject.slashResistance);
+					width - 40, false, null, "Slash ",
+					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
@@ -412,7 +414,8 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 90 + 20);
 		if (bestiaryKnowledge.pierceResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
-					width - 40, false, null, "Pierce ", "" + gameObject.pierceResistance);
+					width - 40, false, null, "Pierce ",
+					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
@@ -427,7 +430,8 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 120 + 20);
 		if (bestiaryKnowledge.bluntResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
-					width - 40, false, null, "Blunt ", "" + gameObject.bluntResistance);
+					width - 40, false, null, "Blunt ",
+					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
@@ -441,7 +445,8 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 150 + 20);
 		if (bestiaryKnowledge.fireResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
-					width - 40, false, null, "Fire ", "" + gameObject.fireResistance);
+					width - 40, false, null, "Fire ",
+					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
@@ -455,7 +460,8 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 180 + 20);
 		if (bestiaryKnowledge.waterResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
-					width - 40, false, null, "Water ", "" + gameObject.waterResistance);
+					width - 40, false, null, "Water ",
+					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.WATER_DAMAGE));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
@@ -470,7 +476,8 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 210 + 20);
 		if (bestiaryKnowledge.electricalResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 210,
-					width - 40, false, null, "Electrical ", "" + gameObject.electricalResistance);
+					width - 40, false, null, "Electrical ",
+					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 210,
@@ -484,7 +491,8 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 240 + 20);
 		if (bestiaryKnowledge.poisonResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 240,
-					width - 40, false, null, "Poison ", "" + gameObject.poisonResistance);
+					width - 40, false, null, "Poison ",
+					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.POISON_DAMAGE));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 240,
@@ -498,7 +506,8 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 270 + 20);
 		if (bestiaryKnowledge.poisonResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 270,
-					width - 40, false, null, "Bleed ", "" + gameObject.poisonResistance);
+					width - 40, false, null, "Bleed ",
+					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE));
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 270,

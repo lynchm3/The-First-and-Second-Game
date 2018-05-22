@@ -38,10 +38,6 @@ public class TemplatesFurniture {
 		Templates.BED.soundWhenHitting = 1f;
 		Templates.BED.soundDampening = 1f;
 		Templates.BED.stackable = false;
-		Templates.BED.waterResistance = 0f;
-		Templates.BED.electricalResistance = 0f;
-		Templates.BED.poisonResistance = 0f;
-		Templates.BED.slashResistance = 0f;
 		Templates.BED.weight = 75f;
 		Templates.BED.value = 150;
 		Templates.BED.anchorX = 0;
@@ -223,8 +219,7 @@ public class TemplatesFurniture {
 		Templates.BROKEN_PLATE.anchorX = 0;
 		Templates.BROKEN_PLATE.anchorY = 0;
 		Templates.BROKEN_PLATE.templateId = GameObject.generateNewTemplateId();
-		Templates.BROKEN_PLATE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
-				new Stat(1));
+		Templates.BROKEN_PLATE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(1));
 
 		Templates.DINNER_KNIFE = new GameObject();
 		Templates.DINNER_KNIFE.name = "Dinner Knife";
@@ -244,8 +239,7 @@ public class TemplatesFurniture {
 		Templates.DINNER_KNIFE.anchorX = 0;
 		Templates.DINNER_KNIFE.anchorY = 0;
 		Templates.DINNER_KNIFE.templateId = GameObject.generateNewTemplateId();
-		Templates.DINNER_KNIFE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
-				new Stat(2));
+		Templates.DINNER_KNIFE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(2));
 
 		Templates.DINNER_FORK = new GameObject();
 		Templates.DINNER_FORK.name = "Dinner Fork";
@@ -265,8 +259,7 @@ public class TemplatesFurniture {
 		Templates.DINNER_FORK.anchorX = 0;
 		Templates.DINNER_FORK.anchorY = 0;
 		Templates.DINNER_FORK.templateId = GameObject.generateNewTemplateId();
-		Templates.DINNER_FORK.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE,
-				new Stat(1));
+		Templates.DINNER_FORK.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(1));
 
 		Templates.ANTLERS_SWITCH = new Switch();
 		Templates.ANTLERS_SWITCH.name = "Obvious Antlers";
@@ -347,8 +340,7 @@ public class TemplatesFurniture {
 		Templates.BROKEN_LAMP.anchorX = 0;
 		Templates.BROKEN_LAMP.anchorY = 0;
 		Templates.BROKEN_LAMP.templateId = GameObject.generateNewTemplateId();
-		Templates.BROKEN_LAMP.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
-				new Stat(2));
+		Templates.BROKEN_LAMP.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(2));
 
 		Templates.BROKEN_GLASS = new BrokenGlass();
 		Templates.BROKEN_GLASS.name = "Broken Glass";
@@ -368,8 +360,7 @@ public class TemplatesFurniture {
 		Templates.BROKEN_GLASS.anchorX = 0;
 		Templates.BROKEN_GLASS.anchorY = 0;
 		Templates.BROKEN_GLASS.templateId = GameObject.generateNewTemplateId();
-		Templates.BROKEN_GLASS.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
-				new Stat(2));
+		Templates.BROKEN_GLASS.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(2));
 
 		Templates.DROP_HOLE = new Searchable();
 		Templates.DROP_HOLE.name = "Drop Hole";

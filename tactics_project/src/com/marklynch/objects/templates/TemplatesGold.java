@@ -24,7 +24,6 @@ public class TemplatesGold {
 		Templates.GOLD.soundWhenHit = 1f;
 		Templates.GOLD.soundWhenHitting = 1f;
 		Templates.GOLD.soundDampening = 1f;
-		Templates.GOLD.fireResistance = 100f;
 		Templates.GOLD.stackable = false;
 		Templates.GOLD.weight = 1f;
 		Templates.GOLD.value = 1;
@@ -44,7 +43,6 @@ public class TemplatesGold {
 		Templates.SMALL_ORB.soundWhenHit = 1f;
 		Templates.SMALL_ORB.soundWhenHitting = 1f;
 		Templates.SMALL_ORB.soundDampening = 1f;
-		Templates.SMALL_ORB.fireResistance = 100f;
 		Templates.SMALL_ORB.stackable = false;
 		Templates.SMALL_ORB.weight = 1f;
 		Templates.SMALL_ORB.value = 1;
@@ -64,7 +62,6 @@ public class TemplatesGold {
 		Templates.MEDIUM_ORB.soundWhenHit = 1f;
 		Templates.MEDIUM_ORB.soundWhenHitting = 1f;
 		Templates.MEDIUM_ORB.soundDampening = 1f;
-		Templates.MEDIUM_ORB.fireResistance = 100f;
 		Templates.MEDIUM_ORB.stackable = false;
 		Templates.MEDIUM_ORB.weight = 1f;
 		Templates.MEDIUM_ORB.value = 1;
@@ -84,7 +81,6 @@ public class TemplatesGold {
 		Templates.LARGE_ORB.soundWhenHit = 1f;
 		Templates.LARGE_ORB.soundWhenHitting = 1f;
 		Templates.LARGE_ORB.soundDampening = 1f;
-		Templates.LARGE_ORB.fireResistance = 100f;
 		Templates.LARGE_ORB.stackable = false;
 		Templates.LARGE_ORB.weight = 1f;
 		Templates.LARGE_ORB.value = 1;
@@ -104,7 +100,6 @@ public class TemplatesGold {
 		Templates.BUBBLE.soundWhenHit = 1f;
 		Templates.BUBBLE.soundWhenHitting = 1f;
 		Templates.BUBBLE.soundDampening = 1f;
-		Templates.BUBBLE.fireResistance = 100f;
 		Templates.BUBBLE.stackable = false;
 		Templates.BUBBLE.weight = 1f;
 		Templates.BUBBLE.value = 1;

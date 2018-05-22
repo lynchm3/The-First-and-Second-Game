@@ -38,11 +38,7 @@ public class TemplatesTools {
 		Templates.BROOM.soundWhenHitting = 1f;
 		Templates.BROOM.soundDampening = 1f;
 		Templates.BROOM.stackable = false;
-		Templates.BROOM.fireResistance = -50f;
-		Templates.BROOM.waterResistance = 0f;
-		Templates.BROOM.electricalResistance = 0f;
-		Templates.BROOM.poisonResistance = 0f;
-		Templates.BROOM.slashResistance = 0f;
+		Templates.BROOM.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-50));
 		Templates.BROOM.weight = 15;
 		Templates.BROOM.value = 12;
 		Templates.BROOM.anchorX = 55;
@@ -65,7 +61,7 @@ public class TemplatesTools {
 		Templates.PICKAXE.soundWhenHitting = 1f;
 		Templates.PICKAXE.soundDampening = 1f;
 		Templates.PICKAXE.stackable = false;
-		Templates.PICKAXE.fireResistance = -50f;
+		Templates.PICKAXE.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-50));
 		Templates.PICKAXE.weight = 25f;
 		Templates.PICKAXE.value = 29;
 		Templates.PICKAXE.anchorX = 32;
@@ -82,7 +78,7 @@ public class TemplatesTools {
 		Templates.SHOVEL.soundWhenHitting = 1f;
 		Templates.SHOVEL.soundDampening = 1f;
 		Templates.SHOVEL.stackable = false;
-		Templates.SHOVEL.fireResistance = -40f;
+		Templates.SHOVEL.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-50));
 		Templates.SHOVEL.weight = 28f;
 		Templates.SHOVEL.value = 32;
 		Templates.SHOVEL.anchorX = 63;
@@ -91,8 +87,7 @@ public class TemplatesTools {
 
 		Templates.FISHING_ROD = new FishingRod(); // 93,0
 		Templates.FISHING_ROD.name = "Fishing Rod";
-		Templates.FISHING_ROD.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
-				new Stat(4));
+		Templates.FISHING_ROD.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(4));
 		Templates.FISHING_ROD.fishingRange = 10;
 		Templates.FISHING_ROD.lineAnchorX = 93;
 		Templates.FISHING_ROD.lineAnchorY = 0;
@@ -103,7 +98,7 @@ public class TemplatesTools {
 		Templates.FISHING_ROD.soundWhenHitting = 1f;
 		Templates.FISHING_ROD.soundDampening = 1f;
 		Templates.FISHING_ROD.stackable = false;
-		Templates.FISHING_ROD.fireResistance = -60f;
+		Templates.FISHING_ROD.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-60));
 		Templates.FISHING_ROD.weight = 23f;
 		Templates.FISHING_ROD.value = 31;
 		Templates.FISHING_ROD.anchorX = 55;
@@ -126,7 +121,7 @@ public class TemplatesTools {
 		Templates.HATCHET.soundWhenHitting = 1f;
 		Templates.HATCHET.soundDampening = 1f;
 		Templates.HATCHET.stackable = false;
-		Templates.HATCHET.fireResistance = -50f;
+		Templates.HATCHET.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-50));
 		Templates.HATCHET.weight = 22f;
 		Templates.HATCHET.value = 32;
 		Templates.HATCHET.anchorX = 48;
@@ -135,8 +130,7 @@ public class TemplatesTools {
 
 		Templates.HUNTING_KNIFE = new Knife();
 		Templates.HUNTING_KNIFE.name = "Hunting Knife";
-		Templates.HUNTING_KNIFE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
-				new Stat(9));
+		Templates.HUNTING_KNIFE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(9));
 		Templates.HUNTING_KNIFE.minRange = 1;
 		Templates.HUNTING_KNIFE.maxRange = 1;
 		Templates.HUNTING_KNIFE.imageTexturePath = "hunting_knife.png";
@@ -172,7 +166,7 @@ public class TemplatesTools {
 		Templates.HOE.soundWhenHitting = 1f;
 		Templates.HOE.soundDampening = 1f;
 		Templates.HOE.stackable = false;
-		Templates.HOE.fireResistance = -50f;
+		Templates.HOE.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-50));
 		Templates.HOE.weight = 31f;
 		Templates.HOE.value = 17;
 		Templates.HOE.anchorX = 61;
@@ -195,7 +189,7 @@ public class TemplatesTools {
 		Templates.SICKLE.soundWhenHitting = 1f;
 		Templates.SICKLE.soundDampening = 1f;
 		Templates.SICKLE.stackable = false;
-		Templates.SICKLE.fireResistance = -50f;
+		Templates.SICKLE.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-50));
 		Templates.SICKLE.weight = 21f;
 		Templates.SICKLE.value = 22;
 		Templates.SICKLE.anchorX = 20;
@@ -218,7 +212,7 @@ public class TemplatesTools {
 		Templates.HAMMER.soundWhenHitting = 1f;
 		Templates.HAMMER.soundDampening = 1f;
 		Templates.HAMMER.stackable = false;
-		Templates.HAMMER.fireResistance = -50f;
+		Templates.HAMMER.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-50));
 		Templates.HAMMER.weight = 23f;
 		Templates.HAMMER.value = 41;
 		Templates.HAMMER.anchorX = 31;
@@ -241,7 +235,7 @@ public class TemplatesTools {
 		Templates.BASKET.soundWhenHitting = 1f;
 		Templates.BASKET.soundDampening = 1f;
 		Templates.BASKET.stackable = false;
-		Templates.BASKET.fireResistance = -80f;
+		Templates.BASKET.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-80));
 		Templates.BASKET.weight = 9f;
 		Templates.BASKET.value = 13;
 		Templates.BASKET.anchorX = 65;
@@ -273,8 +267,7 @@ public class TemplatesTools {
 
 		Templates.SERRATED_SPOON = new Weapon();
 		Templates.SERRATED_SPOON.name = "Serrated Spoon";
-		Templates.SERRATED_SPOON.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
-				new Stat(2));
+		Templates.SERRATED_SPOON.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(2));
 		Templates.SERRATED_SPOON.minRange = 1;
 		Templates.SERRATED_SPOON.maxRange = 1;
 		Templates.SERRATED_SPOON.imageTexturePath = "serrated_spoon.png";
@@ -296,8 +289,7 @@ public class TemplatesTools {
 
 		Templates.DINNER_BELL = new Bell();
 		Templates.DINNER_BELL.name = "Dinner Bell";
-		Templates.DINNER_BELL.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE,
-				new Stat(2));
+		Templates.DINNER_BELL.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(2));
 		Templates.DINNER_BELL.minRange = 1;
 		Templates.DINNER_BELL.maxRange = 1;
 		Templates.DINNER_BELL.imageTexturePath = "bell.png";
@@ -368,8 +360,7 @@ public class TemplatesTools {
 
 		Templates.JAR_OF_WATER = new ContainerForLiquids();
 		Templates.JAR_OF_WATER.name = "Jar of Water";
-		Templates.JAR_OF_WATER.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
-				new Stat(6));
+		Templates.JAR_OF_WATER.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(6));
 		Templates.JAR_OF_WATER.minRange = 1;
 		Templates.JAR_OF_WATER.maxRange = 1;
 		Templates.JAR_OF_WATER.imageTexturePath = "water_jar.png";

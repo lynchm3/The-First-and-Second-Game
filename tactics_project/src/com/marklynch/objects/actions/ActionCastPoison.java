@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Liquid;
@@ -35,7 +36,8 @@ public class ActionCastPoison extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -54,7 +56,7 @@ public class ActionCastPoison extends Action {
 			if (Game.level.shouldLog(target, performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " made ", poison, " in ", target }));
 		} else {
-			if (Math.random() * 100 > target.getEffectivePoisonResistance()) {
+			if (Math.random() * 100 > target.defensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value) {
 				target.addEffect(new EffectPoison(performer, target, 5));
 			} else {
 

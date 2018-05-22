@@ -24,10 +24,6 @@ public class TemplatesContainers {
 		Templates.CHEST.soundWhenHitting = 1f;
 		Templates.CHEST.soundDampening = 1f;
 		Templates.CHEST.stackable = false;
-		Templates.CHEST.waterResistance = 0f;
-		Templates.CHEST.electricalResistance = 0f;
-		Templates.CHEST.poisonResistance = 0f;
-		Templates.CHEST.slashResistance = 0f;
 		Templates.CHEST.weight = 100f;
 		Templates.CHEST.value = 37;
 		Templates.CHEST.anchorX = 0;
@@ -51,11 +47,7 @@ public class TemplatesContainers {
 		Templates.CRATE.soundDampening = 1f;
 		Templates.CRATE.stackable = false;
 		Templates.CRATE.floats = true;
-		Templates.CRATE.waterResistance = 0f;
-		Templates.CRATE.fireResistance = -50f;
-		Templates.CRATE.electricalResistance = 0f;
-		Templates.CRATE.poisonResistance = 0f;
-		Templates.CRATE.slashResistance = 0f;
+		Templates.CRATE.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-50));
 		Templates.CRATE.weight = 100f;
 		Templates.CRATE.value = 20;
 		Templates.CRATE.anchorX = 0;
@@ -71,14 +63,13 @@ public class TemplatesContainers {
 		Templates.LOST_AND_FOUND.chestOpenTexture = ResourceUtils.getGlobalImage("crate_open.png", true);
 		Templates.LOST_AND_FOUND.totalHealth = Templates.LOST_AND_FOUND.remainingHealth = 120;
 		Templates.LOST_AND_FOUND.stackable = false;
-		Templates.LOST_AND_FOUND.fireResistance = -50f;
+		Templates.LOST_AND_FOUND.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-50));
 		Templates.LOST_AND_FOUND.weight = 160f;
 		Templates.LOST_AND_FOUND.value = 40;
 		Templates.LOST_AND_FOUND.anchorX = 0;
 		Templates.LOST_AND_FOUND.anchorY = 0;
 		Templates.LOST_AND_FOUND.templateId = GameObject.generateNewTemplateId();
-		Templates.LOST_AND_FOUND.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE,
-				new Stat(6));
+		Templates.LOST_AND_FOUND.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(6));
 		Templates.LOST_AND_FOUND.flipYAxisInMirror = false;
 
 	}

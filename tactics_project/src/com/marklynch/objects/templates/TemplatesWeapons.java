@@ -32,10 +32,6 @@ public class TemplatesWeapons {
 		Templates.KATANA.soundWhenHitting = 5f;
 		Templates.KATANA.soundDampening = 1f;
 		Templates.KATANA.stackable = false;
-		Templates.KATANA.waterResistance = 0f;
-		Templates.KATANA.electricalResistance = 0f;
-		Templates.KATANA.poisonResistance = 0f;
-		Templates.KATANA.slashResistance = 0f;
 		Templates.KATANA.weight = 15;
 		Templates.KATANA.value = 69;
 		Templates.KATANA.anchorX = 27;
@@ -84,8 +80,7 @@ public class TemplatesWeapons {
 
 		Templates.HUNTING_BOW = new Weapon();
 		Templates.HUNTING_BOW.name = "Hunting Bow";
-		Templates.HUNTING_BOW.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE,
-				new Stat(5));
+		Templates.HUNTING_BOW.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(5));
 		Templates.HUNTING_BOW.minRange = 1;
 		Templates.HUNTING_BOW.maxRange = 9;
 		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -100,12 +95,13 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.soundWhenHitting = 5f;
 		Templates.HUNTING_BOW.soundDampening = 1f;
 		Templates.HUNTING_BOW.stackable = false;
-		Templates.HUNTING_BOW.fireResistance = -70f;
+		Templates.HUNTING_BOW.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-70));
 		Templates.HUNTING_BOW.weight = 26f;
 		Templates.HUNTING_BOW.value = 54;
 		Templates.HUNTING_BOW.anchorX = 64;
 		Templates.HUNTING_BOW.anchorY = 112;
-		Templates.HUNTING_BOW.slashResistance = 1;
+		Templates.HUNTING_BOW.defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(1));
+		;
 		Templates.HUNTING_BOW.templateId = GameObject.generateNewTemplateId();
 	}
 

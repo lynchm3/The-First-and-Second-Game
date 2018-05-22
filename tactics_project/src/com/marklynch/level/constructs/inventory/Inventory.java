@@ -1804,14 +1804,24 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (armor == armorOFSameTypeInInventory)
 				continue;
 
-			if (armorOFSameTypeInInventory.fireResistance >= armor.fireResistance
-					&& armorOFSameTypeInInventory.waterResistance >= armor.waterResistance
-					&& armorOFSameTypeInInventory.electricalResistance >= armor.electricalResistance
-					&& armorOFSameTypeInInventory.poisonResistance >= armor.poisonResistance
-					&& armorOFSameTypeInInventory.bleedResistance >= armor.bleedResistance
-					&& armorOFSameTypeInInventory.pierceResistance >= armor.pierceResistance
-					&& armorOFSameTypeInInventory.bluntResistance >= armor.bluntResistance
-					&& armorOFSameTypeInInventory.slashResistance >= armor.slashResistance) {
+			if (armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE) >= armor
+					.getEffectiveDefensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE) >= armor
+							.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE) >= armor
+							.getEffectiveDefensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE) >= armor
+							.getEffectiveDefensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.WATER_DAMAGE) >= armor
+							.getEffectiveDefensiveStat(OFFENSIVE_STATS.WATER_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE) >= armor
+							.getEffectiveDefensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.POISON_DAMAGE) >= armor
+							.getEffectiveDefensiveStat(OFFENSIVE_STATS.POISON_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE) >= armor
+							.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.HEALING) >= armor
+							.getEffectiveDefensiveStat(OFFENSIVE_STATS.HEALING)) {
 				armor.toSell = true;
 				itemsToSellCount++;
 				return true;

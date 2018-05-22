@@ -25,10 +25,6 @@ public class TemplatesEntrances {
 		Templates.WEAK_WOODEN_DOOR.soundWhenHitting = 1f;
 		Templates.WEAK_WOODEN_DOOR.soundDampening = 1f;
 		Templates.WEAK_WOODEN_DOOR.stackable = false;
-		Templates.WEAK_WOODEN_DOOR.waterResistance = 0f;
-		Templates.WEAK_WOODEN_DOOR.electricalResistance = 0f;
-		Templates.WEAK_WOODEN_DOOR.poisonResistance = 0f;
-		Templates.WEAK_WOODEN_DOOR.slashResistance = 0f;
 		Templates.WEAK_WOODEN_DOOR.weight = 80f;
 		Templates.WEAK_WOODEN_DOOR.value = 20;
 		Templates.WEAK_WOODEN_DOOR.anchorX = 0;
@@ -52,10 +48,6 @@ public class TemplatesEntrances {
 		Templates.DOOR.soundWhenHitting = 1f;
 		Templates.DOOR.soundDampening = 1f;
 		Templates.DOOR.stackable = false;
-		Templates.DOOR.waterResistance = 0f;
-		Templates.DOOR.electricalResistance = 0f;
-		Templates.DOOR.poisonResistance = 0f;
-		Templates.DOOR.slashResistance = 0f;
 		Templates.DOOR.weight = 80f;
 		Templates.DOOR.value = 30;
 		Templates.DOOR.anchorX = 0;
@@ -79,10 +71,6 @@ public class TemplatesEntrances {
 		Templates.GATE.soundWhenHitting = 1f;
 		Templates.GATE.soundDampening = 1f;
 		Templates.GATE.stackable = false;
-		Templates.GATE.waterResistance = 0f;
-		Templates.GATE.electricalResistance = 0f;
-		Templates.GATE.poisonResistance = 0f;
-		Templates.GATE.slashResistance = 0f;
 		Templates.GATE.weight = 80f;
 		Templates.GATE.value = 20;
 		Templates.GATE.anchorX = 0;
@@ -105,10 +93,6 @@ public class TemplatesEntrances {
 		Templates.FALSE_WALL.soundDampening = 1f;
 		Templates.FALSE_WALL.soundDampeningWhenClosed = 5;
 		Templates.FALSE_WALL.stackable = false;
-		Templates.FALSE_WALL.waterResistance = 0f;
-		Templates.FALSE_WALL.electricalResistance = 0f;
-		Templates.FALSE_WALL.poisonResistance = 0f;
-		Templates.FALSE_WALL.slashResistance = 0f;
 		Templates.FALSE_WALL.weight = 200f;
 		Templates.FALSE_WALL.value = 29;
 		Templates.FALSE_WALL.anchorX = 0;
