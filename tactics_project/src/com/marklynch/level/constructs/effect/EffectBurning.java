@@ -5,6 +5,8 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.ui.ActivityLog;
@@ -19,7 +21,7 @@ public class EffectBurning extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_burn.png", false);
-		this.fireDamage = 5;
+		offensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(5));
 	}
 
 	public EffectBurning(int totalTurns) {

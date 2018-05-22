@@ -4,7 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.characterscreen.CharacterScreen;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -17,8 +17,8 @@ public class TemplatesWeapons {
 		// Weapons
 		Templates.KATANA = new Weapon();
 		Templates.KATANA.name = "Katana";
-		Templates.KATANA.slashDamage = 11;
-		Templates.KATANA.pierceDamage = 3;
+		Templates.KATANA.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(11));
+		Templates.KATANA.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(3));
 		Templates.KATANA.minRange = 1;
 		Templates.KATANA.maxRange = 1;
 		Templates.KATANA.imageTexturePath = "katana.png";
@@ -44,8 +44,8 @@ public class TemplatesWeapons {
 
 		Templates.SWORD = new Weapon();
 		Templates.SWORD.name = "Sword";
-		Templates.SWORD.slashDamage = 9;
-		Templates.SWORD.pierceDamage = 3;
+		Templates.SWORD.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(9));
+		Templates.SWORD.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(3));
 		Templates.SWORD.minRange = 1;
 		Templates.SWORD.maxRange = 1;
 		Templates.SWORD.imageTexturePath = "sword.png";
@@ -62,7 +62,7 @@ public class TemplatesWeapons {
 
 		Templates.CLEAVER = new Weapon();
 		Templates.CLEAVER.name = "Cleaver";
-		Templates.CLEAVER.slashDamage = 7;
+		Templates.CLEAVER.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(7));
 		Templates.CLEAVER.minRange = 1;
 		Templates.CLEAVER.maxRange = 1;
 		Templates.CLEAVER.imageTexturePath = "cleaver.png";
@@ -84,10 +84,11 @@ public class TemplatesWeapons {
 
 		Templates.HUNTING_BOW = new Weapon();
 		Templates.HUNTING_BOW.name = "Hunting Bow";
-		Templates.HUNTING_BOW.pierceDamage = 5;
+		Templates.HUNTING_BOW.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE,
+				new Stat(5));
 		Templates.HUNTING_BOW.minRange = 1;
 		Templates.HUNTING_BOW.maxRange = 9;
-		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(CharacterScreen.DEXTERITY, 10));
+		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
 		Templates.HUNTING_BOW.imageTexturePath = "a2r2.png";
 		Templates.HUNTING_BOW.imageTexture = getGlobalImage(Templates.HUNTING_BOW.imageTexturePath, true);
 		Templates.HUNTING_BOW.totalHealth = Templates.HUNTING_BOW.remainingHealth = 20;

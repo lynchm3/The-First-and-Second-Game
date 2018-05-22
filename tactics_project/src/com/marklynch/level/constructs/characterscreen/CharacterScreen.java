@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -315,15 +316,16 @@ public class CharacterScreen implements Draggable, Scrollable {
 			highLevelStatButtons.get(statType).setTooltipText(Level.player.getEffectiveHighLevelStatTooltip(statType));
 		}
 
-		slashDamageButton.setTooltipText(Level.player.getEffectiveSlashDamageTooltip());
-		bluntDamageButton.setTooltipText(Level.player.getEffectiveBluntDamageTooltip());
-		pierceDamageButton.setTooltipText(Level.player.getEffectivePierceDamageTooltip());
-		fireDamageButton.setTooltipText(Level.player.getEffectiveFireDamageTooltip());
-		waterDamageButton.setTooltipText(Level.player.getEffectiveWaterDamageTooltip());
-		electricalDamageButton.setTooltipText(Level.player.getEffectiveElectricalDamageTooltip());
-		poisonDamageButton.setTooltipText(Level.player.getEffectivePoisonDamageTooltip());
-		bleedDamageButton.setTooltipText(Level.player.getEffectiveBleedDamageTooltip());
-		healingButton.setTooltipText(Level.player.getEffectiveHealingTooltip());
+		slashDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE));
+		bluntDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE));
+		pierceDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE));
+		fireDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE));
+		waterDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE));
+		electricalDamageButton
+				.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
+		poisonDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE));
+		bleedDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE));
+		healingButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.HEALING));
 
 		slashResistanceButton.setTooltipText(Level.player.getEffectiveSlashResistanceTooltip());
 		bluntResistanceButton.setTooltipText(Level.player.getEffectiveBluntResistanceTooltip());
@@ -398,57 +400,66 @@ public class CharacterScreen implements Draggable, Scrollable {
 			// DAMAGE
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, SLASH_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveSlashDamage());
-			slashDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveSlashDamage());
+					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE));
+			slashDamageButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, BLUNT_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveBluntDamage());
-			bluntDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveBluntDamage());
+					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE));
+			bluntDamageButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, PIERCE_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectivePierceDamage());
-			pierceDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectivePierceDamage());
+					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE));
+			pierceDamageButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, FIRE_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveFireDamage());
-			fireDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveFireDamage());
+					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE));
+			fireDamageButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, WATER_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveWaterDamage());
-			waterDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveWaterDamage());
+					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE));
+			waterDamageButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
 					ELECTRICAL_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveElectricalDamage());
-			electricalDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveElectricalDamage());
+					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
+			electricalDamageButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, POISON_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectivePoisonDamage());
-			poisonDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectivePoisonDamage());
+					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE));
+			poisonDamageButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, BLEED_DAMAGE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveBleedDamage());
-			bleedDamageButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveBleedDamage());
+					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE));
+			bleedDamageButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, HEALING_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.getEffectiveHealing());
-			healingButton.width = Game.smallFont.getWidth("" + Level.player.getEffectiveHealing());
+					Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING));
+			healingButton.width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING));
 			drawStatY += statsLineHeight;
 			drawStatY += statsLineHeight;
 

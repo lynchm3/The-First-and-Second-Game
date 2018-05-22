@@ -2,6 +2,8 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.Sign;
@@ -126,7 +128,7 @@ public class TemplatesReadables {
 		Templates.DOCUMENTS.anchorX = 0;
 		Templates.DOCUMENTS.anchorY = 0;
 		Templates.DOCUMENTS.templateId = GameObject.generateNewTemplateId();
-		Templates.DOCUMENTS.slashDamage = 1;
+		Templates.DOCUMENTS.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(1));
 
 	}
 

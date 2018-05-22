@@ -2,6 +2,8 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -33,7 +35,7 @@ public class TemplatesLiquids {
 		Templates.WATER.volume = 1;
 		Templates.WATER.touchEffects = new Effect[] { new EffectWet(5) };
 		Templates.WATER.drinkEffects = new Effect[] {};
-		Templates.WATER.waterDamage = 1;
+		Templates.WATER.offensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(1));
 
 		Templates.POISON = new Liquid();
 		Templates.POISON.name = "Poison";
@@ -56,7 +58,7 @@ public class TemplatesLiquids {
 		Templates.POISON.volume = 1;
 		Templates.POISON.touchEffects = new Effect[] { new EffectPoison(5) };
 		Templates.POISON.drinkEffects = new Effect[] { new EffectPoison(10) };
-		Templates.POISON.poisonDamage = 3;
+		Templates.POISON.offensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(3));
 	}
 
 }

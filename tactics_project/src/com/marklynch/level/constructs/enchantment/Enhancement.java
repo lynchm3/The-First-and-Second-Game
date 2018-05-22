@@ -6,24 +6,26 @@ import java.util.HashMap;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.characterscreen.CharacterScreen;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.utils.Texture;
 
 public class Enhancement {
 
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
+	public HashMap<OFFENSIVE_STATS, Stat> offensiveStats = new HashMap<OFFENSIVE_STATS, Stat>();
+
 	public String enhancementName = "Enhancement";
 	public Texture imageTexture;
-	public float slashDamage = 0;
-	public float pierceDamage = 0;
-	public float bluntDamage = 0;
-	public float fireDamage = 0;
-	public float waterDamage = 0;
-	public float electricalDamage = 0;
-	public float poisonDamage = 0;
-	public float bleedDamage = 0;
-	public float healing = 0;
+	// public float slashDamage = 0;
+	// public float pierceDamage = 0;
+	// public float bluntDamage = 0;
+	// public float fireDamage = 0;
+	// public float waterDamage = 0;
+	// public float electricalDamage = 0;
+	// public float poisonDamage = 0;
+	// public float bleedDamage = 0;
+	// public float healing = 0;
 	public float minRange = 0;
 	public float maxRange = 0;
 
@@ -47,28 +49,34 @@ public class Enhancement {
 
 	public Enhancement() {
 
-		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(CharacterScreen.STRENGTH, 0));
-		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(CharacterScreen.DEXTERITY, 0));
-		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(CharacterScreen.ENDURANCE, 0));
-		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(CharacterScreen.INTELLIGENCE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(0));
+
+		offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(0));
 	}
 
 	public Enhancement makeCopy() {
 
 		Enhancement enhancement = new Enhancement();
+
 		for (HIGH_LEVEL_STATS statKey : this.highLevelStats.keySet()) {
 			enhancement.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
 		}
 
-		enhancement.slashDamage = slashDamage;
-		enhancement.pierceDamage = pierceDamage;
-		enhancement.bluntDamage = bluntDamage;
-		enhancement.fireDamage = fireDamage;
-		enhancement.waterDamage = waterDamage;
-		enhancement.electricalDamage = electricalDamage;
-		enhancement.poisonDamage = poisonDamage;
-		enhancement.bleedDamage = bleedDamage;
-		enhancement.healing = healing;
+		for (OFFENSIVE_STATS statKey : this.offensiveStats.keySet()) {
+			enhancement.offensiveStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
+		}
+
 		enhancement.minRange = minRange;
 		enhancement.maxRange = maxRange;
 

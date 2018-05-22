@@ -1,5 +1,7 @@
 package com.marklynch.objects.templates;
 
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Storage;
 import com.marklynch.utils.ResourceUtils;
@@ -31,7 +33,7 @@ public class TemplatesContainers {
 		Templates.CHEST.anchorX = 0;
 		Templates.CHEST.anchorY = 0;
 		Templates.CHEST.templateId = GameObject.generateNewTemplateId();
-		Templates.CHEST.bluntDamage = 5;
+		Templates.CHEST.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(5));
 		Templates.CHEST.flipYAxisInMirror = false;
 
 		Templates.CRATE = new Storage();
@@ -59,7 +61,7 @@ public class TemplatesContainers {
 		Templates.CRATE.anchorX = 0;
 		Templates.CRATE.anchorY = 0;
 		Templates.CRATE.templateId = GameObject.generateNewTemplateId();
-		Templates.CRATE.bluntDamage = 4;
+		Templates.CRATE.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(4));
 		Templates.CRATE.flipYAxisInMirror = false;
 
 		Templates.LOST_AND_FOUND = new Storage();
@@ -75,7 +77,8 @@ public class TemplatesContainers {
 		Templates.LOST_AND_FOUND.anchorX = 0;
 		Templates.LOST_AND_FOUND.anchorY = 0;
 		Templates.LOST_AND_FOUND.templateId = GameObject.generateNewTemplateId();
-		Templates.LOST_AND_FOUND.bluntDamage = 4;
+		Templates.LOST_AND_FOUND.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE,
+				new Stat(6));
 		Templates.LOST_AND_FOUND.flipYAxisInMirror = false;
 
 	}

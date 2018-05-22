@@ -2,21 +2,23 @@ package com.marklynch.level.constructs;
 
 public class Stat {
 
-	public enum HIGH_LEVEL_STATS {
+	public static enum HIGH_LEVEL_STATS {
 		STRENGTH, DEXTERITY, ENDURANCE, INTELLIGENCE
 	};
 
-	public String name;
+	public static enum OFFENSIVE_STATS {
+		SLASH_DAMAGE, BLUNT_DAMAGE, PIERCE_DAMAGE, FIRE_DAMAGE, WATER_DAMAGE, ELECTRICAL_DAMAGE, POISON_DAMAGE, BLEED_DAMAGE, HEALING
+	};
+
 	public float value;
 
-	public Stat(String name, float value) {
+	public Stat(float value) {
 		super();
-		this.name = name;
 		this.value = value;
 	}
 
 	public Stat makeCopy() {
-		return new Stat(name, value);
+		return new Stat(value);
 	}
 
 }

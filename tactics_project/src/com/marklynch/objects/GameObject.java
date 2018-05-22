@@ -14,11 +14,11 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
-import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectBurning;
@@ -112,6 +112,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public String guid = UUID.randomUUID().toString();
 
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
+	public HashMap<OFFENSIVE_STATS, Stat> offensiveStats = new HashMap<OFFENSIVE_STATS, Stat>();
 
 	// public enum OFFENSIVE_STATS {"PIZZA"}
 	// public enum DEFENSIVE_STATS;
@@ -229,15 +230,16 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean flash = false;
 
 	// weapons
-	public float slashDamage = 0;
-	public float pierceDamage = 0;
-	public float bluntDamage = 0;
-	public float fireDamage = 0; // fire/purify/clean
-	public float waterDamage = 0; // water/life
-	public float electricalDamage = 0; // lightning/light/electrical/speed
-	public float poisonDamage = 0;// poison/ground/contaminate/neutralize/slow/corruption
-	public float bleedDamage = 0;
-	public float healing = 0;
+	// public float slashDamage = 0;
+	// public float pierceDamage = 0;
+	// public float bluntDamage = 0;
+	// public float fireDamage = 0; // fire/purify/clean
+	// public float waterDamage = 0; // water/life
+	// public float electricalDamage = 0; // lightning/light/electrical/speed
+	// public float poisonDamage = 0;//
+	// poison/ground/contaminate/neutralize/slow/corruption
+	// public float bleedDamage = 0;
+	// public float healing = 0;
 	public float minRange = 1;
 	public float maxRange = 1;
 
@@ -273,10 +275,20 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public GameObject() {
 
-		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(CharacterScreen.STRENGTH, 0));
-		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(CharacterScreen.DEXTERITY, 0));
-		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(CharacterScreen.ENDURANCE, 0));
-		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(CharacterScreen.INTELLIGENCE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(0));
+
+		offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(0));
 	}
 
 	public void setInstances(GameObject gameObject) {
@@ -1741,6 +1753,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			gameObject.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
 		}
 
+		for (OFFENSIVE_STATS statKey : this.offensiveStats.keySet()) {
+			gameObject.offensiveStats.put(statKey, this.offensiveStats.get(statKey).makeCopy());
+		}
+
 		gameObject.totalHealth = gameObject.remainingHealth = totalHealth;
 		gameObject.imageTexturePath = imageTexturePath;
 		gameObject.imageTexture = imageTexture;
@@ -1753,15 +1769,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.soundDampening = soundDampening;
 		gameObject.weight = weight;
 
-		gameObject.slashDamage = slashDamage;
-		gameObject.pierceDamage = pierceDamage;
-		gameObject.bluntDamage = bluntDamage;
-		gameObject.fireDamage = fireDamage;
-		gameObject.waterDamage = waterDamage;
-		gameObject.electricalDamage = electricalDamage;
-		gameObject.poisonDamage = poisonDamage;
-		gameObject.bleedDamage = bleedDamage;
-		gameObject.healing = healing;
 		gameObject.minRange = minRange;
 		gameObject.maxRange = maxRange;
 
@@ -1986,41 +1993,50 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE) {
-			return Math.round(otherGameObject.slashDamage - this.slashDamage);
+			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value
+					- this.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_BLUNT_DAMAGE) {
-			return Math.round(otherGameObject.bluntDamage - this.bluntDamage);
+			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value
+					- this.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_PIERCE_DAMAGE) {
-			return Math.round(otherGameObject.pierceDamage - this.pierceDamage);
+			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value
+					- this.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_FIRE_DAMAGE) {
-			return Math.round(otherGameObject.fireDamage - this.fireDamage);
+			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value
+					- this.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_WATER_DAMAGE) {
-			return Math.round(otherGameObject.waterDamage - this.waterDamage);
+			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value
+					- this.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_POISON_DAMAGE) {
-			return Math.round(otherGameObject.poisonDamage - this.poisonDamage);
+			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value
+					- this.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_ELECTRICAL_DAMAGE) {
-			return Math.round(otherGameObject.electricalDamage - this.electricalDamage);
+			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value
+					- this.offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value);
 
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_BLEEDING_DAMAGE) {
-			return Math.round(otherGameObject.bleedDamage - this.bleedDamage);
+			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value
+					- this.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value);
 
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_HEALING) {
-			return Math.round(otherGameObject.healing - this.healing);
+			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.HEALING).value
+					- this.offensiveStats.get(OFFENSIVE_STATS.HEALING).value);
 
 		}
 
@@ -2058,130 +2074,22 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	@Override
-	public float getEffectiveSlashDamage() {
-		if (enhancement != null)
-			return slashDamage + enhancement.slashDamage;
-		return slashDamage;
+	public float getEffectiveOffensiveStat(OFFENSIVE_STATS statType) {
+		float result = offensiveStats.get(statType).value;
+		if (enhancement != null && enhancement.offensiveStats.get(statType).value != 0)
+			result += enhancement.offensiveStats.get(statType).value;
+		return result;
 	}
 
 	@Override
-	public String getEffectiveSlashDamageTooltip() {
-		if (enhancement != null)
-			return name + " " + slashDamage + " + " + enhancement.enhancementName + " " + enhancement.slashDamage;
-		return name + " " + slashDamage;
-	}
-
-	@Override
-	public float getEffectivePierceDamage() {
-		if (enhancement != null)
-			return pierceDamage + enhancement.pierceDamage;
-		return pierceDamage;
-	}
-
-	@Override
-	public String getEffectivePierceDamageTooltip() {
-		if (enhancement != null)
-			return name + " " + pierceDamage + " + " + enhancement.enhancementName + " " + enhancement.pierceDamage;
-		return name + " " + pierceDamage;
-	}
-
-	@Override
-	public float getEffectiveBluntDamage() {
-		if (enhancement != null)
-			return bluntDamage + enhancement.bluntDamage;
-		return bluntDamage;
-	}
-
-	@Override
-	public String getEffectiveBluntDamageTooltip() {
-		if (enhancement != null)
-			return name + " " + bluntDamage + " + " + enhancement.enhancementName + " " + enhancement.bluntDamage;
-		return name + " " + bluntDamage;
-	}
-
-	@Override
-	public float getEffectiveFireDamage() {
-		if (enhancement != null)
-			return fireDamage + enhancement.fireDamage;
-		return fireDamage;
-	}
-
-	@Override
-	public String getEffectiveFireDamageTooltip() {
-		if (enhancement != null)
-			return name + " " + fireDamage + " + " + enhancement.enhancementName + " " + enhancement.fireDamage;
-		return name + " " + fireDamage;
-	}
-
-	@Override
-	public float getEffectiveWaterDamage() {
-		if (enhancement != null)
-			return waterDamage + enhancement.waterDamage;
-		return waterDamage;
-	}
-
-	@Override
-	public String getEffectiveWaterDamageTooltip() {
-		if (enhancement != null)
-			return name + " " + waterDamage + " + " + enhancement.enhancementName + " " + enhancement.waterDamage;
-		return name + " " + waterDamage;
-	}
-
-	@Override
-	public float getEffectiveElectricalDamage() {
-		if (enhancement != null)
-			return electricalDamage + enhancement.electricalDamage;
-		return electricalDamage;
-	}
-
-	@Override
-	public String getEffectiveElectricalDamageTooltip() {
-		if (enhancement != null)
-			return name + " " + electricalDamage + " + " + enhancement.enhancementName + " "
-					+ enhancement.electricalDamage;
-		return name + " " + electricalDamage;
-	}
-
-	@Override
-	public float getEffectivePoisonDamage() {
-		if (enhancement != null)
-			return poisonDamage + enhancement.poisonDamage;
-		return poisonDamage;
-	}
-
-	@Override
-	public String getEffectivePoisonDamageTooltip() {
-		if (enhancement != null)
-			return name + " " + poisonDamage + " + " + enhancement.enhancementName + " " + enhancement.poisonDamage;
-		return name + " " + poisonDamage;
-	}
-
-	@Override
-	public float getEffectiveBleedDamage() {
-		if (enhancement != null)
-			return bleedDamage + enhancement.bleedDamage;
-		return bleedDamage;
-	}
-
-	@Override
-	public String getEffectiveBleedDamageTooltip() {
-		if (enhancement != null)
-			return name + " " + bleedDamage + " + " + enhancement.enhancementName + " " + enhancement.bleedDamage;
-		return name + " " + bleedDamage;
-	}
-
-	@Override
-	public float getEffectiveHealing() {
-		if (enhancement != null)
-			return healing + enhancement.healing;
-		return healing;
-	}
-
-	@Override
-	public String getEffectiveHealingTooltip() {
-		if (enhancement != null)
-			return name + " " + healing + " + " + enhancement.enhancementName + " " + enhancement.healing;
-		return name + " " + healing;
+	public ArrayList<Object> getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS statType) {
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add(name + " " + offensiveStats.get(statType).value);
+		if (enhancement != null && enhancement.offensiveStats.get(statType).value != 0) {
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.add("" + enhancement.enhancementName + " " + enhancement.offensiveStats.get(statType).value);
+		}
+		return result;
 	}
 
 	public float getEffectiveMinRange() {
@@ -2193,17 +2101,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	protected float getTotalDamage() {
-		return slashDamage + pierceDamage + bluntDamage + fireDamage + waterDamage + electricalDamage + poisonDamage
-				+ bleedDamage;
+		return offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value
+				+ offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value
+				+ offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value
+				+ offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value
+				+ offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value
+				+ offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value
+				+ offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value
+				+ offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value;
 	}
-
-	// public float getTotalEffectiveDamage() {
-	// return getEffectiveSlashDamage() + getEffectivePierceDamage() +
-	// getEffectiveBluntDamage()
-	// + getEffectiveFireDamage() + getEffectiveWaterDamage() +
-	// getEffectiveElectricalDamage()
-	// + getEffectivePoisonDamage();
-	// }
 
 	public boolean animationsBlockingAI() {
 		if (!primaryAnimation.completed && primaryAnimation.blockAI)
@@ -2242,11 +2148,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// damageDealer).bluntDamage);
 
 		// Slash
-		if (damageDealer.getEffectiveSlashDamage() != 0) {
+		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE) != 0) {
 
 			float resistance = (this.getEffectiveSlashResistance() / 100);
-			float resistedDamage = damageDealer.getEffectiveSlashDamage() * resistance;
-			float dmg = damageDealer.getEffectiveSlashDamage() - resistedDamage;
+			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE) * resistance;
+			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE) - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.SLASH, this.getEffectiveSlashResistance());
 			remainingHealth -= dmg;
 			totalDamage += dmg;
@@ -2265,11 +2171,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Blunt
-		if (damageDealer.getEffectiveBluntDamage() != 0) {
+		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE) != 0) {
 
 			float resistance = (this.getEffectiveBluntResistance() / 100);
-			float resistedDamage = damageDealer.getEffectiveBluntDamage() * resistance;
-			float dmg = damageDealer.getEffectiveBluntDamage() - resistedDamage;
+			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE) * resistance;
+			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE) - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.BLUNT, this.getEffectiveBluntResistance());
 			remainingHealth -= dmg;
 			totalDamage += dmg;
@@ -2288,11 +2194,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Pierce
-		if (damageDealer.getEffectivePierceDamage() != 0) {
+		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE) != 0) {
 
 			float resistance = (this.getEffectivePierceResistance() / 100);
-			float resistedDamage = damageDealer.getEffectivePierceDamage() * resistance;
-			float dmg = damageDealer.getEffectivePierceDamage() - resistedDamage;
+			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE) * resistance;
+			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE) - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.PIERCE, this.getEffectivePierceResistance());
 			remainingHealth -= dmg;
 			totalDamage += dmg;
@@ -2311,11 +2217,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Fire
-		if (damageDealer.getEffectiveFireDamage() != 0) {
+		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE) != 0) {
 
 			float resistance = (this.getEffectiveFireResistance() / 100);
-			float resistedDamage = damageDealer.getEffectiveFireDamage() * resistance;
-			float dmg = damageDealer.getEffectiveFireDamage() - resistedDamage;
+			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE) * resistance;
+			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE) - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.FIRE, this.getEffectiveFireResistance());
 			remainingHealth -= dmg;
 			totalDamage += dmg;
@@ -2334,11 +2240,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Water
-		if (damageDealer.getEffectiveWaterDamage() != 0) {
+		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE) != 0) {
 
 			float resistance = (this.getEffectiveWaterResistance() / 100);
-			float resistedDamage = damageDealer.getEffectiveWaterDamage() * resistance;
-			float dmg = damageDealer.getEffectiveWaterDamage() - resistedDamage;
+			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE) * resistance;
+			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE) - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.WATER, this.getEffectiveWaterResistance());
 			remainingHealth -= dmg;
 			totalDamage += dmg;
@@ -2357,11 +2263,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Electrical
-		if (damageDealer.getEffectiveElectricalDamage() != 0) {
+		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE) != 0) {
 
 			float resistance = (this.getEffectiveElectricalResistance() / 100);
-			float resistedDamage = damageDealer.getEffectiveElectricalDamage() * resistance;
-			float dmg = damageDealer.getEffectiveElectricalDamage() - resistedDamage;
+			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE)
+					* resistance;
+			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE) - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.ELECTRIC, this.getEffectiveElectricalResistance());
 			remainingHealth -= dmg;
 			totalDamage += dmg;
@@ -2380,11 +2287,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Poison
-		if (damageDealer.getEffectivePoisonDamage() != 0) {
+		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE) != 0) {
 
 			float resistance = (this.getEffectivePoisonResistance() / 100);
-			float resistedDamage = damageDealer.getEffectivePoisonDamage() * resistance;
-			float dmg = damageDealer.getEffectivePoisonDamage() - resistedDamage;
+			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE) * resistance;
+			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE) - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.POISON, this.getEffectivePoisonResistance());
 			remainingHealth -= dmg;
 			totalDamage += dmg;
@@ -2403,11 +2310,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Bleed
-		if (damageDealer.getEffectiveBleedDamage() != 0) {
+		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE) != 0) {
 
 			float resistance = (this.getEffectiveBleedResistance() / 100);
-			float resistedDamage = damageDealer.getEffectiveBleedDamage() * resistance;
-			float dmg = damageDealer.getEffectiveBleedDamage() - resistedDamage;
+			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE) * resistance;
+			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE) - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.BLEEDING, this.getEffectiveBleedResistance());
 			remainingHealth -= dmg;
 			totalDamage += dmg;
@@ -2426,12 +2333,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Healing
-		if (damageDealer.getEffectiveHealing() != 0) {
-			// float dmg = damageDealer.getEffectivePoisonDamage() /
+		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING) != 0) {
+			// float dmg =
+			// damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE) /
 			// (this.getEffectivePosionResistance() / 100);
-			doDamageAnimation(damageDealer.getEffectiveHealing(), offsetY, DAMAGE_TYPE.HEALING, +200f);
-			remainingHealth += damageDealer.getEffectiveHealing();
-			totalDamage -= damageDealer.getEffectiveHealing();
+			doDamageAnimation(damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING), offsetY,
+					DAMAGE_TYPE.HEALING, +200f);
+			remainingHealth += damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING);
+			totalDamage -= damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING);
 			// thisIsAnAttack = true;
 
 			if (gameObjectAttacker != null)

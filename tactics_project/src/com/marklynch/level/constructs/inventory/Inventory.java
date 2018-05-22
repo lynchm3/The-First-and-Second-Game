@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
@@ -1765,12 +1766,24 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				}
 			}
 
-			if (otherWeapon.bluntDamage >= weapon.bluntDamage && otherWeapon.slashDamage >= weapon.slashDamage
-					&& otherWeapon.pierceDamage >= weapon.pierceDamage && otherWeapon.waterDamage >= weapon.waterDamage
-					&& otherWeapon.fireDamage >= weapon.fireDamage
-					&& otherWeapon.electricalDamage >= weapon.electricalDamage
-					&& otherWeapon.poisonDamage >= weapon.poisonDamage
-					&& otherWeapon.bleedDamage >= weapon.bleedDamage && otherWeapon.healing >= weapon.healing
+			if (otherWeapon.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value >= weapon.offensiveStats
+					.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value
+					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value >= weapon.offensiveStats
+							.get(OFFENSIVE_STATS.SLASH_DAMAGE).value
+					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value >= weapon.offensiveStats
+							.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value
+					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value >= weapon.offensiveStats
+							.get(OFFENSIVE_STATS.WATER_DAMAGE).value
+					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value >= weapon.offensiveStats
+							.get(OFFENSIVE_STATS.FIRE_DAMAGE).value
+					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value >= weapon.offensiveStats
+							.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value
+					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value >= weapon.offensiveStats
+							.get(OFFENSIVE_STATS.POISON_DAMAGE).value
+					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value >= weapon.offensiveStats
+							.get(OFFENSIVE_STATS.BLEED_DAMAGE).value
+					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.HEALING).value >= weapon.offensiveStats
+							.get(OFFENSIVE_STATS.HEALING).value
 					&& otherWeapon.maxRange >= weapon.maxRange && otherWeapon.minRange <= weapon.minRange) {
 				weapon.toSell = true;
 				itemsToSellCount++;

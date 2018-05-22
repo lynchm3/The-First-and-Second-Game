@@ -23,6 +23,7 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
@@ -512,38 +513,6 @@ public class Actor extends GameObject {
 				equip(weapon);
 				equippedWeaponGUID = weapon.guid;
 			}
-		}
-	}
-
-	public void equipBestWeaponForCounter(GameObject target, Weapon targetsWeapon) {
-
-		if (!canEquipWeapons)
-			return;
-
-		ArrayList<Weapon> potentialWeaponsToEquip = new ArrayList<Weapon>();
-
-		int range = this.straightLineDistanceTo(target.squareGameObjectIsOn);
-		for (Weapon weapon : getWeaponsInInventory()) {
-			if (range >= weapon.getEffectiveMinRange() && range <= weapon.getEffectiveMaxRange()) {
-				potentialWeaponsToEquip.add(weapon);
-			}
-		}
-
-		if (potentialWeaponsToEquip.size() == 0) {
-			equip(null);
-			equippedWeaponGUID = null;
-		} else if (potentialWeaponsToEquip.size() == 1) {
-			equip(potentialWeaponsToEquip.get(0));
-			equippedWeaponGUID = potentialWeaponsToEquip.get(0).guid;
-		} else {
-			ArrayList<Fight> fights = new ArrayList<Fight>();
-			for (Weapon weapon : potentialWeaponsToEquip) {
-				Fight fight = new Fight(this, weapon, target, targetsWeapon, range);
-				fights.add(fight);
-			}
-			fights.sort(new Fight.FightComparator());
-			equipped = fights.get(0).attackerWeapon;
-			equippedWeaponGUID = fights.get(0).attackerWeapon.guid;
 		}
 	}
 
@@ -1539,31 +1508,6 @@ public class Actor extends GameObject {
 		super.drawUI();
 	}
 
-	public ArrayList<Float> calculateIdealDistanceFromTargetToAttack(GameObject target) {
-
-		ArrayList<Float> idealDistances = new ArrayList<Float>();
-		if (!canEquipWeapons) {
-			idealDistances.add(1f);
-			return idealDistances;
-		}
-
-		ArrayList<Fight> fights = new ArrayList<Fight>();
-		for (Weapon weapon : getWeaponsInInventory()) {
-			for (float range = weapon.getEffectiveMinRange(); range <= weapon.getEffectiveMaxRange(); range++) {
-				Fight fight = new Fight(this, weapon, target, target.bestCounterWeapon(this, weapon, range), range);
-				fights.add(fight);
-			}
-		}
-
-		fights.sort(new Fight.FightComparator());
-
-		for (Fight fight : fights) {
-			idealDistances.add(fight.range);
-		}
-
-		return idealDistances;
-	}
-
 	public Button getButtonFromMousePosition(float alteredMouseX, float alteredMouseY) {
 
 		return null;
@@ -2369,147 +2313,49 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public float getEffectiveSlashDamage() {
-		if (equipped != null)
-			return equipped.getEffectiveSlashDamage();
-		else
-			return this.slashDamage;
+	public float getEffectiveOffensiveStat(OFFENSIVE_STATS statType) {
+		// Stat stat = highLevelStats.get(statType);
+		// return stat.value;
+
+		float result = offensiveStats.get(statType).value;
+		if (equipped != null && equipped.offensiveStats.get(statType).value != 0) {
+			result += equipped.offensiveStats.get(statType).value;
+		}
+		if (helmet != null && helmet.offensiveStats.get(statType).value != 0) {
+			result += helmet.offensiveStats.get(statType).value;
+		}
+		if (bodyArmor != null && bodyArmor.offensiveStats.get(statType).value != 0) {
+			result += bodyArmor.offensiveStats.get(statType).value;
+		}
+		if (legArmor != null && legArmor.offensiveStats.get(statType).value != 0) {
+			result += legArmor.offensiveStats.get(statType).value;
+		}
+
+		return result;
 	}
 
 	@Override
-	public String getEffectiveSlashDamageTooltip() {
-		if (equipped != null)
-			return "(" + equipped.getEffectiveSlashDamageTooltip() + ")";
-		else
-			return "(" + "Unarmed - " + this.slashDamage + ")";
-	}
+	public ArrayList<Object> getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS statType) {
+		ArrayList<Object> result = new ArrayList<Object>();
 
-	@Override
-	public float getEffectiveBluntDamage() {
-		if (equipped != null)
-			return equipped.getEffectiveBluntDamage();
-		else
-			return this.bluntDamage;
-	}
-
-	@Override
-	public String getEffectiveBluntDamageTooltip() {
-		if (equipped != null)
-			return "(" + equipped.getEffectiveBluntDamageTooltip() + ")";
-		else
-			return "(" + "Unarmed - " + this.bluntDamage + ")";
-	}
-
-	@Override
-	public float getEffectivePierceDamage() {
-		if (equipped != null)
-			return equipped.getEffectivePierceDamage();
-		else
-			return this.pierceDamage;
-	}
-
-	@Override
-	public String getEffectivePierceDamageTooltip() {
-		if (equipped != null)
-			return "(" + equipped.getEffectivePierceDamageTooltip() + ")";
-		else
-			return "(" + "Unarmed - " + this.pierceDamage + ")";
-	}
-
-	@Override
-	public float getEffectiveFireDamage() {
-		if (equipped != null)
-			return equipped.getEffectiveFireDamage();
-		else
-			return this.fireDamage;
-	}
-
-	@Override
-	public String getEffectiveFireDamageTooltip() {
-		if (equipped != null)
-			return "(" + equipped.getEffectiveFireDamageTooltip() + ")";
-		else
-			return "(" + "Unarmed - " + this.fireDamage + ")";
-	}
-
-	@Override
-	public float getEffectiveWaterDamage() {
-		if (equipped != null)
-			return equipped.getEffectiveWaterDamage();
-		else
-			return this.waterDamage;
-	}
-
-	@Override
-	public String getEffectiveWaterDamageTooltip() {
-		if (equipped != null)
-			return "(" + equipped.getEffectiveWaterDamageTooltip() + ")";
-		else
-			return "(" + "Unarmed - " + this.waterDamage + ")";
-	}
-
-	@Override
-	public float getEffectiveElectricalDamage() {
-		if (equipped != null)
-			return equipped.getEffectiveElectricalDamage();
-		else
-			return this.electricalDamage;
-	}
-
-	@Override
-	public String getEffectiveElectricalDamageTooltip() {
-		if (equipped != null)
-			return "(" + equipped.getEffectiveElectricalDamageTooltip() + ")";
-		else
-			return "(" + "Unarmed - " + this.electricalDamage + ")";
-	}
-
-	@Override
-	public float getEffectivePoisonDamage() {
-		if (equipped != null)
-			return equipped.getEffectivePoisonDamage();
-		else
-			return this.poisonDamage;
-	}
-
-	@Override
-	public String getEffectivePoisonDamageTooltip() {
-		if (equipped != null)
-			return "(" + equipped.getEffectivePoisonDamageTooltip() + ")";
-		else
-			return "(" + "Unarmed - " + this.poisonDamage + ")";
-	}
-
-	@Override
-	public float getEffectiveBleedDamage() {
-		if (equipped != null)
-			return equipped.getEffectiveBleedDamage();
-		else
-			return this.bleedDamage;
-	}
-
-	@Override
-	public String getEffectiveBleedDamageTooltip() {
-		if (equipped != null)
-			return "(" + equipped.getEffectiveBleedDamageTooltip() + ")";
-		else
-			return "(" + "Unarmed - " + this.bleedDamage + ")";
-	}
-
-	@Override
-	public float getEffectiveHealing() {
-		if (equipped != null)
-			return equipped.getEffectiveHealing();
-		else
-			return this.healing;
-	}
-
-	@Override
-	public String getEffectiveHealingTooltip() {
-		if (equipped != null)
-			return "(" + equipped.getEffectiveHealingTooltip() + ")";
-		else
-			return "(" + "Unarmed - " + this.healing + ")";
+		result.add("Inherent " + offensiveStats.get(statType).value);
+		if (equipped != null && equipped.offensiveStats.get(statType).value != 0) {
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(equipped.getEffectiveOffensiveStatTooltip(statType));
+		}
+		if (helmet != null && helmet.offensiveStats.get(statType).value != 0) {
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(helmet.getEffectiveOffensiveStatTooltip(statType));
+		}
+		if (bodyArmor != null && bodyArmor.offensiveStats.get(statType).value != 0) {
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(bodyArmor.getEffectiveOffensiveStatTooltip(statType));
+		}
+		if (legArmor != null && legArmor.offensiveStats.get(statType).value != 0) {
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(legArmor.getEffectiveOffensiveStatTooltip(statType));
+		}
+		return result;
 	}
 
 	@Override

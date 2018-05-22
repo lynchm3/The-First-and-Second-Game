@@ -2,6 +2,8 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.objects.Discoverable;
@@ -247,7 +249,7 @@ public class TemplatesNature {
 		Templates.APPLE.anchorX = 16;
 		Templates.APPLE.anchorY = 16;
 		Templates.APPLE.templateId = GameObject.generateNewTemplateId();
-		Templates.APPLE.bluntDamage = 1;
+		Templates.APPLE.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(1));
 		Templates.APPLE.flipYAxisInMirror = false;
 
 		Templates.ROCK = new GameObject();
@@ -268,7 +270,7 @@ public class TemplatesNature {
 		Templates.ROCK.anchorX = 12;
 		Templates.ROCK.anchorY = 14;
 		Templates.ROCK.templateId = GameObject.generateNewTemplateId();
-		Templates.ROCK.bluntDamage = 5;
+		Templates.ROCK.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(5));
 		Templates.ROCK.flipYAxisInMirror = false;
 
 		Templates.VEIN = new Vein();
@@ -318,7 +320,8 @@ public class TemplatesNature {
 		Templates.MEAT_CHUNK.anchorX = 0;
 		Templates.MEAT_CHUNK.anchorY = 0;
 		Templates.MEAT_CHUNK.templateId = GameObject.generateNewTemplateId();
-		Templates.MEAT_CHUNK.bluntDamage = 2;
+		Templates.MEAT_CHUNK.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE,
+				new Stat(2));
 
 		// WATER_BODY
 		Templates.WATER_BODY = new WaterBody();

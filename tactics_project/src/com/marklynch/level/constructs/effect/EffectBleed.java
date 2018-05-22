@@ -3,6 +3,8 @@ package com.marklynch.level.constructs.effect;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.templates.Templates;
@@ -22,7 +24,8 @@ public class EffectBleed extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_bleed.png", false);
-		this.bleedDamage = 5;
+
+		offensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(5));
 	}
 
 	public EffectBleed(int totalTurns) {

@@ -2,6 +2,8 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
@@ -22,13 +24,7 @@ public class TemplatesTools {
 		// Tools
 		Templates.BROOM = new Weapon();
 		Templates.BROOM.name = "Broom";
-		Templates.BROOM.slashDamage = 0;
-		Templates.BROOM.pierceDamage = 0;
-		Templates.BROOM.bluntDamage = 1;
-		Templates.BROOM.fireDamage = 0;
-		Templates.BROOM.waterDamage = 0;
-		Templates.BROOM.electricalDamage = 1;
-		Templates.BROOM.poisonDamage = 0;
+		Templates.BROOM.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(1));
 		Templates.BROOM.minRange = 1;
 		Templates.BROOM.maxRange = 1;
 		Templates.BROOM.imageTexturePath = "broom.png";
@@ -55,7 +51,7 @@ public class TemplatesTools {
 
 		Templates.PICKAXE = new Pickaxe();
 		Templates.PICKAXE.name = "Pickaxe";
-		Templates.PICKAXE.pierceDamage = 7;
+		Templates.PICKAXE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(7));
 		Templates.PICKAXE.minRange = 1;
 		Templates.PICKAXE.maxRange = 1;
 		Templates.PICKAXE.imageTexturePath = "pickaxe.png";
@@ -78,7 +74,7 @@ public class TemplatesTools {
 
 		Templates.SHOVEL = new Shovel();
 		Templates.SHOVEL.name = "Shovel";
-		Templates.SHOVEL.slashDamage = 6;
+		Templates.SHOVEL.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(6));
 		Templates.SHOVEL.imageTexturePath = "shovel.png";
 		Templates.SHOVEL.imageTexture = getGlobalImage(Templates.SHOVEL.imageTexturePath, true);
 		Templates.SHOVEL.totalHealth = Templates.SHOVEL.remainingHealth = 27;
@@ -95,7 +91,8 @@ public class TemplatesTools {
 
 		Templates.FISHING_ROD = new FishingRod(); // 93,0
 		Templates.FISHING_ROD.name = "Fishing Rod";
-		Templates.FISHING_ROD.slashDamage = 4;
+		Templates.FISHING_ROD.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
+				new Stat(4));
 		Templates.FISHING_ROD.fishingRange = 10;
 		Templates.FISHING_ROD.lineAnchorX = 93;
 		Templates.FISHING_ROD.lineAnchorY = 0;
@@ -115,7 +112,7 @@ public class TemplatesTools {
 
 		Templates.HATCHET = new Axe();
 		Templates.HATCHET.name = "Hatchet";
-		Templates.HATCHET.slashDamage = 6;
+		Templates.HATCHET.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(6));
 		Templates.HATCHET.minRange = 1;
 		Templates.HATCHET.maxRange = 1;
 		Templates.HATCHET.imageTexturePath = "hatchet.png";
@@ -138,7 +135,8 @@ public class TemplatesTools {
 
 		Templates.HUNTING_KNIFE = new Knife();
 		Templates.HUNTING_KNIFE.name = "Hunting Knife";
-		Templates.HUNTING_KNIFE.slashDamage = 9;
+		Templates.HUNTING_KNIFE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
+				new Stat(9));
 		Templates.HUNTING_KNIFE.minRange = 1;
 		Templates.HUNTING_KNIFE.maxRange = 1;
 		Templates.HUNTING_KNIFE.imageTexturePath = "hunting_knife.png";
@@ -160,7 +158,7 @@ public class TemplatesTools {
 
 		Templates.HOE = new Weapon();
 		Templates.HOE.name = "Hoe";
-		Templates.HOE.slashDamage = 3;
+		Templates.HOE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(3));
 		Templates.HOE.minRange = 1;
 		Templates.HOE.maxRange = 1;
 		Templates.HOE.imageTexturePath = "hoe.png";
@@ -183,7 +181,7 @@ public class TemplatesTools {
 
 		Templates.SICKLE = new Weapon();
 		Templates.SICKLE.name = "Sickle";
-		Templates.SICKLE.slashDamage = 4;
+		Templates.SICKLE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(6));
 		Templates.SICKLE.minRange = 1;
 		Templates.SICKLE.maxRange = 1;
 		Templates.SICKLE.imageTexturePath = "sickle.png";
@@ -206,7 +204,7 @@ public class TemplatesTools {
 
 		Templates.HAMMER = new Weapon();
 		Templates.HAMMER.name = "Hammer";
-		Templates.HAMMER.bluntDamage = 4;
+		Templates.HAMMER.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(5));
 		Templates.HAMMER.minRange = 1;
 		Templates.HAMMER.maxRange = 1;
 		Templates.HAMMER.imageTexturePath = "hammer.png";
@@ -229,7 +227,7 @@ public class TemplatesTools {
 
 		Templates.BASKET = new Weapon();
 		Templates.BASKET.name = "Basket";
-		Templates.BASKET.bluntDamage = 4;
+		Templates.BASKET.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(1));
 		Templates.BASKET.minRange = 1;
 		Templates.BASKET.maxRange = 1;
 		Templates.BASKET.imageTexturePath = "basket.png";
@@ -253,7 +251,7 @@ public class TemplatesTools {
 
 		Templates.WHIP = new Weapon();
 		Templates.WHIP.name = "Whip";
-		Templates.WHIP.bluntDamage = 4;
+		Templates.WHIP.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(9));
 		Templates.WHIP.minRange = 1;
 		Templates.WHIP.maxRange = 1;
 		Templates.WHIP.imageTexturePath = "whip.png";
@@ -275,7 +273,8 @@ public class TemplatesTools {
 
 		Templates.SERRATED_SPOON = new Weapon();
 		Templates.SERRATED_SPOON.name = "Serrated Spoon";
-		Templates.SERRATED_SPOON.slashDamage = 2;
+		Templates.SERRATED_SPOON.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
+				new Stat(2));
 		Templates.SERRATED_SPOON.minRange = 1;
 		Templates.SERRATED_SPOON.maxRange = 1;
 		Templates.SERRATED_SPOON.imageTexturePath = "serrated_spoon.png";
@@ -297,7 +296,8 @@ public class TemplatesTools {
 
 		Templates.DINNER_BELL = new Bell();
 		Templates.DINNER_BELL.name = "Dinner Bell";
-		Templates.DINNER_BELL.bluntDamage = 2;
+		Templates.DINNER_BELL.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE,
+				new Stat(2));
 		Templates.DINNER_BELL.minRange = 1;
 		Templates.DINNER_BELL.maxRange = 1;
 		Templates.DINNER_BELL.imageTexturePath = "bell.png";
@@ -319,8 +319,8 @@ public class TemplatesTools {
 
 		Templates.LANTERN = new Lantern();
 		Templates.LANTERN.name = "Lantern";
-		Templates.LANTERN.bluntDamage = 1;
-		Templates.LANTERN.fireDamage = 1;
+		Templates.LANTERN.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(1));
+		Templates.LANTERN.offensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(1));
 		Templates.LANTERN.minRange = 1;
 		Templates.LANTERN.maxRange = 1;
 		Templates.LANTERN.imageTexturePath = "lantern.png";
@@ -343,7 +343,7 @@ public class TemplatesTools {
 
 		Templates.JAR = new ContainerForLiquids();
 		Templates.JAR.name = "Empty Jar";
-		Templates.JAR.slashDamage = 10;
+		Templates.JAR.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(6));
 		Templates.JAR.minRange = 1;
 		Templates.JAR.maxRange = 1;
 		Templates.JAR.imageTexturePath = "jar.png";
@@ -368,7 +368,8 @@ public class TemplatesTools {
 
 		Templates.JAR_OF_WATER = new ContainerForLiquids();
 		Templates.JAR_OF_WATER.name = "Jar of Water";
-		Templates.JAR_OF_WATER.slashDamage = 10;
+		Templates.JAR_OF_WATER.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE,
+				new Stat(6));
 		Templates.JAR_OF_WATER.minRange = 1;
 		Templates.JAR_OF_WATER.maxRange = 1;
 		Templates.JAR_OF_WATER.imageTexturePath = "water_jar.png";

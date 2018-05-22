@@ -3,6 +3,8 @@ package com.marklynch.level.constructs.effect;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -17,7 +19,7 @@ public class EffectPoison extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_poison.png", false);
-		this.poisonDamage = 5;
+		offensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(5));
 	}
 
 	public EffectPoison(int totalTurns) {

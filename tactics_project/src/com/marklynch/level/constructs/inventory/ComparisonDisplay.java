@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.inventory;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -143,12 +144,12 @@ public class ComparisonDisplay {
 		// Slash Damage
 		float equippedSlashDamage = 0;
 		if (gameObject1 != null)
-			equippedSlashDamage = gameObject1.slashDamage;
-		if (equippedSlashDamage != 0 || gameObject2.slashDamage != 0) {
-			if (equippedSlashDamage == gameObject2.slashDamage) {
+			equippedSlashDamage = gameObject1.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value;
+		if (equippedSlashDamage != 0 || gameObject2.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value != 0) {
+			if (equippedSlashDamage == gameObject2.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedSlashDamage < gameObject2.slashDamage) {
+			} else if (equippedSlashDamage < gameObject2.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -160,7 +161,8 @@ public class ComparisonDisplay {
 					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedSlashDamage, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.slashDamage, color2) });
+					new Object[] { new StringWithColor(
+							"" + gameObject2.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value, color2) });
 			TextureUtils.drawTexture(imageSlash, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -168,12 +170,12 @@ public class ComparisonDisplay {
 		// Pierce Damage
 		float equippedPierceDamage = 0;
 		if (gameObject1 != null)
-			equippedPierceDamage = gameObject1.pierceDamage;
-		if (equippedPierceDamage != 0 || gameObject2.pierceDamage != 0) {
-			if (equippedPierceDamage == gameObject2.pierceDamage) {
+			equippedPierceDamage = gameObject1.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value;
+		if (equippedPierceDamage != 0 || gameObject2.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value != 0) {
+			if (equippedPierceDamage == gameObject2.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedPierceDamage < gameObject2.pierceDamage) {
+			} else if (equippedPierceDamage < gameObject2.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -184,8 +186,11 @@ public class ComparisonDisplay {
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedPierceDamage),
 					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedPierceDamage, color1) });
-			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.pierceDamage, color2) });
+			TextUtils
+					.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
+							new Object[] { new StringWithColor(
+									"" + gameObject2.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value,
+									color2) });
 			TextureUtils.drawTexture(imagePierce, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -193,12 +198,12 @@ public class ComparisonDisplay {
 		// Blunt Damage
 		float equippedBluntDamage = 1;
 		if (gameObject1 != null)
-			equippedBluntDamage = gameObject1.bluntDamage;
-		if (equippedBluntDamage != 0 || gameObject2.bluntDamage != 0) {
-			if (equippedBluntDamage == gameObject2.bluntDamage) {
+			equippedBluntDamage = gameObject1.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value;
+		if (equippedBluntDamage != 0 || gameObject2.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value != 0) {
+			if (equippedBluntDamage == gameObject2.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedBluntDamage < gameObject2.bluntDamage) {
+			} else if (equippedBluntDamage < gameObject2.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -210,7 +215,8 @@ public class ComparisonDisplay {
 					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedBluntDamage, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.bluntDamage, color2) });
+					new Object[] { new StringWithColor(
+							"" + gameObject2.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value, color2) });
 			TextureUtils.drawTexture(imageBlunt, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -218,12 +224,12 @@ public class ComparisonDisplay {
 		// Fire Damage
 		float equippedFireDamage = 0;
 		if (gameObject1 != null)
-			equippedBluntDamage = gameObject1.fireDamage;
-		if (equippedFireDamage != 0 || gameObject2.fireDamage != 0) {
-			if (equippedFireDamage == gameObject2.fireDamage) {
+			equippedBluntDamage = gameObject1.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value;
+		if (equippedFireDamage != 0 || gameObject2.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value != 0) {
+			if (equippedFireDamage == gameObject2.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedFireDamage < gameObject2.fireDamage) {
+			} else if (equippedFireDamage < gameObject2.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -235,7 +241,8 @@ public class ComparisonDisplay {
 					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedFireDamage, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.fireDamage, color2) });
+					new Object[] { new StringWithColor(
+							"" + gameObject2.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value, color2) });
 			TextureUtils.drawTexture(imageFire, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -243,12 +250,12 @@ public class ComparisonDisplay {
 		// Water Damage
 		float equippedWaterDamage = 0;
 		if (gameObject1 != null)
-			equippedWaterDamage = gameObject1.waterDamage;
-		if (equippedWaterDamage != 0 || gameObject2.waterDamage != 0) {
-			if (equippedWaterDamage == gameObject2.waterDamage) {
+			equippedWaterDamage = gameObject1.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value;
+		if (equippedWaterDamage != 0 || gameObject2.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value != 0) {
+			if (equippedWaterDamage == gameObject2.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedWaterDamage < gameObject2.waterDamage) {
+			} else if (equippedWaterDamage < gameObject2.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -260,7 +267,8 @@ public class ComparisonDisplay {
 					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedWaterDamage, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.waterDamage, color2) });
+					new Object[] { new StringWithColor(
+							"" + gameObject2.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value, color2) });
 			TextureUtils.drawTexture(imageWater, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -268,12 +276,14 @@ public class ComparisonDisplay {
 		// Electrical Damage
 		float equippedElectricalDamage = 0;
 		if (gameObject1 != null)
-			equippedBluntDamage = gameObject1.electricalDamage;
-		if (equippedElectricalDamage != 0 || gameObject2.electricalDamage != 0) {
-			if (equippedElectricalDamage == gameObject2.electricalDamage) {
+			equippedBluntDamage = gameObject1.offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value;
+		if (equippedElectricalDamage != 0
+				|| gameObject2.offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value != 0) {
+			if (equippedElectricalDamage == gameObject2.offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedElectricalDamage < gameObject2.electricalDamage) {
+			} else if (equippedElectricalDamage < gameObject2.offensiveStats
+					.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -285,8 +295,11 @@ public class ComparisonDisplay {
 					statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedElectricalDamage), currentY,
 					Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedElectricalDamage, color1) });
-			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.electricalDamage, color2) });
+			TextUtils
+					.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
+							new Object[] { new StringWithColor(
+									"" + gameObject2.offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value,
+									color2) });
 			TextureUtils.drawTexture(imageElectrical, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -294,12 +307,12 @@ public class ComparisonDisplay {
 		// Posion Damage
 		float equippedPoisonDamage = 0;
 		if (gameObject1 != null)
-			equippedPoisonDamage = gameObject1.poisonDamage;
-		if (equippedPoisonDamage != 0 || gameObject2.poisonDamage != 0) {
-			if (equippedPoisonDamage == gameObject2.poisonDamage) {
+			equippedPoisonDamage = gameObject1.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value;
+		if (equippedPoisonDamage != 0 || gameObject2.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value != 0) {
+			if (equippedPoisonDamage == gameObject2.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedPoisonDamage < gameObject2.poisonDamage) {
+			} else if (equippedPoisonDamage < gameObject2.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -310,8 +323,11 @@ public class ComparisonDisplay {
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedPoisonDamage),
 					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedPoisonDamage, color1) });
-			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.poisonDamage, color2) });
+			TextUtils
+					.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
+							new Object[] { new StringWithColor(
+									"" + gameObject2.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value,
+									color2) });
 			TextureUtils.drawTexture(imagePosion, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -319,12 +335,12 @@ public class ComparisonDisplay {
 		// Bleed
 		float equippedBleedDamage = 0;
 		if (gameObject1 != null)
-			equippedBleedDamage = gameObject1.bleedDamage;
-		if (equippedBleedDamage != 0 || gameObject2.bleedDamage != 0) {
-			if (equippedBleedDamage == gameObject2.bleedDamage) {
+			equippedBleedDamage = gameObject1.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value;
+		if (equippedBleedDamage != 0 || gameObject2.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value != 0) {
+			if (equippedBleedDamage == gameObject2.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedBleedDamage < gameObject2.bleedDamage) {
+			} else if (equippedBleedDamage < gameObject2.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -336,7 +352,8 @@ public class ComparisonDisplay {
 					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedBleedDamage, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.bleedDamage, color2) });
+					new Object[] { new StringWithColor(
+							"" + gameObject2.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value, color2) });
 			TextureUtils.drawTexture(imagePosion, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -344,12 +361,12 @@ public class ComparisonDisplay {
 		// Healing
 		float equippedHealingDamage = 0;
 		if (gameObject1 != null)
-			equippedHealingDamage = gameObject1.healing;
-		if (equippedHealingDamage != 0 || gameObject2.healing != 0) {
-			if (equippedHealingDamage == gameObject2.healing) {
+			equippedHealingDamage = gameObject1.offensiveStats.get(OFFENSIVE_STATS.HEALING).value;
+		if (equippedHealingDamage != 0 || gameObject2.offensiveStats.get(OFFENSIVE_STATS.HEALING).value != 0) {
+			if (equippedHealingDamage == gameObject2.offensiveStats.get(OFFENSIVE_STATS.HEALING).value) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedHealingDamage < gameObject2.healing) {
+			} else if (equippedHealingDamage < gameObject2.offensiveStats.get(OFFENSIVE_STATS.HEALING).value) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -360,8 +377,8 @@ public class ComparisonDisplay {
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedHealingDamage),
 					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedHealingDamage, color1) });
-			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.healing, color2) });
+			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, new Object[] {
+					new StringWithColor("" + gameObject2.offensiveStats.get(OFFENSIVE_STATS.HEALING).value, color2) });
 			TextureUtils.drawTexture(imagePosion, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}

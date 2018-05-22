@@ -1,41 +1,13 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+
 public interface DamageDealer {
 
-	float getEffectiveSlashDamage();
+	public float getEffectiveOffensiveStat(OFFENSIVE_STATS statType);
 
-	float getEffectiveBluntDamage();
-
-	float getEffectivePierceDamage();
-
-	float getEffectiveFireDamage();
-
-	float getEffectiveWaterDamage();
-
-	float getEffectiveElectricalDamage();
-
-	float getEffectivePoisonDamage();
-
-	float getEffectiveHealing();
-
-	float getEffectiveBleedDamage();
-
-	String getEffectiveSlashDamageTooltip();
-
-	String getEffectiveBluntDamageTooltip();
-
-	String getEffectivePierceDamageTooltip();
-
-	String getEffectiveFireDamageTooltip();
-
-	String getEffectiveWaterDamageTooltip();
-
-	String getEffectiveElectricalDamageTooltip();
-
-	String getEffectivePoisonDamageTooltip();
-
-	String getEffectiveHealingTooltip();
-
-	String getEffectiveBleedDamageTooltip();
+	public ArrayList<Object> getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS statType);
 
 }
