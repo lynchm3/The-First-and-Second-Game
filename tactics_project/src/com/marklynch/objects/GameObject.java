@@ -13,6 +13,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
@@ -98,6 +99,7 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
@@ -108,10 +110,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
 	public String guid = UUID.randomUUID().toString();
-
-	public enum HIGH_LEVEL_STATS {
-		STRENGTH, DEXTERITY, ENDURANCE, INTELLIGENCE
-	};
 
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
 
@@ -2043,13 +2041,19 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public float getEffectiveHighLevelStat(HIGH_LEVEL_STATS statType) {
-		Stat stat = highLevelStats.get(statType);
-		return stat.value;
+		float result = highLevelStats.get(statType).value;
+		if (enhancement != null && enhancement.highLevelStats.get(statType).value != 0)
+			result += enhancement.highLevelStats.get(statType).value;
+		return result;
 	}
 
 	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
 		ArrayList<Object> result = new ArrayList<Object>();
 		result.add(name + " " + highLevelStats.get(statType).value);
+		if (enhancement != null && enhancement.highLevelStats.get(statType).value != 0) {
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.add("" + enhancement.enhancementName + " " + enhancement.highLevelStats.get(statType).value);
+		}
 		return result;
 	}
 

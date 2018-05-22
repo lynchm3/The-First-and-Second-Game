@@ -26,7 +26,7 @@ import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
-import com.marklynch.level.constructs.enchantment.EnhancementFireDamage;
+import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.squares.Square;
@@ -405,7 +405,7 @@ public class Editor {
 				new HOBBY[] { HOBBY.HUNTING });
 		Game.level.player = player;
 		Weapon playersHuntingBow = Templates.HUNTING_BOW.makeCopy(null, player);
-		playersHuntingBow.enhancement = new EnhancementFireDamage();
+		playersHuntingBow.enhancement = new Enhancement();
 		player.inventory.add(playersHuntingBow);
 		player.inventory.add(Templates.KATANA.makeCopy(null, player));
 		player.inventory.add(Templates.KATANA.makeCopy(null, player));

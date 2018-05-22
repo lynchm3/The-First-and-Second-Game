@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -313,7 +313,6 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			highLevelStatButtons.get(statType).setTooltipText(Level.player.getEffectiveHighLevelStatTooltip(statType));
-			System.out.println("Tooltip = " + Level.player.getEffectiveHighLevelStatTooltip(statType));
 		}
 
 		slashDamageButton.setTooltipText(Level.player.getEffectiveSlashDamageTooltip());
@@ -369,33 +368,30 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, STRENGTH_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.STRENGTH));
+					"" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH));
 			highLevelStatButtons.get(HIGH_LEVEL_STATS.STRENGTH).width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.STRENGTH));
-			System.out.println("highLevelStatButtons.get(HIGH_LEVEL_STATS.STRENGTH).width = "
-					+ highLevelStatButtons.get(HIGH_LEVEL_STATS.STRENGTH).width);
-
+					.getWidth("" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, DEXTERITY_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.DEXTERITY));
+					"" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.DEXTERITY));
 			highLevelStatButtons.get(HIGH_LEVEL_STATS.DEXTERITY).width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.DEXTERITY));
+					.getWidth("" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.DEXTERITY));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, INTELLIGENCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.INTELLIGENCE));
+					"" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.INTELLIGENCE));
 			highLevelStatButtons.get(HIGH_LEVEL_STATS.INTELLIGENCE).width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.INTELLIGENCE));
+					.getWidth("" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.INTELLIGENCE));
 			drawStatY += statsLineHeight;
 
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, ENDURANCE_WHITE);
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					"" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.ENDURANCE));
+					"" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.ENDURANCE));
 			highLevelStatButtons.get(HIGH_LEVEL_STATS.ENDURANCE).width = Game.smallFont
-					.getWidth("" + Level.player.getEffectiveHighLevelStat(Actor.HIGH_LEVEL_STATS.ENDURANCE));
+					.getWidth("" + Level.player.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.ENDURANCE));
 			drawStatY += statsLineHeight;
 			drawStatY += statsLineHeight;
 

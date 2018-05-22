@@ -3,9 +3,9 @@ package com.marklynch.objects.templates;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.weapons.Weapon;
 
 public class TemplatesWeapons {

@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.requirementtomeet;
 
-import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.units.Actor;
 
 public class StatRequirementToMeet extends RequirementToMeet {

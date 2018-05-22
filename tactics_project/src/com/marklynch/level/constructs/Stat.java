@@ -2,6 +2,10 @@ package com.marklynch.level.constructs;
 
 public class Stat {
 
+	public enum HIGH_LEVEL_STATS {
+		STRENGTH, DEXTERITY, ENDURANCE, INTELLIGENCE
+	};
+
 	public String name;
 	public float value;
 

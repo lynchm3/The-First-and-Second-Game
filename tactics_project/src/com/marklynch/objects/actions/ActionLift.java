@@ -3,8 +3,8 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Path;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -17,7 +18,6 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.Wall;

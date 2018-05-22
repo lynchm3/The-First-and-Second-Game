@@ -22,6 +22,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;

@@ -4,11 +4,11 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
