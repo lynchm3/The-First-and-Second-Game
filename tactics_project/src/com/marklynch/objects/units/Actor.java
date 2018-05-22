@@ -2360,6 +2360,11 @@ public class Actor extends GameObject {
 			result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(legArmor.getEffectiveOffensiveStatTooltip(statType));
 		}
+
+		if (result.size() == 0) {
+			result.add("0");
+		}
+
 		return result;
 	}
 
@@ -2410,6 +2415,10 @@ public class Actor extends GameObject {
 		if (legArmor != null && legArmor.defensiveStats.get(statType).value != 0) {
 			result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(legArmor.getEffectiveDefensiveStatTooltip(statType));
+		}
+
+		if (result.size() == 0) {
+			result.add("0");
 		}
 		return result;
 	}

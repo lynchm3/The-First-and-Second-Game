@@ -70,6 +70,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static String ELECTRICAL_RESISTANCE = "ELECTRICAL RESISTANCE";
 	public static String POISON_RESISTANCE = "POSION RESISTANCE";
 	public static String BLEED_RESISTANCE = "BLEEDING RESISTANCE";
+	public static String HEALING_RESISTANCE = "HEALING RESISTANCE";
 	public static StringWithColor SLASH_RESISTANCE_WHITE = new StringWithColor(SLASH_RESISTANCE, Color.WHITE);
 	public static StringWithColor BLUNT_RESISTANCE_WHITE = new StringWithColor(BLUNT_RESISTANCE, Color.WHITE);
 	public static StringWithColor PIERCE_RESISTANCE_WHITE = new StringWithColor(PIERCE_RESISTANCE, Color.WHITE);
@@ -78,6 +79,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static StringWithColor ELECTRICAL_RESISTANCE_WHITE = new StringWithColor(ELECTRICAL_RESISTANCE, Color.WHITE);
 	public static StringWithColor POISON_RESISTANCE_WHITE = new StringWithColor(POISON_RESISTANCE, Color.WHITE);
 	public static StringWithColor BLEED_RESISTANCE_WHITE = new StringWithColor(BLEED_RESISTANCE, Color.WHITE);
+	public static StringWithColor HEALING_RESISTANCE_WHITE = new StringWithColor(HEALING_RESISTANCE, Color.WHITE);
 	public HashMap<OFFENSIVE_STATS, LevelButton> defensiveStatButtons = new HashMap<OFFENSIVE_STATS, LevelButton>();
 	public HashMap<OFFENSIVE_STATS, String> defensiveStatNames = new HashMap<OFFENSIVE_STATS, String>();
 
@@ -98,8 +100,6 @@ public class CharacterScreen implements Draggable, Scrollable {
 	int contentX;
 	int contentY;
 	int contentBorder;
-
-	int listItemHeight;
 
 	float activeDrawPosition;
 	float resolvedDrawPosition;
@@ -140,15 +140,15 @@ public class CharacterScreen implements Draggable, Scrollable {
 		offensiveStatNames.put(OFFENSIVE_STATS.BLEED_DAMAGE, BLEED_DAMAGE);
 		offensiveStatNames.put(OFFENSIVE_STATS.HEALING, HEALING);
 
-		defensiveStatNames.put(OFFENSIVE_STATS.SLASH_DAMAGE, SLASH_DAMAGE);
-		defensiveStatNames.put(OFFENSIVE_STATS.BLUNT_DAMAGE, BLUNT_DAMAGE);
-		defensiveStatNames.put(OFFENSIVE_STATS.PIERCE_DAMAGE, PIERCE_DAMAGE);
-		defensiveStatNames.put(OFFENSIVE_STATS.FIRE_DAMAGE, FIRE_DAMAGE);
-		defensiveStatNames.put(OFFENSIVE_STATS.WATER_DAMAGE, WATER_DAMAGE);
-		defensiveStatNames.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, ELECTRICAL_DAMAGE);
-		defensiveStatNames.put(OFFENSIVE_STATS.POISON_DAMAGE, POISON_DAMAGE);
-		defensiveStatNames.put(OFFENSIVE_STATS.BLEED_DAMAGE, BLEED_DAMAGE);
-		defensiveStatNames.put(OFFENSIVE_STATS.HEALING, HEALING);
+		defensiveStatNames.put(OFFENSIVE_STATS.SLASH_DAMAGE, SLASH_RESISTANCE);
+		defensiveStatNames.put(OFFENSIVE_STATS.BLUNT_DAMAGE, BLUNT_RESISTANCE);
+		defensiveStatNames.put(OFFENSIVE_STATS.PIERCE_DAMAGE, PIERCE_RESISTANCE);
+		defensiveStatNames.put(OFFENSIVE_STATS.FIRE_DAMAGE, FIRE_RESISTANCE);
+		defensiveStatNames.put(OFFENSIVE_STATS.WATER_DAMAGE, WATER_RESISTANCE);
+		defensiveStatNames.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, ELECTRICAL_RESISTANCE);
+		defensiveStatNames.put(OFFENSIVE_STATS.POISON_DAMAGE, POISON_RESISTANCE);
+		defensiveStatNames.put(OFFENSIVE_STATS.BLEED_DAMAGE, BLEED_RESISTANCE);
+		defensiveStatNames.put(OFFENSIVE_STATS.HEALING, HEALING_RESISTANCE);
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			LevelButton button = new LevelButton(0, 0, Game.smallFont.getWidth(highLevelStatNames.get(statType)), 30,
@@ -199,12 +199,6 @@ public class CharacterScreen implements Draggable, Scrollable {
 		listBorder = 16;
 		listWidth = 300;
 
-		// contentX = listX + listWidth + listBorder * 2;
-		// contentY = 30;
-		// contentBorder = 16;
-
-		listItemHeight = 30;
-
 		bottomBorderHeight = 384;
 
 		int drawStatY = statsY;
@@ -212,22 +206,22 @@ public class CharacterScreen implements Draggable, Scrollable {
 		healthButton.updatePosition(statValuesX, drawStatY);
 		drawStatY += statsLineHeight;
 
-		for (LevelButton button : highLevelStatButtons.values()) {
-			button.updatePosition(statValuesX, drawStatY);
+		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+			highLevelStatButtons.get(statType).updatePosition(statValuesX, drawStatY);
 			drawStatY += statsLineHeight;
 		}
 
 		drawStatY += statsLineHeight;
 
-		for (LevelButton button : offensiveStatButtons.values()) {
-			button.updatePosition(statValuesX, drawStatY);
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			offensiveStatButtons.get(statType).updatePosition(statValuesX, drawStatY);
 			drawStatY += statsLineHeight;
 		}
 
 		drawStatY += statsLineHeight;
 
-		for (LevelButton button : defensiveStatButtons.values()) {
-			button.updatePosition(statValuesX, drawStatY);
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			defensiveStatButtons.get(statType).updatePosition(statValuesX, drawStatY);
 			drawStatY += statsLineHeight;
 		}
 
@@ -246,8 +240,6 @@ public class CharacterScreen implements Draggable, Scrollable {
 	}
 
 	public void generateLinks() {
-
-		// healthButton.setTooltipText(Level.player.getEffectiveHealthTooltip());
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			highLevelStatButtons.get(statType).setTooltipText(Level.player.getEffectiveHighLevelStatTooltip(statType));
