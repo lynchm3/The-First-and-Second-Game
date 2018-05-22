@@ -2316,19 +2316,22 @@ public class Actor extends GameObject {
 	public float getEffectiveOffensiveStat(OFFENSIVE_STATS statType) {
 		// Stat stat = highLevelStats.get(statType);
 		// return stat.value;
+		float result = 0;
 
-		float result = offensiveStats.get(statType).value;
-		if (equipped != null && equipped.offensiveStats.get(statType).value != 0) {
-			result += equipped.offensiveStats.get(statType).value;
+		if (equipped == null)
+			result = offensiveStats.get(statType).value;
+
+		if (equipped != null && equipped.getEffectiveOffensiveStat(statType) != 0) {
+			result += equipped.getEffectiveOffensiveStat(statType);
 		}
-		if (helmet != null && helmet.offensiveStats.get(statType).value != 0) {
-			result += helmet.offensiveStats.get(statType).value;
+		if (helmet != null && helmet.getEffectiveOffensiveStat(statType) != 0) {
+			result += helmet.getEffectiveOffensiveStat(statType);
 		}
-		if (bodyArmor != null && bodyArmor.offensiveStats.get(statType).value != 0) {
-			result += bodyArmor.offensiveStats.get(statType).value;
+		if (bodyArmor != null && bodyArmor.getEffectiveOffensiveStat(statType) != 0) {
+			result += bodyArmor.getEffectiveOffensiveStat(statType);
 		}
-		if (legArmor != null && legArmor.offensiveStats.get(statType).value != 0) {
-			result += legArmor.offensiveStats.get(statType).value;
+		if (legArmor != null && legArmor.getEffectiveOffensiveStat(statType) != 0) {
+			result += legArmor.getEffectiveOffensiveStat(statType);
 		}
 
 		return result;
@@ -2338,7 +2341,9 @@ public class Actor extends GameObject {
 	public ArrayList<Object> getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS statType) {
 		ArrayList<Object> result = new ArrayList<Object>();
 
-		result.add("Inherent " + offensiveStats.get(statType).value);
+		if (equipped == null && offensiveStats.get(statType).value != 0)
+			result.add("Unarmed " + offensiveStats.get(statType).value);
+
 		if (equipped != null && equipped.offensiveStats.get(statType).value != 0) {
 			result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(equipped.getEffectiveOffensiveStatTooltip(statType));

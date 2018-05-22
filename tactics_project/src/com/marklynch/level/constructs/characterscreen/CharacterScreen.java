@@ -316,15 +316,15 @@ public class CharacterScreen implements Draggable, Scrollable {
 			highLevelStatButtons.get(statType).setTooltipText(Level.player.getEffectiveHighLevelStatTooltip(statType));
 		}
 
-		slashDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE));
-		bluntDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE));
-		pierceDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE));
-		fireDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE));
-		waterDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE));
+		slashDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.SLASH_DAMAGE));
+		bluntDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.BLUNT_DAMAGE));
+		pierceDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.PIERCE_DAMAGE));
+		fireDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.FIRE_DAMAGE));
+		waterDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.WATER_DAMAGE));
 		electricalDamageButton
-				.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
-		poisonDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE));
-		bleedDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE));
+				.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
+		poisonDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.POISON_DAMAGE));
+		bleedDamageButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.BLEED_DAMAGE));
 		healingButton.setTooltipText(Level.player.getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS.HEALING));
 
 		slashResistanceButton.setTooltipText(Level.player.getEffectiveSlashResistanceTooltip());

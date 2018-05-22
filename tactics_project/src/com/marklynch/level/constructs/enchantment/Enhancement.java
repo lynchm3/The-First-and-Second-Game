@@ -60,7 +60,7 @@ public class Enhancement {
 		offensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(0));
 		offensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(0));
 		offensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(0));
+		offensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(0));
 		offensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(0));
 		offensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(0));
 	}
