@@ -22,7 +22,6 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
@@ -2309,10 +2308,6 @@ public class Actor extends GameObject {
 		actor.title = title;
 		actor.level = level;
 
-		for (HIGH_LEVEL_STATS statKey : this.highLevelStats.keySet()) {
-			actor.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
-		}
-
 		actor.travelDistance = travelDistance;
 		actor.sight = sight;
 		actor.canOpenDoors = canOpenDoors;
@@ -2326,9 +2321,50 @@ public class Actor extends GameObject {
 		actor.init(gold, mustHaves, mightHaves);
 	}
 
+	@Override
 	public float getEffectiveHighLevelStat(HIGH_LEVEL_STATS statType) {
-		Stat stat = highLevelStats.get(statType);
-		return stat.value;
+		// Stat stat = highLevelStats.get(statType);
+		// return stat.value;
+
+		float result = highLevelStats.get(statType).value;
+		if (equipped != null && equipped.highLevelStats.get(statType).value != 0) {
+			result += equipped.highLevelStats.get(statType).value;
+		}
+		if (helmet != null && helmet.highLevelStats.get(statType).value != 0) {
+			result += helmet.highLevelStats.get(statType).value;
+		}
+		if (bodyArmor != null && bodyArmor.highLevelStats.get(statType).value != 0) {
+			result += bodyArmor.highLevelStats.get(statType).value;
+		}
+		if (legArmor != null && legArmor.highLevelStats.get(statType).value != 0) {
+			result += legArmor.highLevelStats.get(statType).value;
+		}
+
+		return result;
+	}
+
+	@Override
+	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
+		ArrayList<Object> result = new ArrayList<Object>();
+
+		result.add("Inherent " + highLevelStats.get(statType).value);
+		if (equipped != null && equipped.highLevelStats.get(statType).value != 0) {
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(equipped.getEffectiveHighLevelStatTooltip(statType));
+		}
+		if (helmet != null && helmet.highLevelStats.get(statType).value != 0) {
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(helmet.getEffectiveHighLevelStatTooltip(statType));
+		}
+		if (bodyArmor != null && bodyArmor.highLevelStats.get(statType).value != 0) {
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(bodyArmor.getEffectiveHighLevelStatTooltip(statType));
+		}
+		if (legArmor != null && legArmor.highLevelStats.get(statType).value != 0) {
+			result.add(TextUtils.NewLine.NEW_LINE);
+			result.addAll(legArmor.getEffectiveHighLevelStatTooltip(statType));
+		}
+		return result;
 	}
 
 	@Override

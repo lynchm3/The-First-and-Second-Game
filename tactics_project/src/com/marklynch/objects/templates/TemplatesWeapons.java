@@ -2,7 +2,10 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.GameObject.HIGH_LEVEL_STATS;
 import com.marklynch.objects.weapons.Weapon;
 
 public class TemplatesWeapons {
@@ -84,6 +87,7 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.pierceDamage = 5;
 		Templates.HUNTING_BOW.minRange = 1;
 		Templates.HUNTING_BOW.maxRange = 9;
+		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(CharacterScreen.STRENGTH, 10));
 		Templates.HUNTING_BOW.imageTexturePath = "a2r2.png";
 		Templates.HUNTING_BOW.imageTexture = getGlobalImage(Templates.HUNTING_BOW.imageTexturePath, true);
 		Templates.HUNTING_BOW.totalHealth = Templates.HUNTING_BOW.remainingHealth = 20;

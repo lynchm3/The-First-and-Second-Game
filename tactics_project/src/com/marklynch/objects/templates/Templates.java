@@ -306,7 +306,7 @@ public class Templates {
 	public static GameObject ASH;
 	public static GameObject WOOD_CHIPS;
 
-	public static Inspectable BLOODY_PULP;;;
+	public static Inspectable BLOODY_PULP;
 	public static Inspectable BLOOD;
 
 	// Food?

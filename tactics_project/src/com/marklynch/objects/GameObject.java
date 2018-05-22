@@ -275,10 +275,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public GameObject() {
 
-		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(CharacterScreen.STRENGTH, 1));
-		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(CharacterScreen.DEXTERITY, 1));
-		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(CharacterScreen.ENDURANCE, 1));
-		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(CharacterScreen.INTELLIGENCE, 1));
+		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(CharacterScreen.STRENGTH, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(CharacterScreen.DEXTERITY, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(CharacterScreen.ENDURANCE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(CharacterScreen.INTELLIGENCE, 0));
 	}
 
 	public void setInstances(GameObject gameObject) {
@@ -1739,6 +1739,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.value = value;
 		gameObject.floats = floats;
 
+		for (HIGH_LEVEL_STATS statKey : this.highLevelStats.keySet()) {
+			gameObject.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
+		}
+
 		gameObject.totalHealth = gameObject.remainingHealth = totalHealth;
 		gameObject.imageTexturePath = imageTexturePath;
 		gameObject.imageTexture = imageTexture;
@@ -2036,6 +2040,17 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public Action getUtilityAction(Actor performer) {
 		return null;
+	}
+
+	public float getEffectiveHighLevelStat(HIGH_LEVEL_STATS statType) {
+		Stat stat = highLevelStats.get(statType);
+		return stat.value;
+	}
+
+	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
+		ArrayList<Object> result = new ArrayList<Object>();
+		result.add("" + highLevelStats.get(statType).value);
+		return result;
 	}
 
 	@Override
