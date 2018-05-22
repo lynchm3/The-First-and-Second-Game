@@ -2037,215 +2037,28 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// System.out.println("damageDealer.bluntDamage = " + ((Actor)
 		// damageDealer).bluntDamage);
 
-		// Slash
-		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE) != 0) {
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			if (damageDealer.getEffectiveOffensiveStat(statType) != 0) {
 
-			float resistance = (this.defensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value / 100);
-			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE) * resistance;
-			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE) - resistedDamage;
-			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.SLASH,
-					this.defensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value);
-			remainingHealth -= dmg;
-			totalDamage += dmg;
-			if (dmg > 0)
-				thisIsAnAttack = true;
+				float resistance = (this.defensiveStats.get(statType).value / 100);
+				float resistedDamage = damageDealer.getEffectiveOffensiveStat(statType) * resistance;
+				float dmg = damageDealer.getEffectiveOffensiveStat(statType) - resistedDamage;
+				doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.SLASH, this.defensiveStats.get(statType).value);
+				remainingHealth -= dmg;
+				totalDamage += dmg;
+				if (dmg > 0)
+					thisIsAnAttack = true;
 
-			// Update bestiary
-			if (Game.level.shouldLog(this))
-				Game.level.bestiaryKnowledgeCollection.get(this.templateId).slashResistance = true;
+				// Update bestiary
+				if (Game.level.shouldLog(this))
+					Game.level.bestiaryKnowledgeCollection.get(this.templateId).slashResistance = true;
 
-			if (gameObjectAttacker != null)
-				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).slashDamage = true;
+				if (gameObjectAttacker != null)
+					if (Game.level.shouldLog(gameObjectAttacker))
+						Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).slashDamage = true;
 
-			offsetY += 48;
-		}
-
-		// Blunt
-		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE) != 0) {
-
-			float resistance = (this.defensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value / 100);
-			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE) * resistance;
-			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE) - resistedDamage;
-			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.BLUNT,
-					this.defensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value);
-			remainingHealth -= dmg;
-			totalDamage += dmg;
-			if (dmg > 0)
-				thisIsAnAttack = true;
-
-			// Update bestiary
-			if (Game.level.shouldLog(this))
-				Game.level.bestiaryKnowledgeCollection.get(this.templateId).bluntResistance = true;
-
-			if (gameObjectAttacker != null)
-				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).bluntDamage = true;
-
-			offsetY += 48;
-		}
-
-		// Pierce
-		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE) != 0) {
-
-			float resistance = (this.defensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value / 100);
-			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE) * resistance;
-			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE) - resistedDamage;
-			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.PIERCE,
-					this.defensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value);
-			remainingHealth -= dmg;
-			totalDamage += dmg;
-			if (dmg > 0)
-				thisIsAnAttack = true;
-
-			// Update bestiary
-			if (Game.level.shouldLog(this))
-				Game.level.bestiaryKnowledgeCollection.get(this.templateId).pierceResistance = true;
-
-			if (gameObjectAttacker != null)
-				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).pierceDamage = true;
-
-			offsetY += 48;
-		}
-
-		// Fire
-		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE) != 0) {
-
-			float resistance = (this.defensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value / 100);
-			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE) * resistance;
-			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE) - resistedDamage;
-			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.FIRE,
-					this.defensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value);
-			remainingHealth -= dmg;
-			totalDamage += dmg;
-			if (dmg > 0)
-				thisIsAnAttack = true;
-
-			// Update bestiary
-			if (Game.level.shouldLog(this))
-				Game.level.bestiaryKnowledgeCollection.get(this.templateId).fireResistance = true;
-
-			if (gameObjectAttacker != null)
-				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).fireDamage = true;
-
-			offsetY += 48;
-		}
-
-		// Water
-		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE) != 0) {
-
-			float resistance = (defensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value / 100);
-			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE) * resistance;
-			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.WATER_DAMAGE) - resistedDamage;
-			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.WATER,
-					this.defensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value);
-			remainingHealth -= dmg;
-			totalDamage += dmg;
-			if (dmg > 0)
-				thisIsAnAttack = true;
-
-			// Update bestiary
-			if (Game.level.shouldLog(this))
-				Game.level.bestiaryKnowledgeCollection.get(this.templateId).waterResistance = true;
-
-			if (gameObjectAttacker != null)
-				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).waterDamage = true;
-
-			offsetY += 48;
-		}
-
-		// Electrical
-		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE) != 0) {
-
-			float resistance = (this.defensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value / 100);
-			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE)
-					* resistance;
-			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE) - resistedDamage;
-			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.ELECTRIC,
-					this.defensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value);
-			remainingHealth -= dmg;
-			totalDamage += dmg;
-			if (dmg > 0)
-				thisIsAnAttack = true;
-
-			// Update bestiary
-			if (Game.level.shouldLog(this))
-				Game.level.bestiaryKnowledgeCollection.get(this.templateId).electricalResistance = true;
-
-			if (gameObjectAttacker != null)
-				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).electricalDamage = true;
-
-			offsetY += 48;
-		}
-
-		// Poison
-		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE) != 0) {
-
-			float resistance = (this.defensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value / 100);
-			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE) * resistance;
-			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE) - resistedDamage;
-			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.POISON,
-					this.defensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value);
-			remainingHealth -= dmg;
-			totalDamage += dmg;
-			if (dmg > 0)
-				thisIsAnAttack = true;
-
-			// Update bestiary
-			if (Game.level.shouldLog(this))
-				Game.level.bestiaryKnowledgeCollection.get(this.templateId).poisonResistance = true;
-
-			if (gameObjectAttacker != null)
-				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).poisonDamage = true;
-
-			offsetY += 48;
-		}
-
-		// Bleed
-		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE) != 0) {
-
-			float resistance = (this.defensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value / 100);
-			float resistedDamage = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE) * resistance;
-			float dmg = damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE) - resistedDamage;
-			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.BLEEDING,
-					this.defensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value);
-			remainingHealth -= dmg;
-			totalDamage += dmg;
-			if (dmg > 0)
-				thisIsAnAttack = true;
-
-			// Update bestiary
-			if (Game.level.shouldLog(this))
-				Game.level.bestiaryKnowledgeCollection.get(this.templateId).bleedResistance = true;
-
-			if (gameObjectAttacker != null)
-				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).bleedDamage = true;
-
-			offsetY += 48;
-		}
-
-		// Healing
-		if (damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING) != 0) {
-			// float dmg =
-			// damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.POISON_DAMAGE) /
-			// (this.getEffectivePosionResistance() / 100);
-			doDamageAnimation(damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING), offsetY,
-					DAMAGE_TYPE.HEALING, +200f);
-			remainingHealth += damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING);
-			totalDamage -= damageDealer.getEffectiveOffensiveStat(OFFENSIVE_STATS.HEALING);
-			// thisIsAnAttack = true;
-
-			if (gameObjectAttacker != null)
-				if (Game.level.shouldLog(gameObjectAttacker))
-					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).healing = true;
-
-			offsetY += 48;
+				offsetY += 48;
+			}
 		}
 
 		if (remainingHealth > totalHealth)
