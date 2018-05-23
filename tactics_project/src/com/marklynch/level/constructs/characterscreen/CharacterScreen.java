@@ -13,12 +13,10 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
-import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
-import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 
@@ -34,13 +32,15 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static String DEXTERITY = "DEXTERITY";
 	public static String INTELLIGENCE = "INTELLIGENCE";
 	public static String ENDURANCE = "ENDURANCE";
-	public static StringWithColor HEALTH_WHITE = new StringWithColor(HEALTH, Color.WHITE);
-	public static StringWithColor STRENGTH_WHITE = new StringWithColor(STRENGTH, Color.WHITE);
-	public static StringWithColor DEXTERITY_WHITE = new StringWithColor(DEXTERITY, Color.WHITE);
-	public static StringWithColor INTELLIGENCE_WHITE = new StringWithColor(INTELLIGENCE, Color.WHITE);
-	public static StringWithColor ENDURANCE_WHITE = new StringWithColor(ENDURANCE, Color.WHITE);
+	public static String HEALTH_SHORT = "HP ";
+	public static String STRENGTH_SHORT = "STR";
+	public static String DEXTERITY_SHORT = "DEX";
+	public static String INTELLIGENCE_SHORT = "INT";
+	public static String ENDURANCE_SHORT = "ENDE";
+
 	public static HashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons = new HashMap<HIGH_LEVEL_STATS, LevelButton>();
 	public static HashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new HashMap<HIGH_LEVEL_STATS, String>();
+	public static HashMap<HIGH_LEVEL_STATS, String> highLevelStatNamesShort = new HashMap<HIGH_LEVEL_STATS, String>();
 	public static HashMap<HIGH_LEVEL_STATS, Texture> highLevelStatImages = new HashMap<HIGH_LEVEL_STATS, Texture>();
 
 	// DMG and Healing
@@ -53,17 +53,18 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static String POISON_DAMAGE = "POISON DAMAGE";
 	public static String BLEED_DAMAGE = "BLEED DAMAGE";
 	public static String HEALING = "HEALING";
-	public static StringWithColor SLASH_DAMAGE_WHITE = new StringWithColor(SLASH_DAMAGE, Color.WHITE);
-	public static StringWithColor BLUNT_DAMAGE_WHITE = new StringWithColor(BLUNT_DAMAGE, Color.WHITE);
-	public static StringWithColor PIERCE_DAMAGE_WHITE = new StringWithColor(PIERCE_DAMAGE, Color.WHITE);
-	public static StringWithColor FIRE_DAMAGE_WHITE = new StringWithColor(FIRE_DAMAGE, Color.WHITE);
-	public static StringWithColor WATER_DAMAGE_WHITE = new StringWithColor(WATER_DAMAGE, Color.WHITE);
-	public static StringWithColor ELECTRICAL_DAMAGE_WHITE = new StringWithColor(ELECTRICAL_DAMAGE, Color.WHITE);
-	public static StringWithColor POISON_DAMAGE_WHITE = new StringWithColor(POISON_DAMAGE, Color.WHITE);
-	public static StringWithColor BLEED_DAMAGE_WHITE = new StringWithColor(BLEED_DAMAGE, Color.WHITE);
-	public static StringWithColor HEALING_WHITE = new StringWithColor(HEALING, Color.WHITE);
+	public static String SLASH_SHORT = "SLSH";
+	public static String BLUNT_SHORT = "BLNT";
+	public static String PIERCE_SHORT = "PRCE";
+	public static String FIRE_SHORT = "FIRE";
+	public static String WATER_SHORT = "WATR";
+	public static String ELECTRICAL_SHORT = "ELEC";
+	public static String POISON_SHORT = "PSN ";
+	public static String BLEED_SHORT = "BLD ";
+	public static String HEALING_SHORT = "HEAL";
 	public static HashMap<OFFENSIVE_STATS, LevelButton> offensiveStatButtons = new HashMap<OFFENSIVE_STATS, LevelButton>();
 	public static HashMap<OFFENSIVE_STATS, String> offensiveStatNames = new HashMap<OFFENSIVE_STATS, String>();
+	public static HashMap<OFFENSIVE_STATS, String> offensiveStatNamesShort = new HashMap<OFFENSIVE_STATS, String>();
 	public static HashMap<OFFENSIVE_STATS, Texture> offensiveStatImages = new HashMap<OFFENSIVE_STATS, Texture>();
 
 	// Resistances
@@ -76,15 +77,6 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static String POISON_RESISTANCE = "POSION RESISTANCE";
 	public static String BLEED_RESISTANCE = "BLEEDING RESISTANCE";
 	public static String HEALING_RESISTANCE = "HEALING RESISTANCE";
-	public static StringWithColor SLASH_RESISTANCE_WHITE = new StringWithColor(SLASH_RESISTANCE, Color.WHITE);
-	public static StringWithColor BLUNT_RESISTANCE_WHITE = new StringWithColor(BLUNT_RESISTANCE, Color.WHITE);
-	public static StringWithColor PIERCE_RESISTANCE_WHITE = new StringWithColor(PIERCE_RESISTANCE, Color.WHITE);
-	public static StringWithColor FIRE_RESISTANCE_WHITE = new StringWithColor(FIRE_RESISTANCE, Color.WHITE);
-	public static StringWithColor WATER_RESISTANCE_WHITE = new StringWithColor(WATER_RESISTANCE, Color.WHITE);
-	public static StringWithColor ELECTRICAL_RESISTANCE_WHITE = new StringWithColor(ELECTRICAL_RESISTANCE, Color.WHITE);
-	public static StringWithColor POISON_RESISTANCE_WHITE = new StringWithColor(POISON_RESISTANCE, Color.WHITE);
-	public static StringWithColor BLEED_RESISTANCE_WHITE = new StringWithColor(BLEED_RESISTANCE, Color.WHITE);
-	public static StringWithColor HEALING_RESISTANCE_WHITE = new StringWithColor(HEALING_RESISTANCE, Color.WHITE);
 	public static HashMap<OFFENSIVE_STATS, LevelButton> defensiveStatButtons = new HashMap<OFFENSIVE_STATS, LevelButton>();
 	public static HashMap<OFFENSIVE_STATS, String> defensiveStatNames = new HashMap<OFFENSIVE_STATS, String>();
 	public static HashMap<OFFENSIVE_STATS, Texture> defensiveStatImages = new HashMap<OFFENSIVE_STATS, Texture>();
@@ -95,25 +87,25 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 	public boolean showing = false;
 
-	int statsX;
-	int statLabelsX;
-	int statValuesX;
-	int statsY;
-	int statsLineHeight;
-	int listBorder;
-	int listWidth;
+	// int statsX;
+	// int statLabelsX;
+	// int statValuesX;
+	// int statsY;
+	// int statsLineHeight;
+	// int listBorder;
+	// int listWidth;
+	//
+	// int contentX;
+	// int contentY;
+	// int contentBorder;
+	//
+	// float activeDrawPosition;
+	// float resolvedDrawPosition;
 
-	int contentX;
-	int contentY;
-	int contentBorder;
+	// transient static int bottomBorderHeight;
 
-	float activeDrawPosition;
-	float resolvedDrawPosition;
-
-	transient static int bottomBorderHeight;
-
-	transient int actorX = 100;
-	transient int actorY = 0;
+	// transient int actorX;
+	// transient int actorY;
 
 	public ArrayList<Link> logLinks = new ArrayList<Link>();
 	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
@@ -155,6 +147,21 @@ public class CharacterScreen implements Draggable, Scrollable {
 		defensiveStatNames.put(OFFENSIVE_STATS.POISON_DAMAGE, POISON_RESISTANCE);
 		defensiveStatNames.put(OFFENSIVE_STATS.BLEED_DAMAGE, BLEED_RESISTANCE);
 		defensiveStatNames.put(OFFENSIVE_STATS.HEALING, HEALING_RESISTANCE);
+
+		highLevelStatNamesShort.put(HIGH_LEVEL_STATS.STRENGTH, STRENGTH_SHORT);
+		highLevelStatNamesShort.put(HIGH_LEVEL_STATS.DEXTERITY, DEXTERITY_SHORT);
+		highLevelStatNamesShort.put(HIGH_LEVEL_STATS.INTELLIGENCE, INTELLIGENCE_SHORT);
+		highLevelStatNamesShort.put(HIGH_LEVEL_STATS.ENDURANCE, ENDURANCE_SHORT);
+
+		offensiveStatNamesShort.put(OFFENSIVE_STATS.SLASH_DAMAGE, SLASH_SHORT);
+		offensiveStatNamesShort.put(OFFENSIVE_STATS.BLUNT_DAMAGE, BLUNT_SHORT);
+		offensiveStatNamesShort.put(OFFENSIVE_STATS.PIERCE_DAMAGE, PIERCE_SHORT);
+		offensiveStatNamesShort.put(OFFENSIVE_STATS.FIRE_DAMAGE, FIRE_SHORT);
+		offensiveStatNamesShort.put(OFFENSIVE_STATS.WATER_DAMAGE, WATER_SHORT);
+		offensiveStatNamesShort.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, ELECTRICAL_SHORT);
+		offensiveStatNamesShort.put(OFFENSIVE_STATS.POISON_DAMAGE, POISON_SHORT);
+		offensiveStatNamesShort.put(OFFENSIVE_STATS.BLEED_DAMAGE, BLEED_SHORT);
+		offensiveStatNamesShort.put(OFFENSIVE_STATS.HEALING, HEALING_SHORT);
 
 		highLevelStatImages.put(HIGH_LEVEL_STATS.STRENGTH, getGlobalImage("action_slash.png", false));
 		highLevelStatImages.put(HIGH_LEVEL_STATS.DEXTERITY, getGlobalImage("action_slash.png", false));
@@ -202,61 +209,22 @@ public class CharacterScreen implements Draggable, Scrollable {
 			buttons.add(button);
 		}
 
-		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "CLOSE", true, false, Color.BLACK, Color.WHITE, null);
-		buttonClose.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.level.openCloseCharacterScreen();
-			}
-		});
-		buttons.add(buttonClose);
+		// buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight,
+		// 70f, 30f, "end_turn_button.png",
+		// "end_turn_button.png", "CLOSE", true, false, Color.BLACK, Color.WHITE, null);
+		// buttonClose.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// Game.level.openCloseCharacterScreen();
+		// }
+		// });
+		// buttons.add(buttonClose);
 	}
 
 	public static void loadStaticImages() {
 	}
 
 	public void resize() {
-
-		actorX = 0;
-		actorY = (int) (Game.halfWindowHeight - Game.level.player.height);
-
-		statsX = 200;
-		statLabelsX = statsX;
-		statValuesX = statsX + 200;
-		statsY = 100;
-		statsLineHeight = 30;
-
-		listBorder = 16;
-		listWidth = 300;
-
-		bottomBorderHeight = 384;
-
-		int drawStatY = statsY;
-
-		healthButton.updatePosition(statValuesX, drawStatY);
-		drawStatY += statsLineHeight;
-
-		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
-			highLevelStatButtons.get(statType).updatePosition(statValuesX, drawStatY);
-			drawStatY += statsLineHeight;
-		}
-
-		drawStatY += statsLineHeight;
-
-		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-			offensiveStatButtons.get(statType).updatePosition(statValuesX, drawStatY);
-			drawStatY += statsLineHeight;
-		}
-
-		drawStatY += statsLineHeight;
-
-		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-			defensiveStatButtons.get(statType).updatePosition(statValuesX, drawStatY);
-			drawStatY += statsLineHeight;
-		}
-
-		drawStatY += statsLineHeight;
 	}
 
 	public void open() {
@@ -302,59 +270,98 @@ public class CharacterScreen implements Draggable, Scrollable {
 			button.draw();
 		}
 
-		// Actor
-		drawActor(Game.level.player, this.actorX, this.actorY);
+		drawStats(0, 0);
 
-		if (mode == MODE.STATS) {
+	}
 
-			int drawStatY = statsY;
+	public void drawStats(int x, int y) {
 
-			// BASIC STATS
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, HEALTH_WHITE);
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-					Level.player.remainingHealth + "/" + Level.player.totalHealth);
-			healthButton.width = Game.smallFont.getWidth(Level.player.remainingHealth + "/" + Level.player.totalHealth);
+		int actorX = 0 + x;
+		int actorY = (int) (Game.halfWindowHeight - Game.level.player.height) + y;
+
+		int statsX = 200 + x;
+		int statLabelsX = statsX;
+		int statValuesX = statsX + 200;
+		int statsY = 100 + y;
+		int statsLineHeight = 30;
+		int drawStatY = statsY;
+
+		healthButton.updatePosition(statValuesX, drawStatY);
+		drawStatY += statsLineHeight;
+
+		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+			highLevelStatButtons.get(statType).updatePosition(statValuesX, drawStatY);
 			drawStatY += statsLineHeight;
-
-			for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
-				TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-						highLevelStatNames.get(statType));
-				TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-						"" + Level.player.getEffectiveHighLevelStat(statType));
-				highLevelStatButtons.get(statType).width = Game.smallFont
-						.getWidth("" + Level.player.getEffectiveHighLevelStat(statType));
-				drawStatY += statsLineHeight;
-			}
-
-			drawStatY += statsLineHeight;
-
-			// DAMAGE
-
-			for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-				TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-						offensiveStatNames.get(statType));
-				TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-						"" + Level.player.getEffectiveOffensiveStat(statType));
-				offensiveStatButtons.get(statType).width = Game.smallFont
-						.getWidth("" + Level.player.getEffectiveOffensiveStat(statType));
-				drawStatY += statsLineHeight;
-			}
-			drawStatY += statsLineHeight;
-
-			// RESISTANCES
-
-			for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-				TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-						defensiveStatNames.get(statType));
-				TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
-						"" + Level.player.getEffectiveDefensiveStat(statType));
-				defensiveStatButtons.get(statType).width = Game.smallFont
-						.getWidth("" + Level.player.getEffectiveDefensiveStat(statType));
-				drawStatY += statsLineHeight;
-			}
-			drawStatY += statsLineHeight;
-
 		}
+
+		drawStatY += statsLineHeight;
+
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			offensiveStatButtons.get(statType).updatePosition(statValuesX, drawStatY);
+			drawStatY += statsLineHeight;
+		}
+
+		drawStatY += statsLineHeight;
+
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			defensiveStatButtons.get(statType).updatePosition(statValuesX, drawStatY);
+			drawStatY += statsLineHeight;
+		}
+
+		// DRAW STUFF
+
+		drawStatY += statsLineHeight;
+
+		// Actor
+		drawActor(Game.level.player, actorX, actorY);
+
+		drawStatY = statsY;
+
+		// BASIC STATS
+		TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, HEALTH);
+		TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+				Level.player.remainingHealth + "/" + Level.player.totalHealth);
+		healthButton.width = Game.smallFont.getWidth(Level.player.remainingHealth + "/" + Level.player.totalHealth);
+		drawStatY += statsLineHeight;
+
+		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
+					highLevelStatNames.get(statType));
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+					"" + Level.player.getEffectiveHighLevelStat(statType));
+			highLevelStatButtons.get(statType).width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveHighLevelStat(statType));
+			drawStatY += statsLineHeight;
+		}
+
+		drawStatY += statsLineHeight;
+
+		// DAMAGE
+
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
+					offensiveStatNames.get(statType));
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+					"" + Level.player.getEffectiveOffensiveStat(statType));
+			offensiveStatButtons.get(statType).width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveOffensiveStat(statType));
+			drawStatY += statsLineHeight;
+		}
+		drawStatY += statsLineHeight;
+
+		// RESISTANCES
+
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
+					defensiveStatNames.get(statType));
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+					"" + Level.player.getEffectiveDefensiveStat(statType));
+			defensiveStatButtons.get(statType).width = Game.smallFont
+					.getWidth("" + Level.player.getEffectiveDefensiveStat(statType));
+			drawStatY += statsLineHeight;
+		}
+		drawStatY += statsLineHeight;
+
 	}
 
 	@Override
