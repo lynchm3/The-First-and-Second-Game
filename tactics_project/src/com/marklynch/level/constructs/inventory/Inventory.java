@@ -8,6 +8,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
@@ -1229,6 +1230,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 							- (((Actor) otherGameObject).torsoImageTexture.getHeight()));
 				}
 				drawActor((Actor) otherGameObject, actorPositionXInPixels, actorPositionYInPixels);
+
+				// CharacterScreen.drawStats(0, 0);
+
 				float otherBagTextureX = otherTextureX;
 				float otherBagTextureY = this.squaresBaseY + Inventory.squaresAreaHeight / 2 - textureBag.getHeight();
 				TextureUtils.drawTexture(textureBag, 1f, otherBagTextureX, otherBagTextureY,
@@ -1405,7 +1409,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					- (Game.level.player.torsoImageTexture.getHeight()));
 		}
 
-		drawActor(Game.level.player, actorPositionXInPixels, actorPositionYInPixels);
+		// drawActor(Game.level.player, actorPositionXInPixels, actorPositionYInPixels);
+		CharacterScreen.drawStats(0, 0);
 
 		// Weapon comparison
 		if (this.inventorySquareMouseIsOver != null && this.inventorySquareMouseIsOver.stack.get(0) instanceof Weapon) {

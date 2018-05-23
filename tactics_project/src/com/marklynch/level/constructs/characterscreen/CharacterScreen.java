@@ -274,7 +274,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 	}
 
-	public void drawStats(int x, int y) {
+	public static void drawStats(int x, int y) {
 
 		int actorX = 0 + x;
 		int actorY = (int) (Game.halfWindowHeight - Game.level.player.height) + y;
@@ -376,7 +376,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 	}
 
-	public void drawActor(Actor actor, int x, int y) {
+	public static void drawActor(Actor actor, int x, int y) {
 		actor.drawActor(x, y, 1, false, 2f);
 	}
 
