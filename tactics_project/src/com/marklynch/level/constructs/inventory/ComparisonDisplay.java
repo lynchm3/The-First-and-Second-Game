@@ -2,6 +2,8 @@ package com.marklynch.level.constructs.inventory;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import org.lwjgl.input.Mouse;
+
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
@@ -11,6 +13,7 @@ import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.utils.Color;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
@@ -44,6 +47,11 @@ public class ComparisonDisplay {
 	public static Texture imageValue;
 
 	public ComparisonDisplay() {
+
+		weaponWidth = 128;
+		weaponHeight = 128;
+		width = weaponWidth * 5;
+
 		resize();
 	}
 
@@ -51,7 +59,11 @@ public class ComparisonDisplay {
 		imageRange = getGlobalImage("range.png", false);
 		imageWeight = getGlobalImage("weight.png", false);
 		imageValue = getGlobalImage("gold.png", false);
+
 	}
+
+	// Color backgroundColor = Color.BLACK;
+	Color backgroundColor = new Color(0f, 0f, 0f, 0.9f);
 
 	public void drawStaticUI() {
 
@@ -61,16 +73,22 @@ public class ComparisonDisplay {
 		if (Game.level.player.inventory.inventorySquareMouseIsOver.stack.get(0) == null)
 			return;
 
-		// if
-		// (!(Game.level.player.inventory.inventorySquareMouseIsOver.gameObject
-		// instanceof Weapon))
-		// return;
+		x = Mouse.getX();
+		y = (int) (Game.windowHeight - Mouse.getY());
 
-		// if (Game.level.player.equipped == null)
-		// return;
+		// x = (int) (Game.windowWidth / 2 - width / 2);
+		// y = (int) (Game.windowHeight - 256);
+		halfWidth = width / 2;
 
-		// if (!(Game.level.player.equipped instanceof Weapon))
-		// return;
+		equippedStringX = x + 32;
+		equippedStringY = y - 32;
+		weapon1DrawX = x;
+		weaponDrawY = y;
+		weapon2DrawX = x + width - weaponWidth;
+
+		statsOfEquippedRightX = x + halfWidth - 10;
+		statsOfHoveredX = x + halfWidth + 10;
+		iconsX = x + halfWidth - 8;
 
 		GameObject gameObject2 = Level.player.inventory.inventorySquareMouseIsOver.stack.get(0);
 
@@ -82,6 +100,8 @@ public class ComparisonDisplay {
 		} else if (gameObject2 instanceof Helmet) {
 			gameObject1 = Level.player.helmet;
 		}
+
+		QuadUtils.drawQuad(backgroundColor, x, y, x + width, y + 200);
 
 		// "Equipped"
 		TextUtils.printTextWithImages(equippedStringX, equippedStringY, Integer.MAX_VALUE, false, null, stringEquipped);
@@ -246,24 +266,6 @@ public class ComparisonDisplay {
 	}
 
 	public void resize() {
-
-		weaponWidth = 128;
-		weaponHeight = 128;
-		width = weaponWidth * 5;
-
-		x = (int) (Game.windowWidth / 2 - width / 2);
-		y = (int) (Game.windowHeight - 256);
-		halfWidth = width / 2;
-
-		equippedStringX = x + 32;
-		equippedStringY = y - 32;
-		weapon1DrawX = x;
-		weaponDrawY = y;
-		weapon2DrawX = x + width - weaponWidth;
-
-		statsOfEquippedRightX = x + halfWidth - 10;
-		statsOfHoveredX = x + halfWidth + 10;
-		iconsX = x + halfWidth - 8;
 
 	}
 
