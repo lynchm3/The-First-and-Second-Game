@@ -26,6 +26,8 @@ public class ComparisonDisplay {
 	int weaponWidth;
 	int weaponHeight;
 	int width;
+	int height;
+	int minHeight;
 
 	int x;
 	int y;
@@ -50,7 +52,8 @@ public class ComparisonDisplay {
 
 		weaponWidth = 128;
 		weaponHeight = 128;
-		width = weaponWidth * 5;
+		minHeight = height = weaponHeight;// + 8;
+		width = weaponWidth * 3;
 
 		resize();
 	}
@@ -73,17 +76,17 @@ public class ComparisonDisplay {
 		if (Game.level.player.inventory.inventorySquareMouseIsOver.stack.get(0) == null)
 			return;
 
-		x = Mouse.getX();
-		y = (int) (Game.windowHeight - Mouse.getY());
+		x = Mouse.getX() + 32;
+		y = (int) (Game.windowHeight - Mouse.getY()) + 32;
 
 		// x = (int) (Game.windowWidth / 2 - width / 2);
 		// y = (int) (Game.windowHeight - 256);
 		halfWidth = width / 2;
 
 		equippedStringX = x + 32;
-		equippedStringY = y - 32;
+		equippedStringY = y;
 		weapon1DrawX = x;
-		weaponDrawY = y;
+		weaponDrawY = y + 32;
 		weapon2DrawX = x + width - weaponWidth;
 
 		statsOfEquippedRightX = x + halfWidth - 10;
@@ -101,10 +104,11 @@ public class ComparisonDisplay {
 			gameObject1 = Level.player.helmet;
 		}
 
-		QuadUtils.drawQuad(backgroundColor, x, y, x + width, y + 200);
+		QuadUtils.drawQuad(backgroundColor, x, y, x + width, y + height);
 
 		// "Equipped"
-		TextUtils.printTextWithImages(equippedStringX, equippedStringY, Integer.MAX_VALUE, false, null, stringEquipped);
+		// TextUtils.printTextWithImages(equippedStringX, equippedStringY,
+		// Integer.MAX_VALUE, false, null, stringEquipped);
 
 		// Squares
 		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon1DrawX, weaponDrawY, weapon1DrawX + weaponWidth,
@@ -131,6 +135,7 @@ public class ComparisonDisplay {
 					new Object[] { new StringWithColor("" + gameObject1.name, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + gameObject2.name, color2) });
+		currentY += fieldHeight;
 		currentY += fieldHeight;
 
 		// Offensive stats
@@ -262,6 +267,10 @@ public class ComparisonDisplay {
 			TextureUtils.drawTexture(imageValue, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
+
+		height = currentY + 32 - y;
+		if (height < minHeight)
+			height = minHeight;
 
 	}
 
