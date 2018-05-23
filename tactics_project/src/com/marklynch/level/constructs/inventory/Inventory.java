@@ -467,6 +467,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		}
 
+		CharacterScreen.generateLinks();
 		buttons.addAll(CharacterScreen.buttons);
 
 		this.isOpen = true;
@@ -1187,7 +1188,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				float emptyStringY = groundDisplay.squaresY + this.squaresAreaHeight / 2 - 10;
 				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringY - 8,
 						emptyStringX + GroundDisplay.lengthEmpty + 8, emptyStringY + 28);
-				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, null,
+				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, null, Color.WHITE,
 						new Object[] { GroundDisplay.stringEmpty });
 			}
 
@@ -1253,7 +1254,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				float emptyStringY = otherInventory.squaresY + otherInventory.squaresAreaHeight / 2 - 10;
 				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringY - 8, emptyStringX + lengthEmpty + 8,
 						emptyStringY + 28);
-				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, null,
+				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, null, Color.WHITE,
 						new Object[] { stringEmpty });
 			}
 
@@ -1346,23 +1347,23 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				Game.windowHeight - textureCornerGradient.getHeight());
 
 		// "Search:" text
-		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, new Object[] { stringSearch });
+		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] { stringSearch });
 
 		// [SHIFT]
 		if (groundDisplay != null)
 
 		{
-			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					new Object[] { stringShiftDrop });
 			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, null, new Object[] { stringShiftEquip });
+					false, null, Color.WHITE, new Object[] { stringShiftEquip });
 		}
 
 		if (otherInventory != null && inventoryMode != INVENTORY_MODE.MODE_TRADE) {
-			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					new Object[] { stringShiftPut });
 			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, null, new Object[] { stringShiftEquip });
+					false, null, Color.WHITE, new Object[] { stringShiftEquip });
 		}
 
 		// [ENTER] Search
@@ -1370,26 +1371,26 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// text
 		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
 					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
 					new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
 					new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
 					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
 					new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
 					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 		}
 
-		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, null, "Bag");
+		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, null, Color.WHITE, "Bag");
 
 		if (groundDisplay != null) {
 			groundDisplay.drawText();
@@ -1460,7 +1461,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			float goldWidth = Game.smallFont.getWidth(goldText);
 			float goldPositionX = squaresX + squaresAreaWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, null, new Object[] { goldText });
+					false, null, Color.WHITE, new Object[] { goldText });
 		}
 
 		// Gold for other actor
@@ -1471,7 +1472,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			float goldWidth = Game.smallFont.getWidth(goldText);
 			float goldPositionX = otherInventory.squaresX + squaresAreaWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, null, new Object[] { goldText });
+					false, null, Color.WHITE, new Object[] { goldText });
 
 		}
 
@@ -1498,13 +1499,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, 0, Game.windowWidth, Game.windowHeight);
 			// Instructions
 			TextUtils.printTextWithImages(textBoxQty.drawPositionX, textBoxQty.drawPositionY - 36, Integer.MAX_VALUE,
-					true, null, new Object[] { qtyStringWithColor });
+					true, null, Color.WHITE, new Object[] { qtyStringWithColor });
 			textBoxQty.draw();
 			if (valuePerQty != 0 && textBoxQty.numericValue > 0) {
 				int totalValue = valuePerQty * textBoxQty.numericValue;
 				String totalValueString = "Total value " + totalValue + " gold";
 				TextUtils.printTextWithImages(textBoxQty.drawPositionX, textBoxQty.drawPositionY + 36,
-						Integer.MAX_VALUE, true, null,
+						Integer.MAX_VALUE, true, null, Color.WHITE,
 						new Object[] { new StringWithColor(totalValueString, Color.WHITE) });
 
 			}
@@ -1518,7 +1519,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void drawOtherInventoryText() {
-		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, null,
+		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, null, Color.WHITE,
 				new Object[] { ((GameObject) this.parent).name });
 	}
 

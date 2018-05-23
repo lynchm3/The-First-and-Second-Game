@@ -8,6 +8,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionChangeAppearance;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.Link;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
@@ -101,7 +102,7 @@ public class MapMarker extends GameObject {
 
 		if (baseName.length() > 0) {
 			TextUtils.printTextWithImages(drawPositionX1, drawPositionY1 + Game.HALF_SQUARE_HEIGHT,
-					(int) Game.SQUARE_WIDTH, false, null, new Object[] { baseName });
+					(int) Game.SQUARE_WIDTH, false, null, Color.WHITE, new Object[] { baseName });
 		}
 
 	}

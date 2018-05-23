@@ -1279,19 +1279,19 @@ public class Level {
 
 		// Turn text
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, null,
-				new Object[] { "TURN " + turn });
+				Color.WHITE, new Object[] { "TURN " + turn });
 
 		// Zoom
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 100, Integer.MAX_VALUE, true, null,
-				new Object[] { "Zoom " + Game.zoom });
+				Color.WHITE, new Object[] { "Zoom " + Game.zoom });
 
 		// FPS
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 120, Integer.MAX_VALUE, true, null,
-				new Object[] { "FPS " + Game.displayFPS });
+				Color.WHITE, new Object[] { "FPS " + Game.displayFPS });
 
 		// TIME
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 140, Integer.MAX_VALUE, true, null,
-				new Object[] { timeString });
+				Color.WHITE, new Object[] { timeString });
 
 		if (conversation != null)
 

@@ -1396,7 +1396,7 @@ public class Actor extends GameObject {
 					expressionBubblePositionYInPixels + expressionBubbleHeight);
 
 			TextUtils.printTextWithImages(expressionBubblePositionXInPixels + 4, expressionBubblePositionYInPixels + 38,
-					Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor(miniDialogue, Color.BLACK) });
+					Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] { new StringWithColor(miniDialogue, Color.BLACK) });
 		} else {
 
 			// bubble

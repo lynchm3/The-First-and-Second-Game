@@ -8,6 +8,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
@@ -189,7 +190,7 @@ public class Structure {
 		for (StructureRoom room : rooms) {
 			if (room.seenByPlayer)
 				TextUtils.printTextWithImages(room.x * Game.SQUARE_WIDTH, room.y * Game.SQUARE_HEIGHT, 100, true, null,
-						new Object[] { room.name });
+						Color.WHITE, new Object[] { room.name });
 		}
 
 	}

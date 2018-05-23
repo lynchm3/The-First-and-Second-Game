@@ -244,11 +244,11 @@ public class Player extends Human {
 
 			if (equipped instanceof Gold) {
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						new Object[] { equipped.value });
+						Color.WHITE, new Object[] { equipped.value });
 
 			} else if (count > 1) {
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						new Object[] { count + "x" });
+						Color.WHITE, new Object[] { count + "x" });
 			}
 		}
 

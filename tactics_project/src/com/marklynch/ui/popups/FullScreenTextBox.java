@@ -54,7 +54,7 @@ public class FullScreenTextBox implements TextBoxHolder {
 		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, 0, Game.windowWidth, Game.windowHeight);
 		// Instructions
 		TextUtils.printTextWithImages(textBox.drawPositionX, instructionsDrawPositionY, Integer.MAX_VALUE, true, null,
-				new Object[] { instructions });
+				Color.WHITE, new Object[] { instructions });
 		textBox.draw();
 	}
 

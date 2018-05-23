@@ -376,8 +376,9 @@ public class TextUtils {
 	}
 
 	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, ArrayList<Link> links,
-			Object... contents) {
-		printTextWithImages(new ArrayList<Object>(Arrays.asList(contents)), posX, posY, maxWidth, wrap, links);
+			Color defaultColor, Object... contents) {
+		printTextWithImages(new ArrayList<Object>(Arrays.asList(contents)), posX, posY, maxWidth, wrap, defaultColor,
+				links);
 	}
 
 	public static class NewLine {
@@ -385,7 +386,7 @@ public class TextUtils {
 	}
 
 	public static void printTextWithImages(ArrayList<Object> contents, float posX, float posY, float maxWidth,
-			boolean wrap, ArrayList<Link> links) {
+			boolean wrap, Color defaultColor, ArrayList<Link> links) {
 
 		if (contents == null)
 			return;
@@ -405,7 +406,7 @@ public class TextUtils {
 					|| content instanceof Float || content instanceof Boolean || content instanceof Tooltip) {
 
 				String string = null;
-				Color color = Color.WHITE;
+				Color color = defaultColor;
 
 				if (content instanceof Integer || content instanceof Float || content instanceof Boolean) {
 					string = "" + content;
@@ -741,11 +742,11 @@ public class TextUtils {
 
 					if (!action.enabled) {
 						if (action.legal) {
-							TextureUtils.drawTexture(Action.textureX, x + 10, posY + offsetY + 10, x + 20, posY + offsetY + 20,
-									Color.RED);
+							TextureUtils.drawTexture(Action.textureX, x + 10, posY + offsetY + 10, x + 20,
+									posY + offsetY + 20, Color.RED);
 						} else {
-							TextureUtils.drawTexture(Action.textureX, x + 10, posY + offsetY + 10, x + 20, posY + offsetY + 20,
-									Color.WHITE);
+							TextureUtils.drawTexture(Action.textureX, x + 10, posY + offsetY + 10, x + 20,
+									posY + offsetY + 20, Color.WHITE);
 
 						}
 					}

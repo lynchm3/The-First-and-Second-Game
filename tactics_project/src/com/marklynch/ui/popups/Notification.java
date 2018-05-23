@@ -67,9 +67,9 @@ public class Notification {
 		} else {
 			QuadUtils.drawQuad(Color.PINK, x, y, x + width, y + height);
 		}
-		TextUtils.printTextWithImages(textX, textY, textWidth, true, links, objects);
+		TextUtils.printTextWithImages(textX, textY, textWidth, true, links, Color.WHITE, objects);
 		QuadUtils.drawQuad(Color.BLACK, x + 12, y - 16, x + 76, y + 4);
-		TextUtils.printTextWithImages(textX, y - 16, 999, false, null, turn);
+		TextUtils.printTextWithImages(textX, y - 16, 999, false, null, Color.WHITE, turn);
 		closeButton.draw();
 	}
 

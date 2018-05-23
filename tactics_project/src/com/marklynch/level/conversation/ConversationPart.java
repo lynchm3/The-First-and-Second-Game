@@ -132,7 +132,7 @@ public class ConversationPart {
 		float x1 = Game.halfWindowWidth - halfTextWidth;
 		float y1 = Game.windowHeight - Conversation.bottomMargin - Conversation.height + topMargin;
 
-		TextUtils.printTextWithImages(x1, y1, maxWidth, true, links, text);
+		TextUtils.printTextWithImages(x1, y1, maxWidth, true, links, Color.WHITE, text);
 
 	}
 

@@ -237,7 +237,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 	}
 
-	public void generateLinks() {
+	public static void generateLinks() {
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			highLevelStatButtons.get(statType).setTooltipText(Level.player.getEffectiveHighLevelStatTooltip(statType));
@@ -336,16 +336,16 @@ public class CharacterScreen implements Draggable, Scrollable {
 		drawStatY = statsY;
 
 		// BASIC STATS
-		TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, HEALTH);
-		TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE, HEALTH);
+		TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
 				Level.player.remainingHealth + "/" + Level.player.totalHealth);
 		healthButton.width = Game.smallFont.getWidth(Level.player.remainingHealth + "/" + Level.player.totalHealth);
 		drawStatY += statsLineHeight;
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					highLevelStatNamesToUse.get(statType));
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					"" + Level.player.getEffectiveHighLevelStat(statType));
 			highLevelStatButtons.get(statType).width = Game.smallFont
 					.getWidth("" + Level.player.getEffectiveHighLevelStat(statType));
@@ -357,9 +357,9 @@ public class CharacterScreen implements Draggable, Scrollable {
 		// DAMAGE
 
 		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					offensiveStatNamesToUse.get(statType));
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					"" + Level.player.getEffectiveOffensiveStat(statType));
 			offensiveStatButtons.get(statType).width = Game.smallFont
 					.getWidth("" + Level.player.getEffectiveOffensiveStat(statType));
@@ -370,9 +370,9 @@ public class CharacterScreen implements Draggable, Scrollable {
 		// RESISTANCES
 
 		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					defensiveStatNamesToUse.get(statType));
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					"" + Level.player.getEffectiveDefensiveStat(statType));
 			defensiveStatButtons.get(statType).width = Game.smallFont
 					.getWidth("" + Level.player.getEffectiveDefensiveStat(statType));

@@ -132,9 +132,9 @@ public class ComparisonDisplay {
 		if (gameObject1 != null)
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + gameObject1.name),
 					currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject1.name, color1) });
+					Color.WHITE, new Object[] { new StringWithColor("" + gameObject1.name, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-				new Object[] { new StringWithColor("" + gameObject2.name, color2) });
+				Color.WHITE, new Object[] { new StringWithColor("" + gameObject2.name, color2) });
 		currentY += fieldHeight;
 		currentY += fieldHeight;
 
@@ -157,8 +157,8 @@ public class ComparisonDisplay {
 
 				TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedStat),
 						currentY, Integer.MAX_VALUE, false, null,
-						new Object[] { new StringWithColor("" + equippedStat, color1) });
-				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, new Object[] {
+						Color.WHITE, new Object[] { new StringWithColor("" + equippedStat, color1) });
+				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] {
 						new StringWithColor("" + gameObject2.offensiveStats.get(statType).value, color2) });
 				TextureUtils.drawTexture(CharacterScreen.offensiveStatImages.get(statType), iconsX, currentY,
 						iconsX + 16, currentY + 16);
@@ -185,8 +185,8 @@ public class ComparisonDisplay {
 
 				TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedStat),
 						currentY, Integer.MAX_VALUE, false, null,
-						new Object[] { new StringWithColor("" + equippedStat, color1) });
-				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, new Object[] {
+						Color.WHITE, new Object[] { new StringWithColor("" + equippedStat, color1) });
+				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] {
 						new StringWithColor("" + gameObject2.defensiveStats.get(statType).value, color2) });
 				TextureUtils.drawTexture(CharacterScreen.defensiveStatImages.get(statType), iconsX, currentY,
 						iconsX + 16, currentY + 16);
@@ -212,9 +212,9 @@ public class ComparisonDisplay {
 
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedMaxRange),
 					currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + equippedMaxRange, color1) });
+					Color.WHITE, new Object[] { new StringWithColor("" + equippedMaxRange, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.maxRange, color2) });
+					Color.WHITE, new Object[] { new StringWithColor("" + gameObject2.maxRange, color2) });
 			TextureUtils.drawTexture(imageRange, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -237,9 +237,9 @@ public class ComparisonDisplay {
 
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedWeight),
 					currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + equippedWeight, color1) });
+					Color.WHITE, new Object[] { new StringWithColor("" + equippedWeight, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.weight, color2) });
+					Color.WHITE, new Object[] { new StringWithColor("" + gameObject2.weight, color2) });
 			TextureUtils.drawTexture(imageWeight, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -261,9 +261,9 @@ public class ComparisonDisplay {
 			}
 
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedValue), currentY,
-					Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + equippedValue, color1) });
+					Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] { new StringWithColor("" + equippedValue, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor("" + gameObject2.value, color2) });
+					Color.WHITE, new Object[] { new StringWithColor("" + gameObject2.value, color2) });
 			TextureUtils.drawTexture(imageValue, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
