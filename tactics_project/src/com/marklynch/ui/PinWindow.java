@@ -340,7 +340,7 @@ public class PinWindow implements Draggable {
 
 		}
 
-		// STATS
+		// HIGH LVL STATS
 		TextUtils.printTextWithImages(drawPositionX + statsImageX, drawPositionY + statsY + 120, width - 40, false,
 				null, "STATS");
 
@@ -354,7 +354,7 @@ public class PinWindow implements Draggable {
 			if (bestiaryKnowledge.getHighLevel(statType)) {
 				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
 						false, null, CharacterScreen.highLevelStatNames.get(statType),
-						"" + actor.highLevelStats.get(statType));
+						"" + actor.highLevelStats.get(statType).value);
 			} else {
 				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
 						false, null, CharacterScreen.highLevelStatNames.get(statType), unknownStats);
@@ -371,16 +371,16 @@ public class PinWindow implements Draggable {
 
 		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
 
-			TextureUtils.drawTexture(CharacterScreen.defensiveStatImages.get(statType), drawPositionX + statsImageX,
-					drawPositionY + statsY + offsetY, drawPositionX + statsImageX + 20,
-					drawPositionY + statsY + offsetY + 20);
+			TextureUtils.drawTexture(CharacterScreen.defensiveStatImages.get(statType),
+					drawPositionX + resistancesImageX, drawPositionY + resistancesY + offsetY,
+					drawPositionX + resistancesImageX + 20, drawPositionY + resistancesY + offsetY + 20);
 			if (bestiaryKnowledge.getDefensive(statType)) {
-				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
-						false, null, CharacterScreen.defensiveStatNames.get(statType),
-						"" + actor.defensiveStats.get(statType));
+				TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + offsetY,
+						width - 40, false, null, CharacterScreen.defensiveStatNames.get(statType),
+						"" + actor.defensiveStats.get(statType).value);
 			} else {
-				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
-						false, null, CharacterScreen.defensiveStatNames.get(statType), unknownStats);
+				TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + offsetY,
+						width - 40, false, null, CharacterScreen.defensiveStatNames.get(statType), unknownStats);
 
 			}
 			offsetY += 30;
