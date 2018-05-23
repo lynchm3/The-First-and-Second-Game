@@ -644,6 +644,8 @@ public class Level {
 	public static final int flashGameObjectTotalTime = 1200;// ms
 
 	public void openCloseInventory() {
+		characterScreen.close();
+		journal.close();
 		if (Game.level.openInventories.size() > 0) {
 			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
 				inventory.close();
@@ -660,6 +662,10 @@ public class Level {
 	}
 
 	public void openCloseJournal() {
+		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+			inventory.close();
+		}
+		characterScreen.close();
 
 		if (journal.showing) {
 			journal.close();
@@ -671,6 +677,10 @@ public class Level {
 	}
 
 	public void openCloseCharacterScreen() {
+		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+			inventory.close();
+		}
+		journal.close();
 
 		if (characterScreen.showing) {
 			characterScreen.close();

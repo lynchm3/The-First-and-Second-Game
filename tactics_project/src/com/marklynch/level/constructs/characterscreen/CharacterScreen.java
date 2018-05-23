@@ -9,7 +9,6 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
@@ -121,7 +120,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public CharacterScreen() {
 		// resize();
 		healthButton = new LevelButton(0, 0, Game.smallFont.getWidth(HEALTH), 30, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "", true, true, Color.TRANSPARENT, Color.WHITE, null);
 		buttons.add(healthButton);
 		highLevelStatNames.put(HIGH_LEVEL_STATS.STRENGTH, STRENGTH);
 		highLevelStatNames.put(HIGH_LEVEL_STATS.DEXTERITY, DEXTERITY);
@@ -190,21 +189,21 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			LevelButton button = new LevelButton(0, 0, Game.smallFont.getWidth(highLevelStatNames.get(statType)), 30,
-					"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+					"end_turn_button.png", "end_turn_button.png", "", true, true, Color.TRANSPARENT, Color.WHITE, null);
 			highLevelStatButtons.put(statType, button);
 			buttons.add(button);
 		}
 
 		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
 			LevelButton button = new LevelButton(0, 0, Game.smallFont.getWidth(offensiveStatNames.get(statType)), 30,
-					"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+					"end_turn_button.png", "end_turn_button.png", "", true, true, Color.TRANSPARENT, Color.WHITE, null);
 			offensiveStatButtons.put(statType, button);
 			buttons.add(button);
 		}
 
 		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
 			LevelButton button = new LevelButton(0, 0, Game.smallFont.getWidth(defensiveStatNames.get(statType)), 30,
-					"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+					"end_turn_button.png", "end_turn_button.png", "", true, true, Color.TRANSPARENT, Color.WHITE, null);
 			defensiveStatButtons.put(statType, button);
 			buttons.add(button);
 		}
@@ -270,14 +269,15 @@ public class CharacterScreen implements Draggable, Scrollable {
 			button.draw();
 		}
 
-		drawStats(0, 0);
+		drawStats(0, 0, false);
 
 	}
 
-	public static void drawStats(int x, int y) {
+	public static void drawStats(int x, int y, boolean smallVersion) {
 
 		int actorX = 0 + x;
 		int actorY = (int) (Game.halfWindowHeight - Game.level.player.height) + y;
+		float actorScale = 2f;
 
 		int statsX = 200 + x;
 		int statLabelsX = statsX;
@@ -285,6 +285,23 @@ public class CharacterScreen implements Draggable, Scrollable {
 		int statsY = 100 + y;
 		int statsLineHeight = 30;
 		int drawStatY = statsY;
+		HashMap<HIGH_LEVEL_STATS, String> highLevelStatNamesToUse = highLevelStatNames;
+		HashMap<OFFENSIVE_STATS, String> offensiveStatNamesToUse = offensiveStatNames;
+		HashMap<OFFENSIVE_STATS, String> defensiveStatNamesToUse = defensiveStatNames;
+
+		if (smallVersion) {
+			actorY = 0 + x;
+			actorScale = 1f;
+			statsX = 0 + x;
+			statLabelsX = statsX;
+			statValuesX = statsX + 50;
+			statsY = 128 + y;
+			statsLineHeight = 30;
+			drawStatY = statsY;
+			highLevelStatNamesToUse = highLevelStatNamesShort;
+			offensiveStatNamesToUse = offensiveStatNamesShort;
+			defensiveStatNamesToUse = offensiveStatNamesShort;
+		}
 
 		healthButton.updatePosition(statValuesX, drawStatY);
 		drawStatY += statsLineHeight;
@@ -313,7 +330,8 @@ public class CharacterScreen implements Draggable, Scrollable {
 		drawStatY += statsLineHeight;
 
 		// Actor
-		drawActor(Game.level.player, actorX, actorY);
+		// drawActor(Game.level.player, actorX, actorY);
+		Level.player.drawActor(actorX, actorY, 1, false, actorScale);
 
 		drawStatY = statsY;
 
@@ -326,7 +344,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					highLevelStatNames.get(statType));
+					highLevelStatNamesToUse.get(statType));
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					"" + Level.player.getEffectiveHighLevelStat(statType));
 			highLevelStatButtons.get(statType).width = Game.smallFont
@@ -340,7 +358,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					offensiveStatNames.get(statType));
+					offensiveStatNamesToUse.get(statType));
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					"" + Level.player.getEffectiveOffensiveStat(statType));
 			offensiveStatButtons.get(statType).width = Game.smallFont
@@ -353,7 +371,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null,
-					defensiveStatNames.get(statType));
+					defensiveStatNamesToUse.get(statType));
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null,
 					"" + Level.player.getEffectiveDefensiveStat(statType));
 			defensiveStatButtons.get(statType).width = Game.smallFont
@@ -374,10 +392,6 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public void drag(float dragX, float dragY) {
 		// TODO Auto-generated method stub
 
-	}
-
-	public static void drawActor(Actor actor, int x, int y) {
-		actor.drawActor(x, y, 1, false, 2f);
 	}
 
 }

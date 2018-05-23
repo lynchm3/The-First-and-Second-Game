@@ -467,6 +467,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		}
 
+		buttons.addAll(CharacterScreen.buttons);
+
 		this.isOpen = true;
 		if (!Game.level.openInventories.contains(this))
 			Game.level.openInventories.add(this);
@@ -1410,7 +1412,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		// drawActor(Game.level.player, actorPositionXInPixels, actorPositionYInPixels);
-		CharacterScreen.drawStats(0, 0);
+		CharacterScreen.drawStats(0, 0, true);
 
 		// Weapon comparison
 		if (this.inventorySquareMouseIsOver != null && this.inventorySquareMouseIsOver.stack.get(0) instanceof Weapon) {

@@ -2345,19 +2345,23 @@ public class Actor extends GameObject {
 			result.add("Unarmed " + offensiveStats.get(statType).value);
 
 		if (equipped != null && equipped.offensiveStats.get(statType).value != 0) {
-			result.add(TextUtils.NewLine.NEW_LINE);
+			if (result.size() > 0)
+				result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(equipped.getEffectiveOffensiveStatTooltip(statType));
 		}
 		if (helmet != null && helmet.offensiveStats.get(statType).value != 0) {
-			result.add(TextUtils.NewLine.NEW_LINE);
+			if (result.size() > 0)
+				result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(helmet.getEffectiveOffensiveStatTooltip(statType));
 		}
 		if (bodyArmor != null && bodyArmor.offensiveStats.get(statType).value != 0) {
-			result.add(TextUtils.NewLine.NEW_LINE);
+			if (result.size() > 0)
+				result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(bodyArmor.getEffectiveOffensiveStatTooltip(statType));
 		}
 		if (legArmor != null && legArmor.offensiveStats.get(statType).value != 0) {
-			result.add(TextUtils.NewLine.NEW_LINE);
+			if (result.size() > 0)
+				result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(legArmor.getEffectiveOffensiveStatTooltip(statType));
 		}
 
@@ -2401,19 +2405,23 @@ public class Actor extends GameObject {
 			result.add("Unarmed " + defensiveStats.get(statType).value);
 
 		if (equipped != null && equipped.defensiveStats.get(statType).value != 0) {
-			result.add(TextUtils.NewLine.NEW_LINE);
+			if (result.size() > 0)
+				result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(equipped.getEffectiveDefensiveStatTooltip(statType));
 		}
 		if (helmet != null && helmet.defensiveStats.get(statType).value != 0) {
-			result.add(TextUtils.NewLine.NEW_LINE);
+			if (result.size() > 0)
+				result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(helmet.getEffectiveDefensiveStatTooltip(statType));
 		}
 		if (bodyArmor != null && bodyArmor.defensiveStats.get(statType).value != 0) {
-			result.add(TextUtils.NewLine.NEW_LINE);
+			if (result.size() > 0)
+				result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(bodyArmor.getEffectiveDefensiveStatTooltip(statType));
 		}
 		if (legArmor != null && legArmor.defensiveStats.get(statType).value != 0) {
-			result.add(TextUtils.NewLine.NEW_LINE);
+			if (result.size() > 0)
+				result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(legArmor.getEffectiveDefensiveStatTooltip(statType));
 		}
 
