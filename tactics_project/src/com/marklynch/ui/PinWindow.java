@@ -62,8 +62,10 @@ public class PinWindow implements Draggable {
 			this.gameObject = (GameObject) object;
 			if (object instanceof Actor)
 				this.actor = (Actor) object;
-			this.width = gameObject.imageTexture.getWidth() + borderWidth * 2;
-			this.height = gameObject.imageTexture.getHeight() + titleBarHeight + borderWidth;
+			if (gameObject.imageTexture != null) {
+				this.width = gameObject.imageTexture.getWidth() + borderWidth * 2;
+				this.height = gameObject.imageTexture.getHeight() + titleBarHeight + borderWidth;
+			}
 		} else if (object instanceof Square) {
 			this.square = (Square) object;
 			this.width = Game.SQUARE_WIDTH;
@@ -189,9 +191,13 @@ public class PinWindow implements Draggable {
 
 			// Image
 			if (gameObject != null) {
-				TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
-						drawPositionY + titleBarHeight, drawPositionX + gameObject.imageTexture.getWidth(),
-						drawPositionY + gameObject.imageTexture.getHeight());
+				if (actor != null) {
+
+				} else {
+					TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
+							drawPositionY + titleBarHeight, drawPositionX + gameObject.imageTexture.getWidth(),
+							drawPositionY + gameObject.imageTexture.getHeight());
+				}
 				if (actor != null) {
 					drawStats(actor);
 				}
@@ -276,15 +282,18 @@ public class PinWindow implements Draggable {
 
 		// GENERAL
 		if (bestiaryKnowledge.faction) {
-			TextUtils.printTextWithImages(drawPositionX + borderWidth,
-					drawPositionY + titleBarHeight + actor.imageTexture.getHeight(), 128, false, null, "Faction ",
-					actor.faction);
+			// TextUtils.printTextWithImages(drawPositionX + borderWidth,
+			// drawPositionY + titleBarHeight + actor.imageTexture.getHeight(), 128, false,
+			// null, "Faction ",
+			// actor.faction);
 		}
 
 		if (bestiaryKnowledge.group && actor.group != null) {
-			TextUtils.printTextWithImages(drawPositionX + borderWidth,
-					drawPositionY + titleBarHeight + actor.imageTexture.getHeight() + 30, 128, false, null, "Group ",
-					actor.group.name);
+
+			// TextUtils.printTextWithImages(drawPositionX + borderWidth,
+			// drawPositionY + titleBarHeight + actor.imageTexture.getHeight() + 30, 128,
+			// false, null, "Group ",
+			// actor.group.name);
 		}
 
 		// Name
@@ -336,7 +345,7 @@ public class PinWindow implements Draggable {
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 
-			TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+			TextureUtils.drawTexture(CharacterScreen.highLevelStatImages.get(statType), drawPositionX + statsImageX,
 					drawPositionY + statsY + offsetY, drawPositionX + statsImageX + 20,
 					drawPositionY + statsY + offsetY + 20);
 			if (bestiaryKnowledge.getHighLevel(statType)) {
@@ -359,7 +368,7 @@ public class PinWindow implements Draggable {
 
 		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
 
-			TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+			TextureUtils.drawTexture(CharacterScreen.defensiveStatImages.get(statType), drawPositionX + statsImageX,
 					drawPositionY + statsY + offsetY, drawPositionX + statsImageX + 20,
 					drawPositionY + statsY + offsetY + 20);
 			if (bestiaryKnowledge.getDefensive(statType)) {

@@ -1,5 +1,7 @@
 package com.marklynch.level.constructs.characterscreen;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,6 +20,7 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.Texture;
 
 public class CharacterScreen implements Draggable, Scrollable {
 
@@ -38,6 +41,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static StringWithColor ENDURANCE_WHITE = new StringWithColor(ENDURANCE, Color.WHITE);
 	public static HashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons = new HashMap<HIGH_LEVEL_STATS, LevelButton>();
 	public static HashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new HashMap<HIGH_LEVEL_STATS, String>();
+	public static HashMap<HIGH_LEVEL_STATS, Texture> highLevelStatImages = new HashMap<HIGH_LEVEL_STATS, Texture>();
 
 	// DMG and Healing
 	public static String SLASH_DAMAGE = "SLASH DAMAGE";
@@ -60,6 +64,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static StringWithColor HEALING_WHITE = new StringWithColor(HEALING, Color.WHITE);
 	public static HashMap<OFFENSIVE_STATS, LevelButton> offensiveStatButtons = new HashMap<OFFENSIVE_STATS, LevelButton>();
 	public static HashMap<OFFENSIVE_STATS, String> offensiveStatNames = new HashMap<OFFENSIVE_STATS, String>();
+	public static HashMap<OFFENSIVE_STATS, Texture> offensiveStatImages = new HashMap<OFFENSIVE_STATS, Texture>();
 
 	// Resistances
 	public static String SLASH_RESISTANCE = "SLASH RESISTANCE";
@@ -82,6 +87,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static StringWithColor HEALING_RESISTANCE_WHITE = new StringWithColor(HEALING_RESISTANCE, Color.WHITE);
 	public static HashMap<OFFENSIVE_STATS, LevelButton> defensiveStatButtons = new HashMap<OFFENSIVE_STATS, LevelButton>();
 	public static HashMap<OFFENSIVE_STATS, String> defensiveStatNames = new HashMap<OFFENSIVE_STATS, String>();
+	public static HashMap<OFFENSIVE_STATS, Texture> defensiveStatImages = new HashMap<OFFENSIVE_STATS, Texture>();
 
 	public static LevelButton healthButton;
 
@@ -149,6 +155,31 @@ public class CharacterScreen implements Draggable, Scrollable {
 		defensiveStatNames.put(OFFENSIVE_STATS.POISON_DAMAGE, POISON_RESISTANCE);
 		defensiveStatNames.put(OFFENSIVE_STATS.BLEED_DAMAGE, BLEED_RESISTANCE);
 		defensiveStatNames.put(OFFENSIVE_STATS.HEALING, HEALING_RESISTANCE);
+
+		highLevelStatImages.put(HIGH_LEVEL_STATS.STRENGTH, getGlobalImage("action_slash.png", false));
+		highLevelStatImages.put(HIGH_LEVEL_STATS.DEXTERITY, getGlobalImage("action_slash.png", false));
+		highLevelStatImages.put(HIGH_LEVEL_STATS.INTELLIGENCE, getGlobalImage("action_slash.png", false));
+		highLevelStatImages.put(HIGH_LEVEL_STATS.ENDURANCE, getGlobalImage("action_slash.png", false));
+
+		offensiveStatImages.put(OFFENSIVE_STATS.SLASH_DAMAGE, getGlobalImage("action_slash.png", false));
+		offensiveStatImages.put(OFFENSIVE_STATS.BLUNT_DAMAGE, getGlobalImage("action_blunt.png", false));
+		offensiveStatImages.put(OFFENSIVE_STATS.PIERCE_DAMAGE, getGlobalImage("action_pierce.png", false));
+		offensiveStatImages.put(OFFENSIVE_STATS.FIRE_DAMAGE, getGlobalImage("action_burn.png", false));
+		offensiveStatImages.put(OFFENSIVE_STATS.WATER_DAMAGE, getGlobalImage("action_douse.png", false));
+		offensiveStatImages.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, getGlobalImage("action_electrical.png", false));
+		offensiveStatImages.put(OFFENSIVE_STATS.POISON_DAMAGE, getGlobalImage("action_poison.png", false));
+		offensiveStatImages.put(OFFENSIVE_STATS.BLEED_DAMAGE, getGlobalImage("action_bleed.png", false));
+		offensiveStatImages.put(OFFENSIVE_STATS.HEALING, getGlobalImage("action_healing.png", false));
+
+		defensiveStatImages.put(OFFENSIVE_STATS.SLASH_DAMAGE, getGlobalImage("action_slash.png", false));
+		defensiveStatImages.put(OFFENSIVE_STATS.BLUNT_DAMAGE, getGlobalImage("action_blunt.png", false));
+		defensiveStatImages.put(OFFENSIVE_STATS.PIERCE_DAMAGE, getGlobalImage("action_pierce.png", false));
+		defensiveStatImages.put(OFFENSIVE_STATS.FIRE_DAMAGE, getGlobalImage("action_burn.png", false));
+		defensiveStatImages.put(OFFENSIVE_STATS.WATER_DAMAGE, getGlobalImage("action_douse.png", false));
+		defensiveStatImages.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, getGlobalImage("action_electrical.png", false));
+		defensiveStatImages.put(OFFENSIVE_STATS.POISON_DAMAGE, getGlobalImage("action_poison.png", false));
+		defensiveStatImages.put(OFFENSIVE_STATS.BLEED_DAMAGE, getGlobalImage("action_bleed.png", false));
+		defensiveStatImages.put(OFFENSIVE_STATS.HEALING, getGlobalImage("action_healing.png", false));
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			LevelButton button = new LevelButton(0, 0, Game.smallFont.getWidth(highLevelStatNames.get(statType)), 30,
