@@ -6,6 +6,8 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -433,18 +435,6 @@ public class QuestSmallGame extends Quest {
 				new GameObject[] {}, new GameObject[] {}, null);
 		superWolf.powers.add(new PowerSuperPeek(superWolf));
 
-		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
-		bestiaryKnowledge.name = true;
-		bestiaryKnowledge.image = true;
-		bestiaryKnowledge.fireResistance = true;
-		bestiaryKnowledge.waterResistance = true;
-		bestiaryKnowledge.bluntResistance = true;
-		bestiaryKnowledge.pierceResistance = true;
-		bestiaryKnowledge.slashResistance = true;
-		bestiaryKnowledge.poisonResistance = true;
-		bestiaryKnowledge.electricalResistance = true;
-		bestiaryKnowledge.powers = true;
-
 		Actor wolf2 = Templates.WOLF.makeCopy("Wolf", Game.level.squares[128][11], Game.level.factions.wolves, null,
 				new GameObject[] {}, new GameObject[] {}, null);
 
@@ -499,14 +489,29 @@ public class QuestSmallGame extends Quest {
 
 					BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
 					bestiaryKnowledge.name = true;
+					bestiaryKnowledge.level = true;
 					bestiaryKnowledge.image = true;
-					bestiaryKnowledge.fireResistance = true;
-					bestiaryKnowledge.waterResistance = true;
-					bestiaryKnowledge.bluntResistance = true;
-					bestiaryKnowledge.pierceResistance = true;
-					bestiaryKnowledge.slashResistance = true;
-					bestiaryKnowledge.poisonResistance = true;
-					bestiaryKnowledge.electricalResistance = true;
+					bestiaryKnowledge.totalHealth = true;
+					bestiaryKnowledge.faction = true;
+					bestiaryKnowledge.group = true;
+
+					// Stats
+					for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+						bestiaryKnowledge.putHighLevel(statType, true);
+					}
+
+					// Damage
+					for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+						bestiaryKnowledge.putOffensive(statType, true);
+					}
+
+					// Resistances
+					for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+						bestiaryKnowledge.putDefensive(statType, true);
+					}
+
+					// Powers
+					bestiaryKnowledge.powers = true;
 
 				}
 			}
