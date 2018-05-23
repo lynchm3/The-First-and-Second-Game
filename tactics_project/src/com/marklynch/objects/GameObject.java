@@ -224,17 +224,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean starred = false;
 	public boolean flash = false;
 
-	// weapons
-	// public float slashDamage = 0;
-	// public float pierceDamage = 0;
-	// public float bluntDamage = 0;
-	// public float fireDamage = 0; // fire/purify/clean
-	// public float waterDamage = 0; // water/life
-	// public float electricalDamage = 0; // lightning/light/electrical/speed
-	// public float poisonDamage = 0;//
-	// poison/ground/contaminate/neutralize/slow/corruption
-	// public float bleedDamage = 0;
-	// public float healing = 0;
 	public float minRange = 1;
 	public float maxRange = 1;
 
@@ -2043,7 +2032,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				float resistance = (this.defensiveStats.get(statType).value / 100);
 				float resistedDamage = damageDealer.getEffectiveOffensiveStat(statType) * resistance;
 				float dmg = damageDealer.getEffectiveOffensiveStat(statType) - resistedDamage;
-				doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.SLASH, this.defensiveStats.get(statType).value);
+				doDamageAnimation(dmg, offsetY, statType, this.defensiveStats.get(statType).value);
 				remainingHealth -= dmg;
 				totalDamage += dmg;
 				if (dmg > 0)
@@ -2051,11 +2040,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 				// Update bestiary
 				if (Game.level.shouldLog(this))
-					Game.level.bestiaryKnowledgeCollection.get(this.templateId).slashResistance = true;
+					Level.bestiaryKnowledgeCollection.get(this.templateId).putDefensive(statType, true);
 
 				if (gameObjectAttacker != null)
 					if (Game.level.shouldLog(gameObjectAttacker))
-						Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).slashDamage = true;
+						Level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).putOffensive(statType,
+								true);
 
 				offsetY += 48;
 			}
@@ -2078,11 +2068,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return totalDamage;
 	}
 
-	public enum DAMAGE_TYPE {
-		SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, BLEEDING, HEALING
-	};
+	// public enum DAMAGE_TYPE {
+	// SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, BLEEDING, HEALING
+	// };
 
-	public void doDamageAnimation(float healing, float offsetY, DAMAGE_TYPE damageType, float res) {
+	public void doDamageAnimation(float healing, float offsetY, OFFENSIVE_STATS statType, float res) {
 
 		Color color = Color.WHITE;
 
@@ -2111,6 +2101,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
 		this.secondaryAnimations
-				.add(new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f, damageType, color));
+				.add(new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f, statType, color));
 	}
 }

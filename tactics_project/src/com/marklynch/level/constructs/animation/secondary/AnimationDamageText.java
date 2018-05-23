@@ -5,10 +5,10 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.inventory.ComparisonDisplay;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObject.DAMAGE_TYPE;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -36,7 +36,7 @@ public class AnimationDamageText extends Animation {
 	Color color;
 
 	public AnimationDamageText(int damage, GameObject targetGameObject, float originX, float originY, float speed,
-			DAMAGE_TYPE damageType, Color color) {
+			OFFENSIVE_STATS statType, Color color) {
 
 		this.targetGameObject = targetGameObject;
 
@@ -55,23 +55,23 @@ public class AnimationDamageText extends Animation {
 		// this.targetOffsetX = targetOffsetX;
 		// this.targetOffsetY = targetOffsetY;
 
-		if (damageType == DAMAGE_TYPE.SLASH) {
+		if (statType == OFFENSIVE_STATS.SLASH_DAMAGE) {
 			texture = ComparisonDisplay.imageSlash;
-		} else if (damageType == DAMAGE_TYPE.BLUNT) {
+		} else if (statType == OFFENSIVE_STATS.BLUNT_DAMAGE) {
 			texture = ComparisonDisplay.imageBlunt;
-		} else if (damageType == DAMAGE_TYPE.PIERCE) {
+		} else if (statType == OFFENSIVE_STATS.PIERCE_DAMAGE) {
 			texture = ComparisonDisplay.imagePierce;
-		} else if (damageType == DAMAGE_TYPE.FIRE) {
+		} else if (statType == OFFENSIVE_STATS.FIRE_DAMAGE) {
 			texture = ComparisonDisplay.imageFire;
-		} else if (damageType == DAMAGE_TYPE.WATER) {
+		} else if (statType == OFFENSIVE_STATS.WATER_DAMAGE) {
 			texture = ComparisonDisplay.imageWater;
-		} else if (damageType == DAMAGE_TYPE.ELECTRIC) {
+		} else if (statType == OFFENSIVE_STATS.ELECTRICAL_DAMAGE) {
 			texture = ComparisonDisplay.imageElectrical;
-		} else if (damageType == DAMAGE_TYPE.POISON) {
+		} else if (statType == OFFENSIVE_STATS.POISON_DAMAGE) {
 			texture = ComparisonDisplay.imagePosion;
-		} else if (damageType == DAMAGE_TYPE.BLEEDING) {
+		} else if (statType == OFFENSIVE_STATS.BLEED_DAMAGE) {
 			texture = ComparisonDisplay.imageBleed;
-		} else if (damageType == DAMAGE_TYPE.HEALING) {
+		} else if (statType == OFFENSIVE_STATS.HEALING) {
 			texture = ComparisonDisplay.imageHealing;
 		}
 

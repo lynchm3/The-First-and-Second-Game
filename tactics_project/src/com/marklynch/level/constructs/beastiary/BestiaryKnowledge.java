@@ -1,5 +1,10 @@
 package com.marklynch.level.constructs.beastiary;
 
+import java.util.HashMap;
+
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+
 public class BestiaryKnowledge {
 
 	int templateId;
@@ -12,32 +17,10 @@ public class BestiaryKnowledge {
 	public boolean faction;
 	public boolean group;
 
-	// stats
-	public boolean strength;
-	public boolean dexterity;
-	public boolean intelligence;
-	public boolean endurance;
+	public HashMap<HIGH_LEVEL_STATS, Boolean> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Boolean>();
+	public HashMap<OFFENSIVE_STATS, Boolean> offensiveStats = new HashMap<OFFENSIVE_STATS, Boolean>();
+	public HashMap<OFFENSIVE_STATS, Boolean> defensiveStats = new HashMap<OFFENSIVE_STATS, Boolean>();
 
-	// Resistances
-	public boolean slashResistance;
-	public boolean bluntResistance;
-	public boolean pierceResistance;
-	public boolean fireResistance;
-	public boolean waterResistance;
-	public boolean electricalResistance;
-	public boolean poisonResistance;
-	public boolean bleedResistance;
-
-	// Damage
-	public boolean slashDamage;
-	public boolean bluntDamage;
-	public boolean pierceDamage;
-	public boolean fireDamage;
-	public boolean waterDamage;
-	public boolean electricalDamage;
-	public boolean poisonDamage;
-	public boolean bleedDamage;
-	public boolean healing;
 	public boolean range;
 
 	// Powers
@@ -45,6 +28,18 @@ public class BestiaryKnowledge {
 
 	public BestiaryKnowledge(int templateId) {
 		this.templateId = templateId;
+	}
+
+	public void putHighLevel(HIGH_LEVEL_STATS statType, boolean value) {
+		highLevelStats.put(statType, value);
+	}
+
+	public void putOffensive(OFFENSIVE_STATS statType, boolean value) {
+		offensiveStats.put(statType, value);
+	}
+
+	public void putDefensive(OFFENSIVE_STATS statType, boolean value) {
+		defensiveStats.put(statType, value);
 	}
 
 }
