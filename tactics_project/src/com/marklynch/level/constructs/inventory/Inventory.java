@@ -1766,32 +1766,33 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				}
 			}
 
-			if (otherWeapon.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value >= weapon.offensiveStats
-					.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value
-					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value >= weapon.offensiveStats
-							.get(OFFENSIVE_STATS.SLASH_DAMAGE).value
-					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value >= weapon.offensiveStats
-							.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value
-					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value >= weapon.offensiveStats
-							.get(OFFENSIVE_STATS.WATER_DAMAGE).value
-					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value >= weapon.offensiveStats
-							.get(OFFENSIVE_STATS.FIRE_DAMAGE).value
-					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value >= weapon.offensiveStats
-							.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value
-					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value >= weapon.offensiveStats
-							.get(OFFENSIVE_STATS.POISON_DAMAGE).value
-					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value >= weapon.offensiveStats
-							.get(OFFENSIVE_STATS.BLEED_DAMAGE).value
-					&& otherWeapon.offensiveStats.get(OFFENSIVE_STATS.HEALING).value >= weapon.offensiveStats
-							.get(OFFENSIVE_STATS.HEALING).value
-					&& otherWeapon.maxRange >= weapon.maxRange && otherWeapon.minRange <= weapon.minRange) {
-				weapon.toSell = true;
-				itemsToSellCount++;
-				return true;
+			// offensive
+			for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+				if (otherWeapon.offensiveStats.get(statType).value < weapon.offensiveStats.get(statType).value)
+					return false;
 			}
+
+			// defensive
+			for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+				if (otherWeapon.defensiveStats.get(statType).value < weapon.defensiveStats.get(statType).value)
+					return false;
+			}
+
+			if (otherWeapon.maxRange < weapon.maxRange) {
+				return false;
+			}
+
+			if (otherWeapon.minRange > weapon.minRange) {
+				return false;
+			}
+
+			weapon.toSell = true;
+			itemsToSellCount++;
+			return true;
 		}
 
 		return false;
+
 	}
 
 	public boolean checkIfPlayersArmorObsolete(Armor armor) {

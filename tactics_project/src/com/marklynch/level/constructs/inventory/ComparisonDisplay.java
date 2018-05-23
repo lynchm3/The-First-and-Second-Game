@@ -72,15 +72,15 @@ public class ComparisonDisplay {
 		// if (!(Game.level.player.equipped instanceof Weapon))
 		// return;
 
-		GameObject gameObject2 = Game.level.player.inventory.inventorySquareMouseIsOver.stack.get(0);
+		GameObject gameObject2 = Level.player.inventory.inventorySquareMouseIsOver.stack.get(0);
 
-		GameObject gameObject1 = Game.level.player.equipped;
+		GameObject gameObject1 = Level.player.equipped;
 		if (gameObject2 instanceof BodyArmor) {
-			gameObject1 = Game.level.player.bodyArmor;
+			gameObject1 = Level.player.bodyArmor;
 		} else if (gameObject2 instanceof LegArmor) {
-			gameObject1 = Game.level.player.legArmor;
+			gameObject1 = Level.player.legArmor;
 		} else if (gameObject2 instanceof Helmet) {
-			gameObject1 = Game.level.player.helmet;
+			gameObject1 = Level.player.helmet;
 		}
 
 		// "Equipped"
