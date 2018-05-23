@@ -7,8 +7,9 @@ import org.lwjgl.util.vector.Vector3f;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.animation.Animation;
-import com.marklynch.level.constructs.inventory.ComparisonDisplay;
+import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -31,7 +32,7 @@ public class AnimationDamageText extends Animation {
 
 	boolean reachedDestination = false;
 
-	public Texture texture = ComparisonDisplay.imageSlash;
+	public Texture texture = Action.textureAttack;
 
 	Color color;
 
@@ -52,28 +53,7 @@ public class AnimationDamageText extends Animation {
 
 		this.durationToReach = 1000f;
 
-		// this.targetOffsetX = targetOffsetX;
-		// this.targetOffsetY = targetOffsetY;
-
-		if (statType == OFFENSIVE_STATS.SLASH_DAMAGE) {
-			texture = ComparisonDisplay.imageSlash;
-		} else if (statType == OFFENSIVE_STATS.BLUNT_DAMAGE) {
-			texture = ComparisonDisplay.imageBlunt;
-		} else if (statType == OFFENSIVE_STATS.PIERCE_DAMAGE) {
-			texture = ComparisonDisplay.imagePierce;
-		} else if (statType == OFFENSIVE_STATS.FIRE_DAMAGE) {
-			texture = ComparisonDisplay.imageFire;
-		} else if (statType == OFFENSIVE_STATS.WATER_DAMAGE) {
-			texture = ComparisonDisplay.imageWater;
-		} else if (statType == OFFENSIVE_STATS.ELECTRICAL_DAMAGE) {
-			texture = ComparisonDisplay.imageElectrical;
-		} else if (statType == OFFENSIVE_STATS.POISON_DAMAGE) {
-			texture = ComparisonDisplay.imagePosion;
-		} else if (statType == OFFENSIVE_STATS.BLEED_DAMAGE) {
-			texture = ComparisonDisplay.imageBleed;
-		} else if (statType == OFFENSIVE_STATS.HEALING) {
-			texture = ComparisonDisplay.imageHealing;
-		}
+		texture = CharacterScreen.offensiveStatImages.get(statType);
 
 		blockAI = false;
 

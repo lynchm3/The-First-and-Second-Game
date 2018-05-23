@@ -39,27 +39,6 @@ public class ComparisonDisplay {
 	int statsOfHoveredX;
 	int iconsX;
 
-	// int nameY;
-	// int slashDamageY;
-	// int bluntDamageY;
-	// int pierceDamageY;
-	// int fireDamageY;
-	// int waterDamageY;
-	// int electricalDamageY;
-	// int poisonDamageY;
-	// int rangeY;
-	// int weightY;
-	// int valueY;
-
-	public static Texture imageSlash;
-	public static Texture imagePierce;
-	public static Texture imageBlunt;
-	public static Texture imageFire;
-	public static Texture imageWater;
-	public static Texture imageElectrical;
-	public static Texture imagePosion;
-	public static Texture imageBleed;
-	public static Texture imageHealing;
 	public static Texture imageRange;
 	public static Texture imageWeight;
 	public static Texture imageValue;
@@ -69,15 +48,6 @@ public class ComparisonDisplay {
 	}
 
 	public static void loadStaticImages() {
-		imageSlash = getGlobalImage("action_slash.png", false);
-		imagePierce = getGlobalImage("action_pierce.png", false);
-		imageBlunt = getGlobalImage("action_blunt.png", false);
-		imageFire = getGlobalImage("action_burn.png", false);
-		imageWater = getGlobalImage("action_douse.png", false);
-		imageElectrical = getGlobalImage("action_electrical.png", false);
-		imagePosion = getGlobalImage("action_poison.png", false);
-		imageBleed = getGlobalImage("effect_bleed.png", false);
-		imageHealing = getGlobalImage("action_heal.png", false);
 		imageRange = getGlobalImage("range.png", false);
 		imageWeight = getGlobalImage("weight.png", false);
 		imageValue = getGlobalImage("gold.png", false);
@@ -143,6 +113,7 @@ public class ComparisonDisplay {
 				new Object[] { new StringWithColor("" + gameObject2.name, color2) });
 		currentY += fieldHeight;
 
+		// Offensive stats
 		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
 			float equippedStat = Level.player.offensiveStats.get(statType).value;
 			if (gameObject1 != null)
@@ -168,7 +139,34 @@ public class ComparisonDisplay {
 						iconsX + 16, currentY + 16);
 				currentY += fieldHeight;
 			}
+		}
 
+		// Defensive stats
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+			float equippedStat = Level.player.defensiveStats.get(statType).value;
+			if (gameObject1 != null)
+				equippedStat = gameObject1.defensiveStats.get(statType).value;
+			if (equippedStat != 0 || gameObject2.defensiveStats.get(statType).value != 0) {
+				if (equippedStat == gameObject2.defensiveStats.get(statType).value) {
+					color1 = Color.WHITE;
+					color2 = Color.WHITE;
+				} else if (equippedStat < gameObject2.defensiveStats.get(statType).value) {
+					color1 = Color.RED;
+					color2 = Color.GREEN;
+				} else {
+					color1 = Color.GREEN;
+					color2 = Color.RED;
+				}
+
+				TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedStat),
+						currentY, Integer.MAX_VALUE, false, null,
+						new Object[] { new StringWithColor("" + equippedStat, color1) });
+				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, new Object[] {
+						new StringWithColor("" + gameObject2.defensiveStats.get(statType).value, color2) });
+				TextureUtils.drawTexture(CharacterScreen.defensiveStatImages.get(statType), iconsX, currentY,
+						iconsX + 16, currentY + 16);
+				currentY += fieldHeight;
+			}
 		}
 
 		// Range
@@ -221,7 +219,7 @@ public class ComparisonDisplay {
 			currentY += fieldHeight;
 		}
 
-		// vlaue
+		// value
 		float equippedValue = 0;
 		if (gameObject1 != null)
 			equippedValue = gameObject1.value;

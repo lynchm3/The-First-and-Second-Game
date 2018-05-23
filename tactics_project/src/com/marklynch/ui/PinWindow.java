@@ -65,6 +65,9 @@ public class PinWindow implements Draggable {
 			if (gameObject.imageTexture != null) {
 				this.width = gameObject.imageTexture.getWidth() + borderWidth * 2;
 				this.height = gameObject.imageTexture.getHeight() + titleBarHeight + borderWidth;
+			} else {
+				this.width = gameObject.width + borderWidth * 2;
+				this.height = gameObject.height + titleBarHeight + borderWidth;
 			}
 		} else if (object instanceof Square) {
 			this.square = (Square) object;
@@ -192,7 +195,8 @@ public class PinWindow implements Draggable {
 			// Image
 			if (gameObject != null) {
 				if (actor != null) {
-
+					actor.drawActor((int) (drawPositionX + borderWidth), (int) (drawPositionY + titleBarHeight), 1f,
+							false, 1);
 				} else {
 					TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
 							drawPositionY + titleBarHeight, drawPositionX + gameObject.imageTexture.getWidth(),
@@ -289,7 +293,6 @@ public class PinWindow implements Draggable {
 		}
 
 		if (bestiaryKnowledge.group && actor.group != null) {
-
 			// TextUtils.printTextWithImages(drawPositionX + borderWidth,
 			// drawPositionY + titleBarHeight + actor.imageTexture.getHeight() + 30, 128,
 			// false, null, "Group ",
