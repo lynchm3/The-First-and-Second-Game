@@ -1710,6 +1710,7 @@ public class Level {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
+			return null;
 		}
 
 		if (journal.showing) {
@@ -1803,6 +1804,8 @@ public class Level {
 				return pinWindows.get(i).minimiseButton;
 			if (pinWindows.get(i).mouseOverInvisibleMinimiseButton(mouseX, Game.windowHeight - mouseY))
 				return pinWindows.get(i).titleBarButton;
+			if (pinWindows.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
+				return null;
 		}
 
 		if (conversation != null) {

@@ -212,8 +212,8 @@ public class PinWindow implements Draggable {
 				}
 			} else if (square != null) {
 				TextureUtils.drawTexture(square.imageTexture, drawPositionX + borderWidth,
-						drawPositionY + titleBarHeight, drawPositionX + Game.SQUARE_WIDTH,
-						drawPositionY + Game.SQUARE_HEIGHT);
+						drawPositionY + titleBarHeight, drawPositionX + borderWidth + Game.SQUARE_WIDTH,
+						drawPositionY + titleBarHeight + Game.SQUARE_HEIGHT);
 				drawSquareStats();
 			}
 		}
@@ -337,11 +337,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 60 + 20);
 		if (bestiaryKnowledge.totalHealth) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false,
-					null, "Max Health ", "" + actor.totalHealth);
+					null, "Max HP ", "" + actor.totalHealth);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false,
-					null, "Max Health ", unknownStats);
+					null, "Max HP ", unknownStats);
 
 		}
 
@@ -358,11 +358,11 @@ public class PinWindow implements Draggable {
 					drawPositionY + statsY + offsetY + 20);
 			if (bestiaryKnowledge.getHighLevel(statType)) {
 				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
-						false, null, CharacterScreen.highLevelStatNames.get(statType),
+						false, null, CharacterScreen.highLevelStatNamesShort.get(statType),
 						"" + actor.highLevelStats.get(statType).value);
 			} else {
 				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
-						false, null, CharacterScreen.highLevelStatNames.get(statType), unknownStats);
+						false, null, CharacterScreen.highLevelStatNamesShort.get(statType), unknownStats);
 
 			}
 			offsetY += 30;
@@ -381,11 +381,11 @@ public class PinWindow implements Draggable {
 					drawPositionX + resistancesImageX + 20, drawPositionY + resistancesY + offsetY + 20);
 			if (bestiaryKnowledge.getDefensive(statType)) {
 				TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + offsetY,
-						width - 40, false, null, CharacterScreen.defensiveStatNames.get(statType),
+						width - 40, false, null, CharacterScreen.offensiveStatNamesShort.get(statType),
 						"" + actor.defensiveStats.get(statType).value);
 			} else {
 				TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + offsetY,
-						width - 40, false, null, CharacterScreen.defensiveStatNames.get(statType), unknownStats);
+						width - 40, false, null, CharacterScreen.highLevelStatNamesShort.get(statType), unknownStats);
 
 			}
 			offsetY += 30;
