@@ -42,4 +42,16 @@ public class BestiaryKnowledge {
 		defensiveStats.put(statType, value);
 	}
 
+	public boolean getHighLevel(HIGH_LEVEL_STATS statType) {
+		return highLevelStats.get(statType);
+	}
+
+	public boolean getOffensive(OFFENSIVE_STATS statType) {
+		return offensiveStats.get(statType);
+	}
+
+	public boolean getDefensive(OFFENSIVE_STATS statType) {
+		return defensiveStats.get(statType);
+	}
+
 }

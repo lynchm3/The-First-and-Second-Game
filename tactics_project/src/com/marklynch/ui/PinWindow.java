@@ -7,6 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
+import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -331,188 +332,46 @@ public class PinWindow implements Draggable {
 		TextUtils.printTextWithImages(drawPositionX + statsImageX, drawPositionY + statsY + 120, width - 40, false,
 				null, "STATS");
 
-		// strength
+		float offsetY = 150;
 
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
-				drawPositionY + statsY + 150, drawPositionX + statsImageX + 20, drawPositionY + statsY + 150 + 20);
-		if (bestiaryKnowledge.strength) {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false,
-					null, "STR ", "" + actor.highLevelStats.get(HIGH_LEVEL_STATS.STRENGTH));
+		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false,
-					null, "STR ", unknownStats);
+			TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+					drawPositionY + statsY + offsetY, drawPositionX + statsImageX + 20,
+					drawPositionY + statsY + offsetY + 20);
+			if (bestiaryKnowledge.getHighLevel(statType)) {
+				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
+						false, null, CharacterScreen.highLevelStatNames.get(statType),
+						"" + actor.highLevelStats.get(statType));
+			} else {
+				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
+						false, null, CharacterScreen.highLevelStatNames.get(statType), unknownStats);
 
-		}
-
-		// dexterity
-
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
-				drawPositionY + statsY + 180, drawPositionX + statsImageX + 20, drawPositionY + statsY + 180 + 20);
-		if (bestiaryKnowledge.dexterity) {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false,
-					null, "DEX ", "" + actor.highLevelStats.get(HIGH_LEVEL_STATS.DEXTERITY));
-
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false,
-					null, "DEX ", unknownStats);
-
-		}
-
-		// intelligence
-
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
-				drawPositionY + statsY + 210, drawPositionX + statsImageX + 20, drawPositionY + statsY + 210 + 20);
-		if (bestiaryKnowledge.intelligence) {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false,
-					null, "INT ", "" + actor.highLevelStats.get(HIGH_LEVEL_STATS.INTELLIGENCE));
-
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false,
-					null, "INT ", unknownStats);
-
-		}
-
-		// endurance
-
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
-				drawPositionY + statsY + 240, drawPositionX + statsImageX + 20, drawPositionY + statsY + 240 + 20);
-		if (bestiaryKnowledge.endurance) {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false,
-					null, "END ", "" + actor.highLevelStats.get(HIGH_LEVEL_STATS.ENDURANCE));
-
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false,
-					null, "END ", unknownStats);
-
+			}
+			offsetY += 30;
 		}
 
 		// RESISTANCES
 		TextUtils.printTextWithImages(drawPositionX + resistancesImageX, drawPositionY + resistancesY + 30, width - 40,
 				false, null, "RESISTANCES");
 
-		// Slash resistance
+		offsetY = 60;
 
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 60, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 60 + 20);
-		if (bestiaryKnowledge.slashResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
-					width - 40, false, null, "Slash ",
-					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE));
+		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
 
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
-					width - 40, false, null, "Slash ", unknownStats);
+			TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+					drawPositionY + statsY + offsetY, drawPositionX + statsImageX + 20,
+					drawPositionY + statsY + offsetY + 20);
+			if (bestiaryKnowledge.getDefensive(statType)) {
+				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
+						false, null, CharacterScreen.defensiveStatNames.get(statType),
+						"" + actor.defensiveStats.get(statType));
+			} else {
+				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
+						false, null, CharacterScreen.defensiveStatNames.get(statType), unknownStats);
 
-		}
-
-		// Pierce resistance
-
-		TextureUtils.drawTexture(getGlobalImage("action_pierce.png", false), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 90, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 90 + 20);
-		if (bestiaryKnowledge.pierceResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
-					width - 40, false, null, "Pierce ",
-					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE));
-
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
-					width - 40, false, null, "Pierce ", unknownStats);
-
-		}
-
-		// Blunt resistance
-
-		TextureUtils.drawTexture(getGlobalImage("action_blunt.png", false), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 120, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 120 + 20);
-		if (bestiaryKnowledge.bluntResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
-					width - 40, false, null, "Blunt ",
-					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE));
-
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
-					width - 40, false, null, "Blunt ", unknownStats);
-
-		}
-
-		// Fire resistance
-		TextureUtils.drawTexture(getGlobalImage("action_burn.png", false), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 150, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 150 + 20);
-		if (bestiaryKnowledge.fireResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
-					width - 40, false, null, "Fire ",
-					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE));
-
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
-					width - 40, false, null, "Fire ", unknownStats);
-
-		}
-
-		// Water resistance
-		TextureUtils.drawTexture(getGlobalImage("action_douse.png", false), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 180, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 180 + 20);
-		if (bestiaryKnowledge.waterResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
-					width - 40, false, null, "Water ",
-					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.WATER_DAMAGE));
-
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
-					width - 40, false, null, "Water ", unknownStats);
-
-		}
-
-		// Electrical resistance
-
-		TextureUtils.drawTexture(getGlobalImage("action_electrical.png", false), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 210, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 210 + 20);
-		if (bestiaryKnowledge.electricalResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 210,
-					width - 40, false, null, "Electrical ",
-					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE));
-
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 210,
-					width - 40, false, null, "Electrical ", unknownStats);
-
-		}
-
-		// Poison resistance
-		TextureUtils.drawTexture(getGlobalImage("action_poison.png", false), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 240, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 240 + 20);
-		if (bestiaryKnowledge.poisonResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 240,
-					width - 40, false, null, "Poison ",
-					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.POISON_DAMAGE));
-
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 240,
-					width - 40, false, null, "Poison ", unknownStats);
-
-		}
-
-		// Bleed resistance
-		TextureUtils.drawTexture(getGlobalImage("effect_bleed.png", false), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 270, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 270 + 20);
-		if (bestiaryKnowledge.poisonResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 270,
-					width - 40, false, null, "Bleed ",
-					"" + gameObject.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE));
-
-		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 270,
-					width - 40, false, null, "Bleed ", unknownStats);
-
+			}
+			offsetY += 30;
 		}
 
 		// POWERS
