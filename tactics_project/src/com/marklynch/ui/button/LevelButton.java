@@ -15,7 +15,6 @@ public class LevelButton extends Button {
 	public Color buttonColor;
 	private Color textColor;
 	public Object[] textParts;
-	public Tooltip tooltip;
 	public float realX = x;
 	public float realY = y;
 

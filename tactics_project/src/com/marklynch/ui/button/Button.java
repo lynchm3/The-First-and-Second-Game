@@ -1,7 +1,6 @@
 package com.marklynch.ui.button;
 
 import com.marklynch.utils.ResourceUtils;
-
 import com.marklynch.utils.Texture;
 
 public abstract class Button {
@@ -14,6 +13,7 @@ public abstract class Button {
 	public ClickListener clickListener;
 	protected Object text;
 	protected boolean highlighted = false;
+	public Tooltip tooltip;
 
 	public Button(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,
 			Object text) {

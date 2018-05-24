@@ -11,12 +11,17 @@ import com.marklynch.utils.TextUtils;
 
 public class Tooltip {
 
+	public static Tooltip lastTooltipShown = null;
+
 	public StringWithColor textWithColor;
 	// public int textWidth;
 	public static final int wrapWidth = 200;
 	LevelButton levelButton;
 	float[] dimensions;
 	ArrayList<Object> text;
+	float alpha = 0f;
+	Color backgroundColor = new Color(1f, 1f, 1f, 0f);
+	Color textColor = new Color(0f, 0f, 0f, 0f);
 
 	public Tooltip(LevelButton button, Object... text) {
 		this.text = new ArrayList<Object>(Arrays.asList(text));
@@ -40,6 +45,14 @@ public class Tooltip {
 
 		// if (1 == 1)
 		// return;
+		if (lastTooltipShown != this) {
+			alpha = 0f;
+		} else if (alpha < 1f) {
+			alpha += 0.05f;
+			if (alpha > 1) {
+				alpha = 1;
+			}
+		}
 
 		if (levelButton != null) {
 
@@ -80,9 +93,11 @@ public class Tooltip {
 
 			// textWidth
 
-			QuadUtils.drawQuad(Color.WHITE, x1, y1, x2, y2);
+			backgroundColor.a = alpha;
+			QuadUtils.drawQuad(backgroundColor, x1, y1, x2, y2);
 
-			TextUtils.printTextWithImages(this.text, x1, y1, wrapWidth, true, Color.BLACK, null);
+			textColor.a = alpha;
+			TextUtils.printTextWithImages(this.text, x1, y1, wrapWidth, true, textColor, null);
 
 		}
 	}

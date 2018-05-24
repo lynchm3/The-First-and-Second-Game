@@ -65,6 +65,7 @@ import com.marklynch.ui.TextBox;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.button.Tooltip;
 import com.marklynch.ui.popups.FullScreenTextBox;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.ui.popups.PopupMenu;
@@ -1278,20 +1279,20 @@ public class Level {
 		Game.font2.drawString(100, 100, "NICE LOOKING FONTS!", org.newdawn.slick.Color.green);
 
 		// Turn text
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, null,
-				Color.WHITE, new Object[] { "TURN " + turn });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, null, Color.WHITE,
+				new Object[] { "TURN " + turn });
 
 		// Zoom
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 100, Integer.MAX_VALUE, true, null,
-				Color.WHITE, new Object[] { "Zoom " + Game.zoom });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 100, Integer.MAX_VALUE, true, null, Color.WHITE,
+				new Object[] { "Zoom " + Game.zoom });
 
 		// FPS
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 120, Integer.MAX_VALUE, true, null,
-				Color.WHITE, new Object[] { "FPS " + Game.displayFPS });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 120, Integer.MAX_VALUE, true, null, Color.WHITE,
+				new Object[] { "FPS " + Game.displayFPS });
 
 		// TIME
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 140, Integer.MAX_VALUE, true, null,
-				Color.WHITE, new Object[] { timeString });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 140, Integer.MAX_VALUE, true, null, Color.WHITE,
+				new Object[] { timeString });
 
 		if (conversation != null)
 
@@ -1357,8 +1358,12 @@ public class Level {
 		if (fullScreenTextBox != null)
 			fullScreenTextBox.draw();
 
-		if (Game.buttonHoveringOver != null)
+		if (Game.buttonHoveringOver != null) {
 			Game.buttonHoveringOver.drawTooltip();
+			Tooltip.lastTooltipShown = Game.buttonHoveringOver.tooltip;
+		} else {
+			Tooltip.lastTooltipShown = null;
+		}
 
 	}
 
