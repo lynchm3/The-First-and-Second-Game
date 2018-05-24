@@ -206,6 +206,7 @@ public class UserInputLevel {
 		Game.gameObjectMouseIsOver = null;
 		if (Level.journal.showing) {
 		} else if (Level.characterScreen.showing) {
+		} else if (Level.skillTree.showing) {
 		} else if (Level.gameOver.showing) {
 		} else if (Game.level.openInventories.size() > 0) {
 			InventorySquare inventorySquareMouseIsOver = Game.level.openInventories.get(0)
@@ -337,6 +338,8 @@ public class UserInputLevel {
 
 			} else if (Level.characterScreen.showing) {
 
+			} else if (Level.skillTree.showing) {
+
 			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
 			} else if (Game.textBoxHoveringOver != null) {
@@ -367,6 +370,7 @@ public class UserInputLevel {
 
 			if (Level.journal.showing) {
 			} else if (Level.characterScreen.showing) {
+			} else if (Level.skillTree.showing) {
 			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
 			} else if (Game.level.fullScreenTextBox != null) {
@@ -436,6 +440,11 @@ public class UserInputLevel {
 		if (Level.characterScreen.showing) {
 			draggableMouseIsOver = Level.characterScreen;
 			scrollableMouseIsOver = Level.characterScreen;
+		}
+
+		if (Level.skillTree.showing) {
+			draggableMouseIsOver = Level.skillTree;
+			scrollableMouseIsOver = Level.skillTree;
 		}
 
 		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
@@ -573,6 +582,8 @@ public class UserInputLevel {
 			return;
 		} else if (Level.characterScreen.showing) {
 			return;
+		} else if (Level.skillTree.showing) {
+			return;
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -624,6 +635,8 @@ public class UserInputLevel {
 			return;
 		} else if (Level.characterScreen.showing) {
 			return;
+		} else if (Level.skillTree.showing) {
+			return;
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -669,6 +682,8 @@ public class UserInputLevel {
 		if (Game.level.fullScreenTextBox != null) {
 			return;
 		} else if (Level.journal.showing) {
+			return;
+		} else if (Level.skillTree.showing) {
 			return;
 		} else if (Level.characterScreen.showing) {
 			return;
@@ -719,6 +734,8 @@ public class UserInputLevel {
 		} else if (Level.journal.showing) {
 			return;
 		} else if (Level.characterScreen.showing) {
+			return;
+		} else if (Level.skillTree.showing) {
 			return;
 		} else if (Level.gameOver.showing) {
 			return;
@@ -774,6 +791,8 @@ public class UserInputLevel {
 			return;
 		} else if (Level.characterScreen.showing) {
 			return;
+		} else if (Level.skillTree.showing) {
+			return;
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -827,6 +846,10 @@ public class UserInputLevel {
 		}
 
 		if (Level.characterScreen.showing) {
+			return;
+		}
+
+		if (Level.skillTree.showing) {
 			return;
 		}
 
@@ -889,6 +912,8 @@ public class UserInputLevel {
 			Game.level.openCloseJournal();
 		} else if (Level.characterScreen.showing) {
 			Game.level.openCloseCharacterScreen();
+		} else if (Level.skillTree.showing) {
+			Game.level.openCloseSkillTree();
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -935,6 +960,9 @@ public class UserInputLevel {
 			return;
 		} else if (character == 'c' || character == 'C') {
 			Game.level.openCloseCharacterScreen();
+			return;
+		} else if (character == 't' || character == 'T') {
+			Game.level.openCloseSkillTree();
 			return;
 		} else if (Level.gameOver.showing) {
 			return;
@@ -991,6 +1019,8 @@ public class UserInputLevel {
 
 			} else if (Level.characterScreen.showing) {
 
+			} else if (Level.skillTree.showing) {
+
 			} else if (Game.level.openInventories.size() > 0) {
 			} else if (Game.level.conversation != null
 					&& Game.level.conversation.currentConversationPart.windowSelectConversationResponse.buttonTrade != null) {
@@ -1005,7 +1035,9 @@ public class UserInputLevel {
 				}
 				leftPressed(true, false);
 			}
-		} else if (character == 's' || character == 'S') {
+		} else if (character == 's' || character == 'S')
+
+		{
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
