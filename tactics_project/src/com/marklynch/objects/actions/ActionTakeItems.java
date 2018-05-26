@@ -62,7 +62,8 @@ public class ActionTakeItems extends VariableQtyAction {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -137,6 +138,10 @@ public class ActionTakeItems extends VariableQtyAction {
 	@Override
 	public boolean check() {
 
+		if (objects.length == 0) {
+			return false;
+		}
+
 		// Check it's still on the same spot
 		if (targetGameObject != null) {
 			for (GameObject object : objects) {
@@ -174,6 +179,8 @@ public class ActionTakeItems extends VariableQtyAction {
 
 	@Override
 	public boolean checkLegality() {
+		if (objects.length == 0)
+			return true;
 		if (objects[0].owner != null && objects[0].owner != performer)
 			return false;
 		return true;

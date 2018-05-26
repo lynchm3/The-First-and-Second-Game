@@ -19,6 +19,7 @@ public abstract class Power {
 
 	public Texture image;
 	public String name;
+	public String description;
 	public GameObject source;
 	public GameObject target;
 	public Effect[] effects;

@@ -29,6 +29,7 @@ import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.constructs.journal.MarkerList;
 import com.marklynch.level.constructs.journal.QuestList;
+import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerHealRanged;
@@ -2035,6 +2036,8 @@ public class Level {
 		// Do passive powers
 		new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
 				new PowerRespite(Game.level.player)).perform();
+		new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn, new PowerGrabber(Game.level.player))
+				.perform();
 
 		if (levelMode != LevelMode.LEVEL_MODE_FISHING) {
 			if (player.fishingTarget != null) {
