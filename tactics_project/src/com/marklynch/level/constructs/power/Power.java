@@ -27,6 +27,7 @@ public abstract class Power {
 	public boolean potentialyCriminal;
 	public Crime.TYPE crimeSeverity;
 	public String disabledReason = "";
+	boolean passive = false;;
 
 	int range;
 	Point[] areaOfEffect;

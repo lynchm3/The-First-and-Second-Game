@@ -36,6 +36,7 @@ import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerHealTouch;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerPoisonBlast;
+import com.marklynch.level.constructs.power.PowerRespite;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerTimePlusSixHours;
 import com.marklynch.level.constructs.power.PowerUnlock;
@@ -2030,6 +2031,11 @@ public class Level {
 		System.out.println("----------------START PLAYER TURN-----------------");
 		this.turn++;
 		loggedThisTurn = false;
+
+		// Do passive powers
+		new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
+				new PowerRespite(Game.level.player)).perform();
+
 		if (levelMode != LevelMode.LEVEL_MODE_FISHING) {
 			if (player.fishingTarget != null) {
 				player.fishingTarget.beingFishedBy = null;

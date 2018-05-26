@@ -7,7 +7,6 @@ import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.ui.button.Link;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 
@@ -17,22 +16,30 @@ public class SkillTree implements Draggable, Scrollable {
 		STATS, SKILLS
 	};
 
+	ArrayList<SkillTreeNode> skillTreeNodes = new ArrayList<SkillTreeNode>();
+
 	public static MODE mode = MODE.SKILLS;
 
 	public boolean showing = false;
-
-	public ArrayList<Link> logLinks = new ArrayList<Link>();
-	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
-	public ArrayList<Link> objectiveLinksTopRight = new ArrayList<Link>();
-	public ArrayList<Link> questLinksTopRight = new ArrayList<Link>();
-	public ArrayList<Link> markerLinksTopRight = new ArrayList<Link>();
-	public ArrayList<Link> markerLinksInJournal = new ArrayList<Link>();
 
 	// Close button
 	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 	static LevelButton buttonClose;
 
 	public SkillTree() {
+		SkillTreeNode startNode = new SkillTreeNode(true, null, 0, 0);
+		// startNode.powerUnlocked = null;
+		// startNode.requirementsToMeet.add();
+		// startNode.linkedSkillTreeNodes.add();
+		// startNode.statsUnlocked
+		skillTreeNodes.add(startNode);
+
+		SkillTreeNode hpNode1 = new SkillTreeNode(false, null, 32, 0);
+		// hpNode1.powerUnlocked = null;
+		// hpNode1.requirementsToMeet.add();
+		// hpNode1.statsUnlocked.add(new Stat(Stat.HIGH_LEVEL_STATS.STRENGTH));
+		hpNode1.linkedSkillTreeNodes.add(startNode);
+		skillTreeNodes.add(hpNode1);
 	}
 
 	public static void loadStaticImages() {
