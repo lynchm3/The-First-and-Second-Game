@@ -11,7 +11,7 @@ public class LineUtils {
 		float dist = (float) Math.sqrt(dx * dx + dy * dy);
 		float rad = (float) Math.atan2(dy, dx);
 
-		Game.activeBatch.setColor(color.r, color.b, color.g, color.a);
+		Game.activeBatch.setColor(color.r, color.g, color.b, color.a);
 
 		Game.activeBatch.draw(Game.quadTexture, x1, y1, dist, lineWidth, 0, 0, rad);
 		Game.activeBatch.setColor(Color.WHITE);

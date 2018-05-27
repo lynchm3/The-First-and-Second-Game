@@ -14,5 +14,6 @@ public class PowerSpark extends Power {
 	public PowerSpark(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_burn.png", false), source, new Effect[] {}, 5,
 				new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
+		selectTarget = true;
 	}
 }

@@ -430,21 +430,25 @@ public class UserInputLevel {
 		if (Level.gameOver.showing) {
 			draggableMouseIsOver = Level.gameOver;
 			scrollableMouseIsOver = Level.gameOver;
+			return;
 		}
 
 		if (Level.journal.showing) {
 			draggableMouseIsOver = Level.journal;
 			scrollableMouseIsOver = Level.journal;
+			return;
 		}
 
 		if (Level.characterScreen.showing) {
 			draggableMouseIsOver = Level.characterScreen;
 			scrollableMouseIsOver = Level.characterScreen;
+			return;
 		}
 
 		if (Level.skillTree.showing) {
 			draggableMouseIsOver = Level.skillTree;
 			scrollableMouseIsOver = Level.skillTree;
+			return;
 		}
 
 		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
@@ -452,21 +456,28 @@ public class UserInputLevel {
 			draggableMouseIsOver = Game.level.openInventories.get(0).getDraggable(Mouse.getX(),
 					(int) Game.windowHeight - Mouse.getY());
 			scrollableMouseIsOver = (Scrollable) draggableMouseIsOver;
+			return;
 		}
 
-		if (!inventoriesOpen) {
-			for (int i = Game.level.pinWindows.size() - 1; i >= 0; i--) {
-				if (Game.level.pinWindows.get(i).isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
-					draggableMouseIsOver = Game.level.pinWindows.get(i);
-					break;
-				}
+		for (int i = Game.level.pinWindows.size() - 1; i >= 0; i--) {
+			if (Game.level.pinWindows.get(i).isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+				draggableMouseIsOver = Game.level.pinWindows.get(i);
+				return;
 			}
+		}
 
-			if (draggableMouseIsOver == null && scrollableMouseIsOver == null
-					&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
-				draggableMouseIsOver = Game.level.activityLogger;
-				scrollableMouseIsOver = Game.level.activityLogger;
-			}
+		if (draggableMouseIsOver == null && scrollableMouseIsOver == null
+				&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+			draggableMouseIsOver = Game.level.activityLogger;
+			scrollableMouseIsOver = Game.level.activityLogger;
+			return;
+		}
+
+		if (Game.level.quickBar.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+			draggableMouseIsOver = Game.level.quickBar;
+			scrollableMouseIsOver = Game.level.quickBar;
+			return;
+
 		}
 
 	}

@@ -26,6 +26,7 @@ public abstract class Power {
 	public int loudness;
 	public boolean hostile;
 	public boolean potentialyCriminal;
+	public boolean selectTarget = false;
 	public Crime.TYPE crimeSeverity;
 	public String disabledReason = "";
 	boolean passive = false;;

@@ -91,7 +91,12 @@ public class SkillTreeNode extends LevelButton {
 
 	public void drawLines() {
 		for (SkillTreeNode linkedSkillTreeNode : linkedSkillTreeNodes) {
-			LineUtils.drawLine(Color.WHITE, this.x, this.y, linkedSkillTreeNode.x, linkedSkillTreeNode.y, 4);
+			if (this.activated && linkedSkillTreeNode.activated)
+				LineUtils.drawLine(Color.BLUE, this.x, this.y, linkedSkillTreeNode.x, linkedSkillTreeNode.y, 4);
+			else if (this.activated || linkedSkillTreeNode.activated)
+				LineUtils.drawLine(Color.LIGHT_GRAY, this.x, this.y, linkedSkillTreeNode.x, linkedSkillTreeNode.y, 4);
+			else
+				LineUtils.drawLine(Color.DARK_GRAY, this.x, this.y, linkedSkillTreeNode.x, linkedSkillTreeNode.y, 4);
 		}
 
 	}
@@ -134,6 +139,10 @@ public class SkillTreeNode extends LevelButton {
 	}
 
 	public boolean isAvailable() {
+
+		if (activated)
+			return false;
+
 		for (SkillTreeNode linkedSkillTreeNode : linkedSkillTreeNodes) {
 			if (linkedSkillTreeNode.activated) {
 				return true;
