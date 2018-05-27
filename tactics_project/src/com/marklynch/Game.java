@@ -364,6 +364,7 @@ public class Game {
 			Game.fontTexture = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST, false);
 
 			Game.smallFont = new BitmapFont(Util.getResource("res/ptsans.fnt"), Game.fontTexture);
+			System.out.println("CREATED FONT");
 
 			// in Photoshop, we included a small white box at the bottom
 			// right

@@ -3,6 +3,8 @@ package com.marklynch.level.constructs.skilltree;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.power.PowerGrabber;
+import com.marklynch.level.constructs.power.PowerRespite;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
@@ -16,7 +18,7 @@ public class SkillTree implements Draggable, Scrollable {
 		STATS, SKILLS
 	};
 
-	ArrayList<SkillTreeNode> skillTreeNodes = new ArrayList<SkillTreeNode>();
+	static ArrayList<SkillTreeNode> skillTreeNodes = new ArrayList<SkillTreeNode>();
 
 	public static MODE mode = MODE.SKILLS;
 
@@ -26,23 +28,44 @@ public class SkillTree implements Draggable, Scrollable {
 	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 	static LevelButton buttonClose;
 
-	public SkillTree() {
-		SkillTreeNode startNode = new SkillTreeNode(true, null, 0, 0);
-		// startNode.powerUnlocked = null;
-		// startNode.requirementsToMeet.add();
-		// startNode.linkedSkillTreeNodes.add();
-		// startNode.statsUnlocked
-		skillTreeNodes.add(startNode);
+	SkillTreeNode respite;
+	SkillTreeNode grabber;
 
-		SkillTreeNode hpNode1 = new SkillTreeNode(false, null, 32, 0);
-		// hpNode1.powerUnlocked = null;
-		// hpNode1.requirementsToMeet.add();
-		// hpNode1.statsUnlocked.add(new Stat(Stat.HIGH_LEVEL_STATS.STRENGTH));
-		hpNode1.linkedSkillTreeNodes.add(startNode);
-		skillTreeNodes.add(hpNode1);
+	public SkillTree() {
+
+		// Respite
+		SkillTreeNode respite = new SkillTreeNode(128, 128);
+		respite.activated = true;
+		respite.name = "Respite";
+		respite.description = "Respite";
+		// respite.requirementsToMeet.add();
+		// respite.linkedSkillTreeNodes.add();
+		respite.powerUnlocked.add(new PowerRespite(null));
+		// respite.statsUnlocked.add();
+		skillTreeNodes.add(respite);
+
+		// Grabber
+		SkillTreeNode grabber = new SkillTreeNode(128, 256);
+		grabber.activated = true;
+		grabber.name = "Grabber";
+		grabber.description = "Grabber";
+		// grabber.requirementsToMeet.add();
+		// grabber.linkedSkillTreeNodes.add();
+		grabber.powerUnlocked.add(new PowerGrabber(null));
+		// grabber.statsUnlocked.add();
+		skillTreeNodes.add(grabber);
+
+		respite.linkedSkillTreeNodes.add(grabber);
+		grabber.linkedSkillTreeNodes.add(respite);
+
+		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
+			skillTreeNode.init();
+			buttons.add(skillTreeNode);
+		}
 	}
 
 	public static void loadStaticImages() {
+		SkillTreeNode.loadStaticImages();
 	}
 
 	public void resize() {
@@ -83,6 +106,13 @@ public class SkillTree implements Draggable, Scrollable {
 	}
 
 	public static void drawTree(int x, int y, boolean smallVersion) {
+
+		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
+			skillTreeNode.drawLines();
+		}
+		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
+			skillTreeNode.drawCircles();
+		}
 
 	}
 
