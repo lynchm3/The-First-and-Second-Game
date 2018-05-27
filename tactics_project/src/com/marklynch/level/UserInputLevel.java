@@ -30,6 +30,7 @@ import com.marklynch.ui.popups.Notification;
 import com.marklynch.ui.popups.PopupMenu;
 import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
+import com.marklynch.ui.quickbar.QuickBarSquare;
 
 public class UserInputLevel {
 
@@ -484,9 +485,17 @@ public class UserInputLevel {
 		}
 
 		if (Game.level.quickBar.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
-			draggableMouseIsOver = Game.level.quickBar;
-			scrollableMouseIsOver = Game.level.quickBar;
-			return;
+			draggableMouseIsOver = null;
+			scrollableMouseIsOver = null;
+			for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+				if (quickBarSquare.calculateIfPointInBoundsOfButton(Mouse.getX(),
+						(int) Game.windowHeight - Mouse.getY())) {
+					WE KNOW THEYRE DRAGGABLES AND WE'RE OVER THEM... probably
+					draggableMouseIsOver = quickBarSquare;
+					scrollableMouseIsOver = quickBarSquare;
+					return;
+				}
+			}
 
 		}
 

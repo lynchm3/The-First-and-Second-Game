@@ -7,13 +7,15 @@ import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionUsePower;
+import com.marklynch.ui.Draggable;
+import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextureUtils;
 
-public class QuickBarSquare extends LevelButton {
+public class QuickBarSquare extends LevelButton implements Draggable, Scrollable {
 
 	private Object shortcut;
 	public int index;
@@ -79,6 +81,32 @@ public class QuickBarSquare extends LevelButton {
 
 	public Object getShortcut() {
 		return shortcut;
+	}
+
+	@Override
+	public void scroll(float dragX, float dragY) {
+		// System.out.println("SKILL TREE . SCROLL");
+		// drag(dragX, dragY);
+
+		// zooming buttons? fuck...
+	}
+
+	@Override
+	public void drag(float dragX, float dragY) {
+
+		// this.offsetX -= dragX;
+		// this.offsetY -= dragY;
+
+		// System.out.println("SKILL TREE . DRAG");
+
+		// for (SkillTreeNode skillTreeNode : skillTreeNodes) {
+		//
+		// skillTreeNode.updatePosition(skillTreeNode.x + dragX, skillTreeNode.y -
+		// dragY);
+		// }
+
+		// fixScroll();
+		// resize2();
 	}
 
 }

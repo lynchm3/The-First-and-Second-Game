@@ -3,13 +3,11 @@ package com.marklynch.ui.quickbar;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.ui.Draggable;
-import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 
-public class QuickBar implements Draggable, Scrollable {
+public class QuickBar {
 
 	public QuickBarSquare[] quickBarSquares = new QuickBarSquare[] { new QuickBarSquare(0), new QuickBarSquare(1),
 			new QuickBarSquare(2), new QuickBarSquare(3), new QuickBarSquare(4), new QuickBarSquare(5),
@@ -36,31 +34,32 @@ public class QuickBar implements Draggable, Scrollable {
 			quickBarSquare.drawStaticUI();
 		}
 	}
-
-	@Override
-	public void scroll(float dragX, float dragY) {
-		// System.out.println("SKILL TREE . SCROLL");
-		// drag(dragX, dragY);
-
-		// zooming buttons? fuck...
-	}
-
-	@Override
-	public void drag(float dragX, float dragY) {
-		// this.offsetX -= dragX;
-		// this.offsetY -= dragY;
-
-		// System.out.println("SKILL TREE . DRAG");
-
-		// for (SkillTreeNode skillTreeNode : skillTreeNodes) {
-		//
-		// skillTreeNode.updatePosition(skillTreeNode.x + dragX, skillTreeNode.y -
-		// dragY);
-		// }
-
-		// fixScroll();
-		// resize2();
-	}
+	//
+	// @Override
+	// public void scroll(float dragX, float dragY) {
+	// // System.out.println("SKILL TREE . SCROLL");
+	// // drag(dragX, dragY);
+	//
+	// // zooming buttons? fuck...
+	// }
+	//
+	// @Override
+	// public void drag(float dragX, float dragY) {
+	//
+	// // this.offsetX -= dragX;
+	// // this.offsetY -= dragY;
+	//
+	// // System.out.println("SKILL TREE . DRAG");
+	//
+	// // for (SkillTreeNode skillTreeNode : skillTreeNodes) {
+	// //
+	// // skillTreeNode.updatePosition(skillTreeNode.x + dragX, skillTreeNode.y -
+	// // dragY);
+	// // }
+	//
+	// // fixScroll();
+	// // resize2();
+	// }
 
 	// int y = 0;
 	// int width = 1920;
