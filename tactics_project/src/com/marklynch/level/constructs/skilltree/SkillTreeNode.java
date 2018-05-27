@@ -3,7 +3,6 @@ package com.marklynch.level.constructs.skilltree;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.ui.button.LevelButton;
@@ -24,7 +23,7 @@ public class SkillTreeNode extends LevelButton {
 	public ArrayList<RequirementToMeet> requirementsToMeet = new ArrayList<RequirementToMeet>();
 	public ArrayList<SkillTreeNode> linkedSkillTreeNodes = new ArrayList<SkillTreeNode>();
 	public ArrayList<Power> powerUnlocked = new ArrayList<Power>();
-	public ArrayList<Stat> statsUnlocked = new ArrayList<Stat>();
+	public ArrayList<Object> statsUnlocked = new ArrayList<Object>();
 	public float x, y, circleX1, circleY1, circleX2, circleY2, textX, textY;
 	public static float circleRadius = 48;
 	public static float circleCircumference = circleRadius * 2;
@@ -70,7 +69,23 @@ public class SkillTreeNode extends LevelButton {
 	}
 
 	public void drawCircles() {
-		TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2);
+		if (activated) {
+			TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2, Color.BLUE);
+		} else {
+
+			boolean available = false;
+			for (SkillTreeNode linkedSkillTreeNode : linkedSkillTreeNodes) {
+				if (linkedSkillTreeNode.activated) {
+					available = true;
+					break;
+				}
+			}
+			if (available) {
+				TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2, Color.LIGHT_GRAY);
+			} else {
+				TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2, Color.DARK_GRAY);
+			}
+		}
 		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, name);
 	}
 

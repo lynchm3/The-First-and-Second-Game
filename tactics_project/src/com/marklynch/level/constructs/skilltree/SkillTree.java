@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.skilltree;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerRespite;
@@ -49,7 +50,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Grabber
 		SkillTreeNode grabber = new SkillTreeNode(128, 256);
-		grabber.activated = true;
+		grabber.activated = false;
 		grabber.name = "Grabber";
 		grabber.description = "Grabber";
 		// grabber.requirementsToMeet.add();
@@ -62,7 +63,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Superpeek
 		SkillTreeNode superPeek = new SkillTreeNode(256, 256);
-		superPeek.activated = true;
+		superPeek.activated = false;
 		superPeek.name = "Superpeek";
 		superPeek.description = "Superpeek";
 		// grabber.requirementsToMeet.add();
@@ -75,7 +76,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Spark
 		SkillTreeNode spark = new SkillTreeNode(128, 256 + 128);
-		spark.activated = true;
+		spark.activated = false;
 		spark.name = "Spark";
 		spark.description = "Spark";
 		// grabber.requirementsToMeet.add();
@@ -93,13 +94,13 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Fire Damage +1
 		SkillTreeNode fire1 = new SkillTreeNode(256, 256 + 198);
-		fire1.activated = true;
+		fire1.activated = false;
 		fire1.name = "Fire +1";
 		fire1.description = "Fire +1";
 		// grabber.requirementsToMeet.add();
 		// grabber.linkedSkillTreeNodes.add();
-		fire1.powerUnlocked.add(new PowerInferno(null));
-		// grabber.statsUnlocked.add();
+		// fire1.powerUnlocked.add(new PowerInferno(null));
+		grabber.statsUnlocked.add(Stat.OFFENSIVE_STATS.FIRE_DAMAGE);
 		skillTreeNodes.add(fire1);
 		spark.linkedSkillTreeNodes.add(fire1);
 		fire1.linkedSkillTreeNodes.add(spark);
@@ -111,7 +112,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Inferno
 		SkillTreeNode inferno = new SkillTreeNode(128, 256 + 256);
-		inferno.activated = true;
+		inferno.activated = false;
 		inferno.name = "Inferno";
 		inferno.description = "Inferno";
 		// grabber.requirementsToMeet.add();
@@ -153,12 +154,14 @@ public class SkillTree implements Draggable, Scrollable {
 		showing = false;
 	}
 
+	public static Color background = new Color(0f, 0f, 0f, 0.75f);
+
 	public void drawStaticUI() {
 
 		// links.clear();
 
 		// Black cover
-		QuadUtils.drawQuad(Color.TRANSPARENT, 0, 0, Game.windowWidth, Game.windowHeight);
+		QuadUtils.drawQuad(background, 0, 0, Game.windowWidth, Game.windowHeight);
 
 		// Tab Buttons
 		for (Button button : buttons) {
@@ -182,8 +185,10 @@ public class SkillTree implements Draggable, Scrollable {
 
 	@Override
 	public void scroll(float dragX, float dragY) {
-		System.out.println("SKILL TREE . SCROLL");
-		drag(dragX, dragY);
+		// System.out.println("SKILL TREE . SCROLL");
+		// drag(dragX, dragY);
+
+		// zooming buttons? fuck...
 	}
 
 	@Override
@@ -191,7 +196,7 @@ public class SkillTree implements Draggable, Scrollable {
 		// this.offsetX -= dragX;
 		// this.offsetY -= dragY;
 
-		System.out.println("SKILL TREE . DRAG");
+		// System.out.println("SKILL TREE . DRAG");
 
 		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
 

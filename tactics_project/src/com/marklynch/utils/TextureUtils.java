@@ -116,7 +116,7 @@ public class TextureUtils {
 		// color.System.out.println("neutralColor = " + neutralColor);
 
 		// Gives proper color... i'm so fucking confused
-		Game.activeBatch.setColor(color.r, color.b, color.g, alpha);// gives all
+		Game.activeBatch.setColor(color.r, color.g, color.b, alpha);// gives all
 																	// proper
 																	// color
 
