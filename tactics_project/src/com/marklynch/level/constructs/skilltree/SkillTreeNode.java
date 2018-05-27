@@ -3,11 +3,12 @@ package com.marklynch.level.constructs.skilltree;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.quickbar.QuickBarSquare;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.ResourceUtils;
@@ -19,7 +20,7 @@ public class SkillTreeNode extends LevelButton {
 
 	public static Texture textureCircle;
 
-	public boolean activated = false;
+	private boolean activated = false;
 	public String name;
 	public String description;
 	public ArrayList<RequirementToMeet> requirementsToMeet = new ArrayList<RequirementToMeet>();
@@ -60,17 +61,24 @@ public class SkillTreeNode extends LevelButton {
 				if (activated || !isAvailable()) {
 					return;
 				} else {
-					activate();
+					activate(Game.level.player);
 				}
 
 			}
 		});
 	}
 
-	public void activate() {
+	public void activate(Actor actor) {
 		activated = true;
 		for (Power power : powersUnlocked) {
-			Level.player.powers.add(power);
+			actor.powers.add(power);
+			for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+
+				if (power.passive == false && quickBarSquare.getShortcut() == null) {
+					quickBarSquare.setShortcut(power);
+					break;
+				}
+			}
 		}
 
 		for (Object statUnlocked : statsUnlocked) {

@@ -17,6 +17,7 @@ public class PowerRespite extends Power {
 		super(NAME, ResourceUtils.getGlobalImage("bed.png", false), source, new Effect[] {}, 0,
 				new Point[] { new Point(0, 0) }, 20, false, false, Crime.TYPE.NONE);
 		passive = true;
+		activateAtStartOfTurn = true;
 	}
 
 	@Override
@@ -42,6 +43,6 @@ public class PowerRespite extends Power {
 
 	@Override
 	public Power makeCopy(GameObject source) {
-		return null;
+		return new PowerRespite(source);
 	}
 }

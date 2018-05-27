@@ -35,90 +35,61 @@ public class SkillTree implements Draggable, Scrollable {
 	SkillTreeNode respite;
 	SkillTreeNode grabber;
 
+	public ArrayList<SkillTreeNode> activateAtStart = new ArrayList<SkillTreeNode>();
+
 	public SkillTree() {
 
 		// Respite
 		SkillTreeNode respite = new SkillTreeNode(128, 128);
-		respite.activated = true;
+		activateAtStart.add(respite);
 		respite.name = "Respite";
 		respite.description = "Respite";
-		// respite.requirementsToMeet.add();
-		// respite.linkedSkillTreeNodes.add();
 		respite.powersUnlocked.add(new PowerRespite(null));
-		// respite.statsUnlocked.add();
 		skillTreeNodes.add(respite);
 
 		// Grabber
 		SkillTreeNode grabber = new SkillTreeNode(128, 256);
-		grabber.activated = false;
+		activateAtStart.add(grabber);
 		grabber.name = "Grabber";
 		grabber.description = "Grabber";
-		// grabber.requirementsToMeet.add();
-		// grabber.linkedSkillTreeNodes.add();
 		grabber.powersUnlocked.add(new PowerGrabber(null));
-		// grabber.statsUnlocked.add();
 		skillTreeNodes.add(grabber);
 		respite.linkedSkillTreeNodes.add(grabber);
 		grabber.linkedSkillTreeNodes.add(respite);
 
 		// Superpeek
 		SkillTreeNode superPeek = new SkillTreeNode(256, 256);
-		superPeek.activated = false;
 		superPeek.name = "Superpeek";
 		superPeek.description = "Superpeek";
-		// grabber.requirementsToMeet.add();
-		// grabber.linkedSkillTreeNodes.add();
 		superPeek.powersUnlocked.add(new PowerSuperPeek(null));
-		// grabber.statsUnlocked.add();
 		skillTreeNodes.add(superPeek);
 		superPeek.linkedSkillTreeNodes.add(grabber);
 		grabber.linkedSkillTreeNodes.add(superPeek);
 
 		// Spark
 		SkillTreeNode spark = new SkillTreeNode(128, 256 + 128);
-		spark.activated = false;
+		activateAtStart.add(spark);
 		spark.name = "Spark";
 		spark.description = "Spark";
-		// grabber.requirementsToMeet.add();
-		// grabber.linkedSkillTreeNodes.add();
 		spark.powersUnlocked.add(new PowerSpark(null));
-		// grabber.statsUnlocked.add();
 		skillTreeNodes.add(spark);
 		spark.linkedSkillTreeNodes.add(grabber);
 		grabber.linkedSkillTreeNodes.add(spark);
 
-		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
-			skillTreeNode.init();
-			buttons.add(skillTreeNode);
-		}
-
 		// Fire Damage +1
 		SkillTreeNode fire1 = new SkillTreeNode(256, 256 + 198);
-		fire1.activated = false;
 		fire1.name = "Fire +1";
 		fire1.description = "Fire +1";
-		// grabber.requirementsToMeet.add();
-		// grabber.linkedSkillTreeNodes.add();
-		// fire1.powerUnlocked.add(new PowerInferno(null));
 		grabber.statsUnlocked.add(Stat.OFFENSIVE_STATS.FIRE_DAMAGE);
 		skillTreeNodes.add(fire1);
 		spark.linkedSkillTreeNodes.add(fire1);
 		fire1.linkedSkillTreeNodes.add(spark);
 
-		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
-			skillTreeNode.init();
-			buttons.add(skillTreeNode);
-		}
-
 		// Inferno
 		SkillTreeNode inferno = new SkillTreeNode(128, 256 + 256);
-		inferno.activated = false;
 		inferno.name = "Inferno";
 		inferno.description = "Inferno";
-		// grabber.requirementsToMeet.add();
-		// grabber.linkedSkillTreeNodes.add();
 		inferno.powersUnlocked.add(new PowerInferno(null));
-		// grabber.statsUnlocked.add();
 		skillTreeNodes.add(inferno);
 		fire1.linkedSkillTreeNodes.add(inferno);
 		inferno.linkedSkillTreeNodes.add(fire1);
@@ -127,6 +98,7 @@ public class SkillTree implements Draggable, Scrollable {
 			skillTreeNode.init();
 			buttons.add(skillTreeNode);
 		}
+
 	}
 
 	public static void loadStaticImages() {

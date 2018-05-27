@@ -20,6 +20,7 @@ public class PowerGrabber extends Power {
 		super(NAME, ResourceUtils.getGlobalImage("left.png", false), source, new Effect[] {}, 0,
 				new Point[] { new Point(0, 0) }, 20, false, false, Crime.TYPE.NONE);
 		passive = true;
+		activateAtStartOfTurn = true;
 	}
 
 	@Override
@@ -53,6 +54,6 @@ public class PowerGrabber extends Power {
 
 	@Override
 	public Power makeCopy(GameObject source) {
-		return null;
+		return new PowerGrabber(source);
 	}
 }

@@ -15,9 +15,9 @@ import com.marklynch.utils.TextureUtils;
 
 public class QuickBarSquare extends LevelButton {
 
-	Object shortcut;
-	int index;
-	int x1, y1, x2, y2;
+	private Object shortcut;
+	public int index;
+	public int x1, y1, x2, y2;
 
 	public QuickBarSquare(int index) {
 		super(QuickBar.positionX + index * QuickBar.shortcutWidth, QuickBar.positionY, QuickBar.shortcutWidth,
@@ -76,6 +76,10 @@ public class QuickBarSquare extends LevelButton {
 
 	public void drawGameObject(GameObject gameObject) {
 		TextureUtils.drawTexture(gameObject.imageTexture, x1, y1, x2, y2);
+	}
+
+	public Object getShortcut() {
+		return shortcut;
 	}
 
 }

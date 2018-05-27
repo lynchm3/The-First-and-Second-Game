@@ -31,13 +31,11 @@ import com.marklynch.level.constructs.journal.MarkerList;
 import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerBleed;
-import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerHealTouch;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerPoisonBlast;
-import com.marklynch.level.constructs.power.PowerRespite;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerTimePlusSixHours;
 import com.marklynch.level.constructs.power.PowerUnlock;
@@ -2039,11 +2037,12 @@ public class Level {
 		this.turn++;
 		loggedThisTurn = false;
 
-		// Do passive powers
-		new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
-				new PowerRespite(Game.level.player)).perform();
-		new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
-				new PowerGrabber(Game.level.player)).perform();
+		// Do passive powers that run at start of turn.. yo
+		for (Power power : player.powers) {
+			if (power.activateAtStartOfTurn) {
+				new ActionUsePower(player, player.squareGameObjectIsOn, power.makeCopy(player)).perform();
+			}
+		}
 
 		if (levelMode != LevelMode.LEVEL_MODE_FISHING) {
 			if (player.fishingTarget != null) {

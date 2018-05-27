@@ -16,8 +16,6 @@ import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.InventorySquare;
-import com.marklynch.level.constructs.power.PowerBleed;
-import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
@@ -57,8 +55,8 @@ public class Player extends Human {
 	public Player() {
 		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png", false);
 		stepRightTexture = ResourceUtils.getGlobalImage("player_step_right.png", false);
-		powers.add(new PowerBleed(this));
-		powers.add(new PowerInferno(this));
+		System.out.println("Level.skillTree.activateAtStart.size() = " + Level.skillTree.activateAtStart.size());
+
 		thoughtsOnPlayer = 100;
 	}
 

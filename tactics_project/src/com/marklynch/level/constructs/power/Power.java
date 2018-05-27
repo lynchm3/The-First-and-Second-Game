@@ -29,10 +29,11 @@ public abstract class Power {
 	public boolean selectTarget = false;
 	public Crime.TYPE crimeSeverity;
 	public String disabledReason = "";
-	boolean passive = false;;
+	public boolean passive = false;
+	public boolean activateAtStartOfTurn = false;
 
-	int range;
-	Point[] areaOfEffect;
+	public int range;
+	public Point[] areaOfEffect;
 
 	public Power(String name, Texture image, GameObject source, Effect[] effects, int range, Point[] areaOfEffect,
 			int loudness, boolean hostile, boolean potentiallyCriminal, Crime.TYPE crimeSeverity) {

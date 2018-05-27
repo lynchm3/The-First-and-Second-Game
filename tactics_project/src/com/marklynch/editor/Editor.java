@@ -29,6 +29,7 @@ import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.journal.AreaList;
+import com.marklynch.level.constructs.skilltree.SkillTreeNode;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.ThoughtBubbles;
@@ -404,6 +405,10 @@ public class Editor {
 				Level.factions.player, null, 100, new GameObject[] {}, new GameObject[] {}, null, new int[] {},
 				new HOBBY[] { HOBBY.HUNTING });
 		Game.level.player = player;
+		for (SkillTreeNode skillTreeNode : Level.skillTree.activateAtStart) {
+			System.out.println("SkillTreeNode = " + skillTreeNode);
+			skillTreeNode.activate(player);
+		}
 		Weapon playersHuntingBow = Templates.HUNTING_BOW.makeCopy(null, player);
 		playersHuntingBow.enhancement = new Enhancement();
 		player.inventory.add(playersHuntingBow);

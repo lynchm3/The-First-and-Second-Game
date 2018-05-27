@@ -3,7 +3,6 @@ package com.marklynch.ui.quickbar;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Level;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.LevelButton;
@@ -24,11 +23,14 @@ public class QuickBar implements Draggable, Scrollable {
 
 		QuadUtils.drawQuad(Color.WHITE, positionX, positionY, positionX + Game.windowWidth, positionY + shortcutWidth);
 
-		for (int i = 0; i < quickBarSquares.length && i < Game.level.player.powers.size(); i++) {
-			quickBarSquares[i].setShortcut(null);
-			quickBarSquares[i].setShortcut(Level.player.powers.get(i));
-			System.out.println("Level.player.powers.get(i) = " + Level.player.powers.get(i));
-		}
+		// for (int i = 0, j = 0; i < quickBarSquares.length && j <
+		// Level.player.powers.size(); j++) {
+		// quickBarSquares[i].setShortcut(null);
+		// if (Level.player.powers.get(j).passive == false) {
+		// quickBarSquares[i].setShortcut(Level.player.powers.get(j));
+		// i++;
+		// }
+		// }
 
 		for (QuickBarSquare quickBarSquare : quickBarSquares) {
 			quickBarSquare.drawStaticUI();
