@@ -1,6 +1,7 @@
 package com.marklynch.ui.quickbar;
 
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.Color;
@@ -19,13 +20,14 @@ public class QuickBarSquare extends LevelButton {
 		this.index = index;
 		x1 = QuickBar.positionX + index * QuickBar.shortcutWidth;
 		y1 = QuickBar.positionY;
-		x2 = QuickBar.positionX + index * QuickBar.shortcutWidth;
-		y2 = QuickBar.positionX + index * QuickBar.shortcutWidth;
+		x2 = QuickBar.positionX + (index + 1) * QuickBar.shortcutWidth;
+		y2 = QuickBar.positionY + QuickBar.shortcutWidth;
 	}
 
 	public void drawStaticUI() {
 
 		QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
+		TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
 
 		if (object == null) {
 

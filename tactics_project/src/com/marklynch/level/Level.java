@@ -29,9 +29,9 @@ import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.constructs.journal.MarkerList;
 import com.marklynch.level.constructs.journal.QuestList;
-import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerBleed;
+import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerHealTouch;
@@ -76,6 +76,7 @@ import com.marklynch.ui.popups.PopupMenuActionButton;
 import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
 import com.marklynch.ui.quickbar.QuickBar;
+import com.marklynch.ui.quickbar.QuickBarSquare;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -1894,6 +1895,11 @@ public class Level {
 			}
 		}
 
+		for (QuickBarSquare quickBarSquare : quickBar.quickBarSquares) {
+			if (quickBarSquare.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+				return quickBarSquare;
+		}
+
 		// for (PopupTooltip popupTooltip : popupTooltips) {
 		// if (popupTooltip.calculateIfPointInBoundsOfButton(mouseX,
 		// Game.windowHeight - mouseY))
@@ -2036,8 +2042,8 @@ public class Level {
 		// Do passive powers
 		new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
 				new PowerRespite(Game.level.player)).perform();
-		new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn, new PowerGrabber(Game.level.player))
-				.perform();
+		new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
+				new PowerGrabber(Game.level.player)).perform();
 
 		if (levelMode != LevelMode.LEVEL_MODE_FISHING) {
 			if (player.fishingTarget != null) {

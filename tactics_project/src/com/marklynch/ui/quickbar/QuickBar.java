@@ -3,13 +3,16 @@ package com.marklynch.ui.quickbar;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.Color;
+import com.marklynch.utils.QuadUtils;
 
 public class QuickBar implements Draggable, Scrollable {
 
-	QuickBarSquare[] quickBarSquareItems = new QuickBarSquare[] { new QuickBarSquare(0), new QuickBarSquare(1),
+	public QuickBarSquare[] quickBarSquares = new QuickBarSquare[] { new QuickBarSquare(0), new QuickBarSquare(1),
 			new QuickBarSquare(2), new QuickBarSquare(3), new QuickBarSquare(4), new QuickBarSquare(5),
 			new QuickBarSquare(6), new QuickBarSquare(7), new QuickBarSquare(8), new QuickBarSquare(9) };
 	ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
@@ -19,12 +22,15 @@ public class QuickBar implements Draggable, Scrollable {
 
 	public void drawStaticUI() {
 
-		for (int i = 0; i < quickBarSquareItems.length && i < Game.level.player.powers.size(); i++) {
-			quickBarSquareItems[i].object = null;
-			quickBarSquareItems[i].object = Game.level.player.powers.get(i);
+		QuadUtils.drawQuad(Color.WHITE, positionX, positionY, positionX + Game.windowWidth, positionY + shortcutWidth);
+
+		for (int i = 0; i < quickBarSquares.length && i < Game.level.player.powers.size(); i++) {
+			quickBarSquares[i].object = null;
+			quickBarSquares[i].object = Level.player.powers.get(i);
+			System.out.println("Level.player.powers.get(i) = " + Level.player.powers.get(i));
 		}
 
-		for (QuickBarSquare quickBarSquare : quickBarSquareItems) {
+		for (QuickBarSquare quickBarSquare : quickBarSquares) {
 			quickBarSquare.drawStaticUI();
 		}
 	}
@@ -54,16 +60,14 @@ public class QuickBar implements Draggable, Scrollable {
 		// resize2();
 	}
 
-	int x = 0;
-	int y = 0;
-	int width = 1920;
-	int height = 128;
+	// int y = 0;
+	// int width = 1920;
+	// int height = 128;
 
 	public boolean isMouseOver(int mouseX, int mouseY) {
-		if (Game.level.showLog == false)
-			return false;
 
-		if (mouseX > x && mouseX < x + width && mouseY > 0 && mouseY < 0 + Game.windowHeight) {
+		if (mouseX > positionX && mouseX < positionX + Game.windowWidth && mouseY > positionY
+				&& mouseY < positionY + shortcutWidth) {
 			return true;
 		}
 
