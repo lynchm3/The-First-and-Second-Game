@@ -14,7 +14,7 @@ public class PowerRespite extends Power {
 	private static String NAME = "Respite";
 
 	public PowerRespite(GameObject source) {
-		super(NAME, ResourceUtils.getGlobalImage("respite.png", false), source, new Effect[] {}, 0,
+		super(NAME, ResourceUtils.getGlobalImage("bed.png", false), source, new Effect[] {}, 0,
 				new Point[] { new Point(0, 0) }, 20, false, false, Crime.TYPE.NONE);
 		passive = true;
 	}

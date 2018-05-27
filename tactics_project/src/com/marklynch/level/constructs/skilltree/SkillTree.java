@@ -44,7 +44,7 @@ public class SkillTree implements Draggable, Scrollable {
 		respite.description = "Respite";
 		// respite.requirementsToMeet.add();
 		// respite.linkedSkillTreeNodes.add();
-		respite.powerUnlocked.add(new PowerRespite(null));
+		respite.powersUnlocked.add(new PowerRespite(null));
 		// respite.statsUnlocked.add();
 		skillTreeNodes.add(respite);
 
@@ -55,7 +55,7 @@ public class SkillTree implements Draggable, Scrollable {
 		grabber.description = "Grabber";
 		// grabber.requirementsToMeet.add();
 		// grabber.linkedSkillTreeNodes.add();
-		grabber.powerUnlocked.add(new PowerGrabber(null));
+		grabber.powersUnlocked.add(new PowerGrabber(null));
 		// grabber.statsUnlocked.add();
 		skillTreeNodes.add(grabber);
 		respite.linkedSkillTreeNodes.add(grabber);
@@ -68,7 +68,7 @@ public class SkillTree implements Draggable, Scrollable {
 		superPeek.description = "Superpeek";
 		// grabber.requirementsToMeet.add();
 		// grabber.linkedSkillTreeNodes.add();
-		superPeek.powerUnlocked.add(new PowerSuperPeek(null));
+		superPeek.powersUnlocked.add(new PowerSuperPeek(null));
 		// grabber.statsUnlocked.add();
 		skillTreeNodes.add(superPeek);
 		superPeek.linkedSkillTreeNodes.add(grabber);
@@ -81,7 +81,7 @@ public class SkillTree implements Draggable, Scrollable {
 		spark.description = "Spark";
 		// grabber.requirementsToMeet.add();
 		// grabber.linkedSkillTreeNodes.add();
-		spark.powerUnlocked.add(new PowerSpark(null));
+		spark.powersUnlocked.add(new PowerSpark(null));
 		// grabber.statsUnlocked.add();
 		skillTreeNodes.add(spark);
 		spark.linkedSkillTreeNodes.add(grabber);
@@ -117,7 +117,7 @@ public class SkillTree implements Draggable, Scrollable {
 		inferno.description = "Inferno";
 		// grabber.requirementsToMeet.add();
 		// grabber.linkedSkillTreeNodes.add();
-		inferno.powerUnlocked.add(new PowerInferno(null));
+		inferno.powersUnlocked.add(new PowerInferno(null));
 		// grabber.statsUnlocked.add();
 		skillTreeNodes.add(inferno);
 		fire1.linkedSkillTreeNodes.add(inferno);

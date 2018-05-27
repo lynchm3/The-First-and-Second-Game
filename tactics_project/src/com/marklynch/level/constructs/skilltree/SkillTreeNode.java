@@ -3,8 +3,10 @@ package com.marklynch.level.constructs.skilltree;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
+import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
@@ -22,7 +24,7 @@ public class SkillTreeNode extends LevelButton {
 	public String description;
 	public ArrayList<RequirementToMeet> requirementsToMeet = new ArrayList<RequirementToMeet>();
 	public ArrayList<SkillTreeNode> linkedSkillTreeNodes = new ArrayList<SkillTreeNode>();
-	public ArrayList<Power> powerUnlocked = new ArrayList<Power>();
+	public ArrayList<Power> powersUnlocked = new ArrayList<Power>();
 	public ArrayList<Object> statsUnlocked = new ArrayList<Object>();
 	public float x, y, circleX1, circleY1, circleX2, circleY2, textX, textY;
 	public static float circleRadius = 48;
@@ -49,6 +51,32 @@ public class SkillTreeNode extends LevelButton {
 
 	public void init() {
 		setLocation();
+
+		this.setClickListener(new ClickListener() {
+
+			@Override
+			public void click() {
+
+				if (activated || !isAvailable()) {
+					return;
+				} else {
+					activate();
+				}
+
+			}
+		});
+	}
+
+	public void activate() {
+		activated = true;
+		for (Power power : powersUnlocked) {
+			Level.player.powers.add(power);
+		}
+
+		for (Object statUnlocked : statsUnlocked) {
+
+		}
+
 	}
 
 	private void setLocation() {
@@ -72,15 +100,7 @@ public class SkillTreeNode extends LevelButton {
 		if (activated) {
 			TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2, Color.BLUE);
 		} else {
-
-			boolean available = false;
-			for (SkillTreeNode linkedSkillTreeNode : linkedSkillTreeNodes) {
-				if (linkedSkillTreeNode.activated) {
-					available = true;
-					break;
-				}
-			}
-			if (available) {
+			if (isAvailable()) {
 				TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2, Color.LIGHT_GRAY);
 			} else {
 				TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2, Color.DARK_GRAY);
@@ -111,6 +131,15 @@ public class SkillTreeNode extends LevelButton {
 		this.y = y;
 		setLocation();
 
+	}
+
+	public boolean isAvailable() {
+		for (SkillTreeNode linkedSkillTreeNode : linkedSkillTreeNodes) {
+			if (linkedSkillTreeNode.activated) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
