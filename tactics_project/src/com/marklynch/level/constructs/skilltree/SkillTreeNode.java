@@ -109,7 +109,7 @@ public class SkillTreeNode extends LevelButton {
 
 	}
 
-	public void drawCircles() {
+	public void drawCircle() {
 		if (activated) {
 			TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2, Color.BLUE);
 		} else {

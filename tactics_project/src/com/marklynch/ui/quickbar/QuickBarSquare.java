@@ -64,9 +64,8 @@ public class QuickBarSquare extends LevelButton {
 					Game.level.popupMenuActions.clear();
 				}
 			});
-			// drawPower((Power) shortcut);
 		} else if (shortcut instanceof GameObject) {
-			// drawGameObject((GameObject) shortcut);
+			this.setClickListener(null);
 		}
 	}
 

@@ -55,8 +55,6 @@ public class Player extends Human {
 	public Player() {
 		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png", false);
 		stepRightTexture = ResourceUtils.getGlobalImage("player_step_right.png", false);
-		System.out.println("Level.skillTree.activateAtStart.size() = " + Level.skillTree.activateAtStart.size());
-
 		thoughtsOnPlayer = 100;
 	}
 
@@ -207,8 +205,8 @@ public class Player extends Human {
 																// items in
 																// inventory
 
-		float xInPixels = Game.windowWidth - 120;
-		float yInPixels = Game.windowHeight - 180 - Game.INVENTORY_SQUARE_HEIGHT;
+		float xInPixels = Game.windowWidth - 110;
+		float yInPixels = Game.windowHeight - 140 - Game.INVENTORY_SQUARE_HEIGHT;
 
 		TextureUtils.drawTexture(squareTexture, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
 				yInPixels + Game.INVENTORY_SQUARE_HEIGHT);

@@ -32,9 +32,6 @@ public class SkillTree implements Draggable, Scrollable {
 	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 	static LevelButton buttonClose;
 
-	SkillTreeNode respite;
-	SkillTreeNode grabber;
-
 	public ArrayList<SkillTreeNode> activateAtStart = new ArrayList<SkillTreeNode>();
 
 	public SkillTree() {
@@ -150,7 +147,7 @@ public class SkillTree implements Draggable, Scrollable {
 			skillTreeNode.drawLines();
 		}
 		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
-			skillTreeNode.drawCircles();
+			skillTreeNode.drawCircle();
 		}
 
 	}
