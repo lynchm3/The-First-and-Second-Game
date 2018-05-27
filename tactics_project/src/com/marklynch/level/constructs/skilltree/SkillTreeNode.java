@@ -25,9 +25,9 @@ public class SkillTreeNode extends LevelButton {
 	public ArrayList<SkillTreeNode> linkedSkillTreeNodes = new ArrayList<SkillTreeNode>();
 	public ArrayList<Power> powerUnlocked = new ArrayList<Power>();
 	public ArrayList<Stat> statsUnlocked = new ArrayList<Stat>();
-	public int x, y, circleX1, circleY1, circleX2, circleY2, textX, textY;
-	public static int circleRadius = 32;
-	public static int circleCircumference = circleRadius * 2;
+	public float x, y, circleX1, circleY1, circleX2, circleY2, textX, textY;
+	public static float circleRadius = 48;
+	public static float circleCircumference = circleRadius * 2;
 
 	public SkillTreeNode(int x, int y) {
 		super(x - circleRadius, y - circleRadius, circleCircumference, circleCircumference, null, null, "", true, true,
@@ -49,12 +49,17 @@ public class SkillTreeNode extends LevelButton {
 	// }
 
 	public void init() {
+		setLocation();
+	}
+
+	private void setLocation() {
 		circleX1 = x - circleRadius;
 		circleY1 = y - circleRadius;
 		circleX2 = x + circleRadius;
 		circleY2 = y + circleRadius;
 		textX = x - Game.smallFont.getWidth(name) / 2;
 		textY = y - 10;
+
 	}
 
 	public void drawLines() {
@@ -80,6 +85,17 @@ public class SkillTreeNode extends LevelButton {
 			return Math.hypot(this.x - mouseX, this.y - mouseY) <= circleRadius;
 		}
 		return false;
+	}
+
+	@Override
+	public void updatePosition(float x, float y) {
+
+		super.updatePosition(x - circleRadius, y - circleRadius);
+
+		this.x = x;
+		this.y = y;
+		setLocation();
+
 	}
 
 }
