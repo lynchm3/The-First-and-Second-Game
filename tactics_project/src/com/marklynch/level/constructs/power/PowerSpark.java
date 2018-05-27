@@ -16,4 +16,9 @@ public class PowerSpark extends Power {
 				new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
+
+	@Override
+	public Power makeCopy(GameObject source) {
+		return new PowerSpark(source);
+	}
 }

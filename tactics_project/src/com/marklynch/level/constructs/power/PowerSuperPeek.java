@@ -45,4 +45,9 @@ public class PowerSuperPeek extends Power {
 		// }
 		// return squares;
 	}
+
+	@Override
+	public Power makeCopy(GameObject source) {
+		return new PowerSuperPeek(source);
+	}
 }

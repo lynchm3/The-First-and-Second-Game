@@ -23,4 +23,9 @@ public class PowerTimePlusSixHours extends Power {
 	public void cast(Actor source, Square targetSquare) {
 		Game.level.changeTime(60 * 60 * 6);
 	}
+
+	@Override
+	public Power makeCopy(GameObject source) {
+		return new PowerTimePlusSixHours(source);
+	}
 }

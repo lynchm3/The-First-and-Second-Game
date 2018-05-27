@@ -19,4 +19,9 @@ public class PowerInferno extends Power {
 				10, true, true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
+
+	@Override
+	public Power makeCopy(GameObject source) {
+		return new PowerInferno(source);
+	}
 }

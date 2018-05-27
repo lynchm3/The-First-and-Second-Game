@@ -25,8 +25,8 @@ public class QuickBar implements Draggable, Scrollable {
 		QuadUtils.drawQuad(Color.WHITE, positionX, positionY, positionX + Game.windowWidth, positionY + shortcutWidth);
 
 		for (int i = 0; i < quickBarSquares.length && i < Game.level.player.powers.size(); i++) {
-			quickBarSquares[i].object = null;
-			quickBarSquares[i].object = Level.player.powers.get(i);
+			quickBarSquares[i].setShortcut(null);
+			quickBarSquares[i].setShortcut(Level.player.powers.get(i));
 			System.out.println("Level.player.powers.get(i) = " + Level.player.powers.get(i));
 		}
 

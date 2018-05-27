@@ -18,4 +18,9 @@ public class PowerBleed extends Power {
 				Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
+
+	@Override
+	public Power makeCopy(GameObject source) {
+		return new PowerBleed(source);
+	}
 }

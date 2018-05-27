@@ -51,4 +51,8 @@ public class PowerGrabber extends Power {
 		// name }));
 	}
 
+	@Override
+	public Power makeCopy(GameObject source) {
+		return null;
+	}
 }

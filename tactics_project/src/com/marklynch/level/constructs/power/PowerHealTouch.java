@@ -18,4 +18,9 @@ public class PowerHealTouch extends Power {
 				Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
+
+	@Override
+	public Power makeCopy(GameObject source) {
+		return new PowerHealTouch(source);
+	}
 }

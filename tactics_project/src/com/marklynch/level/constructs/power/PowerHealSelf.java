@@ -17,4 +17,9 @@ public class PowerHealSelf extends Power {
 				new Effect[] { new EffectHeal(source, null, 1) }, 0, new Point[] { new Point(0, 0) }, 5, false, false,
 				Crime.TYPE.NONE);
 	}
+
+	@Override
+	public Power makeCopy(GameObject source) {
+		return new PowerHealSelf(source);
+	}
 }

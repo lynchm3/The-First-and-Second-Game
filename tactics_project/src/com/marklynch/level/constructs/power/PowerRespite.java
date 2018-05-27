@@ -39,4 +39,9 @@ public class PowerRespite extends Power {
 		}
 
 	}
+
+	@Override
+	public Power makeCopy(GameObject source) {
+		return null;
+	}
 }

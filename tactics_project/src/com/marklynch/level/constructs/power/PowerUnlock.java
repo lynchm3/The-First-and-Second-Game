@@ -62,6 +62,11 @@ public class PowerUnlock extends Power {
 		return true;
 	}
 
+	@Override
+	public Power makeCopy(GameObject source) {
+		return new PowerUnlock(source);
+	}
+
 	// @Override
 	// public ArrayList<Square> getAffectedSquares(Square target) {
 	// // ArrayList<Square> squares = new ArrayList<Square>();

@@ -1,8 +1,13 @@
 package com.marklynch.ui.quickbar;
 
+import com.marklynch.Game;
+import com.marklynch.level.Level;
+import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.ActionUsePower;
+import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
@@ -10,7 +15,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class QuickBarSquare extends LevelButton {
 
-	Object object;
+	Object shortcut;
 	int index;
 	int x1, y1, x2, y2;
 
@@ -29,12 +34,39 @@ public class QuickBarSquare extends LevelButton {
 		QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
 		TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
 
-		if (object == null) {
+		if (shortcut == null) {
 
-		} else if (object instanceof Power) {
-			drawPower((Power) object);
-		} else if (object instanceof GameObject) {
-			drawGameObject((GameObject) object);
+		} else if (shortcut instanceof Power) {
+			drawPower((Power) shortcut);
+		} else if (shortcut instanceof GameObject) {
+			drawGameObject((GameObject) shortcut);
+		}
+	}
+
+	public void setShortcut(Object shortcut) {
+		this.shortcut = shortcut;
+		if (shortcut == null) {
+			this.setClickListener(null);
+		} else if (shortcut instanceof Power) {
+			this.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+					Power power = (Power) QuickBarSquare.this.shortcut;
+					Level.pausePlayer();
+					if (power.selectTarget) {
+						Level.levelMode = LevelMode.LEVEL_MODE_CAST;
+						Game.level.selectedPower = power.makeCopy(Level.player);
+					} else {
+						new ActionUsePower(Level.player, Level.player.squareGameObjectIsOn,
+								power.makeCopy(Level.player)).perform();
+					}
+					Game.level.popupMenuObjects.clear();
+					Game.level.popupMenuActions.clear();
+				}
+			});
+			// drawPower((Power) shortcut);
+		} else if (shortcut instanceof GameObject) {
+			// drawGameObject((GameObject) shortcut);
 		}
 	}
 
