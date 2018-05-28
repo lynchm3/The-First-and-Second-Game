@@ -482,4 +482,10 @@ public class PinWindow implements Draggable {
 		Game.level.pinWindows.remove(this);
 		Game.level.pinWindows.add(this);
 	}
+
+	@Override
+	public void dragDropped() {
+		// TODO Auto-generated method stub
+		
+	}
 }

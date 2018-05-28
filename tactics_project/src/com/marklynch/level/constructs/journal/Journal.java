@@ -881,4 +881,10 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		return quest2.turnUpdated - quest1.turnUpdated;
 	}
 
+	@Override
+	public void dragDropped() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

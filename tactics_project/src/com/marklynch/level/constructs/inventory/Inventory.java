@@ -1918,4 +1918,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		actor.drawActor(x, y, 1, false, 2f);
 	}
 
+	@Override
+	public void dragDropped() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

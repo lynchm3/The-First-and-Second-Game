@@ -119,4 +119,10 @@ public class ActivityLogger implements Draggable, Scrollable {
 
 	}
 
+	@Override
+	public void dragDropped() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

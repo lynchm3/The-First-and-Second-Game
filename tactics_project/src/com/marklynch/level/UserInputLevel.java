@@ -112,8 +112,7 @@ public class UserInputLevel {
 		float mouseYinPixels = Mouse.getY();
 
 		// Setting the draggable
-
-		setDraggableAndScrollableMouseIsOver();
+		setScrollableMouseIsOver();
 
 		// Transformed mouse coords
 		mouseXTransformed = (((Game.windowWidth / 2) - Game.getDragXWithOffset() - (Game.windowWidth / 2) / Game.zoom)
@@ -168,6 +167,7 @@ public class UserInputLevel {
 
 		// DRAG
 		if (Mouse.isButtonDown(0)) {
+			setDraggableMouseIsOver();
 			if (mouseDownX == -1) {
 				mouseDownX = Mouse.getX();
 				mouseDownY = Mouse.getY();
@@ -407,8 +407,10 @@ public class UserInputLevel {
 
 		if (!Mouse.isButtonDown(0)) {
 			draggingMap = false;
-			UserInputLevel.scrollableMouseIsOver = null;
-			UserInputLevel.draggableMouseIsOver = null;
+			if (draggableMouseIsOver != null) {
+				draggableMouseIsOver.dragDropped();
+				UserInputLevel.draggableMouseIsOver = null;
+			}
 		}
 
 		checkButtons();
@@ -421,7 +423,55 @@ public class UserInputLevel {
 		// interactedThisTurn = false;
 	}
 
-	private static void setDraggableAndScrollableMouseIsOver() {
+	private static void setScrollableMouseIsOver() {
+
+		if (Level.gameOver.showing) {
+			scrollableMouseIsOver = Level.gameOver;
+			return;
+		}
+
+		if (Level.journal.showing) {
+			scrollableMouseIsOver = Level.journal;
+			return;
+		}
+
+		if (Level.characterScreen.showing) {
+			scrollableMouseIsOver = Level.characterScreen;
+			return;
+		}
+
+		if (Level.skillTree.showing) {
+			scrollableMouseIsOver = Level.skillTree;
+			return;
+		}
+
+		if (Level.activePowerScreen.showing) {
+			scrollableMouseIsOver = Level.activePowerScreen;
+			return;
+		}
+
+		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
+		if (inventoriesOpen) {
+			scrollableMouseIsOver = (Scrollable) draggableMouseIsOver;
+			return;
+		}
+
+		if (draggableMouseIsOver == null && scrollableMouseIsOver == null
+				&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+			scrollableMouseIsOver = Game.level.activityLogger;
+			return;
+		}
+
+		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+			if (quickBarSquare.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+				scrollableMouseIsOver = quickBarSquare;
+				return;
+			}
+		}
+
+	}
+
+	private static void setDraggableMouseIsOver() {
 
 		if (draggingMap)
 			return;
@@ -429,36 +479,28 @@ public class UserInputLevel {
 		if (draggableMouseIsOver != null)
 			return;
 
-		if (scrollableMouseIsOver != null)
-			return;
-
 		if (Level.gameOver.showing) {
 			draggableMouseIsOver = Level.gameOver;
-			scrollableMouseIsOver = Level.gameOver;
 			return;
 		}
 
 		if (Level.journal.showing) {
 			draggableMouseIsOver = Level.journal;
-			scrollableMouseIsOver = Level.journal;
 			return;
 		}
 
 		if (Level.characterScreen.showing) {
 			draggableMouseIsOver = Level.characterScreen;
-			scrollableMouseIsOver = Level.characterScreen;
 			return;
 		}
 
 		if (Level.skillTree.showing) {
 			draggableMouseIsOver = Level.skillTree;
-			scrollableMouseIsOver = Level.skillTree;
 			return;
 		}
 
 		if (Level.activePowerScreen.showing) {
 			draggableMouseIsOver = Level.activePowerScreen;
-			scrollableMouseIsOver = Level.activePowerScreen;
 			return;
 		}
 
@@ -466,7 +508,6 @@ public class UserInputLevel {
 		if (inventoriesOpen) {
 			draggableMouseIsOver = Game.level.openInventories.get(0).getDraggable(Mouse.getX(),
 					(int) Game.windowHeight - Mouse.getY());
-			scrollableMouseIsOver = (Scrollable) draggableMouseIsOver;
 			return;
 		}
 
@@ -480,23 +521,14 @@ public class UserInputLevel {
 		if (draggableMouseIsOver == null && scrollableMouseIsOver == null
 				&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
 			draggableMouseIsOver = Game.level.activityLogger;
-			scrollableMouseIsOver = Game.level.activityLogger;
 			return;
 		}
 
-		if (Game.level.quickBar.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
-			draggableMouseIsOver = null;
-			scrollableMouseIsOver = null;
-			for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
-				if (quickBarSquare.calculateIfPointInBoundsOfButton(Mouse.getX(),
-						(int) Game.windowHeight - Mouse.getY())) {
-					WE KNOW THEYRE DRAGGABLES AND WE'RE OVER THEM... probably
-					draggableMouseIsOver = quickBarSquare;
-					scrollableMouseIsOver = quickBarSquare;
-					return;
-				}
+		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+			if (quickBarSquare.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+				draggableMouseIsOver = quickBarSquare;
+				return;
 			}
-
 		}
 
 	}

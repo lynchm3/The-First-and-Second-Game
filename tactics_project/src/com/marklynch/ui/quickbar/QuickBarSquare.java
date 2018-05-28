@@ -19,16 +19,22 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 
 	private Object shortcut;
 	public int index;
-	public int x1, y1, x2, y2;
+	public float x1, y1, x2, y2;
 
 	public QuickBarSquare(int index) {
 		super(QuickBar.positionX + index * QuickBar.shortcutWidth, QuickBar.positionY, QuickBar.shortcutWidth,
 				QuickBar.shortcutWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "BUTTON");
 		this.index = index;
+		resetPosition();
+	}
+
+	public void resetPosition() {
 		x1 = QuickBar.positionX + index * QuickBar.shortcutWidth;
 		y1 = QuickBar.positionY;
 		x2 = QuickBar.positionX + (index + 1) * QuickBar.shortcutWidth;
 		y2 = QuickBar.positionY + QuickBar.shortcutWidth;
+		updatePosition(x1, y1);
+
 	}
 
 	public void drawStaticUI() {
@@ -97,16 +103,40 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 		// this.offsetX -= dragX;
 		// this.offsetY -= dragY;
 
-		// System.out.println("SKILL TREE . DRAG");
+		System.out.println("POWER SQUARE . DRAG");
 
 		// for (SkillTreeNode skillTreeNode : skillTreeNodes) {
 		//
-		// skillTreeNode.updatePosition(skillTreeNode.x + dragX, skillTreeNode.y -
-		// dragY);
-		// }
+		updatePosition(x + dragX, y - dragY);
 
 		// fixScroll();
 		// resize2();
+	}
+
+	@Override
+	public void updatePosition(float x, float y) {
+
+		this.x = x;
+		this.y = y;
+
+		realX = x;
+		if (this.xFromLeft == false)
+			realX = Game.windowWidth - x;
+
+		realY = y;
+		if (this.yFromTop == false)
+			realY = Game.windowHeight - y;
+		x1 = x;
+		y1 = y;
+		x2 = x + QuickBar.shortcutWidth;
+		y2 = y + QuickBar.shortcutWidth;
+
+	}
+
+	@Override
+	public void dragDropped() {
+		resetPosition();
+
 	}
 
 }

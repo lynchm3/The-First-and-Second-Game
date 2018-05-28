@@ -176,4 +176,10 @@ public class SkillTree implements Draggable, Scrollable {
 		// resize2();
 	}
 
+	@Override
+	public void dragDropped() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
