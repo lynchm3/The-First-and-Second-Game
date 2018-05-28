@@ -21,6 +21,7 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 	public int index;
 	public float x1, y1, x2, y2;
 	public float dragX = 0, dragY = 0;
+	private QuickBarSquare tempSwap;
 
 	public QuickBarSquare(int index) {
 		super(QuickBar.positionX + index * QuickBar.shortcutWidth, QuickBar.positionY, QuickBar.shortcutWidth,
@@ -33,14 +34,16 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 		updatePosition(QuickBar.positionX + index * QuickBar.shortcutWidth, QuickBar.positionY);
 	}
 
-	public void drawStaticUI() {
+	public void drawStaticUI(boolean drawBackground) {
 
 		// if (shortcut == null) {
 		// return;
 		// }
 
-		QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
-		TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
+		if (drawBackground) {
+			QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
+			TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
+		}
 
 		if (shortcut instanceof Power) {
 			drawPower((Power) shortcut);
@@ -76,7 +79,17 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 	}
 
 	public void drawPower(Power power) {
-		TextureUtils.drawTexture(power.image, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
+
+		if (tempSwap != null) {
+			System.out.println("tempswap x1 != null = " + x1);
+			System.out.println("tempswap x1!= null = " + y1);
+			System.out.println("tempswap x1!= null = " + x2);
+			System.out.println("tempswap x1!= null = " + y);
+			TextureUtils.drawTexture(power.image, tempSwap.x1, tempSwap.y1, tempSwap.x2, tempSwap.y2);
+
+		} else {
+			TextureUtils.drawTexture(power.image, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
+		}
 	}
 
 	public void drawGameObject(GameObject gameObject) {
@@ -96,22 +109,24 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 	}
 
 	@Override
-	public void drag(float dragX, float dragY) {
+	public void drag(float drawOffsetX, float dragOffsetY) {
 
-		// this.offsetX -= dragX;
-		// this.offsetY -= dragY;
+		this.dragX = this.dragX + drawOffsetX;
+		this.dragY = this.dragY - dragOffsetY;
 
-		System.out.println("drag " + System.currentTimeMillis());
+		///
 
-		this.dragX = this.dragX + dragX;
-		this.dragY = this.dragY - dragY;
+		float centerX = x1 + this.dragX + QuickBar.shortcutWidth / 2f;
+		float centerY = y1 + this.dragY + QuickBar.shortcutWidth / 2f;
 
-		// for (SkillTreeNode skillTreeNode : skillTreeNodes) {
-		//
-		// updatePosition(x + dragX, y - dragY);
-
-		// fixScroll();
-		// resize2();
+		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+			if (quickBarSquare != this && quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
+				System.out.println("overlap!!");
+				quickBarSquare.tempSwap = this;
+			} else {
+				quickBarSquare.tempSwap = null;
+			}
+		}
 	}
 
 	@Override
@@ -145,8 +160,12 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 
 		QuickBarSquare quickBarSquareToSwapWith = null;
 		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
-			if (quickBarSquare != this && quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY))
+			if (quickBarSquare != this && quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
+
 				quickBarSquareToSwapWith = quickBarSquare;
+			}
+
+			quickBarSquare.tempSwap = null;
 		}
 
 		if (quickBarSquareToSwapWith == null) {

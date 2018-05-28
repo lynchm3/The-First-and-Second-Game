@@ -176,8 +176,8 @@ public class UserInputLevel {
 			}
 
 			if (draggingMap == false && draggableMouseIsOver == null) {
-				if (Mouse.getX() - mouseDownX > 20 || Mouse.getX() - mouseDownX < -20 || Mouse.getY() - mouseDownY > 20
-						|| Mouse.getY() - mouseDownY < -20) {
+				if (Mouse.getX() - mouseDownX > 5 || Mouse.getX() - mouseDownX < -5 || Mouse.getY() - mouseDownY > 5
+						|| Mouse.getY() - mouseDownY < -5) {
 					setDraggableMouseIsOver();
 					if (draggableMouseIsOver == null) {
 						draggingMap = true;
