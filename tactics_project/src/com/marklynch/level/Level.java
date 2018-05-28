@@ -2379,6 +2379,8 @@ public class Level {
 		if (gameOver.showing)
 			gameOver.resize();
 
+		quickBar.resize();
+
 		if (conversation != null)
 			conversation.resize();
 

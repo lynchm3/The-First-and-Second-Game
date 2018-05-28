@@ -20,6 +20,7 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 	private Object shortcut;
 	public int index;
 	public float x1, y1, x2, y2;
+	public float dragX = 0, dragY = 0;
 
 	public QuickBarSquare(int index) {
 		super(QuickBar.positionX + index * QuickBar.shortcutWidth, QuickBar.positionY, QuickBar.shortcutWidth,
@@ -34,9 +35,9 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 
 	public void drawStaticUI() {
 
-		if (shortcut == null) {
-			return;
-		}
+		// if (shortcut == null) {
+		// return;
+		// }
 
 		QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
 		TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
@@ -75,11 +76,11 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 	}
 
 	public void drawPower(Power power) {
-		TextureUtils.drawTexture(power.image, x1, y1, x2, y2);
+		TextureUtils.drawTexture(power.image, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
 	}
 
 	public void drawGameObject(GameObject gameObject) {
-		TextureUtils.drawTexture(gameObject.imageTexture, x1, y1, x2, y2);
+		TextureUtils.drawTexture(gameObject.imageTexture, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
 	}
 
 	public Object getShortcut() {
@@ -100,11 +101,14 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 		// this.offsetX -= dragX;
 		// this.offsetY -= dragY;
 
-		System.out.println("POWER SQUARE . DRAG");
+		System.out.println("drag " + System.currentTimeMillis());
+
+		this.dragX = this.dragX + dragX;
+		this.dragY = this.dragY - dragY;
 
 		// for (SkillTreeNode skillTreeNode : skillTreeNodes) {
 		//
-		updatePosition(x + dragX, y - dragY);
+		// updatePosition(x + dragX, y - dragY);
 
 		// fixScroll();
 		// resize2();
@@ -128,13 +132,16 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 		x2 = x + QuickBar.shortcutWidth;
 		y2 = y + QuickBar.shortcutWidth;
 
+		dragX = 0;
+		dragY = 0;
+
 	}
 
 	@Override
 	public void dragDropped() {
 
-		float centerX = x1 + QuickBar.shortcutWidth / 2f;
-		float centerY = y1 + QuickBar.shortcutWidth / 2f;
+		float centerX = x1 + dragX + QuickBar.shortcutWidth / 2f;
+		float centerY = y1 + dragY + QuickBar.shortcutWidth / 2f;
 
 		QuickBarSquare quickBarSquareToSwapWith = null;
 		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
@@ -146,12 +153,12 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 			if (Game.level.quickBar.isMouseOver((int) centerX, (int) centerY)) {
 
 			} else {
-				shortcut = null;
+				setShortcut(null);
 			}
 		} else {
 			Object tempShortcut = this.shortcut;
-			this.shortcut = quickBarSquareToSwapWith.shortcut;
-			quickBarSquareToSwapWith.shortcut = tempShortcut;
+			setShortcut(quickBarSquareToSwapWith.shortcut);
+			quickBarSquareToSwapWith.setShortcut(tempShortcut);
 		}
 		resetPosition();
 	}

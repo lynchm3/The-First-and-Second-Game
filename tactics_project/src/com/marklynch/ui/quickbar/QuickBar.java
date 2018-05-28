@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.utils.Color;
-import com.marklynch.utils.QuadUtils;
 
 public class QuickBar {
 
@@ -14,13 +12,18 @@ public class QuickBar {
 			new QuickBarSquare(2), new QuickBarSquare(3), new QuickBarSquare(4), new QuickBarSquare(5),
 			new QuickBarSquare(6), new QuickBarSquare(7), new QuickBarSquare(8), new QuickBarSquare(9) };
 	ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
-	public static int positionX = 428;
-	public static int positionY = 8;
-	public static int shortcutWidth = 32;
+	public static int positionX;
+	public static final int positionY = 8;
+	public static final int shortcutWidth = 64;
+
+	public QuickBar() {
+		resize();
+	}
 
 	public void drawStaticUI() {
 
-		QuadUtils.drawQuad(Color.WHITE, positionX, positionY, positionX + Game.windowWidth, positionY + shortcutWidth);
+		// QuadUtils.drawQuad(Color.WHITE, positionX, positionY, positionX +
+		// Game.windowWidth, positionY + shortcutWidth);
 
 		// for (int i = 0, j = 0; i < quickBarSquares.length && j <
 		// Level.player.powers.size(); j++) {
@@ -39,6 +42,16 @@ public class QuickBar {
 			((QuickBarSquare) UserInputLevel.draggableMouseIsOver).drawStaticUI();
 		}
 	}
+
+	public void resize() {
+
+		positionX = (int) (Game.halfWindowWidth - 5 * shortcutWidth);
+		for (QuickBarSquare quickBarSquare : quickBarSquares) {
+			quickBarSquare.resetPosition();
+		}
+
+	}
+
 	//
 	// @Override
 	// public void scroll(float dragX, float dragY) {

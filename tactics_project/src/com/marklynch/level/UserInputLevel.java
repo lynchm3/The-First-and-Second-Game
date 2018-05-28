@@ -167,17 +167,31 @@ public class UserInputLevel {
 
 		// DRAG
 		if (Mouse.isButtonDown(0)) {
-			setDraggableMouseIsOver();
+
+			mouseButtonStateLeft = true;
+
 			if (mouseDownX == -1) {
 				mouseDownX = Mouse.getX();
 				mouseDownY = Mouse.getY();
-				draggingMap = false;
 			}
-			mouseButtonStateLeft = true;
 
-			if (Mouse.getX() - mouseDownX > 20 || Mouse.getX() - mouseDownX < -20 || Mouse.getY() - mouseDownY > 20
-					|| Mouse.getY() - mouseDownY < -20) {
-				draggingMap = true;
+			if (draggingMap == false && draggableMouseIsOver == null) {
+				if (Mouse.getX() - mouseDownX > 20 || Mouse.getX() - mouseDownX < -20 || Mouse.getY() - mouseDownY > 20
+						|| Mouse.getY() - mouseDownY < -20) {
+					setDraggableMouseIsOver();
+					if (draggableMouseIsOver == null) {
+						draggingMap = true;
+					}
+				}
+
+			}
+
+			if (draggableMouseIsOver != null) {
+				if (draggableMouseIsOver instanceof PinWindow) {
+					((PinWindow) draggableMouseIsOver).bringToFront();
+				}
+				draggableMouseIsOver.drag(Mouse.getX() - mouseLastX, Mouse.getY() - mouseLastY);
+			} else if (draggingMap == true) {
 				if (Game.level.cameraFollow) {
 					Game.dragX = Game.getDragXWithOffset();
 					Game.dragY = Game.getDragYWithOffset();
@@ -185,17 +199,8 @@ public class UserInputLevel {
 				Game.level.cameraFollow = false;
 				Game.level.centerToSquare = false;
 
-				if (draggableMouseIsOver != null) {
-
-					if (draggableMouseIsOver instanceof PinWindow) {
-						((PinWindow) draggableMouseIsOver).bringToFront();
-					}
-
-					draggableMouseIsOver.drag(Mouse.getX() - mouseLastX, Mouse.getY() - mouseLastY);
-				} else {
-					Game.dragX += (Mouse.getX() - mouseLastX) / Game.zoom;
-					Game.dragY -= (Mouse.getY() - mouseLastY) / Game.zoom;
-				}
+				Game.dragX += (Mouse.getX() - mouseLastX) / Game.zoom;
+				Game.dragY -= (Mouse.getY() - mouseLastY) / Game.zoom;
 			}
 		}
 
@@ -410,6 +415,7 @@ public class UserInputLevel {
 			if (draggableMouseIsOver != null) {
 				draggableMouseIsOver.dragDropped();
 				UserInputLevel.draggableMouseIsOver = null;
+				draggingMap = false;
 			}
 		}
 
