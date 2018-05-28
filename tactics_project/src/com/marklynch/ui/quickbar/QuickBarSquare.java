@@ -29,22 +29,19 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 	}
 
 	public void resetPosition() {
-		x1 = QuickBar.positionX + index * QuickBar.shortcutWidth;
-		y1 = QuickBar.positionY;
-		x2 = QuickBar.positionX + (index + 1) * QuickBar.shortcutWidth;
-		y2 = QuickBar.positionY + QuickBar.shortcutWidth;
-		updatePosition(x1, y1);
-
+		updatePosition(QuickBar.positionX + index * QuickBar.shortcutWidth, QuickBar.positionY);
 	}
 
 	public void drawStaticUI() {
 
+		if (shortcut == null) {
+			return;
+		}
+
 		QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
 		TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
 
-		if (shortcut == null) {
-
-		} else if (shortcut instanceof Power) {
+		if (shortcut instanceof Power) {
 			drawPower((Power) shortcut);
 		} else if (shortcut instanceof GameObject) {
 			drawGameObject((GameObject) shortcut);
@@ -135,8 +132,28 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 
 	@Override
 	public void dragDropped() {
-		resetPosition();
 
+		float centerX = x1 + QuickBar.shortcutWidth / 2f;
+		float centerY = y1 + QuickBar.shortcutWidth / 2f;
+
+		QuickBarSquare quickBarSquareToSwapWith = null;
+		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+			if (quickBarSquare != this && quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY))
+				quickBarSquareToSwapWith = quickBarSquare;
+		}
+
+		if (quickBarSquareToSwapWith == null) {
+			if (Game.level.quickBar.isMouseOver((int) centerX, (int) centerY)) {
+
+			} else {
+				shortcut = null;
+			}
+		} else {
+			Object tempShortcut = this.shortcut;
+			this.shortcut = quickBarSquareToSwapWith.shortcut;
+			quickBarSquareToSwapWith.shortcut = tempShortcut;
+		}
+		resetPosition();
 	}
 
 }

@@ -425,6 +425,8 @@ public class UserInputLevel {
 
 	private static void setScrollableMouseIsOver() {
 
+		scrollableMouseIsOver = null;
+
 		if (Level.gameOver.showing) {
 			scrollableMouseIsOver = Level.gameOver;
 			return;

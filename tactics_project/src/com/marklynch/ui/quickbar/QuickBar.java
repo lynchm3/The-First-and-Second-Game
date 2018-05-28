@@ -3,6 +3,7 @@ package com.marklynch.ui.quickbar;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.UserInputLevel;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
@@ -32,6 +33,10 @@ public class QuickBar {
 
 		for (QuickBarSquare quickBarSquare : quickBarSquares) {
 			quickBarSquare.drawStaticUI();
+		}
+
+		if (UserInputLevel.draggableMouseIsOver instanceof QuickBarSquare) {
+			((QuickBarSquare) UserInputLevel.draggableMouseIsOver).drawStaticUI();
 		}
 	}
 	//
