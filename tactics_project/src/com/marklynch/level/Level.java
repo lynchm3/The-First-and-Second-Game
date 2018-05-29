@@ -31,15 +31,6 @@ import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.constructs.journal.MarkerList;
 import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.constructs.power.Power;
-import com.marklynch.level.constructs.power.PowerBleed;
-import com.marklynch.level.constructs.power.PowerHealRanged;
-import com.marklynch.level.constructs.power.PowerHealSelf;
-import com.marklynch.level.constructs.power.PowerHealTouch;
-import com.marklynch.level.constructs.power.PowerInferno;
-import com.marklynch.level.constructs.power.PowerPoisonBlast;
-import com.marklynch.level.constructs.power.PowerSuperPeek;
-import com.marklynch.level.constructs.power.PowerTimePlusSixHours;
-import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.constructs.skilltree.SkillTree;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
@@ -343,139 +334,151 @@ public class Level {
 		cameraFollowButton.enabled = true;
 		buttons.add(cameraFollowButton);
 
-		Button infernoButton = new LevelButton(110f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"INFERNO", false, false, Color.BLACK, Color.WHITE, "DEV - Cast INFERNO");
-		infernoButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				pausePlayer();
-				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerInferno(Game.level.player);
-				Game.level.popupMenuObjects.clear();
-				Game.level.popupMenuActions.clear();
-			}
-		});
-		infernoButton.enabled = true;
-		buttons.add(infernoButton);
-
-		Button superPeekButton = new LevelButton(220f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"SUPERPEEK", false, false, Color.BLACK, Color.WHITE, "DEV - Cast SUPERPEEK");
-		superPeekButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				pausePlayer();
-				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerSuperPeek(Game.level.player);
-				Game.level.popupMenuObjects.clear();
-				Game.level.popupMenuActions.clear();
-			}
-		});
-		superPeekButton.enabled = true;
-		buttons.add(superPeekButton);
-
-		Button healSelfButton = new LevelButton(330f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"HEAL SELF", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL SELF");
-		healSelfButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				pausePlayer();
-				new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
-						new PowerHealSelf(Game.level.player)).perform();
-				Game.level.popupMenuObjects.clear();
-				Game.level.popupMenuActions.clear();
-			}
-		});
-		healSelfButton.enabled = true;
-		buttons.add(healSelfButton);
-
-		Button healTouchButton = new LevelButton(440f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"HEAL TOUCH", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL TOUCH");
-		healTouchButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				pausePlayer();
-				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerHealTouch(Game.level.player);
-				Game.level.popupMenuObjects.clear();
-				Game.level.popupMenuActions.clear();
-			}
-		});
-		healTouchButton.enabled = true;
-		buttons.add(healTouchButton);
-
-		Button healRangedButton = new LevelButton(550f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"HEAL RANGED", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL RANGED");
-		healRangedButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				pausePlayer();
-				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerHealRanged(Game.level.player);
-				Game.level.popupMenuObjects.clear();
-				Game.level.popupMenuActions.clear();
-			}
-		});
-		healRangedButton.enabled = true;
-		buttons.add(healRangedButton);
-
-		Button unlockButton = new LevelButton(110f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"UNLOCK", false, false, Color.BLACK, Color.WHITE, "DEV - Cast UNLOCK");
-		unlockButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				pausePlayer();
-				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerUnlock(Game.level.player);
-				Game.level.popupMenuObjects.clear();
-				Game.level.popupMenuActions.clear();
-			}
-		});
-		unlockButton.enabled = true;
-		buttons.add(unlockButton);
-
-		poisonBlastButton = new LevelButton(220f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"POISON", false, false, Color.BLACK, Color.WHITE, "DEV - Cast POISON BLAST");
-		poisonBlastButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				pausePlayer();
-				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerPoisonBlast(Game.level.player);
-				Game.level.popupMenuObjects.clear();
-				Game.level.popupMenuActions.clear();
-			}
-		});
-		poisonBlastButton.enabled = true;
-
-		Button bleedButton = new LevelButton(330f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"BLEED", false, false, Color.BLACK, Color.WHITE, "DEV - Cast BLEED");
-		bleedButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				pausePlayer();
-				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerBleed(Game.level.player);
-				Game.level.popupMenuObjects.clear();
-				Game.level.popupMenuActions.clear();
-			}
-		});
-		bleedButton.enabled = true;
-		buttons.add(bleedButton);
-
-		Button timePlusSixButton = new LevelButton(440f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"Time +6hrs", false, false, Color.BLACK, Color.WHITE, "DEV - Move time forward 6 hrs");
-		timePlusSixButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				pausePlayer();
-				new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
-						new PowerTimePlusSixHours(Game.level.player)).perform();
-				Game.level.popupMenuObjects.clear();
-				Game.level.popupMenuActions.clear();
-			}
-		});
-		timePlusSixButton.enabled = true;
-		buttons.add(timePlusSixButton);
+		// Button infernoButton = new LevelButton(110f, 80f, 100f, 30f,
+		// "undo_button.png", "undo_button_disabled.png",
+		// "INFERNO", false, false, Color.BLACK, Color.WHITE, "DEV - Cast INFERNO");
+		// infernoButton.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// pausePlayer();
+		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+		// Level.this.selectedPower = new PowerInferno(Game.level.player);
+		// Game.level.popupMenuObjects.clear();
+		// Game.level.popupMenuActions.clear();
+		// }
+		// });
+		// infernoButton.enabled = true;
+		// buttons.add(infernoButton);
+		//
+		// Button superPeekButton = new LevelButton(220f, 80f, 100f, 30f,
+		// "undo_button.png", "undo_button_disabled.png",
+		// "SUPERPEEK", false, false, Color.BLACK, Color.WHITE, "DEV - Cast SUPERPEEK");
+		// superPeekButton.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// pausePlayer();
+		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+		// Level.this.selectedPower = new PowerSuperPeek(Game.level.player);
+		// Game.level.popupMenuObjects.clear();
+		// Game.level.popupMenuActions.clear();
+		// }
+		// });
+		// superPeekButton.enabled = true;
+		// buttons.add(superPeekButton);
+		//
+		// Button healSelfButton = new LevelButton(330f, 80f, 100f, 30f,
+		// "undo_button.png", "undo_button_disabled.png",
+		// "HEAL SELF", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL SELF");
+		// healSelfButton.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// pausePlayer();
+		// new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
+		// new PowerHealSelf(Game.level.player)).perform();
+		// Game.level.popupMenuObjects.clear();
+		// Game.level.popupMenuActions.clear();
+		// }
+		// });
+		// healSelfButton.enabled = true;
+		// buttons.add(healSelfButton);
+		//
+		// Button healTouchButton = new LevelButton(440f, 80f, 100f, 30f,
+		// "undo_button.png", "undo_button_disabled.png",
+		// "HEAL TOUCH", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL
+		// TOUCH");
+		// healTouchButton.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// pausePlayer();
+		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+		// Level.this.selectedPower = new PowerHealTouch(Game.level.player);
+		// Game.level.popupMenuObjects.clear();
+		// Game.level.popupMenuActions.clear();
+		// }
+		// });
+		// healTouchButton.enabled = true;
+		// buttons.add(healTouchButton);
+		//
+		// Button healRangedButton = new LevelButton(550f, 80f, 100f, 30f,
+		// "undo_button.png", "undo_button_disabled.png",
+		// "HEAL RANGED", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL
+		// RANGED");
+		// healRangedButton.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// pausePlayer();
+		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+		// Level.this.selectedPower = new PowerHealRanged(Game.level.player);
+		// Game.level.popupMenuObjects.clear();
+		// Game.level.popupMenuActions.clear();
+		// }
+		// });
+		// healRangedButton.enabled = true;
+		// buttons.add(healRangedButton);
+		//
+		// Button unlockButton = new LevelButton(110f, 120f, 100f, 30f,
+		// "undo_button.png", "undo_button_disabled.png",
+		// "UNLOCK", false, false, Color.BLACK, Color.WHITE, "DEV - Cast UNLOCK");
+		// unlockButton.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// pausePlayer();
+		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+		// Level.this.selectedPower = new PowerUnlock(Game.level.player);
+		// Game.level.popupMenuObjects.clear();
+		// Game.level.popupMenuActions.clear();
+		// }
+		// });
+		// unlockButton.enabled = true;
+		// buttons.add(unlockButton);
+		//
+		// poisonBlastButton = new LevelButton(220f, 120f, 100f, 30f, "undo_button.png",
+		// "undo_button_disabled.png",
+		// "POISON", false, false, Color.BLACK, Color.WHITE, "DEV - Cast POISON BLAST");
+		// poisonBlastButton.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// pausePlayer();
+		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+		// Level.this.selectedPower = new PowerPoisonBlast(Game.level.player);
+		// Game.level.popupMenuObjects.clear();
+		// Game.level.popupMenuActions.clear();
+		// }
+		// });
+		// poisonBlastButton.enabled = true;
+		//
+		// Button bleedButton = new LevelButton(330f, 120f, 100f, 30f,
+		// "undo_button.png", "undo_button_disabled.png",
+		// "BLEED", false, false, Color.BLACK, Color.WHITE, "DEV - Cast BLEED");
+		// bleedButton.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// pausePlayer();
+		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+		// Level.this.selectedPower = new PowerBleed(Game.level.player);
+		// Game.level.popupMenuObjects.clear();
+		// Game.level.popupMenuActions.clear();
+		// }
+		// });
+		// bleedButton.enabled = true;
+		// buttons.add(bleedButton);
+		//
+		// Button timePlusSixButton = new LevelButton(440f, 120f, 100f, 30f,
+		// "undo_button.png", "undo_button_disabled.png",
+		// "Time +6hrs", false, false, Color.BLACK, Color.WHITE, "DEV - Move time
+		// forward 6 hrs");
+		// timePlusSixButton.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// pausePlayer();
+		// new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
+		// new PowerTimePlusSixHours(Game.level.player)).perform();
+		// Game.level.popupMenuObjects.clear();
+		// Game.level.popupMenuActions.clear();
+		// }
+		// });
+		// timePlusSixButton.enabled = true;
+		// buttons.add(timePlusSixButton);
 
 		showHideLogButton = new LevelButton(activityLogger.width, 64f, 70f, 30f, "undo_button.png",
 				"undo_button_disabled.png", " LOG [L] <", true, true, Color.BLACK, Color.WHITE,

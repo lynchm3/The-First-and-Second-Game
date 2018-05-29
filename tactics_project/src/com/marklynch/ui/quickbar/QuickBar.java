@@ -13,7 +13,7 @@ public class QuickBar {
 			new QuickBarSquare(6), new QuickBarSquare(7), new QuickBarSquare(8), new QuickBarSquare(9) };
 	ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 	public static int positionX;
-	public static final int positionY = 8;
+	public static int positionY;
 	public static final int shortcutWidth = 64;
 
 	public QuickBar() {
@@ -46,6 +46,7 @@ public class QuickBar {
 	public void resize() {
 
 		positionX = (int) (Game.halfWindowWidth - 5 * shortcutWidth);
+		positionY = (int) (Game.windowHeight - 64 - shortcutWidth);
 		for (QuickBarSquare quickBarSquare : quickBarSquares) {
 			quickBarSquare.resetPosition();
 		}
