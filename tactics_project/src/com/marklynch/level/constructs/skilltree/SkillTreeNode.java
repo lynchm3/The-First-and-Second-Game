@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -13,6 +14,7 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.quickbar.QuickBarSquare;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
@@ -30,6 +32,9 @@ public class SkillTreeNode extends LevelButton {
 	public ArrayList<SkillTreeNodePower> powerButtons = new ArrayList<SkillTreeNodePower>();
 	public ArrayList<Object> statsUnlocked = new ArrayList<Object>();
 	public float x, y, circleX1, circleY1, circleX2, circleY2, textX, textY;
+
+	float powerOffsetX = 16;
+	float powerOffsetY = 16;
 
 	public ArrayList<Power> powersUnlocked = new ArrayList<Power>();;
 	public static float circleRadius = 48;
@@ -122,6 +127,7 @@ public class SkillTreeNode extends LevelButton {
 		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, name);
 
 		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
+			skillTreeNodePower.drawBackground();
 			skillTreeNodePower.drawPower();
 		}
 
@@ -164,7 +170,7 @@ public class SkillTreeNode extends LevelButton {
 		textY = y - 10;
 
 		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
-			skillTreeNodePower.setLocation(x, y);
+			skillTreeNodePower.setLocation(x + powerOffsetX, y + powerOffsetY);
 		}
 
 		// powerX =
@@ -210,7 +216,16 @@ public class SkillTreeNode extends LevelButton {
 
 		}
 
+		public void drawBackground() {
+			QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
+			TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
+		}
+
 		public void drawPower() {
+			TextureUtils.drawTexture(this.power.image, x1, y1, x2, y2);
+		}
+
+		public void drawDragged() {
 			TextureUtils.drawTexture(this.power.image, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
 		}
 
@@ -220,6 +235,9 @@ public class SkillTreeNode extends LevelButton {
 
 		@Override
 		public void drag(float drawOffsetX, float dragOffsetY) {
+
+			if (power.passive || !SkillTreeNode.this.activated)
+				return;
 
 			this.dragX = this.dragX + drawOffsetX;
 			this.dragY = this.dragY - dragOffsetY;
@@ -260,7 +278,6 @@ public class SkillTreeNode extends LevelButton {
 			this.dragX = 0;
 			this.dragY = 0;
 		}
-
 	}
 
 }

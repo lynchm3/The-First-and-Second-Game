@@ -3,12 +3,14 @@ package com.marklynch.level.constructs.skilltree;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerRespite;
 import com.marklynch.level.constructs.power.PowerSpark;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
+import com.marklynch.level.constructs.skilltree.SkillTreeNode.SkillTreeNodePower;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
@@ -140,6 +142,10 @@ public class SkillTree implements Draggable, Scrollable {
 		drawTree(0, 0, false);
 
 		Game.level.quickBar.drawStaticUI();
+
+		if (UserInputLevel.draggableMouseIsOver instanceof SkillTreeNodePower) {
+			((SkillTreeNodePower) UserInputLevel.draggableMouseIsOver).drawDragged();
+		}
 
 	}
 
