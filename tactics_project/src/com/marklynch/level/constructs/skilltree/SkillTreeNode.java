@@ -2,6 +2,8 @@ package com.marklynch.level.constructs.skilltree;
 
 import java.util.ArrayList;
 
+import org.lwjgl.input.Mouse;
+
 import com.marklynch.Game;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
@@ -249,7 +251,14 @@ public class SkillTreeNode extends LevelButton {
 		}
 
 		public void drawDragged() {
-			TextureUtils.drawTexture(this.power.image, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
+
+			if (power.passive || !SkillTreeNode.this.activated)
+				return;
+			// TextureUtils.drawTexture(this.power.image, x1 + dragX, y1 + dragY, x2 +
+			// dragX, y2 + dragY);
+			TextureUtils.drawTexture(this.power.image, Mouse.getX() - powerHalfWidth,
+					Game.windowHeight - Mouse.getY() - powerHalfWidth, Mouse.getX() + powerHalfWidth,
+					Game.windowHeight - Mouse.getY() + powerHalfWidth);
 		}
 
 		@Override
@@ -282,8 +291,11 @@ public class SkillTreeNode extends LevelButton {
 		@Override
 		public void dragDropped() {
 
-			float centerX = this.x + this.dragX + this.powerHalfWidth;
-			float centerY = this.y + this.dragY + this.powerHalfWidth;
+			if (power.passive || !SkillTreeNode.this.activated)
+				return;
+
+			float centerX = Mouse.getX();
+			float centerY = Game.windowHeight - Mouse.getY();
 
 			QuickBarSquare quickBarSquareToSwapWith = null;
 			for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {

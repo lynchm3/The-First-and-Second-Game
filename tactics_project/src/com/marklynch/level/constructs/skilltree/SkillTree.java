@@ -2,11 +2,13 @@ package com.marklynch.level.constructs.skilltree;
 
 import java.util.ArrayList;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.power.PowerGrabber;
@@ -254,6 +256,22 @@ public class SkillTree implements Draggable, Scrollable {
 	private float getDragXWithOffset() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public Draggable getDraggable() {
+		float mouseXTransformed = (((Game.windowWidth / 2) - getDragXWithOffset() - (Game.windowWidth / 2) / zoom)
+				+ (Mouse.getX()) / zoom);
+		float mouseYTransformed = ((Game.windowHeight / 2 - getDragYWithOffset() - (Game.windowHeight / 2) / zoom)
+				+ (((Game.windowHeight - Mouse.getY())) / zoom));
+
+		for (SkillTreeNode skillTreeNode : SkillTree.skillTreeNodes) {
+			for (SkillTreeNodePower skillTreeNodePower : skillTreeNode.powerButtons) {
+				if (skillTreeNodePower.calculateIfPointInBoundsOfButton(mouseXTransformed, mouseYTransformed)) {
+					return skillTreeNodePower;
+				}
+			}
+		}
+		return Level.skillTree;
 	}
 
 }
