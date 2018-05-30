@@ -1812,11 +1812,7 @@ public class Level {
 		}
 
 		if (skillTree.showing) {
-			for (Button button : SkillTree.buttons) {
-				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
-					return button;
-			}
-			return null;
+			return skillTree.getButtonFromMousePosition(mouseX, mouseY);
 		}
 
 		if (activePowerScreen.showing) {

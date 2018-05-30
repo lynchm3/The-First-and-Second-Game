@@ -254,6 +254,7 @@ public class SkillTreeNode extends LevelButton {
 
 		@Override
 		public void scroll(float dragX, float dragY) {
+
 		}
 
 		@Override

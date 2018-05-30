@@ -2,6 +2,10 @@ package com.marklynch.level.constructs.skilltree;
 
 import java.util.ArrayList;
 
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
 import com.marklynch.Game;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Stat;
@@ -57,7 +61,7 @@ public class SkillTree implements Draggable, Scrollable {
 		grabber.linkedSkillTreeNodes.add(respite);
 
 		// Superpeek
-		SkillTreeNode superPeek = new SkillTreeNode(256, 256);
+		SkillTreeNode superPeek = new SkillTreeNode(512, 512);
 		superPeek.name = "Superpeek";
 		superPeek.description = "Superpeek";
 		superPeek.powersUnlocked.add(new PowerSuperPeek(null));
@@ -131,16 +135,30 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// links.clear();
 
+		Matrix4f view = Game.activeBatch.getViewMatrix();
 		// Black cover
+		Game.activeBatch.flush();
+		view.setIdentity();
+		Game.activeBatch.updateUniforms();
 		QuadUtils.drawQuad(background, 0, 0, Game.windowWidth, Game.windowHeight);
+		Game.activeBatch.flush();
 
-		// Tab Buttons
+		view.setIdentity();
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(zoom, zoom, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
+		view.translate(new Vector2f(getDragXWithOffset(), getDragYWithOffset()));
+		Game.activeBatch.updateUniforms();
+
 		for (Button button : buttons) {
 			button.draw();
 		}
 
 		drawTree(0, 0, false);
 
+		Game.activeBatch.flush();
+		view.setIdentity();
+		Game.activeBatch.updateUniforms();
 		Game.level.quickBar.drawStaticUI();
 
 		if (UserInputLevel.draggableMouseIsOver instanceof SkillTreeNodePower) {
@@ -160,8 +178,34 @@ public class SkillTree implements Draggable, Scrollable {
 
 	}
 
+	float zoom = 1;
+
 	@Override
 	public void scroll(float dragX, float dragY) {
+
+		if (dragY > 0 && zoom > 0.1f) {
+			zoom -= 0.1f;
+		} else if (dragY < 0) {
+			if (zoom + 0.1f >= 1f) {
+				zoom = 1f;
+			} else {
+				zoom += 0.1f;
+			}
+
+		}
+
+		System.out.println("dragY = " + dragY);
+		System.out.println("zoom = " + zoom);
+
+		// for (SkillTreeNode skillTreeNode : skillTreeNodes) {
+		//
+		// skillTreeNode.updatePosition(skillTreeNode.x + dragX, skillTreeNode.y -
+		// dragY);
+		// }
+
+		// Transformed mouse coords
+
+		// ZOOM
 		// System.out.println("SKILL TREE . SCROLL");
 		// drag(dragX, dragY);
 
@@ -172,8 +216,6 @@ public class SkillTree implements Draggable, Scrollable {
 	public void drag(float dragX, float dragY) {
 		// this.offsetX -= dragX;
 		// this.offsetY -= dragY;
-
-		// System.out.println("SKILL TREE . DRAG");
 
 		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
 
@@ -188,6 +230,30 @@ public class SkillTree implements Draggable, Scrollable {
 	public void dragDropped() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public Button getButtonFromMousePosition(float mouseX, float mouseY) {
+		// TODO Auto-generated method stub
+		float mouseXTransformed = (((Game.windowWidth / 2) - getDragXWithOffset() - (Game.windowWidth / 2) / zoom)
+				+ (mouseX) / zoom);
+		float mouseYTransformed = ((Game.windowHeight / 2 - getDragYWithOffset() - (Game.windowHeight / 2) / zoom)
+				+ (((Game.windowHeight - mouseY)) / zoom));
+
+		for (Button button : SkillTree.buttons) {
+			if (button.calculateIfPointInBoundsOfButton(mouseXTransformed, mouseYTransformed))
+				return button;
+		}
+		return null;
+	}
+
+	private float getDragYWithOffset() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private float getDragXWithOffset() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
