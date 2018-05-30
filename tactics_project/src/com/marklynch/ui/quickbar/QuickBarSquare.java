@@ -82,10 +82,10 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 	public void drawPower(Power power) {
 
 		if (tempSwap != null) {
-			System.out.println("tempswap x1 != null = " + x1);
-			System.out.println("tempswap x1!= null = " + y1);
-			System.out.println("tempswap x1!= null = " + x2);
-			System.out.println("tempswap x1!= null = " + y);
+			// System.out.println("tempswap x1 != null = " + x1);
+			// System.out.println("tempswap x1!= null = " + y1);
+			// System.out.println("tempswap x1!= null = " + x2);
+			// System.out.println("tempswap x1!= null = " + y);
 			TextureUtils.drawTexture(power.image, tempSwap.x1, tempSwap.y1, tempSwap.x2, tempSwap.y2);
 
 		} else {

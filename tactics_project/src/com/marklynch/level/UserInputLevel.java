@@ -16,7 +16,9 @@ import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
+import com.marklynch.level.constructs.skilltree.SkillTree;
 import com.marklynch.level.constructs.skilltree.SkillTreeNode;
+import com.marklynch.level.constructs.skilltree.SkillTreeNode.SkillTreeNodePower;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTeleport;
@@ -523,11 +525,13 @@ public class UserInputLevel {
 		}
 
 		if (Level.skillTree.showing) {
-			for (SkillTreeNode skillTreeNode : Game.level.skillTree.skillTreeNodes) {
-				if (skillTreeNode.calculateIfPointInBoundsOfButton(Mouse.getX(),
-						(int) Game.windowHeight - Mouse.getY())) {
-					draggableMouseIsOver = skillTreeNode;
-					return;
+			for (SkillTreeNode skillTreeNode : SkillTree.skillTreeNodes) {
+				for (SkillTreeNodePower skillTreeNodePower : skillTreeNode.powerButtons) {
+					if (skillTreeNodePower.calculateIfPointInBoundsOfButton(Mouse.getX(),
+							(int) Game.windowHeight - Mouse.getY())) {
+						draggableMouseIsOver = skillTreeNodePower;
+						return;
+					}
 				}
 			}
 			draggableMouseIsOver = Level.skillTree;

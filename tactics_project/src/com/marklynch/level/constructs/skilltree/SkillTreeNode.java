@@ -18,7 +18,7 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class SkillTreeNode extends LevelButton implements Draggable, Scrollable {
+public class SkillTreeNode extends LevelButton {
 
 	public static Texture textureCircle;
 
@@ -27,12 +27,14 @@ public class SkillTreeNode extends LevelButton implements Draggable, Scrollable 
 	public String description;
 	public ArrayList<RequirementToMeet> requirementsToMeet = new ArrayList<RequirementToMeet>();
 	public ArrayList<SkillTreeNode> linkedSkillTreeNodes = new ArrayList<SkillTreeNode>();
-	public ArrayList<Power> powersUnlocked = new ArrayList<Power>();
+	public ArrayList<SkillTreeNodePower> powerButtons = new ArrayList<SkillTreeNodePower>();
 	public ArrayList<Object> statsUnlocked = new ArrayList<Object>();
 	public float x, y, circleX1, circleY1, circleX2, circleY2, textX, textY;
+
+	public ArrayList<Power> powersUnlocked = new ArrayList<Power>();;
 	public static float circleRadius = 48;
 	public static float circleCircumference = circleRadius * 2;
-	public float dragX = 0, dragY = 0;
+	// public float dragX = 0, dragY = 0;
 
 	public SkillTreeNode(int x, int y) {
 		super(x - circleRadius, y - circleRadius, circleCircumference, circleCircumference, null, null, "", true, true,
@@ -54,6 +56,11 @@ public class SkillTreeNode extends LevelButton implements Draggable, Scrollable 
 	// }
 
 	public void init() {
+
+		for (Power power : powersUnlocked) {
+			this.powerButtons.add(new SkillTreeNodePower(power, 0, 0));
+		}
+
 		setLocation();
 
 		this.setClickListener(new ClickListener() {
@@ -73,12 +80,12 @@ public class SkillTreeNode extends LevelButton implements Draggable, Scrollable 
 
 	public void activate(Actor actor) {
 		activated = true;
-		for (Power power : powersUnlocked) {
-			actor.powers.add(power);
+		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
+			actor.powers.add(skillTreeNodePower.power);
 			for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
 
-				if (power.passive == false && quickBarSquare.getShortcut() == null) {
-					quickBarSquare.setShortcut(power);
+				if (skillTreeNodePower.power.passive == false && quickBarSquare.getShortcut() == null) {
+					quickBarSquare.setShortcut(skillTreeNodePower.power);
 					break;
 				}
 			}
@@ -87,16 +94,6 @@ public class SkillTreeNode extends LevelButton implements Draggable, Scrollable 
 		for (Object statUnlocked : statsUnlocked) {
 
 		}
-
-	}
-
-	private void setLocation() {
-		circleX1 = x - circleRadius;
-		circleY1 = y - circleRadius;
-		circleX2 = x + circleRadius;
-		circleY2 = y + circleRadius;
-		textX = x - Game.smallFont.getWidth(name) / 2;
-		textY = y - 10;
 
 	}
 
@@ -122,7 +119,16 @@ public class SkillTreeNode extends LevelButton implements Draggable, Scrollable 
 				TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2, Color.DARK_GRAY);
 			}
 		}
-		TextUtils.printTextWithImages(textX + dragX, textY + dragY, Integer.MAX_VALUE, false, null, Color.WHITE, name);
+		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, name);
+
+		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
+			skillTreeNodePower.drawPower();
+		}
+
+		// if (powersUnlocked.size() != 0) {
+		// // ;lkzxdfkjl'
+		// }
+
 	}
 
 	public static void loadStaticImages() {
@@ -149,6 +155,22 @@ public class SkillTreeNode extends LevelButton implements Draggable, Scrollable 
 
 	}
 
+	private void setLocation() {
+		circleX1 = x - circleRadius;
+		circleY1 = y - circleRadius;
+		circleX2 = x + circleRadius;
+		circleY2 = y + circleRadius;
+		textX = x - Game.smallFont.getWidth(name) / 2;
+		textY = y - 10;
+
+		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
+			skillTreeNodePower.setLocation(x, y);
+		}
+
+		// powerX =
+
+	}
+
 	public boolean isAvailable() {
 
 		if (activated)
@@ -162,59 +184,83 @@ public class SkillTreeNode extends LevelButton implements Draggable, Scrollable 
 		return false;
 	}
 
-	@Override
-	public void scroll(float dragX, float dragY) {
-		// System.out.println("SKILL TREE . SCROLL");
-		// drag(dragX, dragY);
+	public class SkillTreeNodePower extends LevelButton implements Draggable, Scrollable {
 
-		// zooming buttons? fuck...
-	}
+		Power power;
+		public float dragX = 0, dragY = 0;
+		public static final float powerWidth = 64;
+		public float powerHalfWidth = powerWidth / 2;
+		public float x1, y1, x2, y2;
 
-	@Override
-	public void drag(float drawOffsetX, float dragOffsetY) {
+		public SkillTreeNodePower(Power power, int x, int y) {
+			super(x, y, powerWidth, powerWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "BUTTON");
+			this.power = power;
+			this.x = x;
+			this.y = y;
 
-		this.dragX = this.dragX + drawOffsetX;
-		this.dragY = this.dragY - dragOffsetY;
+		}
 
-		///
+		private void setLocation(float x, float y) {
+			this.x = x;
+			this.y = y;
+			this.x1 = x;
+			this.y1 = y;
+			this.x2 = x + powerWidth;
+			this.y2 = y + powerWidth;
 
-		float centerX = this.x + this.dragX;
-		float centerY = this.y + this.dragY;
+		}
 
-		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
-			if (quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
-				System.out.println("overlap!!");
-				// quickBarSquare.tempSwap = this;
-			} else {
-				// quickBarSquare.tempSwap = null;
+		public void drawPower() {
+			TextureUtils.drawTexture(this.power.image, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
+		}
+
+		@Override
+		public void scroll(float dragX, float dragY) {
+		}
+
+		@Override
+		public void drag(float drawOffsetX, float dragOffsetY) {
+
+			this.dragX = this.dragX + drawOffsetX;
+			this.dragY = this.dragY - dragOffsetY;
+
+			float centerX = this.x + this.dragX;
+			float centerY = this.y + this.dragY;
+
+			for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+				if (quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
+					// System.out.println("overlap!!");
+					// quickBarSquare.tempSwap = this;
+				} else {
+					// quickBarSquare.tempSwap = null;
+				}
 			}
 		}
-	}
 
-	@Override
-	public void dragDropped() {
+		@Override
+		public void dragDropped() {
 
-		float centerX = this.x + this.dragX;
-		float centerY = this.y + this.dragY;
+			float centerX = this.x + this.dragX + this.powerHalfWidth;
+			float centerY = this.y + this.dragY + this.powerHalfWidth;
 
-		QuickBarSquare quickBarSquareToSwapWith = null;
-		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
-			if (quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
-				quickBarSquareToSwapWith = quickBarSquare;
+			QuickBarSquare quickBarSquareToSwapWith = null;
+			for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+				if (quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
+					quickBarSquareToSwapWith = quickBarSquare;
+				}
+				quickBarSquare.tempSwap = null;
 			}
-			quickBarSquare.tempSwap = null;
+
+			if (quickBarSquareToSwapWith == null) {
+
+			} else if (power.passive == false && SkillTreeNode.this.activated) {
+				quickBarSquareToSwapWith.setShortcut(this.power);
+			}
+
+			this.dragX = 0;
+			this.dragY = 0;
 		}
 
-		if (quickBarSquareToSwapWith == null) {
-
-		} else if (this.powersUnlocked.size() > 0 && powersUnlocked.get(0).passive == false && this.activated) {
-			// Object tempShortcut = this.shortcut;
-			// setShortcut(quickBarSquareToSwapWith.shortcut);
-			quickBarSquareToSwapWith.setShortcut(this.powersUnlocked.get(0));
-		}
-
-		this.dragX = 0;
-		this.dragY = 0;
 	}
 
 }
