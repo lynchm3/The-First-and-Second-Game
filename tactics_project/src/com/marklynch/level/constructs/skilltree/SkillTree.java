@@ -22,7 +22,7 @@ public class SkillTree implements Draggable, Scrollable {
 		STATS, SKILLS
 	};
 
-	static ArrayList<SkillTreeNode> skillTreeNodes = new ArrayList<SkillTreeNode>();
+	public static ArrayList<SkillTreeNode> skillTreeNodes = new ArrayList<SkillTreeNode>();
 
 	public static MODE mode = MODE.SKILLS;
 
@@ -139,6 +139,8 @@ public class SkillTree implements Draggable, Scrollable {
 
 		drawTree(0, 0, false);
 
+		Game.level.quickBar.drawStaticUI();
+
 	}
 
 	public static void drawTree(int x, int y, boolean smallVersion) {
@@ -179,7 +181,7 @@ public class SkillTree implements Draggable, Scrollable {
 	@Override
 	public void dragDropped() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

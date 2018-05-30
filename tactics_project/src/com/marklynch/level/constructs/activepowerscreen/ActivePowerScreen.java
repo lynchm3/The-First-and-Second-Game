@@ -77,6 +77,8 @@ public class ActivePowerScreen implements Draggable, Scrollable {
 
 		drawPowerSquare(0, 0, false);
 
+		Game.level.quickBar.drawStaticUI();
+
 	}
 
 	public static void drawPowerSquare(int x, int y, boolean smallVersion) {
@@ -107,7 +109,7 @@ public class ActivePowerScreen implements Draggable, Scrollable {
 	@Override
 	public void dragDropped() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

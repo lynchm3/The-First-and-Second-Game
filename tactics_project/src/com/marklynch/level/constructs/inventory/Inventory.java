@@ -1318,6 +1318,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				textureBackgroundTile.getHeight(), 0, Game.windowHeight - bottomBorderHeight, Game.windowWidth,
 				Game.windowHeight, false, false);
 
+		Game.level.quickBar.drawStaticUI();
+
 		// corner gradients
 		TextureUtils.drawTexture(textureCornerGradient, 1f, 0, 0, textureCornerGradient.getWidth(),
 				textureCornerGradient.getHeight());
@@ -1921,7 +1923,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	@Override
 	public void dragDropped() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

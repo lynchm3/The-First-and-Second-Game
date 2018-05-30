@@ -6,6 +6,8 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.Draggable;
+import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.quickbar.QuickBarSquare;
@@ -16,7 +18,7 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class SkillTreeNode extends LevelButton {
+public class SkillTreeNode extends LevelButton implements Draggable, Scrollable {
 
 	public static Texture textureCircle;
 
@@ -30,6 +32,7 @@ public class SkillTreeNode extends LevelButton {
 	public float x, y, circleX1, circleY1, circleX2, circleY2, textX, textY;
 	public static float circleRadius = 48;
 	public static float circleCircumference = circleRadius * 2;
+	public float dragX = 0, dragY = 0;
 
 	public SkillTreeNode(int x, int y) {
 		super(x - circleRadius, y - circleRadius, circleCircumference, circleCircumference, null, null, "", true, true,
@@ -119,7 +122,7 @@ public class SkillTreeNode extends LevelButton {
 				TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2, Color.DARK_GRAY);
 			}
 		}
-		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, name);
+		TextUtils.printTextWithImages(textX + dragX, textY + dragY, Integer.MAX_VALUE, false, null, Color.WHITE, name);
 	}
 
 	public static void loadStaticImages() {
@@ -157,6 +160,61 @@ public class SkillTreeNode extends LevelButton {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void scroll(float dragX, float dragY) {
+		// System.out.println("SKILL TREE . SCROLL");
+		// drag(dragX, dragY);
+
+		// zooming buttons? fuck...
+	}
+
+	@Override
+	public void drag(float drawOffsetX, float dragOffsetY) {
+
+		this.dragX = this.dragX + drawOffsetX;
+		this.dragY = this.dragY - dragOffsetY;
+
+		///
+
+		float centerX = this.x + this.dragX;
+		float centerY = this.y + this.dragY;
+
+		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+			if (quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
+				System.out.println("overlap!!");
+				// quickBarSquare.tempSwap = this;
+			} else {
+				// quickBarSquare.tempSwap = null;
+			}
+		}
+	}
+
+	@Override
+	public void dragDropped() {
+
+		float centerX = this.x + this.dragX;
+		float centerY = this.y + this.dragY;
+
+		QuickBarSquare quickBarSquareToSwapWith = null;
+		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+			if (quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
+				quickBarSquareToSwapWith = quickBarSquare;
+			}
+			quickBarSquare.tempSwap = null;
+		}
+
+		if (quickBarSquareToSwapWith == null) {
+
+		} else if (this.powersUnlocked.size() > 0 && powersUnlocked.get(0).passive == false && this.activated) {
+			// Object tempShortcut = this.shortcut;
+			// setShortcut(quickBarSquareToSwapWith.shortcut);
+			quickBarSquareToSwapWith.setShortcut(this.powersUnlocked.get(0));
+		}
+
+		this.dragX = 0;
+		this.dragY = 0;
 	}
 
 }

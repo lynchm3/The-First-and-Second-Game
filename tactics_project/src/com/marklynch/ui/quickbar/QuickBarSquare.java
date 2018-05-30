@@ -21,7 +21,7 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 	public int index;
 	public float x1, y1, x2, y2;
 	public float dragX = 0, dragY = 0;
-	private QuickBarSquare tempSwap;
+	public QuickBarSquare tempSwap;
 
 	public QuickBarSquare(int index) {
 		super(QuickBar.positionX + index * QuickBar.shortcutWidth, QuickBar.positionY, QuickBar.shortcutWidth,

@@ -16,6 +16,7 @@ import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
+import com.marklynch.level.constructs.skilltree.SkillTreeNode;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTeleport;
@@ -502,20 +503,34 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Level.skillTree.showing) {
-			draggableMouseIsOver = Level.skillTree;
-			return;
-		}
-
 		if (Level.activePowerScreen.showing) {
 			draggableMouseIsOver = Level.activePowerScreen;
 			return;
+		}
+
+		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+			if (quickBarSquare.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+				draggableMouseIsOver = quickBarSquare;
+				return;
+			}
 		}
 
 		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
 		if (inventoriesOpen) {
 			draggableMouseIsOver = Game.level.openInventories.get(0).getDraggable(Mouse.getX(),
 					(int) Game.windowHeight - Mouse.getY());
+			return;
+		}
+
+		if (Level.skillTree.showing) {
+			for (SkillTreeNode skillTreeNode : Game.level.skillTree.skillTreeNodes) {
+				if (skillTreeNode.calculateIfPointInBoundsOfButton(Mouse.getX(),
+						(int) Game.windowHeight - Mouse.getY())) {
+					draggableMouseIsOver = skillTreeNode;
+					return;
+				}
+			}
+			draggableMouseIsOver = Level.skillTree;
 			return;
 		}
 
@@ -530,13 +545,6 @@ public class UserInputLevel {
 				&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
 			draggableMouseIsOver = Game.level.activityLogger;
 			return;
-		}
-
-		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
-			if (quickBarSquare.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
-				draggableMouseIsOver = quickBarSquare;
-				return;
-			}
 		}
 
 	}
