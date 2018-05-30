@@ -35,11 +35,15 @@ public class QuickBar {
 		// }
 
 		for (QuickBarSquare quickBarSquare : quickBarSquares) {
-			quickBarSquare.drawStaticUI(true);
+			quickBarSquare.drawBackground();
+		}
+
+		for (QuickBarSquare quickBarSquare : quickBarSquares) {
+			quickBarSquare.drawShortcut();
 		}
 
 		if (UserInputLevel.draggableMouseIsOver instanceof QuickBarSquare) {
-			((QuickBarSquare) UserInputLevel.draggableMouseIsOver).drawStaticUI(false);
+			((QuickBarSquare) UserInputLevel.draggableMouseIsOver).drawShortcut();
 		}
 	}
 

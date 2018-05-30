@@ -34,16 +34,17 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 		updatePosition(QuickBar.positionX + index * QuickBar.shortcutWidth, QuickBar.positionY);
 	}
 
-	public void drawStaticUI(boolean drawBackground) {
+	public void drawBackground() {
 
 		// if (shortcut == null) {
 		// return;
 		// }
 
-		if (drawBackground) {
-			QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
-			TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
-		}
+		QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
+		TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
+	}
+
+	public void drawShortcut() {
 
 		if (shortcut instanceof Power) {
 			drawPower((Power) shortcut);
