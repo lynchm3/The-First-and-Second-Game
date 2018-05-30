@@ -39,7 +39,7 @@ public class SkillTree implements Draggable, Scrollable {
 	public SkillTree() {
 
 		// Respite
-		SkillTreeNode respite = new SkillTreeNode(128, 128);
+		SkillTreeNode respite = new SkillTreeNode(256, 256);
 		activateAtStart.add(respite);
 		respite.name = "Respite";
 		respite.description = "Respite";
@@ -47,7 +47,7 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(respite);
 
 		// Grabber
-		SkillTreeNode grabber = new SkillTreeNode(128, 256);
+		SkillTreeNode grabber = new SkillTreeNode(256, 512);
 		activateAtStart.add(grabber);
 		grabber.name = "Grabber";
 		grabber.description = "Grabber";
@@ -66,7 +66,7 @@ public class SkillTree implements Draggable, Scrollable {
 		grabber.linkedSkillTreeNodes.add(superPeek);
 
 		// Spark
-		SkillTreeNode spark = new SkillTreeNode(128, 256 + 128);
+		SkillTreeNode spark = new SkillTreeNode(256, 512 + 256);
 		activateAtStart.add(spark);
 		spark.name = "Spark";
 		spark.description = "Spark";
@@ -76,7 +76,7 @@ public class SkillTree implements Draggable, Scrollable {
 		grabber.linkedSkillTreeNodes.add(spark);
 
 		// Fire Damage +1
-		SkillTreeNode fire1 = new SkillTreeNode(256, 256 + 198);
+		SkillTreeNode fire1 = new SkillTreeNode(512, 512 + 512);
 		fire1.name = "Fire +1";
 		fire1.description = "Fire +1";
 		grabber.statsUnlocked.add(Stat.OFFENSIVE_STATS.FIRE_DAMAGE);
@@ -85,7 +85,7 @@ public class SkillTree implements Draggable, Scrollable {
 		fire1.linkedSkillTreeNodes.add(spark);
 
 		// Inferno
-		SkillTreeNode inferno = new SkillTreeNode(128, 256 + 256);
+		SkillTreeNode inferno = new SkillTreeNode(256, 512 + 512);
 		inferno.name = "Inferno";
 		inferno.description = "Inferno";
 		inferno.powersUnlocked.add(new PowerInferno(null));
