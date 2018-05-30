@@ -217,8 +217,31 @@ public class SkillTreeNode extends LevelButton {
 		}
 
 		public void drawBackground() {
-			QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
-			TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
+
+			if (power.passive) {
+
+				if (activated) {
+					TextureUtils.drawTexture(textureCircle, x1, y1, x2, y2, Color.BLUE);
+				} else {
+					if (isAvailable()) {
+						TextureUtils.drawTexture(textureCircle, x1, y1, x2, y2, Color.LIGHT_GRAY);
+					} else {
+						TextureUtils.drawTexture(textureCircle, x1, y1, x2, y2, Color.DARK_GRAY);
+					}
+				}
+
+			} else {
+				QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
+				if (activated) {
+					TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2, Color.BLUE);
+				} else {
+					if (isAvailable()) {
+						TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2, Color.LIGHT_GRAY);
+					} else {
+						TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2, Color.DARK_GRAY);
+					}
+				}
+			}
 		}
 
 		public void drawPower() {
