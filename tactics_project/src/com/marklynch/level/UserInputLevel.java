@@ -502,11 +502,6 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Level.activePowerScreen.showing) {
-			draggableMouseIsOver = Level.activePowerScreen;
-			return;
-		}
-
 		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
 			if (quickBarSquare.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
 				draggableMouseIsOver = quickBarSquare;
@@ -517,6 +512,12 @@ public class UserInputLevel {
 		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
 		if (inventoriesOpen) {
 			draggableMouseIsOver = Game.level.openInventories.get(0).getDraggable(Mouse.getX(),
+					(int) Game.windowHeight - Mouse.getY());
+			return;
+		}
+
+		if (Level.activePowerScreen.showing) {
+			draggableMouseIsOver = Level.activePowerScreen.getDraggable(Mouse.getX(),
 					(int) Game.windowHeight - Mouse.getY());
 			return;
 		}

@@ -1,19 +1,24 @@
 package com.marklynch.level.constructs.activepowerscreen;
 
+import org.lwjgl.input.Mouse;
+
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionUsePower;
+import com.marklynch.ui.Draggable;
+import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.quickbar.QuickBarSquare;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-public class PowerSquare extends LevelButton {
+public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 
 	// public String name;
 	// public String description;
@@ -25,13 +30,22 @@ public class PowerSquare extends LevelButton {
 	public float textBarHeight = 24;
 	private Power power;
 
+	public float dragX = 0, dragY = 0;
+	public static final float draggedPowerWidth = 64;
+	public float draggedPowerHalfWidth = draggedPowerWidth / 2;
+
 	public PowerSquare(Power power, float x, float y) {
 		super(x, y, width, width, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "BUTTON");
+		this.power = power;
+		setLocation(x, y);
+
+	}
+
+	private void setLocation(float x, float y) {
 		this.x1 = x;
 		this.y1 = y;
 		this.x2 = x + width;
 		this.y2 = y + width;
-		this.power = power;
 
 		textWidth = Game.smallFont.getWidth(power.name);
 
@@ -75,7 +89,77 @@ public class PowerSquare extends LevelButton {
 		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, power.name);
 	}
 
+	public void drawPower() {
+		TextureUtils.drawTexture(this.power.image, x1, y1, x2, y2);
+	}
+
+	public void drawDragged() {
+
+		if (power.passive)
+			return;
+		// TextureUtils.drawTexture(this.power.image, x1 + dragX, y1 + dragY, x2 +
+		// dragX, y2 + dragY);
+		TextureUtils.drawTexture(this.power.image, Mouse.getX() - draggedPowerHalfWidth,
+				Game.windowHeight - Mouse.getY() - draggedPowerHalfWidth, Mouse.getX() + draggedPowerHalfWidth,
+				Game.windowHeight - Mouse.getY() + draggedPowerHalfWidth);
+	}
+
+	@Override
+	public void scroll(float dragX, float dragY) {
+
+	}
+
+	@Override
+	public void drag(float drawOffsetX, float dragOffsetY) {
+
+		if (power.passive)
+			return;
+
+		this.dragX = this.dragX + drawOffsetX;
+		this.dragY = this.dragY - dragOffsetY;
+
+		float centerX = this.x + this.dragX;
+		float centerY = this.y + this.dragY;
+
+		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+			if (quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
+				// System.out.println("overlap!!");
+				// quickBarSquare.tempSwap = this;
+			} else {
+				// quickBarSquare.tempSwap = null;
+			}
+		}
+	}
+
+	@Override
+	public void dragDropped() {
+
+		if (power.passive)
+			return;
+
+		float centerX = Mouse.getX();
+		float centerY = Game.windowHeight - Mouse.getY();
+
+		QuickBarSquare quickBarSquareToSwapWith = null;
+		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+			if (quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
+				quickBarSquareToSwapWith = quickBarSquare;
+			}
+			quickBarSquare.tempSwap = null;
+		}
+
+		if (quickBarSquareToSwapWith == null) {
+
+		} else if (power.passive == false) {
+			quickBarSquareToSwapWith.setShortcut(this.power);
+		}
+
+		this.dragX = 0;
+		this.dragY = 0;
+	}
+
 	public static void loadStaticImages() {
+		// TODO Auto-generated method stub
 
 	}
 }

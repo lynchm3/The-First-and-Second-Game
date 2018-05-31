@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -40,6 +41,7 @@ public class ActivePowerScreen implements Draggable, Scrollable {
 		float offsetX = 64;
 		powerSquares.clear();
 		for (Power power : Level.player.powers) {
+
 			if (power.passive == false) {
 				PowerSquare powerSquare = new PowerSquare(power, offsetX, 64);
 				powerSquares.add(powerSquare);
@@ -75,16 +77,14 @@ public class ActivePowerScreen implements Draggable, Scrollable {
 			button.draw();
 		}
 
-		drawPowerSquare(0, 0, false);
+		for (PowerSquare powerSquare : powerSquares) {
+			powerSquare.drawSquare();
+		}
 
 		Game.level.quickBar.drawStaticUI();
 
-	}
-
-	public static void drawPowerSquare(int x, int y, boolean smallVersion) {
-
-		for (PowerSquare powerSquare : powerSquares) {
-			powerSquare.drawSquare();
+		if (UserInputLevel.draggableMouseIsOver instanceof PowerSquare) {
+			((PowerSquare) UserInputLevel.draggableMouseIsOver).drawDragged();
 		}
 
 	}
@@ -110,6 +110,16 @@ public class ActivePowerScreen implements Draggable, Scrollable {
 	public void dragDropped() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public Draggable getDraggable(float mouseX, float mouseY) {
+
+		for (PowerSquare powerSquare : powerSquares) {
+			if (powerSquare.calculateIfPointInBoundsOfButton(mouseX, mouseY)) {
+				return powerSquare;
+			}
+		}
+		return Level.skillTree;
 	}
 
 }
