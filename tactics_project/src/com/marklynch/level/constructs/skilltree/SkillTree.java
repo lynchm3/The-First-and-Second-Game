@@ -10,7 +10,6 @@ import org.lwjgl.util.vector.Vector3f;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
-import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.PowerHealRanged;
@@ -21,6 +20,8 @@ import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
 import com.marklynch.level.constructs.power.PowerRespite;
 import com.marklynch.level.constructs.power.PowerSpark;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
+import com.marklynch.level.constructs.power.PowerTimePlusSixHours;
+import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.constructs.skilltree.SkillTreeNode.SkillTreeNodePower;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -95,41 +96,38 @@ public class SkillTree implements Draggable, Scrollable {
 		// grabber.linkedSkillTreeNodes.add(respite);
 
 		// Superpeek
-		SkillTreeNode superPeek = new SkillTreeNode(512, 512);
+		SkillTreeNode superPeek = new SkillTreeNode(5120, 1024);
+		activateAtStart.add(superPeek);
 		superPeek.name = "Superpeek";
 		superPeek.description = "Superpeek";
 		superPeek.powersUnlocked.add(new PowerSuperPeek(null));
 		skillTreeNodes.add(superPeek);
-		superPeek.linkedSkillTreeNodes.add(grabber);
-		grabber.linkedSkillTreeNodes.add(superPeek);
 
 		// Spark
-		SkillTreeNode spark = new SkillTreeNode(256, 512 + 256);
+		SkillTreeNode spark = new SkillTreeNode(4096, 1536);
 		activateAtStart.add(spark);
 		spark.name = "Spark";
 		spark.description = "Spark";
 		spark.powersUnlocked.add(new PowerSpark(null));
 		skillTreeNodes.add(spark);
-		spark.linkedSkillTreeNodes.add(grabber);
-		grabber.linkedSkillTreeNodes.add(spark);
 
 		// Fire Damage +1
-		SkillTreeNode fire1 = new SkillTreeNode(512, 512 + 512);
-		fire1.name = "Fire +1";
-		fire1.description = "Fire +1";
-		grabber.statsUnlocked.add(Stat.OFFENSIVE_STATS.FIRE_DAMAGE);
-		skillTreeNodes.add(fire1);
-		spark.linkedSkillTreeNodes.add(fire1);
-		fire1.linkedSkillTreeNodes.add(spark);
+		// SkillTreeNode fire1 = new SkillTreeNode(512, 512 + 512);
+		// fire1.name = "Fire +1";
+		// fire1.description = "Fire +1";
+		// grabber.statsUnlocked.add(Stat.OFFENSIVE_STATS.FIRE_DAMAGE);
+		// skillTreeNodes.add(fire1);
+		// spark.linkedSkillTreeNodes.add(fire1);
+		// fire1.linkedSkillTreeNodes.add(spark);
 
 		// Inferno
-		SkillTreeNode inferno = new SkillTreeNode(256, 512 + 512);
+		SkillTreeNode inferno = new SkillTreeNode(4096, 1792);
 		inferno.name = "Inferno";
 		inferno.description = "Inferno";
 		inferno.powersUnlocked.add(new PowerInferno(null));
 		skillTreeNodes.add(inferno);
-		fire1.linkedSkillTreeNodes.add(inferno);
-		inferno.linkedSkillTreeNodes.add(fire1);
+		spark.linkedSkillTreeNodes.add(inferno);
+		inferno.linkedSkillTreeNodes.add(spark);
 
 		// Poison Knife
 		SkillTreeNode poisonKnives = new SkillTreeNode(1280, 1024);
@@ -147,6 +145,23 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(bleed);
 		bleed.linkedSkillTreeNodes.add(poisonKnives);
 		poisonKnives.linkedSkillTreeNodes.add(bleed);
+
+		// Time +6 hrs
+		SkillTreeNode timePlus6 = new SkillTreeNode(3328, 2816);
+		activateAtStart.add(timePlus6);
+		timePlus6.name = "timePlus6";
+		timePlus6.description = "";
+		timePlus6.powersUnlocked.add(new PowerTimePlusSixHours(null));
+		skillTreeNodes.add(timePlus6);
+
+		// Unlock
+		SkillTreeNode unlock = new SkillTreeNode(3328, 3072);
+		unlock.name = "unlock";
+		unlock.description = "";
+		unlock.powersUnlocked.add(new PowerUnlock(null));
+		skillTreeNodes.add(unlock);
+		timePlus6.linkedSkillTreeNodes.add(unlock);
+		unlock.linkedSkillTreeNodes.add(timePlus6);
 
 		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
 			skillTreeNode.init();
@@ -270,7 +285,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
 
-			skillTreeNode.updatePosition(skillTreeNode.x + dragX, skillTreeNode.y - dragY);
+			skillTreeNode.updatePosition(skillTreeNode.x + dragX / zoom, skillTreeNode.y - dragY / zoom);
 		}
 
 		// fixScroll();
