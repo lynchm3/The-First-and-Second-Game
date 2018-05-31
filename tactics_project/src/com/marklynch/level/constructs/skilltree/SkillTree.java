@@ -11,11 +11,13 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerHealTouch;
 import com.marklynch.level.constructs.power.PowerInferno;
+import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
 import com.marklynch.level.constructs.power.PowerRespite;
 import com.marklynch.level.constructs.power.PowerSpark;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
@@ -128,6 +130,23 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(inferno);
 		fire1.linkedSkillTreeNodes.add(inferno);
 		inferno.linkedSkillTreeNodes.add(fire1);
+
+		// Poison Knife
+		SkillTreeNode poisonKnives = new SkillTreeNode(1280, 1024);
+		activateAtStart.add(poisonKnives);
+		poisonKnives.name = "Poison Knives";
+		poisonKnives.description = "";
+		poisonKnives.powersUnlocked.add(new PowerPoisonThrowingKnives(null));
+		skillTreeNodes.add(poisonKnives);
+
+		// Bleed
+		SkillTreeNode bleed = new SkillTreeNode(1280, 1280);
+		bleed.name = "Bleed";
+		bleed.description = "";
+		bleed.powersUnlocked.add(new PowerBleed(null));
+		skillTreeNodes.add(bleed);
+		bleed.linkedSkillTreeNodes.add(poisonKnives);
+		poisonKnives.linkedSkillTreeNodes.add(bleed);
 
 		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
 			skillTreeNode.init();
