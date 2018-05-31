@@ -140,6 +140,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean canBePickedUp = true;
 	public boolean decorative = false;
 	public boolean floats = false;
+	public boolean flammableLightSource = false;
 
 	public int value = 1;
 	public int turnAcquired = 1;

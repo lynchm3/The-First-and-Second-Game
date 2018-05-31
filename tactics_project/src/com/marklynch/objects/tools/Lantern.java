@@ -12,6 +12,7 @@ public class Lantern extends Tool {
 
 	public Lantern() {
 		super();
+		flammableLightSource = true;
 	}
 
 	@Override
