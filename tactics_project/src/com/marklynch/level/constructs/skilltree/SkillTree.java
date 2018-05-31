@@ -12,6 +12,9 @@ import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.power.PowerGrabber;
+import com.marklynch.level.constructs.power.PowerHealRanged;
+import com.marklynch.level.constructs.power.PowerHealSelf;
+import com.marklynch.level.constructs.power.PowerHealTouch;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerRespite;
 import com.marklynch.level.constructs.power.PowerSpark;
@@ -45,12 +48,39 @@ public class SkillTree implements Draggable, Scrollable {
 	public SkillTree() {
 
 		// Respite
-		SkillTreeNode respite = new SkillTreeNode(256, 256);
+		SkillTreeNode respite = new SkillTreeNode(2816, 1792);
 		activateAtStart.add(respite);
 		respite.name = "Respite";
 		respite.description = "Respite";
 		respite.powersUnlocked.add(new PowerRespite(null));
 		skillTreeNodes.add(respite);
+
+		// Heal Self
+		SkillTreeNode healSelf = new SkillTreeNode(2560, 1792);
+		healSelf.name = "Heal Self";
+		healSelf.description = "Heal Self";
+		healSelf.powersUnlocked.add(new PowerHealSelf(null));
+		skillTreeNodes.add(healSelf);
+		respite.linkedSkillTreeNodes.add(healSelf);
+		healSelf.linkedSkillTreeNodes.add(respite);
+
+		// Heal Touch
+		SkillTreeNode healTouch = new SkillTreeNode(2560, 1536);
+		healTouch.name = "Heal Touch";
+		healTouch.description = "Heal Touch";
+		healTouch.powersUnlocked.add(new PowerHealTouch(null));
+		skillTreeNodes.add(healTouch);
+		healTouch.linkedSkillTreeNodes.add(healSelf);
+		healSelf.linkedSkillTreeNodes.add(healTouch);
+
+		// Heal Other
+		SkillTreeNode healOther = new SkillTreeNode(2816, 1536);
+		healOther.name = "Heal Ranged";
+		healOther.description = "Heal Heal Ranged";
+		healOther.powersUnlocked.add(new PowerHealRanged(null));
+		skillTreeNodes.add(healOther);
+		healTouch.linkedSkillTreeNodes.add(healOther);
+		healOther.linkedSkillTreeNodes.add(healTouch);
 
 		// Grabber
 		SkillTreeNode grabber = new SkillTreeNode(256, 512);
@@ -59,8 +89,8 @@ public class SkillTree implements Draggable, Scrollable {
 		grabber.description = "Grabber";
 		grabber.powersUnlocked.add(new PowerGrabber(null));
 		skillTreeNodes.add(grabber);
-		respite.linkedSkillTreeNodes.add(grabber);
-		grabber.linkedSkillTreeNodes.add(respite);
+		// respite.linkedSkillTreeNodes.add(grabber);
+		// grabber.linkedSkillTreeNodes.add(respite);
 
 		// Superpeek
 		SkillTreeNode superPeek = new SkillTreeNode(512, 512);

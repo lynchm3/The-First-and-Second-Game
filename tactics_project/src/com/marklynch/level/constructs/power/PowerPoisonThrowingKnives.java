@@ -8,11 +8,11 @@ import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.ResourceUtils;
 
-public class PowerPoisonBlast extends Power {
+public class PowerPoisonThrowingKnives extends Power {
 
 	private static String NAME = "Poison";
 
-	public PowerPoisonBlast(GameObject source) {
+	public PowerPoisonThrowingKnives(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_poison.png", false), source,
 				new Effect[] { new EffectPoison(source, null, 3) }, 10,
 				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
@@ -22,6 +22,6 @@ public class PowerPoisonBlast extends Power {
 
 	@Override
 	public Power makeCopy(GameObject source) {
-		return new PowerPoisonBlast(source);
+		return new PowerPoisonThrowingKnives(source);
 	}
 }

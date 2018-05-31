@@ -4,7 +4,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.journal.AreaList;
-import com.marklynch.level.constructs.power.PowerPoisonBlast;
+import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
@@ -105,7 +105,7 @@ public class AreaTownForest {
 		scrollOfPoisonBlast.setOnReadListener(new ActionListener() {
 			@Override
 			public void onRead() {
-				Level.player.powers.add(new PowerPoisonBlast(Level.player));
+				Level.player.powers.add(new PowerPoisonThrowingKnives(Level.player));
 			}
 		});
 
