@@ -11,6 +11,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.power.PowerBleed;
+import com.marklynch.level.constructs.power.PowerDouse;
 import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
@@ -110,6 +111,15 @@ public class SkillTree implements Draggable, Scrollable {
 		spark.description = "Spark";
 		spark.powersUnlocked.add(new PowerSpark(null));
 		skillTreeNodes.add(spark);
+
+		// Douse
+		SkillTreeNode douse = new SkillTreeNode(3840, 1536);
+		douse.name = "douse";
+		douse.description = "douse";
+		douse.powersUnlocked.add(new PowerDouse(null));
+		skillTreeNodes.add(douse);
+		spark.linkedSkillTreeNodes.add(douse);
+		douse.linkedSkillTreeNodes.add(spark);
 
 		// Fire Damage +1
 		// SkillTreeNode fire1 = new SkillTreeNode(512, 512 + 512);
