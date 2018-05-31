@@ -4,7 +4,6 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
@@ -46,7 +45,8 @@ public class ActionPourSpecificItem extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -69,8 +69,6 @@ public class ActionPourSpecificItem extends Action {
 			// new ActionDouse(shooter, gameObject).perform();
 			for (Effect effect : containerForLiquids.liquid.touchEffects) {
 				gameObject.addEffect(effect.makeCopy(performer, gameObject));
-				if (effect instanceof EffectWet)
-					gameObject.removeBurningEffect();
 			}
 		}
 

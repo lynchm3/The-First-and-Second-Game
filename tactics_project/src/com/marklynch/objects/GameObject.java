@@ -1611,6 +1611,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (effectToAdd instanceof EffectBleed && !(this instanceof Actor))
 			return;
 
+		if (effectToAdd instanceof EffectWet)
+			this.removeBurningEffect();
+
 		Effect effectToRemove = null;
 		for (Effect existingEffect : this.activeEffectsOnGameObject) {
 			if (existingEffect.getClass() == effectToAdd.getClass()) {
@@ -1633,8 +1636,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (activeEffectsOnGameObject.size() == 0)
 			return;
 
+		// boolean wet = isWet();
+
 		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>();
 		for (Effect effect : (ArrayList<Effect>) this.activeEffectsOnGameObject.clone()) {
+
 			effect.activate();
 			if (effect.turnsRemaining == 0)
 				effectsToRemove.add(effect);
