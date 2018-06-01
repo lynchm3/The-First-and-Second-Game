@@ -174,11 +174,21 @@ public class SkillTreeNode extends LevelButton {
 
 		this.x = x;
 		this.y = y;
+
+		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
+			skillTreeNodePower.updatePosition(x + powerOffsetX, y + powerOffsetY);
+		}
+
+		for (SkillTreeNodeStat skillTreeNodeStat : statButtons) {
+			skillTreeNodeStat.updatePosition(x + statOffsetX, y + statOffsetY);
+		}
+
 		setLocation();
 
 	}
 
 	private void setLocation() {
+
 		circleX1 = x - circleRadius;
 		circleY1 = y - circleRadius;
 		circleX2 = x + circleRadius;
@@ -220,7 +230,7 @@ public class SkillTreeNode extends LevelButton {
 		public float x1, y1, x2, y2;
 
 		public SkillTreeNodeStat(Stat stat, int x, int y) {
-			super(x, y, statWidth, statWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "BUTTON");
+			super(x, y, statWidth, statWidth, null, null, "STAT", true, true, Color.TRANSPARENT, Color.WHITE, "BUTTON");
 			this.stat = stat;
 			this.x = x;
 			this.y = y;
@@ -264,7 +274,8 @@ public class SkillTreeNode extends LevelButton {
 		public float x1, y1, x2, y2;
 
 		public SkillTreeNodePower(Power power, int x, int y) {
-			super(x, y, powerWidth, powerWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "BUTTON");
+			super(x, y, powerWidth, powerWidth, null, null, power.description, true, true, Color.TRANSPARENT,
+					Color.WHITE, "BUTTON");
 			this.power = power;
 			this.x = x;
 			this.y = y;

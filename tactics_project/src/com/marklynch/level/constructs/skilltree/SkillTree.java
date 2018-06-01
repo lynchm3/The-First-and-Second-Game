@@ -27,6 +27,7 @@ import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerTimePlusSixHours;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.constructs.skilltree.SkillTreeNode.SkillTreeNodePower;
+import com.marklynch.level.constructs.skilltree.SkillTreeNode.SkillTreeNodeStat;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
@@ -327,9 +328,20 @@ public class SkillTree implements Draggable, Scrollable {
 		float mouseYTransformed = ((Game.windowHeight / 2 - getDragYWithOffset() - (Game.windowHeight / 2) / zoom)
 				+ (((Game.windowHeight - mouseY)) / zoom));
 
-		for (Button button : SkillTree.buttons) {
-			if (button.calculateIfPointInBoundsOfButton(mouseXTransformed, mouseYTransformed))
-				return button;
+		for (SkillTreeNode node : SkillTree.skillTreeNodes) {
+			for (SkillTreeNodePower powerButton : node.powerButtons) {
+
+				if (node.calculateIfPointInBoundsOfButton(mouseXTransformed, mouseYTransformed))
+					return powerButton;
+			}
+			for (SkillTreeNodeStat statButton : node.statButtons) {
+
+				if (node.calculateIfPointInBoundsOfButton(mouseXTransformed, mouseYTransformed))
+					return statButton;
+			}
+
+			if (node.calculateIfPointInBoundsOfButton(mouseXTransformed, mouseYTransformed))
+				return node;
 		}
 		return null;
 	}
