@@ -331,12 +331,12 @@ public class SkillTree implements Draggable, Scrollable {
 		for (SkillTreeNode node : SkillTree.skillTreeNodes) {
 			for (SkillTreeNodePower powerButton : node.powerButtons) {
 
-				if (node.calculateIfPointInBoundsOfButton(mouseXTransformed, mouseYTransformed))
+				if (powerButton.calculateIfPointInBoundsOfButton(mouseXTransformed, mouseYTransformed))
 					return powerButton;
 			}
 			for (SkillTreeNodeStat statButton : node.statButtons) {
 
-				if (node.calculateIfPointInBoundsOfButton(mouseXTransformed, mouseYTransformed))
+				if (statButton.calculateIfPointInBoundsOfButton(mouseXTransformed, mouseYTransformed))
 					return statButton;
 			}
 
