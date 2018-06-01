@@ -3,7 +3,7 @@ package com.marklynch.level.constructs;
 public class Stat {
 
 	public static enum HIGH_LEVEL_STATS {
-		STRENGTH, DEXTERITY, ENDURANCE, INTELLIGENCE
+		STRENGTH, DEXTERITY, ENDURANCE, INTELLIGENCE, FRIENDLY_FIRE
 	};
 
 	public static enum OFFENSIVE_STATS {

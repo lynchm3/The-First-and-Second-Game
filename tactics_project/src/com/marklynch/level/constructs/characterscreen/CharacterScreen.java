@@ -31,6 +31,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static String DEXTERITY = "DEXTERITY";
 	public static String INTELLIGENCE = "INTELLIGENCE";
 	public static String ENDURANCE = "ENDURANCE";
+	public static String FRIENDLY_FIRE = "FRIENDLY FIRE";
 	public static String HEALTH_SHORT = "HP ";
 	public static String STRENGTH_SHORT = "STR";
 	public static String DEXTERITY_SHORT = "DEX";
@@ -126,6 +127,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 		highLevelStatNames.put(HIGH_LEVEL_STATS.DEXTERITY, DEXTERITY);
 		highLevelStatNames.put(HIGH_LEVEL_STATS.INTELLIGENCE, INTELLIGENCE);
 		highLevelStatNames.put(HIGH_LEVEL_STATS.ENDURANCE, ENDURANCE);
+		highLevelStatNames.put(HIGH_LEVEL_STATS.FRIENDLY_FIRE, FRIENDLY_FIRE);
 
 		offensiveStatNames.put(OFFENSIVE_STATS.SLASH_DAMAGE, SLASH_DAMAGE);
 		offensiveStatNames.put(OFFENSIVE_STATS.BLUNT_DAMAGE, BLUNT_DAMAGE);
@@ -397,7 +399,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 	@Override
 	public void dragDropped() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

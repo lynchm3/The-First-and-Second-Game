@@ -264,6 +264,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FRIENDLY_FIRE, new Stat(0));
 
 		offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(0));
 		offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(0));
