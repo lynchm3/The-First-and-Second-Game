@@ -16,10 +16,17 @@ public class Stat {
 	// };
 
 	public float value;
+	public HIGH_LEVEL_STATS type;
 
 	public Stat(float value) {
 		super();
 		this.value = value;
+	}
+
+	public Stat(float value, HIGH_LEVEL_STATS type) {
+		super();
+		this.value = value;
+		this.type = type;
 	}
 
 	public Stat makeCopy() {

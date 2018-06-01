@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.squares.Square;
@@ -32,11 +35,14 @@ public class SkillTreeNode extends LevelButton {
 	public ArrayList<RequirementToMeet> requirementsToMeet = new ArrayList<RequirementToMeet>();
 	public ArrayList<SkillTreeNode> linkedSkillTreeNodes = new ArrayList<SkillTreeNode>();
 	public ArrayList<SkillTreeNodePower> powerButtons = new ArrayList<SkillTreeNodePower>();
-	public ArrayList<Object> statsUnlocked = new ArrayList<Object>();
+	public ArrayList<SkillTreeNodeStat> statButtons = new ArrayList<SkillTreeNodeStat>();
+	public ArrayList<Stat> statsUnlocked = new ArrayList<Stat>();
 	public float x, y, circleX1, circleY1, circleX2, circleY2, textX, textY;
 
 	float powerOffsetX = 16;
 	float powerOffsetY = 16;
+	float statOffsetX = 16;
+	float statOffsetY = -16 - SkillTreeNodeStat.statWidth;
 
 	public ArrayList<Power> powersUnlocked = new ArrayList<Power>();;
 	public static float circleRadius = 48;
@@ -66,6 +72,10 @@ public class SkillTreeNode extends LevelButton {
 
 		for (Power power : powersUnlocked) {
 			this.powerButtons.add(new SkillTreeNodePower(power, 0, 0));
+		}
+
+		for (Stat stat : statsUnlocked) {
+			this.statButtons.add(new SkillTreeNodeStat(stat, 0, 0));
 		}
 
 		setLocation();
@@ -98,8 +108,8 @@ public class SkillTreeNode extends LevelButton {
 			}
 		}
 
-		for (Object statUnlocked : statsUnlocked) {
-
+		for (Stat statUnlocked : statsUnlocked) {
+			Level.player.highLevelStats.get(statUnlocked.type).value += statUnlocked.value;
 		}
 
 	}
@@ -131,6 +141,11 @@ public class SkillTreeNode extends LevelButton {
 		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
 			skillTreeNodePower.drawBackground();
 			skillTreeNodePower.drawPower();
+		}
+
+		for (SkillTreeNodeStat skillTreeNodeStat : statButtons) {
+			skillTreeNodeStat.drawBackground();
+			skillTreeNodeStat.drawStat();
 		}
 
 		// if (powersUnlocked.size() != 0) {
@@ -175,6 +190,10 @@ public class SkillTreeNode extends LevelButton {
 			skillTreeNodePower.setLocation(x + powerOffsetX, y + powerOffsetY);
 		}
 
+		for (SkillTreeNodeStat skillTreeNodeStat : statButtons) {
+			skillTreeNodeStat.setLocation(x + statOffsetX, y + statOffsetY);
+		}
+
 		// powerX =
 
 	}
@@ -190,6 +209,50 @@ public class SkillTreeNode extends LevelButton {
 			}
 		}
 		return false;
+	}
+
+	public class SkillTreeNodeStat extends LevelButton {
+
+		Stat stat;
+		public float dragX = 0, dragY = 0;
+		public static final float statWidth = 64;
+		public float powerHalfWidth = statWidth / 2;
+		public float x1, y1, x2, y2;
+
+		public SkillTreeNodeStat(Stat stat, int x, int y) {
+			super(x, y, statWidth, statWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "BUTTON");
+			this.stat = stat;
+			this.x = x;
+			this.y = y;
+
+		}
+
+		private void setLocation(float x, float y) {
+			this.x = x;
+			this.y = y;
+			this.x1 = x;
+			this.y1 = y;
+			this.x2 = x + statWidth;
+			this.y2 = y + statWidth;
+
+		}
+
+		public void drawBackground() {
+
+			if (activated) {
+				TextureUtils.drawTexture(textureCircle, x1, y1, x2, y2, Color.BLUE);
+			} else {
+				if (isAvailable()) {
+					TextureUtils.drawTexture(textureCircle, x1, y1, x2, y2, Color.LIGHT_GRAY);
+				} else {
+					TextureUtils.drawTexture(textureCircle, x1, y1, x2, y2, Color.DARK_GRAY);
+				}
+			}
+		}
+
+		public void drawStat() {
+			TextureUtils.drawTexture(CharacterScreen.highLevelStatImages.get(this.stat.type), x1, y1, x2, y2);
+		}
 	}
 
 	public class SkillTreeNodePower extends LevelButton implements Draggable, Scrollable {

@@ -10,6 +10,8 @@ import org.lwjgl.util.vector.Vector3f;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerDouse;
 import com.marklynch.level.constructs.power.PowerGrabber;
@@ -83,6 +85,7 @@ public class SkillTree implements Draggable, Scrollable {
 		healOther.name = "Heal Ranged";
 		healOther.description = "Heal Heal Ranged";
 		healOther.powersUnlocked.add(new PowerHealRanged(null));
+		healOther.statsUnlocked.add(new Stat(10, HIGH_LEVEL_STATS.DEXTERITY));
 		skillTreeNodes.add(healOther);
 		healTouch.linkedSkillTreeNodes.add(healOther);
 		healOther.linkedSkillTreeNodes.add(healTouch);
