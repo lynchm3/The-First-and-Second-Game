@@ -20,6 +20,7 @@ import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
 import com.marklynch.level.constructs.power.PowerRespite;
 import com.marklynch.level.constructs.power.PowerSpark;
+import com.marklynch.level.constructs.power.PowerSpiritBag;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerTimePlusSixHours;
 import com.marklynch.level.constructs.power.PowerUnlock;
@@ -95,6 +96,14 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(grabber);
 		// respite.linkedSkillTreeNodes.add(grabber);
 		// grabber.linkedSkillTreeNodes.add(respite);
+
+		// Spirit bag
+		SkillTreeNode spiritBag = new SkillTreeNode(512, 1792);
+		activateAtStart.add(spiritBag);
+		spiritBag.name = "spiritBag";
+		spiritBag.description = "spiritBag";
+		spiritBag.powersUnlocked.add(new PowerSpiritBag(null));
+		skillTreeNodes.add(spiritBag);
 
 		// Superpeek
 		SkillTreeNode superPeek = new SkillTreeNode(5120, 1024);
