@@ -10,6 +10,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
+import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -18,6 +19,7 @@ import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.constructs.skilltree.SkillTreeNode;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -408,6 +410,44 @@ public class TextUtils {
 				// Newline
 				offsetY += 20;
 				offsetX = 0;
+
+			} else if (content instanceof Stat) {
+
+				Stat stat = (Stat) content;
+
+				float textWidth = Game.smallFont.getWidth(CharacterScreen.highLevelStatNames.get(stat.type));
+				float textureWidth = 20;
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+
+				// Name
+
+				offsetX += Game.smallFont.getWidth(CharacterScreen.highLevelStatNames.get(stat.type)) + 10;
+
+				// Image
+				offsetX += textureWidth;
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
+				// Description
+
+				String[] stringParts = CharacterScreen.highLevelStatNames.get(stat.type).split(splitRegex);
+
+				for (String stringPart : stringParts) {
+
+					float width = Game.smallFont.getWidth(stringPart);
+					if (offsetX + width > maxWidth && offsetX != 0) {
+						offsetY += 20;
+						offsetX = 0;
+					}
+
+					offsetX += width;
+
+				}
 
 			}
 		}
@@ -1063,6 +1103,67 @@ public class TextUtils {
 				offsetY += 20;
 				offsetX = 0;
 				Game.smallFont.drawText(Game.activeBatch, "NOISE " + power.loudness, posX + offsetX, posY + offsetY);
+
+			} else if (content instanceof Stat) {
+
+				Stat stat = (Stat) content;
+
+				Color color = defaultColor;
+				Game.activeBatch.setColor(color);
+
+				float textWidth = Game.smallFont.getWidth(CharacterScreen.highLevelStatNames.get(stat.type));
+				float textureWidth = 20;
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+
+				if (links != null) {
+					Game.activeBatch.setColor(Color.YELLOW);
+					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
+					linkIndex++;
+				}
+
+				// Name
+				Game.smallFont.drawText(Game.activeBatch, CharacterScreen.highLevelStatNames.get(stat.type),
+						posX + offsetX, posY + offsetY);
+
+				offsetX += Game.smallFont.getWidth(CharacterScreen.highLevelStatNames.get(stat.type)) + 10;
+
+				// Image
+				float x = posX + offsetX;
+				QuadUtils.drawQuad(Color.BLACK, x, posY + offsetY, x + 20, posY + offsetY + 20);
+				TextureUtils.drawTexture(SkillTreeNode.textureCircle, x, posY + offsetY, x + 20, posY + offsetY + 20);
+				TextureUtils.drawTexture(CharacterScreen.highLevelStatImages.get(stat.type), x, posY + offsetY, x + 20,
+						posY + offsetY + 20);
+				offsetX += textureWidth;
+
+				Game.activeBatch.setColor(defaultColor);
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
+				// Description
+
+				String[] stringParts = CharacterScreen.highLevelStatNames.get(stat.type).split(splitRegex);
+
+				for (String stringPart : stringParts) {
+
+					float width = Game.smallFont.getWidth(stringPart);
+					if (offsetX + width > maxWidth && offsetX != 0) {
+						if (wrap) {
+							offsetY += 20;
+							offsetX = 0;
+						} else {
+						}
+					}
+
+					Game.smallFont.drawText(Game.activeBatch, stringPart, posX + offsetX, posY + offsetY);
+
+					offsetX += width;
+
+				}
 
 			}
 

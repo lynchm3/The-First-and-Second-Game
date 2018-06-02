@@ -230,10 +230,11 @@ public class SkillTreeNode extends LevelButton {
 		public float x1, y1, x2, y2;
 
 		public SkillTreeNodeStat(Stat stat, int x, int y) {
-			super(x, y, statWidth, statWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "STAT");
+			super(x, y, statWidth, statWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "");
 			this.stat = stat;
 			this.x = x;
 			this.y = y;
+			this.setTooltipText(stat);
 
 		}
 
