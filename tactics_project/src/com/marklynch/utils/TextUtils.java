@@ -967,7 +967,8 @@ public class TextUtils {
 
 							String turnsString = "";
 							if (effect.totalTurns > 1) {
-								turnsString = " FOR " + effect.totalTurns + " TURNS";
+								turnsString = " FOR " + effect.totalTurns + " TURNS ("
+										+ (effect.totalTurns * effect.getEffectiveHighLevelStat(highLevelStat)) + ")";
 							}
 
 							Game.smallFont.drawText(Game.activeBatch,
