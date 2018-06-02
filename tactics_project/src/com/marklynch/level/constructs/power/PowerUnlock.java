@@ -10,6 +10,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Openable;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ResourceUtils;
@@ -25,7 +26,7 @@ public class PowerUnlock extends Power {
 	}
 
 	@Override
-	public void cast(Actor source, Square targetSquare) {
+	public void cast(Actor source, Square targetSquare, Action action) {
 		ArrayList<GameObject> openables = targetSquare.inventory.getGameObjectsOfClass(Openable.class);
 		for (GameObject openable : openables) {
 			if (((Openable) openable).isLocked()) {

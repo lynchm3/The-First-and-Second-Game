@@ -24,6 +24,7 @@ import com.marklynch.level.constructs.power.PowerRespite;
 import com.marklynch.level.constructs.power.PowerSpark;
 import com.marklynch.level.constructs.power.PowerSpiritBag;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
+import com.marklynch.level.constructs.power.PowerTelekineticPush;
 import com.marklynch.level.constructs.power.PowerTimePlusSixHours;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.constructs.skilltree.SkillTreeNode.SkillTreeNodePower;
@@ -59,14 +60,14 @@ public class SkillTree implements Draggable, Scrollable {
 		SkillTreeNode respite = new SkillTreeNode(2816, 1792);
 		activateAtStart.add(respite);
 		respite.name = "Respite";
-		respite.description = "Respite";
+		respite.description = "\"The human body requires 8 hours of sleep per night, or at least 5 secs between fights.\" - Unknown";
 		respite.powersUnlocked.add(new PowerRespite(null));
 		skillTreeNodes.add(respite);
 
 		// Heal Self
 		SkillTreeNode healSelf = new SkillTreeNode(2560, 1792);
 		healSelf.name = "Heal Self";
-		healSelf.description = "Heal Self";
+		healSelf.description = "\"There's nothing wrong with some self-love\" - Unknown";
 		healSelf.powersUnlocked.add(new PowerHealSelf(null));
 		skillTreeNodes.add(healSelf);
 		respite.linkedSkillTreeNodes.add(healSelf);
@@ -75,7 +76,7 @@ public class SkillTree implements Draggable, Scrollable {
 		// Heal Touch
 		SkillTreeNode healTouch = new SkillTreeNode(2560, 1536);
 		healTouch.name = "Heal Touch";
-		healTouch.description = "Heal Touch";
+		healTouch.description = "\"Love thy neighbor\" - God";
 		healTouch.powersUnlocked.add(new PowerHealTouch(null));
 		skillTreeNodes.add(healTouch);
 		healTouch.linkedSkillTreeNodes.add(healSelf);
@@ -84,7 +85,7 @@ public class SkillTree implements Draggable, Scrollable {
 		// Heal Other
 		SkillTreeNode healOther = new SkillTreeNode(2816, 1536);
 		healOther.name = "Heal Ranged";
-		healOther.description = "Heal Heal Ranged";
+		healOther.description = "\"Love evveryone\" - God, probably";
 		healOther.powersUnlocked.add(new PowerHealRanged(null));
 		healOther.statsUnlocked.add(new Stat(10, HIGH_LEVEL_STATS.DEXTERITY));
 		skillTreeNodes.add(healOther);
@@ -185,6 +186,16 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(unlock);
 		timePlus6.linkedSkillTreeNodes.add(unlock);
 		unlock.linkedSkillTreeNodes.add(timePlus6);
+
+		// Telekinteic push
+		SkillTreeNode telekineticPush = new SkillTreeNode(3072, 3072);
+		activateAtStart.add(telekineticPush);
+		telekineticPush.name = "Telekinetic Push";
+		telekineticPush.description = "\"The bigger they are, the harder they fall\" - Stranger";
+		telekineticPush.powersUnlocked.add(new PowerTelekineticPush(null));
+		skillTreeNodes.add(telekineticPush);
+		telekineticPush.linkedSkillTreeNodes.add(unlock);
+		unlock.linkedSkillTreeNodes.add(telekineticPush);
 
 		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
 			skillTreeNode.init();

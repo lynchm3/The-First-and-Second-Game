@@ -44,7 +44,7 @@ public class ActionUsePower extends Action {
 			return;
 
 		power.log(performer, target);
-		power.cast(performer, target);
+		power.cast(performer, target, this);
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

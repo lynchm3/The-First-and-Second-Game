@@ -7,6 +7,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 
@@ -20,7 +21,7 @@ public class PowerTimePlusSixHours extends Power {
 	}
 
 	@Override
-	public void cast(Actor source, Square targetSquare) {
+	public void cast(Actor source, Square targetSquare, Action action) {
 		Game.level.changeTime(60 * 60 * 6);
 	}
 

@@ -72,6 +72,8 @@ public class SkillTreeNode extends LevelButton {
 		ArrayList<Object> tooltipItems = new ArrayList<Object>();
 
 		tooltipItems.add(this.name);
+		tooltipItems.add(TextUtils.NewLine.NEW_LINE);
+		tooltipItems.add(description);
 
 		for (Power power : powersUnlocked) {
 			this.powerButtons.add(new SkillTreeNodePower(power, 0, 0));
@@ -86,6 +88,7 @@ public class SkillTreeNode extends LevelButton {
 			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
 			// tooltipItems.add("_________________________________");
 			tooltipItems.add("    ---------------------------------   ");
+			tooltipItems.add("STAT ");
 			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
 			tooltipItems.add(stat);
 		}

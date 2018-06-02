@@ -2047,6 +2047,60 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return totalDamage;
 	}
 
+	public float changeHealth(Object attacker, Action action, Stat damage) {
+
+		int offsetY = 0;
+		boolean thisIsAnAttack = false;
+		float totalDamage = 0;
+		GameObject gameObjectAttacker = null;
+		if (attacker instanceof GameObject)
+			gameObjectAttacker = (GameObject) attacker;
+		// System.out.println("damageDealer.bluntDamage = " + ((Actor)
+		// damageDealer).bluntDamage);
+
+		float resistance = (this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(damage.type)).value
+				* 0.01f);
+		float resistedDamage = damage.value * resistance;
+		float friendlyFireReduction = 0;
+		if (gameObjectAttacker != null && gameObjectAttacker.group != null && gameObjectAttacker.group.contains(this)) {
+			friendlyFireReduction = gameObjectAttacker.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.FRIENDLY_FIRE)
+					* 0.01f;
+		}
+		float dmg = damage.value - resistedDamage - friendlyFireReduction;
+		doDamageAnimation(dmg, offsetY, damage.type, this.highLevelStats.get(damage.type).value);
+		remainingHealth -= dmg;
+		totalDamage += dmg;
+
+		if (dmg >= 0)
+			thisIsAnAttack = true;
+
+		// Update bestiary
+		if (Game.level.shouldLog(this))
+			Level.bestiaryKnowledgeCollection.get(this.templateId).putHighLevel(damage.type, true);
+
+		if (gameObjectAttacker != null)
+			if (Game.level.shouldLog(gameObjectAttacker))
+				Level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).putHighLevel(damage.type, true);
+
+		offsetY += 48;
+
+		if (remainingHealth > totalHealth)
+			remainingHealth = totalHealth;
+		if (remainingHealth < 0)
+			remainingHealth = 0;
+
+		if (attacker != null && thisIsAnAttack == true) {
+			if (this instanceof Actor) {
+				Actor actor = (Actor) this;
+				actor.attackedBy(attacker, action);
+			} else {
+				attackedBy(attacker, action);
+			}
+		}
+
+		return totalDamage;
+	}
+
 	// public enum DAMAGE_TYPE {
 	// SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, BLEEDING, HEALING
 	// };

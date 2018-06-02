@@ -39,6 +39,13 @@ public class Stat {
 		this.value = value;
 	}
 
+	public Stat(HIGH_LEVEL_STATS type, float value) {
+		super();
+
+		this.type = type;
+		this.value = value;
+	}
+
 	public static void init() {
 
 		GENERAL_STATS.add(HIGH_LEVEL_STATS.STRENGTH);

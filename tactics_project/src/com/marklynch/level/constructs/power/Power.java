@@ -11,6 +11,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.Texture;
@@ -49,7 +50,7 @@ public abstract class Power {
 		this.crimeSeverity = crimeSeverity;
 	}
 
-	public void cast(Actor source, Square targetSquare) {
+	public void cast(Actor source, Square targetSquare, Action action) {
 
 		ArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
 
