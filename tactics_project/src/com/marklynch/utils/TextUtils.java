@@ -10,9 +10,11 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.Power;
@@ -340,6 +342,18 @@ public class TextUtils {
 
 					offsetX += width;
 
+				}
+
+				for (Effect effect : power.effects) {
+					for (HIGH_LEVEL_STATS highLevelStat : HIGH_LEVEL_STATS.values()) {
+
+						if (effect.getEffectiveHighLevelStat(highLevelStat) != 0) {
+
+							// Newline
+							offsetY += 20;
+							offsetX = 0;
+						}
+					}
 				}
 
 				if (power.range != 0) {
@@ -940,6 +954,28 @@ public class TextUtils {
 
 					offsetX += width;
 
+				}
+
+				for (Effect effect : power.effects) {
+					for (HIGH_LEVEL_STATS highLevelStat : HIGH_LEVEL_STATS.values()) {
+
+						if (effect.getEffectiveHighLevelStat(highLevelStat) != 0) {
+
+							// Newline
+							offsetY += 20;
+							offsetX = 0;
+
+							String turnsString = "";
+							if (effect.totalTurns > 1) {
+								turnsString = " FOR " + effect.totalTurns + " TURNS";
+							}
+
+							Game.smallFont.drawText(Game.activeBatch,
+									"" + effect.getEffectiveHighLevelStat(highLevelStat) + " "
+											+ CharacterScreen.highLevelStatNamesShort.get(highLevelStat) + turnsString,
+									posX + offsetX, posY + offsetY);
+						}
+					}
 				}
 
 				if (power.range != 0) {

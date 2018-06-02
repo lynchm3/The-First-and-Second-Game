@@ -26,6 +26,12 @@ public abstract class Effect implements DamageDealer {
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
 
 	public Effect() {
+
+		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FRIENDLY_FIRE, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(0));
@@ -35,6 +41,16 @@ public abstract class Effect implements DamageDealer {
 		highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(0));
+
 	}
 
 	public abstract void activate();
