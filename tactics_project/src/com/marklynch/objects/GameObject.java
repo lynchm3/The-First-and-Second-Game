@@ -2011,9 +2011,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				// Stat.offensiveStatToDefensiveStatMap);
 
 				float resistance = (this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(statType)).value
-						/ 100);
+						* 0.01f);
 				float resistedDamage = damageDealer.getEffectiveHighLevelStat(statType) * resistance;
-				float dmg = damageDealer.getEffectiveHighLevelStat(statType) - resistedDamage;
+				float friendlyFireReduction = 0;
+				if (gameObjectAttacker != null && gameObjectAttacker.group != null
+						&& gameObjectAttacker.group.contains(this)) {
+					friendlyFireReduction = gameObjectAttacker.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.FRIENDLY_FIRE)
+							* 0.01f;
+				}
+				float dmg = damageDealer.getEffectiveHighLevelStat(statType) - resistedDamage - friendlyFireReduction;
 				doDamageAnimation(dmg, offsetY, statType, this.highLevelStats.get(statType).value);
 				remainingHealth -= dmg;
 				totalDamage += dmg;
@@ -2055,6 +2061,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	// };
 
 	public void doDamageAnimation(float healing, float offsetY, HIGH_LEVEL_STATS statType, float res) {
+
+		if (squareGameObjectIsOn == null)
+			return;
 
 		Color color = Color.WHITE;
 

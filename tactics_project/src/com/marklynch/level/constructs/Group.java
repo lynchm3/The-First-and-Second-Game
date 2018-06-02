@@ -144,8 +144,8 @@ public class Group {
 		return members.size();
 	}
 
-	public boolean contains(Actor actor) {
-		return members.contains(actor);
+	public boolean contains(GameObject gameObject) {
+		return members.contains(gameObject);
 	}
 
 	public boolean hasAttackers() {
