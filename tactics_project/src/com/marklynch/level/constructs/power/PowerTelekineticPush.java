@@ -80,7 +80,7 @@ public class PowerTelekineticPush extends Power {
 
 			GameObject obstacle = null;
 			if (!currentSquare.inventory.canShareSquare) {
-				obstacle = currentSquare.inventory.getGameObjectThatCantShareSquare1();
+				obstacle = currentSquare.inventory.gameObjectThatCantShareSquare;
 				int damageToObstacle = 0;
 				for (GameObject gameObject : (ArrayList<GameObject>) lastSquare.inventory.gameObjects.clone()) {
 

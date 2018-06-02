@@ -24,11 +24,11 @@ public class ActionTeleportOther extends Action {
 		}
 		legal = checkLegality();
 		sound = createSound();
-
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
