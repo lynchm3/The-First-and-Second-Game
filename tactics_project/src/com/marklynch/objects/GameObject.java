@@ -632,7 +632,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public void drawUI() {
 
 		// Draw POW
-		if (showPow == true) {
+		if (showPow == true && this.squareGameObjectIsOn.visibleToPlayer) {
 			float powPositionXInPixels = Math.abs(squareGameObjectIsOn.xInGridPixels);
 			float powPositionYInPixels = squareGameObjectIsOn.yInGridPixels;
 			if (primaryAnimation != null) {
