@@ -305,6 +305,96 @@ public class TextUtils {
 				}
 				offsetX += totalWidth;
 
+			} else if (content instanceof Power) {
+
+				Power power = (Power) content;
+				float textWidth = Game.smallFont.getWidth(power.name);
+				float textureWidth = 20;
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+
+				offsetX += Game.smallFont.getWidth(power.name) + 10;
+
+				// Image
+				if (power.image != null) {
+					offsetX += textureWidth;
+				}
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
+				// Description
+
+				String[] stringParts = power.description.split(splitRegex);
+
+				for (String stringPart : stringParts) {
+
+					float width = Game.smallFont.getWidth(stringPart);
+					if (offsetX + width > maxWidth && offsetX != 0) {
+						offsetY += 20;
+						offsetX = 0;
+					}
+
+					offsetX += width;
+
+				}
+
+				if (power.range != 0) {
+
+					// Newline
+					offsetY += 20;
+					offsetX = 0;
+				}
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
+				// AOE
+				if (power.areaOfEffect != null && power.areaOfEffect.length > 0) {
+					// Game.smallFont.drawText(Game.activeBatch, "AOE", posX + offsetX, posY +
+					// offsetY);
+					float lowestX = 0f;
+					float lowestY = 0f;
+					float highestX = 0f;
+					float highestY = 0f;
+					float width = 0f;
+					float height = 0f;
+
+					for (Point point : power.areaOfEffect) {
+						if (point.getX() < lowestX)
+							lowestX = point.getX();
+
+						if (point.getY() < lowestY)
+							lowestY = point.getY();
+
+						if (point.getX() > highestX)
+							highestX = point.getX();
+
+						if (point.getY() > highestY)
+							highestY = point.getY();
+					}
+
+					width = highestX - lowestX + 1f;
+					height = highestY - lowestY + 1f;
+
+					// NEW LINE(s)
+					offsetY += height * 20d;
+					offsetX = 0;
+
+				}
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
 			}
 		}
 
@@ -834,7 +924,6 @@ public class TextUtils {
 							offsetY += 20;
 							offsetX = 0;
 						} else {
-							return;
 						}
 					}
 

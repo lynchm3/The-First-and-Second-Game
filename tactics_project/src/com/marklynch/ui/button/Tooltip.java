@@ -45,6 +45,11 @@ public class Tooltip {
 
 	public void drawStaticUI() {
 
+		System.out.println("drawStaticUI");
+		System.out.println("drawStaticUI.backgroundColor - " + backgroundColor);
+		System.out.println("drawStaticUI.textColor - " + textColor);
+		System.out.println("drawStaticUI.alpha - " + alpha);
+
 		// if (1 == 1)
 		// return;
 		if (lastTooltipShown != this) {
@@ -97,7 +102,7 @@ public class Tooltip {
 		// textWidth
 
 		backgroundColor.a = alpha;
-		QuadUtils.drawQuad(backgroundColor, x1, y1, x2, y2);
+		QuadUtils.drawQuad(backgroundColor, x1, y1, x2, y2);// WAT
 
 		textColor.a = alpha;
 		TextUtils.printTextWithImages(this.text, x1, y1, wrapWidth, true, textColor, null);
