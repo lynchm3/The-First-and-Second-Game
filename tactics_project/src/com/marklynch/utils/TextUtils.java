@@ -492,6 +492,7 @@ public class TextUtils {
 		Game.activeBatch.setColor(1, 1, 1, 1);
 
 		for (Object content : contents) {
+			Game.activeBatch.setColor(defaultColor);
 
 			if (content instanceof NewLine) {
 				offsetY += 20;
@@ -883,6 +884,10 @@ public class TextUtils {
 			} else if (content instanceof Power) {
 
 				Power power = (Power) content;
+
+				Color color = defaultColor;
+				Game.activeBatch.setColor(color);
+
 				float textWidth = Game.smallFont.getWidth(power.name);
 				float textureWidth = 20;
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
@@ -904,9 +909,12 @@ public class TextUtils {
 				// Image
 				if (power.image != null) {
 					float x = posX + offsetX;
+					QuadUtils.drawQuad(Color.BLACK, x, posY + offsetY, x + 20, posY + offsetY + 20);
 					TextureUtils.drawTexture(power.image, x, posY + offsetY, x + 20, posY + offsetY + 20);
 					offsetX += textureWidth;
 				}
+
+				Game.activeBatch.setColor(defaultColor);
 
 				// Newline
 				offsetY += 20;
@@ -979,7 +987,7 @@ public class TextUtils {
 
 						float x = posX + offsetX + (point.getX() - lowestX) * 20f;
 						float y = posY + offsetY + (point.getY() - lowestY) * 20f;
-						TextureUtils.drawTexture(Square.WHITE_SQUARE, x, y, x + 20f, y + 20f);
+						TextureUtils.drawTexture(Square.RED_SQUARE, x, y, x + 20f, y + 20f);
 
 					}
 
@@ -988,6 +996,7 @@ public class TextUtils {
 					offsetX = 0;
 
 				}
+				Game.activeBatch.setColor(defaultColor);
 
 				if (power.passive) {
 					Game.smallFont.drawText(Game.activeBatch, "PASSIVE", posX + offsetX, posY + offsetY);
