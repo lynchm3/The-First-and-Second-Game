@@ -38,7 +38,7 @@ public class TemplatesTools {
 		Templates.BROOM.soundWhenHitting = 1f;
 		Templates.BROOM.soundDampening = 1f;
 		Templates.BROOM.stackable = false;
-		Templates.BROOM.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-50));
+		Templates.BROOM.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.BROOM.weight = 15;
 		Templates.BROOM.value = 12;
 		Templates.BROOM.anchorX = 55;
@@ -61,7 +61,7 @@ public class TemplatesTools {
 		Templates.PICKAXE.soundWhenHitting = 1f;
 		Templates.PICKAXE.soundDampening = 1f;
 		Templates.PICKAXE.stackable = false;
-		Templates.PICKAXE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-50));
+		Templates.PICKAXE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.PICKAXE.weight = 25f;
 		Templates.PICKAXE.value = 29;
 		Templates.PICKAXE.anchorX = 32;
@@ -78,7 +78,7 @@ public class TemplatesTools {
 		Templates.SHOVEL.soundWhenHitting = 1f;
 		Templates.SHOVEL.soundDampening = 1f;
 		Templates.SHOVEL.stackable = false;
-		Templates.SHOVEL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-50));
+		Templates.SHOVEL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.SHOVEL.weight = 28f;
 		Templates.SHOVEL.value = 32;
 		Templates.SHOVEL.anchorX = 63;
@@ -98,7 +98,7 @@ public class TemplatesTools {
 		Templates.FISHING_ROD.soundWhenHitting = 1f;
 		Templates.FISHING_ROD.soundDampening = 1f;
 		Templates.FISHING_ROD.stackable = false;
-		Templates.FISHING_ROD.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-60));
+		Templates.FISHING_ROD.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-60));
 		Templates.FISHING_ROD.weight = 23f;
 		Templates.FISHING_ROD.value = 31;
 		Templates.FISHING_ROD.anchorX = 55;
@@ -121,7 +121,7 @@ public class TemplatesTools {
 		Templates.HATCHET.soundWhenHitting = 1f;
 		Templates.HATCHET.soundDampening = 1f;
 		Templates.HATCHET.stackable = false;
-		Templates.HATCHET.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-50));
+		Templates.HATCHET.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.HATCHET.weight = 22f;
 		Templates.HATCHET.value = 32;
 		Templates.HATCHET.anchorX = 48;
@@ -166,7 +166,7 @@ public class TemplatesTools {
 		Templates.HOE.soundWhenHitting = 1f;
 		Templates.HOE.soundDampening = 1f;
 		Templates.HOE.stackable = false;
-		Templates.HOE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-50));
+		Templates.HOE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.HOE.weight = 31f;
 		Templates.HOE.value = 17;
 		Templates.HOE.anchorX = 61;
@@ -189,7 +189,7 @@ public class TemplatesTools {
 		Templates.SICKLE.soundWhenHitting = 1f;
 		Templates.SICKLE.soundDampening = 1f;
 		Templates.SICKLE.stackable = false;
-		Templates.SICKLE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-50));
+		Templates.SICKLE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.SICKLE.weight = 21f;
 		Templates.SICKLE.value = 22;
 		Templates.SICKLE.anchorX = 20;
@@ -212,7 +212,7 @@ public class TemplatesTools {
 		Templates.HAMMER.soundWhenHitting = 1f;
 		Templates.HAMMER.soundDampening = 1f;
 		Templates.HAMMER.stackable = false;
-		Templates.HAMMER.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-50));
+		Templates.HAMMER.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.HAMMER.weight = 23f;
 		Templates.HAMMER.value = 41;
 		Templates.HAMMER.anchorX = 31;
@@ -235,7 +235,7 @@ public class TemplatesTools {
 		Templates.BASKET.soundWhenHitting = 1f;
 		Templates.BASKET.soundDampening = 1f;
 		Templates.BASKET.stackable = false;
-		Templates.BASKET.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-80));
+		Templates.BASKET.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-80));
 		Templates.BASKET.weight = 9f;
 		Templates.BASKET.value = 13;
 		Templates.BASKET.anchorX = 65;

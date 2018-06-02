@@ -4,7 +4,6 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -95,7 +94,7 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.soundWhenHitting = 5f;
 		Templates.HUNTING_BOW.soundDampening = 1f;
 		Templates.HUNTING_BOW.stackable = false;
-		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-70));
+		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-70));
 		Templates.HUNTING_BOW.weight = 26f;
 		Templates.HUNTING_BOW.value = 54;
 		Templates.HUNTING_BOW.anchorX = 64;

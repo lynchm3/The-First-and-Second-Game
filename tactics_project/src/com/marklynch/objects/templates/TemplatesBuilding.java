@@ -31,15 +31,15 @@ public class TemplatesBuilding {
 		Templates.WALL.anchorY = 0;
 		Templates.WALL.templateId = GameObject.generateNewTemplateId();
 		Templates.WALL.flipYAxisInMirror = false;
-		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(100));
-		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(100));
-		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(100));
-		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(100));
-		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE, new Stat(100));
-		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, new Stat(100));
-		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(100));
-		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(100));
-		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
 		Templates.FENCE = new Fence();
 		Templates.FENCE.name = "Fence";

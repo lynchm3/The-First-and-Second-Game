@@ -22,6 +22,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
@@ -2294,6 +2295,9 @@ public class Actor extends GameObject {
 		if (legArmor != null && legArmor.highLevelStats.get(statType).value != 0) {
 			result += legArmor.highLevelStats.get(statType).value;
 		}
+
+		if (result < 0 && Stat.OFFENSIVE_STATS.contains(statType))
+			result = 0;
 
 		return result;
 	}

@@ -2000,6 +2000,16 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		for (HIGH_LEVEL_STATS statType : Stat.OFFENSIVE_STATS) {
 			if (damageDealer.getEffectiveHighLevelStat(statType) != 0) {
 
+				System.out.println("Stat.offensiveStatToDefensiveStatMap = " + Stat.offensiveStatToDefensiveStatMap);
+				System.out.println("Stat.Stat.offensiveStatToDefensiveStatMap.get(statType) = "
+						+ Stat.offensiveStatToDefensiveStatMap.get(statType));
+				// System.out.println("Stat.offensiveStatToDefensiveStatMap = " +
+				// Stat.offensiveStatToDefensiveStatMap);
+				// System.out.println("Stat.offensiveStatToDefensiveStatMap = " +
+				// Stat.offensiveStatToDefensiveStatMap);
+				// System.out.println("Stat.offensiveStatToDefensiveStatMap = " +
+				// Stat.offensiveStatToDefensiveStatMap);
+
 				float resistance = (this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(statType)).value
 						/ 100);
 				float resistedDamage = damageDealer.getEffectiveHighLevelStat(statType) * resistance;

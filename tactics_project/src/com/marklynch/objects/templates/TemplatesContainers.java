@@ -29,7 +29,7 @@ public class TemplatesContainers {
 		Templates.CHEST.anchorX = 0;
 		Templates.CHEST.anchorY = 0;
 		Templates.CHEST.templateId = GameObject.generateNewTemplateId();
-		Templates.CHEST.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(5));
+		Templates.CHEST.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(5));
 		Templates.CHEST.flipYAxisInMirror = false;
 
 		Templates.CRATE = new Storage();
@@ -47,13 +47,13 @@ public class TemplatesContainers {
 		Templates.CRATE.soundDampening = 1f;
 		Templates.CRATE.stackable = false;
 		Templates.CRATE.floats = true;
-		Templates.CRATE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-50));
+		Templates.CRATE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.CRATE.weight = 100f;
 		Templates.CRATE.value = 20;
 		Templates.CRATE.anchorX = 0;
 		Templates.CRATE.anchorY = 0;
 		Templates.CRATE.templateId = GameObject.generateNewTemplateId();
-		Templates.CRATE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(4));
+		Templates.CRATE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(4));
 		Templates.CRATE.flipYAxisInMirror = false;
 
 		Templates.LOST_AND_FOUND = new Storage();
@@ -63,13 +63,13 @@ public class TemplatesContainers {
 		Templates.LOST_AND_FOUND.chestOpenTexture = ResourceUtils.getGlobalImage("crate_open.png", true);
 		Templates.LOST_AND_FOUND.totalHealth = Templates.LOST_AND_FOUND.remainingHealth = 120;
 		Templates.LOST_AND_FOUND.stackable = false;
-		Templates.LOST_AND_FOUND.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-50));
+		Templates.LOST_AND_FOUND.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.LOST_AND_FOUND.weight = 160f;
 		Templates.LOST_AND_FOUND.value = 40;
 		Templates.LOST_AND_FOUND.anchorX = 0;
 		Templates.LOST_AND_FOUND.anchorY = 0;
 		Templates.LOST_AND_FOUND.templateId = GameObject.generateNewTemplateId();
-		Templates.LOST_AND_FOUND.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(6));
+		Templates.LOST_AND_FOUND.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(6));
 		Templates.LOST_AND_FOUND.flipYAxisInMirror = false;
 
 	}
