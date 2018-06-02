@@ -12,6 +12,7 @@ import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.journal.Objective;
+import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -786,9 +787,10 @@ public class TextUtils {
 				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
-			} else if (content instanceof Objective) {
-				Objective objective = (Objective) content;
-				float textWidth = Game.smallFont.getWidth(objective.text);
+			} else if (content instanceof Power) {
+
+				Power power = (Power) content;
+				float textWidth = Game.smallFont.getWidth(power.name);
 				float textureWidth = 20;
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
@@ -801,16 +803,69 @@ public class TextUtils {
 					linkIndex++;
 				}
 
-				// Text
-				Game.smallFont.drawText(Game.activeBatch, objective.text, posX + offsetX, posY + offsetY);
+				// Name
+				Game.smallFont.drawText(Game.activeBatch, power.name, posX + offsetX, posY + offsetY);
 
-				offsetX += textWidth;
+				offsetX += Game.smallFont.getWidth(power.name) + 10;
 
 				// Image
-				if (objective.texture != null) {
+				if (power.image != null) {
 					float x = posX + offsetX;
-					TextureUtils.drawTexture(objective.texture, x, posY + offsetY, x + 20, posY + offsetY + 20);
+					TextureUtils.drawTexture(power.image, x, posY + offsetY, x + 20, posY + offsetY + 20);
 					offsetX += textureWidth;
+				}
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
+				// Description
+
+				String[] stringParts = power.description.split(splitRegex);
+
+				for (String stringPart : stringParts) {
+
+					float width = Game.smallFont.getWidth(stringPart);
+					if (offsetX + width > maxWidth && offsetX != 0) {
+						if (wrap) {
+							offsetY += 20;
+							offsetX = 0;
+						} else {
+							return;
+						}
+					}
+
+					Game.smallFont.drawText(Game.activeBatch, stringPart, posX + offsetX, posY + offsetY);
+
+					offsetX += width;
+
+				}
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
+				if (power.range != 0) {
+					Game.smallFont.drawText(Game.activeBatch, "RANGE " + power.range, posX + offsetX, posY + offsetY);
+				}
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
+				if (power.areaOfEffect != null && power.areaOfEffect.length > 0) {
+					Game.smallFont.drawText(Game.activeBatch, "AOE", posX + offsetX, posY + offsetY);
+
+				}
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
+				if (power.passive) {
+					Game.smallFont.drawText(Game.activeBatch, "PASSIVE", posX + offsetX, posY + offsetY);
+				} else {
+					Game.smallFont.drawText(Game.activeBatch, "ACTIVE", posX + offsetX, posY + offsetY);
 				}
 
 			}

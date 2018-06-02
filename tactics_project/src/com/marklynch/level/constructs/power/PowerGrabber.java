@@ -21,6 +21,7 @@ public class PowerGrabber extends Power {
 				new Point[] { new Point(0, 0) }, 20, false, false, Crime.TYPE.NONE);
 		passive = true;
 		activateAtStartOfTurn = true;
+		description = "Automatically pick up items within 1 square that don't belong to anyone";
 	}
 
 	@Override

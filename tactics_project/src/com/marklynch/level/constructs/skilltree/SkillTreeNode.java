@@ -274,8 +274,8 @@ public class SkillTreeNode extends LevelButton {
 		public float x1, y1, x2, y2;
 
 		public SkillTreeNodePower(Power power, int x, int y) {
-			super(x, y, powerWidth, powerWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE,
-					power.description);
+			super(x, y, powerWidth, powerWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "");
+			setTooltipText(power);
 			this.power = power;
 			this.x = x;
 			this.y = y;
