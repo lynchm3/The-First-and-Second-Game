@@ -910,6 +910,7 @@ public class TextUtils {
 				if (power.image != null) {
 					float x = posX + offsetX;
 					QuadUtils.drawQuad(Color.BLACK, x, posY + offsetY, x + 20, posY + offsetY + 20);
+					TextureUtils.drawTexture(Square.WHITE_SQUARE, x, posY + offsetY, x + 20, posY + offsetY + 20);
 					TextureUtils.drawTexture(power.image, x, posY + offsetY, x + 20, posY + offsetY + 20);
 					offsetX += textureWidth;
 				}
@@ -956,7 +957,10 @@ public class TextUtils {
 				offsetX = 0;
 
 				// AOE
-				if (power.areaOfEffect != null && power.areaOfEffect.length > 0) {
+				if (power.areaOfEffect != null && power.areaOfEffect.length > 1) {
+					String aoe = "AOE";
+					int aoeTextWidth = Game.smallFont.getWidth(aoe);
+
 					// Game.smallFont.drawText(Game.activeBatch, "AOE", posX + offsetX, posY +
 					// offsetY);
 					float lowestX = 0f;
@@ -983,11 +987,14 @@ public class TextUtils {
 					width = highestX - lowestX + 1f;
 					height = highestY - lowestY + 1f;
 
+					Game.smallFont.drawText(Game.activeBatch, aoe, posX + offsetX, posY + offsetY);
+
 					for (Point point : power.areaOfEffect) {
 
-						float x = posX + offsetX + (point.getX() - lowestX) * 20f;
+						float x = posX + offsetX + aoeTextWidth + (point.getX() - lowestX) * 20f;
 						float y = posY + offsetY + (point.getY() - lowestY) * 20f;
-						TextureUtils.drawTexture(Square.RED_SQUARE, x, y, x + 20f, y + 20f);
+						QuadUtils.drawQuad(Color.BLACK, x, y, x + 20f, y + 20f);
+						TextureUtils.drawTexture(Square.WHITE_SQUARE, x, y, x + 20f, y + 20f);
 
 					}
 
