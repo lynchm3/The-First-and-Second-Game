@@ -1806,6 +1806,12 @@ public class Level {
 		}
 
 		if (characterScreen.showing) {
+
+			for (QuickBarSquare quickBarSquare : quickBar.quickBarSquares) {
+				if (quickBarSquare.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return quickBarSquare;
+			}
+
 			for (Button button : CharacterScreen.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
@@ -1814,10 +1820,20 @@ public class Level {
 		}
 
 		if (skillTree.showing) {
+
+			for (QuickBarSquare quickBarSquare : quickBar.quickBarSquares) {
+				if (quickBarSquare.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return quickBarSquare;
+			}
 			return skillTree.getButtonFromMousePosition(mouseX, mouseY);
 		}
 
 		if (activePowerScreen.showing) {
+
+			for (QuickBarSquare quickBarSquare : quickBar.quickBarSquares) {
+				if (quickBarSquare.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return quickBarSquare;
+			}
 			for (Button button : ActivePowerScreen.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
