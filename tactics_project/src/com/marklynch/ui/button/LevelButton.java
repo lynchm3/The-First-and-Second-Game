@@ -29,7 +29,7 @@ public class LevelButton extends Button {
 		this.textParts = new Object[] { new StringWithColor(text, textColor) };
 
 		if (tooltipText != null)
-			this.tooltip = new Tooltip(this, tooltipText);
+			this.tooltip = new Tooltip(false, tooltipText);
 
 		realX = x;
 		if (this.xFromLeft == false)
@@ -111,14 +111,14 @@ public class LevelButton extends Button {
 	public void setTooltipText(Object... tooltipText) {
 
 		if (tooltipText != null)
-			this.tooltip = new Tooltip(this, tooltipText);
+			this.tooltip = new Tooltip(false, tooltipText);
 
 	}
 
 	public void setTooltipText(ArrayList<Object> tooltipText) {
 
 		if (tooltipText != null)
-			this.tooltip = new Tooltip(this, tooltipText);
+			this.tooltip = new Tooltip(tooltipText);
 
 	}
 

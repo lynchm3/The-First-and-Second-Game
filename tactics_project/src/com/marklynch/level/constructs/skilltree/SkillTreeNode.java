@@ -230,7 +230,7 @@ public class SkillTreeNode extends LevelButton {
 		public float x1, y1, x2, y2;
 
 		public SkillTreeNodeStat(Stat stat, int x, int y) {
-			super(x, y, statWidth, statWidth, null, null, "STAT", true, true, Color.TRANSPARENT, Color.WHITE, "BUTTON");
+			super(x, y, statWidth, statWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "STAT");
 			this.stat = stat;
 			this.x = x;
 			this.y = y;
@@ -274,8 +274,8 @@ public class SkillTreeNode extends LevelButton {
 		public float x1, y1, x2, y2;
 
 		public SkillTreeNodePower(Power power, int x, int y) {
-			super(x, y, powerWidth, powerWidth, null, null, power.description, true, true, Color.TRANSPARENT,
-					Color.WHITE, "BUTTON");
+			super(x, y, powerWidth, powerWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE,
+					power.description);
 			this.power = power;
 			this.x = x;
 			this.y = y;
