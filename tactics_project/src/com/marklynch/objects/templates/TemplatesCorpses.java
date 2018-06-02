@@ -3,7 +3,7 @@ package com.marklynch.objects.templates;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.GameObject;
@@ -30,7 +30,7 @@ public class TemplatesCorpses {
 		Templates.CARCASS.anchorX = 0;
 		Templates.CARCASS.anchorY = 0;
 		Templates.CARCASS.templateId = GameObject.generateNewTemplateId();
-		Templates.CARCASS.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(3));
+		Templates.CARCASS.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
 
 		Templates.CORPSE = new Corpse();
 		Templates.CORPSE.name = "Corpse";
@@ -50,7 +50,7 @@ public class TemplatesCorpses {
 		Templates.CORPSE.anchorX = 0;
 		Templates.CORPSE.anchorY = 0;
 		Templates.CORPSE.templateId = GameObject.generateNewTemplateId();
-		Templates.CORPSE.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(3));
+		Templates.CORPSE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
 
 		Templates.ASH = new GameObject();
 		Templates.ASH.name = "Ash";
@@ -65,7 +65,7 @@ public class TemplatesCorpses {
 		Templates.ASH.soundWhenHitting = 1f;
 		Templates.ASH.soundDampening = 1f;
 		Templates.ASH.stackable = true;
-		Templates.ASH.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(100));
+		Templates.ASH.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(100));
 		Templates.ASH.weight = 2f;
 		Templates.ASH.value = 3;
 		Templates.ASH.anchorX = 0;
@@ -85,7 +85,7 @@ public class TemplatesCorpses {
 		Templates.WOOD_CHIPS.soundWhenHit = 1f;
 		Templates.WOOD_CHIPS.soundWhenHitting = 1f;
 		Templates.WOOD_CHIPS.soundDampening = 1f;
-		Templates.WOOD_CHIPS.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-100));
+		Templates.WOOD_CHIPS.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-100));
 		Templates.WOOD_CHIPS.stackable = true;
 		Templates.WOOD_CHIPS.weight = 12f;
 		Templates.WOOD_CHIPS.value = 6;

@@ -8,7 +8,6 @@ import java.util.HashMap;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.objects.DamageDealer;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.Texture;
@@ -25,18 +24,17 @@ public abstract class Effect implements DamageDealer {
 	public Texture imageTexture;
 
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
-	public HashMap<OFFENSIVE_STATS, Stat> offensiveStats = new HashMap<OFFENSIVE_STATS, Stat>();
 
 	public Effect() {
-		offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(0));
 	}
 
 	public abstract void activate();
@@ -83,15 +81,15 @@ public abstract class Effect implements DamageDealer {
 	}
 
 	@Override
-	public float getEffectiveOffensiveStat(OFFENSIVE_STATS statType) {
-		float result = offensiveStats.get(statType).value;
+	public float getEffectiveHighLevelStat(HIGH_LEVEL_STATS statType) {
+		float result = highLevelStats.get(statType).value;
 		return result;
 	}
 
 	@Override
-	public ArrayList<Object> getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS statType) {
+	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
 		ArrayList<Object> result = new ArrayList<Object>();
-		result.add(effectName + " " + offensiveStats.get(statType).value);
+		result.add(effectName + " " + highLevelStats.get(statType).value);
 		return result;
 	}
 

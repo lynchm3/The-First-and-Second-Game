@@ -3,7 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.objects.GameObject;
@@ -30,7 +30,7 @@ public class ActionCastBurn extends Action {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		} else {
-			actionName = ACTION_NAME + " (" + (100 - target.defensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value)
+			actionName = ACTION_NAME + " (" + (100 - target.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value)
 					+ "%)";
 		}
 		legal = checkLegality();
@@ -49,7 +49,7 @@ public class ActionCastBurn extends Action {
 
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", target }));
-		if (Math.random() * 100 > target.defensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value) {
+		if (Math.random() * 100 > target.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
 			target.removeWetEffect();
 			target.addEffect(new EffectBurning(performer, target, 5));
 

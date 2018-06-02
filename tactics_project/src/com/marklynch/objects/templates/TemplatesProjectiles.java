@@ -3,7 +3,7 @@ package com.marklynch.objects.templates;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 
@@ -32,7 +32,7 @@ public class TemplatesProjectiles {
 		Templates.ARROW.anchorX = 8;
 		Templates.ARROW.anchorY = 16;
 		Templates.ARROW.templateId = GameObject.generateNewTemplateId();
-		Templates.ARROW.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(5));
+		Templates.ARROW.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(5));
 		Templates.ARROW.flipYAxisInMirror = false;
 
 		Templates.FIRE_BALL = new Arrow();
@@ -53,7 +53,7 @@ public class TemplatesProjectiles {
 		Templates.FIRE_BALL.anchorX = 0;
 		Templates.FIRE_BALL.anchorY = 0;
 		Templates.FIRE_BALL.templateId = GameObject.generateNewTemplateId();
-		Templates.FIRE_BALL.offensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(5));
+		Templates.FIRE_BALL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(5));
 		Templates.FIRE_BALL.flipYAxisInMirror = false;
 
 		Templates.WATER_BALL = new Arrow();
@@ -74,7 +74,7 @@ public class TemplatesProjectiles {
 		Templates.WATER_BALL.anchorX = 0;
 		Templates.WATER_BALL.anchorY = 0;
 		Templates.WATER_BALL.templateId = GameObject.generateNewTemplateId();
-		Templates.WATER_BALL.offensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE,
+		Templates.WATER_BALL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE,
 				new Stat(5));
 		Templates.WATER_BALL.flipYAxisInMirror = false;
 	}

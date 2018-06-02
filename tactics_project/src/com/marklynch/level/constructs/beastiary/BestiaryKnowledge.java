@@ -3,7 +3,6 @@ package com.marklynch.level.constructs.beastiary;
 import java.util.HashMap;
 
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 
 public class BestiaryKnowledge {
 
@@ -18,8 +17,6 @@ public class BestiaryKnowledge {
 	public boolean group;
 
 	public HashMap<HIGH_LEVEL_STATS, Boolean> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Boolean>();
-	public HashMap<OFFENSIVE_STATS, Boolean> offensiveStats = new HashMap<OFFENSIVE_STATS, Boolean>();
-	public HashMap<OFFENSIVE_STATS, Boolean> defensiveStats = new HashMap<OFFENSIVE_STATS, Boolean>();
 
 	public boolean range;
 
@@ -34,24 +31,8 @@ public class BestiaryKnowledge {
 		highLevelStats.put(statType, value);
 	}
 
-	public void putOffensive(OFFENSIVE_STATS statType, boolean value) {
-		offensiveStats.put(statType, value);
-	}
-
-	public void putDefensive(OFFENSIVE_STATS statType, boolean value) {
-		defensiveStats.put(statType, value);
-	}
-
 	public boolean getHighLevel(HIGH_LEVEL_STATS statType) {
 		return highLevelStats.get(statType);
-	}
-
-	public boolean getOffensive(OFFENSIVE_STATS statType) {
-		return offensiveStats.get(statType);
-	}
-
-	public boolean getDefensive(OFFENSIVE_STATS statType) {
-		return defensiveStats.get(statType);
 	}
 
 }

@@ -4,7 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -19,7 +19,7 @@ public class EffectHeal extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("action_heal.png", false);
-		offensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(5));
+		highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(5));
 	}
 
 	public EffectHeal(int totalTurns) {

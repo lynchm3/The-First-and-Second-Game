@@ -5,7 +5,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.objects.GameObject;
@@ -37,7 +37,7 @@ public class AnimationDamageText extends Animation {
 	Color color;
 
 	public AnimationDamageText(int damage, GameObject targetGameObject, float originX, float originY, float speed,
-			OFFENSIVE_STATS statType, Color color) {
+			HIGH_LEVEL_STATS statType, Color color) {
 
 		this.targetGameObject = targetGameObject;
 
@@ -53,7 +53,7 @@ public class AnimationDamageText extends Animation {
 
 		this.durationToReach = 1000f;
 
-		texture = CharacterScreen.offensiveStatImages.get(statType);
+		texture = CharacterScreen.highLevelStatImages.get(statType);
 
 		blockAI = false;
 
@@ -110,8 +110,8 @@ public class AnimationDamageText extends Animation {
 		float drawPositionY = (Game.halfWindowHeight) + (Game.zoom * inverseSize
 				* (y + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
 
-		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null,
-				Color.WHITE, damageStringWithColor);
+		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null, Color.WHITE,
+				damageStringWithColor);
 		TextureUtils.drawTexture(texture, 1, drawPositionX - 16, drawPositionY, drawPositionX, drawPositionY + 16);
 
 		Game.activeBatch.flush();

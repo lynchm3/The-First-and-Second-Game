@@ -5,7 +5,6 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.power.Power;
@@ -358,8 +357,8 @@ public class PinWindow implements Draggable {
 					drawPositionY + statsY + offsetY + 20);
 			if (bestiaryKnowledge.getHighLevel(statType)) {
 				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
-						false, null, Color.WHITE,
-						CharacterScreen.highLevelStatNamesShort.get(statType), "" + actor.highLevelStats.get(statType).value);
+						false, null, Color.WHITE, CharacterScreen.highLevelStatNamesShort.get(statType),
+						"" + actor.highLevelStats.get(statType).value);
 			} else {
 				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
 						false, null, Color.WHITE, CharacterScreen.highLevelStatNamesShort.get(statType), unknownStats);
@@ -374,18 +373,19 @@ public class PinWindow implements Draggable {
 
 		offsetY = 60;
 
-		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
+		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 
-			TextureUtils.drawTexture(CharacterScreen.defensiveStatImages.get(statType),
+			TextureUtils.drawTexture(CharacterScreen.highLevelStatImages.get(statType),
 					drawPositionX + resistancesImageX, drawPositionY + resistancesY + offsetY,
 					drawPositionX + resistancesImageX + 20, drawPositionY + resistancesY + offsetY + 20);
-			if (bestiaryKnowledge.getDefensive(statType)) {
+			if (bestiaryKnowledge.getHighLevel(statType)) {
 				TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + offsetY,
-						width - 40, false, null, Color.WHITE,
-						CharacterScreen.offensiveStatNamesShort.get(statType), "" + actor.defensiveStats.get(statType).value);
+						width - 40, false, null, Color.WHITE, CharacterScreen.highLevelStatNamesShort.get(statType),
+						"" + actor.highLevelStats.get(statType).value);
 			} else {
 				TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + offsetY,
-						width - 40, false, null, Color.WHITE, CharacterScreen.highLevelStatNamesShort.get(statType), unknownStats);
+						width - 40, false, null, Color.WHITE, CharacterScreen.highLevelStatNamesShort.get(statType),
+						unknownStats);
 
 			}
 			offsetY += 30;
@@ -405,7 +405,8 @@ public class PinWindow implements Draggable {
 						drawPositionY + powersListY + powersDrawn * 30, drawPositionX + powersImageX + 20,
 						drawPositionY + powersListY + powersDrawn * 30 + 20);
 				TextUtils.printTextWithImages(drawPositionX + powersTextX,
-						drawPositionY + powersListY + powersDrawn * 30, width - 40, false, null, Color.WHITE, power.name);
+						drawPositionY + powersListY + powersDrawn * 30, width - 40, false, null, Color.WHITE,
+						power.name);
 				powersDrawn++;
 			}
 		} else {
@@ -486,6 +487,6 @@ public class PinWindow implements Draggable {
 	@Override
 	public void dragDropped() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

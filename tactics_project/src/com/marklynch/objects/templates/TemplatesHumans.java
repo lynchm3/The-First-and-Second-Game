@@ -8,7 +8,7 @@ import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.quest.caveoftheblind.AIRoutineForMort;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
@@ -34,7 +34,7 @@ public class TemplatesHumans {
 		Templates.PLAYER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
 		Templates.PLAYER.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
 		Templates.PLAYER.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
-		Templates.PLAYER.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(3));
+		Templates.PLAYER.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
 		// Templates.PLAYER.imageTexturePath = "hero.png";
 		// Templates.PLAYER.imageTexture =
 		// getGlobalImage(Templates.PLAYER.imageTexturePath, true);
@@ -50,7 +50,7 @@ public class TemplatesHumans {
 		Templates.HUNTER = new Human();
 		Templates.HUNTER.title = "Hunter";
 		Templates.HUNTER.level = 1;
-		Templates.HUNTER.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(3));
+		Templates.HUNTER.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
 		Templates.HUNTER.totalHealth = Templates.HUNTER.remainingHealth = 10;
 		Templates.HUNTER.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.HUNTER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -71,7 +71,7 @@ public class TemplatesHumans {
 		Templates.GUARD = new Guard();
 		Templates.GUARD.title = "Guard";
 		Templates.GUARD.level = 10;
-		Templates.GUARD.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(5));
+		Templates.GUARD.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(5));
 		Templates.GUARD.totalHealth = Templates.GUARD.remainingHealth = 10;
 		Templates.GUARD.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(20));
 		Templates.GUARD.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(11));
@@ -89,7 +89,7 @@ public class TemplatesHumans {
 		Templates.FISHERMAN = new Human();
 		Templates.FISHERMAN.title = "Fisherman";
 		Templates.FISHERMAN.level = 10;
-		Templates.FISHERMAN.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(3));
+		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
 		Templates.FISHERMAN.totalHealth = Templates.FISHERMAN.remainingHealth = 10;
 		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(6));
 		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(4));
@@ -113,7 +113,7 @@ public class TemplatesHumans {
 		Templates.MINER = new Human();
 		Templates.MINER.title = "Miner";
 		Templates.MINER.level = 1;
-		Templates.MINER.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(3));
+		Templates.MINER.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
 		Templates.MINER.totalHealth = Templates.MINER.remainingHealth = 10;
 		Templates.MINER.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(13));
 		Templates.MINER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(5));
@@ -134,7 +134,7 @@ public class TemplatesHumans {
 		Templates.THIEF = new Thief();
 		Templates.THIEF.title = "Thief";
 		Templates.THIEF.level = 1;
-		Templates.THIEF.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(2));
+		Templates.THIEF.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(2));
 		Templates.THIEF.totalHealth = Templates.THIEF.remainingHealth = 10;
 		Templates.THIEF.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.THIEF.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -156,7 +156,7 @@ public class TemplatesHumans {
 		Templates.FARMER = new Human();
 		Templates.FARMER.title = "Farmer";
 		Templates.FARMER.level = 1;
-		Templates.FARMER.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(3));
+		Templates.FARMER.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
 		Templates.FARMER.totalHealth = Templates.FARMER.remainingHealth = 10;
 		Templates.FARMER.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.FARMER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -182,7 +182,7 @@ public class TemplatesHumans {
 		Templates.MORT = new Mort();
 		Templates.MORT.title = "Mort";
 		Templates.MORT.level = 1;
-		Templates.MORT.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(2));
+		Templates.MORT.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(2));
 		Templates.MORT.totalHealth = Templates.MORT.remainingHealth = 10;
 		Templates.MORT.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.MORT.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -203,7 +203,7 @@ public class TemplatesHumans {
 		Templates.TRADER = new Trader();
 		Templates.TRADER.title = "Trader";
 		Templates.TRADER.level = 1;
-		Templates.TRADER.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(2));
+		Templates.TRADER.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(2));
 		Templates.TRADER.totalHealth = Templates.TRADER.remainingHealth = 10;
 		Templates.TRADER.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.TRADER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));

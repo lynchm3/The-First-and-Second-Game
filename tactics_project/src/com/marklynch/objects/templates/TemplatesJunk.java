@@ -3,7 +3,7 @@ package com.marklynch.objects.templates;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 
@@ -67,7 +67,7 @@ public class TemplatesJunk {
 		Templates.WOOD.anchorX = 0;
 		Templates.WOOD.anchorY = 0;
 		Templates.WOOD.templateId = GameObject.generateNewTemplateId();
-		Templates.WOOD.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(4));
+		Templates.WOOD.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(4));
 
 		Templates.ORE = new Junk();
 		Templates.ORE.name = "Ore";
@@ -87,7 +87,7 @@ public class TemplatesJunk {
 		Templates.ORE.anchorX = 0;
 		Templates.ORE.anchorY = 0;
 		Templates.ORE.templateId = GameObject.generateNewTemplateId();
-		Templates.ORE.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(6));
+		Templates.ORE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(6));
 
 	}
 

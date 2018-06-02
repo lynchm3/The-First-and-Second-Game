@@ -4,7 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -17,8 +17,8 @@ public class TemplatesWeapons {
 		// Weapons
 		Templates.KATANA = new Weapon();
 		Templates.KATANA.name = "Katana";
-		Templates.KATANA.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(11));
-		Templates.KATANA.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(3));
+		Templates.KATANA.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(11));
+		Templates.KATANA.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(3));
 		Templates.KATANA.minRange = 1;
 		Templates.KATANA.maxRange = 1;
 		Templates.KATANA.imageTexturePath = "katana.png";
@@ -40,8 +40,8 @@ public class TemplatesWeapons {
 
 		Templates.SWORD = new Weapon();
 		Templates.SWORD.name = "Sword";
-		Templates.SWORD.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(9));
-		Templates.SWORD.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(3));
+		Templates.SWORD.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(9));
+		Templates.SWORD.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(3));
 		Templates.SWORD.minRange = 1;
 		Templates.SWORD.maxRange = 1;
 		Templates.SWORD.imageTexturePath = "sword.png";
@@ -58,7 +58,7 @@ public class TemplatesWeapons {
 
 		Templates.CLEAVER = new Weapon();
 		Templates.CLEAVER.name = "Cleaver";
-		Templates.CLEAVER.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(7));
+		Templates.CLEAVER.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(7));
 		Templates.CLEAVER.minRange = 1;
 		Templates.CLEAVER.maxRange = 1;
 		Templates.CLEAVER.imageTexturePath = "cleaver.png";
@@ -80,7 +80,7 @@ public class TemplatesWeapons {
 
 		Templates.HUNTING_BOW = new Weapon();
 		Templates.HUNTING_BOW.name = "Hunting Bow";
-		Templates.HUNTING_BOW.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(5));
+		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(5));
 		Templates.HUNTING_BOW.minRange = 1;
 		Templates.HUNTING_BOW.maxRange = 9;
 		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -95,12 +95,12 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.soundWhenHitting = 5f;
 		Templates.HUNTING_BOW.soundDampening = 1f;
 		Templates.HUNTING_BOW.stackable = false;
-		Templates.HUNTING_BOW.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(-70));
+		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(-70));
 		Templates.HUNTING_BOW.weight = 26f;
 		Templates.HUNTING_BOW.value = 54;
 		Templates.HUNTING_BOW.anchorX = 64;
 		Templates.HUNTING_BOW.anchorY = 112;
-		Templates.HUNTING_BOW.defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(1));
+		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(1));
 		;
 		Templates.HUNTING_BOW.templateId = GameObject.generateNewTemplateId();
 	}

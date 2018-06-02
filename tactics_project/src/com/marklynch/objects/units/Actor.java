@@ -23,7 +23,6 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
@@ -2319,125 +2318,6 @@ public class Actor extends GameObject {
 		if (legArmor != null && legArmor.highLevelStats.get(statType).value != 0) {
 			result.add(TextUtils.NewLine.NEW_LINE);
 			result.addAll(legArmor.getEffectiveHighLevelStatTooltip(statType));
-		}
-		return result;
-	}
-
-	@Override
-	public float getEffectiveOffensiveStat(OFFENSIVE_STATS statType) {
-		// Stat stat = highLevelStats.get(statType);
-		// return stat.value;
-		float result = 0;
-
-		if (equipped == null)
-			result = offensiveStats.get(statType).value;
-
-		if (equipped != null && equipped.getEffectiveOffensiveStat(statType) != 0) {
-			result += equipped.getEffectiveOffensiveStat(statType);
-		}
-		if (helmet != null && helmet.getEffectiveOffensiveStat(statType) != 0) {
-			result += helmet.getEffectiveOffensiveStat(statType);
-		}
-		if (bodyArmor != null && bodyArmor.getEffectiveOffensiveStat(statType) != 0) {
-			result += bodyArmor.getEffectiveOffensiveStat(statType);
-		}
-		if (legArmor != null && legArmor.getEffectiveOffensiveStat(statType) != 0) {
-			result += legArmor.getEffectiveOffensiveStat(statType);
-		}
-
-		return result;
-	}
-
-	@Override
-	public ArrayList<Object> getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS statType) {
-		ArrayList<Object> result = new ArrayList<Object>();
-
-		if (equipped == null && offensiveStats.get(statType).value != 0)
-			result.add("Unarmed " + offensiveStats.get(statType).value);
-
-		if (equipped != null && equipped.offensiveStats.get(statType).value != 0) {
-			if (result.size() > 0)
-				result.add(TextUtils.NewLine.NEW_LINE);
-			result.addAll(equipped.getEffectiveOffensiveStatTooltip(statType));
-		}
-		if (helmet != null && helmet.offensiveStats.get(statType).value != 0) {
-			if (result.size() > 0)
-				result.add(TextUtils.NewLine.NEW_LINE);
-			result.addAll(helmet.getEffectiveOffensiveStatTooltip(statType));
-		}
-		if (bodyArmor != null && bodyArmor.offensiveStats.get(statType).value != 0) {
-			if (result.size() > 0)
-				result.add(TextUtils.NewLine.NEW_LINE);
-			result.addAll(bodyArmor.getEffectiveOffensiveStatTooltip(statType));
-		}
-		if (legArmor != null && legArmor.offensiveStats.get(statType).value != 0) {
-			if (result.size() > 0)
-				result.add(TextUtils.NewLine.NEW_LINE);
-			result.addAll(legArmor.getEffectiveOffensiveStatTooltip(statType));
-		}
-
-		if (result.size() == 0) {
-			result.add("0");
-		}
-
-		return result;
-	}
-
-	@Override
-	public float getEffectiveDefensiveStat(OFFENSIVE_STATS statType) {
-		// Stat stat = highLevelStats.get(statType);
-		// return stat.value;
-		float result = 0;
-
-		if (equipped == null)
-			result = defensiveStats.get(statType).value;
-
-		if (equipped != null && equipped.getEffectiveDefensiveStat(statType) != 0) {
-			result += equipped.getEffectiveDefensiveStat(statType);
-		}
-		if (helmet != null && helmet.getEffectiveDefensiveStat(statType) != 0) {
-			result += helmet.getEffectiveDefensiveStat(statType);
-		}
-		if (bodyArmor != null && bodyArmor.getEffectiveDefensiveStat(statType) != 0) {
-			result += bodyArmor.getEffectiveDefensiveStat(statType);
-		}
-		if (legArmor != null && legArmor.getEffectiveDefensiveStat(statType) != 0) {
-			result += legArmor.getEffectiveDefensiveStat(statType);
-		}
-
-		return result;
-	}
-
-	@Override
-	public ArrayList<Object> getEffectiveDefensiveStatTooltip(OFFENSIVE_STATS statType) {
-		ArrayList<Object> result = new ArrayList<Object>();
-
-		if (equipped == null && defensiveStats.get(statType).value != 0)
-			result.add("Unarmed " + defensiveStats.get(statType).value);
-
-		if (equipped != null && equipped.defensiveStats.get(statType).value != 0) {
-			if (result.size() > 0)
-				result.add(TextUtils.NewLine.NEW_LINE);
-			result.addAll(equipped.getEffectiveDefensiveStatTooltip(statType));
-		}
-		if (helmet != null && helmet.defensiveStats.get(statType).value != 0) {
-			if (result.size() > 0)
-				result.add(TextUtils.NewLine.NEW_LINE);
-			result.addAll(helmet.getEffectiveDefensiveStatTooltip(statType));
-		}
-		if (bodyArmor != null && bodyArmor.defensiveStats.get(statType).value != 0) {
-			if (result.size() > 0)
-				result.add(TextUtils.NewLine.NEW_LINE);
-			result.addAll(bodyArmor.getEffectiveDefensiveStatTooltip(statType));
-		}
-		if (legArmor != null && legArmor.defensiveStats.get(statType).value != 0) {
-			if (result.size() > 0)
-				result.add(TextUtils.NewLine.NEW_LINE);
-			result.addAll(legArmor.getEffectiveDefensiveStatTooltip(statType));
-		}
-
-		if (result.size() == 0) {
-			result.add("0");
 		}
 		return result;
 	}

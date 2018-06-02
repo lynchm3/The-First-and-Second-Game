@@ -8,7 +8,7 @@ import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
 import com.marklynch.ai.routines.AIRoutineForPig;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.Fish;
@@ -25,7 +25,7 @@ public class TemplatesAnimals {
 		Templates.PIG = new Pig();
 		Templates.PIG.title = "Pig";
 		Templates.PIG.level = 1;
-		Templates.PIG.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(4));
+		Templates.PIG.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(4));
 		Templates.PIG.totalHealth = Templates.PIG.remainingHealth = 100;
 		Templates.PIG.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.PIG.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -46,7 +46,7 @@ public class TemplatesAnimals {
 		Templates.RAT = new TinyNeutralWildAnimal();
 		Templates.RAT.title = "Rat";
 		Templates.RAT.level = 1;
-		Templates.RAT.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(2));
+		Templates.RAT.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(2));
 		Templates.RAT.totalHealth = Templates.RAT.remainingHealth = 5;
 		Templates.RAT.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.RAT.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -68,7 +68,7 @@ public class TemplatesAnimals {
 		Templates.RABBIT = new HerbivoreWildAnimal();
 		Templates.RABBIT.title = "Rabbit";
 		Templates.RABBIT.level = 1;
-		Templates.RABBIT.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(1));
+		Templates.RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(1));
 		Templates.RABBIT.totalHealth = Templates.RABBIT.remainingHealth = 10;
 		Templates.RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -88,7 +88,7 @@ public class TemplatesAnimals {
 		Templates.BABY_RABBIT = new TinyNeutralWildAnimal();
 		Templates.BABY_RABBIT.title = "Baby Rabbit";
 		Templates.BABY_RABBIT.level = 1;
-		Templates.BABY_RABBIT.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE,
+		Templates.BABY_RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE,
 				new Stat(1));
 		Templates.BABY_RABBIT.totalHealth = Templates.BABY_RABBIT.remainingHealth = 5;
 		Templates.BABY_RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
@@ -112,7 +112,7 @@ public class TemplatesAnimals {
 		Templates.FOX = new CarnivoreNeutralWildAnimal();
 		Templates.FOX.title = "Fox";
 		Templates.FOX.level = 1;
-		Templates.FOX.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(6));
+		Templates.FOX.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(6));
 		Templates.FOX.totalHealth = Templates.FOX.remainingHealth = 15;
 		Templates.FOX.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.FOX.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -132,7 +132,7 @@ public class TemplatesAnimals {
 		Templates.WOLF = new CarnivoreNeutralWildAnimal();
 		Templates.WOLF.title = "Wolf";
 		Templates.WOLF.level = 1;
-		Templates.WOLF.offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(10));
+		Templates.WOLF.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(10));
 		Templates.WOLF.totalHealth = Templates.WOLF.remainingHealth = 20;
 		Templates.WOLF.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.WOLF.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -153,7 +153,7 @@ public class TemplatesAnimals {
 		Templates.FISH = new Fish();
 		Templates.FISH.title = "Fish";
 		Templates.FISH.level = 1;
-		Templates.FISH.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(1));
+		Templates.FISH.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(1));
 		Templates.FISH.totalHealth = Templates.FISH.remainingHealth = 5;
 		Templates.FISH.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(1));
 		Templates.FISH.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(1));
@@ -177,7 +177,7 @@ public class TemplatesAnimals {
 		Templates.TURTLE = new Fish();
 		Templates.TURTLE.title = "Turtle";
 		Templates.TURTLE.level = 1;
-		Templates.TURTLE.offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(2));
+		Templates.TURTLE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(2));
 		Templates.TURTLE.totalHealth = Templates.TURTLE.remainingHealth = 5;
 		Templates.TURTLE.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(1));
 		Templates.TURTLE.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(1));

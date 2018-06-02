@@ -5,7 +5,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.quest.caveoftheblind.AIRoutineForBlind;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.objects.GameObject;
@@ -20,7 +20,7 @@ public class TemplatesMonsters {
 		Templates.BLIND = new Blind();
 		Templates.BLIND.title = "Blind";
 		Templates.BLIND.level = 1;
-		Templates.BLIND.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(6));
+		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(6));
 		Templates.BLIND.totalHealth = Templates.BLIND.remainingHealth = 100;
 		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
@@ -39,7 +39,7 @@ public class TemplatesMonsters {
 
 		Templates.ROCK_GOLEM = new RockGolem();
 		Templates.ROCK_GOLEM.title = "Suspicious Boulder";
-		Templates.ROCK_GOLEM.offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE,
+		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE,
 				new Stat(20));
 		Templates.ROCK_GOLEM.level = 1;
 		Templates.ROCK_GOLEM.totalHealth = Templates.ROCK_GOLEM.remainingHealth = 300;

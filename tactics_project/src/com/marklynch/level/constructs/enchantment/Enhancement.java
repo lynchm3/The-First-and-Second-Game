@@ -6,15 +6,12 @@ import java.util.HashMap;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.utils.Texture;
 
 public class Enhancement {
 
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
-	public HashMap<OFFENSIVE_STATS, Stat> offensiveStats = new HashMap<OFFENSIVE_STATS, Stat>();
-	public HashMap<OFFENSIVE_STATS, Stat> defensiveStats = new HashMap<OFFENSIVE_STATS, Stat>();
 
 	public String enhancementName = "Enhancement";
 	public Texture imageTexture;
@@ -36,26 +33,27 @@ public class Enhancement {
 		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FRIENDLY_FIRE, new Stat(0));
 
-		offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(0));
 
-		defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(0));
 	}
 
 	public Enhancement makeCopy() {
@@ -66,12 +64,12 @@ public class Enhancement {
 			enhancement.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
 		}
 
-		for (OFFENSIVE_STATS statKey : this.offensiveStats.keySet()) {
-			enhancement.offensiveStats.put(statKey, this.offensiveStats.get(statKey).makeCopy());
+		for (HIGH_LEVEL_STATS statKey : this.highLevelStats.keySet()) {
+			enhancement.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
 		}
 
-		for (OFFENSIVE_STATS statKey : this.defensiveStats.keySet()) {
-			enhancement.defensiveStats.put(statKey, this.defensiveStats.get(statKey).makeCopy());
+		for (HIGH_LEVEL_STATS statKey : this.highLevelStats.keySet()) {
+			enhancement.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
 		}
 
 		enhancement.minRange = minRange;

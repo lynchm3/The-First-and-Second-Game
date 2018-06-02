@@ -14,7 +14,6 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
@@ -112,12 +111,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public String guid = UUID.randomUUID().toString();
 
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
-	public HashMap<OFFENSIVE_STATS, Stat> offensiveStats = new HashMap<OFFENSIVE_STATS, Stat>();
-	public HashMap<OFFENSIVE_STATS, Stat> defensiveStats = new HashMap<OFFENSIVE_STATS, Stat>();
-	// public HashMap<DEFENSIVE_STATS, Stat> defensiveStats = new
-	// HashMap<OFFENSIVE_STATS, Stat>();
+	// public HashMap<DEFENSIVE_STATS, Stat> highLevelStats = new
+	// HashMap<HIGH_LEVEL_STATS, Stat>();
 
-	// public enum OFFENSIVE_STATS {"PIZZA"}
+	// public enum HIGH_LEVEL_STATS {"PIZZA"}
 	// public enum DEFENSIVE_STATS;
 	// public enum STATS;
 
@@ -266,25 +263,25 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.FRIENDLY_FIRE, new Stat(0));
 
-		offensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(0));
-		offensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(0));
 
-		defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(0));
-		defensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(0));
 	}
 
 	public void setInstances(GameObject gameObject) {
@@ -1755,12 +1752,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			gameObject.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
 		}
 
-		for (OFFENSIVE_STATS statKey : this.offensiveStats.keySet()) {
-			gameObject.offensiveStats.put(statKey, this.offensiveStats.get(statKey).makeCopy());
+		for (HIGH_LEVEL_STATS statKey : this.highLevelStats.keySet()) {
+			gameObject.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
 		}
 
-		for (OFFENSIVE_STATS statKey : this.defensiveStats.keySet()) {
-			gameObject.defensiveStats.put(statKey, this.defensiveStats.get(statKey).makeCopy());
+		for (HIGH_LEVEL_STATS statKey : this.highLevelStats.keySet()) {
+			gameObject.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
 		}
 
 		gameObject.totalHealth = gameObject.remainingHealth = totalHealth;
@@ -1863,50 +1860,50 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE) {
-			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value
-					- this.offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value);
+			return Math.round(otherGameObject.highLevelStats.get(HIGH_LEVEL_STATS.SLASH_DAMAGE).value
+					- this.highLevelStats.get(HIGH_LEVEL_STATS.SLASH_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_BLUNT_DAMAGE) {
-			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value
-					- this.offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value);
+			return Math.round(otherGameObject.highLevelStats.get(HIGH_LEVEL_STATS.BLUNT_DAMAGE).value
+					- this.highLevelStats.get(HIGH_LEVEL_STATS.BLUNT_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_PIERCE_DAMAGE) {
-			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value
-					- this.offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value);
+			return Math.round(otherGameObject.highLevelStats.get(HIGH_LEVEL_STATS.PIERCE_DAMAGE).value
+					- this.highLevelStats.get(HIGH_LEVEL_STATS.PIERCE_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_FIRE_DAMAGE) {
-			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value
-					- this.offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value);
+			return Math.round(otherGameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value
+					- this.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_WATER_DAMAGE) {
-			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value
-					- this.offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value);
+			return Math.round(otherGameObject.highLevelStats.get(HIGH_LEVEL_STATS.WATER_DAMAGE).value
+					- this.highLevelStats.get(HIGH_LEVEL_STATS.WATER_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_POISON_DAMAGE) {
-			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value
-					- this.offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value);
+			return Math.round(otherGameObject.highLevelStats.get(HIGH_LEVEL_STATS.POISON_DAMAGE).value
+					- this.highLevelStats.get(HIGH_LEVEL_STATS.POISON_DAMAGE).value);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_ELECTRICAL_DAMAGE) {
-			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value
-					- this.offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value);
+			return Math.round(otherGameObject.highLevelStats.get(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE).value
+					- this.highLevelStats.get(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE).value);
 
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_BLEEDING_DAMAGE) {
-			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value
-					- this.offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value);
+			return Math.round(otherGameObject.highLevelStats.get(HIGH_LEVEL_STATS.BLEED_DAMAGE).value
+					- this.highLevelStats.get(HIGH_LEVEL_STATS.BLEED_DAMAGE).value);
 
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_HEALING) {
-			return Math.round(otherGameObject.offensiveStats.get(OFFENSIVE_STATS.HEALING).value
-					- this.offensiveStats.get(OFFENSIVE_STATS.HEALING).value);
+			return Math.round(otherGameObject.highLevelStats.get(HIGH_LEVEL_STATS.HEALING).value
+					- this.highLevelStats.get(HIGH_LEVEL_STATS.HEALING).value);
 
 		}
 
@@ -1926,6 +1923,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return null;
 	}
 
+	@Override
 	public float getEffectiveHighLevelStat(HIGH_LEVEL_STATS statType) {
 		float result = highLevelStats.get(statType).value;
 		if (enhancement != null && enhancement.highLevelStats.get(statType).value != 0)
@@ -1933,48 +1931,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return result;
 	}
 
+	@Override
 	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
 		ArrayList<Object> result = new ArrayList<Object>();
 		result.add(name + " " + highLevelStats.get(statType).value);
 		if (enhancement != null && enhancement.highLevelStats.get(statType).value != 0) {
 			result.add(TextUtils.NewLine.NEW_LINE);
 			result.add("" + enhancement.enhancementName + " " + enhancement.highLevelStats.get(statType).value);
-		}
-		return result;
-	}
-
-	@Override
-	public float getEffectiveOffensiveStat(OFFENSIVE_STATS statType) {
-		float result = offensiveStats.get(statType).value;
-		if (enhancement != null && enhancement.offensiveStats.get(statType).value != 0)
-			result += enhancement.offensiveStats.get(statType).value;
-		return result;
-	}
-
-	@Override
-	public ArrayList<Object> getEffectiveOffensiveStatTooltip(OFFENSIVE_STATS statType) {
-		ArrayList<Object> result = new ArrayList<Object>();
-		result.add(name + " " + offensiveStats.get(statType).value);
-		if (enhancement != null && enhancement.offensiveStats.get(statType).value != 0) {
-			result.add(TextUtils.NewLine.NEW_LINE);
-			result.add("" + enhancement.enhancementName + " " + enhancement.offensiveStats.get(statType).value);
-		}
-		return result;
-	}
-
-	public float getEffectiveDefensiveStat(OFFENSIVE_STATS statType) {
-		float result = defensiveStats.get(statType).value;
-		if (enhancement != null && enhancement.defensiveStats.get(statType).value != 0)
-			result += enhancement.defensiveStats.get(statType).value;
-		return result;
-	}
-
-	public ArrayList<Object> getEffectiveDefensiveStatTooltip(OFFENSIVE_STATS statType) {
-		ArrayList<Object> result = new ArrayList<Object>();
-		result.add(name + " " + defensiveStats.get(statType).value);
-		if (enhancement != null && enhancement.defensiveStats.get(statType).value != 0) {
-			result.add(TextUtils.NewLine.NEW_LINE);
-			result.add("" + enhancement.enhancementName + " " + enhancement.defensiveStats.get(statType).value);
 		}
 		return result;
 	}
@@ -1988,14 +1951,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	protected float getTotalDamage() {
-		return offensiveStats.get(OFFENSIVE_STATS.SLASH_DAMAGE).value
-				+ offensiveStats.get(OFFENSIVE_STATS.BLUNT_DAMAGE).value
-				+ offensiveStats.get(OFFENSIVE_STATS.PIERCE_DAMAGE).value
-				+ offensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value
-				+ offensiveStats.get(OFFENSIVE_STATS.WATER_DAMAGE).value
-				+ offensiveStats.get(OFFENSIVE_STATS.ELECTRICAL_DAMAGE).value
-				+ offensiveStats.get(OFFENSIVE_STATS.POISON_DAMAGE).value
-				+ offensiveStats.get(OFFENSIVE_STATS.BLEED_DAMAGE).value;
+		return highLevelStats.get(HIGH_LEVEL_STATS.SLASH_DAMAGE).value
+				+ highLevelStats.get(HIGH_LEVEL_STATS.BLUNT_DAMAGE).value
+				+ highLevelStats.get(HIGH_LEVEL_STATS.PIERCE_DAMAGE).value
+				+ highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value
+				+ highLevelStats.get(HIGH_LEVEL_STATS.WATER_DAMAGE).value
+				+ highLevelStats.get(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE).value
+				+ highLevelStats.get(HIGH_LEVEL_STATS.POISON_DAMAGE).value
+				+ highLevelStats.get(HIGH_LEVEL_STATS.BLEED_DAMAGE).value;
 	}
 
 	public boolean animationsBlockingAI() {
@@ -2034,13 +1997,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// System.out.println("damageDealer.bluntDamage = " + ((Actor)
 		// damageDealer).bluntDamage);
 
-		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-			if (damageDealer.getEffectiveOffensiveStat(statType) != 0) {
+		for (HIGH_LEVEL_STATS statType : Stat.OFFENSIVE_STATS) {
+			if (damageDealer.getEffectiveHighLevelStat(statType) != 0) {
 
-				float resistance = (this.defensiveStats.get(statType).value / 100);
-				float resistedDamage = damageDealer.getEffectiveOffensiveStat(statType) * resistance;
-				float dmg = damageDealer.getEffectiveOffensiveStat(statType) - resistedDamage;
-				doDamageAnimation(dmg, offsetY, statType, this.defensiveStats.get(statType).value);
+				float resistance = (this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(statType)).value
+						/ 100);
+				float resistedDamage = damageDealer.getEffectiveHighLevelStat(statType) * resistance;
+				float dmg = damageDealer.getEffectiveHighLevelStat(statType) - resistedDamage;
+				doDamageAnimation(dmg, offsetY, statType, this.highLevelStats.get(statType).value);
 				remainingHealth -= dmg;
 				totalDamage += dmg;
 				if (dmg > 0)
@@ -2048,11 +2012,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 				// Update bestiary
 				if (Game.level.shouldLog(this))
-					Level.bestiaryKnowledgeCollection.get(this.templateId).putDefensive(statType, true);
+					Level.bestiaryKnowledgeCollection.get(this.templateId).putHighLevel(statType, true);
 
 				if (gameObjectAttacker != null)
 					if (Game.level.shouldLog(gameObjectAttacker))
-						Level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).putOffensive(statType,
+						Level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).putHighLevel(statType,
 								true);
 
 				offsetY += 48;
@@ -2080,7 +2044,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	// SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, BLEEDING, HEALING
 	// };
 
-	public void doDamageAnimation(float healing, float offsetY, OFFENSIVE_STATS statType, float res) {
+	public void doDamageAnimation(float healing, float offsetY, HIGH_LEVEL_STATS statType, float res) {
 
 		Color color = Color.WHITE;
 

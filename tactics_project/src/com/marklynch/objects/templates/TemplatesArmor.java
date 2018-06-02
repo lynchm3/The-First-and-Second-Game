@@ -3,7 +3,7 @@ package com.marklynch.objects.templates;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -28,7 +28,7 @@ public class TemplatesArmor {
 		Templates.HARD_HAT.value = 52;
 		Templates.HARD_HAT.anchorX = 20;
 		Templates.HARD_HAT.anchorY = 8;
-		Templates.HARD_HAT.defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(10));
+		Templates.HARD_HAT.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(10));
 		Templates.HARD_HAT.templateId = GameObject.generateNewTemplateId();
 
 		Templates.PINK_HARD_HAT = new Helmet();
@@ -94,7 +94,7 @@ public class TemplatesArmor {
 		Templates.JUMPER.stackable = false;
 		Templates.JUMPER.weight = 14f;
 		Templates.JUMPER.value = 30;
-		Templates.JUMPER.defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(1));
+		Templates.JUMPER.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(1));
 		Templates.JUMPER.templateId = GameObject.generateNewTemplateId();
 
 		Templates.APRON = new BodyArmor();
@@ -163,7 +163,7 @@ public class TemplatesArmor {
 		Templates.PANTS.heightRatio = 1.5f;
 		Templates.PANTS.weight = 12f;
 		Templates.PANTS.value = 24;
-		Templates.PANTS.defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(2));
+		Templates.PANTS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(2));
 		Templates.PANTS.templateId = GameObject.generateNewTemplateId();
 
 		Templates.DUNGAREES = new LegArmor();
@@ -177,7 +177,7 @@ public class TemplatesArmor {
 		Templates.DUNGAREES.heightRatio = 1.5f;
 		Templates.DUNGAREES.weight = 14f;
 		Templates.DUNGAREES.value = 29;
-		Templates.DUNGAREES.defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(10));
+		Templates.DUNGAREES.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(10));
 		Templates.DUNGAREES.templateId = GameObject.generateNewTemplateId();
 
 		Templates.UNDIES = new LegArmor();

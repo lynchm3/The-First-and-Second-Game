@@ -4,7 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.templates.Templates;
@@ -25,7 +25,7 @@ public class EffectBleed extends Effect {
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_bleed.png", false);
 
-		offensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(5));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(5));
 	}
 
 	public EffectBleed(int totalTurns) {

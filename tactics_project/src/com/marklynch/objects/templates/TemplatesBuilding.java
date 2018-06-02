@@ -3,7 +3,7 @@ package com.marklynch.objects.templates;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.Fence;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
@@ -31,15 +31,15 @@ public class TemplatesBuilding {
 		Templates.WALL.anchorY = 0;
 		Templates.WALL.templateId = GameObject.generateNewTemplateId();
 		Templates.WALL.flipYAxisInMirror = false;
-		Templates.WALL.defensiveStats.put(OFFENSIVE_STATS.SLASH_DAMAGE, new Stat(100));
-		Templates.WALL.defensiveStats.put(OFFENSIVE_STATS.BLUNT_DAMAGE, new Stat(100));
-		Templates.WALL.defensiveStats.put(OFFENSIVE_STATS.PIERCE_DAMAGE, new Stat(100));
-		Templates.WALL.defensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(100));
-		Templates.WALL.defensiveStats.put(OFFENSIVE_STATS.WATER_DAMAGE, new Stat(100));
-		Templates.WALL.defensiveStats.put(OFFENSIVE_STATS.ELECTRICAL_DAMAGE, new Stat(100));
-		Templates.WALL.defensiveStats.put(OFFENSIVE_STATS.POISON_DAMAGE, new Stat(100));
-		Templates.WALL.defensiveStats.put(OFFENSIVE_STATS.BLEED_DAMAGE, new Stat(100));
-		Templates.WALL.defensiveStats.put(OFFENSIVE_STATS.HEALING, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(100));
+		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(100));
 
 		Templates.FENCE = new Fence();
 		Templates.FENCE.name = "Fence";

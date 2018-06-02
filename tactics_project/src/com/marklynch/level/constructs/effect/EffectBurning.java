@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.ui.ActivityLog;
@@ -21,7 +21,7 @@ public class EffectBurning extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_burn.png", false);
-		offensiveStats.put(OFFENSIVE_STATS.FIRE_DAMAGE, new Stat(5));
+		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(5));
 	}
 
 	public EffectBurning(int totalTurns) {
@@ -49,7 +49,7 @@ public class EffectBurning extends Effect {
 				for (GameObject gameObject : squareTargetIsOn.inventory.getGameObjects()) {
 
 					if (gameObject != target
-							&& Math.random() * 100 > gameObject.defensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value) {
+							&& Math.random() * 100 > gameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
 						gameObject.removeWetEffect();
 						gameObject.addEffect(this.makeCopy(source, gameObject));
 						if (Game.level.shouldLog(gameObject))
@@ -60,7 +60,7 @@ public class EffectBurning extends Effect {
 				ArrayList<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
 				for (Square adjacentSquare : adjacentSquares) {
 					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
-						if (Math.random() * 100 > gameObject.defensiveStats.get(OFFENSIVE_STATS.FIRE_DAMAGE).value) {
+						if (Math.random() * 100 > gameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
 							gameObject.removeWetEffect();
 							gameObject.addEffect(this.makeCopy(source, gameObject));
 

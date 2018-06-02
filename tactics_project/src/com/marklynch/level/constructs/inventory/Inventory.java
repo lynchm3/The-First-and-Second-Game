@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.objects.Food;
@@ -1777,14 +1777,14 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 
 			// offensive
-			for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-				if (otherWeapon.offensiveStats.get(statType).value < weapon.offensiveStats.get(statType).value)
+			for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+				if (otherWeapon.highLevelStats.get(statType).value < weapon.highLevelStats.get(statType).value)
 					return false;
 			}
 
 			// defensive
-			for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-				if (otherWeapon.defensiveStats.get(statType).value < weapon.defensiveStats.get(statType).value)
+			for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+				if (otherWeapon.highLevelStats.get(statType).value < weapon.highLevelStats.get(statType).value)
 					return false;
 			}
 
@@ -1815,24 +1815,24 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (armor == armorOFSameTypeInInventory)
 				continue;
 
-			if (armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE) >= armor
-					.getEffectiveDefensiveStat(OFFENSIVE_STATS.SLASH_DAMAGE)
-					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE) >= armor
-							.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLUNT_DAMAGE)
-					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE) >= armor
-							.getEffectiveDefensiveStat(OFFENSIVE_STATS.PIERCE_DAMAGE)
-					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE) >= armor
-							.getEffectiveDefensiveStat(OFFENSIVE_STATS.FIRE_DAMAGE)
-					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.WATER_DAMAGE) >= armor
-							.getEffectiveDefensiveStat(OFFENSIVE_STATS.WATER_DAMAGE)
-					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE) >= armor
-							.getEffectiveDefensiveStat(OFFENSIVE_STATS.ELECTRICAL_DAMAGE)
-					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.POISON_DAMAGE) >= armor
-							.getEffectiveDefensiveStat(OFFENSIVE_STATS.POISON_DAMAGE)
-					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE) >= armor
-							.getEffectiveDefensiveStat(OFFENSIVE_STATS.BLEED_DAMAGE)
-					&& armorOFSameTypeInInventory.getEffectiveDefensiveStat(OFFENSIVE_STATS.HEALING) >= armor
-							.getEffectiveDefensiveStat(OFFENSIVE_STATS.HEALING)) {
+			if (armorOFSameTypeInInventory.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.SLASH_DAMAGE) >= armor
+					.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.SLASH_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.BLUNT_DAMAGE) >= armor
+							.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.BLUNT_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.PIERCE_DAMAGE) >= armor
+							.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.PIERCE_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.FIRE_DAMAGE) >= armor
+							.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.FIRE_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.WATER_DAMAGE) >= armor
+							.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.WATER_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE) >= armor
+							.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.POISON_DAMAGE) >= armor
+							.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.POISON_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.BLEED_DAMAGE) >= armor
+							.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.BLEED_DAMAGE)
+					&& armorOFSameTypeInInventory.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.HEALING) >= armor
+							.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.HEALING)) {
 				armor.toSell = true;
 				itemsToSellCount++;
 				return true;

@@ -138,7 +138,7 @@ public class SkillTree implements Draggable, Scrollable {
 		// SkillTreeNode fire1 = new SkillTreeNode(512, 512 + 512);
 		// fire1.name = "Fire +1";
 		// fire1.description = "Fire +1";
-		// grabber.statsUnlocked.add(Stat.OFFENSIVE_STATS.FIRE_DAMAGE);
+		// grabber.statsUnlocked.add(Stat.HIGH_LEVEL_STATS.FIRE_DAMAGE);
 		// skillTreeNodes.add(fire1);
 		// spark.linkedSkillTreeNodes.add(fire1);
 		// fire1.linkedSkillTreeNodes.add(spark);

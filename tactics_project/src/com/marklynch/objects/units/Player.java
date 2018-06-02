@@ -10,7 +10,6 @@ import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
@@ -111,16 +110,6 @@ public class Player extends Human {
 		// Stats
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			bestiaryKnowledge.putHighLevel(statType, true);
-		}
-
-		// Damage
-		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-			bestiaryKnowledge.putOffensive(statType, true);
-		}
-
-		// Resistances
-		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-			bestiaryKnowledge.putDefensive(statType, true);
 		}
 
 		// Powers

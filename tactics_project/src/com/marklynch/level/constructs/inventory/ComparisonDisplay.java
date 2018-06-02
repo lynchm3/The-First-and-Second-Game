@@ -6,7 +6,7 @@ import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.weapons.BodyArmor;
@@ -131,23 +131,23 @@ public class ComparisonDisplay {
 		// Name
 		if (gameObject1 != null)
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + gameObject1.name),
-					currentY, Integer.MAX_VALUE, false, null,
-					Color.WHITE, new Object[] { new StringWithColor("" + gameObject1.name, color1) });
-		TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-				Color.WHITE, new Object[] { new StringWithColor("" + gameObject2.name, color2) });
+					currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+					new Object[] { new StringWithColor("" + gameObject1.name, color1) });
+		TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+				new Object[] { new StringWithColor("" + gameObject2.name, color2) });
 		currentY += fieldHeight;
 		currentY += fieldHeight;
 
 		// Offensive stats
-		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-			float equippedStat = Level.player.offensiveStats.get(statType).value;
+		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+			float equippedStat = Level.player.highLevelStats.get(statType).value;
 			if (gameObject1 != null)
-				equippedStat = gameObject1.offensiveStats.get(statType).value;
-			if (equippedStat != 0 || gameObject2.offensiveStats.get(statType).value != 0) {
-				if (equippedStat == gameObject2.offensiveStats.get(statType).value) {
+				equippedStat = gameObject1.highLevelStats.get(statType).value;
+			if (equippedStat != 0 || gameObject2.highLevelStats.get(statType).value != 0) {
+				if (equippedStat == gameObject2.highLevelStats.get(statType).value) {
 					color1 = Color.WHITE;
 					color2 = Color.WHITE;
-				} else if (equippedStat < gameObject2.offensiveStats.get(statType).value) {
+				} else if (equippedStat < gameObject2.highLevelStats.get(statType).value) {
 					color1 = Color.RED;
 					color2 = Color.GREEN;
 				} else {
@@ -156,26 +156,27 @@ public class ComparisonDisplay {
 				}
 
 				TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedStat),
-						currentY, Integer.MAX_VALUE, false, null,
-						Color.WHITE, new Object[] { new StringWithColor("" + equippedStat, color1) });
-				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] {
-						new StringWithColor("" + gameObject2.offensiveStats.get(statType).value, color2) });
-				TextureUtils.drawTexture(CharacterScreen.offensiveStatImages.get(statType), iconsX, currentY,
+						currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+						new Object[] { new StringWithColor("" + equippedStat, color1) });
+				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+						new Object[] {
+								new StringWithColor("" + gameObject2.highLevelStats.get(statType).value, color2) });
+				TextureUtils.drawTexture(CharacterScreen.highLevelStatImages.get(statType), iconsX, currentY,
 						iconsX + 16, currentY + 16);
 				currentY += fieldHeight;
 			}
 		}
 
 		// Defensive stats
-		for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-			float equippedStat = Level.player.defensiveStats.get(statType).value;
+		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+			float equippedStat = Level.player.highLevelStats.get(statType).value;
 			if (gameObject1 != null)
-				equippedStat = gameObject1.defensiveStats.get(statType).value;
-			if (equippedStat != 0 || gameObject2.defensiveStats.get(statType).value != 0) {
-				if (equippedStat == gameObject2.defensiveStats.get(statType).value) {
+				equippedStat = gameObject1.highLevelStats.get(statType).value;
+			if (equippedStat != 0 || gameObject2.highLevelStats.get(statType).value != 0) {
+				if (equippedStat == gameObject2.highLevelStats.get(statType).value) {
 					color1 = Color.WHITE;
 					color2 = Color.WHITE;
-				} else if (equippedStat < gameObject2.defensiveStats.get(statType).value) {
+				} else if (equippedStat < gameObject2.highLevelStats.get(statType).value) {
 					color1 = Color.RED;
 					color2 = Color.GREEN;
 				} else {
@@ -184,11 +185,12 @@ public class ComparisonDisplay {
 				}
 
 				TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedStat),
-						currentY, Integer.MAX_VALUE, false, null,
-						Color.WHITE, new Object[] { new StringWithColor("" + equippedStat, color1) });
-				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] {
-						new StringWithColor("" + gameObject2.defensiveStats.get(statType).value, color2) });
-				TextureUtils.drawTexture(CharacterScreen.defensiveStatImages.get(statType), iconsX, currentY,
+						currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+						new Object[] { new StringWithColor("" + equippedStat, color1) });
+				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+						new Object[] {
+								new StringWithColor("" + gameObject2.highLevelStats.get(statType).value, color2) });
+				TextureUtils.drawTexture(CharacterScreen.highLevelStatImages.get(statType), iconsX, currentY,
 						iconsX + 16, currentY + 16);
 				currentY += fieldHeight;
 			}
@@ -211,10 +213,10 @@ public class ComparisonDisplay {
 			}
 
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedMaxRange),
-					currentY, Integer.MAX_VALUE, false, null,
-					Color.WHITE, new Object[] { new StringWithColor("" + equippedMaxRange, color1) });
-			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					Color.WHITE, new Object[] { new StringWithColor("" + gameObject2.maxRange, color2) });
+					currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+					new Object[] { new StringWithColor("" + equippedMaxRange, color1) });
+			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+					new Object[] { new StringWithColor("" + gameObject2.maxRange, color2) });
 			TextureUtils.drawTexture(imageRange, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -236,10 +238,10 @@ public class ComparisonDisplay {
 			}
 
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedWeight),
-					currentY, Integer.MAX_VALUE, false, null,
-					Color.WHITE, new Object[] { new StringWithColor("" + equippedWeight, color1) });
-			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					Color.WHITE, new Object[] { new StringWithColor("" + gameObject2.weight, color2) });
+					currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+					new Object[] { new StringWithColor("" + equippedWeight, color1) });
+			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+					new Object[] { new StringWithColor("" + gameObject2.weight, color2) });
 			TextureUtils.drawTexture(imageWeight, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
@@ -261,9 +263,10 @@ public class ComparisonDisplay {
 			}
 
 			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedValue), currentY,
-					Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] { new StringWithColor("" + equippedValue, color1) });
-			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
-					Color.WHITE, new Object[] { new StringWithColor("" + gameObject2.value, color2) });
+					Integer.MAX_VALUE, false, null, Color.WHITE,
+					new Object[] { new StringWithColor("" + equippedValue, color1) });
+			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+					new Object[] { new StringWithColor("" + gameObject2.value, color2) });
 			TextureUtils.drawTexture(imageValue, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}

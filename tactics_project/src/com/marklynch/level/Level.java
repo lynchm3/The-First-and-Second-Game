@@ -14,6 +14,7 @@ import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.ai.utils.Move;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.activepowerscreen.ActivePowerScreen;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
@@ -216,6 +217,7 @@ public class Level {
 		ActivePowerScreen.loadStaticImages();
 		ActivityLogger.loadStaticImages();
 		GameOver.loadStaticImages();
+		Stat.init();
 
 		structures = new ArrayList<Structure>();
 

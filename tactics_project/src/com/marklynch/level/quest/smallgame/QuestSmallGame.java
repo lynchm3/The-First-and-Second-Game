@@ -7,7 +7,6 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.OFFENSIVE_STATS;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -498,16 +497,6 @@ public class QuestSmallGame extends Quest {
 					// Stats
 					for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 						bestiaryKnowledge.putHighLevel(statType, true);
-					}
-
-					// Damage
-					for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-						bestiaryKnowledge.putOffensive(statType, true);
-					}
-
-					// Resistances
-					for (OFFENSIVE_STATS statType : OFFENSIVE_STATS.values()) {
-						bestiaryKnowledge.putDefensive(statType, true);
 					}
 
 					// Powers
