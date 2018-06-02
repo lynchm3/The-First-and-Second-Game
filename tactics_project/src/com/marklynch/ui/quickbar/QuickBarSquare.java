@@ -55,6 +55,7 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 
 	public void setShortcut(Object shortcut) {
 		this.shortcut = shortcut;
+		this.setTooltipText(this.shortcut);
 		if (shortcut == null) {
 			this.setClickListener(null);
 		} else if (shortcut instanceof Power) {
