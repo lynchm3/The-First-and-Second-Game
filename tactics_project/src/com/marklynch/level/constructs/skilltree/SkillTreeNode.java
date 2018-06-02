@@ -263,6 +263,14 @@ public class SkillTreeNode extends LevelButton {
 		public void drawStat() {
 			TextureUtils.drawTexture(CharacterScreen.highLevelStatImages.get(this.stat.type), x1, y1, x2, y2);
 		}
+
+		@Override
+		public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
+			if (super.calculateIfPointInBoundsOfButton(mouseX, mouseY)) {
+				return Math.hypot(this.x - mouseX, this.y - mouseY) <= circleRadius;
+			}
+			return false;
+		}
 	}
 
 	public class SkillTreeNodePower extends LevelButton implements Draggable, Scrollable {
@@ -271,6 +279,7 @@ public class SkillTreeNode extends LevelButton {
 		public float dragX = 0, dragY = 0;
 		public static final float powerWidth = 64;
 		public float powerHalfWidth = powerWidth / 2;
+		public float circleRadius = powerHalfWidth;
 		public float x1, y1, x2, y2;
 
 		public SkillTreeNodePower(Power power, int x, int y) {
@@ -290,6 +299,19 @@ public class SkillTreeNode extends LevelButton {
 			this.x2 = x + powerWidth;
 			this.y2 = y + powerWidth;
 
+		}
+
+		@Override
+		public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
+			if (super.calculateIfPointInBoundsOfButton(mouseX, mouseY)) {
+				if (power.passive) {
+					return Math.hypot((this.x + circleRadius) - mouseX,
+							(this.y + +circleRadius) - mouseY) <= circleRadius;
+				} else {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		public void drawBackground() {
