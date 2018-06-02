@@ -7,6 +7,7 @@ import org.lwjgl.util.Point;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.animation.secondary.AnimationMovementFade;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -95,6 +96,7 @@ public class PowerTelekineticPush extends Power {
 			temp.addAll(lastSquare.inventory.gameObjects);
 
 			for (GameObject gameObject : temp) {
+				gameObject.secondaryAnimations.add(new AnimationMovementFade(lastSquare, gameObject));
 				currentSquare.inventory.add(gameObject);
 			}
 
