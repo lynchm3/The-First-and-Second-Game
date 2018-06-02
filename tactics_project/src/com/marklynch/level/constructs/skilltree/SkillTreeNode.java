@@ -69,13 +69,25 @@ public class SkillTreeNode extends LevelButton {
 	// }
 
 	public void init() {
+		ArrayList<Object> tooltipItems = new ArrayList<Object>();
+
+		tooltipItems.add(this.name);
 
 		for (Power power : powersUnlocked) {
 			this.powerButtons.add(new SkillTreeNodePower(power, 0, 0));
+			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
+			tooltipItems.add("    ---------------------------------   ");
+			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
+			tooltipItems.add(power);
 		}
 
 		for (Stat stat : statsUnlocked) {
 			this.statButtons.add(new SkillTreeNodeStat(stat, 0, 0));
+			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
+			// tooltipItems.add("_________________________________");
+			tooltipItems.add("    ---------------------------------   ");
+			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
+			tooltipItems.add(stat);
 		}
 
 		setLocation();
@@ -93,6 +105,8 @@ public class SkillTreeNode extends LevelButton {
 
 			}
 		});
+
+		this.setTooltipText(tooltipItems);
 	}
 
 	public void activate(Actor actor) {
