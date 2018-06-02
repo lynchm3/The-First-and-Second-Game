@@ -3,8 +3,11 @@ package com.marklynch.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.lwjgl.util.Point;
+
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.area.Area;
@@ -841,11 +844,13 @@ public class TextUtils {
 
 				}
 
-				// Newline
-				offsetY += 20;
-				offsetX = 0;
-
 				if (power.range != 0) {
+
+					// Newline
+					offsetY += 20;
+					offsetX = 0;
+
+					// Range
 					Game.smallFont.drawText(Game.activeBatch, "RANGE " + power.range, posX + offsetX, posY + offsetY);
 				}
 
@@ -853,14 +858,47 @@ public class TextUtils {
 				offsetY += 20;
 				offsetX = 0;
 
+				// AOE
 				if (power.areaOfEffect != null && power.areaOfEffect.length > 0) {
-					Game.smallFont.drawText(Game.activeBatch, "AOE", posX + offsetX, posY + offsetY);
+					// Game.smallFont.drawText(Game.activeBatch, "AOE", posX + offsetX, posY +
+					// offsetY);
+					float lowestX = 0f;
+					float lowestY = 0f;
+					float highestX = 0f;
+					float highestY = 0f;
+					float width = 0f;
+					float height = 0f;
+
+					for (Point point : power.areaOfEffect) {
+						if (point.getX() < lowestX)
+							lowestX = point.getX();
+
+						if (point.getY() < lowestY)
+							lowestY = point.getY();
+
+						if (point.getX() > highestX)
+							highestX = point.getX();
+
+						if (point.getY() > highestY)
+							highestY = point.getY();
+					}
+
+					width = highestX - lowestX + 1f;
+					height = highestY - lowestY + 1f;
+
+					for (Point point : power.areaOfEffect) {
+
+						float x = posX + offsetX + (point.getX() - lowestX) * 20f;
+						float y = posY + offsetY + (point.getY() - lowestY) * 20f;
+						TextureUtils.drawTexture(Square.WHITE_SQUARE, x, y, x + 20f, y + 20f);
+
+					}
+
+					// NEW LINE(s)
+					offsetY += height * 20d;
+					offsetX = 0;
 
 				}
-
-				// Newline
-				offsetY += 20;
-				offsetX = 0;
 
 				if (power.passive) {
 					Game.smallFont.drawText(Game.activeBatch, "PASSIVE", posX + offsetX, posY + offsetY);
@@ -868,10 +906,30 @@ public class TextUtils {
 					Game.smallFont.drawText(Game.activeBatch, "ACTIVE", posX + offsetX, posY + offsetY);
 				}
 
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+
+				if (power.crimeSeverity == Crime.TYPE.NONE) {
+					Game.smallFont.drawText(Game.activeBatch, "LEGAL", posX + offsetX, posY + offsetY);
+
+				} else {
+					Game.smallFont.drawText(Game.activeBatch, "ILLEGAL", posX + offsetX, posY + offsetY);
+				}
+
+				// Newline
+				offsetY += 20;
+				offsetX = 0;
+				Game.smallFont.drawText(Game.activeBatch, "NOISE " + power.loudness, posX + offsetX, posY + offsetY);
+
 			}
 
 		}
 		Game.activeBatch.setColor(1, 1, 1, 1);
+
+	}
+
+	public void drawAOEForTextUtils(int posX, int posY, int offsetX, int offsetY, Power power) {
 
 	}
 
