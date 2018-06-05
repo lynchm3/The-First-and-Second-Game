@@ -1,9 +1,11 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.constructs.power.PowerTeleportOther;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -44,6 +46,7 @@ public class ActionUsePower extends Action {
 		if (!checkRange())
 			return;
 
+		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		power.log(performer, target);
 		power.cast(performer, target, this);
 
@@ -90,7 +93,7 @@ public class ActionUsePower extends Action {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
 
-		if (performer == Game.level.player && !power.passive)// && power.)
+		if (performer == Game.level.player && !power.passive && !(power instanceof PowerTeleportOther))
 			Game.level.endPlayerTurn();
 	}
 

@@ -77,7 +77,7 @@ import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActionTakeItemsSelectedInInventory;
-import com.marklynch.objects.actions.ActionTeleportOther;
+import com.marklynch.objects.actions.ActionSelectTeleportTarget;
 import com.marklynch.objects.actions.ActionThrowItem;
 import com.marklynch.objects.actions.ActionTrackMapMarker;
 import com.marklynch.objects.actions.ActionUnequip;
@@ -1218,7 +1218,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (!decorative && this != Game.level.player && attackable && !(this instanceof Wall)
 				&& !(this instanceof Door))
-			actions.add(new ActionTeleportOther(performer, this));
+			actions.add(new ActionSelectTeleportTarget(performer, this));
 		// }
 		if (!decorative && this != Game.level.player && this instanceof Actor)
 			actions.add(new ActionFollow(Game.level.player, (Actor) this));

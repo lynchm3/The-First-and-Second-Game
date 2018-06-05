@@ -25,7 +25,7 @@ import com.marklynch.level.constructs.power.PowerSpark;
 import com.marklynch.level.constructs.power.PowerSpiritBag;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerTelekineticPush;
-import com.marklynch.level.constructs.power.PowerTeleport;
+import com.marklynch.level.constructs.power.PowerTeleportOther;
 import com.marklynch.level.constructs.power.PowerTimePlusSixHours;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.constructs.skilltree.SkillTreeNode.SkillTreeNodePower;
@@ -203,7 +203,7 @@ public class SkillTree implements Draggable, Scrollable {
 		activateAtStart.add(teleportation1);
 		teleportation1.name = "Teleport";
 		teleportation1.description = "\"Teleportation! WOW!\" - Stranger";
-		teleportation1.powersUnlocked.add(new PowerTeleport(null));
+		teleportation1.powersUnlocked.add(new PowerTeleportOther(null));
 		skillTreeNodes.add(teleportation1);
 		teleportation1.linkedSkillTreeNodes.add(telekineticPush);
 		telekineticPush.linkedSkillTreeNodes.add(teleportation1);

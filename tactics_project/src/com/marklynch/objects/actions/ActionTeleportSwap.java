@@ -36,11 +36,13 @@ public class ActionTeleportSwap extends Action {
 		legal = checkLegality();
 		sound = createSound();
 		movement = true;
+		System.out.println("ActionTeleportSwap");
 
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

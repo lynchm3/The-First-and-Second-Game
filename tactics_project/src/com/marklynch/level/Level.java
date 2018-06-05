@@ -72,7 +72,6 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
-import com.marklynch.utils.Utils;
 
 public class Level {
 
@@ -1775,6 +1774,7 @@ public class Level {
 		Player.playerTargetAction = null;
 		Player.playerTargetActor = null;
 		Game.level.highlightPauseButton();
+		System.out.println("pausePlayer");
 		levelMode = LevelMode.LEVEL_MODE_NORMAL;
 	}
 
@@ -2169,7 +2169,7 @@ public class Level {
 	public void endPlayerTurn() {
 
 		System.out.println("----------------END PLAYER TURN-----------------");
-		Utils.printStackTrace();
+		// Utils.printStackTrace();
 
 		changeTime(20);
 		// secondString;

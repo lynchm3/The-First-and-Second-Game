@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.quest.caveoftheblind.Blind;
@@ -38,11 +39,13 @@ public class ActionTeleport extends Action {
 		legal = checkLegality();
 		sound = createSound();
 		movement = true;
+		System.out.println("ActionTeleport");
 
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -54,6 +57,7 @@ public class ActionTeleport extends Action {
 			new ActionStopPeeking(performer).perform();
 		}
 
+		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		teleport(teleportee, target);
 
 		performer.actionsPerformedThisTurn.add(this);

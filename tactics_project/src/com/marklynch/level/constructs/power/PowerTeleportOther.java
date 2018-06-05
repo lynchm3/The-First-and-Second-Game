@@ -2,20 +2,21 @@ package com.marklynch.level.constructs.power;
 
 import org.lwjgl.util.Point;
 
+import com.marklynch.level.Level;
+import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionTeleportOther;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 
-public class PowerTeleport extends Power {
+public class PowerTeleportOther extends Power {
 
 	private static String NAME = "Teleport";
 
-	public PowerTeleport(GameObject source) {
+	public PowerTeleportOther(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("up.png", false), source, new Effect[] {}, 10,
 				new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
@@ -23,7 +24,7 @@ public class PowerTeleport extends Power {
 
 	@Override
 	public Power makeCopy(GameObject source) {
-		return new PowerTeleport(source);
+		return new PowerTeleportOther(source);
 	}
 
 	@Override
@@ -31,15 +32,22 @@ public class PowerTeleport extends Power {
 
 		GameObject objectToTeleport = targetSquare.inventory.gameObjectThatCantShareSquare;
 
-		System.out.println("objectToTeleport = " + objectToTeleport);
+		System.out.println("TELEPORT POWA CAST");
 
-		ActionTeleportOther actionTeleportOther =
+		//
+		// System.out.println("objectToTeleport = " + objectToTeleport);
+		//
+		// ActionTeleportOther actionTeleportOther =
+		//
+		// new ActionTeleportOther(source, objectToTeleport);
+		//
+		// System.out.println("actionTeleportOther.enabled = " +
+		// actionTeleportOther.enabled);
+		//
+		// actionTeleportOther.perform();
 
-				new ActionTeleportOther(source, objectToTeleport);
-
-		System.out.println("actionTeleportOther.enabled = " + actionTeleportOther.enabled);
-
-		actionTeleportOther.perform();
+		Level.levelMode = LevelMode.LEVEL_SELECT_TELEPORT_SQUARE;
+		Level.teleportee = objectToTeleport;
 	}
 
 }
