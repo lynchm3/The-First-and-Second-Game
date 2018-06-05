@@ -71,8 +71,8 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 					Level.levelMode = LevelMode.LEVEL_MODE_CAST;
 					Game.level.selectedPower = power.makeCopy(Level.player);
 				} else {
-					new ActionUsePower(Level.player, null, Level.player.squareGameObjectIsOn, power.makeCopy(Level.player))
-							.perform();
+					new ActionUsePower(Level.player, Game.gameObjectMouseIsOver, Level.player.squareGameObjectIsOn,
+							power.makeCopy(Level.player)).perform();
 				}
 				Game.level.popupMenuObjects.clear();
 				Game.level.popupMenuActions.clear();

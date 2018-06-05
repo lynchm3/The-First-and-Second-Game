@@ -1234,7 +1234,8 @@ public class Level {
 				}
 
 				// Draw power icon on sqrs / or x if out of range
-				ActionUsePower actionUsePower = new ActionUsePower(this.player, null, Game.squareMouseIsOver, selectedPower);
+				ActionUsePower actionUsePower = new ActionUsePower(this.player, Game.gameObjectMouseIsOver,
+						Game.squareMouseIsOver, selectedPower);
 				if (actionUsePower.enabled) {
 					ArrayList<Square> affectedSquares = selectedPower.getAffectedSquares(Game.squareMouseIsOver);
 					for (Square affectedSquare : affectedSquares) {
