@@ -68,7 +68,10 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 						Level.levelMode = LevelMode.LEVEL_MODE_CAST;
 						Game.level.selectedPower = power.makeCopy(Level.player);
 					} else {
-						new ActionUsePower(Level.player, Level.player.squareGameObjectIsOn,
+
+						System.out.println("Clicked QB, Game.gameObjectMouseIsOver = " + Game.gameObjectMouseIsOver);
+
+						new ActionUsePower(Level.player, Game.gameObjectMouseIsOver, Level.player.squareGameObjectIsOn,
 								power.makeCopy(Level.player)).perform();
 					}
 					Game.level.popupMenuObjects.clear();

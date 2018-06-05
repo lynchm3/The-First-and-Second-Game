@@ -1234,7 +1234,7 @@ public class Level {
 				}
 
 				// Draw power icon on sqrs / or x if out of range
-				ActionUsePower actionUsePower = new ActionUsePower(this.player, Game.squareMouseIsOver, selectedPower);
+				ActionUsePower actionUsePower = new ActionUsePower(this.player, null, Game.squareMouseIsOver, selectedPower);
 				if (actionUsePower.enabled) {
 					ArrayList<Square> affectedSquares = selectedPower.getAffectedSquares(Game.squareMouseIsOver);
 					for (Square affectedSquare : affectedSquares) {
@@ -2108,7 +2108,7 @@ public class Level {
 		// Do passive powers that run at start of turn.. yo
 		for (Power power : player.powers) {
 			if (power.activateAtStartOfTurn) {
-				new ActionUsePower(player, player.squareGameObjectIsOn, power.makeCopy(player)).perform();
+				new ActionUsePower(player, null, player.squareGameObjectIsOn, power.makeCopy(player)).perform();
 			}
 		}
 

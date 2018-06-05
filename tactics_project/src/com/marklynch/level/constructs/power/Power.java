@@ -50,7 +50,7 @@ public abstract class Power {
 		this.crimeSeverity = crimeSeverity;
 	}
 
-	public void cast(Actor source, Square targetSquare, Action action) {
+	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
 
 		ArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
 

@@ -7,14 +7,14 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
-public class ActionSelectTeleportTarget extends Action {
+public class ActionSelectTeleportTarget1 extends Action {
 
 	public static final String ACTION_NAME = "Teleport";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	GameObject teleportee;
 
-	public ActionSelectTeleportTarget(Actor performer, GameObject teleportee) {
+	public ActionSelectTeleportTarget1(Actor performer, GameObject teleportee) {
 		super(ACTION_NAME, "action_teleport.png");
 		super.gameObjectPerformer = this.performer = performer;
 		this.teleportee = teleportee;

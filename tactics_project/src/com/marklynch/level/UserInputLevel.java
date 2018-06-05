@@ -568,7 +568,8 @@ public class UserInputLevel {
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 			return;
 		} else if (Game.level.levelMode == LevelMode.LEVEL_MODE_CAST) {
-			new ActionUsePower(Game.level.player, Game.squareMouseIsOver, Game.level.selectedPower).perform();
+			new ActionUsePower(Game.level.player, Game.gameObjectMouseIsOver, Game.squareMouseIsOver,
+					Game.level.selectedPower).perform();
 			// Game.level.selectedPower.cast(Game.level.player, square);
 			System.out.println("LEVEL_MODE_CAST");
 			// Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;

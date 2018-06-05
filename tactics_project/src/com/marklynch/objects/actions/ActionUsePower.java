@@ -19,14 +19,16 @@ public class ActionUsePower extends Action {
 	// reach)";
 
 	Actor performer;
-	Square target;
+	Square targetSquare;
+	GameObject targetGameObject;
 	Power power;
 
 	// Default for hostiles
-	public ActionUsePower(Actor attacker, Square target, Power power) {
+	public ActionUsePower(Actor attacker, GameObject targetGameObject, Square targetSquare, Power power) {
 		super("Cast " + power.name, "action_attack.png");
 		super.gameObjectPerformer = this.performer = attacker;
-		this.target = target;
+		this.targetSquare = targetSquare;
+		this.targetGameObject = targetGameObject;
 		this.power = power;
 		if (!check()) {
 			enabled = false;
@@ -47,8 +49,8 @@ public class ActionUsePower extends Action {
 			return;
 
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
-		power.log(performer, target);
-		power.cast(performer, target, this);
+		power.log(performer, targetSquare);
+		power.cast(performer, targetGameObject, targetSquare, this);
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
@@ -60,7 +62,7 @@ public class ActionUsePower extends Action {
 		// Something that belongs to some one else
 
 		if (power.hostile) {
-			for (Square square : power.getAffectedSquares(target)) {
+			for (Square square : power.getAffectedSquares(targetSquare)) {
 				for (GameObject gameObject : square.inventory.getGameObjects()) {
 					gameObject.attackedBy(this.performer, this);
 				}
@@ -68,7 +70,7 @@ public class ActionUsePower extends Action {
 		}
 
 		if (!legal) {
-			for (Square square : power.getAffectedSquares(target)) {
+			for (Square square : power.getAffectedSquares(targetSquare)) {
 				for (GameObject gameObject : square.inventory.getGameObjects()) {
 					Actor victim;
 					if (gameObject instanceof Actor)
@@ -101,16 +103,16 @@ public class ActionUsePower extends Action {
 	public boolean check() {
 
 		disabledReason = power.disabledReason;
-		return power.check(performer, target);
+		return power.check(performer, targetSquare);
 	}
 
 	@Override
 	public boolean checkRange() {
 
-		if (!target.visibleToPlayer && !power.hasRange(Integer.MAX_VALUE))
+		if (!targetSquare.visibleToPlayer && !power.hasRange(Integer.MAX_VALUE))
 			return false;
 
-		if (!power.hasRange(performer.straightLineDistanceTo(target)))
+		if (!power.hasRange(performer.straightLineDistanceTo(targetSquare)))
 			return false;
 
 		return true;
@@ -130,10 +132,10 @@ public class ActionUsePower extends Action {
 		if (!power.potentialyCriminal)
 			return true;
 
-		if (performer.attackers.contains(target))
+		if (performer.attackers.contains(targetSquare))
 			return true;
 
-		for (Square square : power.getAffectedSquares(target)) {
+		for (Square square : power.getAffectedSquares(targetSquare)) {
 
 			for (GameObject gameObject : square.inventory.getGameObjects()) {
 
@@ -162,7 +164,7 @@ public class ActionUsePower extends Action {
 		float loudness = power.loudness;
 
 		if (performer.equipped != null)
-			return new Sound(performer, performer, target, loudness, legal, this.getClass());
+			return new Sound(performer, performer, targetSquare, loudness, legal, this.getClass());
 		return null;
 	}
 

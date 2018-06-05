@@ -28,6 +28,7 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventoryParent;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.journal.Journal;
+import com.marklynch.level.constructs.power.PowerTeleportOther;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
@@ -77,13 +78,13 @@ import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActionTakeItemsSelectedInInventory;
-import com.marklynch.objects.actions.ActionSelectTeleportTarget;
 import com.marklynch.objects.actions.ActionThrowItem;
 import com.marklynch.objects.actions.ActionTrackMapMarker;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.actions.ActionUntrackMapMarker;
 import com.marklynch.objects.actions.ActionUse;
+import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.templates.Templates;
@@ -1218,7 +1219,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (!decorative && this != Game.level.player && attackable && !(this instanceof Wall)
 				&& !(this instanceof Door))
-			actions.add(new ActionSelectTeleportTarget(performer, this));
+			actions.add(new ActionUsePower(Level.player, this, this.squareGameObjectIsOn,
+					new PowerTeleportOther(Level.player)));
+		// actions.add(new ActionSelectTeleportTarget(performer, this));
 		// }
 		if (!decorative && this != Game.level.player && this instanceof Actor)
 			actions.add(new ActionFollow(Game.level.player, (Actor) this));

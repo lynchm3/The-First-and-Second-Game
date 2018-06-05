@@ -26,7 +26,7 @@ public class PowerUnlock extends Power {
 	}
 
 	@Override
-	public void cast(Actor source, Square targetSquare, Action action) {
+	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
 		ArrayList<GameObject> openables = targetSquare.inventory.getGameObjectsOfClass(Openable.class);
 		for (GameObject openable : openables) {
 			if (((Openable) openable).isLocked()) {

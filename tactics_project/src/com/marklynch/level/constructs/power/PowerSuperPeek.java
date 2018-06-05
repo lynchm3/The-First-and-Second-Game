@@ -22,7 +22,7 @@ public class PowerSuperPeek extends Power {
 	}
 
 	@Override
-	public void cast(Actor source, Square targetSquare, Action action) {
+	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
 		if (source == Game.level.player)
 			Game.level.player.calculateVisibleSquares(targetSquare);
 		source.peekSquare = targetSquare;

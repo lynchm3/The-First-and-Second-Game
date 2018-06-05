@@ -27,7 +27,7 @@ public class PowerSpiritBag extends Power {
 	}
 
 	@Override
-	public void cast(Actor source, Square targetSquare, Action action) {
+	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
 
 	}
 

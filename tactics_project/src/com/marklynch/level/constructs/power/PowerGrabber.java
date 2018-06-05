@@ -31,7 +31,7 @@ public class PowerGrabber extends Power {
 	}
 
 	@Override
-	public void cast(Actor source, Square targetSquare, Action action) {
+	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
 
 		ArrayList<GameObject> gameObjectsToTake = new ArrayList<GameObject>();
 		for (Square squareToPickupFrom : source.getAllSquaresWithinDistance(0, 1)) {
