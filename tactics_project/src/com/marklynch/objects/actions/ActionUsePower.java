@@ -35,7 +35,8 @@ public class ActionUsePower extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -89,7 +90,7 @@ public class ActionUsePower extends Action {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
 
-		if (performer == Game.level.player)
+		if (performer == Game.level.player && !power.passive)// && power.)
 			Game.level.endPlayerTurn();
 	}
 

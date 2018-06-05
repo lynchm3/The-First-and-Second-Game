@@ -406,7 +406,6 @@ public class Editor {
 				new HOBBY[] { HOBBY.HUNTING });
 		Game.level.player = player;
 		for (SkillTreeNode skillTreeNode : Level.skillTree.activateAtStart) {
-			System.out.println("SkillTreeNode = " + skillTreeNode);
 			skillTreeNode.activate(player);
 		}
 		Weapon playersHuntingBow = Templates.HUNTING_BOW.makeCopy(null, player);

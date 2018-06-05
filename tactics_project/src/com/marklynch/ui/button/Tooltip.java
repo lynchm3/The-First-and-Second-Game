@@ -45,11 +45,6 @@ public class Tooltip {
 
 	public void drawStaticUI() {
 
-		System.out.println("drawStaticUI");
-		System.out.println("drawStaticUI.backgroundColor - " + backgroundColor);
-		System.out.println("drawStaticUI.textColor - " + textColor);
-		System.out.println("drawStaticUI.alpha - " + alpha);
-
 		// if (1 == 1)
 		// return;
 		if (lastTooltipShown != this) {

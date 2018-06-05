@@ -33,8 +33,6 @@ public class PowerTelekineticPush extends Power {
 
 	@Override
 	public void cast(Actor source, Square targetSquare, Action action) {
-		System.out.println("source = " + source);
-		System.out.println("targetSquare = " + targetSquare);
 
 		if (targetSquare.inventory.contains(source))
 			return;
@@ -51,12 +49,9 @@ public class PowerTelekineticPush extends Power {
 			direction = Direction.DOWN;
 		}
 
-		System.out.println("Direction = " + direction);
-
 		int maxPushCount = 5;
 		int pushCount = 0;
 		Square lastSquare = targetSquare;
-		System.out.println("lastSquare = " + lastSquare);
 		while (pushCount < maxPushCount) {
 
 			Square currentSquare = null;

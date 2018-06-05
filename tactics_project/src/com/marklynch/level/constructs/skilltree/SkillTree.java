@@ -305,9 +305,6 @@ public class SkillTree implements Draggable, Scrollable {
 
 		}
 
-		System.out.println("dragY = " + dragY);
-		System.out.println("zoom = " + zoom);
-
 		// for (SkillTreeNode skillTreeNode : skillTreeNodes) {
 		//
 		// skillTreeNode.updatePosition(skillTreeNode.x + dragX, skillTreeNode.y -

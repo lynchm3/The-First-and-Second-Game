@@ -1769,7 +1769,7 @@ public class Level {
 	}
 
 	public static void pausePlayer() {
-		Utils.printStackTrace();
+		// Utils.printStackTrace();
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;
 		Player.playerTargetAction = null;
@@ -2169,6 +2169,7 @@ public class Level {
 	public void endPlayerTurn() {
 
 		System.out.println("----------------END PLAYER TURN-----------------");
+		Utils.printStackTrace();
 
 		changeTime(20);
 		// secondString;

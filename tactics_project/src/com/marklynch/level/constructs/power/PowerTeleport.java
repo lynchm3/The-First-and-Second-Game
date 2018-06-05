@@ -33,7 +33,13 @@ public class PowerTeleport extends Power {
 
 		System.out.println("objectToTeleport = " + objectToTeleport);
 
-		new ActionTeleportOther(source, objectToTeleport).perform();
+		ActionTeleportOther actionTeleportOther =
+
+				new ActionTeleportOther(source, objectToTeleport);
+
+		System.out.println("actionTeleportOther.enabled = " + actionTeleportOther.enabled);
+
+		actionTeleportOther.perform();
 	}
 
 }

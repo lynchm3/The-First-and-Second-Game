@@ -2,7 +2,6 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
-import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.actions.ActionClose;
@@ -10,7 +9,6 @@ import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.utils.Utils;
 
 public abstract class Openable extends GameObject implements SwitchListener {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
@@ -41,9 +39,6 @@ public abstract class Openable extends GameObject implements SwitchListener {
 
 	public void lock() {
 		this.name = baseName + " (locked)";
-		if (this.squareGameObjectIsOn == Game.level.squares[105][12]) {
-			Utils.printStackTrace();
-		}
 		locked = true;
 	}
 
