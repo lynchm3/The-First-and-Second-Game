@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
-public class AnimationTeleport extends Animation {
+public class AnimationPushed extends Animation {
 
 	public GameObject performer;
 	public Square startSquare;
@@ -19,7 +19,7 @@ public class AnimationTeleport extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare) {
+	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare) {
 		super();
 		durationToReach = 4000;
 
@@ -60,17 +60,17 @@ public class AnimationTeleport extends Animation {
 		} else if (progress >= 0.5f) {
 			offsetX = 0;
 			offsetY = 0;
-			// boundsX1 = 0;
+			boundsX1 = 0;
 			boundsY1 = (int) ((1 - progress) * 2 * performer.height);
-			// boundsX2 = 0;
-			// boundsY2 = 0;
+			boundsX2 = 0;
+			boundsY2 = 0;
 		} else {
 			offsetX = startOffsetX;
 			offsetY = startOffsetY;
-			// boundsX1 = 0;
+			boundsX1 = 0;
 			boundsY1 = (int) (progress * 2 * performer.height);
-			// boundsX2 = 0;
-			// boundsY2 = 0;
+			boundsX2 = 0;
+			boundsY2 = 0;
 		}
 	}
 

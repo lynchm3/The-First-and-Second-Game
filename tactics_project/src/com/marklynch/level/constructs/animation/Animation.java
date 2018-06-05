@@ -42,10 +42,10 @@ public abstract class Animation {
 	public boolean drawBowString = false;
 	public float bowStringHandleY = 0;
 
-	public int boundsX1 = 0;
-	public int boundsY1 = 0;
-	public int boundsX2 = 0;
-	public int boundsY2 = 0;
+	public int boundsX1 = -128;
+	public int boundsY1 = -128;
+	public int boundsX2 = 128;
+	public int boundsY2 = 128;
 
 	protected void reverseAnimtion() {
 
