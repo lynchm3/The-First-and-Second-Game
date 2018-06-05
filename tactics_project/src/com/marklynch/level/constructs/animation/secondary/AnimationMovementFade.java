@@ -48,7 +48,8 @@ public class AnimationMovementFade extends Animation {
 			int actorPositionXInPixels = (int) (this.square.xInGridPixels + Game.SQUARE_WIDTH * actor.drawOffsetRatioX);
 			int actorPositionYInPixels = (int) (this.square.yInGridPixels
 					+ Game.SQUARE_HEIGHT * actor.drawOffsetRatioY);
-			actor.drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha, true, 1f);
+			actor.drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha, true, 1f, Integer.MIN_VALUE,
+					Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
 		} else {
 
 			int actorPositionXInPixels = (int) (square.xInGridPixels + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);

@@ -551,9 +551,19 @@ public class Actor extends GameObject {
 		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 		actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+
+		float boundsX1 = actorPositionXInPixels;
+		float boundsY1 = actorPositionYInPixels;
+		float boundsX2 = actorPositionXInPixels + width;
+		float boundsY2 = actorPositionYInPixels + height;
+
 		if (primaryAnimation != null) {
 			actorPositionXInPixels += primaryAnimation.offsetX;
 			actorPositionYInPixels += primaryAnimation.offsetY;
+			boundsX1 += primaryAnimation.offsetX + primaryAnimation.boundsX1;
+			boundsY1 += primaryAnimation.offsetY + primaryAnimation.boundsY1;
+			boundsX2 += primaryAnimation.offsetX + primaryAnimation.boundsX2;
+			boundsY2 += primaryAnimation.offsetY + primaryAnimation.boundsY2;
 		}
 
 		if (primaryAnimation != null && primaryAnimation.completed == false)
@@ -604,11 +614,12 @@ public class Actor extends GameObject {
 		else
 
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
-					flash || this == Game.gameObjectMouseIsOver, 1f);
+					flash || this == Game.gameObjectMouseIsOver, 1f, boundsX1, boundsY1, boundsX2, boundsY2);
 
 	}
 
-	public void drawActor(int x, int y, float alpha, boolean highlight, float scale) {
+	public void drawActor(int x, int y, float alpha, boolean highlight, float scale, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2) {
 
 		if (scale != 1) {
 			Game.flush();
@@ -620,10 +631,11 @@ public class Actor extends GameObject {
 		}
 
 		if (torsoImageTexture != null) {
-			TextureUtils.drawTexture(torsoImageTexture, alpha, x, y, x + width, y + height, backwards);
+			TextureUtils.drawTextureWithinBounds(torsoImageTexture, alpha, x, y, x + width, y + height, boundsX1,
+					boundsY1, boundsX2, boundsY2, backwards, false);
 			if (highlight) {
-				TextureUtils.drawTexture(torsoImageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards,
-						false, flashColor, false);
+				TextureUtils.drawTexture(torsoImageTexture, 0.5f, x, y, x + width, y + height, boundsX1, boundsY1,
+						boundsX2, boundsY2, backwards, false, flashColor, false);
 			}
 		}
 
@@ -700,26 +712,29 @@ public class Actor extends GameObject {
 			int helmetPositionXInPixels = (x);
 			int helmetPositionYInPixels = (y);
 
-			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels, helmetPositionYInPixels,
-					helmetPositionXInPixels + helmet.width, helmetPositionYInPixels + helmet.height, backwards);
+			TextureUtils.drawTextureWithinBounds(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
+					helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,
+					helmetPositionYInPixels + helmet.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards, false);
 			if (highlight) {
 				TextureUtils.drawTexture(this.helmet.imageTexture, 0.5f, helmetPositionXInPixels,
 						helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,
-						helmetPositionYInPixels + helmet.height, 0, 0, 0, 0, backwards, false, flashColor, false);
+						helmetPositionYInPixels + helmet.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
+						false, flashColor, false);
 
 			}
 
 		} else if (hairImageTexture != null) {
 			int bodyArmorPositionXInPixels = (x);
 			int bodyArmorPositionYInPixels = (y);
-			TextureUtils.drawTexture(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
+			TextureUtils.drawTextureWithinBounds(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
-					bodyArmorPositionYInPixels + hairImageTexture.getHeight(), backwards);
+					bodyArmorPositionYInPixels + hairImageTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+					backwards, false);
 			if (highlight) {
 				TextureUtils.drawTexture(this.hairImageTexture, 0.5f, bodyArmorPositionXInPixels,
 						bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
-						bodyArmorPositionYInPixels + hairImageTexture.getHeight(), 0, 0, 0, 0, backwards, false,
-						flashColor, false);
+						bodyArmorPositionYInPixels + hairImageTexture.getHeight(), boundsX1, boundsY1, boundsX2,
+						boundsY2, backwards, false, flashColor, false);
 
 			}
 		}
@@ -729,26 +744,29 @@ public class Actor extends GameObject {
 			int bodyArmorPositionXInPixels = (x);
 			int bodyArmorPositionYInPixels = (y);
 
-			TextureUtils.drawTexture(this.bodyArmor.backTexture, alpha, bodyArmorPositionXInPixels,
+			TextureUtils.drawTextureWithinBounds(this.bodyArmor.backTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels + bodyArmor.width, bodyArmorPositionXInPixels,
-					bodyArmorPositionYInPixels + bodyArmor.height, backwards);
+					bodyArmorPositionYInPixels + bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
+					false);
 			if (highlight) {
 				TextureUtils.drawTexture(this.bodyArmor.backTexture, 0.5f, bodyArmorPositionXInPixels,
 						bodyArmorPositionYInPixels + bodyArmor.width, bodyArmorPositionXInPixels,
-						bodyArmorPositionYInPixels + bodyArmor.height, 0, 0, 0, 0, backwards, false, flashColor, false);
+						bodyArmorPositionYInPixels + bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2,
+						backwards, false, flashColor, false);
 
 			}
 		}
 
-		drawBackArm(x, y, alpha, highlight);
+		drawBackArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 
 		// pelvis
 		if (pelvisImageTexture != null) {
-			TextureUtils.drawTexture(pelvisImageTexture, alpha, x, y, x + width, y + height, backwards);
+			TextureUtils.drawTextureWithinBounds(pelvisImageTexture, alpha, x, y, x + width, y + height, boundsX1,
+					boundsY1, boundsX2, boundsY2, backwards, false);
 
 			if (highlight) {
-				TextureUtils.drawTexture(pelvisImageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards,
-						false, flashColor, false);
+				TextureUtils.drawTexture(pelvisImageTexture, 0.5f, x, y, x + width, y + height, boundsX1, boundsY1,
+						boundsX2, boundsY2, backwards, false, flashColor, false);
 
 			}
 		}
@@ -757,33 +775,37 @@ public class Actor extends GameObject {
 
 			int legArmorPositionXInPixels = (x);
 			int legArmorPositionYInPixels = (y);
-			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
+			TextureUtils.drawTextureWithinBounds(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
-					legArmorPositionYInPixels + legArmor.height, backwards);
+					legArmorPositionYInPixels + legArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
+					false);
 			if (highlight) {
 				TextureUtils.drawTexture(this.legArmor.imageTexture, 0.5f, legArmorPositionXInPixels,
 						legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
-						legArmorPositionYInPixels + legArmor.height, 0, 0, 0, 0, backwards, false, flashColor, false);
+						legArmorPositionYInPixels + legArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
+						false, flashColor, false);
 
 			}
 		}
 
-		drawBackLeg(x, y, alpha, highlight);
-		drawFrontLeg(x, y, alpha, highlight);
+		drawBackLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
+		drawFrontLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 
 		if (bodyArmor != null && !sleeping) {
 
 			int bodyArmorPositionXInPixels = (x);
 			int bodyArmorPositionYInPixels = (y);
 
-			TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
+			TextureUtils.drawTextureWithinBounds(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
-					bodyArmorPositionYInPixels + bodyArmor.height, backwards);
+					bodyArmorPositionYInPixels + bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
+					false);
 
 			if (highlight) {
 				TextureUtils.drawTexture(this.bodyArmor.imageTexture, 0.5f, bodyArmorPositionXInPixels,
 						bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
-						bodyArmorPositionYInPixels + bodyArmor.height, 0, 0, 0, 0, backwards, false, flashColor, false);
+						bodyArmorPositionYInPixels + bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2,
+						backwards, false, flashColor, false);
 
 			}
 		}
@@ -792,18 +814,20 @@ public class Actor extends GameObject {
 
 			int legArmorPositionXInPixels = (x);
 			int legArmorPositionYInPixels = (y);
-			TextureUtils.drawTexture(this.legArmor.frontTexture, alpha, legArmorPositionXInPixels,
+			TextureUtils.drawTextureWithinBounds(this.legArmor.frontTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
-					legArmorPositionYInPixels + legArmor.height, backwards);
+					legArmorPositionYInPixels + legArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
+					false);
 			if (highlight) {
 				TextureUtils.drawTexture(this.legArmor.frontTexture, 0.5f, legArmorPositionXInPixels,
 						legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
-						legArmorPositionYInPixels + legArmor.height, 0, 0, 0, 0, backwards, false, flashColor, false);
+						legArmorPositionYInPixels + legArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
+						false, flashColor, false);
 
 			}
 		}
 
-		drawFrontArm(x, y, alpha, highlight);
+		drawFrontArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 
 		if (scale != 1) {
 			Game.flush();
@@ -813,22 +837,25 @@ public class Actor extends GameObject {
 		}
 	}
 
-	public void drawFrontArm(int x, int y, float alpha, boolean highlight) {
+	public void drawFrontArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2) {
 		if (backwards)
-			drawRightArm(x, y, alpha, highlight);
+			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 		else
-			drawLeftArm(x, y, alpha, highlight);
+			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 	}
 
-	public void drawBackArm(int x, int y, float alpha, boolean highlight) {
+	public void drawBackArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2) {
 		if (backwards)
-			drawLeftArm(x, y, alpha, highlight);
+			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 		else
-			drawRightArm(x, y, alpha, highlight);
+			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 
 	}
 
-	public void drawRightArm(int x, int y, float alpha, boolean highlight) {
+	public void drawRightArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2) {
 
 		if (armImageTexture == null)
 			return;
@@ -863,29 +890,32 @@ public class Actor extends GameObject {
 			drawArrow(rightArmHingeX - Templates.ARROW.anchorX, y + handY);
 		}
 
-		TextureUtils.drawTexture(this.armImageTexture, 1f, rightArmDrawX, elbowDrawY,
-				rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
+		TextureUtils.drawTextureWithinBounds(this.armImageTexture, 1f, rightArmDrawX, elbowDrawY,
+				rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight(), boundsX1,
+				boundsY1, boundsX2, boundsY2, false, false);
 		if (highlight) {
 
 			TextureUtils.drawTexture(this.armImageTexture, 0.5f, rightArmDrawX, elbowDrawY,
-					rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight(), 0, 0, 0, 0,
-					backwards, false, flashColor, false);
+					rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight(), boundsX1,
+					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 		}
 		if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
-			TextureUtils.drawTexture(this.bodyArmor.armLowerTexture, 1f, rightArmDrawX, elbowDrawY,
+			TextureUtils.drawTextureWithinBounds(this.bodyArmor.armLowerTexture, 1f, rightArmDrawX, elbowDrawY,
 					rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
-					elbowDrawY + bodyArmor.armLowerTexture.getHeight());
+					elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
+					false);
 			if (highlight) {
 				TextureUtils.drawTexture(this.bodyArmor.armLowerTexture, 0.5f, rightArmDrawX, elbowDrawY,
 						rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
-						elbowDrawY + bodyArmor.armLowerTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
-						false);
+						elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+						backwards, false, flashColor, false);
 
 			}
 		}
 
 		if (equipped != null && !backwards && !sleeping) {
-			drawWeapon(rightArmHingeX - equipped.anchorX, y + handY - equipped.anchorY, highlight);
+			drawWeapon(rightArmHingeX - equipped.anchorX, y + handY - equipped.anchorY, highlight, boundsX1, boundsY1,
+					boundsX2, boundsY2);
 		}
 
 		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
@@ -903,25 +933,27 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-rightArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(this.armImageTexture, alpha, rightArmDrawX, shoulderDrawY,
-				rightArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight());
+		TextureUtils.drawTextureWithinBounds(this.armImageTexture, alpha, rightArmDrawX, shoulderDrawY,
+				rightArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight(), boundsX1,
+				boundsY1, boundsX2, boundsY2, false, false);
 		if (highlight) {
 			TextureUtils.drawTexture(this.armImageTexture, 0.5f, rightArmDrawX, shoulderDrawY,
-					rightArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight(), 0, 0, 0, 0,
-					backwards, false, flashColor, false);
+					rightArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight(), boundsX1,
+					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 
 		}
 		if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
 
-			TextureUtils.drawTexture(bodyArmor.armUpperTexture, 1f, rightArmDrawX, shoulderDrawY,
+			TextureUtils.drawTextureWithinBounds(bodyArmor.armUpperTexture, 1f, rightArmDrawX, shoulderDrawY,
 					rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
-					shoulderDrawY + bodyArmor.armUpperTexture.getHeight());
+					shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+					false, false);
 			if (highlight) {
 
 				TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, rightArmDrawX, shoulderDrawY,
 						rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
-						shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
-						false);
+						shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+						backwards, false, flashColor, false);
 
 			}
 		}
@@ -934,7 +966,8 @@ public class Actor extends GameObject {
 
 	}
 
-	public void drawLeftArm(int x, int y, float alpha, boolean highlight) {
+	public void drawLeftArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2) {
 
 		if (armImageTexture == null)
 			return;
@@ -975,31 +1008,34 @@ public class Actor extends GameObject {
 			drawArrow(leftArmHingeX - Templates.ARROW.anchorX, y + handY);
 		}
 
-		TextureUtils.drawTexture(this.armImageTexture, alpha, leftArmDrawX, elbowDrawY,
-				leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight());
+		TextureUtils.drawTextureWithinBounds(this.armImageTexture, alpha, leftArmDrawX, elbowDrawY,
+				leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight(), boundsX1, boundsY1,
+				boundsX2, boundsY2, false, false);
 		if (highlight) {
 			TextureUtils.drawTexture(this.armImageTexture, 0.5f, leftArmDrawX, elbowDrawY,
-					leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight(), 0, 0, 0, 0,
-					backwards, false, flashColor, false);
+					leftArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight(), boundsX1,
+					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 
 		}
 		if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
 
-			TextureUtils.drawTexture(bodyArmor.armLowerTexture, 1f, leftArmDrawX, elbowDrawY,
+			TextureUtils.drawTextureWithinBounds(bodyArmor.armLowerTexture, 1f, leftArmDrawX, elbowDrawY,
 					leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
-					elbowDrawY + bodyArmor.armLowerTexture.getHeight());
+					elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
+					false);
 			if (highlight) {
 
 				TextureUtils.drawTexture(bodyArmor.armLowerTexture, 0.5f, leftArmDrawX, elbowDrawY,
 						leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
-						elbowDrawY + bodyArmor.armLowerTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
-						false);
+						elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+						backwards, false, flashColor, false);
 
 			}
 		}
 
 		if (equipped != null && backwards && !sleeping) {
-			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX), y + handY - equipped.anchorY, highlight);
+			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX), y + handY - equipped.anchorY, highlight,
+					boundsX1, boundsY1, boundsX2, boundsY2);
 		}
 		if (equipped != null && backwards && !sleeping && primaryAnimation != null
 				&& primaryAnimation.drawArrowInMainHand == true) {
@@ -1016,25 +1052,27 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-leftArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(this.armImageTexture, alpha, leftArmDrawX, shoulderDrawY,
-				leftArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight());
+		TextureUtils.drawTextureWithinBounds(this.armImageTexture, alpha, leftArmDrawX, shoulderDrawY,
+				leftArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight(), boundsX1,
+				boundsY1, boundsX2, boundsY2, false, false);
 		if (highlight) {
 			TextureUtils.drawTexture(this.armImageTexture, 0.5f, leftArmDrawX, shoulderDrawY,
-					leftArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight(), 0, 0, 0, 0,
-					backwards, false, flashColor, false);
+					leftArmDrawX + armImageTexture.getWidth(), shoulderDrawY + armImageTexture.getHeight(), boundsX1,
+					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 
 		}
 
 		if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
 
-			TextureUtils.drawTexture(bodyArmor.armUpperTexture, alpha, leftArmDrawX, shoulderDrawY,
+			TextureUtils.drawTextureWithinBounds(bodyArmor.armUpperTexture, alpha, leftArmDrawX, shoulderDrawY,
 					leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
-					shoulderDrawY + bodyArmor.armUpperTexture.getHeight());
+					shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+					false, false);
 			if (highlight) {
 				TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, leftArmDrawX, shoulderDrawY,
 						leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
-						shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
-						false);
+						shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+						backwards, false, flashColor, false);
 
 			}
 		}
@@ -1047,18 +1085,19 @@ public class Actor extends GameObject {
 
 	}
 
-	public void drawWeapon(float x, float y, boolean highlight) {
+	public void drawWeapon(float x, float y, boolean highlight, float boundsX1, float boundsY1, float boundsX2,
+			float boundsY2) {
 
 		if (primaryAnimation != null && primaryAnimation.drawEquipped == false)
 			return;
 
 		// weapon
 		float alpha = 1.0f;
-		TextureUtils.drawTexture(this.equipped.imageTexture, alpha, x, y, x + equipped.width, y + equipped.height,
-				backwards);
+		TextureUtils.drawTextureWithinBounds(this.equipped.imageTexture, alpha, x, y, x + equipped.width,
+				y + equipped.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards, false);
 		if (highlight) {
-			TextureUtils.drawTexture(this.equipped.imageTexture, 0.5f, x, y, x + equipped.width, y + equipped.height, 0,
-					0, 0, 0, backwards, false, flashColor, false);
+			TextureUtils.drawTexture(this.equipped.imageTexture, 0.5f, x, y, x + equipped.width, y + equipped.height,
+					boundsX1, boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 
 		}
 
@@ -1068,22 +1107,25 @@ public class Actor extends GameObject {
 		}
 	}
 
-	public void drawFrontLeg(int x, int y, float alpha, boolean highlight) {
+	public void drawFrontLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2) {
 		if (backwards)
-			drawRightLeg(x, y, alpha, highlight);
+			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 		else
-			drawLeftLeg(x, y, alpha, highlight);
+			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 	}
 
-	public void drawBackLeg(int x, int y, float alpha, boolean highlight) {
+	public void drawBackLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2) {
 		if (backwards)
-			drawLeftLeg(x, y, alpha, highlight);
+			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 		else
-			drawRightLeg(x, y, alpha, highlight);
+			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 
 	}
 
-	public void drawLeftLeg(int x, int y, float alpha, boolean highlight) {
+	public void drawLeftLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2) {
 
 		if (legImageTexture == null)
 			return;
@@ -1124,26 +1166,28 @@ public class Actor extends GameObject {
 			drawArrow(leftLegHingeX - Templates.ARROW.anchorX, y + handY);
 		}
 
-		TextureUtils.drawTexture(this.legImageTexture, alpha, leftLegDrawX, kneeDrawY,
-				leftLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight());
+		TextureUtils.drawTextureWithinBounds(this.legImageTexture, alpha, leftLegDrawX, kneeDrawY,
+				leftLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight(), boundsX1, boundsY1,
+				boundsX2, boundsY2, false, false);
 		if (highlight) {
 			TextureUtils.drawTexture(this.legImageTexture, 0.5f, leftLegDrawX, kneeDrawY,
-					leftLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight(), 0, 0, 0, 0,
-					backwards, false, flashColor, false);
+					leftLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight(), boundsX1,
+					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 
 		}
 
 		if (legArmor != null && legArmor.legLowerTexture != null) {
 
-			TextureUtils.drawTexture(legArmor.legLowerTexture, 1f, leftLegDrawX, kneeDrawY,
+			TextureUtils.drawTextureWithinBounds(legArmor.legLowerTexture, 1f, leftLegDrawX, kneeDrawY,
 					leftLegDrawX + legArmor.legLowerTexture.getWidth(),
-					kneeDrawY + legArmor.legLowerTexture.getHeight());
+					kneeDrawY + legArmor.legLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
+					false);
 			if (highlight) {
 
 				TextureUtils.drawTexture(legArmor.legLowerTexture, 0.5f, leftLegDrawX, kneeDrawY,
 						leftLegDrawX + legArmor.legLowerTexture.getWidth(),
-						kneeDrawY + legArmor.legLowerTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
-						false);
+						kneeDrawY + legArmor.legLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+						backwards, false, flashColor, false);
 
 			}
 		}
@@ -1154,25 +1198,26 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-leftLegHingeX, -kneeDrawY));
 		Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(this.legImageTexture, alpha, leftLegDrawX, hipDrawY,
-				leftLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight());
+		TextureUtils.drawTextureWithinBounds(this.legImageTexture, alpha, leftLegDrawX, hipDrawY,
+				leftLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight(), boundsX1, boundsY1,
+				boundsX2, boundsY2, false, false);
 		if (highlight) {
 			TextureUtils.drawTexture(this.legImageTexture, 0.5f, leftLegDrawX, hipDrawY,
-					leftLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight(), 0, 0, 0, 0,
-					backwards, false, flashColor, false);
+					leftLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight(), boundsX1,
+					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 
 		}
 
 		if (legArmor != null && legArmor.legUpperTexture != null) {
 
-			TextureUtils.drawTexture(legArmor.legUpperTexture, alpha, leftLegDrawX, hipDrawY,
-					leftLegDrawX + legArmor.legUpperTexture.getWidth(),
-					hipDrawY + legArmor.legUpperTexture.getHeight());
+			TextureUtils.drawTextureWithinBounds(legArmor.legUpperTexture, alpha, leftLegDrawX, hipDrawY,
+					leftLegDrawX + legArmor.legUpperTexture.getWidth(), hipDrawY + legArmor.legUpperTexture.getHeight(),
+					boundsX1, boundsY1, boundsX2, boundsY2, false, false);
 			if (highlight) {
 				TextureUtils.drawTexture(legArmor.legUpperTexture, 0.5f, leftLegDrawX, hipDrawY,
 						leftLegDrawX + legArmor.legUpperTexture.getWidth(),
-						hipDrawY + legArmor.legUpperTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
-						false);
+						hipDrawY + legArmor.legUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+						backwards, false, flashColor, false);
 
 			}
 		}
@@ -1185,7 +1230,8 @@ public class Actor extends GameObject {
 
 	}
 
-	public void drawRightLeg(int x, int y, float alpha, boolean highlight) {
+	public void drawRightLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2) {
 
 		if (legImageTexture == null)
 			return;
@@ -1226,26 +1272,28 @@ public class Actor extends GameObject {
 			drawArrow(rightLegHingeX - Templates.ARROW.anchorX, y + handY);
 		}
 
-		TextureUtils.drawTexture(this.legImageTexture, alpha, rightLegDrawX, kneeDrawY,
-				rightLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight());
+		TextureUtils.drawTextureWithinBounds(this.legImageTexture, alpha, rightLegDrawX, kneeDrawY,
+				rightLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight(), boundsX1, boundsY1,
+				boundsX2, boundsY2, false, false);
 		if (highlight) {
 			TextureUtils.drawTexture(this.legImageTexture, 0.5f, rightLegDrawX, kneeDrawY,
-					rightLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight(), 0, 0, 0, 0,
-					backwards, false, flashColor, false);
+					rightLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight(), boundsX1,
+					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 
 		}
 
 		if (legArmor != null && legArmor.legLowerTexture != null) {
 
-			TextureUtils.drawTexture(legArmor.legLowerTexture, 1f, rightLegDrawX, kneeDrawY,
+			TextureUtils.drawTextureWithinBounds(legArmor.legLowerTexture, 1f, rightLegDrawX, kneeDrawY,
 					rightLegDrawX + legArmor.legLowerTexture.getWidth(),
-					kneeDrawY + legArmor.legLowerTexture.getHeight());
+					kneeDrawY + legArmor.legLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
+					false);
 			if (highlight) {
 
 				TextureUtils.drawTexture(legArmor.legLowerTexture, 0.5f, rightLegDrawX, kneeDrawY,
 						rightLegDrawX + legArmor.legLowerTexture.getWidth(),
-						kneeDrawY + legArmor.legLowerTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
-						false);
+						kneeDrawY + legArmor.legLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+						backwards, false, flashColor, false);
 
 			}
 		}
@@ -1256,25 +1304,27 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-rightLegHingeX, -kneeDrawY));
 		Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(this.legImageTexture, alpha, rightLegDrawX, hipDrawY,
-				rightLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight());
+		TextureUtils.drawTextureWithinBounds(this.legImageTexture, alpha, rightLegDrawX, hipDrawY,
+				rightLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight(), boundsX1, boundsY1,
+				boundsX2, boundsY2, false, false);
 		if (highlight) {
 			TextureUtils.drawTexture(this.legImageTexture, 0.5f, rightLegDrawX, hipDrawY,
-					rightLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight(), 0, 0, 0, 0,
-					backwards, false, flashColor, false);
+					rightLegDrawX + legImageTexture.getWidth(), hipDrawY + legImageTexture.getHeight(), boundsX1,
+					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 
 		}
 
 		if (legArmor != null && legArmor.legUpperTexture != null) {
 
-			TextureUtils.drawTexture(legArmor.legUpperTexture, alpha, rightLegDrawX, hipDrawY,
+			TextureUtils.drawTextureWithinBounds(legArmor.legUpperTexture, alpha, rightLegDrawX, hipDrawY,
 					rightLegDrawX + legArmor.legUpperTexture.getWidth(),
-					hipDrawY + legArmor.legUpperTexture.getHeight());
+					hipDrawY + legArmor.legUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
+					false);
 			if (highlight) {
 				TextureUtils.drawTexture(legArmor.legUpperTexture, 0.5f, rightLegDrawX, hipDrawY,
 						rightLegDrawX + legArmor.legUpperTexture.getWidth(),
-						hipDrawY + legArmor.legUpperTexture.getHeight(), 0, 0, 0, 0, backwards, false, flashColor,
-						false);
+						hipDrawY + legArmor.legUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
+						backwards, false, flashColor, false);
 
 			}
 		}

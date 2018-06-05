@@ -1917,7 +1917,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void drawActor(Actor actor, int x, int y) {
-		actor.drawActor(x, y, 1, false, 2f);
+		actor.drawActor(x, y, 1, false, 2f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
 	}
 
 	@Override
