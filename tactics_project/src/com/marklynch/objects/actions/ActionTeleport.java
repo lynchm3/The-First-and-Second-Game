@@ -7,6 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.primary.AnimationTeleport;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -20,7 +21,7 @@ public class ActionTeleport extends Action {
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	GameObject teleportee;
-	Square target;
+	Square targetSquare;
 	boolean endTurn;
 	GameObject gameObjectInTheWay;
 
@@ -28,7 +29,7 @@ public class ActionTeleport extends Action {
 		super(ACTION_NAME, "action_teleport.png");
 		super.gameObjectPerformer = this.performer = performer;
 		this.teleportee = teleportee;
-		this.target = target;
+		this.targetSquare = target;
 		this.endTurn = endTurn;
 		if (!check()) {
 			enabled = false;
@@ -58,7 +59,8 @@ public class ActionTeleport extends Action {
 		}
 
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
-		teleport(teleportee, target);
+		Square startSquare = teleportee.squareGameObjectIsOn;
+		teleport(teleportee, targetSquare);
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
@@ -113,6 +115,8 @@ public class ActionTeleport extends Action {
 
 		trespassingCheck(this, performer, teleportee.squareGameObjectIsOn);
 
+		teleportee.primaryAnimation = new AnimationTeleport(teleportee, startSquare, targetSquare);
+
 		Level.teleportee = null;
 
 	}
@@ -125,10 +129,10 @@ public class ActionTeleport extends Action {
 
 		if (Game.level.shouldLog(performer, teleportee)) {
 			if (performer == teleportee)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", target }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", targetSquare }));
 			else
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " teleported ", teleportee, " to ", target }));
+						new ActivityLog(new Object[] { performer, " teleported ", teleportee, " to ", targetSquare }));
 		}
 
 		// Teleported big object on to big object... someone has to die.
@@ -155,7 +159,7 @@ public class ActionTeleport extends Action {
 	@Override
 	public boolean check() {
 
-		if (target == teleportee.squareGameObjectIsOn)
+		if (targetSquare == teleportee.squareGameObjectIsOn)
 			return false;
 
 		// if (target.inventory.isPassable(teleportee))
@@ -177,7 +181,7 @@ public class ActionTeleport extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.restricted == true && !target.owners.contains(teleportee)) {
+		if (targetSquare.restricted == true && !targetSquare.owners.contains(teleportee)) {
 			return false;
 		}
 
@@ -198,10 +202,10 @@ public class ActionTeleport extends Action {
 	public Sound createSound() {
 
 		// Sound of glass
-		ArrayList<GameObject> stampables = target.inventory.getGameObjectsOfClass(Stampable.class);
+		ArrayList<GameObject> stampables = targetSquare.inventory.getGameObjectsOfClass(Stampable.class);
 		if (!(teleportee instanceof Blind) && stampables.size() > 0) {
 			for (GameObject stampable : stampables) {
-				return new Sound(teleportee, stampable, target, 10, legal, this.getClass());
+				return new Sound(teleportee, stampable, targetSquare, 10, legal, this.getClass());
 			}
 		}
 		return null;

@@ -442,8 +442,19 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			// System.out.println("this = " + this + "..." + this.getClass());
 
 			// GL11.glTexParameteri(target, pname, param);
-			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
+
+			if (primaryAnimation != null && primaryAnimation.boundsX1 != Integer.MAX_VALUE) {
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, actorPositionXInPixels,
+						actorPositionYInPixels, actorPositionXInPixels + width, actorPositionYInPixels + height,
+						actorPositionXInPixels + primaryAnimation.boundsX1,
+						actorPositionYInPixels + primaryAnimation.boundsY1,
+						actorPositionXInPixels + width + primaryAnimation.boundsX2,
+						actorPositionYInPixels + height + primaryAnimation.boundsY2, backwards, false);
+			} else {
+
+				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+						actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
+			}
 
 			if (flash || this == Game.gameObjectMouseIsOver) {
 				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
@@ -485,6 +496,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
 									+ arrow.height);
+
 				} else {
 					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
 							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
