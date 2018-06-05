@@ -390,9 +390,19 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+
+			float boundsX1 = actorPositionXInPixels;
+			float boundsY1 = actorPositionYInPixels;
+			float boundsX2 = actorPositionXInPixels + width;
+			float boundsY2 = actorPositionYInPixels + height;
+
 			if (primaryAnimation != null) {
 				actorPositionXInPixels += primaryAnimation.offsetX;
 				actorPositionYInPixels += primaryAnimation.offsetY;
+				boundsX1 += primaryAnimation.offsetX + primaryAnimation.boundsX1;
+				boundsY1 += primaryAnimation.offsetY + primaryAnimation.boundsY1;
+				boundsX2 += primaryAnimation.offsetX + primaryAnimation.boundsX2;
+				boundsY2 += primaryAnimation.offsetY + primaryAnimation.boundsY2;
 			}
 
 			float alpha = 1.0f;
@@ -443,18 +453,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			// GL11.glTexParameteri(target, pname, param);
 
-			if (primaryAnimation != null && primaryAnimation.boundsX1 != Integer.MAX_VALUE) {
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, actorPositionXInPixels,
-						actorPositionYInPixels, actorPositionXInPixels + width, actorPositionYInPixels + height,
-						actorPositionXInPixels + primaryAnimation.boundsX1,
-						actorPositionYInPixels + primaryAnimation.boundsY1,
-						actorPositionXInPixels + width + primaryAnimation.boundsX2,
-						actorPositionYInPixels + height + primaryAnimation.boundsY2, backwards, false);
-			} else {
-
-				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-						actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
-			}
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + width, actorPositionYInPixels + height, boundsX1, boundsY1, boundsX2,
+					boundsY2, backwards, false);
 
 			if (flash || this == Game.gameObjectMouseIsOver) {
 				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
