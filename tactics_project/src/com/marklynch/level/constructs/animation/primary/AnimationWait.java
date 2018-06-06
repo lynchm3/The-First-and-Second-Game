@@ -31,6 +31,7 @@ public class AnimationWait extends Animation {
 
 		float angleChange = (float) (0.002d * delta);
 
+		// torsoAngle = 0.5f;
 		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, 0);
 		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, 0);
 		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);

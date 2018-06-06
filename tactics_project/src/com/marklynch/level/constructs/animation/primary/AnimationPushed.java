@@ -73,13 +73,15 @@ public class AnimationPushed extends Animation {
 
 		float angleChange = (float) (0.010d * delta);
 
-		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetLimbRadians);
-		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetLimbRadians);
+		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, targetLimbRadians);
+
+		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, 0);
+		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, 0);
 		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
 
-		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, targetLimbRadians);
-		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, targetLimbRadians);
+		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, 0);
+		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, 0);
 		leftKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 		rightKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 

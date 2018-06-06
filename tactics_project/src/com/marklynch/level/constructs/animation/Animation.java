@@ -6,6 +6,7 @@ public abstract class Animation {
 	public float offsetX = 0;
 	public float offsetY = 0;
 
+	public float torsoAngle = 0f;
 	public float leftShoulderAngle = 0f;
 	public float leftElbowAngle = 0f;
 	public float rightShoulderAngle = 0f;

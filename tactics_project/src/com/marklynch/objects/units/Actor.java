@@ -630,6 +630,18 @@ public class Actor extends GameObject {
 			Game.activeBatch.updateUniforms();
 		}
 
+		// torso rotation
+		float torsoAngle = 0;
+		if (primaryAnimation != null) {
+			torsoAngle = primaryAnimation.torsoAngle;
+		}
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		Game.flush();
+		view.translate(new Vector2f(x + halfWidth, y + hipY));
+		view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
+		Game.activeBatch.updateUniforms();
+
 		if (torsoImageTexture != null) {
 			TextureUtils.drawTextureWithinBounds(torsoImageTexture, alpha, x, y, x + width, y + height, boundsX1,
 					boundsY1, boundsX2, boundsY2, backwards, false);
@@ -829,9 +841,14 @@ public class Actor extends GameObject {
 
 		drawFrontArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2);
 
+		Game.flush();
+		view.translate(new Vector2f(x + halfWidth, y + hipY));
+		view.rotate(-torsoAngle, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
+		Game.activeBatch.updateUniforms();
+
 		if (scale != 1) {
-			Game.flush();
-			Matrix4f view = Game.activeBatch.getViewMatrix();
+			// Matrix4f view = Game.activeBatch.getViewMatrix();
 			view.setIdentity();
 			Game.activeBatch.updateUniforms();
 		}
