@@ -83,9 +83,6 @@ public class AnimationSlash extends Animation {
 			rightShoulderAngle = 0;
 			rightElbowAngle = 0;
 			complete();
-
-			target.setPrimaryAnimation(
-					new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
 		} else {
 		}
 
