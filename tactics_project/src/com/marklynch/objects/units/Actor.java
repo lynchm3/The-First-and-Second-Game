@@ -936,11 +936,13 @@ public class Actor extends GameObject {
 		}
 
 		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
-				&& primaryAnimation.drawArrowInMainHand == true) {
+				&& primaryAnimation.drawArrowInMainHand == true
+				&& (primaryAnimation == null || primaryAnimation.drawWeapon)) {
 			drawArrow(rightArmHingeX - Templates.ARROW.anchorX, y + handY);
 		}
 
-		if (equipped != null && equipped.templateId == Templates.HUNTING_BOW.templateId && !backwards) {
+		if (equipped != null && equipped.templateId == Templates.HUNTING_BOW.templateId && !backwards
+				&& (primaryAnimation == null || primaryAnimation.drawWeapon)) {
 			drawBowString(rightArmHingeX, y + handY);
 		}
 

@@ -18,7 +18,7 @@ public class AnimationPush extends Animation {
 		this.targetSquare = targetSquare;
 		this.performer = performer;
 		durationToReach = 400;
-		drawWeapon = false;
+		// drawWeapon = false;
 		if (previousAnimation != null) {
 			torsoAngle = previousAnimation.torsoAngle;
 			leftShoulderAngle = previousAnimation.leftShoulderAngle;
@@ -51,6 +51,7 @@ public class AnimationPush extends Animation {
 		}
 		if (targetSquare.xInGrid - performer.squareGameObjectIsOn.xInGrid < 0) {
 			targetRadians = left;
+			performer.backwards = true;
 
 		} else if (targetSquare.xInGrid - performer.squareGameObjectIsOn.xInGrid > 0) {
 			targetRadians = right;
@@ -89,6 +90,7 @@ public class AnimationPush extends Animation {
 		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, 0);
 		leftKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 		rightKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
+		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, 0);
 
 		if (progress >= 1) {
 			complete();
@@ -98,8 +100,10 @@ public class AnimationPush extends Animation {
 
 		// If at last square, drop y.
 		if (durationSoFar < quarterDurationToReach) {
-			leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetRadians);
-			rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetRadians);
+			if (!backwards)
+				leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetRadians);
+			else
+				rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetRadians);
 		} else {
 			// leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle,
 			// angleChange, 0);
