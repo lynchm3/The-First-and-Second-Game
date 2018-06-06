@@ -22,7 +22,7 @@ public class AnimationTeleport extends Animation {
 
 	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare) {
 		super();
-		durationToReach = 4000;
+		durationToReach = 400;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;

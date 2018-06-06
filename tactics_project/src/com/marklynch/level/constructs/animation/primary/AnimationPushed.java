@@ -22,7 +22,7 @@ public class AnimationPushed extends Animation {
 
 	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare) {
 		super();
-		durationToReach = 400;
+		durationToReach = 4000;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -36,11 +36,23 @@ public class AnimationPushed extends Animation {
 
 		backwards = performer.backwards;
 
+		float deltaX = endSquare.xInGrid - startSquare.xInGrid;
+		float deltaY = endSquare.yInGrid - startSquare.yInGrid;
+		double targetLimbRadians = Math.atan2(deltaY, deltaX);
+		targetLimbDegrees = (float) Math.toDegrees(targetLimbRadians);
+		targetLimbDegrees = (float) Math.atan2(endSquare.yInGrid - startSquare.yInGrid,
+				endSquare.xInGrid - startSquare.xInGrid) + 1.5708f;
+		// System.out.println("deltaX = " + deltaX);
+		// System.out.println("deltaY = " + deltaY);
+		System.out.println("targetLimbDegrees = " + targetLimbDegrees);
+
 		blockAI = true;
 
 		if (blockAI)
 			Level.blockingAnimations.add(this);
 	}
+
+	float targetLimbDegrees = 0;
 
 	@Override
 	public void update(double delta) {
@@ -55,6 +67,25 @@ public class AnimationPushed extends Animation {
 		if (progress >= 1) {
 			progress = 1;
 		}
+
+		float angleChange = 1;
+
+		leftShoulderAngle = targetLimbDegrees; // = moveTowardsTargetAngleInDegrees(leftShoulderAngle, angleChange,
+												// targetLimbDegrees);
+		rightShoulderAngle = targetLimbDegrees;// = moveTowardsTargetAngleInDegrees(rightShoulderAngle, angleChange,
+												// targetLimbDegrees);
+		leftElbowAngle = 0;// = moveTowardsTargetAngleInDegrees(leftElbowAngle, angleChange,
+							// targetLimbDegrees);
+		rightElbowAngle = 0;// = moveTowardsTargetAngleInDegrees(rightElbowAngle, angleChange,
+							// targetLimbDegrees);
+
+		leftHipAngle = targetLimbDegrees;
+
+		rightHipAngle = targetLimbDegrees;
+
+		leftKneeAngle = 0;
+
+		rightKneeAngle = 0;
 
 		if (progress >= 1) {
 			completed = true;

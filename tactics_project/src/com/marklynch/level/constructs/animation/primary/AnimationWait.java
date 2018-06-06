@@ -31,33 +31,10 @@ public class AnimationWait extends Animation {
 
 		float angleChange = (float) (0.002d * delta);
 
-		leftShoulderAngle = moveTowardsZero(leftShoulderAngle, angleChange);
-		rightShoulderAngle = moveTowardsZero(rightShoulderAngle, angleChange);
-		leftElbowAngle = moveTowardsZero(leftElbowAngle, angleChange);
-		rightElbowAngle = moveTowardsZero(rightElbowAngle, angleChange);
-
-	}
-
-	private float moveTowardsZero(float angleToChange, float angleChange) {
-		if (angleToChange == 0) {
-
-		} else if (Math.abs(angleToChange) < angleChange) {
-			angleToChange = 0;
-		} else if (angleToChange > 0) {
-			if (angleToChange < angleChange) {
-				angleToChange = 0;
-			} else {
-				angleToChange -= angleChange;
-			}
-		} else if (angleToChange < 0) {
-			if (angleToChange > angleChange) {
-				angleToChange = 0;
-			} else {
-				angleToChange += angleChange;
-			}
-		}
-
-		return angleToChange;
+		leftShoulderAngle = moveTowardsTargetAngleInDegrees(leftShoulderAngle, angleChange, 0);
+		rightShoulderAngle = moveTowardsTargetAngleInDegrees(rightShoulderAngle, angleChange, 0);
+		leftElbowAngle = moveTowardsTargetAngleInDegrees(leftElbowAngle, angleChange, 0);
+		rightElbowAngle = moveTowardsTargetAngleInDegrees(rightElbowAngle, angleChange, 0);
 
 	}
 
