@@ -28,7 +28,7 @@ public class AnimationPushed extends Animation {
 		float distance = (float) Math.hypot(this.startSquare.xInGrid - this.endSquare.xInGrid,
 				this.startSquare.yInGrid - this.endSquare.yInGrid);
 
-		durationToReach = distance * 50;
+		durationToReach = distance * 500;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -43,8 +43,19 @@ public class AnimationPushed extends Animation {
 		// float deltaY = endSquare.yInGrid - startSquare.yInGrid;
 		// double targetLimbRadians = Math.atan2(deltaY, deltaX);
 		// targetLimbRadians = (float) Math.toDegrees(targetLimbRadians);
+
+		// -180 to +180 = -3.14 to 3.14
 		targetLimbRadians = (float) Math.atan2(endSquare.yInGrid - startSquare.yInGrid,
 				endSquare.xInGrid - startSquare.xInGrid) + 1.5708f;
+
+		while (targetLimbRadians > 3.14f) {
+			targetLimbRadians -= 3.14f;
+		}
+
+		while (targetLimbRadians < -3.14f) {
+			targetLimbRadians += 3.14f;
+		}
+
 		// System.out.println("deltaX = " + deltaX);
 		// System.out.println("deltaY = " + deltaY);
 		System.out.println("targetLimbDegrees = " + targetLimbRadians);

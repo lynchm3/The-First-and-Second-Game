@@ -365,6 +365,7 @@ public class QuestSmallGame extends Quest {
 				new GameObject[] { Templates.HATCHET.makeCopy(null, null),
 						Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town, new int[] {}, new HOBBY[] { HOBBY.HUNTING });
+		t3.aiRoutine = null;
 		ArrayList<Wall> extraWallsThievesHut = new ArrayList<Wall>();
 		ArrayList<StructureFeature> featuresThievesHut = new ArrayList<StructureFeature>();
 		ArrayList<StructurePath> pathsThievesHut = new ArrayList<StructurePath>();

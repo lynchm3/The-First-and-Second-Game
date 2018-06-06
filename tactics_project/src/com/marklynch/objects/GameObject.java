@@ -703,6 +703,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			}
 
+			if (primaryAnimation != null) {
+				Level.blockingAnimations.remove(primaryAnimation);
+			}
+
+			for (Animation animation : secondaryAnimations) {
+				Level.blockingAnimations.remove(animation);
+			}
+
 			// for (DestructionListener destructionListener :
 			// destructionListeners) {
 			// destructionListener.onDestroy();
