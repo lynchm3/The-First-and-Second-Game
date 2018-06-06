@@ -113,7 +113,7 @@ public class PowerTelekineticPush extends Power {
 		for (GameObject pushedGameObject : pushedObjectToStartSquare.keySet()) {
 			if (pushedGameObject.remainingHealth > 0)
 				pushedGameObject.primaryAnimation = new AnimationPushed(pushedGameObject,
-						pushedObjectToStartSquare.get(pushedGameObject), endSquare);
+						pushedObjectToStartSquare.get(pushedGameObject), endSquare, pushedGameObject.primaryAnimation);
 		}
 	}
 

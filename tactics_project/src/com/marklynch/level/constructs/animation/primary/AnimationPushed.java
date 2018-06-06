@@ -18,12 +18,30 @@ public class AnimationPushed extends Animation {
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
+	// Animation previousAnimation;
+
 	// for show only, walking actor, primary
 
-	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare) {
+	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare, Animation previousAnimation) {
 		super();
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
+
+		if (previousAnimation != null) {
+
+			torsoAngle = previousAnimation.torsoAngle;
+
+			leftShoulderAngle = previousAnimation.leftShoulderAngle;
+			rightShoulderAngle = previousAnimation.rightShoulderAngle;
+			leftElbowAngle = previousAnimation.leftElbowAngle;
+			rightElbowAngle = previousAnimation.rightElbowAngle;
+
+			leftHipAngle = previousAnimation.leftHipAngle;
+			rightHipAngle = previousAnimation.rightHipAngle;
+			leftKneeAngle = previousAnimation.leftKneeAngle;
+			rightKneeAngle = previousAnimation.rightKneeAngle;
+
+		}
 
 		float distance = (float) Math.hypot(this.startSquare.xInGrid - this.endSquare.xInGrid,
 				this.startSquare.yInGrid - this.endSquare.yInGrid);
@@ -38,22 +56,42 @@ public class AnimationPushed extends Animation {
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
 		backwards = performer.backwards;
-
-		// float deltaX = endSquare.xInGrid - startSquare.xInGrid;
-		// float deltaY = endSquare.yInGrid - startSquare.yInGrid;
-		// double targetLimbRadians = Math.atan2(deltaY, deltaX);
-		// targetLimbRadians = (float) Math.toDegrees(targetLimbRadians);
-
 		// -180 to +180 = -3.14 to 3.14
-		targetLimbRadians = (float) Math.atan2(endSquare.yInGrid - startSquare.yInGrid,
-				endSquare.xInGrid - startSquare.xInGrid) + 1.5708f;
 
-		while (targetLimbRadians > 3.14f) {
-			targetLimbRadians -= 3.14f;
+		// targetLimbRadians = (float) Math.atan2(endSquare.yInGrid -
+		// startSquare.yInGrid,
+		// endSquare.xInGrid - startSquare.xInGrid) + 1.5708f;
+
+		// if (endSquare.yInGrid - startSquare.yInGrid < 0) {
+		// targetLimbRadians = -targetLimbRadians;
+		// }
+		// if (endSquare.xInGrid - startSquare.xInGrid < 0) {
+		// targetLimbRadians = -targetLimbRadians;
+		// }
+		//
+		// while (targetLimbRadians > 3.14f) {
+		// targetLimbRadians -= 3.14f;
+		// }
+		//
+		// while (targetLimbRadians < -3.14f) {
+		// targetLimbRadians += 3.14f;
+		// }
+
+		float up = 0f;
+		float down = 3.14f;
+		float left = -1.57f;
+		float right = 1.57f;
+
+		if (endSquare.yInGrid - startSquare.yInGrid < 0) {
+			targetLimbRadians = up;
+		} else if (endSquare.yInGrid - startSquare.yInGrid > 0) {
+			targetLimbRadians = down;
+
 		}
-
-		while (targetLimbRadians < -3.14f) {
-			targetLimbRadians += 3.14f;
+		if (endSquare.xInGrid - startSquare.xInGrid < 0) {
+			targetLimbRadians = left;
+		} else if (endSquare.xInGrid - startSquare.xInGrid > 0) {
+			targetLimbRadians = right;
 		}
 
 		// System.out.println("deltaX = " + deltaX);
