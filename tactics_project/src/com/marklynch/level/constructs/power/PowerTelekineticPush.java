@@ -8,6 +8,7 @@ import org.lwjgl.util.Point;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.animation.primary.AnimationPush;
 import com.marklynch.level.constructs.animation.primary.AnimationPushed;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
@@ -110,6 +111,7 @@ public class PowerTelekineticPush extends Power {
 
 		}
 
+		source.primaryAnimation = new AnimationPush(source, targetSquare, source.primaryAnimation);
 		for (GameObject pushedGameObject : pushedObjectToStartSquare.keySet()) {
 			if (pushedGameObject.remainingHealth > 0)
 				pushedGameObject.primaryAnimation = new AnimationPushed(pushedGameObject,

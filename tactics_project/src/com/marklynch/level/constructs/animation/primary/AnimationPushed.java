@@ -81,8 +81,8 @@ public class AnimationPushed extends Animation {
 
 		float up = 0f;
 		float down = 3.14f;
-		float left = -1.57f;
-		float right = 1.57f;
+		float left = -1.7f;
+		float right = 1.7f;
 
 		if (endSquare.yInGrid - startSquare.yInGrid < 0) {
 			targetRadians = up;
@@ -131,7 +131,7 @@ public class AnimationPushed extends Animation {
 			progress = 1;
 		}
 
-		float angleChange = (float) (0.010d * delta);
+		float angleChange = (float) (0.01d * delta);
 
 		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, targetRadians);
 
