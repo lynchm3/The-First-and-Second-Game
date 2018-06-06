@@ -83,20 +83,26 @@ public class AnimationPushed extends Animation {
 		float right = 1.57f;
 
 		if (endSquare.yInGrid - startSquare.yInGrid < 0) {
-			targetLimbRadians = up;
+			targetRadians = up;
+			targetArmRadians = -0.25f;
+
 		} else if (endSquare.yInGrid - startSquare.yInGrid > 0) {
-			targetLimbRadians = down;
+			targetRadians = down;
+			targetArmRadians = 0.25f;
 
 		}
 		if (endSquare.xInGrid - startSquare.xInGrid < 0) {
-			targetLimbRadians = left;
+			targetRadians = left;
+			targetArmRadians = -0.25f;
+
 		} else if (endSquare.xInGrid - startSquare.xInGrid > 0) {
-			targetLimbRadians = right;
+			targetRadians = right;
+			targetArmRadians = 0.25f;
 		}
 
 		// System.out.println("deltaX = " + deltaX);
 		// System.out.println("deltaY = " + deltaY);
-		System.out.println("targetLimbDegrees = " + targetLimbRadians);
+		System.out.println("targetLimbDegrees = " + targetRadians);
 
 		blockAI = true;
 
@@ -104,7 +110,8 @@ public class AnimationPushed extends Animation {
 			Level.blockingAnimations.add(this);
 	}
 
-	float targetLimbRadians = 0;
+	float targetRadians = 0;
+	float targetArmRadians = 0;
 
 	@Override
 	public void update(double delta) {
@@ -122,10 +129,10 @@ public class AnimationPushed extends Animation {
 
 		float angleChange = (float) (0.010d * delta);
 
-		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, targetLimbRadians);
+		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, targetRadians);
 
-		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, 0);
-		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, 0);
+		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetArmRadians);
+		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetArmRadians);
 		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
 
