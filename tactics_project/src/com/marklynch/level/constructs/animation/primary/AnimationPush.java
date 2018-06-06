@@ -90,7 +90,6 @@ public class AnimationPush extends Animation {
 		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, 0);
 		leftKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 		rightKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, 0);
 
 		if (progress >= 1) {
 			complete();
@@ -100,10 +99,11 @@ public class AnimationPush extends Animation {
 
 		// If at last square, drop y.
 		if (durationSoFar < quarterDurationToReach) {
-			if (!backwards)
+			if (!backwards) {
 				leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetRadians);
-			else
+			} else {
 				rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetRadians);
+			}
 		} else {
 			// leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle,
 			// angleChange, 0);
