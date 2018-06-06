@@ -51,7 +51,7 @@ public abstract class Animation {
 	public int boundsY2 = 128;
 	public boolean drawWeapon = true;
 
-	protected void reverseAnimtion() {
+	protected void reverseAnimation() {
 
 		float temp = rightShoulderAngle;
 		rightShoulderAngle = -leftShoulderAngle;

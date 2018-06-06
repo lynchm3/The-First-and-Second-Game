@@ -131,13 +131,20 @@ public class TextureUtils {
 		texture.bind();
 		if (inBounds == true) {
 
-			if (upsideDown) {
+			// if (backwards) {
+			// Game.activeBatch.draw(texture, vertexX2, vertexY1, -(vertexX2 - vertexX1),
+			// vertexY2 - vertexY1);
+			//
+			// } else {
+			// Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1,
+			// vertexY2 - vertexY1);
+			// }
 
-				float srcY = (texture.getHeight() - textureY1);
-				float srcHeight = -(textureY2 - textureY1);
+			if (backwards) {
 
-				Game.activeBatch.drawRegion(texture, textureX1, srcY, textureX2 - textureX1, srcHeight, vertexX1,
-						vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
+				Game.activeBatch.drawRegion(texture, textureX1, textureY1, textureX2 - textureX1,
+						(textureY2 - textureY1), vertexX2, vertexY1, -(vertexX2 - vertexX1), vertexY2 - vertexY1);
+
 			} else {
 				Game.activeBatch.drawRegion(texture, textureX1, textureY1, textureX2 - textureX1,
 						(textureY2 - textureY1), vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);

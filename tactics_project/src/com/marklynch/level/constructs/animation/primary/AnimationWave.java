@@ -94,7 +94,7 @@ public class AnimationWave extends Animation {
 		}
 
 		if (backwards) {
-			reverseAnimtion();
+			reverseAnimation();
 		}
 
 		if (progress >= 1) {

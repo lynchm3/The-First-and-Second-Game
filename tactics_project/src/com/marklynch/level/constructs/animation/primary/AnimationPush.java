@@ -35,8 +35,6 @@ public class AnimationPush extends Animation {
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
 		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
-		backwards = performer.backwards;
-
 		float down = 0f;
 		float up = 3.14f;
 		float right = -1.5f;
@@ -55,7 +53,9 @@ public class AnimationPush extends Animation {
 
 		} else if (targetSquare.xInGrid - performer.squareGameObjectIsOn.xInGrid > 0) {
 			targetRadians = right;
+			performer.backwards = false;
 		}
+		backwards = performer.backwards;
 
 		System.out.println("targetLimbDegrees = " + targetRadians);
 
@@ -110,6 +110,9 @@ public class AnimationPush extends Animation {
 			// rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle,
 			// angleChange, 0);
 		}
+
+		// if (backwards)
+		// reverseAnimation();
 
 	}
 

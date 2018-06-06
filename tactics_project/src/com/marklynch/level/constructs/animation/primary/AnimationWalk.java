@@ -159,7 +159,7 @@ public class AnimationWalk extends Animation {
 
 		if (backwards) {
 
-			reverseAnimtion();
+			reverseAnimation();
 		}
 
 	}

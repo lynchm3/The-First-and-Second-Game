@@ -73,7 +73,7 @@ public class AnimationSlash extends Animation {
 		}
 
 		if (backwards) {
-			reverseAnimtion();
+			reverseAnimation();
 		}
 
 		if (progress >= 1) {
