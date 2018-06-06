@@ -76,19 +76,6 @@ public class AnimationWalk extends Animation {
 
 		durationSoFar += delta;
 
-		// if (durationSoFar < quarterDurationToReach) {
-		// rightShoulderAngle = -leftShoulderAngle;
-		// } else if (durationSoFar < halfDurationToReach) {
-		// leftShoulderAngle = 0.001f * (halfDurationToReach - durationSoFar);
-		// rightShoulderAngle = -leftShoulderAngle;
-		// } else if (durationSoFar < threeQuarterDurationToReach) {
-		// leftShoulderAngle = 0.001f * (halfDurationToReach - durationSoFar);
-		// rightShoulderAngle = -leftShoulderAngle;
-		// } else {
-		// leftShoulderAngle = 0.001f * (durationSoFar - durationToReach);
-		// rightShoulderAngle = -leftShoulderAngle;
-		// }
-
 		float progress = durationSoFar / durationToReach;
 
 		if (progress >= 1) {

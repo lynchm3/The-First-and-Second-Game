@@ -1,13 +1,14 @@
 package com.marklynch.level.constructs.power;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.lwjgl.util.Point;
 
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.animation.secondary.AnimationMovementFade;
+import com.marklynch.level.constructs.animation.primary.AnimationPushed;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -52,6 +53,8 @@ public class PowerTelekineticPush extends Power {
 		int maxPushCount = 5;
 		int pushCount = 0;
 		Square lastSquare = targetSquare;
+		Square endSquare = lastSquare;
+		HashMap<GameObject, Square> pushedObjectToStartSquare = new HashMap<GameObject, Square>();
 		while (pushCount < maxPushCount) {
 
 			Square currentSquare = null;
@@ -91,13 +94,25 @@ public class PowerTelekineticPush extends Power {
 			temp.addAll(lastSquare.inventory.gameObjects);
 
 			for (GameObject gameObject : temp) {
-				gameObject.secondaryAnimations.add(new AnimationMovementFade(lastSquare, gameObject));
+				// gameObject.secondaryAnimations.add(new AnimationMovementFade(lastSquare,
+				// gameObject));
+
+				if (!pushedObjectToStartSquare.keySet().contains(gameObject)) {
+					pushedObjectToStartSquare.put(gameObject, gameObject.squareGameObjectIsOn);
+				}
+
 				currentSquare.inventory.add(gameObject);
 			}
 
-			lastSquare = currentSquare;
+			endSquare = lastSquare = currentSquare;
+
 			pushCount++;
 
+		}
+
+		for (GameObject pushedGameObject : pushedObjectToStartSquare.keySet()) {
+			pushedGameObject.primaryAnimation = new AnimationPushed(pushedGameObject,
+					pushedObjectToStartSquare.get(pushedGameObject), endSquare);
 		}
 	}
 

@@ -7,13 +7,13 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationMovementFade extends Animation {
+public class AnimationMovementFade1 extends Animation {
 
 	Square square;
 	GameObject gameObject;
 	float alpha = 0.5f;
 
-	public AnimationMovementFade(Square square, GameObject gameObject) {
+	public AnimationMovementFade1(Square square, GameObject gameObject) {
 		this.square = square;
 		this.gameObject = gameObject;
 		this.durationToReach = 1000f;

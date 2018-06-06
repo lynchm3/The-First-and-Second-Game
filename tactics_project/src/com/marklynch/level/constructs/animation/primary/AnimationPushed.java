@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -21,7 +22,7 @@ public class AnimationPushed extends Animation {
 
 	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare) {
 		super();
-		durationToReach = 4000;
+		durationToReach = 400;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -33,11 +34,12 @@ public class AnimationPushed extends Animation {
 		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
-		this.performer = performer;
-
 		backwards = performer.backwards;
 
-		blockAI = false;
+		blockAI = true;
+
+		if (blockAI)
+			Level.blockingAnimations.add(this);
 	}
 
 	@Override
@@ -56,21 +58,13 @@ public class AnimationPushed extends Animation {
 
 		if (progress >= 1) {
 			completed = true;
+			if (blockAI)
+				Level.blockingAnimations.remove(this);
 			offsetX = 0;
-		} else if (progress >= 0.5f) {
-			offsetX = 0;
-			offsetY = 0;
-			boundsX1 = 0;
-			boundsY1 = (int) ((1 - progress) * 2 * performer.height);
-			boundsX2 = 0;
-			boundsY2 = 0;
+			offsetY = 0f;
 		} else {
-			offsetX = startOffsetX;
-			offsetY = startOffsetY;
-			boundsX1 = 0;
-			boundsY1 = (int) (progress * 2 * performer.height);
-			boundsX2 = 0;
-			boundsY2 = 0;
+			offsetX = (int) (startOffsetX * (1 - progress));
+			offsetY = (int) (startOffsetY * (1 - progress));
 		}
 	}
 
