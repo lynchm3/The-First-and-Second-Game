@@ -4,7 +4,7 @@ import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
-public class AnimationPush extends Animation {
+public class AnimationFlinch extends Animation {
 
 	public GameObject performer;
 	public Square targetSquare;
@@ -13,9 +13,9 @@ public class AnimationPush extends Animation {
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
-	public AnimationPush(GameObject performer, Square targetSquare, Animation previousAnimation) {
+	public AnimationFlinch(GameObject performer, Square squareBeingAttackedFrom, Animation previousAnimation) {
 		super();
-		this.targetSquare = targetSquare;
+		this.targetSquare = squareBeingAttackedFrom;
 		this.performer = performer;
 		durationToReach = 400;
 		// drawWeapon = false;
@@ -35,23 +35,23 @@ public class AnimationPush extends Animation {
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
 		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
-		float down = 0f;
-		float up = 3.14f;
-		float right = -1.5f;
-		float left = 1.5f;
+		float down = 0.5f;
+		float up = -0.5f;
+		float right = -0.5f;
+		float left = 0.5f;
 
-		if (targetSquare.yInGrid - performer.squareGameObjectIsOn.yInGrid < 0) {
+		if (squareBeingAttackedFrom.yInGrid - performer.squareGameObjectIsOn.yInGrid < 0) {
 			targetRadians = up;
 
-		} else if (targetSquare.yInGrid - performer.squareGameObjectIsOn.yInGrid > 0) {
+		} else if (squareBeingAttackedFrom.yInGrid - performer.squareGameObjectIsOn.yInGrid > 0) {
 			targetRadians = down;
 
 		}
-		if (targetSquare.xInGrid - performer.squareGameObjectIsOn.xInGrid < 0) {
+		if (squareBeingAttackedFrom.xInGrid - performer.squareGameObjectIsOn.xInGrid < 0) {
 			targetRadians = left;
 			performer.backwards = true;
 
-		} else if (targetSquare.xInGrid - performer.squareGameObjectIsOn.xInGrid > 0) {
+		} else if (squareBeingAttackedFrom.xInGrid - performer.squareGameObjectIsOn.xInGrid > 0) {
 			targetRadians = right;
 			performer.backwards = false;
 		}
@@ -81,11 +81,13 @@ public class AnimationPush extends Animation {
 
 		float angleChange = (float) (0.02d * delta);
 
-		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, 0);
+		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, targetRadians);
 		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
-		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, 0);
-		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, 0);
+		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, -targetRadians);
+		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, -targetRadians);
+		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, -targetRadians);
+		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, -targetRadians);
 		leftKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 		rightKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 
@@ -94,24 +96,6 @@ public class AnimationPush extends Animation {
 			if (performer.getPrimaryAnimation() == this)
 				performer.setPrimaryAnimation(new AnimationWait(this));
 		}
-
-		// If at last square, drop y.
-		if (durationSoFar < quarterDurationToReach) {
-			if (!backwards) {
-				leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetRadians);
-			} else {
-				rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetRadians);
-			}
-		} else {
-			// leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle,
-			// angleChange, 0);
-			// rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle,
-			// angleChange, 0);
-		}
-
-		// if (backwards)
-		// reverseAnimation();
-
 	}
 
 	@Override

@@ -17,10 +17,12 @@ public class AnimationSlash extends Animation {
 	// for show only, walking actor, primary
 
 	GameObject target;
+	GameObject performer;
 
 	public AnimationSlash(GameObject performer, GameObject target) {
 		super();
 		this.target = target;
+		this.performer = performer;
 		durationToReach = 400;
 
 		quarterDurationToReach = durationToReach / 4;
@@ -81,6 +83,9 @@ public class AnimationSlash extends Animation {
 			rightShoulderAngle = 0;
 			rightElbowAngle = 0;
 			complete();
+
+			target.setPrimaryAnimation(
+					new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
 		} else {
 		}
 
