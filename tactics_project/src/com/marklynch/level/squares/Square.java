@@ -756,9 +756,9 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 					+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
 			int y = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
-			if (gameObject.primaryAnimation != null) {
-				x += gameObject.primaryAnimation.offsetX;
-				y += gameObject.primaryAnimation.offsetY;
+			if (gameObject.getPrimaryAnimation() != null) {
+				x += gameObject.getPrimaryAnimation().offsetX;
+				y += gameObject.getPrimaryAnimation().offsetY;
 			}
 
 			// FirstCheckBounding box :P

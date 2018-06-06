@@ -35,7 +35,8 @@ public class ActionFishingCompleted extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -61,7 +62,7 @@ public class ActionFishingCompleted extends Action {
 			performer.squareGameObjectIsOn.inventory.add(target);
 			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
 					&& performer.squareGameObjectIsOn.visibleToPlayer) {
-				target.primaryAnimation = new AnimationWalk(target, oldSquare, performer.squareGameObjectIsOn, 0);
+				target.setPrimaryAnimation(new AnimationWalk(target, oldSquare, performer.squareGameObjectIsOn, 0));
 			}
 		}
 
@@ -75,7 +76,7 @@ public class ActionFishingCompleted extends Action {
 
 		if (performer == Game.level.player) {
 			Level.pausePlayer();
-			target.primaryAnimation = null;
+			target.setPrimaryAnimation(null);
 			if (performer.equippedBeforePickingUpObject != null) {
 				performer.equipped = performer.equippedBeforePickingUpObject;
 				performer.equippedBeforePickingUpObject = null;

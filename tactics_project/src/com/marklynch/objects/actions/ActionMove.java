@@ -40,7 +40,8 @@ public class ActionMove extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -81,8 +82,8 @@ public class ActionMove extends Action {
 		}
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.primaryAnimation = new AnimationWalk(performer, actor.squareGameObjectIsOn, squareToMoveTo,
-					performer.walkPhase);
+			performer.setPrimaryAnimation(
+					new AnimationWalk(performer, actor.squareGameObjectIsOn, squareToMoveTo, performer.walkPhase));
 			// performer.primaryAnimation.phase = performer.walkPhase;
 			performer.walkPhase++;
 			if (performer.walkPhase >= 4) {

@@ -26,7 +26,8 @@ public class ActionWait extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 		if (!enabled)
 			return;
 
@@ -41,7 +42,7 @@ public class ActionWait extends Action {
 			sound.play();
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-			performer.primaryAnimation = new AnimationWait(performer.primaryAnimation);
+			performer.setPrimaryAnimation(new AnimationWait(performer.getPrimaryAnimation()));
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();
 

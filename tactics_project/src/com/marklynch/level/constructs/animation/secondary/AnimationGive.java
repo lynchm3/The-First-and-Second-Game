@@ -56,7 +56,7 @@ public class AnimationGive extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		float distanceX = (float) (speedX * delta);
@@ -75,7 +75,7 @@ public class AnimationGive extends Animation {
 	}
 
 	public void completed() {
-		completed = true;
+		complete();
 	}
 
 	@Override

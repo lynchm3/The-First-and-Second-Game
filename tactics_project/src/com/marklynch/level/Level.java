@@ -1634,8 +1634,9 @@ public class Level {
 			}
 
 			actors.removeAll(deadActors);
-		} else if (Game.level.player.primaryAnimation.completed && Game.level.player.playerTargetAction != null
-				&& Game.level.player.playerTargetAction.recheck() && Game.level.player.playerTargetAction.checkRange())
+		} else if (Game.level.player.getPrimaryAnimation().getCompleted()
+				&& Game.level.player.playerTargetAction != null && Game.level.player.playerTargetAction.recheck()
+				&& Game.level.player.playerTargetAction.checkRange())
 
 		{
 			Action playerActionToPerform = Game.level.player.playerTargetAction;
@@ -1664,7 +1665,7 @@ public class Level {
 				}
 			}
 
-		} else if (Game.level.player.primaryAnimation.completed && Player.playerTargetSquare != null) {
+		} else if (Game.level.player.getPrimaryAnimation().getCompleted() && Player.playerTargetSquare != null) {
 			// Auto move player
 
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
@@ -1736,26 +1737,27 @@ public class Level {
 			return;
 		} else if (Game.level.conversation != null) {
 			return;
-		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true && Game.level.player.primaryAnimation.completed) {
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true
+				&& Game.level.player.getPrimaryAnimation().getCompleted()) {
 			highlightPlayButton();
 			UserInputLevel.waitPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_UP) == true || Keyboard.isKeyDown(Keyboard.KEY_W) == true)
-				&& Game.level.player.primaryAnimation.completed) {
+				&& Game.level.player.getPrimaryAnimation().getCompleted()) {
 			highlightPlayButton();
 			UserInputLevel.upPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_DOWN) == true || Keyboard.isKeyDown(Keyboard.KEY_S) == true)
-				&& Game.level.player.primaryAnimation.completed) {
+				&& Game.level.player.getPrimaryAnimation().getCompleted()) {
 			highlightPlayButton();
 			UserInputLevel.downPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) == true || Keyboard.isKeyDown(Keyboard.KEY_A) == true)
-				&& Game.level.player.primaryAnimation.completed) {
+				&& Game.level.player.getPrimaryAnimation().getCompleted()) {
 			highlightPlayButton();
 			UserInputLevel.leftPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) == true || Keyboard.isKeyDown(Keyboard.KEY_D) == true)
-				&& Game.level.player.primaryAnimation.completed) {
+				&& Game.level.player.getPrimaryAnimation().getCompleted()) {
 			highlightPlayButton();
 			UserInputLevel.rightPressed(false, true);
-		} else if (Game.level.player.primaryAnimation.completed) {
+		} else if (Game.level.player.getPrimaryAnimation().getCompleted()) {
 			highlightPauseButton();
 		}
 	}
@@ -2122,25 +2124,25 @@ public class Level {
 		if (levelMode != LevelMode.LEVEL_MODE_FISHING) {
 			if (player.fishingTarget != null) {
 				player.fishingTarget.beingFishedBy = null;
-				player.fishingTarget.primaryAnimation = null;
+				player.fishingTarget.setPrimaryAnimation(null);
 				player.fishingTarget = null;
 			}
 		} else if (levelMode != LevelMode.LEVEL_MODE_CHOPPING) {
 			if (player.choppingTarget != null) {
 				player.choppingTarget.beingChopped = false;
-				player.choppingTarget.primaryAnimation = null;
+				player.choppingTarget.setPrimaryAnimation(null);
 				player.choppingTarget = null;
 			}
 		} else if (levelMode != LevelMode.LEVEL_MODE_MINING) {
 			if (player.miningTarget != null) {
 				player.miningTarget.beingMined = false;
-				player.miningTarget.primaryAnimation = null;
+				player.miningTarget.setPrimaryAnimation(null);
 				player.miningTarget = null;
 			}
 		} else if (levelMode != LevelMode.LEVEL_MODE_DIGGING) {
 			if (player.diggingTarget != null) {
 				player.diggingTarget.beingDigged = false;
-				player.diggingTarget.primaryAnimation = null;
+				player.diggingTarget.setPrimaryAnimation(null);
 				player.diggingTarget = null;
 			}
 		}

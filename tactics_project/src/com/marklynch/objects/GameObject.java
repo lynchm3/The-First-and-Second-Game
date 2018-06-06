@@ -216,7 +216,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Object destroyedBy = null;
 	public Action destroyedByAction = null;
 
-	public Animation primaryAnimation = new AnimationWait(null);
+	protected Animation primaryAnimation = new AnimationWait(null);
 	public ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
 
 	public boolean toSell = false;
@@ -377,7 +377,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return;
 		}
 
-		if (primaryAnimation != null && primaryAnimation.completed == false)
+		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw1();
 
 		for (Animation secondaryAnimation : secondaryAnimations)
@@ -552,7 +552,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			effect.draw2();
 		}
 
-		if (primaryAnimation != null && primaryAnimation.completed == false)
+		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw2();
 		for (Animation secondaryAnimation : secondaryAnimations) {
 			secondaryAnimation.draw2();
@@ -660,7 +660,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void drawStaticUI() {
 
-		if (primaryAnimation != null && primaryAnimation.completed == false)
+		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.drawStaticUI();
 
 		for (Animation secondaryAnimation : secondaryAnimations)
@@ -960,14 +960,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void updateRealtime(int delta) {
-		if (primaryAnimation != null && !primaryAnimation.completed) {
+		if (primaryAnimation != null && !primaryAnimation.getCompleted()) {
 			primaryAnimation.update(delta);
 		} else {
 		}
 
 		for (Animation secondaryAnimation : (ArrayList<Animation>) secondaryAnimations.clone()) {
 			secondaryAnimation.update(delta);
-			if (secondaryAnimation.completed)
+			if (secondaryAnimation.getCompleted())
 				secondaryAnimations.remove(secondaryAnimation);
 		}
 	}
@@ -2116,6 +2116,17 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	// public enum DAMAGE_TYPE {
 	// SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, BLEEDING, HEALING
 	// };
+
+	public void setPrimaryAnimation(Animation animation) {
+		Level.blockingAnimations.remove(this.primaryAnimation);
+		this.primaryAnimation = animation;
+		if (animation != null && animation.blockAI)
+			Level.blockingAnimations.add(animation);
+	}
+
+	public Animation getPrimaryAnimation() {
+		return this.primaryAnimation;
+	}
 
 	public void doDamageAnimation(float healing, float offsetY, HIGH_LEVEL_STATS statType, float res) {
 

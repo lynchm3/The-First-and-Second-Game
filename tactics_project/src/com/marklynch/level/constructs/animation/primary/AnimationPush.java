@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.animation.primary;
 
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -60,9 +59,6 @@ public class AnimationPush extends Animation {
 		System.out.println("targetLimbDegrees = " + targetRadians);
 
 		blockAI = true;
-
-		if (blockAI)
-			Level.blockingAnimations.add(this);
 	}
 
 	float targetRadians = 0;
@@ -70,7 +66,7 @@ public class AnimationPush extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed) {
+		if (getCompleted()) {
 			return;
 		}
 
@@ -95,10 +91,9 @@ public class AnimationPush extends Animation {
 		rightKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 
 		if (progress >= 1) {
-			completed = true;
-			Level.blockingAnimations.remove(this);
-			if (performer.primaryAnimation == this)
-				performer.primaryAnimation = new AnimationWait(this);
+			complete();
+			if (performer.getPrimaryAnimation() == this)
+				performer.setPrimaryAnimation(new AnimationWait(this));
 		}
 
 		// If at last square, drop y.

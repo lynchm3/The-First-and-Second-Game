@@ -36,7 +36,8 @@ public class ActionMiningStart extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -56,7 +57,7 @@ public class ActionMiningStart extends Action {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
 
 		if (Game.level.shouldLog(target, performer)) {
-			target.primaryAnimation = new AnimationShake();
+			target.setPrimaryAnimation(new AnimationShake());
 		}
 
 		if (!target.infinite) {
@@ -100,7 +101,7 @@ public class ActionMiningStart extends Action {
 		if (performer == Game.level.player) {
 			if (destroyed) {
 				Level.pausePlayer();
-				target.primaryAnimation = null;
+				target.setPrimaryAnimation(null);
 				if (performer.equippedBeforePickingUpObject != null) {
 					performer.equipped = performer.equippedBeforePickingUpObject;
 					performer.equippedBeforePickingUpObject = null;

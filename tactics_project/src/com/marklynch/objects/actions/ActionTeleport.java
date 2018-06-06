@@ -115,7 +115,7 @@ public class ActionTeleport extends Action {
 
 		trespassingCheck(this, performer, teleportee.squareGameObjectIsOn);
 
-		teleportee.primaryAnimation = new AnimationTeleport(teleportee, startSquare, targetSquare);
+		teleportee.setPrimaryAnimation(new AnimationTeleport(teleportee, startSquare, targetSquare));
 
 		Level.teleportee = null;
 

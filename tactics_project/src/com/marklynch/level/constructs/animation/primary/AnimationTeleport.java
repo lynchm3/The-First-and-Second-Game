@@ -47,7 +47,7 @@ public class AnimationTeleport extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		durationSoFar += delta;
@@ -59,9 +59,10 @@ public class AnimationTeleport extends Animation {
 		}
 
 		if (progress >= 1) {
-			completed = true;
-			if (blockAI)
-				Level.blockingAnimations.remove(this);
+			complete();
+			if (performer.getPrimaryAnimation() == this)
+				performer.setPrimaryAnimation(new AnimationWait(this));
+
 			offsetX = 0;
 		} else if (progress >= 0.5f) {
 			offsetX = 0;

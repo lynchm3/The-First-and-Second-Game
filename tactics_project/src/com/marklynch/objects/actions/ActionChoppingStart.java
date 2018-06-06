@@ -38,7 +38,8 @@ public class ActionChoppingStart extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -67,7 +68,7 @@ public class ActionChoppingStart extends Action {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " chopped at ", target, " with ", axe }));
 
 		if (Game.level.shouldLog(target, performer)) {
-			target.primaryAnimation = new AnimationShake();
+			target.setPrimaryAnimation(new AnimationShake());
 		}
 
 		boolean destroyed = target.checkIfDestroyed(performer, this);
@@ -91,7 +92,7 @@ public class ActionChoppingStart extends Action {
 		if (performer == Game.level.player) {
 			if (destroyed) {
 				Level.pausePlayer();
-				target.primaryAnimation = null;
+				target.setPrimaryAnimation(null);
 				if (performer.equippedBeforePickingUpObject != null) {
 					performer.equipped = performer.equippedBeforePickingUpObject;
 					performer.equippedBeforePickingUpObject = null;

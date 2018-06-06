@@ -110,7 +110,7 @@ public class AnimationThrown extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		float distanceX = (float) (speedX * delta);
@@ -123,7 +123,7 @@ public class AnimationThrown extends Animation {
 
 		if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
-			completed = true;
+			complete();
 			if (targetGameObject != null)
 				targetGameObject.showPow();
 			if (!(projectileObject instanceof Arrow)) {

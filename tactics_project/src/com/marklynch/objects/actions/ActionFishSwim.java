@@ -30,7 +30,8 @@ public class ActionFishSwim extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -145,11 +146,11 @@ public class ActionFishSwim extends Action {
 		GameObject gameObjectInTheWay = target.inventory.gameObjectThatCantShareSquare;
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-			performer.primaryAnimation = new AnimationWalk(
+			performer.setPrimaryAnimation(new AnimationWalk(
 					actor.squareGameObjectIsOn.xInGridPixels + actor.drawOffsetRatioX * Game.SQUARE_WIDTH,
 					actor.squareGameObjectIsOn.yInGridPixels + actor.drawOffsetRatioY * Game.SQUARE_HEIGHT,
 					target.xInGridPixels + targetOffsetX * Game.SQUARE_WIDTH,
-					target.yInGridPixels + targetOffsetY * Game.SQUARE_HEIGHT);
+					target.yInGridPixels + targetOffsetY * Game.SQUARE_HEIGHT));
 
 		if (actor.squareGameObjectIsOn != target)
 			target.inventory.add(actor);

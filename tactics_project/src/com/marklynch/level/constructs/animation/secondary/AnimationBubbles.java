@@ -46,13 +46,13 @@ public class AnimationBubbles extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		durationSoFar += delta;
 		double progress = durationSoFar / durationToReach;
 		if (progress >= 1) {
-			completed = true;
+			complete();
 		} else {
 			y -= delta * 0.1f;
 		}
@@ -76,7 +76,7 @@ public class AnimationBubbles extends Animation {
 		if (reachedDestination)
 			return;
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		// float size = 2f;

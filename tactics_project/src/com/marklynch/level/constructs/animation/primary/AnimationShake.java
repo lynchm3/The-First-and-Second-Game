@@ -37,7 +37,7 @@ public class AnimationShake extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		offsetX = (float) (Math.random() * 16) - 8f;

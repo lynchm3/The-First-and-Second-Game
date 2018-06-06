@@ -45,7 +45,7 @@ public class AnimationThrow extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		durationSoFar += delta;
@@ -82,7 +82,7 @@ public class AnimationThrow extends Animation {
 			drawEquipped = true;
 			rightShoulderAngle = 0;
 			rightElbowAngle = 0;
-			completed = true;
+			complete();
 		} else {
 		}
 

@@ -87,7 +87,7 @@ public class FishingRod extends Tool {
 			float delta) {
 		fishingTargetInTheWater = fisher.fishingTarget.squareGameObjectIsOn != null;
 
-		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
+		if (fishingTargetInTheWater && fisher.fishingTarget.getPrimaryAnimation() != null) {
 			// Line
 			fishingLineX1 = lineAnchorX + weaponPositionXInPixels;
 
@@ -201,16 +201,16 @@ public class FishingRod extends Tool {
 
 		fishingTargetInTheWater = fisher.fishingTarget.squareGameObjectIsOn != null;
 
-		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
+		if (fishingTargetInTheWater && fisher.fishingTarget.getPrimaryAnimation() != null) {
 			// Line
 			fishingLineX1 = lineAnchorX + weaponPositionXInPixels;
 			fishingLineY1 = lineAnchorY + weaponPositionYInPixels;
 			fishCenterX = (int) (fisher.fishingTarget.squareGameObjectIsOn.xInGridPixels
 					+ Game.SQUARE_WIDTH * fisher.fishingTarget.drawOffsetRatioX + fisher.fishingTarget.halfWidth)
-					+ fisher.fishingTarget.primaryAnimation.offsetX;
+					+ fisher.fishingTarget.getPrimaryAnimation().offsetX;
 			fishCenterY = (int) (fisher.fishingTarget.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * fisher.fishingTarget.drawOffsetRatioY + fisher.fishingTarget.halfHeight)
-					+ fisher.fishingTarget.primaryAnimation.offsetY;
+					+ fisher.fishingTarget.getPrimaryAnimation().offsetY;
 
 			if (fisher != Game.level.player) {
 				float progressThisUpdate = (float) (Math.random() - 0.5);
@@ -228,7 +228,7 @@ public class FishingRod extends Tool {
 
 		boolean fishingTargetInTheWater = fisher.fishingTarget.squareGameObjectIsOn != null;
 
-		if (fishingTargetInTheWater && fisher.fishingTarget.primaryAnimation != null) {
+		if (fishingTargetInTheWater && fisher.fishingTarget.getPrimaryAnimation() != null) {
 
 			// Fish circle
 			TextureUtils.drawTexture(GameCursor.circleBlack, 0.25f, circleX1, circleY1, circleX2, circleY2);

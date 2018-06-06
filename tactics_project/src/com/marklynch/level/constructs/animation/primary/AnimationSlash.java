@@ -44,7 +44,7 @@ public class AnimationSlash extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		durationSoFar += delta;
@@ -80,7 +80,7 @@ public class AnimationSlash extends Animation {
 			target.showPow();
 			rightShoulderAngle = 0;
 			rightElbowAngle = 0;
-			completed = true;
+			complete();
 		} else {
 		}
 

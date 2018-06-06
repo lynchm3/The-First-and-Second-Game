@@ -1514,7 +1514,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		}
 
-		if (animation != null && !animation.completed) {
+		if (animation != null && !animation.getCompleted()) {
 			animation.draw2();
 		}
 
@@ -1905,7 +1905,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void updateRealtime(int delta) {
-		if (animation != null && !animation.completed) {
+		if (animation != null && !animation.getCompleted()) {
 			animation.update(delta);
 		} else {
 		}

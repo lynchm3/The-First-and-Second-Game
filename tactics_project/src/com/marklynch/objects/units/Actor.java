@@ -566,7 +566,7 @@ public class Actor extends GameObject {
 			boundsY2 += primaryAnimation.offsetY + primaryAnimation.boundsY2;
 		}
 
-		if (primaryAnimation != null && primaryAnimation.completed == false)
+		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw1();
 
 		for (Animation secondaryAnimation : secondaryAnimations)

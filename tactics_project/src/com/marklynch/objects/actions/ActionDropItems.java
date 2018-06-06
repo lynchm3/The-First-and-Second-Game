@@ -58,8 +58,10 @@ public class ActionDropItems extends VariableQtyAction {
 			return;
 
 		if (Game.level.openInventories.size() > 0) {
-		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen() && gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
-			objects[0].primaryAnimation = new AnimationDrop(objects[0].name, gameObjectPerformer, this, square, objects[0], 0.5f);
+		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen()
+				&& gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
+			objects[0].setPrimaryAnimation(
+					new AnimationDrop(objects[0].name, gameObjectPerformer, this, square, objects[0], 0.5f));
 		}
 
 		for (int i = 0; i < amountToDrop; i++) {

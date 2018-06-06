@@ -70,8 +70,8 @@ public abstract class Effect implements DamageDealer {
 			int actorPositionYInPixels = (int) (target.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * target.drawOffsetRatioY);
 			if (target != null) {
-				actorPositionXInPixels += target.primaryAnimation.offsetX;
-				actorPositionYInPixels += target.primaryAnimation.offsetY;
+				actorPositionXInPixels += target.getPrimaryAnimation().offsetX;
+				actorPositionYInPixels += target.getPrimaryAnimation().offsetY;
 			}
 
 			float alpha = 1.0f;

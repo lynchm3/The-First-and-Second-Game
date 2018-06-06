@@ -464,11 +464,11 @@ public class Player extends Human {
 
 		System.out.println("animationBlockingAI()");
 
-		if (primaryAnimation != null && !primaryAnimation.completed && primaryAnimation.blockAI)
+		if (primaryAnimation != null && !primaryAnimation.getCompleted() && primaryAnimation.blockAI)
 			return true;
 
 		for (Animation secondaryAnimation : secondaryAnimations) {
-			if (!secondaryAnimation.completed && secondaryAnimation.blockAI)
+			if (!secondaryAnimation.getCompleted() && secondaryAnimation.blockAI)
 				return true;
 		}
 

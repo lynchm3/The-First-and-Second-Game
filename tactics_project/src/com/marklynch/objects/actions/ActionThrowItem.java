@@ -73,7 +73,7 @@ public class ActionThrowItem extends Action {
 		}
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.primaryAnimation = new AnimationThrow(performer, targetGameObject);
+			performer.setPrimaryAnimation(new AnimationThrow(performer, targetGameObject));
 		}
 
 		if (targetGameObject != null && targetGameObject.attackable) {

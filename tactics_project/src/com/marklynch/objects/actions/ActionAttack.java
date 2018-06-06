@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationShootArrow;
-import com.marklynch.level.constructs.animation.primary.AnimationWave;
+import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -74,9 +74,9 @@ public class ActionAttack extends Action {
 			if (weapon.maxRange == 1) {
 				// performer.primaryAnimation = new AnimationSlash(performer,
 				// target);
-				performer.primaryAnimation = new AnimationWave(performer, target);
+				performer.setPrimaryAnimation(new AnimationSlash(performer, target));
 			} else {
-				performer.primaryAnimation = new AnimationShootArrow(performer, target, weapon, this);
+				performer.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this));
 			}
 		}
 
@@ -89,13 +89,12 @@ public class ActionAttack extends Action {
 
 				if (weapon != performer) {
 					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(
-								new ActivityLog(new Object[] { performer, " " + attackTypeString + " ", target,
-										" with ", weapon, " for " + damage + " damage" }));
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+								target, " with ", weapon, " for " + damage + " damage" }));
 				} else {
 					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer,
-								" " + attackTypeString + " ", target, " for " + damage + " damage" }));
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+								target, " for " + damage + " damage" }));
 				}
 			}
 

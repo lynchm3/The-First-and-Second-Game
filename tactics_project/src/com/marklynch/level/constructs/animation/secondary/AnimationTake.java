@@ -82,7 +82,7 @@ public class AnimationTake extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		float oldX = x;
@@ -92,9 +92,9 @@ public class AnimationTake extends Animation {
 				+ (Game.SQUARE_WIDTH - gameObject.width) / 2) + targetOffsetX;
 		targetY = (int) (targetGameObject.squareGameObjectIsOn.yInGridPixels
 				+ (Game.SQUARE_HEIGHT - gameObject.height) / 2) + targetOffsetY;
-		if (targetGameObject.primaryAnimation != null) {
-			targetX += targetGameObject.primaryAnimation.offsetX;
-			targetX += targetGameObject.primaryAnimation.offsetY;
+		if (targetGameObject.getPrimaryAnimation() != null) {
+			targetX += targetGameObject.getPrimaryAnimation().offsetX;
+			targetY += targetGameObject.getPrimaryAnimation().offsetY;
 		}
 
 		float distanceToCoverX = this.targetX - this.x;
@@ -128,7 +128,7 @@ public class AnimationTake extends Animation {
 			if (trailLines.size() > 0) {
 				trailLines.remove(0);
 				if (trailLines.size() == 0)
-					completed = true;
+					complete();
 			}
 		} else {
 			trailLines.add(new Line(oldX + gameObject.halfWidth, oldY + gameObject.halfHeight, x + gameObject.halfWidth,

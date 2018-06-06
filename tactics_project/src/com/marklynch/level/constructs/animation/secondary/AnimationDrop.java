@@ -56,13 +56,13 @@ public class AnimationDrop extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		durationSoFar += delta;
 		double progress = durationSoFar / durationToReach;
 		if (progress >= 1) {
-			completed = true;
+			complete();
 			offsetX = 0;
 			offsetY = 0;
 		} else {

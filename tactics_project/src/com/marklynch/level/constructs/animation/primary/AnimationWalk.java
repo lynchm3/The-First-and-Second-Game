@@ -71,7 +71,7 @@ public class AnimationWalk extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		durationSoFar += delta;
@@ -85,7 +85,7 @@ public class AnimationWalk extends Animation {
 		setAngles(progress);
 
 		if (progress >= 1) {
-			completed = true;
+			complete();
 			offsetX = 0;
 			// offsetY = 0;
 			if (phase == 0 || phase == 2) {

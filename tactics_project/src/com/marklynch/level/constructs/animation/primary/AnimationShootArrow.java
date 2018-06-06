@@ -56,7 +56,7 @@ public class AnimationShootArrow extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		durationSoFar += delta;
@@ -146,7 +146,7 @@ public class AnimationShootArrow extends Animation {
 			rightElbowAngle = 0;
 			leftShoulderAngle = 0;
 			leftElbowAngle = 0;
-			completed = true;
+			complete();
 		} else {
 		}
 

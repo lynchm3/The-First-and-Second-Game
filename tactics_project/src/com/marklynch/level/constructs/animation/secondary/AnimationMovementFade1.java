@@ -24,13 +24,13 @@ public class AnimationMovementFade1 extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		durationSoFar += delta;
 		float progress = durationSoFar / durationToReach;
 		if (progress >= 1) {
-			completed = true;
+			complete();
 		} else {
 			alpha = (1f - progress) * 0.5f;
 		}
@@ -39,7 +39,7 @@ public class AnimationMovementFade1 extends Animation {
 	@Override
 	public void draw1() {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		if (gameObject instanceof Actor) {

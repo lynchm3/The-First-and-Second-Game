@@ -32,9 +32,8 @@ public class ActionFishingFailed extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
-		
-		
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -46,7 +45,7 @@ public class ActionFishingFailed extends Action {
 
 		if (performer == Game.level.player) {
 			Level.pausePlayer();
-			target.primaryAnimation = null;
+			target.setPrimaryAnimation(null);
 		} else {
 		}
 
@@ -63,7 +62,7 @@ public class ActionFishingFailed extends Action {
 
 		if (performer == Game.level.player) {
 			Level.pausePlayer();
-			target.primaryAnimation = null;
+			target.setPrimaryAnimation(null);
 			if (performer.equippedBeforePickingUpObject != null) {
 				performer.equipped = performer.equippedBeforePickingUpObject;
 				performer.equippedBeforePickingUpObject = null;

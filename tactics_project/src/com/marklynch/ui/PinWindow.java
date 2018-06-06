@@ -163,12 +163,12 @@ public class PinWindow implements Draggable {
 				&& gameObject.squareGameObjectIsOn.visibleToPlayer) {
 
 			objectX = (gameObject.squareGameObjectIsOn.xInGridPixels);
-			if (gameObject.primaryAnimation != null)
-				objectX += gameObject.primaryAnimation.offsetX;
+			if (gameObject.getPrimaryAnimation() != null)
+				objectX += gameObject.getPrimaryAnimation().offsetX;
 
 			objectY = (gameObject.squareGameObjectIsOn.yInGridPixels);
-			if (gameObject.primaryAnimation != null)
-				objectY += gameObject.primaryAnimation.offsetY;
+			if (gameObject.getPrimaryAnimation() != null)
+				objectY += gameObject.getPrimaryAnimation().offsetY;
 
 			// Draw line from window to subject
 		} else if (square != null) {

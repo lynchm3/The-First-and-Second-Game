@@ -29,7 +29,7 @@ public class AnimationWave extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (getCompleted())
 			return;
 
 		durationSoFar += delta;
@@ -101,7 +101,7 @@ public class AnimationWave extends Animation {
 			target.showPow();
 			rightShoulderAngle = 0;
 			rightElbowAngle = 0;
-			completed = true;
+			complete();
 		} else {
 		}
 
