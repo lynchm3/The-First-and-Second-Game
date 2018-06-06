@@ -18,6 +18,8 @@ public class AnimationPushed extends Animation {
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
+	float durationPerSquare = 500;
+
 	// Animation previousAnimation;
 
 	// for show only, walking actor, primary
@@ -46,7 +48,7 @@ public class AnimationPushed extends Animation {
 		float distance = (float) Math.hypot(this.startSquare.xInGrid - this.endSquare.xInGrid,
 				this.startSquare.yInGrid - this.endSquare.yInGrid);
 
-		durationToReach = distance * 500;
+		durationToReach = distance * durationPerSquare;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -123,6 +125,8 @@ public class AnimationPushed extends Animation {
 
 		float progress = durationSoFar / durationToReach;
 
+		float durationReamaining = durationToReach - durationSoFar;
+
 		if (progress >= 1) {
 			progress = 1;
 		}
@@ -131,8 +135,6 @@ public class AnimationPushed extends Animation {
 
 		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, targetRadians);
 
-		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetArmRadians);
-		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetArmRadians);
 		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
 
@@ -145,12 +147,25 @@ public class AnimationPushed extends Animation {
 			completed = true;
 			if (blockAI)
 				Level.blockingAnimations.remove(this);
-			offsetX = 0;
-			offsetY = 0f;
-		} else {
-			offsetX = (int) (startOffsetX * (1 - progress));
-			offsetY = (int) (startOffsetY * (1 - progress));
 		}
+
+		offsetX = (int) (startOffsetX * (1 - progress));
+		offsetY = (int) (startOffsetY * (1 - progress));
+
+		// If at last square, drop y.
+		if (durationReamaining <= durationPerSquare) {
+
+			float dropRatio = 1f - (durationReamaining / durationPerSquare);
+			offsetY += dropRatio * 32f;
+			leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, 0);
+			rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, 0);
+
+		} else {
+
+			leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetArmRadians);
+			rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetArmRadians);
+		}
+
 	}
 
 	@Override
