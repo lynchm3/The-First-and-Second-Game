@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -37,7 +38,10 @@ public class AnimationTeleport extends Animation {
 
 		backwards = performer.backwards;
 
-		blockAI = false;
+		blockAI = true;
+
+		if (blockAI)
+			Level.blockingAnimations.add(this);
 	}
 
 	@Override
@@ -56,6 +60,8 @@ public class AnimationTeleport extends Animation {
 
 		if (progress >= 1) {
 			completed = true;
+			if (blockAI)
+				Level.blockingAnimations.remove(this);
 			offsetX = 0;
 		} else if (progress >= 0.5f) {
 			offsetX = 0;

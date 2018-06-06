@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
-public class AnimationMove extends Animation {
+public class AnimationWalk extends Animation {
 
 	public Square startSquare;
 	public Square endSquare;
@@ -18,7 +18,7 @@ public class AnimationMove extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationMove(GameObject performer, Square startSquare, Square endSquare, int phase) {
+	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int phase) {
 		super();
 		durationToReach = 400;
 
@@ -47,12 +47,12 @@ public class AnimationMove extends Animation {
 		setAngles(0f);
 	}
 
-	public AnimationMove(int startX, int startY, int endX, int endY) {
+	public AnimationWalk(int startX, int startY, int endX, int endY) {
 
 		setAngles(0f);
 	}
 
-	public AnimationMove(float startX, float startY, float endX, float endY) {
+	public AnimationWalk(float startX, float startY, float endX, float endY) {
 		super();
 		durationToReach = 400;
 		startOffsetX = offsetX = startX - endX;

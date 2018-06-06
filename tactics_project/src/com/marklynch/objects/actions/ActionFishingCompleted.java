@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.primary.AnimationMove;
+import com.marklynch.level.constructs.animation.primary.AnimationWalk;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -61,7 +61,7 @@ public class ActionFishingCompleted extends Action {
 			performer.squareGameObjectIsOn.inventory.add(target);
 			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
 					&& performer.squareGameObjectIsOn.visibleToPlayer) {
-				target.primaryAnimation = new AnimationMove(target, oldSquare, performer.squareGameObjectIsOn, 0);
+				target.primaryAnimation = new AnimationWalk(target, oldSquare, performer.squareGameObjectIsOn, 0);
 			}
 		}
 

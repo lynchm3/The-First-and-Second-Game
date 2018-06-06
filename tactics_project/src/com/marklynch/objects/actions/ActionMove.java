@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.primary.AnimationMove;
+import com.marklynch.level.constructs.animation.primary.AnimationWalk;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
@@ -81,7 +81,7 @@ public class ActionMove extends Action {
 		}
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.primaryAnimation = new AnimationMove(performer, actor.squareGameObjectIsOn, squareToMoveTo,
+			performer.primaryAnimation = new AnimationWalk(performer, actor.squareGameObjectIsOn, squareToMoveTo,
 					performer.walkPhase);
 			// performer.primaryAnimation.phase = performer.walkPhase;
 			performer.walkPhase++;

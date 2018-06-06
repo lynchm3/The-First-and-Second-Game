@@ -1977,18 +1977,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				+ highLevelStats.get(HIGH_LEVEL_STATS.BLEED_DAMAGE).value;
 	}
 
-	public boolean animationsBlockingAI() {
-		if (!primaryAnimation.completed && primaryAnimation.blockAI)
-			return true;
-
-		for (Animation secondaryAnimation : secondaryAnimations) {
-			if (!secondaryAnimation.completed && secondaryAnimation.blockAI)
-				return true;
-		}
-
-		return false;
-	}
-
 	public void changeHealth(float change, Object attacker, Action action) {
 
 		remainingHealth += change;

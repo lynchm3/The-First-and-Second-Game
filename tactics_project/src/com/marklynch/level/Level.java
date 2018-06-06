@@ -16,6 +16,7 @@ import com.marklynch.ai.utils.Move;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.activepowerscreen.ActivePowerScreen;
+import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -186,6 +187,8 @@ public class Level {
 	int second = 0;
 	String secondString = "0";
 	public String timeString = "Day 1, 06:00";
+
+	public static ArrayList<Animation> blockingAnimations = new ArrayList<Animation>();
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -1601,6 +1604,9 @@ public class Level {
 		if (Player.playerTargetActor != null) {
 			Player.playerTargetSquare = Player.playerTargetActor.squareGameObjectIsOn;
 		}
+
+		if (blockingAnimations.size() != 0)
+			return;
 
 		if (aiTurn) {
 			float amountOfAiToUpdate = actors.size() * ((float) delta / (float) timeToMoveAll);

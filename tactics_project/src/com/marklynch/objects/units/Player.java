@@ -10,6 +10,7 @@ import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
@@ -456,6 +457,21 @@ public class Player extends Human {
 
 			return true;
 		}
+		return false;
+	}
+
+	public boolean animationsBlockingAI() {
+
+		System.out.println("animationBlockingAI()");
+
+		if (primaryAnimation != null && !primaryAnimation.completed && primaryAnimation.blockAI)
+			return true;
+
+		for (Animation secondaryAnimation : secondaryAnimations) {
+			if (!secondaryAnimation.completed && secondaryAnimation.blockAI)
+				return true;
+		}
+
 		return false;
 	}
 
