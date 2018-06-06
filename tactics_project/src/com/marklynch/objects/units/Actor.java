@@ -930,7 +930,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (equipped != null && !backwards && !sleeping) {
+		if (equipped != null && !backwards && !sleeping && (primaryAnimation == null || primaryAnimation.drawWeapon)) {
 			drawWeapon(rightArmHingeX - equipped.anchorX, y + handY - equipped.anchorY, highlight, boundsX1, boundsY1,
 					boundsX2, boundsY2);
 		}
@@ -1050,7 +1050,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (equipped != null && backwards && !sleeping) {
+		if (equipped != null && backwards && !sleeping && (primaryAnimation == null || primaryAnimation.drawWeapon)) {
 			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX), y + handY - equipped.anchorY, highlight,
 					boundsX1, boundsY1, boundsX2, boundsY2);
 		}

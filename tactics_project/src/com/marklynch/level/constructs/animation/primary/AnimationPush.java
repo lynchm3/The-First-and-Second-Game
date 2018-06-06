@@ -17,7 +17,9 @@ public class AnimationPush extends Animation {
 	public AnimationPush(GameObject performer, Square targetSquare, Animation previousAnimation) {
 		super();
 		this.targetSquare = targetSquare;
+		this.performer = performer;
 		durationToReach = 400;
+		drawWeapon = false;
 		if (previousAnimation != null) {
 			torsoAngle = previousAnimation.torsoAngle;
 			leftShoulderAngle = previousAnimation.leftShoulderAngle;
@@ -38,8 +40,8 @@ public class AnimationPush extends Animation {
 
 		float down = 0f;
 		float up = 3.14f;
-		float right = -1.7f;
-		float left = 1.7f;
+		float right = -1.5f;
+		float left = 1.5f;
 
 		if (targetSquare.yInGrid - performer.squareGameObjectIsOn.yInGrid < 0) {
 			targetRadians = up;
@@ -68,8 +70,9 @@ public class AnimationPush extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (completed)
+		if (completed) {
 			return;
+		}
 
 		durationSoFar += delta;
 
@@ -93,8 +96,9 @@ public class AnimationPush extends Animation {
 
 		if (progress >= 1) {
 			completed = true;
-			if (blockAI)
-				Level.blockingAnimations.remove(this);
+			Level.blockingAnimations.remove(this);
+			if (performer.primaryAnimation == this)
+				performer.primaryAnimation = new AnimationWait(this);
 		}
 
 		// If at last square, drop y.

@@ -47,6 +47,7 @@ public abstract class Animation {
 	public int boundsY1 = -128;
 	public int boundsX2 = 128;
 	public int boundsY2 = 128;
+	public boolean drawWeapon = true;
 
 	protected void reverseAnimtion() {
 

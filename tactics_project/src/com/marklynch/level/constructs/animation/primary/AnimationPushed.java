@@ -18,7 +18,7 @@ public class AnimationPushed extends Animation {
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
-	float durationPerSquare = 500;
+	float durationPerSquare = 50;
 
 	// Animation previousAnimation;
 
@@ -28,6 +28,7 @@ public class AnimationPushed extends Animation {
 		super();
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
+		this.performer = performer;
 
 		if (previousAnimation != null) {
 
@@ -145,8 +146,9 @@ public class AnimationPushed extends Animation {
 
 		if (progress >= 1) {
 			completed = true;
-			if (blockAI)
-				Level.blockingAnimations.remove(this);
+			Level.blockingAnimations.remove(this);
+			if (performer.primaryAnimation == this)
+				performer.primaryAnimation = new AnimationWait(this);
 		}
 
 		offsetX = (int) (startOffsetX * (1 - progress));
