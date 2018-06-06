@@ -2119,9 +2119,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void setPrimaryAnimation(Animation animation) {
 		Level.blockingAnimations.remove(this.primaryAnimation);
-		this.primaryAnimation = animation;
-		if (animation != null && animation.blockAI)
-			Level.blockingAnimations.add(animation);
+
+		if (remainingHealth > 0) {
+			this.primaryAnimation = animation;
+			if (animation != null && animation.blockAI)
+				Level.blockingAnimations.add(animation);
+		}
 	}
 
 	public Animation getPrimaryAnimation() {
