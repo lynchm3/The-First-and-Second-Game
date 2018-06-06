@@ -22,14 +22,17 @@ public class AnimationPushed extends Animation {
 
 	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare) {
 		super();
-		durationToReach = 4000;
+		this.startSquare = startSquare;
+		this.endSquare = endSquare;
+
+		float distance = (float) Math.hypot(this.startSquare.xInGrid - this.endSquare.xInGrid,
+				this.startSquare.yInGrid - this.endSquare.yInGrid);
+
+		durationToReach = distance * 50;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
 		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
-
-		this.startSquare = startSquare;
-		this.endSquare = endSquare;
 
 		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
@@ -68,7 +71,7 @@ public class AnimationPushed extends Animation {
 			progress = 1;
 		}
 
-		float angleChange = (float) (0.002d * delta);
+		float angleChange = (float) (0.010d * delta);
 
 		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetLimbRadians);
 		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetLimbRadians);
