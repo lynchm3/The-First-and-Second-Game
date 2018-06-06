@@ -36,15 +36,15 @@ public class AnimationPushed extends Animation {
 
 		backwards = performer.backwards;
 
-		float deltaX = endSquare.xInGrid - startSquare.xInGrid;
-		float deltaY = endSquare.yInGrid - startSquare.yInGrid;
-		double targetLimbRadians = Math.atan2(deltaY, deltaX);
-		targetLimbDegrees = (float) Math.toDegrees(targetLimbRadians);
-		targetLimbDegrees = (float) Math.atan2(endSquare.yInGrid - startSquare.yInGrid,
+		// float deltaX = endSquare.xInGrid - startSquare.xInGrid;
+		// float deltaY = endSquare.yInGrid - startSquare.yInGrid;
+		// double targetLimbRadians = Math.atan2(deltaY, deltaX);
+		// targetLimbRadians = (float) Math.toDegrees(targetLimbRadians);
+		targetLimbRadians = (float) Math.atan2(endSquare.yInGrid - startSquare.yInGrid,
 				endSquare.xInGrid - startSquare.xInGrid) + 1.5708f;
 		// System.out.println("deltaX = " + deltaX);
 		// System.out.println("deltaY = " + deltaY);
-		System.out.println("targetLimbDegrees = " + targetLimbDegrees);
+		System.out.println("targetLimbDegrees = " + targetLimbRadians);
 
 		blockAI = true;
 
@@ -52,7 +52,7 @@ public class AnimationPushed extends Animation {
 			Level.blockingAnimations.add(this);
 	}
 
-	float targetLimbDegrees = 0;
+	float targetLimbRadians = 0;
 
 	@Override
 	public void update(double delta) {
@@ -68,24 +68,17 @@ public class AnimationPushed extends Animation {
 			progress = 1;
 		}
 
-		float angleChange = 1;
+		float angleChange = (float) (0.002d * delta);
 
-		leftShoulderAngle = targetLimbDegrees; // = moveTowardsTargetAngleInDegrees(leftShoulderAngle, angleChange,
-												// targetLimbDegrees);
-		rightShoulderAngle = targetLimbDegrees;// = moveTowardsTargetAngleInDegrees(rightShoulderAngle, angleChange,
-												// targetLimbDegrees);
-		leftElbowAngle = 0;// = moveTowardsTargetAngleInDegrees(leftElbowAngle, angleChange,
-							// targetLimbDegrees);
-		rightElbowAngle = 0;// = moveTowardsTargetAngleInDegrees(rightElbowAngle, angleChange,
-							// targetLimbDegrees);
+		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetLimbRadians);
+		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetLimbRadians);
+		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
+		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
 
-		leftHipAngle = targetLimbDegrees;
-
-		rightHipAngle = targetLimbDegrees;
-
-		leftKneeAngle = 0;
-
-		rightKneeAngle = 0;
+		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, targetLimbRadians);
+		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, targetLimbRadians);
+		leftKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
+		rightKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 
 		if (progress >= 1) {
 			completed = true;

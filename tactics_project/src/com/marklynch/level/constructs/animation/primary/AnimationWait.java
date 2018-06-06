@@ -31,10 +31,10 @@ public class AnimationWait extends Animation {
 
 		float angleChange = (float) (0.002d * delta);
 
-		leftShoulderAngle = moveTowardsTargetAngleInDegrees(leftShoulderAngle, angleChange, 0);
-		rightShoulderAngle = moveTowardsTargetAngleInDegrees(rightShoulderAngle, angleChange, 0);
-		leftElbowAngle = moveTowardsTargetAngleInDegrees(leftElbowAngle, angleChange, 0);
-		rightElbowAngle = moveTowardsTargetAngleInDegrees(rightElbowAngle, angleChange, 0);
+		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, 0);
+		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, 0);
+		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
+		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
 
 	}
 

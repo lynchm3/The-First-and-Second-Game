@@ -67,23 +67,20 @@ public abstract class Animation {
 
 	}
 
-	protected float moveTowardsTargetAngleInDegrees(float angleToChange, float angleChange, float targetAngle) {
-		if (angleToChange == 0) {
+	protected float moveTowardsTargetAngleInRadians(float angleToChange, float angleChange, float targetAngle) {
+		if (angleToChange == targetAngle) {
 
-		} else if (Math.abs(angleToChange) < angleChange) {
-			angleToChange = 0;
+			// } else if (Math.abs(angleToChange) < angleChange) {
+			// angleToChange = targetAngle;
 		} else if (angleToChange > targetAngle) {
-			if (angleToChange < angleChange) {
-				angleToChange = targetAngle;
-			} else {
-				angleToChange -= angleChange;
-			}
+
+			angleToChange -= angleChange;
 		} else if (angleToChange < targetAngle) {
-			if (angleToChange > angleChange) {
-				angleToChange = targetAngle;
-			} else {
-				angleToChange += angleChange;
-			}
+			angleToChange += angleChange;
+		}
+
+		if (Math.abs(angleToChange - targetAngle) < angleChange) {
+			angleToChange = targetAngle;
 		}
 
 		return angleToChange;
