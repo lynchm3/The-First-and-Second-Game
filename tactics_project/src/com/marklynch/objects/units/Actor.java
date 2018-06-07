@@ -585,34 +585,6 @@ public class Actor extends GameObject {
 		if (hiding)
 			alpha = 0.5f;
 
-		for (Arrow arrow : arrows) {
-
-			float arrowWidth = arrow.width;
-
-			if (arrow.backwards) {
-				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								+ arrowWidth + primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ primaryAnimation.offsetY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								+ primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ arrow.height + primaryAnimation.offsetY);
-			} else {
-				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								+ primaryAnimation.offsetX - arrowWidth,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ primaryAnimation.offsetY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								+ primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ arrow.height + primaryAnimation.offsetY);
-
-			}
-		}
-
 		if (imageTexture != null)
 			super.draw1();
 		else
@@ -645,6 +617,34 @@ public class Actor extends GameObject {
 		view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
 		Game.activeBatch.updateUniforms();
+
+		for (Arrow arrow : arrows) {
+
+			float arrowWidth = arrow.width;
+
+			if (arrow.backwards) {
+				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								+ arrowWidth + primaryAnimation.offsetX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ primaryAnimation.offsetY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								+ primaryAnimation.offsetX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ arrow.height + primaryAnimation.offsetY);
+			} else {
+				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								+ primaryAnimation.offsetX - arrowWidth,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ primaryAnimation.offsetY,
+						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+								+ primaryAnimation.offsetX,
+						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+								+ arrow.height + primaryAnimation.offsetY);
+
+			}
+		}
 
 		if (torsoImageTexture != null) {
 			TextureUtils.drawTextureWithinBounds(torsoImageTexture, alpha, x, y, x + width, y + height, boundsX1,
@@ -697,7 +697,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (remainingHealth != totalHealth) {
+		if (remainingHealth != totalHealth && remainingHealth > 0) {
 			// draw sidebar on square
 			float healthPercentage = (remainingHealth) / (totalHealth);
 			float healthBarHeightInPixels = height * healthPercentage;
@@ -1184,11 +1184,6 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-leftLegHingeX, -kneeDrawY));
 		Game.activeBatch.updateUniforms();
 
-		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
-				&& primaryAnimation.drawArrowInOffHand == true) {
-			drawArrow(leftLegHingeX - Templates.ARROW.anchorX, y + handY);
-		}
-
 		TextureUtils.drawTextureWithinBounds(this.legImageTexture, alpha, leftLegDrawX, kneeDrawY,
 				leftLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight(), boundsX1, boundsY1,
 				boundsX2, boundsY2, false, false);
@@ -1289,11 +1284,6 @@ public class Actor extends GameObject {
 		view.rotate(rightKneeAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-rightLegHingeX, -kneeDrawY));
 		Game.activeBatch.updateUniforms();
-
-		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
-				&& primaryAnimation.drawArrowInOffHand == true) {
-			drawArrow(rightLegHingeX - Templates.ARROW.anchorX, y + handY);
-		}
 
 		TextureUtils.drawTextureWithinBounds(this.legImageTexture, alpha, rightLegDrawX, kneeDrawY,
 				rightLegDrawX + legImageTexture.getWidth(), kneeDrawY + legImageTexture.getHeight(), boundsX1, boundsY1,
@@ -1476,7 +1466,8 @@ public class Actor extends GameObject {
 		} else {
 
 			// bubble
-			if (thoughtBubbleImageTextureObject != null || thoughtBubbleImageTextureAction != null) {
+			if (remainingHealth > 0
+					&& (thoughtBubbleImageTextureObject != null || thoughtBubbleImageTextureAction != null)) {
 
 				int expressionBubbleWidth = 64;
 				int expressionBubbleHeight = 64;
