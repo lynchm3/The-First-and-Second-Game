@@ -83,6 +83,11 @@ public class AnimationWalk extends Animation {
 			progress = 1;
 		}
 
+		float torsoAngleChange = (float) (0.05d * delta);
+		// offsetY = moveTowardsTargetAngleInRadians(offsetY, offsetYChange, 0);
+		// offsetY = moveTowardsTargetAngleInRadians(offsetY, offsetYChange, 0);
+		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngleChange, torsoAngleChange, 0);
+
 		setAngles(progress);
 
 		if (progress >= 1) {

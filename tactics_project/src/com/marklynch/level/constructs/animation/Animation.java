@@ -130,15 +130,12 @@ public abstract class Animation {
 			performer.setPrimaryAnimation(new AnimationWait(performer));
 
 		}
-		System.out.println("a complete() performer = " + performer + ", " + this);
 
 		if (!(performer instanceof Actor))
 			return;
-		System.out.println("b complete() performer = " + performer + ", " + this);
 
 		if (this instanceof AnimationWalk || this instanceof AnimationWait)
 			return;
-		System.out.println("c complete() performer = " + performer + ", " + this);
 
 		// if (!(this instanceof AnimationWalk)) {
 		//
