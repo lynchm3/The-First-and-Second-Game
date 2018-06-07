@@ -14,6 +14,7 @@ public class AnimationMovementFade1 extends Animation {
 	float alpha = 0.5f;
 
 	public AnimationMovementFade1(Square square, GameObject gameObject) {
+		super(null);
 		this.square = square;
 		this.gameObject = gameObject;
 		this.durationToReach = 1000f;

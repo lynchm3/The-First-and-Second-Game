@@ -17,12 +17,10 @@ public class AnimationSlash extends Animation {
 	// for show only, walking actor, primary
 
 	GameObject target;
-	GameObject performer;
 
 	public AnimationSlash(GameObject performer, GameObject target) {
-		super();
+		super(performer);
 		this.target = target;
-		this.performer = performer;
 		durationToReach = 400;
 
 		quarterDurationToReach = durationToReach / 4;

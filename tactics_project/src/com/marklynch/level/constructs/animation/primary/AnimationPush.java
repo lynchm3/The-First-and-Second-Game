@@ -6,30 +6,16 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationPush extends Animation {
 
-	public GameObject performer;
 	public Square targetSquare;
 
 	float quarterDurationToReach;
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
-	public AnimationPush(GameObject performer, Square targetSquare, Animation previousAnimation) {
-		super();
+	public AnimationPush(GameObject performer, Square targetSquare, Animation oldAnimation) {
+		super(performer);
 		this.targetSquare = targetSquare;
-		this.performer = performer;
 		durationToReach = 400;
-		// drawWeapon = false;
-		if (previousAnimation != null) {
-			torsoAngle = previousAnimation.torsoAngle;
-			leftShoulderAngle = previousAnimation.leftShoulderAngle;
-			rightShoulderAngle = previousAnimation.rightShoulderAngle;
-			leftElbowAngle = previousAnimation.leftElbowAngle;
-			rightElbowAngle = previousAnimation.rightElbowAngle;
-			leftHipAngle = previousAnimation.leftHipAngle;
-			rightHipAngle = previousAnimation.rightHipAngle;
-			leftKneeAngle = previousAnimation.leftKneeAngle;
-			rightKneeAngle = previousAnimation.rightKneeAngle;
-		}
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -92,7 +78,7 @@ public class AnimationPush extends Animation {
 		if (progress >= 1) {
 			complete();
 			if (performer.getPrimaryAnimation() == this)
-				performer.setPrimaryAnimation(new AnimationWait(this));
+				performer.setPrimaryAnimation(new AnimationWait(performer, this));
 		}
 
 		// If at last square, drop y.

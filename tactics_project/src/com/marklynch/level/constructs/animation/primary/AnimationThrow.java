@@ -19,7 +19,7 @@ public class AnimationThrow extends Animation {
 	GameObject target;
 
 	public AnimationThrow(GameObject performer, GameObject target) {
-		super();
+		super(performer);
 		this.target = target;
 		durationToReach = 400;
 		drawEquipped = false;

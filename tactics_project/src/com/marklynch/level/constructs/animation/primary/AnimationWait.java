@@ -1,27 +1,14 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.objects.GameObject;
 
 public class AnimationWait extends Animation {
 
-	public AnimationWait(Animation oldAnimation) {
-		super();
+	public AnimationWait(GameObject performer, Animation oldAnimation) {
+		super(performer);
 		// durationToReach = 400;
 		blockAI = false;
-
-		if (oldAnimation != null) {
-			this.torsoAngle = oldAnimation.torsoAngle;
-
-			this.leftShoulderAngle = oldAnimation.leftShoulderAngle;
-			this.rightShoulderAngle = oldAnimation.rightShoulderAngle;
-			this.leftElbowAngle = oldAnimation.leftElbowAngle;
-			this.rightElbowAngle = oldAnimation.rightElbowAngle;
-
-			this.leftHipAngle = oldAnimation.leftHipAngle;
-			this.rightHipAngle = oldAnimation.rightHipAngle;
-			this.leftKneeAngle = oldAnimation.leftKneeAngle;
-			this.rightKneeAngle = oldAnimation.rightKneeAngle;
-		}
 	}
 
 	@Override
@@ -32,17 +19,51 @@ public class AnimationWait extends Animation {
 
 		durationSoFar += delta;
 		// double progress = durationSoFar / durationToReach;
-		if (leftShoulderAngle == 0 &&
+
+		float targetRightHip = 0f;
+		float targetRightKnee = 0f;
+		float targetLeftHip = 0f;
+		float targetLeftKnee = 0f;
+
+		float targetOffsetY = 0f;
+		if (performer.hiding) {
+
+			targetLeftHip = -1.1f;
+			targetRightHip = -1.1f;
+
+			targetLeftKnee = 2f;
+			targetRightKnee = 2f;
+
+			targetOffsetY = 28f;
+		}
+
+		if (offsetY == targetOffsetY &&
 		//
+				torsoAngle == 0 &&
+				//
+				leftShoulderAngle == 0 &&
+				//
 				rightShoulderAngle == 0 &&
 				//
 				leftElbowAngle == 0 &&
 				//
-				rightElbowAngle == 0) {
+				rightElbowAngle == 0 &&
+				//
+				leftHipAngle == targetLeftHip &&
+				//
+				rightHipAngle == targetRightHip &&
+				//
+				leftKneeAngle == targetLeftKnee &&
+				//
+				rightKneeAngle == targetRightKnee) {
 			complete();
 		}
 
+		float offsetYChange = (float) (0.05d * delta);
 		float angleChange = (float) (0.002d * delta);
+		float angleChangeKnee = (float) (0.004d * delta);
+
+		offsetY = moveTowardsTargetAngleInRadians(offsetY, offsetYChange, targetOffsetY);
 
 		// torsoAngle = 0.5f;
 		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, 0);
@@ -52,10 +73,10 @@ public class AnimationWait extends Animation {
 		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
 
-		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, 0);
-		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, 0);
-		leftKneeAngle = moveTowardsTargetAngleInRadians(leftKneeAngle, angleChange, 0);
-		rightKneeAngle = moveTowardsTargetAngleInRadians(rightKneeAngle, angleChange, 0);
+		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, targetLeftHip);
+		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, targetRightHip);
+		leftKneeAngle = moveTowardsTargetAngleInRadians(leftKneeAngle, angleChangeKnee, targetLeftKnee);
+		rightKneeAngle = moveTowardsTargetAngleInRadians(rightKneeAngle, angleChangeKnee, targetRightKnee);
 
 	}
 

@@ -57,7 +57,7 @@ public class ActionMiningStart extends Action {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
 
 		if (Game.level.shouldLog(target, performer)) {
-			target.setPrimaryAnimation(new AnimationShake());
+			target.setPrimaryAnimation(new AnimationShake(target));
 		}
 
 		if (!target.infinite) {

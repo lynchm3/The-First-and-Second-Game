@@ -8,7 +8,7 @@ public class AnimationWave extends Animation {
 	GameObject target;
 
 	public AnimationWave(GameObject performer, GameObject target) {
-		super();
+		super(performer);
 		this.target = target;
 		durationToReach = 2000;
 

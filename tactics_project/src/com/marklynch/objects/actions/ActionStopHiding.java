@@ -26,7 +26,8 @@ public class ActionStopHiding extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -36,11 +37,17 @@ public class ActionStopHiding extends Action {
 
 		if (performer.hiding == true) {
 			performer.hiding = false;
-			performer.hidingPlace.actorsHidingHere.remove(performer);
-			performer.hidingPlace = null;
+			if (performer.hidingPlace != null) {
+				performer.hidingPlace.actorsHidingHere.remove(performer);
+				performer.hidingPlace = null;
 
-			if (Game.level.shouldLog(object, performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", object }));
+				if (Game.level.shouldLog(object, performer))
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", object }));
+			} else {
+
+				if (Game.level.shouldLog(object, performer))
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding" }));
+			}
 		}
 
 		performer.actionsPerformedThisTurn.add(this);

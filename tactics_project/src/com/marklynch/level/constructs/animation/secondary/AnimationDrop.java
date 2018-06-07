@@ -21,6 +21,8 @@ public class AnimationDrop extends Animation {
 	public AnimationDrop(String name, GameObject shooter, Action action, Square targetSquare,
 			GameObject projectileObject, float speed) {
 
+		super(null);
+
 		if (shooter == Game.level.player) {
 			name = "Your " + name;
 		} else {

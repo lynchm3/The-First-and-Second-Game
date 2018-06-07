@@ -21,15 +21,13 @@ public class AnimationShootArrow extends Animation {
 	// for show only, walking actor, primary
 
 	GameObject target;
-	Actor performer;
 	Action action;
 	AnimationThrown animationThrown;
 	GameObject weapon;
 
 	public AnimationShootArrow(Actor performer, GameObject target, GameObject weapon, Action action) {
-		super();
+		super(performer);
 		// this.performer []
-		this.performer = performer;
 		this.target = target;
 		this.action = action;
 		this.weapon = weapon;
@@ -105,8 +103,8 @@ public class AnimationShootArrow extends Animation {
 				Arrow arrow = Templates.ARROW.makeCopy(null, null);
 				arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
 				arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
-				animationThrown = new AnimationThrown("Arrow", performer, action, target, target.squareGameObjectIsOn,
-						arrow, weapon, 2f, 0f, true);
+				animationThrown = new AnimationThrown("Arrow", (Actor) performer, action, target,
+						target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true);
 				performer.secondaryAnimations.add(animationThrown);
 			}
 

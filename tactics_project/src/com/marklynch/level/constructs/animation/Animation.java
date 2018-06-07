@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation;
 
 import com.marklynch.level.Level;
+import com.marklynch.objects.GameObject;
 
 public abstract class Animation {
 	public boolean blockAI = false;
@@ -50,6 +51,31 @@ public abstract class Animation {
 	public int boundsX2 = 128;
 	public int boundsY2 = 128;
 	public boolean drawWeapon = true;
+
+	protected GameObject performer;
+
+	public Animation(GameObject performer) {
+
+		this.performer = performer;
+
+		if (performer != null && performer.getPrimaryAnimation() != null) {
+
+			this.offsetX = performer.getPrimaryAnimation().offsetX;
+			this.offsetY = performer.getPrimaryAnimation().offsetY;
+
+			this.torsoAngle = performer.getPrimaryAnimation().torsoAngle;
+
+			this.leftShoulderAngle = performer.getPrimaryAnimation().leftShoulderAngle;
+			this.rightShoulderAngle = performer.getPrimaryAnimation().rightShoulderAngle;
+			this.leftElbowAngle = performer.getPrimaryAnimation().leftElbowAngle;
+			this.rightElbowAngle = performer.getPrimaryAnimation().rightElbowAngle;
+
+			this.leftHipAngle = performer.getPrimaryAnimation().leftHipAngle;
+			this.rightHipAngle = performer.getPrimaryAnimation().rightHipAngle;
+			this.leftKneeAngle = performer.getPrimaryAnimation().leftKneeAngle;
+			this.rightKneeAngle = performer.getPrimaryAnimation().rightKneeAngle;
+		}
+	}
 
 	protected void reverseAnimation() {
 

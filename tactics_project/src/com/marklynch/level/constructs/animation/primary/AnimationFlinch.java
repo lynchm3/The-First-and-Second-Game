@@ -6,30 +6,16 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationFlinch extends Animation {
 
-	public GameObject performer;
 	public Square targetSquare;
 
 	float quarterDurationToReach;
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
-	public AnimationFlinch(GameObject performer, Square squareBeingAttackedFrom, Animation previousAnimation) {
-		super();
+	public AnimationFlinch(GameObject performer, Square squareBeingAttackedFrom, Animation oldAnimation) {
+		super(performer);
 		this.targetSquare = squareBeingAttackedFrom;
-		this.performer = performer;
 		durationToReach = 400;
-		// drawWeapon = false;
-		if (previousAnimation != null) {
-			torsoAngle = previousAnimation.torsoAngle;
-			leftShoulderAngle = previousAnimation.leftShoulderAngle;
-			rightShoulderAngle = previousAnimation.rightShoulderAngle;
-			leftElbowAngle = previousAnimation.leftElbowAngle;
-			rightElbowAngle = previousAnimation.rightElbowAngle;
-			leftHipAngle = previousAnimation.leftHipAngle;
-			rightHipAngle = previousAnimation.rightHipAngle;
-			leftKneeAngle = previousAnimation.leftKneeAngle;
-			rightKneeAngle = previousAnimation.rightKneeAngle;
-		}
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -94,7 +80,7 @@ public class AnimationFlinch extends Animation {
 		if (progress >= 1) {
 			complete();
 			if (performer.getPrimaryAnimation() == this)
-				performer.setPrimaryAnimation(new AnimationWait(this));
+				performer.setPrimaryAnimation(new AnimationWait(performer, this));
 		}
 	}
 

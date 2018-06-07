@@ -7,7 +7,6 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationPushed extends Animation {
 
-	public GameObject performer;
 	public Square startSquare;
 	public Square endSquare;
 	public float startOffsetX = 0;
@@ -23,27 +22,10 @@ public class AnimationPushed extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare, Animation previousAnimation) {
-		super();
+	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare, Animation oldAnimation) {
+		super(performer);
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
-		this.performer = performer;
-
-		if (previousAnimation != null) {
-
-			torsoAngle = previousAnimation.torsoAngle;
-
-			leftShoulderAngle = previousAnimation.leftShoulderAngle;
-			rightShoulderAngle = previousAnimation.rightShoulderAngle;
-			leftElbowAngle = previousAnimation.leftElbowAngle;
-			rightElbowAngle = previousAnimation.rightElbowAngle;
-
-			leftHipAngle = previousAnimation.leftHipAngle;
-			rightHipAngle = previousAnimation.rightHipAngle;
-			leftKneeAngle = previousAnimation.leftKneeAngle;
-			rightKneeAngle = previousAnimation.rightKneeAngle;
-
-		}
 
 		float distance = (float) Math.hypot(this.startSquare.xInGrid - this.endSquare.xInGrid,
 				this.startSquare.yInGrid - this.endSquare.yInGrid);
@@ -143,7 +125,7 @@ public class AnimationPushed extends Animation {
 		if (progress >= 1) {
 			complete();
 			if (performer.getPrimaryAnimation() == this)
-				performer.setPrimaryAnimation(new AnimationWait(this));
+				performer.setPrimaryAnimation(new AnimationWait(performer, this));
 		}
 
 		offsetX = (int) (startOffsetX * (1 - progress));

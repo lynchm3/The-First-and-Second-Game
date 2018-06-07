@@ -8,7 +8,6 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationTeleport extends Animation {
 
-	public GameObject performer;
 	public Square startSquare;
 	public Square endSquare;
 	public float startOffsetX = 0;
@@ -21,7 +20,7 @@ public class AnimationTeleport extends Animation {
 	// for show only, walking actor, primary
 
 	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare) {
-		super();
+		super(performer);
 		durationToReach = 400;
 
 		quarterDurationToReach = durationToReach / 4;
@@ -33,8 +32,6 @@ public class AnimationTeleport extends Animation {
 
 		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
-
-		this.performer = performer;
 
 		backwards = performer.backwards;
 
@@ -61,7 +58,7 @@ public class AnimationTeleport extends Animation {
 		if (progress >= 1) {
 			complete();
 			if (performer.getPrimaryAnimation() == this)
-				performer.setPrimaryAnimation(new AnimationWait(this));
+				performer.setPrimaryAnimation(new AnimationWait(performer, this));
 
 			offsetX = 0;
 		} else if (progress >= 0.5f) {

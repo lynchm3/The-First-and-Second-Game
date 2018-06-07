@@ -19,7 +19,7 @@ public class AnimationWalk extends Animation {
 	// for show only, walking actor, primary
 
 	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int phase) {
-		super();
+		super(performer);
 		durationToReach = 400;
 
 		quarterDurationToReach = durationToReach / 4;
@@ -48,12 +48,13 @@ public class AnimationWalk extends Animation {
 	}
 
 	public AnimationWalk(int startX, int startY, int endX, int endY) {
+		super(null);
 
 		setAngles(0f);
 	}
 
 	public AnimationWalk(float startX, float startY, float endX, float endY) {
-		super();
+		super(null);
 		durationToReach = 400;
 		startOffsetX = offsetX = startX - endX;
 		startOffsetY = offsetY = startY - endY;

@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.objects.GameObject;
 
 public class AnimationShake extends Animation {
 
@@ -9,11 +10,9 @@ public class AnimationShake extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationShake() {
-		super();
+	public AnimationShake(GameObject performer) {
+		super(performer);
 		// durationToReach = 200;
-		this.baseOffsetX = baseOffsetX;
-		this.baseOffsetX = baseOffsetX;
 		blockAI = false;
 
 	}

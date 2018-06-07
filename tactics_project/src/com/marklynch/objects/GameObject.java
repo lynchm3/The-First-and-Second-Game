@@ -216,7 +216,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Object destroyedBy = null;
 	public Action destroyedByAction = null;
 
-	protected Animation primaryAnimation = new AnimationWait(null);
+	protected Animation primaryAnimation = new AnimationWait(this, null);
 	public ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
 
 	public boolean toSell = false;

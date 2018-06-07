@@ -39,6 +39,8 @@ public class AnimationDamageText extends Animation {
 	public AnimationDamageText(int damage, GameObject targetGameObject, float originX, float originY, float speed,
 			HIGH_LEVEL_STATS statType, Color color) {
 
+		super(null);
+
 		this.targetGameObject = targetGameObject;
 
 		String damageString = "" + damage;

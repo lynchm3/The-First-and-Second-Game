@@ -38,6 +38,7 @@ public class AnimationTake extends Animation {
 
 	public AnimationTake(GameObject gameObject, GameObject taker, float originX, float originY, float speed,
 			float targetOffsetX, float targetOffsetY) {
+		super(null);
 
 		this.targetGameObject = taker;
 		this.gameObject = gameObject;
@@ -55,6 +56,7 @@ public class AnimationTake extends Animation {
 
 	public AnimationTake(GameObject gameObject, GameObject taker, float targetOffsetX, float targetOffsetY,
 			float speed) {
+		super(null);
 
 		this.targetGameObject = taker;
 		this.gameObject = gameObject;
