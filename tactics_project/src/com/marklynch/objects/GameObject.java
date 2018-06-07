@@ -250,7 +250,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float swimmingChangeX = 0;
 	public float swimmingChangeY = 0;
 
-	public ArrayList<Arrow> arrows = new ArrayList<Arrow>();
+	public ArrayList<Arrow> arrowsEmbeddedInThis = new ArrayList<Arrow>();
 
 	public GameObject fishingTarget;
 	public GameObject equipped = null;
@@ -413,7 +413,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (hiding)
 				alpha = 0.5f;
 
-			for (Arrow arrow : arrows) {
+			for (Arrow arrow : arrowsEmbeddedInThis) {
 
 				float arrowWidth = arrow.width;
 				// arrowWidth = -arrowWidth;
@@ -473,7 +473,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				// squareGameObjectIsOn.inventory.getGameObjectOfClass(WaterBody.class).draw1();
 			}
 
-			for (Arrow arrow : arrows) {
+			for (Arrow arrow : arrowsEmbeddedInThis) {
 
 				float arrowWidth = arrow.width;
 				// arrowWidth = -arrowWidth;

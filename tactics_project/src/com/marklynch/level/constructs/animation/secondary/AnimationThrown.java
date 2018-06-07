@@ -145,7 +145,7 @@ public class AnimationThrown extends Animation {
 				// targetGameObject.squareGameObjectIsOn.yInGridPixels)
 				// / Game.SQUARE_HEIGHT;
 
-				targetGameObject.arrows.add((Arrow) projectileObject);
+				targetGameObject.arrowsEmbeddedInThis.add((Arrow) projectileObject);
 			}
 
 			if (Level.player.inventory.groundDisplay != null)

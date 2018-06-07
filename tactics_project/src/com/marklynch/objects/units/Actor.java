@@ -618,7 +618,7 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
 		Game.activeBatch.updateUniforms();
 
-		for (Arrow arrow : arrows) {
+		for (Arrow arrow : arrowsEmbeddedInThis) {
 
 			float arrowWidth = arrow.width;
 
@@ -669,7 +669,7 @@ public class Actor extends GameObject {
 			// squareGameObjectIsOn.inventory.getGameObjectOfClass(WaterBody.class).draw1();
 		}
 
-		for (Arrow arrow : arrows) {
+		for (Arrow arrow : arrowsEmbeddedInThis) {
 
 			float arrowWidth = arrow.width;
 
@@ -1466,8 +1466,19 @@ public class Actor extends GameObject {
 		} else {
 
 			// bubble
-			if (remainingHealth > 0
+			if (remainingHealth > 0 && !hiding
 					&& (thoughtBubbleImageTextureObject != null || thoughtBubbleImageTextureAction != null)) {
+
+				float torsoAngle = 0;
+				if (primaryAnimation != null) {
+					torsoAngle = primaryAnimation.torsoAngle;
+				}
+				Matrix4f view = Game.activeBatch.getViewMatrix();
+				Game.flush();
+				view.translate(new Vector2f(actorPositionXInPixels + halfWidth, actorPositionYInPixels + hipY));
+				view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
+				view.translate(new Vector2f(-(actorPositionXInPixels + halfWidth), -(actorPositionYInPixels + hipY)));
+				Game.activeBatch.updateUniforms();
 
 				int expressionBubbleWidth = 64;
 				int expressionBubbleHeight = 64;
@@ -1545,6 +1556,12 @@ public class Actor extends GameObject {
 							expressionPositionYInPixels + expressionHeight / 2, thoughtBubbleImageTextureActionColor);
 					// TextureUtils.skipNormals = false;
 				}
+
+				Game.flush();
+				view.translate(new Vector2f(actorPositionXInPixels + halfWidth, actorPositionYInPixels + hipY));
+				view.rotate(-torsoAngle, new Vector3f(0f, 0f, 1f));
+				view.translate(new Vector2f(-(actorPositionXInPixels + halfWidth), -(actorPositionYInPixels + hipY)));
+				Game.activeBatch.updateUniforms();
 			}
 		}
 		//
