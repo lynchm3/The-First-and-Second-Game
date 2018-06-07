@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Vector3f;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.primary.AnimationFlinch;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -125,6 +126,10 @@ public class AnimationThrown extends Animation {
 		if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
 			complete();
+
+			if (targetGameObject != null && targetGameObject instanceof Actor)
+				targetGameObject.setPrimaryAnimation(new AnimationFlinch(targetGameObject, shooter.squareGameObjectIsOn,
+						targetGameObject.getPrimaryAnimation()));
 			if (targetGameObject != null)
 				targetGameObject.showPow();
 			if (!(projectileObject instanceof Arrow)) {
