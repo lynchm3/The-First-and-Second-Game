@@ -127,6 +127,12 @@ public abstract class Animation {
 			Level.blockingAnimations.remove(this);
 		completed = true;
 
+		if (performer == null)
+			return;
+
+		if (!(performer instanceof Actor))
+			return;
+
 		if (this != performer.getPrimaryAnimation())
 			return;
 
@@ -135,9 +141,6 @@ public abstract class Animation {
 			performer.setPrimaryAnimation(new AnimationWait(performer));
 			return;
 		}
-
-		if (!(performer instanceof Actor))
-			return;
 
 		if (this instanceof AnimationWalk || this instanceof AnimationWait || this instanceof AnimationDie)
 			return;
