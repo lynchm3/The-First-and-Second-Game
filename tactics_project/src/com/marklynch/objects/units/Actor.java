@@ -25,6 +25,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.effect.Effect;
@@ -215,6 +216,8 @@ public class Actor extends GameObject {
 	public Actor() {
 
 		super();
+
+		primaryAnimation = new AnimationWait(this);
 
 		canBePickedUp = false;
 
@@ -1379,7 +1382,9 @@ public class Actor extends GameObject {
 	public void drawBowString(float handX, float handY) {
 
 		float bowStringY = handY - 16;
-		float bowStringYPulled = handY - 16 + primaryAnimation.bowStringHandleY;
+		float bowStringYPulled = handY - 16;
+		if (primaryAnimation != null)
+			bowStringYPulled += primaryAnimation.bowStringHandleY;
 
 		float boStringX = handX;
 

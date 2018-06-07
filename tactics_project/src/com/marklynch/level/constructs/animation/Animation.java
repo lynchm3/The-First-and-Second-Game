@@ -2,7 +2,9 @@ package com.marklynch.level.constructs.animation;
 
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
+import com.marklynch.level.constructs.animation.primary.AnimationWalk;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 
 public abstract class Animation {
@@ -125,9 +127,22 @@ public abstract class Animation {
 		completed = true;
 		if (performer == Level.player && Player.playerPathToMove == null && Player.playerTargetSquare == null
 				&& Player.playerTargetAction == null && Player.playerTargetActor == null) {
-			Level.player.setPrimaryAnimation(new AnimationWait(performer));
+			performer.setPrimaryAnimation(new AnimationWait(performer));
 
 		}
+		System.out.println("a complete() performer = " + performer + ", " + this);
+
+		if (!(performer instanceof Actor))
+			return;
+		System.out.println("b complete() performer = " + performer + ", " + this);
+
+		if (this instanceof AnimationWalk || this instanceof AnimationWait)
+			return;
+		System.out.println("c complete() performer = " + performer + ", " + this);
+
+		// if (!(this instanceof AnimationWalk)) {
+		//
+		// } else
 	}
 
 	public boolean getCompleted() {

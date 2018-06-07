@@ -15,7 +15,6 @@ import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
-import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.effect.Effect;
@@ -216,7 +215,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Object destroyedBy = null;
 	public Action destroyedByAction = null;
 
-	protected Animation primaryAnimation = new AnimationWait(this);
+	protected Animation primaryAnimation;
 	public ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
 
 	public boolean toSell = false;
