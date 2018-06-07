@@ -17,6 +17,9 @@ public class AnimationTeleport extends Animation {
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
+	float offsetXFromLastAnimation;
+	float offsetYFromLastAnimation;
+
 	// for show only, walking actor, primary
 
 	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare) {
@@ -29,9 +32,12 @@ public class AnimationTeleport extends Animation {
 
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
-
-		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
-		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
+		offsetXFromLastAnimation = offsetX;
+		offsetYFromLastAnimation = offsetY;
+		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH)
+				+ offsetXFromLastAnimation;
+		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT)
+				+ offsetYFromLastAnimation;
 
 		backwards = performer.backwards;
 
@@ -60,10 +66,10 @@ public class AnimationTeleport extends Animation {
 			// if (performer.getPrimaryAnimation() == this)
 			// performer.setPrimaryAnimation(new AnimationWait(performer));
 
-			offsetX = 0;
+			// offsetX = 0;
 		} else if (progress >= 0.5f) {
-			offsetX = 0;
-			offsetY = 0;
+			offsetX = offsetXFromLastAnimation;
+			offsetY = offsetYFromLastAnimation;
 			// boundsX1 = 0;
 			boundsY1 = (int) ((1 - progress) * 2 * performer.height);
 			// boundsX2 = 0;

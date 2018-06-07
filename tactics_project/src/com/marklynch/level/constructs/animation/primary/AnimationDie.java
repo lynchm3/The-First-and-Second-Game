@@ -15,14 +15,14 @@ public class AnimationDie extends Animation {
 		blockAI = true;
 
 		if (Math.random() >= 0.5) {
-			targetOffsetX = (float) (64f - Math.random() * 16f);
+			targetOffsetX = (64f);// - Math.random() * 16f);
 			targetTorsoAngle = 1.57f;
 		} else {
-			targetOffsetX = (float) (-64f + Math.random() * 16f);
+			targetOffsetX = (-64f);// + Math.random() * 16f);
 			targetTorsoAngle = -1.57f;
 
 		}
-		targetOffsetY = (float) (32f - Math.random() * 32f);
+		targetOffsetY = (float) (32f - Math.random() * 16f);
 	}
 
 	@Override
