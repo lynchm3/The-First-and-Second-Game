@@ -50,6 +50,7 @@ import com.marklynch.objects.actions.ActionFishingStart;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionOpenOtherInventory;
 import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
@@ -1700,6 +1701,10 @@ public class Actor extends GameObject {
 			return new ActionWait(performer, performer.squareGameObjectIsOn);
 		}
 
+		if (remainingHealth <= 0) {
+			return new ActionOpenOtherInventory(performer, this);
+		}
+
 		// Water Source
 		if (this.squareGameObjectIsOn != null && this.squareGameObjectIsOn.inventory.waterBody != null) {
 			return new ActionFishingStart(performer, this);
@@ -1787,10 +1792,14 @@ public class Actor extends GameObject {
 			actions.add(new ActionPin(performer, this));
 		} else {
 			// Talk
-			if (this.getConversation() != null)
+			if (remainingHealth > 0 && this.getConversation() != null)
 				actions.add(new ActionTalk(performer, this));
-			if (this instanceof Animal) {
+			// Pet
+			if (remainingHealth > 0 && this instanceof Animal) {
 				actions.add(new ActionPet(performer, this));
+			}
+			if (remainingHealth <= 0) {
+				actions.add(new ActionOpenOtherInventory(performer, this));
 			}
 			actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		}
@@ -1820,6 +1829,9 @@ public class Actor extends GameObject {
 
 	@Override
 	public Conversation getConversation() {
+
+		if (remainingHealth <= 0)
+			return null;
 
 		Quest quest;
 		if (group != null) {

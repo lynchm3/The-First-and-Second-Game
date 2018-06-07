@@ -5,10 +5,15 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationDie extends Animation {
 
+	float targetOffsetY = 64f;
+	float targetOffsetX = 32f;
+
 	public AnimationDie(GameObject performer) {
 		super(performer);
 		// durationToReach = 400;
 		blockAI = true;
+		targetOffsetX -= Math.random() * 16f;
+		targetOffsetY -= Math.random() * 32f;
 	}
 
 	@Override
@@ -25,8 +30,6 @@ public class AnimationDie extends Animation {
 		float targetRightKnee = 0f;
 		float targetLeftHip = 0f;
 		float targetLeftKnee = 0f;
-		float targetOffsetY = 64f;
-		float targetOffsetX = 32f;
 
 		if (offsetY == targetOffsetY &&
 		//
