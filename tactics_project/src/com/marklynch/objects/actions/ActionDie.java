@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
 import com.marklynch.level.constructs.effect.EffectBurning;
@@ -150,7 +151,12 @@ public class ActionDie extends Action {
 
 		if (gameObjectPerformer instanceof Actor) {
 
-			gameObjectPerformer.setPrimaryAnimation(new AnimationDie(gameObjectPerformer));
+			Actor actor = (Actor) gameObjectPerformer;
+			if (gameObjectPerformer.equipped != null && gameObjectPerformer != Level.player)
+				new ActionDropItems(gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn,
+						gameObjectPerformer.equipped).perform();
+			actor.setPrimaryAnimation(new AnimationDie(gameObjectPerformer));
+
 			// GameObject body = null;
 			// if (gameObjectPerformer instanceof RockGolem) {
 			// Templates.ORE.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
