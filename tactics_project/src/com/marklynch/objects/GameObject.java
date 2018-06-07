@@ -360,8 +360,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void draw1() {
 
-		if (this.remainingHealth <= 0)
-			return;
+		// if (this.remainingHealth <= 0)
+		// return;
 		if (squareGameObjectIsOn == null)
 			return;
 		if (hiding && this != Game.level.player)
@@ -564,8 +564,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return;
 		if (!floats)
 			return;
-		if (this.remainingHealth <= 0)
-			return;
+		// if (this.remainingHealth <= 0)
+		// return;
 		if (squareGameObjectIsOn == null)
 			return;
 		if (hiding)
@@ -1079,8 +1079,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
-		if (this.remainingHealth <= 0)
-			return actions;
+		// if (this.remainingHealth <= 0)
+		// return actions;
 
 		if (this instanceof Discoverable) {
 			Discoverable discoverable = (Discoverable) this;
@@ -2119,11 +2119,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public void setPrimaryAnimation(Animation animation) {
 		Level.blockingAnimations.remove(this.primaryAnimation);
 
-		if (remainingHealth > 0) {
-			this.primaryAnimation = animation;
-			if (animation != null && animation.blockAI)
-				Level.blockingAnimations.add(animation);
-		}
+		// if (remainingHealth > 0) {
+		this.primaryAnimation = animation;
+		if (animation != null && animation.blockAI)
+			Level.blockingAnimations.add(animation);
+		// }
 	}
 
 	public Animation getPrimaryAnimation() {

@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation;
 
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.animation.primary.AnimationDie;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.primary.AnimationWalk;
 import com.marklynch.objects.GameObject;
@@ -128,13 +129,13 @@ public abstract class Animation {
 		if (performer == Level.player && Player.playerPathToMove == null && Player.playerTargetSquare == null
 				&& Player.playerTargetAction == null && Player.playerTargetActor == null) {
 			performer.setPrimaryAnimation(new AnimationWait(performer));
-
+			return;
 		}
 
 		if (!(performer instanceof Actor))
 			return;
 
-		if (this instanceof AnimationWalk || this instanceof AnimationWait)
+		if (this instanceof AnimationWalk || this instanceof AnimationWait || this instanceof AnimationDie)
 			return;
 
 		// if (!(this instanceof AnimationWalk)) {

@@ -536,8 +536,8 @@ public class Actor extends GameObject {
 	public void draw1() {
 
 		// Don't draw if dead
-		if (this.remainingHealth <= 0)
-			return;
+		// if (this.remainingHealth <= 0)
+		// return;
 
 		// Don't draw if hiding
 		if (hiding && this != Game.level.player)
@@ -1425,8 +1425,8 @@ public class Actor extends GameObject {
 		// if (this.squareGameObjectIsOn.visibleToPlayer == false)
 		// return;
 
-		if (this.remainingHealth <= 0)
-			return;
+		// if (this.remainingHealth <= 0)
+		// return;
 
 		if (!Game.fullVisiblity && this != Game.level.player) {
 
@@ -1755,8 +1755,8 @@ public class Actor extends GameObject {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
 
-		if (this.remainingHealth <= 0)
-			return actions;
+		// if (this.remainingHealth <= 0)
+		// return actions;
 
 		if (this == Game.level.player) {
 			if (Game.level.player.peekingThrough != null) {
