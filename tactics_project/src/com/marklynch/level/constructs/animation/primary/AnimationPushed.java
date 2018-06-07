@@ -124,8 +124,8 @@ public class AnimationPushed extends Animation {
 
 		if (progress >= 1) {
 			complete();
-			if (performer.getPrimaryAnimation() == this)
-				performer.setPrimaryAnimation(new AnimationWait(performer));
+			// if (performer.getPrimaryAnimation() == this)
+			// performer.setPrimaryAnimation(new AnimationWait(performer));
 		}
 
 		offsetX = (int) (startOffsetX * (1 - progress));

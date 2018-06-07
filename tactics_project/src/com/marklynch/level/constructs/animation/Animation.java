@@ -138,6 +138,11 @@ public abstract class Animation {
 		if (this instanceof AnimationWalk || this instanceof AnimationWait || this instanceof AnimationDie)
 			return;
 
+		if (performer.remainingHealth > 0)
+			performer.setPrimaryAnimation(new AnimationWait(performer));
+		else
+			performer.setPrimaryAnimation(new AnimationDie(performer));
+
 		// if (!(this instanceof AnimationWalk)) {
 		//
 		// } else

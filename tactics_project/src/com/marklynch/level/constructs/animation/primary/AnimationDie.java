@@ -7,13 +7,22 @@ public class AnimationDie extends Animation {
 
 	float targetOffsetY = 64f;
 	float targetOffsetX = 32f;
+	float targetTorsoAngle = 1.57f;// 3.14/2
 
 	public AnimationDie(GameObject performer) {
 		super(performer);
 		// durationToReach = 400;
 		blockAI = true;
-		targetOffsetX -= Math.random() * 16f;
-		targetOffsetY -= Math.random() * 32f;
+
+		if (Math.random() >= 0.5) {
+			targetOffsetX = (float) (64f - Math.random() * 16f);
+			targetTorsoAngle = 1.57f;
+		} else {
+			targetOffsetX = (float) (-64f + Math.random() * 16f);
+			targetTorsoAngle = -1.57f;
+
+		}
+		targetOffsetY = (float) (32f - Math.random() * 32f);
 	}
 
 	@Override
@@ -25,7 +34,6 @@ public class AnimationDie extends Animation {
 		durationSoFar += delta;
 		// double progress = durationSoFar / durationToReach;
 
-		float targetTorsoAngle = 1.57f;// 3.14/2
 		float targetRightHip = 0f;
 		float targetRightKnee = 0f;
 		float targetLeftHip = 0f;
