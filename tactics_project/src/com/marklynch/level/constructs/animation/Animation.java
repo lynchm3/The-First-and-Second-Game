@@ -126,6 +126,10 @@ public abstract class Animation {
 		if (blockAI)
 			Level.blockingAnimations.remove(this);
 		completed = true;
+
+		if (this != performer.getPrimaryAnimation())
+			return;
+
 		if (performer == Level.player && Player.playerPathToMove == null && Player.playerTargetSquare == null
 				&& Player.playerTargetAction == null && Player.playerTargetActor == null) {
 			performer.setPrimaryAnimation(new AnimationWait(performer));
