@@ -5,7 +5,7 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationWait extends Animation {
 
-	public AnimationWait(GameObject performer, Animation oldAnimation) {
+	public AnimationWait(GameObject performer) {
 		super(performer);
 		// durationToReach = 400;
 		blockAI = false;

@@ -78,7 +78,7 @@ public class AnimationPush extends Animation {
 		if (progress >= 1) {
 			complete();
 			if (performer.getPrimaryAnimation() == this)
-				performer.setPrimaryAnimation(new AnimationWait(performer, this));
+				performer.setPrimaryAnimation(new AnimationWait(performer));
 		}
 
 		// If at last square, drop y.

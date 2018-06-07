@@ -58,7 +58,7 @@ public class AnimationTeleport extends Animation {
 		if (progress >= 1) {
 			complete();
 			if (performer.getPrimaryAnimation() == this)
-				performer.setPrimaryAnimation(new AnimationWait(performer, this));
+				performer.setPrimaryAnimation(new AnimationWait(performer));
 
 			offsetX = 0;
 		} else if (progress >= 0.5f) {

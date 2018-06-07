@@ -1,7 +1,9 @@
 package com.marklynch.level.constructs.animation;
 
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Player;
 
 public abstract class Animation {
 	public boolean blockAI = false;
@@ -121,6 +123,11 @@ public abstract class Animation {
 		if (blockAI)
 			Level.blockingAnimations.remove(this);
 		completed = true;
+		if (performer == Level.player && Player.playerPathToMove == null && Player.playerTargetSquare == null
+				&& Player.playerTargetAction == null && Player.playerTargetActor == null) {
+			Level.player.setPrimaryAnimation(new AnimationWait(performer));
+
+		}
 	}
 
 	public boolean getCompleted() {
