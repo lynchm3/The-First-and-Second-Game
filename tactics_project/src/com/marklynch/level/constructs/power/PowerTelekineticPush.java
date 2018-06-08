@@ -34,7 +34,7 @@ public class PowerTelekineticPush extends Power {
 	}
 
 	@Override
-	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
+	public void cast(final Actor source, GameObject targetGameObject, Square targetSquare, final Action action) {
 
 		if (targetSquare.inventory.contains(source))
 			return;
@@ -56,6 +56,9 @@ public class PowerTelekineticPush extends Power {
 		Square lastSquare = targetSquare;
 		Square endSquare = lastSquare;
 		HashMap<GameObject, Square> pushedObjectToStartSquare = new HashMap<GameObject, Square>();
+		GameObject tempObstacle = null;
+		// final HashMap<GameObject, Float> pushedObjectToDamageTaken = new
+		// HashMap<GameObject, Float>();
 		while (pushCount < maxPushCount) {
 
 			Square currentSquare = null;
@@ -77,23 +80,22 @@ public class PowerTelekineticPush extends Power {
 				break;
 			}
 
-			GameObject obstacle = null;
+			// Hit an obstacle?
 			if (!currentSquare.inventory.canShareSquare) {
-				obstacle = currentSquare.inventory.gameObjectThatCantShareSquare;
-				int damageToObstacle = 0;
+				if (tempObstacle != null)
+					tempObstacle = currentSquare.inventory.gameObjectThatCantShareSquare;
 				for (GameObject gameObject : (ArrayList<GameObject>) lastSquare.inventory.gameObjects.clone()) {
 
 					// public float changeHealth(Object attacker, Action action, Stat damage) {
-					gameObject.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, gameObject.weight));
-					damageToObstacle += gameObject.weight;
+					// pushedObjectToDamageTaken.put(gameObject, gameObject.weight);
+					// damageToObstacle += gameObject.weight;
 				}
-				obstacle.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, damageToObstacle));
 				break;
 			}
 
+			// Pick up new objects
 			ArrayList<GameObject> temp = new ArrayList<GameObject>();
 			temp.addAll(lastSquare.inventory.gameObjects);
-
 			for (GameObject gameObject : temp) {
 				// gameObject.secondaryAnimations.add(new AnimationMovementFade(lastSquare,
 				// gameObject));
@@ -111,12 +113,26 @@ public class PowerTelekineticPush extends Power {
 
 		}
 
+		final GameObject obstacle = tempObstacle;
+
 		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
-		for (GameObject pushedGameObject : pushedObjectToStartSquare.keySet()) {
-			if (pushedGameObject.remainingHealth > 0)
-				pushedGameObject.setPrimaryAnimation(
-						new AnimationPushed(pushedGameObject, pushedObjectToStartSquare.get(pushedGameObject),
-								endSquare, pushedGameObject.getPrimaryAnimation()));
+		for (final GameObject pushedGameObject : pushedObjectToStartSquare.keySet()) {
+			// if (pushedGameObject.remainingHealth > 0)
+			pushedGameObject.setPrimaryAnimation(
+					new AnimationPushed(pushedGameObject, pushedObjectToStartSquare.get(pushedGameObject), endSquare,
+							pushedGameObject.getPrimaryAnimation()) {
+						@Override
+						public void complete() {
+							super.complete();
+							pushedGameObject.changeHealth(source, action,
+									new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
+							obstacle.changeHealth(source, action,
+									new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
+						}
+					}
+
+			);
+
 		}
 	}
 
