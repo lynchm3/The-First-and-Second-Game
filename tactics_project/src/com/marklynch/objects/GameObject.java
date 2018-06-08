@@ -410,8 +410,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
 				alpha = 0.5f;
-			if (hiding)
-				alpha = 0.5f;
+			else if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 
 			for (Arrow arrow : arrowsEmbeddedInThis) {
 
@@ -604,8 +604,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			}
 
 			float alpha = 1.0f;
-			if (hiding)
-				alpha = 0.5f;
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 
 			float boundsX1 = actorPositionXInPixels;
 			float boundsY1 = actorPositionYInPixels;

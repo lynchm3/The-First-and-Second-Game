@@ -580,9 +580,9 @@ public class Actor extends GameObject {
 
 		// TextureUtils.skipNormals = true;
 
+		if (primaryAnimation != null)
+			alpha = primaryAnimation.alpha;
 		if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
-			alpha = 0.5f;
-		if (hiding)
 			alpha = 0.5f;
 
 		if (imageTexture != null)
@@ -1122,6 +1122,9 @@ public class Actor extends GameObject {
 
 		// weapon
 		float alpha = 1.0f;
+
+		if (primaryAnimation != null)
+			alpha = primaryAnimation.alpha;
 		TextureUtils.drawTextureWithinBounds(this.equipped.imageTexture, alpha, x, y, x + equipped.width,
 				y + equipped.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards, false);
 		if (highlight) {
@@ -1525,6 +1528,8 @@ public class Actor extends GameObject {
 
 					// TextureUtils.skipNormals = true;
 
+					if (primaryAnimation != null)
+						alpha = primaryAnimation.alpha;
 					if (!this.squareGameObjectIsOn.visibleToPlayer)
 						alpha = 0.5f;
 
@@ -1555,6 +1560,8 @@ public class Actor extends GameObject {
 
 					// TextureUtils.skipNormals = true;
 
+					if (primaryAnimation != null)
+						alpha = primaryAnimation.alpha;
 					if (!this.squareGameObjectIsOn.visibleToPlayer)
 						alpha = 0.5f;
 					TextureUtils.drawTexture(thoughtBubbleImageTextureAction, alpha, expressionPositionXInPixels,

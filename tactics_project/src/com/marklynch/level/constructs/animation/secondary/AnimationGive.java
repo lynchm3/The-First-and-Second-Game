@@ -81,14 +81,13 @@ public class AnimationGive extends Animation {
 
 	@Override
 	public void draw2() {
-		float alpha = 1.0f;
 
 		// Game.flush();
 		// Matrix4f view = Game.activeBatch.getViewMatrix();
 		// view.translate(new Vector2f(x, y));
 		// Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, x, y, x + projectileObject.width,
+		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f, x, y, x + projectileObject.width,
 				y + projectileObject.height);
 
 		// Game.flush();

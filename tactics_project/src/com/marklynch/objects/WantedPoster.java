@@ -82,9 +82,9 @@ public class WantedPoster extends Sign implements CrimeListener {
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * drawOffsetRatioY + Game.QUARTER_SQUARE_HEIGHT);
 			float alpha = 1.0f;
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 			if (!this.squareGameObjectIsOn.visibleToPlayer)
-				alpha = 0.5f;
-			if (hiding)
 				alpha = 0.5f;
 
 			TextureUtils.drawTexture(criminal.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,

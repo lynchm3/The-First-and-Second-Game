@@ -48,6 +48,7 @@ public class AnimationTeleport extends Animation {
 
 		if (getCompleted())
 			return;
+		super.update(delta);
 
 		durationSoFar += delta;
 

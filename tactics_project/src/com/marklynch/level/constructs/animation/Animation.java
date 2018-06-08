@@ -26,11 +26,11 @@ public abstract class Animation {
 	public float rightHipAngle = 0;
 	public float rightKneeAngle = 0;
 
+	public float alpha = 1f;
+
 	public float durationSoFar = 0;
 	public float durationToReach = 200;
 	public int phase = 0;
-
-	public abstract void update(double delta);
 
 	public abstract void draw1();
 
@@ -79,7 +79,18 @@ public abstract class Animation {
 			this.rightHipAngle = performer.getPrimaryAnimation().rightHipAngle;
 			this.leftKneeAngle = performer.getPrimaryAnimation().leftKneeAngle;
 			this.rightKneeAngle = performer.getPrimaryAnimation().rightKneeAngle;
+
+			this.alpha = performer.getPrimaryAnimation().alpha;
 		}
+	}
+
+	public void update(double delta) {
+		float alphaChange = (float) (0.002d * delta);
+		float targetAlpha = 1f;
+		if (performer != null && performer.hiding) {
+			targetAlpha = 0.5f;
+		}
+		alpha = moveTowardsTargetAngleInRadians(alpha, alphaChange, targetAlpha);
 	}
 
 	protected void reverseAnimation() {

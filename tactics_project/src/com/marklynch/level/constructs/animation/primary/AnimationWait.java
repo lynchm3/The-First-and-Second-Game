@@ -16,6 +16,7 @@ public class AnimationWait extends Animation {
 
 		if (getCompleted())
 			return;
+		super.update(delta);
 
 		durationSoFar += delta;
 		// double progress = durationSoFar / durationToReach;

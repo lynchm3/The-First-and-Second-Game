@@ -74,6 +74,7 @@ public class AnimationWalk extends Animation {
 
 		if (getCompleted())
 			return;
+		super.update(delta);
 
 		durationSoFar += delta;
 

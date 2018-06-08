@@ -57,6 +57,7 @@ public class AnimationFlinch extends Animation {
 			return;
 		}
 
+		super.update(delta);
 		durationSoFar += delta;
 
 		float progress = durationSoFar / durationToReach;

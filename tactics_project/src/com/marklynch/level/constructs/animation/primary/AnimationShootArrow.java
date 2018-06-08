@@ -56,6 +56,7 @@ public class AnimationShootArrow extends Animation {
 
 		if (getCompleted())
 			return;
+		super.update(delta);
 
 		durationSoFar += delta;
 

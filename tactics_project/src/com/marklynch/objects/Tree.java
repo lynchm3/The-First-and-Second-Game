@@ -96,6 +96,8 @@ public class Tree extends GameObject {
 					+ fruit.drawOffsetRatioY * Game.SQUARE_HEIGHT);
 
 			float alpha = 1.0f;
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 
 			// TextureUtils.skipNormals = true;
 

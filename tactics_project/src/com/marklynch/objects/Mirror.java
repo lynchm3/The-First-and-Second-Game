@@ -180,6 +180,8 @@ public class Mirror extends GameObject {
 		float squarePositionY = this.squareGameObjectIsOn.yInGridPixels - Game.SQUARE_HEIGHT * offsetY;
 
 		float alpha = 1f;
+		if (primaryAnimation != null)
+			alpha = primaryAnimation.alpha;
 		if (!this.squareGameObjectIsOn.visibleToPlayer)
 			alpha = 0.5f;
 
@@ -211,9 +213,9 @@ public class Mirror extends GameObject {
 
 		// TextureUtils.skipNormals = true;
 
+		if (primaryAnimation != null)
+			alpha = primaryAnimation.alpha;
 		if (!this.squareGameObjectIsOn.visibleToPlayer && gameObject != Game.level.player)
-			alpha = 0.5f;
-		if (hiding)
 			alpha = 0.5f;
 
 		TextureUtils.drawTextureWithinBounds(gameObject.imageTexture, alpha, actorPositionXInPixels,
@@ -236,9 +238,9 @@ public class Mirror extends GameObject {
 
 		float alpha = 1.0f;
 
+		if (primaryAnimation != null)
+			alpha = primaryAnimation.alpha;
 		if (!this.squareGameObjectIsOn.visibleToPlayer && actor != Game.level.player)
-			alpha = 0.5f;
-		if (hiding)
 			alpha = 0.5f;
 
 		TextureUtils.drawTextureWithinBounds(actor.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
@@ -250,6 +252,8 @@ public class Mirror extends GameObject {
 			int helmetPositionXInPixels = (int) (actorPositionXInPixels);
 			int helmetPositionYInPixels = (int) (actorPositionYInPixels);
 			alpha = 1.0f;
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 			TextureUtils.drawTextureWithinBounds(actor.helmet.imageTexture, alpha, helmetPositionXInPixels,
 					helmetPositionYInPixels, helmetPositionXInPixels + actor.helmet.width,
 					helmetPositionYInPixels + actor.helmet.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
@@ -258,6 +262,8 @@ public class Mirror extends GameObject {
 			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels);
 			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels);
 			alpha = 1.0f;
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 			TextureUtils.drawTextureWithinBounds(actor.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + actor.hairImageTexture.getWidth(),
 					bodyArmorPositionYInPixels + actor.hairImageTexture.getHeight(), boundsX1, boundsY1, boundsX2,
@@ -269,6 +275,8 @@ public class Mirror extends GameObject {
 			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels);
 			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels);
 			alpha = 1.0f;
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 			TextureUtils.drawTextureWithinBounds(actor.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + actor.bodyArmor.width,
 					bodyArmorPositionYInPixels + actor.bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
@@ -285,6 +293,8 @@ public class Mirror extends GameObject {
 			int legArmorPositionXInPixels = (int) (actorPositionXInPixels);
 			int legArmorPositionYInPixels = (int) (actorPositionYInPixels);
 			alpha = 1.0f;
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 			TextureUtils.drawTextureWithinBounds(actor.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + actor.legArmor.width,
 					legArmorPositionYInPixels + actor.legArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
@@ -298,6 +308,8 @@ public class Mirror extends GameObject {
 					- actor.equipped.anchorX);
 			int weaponPositionYInPixels = (int) (actorPositionYInPixels + actor.handY - actor.equipped.anchorY);
 			alpha = 1.0f;
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 			TextureUtils.drawTextureWithinBounds(actor.equipped.imageTexture, alpha, weaponPositionXInPixels,
 					weaponPositionYInPixels, weaponPositionXInPixels + actor.equipped.width,
 					weaponPositionYInPixels + actor.equipped.height, boundsX1, boundsY1, boundsX2, boundsY2, false,

@@ -99,6 +99,7 @@ public class AnimationPushed extends Animation {
 
 		if (getCompleted())
 			return;
+		super.update(delta);
 
 		durationSoFar += delta;
 

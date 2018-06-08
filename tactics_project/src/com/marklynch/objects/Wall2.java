@@ -152,6 +152,8 @@ public class Wall2 extends GameObject {
 		if (squareGameObjectIsOn != null) {
 
 			float alpha = 1.0f;
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 
 			// 8
 			if (fullWall) {

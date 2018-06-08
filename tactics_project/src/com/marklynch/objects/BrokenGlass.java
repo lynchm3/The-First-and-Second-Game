@@ -63,7 +63,7 @@ public class BrokenGlass extends Stampable {
 		}
 	}
 
-	public static class GlassShard {
+	private class GlassShard {
 		BrokenGlass parent;
 		Texture imageTexture;
 		float width;
@@ -100,6 +100,8 @@ public class BrokenGlass extends Stampable {
 
 			// TextureUtils.skipNormals = true;
 
+			if (BrokenGlass.this.primaryAnimation != null)
+				alpha = BrokenGlass.this.primaryAnimation.alpha;
 			if (!this.parent.squareGameObjectIsOn.visibleToPlayer)
 				alpha = 0.5f;
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,

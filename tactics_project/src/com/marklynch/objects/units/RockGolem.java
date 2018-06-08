@@ -81,6 +81,8 @@ public class RockGolem extends Monster {
 
 			// TextureUtils.skipNormals = true;
 
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
 			if (!this.squareGameObjectIsOn.visibleToPlayer)
 				alpha = 0.5f;
 			TextureUtils.drawTexture(sleepingTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,

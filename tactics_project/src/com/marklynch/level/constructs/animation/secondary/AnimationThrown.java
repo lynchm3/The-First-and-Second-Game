@@ -192,7 +192,6 @@ public class AnimationThrown extends Animation {
 
 	@Override
 	public void draw2() {
-		float alpha = 1.0f;
 
 		Game.flush();
 		float radians = (float) Math.toRadians(angle);
@@ -201,7 +200,7 @@ public class AnimationThrown extends Animation {
 		view.rotate(radians, new Vector3f(0f, 0f, 1f));
 		Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, 0 - projectileObject.width / 2,
+		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f, 0 - projectileObject.width / 2,
 				0 - projectileObject.height / 2, 0 + projectileObject.width - projectileObject.width / 2,
 				0 + projectileObject.height - projectileObject.height / 2, projectileObject.backwards);
 

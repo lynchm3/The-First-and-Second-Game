@@ -38,6 +38,7 @@ public class AnimationShake extends Animation {
 
 		if (getCompleted())
 			return;
+		super.update(delta);
 
 		offsetX = (float) (Math.random() * 16) - 8f;
 		offsetY = (float) (Math.random() * 16) - 8f;

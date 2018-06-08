@@ -47,6 +47,7 @@ public class AnimationThrow extends Animation {
 
 		if (getCompleted())
 			return;
+		super.update(delta);
 
 		durationSoFar += delta;
 
