@@ -126,8 +126,10 @@ public class PowerTelekineticPush extends Power {
 							super.complete();
 							pushedGameObject.changeHealth(source, action,
 									new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
-							obstacle.changeHealth(source, action,
-									new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
+							if (obstacle != null) {
+								obstacle.changeHealth(source, action,
+										new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
+							}
 						}
 					}
 

@@ -2231,13 +2231,35 @@ public class Level {
 		}
 		inanimateObjectsToAdd.clear();
 
+		ArrayList<GameObject> removed = new ArrayList<GameObject>();
 		for (GameObject gameObject : inanimateObjectsOnGroundToRemove) {
-			if ((inanimateObjectsOnGround).contains(gameObject))
+			if ((inanimateObjectsOnGround).contains(gameObject)) {
+				if (gameObject.getPrimaryAnimation() != null
+						&& gameObject.getPrimaryAnimation().getCompleted() == false) {
+					continue;
+				}
+
+				boolean waitingOnSecondaryAnimation = false;
+				for (Animation secondaryAnimation : gameObject.secondaryAnimations) {
+					if (secondaryAnimation.getCompleted() == false) {
+						waitingOnSecondaryAnimation = true;
+						break;
+					}
+				}
+
+				if (waitingOnSecondaryAnimation) {
+					continue;
+				}
+
+				System.out.println("Removing " + gameObject);
+
 				inanimateObjectsOnGround.remove(gameObject);
-			if (gameObject.squareGameObjectIsOn != null)
-				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+				if (gameObject.squareGameObjectIsOn != null)
+					gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+				removed.add(gameObject);
+			}
 		}
-		inanimateObjectsOnGroundToRemove.clear();
+		inanimateObjectsOnGroundToRemove.removeAll(removed);
 
 		for (Actor actor : actorsToRemove) {
 			actor.faction.actors.remove(actor);
