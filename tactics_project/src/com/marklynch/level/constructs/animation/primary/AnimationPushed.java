@@ -86,7 +86,6 @@ public class AnimationPushed extends Animation {
 
 		// System.out.println("deltaX = " + deltaX);
 		// System.out.println("deltaY = " + deltaY);
-		System.out.println("targetLimbDegrees = " + targetRadians);
 
 		blockAI = true;
 	}

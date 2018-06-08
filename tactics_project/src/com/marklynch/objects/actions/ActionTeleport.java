@@ -40,7 +40,6 @@ public class ActionTeleport extends Action {
 		legal = checkLegality();
 		sound = createSound();
 		movement = true;
-		System.out.println("ActionTeleport");
 
 	}
 

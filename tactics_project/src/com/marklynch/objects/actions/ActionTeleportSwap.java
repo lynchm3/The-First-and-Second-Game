@@ -36,7 +36,6 @@ public class ActionTeleportSwap extends Action {
 		legal = checkLegality();
 		sound = createSound();
 		movement = true;
-		System.out.println("ActionTeleportSwap");
 
 	}
 

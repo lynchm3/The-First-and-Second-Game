@@ -699,11 +699,6 @@ public class Actor extends GameObject {
 
 		if (remainingHealth != totalHealth && remainingHealth > 0) {
 
-			if (this == Level.player) {
-				System.out.println("remainingHealth = " + remainingHealth);
-				System.out.println("totalHealth = " + totalHealth);
-			}
-
 			// draw sidebar on square
 			float healthPercentage = ((float) remainingHealth) / ((float) totalHealth);
 			float healthBarHeightInPixels = height * healthPercentage;

@@ -550,7 +550,6 @@ public class UserInputLevel {
 			return;
 
 		if (openMenu) {
-			System.out.println("openMenu");
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		}
 
@@ -564,14 +563,12 @@ public class UserInputLevel {
 
 		if (Game.level.levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
 			new ActionTeleport(Game.level.player, Level.teleportee, square, true).perform();
-			System.out.println("LEVEL_SELECT_TELEPORT_SQUARE");
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 			return;
 		} else if (Game.level.levelMode == LevelMode.LEVEL_MODE_CAST) {
 			new ActionUsePower(Game.level.player, Game.gameObjectMouseIsOver, Game.squareMouseIsOver,
 					Game.level.selectedPower).perform();
 			// Game.level.selectedPower.cast(Game.level.player, square);
-			System.out.println("LEVEL_MODE_CAST");
 			// Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 			return;
 		}

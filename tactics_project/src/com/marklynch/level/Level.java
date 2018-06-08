@@ -1770,7 +1770,6 @@ public class Level {
 		Player.playerTargetAction = null;
 		Player.playerTargetActor = null;
 		Game.level.highlightPauseButton();
-		System.out.println("pausePlayer");
 		levelMode = LevelMode.LEVEL_MODE_NORMAL;
 	}
 
@@ -2238,8 +2237,6 @@ public class Level {
 				if (waitingOnSecondaryAnimation) {
 					continue;
 				}
-
-				System.out.println("Removing " + gameObject);
 
 				inanimateObjectsOnGround.remove(gameObject);
 				if (gameObject.squareGameObjectIsOn != null)

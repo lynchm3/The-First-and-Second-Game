@@ -135,8 +135,6 @@ public abstract class Animation {
 
 	public void complete() {
 
-		System.out.println("complete() 1 " + this + ", performer = " + performer);
-
 		if (blockAI)
 			Level.blockingAnimations.remove(this);
 		completed = true;
@@ -164,7 +162,6 @@ public abstract class Animation {
 			return;
 
 		if (performer.remainingHealth > 0) {
-			System.out.println("complete() 2 " + this);
 			performer.setPrimaryAnimation(new AnimationWait(performer));
 		}
 		// else

@@ -465,8 +465,6 @@ public class Player extends Human {
 
 	public boolean animationsBlockingAI() {
 
-		System.out.println("animationBlockingAI()");
-
 		if (primaryAnimation != null && !primaryAnimation.getCompleted() && primaryAnimation.blockAI)
 			return true;
 

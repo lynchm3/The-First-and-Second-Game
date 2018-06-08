@@ -43,8 +43,6 @@ public class AnimationFlinch extends Animation {
 		}
 		backwards = performer.backwards;
 
-		System.out.println("targetLimbDegrees = " + targetRadians);
-
 		blockAI = true;
 	}
 
