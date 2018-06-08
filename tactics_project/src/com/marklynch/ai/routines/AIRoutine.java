@@ -52,6 +52,7 @@ import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.HOBBY;
 import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.Animal;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.Fish;
 import com.marklynch.objects.units.Guard;
@@ -204,7 +205,7 @@ public abstract class AIRoutine {
 
 		// Go to burrow and hide if can
 		SmallHidingPlace smallHidingPlace = (SmallHidingPlace) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20f,
-				false, false, false, false, 0, false, SmallHidingPlace.class);
+				false, false, false, false, 0, false, true, SmallHidingPlace.class);
 		if (smallHidingPlace != null) {
 
 			if (Game.level.activeActor.straightLineDistanceTo(smallHidingPlace.squareGameObjectIsOn) < 2) {
@@ -326,7 +327,7 @@ public abstract class AIRoutine {
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
 
 					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20, false, false,
-							false, false, 0, false, Guard.class);
+							false, false, 0, false, true, Guard.class);
 
 					// if (this.actor.canSeeGameObject(actorNearby)) {
 					// } else {
@@ -1016,7 +1017,7 @@ public abstract class AIRoutine {
 
 		// 1. loot carcasses
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, true, true, true, 0, false,
-				Carcass.class);
+				false, Animal.class);
 		if (carcass != null) {
 			this.actor.thoughtBubbleImageTextureObject = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
@@ -1039,7 +1040,7 @@ public abstract class AIRoutine {
 
 		// 1. loot carcasses
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, 0, false,
-				Carcass.class);
+				true, Carcass.class);
 
 		if (carcass != null) {
 
@@ -1060,7 +1061,7 @@ public abstract class AIRoutine {
 	public boolean lootFromGround() {
 		// Pick up loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, true, 10, false,
-				Junk.class, Food.class, Weapon.class, Armor.class, MeatChunk.class, Gold.class);
+				true, Junk.class, Food.class, Weapon.class, Armor.class, MeatChunk.class, Gold.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
@@ -1079,7 +1080,7 @@ public abstract class AIRoutine {
 
 	public boolean eatFoodOnGround() {
 		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, false, false, 0,
-				false, Food.class);
+				false, false, Food.class);
 		if (food != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTextureObject = food.imageTexture;
@@ -1097,7 +1098,7 @@ public abstract class AIRoutine {
 
 	public boolean eatCarcassOnGround() {
 		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, false, false,
-				0, false, Carcass.class);
+				0, false, false, Animal.class);
 		if (corpse != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTextureObject = corpse.imageTexture;
@@ -1260,7 +1261,7 @@ public abstract class AIRoutine {
 			return false;
 
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, false,
-				false, false, 0, false, Trader.class);
+				false, false, 0, false, true, Trader.class);
 
 		if (target == null || target.sleeping || target.aiRoutine.state == STATE.GO_TO_BED_AND_GO_TO_SLEEP
 				|| target.knownCriminals.contains(actor) || actor.knownCriminals.contains(target)) {
@@ -1299,7 +1300,7 @@ public abstract class AIRoutine {
 
 		// find nearest shop keeper w/ pickaxe?
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, false,
-				false, false, 0, false, Trader.class);
+				false, false, 0, false, true, Trader.class);
 
 		if (target == null || target.sleeping || target.aiRoutine.state == STATE.GO_TO_BED_AND_GO_TO_SLEEP
 				|| target.knownCriminals.contains(actor) || actor.knownCriminals.contains(target)) {
@@ -1405,7 +1406,7 @@ public abstract class AIRoutine {
 			return false;
 
 		Guard guardNearby = (Guard) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false, false,
-				0, false, Guard.class);
+				0, false, true, Guard.class);
 
 		if (guardNearby == null)
 			return false;
@@ -1538,7 +1539,7 @@ public abstract class AIRoutine {
 		actor.followersShouldFollow = false;
 
 		Fish target = (Fish) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, true, false, false, false, 0,
-				false, Fish.class); // target is null, wtf
+				false, true, Fish.class); // target is null, wtf
 
 		FishingRod fishingRod = null;
 		ArrayList<GameObject> fishingRods = actor.inventory.getGameObjectsOfClass(FishingRod.class);
@@ -1593,7 +1594,7 @@ public abstract class AIRoutine {
 		this.actor.followersShouldFollow = true;
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 		// if (target == null)
-		target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false, true, 0, false,
+		target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false, true, 0, false, true,
 				AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
 				TinyNeutralWildAnimal.class);
 		if (target == null) {

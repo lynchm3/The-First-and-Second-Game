@@ -55,7 +55,7 @@ public class AIRoutineForBlind extends AIRoutine {
 
 			// find a meatchunk within smelling distance
 			MeatChunk tempMeatChunk = (MeatChunk) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(3, true, false,
-					false, false, 0, false, MeatChunk.class);
+					false, false, 0, false, true, MeatChunk.class);
 			if (tempMeatChunk != null) {
 				this.meatChunk = tempMeatChunk;
 				this.originalMeatChunkSquare = this.meatChunk.squareGameObjectIsOn;

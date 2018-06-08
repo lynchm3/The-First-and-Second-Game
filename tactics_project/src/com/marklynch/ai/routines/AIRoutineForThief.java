@@ -3,7 +3,6 @@ package com.marklynch.ai.routines;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
@@ -96,7 +95,7 @@ public class AIRoutineForThief extends AIRoutine {
 
 			// 1. loot corpses, even if owned
 			GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, false, true, false, true, 0,
-					false, Corpse.class, Storage.class);
+					false, false, Actor.class, Storage.class);
 			if (container != null) {
 				if (container.owner != null && container.owner != actor)
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
@@ -132,7 +131,7 @@ public class AIRoutineForThief extends AIRoutine {
 			// stupid generic game object
 
 			GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, true, false, false, true, 0,
-					false, Weapon.class, Armor.class, Food.class, Junk.class, MeatChunk.class, Gold.class);
+					false, true, Weapon.class, Armor.class, Food.class, Junk.class, MeatChunk.class, Gold.class);
 			if (loot != null) {
 				if (loot.owner != null && loot.owner != actor)
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;

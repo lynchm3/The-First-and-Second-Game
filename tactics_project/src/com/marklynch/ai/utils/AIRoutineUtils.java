@@ -129,7 +129,7 @@ public class AIRoutineUtils {
 
 	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
 			boolean mustContainObjects, boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumGoldValue,
-			boolean REMOVETHIS, Class... types) {
+			boolean REMOVETHIS, boolean actorsAlive, Class... types) {
 
 		// if (Game.level.activeActor.name.contains("Farmer")) {
 		// System.out.println("getNearest");
@@ -150,7 +150,7 @@ public class AIRoutineUtils {
 
 		if (objects.size() > maxDistance * maxDistance) {
 			return getNearestForPurposeOfBeingAdjacent(maxDistance, fitsInInventory, mustContainObjects, mustBeUnowned,
-					ignoreQuestObjects, minimumGoldValue, types);
+					ignoreQuestObjects, minimumGoldValue, actorsAlive, types);
 		}
 
 		objects.sort(AIRoutineUtils.sortByStraightLineDistance);
@@ -173,7 +173,7 @@ public class AIRoutineUtils {
 			if (straightLineDistance <= maxDistance) {
 
 				if (passesChecks(object, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
-						minimumGoldValue, null, false)) {
+						minimumGoldValue, actorsAlive, null, false)) {
 					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn);
 
 					if (path == null) {
@@ -205,7 +205,7 @@ public class AIRoutineUtils {
 
 	private static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
 			boolean mustContainObjects, boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue,
-			Class[] classes) {
+			boolean actorsAlive, Class[] classes) {
 
 		if (maxDistance > Game.level.width + Game.level.height) {
 			maxDistance = Game.level.width + Game.level.height;
@@ -216,7 +216,7 @@ public class AIRoutineUtils {
 			for (Square square : squares) {
 				for (GameObject gameObject : square.inventory.gameObjects) {
 					if (passesChecks(gameObject, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
-							minimumValue, classes, false)) {
+							minimumValue, actorsAlive, classes, false)) {
 						AIPath path = Game.level.activeActor.getPathTo(gameObject.squareGameObjectIsOn);
 						if (path != null && (path.complete || i > 20)) {
 							tempPath = path;
@@ -319,13 +319,15 @@ public class AIRoutineUtils {
 	// }
 
 	public static boolean passesChecks(GameObject gameObject, boolean fitsInInventory, boolean mustContainsObjects,
-			boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue, Class... classes) {
+			boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue, boolean actorsAlive,
+			Class... classes) {
 		return passesChecks(gameObject, fitsInInventory, mustContainsObjects, mustBeUnowned, ignoreQuestObjects,
-				minimumValue, classes, false);
+				minimumValue, actorsAlive, classes, false);
 	}
 
 	public static boolean passesChecks(GameObject gameObject, boolean fitsInInventory, boolean mustContainsObjects,
-			boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue, Class[] classes, boolean DOESNOTHING) {
+			boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue, boolean actorsAlive,
+			Class[] classes, boolean DOESNOTHING) {
 
 		if (Game.level.activeActor.aiRoutine.ignoreList.contains(gameObject))
 			return false;
@@ -347,6 +349,14 @@ public class AIRoutineUtils {
 
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
+
+		if (gameObject instanceof Actor) {
+			if (gameObject.remainingHealth <= 0 && actorsAlive) {
+				return false;
+			} else if (gameObject.remainingHealth > 0 && !actorsAlive) {
+				return false;
+			}
+		}
 
 		if (classes == null || classes.length == 0)
 			return true;

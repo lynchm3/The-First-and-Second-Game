@@ -62,7 +62,7 @@ public class AIRoutineForPig extends AIRoutine {
 
 		// 1. eat loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, false, false, 0, false,
-				GameObject.class);
+				true, GameObject.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_PIGGING_OUT;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
