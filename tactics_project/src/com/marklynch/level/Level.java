@@ -39,15 +39,12 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
-import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.units.Actor;
@@ -1689,17 +1686,7 @@ public class Level {
 			Square squareToMoveTo = Game.level.player.playerPathToMove.squares.get(0);
 			Action action;
 
-			HidingPlace hidingPlace = (HidingPlace) squareToMoveTo.inventory.getGameObjectOfClass(HidingPlace.class);
-			if (hidingPlace != null && hidingPlace.remainingHealth > 0) {
-				if (player.hiding && player.squareGameObjectIsOn == squareToMoveTo) {
-					action = new ActionStopHiding(player, hidingPlace);
-				} else {
-					action = new ActionHide(player, hidingPlace);
-				}
-			} else {
-				action = new ActionMove(Game.level.player, squareToMoveTo, true);
-
-			}
+			action = new ActionMove(Game.level.player, squareToMoveTo, true);
 
 			if (!action.enabled) {
 				Object[] objects = new Object[] { "Path blocked by ",
@@ -2166,7 +2153,6 @@ public class Level {
 			player.getAttackers().remove(actor);
 		}
 
-		player.update(0);
 		// Game.level.activeActor = null;
 		for (GameObject inanimateObject : inanimateObjectsOnGround) {
 			inanimateObject.update(0);
@@ -2179,6 +2165,8 @@ public class Level {
 
 		System.out.println("----------------END PLAYER TURN-----------------");
 		// Utils.printStackTrace();
+
+		player.update(0);
 
 		changeTime(20);
 		// secondString;

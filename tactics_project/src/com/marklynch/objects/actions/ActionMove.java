@@ -9,7 +9,6 @@ import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
@@ -124,23 +123,6 @@ public class ActionMove extends Action {
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
-
-		if (performer.hiding) {
-
-			HidingPlace hidingPlaceAtDestination = (HidingPlace) target.inventory
-					.getGameObjectOfClass(HidingPlace.class);
-
-			if (hidingPlaceAtDestination == null || hidingPlaceAtDestination.remainingHealth <= 0) {
-				new ActionStopHiding(performer, performer.hidingPlace).perform();
-				// performer.hiding = false;
-				// performer.hidingPlace.actorsHidingHere.remove(performer);
-				// performer.hidingPlace = null;
-			} else {
-				performer.hidingPlace.actorsHidingHere.remove(performer);
-				performer.hidingPlace = (HidingPlace) target.inventory.getGameObjectOfClass(HidingPlace.class);
-				performer.hidingPlace.actorsHidingHere.add(performer);
-			}
-		}
 
 		if (endTurn && performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();

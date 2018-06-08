@@ -1689,6 +1689,24 @@ public class Actor extends GameObject {
 				this.aiRoutine.update();
 		}
 
+		HidingPlace hidingPlaceAtSameSquare = (HidingPlace) squareGameObjectIsOn.inventory
+				.getGameObjectOfClass(HidingPlace.class);
+		if (hiding) {
+			if (hidingPlaceAtSameSquare == null || hidingPlaceAtSameSquare.remainingHealth <= 0) {
+				new ActionStopHiding(this, this.hidingPlace).perform();
+			} else if (hidingPlace == hidingPlaceAtSameSquare) {
+				// still have same hiding place, do nothing
+			} else {
+				hidingPlace.actorsHidingHere.remove(this);
+				hidingPlace = (HidingPlace) squareGameObjectIsOn.inventory.getGameObjectOfClass(HidingPlace.class);
+				hidingPlace.actorsHidingHere.add(this);
+			}
+		} else {
+			if (hidingPlaceAtSameSquare != null && hidingPlaceAtSameSquare.remainingHealth > 0) {
+				new ActionHide(this, hidingPlaceAtSameSquare).perform();
+			}
+		}
+
 		// If hiding in a place get the effects
 		if (hidingPlace != null) {
 			for (Effect effect : hidingPlace.effectsFromInteracting) {
