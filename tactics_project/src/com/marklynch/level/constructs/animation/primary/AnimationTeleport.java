@@ -1,7 +1,6 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.Game;
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -42,9 +41,6 @@ public class AnimationTeleport extends Animation {
 		backwards = performer.backwards;
 
 		blockAI = true;
-
-		if (blockAI)
-			Level.blockingAnimations.add(this);
 	}
 
 	@Override
