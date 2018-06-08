@@ -62,25 +62,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 				Game.level.inanimateObjectsOnGround.add(gameObject);
 
 			this.gameObjects.sort(this);
-
-			square.calculatePathCost();
-			square.calculatePathCostForPlayer();
-
-			updateStacks();
-			matchStacksToSquares();
-
-			canShareSquare = canShareSquare();
-			gameObjectThatCantShareSquare = getGameObjectThatCantShareSquare1();
-			if (gameObjectThatCantShareSquare instanceof Actor)
-				actor = (Actor) gameObjectThatCantShareSquare;
-			else
-				actor = null;
-			door = (Door) getGameObjectOfClass(Door.class);
-			waterBody = (WaterBody) getGameObjectOfClass(WaterBody.class);
-
-			PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
-			if (pressurePlate != null)
-				pressurePlate.updateWeight();
+			refresh();
 		}
 	}
 
@@ -89,25 +71,32 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
 
-			square.calculatePathCost();
-			square.calculatePathCostForPlayer();
-
-			updateStacks();
-			matchStacksToSquares();
-			canShareSquare = canShareSquare();
-			gameObjectThatCantShareSquare = getGameObjectThatCantShareSquare1();
-			if (gameObjectThatCantShareSquare instanceof Actor)
-				actor = (Actor) gameObjectThatCantShareSquare;
-			else
-				actor = null;
-			door = (Door) getGameObjectOfClass(Door.class);
-			waterBody = (WaterBody) getGameObjectOfClass(WaterBody.class);
-
-			PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
-			if (pressurePlate != null)
-				pressurePlate.updateWeight();
+			refresh();
 		}
 		return -1;
+	}
+
+	public void refresh() {
+
+		square.calculatePathCost();
+		square.calculatePathCostForPlayer();
+
+		updateStacks();
+		matchStacksToSquares();
+
+		canShareSquare = canShareSquare();
+		gameObjectThatCantShareSquare = getGameObjectThatCantShareSquare1();
+		if (gameObjectThatCantShareSquare instanceof Actor)
+			actor = (Actor) gameObjectThatCantShareSquare;
+		else
+			actor = null;
+		door = (Door) getGameObjectOfClass(Door.class);
+		waterBody = (WaterBody) getGameObjectOfClass(WaterBody.class);
+
+		PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
+		if (pressurePlate != null)
+			pressurePlate.updateWeight();
+
 	}
 
 	private boolean canShareSquare() {

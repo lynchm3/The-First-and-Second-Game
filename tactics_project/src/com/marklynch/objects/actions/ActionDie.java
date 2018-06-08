@@ -69,6 +69,9 @@ public class ActionDie extends Action {
 			}
 		}
 
+		if (gameObjectPerformer.squareGameObjectIsOn != null)
+			gameObjectPerformer.squareGameObjectIsOn.inventory.refresh();
+
 		// this.faction.actors.remove(this);
 		// gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		gameObjectPerformer.clearActions();
