@@ -58,6 +58,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
+import com.marklynch.utils.Utils.Point;
 
 public class Square implements ActionableInWorld, InventoryParent, Comparable<Square> {
 
@@ -761,23 +762,30 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 				y += gameObject.getPrimaryAnimation().offsetY;
 			}
 
+			Point point = new Point((int) (UserInputLevel.mouseXTransformed - x),
+					(int) (UserInputLevel.mouseYTransformed - y));
+			if (gameObject.getPrimaryAnimation() != null && gameObject.getPrimaryAnimation().torsoAngle != 0
+					&& gameObject instanceof Human) {
+				point = rotatePoint(gameObject.halfWidth, ((Human) gameObject).hipY,
+						-gameObject.getPrimaryAnimation().torsoAngle, point);
+			}
+
 			// FirstCheckBounding box :P
-			if (UserInputLevel.mouseXTransformed > x && UserInputLevel.mouseXTransformed < x + gameObject.width
-					&& UserInputLevel.mouseYTransformed > y
-					&& UserInputLevel.mouseYTransformed < y + gameObject.height) {
+			if (point.x > 0 && point.x < gameObject.width && point.y > 0 && point.y < gameObject.height) {
 				Color color = null;
 				if (gameObject instanceof Human) {
-					color = getPixel(((Human) gameObject).torsoImageTexture,
-							(int) (UserInputLevel.mouseXTransformed - x), (int) (UserInputLevel.mouseYTransformed - y));
+
+					Human human = (Human) gameObject;
+
+					// (x + halfWidth, y + hipY
+
+					color = getPixel(human.torsoImageTexture, (int) point.x, (int) point.y);
 					if (color == null || color.a == 0) {
-						color = getPixel(((Human) gameObject).pelvisImageTexture,
-								(int) (UserInputLevel.mouseXTransformed - x),
-								(int) (UserInputLevel.mouseYTransformed - y));
+						color = getPixel(human.pelvisImageTexture, (int) point.x, (int) point.y);
 
 					}
 				} else {
-					color = getPixel(gameObject.imageTexture, (int) (UserInputLevel.mouseXTransformed - x),
-							(int) (UserInputLevel.mouseYTransformed - y));
+					color = getPixel(gameObject.imageTexture, (int) point.x, (int) point.y);
 
 				}
 
@@ -788,6 +796,24 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		}
 		return null;
 
+	}
+
+	Point rotatePoint(float cx, float cy, float angle, Point p) {
+		double s = Math.sin(angle);
+		double c = Math.cos(angle);
+
+		// translate point back to origin:
+		p.x -= cx;
+		p.y -= cy;
+
+		// rotate point
+		double xnew = p.x * c - p.y * s;
+		double ynew = p.x * s + p.y * c;
+
+		// translate point back:
+		p.x = (float) (xnew + cx);
+		p.y = (float) (ynew + cy);
+		return p;
 	}
 
 	public Color getPixel(Texture texture, int x, int y) {
