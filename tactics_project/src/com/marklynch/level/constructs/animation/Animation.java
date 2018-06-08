@@ -123,6 +123,9 @@ public abstract class Animation {
 	}
 
 	public void complete() {
+
+		System.out.println("complete() 1 " + this + ", performer = " + performer);
+
 		if (blockAI)
 			Level.blockingAnimations.remove(this);
 		completed = true;
@@ -136,17 +139,23 @@ public abstract class Animation {
 		if (this != performer.getPrimaryAnimation())
 			return;
 
+		if (this instanceof AnimationWait || this instanceof AnimationDie)
+			return;
+
+		// Make player do wait animation at end of walk.
 		if (performer == Level.player && Player.playerPathToMove == null && Player.playerTargetSquare == null
 				&& Player.playerTargetAction == null && Player.playerTargetActor == null) {
 			performer.setPrimaryAnimation(new AnimationWait(performer));
 			return;
 		}
 
-		if (this instanceof AnimationWalk || this instanceof AnimationWait || this instanceof AnimationDie)
+		if (this instanceof AnimationWalk)
 			return;
 
-		if (performer.remainingHealth > 0)
+		if (performer.remainingHealth > 0) {
+			System.out.println("complete() 2 " + this);
 			performer.setPrimaryAnimation(new AnimationWait(performer));
+		}
 		// else
 		// performer.setPrimaryAnimation(new AnimationDie(performer));
 

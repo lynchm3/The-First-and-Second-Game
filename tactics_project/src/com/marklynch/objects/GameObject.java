@@ -666,8 +666,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			secondaryAnimation.drawStaticUI();
 	}
 
+	protected boolean died = false;
+
 	public boolean checkIfDestroyed(Object attacker, Action action) {
-		if (remainingHealth <= 0) {
+		if (!died && remainingHealth <= 0) {
+			died = true;
 			destroyedBy = attacker;
 			destroyedByAction = action;
 			this.canShareSquare = true;

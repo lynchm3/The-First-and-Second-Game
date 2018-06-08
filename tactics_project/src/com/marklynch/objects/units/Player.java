@@ -445,9 +445,12 @@ public class Player extends Human {
 
 	}
 
+	// boolean died = false;
+
 	@Override
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 		if (remainingHealth <= 0) {
+			// died = true;
 			destroyedBy = attacker;
 			destroyedByAction = action;
 			remainingHealth = totalHealth;
