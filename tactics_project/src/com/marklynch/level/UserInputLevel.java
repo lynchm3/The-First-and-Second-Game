@@ -14,6 +14,7 @@ import org.lwjgl.input.Mouse;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level.LevelMode;
+import com.marklynch.level.constructs.animation.primary.AnimationWalk;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
@@ -316,12 +317,12 @@ public class UserInputLevel {
 
 		// Path highlights
 		// if (scriptInterceptsClick == false && Game.buttonHoveringOver == null
-		// && Game.level.activeActor != null
+		// && Game.level.player != null
 		// && Game.squareMouseIsOver != null &&
 		// Game.squareMouseIsOver.reachableBySelectedCharater
-		// && Game.level.activeActor.faction == Game.level.factions.player
+		// && Game.level.player.faction == Game.level.factions.player
 		// && Game.level.currentFactionMoving == Game.level.factions.player) {
-		//// path = Game.level.activeActor.paths.get(Game.squareMouseIsOver);
+		//// path = Game.level.player.paths.get(Game.squareMouseIsOver);
 		// for (Square square : path.squares) {
 		// square.inPath = true;
 		// }
@@ -548,9 +549,6 @@ public class UserInputLevel {
 
 		System.out.println("interactWith");
 
-		// if (Game.level.activeActor != Game.level.player)
-		// return;
-
 		if (openMenu) {
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		}
@@ -579,11 +577,11 @@ public class UserInputLevel {
 
 		if (!openMenu) {
 			if (attack) {
-				action = square.getAttackActionForTheSquareOrObject(Game.level.activeActor, key != -1);
+				action = square.getAttackActionForTheSquareOrObject(Game.level.player, key != -1);
 			} else if (secondary) {
-				action = square.getSecondaryActionForTheSquareOrObject(Game.level.activeActor, key != -1);
+				action = square.getSecondaryActionForTheSquareOrObject(Game.level.player, key != -1);
 			} else {
-				action = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor, key != -1);
+				action = square.getDefaultActionForTheSquareOrObject(Game.level.player, key != -1);
 			}
 		}
 
@@ -604,7 +602,9 @@ public class UserInputLevel {
 			}
 			Player.playerTargetAction = action;
 			Player.playerTargetSquare = square;
-			Player.playerFirstMove = true;
+			if (!(Level.player.getPrimaryAnimation() instanceof AnimationWalk))
+				Player.playerFirstMove = true;
+			System.out.println("Set action and returned, playerTargetSquare = " + Level.player.playerTargetSquare);
 			return;
 		} else {
 			Level.closeAllPopups();
@@ -647,10 +647,10 @@ public class UserInputLevel {
 
 	public static void waitPressed(boolean allowMenuControl, boolean held) {
 
-		if (Player.playerTargetSquare != null) {
-			Game.level.pausePlayer();
-			return;
-		}
+		// if (Player.playerTargetSquare != null) {
+		// Game.level.pausePlayer();
+		// return;
+		// }
 
 		if (Game.level.fullScreenTextBox != null) {
 			return;
@@ -679,9 +679,6 @@ public class UserInputLevel {
 		if (!held)
 			controllingMenu = false;
 
-		if (Game.level.activeActor != Game.level.player)
-			return;
-
 		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
 				controllingMenu = true;
@@ -694,8 +691,9 @@ public class UserInputLevel {
 			}
 		} else if (!controllingMenu) {
 
-			if (Level.player.getPrimaryAnimation() != null && !Level.player.getPrimaryAnimation().getCompleted())
-				return;
+			// if (Level.player.getPrimaryAnimation() != null &&
+			// !Level.player.getPrimaryAnimation().getCompleted())
+			// return;
 
 			interactWith(Level.player.squareGameObjectIsOn, Keyboard.KEY_SPACE,
 					Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
@@ -706,10 +704,10 @@ public class UserInputLevel {
 
 	public static void upPressed(boolean allowMenuControl, boolean held) {
 
-		if (Player.playerTargetSquare != null) {
-			Game.level.pausePlayer();
-			return;
-		}
+		// if (Player.playerTargetSquare != null) {
+		// Game.level.pausePlayer();
+		// return;
+		// }
 
 		if (Game.level.fullScreenTextBox != null) {
 			return;
@@ -731,8 +729,7 @@ public class UserInputLevel {
 
 		if (!held)
 			controllingMenu = false;
-		if (Game.level.activeActor != Game.level.player)
-			return;
+
 		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
 				controllingMenu = true;
@@ -744,10 +741,9 @@ public class UserInputLevel {
 				Game.level.popupMenuObjects.get(0).moveHighLightUp();
 			}
 		} else if (!controllingMenu) {
-			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
+			int y = Game.level.player.squareGameObjectIsOn.yInGrid - 1;
 			if (y >= 0) {
-				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
-						Keyboard.KEY_UP,
+				interactWith(Game.level.squares[Game.level.player.squareGameObjectIsOn.xInGrid][y], Keyboard.KEY_UP,
 						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
 						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
 						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
@@ -758,10 +754,10 @@ public class UserInputLevel {
 
 	public static void downPressed(boolean allowMenuControl, boolean held) {
 
-		if (Player.playerTargetSquare != null) {
-			Game.level.pausePlayer();
-			return;
-		}
+		// if (Player.playerTargetSquare != null) {
+		// Game.level.pausePlayer();
+		// return;
+		// }
 
 		if (Game.level.fullScreenTextBox != null) {
 			return;
@@ -783,8 +779,6 @@ public class UserInputLevel {
 
 		if (!held)
 			controllingMenu = false;
-		if (Game.level.activeActor != Game.level.player)
-			return;
 		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
 				controllingMenu = true;
@@ -796,10 +790,9 @@ public class UserInputLevel {
 				Game.level.popupMenuObjects.get(0).moveHighLightDown();
 			}
 		} else if (!controllingMenu) {
-			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
+			int y = Game.level.player.squareGameObjectIsOn.yInGrid + 1;
 			if (y < Game.level.squares[0].length) {
-				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
-						Keyboard.KEY_DOWN,
+				interactWith(Game.level.squares[Game.level.player.squareGameObjectIsOn.xInGrid][y], Keyboard.KEY_DOWN,
 						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
 						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
 						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
@@ -809,10 +802,10 @@ public class UserInputLevel {
 	}
 
 	public static void leftPressed(boolean allowMenuControl, boolean held) {
-		if (Player.playerTargetSquare != null) {
-			Game.level.pausePlayer();
-			return;
-		}
+		// if (Player.playerTargetSquare != null) {
+		// Game.level.pausePlayer();
+		// return;
+		// }
 
 		if (Level.activeTextBox != null) {
 			Level.activeTextBox.moveCaretLeft();
@@ -835,8 +828,6 @@ public class UserInputLevel {
 
 		if (!held)
 			controllingMenu = false;
-		if (Game.level.activeActor != Game.level.player)
-			return;
 
 		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
@@ -854,10 +845,9 @@ public class UserInputLevel {
 		}
 
 		else if (!controllingMenu) {
-			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid - 1;
+			int x = Game.level.player.squareGameObjectIsOn.xInGrid - 1;
 			if (x >= 0) {
-				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
-						Keyboard.KEY_LEFT,
+				interactWith(Game.level.squares[x][Game.level.player.squareGameObjectIsOn.yInGrid], Keyboard.KEY_LEFT,
 						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
 						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
 						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
@@ -867,10 +857,11 @@ public class UserInputLevel {
 	}
 
 	public static void rightPressed(boolean allowMenuControl, boolean held) {
-		if (Player.playerTargetSquare != null) {
-			Game.level.pausePlayer();
-			return;
-		}
+		// System.out.println("rightpressed");
+		// if (Player.playerTargetSquare != null) {
+		// Game.level.pausePlayer();
+		// return;
+		// }
 
 		if (Level.activeTextBox != null) {
 			Level.activeTextBox.moveCaretRight();
@@ -893,8 +884,7 @@ public class UserInputLevel {
 
 		if (!held)
 			controllingMenu = false;
-		if (Game.level.activeActor != Game.level.player)
-			return;
+
 		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
 				controllingMenu = true;
@@ -907,11 +897,11 @@ public class UserInputLevel {
 			}
 		} else if (!controllingMenu) {
 
-			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
+			int x = Game.level.player.squareGameObjectIsOn.xInGrid + 1;
 			if (x < Game.level.squares.length) {
 
-				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
-						Keyboard.KEY_RIGHT,
+				System.out.println("rightpressed, calling interactwith");
+				interactWith(Game.level.squares[x][Game.level.player.squareGameObjectIsOn.yInGrid], Keyboard.KEY_RIGHT,
 						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
 						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
 						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
@@ -959,8 +949,6 @@ public class UserInputLevel {
 			Level.openFullScreenTextBox(fullScreenTextBox);
 			Level.activeTextBox.maxNumericValue = Game.level.squares.length - 1;
 		}
-		// if (Game.level.activeActor != Game.level.player)
-		// return;
 	}
 
 	public static void backSpaceTyped() {
@@ -975,9 +963,6 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Game.level.activeActor != Game.level.player)
-			return;
-
 		Level.closeAllPopups();
 	}
 
@@ -990,9 +975,6 @@ public class UserInputLevel {
 	}
 
 	public static void escapeTyped() {
-
-		// if (Game.level.activeActor != Game.level.player)
-		// return;
 
 		Game.level.levelMode = Level.LevelMode.LEVEL_MODE_NORMAL;
 		Level.activeTextBox = null;

@@ -70,6 +70,7 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.Utils;
 
 public class Level {
 
@@ -1710,8 +1711,6 @@ public class Level {
 					highlightPlayButton();
 				}
 			}
-		} else if (!paused && Game.level.player.getPrimaryAnimation().getCompleted()) {
-			new ActionWait(Game.level.player, Game.level.player.squareGameObjectIsOn).perform();
 		} else if (Game.level.fullScreenTextBox != null) {
 			return;
 		} else if (journal.showing) {
@@ -1728,28 +1727,23 @@ public class Level {
 			return;
 		} else if (Game.level.conversation != null) {
 			return;
-		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true
-				&& Game.level.player.getPrimaryAnimation().getCompleted()) {
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true) {
 			highlightPlayButton();
 			UserInputLevel.waitPressed(false, true);
-		} else if ((Keyboard.isKeyDown(Keyboard.KEY_UP) == true || Keyboard.isKeyDown(Keyboard.KEY_W) == true)
-				&& Game.level.player.getPrimaryAnimation().getCompleted()) {
+		} else if ((Keyboard.isKeyDown(Keyboard.KEY_UP) == true || Keyboard.isKeyDown(Keyboard.KEY_W) == true)) {
 			highlightPlayButton();
 			UserInputLevel.upPressed(false, true);
-		} else if ((Keyboard.isKeyDown(Keyboard.KEY_DOWN) == true || Keyboard.isKeyDown(Keyboard.KEY_S) == true)
-				&& Game.level.player.getPrimaryAnimation().getCompleted()) {
+		} else if ((Keyboard.isKeyDown(Keyboard.KEY_DOWN) == true || Keyboard.isKeyDown(Keyboard.KEY_S) == true)) {
 			highlightPlayButton();
 			UserInputLevel.downPressed(false, true);
-		} else if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) == true || Keyboard.isKeyDown(Keyboard.KEY_A) == true)
-				&& Game.level.player.getPrimaryAnimation().getCompleted()) {
+		} else if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) == true || Keyboard.isKeyDown(Keyboard.KEY_A) == true)) {
 			highlightPlayButton();
 			UserInputLevel.leftPressed(false, true);
-		} else if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) == true || Keyboard.isKeyDown(Keyboard.KEY_D) == true)
-				&& Game.level.player.getPrimaryAnimation().getCompleted()) {
+		} else if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) == true || Keyboard.isKeyDown(Keyboard.KEY_D) == true)) {
 			highlightPlayButton();
 			UserInputLevel.rightPressed(false, true);
-		} else if (Game.level.player.getPrimaryAnimation().getCompleted()) {
-			highlightPauseButton();
+		} else if (!paused && Game.level.player.getPrimaryAnimation().getCompleted()) {
+			new ActionWait(Game.level.player, Game.level.player.squareGameObjectIsOn).perform();
 		}
 	}
 
@@ -1768,7 +1762,7 @@ public class Level {
 	}
 
 	public static void pausePlayer() {
-		// Utils.printStackTrace();
+		Utils.printStackTrace();
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;
 		Player.playerTargetAction = null;
@@ -2277,23 +2271,32 @@ public class Level {
 		activityLogger.addActivityLog(stringToLog);
 	}
 
-	public boolean shouldLog(GameObject... gameObjects) {
+	public boolean shouldLog(Object... objects) {
 
-		for (GameObject gameObject : gameObjects) {
+		for (Object object : objects) {
 
-			if (gameObject == null)
+			if (object == null)
 				continue;
 
-			if (gameObject == Game.level.player)
+			if (object == Game.level.player)
 				return true;
 
-			if (gameObject.squareGameObjectIsOn != null && gameObject.squareGameObjectIsOn.visibleToPlayer) {
-				return true;
-			}
+			if (object instanceof GameObject) {
 
-			if (gameObject.inventoryThatHoldsThisObject != null
-					&& gameObject.inventoryThatHoldsThisObject == Game.level.player.inventory) {
-				return true;
+				GameObject gameObject = (GameObject) object;
+				if (gameObject.squareGameObjectIsOn != null && gameObject.squareGameObjectIsOn.visibleToPlayer) {
+					return true;
+				}
+
+				if (gameObject.inventoryThatHoldsThisObject != null
+						&& gameObject.inventoryThatHoldsThisObject == Game.level.player.inventory) {
+					return true;
+				}
+			} else if (object instanceof Square) {
+				Square square = (Square) object;
+				if (square.visibleToPlayer) {
+					return true;
+				}
 			}
 		}
 

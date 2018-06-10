@@ -80,7 +80,7 @@ public class ActionMove extends Action {
 			return;
 		}
 
-		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
+		if (Game.level.shouldLog(actor, target)) {
 			performer.setPrimaryAnimation(
 					new AnimationWalk(performer, actor.squareGameObjectIsOn, squareToMoveTo, performer.walkPhase));
 			// performer.primaryAnimation.phase = performer.walkPhase;
