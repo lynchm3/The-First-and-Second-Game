@@ -359,7 +359,7 @@ public class UserInputLevel {
 				// } else if (Game.squareMouseIsOver != null &&
 				// Player.playerTargetSquare != null) {
 				// Game.level.pausePlayer();
-			} else if (Game.squareMouseIsOver != null && Game.level.activeActor == Game.level.player) {
+			} else if (Game.squareMouseIsOver != null) {
 				Level.closeAllPopups();
 				interactWith(Game.squareMouseIsOver, -1,
 						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
@@ -544,6 +544,8 @@ public class UserInputLevel {
 	// static boolean interactedThisTurn = false;
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
+
+		System.out.println("interactWith");
 
 		// if (Game.level.activeActor != Game.level.player)
 		// return;
