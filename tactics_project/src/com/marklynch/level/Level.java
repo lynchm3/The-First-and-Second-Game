@@ -136,7 +136,7 @@ public class Level {
 	public transient LevelButton mapButton;
 	public transient LevelButton showHideLocationIconsButton;
 	public transient LevelButton showHideLogButton;
-	public transient LevelButton playButton;
+	// public transient LevelButton playButton;
 	public transient LevelButton pauseButton;
 	public transient LevelButton editorButton;
 	public transient ArrayList<Button> buttons;
@@ -617,40 +617,22 @@ public class Level {
 			}
 		});
 
-		playButton = new LevelButton(30f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  >", false,
-				true, Color.GRAY, Color.WHITE, "Let time pass - [SPACE]");
-		playButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-
-				// if (zoomToMap || zoomFromMap)
-				// return;
-				//
-				// if (Game.zoom >= 0.1) {
-				// zoomToMap = true;
-				// nonMapZoomLevelIndex = Game.zoomLevelIndex;
-				// } else {
-				// zoomFromMap = true;
-				// }
-			}
-		});
-		buttons.add(playButton);
-
-		pauseButton = new LevelButton(60f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  ||", false,
-				true, Color.BLACK, Color.WHITE, "Pause time");
+		pauseButton = new LevelButton(60f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  >", false,
+				true, Color.BLACK, Color.WHITE, "Let time pass [.]");
 		pauseButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
 
-				// if (zoomToMap || zoomFromMap)
-				// return;
-				//
-				// if (Game.zoom >= 0.1) {
-				// zoomToMap = true;
-				// nonMapZoomLevelIndex = Game.zoomLevelIndex;
-				// } else {
-				// zoomFromMap = true;
-				// }
+				paused = !paused;
+				if (paused) {
+					pauseButton.textParts = new Object[] { new StringWithColor(" >", pauseButton.textColor) };
+					pauseButton.setTooltipText("Let time pass [.]");
+				} else {
+					pauseButton.textParts = new Object[] { new StringWithColor(" ||", pauseButton.textColor) };
+					pauseButton.setTooltipText("Pause time [.]");
+
+				}
+
 			}
 		});
 		buttons.add(pauseButton);
@@ -1658,11 +1640,6 @@ public class Level {
 			} else {
 				action.perform();
 				Player.playerFirstMove = false;
-				if (player.squareGameObjectIsOn == Player.playerTargetSquare) {
-					// pausePlayer();
-				} else {
-					highlightPlayButton();
-				}
 			}
 
 		} else if (Game.level.player.getPrimaryAnimation().getCompleted() && Player.playerTargetSquare != null) {
@@ -1707,8 +1684,6 @@ public class Level {
 				Player.playerFirstMove = false;
 				if (player.squareGameObjectIsOn == Player.playerTargetSquare) {
 					pausePlayer();
-				} else {
-					highlightPlayButton();
 				}
 			}
 		} else if (Game.level.fullScreenTextBox != null) {
@@ -1728,37 +1703,18 @@ public class Level {
 		} else if (Game.level.conversation != null) {
 			return;
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true) {
-			highlightPlayButton();
 			UserInputLevel.waitPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_UP) == true || Keyboard.isKeyDown(Keyboard.KEY_W) == true)) {
-			highlightPlayButton();
 			UserInputLevel.upPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_DOWN) == true || Keyboard.isKeyDown(Keyboard.KEY_S) == true)) {
-			highlightPlayButton();
 			UserInputLevel.downPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) == true || Keyboard.isKeyDown(Keyboard.KEY_A) == true)) {
-			highlightPlayButton();
 			UserInputLevel.leftPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) == true || Keyboard.isKeyDown(Keyboard.KEY_D) == true)) {
-			highlightPlayButton();
 			UserInputLevel.rightPressed(false, true);
 		} else if (!paused && Game.level.player.getPrimaryAnimation().getCompleted()) {
 			new ActionWait(Game.level.player, Game.level.player.squareGameObjectIsOn).perform();
 		}
-	}
-
-	public void highlightPlayButton() {
-		playButton.setTextColor(Color.WHITE);
-		playButton.buttonColor = Color.BLACK;
-		pauseButton.setTextColor(Color.WHITE);
-		pauseButton.buttonColor = Color.GRAY;
-	}
-
-	public void highlightPauseButton() {
-		playButton.setTextColor(Color.WHITE);
-		playButton.buttonColor = Color.GRAY;
-		pauseButton.setTextColor(Color.WHITE);
-		pauseButton.buttonColor = Color.BLACK;
 	}
 
 	public static void pausePlayer() {
@@ -1767,7 +1723,6 @@ public class Level {
 		Player.playerTargetSquare = null;
 		Player.playerTargetAction = null;
 		Player.playerTargetActor = null;
-		Game.level.highlightPauseButton();
 		levelMode = LevelMode.LEVEL_MODE_NORMAL;
 	}
 

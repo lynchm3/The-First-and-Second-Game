@@ -13,7 +13,7 @@ public class LevelButton extends Button {
 	public boolean xFromLeft;
 	public boolean yFromTop;
 	public Color buttonColor;
-	private Color textColor;
+	public Color textColor;
 	public Object[] textParts;
 	public float realX = x;
 	public float realY = y;

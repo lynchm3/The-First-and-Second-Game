@@ -1034,7 +1034,7 @@ public class UserInputLevel {
 		}
 
 		if (character == '.') {
-			Level.paused = !Level.paused;
+			Game.level.pauseButton.click();
 		} else if (character == 'j' || character == 'J') {
 			Game.level.openCloseJournal();
 			return;
