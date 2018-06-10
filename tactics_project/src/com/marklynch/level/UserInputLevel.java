@@ -28,6 +28,7 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.popups.FullScreenTextBox;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.ui.popups.PopupMenu;
+import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
 import com.marklynch.ui.quickbar.QuickBarSquare;
 
@@ -605,6 +606,22 @@ public class UserInputLevel {
 			Player.playerTargetSquare = square;
 			Player.playerFirstMove = true;
 			return;
+		} else {
+			Level.closeAllPopups();
+			if (square instanceof InventorySquare && ((InventorySquare) square).stack.get(0) != null) {
+				PopupMenuSelectAction popupSelectAction = new PopupMenuSelectAction(0, 200, Game.level, square,
+						((InventorySquare) square).getAllActionsForTheSquareOrObject(Game.level.player));
+				if (popupSelectAction.buttons.size() > 0)
+					Game.level.popupMenuActions.add(popupSelectAction);
+
+				// Game.level.popups.add(e);
+			} else if (!(square instanceof InventorySquare)) {
+				PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level, square, true, true,
+						false);
+				if (popupSelectObject.buttons.size() > 0)
+					Game.level.popupMenuObjects.add(popupSelectObject);
+			}
+
 		}
 
 		// if (action != null) {
@@ -625,25 +642,6 @@ public class UserInputLevel {
 		//
 		// }
 		// } else {
-		// Level.closeAllPopups();
-		// if (square instanceof InventorySquare && ((InventorySquare)
-		// square).stack.get(0) != null) {
-		// PopupMenuSelectAction popupSelectAction = new PopupMenuSelectAction(0, 200,
-		// Game.level, square,
-		// ((InventorySquare)
-		// square).getAllActionsForTheSquareOrObject(Game.level.player));
-		// if (popupSelectAction.buttons.size() > 0)
-		// Game.level.popupMenuActions.add(popupSelectAction);
-		//
-		// // Game.level.popups.add(e);
-		// } else if (!(square instanceof InventorySquare)) {
-		// PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100,
-		// Game.level, square, true, true,
-		// false);
-		// if (popupSelectObject.buttons.size() > 0)
-		// Game.level.popupMenuObjects.add(popupSelectObject);
-		// }
-		// }
 
 	}
 
