@@ -103,7 +103,7 @@ public class AnimationWave extends Animation {
 			target.showPow();
 			rightShoulderAngle = 0;
 			rightElbowAngle = 0;
-			complete();
+			runCompletionAlgorightm();
 		} else {
 		}
 

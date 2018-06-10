@@ -79,8 +79,8 @@ public class ActionAttack extends Action {
 				performer.setPrimaryAnimation(new AnimationSlash(performer, target) {
 
 					@Override
-					public void complete() {
-						super.complete();
+					public void runCompletionAlgorightm() {
+						super.runCompletionAlgorightm();
 						postAnimation();
 					}
 				}
@@ -90,8 +90,8 @@ public class ActionAttack extends Action {
 				performer.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this) {
 
 					@Override
-					public void complete() {
-						super.complete();
+					public void runCompletionAlgorightm() {
+						super.runCompletionAlgorightm();
 						postAnimation();
 					}
 				});

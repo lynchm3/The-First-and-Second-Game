@@ -125,7 +125,7 @@ public class AnimationThrown extends Animation {
 
 		if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
-			complete();
+			runCompletionAlgorightm();
 
 			if (targetGameObject != null && targetGameObject instanceof Actor)
 				targetGameObject.setPrimaryAnimation(new AnimationFlinch(targetGameObject, shooter.squareGameObjectIsOn,

@@ -92,7 +92,7 @@ public class AnimationWalk extends Animation {
 		setAngles(progress);
 
 		if (progress >= 1) {
-			complete();
+			runCompletionAlgorightm();
 			offsetX = 0;
 			// offsetY = 0;
 			if (phase == 0 || phase == 2) {

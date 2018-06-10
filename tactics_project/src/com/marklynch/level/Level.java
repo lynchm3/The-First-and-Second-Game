@@ -141,6 +141,7 @@ public class Level {
 	public transient ArrayList<Button> buttons;
 	public transient Button poisonBlastButton;
 
+	public static boolean paused = true;
 	public boolean showLog = true;
 
 	public transient static int turn = 1;
@@ -1464,6 +1465,7 @@ public class Level {
 	// ArrayList<Action>();
 
 	public static long lastUpdate = 0;
+
 	int lastActorUpdatedIndex = -1;
 	boolean aiTurn = false;
 	int timeToMoveAll = 200;// ms
@@ -1708,6 +1710,8 @@ public class Level {
 					highlightPlayButton();
 				}
 			}
+		} else if (!paused && Game.level.player.getPrimaryAnimation().getCompleted()) {
+			new ActionWait(Game.level.player, Game.level.player.squareGameObjectIsOn).perform();
 		} else if (Game.level.fullScreenTextBox != null) {
 			return;
 		} else if (journal.showing) {
@@ -2158,6 +2162,12 @@ public class Level {
 		}
 
 		undoList.clear();
+
+		// if(player.playerTargetSquare == null
+		// && player.playerTa)
+		// {
+		//
+		// }
 	}
 
 	public void endPlayerTurn() {

@@ -134,7 +134,7 @@ public abstract class Animation {
 
 	}
 
-	public void complete() {
+	public void runCompletionAlgorightm() {
 
 		if (blockAI)
 			Level.blockingAnimations.remove(this);

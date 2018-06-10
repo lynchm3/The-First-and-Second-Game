@@ -83,7 +83,7 @@ public class AnimationThrow extends Animation {
 			drawEquipped = true;
 			rightShoulderAngle = 0;
 			rightElbowAngle = 0;
-			complete();
+			runCompletionAlgorightm();
 		} else {
 		}
 

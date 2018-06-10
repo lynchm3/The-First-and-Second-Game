@@ -31,7 +31,7 @@ public class AnimationMovementFade1 extends Animation {
 		durationSoFar += delta;
 		float progress = durationSoFar / durationToReach;
 		if (progress >= 1) {
-			complete();
+			runCompletionAlgorightm();
 		} else {
 			alpha = (1f - progress) * 0.5f;
 		}

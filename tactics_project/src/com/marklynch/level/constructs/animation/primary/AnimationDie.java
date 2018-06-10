@@ -61,7 +61,7 @@ public class AnimationDie extends Animation {
 				leftKneeAngle == targetLeftKnee &&
 				//
 				rightKneeAngle == targetRightKnee) {
-			complete();
+			runCompletionAlgorightm();
 		}
 
 		float offsetYChange = (float) (1d * delta);

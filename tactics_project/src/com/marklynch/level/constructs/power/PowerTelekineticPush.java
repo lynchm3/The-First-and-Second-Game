@@ -122,8 +122,8 @@ public class PowerTelekineticPush extends Power {
 					new AnimationPushed(pushedGameObject, pushedObjectToStartSquare.get(pushedGameObject), endSquare,
 							pushedGameObject.getPrimaryAnimation()) {
 						@Override
-						public void complete() {
-							super.complete();
+						public void runCompletionAlgorightm() {
+							super.runCompletionAlgorightm();
 							pushedGameObject.changeHealth(source, action,
 									new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
 							if (obstacle != null) {

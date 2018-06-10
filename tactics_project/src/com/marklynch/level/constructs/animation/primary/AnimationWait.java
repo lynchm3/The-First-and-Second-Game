@@ -61,7 +61,7 @@ public class AnimationWait extends Animation {
 				leftKneeAngle == targetLeftKnee &&
 				//
 				rightKneeAngle == targetRightKnee) {
-			complete();
+			runCompletionAlgorightm();
 		}
 
 		float offsetYChange = (float) (0.05d * delta);
