@@ -10,6 +10,7 @@ import com.marklynch.objects.units.Player;
 
 public abstract class Animation {
 	public boolean blockAI = false;
+	// public boolean blockPlayer = false;
 	private boolean completed = false;
 	public float offsetX = 0;
 	public float offsetY = 0;

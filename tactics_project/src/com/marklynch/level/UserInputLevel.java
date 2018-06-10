@@ -690,7 +690,11 @@ public class UserInputLevel {
 				Game.level.popupMenuObjects.get(0).clickHighlightedButton();
 			}
 		} else if (!controllingMenu) {
-			interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE,
+
+			if (Level.player.getPrimaryAnimation() != null && !Level.player.getPrimaryAnimation().getCompleted())
+				return;
+
+			interactWith(Level.player.squareGameObjectIsOn, Keyboard.KEY_SPACE,
 					Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
 					Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
 					Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));

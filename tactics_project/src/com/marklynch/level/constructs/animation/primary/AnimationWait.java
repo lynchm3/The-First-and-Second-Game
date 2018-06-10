@@ -7,8 +7,10 @@ public class AnimationWait extends Animation {
 
 	public AnimationWait(GameObject performer) {
 		super(performer);
-		// durationToReach = 400;
+		durationToReach = 400;
 		blockAI = false;
+		// if (performer == Level.player)
+		// blockAI = true;
 	}
 
 	@Override
@@ -38,8 +40,10 @@ public class AnimationWait extends Animation {
 			targetOffsetY = 28f;
 		}
 
-		if (offsetY == targetOffsetY &&
+		if (durationSoFar >= durationToReach &&
 		//
+				offsetY == targetOffsetY &&
+				//
 				torsoAngle == 0 &&
 				//
 				leftShoulderAngle == 0 &&
