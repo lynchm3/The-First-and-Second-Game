@@ -17,7 +17,7 @@ public class PowerTimePlusSixHours extends Power {
 
 	public PowerTimePlusSixHours(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("power_time_plus_six_hours.png", false), source, new Effect[] {}, 0,
-				new Point[] { new Point(0, 0) }, 20, false, false, Crime.TYPE.NONE);
+				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
 	}
 
 	@Override

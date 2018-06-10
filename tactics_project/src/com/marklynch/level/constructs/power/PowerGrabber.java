@@ -19,7 +19,7 @@ public class PowerGrabber extends Power {
 
 	public PowerGrabber(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("left.png", false), source, new Effect[] {}, 0,
-				new Point[] { new Point(0, 0) }, 20, false, false, Crime.TYPE.NONE);
+				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
 		passive = true;
 		activateAtStartOfTurn = true;
 		description = "Automatically pick up items within 1 square that don't belong to anyone";

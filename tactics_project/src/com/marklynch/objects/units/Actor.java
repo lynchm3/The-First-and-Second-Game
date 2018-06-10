@@ -78,6 +78,7 @@ import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
+import com.marklynch.utils.Utils;
 
 public class Actor extends GameObject {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
@@ -1684,28 +1685,30 @@ public class Actor extends GameObject {
 				this.aiRoutine.update();
 		}
 
-		HidingPlace hidingPlaceAtSameSquare = (HidingPlace) squareGameObjectIsOn.inventory
-				.getGameObjectOfClass(HidingPlace.class);
-		if (hiding) {
-			if (hidingPlaceAtSameSquare == null || hidingPlaceAtSameSquare.remainingHealth <= 0) {
-				new ActionStopHiding(this, this.hidingPlace).perform();
-			} else if (hidingPlace == hidingPlaceAtSameSquare) {
-				// still have same hiding place, do nothing
+		if (squareGameObjectIsOn != null) {
+			HidingPlace hidingPlaceAtSameSquare = (HidingPlace) squareGameObjectIsOn.inventory
+					.getGameObjectOfClass(HidingPlace.class);
+			if (hiding) {
+				if (hidingPlaceAtSameSquare == null || hidingPlaceAtSameSquare.remainingHealth <= 0) {
+					new ActionStopHiding(this, this.hidingPlace).perform();
+				} else if (hidingPlace == hidingPlaceAtSameSquare) {
+					// still have same hiding place, do nothing
+				} else {
+					hidingPlace.actorsHidingHere.remove(this);
+					hidingPlace = (HidingPlace) squareGameObjectIsOn.inventory.getGameObjectOfClass(HidingPlace.class);
+					hidingPlace.actorsHidingHere.add(this);
+				}
 			} else {
-				hidingPlace.actorsHidingHere.remove(this);
-				hidingPlace = (HidingPlace) squareGameObjectIsOn.inventory.getGameObjectOfClass(HidingPlace.class);
-				hidingPlace.actorsHidingHere.add(this);
+				if (hidingPlaceAtSameSquare != null && hidingPlaceAtSameSquare.remainingHealth > 0) {
+					new ActionHide(this, hidingPlaceAtSameSquare).perform();
+				}
 			}
-		} else {
-			if (hidingPlaceAtSameSquare != null && hidingPlaceAtSameSquare.remainingHealth > 0) {
-				new ActionHide(this, hidingPlaceAtSameSquare).perform();
-			}
-		}
 
-		// If hiding in a place get the effects
-		if (hidingPlace != null) {
-			for (Effect effect : hidingPlace.effectsFromInteracting) {
-				addEffect(effect.makeCopy(hidingPlace, this));
+			// If hiding in a place get the effects
+			if (hidingPlace != null) {
+				for (Effect effect : hidingPlace.effectsFromInteracting) {
+					addEffect(effect.makeCopy(hidingPlace, this));
+				}
 			}
 		}
 
@@ -2025,6 +2028,11 @@ public class Actor extends GameObject {
 
 	public void addInvestigation(GameObject actor, Square square, int priority) {
 		// TODO Auto-generated method stub
+
+		if (this.name.contains("Farmer")) {
+			System.out.println("Farmer addInvestigation");
+			Utils.printStackTrace();
+		}
 
 		Investigation existingInvestigation = this.investigationsMap.get(actor);
 		if (existingInvestigation == null) {
