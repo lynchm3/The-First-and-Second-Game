@@ -28,7 +28,6 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.popups.FullScreenTextBox;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.ui.popups.PopupMenu;
-import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
 import com.marklynch.ui.quickbar.QuickBarSquare;
 
@@ -546,8 +545,8 @@ public class UserInputLevel {
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
 
-		if (Game.level.activeActor != Game.level.player)
-			return;
+		// if (Game.level.activeActor != Game.level.player)
+		// return;
 
 		if (openMenu) {
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
@@ -596,7 +595,7 @@ public class UserInputLevel {
 		}
 
 		//
-		if (key == -1 && action != null && !(square instanceof InventorySquare) && !action.checkRange()) {
+		if (action != null && !(square instanceof InventorySquare)) {
 			if (Game.level.settingFollowPlayer && Game.level.player.onScreen()) {
 				Game.level.cameraFollow = true;
 			}
@@ -606,39 +605,43 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (action != null) {
-
-			action.perform();
-
-			if (action.movement && action.enabled) {
-
-				if (key == Keyboard.KEY_UP) {
-					Level.wHasBeenPressed = true;
-				} else if (key == Keyboard.KEY_DOWN) {
-					Level.sHasBeenPressed = true;
-				} else if (key == Keyboard.KEY_LEFT) {
-					Level.aHasBeenPressed = true;
-				} else if (key == Keyboard.KEY_RIGHT) {
-					Level.dHasBeenPressed = true;
-				}
-
-			}
-		} else {
-			Level.closeAllPopups();
-			if (square instanceof InventorySquare && ((InventorySquare) square).stack.get(0) != null) {
-				PopupMenuSelectAction popupSelectAction = new PopupMenuSelectAction(0, 200, Game.level, square,
-						((InventorySquare) square).getAllActionsForTheSquareOrObject(Game.level.player));
-				if (popupSelectAction.buttons.size() > 0)
-					Game.level.popupMenuActions.add(popupSelectAction);
-
-				// Game.level.popups.add(e);
-			} else if (!(square instanceof InventorySquare)) {
-				PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level, square, true, true,
-						false);
-				if (popupSelectObject.buttons.size() > 0)
-					Game.level.popupMenuObjects.add(popupSelectObject);
-			}
-		}
+		// if (action != null) {
+		//
+		// action.perform();
+		//
+		// if (action.movement && action.enabled) {
+		//
+		// if (key == Keyboard.KEY_UP) {
+		// Level.wHasBeenPressed = true;
+		// } else if (key == Keyboard.KEY_DOWN) {
+		// Level.sHasBeenPressed = true;
+		// } else if (key == Keyboard.KEY_LEFT) {
+		// Level.aHasBeenPressed = true;
+		// } else if (key == Keyboard.KEY_RIGHT) {
+		// Level.dHasBeenPressed = true;
+		// }
+		//
+		// }
+		// } else {
+		// Level.closeAllPopups();
+		// if (square instanceof InventorySquare && ((InventorySquare)
+		// square).stack.get(0) != null) {
+		// PopupMenuSelectAction popupSelectAction = new PopupMenuSelectAction(0, 200,
+		// Game.level, square,
+		// ((InventorySquare)
+		// square).getAllActionsForTheSquareOrObject(Game.level.player));
+		// if (popupSelectAction.buttons.size() > 0)
+		// Game.level.popupMenuActions.add(popupSelectAction);
+		//
+		// // Game.level.popups.add(e);
+		// } else if (!(square instanceof InventorySquare)) {
+		// PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100,
+		// Game.level, square, true, true,
+		// false);
+		// if (popupSelectObject.buttons.size() > 0)
+		// Game.level.popupMenuObjects.add(popupSelectObject);
+		// }
+		// }
 
 	}
 
