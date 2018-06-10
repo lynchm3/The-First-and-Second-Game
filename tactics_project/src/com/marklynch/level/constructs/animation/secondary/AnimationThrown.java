@@ -5,9 +5,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
-import com.marklynch.level.constructs.animation.primary.AnimationFlinch;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -15,14 +13,12 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Liquid;
-import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
@@ -127,59 +123,6 @@ public class AnimationThrown extends Animation {
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
 			runCompletionAlgorightm();
 
-			if (targetGameObject != null && targetGameObject instanceof Actor)
-				targetGameObject.setPrimaryAnimation(new AnimationFlinch(targetGameObject, shooter.squareGameObjectIsOn,
-						targetGameObject.getPrimaryAnimation()));
-			if (targetGameObject != null)
-				targetGameObject.showPow();
-			if (!(projectileObject instanceof Arrow)) {
-				if (targetGameObject != null && targetGameObject instanceof Searchable
-						&& projectileObject.canShareSquare) {
-					targetGameObject.inventory.add(projectileObject);
-				} else {
-					targetSquare.inventory.add(projectileObject);
-				}
-				projectileObject.landed(shooter, action);
-			} else if (targetGameObject != null) {
-
-				// projectileObject.drawOffsetRatioX = (targetX -
-				// targetGameObject.squareGameObjectIsOn.xInGridPixels)
-				// / Game.SQUARE_WIDTH;
-
-				// projectileObject.drawOffsetRatioY = (targetY -
-				// targetGameObject.squareGameObjectIsOn.yInGridPixels)
-				// / Game.SQUARE_HEIGHT;
-
-				targetGameObject.arrowsEmbeddedInThis.add((Arrow) projectileObject);
-			}
-
-			if (Level.player.inventory.groundDisplay != null)
-				Level.player.inventory.groundDisplay.refreshGameObjects();
-
-			// Carry out the dmg, attack, logging...
-			if (targetGameObject != null && targetGameObject.attackable) {
-				float damage = targetGameObject.changeHealth(shooter, action, weapon);
-				String attackTypeString;
-				attackTypeString = "attacked ";
-
-				if (shooter.squareGameObjectIsOn.visibleToPlayer) {
-
-					if (weapon != shooter) {
-						if (Game.level.shouldLog(targetGameObject, shooter))
-							Game.level.logOnScreen(new ActivityLog(new Object[] { shooter, " " + attackTypeString + " ",
-									targetGameObject, " with ", weapon, " for " + damage + " damage" }));
-					} else {
-						if (Game.level.shouldLog(targetGameObject, shooter))
-							Game.level.logOnScreen(new ActivityLog(new Object[] { shooter, " " + attackTypeString + " ",
-									targetGameObject, " for " + damage + " damage" }));
-					}
-				}
-
-				if (weapon instanceof ContainerForLiquids) {
-					smashContainer((ContainerForLiquids) weapon);
-				}
-			}
-
 		} else {
 			x += distanceX;
 			y += distanceY;
@@ -188,6 +131,11 @@ public class AnimationThrown extends Animation {
 			square.inventory.smashWindows(shooter);
 
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "AnimationThrown";
 	}
 
 	@Override

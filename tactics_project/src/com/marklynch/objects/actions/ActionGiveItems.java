@@ -62,8 +62,9 @@ public class ActionGiveItems extends VariableQtyAction {
 			return;
 
 		if (Game.level.openInventories.size() > 0) {
-		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen() && gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
-			gameObjectPerformer.secondaryAnimations.add(new AnimationGive(gameObjectPerformer, receiver, objects[0]));
+		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen()
+				&& gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
+			gameObjectPerformer.addSecondaryAnimation(new AnimationGive(gameObjectPerformer, receiver, objects[0]));
 		}
 
 		if (receiver instanceof Openable) {
@@ -107,14 +108,14 @@ public class ActionGiveItems extends VariableQtyAction {
 			if (amountToGive > 1)
 				amountToDropString = "x" + amountToGive;
 			if (logAsTake)
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { receiver, " took ", objects[0], amountToDropString, " from ", gameObjectPerformer }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { receiver, " took ", objects[0],
+						amountToDropString, " from ", gameObjectPerformer }));
 			else if (receiver instanceof Actor)
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { gameObjectPerformer, " gave ", objects[0], amountToDropString, " to ", receiver }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " gave ", objects[0],
+						amountToDropString, " to ", receiver }));
 			else
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { gameObjectPerformer, " put ", objects[0], amountToDropString, " in ", receiver }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " put ", objects[0],
+						amountToDropString, " in ", receiver }));
 		}
 
 		if (sound != null)
@@ -130,7 +131,8 @@ public class ActionGiveItems extends VariableQtyAction {
 	@Override
 	public boolean checkRange() {
 
-		if (gameObjectPerformer instanceof Actor && !((Actor) gameObjectPerformer).canSeeSquare(receiver.squareGameObjectIsOn)) {
+		if (gameObjectPerformer instanceof Actor
+				&& !((Actor) gameObjectPerformer).canSeeSquare(receiver.squareGameObjectIsOn)) {
 			return false;
 		}
 

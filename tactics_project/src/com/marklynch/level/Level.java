@@ -1453,22 +1453,39 @@ public class Level {
 	boolean aiTurn = false;
 	int timeToMoveAll = 200;// ms
 
+	public static ArrayList<Animation> animations = new ArrayList<Animation>();
+
 	public void update(int delta) {
 		lastUpdate = System.currentTimeMillis();
 		addRemoveObjectToFromGround();
 
-		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
-			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				// is it better to bind once and draw all the same ones?
-				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
-					gameObject.updateRealtime(delta);
-				}
-			}
+		for (Animation blockingAnimation : blockingAnimations) {
+			System.out.println("blockingAnimation = " + blockingAnimation);
+			// this.blockingAnimations
+		}
+		System.out.println("animations.size() = " + animations.size());
+
+		for (Animation animation : animations) {
+			System.out.println("animation = " + animation);
+			// this.blockingAnimations
 		}
 
-		player.updateRealtime(delta);
+		for (Animation animation : (ArrayList<Animation>) animations.clone()) {
+			animation.update(delta);
+		}
 
-		player.inventory.updateRealtime(delta);
+		// for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+		// for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+		// // is it better to bind once and draw all the same ones?
+		// for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
+		// gameObject.updateRealtime(delta);
+		// }
+		// }
+		// }
+		//
+		// player.updateRealtime(delta);
+		//
+		// player.inventory.updateRealtime(delta);
 
 		// update map zoom animation
 		if (zoomToMap) {
@@ -2185,17 +2202,17 @@ public class Level {
 					continue;
 				}
 
-				boolean waitingOnSecondaryAnimation = false;
-				for (Animation secondaryAnimation : gameObject.secondaryAnimations) {
-					if (secondaryAnimation.getCompleted() == false) {
-						waitingOnSecondaryAnimation = true;
-						break;
-					}
-				}
-
-				if (waitingOnSecondaryAnimation) {
-					continue;
-				}
+				// boolean waitingOnSecondaryAnimation = false;
+				// for (Animation secondaryAnimation : gameObject.secondaryAnimations) {
+				// if (secondaryAnimation.getCompleted() == false) {
+				// waitingOnSecondaryAnimation = true;
+				// break;
+				// }
+				// }
+				//
+				// if (waitingOnSecondaryAnimation) {
+				// continue;
+				// }
 
 				inanimateObjectsOnGround.remove(gameObject);
 				if (gameObject.squareGameObjectIsOn != null)

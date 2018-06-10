@@ -8,7 +8,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
-public class AnimationShootArrow extends Animation {
+public abstract class AnimationShootArrow extends Animation {
 
 	// public Square startSquare;
 	// public Square endSquare;
@@ -52,7 +52,16 @@ public class AnimationShootArrow extends Animation {
 	}
 
 	@Override
+	public String toString() {
+		return "AnimationShootArrow";
+	}
+
+	public Arrow arrow;
+
+	@Override
 	public void update(double delta) {
+
+		System.out.println("animationSHootArrow.update()");
 
 		if (getCompleted())
 			return;
@@ -100,13 +109,19 @@ public class AnimationShootArrow extends Animation {
 		} else if (progress < 0.75f) {
 
 			if (animationThrown == null) {
-
-				Arrow arrow = Templates.ARROW.makeCopy(null, null);
+				arrow = Templates.ARROW.makeCopy(null, null);
 				arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
 				arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
 				animationThrown = new AnimationThrown("Arrow", (Actor) performer, action, target,
-						target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true);
-				performer.secondaryAnimations.add(animationThrown);
+						target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true) {
+					@Override
+					public void runCompletionAlgorightm() {
+						super.runCompletionAlgorightm();
+						arrowCallback();
+					}
+				};
+				performer.addSecondaryAnimation(animationThrown);
+
 			}
 
 			bowStringHandleY = 0;
@@ -139,6 +154,7 @@ public class AnimationShootArrow extends Animation {
 			leftElbowAngle = -temp;
 		}
 
+		System.out.println("progress = " + progress);
 		if (progress >= 1) {
 			// target.showPow();
 			rightShoulderAngle = 0;
@@ -165,6 +181,10 @@ public class AnimationShootArrow extends Animation {
 
 	@Override
 	public void drawStaticUI() {
+	}
+
+	public void arrowCallback() {
+
 	}
 
 }

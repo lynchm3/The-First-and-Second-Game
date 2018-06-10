@@ -58,7 +58,7 @@ public abstract class Animation {
 	public int boundsY2 = 128;
 	public boolean drawWeapon = true;
 
-	protected GameObject performer;
+	public GameObject performer;
 
 	public Animation(GameObject performer) {
 
@@ -138,6 +138,9 @@ public abstract class Animation {
 
 		if (blockAI)
 			Level.blockingAnimations.remove(this);
+
+		Level.animations.remove(this);
+
 		completed = true;
 
 		if (performer == null)

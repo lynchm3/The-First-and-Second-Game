@@ -40,7 +40,8 @@ public class ActionBuyItems extends VariableQtyAction {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -55,8 +56,8 @@ public class ActionBuyItems extends VariableQtyAction {
 
 		if (Game.level.openInventories.size() > 0) {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			target.secondaryAnimations.add(new AnimationGive(target, performer, objects[0]));
-			performer.secondaryAnimations.add(new AnimationGive(performer, target, AnimationGive.gold));
+			target.addSecondaryAnimation(new AnimationGive(target, performer, objects[0]));
+			performer.addSecondaryAnimation(new AnimationGive(performer, target, AnimationGive.gold));
 		}
 
 		for (int i = 0; i < amountToSell; i++) {

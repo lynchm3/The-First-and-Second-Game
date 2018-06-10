@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.lwjgl.util.Point;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
@@ -115,26 +116,36 @@ public class PowerTelekineticPush extends Power {
 
 		final GameObject obstacle = tempObstacle;
 
-		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
+		if (Game.level.shouldLog(source)) {
+			source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
+		}
 		for (final GameObject pushedGameObject : pushedObjectToStartSquare.keySet()) {
 			// if (pushedGameObject.remainingHealth > 0)
-			pushedGameObject.setPrimaryAnimation(
-					new AnimationPushed(pushedGameObject, pushedObjectToStartSquare.get(pushedGameObject), endSquare,
-							pushedGameObject.getPrimaryAnimation()) {
-						@Override
-						public void runCompletionAlgorightm() {
-							super.runCompletionAlgorightm();
-							pushedGameObject.changeHealth(source, action,
-									new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
-							if (obstacle != null) {
-								obstacle.changeHealth(source, action,
-										new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
+
+			if (Game.level.shouldLog(source, pushedGameObject)) {
+				pushedGameObject.setPrimaryAnimation(
+						new AnimationPushed(pushedGameObject, pushedObjectToStartSquare.get(pushedGameObject),
+								endSquare, pushedGameObject.getPrimaryAnimation()) {
+							@Override
+							public void runCompletionAlgorightm() {
+								super.runCompletionAlgorightm();
+								postAnimation(pushedGameObject, action, obstacle);
 							}
 						}
-					}
 
-			);
+				);
+			} else {
+				postAnimation(pushedGameObject, action, obstacle);
+			}
 
+		}
+	}
+
+	public void postAnimation(GameObject pushedGameObject, Action action, GameObject obstacle) {
+
+		pushedGameObject.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
+		if (obstacle != null) {
+			obstacle.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
 		}
 	}
 

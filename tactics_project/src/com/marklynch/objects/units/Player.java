@@ -10,7 +10,6 @@ import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
@@ -80,13 +79,13 @@ public class Player extends Human {
 		super.update(delta);
 	}
 
-	@Override
-	public void updateRealtime(int delta) {
-		if (lastUpdateRealtime == Level.lastUpdate)
-			return;
-		lastUpdateRealtime = Level.lastUpdate;
-		super.updateRealtime(delta);
-	}
+	// @Override
+	// public void updateRealtime(int delta) {
+	// if (lastUpdateRealtime == Level.lastUpdate)
+	// return;
+	// lastUpdateRealtime = Level.lastUpdate;
+	// super.updateRealtime(delta);
+	// }
 
 	@Override
 	public Player makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
@@ -132,7 +131,7 @@ public class Player extends Human {
 					float x = square.xInGridPixels + Game.SQUARE_WIDTH * orb.drawOffsetRatioX;
 					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
 
-					Game.level.player.secondaryAnimations.add(new AnimationTake(orb, Game.level.player, x, y,
+					Game.level.player.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
 							(float) (Math.random() * 0.25f + 0.75f), -0f, -0f));
 
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
@@ -143,7 +142,7 @@ public class Player extends Human {
 
 					float x = square.xInGridPixels + Game.SQUARE_WIDTH * orb.drawOffsetRatioX;
 					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
-					Game.level.player.secondaryAnimations.add(new AnimationTake(orb, Game.level.player, x, y,
+					Game.level.player.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
 							(float) (Math.random() * 0.25f + 0.75f), 0f, 0f));
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
 					orbs -= 5;
@@ -153,7 +152,7 @@ public class Player extends Human {
 
 					float x = square.xInGridPixels + Game.SQUARE_WIDTH * orb.drawOffsetRatioX;
 					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
-					Game.level.player.secondaryAnimations.add(new AnimationTake(orb, Game.level.player, x, y,
+					Game.level.player.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
 							(float) (Math.random() * 0.25f + 0.75f), 0f, 0f));
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
 					orbs -= 10;
@@ -460,19 +459,6 @@ public class Player extends Human {
 
 			return true;
 		}
-		return false;
-	}
-
-	public boolean animationsBlockingAI() {
-
-		if (primaryAnimation != null && !primaryAnimation.getCompleted() && primaryAnimation.blockAI)
-			return true;
-
-		for (Animation secondaryAnimation : secondaryAnimations) {
-			if (!secondaryAnimation.getCompleted() && secondaryAnimation.blockAI)
-				return true;
-		}
-
 		return false;
 	}
 

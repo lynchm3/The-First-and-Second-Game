@@ -42,6 +42,11 @@ public class AnimationSlash extends Animation {
 	}
 
 	@Override
+	public String toString() {
+		return "AnimationSlash";
+	}
+
+	@Override
 	public void update(double delta) {
 
 		if (getCompleted())

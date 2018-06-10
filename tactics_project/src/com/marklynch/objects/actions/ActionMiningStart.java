@@ -79,7 +79,7 @@ public class ActionMiningStart extends Action {
 
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-				performer.secondaryAnimations.add(new AnimationTake(ore, performer, 0, 0, 1f));
+				performer.addSecondaryAnimation(new AnimationTake(ore, performer, 0, 0, 1f));
 
 			}
 			performer.inventory.add(ore);

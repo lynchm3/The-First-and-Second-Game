@@ -216,7 +216,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Action destroyedByAction = null;
 
 	protected Animation primaryAnimation;
-	public ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
+	private ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
 
 	public boolean toSell = false;
 	public boolean starred = false;
@@ -949,6 +949,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void update(int delta) {
 
+		for (Animation secondaryAnimation : (ArrayList<Animation>) secondaryAnimations.clone()) {
+			if (secondaryAnimation.getCompleted())
+				secondaryAnimations.remove(secondaryAnimation);
+		}
+
 		if (!(this instanceof Actor))
 			clearActions();
 
@@ -961,18 +966,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 	}
 
-	public void updateRealtime(int delta) {
-		if (primaryAnimation != null && !primaryAnimation.getCompleted()) {
-			primaryAnimation.update(delta);
-		} else {
-		}
-
-		for (Animation secondaryAnimation : (ArrayList<Animation>) secondaryAnimations.clone()) {
-			secondaryAnimation.update(delta);
-			if (secondaryAnimation.getCompleted())
-				secondaryAnimations.remove(secondaryAnimation);
-		}
-	}
+	// public void updateRealtime(int delta) {
+	//
+	//
+	// }
 
 	public float getCenterX() {
 		return squareGameObjectIsOn.xInGridPixels + Game.HALF_SQUARE_WIDTH;
@@ -2121,16 +2118,34 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void setPrimaryAnimation(Animation animation) {
 		Level.blockingAnimations.remove(this.primaryAnimation);
+		Level.animations.remove(this.primaryAnimation);
 
 		// if (remainingHealth > 0) {
 		this.primaryAnimation = animation;
-		if (animation != null && animation.blockAI)
+		if (animation != null && animation.blockAI) {
 			Level.blockingAnimations.add(animation);
-		// }
+		}
+		Level.animations.add(animation);
 	}
 
 	public Animation getPrimaryAnimation() {
 		return this.primaryAnimation;
+	}
+
+	public void addSecondaryAnimation(Animation animation) {
+
+		// if (remainingHealth > 0) {
+		if (animation != null) {
+			this.secondaryAnimations.add(animation);
+			Level.animations.add(animation);
+			if (animation.blockAI) {
+				Level.blockingAnimations.add(animation);
+			}
+		}
+	}
+
+	public Animation getSecondaryAnimation(int i) {
+		return this.secondaryAnimations.get(i);
 	}
 
 	public void doDamageAnimation(float healing, float offsetY, HIGH_LEVEL_STATS statType, float res) {
@@ -2164,7 +2179,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
-		this.secondaryAnimations
-				.add(new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f, statType, color));
+		this.addSecondaryAnimation(
+				new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f, statType, color));
+	}
+
+	public ArrayList<Animation> getSecondaryAnimations() {
+		return secondaryAnimations;
 	}
 }

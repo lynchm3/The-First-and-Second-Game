@@ -175,26 +175,26 @@ public class GameObjectExploder extends GameObject {
 		}
 	}
 
-	@Override
-	public void updateRealtime(int delta) {
-		super.update(delta);
-
-		for (int i = 0; trianglePieces != null && i < trianglePieces.length; i++) {
-
-			if (trianglePieces[i] == null)
-				continue;
-
-			trianglePieces[i].update();
-		}
-
-		for (int i = 0; squarePieces != null && i < squarePieces.length; i++) {
-
-			if (squarePieces[i] == null)
-				continue;
-			squarePieces[i].update();
-		}
-
-	}
+	// @Override
+	// public void updateRealtime(int delta) {
+	// super.update(delta);
+	//
+	// for (int i = 0; trianglePieces != null && i < trianglePieces.length; i++) {
+	//
+	// if (trianglePieces[i] == null)
+	// continue;
+	//
+	// trianglePieces[i].update();
+	// }
+	//
+	// for (int i = 0; squarePieces != null && i < squarePieces.length; i++) {
+	//
+	// if (squarePieces[i] == null)
+	// continue;
+	// squarePieces[i].update();
+	// }
+	//
+	// }
 
 	public class SquarePiece {
 		float x1;

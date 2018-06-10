@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationFlinch;
@@ -10,8 +11,10 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Liquid;
+import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -72,30 +75,40 @@ public class ActionAttack extends Action {
 			weapon = performer;
 		}
 
-		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			if (weapon.maxRange == 1) {
-				// performer.primaryAnimation = new AnimationSlash(performer,
-				// target);
+		if (weapon.maxRange == 1) {
+
+			// Melee weapons
+
+			if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 				performer.setPrimaryAnimation(new AnimationSlash(performer, target) {
 
 					@Override
 					public void runCompletionAlgorightm() {
 						super.runCompletionAlgorightm();
-						postAnimation();
+						postMeleeAnimation();
 					}
 				}
 
 				);
 			} else {
-				performer.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this) {
-
-					@Override
-					public void runCompletionAlgorightm() {
-						super.runCompletionAlgorightm();
-						postAnimation();
-					}
-				});
+				postMeleeAnimation();
 			}
+		} else {
+
+			// Ranged weapon
+
+			performer.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this) {
+
+				@Override
+				public void runCompletionAlgorightm() {
+					super.runCompletionAlgorightm();
+				}
+
+				@Override
+				public void arrowCallback() {
+					postRangedAnimation(this.arrow);
+				}
+			});
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
@@ -140,9 +153,9 @@ public class ActionAttack extends Action {
 			Game.level.endPlayerTurn();
 	}
 
-	public void postAnimation() {
+	public void postMeleeAnimation() {
 
-		if (weapon.maxRange == 1 && target.attackable) {
+		if (target.attackable) {
 			float damage = target.changeHealth(performer, ActionAttack.this, weapon);
 			String attackTypeString;
 			attackTypeString = "attacked ";
@@ -168,6 +181,63 @@ public class ActionAttack extends Action {
 					new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
 		}
 
+	}
+
+	public void postRangedAnimation(GameObject projectileObject) {
+
+		Square targetSquare = null;
+
+		if (target != null && target instanceof Actor)
+			target.setPrimaryAnimation(
+					new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
+		if (target != null)
+			target.showPow();
+		if (!(projectileObject instanceof Arrow)) {
+			if (target != null && target instanceof Searchable && projectileObject.canShareSquare) {
+				target.inventory.add(projectileObject);
+			} else {
+				targetSquare.inventory.add(projectileObject);
+			}
+			projectileObject.landed(performer, this);
+		} else if (target != null) {
+
+			// projectileObject.drawOffsetRatioX = (targetX -
+			// target.squareGameObjectIsOn.xInGridPixels)
+			// / Game.SQUARE_WIDTH;
+
+			// projectileObject.drawOffsetRatioY = (targetY -
+			// target.squareGameObjectIsOn.yInGridPixels)
+			// / Game.SQUARE_HEIGHT;
+
+			target.arrowsEmbeddedInThis.add((Arrow) projectileObject);
+		}
+
+		if (Level.player.inventory.groundDisplay != null)
+			Level.player.inventory.groundDisplay.refreshGameObjects();
+
+		// Carry out the dmg, attack, logging...
+		if (target != null && target.attackable) {
+			float damage = target.changeHealth(performer, this, weapon);
+			String attackTypeString;
+			attackTypeString = "attacked ";
+
+			if (performer.squareGameObjectIsOn.visibleToPlayer) {
+
+				if (weapon != performer) {
+					if (Game.level.shouldLog(target, performer))
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+								target, " with ", weapon, " for " + damage + " damage" }));
+				} else {
+					if (Game.level.shouldLog(target, performer))
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+								target, " for " + damage + " damage" }));
+				}
+			}
+
+			if (weapon instanceof ContainerForLiquids) {
+				smashContainer((ContainerForLiquids) weapon);
+			}
+		}
 	}
 
 	@Override
@@ -258,7 +328,7 @@ public class ActionAttack extends Action {
 			Liquid liquid = (Liquid) container.inventory.get(0);
 			for (GameObject gameObject : container.squareGameObjectIsOn.inventory.getGameObjects()) {
 				if (gameObject != container) {
-					// new ActionDouse(shooter, gameObject).perform();
+					// new ActionDouse(performer, gameObject).perform();
 					for (Effect effect : liquid.touchEffects) {
 						gameObject.addEffect(effect.makeCopy(performer, gameObject));
 						if (effect instanceof EffectWet)

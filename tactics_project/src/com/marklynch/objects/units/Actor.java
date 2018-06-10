@@ -220,6 +220,7 @@ public class Actor extends GameObject {
 		super();
 
 		primaryAnimation = new AnimationWait(this);
+		Level.animations.add(primaryAnimation);
 
 		canBePickedUp = false;
 
@@ -574,7 +575,7 @@ public class Actor extends GameObject {
 		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw1();
 
-		for (Animation secondaryAnimation : secondaryAnimations)
+		for (Animation secondaryAnimation : getSecondaryAnimations())
 			secondaryAnimation.draw1();
 
 		float alpha = 1.0f;
@@ -1611,30 +1612,34 @@ public class Actor extends GameObject {
 		equippedWeaponGUID = this.equipped.guid;
 	}
 
-	@Override
-	public void updateRealtime(int delta) {
-		super.updateRealtime(delta);
-
-		// START FISHING
-		if (fishingTarget != null && equipped instanceof FishingRod) {
-			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
-			if (primaryAnimation != null) {
-				actorPositionXInPixels += primaryAnimation.offsetX;
-				actorPositionYInPixels += primaryAnimation.offsetY;
-			}
-			int weaponPositionXInPixels = (int) (actorPositionXInPixels + rightArmHingeX - equipped.anchorX);
-			int weaponPositionYInPixels = (int) (actorPositionYInPixels + handY - equipped.anchorY);
-			FishingRod fishingRod = (FishingRod) equipped;
-			fishingRod.updateLine(this, weaponPositionXInPixels, weaponPositionYInPixels, delta);
-			if (this == Game.level.player) {
-				fishingRod.updateFishingMinigame(this, weaponPositionXInPixels, weaponPositionYInPixels, delta);
-			}
-		}
-		// END FISHING
-	}
+	// @Override
+	// public void updateRealtime(int delta) {
+	// super.updateRealtime(delta);
+	//
+	// // START FISHING
+	// if (fishingTarget != null && equipped instanceof FishingRod) {
+	// int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+	// + Game.SQUARE_WIDTH * drawOffsetRatioX);
+	// int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+	// + Game.SQUARE_HEIGHT * drawOffsetRatioY);
+	// if (primaryAnimation != null) {
+	// actorPositionXInPixels += primaryAnimation.offsetX;
+	// actorPositionYInPixels += primaryAnimation.offsetY;
+	// }
+	// int weaponPositionXInPixels = (int) (actorPositionXInPixels + rightArmHingeX
+	// - equipped.anchorX);
+	// int weaponPositionYInPixels = (int) (actorPositionYInPixels + handY -
+	// equipped.anchorY);
+	// FishingRod fishingRod = (FishingRod) equipped;
+	// fishingRod.updateLine(this, weaponPositionXInPixels, weaponPositionYInPixels,
+	// delta);
+	// if (this == Game.level.player) {
+	// fishingRod.updateFishingMinigame(this, weaponPositionXInPixels,
+	// weaponPositionYInPixels, delta);
+	// }
+	// }
+	// // END FISHING
+	// }
 
 	@Override
 	public void update(int delta) {
