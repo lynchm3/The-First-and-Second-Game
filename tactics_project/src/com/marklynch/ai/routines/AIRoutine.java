@@ -467,19 +467,6 @@ public abstract class AIRoutine {
 		if (this.actor.investigationsMap.size() == 0)
 			return false;
 
-		if (actor.name.contains("Farmer")) {
-			System.out.println(
-					"Farmer in runSearchRoutine, investigationmap.size() = " + this.actor.investigationsMap.size());
-			for (GameObject gameObject : actor.investigationsMap.keySet()) {
-				System.out.println("Farmer in runSearchRoutine, investigationmap " + gameObject + ", "
-						+ actor.investigationsMap.get(gameObject));
-				// System.out.println("Farmer in runSearchRoutine, investigationmap " +
-				// gameObject + ", "
-				// + actor.investigationsMap.get(gameObject).);
-
-			}
-		}
-
 		// Remove dead objects
 		// and remove gameObjects you can see from investigation list
 		// and remove out of bounds squares from investigation list

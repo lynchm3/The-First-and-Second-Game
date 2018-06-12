@@ -78,7 +78,6 @@ import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
-import com.marklynch.utils.Utils;
 
 public class Actor extends GameObject {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
@@ -2032,12 +2031,6 @@ public class Actor extends GameObject {
 	}
 
 	public void addInvestigation(GameObject actor, Square square, int priority) {
-		// TODO Auto-generated method stub
-
-		if (this.name.contains("Farmer")) {
-			System.out.println("Farmer addInvestigation");
-			Utils.printStackTrace();
-		}
 
 		Investigation existingInvestigation = this.investigationsMap.get(actor);
 		if (existingInvestigation == null) {

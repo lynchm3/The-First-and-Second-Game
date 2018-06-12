@@ -61,8 +61,6 @@ public abstract class AnimationShootArrow extends Animation {
 	@Override
 	public void update(double delta) {
 
-		System.out.println("animationSHootArrow.update()");
-
 		if (getCompleted())
 			return;
 		super.update(delta);
@@ -143,7 +141,6 @@ public abstract class AnimationShootArrow extends Animation {
 			leftElbowAngle = -temp;
 		}
 
-		System.out.println("progress = " + progress);
 		if (progress >= 1) {
 			// target.showPow();
 			rightShoulderAngle = 0;

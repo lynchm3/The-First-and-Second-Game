@@ -305,24 +305,24 @@ public class Level {
 		highlightRestrictedButton.enabled = true;
 		buttons.add(highlightRestrictedButton);
 
-		Button highlightOPathButton = new LevelButton(770f, 40f, 100f, 30f, "undo_button.png",
+		Button highlightPathButton = new LevelButton(770f, 40f, 100f, 30f, "undo_button.png",
 				"undo_button_disabled.png", "PATH SQRS", false, false, Color.BLACK, Color.WHITE,
 				"DEV - Highlight path");
-		highlightOPathButton.setClickListener(new ClickListener() {
+		highlightPathButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
 				Game.highlightPath = !Game.highlightPath;
 				if (Game.highlightPath == false) {
-					if (Game.level.player.playerPathToDraw != null) {
-						for (Square square : Game.level.player.playerPathToDraw.squares) {
+					if (Player.playerPathToDraw != null) {
+						for (Square square : Player.playerPathToDraw.squares) {
 							square.highlight = false;
 						}
 					}
 				}
 			}
 		});
-		highlightOPathButton.enabled = true;
-		buttons.add(highlightOPathButton);
+		highlightPathButton.enabled = true;
+		buttons.add(highlightPathButton);
 
 		Button cameraFollowButton = new LevelButton(880f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
 				"CAM FLLW", false, false, Color.BLACK, Color.WHITE,
@@ -988,25 +988,6 @@ public class Level {
 		if (gridY2Bounds >= height)
 			gridY2Bounds = height;
 
-		if (Game.highlightPath) {
-
-			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
-					squares[i][j].highlight = false;
-				}
-			}
-
-			for (Faction faction : factions) {
-				for (Actor actor : faction.actors) {
-					if (actor.path != null && actor.path.complete) {
-						for (Square square : actor.path.squares) {
-							square.highlight = true;
-						}
-					}
-				}
-			}
-		}
-
 		for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 				// is it better to bind once and draw all the same ones?
@@ -1458,17 +1439,6 @@ public class Level {
 	public void update(int delta) {
 		lastUpdate = System.currentTimeMillis();
 		addRemoveObjectToFromGround();
-
-		for (Animation blockingAnimation : blockingAnimations) {
-			System.out.println("blockingAnimation = " + blockingAnimation);
-			// this.blockingAnimations
-		}
-		System.out.println("animations.size() = " + animations.size());
-
-		for (Animation animation : animations) {
-			System.out.println("animation = " + animation);
-			// this.blockingAnimations
-		}
 
 		for (Animation animation : (ArrayList<Animation>) animations.clone()) {
 			animation.update(delta);

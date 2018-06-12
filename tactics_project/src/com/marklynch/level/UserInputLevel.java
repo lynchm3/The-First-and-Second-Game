@@ -236,19 +236,21 @@ public class UserInputLevel {
 			}
 		}
 
+		System.out.println("highlighPath?");
 		if (Game.highlightPath) {
+			System.out.println("highlighPath? yes");
 			// remove path highlight
-			if (Game.level.player.playerPathToDraw != null) {
-				for (Square square : Game.level.player.playerPathToDraw.squares) {
+			if (Player.playerPathToDraw != null) {
+				for (Square square : Player.playerPathToDraw.squares) {
 					square.highlight = false;
 				}
 			}
 
 			// Add path highlight
 			if (Game.squareMouseIsOver != null) {
-				Game.level.player.playerPathToDraw = Game.level.player.getPathTo(Game.squareMouseIsOver);
-				if (Game.level.player.playerPathToDraw != null) {
-					for (Square square : Game.level.player.playerPathToDraw.squares) {
+				Player.playerPathToDraw = Level.player.getPathTo(Game.squareMouseIsOver);
+				if (Player.playerPathToDraw != null) {
+					for (Square square : Level.player.playerPathToDraw.squares) {
 						square.highlight = true;
 					}
 				}
@@ -546,8 +548,6 @@ public class UserInputLevel {
 	// static boolean interactedThisTurn = false;
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
-
-		System.out.println("interactWith");
 
 		if (openMenu) {
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
@@ -899,8 +899,6 @@ public class UserInputLevel {
 
 			int x = Game.level.player.squareGameObjectIsOn.xInGrid + 1;
 			if (x < Game.level.squares.length) {
-
-				System.out.println("rightpressed, calling interactwith");
 				interactWith(Game.level.squares[x][Game.level.player.squareGameObjectIsOn.yInGrid], Keyboard.KEY_RIGHT,
 						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
 						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
