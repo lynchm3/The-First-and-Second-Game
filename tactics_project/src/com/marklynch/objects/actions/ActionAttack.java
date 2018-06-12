@@ -7,6 +7,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationFlinch;
 import com.marklynch.level.constructs.animation.primary.AnimationShootArrow;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
+import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -97,18 +98,45 @@ public class ActionAttack extends Action {
 
 			// Ranged weapon
 
-			performer.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this) {
+			if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
+				performer.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this) {
 
-				@Override
-				public void runCompletionAlgorightm() {
-					super.runCompletionAlgorightm();
-				}
+					// @Override
+					// public void runCompletionAlgorightm() {
+					// super.runCompletionAlgorightm();
+					// }
 
-				@Override
-				public void arrowCallback() {
-					postRangedAnimation(this.arrow);
-				}
-			});
+					@Override
+					public void arrowCallback() {
+						postRangedAnimation(this.arrow);
+					}
+
+					// AnimationThrown(String name, Actor shooter, Action action, GameObject
+					// targetGameObject, Square targetSquare,
+					// GameObject projectileObject, GameObject weapon, float speed, float
+					// rotationSpeed, boolean onTarget)
+
+					@Override
+					public void shootArrow() {
+
+						AnimationThrown animationThrown;
+						arrow = Templates.ARROW.makeCopy(null, null);
+						arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
+						arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
+						animationThrown = new AnimationThrown("Arrow", (Actor) performer, ActionAttack.this, target,
+								target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true) {
+							@Override
+							public void runCompletionAlgorightm() {
+								super.runCompletionAlgorightm();
+								postRangedAnimation(arrow);
+							}
+						};
+						performer.addSecondaryAnimation(animationThrown);
+					}
+				});
+			} else {
+				postRangedAnimation(Templates.ARROW.makeCopy(null, null));
+			}
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;

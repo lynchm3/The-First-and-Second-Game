@@ -5,7 +5,6 @@ import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
 public abstract class AnimationShootArrow extends Animation {
@@ -57,6 +56,7 @@ public abstract class AnimationShootArrow extends Animation {
 	}
 
 	public Arrow arrow;
+	boolean shotArrow;
 
 	@Override
 	public void update(double delta) {
@@ -108,20 +108,9 @@ public abstract class AnimationShootArrow extends Animation {
 
 		} else if (progress < 0.75f) {
 
-			if (animationThrown == null) {
-				arrow = Templates.ARROW.makeCopy(null, null);
-				arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
-				arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
-				animationThrown = new AnimationThrown("Arrow", (Actor) performer, action, target,
-						target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true) {
-					@Override
-					public void runCompletionAlgorightm() {
-						super.runCompletionAlgorightm();
-						arrowCallback();
-					}
-				};
-				performer.addSecondaryAnimation(animationThrown);
-
+			if (!shotArrow) {
+				shootArrow();
+				shotArrow = true;
 			}
 
 			bowStringHandleY = 0;
@@ -164,6 +153,10 @@ public abstract class AnimationShootArrow extends Animation {
 			runCompletionAlgorightm();
 		} else {
 		}
+
+	}
+
+	public void shootArrow() {
 
 	}
 
