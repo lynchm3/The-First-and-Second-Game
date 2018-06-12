@@ -178,7 +178,7 @@ public class Game {
 		game.start();
 	}
 
-	public boolean paused = false;
+	public boolean pausedUpdatesDisplayNotActive = false;
 	public static boolean displayActive = true;
 	public static int ticksSinceDisplayInactive = 0;
 
@@ -214,11 +214,11 @@ public class Game {
 			boolean wasActive = displayActive;
 
 			if (!Display.isActive()) {
-				paused = true;
-				displayActive = false;
+				// pausedUpdatesDisplayNotActive = true;
+				// displayActive = false;
 				ticksSinceDisplayInactive = 0;
 			} else {
-				paused = false;
+				pausedUpdatesDisplayNotActive = false;
 				displayActive = true;
 
 				if (ticksSinceDisplayInactive < 60)
@@ -232,7 +232,7 @@ public class Game {
 				resize();
 			}
 
-			if (!paused) {
+			if (!pausedUpdatesDisplayNotActive) {
 				// System.out.println("Game.includableInPath = " +
 				// Game.includableInPath);
 				// System.out.println("Game.findPath = " + Game.findPath);

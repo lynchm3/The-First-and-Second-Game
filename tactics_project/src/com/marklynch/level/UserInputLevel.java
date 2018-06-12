@@ -236,26 +236,37 @@ public class UserInputLevel {
 			}
 		}
 
-		System.out.println("highlighPath?");
 		if (Game.highlightPath) {
-			System.out.println("highlighPath? yes");
 			// remove path highlight
 			if (Player.playerPathToDraw != null) {
 				for (Square square : Player.playerPathToDraw.squares) {
-					square.highlight = false;
+					square.drawPathDot = false;
+					square.drawEndPathDot = false;
 				}
 			}
 
 			// Add path highlight
 			if (Game.squareMouseIsOver != null) {
 				Player.playerPathToDraw = Level.player.getPathTo(Game.squareMouseIsOver);
-				if (Player.playerPathToDraw != null) {
-					for (Square square : Level.player.playerPathToDraw.squares) {
-						square.highlight = true;
+				if (Player.playerPathToDraw.squares.size() > 0) {
+					if (Player.playerPathToDraw != null) {
+						for (Square square : Level.player.playerPathToDraw.squares) {
+							square.drawPathDot = true;
+						}
 					}
+					Player.playerPathToDraw.squares
+							.get(Player.playerPathToDraw.squares.size() - 1).drawEndPathDot = true;
 				}
 			}
 		}
+
+		// System.out.println("playerTargetSquare = " + Player.playerTargetSquare);
+		// if (Player.playerTargetSquare != null) {
+		// System.out.println("playerTargetSquare calling draw highlight");
+		// // Player.playerTargetSquare.drawX = true;
+		// // Player.pl.drawHighlight();
+		// // Player.playerTargetSquare.drawHighlight();
+		// }
 
 		// Clear path highlights
 		for (int i = 0; i < Game.level.width; i++) {

@@ -11,6 +11,7 @@ import java.util.UUID;
 import org.lwjgl.input.Keyboard;
 
 import com.marklynch.Game;
+import com.marklynch.GameCursor;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.area.Area;
@@ -111,6 +112,9 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public transient StructureRoom structureRoomSquareIsIn;
 
 	public boolean highlight = false;
+	public boolean drawPathDot = false;
+	public boolean drawEndPathDot = false;
+	// public boolean drawX = false;
 
 	public ArrayList<Actor> owners;
 	public boolean restricted;
@@ -290,6 +294,13 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		if (highlight) {
 			drawHighlight();
 		}
+		if (drawPathDot) {
+			drawPathDot();
+		}
+		if (drawEndPathDot) {
+			drawEndPathDot();
+		}
+
 		if (flash) {
 			drawHighlight();
 		}
@@ -298,9 +309,28 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public void drawHighlight() {
 
+		System.out.println("in drawHighlight");
 		float squarePositionX = xInGridPixels;
 		float squarePositionY = yInGridPixels;
 		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+
+	}
+
+	public void drawPathDot() {
+
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
+		TextureUtils.drawTexture(GameCursor.pathDot, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+
+	}
+
+	public void drawEndPathDot() {
+
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
+		TextureUtils.drawTexture(GameCursor.endPathDot, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
 	}
@@ -613,10 +643,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 			float squarePositionX = xInGridPixels;
 			float squarePositionY = yInGridPixels;
-			TextureUtils.drawTexture(Action.textureX, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
-					squarePositionY + Game.QUARTER_SQUARE_WIDTH,
-					squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
-					squarePositionY + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
+			TextureUtils.drawTexture(Action.textureX, squarePositionX, squarePositionY,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 		}
 
 	}
@@ -632,12 +660,15 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 			// float squarePositionX = xInGridPixels;
 			// float squarePositionY = yInGridPixels;
-			// TextureUtils.drawTexture(action.image, squarePositionX +
-			// Game.QUARTER_SQUARE_WIDTH,
-			// squarePositionY + Game.QUARTER_SQUARE_WIDTH,
-			// squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
-			// squarePositionY + Game.SQUARE_HEIGHT -
-			// Game.QUARTER_SQUARE_WIDTH);
+			// TextureUtils.drawTexture(action.image, squarePositionX, squarePositionY,
+			// squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+
+			float squarePositionX = xInGridPixels;
+			float squarePositionY = yInGridPixels;
+			TextureUtils.drawTexture(action.image, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
+					squarePositionY + Game.QUARTER_SQUARE_WIDTH,
+					squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
+					squarePositionY + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
 		}
 
 	}

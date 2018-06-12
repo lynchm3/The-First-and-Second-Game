@@ -315,7 +315,8 @@ public class Level {
 				if (Game.highlightPath == false) {
 					if (Player.playerPathToDraw != null) {
 						for (Square square : Player.playerPathToDraw.squares) {
-							square.highlight = false;
+							square.drawPathDot = false;
+							square.drawEndPathDot = false;
 						}
 					}
 				}
@@ -1070,6 +1071,13 @@ public class Level {
 
 		for (Structure structure : structures) {
 			structure.draw2();
+		}
+
+		if (Player.playerTargetSquare != null) {
+			if (Player.playerTargetAction != null)
+				Player.playerTargetSquare.drawAction(Player.playerTargetAction, false);
+			else
+				Player.playerTargetSquare.drawX(false);
 		}
 
 	}
