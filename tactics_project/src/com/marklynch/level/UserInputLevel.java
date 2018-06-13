@@ -238,8 +238,8 @@ public class UserInputLevel {
 
 		if (Game.highlightPath) {
 			// remove path highlight
-			if (Player.playerPathToDraw != null) {
-				for (Square square : Player.playerPathToDraw.squares) {
+			if (Player.playerPathToMouse != null) {
+				for (Square square : Player.playerPathToMouse.squares) {
 					square.drawPathDot = false;
 					square.drawEndPathDot = false;
 				}
@@ -247,26 +247,20 @@ public class UserInputLevel {
 
 			// Add path highlight
 			if (Game.squareMouseIsOver != null) {
-				Player.playerPathToDraw = Level.player.getPathTo(Game.squareMouseIsOver);
-				if (Player.playerPathToDraw.squares.size() > 0) {
-					if (Player.playerPathToDraw != null) {
-						for (Square square : Level.player.playerPathToDraw.squares) {
-							square.drawPathDot = true;
+				Player.playerPathToMouse = Level.player.getPathTo(Game.squareMouseIsOver);
+				if (Player.playerPathToMouse != null) {
+					if (Player.playerPathToMouse.squares.size() > 0) {
+						if (Player.playerPathToMouse != null) {
+							for (Square square : Level.player.playerPathToMouse.squares) {
+								square.drawPathDot = true;
+							}
 						}
+						Player.playerPathToMouse.squares
+								.get(Player.playerPathToMouse.squares.size() - 1).drawEndPathDot = true;
 					}
-					Player.playerPathToDraw.squares
-							.get(Player.playerPathToDraw.squares.size() - 1).drawEndPathDot = true;
 				}
 			}
 		}
-
-		// System.out.println("playerTargetSquare = " + Player.playerTargetSquare);
-		// if (Player.playerTargetSquare != null) {
-		// System.out.println("playerTargetSquare calling draw highlight");
-		// // Player.playerTargetSquare.drawX = true;
-		// // Player.pl.drawHighlight();
-		// // Player.playerTargetSquare.drawHighlight();
-		// }
 
 		// Clear path highlights
 		for (int i = 0; i < Game.level.width; i++) {
@@ -597,11 +591,8 @@ public class UserInputLevel {
 		}
 
 		if (action != null && !action.enabled) {
-			// System.out.println("enabled = false");
 			Game.level.addNotification(new Notification(new Object[] { action.disabledReason },
 					Notification.NotificationType.ACTION_DISABLED, null));
-			// new Toast(new Object[] { "NOPE" },
-			// Notification.NotificationType.MISC, null);
 
 			return;
 		}
@@ -615,7 +606,6 @@ public class UserInputLevel {
 			Player.playerTargetSquare = square;
 			if (!(Level.player.getPrimaryAnimation() instanceof AnimationWalk))
 				Player.playerFirstMove = true;
-			System.out.println("Set action and returned, playerTargetSquare = " + Level.player.playerTargetSquare);
 			return;
 		} else {
 			Level.closeAllPopups();
@@ -868,11 +858,6 @@ public class UserInputLevel {
 	}
 
 	public static void rightPressed(boolean allowMenuControl, boolean held) {
-		// System.out.println("rightpressed");
-		// if (Player.playerTargetSquare != null) {
-		// Game.level.pausePlayer();
-		// return;
-		// }
 
 		if (Level.activeTextBox != null) {
 			Level.activeTextBox.moveCaretRight();

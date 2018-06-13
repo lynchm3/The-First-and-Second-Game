@@ -40,10 +40,6 @@ public class Tree extends GameObject {
 	}
 
 	public void addApple(float sizeRatio) {
-
-		// float appleSizeRatio = (float) (Math.random() * sizeRatio);
-		// System.out.println("maxSizeRatio = " + sizeRatio);
-		// System.out.println("appleSizeRatio = " + appleSizeRatio);
 		Food apple = Templates.APPLE.makeCopy(null, null);
 
 		apple.widthRatio = sizeRatio;
@@ -171,8 +167,6 @@ public class Tree extends GameObject {
 		}
 
 		for (GameObject objectToDrop : objectsToDropRandomly) {
-			// System.out.println("Dropping apple @ " +
-			// this.squareGameObjectIsOn);
 			objectToDrop.drawOffsetRatioY = 1 - (objectToDrop.height / Game.SQUARE_HEIGHT);
 			new ActionDropItems(this, this.squareGameObjectIsOn, objectToDrop).perform();
 		}

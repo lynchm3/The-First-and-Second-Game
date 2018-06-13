@@ -448,10 +448,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				}
 			}
 
-			// System.out.println("this = " + this + "..." + this.getClass());
-
-			// GL11.glTexParameteri(target, pname, param);
-
 			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, boundsX1, boundsY1, boundsX2,
 					boundsY2, backwards, false);
@@ -469,8 +465,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				TextureUtils.drawTexture(Templates.WATER_BODY.imageTexture, alpha, actorPositionXInPixels,
 						actorPositionYInPixels, actorPositionXInPixels + width, actorPositionYInPixels + height,
 						backwards);
-
-				// squareGameObjectIsOn.inventory.getGameObjectOfClass(WaterBody.class).draw1();
 			}
 
 			for (Arrow arrow : arrowsEmbeddedInThis) {
@@ -994,10 +988,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (diggable) {
-			// System.out.println("digable");
 			Action action = new ActionDig(performer, this);
-			// System.out.println("action = " + action);
-			// System.out.println("action.enabled = " + action.enabled);
 			return action;
 		}
 
@@ -2005,8 +1996,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		GameObject gameObjectAttacker = null;
 		if (attacker instanceof GameObject)
 			gameObjectAttacker = (GameObject) attacker;
-		// System.out.println("damageDealer.bluntDamage = " + ((Actor)
-		// damageDealer).bluntDamage);
 
 		for (HIGH_LEVEL_STATS statType : Stat.OFFENSIVE_STATS) {
 			if (damageDealer.getEffectiveHighLevelStat(statType) != 0) {
@@ -2066,8 +2055,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		GameObject gameObjectAttacker = null;
 		if (attacker instanceof GameObject)
 			gameObjectAttacker = (GameObject) attacker;
-		// System.out.println("damageDealer.bluntDamage = " + ((Actor)
-		// damageDealer).bluntDamage);
 
 		float resistance = (this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(damage.type)).value
 				* 0.01f);

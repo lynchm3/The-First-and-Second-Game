@@ -233,20 +233,6 @@ public class Game {
 			}
 
 			if (!pausedUpdatesDisplayNotActive) {
-				// System.out.println("Game.includableInPath = " +
-				// Game.includableInPath);
-				// System.out.println("Game.findPath = " + Game.findPath);
-				// System.out.println("Game.constructPath = " +
-				// Game.constructPath);
-				// System.out.println("Game.getEstimatedCost = " +
-				// Game.getEstimatedCost);
-				// System.out.println("Game.straightLineDistanceTo = " +
-				// Game.straightLineDistanceTo);
-				// System.out.println(
-				// "Game.getAllNeighbourSquaresThatCanBeMovedTo = " +
-				// Game.getAllNeighbourSquaresThatCanBeMovedTo);
-				// System.out.println("Game.getNeighborsThatCanBeMovedTo = " +
-				// Game.getNeighborsThatCanBeMovedTo);
 
 				Game.includableInPath = 0;
 				Game.findPath = 0;

@@ -104,12 +104,10 @@ public class Vein extends Wall {
 	//
 	// @Override
 	// public void draw1() {
-	// System.out.println("draw1");
 	//
 	// if (this.remainingHealth <= 0)
 	// return;
 	//
-	// System.out.println("textureFullWall = " + textureFullWall);
 	// TextureUtils.drawTexture(textureFullWall, 1f, drawX1, drawY1, drawX2,
 	// drawY2);
 	//

@@ -40,20 +40,6 @@ public class PowerTeleportOther extends Power {
 			return;
 		}
 
-		// System.out.println("TELEPORT POWA CAST");
-
-		//
-		// System.out.println("objectToTeleport = " + objectToTeleport);
-		//
-		// ActionTeleportOther actionTeleportOther =
-		//
-		// new ActionTeleportOther(source, objectToTeleport);
-		//
-		// System.out.println("actionTeleportOther.enabled = " +
-		// actionTeleportOther.enabled);
-		//
-		// actionTeleportOther.perform();
-
 		Level.levelMode = LevelMode.LEVEL_SELECT_TELEPORT_SQUARE;
 		Level.teleportee = objectToTeleport;
 	}

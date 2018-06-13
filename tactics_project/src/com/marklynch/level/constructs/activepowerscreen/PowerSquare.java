@@ -123,7 +123,6 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 
 		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
 			if (quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
-				// System.out.println("overlap!!");
 				// quickBarSquare.tempSwap = this;
 			} else {
 				// quickBarSquare.tempSwap = null;

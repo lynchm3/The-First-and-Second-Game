@@ -357,7 +357,7 @@ public class Actor extends GameObject {
 
 		if (this.squareGameObjectIsOn.node != null) {
 			lastNodeReached = this.squareGameObjectIsOn.node;
-		} else if (lastPathTarget != target) {
+		} else if (lastNodeReached == null || lastPathTarget != target) {
 			int closestNodeDistance = Integer.MAX_VALUE;
 			for (Node node : this.squareGameObjectIsOn.nodes) {
 				int tempDistance = straightLineDistanceBetween(this.squareGameObjectIsOn, node.square);
@@ -432,16 +432,6 @@ public class Actor extends GameObject {
 			}
 
 			AIPath path = new AIPath(squarePath, squarePath.size(), completePath);
-
-			// if (completePath == false &&
-			// straightLineDistanceBetween(this.squareGameObjectIsOn, target) <
-			// 30) {
-			//
-			// if (Game.level.activeActor.name.contains("Fisher")) {
-			// System.out.println("path return null D");
-			// }
-			// return null;
-			// }
 
 			return path;
 		}

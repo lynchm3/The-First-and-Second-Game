@@ -100,7 +100,6 @@ public class TextureUtils {
 		}
 
 		// Colors everything white
-		// System.out.println("color.red(); = " + color.red());
 		// Game.activeBatch.setColor(255, 255, 255, alpha);
 
 		// all green
@@ -113,7 +112,6 @@ public class TextureUtils {
 		// Game.activeBatch.setColor(Color.WHITE);
 
 		// neutral - 1,1,1
-		// color.System.out.println("neutralColor = " + neutralColor);
 
 		// Gives proper color... i'm so fucking confused
 		Game.activeBatch.setColor(color.r, color.g, color.b, alpha);// gives all

@@ -394,10 +394,7 @@ public class SkillTreeNode extends LevelButton {
 
 			for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
 				if (quickBarSquare.calculateIfPointInBoundsOfButton(centerX, centerY)) {
-					// System.out.println("overlap!!");
-					// quickBarSquare.tempSwap = this;
 				} else {
-					// quickBarSquare.tempSwap = null;
 				}
 			}
 		}

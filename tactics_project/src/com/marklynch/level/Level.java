@@ -313,8 +313,8 @@ public class Level {
 			public void click() {
 				Game.highlightPath = !Game.highlightPath;
 				if (Game.highlightPath == false) {
-					if (Player.playerPathToDraw != null) {
-						for (Square square : Player.playerPathToDraw.squares) {
+					if (Player.playerPathToMouse != null) {
+						for (Square square : Player.playerPathToMouse.squares) {
 							square.drawPathDot = false;
 							square.drawEndPathDot = false;
 						}
@@ -866,101 +866,6 @@ public class Level {
 				squares[i][j] = new Square(i, j, "grass.png", Square.GRASS_TEXTURE, 1, 0, new SquareInventory(), false);
 			}
 		}
-
-		// Attempt to thread below
-
-		// int sectorSize = width / 4;
-		//
-		// final int start1 = 0;
-		// final int end1 = start1 + sectorSize;
-		// final int start2 = end1;
-		// final int end2 = start2 + sectorSize;
-		// final int start3 = end2;
-		// final int end3 = start3 + sectorSize;
-		// final int start4 = end3;
-		// final int end4 = width;
-		//
-		//
-		//
-		// InventorySquare.imageTexture = getGlobalImage("dialogbg.png");
-		// final Texture grassTexture = getGlobalImage("grass.png");
-		//
-		// Thread thread1 = new Thread() {
-		// @Override
-		// public void run() {
-		// System.out.println("Thread1 start");
-		//
-		// for (int i = start1; i < end1; i++) {
-		// for (int j = 0; j < height; j++) {
-		// // System.out.println("Thread1 i = " + i + ", j = " +
-		// // j);
-		// squares[i][j] = new Square(i, j, "grass.png", grassTexture, 1, 0, new
-		// SquareInventory(), false);
-		// }
-		// }
-		// System.out.println("Thread1 end");
-		//
-		// }
-		// };
-		// thread1.start();
-		//
-		// Thread thread2 = new Thread() {
-		// @Override
-		// public void run() {
-		//
-		// for (int i = start2; i < end2; i++) {
-		// for (int j = 0; j < height; j++) {
-		// squares[i][j] = new Square(i, j, "grass.png", grassTexture, 1, 0, new
-		// SquareInventory(), false);
-		// }
-		// }
-		// System.out.println("Thread2 end");
-		//
-		// }
-		// };
-		// thread2.start();
-		//
-		// Thread thread3 = new Thread() {
-		// @Override
-		// public void run() {
-		//
-		// for (int i = start3; i < end3; i++) {
-		// for (int j = 0; j < height; j++) {
-		// squares[i][j] = new Square(i, j, "grass.png", grassTexture, 1, 0, new
-		// SquareInventory(), false);
-		// }
-		// }
-		// System.out.println("Thread3 end");
-		//
-		// }
-		// };
-		// thread3.start();
-		//
-		// Thread thread4 = new Thread() {
-		// @Override
-		// public void run() {
-		//
-		// for (int i = start4; i < end4; i++) {
-		// for (int j = 0; j < height; j++) {
-		// squares[i][j] = new Square(i, j, "grass.png", grassTexture, 1, 0, new
-		// SquareInventory(), false);
-		// }
-		// }
-		// System.out.println("Thread4 end");
-		//
-		// }
-		// };
-		// thread4.start();
-		//
-		// try {
-		// Thread.sleep(3000);
-		// // thread1.join();
-		// // thread2.join();
-		// // thread3.join();
-		// // thread4.join();
-		// } catch (InterruptedException e) {
-		// e.printStackTrace();
-		// }
 	}
 
 	public static int gridX1Bounds;
@@ -1587,7 +1492,6 @@ public class Level {
 
 		if (aiTurn) {
 			float amountOfAiToUpdate = actors.size() * ((float) delta / (float) timeToMoveAll);
-			// System.out.println("amountOfAiToUpdate = " + amountOfAiToUpdate);
 			int start = lastActorUpdatedIndex + 1;
 			int end = (int) (start + amountOfAiToUpdate);
 			if (end >= actors.size())

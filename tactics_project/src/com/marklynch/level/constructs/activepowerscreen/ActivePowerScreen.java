@@ -91,10 +91,6 @@ public class ActivePowerScreen implements Draggable, Scrollable {
 
 	@Override
 	public void scroll(float dragX, float dragY) {
-		// System.out.println("SKILL TREE . SCROLL");
-		// drag(dragX, dragY);
-
-		// zooming buttons? fuck...
 	}
 
 	@Override

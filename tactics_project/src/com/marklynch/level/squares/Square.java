@@ -308,8 +308,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	}
 
 	public void drawHighlight() {
-
-		System.out.println("in drawHighlight");
 		float squarePositionX = xInGridPixels;
 		float squarePositionY = yInGridPixels;
 		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
@@ -548,33 +546,15 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		} else {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
 				action = this.getAttackActionForTheSquareOrObject(Game.level.player, false);
-				// if (action == null || !action.enabled) {
-				// action =
-				// this.getDefaultActionPerformedOnThisInWorld(Game.level.player);
-				// }
+
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				action = this.getSecondaryActionForTheSquareOrObject(Game.level.player, false);
-				// if (action == null || !action.enabled) {
-				// action =
-				// this.getSecondaryActionPerformedOnThisInWorld(Game.level.player);
-				// }
+
 			} else {
 				action = this.getDefaultActionForTheSquareOrObject(Game.level.player, false);
-				// System.out.println("action @ a = " + action);
-				// if (action != null)
-				// System.out.println("action.enabled @ b = " + action.enabled);
-				// if (!action.enabled) {
-				// System.out.println("getting new");
-				// action =
-				// this.getDefaultActionPerformedOnThisInWorld(Game.level.player);
-				// }
-				// System.out.println("action @ c = " + action);
-				// if (action != null)
-				// System.out.println("action.enabled @ d = " + action.enabled);
+
 			}
 
-			// System.out.println("action = " + action);
-			// System.out.println("action.enabled = " + action.enabled);
 			if (action != null && action.image != null) {
 				Color color = Color.WHITE;
 
@@ -592,20 +572,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 							Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16, color);
 				} else {
 
-					// if (action instanceof ActionMove && action.legal)
-					// return action;
-					//
-					// if (action instanceof ActionWait && action.legal)
-					// return action;
-					//
-					// float squarePositionX = xInGridPixels;
-					// float squarePositionY = yInGridPixels;
-					// TextureUtils.drawTexture(action.image, squarePositionX +
-					// Game.SQUARE_WIDTH - 48,
-					// squarePositionY + Game.SQUARE_HEIGHT - 48,
-					// squarePositionX +
-					// Game.SQUARE_WIDTH - 16,
-					// squarePositionY + Game.SQUARE_HEIGHT - 16, color);
 				}
 			}
 		}
@@ -1173,7 +1139,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		if (inventory.contains(BrokenGlass.class))
 			costForPlayer = 9;
 		else if (this.imageTexture == Square.STONE_TEXTURE) {
-			// System.out.println("STONE TEXTURE!!!!");
 			costForPlayer = 1;
 			// } else if (this.imageTexture == Square.WATER_TEXTURE) {
 			// cost = 5;

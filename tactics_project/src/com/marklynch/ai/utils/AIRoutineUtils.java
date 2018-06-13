@@ -131,11 +131,6 @@ public class AIRoutineUtils {
 			boolean mustContainObjects, boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumGoldValue,
 			boolean REMOVETHIS, boolean actorsAlive, Class... types) {
 
-		// if (Game.level.activeActor.name.contains("Farmer")) {
-		// System.out.println("getNearest");
-		//
-		// }
-
 		if (maxDistance > Game.level.width + Game.level.height) {
 			maxDistance = Game.level.width + Game.level.height;
 		}
@@ -155,19 +150,7 @@ public class AIRoutineUtils {
 
 		objects.sort(AIRoutineUtils.sortByStraightLineDistance);
 
-		// if (Game.level.activeActor.name.contains("Farmer")) {
-		// System.out.println("After sort");
-		// System.out.println("objects.size() = " + objects.size());
-		// for (GameObject g : objects) {
-		// System.out.println("g = " + g);
-		// }
-		// }
-
 		for (GameObject object : objects) {
-
-			// if (Game.level.activeActor.name.contains("Farmer")) {
-			// System.out.println("object to check = " + object);
-			// }
 
 			int straightLineDistance = Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn);
 			if (straightLineDistance <= maxDistance) {
@@ -326,8 +309,8 @@ public class AIRoutineUtils {
 	}
 
 	public static boolean passesChecks(GameObject gameObject, boolean fitsInInventory, boolean mustContainsObjects,
-			boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue, boolean actorsAlive,
-			Class[] classes, boolean DOESNOTHING) {
+			boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue, boolean actorsAlive, Class[] classes,
+			boolean DOESNOTHING) {
 
 		if (Game.level.activeActor.aiRoutine.ignoreList.contains(gameObject))
 			return false;
@@ -732,7 +715,11 @@ public class AIRoutineUtils {
 	}
 
 	public static Square getRandomSquareInRoom(StructureRoom room) {
-		return room.squares.get(new Random().nextInt(room.squares.size()));
+
+		Square potentialSquare = room.squares.get(new Random().nextInt(room.squares.size()));
+		if (potentialSquare.inventory.canShareSquare)
+			return potentialSquare;
+		return null;
 	}
 
 	public static Square getRandomSquareInStructureSection(StructureSection structureSection) {
@@ -766,8 +753,10 @@ public class AIRoutineUtils {
 			}
 
 		}
-
-		return Game.level.squares[randomX][randomY];
+		Square potentialSquare = Game.level.squares[randomX][randomY];
+		if (potentialSquare.inventory.canShareSquare)
+			return potentialSquare;
+		return null;
 	}
 
 	// public static Comparator<Actor> sortAttackers = new Comparator<Actor>() {

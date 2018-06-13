@@ -38,7 +38,7 @@ public class Player extends Human {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	public static AIPath playerPathToDraw = null;
+	public static AIPath playerPathToMouse = null;
 	public static AIPath playerPathToMove = null;
 	public static Square playerTargetSquare = null;
 	public static Actor playerTargetActor = null;

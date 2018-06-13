@@ -45,14 +45,8 @@ public class AreaTownForest {
 			if (Level.squares[randomX][randomY].inventory.getGameObjectOfClass(Tree.class) == null) {
 				if ((Math.abs(randomX - centerX) + Math.random() * 10) < 25
 						&& (Math.abs(randomY - centerY) + Math.random() * 10) < 25) {
-					// System.out.println(
-					// "Templates.BIG_TREE.makeCopy(Level.squares[" +
-					// randomX + "][" + randomY + "], null);");
 					Templates.BIG_TREE.makeCopy(Level.squares[randomX][randomY], null);
 				} else {
-					// System.out.println(
-					// "Templates.TREE.makeCopy(Level.squares[" + randomX +
-					// "][" + randomY + "], null);");
 					Templates.TREE.makeCopy(Level.squares[randomX][randomY], null);
 				}
 			}

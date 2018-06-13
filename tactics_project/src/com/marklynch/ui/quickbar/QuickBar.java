@@ -57,33 +57,6 @@ public class QuickBar {
 
 	}
 
-	//
-	// @Override
-	// public void scroll(float dragX, float dragY) {
-	// // System.out.println("SKILL TREE . SCROLL");
-	// // drag(dragX, dragY);
-	//
-	// // zooming buttons? fuck...
-	// }
-	//
-	// @Override
-	// public void drag(float dragX, float dragY) {
-	//
-	// // this.offsetX -= dragX;
-	// // this.offsetY -= dragY;
-	//
-	// // System.out.println("SKILL TREE . DRAG");
-	//
-	// // for (SkillTreeNode skillTreeNode : skillTreeNodes) {
-	// //
-	// // skillTreeNode.updatePosition(skillTreeNode.x + dragX, skillTreeNode.y -
-	// // dragY);
-	// // }
-	//
-	// // fixScroll();
-	// // resize2();
-	// }
-
 	// int y = 0;
 	// int width = 1920;
 	// int height = 128;

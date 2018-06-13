@@ -98,6 +98,12 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (state == STATE.SHOPKEEPING)
 
 		{
+
+			if (actor.name.equals("Trader Joe")) {
+				System.out.println("state == STATE.SHOPKEEPING");
+				System.out.println("targetSquare = " + targetSquare);
+			}
+
 			actor.thoughtBubbleImageTextureObject = Templates.GOLD.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOPKEEPING;
 			if (!trader.isPlayerInTheShop() && trader.getTextForSign() != null)
@@ -123,6 +129,10 @@ public class AIRoutineForTrader extends AIRoutine {
 
 		// Shopkeeper AI 2 - update sign
 		if (state == STATE.UPDATING_SIGN) {
+
+			if (actor.name.equals("Trader Joe")) {
+				System.out.println("state == STATE.UPDATING_SIGN");
+			}
 			Object[] textForSign = trader.getTextForSign();
 			if (textForSign == null) {
 				state = STATE.SHOPKEEPING;
@@ -139,6 +149,11 @@ public class AIRoutineForTrader extends AIRoutine {
 		}
 
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+
+			if (actor.name.equals("Trader Joe")) {
+				System.out.println("state == STATE.GO_TO_BED_AND_GO_TO_SLEEP");
+
+			}
 			actor.thoughtBubbleImageTextureObject = Templates.BED.imageTexture;
 
 			goToBedAndSleep();
