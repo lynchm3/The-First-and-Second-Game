@@ -67,6 +67,7 @@ import com.marklynch.ui.popups.PopupMenuSelectObject;
 import com.marklynch.ui.quickbar.QuickBar;
 import com.marklynch.ui.quickbar.QuickBarSquare;
 import com.marklynch.utils.Color;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
@@ -124,6 +125,7 @@ public class Level {
 	public ArrayList<PopupMenuSelectObject> popupMenuObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
 	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
+	public Color popUpMenuOverlayColor = new Color(0f, 0f, 0f, 0.5f);
 	static FullScreenTextBox fullScreenTextBox = null;
 	public static TextBox activeTextBox = null;
 	public ArrayList<Notification> notifications = new ArrayList<Notification>();
@@ -1314,6 +1316,10 @@ public class Level {
 
 		for (PopupMenu popupTooltip : popupMenuHighlightObjects) {
 			popupTooltip.draw();
+		}
+
+		if (popupMenuObjects.size() > 0 || popupMenuActions.size() > 0) {
+			QuadUtils.drawQuad(popUpMenuOverlayColor, 0, 0, Game.windowWidth, Game.windowHeight);
 		}
 
 		for (PopupMenu popup : popupMenuObjects) {
