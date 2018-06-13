@@ -26,6 +26,7 @@ public class Node implements Comparable<Node> {
 	public ArrayList<Node> neighbors = new ArrayList<Node>();
 
 	public HashMap<Node, Integer> costToNeighbors;
+	public ArrayList<Square> squares = new ArrayList<Square>();
 	// end path finding
 
 	public Node(String name, Square square) {
@@ -82,6 +83,12 @@ public class Node implements Comparable<Node> {
 
 	public boolean includableInPath(Actor actor, Square goalSquare) {
 		return this.square.includableInPath(actor, goalSquare, true);
+	}
+
+	public void addSquare(Square square) {
+		if (!squares.contains(square)) {
+			squares.add(square);
+		}
 	}
 
 	// public void calculateDistanceToNeighbours() {

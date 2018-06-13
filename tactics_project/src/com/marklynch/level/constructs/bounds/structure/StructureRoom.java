@@ -62,6 +62,9 @@ public class StructureRoom {
 
 		for (Square square : squares) {
 			square.nodes = this.nodes;
+			for (Node node : this.nodes) {
+				node.addSquare(square);
+			}
 		}
 
 	}

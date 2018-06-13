@@ -52,6 +52,9 @@ public class Area {
 				Level.squares[i][j].areaSquareIsIn = this;
 				Level.squares[i][j].imageTexture = squareTexture;
 				Level.squares[i][j].nodes = this.nodes;
+				for (Node node : this.nodes) {
+					node.addSquare(Level.squares[i][j]);
+				}
 
 			}
 		}

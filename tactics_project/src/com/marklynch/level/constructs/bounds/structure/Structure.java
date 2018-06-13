@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
+import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionSpot;
@@ -69,6 +70,9 @@ public class Structure {
 			floorSquares.add(feature.gameObject.squareGameObjectIsOn);
 			featureSquares.add(feature.gameObject.squareGameObjectIsOn);
 			feature.gameObject.squareGameObjectIsOn.nodes = feature.nodes;
+			for (Node node : feature.nodes) {
+				node.addSquare(feature.gameObject.squareGameObjectIsOn);
+			}
 		}
 
 		// Floor squares

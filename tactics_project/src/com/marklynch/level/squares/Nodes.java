@@ -9,7 +9,7 @@ import com.marklynch.utils.QuadUtils;
 
 public class Nodes {
 
-	static ArrayList<Node> nodes = new ArrayList<Node>();
+	public static ArrayList<Node> nodes = new ArrayList<Node>();
 	// Town
 	public static Node townShopInner; // 11,4
 	public static Node townShopOuter; // 5,4

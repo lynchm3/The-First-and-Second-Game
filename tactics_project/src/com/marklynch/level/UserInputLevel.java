@@ -7,6 +7,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -103,6 +104,8 @@ public class UserInputLevel {
 
 	public static float mouseXTransformed = 0;
 	public static float mouseYTransformed = 0;
+
+	public static ArrayList<Square> nodeHighlights = new ArrayList<Square>();
 
 	public static void userInput(int delta2) {
 		if (Game.ticksSinceDisplayInactive < 10)
@@ -236,6 +239,20 @@ public class UserInputLevel {
 			}
 		}
 
+		// highlight sqrs for node ur hovering over
+
+		for (Square square : nodeHighlights) {
+			square.highlight = false;
+		}
+		nodeHighlights.clear();
+		if (Game.squareMouseIsOver != null && Game.squareMouseIsOver.node != null) {
+			for (Square square : Game.squareMouseIsOver.node.squares) {
+				square.highlight = true;
+				nodeHighlights.add(square);
+			}
+		}
+
+		// highlight path
 		if (Game.highlightPath) {
 			// remove path highlight
 			if (Player.playerPathToMouse != null) {
@@ -251,7 +268,7 @@ public class UserInputLevel {
 			if (Game.gameObjectMouseIsOver != null && Game.gameObjectMouseIsOver.squareGameObjectIsOn != null
 					&& !(Game.gameObjectMouseIsOver.squareGameObjectIsOn instanceof InventorySquare)) {
 				Player.playerPathToMouse = Level.player.getPathTo(Game.gameObjectMouseIsOver.squareGameObjectIsOn);
-			} else if (Game.squareMouseIsOver != null) {
+			} else if (Game.squareMouseIsOver != null && !(Game.squareMouseIsOver instanceof InventorySquare)) {
 				Player.playerPathToMouse = Level.player.getPathTo(Game.squareMouseIsOver);
 			}
 
