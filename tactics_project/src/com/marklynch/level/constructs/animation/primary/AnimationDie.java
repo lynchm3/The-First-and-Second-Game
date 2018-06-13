@@ -15,7 +15,11 @@ public class AnimationDie extends Animation {
 		// durationToReach = 400;
 		blockAI = true;
 
-		if (Math.random() >= 0.5) {
+		if (!(performer instanceof Human)) {
+			targetOffsetX = 0f;
+			targetOffsetY = 0f;
+			targetTorsoAngle = 1.57f;
+		} else if (Math.random() >= 0.5) {
 			targetOffsetX = (float) ((0f) - Math.random() * 16f);
 			targetTorsoAngle = 1.57f;
 		} else {
@@ -36,6 +40,7 @@ public class AnimationDie extends Animation {
 		if (!(performer instanceof Human)) {
 			torsoAngle = 3.14f;
 			runCompletionAlgorightm();
+			return;
 		}
 
 		durationSoFar += delta;

@@ -397,6 +397,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (primaryAnimation != null) {
 				torsoAngle = primaryAnimation.torsoAngle;
 			}
+			if (name.contains("Bun")) {
+				System.out.println("Bun primaryAnimation = " + primaryAnimation);
+				System.out.println("Bun torsoAngle = " + torsoAngle);
+			}
 
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 			Game.flush();
