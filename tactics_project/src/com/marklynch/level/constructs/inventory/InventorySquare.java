@@ -119,8 +119,8 @@ public class InventorySquare extends Square {
 						yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 
 				TextUtils.printTextWithImages(xInPixels + Game.INVENTORY_SQUARE_WIDTH - goldTextLength - 10,
-						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27, Integer.MAX_VALUE, false, null,
-						Color.WHITE, new Object[] { goldTextStringWithColor });
+						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27, Integer.MAX_VALUE, false, null, Color.WHITE,
+						new Object[] { goldTextStringWithColor });
 
 				TextureUtils.drawTexture(Inventory.textureGold,
 						xInPixels + Game.INVENTORY_SQUARE_WIDTH - goldTextLength - 10 - 16,
@@ -212,6 +212,7 @@ public class InventorySquare extends Square {
 
 	@Override
 	public Action getDefaultActionForTheSquareOrObject(Actor performer, boolean keyPress) {
+		System.out.println("getDefaultActionForTheSquareOrObject");
 		GameObject targetGameObject = this.stack.get(0);
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultActionPerformedOnThisInInventory(performer);

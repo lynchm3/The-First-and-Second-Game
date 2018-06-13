@@ -189,6 +189,8 @@ public class AIRoutineForBlind extends AIRoutine {
 			return;
 
 		// Move around room
+		if (targetSquare != null && targetSquare.inventory.canShareSquare == false)
+			targetSquare = null;
 		if (targetSquare != null) {
 			boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			if (blind.squareGameObjectIsOn == targetSquare || moved == false)

@@ -69,6 +69,9 @@ public class AIRoutineForRockGolem extends AIRoutine {
 			return;
 
 		// Move around room
+
+		if (targetSquare != null && targetSquare.inventory.canShareSquare == false)
+			targetSquare = null;
 		if (targetSquare != null) {
 			boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			if (rockGolem.squareGameObjectIsOn == targetSquare || !moved)

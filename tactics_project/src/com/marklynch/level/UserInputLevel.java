@@ -557,6 +557,7 @@ public class UserInputLevel {
 	// static boolean interactedThisTurn = false;
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
+		System.out.println("interactWith");
 
 		if (openMenu) {
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
@@ -593,6 +594,7 @@ public class UserInputLevel {
 				action = square.getDefaultActionForTheSquareOrObject(Game.level.player, key != -1);
 			}
 		}
+		System.out.println("interactWith action = " + action);
 
 		if (action != null && !action.enabled) {
 			Game.level.addNotification(new Notification(new Object[] { action.disabledReason },
@@ -601,8 +603,9 @@ public class UserInputLevel {
 			return;
 		}
 
-		//
-		if (action != null && !(square instanceof InventorySquare)) {
+		if (action != null && (square instanceof InventorySquare)) {
+			action.perform();
+		} else if (action != null && !(square instanceof InventorySquare)) {
 			if (Game.level.settingFollowPlayer && Game.level.player.onScreen()) {
 				Game.level.cameraFollow = true;
 			}
@@ -632,25 +635,6 @@ public class UserInputLevel {
 			}
 
 		}
-
-		// if (action != null) {
-		//
-		// action.perform();
-		//
-		// if (action.movement && action.enabled) {
-		//
-		// if (key == Keyboard.KEY_UP) {
-		// Level.wHasBeenPressed = true;
-		// } else if (key == Keyboard.KEY_DOWN) {
-		// Level.sHasBeenPressed = true;
-		// } else if (key == Keyboard.KEY_LEFT) {
-		// Level.aHasBeenPressed = true;
-		// } else if (key == Keyboard.KEY_RIGHT) {
-		// Level.dHasBeenPressed = true;
-		// }
-		//
-		// }
-		// } else {
 
 	}
 

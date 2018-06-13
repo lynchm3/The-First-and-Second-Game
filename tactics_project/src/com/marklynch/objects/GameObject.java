@@ -1373,9 +1373,16 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	@Override
 	public Action getDefaultActionPerformedOnThisInInventory(Actor performer) {
 
+		System.out.println("getDefaultActionPerformedOnThisInInventory");
+
+		System.out.println(
+				"getDefaultActionPerformedOnThisInInventory Inventory.inventoryMode = " + Inventory.inventoryMode);
+
 		if (this.inventoryThatHoldsThisObject == null) {
 			return null;
 		}
+
+		System.out.println("getDefaultActionPerformedOnThisInInventory a");
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			if (this instanceof ContainerForLiquids)
@@ -1406,6 +1413,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			else if (Inventory.target instanceof GameObject)
 				return new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this);
 		}
+		System.out.println("getDefaultActionPerformedOnThisInInventory b");
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory)

@@ -98,12 +98,6 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (state == STATE.SHOPKEEPING)
 
 		{
-
-			if (actor.name.equals("Trader Joe")) {
-				System.out.println("state == STATE.SHOPKEEPING");
-				System.out.println("targetSquare = " + targetSquare);
-			}
-
 			actor.thoughtBubbleImageTextureObject = Templates.GOLD.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOPKEEPING;
 			if (!trader.isPlayerInTheShop() && trader.getTextForSign() != null)
@@ -111,6 +105,9 @@ public class AIRoutineForTrader extends AIRoutine {
 			else {
 				if (trader.equipped != trader.broom && trader.inventory.contains(trader.broom))
 					trader.equip(trader.broom);
+
+				if (targetSquare != null && targetSquare.inventory.canShareSquare == false)
+					targetSquare = null;
 				if (targetSquare != null) {
 					boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 					if (trader.squareGameObjectIsOn == targetSquare || !moved)
