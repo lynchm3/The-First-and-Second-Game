@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Human;
 
 public class AnimationDie extends Animation {
 
@@ -31,6 +32,11 @@ public class AnimationDie extends Animation {
 		if (getCompleted())
 			return;
 		super.update(delta);
+
+		if (!(performer instanceof Human)) {
+			torsoAngle = 3.14f;
+			runCompletionAlgorightm();
+		}
 
 		durationSoFar += delta;
 		// double progress = durationSoFar / durationToReach;

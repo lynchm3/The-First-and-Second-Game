@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
@@ -390,6 +393,18 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
+			float torsoAngle = 0;
+			if (primaryAnimation != null) {
+				torsoAngle = primaryAnimation.torsoAngle;
+			}
+
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+			Game.flush();
+			view.translate(new Vector2f(actorPositionXInPixels + halfWidth, actorPositionYInPixels + halfHeight));
+			view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-(actorPositionXInPixels + halfWidth), -(actorPositionYInPixels + halfHeight)));
+			Game.activeBatch.updateUniforms();
+
 			float boundsX1 = actorPositionXInPixels;
 			float boundsY1 = actorPositionYInPixels;
 			float boundsX2 = actorPositionXInPixels + width;
@@ -532,6 +547,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 						actorPositionYInPixels + healthBarHeightInPixels - 1);
 			}
 
+			Game.flush();
+			view.translate(new Vector2f(actorPositionXInPixels + halfWidth, actorPositionYInPixels + halfHeight));
+			view.rotate(-torsoAngle, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-(actorPositionXInPixels + halfWidth), -(actorPositionYInPixels + halfHeight)));
 			Game.flush();
 		}
 	}

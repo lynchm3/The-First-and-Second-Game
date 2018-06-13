@@ -205,8 +205,9 @@ public class ActionAttack extends Action {
 				smashContainer((ContainerForLiquids) weapon);
 			}
 
-			target.setPrimaryAnimation(
-					new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
+			if (target.remainingHealth > 0)
+				target.setPrimaryAnimation(
+						new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
 		}
 
 	}
@@ -215,9 +216,6 @@ public class ActionAttack extends Action {
 
 		Square targetSquare = null;
 
-		if (target != null && target instanceof Actor)
-			target.setPrimaryAnimation(
-					new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
 		if (target != null)
 			target.showPow();
 		if (!(projectileObject instanceof Arrow)) {
@@ -265,6 +263,10 @@ public class ActionAttack extends Action {
 			if (weapon instanceof ContainerForLiquids) {
 				smashContainer((ContainerForLiquids) weapon);
 			}
+
+			if (target != null && target instanceof Actor && target.remainingHealth > 0)
+				target.setPrimaryAnimation(
+						new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
 		}
 	}
 
