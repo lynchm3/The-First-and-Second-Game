@@ -245,19 +245,26 @@ public class UserInputLevel {
 				}
 			}
 
-			// Add path highlight
-			if (Game.squareMouseIsOver != null) {
+			Player.playerPathToMouse = null;
+
+			// Create path to draw
+			if (Game.gameObjectMouseIsOver != null && Game.gameObjectMouseIsOver.squareGameObjectIsOn != null
+					&& !(Game.gameObjectMouseIsOver.squareGameObjectIsOn instanceof InventorySquare)) {
+				Player.playerPathToMouse = Level.player.getPathTo(Game.gameObjectMouseIsOver.squareGameObjectIsOn);
+			} else if (Game.squareMouseIsOver != null) {
 				Player.playerPathToMouse = Level.player.getPathTo(Game.squareMouseIsOver);
-				if (Player.playerPathToMouse != null) {
-					if (Player.playerPathToMouse.squares.size() > 0) {
-						if (Player.playerPathToMouse != null) {
-							for (Square square : Level.player.playerPathToMouse.squares) {
-								square.drawPathDot = true;
-							}
+			}
+
+			// Add path highlight
+			if (Player.playerPathToMouse != null) {
+				if (Player.playerPathToMouse.squares.size() > 0) {
+					if (Player.playerPathToMouse != null) {
+						for (Square square : Level.player.playerPathToMouse.squares) {
+							square.drawPathDot = true;
 						}
-						Player.playerPathToMouse.squares
-								.get(Player.playerPathToMouse.squares.size() - 1).drawEndPathDot = true;
 					}
+					Player.playerPathToMouse.squares
+							.get(Player.playerPathToMouse.squares.size() - 1).drawEndPathDot = true;
 				}
 			}
 		}
