@@ -369,11 +369,15 @@ public class UserInputLevel {
 				// Player.playerTargetSquare != null) {
 				// Game.level.pausePlayer();
 			} else if (Game.squareMouseIsOver != null) {
-				Level.closeAllPopups();
-				interactWith(Game.squareMouseIsOver, -1,
-						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
-						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
-						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
+
+				if (Game.level.popupMenuObjects.size() > 0 || Game.level.popupMenuActions.size() > 0) {
+					Level.closeAllPopups();
+				} else {
+					interactWith(Game.squareMouseIsOver, -1,
+							Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
+							Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
+							Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
+				}
 			}
 		}
 
@@ -608,7 +612,11 @@ public class UserInputLevel {
 				Player.playerFirstMove = true;
 			return;
 		} else {
+			// if (Game.level.popupMenuObjects.size() > 0 ||
+			// Game.level.popupMenuActions.size() > 0) {
 			Level.closeAllPopups();
+			// return;
+			// }
 			if (square instanceof InventorySquare && ((InventorySquare) square).stack.get(0) != null) {
 				PopupMenuSelectAction popupSelectAction = new PopupMenuSelectAction(0, 200, Game.level, square,
 						((InventorySquare) square).getAllActionsForTheSquareOrObject(Game.level.player));
