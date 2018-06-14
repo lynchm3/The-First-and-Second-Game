@@ -582,11 +582,9 @@ public class Actor extends GameObject {
 
 			// Shadow
 			if (Level.shadowDarkness > 0) {
-				drawActor((int) (actorPositionXInPixels + Level.shadowOffSetX * height),
-						(int) (actorPositionYInPixels + Level.shadowOffSetY * height + 64), Level.shadowDarkness, false,
-						1f, Level.shadowLength, Level.shadowAngle, boundsX1 + Level.shadowOffSetX * height,
-						boundsY1 + Level.shadowOffSetY * height + 64, boundsX2 + Level.shadowOffSetX * height,
-						boundsY2 + Level.shadowOffSetY * height + 64, Color.BLACK, false);
+				drawActor((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, 1f,
+						Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
+						false);
 			}
 
 			// drawActor((int) (actorPositionXInPixels + -Level.shadowOffSetX * height),
@@ -619,9 +617,9 @@ public class Actor extends GameObject {
 			Game.activeBatch.updateUniforms();
 		}
 		Game.flush();
-		view.translate(new Vector2f(x + halfWidth, y + hipY));
+		view.translate(new Vector2f(x + halfWidth, y + height));
 		view.rotate(rotationRad, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
+		view.translate(new Vector2f(-(x + halfWidth), -(y + height)));
 		Game.activeBatch.updateUniforms();
 
 		// torso rotation
@@ -877,9 +875,9 @@ public class Actor extends GameObject {
 		Game.activeBatch.updateUniforms();
 
 		Game.flush();
-		view.translate(new Vector2f(x + halfWidth, y + hipY));
+		view.translate(new Vector2f(x + halfWidth, y + height));
 		view.rotate(-(rotationRad), new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
+		view.translate(new Vector2f(-(x + halfWidth), -(y + height)));
 		Game.activeBatch.updateUniforms();
 
 		if (scaleX != 1 || scaleY != 1) {

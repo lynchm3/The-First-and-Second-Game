@@ -180,36 +180,36 @@ public class Level {
 
 	public int day = 1;
 	String dayString = "1";
-	public int hour = 6;
+	public int hour = 0;
 	String hourString = "6";
 	int minute = 0;
 	String minuteString = "0";
 	int second = 0;
 	String secondString = "0";
-	public String timeString = "Day 1, 06:00";
+	public String timeString = "Day 1, 00:00";
 
 	//
 
 	// bottom 12pm
-	public static float shadowAngle = 0f;
-	public static float shadowLength = -0.2f;
-	public static float shadowOffSetX = 0f;
-	public static float shadowOffSetY = 0.86f;
-	public static float shadowDarkness = 0.2f;
+	// public static float shadowAngle = 0f;
+	// public static float shadowLength = -0.2f;
+	// public static float shadowOffSetX = 0f;
+	// public static float shadowOffSetY = 0.86f;
+	// public static float shadowDarkness = 0.4f;
 
 	// Right 6pm
-	// public static float shadowAngle = -1.57f;
-	// public static float shadowLength = -1;
-	// public static float shadowOffSetX = 1.6f;
-	// public static float shadowOffSetY = 0f;
-	// public static float shadowDarkness = 0f;
+	public static float shadowAngle = -1.57f;
+	public static float shadowLength = 1;
+	public static float shadowOffSetX = 0f;
+	public static float shadowOffSetY = 0f;
+	public static float shadowDarkness = 0.2f;
 
 	// Left 6am
-	// public static float shadowAngle = 1.57f;
+	// public static float shadowAngle = -1.57f;
 	// public static float shadowLength = -1;
-	// public static float shadowOffSetX = -1.6f;
-	// public static float shadowOffSetY = 0f;
-	// public static float shadowDarkness = 0f;
+	// public static float shadowOffSetX = -0.45f;
+	// public static float shadowOffSetY = 1.1f;
+	// public static float shadowDarkness = 0.2f;
 
 	// Time 6am -> 12pm ->6pm
 	// shadowAngle -1.57f -> 0f -> 1.57f
@@ -1983,45 +1983,43 @@ public class Level {
 																					// +
 
 		// Shadow
-		if (hour < 6 || hour > 18) {
-			shadowDarkness = 0f;
-		} else if (hour < 13) {
+		// if (hour < 6 || hour > 18) {
+		// shadowDarkness = 0f;
+		// } else
+		if (hour <= 6) {
+			System.out.println("hour = " + hour);
+			float progress = hour / 6f;
+			System.out.println("progress = " + progress);
+			shadowAngle = 1.57f * (progress);
+			System.out.println("shadowAngle = " + shadowAngle);
+		} else if (hour <= 12) {
 			System.out.println("hour = " + hour);
 			float progress = (hour - 6f) / 6f;
 			System.out.println("progress = " + progress);
-			shadowAngle = 1.57f * (1 - progress);
+			shadowAngle = 1.57f + 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
-			shadowLength = -0.8f * (1 - progress) - 0.2f;
-			System.out.println("shadowLength = " + shadowLength);
-			shadowOffSetX = -1.6f * (1 - progress);
-			System.out.println("shadowOffSetX = " + shadowOffSetX);
-			shadowOffSetY = 0.86f * (progress);
-			System.out.println("shadowOffSetY = " + shadowOffSetY);
-			shadowDarkness = 0.2f * (progress) + 0.2f;
-			System.out.println("shadowDarkness = " + shadowDarkness);
-		} else if (hour == 12) {
+		} else if (hour <= 18) {
 			System.out.println("hour = " + hour);
-			float progress = 0f;
+			float progress = (hour - 12f) / 6f;
 			System.out.println("progress = " + progress);
-			shadowAngle = 0;
+			shadowAngle = 3.14f + 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
-			shadowLength = -0.2f;
-			System.out.println("shadowLength = " + shadowLength);
-			shadowOffSetX = 0;
-			System.out.println("shadowOffSetX = " + shadowOffSetX);
-			shadowOffSetY = 0.86f;
-			System.out.println("shadowOffSetY = " + shadowOffSetY);
-			shadowDarkness = 0.2f;
-			System.out.println("shadowDarkness = " + shadowDarkness);
-
+		} else if (hour <= 24) {
+			System.out.println("hour = " + hour);
+			float progress = (hour - 18f) / 6f;
+			System.out.println("progress = " + progress);
+			shadowAngle = 3.14f + 1.57f + 1.57f * (progress);
+			System.out.println("shadowAngle = " + shadowAngle);
 		}
 
+		// Works for both w/ shadow angle 0
 		// public static float shadowAngle = 0f;
 		// public static float shadowLength = -0.2f;
 		// public static float shadowOffSetX = 0f;
 		// public static float shadowOffSetY = 0.86f;
 		// public static float shadowDarkness = 0.2f;
 
+		// What works when doing ROT->SCALE
 		// Time 6am -> 12pm ->6pm
 		// shadowAngle -1.57f -> 0f -> 1.57f
 		// shadowLength = -1f -> -0.2f -> -1f
