@@ -71,7 +71,6 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
-import com.marklynch.utils.Utils;
 
 public class Level {
 
@@ -188,6 +187,36 @@ public class Level {
 	int second = 0;
 	String secondString = "0";
 	public String timeString = "Day 1, 06:00";
+
+	//
+
+	// bottom 12pm
+	public static float shadowAngle = 0f;
+	public static float shadowLength = -0.2f;
+	public static float shadowOffSetX = 0f;
+	public static float shadowOffSetY = 0.86f;
+	public static float shadowDarkness = 0.2f;
+
+	// Right 6pm
+	// public static float shadowAngle = -1.57f;
+	// public static float shadowLength = -1;
+	// public static float shadowOffSetX = 1.6f;
+	// public static float shadowOffSetY = 0f;
+	// public static float shadowDarkness = 0f;
+
+	// Left 6am
+	// public static float shadowAngle = 1.57f;
+	// public static float shadowLength = -1;
+	// public static float shadowOffSetX = -1.6f;
+	// public static float shadowOffSetY = 0f;
+	// public static float shadowDarkness = 0f;
+
+	// Time 6am -> 12pm ->6pm
+	// shadowAngle -1.57f -> 0f -> 1.57f
+	// shadowLength = -1f -> 0.2f -> -1f
+	// public static float shadowOffSetX = -1.6f; -> 0f -> 1.6f
+	// public static float shadowOffSetY = 0->0.86f->0;
+	// public static float shadowDarkness = 0 -> 0.2f -> 0;
 
 	public static ArrayList<Animation> blockingAnimations = new ArrayList<Animation>();
 
@@ -639,6 +668,8 @@ public class Level {
 			}
 		});
 		buttons.add(pauseButton);
+
+		changeTime(0);
 	}
 
 	// values for zoom animation
@@ -1623,7 +1654,7 @@ public class Level {
 	}
 
 	public static void pausePlayer() {
-		Utils.printStackTrace();
+		// Utils.printStackTrace();
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;
 		Player.playerTargetAction = null;
@@ -1951,6 +1982,53 @@ public class Level {
 																					// ":"
 																					// +
 
+		// Shadow
+		if (hour < 6 || hour > 18) {
+			shadowDarkness = 0f;
+		} else if (hour < 13) {
+			System.out.println("hour = " + hour);
+			float progress = (hour - 6f) / 6f;
+			System.out.println("progress = " + progress);
+			shadowAngle = 1.57f * (1 - progress);
+			System.out.println("shadowAngle = " + shadowAngle);
+			shadowLength = -0.8f * (1 - progress) - 0.2f;
+			System.out.println("shadowLength = " + shadowLength);
+			shadowOffSetX = -1.6f * (1 - progress);
+			System.out.println("shadowOffSetX = " + shadowOffSetX);
+			shadowOffSetY = 0.86f * (progress);
+			System.out.println("shadowOffSetY = " + shadowOffSetY);
+			shadowDarkness = 0.2f * (progress) + 0.2f;
+			System.out.println("shadowDarkness = " + shadowDarkness);
+		} else if (hour == 12) {
+			System.out.println("hour = " + hour);
+			float progress = 0f;
+			System.out.println("progress = " + progress);
+			shadowAngle = 0;
+			System.out.println("shadowAngle = " + shadowAngle);
+			shadowLength = -0.2f;
+			System.out.println("shadowLength = " + shadowLength);
+			shadowOffSetX = 0;
+			System.out.println("shadowOffSetX = " + shadowOffSetX);
+			shadowOffSetY = 0.86f;
+			System.out.println("shadowOffSetY = " + shadowOffSetY);
+			shadowDarkness = 0.2f;
+			System.out.println("shadowDarkness = " + shadowDarkness);
+
+		}
+
+		// public static float shadowAngle = 0f;
+		// public static float shadowLength = -0.2f;
+		// public static float shadowOffSetX = 0f;
+		// public static float shadowOffSetY = 0.86f;
+		// public static float shadowDarkness = 0.2f;
+
+		// Time 6am -> 12pm ->6pm
+		// shadowAngle -1.57f -> 0f -> 1.57f
+		// shadowLength = -1f -> -0.2f -> -1f
+		// public static float shadowOffSetX = -1.6f; -> 0f -> 1.6f
+		// public static float shadowOffSetY = 0->0.86f->0;
+		// public static float shadowDarkness = 0 -> 0.2f -> 0;
+
 	}
 
 	public void startPlayerTurn() {
@@ -2031,7 +2109,7 @@ public class Level {
 
 		player.update(0);
 
-		changeTime(20);
+		changeTime(3600); // was 20
 		// secondString;
 
 		// If hiding in a place, add it's effects

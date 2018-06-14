@@ -579,10 +579,25 @@ public class Actor extends GameObject {
 		if (imageTexture != null)
 			super.draw1();
 		else {
+
 			// Shadow
-			drawActor(actorPositionXInPixels, (int) (actorPositionYInPixels + height + halfHeight), 0.1f, false, 1f,
-					-0.5f, 1.57f, boundsX1, boundsY1 + height + halfHeight, boundsX2, boundsY2 + height + halfHeight,
-					Color.BLACK, false);
+			if (Level.shadowDarkness > 0) {
+				drawActor((int) (actorPositionXInPixels + Level.shadowOffSetX * height),
+						(int) (actorPositionYInPixels + Level.shadowOffSetY * height + 64), Level.shadowDarkness, false,
+						1f, Level.shadowLength, Level.shadowAngle, boundsX1 + Level.shadowOffSetX * height,
+						boundsY1 + Level.shadowOffSetY * height + 64, boundsX2 + Level.shadowOffSetX * height,
+						boundsY2 + Level.shadowOffSetY * height + 64, Color.BLACK, false);
+			}
+
+			// drawActor((int) (actorPositionXInPixels + -Level.shadowOffSetX * height),
+			// (int) (actorPositionYInPixels + Level.shadowOffSetY * height + 64), 0.1f,
+			// false, 1f,
+			// Level.shadowLength, -Level.shadowAngle, boundsX1 + -Level.shadowOffSetX *
+			// height,
+			// boundsY1 + Level.shadowOffSetY * height + 64, boundsX2 + -Level.shadowOffSetX
+			// * height,
+			// boundsY2 + Level.shadowOffSetY * height + 64, Color.BLACK, false);
+
 			// Actor
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
 					flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
@@ -595,11 +610,6 @@ public class Actor extends GameObject {
 			float boundsX1, float boundsY1, float boundsX2, float boundsY2, Color color, boolean drawClothes) {
 
 		Matrix4f view = Game.activeBatch.getViewMatrix();
-		Game.flush();
-		view.translate(new Vector2f(x + halfWidth, y + hipY));
-		view.rotate(rotationRad, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
-		Game.activeBatch.updateUniforms();
 
 		if (scaleX != 1 || scaleY != 1) {
 			Game.flush();
@@ -608,6 +618,11 @@ public class Actor extends GameObject {
 			view.translate(new Vector2f(-x, -y));
 			Game.activeBatch.updateUniforms();
 		}
+		Game.flush();
+		view.translate(new Vector2f(x + halfWidth, y + hipY));
+		view.rotate(rotationRad, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
+		Game.activeBatch.updateUniforms();
 
 		// torso rotation
 		float torsoAngle = 0;
@@ -861,6 +876,12 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
 		Game.activeBatch.updateUniforms();
 
+		Game.flush();
+		view.translate(new Vector2f(x + halfWidth, y + hipY));
+		view.rotate(-(rotationRad), new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
+		Game.activeBatch.updateUniforms();
+
 		if (scaleX != 1 || scaleY != 1) {
 			Game.flush();
 			// Matrix4f view = Game.activeBatch.getViewMatrix();
@@ -869,12 +890,6 @@ public class Actor extends GameObject {
 			view.translate(new Vector2f(-x, -y));
 			Game.activeBatch.updateUniforms();
 		}
-
-		Game.flush();
-		view.translate(new Vector2f(x + halfWidth, y + hipY));
-		view.rotate(-(rotationRad), new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
-		Game.activeBatch.updateUniforms();
 	}
 
 	public void drawFrontArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
