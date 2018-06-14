@@ -580,7 +580,7 @@ public class Actor extends GameObject {
 			super.draw1();
 		else {
 			// Shadow
-			drawActor(actorPositionXInPixels, (int) (actorPositionYInPixels + height + halfHeight), 0.25f, false, 1f,
+			drawActor(actorPositionXInPixels, (int) (actorPositionYInPixels + height + halfHeight), 0.1f, false, 1f,
 					-0.5f, boundsX1, boundsY1 + height + halfHeight, boundsX2, boundsY2 + height + halfHeight,
 					Color.BLACK, false);
 			// Actor
@@ -727,7 +727,7 @@ public class Actor extends GameObject {
 					y + healthBarHeightInPixels - 1);
 		}
 
-		if (helmet != null && !sleeping && drawClothes) {
+		if (helmet != null && !sleeping) {
 
 			int helmetPositionXInPixels = (x);
 			int helmetPositionYInPixels = (y);
@@ -919,7 +919,7 @@ public class Actor extends GameObject {
 			drawArrow(rightArmHingeX - Templates.ARROW.anchorX, y + handY, color);
 		}
 
-		TextureUtils.drawTextureWithinBounds(this.armImageTexture, 1f, rightArmDrawX, elbowDrawY,
+		TextureUtils.drawTextureWithinBounds(this.armImageTexture, alpha, rightArmDrawX, elbowDrawY,
 				rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight(), boundsX1,
 				boundsY1, boundsX2, boundsY2, false, false, color);
 		if (highlight) {
@@ -929,7 +929,7 @@ public class Actor extends GameObject {
 					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 		}
 		if (bodyArmor != null && bodyArmor.armLowerTexture != null && drawClothes) {
-			TextureUtils.drawTextureWithinBounds(this.bodyArmor.armLowerTexture, 1f, rightArmDrawX, elbowDrawY,
+			TextureUtils.drawTextureWithinBounds(this.bodyArmor.armLowerTexture, alpha, rightArmDrawX, elbowDrawY,
 					rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
 					elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
 					false, color);
@@ -943,8 +943,8 @@ public class Actor extends GameObject {
 		}
 
 		if (equipped != null && !backwards && !sleeping && (primaryAnimation == null || primaryAnimation.drawWeapon)) {
-			drawWeapon(rightArmHingeX - equipped.anchorX, y + handY - equipped.anchorY, highlight, boundsX1, boundsY1,
-					boundsX2, boundsY2, color);
+			drawWeapon(rightArmHingeX - equipped.anchorX, y + handY - equipped.anchorY, alpha, highlight, boundsX1,
+					boundsY1, boundsX2, boundsY2, color);
 		}
 
 		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
@@ -954,8 +954,8 @@ public class Actor extends GameObject {
 		}
 
 		if (equipped != null && equipped.templateId == Templates.HUNTING_BOW.templateId && !backwards
-				&& (primaryAnimation == null || primaryAnimation.drawWeapon)) {
-			drawBowString(rightArmHingeX, y + handY, color);
+				&& (primaryAnimation == null || primaryAnimation.drawWeapon) && alpha == 1f) {
+			drawBowString(rightArmHingeX, y + handY, alpha, color);
 		}
 
 		Game.flush();
@@ -975,7 +975,7 @@ public class Actor extends GameObject {
 		}
 		if (bodyArmor != null && bodyArmor.armUpperTexture != null && drawClothes) {
 
-			TextureUtils.drawTextureWithinBounds(bodyArmor.armUpperTexture, 1f, rightArmDrawX, shoulderDrawY,
+			TextureUtils.drawTextureWithinBounds(bodyArmor.armUpperTexture, alpha, rightArmDrawX, shoulderDrawY,
 					rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
 					shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
 					false, false, color);
@@ -1050,7 +1050,7 @@ public class Actor extends GameObject {
 		}
 		if (bodyArmor != null && bodyArmor.armLowerTexture != null && drawClothes) {
 
-			TextureUtils.drawTextureWithinBounds(bodyArmor.armLowerTexture, 1f, leftArmDrawX, elbowDrawY,
+			TextureUtils.drawTextureWithinBounds(bodyArmor.armLowerTexture, alpha, leftArmDrawX, elbowDrawY,
 					leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
 					elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
 					false, color);
@@ -1065,16 +1065,17 @@ public class Actor extends GameObject {
 		}
 
 		if (equipped != null && backwards && !sleeping && (primaryAnimation == null || primaryAnimation.drawWeapon)) {
-			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX), y + handY - equipped.anchorY, highlight,
-					boundsX1, boundsY1, boundsX2, boundsY2, color);
+			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX), y + handY - equipped.anchorY, alpha,
+					highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
 		}
 		if (equipped != null && backwards && !sleeping && primaryAnimation != null
 				&& primaryAnimation.drawArrowInMainHand == true) {
 			drawArrow(leftArmHingeX - Templates.ARROW.anchorX, y + handY, color);
 		}
 
-		if (equipped != null && equipped.templateId == Templates.HUNTING_BOW.templateId && backwards) {
-			drawBowString(leftArmHingeX, y + handY, color);
+		if (equipped != null && equipped.templateId == Templates.HUNTING_BOW.templateId && backwards
+				&& (primaryAnimation == null || primaryAnimation.drawWeapon) && alpha == 1f) {
+			drawBowString(leftArmHingeX, y + handY, alpha, color);
 		}
 
 		Game.flush();
@@ -1116,17 +1117,17 @@ public class Actor extends GameObject {
 
 	}
 
-	public void drawWeapon(float x, float y, boolean highlight, float boundsX1, float boundsY1, float boundsX2,
-			float boundsY2, Color color) {
+	public void drawWeapon(float x, float y, float alpha, boolean highlight, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2, Color color) {
 
 		if (primaryAnimation != null && primaryAnimation.drawEquipped == false)
 			return;
 
 		// weapon
-		float alpha = 1.0f;
+		// float alpha = 1.0f;
 
-		if (primaryAnimation != null)
-			alpha = primaryAnimation.alpha;
+		// if (primaryAnimation != null)
+		// alpha = primaryAnimation.alpha;
 		TextureUtils.drawTextureWithinBounds(this.equipped.imageTexture, alpha, x, y, x + equipped.width,
 				y + equipped.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards, false, color);
 		if (highlight) {
@@ -1381,7 +1382,7 @@ public class Actor extends GameObject {
 
 	Color bowStringColor = new Color(0f, 0f, 0f, 0.32f);
 
-	public void drawBowString(float handX, float handY, Color color) {
+	public void drawBowString(float handX, float handY, float alpha, Color color) {
 
 		float bowStringY = handY - 16;
 		float bowStringYPulled = handY - 16;
