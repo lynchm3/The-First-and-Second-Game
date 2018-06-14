@@ -578,21 +578,26 @@ public class Actor extends GameObject {
 
 		if (imageTexture != null)
 			super.draw1();
-		else
-
+		else {
+			// Shadow
+			drawActor(actorPositionXInPixels, (int) (actorPositionYInPixels + height + halfHeight), alpha,
+					flash || this == Game.gameObjectMouseIsOver, 1f, -0.5f, boundsX1, boundsY1 + height + halfHeight,
+					boundsX2, boundsY2 + height + halfHeight);
+			// Actor
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
-					flash || this == Game.gameObjectMouseIsOver, 1f, boundsX1, boundsY1, boundsX2, boundsY2);
+					flash || this == Game.gameObjectMouseIsOver, 1f, 1f, boundsX1, boundsY1, boundsX2, boundsY2);
+		}
 
 	}
 
-	public void drawActor(int x, int y, float alpha, boolean highlight, float scale, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2) {
+	public void drawActor(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY, float boundsX1,
+			float boundsY1, float boundsX2, float boundsY2) {
 
-		if (scale != 1) {
+		if (scaleX != 1 || scaleY != 1) {
 			Game.flush();
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 			view.translate(new Vector2f(x, y));
-			view.scale(new Vector3f(scale, scale, 1f));
+			view.scale(new Vector3f(scaleX, scaleY, 1f));
 			view.translate(new Vector2f(-x, -y));
 			Game.activeBatch.updateUniforms();
 		}
@@ -843,9 +848,12 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
 		Game.activeBatch.updateUniforms();
 
-		if (scale != 1) {
+		if (scaleX != 1 || scaleY != 1) {
+			Game.flush();
 			// Matrix4f view = Game.activeBatch.getViewMatrix();
-			view.setIdentity();
+			view.translate(new Vector2f(x, y));
+			view.scale(new Vector3f(1f / scaleX, 1f / scaleY, 1f));
+			view.translate(new Vector2f(-x, -y));
 			Game.activeBatch.updateUniforms();
 		}
 	}
