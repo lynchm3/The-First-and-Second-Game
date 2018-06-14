@@ -582,17 +582,17 @@ public class Actor extends GameObject {
 			// Shadow
 			drawActor(actorPositionXInPixels, (int) (actorPositionYInPixels + height + halfHeight), 0.25f, false, 1f,
 					-0.5f, boundsX1, boundsY1 + height + halfHeight, boundsX2, boundsY2 + height + halfHeight,
-					Color.BLACK);
+					Color.BLACK, false);
 			// Actor
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
 					flash || this == Game.gameObjectMouseIsOver, 1f, 1f, boundsX1, boundsY1, boundsX2, boundsY2,
-					TextureUtils.neutralColor);
+					TextureUtils.neutralColor, true);
 		}
 
 	}
 
 	public void drawActor(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY, float boundsX1,
-			float boundsY1, float boundsX2, float boundsY2, Color color) {
+			float boundsY1, float boundsX2, float boundsY2, Color color, boolean drawClothes) {
 
 		if (scaleX != 1 || scaleY != 1) {
 			Game.flush();
@@ -727,7 +727,7 @@ public class Actor extends GameObject {
 					y + healthBarHeightInPixels - 1);
 		}
 
-		if (helmet != null && !sleeping) {
+		if (helmet != null && !sleeping && drawClothes) {
 
 			int helmetPositionXInPixels = (x);
 			int helmetPositionYInPixels = (y);
@@ -760,7 +760,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (bodyArmor != null && bodyArmor.backTexture != null && !sleeping) {
+		if (bodyArmor != null && bodyArmor.backTexture != null && !sleeping && drawClothes) {
 
 			int bodyArmorPositionXInPixels = (x);
 			int bodyArmorPositionYInPixels = (y);
@@ -778,7 +778,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		drawBackArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+		drawBackArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 
 		// pelvis
 		if (pelvisImageTexture != null) {
@@ -792,7 +792,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (legArmor != null && !sleeping) {
+		if (legArmor != null && !sleeping && drawClothes) {
 
 			int legArmorPositionXInPixels = (x);
 			int legArmorPositionYInPixels = (y);
@@ -809,10 +809,10 @@ public class Actor extends GameObject {
 			}
 		}
 
-		drawBackLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
-		drawFrontLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+		drawBackLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
+		drawFrontLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 
-		if (bodyArmor != null && !sleeping) {
+		if (bodyArmor != null && !sleeping && drawClothes) {
 
 			int bodyArmorPositionXInPixels = (x);
 			int bodyArmorPositionYInPixels = (y);
@@ -831,7 +831,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (legArmor != null && legArmor.frontTexture != null && !sleeping) {
+		if (legArmor != null && legArmor.frontTexture != null && !sleeping && drawClothes) {
 
 			int legArmorPositionXInPixels = (x);
 			int legArmorPositionYInPixels = (y);
@@ -848,7 +848,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		drawFrontArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+		drawFrontArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 
 		Game.flush();
 		view.translate(new Vector2f(x + halfWidth, y + hipY));
@@ -867,24 +867,24 @@ public class Actor extends GameObject {
 	}
 
 	public void drawFrontArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes) {
 		if (backwards)
-			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 		else
-			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 	}
 
 	public void drawBackArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes) {
 		if (backwards)
-			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 		else
-			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 
 	}
 
 	public void drawRightArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes) {
 
 		if (armImageTexture == null)
 			return;
@@ -928,7 +928,7 @@ public class Actor extends GameObject {
 					rightArmDrawX + armImageTexture.getWidth(), elbowDrawY + armImageTexture.getHeight(), boundsX1,
 					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 		}
-		if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
+		if (bodyArmor != null && bodyArmor.armLowerTexture != null && drawClothes) {
 			TextureUtils.drawTextureWithinBounds(this.bodyArmor.armLowerTexture, 1f, rightArmDrawX, elbowDrawY,
 					rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
 					elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
@@ -973,7 +973,7 @@ public class Actor extends GameObject {
 					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 
 		}
-		if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
+		if (bodyArmor != null && bodyArmor.armUpperTexture != null && drawClothes) {
 
 			TextureUtils.drawTextureWithinBounds(bodyArmor.armUpperTexture, 1f, rightArmDrawX, shoulderDrawY,
 					rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
@@ -998,7 +998,7 @@ public class Actor extends GameObject {
 	}
 
 	public void drawLeftArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes) {
 
 		if (armImageTexture == null)
 			return;
@@ -1048,7 +1048,7 @@ public class Actor extends GameObject {
 					boundsY1, boundsX2, boundsY2, backwards, false, flashColor, false);
 
 		}
-		if (bodyArmor != null && bodyArmor.armLowerTexture != null) {
+		if (bodyArmor != null && bodyArmor.armLowerTexture != null && drawClothes) {
 
 			TextureUtils.drawTextureWithinBounds(bodyArmor.armLowerTexture, 1f, leftArmDrawX, elbowDrawY,
 					leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
@@ -1093,7 +1093,7 @@ public class Actor extends GameObject {
 
 		}
 
-		if (bodyArmor != null && bodyArmor.armUpperTexture != null) {
+		if (bodyArmor != null && bodyArmor.armUpperTexture != null && drawClothes) {
 
 			TextureUtils.drawTextureWithinBounds(bodyArmor.armUpperTexture, alpha, leftArmDrawX, shoulderDrawY,
 					leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
@@ -1142,24 +1142,24 @@ public class Actor extends GameObject {
 	}
 
 	public void drawFrontLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes) {
 		if (backwards)
-			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 		else
-			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 	}
 
 	public void drawBackLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes) {
 		if (backwards)
-			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 		else
-			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color);
+			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes);
 
 	}
 
 	public void drawLeftLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes) {
 
 		if (legImageTexture == null)
 			return;
@@ -1205,7 +1205,7 @@ public class Actor extends GameObject {
 
 		}
 
-		if (legArmor != null && legArmor.legLowerTexture != null) {
+		if (legArmor != null && legArmor.legLowerTexture != null && drawClothes) {
 
 			TextureUtils.drawTextureWithinBounds(legArmor.legLowerTexture, 1f, leftLegDrawX, kneeDrawY,
 					leftLegDrawX + legArmor.legLowerTexture.getWidth(),
@@ -1237,7 +1237,7 @@ public class Actor extends GameObject {
 
 		}
 
-		if (legArmor != null && legArmor.legUpperTexture != null) {
+		if (legArmor != null && legArmor.legUpperTexture != null && drawClothes) {
 
 			TextureUtils.drawTextureWithinBounds(legArmor.legUpperTexture, alpha, leftLegDrawX, hipDrawY,
 					leftLegDrawX + legArmor.legUpperTexture.getWidth(), hipDrawY + legArmor.legUpperTexture.getHeight(),
@@ -1260,7 +1260,7 @@ public class Actor extends GameObject {
 	}
 
 	public void drawRightLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes) {
 
 		if (legImageTexture == null)
 			return;
@@ -1306,7 +1306,7 @@ public class Actor extends GameObject {
 
 		}
 
-		if (legArmor != null && legArmor.legLowerTexture != null) {
+		if (legArmor != null && legArmor.legLowerTexture != null && drawClothes) {
 
 			TextureUtils.drawTextureWithinBounds(legArmor.legLowerTexture, 1f, rightLegDrawX, kneeDrawY,
 					rightLegDrawX + legArmor.legLowerTexture.getWidth(),
@@ -1338,7 +1338,7 @@ public class Actor extends GameObject {
 
 		}
 
-		if (legArmor != null && legArmor.legUpperTexture != null) {
+		if (legArmor != null && legArmor.legUpperTexture != null & drawClothes) {
 
 			TextureUtils.drawTextureWithinBounds(legArmor.legUpperTexture, alpha, rightLegDrawX, hipDrawY,
 					rightLegDrawX + legArmor.legUpperTexture.getWidth(),
