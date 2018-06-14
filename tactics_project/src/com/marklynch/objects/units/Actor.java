@@ -584,7 +584,7 @@ public class Actor extends GameObject {
 			if (Level.shadowDarkness > 0) {
 				drawActor((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, 1f,
 						Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
-						false);
+						false, false);
 			}
 
 			// drawActor((int) (actorPositionXInPixels + -Level.shadowOffSetX * height),
@@ -599,13 +599,14 @@ public class Actor extends GameObject {
 			// Actor
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
 					flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
-					TextureUtils.neutralColor, true);
+					TextureUtils.neutralColor, true, true);
 		}
 
 	}
 
 	public void drawActor(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY, float rotationRad,
-			float boundsX1, float boundsY1, float boundsX2, float boundsY2, Color color, boolean drawClothes) {
+			float boundsX1, float boundsY1, float boundsX2, float boundsY2, Color color, boolean drawClothes,
+			boolean drawHealthBar) {
 
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 
@@ -717,7 +718,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (remainingHealth != totalHealth && remainingHealth > 0) {
+		if (drawHealthBar && remainingHealth != totalHealth && remainingHealth > 0) {
 
 			// draw sidebar on square
 			float healthPercentage = ((float) remainingHealth) / ((float) totalHealth);

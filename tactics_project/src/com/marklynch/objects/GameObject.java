@@ -385,52 +385,56 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		for (Animation secondaryAnimation : secondaryAnimations)
 			secondaryAnimation.draw1();
 
+		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+				+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+		float alpha = 1.0f;
+
+		// TextureUtils.skipNormals = true;
+
+		if (primaryAnimation != null)
+			alpha = primaryAnimation.alpha;
+		if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
+			alpha = 0.5f;
+
+		float boundsX1 = actorPositionXInPixels;
+		float boundsY1 = actorPositionYInPixels;
+		float boundsX2 = actorPositionXInPixels + width;
+		float boundsY2 = actorPositionYInPixels + height;
+
+		if (primaryAnimation != null) {
+			actorPositionXInPixels += primaryAnimation.offsetX;
+			actorPositionYInPixels += primaryAnimation.offsetY;
+			boundsX1 += primaryAnimation.offsetX + primaryAnimation.boundsX1;
+			boundsY1 += primaryAnimation.offsetY + primaryAnimation.boundsY1;
+			boundsX2 += primaryAnimation.offsetX + primaryAnimation.boundsX2;
+			boundsY2 += primaryAnimation.offsetY + primaryAnimation.boundsY2;
+		}
+
+		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
+				flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
+				TextureUtils.neutralColor, true);
+	}
+
+	public void drawGameObject(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY,
+			float rotationRad, float boundsX1, float boundsY1, float boundsX2, float boundsY2, Color color,
+			boolean drawHealthBar) {
+
 		// Draw object
 		if (squareGameObjectIsOn != null) {
-
-			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
 			float torsoAngle = 0;
 			if (primaryAnimation != null) {
 				torsoAngle = primaryAnimation.torsoAngle;
 			}
-			if (name.contains("Bun")) {
-				System.out.println("Bun primaryAnimation = " + primaryAnimation);
-				System.out.println("Bun torsoAngle = " + torsoAngle);
-			}
 
 			Matrix4f view = Game.activeBatch.getViewMatrix();
 			Game.flush();
-			view.translate(new Vector2f(actorPositionXInPixels + halfWidth, actorPositionYInPixels + halfHeight));
+			view.translate(new Vector2f(x + halfWidth, y + halfHeight));
 			view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-(actorPositionXInPixels + halfWidth), -(actorPositionYInPixels + halfHeight)));
+			view.translate(new Vector2f(-(x + halfWidth), -(y + halfHeight)));
 			Game.activeBatch.updateUniforms();
-
-			float boundsX1 = actorPositionXInPixels;
-			float boundsY1 = actorPositionYInPixels;
-			float boundsX2 = actorPositionXInPixels + width;
-			float boundsY2 = actorPositionYInPixels + height;
-
-			if (primaryAnimation != null) {
-				actorPositionXInPixels += primaryAnimation.offsetX;
-				actorPositionYInPixels += primaryAnimation.offsetY;
-				boundsX1 += primaryAnimation.offsetX + primaryAnimation.boundsX1;
-				boundsY1 += primaryAnimation.offsetY + primaryAnimation.boundsY1;
-				boundsX2 += primaryAnimation.offsetX + primaryAnimation.boundsX2;
-				boundsY2 += primaryAnimation.offsetY + primaryAnimation.boundsY2;
-			}
-
-			float alpha = 1.0f;
-
-			// TextureUtils.skipNormals = true;
-
-			if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
-				alpha = 0.5f;
-			else if (primaryAnimation != null)
-				alpha = primaryAnimation.alpha;
 
 			for (Arrow arrow : arrowsEmbeddedInThis) {
 
@@ -467,22 +471,18 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				}
 			}
 
-			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-					actorPositionXInPixels + width, actorPositionYInPixels + height, boundsX1, boundsY1, boundsX2,
-					boundsY2, backwards, false, TextureUtils.neutralColor);
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, x, y, x + width, y + height, boundsX1, boundsY1,
+					boundsX2, boundsY2, backwards, false, TextureUtils.neutralColor);
 
 			if (flash || this == Game.gameObjectMouseIsOver) {
-				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
-						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+				TextureUtils.drawTexture(imageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
 						flashColor, false);
 			} else if (squareGameObjectIsOn.inventory.waterBody != null && !(this instanceof Fish)
 					&& !(this instanceof WaterBody)) {
 
-				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
-						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+				TextureUtils.drawTexture(imageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
 						underWaterColor, false);
-				TextureUtils.drawTexture(Templates.WATER_BODY.imageTexture, alpha, actorPositionXInPixels,
-						actorPositionYInPixels, actorPositionXInPixels + width, actorPositionYInPixels + height,
+				TextureUtils.drawTexture(Templates.WATER_BODY.imageTexture, alpha, x, y, x + width, y + height,
 						backwards);
 			}
 
@@ -522,7 +522,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				}
 			}
 
-			if (remainingHealth != totalHealth) {
+			if (drawHealthBar && remainingHealth != totalHealth) {
 				// draw sidebar on square
 				float healthPercentage = (remainingHealth) / (totalHealth);
 				float healthBarHeightInPixels = height * healthPercentage;
@@ -533,30 +533,29 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 					healthYInPixels += primaryAnimation.offsetY;
 				}
 
-				Color color = Color.YELLOW;
+				Color healthColor = Color.YELLOW;
 				if (thoughtsOnPlayer > 50) {
-					color = Color.GREEN;
+					healthColor = Color.GREEN;
 				} else if (thoughtsOnPlayer < -50) {
-					color = Color.RED;
+					healthColor = Color.RED;
 				}
 
 				// White bit under health bar
-				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), actorPositionXInPixels + 1,
-						actorPositionYInPixels + 1, actorPositionXInPixels + healthWidthInPixels - 1,
-						actorPositionYInPixels + height - 1);
+				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), x + 1, y + 1, x + healthWidthInPixels - 1,
+						y + height - 1);
 
 				// Colored health bar
-				QuadUtils.drawQuad(color, actorPositionXInPixels + 1, actorPositionYInPixels + 1,
-						actorPositionXInPixels + healthWidthInPixels - 1,
-						actorPositionYInPixels + healthBarHeightInPixels - 1);
+				QuadUtils.drawQuad(healthColor, x + 1, y + 1, x + healthWidthInPixels - 1,
+						y + healthBarHeightInPixels - 1);
 			}
 
 			Game.flush();
-			view.translate(new Vector2f(actorPositionXInPixels + halfWidth, actorPositionYInPixels + halfHeight));
+			view.translate(new Vector2f(x + halfWidth, y + halfHeight));
 			view.rotate(-torsoAngle, new Vector3f(0f, 0f, 1f));
-			view.translate(new Vector2f(-(actorPositionXInPixels + halfWidth), -(actorPositionYInPixels + halfHeight)));
+			view.translate(new Vector2f(-(x + halfWidth), -(y + halfHeight)));
 			Game.flush();
 		}
+
 	}
 
 	private void drawHighlight() {
