@@ -285,11 +285,12 @@ public class FishingRod extends Tool {
 
 	}
 
-	public void drawLine(Actor fisher, float weaponPositionXInPixels, float weaponPositionYInPixels) {
+	public void drawLine(Actor fisher, float weaponPositionXInPixels, float weaponPositionYInPixels, Color color) {
 		// Fishing line
-		Color lineColor = new Color(lineDamage, 0, 0);
+		// Color lineColor = new Color(lineDamage, 0, 0);
+		// color
 
-		LineUtils.drawLine(lineColor, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
+		LineUtils.drawLine(color, fishingLineX1, fishingLineY1, fishCenterX, fishCenterY, 2);
 	}
 
 	public void reset() {

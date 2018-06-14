@@ -469,7 +469,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, boundsX1, boundsY1, boundsX2,
-					boundsY2, backwards, false);
+					boundsY2, backwards, false, TextureUtils.neutralColor);
 
 			if (flash || this == Game.gameObjectMouseIsOver) {
 				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
@@ -632,7 +632,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			// GL11.glTexParameteri(target, pname, param);
 			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, boundsX1, boundsY1, boundsX2,
-					boundsY2, backwards, false);
+					boundsY2, backwards, false, TextureUtils.neutralColor);
 
 			Color color1 = new Color(1, 144, 255);
 			Color color2 = new Color(9, 114, 255);

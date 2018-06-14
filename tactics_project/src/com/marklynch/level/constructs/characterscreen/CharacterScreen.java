@@ -17,6 +17,7 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class CharacterScreen implements Draggable, Scrollable {
 
@@ -302,7 +303,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 		// Actor
 		// drawActor(Game.level.player, actorX, actorY);
 		Level.player.drawActor(actorX, actorY, 1, false, actorScale, actorScale, Integer.MIN_VALUE, Integer.MIN_VALUE,
-				Integer.MAX_VALUE, Integer.MAX_VALUE);
+				Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor);
 
 		drawStatY = statsY;
 

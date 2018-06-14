@@ -1161,7 +1161,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		TextureUtils.tileTextureWithinBounds(textureBackgroundTile, 1f, 0, 0, textureBackgroundTile.getWidth(),
 				textureBackgroundTile.getHeight(), 0, topBorderHeight, Game.windowWidth,
-				Game.windowHeight - bottomBorderHeight, false, false);
+				Game.windowHeight - bottomBorderHeight, false, false, TextureUtils.neutralColor);
 
 		// QuadUtils.drawQuad(Color.BLACK, squaresX, this.squaresY, squaresX +
 		// squaresAreaWidth,
@@ -1311,12 +1311,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// Top border black mask
 
 		TextureUtils.tileTextureWithinBounds(textureBackgroundTile, 1f, 0, 0, textureBackgroundTile.getWidth(),
-				textureBackgroundTile.getHeight(), 0, 0, Game.windowWidth, topBorderHeight, false, false);
+				textureBackgroundTile.getHeight(), 0, 0, Game.windowWidth, topBorderHeight, false, false, TextureUtils.neutralColor);
 
 		// Bottom mask
 		TextureUtils.tileTextureWithinBounds(textureBackgroundTile, 1f, 0, 0, textureBackgroundTile.getWidth(),
 				textureBackgroundTile.getHeight(), 0, Game.windowHeight - bottomBorderHeight, Game.windowWidth,
-				Game.windowHeight, false, false);
+				Game.windowHeight, false, false, TextureUtils.neutralColor);
 
 		Game.level.quickBar.drawStaticUI();
 
@@ -1918,7 +1918,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void drawActor(Actor actor, int x, int y) {
 		actor.drawActor(x, y, 1, false, 2f, 2f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE,
-				Integer.MAX_VALUE);
+				Integer.MAX_VALUE, TextureUtils.neutralColor);
 	}
 
 	@Override

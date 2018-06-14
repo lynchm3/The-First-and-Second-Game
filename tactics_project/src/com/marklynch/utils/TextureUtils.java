@@ -9,14 +9,13 @@ import com.marklynch.objects.GameObject;
 
 public class TextureUtils {
 
-	static Color neutralColor = new Color(1f, 1f, 1f, 1f);
+	public static Color neutralColor = new Color(1f, 1f, 1f, 1f);
 
 	public static boolean skipNormals = false;
 
 	// master drawTexture method
-	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2,
-			boolean inBounds, float boundsX1, float boundsY1, float boundsX2, float boundsY2, boolean backwards,
-			boolean upsideDown, boolean inbounds) {
+	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2, float boundsX1,
+			float boundsY1, float boundsX2, float boundsY2, boolean backwards, boolean upsideDown, boolean inbounds) {
 		drawTexture(texture, alpha, x1, y1, x2, y2, boundsX1, boundsY1, boundsX2, boundsY2, backwards, upsideDown,
 				neutralColor, inbounds);
 
@@ -211,30 +210,32 @@ public class TextureUtils {
 	}
 
 	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2) {
-		drawTexture(texture, alpha, x1, y1, x2, y2, false, 0, 0, 0, 0, false, false, false);
+		drawTexture(texture, alpha, x1, y1, x2, y2, 0, 0, 0, 0, false, false, false);
 	}
 
 	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2,
 			boolean backwards) {
-		drawTexture(texture, alpha, x1, y1, x2, y2, false, 0, 0, 0, 0, backwards, false, false);
+		drawTexture(texture, alpha, x1, y1, x2, y2, 0, 0, 0, 0, backwards, false, false);
 	}
 
 	public static void drawTextureBackwards(Texture texture, float alpha, float x1, float y1, float x2, float y2) {
-		drawTexture(texture, alpha, x1, y1, x2, y2, false, 0, 0, 0, 0, true, false, false);
+		drawTexture(texture, alpha, x1, y1, x2, y2, 0, 0, 0, 0, true, false, false);
 	}
 
 	public static void drawTextureupsideDown(Texture texture, float alpha, float x1, float y1, float x2, float y2) {
-		drawTexture(texture, alpha, x1, y1, x2, y2, false, 0, 0, 0, 0, false, true, false);
+		drawTexture(texture, alpha, x1, y1, x2, y2, 0, 0, 0, 0, false, true, false);
 	}
 
 	public static void drawTextureWithinBounds(Texture texture, float alpha, float x1, float y1, float x2, float y2,
-			float boundsX1, float boundsY1, float boundsX2, float boundsY2, boolean backwards, boolean upsideDown) {
-		drawTexture(texture, alpha, x1, y1, x2, y2, true, boundsX1, boundsY1, boundsX2, boundsY2, backwards, upsideDown,
-				true);
+			float boundsX1, float boundsY1, float boundsX2, float boundsY2, boolean backwards, boolean upsideDown,
+			Color color) {
+		drawTexture(texture, alpha, x1, y1, x2, y2, boundsX1, boundsY1, boundsX2, boundsY2, backwards, upsideDown,
+				color, true);
 	}
 
 	public static void tileTextureWithinBounds(Texture texture, float alpha, float x1, float y1, float x2, float y2,
-			float boundsX1, float boundsY1, float boundsX2, float boundsY2, boolean backwards, boolean upsideDown) {
+			float boundsX1, float boundsY1, float boundsX2, float boundsY2, boolean backwards, boolean upsideDown,
+			Color color) {
 
 		float tileWidth = x2 - x1;
 		float tileHeight = y2 - y1;
@@ -244,8 +245,8 @@ public class TextureUtils {
 				for (float j = y1; j < boundsY2; j += tileHeight) {
 					if (j + tileHeight > boundsY1) {
 
-						drawTexture(texture, alpha, i, j, i + tileWidth, j + tileHeight, true, boundsX1, boundsY1,
-								boundsX2, boundsY2, backwards, upsideDown, true);
+						drawTexture(texture, alpha, i, j, i + tileWidth, j + tileHeight, boundsX1, boundsY1, boundsX2,
+								boundsY2, backwards, upsideDown, color, true);
 					}
 				}
 			}
