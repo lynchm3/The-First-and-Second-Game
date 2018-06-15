@@ -80,8 +80,9 @@ public class ConversationPart {
 
 				} else {
 
-					actor.drawActor(0 + offsetX, (int) Game.halfWindowHeight + offsetY, 1f, false, 2f, 2f,
-							0f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false);
+					actor.drawActor(0 + offsetX, (int) Game.halfWindowHeight + offsetY, 1f, false, 2f, 2f, 0f,
+							Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE,
+							TextureUtils.neutralColor, true, false, actor.backwards);
 
 					// TextureUtils.drawTexture(actor.imageTexture, 1.0f, 0 + offsetX,
 					// (int) Game.halfWindowHeight + offsetY, Game.halfWindowHeight + offsetX,
@@ -97,8 +98,9 @@ public class ConversationPart {
 
 				if (originalTarget instanceof Human) {
 					((Actor) Game.level.conversation.originalConversationTarget).drawActor(0 + offsetX,
-							(int) Game.halfWindowHeight + offsetY, 1f, false, 2f, 2f, 0f,
-							Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false);
+							(int) Game.halfWindowHeight + offsetY, 1f, false, 2f, 2f, 0f, Integer.MIN_VALUE,
+							Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true,
+							false, ((Actor) Game.level.conversation.originalConversationTarget).backwards);
 
 				} else {
 					TextureUtils.drawTexture(Game.level.conversation.originalConversationTarget.imageTexture,
@@ -110,8 +112,9 @@ public class ConversationPart {
 
 		// Speaker image
 		if (talker instanceof Human) {
-			((Actor) talker).drawActor(0, (int) Game.halfWindowHeight, 1f, false, 2f, 2f, 0f,
-					Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false);
+			((Actor) talker).drawActor(0, (int) Game.halfWindowHeight, 1f, false, 2f, 2f, 0f, Integer.MIN_VALUE,
+					Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false,
+					((Actor) talker).backwards);
 		} else {
 			TextureUtils.drawTexture(talker.imageTexture, 1.0f, 0, Game.halfWindowHeight, Game.halfWindowHeight,
 					Game.windowHeight);
@@ -119,7 +122,8 @@ public class ConversationPart {
 
 		// Speker 2 image (player)
 		Game.level.player.drawActor((int) (Game.windowWidth - Game.halfWindowHeight), (int) Game.halfWindowHeight, 1f,
-				false, 2f, 2f, 0f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false);
+				false, 2f, 2f, 0f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE,
+				TextureUtils.neutralColor, true, false, Game.level.player.backwards);
 		// TextureUtils.drawTexture(Game.level.player.imageTexture, 1.0f,
 		// Game.windowWidth, Game.halfWindowHeight,
 		// Game.windowWidth - Game.halfWindowHeight, Game.windowHeight);

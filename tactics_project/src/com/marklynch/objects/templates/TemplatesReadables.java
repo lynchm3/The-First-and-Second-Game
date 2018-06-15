@@ -29,6 +29,7 @@ public class TemplatesReadables {
 		Templates.ROCK_WITH_ETCHING.value = 14;
 		Templates.ROCK_WITH_ETCHING.anchorX = 0;
 		Templates.ROCK_WITH_ETCHING.anchorY = 0;
+		Templates.ROCK_WITH_ETCHING.bigShadow = true;
 		Templates.ROCK_WITH_ETCHING.templateId = GameObject.generateNewTemplateId();
 		Templates.ROCK_WITH_ETCHING.flipYAxisInMirror = false;
 
@@ -68,6 +69,7 @@ public class TemplatesReadables {
 		Templates.SIGN.value = 15;
 		Templates.SIGN.anchorX = 0;
 		Templates.SIGN.anchorY = 0;
+		Templates.SIGN.bigShadow = true;
 		Templates.SIGN.templateId = GameObject.generateNewTemplateId();
 		Templates.SIGN.flipYAxisInMirror = false;
 
@@ -107,6 +109,7 @@ public class TemplatesReadables {
 		Templates.SIGNPOST.value = 31;
 		Templates.SIGNPOST.anchorX = 0;
 		Templates.SIGNPOST.anchorY = 0;
+		Templates.SIGNPOST.bigShadow = true;
 		Templates.SIGNPOST.templateId = GameObject.generateNewTemplateId();
 		Templates.SIGNPOST.flipYAxisInMirror = false;
 
