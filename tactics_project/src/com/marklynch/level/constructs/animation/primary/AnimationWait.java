@@ -23,10 +23,33 @@ public class AnimationWait extends Animation {
 		durationSoFar += delta;
 		// double progress = durationSoFar / durationToReach;
 
-		float targetRightHip = 0f;
-		float targetRightKnee = 0f;
-		float targetLeftHip = 0f;
-		float targetLeftKnee = 0f;
+		// 1
+		// float targetTorsoAngle = (float) Math.toRadians(11.4f);
+		// float targetLeftHip = (float) Math.toRadians(-19.13f);
+		// float targetLeftKnee = (float) Math.toRadians(13.86f);
+		// float targetRightHip = (float) Math.toRadians(-33.01f);
+		// float targetRightKnee = (float) Math.toRadians(75.21f);
+
+		// 2
+		// float targetTorsoAngle = (float) Math.toRadians(8.9f);
+		// float targetLeftHip = (float) Math.toRadians(-2f);
+		// float targetLeftKnee = (float) Math.toRadians(-1f);
+		// float targetRightHip = (float) Math.toRadians(-34f);
+		// float targetRightKnee = (float) Math.toRadians(57f);
+
+		// 3
+		// float targetTorsoAngle = (float) Math.toRadians(13.35f);
+		// float targetLeftHip = (float) Math.toRadians(-3f);
+		// float targetLeftKnee = (float) Math.toRadians(22f);
+		// float targetRightHip = (float) Math.toRadians(-36f);
+		// float targetRightKnee = (float) Math.toRadians(27f);
+
+		// 4
+		float targetTorsoAngle = (float) Math.toRadians(7.27f);
+		float targetLeftHip = (float) Math.toRadians(-2f);
+		float targetLeftKnee = (float) Math.toRadians(42f);
+		float targetRightHip = (float) Math.toRadians(-40f);
+		float targetRightKnee = (float) Math.toRadians(27f);
 
 		float targetOffsetY = 0f;
 		if (performer.hiding) {
@@ -44,7 +67,7 @@ public class AnimationWait extends Animation {
 		//
 				offsetY == targetOffsetY &&
 				//
-				torsoAngle == 0 &&
+				torsoAngle == targetTorsoAngle &&
 				//
 				leftShoulderAngle == 0 &&
 				//
@@ -71,7 +94,7 @@ public class AnimationWait extends Animation {
 		offsetY = moveTowardsTargetAngleInRadians(offsetY, offsetYChange, targetOffsetY);
 
 		// torsoAngle = 0.5f;
-		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, 0);
+		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, targetTorsoAngle);
 
 		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, 0);
 		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, 0);
