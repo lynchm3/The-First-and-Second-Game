@@ -1989,40 +1989,40 @@ public class Level {
 																					// ":"
 																					// +
 
-		// Shadow
-		// if (hour < 6 || hour > 18) {
-		// shadowDarkness = 0f;
-		// } else
-		if (hour <= 6) {
+		// seconds through day
+		float secondsThroughDay = second + minute * 60f + hour * 60f * 60f;
+		float sixHoursInSeconds = 3600 * 6;
+
+		if (secondsThroughDay <= sixHoursInSeconds) {
 			System.out.println("hour = " + hour);
-			float progress = hour / 6f;
+			float progress = secondsThroughDay / sixHoursInSeconds;
 			System.out.println("progress = " + progress);
 			shadowAngle = 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
 			shadowDarkness = 0f;
 			smallShadowOffSetX = smallShadowMaxSize * (progress);
 			smallShadowOffSetY = -smallShadowMaxSize * (1f - progress);
-		} else if (hour <= 12) {
+		} else if (secondsThroughDay <= sixHoursInSeconds * 2) {
 			System.out.println("hour = " + hour);
-			float progress = (hour - 6f) / 6f;
+			float progress = (secondsThroughDay - sixHoursInSeconds) / sixHoursInSeconds;
 			System.out.println("progress = " + progress);
 			shadowAngle = 1.57f + 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
 			shadowDarkness = 0.2f * progress;
 			smallShadowOffSetX = smallShadowMaxSize * (1f - progress);
 			smallShadowOffSetY = smallShadowMaxSize * (progress);
-		} else if (hour <= 18) {
+		} else if (secondsThroughDay <= sixHoursInSeconds * 3) {
 			System.out.println("hour = " + hour);
-			float progress = (hour - 12f) / 6f;
+			float progress = (secondsThroughDay - sixHoursInSeconds * 2) / sixHoursInSeconds;
 			System.out.println("progress = " + progress);
 			shadowAngle = 3.14f + 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
 			shadowDarkness = 0.2f * (1f - progress);
 			smallShadowOffSetX = -smallShadowMaxSize * (progress);
 			smallShadowOffSetY = smallShadowMaxSize * (1f - progress);
-		} else if (hour <= 24) {
+		} else if (secondsThroughDay <= sixHoursInSeconds * 4) {
 			System.out.println("hour = " + hour);
-			float progress = (hour - 18f) / 6f;
+			float progress = (secondsThroughDay - sixHoursInSeconds * 3) / sixHoursInSeconds;
 			System.out.println("progress = " + progress);
 			shadowAngle = 3.14f + 1.57f + 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
