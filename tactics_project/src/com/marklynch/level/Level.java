@@ -202,6 +202,9 @@ public class Level {
 	public static float shadowLength = 1;
 	public static float shadowOffSetX = 0f;
 	public static float shadowOffSetY = 0f;
+	public static float smallShadowOffSetX = 0f;
+	public static float smallShadowOffSetY = 0f;
+	public static final float smallShadowMaxSize = 7f;
 	public static float shadowDarkness = 0.2f;
 
 	// Left 6am
@@ -1992,24 +1995,35 @@ public class Level {
 			System.out.println("progress = " + progress);
 			shadowAngle = 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
+			smallShadowOffSetX = smallShadowMaxSize * (progress);
+			smallShadowOffSetY = -smallShadowMaxSize * (1f - progress);
 		} else if (hour <= 12) {
 			System.out.println("hour = " + hour);
 			float progress = (hour - 6f) / 6f;
 			System.out.println("progress = " + progress);
 			shadowAngle = 1.57f + 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
+			shadowDarkness = 0.2f * progress;
+			smallShadowOffSetX = smallShadowMaxSize * (1f - progress);
+			smallShadowOffSetY = smallShadowMaxSize * (progress);
 		} else if (hour <= 18) {
 			System.out.println("hour = " + hour);
 			float progress = (hour - 12f) / 6f;
 			System.out.println("progress = " + progress);
 			shadowAngle = 3.14f + 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
+			shadowDarkness = 0.2f * (1f - progress);
+			smallShadowOffSetX = -smallShadowMaxSize * (progress);
+			smallShadowOffSetY = smallShadowMaxSize * (1f - progress);
 		} else if (hour <= 24) {
 			System.out.println("hour = " + hour);
 			float progress = (hour - 18f) / 6f;
 			System.out.println("progress = " + progress);
 			shadowAngle = 3.14f + 1.57f + 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
+			shadowDarkness = 0f;
+			smallShadowOffSetX = -smallShadowMaxSize * (1f - progress);
+			smallShadowOffSetY = -smallShadowMaxSize * (progress);
 		}
 
 		// Works for both w/ shadow angle 0

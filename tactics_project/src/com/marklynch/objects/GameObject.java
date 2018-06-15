@@ -420,10 +420,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 					Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK, false);
 		} else if (Level.shadowDarkness > 0) {
 			// drawGameObject((actorPositionXInPixels), (actorPositionYInPixels),
-			// Level.shadowDarkness, false, 1f,
-			// Level.shadowLength * 0.1f, Level.shadowAngle, boundsX1, boundsY1, boundsX2,
-			// boundsY2, Color.BLACK,
+			// Level.shadowDarkness, false, 1f, 1f,
+			// Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
 			// false);
+			drawGameObject((int) (actorPositionXInPixels + Level.smallShadowOffSetX),
+					(int) (actorPositionYInPixels + Level.smallShadowOffSetY), Level.shadowDarkness, false, 1f, 1f, 0f,
+					boundsX1 + Level.smallShadowOffSetX, boundsY1 + Level.smallShadowOffSetY,
+					boundsX2 + Level.smallShadowOffSetX, boundsY2 + Level.smallShadowOffSetY, Color.BLACK, false);
 		}
 
 		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
