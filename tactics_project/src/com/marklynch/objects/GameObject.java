@@ -20,6 +20,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectBurning;
@@ -415,10 +416,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// shadow
-		if (Level.shadowDarkness > 0 && bigShadow) {
+		if (Level.shadowDarkness > 0 && bigShadow && this.squareGameObjectIsOn.structureSquareIsIn == null) {
 			drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, 1f,
 					Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK, false);
-		} else if (Level.shadowDarkness > 0) {
+		} else if (Level.shadowDarkness > 0 && this.squareGameObjectIsOn.structureSquareIsIn == null) {
 			// drawGameObject((actorPositionXInPixels), (actorPositionYInPixels),
 			// Level.shadowDarkness, false, 1f, 1f,
 			// Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
@@ -431,9 +432,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 					boundsX2 + Level.smallShadowOffSetX, boundsY2 + Level.smallShadowOffSetY, Color.BLACK, false);
 		}
 
+		Color color = Level.dayTimeOverlayColor;
+		if (this.squareGameObjectIsOn.structureSquareIsIn != null)
+			color = StructureRoom.roomColor;
 		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
-				flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
-				Level.dayTimeOverlayColor, true);
+				flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color,
+				true);
 	}
 
 	public void drawGameObject(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY,

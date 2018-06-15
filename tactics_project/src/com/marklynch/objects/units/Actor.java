@@ -28,6 +28,7 @@ import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.conversation.Conversation;
@@ -581,7 +582,7 @@ public class Actor extends GameObject {
 		else {
 
 			// Shadow
-			if (Level.shadowDarkness > 0) {
+			if (Level.shadowDarkness > 0 && this.squareGameObjectIsOn.structureSquareIsIn == null) {
 				drawActor((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, 1f,
 						Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
 						false, false, !this.backwards);
@@ -597,9 +598,13 @@ public class Actor extends GameObject {
 			// boundsY2 + Level.shadowOffSetY * height + 64, Color.BLACK, false);
 
 			// Actor
+
+			Color color = Level.dayTimeOverlayColor;
+			if (this.squareGameObjectIsOn.structureSquareIsIn != null)
+				color = StructureRoom.roomColor;
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
 					flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
-					Level.dayTimeOverlayColor, true, true, this.backwards);
+					color, true, true, this.backwards);
 		}
 
 	}

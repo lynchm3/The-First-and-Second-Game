@@ -8,6 +8,7 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Color;
 
 public class StructureRoom {
 	public String name;
@@ -19,6 +20,8 @@ public class StructureRoom {
 	public Structure structure;
 	public int level = 0;
 	public ArrayList<Node> nodes;
+
+	public static Color roomColor = new Color(0.7f, 0.7f, 0.7f);
 
 	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList,
 			Node[] nodes, RoomPart... roomParts) {

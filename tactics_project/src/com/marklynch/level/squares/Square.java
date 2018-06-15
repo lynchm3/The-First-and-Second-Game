@@ -280,9 +280,13 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 						squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 			}
 		} else {
+
+			Color color = Level.dayTimeOverlayColor;
+			if (structureSquareIsIn != null && textureToDraw != GREY_TEXTURE)
+				color = StructureRoom.roomColor;
+
 			TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX, squarePositionY,
-					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT,
-					Level.dayTimeOverlayColor);
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT, color);
 		}
 
 		// if (sounds.size() > 0) {
