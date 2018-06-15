@@ -39,6 +39,7 @@ public class TemplatesNature {
 		Templates.TREE.value = 10;
 		Templates.TREE.anchorX = 0;
 		Templates.TREE.anchorY = 0;
+		Templates.TREE.bigShadow = true;
 		Templates.TREE.templateId = GameObject.generateNewTemplateId();
 		Templates.TREE.flipYAxisInMirror = false;
 
@@ -59,6 +60,7 @@ public class TemplatesNature {
 		Templates.BIG_TREE.value = 13;
 		Templates.BIG_TREE.anchorX = 0;
 		Templates.BIG_TREE.anchorY = 0;
+		Templates.BIG_TREE.bigShadow = true;
 		Templates.BIG_TREE.templateId = GameObject.generateNewTemplateId();
 		Templates.BIG_TREE.flipYAxisInMirror = false;
 
@@ -79,6 +81,7 @@ public class TemplatesNature {
 		Templates.STUMP.value = 6;
 		Templates.STUMP.anchorX = 0;
 		Templates.STUMP.anchorY = 0;
+		Templates.STUMP.bigShadow = true;
 		Templates.STUMP.templateId = GameObject.generateNewTemplateId();
 		Templates.STUMP.flipYAxisInMirror = false;
 
@@ -100,6 +103,7 @@ public class TemplatesNature {
 		Templates.BUSH.value = 11;
 		Templates.BUSH.anchorX = 0;
 		Templates.BUSH.anchorY = 0;
+		Templates.BUSH.bigShadow = true;
 		Templates.BUSH.templateId = GameObject.generateNewTemplateId();
 		Templates.BUSH.effectsFromInteracting = new Effect[] {};
 		Templates.BUSH.flipYAxisInMirror = false;
@@ -122,6 +126,7 @@ public class TemplatesNature {
 		Templates.POISON_BUSH.value = 16;
 		Templates.POISON_BUSH.anchorX = 0;
 		Templates.POISON_BUSH.anchorY = 0;
+		Templates.POISON_BUSH.bigShadow = true;
 		Templates.POISON_BUSH.effectsFromInteracting = new Effect[] { new EffectPoison(3) };
 		Templates.POISON_BUSH.templateId = GameObject.generateNewTemplateId();
 		Templates.POISON_BUSH.flipYAxisInMirror = false;
@@ -143,6 +148,7 @@ public class TemplatesNature {
 		Templates.LONG_GRASS.value = 8;
 		Templates.LONG_GRASS.anchorX = 0;
 		Templates.LONG_GRASS.anchorY = 0;
+		Templates.LONG_GRASS.bigShadow = true;
 		Templates.LONG_GRASS.templateId = GameObject.generateNewTemplateId();
 		Templates.LONG_GRASS.effectsFromInteracting = new Effect[] {};
 		Templates.LONG_GRASS.flipYAxisInMirror = false;
@@ -164,6 +170,7 @@ public class TemplatesNature {
 		Templates.WHEAT.value = 17;
 		Templates.WHEAT.anchorX = 0;
 		Templates.WHEAT.anchorY = 0;
+		Templates.WHEAT.bigShadow = true;
 		Templates.WHEAT.templateId = GameObject.generateNewTemplateId();
 		Templates.WHEAT.effectsFromInteracting = new Effect[] {};
 		Templates.WHEAT.flipYAxisInMirror = false;

@@ -258,6 +258,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public GameObject fishingTarget;
 	public GameObject equipped = null;
 
+	public boolean bigShadow = false;
+
 	public GameObject() {
 
 		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(0));
@@ -412,6 +414,18 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			boundsY2 += primaryAnimation.offsetY + primaryAnimation.boundsY2;
 		}
 
+		// shadow
+		if (Level.shadowDarkness > 0 && bigShadow) {
+			drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, 1f,
+					Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK, false);
+		} else if (Level.shadowDarkness > 0) {
+			// drawGameObject((actorPositionXInPixels), (actorPositionYInPixels),
+			// Level.shadowDarkness, false, 1f,
+			// Level.shadowLength * 0.1f, Level.shadowAngle, boundsX1, boundsY1, boundsX2,
+			// boundsY2, Color.BLACK,
+			// false);
+		}
+
 		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
 				flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
 				TextureUtils.neutralColor, true);
@@ -424,12 +438,26 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// Draw object
 		if (squareGameObjectIsOn != null) {
 
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+
+			if (scaleX != 1 || scaleY != 1) {
+				Game.flush();
+				view.translate(new Vector2f(x, y));
+				view.scale(new Vector3f(scaleX, scaleY, 1f));
+				view.translate(new Vector2f(-x, -y));
+				Game.activeBatch.updateUniforms();
+			}
+			Game.flush();
+			view.translate(new Vector2f(x + halfWidth, y + height));
+			view.rotate(rotationRad, new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-(x + halfWidth), -(y + height)));
+			Game.activeBatch.updateUniforms();
+
 			float torsoAngle = 0;
 			if (primaryAnimation != null) {
 				torsoAngle = primaryAnimation.torsoAngle;
 			}
 
-			Matrix4f view = Game.activeBatch.getViewMatrix();
 			Game.flush();
 			view.translate(new Vector2f(x + halfWidth, y + halfHeight));
 			view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
@@ -458,7 +486,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
 							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-									+ arrow.height);
+									+ arrow.height,
+							color);
 				} else {
 					TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
 							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
@@ -466,13 +495,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
 							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-									+ arrow.height);
+									+ arrow.height,
+							color);
 
 				}
 			}
 
 			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, x, y, x + width, y + height, boundsX1, boundsY1,
-					boundsX2, boundsY2, backwards, false, TextureUtils.neutralColor);
+					boundsX2, boundsY2, backwards, false, color);
 
 			if (flash || this == Game.gameObjectMouseIsOver) {
 				TextureUtils.drawTexture(imageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
@@ -508,7 +538,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
 							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-									+ arrow.height);
+									+ arrow.height,
+							color);
 
 				} else {
 					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
@@ -517,7 +548,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
 							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
 							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-									+ arrow.height);
+									+ arrow.height,
+							color);
 
 				}
 			}
@@ -554,6 +586,21 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			view.rotate(-torsoAngle, new Vector3f(0f, 0f, 1f));
 			view.translate(new Vector2f(-(x + halfWidth), -(y + halfHeight)));
 			Game.flush();
+
+			Game.flush();
+			view.translate(new Vector2f(x + halfWidth, y + height));
+			view.rotate(-(rotationRad), new Vector3f(0f, 0f, 1f));
+			view.translate(new Vector2f(-(x + halfWidth), -(y + height)));
+			Game.activeBatch.updateUniforms();
+
+			if (scaleX != 1 || scaleY != 1) {
+				Game.flush();
+				// Matrix4f view = Game.activeBatch.getViewMatrix();
+				view.translate(new Vector2f(x, y));
+				view.scale(new Vector3f(1f / scaleX, 1f / scaleY, 1f));
+				view.translate(new Vector2f(-x, -y));
+				Game.activeBatch.updateUniforms();
+			}
 		}
 
 	}
@@ -1823,6 +1870,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		gameObject.diggable = diggable;
 		gameObject.flipYAxisInMirror = flipYAxisInMirror;
+
+		gameObject.bigShadow = bigShadow;
 
 		gameObject.init();
 	}
