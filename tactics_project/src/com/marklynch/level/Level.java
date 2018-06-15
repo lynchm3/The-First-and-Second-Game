@@ -71,6 +71,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Level {
 
@@ -1188,6 +1189,41 @@ public class Level {
 		// drawStaticUI
 
 		QuadUtils.drawQuad(dayTimeOverlay, 0, 0, Game.windowWidth, Game.windowHeight);
+
+		// corner gradients
+		TextureUtils.drawTexture(Inventory.textureCornerGradient, dayTimeOverlay.a * 0.5f, 0, 0,
+				Inventory.textureCornerGradient.getWidth(), Inventory.textureCornerGradient.getHeight(),
+				dayTimeOverlay);
+		TextureUtils.drawTexture(Inventory.textureCornerGradient, dayTimeOverlay.a * 0.5f, 0, Game.windowHeight,
+				Inventory.textureCornerGradient.getWidth(),
+				Game.windowHeight - Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
+		TextureUtils.drawTexture(Inventory.textureCornerGradient, dayTimeOverlay.a * 0.5f, Game.windowWidth, 0,
+				Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
+				Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
+		TextureUtils.drawTexture(Inventory.textureCornerGradient, dayTimeOverlay.a * 0.5f, Game.windowWidth,
+				Game.windowHeight, Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
+				Game.windowHeight - Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
+
+		// side gradients
+		// left
+		TextureUtils.drawTexture(Inventory.textureSideGradient, dayTimeOverlay.a * 0.5f, 0,
+				Inventory.textureCornerGradient.getHeight(), Inventory.textureCornerGradient.getWidth(),
+				Game.windowHeight - Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
+		// top
+		TextureUtils.drawTexture(Inventory.textureTopGradient, dayTimeOverlay.a * 0.5f,
+				Inventory.textureCornerGradient.getWidth(), 0,
+				Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
+				Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
+		// right
+		TextureUtils.drawTexture(Inventory.textureSideGradient, dayTimeOverlay.a * 0.5f, Game.windowWidth,
+				Inventory.textureCornerGradient.getHeight(),
+				Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
+				Game.windowHeight - Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
+		// bottom
+		TextureUtils.drawTexture(Inventory.textureTopGradient, dayTimeOverlay.a * 0.5f,
+				Inventory.textureCornerGradient.getWidth(), Game.windowHeight,
+				Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
+				Game.windowHeight - Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
 
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 

@@ -1311,7 +1311,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// Top border black mask
 
 		TextureUtils.tileTextureWithinBounds(textureBackgroundTile, 1f, 0, 0, textureBackgroundTile.getWidth(),
-				textureBackgroundTile.getHeight(), 0, 0, Game.windowWidth, topBorderHeight, false, false, TextureUtils.neutralColor);
+				textureBackgroundTile.getHeight(), 0, 0, Game.windowWidth, topBorderHeight, false, false,
+				TextureUtils.neutralColor);
 
 		// Bottom mask
 		TextureUtils.tileTextureWithinBounds(textureBackgroundTile, 1f, 0, 0, textureBackgroundTile.getWidth(),
@@ -1322,31 +1323,31 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// corner gradients
 		TextureUtils.drawTexture(textureCornerGradient, 1f, 0, 0, textureCornerGradient.getWidth(),
-				textureCornerGradient.getHeight());
+				textureCornerGradient.getHeight(), Color.BLACK);
 		TextureUtils.drawTexture(textureCornerGradient, 1f, 0, Game.windowHeight, textureCornerGradient.getWidth(),
-				Game.windowHeight - textureCornerGradient.getHeight());
+				Game.windowHeight - textureCornerGradient.getHeight(), Color.BLACK);
 		TextureUtils.drawTexture(textureCornerGradient, 1f, Game.windowWidth, 0,
-				Game.windowWidth - textureCornerGradient.getWidth(), textureCornerGradient.getHeight());
+				Game.windowWidth - textureCornerGradient.getWidth(), textureCornerGradient.getHeight(), Color.BLACK);
 
 		TextureUtils.drawTexture(textureCornerGradient, 1f, Game.windowWidth, Game.windowHeight,
 				Game.windowWidth - textureCornerGradient.getWidth(),
-				Game.windowHeight - textureCornerGradient.getHeight());
+				Game.windowHeight - textureCornerGradient.getHeight(), Color.BLACK);
 
 		// side gradients
 		// left
 		TextureUtils.drawTexture(textureSideGradient, 1f, 0, textureCornerGradient.getHeight(),
-				textureCornerGradient.getWidth(), Game.windowHeight - textureCornerGradient.getHeight());
+				textureCornerGradient.getWidth(), Game.windowHeight - textureCornerGradient.getHeight(), Color.BLACK);
 		// top
 		TextureUtils.drawTexture(textureTopGradient, 1f, textureCornerGradient.getWidth(), 0,
-				Game.windowWidth - textureCornerGradient.getWidth(), textureCornerGradient.getHeight());
+				Game.windowWidth - textureCornerGradient.getWidth(), textureCornerGradient.getHeight(), Color.BLACK);
 		// right
 		TextureUtils.drawTexture(textureSideGradient, 1f, Game.windowWidth, textureCornerGradient.getHeight(),
 				Game.windowWidth - textureCornerGradient.getWidth(),
-				Game.windowHeight - textureCornerGradient.getHeight());
+				Game.windowHeight - textureCornerGradient.getHeight(), Color.BLACK);
 		// bottom
 		TextureUtils.drawTexture(textureTopGradient, 1f, textureCornerGradient.getWidth(), Game.windowHeight,
 				Game.windowWidth - textureCornerGradient.getWidth(),
-				Game.windowHeight - textureCornerGradient.getHeight());
+				Game.windowHeight - textureCornerGradient.getHeight(), Color.BLACK);
 
 		// "Search:" text
 		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] { stringSearch });
@@ -1917,8 +1918,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void drawActor(Actor actor, int x, int y) {
-		actor.drawActor(x, y, 1, false, 2f, 2f, 0f, Integer.MIN_VALUE, Integer.MIN_VALUE,
-				Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false, actor.backwards);
+		actor.drawActor(x, y, 1, false, 2f, 2f, 0f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE,
+				Integer.MAX_VALUE, TextureUtils.neutralColor, true, false, actor.backwards);
 	}
 
 	@Override
