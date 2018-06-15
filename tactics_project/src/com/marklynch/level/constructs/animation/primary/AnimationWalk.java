@@ -190,7 +190,7 @@ public class AnimationWalk extends Animation {
 		int oldKeyFrame = 0;
 		int newKeyFrame = 0;
 		float intermediateProgress = 0;
-		if (phase == 0) {
+		if (phase == 0 || phase == 2) {
 			// key frames 1,2,3,4
 			if (progress < 0.25f) {
 				// key frame 1
@@ -218,7 +218,7 @@ public class AnimationWalk extends Animation {
 			leftShoulderAngle = 0.2f * progress;
 			rightShoulderAngle = -leftShoulderAngle;
 
-		} else if (phase == 1) {
+		} else if (phase == 1 || phase == 3) {
 			// key frames 4,5,6,7
 			if (progress < 0.25f) {
 				// key frame 1
@@ -255,6 +255,7 @@ public class AnimationWalk extends Animation {
 		}
 		torsoAngle = torsoKeyFrames[oldKeyFrame]
 				+ intermediateProgress * (torsoKeyFrames[newKeyFrame] - torsoKeyFrames[oldKeyFrame]);
+
 		leftHipAngle = leftHipKeyFrames[oldKeyFrame]
 				+ intermediateProgress * (leftHipKeyFrames[newKeyFrame] - leftHipKeyFrames[oldKeyFrame]);
 		leftKneeAngle = leftKneeKeyFrames[oldKeyFrame]
@@ -263,6 +264,18 @@ public class AnimationWalk extends Animation {
 				+ intermediateProgress * (rightHipKeyFrames[newKeyFrame] - rightHipKeyFrames[oldKeyFrame]);
 		rightKneeAngle = rightKneeKeyFrames[oldKeyFrame]
 				+ intermediateProgress * (rightKneeKeyFrames[newKeyFrame] - rightKneeKeyFrames[oldKeyFrame]);
+
+		if (phase == 2 || phase == 4) {
+
+			float temp = leftHipAngle;
+			leftHipAngle = rightHipAngle;
+			rightHipAngle = temp;
+
+			temp = leftKneeAngle;
+			leftKneeAngle = rightKneeAngle;
+			rightKneeAngle = temp;
+
+		}
 
 		leftElbowAngle = -0.1f;
 		rightElbowAngle = -0.1f;
