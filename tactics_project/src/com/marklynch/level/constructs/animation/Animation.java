@@ -96,6 +96,8 @@ public abstract class Animation {
 
 	protected void reverseAnimation() {
 
+		torsoAngle = -torsoAngle;
+
 		float temp = rightShoulderAngle;
 		rightShoulderAngle = -leftShoulderAngle;
 		leftShoulderAngle = -temp;
