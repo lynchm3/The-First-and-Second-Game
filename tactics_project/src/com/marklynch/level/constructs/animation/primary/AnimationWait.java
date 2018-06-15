@@ -22,34 +22,11 @@ public class AnimationWait extends Animation {
 
 		durationSoFar += delta;
 		// double progress = durationSoFar / durationToReach;
-
-		// 1
-		// float targetTorsoAngle = (float) Math.toRadians(11.4f);
-		// float targetLeftHip = (float) Math.toRadians(-19.13f);
-		// float targetLeftKnee = (float) Math.toRadians(13.86f);
-		// float targetRightHip = (float) Math.toRadians(-33.01f);
-		// float targetRightKnee = (float) Math.toRadians(75.21f);
-
-		// 2
-		// float targetTorsoAngle = (float) Math.toRadians(8.9f);
-		// float targetLeftHip = (float) Math.toRadians(-2f);
-		// float targetLeftKnee = (float) Math.toRadians(-1f);
-		// float targetRightHip = (float) Math.toRadians(-34f);
-		// float targetRightKnee = (float) Math.toRadians(57f);
-
-		// 3
-		// float targetTorsoAngle = (float) Math.toRadians(13.35f);
-		// float targetLeftHip = (float) Math.toRadians(-3f);
-		// float targetLeftKnee = (float) Math.toRadians(22f);
-		// float targetRightHip = (float) Math.toRadians(-36f);
-		// float targetRightKnee = (float) Math.toRadians(27f);
-
-		// 4
-		float targetTorsoAngle = (float) Math.toRadians(7.27f);
-		float targetLeftHip = (float) Math.toRadians(-2f);
-		float targetLeftKnee = (float) Math.toRadians(42f);
-		float targetRightHip = (float) Math.toRadians(-40f);
-		float targetRightKnee = (float) Math.toRadians(27f);
+		float targetRightHip = 0f;
+		float targetRightKnee = 0f;
+		float targetLeftHip = 0f;
+		float targetLeftKnee = 0f;
+		float targetTorsoAngle = 0f;
 
 		float targetOffsetY = 0f;
 		if (performer.hiding) {
