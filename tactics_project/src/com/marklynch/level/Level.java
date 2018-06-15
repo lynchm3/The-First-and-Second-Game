@@ -71,7 +71,6 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
-import com.marklynch.utils.TextureUtils;
 
 public class Level {
 
@@ -189,7 +188,7 @@ public class Level {
 	String secondString = "0";
 	public String timeString = "Day 1, 00:00";
 
-	public static Color dayTimeOverlay = Color.TRANSPARENT;
+	public static Color dayTimeOverlayColor = Color.TRANSPARENT;
 
 	//
 
@@ -1000,22 +999,22 @@ public class Level {
 				}
 			}
 
+			// Squares draw2
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				// for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+				// is it better to bind once and draw all the same ones?
+				squares[i][j].draw2();
+				// }
+			}
+
 			Game.flush();
 		}
 
 		Journal.drawQuestsMarkersForVisibleOnScreenObjectives();
 
-		// Squares
-		for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
-				// is it better to bind once and draw all the same ones?
-				squares[i][j].draw2();
-			}
-		}
-
-		for (Structure structure : structures) {
-			structure.draw2();
-		}
+		// for (Structure structure : structures) {
+		// structure.draw2();
+		// }
 
 		if (Player.playerTargetSquare != null) {
 			if (Player.playerTargetAction != null)
@@ -1188,42 +1187,59 @@ public class Level {
 
 		// drawStaticUI
 
-		QuadUtils.drawQuad(dayTimeOverlay, 0, 0, Game.windowWidth, Game.windowHeight);
-
-		// corner gradients
-		TextureUtils.drawTexture(Inventory.textureCornerGradient, dayTimeOverlay.a * 0.5f, 0, 0,
-				Inventory.textureCornerGradient.getWidth(), Inventory.textureCornerGradient.getHeight(),
-				dayTimeOverlay);
-		TextureUtils.drawTexture(Inventory.textureCornerGradient, dayTimeOverlay.a * 0.5f, 0, Game.windowHeight,
-				Inventory.textureCornerGradient.getWidth(),
-				Game.windowHeight - Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
-		TextureUtils.drawTexture(Inventory.textureCornerGradient, dayTimeOverlay.a * 0.5f, Game.windowWidth, 0,
-				Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
-				Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
-		TextureUtils.drawTexture(Inventory.textureCornerGradient, dayTimeOverlay.a * 0.5f, Game.windowWidth,
-				Game.windowHeight, Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
-				Game.windowHeight - Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
-
-		// side gradients
-		// left
-		TextureUtils.drawTexture(Inventory.textureSideGradient, dayTimeOverlay.a * 0.5f, 0,
-				Inventory.textureCornerGradient.getHeight(), Inventory.textureCornerGradient.getWidth(),
-				Game.windowHeight - Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
-		// top
-		TextureUtils.drawTexture(Inventory.textureTopGradient, dayTimeOverlay.a * 0.5f,
-				Inventory.textureCornerGradient.getWidth(), 0,
-				Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
-				Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
-		// right
-		TextureUtils.drawTexture(Inventory.textureSideGradient, dayTimeOverlay.a * 0.5f, Game.windowWidth,
-				Inventory.textureCornerGradient.getHeight(),
-				Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
-				Game.windowHeight - Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
-		// bottom
-		TextureUtils.drawTexture(Inventory.textureTopGradient, dayTimeOverlay.a * 0.5f,
-				Inventory.textureCornerGradient.getWidth(), Game.windowHeight,
-				Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
-				Game.windowHeight - Inventory.textureCornerGradient.getHeight(), dayTimeOverlay);
+		// QuadUtils.drawQuad(dayTimeOverlayColor, 0, 0, Game.windowWidth,
+		// Game.windowHeight);
+		//
+		// // corner gradients
+		// TextureUtils.drawTexture(Inventory.textureCornerGradient,
+		// dayTimeOverlayColor.a * 0.5f, 0, 0,
+		// Inventory.textureCornerGradient.getWidth(),
+		// Inventory.textureCornerGradient.getHeight(),
+		// dayTimeOverlayColor);
+		// TextureUtils.drawTexture(Inventory.textureCornerGradient,
+		// dayTimeOverlayColor.a * 0.5f, 0, Game.windowHeight,
+		// Inventory.textureCornerGradient.getWidth(),
+		// Game.windowHeight - Inventory.textureCornerGradient.getHeight(),
+		// dayTimeOverlayColor);
+		// TextureUtils.drawTexture(Inventory.textureCornerGradient,
+		// dayTimeOverlayColor.a * 0.5f, Game.windowWidth, 0,
+		// Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
+		// Inventory.textureCornerGradient.getHeight(), dayTimeOverlayColor);
+		// TextureUtils.drawTexture(Inventory.textureCornerGradient,
+		// dayTimeOverlayColor.a * 0.5f, Game.windowWidth,
+		// Game.windowHeight, Game.windowWidth -
+		// Inventory.textureCornerGradient.getWidth(),
+		// Game.windowHeight - Inventory.textureCornerGradient.getHeight(),
+		// dayTimeOverlayColor);
+		//
+		// // side gradients
+		// // left
+		// TextureUtils.drawTexture(Inventory.textureSideGradient, dayTimeOverlayColor.a
+		// * 0.5f, 0,
+		// Inventory.textureCornerGradient.getHeight(),
+		// Inventory.textureCornerGradient.getWidth(),
+		// Game.windowHeight - Inventory.textureCornerGradient.getHeight(),
+		// dayTimeOverlayColor);
+		// // top
+		// TextureUtils.drawTexture(Inventory.textureTopGradient, dayTimeOverlayColor.a
+		// * 0.5f,
+		// Inventory.textureCornerGradient.getWidth(), 0,
+		// Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
+		// Inventory.textureCornerGradient.getHeight(), dayTimeOverlayColor);
+		// // right
+		// TextureUtils.drawTexture(Inventory.textureSideGradient, dayTimeOverlayColor.a
+		// * 0.5f, Game.windowWidth,
+		// Inventory.textureCornerGradient.getHeight(),
+		// Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
+		// Game.windowHeight - Inventory.textureCornerGradient.getHeight(),
+		// dayTimeOverlayColor);
+		// // bottom
+		// TextureUtils.drawTexture(Inventory.textureTopGradient, dayTimeOverlayColor.a
+		// * 0.5f,
+		// Inventory.textureCornerGradient.getWidth(), Game.windowHeight,
+		// Game.windowWidth - Inventory.textureCornerGradient.getWidth(),
+		// Game.windowHeight - Inventory.textureCornerGradient.getHeight(),
+		// dayTimeOverlayColor);
 
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
@@ -2087,30 +2103,30 @@ public class Level {
 
 		if (hour <= 6) {
 			float progress = hour / 6f;
-			dayTimeOverlay.a = 0.4f - 0.35f * (progress);
-			System.out.println("dayTimeOverlay.a = " + dayTimeOverlay.a);
+			dayTimeOverlayColor.a = 0.4f - 0.35f * (progress);
+			System.out.println("dayTimeOverlay.a = " + dayTimeOverlayColor.a);
 
-			dayTimeOverlay.r = 0.1f + 0.34f * (progress);
-			dayTimeOverlay.g = 0.1f + 0.34f * (progress);
-			dayTimeOverlay.b = 0.22f - 0f * (progress);
+			dayTimeOverlayColor.r = 0.1f + 0.34f * (progress);
+			dayTimeOverlayColor.g = 0.1f + 0.34f * (progress);
+			dayTimeOverlayColor.b = 0.22f - 0f * (progress);
 		} else if (hour <= 12) {
 			float progress = (hour - 6f) / 6f;
-			dayTimeOverlay.a = 0.05f * (1f - progress);
-			dayTimeOverlay.r = 0.44f + 0.56f * (progress);
-			dayTimeOverlay.g = 0.44f + 0.56f * (progress);
-			dayTimeOverlay.b = 0.22f + 0.78f * (progress);
+			dayTimeOverlayColor.a = 0.05f * (1f - progress);
+			dayTimeOverlayColor.r = 0.44f + 0.56f * (progress);
+			dayTimeOverlayColor.g = 0.44f + 0.56f * (progress);
+			dayTimeOverlayColor.b = 0.22f + 0.78f * (progress);
 		} else if (hour <= 18) {
 			float progress = (hour - 12f) / 6f;
-			dayTimeOverlay.a = 0.05f * (progress);
-			dayTimeOverlay.r = 1f - 0.56f * (progress);
-			dayTimeOverlay.g = 1f - 0.63f * (progress);
-			dayTimeOverlay.b = 1f - 0.67f * (progress);
+			dayTimeOverlayColor.a = 0.05f * (progress);
+			dayTimeOverlayColor.r = 1f - 0.56f * (progress);
+			dayTimeOverlayColor.g = 1f - 0.63f * (progress);
+			dayTimeOverlayColor.b = 1f - 0.67f * (progress);
 		} else if (hour <= 24) {
 			float progress = (hour - 18f) / 6f;
-			dayTimeOverlay.a = 0.1f + 0.35f * (progress);
-			dayTimeOverlay.r = 0.44f - 0.34f * (progress);
-			dayTimeOverlay.g = 0.37f - 0.27f * (progress);
-			dayTimeOverlay.b = 0.33f - 0.11f * (progress);
+			dayTimeOverlayColor.a = 0.1f + 0.35f * (progress);
+			dayTimeOverlayColor.r = 0.44f - 0.34f * (progress);
+			dayTimeOverlayColor.g = 0.37f - 0.27f * (progress);
+			dayTimeOverlayColor.b = 0.33f - 0.11f * (progress);
 		}
 	}
 

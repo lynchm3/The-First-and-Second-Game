@@ -281,7 +281,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			}
 		} else {
 			TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX, squarePositionY,
-					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT,
+					Level.dayTimeOverlayColor);
 		}
 
 		// if (sounds.size() > 0) {
@@ -304,6 +305,23 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		if (flash) {
 			drawHighlight();
 		}
+
+	}
+
+	public void draw2() {
+
+		// if (!this.seenByPlayer || !this.visibleToPlayer)
+		// return;
+		//
+		// float squarePositionX = xInGridPixels;
+		// float squarePositionY = yInGridPixels;
+		//
+		// QuadUtils.drawQuad(Level.dayTimeOverlayColor, squarePositionX,
+		// squarePositionY,
+		// squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		// TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX,
+		// squarePositionY,
+		// squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
 	}
 
@@ -441,18 +459,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		float squarePositionY = yInGridPixels;
 		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture4, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
-
-	}
-
-	public void draw2() {
-
-		// int squarePositionX = xInGridPixels;
-		// int squarePositionY = yInGridPixels;
-		//
-		// if (!this.visibleToPlayer)
-		// QuadUtils.drawQuad(new Color(0.5f, 0.5f, 0.5f, 0.75f),
-		// squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
-		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
 	}
 

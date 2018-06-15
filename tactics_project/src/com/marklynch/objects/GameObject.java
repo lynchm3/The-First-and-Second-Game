@@ -433,7 +433,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
 				flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
-				TextureUtils.neutralColor, true);
+				Level.dayTimeOverlayColor, true);
 	}
 
 	public void drawGameObject(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY,

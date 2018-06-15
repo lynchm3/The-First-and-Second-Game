@@ -599,7 +599,7 @@ public class Actor extends GameObject {
 			// Actor
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
 					flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
-					TextureUtils.neutralColor, true, true, this.backwards);
+					Level.dayTimeOverlayColor, true, true, this.backwards);
 		}
 
 	}
