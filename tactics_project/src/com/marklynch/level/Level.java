@@ -2051,37 +2051,37 @@ public class Level {
 
 		if (hour <= 6) {
 			float progress = hour / 6f;
-			dayTimeOverlay.a = 0.1f * (1f - progress) + 0.1f;
+			dayTimeOverlay.a = 0.4f - 0.35f * (progress);
 			System.out.println("dayTimeOverlay.a = " + dayTimeOverlay.a);
 
-			dayTimeOverlay.r = 0.1f + 0.77f * (progress);
-			dayTimeOverlay.g = 0.1f + 0.72f * (progress);
-			dayTimeOverlay.b = 0.44f - 0.22f * (progress);
+			dayTimeOverlay.r = 0.1f + 0.34f * (progress);
+			dayTimeOverlay.g = 0.1f + 0.34f * (progress);
+			dayTimeOverlay.b = 0.22f - 0f * (progress);
 		} else if (hour <= 12) {
 			float progress = (hour - 6f) / 6f;
-			dayTimeOverlay.a = 0.1f * (1f - progress);
-			dayTimeOverlay.r = 0.87f + 0.13f * (progress);
-			dayTimeOverlay.g = 0.82f + 0.18f * (progress);
+			dayTimeOverlay.a = 0.05f * (1f - progress);
+			dayTimeOverlay.r = 0.44f + 0.56f * (progress);
+			dayTimeOverlay.g = 0.44f + 0.56f * (progress);
 			dayTimeOverlay.b = 0.22f + 0.78f * (progress);
 		} else if (hour <= 18) {
 			float progress = (hour - 12f) / 6f;
-			dayTimeOverlay.a = 0.1f * (progress);
-			dayTimeOverlay.r = 1f - 0.1f * (progress);
+			dayTimeOverlay.a = 0.05f * (progress);
+			dayTimeOverlay.r = 1f - 0.56f * (progress);
 			dayTimeOverlay.g = 1f - 0.63f * (progress);
 			dayTimeOverlay.b = 1f - 0.67f * (progress);
 		} else if (hour <= 24) {
 			float progress = (hour - 18f) / 6f;
-			dayTimeOverlay.a = 0.1f * (progress) + 0.1f;
-			dayTimeOverlay.r = 0.99f - 0.89f * (progress);
+			dayTimeOverlay.a = 0.1f + 0.35f * (progress);
+			dayTimeOverlay.r = 0.44f - 0.34f * (progress);
 			dayTimeOverlay.g = 0.37f - 0.27f * (progress);
-			dayTimeOverlay.b = 0.33f + 0.11f * (progress);
+			dayTimeOverlay.b = 0.33f - 0.11f * (progress);
 		}
 	}
 
-	Color midnightBlue = new Color(0.1f, 0.1f, 0.44f);
-	Color sunriseYellow = new Color(0.87f, 0.82f, 0.22f);
+	Color midnightBlue = new Color(0.1f, 0.1f, 0.22f);
+	Color sunriseYellow = new Color(0.44f, 0.44f, 0.22f);
 	Color white = Color.WHITE;
-	Color sunsetOrange = new Color(0.99f, 0.37f, 0.33f);
+	Color sunsetOrange = new Color(0.44f, 0.37f, 0.33f);
 
 	public void startPlayerTurn() {
 		System.out.println("----------------START PLAYER TURN-----------------");
