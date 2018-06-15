@@ -188,6 +188,8 @@ public class Level {
 	String secondString = "0";
 	public String timeString = "Day 1, 00:00";
 
+	public static Color dayTimeOverlay = Color.TRANSPARENT;
+
 	//
 
 	// bottom 12pm
@@ -1185,6 +1187,8 @@ public class Level {
 
 		// drawStaticUI
 
+		QuadUtils.drawQuad(dayTimeOverlay, 0, 0, Game.windowWidth, Game.windowHeight);
+
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
 			Game.flush();
@@ -1995,6 +1999,7 @@ public class Level {
 			System.out.println("progress = " + progress);
 			shadowAngle = 1.57f * (progress);
 			System.out.println("shadowAngle = " + shadowAngle);
+			shadowDarkness = 0f;
 			smallShadowOffSetX = smallShadowMaxSize * (progress);
 			smallShadowOffSetY = -smallShadowMaxSize * (1f - progress);
 		} else if (hour <= 12) {
@@ -2041,7 +2046,42 @@ public class Level {
 		// public static float shadowOffSetY = 0->0.86f->0;
 		// public static float shadowDarkness = 0 -> 0.2f -> 0;
 
+		// Color overlay
+		// 00:00->12:00
+
+		if (hour <= 6) {
+			float progress = hour / 6f;
+			dayTimeOverlay.a = 0.1f * (1f - progress) + 0.1f;
+			System.out.println("dayTimeOverlay.a = " + dayTimeOverlay.a);
+
+			dayTimeOverlay.r = 0.1f + 0.77f * (progress);
+			dayTimeOverlay.g = 0.1f + 0.72f * (progress);
+			dayTimeOverlay.b = 0.44f - 0.22f * (progress);
+		} else if (hour <= 12) {
+			float progress = (hour - 6f) / 6f;
+			dayTimeOverlay.a = 0.1f * (1f - progress);
+			dayTimeOverlay.r = 0.87f + 0.13f * (progress);
+			dayTimeOverlay.g = 0.82f + 0.18f * (progress);
+			dayTimeOverlay.b = 0.22f + 0.78f * (progress);
+		} else if (hour <= 18) {
+			float progress = (hour - 12f) / 6f;
+			dayTimeOverlay.a = 0.1f * (progress);
+			dayTimeOverlay.r = 1f - 0.1f * (progress);
+			dayTimeOverlay.g = 1f - 0.63f * (progress);
+			dayTimeOverlay.b = 1f - 0.67f * (progress);
+		} else if (hour <= 24) {
+			float progress = (hour - 18f) / 6f;
+			dayTimeOverlay.a = 0.1f * (progress) + 0.1f;
+			dayTimeOverlay.r = 0.99f - 0.89f * (progress);
+			dayTimeOverlay.g = 0.37f - 0.27f * (progress);
+			dayTimeOverlay.b = 0.33f + 0.11f * (progress);
+		}
 	}
+
+	Color midnightBlue = new Color(0.1f, 0.1f, 0.44f);
+	Color sunriseYellow = new Color(0.87f, 0.82f, 0.22f);
+	Color white = Color.WHITE;
+	Color sunsetOrange = new Color(0.99f, 0.37f, 0.33f);
 
 	public void startPlayerTurn() {
 		System.out.println("----------------START PLAYER TURN-----------------");

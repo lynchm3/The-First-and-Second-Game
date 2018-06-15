@@ -423,6 +423,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			// Level.shadowDarkness, false, 1f, 1f,
 			// Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
 			// false);
+
+			// Level.shadowDarkness
 			drawGameObject((int) (actorPositionXInPixels + Level.smallShadowOffSetX),
 					(int) (actorPositionYInPixels + Level.smallShadowOffSetY), Level.shadowDarkness, false, 1f, 1f, 0f,
 					boundsX1 + Level.smallShadowOffSetX, boundsY1 + Level.smallShadowOffSetY,
