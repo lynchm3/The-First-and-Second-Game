@@ -2106,27 +2106,27 @@ public class Level {
 			dayTimeOverlayColor.a = 0.4f - 0.35f * (progress);
 			System.out.println("dayTimeOverlay.a = " + dayTimeOverlayColor.a);
 
-			dayTimeOverlayColor.r = 0.1f + 0.34f * (progress);
-			dayTimeOverlayColor.g = 0.1f + 0.34f * (progress);
-			dayTimeOverlayColor.b = 0.22f - 0f * (progress);
+			dayTimeOverlayColor.r = 0.7f + 0.2f * (progress);
+			dayTimeOverlayColor.g = 0.7f + 0.2f * (progress);
+			dayTimeOverlayColor.b = 0.8f + 0.05f * (progress);
 		} else if (hour <= 12) {
 			float progress = (hour - 6f) / 6f;
 			dayTimeOverlayColor.a = 0.05f * (1f - progress);
-			dayTimeOverlayColor.r = 0.44f + 0.56f * (progress);
-			dayTimeOverlayColor.g = 0.44f + 0.56f * (progress);
-			dayTimeOverlayColor.b = 0.22f + 0.78f * (progress);
+			dayTimeOverlayColor.r = 0.9f + 0.1f * (progress);
+			dayTimeOverlayColor.g = 0.9f + 0.1f * (progress);
+			dayTimeOverlayColor.b = 0.85f + 0.15f * (progress);
 		} else if (hour <= 18) {
 			float progress = (hour - 12f) / 6f;
 			dayTimeOverlayColor.a = 0.05f * (progress);
-			dayTimeOverlayColor.r = 1f - 0.56f * (progress);
-			dayTimeOverlayColor.g = 1f - 0.63f * (progress);
-			dayTimeOverlayColor.b = 1f - 0.67f * (progress);
+			dayTimeOverlayColor.r = 1f - 0.1f * (progress);
+			dayTimeOverlayColor.g = 1f - 0.1f * (progress);
+			dayTimeOverlayColor.b = 1f - 0.15f * (progress);
 		} else if (hour <= 24) {
 			float progress = (hour - 18f) / 6f;
 			dayTimeOverlayColor.a = 0.1f + 0.35f * (progress);
-			dayTimeOverlayColor.r = 0.44f - 0.34f * (progress);
-			dayTimeOverlayColor.g = 0.37f - 0.27f * (progress);
-			dayTimeOverlayColor.b = 0.33f - 0.11f * (progress);
+			dayTimeOverlayColor.r = 0.9f - 0.2f * (progress);
+			dayTimeOverlayColor.g = 0.9f - 0.2f * (progress);
+			dayTimeOverlayColor.b = 0.85f - 0.05f * (progress);
 		}
 	}
 
