@@ -13,12 +13,14 @@ public class AnimationWalk extends Animation {
 	public Square endSquare;
 	public float startOffsetX = 0;
 	public float startOffsetY = 0;
+	public float headBob = 0;
 
 	float quarterDurationToReach;
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
 	// 1
+	float targetOffsetY1 = 0;
 	float targetTorsoAngle1 = (float) Math.toRadians(7f);
 	float targetLeftHip1 = (float) Math.toRadians(-10f);
 	float targetLeftKnee1 = (float) Math.toRadians(7f);
@@ -26,6 +28,7 @@ public class AnimationWalk extends Animation {
 	float targetRightKnee1 = (float) Math.toRadians(37f);
 
 	// 2
+	float targetOffsetY2 = 1f;
 	float targetTorsoAngle2 = (float) Math.toRadians(7f);
 	float targetLeftHip2 = (float) Math.toRadians(-2f);
 	float targetLeftKnee2 = (float) Math.toRadians(-1f);
@@ -33,6 +36,7 @@ public class AnimationWalk extends Animation {
 	float targetRightKnee2 = (float) Math.toRadians(28f);
 
 	// 3
+	float targetOffsetY3 = 2f;
 	float targetTorsoAngle3 = (float) Math.toRadians(7f);
 	float targetLeftHip3 = (float) Math.toRadians(-3f);
 	float targetLeftKnee3 = (float) Math.toRadians(11f);
@@ -40,6 +44,7 @@ public class AnimationWalk extends Animation {
 	float targetRightKnee3 = (float) Math.toRadians(14f);
 
 	// 4
+	float targetOffsetY4 = 3f;
 	float targetTorsoAngle4 = (float) Math.toRadians(7f);
 	float targetLeftHip4 = (float) Math.toRadians(-2f);
 	float targetLeftKnee4 = (float) Math.toRadians(21f);
@@ -47,6 +52,7 @@ public class AnimationWalk extends Animation {
 	float targetRightKnee4 = (float) Math.toRadians(13f);
 
 	// 5
+	float targetOffsetY5 = 3f;
 	float targetTorsoAngle5 = (float) Math.toRadians(7f);
 	float targetLeftHip5 = (float) Math.toRadians(7f);
 	float targetLeftKnee5 = (float) Math.toRadians(11f);
@@ -54,6 +60,7 @@ public class AnimationWalk extends Animation {
 	float targetRightKnee5 = (float) Math.toRadians(0f);
 
 	// 6
+	float targetOffsetY6 = 2f;
 	float targetTorsoAngle6 = (float) Math.toRadians(7f);
 	float targetLeftHip6 = (float) Math.toRadians(8f);
 	float targetLeftKnee6 = (float) Math.toRadians(20f);
@@ -61,6 +68,7 @@ public class AnimationWalk extends Animation {
 	float targetRightKnee6 = (float) Math.toRadians(7f);
 
 	// 7
+	float targetOffsetY7 = 1f;
 	float targetTorsoAngle7 = (float) Math.toRadians(7f);
 	float targetLeftHip7 = (float) Math.toRadians(5f);
 	float targetLeftKnee7 = (float) Math.toRadians(20f);
@@ -68,12 +76,15 @@ public class AnimationWalk extends Animation {
 	float targetRightKnee7 = (float) Math.toRadians(8f);
 
 	// 8
+	float targetOffsetY8 = 0f;
 	float targetTorsoAngle8 = (float) Math.toRadians(7f);
 	float targetLeftHip8 = (float) Math.toRadians(4f);
 	float targetLeftKnee8 = (float) Math.toRadians(26f);
 	float targetRightHip8 = (float) Math.toRadians(-13f);
 	float targetRightKnee8 = (float) Math.toRadians(9f);
 
+	float[] targetHeadBobYFrames = new float[] { targetOffsetY1, targetOffsetY2, targetOffsetY3, targetOffsetY4,
+			targetOffsetY5, targetOffsetY6, targetOffsetY7, targetOffsetY8 };
 	float[] torsoKeyFrames = new float[] { targetTorsoAngle1, targetTorsoAngle2, targetTorsoAngle3, targetTorsoAngle4,
 			targetTorsoAngle5, targetTorsoAngle6, targetTorsoAngle7, targetTorsoAngle8 };
 	float[] leftHipKeyFrames = new float[] { targetLeftHip1, targetLeftHip2, targetLeftHip3, targetLeftHip4,
@@ -101,12 +112,12 @@ public class AnimationWalk extends Animation {
 		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
-		if (phase == 0 || phase == 2) {
-			offsetY += 0f;
-		} else {
-			offsetY += headBob;
-
-		}
+		// if (phase == 0 || phase == 2) {
+		// offsetY += 0f;
+		// } else {
+		// offsetY += headBob;
+		//
+		// }
 
 		if (phase == 0 || phase == 2) {
 			lastKeyFrame = 0;
@@ -116,6 +127,10 @@ public class AnimationWalk extends Animation {
 		}
 
 		backwards = performer.backwards;
+		headBobLastKeyFrame = 0;
+		if (performer.getPrimaryAnimation() instanceof AnimationWalk) {
+			headBobLastKeyFrame = ((AnimationWalk) performer.getPrimaryAnimation()).headBob;
+		}
 
 		torsoAngleFromLastKeyFrame = performer.getPrimaryAnimation().torsoAngle;
 		leftHipAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftHipAngle;
@@ -151,12 +166,12 @@ public class AnimationWalk extends Animation {
 		durationToReach = 400;
 		startOffsetX = offsetX = startX - endX;
 		startOffsetY = offsetY = startY - endY;
-		if (phase == 0 || phase == 2) {
-			offsetY += 0f;
-		} else {
-			offsetY += headBob;
-
-		}
+		// if (phase == 0 || phase == 2) {
+		// offsetY += 0f;
+		// } else {
+		// offsetY += headBob;
+		//
+		// }
 		blockAI = false;
 		setAngles(0f);
 
@@ -183,35 +198,23 @@ public class AnimationWalk extends Animation {
 		// torsoAngle = moveTowardsTargetAngleInRadians(torsoAngleChange,
 		// torsoAngleChange, 0);
 
-		setAngles(progress);
-
 		if (progress >= 1) {
 			runCompletionAlgorightm();
 			offsetX = 0;
-			// offsetY = 0;
-			if (phase == 0 || phase == 2) {
-				offsetY = headBob;
-			} else {
-				offsetY = 0f;
-
-			}
 		} else {
 			offsetX = (int) (startOffsetX * (1 - progress));
 			offsetY = (int) (startOffsetY * (1 - progress));
-			if (phase == 0 || phase == 2) {
-				offsetY += headBob * progress;
-			} else {
-				offsetY += headBob * (1f - progress);
-
-			}
 		}
+
+		setAngles(progress);
 	}
 
-	float frontLegBend = 0.35f;
-	float backLegBend = 0.10f;
-	float headBob = 0f;
+	// float frontLegBend = 0.35f;
+	// float backLegBend = 0.10f;
+	// float headBob = 0f;
 
 	int lastKeyFrame = -1;
+	float headBobLastKeyFrame = 0;
 	float torsoAngleFromLastKeyFrame = 0;
 	float leftHipAngleFromLastKeyFrame = 0;
 	float leftKneeAngleFromLastKeyFrame = 0;
@@ -243,9 +246,6 @@ public class AnimationWalk extends Animation {
 				intermediateProgress = (progress - 0.75f) * 4;
 			}
 
-			leftShoulderAngle = 0.2f * progress;
-			rightShoulderAngle = -leftShoulderAngle;
-
 		} else if (phase == 1 || phase == 3) {
 			// key frames 5,6,7,8
 			if (progress < 0.25f) {
@@ -266,10 +266,23 @@ public class AnimationWalk extends Animation {
 				keyFrame = 7;
 				intermediateProgress = (progress - 0.75f) * 4;
 			}
+
+		}
+
+		if (phase == 0) {
+
+			leftShoulderAngle = 0.2f * progress;
+			rightShoulderAngle = -leftShoulderAngle;
+
+		}
+
+		else if (phase == 1) {
 			leftShoulderAngle = 0.2f * (1f - progress);
 			rightShoulderAngle = -leftShoulderAngle;
 
-		} else if (phase == 2) {
+		}
+
+		else if (phase == 2) {
 			leftShoulderAngle = 0.2f * -progress;
 			rightShoulderAngle = -leftShoulderAngle;
 		} else if (phase == 3) {
@@ -280,6 +293,10 @@ public class AnimationWalk extends Animation {
 
 		if (lastKeyFrame != keyFrame) {
 			lastKeyFrame = keyFrame;
+			headBobLastKeyFrame = 0;
+			if (performer.getPrimaryAnimation() instanceof AnimationWalk) {
+				headBobLastKeyFrame = ((AnimationWalk) performer.getPrimaryAnimation()).headBob;
+			}
 			torsoAngleFromLastKeyFrame = performer.getPrimaryAnimation().torsoAngle;
 			leftHipAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftHipAngle;
 			leftKneeAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftKneeAngle;
@@ -299,6 +316,7 @@ public class AnimationWalk extends Animation {
 			// }
 		}
 
+		float headBobFromCurrentKeyFrame = targetHeadBobYFrames[keyFrame];
 		float torsoAngleFormCurrentKeyFrame = torsoKeyFrames[keyFrame];
 		float leftHipAngleFormCurrentKeyFrame = leftHipKeyFrames[keyFrame];
 		float leftKneeAngleFormCurrentKeyFrame = leftKneeKeyFrames[keyFrame];
@@ -329,6 +347,12 @@ public class AnimationWalk extends Animation {
 			leftKneeAngleFormCurrentKeyFrame = -temp;
 		}
 
+		System.out.println("headBobLastKeyFrame = " + headBobLastKeyFrame);
+		System.out.println("headBobFromCurrentKeyFrame = " + headBobFromCurrentKeyFrame);
+
+		headBob = headBobLastKeyFrame + intermediateProgress * (headBobFromCurrentKeyFrame - headBobLastKeyFrame);
+		offsetY += headBob;
+
 		torsoAngle = torsoAngleFromLastKeyFrame
 				+ intermediateProgress * (torsoAngleFormCurrentKeyFrame - torsoAngleFromLastKeyFrame);
 		leftHipAngle = leftHipAngleFromLastKeyFrame
@@ -352,9 +376,16 @@ public class AnimationWalk extends Animation {
 		// rightKneeAngle = temp;
 		//
 		// }
+		if (backwards) {
 
-		leftElbowAngle = -0.1f;
-		rightElbowAngle = -0.1f;
+			leftElbowAngle = 0.1f;
+			rightElbowAngle = 0.1f;
+		} else {
+
+			leftElbowAngle = -0.1f;
+			rightElbowAngle = -0.1f;
+
+		}
 
 		// if (backwards) {
 		//
