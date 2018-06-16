@@ -4,6 +4,8 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.utils.Color;
+import com.marklynch.utils.TextUtils;
 
 public class AnimationWalk extends Animation {
 
@@ -87,7 +89,7 @@ public class AnimationWalk extends Animation {
 
 	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int phase) {
 		super(performer);
-		durationToReach = 400;
+		durationToReach = 4000;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -106,7 +108,31 @@ public class AnimationWalk extends Animation {
 
 		}
 
+		if (phase == 0 || phase == 2) {
+			lastKeyFrame = 0;
+		} else {
+			lastKeyFrame = 4;
+
+		}
+
 		backwards = performer.backwards;
+
+		torsoAngleFromLastKeyFrame = performer.getPrimaryAnimation().torsoAngle;
+		leftHipAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftHipAngle;
+		leftKneeAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftKneeAngle;
+		rightHipAngleFromLastKeyFrame = performer.getPrimaryAnimation().rightHipAngle;
+		rightKneeAngleFromLastKeyFrame = performer.getPrimaryAnimation().rightKneeAngle;
+		// if (backwards) {
+		// torsoAngleFromLastKeyFrame = -torsoAngleFromLastKeyFrame;
+		//
+		// float temp = rightHipAngleFromLastKeyFrame;
+		// rightHipAngleFromLastKeyFrame = -leftHipAngleFromLastKeyFrame;
+		// leftHipAngleFromLastKeyFrame = -temp;
+		//
+		// temp = rightKneeAngleFromLastKeyFrame;
+		// rightKneeAngleFromLastKeyFrame = -leftKneeAngleFromLastKeyFrame;
+		// leftKneeAngleFromLastKeyFrame = -temp;
+		// }
 
 		blockAI = false;
 
@@ -151,10 +177,11 @@ public class AnimationWalk extends Animation {
 			progress = 1;
 		}
 
-		float torsoAngleChange = (float) (0.05d * delta);
+		// float torsoAngleChange = (float) (0.05d * delta);
 		// offsetY = moveTowardsTargetAngleInRadians(offsetY, offsetYChange, 0);
 		// offsetY = moveTowardsTargetAngleInRadians(offsetY, offsetYChange, 0);
-		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngleChange, torsoAngleChange, 0);
+		// torsoAngle = moveTowardsTargetAngleInRadians(torsoAngleChange,
+		// torsoAngleChange, 0);
 
 		setAngles(progress);
 
@@ -184,34 +211,35 @@ public class AnimationWalk extends Animation {
 	float backLegBend = 0.10f;
 	float headBob = 0f;
 
+	int lastKeyFrame = -1;
+	float torsoAngleFromLastKeyFrame = 0;
+	float leftHipAngleFromLastKeyFrame = 0;
+	float leftKneeAngleFromLastKeyFrame = 0;
+	float rightHipAngleFromLastKeyFrame = 0;
+	float rightKneeAngleFromLastKeyFrame = 0;
+
 	public void setAngles(float progress) {
 
 		// arms
-		int oldKeyFrame = 0;
-		int newKeyFrame = 0;
 		float intermediateProgress = 0;
 		if (phase == 0 || phase == 2) {
 			// key frames 1,2,3,4
 			if (progress < 0.25f) {
 				// key frame 1
-				oldKeyFrame = 7;
-				newKeyFrame = 0;
+				keyFrame = 0;
 				intermediateProgress = progress * 4;
 
 			} else if (progress < 0.5f) {
 				// key frame 2
-				oldKeyFrame = 0;
-				newKeyFrame = 1;
+				keyFrame = 1;
 				intermediateProgress = (progress - 0.25f) * 4;
 			} else if (progress < 0.75f) {
 				// key frame 3
-				oldKeyFrame = 1;
-				newKeyFrame = 2;
+				keyFrame = 2;
 				intermediateProgress = (progress - 0.5f) * 4;
 			} else if (progress <= 1f) {
 				// key frame 4
-				oldKeyFrame = 2;
-				newKeyFrame = 3;
+				keyFrame = 3;
 				intermediateProgress = (progress - 0.75f) * 4;
 			}
 
@@ -219,27 +247,23 @@ public class AnimationWalk extends Animation {
 			rightShoulderAngle = -leftShoulderAngle;
 
 		} else if (phase == 1 || phase == 3) {
-			// key frames 4,5,6,7
+			// key frames 5,6,7,8
 			if (progress < 0.25f) {
-				// key frame 1
-				oldKeyFrame = 3;
-				newKeyFrame = 4;
+				// key frame 5
+				keyFrame = 4;
 				intermediateProgress = progress * 4;
 
 			} else if (progress < 0.5f) {
-				// key frame 2
-				oldKeyFrame = 4;
-				newKeyFrame = 5;
+				// key frame 6
+				keyFrame = 5;
 				intermediateProgress = (progress - 0.25f) * 4;
 			} else if (progress < 0.75f) {
-				// key frame 3
-				oldKeyFrame = 5;
-				newKeyFrame = 6;
+				// key frame 7
+				keyFrame = 6;
 				intermediateProgress = (progress - 0.5f) * 4;
 			} else if (progress <= 1f) {
-				// key frame 4
-				oldKeyFrame = 6;
-				newKeyFrame = 7;
+				// key frame 8
+				keyFrame = 7;
 				intermediateProgress = (progress - 0.75f) * 4;
 			}
 			leftShoulderAngle = 0.2f * (1f - progress);
@@ -253,37 +277,81 @@ public class AnimationWalk extends Animation {
 			rightShoulderAngle = -leftShoulderAngle;
 
 		}
-		torsoAngle = torsoKeyFrames[oldKeyFrame]
-				+ intermediateProgress * (torsoKeyFrames[newKeyFrame] - torsoKeyFrames[oldKeyFrame]);
 
-		leftHipAngle = leftHipKeyFrames[oldKeyFrame]
-				+ intermediateProgress * (leftHipKeyFrames[newKeyFrame] - leftHipKeyFrames[oldKeyFrame]);
-		leftKneeAngle = leftKneeKeyFrames[oldKeyFrame]
-				+ intermediateProgress * (leftKneeKeyFrames[newKeyFrame] - leftKneeKeyFrames[oldKeyFrame]);
-		rightHipAngle = rightHipKeyFrames[oldKeyFrame]
-				+ intermediateProgress * (rightHipKeyFrames[newKeyFrame] - rightHipKeyFrames[oldKeyFrame]);
-		rightKneeAngle = rightKneeKeyFrames[oldKeyFrame]
-				+ intermediateProgress * (rightKneeKeyFrames[newKeyFrame] - rightKneeKeyFrames[oldKeyFrame]);
+		if (lastKeyFrame != keyFrame) {
+			lastKeyFrame = keyFrame;
+			torsoAngleFromLastKeyFrame = performer.getPrimaryAnimation().torsoAngle;
+			leftHipAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftHipAngle;
+			leftKneeAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftKneeAngle;
+			rightHipAngleFromLastKeyFrame = performer.getPrimaryAnimation().rightHipAngle;
+			rightKneeAngleFromLastKeyFrame = performer.getPrimaryAnimation().rightKneeAngle;
 
-		if (phase == 2 || phase == 4) {
-
-			float temp = leftHipAngle;
-			leftHipAngle = rightHipAngle;
-			rightHipAngle = temp;
-
-			temp = leftKneeAngle;
-			leftKneeAngle = rightKneeAngle;
-			rightKneeAngle = temp;
-
+			// if (backwards) {
+			// torsoAngleFromLastKeyFrame = -torsoAngleFromLastKeyFrame;
+			//
+			// float temp = rightHipAngleFromLastKeyFrame;
+			// rightHipAngleFromLastKeyFrame = -leftHipAngleFromLastKeyFrame;
+			// leftHipAngleFromLastKeyFrame = -temp;
+			//
+			// temp = rightKneeAngleFromLastKeyFrame;
+			// rightKneeAngleFromLastKeyFrame = -leftKneeAngleFromLastKeyFrame;
+			// leftKneeAngleFromLastKeyFrame = -temp;
+			// }
 		}
+
+		float torsoAngleFormCurrentKeyFrame = torsoKeyFrames[keyFrame];
+		float leftHipAngleFormCurrentKeyFrame = leftHipKeyFrames[keyFrame];
+		float leftKneeAngleFormCurrentKeyFrame = leftKneeKeyFrames[keyFrame];
+		float rightHipAngleFormCurrentKeyFrame = rightHipKeyFrames[keyFrame];
+		float rightKneeAngleFormCurrentKeyFrame = rightKneeKeyFrames[keyFrame];
+
+		if (backwards) {
+			torsoAngleFormCurrentKeyFrame = -torsoAngleFormCurrentKeyFrame;
+			rightHipAngleFormCurrentKeyFrame = -rightHipAngleFormCurrentKeyFrame;
+			leftHipAngleFormCurrentKeyFrame = -leftHipAngleFormCurrentKeyFrame;
+			rightKneeAngleFormCurrentKeyFrame = -rightKneeAngleFormCurrentKeyFrame;
+			leftKneeAngleFormCurrentKeyFrame = -leftKneeAngleFormCurrentKeyFrame;
+
+			// float temp = rightHipAngleFormCurrentKeyFrame;
+			// rightHipAngleFormCurrentKeyFrame = -leftHipAngleFormCurrentKeyFrame;
+			// leftHipAngleFormCurrentKeyFrame = -temp;
+			//
+			// temp = rightKneeAngleFormCurrentKeyFrame;
+			// rightKneeAngleFormCurrentKeyFrame = -leftKneeAngleFormCurrentKeyFrame;
+			// leftKneeAngleFormCurrentKeyFrame = -temp;
+		}
+
+		torsoAngle = torsoAngleFromLastKeyFrame
+				+ intermediateProgress * (torsoAngleFormCurrentKeyFrame - torsoAngleFromLastKeyFrame);
+		leftHipAngle = leftHipAngleFromLastKeyFrame
+				+ intermediateProgress * (leftHipAngleFormCurrentKeyFrame - leftHipAngleFromLastKeyFrame);
+		leftKneeAngle = leftKneeAngleFromLastKeyFrame
+				+ intermediateProgress * (leftKneeAngleFormCurrentKeyFrame - leftKneeAngleFromLastKeyFrame);
+		rightHipAngle = rightHipAngleFromLastKeyFrame
+				+ intermediateProgress * (rightHipAngleFormCurrentKeyFrame - rightHipAngleFromLastKeyFrame);
+		rightKneeAngle = rightKneeAngleFromLastKeyFrame
+				+ intermediateProgress * (rightKneeAngleFormCurrentKeyFrame - rightKneeAngleFromLastKeyFrame);
+
+		// if (phase == 2 || phase == 4) {
+		//
+		//
+		// float temp = leftHipAngle;
+		// leftHipAngle = rightHipAngle;
+		// rightHipAngle = temp;
+		//
+		// temp = leftKneeAngle;
+		// leftKneeAngle = rightKneeAngle;
+		// rightKneeAngle = temp;
+		//
+		// }
 
 		leftElbowAngle = -0.1f;
 		rightElbowAngle = -0.1f;
 
-		if (backwards) {
-
-			reverseAnimation();
-		}
+		// if (backwards) {
+		//
+		// reverseAnimation();
+		// }
 
 	}
 
@@ -292,10 +360,13 @@ public class AnimationWalk extends Animation {
 
 	}
 
+	int keyFrame = 0;
+
 	@Override
 	public void draw1() {
-		// TODO Auto-generated method stub
-
+		TextUtils.printTextWithImages(performer.squareGameObjectIsOn.xInGridPixels,
+				performer.squareGameObjectIsOn.yInGridPixels, Integer.MAX_VALUE, false, null, Color.WHITE,
+				"" + keyFrame);
 	}
 
 	@Override
