@@ -20,59 +20,59 @@ public class AnimationWalk extends Animation {
 
 	// 1
 	float targetTorsoAngle1 = (float) Math.toRadians(7f);
-	float targetLeftHip1 = (float) Math.toRadians(-19.13f);
-	float targetLeftKnee1 = (float) Math.toRadians(13.86f);
-	float targetRightHip1 = (float) Math.toRadians(-33.01f);
-	float targetRightKnee1 = (float) Math.toRadians(75.21f);
+	float targetLeftHip1 = (float) Math.toRadians(-10f);
+	float targetLeftKnee1 = (float) Math.toRadians(7f);
+	float targetRightHip1 = (float) Math.toRadians(-16f);
+	float targetRightKnee1 = (float) Math.toRadians(37f);
 
 	// 2
 	float targetTorsoAngle2 = (float) Math.toRadians(7f);
 	float targetLeftHip2 = (float) Math.toRadians(-2f);
 	float targetLeftKnee2 = (float) Math.toRadians(-1f);
-	float targetRightHip2 = (float) Math.toRadians(-34f);
-	float targetRightKnee2 = (float) Math.toRadians(57f);
+	float targetRightHip2 = (float) Math.toRadians(-17f);
+	float targetRightKnee2 = (float) Math.toRadians(28f);
 
 	// 3
 	float targetTorsoAngle3 = (float) Math.toRadians(7f);
 	float targetLeftHip3 = (float) Math.toRadians(-3f);
-	float targetLeftKnee3 = (float) Math.toRadians(22f);
-	float targetRightHip3 = (float) Math.toRadians(-36f);
-	float targetRightKnee3 = (float) Math.toRadians(27f);
+	float targetLeftKnee3 = (float) Math.toRadians(11f);
+	float targetRightHip3 = (float) Math.toRadians(-18f);
+	float targetRightKnee3 = (float) Math.toRadians(14f);
 
 	// 4
 	float targetTorsoAngle4 = (float) Math.toRadians(7f);
 	float targetLeftHip4 = (float) Math.toRadians(-2f);
-	float targetLeftKnee4 = (float) Math.toRadians(42f);
-	float targetRightHip4 = (float) Math.toRadians(-40f);
-	float targetRightKnee4 = (float) Math.toRadians(27f);
+	float targetLeftKnee4 = (float) Math.toRadians(21f);
+	float targetRightHip4 = (float) Math.toRadians(-20f);
+	float targetRightKnee4 = (float) Math.toRadians(13f);
 
 	// 5
 	float targetTorsoAngle5 = (float) Math.toRadians(7f);
-	float targetLeftHip5 = (float) Math.toRadians(15f);
-	float targetLeftKnee5 = (float) Math.toRadians(22f);
-	float targetRightHip5 = (float) Math.toRadians(-40f);
+	float targetLeftHip5 = (float) Math.toRadians(7f);
+	float targetLeftKnee5 = (float) Math.toRadians(11f);
+	float targetRightHip5 = (float) Math.toRadians(-20f);
 	float targetRightKnee5 = (float) Math.toRadians(0f);
 
 	// 6
 	float targetTorsoAngle6 = (float) Math.toRadians(7f);
-	float targetLeftHip6 = (float) Math.toRadians(16f);
-	float targetLeftKnee6 = (float) Math.toRadians(40f);
-	float targetRightHip6 = (float) Math.toRadians(-40f);
-	float targetRightKnee6 = (float) Math.toRadians(14f);
+	float targetLeftHip6 = (float) Math.toRadians(8f);
+	float targetLeftKnee6 = (float) Math.toRadians(20f);
+	float targetRightHip6 = (float) Math.toRadians(-20f);
+	float targetRightKnee6 = (float) Math.toRadians(7f);
 
 	// 7
 	float targetTorsoAngle7 = (float) Math.toRadians(7f);
 	float targetLeftHip7 = (float) Math.toRadians(5f);
-	float targetLeftKnee7 = (float) Math.toRadians(40f);
-	float targetRightHip7 = (float) Math.toRadians(-32f);
-	float targetRightKnee7 = (float) Math.toRadians(17f);
+	float targetLeftKnee7 = (float) Math.toRadians(20f);
+	float targetRightHip7 = (float) Math.toRadians(-16f);
+	float targetRightKnee7 = (float) Math.toRadians(8f);
 
 	// 8
 	float targetTorsoAngle8 = (float) Math.toRadians(7f);
-	float targetLeftHip8 = (float) Math.toRadians(7f);
-	float targetLeftKnee8 = (float) Math.toRadians(52f);
-	float targetRightHip8 = (float) Math.toRadians(-26f);
-	float targetRightKnee8 = (float) Math.toRadians(18f);
+	float targetLeftHip8 = (float) Math.toRadians(4f);
+	float targetLeftKnee8 = (float) Math.toRadians(26f);
+	float targetRightHip8 = (float) Math.toRadians(-13f);
+	float targetRightKnee8 = (float) Math.toRadians(9f);
 
 	float[] torsoKeyFrames = new float[] { targetTorsoAngle1, targetTorsoAngle2, targetTorsoAngle3, targetTorsoAngle4,
 			targetTorsoAngle5, targetTorsoAngle6, targetTorsoAngle7, targetTorsoAngle8 };
@@ -305,22 +305,22 @@ public class AnimationWalk extends Animation {
 		float rightHipAngleFormCurrentKeyFrame = rightHipKeyFrames[keyFrame];
 		float rightKneeAngleFormCurrentKeyFrame = rightKneeKeyFrames[keyFrame];
 
-		if (phase == 2 || phase == 4) {
+		// if (phase == 2 || phase == 4) {
 
-			float temp = leftHipAngleFormCurrentKeyFrame;
-			leftHipAngleFormCurrentKeyFrame = rightHipAngleFormCurrentKeyFrame;
-			rightHipAngleFormCurrentKeyFrame = temp;
+		float temp = leftHipAngleFormCurrentKeyFrame;
+		leftHipAngleFormCurrentKeyFrame = rightHipAngleFormCurrentKeyFrame;
+		rightHipAngleFormCurrentKeyFrame = temp;
 
-			temp = leftKneeAngleFormCurrentKeyFrame;
-			leftKneeAngleFormCurrentKeyFrame = rightKneeAngleFormCurrentKeyFrame;
-			rightKneeAngleFormCurrentKeyFrame = temp;
+		temp = leftKneeAngleFormCurrentKeyFrame;
+		leftKneeAngleFormCurrentKeyFrame = rightKneeAngleFormCurrentKeyFrame;
+		rightKneeAngleFormCurrentKeyFrame = temp;
 
-		}
+		// }
 
 		if (backwards) {
 			torsoAngleFormCurrentKeyFrame = -torsoAngleFormCurrentKeyFrame;
 
-			float temp = rightHipAngleFormCurrentKeyFrame;
+			temp = rightHipAngleFormCurrentKeyFrame;
 			rightHipAngleFormCurrentKeyFrame = -leftHipAngleFormCurrentKeyFrame;
 			leftHipAngleFormCurrentKeyFrame = -temp;
 
