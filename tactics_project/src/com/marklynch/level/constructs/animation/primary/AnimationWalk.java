@@ -305,20 +305,28 @@ public class AnimationWalk extends Animation {
 		float rightHipAngleFormCurrentKeyFrame = rightHipKeyFrames[keyFrame];
 		float rightKneeAngleFormCurrentKeyFrame = rightKneeKeyFrames[keyFrame];
 
+		if (phase == 2 || phase == 4) {
+
+			float temp = leftHipAngleFormCurrentKeyFrame;
+			leftHipAngleFormCurrentKeyFrame = rightHipAngleFormCurrentKeyFrame;
+			rightHipAngleFormCurrentKeyFrame = temp;
+
+			temp = leftKneeAngleFormCurrentKeyFrame;
+			leftKneeAngleFormCurrentKeyFrame = rightKneeAngleFormCurrentKeyFrame;
+			rightKneeAngleFormCurrentKeyFrame = temp;
+
+		}
+
 		if (backwards) {
 			torsoAngleFormCurrentKeyFrame = -torsoAngleFormCurrentKeyFrame;
-			rightHipAngleFormCurrentKeyFrame = -rightHipAngleFormCurrentKeyFrame;
-			leftHipAngleFormCurrentKeyFrame = -leftHipAngleFormCurrentKeyFrame;
-			rightKneeAngleFormCurrentKeyFrame = -rightKneeAngleFormCurrentKeyFrame;
-			leftKneeAngleFormCurrentKeyFrame = -leftKneeAngleFormCurrentKeyFrame;
 
-			// float temp = rightHipAngleFormCurrentKeyFrame;
-			// rightHipAngleFormCurrentKeyFrame = -leftHipAngleFormCurrentKeyFrame;
-			// leftHipAngleFormCurrentKeyFrame = -temp;
-			//
-			// temp = rightKneeAngleFormCurrentKeyFrame;
-			// rightKneeAngleFormCurrentKeyFrame = -leftKneeAngleFormCurrentKeyFrame;
-			// leftKneeAngleFormCurrentKeyFrame = -temp;
+			float temp = rightHipAngleFormCurrentKeyFrame;
+			rightHipAngleFormCurrentKeyFrame = -leftHipAngleFormCurrentKeyFrame;
+			leftHipAngleFormCurrentKeyFrame = -temp;
+
+			temp = rightKneeAngleFormCurrentKeyFrame;
+			rightKneeAngleFormCurrentKeyFrame = -leftKneeAngleFormCurrentKeyFrame;
+			leftKneeAngleFormCurrentKeyFrame = -temp;
 		}
 
 		torsoAngle = torsoAngleFromLastKeyFrame
