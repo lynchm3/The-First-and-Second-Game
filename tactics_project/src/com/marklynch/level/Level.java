@@ -180,13 +180,13 @@ public class Level {
 
 	public int day = 1;
 	String dayString = "1";
-	public int hour = 0;
+	public int hour = 12;
 	String hourString = "6";
 	int minute = 0;
 	String minuteString = "0";
 	int second = 0;
 	String secondString = "0";
-	public String timeString = "Day 1, 00:00";
+	public String timeString = "Day 1, 12:00";
 
 	public static Color dayTimeOverlayColor = Color.TRANSPARENT;
 
@@ -2213,7 +2213,8 @@ public class Level {
 
 		player.update(0);
 
-		changeTime(3600); // was 20
+		changeTime(20);
+		// changeTime(3600); // was 20
 		// secondString;
 
 		// If hiding in a place, add it's effects

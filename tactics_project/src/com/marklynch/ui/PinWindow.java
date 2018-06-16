@@ -200,7 +200,7 @@ public class PinWindow implements Draggable {
 			if (gameObject != null) {
 				if (actor != null) {
 					actor.drawActor((int) (drawPositionX + borderWidth), (int) (drawPositionY + titleBarHeight), 1f,
-							false, 1, 1, 0f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false, actor.backwards);
+							false, 1, 1, 0f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false, actor.backwards, false);
 				} else {
 					TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
 							drawPositionY + titleBarHeight, drawPositionX + gameObject.imageTexture.getWidth(),

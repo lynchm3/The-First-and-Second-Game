@@ -585,7 +585,7 @@ public class Actor extends GameObject {
 			if (Level.shadowDarkness > 0 && this.squareGameObjectIsOn.structureSquareIsIn == null) {
 				drawActor((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, 1f,
 						Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
-						false, false, !this.backwards);
+						false, false, !this.backwards, true);
 			}
 
 			// drawActor((int) (actorPositionXInPixels + -Level.shadowOffSetX * height),
@@ -604,14 +604,14 @@ public class Actor extends GameObject {
 				color = StructureRoom.roomColor;
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
 					flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
-					color, true, true, this.backwards);
+					color, true, true, this.backwards, false);
 		}
 
 	}
 
 	public void drawActor(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY, float rotationRad,
 			float boundsX1, float boundsY1, float boundsX2, float boundsY2, Color color, boolean drawClothes,
-			boolean drawHealthBar, boolean backwards) {
+			boolean drawHealthBar, boolean backwards, boolean reverseRotation) {
 
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 
@@ -635,7 +635,10 @@ public class Actor extends GameObject {
 		}
 		Game.flush();
 		view.translate(new Vector2f(x + halfWidth, y + hipY));
-		view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(-torsoAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
 		Game.activeBatch.updateUniforms();
 
@@ -802,7 +805,8 @@ public class Actor extends GameObject {
 			}
 		}
 
-		drawBackArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+		drawBackArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+				reverseRotation);
 
 		// pelvis
 		if (pelvisImageTexture != null) {
@@ -833,8 +837,10 @@ public class Actor extends GameObject {
 			}
 		}
 
-		drawBackLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
-		drawFrontLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+		drawBackLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+				reverseRotation);
+		drawFrontLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+				reverseRotation);
 
 		if (bodyArmor != null && !sleeping && drawClothes) {
 
@@ -872,11 +878,15 @@ public class Actor extends GameObject {
 			}
 		}
 
-		drawFrontArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+		drawFrontArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+				reverseRotation);
 
 		Game.flush();
 		view.translate(new Vector2f(x + halfWidth, y + hipY));
-		view.rotate(-(torsoAngle), new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(-torsoAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
 		Game.activeBatch.updateUniforms();
 
@@ -897,24 +907,31 @@ public class Actor extends GameObject {
 	}
 
 	public void drawFrontArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
+			boolean reverseRotation) {
 		if (backwards)
-			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+					reverseRotation);
 		else
-			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+					reverseRotation);
 	}
 
 	public void drawBackArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
+			boolean reverseRotation) {
 		if (backwards)
-			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+					reverseRotation);
 		else
-			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+					reverseRotation);
 
 	}
 
 	public void drawRightArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
+			boolean reverseRotation) {
 
 		if (armImageTexture == null)
 			return;
@@ -922,9 +939,13 @@ public class Actor extends GameObject {
 		float elbowDrawY = y + this.elbowY;
 		float rightShoulderAngle = 0f;
 		float rightElbowAngle = 0f;
+		float leftShoulderAngle = 0f;
+		float leftElbowAngle = 0f;
 		if (primaryAnimation != null) {
 			rightShoulderAngle = primaryAnimation.rightShoulderAngle;
 			rightElbowAngle = primaryAnimation.rightElbowAngle;
+			leftShoulderAngle = primaryAnimation.leftShoulderAngle;
+			leftElbowAngle = primaryAnimation.leftElbowAngle;
 		}
 
 		// right arm
@@ -934,13 +955,19 @@ public class Actor extends GameObject {
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		Game.flush();
 		view.translate(new Vector2f(rightArmHingeX, shoulderDrawY));
-		view.rotate(rightShoulderAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(rightShoulderAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(-leftShoulderAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-rightArmHingeX, -shoulderDrawY));
 		Game.activeBatch.updateUniforms();
 
 		Game.flush();
 		view.translate(new Vector2f(rightArmHingeX, elbowDrawY));
-		view.rotate(rightElbowAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(rightElbowAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(-leftElbowAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-rightArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
 
@@ -990,7 +1017,11 @@ public class Actor extends GameObject {
 
 		Game.flush();
 		view.translate(new Vector2f(rightArmHingeX, elbowDrawY));
-		view.rotate(-rightElbowAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(-rightElbowAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(leftElbowAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-rightArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
 
@@ -1021,24 +1052,32 @@ public class Actor extends GameObject {
 
 		Game.flush();
 		view.translate(new Vector2f(rightArmHingeX, shoulderDrawY));
-		view.rotate(-rightShoulderAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(-rightShoulderAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(leftShoulderAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-rightArmHingeX, -shoulderDrawY));
 		Game.activeBatch.updateUniforms();
 
 	}
 
 	public void drawLeftArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
+			boolean reverseRotation) {
 
 		if (armImageTexture == null)
 			return;
+
+		float rightShoulderAngle = 0f;
+		float rightElbowAngle = 0f;
 		float leftShoulderAngle = 0f;
 		float leftElbowAngle = 0f;
 		if (primaryAnimation != null) {
-
+			rightShoulderAngle = primaryAnimation.rightShoulderAngle;
+			rightElbowAngle = primaryAnimation.rightElbowAngle;
 			leftShoulderAngle = primaryAnimation.leftShoulderAngle;
 			leftElbowAngle = primaryAnimation.leftElbowAngle;
-
 		}
 
 		// arms
@@ -1054,13 +1093,21 @@ public class Actor extends GameObject {
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		Game.flush();
 		view.translate(new Vector2f(leftArmHingeX, shoulderDrawY));
-		view.rotate(leftShoulderAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(leftShoulderAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(-rightShoulderAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-leftArmHingeX, -shoulderDrawY));
 		Game.activeBatch.updateUniforms();
 
 		Game.flush();
 		view.translate(new Vector2f(leftArmHingeX, elbowDrawY));
-		view.rotate(leftElbowAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(leftElbowAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(-rightElbowAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-leftArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
 
@@ -1110,7 +1157,11 @@ public class Actor extends GameObject {
 
 		Game.flush();
 		view.translate(new Vector2f(leftArmHingeX, elbowDrawY));
-		view.rotate(-leftElbowAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(-leftElbowAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(rightElbowAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-leftArmHingeX, -elbowDrawY));
 		Game.activeBatch.updateUniforms();
 
@@ -1141,7 +1192,10 @@ public class Actor extends GameObject {
 
 		Game.flush();
 		view.translate(new Vector2f(leftArmHingeX, shoulderDrawY));
-		view.rotate(-leftShoulderAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(-leftShoulderAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(rightShoulderAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-leftArmHingeX, -shoulderDrawY));
 		Game.activeBatch.updateUniforms();
 
@@ -1173,33 +1227,44 @@ public class Actor extends GameObject {
 	}
 
 	public void drawFrontLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
+			boolean reverseRotation) {
 		if (backwards)
-			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+					reverseRotation);
 		else
-			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+					reverseRotation);
 	}
 
 	public void drawBackLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
+			boolean reverseRotation) {
 		if (backwards)
-			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+					reverseRotation);
 		else
-			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards);
+			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+					reverseRotation);
 
 	}
 
 	public void drawLeftLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
+			boolean reverseRotation) {
 
 		if (legImageTexture == null)
 			return;
 		float leftHipAngle = 0f;
 		float leftKneeAngle = 0f;
+		float rightHipAngle = 0f;
+		float rightKneeAngle = 0f;
 		if (primaryAnimation != null) {
 
 			leftHipAngle = primaryAnimation.leftHipAngle;
 			leftKneeAngle = primaryAnimation.leftKneeAngle;
+			rightHipAngle = primaryAnimation.rightHipAngle;
+			rightKneeAngle = primaryAnimation.rightKneeAngle;
 
 		}
 
@@ -1216,13 +1281,21 @@ public class Actor extends GameObject {
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		Game.flush();
 		view.translate(new Vector2f(leftLegHingeX, hipDrawY));
-		view.rotate(leftHipAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(leftHipAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(-rightHipAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-leftLegHingeX, -hipDrawY));
 		Game.activeBatch.updateUniforms();
 
 		Game.flush();
 		view.translate(new Vector2f(leftLegHingeX, kneeDrawY));
-		view.rotate(leftKneeAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(leftKneeAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(-rightKneeAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-leftLegHingeX, -kneeDrawY));
 		Game.activeBatch.updateUniforms();
 
@@ -1254,7 +1327,11 @@ public class Actor extends GameObject {
 
 		Game.flush();
 		view.translate(new Vector2f(leftLegHingeX, kneeDrawY));
-		view.rotate(-leftKneeAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(-leftKneeAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(rightKneeAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-leftLegHingeX, -kneeDrawY));
 		Game.activeBatch.updateUniforms();
 
@@ -1284,21 +1361,29 @@ public class Actor extends GameObject {
 
 		Game.flush();
 		view.translate(new Vector2f(leftLegHingeX, hipDrawY));
-		view.rotate(-leftHipAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(-leftHipAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(rightHipAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-leftLegHingeX, -hipDrawY));
 		Game.activeBatch.updateUniforms();
 
 	}
 
 	public void drawRightLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards) {
+			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
+			boolean reverseRotation) {
 
 		if (legImageTexture == null)
 			return;
+		float leftHipAngle = 0f;
+		float leftKneeAngle = 0f;
 		float rightHipAngle = 0f;
 		float rightKneeAngle = 0f;
 		if (primaryAnimation != null) {
 
+			leftHipAngle = primaryAnimation.leftHipAngle;
+			leftKneeAngle = primaryAnimation.leftKneeAngle;
 			rightHipAngle = primaryAnimation.rightHipAngle;
 			rightKneeAngle = primaryAnimation.rightKneeAngle;
 
@@ -1317,13 +1402,20 @@ public class Actor extends GameObject {
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		Game.flush();
 		view.translate(new Vector2f(rightLegHingeX, hipDrawY));
-		view.rotate(rightHipAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(rightHipAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(-leftHipAngle, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-rightLegHingeX, -hipDrawY));
 		Game.activeBatch.updateUniforms();
 
 		Game.flush();
 		view.translate(new Vector2f(rightLegHingeX, kneeDrawY));
-		view.rotate(rightKneeAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(rightKneeAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(-leftKneeAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-rightLegHingeX, -kneeDrawY));
 		Game.activeBatch.updateUniforms();
 
@@ -1355,7 +1447,11 @@ public class Actor extends GameObject {
 
 		Game.flush();
 		view.translate(new Vector2f(rightLegHingeX, kneeDrawY));
-		view.rotate(-rightKneeAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(-rightKneeAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(leftKneeAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-rightLegHingeX, -kneeDrawY));
 		Game.activeBatch.updateUniforms();
 
@@ -1386,7 +1482,11 @@ public class Actor extends GameObject {
 
 		Game.flush();
 		view.translate(new Vector2f(rightLegHingeX, hipDrawY));
-		view.rotate(-rightHipAngle, new Vector3f(0f, 0f, 1f));
+		if (!reverseRotation)
+			view.rotate(-rightHipAngle, new Vector3f(0f, 0f, 1f));
+		else
+			view.rotate(leftHipAngle, new Vector3f(0f, 0f, 1f));
+
 		view.translate(new Vector2f(-rightLegHingeX, -hipDrawY));
 		Game.activeBatch.updateUniforms();
 
@@ -1519,6 +1619,7 @@ public class Actor extends GameObject {
 				Game.flush();
 				view.translate(new Vector2f(actorPositionXInPixels + halfWidth, actorPositionYInPixels + hipY));
 				view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
+
 				view.translate(new Vector2f(-(actorPositionXInPixels + halfWidth), -(actorPositionYInPixels + hipY)));
 				Game.activeBatch.updateUniforms();
 
@@ -1606,6 +1707,7 @@ public class Actor extends GameObject {
 				Game.flush();
 				view.translate(new Vector2f(actorPositionXInPixels + halfWidth, actorPositionYInPixels + hipY));
 				view.rotate(-torsoAngle, new Vector3f(0f, 0f, 1f));
+
 				view.translate(new Vector2f(-(actorPositionXInPixels + halfWidth), -(actorPositionYInPixels + hipY)));
 				Game.activeBatch.updateUniforms();
 			}
