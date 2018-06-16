@@ -1,0 +1,55 @@
+package com.marklynch.level.constructs.animation.primary;
+
+import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.objects.GameObject;
+
+public class AnimationScale extends Animation {
+
+	public AnimationScale(GameObject performer) {
+
+		super(performer);
+		blockAI = false;
+		durationToReach = 2000;
+
+		scaleX = 0;
+		scaleY = 0;
+	}
+
+	@Override
+	public void update(double delta) {
+
+		System.out.println("AnimationScale.update");
+
+		if (getCompleted())
+			return;
+		super.update(delta);
+
+		durationSoFar += delta;
+		double progress = durationSoFar / durationToReach;
+		System.out.println("progress = " + progress);
+		if (progress >= 1) {
+			progress = 1;
+			runCompletionAlgorightm();
+		}
+		scaleX = (float) progress * 1f;
+		scaleY = (float) progress * 1f;
+		System.out.println("scaleX = " + scaleX);
+		System.out.println("scaleY = " + scaleY);
+
+	}
+
+	@Override
+	public void draw2() {
+
+	}
+
+	@Override
+	public void draw1() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void drawStaticUI() {
+	}
+}

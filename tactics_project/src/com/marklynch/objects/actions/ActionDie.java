@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
+import com.marklynch.level.constructs.animation.primary.AnimationScale;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -150,6 +151,15 @@ public class ActionDie extends Action {
 		}
 	}
 
+	private void poolBlood() {
+
+		// Actor actor = (Actor) gameObjectPerformer;
+		GameObject blood = Templates.BLOOD.makeCopy(null, null);
+		blood.setPrimaryAnimation(new AnimationScale(blood));
+		gameObjectPerformer.squareGameObjectIsOn.inventory.add(blood);
+
+	}
+
 	public void createCorpse() {
 
 		if (gameObjectPerformer instanceof Actor) {
@@ -158,7 +168,13 @@ public class ActionDie extends Action {
 			if (gameObjectPerformer.equipped != null && gameObjectPerformer != Level.player)
 				new ActionDropItems(gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn,
 						gameObjectPerformer.equipped).perform();
-			actor.setPrimaryAnimation(new AnimationDie(gameObjectPerformer));
+			actor.setPrimaryAnimation(new AnimationDie(gameObjectPerformer) {
+				@Override
+				public void runCompletionAlgorightm() {
+					super.runCompletionAlgorightm();
+					poolBlood();
+				}
+			});
 
 			// GameObject body = null;
 			// if (gameObjectPerformer instanceof RockGolem) {

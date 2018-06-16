@@ -415,10 +415,18 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			boundsY2 += primaryAnimation.offsetY + primaryAnimation.boundsY2;
 		}
 
+		float scaleX = 1;
+		float scaleY = 1;
+		if (primaryAnimation != null) {
+			scaleX = primaryAnimation.scaleX;
+			scaleY = primaryAnimation.scaleY;
+		}
+
 		// shadow
 		if (Level.shadowDarkness > 0 && bigShadow && this.squareGameObjectIsOn.structureSquareIsIn == null) {
-			drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, 1f,
-					Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK, false);
+			drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, scaleX,
+					Level.shadowLength * scaleY, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
+					false);
 		} else if (Level.shadowDarkness > 0 && this.squareGameObjectIsOn.structureSquareIsIn == null) {
 			// drawGameObject((actorPositionXInPixels), (actorPositionYInPixels),
 			// Level.shadowDarkness, false, 1f, 1f,
@@ -427,17 +435,18 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			// Level.shadowDarkness
 			drawGameObject((int) (actorPositionXInPixels + Level.smallShadowOffSetX),
-					(int) (actorPositionYInPixels + Level.smallShadowOffSetY), Level.shadowDarkness, false, 1f, 1f, 0f,
-					boundsX1 + Level.smallShadowOffSetX, boundsY1 + Level.smallShadowOffSetY,
-					boundsX2 + Level.smallShadowOffSetX, boundsY2 + Level.smallShadowOffSetY, Color.BLACK, false);
+					(int) (actorPositionYInPixels + Level.smallShadowOffSetY), Level.shadowDarkness, false, scaleX,
+					Level.shadowLength * scaleY, 0f, boundsX1 + Level.smallShadowOffSetX,
+					boundsY1 + Level.smallShadowOffSetY, boundsX2 + Level.smallShadowOffSetX,
+					boundsY2 + Level.smallShadowOffSetY, Color.BLACK, false);
 		}
 
 		Color color = Level.dayTimeOverlayColor;
 		if (this.squareGameObjectIsOn.structureSquareIsIn != null)
 			color = StructureRoom.roomColor;
 		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
-				flash || this == Game.gameObjectMouseIsOver, 1f, 1f, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color,
-				true);
+				flash || this == Game.gameObjectMouseIsOver, scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
+				color, true);
 	}
 
 	public void drawGameObject(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY,
@@ -451,11 +460,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			if (scaleX != 1 || scaleY != 1) {
 				Game.flush();
-				view.translate(new Vector2f(x, y));
+				view.translate(new Vector2f(x + halfWidth, y + halfHeight));
 				view.scale(new Vector3f(scaleX, scaleY, 1f));
-				view.translate(new Vector2f(-x, -y));
+				view.translate(new Vector2f(-(x + halfWidth), -(y + halfHeight)));
 				Game.activeBatch.updateUniforms();
 			}
+
 			Game.flush();
 			view.translate(new Vector2f(x + halfWidth, y + height));
 			view.rotate(rotationRad, new Vector3f(0f, 0f, 1f));
@@ -605,9 +615,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (scaleX != 1 || scaleY != 1) {
 				Game.flush();
 				// Matrix4f view = Game.activeBatch.getViewMatrix();
-				view.translate(new Vector2f(x, y));
+				view.translate(new Vector2f(x + halfWidth, y + halfHeight));
 				view.scale(new Vector3f(1f / scaleX, 1f / scaleY, 1f));
-				view.translate(new Vector2f(-x, -y));
+				view.translate(new Vector2f(-(x + halfWidth), -(y + halfHeight)));
 				Game.activeBatch.updateUniforms();
 			}
 		}

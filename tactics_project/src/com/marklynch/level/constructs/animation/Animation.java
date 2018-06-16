@@ -21,6 +21,9 @@ public abstract class Animation {
 	public float rightShoulderAngle = 0f;
 	public float rightElbowAngle = 0f;
 
+	public float scaleX = 1;
+	public float scaleY = 1;
+
 	// leg stuff
 	public float leftHipAngle = 0;
 	public float leftKneeAngle = 0;
