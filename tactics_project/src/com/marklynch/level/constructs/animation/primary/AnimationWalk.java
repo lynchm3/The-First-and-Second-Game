@@ -19,56 +19,56 @@ public class AnimationWalk extends Animation {
 	float threeQuarterDurationToReach;
 
 	// 1
-	float targetTorsoAngle1 = (float) Math.toRadians(11.4f);
+	float targetTorsoAngle1 = (float) Math.toRadians(7f);
 	float targetLeftHip1 = (float) Math.toRadians(-19.13f);
 	float targetLeftKnee1 = (float) Math.toRadians(13.86f);
 	float targetRightHip1 = (float) Math.toRadians(-33.01f);
 	float targetRightKnee1 = (float) Math.toRadians(75.21f);
 
 	// 2
-	float targetTorsoAngle2 = (float) Math.toRadians(8.9f);
+	float targetTorsoAngle2 = (float) Math.toRadians(7f);
 	float targetLeftHip2 = (float) Math.toRadians(-2f);
 	float targetLeftKnee2 = (float) Math.toRadians(-1f);
 	float targetRightHip2 = (float) Math.toRadians(-34f);
 	float targetRightKnee2 = (float) Math.toRadians(57f);
 
 	// 3
-	float targetTorsoAngle3 = (float) Math.toRadians(13.35f);
+	float targetTorsoAngle3 = (float) Math.toRadians(7f);
 	float targetLeftHip3 = (float) Math.toRadians(-3f);
 	float targetLeftKnee3 = (float) Math.toRadians(22f);
 	float targetRightHip3 = (float) Math.toRadians(-36f);
 	float targetRightKnee3 = (float) Math.toRadians(27f);
 
 	// 4
-	float targetTorsoAngle4 = (float) Math.toRadians(7.27f);
+	float targetTorsoAngle4 = (float) Math.toRadians(7f);
 	float targetLeftHip4 = (float) Math.toRadians(-2f);
 	float targetLeftKnee4 = (float) Math.toRadians(42f);
 	float targetRightHip4 = (float) Math.toRadians(-40f);
 	float targetRightKnee4 = (float) Math.toRadians(27f);
 
 	// 5
-	float targetTorsoAngle5 = (float) Math.toRadians(10.20f);
+	float targetTorsoAngle5 = (float) Math.toRadians(7f);
 	float targetLeftHip5 = (float) Math.toRadians(15f);
 	float targetLeftKnee5 = (float) Math.toRadians(22f);
 	float targetRightHip5 = (float) Math.toRadians(-40f);
 	float targetRightKnee5 = (float) Math.toRadians(0f);
 
 	// 6
-	float targetTorsoAngle6 = (float) Math.toRadians(8f);
+	float targetTorsoAngle6 = (float) Math.toRadians(7f);
 	float targetLeftHip6 = (float) Math.toRadians(16f);
 	float targetLeftKnee6 = (float) Math.toRadians(40f);
 	float targetRightHip6 = (float) Math.toRadians(-40f);
 	float targetRightKnee6 = (float) Math.toRadians(14f);
 
 	// 7
-	float targetTorsoAngle7 = (float) Math.toRadians(8.6f);
+	float targetTorsoAngle7 = (float) Math.toRadians(7f);
 	float targetLeftHip7 = (float) Math.toRadians(5f);
 	float targetLeftKnee7 = (float) Math.toRadians(40f);
 	float targetRightHip7 = (float) Math.toRadians(-32f);
 	float targetRightKnee7 = (float) Math.toRadians(17f);
 
 	// 8
-	float targetTorsoAngle8 = (float) Math.toRadians(10f);
+	float targetTorsoAngle8 = (float) Math.toRadians(7f);
 	float targetLeftHip8 = (float) Math.toRadians(7f);
 	float targetLeftKnee8 = (float) Math.toRadians(52f);
 	float targetRightHip8 = (float) Math.toRadians(-26f);
@@ -89,7 +89,7 @@ public class AnimationWalk extends Animation {
 
 	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int phase) {
 		super(performer);
-		durationToReach = 4000;
+		durationToReach = 400;
 
 		quarterDurationToReach = durationToReach / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
