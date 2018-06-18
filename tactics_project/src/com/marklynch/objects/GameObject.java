@@ -1093,6 +1093,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionMove(performer, this.squareGameObjectIsOn, true);
 		}
 
+		if (this instanceof Switch) {
+			Switch zwitch = (Switch) this;
+			return new ActionUse(performer, zwitch, zwitch.actionName, zwitch.actionVerb, zwitch.requirementsToMeet);
+		}
+
 		if (this instanceof Door) {
 			if (((Door) this).open) {
 				return new ActionMove(performer, this.squareGameObjectIsOn, true);

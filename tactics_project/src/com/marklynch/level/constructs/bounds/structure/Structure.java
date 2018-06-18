@@ -69,9 +69,12 @@ public class Structure {
 		for (StructureFeature feature : features) {
 			floorSquares.add(feature.gameObject.squareGameObjectIsOn);
 			featureSquares.add(feature.gameObject.squareGameObjectIsOn);
-			feature.gameObject.squareGameObjectIsOn.nodes = feature.nodes;
-			for (Node node : feature.nodes) {
-				node.addSquare(feature.gameObject.squareGameObjectIsOn);
+
+			if (feature.nodes != null && feature.nodes.size() > 0) {
+				feature.gameObject.squareGameObjectIsOn.nodes = feature.nodes;
+				for (Node node : feature.nodes) {
+					node.addSquare(feature.gameObject.squareGameObjectIsOn);
+				}
 			}
 		}
 

@@ -77,7 +77,7 @@ public class PressurePlate extends Switch {
 		pressurePlate.switchListener = switchListener;
 		pressurePlate.switchType = switchType;
 		pressurePlate.targetWeight = targetWeight;
-		if (switchListener != null)
+		if (switchListener != null && switchListener instanceof GameObject)
 			this.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SWITCH, this,
 					((GameObject) switchListener).squareGameObjectIsOn);
 

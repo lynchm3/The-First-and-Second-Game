@@ -32,10 +32,12 @@ public class StructurePath {
 			}
 		}
 
-		for (Square square : squares) {
-			square.nodes = this.nodes;
-			for (Node node : this.nodes) {
-				node.addSquare(square);
+		if (this.nodes != null && this.nodes.size() > 0) {
+			for (Square square : squares) {
+				square.nodes = this.nodes;
+				for (Node node : this.nodes) {
+					node.addSquare(square);
+				}
 			}
 		}
 	}

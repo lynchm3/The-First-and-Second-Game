@@ -1066,6 +1066,18 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return false;
 	}
 
+	public void removeObjecstWithTemplateId(int id) {
+		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.templateId == id) {
+				toRemove.add(gameObject);
+			}
+		}
+		for (GameObject gameObjectToRemove : toRemove) {
+			this.remove(gameObjectToRemove);
+		}
+	}
+
 	public GameObject getObjectWithTemplateId(int id) {
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.templateId == id) {
