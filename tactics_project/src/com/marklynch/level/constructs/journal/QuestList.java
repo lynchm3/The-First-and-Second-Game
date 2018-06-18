@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.journal;
 import java.util.ArrayList;
 
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMovingBridge;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
@@ -40,6 +41,8 @@ public class QuestList extends ArrayList<Quest> {
 
 		questTheSecretRoom = new QuestTheSecretRoom();
 		Level.fullQuestList.add(questTheSecretRoom);
+
+		new PuzzleRoomMovingBridge();
 	}
 
 	// public void update() {
