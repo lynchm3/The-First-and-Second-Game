@@ -2,11 +2,17 @@ package com.marklynch.level.constructs.bounds.structure.puzzleroom;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
+import com.marklynch.level.constructs.requirementtomeet.StatRequirementToMeet;
+import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.SwitchListener;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
 public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListener {
@@ -28,21 +34,24 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	// o = chasm / drop /death/ impassable
 	// x = bridge
 
-	boolean bridgeVertical = true;
+	boolean bridgeVertical = false;
 	static int posX = 100;
-	static int posY = 100;
+	static int posY = 50;
 	static int totalWidthInSquares = 10;
 	static int totalHeightInSquares = totalWidthInSquares;
 	int bridgeWidth = 2;
 	int bridgeLength = totalWidthInSquares - 2;
-	int bridgeAreaX = posX + 1;
-	int bridgeAreaY = posY + 1;
-	int gapsWidth = (bridgeLength - bridgeWidth) / 2;
-	int bridgeConnectorsX = (totalWidthInSquares - bridgeWidth) / 2;
+	int bridgePosX = posX + 1;
+	int bridgePosY = posY + 1;
+	int gapsWidth = (totalWidthInSquares - bridgeWidth) / 2;
+	int bridgeConnectorsWidth = (totalWidthInSquares - bridgeWidth) / 2;
 
 	public PuzzleRoomMovingBridge() {
-		super("Bridge Room", posX, posY, false, new ArrayList<Actor>(), 1, false, null,
+		super("Bridge Room", posX, posY, false, new ArrayList<Actor>(), 1, false, new Node[] {},
 				new RoomPart[] { new RoomPart(posX, posY, posX + totalWidthInSquares, posY + totalHeightInSquares) });
+
+		Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[posX][posY - 1], null, this, Switch.SWITCH_TYPE.OPEN_CLOSE,
+				new RequirementToMeet[] { new StatRequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) });
 		setup();
 
 	}
@@ -51,16 +60,56 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	public void zwitch(Switch zwitch) {
 		// TODO Auto-generated method stub
 		bridgeVertical = !bridgeVertical;
+		setup();
 
 	}
 
 	public void setup() {
-		// bridge connector parts
+
+		for (int i = posX; i < posX + totalWidthInSquares; i++) {
+
+			for (int j = posY; j < posY + totalHeightInSquares; j++) {
+
+				Level.squares[i][j].imageTexture = Square.WHITE_SQUARE;
+				// Level.squares[i][j].passable = false;
+			}
+		}
+
+		// bridge connector parts on the edges
 		for (int i = 0; i < bridgeWidth; i++) {
+			// left
 			Level.squares[posX][posY + gapsWidth + i].imageTexture = Square.MUD_TEXTURE;
+			// Level.squares[posX][posY + gapsWidth + i].passable = true;
+			// right
 			Level.squares[posX + totalWidthInSquares - 1][posY + gapsWidth + i].imageTexture = Square.MUD_TEXTURE;
+			// Level.squares[posX + totalWidthInSquares - 1][posY + gapsWidth + i].passable
+			// = true;
+			// top
 			Level.squares[posX + gapsWidth + i][posY].imageTexture = Square.MUD_TEXTURE;
+			// Level.squares[posX + gapsWidth + i][posY].passable = true;
+			// bottom
 			Level.squares[posX + gapsWidth + i][posY + totalHeightInSquares - 1].imageTexture = Square.MUD_TEXTURE;
+			// Level.squares[posX + gapsWidth + i][posY + totalHeightInSquares - 1].passable
+			// = true;
+		}
+
+		// bridge
+		if (bridgeVertical) {
+			for (int i = 0; i < bridgeWidth; i++) {
+				for (int j = 0; j < bridgeLength; j++) {
+					Level.squares[posX + gapsWidth + i][bridgePosY + j].imageTexture = Square.MUD_TEXTURE;
+					// Level.squares[bridgePosX + i][posY + gapsWidth + j].passable = true;
+				}
+
+			}
+		} else {
+			for (int i = 0; i < bridgeWidth; i++) {
+				for (int j = 0; j < bridgeLength; j++) {
+					Level.squares[bridgePosX + j][posY + gapsWidth + i].imageTexture = Square.MUD_TEXTURE;
+					// Level.squares[bridgePosX + j][posY + gapsWidth + i].passable = true;
+				}
+
+			}
 		}
 	}
 
