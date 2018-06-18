@@ -15,6 +15,7 @@ import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
+import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.utils.ResourceUtils;
 
@@ -363,6 +364,26 @@ public class TemplatesNature {
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_2.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_3.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_4.png", true));
+
+		Templates.VOID_HOLE = new VoidHole();
+		Templates.VOID_HOLE.name = "Void";
+		Templates.VOID_HOLE.imageTexturePath = "void_hole.png";
+		Templates.VOID_HOLE.imageTexture = getGlobalImage(Templates.VOID_HOLE.imageTexturePath, true);
+		Templates.VOID_HOLE.totalHealth = Templates.VOID_HOLE.remainingHealth = 100;
+		Templates.VOID_HOLE.widthRatio = 1f;
+		Templates.VOID_HOLE.heightRatio = 1f;
+		Templates.VOID_HOLE.drawOffsetRatioX = 0f;
+		Templates.VOID_HOLE.drawOffsetRatioY = 0f;
+		Templates.VOID_HOLE.soundWhenHit = 1f;
+		Templates.VOID_HOLE.soundWhenHitting = 1f;
+		Templates.VOID_HOLE.soundDampening = 1f;
+		Templates.VOID_HOLE.stackable = false;
+		Templates.VOID_HOLE.weight = 1f;
+		Templates.VOID_HOLE.value = 1;
+		Templates.VOID_HOLE.anchorX = 0;
+		Templates.VOID_HOLE.anchorY = 0;
+		Templates.VOID_HOLE.templateId = GameObject.generateNewTemplateId();
+		Templates.VOID_HOLE.effectsFromInteracting = new Effect[] { new EffectPoison(3) };
 
 	}
 

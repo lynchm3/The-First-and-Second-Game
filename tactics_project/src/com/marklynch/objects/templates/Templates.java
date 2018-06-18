@@ -35,6 +35,7 @@ import com.marklynch.objects.Stump;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
+import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.WaterBody;
@@ -373,5 +374,7 @@ public class Templates {
 	public static SmallHidingPlace BURROW;
 
 	public static Discoverable MOUND;
+
+	public static VoidHole VOID_HOLE;
 
 }

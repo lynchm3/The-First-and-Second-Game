@@ -71,10 +71,10 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
 				Level.squares[i][j].imageTexture = Square.WHITE_SQUARE;
-				if (Level.squares[i][j].inventory.containsObjectWithTemplateId(Templates.DROP_HOLE.templateId)) {
+				if (Level.squares[i][j].inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 
 				} else {
-					Level.squares[i][j].inventory.add(Templates.DROP_HOLE.makeCopy(null, null));
+					Level.squares[i][j].inventory.add(Templates.VOID_HOLE.makeCopy(null, null));
 				}
 			}
 		}
@@ -86,31 +86,31 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 			square = Level.squares[posX][posY + gapsWidth + i];
 			square.imageTexture = Square.MUD_TEXTURE;
-			if (square.inventory.containsObjectWithTemplateId(Templates.DROP_HOLE.templateId)) {
-				square.inventory.removeObjecstWithTemplateId(Templates.DROP_HOLE.templateId);
+			if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
+				square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 
 			// Level.squares[posX][posY + gapsWidth + i].passable = true;
 			// right
 			square = Level.squares[posX + totalWidthInSquares - 1][posY + gapsWidth + i];
 			square.imageTexture = Square.MUD_TEXTURE;
-			if (square.inventory.containsObjectWithTemplateId(Templates.DROP_HOLE.templateId)) {
-				square.inventory.removeObjecstWithTemplateId(Templates.DROP_HOLE.templateId);
+			if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
+				square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 			// Level.squares[posX + totalWidthInSquares - 1][posY + gapsWidth + i].passable
 			// = true;
 			// top
 			square = Level.squares[posX + gapsWidth + i][posY];
 			square.imageTexture = Square.MUD_TEXTURE;
-			if (square.inventory.containsObjectWithTemplateId(Templates.DROP_HOLE.templateId)) {
-				square.inventory.removeObjecstWithTemplateId(Templates.DROP_HOLE.templateId);
+			if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
+				square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 			// Level.squares[posX + gapsWidth + i][posY].passable = true;
 			// bottom
 			square = Level.squares[posX + gapsWidth + i][posY + totalHeightInSquares - 1];
 			square.imageTexture = Square.MUD_TEXTURE;
-			if (square.inventory.containsObjectWithTemplateId(Templates.DROP_HOLE.templateId)) {
-				square.inventory.removeObjecstWithTemplateId(Templates.DROP_HOLE.templateId);
+			if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
+				square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 			// Level.squares[posX + gapsWidth + i][posY + totalHeightInSquares - 1].passable
 			// = true;
@@ -122,8 +122,8 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				for (int j = 0; j < bridgeLength; j++) {
 					square = Level.squares[posX + gapsWidth + i][bridgePosY + j];
 					square.imageTexture = Square.MUD_TEXTURE;
-					if (square.inventory.containsObjectWithTemplateId(Templates.DROP_HOLE.templateId)) {
-						square.inventory.removeObjecstWithTemplateId(Templates.DROP_HOLE.templateId);
+					if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
+						square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 					}
 					// Level.squares[bridgePosX + i][posY + gapsWidth + j].passable = true;
 				}
@@ -134,8 +134,8 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				for (int j = 0; j < bridgeLength; j++) {
 					square = Level.squares[bridgePosX + j][posY + gapsWidth + i];
 					square.imageTexture = Square.MUD_TEXTURE;
-					if (square.inventory.containsObjectWithTemplateId(Templates.DROP_HOLE.templateId)) {
-						square.inventory.removeObjecstWithTemplateId(Templates.DROP_HOLE.templateId);
+					if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
+						square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 					}
 					// Level.squares[bridgePosX + j][posY + gapsWidth + i].passable = true;
 				}
