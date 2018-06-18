@@ -2046,38 +2046,26 @@ public class Level {
 		float sixHoursInSeconds = 3600 * 6;
 
 		if (secondsThroughDay <= sixHoursInSeconds) {
-			System.out.println("hour = " + hour);
 			float progress = secondsThroughDay / sixHoursInSeconds;
-			System.out.println("progress = " + progress);
 			shadowAngle = 1.57f * (progress);
-			System.out.println("shadowAngle = " + shadowAngle);
 			shadowDarkness = 0f;
 			smallShadowOffSetX = smallShadowMaxSize * (progress);
 			smallShadowOffSetY = -smallShadowMaxSize * (1f - progress);
 		} else if (secondsThroughDay <= sixHoursInSeconds * 2) {
-			System.out.println("hour = " + hour);
 			float progress = (secondsThroughDay - sixHoursInSeconds) / sixHoursInSeconds;
-			System.out.println("progress = " + progress);
 			shadowAngle = 1.57f + 1.57f * (progress);
-			System.out.println("shadowAngle = " + shadowAngle);
 			shadowDarkness = 0.2f * progress;
 			smallShadowOffSetX = smallShadowMaxSize * (1f - progress);
 			smallShadowOffSetY = smallShadowMaxSize * (progress);
 		} else if (secondsThroughDay <= sixHoursInSeconds * 3) {
-			System.out.println("hour = " + hour);
 			float progress = (secondsThroughDay - sixHoursInSeconds * 2) / sixHoursInSeconds;
-			System.out.println("progress = " + progress);
 			shadowAngle = 3.14f + 1.57f * (progress);
-			System.out.println("shadowAngle = " + shadowAngle);
 			shadowDarkness = 0.2f * (1f - progress);
 			smallShadowOffSetX = -smallShadowMaxSize * (progress);
 			smallShadowOffSetY = smallShadowMaxSize * (1f - progress);
 		} else if (secondsThroughDay <= sixHoursInSeconds * 4) {
-			System.out.println("hour = " + hour);
 			float progress = (secondsThroughDay - sixHoursInSeconds * 3) / sixHoursInSeconds;
-			System.out.println("progress = " + progress);
 			shadowAngle = 3.14f + 1.57f + 1.57f * (progress);
-			System.out.println("shadowAngle = " + shadowAngle);
 			shadowDarkness = 0f;
 			smallShadowOffSetX = -smallShadowMaxSize * (1f - progress);
 			smallShadowOffSetY = -smallShadowMaxSize * (progress);
@@ -2104,7 +2092,6 @@ public class Level {
 		if (hour <= 6) {
 			float progress = hour / 6f;
 			dayTimeOverlayColor.a = 0.4f - 0.35f * (progress);
-			System.out.println("dayTimeOverlay.a = " + dayTimeOverlayColor.a);
 
 			dayTimeOverlayColor.r = 0.7f + 0.2f * (progress);
 			dayTimeOverlayColor.g = 0.7f + 0.2f * (progress);

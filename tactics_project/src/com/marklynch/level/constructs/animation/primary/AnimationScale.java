@@ -18,23 +18,18 @@ public class AnimationScale extends Animation {
 	@Override
 	public void update(double delta) {
 
-		System.out.println("AnimationScale.update");
-
 		if (getCompleted())
 			return;
 		super.update(delta);
 
 		durationSoFar += delta;
 		double progress = durationSoFar / durationToReach;
-		System.out.println("progress = " + progress);
 		if (progress >= 1) {
 			progress = 1;
 			runCompletionAlgorightm();
 		}
 		scaleX = (float) progress * 1f;
 		scaleY = (float) progress * 1f;
-		System.out.println("scaleX = " + scaleX);
-		System.out.println("scaleY = " + scaleY);
 
 	}
 

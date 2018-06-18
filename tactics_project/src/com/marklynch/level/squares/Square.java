@@ -273,13 +273,13 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			alpha = 0.5f;
 
 		if (Game.zoomLevelIndex == Game.zoomLevels.length - 1) {
-			if (!this.seenByPlayer) {
+			if (!this.seenByPlayer || textureToDraw == null) {
 
 			} else {
 				QuadUtils.drawQuad(Square.tileColors.get(textureToDraw), squarePositionX, squarePositionY,
 						squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 			}
-		} else {
+		} else if (textureToDraw != null) {
 
 			Color color = Level.dayTimeOverlayColor;
 			if (structureSquareIsIn != null && textureToDraw != GREY_TEXTURE)

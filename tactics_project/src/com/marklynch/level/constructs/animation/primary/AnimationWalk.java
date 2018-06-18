@@ -347,9 +347,6 @@ public class AnimationWalk extends Animation {
 			leftKneeAngleFormCurrentKeyFrame = -temp;
 		}
 
-		System.out.println("headBobLastKeyFrame = " + headBobLastKeyFrame);
-		System.out.println("headBobFromCurrentKeyFrame = " + headBobFromCurrentKeyFrame);
-
 		headBob = headBobLastKeyFrame + intermediateProgress * (headBobFromCurrentKeyFrame - headBobLastKeyFrame);
 		offsetY += headBob;
 

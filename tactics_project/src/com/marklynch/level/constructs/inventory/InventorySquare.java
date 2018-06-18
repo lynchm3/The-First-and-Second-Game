@@ -212,7 +212,6 @@ public class InventorySquare extends Square {
 
 	@Override
 	public Action getDefaultActionForTheSquareOrObject(Actor performer, boolean keyPress) {
-		System.out.println("getDefaultActionForTheSquareOrObject");
 		GameObject targetGameObject = this.stack.get(0);
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultActionPerformedOnThisInInventory(performer);

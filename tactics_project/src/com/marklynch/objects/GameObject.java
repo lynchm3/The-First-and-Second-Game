@@ -156,7 +156,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Color light;
 	public float lightHandleX;
 	public float lightHandlY;
-	public boolean stackable;
+	public boolean stackable = false;
 
 	public float weight;
 
@@ -1466,16 +1466,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	@Override
 	public Action getDefaultActionPerformedOnThisInInventory(Actor performer) {
 
-		System.out.println("getDefaultActionPerformedOnThisInInventory");
-
-		System.out.println(
-				"getDefaultActionPerformedOnThisInInventory Inventory.inventoryMode = " + Inventory.inventoryMode);
-
 		if (this.inventoryThatHoldsThisObject == null) {
 			return null;
 		}
-
-		System.out.println("getDefaultActionPerformedOnThisInInventory a");
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			if (this instanceof ContainerForLiquids)
@@ -1506,7 +1499,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			else if (Inventory.target instanceof GameObject)
 				return new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this);
 		}
-		System.out.println("getDefaultActionPerformedOnThisInInventory b");
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory)
@@ -2080,6 +2072,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void changeHealth(float change, Object attacker, Action action) {
 
+		if (attackable == false)
+			return;
+
 		remainingHealth += change;
 		if (remainingHealth > totalHealth)
 			remainingHealth = totalHealth;
@@ -2092,6 +2087,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public float changeHealth(Object attacker, Action action, DamageDealer damageDealer) {
+
+		if (attackable == false)
+			return 0;
 
 		int offsetY = 0;
 		boolean thisIsAnAttack = false;
@@ -2151,6 +2149,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public float changeHealth(Object attacker, Action action, Stat damage) {
+
+		if (attackable == false)
+			return 0;
 
 		int offsetY = 0;
 		boolean thisIsAnAttack = false;

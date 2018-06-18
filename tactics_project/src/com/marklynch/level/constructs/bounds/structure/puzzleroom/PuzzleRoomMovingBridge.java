@@ -70,7 +70,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		for (int i = posX; i < posX + totalWidthInSquares; i++) {
 
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
-				Level.squares[i][j].imageTexture = Square.WHITE_SQUARE;
+				Level.squares[i][j].imageTexture = null;
 				if (Level.squares[i][j].inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 
 				} else {
@@ -85,7 +85,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			// left
 
 			square = Level.squares[posX][posY + gapsWidth + i];
-			square.imageTexture = Square.MUD_TEXTURE;
+			square.imageTexture = Square.STONE_TEXTURE;
 			if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 				square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
@@ -93,7 +93,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			// Level.squares[posX][posY + gapsWidth + i].passable = true;
 			// right
 			square = Level.squares[posX + totalWidthInSquares - 1][posY + gapsWidth + i];
-			square.imageTexture = Square.MUD_TEXTURE;
+			square.imageTexture = Square.STONE_TEXTURE;
 			if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 				square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
@@ -101,14 +101,14 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			// = true;
 			// top
 			square = Level.squares[posX + gapsWidth + i][posY];
-			square.imageTexture = Square.MUD_TEXTURE;
+			square.imageTexture = Square.STONE_TEXTURE;
 			if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 				square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 			// Level.squares[posX + gapsWidth + i][posY].passable = true;
 			// bottom
 			square = Level.squares[posX + gapsWidth + i][posY + totalHeightInSquares - 1];
-			square.imageTexture = Square.MUD_TEXTURE;
+			square.imageTexture = Square.STONE_TEXTURE;
 			if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 				square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
@@ -121,7 +121,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			for (int i = 0; i < bridgeWidth; i++) {
 				for (int j = 0; j < bridgeLength; j++) {
 					square = Level.squares[posX + gapsWidth + i][bridgePosY + j];
-					square.imageTexture = Square.MUD_TEXTURE;
+					square.imageTexture = Square.STONE_TEXTURE;
 					if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 						square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 					}
@@ -133,7 +133,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			for (int i = 0; i < bridgeWidth; i++) {
 				for (int j = 0; j < bridgeLength; j++) {
 					square = Level.squares[bridgePosX + j][posY + gapsWidth + i];
-					square.imageTexture = Square.MUD_TEXTURE;
+					square.imageTexture = Square.STONE_TEXTURE;
 					if (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 						square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 					}
