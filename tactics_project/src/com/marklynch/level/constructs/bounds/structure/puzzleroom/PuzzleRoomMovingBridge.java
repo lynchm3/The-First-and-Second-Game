@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.bounds.structure.puzzleroom;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -140,13 +141,19 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 	public void moveBridge() {
 
+		HashMap<GameObject, Square> teleportationsToPerform = new HashMap<GameObject, Square>();
+
 		if (bridgeVertical) {
 			for (int i = 0; i < horizontalBridgeSquares.size(); i++) {
 				Square oldSquare = horizontalBridgeSquares.get(i);
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId)
-						new ActionTeleport(Level.player, gameObject, verticalBridgeSquares.get(i), false).perform();
+						teleportationsToPerform.put(gameObject, verticalBridgeSquares.get(i));
 				}
+			}
+
+			for (GameObject gameObject : teleportationsToPerform.keySet()) {
+				new ActionTeleport(Level.player, gameObject, teleportationsToPerform.get(gameObject), false).perform();
 			}
 
 			for (Square oldSquare : horizontalBridgeSquares) {
@@ -164,8 +171,12 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				horizontalBridgeSquares.get(i).inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId)
-						new ActionTeleport(Level.player, gameObject, horizontalBridgeSquares.get(i), false).perform();
+						teleportationsToPerform.put(gameObject, horizontalBridgeSquares.get(i));
 				}
+			}
+
+			for (GameObject gameObject : teleportationsToPerform.keySet()) {
+				new ActionTeleport(Level.player, gameObject, teleportationsToPerform.get(gameObject), false).perform();
 			}
 
 			for (Square oldSquare : verticalBridgeSquares) {
