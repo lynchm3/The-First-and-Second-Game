@@ -142,18 +142,22 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	public void moveBridge() {
 
 		HashMap<GameObject, Square> teleportationsToPerform = new HashMap<GameObject, Square>();
+		ArrayList<GameObject> teleportationObjectsInOrder = new ArrayList<GameObject>();
 
 		if (bridgeVertical) {
 			for (int i = 0; i < horizontalBridgeSquares.size(); i++) {
 				Square oldSquare = horizontalBridgeSquares.get(i);
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
-					if (gameObject.templateId != Templates.VOID_HOLE.templateId)
+					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
+						teleportationObjectsInOrder.add(gameObject);
 						teleportationsToPerform.put(gameObject, verticalBridgeSquares.get(i));
+					}
 				}
 			}
 
-			for (GameObject gameObject : teleportationsToPerform.keySet()) {
+			for (GameObject gameObject : teleportationObjectsInOrder) {
 				move(gameObject, teleportationsToPerform.get(gameObject));
+
 			}
 
 			for (Square oldSquare : horizontalBridgeSquares) {
@@ -170,13 +174,16 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				Square oldSquare = verticalBridgeSquares.get(i);
 				horizontalBridgeSquares.get(i).inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
-					if (gameObject.templateId != Templates.VOID_HOLE.templateId)
+					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
+						teleportationObjectsInOrder.add(gameObject);
 						teleportationsToPerform.put(gameObject, horizontalBridgeSquares.get(i));
+					}
 				}
 			}
 
-			for (GameObject gameObject : teleportationsToPerform.keySet()) {
+			for (GameObject gameObject : teleportationObjectsInOrder) {
 				move(gameObject, teleportationsToPerform.get(gameObject));
+
 			}
 
 			for (Square oldSquare : verticalBridgeSquares) {
