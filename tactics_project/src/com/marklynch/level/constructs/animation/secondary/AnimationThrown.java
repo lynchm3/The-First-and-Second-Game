@@ -5,7 +5,9 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.primary.AnimationFlinch;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -13,12 +15,14 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Liquid;
+import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
@@ -168,10 +172,10 @@ public class AnimationThrown extends Animation {
 	public void drawStaticUI() {
 	}
 
-	public void smashContainer(ContainerForLiquids container) {
+	public static void smashContainer(Actor performer, GameObject targetGameObject, ContainerForLiquids container) {
 		if (targetGameObject != null)
 			targetGameObject.squareGameObjectIsOn.inventory.add(container);
-		new ActionSmash(shooter, container).perform();
+		new ActionSmash(performer, container).perform();
 
 		// Find a square for broken glass and put it there
 		Square squareForGlass = null;
@@ -188,21 +192,80 @@ public class AnimationThrown extends Animation {
 				if (gameObject != container) {
 					// new ActionDouse(shooter, gameObject).perform();
 					for (Effect effect : liquid.touchEffects) {
-						gameObject.addEffect(effect.makeCopy(shooter, gameObject));
+						gameObject.addEffect(effect.makeCopy(performer, gameObject));
 						if (effect instanceof EffectWet)
 							gameObject.removeBurningEffect();
 					}
 					if (gameObject instanceof Actor)
-						gameObject.addEffect(new EffectBleed(shooter, targetGameObject, 5));
+						gameObject.addEffect(new EffectBleed(performer, targetGameObject, 5));
 				}
 
 			}
 		}
 		for (GameObject gameObject : container.squareGameObjectIsOn.inventory.getGameObjects()) {
 			if (gameObject instanceof Actor)
-				gameObject.addEffect(new EffectBleed(shooter, targetGameObject, 5));
+				gameObject.addEffect(new EffectBleed(performer, targetGameObject, 5));
 
 		}
 
+	}
+
+	public static void postRangedAnimation(Actor performer, GameObject weapon, GameObject target,
+			GameObject projectileObject, Action action) {
+
+		Square targetSquare = null;
+
+		if (target != null)
+			target.showPow();
+		if (!(projectileObject instanceof Arrow)) {
+			if (target != null && target instanceof Searchable && projectileObject.canShareSquare) {
+				target.inventory.add(projectileObject);
+			} else {
+				targetSquare.inventory.add(projectileObject);
+			}
+			projectileObject.landed(performer, action);
+		} else if (target != null) {
+
+			// projectileObject.drawOffsetRatioX = (targetX -
+			// target.squareGameObjectIsOn.xInGridPixels)
+			// / Game.SQUARE_WIDTH;
+
+			// projectileObject.drawOffsetRatioY = (targetY -
+			// target.squareGameObjectIsOn.yInGridPixels)
+			// / Game.SQUARE_HEIGHT;
+
+			target.arrowsEmbeddedInThis.add((Arrow) projectileObject);
+		}
+
+		if (Level.player.inventory.groundDisplay != null)
+			Level.player.inventory.groundDisplay.refreshGameObjects();
+
+		// Carry out the dmg, attack, logging...
+		if (target != null && target.attackable) {
+			float damage = target.changeHealth(performer, action, weapon);
+			String attackTypeString;
+			attackTypeString = "attacked ";
+
+			if (performer.squareGameObjectIsOn.visibleToPlayer) {
+
+				if (weapon != performer) {
+					if (Game.level.shouldLog(target, performer))
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+								target, " with ", weapon, " for " + damage + " damage" }));
+				} else {
+					if (Game.level.shouldLog(target, performer))
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+								target, " for " + damage + " damage" }));
+				}
+			}
+
+			if (weapon instanceof ContainerForLiquids) {
+				smashContainer(performer, target, (ContainerForLiquids) weapon);
+			}
+
+			if (target != null && target instanceof Actor && target.remainingHealth > 0)
+				target.setPrimaryAnimation(
+						new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
+		}
 	}
 }

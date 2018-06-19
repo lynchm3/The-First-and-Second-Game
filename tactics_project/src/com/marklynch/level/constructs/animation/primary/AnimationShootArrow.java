@@ -173,8 +173,4 @@ public abstract class AnimationShootArrow extends Animation {
 	public void drawStaticUI() {
 	}
 
-	public void arrowCallback() {
-
-	}
-
 }

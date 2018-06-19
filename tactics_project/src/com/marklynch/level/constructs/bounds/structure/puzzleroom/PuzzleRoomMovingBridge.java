@@ -5,13 +5,13 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.animation.primary.AnimationTeleport;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.SwitchListener;
-import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
@@ -153,7 +153,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 
 			for (GameObject gameObject : teleportationsToPerform.keySet()) {
-				new ActionTeleport(Level.player, gameObject, teleportationsToPerform.get(gameObject), false).perform();
+				move(gameObject, teleportationsToPerform.get(gameObject));
 			}
 
 			for (Square oldSquare : horizontalBridgeSquares) {
@@ -176,7 +176,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 
 			for (GameObject gameObject : teleportationsToPerform.keySet()) {
-				new ActionTeleport(Level.player, gameObject, teleportationsToPerform.get(gameObject), false).perform();
+				move(gameObject, teleportationsToPerform.get(gameObject));
 			}
 
 			for (Square oldSquare : verticalBridgeSquares) {
@@ -189,6 +189,20 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				newSquare.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 		}
+	}
+
+	public void move(GameObject gameObject, Square targetSquare) {
+
+		Square startSquare = gameObject.squareGameObjectIsOn;
+
+		gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+		gameObject.squareGameObjectIsOn = targetSquare;
+		targetSquare.inventory.add(gameObject);
+
+		gameObject.setPrimaryAnimation(new AnimationTeleport(gameObject, startSquare, targetSquare));
+		// gameObject.setPrimaryAnimation(new AnimationTeleport(gameObject, startSquare,
+		// targetSquare));
+
 	}
 
 	public void setupBridgeConnections() {

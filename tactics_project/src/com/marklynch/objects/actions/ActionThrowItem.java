@@ -99,10 +99,24 @@ public class ActionThrowItem extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
+		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 			performer.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this,
-					targetGameObject, targetSquare, gameObjectToThrow, gameObjectToThrow, 1f, 0.5f, true));
+					targetGameObject, targetSquare, gameObjectToThrow, gameObjectToThrow, 1f, 0.5f, true) {
+				@Override
+				public void runCompletionAlgorightm() {
+					super.runCompletionAlgorightm();
+					postRangedAnimation(ActionThrowItem.this.performer, ActionThrowItem.this.gameObjectToThrow,
+							ActionThrowItem.this.targetGameObject, ActionThrowItem.this.gameObjectToThrow,
+							ActionThrowItem.this);
+					// postRangedAnimation(arrow);
+				}
+			});
+		} else {
 
+			AnimationThrown.postRangedAnimation(ActionThrowItem.this.performer, ActionThrowItem.this.gameObjectToThrow,
+					ActionThrowItem.this.targetGameObject, ActionThrowItem.this.gameObjectToThrow,
+					ActionThrowItem.this);
+		}
 		if (performer.equipped == gameObjectToThrow) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
 				performer.equip(performer.equippedBeforePickingUpObject);
