@@ -106,15 +106,15 @@ public class ActionThrowItem extends Action {
 				public void runCompletionAlgorightm() {
 					super.runCompletionAlgorightm();
 					postRangedAnimation(ActionThrowItem.this.performer, ActionThrowItem.this.gameObjectToThrow,
-							ActionThrowItem.this.targetGameObject, ActionThrowItem.this.gameObjectToThrow,
-							ActionThrowItem.this);
+							ActionThrowItem.this.targetGameObject, this.targetSquare,
+							ActionThrowItem.this.gameObjectToThrow, ActionThrowItem.this);
 					// postRangedAnimation(arrow);
 				}
 			});
 		} else {
 
 			AnimationThrown.postRangedAnimation(ActionThrowItem.this.performer, ActionThrowItem.this.gameObjectToThrow,
-					ActionThrowItem.this.targetGameObject, ActionThrowItem.this.gameObjectToThrow,
+					ActionThrowItem.this.targetGameObject, this.targetSquare, ActionThrowItem.this.gameObjectToThrow,
 					ActionThrowItem.this);
 		}
 		if (performer.equipped == gameObjectToThrow) {

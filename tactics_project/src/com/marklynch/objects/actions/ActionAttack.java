@@ -105,7 +105,8 @@ public class ActionAttack extends Action {
 							public void runCompletionAlgorightm() {
 								super.runCompletionAlgorightm();
 								postRangedAnimation(ActionAttack.this.performer, ActionAttack.this.weapon,
-										ActionAttack.this.target, arrow, ActionAttack.this);
+										ActionAttack.this.target, ActionAttack.this.target.squareGameObjectIsOn, arrow,
+										ActionAttack.this);
 								// postRangedAnimation(arrow);
 							}
 						};
@@ -117,7 +118,8 @@ public class ActionAttack extends Action {
 				arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
 				arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
 				AnimationThrown.postRangedAnimation(ActionAttack.this.performer, ActionAttack.this.weapon,
-						ActionAttack.this.target, arrow, ActionAttack.this);
+						ActionAttack.this.target, ActionAttack.this.target.squareGameObjectIsOn, arrow,
+						ActionAttack.this);
 			}
 		}
 

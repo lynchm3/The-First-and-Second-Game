@@ -210,10 +210,8 @@ public class AnimationThrown extends Animation {
 
 	}
 
-	public static void postRangedAnimation(Actor performer, GameObject weapon, GameObject target,
+	public static void postRangedAnimation(Actor performer, GameObject weapon, GameObject target, Square targetSquare,
 			GameObject projectileObject, Action action) {
-
-		Square targetSquare = null;
 
 		if (target != null)
 			target.showPow();
@@ -225,15 +223,6 @@ public class AnimationThrown extends Animation {
 			}
 			projectileObject.landed(performer, action);
 		} else if (target != null) {
-
-			// projectileObject.drawOffsetRatioX = (targetX -
-			// target.squareGameObjectIsOn.xInGridPixels)
-			// / Game.SQUARE_WIDTH;
-
-			// projectileObject.drawOffsetRatioY = (targetY -
-			// target.squareGameObjectIsOn.yInGridPixels)
-			// / Game.SQUARE_HEIGHT;
-
 			target.arrowsEmbeddedInThis.add((Arrow) projectileObject);
 		}
 

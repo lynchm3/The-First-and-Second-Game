@@ -82,14 +82,16 @@ public class ActionCastBurn extends Action {
 					public void runCompletionAlgorightm() {
 						super.runCompletionAlgorightm();
 						postRangedAnimation(ActionCastBurn.this.performer, ActionCastBurn.this.performer,
-								ActionCastBurn.this.target, fireBall, ActionCastBurn.this);
+								ActionCastBurn.this.target, ActionCastBurn.this.target.squareGameObjectIsOn, fireBall,
+								ActionCastBurn.this);
 					}
 				};
 			}
 		} else {
 
 			AnimationThrown.postRangedAnimation(ActionCastBurn.this.performer, ActionCastBurn.this.performer,
-					ActionCastBurn.this.target, fireBall, ActionCastBurn.this);
+					ActionCastBurn.this.target, ActionCastBurn.this.target.squareGameObjectIsOn, fireBall,
+					ActionCastBurn.this);
 		}
 		// else {
 		// performer.showPow(target);
