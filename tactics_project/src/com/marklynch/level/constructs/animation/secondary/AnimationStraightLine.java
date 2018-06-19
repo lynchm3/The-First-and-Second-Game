@@ -10,45 +10,53 @@ import com.marklynch.utils.TextureUtils;
 public class AnimationStraightLine extends Animation {
 
 	public String name;
-	public Square targetSquare;
-	float x, y, originX, originY, targetX, targetY, speedX, speedY;
+	public Square[] targetSquares;
+	private int index = 0;
+	float x, y, targetX, targetY, speed, speedX, speedY;
 	float angle = 0;
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	GameObject projectileObject;
 	float rotationSpeed = 0;
 
-	public AnimationStraightLine(GameObject projectileObject, Square targetSquare, float speed) {
+	public AnimationStraightLine(GameObject projectileObject, float speed, Square... targetSquares) {
 
 		super(null);
 
-		this.targetSquare = targetSquare;
+		this.targetSquares = targetSquares;
 		this.projectileObject = projectileObject;
+		this.speed = speed;
 
-		this.x = this.originX = projectileObject.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
-		this.y = this.originY = projectileObject.squareGameObjectIsOn.yInGridPixels;// shooter.getCenterY();
-
-		this.targetX = this.targetSquare.xInGridPixels;
-		this.targetY = this.targetSquare.yInGridPixels;
-
-		distanceToCoverX = this.targetX - this.originX;
-		distanceToCoverY = this.targetY - this.originY;
-		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
-
-		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
-		this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
-
+		this.x = projectileObject.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
+		this.y = projectileObject.squareGameObjectIsOn.yInGridPixels;// shooter.getCenterY();
 		if (speedX < 0)
 			this.rotationSpeed = -rotationSpeed;
 		else
 			this.rotationSpeed = rotationSpeed;
 
+		blockAI = true;
+
+		projectileObject.squareGameObjectIsOn.inventory.remove(projectileObject);
+
+		setupForNextSquare();
+
+	}
+
+	public void setupForNextSquare() {
+
+		this.targetX = this.targetSquares[index].xInGridPixels;
+		this.targetY = this.targetSquares[index].yInGridPixels;
+
+		distanceToCoverX = this.targetX - this.x;
+		distanceToCoverY = this.targetY - this.y;
+		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
+
+		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
+		this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
+
 		if (projectileObject instanceof Arrow && distanceToCoverX < 0) {
 			projectileObject.backwards = true;
 		}
 
-		blockAI = true;
-
-		projectileObject.squareGameObjectIsOn.inventory.remove(projectileObject);
 	}
 
 	@Override
@@ -67,14 +75,23 @@ public class AnimationStraightLine extends Animation {
 
 		if (distanceToCoverX == 0 && distanceToCoverY == 0) {
 
-			System.out.println("DONE 1");
-			runCompletionAlgorightm();
+			index++;
+			if (index >= targetSquares.length) {
+				System.out.println("DONE 1");
+				runCompletionAlgorightm();
+			} else {
+				setupForNextSquare();
+			}
 		} else if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
 
-			System.out.println("DONE 2");
-
-			runCompletionAlgorightm();
+			index++;
+			if (index >= targetSquares.length) {
+				System.out.println("DONE 2");
+				runCompletionAlgorightm();
+			} else {
+				setupForNextSquare();
+			}
 
 		} else {
 			x += distanceX;
@@ -100,9 +117,13 @@ public class AnimationStraightLine extends Animation {
 	public void drawStaticUI() {
 	}
 
-	public static void postRangedAnimation(GameObject projectileObject, Square targetSquare) {
+	public static void postRangedAnimation(GameObject projectileObject, Square... targetSquares) {
+		postRangedAnimation(projectileObject, targetSquares, false);
+	}
 
-		targetSquare.inventory.add(projectileObject);
+	public static void postRangedAnimation(GameObject projectileObject, Square[] targetSquares, boolean doesNothing) {
+
+		targetSquares[targetSquares.length - 1].inventory.add(projectileObject);
 
 		if (Level.player.inventory.groundDisplay != null)
 			Level.player.inventory.groundDisplay.refreshGameObjects();

@@ -48,6 +48,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 	ArrayList<Square> verticalBridgeSquares = new ArrayList<Square>();
 	ArrayList<Square> horizontalBridgeSquares = new ArrayList<Square>();
+	ArrayList<Square> midBridgeSquares = new ArrayList<Square>();
 	ArrayList<Square> activeBridgeSquares;
 
 	public PuzzleRoomMovingBridge() {
@@ -82,6 +83,28 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				horizontalBridgeSquares.add(Level.squares[bridgePosX + j][posY + gapsWidth + i]);
 			}
 		}
+
+		int midSquareX1 = bridgePosX + bridgeLength / 2 - 1;
+		int midSquareX2 = bridgePosX + bridgeLength / 2;
+		int midSquareY1 = bridgePosY + bridgeLength / 2 - 1;
+		int midSquareY2 = bridgePosY + bridgeLength / 2;
+		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+
+		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
 
 		for (Square square : verticalBridgeSquares) {
 			System.out.println("verticalBridgeSquare " + square);
@@ -142,6 +165,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	public void moveBridge() {
 
 		HashMap<GameObject, Square> teleportationsToPerform = new HashMap<GameObject, Square>();
+		HashMap<GameObject, Square> midTeleportationsToPerform = new HashMap<GameObject, Square>();
 		ArrayList<GameObject> teleportationObjectsInOrder = new ArrayList<GameObject>();
 
 		if (bridgeVertical) {
@@ -150,13 +174,14 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						teleportationObjectsInOrder.add(gameObject);
+						midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
 						teleportationsToPerform.put(gameObject, verticalBridgeSquares.get(i));
 					}
 				}
 			}
 
 			for (GameObject gameObject : teleportationObjectsInOrder) {
-				move(gameObject, teleportationsToPerform.get(gameObject));
+				move(gameObject, midTeleportationsToPerform.get(gameObject), teleportationsToPerform.get(gameObject));
 
 			}
 
@@ -176,13 +201,14 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						teleportationObjectsInOrder.add(gameObject);
+						midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
 						teleportationsToPerform.put(gameObject, horizontalBridgeSquares.get(i));
 					}
 				}
 			}
 
 			for (GameObject gameObject : teleportationObjectsInOrder) {
-				move(gameObject, teleportationsToPerform.get(gameObject));
+				move(gameObject, midTeleportationsToPerform.get(gameObject), teleportationsToPerform.get(gameObject));
 
 			}
 
@@ -198,21 +224,23 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		}
 	}
 
-	public void move(final GameObject gameObject, Square targetSquare) {
+	public void move(final GameObject gameObject, Square... targetSquares) {
 
 		if ((gameObject.squareGameObjectIsOn.onScreen() && gameObject.squareGameObjectIsOn.visibleToPlayer)
-				|| (targetSquare.onScreen() && targetSquare.visibleToPlayer)) {
-			Level.player.addSecondaryAnimation(new AnimationStraightLine(gameObject, targetSquare, 1f) {
+				|| (targetSquares[0].onScreen() && targetSquares[0].visibleToPlayer)
+				|| (targetSquares[targetSquares.length - 1].onScreen()
+						&& targetSquares[targetSquares.length - 1].visibleToPlayer)) {
+			Level.player.addSecondaryAnimation(new AnimationStraightLine(gameObject, 1f, targetSquares) {
 				@Override
 				public void runCompletionAlgorightm() {
 					super.runCompletionAlgorightm();
-					postRangedAnimation(gameObject, targetSquare);
+					postRangedAnimation(gameObject, targetSquares);
 					// postRangedAnimation(arrow);
 				}
 			});
 		} else {
 
-			AnimationStraightLine.postRangedAnimation(gameObject, targetSquare);
+			AnimationStraightLine.postRangedAnimation(gameObject, targetSquares);
 		}
 
 		// Square startSquare = gameObject.squareGameObjectIsOn;
