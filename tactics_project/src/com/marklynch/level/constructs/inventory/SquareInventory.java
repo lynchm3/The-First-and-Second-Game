@@ -6,8 +6,10 @@ import java.util.Comparator;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
+import com.marklynch.objects.Floor;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.PressurePlate;
+import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
@@ -165,6 +167,26 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 	@Override
 	public int compare(GameObject a, GameObject b) {
+
+		if (a instanceof VoidHole && b instanceof VoidHole) {
+			return 0;
+		} else if (a instanceof VoidHole)
+
+		{
+			return -1;
+		} else if (b instanceof VoidHole) {
+			return 1;
+		}
+
+		if (a instanceof Floor && b instanceof Floor) {
+			return 0;
+		} else if (a instanceof Floor)
+
+		{
+			return -1;
+		} else if (b instanceof Floor) {
+			return 1;
+		}
 
 		if (a instanceof WaterBody && b instanceof WaterBody) {
 			return 0;

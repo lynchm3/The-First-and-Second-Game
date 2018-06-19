@@ -195,7 +195,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 		if ((gameObject.squareGameObjectIsOn.onScreen() && gameObject.squareGameObjectIsOn.visibleToPlayer)
 				|| (targetSquare.onScreen() && targetSquare.visibleToPlayer)) {
-			gameObject.addSecondaryAnimation(new AnimationStraightLine(gameObject, targetSquare, 1f) {
+			Level.player.addSecondaryAnimation(new AnimationStraightLine(gameObject, targetSquare, 1f) {
 				@Override
 				public void runCompletionAlgorightm() {
 					super.runCompletionAlgorightm();

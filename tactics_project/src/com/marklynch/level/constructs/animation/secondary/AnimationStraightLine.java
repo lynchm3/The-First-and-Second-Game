@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.animation.secondary;
 
-import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
@@ -28,23 +27,8 @@ public class AnimationStraightLine extends Animation {
 		this.x = this.originX = projectileObject.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
 		this.y = this.originY = projectileObject.squareGameObjectIsOn.yInGridPixels;// shooter.getCenterY();
 
-		this.targetX = this.targetSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH * this.projectileObject.drawOffsetRatioX
-				+ this.projectileObject.width / 2f;
-		this.targetY = this.targetSquare.yInGridPixels
-				+ Game.HALF_SQUARE_HEIGHT * this.projectileObject.drawOffsetRatioY + this.projectileObject.height / 2f;
-
-		this.targetY += Math.random() * 16f;
-		this.targetY -= 8;
-
-		if (projectileObject.backwards) {
-
-			targetX += projectileObject.width;
-		} else {
-			targetX -= projectileObject.width;
-		}
-
-		// (int) (this.targetSquare.yInGridPixels
-		// + Game.SQUARE_HEIGHT * this.projectileObject.drawOffsetY)
+		this.targetX = this.targetSquare.xInGridPixels;
+		this.targetY = this.targetSquare.yInGridPixels;
 
 		distanceToCoverX = this.targetX - this.originX;
 		distanceToCoverY = this.targetY - this.originY;
@@ -63,6 +47,8 @@ public class AnimationStraightLine extends Animation {
 		}
 
 		blockAI = true;
+
+		projectileObject.squareGameObjectIsOn.inventory.remove(projectileObject);
 	}
 
 	@Override
@@ -79,15 +65,20 @@ public class AnimationStraightLine extends Animation {
 		distanceCoveredX += distanceX;
 		distanceCoveredY += distanceY;
 
-		if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
+		if (distanceToCoverX == 0 && distanceToCoverY == 0) {
+
+			System.out.println("DONE 1");
+			runCompletionAlgorightm();
+		} else if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
+
+			System.out.println("DONE 2");
+
 			runCompletionAlgorightm();
 
 		} else {
 			x += distanceX;
 			y += distanceY;
-			Square square = Game.level.squares[(int) Math.floor(x / Game.SQUARE_WIDTH)][(int) Math
-					.floor(y / Game.SQUARE_HEIGHT)];
 
 		}
 	}
