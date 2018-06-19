@@ -55,6 +55,7 @@ public class Player extends Human {
 		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png", false);
 		stepRightTexture = ResourceUtils.getGlobalImage("player_step_right.png", false);
 		thoughtsOnPlayer = 100;
+		sight = 20;
 	}
 
 	@Override

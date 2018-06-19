@@ -642,10 +642,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void draw3() {
 
-		if (squareGameObjectIsOn.inventory.waterBody == null)
-			return;
-		if (!floats)
-			return;
 		// if (this.remainingHealth <= 0)
 		// return;
 		if (squareGameObjectIsOn == null)
@@ -665,9 +661,18 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// if (primaryAnimation != null && primaryAnimation.completed == false)
 		// primaryAnimation.draw1();
 
-		for (Animation secondaryAnimation : secondaryAnimations)
-			secondaryAnimation.draw1();
+		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
+			primaryAnimation.draw3();
+		for (Animation secondaryAnimation : secondaryAnimations) {
+			secondaryAnimation.draw3();
+		}
 
+		// water stuff... i dunno
+
+		if (squareGameObjectIsOn.inventory.waterBody == null)
+			return;
+		if (!floats)
+			return;
 		// Draw object
 		if (squareGameObjectIsOn != null) {
 			int actorPositionXInPixels = 0;

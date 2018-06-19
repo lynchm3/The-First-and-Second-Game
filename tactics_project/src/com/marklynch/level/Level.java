@@ -992,21 +992,27 @@ public class Level {
 				}
 			}
 			Game.flush();
+
+			// Squares draw2
+			// for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+			// for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+			// is it better to bind once and draw all the same ones?
+			// squares[i][j].draw2();
+			// }
+			// }
+
+			Game.flush();
+		}
+
+		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+
+			Game.flush();
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
 					gameObject.draw3();
 				}
 			}
-
-			// Squares draw2
-			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				// for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
-				// is it better to bind once and draw all the same ones?
-				squares[i][j].draw2();
-				// }
-			}
-
 			Game.flush();
 		}
 

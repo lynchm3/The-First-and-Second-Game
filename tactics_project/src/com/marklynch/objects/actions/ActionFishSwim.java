@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.primary.AnimationWalk;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -145,12 +144,15 @@ public class ActionFishSwim extends Action {
 		Square oldSquare = actor.squareGameObjectIsOn;
 		GameObject gameObjectInTheWay = target.inventory.gameObjectThatCantShareSquare;
 
-		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-			performer.setPrimaryAnimation(new AnimationWalk(
-					actor.squareGameObjectIsOn.xInGridPixels + actor.drawOffsetRatioX * Game.SQUARE_WIDTH,
-					actor.squareGameObjectIsOn.yInGridPixels + actor.drawOffsetRatioY * Game.SQUARE_HEIGHT,
-					target.xInGridPixels + targetOffsetX * Game.SQUARE_WIDTH,
-					target.yInGridPixels + targetOffsetY * Game.SQUARE_HEIGHT));
+		// if (performer.squareGameObjectIsOn.onScreen() &&
+		// performer.squareGameObjectIsOn.visibleToPlayer)
+		// performer.setPrimaryAnimation(new AnimationWalk(
+		// actor.squareGameObjectIsOn.xInGridPixels + actor.drawOffsetRatioX *
+		// Game.SQUARE_WIDTH,
+		// actor.squareGameObjectIsOn.yInGridPixels + actor.drawOffsetRatioY *
+		// Game.SQUARE_HEIGHT,
+		// target.xInGridPixels + targetOffsetX * Game.SQUARE_WIDTH,
+		// target.yInGridPixels + targetOffsetY * Game.SQUARE_HEIGHT));
 
 		if (actor.squareGameObjectIsOn != target)
 			target.inventory.add(actor);

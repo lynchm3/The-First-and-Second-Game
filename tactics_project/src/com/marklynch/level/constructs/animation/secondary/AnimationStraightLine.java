@@ -1,9 +1,5 @@
 package com.marklynch.level.constructs.animation.secondary;
 
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
-
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
@@ -12,7 +8,7 @@ import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationMove extends Animation {
+public class AnimationStraightLine extends Animation {
 
 	public String name;
 	public Square targetSquare;
@@ -22,7 +18,7 @@ public class AnimationMove extends Animation {
 	GameObject projectileObject;
 	float rotationSpeed = 0;
 
-	public AnimationMove(GameObject projectileObject, Square targetSquare, float speed) {
+	public AnimationStraightLine(GameObject projectileObject, Square targetSquare, float speed) {
 
 		super(null);
 
@@ -103,22 +99,6 @@ public class AnimationMove extends Animation {
 
 	@Override
 	public void draw2() {
-
-		Game.flush();
-		float radians = (float) Math.toRadians(angle);
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.translate(new Vector2f(x, y));
-		view.rotate(radians, new Vector3f(0f, 0f, 1f));
-		Game.activeBatch.updateUniforms();
-
-		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f, 0 - projectileObject.width / 2,
-				0 - projectileObject.height / 2, 0 + projectileObject.width - projectileObject.width / 2,
-				0 + projectileObject.height - projectileObject.height / 2, projectileObject.backwards);
-
-		Game.flush();
-		view.rotate(-radians, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-x, -y));
-		Game.activeBatch.updateUniforms();
 	}
 
 	@Override
@@ -135,5 +115,28 @@ public class AnimationMove extends Animation {
 
 		if (Level.player.inventory.groundDisplay != null)
 			Level.player.inventory.groundDisplay.refreshGameObjects();
+	}
+
+	@Override
+	public void draw3() {
+
+		if (getCompleted())
+			return;
+
+		// Game.flush();
+		// float radians = (float) Math.toRadians(angle);
+		// Matrix4f view = Game.activeBatch.getViewMatrix();
+		// view.translate(new Vector2f(x, y));
+		// view.rotate(radians, new Vector3f(0f, 0f, 1f));
+		// Game.activeBatch.updateUniforms();
+
+		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f, x, y, x + projectileObject.width,
+				y + projectileObject.height, projectileObject.backwards);
+
+		// Game.flush();
+		// view.rotate(-radians, new Vector3f(0f, 0f, 1f));
+		// view.translate(new Vector2f(-x, -y));
+		// Game.activeBatch.updateUniforms();
+
 	}
 }

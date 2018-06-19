@@ -136,4 +136,10 @@ public class AnimationDamageText extends Animation {
 		}
 	}
 
+	@Override
+	public void draw3() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

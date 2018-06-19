@@ -145,6 +145,9 @@ public class AnimationThrown extends Animation {
 	@Override
 	public void draw2() {
 
+		if (getCompleted())
+			return;
+
 		Game.flush();
 		float radians = (float) Math.toRadians(angle);
 		Matrix4f view = Game.activeBatch.getViewMatrix();
@@ -256,5 +259,11 @@ public class AnimationThrown extends Animation {
 				target.setPrimaryAnimation(
 						new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
 		}
+	}
+
+	@Override
+	public void draw3() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -28,7 +28,8 @@ public class ActionSpot extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -43,13 +44,13 @@ public class ActionSpot extends Action {
 		Level.flashSquare = true;
 
 		if (spotted instanceof Area) {
-			Game.level.player.addXP((int) Math.pow(5, ((Area) spotted).level), specificSquareSpotted);
+			Game.level.player.addXP((int) Math.pow(1, ((Area) spotted).level), specificSquareSpotted);
 		} else if (spotted instanceof Structure) {
-			Game.level.player.addXP((int) Math.pow(5, ((Structure) spotted).level), specificSquareSpotted);
+			Game.level.player.addXP((int) Math.pow(1, ((Structure) spotted).level), specificSquareSpotted);
 		} else if (spotted instanceof StructureRoom) {
 			StructureRoom structureRoom = (StructureRoom) spotted;
 			if (structureRoom.level != 0)
-				Game.level.player.addXP((int) Math.pow(5, structureRoom.level), specificSquareSpotted);
+				Game.level.player.addXP((int) Math.pow(1, structureRoom.level), specificSquareSpotted);
 		}
 
 		performer.actionsPerformedThisTurn.add(this);

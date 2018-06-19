@@ -47,4 +47,10 @@ public class AnimationScale extends Animation {
 	@Override
 	public void drawStaticUI() {
 	}
+
+	@Override
+	public void draw3() {
+		// TODO Auto-generated method stub
+		
+	}
 }

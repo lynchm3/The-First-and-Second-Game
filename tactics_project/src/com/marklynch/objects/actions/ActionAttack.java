@@ -112,6 +112,12 @@ public class ActionAttack extends Action {
 						};
 						performer.addSecondaryAnimation(animationThrown);
 					}
+
+					@Override
+					public void draw3() {
+						// TODO Auto-generated method stub
+						
+					}
 				});
 			} else {
 				GameObject arrow = Templates.ARROW.makeCopy(null, null);

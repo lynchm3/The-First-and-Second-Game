@@ -104,4 +104,10 @@ public class AnimationThrow extends Animation {
 	public void drawStaticUI() {
 	}
 
+	@Override
+	public void draw3() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
