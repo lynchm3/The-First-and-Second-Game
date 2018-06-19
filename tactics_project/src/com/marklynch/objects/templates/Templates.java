@@ -10,6 +10,7 @@ import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.Door;
+import com.marklynch.objects.Floor;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
@@ -376,5 +377,7 @@ public class Templates {
 	public static Discoverable MOUND;
 
 	public static VoidHole VOID_HOLE;
+
+	public static Floor FLOOR;
 
 }

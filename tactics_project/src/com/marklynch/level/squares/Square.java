@@ -90,6 +90,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public static Texture WHITE_SQUARE;
 	public static Texture YELLOW_SQUARE;
 	public static Texture RED_SQUARE;
+	public static Texture VOID_SQUARE;
 	public static Texture W_TEXTURE;
 	public static Texture A_TEXTURE;
 	public static Texture S_TEXTURE;
@@ -216,6 +217,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		tileColors.put(YELLOW_SQUARE, Color.YELLOW);
 		RED_SQUARE = ResourceUtils.getGlobalImage("red_square.png", false);
 		tileColors.put(RED_SQUARE, Color.RED);
+		VOID_SQUARE = ResourceUtils.getGlobalImage("void_hole.png", false);
+		tileColors.put(VOID_SQUARE, Color.BLACK);
 
 		W_TEXTURE = ResourceUtils.getGlobalImage("w.png", false);
 		A_TEXTURE = ResourceUtils.getGlobalImage("a.png", false);

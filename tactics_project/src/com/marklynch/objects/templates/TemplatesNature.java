@@ -6,7 +6,9 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Discoverable;
+import com.marklynch.objects.Floor;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -370,6 +372,11 @@ public class TemplatesNature {
 		Templates.VOID_HOLE.imageTexturePath = "void_hole.png";
 		Templates.VOID_HOLE.imageTexture = getGlobalImage(Templates.VOID_HOLE.imageTexturePath, true);
 		Templates.VOID_HOLE.templateId = GameObject.generateNewTemplateId();
+
+		Templates.FLOOR = new Floor();
+		Templates.FLOOR.name = "Floor";
+		Templates.FLOOR.imageTexture = Square.GRASS_TEXTURE;
+		Templates.FLOOR.templateId = GameObject.generateNewTemplateId();
 
 	}
 
