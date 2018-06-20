@@ -262,7 +262,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			if (!bridgeVertical)
 				angle = -1.57f;
 
-			Level.player.addSecondaryAnimation(new AnimationCurve(gameObject, 0.001f, focalPoint, angle) {
+			Level.player.addSecondaryAnimation(new AnimationCurve(gameObject, 0.002f, focalPoint, angle) {
 				@Override
 				public void runCompletionAlgorightm() {
 					super.runCompletionAlgorightm();

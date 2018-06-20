@@ -5,8 +5,6 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.utils.Color;
-import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextureUtils;
 import com.marklynch.utils.Utils.Point;
 
@@ -145,8 +143,6 @@ public class AnimationCurve extends Animation {
 
 		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f, x, y, x + projectileObject.width,
 				y + projectileObject.height, projectileObject.backwards);
-
-		QuadUtils.drawQuad(Color.WHITE, focalPoint.x, focalPoint.y, focalPoint.x + 20, focalPoint.y + 20);
 
 		// Game.flush();
 		// view.rotate(-radians, new Vector3f(0f, 0f, 1f));
