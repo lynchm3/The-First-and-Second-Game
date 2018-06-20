@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.animation.secondary.AnimationCurve;
 import com.marklynch.level.constructs.animation.secondary.AnimationStraightLine;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
@@ -14,6 +15,7 @@ import com.marklynch.objects.Switch;
 import com.marklynch.objects.SwitchListener;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Utils.Point;
 
 public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListener {
 
@@ -224,18 +226,24 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		}
 	}
 
-	public void move(final GameObject gameObject, Square... targetSquares) {
+	float focalPointX = posX * Game.SQUARE_WIDTH + (totalWidthInSquares / 2) * Game.SQUARE_WIDTH;
+	float focalPointY = posY * Game.SQUARE_HEIGHT + (totalHeightInSquares / 2) * Game.SQUARE_HEIGHT;
+	Point focalPoint = new Point(focalPointX, focalPointY);
 
+	public void move(final GameObject gameObject, final Square... targetSquares) {
+
+		// Curve
+		// (GameObject projectileObject, float speed, float focalPoint, float
+		// targetAngle)
 		if ((gameObject.squareGameObjectIsOn.onScreen() && gameObject.squareGameObjectIsOn.visibleToPlayer)
 				|| (targetSquares[0].onScreen() && targetSquares[0].visibleToPlayer)
 				|| (targetSquares[targetSquares.length - 1].onScreen()
 						&& targetSquares[targetSquares.length - 1].visibleToPlayer)) {
-			Level.player.addSecondaryAnimation(new AnimationStraightLine(gameObject, 1f, targetSquares) {
+			Level.player.addSecondaryAnimation(new AnimationCurve(gameObject, 0.0001f, focalPoint, 1.57f) {
 				@Override
 				public void runCompletionAlgorightm() {
 					super.runCompletionAlgorightm();
 					postRangedAnimation(gameObject, targetSquares);
-					// postRangedAnimation(arrow);
 				}
 			});
 		} else {
@@ -243,14 +251,25 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			AnimationStraightLine.postRangedAnimation(gameObject, targetSquares);
 		}
 
-		// Square startSquare = gameObject.squareGameObjectIsOn;
+		// Straight
+		// if ((gameObject.squareGameObjectIsOn.onScreen() &&
+		// gameObject.squareGameObjectIsOn.visibleToPlayer)
+		// || (targetSquares[0].onScreen() && targetSquares[0].visibleToPlayer)
+		// || (targetSquares[targetSquares.length - 1].onScreen()
+		// && targetSquares[targetSquares.length - 1].visibleToPlayer)) {
+		// Level.player.addSecondaryAnimation(new AnimationStraightLine(gameObject, 1f,
+		// targetSquares) {
+		// @Override
+		// public void runCompletionAlgorightm() {
+		// super.runCompletionAlgorightm();
+		// postRangedAnimation(gameObject, targetSquares);
+		// // postRangedAnimation(arrow);
+		// }
+		// });
+		// } else {
 		//
-		// gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
-		// gameObject.squareGameObjectIsOn = targetSquare;
-		// targetSquare.inventory.add(gameObject);
-		//
-		// gameObject.setPrimaryAnimation(new AnimationTeleport(gameObject, startSquare,
-		// targetSquare));
+		// AnimationStraightLine.postRangedAnimation(gameObject, targetSquares);
+		// }
 
 	}
 
