@@ -375,7 +375,7 @@ public class TemplatesNature {
 
 		Templates.FLOOR = new Floor();
 		Templates.FLOOR.name = "Floor";
-		Templates.FLOOR.imageTexture = Square.GRASS_TEXTURE;
+		Templates.FLOOR.imageTexture = Square.STONE_TEXTURE;
 		Templates.FLOOR.templateId = GameObject.generateNewTemplateId();
 
 	}

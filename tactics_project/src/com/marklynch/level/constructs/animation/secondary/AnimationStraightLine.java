@@ -1,5 +1,6 @@
 package com.marklynch.level.constructs.animation.secondary;
 
+import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
@@ -142,8 +143,12 @@ public class AnimationStraightLine extends Animation {
 		// view.rotate(radians, new Vector3f(0f, 0f, 1f));
 		// Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f, x, y, x + projectileObject.width,
-				y + projectileObject.height, projectileObject.backwards);
+		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f,
+				x + projectileObject.drawOffsetRatioX * Game.SQUARE_WIDTH,
+				y + projectileObject.drawOffsetRatioY * Game.SQUARE_HEIGHT,
+				x + projectileObject.width + projectileObject.drawOffsetRatioX * Game.SQUARE_WIDTH,
+				y + projectileObject.height + projectileObject.drawOffsetRatioY * Game.SQUARE_HEIGHT,
+				projectileObject.backwards);
 
 		// Game.flush();
 		// view.rotate(-radians, new Vector3f(0f, 0f, 1f));
