@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.animation.secondary.AnimationCurve;
 import com.marklynch.level.constructs.animation.secondary.AnimationStraightLine;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
@@ -201,7 +200,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 
 			for (GameObject gameObject : teleportationObjectsInOrder) {
-				move(gameObject, midTeleportationsToPerform.get(gameObject), teleportationsToPerform.get(gameObject));
+				move(gameObject, teleportationsToPerform.get(gameObject));
 
 			}
 
@@ -228,7 +227,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 
 			for (GameObject gameObject : teleportationObjectsInOrder) {
-				move(gameObject, midTeleportationsToPerform.get(gameObject), teleportationsToPerform.get(gameObject));
+				move(gameObject, teleportationsToPerform.get(gameObject));
 
 			}
 
@@ -253,46 +252,46 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		// Curve
 		// (GameObject projectileObject, float speed, float focalPoint, float
 		// targetAngle)
-		if ((gameObject.squareGameObjectIsOn.onScreen() && gameObject.squareGameObjectIsOn.visibleToPlayer)
-				|| (targetSquares[0].onScreen() && targetSquares[0].visibleToPlayer)
-				|| (targetSquares[targetSquares.length - 1].onScreen()
-						&& targetSquares[targetSquares.length - 1].visibleToPlayer)) {
-
-			float angle = 1.57f;
-			if (!bridgeVertical)
-				angle = -1.57f;
-
-			Level.player.addSecondaryAnimation(new AnimationCurve(gameObject, 0.002f, focalPoint, angle) {
-				@Override
-				public void runCompletionAlgorightm() {
-					super.runCompletionAlgorightm();
-					postRangedAnimation(gameObject, targetSquares);
-				}
-			});
-		} else {
-
-			AnimationStraightLine.postRangedAnimation(gameObject, targetSquares);
-		}
-
-		// Straight
 		// if ((gameObject.squareGameObjectIsOn.onScreen() &&
 		// gameObject.squareGameObjectIsOn.visibleToPlayer)
 		// || (targetSquares[0].onScreen() && targetSquares[0].visibleToPlayer)
 		// || (targetSquares[targetSquares.length - 1].onScreen()
 		// && targetSquares[targetSquares.length - 1].visibleToPlayer)) {
-		// Level.player.addSecondaryAnimation(new AnimationStraightLine(gameObject, 1f,
-		// targetSquares) {
+		//
+		// float angle = 1.57f;
+		// if (!bridgeVertical)
+		// angle = -1.57f;
+		//
+		// Level.player.addSecondaryAnimation(new AnimationCurve(gameObject, 0.002f,
+		// focalPoint, angle) {
 		// @Override
 		// public void runCompletionAlgorightm() {
 		// super.runCompletionAlgorightm();
 		// postRangedAnimation(gameObject, targetSquares);
-		// // postRangedAnimation(arrow);
 		// }
 		// });
 		// } else {
 		//
 		// AnimationStraightLine.postRangedAnimation(gameObject, targetSquares);
 		// }
+
+		// Straight
+		if ((gameObject.squareGameObjectIsOn.onScreen() && gameObject.squareGameObjectIsOn.visibleToPlayer)
+				|| (targetSquares[0].onScreen() && targetSquares[0].visibleToPlayer)
+				|| (targetSquares[targetSquares.length - 1].onScreen()
+						&& targetSquares[targetSquares.length - 1].visibleToPlayer)) {
+			Level.player.addSecondaryAnimation(new AnimationStraightLine(gameObject, 1f, targetSquares) {
+				@Override
+				public void runCompletionAlgorightm() {
+					super.runCompletionAlgorightm();
+					postRangedAnimation(gameObject, targetSquares);
+					// postRangedAnimation(arrow);
+				}
+			});
+		} else {
+
+			AnimationStraightLine.postRangedAnimation(gameObject, targetSquares);
+		}
 
 	}
 
