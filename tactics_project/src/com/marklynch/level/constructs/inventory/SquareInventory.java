@@ -13,6 +13,7 @@ import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fish;
 
@@ -25,6 +26,8 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public Actor actor = null;
 	public Door door = null;
 	public WaterBody waterBody = null;
+	public ArrayList<GameObject> gameObjectsGround = new ArrayList<GameObject>();
+	public ArrayList<GameObject> gameObjectsNonGround = new ArrayList<GameObject>();
 
 	@Override
 	public void postLoad1() {
@@ -60,6 +63,14 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			gameObject.inventoryThatHoldsThisObject = this;
 			gameObject.squareGameObjectIsOn = square;
 
+			if (gameObject.templateId == Templates.VOID_HOLE.templateId
+					|| gameObject.templateId == Templates.FLOOR.templateId
+					|| gameObject.templateId == Templates.WATER_BODY.templateId) {
+				gameObjectsGround.add(gameObject);
+			} else {
+				gameObjectsNonGround.add(gameObject);
+			}
+
 			if (!Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor))
 				Game.level.inanimateObjectsOnGround.add(gameObject);
 
@@ -72,6 +83,14 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public int remove(GameObject gameObject) {
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
+
+			if (gameObject.templateId == Templates.VOID_HOLE.templateId
+					|| gameObject.templateId == Templates.FLOOR.templateId
+					|| gameObject.templateId == Templates.WATER_BODY.templateId) {
+				gameObjectsGround.remove(gameObject);
+			} else {
+				gameObjectsNonGround.remove(gameObject);
+			}
 
 			refresh();
 		}
@@ -231,4 +250,21 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		return null;
 
 	}
+
+	public ArrayList<GameObject> getGameObjectsGround() {
+		return gameObjectsGround;
+	}
+
+	public void setGameObjectsGround(ArrayList<GameObject> gameObjectsGround) {
+		this.gameObjectsGround = gameObjectsGround;
+	}
+
+	public ArrayList<GameObject> getGameObjectsNonGround() {
+		return gameObjectsNonGround;
+	}
+
+	public void setGameObjectsNonGround(ArrayList<GameObject> gameObjectsNonGround) {
+		this.gameObjectsNonGround = gameObjectsNonGround;
+	}
+
 }
