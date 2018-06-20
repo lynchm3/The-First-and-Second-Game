@@ -10,6 +10,7 @@ import com.marklynch.level.constructs.animation.secondary.AnimationStraightLine;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Floor;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.SwitchListener;
@@ -80,7 +81,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		}
 
 		// bridge horizontal points
-		for (int i = 0; i < bridgeWidth; i++) {
+		for (int i = bridgeWidth - 1; i >= 0; i--) {
 			for (int j = 0; j < bridgeLength; j++) {
 				horizontalBridgeSquares.add(Level.squares[bridgePosX + j][posY + gapsWidth + i]);
 			}
@@ -121,7 +122,24 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			activeBridgeSquares = horizontalBridgeSquares;
 
 		for (Square bridgeSquare : activeBridgeSquares) {
-			bridgeSquare.inventory.add(Templates.FLOOR.makeCopy(null, null));
+			Floor floor = Templates.FLOOR.makeCopy(null, null);
+
+			// double random = Math.random();
+			//
+			// if (random < 0.25) {
+			// floor.imageTexture = Square.DARK_GRASS_TEXTURE;
+			// } else if (random < 0.5) {
+			// floor.imageTexture = Square.GRASS_TEXTURE;
+			//
+			// } else if (random < 0.75) {
+			//
+			// floor.imageTexture = Square.STONE_TEXTURE;
+			// } else {
+			//
+			// floor.imageTexture = Square.MUD_TEXTURE;
+			// }
+
+			bridgeSquare.inventory.add(floor);
 		}
 
 		// Put void hole on all the squares
@@ -239,7 +257,12 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				|| (targetSquares[0].onScreen() && targetSquares[0].visibleToPlayer)
 				|| (targetSquares[targetSquares.length - 1].onScreen()
 						&& targetSquares[targetSquares.length - 1].visibleToPlayer)) {
-			Level.player.addSecondaryAnimation(new AnimationCurve(gameObject, 0.0001f, focalPoint, 1.57f) {
+
+			float angle = 1.57f;
+			if (!bridgeVertical)
+				angle = -1.57f;
+
+			Level.player.addSecondaryAnimation(new AnimationCurve(gameObject, 0.001f, focalPoint, angle) {
 				@Override
 				public void runCompletionAlgorightm() {
 					super.runCompletionAlgorightm();

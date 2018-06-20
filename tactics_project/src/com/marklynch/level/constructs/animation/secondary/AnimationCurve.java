@@ -1,5 +1,6 @@
 package com.marklynch.level.constructs.animation.secondary;
 
+import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
@@ -12,7 +13,7 @@ import com.marklynch.utils.Utils.Point;
 public class AnimationCurve extends Animation {
 
 	public String name;
-	float x, y, startX, startY, speed;
+	float x, y, speed;
 	float angle = 0;
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	GameObject projectileObject;
@@ -34,17 +35,16 @@ public class AnimationCurve extends Animation {
 		this.speed = speed;
 		this.focalPoint = focalPoint;
 		this.startAngle = this.angle = getAngle(focalPoint,
-				new Point(projectileObject.squareGameObjectIsOn.xInGridPixels,
-						projectileObject.squareGameObjectIsOn.yInGridPixels));
+				new Point(projectileObject.squareGameObjectIsOn.xInGridPixels + Game.HALF_SQUARE_WIDTH,
+						projectileObject.squareGameObjectIsOn.yInGridPixels + Game.HALF_SQUARE_HEIGHT));
 		this.targetAngle = angle + angleChange;
-		this.startX = this.x = projectileObject.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
-		this.startY = this.y = projectileObject.squareGameObjectIsOn.yInGridPixels;// shooter.getCenterY();
-		this.hypotanusLength = (float) Math.hypot(Math.abs(x - focalPoint.x), Math.abs(y - focalPoint.y));
+		this.x = projectileObject.squareGameObjectIsOn.xInGridPixels
+				+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);// shooter.getCenterX();
+		this.y = projectileObject.squareGameObjectIsOn.yInGridPixels
+				+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioY);// shooter.getCenterY();
+		this.hypotanusLength = (float) Math.hypot(Math.abs((x + projectileObject.halfWidth) - focalPoint.x),
+				Math.abs((y + projectileObject.halfHeight) - focalPoint.y));
 		System.out.println("this.hypotanusLength = " + this.hypotanusLength);
-		if (targetAngle < startAngle)
-			this.rotationSpeed = -rotationSpeed;
-		else
-			this.rotationSpeed = rotationSpeed;
 
 		blockAI = true;
 
@@ -64,20 +64,20 @@ public class AnimationCurve extends Animation {
 		if (getCompleted())
 			return;
 
-		if (targetAngle > 0)
+		if (targetAngle > angle)
 			angle += (float) (speed * delta);
 		else
 			angle -= (float) (speed * delta);
 
 		System.out.println("angle = " + angle);
 
-		if (targetAngle == startAngle) {
-			runCompletionAlgorightm();
-		} else if (Math.abs(angle) >= Math.abs(targetAngle) && Math.abs(angle) >= Math.abs(targetAngle)) {
+		if (Math.abs(targetAngle - angle) < 0.05f) {
 			runCompletionAlgorightm();
 		} else {
-			x = (float) (focalPoint.x + this.hypotanusLength * Math.cos(angle));// Hypotenuse* cos(θ) = Adjacent
-			y = (float) (focalPoint.y + this.hypotanusLength * Math.sin(angle));// Hypotenuse * sin(θ) = Opposite
+			x = (float) (focalPoint.x + this.hypotanusLength * Math.cos(angle)) - Game.HALF_SQUARE_WIDTH
+					+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);
+			y = (float) (focalPoint.y + this.hypotanusLength * Math.sin(angle)) - Game.HALF_SQUARE_HEIGHT
+					+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioY);
 
 			System.out.println("x = " + x);
 			System.out.println("y = " + y);
@@ -87,6 +87,17 @@ public class AnimationCurve extends Animation {
 			// ...CAH... Cosine: cos(θ) = Adjacent / Hypotenuse
 
 			// runCompletionAlgorightm();
+
+			// Hypotenuse*
+			// cos(θ)
+			// =
+			// Adjacent
+
+			// Hypotenuse
+			// *
+			// sin(θ)
+			// =
+			// Opposite
 		}
 	}
 
