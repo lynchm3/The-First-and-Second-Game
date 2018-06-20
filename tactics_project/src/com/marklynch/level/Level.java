@@ -981,6 +981,7 @@ public class Level {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjectsGround()) {
 					gameObject.draw1(); // HERE
+					System.out.println("GROUND " + gameObject);
 				}
 			}
 
@@ -992,12 +993,24 @@ public class Level {
 					gameObject.draw2();
 				}
 			}
+
 			Game.flush();
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				// is it better to bind once and draw all the same ones?
+				for (GameObject gameObject : squares[i][j].inventory.getGameObjectsGround()) {
+					gameObject.draw3();
+				}
+			}
+			Game.flush();
+		}
+
+		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjectsNonGround()) {
 					gameObject.draw1(); // HERE
+					System.out.println("NON GROUND " + gameObject);
 				}
 			}
 
@@ -1006,6 +1019,13 @@ public class Level {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjectsNonGround()) {
 					gameObject.draw2();
+				}
+			}
+			Game.flush();
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				// is it better to bind once and draw all the same ones?
+				for (GameObject gameObject : squares[i][j].inventory.getGameObjectsNonGround()) {
+					gameObject.draw3();
 				}
 			}
 			Game.flush();
@@ -1018,18 +1038,6 @@ public class Level {
 			// }
 			// }
 
-		}
-
-		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
-
-			Game.flush();
-			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				// is it better to bind once and draw all the same ones?
-				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
-					gameObject.draw3();
-				}
-			}
-			Game.flush();
 		}
 
 		Journal.drawQuestsMarkersForVisibleOnScreenObjectives();

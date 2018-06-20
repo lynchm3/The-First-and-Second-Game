@@ -65,7 +65,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 			if (gameObject.templateId == Templates.VOID_HOLE.templateId
 					|| gameObject.templateId == Templates.FLOOR.templateId
-					|| gameObject.templateId == Templates.WATER_BODY.templateId) {
+					|| gameObject.templateId == Templates.WATER_BODY.templateId
+					|| gameObject.templateId == Templates.PRESSURE_PLATE.templateId
+
+			) {
 				gameObjectsGround.add(gameObject);
 			} else {
 				gameObjectsNonGround.add(gameObject);
@@ -86,7 +89,8 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 			if (gameObject.templateId == Templates.VOID_HOLE.templateId
 					|| gameObject.templateId == Templates.FLOOR.templateId
-					|| gameObject.templateId == Templates.WATER_BODY.templateId) {
+					|| gameObject.templateId == Templates.WATER_BODY.templateId
+					|| gameObject.templateId == Templates.PRESSURE_PLATE.templateId) {
 				gameObjectsGround.remove(gameObject);
 			} else {
 				gameObjectsNonGround.remove(gameObject);
@@ -204,6 +208,16 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		{
 			return -1;
 		} else if (b instanceof Floor) {
+			return 1;
+		}
+
+		if (a instanceof PressurePlate && b instanceof PressurePlate) {
+			return 0;
+		} else if (a instanceof PressurePlate)
+
+		{
+			return -1;
+		} else if (b instanceof PressurePlate) {
 			return 1;
 		}
 
