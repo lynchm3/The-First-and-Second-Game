@@ -46,7 +46,7 @@ public class VoidHole extends GameObject {
 		if (squareGameObjectIsOn != null) {
 			for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects
 					.clone()) {
-				if (gameObject != this) {
+				if (gameObject.isFloorObject == false) {
 					gameObject.setPrimaryAnimation(new AnimationScale(gameObject, 1f, 0f, 500) {
 						@Override
 						public void runCompletionAlgorightm() {

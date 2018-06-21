@@ -21,6 +21,7 @@ public class AnimationScale extends Animation {
 
 	@Override
 	public void update(double delta) {
+		// runCompletionAlgorightm();
 
 		if (getCompleted())
 			return;
@@ -30,7 +31,10 @@ public class AnimationScale extends Animation {
 		double progress = durationSoFar / durationToReachMillis;
 		if (progress >= 1) {
 			progress = 1;
+			scaleX = 1;
+			scaleY = 1;
 			runCompletionAlgorightm();
+			return;
 		}
 		scaleX = (float) (startScale + progress * (endScale - startScale));
 		scaleY = (float) (startScale + progress * (endScale - startScale));

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Floor;
@@ -72,6 +73,12 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 				Game.level.inanimateObjectsOnGround.add(gameObject);
 
 			this.gameObjects.sort(this);
+
+			if (gameObject == Level.player) {
+				Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
+				Level.player.peekSquare = null;
+			}
+
 			refresh();
 		}
 	}
