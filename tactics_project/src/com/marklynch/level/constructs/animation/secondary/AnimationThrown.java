@@ -151,7 +151,7 @@ public class AnimationThrown extends Animation {
 		Game.flush();
 		float radians = (float) Math.toRadians(angle);
 		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.translate(new Vector2f(x, y));
+		view.translate(new Vector2f(x + projectileObject.halfWidth, y + projectileObject.halfHeight));
 		view.rotate(radians, new Vector3f(0f, 0f, 1f));
 		Game.activeBatch.updateUniforms();
 
@@ -161,7 +161,7 @@ public class AnimationThrown extends Animation {
 
 		Game.flush();
 		view.rotate(-radians, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-x, -y));
+		view.translate(new Vector2f(-(x + projectileObject.halfWidth), -(y + projectileObject.halfHeight)));
 		Game.activeBatch.updateUniforms();
 	}
 
