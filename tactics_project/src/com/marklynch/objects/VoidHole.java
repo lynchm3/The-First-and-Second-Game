@@ -36,4 +36,16 @@ public class VoidHole extends GameObject {
 		return searchable;
 	}
 
+	@Override
+	public void update(int delta) {
+		super.update(delta);
+		if (squareGameObjectIsOn != null) {
+			for (GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
+				if (gameObject != this) {
+					squareGameObjectIsOn.inventory.remove(gameObject);
+				}
+			}
+		}
+	}
+
 }

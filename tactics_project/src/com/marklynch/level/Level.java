@@ -981,7 +981,6 @@ public class Level {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjectsGround()) {
 					gameObject.draw1(); // HERE
-					System.out.println("GROUND " + gameObject);
 				}
 			}
 
@@ -1010,7 +1009,6 @@ public class Level {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjectsNonGround()) {
 					gameObject.draw1(); // HERE
-					System.out.println("NON GROUND " + gameObject);
 				}
 			}
 
