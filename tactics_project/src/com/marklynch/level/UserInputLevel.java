@@ -40,6 +40,7 @@ public class UserInputLevel {
 	public static float mouseDownY = -1;
 	public static float mouseLastX = -1;
 	public static float mouseLastY = -1;
+	public static boolean dragging = false;
 	public static boolean draggingMap = false;
 	public static boolean mouseButtonStateLeft = false;
 	public static boolean mouseButtonStateRight = false;
@@ -186,6 +187,7 @@ public class UserInputLevel {
 					if (draggableMouseIsOver == null) {
 						draggingMap = true;
 					}
+					dragging = true;
 				}
 
 			}
@@ -360,7 +362,7 @@ public class UserInputLevel {
 		// }
 
 		// Lifted the mouse to perform click
-		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && draggingMap == false) {
+		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && draggingMap == false && !dragging) {
 
 			// Left Click
 			// Game.level.popupMenuObjects.clear();
@@ -403,6 +405,7 @@ public class UserInputLevel {
 							Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
 				}
 			}
+			dragging = false;
 		}
 
 		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && draggingMap == false)
@@ -447,6 +450,7 @@ public class UserInputLevel {
 		}
 
 		if (!Mouse.isButtonDown(0)) {
+			dragging = false;
 			draggingMap = false;
 			if (draggableMouseIsOver != null) {
 				draggableMouseIsOver.dragDropped();
