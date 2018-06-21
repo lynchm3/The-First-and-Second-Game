@@ -496,13 +496,8 @@ public class UserInputLevel {
 
 		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
 		if (inventoriesOpen) {
-			scrollableMouseIsOver = (Scrollable) draggableMouseIsOver;
-			return;
-		}
-
-		if (draggableMouseIsOver == null && scrollableMouseIsOver == null
-				&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
-			scrollableMouseIsOver = Game.level.activityLogger;
+			scrollableMouseIsOver = (Scrollable) Game.level.openInventories.get(0).getDraggable(Mouse.getX(),
+					(int) Game.windowHeight - Mouse.getY());
 			return;
 		}
 
@@ -511,6 +506,12 @@ public class UserInputLevel {
 				scrollableMouseIsOver = quickBarSquare;
 				return;
 			}
+		}
+
+		if (draggableMouseIsOver == null && scrollableMouseIsOver == null
+				&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+			scrollableMouseIsOver = Game.level.activityLogger;
+			return;
 		}
 
 	}
