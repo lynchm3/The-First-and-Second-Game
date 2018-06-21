@@ -108,13 +108,6 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
 		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
 
-		for (Square square : verticalBridgeSquares) {
-			System.out.println("verticalBridgeSquare " + square);
-		}
-		for (Square square : horizontalBridgeSquares) {
-			System.out.println("horizontalBridgeSquare " + square);
-		}
-
 		if (bridgeVertical)
 			activeBridgeSquares = verticalBridgeSquares;
 		else

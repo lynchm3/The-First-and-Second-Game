@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.animation.primary.AnimationScale;
+import com.marklynch.level.constructs.animation.primary.AnimationFall;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
@@ -47,7 +47,7 @@ public class VoidHole extends GameObject {
 			for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects
 					.clone()) {
 				if (gameObject.isFloorObject == false) {
-					gameObject.setPrimaryAnimation(new AnimationScale(gameObject, 1f, 0f, 500) {
+					gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 500) {
 						@Override
 						public void runCompletionAlgorightm() {
 							super.runCompletionAlgorightm();
