@@ -37,9 +37,11 @@ public class PowerRespite extends Power {
 	@Override
 	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
 		if (this.source.remainingHealth < this.source.totalHealth) {
-			this.source.remainingHealth = this.source.totalHealth;
+			this.source.remainingHealth += this.source.totalHealth / 20;
+			if (this.source.remainingHealth > this.source.totalHealth) {
+				this.source.remainingHealth = this.source.totalHealth;
+			}
 		}
-
 	}
 
 	@Override
