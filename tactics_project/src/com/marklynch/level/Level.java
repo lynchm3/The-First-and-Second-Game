@@ -21,6 +21,8 @@ import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
+import com.marklynch.level.constructs.decoration.Cloud;
+import com.marklynch.level.constructs.decoration.Decoration;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.constructs.gameover.GameOver;
@@ -225,6 +227,8 @@ public class Level {
 
 	public static ArrayList<Animation> blockingAnimations = new ArrayList<Animation>();
 
+	public static ArrayList<Decoration> decorations = new ArrayList<Decoration>();
+
 	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -254,6 +258,7 @@ public class Level {
 		ActivePowerScreen.loadStaticImages();
 		ActivityLogger.loadStaticImages();
 		GameOver.loadStaticImages();
+		Decoration.loadStaticImages();
 		Stat.init();
 
 		structures = new ArrayList<Structure>();
@@ -674,6 +679,10 @@ public class Level {
 		});
 		buttons.add(pauseButton);
 
+		for (int i = 0; i < 100; i++) {
+			decorations.add(new Cloud());
+		}
+
 		changeTime(0);
 	}
 
@@ -1037,6 +1046,11 @@ public class Level {
 			// }
 
 		}
+
+		for (Decoration decoration : decorations) {
+			decoration.draw3();
+		}
+		Game.flush();
 
 		Journal.drawQuestsMarkersForVisibleOnScreenObjectives();
 
@@ -1479,6 +1493,10 @@ public class Level {
 
 		for (Animation animation : (ArrayList<Animation>) animations.clone()) {
 			animation.update(delta);
+		}
+
+		for (Decoration decoration : decorations) {
+			decoration.updateRealtime(delta);
 		}
 
 		// for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
