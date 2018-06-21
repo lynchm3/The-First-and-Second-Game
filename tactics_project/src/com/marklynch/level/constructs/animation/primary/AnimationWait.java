@@ -7,7 +7,7 @@ public class AnimationWait extends Animation {
 
 	public AnimationWait(GameObject performer) {
 		super(performer);
-		durationToReach = 400;
+		durationToReachMillis = 400;
 		blockAI = false;
 		// if (performer == Level.player)
 		// blockAI = true;
@@ -40,7 +40,7 @@ public class AnimationWait extends Animation {
 			targetOffsetY = 28f;
 		}
 
-		if (durationSoFar >= durationToReach &&
+		if (durationSoFar >= durationToReachMillis &&
 		//
 				offsetY == targetOffsetY &&
 				//

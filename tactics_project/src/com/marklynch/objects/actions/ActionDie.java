@@ -141,7 +141,6 @@ public class ActionDie extends Action {
 						new Object[] { gameObjectPerformer.destroyedBy, " killed ", gameObjectPerformer, this.image }));
 
 		} else if (gameObjectPerformer.diggable == true) {
-
 		} else {
 
 			if (Game.level.shouldLog(gameObjectPerformer))
@@ -155,7 +154,7 @@ public class ActionDie extends Action {
 
 		// Actor actor = (Actor) gameObjectPerformer;
 		GameObject blood = Templates.BLOOD.makeCopy(null, null);
-		blood.setPrimaryAnimation(new AnimationScale(blood));
+		blood.setPrimaryAnimation(new AnimationScale(blood, 0f, 1f, 2000));
 		gameObjectPerformer.squareGameObjectIsOn.inventory.add(blood);
 
 	}

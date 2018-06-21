@@ -30,9 +30,9 @@ public class AnimationPushed extends Animation {
 		float distance = (float) Math.hypot(this.startSquare.xInGrid - this.endSquare.xInGrid,
 				this.startSquare.yInGrid - this.endSquare.yInGrid);
 
-		durationToReach = distance * durationPerSquare;
+		durationToReachMillis = distance * durationPerSquare;
 
-		quarterDurationToReach = durationToReach / 4;
+		quarterDurationToReach = durationToReachMillis / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
 		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
@@ -99,9 +99,9 @@ public class AnimationPushed extends Animation {
 
 		durationSoFar += delta;
 
-		float progress = durationSoFar / durationToReach;
+		float progress = durationSoFar / durationToReachMillis;
 
-		float durationReamaining = durationToReach - durationSoFar;
+		float durationReamaining = durationToReachMillis - durationSoFar;
 
 		if (progress >= 1) {
 			progress = 1;

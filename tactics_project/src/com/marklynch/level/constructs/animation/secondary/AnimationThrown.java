@@ -216,7 +216,7 @@ public class AnimationThrown extends Animation {
 	public static void postRangedAnimation(Actor performer, GameObject weapon, GameObject target, Square targetSquare,
 			GameObject projectileObject, Action action) {
 
-		if (target != null)
+		if (target != null && target.attackable)
 			target.showPow();
 		if (!(projectileObject instanceof Arrow)) {
 			if (target != null && target instanceof Searchable && projectileObject.canShareSquare) {
@@ -264,6 +264,6 @@ public class AnimationThrown extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

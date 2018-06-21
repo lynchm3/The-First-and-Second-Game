@@ -38,7 +38,7 @@ public class AnimationBubbles extends Animation {
 		this.x = this.originX = (float) (originX + Math.random() * 20d - 10d);
 		this.y = this.originY = originY;
 
-		this.durationToReach = 1000f;
+		this.durationToReachMillis = 1000f;
 
 		blockAI = false;
 
@@ -51,7 +51,7 @@ public class AnimationBubbles extends Animation {
 			return;
 
 		durationSoFar += delta;
-		double progress = durationSoFar / durationToReach;
+		double progress = durationSoFar / durationToReachMillis;
 		if (progress >= 1) {
 			runCompletionAlgorightm();
 		} else {

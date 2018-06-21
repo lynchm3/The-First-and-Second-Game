@@ -17,7 +17,7 @@ public class AnimationMovementFade1 extends Animation {
 		super(null);
 		this.square = square;
 		this.gameObject = gameObject;
-		this.durationToReach = 1000f;
+		this.durationToReachMillis = 1000f;
 		this.durationSoFar = 0;
 
 	}
@@ -29,7 +29,7 @@ public class AnimationMovementFade1 extends Animation {
 			return;
 
 		durationSoFar += delta;
-		float progress = durationSoFar / durationToReach;
+		float progress = durationSoFar / durationToReachMillis;
 		if (progress >= 1) {
 			runCompletionAlgorightm();
 		} else {

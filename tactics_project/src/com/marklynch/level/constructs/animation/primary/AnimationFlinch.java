@@ -15,9 +15,9 @@ public class AnimationFlinch extends Animation {
 	public AnimationFlinch(GameObject performer, Square squareBeingAttackedFrom, Animation oldAnimation) {
 		super(performer);
 		this.targetSquare = squareBeingAttackedFrom;
-		durationToReach = 400;
+		durationToReachMillis = 400;
 
-		quarterDurationToReach = durationToReach / 4;
+		quarterDurationToReach = durationToReachMillis / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
 		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
@@ -58,7 +58,7 @@ public class AnimationFlinch extends Animation {
 		super.update(delta);
 		durationSoFar += delta;
 
-		float progress = durationSoFar / durationToReach;
+		float progress = durationSoFar / durationToReachMillis;
 
 		if (progress >= 1) {
 			progress = 1;

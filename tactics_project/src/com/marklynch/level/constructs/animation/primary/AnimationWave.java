@@ -10,7 +10,7 @@ public class AnimationWave extends Animation {
 	public AnimationWave(GameObject performer, GameObject target) {
 		super(performer);
 		this.target = target;
-		durationToReach = 2000;
+		durationToReachMillis = 2000;
 
 		// this.startSquare = startSquare;
 		// this.endSquare = endSquare;
@@ -36,7 +36,7 @@ public class AnimationWave extends Animation {
 
 		durationSoFar += delta;
 
-		float progress = durationSoFar / durationToReach;
+		float progress = durationSoFar / durationToReachMillis;
 
 		if (progress >= 1) {
 			progress = 1;

@@ -15,9 +15,9 @@ public class AnimationPush extends Animation {
 	public AnimationPush(GameObject performer, Square targetSquare, Animation oldAnimation) {
 		super(performer);
 		this.targetSquare = targetSquare;
-		durationToReach = 400;
+		durationToReachMillis = 400;
 
-		quarterDurationToReach = durationToReach / 4;
+		quarterDurationToReach = durationToReachMillis / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
 		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
@@ -58,7 +58,7 @@ public class AnimationPush extends Animation {
 
 		durationSoFar += delta;
 
-		float progress = durationSoFar / durationToReach;
+		float progress = durationSoFar / durationToReachMillis;
 
 		if (progress >= 1) {
 			progress = 1;

@@ -5,14 +5,18 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationScale extends Animation {
 
-	public AnimationScale(GameObject performer) {
+	float startScale, endScale;
+
+	public AnimationScale(GameObject performer, float start, float end, float durationToReachMillis) {
 
 		super(performer);
 		blockAI = false;
-		durationToReach = 2000;
+		this.durationToReachMillis = durationToReachMillis;
 
-		scaleX = 0;
-		scaleY = 0;
+		scaleX = start;
+		scaleY = start;
+		startScale = start;
+		endScale = end;
 	}
 
 	@Override
@@ -23,13 +27,16 @@ public class AnimationScale extends Animation {
 		super.update(delta);
 
 		durationSoFar += delta;
-		double progress = durationSoFar / durationToReach;
+		double progress = durationSoFar / durationToReachMillis;
 		if (progress >= 1) {
 			progress = 1;
 			runCompletionAlgorightm();
 		}
-		scaleX = (float) progress * 1f;
-		scaleY = (float) progress * 1f;
+		scaleX = (float) (startScale + progress * (endScale - startScale));
+		scaleY = (float) (startScale + progress * (endScale - startScale));
+
+		// scaleX = (float) progress * endScale;
+		// scaleY = (float) progress * endScale;
 
 	}
 
@@ -51,6 +58,6 @@ public class AnimationScale extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

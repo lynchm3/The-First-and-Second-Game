@@ -100,9 +100,9 @@ public class AnimationWalk extends Animation {
 
 	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int phase) {
 		super(performer);
-		durationToReach = 400;
+		durationToReachMillis = 400;
 
-		quarterDurationToReach = durationToReach / 4;
+		quarterDurationToReach = durationToReachMillis / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
 		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
@@ -163,7 +163,7 @@ public class AnimationWalk extends Animation {
 
 	public AnimationWalk(float startX, float startY, float endX, float endY) {
 		super(null);
-		durationToReach = 400;
+		durationToReachMillis = 400;
 		startOffsetX = offsetX = startX - endX;
 		startOffsetY = offsetY = startY - endY;
 		// if (phase == 0 || phase == 2) {
@@ -186,7 +186,7 @@ public class AnimationWalk extends Animation {
 
 		durationSoFar += delta;
 
-		float progress = durationSoFar / durationToReach;
+		float progress = durationSoFar / durationToReachMillis;
 
 		if (progress >= 1) {
 			progress = 1;

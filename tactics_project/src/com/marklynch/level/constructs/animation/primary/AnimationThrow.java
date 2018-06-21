@@ -21,10 +21,10 @@ public class AnimationThrow extends Animation {
 	public AnimationThrow(GameObject performer, GameObject target) {
 		super(performer);
 		this.target = target;
-		durationToReach = 400;
+		durationToReachMillis = 400;
 		drawEquipped = false;
 
-		quarterDurationToReach = durationToReach / 4;
+		quarterDurationToReach = durationToReachMillis / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
 		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
@@ -51,7 +51,7 @@ public class AnimationThrow extends Animation {
 
 		durationSoFar += delta;
 
-		float progress = durationSoFar / durationToReach;
+		float progress = durationSoFar / durationToReachMillis;
 
 		if (progress >= 1) {
 			progress = 1;

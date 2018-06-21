@@ -53,7 +53,7 @@ public class AnimationDamageText extends Animation {
 		this.x = this.originX = originX;
 		this.y = this.originY = originY;
 
-		this.durationToReach = 1000f;
+		this.durationToReachMillis = 1000f;
 
 		texture = CharacterScreen.highLevelStatImages.get(statType);
 
@@ -68,7 +68,7 @@ public class AnimationDamageText extends Animation {
 			return;
 
 		durationSoFar += delta;
-		double progress = durationSoFar / durationToReach;
+		double progress = durationSoFar / durationToReachMillis;
 		if (progress >= 1) {
 			runCompletionAlgorightm();
 		} else {

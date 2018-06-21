@@ -33,7 +33,7 @@ public abstract class Animation {
 	public float alpha = 1f;
 
 	public float durationSoFar = 0;
-	public float durationToReach = 200;
+	public float durationToReachMillis = 200;
 	public int phase = 0;
 
 	public abstract void draw1();

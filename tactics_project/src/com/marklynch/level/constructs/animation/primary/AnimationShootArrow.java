@@ -30,9 +30,9 @@ public abstract class AnimationShootArrow extends Animation {
 		this.target = target;
 		this.action = action;
 		this.weapon = weapon;
-		durationToReach = 2000; // SLOWED IT DOWN HERE
+		durationToReachMillis = 2000; // SLOWED IT DOWN HERE
 
-		quarterDurationToReach = durationToReach / 4;
+		quarterDurationToReach = durationToReachMillis / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
 		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
@@ -67,7 +67,7 @@ public abstract class AnimationShootArrow extends Animation {
 
 		durationSoFar += delta;
 
-		float progress = durationSoFar / durationToReach;
+		float progress = durationSoFar / durationToReachMillis;
 
 		if (progress >= 1) {
 			progress = 1;
