@@ -34,7 +34,7 @@ public class AnimationThrown extends Animation {
 	public GameObject targetGameObject;
 	public Square targetSquare;
 	float x, y, originX, originY, targetX, targetY, speedX, speedY;
-	float angle = 0;
+	float angleInRadians = 0;
 	boolean onTarget;
 	String imagePath;
 	Texture imageTexture;
@@ -63,8 +63,9 @@ public class AnimationThrown extends Animation {
 
 		if (shooter.backwards)
 			this.x = this.originX = shooter.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
-		else
-			this.x = this.originX = shooter.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH;// shooter.getCenterX();
+		// else
+		// this.x = this.originX = shooter.squareGameObjectIsOn.xInGridPixels +
+		// Game.SQUARE_WIDTH;// shooter.getCenterX();
 
 		projectileObject.backwards = shooter.backwards;
 
@@ -118,8 +119,6 @@ public class AnimationThrown extends Animation {
 		float distanceX = (float) (speedX * delta);
 		float distanceY = (float) (speedY * delta);
 
-		angle += rotationSpeed * delta;
-
 		distanceCoveredX += distanceX;
 		distanceCoveredY += distanceY;
 
@@ -135,6 +134,11 @@ public class AnimationThrown extends Animation {
 			square.inventory.smashWindows(shooter);
 
 		}
+
+		float progress = distanceCoveredX / distanceToCoverX;
+		angleInRadians = progress * 6.28f;
+		if (rotationSpeed < 0)
+			angleInRadians = -angleInRadians;
 	}
 
 	@Override
@@ -149,18 +153,19 @@ public class AnimationThrown extends Animation {
 			return;
 
 		Game.flush();
-		float radians = (float) Math.toRadians(angle);
+		// float radians = (float) Math.toRadians(angle);
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.translate(new Vector2f(x + projectileObject.halfWidth, y + projectileObject.halfHeight));
-		view.rotate(radians, new Vector3f(0f, 0f, 1f));
+		view.rotate(angleInRadians, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(-(x + projectileObject.halfWidth), -(y + projectileObject.halfHeight)));
 		Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f, 0 - projectileObject.width / 2,
-				0 - projectileObject.height / 2, 0 + projectileObject.width - projectileObject.width / 2,
-				0 + projectileObject.height - projectileObject.height / 2, projectileObject.backwards);
+		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f, x, y, x + projectileObject.width,
+				y + projectileObject.height, projectileObject.backwards);
 
 		Game.flush();
-		view.rotate(-radians, new Vector3f(0f, 0f, 1f));
+		view.translate(new Vector2f(x + projectileObject.halfWidth, y + projectileObject.halfHeight));
+		view.rotate(-angleInRadians, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-(x + projectileObject.halfWidth), -(y + projectileObject.halfHeight)));
 		Game.activeBatch.updateUniforms();
 	}
