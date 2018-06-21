@@ -142,6 +142,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean decorative = false;
 	public boolean floats = false;
 	public boolean flammableLightSource = false;
+	public boolean isFloorObject = false;
 
 	public int value = 1;
 	public int turnAcquired = 1;
@@ -423,7 +424,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// shadow
-		if (Level.shadowDarkness > 0 && bigShadow && this.squareGameObjectIsOn.structureSquareIsIn == null) {
+		if (!isFloorObject && Level.shadowDarkness > 0 && bigShadow
+				&& this.squareGameObjectIsOn.structureSquareIsIn == null) {
 			drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, scaleX,
 					Level.shadowLength * scaleY, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
 					false);

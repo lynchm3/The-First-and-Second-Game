@@ -13,7 +13,6 @@ import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
-import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fish;
 
@@ -63,12 +62,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			gameObject.inventoryThatHoldsThisObject = this;
 			gameObject.squareGameObjectIsOn = square;
 
-			if (gameObject.templateId == Templates.VOID_HOLE.templateId
-					|| gameObject.templateId == Templates.FLOOR.templateId
-					|| gameObject.templateId == Templates.WATER_BODY.templateId
-					|| gameObject.templateId == Templates.PRESSURE_PLATE.templateId
-
-			) {
+			if (gameObject.isFloorObject) {
 				gameObjectsGround.add(gameObject);
 			} else {
 				gameObjectsNonGround.add(gameObject);
@@ -87,10 +81,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
 
-			if (gameObject.templateId == Templates.VOID_HOLE.templateId
-					|| gameObject.templateId == Templates.FLOOR.templateId
-					|| gameObject.templateId == Templates.WATER_BODY.templateId
-					|| gameObject.templateId == Templates.PRESSURE_PLATE.templateId) {
+			if (gameObject.isFloorObject) {
 				gameObjectsGround.remove(gameObject);
 			} else {
 				gameObjectsNonGround.remove(gameObject);

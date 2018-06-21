@@ -17,6 +17,7 @@ public class PressurePlate extends Switch {
 	public PressurePlate() {
 		super();
 		attackable = false;
+		isFloorObject = true;
 	}
 
 	@Override

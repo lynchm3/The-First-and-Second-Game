@@ -19,6 +19,7 @@ public class Floor extends GameObject {
 		canContainOtherObjects = false;
 		persistsWhenCantBeSeen = true;
 		attackable = false;
+		isFloorObject = true;
 	}
 
 	@Override

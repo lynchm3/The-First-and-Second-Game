@@ -104,6 +104,7 @@ public class WaterBody extends WaterSource {
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = true;
 		attackable = false;
+		isFloorObject = true;
 
 	}
 
