@@ -25,7 +25,9 @@ public abstract class AnimationShootArrow extends Animation {
 	GameObject weapon;
 
 	public AnimationShootArrow(Actor performer, GameObject target, GameObject weapon, Action action) {
-		super(performer);
+		super(performer, performer, target);
+		if (!runAnimation)
+			return;
 		// this.performer []
 		this.target = target;
 		this.action = action;

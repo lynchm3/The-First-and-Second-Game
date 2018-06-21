@@ -9,7 +9,9 @@ public class AnimationScale extends Animation {
 
 	public AnimationScale(GameObject performer, float start, float end, float durationToReachMillis) {
 
-		super(performer);
+		super(performer, performer);
+		if (!runAnimation)
+			return;
 		blockAI = false;
 		this.durationToReachMillis = durationToReachMillis;
 

@@ -8,7 +8,9 @@ public class AnimationWave extends Animation {
 	GameObject target;
 
 	public AnimationWave(GameObject performer, GameObject target) {
-		super(performer);
+		super(performer, performer, target);
+		if (!runAnimation)
+			return;
 		this.target = target;
 		durationToReachMillis = 2000;
 
@@ -127,7 +129,7 @@ public class AnimationWave extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.marklynch.level.constructs.animation;
 
+import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
@@ -64,7 +65,15 @@ public abstract class Animation {
 
 	public GameObject performer;
 
-	public Animation(GameObject performer) {
+	public boolean runAnimation = false;
+
+	public Animation(GameObject performer, Object... objectsInvolved) {
+
+		runAnimation = Game.level.shouldLog(objectsInvolved, false);
+		if (!runAnimation) {
+			runCompletionAlgorightm();
+			return;
+		}
 
 		this.performer = performer;
 
@@ -142,8 +151,7 @@ public abstract class Animation {
 
 	public void runCompletionAlgorightm() {
 
-		if (blockAI)
-			Level.blockingAnimations.remove(this);
+		Level.blockingAnimations.remove(this);
 
 		Level.animations.remove(this);
 

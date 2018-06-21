@@ -11,7 +11,9 @@ public class AnimationShake extends Animation {
 	// for show only, walking actor, primary
 
 	public AnimationShake(GameObject performer) {
-		super(performer);
+		super(performer, performer);
+		if (!runAnimation)
+			return;
 		// durationToReach = 200;
 		blockAI = false;
 
@@ -73,7 +75,7 @@ public class AnimationShake extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

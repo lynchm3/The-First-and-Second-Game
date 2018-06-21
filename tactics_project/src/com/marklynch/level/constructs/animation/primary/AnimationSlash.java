@@ -19,7 +19,9 @@ public class AnimationSlash extends Animation {
 	GameObject target;
 
 	public AnimationSlash(GameObject performer, GameObject target) {
-		super(performer);
+		super(performer, performer, target);
+		if (!runAnimation)
+			return;
 		this.target = target;
 		durationToReachMillis = 400;
 
@@ -110,7 +112,7 @@ public class AnimationSlash extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

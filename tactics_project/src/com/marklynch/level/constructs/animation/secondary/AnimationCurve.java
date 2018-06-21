@@ -27,7 +27,9 @@ public class AnimationCurve extends Animation {
 
 	public AnimationCurve(GameObject projectileObject, float speed, Point focalPoint, float angleChange) {
 
-		super(null);
+		super(null, projectileObject);
+		if (!runAnimation)
+			return;
 
 		this.projectileObject = projectileObject;
 		this.speed = speed;

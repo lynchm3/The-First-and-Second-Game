@@ -14,7 +14,9 @@ public class AnimationMovementFade1 extends Animation {
 	float alpha = 0.5f;
 
 	public AnimationMovementFade1(Square square, GameObject gameObject) {
-		super(null);
+		super(null, square);
+		if (!runAnimation)
+			return;
 		this.square = square;
 		this.gameObject = gameObject;
 		this.durationToReachMillis = 1000f;
@@ -49,8 +51,9 @@ public class AnimationMovementFade1 extends Animation {
 			int actorPositionXInPixels = (int) (this.square.xInGridPixels + Game.SQUARE_WIDTH * actor.drawOffsetRatioX);
 			int actorPositionYInPixels = (int) (this.square.yInGridPixels
 					+ Game.SQUARE_HEIGHT * actor.drawOffsetRatioY);
-			actor.drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha, true, 1f, 1f, 0f,
-					Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false, actor.backwards, false);
+			actor.drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha, true, 1f, 1f, 0f, Integer.MIN_VALUE,
+					Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false,
+					actor.backwards, false);
 		} else {
 
 			int actorPositionXInPixels = (int) (square.xInGridPixels + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
@@ -74,7 +77,7 @@ public class AnimationMovementFade1 extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

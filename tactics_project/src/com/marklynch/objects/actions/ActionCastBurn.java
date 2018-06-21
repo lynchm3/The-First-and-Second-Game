@@ -69,24 +69,21 @@ public class ActionCastBurn extends Action {
 		// shoot projectile
 		final Arrow fireBall = Templates.FIRE_BALL.makeCopy(null, null);
 		if (target.squareGameObjectIsOn != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-				// performer.addSecondaryAnimation(
-				// new AnimationThrown("Fire Ball", performer, this, target,
-				// target.squareGameObjectIsOn,
-				// Templates.FIRE_BALL.makeCopy(null, null), performer, 1f, 0f, true));
+			// performer.addSecondaryAnimation(
+			// new AnimationThrown("Fire Ball", performer, this, target,
+			// target.squareGameObjectIsOn,
+			// Templates.FIRE_BALL.makeCopy(null, null), performer, 1f, 0f, true));
 
-				Animation animationThrown = new AnimationThrown("Fire Ball", performer, this, target,
-						target.squareGameObjectIsOn, Templates.FIRE_BALL.makeCopy(null, null), performer, 1f, 0f,
-						true) {
-					@Override
-					public void runCompletionAlgorightm() {
-						super.runCompletionAlgorightm();
-						postRangedAnimation(ActionCastBurn.this.performer, ActionCastBurn.this.performer,
-								ActionCastBurn.this.target, ActionCastBurn.this.target.squareGameObjectIsOn, fireBall,
-								ActionCastBurn.this);
-					}
-				};
-			}
+			Animation animationThrown = new AnimationThrown("Fire Ball", performer, this, target,
+					target.squareGameObjectIsOn, Templates.FIRE_BALL.makeCopy(null, null), performer, 1f, 0f, true) {
+				@Override
+				public void runCompletionAlgorightm() {
+					super.runCompletionAlgorightm();
+					postRangedAnimation(ActionCastBurn.this.performer, ActionCastBurn.this.performer,
+							ActionCastBurn.this.target, ActionCastBurn.this.target.squareGameObjectIsOn, fireBall,
+							ActionCastBurn.this);
+				}
+			};
 		} else {
 
 			AnimationThrown.postRangedAnimation(ActionCastBurn.this.performer, ActionCastBurn.this.performer,

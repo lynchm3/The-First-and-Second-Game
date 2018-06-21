@@ -13,7 +13,9 @@ public class AnimationPush extends Animation {
 	float threeQuarterDurationToReach;
 
 	public AnimationPush(GameObject performer, Square targetSquare, Animation oldAnimation) {
-		super(performer);
+		super(performer, performer, targetSquare);
+		if (!runAnimation)
+			return;
 		this.targetSquare = targetSquare;
 		durationToReachMillis = 400;
 
@@ -117,7 +119,7 @@ public class AnimationPush extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

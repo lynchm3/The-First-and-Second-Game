@@ -23,7 +23,9 @@ public class AnimationPushed extends Animation {
 	// for show only, walking actor, primary
 
 	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare, Animation oldAnimation) {
-		super(performer);
+		super(performer, performer, startSquare, endSquare);
+		if (!runAnimation)
+			return;
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
 
@@ -162,7 +164,7 @@ public class AnimationPushed extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

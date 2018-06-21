@@ -22,7 +22,9 @@ public class AnimationGive extends Animation {
 	public static GameObject gold = Templates.GOLD.makeCopy(null, null);
 
 	public AnimationGive(GameObject giver, GameObject receiver, GameObject projectileObject) {
-		super(null);
+		super(null, giver, receiver);
+		if (!runAnimation)
+			return;
 
 		float speed = 0.5f;
 
@@ -108,6 +110,6 @@ public class AnimationGive extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

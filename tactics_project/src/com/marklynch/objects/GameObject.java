@@ -2215,6 +2215,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	// };
 
 	public void setPrimaryAnimation(Animation animation) {
+
+		if (animation.runAnimation == false)
+			return;
+
 		Level.blockingAnimations.remove(this.primaryAnimation);
 		Level.animations.remove(this.primaryAnimation);
 
@@ -2231,6 +2235,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void addSecondaryAnimation(Animation animation) {
+
+		if (animation.runAnimation == false)
+			return;
 
 		// if (remainingHealth > 0) {
 		if (animation != null) {

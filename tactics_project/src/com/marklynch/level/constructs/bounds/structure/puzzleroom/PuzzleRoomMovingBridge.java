@@ -254,22 +254,15 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		// }
 
 		// Straight
-		if ((gameObject.squareGameObjectIsOn.onScreen() && gameObject.squareGameObjectIsOn.visibleToPlayer)
-				|| (targetSquares[0].onScreen() && targetSquares[0].visibleToPlayer)
-				|| (targetSquares[targetSquares.length - 1].onScreen()
-						&& targetSquares[targetSquares.length - 1].visibleToPlayer)) {
-			Level.player.addSecondaryAnimation(new AnimationStraightLine(gameObject, 1f, targetSquares) {
-				@Override
-				public void runCompletionAlgorightm() {
-					super.runCompletionAlgorightm();
-					postRangedAnimation(gameObject, targetSquares);
-					// postRangedAnimation(arrow);
-				}
-			});
-		} else {
 
-			AnimationStraightLine.postRangedAnimation(gameObject, targetSquares);
-		}
+		Level.player.addSecondaryAnimation(new AnimationStraightLine(gameObject, 1f, targetSquares) {
+			@Override
+			public void runCompletionAlgorightm() {
+				super.runCompletionAlgorightm();
+				postRangedAnimation(gameObject, targetSquares);
+				// postRangedAnimation(arrow);
+			}
+		});
 
 	}
 

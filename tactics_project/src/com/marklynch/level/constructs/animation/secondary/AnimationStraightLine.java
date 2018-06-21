@@ -21,7 +21,9 @@ public class AnimationStraightLine extends Animation {
 
 	public AnimationStraightLine(GameObject projectileObject, float speed, Square... targetSquares) {
 
-		super(null);
+		super(null, projectileObject, targetSquares[targetSquares.length - 1]);
+		if (!runAnimation)
+			return;
 
 		this.targetSquares = targetSquares;
 		this.projectileObject = projectileObject;

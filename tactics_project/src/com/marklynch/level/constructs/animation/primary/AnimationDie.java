@@ -11,7 +11,9 @@ public class AnimationDie extends Animation {
 	float targetTorsoAngle = 1.57f;// 3.14/2
 
 	public AnimationDie(GameObject performer) {
-		super(performer);
+		super(performer, performer);
+		if (!runAnimation)
+			return;
 		// durationToReach = 400;
 		blockAI = true;
 
@@ -117,6 +119,6 @@ public class AnimationDie extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

@@ -39,7 +39,9 @@ public class AnimationDamageText extends Animation {
 	public AnimationDamageText(int damage, GameObject targetGameObject, float originX, float originY, float speed,
 			HIGH_LEVEL_STATS statType, Color color) {
 
-		super(null);
+		super(null, targetGameObject);
+		if (!runAnimation)
+			return;
 
 		this.targetGameObject = targetGameObject;
 
@@ -139,7 +141,7 @@ public class AnimationDamageText extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

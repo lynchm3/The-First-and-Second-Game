@@ -21,7 +21,9 @@ public class AnimationDrop extends Animation {
 	public AnimationDrop(String name, GameObject shooter, Action action, Square targetSquare,
 			GameObject projectileObject, float speed) {
 
-		super(null);
+		super(null, shooter, targetSquare);
+		if (!runAnimation)
+			return;
 
 		if (shooter == Game.level.player) {
 			name = "Your " + name;
@@ -93,7 +95,7 @@ public class AnimationDrop extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	// @Override

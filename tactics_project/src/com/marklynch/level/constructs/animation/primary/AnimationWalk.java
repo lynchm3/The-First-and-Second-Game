@@ -99,7 +99,9 @@ public class AnimationWalk extends Animation {
 	// for show only, walking actor, primary
 
 	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int phase) {
-		super(performer);
+		super(performer, performer, endSquare);
+		if (!runAnimation)
+			return;
 		durationToReachMillis = 400;
 
 		quarterDurationToReach = durationToReachMillis / 4;
@@ -153,28 +155,6 @@ public class AnimationWalk extends Animation {
 
 		this.phase = phase;
 		setAngles(0f);
-	}
-
-	public AnimationWalk(int startX, int startY, int endX, int endY) {
-		super(null);
-
-		setAngles(0f);
-	}
-
-	public AnimationWalk(float startX, float startY, float endX, float endY) {
-		super(null);
-		durationToReachMillis = 400;
-		startOffsetX = offsetX = startX - endX;
-		startOffsetY = offsetY = startY - endY;
-		// if (phase == 0 || phase == 2) {
-		// offsetY += 0f;
-		// } else {
-		// offsetY += headBob;
-		//
-		// }
-		blockAI = false;
-		setAngles(0f);
-
 	}
 
 	@Override
@@ -412,7 +392,7 @@ public class AnimationWalk extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

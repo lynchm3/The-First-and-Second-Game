@@ -6,7 +6,9 @@ import com.marklynch.objects.GameObject;
 public class AnimationWait extends Animation {
 
 	public AnimationWait(GameObject performer) {
-		super(performer);
+		super(performer, performer);
+		if (!runAnimation)
+			return;
 		durationToReachMillis = 400;
 		blockAI = false;
 		// if (performer == Level.player)
@@ -103,6 +105,6 @@ public class AnimationWait extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

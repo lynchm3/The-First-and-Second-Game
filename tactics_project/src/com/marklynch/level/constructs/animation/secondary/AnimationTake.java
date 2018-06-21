@@ -38,7 +38,9 @@ public class AnimationTake extends Animation {
 
 	public AnimationTake(GameObject gameObject, GameObject taker, float originX, float originY, float speed,
 			float targetOffsetX, float targetOffsetY) {
-		super(null);
+		super(null, gameObject, taker);
+		if (!runAnimation)
+			return;
 
 		this.targetGameObject = taker;
 		this.gameObject = gameObject;
@@ -56,7 +58,9 @@ public class AnimationTake extends Animation {
 
 	public AnimationTake(GameObject gameObject, GameObject taker, float targetOffsetX, float targetOffsetY,
 			float speed) {
-		super(null);
+		super(null, gameObject, taker);
+		if (!runAnimation)
+			return;
 
 		this.targetGameObject = taker;
 		this.gameObject = gameObject;
@@ -181,7 +185,7 @@ public class AnimationTake extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

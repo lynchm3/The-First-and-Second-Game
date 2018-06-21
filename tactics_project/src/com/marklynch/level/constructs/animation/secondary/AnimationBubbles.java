@@ -21,7 +21,9 @@ public class AnimationBubbles extends Animation {
 
 	public AnimationBubbles(GameObject targetGameObject, float originX, float originY, float speed) {
 
-		super(null);
+		super(null, targetGameObject);
+		if (!runAnimation)
+			return;
 		this.targetGameObject = targetGameObject;
 
 		this.speed = speed;
@@ -117,7 +119,7 @@ public class AnimationBubbles extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

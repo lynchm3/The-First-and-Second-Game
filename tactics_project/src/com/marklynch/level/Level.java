@@ -2348,7 +2348,10 @@ public class Level {
 	}
 
 	public boolean shouldLog(Object... objects) {
+		return shouldLog(objects, false);
+	}
 
+	public boolean shouldLog(Object[] objects, boolean doesNothing) {
 		for (Object object : objects) {
 
 			if (object == null)

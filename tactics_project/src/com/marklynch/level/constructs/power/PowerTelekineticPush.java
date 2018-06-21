@@ -120,23 +120,17 @@ public class PowerTelekineticPush extends Power {
 			source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
 		}
 		for (final GameObject pushedGameObject : pushedObjectToStartSquare.keySet()) {
-			// if (pushedGameObject.remainingHealth > 0)
-
-			if (Game.level.shouldLog(source, pushedGameObject)) {
-				pushedGameObject.setPrimaryAnimation(
-						new AnimationPushed(pushedGameObject, pushedObjectToStartSquare.get(pushedGameObject),
-								endSquare, pushedGameObject.getPrimaryAnimation()) {
-							@Override
-							public void runCompletionAlgorightm() {
-								super.runCompletionAlgorightm();
-								postAnimation(pushedGameObject, action, obstacle);
-							}
+			pushedGameObject.setPrimaryAnimation(
+					new AnimationPushed(pushedGameObject, pushedObjectToStartSquare.get(pushedGameObject), endSquare,
+							pushedGameObject.getPrimaryAnimation()) {
+						@Override
+						public void runCompletionAlgorightm() {
+							super.runCompletionAlgorightm();
+							postAnimation(pushedGameObject, action, obstacle);
 						}
+					}
 
-				);
-			} else {
-				postAnimation(pushedGameObject, action, obstacle);
-			}
+			);
 
 		}
 	}

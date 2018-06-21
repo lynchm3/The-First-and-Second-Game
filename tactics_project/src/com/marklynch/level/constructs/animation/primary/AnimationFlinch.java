@@ -13,7 +13,9 @@ public class AnimationFlinch extends Animation {
 	float threeQuarterDurationToReach;
 
 	public AnimationFlinch(GameObject performer, Square squareBeingAttackedFrom, Animation oldAnimation) {
-		super(performer);
+		super(performer, performer);
+		if (!runAnimation)
+			return;
 		this.targetSquare = squareBeingAttackedFrom;
 		durationToReachMillis = 400;
 
@@ -101,7 +103,7 @@ public class AnimationFlinch extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

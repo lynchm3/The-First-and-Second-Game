@@ -22,7 +22,9 @@ public class AnimationTeleport extends Animation {
 	// for show only, walking actor, primary
 
 	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare) {
-		super(performer);
+		super(performer, startSquare, endSquare);
+		if (!runAnimation)
+			return;
 		durationToReachMillis = 400;
 
 		quarterDurationToReach = durationToReachMillis / 4;
@@ -99,7 +101,7 @@ public class AnimationTeleport extends Animation {
 	@Override
 	public void draw3() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
