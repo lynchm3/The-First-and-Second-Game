@@ -53,6 +53,8 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	ArrayList<Square> midBridgeSquares = new ArrayList<Square>();
 	ArrayList<Square> activeBridgeSquares;
 
+	Square voidSquare = Level.squares[90][40];
+
 	public PuzzleRoomMovingBridge() {
 		super("Bridge Room", posX, posY, false, new ArrayList<Actor>(), 1, false, new Node[] {},
 				new RoomPart[] { new RoomPart(posX, posY, posX + totalWidthInSquares, posY + totalHeightInSquares) });
@@ -146,30 +148,13 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				if (Level.squares[i][j].inventory.containsObjectWithTemplateId(Templates.FLOOR.templateId)) {
 				} else if (!Level.squares[i][j].inventory
 						.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
-					Level.squares[i][j].inventory.add(Templates.VOID_HOLE.makeCopy(null, null));
+					Level.squares[i][j].inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
 			}
 		}
 
 		setupBridgeConnections();
-
-		// setup();
 	}
-
-	// public void fillInVoidSquares() {
-	//
-	// for (int i = posX; i < posX + totalWidthInSquares; i++) {
-	//
-	// for (int j = posY; j < posY + totalHeightInSquares; j++) {
-	// Level.squares[i][j].imageTexture = null;
-	// if (activeBridgeSquares.contains(Level.squares[i][j])) {
-	// } else if (!Level.squares[i][j].inventory
-	// .containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
-	// Level.squares[i][j].inventory.add(Templates.VOID_HOLE.makeCopy(null, null));
-	// }
-	// }
-	// }
-	// }
 
 	@Override
 	public void zwitch(Switch zwitch) {
@@ -206,7 +191,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 			for (Square oldSquare : horizontalBridgeSquares) {
 				if (!oldSquare.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
-					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null));
+					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
 			}
 
@@ -233,7 +218,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 			for (Square oldSquare : verticalBridgeSquares) {
 				if (!oldSquare.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
-					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null));
+					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
 			}
 

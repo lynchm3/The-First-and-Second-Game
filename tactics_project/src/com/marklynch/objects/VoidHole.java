@@ -2,6 +2,8 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationScale;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
@@ -9,6 +11,7 @@ import com.marklynch.objects.units.Actor;
 public class VoidHole extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public Square connectedSquare = null;
 
 	public VoidHole() {
 		super();
@@ -29,11 +32,11 @@ public class VoidHole extends GameObject {
 		super.setInstances(gameObject);
 	}
 
-	@Override
-	public VoidHole makeCopy(Square square, Actor owner) {
+	public VoidHole makeCopy(Square square, Actor owner, Square connectedSquare) {
 		VoidHole searchable = new VoidHole();
 		setInstances(searchable);
 		super.setAttributesForCopy(searchable, square, owner);
+		searchable.connectedSquare = connectedSquare;
 		return searchable;
 	}
 
@@ -48,7 +51,13 @@ public class VoidHole extends GameObject {
 						@Override
 						public void runCompletionAlgorightm() {
 							super.runCompletionAlgorightm();
-							squareGameObjectIsOn.inventory.remove(gameObject);
+							connectedSquare.inventory.add(gameObject);
+							if (gameObject == Level.player) {
+								// Game.ca
+								Game.level.centerToSquare = true;
+								Game.level.squareToCenterTo = connectedSquare;
+							}
+							// squareGameObjectIsOn.inventory.remove(gameObject);
 						}
 					});
 
