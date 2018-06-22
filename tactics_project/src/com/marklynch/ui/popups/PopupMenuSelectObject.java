@@ -46,8 +46,7 @@ public class PopupMenuSelectObject extends PopupMenu {
 		buttons.clear();
 
 		if (showSquare) {
-			if (PopupMenuSelectObject.this.square.getAllActionsPerformedOnThisInWorld(Game.level.activeActor)
-					.size() > 0)
+			if (PopupMenuSelectObject.this.square.getAllActionsPerformedOnThisInWorld(Level.player).size() > 0)
 				buttons.add(selectSquareButton);
 		}
 
@@ -61,7 +60,7 @@ public class PopupMenuSelectObject extends PopupMenu {
 			if (onlySmallObjects && !gameObject.canBePickedUp)
 				continue;
 
-			if (gameObject.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0) {
+			if (gameObject.getAllActionsPerformedOnThisInWorld(Level.player).size() > 0) {
 				final PopupMenuButton objectButton = new PopupMenuButton(0, buttons.size() * 30, 128, 30, null, null,
 						true, true, gameObject, this, "" + gameObject);
 
