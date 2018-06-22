@@ -18,10 +18,10 @@ import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerHealTouch;
+import com.marklynch.level.constructs.power.PowerIgnite;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
 import com.marklynch.level.constructs.power.PowerRespite;
-import com.marklynch.level.constructs.power.PowerSpark;
 import com.marklynch.level.constructs.power.PowerSpiritBag;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerTelekineticPush;
@@ -119,13 +119,13 @@ public class SkillTree implements Draggable, Scrollable {
 		superPeek.powersUnlocked.add(new PowerSuperPeek(null));
 		skillTreeNodes.add(superPeek);
 
-		// Spark
-		SkillTreeNode spark = new SkillTreeNode(4096, 1536);
-		activateAtStart.add(spark);
-		spark.name = "Spark";
-		spark.description = "Spark";
-		spark.powersUnlocked.add(new PowerSpark(null));
-		skillTreeNodes.add(spark);
+		// Ignite
+		SkillTreeNode ignite = new SkillTreeNode(4096, 1536);
+		activateAtStart.add(ignite);
+		ignite.name = "Ignite";
+		ignite.description = "Ignite";
+		ignite.powersUnlocked.add(new PowerIgnite(null));
+		skillTreeNodes.add(ignite);
 
 		// Douse
 		SkillTreeNode douse = new SkillTreeNode(3840, 1536);
@@ -133,8 +133,8 @@ public class SkillTree implements Draggable, Scrollable {
 		douse.description = "douse";
 		douse.powersUnlocked.add(new PowerDouse(null));
 		skillTreeNodes.add(douse);
-		spark.linkedSkillTreeNodes.add(douse);
-		douse.linkedSkillTreeNodes.add(spark);
+		ignite.linkedSkillTreeNodes.add(douse);
+		douse.linkedSkillTreeNodes.add(ignite);
 
 		// Fire Damage +1
 		// SkillTreeNode fire1 = new SkillTreeNode(512, 512 + 512);
@@ -147,12 +147,13 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Inferno
 		SkillTreeNode inferno = new SkillTreeNode(4096, 1792);
+		activateAtStart.add(inferno);
 		inferno.name = "Inferno";
 		inferno.description = "Inferno";
 		inferno.powersUnlocked.add(new PowerInferno(null));
 		skillTreeNodes.add(inferno);
-		spark.linkedSkillTreeNodes.add(inferno);
-		inferno.linkedSkillTreeNodes.add(spark);
+		ignite.linkedSkillTreeNodes.add(inferno);
+		inferno.linkedSkillTreeNodes.add(ignite);
 
 		// Poison Knife
 		SkillTreeNode poisonKnives = new SkillTreeNode(1280, 1024);

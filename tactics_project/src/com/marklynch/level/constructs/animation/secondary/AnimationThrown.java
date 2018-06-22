@@ -48,8 +48,6 @@ public class AnimationThrown extends Animation {
 
 		super(null, shooter, targetGameObject, targetSquare);
 
-		System.out.println("AnimationThrown() - runAnimaton = " + runAnimation);
-
 		if (!runAnimation) {
 			return;
 		}

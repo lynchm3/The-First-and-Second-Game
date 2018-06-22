@@ -12,11 +12,11 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 
-public class PowerSpark extends Power {
+public class PowerIgnite extends Power {
 
 	private static String NAME = "Spark";
 
-	public PowerSpark(GameObject source) {
+	public PowerIgnite(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_burn.png", false), source,
 				new Effect[] { new EffectBurning(source, null, 3) }, 5, new Point[] { new Point(0, 0) }, 10, true, true,
 				Crime.TYPE.CRIME_ASSAULT);
@@ -25,7 +25,7 @@ public class PowerSpark extends Power {
 
 	@Override
 	public Power makeCopy(GameObject source) {
-		return new PowerSpark(source);
+		return new PowerIgnite(source);
 	}
 
 	@Override
