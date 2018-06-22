@@ -104,6 +104,9 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 				gameObjectsNonGround.remove(gameObject);
 			}
 
+			if (Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor))
+				Game.level.inanimateObjectsOnGround.remove(gameObject);
+
 			refresh();
 		}
 		return -1;
