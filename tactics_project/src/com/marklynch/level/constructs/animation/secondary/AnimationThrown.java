@@ -47,6 +47,9 @@ public class AnimationThrown extends Animation {
 			GameObject projectileObject, GameObject weapon, float speed, float rotationSpeed, boolean onTarget) {
 
 		super(null, shooter, targetGameObject, targetSquare);
+
+		System.out.println("AnimationThrown() - runAnimaton = " + runAnimation);
+
 		if (!runAnimation) {
 			return;
 		}
@@ -67,9 +70,9 @@ public class AnimationThrown extends Animation {
 
 		if (shooter.backwards)
 			this.x = this.originX = shooter.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
-		// else
-		// this.x = this.originX = shooter.squareGameObjectIsOn.xInGridPixels +
-		// Game.SQUARE_WIDTH;// shooter.getCenterX();
+		else
+			this.x = this.originX = shooter.squareGameObjectIsOn.xInGridPixels;// + Game.SQUARE_WIDTH;//
+																				// shooter.getCenterX();
 
 		projectileObject.backwards = shooter.backwards;
 
