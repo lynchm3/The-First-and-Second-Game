@@ -166,7 +166,6 @@ public class Actor extends GameObject {
 	public Texture thoughtBubbleImageTextureObject = null;
 	public Texture thoughtBubbleImageTextureAction = null;
 	public Color thoughtBubbleImageTextureActionColor = Color.WHITE;
-	public Square lastSquare = null;
 	public GameObject peekingThrough = null;
 	public Square peekSquare = null;
 

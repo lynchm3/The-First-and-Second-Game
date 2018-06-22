@@ -51,11 +51,16 @@ public class VoidHole extends GameObject {
 						@Override
 						public void runCompletionAlgorightm() {
 							super.runCompletionAlgorightm();
-							connectedSquare.inventory.add(gameObject);
+							Square square = gameObject.lastSquare;
+							if (square == null)
+								square = connectedSquare;
+
+							square.inventory.add(gameObject);
+
 							if (gameObject == Level.player) {
 								// Game.ca
 								Game.level.centerToSquare = true;
-								Game.level.squareToCenterTo = connectedSquare;
+								Game.level.squareToCenterTo = square;
 							}
 							// squareGameObjectIsOn.inventory.remove(gameObject);
 						}

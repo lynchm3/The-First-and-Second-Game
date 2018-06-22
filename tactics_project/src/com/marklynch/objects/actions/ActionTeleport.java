@@ -59,6 +59,7 @@ public class ActionTeleport extends Action {
 
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		Square startSquare = teleportee.squareGameObjectIsOn;
+		teleportee.lastSquare = teleportee.squareGameObjectIsOn;
 		teleport(teleportee, targetSquare);
 
 		performer.actionsPerformedThisTurn.add(this);

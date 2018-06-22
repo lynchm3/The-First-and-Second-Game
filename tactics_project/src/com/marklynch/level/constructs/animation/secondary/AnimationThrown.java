@@ -46,9 +46,11 @@ public class AnimationThrown extends Animation {
 	public AnimationThrown(String name, Actor shooter, Action action, GameObject targetGameObject, Square targetSquare,
 			GameObject projectileObject, GameObject weapon, float speed, float rotationSpeed, boolean onTarget) {
 
-		super(null, shooter, targetSquare);
-		if (!runAnimation)
+		super(null, shooter, targetGameObject, targetSquare);
+		if (!runAnimation) {
 			return;
+		}
+
 		if (shooter == Game.level.player) {
 			name = "Your " + name;
 		} else {

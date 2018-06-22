@@ -129,6 +129,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public int totalHealth = 0;
 	public String imageTexturePath = null;
 	public transient Square squareGameObjectIsOn = null;
+	public transient Square lastSquare = null;
 	public transient InventorySquare inventorySquare = null;
 	public Inventory inventory = new Inventory();
 	public boolean showInventoryInGroundDisplay = false;;
