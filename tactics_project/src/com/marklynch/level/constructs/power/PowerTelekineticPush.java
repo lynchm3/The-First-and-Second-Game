@@ -14,6 +14,7 @@ import com.marklynch.level.constructs.animation.primary.AnimationPushed;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
@@ -55,8 +56,8 @@ public class PowerTelekineticPush extends Power {
 		int maxPushCount = 5;
 		int pushCount = 0;
 		Square lastSquare = targetSquare;
-		Square endSquare = lastSquare;
-		HashMap<GameObject, Square> pushedObjectToStartSquare = new HashMap<GameObject, Square>();
+		Square tempEndSquare = lastSquare;
+		HashMap<GameObject, Square> pushedObjectAndTheirStartSquare = new HashMap<GameObject, Square>();
 		GameObject tempObstacle = null;
 		// final HashMap<GameObject, Float> pushedObjectToDamageTaken = new
 		// HashMap<GameObject, Float>();
@@ -82,7 +83,9 @@ public class PowerTelekineticPush extends Power {
 			}
 
 			// Hit an obstacle?
-			if (!currentSquare.inventory.canShareSquare) {
+			if (!currentSquare.inventory.canShareSquare
+					&& !(currentSquare.inventory.gameObjectThatCantShareSquare instanceof VoidHole)
+					&& currentSquare.inventory.gameObjectThatCantShareSquare != null) {
 				if (tempObstacle != null)
 					tempObstacle = currentSquare.inventory.gameObjectThatCantShareSquare;
 				for (GameObject gameObject : (ArrayList<GameObject>) lastSquare.inventory.gameObjects.clone()) {
@@ -98,31 +101,32 @@ public class PowerTelekineticPush extends Power {
 			ArrayList<GameObject> temp = new ArrayList<GameObject>();
 			temp.addAll(lastSquare.inventory.gameObjects);
 			for (GameObject gameObject : temp) {
-				// gameObject.secondaryAnimations.add(new AnimationMovementFade(lastSquare,
-				// gameObject));
 
-				if (!pushedObjectToStartSquare.keySet().contains(gameObject)) {
-					pushedObjectToStartSquare.put(gameObject, gameObject.squareGameObjectIsOn);
+				if (!gameObject.isFloorObject) {
+					if (!pushedObjectAndTheirStartSquare.keySet().contains(gameObject)) {
+						pushedObjectAndTheirStartSquare.put(gameObject, gameObject.squareGameObjectIsOn);
+					}
 				}
-
-				currentSquare.inventory.add(gameObject);
 			}
 
-			endSquare = lastSquare = currentSquare;
+			tempEndSquare = lastSquare = currentSquare;
 
 			pushCount++;
 
 		}
 
 		final GameObject obstacle = tempObstacle;
+		final Square endSquare = tempEndSquare;
 
 		if (Game.level.shouldLog(source)) {
 			source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
 		}
-		for (final GameObject pushedGameObject : pushedObjectToStartSquare.keySet()) {
+
+		for (final GameObject pushedGameObject : pushedObjectAndTheirStartSquare.keySet()) {
+			endSquare.inventory.add(pushedGameObject);
 			pushedGameObject.setPrimaryAnimation(
-					new AnimationPushed(pushedGameObject, pushedObjectToStartSquare.get(pushedGameObject), endSquare,
-							pushedGameObject.getPrimaryAnimation()) {
+					new AnimationPushed(pushedGameObject, pushedObjectAndTheirStartSquare.get(pushedGameObject),
+							endSquare, pushedGameObject.getPrimaryAnimation()) {
 						@Override
 						public void runCompletionAlgorightm() {
 							super.runCompletionAlgorightm();
