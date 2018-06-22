@@ -14,7 +14,7 @@ import com.marklynch.utils.ResourceUtils;
 
 public class PowerIgnite extends Power {
 
-	private static String NAME = "Spark";
+	private static String NAME = "Ignite";
 
 	public PowerIgnite(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_burn.png", false), source,
