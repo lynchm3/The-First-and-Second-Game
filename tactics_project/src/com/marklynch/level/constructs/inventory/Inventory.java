@@ -9,6 +9,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
@@ -718,6 +719,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void add(GameObject gameObject) {
 		add(gameObject, -1);
+		if (this.parent instanceof GameObject) {
+			gameObject.lastSquare = ((GameObject) this.parent).squareGameObjectIsOn;
+		} else if (this.parent instanceof Square) {
+			gameObject.lastSquare = ((Square) this.parent);
+		}
 	}
 
 	public void add(GameObject gameObject, int index) {

@@ -49,6 +49,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null)
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+
+			if (gameObject.lastSquare == null)
+				gameObject.lastSquare = this.square;
+
 			gameObject.squareGameObjectIsOn = null;
 
 			// Remove from ground squares index
