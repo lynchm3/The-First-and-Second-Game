@@ -7,6 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.primary.AnimationPush;
 import com.marklynch.level.constructs.animation.primary.AnimationTeleport;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
@@ -116,6 +117,9 @@ public class ActionTeleport extends Action {
 		trespassingCheck(this, performer, teleportee.squareGameObjectIsOn);
 
 		teleportee.setPrimaryAnimation(new AnimationTeleport(teleportee, startSquare, targetSquare));
+		if (teleportee != performer) {
+			performer.setPrimaryAnimation(new AnimationPush(performer, targetSquare, performer.getPrimaryAnimation()));
+		}
 
 		Level.teleportee = null;
 

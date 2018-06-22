@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import org.lwjgl.util.Point;
 
-import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
@@ -118,9 +117,7 @@ public class PowerTelekineticPush extends Power {
 		final GameObject obstacle = tempObstacle;
 		final Square endSquare = tempEndSquare;
 
-		if (Game.level.shouldLog(source)) {
-			source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
-		}
+		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
 
 		for (final GameObject pushedGameObject : pushedObjectAndTheirStartSquare.keySet()) {
 			endSquare.inventory.add(pushedGameObject);

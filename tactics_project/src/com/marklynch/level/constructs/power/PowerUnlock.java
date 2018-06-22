@@ -6,6 +6,7 @@ import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
+import com.marklynch.level.constructs.animation.primary.AnimationPush;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -33,6 +34,7 @@ public class PowerUnlock extends Power {
 				((Openable) openable).unlock();
 			}
 		}
+		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
 	}
 
 	@Override
