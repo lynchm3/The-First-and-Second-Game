@@ -1,12 +1,9 @@
-package com.marklynch.level.constructs.animation.secondary;
+package com.marklynch.level.constructs.animation.primary;
 
-import com.marklynch.Game;
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
-import com.marklynch.utils.TextureUtils;
 
 public class AnimationStraightLine extends Animation {
 
@@ -21,7 +18,7 @@ public class AnimationStraightLine extends Animation {
 
 	public AnimationStraightLine(GameObject projectileObject, float speed, Square... targetSquares) {
 
-		super(null, projectileObject, targetSquares[targetSquares.length - 1]);
+		super(projectileObject, projectileObject, targetSquares[targetSquares.length - 1]);
 		if (!runAnimation)
 			return;
 
@@ -38,7 +35,7 @@ public class AnimationStraightLine extends Animation {
 
 		blockAI = true;
 
-		projectileObject.squareGameObjectIsOn.inventory.remove(projectileObject);
+		// projectileObject.squareGameObjectIsOn.inventory.remove(projectileObject);
 
 		setupForNextSquare();
 
@@ -91,14 +88,20 @@ public class AnimationStraightLine extends Animation {
 			index++;
 			if (index >= targetSquares.length) {
 				System.out.println("DONE 2");
+				offsetX = 0;
+				offsetY = 0;
 				runCompletionAlgorightm();
 			} else {
 				setupForNextSquare();
 			}
 
 		} else {
+
 			x += distanceX;
 			y += distanceY;
+
+			offsetX = x - performer.squareGameObjectIsOn.xInGridPixels;// - x;
+			offsetY = y - performer.squareGameObjectIsOn.yInGridPixels;// - y;
 
 		}
 	}
@@ -127,9 +130,6 @@ public class AnimationStraightLine extends Animation {
 	public static void postRangedAnimation(GameObject projectileObject, Square[] targetSquares, boolean doesNothing) {
 
 		targetSquares[targetSquares.length - 1].inventory.add(projectileObject);
-
-		if (Level.player.inventory.groundDisplay != null)
-			Level.player.inventory.groundDisplay.refreshGameObjects();
 	}
 
 	@Override
@@ -145,12 +145,14 @@ public class AnimationStraightLine extends Animation {
 		// view.rotate(radians, new Vector3f(0f, 0f, 1f));
 		// Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f,
-				x + projectileObject.drawOffsetRatioX * Game.SQUARE_WIDTH,
-				y + projectileObject.drawOffsetRatioY * Game.SQUARE_HEIGHT,
-				x + projectileObject.width + projectileObject.drawOffsetRatioX * Game.SQUARE_WIDTH,
-				y + projectileObject.height + projectileObject.drawOffsetRatioY * Game.SQUARE_HEIGHT,
-				projectileObject.backwards);
+		// TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f,
+		// x + projectileObject.drawOffsetRatioX * Game.SQUARE_WIDTH,
+		// y + projectileObject.drawOffsetRatioY * Game.SQUARE_HEIGHT,
+		// x + projectileObject.width + projectileObject.drawOffsetRatioX *
+		// Game.SQUARE_WIDTH,
+		// y + projectileObject.height + projectileObject.drawOffsetRatioY *
+		// Game.SQUARE_HEIGHT,
+		// projectileObject.backwards);
 
 		// Game.flush();
 		// view.rotate(-radians, new Vector3f(0f, 0f, 1f));

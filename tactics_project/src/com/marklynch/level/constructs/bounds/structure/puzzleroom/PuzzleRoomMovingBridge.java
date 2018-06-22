@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.animation.secondary.AnimationStraightLine;
+import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
@@ -254,8 +254,11 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		// }
 
 		// Straight
-
-		Level.player.addSecondaryAnimation(new AnimationStraightLine(gameObject, 1f, targetSquares) {
+		// Square startSquare = gameObject.squareGameObjectIsOn;
+		// targetSquares[targetSquares.length - 1].inventory.add(gameObject);
+		// if (Level.player.inventory.groundDisplay != null)
+		// Level.player.inventory.groundDisplay.refreshGameObjects();
+		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 1f, targetSquares) {
 			@Override
 			public void runCompletionAlgorightm() {
 				super.runCompletionAlgorightm();

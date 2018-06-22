@@ -27,6 +27,18 @@ public class VoidHole extends GameObject {
 	}
 
 	@Override
+	public void draw1() {
+	}
+
+	@Override
+	public void draw2() {
+	}
+
+	@Override
+	public void draw3() {
+	}
+
+	@Override
 	public void setInstances(GameObject gameObject) {
 		instances.add(gameObject);
 		super.setInstances(gameObject);
