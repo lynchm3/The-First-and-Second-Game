@@ -52,7 +52,7 @@ public class PressurePlate extends Switch {
 			return;
 		int weightOnPlate = 0;
 		for (GameObject gameObject : squareGameObjectIsOn.inventory.gameObjects) {
-			if (gameObject != this) {
+			if (gameObject.isFloorObject == false) {
 				weightOnPlate += gameObject.weight;
 			}
 		}

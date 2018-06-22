@@ -103,6 +103,11 @@ public class ActionUsePower extends Action {
 	public boolean check() {
 
 		disabledReason = power.disabledReason;
+
+		if (targetGameObject != null)
+			if (targetGameObject.attackable == false || targetGameObject.isFloorObject)
+				return false;
+
 		return power.check(performer, targetSquare);
 	}
 
