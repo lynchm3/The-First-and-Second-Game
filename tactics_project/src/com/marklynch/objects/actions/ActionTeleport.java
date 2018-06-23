@@ -58,6 +58,10 @@ public class ActionTeleport extends Action {
 			new ActionStopPeeking(performer).perform();
 		}
 
+		if (teleportee != performer) {
+			performer.setPrimaryAnimation(new AnimationPush(performer, targetSquare, performer.getPrimaryAnimation()));
+		}
+
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		Square startSquare = teleportee.squareGameObjectIsOn;
 		teleportee.lastSquare = teleportee.squareGameObjectIsOn;
@@ -115,9 +119,6 @@ public class ActionTeleport extends Action {
 			Game.level.endPlayerTurn();
 
 		trespassingCheck(this, performer, teleportee.squareGameObjectIsOn);
-		if (teleportee != performer) {
-			performer.setPrimaryAnimation(new AnimationPush(performer, targetSquare, performer.getPrimaryAnimation()));
-		}
 
 		teleportee.setPrimaryAnimation(new AnimationTeleport(teleportee, startSquare, targetSquare));
 
