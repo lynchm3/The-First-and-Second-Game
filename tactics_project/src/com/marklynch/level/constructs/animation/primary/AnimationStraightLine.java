@@ -129,6 +129,9 @@ public class AnimationStraightLine extends Animation {
 
 	public static void postRangedAnimation(GameObject projectileObject, Square[] targetSquares, boolean doesNothing) {
 
+		System.out.println("targetSquares = " + targetSquares);
+		System.out.println("targetSquares[targetSquares.length - 1].inventory = "
+				+ targetSquares[targetSquares.length - 1].inventory);
 		targetSquares[targetSquares.length - 1].inventory.add(projectileObject);
 	}
 

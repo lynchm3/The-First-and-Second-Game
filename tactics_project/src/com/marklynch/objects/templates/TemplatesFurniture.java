@@ -284,8 +284,8 @@ public class TemplatesFurniture {
 
 		Templates.PRESSURE_PLATE = new PressurePlate();
 		Templates.PRESSURE_PLATE.name = "Pressure Plate";
-		Templates.PRESSURE_PLATE.imageTexturePath = "pressure_plate.png";
-		Templates.PRESSURE_PLATE.imageTexture = getGlobalImage(Templates.PRESSURE_PLATE.imageTexturePath, true);
+		// Templates.PRESSURE_PLATE.imageTexturePath = "pressure_plate.png";
+		Templates.PRESSURE_PLATE.imageTexture = getGlobalImage("pressure_plate.png", true);
 		Templates.PRESSURE_PLATE.totalHealth = Templates.PRESSURE_PLATE.remainingHealth = 1;
 		Templates.PRESSURE_PLATE.widthRatio = 1f;
 		Templates.PRESSURE_PLATE.heightRatio = 1f;

@@ -37,9 +37,9 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	// x = bridge
 
 	boolean bridgeVertical = false;
-	static int posX = 100;
+	static int posX = 90;
 	static int posY = 50;
-	static int totalWidthInSquares = 10;
+	static int totalWidthInSquares = 20;
 	static int totalHeightInSquares = totalWidthInSquares;
 	int bridgeWidth = 2;
 	int bridgeLength = totalWidthInSquares - 2;
@@ -50,7 +50,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 	ArrayList<Square> verticalBridgeSquares = new ArrayList<Square>();
 	ArrayList<Square> horizontalBridgeSquares = new ArrayList<Square>();
-	ArrayList<Square> midBridgeSquares = new ArrayList<Square>();
+	// ArrayList<Square> midBridgeSquares = new ArrayList<Square>();
 	ArrayList<Square> activeBridgeSquares;
 
 	Square voidSquare = Level.squares[90][40];
@@ -63,8 +63,8 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		// this, Switch.SWITCH_TYPE.OPEN_CLOSE,
 		// new RequirementToMeet[] { new
 		// StatRequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) });
-		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX][posY - 1], null, this, Switch.SWITCH_TYPE.OPEN_CLOSE,
-				5);
+		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX - 1][posY + totalHeightInSquares / 2 - 2], null, this,
+				Switch.SWITCH_TYPE.OPEN_CLOSE, 5);
 
 		for (int i = posX; i < posX + totalWidthInSquares; i++) {
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
@@ -86,27 +86,27 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 		}
 
-		int midSquareX1 = bridgePosX + bridgeLength / 2 - 1;
-		int midSquareX2 = bridgePosX + bridgeLength / 2;
-		int midSquareY1 = bridgePosY + bridgeLength / 2 - 1;
-		int midSquareY2 = bridgePosY + bridgeLength / 2;
-		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
-		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
-		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
-		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
-		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
-		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
-		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
-		midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
-
-		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
-		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
-		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
-		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
-		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
-		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
-		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
-		midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		// int midSquareX1 = bridgePosX + bridgeLength / 2 - 1;
+		// int midSquareX2 = bridgePosX + bridgeLength / 2;
+		// int midSquareY1 = bridgePosY + bridgeLength / 2 - 1;
+		// int midSquareY2 = bridgePosY + bridgeLength / 2;
+		// midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		// midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		// midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		// midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		// midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		// midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		// midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		// midBridgeSquares.add(Level.squares[midSquareX1][midSquareY1]);
+		//
+		// midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		// midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		// midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		// midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		// midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		// midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		// midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
+		// midBridgeSquares.add(Level.squares[midSquareX2][midSquareY2]);
 
 		if (bridgeVertical)
 			activeBridgeSquares = verticalBridgeSquares;
@@ -162,7 +162,8 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	public void moveBridge() {
 
 		HashMap<GameObject, Square> teleportationsToPerform = new HashMap<GameObject, Square>();
-		HashMap<GameObject, Square> midTeleportationsToPerform = new HashMap<GameObject, Square>();
+		// HashMap<GameObject, Square> midTeleportationsToPerform = new
+		// HashMap<GameObject, Square>();
 		ArrayList<GameObject> teleportationObjectsInOrder = new ArrayList<GameObject>();
 
 		if (bridgeVertical) {
@@ -171,7 +172,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						teleportationObjectsInOrder.add(gameObject);
-						midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
+						// midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
 						teleportationsToPerform.put(gameObject, verticalBridgeSquares.get(i));
 					}
 				}
@@ -198,7 +199,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						teleportationObjectsInOrder.add(gameObject);
-						midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
+						// midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
 						teleportationsToPerform.put(gameObject, horizontalBridgeSquares.get(i));
 					}
 				}
@@ -225,7 +226,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	float focalPointY = posY * Game.SQUARE_HEIGHT + (totalHeightInSquares / 2) * Game.SQUARE_HEIGHT;
 	Point focalPoint = new Point(focalPointX, focalPointY);
 
-	public void move(final GameObject gameObject, final Square... targetSquares) {
+	public void move(final GameObject gameObject, final Square... targetSquares1) {
 
 		// Curve
 		// (GameObject projectileObject, float speed, float focalPoint, float
@@ -258,11 +259,11 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		// targetSquares[targetSquares.length - 1].inventory.add(gameObject);
 		// if (Level.player.inventory.groundDisplay != null)
 		// Level.player.inventory.groundDisplay.refreshGameObjects();
-		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 1f, targetSquares) {
+		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 1f, targetSquares1) {
 			@Override
 			public void runCompletionAlgorightm(boolean wait) {
 				super.runCompletionAlgorightm(wait);
-				postRangedAnimation(gameObject, targetSquares);
+				postRangedAnimation(gameObject, targetSquares1);
 				// postRangedAnimation(arrow);
 			}
 		});
