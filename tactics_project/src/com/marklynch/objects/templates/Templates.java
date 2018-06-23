@@ -33,6 +33,7 @@ import com.marklynch.objects.Sign;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.Stump;
+import com.marklynch.objects.Support;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
@@ -238,6 +239,8 @@ public class Templates {
 	public static WantedPoster WANTED_POSTER;
 
 	public static Readable DOCUMENTS;
+
+	public static Support WOODEN_SUPPORT;
 
 	// Openables
 	public static Door WEAK_WOODEN_DOOR;

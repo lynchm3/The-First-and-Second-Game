@@ -16,6 +16,7 @@ import com.marklynch.objects.Mirror;
 import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Stampable;
+import com.marklynch.objects.Support;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.WaterSource;
 
@@ -420,6 +421,16 @@ public class TemplatesFurniture {
 		Templates.WELL.anchorY = 0;
 		Templates.WELL.templateId = GameObject.generateNewTemplateId();
 		Templates.WELL.effectsFromInteracting = new Effect[] {};
+
+		Templates.WOODEN_SUPPORT = new Support();
+		Templates.WOODEN_SUPPORT.name = "Wooden Support";
+		Templates.WOODEN_SUPPORT.imageTexture = getGlobalImage("wooden_support.png", true);
+		Templates.WOODEN_SUPPORT.totalHealth = Templates.WOODEN_SUPPORT.remainingHealth = 10;
+		Templates.WOODEN_SUPPORT.drawOffsetRatioX = -0.25f;
+		Templates.WOODEN_SUPPORT.soundWhenHit = 10f;
+		Templates.WOODEN_SUPPORT.weight = 112f;
+		Templates.WOODEN_SUPPORT.value = 24;
+		Templates.WOODEN_SUPPORT.templateId = GameObject.generateNewTemplateId();
 
 	}
 

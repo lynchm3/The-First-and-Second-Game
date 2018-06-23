@@ -124,7 +124,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	// Template id
 	public int templateId;
-
 	public String name = "";
 	public int totalHealth = 0;
 	public String imageTexturePath = null;
@@ -2082,6 +2081,19 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (attackable == false)
 			return;
+
+		remainingHealth += change;
+		if (remainingHealth > totalHealth)
+			remainingHealth = totalHealth;
+		if (remainingHealth < 0)
+			remainingHealth = 0;
+
+		if (change < 0)
+			attackedBy(attacker, action);
+
+	}
+
+	public void changeHealthSafetyOff(float change, Object attacker, Action action) {
 
 		remainingHealth += change;
 		if (remainingHealth > totalHealth)
