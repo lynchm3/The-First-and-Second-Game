@@ -119,7 +119,8 @@ public class Structure {
 					if (!squaresToRemove.contains(Game.level.squares[i][j])) {
 						Game.level.squares[i][j].structureSquareIsIn = this;
 						Game.level.squares[i][j].structureSectionSquareIsIn = caveSection;
-						Game.level.squares[i][j].imageTexture = imageTexture;
+						if (Game.level.squares[i][j].imageTexture == Square.GRASS_TEXTURE)
+							Game.level.squares[i][j].imageTexture = imageTexture;
 					}
 				}
 			}

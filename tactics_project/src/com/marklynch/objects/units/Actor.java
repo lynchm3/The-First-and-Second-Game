@@ -345,6 +345,12 @@ public class Actor extends GameObject {
 			return null;
 		}
 
+		if (this.squareGameObjectIsOn.nodes == null || target.nodes == null) {
+			lastNodeReached = null;
+			lastPathTarget = target;
+			return getPathAtSquareLevel(target);
+		}
+
 		for (Node node1 : this.squareGameObjectIsOn.nodes) {
 			for (Node node2 : target.nodes) {
 				if (node1 == node2) {

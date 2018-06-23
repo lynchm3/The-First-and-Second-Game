@@ -62,7 +62,7 @@ public class Game {
 
 	// Bridge puzzle room
 	public static int playerStartPosX = 99;
-	public static int playerStartPosY = 49;
+	public static int playerStartPosY = 99;
 
 	// Lake
 	// public static int playerStartPosX = 103;

@@ -37,33 +37,43 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	// x = bridge
 
 	boolean bridgeVertical = false;
-	static int posX = 90;
-	static int posY = 50;
-	static int totalWidthInSquares = 20;
-	static int totalHeightInSquares = totalWidthInSquares;
-	int bridgeWidth = 2;
-	int bridgeLength = totalWidthInSquares - 2;
-	int bridgePosX = posX + 1;
-	int bridgePosY = posY + 1;
-	int gapsWidth = (totalWidthInSquares - bridgeWidth) / 2;
-	int bridgeConnectorsWidth = (totalWidthInSquares - bridgeWidth) / 2;
+	int posX;
+	int posY;
+	final static int totalWidthInSquares = 20;
+	final static int totalHeightInSquares = 20;
+	int bridgeWidth;
+	int bridgeLength;
+	int bridgePosX;
+	int bridgePosY;
+	int gapsWidth;
+	int bridgeConnectorsWidth;
 
 	ArrayList<Square> verticalBridgeSquares = new ArrayList<Square>();
 	ArrayList<Square> horizontalBridgeSquares = new ArrayList<Square>();
 	// ArrayList<Square> midBridgeSquares = new ArrayList<Square>();
 	ArrayList<Square> activeBridgeSquares;
 
-	Square voidSquare = Level.squares[90][40];
+	Square voidSquare;
 
-	public PuzzleRoomMovingBridge() {
-		super("Bridge Room", posX, posY, false, new ArrayList<Actor>(), 1, false, new Node[] {},
-				new RoomPart[] { new RoomPart(posX, posY, posX + totalWidthInSquares, posY + totalHeightInSquares) });
+	public PuzzleRoomMovingBridge(int posX, int posY) {
+		super("Bridge Room", posX, posY, false, new ArrayList<Actor>(), 1, false, new Node[] {}, new RoomPart[] {
+				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
+
+		this.posX = posX;
+		this.posY = posY;
+		this.bridgeWidth = 2;
+		this.bridgeLength = totalWidthInSquares - 2;
+		this.bridgePosX = posX + 1;
+		this.bridgePosY = posY + 1;
+		this.gapsWidth = (totalWidthInSquares - bridgeWidth) / 2;
+		this.bridgeConnectorsWidth = (totalWidthInSquares - bridgeWidth) / 2;
+		voidSquare = Level.squares[90][40];
 
 		// Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[posX][posY - 1], null,
 		// this, Switch.SWITCH_TYPE.OPEN_CLOSE,
 		// new RequirementToMeet[] { new
 		// StatRequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) });
-		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX - 1][posY + totalHeightInSquares / 2 - 2], null, this,
+		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX - 1][posY + totalHeightInSquares / 2 - 1], null, this,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 5);
 
 		for (int i = posX; i < posX + totalWidthInSquares; i++) {
