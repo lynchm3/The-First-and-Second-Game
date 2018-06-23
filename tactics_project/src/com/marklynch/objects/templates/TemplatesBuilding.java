@@ -6,6 +6,7 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.Fence;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.MineCart;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Wall;
 
@@ -71,6 +72,15 @@ public class TemplatesBuilding {
 		Templates.RAIL.weight = 45f;
 		Templates.RAIL.value = 29;
 		Templates.RAIL.templateId = GameObject.generateNewTemplateId();
+
+		Templates.MINE_CART = new MineCart();
+		Templates.MINE_CART.name = "Mine Cart";
+		Templates.MINE_CART.isFloorObject = true;
+		Templates.MINE_CART.imageTexture = getGlobalImage("mine_cart.png", true);
+		Templates.MINE_CART.totalHealth = Templates.MINE_CART.remainingHealth = 300;
+		Templates.MINE_CART.weight = 68f;
+		Templates.MINE_CART.value = 97;
+		Templates.MINE_CART.templateId = GameObject.generateNewTemplateId();
 	}
 
 }

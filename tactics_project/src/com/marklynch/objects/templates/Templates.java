@@ -23,6 +23,7 @@ import com.marklynch.objects.Key;
 import com.marklynch.objects.Liquid;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.MineCart;
 import com.marklynch.objects.Mirror;
 import com.marklynch.objects.Orb;
 import com.marklynch.objects.PressurePlate;
@@ -278,6 +279,7 @@ public class Templates {
 	public static Wall FENCE;
 
 	public static Rail RAIL;
+	public static MineCart MINE_CART;
 
 	public static Vein VEIN;
 

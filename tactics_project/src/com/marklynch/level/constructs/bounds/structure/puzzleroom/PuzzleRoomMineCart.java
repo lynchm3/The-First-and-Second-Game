@@ -23,6 +23,11 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		this.posY = posY;
 
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 2], null, false, false, true, true);
+		Templates.RAIL.makeCopy(Level.squares[posX + 3][posY + 2], null, false, false, true, true);
+		Templates.RAIL.makeCopy(Level.squares[posX + 4][posY + 2], null, false, false, true, true);
+		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 2], null, false, false, true, true);
+		Templates.RAIL.makeCopy(Level.squares[posX + 6][posY + 2], null, false, false, true, true);
+		Templates.MINE_CART.makeCopy(Level.squares[posX + 2][posY + 2], null, false, false, false, true);
 	}
 
 }
