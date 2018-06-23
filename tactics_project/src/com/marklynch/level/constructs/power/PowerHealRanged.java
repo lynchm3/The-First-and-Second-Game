@@ -41,8 +41,8 @@ public class PowerHealRanged extends Power {
 
 	@Override
 	public void cast(final Actor source, GameObject targetGameObject, Square targetSquare, final Action action) {
+		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
 		super.cast(source, targetGameObject, targetSquare, action);
 
-		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
 	}
 }

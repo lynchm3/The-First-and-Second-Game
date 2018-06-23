@@ -115,11 +115,11 @@ public class ActionTeleport extends Action {
 			Game.level.endPlayerTurn();
 
 		trespassingCheck(this, performer, teleportee.squareGameObjectIsOn);
-
-		teleportee.setPrimaryAnimation(new AnimationTeleport(teleportee, startSquare, targetSquare));
 		if (teleportee != performer) {
 			performer.setPrimaryAnimation(new AnimationPush(performer, targetSquare, performer.getPrimaryAnimation()));
 		}
+
+		teleportee.setPrimaryAnimation(new AnimationTeleport(teleportee, startSquare, targetSquare));
 
 		Level.teleportee = null;
 

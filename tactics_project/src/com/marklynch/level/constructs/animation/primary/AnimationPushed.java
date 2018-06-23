@@ -122,7 +122,7 @@ public class AnimationPushed extends Animation {
 		rightKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
 
 		if (progress >= 1) {
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 			// if (performer.getPrimaryAnimation() == this)
 			// performer.setPrimaryAnimation(new AnimationWait(performer));
 		}

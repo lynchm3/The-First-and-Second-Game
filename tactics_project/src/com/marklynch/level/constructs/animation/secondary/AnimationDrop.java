@@ -66,7 +66,7 @@ public class AnimationDrop extends Animation {
 		durationSoFar += delta;
 		double progress = durationSoFar / durationToReachMillis;
 		if (progress >= 1) {
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 			offsetX = 0;
 			offsetY = 0;
 		} else {

@@ -41,7 +41,7 @@ public class AnimationDie extends Animation {
 
 		if (!(performer instanceof Human)) {
 			torsoAngle = 3.14f;
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 			return;
 		}
 
@@ -74,7 +74,7 @@ public class AnimationDie extends Animation {
 				leftKneeAngle == targetLeftKnee &&
 				//
 				rightKneeAngle == targetRightKnee) {
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 		}
 
 		float offsetYChange = (float) (1d * delta);

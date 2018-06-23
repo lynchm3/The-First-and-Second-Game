@@ -73,8 +73,8 @@ public class ActionAttack extends Action {
 			performer.setPrimaryAnimation(new AnimationSlash(performer, target) {
 
 				@Override
-				public void runCompletionAlgorightm() {
-					super.runCompletionAlgorightm();
+				public void runCompletionAlgorightm(boolean wait) {
+					super.runCompletionAlgorightm(wait);
 					postMeleeAnimation();
 				}
 			}
@@ -96,8 +96,8 @@ public class ActionAttack extends Action {
 					animationThrown = new AnimationThrown("Arrow", (Actor) performer, ActionAttack.this, target,
 							target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true) {
 						@Override
-						public void runCompletionAlgorightm() {
-							super.runCompletionAlgorightm();
+						public void runCompletionAlgorightm(boolean wait) {
+							super.runCompletionAlgorightm(wait);
 							postRangedAnimation(ActionAttack.this.performer, ActionAttack.this.weapon,
 									ActionAttack.this.target, ActionAttack.this.target.squareGameObjectIsOn, arrow,
 									ActionAttack.this);

@@ -35,7 +35,7 @@ public class AnimationScale extends Animation {
 			progress = 1;
 			scaleX = 1;
 			scaleY = 1;
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 			return;
 		}
 		scaleX = (float) (startScale + progress * (endScale - startScale));

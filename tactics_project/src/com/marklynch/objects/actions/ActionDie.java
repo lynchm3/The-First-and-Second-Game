@@ -169,8 +169,8 @@ public class ActionDie extends Action {
 						gameObjectPerformer.equipped).perform();
 			actor.setPrimaryAnimation(new AnimationDie(gameObjectPerformer) {
 				@Override
-				public void runCompletionAlgorightm() {
-					super.runCompletionAlgorightm();
+				public void runCompletionAlgorightm(boolean wait) {
+					super.runCompletionAlgorightm(wait);
 					poolBlood();
 				}
 			});

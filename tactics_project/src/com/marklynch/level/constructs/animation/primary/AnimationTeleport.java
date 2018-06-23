@@ -61,7 +61,7 @@ public class AnimationTeleport extends Animation {
 		}
 
 		if (progress >= 1) {
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 			// if (performer.getPrimaryAnimation() == this)
 			// performer.setPrimaryAnimation(new AnimationWait(performer));
 

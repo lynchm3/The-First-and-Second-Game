@@ -179,7 +179,7 @@ public class AnimationWalk extends Animation {
 		// torsoAngleChange, 0);
 
 		if (progress >= 1) {
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 			offsetX = 0;
 		} else {
 			offsetX = (int) (startOffsetX * (1 - progress));

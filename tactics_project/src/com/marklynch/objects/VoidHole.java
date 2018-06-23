@@ -61,8 +61,8 @@ public class VoidHole extends GameObject {
 				if (gameObject.isFloorObject == false) {
 					gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 500) {
 						@Override
-						public void runCompletionAlgorightm() {
-							super.runCompletionAlgorightm();
+						public void runCompletionAlgorightm(boolean wait) {
+							super.runCompletionAlgorightm(wait);
 							Square square = gameObject.lastSquare;
 							if (square == null)
 								square = connectedSquare;

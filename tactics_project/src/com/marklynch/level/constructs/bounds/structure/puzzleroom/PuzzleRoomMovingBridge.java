@@ -260,8 +260,8 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		// Level.player.inventory.groundDisplay.refreshGameObjects();
 		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 1f, targetSquares) {
 			@Override
-			public void runCompletionAlgorightm() {
-				super.runCompletionAlgorightm();
+			public void runCompletionAlgorightm(boolean wait) {
+				super.runCompletionAlgorightm(wait);
 				postRangedAnimation(gameObject, targetSquares);
 				// postRangedAnimation(arrow);
 			}

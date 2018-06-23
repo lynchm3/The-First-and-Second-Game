@@ -55,7 +55,7 @@ public class AnimationBubbles extends Animation {
 		durationSoFar += delta;
 		double progress = durationSoFar / durationToReachMillis;
 		if (progress >= 1) {
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 		} else {
 			y -= delta * 0.1f;
 		}

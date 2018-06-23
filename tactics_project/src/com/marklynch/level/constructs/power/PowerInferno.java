@@ -40,8 +40,8 @@ public class PowerInferno extends Power {
 		Animation animationThrown = new AnimationThrown("Fire Ball", source, action, targetGameObject, targetSquare,
 				fireBall, source, 1f, 0f, true) {
 			@Override
-			public void runCompletionAlgorightm() {
-				super.runCompletionAlgorightm();
+			public void runCompletionAlgorightm(boolean wait) {
+				super.runCompletionAlgorightm(wait);
 				PowerInferno.super.cast(source, targetGameObject, targetSquare, action);
 			}
 		};

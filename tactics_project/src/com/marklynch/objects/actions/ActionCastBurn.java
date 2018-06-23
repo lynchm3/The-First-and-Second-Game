@@ -77,8 +77,8 @@ public class ActionCastBurn extends Action {
 			Animation animationThrown = new AnimationThrown("Fire Ball", performer, this, target,
 					target.squareGameObjectIsOn, Templates.FIRE_BALL.makeCopy(null, null), performer, 1f, 0f, true) {
 				@Override
-				public void runCompletionAlgorightm() {
-					super.runCompletionAlgorightm();
+				public void runCompletionAlgorightm(boolean wait) {
+					super.runCompletionAlgorightm(wait);
 					postRangedAnimation(ActionCastBurn.this.performer, ActionCastBurn.this.performer,
 							ActionCastBurn.this.target, ActionCastBurn.this.target.squareGameObjectIsOn, fireBall,
 							ActionCastBurn.this);

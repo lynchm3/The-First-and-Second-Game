@@ -78,7 +78,7 @@ public class AnimationStraightLine extends Animation {
 			index++;
 			if (index >= targetSquares.length) {
 				System.out.println("DONE 1");
-				runCompletionAlgorightm();
+				runCompletionAlgorightm(true);
 			} else {
 				setupForNextSquare();
 			}
@@ -90,7 +90,7 @@ public class AnimationStraightLine extends Animation {
 				System.out.println("DONE 2");
 				offsetX = 0;
 				offsetY = 0;
-				runCompletionAlgorightm();
+				runCompletionAlgorightm(true);
 			} else {
 				setupForNextSquare();
 			}

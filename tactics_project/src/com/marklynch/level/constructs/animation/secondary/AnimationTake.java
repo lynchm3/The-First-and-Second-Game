@@ -134,7 +134,7 @@ public class AnimationTake extends Animation {
 			if (trailLines.size() > 0) {
 				trailLines.remove(0);
 				if (trailLines.size() == 0)
-					runCompletionAlgorightm();
+					runCompletionAlgorightm(true);
 			}
 		} else {
 			trailLines.add(new Line(oldX + gameObject.halfWidth, oldY + gameObject.halfHeight, x + gameObject.halfWidth,

@@ -2217,8 +2217,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void setPrimaryAnimation(Animation animation) {
 
-		if (animation.runAnimation == false)
+		if (animation == null || animation.runAnimation == false)
 			return;
+
+		// if (this.primaryAnimation != null && !(this.primaryAnimation instanceof
+		// AnimationWait))
+		// this.primaryAnimation.runCompletionAlgorightm(false);
 
 		Level.blockingAnimations.remove(this.primaryAnimation);
 		Level.animations.remove(this.primaryAnimation);

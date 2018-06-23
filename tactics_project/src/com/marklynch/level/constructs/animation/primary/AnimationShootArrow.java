@@ -149,7 +149,7 @@ public abstract class AnimationShootArrow extends Animation {
 			rightElbowAngle = 0;
 			leftShoulderAngle = 0;
 			leftElbowAngle = 0;
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 		} else {
 		}
 

@@ -40,6 +40,8 @@ public class PowerTelekineticPush extends Power {
 		if (targetSquare.inventory.contains(source))
 			return;
 
+		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
+
 		Direction direction = Direction.LEFT;
 
 		if (targetSquare.xInGrid < source.squareGameObjectIsOn.xInGrid) {
@@ -117,16 +119,14 @@ public class PowerTelekineticPush extends Power {
 		final GameObject obstacle = tempObstacle;
 		final Square endSquare = tempEndSquare;
 
-		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
-
 		for (final GameObject pushedGameObject : pushedObjectAndTheirStartSquare.keySet()) {
 			endSquare.inventory.add(pushedGameObject);
 			pushedGameObject.setPrimaryAnimation(
 					new AnimationPushed(pushedGameObject, pushedObjectAndTheirStartSquare.get(pushedGameObject),
 							endSquare, pushedGameObject.getPrimaryAnimation()) {
 						@Override
-						public void runCompletionAlgorightm() {
-							super.runCompletionAlgorightm();
+						public void runCompletionAlgorightm(boolean wait) {
+							super.runCompletionAlgorightm(wait);
 							postAnimation(pushedGameObject, action, obstacle);
 						}
 					}

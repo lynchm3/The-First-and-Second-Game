@@ -72,7 +72,7 @@ public class AnimationCurve extends Animation {
 		System.out.println("angle = " + angleInRadians);
 
 		if (Math.abs(targetAngle - angleInRadians) < 0.05f) {
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 		} else {
 			x = (float) (focalPoint.x + this.hypotanusLength * Math.cos(angleInRadians)) - Game.HALF_SQUARE_WIDTH
 					+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);

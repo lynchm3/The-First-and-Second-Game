@@ -102,8 +102,8 @@ public class ActionThrowItem extends Action {
 		performer.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this, targetGameObject,
 				targetSquare, gameObjectToThrow, gameObjectToThrow, 1f, 0.5f, true) {
 			@Override
-			public void runCompletionAlgorightm() {
-				super.runCompletionAlgorightm();
+			public void runCompletionAlgorightm(boolean wait) {
+				super.runCompletionAlgorightm(wait);
 				postRangedAnimation(ActionThrowItem.this.performer, ActionThrowItem.this.gameObjectToThrow,
 						ActionThrowItem.this.targetGameObject, this.targetSquare,
 						ActionThrowItem.this.gameObjectToThrow, ActionThrowItem.this);

@@ -71,7 +71,7 @@ public abstract class Animation {
 
 		runAnimation = Game.level.shouldLog(objectsInvolved, false);
 		if (!runAnimation) {
-			runCompletionAlgorightm();
+			runCompletionAlgorightm(true);
 			return;
 		}
 
@@ -149,7 +149,7 @@ public abstract class Animation {
 
 	}
 
-	public void runCompletionAlgorightm() {
+	public void runCompletionAlgorightm(boolean wait) {
 
 		Level.blockingAnimations.remove(this);
 
@@ -171,7 +171,7 @@ public abstract class Animation {
 
 		// Make player do wait animation at end of walk.
 		if (performer == Level.player && Player.playerPathToMove == null && Player.playerTargetSquare == null
-				&& Player.playerTargetAction == null && Player.playerTargetActor == null) {
+				&& Player.playerTargetAction == null && Player.playerTargetActor == null && wait) {
 			performer.setPrimaryAnimation(new AnimationWait(performer));
 			return;
 		}
@@ -179,7 +179,7 @@ public abstract class Animation {
 		if (this instanceof AnimationWalk)
 			return;
 
-		if (performer.remainingHealth > 0) {
+		if (performer.remainingHealth > 0 && wait) {
 			performer.setPrimaryAnimation(new AnimationWait(performer));
 		}
 		// else
