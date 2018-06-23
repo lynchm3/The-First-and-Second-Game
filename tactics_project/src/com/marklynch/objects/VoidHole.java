@@ -73,6 +73,9 @@ public class VoidHole extends GameObject {
 								// Game.ca
 								Game.level.centerToSquare = true;
 								Game.level.squareToCenterTo = square;
+							} else {
+								Level.gameObjectsToFlash.add(gameObject);
+								Level.flashGameObjectCounters.put(gameObject, 0);
 							}
 							// squareGameObjectIsOn.inventory.remove(gameObject);
 						}
