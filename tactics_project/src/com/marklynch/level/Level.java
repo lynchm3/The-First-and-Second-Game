@@ -2226,7 +2226,7 @@ public class Level {
 		}
 
 		// Game.level.activeActor = null;
-		for (GameObject inanimateObject : inanimateObjectsOnGround) {
+		for (GameObject inanimateObject : (ArrayList<GameObject>) inanimateObjectsOnGround.clone()) {
 			inanimateObject.update(0);
 		}
 

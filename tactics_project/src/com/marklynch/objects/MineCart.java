@@ -6,11 +6,12 @@ import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Actor.Direction;
 
 public class MineCart extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
-	boolean up, down, left, right;
+	Direction direction;
 
 	public MineCart() {
 		super();
@@ -24,14 +25,11 @@ public class MineCart extends GameObject {
 		super.setInstances(gameObject);
 	}
 
-	public MineCart makeCopy(Square square, Actor owner, boolean up, boolean down, boolean left, boolean right) {
+	public MineCart makeCopy(Square square, Actor owner, Direction direction) {
 		MineCart mineCart = new MineCart();
 		setInstances(mineCart);
 		super.setAttributesForCopy(mineCart, square, owner);
-		mineCart.up = up;
-		mineCart.down = down;
-		mineCart.left = left;
-		mineCart.right = right;
+		mineCart.direction = direction;
 		return mineCart;
 	}
 
@@ -42,26 +40,46 @@ public class MineCart extends GameObject {
 		super.update(delta);
 		if (squareGameObjectIsOn != null) {
 			squareToMoveTo = null;
-			if (right) {
-				squareToMoveTo = squareGameObjectIsOn.getSquareToRightOf();
-			} else if (left) {
-				squareToMoveTo = squareGameObjectIsOn.getSquareToLeftOf();
-			} else if (up) {
-				squareToMoveTo = squareGameObjectIsOn.getSquareAbove();
-			} else if (down) {
-				squareToMoveTo = squareGameObjectIsOn.getSquareBelow();
+			// System.out.println("squareToMoveTo 1 = " + squareToMoveTo);
+			System.out.println("direction 1 = " + direction);
+
+			Rail currentRail = (Rail) this.squareGameObjectIsOn.inventory
+					.getObjectWithTemplateId(Templates.RAIL.templateId);
+
+			currentRail = (Rail) this.squareGameObjectIsOn.inventory.getObjectWithTemplateId(Templates.RAIL.templateId);
+			if (direction == Direction.RIGHT) {
+				direction = currentRail.getOppositeDirection(Direction.LEFT);
+			} else if (direction == Direction.LEFT) {
+				direction = currentRail.getOppositeDirection(Direction.RIGHT);
+			} else if (direction == Direction.UP) {
+				direction = currentRail.getOppositeDirection(Direction.DOWN);
+			} else if (direction == Direction.DOWN) {
+				direction = currentRail.getOppositeDirection(Direction.UP);
 			}
 
-			if (squareToMoveTo == null)
-				return;
+			setSquareToMoveTo();
 
+			// if (squareToMoveTo == null) {
+			// direction = currentRail.getOppositeDirection(this.direction);
+			// setSquareToMoveTo();
+			// }
+
+			// System.out.println("squareToMoveTo 2 = " + squareToMoveTo);
+			System.out.println("direction 2 = " + direction);
 			Rail railToMoveTo = (Rail) squareToMoveTo.inventory.getObjectWithTemplateId(Templates.RAIL.templateId);
+			// if (railToMoveTo == null) {
+			// direction = currentRail.getOppositeDirection(this.direction);
+			// setSquareToMoveTo();
+			// railToMoveTo = (Rail)
+			// squareToMoveTo.inventory.getObjectWithTemplateId(Templates.RAIL.templateId);
+			// }
+			// System.out.println("squareToMoveTo 3 = " + squareToMoveTo);
+			// System.out.println("direction 3 = " + direction);
 
-			if (railToMoveTo == null)
-				return;
+			// if (railToMoveTo == null)
+			// return;
 
-			if (squareToMoveTo.inventory.containsObjectWithTemplateId(Templates.RAIL.templateId)
-					&& squareToMoveTo.inventory.canShareSquare) {
+			if (railToMoveTo != null && squareToMoveTo.inventory.canShareSquare) {
 				this.setPrimaryAnimation(new AnimationStraightLine(this, 1f, squareToMoveTo) {
 					@Override
 					public void runCompletionAlgorightm(boolean wait) {
@@ -74,52 +92,22 @@ public class MineCart extends GameObject {
 
 			}
 
+			// if()
+
 			// Redirect -
-			if (right) {
-				this.right = false;
-				if (railToMoveTo.down) {
-					this.down = true;
-				} else if (railToMoveTo.up) {
-					this.up = true;
-				} else if (railToMoveTo.right) {
-					this.right = true;
-				} else {
-					this.left = true;
-				}
-			} else if (left) {
-				this.left = false;
-				if (railToMoveTo.down) {
-					this.down = true;
-				} else if (railToMoveTo.up) {
-					this.up = true;
-				} else if (railToMoveTo.left) {
-					this.left = true;
-				} else {
-					this.right = true;
-				}
-			} else if (up) {
-				this.up = false;
-				if (railToMoveTo.up) {
-					this.up = true;
-				} else if (railToMoveTo.right) {
-					this.right = true;
-				} else if (railToMoveTo.left) {
-					this.left = true;
-				} else {
-					down = true;
-				}
-			} else if (down) {
-				this.down = false;
-				if (railToMoveTo.right) {
-					this.right = true;
-				} else if (railToMoveTo.down) {
-					this.down = true;
-				} else if (railToMoveTo.left) {
-					this.left = true;
-				} else {
-					up = true;
-				}
-			}
+		}
+	}
+
+	public void setSquareToMoveTo() {
+
+		if (direction == Direction.RIGHT) {
+			squareToMoveTo = squareGameObjectIsOn.getSquareToRightOf();
+		} else if (direction == Direction.LEFT) {
+			squareToMoveTo = squareGameObjectIsOn.getSquareToLeftOf();
+		} else if (direction == Direction.UP) {
+			squareToMoveTo = squareGameObjectIsOn.getSquareAbove();
+		} else if (direction == Direction.DOWN) {
+			squareToMoveTo = squareGameObjectIsOn.getSquareBelow();
 		}
 	}
 
