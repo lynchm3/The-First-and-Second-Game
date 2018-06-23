@@ -2,8 +2,10 @@ package com.marklynch.level.constructs.bounds.structure.puzzleroom;
 
 import java.util.ArrayList;
 
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
 public class PuzzleRoomMineCart extends StructureRoom {
@@ -19,6 +21,8 @@ public class PuzzleRoomMineCart extends StructureRoom {
 
 		this.posX = posX;
 		this.posY = posY;
+
+		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 2], null, false, false, true, true);
 	}
 
 }

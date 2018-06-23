@@ -26,6 +26,7 @@ import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Mirror;
 import com.marklynch.objects.Orb;
 import com.marklynch.objects.PressurePlate;
+import com.marklynch.objects.Rail;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Searchable;
@@ -275,6 +276,8 @@ public class Templates {
 	public static Wall WALL;
 
 	public static Wall FENCE;
+
+	public static Rail RAIL;
 
 	public static Vein VEIN;
 

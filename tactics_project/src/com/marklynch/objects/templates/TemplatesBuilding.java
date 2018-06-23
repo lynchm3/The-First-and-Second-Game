@@ -6,6 +6,7 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.Fence;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Rail;
 import com.marklynch.objects.Wall;
 
 public class TemplatesBuilding {
@@ -60,6 +61,16 @@ public class TemplatesBuilding {
 		Templates.FENCE.anchorY = 0;
 		Templates.FENCE.templateId = GameObject.generateNewTemplateId();
 		Templates.FENCE.flipYAxisInMirror = false;
+
+		Templates.RAIL = new Rail();
+		Templates.RAIL.name = "rail";
+		Templates.RAIL.isFloorObject = true;
+		Templates.RAIL.imageTexturePath = "rail.png";
+		Templates.RAIL.imageTexture = getGlobalImage(Templates.RAIL.imageTexturePath, true);
+		Templates.RAIL.totalHealth = Templates.RAIL.remainingHealth = 100;
+		Templates.RAIL.weight = 45f;
+		Templates.RAIL.value = 29;
+		Templates.RAIL.templateId = GameObject.generateNewTemplateId();
 	}
 
 }

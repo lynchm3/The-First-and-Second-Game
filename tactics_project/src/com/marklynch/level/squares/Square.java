@@ -28,6 +28,7 @@ import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.MapMarker;
+import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
@@ -1138,6 +1139,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		if (inventory.contains(BrokenGlass.class)) {
 			cost = 10;
 		} else if (inventory.contains(Actor.class)) {
+			cost = 10;
+		} else if (inventory.contains(PressurePlate.class)) {
 			cost = 10;
 		} else if (this.imageTexture == Square.STONE_TEXTURE) {
 			cost = 1;
