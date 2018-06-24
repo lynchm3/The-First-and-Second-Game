@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Floor;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Switch;
@@ -33,18 +34,16 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 2], null, Direction.DOWN, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 4][posY + 2], null, Direction.LEFT, Direction.RIGHT);
-		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 2], null, Direction.LEFT, Direction.RIGHT);
-		Templates.RAIL.makeCopy(Level.squares[posX + 6][posY + 2], null, Direction.LEFT, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 2], null, Direction.LEFT, Direction.DOWN);
 
 		// right
-		Templates.RAIL.makeCopy(Level.squares[posX + 6][posY + 3], null, Direction.UP, Direction.DOWN);
-		Templates.RAIL.makeCopy(Level.squares[posX + 6][posY + 4], null, Direction.UP, Direction.DOWN);
-		Templates.RAIL.makeCopy(Level.squares[posX + 6][posY + 5], null, Direction.UP, Direction.DOWN);
-		Templates.RAIL.makeCopy(Level.squares[posX + 6][posY + 6], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 3], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 4], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 5], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 6], null, Direction.UP, Direction.DOWN);
 
 		// bottom
-		Templates.RAIL.makeCopy(Level.squares[posX + 6][posY + 7], null, Direction.LEFT, Direction.UP);
-		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 7], null, Direction.LEFT, Direction.RIGHT);
+		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 7], null, Direction.UP, Direction.LEFT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 4][posY + 7], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 3][posY + 7], null, Direction.LEFT, Direction.RIGHT);
 		Rail switchable = Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 7], null, Direction.RIGHT,
@@ -64,8 +63,20 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		// Second loop
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 8], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 9], null, Direction.UP, Direction.DOWN);
-		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 10], null, Direction.UP, Direction.DOWN);
-		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 11], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL_INVISIBLE.makeCopy(Level.squares[posX + 2][posY + 10], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL_INVISIBLE.makeCopy(Level.squares[posX + 2][posY + 11], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL_INVISIBLE.makeCopy(Level.squares[posX + 2][posY + 12], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 13], null, Direction.UP, Direction.DOWN);// lands here
+		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 14], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 15], null, Direction.UP, Direction.DOWN);
+
+		Square voidSquare = Level.squares[posX][posY];
+		for (int i = 0; i < totalWidthInSquares; i++) {
+			for (int j = 10; j < 10 + 3; j++) {
+				Templates.VOID_HOLE.makeCopy(Level.squares[posX + i][posY + j], null, voidSquare);
+				Level.squares[posX + i][posY + j].imageTexture = Square.VOID_SQUARE;
+			}
+		}
 
 		Templates.MINE_CART.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.RIGHT);
 	}

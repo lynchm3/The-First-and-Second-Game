@@ -64,7 +64,7 @@ public class TemplatesBuilding {
 		Templates.FENCE.flipYAxisInMirror = false;
 
 		Templates.RAIL = new Rail();
-		Templates.RAIL.name = "rail";
+		Templates.RAIL.name = "Rail";
 		Templates.RAIL.imageTexturePath = "rail.png";
 		Rail.imageTextureLeftRight = getGlobalImage("rail.png", true);
 		Rail.imageTextureUpDown = getGlobalImage("rail_up_down.png", true);
@@ -77,6 +77,15 @@ public class TemplatesBuilding {
 		Templates.RAIL.weight = 45f;
 		Templates.RAIL.value = 29;
 		Templates.RAIL.templateId = GameObject.generateNewTemplateId();
+
+		Templates.RAIL_INVISIBLE = new Rail();
+		Templates.RAIL_INVISIBLE.name = "RAIL_INVISIBLE";
+		Templates.RAIL_INVISIBLE.hiding = true;
+		Templates.RAIL_INVISIBLE.imageTexture = getGlobalImage(Templates.RAIL_INVISIBLE.imageTexturePath, true);
+		Templates.RAIL_INVISIBLE.totalHealth = Templates.RAIL_INVISIBLE.remainingHealth = 100;
+		Templates.RAIL_INVISIBLE.weight = 45f;
+		Templates.RAIL_INVISIBLE.value = 29;
+		Templates.RAIL_INVISIBLE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.MINE_CART = new MineCart();
 		Templates.MINE_CART.name = "Mine Cart";

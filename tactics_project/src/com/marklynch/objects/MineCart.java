@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 
@@ -70,7 +69,7 @@ public class MineCart extends GameObject {
 				if (gamObject.isFloorObject)
 					continue;
 
-				gamObject.setPrimaryAnimation(new AnimationStraightLine(this, 0.5f, array) {
+				gamObject.setPrimaryAnimation(new AnimationStraightLine(this, 0.5f, true, array) {
 					@Override
 					public void runCompletionAlgorightm(boolean wait) {
 						super.runCompletionAlgorightm(wait);
@@ -92,8 +91,7 @@ public class MineCart extends GameObject {
 		// System.out.println("squareToMoveTo 1 = " + squareToMoveTo);
 		// System.out.println("direction 1 = " + direction);
 
-		Rail currentRail = (Rail) oldSquareAndDirection.square.inventory
-				.getObjectWithTemplateId(Templates.RAIL.templateId);
+		Rail currentRail = (Rail) oldSquareAndDirection.square.inventory.getGameObjectOfClass(Rail.class);
 
 		if (currentRail == null)
 			return newSquareAndDirection;
@@ -121,13 +119,12 @@ public class MineCart extends GameObject {
 		// System.out.println("squareToMoveTo 2 = " + squareToMoveTo);
 		System.out.println("direction 2 = " + direction);
 
-		Rail railToMoveTo = (Rail) newSquareAndDirection.square.inventory
-				.getObjectWithTemplateId(Templates.RAIL.templateId);
+		Rail railToMoveTo = (Rail) newSquareAndDirection.square.inventory.getGameObjectOfClass(Rail.class);
 		// if (railToMoveTo == null) {
 		// direction = currentRail.getOppositeDirection(this.direction);
 		// setSquareToMoveTo();
 		// railToMoveTo = (Rail)
-		// squareToMoveTo.inventory.getObjectWithTemplateId(Templates.RAIL.templateId);
+		// squareToMoveTo.inventory..getGameObjectOfClass(Rail.class);
 		// }
 		// System.out.println("squareToMoveTo 3 = " + squareToMoveTo);
 		// System.out.println("direction 3 = " + direction);

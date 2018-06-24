@@ -60,9 +60,9 @@ public class Game {
 	// public static int playerStartPosX = 3;
 	// public static int playerStartPosY = 3;
 
-	// Bridge puzzle room
-	public static int playerStartPosX = 99;
-	public static int playerStartPosY = 99;
+	// Minecart puzzle room
+	public static int playerStartPosX = 101;
+	public static int playerStartPosY = 122;
 
 	// Lake
 	// public static int playerStartPosX = 103;

@@ -16,7 +16,7 @@ public class AnimationStraightLine extends Animation {
 	GameObject projectileObject;
 	float rotationSpeed = 0;
 
-	public AnimationStraightLine(GameObject projectileObject, float speed, Square... targetSquares) {
+	public AnimationStraightLine(GameObject projectileObject, float speed, boolean blockAI, Square... targetSquares) {
 
 		super(projectileObject, projectileObject, targetSquares[targetSquares.length - 1]);
 		if (!runAnimation)
@@ -33,7 +33,7 @@ public class AnimationStraightLine extends Animation {
 		else
 			this.rotationSpeed = rotationSpeed;
 
-		blockAI = true;
+		blockAI = blockAI;
 
 		// projectileObject.squareGameObjectIsOn.inventory.remove(projectileObject);
 
