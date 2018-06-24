@@ -45,7 +45,8 @@ public class MineCart extends GameObject {
 		currentSquareAndDirection.square = this.squareGameObjectIsOn;
 		for (int i = 0; i < 4; i++) {
 			currentSquareAndDirection = move(currentSquareAndDirection);
-			if (currentSquareAndDirection.square != null && currentSquareAndDirection.direction != null
+			if (currentSquareAndDirection != null && currentSquareAndDirection.square != null
+					&& currentSquareAndDirection.direction != null
 					&& currentSquareAndDirection.square != this.squareGameObjectIsOn) {
 				squaresForAnimation.add(currentSquareAndDirection);
 			} else {
@@ -57,9 +58,6 @@ public class MineCart extends GameObject {
 		if (squaresForAnimation.size() > 0) {
 			final Square[] array = new Square[squaresForAnimation.size()];
 			for (int i = 0; i < squaresForAnimation.size(); i++) {
-				System.out.println("squaresForAnimation.get(" + i + ").square  = " + squaresForAnimation.get(i).square);
-				System.out.println(
-						"squaresForAnimation.get(" + i + ").direction  = " + squaresForAnimation.get(i).direction);
 				array[i] = squaresForAnimation.get(i).square;
 			}
 
@@ -106,6 +104,10 @@ public class MineCart extends GameObject {
 			newSquareAndDirection.direction = currentRail.getOppositeDirection(Direction.UP);
 		}
 
+		System.out.println("oldSquareAndDirection.direction = " + oldSquareAndDirection.direction);
+
+		System.out.println("newSquareAndDirection.direction = " + newSquareAndDirection.direction);
+
 		if (newSquareAndDirection.direction == null)
 			return newSquareAndDirection;
 
@@ -120,6 +122,21 @@ public class MineCart extends GameObject {
 		System.out.println("direction 2 = " + direction);
 
 		Rail railToMoveTo = (Rail) newSquareAndDirection.square.inventory.getGameObjectOfClass(Rail.class);
+
+		if (newSquareAndDirection.direction == Direction.RIGHT && railToMoveTo.direction1 != Direction.LEFT
+				&& railToMoveTo.direction2 != Direction.LEFT) {
+			return null;
+		} else if (newSquareAndDirection.direction == Direction.LEFT && railToMoveTo.direction1 != Direction.RIGHT
+				&& railToMoveTo.direction2 != Direction.RIGHT) {
+			return null;
+		} else if (newSquareAndDirection.direction == Direction.UP && railToMoveTo.direction1 != Direction.DOWN
+				&& railToMoveTo.direction2 != Direction.DOWN) {
+			return null;
+		} else if (newSquareAndDirection.direction == Direction.DOWN && railToMoveTo.direction1 != Direction.UP
+				&& railToMoveTo.direction2 != Direction.UP) {
+			return null;
+		}
+
 		// if (railToMoveTo == null) {
 		// direction = currentRail.getOppositeDirection(this.direction);
 		// setSquareToMoveTo();
