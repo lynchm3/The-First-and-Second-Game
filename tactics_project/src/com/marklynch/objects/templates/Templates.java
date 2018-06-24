@@ -279,6 +279,7 @@ public class Templates {
 	public static Wall FENCE;
 
 	public static Rail RAIL;
+
 	public static MineCart MINE_CART;
 
 	public static Vein VEIN;

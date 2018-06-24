@@ -65,8 +65,13 @@ public class TemplatesBuilding {
 
 		Templates.RAIL = new Rail();
 		Templates.RAIL.name = "rail";
-		Templates.RAIL.isFloorObject = true;
 		Templates.RAIL.imageTexturePath = "rail.png";
+		Rail.imageTextureLeftRight = getGlobalImage("rail.png", true);
+		Rail.imageTextureUpDown = getGlobalImage("rail_up_down.png", true);
+		Rail.imageTextureLeftUp = getGlobalImage("rail_left_up.png", true);
+		Rail.imageTextureRightUp = getGlobalImage("rail_right_up.png", true);
+		Rail.imageTextureLeftDown = getGlobalImage("rail_left_down.png", true);
+		Rail.imageTextureRightDown = getGlobalImage("rail_right_down.png", true);
 		Templates.RAIL.imageTexture = getGlobalImage(Templates.RAIL.imageTexturePath, true);
 		Templates.RAIL.totalHealth = Templates.RAIL.remainingHealth = 100;
 		Templates.RAIL.weight = 45f;
@@ -75,7 +80,6 @@ public class TemplatesBuilding {
 
 		Templates.MINE_CART = new MineCart();
 		Templates.MINE_CART.name = "Mine Cart";
-		Templates.MINE_CART.isFloorObject = true;
 		Templates.MINE_CART.imageTexture = getGlobalImage("mine_cart.png", true);
 		Templates.MINE_CART.totalHealth = Templates.MINE_CART.remainingHealth = 300;
 		Templates.MINE_CART.weight = 68f;
