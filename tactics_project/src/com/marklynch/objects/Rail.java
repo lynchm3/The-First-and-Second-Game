@@ -7,7 +7,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.utils.Texture;
 
-public class Rail extends GameObject {
+public class Rail extends GameObject implements SwitchListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	Direction direction1;
@@ -39,34 +39,8 @@ public class Rail extends GameObject {
 		super.setAttributesForCopy(rail, square, owner);
 		rail.direction1 = direction1;
 		rail.direction2 = direction2;
-		if ((direction1 == Direction.LEFT || direction1 == Direction.RIGHT)
-				&& (direction2 == Direction.LEFT || direction2 == Direction.RIGHT)) {
-			// left right
-			rail.imageTexture = imageTextureLeftRight;
-		} else if ((direction1 == Direction.UP || direction1 == Direction.DOWN)
-				&& (direction2 == Direction.UP || direction2 == Direction.DOWN)) {
-			// up down
-			rail.imageTexture = imageTextureUpDown;
-		} else if ((direction1 == Direction.UP || direction1 == Direction.LEFT)
-				&& (direction2 == Direction.UP || direction2 == Direction.LEFT)) {
-			// up left
-			rail.imageTexture = imageTextureLeftUp;
-		} else if ((direction1 == Direction.DOWN || direction1 == Direction.RIGHT)
-				&& (direction2 == Direction.DOWN || direction2 == Direction.RIGHT)) {
-			// down right
-			rail.imageTexture = imageTextureRightDown;
-		} else if ((direction1 == Direction.UP || direction1 == Direction.RIGHT)
-				&& (direction2 == Direction.UP || direction2 == Direction.RIGHT)) {
-			// up right
-			rail.imageTexture = imageTextureRightUp;
-		} else if ((direction1 == Direction.DOWN || direction1 == Direction.LEFT)
-				&& (direction2 == Direction.DOWN || direction2 == Direction.LEFT)) {
-			// down left
-			rail.imageTexture = imageTextureLeftDown;
-		} else {
-			rail.imageTexture = imageTextureLeftRight;
 
-		}
+		rail.updateImageTexture();
 
 		return rail;
 	}
@@ -78,6 +52,61 @@ public class Rail extends GameObject {
 			return direction1;
 		}
 		return null;
+	}
+
+	@Override
+	public void zwitch(Switch zwitch) {
+		// rotate 90 degrees
+		// if(direction)
+		direction1 = rotate90Degrees(direction1);
+		direction2 = rotate90Degrees(direction2);
+		updateImageTexture();
+
+	}
+
+	public Direction rotate90Degrees(Direction direction) {
+		if (direction == Direction.RIGHT) {
+			return Direction.DOWN;
+		} else if (direction == Direction.DOWN) {
+			return Direction.LEFT;
+		} else if (direction == Direction.LEFT) {
+			return Direction.UP;
+		} else if (direction == Direction.UP) {
+			return Direction.RIGHT;
+		}
+		return Direction.DOWN;
+
+	}
+
+	public void updateImageTexture() {
+		if ((direction1 == Direction.LEFT || direction1 == Direction.RIGHT)
+				&& (direction2 == Direction.LEFT || direction2 == Direction.RIGHT)) {
+			// left right
+			imageTexture = imageTextureLeftRight;
+		} else if ((direction1 == Direction.UP || direction1 == Direction.DOWN)
+				&& (direction2 == Direction.UP || direction2 == Direction.DOWN)) {
+			// up down
+			imageTexture = imageTextureUpDown;
+		} else if ((direction1 == Direction.UP || direction1 == Direction.LEFT)
+				&& (direction2 == Direction.UP || direction2 == Direction.LEFT)) {
+			// up left
+			imageTexture = imageTextureLeftUp;
+		} else if ((direction1 == Direction.DOWN || direction1 == Direction.RIGHT)
+				&& (direction2 == Direction.DOWN || direction2 == Direction.RIGHT)) {
+			// down right
+			imageTexture = imageTextureRightDown;
+		} else if ((direction1 == Direction.UP || direction1 == Direction.RIGHT)
+				&& (direction2 == Direction.UP || direction2 == Direction.RIGHT)) {
+			// up right
+			imageTexture = imageTextureRightUp;
+		} else if ((direction1 == Direction.DOWN || direction1 == Direction.LEFT)
+				&& (direction2 == Direction.DOWN || direction2 == Direction.LEFT)) {
+			// down left
+			imageTexture = imageTextureLeftDown;
+		} else {
+			imageTexture = imageTextureLeftRight;
+		}
+
 	}
 
 }

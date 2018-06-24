@@ -2,9 +2,12 @@ package com.marklynch.level.constructs.bounds.structure.puzzleroom;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
+import com.marklynch.objects.Rail;
+import com.marklynch.objects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
@@ -41,13 +44,17 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 7], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 4][posY + 7], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 3][posY + 7], null, Direction.LEFT, Direction.RIGHT);
-		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 7], null, Direction.RIGHT, Direction.UP);
+		Rail switchable = Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 7], null, Direction.RIGHT,
+				Direction.UP);
 
 		// left
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 3], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 4], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 5], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 6], null, Direction.UP, Direction.DOWN);
+
+		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + 4][posY + 5], null, switchable,
+				Switch.SWITCH_TYPE.OPEN_CLOSE, 5);
 
 		Templates.MINE_CART.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.RIGHT);
 	}
