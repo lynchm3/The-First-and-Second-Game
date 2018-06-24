@@ -33,86 +33,122 @@ public class MineCart extends GameObject {
 		return mineCart;
 	}
 
-	Square squareToMoveTo = null;
-
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-		if (squareGameObjectIsOn != null) {
-			squareToMoveTo = null;
-			// System.out.println("squareToMoveTo 1 = " + squareToMoveTo);
-			System.out.println("direction 1 = " + direction);
+		if (squareGameObjectIsOn == null)
+			return;
 
-			Rail currentRail = (Rail) this.squareGameObjectIsOn.inventory
-					.getObjectWithTemplateId(Templates.RAIL.templateId);
+		ArrayList<SquareAndDirection> squaresForAnimation = new ArrayList<SquareAndDirection>();
 
-			currentRail = (Rail) this.squareGameObjectIsOn.inventory.getObjectWithTemplateId(Templates.RAIL.templateId);
-			if (direction == Direction.RIGHT) {
-				direction = currentRail.getOppositeDirection(Direction.LEFT);
-			} else if (direction == Direction.LEFT) {
-				direction = currentRail.getOppositeDirection(Direction.RIGHT);
-			} else if (direction == Direction.UP) {
-				direction = currentRail.getOppositeDirection(Direction.DOWN);
-			} else if (direction == Direction.DOWN) {
-				direction = currentRail.getOppositeDirection(Direction.UP);
-			}
-
-			if (direction == null)
-				return;
-
-			setSquareToMoveTo();
-
-			// if (squareToMoveTo == null) {
-			// direction = currentRail.getOppositeDirection(this.direction);
-			// setSquareToMoveTo();
-			// }
-
-			// System.out.println("squareToMoveTo 2 = " + squareToMoveTo);
-			System.out.println("direction 2 = " + direction);
-
-			Rail railToMoveTo = (Rail) squareToMoveTo.inventory.getObjectWithTemplateId(Templates.RAIL.templateId);
-			// if (railToMoveTo == null) {
-			// direction = currentRail.getOppositeDirection(this.direction);
-			// setSquareToMoveTo();
-			// railToMoveTo = (Rail)
-			// squareToMoveTo.inventory.getObjectWithTemplateId(Templates.RAIL.templateId);
-			// }
-			// System.out.println("squareToMoveTo 3 = " + squareToMoveTo);
-			// System.out.println("direction 3 = " + direction);
-
-			// if (railToMoveTo == null)
-			// return;
-
-			if (railToMoveTo != null && squareToMoveTo.inventory.canShareSquare) {
-				this.setPrimaryAnimation(new AnimationStraightLine(this, 1f, squareToMoveTo) {
-					@Override
-					public void runCompletionAlgorightm(boolean wait) {
-						super.runCompletionAlgorightm(wait);
-						postRangedAnimation(MineCart.this, squareToMoveTo);
-						// postRangedAnimation(arrow);
-					}
-				});
+		SquareAndDirection currentSquareAndDirection = new SquareAndDirection();
+		currentSquareAndDirection.direction = this.direction;
+		currentSquareAndDirection.square = this.squareGameObjectIsOn;
+		for (int i = 0; i < 4; i++) {
+			currentSquareAndDirection = move(currentSquareAndDirection);
+			if (currentSquareAndDirection.square != null && currentSquareAndDirection.direction != null
+					&& currentSquareAndDirection.square != this.squareGameObjectIsOn) {
+				squaresForAnimation.add(currentSquareAndDirection);
 			} else {
+				break;
+			}
+		}
 
+		System.out.println("squaresForAnimation.size()  = " + squaresForAnimation.size());
+		if (squaresForAnimation.size() > 0) {
+			final Square[] array = new Square[squaresForAnimation.size()];
+			for (int i = 0; i < squaresForAnimation.size(); i++) {
+				System.out.println("squaresForAnimation.get(" + i + ").square  = " + squaresForAnimation.get(i).square);
+				System.out.println(
+						"squaresForAnimation.get(" + i + ").direction  = " + squaresForAnimation.get(i).direction);
+				array[i] = squaresForAnimation.get(i).square;
 			}
 
-			// if()
-
-			// Redirect -
+			this.direction = squaresForAnimation.get(squaresForAnimation.size() - 1).direction;
+			this.setPrimaryAnimation(new AnimationStraightLine(this, 1f, array) {
+				@Override
+				public void runCompletionAlgorightm(boolean wait) {
+					super.runCompletionAlgorightm(wait);
+					postRangedAnimation(MineCart.this, array);
+					// postRangedAnimation(arrow);
+				}
+			});
 		}
 	}
 
-	public void setSquareToMoveTo() {
+	public class SquareAndDirection {
+		public Square square;
+		public Direction direction;
+	}
+
+	public SquareAndDirection move(SquareAndDirection oldSquareAndDirection) {
+		SquareAndDirection newSquareAndDirection = new SquareAndDirection();
+		// System.out.println("squareToMoveTo 1 = " + squareToMoveTo);
+		// System.out.println("direction 1 = " + direction);
+
+		Rail currentRail = (Rail) oldSquareAndDirection.square.inventory
+				.getObjectWithTemplateId(Templates.RAIL.templateId);
+
+		if (currentRail == null)
+			return newSquareAndDirection;
+
+		if (oldSquareAndDirection.direction == Direction.RIGHT) {
+			newSquareAndDirection.direction = currentRail.getOppositeDirection(Direction.LEFT);
+		} else if (oldSquareAndDirection.direction == Direction.LEFT) {
+			newSquareAndDirection.direction = currentRail.getOppositeDirection(Direction.RIGHT);
+		} else if (oldSquareAndDirection.direction == Direction.UP) {
+			newSquareAndDirection.direction = currentRail.getOppositeDirection(Direction.DOWN);
+		} else if (oldSquareAndDirection.direction == Direction.DOWN) {
+			newSquareAndDirection.direction = currentRail.getOppositeDirection(Direction.UP);
+		}
+
+		if (newSquareAndDirection.direction == null)
+			return newSquareAndDirection;
+
+		newSquareAndDirection.square = getSquareToMoveTo(newSquareAndDirection.direction, oldSquareAndDirection.square);
+
+		// if (squareToMoveTo == null) {
+		// direction = currentRail.getOppositeDirection(this.direction);
+		// setSquareToMoveTo();
+		// }
+
+		// System.out.println("squareToMoveTo 2 = " + squareToMoveTo);
+		System.out.println("direction 2 = " + direction);
+
+		Rail railToMoveTo = (Rail) newSquareAndDirection.square.inventory
+				.getObjectWithTemplateId(Templates.RAIL.templateId);
+		// if (railToMoveTo == null) {
+		// direction = currentRail.getOppositeDirection(this.direction);
+		// setSquareToMoveTo();
+		// railToMoveTo = (Rail)
+		// squareToMoveTo.inventory.getObjectWithTemplateId(Templates.RAIL.templateId);
+		// }
+		// System.out.println("squareToMoveTo 3 = " + squareToMoveTo);
+		// System.out.println("direction 3 = " + direction);
+
+		// if (railToMoveTo == null)
+		// return;
+
+		if (railToMoveTo != null && newSquareAndDirection.square.inventory.canShareSquare) {
+		} else {
+			newSquareAndDirection.square = null;
+		}
+
+		return newSquareAndDirection;
+	}
+
+	public Square getSquareToMoveTo(Direction direction, Square currentSquare) {
 
 		if (direction == Direction.RIGHT) {
-			squareToMoveTo = squareGameObjectIsOn.getSquareToRightOf();
+			return currentSquare.getSquareToRightOf();
 		} else if (direction == Direction.LEFT) {
-			squareToMoveTo = squareGameObjectIsOn.getSquareToLeftOf();
+			return currentSquare.getSquareToLeftOf();
 		} else if (direction == Direction.UP) {
-			squareToMoveTo = squareGameObjectIsOn.getSquareAbove();
+			return currentSquare.getSquareAbove();
 		} else if (direction == Direction.DOWN) {
-			squareToMoveTo = squareGameObjectIsOn.getSquareBelow();
+			return currentSquare.getSquareBelow();
 		}
+		return null;
 	}
 
 }
