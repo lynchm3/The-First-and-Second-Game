@@ -11,7 +11,6 @@ public class PressurePlate extends Switch {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	boolean pressed = false;
 	int targetWeight = 10;
 
 	public PressurePlate() {
@@ -58,13 +57,18 @@ public class PressurePlate extends Switch {
 		}
 
 		if (pressed == false && weightOnPlate >= targetWeight) {
-			use();
 			pressed = true;
-		} else if (pressed == true && weightOnPlate < targetWeight) {
 			use();
+		} else if (pressed == true && weightOnPlate < targetWeight) {
 			pressed = false;
+			use();
 		}
 
+	}
+
+	@Override
+	public void use() {
+		switchListener.zwitch(this);
 	}
 
 	public PressurePlate makeCopy(Square square, Actor owner, SwitchListener switchListener, SWITCH_TYPE switchType,

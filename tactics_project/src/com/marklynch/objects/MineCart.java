@@ -57,6 +57,9 @@ public class MineCart extends GameObject {
 				direction = currentRail.getOppositeDirection(Direction.UP);
 			}
 
+			if (direction == null)
+				return;
+
 			setSquareToMoveTo();
 
 			// if (squareToMoveTo == null) {
@@ -66,6 +69,7 @@ public class MineCart extends GameObject {
 
 			// System.out.println("squareToMoveTo 2 = " + squareToMoveTo);
 			System.out.println("direction 2 = " + direction);
+
 			Rail railToMoveTo = (Rail) squareToMoveTo.inventory.getObjectWithTemplateId(Templates.RAIL.templateId);
 			// if (railToMoveTo == null) {
 			// direction = currentRail.getOppositeDirection(this.direction);

@@ -58,8 +58,14 @@ public class Rail extends GameObject implements SwitchListener {
 	public void zwitch(Switch zwitch) {
 		// rotate 90 degrees
 		// if(direction)
-		direction1 = rotate90Degrees(direction1);
-		direction2 = rotate90Degrees(direction2);
+		if (zwitch.pressed) {
+			direction1 = rotate90Degrees(direction1);
+			direction2 = rotate90Degrees(direction2);
+		} else {
+
+			direction1 = rotateMinus90Degrees(direction1);
+			direction2 = rotateMinus90Degrees(direction2);
+		}
 		updateImageTexture();
 
 	}
@@ -73,6 +79,20 @@ public class Rail extends GameObject implements SwitchListener {
 			return Direction.UP;
 		} else if (direction == Direction.UP) {
 			return Direction.RIGHT;
+		}
+		return Direction.DOWN;
+
+	}
+
+	public Direction rotateMinus90Degrees(Direction direction) {
+		if (direction == Direction.RIGHT) {
+			return Direction.UP;
+		} else if (direction == Direction.DOWN) {
+			return Direction.RIGHT;
+		} else if (direction == Direction.LEFT) {
+			return Direction.DOWN;
+		} else if (direction == Direction.UP) {
+			return Direction.LEFT;
 		}
 		return Direction.DOWN;
 

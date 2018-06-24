@@ -20,6 +20,8 @@ public class Switch extends GameObject {
 	public SWITCH_TYPE switchType;
 	public AILine aiLine;
 
+	boolean pressed = false;
+
 	public enum SWITCH_TYPE {
 		OPEN_CLOSE, LOCK_UNLOCK
 	}
@@ -57,6 +59,7 @@ public class Switch extends GameObject {
 	}
 
 	public void use() {
+		pressed = !pressed;
 		switchListener.zwitch(this);
 	}
 
