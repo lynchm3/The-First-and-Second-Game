@@ -26,6 +26,8 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 
+		// Top loop
+
 		// top
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 2], null, Direction.DOWN, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.LEFT, Direction.RIGHT);
@@ -55,6 +57,12 @@ public class PuzzleRoomMineCart extends StructureRoom {
 
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + 4][posY + 5], null, switchable,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 5);
+
+		// Second loop
+		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 8], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 9], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 10], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 11], null, Direction.UP, Direction.DOWN);
 
 		Templates.MINE_CART.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.RIGHT);
 	}
