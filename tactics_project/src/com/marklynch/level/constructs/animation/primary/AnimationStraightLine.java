@@ -48,6 +48,10 @@ public class AnimationStraightLine extends Animation {
 
 		distanceToCoverX = this.targetX - this.x;
 		distanceToCoverY = this.targetY - this.y;
+
+		distanceCoveredX = 0;
+		distanceCoveredY = 0;
+
 		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
 
 		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
@@ -73,11 +77,12 @@ public class AnimationStraightLine extends Animation {
 		distanceCoveredX += distanceX;
 		distanceCoveredY += distanceY;
 
+		System.out.println("updating for index " + index);
+
 		if (distanceToCoverX == 0 && distanceToCoverY == 0) {
 
 			index++;
 			if (index >= targetSquares.length) {
-				System.out.println("DONE 1");
 				runCompletionAlgorightm(true);
 			} else {
 				setupForNextSquare();
@@ -87,7 +92,6 @@ public class AnimationStraightLine extends Animation {
 
 			index++;
 			if (index >= targetSquares.length) {
-				System.out.println("DONE 2");
 				offsetX = 0;
 				offsetY = 0;
 				runCompletionAlgorightm(true);

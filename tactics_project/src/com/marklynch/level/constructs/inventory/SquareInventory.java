@@ -9,6 +9,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Floor;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.MineCart;
 import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.WaterBody;
@@ -251,6 +252,16 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		{
 			return 1;
 		} else if (b instanceof Fish) {
+			return -1;
+		}
+
+		if (a instanceof MineCart && b instanceof MineCart) {
+			return 0;
+		} else if (a instanceof MineCart)
+
+		{
+			return 1;
+		} else if (b instanceof MineCart) {
 			return -1;
 		}
 

@@ -65,14 +65,20 @@ public class MineCart extends GameObject {
 			}
 
 			this.direction = squaresForAnimation.get(squaresForAnimation.size() - 1).direction;
-			this.setPrimaryAnimation(new AnimationStraightLine(this, 1f, array) {
-				@Override
-				public void runCompletionAlgorightm(boolean wait) {
-					super.runCompletionAlgorightm(wait);
-					postRangedAnimation(MineCart.this, array);
-					// postRangedAnimation(arrow);
-				}
-			});
+			for (final GameObject gamObject : this.squareGameObjectIsOn.inventory.gameObjects) {
+
+				if (gamObject.isFloorObject)
+					continue;
+
+				gamObject.setPrimaryAnimation(new AnimationStraightLine(this, 0.5f, array) {
+					@Override
+					public void runCompletionAlgorightm(boolean wait) {
+						super.runCompletionAlgorightm(wait);
+						postRangedAnimation(gamObject, array);
+						// postRangedAnimation(arrow);
+					}
+				});
+			}
 		}
 	}
 
@@ -129,7 +135,7 @@ public class MineCart extends GameObject {
 		// if (railToMoveTo == null)
 		// return;
 
-		if (railToMoveTo != null && newSquareAndDirection.square.inventory.canShareSquare) {
+		if (railToMoveTo != null) {// && newSquareAndDirection.square.inventory.canShareSquare) {
 		} else {
 			newSquareAndDirection.square = null;
 		}
