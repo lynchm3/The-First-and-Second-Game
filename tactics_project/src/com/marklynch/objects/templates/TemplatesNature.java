@@ -373,10 +373,15 @@ public class TemplatesNature {
 		Templates.VOID_HOLE.imageTexture = getGlobalImage(Templates.VOID_HOLE.imageTexturePath, true);
 		Templates.VOID_HOLE.templateId = GameObject.generateNewTemplateId();
 
-		Templates.FLOOR = new Floor();
-		Templates.FLOOR.name = "Floor";
-		Templates.FLOOR.imageTexture = Square.STONE_TEXTURE;
-		Templates.FLOOR.templateId = GameObject.generateNewTemplateId();
+		Templates.STONE_FLOOR = new Floor();
+		Templates.STONE_FLOOR.name = "Floor";
+		Templates.STONE_FLOOR.imageTexture = Square.STONE_TEXTURE;
+		Templates.STONE_FLOOR.templateId = GameObject.generateNewTemplateId();
+
+		Templates.CIRCLE_FLOOR = new Floor();
+		Templates.CIRCLE_FLOOR.name = "Floor";
+		Templates.CIRCLE_FLOOR.imageTexture = getGlobalImage("circle.png", true);
+		Templates.CIRCLE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
 	}
 

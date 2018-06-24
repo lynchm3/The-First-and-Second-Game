@@ -387,6 +387,8 @@ public class Templates {
 
 	public static VoidHole VOID_HOLE;
 
-	public static Floor FLOOR;
+	public static Floor STONE_FLOOR;
+
+	public static Floor CIRCLE_FLOOR;
 
 }

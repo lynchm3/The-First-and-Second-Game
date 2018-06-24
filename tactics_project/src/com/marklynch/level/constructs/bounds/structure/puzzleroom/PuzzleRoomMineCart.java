@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
+import com.marklynch.objects.Floor;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.templates.Templates;
@@ -48,6 +49,8 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.RAIL.makeCopy(Level.squares[posX + 3][posY + 7], null, Direction.LEFT, Direction.RIGHT);
 		Rail switchable = Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 7], null, Direction.RIGHT,
 				Direction.UP);
+		Floor floor = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 2][posY + 7], null);
+		floor.drawOffsetRatioY = 0.375f;
 
 		// left
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 3], null, Direction.UP, Direction.DOWN);

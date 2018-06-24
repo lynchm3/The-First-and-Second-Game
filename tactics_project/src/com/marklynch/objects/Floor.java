@@ -11,8 +11,6 @@ public class Floor extends GameObject {
 
 	public Floor() {
 		super();
-
-		// DROP HOLE
 		canBePickedUp = false;
 		fitsInInventory = false;
 		canShareSquare = true;

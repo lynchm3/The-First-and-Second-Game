@@ -73,14 +73,16 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 			if (gameObject.isFloorObject) {
 				gameObjectsGround.add(gameObject);
+				this.gameObjectsGround.sort(this);
 			} else {
 				gameObjectsNonGround.add(gameObject);
+				this.gameObjectsNonGround.sort(this);
 			}
 
 			if (!Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor))
 				Game.level.inanimateObjectsOnGround.add(gameObject);
 
-			this.gameObjects.sort(this);
+			// this.gameObjects.sort(this);
 
 			if (gameObject == Level.player) {
 				Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);

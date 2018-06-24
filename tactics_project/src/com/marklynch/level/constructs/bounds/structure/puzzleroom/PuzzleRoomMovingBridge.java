@@ -127,7 +127,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			activeBridgeSquares = horizontalBridgeSquares;
 
 		for (Square bridgeSquare : activeBridgeSquares) {
-			Floor floor = Templates.FLOOR.makeCopy(null, null);
+			Floor floor = Templates.STONE_FLOOR.makeCopy(null, null);
 
 			// double random = Math.random();
 			//
@@ -151,7 +151,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		for (int i = posX; i < posX + totalWidthInSquares; i++) {
 
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
-				if (Level.squares[i][j].inventory.containsObjectWithTemplateId(Templates.FLOOR.templateId)) {
+				if (Level.squares[i][j].inventory.containsObjectWithTemplateId(Templates.STONE_FLOOR.templateId)) {
 				} else if (!Level.squares[i][j].inventory
 						.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 					Level.squares[i][j].inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
