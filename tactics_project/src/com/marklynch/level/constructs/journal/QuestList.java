@@ -74,8 +74,8 @@ public class QuestList extends ArrayList<Quest> {
 		squaresToRemove.add(Level.squares[x + 10][y + 21]);
 		squaresToRemove.add(Level.squares[x + 11][y + 21]);
 		// 2nd top left entrance
-		squaresToRemove.add(Level.squares[x][y + 31]);
-		squaresToRemove.add(Level.squares[x][y + 32]);
+		// squaresToRemove.add(Level.squares[x][y + 31]);
+		// squaresToRemove.add(Level.squares[x][y + 32]);
 		ArrayList<Wall> extraWalls = new ArrayList<Wall>();
 
 		Structure puzzleStructure = new Structure("Puzzle Structure", structureSections, puzzleStructureRooms, paths,
