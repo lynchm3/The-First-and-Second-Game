@@ -34,10 +34,12 @@ public class PressurePlate extends Switch {
 	@Override
 	public void draw2() {
 		if (Game.showTriggerLines) {
-			if (switchListener instanceof GameObject) {
-				aiLine.target = ((GameObject) switchListener).squareGameObjectIsOn;
+			for (SwitchListener switchListener : switchListeners) {
+				if (switchListener instanceof GameObject) {
+					aiLine.target = ((GameObject) switchListener).squareGameObjectIsOn;
+				}
+				aiLine.draw2();
 			}
-			aiLine.draw2();
 		}
 	}
 
@@ -68,23 +70,27 @@ public class PressurePlate extends Switch {
 
 	@Override
 	public void use() {
-		switchListener.zwitch(this);
+		for (SwitchListener switchListener : switchListeners)
+			switchListener.zwitch(this);
 	}
 
-	public PressurePlate makeCopy(Square square, Actor owner, SwitchListener switchListener, SWITCH_TYPE switchType,
-			int targetWeight) {
+	public PressurePlate makeCopy(Square square, Actor owner, SWITCH_TYPE switchType, int targetWeight,
+			SwitchListener... switchListeners) {
 
 		PressurePlate pressurePlate = new PressurePlate();
 		setInstances(pressurePlate);
 		super.setAttributesForCopy(pressurePlate, square, owner);
 		pressurePlate.actionName = actionName;
 		pressurePlate.actionVerb = actionVerb;
-		pressurePlate.switchListener = switchListener;
+		pressurePlate.switchListeners = switchListeners;
 		pressurePlate.switchType = switchType;
 		pressurePlate.targetWeight = targetWeight;
-		if (switchListener != null && switchListener instanceof GameObject)
-			this.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SWITCH, this,
-					((GameObject) switchListener).squareGameObjectIsOn);
+
+		for (SwitchListener switchListener : switchListeners) {
+			if (switchListener != null && switchListener instanceof GameObject)
+				this.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SWITCH, this,
+						((GameObject) switchListener).squareGameObjectIsOn);
+		}
 
 		return pressurePlate;
 	}

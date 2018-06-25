@@ -16,7 +16,7 @@ public class Switch extends GameObject {
 	public String actionVerb;
 	public RequirementToMeet[] requirementsToMeet;
 
-	public SwitchListener switchListener;
+	public SwitchListener[] switchListeners;
 	public SWITCH_TYPE switchType;
 	public AILine aiLine;
 
@@ -50,34 +50,41 @@ public class Switch extends GameObject {
 	public void draw2() {
 		super.draw1();
 		if (Game.showTriggerLines) {
-			if (switchListener instanceof GameObject) {
-				aiLine.target = ((GameObject) switchListener).squareGameObjectIsOn;
+			for (SwitchListener switchListener : switchListeners) {
+				if (switchListener instanceof GameObject) {
+					aiLine.target = ((GameObject) switchListener).squareGameObjectIsOn;
+				}
+				aiLine.draw2();
 			}
-			aiLine.draw2();
 		}
 		super.draw2();
 	}
 
 	public void use() {
 		pressed = !pressed;
-		switchListener.zwitch(this);
+
+		for (SwitchListener switchListener : switchListeners) {
+			switchListener.zwitch(this);
+		}
 	}
 
-	public Switch makeCopy(Square square, Actor owner, SwitchListener switchListener, SWITCH_TYPE switchType,
-			RequirementToMeet[] requirementsToMeet) {
+	public Switch makeCopy(Square square, Actor owner, SWITCH_TYPE switchType, RequirementToMeet[] requirementsToMeet,
+			SwitchListener... switchListeners) {
 
 		Switch zwitch = new Switch();
 		setInstances(zwitch);
 		super.setAttributesForCopy(zwitch, square, owner);
 		zwitch.actionName = actionName;
 		zwitch.actionVerb = actionVerb;
-		zwitch.switchListener = switchListener;
+		zwitch.switchListeners = switchListeners;
 		zwitch.switchType = switchType;
 		zwitch.requirementsToMeet = requirementsToMeet;
-		if (switchListener != null && switchListener instanceof GameObject)
-			this.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SWITCH, this,
-					((GameObject) switchListener).squareGameObjectIsOn);
+		for (SwitchListener switchListener : switchListeners) {
+			if (switchListener != null && switchListener instanceof GameObject)
+				this.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SWITCH, this,
+						((GameObject) switchListener).squareGameObjectIsOn);
 
+		}
 		return zwitch;
 	}
 

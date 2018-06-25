@@ -77,8 +77,6 @@ public class AnimationStraightLine extends Animation {
 		distanceCoveredX += distanceX;
 		distanceCoveredY += distanceY;
 
-		System.out.println("updating for index " + index);
-
 		if (distanceToCoverX == 0 && distanceToCoverY == 0) {
 
 			index++;

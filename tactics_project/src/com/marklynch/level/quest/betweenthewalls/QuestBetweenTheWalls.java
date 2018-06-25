@@ -121,12 +121,12 @@ public class QuestBetweenTheWalls extends Quest {
 				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE, 2));
 
 		// Antler switch
-		Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[53][19], null, falseWall, Switch.SWITCH_TYPE.OPEN_CLOSE,
-				new RequirementToMeet[] { new StatRequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) });
+		Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[53][19], null, Switch.SWITCH_TYPE.OPEN_CLOSE, new RequirementToMeet[] { new StatRequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) },
+				falseWall);
 
 		// Pressure Plate
-		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[51][21], null, falseWall, Switch.SWITCH_TYPE.OPEN_CLOSE,
-				30);
+		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[51][21], null, Switch.SWITCH_TYPE.OPEN_CLOSE, 30,
+				falseWall);
 
 		// Path to town 24,21 -> 40,21
 		Path pathToTown = new Path(24, 21, 40, 21);

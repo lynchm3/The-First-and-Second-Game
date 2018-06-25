@@ -19,6 +19,7 @@ public class Rail extends GameObject implements SwitchListener {
 	public static Texture imageTextureRightUp;
 	public static Texture imageTextureLeftDown;
 	public static Texture imageTextureRightDown;
+	public boolean turnsClockwiseFirst = true;
 
 	public Rail() {
 		super();
@@ -58,14 +59,28 @@ public class Rail extends GameObject implements SwitchListener {
 	public void zwitch(Switch zwitch) {
 		// rotate 90 degrees
 		// if(direction)
-		if (zwitch.pressed) {
-			direction1 = rotate90Degrees(direction1);
-			direction2 = rotate90Degrees(direction2);
+		if (turnsClockwiseFirst) {
+			if (zwitch.pressed) {
+				direction1 = rotate90Degrees(direction1);
+				direction2 = rotate90Degrees(direction2);
+			} else {
+
+				direction1 = rotateMinus90Degrees(direction1);
+				direction2 = rotateMinus90Degrees(direction2);
+			}
 		} else {
 
-			direction1 = rotateMinus90Degrees(direction1);
-			direction2 = rotateMinus90Degrees(direction2);
+			if (zwitch.pressed) {
+				direction1 = rotateMinus90Degrees(direction1);
+				direction2 = rotateMinus90Degrees(direction2);
+			} else {
+
+				direction1 = rotate90Degrees(direction1);
+				direction2 = rotate90Degrees(direction2);
+			}
 		}
+
+		this.showPow();
 		updateImageTexture();
 
 	}

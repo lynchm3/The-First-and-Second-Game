@@ -45,15 +45,19 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 6], null, Direction.UP, Direction.DOWN);
 
 		// bottom
-		Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 7], null, Direction.UP, Direction.LEFT);
+		Rail switchableRight = Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 7], null, Direction.UP,
+				Direction.LEFT);
+		switchableRight.turnsClockwiseFirst = false;
+		Floor circleFloorRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 7][posY + 7], null);
+		circleFloorRight.drawOffsetRatioY = 0.375f;
 		Templates.RAIL.makeCopy(Level.squares[posX + 6][posY + 7], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 7], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 4][posY + 7], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 3][posY + 7], null, Direction.LEFT, Direction.RIGHT);
-		Rail switchable = Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 7], null, Direction.RIGHT,
+		Rail switchableLeft = Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 7], null, Direction.RIGHT,
 				Direction.UP);
-		Floor floor = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 2][posY + 7], null);
-		floor.drawOffsetRatioY = 0.375f;
+		Floor circleFloorLeft = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 2][posY + 7], null);
+		circleFloorLeft.drawOffsetRatioY = 0.375f;
 
 		// left
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 3], null, Direction.UP, Direction.DOWN);
@@ -61,8 +65,8 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 5], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 6], null, Direction.UP, Direction.DOWN);
 
-		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + 4][posY + 5], null, switchable,
-				Switch.SWITCH_TYPE.OPEN_CLOSE, 5);
+		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + 4][posY + 5], null, Switch.SWITCH_TYPE.OPEN_CLOSE,
+				5, switchableLeft, switchableRight);
 
 		// Second loop
 

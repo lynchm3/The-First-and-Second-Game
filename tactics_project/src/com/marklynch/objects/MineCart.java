@@ -67,7 +67,7 @@ public class MineCart extends GameObject {
 				if (gamObject.isFloorObject)
 					continue;
 
-				gamObject.setPrimaryAnimation(new AnimationStraightLine(this, 0.5f, true, array) {
+				gamObject.setPrimaryAnimation(new AnimationStraightLine(this, 2f, true, array) {
 					@Override
 					public void runCompletionAlgorightm(boolean wait) {
 						super.runCompletionAlgorightm(wait);
@@ -123,7 +123,9 @@ public class MineCart extends GameObject {
 
 		Rail railToMoveTo = (Rail) newSquareAndDirection.square.inventory.getGameObjectOfClass(Rail.class);
 
-		if (newSquareAndDirection.direction == Direction.RIGHT && railToMoveTo.direction1 != Direction.LEFT
+		if (railToMoveTo == null) {
+			return null;
+		} else if (newSquareAndDirection.direction == Direction.RIGHT && railToMoveTo.direction1 != Direction.LEFT
 				&& railToMoveTo.direction2 != Direction.LEFT) {
 			return null;
 		} else if (newSquareAndDirection.direction == Direction.LEFT && railToMoveTo.direction1 != Direction.RIGHT
