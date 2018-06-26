@@ -1569,6 +1569,7 @@ public class Level {
 
 		for (GameObject gameObjectToFlash : (ArrayList<GameObject>) gameObjectsToFlash.clone()) {
 
+			System.out.println("gameObjectToFlash = " + gameObjectToFlash);
 			flashGameObjectCounters.put(gameObjectToFlash, flashGameObjectCounters.get(gameObjectToFlash) + delta);
 
 			if (flashGameObjectCounters.get(gameObjectToFlash) >= flashGameObjectTotalTime) {

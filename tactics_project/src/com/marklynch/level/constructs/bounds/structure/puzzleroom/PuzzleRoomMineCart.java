@@ -17,7 +17,7 @@ import com.marklynch.objects.units.Actor.Direction;
 public class PuzzleRoomMineCart extends StructureRoom {
 	int posX;
 	int posY;
-	final static int totalWidthInSquares = 20;
+	final static int totalWidthInSquares = 13;
 	final static int totalHeightInSquares = 20;
 
 	public PuzzleRoomMineCart(int posX, int posY) {
@@ -105,8 +105,12 @@ public class PuzzleRoomMineCart extends StructureRoom {
 
 		// Top 2 Templates.RAIL.makeCopy(Level.squares[posX + 10][posY + 16], null,
 		// Direction.UP, Direction.LEFT);
-		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 7], null, Direction.LEFT, Direction.DOWN);
-		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 7], null, Direction.RIGHT, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 7], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 6], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 5], null, Direction.LEFT, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 5], null, Direction.RIGHT, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 6], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 7], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 8], null, Direction.LEFT, Direction.UP);
 		Templates.RAIL.makeCopy(Level.squares[posX + 10][posY + 8], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 9][posY + 8], null, Direction.LEFT, Direction.RIGHT);
@@ -114,6 +118,27 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 8], null, Direction.UP, Direction.RIGHT);
 
 		Square voidSquare = Level.squares[posX][posY];
+
+		// Island crate
+		Templates.CRATE.makeCopy(Level.squares[posX + 11][posY + 4], null);
+
+		ArrayList<Square> islandSquares = new ArrayList<Square>();
+		islandSquares.add(Level.squares[posX + 11][posY + 4]);
+		islandSquares.add(Level.squares[posX + 11][posY + 5]);
+		islandSquares.add(Level.squares[posX + 12][posY + 4]);
+		islandSquares.add(Level.squares[posX + 12][posY + 5]);
+
+		// Bonus void to get the chest
+		for (int i = 9; i < 13; i++) {
+			for (int j = 2; j < 8; j++) {
+				if (!islandSquares.contains(Level.squares[posX + i][posY + j])) {
+					Templates.VOID_HOLE.makeCopy(Level.squares[posX + i][posY + j], null, voidSquare);
+					Level.squares[posX + i][posY + j].imageTexture = Square.VOID_SQUARE;
+				}
+			}
+		}
+
+		// Long void in middle of level that needs to be cleared
 		for (int i = 0; i < totalWidthInSquares; i++) {
 			for (int j = 10; j < 10 + 3; j++) {
 				Templates.VOID_HOLE.makeCopy(Level.squares[posX + i][posY + j], null, voidSquare);

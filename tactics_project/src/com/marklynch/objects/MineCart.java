@@ -62,7 +62,8 @@ public class MineCart extends GameObject {
 			}
 
 			this.direction = squaresForAnimation.get(squaresForAnimation.size() - 1).direction;
-			for (final GameObject gamObject : this.squareGameObjectIsOn.inventory.gameObjects) {
+			for (final GameObject gamObject : (ArrayList<GameObject>) this.squareGameObjectIsOn.inventory.gameObjects
+					.clone()) {
 
 				if (gamObject.isFloorObject)
 					continue;
