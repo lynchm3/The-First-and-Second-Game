@@ -90,11 +90,15 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.RAIL.makeCopy(Level.squares[posX + 8][posY + 16], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 9][posY + 16], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 10][posY + 16], null, Direction.LEFT, Direction.RIGHT);
-		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 16], null, Direction.LEFT, Direction.RIGHT);
-		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 16], null, Direction.UP, Direction.LEFT);
+		Rail switchableBottomRight = Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 16], null, Direction.UP,
+				Direction.LEFT);
+		switchableBottomRight.turnsClockwiseFirst = false;
+		Floor circleFloorBottomRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 11][posY + 16], null);
+		circleFloorBottomRight.drawOffsetRatioY = 0.375f;
+		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 15], null, Direction.DOWN, Direction.RIGHT);
+		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 15], null, Direction.UP, Direction.LEFT);
 
 		// Right 2 (over gap)
-		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 15], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 14], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 13], null, Direction.UP, Direction.DOWN);// lands here
 		Templates.RAIL_INVISIBLE.makeCopy(Level.squares[posX + 12][posY + 12], null, Direction.UP, Direction.DOWN);
@@ -103,8 +107,7 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 9], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 8], null, Direction.UP, Direction.DOWN);
 
-		// Top 2 Templates.RAIL.makeCopy(Level.squares[posX + 10][posY + 16], null,
-		// Direction.UP, Direction.LEFT);
+		// Top 2
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 7], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 6], null, Direction.UP, Direction.DOWN);
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 5], null, Direction.LEFT, Direction.DOWN);
@@ -116,6 +119,16 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.RAIL.makeCopy(Level.squares[posX + 9][posY + 8], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 8][posY + 8], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 8], null, Direction.UP, Direction.RIGHT);
+
+		// Bottom right exit
+		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 17], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 18], null, Direction.UP, Direction.DOWN);
+		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 19], null, Direction.UP, Direction.RIGHT);
+		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 19], null, Direction.LEFT, Direction.RIGHT);
+		Templates.RAIL.makeCopy(Level.squares[posX + 13][posY + 19], null, Direction.LEFT, Direction.RIGHT);
+
+		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + 8][posY + 15], null, Switch.SWITCH_TYPE.OPEN_CLOSE,
+				5, switchableBottomRight);
 
 		Square voidSquare = Level.squares[posX][posY];
 

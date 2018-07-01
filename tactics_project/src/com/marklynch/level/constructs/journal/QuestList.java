@@ -70,9 +70,11 @@ public class QuestList extends ArrayList<Quest> {
 		// top left entrance
 		squaresToRemove.add(Level.squares[x][y + 10]);
 		squaresToRemove.add(Level.squares[x][y + 11]);
-		// entrance between 2 bridges
+		// entrance between bridge nad minecart
 		squaresToRemove.add(Level.squares[x + 10][y + 21]);
 		squaresToRemove.add(Level.squares[x + 11][y + 21]);
+		// minecart 1 to minecart 2
+		squaresToRemove.add(Level.squares[x + 14][y + 41]);
 		// 2nd top left entrance
 		// squaresToRemove.add(Level.squares[x][y + 31]);
 		// squaresToRemove.add(Level.squares[x][y + 32]);
