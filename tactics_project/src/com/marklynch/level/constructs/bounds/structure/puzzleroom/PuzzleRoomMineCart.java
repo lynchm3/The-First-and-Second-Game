@@ -120,7 +120,7 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Square voidSquare = Level.squares[posX][posY];
 
 		// Island crate
-		Templates.CRATE.makeCopy(Level.squares[posX + 11][posY + 4], null);
+		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 11][posY + 4], false, null);
 
 		ArrayList<Square> islandSquares = new ArrayList<Square>();
 		islandSquares.add(Level.squares[posX + 11][posY + 4]);
