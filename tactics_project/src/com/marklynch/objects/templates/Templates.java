@@ -267,6 +267,7 @@ public class Templates {
 	public static PressurePlate PRESSURE_PLATE;
 
 	public static Seesaw SEESAW;
+	public static Seesaw.SeesawPart SEESAW_PART;
 
 	// Kitchenware
 	public static GameObject PLATE;

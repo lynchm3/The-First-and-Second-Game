@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -15,8 +16,8 @@ public class Seesaw extends GameObject implements SwitchListener {
 
 	public Square square1;
 	public Square square2;
-	public PressurePlate pressurePlate1;
-	public PressurePlate pressurePlate2;
+	public Seesaw.SeesawPart pressurePlate1;
+	public Seesaw.SeesawPart pressurePlate2;
 
 	public static Texture imageTextureLeftRight;
 	public static Texture imageTextureUpDown;
@@ -60,11 +61,9 @@ public class Seesaw extends GameObject implements SwitchListener {
 		seesaw.square1 = square1;
 		seesaw.square2 = square2;
 		System.out.println("calling pressurePlate1.makeCopy()");
-		seesaw.pressurePlate1 = Templates.PRESSURE_PLATE.makeCopy(square1, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 100,
-				seesaw);
+		seesaw.pressurePlate1 = Templates.SEESAW_PART.makeCopy(square1, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 0, seesaw);
 		System.out.println("calling pressurePlate2.makeCopy()");
-		seesaw.pressurePlate2 = Templates.PRESSURE_PLATE.makeCopy(square2, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 100,
-				seesaw);
+		seesaw.pressurePlate2 = Templates.SEESAW_PART.makeCopy(square2, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 0, seesaw);
 
 		return seesaw;
 	}
@@ -72,6 +71,60 @@ public class Seesaw extends GameObject implements SwitchListener {
 	@Override
 	public void zwitch(Switch zwitch) {
 		System.out.println("Seesaw.zwitch()");
+		if (pressurePlate1 == null || pressurePlate2 == null)
+			return;
+
+		if (pressurePlate1.weightOnPlate > pressurePlate2.weightOnPlate) {
+			// pressurePlate1.
+
+		} else if (pressurePlate1.weightOnPlate > pressurePlate2.weightOnPlate) {
+
+		} else {
+			// equal weight
+		}
+	}
+
+	public static class SeesawPart extends PressurePlate {
+
+		public int weightOnPlate = 0;
+
+		@Override
+		public void updateWeight() {
+			if (squareGameObjectIsOn == null)
+				return;
+			weightOnPlate = 0;
+			for (GameObject gameObject : squareGameObjectIsOn.inventory.gameObjects) {
+				if (gameObject.isFloorObject == false) {
+					weightOnPlate += gameObject.weight;
+				}
+			}
+			use();
+
+		}
+
+		@Override
+		public SeesawPart makeCopy(Square square, Actor owner, SWITCH_TYPE switchType, int targetWeight,
+				SwitchListener... switchListeners) {
+			System.out.println("in SeesawPart.makeCopy()");
+
+			SeesawPart seesawPart = new SeesawPart();
+			seesawPart.switchListeners = switchListeners;
+			setInstances(seesawPart);
+			super.setAttributesForCopy(seesawPart, square, owner);
+			seesawPart.actionName = actionName;
+			seesawPart.actionVerb = actionVerb;
+			System.out.println("SeesawPart.switchListeners = " + seesawPart.switchListeners);
+			seesawPart.switchType = switchType;
+			seesawPart.targetWeight = targetWeight;
+
+			for (SwitchListener switchListener : switchListeners) {
+				if (switchListener != null && switchListener instanceof GameObject)
+					this.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SWITCH, seesawPart,
+							((GameObject) switchListener).squareGameObjectIsOn);
+			}
+
+			return seesawPart;
+		}
 	}
 
 }
