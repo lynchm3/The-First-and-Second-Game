@@ -12,6 +12,8 @@ public class AnimationFall extends AnimationScale {
 	public AnimationFall(GameObject performer, float start, float end, float durationToReachMillis) {
 
 		super(performer, start, end, durationToReachMillis);
+		if (!runAnimation)
+			return;
 		startLeftArmAngle = this.leftShoulderAngle;
 		startRightArmAngle = this.rightShoulderAngle;
 	}

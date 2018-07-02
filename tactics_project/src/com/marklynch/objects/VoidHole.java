@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationFall;
+import com.marklynch.level.constructs.animation.primary.AnimationFallFromTheSky;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
@@ -67,6 +68,7 @@ public class VoidHole extends GameObject {
 					@Override
 					public void runCompletionAlgorightm(boolean wait) {
 						super.runCompletionAlgorightm(wait);
+
 						Square square = gameObject.lastSquare;
 						if (square == null)
 							square = connectedSquare;
@@ -81,7 +83,8 @@ public class VoidHole extends GameObject {
 							Level.gameObjectsToFlash.add(gameObject);
 							Level.flashGameObjectCounters.put(gameObject, 0);
 						}
-						// squareGameObjectIsOn.inventory.remove(gameObject);
+
+						gameObject.setPrimaryAnimation(new AnimationFallFromTheSky(gameObject, 200));
 					}
 				});
 

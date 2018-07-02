@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationFall;
+import com.marklynch.level.constructs.animation.primary.AnimationFallFromTheSky;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -253,6 +254,7 @@ public class Seesaw extends GameObject implements SwitchListener {
 								Level.flashGameObjectCounters.put(gameObject, 0);
 							}
 							// squareGameObjectIsOn.inventory.remove(gameObject);
+							gameObject.setPrimaryAnimation(new AnimationFallFromTheSky(gameObject, 200));
 						}
 					});
 
