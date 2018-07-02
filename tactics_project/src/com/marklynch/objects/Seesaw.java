@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.templates.Templates;
@@ -9,6 +10,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Seesaw extends GameObject implements SwitchListener {
 
@@ -19,20 +21,13 @@ public class Seesaw extends GameObject implements SwitchListener {
 	public Seesaw.SeesawPart pressurePlate1;
 	public Seesaw.SeesawPart pressurePlate2;
 
-	public static Texture imageTextureLeftRight;
-	public static Texture imageTextureUpDown;
-	// boolean up, down, left, right;
-	public static Texture imageTextureLeftUp;
-	public static Texture imageTextureRightUp;
-	public static Texture imageTextureLeftDown;
-	public static Texture imageTextureRightDown;
-	public boolean turnsClockwiseFirst = true;
+	public static Texture gradient;
 
 	public Seesaw() {
 		super();
 		canBePickedUp = false;
 		fitsInInventory = false;
-		isFloorObject = true;
+		// isFloorObject = true;
 		attackable = false;
 	}
 
@@ -48,6 +43,13 @@ public class Seesaw extends GameObject implements SwitchListener {
 				square2.getCenterY() + 5);
 		super.draw1();
 		super.draw2();
+
+		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+				+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+		TextureUtils.drawTexture(gradient, 1f, actorPositionXInPixels - 256, actorPositionYInPixels,
+				actorPositionXInPixels + 256, actorPositionYInPixels + 128);
 	}
 
 	public Seesaw makeCopy(Square square, Actor owner, Square square1, Square square2) {

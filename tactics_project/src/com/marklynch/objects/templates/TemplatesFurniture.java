@@ -308,6 +308,7 @@ public class TemplatesFurniture {
 		Templates.SEESAW = new Seesaw();
 		Templates.SEESAW.name = "Seesaw";
 		Templates.SEESAW.imageTexture = getGlobalImage("seesaw_middle.png", true);
+		Seesaw.gradient = getGlobalImage("seesaw_gradient.png", true);
 		Templates.SEESAW.totalHealth = Templates.SEESAW.remainingHealth = 1;
 		Templates.SEESAW.value = 33;
 		Templates.SEESAW.templateId = GameObject.generateNewTemplateId();
