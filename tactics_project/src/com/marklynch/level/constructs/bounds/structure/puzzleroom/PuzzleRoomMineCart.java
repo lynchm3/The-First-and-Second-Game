@@ -29,8 +29,9 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 
+		Square voidSquare = Level.squares[posX][posY];
 		Seesaw seesaw = Templates.SEESAW.makeCopy(Level.squares[posX + 5][posY + 10], null,
-				Level.squares[posX + 3][posY + 10], Level.squares[posX + 7][posY + 10]);
+				Level.squares[posX + 3][posY + 10], Level.squares[posX + 7][posY + 10], voidSquare);
 
 		// Top loop
 
@@ -133,8 +134,6 @@ public class PuzzleRoomMineCart extends StructureRoom {
 
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + 8][posY + 15], null, Switch.SWITCH_TYPE.OPEN_CLOSE,
 				5, switchableBottomRight);
-
-		Square voidSquare = Level.squares[posX][posY];
 
 		// Island crate
 		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 11][posY + 4], false, null);

@@ -44,11 +44,11 @@ public class Switch extends GameObject {
 
 	@Override
 	public void draw1() {
+		super.draw1();
 	}
 
 	@Override
 	public void draw2() {
-		super.draw1();
 		if (Game.showTriggerLines) {
 			for (SwitchListener switchListener : switchListeners) {
 				if (switchListener instanceof GameObject) {

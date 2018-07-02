@@ -29,11 +29,11 @@ public class PressurePlate extends Switch {
 	@Override
 	public void draw1() {
 		super.draw1();
-		super.draw2();
 	}
 
 	@Override
 	public void draw2() {
+		super.draw2();
 		if (Game.showTriggerLines) {
 			for (SwitchListener switchListener : switchListeners) {
 				if (switchListener instanceof GameObject) {

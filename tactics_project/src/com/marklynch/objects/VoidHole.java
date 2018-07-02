@@ -55,35 +55,39 @@ public class VoidHole extends GameObject {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-		if (squareGameObjectIsOn != null) {
-			for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects
-					.clone()) {
-				if (gameObject.isFloorObject == false) {
-					gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 500) {
-						@Override
-						public void runCompletionAlgorightm(boolean wait) {
-							super.runCompletionAlgorightm(wait);
-							Square square = gameObject.lastSquare;
-							if (square == null)
-								square = connectedSquare;
+	}
 
-							square.inventory.add(gameObject);
+	public void updateVoid() {
+		if (squareGameObjectIsOn == null)
+			return;
 
-							if (gameObject == Level.player) {
-								// Game.ca
-								Game.level.centerToSquare = true;
-								Game.level.squareToCenterTo = square;
-							} else {
-								Level.gameObjectsToFlash.add(gameObject);
-								Level.flashGameObjectCounters.put(gameObject, 0);
-							}
-							// squareGameObjectIsOn.inventory.remove(gameObject);
+		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
+			if (gameObject.isFloorObject == false) {
+				gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 400) {
+					@Override
+					public void runCompletionAlgorightm(boolean wait) {
+						super.runCompletionAlgorightm(wait);
+						Square square = gameObject.lastSquare;
+						if (square == null)
+							square = connectedSquare;
+
+						square.inventory.add(gameObject);
+
+						if (gameObject == Level.player) {
+							// Game.ca
+							Game.level.centerToSquare = true;
+							Game.level.squareToCenterTo = square;
+						} else {
+							Level.gameObjectsToFlash.add(gameObject);
+							Level.flashGameObjectCounters.put(gameObject, 0);
 						}
-					});
+						// squareGameObjectIsOn.inventory.remove(gameObject);
+					}
+				});
 
-				}
 			}
 		}
+
 	}
 
 }

@@ -980,7 +980,6 @@ public class Level {
 	}
 
 	public void drawForeground() {
-
 		// Background decorations
 
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
@@ -989,7 +988,8 @@ public class Level {
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjectsGround()) {
-					gameObject.draw1(); // HERE
+
+					gameObject.draw1();
 				}
 			}
 

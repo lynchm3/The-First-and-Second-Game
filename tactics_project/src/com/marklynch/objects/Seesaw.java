@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
+import com.marklynch.level.Level;
+import com.marklynch.level.constructs.animation.primary.AnimationFall;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -21,13 +23,14 @@ public class Seesaw extends GameObject implements SwitchListener {
 	public Seesaw.SeesawPart pressurePlate1;
 	public Seesaw.SeesawPart pressurePlate2;
 
-	public static Texture gradient;
+	public static Texture gradientRightUp;
+	public static Texture gradientLeftUp;
 
 	public Seesaw() {
 		super();
 		canBePickedUp = false;
 		fitsInInventory = false;
-		// isFloorObject = true;
+		isFloorObject = true;
 		attackable = false;
 	}
 
@@ -39,20 +42,35 @@ public class Seesaw extends GameObject implements SwitchListener {
 
 	@Override
 	public void draw1() {
-		QuadUtils.drawQuad(Color.WHITE, square1.getCenterX(), square1.getCenterY() - 5, square2.getCenterX(),
-				square2.getCenterY() + 5);
 		super.draw1();
-		super.draw2();
 
-		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-				+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
-		TextureUtils.drawTexture(gradient, 1f, actorPositionXInPixels - 256, actorPositionYInPixels,
-				actorPositionXInPixels + 256, actorPositionYInPixels + 128);
 	}
 
-	public Seesaw makeCopy(Square square, Actor owner, Square square1, Square square2) {
+	@Override
+	public void draw2() {
+		super.draw2();
+		QuadUtils.drawQuad(Color.WHITE, square1.xInGridPixels + Game.SQUARE_WIDTH, square1.getCenterY() - 5,
+				square2.xInGridPixels, square2.getCenterY() + 5);
+
+		if (pressurePlate1.up == true && pressurePlate2.up == true) {
+
+		} else {
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+
+			if (pressurePlate1.up) {
+				TextureUtils.drawTexture(gradientLeftUp, 1f, actorPositionXInPixels - 256, actorPositionYInPixels,
+						actorPositionXInPixels + 384, actorPositionYInPixels + 128);
+			} else {
+				TextureUtils.drawTexture(gradientRightUp, 1f, actorPositionXInPixels - 256, actorPositionYInPixels,
+						actorPositionXInPixels + 384, actorPositionYInPixels + 128);
+			}
+		}
+	}
+
+	public Seesaw makeCopy(Square square, Actor owner, Square square1, Square square2, Square connectedSquare) {
 
 		Seesaw seesaw = new Seesaw();
 		setInstances(seesaw);
@@ -61,8 +79,12 @@ public class Seesaw extends GameObject implements SwitchListener {
 
 		seesaw.square1 = square1;
 		seesaw.square2 = square2;
-		seesaw.pressurePlate1 = Templates.SEESAW_PART.makeCopy(square1, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 0, seesaw);
-		seesaw.pressurePlate2 = Templates.SEESAW_PART.makeCopy(square2, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 0, seesaw);
+		seesaw.pressurePlate1 = Templates.SEESAW_PART.makeCopy(square1, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 0,
+				connectedSquare, seesaw);
+		seesaw.pressurePlate1.up = false;
+		seesaw.pressurePlate2 = Templates.SEESAW_PART.makeCopy(square2, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 0,
+				connectedSquare, seesaw);
+		seesaw.pressurePlate1.up = true;
 
 		return seesaw;
 	}
@@ -76,19 +98,88 @@ public class Seesaw extends GameObject implements SwitchListener {
 		if (pressurePlate1.weightOnPlate > pressurePlate2.weightOnPlate) {
 			// pressurePlate1.
 			System.out.println("1 > 2");
+			if (pressurePlate1.up == false && pressurePlate2.up == true) {
+				// already in position
+			} else {
+				pressurePlate1.up = false;
+				pressurePlate2.up = true;
+				moveSeesaw();
+			}
 
 		} else if (pressurePlate2.weightOnPlate > pressurePlate1.weightOnPlate) {
 			System.out.println("2 > 1");
+			if (pressurePlate1.up == true && pressurePlate2.up == false) {
+				// already in position
+			} else {
+				pressurePlate1.up = true;
+				pressurePlate2.up = false;
+				moveSeesaw();
+			}
 
 		} else {
 			System.out.println("even");
-			// equal weight
+			if (pressurePlate1.up == true && pressurePlate2.up == true) {
+				// already in position
+			} else {
+				pressurePlate1.up = true;
+				pressurePlate2.up = true;
+				moveSeesaw();
+			}
+		}
+	}
+
+	public void moveSeesaw() {
+		if (pressurePlate1.weightOnPlate > pressurePlate2.weightOnPlate) {
+			// pressurePlate1.
+			System.out.println("1 > 2");
+			if (pressurePlate1.up == false) {
+				// already in position
+			} else {
+				pressurePlate1.up = false;
+			}
+
+			if (pressurePlate2.up == true) {
+				// already in position
+			} else {
+				pressurePlate2.up = true;
+			}
+
+		} else if (pressurePlate2.weightOnPlate > pressurePlate1.weightOnPlate) {
+			System.out.println("2 > 1");
+			if (pressurePlate1.up == true) {
+				// already in position
+			} else {
+				pressurePlate1.up = true;
+			}
+
+			if (pressurePlate2.up == false) {
+				// already in position
+			} else {
+				pressurePlate2.up = false;
+
+			}
+
+		} else {
+			System.out.println("even");
+			if (pressurePlate1.up == true) {
+				// already in position
+			} else {
+				pressurePlate1.up = true;
+			}
+
+			if (pressurePlate2.up == true) {
+				// already in position
+			} else {
+				pressurePlate2.up = true;
+			}
 		}
 	}
 
 	public static class SeesawPart extends PressurePlate {
 
 		public int weightOnPlate = 0;
+		public boolean up;
+		public Square connectedSquare = null;
 
 		@Override
 		public void updateWeight() {
@@ -104,11 +195,11 @@ public class Seesaw extends GameObject implements SwitchListener {
 
 		}
 
-		@Override
 		public SeesawPart makeCopy(Square square, Actor owner, SWITCH_TYPE switchType, int targetWeight,
-				SwitchListener... switchListeners) {
+				Square connectedSquare, SwitchListener... switchListeners) {
 
 			SeesawPart seesawPart = new SeesawPart();
+			seesawPart.connectedSquare = connectedSquare;
 			seesawPart.switchListeners = switchListeners;
 			setInstances(seesawPart);
 			super.setAttributesForCopy(seesawPart, square, owner);
@@ -124,6 +215,50 @@ public class Seesaw extends GameObject implements SwitchListener {
 			}
 
 			return seesawPart;
+		}
+
+		@Override
+		public void update(int delta) {
+			super.update(delta);
+		}
+
+		public void updateVoid() {
+
+			if (up)
+				return;
+
+			for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects
+					.clone()) {
+				if (gameObject.isFloorObject == false) {
+					gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, -400) {
+						@Override
+						public void runCompletionAlgorightm(boolean wait) {
+
+							performer.primaryAnimation.offsetY = 400;
+
+							super.runCompletionAlgorightm(wait);
+
+							Square square = gameObject.lastSquare;
+							if (square == null)
+								square = connectedSquare;
+
+							square.inventory.add(gameObject);
+
+							if (gameObject == Level.player) {
+								// Game.ca
+								Game.level.centerToSquare = true;
+								Game.level.squareToCenterTo = square;
+							} else {
+								Level.gameObjectsToFlash.add(gameObject);
+								Level.flashGameObjectCounters.put(gameObject, 0);
+							}
+							// squareGameObjectIsOn.inventory.remove(gameObject);
+						}
+					});
+
+				}
+			}
+
 		}
 	}
 

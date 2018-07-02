@@ -11,6 +11,7 @@ import com.marklynch.objects.Floor;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MineCart;
 import com.marklynch.objects.PressurePlate;
+import com.marklynch.objects.Seesaw.SeesawPart;
 import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.Window;
@@ -135,6 +136,14 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
 		if (pressurePlate != null)
 			pressurePlate.updateWeight();
+
+		VoidHole voidHole = (VoidHole) getGameObjectOfClass(VoidHole.class);
+		if (voidHole != null)
+			voidHole.updateVoid();
+
+		SeesawPart seesawPart = (SeesawPart) getGameObjectOfClass(SeesawPart.class);
+		if (seesawPart != null)
+			seesawPart.updateVoid();
 
 	}
 
