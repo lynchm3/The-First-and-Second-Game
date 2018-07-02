@@ -307,7 +307,7 @@ public class TemplatesFurniture {
 
 		Templates.SEESAW = new Seesaw();
 		Templates.SEESAW.name = "Seesaw";
-		Templates.SEESAW.imageTexture = getGlobalImage("pressure_plate.png", true);
+		Templates.SEESAW.imageTexture = getGlobalImage("seesaw_middle.png", true);
 		Templates.SEESAW.totalHealth = Templates.SEESAW.remainingHealth = 1;
 		Templates.SEESAW.value = 33;
 		Templates.SEESAW.templateId = GameObject.generateNewTemplateId();
@@ -315,7 +315,7 @@ public class TemplatesFurniture {
 		Templates.SEESAW_PART = new Seesaw.SeesawPart();
 		Templates.SEESAW_PART.name = "Seesaw";
 		// Templates.SEESAW_PART.imageTexturePath = "SEESAW_PART.png";
-		Templates.SEESAW_PART.imageTexture = getGlobalImage("pressure_plate.png", true);
+		Templates.SEESAW_PART.imageTexture = getGlobalImage("seesaw_part.png", true);
 		Templates.SEESAW_PART.totalHealth = Templates.SEESAW_PART.remainingHealth = 1;
 		Templates.SEESAW_PART.value = 22;
 		Templates.SEESAW_PART.templateId = GameObject.generateNewTemplateId();

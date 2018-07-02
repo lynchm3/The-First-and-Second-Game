@@ -29,8 +29,8 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 
-		Seesaw seesaw = Templates.SEESAW.makeCopy(Level.squares[posX + 2][posY + 0], null,
-				Level.squares[posX + 0][posY + 0], Level.squares[posX + 4][posY + 0]);
+		Seesaw seesaw = Templates.SEESAW.makeCopy(Level.squares[posX + 5][posY + 10], null,
+				Level.squares[posX + 3][posY + 10], Level.squares[posX + 7][posY + 10]);
 
 		// Top loop
 
@@ -158,7 +158,10 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		// Long void in middle of level that needs to be cleared
 		for (int i = 0; i < totalWidthInSquares; i++) {
 			for (int j = 10; j < 10 + 3; j++) {
-				Templates.VOID_HOLE.makeCopy(Level.squares[posX + i][posY + j], null, voidSquare);
+				if (Level.squares[posX + i][posY + j] != seesaw.square1
+						&& Level.squares[posX + i][posY + j] != seesaw.square2) {
+					Templates.VOID_HOLE.makeCopy(Level.squares[posX + i][posY + j], null, voidSquare);
+				}
 				Level.squares[posX + i][posY + j].imageTexture = Square.VOID_SQUARE;
 			}
 		}

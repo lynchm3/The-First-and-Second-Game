@@ -39,10 +39,7 @@ public class Support extends GameObject {
 		if (destroyed && supporteesSquares != null) {
 			for (Square supporteeSquare : supporteesSquares) {
 
-				System.out.println("supporteeSquare = " + supporteeSquare);
-
 				Wall wall = (Wall) supporteeSquare.inventory.getGameObjectOfClass(Wall.class);
-				System.out.println("wall = " + wall);
 				if (wall != null) {
 					wall.changeHealthSafetyOff(-wall.remainingHealth, attacker, action);
 				}

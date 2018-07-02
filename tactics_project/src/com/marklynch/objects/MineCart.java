@@ -54,7 +54,6 @@ public class MineCart extends GameObject {
 			}
 		}
 
-		System.out.println("squaresForAnimation.size()  = " + squaresForAnimation.size());
 		if (squaresForAnimation.size() > 0) {
 			final Square[] array = new Square[squaresForAnimation.size()];
 			for (int i = 0; i < squaresForAnimation.size(); i++) {
@@ -105,22 +104,10 @@ public class MineCart extends GameObject {
 			newSquareAndDirection.direction = currentRail.getOppositeDirection(Direction.UP);
 		}
 
-		System.out.println("oldSquareAndDirection.direction = " + oldSquareAndDirection.direction);
-
-		System.out.println("newSquareAndDirection.direction = " + newSquareAndDirection.direction);
-
 		if (newSquareAndDirection.direction == null)
 			return newSquareAndDirection;
 
 		newSquareAndDirection.square = getSquareToMoveTo(newSquareAndDirection.direction, oldSquareAndDirection.square);
-
-		// if (squareToMoveTo == null) {
-		// direction = currentRail.getOppositeDirection(this.direction);
-		// setSquareToMoveTo();
-		// }
-
-		// System.out.println("squareToMoveTo 2 = " + squareToMoveTo);
-		System.out.println("direction 2 = " + direction);
 
 		Rail railToMoveTo = (Rail) newSquareAndDirection.square.inventory.getGameObjectOfClass(Rail.class);
 

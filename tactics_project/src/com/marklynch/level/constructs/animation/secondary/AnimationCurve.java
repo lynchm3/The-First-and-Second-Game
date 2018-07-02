@@ -44,7 +44,6 @@ public class AnimationCurve extends Animation {
 				+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioY);// shooter.getCenterY();
 		this.hypotanusLength = (float) Math.hypot(Math.abs((x + projectileObject.halfWidth) - focalPoint.x),
 				Math.abs((y + projectileObject.halfHeight) - focalPoint.y));
-		System.out.println("this.hypotanusLength = " + this.hypotanusLength);
 
 		blockAI = true;
 
@@ -69,8 +68,6 @@ public class AnimationCurve extends Animation {
 		else
 			angleInRadians -= (float) (speed * delta);
 
-		System.out.println("angle = " + angleInRadians);
-
 		if (Math.abs(targetAngle - angleInRadians) < 0.05f) {
 			runCompletionAlgorightm(true);
 		} else {
@@ -78,9 +75,6 @@ public class AnimationCurve extends Animation {
 					+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);
 			y = (float) (focalPoint.y + this.hypotanusLength * Math.sin(angleInRadians)) - Game.HALF_SQUARE_HEIGHT
 					+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioY);
-
-			System.out.println("x = " + x);
-			System.out.println("y = " + y);
 			// runCompletionAlgorightm();
 
 			// SOH... Sine: sin(θ) = Opposite / Hypotenuse

@@ -44,14 +44,13 @@ public class Seesaw extends GameObject implements SwitchListener {
 
 	@Override
 	public void draw1() {
+		QuadUtils.drawQuad(Color.WHITE, square1.getCenterX(), square1.getCenterY() - 5, square2.getCenterX(),
+				square2.getCenterY() + 5);
 		super.draw1();
 		super.draw2();
-		QuadUtils.drawQuad(Color.RED, square1.xInGridPixels, square1.yInGridPixels, square2.xInGridPixels,
-				square2.yInGridPixels + 10);
 	}
 
 	public Seesaw makeCopy(Square square, Actor owner, Square square1, Square square2) {
-		System.out.println("Seesaw.makeCopy()");
 
 		Seesaw seesaw = new Seesaw();
 		setInstances(seesaw);
@@ -60,9 +59,7 @@ public class Seesaw extends GameObject implements SwitchListener {
 
 		seesaw.square1 = square1;
 		seesaw.square2 = square2;
-		System.out.println("calling pressurePlate1.makeCopy()");
 		seesaw.pressurePlate1 = Templates.SEESAW_PART.makeCopy(square1, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 0, seesaw);
-		System.out.println("calling pressurePlate2.makeCopy()");
 		seesaw.pressurePlate2 = Templates.SEESAW_PART.makeCopy(square2, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 0, seesaw);
 
 		return seesaw;
@@ -70,16 +67,19 @@ public class Seesaw extends GameObject implements SwitchListener {
 
 	@Override
 	public void zwitch(Switch zwitch) {
-		System.out.println("Seesaw.zwitch()");
+		System.out.println("Seesaw.zwitch");
 		if (pressurePlate1 == null || pressurePlate2 == null)
 			return;
 
 		if (pressurePlate1.weightOnPlate > pressurePlate2.weightOnPlate) {
 			// pressurePlate1.
+			System.out.println("1 > 2");
 
-		} else if (pressurePlate1.weightOnPlate > pressurePlate2.weightOnPlate) {
+		} else if (pressurePlate2.weightOnPlate > pressurePlate1.weightOnPlate) {
+			System.out.println("2 > 1");
 
 		} else {
+			System.out.println("even");
 			// equal weight
 		}
 	}
@@ -105,7 +105,6 @@ public class Seesaw extends GameObject implements SwitchListener {
 		@Override
 		public SeesawPart makeCopy(Square square, Actor owner, SWITCH_TYPE switchType, int targetWeight,
 				SwitchListener... switchListeners) {
-			System.out.println("in SeesawPart.makeCopy()");
 
 			SeesawPart seesawPart = new SeesawPart();
 			seesawPart.switchListeners = switchListeners;
@@ -113,7 +112,6 @@ public class Seesaw extends GameObject implements SwitchListener {
 			super.setAttributesForCopy(seesawPart, square, owner);
 			seesawPart.actionName = actionName;
 			seesawPart.actionVerb = actionVerb;
-			System.out.println("SeesawPart.switchListeners = " + seesawPart.switchListeners);
 			seesawPart.switchType = switchType;
 			seesawPart.targetWeight = targetWeight;
 

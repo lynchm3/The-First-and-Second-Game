@@ -79,7 +79,6 @@ public class PressurePlate extends Switch {
 
 	public PressurePlate makeCopy(Square square, Actor owner, SWITCH_TYPE switchType, int targetWeight,
 			SwitchListener... switchListeners) {
-		System.out.println("in PressurePlate.makeCopy()");
 
 		PressurePlate pressurePlate = new PressurePlate();
 		pressurePlate.switchListeners = switchListeners;
@@ -87,7 +86,6 @@ public class PressurePlate extends Switch {
 		super.setAttributesForCopy(pressurePlate, square, owner);
 		pressurePlate.actionName = actionName;
 		pressurePlate.actionVerb = actionVerb;
-		System.out.println("pressurePlate.switchListeners = " + pressurePlate.switchListeners);
 		pressurePlate.switchType = switchType;
 		pressurePlate.targetWeight = targetWeight;
 
