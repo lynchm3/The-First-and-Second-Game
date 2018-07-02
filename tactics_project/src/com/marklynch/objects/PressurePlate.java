@@ -17,6 +17,7 @@ public class PressurePlate extends Switch {
 		super();
 		attackable = false;
 		isFloorObject = true;
+		attackable = false;
 	}
 
 	@Override
@@ -76,19 +77,21 @@ public class PressurePlate extends Switch {
 
 	public PressurePlate makeCopy(Square square, Actor owner, SWITCH_TYPE switchType, int targetWeight,
 			SwitchListener... switchListeners) {
+		System.out.println("in PressurePlate.makeCopy()");
 
 		PressurePlate pressurePlate = new PressurePlate();
+		pressurePlate.switchListeners = switchListeners;
 		setInstances(pressurePlate);
 		super.setAttributesForCopy(pressurePlate, square, owner);
 		pressurePlate.actionName = actionName;
 		pressurePlate.actionVerb = actionVerb;
-		pressurePlate.switchListeners = switchListeners;
+		System.out.println("pressurePlate.switchListeners = " + pressurePlate.switchListeners);
 		pressurePlate.switchType = switchType;
 		pressurePlate.targetWeight = targetWeight;
 
 		for (SwitchListener switchListener : switchListeners) {
 			if (switchListener != null && switchListener instanceof GameObject)
-				this.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SWITCH, this,
+				this.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SWITCH, pressurePlate,
 						((GameObject) switchListener).squareGameObjectIsOn);
 		}
 

@@ -9,6 +9,7 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Floor;
 import com.marklynch.objects.Rail;
+import com.marklynch.objects.Seesaw;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -27,6 +28,9 @@ public class PuzzleRoomMineCart extends StructureRoom {
 
 		this.posX = posX;
 		this.posY = posY;
+
+		Seesaw seesaw = Templates.SEESAW.makeCopy(Level.squares[posX + 2][posY + 0], null,
+				Level.squares[posX + 0][posY + 0], Level.squares[posX + 4][posY + 0]);
 
 		// Top loop
 

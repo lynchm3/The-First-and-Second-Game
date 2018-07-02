@@ -15,6 +15,7 @@ import com.marklynch.objects.Key;
 import com.marklynch.objects.Mirror;
 import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.Searchable;
+import com.marklynch.objects.Seesaw;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.Support;
 import com.marklynch.objects.Switch;
@@ -303,6 +304,13 @@ public class TemplatesFurniture {
 		Templates.PRESSURE_PLATE.templateId = GameObject.generateNewTemplateId();
 		Templates.PRESSURE_PLATE.actionName = "Trigger";
 		Templates.PRESSURE_PLATE.actionVerb = "triggered";
+
+		Templates.SEESAW = new Seesaw();
+		Templates.SEESAW.name = "Seesaw";
+		Templates.SEESAW.imageTexture = getGlobalImage("pressure_plate.png", true);
+		Templates.SEESAW.totalHealth = Templates.SEESAW.remainingHealth = 1;
+		Templates.SEESAW.value = 33;
+		Templates.SEESAW.templateId = GameObject.generateNewTemplateId();
 
 		Templates.FURNACE = new Furnace();
 		Templates.FURNACE.name = "FURNACE";

@@ -31,6 +31,7 @@ import com.marklynch.objects.Rail;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Searchable;
+import com.marklynch.objects.Seesaw;
 import com.marklynch.objects.Sign;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Storage;
@@ -264,6 +265,8 @@ public class Templates {
 	public static Switch ANTLERS_SWITCH;
 
 	public static PressurePlate PRESSURE_PLATE;
+
+	public static Seesaw SEESAW;
 
 	// Kitchenware
 	public static GameObject PLATE;

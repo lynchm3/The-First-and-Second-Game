@@ -1858,7 +1858,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.anchorX = anchorX;
 		gameObject.anchorY = anchorY;
 		gameObject.name = name;
-		gameObject.squareGameObjectIsOn = square;
 		gameObject.value = value;
 		gameObject.floats = floats;
 
