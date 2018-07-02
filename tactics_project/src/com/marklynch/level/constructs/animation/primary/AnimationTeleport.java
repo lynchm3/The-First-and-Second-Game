@@ -11,6 +11,8 @@ public class AnimationTeleport extends Animation {
 	public Square endSquare;
 	public float startOffsetX = 0;
 	public float startOffsetY = 0;
+	public float endOffsetX = 0;
+	public float endOffsetY = 0;
 
 	float quarterDurationToReach;
 	float halfDurationToReach;
@@ -33,13 +35,10 @@ public class AnimationTeleport extends Animation {
 
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
-		offsetXFromLastAnimation = offsetX;
-		offsetYFromLastAnimation = offsetY;
-		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH)
-				+ offsetXFromLastAnimation;
-		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT)
-				+ offsetYFromLastAnimation;
-
+		startOffsetX = offsetX;// = offsetX;
+		startOffsetY = offsetY;
+		endOffsetX = (int) ((this.endSquare.xInGrid - this.startSquare.xInGrid) * Game.SQUARE_WIDTH);
+		endOffsetY = (int) ((this.endSquare.yInGrid - this.startSquare.yInGrid) * Game.SQUARE_HEIGHT);
 		backwards = performer.backwards;
 
 		blockAI = true;
@@ -67,8 +66,8 @@ public class AnimationTeleport extends Animation {
 
 			// offsetX = 0;
 		} else if (progress >= 0.5f) {
-			offsetX = offsetXFromLastAnimation;
-			offsetY = offsetYFromLastAnimation;
+			offsetX = endOffsetX;
+			offsetY = endOffsetY;
 			// boundsX1 = 0;
 			boundsY1 = (int) ((1 - progress) * 2 * performer.height);
 			// boundsX2 = 0;

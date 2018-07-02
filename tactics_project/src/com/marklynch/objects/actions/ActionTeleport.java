@@ -62,9 +62,26 @@ public class ActionTeleport extends Action {
 			performer.setPrimaryAnimation(new AnimationPush(performer, targetSquare, performer.getPrimaryAnimation()));
 		}
 
-		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		Square startSquare = teleportee.squareGameObjectIsOn;
+
+		teleportee.setPrimaryAnimation(new AnimationTeleport(teleportee, startSquare, targetSquare) {
+
+			@Override
+			public void runCompletionAlgorightm(boolean wait) {
+				offsetX = 0;
+				offsetY = 0;
+				super.runCompletionAlgorightm(wait);
+				postAnimation();
+			}
+		});
+
+	}
+
+	public void postAnimation() {
+
 		teleportee.lastSquare = teleportee.squareGameObjectIsOn;
+		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+
 		teleport(teleportee, targetSquare);
 
 		performer.actionsPerformedThisTurn.add(this);
@@ -120,10 +137,7 @@ public class ActionTeleport extends Action {
 
 		trespassingCheck(this, performer, teleportee.squareGameObjectIsOn);
 
-		teleportee.setPrimaryAnimation(new AnimationTeleport(teleportee, startSquare, targetSquare));
-
 		Level.teleportee = null;
-
 	}
 
 	private void teleport(GameObject gameObject, Square square) {

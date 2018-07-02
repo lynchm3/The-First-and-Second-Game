@@ -230,11 +230,11 @@ public class Seesaw extends GameObject implements SwitchListener {
 			for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects
 					.clone()) {
 				if (gameObject.isFloorObject == false) {
-					gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, -400) {
+					gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 400) {
 						@Override
 						public void runCompletionAlgorightm(boolean wait) {
 
-							performer.primaryAnimation.offsetY = 400;
+							// performer.primaryAnimation.offsetY = -400;
 
 							super.runCompletionAlgorightm(wait);
 
