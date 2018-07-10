@@ -43,6 +43,18 @@ public class TemplatesBuilding {
 		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
 		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
+		Templates.FALSE_WALL = new Wall();
+		Templates.FALSE_WALL.name = "Wall";
+		Templates.FALSE_WALL.imageTexturePath = "wall.png";
+		Templates.FALSE_WALL.imageTexture = getGlobalImage(Templates.FALSE_WALL.imageTexturePath, true);
+		Templates.FALSE_WALL.totalHealth = Templates.FALSE_WALL.remainingHealth = 1;
+		Templates.FALSE_WALL.soundWhenHit = 10f;
+		Templates.FALSE_WALL.soundDampening = 10f;
+		Templates.FALSE_WALL.stackable = false;
+		Templates.FALSE_WALL.weight = 1f;
+		Templates.FALSE_WALL.value = 1;
+		Templates.FALSE_WALL.templateId = GameObject.generateNewTemplateId();
+
 		Templates.FENCE = new Fence();
 		Templates.FENCE.name = "Fence";
 		Templates.FENCE.imageTexturePath = "wall.png";

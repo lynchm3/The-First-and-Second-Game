@@ -63,7 +63,7 @@ public class QuestTheSecretRoom extends Quest {
 		structureSections.add(new StructureSection("A Cozy Place", 19, 36, 36, 46, false));
 
 		// False wall
-		RemoteDoor falseWall = Templates.FALSE_WALL.makeCopy("Wall", Game.level.squares[22][36], false, null);
+		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall", Game.level.squares[22][36], false, null);
 		structureFeatures.add(new StructureFeature(falseWall, Nodes.dungeonHouseHiddenArea));
 
 		// Back room

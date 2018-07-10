@@ -258,7 +258,7 @@ public class Templates {
 
 	public static Storage LOST_AND_FOUND;
 
-	public static RemoteDoor FALSE_WALL;;
+	public static RemoteDoor OPENABLE_WALL;;
 
 	public static Key KEY;
 
@@ -279,6 +279,7 @@ public class Templates {
 	public static GameObject DINNER_FORK;
 
 	public static Wall WALL;
+	public static Wall FALSE_WALL;
 
 	public static Wall FENCE;
 

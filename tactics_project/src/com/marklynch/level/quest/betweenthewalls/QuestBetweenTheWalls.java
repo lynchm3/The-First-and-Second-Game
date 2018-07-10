@@ -95,7 +95,7 @@ public class QuestBetweenTheWalls extends Quest {
 		structurePaths.add(pathBetweenTheWalls);
 
 		// False wall
-		RemoteDoor falseWall = Templates.FALSE_WALL.makeCopy("Wall", Game.level.squares[52][27], false, null);
+		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall", Game.level.squares[52][27], false, null);
 		structureFeatures.add(new StructureFeature(falseWall, Nodes.wallHouseHiddenArea));
 
 		// Rat

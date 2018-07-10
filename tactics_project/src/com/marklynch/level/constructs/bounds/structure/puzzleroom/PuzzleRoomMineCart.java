@@ -166,6 +166,7 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		}
 
 		Templates.MINE_CART.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.RIGHT);
+
 	}
 
 }

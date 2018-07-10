@@ -78,28 +78,28 @@ public class TemplatesEntrances {
 		Templates.GATE.templateId = GameObject.generateNewTemplateId();
 		Templates.GATE.flipYAxisInMirror = false;
 
-		Templates.FALSE_WALL = new RemoteDoor();
-		Templates.FALSE_WALL.name = "Wall";
-		Templates.FALSE_WALL.baseName = "Wall";
-		Templates.FALSE_WALL.imageTexturePath = "wall.png";
-		Templates.FALSE_WALL.imageTexture = getGlobalImage(Templates.FALSE_WALL.imageTexturePath, true);
-		Templates.FALSE_WALL.totalHealth = Templates.FALSE_WALL.remainingHealth = 500;
-		Templates.FALSE_WALL.widthRatio = 1f;
-		Templates.FALSE_WALL.heightRatio = 1f;
-		Templates.FALSE_WALL.drawOffsetRatioX = 0f;
-		Templates.FALSE_WALL.drawOffsetRatioY = 0f;
-		Templates.FALSE_WALL.soundWhenHit = 1f;
-		Templates.FALSE_WALL.soundWhenHitting = 1f;
-		Templates.FALSE_WALL.soundDampening = 1f;
-		Templates.FALSE_WALL.soundDampeningWhenClosed = 5;
-		Templates.FALSE_WALL.stackable = false;
-		Templates.FALSE_WALL.weight = 200f;
-		Templates.FALSE_WALL.value = 29;
-		Templates.FALSE_WALL.anchorX = 0;
-		Templates.FALSE_WALL.anchorY = 0;
-		Templates.FALSE_WALL.blocksLineOfSightWhenClosed = true;
-		Templates.FALSE_WALL.templateId = GameObject.generateNewTemplateId();
-		Templates.FALSE_WALL.flipYAxisInMirror = false;
+		Templates.OPENABLE_WALL = new RemoteDoor();
+		Templates.OPENABLE_WALL.name = "Wall";
+		Templates.OPENABLE_WALL.baseName = "Wall";
+		Templates.OPENABLE_WALL.imageTexturePath = "wall.png";
+		Templates.OPENABLE_WALL.imageTexture = getGlobalImage(Templates.OPENABLE_WALL.imageTexturePath, true);
+		Templates.OPENABLE_WALL.totalHealth = Templates.OPENABLE_WALL.remainingHealth = 500;
+		Templates.OPENABLE_WALL.widthRatio = 1f;
+		Templates.OPENABLE_WALL.heightRatio = 1f;
+		Templates.OPENABLE_WALL.drawOffsetRatioX = 0f;
+		Templates.OPENABLE_WALL.drawOffsetRatioY = 0f;
+		Templates.OPENABLE_WALL.soundWhenHit = 1f;
+		Templates.OPENABLE_WALL.soundWhenHitting = 1f;
+		Templates.OPENABLE_WALL.soundDampening = 1f;
+		Templates.OPENABLE_WALL.soundDampeningWhenClosed = 5;
+		Templates.OPENABLE_WALL.stackable = false;
+		Templates.OPENABLE_WALL.weight = 200f;
+		Templates.OPENABLE_WALL.value = 29;
+		Templates.OPENABLE_WALL.anchorX = 0;
+		Templates.OPENABLE_WALL.anchorY = 0;
+		Templates.OPENABLE_WALL.blocksLineOfSightWhenClosed = true;
+		Templates.OPENABLE_WALL.templateId = GameObject.generateNewTemplateId();
+		Templates.OPENABLE_WALL.flipYAxisInMirror = false;
 
 	}
 

@@ -82,7 +82,7 @@ public class Seesaw extends GameObject implements SwitchListener {
 		seesaw.square2 = square2;
 		seesaw.pressurePlate1 = Templates.SEESAW_PART.makeCopy(square1, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 0,
 				connectedSquare, seesaw);
-		seesaw.pressurePlate1.up = false;
+		seesaw.pressurePlate1.up = true;
 		seesaw.pressurePlate2 = Templates.SEESAW_PART.makeCopy(square2, null, Switch.SWITCH_TYPE.OPEN_CLOSE, 0,
 				connectedSquare, seesaw);
 		seesaw.pressurePlate1.up = true;

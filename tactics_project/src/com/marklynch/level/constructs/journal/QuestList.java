@@ -79,6 +79,7 @@ public class QuestList extends ArrayList<Quest> {
 		// squaresToRemove.add(Level.squares[x][y + 31]);
 		// squaresToRemove.add(Level.squares[x][y + 32]);
 		ArrayList<Wall> extraWalls = new ArrayList<Wall>();
+		extraWalls.add(Templates.FALSE_WALL.makeCopy(Level.squares[x + 1 + 1][y + 22 + 0], null));
 
 		Structure puzzleStructure = new Structure("Puzzle Structure", structureSections, puzzleStructureRooms, paths,
 				features, entrances, "building2.png", x, y, x + 100, y + 100, true, null, squaresToRemove, extraWalls,
