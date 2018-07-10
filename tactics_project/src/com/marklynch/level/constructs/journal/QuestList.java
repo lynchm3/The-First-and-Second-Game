@@ -10,6 +10,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomCrumblingWall;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMineCart;
+import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMineCart2;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMovingBridge;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
@@ -62,6 +63,7 @@ public class QuestList extends ArrayList<Quest> {
 		ArrayList<StructureRoom> puzzleStructureRooms = new ArrayList<StructureRoom>();
 		puzzleStructureRooms.add(new PuzzleRoomMovingBridge(x + 1, y + 1));
 		puzzleStructureRooms.add(new PuzzleRoomMineCart(x + 1, y + 22));
+		puzzleStructureRooms.add(new PuzzleRoomMineCart2(x + 15, y + 30));
 		puzzleStructureRooms.add(new PuzzleRoomCrumblingWall(x + 22, y + 10));
 		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
 		ArrayList<Square> entrances = new ArrayList<Square>();
