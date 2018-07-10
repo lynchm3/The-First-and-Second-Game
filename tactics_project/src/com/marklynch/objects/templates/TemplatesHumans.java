@@ -3,11 +3,11 @@ package com.marklynch.objects.templates;
 import com.marklynch.ai.routines.AIRoutineForFisherman;
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHunter;
+import com.marklynch.ai.routines.AIRoutineForMinecart;
 import com.marklynch.ai.routines.AIRoutineForMiner;
 import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.quest.caveoftheblind.AIRoutineForMort;
 import com.marklynch.level.quest.caveoftheblind.Mort;
@@ -93,8 +93,7 @@ public class TemplatesHumans {
 		Templates.FISHERMAN.totalHealth = Templates.FISHERMAN.remainingHealth = 10;
 		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(6));
 		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(4));
-		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE,
-				new Stat(3));
+		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(3));
 		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(11));
 		// Templates.FISHERMAN.imageTexturePath = "hero.png";
 		// Templates.FISHERMAN.imageTexture =
@@ -220,6 +219,26 @@ public class TemplatesHumans {
 		Templates.TRADER.aiRoutine = new AIRoutineForTrader(Templates.TRADER);
 		Templates.TRADER.templateId = GameObject.generateNewTemplateId();
 		Templates.TRADER.flipYAxisInMirror = false;
+
+		Templates.MINECART_RIDER = new Human();
+		Templates.MINECART_RIDER.title = "MINECART_RIDER";
+		Templates.MINECART_RIDER.level = 1;
+		Templates.MINECART_RIDER.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
+		Templates.MINECART_RIDER.totalHealth = Templates.MINECART_RIDER.remainingHealth = 10;
+		Templates.MINECART_RIDER.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
+		Templates.MINECART_RIDER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
+		Templates.MINECART_RIDER.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
+		Templates.MINECART_RIDER.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
+		Templates.MINECART_RIDER.heightRatio = 1.5f;
+		Templates.MINECART_RIDER.drawOffsetRatioY = -0.5f;
+		Templates.MINECART_RIDER.weight = 90f;
+		Templates.MINECART_RIDER.canOpenDoors = true;
+		Templates.MINECART_RIDER.canEquipWeapons = true;
+		Templates.MINECART_RIDER.aiRoutine = new AIRoutineForMinecart(Templates.MINECART_RIDER);
+		Templates.MINECART_RIDER.templateId = GameObject.generateNewTemplateId();
+		Templates.MINECART_RIDER.flipYAxisInMirror = false;
+		Templates.MINECART_RIDER.bodyArmor = null;
+		Templates.MINECART_RIDER.legArmor = Templates.UNDIES.makeCopy(null, null);
 	}
 
 }

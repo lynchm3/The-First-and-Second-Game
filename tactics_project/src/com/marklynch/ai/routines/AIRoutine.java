@@ -246,7 +246,7 @@ public abstract class AIRoutine {
 		return false;
 	}
 
-	public boolean runFightRoutine() {
+	public boolean runFightRoutine(boolean allowedMove) {
 		boolean attacked = false;
 		boolean moved = false;
 
@@ -276,7 +276,7 @@ public abstract class AIRoutine {
 						attacked = AIRoutineUtils.attackTarget(target);
 						// If you can't attack preference 1 target, move towards
 						// them
-						if (!attacked) {
+						if (!attacked && allowedMove) {
 							moved = AIRoutineUtils.moveTowards(target);
 							if (moved)
 								break;

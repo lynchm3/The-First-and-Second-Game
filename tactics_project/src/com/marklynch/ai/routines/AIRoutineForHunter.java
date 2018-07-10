@@ -61,7 +61,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// Fight
-		if (runFightRoutine()) {
+		if (runFightRoutine(true)) {
 			this.actor.followersShouldFollow = true;
 			return;
 		}

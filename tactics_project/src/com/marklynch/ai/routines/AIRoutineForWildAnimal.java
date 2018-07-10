@@ -31,7 +31,7 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 			return;
 
 		// Fight
-		if (runFightRoutine())
+		if (runFightRoutine(true))
 			return;
 
 		// Search

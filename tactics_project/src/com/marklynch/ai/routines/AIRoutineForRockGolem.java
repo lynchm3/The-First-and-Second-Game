@@ -49,7 +49,7 @@ public class AIRoutineForRockGolem extends AIRoutine {
 		aiRoutineStart();
 
 		// Fight
-		if (runFightRoutine())
+		if (runFightRoutine(true))
 			return;
 
 		// Search

@@ -169,7 +169,7 @@ public class AIRoutineForBlind extends AIRoutine {
 		// Fight
 		if (
 
-		runFightRoutine())
+		runFightRoutine(true))
 			return;
 
 		// Search

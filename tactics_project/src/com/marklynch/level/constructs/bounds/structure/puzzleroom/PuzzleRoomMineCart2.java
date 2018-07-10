@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.squares.Node;
 import com.marklynch.objects.Floor;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
+import com.marklynch.objects.units.Actor.HOBBY;
 
 public class PuzzleRoomMineCart2 extends StructureRoom {
 	int posX;
@@ -131,10 +134,13 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 
 		Templates.ROCK.makeCopy(Game.level.squares[posX + 9][posY + 10], null);
 
-		Templates.MINE_CART.makeCopy(Level.squares[posX + 12][posY + 10], null, Direction.LEFT);
-		Templates.MINE_CART.makeCopy(Level.squares[posX + 6][posY + 10], null, Direction.UP);
-		Templates.MINE_CART.makeCopy(Level.squares[posX + 12][posY + 12], null, Direction.DOWN);
-		Templates.MINE_CART.makeCopy(Level.squares[posX + 6][posY + 12], null, Direction.RIGHT);
+		Templates.MINE_CART.makeCopy(Level.squares[posX + 12][posY + 10], null, Direction.RIGHT);
+		Templates.MINECART_RIDER.makeCopy("Dan", Level.squares[posX + 12][posY + 10], Game.level.factions.townsPeople,
+				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
+				AreaList.town, new int[] {}, new HOBBY[] {});
+		Templates.MINE_CART.makeCopy(Level.squares[posX + 6][posY + 10], null, Direction.DOWN);
+		Templates.MINE_CART.makeCopy(Level.squares[posX + 12][posY + 12], null, Direction.UP);
+		Templates.MINE_CART.makeCopy(Level.squares[posX + 6][posY + 12], null, Direction.LEFT);
 
 	}
 

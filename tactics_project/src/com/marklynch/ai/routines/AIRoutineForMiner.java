@@ -69,7 +69,7 @@ public class AIRoutineForMiner extends AIRoutine {
 		}
 
 		// Fight
-		if (runFightRoutine()) {
+		if (runFightRoutine(true)) {
 			this.actor.followersShouldFollow = true;
 			return;
 		}

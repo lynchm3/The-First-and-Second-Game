@@ -101,7 +101,7 @@ public class AIRoutineForMort extends AIRoutine {
 		}
 
 		// Fight
-		if (runFightRoutine())
+		if (runFightRoutine(true))
 			return;
 
 		// Crime reaction

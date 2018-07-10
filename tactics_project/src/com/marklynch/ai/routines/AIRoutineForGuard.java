@@ -99,7 +99,7 @@ public class AIRoutineForGuard extends AIRoutine {
 		}
 
 		// Fight
-		if (runFightRoutine()) {
+		if (runFightRoutine(true)) {
 			this.actor.followersShouldFollow = true;
 			return;
 		}

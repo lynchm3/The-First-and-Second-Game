@@ -129,6 +129,8 @@ public class Templates {
 
 	public static Trader TRADER;
 
+	public static Human MINECART_RIDER;
+
 	// Domestic animals
 	public static Pig PIG;
 

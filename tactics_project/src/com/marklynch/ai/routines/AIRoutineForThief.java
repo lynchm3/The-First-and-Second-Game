@@ -66,7 +66,7 @@ public class AIRoutineForThief extends AIRoutine {
 			return;
 
 		// Fight
-		if (runFightRoutine())
+		if (runFightRoutine(true))
 			return;
 
 		// Crime reaction
