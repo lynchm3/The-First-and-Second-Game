@@ -1,5 +1,6 @@
 package com.marklynch.ai.routines;
 
+import com.marklynch.level.constructs.animation.primary.AnimationHandsUp;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
@@ -19,7 +20,14 @@ public class AIRoutineForMinecart extends AIRoutine {
 	public void update() {
 
 		aiRoutineStart();
-		runFightRoutine(false);
+
+		// Fight
+		if (runFightRoutine(false)) {
+			return;
+		}
+
+		// Hands up WOO!
+		actor.setPrimaryAnimation(new AnimationHandsUp(actor, 100));
 	}
 
 	@Override

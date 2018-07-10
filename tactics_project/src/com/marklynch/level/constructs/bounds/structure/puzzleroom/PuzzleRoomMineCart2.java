@@ -139,8 +139,17 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
 				AreaList.town, new int[] {}, new HOBBY[] {});
 		Templates.MINE_CART.makeCopy(Level.squares[posX + 6][posY + 10], null, Direction.DOWN);
+		Templates.MINECART_RIDER.makeCopy("Don", Level.squares[posX + 6][posY + 10], Game.level.factions.townsPeople,
+				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
+				AreaList.town, new int[] {}, new HOBBY[] {});
 		Templates.MINE_CART.makeCopy(Level.squares[posX + 12][posY + 12], null, Direction.UP);
+		Templates.MINECART_RIDER.makeCopy("Dar", Level.squares[posX + 12][posY + 12], Game.level.factions.townsPeople,
+				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
+				AreaList.town, new int[] {}, new HOBBY[] {});
 		Templates.MINE_CART.makeCopy(Level.squares[posX + 6][posY + 12], null, Direction.LEFT);
+		Templates.MINECART_RIDER.makeCopy("Dank", Level.squares[posX + 6][posY + 12], Game.level.factions.townsPeople,
+				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
+				AreaList.town, new int[] {}, new HOBBY[] {});
 
 	}
 
