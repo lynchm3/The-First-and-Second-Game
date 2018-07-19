@@ -271,4 +271,7 @@ public abstract class Power {
 			//
 			, new Point(10, 0), new Point(-10, 0), new Point(0, 10), new Point(0, -10) };
 
+	public static Point[] castLocationsOnly2 = new Point[] { //
+			new Point(2, 0), new Point(-2, 0), new Point(0, 2), new Point(0, -2) };
+
 }

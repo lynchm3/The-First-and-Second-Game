@@ -13,6 +13,7 @@ import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.power.PowerBleed;
+import com.marklynch.level.constructs.power.PowerDash;
 import com.marklynch.level.constructs.power.PowerDouse;
 import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.PowerHealRanged;
@@ -102,6 +103,16 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(grabber);
 		// respite.linkedSkillTreeNodes.add(grabber);
 		// grabber.linkedSkillTreeNodes.add(respite);
+
+		// Dash
+		SkillTreeNode dash = new SkillTreeNode(512, 512);
+		activateAtStart.add(dash);
+		grabber.name = "Dash";
+		grabber.description = "Dash";
+		grabber.powersUnlocked.add(new PowerDash(null));
+		skillTreeNodes.add(dash);
+		dash.linkedSkillTreeNodes.add(grabber);
+		grabber.linkedSkillTreeNodes.add(dash);
 
 		// Spirit bag
 		SkillTreeNode spiritBag = new SkillTreeNode(512, 1792);
