@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.power;
 
 import org.lwjgl.util.Point;
 
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
@@ -9,8 +10,10 @@ import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.utils.ResourceUtils;
 
 public class PowerDash extends Power {
@@ -31,6 +34,22 @@ public class PowerDash extends Power {
 	@Override
 	public void cast(final Actor source, GameObject targetGameObject, final Square targetSquare, final Action action) {
 
+		Direction direction = Direction.LEFT;
+
+		if (targetSquare.xInGrid < source.squareGameObjectIsOn.xInGrid) {
+			direction = Direction.LEFT;
+		} else if (targetSquare.xInGrid > source.squareGameObjectIsOn.xInGrid) {
+			direction = Direction.RIGHT;
+		} else if (targetSquare.yInGrid < source.squareGameObjectIsOn.yInGrid) {
+			direction = Direction.UP;
+		} else if (targetSquare.yInGrid > source.squareGameObjectIsOn.yInGrid) {
+			direction = Direction.DOWN;
+		}
+
+		int distance = 2;
+
+		push(source, direction, distance);
+
 		source.setPrimaryAnimation(new AnimationStraightLine(source, 2f, true, new Square[] { targetSquare }) {
 			@Override
 			public void runCompletionAlgorightm(boolean wait) {
@@ -39,6 +58,40 @@ public class PowerDash extends Power {
 				// postRangedAnimation(arrow);
 			}
 		});
+	}
+
+	public int push(Actor source, Direction direction, int attemptedDistance) {
+		int actualPush = attemptedDistance;
+		boolean hitWall = false;
+		for (int i = 0; i < attemptedDistance; i++) {
+			Square square = null;
+			int squareX;
+			int squareY;
+			if (direction == direction.LEFT) {
+				squareX = source.squareGameObjectIsOn.xInGrid - i;
+				squareY = source.squareGameObjectIsOn.yInGrid;
+			} else if (direction == Direction.RIGHT) {
+				squareX = source.squareGameObjectIsOn.xInGrid + i;
+				squareY = source.squareGameObjectIsOn.yInGrid;
+			} else if (direction == Direction.UP) {
+				squareX = source.squareGameObjectIsOn.xInGrid;
+				squareY = source.squareGameObjectIsOn.yInGrid - i;
+			} else /* direction == direction.DOWN */ {
+				squareX = source.squareGameObjectIsOn.xInGrid;
+				squareY = source.squareGameObjectIsOn.yInGrid + i;
+			}
+
+			if (squareX > 0 && squareY > 0 && squareX < Level.squares.length && squareY < Level.squares[0].length) {
+				square = Level.squares[squareX][squareY];
+				if (square.inventory.contains(Wall.class)) {
+					return i - 1;
+				}
+			} else {
+				return i - 1;
+			}
+		}
+
+		return 2;
 	}
 
 	public void postAnimation(GameObject pushedGameObject, Action action, GameObject obstacle) {
