@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
@@ -34,6 +35,8 @@ public abstract class Power {
 	public boolean activateAtStartOfTurn = false;
 
 	public int range;
+	public Point[] castLocations = new Point[] { new Point(1, 0), new Point(2, 0), new Point(-1, 0), new Point(0, 1),
+			new Point(0, -1) };
 	public Point[] areaOfEffect;
 
 	public Power(String name, Texture image, GameObject source, Effect[] effects, int range, Point[] areaOfEffect,
@@ -92,6 +95,22 @@ public abstract class Power {
 		// return true;
 		// }
 		// return false;
+	}
+
+	public boolean squareInCastLocations(Actor caster, Square potentialCastLocation) {
+
+		for (Point point : castLocations) {
+			int castLocationSquareX = caster.squareGameObjectIsOn.xInGrid + point.getX();
+			int castLocationSquareY = caster.squareGameObjectIsOn.yInGrid + point.getY();
+			if (castLocationSquareX > 0 && castLocationSquareY > 0 && castLocationSquareX < Level.squares.length
+					&& castLocationSquareY < Level.squares[0].length) {
+				Square castLocationSquare = Level.squares[castLocationSquareX][castLocationSquareY];
+				if (potentialCastLocation == castLocationSquare) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static void loadActionImages() {

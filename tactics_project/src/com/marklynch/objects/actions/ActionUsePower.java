@@ -120,6 +120,9 @@ public class ActionUsePower extends Action {
 		if (!power.hasRange(performer.straightLineDistanceTo(targetSquare)))
 			return false;
 
+		if (!power.squareInCastLocations(performer, targetSquare))
+			return false;
+
 		return true;
 	}
 

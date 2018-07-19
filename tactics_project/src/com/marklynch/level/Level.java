@@ -1182,8 +1182,10 @@ public class Level {
 						if (selectedPower.hasRange(i)) {
 							ArrayList<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
 							for (Square squareToHighlight : squaresToHighlight) {
-								if (squareToHighlight.visibleToPlayer || Game.fullVisiblity) {
-									squareToHighlight.drawHighlight();
+								if (selectedPower.squareInCastLocations(Level.player, squareToHighlight)) {
+									if (squareToHighlight.visibleToPlayer || Game.fullVisiblity) {
+										squareToHighlight.drawHighlight();
+									}
 								}
 							}
 
