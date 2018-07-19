@@ -35,17 +35,18 @@ public abstract class Power {
 	public boolean activateAtStartOfTurn = false;
 
 	public int range;
-	public Point[] castLocations = new Point[] { new Point(1, 0), new Point(2, 0), new Point(-1, 0), new Point(0, 1),
-			new Point(0, -1) };
+	public Point[] castLocations;
 	public Point[] areaOfEffect;
 
-	public Power(String name, Texture image, GameObject source, Effect[] effects, int range, Point[] areaOfEffect,
-			int loudness, boolean hostile, boolean potentiallyCriminal, Crime.TYPE crimeSeverity) {
+	public Power(String name, Texture image, GameObject source, Effect[] effects, int range, Point[] castLocations,
+			Point[] areaOfEffect, int loudness, boolean hostile, boolean potentiallyCriminal,
+			Crime.TYPE crimeSeverity) {
 		this.name = name;
 		this.image = image;
 		this.source = source;
 		this.effects = effects;
 		this.range = range;
+		this.castLocations = castLocations;
 		this.areaOfEffect = areaOfEffect;
 		this.loudness = loudness;
 		this.hostile = hostile;
@@ -99,6 +100,9 @@ public abstract class Power {
 
 	public boolean squareInCastLocations(Actor caster, Square potentialCastLocation) {
 
+		if (castLocations == null)
+			return true;
+
 		for (Point point : castLocations) {
 			int castLocationSquareX = caster.squareGameObjectIsOn.xInGrid + point.getX();
 			int castLocationSquareY = caster.squareGameObjectIsOn.yInGrid + point.getY();
@@ -136,5 +140,135 @@ public abstract class Power {
 	}
 
 	public abstract Power makeCopy(GameObject source);
+
+	public static Point[] castLocationsLine1 = new Point[] {
+			//
+			new Point(1, 0), new Point(-1, 0), new Point(0, 1), new Point(0, -1) };
+
+	public static Point[] castLocationsLine2 = new Point[] {
+			//
+			new Point(1, 0), new Point(-1, 0), new Point(0, 1), new Point(0, -1)
+			//
+			, new Point(2, 0), new Point(-2, 0), new Point(0, 2), new Point(0, -2) };
+
+	public static Point[] castLocationsLine3 = new Point[] {
+			//
+			new Point(1, 0), new Point(-1, 0), new Point(0, 1), new Point(0, -1)
+			//
+			, new Point(2, 0), new Point(-2, 0), new Point(0, 2), new Point(0, -2)
+			//
+			, new Point(3, 0), new Point(-3, 0), new Point(0, 3), new Point(0, -3) };
+
+	public static Point[] castLocationsLine4 = new Point[] {
+			//
+			new Point(1, 0), new Point(-1, 0), new Point(0, 1), new Point(0, -1)
+			//
+			, new Point(2, 0), new Point(-2, 0), new Point(0, 2), new Point(0, -2)
+			//
+			, new Point(3, 0), new Point(-3, 0), new Point(0, 3), new Point(0, -3)
+			//
+			, new Point(4, 0), new Point(-4, 0), new Point(0, 4), new Point(0, -4) };
+
+	public static Point[] castLocationsLine5 = new Point[] {
+			//
+			new Point(1, 0), new Point(-1, 0), new Point(0, 1), new Point(0, -1)
+			//
+			, new Point(2, 0), new Point(-2, 0), new Point(0, 2), new Point(0, -2)
+			//
+			, new Point(3, 0), new Point(-3, 0), new Point(0, 3), new Point(0, -3)
+			//
+			, new Point(4, 0), new Point(-4, 0), new Point(0, 4), new Point(0, -4)
+			//
+			, new Point(5, 0), new Point(-5, 0), new Point(0, 5), new Point(0, -5) };
+
+	public static Point[] castLocationsLine6 = new Point[] {
+			//
+			new Point(1, 0), new Point(-1, 0), new Point(0, 1), new Point(0, -1)
+			//
+			, new Point(2, 0), new Point(-2, 0), new Point(0, 2), new Point(0, -2)
+			//
+			, new Point(3, 0), new Point(-3, 0), new Point(0, 3), new Point(0, -3)
+			//
+			, new Point(4, 0), new Point(-4, 0), new Point(0, 4), new Point(0, -4)
+			//
+			, new Point(5, 0), new Point(-5, 0), new Point(0, 5), new Point(0, -5)
+			//
+			, new Point(6, 0), new Point(-6, 0), new Point(0, 6), new Point(0, -6) };
+
+	public static Point[] castLocationsLine7 = new Point[] {
+			//
+			new Point(1, 0), new Point(-1, 0), new Point(0, 1), new Point(0, -1)
+			//
+			, new Point(2, 0), new Point(-2, 0), new Point(0, 2), new Point(0, -2)
+			//
+			, new Point(3, 0), new Point(-3, 0), new Point(0, 3), new Point(0, -3)
+			//
+			, new Point(4, 0), new Point(-4, 0), new Point(0, 4), new Point(0, -4)
+			//
+			, new Point(5, 0), new Point(-5, 0), new Point(0, 5), new Point(0, -5)
+			//
+			, new Point(6, 0), new Point(-6, 0), new Point(0, 6), new Point(0, -6)
+			//
+			, new Point(7, 0), new Point(-7, 0), new Point(0, 7), new Point(0, -7) };
+
+	public static Point[] castLocationsLine8 = new Point[] {
+			//
+			new Point(1, 0), new Point(-1, 0), new Point(0, 1), new Point(0, -1)
+			//
+			, new Point(2, 0), new Point(-2, 0), new Point(0, 2), new Point(0, -2)
+			//
+			, new Point(3, 0), new Point(-3, 0), new Point(0, 3), new Point(0, -3)
+			//
+			, new Point(4, 0), new Point(-4, 0), new Point(0, 4), new Point(0, -4)
+			//
+			, new Point(5, 0), new Point(-5, 0), new Point(0, 5), new Point(0, -5)
+			//
+			, new Point(6, 0), new Point(-6, 0), new Point(0, 6), new Point(0, -6)
+			//
+			, new Point(7, 0), new Point(-7, 0), new Point(0, 7), new Point(0, -7)
+			//
+			, new Point(8, 0), new Point(-8, 0), new Point(0, 8), new Point(0, -8) };
+
+	public static Point[] castLocationsLine9 = new Point[] {
+			//
+			new Point(1, 0), new Point(-1, 0), new Point(0, 1), new Point(0, -1)
+			//
+			, new Point(2, 0), new Point(-2, 0), new Point(0, 2), new Point(0, -2)
+			//
+			, new Point(3, 0), new Point(-3, 0), new Point(0, 3), new Point(0, -3)
+			//
+			, new Point(4, 0), new Point(-4, 0), new Point(0, 4), new Point(0, -4)
+			//
+			, new Point(5, 0), new Point(-5, 0), new Point(0, 5), new Point(0, -5)
+			//
+			, new Point(6, 0), new Point(-6, 0), new Point(0, 6), new Point(0, -6)
+			//
+			, new Point(7, 0), new Point(-7, 0), new Point(0, 7), new Point(0, -7)
+			//
+			, new Point(8, 0), new Point(-8, 0), new Point(0, 8), new Point(0, -8)
+			//
+			, new Point(9, 0), new Point(-9, 0), new Point(0, 9), new Point(0, -9) };
+
+	public static Point[] castLocationsLine10 = new Point[] {
+			//
+			new Point(1, 0), new Point(-1, 0), new Point(0, 1), new Point(0, -1)
+			//
+			, new Point(2, 0), new Point(-2, 0), new Point(0, 2), new Point(0, -2)
+			//
+			, new Point(3, 0), new Point(-3, 0), new Point(0, 3), new Point(0, -3)
+			//
+			, new Point(4, 0), new Point(-4, 0), new Point(0, 4), new Point(0, -4)
+			//
+			, new Point(5, 0), new Point(-5, 0), new Point(0, 5), new Point(0, -5)
+			//
+			, new Point(6, 0), new Point(-6, 0), new Point(0, 6), new Point(0, -6)
+			//
+			, new Point(7, 0), new Point(-7, 0), new Point(0, 7), new Point(0, -7)
+			//
+			, new Point(8, 0), new Point(-8, 0), new Point(0, 8), new Point(0, -8)
+			//
+			, new Point(9, 0), new Point(-9, 0), new Point(0, 9), new Point(0, -9)
+			//
+			, new Point(10, 0), new Point(-10, 0), new Point(0, 10), new Point(0, -10) };
 
 }

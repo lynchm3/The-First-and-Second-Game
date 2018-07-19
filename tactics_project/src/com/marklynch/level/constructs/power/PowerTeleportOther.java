@@ -20,7 +20,7 @@ public class PowerTeleportOther extends Power {
 
 	public PowerTeleportOther(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("up.png", false), source, new Effect[] {}, 20,
-				new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
+				null, new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 

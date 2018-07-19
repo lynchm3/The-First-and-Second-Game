@@ -23,8 +23,8 @@ public class PowerInferno extends Power {
 	public PowerInferno(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_burn.png", false), source,
 				new Effect[] { new EffectBurning(source, null, 3) }, 5,
-				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
-				10, true, true, Crime.TYPE.CRIME_ASSAULT);
+				null,
+				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 

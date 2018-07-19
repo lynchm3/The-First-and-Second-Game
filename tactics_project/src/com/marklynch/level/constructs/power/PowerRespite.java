@@ -16,7 +16,7 @@ public class PowerRespite extends Power {
 
 	public PowerRespite(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("bed.png", false), source, new Effect[] {}, 0,
-				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
+				null, new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
 		passive = true;
 		activateAtStartOfTurn = true;
 	}

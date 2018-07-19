@@ -18,8 +18,8 @@ public class PowerDouse extends Power {
 
 	public PowerDouse(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_douse.png", false), source,
-				new Effect[] { new EffectWet(source, null, 3) }, 5, new Point[] { new Point(0, 0) }, 10, true, true,
-				Crime.TYPE.CRIME_DOUSE);
+				new Effect[] { new EffectWet(source, null, 3) }, 5, null, new Point[] { new Point(0, 0) }, 10, true,
+				true, Crime.TYPE.CRIME_DOUSE);
 		selectTarget = true;
 	}
 

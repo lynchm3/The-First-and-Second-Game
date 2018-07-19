@@ -19,8 +19,8 @@ public class PowerPoisonThrowingKnives extends Power {
 	public PowerPoisonThrowingKnives(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_poison.png", false), source,
 				new Effect[] { new EffectPoison(source, null, 3) }, 10,
-				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
-				1, true, true, Crime.TYPE.CRIME_ASSAULT);
+				null,
+				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) }, 1, true, true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 

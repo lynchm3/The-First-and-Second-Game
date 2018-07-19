@@ -14,8 +14,8 @@ public class PowerHealSelf extends Power {
 
 	public PowerHealSelf(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_heal.png", false), source,
-				new Effect[] { new EffectHeal(source, null, 1) }, 0, new Point[] { new Point(0, 0) }, 5, false, false,
-				Crime.TYPE.NONE);
+				new Effect[] { new EffectHeal(source, null, 1) }, 0, null, new Point[] { new Point(0, 0) }, 5, false,
+				false, Crime.TYPE.NONE);
 	}
 
 	@Override

@@ -18,8 +18,8 @@ public class PowerHealTouch extends Power {
 
 	public PowerHealTouch(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_heal.png", false), source,
-				new Effect[] { new EffectHeal(source, null, 1) }, 1, new Point[] { new Point(0, 0) }, 5, false, false,
-				Crime.TYPE.CRIME_ASSAULT);
+				new Effect[] { new EffectHeal(source, null, 1) }, 1, null, new Point[] { new Point(0, 0) }, 5, false,
+				false, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 

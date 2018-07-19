@@ -16,7 +16,7 @@ public class PowerSpiritBag extends Power {
 
 	public PowerSpiritBag(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("bag.png", false), source, new Effect[] {}, 0,
-				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
+				null, new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
 		passive = true;
 		activateAtStartOfTurn = false;
 	}

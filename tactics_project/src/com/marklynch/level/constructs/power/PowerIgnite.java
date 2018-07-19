@@ -18,8 +18,8 @@ public class PowerIgnite extends Power {
 
 	public PowerIgnite(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_burn.png", false), source,
-				new Effect[] { new EffectBurning(source, null, 3) }, 5, new Point[] { new Point(0, 0) }, 10, true, true,
-				Crime.TYPE.CRIME_ASSAULT);
+				new Effect[] { new EffectBurning(source, null, 3) }, 5, null, new Point[] { new Point(0, 0) }, 10, true,
+				true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 

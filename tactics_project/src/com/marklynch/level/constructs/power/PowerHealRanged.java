@@ -19,8 +19,8 @@ public class PowerHealRanged extends Power {
 	public PowerHealRanged(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_heal.png", false), source,
 				new Effect[] { new EffectHeal(source, null, 1) }, 5,
-				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
-				5, false, false, Crime.TYPE.CRIME_ASSAULT);
+				null,
+				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) }, 5, false, false, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 
