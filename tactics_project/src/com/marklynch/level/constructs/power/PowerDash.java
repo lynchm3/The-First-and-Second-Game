@@ -48,22 +48,38 @@ public class PowerDash extends Power {
 
 		int distance = 2;
 
-		push(source, direction, distance);
+		int correctedDistance = push(source, direction, distance, false);
+		Square correctedTargetSquare = null;
+		if (direction == direction.LEFT) {
+			correctedTargetSquare = Level.squares[source.squareGameObjectIsOn.xInGrid
+					- correctedDistance][source.squareGameObjectIsOn.yInGrid];
+		} else if (direction == Direction.RIGHT) {
+			correctedTargetSquare = Level.squares[source.squareGameObjectIsOn.xInGrid
+					+ correctedDistance][source.squareGameObjectIsOn.yInGrid];
+		} else if (direction == Direction.UP) {
+			correctedTargetSquare = Level.squares[source.squareGameObjectIsOn.xInGrid][source.squareGameObjectIsOn.yInGrid
+					- correctedDistance];
+		} else /* direction == direction.DOWN */ {
+			correctedTargetSquare = Level.squares[source.squareGameObjectIsOn.xInGrid][source.squareGameObjectIsOn.yInGrid
+					+ correctedDistance];
+		}
+
+		final Square finalCorrectedTargetSquare = correctedTargetSquare;
 
 		source.setPrimaryAnimation(new AnimationStraightLine(source, 2f, true, new Square[] { targetSquare }) {
 			@Override
 			public void runCompletionAlgorightm(boolean wait) {
 				super.runCompletionAlgorightm(wait);
-				postRangedAnimation(source, targetSquare);
+				postRangedAnimation(source, finalCorrectedTargetSquare);
 				// postRangedAnimation(arrow);
 			}
 		});
 	}
 
-	public int push(Actor source, Direction direction, int attemptedDistance) {
+	public int push(GameObject source, Direction direction, int attemptedDistance, boolean doAnimation) {
 		int actualPush = attemptedDistance;
 		boolean hitWall = false;
-		for (int i = 0; i < attemptedDistance; i++) {
+		for (int i = 1; i < attemptedDistance; i++) {
 			Square square = null;
 			int squareX;
 			int squareY;
@@ -85,13 +101,55 @@ public class PowerDash extends Power {
 				square = Level.squares[squareX][squareY];
 				if (square.inventory.contains(Wall.class)) {
 					return i - 1;
+				} else {
+					final GameObject gameObjectThatCantShareSquare = square.inventory.gameObjectThatCantShareSquare;
+					if (gameObjectThatCantShareSquare != null) {
+
+						int recursiveDistance = push(gameObjectThatCantShareSquare, direction, attemptedDistance, true);
+						Square recursiveSquare;
+						if (direction == direction.LEFT) {
+							recursiveSquare = Level.squares[gameObjectThatCantShareSquare.squareGameObjectIsOn.xInGrid
+									- recursiveDistance][gameObjectThatCantShareSquare.squareGameObjectIsOn.yInGrid];
+						} else if (direction == Direction.RIGHT) {
+							recursiveSquare = Level.squares[gameObjectThatCantShareSquare.squareGameObjectIsOn.xInGrid
+									+ recursiveDistance][gameObjectThatCantShareSquare.squareGameObjectIsOn.yInGrid];
+						} else if (direction == Direction.UP) {
+							recursiveSquare = Level.squares[gameObjectThatCantShareSquare.squareGameObjectIsOn.xInGrid][gameObjectThatCantShareSquare.squareGameObjectIsOn.yInGrid
+									- recursiveDistance];
+						} else /* direction == direction.DOWN */ {
+							recursiveSquare = Level.squares[gameObjectThatCantShareSquare.squareGameObjectIsOn.xInGrid][gameObjectThatCantShareSquare.squareGameObjectIsOn.yInGrid
+									+ recursiveDistance];
+						}
+
+						final Square finaledSquare = recursiveSquare;
+
+						// public AnimationStraightLine(GameObject projectileObject, float speed,
+						// boolean blockAI, Square... targetSquares) {
+
+						gameObjectThatCantShareSquare.setPrimaryAnimation(
+								new AnimationStraightLine(gameObjectThatCantShareSquare, 2f, true, finaledSquare) {
+									@Override
+									public void runCompletionAlgorightm(boolean wait) {
+										super.runCompletionAlgorightm(wait);
+										postRangedAnimation(gameObjectThatCantShareSquare, finaledSquare);
+										// postRangedAnimation(arrow);
+									}
+								});
+
+						int distanceTargetIsPushed = i + recursiveDistance;
+						if (distanceTargetIsPushed > attemptedDistance) {
+							return attemptedDistance;
+						} else {
+							return distanceTargetIsPushed;
+						}
+					}
 				}
 			} else {
 				return i - 1;
 			}
 		}
 
-		return 2;
+		return attemptedDistance;
 	}
 
 	public void postAnimation(GameObject pushedGameObject, Action action, GameObject obstacle) {
