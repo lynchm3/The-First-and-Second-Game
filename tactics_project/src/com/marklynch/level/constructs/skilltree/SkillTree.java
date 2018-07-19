@@ -107,9 +107,9 @@ public class SkillTree implements Draggable, Scrollable {
 		// Dash
 		SkillTreeNode dash = new SkillTreeNode(512, 512);
 		activateAtStart.add(dash);
-		grabber.name = "Dash";
-		grabber.description = "Dash";
-		grabber.powersUnlocked.add(new PowerDash(null));
+		dash.name = "Dash";
+		dash.description = "Dash";
+		dash.powersUnlocked.add(new PowerDash(null));
 		skillTreeNodes.add(dash);
 		dash.linkedSkillTreeNodes.add(grabber);
 		grabber.linkedSkillTreeNodes.add(dash);

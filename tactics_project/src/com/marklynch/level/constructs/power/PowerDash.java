@@ -15,7 +15,7 @@ import com.marklynch.utils.ResourceUtils;
 
 public class PowerDash extends Power {
 
-	private static String NAME = "Telekinetic Push";
+	private static String NAME = "Dash";
 
 	public PowerDash(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("right.png", false), source, new Effect[] {}, 3,

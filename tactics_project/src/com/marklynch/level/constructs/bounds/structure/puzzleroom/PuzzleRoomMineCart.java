@@ -143,6 +143,10 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		islandSquares.add(Level.squares[posX + 12][posY + 4]);
 		islandSquares.add(Level.squares[posX + 12][posY + 5]);
 
+		// Single square on it's own to test dash
+		Templates.VOID_HOLE.makeCopy(Level.squares[posX + 2][posY + 1], null, voidSquare);
+		Level.squares[posX + 2][posY + 1].imageTexture = Square.VOID_SQUARE;
+
 		// Bonus void to get the chest
 		for (int i = 9; i < 13; i++) {
 			for (int j = 2; j < 8; j++) {
