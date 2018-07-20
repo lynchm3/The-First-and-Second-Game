@@ -1,5 +1,7 @@
 package com.marklynch.level.constructs.power;
 
+import java.util.ArrayList;
+
 import org.lwjgl.util.Point;
 
 import com.marklynch.level.Level;
@@ -49,7 +51,8 @@ public class PowerDash extends Power {
 
 		int distance = 2;
 
-		int correctedDistance = push(source, direction, distance, false);
+		ArrayList<PushedObject> pushedObjects = new ArrayList<PushedObject>();
+		int correctedDistance = push(source, direction, distance, false, pushedObjects);
 		System.out.println("correctedDistance = " + correctedDistance);
 		Square correctedTargetSquare = null;
 		if (direction == direction.LEFT) {
@@ -66,23 +69,26 @@ public class PowerDash extends Power {
 					+ correctedDistance];
 		}
 
-		final Square finalCorrectedTargetSquare = correctedTargetSquare;
-		System.out.println("Before dash - " + finalCorrectedTargetSquare.inventory);
+		pushedObjects.add(new PushedObject(source, correctedTargetSquare));
 
-		source.setPrimaryAnimation(
-				new AnimationStraightLine(source, 2f, true, new Square[] { finalCorrectedTargetSquare }) {
-					@Override
-					public void runCompletionAlgorightm(boolean wait) {
-						System.out.println("After dash 0 - " + finalCorrectedTargetSquare.inventory);
-						super.runCompletionAlgorightm(wait);
-						System.out.println("After dash 1 - " + finalCorrectedTargetSquare.inventory);
-						postRangedAnimation(source, finalCorrectedTargetSquare);
-						System.out.println("After dash 2 - " + finalCorrectedTargetSquare.inventory);
-					}
-				});
+		for (final PushedObject pushedObject : pushedObjects) {
+
+			System.out.println("pushedObject = " + pushedObject.gameObject + ", " + pushedObject.destinationSquare);
+
+			pushedObject.gameObject.setPrimaryAnimation(new AnimationStraightLine(pushedObject.gameObject, 2f, true,
+					new Square[] { pushedObject.destinationSquare }) {
+				@Override
+				public void runCompletionAlgorightm(boolean wait) {
+					super.runCompletionAlgorightm(wait);
+					postRangedAnimation(pushedObject.gameObject, pushedObject.destinationSquare);
+				}
+			});
+
+		}
 	}
 
-	public int push(GameObject source, Direction direction, int attemptedDistance, boolean doAnimation) {
+	public int push(GameObject source, Direction direction, int attemptedDistance, boolean doAnimation,
+			ArrayList<PushedObject> pushedObjects) {
 
 		System.out.println("PUSH " + source + ", " + direction + ", " + attemptedDistance + ", " + doAnimation);
 
@@ -117,7 +123,8 @@ public class PowerDash extends Power {
 					System.out.println("hit gameObject " + gameObjectThatCantShareSquare);
 					if (gameObjectThatCantShareSquare != null) {
 
-						int recursiveDistance = push(gameObjectThatCantShareSquare, direction, attemptedDistance, true);
+						int recursiveDistance = push(gameObjectThatCantShareSquare, direction, attemptedDistance, true,
+								pushedObjects);
 						Square recursiveSquare;
 						if (direction == direction.LEFT) {
 							recursiveSquare = Level.squares[gameObjectThatCantShareSquare.squareGameObjectIsOn.xInGrid
@@ -133,20 +140,21 @@ public class PowerDash extends Power {
 									+ recursiveDistance];
 						}
 
-						final Square finaledSquare = recursiveSquare;
-
 						// public AnimationStraightLine(GameObject projectileObject, float speed,
 						// boolean blockAI, Square... targetSquares) {
 
-						gameObjectThatCantShareSquare.setPrimaryAnimation(
-								new AnimationStraightLine(gameObjectThatCantShareSquare, 2f, true, finaledSquare) {
-									@Override
-									public void runCompletionAlgorightm(boolean wait) {
-										super.runCompletionAlgorightm(wait);
-										postRangedAnimation(gameObjectThatCantShareSquare, finaledSquare);
-										// postRangedAnimation(arrow);
-									}
-								});
+						pushedObjects.add(new PushedObject(gameObjectThatCantShareSquare, recursiveSquare));
+
+						// gameObjectThatCantShareSquare.setPrimaryAnimation(
+						// new AnimationStraightLine(gameObjectThatCantShareSquare, 2f, true,
+						// finaledSquare) {
+						// @Override
+						// public void runCompletionAlgorightm(boolean wait) {
+						// super.runCompletionAlgorightm(wait);
+						// postRangedAnimation(gameObjectThatCantShareSquare, finaledSquare);
+						// // postRangedAnimation(arrow);
+						// }
+						// });
 
 						int distanceTargetIsPushed = i - 1 + recursiveDistance;
 						if (distanceTargetIsPushed > attemptedDistance) {
@@ -172,6 +180,23 @@ public class PowerDash extends Power {
 		if (obstacle != null) {
 			obstacle.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
 		}
+	}
+
+	public void drawUI() {
+
+		ArrayList<PushedObject> pushedObjects = new ArrayList<PushedObject>();
+	}
+
+	public static class PushedObject {
+		GameObject gameObject;
+		Square destinationSquare;
+
+		public PushedObject(GameObject gameObject, Square destinationSquare) {
+			super();
+			this.gameObject = gameObject;
+			this.destinationSquare = destinationSquare;
+		}
+
 	}
 
 }

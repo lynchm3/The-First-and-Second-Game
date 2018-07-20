@@ -139,6 +139,10 @@ public abstract class Power {
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " used ", name }));
 	}
 
+	public void darwUI() {
+
+	}
+
 	public abstract Power makeCopy(GameObject source);
 
 	public static Point[] castLocationsLine1 = new Point[] {
