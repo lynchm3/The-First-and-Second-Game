@@ -59,6 +59,8 @@ public class VoidHole extends GameObject {
 	}
 
 	public void updateVoid() {
+		System.out.println("updateVoid 1 - " + squareGameObjectIsOn.inventory);
+
 		if (squareGameObjectIsOn == null)
 			return;
 
@@ -90,6 +92,7 @@ public class VoidHole extends GameObject {
 
 			}
 		}
+		System.out.println("updateVoid 2 - " + squareGameObjectIsOn.inventory);
 
 	}
 

@@ -48,6 +48,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public void add(GameObject gameObject) {
 		if (!gameObjects.contains(gameObject)) {
 
+			if (gameObject == Game.level.player) {
+				System.out.println("add() start - " + this);
+			}
+
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null)
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
@@ -92,6 +96,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			}
 
 			refresh();
+
+			if (gameObject == Game.level.player) {
+				System.out.println("add() end - " + this);
+			}
 		}
 	}
 
@@ -312,6 +320,19 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 	public void setGameObjectsNonGround(ArrayList<GameObject> gameObjectsNonGround) {
 		this.gameObjectsNonGround = gameObjectsNonGround;
+	}
+
+	@Override
+	public String toString() {
+		String string = "";
+		string += "SquareInventory { ";
+		string += "gameObjects [";
+		for (GameObject gameObject : gameObjects) {
+			string += "" + gameObject + ", ";
+		}
+		string += " ]";
+		string += " }";
+		return string;
 	}
 
 }

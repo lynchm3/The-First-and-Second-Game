@@ -67,14 +67,17 @@ public class PowerDash extends Power {
 		}
 
 		final Square finalCorrectedTargetSquare = correctedTargetSquare;
+		System.out.println("Before dash - " + finalCorrectedTargetSquare.inventory);
 
 		source.setPrimaryAnimation(
 				new AnimationStraightLine(source, 2f, true, new Square[] { finalCorrectedTargetSquare }) {
 					@Override
 					public void runCompletionAlgorightm(boolean wait) {
+						System.out.println("After dash 0 - " + finalCorrectedTargetSquare.inventory);
 						super.runCompletionAlgorightm(wait);
+						System.out.println("After dash 1 - " + finalCorrectedTargetSquare.inventory);
 						postRangedAnimation(source, finalCorrectedTargetSquare);
-						// postRangedAnimation(arrow);
+						System.out.println("After dash 2 - " + finalCorrectedTargetSquare.inventory);
 					}
 				});
 	}
@@ -154,6 +157,8 @@ public class PowerDash extends Power {
 					}
 				}
 			} else {
+
+				// Outside of grid
 				return i - 1;
 			}
 		}
