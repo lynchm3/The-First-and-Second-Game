@@ -18,6 +18,7 @@ import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fish;
+import com.marklynch.utils.Utils;
 
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
 
@@ -106,6 +107,11 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	@Override
 	public int remove(GameObject gameObject) {
 		if (gameObjects.contains(gameObject)) {
+
+			if (gameObject instanceof VoidHole) {
+				System.out.println("Remove!");
+				Utils.printStackTrace();
+			}
 
 			gameObject.lastSquare = this.square;
 			gameObjects.remove(gameObject);

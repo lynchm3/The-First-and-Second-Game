@@ -1712,7 +1712,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void attackedBy(Object attacker, Action action) {
-		checkIfDestroyed(attacker, action);
+		if (attackable) {
+			checkIfDestroyed(attacker, action);
+		}
 	}
 
 	public void addEffect(Effect effectToAdd) {
