@@ -32,23 +32,25 @@ public class PowerDash extends Power {
 	}
 
 	@Override
-	public void cast(final Actor source, GameObject targetGameObject, final Square targetSquare, final Action action) {
+	public void cast(final Actor source, GameObject targetGameObject, final Square attemptedTargetSquare,
+			final Action action) {
 
 		Direction direction = Direction.LEFT;
 
-		if (targetSquare.xInGrid < source.squareGameObjectIsOn.xInGrid) {
+		if (attemptedTargetSquare.xInGrid < source.squareGameObjectIsOn.xInGrid) {
 			direction = Direction.LEFT;
-		} else if (targetSquare.xInGrid > source.squareGameObjectIsOn.xInGrid) {
+		} else if (attemptedTargetSquare.xInGrid > source.squareGameObjectIsOn.xInGrid) {
 			direction = Direction.RIGHT;
-		} else if (targetSquare.yInGrid < source.squareGameObjectIsOn.yInGrid) {
+		} else if (attemptedTargetSquare.yInGrid < source.squareGameObjectIsOn.yInGrid) {
 			direction = Direction.UP;
-		} else if (targetSquare.yInGrid > source.squareGameObjectIsOn.yInGrid) {
+		} else if (attemptedTargetSquare.yInGrid > source.squareGameObjectIsOn.yInGrid) {
 			direction = Direction.DOWN;
 		}
 
 		int distance = 2;
 
 		int correctedDistance = push(source, direction, distance, false);
+		System.out.println("correctedDistance = " + correctedDistance);
 		Square correctedTargetSquare = null;
 		if (direction == direction.LEFT) {
 			correctedTargetSquare = Level.squares[source.squareGameObjectIsOn.xInGrid
@@ -66,24 +68,28 @@ public class PowerDash extends Power {
 
 		final Square finalCorrectedTargetSquare = correctedTargetSquare;
 
-		source.setPrimaryAnimation(new AnimationStraightLine(source, 2f, true, new Square[] { targetSquare }) {
-			@Override
-			public void runCompletionAlgorightm(boolean wait) {
-				super.runCompletionAlgorightm(wait);
-				postRangedAnimation(source, finalCorrectedTargetSquare);
-				// postRangedAnimation(arrow);
-			}
-		});
+		source.setPrimaryAnimation(
+				new AnimationStraightLine(source, 2f, true, new Square[] { finalCorrectedTargetSquare }) {
+					@Override
+					public void runCompletionAlgorightm(boolean wait) {
+						super.runCompletionAlgorightm(wait);
+						postRangedAnimation(source, finalCorrectedTargetSquare);
+						// postRangedAnimation(arrow);
+					}
+				});
 	}
 
 	public int push(GameObject source, Direction direction, int attemptedDistance, boolean doAnimation) {
-		int actualPush = attemptedDistance;
-		boolean hitWall = false;
-		for (int i = 1; i < attemptedDistance; i++) {
+
+		System.out.println("PUSH " + source + ", " + direction + ", " + attemptedDistance + ", " + doAnimation);
+
+		// int actualPush = attemptedDistance;
+		// boolean hitWall = false;
+		for (int i = 1; i <= attemptedDistance; i++) {
 			Square square = null;
 			int squareX;
 			int squareY;
-			if (direction == direction.LEFT) {
+			if (direction == Direction.LEFT) {
 				squareX = source.squareGameObjectIsOn.xInGrid - i;
 				squareY = source.squareGameObjectIsOn.yInGrid;
 			} else if (direction == Direction.RIGHT) {
@@ -99,10 +105,13 @@ public class PowerDash extends Power {
 
 			if (squareX > 0 && squareY > 0 && squareX < Level.squares.length && squareY < Level.squares[0].length) {
 				square = Level.squares[squareX][squareY];
+				System.out.println("checking square " + square);
 				if (square.inventory.contains(Wall.class)) {
+					System.out.println("hit wall, returning");
 					return i - 1;
 				} else {
 					final GameObject gameObjectThatCantShareSquare = square.inventory.gameObjectThatCantShareSquare;
+					System.out.println("hit gameObject " + gameObjectThatCantShareSquare);
 					if (gameObjectThatCantShareSquare != null) {
 
 						int recursiveDistance = push(gameObjectThatCantShareSquare, direction, attemptedDistance, true);

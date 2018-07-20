@@ -20,7 +20,7 @@ public class VoidHole extends GameObject {
 		// DROP HOLE
 		canBePickedUp = false;
 		fitsInInventory = false;
-		canShareSquare = false;
+		canShareSquare = true;
 		canContainOtherObjects = false;
 		persistsWhenCantBeSeen = true;
 		attackable = false;
