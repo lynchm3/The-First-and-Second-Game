@@ -148,7 +148,7 @@ public class PowerDash extends Power {
 									}
 								});
 
-						int distanceTargetIsPushed = i + recursiveDistance;
+						int distanceTargetIsPushed = i - 1 + recursiveDistance;
 						if (distanceTargetIsPushed > attemptedDistance) {
 							return attemptedDistance;
 						} else {
