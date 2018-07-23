@@ -139,7 +139,7 @@ public abstract class Power {
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " used ", name }));
 	}
 
-	public void darwUI() {
+	public void drawUI() {
 
 	}
 

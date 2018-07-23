@@ -1193,6 +1193,8 @@ public class Level {
 					}
 				}
 
+				selectedPower.drawUI();
+
 				// Draw power icon on sqrs / or x if out of range
 				ActionUsePower actionUsePower = new ActionUsePower(this.player, Game.gameObjectMouseIsOver,
 						Game.squareMouseIsOver, selectedPower);

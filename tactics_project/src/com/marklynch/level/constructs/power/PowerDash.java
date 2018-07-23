@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.util.Point;
 
+import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Stat;
@@ -182,9 +183,36 @@ public class PowerDash extends Power {
 		}
 	}
 
+	@Override
 	public void drawUI() {
 
+		Square attemptedTargetSquare = Game.squareMouseIsOver;
+		if (attemptedTargetSquare == null)
+			return;
+
+		if (!squareInCastLocations(Level.player, attemptedTargetSquare))
+			return;
+
+		Direction direction = Direction.LEFT;
+
+		if (attemptedTargetSquare.xInGrid < source.squareGameObjectIsOn.xInGrid) {
+			direction = Direction.LEFT;
+		} else if (attemptedTargetSquare.xInGrid > source.squareGameObjectIsOn.xInGrid) {
+			direction = Direction.RIGHT;
+		} else if (attemptedTargetSquare.yInGrid < source.squareGameObjectIsOn.yInGrid) {
+			direction = Direction.UP;
+		} else if (attemptedTargetSquare.yInGrid > source.squareGameObjectIsOn.yInGrid) {
+			direction = Direction.DOWN;
+		}
+
+		int distance = 2;
+
 		ArrayList<PushedObject> pushedObjects = new ArrayList<PushedObject>();
+		int correctedDistance = push(source, direction, distance, false, pushedObjects);
+
+		for (PushedObject pushedObject : pushedObjects) {
+			pushedObject.gameObject.squareGameObjectIsOn.drawHighlight();
+		}
 	}
 
 	public static class PushedObject {
