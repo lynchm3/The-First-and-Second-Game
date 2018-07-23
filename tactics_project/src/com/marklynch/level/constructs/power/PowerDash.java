@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
+import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Stat;
@@ -212,6 +213,10 @@ public class PowerDash extends Power {
 
 		for (PushedObject pushedObject : pushedObjects) {
 			pushedObject.gameObject.squareGameObjectIsOn.drawHighlight();
+
+			new AILine(AILine.AILineType.AI_LINE_TYPE_ESCAPE, pushedObject.gameObject, pushedObject.destinationSquare)
+					.draw2();
+			;
 		}
 	}
 
