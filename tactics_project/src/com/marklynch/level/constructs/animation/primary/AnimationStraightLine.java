@@ -16,8 +16,10 @@ public class AnimationStraightLine extends Animation {
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	GameObject projectileObject;
 	float rotationSpeed = 0;
+	double delay;
 
-	public AnimationStraightLine(GameObject projectileObject, float speed, boolean blockAI, Square... targetSquares) {
+	public AnimationStraightLine(GameObject projectileObject, float speed, boolean blockAI, double delay,
+			Square... targetSquares) {
 
 		super(projectileObject, projectileObject, targetSquares[targetSquares.length - 1]);
 		if (!runAnimation)
@@ -37,7 +39,8 @@ public class AnimationStraightLine extends Animation {
 		else
 			this.rotationSpeed = rotationSpeed;
 
-		blockAI = blockAI;
+		this.blockAI = blockAI;
+		this.delay = delay;
 
 		// projectileObject.squareGameObjectIsOn.inventory.remove(projectileObject);
 
@@ -76,6 +79,11 @@ public class AnimationStraightLine extends Animation {
 
 		if (getCompleted())
 			return;
+
+		if (delay > 0) {
+			delay -= delta;
+			return;
+		}
 
 		float distanceX = (float) (speedX * delta);
 		float distanceY = (float) (speedY * delta);

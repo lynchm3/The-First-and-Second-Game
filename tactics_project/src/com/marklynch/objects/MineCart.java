@@ -67,7 +67,7 @@ public class MineCart extends GameObject {
 				if (gamObject.isFloorObject)
 					continue;
 
-				gamObject.setPrimaryAnimation(new AnimationStraightLine(this, 2f, true, array) {
+				gamObject.setPrimaryAnimation(new AnimationStraightLine(this, 2f, true, 0f, array) {
 					@Override
 					public void runCompletionAlgorightm(boolean wait) {
 						super.runCompletionAlgorightm(wait);

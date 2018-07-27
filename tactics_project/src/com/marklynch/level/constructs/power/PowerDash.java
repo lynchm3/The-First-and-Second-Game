@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.power;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.lwjgl.util.Point;
 
@@ -73,18 +74,40 @@ public class PowerDash extends Power {
 
 		pushedObjects.add(new PushedObject(source, correctedTargetSquare));
 
+		float speed = 2f;
+
+		Collections.reverse(pushedObjects);
+		PushedObject previousPushedObject = null;
+		double previousDelay = 0;
+
 		for (final PushedObject pushedObject : pushedObjects) {
 
 			System.out.println("pushedObject = " + pushedObject.gameObject + ", " + pushedObject.destinationSquare);
 
-			pushedObject.gameObject.setPrimaryAnimation(new AnimationStraightLine(pushedObject.gameObject, 2f, true,
-					new Square[] { pushedObject.destinationSquare }) {
+			double delay = 0;
+
+			if (previousPushedObject != null) {
+				delay = previousDelay + (previousPushedObject.gameObject
+						.straightLineDistanceTo(pushedObject.gameObject.squareGameObjectIsOn) * Game.SQUARE_WIDTH
+						- Game.HALF_SQUARE_WIDTH) / speed;
+			}
+
+			System.out.println("Delay = " + delay);
+
+			// if (pushedObject.gameObject != source)
+			// delay = 32f;
+
+			pushedObject.gameObject.setPrimaryAnimation(new AnimationStraightLine(pushedObject.gameObject, speed, true,
+					delay, new Square[] { pushedObject.destinationSquare }) {
 				@Override
 				public void runCompletionAlgorightm(boolean wait) {
 					super.runCompletionAlgorightm(wait);
 					postRangedAnimation(pushedObject.gameObject, pushedObject.destinationSquare);
 				}
 			});
+
+			previousDelay = delay;
+			previousPushedObject = pushedObject;
 
 		}
 	}
