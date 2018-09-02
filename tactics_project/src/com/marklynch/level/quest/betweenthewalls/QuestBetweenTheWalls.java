@@ -30,7 +30,7 @@ public class QuestBetweenTheWalls extends Quest {
 	// Info objects
 	String theresSomethingInTheWalls = "There's something in the walls...";
 
-	public QuestBetweenTheWalls() {
+	public QuestBetweenTheWalls(int posX, int posY) {
 		name = "BETWEEN THE WALLS";
 
 		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>();
@@ -42,69 +42,74 @@ public class QuestBetweenTheWalls extends Quest {
 		ArrayList<Square> structureEntranceSquares = new ArrayList<Square>();
 
 		// Front section
-		structureSections.add(new StructureSection("A Lovely House", 41, 19, 56, 28, false));
+		structureSections
+				.add(new StructureSection("A Lovely House", posX + 41, posY + 19, posX + 56, posY + 28, false));
 
 		// Front door
-		structureFeatures.add(new StructureFeature(
-				Templates.DOOR.makeCopy("Front Door", Game.level.squares[41][21], false, false, false, null),
-				Nodes.wallsHouseOuter));
+		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Front Door",
+				Game.level.squares[posX + 41][posY + 21], false, false, false, null), Nodes.wallsHouseOuter));
 
 		// Front room
-		StructureRoom frontRoom = new StructureRoom("Front Room", 42, 20, false, new ArrayList<Actor>(),
+		StructureRoom frontRoom = new StructureRoom("Front Room", posX + 42, posY + 20, false, new ArrayList<Actor>(),
 				new Node[] { Nodes.wallsHouseOuter, Nodes.wallHouseHiddenArea, Nodes.wallHouseBedroom },
-				new RoomPart(42, 20, 55, 26));
+				new RoomPart(posX + 42, posY + 20, posX + 55, posY + 26));
 		structureRooms.add(frontRoom);
 
 		// Front room decorative walls
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[55][20], null));
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[55][26], null));
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[46][23], null));
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[51][23], null));
+		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 55][posY + 20], null));
+		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 55][posY + 26], null));
+		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 46][posY + 23], null));
+		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 51][posY + 23], null));
 
 		// Bedroom Section
-		structureSections.add(new StructureSection("A Lovely House", 41, 28, 56, 38, false));
+		structureSections
+				.add(new StructureSection("A Lovely House", posX + 41, posY + 28, posX + 56, posY + 38, false));
 
 		// Bedroom door
 		structurePaths.add(new StructurePath("Front Room", false, new ArrayList(), new Node[] { Nodes.wallsHouseOuter },
-				Game.level.squares[42][27]));
-		structureFeatures.add(new StructureFeature(
-				Templates.DOOR.makeCopy("Bedroom Door", Game.level.squares[42][28], false, true, true, null),
-				Nodes.wallHouseBedroom));
+				Game.level.squares[posX + 42][posY + 27]));
+		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Bedroom Door",
+				Game.level.squares[posX + 42][posY + 28], false, true, true, null), Nodes.wallHouseBedroom));
 		structurePaths.add(new StructurePath("Bedroom", false, new ArrayList(), new Node[] { Nodes.wallHouseBedroom },
-				Game.level.squares[42][29]));
+				Game.level.squares[posX + 42][posY + 29]));
 
 		// Bedroom room
-		StructureRoom bedRoom = new StructureRoom("wallHouseBedroom", 42, 30, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.wallHouseBedroom }, new RoomPart(42, 30, 53, 34));
+		StructureRoom bedRoom = new StructureRoom("wallHouseBedroom", posX + 42, posY + 30, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.wallHouseBedroom },
+				new RoomPart(posX + 42, posY + 30, posX + 53, posY + 34));
 		structureRooms.add(bedRoom);
 
 		// Bedroom decorative walls
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[53][30], null));
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[53][34], null));
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[42][34], null));
+		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 53][posY + 30], null));
+		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 53][posY + 34], null));
+		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 42][posY + 34], null));
 
 		// Path between the walls
 		StructurePath pathBetweenTheWalls = new StructurePath("Between the walls", false, new ArrayList(),
-				new Node[] { Nodes.wallHouseHiddenArea }, Game.level.squares[44][28], Game.level.squares[45][28],
-				Game.level.squares[46][28], Game.level.squares[47][28], Game.level.squares[48][28],
-				Game.level.squares[49][28], Game.level.squares[50][28], Game.level.squares[51][28],
-				Game.level.squares[52][28], Game.level.squares[53][28], Game.level.squares[54][28],
-				Game.level.squares[55][28], Game.level.squares[55][29], Game.level.squares[55][30],
-				Game.level.squares[55][31], Game.level.squares[55][32], Game.level.squares[55][33],
-				Game.level.squares[55][34], Game.level.squares[55][35]);
+				new Node[] { Nodes.wallHouseHiddenArea }, Game.level.squares[posX + 44][posY + 28],
+				Game.level.squares[posX + 45][posY + 28], Game.level.squares[posX + 46][posY + 28],
+				Game.level.squares[posX + 47][posY + 28], Game.level.squares[posX + 48][posY + 28],
+				Game.level.squares[posX + 49][posY + 28], Game.level.squares[posX + 50][posY + 28],
+				Game.level.squares[posX + 51][posY + 28], Game.level.squares[posX + 52][posY + 28],
+				Game.level.squares[posX + 53][posY + 28], Game.level.squares[posX + 54][posY + 28],
+				Game.level.squares[posX + 55][posY + 28], Game.level.squares[posX + 55][posY + 29],
+				Game.level.squares[posX + 55][posY + 30], Game.level.squares[posX + 55][posY + 31],
+				Game.level.squares[posX + 55][posY + 32], Game.level.squares[posX + 55][posY + 33],
+				Game.level.squares[posX + 55][posY + 34], Game.level.squares[posX + 55][posY + 35]);
 		structurePaths.add(pathBetweenTheWalls);
 
 		// False wall
-		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall", Game.level.squares[52][27], false, null);
+		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall", Game.level.squares[posX + 52][posY + 27], false,
+				null);
 		structureFeatures.add(new StructureFeature(falseWall, Nodes.wallHouseHiddenArea));
 
 		// Rat
-		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.rats, null, new GameObject[] {},
-				new GameObject[] {}, null);
+		Templates.RAT.makeCopy("Rat", Game.level.squares[posX + 44][posY + 28], Game.level.factions.rats, null,
+				new GameObject[] {}, new GameObject[] {}, null);
 
 		// Hidden room
-		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", 42, 36, false, new ArrayList<Actor>(), 4,
-				new Node[] { Nodes.wallHouseHiddenArea }, new RoomPart(42, 36, 55, 37));
+		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", posX + 42, posY + 36, false, new ArrayList<Actor>(),
+				4, new Node[] { Nodes.wallHouseHiddenArea }, new RoomPart(posX + 42, posY + 36, posX + 55, posY + 37));
 		structureRooms.add(hiddenRoom);
 
 		// Path west entrance to west atrium
@@ -117,35 +122,35 @@ public class QuestBetweenTheWalls extends Quest {
 		// structureExtraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[243][7],
 		// null));
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
-				structureFeatures, structureEntranceSquares, null, 0, 0, 0, 0, true, null, structureSquaresToRemove,
-				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE, 2));
+				structureFeatures, structureEntranceSquares, null, posX + 0, posY + 0, posX + 0, posY + 0, true, null,
+				structureSquaresToRemove, structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE, 2));
 
 		// Antler switch
-		Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[53][19], null, Switch.SWITCH_TYPE.OPEN_CLOSE, new RequirementToMeet[] { new StatRequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) },
-				falseWall);
+		Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[posX + 53][posY + 19], null, Switch.SWITCH_TYPE.OPEN_CLOSE,
+				new RequirementToMeet[] { new StatRequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) }, falseWall);
 
 		// Pressure Plate
-		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[51][21], null, Switch.SWITCH_TYPE.OPEN_CLOSE, 30,
-				falseWall);
+		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + 51][posY + 21], null, Switch.SWITCH_TYPE.OPEN_CLOSE,
+				30, falseWall);
 
 		// Path to town 24,21 -> 40,21
-		Path pathToTown = new Path(24, 21, 40, 21);
+		Path pathToTown = new Path(posX + 24, posY + 21, posX + 40, posY + 21);
 
 		// Bushed along path
-		Templates.BUSH.makeCopy(Game.level.squares[28][20], null);
-		Templates.BUSH.makeCopy(Game.level.squares[28][22], null);
-		Templates.BUSH.makeCopy(Game.level.squares[30][20], null);
-		Templates.BUSH.makeCopy(Game.level.squares[30][22], null);
-		Templates.BUSH.makeCopy(Game.level.squares[32][20], null);
-		Templates.BUSH.makeCopy(Game.level.squares[32][22], null);
-		Templates.BUSH.makeCopy(Game.level.squares[34][20], null);
-		Templates.BUSH.makeCopy(Game.level.squares[34][22], null);
-		Templates.BUSH.makeCopy(Game.level.squares[36][20], null);
-		Templates.BUSH.makeCopy(Game.level.squares[36][22], null);
-		Templates.BUSH.makeCopy(Game.level.squares[38][20], null);
-		Templates.BUSH.makeCopy(Game.level.squares[38][22], null);
-		Templates.BUSH.makeCopy(Game.level.squares[40][20], null);
-		Templates.BUSH.makeCopy(Game.level.squares[40][22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 28][posY + 20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 28][posY + 22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 30][posY + 20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 30][posY + 22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 32][posY + 20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 32][posY + 22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 34][posY + 20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 34][posY + 22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 36][posY + 20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 36][posY + 22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 38][posY + 20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 38][posY + 22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 40][posY + 20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[posX + 40][posY + 22], null);
 
 		links = TextUtils.getLinks(true, this);
 	}

@@ -193,6 +193,11 @@ public class Mirror extends GameObject {
 
 	public void drawGameObject(GameObject gameObject, int offsetX, int offsetY) {
 
+		// This was crashing when a static gameobject was put on front of it.
+		// GameObject.primaryanimtion was null
+		if (1 == 1)
+			return;
+
 		float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * offsetX
 				+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX;
 		actorPositionXInPixels += gameObject.primaryAnimation.offsetX;
@@ -256,8 +261,8 @@ public class Mirror extends GameObject {
 				alpha = primaryAnimation.alpha;
 			TextureUtils.drawTextureWithinBounds(actor.helmet.imageTexture, alpha, helmetPositionXInPixels,
 					helmetPositionYInPixels, helmetPositionXInPixels + actor.helmet.width,
-					helmetPositionYInPixels + actor.helmet.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
-					false, TextureUtils.neutralColor);
+					helmetPositionYInPixels + actor.helmet.height, boundsX1, boundsY1, boundsX2, boundsY2, false, false,
+					TextureUtils.neutralColor);
 		} else if (actor.hairImageTexture != null) {
 			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels);
 			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels);
