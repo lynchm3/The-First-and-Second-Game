@@ -79,6 +79,36 @@ public class AreaTown {
 		trader.shopRoom = shopAtriums.get(0);
 		trader.shopSign = joesShopSign;
 
+		// Doctor's Practice
+		ArrayList<Square> doctorsEntranceSquares = new ArrayList<Square>(
+				Arrays.asList(new Square[] { Game.level.squares[posX + 4 + 35][posY + 4 + 3] }));
+		ArrayList<StructureFeature> doctorsShopFeatures = new ArrayList<StructureFeature>();
+		doctorsShopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Shop Door",
+				Game.level.squares[posX + 5 + 35][posY + 4 + 3], false, false, false, trader), Nodes.townShopOuter));
+		doctorsShopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Private Quarters Door",
+				Game.level.squares[posX + 11 + 35][posY + 4 + 3], false, true, true, trader), Nodes.townShopInner));
+		ArrayList<StructureRoom> doctorsShopAtriums = new ArrayList<StructureRoom>();
+		doctorsShopAtriums.add(new StructureRoom("Trader Joe's Shop", posX + 6 + 35, posY + 1 + 3, false,
+				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })),
+				new Node[] { Nodes.townShopInner, Nodes.townShopOuter },
+				new RoomPart(posX + 6 + 35, posY + 1 + 3, posX + 10 + 35, posY + 4 + 3)));
+		doctorsShopAtriums.add(new StructureRoom("Trader Joe's Shop", posX + 12 + 35, posY + 1 + 3, true,
+				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })), new Node[] { Nodes.townShopInner },
+				new RoomPart(posX + 12 + 35, posY + 1 + 3, posX + 16 + 35, posY + 4 + 3)));
+		ArrayList<StructureSection> doctorsShopSections = new ArrayList<StructureSection>();
+		doctorsShopSections.add(new StructureSection("Super Wolf's Den", posX + 5 + 35, posY + 0 + 3, posX + 17 + 35,
+				posY + 5 + 3, false));
+		Structure doctorsShop = new Structure("Trader Joe's Shop", doctorsShopSections, doctorsShopAtriums,
+				new ArrayList<StructurePath>(), doctorsShopFeatures, doctorsEntranceSquares, "building2.png",
+				posX + 640 + 35, posY + 640 + 1664 + 3, posX + -100 + 35, posY + -100 + 868 + 3, true, trader,
+				new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, Square.STONE_TEXTURE, 2);
+		Game.level.structures.add(doctorsShop);
+		Sign doctorsShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6 + 35][posY + 6 + 3],
+				doctorsShop.name + " sign", new Object[] { doctorsShop.name }, trader);
+		Templates.SHOP_COUNTER.makeCopy(Game.level.squares[posX + 7 + 35][posY + 1 + 3], null);
+		trader.shopRoom = doctorsShopAtriums.get(0);
+		trader.shopSign = doctorsShopSign;
+
 		// Wanted Poster
 		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[posX + 27][posY + 8],
 				"Wanter Poster", new ArrayList<Crime>(), trader);
@@ -101,8 +131,7 @@ public class AreaTown {
 		// Game.level.structures.add(new Building("Hunting Lodge", 7, 7, 11, 11,
 		// doorLocations2));
 
-		// Add a game object
-		// Templates.DUMPSTER.makeCopy(Game.level.squares[4][2], null);
+		// Floor game objects
 		Templates.FUR.makeCopy(Game.level.squares[posX + 0][posY + 7], null);
 		Templates.MUSHROOM.makeCopy(Game.level.squares[posX + 0][posY + 8], null);
 		Templates.TREE.makeCopy(Game.level.squares[posX + 1][posY + 2], null);
