@@ -54,6 +54,7 @@ import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
+import com.marklynch.objects.units.Doctor;
 import com.marklynch.objects.units.Fish;
 import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
@@ -128,6 +129,7 @@ public class Templates {
 	public static Human FARMER;
 
 	public static Trader TRADER;
+	public static Doctor DOCTOR;
 
 	public static Human MINECART_RIDER;
 

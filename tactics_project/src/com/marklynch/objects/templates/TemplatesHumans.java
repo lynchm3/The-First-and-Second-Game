@@ -1,5 +1,6 @@
 package com.marklynch.objects.templates;
 
+import com.marklynch.ai.routines.AIRoutineForDoctor;
 import com.marklynch.ai.routines.AIRoutineForFisherman;
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHunter;
@@ -12,6 +13,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.quest.caveoftheblind.AIRoutineForMort;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Doctor;
 import com.marklynch.objects.units.Guard;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Player;
@@ -219,6 +221,24 @@ public class TemplatesHumans {
 		Templates.TRADER.aiRoutine = new AIRoutineForTrader(Templates.TRADER);
 		Templates.TRADER.templateId = GameObject.generateNewTemplateId();
 		Templates.TRADER.flipYAxisInMirror = false;
+
+		Templates.DOCTOR = new Doctor();
+		Templates.DOCTOR.title = "Doctor";
+		Templates.DOCTOR.level = 1;
+		Templates.DOCTOR.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(4));
+		Templates.DOCTOR.totalHealth = Templates.DOCTOR.remainingHealth = 10;
+		Templates.DOCTOR.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(7));
+		Templates.DOCTOR.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(12));
+		Templates.DOCTOR.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(20));
+		Templates.DOCTOR.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(7));
+		// Templates.DOCTOR.imageTexturePath = "shopkeeper.png";
+		// Templates.DOCTOR.imageTexture =
+		// getGlobalImage(Templates.DOCTOR.imageTexturePath, true);
+		Templates.DOCTOR.heightRatio = 1.5f;
+		Templates.DOCTOR.drawOffsetRatioY = -0.5f;
+		Templates.DOCTOR.weight = 80f;
+		Templates.DOCTOR.aiRoutine = new AIRoutineForDoctor(Templates.DOCTOR);
+		Templates.DOCTOR.templateId = GameObject.generateNewTemplateId();
 
 		Templates.MINECART_RIDER = new Human();
 		Templates.MINECART_RIDER.title = "MINECART_RIDER";

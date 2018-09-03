@@ -18,6 +18,8 @@ public class Human extends Actor {
 		armImageTexture = ResourceUtils.getGlobalImage("arm.png", true);
 		legImageTexture = ResourceUtils.getGlobalImage("leg.png", true);
 		hairImageTexture = ResourceUtils.getGlobalImage("hair.png", true);
+		canOpenDoors = true;
+		canEquipWeapons = true;
 	}
 
 	@Override
