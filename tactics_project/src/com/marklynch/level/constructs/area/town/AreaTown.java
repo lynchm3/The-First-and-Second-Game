@@ -31,7 +31,9 @@ import com.marklynch.objects.units.Trader;
 
 public class AreaTown {
 
-	public AreaTown(int posX, int posY) {
+	public static int posX = 10, posY = 10;
+
+	public AreaTown() {
 
 		Templates.MIRROR.makeCopy(Game.level.squares[posX + 27][posY + 31], null);
 

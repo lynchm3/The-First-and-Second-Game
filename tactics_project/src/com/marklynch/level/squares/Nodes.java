@@ -3,6 +3,7 @@ package com.marklynch.level.squares;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.area.town.AreaTown;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
@@ -16,6 +17,8 @@ public class Nodes {
 	public static Node townShopCrossRoads; // 4,21
 	public static Node townCenter; // 24,22
 	public static Node townNorth; // 24,18
+	public static Node townDoctorsInner; // 11,4
+	public static Node townDoctorsOuter; // 5,4
 	public static Node townNorthEast; // 24,18
 	public static Node townEast; // 24,18
 	public static Node townSouthEast; // 24,18
@@ -56,49 +59,56 @@ public class Nodes {
 	public Nodes(Square[][] squares) {
 
 		// town
-		townShopInner = new Node("Town Shop Private Quarters", squares[11][4]);
+		townShopInner = new Node("Town Shop Private Quarters", squares[AreaTown.posX + 11][AreaTown.posY + 4]);
 		nodes.add(townShopInner);
 
-		townShopOuter = new Node("Town Shop", squares[5][4]);
+		townShopOuter = new Node("Town Shop", squares[AreaTown.posX + 5][AreaTown.posY + 4]);
 		nodes.add(townShopOuter);
 
-		townShopCrossRoads = new Node("Town Shop Crossroads", squares[4][21]);
+		townShopCrossRoads = new Node("Town Shop Crossroads", squares[AreaTown.posX + 4][AreaTown.posY + 21]);
 		nodes.add(townShopCrossRoads);
 
-		townCenter = new Node("Town Center", squares[24][21]);
+		townCenter = new Node("Town Center", squares[AreaTown.posX + 24][AreaTown.posY + 21]);
 		nodes.add(townCenter);
 
-		dungeonHouseOuter = new Node("Dungeon House", squares[24][30]);
+		dungeonHouseOuter = new Node("Dungeon House", squares[AreaTown.posX + 24][AreaTown.posY + 30]);
 		nodes.add(dungeonHouseOuter);
 
-		dungeonHouseHiddenArea = new Node("Dungeon House Secret", squares[22][36]); // 22,36
+		dungeonHouseHiddenArea = new Node("Dungeon House Secret", squares[AreaTown.posX + 22][AreaTown.posY + 36]); // 22,36
 		nodes.add(dungeonHouseHiddenArea);
 
-		wallsHouseOuter = new Node("Walls House", squares[41][21]);
+		wallsHouseOuter = new Node("Walls House", squares[AreaTown.posX + 41][AreaTown.posY + 21]);
 		nodes.add(wallsHouseOuter);
 
-		wallHouseBedroom = new Node("Walls House Bedroom", squares[42][28]);// 42,28
+		wallHouseBedroom = new Node("Walls House Bedroom", squares[AreaTown.posX + 42][AreaTown.posY + 28]);// 42,28
 		nodes.add(wallHouseBedroom);
 
-		wallHouseHiddenArea = new Node("Walls House Secret", squares[52][27]); // 52,27
+		wallHouseHiddenArea = new Node("Walls House Secret", squares[AreaTown.posX + 52][AreaTown.posY + 27]); // 52,27
 		nodes.add(wallHouseHiddenArea);
 
-		townNorth = new Node("Town North", squares[24][18]);
+		townNorth = new Node("Town North", squares[AreaTown.posX + 24][AreaTown.posY + 7]);
 		nodes.add(townNorth);
 
-		townNorthEast = new Node("Town North East", squares[89][19]);
+		townDoctorsOuter = new Node("Doctor's Practice", squares[AreaTown.posX + 40][AreaTown.posY + 7]);
+		nodes.add(townDoctorsOuter);
+
+		townDoctorsInner = new Node("Doctor's Practice Private Quarters",
+				squares[AreaTown.posX + 46][AreaTown.posY + 7]);
+		nodes.add(townDoctorsInner);
+
+		townNorthEast = new Node("Town North East", squares[AreaTown.posX + 89][AreaTown.posY + 19]);
 		nodes.add(townNorthEast);
 
-		townEast = new Node("Town East", squares[89][40]);
+		townEast = new Node("Town East", squares[AreaTown.posX + 89][AreaTown.posY + 40]);
 		nodes.add(townEast);
 
-		townSouthEast = new Node("Town South East", squares[89][63]);
+		townSouthEast = new Node("Town South East", squares[AreaTown.posX + 89][AreaTown.posY + 63]);
 		nodes.add(townSouthEast);
 
-		barracksNorth = new Node("Barracks North", squares[80][52]);
+		barracksNorth = new Node("Barracks North", squares[AreaTown.posX + 80][AreaTown.posY + 52]);
 		nodes.add(barracksNorth);
 
-		barracksSouth = new Node("Barracks South", squares[80][61]);
+		barracksSouth = new Node("Barracks South", squares[AreaTown.posX + 80][AreaTown.posY + 61]);
 		nodes.add(barracksSouth);
 
 		lodgeJunction = new Node("Lodge Junction", squares[104][18]);
@@ -170,6 +180,7 @@ public class Nodes {
 		townCenter.neighbors.add(dungeonHouseOuter);
 		townCenter.neighbors.add(wallsHouseOuter);
 		townCenter.neighbors.add(townNorth);
+		townCenter.neighbors.add(townNorthEast);
 		// townCenter.neighbors.add(townEast);
 		// townCenter.neighbors.add(barracksNorth);
 		// townCenter.neighbors.add(barracksSouth);
@@ -197,9 +208,15 @@ public class Nodes {
 		wallHouseBedroom.neighbors.add(wallsHouseOuter);
 
 		townNorth.neighbors.add(townCenter);
-		townNorth.neighbors.add(townNorthEast);
+		// townNorth.neighbors.add(townNorthEast);
+		townNorth.neighbors.add(townDoctorsOuter);
 
-		townNorthEast.neighbors.add(townNorth);
+		townDoctorsOuter.neighbors.add(townDoctorsInner);
+		townDoctorsOuter.neighbors.add(townNorth);
+
+		townDoctorsInner.neighbors.add(townDoctorsOuter);
+
+		townNorthEast.neighbors.add(townCenter);
 		townNorthEast.neighbors.add(townEast);
 		townNorthEast.neighbors.add(lodgeJunction);
 

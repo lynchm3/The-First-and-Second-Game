@@ -47,7 +47,7 @@ public class AreaList extends ArrayList<Quest> {
 	}
 
 	public static void buildAreas() {
-		new AreaTown(10, 10);
+		new AreaTown();
 	}
 
 	public void makeQuests() {
