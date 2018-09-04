@@ -1,21 +1,15 @@
 package com.marklynch.level.quest.thesecretroom;
 
-import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
-import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
 public class AIRoutineForKidnapper extends AIRoutine {
 
 	Kidnapper mort;
-	GameObject target;
-	boolean rangBellAsLastResort;
-	boolean retreatedToRoom = false;
 
 	enum FEEDING_DEMO_STATE {
 		WALK_TO_TROUGH, PLACE_MEAT, RING_BELL, WALK_AWAY, WAIT_FOR_BLIND_TO_ENTER, WAIT_FOR_BLIND_TO_LEAVE
@@ -72,30 +66,6 @@ public class AIRoutineForKidnapper extends AIRoutine {
 		// Door maintenance routine
 		if (runDoorRoutine())
 			return;
-
-		if (retreatedToRoom)
-			return;
-
-		// Can mort see the Player in his territory? If so record it. If not,
-		// follow.
-		if (actor.canSeeGameObject(Game.level.player) && targetInTerritory(Game.level.player)) {
-			if (keepTrackOf(Game.level.player)) {
-				return;
-			}
-		} else if (lastLocationSeenActorToKeepTrackOf != null
-				&& squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
-			if (keepTrackOf(Game.level.player)) {
-				return;
-			}
-		} else if (lastLocationSeenActorToKeepTrackOf != null
-				&& !squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
-			lastLocationSeenActorToKeepTrackOf = null;
-		}
-
-		if (squareInTerritory(Game.level.player.squareGameObjectIsOn)) {
-		} else {
-			AIRoutineUtils.moveTowardsTargetSquare(Kidnapper.mortsStandingSpot);
-		}
 	}
 
 	public boolean targetInTerritory(Actor target) {
