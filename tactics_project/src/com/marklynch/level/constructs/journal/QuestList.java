@@ -50,7 +50,7 @@ public class QuestList extends ArrayList<Quest> {
 		questBetweenTheWalls = new QuestBetweenTheWalls(10, 10);
 		Level.fullQuestList.add(questBetweenTheWalls);
 
-		questTheSecretRoom = new QuestTheSecretRoom(10, 10);
+		questTheSecretRoom = new QuestTheSecretRoom();
 		Level.fullQuestList.add(questTheSecretRoom);
 
 		// PUZZLE ROOMS

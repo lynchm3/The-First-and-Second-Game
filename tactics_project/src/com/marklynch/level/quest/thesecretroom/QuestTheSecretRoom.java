@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Path;
+import com.marklynch.level.constructs.area.town.AreaTown;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -25,7 +26,7 @@ import com.marklynch.utils.TextUtils;
 
 public class QuestTheSecretRoom extends Quest {
 
-	public QuestTheSecretRoom(int posX, int posY) {
+	public QuestTheSecretRoom() {
 		name = "THE SECRET ROOM";
 
 		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>();
@@ -37,16 +38,20 @@ public class QuestTheSecretRoom extends Quest {
 		ArrayList<Square> structureEntranceSquares = new ArrayList<Square>();
 
 		// Front section
-		structureSections.add(new StructureSection("A Cozy Place", posX + 21, posY + 30, posX + 29, posY + 36, false));
+		structureSections.add(new StructureSection("A Cozy Place", AreaTown.posX + 21, AreaTown.posY + 30,
+				AreaTown.posX + 29, AreaTown.posY + 36, false));
 
 		// Front door
-		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Front Door",
-				Game.level.squares[posX + 24][posY + 30], false, false, false, null), Nodes.dungeonHouseOuter));
+		structureFeatures
+				.add(new StructureFeature(
+						Templates.DOOR.makeCopy("Front Door",
+								Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 30], false, false, false, null),
+						Nodes.dungeonHouseOuter));
 
 		// Front room
-		StructureRoom livingRoom = new StructureRoom("Living Room", posX + 22, posY + 31, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.dungeonHouseOuter, Nodes.dungeonHouseHiddenArea },
-				new RoomPart(posX + 22, posY + 31, posX + 28, posY + 35));
+		StructureRoom livingRoom = new StructureRoom("Living Room", AreaTown.posX + 22, AreaTown.posY + 31, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.dungeonHouseOuter, Nodes.dungeonHouseHiddenArea },
+				new RoomPart(AreaTown.posX + 22, AreaTown.posY + 31, AreaTown.posX + 28, AreaTown.posY + 35));
 		structureRooms.add(livingRoom);
 
 		// Front room decorative walls
@@ -60,16 +65,18 @@ public class QuestTheSecretRoom extends Quest {
 		// null));
 
 		// Back Section
-		structureSections.add(new StructureSection("A Cozy Place", posX + 19, posY + 36, posX + 36, posY + 46, false));
+		structureSections.add(new StructureSection("A Cozy Place", AreaTown.posX + 19, AreaTown.posY + 36,
+				AreaTown.posX + 36, AreaTown.posY + 46, false));
 
 		// False wall
-		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall", Game.level.squares[posX + 22][posY + 36], false,
-				null);
+		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall",
+				Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 36], false, null);
 		structureFeatures.add(new StructureFeature(falseWall, Nodes.dungeonHouseHiddenArea));
 
 		// Back room
-		StructureRoom backRoom = new StructureRoom("Back room", posX + 20, posY + 37, false, new ArrayList<Actor>(), 4,
-				new Node[] { Nodes.dungeonHouseHiddenArea }, new RoomPart(posX + 20, posY + 37, posX + 35, posY + 45));
+		StructureRoom backRoom = new StructureRoom("Back room", AreaTown.posX + 20, AreaTown.posY + 37, false,
+				new ArrayList<Actor>(), 4, new Node[] { Nodes.dungeonHouseHiddenArea },
+				new RoomPart(AreaTown.posX + 20, AreaTown.posY + 37, AreaTown.posX + 35, AreaTown.posY + 45));
 		structureRooms.add(backRoom);
 
 		// back room decorative walls
@@ -81,53 +88,65 @@ public class QuestTheSecretRoom extends Quest {
 		// null));
 
 		// Rat
-		Templates.RAT.makeCopy("Rat", Game.level.squares[posX + 25][posY + 39], Game.level.factions.rats, null,
-				new GameObject[] {}, new GameObject[] {}, null);
+		Templates.RAT.makeCopy("Rat", Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 39],
+				Game.level.factions.rats, null, new GameObject[] {}, new GameObject[] {}, null);
 
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
-				structureFeatures, structureEntranceSquares, null, posX + 0, posY + 0, posX + 0, posY + 0, true, null,
-				structureSquaresToRemove, structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE, 2));
+				structureFeatures, structureEntranceSquares, null, AreaTown.posX + 0, AreaTown.posY + 0,
+				AreaTown.posX + 0, AreaTown.posY + 0, true, null, structureSquaresToRemove, structureExtraWalls,
+				Templates.WALL, Square.STONE_TEXTURE, 2));
 
 		// Path to town 24,21 -> 24,29
-		Path pathToTown = new Path(posX + 24, posY + 21, posX + 24, posY + 29);
+		Path pathToTown = new Path(AreaTown.posX + 24, AreaTown.posY + 21, AreaTown.posX + 24, AreaTown.posY + 29);
 
 		// Bushed along path to town
-		Templates.BUSH.makeCopy(Game.level.squares[posX + 23][posY + 25], null);
-		Templates.BUSH.makeCopy(Game.level.squares[posX + 25][posY + 25], null);
-		Templates.BUSH.makeCopy(Game.level.squares[posX + 23][posY + 27], null);
-		Templates.BUSH.makeCopy(Game.level.squares[posX + 25][posY + 27], null);
-		Templates.BUSH.makeCopy(Game.level.squares[posX + 23][posY + 29], null);
-		Templates.BUSH.makeCopy(Game.level.squares[posX + 25][posY + 29], null);
+		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 25], null);
+		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 25], null);
+		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 27], null);
+		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 27], null);
+		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 29], null);
+		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 29], null);
 
 		// TownSquare Well 24,21
-		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[posX + 23][posY + 20], null);
+		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 20], null);
 
 		// Town square pavement
-		Path townSquare = new Path(Game.level.squares[posX + 23][posY + 19], Game.level.squares[posX + 24][posY + 19],
-				Game.level.squares[posX + 25][posY + 19], Game.level.squares[posX + 22][posY + 20],
-				Game.level.squares[posX + 23][posY + 20], Game.level.squares[posX + 24][posY + 20],
-				Game.level.squares[posX + 25][posY + 20], Game.level.squares[posX + 26][posY + 20],
-				Game.level.squares[posX + 22][posY + 21], Game.level.squares[posX + 23][posY + 21],
-				Game.level.squares[posX + 24][posY + 21], Game.level.squares[posX + 25][posY + 21],
-				Game.level.squares[posX + 26][posY + 21], Game.level.squares[posX + 22][posY + 22],
-				Game.level.squares[posX + 23][posY + 22], Game.level.squares[posX + 24][posY + 22],
-				Game.level.squares[posX + 25][posY + 22], Game.level.squares[posX + 26][posY + 22],
-				Game.level.squares[posX + 23][posY + 23], Game.level.squares[posX + 24][posY + 23],
-				Game.level.squares[posX + 25][posY + 23]);
+		Path townSquare = new Path(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 19],
+				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 19],
+				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 19],
+				Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 20],
+				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 20],
+				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 20],
+				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 20],
+				Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 20],
+				Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 21],
+				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 21],
+				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 21],
+				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 21],
+				Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 21],
+				Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 22],
+				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 22],
+				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 22],
+				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 22],
+				Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 22],
+				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 23],
+				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 23],
+				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 23]);
 
 		// Path left of fountain
-		new Path(posX + 4, posY + 21, posX + 21, posY + 21);
+		new Path(AreaTown.posX + 4, AreaTown.posY + 21, AreaTown.posX + 21, AreaTown.posY + 21);
 
 		// Path to shop
-		new Path(posX + 4, posY + 4, posX + 4, posY + 21);
+		new Path(AreaTown.posX + 4, AreaTown.posY + 4, AreaTown.posX + 4, AreaTown.posY + 21);
 
 		// Path to farm
-		new Path(posX + 4, posY + 21, posX + 4, posY + 62);
-		new Path(posX + 4, posY + 62, posX + 18, posY + 62);
-		new Path(posX + 18, posY + 62, posX + 18, posY + 68);
+		new Path(AreaTown.posX + 4, AreaTown.posY + 21, AreaTown.posX + 4, AreaTown.posY + 62);
+		new Path(AreaTown.posX + 4, AreaTown.posY + 62, AreaTown.posX + 18, AreaTown.posY + 62);
+		new Path(AreaTown.posX + 18, AreaTown.posY + 62, AreaTown.posX + 18, AreaTown.posY + 68);
 
 		// Signpost 5,20
-		Sign signpost = Templates.SIGNPOST.makeCopy(Game.level.squares[posX + 5][posY + 20], "Signpost",
+		Sign signpost = Templates.SIGNPOST.makeCopy(Game.level.squares[AreaTown.posX + 5][AreaTown.posY + 20],
+				"Signpost",
 
 				new Object[] { GameObject.upTexture, " Shop  ", GameObject.rightTexture, " Estates  ",
 						GameObject.downTexture, " Farm" },
@@ -136,10 +155,10 @@ public class QuestTheSecretRoom extends Quest {
 		// "North - Shop, Hunter's Lodge; East - Estates; South - Farm",
 
 		// Trees around town square
-		Templates.TREE.makeCopy(Game.level.squares[posX + 22][posY + 19], null);
-		Templates.TREE.makeCopy(Game.level.squares[posX + 22][posY + 23], null);
-		Templates.TREE.makeCopy(Game.level.squares[posX + 26][posY + 19], null);
-		Templates.TREE.makeCopy(Game.level.squares[posX + 26][posY + 23], null);
+		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 19], null);
+		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 23], null);
+		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 19], null);
+		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 23], null);
 
 		links = TextUtils.getLinks(true, this);
 
