@@ -10,9 +10,9 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Human;
 
-public class Kidnapper extends Actor {
+public class Kidnapper extends Human {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
@@ -50,8 +50,8 @@ public class Kidnapper extends Actor {
 		super.postLoad2();
 	}
 
-	public Kidnapper makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves, Area area) {
+	public Kidnapper makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 		Kidnapper actor = new Kidnapper();
 		setInstances(actor);
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);

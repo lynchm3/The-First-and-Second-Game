@@ -10,9 +10,9 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Human;
 
-public class Mort extends Actor {
+public class Mort extends Human {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 

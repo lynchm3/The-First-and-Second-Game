@@ -12,6 +12,8 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.quest.caveoftheblind.AIRoutineForMort;
 import com.marklynch.level.quest.caveoftheblind.Mort;
+import com.marklynch.level.quest.thesecretroom.AIRoutineForKidnapper;
+import com.marklynch.level.quest.thesecretroom.Kidnapper;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Doctor;
 import com.marklynch.objects.units.Guard;
@@ -189,9 +191,6 @@ public class TemplatesHumans {
 		Templates.MORT.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
 		Templates.MORT.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
 		Templates.MORT.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
-		// Templates.MORT.imageTexturePath = "farmer.png";
-		// Templates.MORT.imageTexture = getGlobalImage(Templates.MORT.imageTexturePath,
-		// true);
 		Templates.MORT.heightRatio = 1.5f;
 		Templates.MORT.drawOffsetRatioY = -0.5f;
 		Templates.MORT.weight = 90f;
@@ -200,6 +199,21 @@ public class TemplatesHumans {
 		Templates.MORT.aiRoutine = new AIRoutineForMort(Templates.MORT);
 		Templates.MORT.templateId = GameObject.generateNewTemplateId();
 		Templates.MORT.flipYAxisInMirror = false;
+
+		Templates.KIDNAPPER = new Kidnapper();
+		Templates.KIDNAPPER.title = "KIDNAPPER";
+		Templates.KIDNAPPER.level = 1;
+		Templates.KIDNAPPER.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(2));
+		Templates.KIDNAPPER.totalHealth = Templates.KIDNAPPER.remainingHealth = 10;
+		Templates.KIDNAPPER.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
+		Templates.KIDNAPPER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
+		Templates.KIDNAPPER.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
+		Templates.KIDNAPPER.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
+		Templates.KIDNAPPER.heightRatio = 1.5f;
+		Templates.KIDNAPPER.drawOffsetRatioY = -0.5f;
+		Templates.KIDNAPPER.weight = 90f;
+		Templates.KIDNAPPER.aiRoutine = new AIRoutineForKidnapper(Templates.KIDNAPPER);
+		Templates.KIDNAPPER.templateId = GameObject.generateNewTemplateId();
 
 		Templates.TRADER = new Trader();
 		Templates.TRADER.title = "Trader";

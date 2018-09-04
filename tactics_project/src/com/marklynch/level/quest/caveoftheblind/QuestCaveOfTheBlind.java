@@ -115,13 +115,13 @@ public class QuestCaveOfTheBlind extends Quest {
 		name = "CAVE OF THE BLIND";
 
 		// Mort and his bed
-		GameObject mortsGameObject = Templates.BED.makeCopy(Game.level.squares[267][42], null);
-		mortsGameObject.quest = this;
+		GameObject mortsBed = Templates.BED.makeCopy(Game.level.squares[267][42], null);
+		mortsBed.quest = this;
 		mortsKey = Templates.KEY.makeCopy("Mort's Key", null, mort);
 		mortsKey.quest = this;
 		// [147][21]
-		mort = Templates.MORT.makeCopy("Mort", Game.level.squares[281][41], Game.level.factions.townsPeople,
-				mortsGameObject, 100, new GameObject[] {}, new GameObject[] {}, null);
+		mort = Templates.MORT.makeCopy("Mort", Game.level.squares[281][41], Game.level.factions.townsPeople, mortsBed,
+				100, new GameObject[] {}, new GameObject[] {}, null);
 		mort.quest = this;
 		mort.mortsBell = Templates.DINNER_BELL.makeCopy(null, mort);
 		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy(null, null);
@@ -266,9 +266,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[260][10], null),
 				Nodes.caveOfTheBlindWest));
 		Templates.TABLE.makeCopy(Game.level.squares[258][9], null);
-		Templates.DOCUMENTS.makeCopy(Game.level.squares[258][9], "Ingoing/Outgoing",
-				new Object[] {
-						"In: 1.5kg Grain, 38x Steak, 38x Grapefruit, 1x Replacement pickaxe Out: .2kg Gold Ore, .3kg Silver Ore, 2kg General Waste, 10kg Fecal Matter" },
+		Templates.DOCUMENTS.makeCopy(Game.level.squares[258][9], "Ingoing/Outgoing", new Object[] {
+				"In: 1.5kg Grain, 38x Steak, 38x Grapefruit, 1x Replacement pickaxe Out: .2kg Gold Ore, .3kg Silver Ore, 2kg General Waste, 10kg Fecal Matter" },
 				null);
 		Storage securityChest = Templates.CHEST.makeCopy("Security Chest", Game.level.squares[259][9], false, null);
 		securityChest.inventory.add(Templates.PICKAXE.makeCopy(null, null));

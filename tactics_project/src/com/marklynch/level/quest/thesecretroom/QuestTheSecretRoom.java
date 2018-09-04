@@ -15,6 +15,7 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Sign;
@@ -28,6 +29,12 @@ public class QuestTheSecretRoom extends Quest {
 
 	public QuestTheSecretRoom() {
 		name = "THE SECRET ROOM";
+
+		// Kidnapper kidnapper = Templates.KIDNAPPER.makeCopy()
+		Bed bed = null;
+		Kidnapper kidnapper = Templates.KIDNAPPER.makeCopy("KIDNAPPER",
+				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 32], Game.level.factions.townsPeople, bed, 100,
+				new GameObject[] {}, new GameObject[] {}, null);
 
 		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>();
 		ArrayList<StructureFeature> structureFeatures = new ArrayList<StructureFeature>();

@@ -2,6 +2,7 @@ package com.marklynch.objects.templates;
 
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
+import com.marklynch.level.quest.thesecretroom.Kidnapper;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.BigGameObject;
@@ -157,6 +158,7 @@ public class Templates {
 
 	// Special People
 	public static Mort MORT;
+	public static Kidnapper KIDNAPPER;
 
 	// Tools
 	public static Weapon BROOM;
