@@ -1254,4 +1254,15 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		return false;
 	}
 	/// END PATH FINDING
+
+	public boolean restricted() {
+		if (restricted)
+			return true;
+
+		if (restrictedAtNight && (Game.level.hour < 6 || Game.level.hour > 21)) {
+			return true;
+		}
+
+		return false;
+	}
 }

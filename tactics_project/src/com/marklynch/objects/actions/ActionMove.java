@@ -225,7 +225,7 @@ public class ActionMove extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.restricted == true && !target.owners.contains(performer)) {
+		if (target.restricted() == true && !target.owners.contains(performer)) {
 			return false;
 		}
 

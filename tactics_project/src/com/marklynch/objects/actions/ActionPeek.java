@@ -26,7 +26,8 @@ public class ActionPeek extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -88,7 +89,8 @@ public class ActionPeek extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (object.squareGameObjectIsOn.restricted == true && !object.squareGameObjectIsOn.owners.contains(performer)) {
+		if (object.squareGameObjectIsOn.restricted() == true
+				&& !object.squareGameObjectIsOn.owners.contains(performer)) {
 			return false;
 		}
 		return true;

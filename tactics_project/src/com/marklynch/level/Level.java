@@ -1676,7 +1676,7 @@ public class Level {
 			// Wait if following someone ur beside
 			Action action = new ActionWait(Game.level.player, player.squareGameObjectIsOn);
 
-			if (!action.legal && !player.squareGameObjectIsOn.restricted && Player.playerFirstMove == false) {
+			if (!action.legal && !player.squareGameObjectIsOn.restricted() && Player.playerFirstMove == false) {
 				Object[] objects = new Object[] { "Stopped before illegal action!" };
 				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
@@ -1718,7 +1718,7 @@ public class Level {
 				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
 				pausePlayer();
-			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && Player.playerFirstMove == false) {
+			} else if (!action.legal && !player.squareGameObjectIsOn.restricted() && Player.playerFirstMove == false) {
 				Object[] objects = new Object[] { "Stopped before illegal action!" };
 				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));

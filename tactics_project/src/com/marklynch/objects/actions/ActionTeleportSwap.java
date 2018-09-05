@@ -144,7 +144,7 @@ public class ActionTeleportSwap extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.restricted == true && !target.owners.contains(teleportee)) {
+		if (target.restricted() == true && !target.owners.contains(teleportee)) {
 			return false;
 		}
 		return true;

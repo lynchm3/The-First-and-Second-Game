@@ -64,7 +64,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Front section
 		structureSections.add(new StructureSection("A Cozy Place", AreaTown.posX + 21, AreaTown.posY + 30,
-				AreaTown.posX + 29, AreaTown.posY + 36, false, false));
+				AreaTown.posX + 29, AreaTown.posY + 36, false, true));
 
 		// Front door
 		structureFeatures
@@ -74,9 +74,9 @@ public class QuestTheSecretRoom extends Quest {
 						Nodes.dungeonHouseOuter));
 
 		// Front room
-		StructureRoom livingRoom = new StructureRoom("Living Room", AreaTown.posX + 22, AreaTown.posY + 31, false,
-				false, new ArrayList<Actor>(),
-				new Node[] { Nodes.dungeonHouseOuter, Nodes.dungeonHouseHiddenArea }, new RoomPart(AreaTown.posX + 22, AreaTown.posY + 31, AreaTown.posX + 28, AreaTown.posY + 35));
+		StructureRoom livingRoom = new StructureRoom("Living Room", AreaTown.posX + 22, AreaTown.posY + 31, false, true,
+				new ArrayList<Actor>(), new Node[] { Nodes.dungeonHouseOuter, Nodes.dungeonHouseHiddenArea },
+				new RoomPart(AreaTown.posX + 22, AreaTown.posY + 31, AreaTown.posX + 28, AreaTown.posY + 35));
 		structureRooms.add(livingRoom);
 
 		// Front room decorative walls
@@ -90,8 +90,8 @@ public class QuestTheSecretRoom extends Quest {
 		// null));
 
 		// Back Section
-		structureSections.add(new StructureSection("A Cozy Place", AreaTown.posX + 19, AreaTown.posY + 36,
-				AreaTown.posX + 36, AreaTown.posY + 46, false, false));
+		structureSections.add(new StructureSection("Secret Room", AreaTown.posX + 19, AreaTown.posY + 36,
+				AreaTown.posX + 36, AreaTown.posY + 46, true, true));
 
 		// False wall
 		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall",
@@ -99,9 +99,9 @@ public class QuestTheSecretRoom extends Quest {
 		structureFeatures.add(new StructureFeature(falseWall, Nodes.dungeonHouseHiddenArea));
 
 		// Back room
-		StructureRoom backRoom = new StructureRoom("Back room", AreaTown.posX + 20, AreaTown.posY + 37, false,
-				false, new ArrayList<Actor>(), 4,
-				new Node[] { Nodes.dungeonHouseHiddenArea }, new RoomPart(AreaTown.posX + 20, AreaTown.posY + 37, AreaTown.posX + 35, AreaTown.posY + 45));
+		StructureRoom backRoom = new StructureRoom("Back room", AreaTown.posX + 20, AreaTown.posY + 37, false, true,
+				new ArrayList<Actor>(), 4, new Node[] { Nodes.dungeonHouseHiddenArea },
+				new RoomPart(AreaTown.posX + 20, AreaTown.posY + 37, AreaTown.posX + 35, AreaTown.posY + 45));
 		structureRooms.add(backRoom);
 
 		// back room decorative walls

@@ -200,7 +200,8 @@ public class PinWindow implements Draggable {
 			if (gameObject != null) {
 				if (actor != null) {
 					actor.drawActor((int) (drawPositionX + borderWidth), (int) (drawPositionY + titleBarHeight), 1f,
-							false, 1, 1, 0f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false, actor.backwards, false);
+							false, 1, 1, 0f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE,
+							TextureUtils.neutralColor, true, false, actor.backwards, false);
 				} else {
 					TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
 							drawPositionY + titleBarHeight, drawPositionX + gameObject.imageTexture.getWidth(),
@@ -265,23 +266,28 @@ public class PinWindow implements Draggable {
 				Color.WHITE, "Restricted ", square.restricted);
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
-				drawPositionY + statsY + 120, drawPositionX + statsImageX + 20, drawPositionY + statsY + 120 + 20);
+				drawPositionY + statsY + 90, drawPositionX + statsImageX + 20, drawPositionY + statsY + 120 + 20);
 		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 120, width - 40, false, null,
+				Color.WHITE, "Restricted at night (22:00 - 06:00) ", square.restrictedAtNight);
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+				drawPositionY + statsY + 120, drawPositionX + statsImageX + 20, drawPositionY + statsY + 150 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false, null,
 				Color.WHITE, "Area ", square.areaSquareIsIn);
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
-				drawPositionY + statsY + 150, drawPositionX + statsImageX + 20, drawPositionY + statsY + 150 + 20);
-		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false, null,
+				drawPositionY + statsY + 150, drawPositionX + statsImageX + 20, drawPositionY + statsY + 180 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false, null,
 				Color.WHITE, "Structure ", square.structureSquareIsIn);
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
-				drawPositionY + statsY + 180, drawPositionX + statsImageX + 20, drawPositionY + statsY + 180 + 20);
-		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false, null,
+				drawPositionY + statsY + 180, drawPositionX + statsImageX + 20, drawPositionY + statsY + 210 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false, null,
 				Color.WHITE, "SubStructure ", square.structureSectionSquareIsIn);
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
-				drawPositionY + statsY + 210, drawPositionX + statsImageX + 20, drawPositionY + statsY + 210 + 20);
-		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false, null,
+				drawPositionY + statsY + 210, drawPositionX + statsImageX + 20, drawPositionY + statsY + 240 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false, null,
 				Color.WHITE, "Room ", square.structureRoomSquareIsIn);
 	}
 
