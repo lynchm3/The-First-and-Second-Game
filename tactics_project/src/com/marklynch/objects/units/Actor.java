@@ -2377,11 +2377,20 @@ public class Actor extends GameObject {
 			mapActorToCrimesWitnessed.remove(criminal);
 		}
 
-		accumulatedCrimeSeverityUnresolved.put(criminal,
-				accumulatedCrimeSeverityUnresolved.get(criminal) - crime.type.severity);
+		System.out.println("accumulatedCrimeSeverityUnresolved = " + accumulatedCrimeSeverityUnresolved);
+		System.out.println("criminal = " + criminal);
+		System.out.println("crime = " + crime);
+		System.out.println("crime.type = " + crime.type);
+		System.out.println("accumulatedCrimeSeverityUnresolved.get(criminal) = "
+				+ accumulatedCrimeSeverityUnresolved.get(criminal));
 
-		if (accumulatedCrimeSeverityUnresolved.get(criminal) == 0)
-			accumulatedCrimeSeverityUnresolved.remove(criminal);
+		if (accumulatedCrimeSeverityUnresolved.get(criminal) != null) {
+			accumulatedCrimeSeverityUnresolved.put(criminal,
+					accumulatedCrimeSeverityUnresolved.get(criminal) - crime.type.severity);
+
+			if (accumulatedCrimeSeverityUnresolved.get(criminal) == 0)
+				accumulatedCrimeSeverityUnresolved.remove(criminal);
+		}
 
 		updateHighestUnresolvedCrimeSeverity();
 	}

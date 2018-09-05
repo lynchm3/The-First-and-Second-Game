@@ -53,6 +53,8 @@ public class QuestTheSecretRoom extends Quest {
 				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 32], Game.level.factions.townsPeople, bed, 100,
 				new GameObject[] {}, new GameObject[] {}, null);
 		kidnapper.quest = this;
+		ArrayList<Actor> ownershipArrayList = new ArrayList<Actor>();
+		ownershipArrayList.add(kidnapper);
 
 		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>();
 		ArrayList<StructureFeature> structureFeatures = new ArrayList<StructureFeature>();
@@ -64,18 +66,16 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Front section
 		structureSections.add(new StructureSection("A Cozy Place", AreaTown.posX + 21, AreaTown.posY + 30,
-				AreaTown.posX + 29, AreaTown.posY + 36, false, true));
+				AreaTown.posX + 29, AreaTown.posY + 36, false, true, kidnapper));
 
 		// Front door
-		structureFeatures
-				.add(new StructureFeature(
-						Templates.DOOR.makeCopy("Front Door",
-								Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 30], false, false, false, null),
-						Nodes.dungeonHouseOuter));
+		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Front Door",
+				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 30], false, false, false, kidnapper),
+				Nodes.dungeonHouseOuter));
 
 		// Front room
 		StructureRoom livingRoom = new StructureRoom("Living Room", AreaTown.posX + 22, AreaTown.posY + 31, false, true,
-				new ArrayList<Actor>(), new Node[] { Nodes.dungeonHouseOuter, Nodes.dungeonHouseHiddenArea },
+				ownershipArrayList, new Node[] { Nodes.dungeonHouseOuter, Nodes.dungeonHouseHiddenArea },
 				new RoomPart(AreaTown.posX + 22, AreaTown.posY + 31, AreaTown.posX + 28, AreaTown.posY + 35));
 		structureRooms.add(livingRoom);
 
@@ -91,7 +91,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Back Section
 		structureSections.add(new StructureSection("Secret Room", AreaTown.posX + 19, AreaTown.posY + 36,
-				AreaTown.posX + 36, AreaTown.posY + 46, true, true));
+				AreaTown.posX + 36, AreaTown.posY + 46, true, true, kidnapper));
 
 		// False wall
 		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall",
@@ -100,7 +100,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Back room
 		StructureRoom backRoom = new StructureRoom("Back room", AreaTown.posX + 20, AreaTown.posY + 37, false, true,
-				new ArrayList<Actor>(), 4, new Node[] { Nodes.dungeonHouseHiddenArea },
+				ownershipArrayList, 4, new Node[] { Nodes.dungeonHouseHiddenArea },
 				new RoomPart(AreaTown.posX + 20, AreaTown.posY + 37, AreaTown.posX + 35, AreaTown.posY + 45));
 		structureRooms.add(backRoom);
 
@@ -118,7 +118,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
 				structureFeatures, structureEntranceSquares, null, AreaTown.posX + 0, AreaTown.posY + 0,
-				AreaTown.posX + 0, AreaTown.posY + 0, true, null, structureSquaresToRemove, structureExtraWalls,
+				AreaTown.posX + 0, AreaTown.posY + 0, true, kidnapper, structureSquaresToRemove, structureExtraWalls,
 				Templates.WALL, Square.STONE_TEXTURE, 2));
 
 		// Path to town 24,21 -> 24,29
