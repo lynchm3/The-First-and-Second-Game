@@ -11,6 +11,8 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.journal.JournalLog;
+import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Node;
@@ -28,6 +30,19 @@ import com.marklynch.utils.TextUtils;
 
 public class QuestTheSecretRoom extends Quest {
 	Kidnapper kidnapper;
+
+	final String OBJECTIVE_FIND_OUT_WHAT_THE_WOMAN_WANTS = "Find out what the man wants";
+
+	public Objective objectiveKidnapper;
+	public Objective objectiveChild;
+	// public Objective objectiveHunters;
+	// public Objective objectiveEnvironmentalist;
+
+	JournalLog journalLogMetKidnapper = new JournalLog("I've met a man in town who would like me me to help him out.");
+	JournalLog journalLogTheFavour = new JournalLog(
+			"He wants me to fetch his child, who's out playing near the pond to the east of town.");
+	// How do I reword this
+	ConversationForKidnapper conversationForKidnapper;
 
 	public QuestTheSecretRoom() {
 		name = "THE SECRET ROOM";
@@ -170,8 +185,7 @@ public class QuestTheSecretRoom extends Quest {
 		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 19], null);
 		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 23], null);
 
-		ConversationsTheSecretRoom.quest = this;
-		ConversationsTheSecretRoom.createConversations();
+		conversationForKidnapper = new ConversationForKidnapper(this);
 
 		links = TextUtils.getLinks(true, this);
 
@@ -198,20 +212,12 @@ public class QuestTheSecretRoom extends Quest {
 		if (actor == kidnapper) {
 			return getConversationForKidnapper(actor);
 		}
-		// else if (actor == rangerBill) {
-		// return getConversationForEnvironmentalist(actor);
-		// } else if (wolfPack.contains(actor)) {
-		// return getConversationForWolf(actor);
-		// }
 		return null;
 	}
 
 	private Conversation getConversationForKidnapper(Actor actor) {
-		// Talking to kidnapper
-		// if (!haveJournalLog(journalLogAgreedToJoinHunters)) {
-		return ConversationsTheSecretRoom.conversationHi;
-		// }
-		// return null;
+		conversationForKidnapper.setup();
+		return conversationForKidnapper;
 	}
 
 }

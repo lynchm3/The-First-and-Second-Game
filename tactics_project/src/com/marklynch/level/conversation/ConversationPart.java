@@ -159,6 +159,8 @@ public class ConversationPart {
 
 		for (Quest quest : quests)
 			quest.addConversationPart(this);
+
+		shown();
 	}
 
 	public void leave() {
@@ -167,6 +169,7 @@ public class ConversationPart {
 
 		for (Quest quest : quests)
 			quest.addConversationPart(this);
+		shown();
 
 	}
 
@@ -197,6 +200,10 @@ public class ConversationPart {
 
 	public Area getArea() {
 		return area;
+	}
+
+	public void shown() {
+
 	}
 
 }

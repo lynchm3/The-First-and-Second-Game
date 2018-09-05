@@ -45,12 +45,15 @@ public class QuestList extends ArrayList<Quest> {
 				questSmallGame.hunterBrent.imageTexture);
 
 		questThePigs = new QuestThePigs();
+		add(questThePigs);
 		Level.fullQuestList.add(questThePigs);
 
 		questBetweenTheWalls = new QuestBetweenTheWalls(10, 10);
+		add(questBetweenTheWalls);
 		Level.fullQuestList.add(questBetweenTheWalls);
 
 		questTheSecretRoom = new QuestTheSecretRoom();
+		add(questTheSecretRoom);
 		Level.fullQuestList.add(questTheSecretRoom);
 
 		// PUZZLE ROOMS
@@ -59,7 +62,8 @@ public class QuestList extends ArrayList<Quest> {
 
 		ArrayList<StructurePath> paths = new ArrayList<StructurePath>();
 		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>();
-		structureSections.add(new StructureSection("Puzzle Structure Section", puzzleRoomsX, puzzleRoomsY, puzzleRoomsX + 100, puzzleRoomsY + 100, false));
+		structureSections.add(new StructureSection("Puzzle Structure Section", puzzleRoomsX, puzzleRoomsY,
+				puzzleRoomsX + 100, puzzleRoomsY + 100, false));
 		ArrayList<StructureRoom> puzzleStructureRooms = new ArrayList<StructureRoom>();
 		puzzleStructureRooms.add(new PuzzleRoomMovingBridge(puzzleRoomsX + 1, puzzleRoomsY + 1));
 		puzzleStructureRooms.add(new PuzzleRoomMineCart(puzzleRoomsX + 1, puzzleRoomsY + 22));
@@ -84,8 +88,8 @@ public class QuestList extends ArrayList<Quest> {
 		extraWalls.add(Templates.FALSE_WALL.makeCopy(Level.squares[puzzleRoomsX + 1 + 1][puzzleRoomsY + 22 + 0], null));
 
 		Structure puzzleStructure = new Structure("Puzzle Structure", structureSections, puzzleStructureRooms, paths,
-				features, entrances, "building2.png", puzzleRoomsX, puzzleRoomsY, puzzleRoomsX + 100, puzzleRoomsY + 100, true, null, squaresToRemove, extraWalls,
-				Templates.WALL, Square.STONE_TEXTURE, 10);
+				features, entrances, "building2.png", puzzleRoomsX, puzzleRoomsY, puzzleRoomsX + 100,
+				puzzleRoomsY + 100, true, null, squaresToRemove, extraWalls, Templates.WALL, Square.STONE_TEXTURE, 10);
 
 	}
 
