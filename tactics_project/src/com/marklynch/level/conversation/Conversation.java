@@ -4,9 +4,8 @@ import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Human;
-import com.marklynch.utils.QuadUtils;
-
 import com.marklynch.utils.Color;
+import com.marklynch.utils.QuadUtils;
 
 public class Conversation {
 
@@ -59,6 +58,7 @@ public class Conversation {
 		QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
 		currentConversationPart.drawStaticUI1();
 		currentConversationPart.drawStaticUI2();
+		currentConversationPart.shown();
 		// TextUtils.printTextWithImages(new Object[] { object }, realX, realY,
 		// Integer.MAX_VALUE, true);
 

@@ -45,7 +45,7 @@ public class QuestTheSecretRoom extends Quest {
 	ConversationForKidnapper conversationForKidnapper;
 
 	public QuestTheSecretRoom() {
-		name = "THE SECRET ROOM";
+		name = "MISSIN CHILD";
 
 		// Kidnapper kidnapper = Templates.KIDNAPPER.makeCopy()
 		Bed bed = null;
@@ -188,6 +188,9 @@ public class QuestTheSecretRoom extends Quest {
 		conversationForKidnapper = new ConversationForKidnapper(this);
 
 		links = TextUtils.getLinks(true, this);
+
+		objectiveKidnapper = new Objective("John", kidnapper, null, kidnapper.armImageTexture);
+		objectiveChild = new Objective("John", kidnapper, null, kidnapper.armImageTexture);
 
 	}
 

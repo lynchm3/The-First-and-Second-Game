@@ -32,7 +32,9 @@ public class ConversationForKidnapper extends Conversation {
 			@Override
 			public void shown() {
 				super.shown();
+				System.out.println("SHOWN() 1");
 				questTheSecretRoom.addJournalLog(questTheSecretRoom.journalLogMetKidnapper);
+				questTheSecretRoom.addObjective(questTheSecretRoom.objectiveKidnapper);
 
 			}
 		};
@@ -48,7 +50,9 @@ public class ConversationForKidnapper extends Conversation {
 			@Override
 			public void shown() {
 				super.shown();
+				System.out.println("SHOWN() 2");
 				questTheSecretRoom.addJournalLog(questTheSecretRoom.journalLogTheFavour);
+				questTheSecretRoom.addObjective(questTheSecretRoom.objectiveChild);
 
 			}
 		};
