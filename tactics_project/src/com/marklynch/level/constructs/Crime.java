@@ -15,9 +15,10 @@ public class Crime {
 	public boolean hasBeenToldToStop;
 
 	public enum TYPE {
-		CRIME_TRESPASSING("Trespassing", 1), CRIME_NON_COMPLIANCE("Non Compliance", 1), CRIME_DOUSE("Minor Assault",
-				1), CRIME_VOYEURISM("Voyeurism", 2), CRIME_VANDALISM("Vandalism", 3), CRIME_THEFT("Theft",
-						4), CRIME_ARSON("Arson", 5), CRIME_MANSLAUGHTER("Manslaughter",
+		CRIME_TRESPASSING_LEEWAY("Trespassing", 0), CRIME_TRESPASSING("Trespassing", 1), CRIME_NON_COMPLIANCE(
+				"Non Compliance",
+				1), CRIME_DOUSE("Minor Assault", 1), CRIME_VOYEURISM("Voyeurism", 2), CRIME_VANDALISM("Vandalism",
+						3), CRIME_THEFT("Theft", 4), CRIME_ARSON("Arson", 5), CRIME_MANSLAUGHTER("Manslaughter",
 								6), CRIME_ASSAULT("Assault", 10), CRIME_MURDER("Murder", 20), NONE("None", 0);
 		public final String name;
 		public final int severity;

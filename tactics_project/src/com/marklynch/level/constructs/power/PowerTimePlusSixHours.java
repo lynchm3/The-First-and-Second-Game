@@ -22,7 +22,8 @@ public class PowerTimePlusSixHours extends Power {
 
 	@Override
 	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
-		Game.level.changeTime(60 * 60 * 6);
+		// Game.level.changeTime(60 * 60 * 6);
+		Game.level.changeTime(60 * 60 * 10);
 	}
 
 	@Override

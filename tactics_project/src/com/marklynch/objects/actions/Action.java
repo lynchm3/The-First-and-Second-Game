@@ -2,6 +2,7 @@ package com.marklynch.objects.actions;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
@@ -107,10 +108,17 @@ public abstract class Action {
 				loudness = action.sound.loudness;
 			ActionTrespass actionTrespass = new ActionTrespass(performer, square, loudness);
 			Crime crime = null;
+
+			Crime.TYPE tresspassingType = Crime.TYPE.CRIME_TRESPASSING;
+			if (square.restricted == false && square.restrictedAtNight == true && Game.level.hour == 22
+					&& Game.level.minute < 10) {
+				tresspassingType = Crime.TYPE.CRIME_TRESPASSING_LEEWAY;
+			}
+
 			if (square.owners.size() > 0)
-				crime = new Crime(actionTrespass, performer, square.owners.get(0), Crime.TYPE.CRIME_TRESPASSING);
+				crime = new Crime(actionTrespass, performer, square.owners.get(0), tresspassingType);
 			else
-				crime = new Crime(actionTrespass, performer, null, Crime.TYPE.CRIME_TRESPASSING);
+				crime = new Crime(actionTrespass, performer, null, tresspassingType);
 
 			performer.crimesPerformedThisTurn.add(crime);
 			performer.crimesPerformedInLifetime.add(crime);

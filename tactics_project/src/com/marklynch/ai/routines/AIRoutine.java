@@ -658,6 +658,7 @@ public abstract class AIRoutine {
 	}
 
 	public static String STOP_THAT = "Stop that!";
+	public static String TIME_TO_LEAVE = "It's getting late, time for you to go...";
 	public static String I_SAW_THAT = "I saw that!!";
 
 	protected boolean runCrimeReactionRoutine() {
@@ -727,7 +728,10 @@ public abstract class AIRoutine {
 						new ActionTalk(this.actor, criminal, createJusticeStopConversation(crime)).perform();
 					} else {
 						if (Game.level.shouldLog(this.actor)) {
-							if (crime.type == Crime.TYPE.CRIME_THEFT)
+
+							if (crime.type == Crime.TYPE.CRIME_TRESPASSING_LEEWAY)
+								actor.setMiniDialogue(TIME_TO_LEAVE, criminal);
+							else if (crime.type == Crime.TYPE.CRIME_THEFT)
 								actor.setMiniDialogue(I_SAW_THAT, criminal);
 							else
 								actor.setMiniDialogue(STOP_THAT, criminal);
@@ -850,7 +854,12 @@ public abstract class AIRoutine {
 	public Conversation createJusticeStopConversation(Crime crime) {
 		ConversationResponse done = new ConversationResponse(":/", null);
 		ConversationPart conversationPartJustice = null;
-		if (crime.type == Crime.TYPE.CRIME_THEFT) {
+
+		if (crime.type == Crime.TYPE.CRIME_TRESPASSING_LEEWAY) {
+			conversationPartJustice = new ConversationPart(new Object[] { TIME_TO_LEAVE },
+					new ConversationResponse[] { done }, this.actor);
+
+		} else if (crime.type == Crime.TYPE.CRIME_THEFT) {
 			conversationPartJustice = new ConversationPart(new Object[] { I_SAW_THAT },
 					new ConversationResponse[] { done }, this.actor);
 

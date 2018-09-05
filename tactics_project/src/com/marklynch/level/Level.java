@@ -184,7 +184,7 @@ public class Level {
 	String dayString = "1";
 	public int hour = 12;
 	String hourString = "6";
-	int minute = 0;
+	public int minute = 0;
 	String minuteString = "0";
 	int second = 0;
 	String secondString = "0";
