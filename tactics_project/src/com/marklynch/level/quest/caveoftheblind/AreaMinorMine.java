@@ -39,18 +39,18 @@ public class AreaMinorMine {
 		ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>();
 		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
 
-		mineSections.add(new StructureSection("Minor Mine", 280, 76, 307, 97, false));
+		mineSections.add(new StructureSection("Minor Mine", 280, 76, 307, 97, false, false));
 
-		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.minorMine }, new RoomPart(281, 77, 306, 88), new RoomPart(281, 89, 301, 91),
-				new RoomPart(292, 92, 301, 96)));
+		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.minorMine }, new RoomPart(281, 77, 306, 88),
+				new RoomPart(281, 89, 301, 91), new RoomPart(292, 92, 301, 96)));
 
-		StructureRoom shopRoom = new StructureRoom("What's Mine is Yours*", 281, 93, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.minorMine }, new RoomPart(281, 93, 290, 96));
+		StructureRoom shopRoom = new StructureRoom("What's Mine is Yours*", 281, 93, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.minorMine }, new RoomPart(281, 93, 290, 96));
 		rooms.add(shopRoom);
 
-		rooms.add(new StructureRoom("Minor Mine Quarters", 303, 90, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.minorMine }, new RoomPart(303, 90, 306, 96)));
+		rooms.add(new StructureRoom("Minor Mine Quarters", 303, 90, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.minorMine }, new RoomPart(303, 90, 306, 96)));
 
 		// entry to mine
 		squaresToRemove.add(Game.level.squares[280][87]);

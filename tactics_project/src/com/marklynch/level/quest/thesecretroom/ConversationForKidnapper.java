@@ -45,7 +45,7 @@ public class ConversationForKidnapper extends Conversation {
 		conversationResponseWhatsTheFavour = new ConversationResponse("What's the favour?", null);
 
 		conversationPartTheFavour = new ConversationPart(new Object[] {
-				"My son, he's out playing near the pond to the east of town. Could you fetch him for me? I always have awful trouble getting him to come in in the evenings, if he gives you trouble you can bribe him with this chocolate. Does the trick every time!" },
+				"My son, he's out playing near the pond to the east of town. Could you fetch him for me? I always have awful trouble getting him to come in in the evenings, if he gives you trouble you can bribe him with this chocolate. It's his favourite, does the trick every time!" },
 				new ConversationResponse[] {}, questTheSecretRoom.kidnapper, this.questTheSecretRoom) {
 			@Override
 			public void shown() {

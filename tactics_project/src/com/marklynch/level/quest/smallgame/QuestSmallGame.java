@@ -244,10 +244,10 @@ public class QuestSmallGame extends Quest {
 				Templates.DOOR.makeCopy("Door", Game.level.squares[105][12], false, false, false, hunterBrent),
 				Nodes.lodgeEntrance));
 		ArrayList<StructureRoom> lodgeRooms = new ArrayList<StructureRoom>();
-		lodgeRooms.add(new StructureRoom("Hunting Lodge", 107, 9, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.lodgeEntrance }, new RoomPart(106, 10, 110, 14)));
+		lodgeRooms.add(new StructureRoom("Hunting Lodge", 107, 9, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.lodgeEntrance }, new RoomPart(106, 10, 110, 14)));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
-		lodgeSections.add(new StructureSection("Hunting Lodge", 105, 9, 111, 15, false));
+		lodgeSections.add(new StructureSection("Hunting Lodge", 105, 9, 111, 15, false, false));
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeRooms, new ArrayList<StructurePath>(),
 				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true,
 				hunterBrent, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, Square.STONE_TEXTURE, 2);
@@ -330,9 +330,9 @@ public class QuestSmallGame extends Quest {
 		featuresBarracks.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[80][61], false, false, false, null),
 				Nodes.barracksSouth));
-		roomsBarracks.add(new StructureRoom("Barracks", 75, 53, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.barracksNorth, Nodes.barracksSouth }, new RoomPart(75, 53, 84, 60)));
-		sectionsBarracks.add(new StructureSection("Barracks", 74, 52, 85, 61, false));
+		roomsBarracks.add(new StructureRoom("Barracks", 75, 53, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.barracksNorth, Nodes.barracksSouth }, new RoomPart(75, 53, 84, 60)));
+		sectionsBarracks.add(new StructureSection("Barracks", 74, 52, 85, 61, false, false));
 		Structure barracks = new Structure("Barracks", sectionsBarracks, roomsBarracks, pathsBarracks, featuresBarracks,
 				new ArrayList<Square>(), null, 74, 52, 85, 61, true, null, squaresToRemoveBarracks, extraWallsBarracks,
 				Templates.WALL, Square.STONE_TEXTURE, 5);
@@ -375,9 +375,9 @@ public class QuestSmallGame extends Quest {
 		featuresThievesHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[113][53], false, false, false, null),
 				Nodes.forestThiefHut));
-		roomsThievesHut.add(new StructureRoom("Hut", 114, 53, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.forestThiefHut }, new RoomPart(114, 53, 116, 55)));
-		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false));
+		roomsThievesHut.add(new StructureRoom("Hut", 114, 53, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.forestThiefHut }, new RoomPart(114, 53, 116, 55)));
+		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false, false));
 		Structure thievesHut = new Structure("Hut", sectionsThievesHut, roomsThievesHut, pathsThievesHut,
 				featuresThievesHut, new ArrayList<Square>(), null, 113, 52, 117, 56, true, null,
 				squaresToRemoveThievesHut, extraWallsThievesHut, Templates.WALL, Square.STONE_TEXTURE, 5);
@@ -422,9 +422,9 @@ public class QuestSmallGame extends Quest {
 		featuresRangersHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[133][34], false, false, false, rangerBill),
 				Nodes.forestRangersHut));
-		roomsRangersHut.add(new StructureRoom("Ranger's Hut", 130, 34, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.forestRangersHut }, new RoomPart(130, 34, 132, 36)));
-		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false));
+		roomsRangersHut.add(new StructureRoom("Ranger's Hut", 130, 34, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.forestRangersHut }, new RoomPart(130, 34, 132, 36)));
+		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false, false));
 		Structure rangerHut = new Structure("Ranger's Hut", sectionsRangersHut, roomsRangersHut, pathsRangersHut,
 				featuresRangersHut, new ArrayList<Square>(), null, 129, 33, 133, 37, true, null,
 				squaresToRemoveRangersHut, extraWallsRangersHut, Templates.WALL, Square.STONE_TEXTURE, 5);

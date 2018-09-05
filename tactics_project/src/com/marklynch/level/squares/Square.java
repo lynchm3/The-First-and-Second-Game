@@ -120,6 +120,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public ArrayList<Actor> owners;
 	public boolean restricted;
+	public boolean restrictedAtNight;
 	public String name;
 	public boolean flash;
 

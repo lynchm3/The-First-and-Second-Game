@@ -56,7 +56,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	Square voidSquare;
 
 	public PuzzleRoomMovingBridge(int posX, int posY) {
-		super("Bridge Room", posX, posY, false, new ArrayList<Actor>(), 1, false, new Node[] {}, new RoomPart[] {
+		super("Bridge Room", posX, posY, false, false, new ArrayList<Actor>(), 1, false, new Node[] {}, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;

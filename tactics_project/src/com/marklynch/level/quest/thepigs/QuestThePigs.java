@@ -118,9 +118,9 @@ public class QuestThePigs extends Quest {
 		Door gate = Templates.GATE.makeCopy("Gate", Game.level.squares[32][72], false, true, false, farmer);
 		pigPenFeatures.add(new StructureFeature(gate, Nodes.farmPigPen));
 
-		penSection = new StructureSection("Pen", 28, 72, 46, 82, false, larry);
-		penRoom = new StructureRoom("Pen", 29, 73, false, new ArrayList<Actor>(), new Node[] { Nodes.farmPigPen },
-				new RoomPart(29, 73, 45, 81));
+		penSection = new StructureSection("Pen", 28, 72, 46, 82, false, false, larry);
+		penRoom = new StructureRoom("Pen", 29, 73, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.farmPigPen }, new RoomPart(29, 73, 45, 81));
 
 		pigPenSections.add(penSection);
 		pigPenRooms.add(penRoom);
@@ -154,16 +154,16 @@ public class QuestThePigs extends Quest {
 				farmer);
 		farmHouseFeatures.add(new StructureFeature(farmHouseBackDoor, Nodes.farmBackDoor));
 
-		farmHouseFrontSection = new StructureSection("Farm House", 12, 69, 24, 74, false, farmer);
-		farmHouseBackSection = new StructureSection("Farm House", 2, 75, 24, 85, false, farmer);
-		farmHouseFrontRoom = new StructureRoom("Kitchen", 13, 70, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.farmEntrance, Nodes.farmHallway }, new RoomPart(13, 70, 23, 74));
-		farmHouseHallRoom = new StructureRoom("Hall", 3, 76, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.farmHallway, Nodes.farmBedroom, Nodes.farmStorage }, new RoomPart(3, 76, 23, 77));
-		farmHouseBedroom = new StructureRoom("Bedroom", 3, 79, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.farmBedroom }, new RoomPart(3, 79, 17, 84));
-		farmHouseStorageRoom = new StructureRoom("Storage", 19, 79, false, new ArrayList<Actor>(),
-				new Node[] { Nodes.farmStorage, Nodes.farmBackDoor }, new RoomPart(19, 79, 23, 84));
+		farmHouseFrontSection = new StructureSection("Farm House", 12, 69, 24, 74, false, false, farmer);
+		farmHouseBackSection = new StructureSection("Farm House", 2, 75, 24, 85, false, false, farmer);
+		farmHouseFrontRoom = new StructureRoom("Kitchen", 13, 70, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.farmEntrance, Nodes.farmHallway }, new RoomPart(13, 70, 23, 74));
+		farmHouseHallRoom = new StructureRoom("Hall", 3, 76, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.farmHallway, Nodes.farmBedroom, Nodes.farmStorage }, new RoomPart(3, 76, 23, 77));
+		farmHouseBedroom = new StructureRoom("Bedroom", 3, 79, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.farmBedroom }, new RoomPart(3, 79, 17, 84));
+		farmHouseStorageRoom = new StructureRoom("Storage", 19, 79, false, false,
+				new ArrayList<Actor>(), new Node[] { Nodes.farmStorage, Nodes.farmBackDoor }, new RoomPart(19, 79, 23, 84));
 
 		farmHouseSections.add(farmHouseFrontSection);
 		farmHouseSections.add(farmHouseBackSection);

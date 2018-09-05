@@ -13,8 +13,8 @@ public class StructurePath {
 	Square[] squares;
 	ArrayList<Node> nodes;
 
-	public StructurePath(String name, boolean restricted, ArrayList<Actor> ownersArrayList, Node[] nodes,
-			Square... squares) {
+	public StructurePath(String name, boolean restricted, boolean restrictedAtNight, ArrayList<Actor> ownersArrayList,
+			Node[] nodes, Square... squares) {
 		super();
 		this.name = name;
 		this.squares = squares;
@@ -23,6 +23,12 @@ public class StructurePath {
 		if (restricted) {
 			for (Square square : squares) {
 				square.restricted = true;
+			}
+		}
+
+		if (restrictedAtNight) {
+			for (Square square : squares) {
+				square.restrictedAtNight = true;
 			}
 		}
 

@@ -11,7 +11,7 @@ public class StructureSection {
 	public int gridX1, gridY1, gridX2, gridY2;
 
 	public StructureSection(String name, int gridX1, int gridY1, int gridX2, int gridY2, boolean restricted,
-			Actor... ownersArray) {
+			boolean restrictedAtNight, Actor... ownersArray) {
 		super();
 		this.name = name;
 		this.gridX1 = gridX1;
@@ -28,6 +28,14 @@ public class StructureSection {
 			for (int i = gridX1; i <= gridX2; i++) {
 				for (int j = gridY1; j <= gridY2; j++) {
 					Game.level.squares[i][j].restricted = true;
+				}
+			}
+		}
+
+		if (restrictedAtNight) {
+			for (int i = gridX1; i <= gridX2; i++) {
+				for (int j = gridY1; j <= gridY2; j++) {
+					Game.level.squares[i][j].restrictedAtNight = true;
 				}
 			}
 		}

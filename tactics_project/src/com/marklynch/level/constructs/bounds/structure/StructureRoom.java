@@ -23,19 +23,19 @@ public class StructureRoom {
 
 	public static Color roomColor = new Color(0.7f, 0.7f, 0.7f);
 
-	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList,
-			Node[] nodes, RoomPart... roomParts) {
-		this(name, x, y, restricted, ownersArrayList, 0, true, nodes, roomParts);
+	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
+			ArrayList<Actor> ownersArrayList, Node[] nodes, RoomPart... roomParts) {
+		this(name, x, y, restricted, restrictedAtNight, ownersArrayList, 0, true, nodes, roomParts);
 	}
 
-	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList, int level,
-			Node[] nodes, RoomPart... roomParts) {
-		this(name, x, y, restricted, ownersArrayList, level, true, nodes, roomParts);
+	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
+			ArrayList<Actor> ownersArrayList, int level, Node[] nodes, RoomPart... roomParts) {
+		this(name, x, y, restricted, restrictedAtNight, ownersArrayList, level, true, nodes, roomParts);
 
 	}
 
-	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList, int level,
-			boolean doesNothing, Node[] nodes, RoomPart[] roomParts) {
+	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
+			ArrayList<Actor> ownersArrayList, int level, boolean doesNothing, Node[] nodes, RoomPart[] roomParts) {
 		super();
 		this.name = name;
 		this.x = x;
@@ -54,6 +54,12 @@ public class StructureRoom {
 		if (restricted) {
 			for (Square square : squares) {
 				square.restricted = true;
+			}
+		}
+
+		if (restrictedAtNight) {
+			for (Square square : squares) {
+				square.restrictedAtNight = true;
 			}
 		}
 
