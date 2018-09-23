@@ -15,12 +15,10 @@ import com.marklynch.objects.Mirror;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
-import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.RockGolem;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.Utils;
 
 public class ActionDie extends Action {
 
@@ -68,10 +66,11 @@ public class ActionDie extends Action {
 				// Game.level.actorsToRemove.add((Actor) gameObjectPerformer);
 
 			} else {
-				if (gameObjectPerformer instanceof VoidHole) {
-					System.out.println("inanimateObjectsOnGroundToRemove.add " + gameObjectPerformer);
-					Utils.printStackTrace();
-				}
+				// if (gameObjectPerformer instanceof VoidHole) {
+				// System.out.println("inanimateObjectsOnGroundToRemove.add " +
+				// gameObjectPerformer);
+				// Utils.printStackTrace();
+				// }
 				Game.level.inanimateObjectsOnGroundToRemove.add(gameObjectPerformer);
 			}
 		}

@@ -10,6 +10,7 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.Floor;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MineCart;
+import com.marklynch.objects.Portal;
 import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.Seesaw.SeesawPart;
 import com.marklynch.objects.VoidHole;
@@ -18,7 +19,6 @@ import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fish;
-import com.marklynch.utils.Utils;
 
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
 
@@ -108,10 +108,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public int remove(GameObject gameObject) {
 		if (gameObjects.contains(gameObject)) {
 
-			if (gameObject instanceof VoidHole) {
-				System.out.println("Remove!");
-				Utils.printStackTrace();
-			}
+			// if (gameObject instanceof VoidHole) {
+			// System.out.println("Remove!");
+			// Utils.printStackTrace();
+			// }
 
 			gameObject.lastSquare = this.square;
 			gameObjects.remove(gameObject);
@@ -154,6 +154,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		VoidHole voidHole = (VoidHole) getGameObjectOfClass(VoidHole.class);
 		if (voidHole != null)
 			voidHole.updateVoid();
+
+		Portal portal = (Portal) getGameObjectOfClass(Portal.class);
+		if (portal != null)
+			portal.updateVoid();
 
 		SeesawPart seesawPart = (SeesawPart) getGameObjectOfClass(SeesawPart.class);
 		if (seesawPart != null)
@@ -235,6 +239,16 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		{
 			return -1;
 		} else if (b instanceof VoidHole) {
+			return 1;
+		}
+
+		if (a instanceof Portal && b instanceof Portal) {
+			return 0;
+		} else if (a instanceof Portal)
+
+		{
+			return -1;
+		} else if (b instanceof Portal) {
 			return 1;
 		}
 

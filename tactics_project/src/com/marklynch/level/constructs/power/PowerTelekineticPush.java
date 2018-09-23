@@ -13,6 +13,7 @@ import com.marklynch.level.constructs.animation.primary.AnimationPushed;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Portal;
 import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
@@ -86,6 +87,7 @@ public class PowerTelekineticPush extends Power {
 			// Hit an obstacle?
 			if (!currentSquare.inventory.canShareSquare
 					&& !(currentSquare.inventory.gameObjectThatCantShareSquare instanceof VoidHole)
+					&& !(currentSquare.inventory.gameObjectThatCantShareSquare instanceof Portal)
 					&& currentSquare.inventory.gameObjectThatCantShareSquare != null) {
 				if (tempObstacle != null)
 					tempObstacle = currentSquare.inventory.gameObjectThatCantShareSquare;

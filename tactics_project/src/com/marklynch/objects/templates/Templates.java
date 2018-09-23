@@ -27,6 +27,7 @@ import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.MineCart;
 import com.marklynch.objects.Mirror;
 import com.marklynch.objects.Orb;
+import com.marklynch.objects.Portal;
 import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Readable;
@@ -398,6 +399,8 @@ public class Templates {
 	public static Discoverable MOUND;
 
 	public static VoidHole VOID_HOLE;
+
+	public static Portal PORTAL;
 
 	public static Floor STONE_FLOOR;
 

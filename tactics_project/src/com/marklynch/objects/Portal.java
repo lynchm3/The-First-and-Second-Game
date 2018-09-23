@@ -7,14 +7,16 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationFall;
 import com.marklynch.level.constructs.animation.primary.AnimationFallFromTheSky;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
 
-public class VoidHole extends GameObject {
+public class Portal extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public Square connectedSquare = null;
 
-	public VoidHole() {
+	public Portal() {
 		super();
 		canBePickedUp = false;
 		fitsInInventory = false;
@@ -25,17 +27,17 @@ public class VoidHole extends GameObject {
 		isFloorObject = true;
 	}
 
-	@Override
-	public void draw1() {
-	}
-
-	@Override
-	public void draw2() {
-	}
-
-	@Override
-	public void draw3() {
-	}
+	// @Override
+	// public void draw1() {
+	// }
+	//
+	// @Override
+	// public void draw2() {
+	// }
+	//
+	// @Override
+	// public void draw3() {
+	// }
 
 	@Override
 	public void setInstances(GameObject gameObject) {
@@ -43,12 +45,12 @@ public class VoidHole extends GameObject {
 		super.setInstances(gameObject);
 	}
 
-	public VoidHole makeCopy(Square square, Actor owner, Square connectedSquare) {
-		VoidHole voidHole = new VoidHole();
-		setInstances(voidHole);
-		super.setAttributesForCopy(voidHole, square, owner);
-		voidHole.connectedSquare = connectedSquare;
-		return voidHole;
+	public Portal makeCopy(Square square, Actor owner, Square connectedSquare) {
+		Portal portal = new Portal();
+		setInstances(portal);
+		super.setAttributesForCopy(portal, square, owner);
+		portal.connectedSquare = connectedSquare;
+		return portal;
 	}
 
 	@Override
@@ -69,9 +71,9 @@ public class VoidHole extends GameObject {
 					public void runCompletionAlgorightm(boolean wait) {
 						super.runCompletionAlgorightm(wait);
 
-						Square square = gameObject.lastSquare;
-						if (square == null)
-							square = connectedSquare;
+						// Square square = gameObject.lastSquare;
+						// if (square == null)
+						Square square = connectedSquare;
 
 						square.inventory.add(gameObject);
 
@@ -92,6 +94,24 @@ public class VoidHole extends GameObject {
 		}
 		System.out.println("updateVoid 2 - " + squareGameObjectIsOn.inventory);
 
+	}
+
+	@Override
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+		return new ActionMove(performer, squareGameObjectIsOn, true);
+	}
+
+	@Override
+	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+		return new ActionMove(performer, squareGameObjectIsOn, true);
+	}
+
+	@Override
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.add(new ActionMove(performer, squareGameObjectIsOn, true));
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
+		return actions;
 	}
 
 }

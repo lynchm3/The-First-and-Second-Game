@@ -13,6 +13,7 @@ import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.Portal;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
@@ -372,6 +373,12 @@ public class TemplatesNature {
 		Templates.VOID_HOLE.imageTexturePath = "void_hole.png";
 		Templates.VOID_HOLE.imageTexture = getGlobalImage(Templates.VOID_HOLE.imageTexturePath, true);
 		Templates.VOID_HOLE.templateId = GameObject.generateNewTemplateId();
+
+		Templates.PORTAL = new Portal();
+		Templates.PORTAL.name = "Portal";
+		Templates.PORTAL.imageTexturePath = "portal.png";
+		Templates.PORTAL.imageTexture = getGlobalImage(Templates.PORTAL.imageTexturePath, true);
+		Templates.PORTAL.templateId = GameObject.generateNewTemplateId();
 
 		Templates.STONE_FLOOR = new Floor();
 		Templates.STONE_FLOOR.name = "Floor";
