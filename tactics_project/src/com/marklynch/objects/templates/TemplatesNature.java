@@ -12,6 +12,7 @@ import com.marklynch.objects.Floor;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
+import com.marklynch.objects.Landmine;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Portal;
 import com.marklynch.objects.SmallHidingPlace;
@@ -379,6 +380,12 @@ public class TemplatesNature {
 		Templates.PORTAL.imageTexturePath = "portal.png";
 		Templates.PORTAL.imageTexture = getGlobalImage(Templates.PORTAL.imageTexturePath, true);
 		Templates.PORTAL.templateId = GameObject.generateNewTemplateId();
+
+		Templates.LANDMINE = new Landmine();
+		Templates.LANDMINE.name = "Landmine";
+		Templates.LANDMINE.imageTexturePath = "landmine.png";
+		Templates.LANDMINE.imageTexture = getGlobalImage(Templates.LANDMINE.imageTexturePath, true);
+		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.STONE_FLOOR = new Floor();
 		Templates.STONE_FLOOR.name = "Floor";

@@ -176,25 +176,11 @@ public class Seesaw extends GameObject implements SwitchListener {
 		}
 	}
 
-	public static class SeesawPart extends PressurePlate {
+	public static class SeesawPart extends PressurePlate implements UpdatesWhenSquareContentsChange {
 
 		public int weightOnPlate = 0;
 		public boolean up;
 		public Square connectedSquare = null;
-
-		@Override
-		public void updateWeight() {
-			if (squareGameObjectIsOn == null)
-				return;
-			weightOnPlate = 0;
-			for (GameObject gameObject : squareGameObjectIsOn.inventory.gameObjects) {
-				if (gameObject.isFloorObject == false) {
-					weightOnPlate += gameObject.weight;
-				}
-			}
-			use();
-
-		}
 
 		public SeesawPart makeCopy(Square square, Actor owner, SWITCH_TYPE switchType, int targetWeight,
 				Square connectedSquare, SwitchListener... switchListeners) {
@@ -223,7 +209,17 @@ public class Seesaw extends GameObject implements SwitchListener {
 			super.update(delta);
 		}
 
-		public void updateVoid() {
+		@Override
+		public void squareContentsChanged() {
+			if (squareGameObjectIsOn == null)
+				return;
+			weightOnPlate = 0;
+			for (GameObject gameObject : squareGameObjectIsOn.inventory.gameObjects) {
+				if (gameObject.isFloorObject == false) {
+					weightOnPlate += gameObject.weight;
+				}
+			}
+			use();
 
 			if (up)
 				return;

@@ -7,7 +7,7 @@ import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-public class PressurePlate extends Switch {
+public class PressurePlate extends Switch implements UpdatesWhenSquareContentsChange {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
@@ -51,7 +51,8 @@ public class PressurePlate extends Switch {
 
 	public int weightOnPlate = 0;
 
-	public void updateWeight() {
+	@Override
+	public void squareContentsChanged() {
 		if (squareGameObjectIsOn == null)
 			return;
 		weightOnPlate = 0;

@@ -21,6 +21,7 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Inspectable;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Key;
+import com.marklynch.objects.Landmine;
 import com.marklynch.objects.Liquid;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.MeatChunk;
@@ -401,6 +402,8 @@ public class Templates {
 	public static VoidHole VOID_HOLE;
 
 	public static Portal PORTAL;
+
+	public static Landmine LANDMINE;
 
 	public static Floor STONE_FLOOR;
 

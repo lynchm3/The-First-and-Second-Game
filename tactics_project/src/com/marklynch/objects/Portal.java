@@ -11,7 +11,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
 
-public class Portal extends GameObject {
+public class Portal extends GameObject implements UpdatesWhenSquareContentsChange {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public Square connectedSquare = null;
@@ -58,7 +58,8 @@ public class Portal extends GameObject {
 		super.update(delta);
 	}
 
-	public void updateVoid() {
+	@Override
+	public void squareContentsChanged() {
 		System.out.println("updateVoid 1 - " + squareGameObjectIsOn.inventory);
 
 		if (squareGameObjectIsOn == null)

@@ -9,7 +9,7 @@ import com.marklynch.level.constructs.animation.primary.AnimationFallFromTheSky;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-public class VoidHole extends GameObject {
+public class VoidHole extends GameObject implements UpdatesWhenSquareContentsChange {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public Square connectedSquare = null;
@@ -56,7 +56,8 @@ public class VoidHole extends GameObject {
 		super.update(delta);
 	}
 
-	public void updateVoid() {
+	@Override
+	public void squareContentsChanged() {
 		System.out.println("updateVoid 1 - " + squareGameObjectIsOn.inventory);
 
 		if (squareGameObjectIsOn == null)

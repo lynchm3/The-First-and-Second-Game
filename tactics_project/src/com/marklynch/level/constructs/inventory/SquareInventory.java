@@ -9,10 +9,10 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Floor;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Landmine;
 import com.marklynch.objects.MineCart;
-import com.marklynch.objects.Portal;
 import com.marklynch.objects.PressurePlate;
-import com.marklynch.objects.Seesaw.SeesawPart;
+import com.marklynch.objects.UpdatesWhenSquareContentsChange;
 import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.Window;
@@ -147,21 +147,11 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		door = (Door) getGameObjectOfClass(Door.class);
 		waterBody = (WaterBody) getGameObjectOfClass(WaterBody.class);
 
-		PressurePlate pressurePlate = (PressurePlate) getGameObjectOfClass(PressurePlate.class);
-		if (pressurePlate != null)
-			pressurePlate.updateWeight();
-
-		VoidHole voidHole = (VoidHole) getGameObjectOfClass(VoidHole.class);
-		if (voidHole != null)
-			voidHole.updateVoid();
-
-		Portal portal = (Portal) getGameObjectOfClass(Portal.class);
-		if (portal != null)
-			portal.updateVoid();
-
-		SeesawPart seesawPart = (SeesawPart) getGameObjectOfClass(SeesawPart.class);
-		if (seesawPart != null)
-			seesawPart.updateVoid();
+		UpdatesWhenSquareContentsChange updatesWhenSquareContentsChange = (UpdatesWhenSquareContentsChange) getGameObjectOfClass(
+				UpdatesWhenSquareContentsChange.class);
+		if (updatesWhenSquareContentsChange != null) {
+			updatesWhenSquareContentsChange.squareContentsChanged();
+		}
 
 	}
 
@@ -242,16 +232,6 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			return 1;
 		}
 
-		if (a instanceof Portal && b instanceof Portal) {
-			return 0;
-		} else if (a instanceof Portal)
-
-		{
-			return -1;
-		} else if (b instanceof Portal) {
-			return 1;
-		}
-
 		if (a instanceof Floor && b instanceof Floor) {
 			return 0;
 		} else if (a instanceof Floor)
@@ -259,6 +239,16 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		{
 			return -1;
 		} else if (b instanceof Floor) {
+			return 1;
+		}
+
+		if (a instanceof Landmine && b instanceof Landmine) {
+			return 0;
+		} else if (a instanceof Landmine)
+
+		{
+			return -1;
+		} else if (b instanceof Landmine) {
 			return 1;
 		}
 
