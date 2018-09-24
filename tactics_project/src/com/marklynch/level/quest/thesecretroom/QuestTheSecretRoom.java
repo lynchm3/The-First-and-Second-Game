@@ -38,7 +38,10 @@ public class QuestTheSecretRoom extends Quest {
 	// public Objective objectiveHunters;
 	// public Objective objectiveEnvironmentalist;
 
-	JournalLog journalLogMetKidnapper = new JournalLog("I've met a man in town who would like me me to help him out.");
+	// Maybe the child is a bit slow
+	// Just insinuate what was happening to the kid, obvs dont say in explicit terms
+
+	JournalLog journalLogMetKidnapper = new JournalLog("I've met a man in town who would like me to help him out.");
 	JournalLog journalLogTheFavour = new JournalLog(
 			"He wants me to fetch his child, who's out playing near the pond to the east of town.");
 	// How do I reword this

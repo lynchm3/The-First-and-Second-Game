@@ -514,7 +514,7 @@ public class TextUtils {
 				Objective objective = (Objective) content;
 
 				links.add(new Link(0, 0, objective.width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE,
-						content, "Go to objective"));
+						content, "Pan to objective"));
 
 			}
 		}
@@ -920,6 +920,25 @@ public class TextUtils {
 
 				Quest quest = (Quest) content;
 				String string = quest.name;
+
+				float textWidth = Game.smallFont.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+
+				if (links != null) {
+					Game.activeBatch.setColor(Color.YELLOW);
+					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
+					linkIndex++;
+				}
+				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				offsetX += textWidth;
+
+			} else if (content instanceof Objective) {
+
+				Objective objective = (Objective) content;
+				String string = objective.text;
 
 				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {

@@ -388,8 +388,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 			}
 			if (Level.markerList.size() == 0)
-				TextUtils.printTextWithImages(0, 256, Integer.MAX_VALUE, true, null, Color.WHITE, new Object[] { "NO MARKERS",
-						TextUtils.NewLine.NEW_LINE, "(Markers you add to the map will appear here)" });
+				TextUtils.printTextWithImages(0, 256, Integer.MAX_VALUE, true, null, Color.WHITE, new Object[] {
+						"NO MARKERS", TextUtils.NewLine.NEW_LINE, "(Markers you add to the map will appear here)" });
 		} else {
 			for (Button button : questButtons) {
 				button.draw();
@@ -402,16 +402,16 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				if (mode == MODE.LOG) {
 					for (JournalLog journalLog : questToDisplayInJournal.logList) {
 						TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-								Integer.MAX_VALUE, true, journalLog.links,
-								Color.WHITE, new Object[] { journalLog.getTurnString(), journalLog.getArea(), journalLog.getSquare(),
+								Integer.MAX_VALUE, true, journalLog.links, Color.WHITE,
+								new Object[] { journalLog.getTurnString(), journalLog.getArea(), journalLog.getSquare(),
 										TextUtils.NewLine.NEW_LINE, journalLog.object });
 						height += journalLog.height + 20;
 					}
 				} else if (mode == MODE.CONVERSATION) {
 					for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
 						TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-								Integer.MAX_VALUE, true, conversationPart.linksForJournal,
-								Color.WHITE, new Object[] { conversationPart.getTurnString(), conversationPart.talker,
+								Integer.MAX_VALUE, true, conversationPart.linksForJournal, Color.WHITE,
+								new Object[] { conversationPart.getTurnString(), conversationPart.talker,
 										conversationPart.getArea(), conversationPart.getSquare(),
 										TextUtils.NewLine.NEW_LINE, conversationPart.text[0] });
 						height += conversationPart.height + 20;
@@ -420,7 +420,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			}
 
 			if (tabButtons.size() == 1) {
-				TextUtils.printTextWithImages(0, 256, Integer.MAX_VALUE, true, null, Color.WHITE, new Object[] { "NO QUESTS" });
+				TextUtils.printTextWithImages(0, 256, Integer.MAX_VALUE, true, null, Color.WHITE,
+						new Object[] { "NO QUESTS" });
 			} else {
 			}
 
@@ -477,11 +478,14 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 			questLinksTopRight.add(activeQuest.links.get(0));
 			TextUtils.printTextWithImages(Game.windowWidth - Game.smallFont.getWidth(activeQuest.name) - 202,
-					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, activeQuest.links, Color.WHITE, new Object[] { activeQuest });
+					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, activeQuest.links, Color.WHITE,
+					new Object[] { activeQuest });
 			TextureUtils.drawTexture(x, Game.windowWidth - 180, 20 + 20 * linesPrinted, Game.windowWidth - 160,
 					20 + 20 * linesPrinted + 20);
 			linesPrinted++;
 			for (Objective objective : activeQuest.currentObjectives) {
+
+				// Here's the problem text
 				TextUtils.printTextWithImages(Game.windowWidth - Game.smallFont.getWidth(objective.text) - 202,
 						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, objective.links, Color.WHITE, objective);
 
@@ -515,12 +519,13 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		markerLinksTopRight.clear();
 		if (markersToTrack.size() > 0) {
 			TextUtils.printTextWithImages(Game.windowWidth - mapMarkersLength - 202, 20 + 20 * linesPrinted,
-					Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] { new StringWithColor(mapMarkers, Color.WHITE) });
+					Integer.MAX_VALUE, false, null, Color.WHITE,
+					new Object[] { new StringWithColor(mapMarkers, Color.WHITE) });
 			linesPrinted++;
 			for (MapMarker trackedMapMarker : markersToTrack) {
 				TextUtils.printTextWithImages(Game.windowWidth - Game.smallFont.getWidth(trackedMapMarker.name) - 202,
-						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, trackedMapMarker.links,
-						Color.WHITE, new Object[] { trackedMapMarker });
+						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, trackedMapMarker.links, Color.WHITE,
+						new Object[] { trackedMapMarker });
 
 				markerLinksTopRight.add(trackedMapMarker.links.get(0));
 
@@ -884,7 +889,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	@Override
 	public void dragDropped() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

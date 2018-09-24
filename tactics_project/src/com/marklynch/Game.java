@@ -61,8 +61,8 @@ public class Game {
 	// public static int playerStartPosY = 3;
 
 	// Town
-	public static int playerStartPosX = 102;
-	public static int playerStartPosY = 124;
+	public static int playerStartPosX = 39;
+	public static int playerStartPosY = 17;
 
 	// Minecart puzzle room
 	// public static int playerStartPosX = 101;
