@@ -54,7 +54,7 @@ public abstract class Power {
 		this.crimeSeverity = crimeSeverity;
 	}
 
-	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
+	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
 
 		ArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
 
@@ -98,7 +98,7 @@ public abstract class Power {
 		// return false;
 	}
 
-	public boolean squareInCastLocations(Actor caster, Square potentialCastLocation) {
+	public boolean squareInCastLocations(GameObject caster, Square potentialCastLocation) {
 
 		if (castLocations == null)
 			return true;
@@ -127,7 +127,7 @@ public abstract class Power {
 
 	}
 
-	public boolean check(Actor source, Square targetSquare) {
+	public boolean check(GameObject source, Square targetSquare) {
 		return true;
 	}
 
@@ -135,7 +135,7 @@ public abstract class Power {
 		return true;
 	}
 
-	public void log(Actor performer, Square target2) {
+	public void log(GameObject performer, Square target2) {
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " used ", name }));
 	}
 

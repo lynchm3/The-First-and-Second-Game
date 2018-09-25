@@ -22,9 +22,9 @@ public class PowerInferno extends Power {
 
 	public PowerInferno(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_burn.png", false), source,
-				new Effect[] { new EffectBurning(source, null, 3) }, 5,
-				null,
-				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
+				new Effect[] { new EffectBurning(source, null, 3) }, 5, null,
+				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
+				10, true, true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 
@@ -34,18 +34,21 @@ public class PowerInferno extends Power {
 	}
 
 	@Override
-	public void cast(final Actor source, GameObject targetGameObject, Square targetSquare, final Action action) {
+	public void cast(final GameObject source, GameObject targetGameObject, Square targetSquare, final Action action) {
 		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
 		final Arrow fireBall = Templates.FIRE_BALL.makeCopy(null, null);
-		Animation animationThrown = new AnimationThrown("Fire Ball", source, action, targetGameObject, targetSquare,
-				fireBall, source, 1f, 0f, true) {
-			@Override
-			public void runCompletionAlgorightm(boolean wait) {
-				super.runCompletionAlgorightm(wait);
-				PowerInferno.super.cast(source, targetGameObject, targetSquare, action);
-			}
-		};
-		source.addSecondaryAnimation(animationThrown);
+
+		if (source instanceof Actor) {
+			Animation animationThrown = new AnimationThrown("Fire Ball", (Actor) source, action, targetGameObject,
+					targetSquare, fireBall, source, 1f, 0f, true) {
+				@Override
+				public void runCompletionAlgorightm(boolean wait) {
+					super.runCompletionAlgorightm(wait);
+					PowerInferno.super.cast(source, targetGameObject, targetSquare, action);
+				}
+			};
+			((Actor) source).addSecondaryAnimation(animationThrown);
+		}
 
 	}
 }

@@ -23,11 +23,13 @@ public class PowerSuperPeek extends Power {
 	}
 
 	@Override
-	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
+	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
 		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
 		if (source == Game.level.player)
 			Game.level.player.calculateVisibleSquares(targetSquare);
-		source.peekSquare = targetSquare;
+
+		if (source instanceof Actor)
+			((Actor) source).peekSquare = targetSquare;
 	}
 
 	// @Override

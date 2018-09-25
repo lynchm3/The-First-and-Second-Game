@@ -386,7 +386,7 @@ public class TemplatesNature {
 		Templates.LANDMINE.imageTexturePath = "landmine.png";
 		Templates.LANDMINE.imageTexture = getGlobalImage(Templates.LANDMINE.imageTexturePath, true);
 		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();
-		Templates.LANDMINE.totalHealth = Templates.MOUND.remainingHealth = 103;
+		Templates.LANDMINE.totalHealth = Templates.MOUND.remainingHealth = 10;
 		Templates.LANDMINE.weight = 14f;
 		Templates.LANDMINE.value = 110;
 		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();

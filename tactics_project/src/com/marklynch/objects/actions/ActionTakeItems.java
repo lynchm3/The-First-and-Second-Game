@@ -19,21 +19,21 @@ public class ActionTakeItems extends VariableQtyAction {
 	public static final String ACTION_NAME_ILLEGAL = "Steal";
 	public static final String ACTION_NAME_DISABLED_ILLEGAL = ACTION_NAME_ILLEGAL + " (can't reach)";
 
-	Actor performer;
+	GameObject performer;
 	Object target;
 	Square targetSquare;
 	GameObject targetGameObject;
 	GameObject[] objects;
 
-	public ActionTakeItems(Actor performer, Object target, ArrayList<GameObject> objects) {
+	public ActionTakeItems(GameObject performer, Object target, ArrayList<GameObject> objects) {
 		this(performer, target, objects.toArray(new GameObject[objects.size()]), false);
 	}
 
-	public ActionTakeItems(Actor performer, Object target, GameObject... objects) {
+	public ActionTakeItems(GameObject performer, Object target, GameObject... objects) {
 		this(performer, target, objects, false);
 	}
 
-	public ActionTakeItems(Actor performer, Object target, GameObject[] objects, boolean doesnothing) {
+	public ActionTakeItems(GameObject performer, Object target, GameObject[] objects, boolean doesnothing) {
 
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
@@ -95,16 +95,16 @@ public class ActionTakeItems extends VariableQtyAction {
 			}
 
 			performer.inventory.add(object);
-			if (object.owner == null)
-				object.owner = performer;
+			if (object.owner == null && performer instanceof Actor)
+				object.owner = ((Actor) performer);
 			performer.actionsPerformedThisTurn.add(this);
 			if (sound != null)
 				sound.play();
 
-			if (!legal) {
-				Crime crime = new Crime(this, this.performer, object.owner, Crime.TYPE.CRIME_THEFT, object);
-				this.performer.crimesPerformedThisTurn.add(crime);
-				this.performer.crimesPerformedInLifetime.add(crime);
+			if (!legal && performer instanceof Actor) {
+				Crime crime = new Crime(this, ((Actor) performer), object.owner, Crime.TYPE.CRIME_THEFT, object);
+				((Actor) performer).crimesPerformedThisTurn.add(crime);
+				((Actor) performer).crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
 			}
 		}

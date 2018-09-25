@@ -17,7 +17,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.utils.ResourceUtils;
 
@@ -37,7 +36,7 @@ public class PowerDash extends Power {
 	}
 
 	@Override
-	public void cast(final Actor source, GameObject targetGameObject, final Square attemptedTargetSquare,
+	public void cast(final GameObject source, GameObject targetGameObject, final Square attemptedTargetSquare,
 			final Action action) {
 
 		Direction direction = Direction.LEFT;

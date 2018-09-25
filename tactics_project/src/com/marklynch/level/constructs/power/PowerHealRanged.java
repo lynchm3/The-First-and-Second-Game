@@ -18,14 +18,14 @@ public class PowerHealRanged extends Power {
 
 	public PowerHealRanged(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_heal.png", false), source,
-				new Effect[] { new EffectHeal(source, null, 1) }, 5,
-				null,
-				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) }, 5, false, false, Crime.TYPE.CRIME_ASSAULT);
+				new Effect[] { new EffectHeal(source, null, 1) }, 5, null,
+				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
+				5, false, false, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 
 	@Override
-	public boolean check(Actor source, Square targetSquare) {
+	public boolean check(GameObject source, Square targetSquare) {
 		return true;
 	}
 
@@ -40,7 +40,7 @@ public class PowerHealRanged extends Power {
 	}
 
 	@Override
-	public void cast(final Actor source, GameObject targetGameObject, Square targetSquare, final Action action) {
+	public void cast(final GameObject source, GameObject targetGameObject, Square targetSquare, final Action action) {
 		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
 		super.cast(source, targetGameObject, targetSquare, action);
 

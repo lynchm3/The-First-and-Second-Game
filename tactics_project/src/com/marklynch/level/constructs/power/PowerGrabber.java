@@ -18,20 +18,20 @@ public class PowerGrabber extends Power {
 	private static String NAME = "Grabber";
 
 	public PowerGrabber(GameObject source) {
-		super(NAME, ResourceUtils.getGlobalImage("left.png", false), source, new Effect[] {}, 0,
-				null, new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
+		super(NAME, ResourceUtils.getGlobalImage("left.png", false), source, new Effect[] {}, 0, null,
+				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
 		passive = true;
 		activateAtStartOfTurn = true;
 		description = "Automatically pick up items within 1 square that don't belong to anyone";
 	}
 
 	@Override
-	public boolean check(Actor source, Square targetSquare) {
+	public boolean check(GameObject source, Square targetSquare) {
 		return true;
 	}
 
 	@Override
-	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
+	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
 
 		ArrayList<GameObject> gameObjectsToTake = new ArrayList<GameObject>();
 		for (Square squareToPickupFrom : source.getAllSquaresWithinDistance(0, 1)) {
@@ -49,7 +49,7 @@ public class PowerGrabber extends Power {
 	}
 
 	@Override
-	public void log(Actor performer, Square target2) {
+	public void log(GameObject performer, Square target2) {
 		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " used ",
 		// name }));
 	}

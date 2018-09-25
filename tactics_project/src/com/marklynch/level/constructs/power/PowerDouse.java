@@ -9,7 +9,6 @@ import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 
 public class PowerDouse extends Power {
@@ -29,7 +28,7 @@ public class PowerDouse extends Power {
 	}
 
 	@Override
-	public void cast(final Actor source, GameObject targetGameObject, Square targetSquare, final Action action) {
+	public void cast(final GameObject source, GameObject targetGameObject, Square targetSquare, final Action action) {
 		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
 		super.cast(source, targetGameObject, targetSquare, action);
 

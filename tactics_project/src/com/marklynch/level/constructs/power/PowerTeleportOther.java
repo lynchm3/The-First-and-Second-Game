@@ -10,7 +10,6 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.utils.ResourceUtils;
 
@@ -19,8 +18,8 @@ public class PowerTeleportOther extends Power {
 	private static String NAME = "Teleport";
 
 	public PowerTeleportOther(GameObject source) {
-		super(NAME, ResourceUtils.getGlobalImage("up.png", false), source, new Effect[] {}, 20,
-				null, new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
+		super(NAME, ResourceUtils.getGlobalImage("up.png", false), source, new Effect[] {}, 20, null,
+				new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 
@@ -30,7 +29,7 @@ public class PowerTeleportOther extends Power {
 	}
 
 	@Override
-	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
+	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
 
 		GameObject objectToTeleport = targetGameObject;
 		if (objectToTeleport == null)

@@ -15,19 +15,19 @@ public class PowerRespite extends Power {
 	private static String NAME = "Respite";
 
 	public PowerRespite(GameObject source) {
-		super(NAME, ResourceUtils.getGlobalImage("bed.png", false), source, new Effect[] {}, 0,
-				null, new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
+		super(NAME, ResourceUtils.getGlobalImage("bed.png", false), source, new Effect[] {}, 0, null,
+				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
 		passive = true;
 		activateAtStartOfTurn = true;
 	}
 
 	@Override
-	public boolean check(Actor source, Square targetSquare) {
+	public boolean check(GameObject source, Square targetSquare) {
 		if (this.source.remainingHealth >= this.source.totalHealth) {
 			return false;
 		}
 
-		if (source.hasNearbyAttackers()) {
+		if (source instanceof Actor && ((Actor) source).hasNearbyAttackers()) {
 			return false;
 		}
 
@@ -35,7 +35,7 @@ public class PowerRespite extends Power {
 	}
 
 	@Override
-	public void cast(Actor source, GameObject targetGameObject, Square targetSquare, Action action) {
+	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
 		if (this.source.remainingHealth < this.source.totalHealth) {
 			this.source.remainingHealth += this.source.totalHealth / 20;
 			if (this.source.remainingHealth > this.source.totalHealth) {

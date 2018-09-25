@@ -49,13 +49,13 @@ public class PressurePlate extends Switch implements UpdatesWhenSquareContentsCh
 	// super.update(delta);
 	// }
 
-	public int weightOnPlate = 0;
-
 	@Override
 	public void squareContentsChanged() {
+		int weightOnPlate = 0;
+
 		if (squareGameObjectIsOn == null)
 			return;
-		weightOnPlate = 0;
+
 		for (GameObject gameObject : squareGameObjectIsOn.inventory.gameObjects) {
 			if (gameObject.isFloorObject == false) {
 				weightOnPlate += gameObject.weight;

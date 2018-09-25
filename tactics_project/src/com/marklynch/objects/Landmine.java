@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
@@ -9,6 +10,7 @@ import com.marklynch.objects.units.Actor;
 public class Landmine extends Discoverable implements UpdatesWhenSquareContentsChange {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	int targetWeight = 10;
 
 	public Landmine() {
 		super();
@@ -34,7 +36,24 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 
 	@Override
 	public void squareContentsChanged() {
-		System.out.println("updateLandmine");
+		int weightOnPlate = 0;
+
+		if (squareGameObjectIsOn == null)
+			return;
+
+		for (GameObject gameObject : squareGameObjectIsOn.inventory.gameObjects) {
+			if (gameObject.isFloorObject == false) {
+				weightOnPlate += gameObject.weight;
+			}
+		}
+
+		if (weightOnPlate >= targetWeight) {
+			explode();
+		}
+	}
+
+	public void explode() {
+		// new ActionUsePower(attacker, targetGameObject, targetSquare, power);
 	}
 
 	@Override
@@ -53,6 +72,17 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 		actions.add(new ActionMove(performer, squareGameObjectIsOn, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;
+	}
+
+	public Discoverable makeCopy(Square square, Actor owner, int level, int targetWeight) {
+		Landmine landmine = new Landmine();
+		setInstances(landmine);
+		super.setAttributesForCopy(landmine, square, owner);
+		landmine.level = level;
+		landmine.targetWeight = targetWeight;
+		landmine.preDiscoverTexture = preDiscoverTexture;
+		landmine.postDiscoverTexture = postDiscoverTexture;
+		return landmine;
 	}
 
 }

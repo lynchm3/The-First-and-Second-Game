@@ -16,7 +16,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Portal;
 import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.utils.ResourceUtils;
 
@@ -36,7 +35,7 @@ public class PowerTelekineticPush extends Power {
 	}
 
 	@Override
-	public void cast(final Actor source, GameObject targetGameObject, Square targetSquare, final Action action) {
+	public void cast(final GameObject source, GameObject targetGameObject, Square targetSquare, final Action action) {
 
 		if (targetSquare.inventory.contains(source))
 			return;
