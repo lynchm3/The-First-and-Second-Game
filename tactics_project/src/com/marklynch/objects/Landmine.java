@@ -2,7 +2,7 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
-import com.marklynch.level.constructs.power.PowerInferno;
+import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
@@ -13,6 +13,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	int targetWeight = 10;
+	public Power power;
 
 	public Landmine() {
 		super();
@@ -64,7 +65,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 		boolean destroyed = super.checkIfDestroyed(attacker, action);
 
 		if (destroyed) {
-			new ActionUsePower(this, null, this.squareGameObjectIsOn, new PowerInferno(this)).perform();
+			new ActionUsePower(this, null, this.squareGameObjectIsOn, power.makeCopy(this)).perform();
 		}
 
 		return destroyed;
@@ -94,7 +95,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 		return actions;
 	}
 
-	public Discoverable makeCopy(Square square, Actor owner, int level, int targetWeight) {
+	public Landmine makeCopy(Square square, Actor owner, int level, int targetWeight) {
 		Landmine landmine = new Landmine();
 		setInstances(landmine);
 		super.setAttributesForCopy(landmine, square, owner);
@@ -102,6 +103,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 		landmine.targetWeight = targetWeight;
 		landmine.preDiscoverTexture = preDiscoverTexture;
 		landmine.postDiscoverTexture = postDiscoverTexture;
+		landmine.power = power;
 		return landmine;
 	}
 

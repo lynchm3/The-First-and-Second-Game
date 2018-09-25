@@ -6,6 +6,7 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
+import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.Floor;
@@ -389,9 +390,10 @@ public class TemplatesNature {
 		Templates.LANDMINE.totalHealth = Templates.MOUND.remainingHealth = 10;
 		Templates.LANDMINE.weight = 14f;
 		Templates.LANDMINE.value = 110;
-		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();
 		Templates.LANDMINE.preDiscoverTexture = ResourceUtils.getGlobalImage("landmine.png", true);
 		Templates.LANDMINE.postDiscoverTexture = ResourceUtils.getGlobalImage("landmine.png", true);
+		Templates.LANDMINE.power = new PowerInferno(null);
+		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.STONE_FLOOR = new Floor();
 		Templates.STONE_FLOOR.name = "Floor";
