@@ -12,7 +12,7 @@ import com.marklynch.objects.units.Player;
 public abstract class Animation {
 	public boolean blockAI = false;
 	// public boolean blockPlayer = false;
-	private boolean completed = false;
+	public boolean completed = false;
 	public float offsetX = 0;
 	public float offsetY = 0;
 
@@ -66,6 +66,8 @@ public abstract class Animation {
 	public GameObject performer;
 
 	public boolean runAnimation = false;
+
+	public OnCompletionListener onCompletionListener;
 
 	public Animation(GameObject performer, Object... objectsInvolved) {
 
@@ -188,10 +190,16 @@ public abstract class Animation {
 		// if (!(this instanceof AnimationWalk)) {
 		//
 		// } else
+		if (onCompletionListener != null && performer != null)
+			onCompletionListener.animationComplete(performer);
 	}
 
 	public boolean getCompleted() {
 		return completed;
+	}
+
+	public static interface OnCompletionListener {
+		public void animationComplete(GameObject gameObject);
 	}
 
 }
