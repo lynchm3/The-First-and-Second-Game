@@ -23,6 +23,7 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		isFloorObject = true;
+		orderingOnGound = 10;
 	}
 
 	@Override

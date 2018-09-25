@@ -7,18 +7,12 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
-import com.marklynch.objects.Floor;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Landmine;
-import com.marklynch.objects.MineCart;
-import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.UpdatesWhenSquareContentsChange;
-import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Fish;
 
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
 
@@ -222,75 +216,8 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	@Override
 	public int compare(GameObject a, GameObject b) {
 
-		if (a instanceof VoidHole && b instanceof VoidHole) {
-			return 0;
-		} else if (a instanceof VoidHole)
-
-		{
-			return -1;
-		} else if (b instanceof VoidHole) {
-			return 1;
-		}
-
-		if (a instanceof Floor && b instanceof Floor) {
-			return 0;
-		} else if (a instanceof Floor)
-
-		{
-			return -1;
-		} else if (b instanceof Floor) {
-			return 1;
-		}
-
-		if (a instanceof Landmine && b instanceof Landmine) {
-			return 0;
-		} else if (a instanceof Landmine)
-
-		{
-			return -1;
-		} else if (b instanceof Landmine) {
-			return 1;
-		}
-
-		if (a instanceof PressurePlate && b instanceof PressurePlate) {
-			return 0;
-		} else if (a instanceof PressurePlate)
-
-		{
-			return -1;
-		} else if (b instanceof PressurePlate) {
-			return 1;
-		}
-
-		if (a instanceof WaterBody && b instanceof WaterBody) {
-			return 0;
-		} else if (a instanceof WaterBody)
-
-		{
-			return 1;
-		} else if (b instanceof WaterBody) {
-			return -1;
-		}
-
-		if (a instanceof Fish && b instanceof Fish) {
-			return 0;
-		} else if (a instanceof Fish)
-
-		{
-			return 1;
-		} else if (b instanceof Fish) {
-			return -1;
-		}
-
-		if (a instanceof MineCart && b instanceof MineCart) {
-			return 0;
-		} else if (a instanceof MineCart)
-
-		{
-			return 1;
-		} else if (b instanceof MineCart) {
-			return -1;
-		}
+		if (a.orderingOnGound != Integer.MAX_VALUE || b.orderingOnGound != Integer.MAX_VALUE)
+			return a.orderingOnGound - b.orderingOnGound;
 
 		return (int) (a.height - b.height);
 	}

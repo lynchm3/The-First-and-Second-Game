@@ -16,6 +16,7 @@ public class MineCart extends GameObject {
 		super();
 		canBePickedUp = false;
 		fitsInInventory = false;
+		orderingOnGound = 70;
 	}
 
 	@Override

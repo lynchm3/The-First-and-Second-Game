@@ -17,6 +17,7 @@ public class Fish extends WildAnimal {
 		super();
 		canShareSquare = true;
 		fitsInInventory = true;
+		orderingOnGound = 60;
 	}
 
 	@Override

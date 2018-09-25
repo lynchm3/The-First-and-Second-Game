@@ -262,6 +262,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public boolean bigShadow = false;
 
+	public int orderingOnGound = Integer.MAX_VALUE;
+
 	public GameObject() {
 
 		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(0));

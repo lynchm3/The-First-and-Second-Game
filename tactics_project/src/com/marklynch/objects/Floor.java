@@ -18,6 +18,7 @@ public class Floor extends GameObject {
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		isFloorObject = true;
+		orderingOnGound = 20;
 	}
 
 	@Override
