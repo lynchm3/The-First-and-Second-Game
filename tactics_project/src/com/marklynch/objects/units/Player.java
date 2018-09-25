@@ -241,10 +241,13 @@ public class Player extends Human {
 	}
 
 	public void discoveryCheck() {
+		System.out.println("discoveryCheck");
 		for (Square square : squaresVisibleToPlayerOnlyPlayer) {
 			for (GameObject discoverableGameObject : square.inventory.getGameObjectsOfClass(Discoverable.class)) {
 				Discoverable discoverable = ((Discoverable) discoverableGameObject);
+				System.out.println("discoverable = " + discoverable);
 				if (!discoverable.discovered) {
+					System.out.println("!discoverable.discovered");
 					new ActionDiscover(this, discoverable).perform();
 				}
 			}

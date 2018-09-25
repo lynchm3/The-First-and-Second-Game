@@ -40,6 +40,7 @@ public class Discoverable extends GameObject {
 	}
 
 	public void discovered() {
+		System.out.println("discovered()");
 		discovered = true;
 		imageTexture = postDiscoverTexture;
 
