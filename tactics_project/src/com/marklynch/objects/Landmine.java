@@ -64,7 +64,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 		boolean destroyed = super.checkIfDestroyed(attacker, action);
 
 		if (destroyed) {
-			new ActionUsePower(this, this, this.squareGameObjectIsOn, new PowerInferno(this)).perform();
+			new ActionUsePower(this, null, this.squareGameObjectIsOn, new PowerInferno(this)).perform();
 		}
 
 		return destroyed;
