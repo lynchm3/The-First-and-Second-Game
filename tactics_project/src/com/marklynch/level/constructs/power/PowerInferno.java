@@ -35,10 +35,10 @@ public class PowerInferno extends Power {
 
 	@Override
 	public void cast(final GameObject source, GameObject targetGameObject, Square targetSquare, final Action action) {
-		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
-		final Arrow fireBall = Templates.FIRE_BALL.makeCopy(null, null);
 
 		if (source instanceof Actor) {
+			source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
+			final Arrow fireBall = Templates.FIRE_BALL.makeCopy(null, null);
 			Animation animationThrown = new AnimationThrown("Fire Ball", (Actor) source, action, targetGameObject,
 					targetSquare, fireBall, source, 1f, 0f, true) {
 				@Override
@@ -48,7 +48,8 @@ public class PowerInferno extends Power {
 				}
 			};
 			((Actor) source).addSecondaryAnimation(animationThrown);
+		} else {
+			PowerInferno.super.cast(source, targetGameObject, targetSquare, action);
 		}
-
 	}
 }

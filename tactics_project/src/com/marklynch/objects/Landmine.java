@@ -2,9 +2,11 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
 
 public class Landmine extends Discoverable implements UpdatesWhenSquareContentsChange {
@@ -19,7 +21,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 		canShareSquare = true;
 		canContainOtherObjects = false;
 		persistsWhenCantBeSeen = true;
-		attackable = false;
+		attackable = true;
 		isFloorObject = true;
 	}
 
@@ -38,22 +40,40 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 	public void squareContentsChanged() {
 		int weightOnPlate = 0;
 
+		System.out.println("Landmine.squareContentsChanged()");
+
 		if (squareGameObjectIsOn == null)
 			return;
 
+		System.out.println("Landmine.squareContentsChanged() 2");
 		for (GameObject gameObject : squareGameObjectIsOn.inventory.gameObjects) {
 			if (gameObject.isFloorObject == false) {
 				weightOnPlate += gameObject.weight;
 			}
 		}
+		System.out.println("Landmine.squareContentsChanged() 3");
 
 		if (weightOnPlate >= targetWeight) {
+			System.out.println("Landmine.squareContentsChanged() calling explode");
 			explode();
 		}
 	}
 
+	@Override
+	public boolean checkIfDestroyed(Object attacker, Action action) {
+		boolean destroyed = super.checkIfDestroyed(attacker, action);
+
+		if (destroyed) {
+			new ActionUsePower(this, this, this.squareGameObjectIsOn, new PowerInferno(this)).perform();
+		}
+
+		return destroyed;
+
+	}
+
 	public void explode() {
-		// new ActionUsePower(attacker, targetGameObject, targetSquare, power);
+		System.out.println("explode");
+		this.changeHealthSafetyOff(-this.remainingHealth, this, null);
 	}
 
 	@Override
