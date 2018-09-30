@@ -95,6 +95,9 @@ public class UserInputLevel {
 	public static boolean keyState9 = false;
 	public static boolean keyState0 = false;
 	public static boolean keyStateMinus = false;
+	public static boolean keyStateUnderscore = false;
+	public static boolean keyStateEquals = false;
+	public static boolean keyStatePlus = false;
 	public static boolean keyStatePeriod = false;
 
 	public static AIPath path;
@@ -1158,9 +1161,9 @@ public class UserInputLevel {
 			if (Game.level.conversation != null) {
 				Game.level.conversation.selectDialogueOption(character);
 			}
-		} else if (character == 'p' || character == 'P') {
+		} else if (character == '+' || character == '=') {
 			Game.zoomLevelIndex--;
-		} else if (character == 'o' || character == 'O') {
+		} else if (character == '_' || character == '-') {
 			Game.zoomLevelIndex++;
 		}
 
@@ -1823,6 +1826,27 @@ public class UserInputLevel {
 			keyStateMinus = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_MINUS)) {
 			keyStateMinus = false;
+		}
+
+		if (keyStateUnderscore == false && Keyboard.isKeyDown(Keyboard.KEY_UNDERLINE)) {
+			keyTyped('_');
+			keyStateUnderscore = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_UNDERLINE)) {
+			keyStateUnderscore = false;
+		}
+
+		if (keyStateEquals == false && Keyboard.isKeyDown(Keyboard.KEY_EQUALS)) {
+			keyTyped('=');
+			keyStateEquals = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_EQUALS)) {
+			keyStateEquals = false;
+		}
+
+		if (keyStatePlus == false && Keyboard.isKeyDown(Keyboard.KEY_ADD)) {
+			keyTyped('+');
+			keyStatePlus = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_ADD)) {
+			keyStatePlus = false;
 		}
 
 		if (keyStatePeriod == false && Keyboard.isKeyDown(Keyboard.KEY_PERIOD)) {
