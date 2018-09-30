@@ -54,6 +54,15 @@ public class TemplatesBuilding {
 		Templates.FALSE_WALL.weight = 1f;
 		Templates.FALSE_WALL.value = 1;
 		Templates.FALSE_WALL.templateId = GameObject.generateNewTemplateId();
+		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
+		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
+		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
+		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
+		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(100));
+		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(100));
+		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
+		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
+		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
 		Templates.FENCE = new Fence();
 		Templates.FENCE.name = "Fence";
@@ -89,6 +98,15 @@ public class TemplatesBuilding {
 		Templates.RAIL.weight = 45f;
 		Templates.RAIL.value = 29;
 		Templates.RAIL.templateId = GameObject.generateNewTemplateId();
+		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
+		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
+		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
+		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
+		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(100));
+		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(100));
+		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
+		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
+		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
 		Templates.RAIL_INVISIBLE = new Rail();
 		Templates.RAIL_INVISIBLE.name = "RAIL_INVISIBLE";
@@ -98,6 +116,15 @@ public class TemplatesBuilding {
 		Templates.RAIL_INVISIBLE.weight = 45f;
 		Templates.RAIL_INVISIBLE.value = 29;
 		Templates.RAIL_INVISIBLE.templateId = GameObject.generateNewTemplateId();
+		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
+		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
+		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
+		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
+		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(100));
+		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(100));
+		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
+		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
+		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
 		Templates.MINE_CART = new MineCart();
 		Templates.MINE_CART.name = "Mine Cart";
