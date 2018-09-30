@@ -113,8 +113,7 @@ public class Quest {
 	public void start() {
 		if (started || resolved)
 			return;
-		if (this.isFirstQuest())
-			Journal.questsToTrack.add(this);
+		Journal.questsToTrack.add(this);
 		started = true;
 		Game.level.addNotification(new Notification(new Object[] { "Quest ", this, " started" },
 				Notification.NotificationType.QUEST_STARTED, this));
