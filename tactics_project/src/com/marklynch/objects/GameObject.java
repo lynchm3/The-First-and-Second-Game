@@ -1724,6 +1724,22 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (remainingHealth <= 0 || !attackable)
 			return;
 
+		boolean fullyResisted = true;
+		for (HIGH_LEVEL_STATS offensiveStat : Stat.OFFENSIVE_STATS) {
+			if (effectToAdd.highLevelStats.get(offensiveStat).value == 0)
+				continue;
+
+			if (this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(offensiveStat)).value == 100)
+				continue;
+
+			fullyResisted = false;
+			break;
+
+		}
+
+		if (fullyResisted)
+			return;
+
 		if (effectToAdd instanceof EffectBleed && !(this instanceof Actor))
 			return;
 
