@@ -55,9 +55,9 @@ public abstract class Action {
 
 	public void perform() {
 		// Cancel fishing
-		if (gameObjectPerformer.fishingTarget != null && !(this instanceof ActionFishingStart)
-				&& !(this instanceof ActionFishingCompleted) && !(this instanceof ActionFishingInProgress)
-				&& !(this instanceof ActionFishingFailed)) {
+		if (gameObjectPerformer != null && gameObjectPerformer.fishingTarget != null
+				&& !(this instanceof ActionFishingStart) && !(this instanceof ActionFishingCompleted)
+				&& !(this instanceof ActionFishingInProgress) && !(this instanceof ActionFishingFailed)) {
 
 			FishingRod fishingRod = (FishingRod) gameObjectPerformer.equipped;
 			// gameObjectPerformer.fishingTarget.primaryAnimation = null;

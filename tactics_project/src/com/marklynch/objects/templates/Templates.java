@@ -365,6 +365,8 @@ public class Templates {
 
 	public static MapMarker MAP_MARKER_TREASURE;
 
+	public static MapMarker MAP_MARKER_PORTAL;
+
 	public static Inspectable GIANT_FOOTPRINT;
 
 	public static Inspectable GIANT_FOOTPRINT_LEFT;

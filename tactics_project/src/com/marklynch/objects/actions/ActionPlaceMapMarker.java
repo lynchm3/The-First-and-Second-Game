@@ -28,7 +28,8 @@ public class ActionPlaceMapMarker extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -42,6 +43,7 @@ public class ActionPlaceMapMarker extends Action {
 		mapMarker.inventory.add(Templates.MAP_MARKER_BLUE.makeCopy(null, null));
 		mapMarker.inventory.add(Templates.MAP_MARKER_SKULL.makeCopy(null, null));
 		mapMarker.inventory.add(Templates.MAP_MARKER_TREASURE.makeCopy(null, null));
+		mapMarker.inventory.add(Templates.MAP_MARKER_PORTAL.makeCopy(null, null));
 
 		if (Game.level.shouldLog(Game.level.player))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { "Added map marker to ", target }));
