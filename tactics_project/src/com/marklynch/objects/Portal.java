@@ -2,14 +2,11 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
-import com.marklynch.Game;
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
-import com.marklynch.level.constructs.animation.primary.AnimationFall;
-import com.marklynch.level.constructs.animation.primary.AnimationFallFromTheSky;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.units.Actor;
 
 public class Portal extends GameObject implements UpdatesWhenSquareContentsChange, OnCompletionListener {
@@ -67,6 +64,9 @@ public class Portal extends GameObject implements UpdatesWhenSquareContentsChang
 
 		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
 
+			if (gameObject == this || gameObject.isFloorObject)
+				continue;
+
 			if (gameObject.primaryAnimation != null && gameObject.primaryAnimation.completed == false) {
 				gameObject.primaryAnimation.onCompletionListener = this;
 			} else {
@@ -79,36 +79,9 @@ public class Portal extends GameObject implements UpdatesWhenSquareContentsChang
 
 	public void doTheThing(final GameObject gameObject) {
 
-		if (squareGameObjectIsOn == null)
+		if (squareGameObjectIsOn == null || gameObject == null || connectedSquare == null)
 			return;
-
-		if (gameObject.isFloorObject == false) {
-			gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 400) {
-				@Override
-				public void runCompletionAlgorightm(boolean wait) {
-					super.runCompletionAlgorightm(wait);
-
-					// Square square = gameObject.lastSquare;
-					// if (square == null)
-					Square square = connectedSquare;
-
-					square.inventory.add(gameObject);
-
-					if (gameObject == Level.player) {
-						// Game.ca
-						Game.level.centerToSquare = true;
-						Game.level.squareToCenterTo = square;
-					} else {
-						Level.gameObjectsToFlash.add(gameObject);
-						Level.flashGameObjectCounters.put(gameObject, 0);
-					}
-
-					gameObject.setPrimaryAnimation(new AnimationFallFromTheSky(gameObject, 200));
-				}
-			});
-
-		}
-		System.out.println("updateVoid 2 - " + squareGameObjectIsOn.inventory);
+		new ActionTeleport(Portal.this, gameObject, connectedSquare, true).perform();
 
 	}
 

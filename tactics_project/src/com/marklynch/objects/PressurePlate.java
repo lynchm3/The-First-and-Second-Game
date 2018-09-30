@@ -4,11 +4,10 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
-import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-public class PressurePlate extends Switch implements UpdatesWhenSquareContentsChange, OnCompletionListener {
+public class PressurePlate extends Switch implements UpdatesWhenSquareContentsChange {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
@@ -56,15 +55,7 @@ public class PressurePlate extends Switch implements UpdatesWhenSquareContentsCh
 
 		if (squareGameObjectIsOn == null)
 			return;
-
-		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
-
-			if (gameObject.primaryAnimation != null && gameObject.primaryAnimation.completed == false) {
-				gameObject.primaryAnimation.onCompletionListener = this;
-			} else {
-				doTheThing(gameObject);
-			}
-		}
+		doTheThing(null);
 
 	}
 
@@ -116,12 +107,6 @@ public class PressurePlate extends Switch implements UpdatesWhenSquareContentsCh
 		}
 
 		return pressurePlate;
-	}
-
-	@Override
-	public void animationComplete(GameObject gameObject) {
-		System.out.println("VoidHole.animationComplete");
-		doTheThing(gameObject);
 	}
 
 }

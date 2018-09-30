@@ -66,6 +66,9 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 
 		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
 
+			if (gameObject == this || gameObject.isFloorObject)
+				continue;
+
 			if (gameObject.primaryAnimation != null && gameObject.primaryAnimation.completed == false) {
 				gameObject.primaryAnimation.onCompletionListener = this;
 			} else {

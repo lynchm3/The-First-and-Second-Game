@@ -45,14 +45,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 		if (squareGameObjectIsOn == null)
 			return;
 
-		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
-
-			if (gameObject.primaryAnimation != null && gameObject.primaryAnimation.completed == false) {
-				gameObject.primaryAnimation.onCompletionListener = this;
-			} else {
-				doTheThing(gameObject);
-			}
-		}
+		doTheThing(null);
 	}
 
 	public void doTheThing(GameObject g) {

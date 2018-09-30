@@ -20,15 +20,18 @@ public class ActionTeleport extends Action {
 
 	public static final String ACTION_NAME = "Teleport here";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	Actor performer;
+	Actor actorPerformer;
+	GameObject gameObjectPerformer;
 	GameObject teleportee;
 	Square targetSquare;
 	boolean endTurn;
 	GameObject gameObjectInTheWay;
 
-	public ActionTeleport(Actor performer, GameObject teleportee, Square target, boolean endTurn) {
+	public ActionTeleport(GameObject performer, GameObject teleportee, Square target, boolean endTurn) {
 		super(ACTION_NAME, "action_teleport.png");
-		super.gameObjectPerformer = this.performer = performer;
+		super.gameObjectPerformer = this.gameObjectPerformer = performer;
+		if (performer instanceof Actor)
+			this.actorPerformer = (Actor) performer;
 		this.teleportee = teleportee;
 		this.targetSquare = target;
 		this.endTurn = endTurn;
@@ -54,12 +57,13 @@ public class ActionTeleport extends Action {
 		if (!checkRange())
 			return;
 
-		if (performer.peekSquare != null) {
-			new ActionStopPeeking(performer).perform();
+		if (actorPerformer != null && actorPerformer.peekSquare != null) {
+			new ActionStopPeeking(actorPerformer).perform();
 		}
 
-		if (teleportee != performer) {
-			performer.setPrimaryAnimation(new AnimationPush(performer, targetSquare, performer.getPrimaryAnimation()));
+		if (teleportee != gameObjectPerformer) {
+			gameObjectPerformer.setPrimaryAnimation(
+					new AnimationPush(gameObjectPerformer, targetSquare, gameObjectPerformer.getPrimaryAnimation()));
 		}
 
 		Square startSquare = teleportee.squareGameObjectIsOn;
@@ -84,11 +88,11 @@ public class ActionTeleport extends Action {
 
 		teleport(teleportee, targetSquare);
 
-		performer.actionsPerformedThisTurn.add(this);
+		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 
-		if (!legal) {
+		if (actorPerformer != null && !legal) {
 
 			// GameObject gameObjectInTheWay = null;
 			if (gameObjectInTheWay != null) {
@@ -104,9 +108,9 @@ public class ActionTeleport extends Action {
 						victim = teleportee.owner;
 						severity = Crime.TYPE.CRIME_VANDALISM;
 					}
-					Crime crime = new Crime(this, this.performer, victim, severity);
-					this.performer.crimesPerformedThisTurn.add(crime);
-					this.performer.crimesPerformedInLifetime.add(crime);
+					Crime crime = new Crime(this, this.actorPerformer, victim, severity);
+					this.actorPerformer.crimesPerformedThisTurn.add(crime);
+					this.actorPerformer.crimesPerformedInLifetime.add(crime);
 					notifyWitnessesOfCrime(crime);
 
 				}
@@ -122,20 +126,21 @@ public class ActionTeleport extends Action {
 						victim = gameObjectInTheWay.owner;
 						severity = Crime.TYPE.CRIME_VANDALISM;
 					}
-					Crime crime = new Crime(this, this.performer, victim, severity);
-					this.performer.crimesPerformedThisTurn.add(crime);
-					this.performer.crimesPerformedInLifetime.add(crime);
+					Crime crime = new Crime(this, this.actorPerformer, victim, severity);
+					this.actorPerformer.crimesPerformedThisTurn.add(crime);
+					this.actorPerformer.crimesPerformedInLifetime.add(crime);
 					notifyWitnessesOfCrime(crime);
 				}
 			}
-		} else {
-			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+		} else if (actorPerformer != null) {
+			trespassingCheck(this, actorPerformer, actorPerformer.squareGameObjectIsOn);
 		}
 
-		if (endTurn && performer == Game.level.player && Game.level.activeActor == Game.level.player)
+		if (endTurn && gameObjectPerformer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();
 
-		trespassingCheck(this, performer, teleportee.squareGameObjectIsOn);
+		if (actorPerformer != null)
+			trespassingCheck(this, actorPerformer, teleportee.squareGameObjectIsOn);
 
 		Level.teleportee = null;
 	}
@@ -146,12 +151,13 @@ public class ActionTeleport extends Action {
 		gameObject.squareGameObjectIsOn = square;
 		square.inventory.add(gameObject);
 
-		if (Game.level.shouldLog(performer, teleportee)) {
-			if (performer == teleportee)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", targetSquare }));
-			else
+		if (Game.level.shouldLog(gameObjectPerformer, teleportee)) {
+			if (gameObjectPerformer == teleportee)
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " teleported ", teleportee, " to ", targetSquare }));
+						new ActivityLog(new Object[] { gameObjectPerformer, " teleported to ", targetSquare }));
+			else
+				Game.level.logOnScreen(new ActivityLog(
+						new Object[] { gameObjectPerformer, " teleported ", teleportee, " to ", targetSquare }));
 		}
 
 		// Teleported big object on to big object... someone has to die.
@@ -164,12 +170,12 @@ public class ActionTeleport extends Action {
 			gameObject.changeHealth(-damage, null, null);
 			gameObjectInTheWay.changeHealth(-damage, null, null);
 
-			if (performer == teleportee) {
+			if (gameObjectPerformer == teleportee) {
 				gameObject.changeHealth(-damage, gameObjectInTheWay, this);
 				gameObjectInTheWay.changeHealth(-damage, gameObject, this);
 			} else {
-				gameObject.changeHealth(-damage, performer, this);
-				gameObjectInTheWay.changeHealth(-damage, performer, this);
+				gameObject.changeHealth(-damage, gameObjectPerformer, this);
+				gameObjectInTheWay.changeHealth(-damage, gameObjectPerformer, this);
 			}
 
 		}
