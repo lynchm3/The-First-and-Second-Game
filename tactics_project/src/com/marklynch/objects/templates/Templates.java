@@ -394,6 +394,7 @@ public class Templates {
 	public static HidingPlace WHEAT;
 
 	public static Food MUSHROOM;
+	public static Food CANDY;
 
 	public static Food APPLE;
 

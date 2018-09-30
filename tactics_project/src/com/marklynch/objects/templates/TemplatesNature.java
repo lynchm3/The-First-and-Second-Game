@@ -201,6 +201,20 @@ public class TemplatesNature {
 		Templates.MUSHROOM.templateId = GameObject.generateNewTemplateId();
 		Templates.MUSHROOM.flipYAxisInMirror = false;
 
+		Templates.CANDY = new Food();
+		Templates.CANDY.name = "Candy";
+		Templates.CANDY.imageTexturePath = "candy.png";
+		Templates.CANDY.imageTexture = getGlobalImage(Templates.CANDY.imageTexturePath, true);
+		Templates.CANDY.totalHealth = Templates.CANDY.remainingHealth = 11;
+		Templates.CANDY.widthRatio = 0.5f;
+		Templates.CANDY.heightRatio = 0.5f;
+		Templates.CANDY.weight = 7f;
+		Templates.CANDY.value = 9;
+		Templates.CANDY.anchorX = 18;
+		Templates.CANDY.anchorY = 60;
+		Templates.CANDY.templateId = GameObject.generateNewTemplateId();
+		Templates.CANDY.flipYAxisInMirror = false;
+
 		Templates.BURROW = new SmallHidingPlace();
 		Templates.BURROW.name = "Burrow";
 		Templates.BURROW.imageTexturePath = "burrow.png";

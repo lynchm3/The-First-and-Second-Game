@@ -51,7 +51,7 @@ public class ActionDie extends Action {
 
 		logDeath();
 		createCorpse();
-		if (target.visibleToPlayer && gameObjectPerformer instanceof Actor)
+		if (target != null && target.visibleToPlayer && gameObjectPerformer instanceof Actor)
 			Game.level.player.addXP(gameObjectPerformer.level, gameObjectPerformer.squareGameObjectIsOn);
 
 		// Remove from draw/update
