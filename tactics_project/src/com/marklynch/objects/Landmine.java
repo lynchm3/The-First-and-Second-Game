@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
@@ -9,7 +10,7 @@ import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
 
-public class Landmine extends Discoverable implements UpdatesWhenSquareContentsChange {
+public class Landmine extends Discoverable implements UpdatesWhenSquareContentsChange, OnCompletionListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	int targetWeight = 10;
@@ -40,6 +41,21 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 
 	@Override
 	public void squareContentsChanged() {
+
+		if (squareGameObjectIsOn == null)
+			return;
+
+		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
+
+			if (gameObject.primaryAnimation != null && gameObject.primaryAnimation.completed == false) {
+				gameObject.primaryAnimation.onCompletionListener = this;
+			} else {
+				doTheThing(gameObject);
+			}
+		}
+	}
+
+	public void doTheThing(GameObject g) {
 		int weightOnPlate = 0;
 
 		System.out.println("Landmine.squareContentsChanged()");
@@ -59,6 +75,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 			System.out.println("Landmine.squareContentsChanged() calling explode");
 			explode();
 		}
+
 	}
 
 	@Override
@@ -106,6 +123,12 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 		landmine.postDiscoverTexture = postDiscoverTexture;
 		landmine.power = power;
 		return landmine;
+	}
+
+	@Override
+	public void animationComplete(GameObject gameObject) {
+		System.out.println("VoidHole.animationComplete");
+		doTheThing(gameObject);
 	}
 
 }

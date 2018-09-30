@@ -60,23 +60,24 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 
 	@Override
 	public void squareContentsChanged() {
-		System.out.println("updateVoid 1 - " + squareGameObjectIsOn.inventory);
 
 		if (squareGameObjectIsOn == null)
 			return;
 
 		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
+
 			if (gameObject.primaryAnimation != null && gameObject.primaryAnimation.completed == false) {
-				primaryAnimation.onCompletionListener = this;
+				gameObject.primaryAnimation.onCompletionListener = this;
 			} else {
 				doTheThing(gameObject);
 			}
 		}
-		System.out.println("updateVoid 2 - " + squareGameObjectIsOn.inventory);
-
 	}
 
 	public void doTheThing(final GameObject gameObject) {
+		System.out.println("VoidHole.doTheThing");
+		System.out.println("gameObject = " + gameObject);
+		System.out.println("gameObject.isFloorObject = " + gameObject.isFloorObject);
 
 		if (gameObject.isFloorObject == false) {
 			gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 400) {
@@ -108,6 +109,7 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 
 	@Override
 	public void animationComplete(GameObject gameObject) {
+		System.out.println("VoidHole.animationComplete");
 		doTheThing(gameObject);
 	}
 

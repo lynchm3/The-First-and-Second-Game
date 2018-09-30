@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationFall;
 import com.marklynch.level.constructs.animation.primary.AnimationFallFromTheSky;
 import com.marklynch.level.squares.Square;
@@ -176,7 +177,8 @@ public class Seesaw extends GameObject implements SwitchListener {
 		}
 	}
 
-	public static class SeesawPart extends PressurePlate implements UpdatesWhenSquareContentsChange {
+	public static class SeesawPart extends PressurePlate
+			implements UpdatesWhenSquareContentsChange, OnCompletionListener {
 
 		public int weightOnPlate = 0;
 		public boolean up;
@@ -211,6 +213,24 @@ public class Seesaw extends GameObject implements SwitchListener {
 
 		@Override
 		public void squareContentsChanged() {
+
+			if (squareGameObjectIsOn == null)
+				return;
+
+			for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects
+					.clone()) {
+
+				if (gameObject.primaryAnimation != null && gameObject.primaryAnimation.completed == false) {
+					gameObject.primaryAnimation.onCompletionListener = this;
+				} else {
+					doTheThing(gameObject);
+				}
+			}
+
+		}
+
+		@Override
+		public void doTheThing(final GameObject g) {
 			if (squareGameObjectIsOn == null)
 				return;
 			weightOnPlate = 0;
@@ -257,6 +277,12 @@ public class Seesaw extends GameObject implements SwitchListener {
 				}
 			}
 
+		}
+
+		@Override
+		public void animationComplete(GameObject gameObject) {
+			System.out.println("VoidHole.animationComplete");
+			doTheThing(gameObject);
 		}
 	}
 

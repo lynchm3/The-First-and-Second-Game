@@ -162,36 +162,50 @@ public abstract class Animation {
 		if (performer == null)
 			return;
 
-		if (!(performer instanceof Actor))
+		if (!(performer instanceof Actor)) {
+			if (onCompletionListener != null)
+				onCompletionListener.animationComplete(performer);
 			return;
+		}
 
-		if (this != performer.getPrimaryAnimation())
+		if (this != performer.getPrimaryAnimation()) {
+			if (onCompletionListener != null)
+				onCompletionListener.animationComplete(performer);
 			return;
+		}
 
-		if (this instanceof AnimationWait || this instanceof AnimationDie)
+		if (this instanceof AnimationWait || this instanceof AnimationDie) {
+			if (onCompletionListener != null)
+				onCompletionListener.animationComplete(performer);
 			return;
+		}
 
 		// Make player do wait animation at end of walk.
 		if (performer == Level.player && Player.playerPathToMove == null && Player.playerTargetSquare == null
 				&& Player.playerTargetAction == null && Player.playerTargetActor == null && wait) {
 			performer.setPrimaryAnimation(new AnimationWait(performer));
+			if (onCompletionListener != null)
+				onCompletionListener.animationComplete(performer);
 			return;
 		}
 
-		if (this instanceof AnimationWalk)
+		if (this instanceof AnimationWalk) {
+			if (onCompletionListener != null)
+				onCompletionListener.animationComplete(performer);
 			return;
+		}
 
 		if (performer.remainingHealth > 0 && wait) {
 			performer.setPrimaryAnimation(new AnimationWait(performer));
 		}
+		if (onCompletionListener != null)
+			onCompletionListener.animationComplete(performer);
 		// else
 		// performer.setPrimaryAnimation(new AnimationDie(performer));
 
 		// if (!(this instanceof AnimationWalk)) {
 		//
 		// } else
-		if (onCompletionListener != null && performer != null)
-			onCompletionListener.animationComplete(performer);
 	}
 
 	public boolean getCompleted() {
