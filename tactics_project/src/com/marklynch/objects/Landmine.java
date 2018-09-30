@@ -58,11 +58,10 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 
 		System.out.println("Landmine.squareContentsChanged() 2");
 		for (GameObject gameObject : squareGameObjectIsOn.inventory.gameObjects) {
-			if (gameObject.isFloorObject == false) {
+			if (gameObject.isFloorObject == false && gameObject != this) {
 				weightOnPlate += gameObject.weight;
 			}
 		}
-		System.out.println("Landmine.squareContentsChanged() 3");
 
 		if (weightOnPlate >= targetWeight) {
 			System.out.println("Landmine.squareContentsChanged() calling explode");
@@ -84,7 +83,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 	}
 
 	public void explode() {
-		System.out.println("explode");
+		discovered();
 		this.changeHealthSafetyOff(-this.remainingHealth, this, null);
 	}
 
@@ -101,6 +100,8 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
+		if (!this.discovered)
+			return actions;
 		actions.add(new ActionMove(performer, squareGameObjectIsOn, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;
