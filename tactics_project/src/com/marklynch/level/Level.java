@@ -1953,18 +1953,6 @@ public class Level {
 			}
 		}
 
-		for (QuickBarSquare quickBarSquare : quickBar.quickBarSquares) {
-			if (quickBarSquare.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
-				return quickBarSquare;
-		}
-
-		// for (PopupTooltip popupTooltip : popupTooltips) {
-		// if (popupTooltip.calculateIfPointInBoundsOfButton(mouseX,
-		// Game.windowHeight - mouseY))
-		// return popupTooltip;
-		//
-		// }
-
 		if (!Game.level.popupMenuActions.isEmpty()) {
 
 			for (int i = popupMenuActions.size() - 1; i >= 0; i--) {
@@ -1986,6 +1974,18 @@ public class Level {
 
 			}
 		}
+
+		for (QuickBarSquare quickBarSquare : quickBar.quickBarSquares) {
+			if (quickBarSquare.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+				return quickBarSquare;
+		}
+
+		// for (PopupTooltip popupTooltip : popupTooltips) {
+		// if (popupTooltip.calculateIfPointInBoundsOfButton(mouseX,
+		// Game.windowHeight - mouseY))
+		// return popupTooltip;
+		//
+		// }
 
 		if (!Game.level.popupMenuHighlightObjects.isEmpty()) {
 
