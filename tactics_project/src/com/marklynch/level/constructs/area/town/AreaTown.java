@@ -6,6 +6,7 @@ import java.util.Arrays;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.BodyOfWater;
 import com.marklynch.level.constructs.Crime;
+import com.marklynch.level.constructs.Path;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -31,7 +32,7 @@ import com.marklynch.objects.units.Trader;
 
 public class AreaTown {
 
-	public static int posX = 10, posY = 10;
+	public static int posX = 0, posY = 0;
 
 	public AreaTown() {
 
@@ -117,6 +118,9 @@ public class AreaTown {
 		Templates.SHOP_COUNTER.makeCopy(Game.level.squares[posX + 7 + 35][posY + 1 + 3], null);
 		doctor.shopRoom = doctorsShopAtriums.get(0);
 		doctor.shopSign = doctorsShopSign;
+		// Path from cotors office to well
+		new Path(posX + 24, posY + 7, posX + 38, posY + 7);
+		new Path(posX + 24, posY + 8, posX + 24, posY + 18);
 
 		// Wanted Poster
 		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[posX + 27][posY + 8],
@@ -163,8 +167,11 @@ public class AreaTown {
 
 		// River
 		new BodyOfWater(posX + 0, posY + 15, posX + 3, posY + 15);
-		new BodyOfWater(posX + 5, posY + 15, posX + 91, posY + 15);
+		new BodyOfWater(posX + 5, posY + 15, posX + 23, posY + 15);
+		new BodyOfWater(posX + 25, posY + 15, posX + 90, posY + 15);
 		new BodyOfWater(posX + 92, posY + 15, posX + 92, posY + 29);
+
+		Game.level.squares[posX + 91][posY + 15].imageTexture = Square.STONE_TEXTURE;
 
 	}
 

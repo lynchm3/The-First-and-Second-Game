@@ -278,7 +278,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			alpha = 0.5f;
 
 		if (Game.zoomLevelIndex == Game.zoomLevels.length - 1) {
-			if (!this.seenByPlayer || textureToDraw == null) {
+			if ((!Game.fullVisiblity && !this.seenByPlayer) || textureToDraw == null) {
 
 			} else {
 				QuadUtils.drawQuad(Square.tileColors.get(textureToDraw), squarePositionX, squarePositionY,
