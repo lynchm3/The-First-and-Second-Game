@@ -166,7 +166,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
 
 	// attributes
-	public int remainingHealth = 0;
+	public int remainingHealth = 1;
 	boolean favourite = false;
 	public transient boolean hasAttackedThisTurn = false;
 
@@ -2326,5 +2326,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public ArrayList<Animation> getSecondaryAnimations() {
 		return secondaryAnimations;
+	}
+
+	public void setImageAndExtrapolateSize(String imagPath) {
+		this.imageTexturePath = imagPath;
+		this.imageTexture = getGlobalImage(imagPath, true);
+		this.widthRatio = imageTexture.getWidth() / Game.SQUARE_WIDTH;
+		this.heightRatio = imageTexture.getHeight() / Game.SQUARE_HEIGHT;
+
 	}
 }

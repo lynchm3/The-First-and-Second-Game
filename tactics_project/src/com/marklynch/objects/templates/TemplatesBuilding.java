@@ -128,7 +128,7 @@ public class TemplatesBuilding {
 
 		Templates.MINE_CART = new MineCart();
 		Templates.MINE_CART.name = "Mine Cart";
-		Templates.MINE_CART.imageTexture = getGlobalImage("mine_cart.png", true);
+		Templates.MINE_CART.setImageAndExtrapolateSize("mine_cart.png");
 		Templates.MINE_CART.totalHealth = Templates.MINE_CART.remainingHealth = 300;
 		Templates.MINE_CART.weight = 68f;
 		Templates.MINE_CART.value = 97;

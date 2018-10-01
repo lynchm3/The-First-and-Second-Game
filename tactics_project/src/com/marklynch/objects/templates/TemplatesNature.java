@@ -30,17 +30,12 @@ public class TemplatesNature {
 
 		Templates.TREE = new Tree();
 		Templates.TREE.name = "Tree";
-		Templates.TREE.imageTexturePath = "tree.png";
-		Templates.TREE.imageTexture = getGlobalImage(Templates.TREE.imageTexturePath, true);
+		Templates.TREE.setImageAndExtrapolateSize("tree.png");
 		Templates.TREE.totalHealth = Templates.TREE.remainingHealth = 100;
 		Templates.TREE.widthRatio = 1f;
 		Templates.TREE.heightRatio = 1.5f;
 		Templates.TREE.drawOffsetRatioX = 0f;
 		Templates.TREE.drawOffsetRatioY = -0.5f;
-		Templates.TREE.soundWhenHit = 1f;
-		Templates.TREE.soundWhenHitting = 1f;
-		Templates.TREE.soundDampening = 1f;
-		Templates.TREE.stackable = false;
 		Templates.TREE.weight = 100f;
 		Templates.TREE.value = 10;
 		Templates.TREE.anchorX = 0;
@@ -51,17 +46,13 @@ public class TemplatesNature {
 
 		Templates.BIG_TREE = new Tree();
 		Templates.BIG_TREE.name = "Big Tree";
-		Templates.BIG_TREE.imageTexturePath = "tree_big" + ".png";
-		Templates.BIG_TREE.imageTexture = getGlobalImage(Templates.BIG_TREE.imageTexturePath, true);
+		Templates.BIG_TREE.setImageAndExtrapolateSize("tree_big.png");
 		Templates.BIG_TREE.totalHealth = Templates.BIG_TREE.remainingHealth = 150;
 		Templates.BIG_TREE.widthRatio = 1.5f;
 		Templates.BIG_TREE.heightRatio = 1.5f;
 		Templates.BIG_TREE.drawOffsetRatioX = -0.25f;
 		Templates.BIG_TREE.drawOffsetRatioY = -0.5f;
-		Templates.BIG_TREE.soundWhenHit = 1f;
-		Templates.BIG_TREE.soundWhenHitting = 1f;
 		Templates.BIG_TREE.soundDampening = 2f;
-		Templates.BIG_TREE.stackable = false;
 		Templates.BIG_TREE.weight = 200f;
 		Templates.BIG_TREE.value = 13;
 		Templates.BIG_TREE.anchorX = 0;
@@ -72,17 +63,8 @@ public class TemplatesNature {
 
 		Templates.STUMP = new Stump();
 		Templates.STUMP.name = "Stump";
-		Templates.STUMP.imageTexturePath = "stump.png";
-		Templates.STUMP.imageTexture = getGlobalImage(Templates.STUMP.imageTexturePath, true);
+		Templates.STUMP.setImageAndExtrapolateSize("stump.png");
 		Templates.STUMP.totalHealth = Templates.STUMP.remainingHealth = 52;
-		Templates.STUMP.widthRatio = 1f;
-		Templates.STUMP.heightRatio = 1f;
-		Templates.STUMP.drawOffsetRatioX = 0f;
-		Templates.STUMP.drawOffsetRatioY = 0f;
-		Templates.STUMP.soundWhenHit = 1f;
-		Templates.STUMP.soundWhenHitting = 1f;
-		Templates.STUMP.soundDampening = 1f;
-		Templates.STUMP.stackable = false;
 		Templates.STUMP.weight = 50f;
 		Templates.STUMP.value = 6;
 		Templates.STUMP.anchorX = 0;
@@ -93,18 +75,9 @@ public class TemplatesNature {
 
 		Templates.BUSH = new HidingPlace();
 		Templates.BUSH.name = "Bush";
-		Templates.BUSH.imageTexturePath = "bush.png";
-		Templates.BUSH.imageTexture = getGlobalImage(Templates.BUSH.imageTexturePath, true);
+		Templates.BUSH.setImageAndExtrapolateSize("bush.png");
 		Templates.BUSH.totalHealth = Templates.BUSH.remainingHealth = 21;
 		Templates.BUSH.canShareSquare = true;
-		Templates.BUSH.widthRatio = 1f;
-		Templates.BUSH.heightRatio = 1f;
-		Templates.BUSH.drawOffsetRatioX = 0f;
-		Templates.BUSH.drawOffsetRatioY = 0f;
-		Templates.BUSH.soundWhenHit = 1f;
-		Templates.BUSH.soundWhenHitting = 1f;
-		Templates.BUSH.soundDampening = 1f;
-		Templates.BUSH.stackable = false;
 		Templates.BUSH.weight = 34f;
 		Templates.BUSH.value = 11;
 		Templates.BUSH.anchorX = 0;
@@ -116,18 +89,9 @@ public class TemplatesNature {
 
 		Templates.POISON_BUSH = new HidingPlace();
 		Templates.POISON_BUSH.name = "Posion Bush";
-		Templates.POISON_BUSH.imageTexturePath = "bush.png";
-		Templates.POISON_BUSH.imageTexture = getGlobalImage(Templates.POISON_BUSH.imageTexturePath, true);
+		Templates.POISON_BUSH.setImageAndExtrapolateSize("bush.png");
 		Templates.POISON_BUSH.totalHealth = Templates.POISON_BUSH.remainingHealth = 21;
 		Templates.POISON_BUSH.canShareSquare = true;
-		Templates.POISON_BUSH.widthRatio = 1f;
-		Templates.POISON_BUSH.heightRatio = 1f;
-		Templates.POISON_BUSH.drawOffsetRatioX = 0f;
-		Templates.POISON_BUSH.drawOffsetRatioY = 0f;
-		Templates.POISON_BUSH.soundWhenHit = 1f;
-		Templates.POISON_BUSH.soundWhenHitting = 1f;
-		Templates.POISON_BUSH.soundDampening = 1f;
-		Templates.POISON_BUSH.stackable = false;
 		Templates.POISON_BUSH.weight = 34f;
 		Templates.POISON_BUSH.value = 16;
 		Templates.POISON_BUSH.anchorX = 0;
@@ -139,17 +103,8 @@ public class TemplatesNature {
 
 		Templates.LONG_GRASS = new HidingPlace();
 		Templates.LONG_GRASS.name = "Long Grass";
-		Templates.LONG_GRASS.imageTexturePath = "long_grass.png";
-		Templates.LONG_GRASS.imageTexture = getGlobalImage(Templates.LONG_GRASS.imageTexturePath, true);
+		Templates.LONG_GRASS.setImageAndExtrapolateSize("long_grass.png");
 		Templates.LONG_GRASS.totalHealth = Templates.LONG_GRASS.remainingHealth = 10;
-		Templates.LONG_GRASS.widthRatio = 1f;
-		Templates.LONG_GRASS.heightRatio = 1f;
-		Templates.LONG_GRASS.drawOffsetRatioX = 0f;
-		Templates.LONG_GRASS.drawOffsetRatioY = 0f;
-		Templates.LONG_GRASS.soundWhenHit = 1f;
-		Templates.LONG_GRASS.soundWhenHitting = 1f;
-		Templates.LONG_GRASS.soundDampening = 1f;
-		Templates.LONG_GRASS.stackable = false;
 		Templates.LONG_GRASS.weight = 5f;
 		Templates.LONG_GRASS.value = 8;
 		Templates.LONG_GRASS.anchorX = 0;
@@ -161,17 +116,8 @@ public class TemplatesNature {
 
 		Templates.WHEAT = new HidingPlace();
 		Templates.WHEAT.name = "Wheat";
-		Templates.WHEAT.imageTexturePath = "wheat.png";
-		Templates.WHEAT.imageTexture = getGlobalImage(Templates.WHEAT.imageTexturePath, true);
+		Templates.WHEAT.setImageAndExtrapolateSize("wheat.png");
 		Templates.WHEAT.totalHealth = Templates.WHEAT.remainingHealth = 11;
-		Templates.WHEAT.widthRatio = 1f;
-		Templates.WHEAT.heightRatio = 1f;
-		Templates.WHEAT.drawOffsetRatioX = 0f;
-		Templates.WHEAT.drawOffsetRatioY = 0f;
-		Templates.WHEAT.soundWhenHit = 1f;
-		Templates.WHEAT.soundWhenHitting = 1f;
-		Templates.WHEAT.soundDampening = 1f;
-		Templates.WHEAT.stackable = false;
 		Templates.WHEAT.weight = 9f;
 		Templates.WHEAT.value = 17;
 		Templates.WHEAT.anchorX = 0;
@@ -183,16 +129,8 @@ public class TemplatesNature {
 
 		Templates.MUSHROOM = new Food();
 		Templates.MUSHROOM.name = "Mushroom";
-		Templates.MUSHROOM.imageTexturePath = "mushroom.png";
-		Templates.MUSHROOM.imageTexture = getGlobalImage(Templates.MUSHROOM.imageTexturePath, true);
+		Templates.MUSHROOM.setImageAndExtrapolateSize("mushroom.png");
 		Templates.MUSHROOM.totalHealth = Templates.MUSHROOM.remainingHealth = 13;
-		Templates.MUSHROOM.widthRatio = 0.5f;
-		Templates.MUSHROOM.heightRatio = 0.5f;
-		Templates.MUSHROOM.drawOffsetRatioX = 0f;
-		Templates.MUSHROOM.drawOffsetRatioY = 0f;
-		Templates.MUSHROOM.soundWhenHit = 1f;
-		Templates.MUSHROOM.soundWhenHitting = 1f;
-		Templates.MUSHROOM.soundDampening = 1f;
 		Templates.MUSHROOM.stackable = false;
 		Templates.MUSHROOM.weight = 14f;
 		Templates.MUSHROOM.value = 19;
@@ -203,11 +141,8 @@ public class TemplatesNature {
 
 		Templates.CANDY = new Food();
 		Templates.CANDY.name = "Candy";
-		Templates.CANDY.imageTexturePath = "candy.png";
-		Templates.CANDY.imageTexture = getGlobalImage(Templates.CANDY.imageTexturePath, true);
+		Templates.CANDY.setImageAndExtrapolateSize("candy.png");
 		Templates.CANDY.totalHealth = Templates.CANDY.remainingHealth = 11;
-		Templates.CANDY.widthRatio = 0.5f;
-		Templates.CANDY.heightRatio = 0.5f;
 		Templates.CANDY.weight = 7f;
 		Templates.CANDY.value = 9;
 		Templates.CANDY.anchorX = 18;
@@ -217,17 +152,10 @@ public class TemplatesNature {
 
 		Templates.BURROW = new SmallHidingPlace();
 		Templates.BURROW.name = "Burrow";
+		Templates.BURROW.setImageAndExtrapolateSize("burrow.png");
 		Templates.BURROW.imageTexturePath = "burrow.png";
-		Templates.BURROW.imageTexture = getGlobalImage(Templates.BURROW.imageTexturePath, true);
-		Templates.BURROW.totalHealth = Templates.BURROW.remainingHealth = 32;
-		Templates.BURROW.widthRatio = 0.5f;
-		Templates.BURROW.heightRatio = 0.5f;
 		Templates.BURROW.drawOffsetRatioX = 16f;
 		Templates.BURROW.drawOffsetRatioY = 16f;
-		Templates.BURROW.soundWhenHit = 1f;
-		Templates.BURROW.soundWhenHitting = 1f;
-		Templates.BURROW.soundDampening = 1f;
-		Templates.BURROW.stackable = false;
 		Templates.BURROW.weight = 100f;
 		Templates.BURROW.value = 14;
 		Templates.BURROW.anchorX = 0;
@@ -236,17 +164,8 @@ public class TemplatesNature {
 
 		Templates.MOUND = new Discoverable();
 		Templates.MOUND.name = "Mound of Dirt";
-		Templates.MOUND.imageTexturePath = "mound.png";
-		Templates.MOUND.imageTexture = getGlobalImage(Templates.MOUND.imageTexturePath, true);
+		Templates.MOUND.setImageAndExtrapolateSize("mound.png");
 		Templates.MOUND.totalHealth = Templates.MOUND.remainingHealth = 103;
-		Templates.MOUND.widthRatio = 1f;
-		Templates.MOUND.heightRatio = 1f;
-		Templates.MOUND.drawOffsetRatioX = 0f;
-		Templates.MOUND.drawOffsetRatioY = 0f;
-		Templates.MOUND.soundWhenHit = 1f;
-		Templates.MOUND.soundWhenHitting = 1f;
-		Templates.MOUND.soundDampening = 1f;
-		Templates.MOUND.stackable = false;
 		Templates.MOUND.weight = 100f;
 		Templates.MOUND.value = 15;
 		Templates.MOUND.anchorX = 0;
@@ -260,17 +179,8 @@ public class TemplatesNature {
 
 		Templates.APPLE = new Food();
 		Templates.APPLE.name = "Apple";
-		Templates.APPLE.imageTexturePath = "apple.png";
-		Templates.APPLE.imageTexture = getGlobalImage(Templates.APPLE.imageTexturePath, true);
+		Templates.APPLE.setImageAndExtrapolateSize("apple.png");
 		Templates.APPLE.totalHealth = Templates.APPLE.remainingHealth = 11;
-		Templates.APPLE.widthRatio = 0.25f;
-		Templates.APPLE.heightRatio = 0.25f;
-		Templates.APPLE.drawOffsetRatioX = 0f;
-		Templates.APPLE.drawOffsetRatioY = 0f;
-		Templates.APPLE.soundWhenHit = 1f;
-		Templates.APPLE.soundWhenHitting = 1f;
-		Templates.APPLE.soundDampening = 1f;
-		Templates.APPLE.stackable = false;
 		Templates.APPLE.weight = 5f;
 		Templates.APPLE.value = 15;
 		Templates.APPLE.anchorX = 16;
@@ -281,17 +191,8 @@ public class TemplatesNature {
 
 		Templates.ROCK = new GameObject();
 		Templates.ROCK.name = "Rock";
-		Templates.ROCK.imageTexturePath = "rock.png";
-		Templates.ROCK.imageTexture = getGlobalImage(Templates.ROCK.imageTexturePath, true);
+		Templates.ROCK.setImageAndExtrapolateSize("rock.png");
 		Templates.ROCK.totalHealth = Templates.ROCK.remainingHealth = 51;
-		Templates.ROCK.widthRatio = 0.32f;
-		Templates.ROCK.heightRatio = 0.32f;
-		Templates.ROCK.drawOffsetRatioX = 0f;
-		Templates.ROCK.drawOffsetRatioY = 0f;
-		Templates.ROCK.soundWhenHit = 1f;
-		Templates.ROCK.soundWhenHitting = 1f;
-		Templates.ROCK.soundDampening = 1f;
-		Templates.ROCK.stackable = false;
 		Templates.ROCK.weight = 12f;
 		Templates.ROCK.value = 6;
 		Templates.ROCK.anchorX = 12;
@@ -302,8 +203,7 @@ public class TemplatesNature {
 
 		Templates.VEIN = new Vein();
 		Templates.VEIN.name = "Vein";
-		Templates.VEIN.imageTexturePath = "vein.png";
-		Templates.VEIN.imageTexture = getGlobalImage(Templates.VEIN.imageTexturePath, true);
+		Templates.VEIN.setImageAndExtrapolateSize("vein.png");
 		Templates.VEIN.totalHealth = Templates.VEIN.remainingHealth = 1000;
 		Templates.VEIN.widthRatio = 1f;
 		Templates.VEIN.heightRatio = 1f;
@@ -332,17 +232,8 @@ public class TemplatesNature {
 		// Food?
 		Templates.MEAT_CHUNK = new MeatChunk();
 		Templates.MEAT_CHUNK.name = "Meat Chunk";
-		Templates.MEAT_CHUNK.imageTexturePath = "meat_chunk.png";
-		Templates.MEAT_CHUNK.imageTexture = getGlobalImage(Templates.MEAT_CHUNK.imageTexturePath, true);
+		Templates.MEAT_CHUNK.setImageAndExtrapolateSize("meat_chunk.png");
 		Templates.MEAT_CHUNK.totalHealth = Templates.MEAT_CHUNK.remainingHealth = 13;
-		Templates.MEAT_CHUNK.widthRatio = 1f;
-		Templates.MEAT_CHUNK.heightRatio = 1f;
-		Templates.MEAT_CHUNK.drawOffsetRatioX = 0f;
-		Templates.MEAT_CHUNK.drawOffsetRatioY = 0f;
-		Templates.MEAT_CHUNK.soundWhenHit = 1f;
-		Templates.MEAT_CHUNK.soundWhenHitting = 1f;
-		Templates.MEAT_CHUNK.soundDampening = 1f;
-		Templates.MEAT_CHUNK.stackable = false;
 		Templates.MEAT_CHUNK.weight = 14f;
 		Templates.MEAT_CHUNK.value = 18;
 		Templates.MEAT_CHUNK.anchorX = 0;
@@ -353,17 +244,9 @@ public class TemplatesNature {
 		// WATER_BODY
 		Templates.WATER_BODY = new WaterBody();
 		Templates.WATER_BODY.name = "Water";
+		Templates.WATER_BODY.setImageAndExtrapolateSize("water.png");
 		Templates.WATER_BODY.imageTexturePath = "water.png";
-		Templates.WATER_BODY.imageTexture = getGlobalImage(Templates.WATER_BODY.imageTexturePath, true);
 		Templates.WATER_BODY.totalHealth = Templates.WATER_BODY.remainingHealth = 1000;
-		Templates.WATER_BODY.widthRatio = 1f;
-		Templates.WATER_BODY.heightRatio = 1f;
-		Templates.WATER_BODY.drawOffsetRatioX = 0f;
-		Templates.WATER_BODY.drawOffsetRatioY = 0f;
-		Templates.WATER_BODY.soundWhenHit = 1f;
-		Templates.WATER_BODY.soundWhenHitting = 1f;
-		Templates.WATER_BODY.soundDampening = 10f;
-		Templates.WATER_BODY.stackable = false;
 		Templates.WATER_BODY.weight = 1000f;
 		Templates.WATER_BODY.value = 36;
 		Templates.WATER_BODY.anchorX = 0;
@@ -386,22 +269,19 @@ public class TemplatesNature {
 
 		Templates.VOID_HOLE = new VoidHole();
 		Templates.VOID_HOLE.name = "Void";
-		Templates.VOID_HOLE.imageTexturePath = "void_hole.png";
-		Templates.VOID_HOLE.imageTexture = getGlobalImage(Templates.VOID_HOLE.imageTexturePath, true);
+		Templates.VOID_HOLE.setImageAndExtrapolateSize("void_hole.png");
 		Templates.VOID_HOLE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.PORTAL = new Portal();
 		Templates.PORTAL.name = "Portal";
-		Templates.PORTAL.imageTexturePath = "portal.png";
-		Templates.PORTAL.imageTexture = getGlobalImage(Templates.PORTAL.imageTexturePath, true);
+		Templates.PORTAL.setImageAndExtrapolateSize("portal.png");
 		Templates.PORTAL.templateId = GameObject.generateNewTemplateId();
 
 		Templates.LANDMINE = new Landmine();
 		Templates.LANDMINE.name = "Landmine";
-		Templates.LANDMINE.imageTexturePath = "landmine.png";
-		Templates.LANDMINE.imageTexture = getGlobalImage(Templates.LANDMINE.imageTexturePath, true);
+		Templates.LANDMINE.setImageAndExtrapolateSize("landmine.png");
 		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();
-		Templates.LANDMINE.totalHealth = Templates.MOUND.remainingHealth = 10;
+		Templates.LANDMINE.totalHealth = Templates.LANDMINE.remainingHealth = 10;
 		Templates.LANDMINE.weight = 14f;
 		Templates.LANDMINE.value = 110;
 		Templates.LANDMINE.preDiscoverTexture = ResourceUtils.getGlobalImage("landmine.png", true);

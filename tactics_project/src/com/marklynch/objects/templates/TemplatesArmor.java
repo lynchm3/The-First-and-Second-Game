@@ -19,11 +19,8 @@ public class TemplatesArmor {
 		// Helmets
 		Templates.HARD_HAT = new Helmet();
 		Templates.HARD_HAT.name = "Hard Hat";
-		Templates.HARD_HAT.imageTexturePath = "hard_hat.png";
-		Templates.HARD_HAT.imageTexture = getGlobalImage(Templates.HARD_HAT.imageTexturePath, true);
+		Templates.HARD_HAT.setImageAndExtrapolateSize("hard_hat.png");
 		Templates.HARD_HAT.totalHealth = Templates.HARD_HAT.remainingHealth = 50;
-		Templates.HARD_HAT.widthRatio = 1f;
-		Templates.HARD_HAT.heightRatio = 0.5f;
 		Templates.HARD_HAT.weight = 7;
 		Templates.HARD_HAT.value = 52;
 		Templates.HARD_HAT.anchorX = 20;
@@ -33,11 +30,8 @@ public class TemplatesArmor {
 
 		Templates.PINK_HARD_HAT = new Helmet();
 		Templates.PINK_HARD_HAT.name = "Hard Hat";
-		Templates.PINK_HARD_HAT.imageTexturePath = "pink_hard_hat.png";
-		Templates.PINK_HARD_HAT.imageTexture = getGlobalImage(Templates.PINK_HARD_HAT.imageTexturePath, true);
+		Templates.PINK_HARD_HAT.setImageAndExtrapolateSize("pink_hard_hat.png");
 		Templates.PINK_HARD_HAT.totalHealth = Templates.PINK_HARD_HAT.remainingHealth = 50;
-		Templates.PINK_HARD_HAT.widthRatio = 1f;
-		Templates.PINK_HARD_HAT.heightRatio = 0.5f;
 		Templates.PINK_HARD_HAT.weight = 7;
 		Templates.PINK_HARD_HAT.value = 82;
 		Templates.PINK_HARD_HAT.anchorX = 20;
@@ -46,11 +40,8 @@ public class TemplatesArmor {
 
 		Templates.HUNTING_CAP = new Helmet();
 		Templates.HUNTING_CAP.name = "Hunting Cap";
-		Templates.HUNTING_CAP.imageTexturePath = "hunting_cap.png";
-		Templates.HUNTING_CAP.imageTexture = getGlobalImage(Templates.HUNTING_CAP.imageTexturePath, true);
+		Templates.HUNTING_CAP.setImageAndExtrapolateSize("hunting_cap.png");
 		Templates.HUNTING_CAP.totalHealth = Templates.HUNTING_CAP.remainingHealth = 50;
-		Templates.HUNTING_CAP.widthRatio = 1f;
-		Templates.HUNTING_CAP.heightRatio = 0.5f;
 		Templates.HUNTING_CAP.weight = 5;
 		Templates.HUNTING_CAP.value = 21;
 		Templates.HUNTING_CAP.anchorX = 20;
@@ -59,17 +50,8 @@ public class TemplatesArmor {
 
 		Templates.COWBOY_HAT = new Helmet();
 		Templates.COWBOY_HAT.name = "Cowboy Hat";
-		Templates.COWBOY_HAT.imageTexturePath = "cowboy_hat.png";
-		Templates.COWBOY_HAT.imageTexture = getGlobalImage(Templates.COWBOY_HAT.imageTexturePath, true);
+		Templates.COWBOY_HAT.setImageAndExtrapolateSize("cowboy_hat.png");
 		Templates.COWBOY_HAT.totalHealth = Templates.COWBOY_HAT.remainingHealth = 15;
-		Templates.COWBOY_HAT.widthRatio = 0.5f;
-		Templates.COWBOY_HAT.heightRatio = 0.5f;
-		Templates.COWBOY_HAT.drawOffsetRatioX = 0f;
-		Templates.COWBOY_HAT.drawOffsetRatioY = 0f;
-		Templates.COWBOY_HAT.soundWhenHit = 1f;
-		Templates.COWBOY_HAT.soundWhenHitting = 1f;
-		Templates.COWBOY_HAT.soundDampening = 1f;
-		Templates.COWBOY_HAT.stackable = false;
 		Templates.COWBOY_HAT.weight = 6f;
 		Templates.COWBOY_HAT.value = 34;
 		Templates.COWBOY_HAT.anchorX = 34;
