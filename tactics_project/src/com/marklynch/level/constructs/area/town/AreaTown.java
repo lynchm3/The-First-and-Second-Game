@@ -62,15 +62,16 @@ public class AreaTown {
 		shopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Private Quarters Door",
 				Game.level.squares[posX + 11][posY + 4], false, true, true, trader), Nodes.townShopInner));
 		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>();
-		shopAtriums.add(new StructureRoom("Trader Joe's Shop", posX + 6, posY + 1, false,
-				false,
+		shopAtriums.add(new StructureRoom("Trader Joe's Shop", posX + 6, posY + 1, false, false,
 				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })),
-				new Node[] { Nodes.townShopInner, Nodes.townShopOuter }, new RoomPart(posX + 6, posY + 1, posX + 10, posY + 4)));
-		shopAtriums.add(new StructureRoom("Trader Joe's Shop", posX + 12, posY + 1, true,
-				false, new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })),
-				new Node[] { Nodes.townShopInner }, new RoomPart(posX + 12, posY + 1, posX + 16, posY + 4)));
+				new Node[] { Nodes.townShopInner, Nodes.townShopOuter },
+				new RoomPart(posX + 6, posY + 1, posX + 10, posY + 4)));
+		shopAtriums.add(new StructureRoom("Trader Joe's Shop", posX + 12, posY + 1, true, false,
+				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })), new Node[] { Nodes.townShopInner },
+				new RoomPart(posX + 12, posY + 1, posX + 16, posY + 4)));
 		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
-		shopSections.add(new StructureSection("Trader Joe's Shop", posX + 5, posY + 0, posX + 17, posY + 5, false, false));
+		shopSections
+				.add(new StructureSection("Trader Joe's Shop", posX + 5, posY + 0, posX + 17, posY + 5, false, false));
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
 				new ArrayList<StructurePath>(), shopFeatures, entranceSquares, "building2.png", posX + 640,
 				posY + 640 + 1664, posX + -100, posY + -100 + 868, true, trader, new ArrayList<Square>(),
@@ -96,13 +97,13 @@ public class AreaTown {
 		doctorsShopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Private Quarters Door",
 				Game.level.squares[posX + 11 + 35][posY + 4 + 3], false, true, true, doctor), Nodes.townShopInner));
 		ArrayList<StructureRoom> doctorsShopAtriums = new ArrayList<StructureRoom>();
-		doctorsShopAtriums.add(new StructureRoom("Doctor Mike's Practice", posX + 6 + 35, posY + 1 + 3, false,
-				false,
+		doctorsShopAtriums.add(new StructureRoom("Doctor Mike's Practice", posX + 6 + 35, posY + 1 + 3, false, false,
 				new ArrayList<Actor>(Arrays.asList(new Actor[] { doctor })),
-				new Node[] { Nodes.townShopInner, Nodes.townShopOuter }, new RoomPart(posX + 6 + 35, posY + 1 + 3, posX + 10 + 35, posY + 4 + 3)));
-		doctorsShopAtriums.add(new StructureRoom("Doctor Mike's Practice", posX + 12 + 35, posY + 1 + 3, true,
-				false, new ArrayList<Actor>(Arrays.asList(new Actor[] { doctor })),
-				new Node[] { Nodes.townShopInner }, new RoomPart(posX + 12 + 35, posY + 1 + 3, posX + 16 + 35, posY + 4 + 3)));
+				new Node[] { Nodes.townShopInner, Nodes.townShopOuter },
+				new RoomPart(posX + 6 + 35, posY + 1 + 3, posX + 10 + 35, posY + 4 + 3)));
+		doctorsShopAtriums.add(new StructureRoom("Doctor Mike's Practice", posX + 12 + 35, posY + 1 + 3, true, false,
+				new ArrayList<Actor>(Arrays.asList(new Actor[] { doctor })), new Node[] { Nodes.townShopInner },
+				new RoomPart(posX + 12 + 35, posY + 1 + 3, posX + 16 + 35, posY + 4 + 3)));
 		ArrayList<StructureSection> doctorsShopSections = new ArrayList<StructureSection>();
 		doctorsShopSections.add(new StructureSection("Doctor Mike's Practice", posX + 5 + 35, posY + 0 + 3,
 				posX + 17 + 35, posY + 5 + 3, false, false));
@@ -153,12 +154,17 @@ public class AreaTown {
 		Templates.BUSH.makeCopy(Game.level.squares[posX + 17][posY + 19], null);
 
 		// Lake
-		new BodyOfWater(posX + 105, 30, posX + 110, 37);
+		new BodyOfWater(posX + 90, posY + 30, posX + 100, posY + 37);
 		Templates.FISH.makeCopy("Fish", Game.level.squares[posX + 107][posY + 34], FactionList.buns, null,
 				new GameObject[] {}, new GameObject[] {}, null);
 		Templates.CHEST.makeCopy("Chest", Game.level.squares[posX + 107][posY + 33], false, null);
 		Templates.CRATE.makeCopy("Crate", Game.level.squares[posX + 106][posY + 31], false, null);
 		// new BodyOfWater(105, 30, 106, 37);
+
+		// River
+		new BodyOfWater(posX + 0, posY + 15, posX + 3, posY + 15);
+		new BodyOfWater(posX + 5, posY + 15, posX + 91, posY + 15);
+		new BodyOfWater(posX + 92, posY + 15, posX + 92, posY + 29);
 
 	}
 
