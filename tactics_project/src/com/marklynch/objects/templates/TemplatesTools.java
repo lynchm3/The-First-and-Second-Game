@@ -52,8 +52,8 @@ public class TemplatesTools {
 		Templates.SHOVEL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.SHOVEL.weight = 28f;
 		Templates.SHOVEL.value = 32;
-		Templates.SHOVEL.anchorX = 63;
-		Templates.SHOVEL.anchorY = 67;
+		Templates.SHOVEL.anchorX = 33;
+		Templates.SHOVEL.anchorY = 68;
 		Templates.SHOVEL.templateId = GameObject.generateNewTemplateId();
 
 		Templates.FISHING_ROD = new FishingRod(); // 93,0
@@ -184,8 +184,8 @@ public class TemplatesTools {
 		Templates.LANTERN.totalHealth = Templates.LANTERN.remainingHealth = 14;
 		Templates.LANTERN.weight = 10f;
 		Templates.LANTERN.value = 43;
-		Templates.LANTERN.anchorX = 63;
-		Templates.LANTERN.anchorY = 6;
+		Templates.LANTERN.anchorX = 32;
+		Templates.LANTERN.anchorY = 7;
 		Templates.LANTERN.templateId = GameObject.generateNewTemplateId();
 		Templates.LANTERN.flipYAxisInMirror = false;
 

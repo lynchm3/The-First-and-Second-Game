@@ -15,8 +15,8 @@ public class TemplatesJunk {
 		Templates.FUR.totalHealth = Templates.FUR.remainingHealth = 21;
 		Templates.FUR.weight = 15f;
 		Templates.FUR.value = 55;
-		Templates.FUR.anchorX = 0;
-		Templates.FUR.anchorY = 0;
+		Templates.FUR.anchorX = 64;
+		Templates.FUR.anchorY = 64;
 		Templates.FUR.templateId = GameObject.generateNewTemplateId();
 
 		Templates.DIRTY_SHEET_3 = new Junk();

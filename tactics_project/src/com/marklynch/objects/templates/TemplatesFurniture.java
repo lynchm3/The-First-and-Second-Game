@@ -113,8 +113,8 @@ public class TemplatesFurniture {
 		Templates.KEY.totalHealth = Templates.KEY.remainingHealth = 10;
 		Templates.KEY.weight = 5f;
 		Templates.KEY.value = 12;
-		Templates.KEY.anchorX = 0;
-		Templates.KEY.anchorY = 0;
+		Templates.KEY.anchorX = 6;
+		Templates.KEY.anchorY = 6;
 		Templates.KEY.templateId = GameObject.generateNewTemplateId();
 		Templates.KEY.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(1));
 

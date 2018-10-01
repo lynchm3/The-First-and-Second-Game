@@ -54,8 +54,8 @@ public class TemplatesArmor {
 		Templates.COWBOY_HAT.totalHealth = Templates.COWBOY_HAT.remainingHealth = 15;
 		Templates.COWBOY_HAT.weight = 6f;
 		Templates.COWBOY_HAT.value = 34;
-		Templates.COWBOY_HAT.anchorX = 34;
-		Templates.COWBOY_HAT.anchorY = 68;
+		Templates.COWBOY_HAT.anchorX = 30;
+		Templates.COWBOY_HAT.anchorY = 54;
 		Templates.COWBOY_HAT.templateId = GameObject.generateNewTemplateId();
 
 		// Body Armor
