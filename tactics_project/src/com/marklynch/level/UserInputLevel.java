@@ -993,14 +993,14 @@ public class UserInputLevel {
 	public static void escapeTyped() {
 
 		Game.level.levelMode = Level.LevelMode.LEVEL_MODE_NORMAL;
-		Level.activeTextBox = null;
 
-		Level.closeAllPopups();
-		if (Level.fullScreenTextBox != null) {
+		if (Game.level.popupMenuObjects.size() != 0 || Game.level.popupMenuActions.size() != 0) {
+			Level.closeAllPopups();
+		} else if (Level.activeTextBox != null) {
+			Level.activeTextBox = null;
+		} else if (Level.fullScreenTextBox != null) {
 			Level.closeFullScreenTextBox();
-		}
-		// Game.level.notifications.clear();
-		if (Level.journal.showing) {
+		} else if (Level.journal.showing) {
 			Game.level.openCloseJournal();
 		} else if (Level.characterScreen.showing) {
 			Game.level.openCloseCharacterScreen();
