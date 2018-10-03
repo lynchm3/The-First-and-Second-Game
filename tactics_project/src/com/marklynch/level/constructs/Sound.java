@@ -8,6 +8,9 @@ import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor.Direction;
+import com.marklynch.utils.CircleUtils;
+import com.marklynch.utils.Color;
+import com.marklynch.utils.TextureUtils;
 
 public class Sound {
 	public GameObject sourcePerformer;
@@ -31,6 +34,38 @@ public class Sound {
 		// destinationSquares = new ArrayList<Square>();
 		createDestinationSounds();
 
+	}
+
+	public void draw() {
+		float circleCenterX = sourceSquare.getCenterX();
+		float circleCenterY = sourceSquare.getCenterY();
+		CircleUtils.drawCircle(Color.BLACK, 64, circleCenterX, circleCenterY);
+		int circlesToDraw = (int) loudness * 2;
+
+		System.out.println("circleCenterX = " + circleCenterX);
+		System.out.println("circleCenterY = " + circleCenterY);
+		System.out.println("loudness = " + loudness);
+		System.out.println("circlesToDraw = " + circlesToDraw);
+
+		for (int i = 0; i < circlesToDraw; i++) {
+
+			int radius = (int) (i * Game.HALF_SQUARE_WIDTH);
+			System.out.println("radius = " + radius);
+			CircleUtils.drawCircle(Color.BLACK, i * Game.HALF_SQUARE_WIDTH, circleCenterX, circleCenterY);
+		}
+
+		for (Square square : destinationSquares) {
+
+			float squarePositionX = square.xInGridPixels;
+			float squarePositionY = square.yInGridPixels;
+
+			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+			float circleCenterX1 = square.getCenterX();
+			float circleCenterY1 = square.getCenterY();
+			CircleUtils.drawCircle(Color.BLACK, 64, circleCenterX1, circleCenterY1);
+
+		}
 	}
 
 	@Override
