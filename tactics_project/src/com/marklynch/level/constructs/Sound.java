@@ -42,30 +42,47 @@ public class Sound {
 		CircleUtils.drawCircle(Color.BLACK, 64, circleCenterX, circleCenterY);
 		int circlesToDraw = (int) loudness * 2;
 
-		System.out.println("circleCenterX = " + circleCenterX);
-		System.out.println("circleCenterY = " + circleCenterY);
 		System.out.println("loudness = " + loudness);
 		System.out.println("circlesToDraw = " + circlesToDraw);
+
+		float squarePositionX = destinationSquares.get(0).xInGridPixels;
+		float squarePositionY = destinationSquares.get(0).yInGridPixels;
+		float circleCenterX1 = destinationSquares.get(0).getCenterX();
+		float circleCenterY1 = destinationSquares.get(0).getCenterY();
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
 		for (int i = 0; i < circlesToDraw; i++) {
 
 			int radius = (int) (i * Game.HALF_SQUARE_WIDTH);
 			System.out.println("radius = " + radius);
-			CircleUtils.drawCircle(Color.BLACK, i * Game.HALF_SQUARE_WIDTH, circleCenterX, circleCenterY);
+			System.out.println("circleCenterX = " + circleCenterX);
+			System.out.println("circleCenterY = " + circleCenterY);
+			CircleUtils.drawCircle(Color.BLACK, radius, circleCenterX, circleCenterY);
 		}
+		// int radius1 = 128;
+		// System.out.println("radius1 = " + radius1);
+		// System.out.println("circleCenterX1 = " + circleCenterX1);
+		// System.out.println("circleCenterY1 = " + circleCenterY1);
+		// // CircleUtils.drawCircle(Color.BLACK, radius1, circleCenterX1,
+		// circleCenterY1);
+		// CircleUtils.drawCircle(Color.BLACK, radius1, circleCenterX, circleCenterY);
 
-		for (Square square : destinationSquares) {
-
-			float squarePositionX = square.xInGridPixels;
-			float squarePositionY = square.yInGridPixels;
-
-			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
-					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
-			float circleCenterX1 = square.getCenterX();
-			float circleCenterY1 = square.getCenterY();
-			CircleUtils.drawCircle(Color.BLACK, 64, circleCenterX1, circleCenterY1);
-
-		}
+		// for (Square square : destinationSquares) {
+		//
+		// float squarePositionX2 = square.xInGridPixels;
+		// float squarePositionY2 = square.yInGridPixels;
+		//
+		// TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
+		// squarePositionX, squarePositionY,
+		// squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		// float circleCenterX2 = square.getCenterX();
+		// float circleCenterY2 = square.getCenterY();
+		// CircleUtils.drawCircle(Color.BLACK, 128, circleCenterX2, circleCenterY2);
+		// // System.out.println("circleCenterX2 = " + circleCenterX2);
+		// // System.out.println("circleCenterY2 = " + circleCenterY2);
+		//
+		// }
 	}
 
 	@Override
