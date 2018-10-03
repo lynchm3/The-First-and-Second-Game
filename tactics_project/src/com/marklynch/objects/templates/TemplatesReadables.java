@@ -28,8 +28,8 @@ public class TemplatesReadables {
 		Templates.SCROLL.totalHealth = Templates.SCROLL.remainingHealth = 1;
 		Templates.SCROLL.weight = 2f;
 		Templates.SCROLL.value = 100;
-		Templates.SCROLL.anchorX = 0;
-		Templates.SCROLL.anchorY = 0;
+		Templates.SCROLL.anchorX = 16;
+		Templates.SCROLL.anchorY = 16;
 		Templates.SCROLL.templateId = GameObject.generateNewTemplateId();
 
 		Templates.SIGN = new Sign();
@@ -76,8 +76,8 @@ public class TemplatesReadables {
 		Templates.DOCUMENTS.totalHealth = Templates.DOCUMENTS.remainingHealth = 5;
 		Templates.DOCUMENTS.weight = 2f;
 		Templates.DOCUMENTS.value = 0;
-		Templates.DOCUMENTS.anchorX = 0;
-		Templates.DOCUMENTS.anchorY = 0;
+		Templates.DOCUMENTS.anchorX = 12;
+		Templates.DOCUMENTS.anchorY = 28;
 		Templates.DOCUMENTS.templateId = GameObject.generateNewTemplateId();
 		Templates.DOCUMENTS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(1));
 

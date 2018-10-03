@@ -236,8 +236,8 @@ public class TemplatesNature {
 		Templates.MEAT_CHUNK.totalHealth = Templates.MEAT_CHUNK.remainingHealth = 13;
 		Templates.MEAT_CHUNK.weight = 14f;
 		Templates.MEAT_CHUNK.value = 18;
-		Templates.MEAT_CHUNK.anchorX = 0;
-		Templates.MEAT_CHUNK.anchorY = 0;
+		Templates.MEAT_CHUNK.anchorX = 12;
+		Templates.MEAT_CHUNK.anchorY = 20;
 		Templates.MEAT_CHUNK.templateId = GameObject.generateNewTemplateId();
 		Templates.MEAT_CHUNK.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(2));
 
@@ -284,6 +284,8 @@ public class TemplatesNature {
 		Templates.LANDMINE.totalHealth = Templates.LANDMINE.remainingHealth = 10;
 		Templates.LANDMINE.weight = 14f;
 		Templates.LANDMINE.value = 110;
+		Templates.LANDMINE.anchorX = 16;
+		Templates.LANDMINE.anchorY = 4;
 		Templates.LANDMINE.preDiscoverTexture = ResourceUtils.getGlobalImage("landmine.png", true);
 		Templates.LANDMINE.postDiscoverTexture = ResourceUtils.getGlobalImage("landmine.png", true);
 		Templates.LANDMINE.power = new PowerInferno(null);

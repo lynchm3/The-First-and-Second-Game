@@ -162,6 +162,8 @@ public class TemplatesAnimals {
 		Templates.TURTLE.setImageAndExtrapolateSize("turtle.png");
 		Templates.TURTLE.drawOffsetRatioY = 0.75f;
 		Templates.TURTLE.drawOffsetRatioX = 0.5f;
+		Templates.TURTLE.anchorX = 32;
+		Templates.TURTLE.anchorY = 16;
 		Templates.TURTLE.weight = 4f;
 		Templates.TURTLE.canOpenDoors = false;
 		Templates.TURTLE.canEquipWeapons = false;

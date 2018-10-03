@@ -39,8 +39,8 @@ public class TemplatesCorpses {
 		Templates.ASH.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
 		Templates.ASH.weight = 2f;
 		Templates.ASH.value = 3;
-		Templates.ASH.anchorX = 0;
-		Templates.ASH.anchorY = 0;
+		Templates.ASH.anchorX = 16;
+		Templates.ASH.anchorY = 32;
 		Templates.ASH.templateId = GameObject.generateNewTemplateId();
 		Templates.ASH.flipYAxisInMirror = false;
 
@@ -57,8 +57,8 @@ public class TemplatesCorpses {
 		Templates.WOOD_CHIPS.stackable = true;
 		Templates.WOOD_CHIPS.weight = 12f;
 		Templates.WOOD_CHIPS.value = 6;
-		Templates.WOOD_CHIPS.anchorX = 0;
-		Templates.WOOD_CHIPS.anchorY = 0;
+		Templates.WOOD_CHIPS.anchorX = 16;
+		Templates.WOOD_CHIPS.anchorY = 32;
 		Templates.WOOD_CHIPS.templateId = GameObject.generateNewTemplateId();
 
 	}

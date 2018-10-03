@@ -126,8 +126,8 @@ public class TemplatesTools {
 		Templates.HAMMER.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.HAMMER.weight = 23f;
 		Templates.HAMMER.value = 41;
-		Templates.HAMMER.anchorX = 31;
-		Templates.HAMMER.anchorY = 98;
+		Templates.HAMMER.anchorX = 10;
+		Templates.HAMMER.anchorY = 54;
 		Templates.HAMMER.templateId = GameObject.generateNewTemplateId();
 
 		Templates.BASKET = new Weapon();
@@ -138,8 +138,8 @@ public class TemplatesTools {
 		Templates.BASKET.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-80));
 		Templates.BASKET.weight = 9f;
 		Templates.BASKET.value = 13;
-		Templates.BASKET.anchorX = 65;
-		Templates.BASKET.anchorY = 11;
+		Templates.BASKET.anchorX = 20;
+		Templates.BASKET.anchorY = 16;
 		Templates.BASKET.templateId = GameObject.generateNewTemplateId();
 		Templates.BASKET.flipYAxisInMirror = false;
 

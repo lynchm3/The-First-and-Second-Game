@@ -124,8 +124,8 @@ public class TemplatesFurniture {
 		Templates.PLATE.totalHealth = Templates.PLATE.remainingHealth = 6;
 		Templates.PLATE.weight = 12f;
 		Templates.PLATE.value = 14;
-		Templates.PLATE.anchorX = 0;
-		Templates.PLATE.anchorY = 0;
+		Templates.PLATE.anchorX = 16;
+		Templates.PLATE.anchorY = 16;
 		Templates.PLATE.templateId = GameObject.generateNewTemplateId();
 		Templates.PLATE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(1));
 
@@ -135,8 +135,8 @@ public class TemplatesFurniture {
 		Templates.BROKEN_PLATE.totalHealth = Templates.BROKEN_PLATE.remainingHealth = 4;
 		Templates.BROKEN_PLATE.weight = 12f;
 		Templates.BROKEN_PLATE.value = 3;
-		Templates.BROKEN_PLATE.anchorX = 0;
-		Templates.BROKEN_PLATE.anchorY = 0;
+		Templates.BROKEN_PLATE.anchorX = 16;
+		Templates.BROKEN_PLATE.anchorY = 16;
 		Templates.BROKEN_PLATE.templateId = GameObject.generateNewTemplateId();
 		Templates.BROKEN_PLATE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(1));
 
@@ -146,8 +146,8 @@ public class TemplatesFurniture {
 		Templates.DINNER_KNIFE.totalHealth = Templates.DINNER_KNIFE.remainingHealth = 21;
 		Templates.DINNER_KNIFE.weight = 6f;
 		Templates.DINNER_KNIFE.value = 17;
-		Templates.DINNER_KNIFE.anchorX = 0;
-		Templates.DINNER_KNIFE.anchorY = 0;
+		Templates.DINNER_KNIFE.anchorX = 4;
+		Templates.DINNER_KNIFE.anchorY = 4;
 		Templates.DINNER_KNIFE.templateId = GameObject.generateNewTemplateId();
 		Templates.DINNER_KNIFE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(2));
 
@@ -157,8 +157,8 @@ public class TemplatesFurniture {
 		Templates.DINNER_FORK.totalHealth = Templates.DINNER_FORK.remainingHealth = 12;
 		Templates.DINNER_FORK.weight = 7f;
 		Templates.DINNER_FORK.value = 17;
-		Templates.DINNER_FORK.anchorX = 0;
-		Templates.DINNER_FORK.anchorY = 0;
+		Templates.DINNER_FORK.anchorX = 4;
+		Templates.DINNER_FORK.anchorY = 4;
 		Templates.DINNER_FORK.templateId = GameObject.generateNewTemplateId();
 		Templates.DINNER_FORK.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(1));
 
@@ -256,8 +256,8 @@ public class TemplatesFurniture {
 		Templates.SHELF.totalHealth = Templates.SHELF.remainingHealth = 28;
 		Templates.SHELF.weight = 27f;
 		Templates.SHELF.value = 21;
-		Templates.SHELF.anchorX = 0;
-		Templates.SHELF.anchorY = 0;
+		Templates.SHELF.anchorX = 32;
+		Templates.SHELF.anchorY = 8;
 		Templates.SHELF.templateId = GameObject.generateNewTemplateId();
 
 		Templates.WELL = new WaterSource();
