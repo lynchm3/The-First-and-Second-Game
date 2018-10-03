@@ -426,38 +426,43 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT, u1, v1, u2, v2);
 	}
 
-	public void drawSoundHighlight() {
-
-		if (!this.seenByPlayer)
-			return;
-
-		float squarePositionX = xInGridPixels;
-		float squarePositionY = yInGridPixels;
-
-		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
-
-		float distanceX = this.xInGrid - Game.level.player.squareGameObjectIsOn.xInGrid;
-		float u1 = (distanceX + 11) * 0.09f;
-		float u2 = (distanceX + 11) * 0.09f + 0.09f;
-
-		float distanceY = this.yInGrid - Game.level.player.squareGameObjectIsOn.yInGrid;
-		float v1 = (distanceY + 11) * 0.09f;
-		float v2 = (distanceY + 11) * 0.09f + 0.09f;
-
-		if (this.xInGrid > Game.level.player.squareGameObjectIsOn.xInGrid) {
-			u1 = 1 - u1;
-			u2 = 1 - u2;
-		}
-
-		if (this.yInGrid > Game.level.player.squareGameObjectIsOn.yInGrid) {
-			v1 = 1 - v1;
-			v2 = 1 - v2;
-		}
-
-		TextureUtils.drawTexture(Square.SOUND_TEXTURE, squarePositionX, squarePositionY,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT, u1, v1, u2, v2);
-	}
+	// public void drawSoundHighlight() {
+	//
+	// if (!this.seenByPlayer)
+	// return;
+	//
+	// float squarePositionX = xInGridPixels;
+	// float squarePositionY = yInGridPixels;
+	//
+	// TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
+	// squarePositionX, squarePositionY,
+	// squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+	//
+	// float distanceX = this.xInGrid -
+	// Game.level.player.squareGameObjectIsOn.xInGrid;
+	// float u1 = (distanceX + 11) * 0.09f;
+	// float u2 = (distanceX + 11) * 0.09f + 0.09f;
+	//
+	// float distanceY = this.yInGrid -
+	// Game.level.player.squareGameObjectIsOn.yInGrid;
+	// float v1 = (distanceY + 11) * 0.09f;
+	// float v2 = (distanceY + 11) * 0.09f + 0.09f;
+	//
+	// if (this.xInGrid > Game.level.player.squareGameObjectIsOn.xInGrid) {
+	// u1 = 1 - u1;
+	// u2 = 1 - u2;
+	// }
+	//
+	// if (this.yInGrid > Game.level.player.squareGameObjectIsOn.yInGrid) {
+	// v1 = 1 - v1;
+	// v2 = 1 - v2;
+	// }
+	//
+	// TextureUtils.drawTexture(Square.SOUND_TEXTURE, squarePositionX,
+	// squarePositionY,
+	// squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT,
+	// u1, v1, u2, v2);
+	// }
 
 	public void drawRedHighlight() {
 

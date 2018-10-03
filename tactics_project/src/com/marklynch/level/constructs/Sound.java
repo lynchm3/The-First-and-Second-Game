@@ -40,7 +40,7 @@ public class Sound {
 		float circleCenterX = sourceSquare.getCenterX();
 		float circleCenterY = sourceSquare.getCenterY();
 		CircleUtils.drawCircle(Color.BLACK, 64, circleCenterX, circleCenterY);
-		int circlesToDraw = (int) loudness * 2;
+		int circlesToDraw = (int) loudness * 3;
 
 		System.out.println("loudness = " + loudness);
 		System.out.println("circlesToDraw = " + circlesToDraw);
@@ -49,17 +49,33 @@ public class Sound {
 		float squarePositionY = destinationSquares.get(0).yInGridPixels;
 		float circleCenterX1 = destinationSquares.get(0).getCenterX();
 		float circleCenterY1 = destinationSquares.get(0).getCenterY();
-		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
-		for (int i = 0; i < circlesToDraw; i++) {
+		for (Square destinationSquare : destinationSquares) {
+			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, destinationSquare.xInGridPixels,
+					destinationSquare.yInGridPixels, destinationSquare.xInGridPixels + Game.SQUARE_WIDTH,
+					destinationSquare.yInGridPixels + Game.SQUARE_HEIGHT);
+			for (int i = 0; i < circlesToDraw; i++) {
 
-			int radius = (int) (i * Game.HALF_SQUARE_WIDTH);
-			System.out.println("radius = " + radius);
-			System.out.println("circleCenterX = " + circleCenterX);
-			System.out.println("circleCenterY = " + circleCenterY);
-			CircleUtils.drawCircle(Color.BLACK, radius, circleCenterX, circleCenterY);
+				int radius = (int) (i * Game.HALF_SQUARE_WIDTH);
+				// System.out.println("radius = " + radius);
+				// System.out.println("circleCenterX = " + circleCenterX);
+				// System.out.println("circleCenterY = " + circleCenterY);
+
+				// optimisation 1: pass a list of bounds instead of 1
+				// optimisation 2: only try to draw square on circle when u know it'll be a
+				// possiblity they overlap
+				CircleUtils.drawCircleWithinBounds(Color.BLACK, radius, circleCenterX, circleCenterY,
+						destinationSquare.xInGridPixels, destinationSquare.yInGridPixels,
+						destinationSquare.xInGridPixels + Game.SQUARE_WIDTH,
+						destinationSquare.yInGridPixels + Game.SQUARE_HEIGHT);// could
+				// pass
+				// a
+				// list
+				// of
+				// bounds...
+			}
 		}
+
 		// int radius1 = 128;
 		// System.out.println("radius1 = " + radius1);
 		// System.out.println("circleCenterX1 = " + circleCenterX1);
