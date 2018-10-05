@@ -29,7 +29,7 @@ public class CircleUtils {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4f(color.r, color.g, color.b, color.a);
 		ArrayList<Point> pointsInCurrentCurve = new ArrayList<Point>();
-		for (int i = 0; i < 360; i++) {
+		for (int i = 0; i < 361; i++) {
 			double degInRad = Math.toRadians(i);
 			double xToDrawNow = Math.cos(degInRad) * radius + centerX;
 			double yToDrawNow = Math.sin(degInRad) * radius + centerY;
