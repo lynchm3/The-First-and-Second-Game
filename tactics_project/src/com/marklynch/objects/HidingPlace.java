@@ -16,7 +16,6 @@ public class HidingPlace extends Searchable {
 
 	public HidingPlace() {
 		super();
-		// BUSH
 		canBePickedUp = false;
 
 		fitsInInventory = false;
@@ -25,7 +24,7 @@ public class HidingPlace extends Searchable {
 
 		persistsWhenCantBeSeen = true;
 		canShareSquare = true;
-
+		attackable = true;
 	}
 
 	@Override

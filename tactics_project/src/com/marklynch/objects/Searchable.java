@@ -14,8 +14,6 @@ public class Searchable extends GameObject {
 
 	public Searchable() {
 		super();
-
-		// DROP HOLE
 		canBePickedUp = false;
 
 		fitsInInventory = false;
