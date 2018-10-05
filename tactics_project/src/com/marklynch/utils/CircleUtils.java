@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
+import com.marklynch.utils.Utils.Point;
 
 public class CircleUtils {
 
@@ -22,64 +23,78 @@ public class CircleUtils {
 	}
 
 	public static void drawCircleWithinBounds(Color color, double radius, double centerX, double centerY,
-
 			ArrayList<Square> squares) {
 
 		GL11.glLineWidth(10f);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4f(color.r, color.g, color.b, color.a);
-		GL11.glBegin(GL11.GL_LINE_LOOP);
+		ArrayList<Point> pointsInCurrentCurve = new ArrayList<Point>();
 		for (int i = 0; i < 360; i++) {
 			double degInRad = Math.toRadians(i);
-
-			// Check x
 			double xToDrawNow = Math.cos(degInRad) * radius + centerX;
 			double yToDrawNow = Math.sin(degInRad) * radius + centerY;
+			boolean drewAtThisDegree = false;
 			for (Square square : squares) {
 				double boundsX1 = square.xInGridPixels;
 				double boundsX2 = square.xInGridPixels + Game.SQUARE_WIDTH;
 				double boundsY1 = square.yInGridPixels;
 				double boundsY2 = square.yInGridPixels + Game.SQUARE_HEIGHT;
-				if (xToDrawNow <= boundsX1)
+				if (xToDrawNow < boundsX1)
 					continue;
-				if (xToDrawNow >= boundsX2)
+				if (xToDrawNow > boundsX2)
 					continue;
-				if (yToDrawNow <= boundsY1)
+				if (yToDrawNow < boundsY1)
 					continue;
-				if (yToDrawNow >= boundsY2)
+				if (yToDrawNow > boundsY2)
 					continue;
-				GL11.glVertex2d(xToDrawNow, yToDrawNow);
+				drewAtThisDegree = true;
+				pointsInCurrentCurve.add(new Point(xToDrawNow, yToDrawNow));
 				break;
 			}
+			if (!drewAtThisDegree) {
+				if (pointsInCurrentCurve.size() > 0) {
+					GL11.glBegin(GL11.GL_LINE_STRIP);
+					for (Point point : pointsInCurrentCurve)
+						GL11.glVertex2d(point.x, point.y);
+					GL11.glEnd();
+				}
+				pointsInCurrentCurve.clear();
+			}
 		}
-		GL11.glEnd();
-
+		if (pointsInCurrentCurve.size() > 0) {
+			GL11.glBegin(GL11.GL_LINE_STRIP);
+			for (Point point : pointsInCurrentCurve)
+				GL11.glVertex2d(point.x, point.y);
+			GL11.glEnd();
+		}
+		pointsInCurrentCurve.clear();
 	}
 
-	public static void drawCircleWithinBounds(Color color, double radius, double centerX, double centerY,
-
-			double boundsX1, double boundsY1, double boundsX2, double boundsY2) {
-		GL11.glLineWidth(10f);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glColor4f(color.r, color.g, color.b, color.a);
-		GL11.glBegin(GL11.GL_LINE_LOOP);
-		for (int i = 0; i < 360; i++) {
-			double degInRad = Math.toRadians(i);
-
-			double xToDrawNow = Math.cos(degInRad) * radius + centerX;
-			if (xToDrawNow < boundsX1)
-				continue;
-			if (xToDrawNow > boundsX2)
-				continue;
-
-			double yToDrawNow = Math.sin(degInRad) * radius + centerY;
-			if (yToDrawNow < boundsY1)
-				continue;
-			if (yToDrawNow > boundsY2)
-				continue;
-
-			GL11.glVertex2d(xToDrawNow, yToDrawNow);
-		}
-		GL11.glEnd();
-	}
+	// public static void drawCircleWithinBounds(Color color, double radius, double
+	// centerX, double centerY,
+	//
+	// double boundsX1, double boundsY1, double boundsX2, double boundsY2) {
+	// GL11.glLineWidth(10f);
+	// GL11.glDisable(GL11.GL_TEXTURE_2D);
+	// GL11.glColor4f(color.r, color.g, color.b, color.a);
+	// GL11.glBegin(GL11.GL_LINE_LOOP);
+	// for (int i = 0; i < 360; i++) {
+	// double degInRad = Math.toRadians(i);
+	//
+	// double xToDrawNow = Math.cos(degInRad) * radius + centerX;
+	// if (xToDrawNow < boundsX1)
+	// continue;
+	// if (xToDrawNow > boundsX2)
+	// continue;
+	//
+	// double yToDrawNow = Math.sin(degInRad) * radius + centerY;
+	// if (yToDrawNow < boundsY1)
+	// continue;
+	// if (yToDrawNow > boundsY2)
+	// continue;
+	//
+	// GL11.glVertex2d(xToDrawNow, yToDrawNow);
+	// }
+	// GL11.glEnd();
+	// }
 }

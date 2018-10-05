@@ -40,7 +40,7 @@ public class Sound {
 		float circleCenterX = sourceSquare.getCenterX();
 		float circleCenterY = sourceSquare.getCenterY();
 		CircleUtils.drawCircle(Color.BLACK, 64, circleCenterX, circleCenterY);
-		int circlesToDraw = (int) loudness * 2;
+		int circlesToDraw = (int) loudness * 3;
 
 		for (Square destinationSquare : destinationSquares) {
 			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, destinationSquare.xInGridPixels,
