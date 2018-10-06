@@ -1,5 +1,8 @@
 package com.marklynch.utils;
 
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
+
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
@@ -11,6 +14,9 @@ import com.marklynch.utils.Utils.Point;
 public class CircleUtils {
 
 	public static void drawCircle(Color color, double radius, double x, double y) {
+		glActiveTexture(GL_TEXTURE0);
+		Game.level.gameCursor.imageTexture2.bind();
+		Game.activeBatch.setColor(1, 1, 1, 1);
 		GL11.glLineWidth(10f);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4f(color.r, color.g, color.b, color.a);
@@ -24,6 +30,10 @@ public class CircleUtils {
 
 	public static void drawCircleWithinBounds(Color color, double radius, double centerX, double centerY,
 			ArrayList<Square> squares) {
+
+		glActiveTexture(GL_TEXTURE0);
+		Game.level.gameCursor.imageTexture2.bind();
+		Game.activeBatch.setColor(1, 1, 1, 1);
 
 		GL11.glLineWidth(10f);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -74,6 +84,9 @@ public class CircleUtils {
 	// centerX, double centerY,
 	//
 	// double boundsX1, double boundsY1, double boundsX2, double boundsY2) {
+	// glActiveTexture(GL_TEXTURE0);
+	// Game.level.gameCursor.imageTexture2.bind();
+	// Game.activeBatch.setColor(1, 1, 1, 1);
 	// GL11.glLineWidth(10f);
 	// GL11.glDisable(GL11.GL_TEXTURE_2D);
 	// GL11.glColor4f(color.r, color.g, color.b, color.a);

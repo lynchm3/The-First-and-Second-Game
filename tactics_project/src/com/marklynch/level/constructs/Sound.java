@@ -10,7 +10,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.utils.CircleUtils;
 import com.marklynch.utils.Color;
-import com.marklynch.utils.TextureUtils;
 
 public class Sound {
 	public GameObject sourcePerformer;
@@ -42,11 +41,13 @@ public class Sound {
 		CircleUtils.drawCircle(Color.BLACK, 64, circleCenterX, circleCenterY);
 		int circlesToDraw = (int) loudness * 3;
 
-		for (Square destinationSquare : destinationSquares) {
-			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, destinationSquare.xInGridPixels,
-					destinationSquare.yInGridPixels, destinationSquare.xInGridPixels + Game.SQUARE_WIDTH,
-					destinationSquare.yInGridPixels + Game.SQUARE_HEIGHT);
-		}
+		// for (Square destinationSquare : destinationSquares) {
+		// TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
+		// destinationSquare.xInGridPixels,
+		// destinationSquare.yInGridPixels, destinationSquare.xInGridPixels +
+		// Game.SQUARE_WIDTH,
+		// destinationSquare.yInGridPixels + Game.SQUARE_HEIGHT);
+		// }
 
 		for (int i = 0; i < circlesToDraw; i++) {
 			int radius = (int) (i * Game.HALF_SQUARE_WIDTH);
