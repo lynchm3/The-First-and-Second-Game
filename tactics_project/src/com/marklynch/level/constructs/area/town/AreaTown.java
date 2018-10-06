@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.BodyOfWater;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Path;
@@ -83,6 +84,20 @@ public class AreaTown {
 		Templates.SHOP_COUNTER.makeCopy(Game.level.squares[posX + 7][posY + 1], null);
 		trader.shopRoom = shopAtriums.get(0);
 		trader.shopSign = joesShopSign;
+
+		// Boxws beside Joe's shop
+		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 18][posY + 0], false, null);
+		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 18][posY + 1], false, null);
+		Templates.SHOVEL.makeCopy(Level.squares[posX + 18][posY + 2], null);
+		// Templates.CRATE.makeCopy("Crate", Level.squares[posX + 18][posY + 2], false,
+		// null);
+		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 18][posY + 3], false, null);
+		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 18][posY + 4], false, null);
+		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 19][posY + 0], false, null);
+		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 19][posY + 1], false, null);
+		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 19][posY + 2], false, null);
+		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 19][posY + 3], false, null);
+		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 20][posY + 2], false, null);
 
 		// Doctor's Practice
 		Doctor doctor = Templates.DOCTOR.makeCopy("Doctor Mike", Game.level.squares[posX + 7 + 35][posY + 1 + 3],
