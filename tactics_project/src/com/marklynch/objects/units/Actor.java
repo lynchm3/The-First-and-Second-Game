@@ -529,6 +529,12 @@ public class Actor extends GameObject {
 
 	public int actorPositionXInPixels;
 	public int actorPositionYInPixels;
+	public float boundsX1;
+	public float boundsY1;
+	public float boundsX2;
+	public float boundsY2;
+	public float scaleX;
+	public float scaleY;
 
 	@Override
 	public void draw1() {
@@ -553,10 +559,10 @@ public class Actor extends GameObject {
 		actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
-		float boundsX1 = actorPositionXInPixels;
-		float boundsY1 = actorPositionYInPixels;
-		float boundsX2 = actorPositionXInPixels + width;
-		float boundsY2 = actorPositionYInPixels + height;
+		boundsX1 = actorPositionXInPixels;
+		boundsY1 = actorPositionYInPixels;
+		boundsX2 = actorPositionXInPixels + width;
+		boundsY2 = actorPositionYInPixels + height;
 
 		if (primaryAnimation != null) {
 			actorPositionXInPixels += primaryAnimation.offsetX;
@@ -582,8 +588,8 @@ public class Actor extends GameObject {
 		if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
 			alpha = 0.5f;
 
-		float scaleX = 1;
-		float scaleY = 1;
+		scaleX = 1;
+		scaleY = 1;
 		if (primaryAnimation != null) {
 			scaleX = primaryAnimation.scaleX;
 			scaleY = primaryAnimation.scaleY;
@@ -615,11 +621,14 @@ public class Actor extends GameObject {
 			if (this.squareGameObjectIsOn.structureSquareIsIn != null)
 				color = StructureRoom.roomColor;
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
-					flash || this == Game.gameObjectMouseIsOver, scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2,
-					boundsY2, color, true, true, this.backwards, false);
+					flash || this == Game.gameObjectMouseIsOver || inSoundPreview, scaleX, scaleY, 0f, boundsX1,
+					boundsY1, boundsX2, boundsY2, color, true, true, this.backwards, false);
+			inSoundPreview = false;
 		}
 
 	}
+
+	public boolean inSoundPreview;
 
 	public void drawActor(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY, float rotationRad,
 			float boundsX1, float boundsY1, float boundsX2, float boundsY2, Color color, boolean drawClothes,

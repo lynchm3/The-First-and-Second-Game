@@ -7,6 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.utils.CircleUtils;
 import com.marklynch.utils.Color;
@@ -41,14 +42,6 @@ public class Sound {
 		CircleUtils.drawCircle(Color.BLACK, 64, circleCenterX, circleCenterY);
 		int circlesToDraw = (int) loudness * 3;
 
-		// for (Square destinationSquare : destinationSquares) {
-		// TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
-		// destinationSquare.xInGridPixels,
-		// destinationSquare.yInGridPixels, destinationSquare.xInGridPixels +
-		// Game.SQUARE_WIDTH,
-		// destinationSquare.yInGridPixels + Game.SQUARE_HEIGHT);
-		// }
-
 		for (int i = 0; i < circlesToDraw; i++) {
 			int radius = (int) (i * Game.HALF_SQUARE_WIDTH);
 
@@ -56,6 +49,28 @@ public class Sound {
 			// optimisation 2: only try to draw square on circle when u know it'll be a
 			// possiblity they overlap
 			CircleUtils.drawCircleWithinBounds(Color.BLACK, radius, circleCenterX, circleCenterY, destinationSquares);
+		}
+
+		for (Square destinationSquare : destinationSquares) {
+			// TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
+			// destinationSquare.xInGridPixels,
+			// destinationSquare.yInGridPixels, destinationSquare.xInGridPixels +
+			// Game.SQUARE_WIDTH,
+			// destinationSquare.yInGridPixels + Game.SQUARE_HEIGHT);
+			if (destinationSquare.inventory.actor != null) {
+				Actor actor = destinationSquare.inventory.actor;
+				if (actor.hiding || actor == Game.level.player)
+					continue;
+
+				if (!Game.fullVisiblity) {
+					if (destinationSquare.visibleToPlayer == false)
+						continue;
+				}
+
+				destinationSquare.inventory.actor.drawActor(actor.actorPositionXInPixels, actor.actorPositionYInPixels,
+						0.5f, true, actor.scaleX, actor.scaleY, 0f, actor.boundsX1, actor.boundsY1, actor.boundsX2,
+						actor.boundsY2, Color.RED, true, true, actor.backwards, false);
+			}
 		}
 	}
 
