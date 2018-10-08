@@ -146,6 +146,7 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(douse);
 		ignite.linkedSkillTreeNodes.add(douse);
 		douse.linkedSkillTreeNodes.add(ignite);
+		respite.powersUnlocked.add(new PowerDouse(null));
 
 		// Fire Damage +1
 		// SkillTreeNode fire1 = new SkillTreeNode(512, 512 + 512);

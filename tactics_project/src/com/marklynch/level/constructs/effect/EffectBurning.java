@@ -74,30 +74,6 @@ public class EffectBurning extends Effect {
 					}
 				}
 			}
-
-			// If in inventory
-			// InventorySquare inventorySquareTargetIsOn =
-			// target.inventorySquareGameObjectIsOn;
-			// if (inventorySquareTargetIsOn != null) {
-			//
-			// ArrayList<InventorySquare> adjacentSquares =
-			// inventorySquareTargetIsOn.getAllInventorySquaresAtDistance(1);
-			// for (InventorySquare adjacentSquare : adjacentSquares) {
-			// if (adjacentSquare.gameObject != null
-			// && Math.random() * 100 >
-			// adjacentSquare.gameObject.getEffectiveFireResistance()) {
-			// adjacentSquare.gameObject.removeWetEffect();
-			// adjacentSquare.gameObject.addEffect(this.makeCopy(source,
-			// adjacentSquare.gameObject));
-			// if (inventorySquareTargetIsOn.inventoryThisBelongsTo.parent ==
-			// Game.level.player)
-			// Game.level.logOnScreen(
-			// new ActivityLog(new Object[] { this, " spread to ",
-			// adjacentSquare.gameObject }));
-			// }
-			//
-			// }
-			// }
 		}
 
 		if (target instanceof FlammableLightSource) {
