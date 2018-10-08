@@ -48,7 +48,7 @@ public class AnimationMovementFade1 extends Animation {
 		if (gameObject instanceof Actor) {
 			Actor actor = (Actor) gameObject;
 
-			int actorPositionXInPixels = (int) (this.square.rightInGridPixels * actor.drawOffsetRatioX);
+			int actorPositionXInPixels = (int) (this.square.xInGridPixels + Game.SQUARE_WIDTH * actor.drawOffsetRatioX);
 			int actorPositionYInPixels = (int) (this.square.yInGridPixels
 					+ Game.SQUARE_HEIGHT * actor.drawOffsetRatioY);
 			actor.drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha, true, 1f, 1f, 0f, Integer.MIN_VALUE,
@@ -56,7 +56,7 @@ public class AnimationMovementFade1 extends Animation {
 					actor.backwards, false);
 		} else {
 
-			int actorPositionXInPixels = (int) (square.rightInGridPixels * gameObject.drawOffsetRatioX);
+			int actorPositionXInPixels = (int) (square.xInGridPixels + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
 			int actorPositionYInPixels = (int) (square.yInGridPixels
 					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
 			TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,

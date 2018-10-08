@@ -61,8 +61,8 @@ public class Mirror extends GameObject {
 				return;
 		}
 
-		boundsX1 = (int) (this.squareGameObjectIsOn.rightInGridPixels * drawOffsetRatioX);
-		boundsY1 = (int) (this.squareGameObjectIsOn.bottomInGridPixels * drawOffsetRatioY);
+		boundsX1 = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
+		boundsY1 = (int) (this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 		boundsX2 = (int) (boundsX1 + width);
 		boundsY2 = (int) (boundsY1 + height);
 
@@ -176,7 +176,7 @@ public class Mirror extends GameObject {
 	public void drawSquare(Square square, int offsetX, int offsetY) {
 
 		Texture textureToDraw = square.imageTexture;
-		float squarePositionX = this.squareGameObjectIsOn.rightInGridPixels * offsetX;
+		float squarePositionX = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * offsetX;
 		float squarePositionY = this.squareGameObjectIsOn.yInGridPixels - Game.SQUARE_HEIGHT * offsetY;
 
 		float alpha = 1f;
@@ -198,7 +198,7 @@ public class Mirror extends GameObject {
 		if (1 == 1)
 			return;
 
-		float actorPositionXInPixels = this.squareGameObjectIsOn.rightInGridPixels * offsetX
+		float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * offsetX
 				+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX;
 		actorPositionXInPixels += gameObject.primaryAnimation.offsetX;
 
@@ -232,7 +232,7 @@ public class Mirror extends GameObject {
 
 	public void drawActor(Actor actor, int offsetX, int offsetY) {
 
-		float actorPositionXInPixels = this.squareGameObjectIsOn.rightInGridPixels * offsetX
+		float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * offsetX
 				+ Game.SQUARE_WIDTH * actor.drawOffsetRatioX;
 		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
 				+ Game.SQUARE_HEIGHT * actor.drawOffsetRatioY - Game.SQUARE_HEIGHT * offsetY;

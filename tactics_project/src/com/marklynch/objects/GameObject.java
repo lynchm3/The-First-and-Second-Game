@@ -492,28 +492,33 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				// arrowWidth = -arrowWidth;
 
 				// QuadUtils.drawQuad(Color.RED,
-				// this.squareGameObjectIsOn.rightInGridPixels *
+				// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
 				// arrow.drawOffsetRatioX,
-				// this.squareGameObjectIsOn.bottomInGridPixels
+				// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
 				// * arrow.drawOffsetRatioY,
-				// this.squareGameObjectIsOn.rightInGridPixels *
+				// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
 				// arrow.drawOffsetRatioX + 10,
-				// this.squareGameObjectIsOn.bottomInGridPixels
+				// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
 				// * arrow.drawOffsetRatioY + 10);
 
 				if (arrow.backwards) {
 					TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX + arrowWidth,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY + arrow.height,
+
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+									+ arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+									+ arrow.height,
 							color);
 				} else {
 					TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX - arrowWidth,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY + arrow.height,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+									- arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+									+ arrow.height,
 							color);
 
 				}
@@ -540,29 +545,33 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				// arrowWidth = -arrowWidth;
 
 				// QuadUtils.drawQuad(Color.RED,
-				// this.squareGameObjectIsOn.rightInGridPixels *
+				// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
 				// arrow.drawOffsetRatioX,
-				// this.squareGameObjectIsOn.bottomInGridPixels
+				// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
 				// * arrow.drawOffsetRatioY,
-				// this.squareGameObjectIsOn.rightInGridPixels *
+				// this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH *
 				// arrow.drawOffsetRatioX + 10,
-				// this.squareGameObjectIsOn.bottomInGridPixels
+				// this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT
 				// * arrow.drawOffsetRatioY + 10);
 
 				if (arrow.backwards) {
 					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX + arrowWidth,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY + arrow.height,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+									+ arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+									+ arrow.height,
 							color);
 
 				} else {
 					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX - arrowWidth,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY + arrow.height,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+									- arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
+							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
+							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+									+ arrow.height,
 							color);
 
 				}
@@ -2308,8 +2317,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// CRIT large red, HIGH DMG red, NORMAL DMG white, resisted DMG grey,
 		// HEAL green
 
-		int x = (int) (squareGameObjectIsOn.rightInGridPixels * drawOffsetRatioX);
-		int y = (int) (squareGameObjectIsOn.bottomInGridPixels * drawOffsetRatioY);
+		int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
+		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
 		this.addSecondaryAnimation(
 				new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f, statType, color));

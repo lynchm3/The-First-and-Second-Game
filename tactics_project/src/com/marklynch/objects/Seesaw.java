@@ -50,7 +50,7 @@ public class Seesaw extends GameObject implements SwitchListener {
 	@Override
 	public void draw2() {
 		super.draw2();
-		QuadUtils.drawQuad(Color.WHITE, square1.rightInGridPixels, square1.getCenterY() - 5,
+		QuadUtils.drawQuad(Color.WHITE, square1.xInGridPixels + Game.SQUARE_WIDTH, square1.getCenterY() - 5,
 				square2.xInGridPixels, square2.getCenterY() + 5);
 
 		if (pressurePlate1.up == true && pressurePlate2.up == true) {

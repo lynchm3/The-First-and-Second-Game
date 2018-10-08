@@ -56,7 +56,7 @@ public class Sound {
 			// destinationSquare.xInGridPixels,
 			// destinationSquare.yInGridPixels, destinationSquare.xInGridPixels +
 			// Game.SQUARE_WIDTH,
-			// destinationSquare.bottomInGridPixels);
+			// destinationSquare.yInGridPixels + Game.SQUARE_HEIGHT);
 			if (destinationSquare.inventory.actor != null) {
 				Actor actor = destinationSquare.inventory.actor;
 				if (actor.hiding || actor == Game.level.player)

@@ -139,8 +139,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public float xInGridPixels;
 	public float yInGridPixels;
-	public float rightInGridPixels;
-	public float bottomInGridPixels;
 
 	public ArrayList<Square> neighbors;
 	// end path finding
@@ -161,8 +159,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		name = this.xInGrid + "," + this.yInGrid;
 		this.xInGridPixels = xInGrid * Game.SQUARE_WIDTH;
 		this.yInGridPixels = yInGrid * Game.SQUARE_HEIGHT;
-		this.rightInGridPixels = xInGridPixels + Game.SQUARE_WIDTH;
-		this.bottomInGridPixels = yInGridPixels + Game.SQUARE_HEIGHT;
 
 		this.imageTexturePath = imagePath;
 		this.travelCost = travelCost;

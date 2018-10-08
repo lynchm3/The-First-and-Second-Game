@@ -558,7 +558,7 @@ public class Editor {
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 
 			float x1 = this.selectedGameObject.squareGameObjectIsOn.xInGridPixels / 2;
-			float y1 = this.selectedGameObject.squareGameObjectIsOn.bottomInGridPixels / 2;
+			float y1 = this.selectedGameObject.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT / 2;
 			float x2 = Game.squareMouseIsOver.xInGridPixels / 2;
 			float y2 = Game.squareMouseIsOver.yInGridPixels / 2;
 

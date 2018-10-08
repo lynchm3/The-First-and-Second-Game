@@ -301,11 +301,11 @@ public class Nodes {
 
 		for (Node node : nodes) {
 			QuadUtils.drawQuad(color, node.square.xInGridPixels, node.square.yInGridPixels,
-					node.square.rightInGridPixels, node.square.bottomInGridPixels);
+					node.square.xInGridPixels + Game.SQUARE_WIDTH, node.square.yInGridPixels + Game.SQUARE_HEIGHT);
 			for (Node neighbor : node.neighbors) {
 				LineUtils.drawLine(color, node.square.xInGridPixels, node.square.yInGridPixels,
-						neighbor.square.rightInGridPixels,
-						neighbor.square.bottomInGridPixels, 10);
+						neighbor.square.xInGridPixels + Game.SQUARE_WIDTH,
+						neighbor.square.yInGridPixels + Game.SQUARE_HEIGHT, 10);
 			}
 		}
 	}

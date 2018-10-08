@@ -129,8 +129,8 @@ public class Player extends Human {
 				if (orbs >= 1) {
 					Orb orb = Templates.SMALL_ORB.makeCopy(null, null, 1);
 
-					float x = square.rightInGridPixels * orb.drawOffsetRatioX;
-					float y = square.bottomInGridPixels * orb.drawOffsetRatioY;
+					float x = square.xInGridPixels + Game.SQUARE_WIDTH * orb.drawOffsetRatioX;
+					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
 
 					Game.level.player.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
 							(float) (Math.random() * 0.25f + 0.75f), -0f, -0f));
@@ -141,8 +141,8 @@ public class Player extends Human {
 				if (orbs >= 5) {
 					Orb orb = Templates.MEDIUM_ORB.makeCopy(null, null, 5);
 
-					float x = square.rightInGridPixels * orb.drawOffsetRatioX;
-					float y = square.bottomInGridPixels * orb.drawOffsetRatioY;
+					float x = square.xInGridPixels + Game.SQUARE_WIDTH * orb.drawOffsetRatioX;
+					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
 					Game.level.player.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
 							(float) (Math.random() * 0.25f + 0.75f), 0f, 0f));
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
@@ -151,8 +151,8 @@ public class Player extends Human {
 				if (orbs >= 10) {
 					Orb orb = Templates.LARGE_ORB.makeCopy(null, null, 10);
 
-					float x = square.rightInGridPixels * orb.drawOffsetRatioX;
-					float y = square.bottomInGridPixels * orb.drawOffsetRatioY;
+					float x = square.xInGridPixels + Game.SQUARE_WIDTH * orb.drawOffsetRatioX;
+					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
 					Game.level.player.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
 							(float) (Math.random() * 0.25f + 0.75f), 0f, 0f));
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
