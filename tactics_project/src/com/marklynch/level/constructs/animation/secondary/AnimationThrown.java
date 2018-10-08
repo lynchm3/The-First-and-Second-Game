@@ -242,7 +242,7 @@ public class AnimationThrown extends Animation {
 			Level.player.inventory.groundDisplay.refreshGameObjects();
 
 		// Carry out the dmg, attack, logging...
-		if (target != null && target.attackable) {
+		if (target != null && target.attackable && !(target instanceof Searchable)) {
 			float damage = target.changeHealth(performer, action, weapon);
 
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
@@ -251,13 +251,11 @@ public class AnimationThrown extends Animation {
 							" for " + damage + " damage" }));
 			}
 
-			// if (weapon instanceof ContainerForLiquids) {
-			// smashContainer(performer, target, (ContainerForLiquids) weapon);
-			// }
-
-			if (target != null && target instanceof Actor && target.remainingHealth > 0)
+			if (target instanceof Actor && target.remainingHealth > 0)
 				target.setPrimaryAnimation(
 						new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
+		} else if (target != null && target instanceof Searchable) {
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw ", weapon, " in to ", target }));
 		}
 	}
 

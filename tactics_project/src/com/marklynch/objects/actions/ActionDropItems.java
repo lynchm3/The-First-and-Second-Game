@@ -136,7 +136,7 @@ public class ActionDropItems extends VariableQtyAction {
 	@Override
 	public boolean check() {
 
-		if (objects == null || objects.length == 0 || objects[0] == null)
+		if (objects == null || objects.length == 0 || objects[0] == null || square == null)
 			return false;
 
 		if (gameObjectPerformer instanceof Actor) {
@@ -153,10 +153,6 @@ public class ActionDropItems extends VariableQtyAction {
 
 		}
 
-		System.out.println("DROP.check()");
-		System.out.println("DROP.check() square = " + square);
-		System.out.println("DROP.check() square.inventory = " + square.inventory);
-		System.out.println("DROP.check() objects[0] = " + objects[0]);
 		if (!square.inventory.canShareSquare && !objects[0].canShareSquare) {
 			actionName = ACTION_NAME + " " + objects[0].name + " (no space)";
 			return false;

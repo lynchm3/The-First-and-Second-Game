@@ -140,10 +140,6 @@ public class PinWindow implements Draggable {
 				PinWindow.this.minimised = !PinWindow.this.minimised;
 			}
 		});
-
-		// if (objects.length == 1)
-		// this.width = Game.font.getWidth((CharSequence) objects[0]) + 10;
-		// this.height = 40;
 	}
 
 	public void drawLine() {
