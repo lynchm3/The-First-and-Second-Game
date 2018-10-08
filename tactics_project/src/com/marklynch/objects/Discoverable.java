@@ -46,8 +46,10 @@ public class Discoverable extends GameObject {
 		discovered = true;
 		imageTexture = postDiscoverTexture;
 
-		Level.gameObjectsToFlash.add(this);
-		Level.flashGameObjectCounters.put(this, 0);
+		if (squareGameObjectIsOn != null) {
+			Level.gameObjectsToFlash.add(this);
+			Level.flashGameObjectCounters.put(this, 0);
+		}
 	}
 
 	@Override

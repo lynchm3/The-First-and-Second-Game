@@ -10,6 +10,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
@@ -787,6 +788,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
+
+			if (parent == Level.player && gameObject instanceof Discoverable) {
+				((Discoverable) gameObject).discovered();
+			}
 
 			updateStacks();
 			matchStacksToSquares();
