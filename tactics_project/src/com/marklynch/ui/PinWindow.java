@@ -160,37 +160,45 @@ public class PinWindow implements Draggable {
 		if (gameObject == null && square == null)
 			return;
 
-		// LINE
 		if (drawLine) {
+			// Draw line from window to object
 			float lineX1 = this.drawPositionX + this.width / 2;
 			float lineY1 = drawPositionY + height / 2;
 			float objectX = 0;
 			float objectY = 0;
 
+			float lineX2 = 0;
+			float lineY2 = 0;
+
 			if (gameObject != null && gameObject.squareGameObjectIsOn != null
 					&& (gameObject.squareGameObjectIsOn.visibleToPlayer || gameObject.persistsWhenCantBeSeen)) {
 
-				objectX = (gameObject.squareGameObjectIsOn.xInGridPixels);
+				objectX = (gameObject.squareGameObjectIsOn.xInGridPixels)
+						+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX;
 				if (gameObject.getPrimaryAnimation() != null)
 					objectX += gameObject.getPrimaryAnimation().offsetX;
 
-				objectY = (gameObject.squareGameObjectIsOn.yInGridPixels);
+				objectY = (gameObject.squareGameObjectIsOn.yInGridPixels)
+						+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY;
 				if (gameObject.getPrimaryAnimation() != null)
 					objectY += gameObject.getPrimaryAnimation().offsetY;
+
+				lineX2 = (Game.windowWidth / 2) + (Game.zoom
+						* (objectX - Game.windowWidth / 2 + Game.getDragXWithOffset() + gameObject.halfWidth));
+				lineY2 = (Game.windowHeight / 2) + (Game.zoom
+						* (objectY - Game.windowHeight / 2 + Game.getDragYWithOffset() + gameObject.halfHeight));
 			} else if (square != null) {
 
 				objectX = square.xInGridPixels;
 				objectY = square.yInGridPixels;
+				lineX2 = (Game.windowWidth / 2) + (Game.zoom
+						* (objectX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
+				lineY2 = (Game.windowHeight / 2) + (Game.zoom
+						* (objectY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
 
 			} else {
 				return;
 			}
-
-			// Draw line from window to object
-			float lineX2 = (Game.windowWidth / 2) + (Game.zoom
-					* (objectX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
-			float lineY2 = (Game.windowHeight / 2) + (Game.zoom
-					* (objectY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
 			LineUtils.drawLine(Color.BLACK, lineX1, lineY1, lineX2, lineY2, 5);
 		}
 	}

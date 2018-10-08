@@ -7,7 +7,7 @@ import com.marklynch.ui.PinWindow;
 
 public class ActionPin extends Action {
 
-	public static final String ACTION_NAME = "Pin";
+	public static final String ACTION_NAME = "Info";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (duplicate)";
 
 	public Actor performer;
@@ -27,7 +27,8 @@ public class ActionPin extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
