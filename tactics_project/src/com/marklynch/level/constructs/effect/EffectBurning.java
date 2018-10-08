@@ -36,6 +36,8 @@ public class EffectBurning extends Effect {
 		// 100f));
 		if (target instanceof FlammableLightSource) {
 			((FlammableLightSource) target).setLighting(true);
+			turnsRemaining = 0;
+			return;
 		} else {
 			float damage = target.changeHealth(this, null, this);
 			if (Game.level.shouldLog(target))
@@ -76,11 +78,7 @@ public class EffectBurning extends Effect {
 			}
 		}
 
-		if (target instanceof FlammableLightSource) {
-			((FlammableLightSource) target).setLighting(true);
-		} else {
-			turnsRemaining--;
-		}
+		turnsRemaining--;
 
 	}
 

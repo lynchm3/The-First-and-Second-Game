@@ -183,8 +183,8 @@ public class TemplatesTools {
 		Templates.LANTERN.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(1));
 		Templates.LANTERN.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(1));
 		Templates.LANTERN.setImageAndExtrapolateSize("lantern_lit.png");
-		Templates.LANTERN.imageTextureUnlit = getGlobalImage("lantern_lit.png", true);
-		Templates.LANTERN.imageTextureLit = getGlobalImage("lantern_unlit.png", true);
+		Templates.LANTERN.imageTextureLit = getGlobalImage("lantern_lit.png", true);
+		Templates.LANTERN.imageTextureUnlit = getGlobalImage("lantern_unlit.png", true);
 		Templates.LANTERN.totalHealth = Templates.LANTERN.remainingHealth = 14;
 		Templates.LANTERN.weight = 10f;
 		Templates.LANTERN.value = 43;
