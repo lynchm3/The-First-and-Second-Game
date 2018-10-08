@@ -161,7 +161,7 @@ public class PinWindow implements Draggable {
 		float objectY = 0;
 
 		if (gameObject != null && gameObject.squareGameObjectIsOn != null
-				&& gameObject.squareGameObjectIsOn.visibleToPlayer) {
+				&& (gameObject.squareGameObjectIsOn.visibleToPlayer || gameObject.persistsWhenCantBeSeen)) {
 
 			objectX = (gameObject.squareGameObjectIsOn.xInGridPixels);
 			if (gameObject.getPrimaryAnimation() != null)

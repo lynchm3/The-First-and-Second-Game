@@ -247,7 +247,7 @@ public class AnimationThrown extends Animation {
 
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
 				if (Game.level.shouldLog(target, performer))
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw ", weapon, " at " + target,
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw ", weapon, " at ", target,
 							" for " + damage + " damage" }));
 			}
 
