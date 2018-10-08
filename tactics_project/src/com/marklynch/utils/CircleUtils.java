@@ -46,9 +46,9 @@ public class CircleUtils {
 			boolean drewAtThisDegree = false;
 			for (Square square : squares) {
 				double boundsX1 = square.xInGridPixels;
-				double boundsX2 = square.xInGridPixels + Game.SQUARE_WIDTH;
+				double boundsX2 = square.rightInGridPixels;
 				double boundsY1 = square.yInGridPixels;
-				double boundsY2 = square.yInGridPixels + Game.SQUARE_HEIGHT;
+				double boundsY2 = square.bottomInGridPixels;
 				if (xToDrawNow < boundsX1)
 					continue;
 				if (xToDrawNow > boundsX2)

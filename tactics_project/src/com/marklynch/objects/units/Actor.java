@@ -555,7 +555,7 @@ public class Actor extends GameObject {
 				return;
 		}
 
-		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
+		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.rightInGridPixels * drawOffsetRatioX);
 		actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
@@ -669,24 +669,24 @@ public class Actor extends GameObject {
 
 			if (arrow.backwards) {
 				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+						this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
 								+ arrowWidth + primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+						this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
 								+ primaryAnimation.offsetY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+						this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
 								+ primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+						this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
 								+ arrow.height + primaryAnimation.offsetY,
 						color);
 			} else {
 				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+						this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
 								+ primaryAnimation.offsetX - arrowWidth,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+						this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
 								+ primaryAnimation.offsetY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+						this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
 								+ primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+						this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
 								+ arrow.height + primaryAnimation.offsetY,
 						color);
 
@@ -723,24 +723,24 @@ public class Actor extends GameObject {
 
 			if (arrow.backwards) {
 				TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+						this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
 								+ arrowWidth + primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+						this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
 								+ primaryAnimation.offsetY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+						this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
 								+ primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+						this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
 								+ arrow.height + primaryAnimation.offsetY,
 						color);
 			} else {
 				TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+						this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
 								- arrowWidth + primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+						this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
 								+ primaryAnimation.offsetY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+						this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
 								+ primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+						this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
 								+ arrow.height + primaryAnimation.offsetY,
 						color);
 

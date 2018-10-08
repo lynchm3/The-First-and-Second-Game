@@ -40,8 +40,8 @@ public class Fish extends WildAnimal {
 		super.update(delta);
 
 		if (squareGameObjectIsOn != null && delta % 3 == 0) {
-			int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
-			int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			int x = (int) (squareGameObjectIsOn.rightInGridPixels * drawOffsetRatioX);
+			int y = (int) (squareGameObjectIsOn.bottomInGridPixels * drawOffsetRatioY);
 			this.addSecondaryAnimation(new AnimationBubbles(this, x + width, y, 0.1f));
 		}
 	}

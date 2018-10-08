@@ -48,8 +48,8 @@ public class AnimationDrop extends Animation {
 					+ (Game.SQUARE_HEIGHT - projectileObject.height) / 2);
 		}
 
-		targetX = (int) (targetSquare.xInGridPixels + Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);
-		targetY = (int) (targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * projectileObject.drawOffsetRatioY);
+		targetX = (int) (targetSquare.rightInGridPixels * projectileObject.drawOffsetRatioX);
+		targetY = (int) (targetSquare.bottomInGridPixels * projectileObject.drawOffsetRatioY);
 
 		startOffsetX = offsetX = originX - targetX;
 		startOffsetY = offsetY = originY - targetY;
