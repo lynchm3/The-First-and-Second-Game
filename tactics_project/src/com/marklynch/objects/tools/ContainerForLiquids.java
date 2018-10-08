@@ -38,7 +38,7 @@ public class ContainerForLiquids extends Tool {
 		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
 		weapon.volume = volume;
-		if (weapon.liquid != null)
+		if (this.liquid != null)
 			weapon.liquid = liquid.makeCopy(null, owner, volume);
 		return weapon;
 	}

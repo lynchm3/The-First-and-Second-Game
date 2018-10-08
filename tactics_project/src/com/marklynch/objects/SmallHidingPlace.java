@@ -75,8 +75,11 @@ public class SmallHidingPlace extends Searchable {
 	@Override
 	public void update(int delta) {
 		if (group == null || group.size() == 0) {
-			if (Math.random() > 0.9f)
-				group = createBunGroup();
+			if (Math.random() > 0.9f) {
+				Group newGroup = createBunGroup();
+				if (newGroup != null)
+					group = createBunGroup();
+			}
 		}
 	}
 
@@ -89,6 +92,10 @@ public class SmallHidingPlace extends Searchable {
 	// }
 
 	public Group createBunGroup() {
+
+		if (squareGameObjectIsOn == null)
+			return null;
+
 		return new Group("Buns", Templates.RABBIT.makeCopy("Female Bun", this.squareGameObjectIsOn.getSquareAbove(),
 				Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
 				new GameObject[] { Templates.FUR.makeCopy(null, null) }, this.squareGameObjectIsOn.areaSquareIsIn),
