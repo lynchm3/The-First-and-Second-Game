@@ -516,7 +516,12 @@ public class Editor {
 		player.inventory.add(playersDungarees);
 		player.inventory.add(Templates.PINK_HARD_HAT.makeCopy(null, player));
 		player.inventory.add(Templates.COWBOY_HAT.makeCopy(null, player));
-		player.inventory.add(Templates.JAR.makeCopy(null, player));
+		player.inventory.add(Templates.JAR_OF_WATER.makeCopy(null, player));
+		player.inventory.add(Templates.JAR_OF_WATER.makeCopy(null, player));
+		player.inventory.add(Templates.JAR_OF_WATER.makeCopy(null, player));
+		player.inventory.add(Templates.JAR_OF_WATER.makeCopy(null, player));
+		player.inventory.add(Templates.JAR_OF_WATER.makeCopy(null, player));
+		player.inventory.add(Templates.JAR_OF_WATER.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
