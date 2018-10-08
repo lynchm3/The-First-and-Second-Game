@@ -7,6 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -206,6 +207,10 @@ public class PinWindow implements Draggable {
 					TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
 							drawPositionY + titleBarHeight, drawPositionX + gameObject.imageTexture.getWidth(),
 							drawPositionY + gameObject.imageTexture.getHeight());
+					for (Effect effect : gameObject.activeEffectsOnGameObject) {
+						TextUtils.printTextWithImages(drawPositionX + borderWidth, drawPositionY + titleBarHeight,
+								Integer.MAX_VALUE, false, null, Color.WHITE, effect);
+					}
 				}
 				if (actor != null) {
 					drawStats(actor);
