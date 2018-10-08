@@ -30,8 +30,9 @@ public class PinWindow implements Draggable {
 	public float height;
 
 	public boolean minimised = false;
+	public boolean drawLine = true;
 	public float drawPositionX, drawPositionY;
-	public LevelButton closeButton, minimiseButton, titleBarButton;
+	public LevelButton closeButton, minimiseButton, lineButton, titleBarButton;
 	public int titleBarHeight = 20;
 	public int borderWidth = 2;
 	public static Object[] unknownStats = new Object[] { "??" };
@@ -132,6 +133,15 @@ public class PinWindow implements Draggable {
 			}
 		});
 
+		lineButton = new LevelButton(drawPositionX + width - 60, drawPositionY, 20f, 20f, "end_turn_button.png",
+				"end_turn_button.png", "<->", true, true, Color.BLACK, Color.WHITE, "Turn on/off line");
+		lineButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				PinWindow.this.drawLine = !PinWindow.this.drawLine;
+			}
+		});
+
 		titleBarButton = new LevelButton(drawPositionX, drawPositionY, width, 20f, "end_turn_button.png",
 				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
 		titleBarButton.setClickListener(new ClickListener() {
@@ -151,37 +161,38 @@ public class PinWindow implements Draggable {
 			return;
 
 		// LINE
-		float lineX1 = this.drawPositionX + this.width / 2;
-		float lineY1 = drawPositionY + height / 2;
-		float objectX = 0;
-		float objectY = 0;
+		if (drawLine) {
+			float lineX1 = this.drawPositionX + this.width / 2;
+			float lineY1 = drawPositionY + height / 2;
+			float objectX = 0;
+			float objectY = 0;
 
-		if (gameObject != null && gameObject.squareGameObjectIsOn != null
-				&& (gameObject.squareGameObjectIsOn.visibleToPlayer || gameObject.persistsWhenCantBeSeen)) {
+			if (gameObject != null && gameObject.squareGameObjectIsOn != null
+					&& (gameObject.squareGameObjectIsOn.visibleToPlayer || gameObject.persistsWhenCantBeSeen)) {
 
-			objectX = (gameObject.squareGameObjectIsOn.xInGridPixels);
-			if (gameObject.getPrimaryAnimation() != null)
-				objectX += gameObject.getPrimaryAnimation().offsetX;
+				objectX = (gameObject.squareGameObjectIsOn.xInGridPixels);
+				if (gameObject.getPrimaryAnimation() != null)
+					objectX += gameObject.getPrimaryAnimation().offsetX;
 
-			objectY = (gameObject.squareGameObjectIsOn.yInGridPixels);
-			if (gameObject.getPrimaryAnimation() != null)
-				objectY += gameObject.getPrimaryAnimation().offsetY;
+				objectY = (gameObject.squareGameObjectIsOn.yInGridPixels);
+				if (gameObject.getPrimaryAnimation() != null)
+					objectY += gameObject.getPrimaryAnimation().offsetY;
+			} else if (square != null) {
 
-			// Draw line from window to subject
-		} else if (square != null) {
+				objectX = square.xInGridPixels;
+				objectY = square.yInGridPixels;
 
-			objectX = square.xInGridPixels;
-			objectY = square.yInGridPixels;
+			} else {
+				return;
+			}
 
-		} else {
-			return;
+			// Draw line from window to object
+			float lineX2 = (Game.windowWidth / 2) + (Game.zoom
+					* (objectX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
+			float lineY2 = (Game.windowHeight / 2) + (Game.zoom
+					* (objectY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
+			LineUtils.drawLine(Color.BLACK, lineX1, lineY1, lineX2, lineY2, 5);
 		}
-
-		float lineX2 = (Game.windowWidth / 2)
-				+ (Game.zoom * (objectX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
-		float lineY2 = (Game.windowHeight / 2)
-				+ (Game.zoom * (objectY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
-		LineUtils.drawLine(Color.BLACK, lineX1, lineY1, lineX2, lineY2, 5);
 	}
 
 	public void drawStaticUI() {
@@ -234,6 +245,7 @@ public class PinWindow implements Draggable {
 		// Title bar buttons
 		this.closeButton.draw();
 		this.minimiseButton.draw();
+		this.lineButton.draw();
 
 		// Borders (left,right,bottom)
 		if (!minimised) {
@@ -439,6 +451,10 @@ public class PinWindow implements Draggable {
 		return minimiseButton.calculateIfPointInBoundsOfButton(mouseX, mouseY);
 	}
 
+	public boolean mouseOverLineButton(float mouseX, float mouseY) {
+		return lineButton.calculateIfPointInBoundsOfButton(mouseX, mouseY);
+	}
+
 	public boolean mouseOverInvisibleMinimiseButton(float mouseX, float mouseY) {
 		return titleBarButton.calculateIfPointInBoundsOfButton(mouseX, mouseY);
 	}
@@ -453,25 +469,31 @@ public class PinWindow implements Draggable {
 		this.closeButton.y -= dragY;
 		this.minimiseButton.x += dragX;
 		this.minimiseButton.y -= dragY;
+		this.lineButton.x += dragX;
+		this.lineButton.y -= dragY;
 
 		if (drawPositionX < 0) {
 			drawPositionX = titleBarButton.x = 0;
 			this.closeButton.x = drawPositionX + width - 20;
 			this.minimiseButton.x = drawPositionX + width - 40;
+			this.lineButton.x = drawPositionX + width - 60;
 		} else if (drawPositionX > Game.windowWidth - 20) {
 			drawPositionX = titleBarButton.x = Game.windowWidth - 20;
 			this.closeButton.x = drawPositionX + width - 20;
 			this.minimiseButton.x = drawPositionX + width - 40;
+			this.lineButton.x = drawPositionX + width - 60;
 		}
 
 		if (drawPositionY < 0) {
 			drawPositionY = titleBarButton.y = 0;
 			this.closeButton.y = drawPositionY;
 			this.minimiseButton.y = drawPositionY;
+			this.lineButton.y = drawPositionY;
 		} else if (drawPositionY > Game.windowHeight - 20) {
 			drawPositionY = titleBarButton.y = Game.windowHeight - 20;
 			this.closeButton.y = drawPositionY;
 			this.minimiseButton.y = drawPositionY;
+			this.lineButton.y = drawPositionY;
 		}
 
 	}

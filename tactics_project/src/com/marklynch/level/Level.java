@@ -1926,6 +1926,8 @@ public class Level {
 				return pinWindows.get(i).closeButton;
 			if (pinWindows.get(i).mouseOverMinimiseButton(mouseX, Game.windowHeight - mouseY))
 				return pinWindows.get(i).minimiseButton;
+			if (pinWindows.get(i).mouseOverLineButton(mouseX, Game.windowHeight - mouseY))
+				return pinWindows.get(i).lineButton;
 			if (pinWindows.get(i).mouseOverInvisibleMinimiseButton(mouseX, Game.windowHeight - mouseY))
 				return pinWindows.get(i).titleBarButton;
 			if (pinWindows.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
