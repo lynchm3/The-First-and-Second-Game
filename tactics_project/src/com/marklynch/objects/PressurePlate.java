@@ -19,6 +19,7 @@ public class PressurePlate extends Switch implements UpdatesWhenSquareContentsCh
 		isFloorObject = true;
 		attackable = false;
 		orderingOnGound = 30;
+		type = "Pressure Plate";
 	}
 
 	@Override

@@ -18,6 +18,7 @@ public class Fence extends Wall {
 		canShareSquare = false;
 
 		persistsWhenCantBeSeen = true;
+		type = "Fence";
 
 	}
 

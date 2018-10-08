@@ -15,6 +15,7 @@ public class Armor extends GameObject {
 	public Armor() {
 
 		super();
+		type = "Armor";
 
 	}
 

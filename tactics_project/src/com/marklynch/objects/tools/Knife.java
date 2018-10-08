@@ -12,6 +12,7 @@ public class Knife extends Tool {
 
 	public Knife() {
 		super();
+		type = "Knife";
 	}
 
 	@Override

@@ -13,6 +13,7 @@ public class Key extends GameObject {
 
 	public Key() {
 		super();
+		type = "Key";
 
 	}
 

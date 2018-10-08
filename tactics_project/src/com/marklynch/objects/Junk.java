@@ -10,6 +10,7 @@ public class Junk extends GameObject {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public Junk() {
+		type = "Junk";
 
 	}
 

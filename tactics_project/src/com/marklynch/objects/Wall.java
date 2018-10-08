@@ -76,6 +76,7 @@ public class Wall extends GameObject {
 
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
+		type = "Wall";
 	}
 
 	@Override

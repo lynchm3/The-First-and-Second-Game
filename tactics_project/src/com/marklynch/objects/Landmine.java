@@ -26,6 +26,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 		attackable = true;
 		isFloorObject = true;
 		orderingOnGound = 40;
+		type = "Trap";
 	}
 
 	@Override

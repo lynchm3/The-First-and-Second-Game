@@ -17,6 +17,7 @@ public class MineCart extends GameObject {
 		canBePickedUp = false;
 		fitsInInventory = false;
 		orderingOnGound = 70;
+		type = "Mine Cart";
 	}
 
 	@Override

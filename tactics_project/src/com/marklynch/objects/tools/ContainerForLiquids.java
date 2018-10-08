@@ -23,6 +23,7 @@ public class ContainerForLiquids extends Tool {
 	public ContainerForLiquids() {
 
 		super();
+		type = "Container";
 
 	}
 

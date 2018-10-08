@@ -2567,6 +2567,7 @@ public class Actor extends GameObject {
 		actor.armImageTexture = armImageTexture;
 		actor.torsoImageTexture = torsoImageTexture;
 		actor.pelvisImageTexture = pelvisImageTexture;
+		actor.type = type;
 		if (aiRoutine != null)
 			actor.aiRoutine = aiRoutine.getInstance(actor);
 		actor.init(gold, mustHaves, mightHaves);

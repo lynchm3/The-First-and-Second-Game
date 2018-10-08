@@ -12,6 +12,7 @@ public class FlammableLightSource extends Tool {
 
 	public FlammableLightSource() {
 		super();
+		type = "Light Source";
 	}
 
 	@Override

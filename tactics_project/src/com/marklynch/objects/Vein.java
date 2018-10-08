@@ -15,6 +15,11 @@ public class Vein extends Wall {
 
 	public double dropChance;
 
+	public Vein() {
+		super();
+		type = "Vein";
+	}
+
 	// public boolean fullWall;
 	// public boolean fullRightWall;
 	// public boolean fullLeftWall;

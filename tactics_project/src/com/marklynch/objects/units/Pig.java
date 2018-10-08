@@ -26,6 +26,7 @@ public class Pig extends Animal {
 
 	public Pig() {
 		super();
+		type = "Pig";
 	}
 
 	@Override

@@ -32,6 +32,7 @@ public class Trader extends Human implements Comparator<GameObject> {
 
 	public Trader() {
 		super();
+		type = "Trader";
 	}
 
 	@Override
@@ -114,15 +115,15 @@ public class Trader extends Human implements Comparator<GameObject> {
 		actor.broom = Templates.BROOM.makeCopy(null, null);
 		actor.inventory.add(actor.broom);
 		actor.equip(actor.broom);
-		
+
 		actor.apron = Templates.APRON.makeCopy(null, null);
 		actor.inventory.add(actor.apron);
 		actor.bodyArmor = actor.apron;
-		
+
 		actor.pants = Templates.PANTS.makeCopy(null, null);
 		actor.inventory.add(actor.pants);
 		actor.legArmor = actor.pants;
-		
+
 		return actor;
 	}
 

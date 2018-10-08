@@ -39,6 +39,7 @@ public class MapMarker extends GameObject {
 
 		persistsWhenCantBeSeen = true;
 		attackable = false;
+		type = "Marker";
 	}
 
 	@Override

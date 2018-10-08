@@ -20,6 +20,7 @@ public class Human extends Actor {
 		hairImageTexture = ResourceUtils.getGlobalImage("hair.png", true);
 		canOpenDoors = true;
 		canEquipWeapons = true;
+		type = "Human";
 	}
 
 	@Override

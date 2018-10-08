@@ -19,6 +19,7 @@ public class Inspectable extends GameObject {
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		decorative = true;
+		type = "Inspectable";
 
 	}
 

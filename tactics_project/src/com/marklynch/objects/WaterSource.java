@@ -24,6 +24,7 @@ public class WaterSource extends GameObject {
 		canContainOtherObjects = true;
 
 		persistsWhenCantBeSeen = true;
+		type = "Water Source";
 
 	}
 

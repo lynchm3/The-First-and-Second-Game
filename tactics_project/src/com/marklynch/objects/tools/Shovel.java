@@ -12,6 +12,7 @@ public class Shovel extends Tool {
 
 	public Shovel() {
 		super();
+		type = "Shovel";
 	}
 
 	@Override

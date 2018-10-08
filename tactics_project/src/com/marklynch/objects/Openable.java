@@ -20,6 +20,7 @@ public abstract class Openable extends GameObject implements SwitchListener {
 
 	public Openable() {
 		super();
+		type = "Openable";
 
 	}
 

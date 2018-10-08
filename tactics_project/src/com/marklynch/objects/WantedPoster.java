@@ -24,6 +24,7 @@ public class WantedPoster extends Sign implements CrimeListener {
 
 	public WantedPoster() {
 		super();
+		// type = "Wanted Poster";
 
 	}
 

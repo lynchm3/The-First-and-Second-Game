@@ -106,6 +106,7 @@ public class WaterBody extends WaterSource {
 		attackable = false;
 		isFloorObject = true;
 		orderingOnGound = 50;
+		type = "Water";
 
 	}
 

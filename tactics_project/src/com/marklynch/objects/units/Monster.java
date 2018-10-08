@@ -10,6 +10,7 @@ public class Monster extends Actor {
 	public Monster() {
 		super();
 		thoughtsOnPlayer = -100;
+		type = "Monster";
 	}
 
 	@Override

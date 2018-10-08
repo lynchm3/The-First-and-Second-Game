@@ -20,6 +20,7 @@ public class Window extends GameObjectExploder {
 		canShareSquare = false;
 
 		persistsWhenCantBeSeen = true;
+		type = "Window";
 
 	}
 

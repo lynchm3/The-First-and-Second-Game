@@ -33,6 +33,7 @@ public class Switch extends GameObject {
 		fitsInInventory = false;
 
 		persistsWhenCantBeSeen = true;
+		type = "Switch";
 
 	}
 

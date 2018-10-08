@@ -26,6 +26,7 @@ public class Rail extends GameObject implements SwitchListener {
 		canBePickedUp = false;
 		fitsInInventory = false;
 		isFloorObject = true;
+		type = "Rail";
 	}
 
 	@Override

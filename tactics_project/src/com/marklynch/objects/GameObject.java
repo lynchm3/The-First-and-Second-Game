@@ -263,6 +263,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public int orderingOnGound = Integer.MAX_VALUE;
 
+	public String type = "Object";
+
 	public GameObject() {
 
 		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(0));
@@ -1923,6 +1925,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.flipYAxisInMirror = flipYAxisInMirror;
 
 		gameObject.bigShadow = bigShadow;
+		gameObject.type = type;
 
 		gameObject.init();
 	}

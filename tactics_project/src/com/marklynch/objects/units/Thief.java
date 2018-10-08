@@ -18,6 +18,7 @@ public class Thief extends Human {
 
 	public Thief() {
 		super();
+		type = "Thief";
 	}
 
 	@Override
@@ -45,11 +46,11 @@ public class Thief extends Human {
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
 		actor.requiredEquipmentTemplateIds = requiredEquipmentTemplateIds;
 		actor.hobbies = hobbies;
-		
+
 		BodyArmor robe = Templates.ROBE.makeCopy(null, null);
 		actor.inventory.add(robe);
 		actor.bodyArmor = robe;
-		
+
 		LegArmor pants = Templates.PANTS.makeCopy(null, null);
 		actor.inventory.add(pants);
 		actor.legArmor = pants;

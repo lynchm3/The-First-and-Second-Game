@@ -17,6 +17,7 @@ public class Helmet extends Armor {
 	public Helmet() {
 
 		super();
+		type = "Headgear";
 
 	}
 

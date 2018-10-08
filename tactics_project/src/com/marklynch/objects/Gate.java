@@ -22,6 +22,7 @@ public class Gate extends Door {
 
 		soundDampeningWhenClosed = soundDampening;
 		blocksLineOfSightWhenClosed = blocksLineOfSight;
+		type = "Gate";
 
 	}
 

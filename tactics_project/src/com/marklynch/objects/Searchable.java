@@ -22,6 +22,7 @@ public class Searchable extends GameObject {
 
 		persistsWhenCantBeSeen = true;
 		attackable = false;
+		type = "Searchable";
 	}
 
 	@Override

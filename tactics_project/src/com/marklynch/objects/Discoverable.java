@@ -31,6 +31,8 @@ public class Discoverable extends GameObject {
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 
+		type = "Discoverable";
+
 	}
 
 	@Override

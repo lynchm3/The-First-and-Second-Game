@@ -18,6 +18,7 @@ public class Readable extends GameObject {
 
 	public Readable() {
 		super();
+		type = "Readable";
 
 		// BOOK / SCROLL
 

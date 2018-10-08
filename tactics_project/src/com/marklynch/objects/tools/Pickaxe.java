@@ -12,6 +12,7 @@ public class Pickaxe extends Tool {
 
 	public Pickaxe() {
 		super();
+		type = "Pickaxe";
 	}
 
 	@Override

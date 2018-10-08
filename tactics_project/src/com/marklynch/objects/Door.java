@@ -23,6 +23,7 @@ public class Door extends Openable {
 
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
+		type = "Door";
 
 	}
 

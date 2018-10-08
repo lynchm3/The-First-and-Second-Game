@@ -29,6 +29,7 @@ public class Doctor extends Human implements Comparator<GameObject> {
 
 	public Doctor() {
 		super();
+		type = "Doctor";
 	}
 
 	@Override

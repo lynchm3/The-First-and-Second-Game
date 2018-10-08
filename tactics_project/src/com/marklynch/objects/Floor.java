@@ -19,6 +19,7 @@ public class Floor extends GameObject {
 		attackable = false;
 		isFloorObject = true;
 		orderingOnGound = 20;
+		type = "Floor";
 	}
 
 	@Override

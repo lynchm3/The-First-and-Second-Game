@@ -16,9 +16,11 @@ public class Weapon extends GameObject {
 	public Weapon() {
 
 		super();
+		type = "Weapon";
 
 	}
 
+	@Override
 	public void setInstances(GameObject gameObject) {
 		instances.add(gameObject);
 		super.setInstances(gameObject);

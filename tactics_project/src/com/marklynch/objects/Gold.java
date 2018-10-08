@@ -15,6 +15,7 @@ public class Gold extends GameObject {
 		// BOOK / SCROLL
 
 		attackable = false;
+		type = "Gold";
 
 	}
 

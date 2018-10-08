@@ -33,6 +33,7 @@ public class Mirror extends GameObject {
 
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
+		type = "Mirror";
 
 	}
 

@@ -97,6 +97,7 @@ public class Wall2 extends GameObject {
 
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
+		type = "Wall";
 
 	}
 

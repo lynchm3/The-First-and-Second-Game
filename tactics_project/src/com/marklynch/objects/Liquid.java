@@ -20,6 +20,7 @@ public class Liquid extends GameObject {
 		fitsInInventory = false;
 
 		attackable = false;
+		type = "Liquid";
 	}
 
 	@Override

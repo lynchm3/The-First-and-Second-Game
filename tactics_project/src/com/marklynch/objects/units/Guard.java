@@ -20,6 +20,7 @@ public class Guard extends Human {
 
 	public Guard() {
 		super();
+		type = "Guard";
 	}
 
 	@Override
@@ -48,15 +49,15 @@ public class Guard extends Human {
 		actor.shift = shift;
 		actor.patrolSquares = patrolSquares;
 		actor.hobbies = hobbies;
-		
+
 		BodyArmor chainmail = Templates.CHAINMAIL.makeCopy(null, null);
 		actor.inventory.add(chainmail);
 		actor.bodyArmor = chainmail;
-		
+
 		LegArmor pants = Templates.PANTS.makeCopy(null, null);
 		actor.inventory.add(pants);
 		actor.legArmor = pants;
-		
+
 		return actor;
 	}
 

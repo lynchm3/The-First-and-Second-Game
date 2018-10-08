@@ -28,6 +28,7 @@ public class FishingRod extends Tool {
 
 	public FishingRod() {
 		super();
+		type = "Fishing Rod";
 	}
 
 	@Override

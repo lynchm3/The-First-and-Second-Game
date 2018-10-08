@@ -22,6 +22,7 @@ public class BodyArmor extends Armor {
 	public BodyArmor() {
 
 		super();
+		type = "Body Armor";
 
 	}
 

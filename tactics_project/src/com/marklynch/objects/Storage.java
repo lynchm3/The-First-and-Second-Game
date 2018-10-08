@@ -23,6 +23,7 @@ public class Storage extends Openable {
 		canShareSquare = false;
 		canContainOtherObjects = true;
 		showInventoryInGroundDisplay = true;
+		type = "Storage";
 
 	}
 

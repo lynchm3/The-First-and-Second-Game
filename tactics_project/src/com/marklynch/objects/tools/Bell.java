@@ -15,6 +15,7 @@ public class Bell extends Tool {
 	public Bell() {
 
 		super();
+		type = "Bell";
 	}
 
 	@Override

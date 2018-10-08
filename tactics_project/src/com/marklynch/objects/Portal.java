@@ -23,6 +23,7 @@ public class Portal extends GameObject implements UpdatesWhenSquareContentsChang
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		isFloorObject = true;
+		type = "Portal";
 	}
 
 	// @Override

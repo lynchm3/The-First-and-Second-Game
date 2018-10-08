@@ -12,6 +12,7 @@ public class Axe extends Tool {
 
 	public Axe() {
 		super();
+		type = "Axe";
 	}
 
 	@Override

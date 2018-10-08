@@ -9,6 +9,7 @@ public class WildAnimal extends Animal {
 
 	public WildAnimal() {
 		super();
+		type = "Wild Animal";
 	}
 
 	@Override

@@ -14,6 +14,7 @@ public class Orb extends GameObject {
 		super();
 
 		attackable = false;
+		type = "Orb";
 
 	}
 

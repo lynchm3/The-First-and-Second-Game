@@ -25,6 +25,7 @@ public class Bed extends GameObject {
 		canBePickedUp = false;
 
 		fitsInInventory = false;
+		type = "Bed";
 
 	}
 

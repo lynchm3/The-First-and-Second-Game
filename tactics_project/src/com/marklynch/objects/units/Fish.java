@@ -18,6 +18,7 @@ public class Fish extends WildAnimal {
 		canShareSquare = true;
 		fitsInInventory = true;
 		orderingOnGound = 60;
+		type = "Fish";
 	}
 
 	@Override

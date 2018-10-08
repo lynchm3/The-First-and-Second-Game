@@ -25,6 +25,7 @@ public class HidingPlace extends Searchable {
 		persistsWhenCantBeSeen = true;
 		canShareSquare = true;
 		attackable = true;
+		type = "Hiding Place";
 	}
 
 	@Override

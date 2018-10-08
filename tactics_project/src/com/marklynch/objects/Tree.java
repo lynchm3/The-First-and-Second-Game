@@ -31,6 +31,7 @@ public class Tree extends GameObject {
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
 
+		type = "Tree";
 	}
 
 	@Override
