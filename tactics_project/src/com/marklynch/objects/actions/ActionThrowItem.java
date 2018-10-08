@@ -11,7 +11,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.Monster;
-import com.marklynch.ui.ActivityLog;
 
 public class ActionThrowItem extends Action {
 
@@ -76,23 +75,20 @@ public class ActionThrowItem extends Action {
 			performer.setPrimaryAnimation(new AnimationThrow(performer, targetGameObject));
 		}
 
-		if (targetGameObject != null && targetGameObject.attackable) {
-			float damage = targetGameObject.changeHealth(performer, this, gameObjectToThrow);
-
-			if (Game.level.shouldLog(targetGameObject, performer)) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", gameObjectToThrow, " at ",
-						targetGameObject, " for " + damage + " damage" }));
-			} else {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", gameObjectToThrow }));
-
-			}
-		}
-
-		if (targetGameObject != null && targetGameObject.attackable)
-
-		{
-			targetGameObject.attackedBy(performer, this);
-		}
+		// if (targetGameObject != null && targetGameObject.attackable) {
+		// float damage = targetGameObject.changeHealth(performer, this,
+		// gameObjectToThrow);
+		//
+		// if (Game.level.shouldLog(targetGameObject, performer)) {
+		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ",
+		// gameObjectToThrow, " at ",
+		// targetGameObject, " for " + damage + " damage" }));
+		// } else {
+		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ",
+		// gameObjectToThrow }));
+		//
+		// }
+		// }
 		// target.attacked(performer);
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
@@ -110,6 +106,7 @@ public class ActionThrowItem extends Action {
 				// postRangedAnimation(arrow);
 			}
 		});
+
 		if (performer.equipped == gameObjectToThrow) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
 				performer.equip(performer.equippedBeforePickingUpObject);
@@ -120,6 +117,7 @@ public class ActionThrowItem extends Action {
 			}
 			performer.equippedBeforePickingUpObject = null;
 		}
+
 		if (performer.helmet == gameObjectToThrow)
 			performer.helmet = null;
 		if (performer.bodyArmor == gameObjectToThrow)

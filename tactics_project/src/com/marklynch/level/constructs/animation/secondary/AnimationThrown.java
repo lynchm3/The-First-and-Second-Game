@@ -244,20 +244,11 @@ public class AnimationThrown extends Animation {
 		// Carry out the dmg, attack, logging...
 		if (target != null && target.attackable) {
 			float damage = target.changeHealth(performer, action, weapon);
-			String attackTypeString;
-			attackTypeString = "attacked ";
 
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
-
-				if (weapon != performer) {
-					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-								target, " with ", weapon, " for " + damage + " damage" }));
-				} else {
-					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-								target, " for " + damage + " damage" }));
-				}
+				if (Game.level.shouldLog(target, performer))
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw ", weapon, " at " + target,
+							" for " + damage + " damage" }));
 			}
 
 			// if (weapon instanceof ContainerForLiquids) {
