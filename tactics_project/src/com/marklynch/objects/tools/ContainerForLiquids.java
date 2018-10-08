@@ -98,8 +98,8 @@ public class ContainerForLiquids extends Tool {
 		if (Game.level.shouldLog(this))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " smashed" }));
 
-		if (this.inventory.size() > 0 && this.inventory.get(0) instanceof Liquid) {
-			Liquid liquid = (Liquid) this.inventory.get(0);
+		if (this.liquid != null) {
+			Liquid liquid = this.liquid;
 			for (GameObject gameObject : this.squareGameObjectIsOn.inventory.getGameObjects()) {
 				if (gameObject != this) {
 					// new ActionDouse(shooter, gameObject).perform();

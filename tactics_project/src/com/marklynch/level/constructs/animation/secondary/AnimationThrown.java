@@ -8,19 +8,11 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationFlinch;
-import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectBleed;
-import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Liquid;
 import com.marklynch.objects.Searchable;
-import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionSmash;
-import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.Texture;
@@ -185,43 +177,49 @@ public class AnimationThrown extends Animation {
 	public void drawStaticUI() {
 	}
 
-	public static void smashContainer(Actor performer, GameObject targetGameObject, ContainerForLiquids container) {
-		if (targetGameObject != null)
-			targetGameObject.squareGameObjectIsOn.inventory.add(container);
-		new ActionSmash(performer, container).perform();
-
-		// Find a square for broken glass and put it there
-		Square squareForGlass = null;
-		if (!container.squareGameObjectIsOn.inventory.contains(Wall.class)) {
-			squareForGlass = container.squareGameObjectIsOn;
-		}
-
-		if (squareForGlass != null)
-			Templates.BROKEN_GLASS.makeCopy(squareForGlass, container.owner);
-
-		if (container.inventory.size() > 0 && container.inventory.get(0) instanceof Liquid) {
-			Liquid liquid = (Liquid) container.inventory.get(0);
-			for (GameObject gameObject : container.squareGameObjectIsOn.inventory.getGameObjects()) {
-				if (gameObject != container) {
-					// new ActionDouse(shooter, gameObject).perform();
-					for (Effect effect : liquid.touchEffects) {
-						gameObject.addEffect(effect.makeCopy(performer, gameObject));
-						if (effect instanceof EffectWet)
-							gameObject.removeBurningEffect();
-					}
-					if (gameObject instanceof Actor)
-						gameObject.addEffect(new EffectBleed(performer, targetGameObject, 5));
-				}
-
-			}
-		}
-		for (GameObject gameObject : container.squareGameObjectIsOn.inventory.getGameObjects()) {
-			if (gameObject instanceof Actor)
-				gameObject.addEffect(new EffectBleed(performer, targetGameObject, 5));
-
-		}
-
-	}
+	// public static void smashContainer(Actor performer, GameObject
+	// targetGameObject, ContainerForLiquids container) {
+	// if (targetGameObject != null)
+	// targetGameObject.squareGameObjectIsOn.inventory.add(container);
+	//
+	// new ActionSmash(performer, container).perform();
+	//
+	// // Find a square for broken glass and put it there
+	// Square squareForGlass = null;
+	// if (!container.squareGameObjectIsOn.inventory.contains(Wall.class)) {
+	// squareForGlass = container.squareGameObjectIsOn;
+	// }
+	//
+	// if (squareForGlass != null)
+	// Templates.BROKEN_GLASS.makeCopy(squareForGlass, container.owner);
+	//
+	// System.out.println("container.liquid = " + container.liquid);
+	// System.out.println("squareForGlass = " + squareForGlass);
+	//
+	// if (container.liquid != null && squareForGlass != null) {
+	// Liquid liquid = container.liquid;
+	// for (GameObject gameObject :
+	// container.squareGameObjectIsOn.inventory.getGameObjects()) {
+	// System.out.println("gameObject = " + gameObject);
+	// if (gameObject != container) {
+	// for (Effect effect : liquid.touchEffects) {
+	// System.out.println("effect = " + effect);
+	// gameObject.addEffect(effect.makeCopy(performer, gameObject));
+	// }
+	// if (gameObject instanceof Actor)
+	// gameObject.addEffect(new EffectBleed(performer, targetGameObject, 5));
+	// }
+	//
+	// }
+	// }
+	// for (GameObject gameObject :
+	// container.squareGameObjectIsOn.inventory.getGameObjects()) {
+	// if (gameObject instanceof Actor)
+	// gameObject.addEffect(new EffectBleed(performer, targetGameObject, 5));
+	//
+	// }
+	//
+	// }
 
 	public static void postRangedAnimation(Actor performer, GameObject weapon, GameObject target, Square targetSquare,
 			GameObject projectileObject, Action action) {
@@ -233,8 +231,9 @@ public class AnimationThrown extends Animation {
 				target.inventory.add(projectileObject);
 			} else {
 				targetSquare.inventory.add(projectileObject);
+				projectileObject.landed(performer, action);
 			}
-			projectileObject.landed(performer, action);
+
 		} else if (target != null) {
 			target.arrowsEmbeddedInThis.add((Arrow) projectileObject);
 		}
@@ -261,9 +260,9 @@ public class AnimationThrown extends Animation {
 				}
 			}
 
-			if (weapon instanceof ContainerForLiquids) {
-				smashContainer(performer, target, (ContainerForLiquids) weapon);
-			}
+			// if (weapon instanceof ContainerForLiquids) {
+			// smashContainer(performer, target, (ContainerForLiquids) weapon);
+			// }
 
 			if (target != null && target instanceof Actor && target.remainingHealth > 0)
 				target.setPrimaryAnimation(

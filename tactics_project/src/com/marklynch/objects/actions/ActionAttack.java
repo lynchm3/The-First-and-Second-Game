@@ -178,7 +178,10 @@ public class ActionAttack extends Action {
 			}
 
 			if (weapon instanceof ContainerForLiquids) {
-				AnimationThrown.smashContainer(performer, target, (ContainerForLiquids) weapon);
+				target.squareGameObjectIsOn.inventory.add(weapon);
+				((ContainerForLiquids) weapon).landed(performer, this);
+				// AnimationThrown.smashContainer(performer, target, (ContainerForLiquids)
+				// weapon);
 			}
 
 			if (target.remainingHealth > 0)
