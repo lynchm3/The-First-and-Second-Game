@@ -9,6 +9,7 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.ui.ActivityLog;
 
 public class EffectBurning extends Effect {
@@ -33,7 +34,9 @@ public class EffectBurning extends Effect {
 
 		// float damage = 5 - (10 * (target.getEffectiveFireResistance() /
 		// 100f));
-		if (target.flammableLightSource == false) {
+		if (target instanceof FlammableLightSource) {
+			((FlammableLightSource) target).setLighting(true);
+		} else {
 			float damage = target.changeHealth(this, null, this);
 			if (Game.level.shouldLog(target))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
@@ -48,8 +51,8 @@ public class EffectBurning extends Effect {
 			if (squareTargetIsOn != null) {
 				for (GameObject gameObject : squareTargetIsOn.inventory.getGameObjects()) {
 
-					if (gameObject != target
-							&& Math.random() * 100 > gameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
+					if (gameObject != target && Math.random()
+							* 100 > gameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
 						gameObject.removeWetEffect();
 						gameObject.addEffect(this.makeCopy(source, gameObject));
 						if (Game.level.shouldLog(gameObject))
@@ -97,7 +100,9 @@ public class EffectBurning extends Effect {
 			// }
 		}
 
-		if (target.flammableLightSource == false) {
+		if (target instanceof FlammableLightSource) {
+			((FlammableLightSource) target).setLighting(true);
+		} else {
 			turnsRemaining--;
 		}
 

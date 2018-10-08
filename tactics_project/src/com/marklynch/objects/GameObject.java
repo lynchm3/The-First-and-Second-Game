@@ -141,7 +141,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean canBePickedUp = true;
 	public boolean decorative = false;
 	public boolean floats = false;
-	public boolean flammableLightSource = false;
 	public boolean isFloorObject = false;
 
 	public int value = 1;
@@ -504,21 +503,17 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 				if (arrow.backwards) {
 					TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
-									+ arrowWidth,
+							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX + arrowWidth,
 							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY,
 							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
-									+ arrow.height,
+							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY + arrow.height,
 							color);
 				} else {
 					TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
-									- arrowWidth,
+							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX - arrowWidth,
 							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY,
 							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
-									+ arrow.height,
+							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY + arrow.height,
 							color);
 
 				}
@@ -556,22 +551,18 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 				if (arrow.backwards) {
 					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
-									+ arrowWidth,
+							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX + arrowWidth,
 							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY,
 							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
-									+ arrow.height,
+							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY + arrow.height,
 							color);
 
 				} else {
 					TextureUtils.drawTexture(arrow.textureEmbedded, alpha,
-							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX
-									- arrowWidth,
+							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX - arrowWidth,
 							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY,
 							this.squareGameObjectIsOn.rightInGridPixels * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY
-									+ arrow.height,
+							this.squareGameObjectIsOn.bottomInGridPixels * arrow.drawOffsetRatioY + arrow.height,
 							color);
 
 				}

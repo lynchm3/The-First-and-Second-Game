@@ -6,13 +6,12 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
-public class Lantern extends Tool {
+public class Lantern extends FlammableLightSource {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public Lantern() {
 		super();
-		flammableLightSource = true;
 	}
 
 	@Override
@@ -31,6 +30,9 @@ public class Lantern extends Tool {
 		Lantern weapon = new Lantern();
 		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
+		weapon.imageTextureUnlit = this.imageTextureUnlit;
+		weapon.imageTextureLit = this.imageTextureLit;
+		weapon.lit = this.lit;
 		return weapon;
 	}
 }

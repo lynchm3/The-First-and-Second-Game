@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.effect;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.tools.FlammableLightSource;
 
 public class EffectWet extends Effect {
 
@@ -22,6 +23,9 @@ public class EffectWet extends Effect {
 
 	@Override
 	public void activate() {
+		if (target instanceof FlammableLightSource) {
+			((FlammableLightSource) target).setLighting(false);
+		}
 		turnsRemaining--;
 	}
 
