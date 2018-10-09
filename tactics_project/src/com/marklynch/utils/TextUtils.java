@@ -25,6 +25,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
@@ -643,7 +644,16 @@ public class TextUtils {
 
 				// Image
 				float x = posX + offsetX;
-				TextureUtils.drawTexture(gameObject.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
+				if (content instanceof Actor) {
+					Actor actor = (Actor) content;
+					actor.drawActor((int) x, (int) (posY + offsetY), 1f, false, 0.1f, 0.1f, 0f, Integer.MIN_VALUE,
+							Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true,
+							false, false, false);
+				} else {
+					Texture imageTexture = gameObject.imageTexture;
+					TextureUtils.drawTexture(imageTexture, x, posY + offsetY, x + textureWidth,
+							posY + offsetY + textureWidth);
+				}
 				offsetX += textureWidth;
 
 			} else if (content instanceof Faction) {

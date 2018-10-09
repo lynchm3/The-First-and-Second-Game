@@ -635,18 +635,20 @@ public class Actor extends GameObject {
 			boolean drawHealthBar, boolean backwards, boolean reverseRotation) {
 
 		Matrix4f view = Game.activeBatch.getViewMatrix();
+		float halfWidthAtScale = halfWidth * scaleX;
+		float halfHeightAtScale = halfHeight * scaleY;
 
 		if (scaleX != 1 || scaleY != 1) {
 			Game.flush();
-			view.translate(new Vector2f(x + halfWidth, y + halfHeight));
+			view.translate(new Vector2f(x + halfWidthAtScale, y + halfHeightAtScale));
 			view.scale(new Vector3f(scaleX, scaleY, 1f));
-			view.translate(new Vector2f(-(x + halfWidth), -(y + halfHeight)));
+			view.translate(new Vector2f(-(x + halfWidthAtScale), -(y + halfHeightAtScale)));
 			Game.activeBatch.updateUniforms();
 		}
 		Game.flush();
-		view.translate(new Vector2f(x + halfWidth, y + height));
+		view.translate(new Vector2f(x + halfWidthAtScale, y + height));
 		view.rotate(rotationRad, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + halfWidth), -(y + height)));
+		view.translate(new Vector2f(-(x + halfWidthAtScale), -(y + height)));
 		Game.activeBatch.updateUniforms();
 
 		// torso rotation
@@ -655,12 +657,12 @@ public class Actor extends GameObject {
 			torsoAngle = primaryAnimation.torsoAngle;
 		}
 		Game.flush();
-		view.translate(new Vector2f(x + halfWidth, y + hipY));
+		view.translate(new Vector2f(x + halfWidthAtScale, y + hipY));
 		if (!reverseRotation)
 			view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
 		else
 			view.rotate(-torsoAngle, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
+		view.translate(new Vector2f(-(x + halfWidthAtScale), -(y + hipY)));
 		Game.activeBatch.updateUniforms();
 
 		for (Arrow arrow : arrowsEmbeddedInThis) {
@@ -903,26 +905,26 @@ public class Actor extends GameObject {
 				reverseRotation);
 
 		Game.flush();
-		view.translate(new Vector2f(x + halfWidth, y + hipY));
+		view.translate(new Vector2f(x + halfWidthAtScale, y + hipY));
 		if (!reverseRotation)
 			view.rotate(-torsoAngle, new Vector3f(0f, 0f, 1f));
 		else
 			view.rotate(torsoAngle, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + halfWidth), -(y + hipY)));
+		view.translate(new Vector2f(-(x + halfWidthAtScale), -(y + hipY)));
 		Game.activeBatch.updateUniforms();
 
 		Game.flush();
-		view.translate(new Vector2f(x + halfWidth, y + height));
+		view.translate(new Vector2f(x + halfWidthAtScale, y + height));
 		view.rotate(-(rotationRad), new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + halfWidth), -(y + height)));
+		view.translate(new Vector2f(-(x + halfWidthAtScale), -(y + height)));
 		Game.activeBatch.updateUniforms();
 
 		if (scaleX != 1 || scaleY != 1) {
 			Game.flush();
 			// Matrix4f view = Game.activeBatch.getViewMatrix();
-			view.translate(new Vector2f((x + halfWidth), (y + halfHeight)));
+			view.translate(new Vector2f((x + halfWidthAtScale), (y + halfHeightAtScale)));
 			view.scale(new Vector3f(1f / scaleX, 1f / scaleY, 1f));
-			view.translate(new Vector2f(-(x + halfWidth), -(y + halfHeight)));
+			view.translate(new Vector2f(-(x + halfWidthAtScale), -(y + halfHeightAtScale)));
 			Game.activeBatch.updateUniforms();
 		}
 	}
