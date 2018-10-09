@@ -32,7 +32,8 @@ public class ActionEatItemsSelectedInInventory extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -44,7 +45,8 @@ public class ActionEatItemsSelectedInInventory extends Action {
 			new ActionEatItems(performer, object).perform();
 		} else {
 			Game.level.player.inventory.showQTYDialog(new ActionEatItems(performer, object.inventorySquare.stack),
-					inventorySquare.stack.size(), "Enter qty to eat", 0);
+					inventorySquare.stack.size(), "Enter qty to eat (available: " + inventorySquare.stack.size() + ")",
+					0);
 		}
 	}
 

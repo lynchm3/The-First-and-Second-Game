@@ -50,7 +50,8 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -63,7 +64,7 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 		} else {
 			Game.level.player.inventory.showQTYDialog(
 					new ActionTakeItems(performer, target, object.inventorySquare.stack), inventorySquare.stack.size(),
-					"Enter qty to take", 0);
+					"Enter qty to take (available: " + inventorySquare.stack.size() + ")", 0);
 		}
 	}
 

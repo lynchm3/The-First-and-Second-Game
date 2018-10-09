@@ -15,8 +15,6 @@ public class WaterSource extends GameObject {
 	public WaterSource() {
 		super();
 
-		// WELL
-		// These are basically settings for a WELL at the moment...
 		canBePickedUp = false;
 
 		fitsInInventory = false;

@@ -44,8 +44,8 @@ public class ActionDropItemsSelectedInInventory extends Action {
 			new ActionDropItems(gameObjectPerformer, square, object).perform();
 		} else {
 			Game.level.player.inventory.showQTYDialog(
-					new ActionDropItems(gameObjectPerformer, square, object.inventorySquare.stack), inventorySquare.stack.size(),
-					"Enter qty to drop", 0);
+					new ActionDropItems(gameObjectPerformer, square, object.inventorySquare.stack),
+					inventorySquare.stack.size(), "Enter qty to drop (have: " + inventorySquare.stack.size() + ")", 0);
 		}
 	}
 

@@ -47,9 +47,9 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 		if (inventorySquare.stack.size() <= 5) {
 			new ActionGiveItems(gameObjectPerformer, receiver, logAsTake, object).perform();
 		} else {
-			String qtyString = "Enter qty to give";
+			String qtyString = "Enter qty to give (have: " + inventorySquare.stack.size() + ")";
 			if (!(receiver instanceof Actor)) {
-				qtyString = "Enter qty to put";
+				qtyString = "Enter qty to put (have: " + +inventorySquare.stack.size() + ")";
 			}
 			Game.level.player.inventory.showQTYDialog(
 					new ActionGiveItems(gameObjectPerformer, receiver, logAsTake, object.inventorySquare.stack),
@@ -69,7 +69,8 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (gameObjectPerformer instanceof Actor && !((Actor) gameObjectPerformer).canSeeSquare(receiver.squareGameObjectIsOn)) {
+		if (gameObjectPerformer instanceof Actor
+				&& !((Actor) gameObjectPerformer).canSeeSquare(receiver.squareGameObjectIsOn)) {
 			return false;
 		}
 
