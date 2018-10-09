@@ -54,6 +54,7 @@ import com.marklynch.objects.actions.ActionFishingStart;
 import com.marklynch.objects.actions.ActionFollow;
 import com.marklynch.objects.actions.ActionGiveItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionHide;
+import com.marklynch.objects.actions.ActionIgnite;
 import com.marklynch.objects.actions.ActionInitiateTrade;
 import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.actions.ActionLift;
@@ -1369,6 +1370,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// Pour from inventory
 		if (!decorative)
 			actions.add(new ActionPourContainerInInventory(performer, this));
+
+		if (!decorative)
+			actions.add(new ActionIgnite(performer, this));
 
 		// if (!decorative)
 		// actions.add(new ActionCastBurn(performer, this));

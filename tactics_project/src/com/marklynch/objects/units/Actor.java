@@ -49,6 +49,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionFishingStart;
 import com.marklynch.objects.actions.ActionHide;
+import com.marklynch.objects.actions.ActionIgnite;
 import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionOpenOtherInventory;
@@ -1986,6 +1987,7 @@ public class Actor extends GameObject {
 			}
 
 			actions.add(new ActionPourContainerInInventory(performer, performer));
+			actions.add(new ActionIgnite(performer, this));
 
 			if (hiding) {
 				actions.add(new ActionStopHiding(this, this.hidingPlace));
@@ -2625,5 +2627,23 @@ public class Actor extends GameObject {
 			result.addAll(legArmor.getEffectiveHighLevelStatTooltip(statType));
 		}
 		return result;
+	}
+
+	public boolean hasPower(Class powerClazz) {
+		for (Power power : powers) {
+			if (powerClazz.isInstance(power)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Power getPower(Class powerClazz) {
+		for (Power power : powers) {
+			if (powerClazz.isInstance(power)) {
+				return power;
+			}
+		}
+		return null;
 	}
 }

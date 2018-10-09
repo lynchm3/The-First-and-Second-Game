@@ -25,10 +25,6 @@ public class EffectBurning extends Effect {
 		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(5));
 	}
 
-	public EffectBurning(int totalTurns) {
-		this(null, null, totalTurns);
-	}
-
 	@Override
 	public void activate() {
 
