@@ -1311,11 +1311,15 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			float otherTextureY = squaresBaseY + squaresAreaHeight / 2 - (otherGameObject.height);
 			if (otherGameObject instanceof Actor) {
 				int actorPositionXInPixels = (int) otherTextureX;
-				int actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
-						- (otherGameObject.imageTexture.getHeight()));
-				TextureUtils.drawTexture(otherGameObject.imageTexture, 1f, actorPositionXInPixels,
-						actorPositionYInPixels, actorPositionXInPixels + otherGameObject.width * 2,
-						actorPositionYInPixels + otherGameObject.height * 2, true);
+				int actorPositionYInPixels;
+				if (otherGameObject.imageTexture != null) {
+					actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
+							- (otherGameObject.imageTexture.getHeight()));
+				} else {
+					actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
+							- (((Actor) otherGameObject).torsoImageTexture.getHeight()));
+				}
+				drawActor((Actor) otherGameObject, actorPositionXInPixels, actorPositionYInPixels);
 			} else {
 				TextureUtils.drawTexture(otherGameObject.imageTexture, 0.5f, otherTextureX, otherTextureY,
 						otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2);
