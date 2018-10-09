@@ -132,7 +132,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Ignite
 		SkillTreeNode ignite = new SkillTreeNode(4096, 1536);
-		activateAtStart.add(ignite);
+		// activateAtStart.add(ignite);
 		ignite.name = "Ignite";
 		ignite.description = "Ignite";
 		ignite.powersUnlocked.add(new PowerIgnite(null));

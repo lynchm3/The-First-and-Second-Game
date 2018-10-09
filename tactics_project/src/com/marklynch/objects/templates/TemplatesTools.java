@@ -5,6 +5,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Matches;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -177,6 +178,16 @@ public class TemplatesTools {
 		Templates.DINNER_BELL.anchorX = 53;
 		Templates.DINNER_BELL.anchorY = 103;
 		Templates.DINNER_BELL.templateId = GameObject.generateNewTemplateId();
+
+		Templates.MATCHES = new Matches();
+		Templates.MATCHES.name = "Matches";
+		Templates.MATCHES.setImageAndExtrapolateSize("matches.png");
+		Templates.MATCHES.totalHealth = Templates.MATCHES.remainingHealth = 16;
+		Templates.MATCHES.weight = 6f;
+		Templates.MATCHES.value = 24;
+		Templates.MATCHES.anchorX = 6;
+		Templates.MATCHES.anchorY = 20;
+		Templates.MATCHES.templateId = GameObject.generateNewTemplateId();
 
 		Templates.LANTERN = new Lantern();
 		Templates.LANTERN.name = "Lantern";

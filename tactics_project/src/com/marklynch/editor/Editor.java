@@ -529,6 +529,7 @@ public class Editor {
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
+		player.inventory.add(Templates.MATCHES.makeCopy(null, player));
 
 		// relationships
 		Game.level.factions.player.relationships.put(Game.level.factions.get(1),

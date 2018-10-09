@@ -24,6 +24,7 @@ import com.marklynch.objects.Key;
 import com.marklynch.objects.Landmine;
 import com.marklynch.objects.Liquid;
 import com.marklynch.objects.MapMarker;
+import com.marklynch.objects.Matches;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.MineCart;
 import com.marklynch.objects.Mirror;
@@ -192,6 +193,7 @@ public class Templates {
 	public static Bell DINNER_BELL;
 
 	public static Lantern LANTERN;
+	public static Matches MATCHES;
 
 	// Blades
 	public static Weapon KATANA;
