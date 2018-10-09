@@ -249,7 +249,7 @@ public class ShadowLight {
 		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
 			QuadUtils.drawQuad(Color.BLACK, 0, 0, Game.windowHeight, Game.windowWidth);
 			Game.level.player.draw1();
-			Game.level.player.drawFishing();
+			Game.level.player.drawFishing(true);
 			Game.level.player.fishingTarget.draw1();
 			Game.flush();
 		}

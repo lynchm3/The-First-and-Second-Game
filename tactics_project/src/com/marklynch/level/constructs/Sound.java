@@ -69,7 +69,7 @@ public class Sound {
 
 				destinationSquare.inventory.actor.drawActor(actor.actorPositionXInPixels, actor.actorPositionYInPixels,
 						0.5f, true, actor.scaleX, actor.scaleY, 0f, actor.boundsX1, actor.boundsY1, actor.boundsX2,
-						actor.boundsY2, Color.RED, true, true, actor.backwards, false);
+						actor.boundsY2, Color.RED, true, true, actor.backwards, false, true);
 			}
 		}
 	}

@@ -648,7 +648,7 @@ public class TextUtils {
 					Actor actor = (Actor) content;
 					actor.drawActor((int) x, (int) (posY + offsetY), 1f, false, 0.1f, 0.1f, 0f, Integer.MIN_VALUE,
 							Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true,
-							false, false, false);
+							false, false, false, false);
 				} else {
 					Texture imageTexture = gameObject.imageTexture;
 					TextureUtils.drawTexture(imageTexture, x, posY + offsetY, x + textureWidth,

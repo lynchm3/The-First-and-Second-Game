@@ -53,7 +53,7 @@ public class AnimationMovementFade1 extends Animation {
 					+ Game.SQUARE_HEIGHT * actor.drawOffsetRatioY);
 			actor.drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha, true, 1f, 1f, 0f, Integer.MIN_VALUE,
 					Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false,
-					actor.backwards, false);
+					actor.backwards, false, true);
 		} else {
 
 			int actorPositionXInPixels = (int) (square.xInGridPixels + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);

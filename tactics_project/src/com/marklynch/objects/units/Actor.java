@@ -603,7 +603,7 @@ public class Actor extends GameObject {
 			if (Level.shadowDarkness > 0 && this.squareGameObjectIsOn.structureSquareIsIn == null) {
 				drawActor((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, scaleX,
 						scaleY * Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2,
-						Color.BLACK, false, false, !this.backwards, true);
+						Color.BLACK, false, false, !this.backwards, true, true);
 			}
 
 			// drawActor((int) (actorPositionXInPixels + -Level.shadowOffSetX * height),
@@ -622,7 +622,7 @@ public class Actor extends GameObject {
 				color = StructureRoom.roomColor;
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
 					flash || this == Game.gameObjectMouseIsOver || inSoundPreview, scaleX, scaleY, 0f, boundsX1,
-					boundsY1, boundsX2, boundsY2, color, true, true, this.backwards, false);
+					boundsY1, boundsX2, boundsY2, color, true, true, this.backwards, false, true);
 			inSoundPreview = false;
 		}
 
@@ -632,7 +632,7 @@ public class Actor extends GameObject {
 
 	public void drawActor(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY, float rotationRad,
 			float boundsX1, float boundsY1, float boundsX2, float boundsY2, Color color, boolean drawClothes,
-			boolean drawHealthBar, boolean backwards, boolean reverseRotation) {
+			boolean drawHealthBar, boolean backwards, boolean reverseRotation, boolean useAnimation) {
 
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		float halfWidthAtScale = halfWidth * scaleX;
@@ -653,7 +653,7 @@ public class Actor extends GameObject {
 
 		// torso rotation
 		float torsoAngle = 0;
-		if (primaryAnimation != null) {
+		if (primaryAnimation != null && useAnimation) {
 			torsoAngle = primaryAnimation.torsoAngle;
 		}
 		Game.flush();
@@ -829,7 +829,7 @@ public class Actor extends GameObject {
 		}
 
 		drawBackArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-				reverseRotation);
+				reverseRotation, useAnimation);
 
 		// pelvis
 		if (pelvisImageTexture != null) {
@@ -861,9 +861,9 @@ public class Actor extends GameObject {
 		}
 
 		drawBackLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-				reverseRotation);
+				reverseRotation, useAnimation);
 		drawFrontLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-				reverseRotation);
+				reverseRotation, useAnimation);
 
 		if (bodyArmor != null && !sleeping && drawClothes) {
 
@@ -902,7 +902,7 @@ public class Actor extends GameObject {
 		}
 
 		drawFrontArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-				reverseRotation);
+				reverseRotation, useAnimation);
 
 		Game.flush();
 		view.translate(new Vector2f(x + halfWidthAtScale, y + hipY));
@@ -931,30 +931,30 @@ public class Actor extends GameObject {
 
 	public void drawFrontArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
 			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
-			boolean reverseRotation) {
+			boolean reverseRotation, boolean useAnimation) {
 		if (backwards)
 			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-					reverseRotation);
+					reverseRotation, useAnimation);
 		else
 			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-					reverseRotation);
+					reverseRotation, useAnimation);
 	}
 
 	public void drawBackArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
 			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
-			boolean reverseRotation) {
+			boolean reverseRotation, boolean useAnimation) {
 		if (backwards)
 			drawLeftArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-					reverseRotation);
+					reverseRotation, useAnimation);
 		else
 			drawRightArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-					reverseRotation);
+					reverseRotation, useAnimation);
 
 	}
 
 	public void drawRightArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
 			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
-			boolean reverseRotation) {
+			boolean reverseRotation, boolean useAnimation) {
 
 		if (armImageTexture == null)
 			return;
@@ -964,7 +964,7 @@ public class Actor extends GameObject {
 		float rightElbowAngle = 0f;
 		float leftShoulderAngle = 0f;
 		float leftElbowAngle = 0f;
-		if (primaryAnimation != null) {
+		if (primaryAnimation != null && useAnimation) {
 			rightShoulderAngle = primaryAnimation.rightShoulderAngle;
 			rightElbowAngle = primaryAnimation.rightElbowAngle;
 			leftShoulderAngle = primaryAnimation.leftShoulderAngle;
@@ -995,7 +995,7 @@ public class Actor extends GameObject {
 		Game.activeBatch.updateUniforms();
 
 		if (equipped != null && backwards && !sleeping && primaryAnimation != null
-				&& primaryAnimation.drawArrowInOffHand == true) {
+				&& primaryAnimation.drawArrowInOffHand == true && useAnimation) {
 			drawArrow(rightArmHingeX - Templates.ARROW.anchorX, y + handY, color, backwards);
 		}
 
@@ -1022,20 +1022,21 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (equipped != null && !backwards && !sleeping && (primaryAnimation == null || primaryAnimation.drawWeapon)) {
+		if (equipped != null && !backwards && !sleeping
+				&& (primaryAnimation == null || primaryAnimation.drawWeapon || !useAnimation)) {
 			drawWeapon(rightArmHingeX - equipped.anchorX, y + handY - equipped.anchorY, alpha, highlight, boundsX1,
-					boundsY1, boundsX2, boundsY2, color, backwards);
+					boundsY1, boundsX2, boundsY2, color, backwards, useAnimation);
 		}
 
 		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
 				&& primaryAnimation.drawArrowInMainHand == true
-				&& (primaryAnimation == null || primaryAnimation.drawWeapon)) {
+				&& (primaryAnimation == null || primaryAnimation.drawWeapon || !useAnimation)) {
 			drawArrow(rightArmHingeX - Templates.ARROW.anchorX, y + handY, color, backwards);
 		}
 
 		if (equipped != null && equipped.templateId == Templates.HUNTING_BOW.templateId && !backwards
-				&& (primaryAnimation == null || primaryAnimation.drawWeapon) && alpha == 1f) {
-			drawBowString(rightArmHingeX, y + handY, alpha, color, backwards);
+				&& (primaryAnimation == null || primaryAnimation.drawWeapon || !useAnimation) && alpha == 1f) {
+			drawBowString(rightArmHingeX, y + handY, alpha, color, backwards, useAnimation);
 		}
 
 		Game.flush();
@@ -1087,7 +1088,7 @@ public class Actor extends GameObject {
 
 	public void drawLeftArm(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
 			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
-			boolean reverseRotation) {
+			boolean reverseRotation, boolean useAnimation) {
 
 		if (armImageTexture == null)
 			return;
@@ -1096,7 +1097,7 @@ public class Actor extends GameObject {
 		float rightElbowAngle = 0f;
 		float leftShoulderAngle = 0f;
 		float leftElbowAngle = 0f;
-		if (primaryAnimation != null) {
+		if (primaryAnimation != null && useAnimation) {
 			rightShoulderAngle = primaryAnimation.rightShoulderAngle;
 			rightElbowAngle = primaryAnimation.rightElbowAngle;
 			leftShoulderAngle = primaryAnimation.leftShoulderAngle;
@@ -1135,7 +1136,7 @@ public class Actor extends GameObject {
 		Game.activeBatch.updateUniforms();
 
 		if (equipped != null && !backwards && !sleeping && primaryAnimation != null
-				&& primaryAnimation.drawArrowInOffHand == true) {
+				&& primaryAnimation.drawArrowInOffHand == true && useAnimation) {
 			drawArrow(leftArmHingeX - Templates.ARROW.anchorX, y + handY, color, backwards);
 		}
 
@@ -1164,18 +1165,19 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (equipped != null && backwards && !sleeping && (primaryAnimation == null || primaryAnimation.drawWeapon)) {
+		if (equipped != null && backwards && !sleeping
+				&& (primaryAnimation == null || primaryAnimation.drawWeapon || !useAnimation)) {
 			drawWeapon(leftArmHingeX - (equipped.width - equipped.anchorX), y + handY - equipped.anchorY, alpha,
-					highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, backwards);
+					highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, backwards, useAnimation);
 		}
 		if (equipped != null && backwards && !sleeping && primaryAnimation != null
-				&& primaryAnimation.drawArrowInMainHand == true) {
+				&& primaryAnimation.drawArrowInMainHand == true && useAnimation) {
 			drawArrow(leftArmHingeX - Templates.ARROW.anchorX, y + handY, color, backwards);
 		}
 
 		if (equipped != null && equipped.templateId == Templates.HUNTING_BOW.templateId && backwards
-				&& (primaryAnimation == null || primaryAnimation.drawWeapon) && alpha == 1f) {
-			drawBowString(leftArmHingeX, y + handY, alpha, color, backwards);
+				&& (primaryAnimation == null || primaryAnimation.drawWeapon || !useAnimation) && alpha == 1f) {
+			drawBowString(leftArmHingeX, y + handY, alpha, color, backwards, useAnimation);
 		}
 
 		Game.flush();
@@ -1225,9 +1227,9 @@ public class Actor extends GameObject {
 	}
 
 	public void drawWeapon(float x, float y, float alpha, boolean highlight, float boundsX1, float boundsY1,
-			float boundsX2, float boundsY2, Color color, boolean backwards) {
+			float boundsX2, float boundsY2, Color color, boolean backwards, boolean useAnimation) {
 
-		if (primaryAnimation != null && primaryAnimation.drawEquipped == false)
+		if (primaryAnimation != null && primaryAnimation.drawEquipped == false && useAnimation)
 			return;
 
 		// weapon
@@ -1251,30 +1253,30 @@ public class Actor extends GameObject {
 
 	public void drawFrontLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
 			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
-			boolean reverseRotation) {
+			boolean reverseRotation, boolean useAnimation) {
 		if (backwards)
 			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-					reverseRotation);
+					reverseRotation, useAnimation);
 		else
 			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-					reverseRotation);
+					reverseRotation, useAnimation);
 	}
 
 	public void drawBackLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
 			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
-			boolean reverseRotation) {
+			boolean reverseRotation, boolean useAnimation) {
 		if (backwards)
 			drawLeftLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-					reverseRotation);
+					reverseRotation, useAnimation);
 		else
 			drawRightLeg(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-					reverseRotation);
+					reverseRotation, useAnimation);
 
 	}
 
 	public void drawLeftLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
 			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
-			boolean reverseRotation) {
+			boolean reverseRotation, boolean useAnimation) {
 
 		if (legImageTexture == null)
 			return;
@@ -1282,7 +1284,7 @@ public class Actor extends GameObject {
 		float leftKneeAngle = 0f;
 		float rightHipAngle = 0f;
 		float rightKneeAngle = 0f;
-		if (primaryAnimation != null) {
+		if (primaryAnimation != null && useAnimation) {
 
 			leftHipAngle = primaryAnimation.leftHipAngle;
 			leftKneeAngle = primaryAnimation.leftKneeAngle;
@@ -1395,7 +1397,7 @@ public class Actor extends GameObject {
 
 	public void drawRightLeg(int x, int y, float alpha, boolean highlight, float boundsX1, float boundsY1,
 			float boundsX2, float boundsY2, Color color, boolean drawClothes, boolean backwards,
-			boolean reverseRotation) {
+			boolean reverseRotation, boolean useAnimation) {
 
 		if (legImageTexture == null)
 			return;
@@ -1403,7 +1405,7 @@ public class Actor extends GameObject {
 		float leftKneeAngle = 0f;
 		float rightHipAngle = 0f;
 		float rightKneeAngle = 0f;
-		if (primaryAnimation != null) {
+		if (primaryAnimation != null && useAnimation) {
 
 			leftHipAngle = primaryAnimation.leftHipAngle;
 			leftKneeAngle = primaryAnimation.leftKneeAngle;
@@ -1535,11 +1537,12 @@ public class Actor extends GameObject {
 
 	Color bowStringColor = new Color(0f, 0f, 0f, 0.32f);
 
-	public void drawBowString(float handX, float handY, float alpha, Color color, boolean backwards) {
+	public void drawBowString(float handX, float handY, float alpha, Color color, boolean backwards,
+			boolean useAnimation) {
 
 		float bowStringY = handY - 16;
 		float bowStringYPulled = handY - 16;
-		if (primaryAnimation != null)
+		if (primaryAnimation != null && useAnimation)
 			bowStringYPulled += primaryAnimation.bowStringHandleY;
 
 		float boStringX = handX;
@@ -1553,12 +1556,12 @@ public class Actor extends GameObject {
 		}
 	}
 
-	public void drawFishing() {
+	public void drawFishing(boolean useAnimation) {
 		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 				+ Game.SQUARE_WIDTH * drawOffsetRatioX);
 		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
-		if (primaryAnimation != null) {
+		if (primaryAnimation != null && useAnimation) {
 			actorPositionXInPixels += primaryAnimation.offsetX;
 			actorPositionYInPixels += primaryAnimation.offsetY;
 		}

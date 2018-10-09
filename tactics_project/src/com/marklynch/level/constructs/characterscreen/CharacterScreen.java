@@ -304,7 +304,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 		// drawActor(Game.level.player, actorX, actorY);
 		Level.player.drawActor(actorX, actorY, 1, false, actorScale, actorScale, 0f, Integer.MIN_VALUE,
 				Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false,
-				Level.player.backwards, false);
+				Level.player.backwards, false, false);
 
 		drawStatY = statsY;
 
