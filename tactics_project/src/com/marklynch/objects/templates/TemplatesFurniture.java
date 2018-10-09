@@ -274,6 +274,15 @@ public class TemplatesFurniture {
 		Templates.WELL.anchorY = 0;
 		Templates.WELL.templateId = GameObject.generateNewTemplateId();
 		Templates.WELL.effectsFromInteracting = new Effect[] {};
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
 		Templates.WOODEN_SUPPORT = new Support();
 		Templates.WOODEN_SUPPORT.setImageAndExtrapolateSize("wooden_support.png");
