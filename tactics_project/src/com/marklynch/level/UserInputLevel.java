@@ -606,6 +606,33 @@ public class UserInputLevel {
 			}
 		}
 
+		// Pop up menu for actions
+		if (!Game.level.popupMenuActions.isEmpty()) {
+			for (int i = Game.level.popupMenuActions.size() - 1; i >= 0; i--) {
+				for (Button button : Game.level.popupMenuActions.get(i).buttons) {
+					if (button.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+
+						draggableMouseIsOver = Game.level.popupMenuActions.get(i);
+						return;
+					}
+				}
+
+			}
+		}
+
+		// Pop up menu for objects
+		if (!Game.level.popupMenuObjects.isEmpty()) {
+			for (int i = Game.level.popupMenuObjects.size() - 1; i >= 0; i--) {
+				for (Button button : Game.level.popupMenuObjects.get(i).buttons) {
+					if (button.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+						draggableMouseIsOver = Game.level.popupMenuObjects.get(i);
+						return;
+					}
+				}
+
+			}
+		}
+
 		if (draggableMouseIsOver == null && scrollableMouseIsOver == null
 				&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
 			draggableMouseIsOver = Game.level.activityLogger;
