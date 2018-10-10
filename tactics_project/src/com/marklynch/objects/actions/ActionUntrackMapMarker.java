@@ -7,7 +7,6 @@ import com.marklynch.objects.MapMarker;
 public class ActionUntrackMapMarker extends Action {
 
 	public static final String ACTION_NAME = "Untrack Map Marker";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	MapMarker mapMarker;
 
 	public ActionUntrackMapMarker(MapMarker mapMarker) {
@@ -15,7 +14,6 @@ public class ActionUntrackMapMarker extends Action {
 		this.mapMarker = mapMarker;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -23,7 +21,8 @@ public class ActionUntrackMapMarker extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

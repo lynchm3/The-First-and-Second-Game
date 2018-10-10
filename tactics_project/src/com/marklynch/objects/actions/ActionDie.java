@@ -23,7 +23,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionDie extends Action {
 
 	public static final String ACTION_NAME = "Die";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Square target;
 
 	public ActionDie(GameObject performer, Square target) {
@@ -32,7 +31,6 @@ public class ActionDie extends Action {
 		this.target = target;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

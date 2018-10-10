@@ -8,7 +8,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionStopPeeking extends Action {
 
 	public static final String ACTION_NAME = "Stop Peeking";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 
@@ -21,7 +20,8 @@ public class ActionStopPeeking extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

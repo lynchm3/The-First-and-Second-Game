@@ -12,7 +12,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionWrite extends Action {
 
 	public static final String ACTION_NAME = "Write";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	Readable sign;
@@ -25,14 +24,14 @@ public class ActionWrite extends Action {
 		this.text = text;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

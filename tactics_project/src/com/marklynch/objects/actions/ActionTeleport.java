@@ -19,7 +19,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionTeleport extends Action {
 
 	public static final String ACTION_NAME = "Teleport here";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor actorPerformer;
 	GameObject gameObjectPerformer;
 	GameObject teleportee;
@@ -37,7 +36,6 @@ public class ActionTeleport extends Action {
 		this.endTurn = endTurn;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		if (!teleportee.canShareSquare)
 			gameObjectInTheWay = target.inventory.gameObjectThatCantShareSquare;

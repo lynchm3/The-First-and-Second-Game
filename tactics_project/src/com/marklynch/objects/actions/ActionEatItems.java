@@ -16,7 +16,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionEatItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Eat";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject[] objects;
@@ -35,14 +34,14 @@ public class ActionEatItems extends VariableQtyAction {
 		this.objects = objects;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

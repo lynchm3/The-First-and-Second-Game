@@ -10,7 +10,6 @@ import com.marklynch.objects.GameObject;
 public class ActionChangeAppearance extends Action {
 
 	public static final String ACTION_NAME = "Appearance";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	GameObject target;
 
 	public ActionChangeAppearance(GameObject target) {
@@ -18,7 +17,6 @@ public class ActionChangeAppearance extends Action {
 		this.target = target;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -26,7 +24,8 @@ public class ActionChangeAppearance extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

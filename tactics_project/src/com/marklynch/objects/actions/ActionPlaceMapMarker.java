@@ -12,7 +12,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionPlaceMapMarker extends Action {
 
 	public static final String ACTION_NAME = "Place Map Marker";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Square target;
 
 	public ActionPlaceMapMarker(Square target) {
@@ -20,7 +19,6 @@ public class ActionPlaceMapMarker extends Action {
 		this.target = target;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

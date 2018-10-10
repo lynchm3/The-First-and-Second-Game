@@ -14,7 +14,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionDiscover extends Action {
 
 	public static final String ACTION_NAME = "Discover";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Discoverable target;
 
 	public ActionDiscover(GameObject performer, Discoverable target) {
@@ -23,7 +22,6 @@ public class ActionDiscover extends Action {
 		this.target = target;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

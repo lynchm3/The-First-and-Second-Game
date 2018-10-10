@@ -9,7 +9,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionRing extends Action {
 
 	public static final String ACTION_NAME = "Ring Bell";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject object;
@@ -20,7 +19,6 @@ public class ActionRing extends Action {
 		this.object = object;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -28,7 +26,8 @@ public class ActionRing extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

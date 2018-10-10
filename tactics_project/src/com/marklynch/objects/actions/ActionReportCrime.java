@@ -10,7 +10,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionReportCrime extends Action {
 
 	public static final String ACTION_NAME = "Report Crime";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	Guard guard;
@@ -22,14 +21,14 @@ public class ActionReportCrime extends Action {
 		this.guard = guard;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

@@ -36,7 +36,8 @@ public class ActionOpenOtherInventory extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -85,12 +86,10 @@ public class ActionOpenOtherInventory extends Action {
 		}
 
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 
 		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 

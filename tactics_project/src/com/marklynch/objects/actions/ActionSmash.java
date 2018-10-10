@@ -9,7 +9,6 @@ import com.marklynch.objects.units.Actor;
 public class ActionSmash extends Action {
 
 	public static final String ACTION_NAME = "Smash";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	GameObject target;
 	Actor actor;
@@ -23,7 +22,6 @@ public class ActionSmash extends Action {
 		this.target = target;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

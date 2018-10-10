@@ -9,7 +9,6 @@ import com.marklynch.objects.units.Actor;
 public class ActionWait extends Action {
 
 	public static final String ACTION_NAME = "Wait";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	Square target;
 
@@ -19,7 +18,6 @@ public class ActionWait extends Action {
 		this.target = target;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

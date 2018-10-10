@@ -9,7 +9,6 @@ import com.marklynch.objects.units.Actor;
 public class ActionEatItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Eat";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject object;
@@ -25,7 +24,6 @@ public class ActionEatItemsSelectedInInventory extends Action {
 		this.inventorySquare = object.inventorySquare;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

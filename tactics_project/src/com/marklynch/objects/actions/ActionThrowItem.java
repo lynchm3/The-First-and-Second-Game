@@ -15,7 +15,6 @@ import com.marklynch.objects.units.Monster;
 public class ActionThrowItem extends Action {
 
 	public static final String ACTION_NAME = "Throw";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	Square targetSquare;
@@ -179,7 +178,6 @@ public class ActionThrowItem extends Action {
 			maxDistance = 10;
 
 		if (performer.straightLineDistanceTo(targetSquare) > maxDistance) {
-			actionName = ACTION_NAME + " " + gameObjectToThrow.name + " (too heavy)";
 			disabledReason = "Too heavy";
 			return false;
 		}
@@ -194,7 +192,6 @@ public class ActionThrowItem extends Action {
 			return false;
 
 		if (!performer.canSeeSquare(targetSquare)) {
-			actionName = ACTION_NAME + " " + gameObjectToThrow.name + " (can't reach)";
 			return false;
 		}
 

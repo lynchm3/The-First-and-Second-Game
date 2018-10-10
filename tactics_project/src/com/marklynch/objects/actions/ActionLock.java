@@ -12,9 +12,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionLock extends Action {
 
 	public static final String ACTION_NAME = "Lock";
-	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
-	public static final String ACTION_NAME_BLOCKED = ACTION_NAME + " (blocked)";
 
 	Openable openable;
 
@@ -50,8 +47,8 @@ public class ActionLock extends Action {
 			openable.lock();
 
 			if (Game.level.shouldLog(openable, gameObjectPerformer))
-				Game.level
-						.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " locked ", openable, " with ", key }));
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { gameObjectPerformer, " locked ", openable, " with ", key }));
 
 			openable.showPow();
 
@@ -82,18 +79,15 @@ public class ActionLock extends Action {
 			Actor actor = (Actor) gameObjectPerformer;
 
 			if (!actor.hasKeyForDoor(openable)) {
-				actionName = ACTION_NAME_NEED_KEY;
-				disabledReason = "You need a key";
+				disabledReason = "Need a key";
 				return false;
 			}
 
 			if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.canShareSquare == false) {
-				actionName = ACTION_NAME_BLOCKED;
 				disabledReason = "Doorway blocked";
 			}
 
 			if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.contains(Actor.class)) {
-				actionName = ACTION_NAME_BLOCKED;
 				disabledReason = "Doorway blocked";
 				return false;
 			}
@@ -107,11 +101,9 @@ public class ActionLock extends Action {
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.canSeeGameObject(openable)) {
-				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 			if (actor.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
-				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 		}

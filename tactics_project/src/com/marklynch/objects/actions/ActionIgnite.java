@@ -17,7 +17,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionIgnite extends Action {
 
 	public static final String ACTION_NAME = "Ignite";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	public static final String NEED_MATCHES_OR_IGNITE_POWER = "Need Fire source or Ignite Power";
 
 	Actor performer;
@@ -119,7 +118,6 @@ public class ActionIgnite extends Action {
 	public boolean checkRange() {
 
 		if (!performer.canSeeSquare(targetSquare)) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 
@@ -132,7 +130,6 @@ public class ActionIgnite extends Action {
 
 		// No magic, just matches
 		if (performer.straightLineDistanceTo(targetSquare) > 1) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 

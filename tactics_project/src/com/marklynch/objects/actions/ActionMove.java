@@ -18,7 +18,6 @@ import com.marklynch.objects.units.TinyNeutralWildAnimal;
 public class ActionMove extends Action {
 
 	public static final String ACTION_NAME = "Move here";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	Square target;
 	boolean endTurn;
@@ -30,7 +29,6 @@ public class ActionMove extends Action {
 		this.endTurn = endTurn;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

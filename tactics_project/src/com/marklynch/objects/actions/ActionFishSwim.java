@@ -12,7 +12,6 @@ import com.marklynch.objects.units.Fish;
 public class ActionFishSwim extends Action {
 
 	public static final String ACTION_NAME = "Swim";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Fish performer;
 
 	public ActionFishSwim(Fish performer) {
@@ -20,7 +19,6 @@ public class ActionFishSwim extends Action {
 		super.gameObjectPerformer = this.performer = performer;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

@@ -9,7 +9,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionTrespass extends Action {
 
 	public static final String ACTION_NAME = "Trespass here";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	Square target;
 	float loudness;
@@ -21,7 +20,6 @@ public class ActionTrespass extends Action {
 		this.loudness = loudness;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -29,7 +27,8 @@ public class ActionTrespass extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

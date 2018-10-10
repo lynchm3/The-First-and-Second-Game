@@ -9,7 +9,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionShoutForHelp extends Action {
 
 	public static final String ACTION_NAME = "Shout For Help";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject attacker;
@@ -21,14 +20,14 @@ public class ActionShoutForHelp extends Action {
 		this.attacker = attacker;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

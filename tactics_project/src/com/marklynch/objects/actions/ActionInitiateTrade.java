@@ -11,7 +11,6 @@ import com.marklynch.objects.units.Actor;
 public class ActionInitiateTrade extends Action {
 
 	public static final String ACTION_NAME = "Trade";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	Actor target;
@@ -28,7 +27,8 @@ public class ActionInitiateTrade extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -85,7 +85,6 @@ public class ActionInitiateTrade extends Action {
 	@Override
 	public boolean check() {
 		if (target.knownCriminals.contains(performer)) {
-			actionName = ACTION_NAME + " (distrust)";
 			disabledReason = "Not enough trust";
 			return false;
 		}
@@ -96,7 +95,6 @@ public class ActionInitiateTrade extends Action {
 	@Override
 	public boolean checkRange() {
 		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 

@@ -12,8 +12,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionUnlock extends Action {
 
 	public static final String ACTION_NAME = "Unlock";
-	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
 
 	Openable openable;
 
@@ -82,8 +80,7 @@ public class ActionUnlock extends Action {
 			Actor actor = (Actor) gameObjectPerformer;
 
 			if (!actor.hasKeyForDoor(openable)) {
-				actionName = ACTION_NAME_NEED_KEY;
-				disabledReason = "You need a key";
+				disabledReason = "Need a key";
 				return false;
 			}
 		}
@@ -97,11 +94,9 @@ public class ActionUnlock extends Action {
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.canSeeGameObject(openable)) {
-				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 			if (actor.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
-				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 		}

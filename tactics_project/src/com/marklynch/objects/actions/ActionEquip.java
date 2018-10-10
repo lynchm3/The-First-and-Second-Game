@@ -13,7 +13,6 @@ import com.marklynch.utils.ResourceUtils;
 public class ActionEquip extends Action {
 
 	public static final String ACTION_NAME = "Equip";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (unequippable)";
 
 	Actor performer;
 	GameObject gameObject;
@@ -32,14 +31,14 @@ public class ActionEquip extends Action {
 		}
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -73,7 +72,7 @@ public class ActionEquip extends Action {
 
 		if (actionTake != null) {
 			if (!actionTake.enabled)
-				disabledReason = "Can't reach";
+				disabledReason = actionTake.disabledReason;
 			return actionTake.enabled;
 		}
 

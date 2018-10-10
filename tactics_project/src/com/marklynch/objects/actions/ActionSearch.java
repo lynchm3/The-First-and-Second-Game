@@ -14,7 +14,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionSearch extends Action {
 
 	public static final String ACTION_NAME = "Search";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	Searchable object;
@@ -25,14 +24,14 @@ public class ActionSearch extends Action {
 		this.object = object;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

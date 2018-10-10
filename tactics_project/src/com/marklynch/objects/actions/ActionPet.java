@@ -9,7 +9,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionPet extends Action {
 
 	public static final String ACTION_NAME = "Pet";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject object;
@@ -26,7 +25,8 @@ public class ActionPet extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -55,7 +55,6 @@ public class ActionPet extends Action {
 	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
-			actionName = ACTION_NAME_DISABLED;
 			return false;
 		}
 		return true;

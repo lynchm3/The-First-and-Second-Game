@@ -13,7 +13,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionBuyItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Buy";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	Actor target;
 	GameObject[] objects;
@@ -33,7 +32,6 @@ public class ActionBuyItems extends VariableQtyAction {
 		this.objects = objects;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -100,7 +98,6 @@ public class ActionBuyItems extends VariableQtyAction {
 	@Override
 	public boolean checkRange() {
 		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 		return true;

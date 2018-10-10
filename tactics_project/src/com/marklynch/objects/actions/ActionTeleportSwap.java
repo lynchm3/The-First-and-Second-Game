@@ -17,7 +17,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionTeleportSwap extends Action {
 
 	public static final String ACTION_NAME = "Swap here";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	GameObject teleportee;
 	Square target;
@@ -31,7 +30,6 @@ public class ActionTeleportSwap extends Action {
 		this.endTurn = endTurn;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

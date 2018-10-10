@@ -16,8 +16,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionFishingCompleted extends Action {
 
 	public static final String ACTION_NAME = "Fishing";
-	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	public static final String ACTION_NAME_NEED_FISHING_ROD = ACTION_NAME + " (need fishing rod)";
 
 	Actor performer;
 	GameObject target;
@@ -108,8 +106,7 @@ public class ActionFishingCompleted extends Action {
 	public boolean check() {
 
 		if (!performer.inventory.contains(FishingRod.class)) {
-			actionName = ACTION_NAME_NEED_FISHING_ROD;
-			disabledReason = "You need a fishing rod";
+			disabledReason = "Need a fishing rod";
 			return false;
 		}
 

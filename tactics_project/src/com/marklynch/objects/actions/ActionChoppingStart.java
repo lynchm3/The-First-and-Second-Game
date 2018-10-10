@@ -19,8 +19,7 @@ import com.marklynch.ui.ActivityLog;
 public class ActionChoppingStart extends Action {
 
 	public static final String ACTION_NAME = "Chop";
-	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	public static final String ACTION_NAME_NEED_AXE = ACTION_NAME + " (need axe)";
+	public static final String NEED_AN_AXE = "Need an axe";
 
 	Actor performer;
 	GameObject target;
@@ -134,8 +133,7 @@ public class ActionChoppingStart extends Action {
 	public boolean check() {
 
 		if (!performer.inventory.contains(Axe.class)) {
-			disabledReason = "You need an axe";
-			actionName = ACTION_NAME_NEED_AXE;
+			disabledReason = NEED_AN_AXE;
 			return false;
 		}
 
@@ -146,7 +144,6 @@ public class ActionChoppingStart extends Action {
 	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 

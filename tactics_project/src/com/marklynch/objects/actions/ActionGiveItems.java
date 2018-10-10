@@ -13,7 +13,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionGiveItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Give";
-	public static final String ACTION_NAME_DISABLED = "(can't reach)";
 	GameObject receiver;
 	GameObject[] objects;
 	boolean logAsTake;
@@ -38,7 +37,6 @@ public class ActionGiveItems extends VariableQtyAction {
 		this.logAsTake = logAsTake;
 		if (!check()) {
 			enabled = false;
-			actionName = actionName + ACTION_NAME_DISABLED;
 		} else {
 			actionName = actionName + " " + objects[0].name;
 		}

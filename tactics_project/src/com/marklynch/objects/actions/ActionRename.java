@@ -8,7 +8,6 @@ import com.marklynch.ui.popups.FullScreenTextBox;
 public class ActionRename extends Action {
 
 	public static final String ACTION_NAME = "Rename";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	GameObject target;
 
 	public ActionRename(GameObject target) {
@@ -16,7 +15,6 @@ public class ActionRename extends Action {
 		this.target = target;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -24,7 +22,8 @@ public class ActionRename extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

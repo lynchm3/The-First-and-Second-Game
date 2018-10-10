@@ -13,11 +13,6 @@ import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.Monster;
 
 public class ActionUsePower extends Action {
-
-	// public static final String ACTION_NAME = "Attack";
-	// public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't
-	// reach)";
-
 	GameObject gameObjectSource;
 	Actor actorPerformer;
 	Square targetSquare;
@@ -35,7 +30,6 @@ public class ActionUsePower extends Action {
 		this.power = power;
 		if (!check()) {
 			enabled = false;
-			actionName = actionName + "(can't reach)";
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -58,11 +52,6 @@ public class ActionUsePower extends Action {
 		gameObjectSource.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
-
-		// if (!legal) {
-		//
-
-		// Something that belongs to some one else
 
 		if (power.hostile) {
 			for (Square square : power.getAffectedSquares(targetSquare)) {

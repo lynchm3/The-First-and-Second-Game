@@ -10,7 +10,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionStopHidingInside extends Action {
 
 	public static final String ACTION_NAME = "Stop Hiding";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject object;

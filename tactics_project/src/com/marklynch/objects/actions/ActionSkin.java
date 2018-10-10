@@ -14,8 +14,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionSkin extends Action {
 
 	public static final String ACTION_NAME = "Skin";
-	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	public static final String ACTION_NAME_NEED_KNIFE = ACTION_NAME + " (need knife)";
 
 	Actor performer;
 	GameObject target;
@@ -35,7 +33,8 @@ public class ActionSkin extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -91,8 +90,7 @@ public class ActionSkin extends Action {
 	@Override
 	public boolean check() {
 		if (!performer.inventory.contains(Knife.class)) {
-			actionName = ACTION_NAME_NEED_KNIFE;
-			disabledReason = "You need a knife";
+			disabledReason = "Need a knife";
 			return false;
 		}
 

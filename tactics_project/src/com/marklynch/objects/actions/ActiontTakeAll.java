@@ -13,7 +13,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActiontTakeAll extends Action {
 
 	public static final String ACTION_NAME = "Loot All";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject container;
@@ -28,14 +27,14 @@ public class ActiontTakeAll extends Action {
 		}
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

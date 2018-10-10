@@ -12,7 +12,6 @@ import com.marklynch.objects.units.Actor;
 public class ActionFillContainersInInventory extends Action {
 
 	public static final String ACTION_NAME = "Fill Container(s)";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	WaterSource waterSource;
@@ -29,7 +28,8 @@ public class ActionFillContainersInInventory extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -87,12 +87,10 @@ public class ActionFillContainersInInventory extends Action {
 	@Override
 	public boolean checkRange() {
 		if (performer.straightLineDistanceTo(waterSource.squareGameObjectIsOn) > 1) {
-			actionName = ACTION_NAME_DISABLED;
 			return false;
 		}
 
 		if (!performer.canSeeSquare(waterSource.squareGameObjectIsOn)) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 		return true;

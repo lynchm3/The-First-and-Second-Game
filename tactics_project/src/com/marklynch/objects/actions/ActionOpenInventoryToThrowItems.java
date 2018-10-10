@@ -15,7 +15,6 @@ import com.marklynch.objects.units.Monster;
 public class ActionOpenInventoryToThrowItems extends Action {
 
 	public static final String ACTION_NAME = "Throw";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	Object target;
@@ -41,7 +40,8 @@ public class ActionOpenInventoryToThrowItems extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -108,12 +108,10 @@ public class ActionOpenInventoryToThrowItems extends Action {
 		float maxDistance = 10;
 
 		if (performer.straightLineDistanceTo(targetSquare) > maxDistance) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 
 		if (!performer.canSeeSquare(targetSquare)) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 

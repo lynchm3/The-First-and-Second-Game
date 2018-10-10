@@ -12,7 +12,6 @@ import com.marklynch.objects.units.Actor;
 public class ActionOpenInventoryToGiveItems extends Action {
 
 	public static final String ACTION_NAME = "Give";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject target;
@@ -28,14 +27,14 @@ public class ActionOpenInventoryToGiveItems extends Action {
 
 		if (!check()) {
 			enabled = false;
-			this.actionName += " (can't reach)";
 		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -98,12 +97,10 @@ public class ActionOpenInventoryToGiveItems extends Action {
 	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 
 		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 

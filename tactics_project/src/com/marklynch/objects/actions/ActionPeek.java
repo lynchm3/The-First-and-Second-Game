@@ -11,7 +11,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionPeek extends Action {
 
 	public static final String ACTION_NAME = "Peek";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject object;

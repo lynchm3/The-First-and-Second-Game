@@ -11,9 +11,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionUse extends Action {
 
 	public static String ACTION_NAME = "Use";
-	public static String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	// SPECIAL CASE HERE IF UR ADDING NEW ITEMS, THE ACTION NAME GETS SET IN THE
-	// CONSTRUCTOR
 
 	Switch switchToUse;
 	String verb;
@@ -28,7 +25,6 @@ public class ActionUse extends Action {
 			ACTION_NAME += " " + requirementToMeet.getText();
 		}
 		this.actionName = ACTION_NAME;
-		ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.switchToUse = switchToUse;
 		this.verb = verb;
@@ -101,12 +97,10 @@ public class ActionUse extends Action {
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.canSeeGameObject(switchToUse)) {
-				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 
 			if (gameObjectPerformer.straightLineDistanceTo(switchToUse.squareGameObjectIsOn) != 1) {
-				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 		}

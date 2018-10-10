@@ -11,7 +11,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionLift extends Action {
 
 	public static final String ACTION_NAME = "Lift";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject object;
@@ -67,7 +66,6 @@ public class ActionLift extends Action {
 	public boolean check() {
 		float maxWeightForPerformer = 50f + performer.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH) * 10f;
 		if (object.weight > maxWeightForPerformer) {
-			actionName = ACTION_NAME + " (too heavy)";
 			disabledReason = "Too heavy";
 			return false;
 		}
@@ -78,7 +76,6 @@ public class ActionLift extends Action {
 	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
-			actionName = ACTION_NAME_DISABLED;
 			return false;
 		}
 		return true;

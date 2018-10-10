@@ -18,7 +18,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionCastBurn extends Action {
 
 	public static final String ACTION_NAME = "Cast Burn";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject target;
@@ -30,7 +29,6 @@ public class ActionCastBurn extends Action {
 		this.target = target;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		} else {
 			actionName = ACTION_NAME + " (" + (100 - target.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value)
 					+ "%)";

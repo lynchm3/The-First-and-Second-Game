@@ -10,7 +10,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionHide extends Action {
 
 	public static final String ACTION_NAME = "Hide";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	HidingPlace object;

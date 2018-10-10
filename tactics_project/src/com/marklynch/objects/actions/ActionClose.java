@@ -11,9 +11,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionClose extends Action {
 
 	public static final String ACTION_NAME = "Close";
-	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
-	public static final String ACTION_NAME_BLOCKED = ACTION_NAME + " (blocked)";
 
 	Openable openable;
 
@@ -67,20 +64,17 @@ public class ActionClose extends Action {
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
 			if (openable.isLocked() && !actor.hasKeyForDoor(openable)) {
-				actionName = ACTION_NAME_NEED_KEY;
-				disabledReason = "You need a key";
+				disabledReason = "Need a key";
 				return false;
 			}
 		}
 
 		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.canShareSquare == false) {
 			disabledReason = "Doorway blocked";
-			actionName = ACTION_NAME_BLOCKED;
 		}
 
 		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.contains(Actor.class)) {
 			disabledReason = "Doorway blocked";
-			actionName = ACTION_NAME_BLOCKED;
 			return false;
 		}
 
@@ -93,12 +87,10 @@ public class ActionClose extends Action {
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.canSeeGameObject(openable)) {
-				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 
 			if (gameObjectPerformer.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
-				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 		}

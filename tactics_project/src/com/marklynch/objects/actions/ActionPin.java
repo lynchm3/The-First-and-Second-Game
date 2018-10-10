@@ -8,7 +8,6 @@ import com.marklynch.ui.PinWindow;
 public class ActionPin extends Action {
 
 	public static final String ACTION_NAME = "Info";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (duplicate)";
 
 	public Actor performer;
 	public Object target;
@@ -20,7 +19,6 @@ public class ActionPin extends Action {
 		this.target = target;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

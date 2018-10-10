@@ -32,7 +32,8 @@ public class ActionBuytemsSelectedInInventory extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -68,7 +69,6 @@ public class ActionBuytemsSelectedInInventory extends Action {
 	@Override
 	public boolean checkRange() {
 		if (!performer.canSeeSquare(seller.squareGameObjectIsOn)) {
-			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
 		return true;

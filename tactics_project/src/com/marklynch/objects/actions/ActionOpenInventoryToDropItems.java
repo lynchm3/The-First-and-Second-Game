@@ -12,7 +12,6 @@ import com.marklynch.objects.units.Actor;
 public class ActionOpenInventoryToDropItems extends Action {
 
 	public static final String ACTION_NAME = "Drop";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	Square target;
@@ -61,7 +60,6 @@ public class ActionOpenInventoryToDropItems extends Action {
 	@Override
 	public boolean checkRange() {
 		if (performer.straightLineDistanceTo(target) > 1) {
-			actionName = ACTION_NAME_DISABLED;
 			return false;
 		}
 		return true;

@@ -35,7 +35,6 @@ public class ActionDropItems extends VariableQtyAction {
 		if (!check()) {
 			enabled = false;
 		} else {
-
 			actionName = ACTION_NAME + " " + objects[0].name;
 		}
 		legal = checkLegality();
@@ -142,19 +141,17 @@ public class ActionDropItems extends VariableQtyAction {
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.inventory.contains(objects[0]) && actor.equipped != objects[0]) {
-				actionName = ACTION_NAME + " " + objects[0].name + " (can't reach)";
 				return false;
 			}
 		} else {
 			if (!gameObjectPerformer.inventory.contains(objects[0])) {
-				actionName = ACTION_NAME + " " + objects[0].name + " (can't reach)";
 				return false;
 			}
 
 		}
 
 		if (!square.inventory.canShareSquare && !objects[0].canShareSquare) {
-			actionName = ACTION_NAME + " " + objects[0].name + " (no space)";
+			disabledReason = "No space";
 			return false;
 		}
 
@@ -164,7 +161,6 @@ public class ActionDropItems extends VariableQtyAction {
 	@Override
 	public boolean checkRange() {
 		if (gameObjectPerformer.straightLineDistanceTo(square) > 1) {
-			actionName = ACTION_NAME + " " + objects[0].name + " (can't reach)";
 			return false;
 		}
 

@@ -17,9 +17,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionFishingStart extends Action {
 
 	public static final String ACTION_NAME = "Fishing";
-	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	public static final String ACTION_NAME_NEED_FISHING_ROD = ACTION_NAME + " (need fishing rod)";
-	public static final String ACTION_NAME_ALREADY_BEING_FISHED = ACTION_NAME + " (taken)";
 
 	Actor performer;
 	GameObject target;
@@ -109,13 +106,11 @@ public class ActionFishingStart extends Action {
 	public boolean check() {
 
 		if (!performer.inventory.contains(FishingRod.class)) {
-			actionName = ACTION_NAME_NEED_FISHING_ROD;
-			disabledReason = "You need a fishing rod";
+			disabledReason = "Need a fishing rod";
 			return false;
 		}
 
 		if (target.beingFishedBy != null) {
-			actionName = ACTION_NAME_NEED_FISHING_ROD;
 			disabledReason = "Already being fished";
 			return false;
 		}
@@ -134,7 +129,6 @@ public class ActionFishingStart extends Action {
 				return true;
 			}
 		}
-		actionName = ACTION_NAME_CANT_REACH;
 		return false;
 	}
 

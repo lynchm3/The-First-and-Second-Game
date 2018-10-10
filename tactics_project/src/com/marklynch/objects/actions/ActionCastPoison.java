@@ -17,7 +17,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionCastPoison extends Action {
 
 	public static final String ACTION_NAME = "Cast Posion";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject target;
@@ -29,7 +28,6 @@ public class ActionCastPoison extends Action {
 		this.target = target;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

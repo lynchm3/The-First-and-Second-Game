@@ -15,8 +15,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionDig extends Action {
 
 	public static final String ACTION_NAME = "Dig";
-	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	public static final String ACTION_NAME_NEED_SHOVEL = ACTION_NAME + " (need shovel)";
 
 	Actor performer;
 	GameObject target;
@@ -93,8 +91,7 @@ public class ActionDig extends Action {
 	public boolean check() {
 
 		if (!performer.inventory.contains(Shovel.class)) {
-			actionName = ACTION_NAME_NEED_SHOVEL;
-			disabledReason = "You need a shovel";
+			disabledReason = "Need a shovel";
 			return false;
 		}
 
@@ -105,7 +102,6 @@ public class ActionDig extends Action {
 	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 

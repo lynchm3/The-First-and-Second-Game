@@ -19,7 +19,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionAttack extends Action {
 
 	public static final String ACTION_NAME = "Attack";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject target;
@@ -35,7 +34,6 @@ public class ActionAttack extends Action {
 
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();

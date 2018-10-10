@@ -58,19 +58,17 @@ public class ActionDropItemsSelectedInInventory extends Action {
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
 			if (!actor.inventory.contains(object)) {
-				actionName = ACTION_NAME + " " + object.name + " (can't reach)";
 				return false;
 			}
 		} else {
 			if (!gameObjectPerformer.inventory.contains(object)) {
-				actionName = ACTION_NAME + " " + object.name + " (can't reach)";
 				return false;
 			}
 
 		}
 
 		if (!square.inventory.canShareSquare && !object.canShareSquare) {
-			actionName = ACTION_NAME + " " + object.name + " (no space)";
+			disabledReason = "No Space";
 			return false;
 		}
 
@@ -80,7 +78,6 @@ public class ActionDropItemsSelectedInInventory extends Action {
 	@Override
 	public boolean checkRange() {
 		if (gameObjectPerformer.straightLineDistanceTo(square) > 1) {
-			actionName = ACTION_NAME + " " + object.name + " (can't reach)";
 			return false;
 		}
 
