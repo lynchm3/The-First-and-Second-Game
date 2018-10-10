@@ -6,9 +6,11 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
+import com.marklynch.ui.Draggable;
+import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
 
-public class PopupMenu {
+public class PopupMenu implements Draggable, Scrollable {
 
 	public float width;
 	public ArrayList<PopupMenuButton> buttons = new ArrayList<PopupMenuButton>();
@@ -16,6 +18,7 @@ public class PopupMenu {
 	public Square square;
 	public PopupMenuButton selectSquareButton;
 	public float drawPositionX, drawPositionY;
+	public float scrollOffsetY = 0;
 
 	public Button highlightedButton;
 	public int highlightedButtonIndex = 0;
@@ -30,10 +33,10 @@ public class PopupMenu {
 	public void draw() {
 		if (square instanceof InventorySquare) {
 			drawPositionX = ((InventorySquare) square).xInPixels;
-			drawPositionY = ((InventorySquare) square).yInPixels;
+			drawPositionY = ((InventorySquare) square).yInPixels + scrollOffsetY;
 		} else {
 			float squarePositionX = square.xInGridPixels;
-			float squarePositionY = square.yInGridPixels;
+			float squarePositionY = square.yInGridPixels + scrollOffsetY;
 			drawPositionX = (Game.windowWidth / 2)
 					+ (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.getDragXWithOffset()));
 			drawPositionY = (Game.windowHeight / 2)
@@ -55,13 +58,13 @@ public class PopupMenu {
 
 	}
 
-	public PopupMenuButton getButton(Object object) {
-		for (PopupMenuButton button : buttons) {
-			if (button.object == object)
-				return button;
-		}
-		return null;
-	}
+	// public PopupMenuButton getButton(Object object) {
+	// for (PopupMenuButton button : buttons) {
+	// if (button.object == object)
+	// return button;
+	// }
+	// return null;
+	// }
 
 	public void moveHighLightUp() {
 		highlightedButton.removeHighlight();
@@ -91,6 +94,25 @@ public class PopupMenu {
 		if (highlightedButton != null) {
 			highlightedButton.removeHighlight();
 		}
+
+	}
+
+	@Override
+	public void scroll(float dragX, float dragY) {
+		drag(dragX, dragY);
+
+	}
+
+	@Override
+	public void drag(float dragX, float dragY) {
+		this.scrollOffsetY -= dragY;
+		// fixScroll();
+		// resize2();S
+
+	}
+
+	@Override
+	public void dragDropped() {
 
 	}
 

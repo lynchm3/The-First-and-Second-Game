@@ -133,8 +133,8 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	public void drawText() {
 
-		TextUtils.printTextWithImages(this.squaresX, Inventory.inventoryNamesY, 300f, true, null,
-				Color.WHITE, new Object[] { new StringWithColor("Items Nearby", Color.WHITE) });
+		TextUtils.printTextWithImages(this.squaresX, Inventory.inventoryNamesY, 300f, true, null, Color.WHITE,
+				new Object[] { new StringWithColor("Items Nearby", Color.WHITE) });
 
 	}
 
@@ -187,8 +187,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	@Override
 	public void dragDropped() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }

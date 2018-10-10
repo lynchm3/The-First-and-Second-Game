@@ -141,6 +141,7 @@ public class UserInputLevel {
 				scrollableMouseIsOver.scroll(0, -100);
 			else if (mouseWheelDelta < 0)
 				scrollableMouseIsOver.scroll(0, 100);
+
 			// if (mouseWheelDelta != 0) {
 			// Game.level.activityLogger.drag(-mouseWheelDelta);
 			// }
@@ -506,6 +507,33 @@ public class UserInputLevel {
 			scrollableMouseIsOver = (Scrollable) Game.level.openInventories.get(0).getDraggable(Mouse.getX(),
 					(int) Game.windowHeight - Mouse.getY());
 			return;
+		}
+
+		// Pop up menu for actions
+		if (!Game.level.popupMenuActions.isEmpty()) {
+			for (int i = Game.level.popupMenuActions.size() - 1; i >= 0; i--) {
+				for (Button button : Game.level.popupMenuActions.get(i).buttons) {
+					if (button.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+
+						scrollableMouseIsOver = Game.level.popupMenuActions.get(i);
+						return;
+					}
+				}
+
+			}
+		}
+
+		// Pop up menu for objects
+		if (!Game.level.popupMenuObjects.isEmpty()) {
+			for (int i = Game.level.popupMenuObjects.size() - 1; i >= 0; i--) {
+				for (Button button : Game.level.popupMenuObjects.get(i).buttons) {
+					if (button.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+						scrollableMouseIsOver = Game.level.popupMenuObjects.get(i);
+						return;
+					}
+				}
+
+			}
 		}
 
 		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
