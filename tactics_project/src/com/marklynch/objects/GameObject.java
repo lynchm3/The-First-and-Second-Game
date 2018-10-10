@@ -530,7 +530,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, x, y, x + width, y + height, boundsX1, boundsY1,
 					boundsX2, boundsY2, backwards, false, color);
 
-			if (flash || this == Game.gameObjectMouseIsOver) {
+			if (highlight) {
 				TextureUtils.drawTexture(imageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
 						flashColor, false);
 			} else if (squareGameObjectIsOn.inventory.waterBody != null && !(this instanceof Fish)
@@ -727,11 +727,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			// boundsX2, boundsY2, false,
 			// gameObject.flipYAxisInMirror);
 
-			if (flash || this == Game.gameObjectMouseIsOver) {
-				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
-						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
-						flashColor, false);
-			}
+			// if (flash || this == Game.gameObjectMouseIsOver) {
+			// TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels,
+			// actorPositionYInPixels,
+			// actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0,
+			// backwards, false,
+			// flashColor, false);
+			// }
 		}
 
 	}
