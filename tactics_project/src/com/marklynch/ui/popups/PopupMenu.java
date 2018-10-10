@@ -38,11 +38,12 @@ public class PopupMenu implements Draggable, Scrollable {
 			drawPositionY = ((InventorySquare) square).yInPixels + scrollOffsetY;
 		} else {
 			float squarePositionX = square.xInGridPixels;
-			float squarePositionY = square.yInGridPixels + scrollOffsetY;
+			float squarePositionY = square.yInGridPixels;
 			drawPositionX = (Game.windowWidth / 2)
 					+ (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.getDragXWithOffset()));
 			drawPositionY = (Game.windowHeight / 2)
-					+ (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.getDragYWithOffset()));
+					+ (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.getDragYWithOffset()))
+					+ scrollOffsetY;
 		}
 
 		// QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width,
@@ -114,23 +115,32 @@ public class PopupMenu implements Draggable, Scrollable {
 	}
 
 	private void fixScroll(float dragY) {
-		// check not too far off orginial poss
-		if (scrollOffsetY > 0) {
-			scrollOffsetY = 0;
-		}
-		// else if(scrollOffsetY < -SOMETHING)
-		// {
-		// scrollOffsetY = -SOMETHING;
-		// }
 
 		// Check mouse still over a button
+		boolean stillOverAButton = false;
 		for (Button button : buttons) {
 			if (button.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY() + dragY)) {
-				return;
+				stillOverAButton = true;
+				break;
 			}
 		}
 
-		this.scrollOffsetY += dragY;
+		if (!stillOverAButton) {
+			this.scrollOffsetY += dragY;
+			return;
+		}
+
+		// check not too far off orginial poss
+		if (scrollOffsetY > 0) {
+			scrollOffsetY = 0;
+			return;
+		}
+		//
+		float minimumScrollY = -(buttons.size() * buttons.get(0).height) + Game.SQUARE_HEIGHT;
+		if (scrollOffsetY < minimumScrollY) {
+			scrollOffsetY = minimumScrollY;
+			return;
+		}
 	}
 
 	@Override
