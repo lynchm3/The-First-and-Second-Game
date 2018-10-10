@@ -193,7 +193,7 @@ public class ActionAttack extends Action {
 	public boolean check() {
 
 		if (!target.attackable) {
-			disabledReason = "Can't be attacked";
+			disabledReason = CANT_BE_ATTACKED;
 			return false;
 		}
 

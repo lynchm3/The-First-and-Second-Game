@@ -106,7 +106,7 @@ public class ActionFishingCompleted extends Action {
 	public boolean check() {
 
 		if (!performer.inventory.contains(FishingRod.class)) {
-			disabledReason = "Need a fishing rod";
+			disabledReason = NEED_A_FISHING_ROD;
 			return false;
 		}
 

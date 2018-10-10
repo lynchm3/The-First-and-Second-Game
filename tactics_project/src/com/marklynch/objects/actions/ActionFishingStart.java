@@ -106,12 +106,12 @@ public class ActionFishingStart extends Action {
 	public boolean check() {
 
 		if (!performer.inventory.contains(FishingRod.class)) {
-			disabledReason = "Need a fishing rod";
+			disabledReason = NEED_A_FISHING_ROD;
 			return false;
 		}
 
 		if (target.beingFishedBy != null) {
-			disabledReason = "Already being fished";
+			disabledReason = ALREADY_BEING_FISHED;
 			return false;
 		}
 

@@ -119,7 +119,7 @@ public class ActionPourSpecificItem extends Action {
 			return false;
 
 		if (containerForLiquids.liquid == null) {
-			disabledReason = "Container is empty";
+			disabledReason = CONTAINER_IS_EMPTY;
 			return false;
 		}
 

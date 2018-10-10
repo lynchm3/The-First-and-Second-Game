@@ -66,7 +66,7 @@ public class ActionLift extends Action {
 	public boolean check() {
 		float maxWeightForPerformer = 50f + performer.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH) * 10f;
 		if (object.weight > maxWeightForPerformer) {
-			disabledReason = "Too heavy";
+			disabledReason = TOO_HEAVY;
 			return false;
 		}
 		return true;

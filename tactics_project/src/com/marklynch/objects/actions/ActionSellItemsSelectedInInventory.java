@@ -59,7 +59,7 @@ public class ActionSellItemsSelectedInInventory extends Action {
 			return false;
 
 		if (!(buyer instanceof Trader) && buyer.getCarriedGoldValue() < object.value) {
-			disabledReason = "Not enough gold";
+			disabledReason = NOT_ENOUGH_GOLD;
 			return false;
 		}
 

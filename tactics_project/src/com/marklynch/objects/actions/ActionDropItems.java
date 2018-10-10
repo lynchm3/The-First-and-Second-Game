@@ -151,7 +151,7 @@ public class ActionDropItems extends VariableQtyAction {
 		}
 
 		if (!square.inventory.canShareSquare && !objects[0].canShareSquare) {
-			disabledReason = "No space";
+			disabledReason = NO_SPACE;
 			return false;
 		}
 

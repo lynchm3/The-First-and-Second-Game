@@ -17,7 +17,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionIgnite extends Action {
 
 	public static final String ACTION_NAME = "Ignite";
-	public static final String NEED_MATCHES_OR_IGNITE_POWER = "Need Fire source or Ignite Power";
 
 	Actor performer;
 	Square targetSquare;

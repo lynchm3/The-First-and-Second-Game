@@ -56,7 +56,7 @@ public class PowerUnlock extends Power {
 				return true;
 			}
 		}
-		disabledReason = "Not locked";
+		disabledReason = Action.NOT_LOCKED;
 		return false;
 	}
 

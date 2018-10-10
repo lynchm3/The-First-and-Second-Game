@@ -91,7 +91,7 @@ public class ActionDig extends Action {
 	public boolean check() {
 
 		if (!performer.inventory.contains(Shovel.class)) {
-			disabledReason = "Need a shovel";
+			disabledReason = NEED_A_SHOVEL;
 			return false;
 		}
 

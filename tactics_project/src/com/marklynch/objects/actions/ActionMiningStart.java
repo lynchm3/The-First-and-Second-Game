@@ -144,7 +144,7 @@ public class ActionMiningStart extends Action {
 	public boolean check() {
 
 		if (!performer.inventory.contains(Pickaxe.class)) {
-			disabledReason = "Need a pickaxe";
+			disabledReason = NEED_A_PICKAXE;
 			return false;
 		}
 

@@ -41,6 +41,22 @@ public abstract class Action {
 	public static Texture textureSleep;
 
 	public String disabledReason = null;
+	public static final String ALREADY_BEING_FISHED = "Already being fished";
+	public static final String CANT_BE_ATTACKED = "Can't be attacked";
+	public static final String CONTAINER_IS_EMPTY = "Container is empty";
+	public static final String DOORWAY_BLOCKED = "Doorway blocked";
+	public static final String NEED_A_FISHING_ROD = "Need a fishing rod";
+	public static final String NEED_A_KEY = "Need a key";
+	public static final String NEED_A_KNIFE = "Need a knife";
+	public static final String NEED_A_PICKAXE = "Need a pickaxe";
+	public static final String NEED_A_SHOVEL = "Need a shovel";
+	public static final String NEED_AN_AXE = "Need an axe";
+	public static final String NEED_MATCHES_OR_IGNITE_POWER = "Need Fire source or Ignite Power";
+	public static final String NO_SPACE = "No space";
+	public static final String NOT_ENOUGH_GOLD = "Not enough gold";
+	public static final String NOT_ENOUGH_TRUST = "Not enough trust";
+	public static final String NOT_LOCKED = "Not locked";
+	public static final String TOO_HEAVY = "Too heavy";
 
 	public Action(String actionName) {
 		super();

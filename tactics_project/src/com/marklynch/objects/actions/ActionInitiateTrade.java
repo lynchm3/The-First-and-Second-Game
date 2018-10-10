@@ -85,7 +85,7 @@ public class ActionInitiateTrade extends Action {
 	@Override
 	public boolean check() {
 		if (target.knownCriminals.contains(performer)) {
-			disabledReason = "Not enough trust";
+			disabledReason = NOT_ENOUGH_TRUST;
 			return false;
 		}
 

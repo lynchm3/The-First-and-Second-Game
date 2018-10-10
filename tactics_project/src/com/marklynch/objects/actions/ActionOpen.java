@@ -69,7 +69,7 @@ public class ActionOpen extends Action {
 			Actor actor = (Actor) gameObjectPerformer;
 
 			if (openable.isLocked() && !actor.hasKeyForDoor(openable)) {
-				disabledReason = "Need a key";
+				disabledReason = NEED_A_KEY;
 				return false;
 			}
 		}

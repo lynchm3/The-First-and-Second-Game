@@ -19,7 +19,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionChoppingStart extends Action {
 
 	public static final String ACTION_NAME = "Chop";
-	public static final String NEED_AN_AXE = "Need an axe";
 
 	Actor performer;
 	GameObject target;

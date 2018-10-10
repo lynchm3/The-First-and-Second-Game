@@ -90,7 +90,7 @@ public class ActionSkin extends Action {
 	@Override
 	public boolean check() {
 		if (!performer.inventory.contains(Knife.class)) {
-			disabledReason = "Need a knife";
+			disabledReason = NEED_A_KNIFE;
 			return false;
 		}
 

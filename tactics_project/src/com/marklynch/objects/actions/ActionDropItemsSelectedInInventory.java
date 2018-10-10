@@ -68,7 +68,7 @@ public class ActionDropItemsSelectedInInventory extends Action {
 		}
 
 		if (!square.inventory.canShareSquare && !object.canShareSquare) {
-			disabledReason = "No Space";
+			disabledReason = NO_SPACE;
 			return false;
 		}
 

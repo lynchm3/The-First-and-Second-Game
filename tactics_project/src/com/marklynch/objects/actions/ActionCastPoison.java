@@ -117,7 +117,7 @@ public class ActionCastPoison extends Action {
 		// return false;
 
 		if (!target.attackable) {
-			disabledReason = "Can't be attacked";
+			disabledReason = CANT_BE_ATTACKED;
 			return false;
 		}
 

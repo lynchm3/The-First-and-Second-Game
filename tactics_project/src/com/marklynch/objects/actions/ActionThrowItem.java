@@ -178,7 +178,7 @@ public class ActionThrowItem extends Action {
 			maxDistance = 10;
 
 		if (performer.straightLineDistanceTo(targetSquare) > maxDistance) {
-			disabledReason = "Too heavy";
+			disabledReason = TOO_HEAVY;
 			return false;
 		}
 
