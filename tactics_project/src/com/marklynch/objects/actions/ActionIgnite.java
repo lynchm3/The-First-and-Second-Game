@@ -34,6 +34,9 @@ public class ActionIgnite extends Action {
 			targetGameObject = (GameObject) target;
 			targetSquare = targetGameObject.squareGameObjectIsOn;
 		}
+		if (!check()) {
+			enabled = false;
+		}
 		legal = checkLegality();
 		sound = createSound();
 	}
@@ -126,7 +129,7 @@ public class ActionIgnite extends Action {
 				return true;
 		}
 
-		// No magic
+		// No magic, just matches
 		if (performer.straightLineDistanceTo(targetSquare) > 1) {
 			actionName = ACTION_NAME + " (can't reach)";
 			return false;
