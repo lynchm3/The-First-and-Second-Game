@@ -619,9 +619,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		filteredGameObjects.clear();
 		if (Game.level.player.inventory.textBoxSearch.getText().length() > 0) {
+			String searchText = Game.level.player.inventory.textBoxSearch.getText();
 			for (GameObject gameObject : gameObjects) {
-				if (TextUtils.containsIgnoreCase(gameObject.name,
-						Game.level.player.inventory.textBoxSearch.getText())) {
+				if (TextUtils.containsIgnoreCase(gameObject.name, searchText)
+						|| TextUtils.containsIgnoreCase(gameObject.type, searchText)) {
 					filteredGameObjects.add(gameObject);
 				}
 			}
