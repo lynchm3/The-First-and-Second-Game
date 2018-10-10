@@ -2,6 +2,8 @@ package com.marklynch.ui.popups;
 
 import java.util.ArrayList;
 
+import org.lwjgl.input.Mouse;
+
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.inventory.InventorySquare;
@@ -106,9 +108,29 @@ public class PopupMenu implements Draggable, Scrollable {
 	@Override
 	public void drag(float dragX, float dragY) {
 		this.scrollOffsetY -= dragY;
-		// fixScroll();
+		fixScroll(dragY);
 		// resize2();S
 
+	}
+
+	private void fixScroll(float dragY) {
+		// check not too far off orginial poss
+		if (scrollOffsetY > 0) {
+			scrollOffsetY = 0;
+		}
+		// else if(scrollOffsetY < -SOMETHING)
+		// {
+		// scrollOffsetY = -SOMETHING;
+		// }
+
+		// Check mouse still over a button
+		for (Button button : buttons) {
+			if (button.calculateIfPointInBoundsOfButton(Mouse.getX(), (int) Game.windowHeight - Mouse.getY() + dragY)) {
+				return;
+			}
+		}
+
+		this.scrollOffsetY += dragY;
 	}
 
 	@Override
