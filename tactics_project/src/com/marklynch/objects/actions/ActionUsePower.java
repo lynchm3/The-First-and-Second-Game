@@ -95,13 +95,17 @@ public class ActionUsePower extends Action {
 	@Override
 	public boolean check() {
 
-		disabledReason = power.disabledReason;
-
 		if (targetGameObject != null)
 			if (targetGameObject.attackable == false || targetGameObject.isFloorObject)
 				return false;
 
-		return power.check(gameObjectSource, targetSquare);
+		boolean powerCheck = power.check(gameObjectSource, targetSquare);
+		if (powerCheck) {
+			return true;
+		} else {
+			disabledReason = power.disabledReason;
+			return false;
+		}
 	}
 
 	@Override

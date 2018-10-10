@@ -40,7 +40,7 @@ public abstract class Action {
 	public static Texture textureX;
 	public static Texture textureSleep;
 
-	public String disabledReason = "";
+	public String disabledReason = null;
 
 	public Action(String actionName) {
 		super();

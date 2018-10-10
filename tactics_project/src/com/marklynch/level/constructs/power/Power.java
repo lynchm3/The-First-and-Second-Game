@@ -30,7 +30,7 @@ public abstract class Power {
 	public boolean potentialyCriminal;
 	public boolean selectTarget = false;
 	public Crime.TYPE crimeSeverity;
-	public String disabledReason = "";
+	public String disabledReason = null;
 	public boolean passive = false;
 	public boolean activateAtStartOfTurn = false;
 
