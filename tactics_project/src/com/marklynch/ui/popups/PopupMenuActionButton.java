@@ -9,7 +9,8 @@ public class PopupMenuActionButton extends PopupMenuButton {
 	public PopupMenuActionButton(float x, float y, float width, float height, String enabledTexturePath,
 			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop, Action action,
 			PopupMenu popup) {
-		super(x, y, width, height, enabledTexturePath, disabledTexturePath, xFromLeft, yFromTop, action, popup, text);
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath, xFromLeft, yFromTop, action, popup, text,
+				action.disabledReason);
 		this.action = action;
 	}
 

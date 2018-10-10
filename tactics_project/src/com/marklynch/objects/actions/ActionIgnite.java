@@ -18,6 +18,7 @@ public class ActionIgnite extends Action {
 
 	public static final String ACTION_NAME = "Ignite";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
+	public static final String NEED_MATCHES_OR_IGNITE_POWER = "Need Fire source or Ignite Power";
 
 	Actor performer;
 	Square targetSquare;
@@ -109,7 +110,7 @@ public class ActionIgnite extends Action {
 			return true;
 		}
 
-		disabledReason = "You need matches or ignite power to ignite objects";
+		disabledReason = NEED_MATCHES_OR_IGNITE_POWER;
 
 		return false;
 	}

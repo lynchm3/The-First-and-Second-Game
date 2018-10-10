@@ -15,7 +15,7 @@ public class PopupButton extends Button {
 
 	public PopupButton(float x, float y, float width, float height, String enabledTexturePath,
 			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop, Object object, Popup popup) {
-		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text);
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text, null);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 		this.object = object;

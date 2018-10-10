@@ -16,7 +16,7 @@ public abstract class SettingsWindowButton extends Button {
 
 	public SettingsWindowButton(float x, float y, float width, float height, Object object, boolean xFromLeft,
 			boolean yFromTop) {
-		super(x, y, width, height, null, null, object);
+		super(x, y, width, height, null, null, object, null);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 		this.object = object;

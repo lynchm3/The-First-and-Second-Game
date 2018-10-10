@@ -22,7 +22,7 @@ public class AtributesWindowButton extends Button {
 
 	public AtributesWindowButton(float x, float y, float width, float height, Object object, String attribute,
 			boolean xFromLeft, boolean yFromTop, AttributesDialog detailsWindow, int index) {
-		super(x, y, width, height, null, null, "");
+		super(x, y, width, height, null, null, "", null);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 		this.attributesWindow = detailsWindow;

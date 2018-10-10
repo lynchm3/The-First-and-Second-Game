@@ -6,7 +6,7 @@ public abstract class ActorButton extends Button {
 
 	public ActorButton(float x, float y, float width, float height, String enabledTexturePath,
 			String disabledTexturePath) {
-		super(x, y, width, height, enabledTexturePath, disabledTexturePath, "");
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath, "", null);
 	}
 
 	@Override

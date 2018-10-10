@@ -1,7 +1,5 @@
 package com.marklynch.ui.button;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
@@ -21,15 +19,15 @@ public class LevelButton extends Button {
 	public LevelButton(float x, float y, float width, float height, String enabledTexturePath,
 			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop, Color buttonColor,
 			Color textColor, String tooltipText) {
-		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text);
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text, tooltipText);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 		this.buttonColor = buttonColor;
 		this.textColor = textColor;
 		this.textParts = new Object[] { new StringWithColor(text, textColor) };
 
-		if (tooltipText != null)
-			this.tooltip = new Tooltip(false, tooltipText);
+		// if (tooltipText != null)
+		// this.tooltip = new Tooltip(false, tooltipText);
 
 		realX = x;
 		if (this.xFromLeft == false)
@@ -67,12 +65,6 @@ public class LevelButton extends Button {
 	}
 
 	@Override
-	public void drawTooltip() {
-		if (tooltip != null)
-			tooltip.drawStaticUI();
-	}
-
-	@Override
 	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
 
 		float realX = x;
@@ -105,20 +97,6 @@ public class LevelButton extends Button {
 		realY = y;
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
-
-	}
-
-	public void setTooltipText(Object... tooltipText) {
-
-		if (tooltipText != null)
-			this.tooltip = new Tooltip(false, tooltipText);
-
-	}
-
-	public void setTooltipText(ArrayList<Object> tooltipText) {
-
-		if (tooltipText != null)
-			this.tooltip = new Tooltip(tooltipText);
 
 	}
 

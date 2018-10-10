@@ -1,5 +1,7 @@
 package com.marklynch.ui.button;
 
+import java.util.ArrayList;
+
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
@@ -16,7 +18,7 @@ public abstract class Button {
 	public Tooltip tooltip;
 
 	public Button(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,
-			Object text) {
+			Object text, String tooltipText) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -25,6 +27,8 @@ public abstract class Button {
 		this.enabledTexture = ResourceUtils.getGlobalImage(enabledTexturePath, false);
 		this.disabledTexture = ResourceUtils.getGlobalImage(disabledTexturePath, false);
 		this.text = text;
+		if (tooltipText != null)
+			this.tooltip = new Tooltip(false, tooltipText);
 	}
 
 	public void setClickListener(ClickListener clickListener) {
@@ -56,6 +60,22 @@ public abstract class Button {
 	}
 
 	public void drawTooltip() {
+		if (tooltip != null)
+			tooltip.drawStaticUI();
+	}
+
+	public void setTooltipText(Object... tooltipText) {
+
+		if (tooltipText != null)
+			this.tooltip = new Tooltip(false, tooltipText);
+
+	}
+
+	public void setTooltipText(ArrayList<Object> tooltipText) {
+
+		if (tooltipText != null)
+			this.tooltip = new Tooltip(tooltipText);
+
 	}
 
 }
