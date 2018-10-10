@@ -101,7 +101,6 @@ public class ActionSkin extends Action {
 	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 
