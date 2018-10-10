@@ -948,6 +948,12 @@ public class Level {
 			}
 		}
 
+		if (Game.gameObjectMouseIsOver != null && Game.gameObjectMouseIsOver.squareGameObjectIsOn != null) {
+			Game.gameObjectMouseIsOver.squareGameObjectIsOn.drawHighlight();
+		} else if (Game.squareMouseIsOver != null) {
+			Game.squareMouseIsOver.drawHighlight();
+		}
+
 		Game.flush();
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();

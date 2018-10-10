@@ -319,6 +319,10 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public void draw2() {
 
+		// if (Game.gameObjectMouseIsOver.squareGameObjectIsOn == this) {
+		//
+		// }
+
 		// if (!this.seenByPlayer || !this.visibleToPlayer)
 		// return;
 		//
