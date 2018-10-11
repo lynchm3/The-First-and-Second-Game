@@ -264,10 +264,6 @@ public class TemplatesFurniture {
 		Templates.WELL.name = "Well";
 		Templates.WELL.setImageAndExtrapolateSize("well.png");
 		Templates.WELL.totalHealth = Templates.WELL.remainingHealth = 138;
-		Templates.WELL.widthRatio = 1.5f;
-		Templates.WELL.heightRatio = 1.5f;
-		Templates.WELL.drawOffsetRatioX = -0.25f;
-		Templates.WELL.drawOffsetRatioY = -0.25f;
 		Templates.WELL.weight = 213f;
 		Templates.WELL.value = 89;
 		Templates.WELL.anchorX = 0;
