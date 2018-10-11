@@ -149,7 +149,7 @@ public class ActionTeleportSwap extends Action {
 		}
 
 		if (target.restricted() == true && !target.owners.contains(teleportee)) {
-			illegalReason = TRESSPASSING;
+			illegalReason = TRESPASSING;
 			return false;
 		}
 		return true;

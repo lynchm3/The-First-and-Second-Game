@@ -63,9 +63,9 @@ public abstract class Action {
 
 	// Illegal Reason
 	public String illegalReason = null;
-	public static final String ASSAULT = "ASSAULT";
-	public static final String THIEVERY = "THIEVERY";
-	public static final String TRESSPASSING = "TRESSPASSING";
+	public static final String ASSAULT = "Assault";
+	public static final String THEFT = "Theft";
+	public static final String TRESSPASSING = "Tresspassing";
 	public static final String VANDALISM = "VANDALISM";
 
 	public Action(String actionName) {
@@ -218,16 +218,16 @@ public abstract class Action {
 
 	}
 
-	public boolean standardAttackLegalityCheck(GameObject teleportee, GameObject target) {
+	public boolean standardAttackLegalityCheck(GameObject performer, GameObject target) {
 
 		if (target == null)
 			return true;
 
-		if (teleportee.attackers.contains(target))
+		if (performer.attackers.contains(target))
 			return true;
 
 		// Is Object
-		if (target.owner != null && target.owner != teleportee) {
+		if (target.owner != null && target.owner != performer) {
 			illegalReason = VANDALISM;
 			return false;
 		}
@@ -235,6 +235,7 @@ public abstract class Action {
 		// Is human
 		if (target instanceof Actor) {
 			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal)) {
+				illegalReason = ASSAULT;
 				return false;
 			}
 		}

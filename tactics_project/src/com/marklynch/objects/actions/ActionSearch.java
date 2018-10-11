@@ -100,7 +100,7 @@ public class ActionSearch extends Action {
 	@Override
 	public boolean checkLegality() {
 		if (object.owner != null && object.owner != performer) {
-			illegalReason = THIEVERY;
+			illegalReason = THEFT;
 			return false;
 		}
 		return true;

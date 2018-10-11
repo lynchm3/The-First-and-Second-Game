@@ -157,7 +157,7 @@ public class ActionSellItems extends VariableQtyAction {
 	public boolean checkLegality() {
 		for (GameObject gameObject : objects) {
 			if (gameObject.owner == receiver) {
-				illegalReason = THIEVERY;
+				illegalReason = THEFT;
 				return false;
 			}
 		}

@@ -107,7 +107,7 @@ public class ActionUnlock extends Action {
 	@Override
 	public boolean checkLegality() {
 		if (openable.owner != null && openable.owner != gameObjectPerformer) {
-			illegalReason = TRESSPASSING;
+			illegalReason = TRESPASSING;
 			return false;
 		}
 		return true;

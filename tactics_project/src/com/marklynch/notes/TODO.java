@@ -218,7 +218,7 @@ public class TODO {
 
 	// When u mouse over something, lemme know the default function. Image +
 	// text in white, or red if u'll be attacked for it (stealing, attacking,
-	// tresspassing)
+	// trespassing)
 
 	// Same for the actions in the popups
 

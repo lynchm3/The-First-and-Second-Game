@@ -57,7 +57,7 @@ public class ActionTrespass extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		illegalReason = TRESSPASSING;
+		illegalReason = TRESPASSING;
 		return false;
 	}
 

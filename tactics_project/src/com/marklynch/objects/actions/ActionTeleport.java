@@ -205,7 +205,7 @@ public class ActionTeleport extends Action {
 	@Override
 	public boolean checkLegality() {
 		if (targetSquare.restricted() == true && !targetSquare.owners.contains(teleportee)) {
-			illegalReason = TRESSPASSING;
+			illegalReason = TRESPASSING;
 			return false;
 		}
 

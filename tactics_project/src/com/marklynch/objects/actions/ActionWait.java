@@ -61,7 +61,7 @@ public class ActionWait extends Action {
 	@Override
 	public boolean checkLegality() {
 		if (target.restricted() == true && !target.owners.contains(performer)) {
-			illegalReason = TRESSPASSING;
+			illegalReason = TRESPASSING;
 			return false;
 		}
 		return true;

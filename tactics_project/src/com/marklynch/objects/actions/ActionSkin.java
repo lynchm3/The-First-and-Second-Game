@@ -116,7 +116,7 @@ public class ActionSkin extends Action {
 		}
 
 		if (target.owner != null && target.owner != performer) {
-			illegalReason = THIEVERY;
+			illegalReason = THEFT;
 			return false;
 		}
 

@@ -92,7 +92,7 @@ public class ActionTakeAll extends Action {
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) square.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer) {
-				illegalReason = THIEVERY;
+				illegalReason = THEFT;
 				return false;
 			}
 		}

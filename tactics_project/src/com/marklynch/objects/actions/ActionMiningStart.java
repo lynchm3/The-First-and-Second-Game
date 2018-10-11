@@ -164,7 +164,7 @@ public class ActionMiningStart extends Action {
 	@Override
 	public boolean checkLegality() {
 		if (target.owner != null && target.owner != performer) {
-			illegalReason = THIEVERY;
+			illegalReason = THEFT;
 			return false;
 		}
 		return true;

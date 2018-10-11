@@ -98,7 +98,7 @@ public class ActionOpen extends Action {
 		if (openable.isLocked()) {
 			Action unlock = new ActionUnlock(gameObjectPerformer, openable);
 			if (!unlock.legal) {
-				illegalReason = TRESSPASSING;
+				illegalReason = TRESPASSING;
 				return false;
 			}
 		}

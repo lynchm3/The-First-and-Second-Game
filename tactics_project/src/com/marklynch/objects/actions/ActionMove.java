@@ -224,7 +224,7 @@ public class ActionMove extends Action {
 	@Override
 	public boolean checkLegality() {
 		if (target.restricted() == true && !target.owners.contains(performer)) {
-			illegalReason = TRESSPASSING;
+			illegalReason = TRESPASSING;
 			return false;
 		}
 
@@ -232,7 +232,7 @@ public class ActionMove extends Action {
 		if (door != null && door.isOpen() == false && !(door instanceof RemoteDoor)) {
 			Action open = new ActionOpen(performer, door);
 			if (!open.legal) {
-				illegalReason = TRESSPASSING;
+				illegalReason = TRESPASSING;
 				return false;
 			}
 		}
