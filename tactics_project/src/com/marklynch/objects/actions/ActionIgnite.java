@@ -135,7 +135,10 @@ public class ActionIgnite extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, targetGameObject);
+		boolean illegal = standardAttackLegalityCheck(performer, targetGameObject);
+		if (illegalReason == VANDALISM)
+			illegalReason = ARSON;
+		return illegal;
 	}
 
 	@Override
