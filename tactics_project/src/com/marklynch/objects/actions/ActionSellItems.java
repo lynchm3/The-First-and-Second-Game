@@ -158,6 +158,8 @@ public class ActionSellItems extends VariableQtyAction {
 		for (GameObject gameObject : objects) {
 			if (gameObject.owner == receiver) {
 				illegalReason = THEFT;
+				if (gameObject.value > 100)
+					illegalReason = GRAND_THEFT;
 				return false;
 			}
 		}

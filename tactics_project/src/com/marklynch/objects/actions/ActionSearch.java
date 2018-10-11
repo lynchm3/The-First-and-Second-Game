@@ -16,12 +16,12 @@ public class ActionSearch extends Action {
 	public static final String ACTION_NAME = "Search";
 
 	Actor performer;
-	Searchable object;
+	Searchable target;
 
 	public ActionSearch(Actor performer, Searchable object) {
 		super(ACTION_NAME, "action_search.png");
 		super.gameObjectPerformer = this.performer = performer;
-		this.object = object;
+		this.target = object;
 		if (!check()) {
 			enabled = false;
 		}
@@ -39,16 +39,16 @@ public class ActionSearch extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(object, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " searched ", object }));
+		if (Game.level.shouldLog(target, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " searched ", target }));
 
-		ArrayList<GameObject> gameObjectsToLoot = object.search();
+		ArrayList<GameObject> gameObjectsToLoot = target.search();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 
 			if (Game.level.shouldLog(gameObjectToLoot, performer))
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " found ", gameObjectToLoot, " in ", object }));
-			object.inventory.remove(gameObjectToLoot);
+						new ActivityLog(new Object[] { performer, " found ", gameObjectToLoot, " in ", target }));
+			target.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
 			if (gameObjectToLoot.owner == null)
 				gameObjectToLoot.owner = performer;
@@ -58,8 +58,8 @@ public class ActionSearch extends Action {
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " found nothing" }));
 
-		for (Effect effect : object.effectsFromInteracting) {
-			performer.addEffect(effect.makeCopy(object, performer));
+		for (Effect effect : target.effectsFromInteracting) {
+			performer.addEffect(effect.makeCopy(target, performer));
 		}
 
 		performer.actionsPerformedThisTurn.add(this);
@@ -91,7 +91,7 @@ public class ActionSearch extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 		return false;
@@ -99,7 +99,7 @@ public class ActionSearch extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (object.owner != null && object.owner != performer) {
+		if (target.owner != null && target.owner != performer) {
 			illegalReason = THEFT;
 			return false;
 		}

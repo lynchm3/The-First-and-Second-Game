@@ -93,6 +93,8 @@ public class ActionTakeAll extends Action {
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer) {
 				illegalReason = THEFT;
+				if (gameObjectToLoot.value > 100)
+					illegalReason = GRAND_THEFT;
 				return false;
 			}
 		}

@@ -179,6 +179,8 @@ public class ActionTakeItems extends VariableQtyAction {
 			return true;
 		if (objects[0].owner != null && objects[0].owner != performer) {
 			illegalReason = THEFT;
+			if (objects[0].value > 100)
+				illegalReason = GRAND_THEFT;
 			return false;
 		}
 		return true;

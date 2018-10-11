@@ -65,6 +65,7 @@ public abstract class Action {
 	public String illegalReason = null;
 	public static final String ASSAULT = "Assault";
 	public static final String THEFT = "Theft";
+	public static final String GRAND_THEFT = "Grand Theft";
 	public static final String TRESPASSING = "Trespassing";
 	public static final String VANDALISM = "VANDALISM";
 
