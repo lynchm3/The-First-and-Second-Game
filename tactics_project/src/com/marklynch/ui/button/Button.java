@@ -70,11 +70,13 @@ public abstract class Button {
 	}
 
 	public void setTooltipText(Object... tooltipText) {
-		tooltipGroup.setTooltipText(tooltipText);
+		if (tooltipGroup != null)
+			tooltipGroup.setTooltipText(tooltipText);
 	}
 
 	public void setTooltipText(ArrayList<Object> tooltipText) {
-		tooltipGroup.setTooltipText(tooltipText);
+		if (tooltipGroup != null)
+			tooltipGroup.setTooltipText(tooltipText);
 	}
 
 }

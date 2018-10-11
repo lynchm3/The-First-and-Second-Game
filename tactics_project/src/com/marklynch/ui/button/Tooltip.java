@@ -21,7 +21,7 @@ public class Tooltip {
 	// LevelButton levelButton;
 	float[] dimensions;
 	ArrayList<Object> text;
-	float alpha = 0f;
+	// float alpha = 0f;
 	Color backgroundColor = new Color(1f, 1f, 1f, 0f);
 	Color textColor = new Color(0f, 0f, 0f, 0f);
 
@@ -42,59 +42,31 @@ public class Tooltip {
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
 	}
 
-	public void drawStaticUI() {
-		System.out.println("Tooltip.drawStaticUI");
-
-		// if (1 == 1)
-		// return;
-		if (lastTooltipGroupShown == null || !lastTooltipGroupShown.contains(this)) {
-			alpha = 0f;
-		} else if (alpha < 1f) {
-			alpha += 0.05f;
-			if (alpha > 1) {
-				alpha = 1;
-			}
-		}
+	public void drawStaticUI(float y1, float alpha) {
+		System.out.println("Tooltip.drawStaticUI y1 = " + y1);
+		System.out.println("Tooltip.drawStaticUI alpha = " + alpha);
 
 		float mouseX = Mouse.getX();
-		float mouseY = Game.windowHeight - Mouse.getY();
 
 		float x1 = 0;
 		float x2 = 0;
-		float y1 = 0;
-		float y2 = 0;
+		// float y1 = 0;
+		float y2 = y1 + dimensions[1];
+		System.out.println("Tooltip.drawStaticUI y2 = " + y2);
 
-		if (mouseX <= Game.halfWindowWidth && mouseY <= Game.halfWindowHeight) {
+		if (mouseX <= Game.halfWindowWidth) {
 			// top left quadrant
 			x1 = mouseX + 10;
 			x2 = x1 + dimensions[0];
-			y1 = mouseY;
-			y2 = y1 + dimensions[1];
 
-		} else if (mouseX <= Game.halfWindowWidth && mouseY > Game.halfWindowHeight) {
-			// bottom left quadrant
-			x1 = mouseX + 10;
-			x2 = x1 + dimensions[0];
-			y2 = mouseY;
-			y1 = y2 - dimensions[1];
-
-		} else if (mouseX > Game.halfWindowWidth && mouseY <= Game.halfWindowHeight) {
-			// bottom right
-			x2 = mouseX + -10;
-			x1 = x2 - dimensions[0];
-			y1 = mouseY;
-			y2 = y1 + dimensions[1];
-
-		} else if (mouseX > Game.halfWindowWidth && mouseY > Game.halfWindowHeight) {
+		} else if (mouseX > Game.halfWindowWidth) {
 			// top right
 			x2 = mouseX + -10;
 			x1 = x2 - dimensions[0];
-			y2 = mouseY;
-			y1 = y2 - dimensions[1];
 
 		}
-
-		// textWidth
+		System.out.println("Tooltip.drawStaticUI x1 = " + x1);
+		System.out.println("Tooltip.drawStaticUI x2 = " + x2);
 
 		backgroundColor.a = alpha;
 		QuadUtils.drawQuad(backgroundColor, x1, y1, x2, y2);// WAT
