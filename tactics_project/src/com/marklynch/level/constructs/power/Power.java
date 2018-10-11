@@ -37,6 +37,7 @@ public abstract class Power {
 	public int range;
 	public Point[] castLocations;
 	public Point[] areaOfEffect;
+	public String illegalReason;
 
 	public Power(String name, Texture image, GameObject source, Effect[] effects, int range, Point[] castLocations,
 			Point[] areaOfEffect, int loudness, boolean hostile, boolean potentiallyCriminal,

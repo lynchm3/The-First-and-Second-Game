@@ -144,6 +144,10 @@ public class ActionUsePower extends Action {
 
 				boolean assaultOrVandalism = standardAttackLegalityCheck(gameObjectPerformer, gameObject);
 				if (assaultOrVandalism) {
+					if (power.illegalReason != null) {
+						this.illegalReason = power.illegalReason;
+					}
+
 					return false;
 				}
 
