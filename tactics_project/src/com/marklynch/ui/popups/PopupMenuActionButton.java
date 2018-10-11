@@ -2,7 +2,7 @@ package com.marklynch.ui.popups;
 
 import com.marklynch.objects.actions.Action;
 import com.marklynch.ui.button.Tooltip;
-import com.marklynch.utils.TextUtils;
+import com.marklynch.ui.button.TooltipGroup;
 
 public class PopupMenuActionButton extends PopupMenuButton {
 
@@ -15,12 +15,17 @@ public class PopupMenuActionButton extends PopupMenuButton {
 				null);
 		this.action = action;
 
-		if (action.disabledReason != null && action.illegalReason != null) {
-			this.tooltip = new Tooltip(false, action.disabledReason, TextUtils.NewLine.NEW_LINE, action.illegalReason);
-		} else if (action.disabledReason != null) {
-			this.tooltip = new Tooltip(false, action.disabledReason);
-		} else if (action.illegalReason != null) {
-			this.tooltip = new Tooltip(false, action.illegalReason);
+		if (action.disabledReason != null) {
+			if (tooltipGroup == null)
+				tooltipGroup = new TooltipGroup();
+
+			this.tooltipGroup.add(new Tooltip(false, action.disabledReason));
+		}
+
+		if (action.illegalReason != null) {
+			if (tooltipGroup == null)
+				tooltipGroup = new TooltipGroup();
+			this.tooltipGroup.add(new Tooltip(false, action.illegalReason));
 		}
 
 	}

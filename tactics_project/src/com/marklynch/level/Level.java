@@ -1477,9 +1477,9 @@ public class Level {
 
 		if (Game.buttonHoveringOver != null) {
 			Game.buttonHoveringOver.drawTooltip();
-			Tooltip.lastTooltipShown = Game.buttonHoveringOver.tooltip;
+			Tooltip.lastTooltipGroupShown = Game.buttonHoveringOver.tooltipGroup;
 		} else {
-			Tooltip.lastTooltipShown = null;
+			Tooltip.lastTooltipGroupShown = null;
 		}
 
 	}

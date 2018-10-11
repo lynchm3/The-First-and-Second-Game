@@ -13,7 +13,7 @@ import com.marklynch.utils.TextUtils;
 
 public class Tooltip {
 
-	public static Tooltip lastTooltipShown = null;
+	public static TooltipGroup lastTooltipGroupShown = null;
 
 	public StringWithColor textWithColor;
 	// public int textWidth;
@@ -27,7 +27,6 @@ public class Tooltip {
 
 	public Tooltip(boolean doesNothing, Object... text) {
 		this.text = new ArrayList<Object>(Arrays.asList(text));
-		// this.levelButton = button;
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
 	}
 
@@ -47,7 +46,7 @@ public class Tooltip {
 
 		// if (1 == 1)
 		// return;
-		if (lastTooltipShown != this) {
+		if (!lastTooltipGroupShown.contains(this)) {
 			alpha = 0f;
 		} else if (alpha < 1f) {
 			alpha += 0.05f;

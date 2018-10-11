@@ -15,7 +15,7 @@ public abstract class Button {
 	public ClickListener clickListener;
 	protected Object text;
 	protected boolean highlighted = false;
-	public Tooltip tooltip;
+	public TooltipGroup tooltipGroup;
 
 	public Button(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,
 			Object text, String tooltipText) {
@@ -27,8 +27,11 @@ public abstract class Button {
 		this.enabledTexture = ResourceUtils.getGlobalImage(enabledTexturePath, false);
 		this.disabledTexture = ResourceUtils.getGlobalImage(disabledTexturePath, false);
 		this.text = text;
-		if (tooltipText != null)
-			this.tooltip = new Tooltip(false, tooltipText);
+		if (tooltipText != null) {
+			tooltipGroup = new TooltipGroup();
+			tooltipGroup.add(new Tooltip(false, tooltipText));
+		}
+
 	}
 
 	public void setClickListener(ClickListener clickListener) {
@@ -60,22 +63,16 @@ public abstract class Button {
 	}
 
 	public void drawTooltip() {
-		if (tooltip != null)
-			tooltip.drawStaticUI();
+		if (tooltipGroup != null)
+			tooltipGroup.drawStaticUI();
 	}
 
 	public void setTooltipText(Object... tooltipText) {
-
-		if (tooltipText != null)
-			this.tooltip = new Tooltip(false, tooltipText);
-
+		tooltipGroup.setTooltipText(tooltipText);
 	}
 
 	public void setTooltipText(ArrayList<Object> tooltipText) {
-
-		if (tooltipText != null)
-			this.tooltip = new Tooltip(tooltipText);
-
+		tooltipGroup.setTooltipText(tooltipText);
 	}
 
 }

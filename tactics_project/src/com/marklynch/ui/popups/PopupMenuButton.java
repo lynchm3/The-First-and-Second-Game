@@ -83,10 +83,4 @@ public class PopupMenuButton extends Button {
 		return false;
 	}
 
-	@Override
-	public void drawTooltip() {
-		if (tooltip != null)
-			tooltip.drawStaticUI();
-	}
-
 }
