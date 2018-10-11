@@ -63,6 +63,8 @@ public abstract class Button {
 	}
 
 	public void drawTooltip() {
+
+		System.out.println("button.drawTooltip");
 		if (tooltipGroup != null)
 			tooltipGroup.drawStaticUI();
 	}

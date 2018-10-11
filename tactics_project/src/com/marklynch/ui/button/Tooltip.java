@@ -43,10 +43,11 @@ public class Tooltip {
 	}
 
 	public void drawStaticUI() {
+		System.out.println("Tooltip.drawStaticUI");
 
 		// if (1 == 1)
 		// return;
-		if (!lastTooltipGroupShown.contains(this)) {
+		if (lastTooltipGroupShown == null || !lastTooltipGroupShown.contains(this)) {
 			alpha = 0f;
 		} else if (alpha < 1f) {
 			alpha += 0.05f;
