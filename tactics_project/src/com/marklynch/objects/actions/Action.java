@@ -65,7 +65,7 @@ public abstract class Action {
 	public String illegalReason = null;
 	public static final String ASSAULT = "Assault";
 	public static final String THEFT = "Theft";
-	public static final String TRESSPASSING = "Tresspassing";
+	public static final String TRESPASSING = "Trespassing";
 	public static final String VANDALISM = "VANDALISM";
 
 	public Action(String actionName) {
@@ -135,16 +135,16 @@ public abstract class Action {
 			ActionTrespass actionTrespass = new ActionTrespass(performer, square, loudness);
 			Crime crime = null;
 
-			Crime.TYPE tresspassingType = Crime.TYPE.CRIME_TRESPASSING;
+			Crime.TYPE trespassingType = Crime.TYPE.CRIME_TRESPASSING;
 			if (square.restricted == false && square.restrictedAtNight == true && Game.level.hour == 22
 					&& Game.level.minute < 10) {
-				tresspassingType = Crime.TYPE.CRIME_TRESPASSING_LEEWAY;
+				trespassingType = Crime.TYPE.CRIME_TRESPASSING_LEEWAY;
 			}
 
 			if (square.owners.size() > 0)
-				crime = new Crime(actionTrespass, performer, square.owners.get(0), tresspassingType);
+				crime = new Crime(actionTrespass, performer, square.owners.get(0), trespassingType);
 			else
-				crime = new Crime(actionTrespass, performer, null, tresspassingType);
+				crime = new Crime(actionTrespass, performer, null, trespassingType);
 
 			performer.crimesPerformedThisTurn.add(crime);
 			performer.crimesPerformedInLifetime.add(crime);
