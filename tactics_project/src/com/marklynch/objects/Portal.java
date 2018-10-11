@@ -74,7 +74,6 @@ public class Portal extends GameObject implements UpdatesWhenSquareContentsChang
 				doTheThing(gameObject);
 			}
 		}
-		System.out.println("updateVoid 1 - " + squareGameObjectIsOn.inventory);
 
 	}
 
@@ -106,7 +105,6 @@ public class Portal extends GameObject implements UpdatesWhenSquareContentsChang
 
 	@Override
 	public void animationComplete(GameObject gameObject) {
-		System.out.println("VoidHole.animationComplete");
 		doTheThing(gameObject);
 	}
 

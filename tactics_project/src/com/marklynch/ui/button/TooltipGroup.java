@@ -27,7 +27,6 @@ public class TooltipGroup extends ArrayList<Tooltip> {
 	}
 
 	public void drawStaticUI() {
-		System.out.println("TooltipGroup.drawStaticUI");
 
 		if (Tooltip.lastTooltipGroupShown != this) {
 			alpha = 0f;
@@ -38,6 +37,9 @@ public class TooltipGroup extends ArrayList<Tooltip> {
 				alpha = 1;
 			}
 		}
+
+		// !!! HERE !!!
+		alpha = 1;
 
 		float mouseY = Game.windowHeight - Mouse.getY();
 

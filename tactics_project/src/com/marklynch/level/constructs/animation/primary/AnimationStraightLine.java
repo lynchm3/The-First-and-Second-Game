@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.animation.primary;
 
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
@@ -25,9 +24,6 @@ public class AnimationStraightLine extends Animation {
 		if (!runAnimation)
 			return;
 
-		if (projectileObject == Level.player)
-			System.out.println("AnimationStraightLine 0 - " + targetSquares[0].inventory);
-
 		this.targetSquares = targetSquares;
 		this.projectileObject = projectileObject;
 		this.speed = speed;
@@ -45,8 +41,6 @@ public class AnimationStraightLine extends Animation {
 		// projectileObject.squareGameObjectIsOn.inventory.remove(projectileObject);
 
 		setupForNextSquare();
-		if (projectileObject == Level.player)
-			System.out.println("AnimationStraightLine 1 - " + targetSquares[0].inventory);
 
 	}
 
@@ -69,9 +63,6 @@ public class AnimationStraightLine extends Animation {
 		if (projectileObject instanceof Arrow && distanceToCoverX < 0) {
 			projectileObject.backwards = true;
 		}
-
-		if (projectileObject == Level.player)
-			System.out.println("AnimationStraightLine 2 - " + targetSquares[0].inventory);
 	}
 
 	@Override
@@ -97,9 +88,6 @@ public class AnimationStraightLine extends Animation {
 
 			index++;
 			if (index >= targetSquares.length) {
-
-				if (projectileObject == Level.player)
-					System.out.println("AnimationStraightLine 3 - " + targetSquares[0].inventory);
 				runCompletionAlgorightm(true);
 			} else {
 				setupForNextSquare();
@@ -111,9 +99,6 @@ public class AnimationStraightLine extends Animation {
 			if (index >= targetSquares.length) {
 				offsetX = 0;
 				offsetY = 0;
-
-				if (projectileObject == Level.player)
-					System.out.println("AnimationStraightLine 4 - " + targetSquares[0].inventory);
 				runCompletionAlgorightm(true);
 			} else {
 				setupForNextSquare();
@@ -126,9 +111,6 @@ public class AnimationStraightLine extends Animation {
 
 			offsetX = x - performer.squareGameObjectIsOn.xInGridPixels;// - x;
 			offsetY = y - performer.squareGameObjectIsOn.yInGridPixels;// - y;
-
-			if (projectileObject == Level.player)
-				System.out.println("AnimationStraightLine 5 - " + targetSquares[0].inventory);
 
 		}
 	}

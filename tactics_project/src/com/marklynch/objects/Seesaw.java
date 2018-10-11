@@ -92,13 +92,11 @@ public class Seesaw extends GameObject implements SwitchListener {
 
 	@Override
 	public void zwitch(Switch zwitch) {
-		System.out.println("Seesaw.zwitch");
 		if (pressurePlate1 == null || pressurePlate2 == null)
 			return;
 
 		if (pressurePlate1.weightOnPlate > pressurePlate2.weightOnPlate) {
 			// pressurePlate1.
-			System.out.println("1 > 2");
 			if (pressurePlate1.up == false && pressurePlate2.up == true) {
 				// already in position
 			} else {
@@ -108,7 +106,6 @@ public class Seesaw extends GameObject implements SwitchListener {
 			}
 
 		} else if (pressurePlate2.weightOnPlate > pressurePlate1.weightOnPlate) {
-			System.out.println("2 > 1");
 			if (pressurePlate1.up == true && pressurePlate2.up == false) {
 				// already in position
 			} else {
@@ -118,7 +115,6 @@ public class Seesaw extends GameObject implements SwitchListener {
 			}
 
 		} else {
-			System.out.println("even");
 			if (pressurePlate1.up == true && pressurePlate2.up == true) {
 				// already in position
 			} else {
@@ -132,7 +128,6 @@ public class Seesaw extends GameObject implements SwitchListener {
 	public void moveSeesaw() {
 		if (pressurePlate1.weightOnPlate > pressurePlate2.weightOnPlate) {
 			// pressurePlate1.
-			System.out.println("1 > 2");
 			if (pressurePlate1.up == false) {
 				// already in position
 			} else {
@@ -146,7 +141,6 @@ public class Seesaw extends GameObject implements SwitchListener {
 			}
 
 		} else if (pressurePlate2.weightOnPlate > pressurePlate1.weightOnPlate) {
-			System.out.println("2 > 1");
 			if (pressurePlate1.up == true) {
 				// already in position
 			} else {
@@ -161,7 +155,6 @@ public class Seesaw extends GameObject implements SwitchListener {
 			}
 
 		} else {
-			System.out.println("even");
 			if (pressurePlate1.up == true) {
 				// already in position
 			} else {

@@ -46,8 +46,6 @@ public class Tooltip {
 	}
 
 	public void drawStaticUI(float y1, float alpha) {
-		System.out.println("Tooltip.drawStaticUI y1 = " + y1);
-		System.out.println("Tooltip.drawStaticUI alpha = " + alpha);
 
 		float mouseX = Mouse.getX();
 
@@ -55,7 +53,6 @@ public class Tooltip {
 		float x2 = 0;
 		// float y1 = 0;
 		float y2 = y1 + dimensions[1];
-		System.out.println("Tooltip.drawStaticUI y2 = " + y2);
 
 		if (mouseX <= Game.halfWindowWidth) {
 			// top left quadrant
@@ -68,8 +65,6 @@ public class Tooltip {
 			x1 = x2 - dimensions[0];
 
 		}
-		System.out.println("Tooltip.drawStaticUI x1 = " + x1);
-		System.out.println("Tooltip.drawStaticUI x2 = " + x2);
 
 		backgroundColor.a = alpha;
 		QuadUtils.drawQuad(backgroundColor, x1, y1, x2, y2);// WAT

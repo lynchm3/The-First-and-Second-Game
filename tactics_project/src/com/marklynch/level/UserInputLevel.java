@@ -645,8 +645,6 @@ public class UserInputLevel {
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
 
-		System.out.println("interactWith");
-
 		if (openMenu) {
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		}

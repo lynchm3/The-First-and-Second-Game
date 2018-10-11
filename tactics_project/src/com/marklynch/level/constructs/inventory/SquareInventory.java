@@ -43,10 +43,6 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public void add(GameObject gameObject) {
 		if (!gameObjects.contains(gameObject)) {
 
-			if (gameObject == Game.level.player) {
-				System.out.println("add() start - " + this);
-			}
-
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null)
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
@@ -91,10 +87,6 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			}
 
 			refresh();
-
-			if (gameObject == Game.level.player) {
-				System.out.println("add() end - " + this);
-			}
 		}
 	}
 

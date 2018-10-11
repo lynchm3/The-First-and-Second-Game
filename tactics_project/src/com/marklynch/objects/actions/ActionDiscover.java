@@ -31,7 +31,6 @@ public class ActionDiscover extends Action {
 	@Override
 	public void perform() {
 		super.perform();
-		System.out.println("ActionDiscover.perform");
 
 		if (!enabled)
 			return;

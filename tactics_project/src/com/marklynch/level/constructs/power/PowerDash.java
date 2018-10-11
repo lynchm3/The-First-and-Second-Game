@@ -55,7 +55,6 @@ public class PowerDash extends Power {
 
 		ArrayList<PushedObject> pushedObjects = new ArrayList<PushedObject>();
 		int correctedDistance = push(source, direction, distance, false, pushedObjects);
-		System.out.println("correctedDistance = " + correctedDistance);
 		Square correctedTargetSquare = null;
 		if (direction == direction.LEFT) {
 			correctedTargetSquare = Level.squares[source.squareGameObjectIsOn.xInGrid
@@ -81,8 +80,6 @@ public class PowerDash extends Power {
 
 		for (final PushedObject pushedObject : pushedObjects) {
 
-			System.out.println("pushedObject = " + pushedObject.gameObject + ", " + pushedObject.destinationSquare);
-
 			double delay = 0;
 
 			if (previousPushedObject != null) {
@@ -90,8 +87,6 @@ public class PowerDash extends Power {
 						.straightLineDistanceTo(pushedObject.gameObject.squareGameObjectIsOn) * Game.SQUARE_WIDTH
 						- Game.HALF_SQUARE_WIDTH) / speed;
 			}
-
-			System.out.println("Delay = " + delay);
 
 			// if (pushedObject.gameObject != source)
 			// delay = 32f;
@@ -113,8 +108,6 @@ public class PowerDash extends Power {
 
 	public int push(GameObject source, Direction direction, int attemptedDistance, boolean doAnimation,
 			ArrayList<PushedObject> pushedObjects) {
-
-		System.out.println("PUSH " + source + ", " + direction + ", " + attemptedDistance + ", " + doAnimation);
 
 		// int actualPush = attemptedDistance;
 		// boolean hitWall = false;
@@ -138,13 +131,10 @@ public class PowerDash extends Power {
 
 			if (squareX > 0 && squareY > 0 && squareX < Level.squares.length && squareY < Level.squares[0].length) {
 				square = Level.squares[squareX][squareY];
-				System.out.println("checking square " + square);
 				if (square.inventory.contains(Wall.class)) {
-					System.out.println("hit wall, returning");
 					return i - 1;
 				} else {
 					final GameObject gameObjectThatCantShareSquare = square.inventory.gameObjectThatCantShareSquare;
-					System.out.println("hit gameObject " + gameObjectThatCantShareSquare);
 					if (gameObjectThatCantShareSquare != null) {
 
 						int recursiveDistance = push(gameObjectThatCantShareSquare, direction, attemptedDistance, true,

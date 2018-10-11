@@ -54,6 +54,8 @@ import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.ui.button.Tooltip;
+import com.marklynch.ui.button.TooltipGroup;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
@@ -199,6 +201,9 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	}
 
 	public static final HashMap<Texture, Color> tileColors = new HashMap<Texture, Color>();
+
+	public static TooltipGroup tooltipGroup = null;
+	private static Square squareForTooltip;
 
 	public static void loadStaticImages() {
 		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png", false);
@@ -528,6 +533,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public Action drawActionThatWillBePerformed(boolean onMouse) {
 
+		System.out.println("drawActionThatWillBePerformed");
+
 		Action action = null;
 		if (!this.seenByPlayer) {
 			if (onMouse) {
@@ -594,6 +601,27 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 							Game.windowHeight - UserInputLevel.mouseLastY + 16,
 							UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 							Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16, color);
+
+					// if (action.disabledReason != null || action.illegalReason != null) {
+					// Square.tooltipGroup = ???;
+					Square.tooltipGroup = new TooltipGroup();
+					Square.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.actionName));
+
+					if (action.disabledReason != null) {
+						Square.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.disabledReason));
+					}
+
+					if (action.illegalReason != null) {
+						Square.tooltipGroup.add(new Tooltip(false, Tooltip.RED, action.illegalReason));
+					}
+					// } else {
+					// Square.tooltipGroup = null;
+					// }
+
+					if (Square.tooltipGroup != null) {
+						System.out.println("Square calling tooltipGroup.drawStaticUI();");
+						Square.tooltipGroup.drawStaticUI();
+					}
 				} else {
 
 				}
@@ -646,12 +674,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 					Game.windowHeight - UserInputLevel.mouseLastY + 16,
 					UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
-		} else {
 
-			// float squarePositionX = xInGridPixels;
-			// float squarePositionY = yInGridPixels;
-			// TextureUtils.drawTexture(action.image, squarePositionX, squarePositionY,
-			// squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		} else {
 
 			float squarePositionX = xInGridPixels;
 			float squarePositionY = yInGridPixels;
