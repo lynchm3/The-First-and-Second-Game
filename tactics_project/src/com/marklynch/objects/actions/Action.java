@@ -10,6 +10,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.Monster;
 import com.marklynch.utils.Texture;
 
 public abstract class Action {
@@ -40,6 +42,7 @@ public abstract class Action {
 	public static Texture textureX;
 	public static Texture textureSleep;
 
+	// Disabled Reason
 	public String disabledReason = null;
 	public static final String ALREADY_BEING_FISHED = "Already being fished";
 	public static final String CANT_BE_ATTACKED = "Can't be attacked";
@@ -57,6 +60,13 @@ public abstract class Action {
 	public static final String NOT_ENOUGH_TRUST = "Not enough trust";
 	public static final String NOT_LOCKED = "Not locked";
 	public static final String TOO_HEAVY = "Too heavy";
+
+	// Illegal Reason
+	public String illegalReason = null;
+	public static final String ASSAULT = "ASSAULT";
+	public static final String THIEVERY = "THIEVERY";
+	public static final String TRESSPASSING = "TRESSPASSING";
+	public static final String VANDALISM = "VANDALISM";
 
 	public Action(String actionName) {
 		super();
@@ -205,6 +215,31 @@ public abstract class Action {
 		textureWrite = getGlobalImage("action_write.png", false); // untested
 		getGlobalImage("star.png", false);
 		textureX = getGlobalImage("x.png", false);
+
+	}
+
+	public boolean standardAttackLegalityCheck(GameObject teleportee, GameObject target) {
+
+		if (target == null)
+			return true;
+
+		if (teleportee.attackers.contains(target))
+			return true;
+
+		// Is Object
+		if (target.owner != null && target.owner != teleportee) {
+			illegalReason = VANDALISM;
+			return false;
+		}
+
+		// Is human
+		if (target instanceof Actor) {
+			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal)) {
+				return false;
+			}
+		}
+
+		return true;
 
 	}
 }

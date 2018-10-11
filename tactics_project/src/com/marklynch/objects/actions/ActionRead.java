@@ -69,7 +69,6 @@ public class ActionRead extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

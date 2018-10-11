@@ -71,8 +71,7 @@ public class ActionEquip extends Action {
 	public boolean check() {
 
 		if (actionTake != null) {
-			if (!actionTake.enabled)
-				disabledReason = actionTake.disabledReason;
+			disabledReason = actionTake.disabledReason;
 			return actionTake.enabled;
 		}
 
@@ -91,6 +90,7 @@ public class ActionEquip extends Action {
 	@Override
 	public boolean checkLegality() {
 		if (actionTake != null) {
+			this.illegalReason = actionTake.illegalReason;
 			return actionTake.legal;
 		}
 		return true;

@@ -11,7 +11,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 	public static final String ACTION_NAME = "Eat";
 
 	Actor performer;
-	GameObject object;
+	GameObject target;
 	InventorySquare inventorySquare;
 
 	public ActionEatItemsSelectedInInventory(Actor performer, GameObject object) {
@@ -20,7 +20,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 		// object) {
 		super(ACTION_NAME, "action_eat.png");
 		super.gameObjectPerformer = this.performer = performer;
-		this.object = object;
+		this.target = object;
 		this.inventorySquare = object.inventorySquare;
 		if (!check()) {
 			enabled = false;
@@ -40,9 +40,9 @@ public class ActionEatItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionEatItems(performer, object).perform();
+			new ActionEatItems(performer, target).perform();
 		} else {
-			Game.level.player.inventory.showQTYDialog(new ActionEatItems(performer, object.inventorySquare.stack),
+			Game.level.player.inventory.showQTYDialog(new ActionEatItems(performer, target.inventorySquare.stack),
 					inventorySquare.stack.size(), "Enter qty to eat (available: " + inventorySquare.stack.size() + ")",
 					0);
 		}
@@ -56,10 +56,10 @@ public class ActionEatItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;
 		}
-		if (performer.inventory == object.inventoryThatHoldsThisObject)
+		if (performer.inventory == target.inventoryThatHoldsThisObject)
 			return true;
 
 		return false;
@@ -67,9 +67,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (object.owner != null && object.owner != performer)
-			return false;
-		return true;
+		return standardAttackLegalityCheck(performer, target);
 	}
 
 	@Override

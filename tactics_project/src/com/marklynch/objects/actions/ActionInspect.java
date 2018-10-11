@@ -25,7 +25,8 @@ public class ActionInspect extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;
@@ -66,7 +67,6 @@ public class ActionInspect extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

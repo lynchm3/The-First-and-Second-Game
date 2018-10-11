@@ -10,8 +10,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Matches;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.Monster;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionIgnite extends Action {
@@ -137,20 +135,7 @@ public class ActionIgnite extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		// Empty square, it's fine
-		if (targetGameObject == null)
-			return true;
-
-		// Something that belongs to some one else
-		if (targetGameObject.owner != null && targetGameObject.owner != performer)
-			return false;
-
-		// Is human
-		if (targetGameObject instanceof Actor)
-			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal))
-				return false;
-
-		return true;
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override

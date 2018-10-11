@@ -5,8 +5,6 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.Monster;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionSquash extends Action {
@@ -109,26 +107,9 @@ public class ActionSquash extends Action {
 		return true;
 	}
 
-	// @Override
-	// public boolean checkLegality() {
-	// // Something that belongs to some one else
-	// if (target.owner != null && target.owner != Game.level.player)
-	// return false;
-	// return true;
-	// }
-
 	@Override
 	public boolean checkLegality() {
-		// Something that belongs to some one else
-
-		if (target.owner != null && target.owner != performer)
-			return false;
-		// Is human
-
-		if (target instanceof Actor)
-			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal))
-				return false;
-		return true;
+		return standardAttackLegalityCheck(performer, target);
 	}
 
 	@Override

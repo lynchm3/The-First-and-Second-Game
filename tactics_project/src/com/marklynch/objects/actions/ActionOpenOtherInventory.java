@@ -98,8 +98,10 @@ public class ActionOpenOtherInventory extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (actionOpen != null)
+		if (actionOpen != null) {
+			illegalReason = actionOpen.illegalReason;
 			return actionOpen.legal;
+		}
 		return true;
 	}
 

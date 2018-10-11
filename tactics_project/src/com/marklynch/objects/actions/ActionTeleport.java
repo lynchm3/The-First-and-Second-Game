@@ -205,17 +205,18 @@ public class ActionTeleport extends Action {
 	@Override
 	public boolean checkLegality() {
 		if (targetSquare.restricted() == true && !targetSquare.owners.contains(teleportee)) {
+			illegalReason = TRESSPASSING;
+			return false;
+		}
+
+		boolean illegalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, teleportee);
+		if (illegalToPerformOnTeleportee) {
 			return false;
 		}
 
 		// If ur going to dmg something...
 		if (gameObjectInTheWay != null) {
-			if (teleportee != Game.level.player && teleportee.owner != null && teleportee.owner != Game.level.player)
-				return false;
-			if (gameObjectInTheWay != Game.level.player && gameObjectInTheWay.owner != null
-					&& gameObjectInTheWay.owner != Game.level.player)
-				return false;
-
+			return standardAttackLegalityCheck(gameObjectPerformer, gameObjectInTheWay);
 		}
 
 		return true;

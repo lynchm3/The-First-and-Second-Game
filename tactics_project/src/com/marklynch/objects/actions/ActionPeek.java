@@ -90,6 +90,7 @@ public class ActionPeek extends Action {
 	public boolean checkLegality() {
 		if (object.squareGameObjectIsOn.restricted() == true
 				&& !object.squareGameObjectIsOn.owners.contains(performer)) {
+			illegalReason = TRESSPASSING;
 			return false;
 		}
 		return true;

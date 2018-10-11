@@ -11,8 +11,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Monster;
-import com.marklynch.objects.units.WildAnimal;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
@@ -231,18 +229,7 @@ public class ActionAttack extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		// Something that belongs to some one else
-		if (performer.attackers.contains(target))
-			return true;
-
-		if (target.owner != null && target.owner != performer)
-			return false;
-		// Is human
-
-		if (target instanceof Actor)
-			if (!(target instanceof Monster) && !(target instanceof WildAnimal))
-				return false;
-		return true;
+		return standardAttackLegalityCheck(performer, target);
 	}
 
 	@Override

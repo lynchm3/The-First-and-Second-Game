@@ -113,8 +113,10 @@ public class ActiontTakeAll extends Action {
 	@Override
 	public boolean checkLegality() {
 		if (actionOpen != null) {
-			if (!actionOpen.legal)
+			if (!actionOpen.legal) {
+				illegalReason = actionOpen.illegalReason;
 				return false;
+			}
 		}
 
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();

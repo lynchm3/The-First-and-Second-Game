@@ -18,7 +18,7 @@ public class ActionEatItems extends VariableQtyAction {
 	public static final String ACTION_NAME = "Eat";
 
 	Actor performer;
-	GameObject[] objects;
+	GameObject[] targets;
 
 	public ActionEatItems(Actor performer, ArrayList<GameObject> objects) {
 		this(performer, objects.toArray(new GameObject[objects.size()]), false);
@@ -31,7 +31,7 @@ public class ActionEatItems extends VariableQtyAction {
 	public ActionEatItems(Actor performer, GameObject[] objects, boolean doesNothing) {
 		super(ACTION_NAME, "action_eat.png");
 		super.gameObjectPerformer = this.performer = performer;
-		this.objects = objects;
+		this.targets = objects;
 		if (!check()) {
 			enabled = false;
 		}
@@ -49,13 +49,13 @@ public class ActionEatItems extends VariableQtyAction {
 		if (!checkRange())
 			return;
 
-		int amountToEat = Math.min(objects.length, qty);
+		int amountToEat = Math.min(targets.length, qty);
 
 		if (amountToEat == 0)
 			return;
 
 		for (int i = 0; i < amountToEat; i++) {
-			GameObject object = objects[i];
+			GameObject object = targets[i];
 
 			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass) {
 				object.changeHealth(-object.remainingHealth, null, null);
@@ -86,7 +86,7 @@ public class ActionEatItems extends VariableQtyAction {
 			if (amountToEat > 1) {
 				amountText = "x" + amountToEat;
 			}
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ate ", objects[0], amountText }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ate ", targets[0], amountText }));
 		}
 	}
 
@@ -97,19 +97,17 @@ public class ActionEatItems extends VariableQtyAction {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(objects[0].squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(targets[0].squareGameObjectIsOn) < 2) {
 			return true;
 		}
-		if (performer.inventory == objects[0].inventoryThatHoldsThisObject)
+		if (performer.inventory == targets[0].inventoryThatHoldsThisObject)
 			return true;
 		return false;
 	}
 
 	@Override
 	public boolean checkLegality() {
-		if (objects[0].owner != null && objects[0].owner != performer)
-			return false;
-		return true;
+		return standardAttackLegalityCheck(performer, targets[0]);
 	}
 
 	@Override

@@ -9,8 +9,6 @@ import com.marklynch.level.constructs.power.PowerTeleportOther;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.Monster;
 
 public class ActionUsePower extends Action {
 	GameObject gameObjectSource;
@@ -137,20 +135,17 @@ public class ActionUsePower extends Action {
 		if (!power.potentialyCriminal)
 			return true;
 
-		if (gameObjectSource.attackers.contains(targetSquare))
-			return true;
+		// if (gameObjectSource.attackers.contains(targetSquare))
+		// return true;
 
 		for (Square square : power.getAffectedSquares(targetSquare)) {
 
 			for (GameObject gameObject : square.inventory.getGameObjects()) {
 
-				if (gameObject.owner != null && gameObject.owner != gameObjectSource)
+				boolean assaultOrVandalism = standardAttackLegalityCheck(gameObjectPerformer, gameObject);
+				if (assaultOrVandalism) {
 					return false;
-				// Is human
-
-				if (gameObject instanceof Actor)
-					if (!(gameObject instanceof Monster) && !(gameObject instanceof AggressiveWildAnimal))
-						return false;
+				}
 
 			}
 

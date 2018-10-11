@@ -11,14 +11,14 @@ public class ActionSmash extends Action {
 	public static final String ACTION_NAME = "Smash";
 
 	GameObject target;
-	Actor actor;
+	Actor performer;
 
 	// Default for hostiles
 	public ActionSmash(GameObject attacker, GameObject target) {
 		super(ACTION_NAME, "action_smash.png");
 		super.gameObjectPerformer = this.gameObjectPerformer = attacker;
 		if (gameObjectPerformer instanceof Actor)
-			actor = (Actor) gameObjectPerformer;
+			performer = (Actor) gameObjectPerformer;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -48,14 +48,14 @@ public class ActionSmash extends Action {
 		if (gameObjectPerformer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();
 
-		if (actor != null) {
+		if (performer != null) {
 			if (!legal) {
-				Crime crime = new Crime(this, this.actor, target.owner, Crime.TYPE.CRIME_VANDALISM);
-				this.actor.crimesPerformedThisTurn.add(crime);
-				this.actor.crimesPerformedInLifetime.add(crime);
+				Crime crime = new Crime(this, this.performer, target.owner, Crime.TYPE.CRIME_VANDALISM);
+				this.performer.crimesPerformedThisTurn.add(crime);
+				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
 			} else {
-				trespassingCheck(this, actor, actor.squareGameObjectIsOn);
+				trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 			}
 		}
 	}
@@ -112,9 +112,7 @@ public class ActionSmash extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.owner != null && target.owner != gameObjectPerformer)
-			return false;
-		return true;
+		return standardAttackLegalityCheck(performer, target);
 	}
 
 	@Override

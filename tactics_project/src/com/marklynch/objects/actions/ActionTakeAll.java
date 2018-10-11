@@ -91,8 +91,10 @@ public class ActionTakeAll extends Action {
 	public boolean checkLegality() {
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) square.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
-			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer)
+			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer) {
+				illegalReason = THIEVERY;
 				return false;
+			}
 		}
 		return true;
 	}

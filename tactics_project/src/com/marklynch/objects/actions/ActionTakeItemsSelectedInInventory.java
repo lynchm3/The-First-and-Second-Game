@@ -92,8 +92,10 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (object.owner != null && object.owner != performer)
+		if (object.owner != null && object.owner != performer) {
+			illegalReason = THIEVERY;
 			return false;
+		}
 		return true;
 	}
 

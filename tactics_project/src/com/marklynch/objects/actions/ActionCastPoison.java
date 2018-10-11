@@ -10,8 +10,6 @@ import com.marklynch.objects.Liquid;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.Monster;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionCastPoison extends Action {
@@ -140,21 +138,9 @@ public class ActionCastPoison extends Action {
 	// return false;
 	// return true;
 	// }
-
 	@Override
 	public boolean checkLegality() {
-		// Something that belongs to some one else
-		if (performer.attackers.contains(target))
-			return true;
-
-		if (target.owner != null && target.owner != performer)
-			return false;
-		// Is human
-
-		if (target instanceof Actor)
-			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal))
-				return false;
-		return true;
+		return standardAttackLegalityCheck(performer, target);
 	}
 
 	@Override

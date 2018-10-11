@@ -110,11 +110,15 @@ public class ActionSkin extends Action {
 	@Override
 	public boolean checkLegality() {
 
-		if (!actionLootAll.legal)
+		if (!actionLootAll.legal) {
+			illegalReason = actionLootAll.illegalReason;
 			return false;
+		}
 
-		if (target.owner != null && target.owner != performer)
+		if (target.owner != null && target.owner != performer) {
+			illegalReason = THIEVERY;
 			return false;
+		}
 
 		return true;
 	}

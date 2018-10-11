@@ -93,13 +93,17 @@ public class ActionPourContainerInInventory extends Action {
 			return true;
 
 		// Something that belongs to some one else
-		if (targetGameObject.owner != null && targetGameObject.owner != performer)
+		if (targetGameObject.owner != null && targetGameObject.owner != performer) {
+			illegalReason = VANDALISM;
 			return false;
+		}
 
 		// Is human
 		if (targetGameObject instanceof Actor)
-			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal))
+			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal)) {
+				illegalReason = ASSAULT;
 				return false;
+			}
 
 		return true;
 	}

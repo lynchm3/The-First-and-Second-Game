@@ -142,7 +142,14 @@ public class ActionTeleportSwap extends Action {
 
 	@Override
 	public boolean checkLegality() {
+		boolean illegalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, teleportee);
+
+		if (illegalToPerformOnTeleportee) {
+			return false;
+		}
+
 		if (target.restricted() == true && !target.owners.contains(teleportee)) {
+			illegalReason = TRESSPASSING;
 			return false;
 		}
 		return true;

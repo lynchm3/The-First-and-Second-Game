@@ -132,9 +132,7 @@ public class ActionFishingCompleted extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.owner != null && target.owner != performer)
-			return false;
-		return true;
+		return standardAttackLegalityCheck(performer, target);
 	}
 
 	@Override

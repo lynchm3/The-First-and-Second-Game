@@ -98,6 +98,7 @@ public class ActionHide extends Action {
 
 		if (object.squareGameObjectIsOn.restricted() == true
 				&& !object.squareGameObjectIsOn.owners.contains(performer)) {
+			illegalReason = TRESSPASSING;
 			return false;
 		}
 		return true;

@@ -9,8 +9,6 @@ import com.marklynch.objects.Liquid;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.Monster;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionCastDouse extends Action {
@@ -145,16 +143,7 @@ public class ActionCastDouse extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		// Something that belongs to some one else
-
-		if (target.owner != null && target.owner != performer)
-			return false;
-		// Is human
-
-		if (target instanceof Actor)
-			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal))
-				return false;
-		return true;
+		return standardAttackLegalityCheck(performer, target);
 	}
 
 	@Override
