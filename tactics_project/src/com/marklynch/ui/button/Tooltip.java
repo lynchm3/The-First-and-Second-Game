@@ -22,23 +22,26 @@ public class Tooltip {
 	float[] dimensions;
 	ArrayList<Object> text;
 	// float alpha = 0f;
-	Color backgroundColor = new Color(1f, 1f, 1f, 0f);
+	Color backgroundColor = null;
+	public static final Color WHITE = new Color(1f, 1f, 1f, 0f);
+	public static final Color RED = new Color(1f, 0f, 0f, 0f);
 	Color textColor = new Color(0f, 0f, 0f, 0f);
 
-	public Tooltip(boolean doesNothing, Object... text) {
+	public Tooltip(boolean doesNothing, Color color, Object... text) {
+		backgroundColor = color;
 		this.text = new ArrayList<Object>(Arrays.asList(text));
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
 	}
 
-	public Tooltip(Object[] text) {
+	public Tooltip(Color color, Object[] text) {
+		backgroundColor = color;
 		this.text = new ArrayList<Object>(Arrays.asList(text));
-		// this.levelButton = button;
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
 	}
 
-	public Tooltip(ArrayList<Object> text) {
+	public Tooltip(Color color, ArrayList<Object> text) {
+		backgroundColor = color;
 		this.text = text;
-		// this.levelButton = button;
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
 	}
 

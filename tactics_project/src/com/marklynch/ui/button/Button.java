@@ -29,7 +29,7 @@ public abstract class Button {
 		this.text = text;
 		if (tooltipText != null) {
 			tooltipGroup = new TooltipGroup();
-			tooltipGroup.add(new Tooltip(false, tooltipText));
+			tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, tooltipText));
 		}
 
 	}

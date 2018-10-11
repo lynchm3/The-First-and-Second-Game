@@ -62,7 +62,7 @@ public class TooltipGroup extends ArrayList<Tooltip> {
 	public void setTooltipText(Object[] tooltipText) {
 		if (tooltipText != null && this.size() > 0) {
 			this.remove(0);
-			this.add(new Tooltip(false, tooltipText));
+			this.add(new Tooltip(false, Tooltip.WHITE, tooltipText));
 		}
 
 	}
@@ -70,7 +70,7 @@ public class TooltipGroup extends ArrayList<Tooltip> {
 	public void setTooltipText(ArrayList<Object> tooltipText) {
 		if (tooltipText != null && this.size() > 0) {
 			this.remove(0);
-			this.add(new Tooltip(false, tooltipText));
+			this.add(new Tooltip(false, Tooltip.WHITE, tooltipText));
 		}
 
 	}

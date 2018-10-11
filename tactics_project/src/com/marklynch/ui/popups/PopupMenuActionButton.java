@@ -19,13 +19,13 @@ public class PopupMenuActionButton extends PopupMenuButton {
 			if (tooltipGroup == null)
 				tooltipGroup = new TooltipGroup();
 
-			this.tooltipGroup.add(new Tooltip(false, action.disabledReason));
+			this.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.disabledReason));
 		}
 
 		if (action.illegalReason != null) {
 			if (tooltipGroup == null)
 				tooltipGroup = new TooltipGroup();
-			this.tooltipGroup.add(new Tooltip(false, action.illegalReason));
+			this.tooltipGroup.add(new Tooltip(false, Tooltip.RED, action.illegalReason));
 		}
 
 	}
