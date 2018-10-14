@@ -22,7 +22,11 @@ public class TooltipGroup extends ArrayList<Tooltip> {
 	public boolean add(Tooltip tooltip) {
 		boolean result = super.add(tooltip);
 		toolTipGroupDimensions[0] = Math.max(toolTipGroupDimensions[0], tooltip.dimensions[0]);
-		toolTipGroupDimensions[1] += tooltip.dimensions[1];
+		toolTipGroupDimensions[1] = 0;
+
+		for (Tooltip tooltipsInList : this) {
+			toolTipGroupDimensions[1] += tooltipsInList.dimensions[1];
+		}
 		return result;
 	}
 
@@ -45,6 +49,9 @@ public class TooltipGroup extends ArrayList<Tooltip> {
 
 		float y1 = 0;
 		float y2 = 0;
+
+		// System.out.println("toolTipGroupDimensions[1] = " +
+		// toolTipGroupDimensions[1]);
 
 		if (mouseY <= Game.halfWindowHeight) {
 			y1 = mouseY;
