@@ -533,8 +533,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public Action drawActionThatWillBePerformed(boolean onMouse) {
 
-		System.out.println("drawActionThatWillBePerformed");
-
 		Action action = null;
 		if (!this.seenByPlayer) {
 			if (onMouse) {
@@ -602,9 +600,13 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 							UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 							Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16, color);
 
-					// if (action.disabledReason != null || action.illegalReason != null) {
-					// Square.tooltipGroup = ???;
 					Square.tooltipGroup = new TooltipGroup();
+
+					if (Game.level.showWindowPixelCoords) {
+						Square.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE,
+								"" + UserInputLevel.mouseLastX + "," + UserInputLevel.mouseLastY));
+					}
+
 					Square.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.actionName));
 
 					if (action.disabledReason != null) {
@@ -619,7 +621,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 					// }
 
 					if (Square.tooltipGroup != null) {
-						System.out.println("Square calling tooltipGroup.drawStaticUI();");
 						Square.tooltipGroup.drawStaticUI();
 					}
 				} else {

@@ -99,6 +99,8 @@ public class UserInputLevel {
 	public static boolean keyStateEquals = false;
 	public static boolean keyStatePlus = false;
 	public static boolean keyStatePeriod = false;
+	public static boolean keyStateQuestionMark = false;
+	public static boolean keyStateForwardSlash = false;
 
 	public static AIPath path;
 	static boolean controllingMenu = false;
@@ -1111,6 +1113,8 @@ public class UserInputLevel {
 
 		if (character == '.') {
 			Game.level.pauseButton.click();
+		} else if (character == '/') {
+			Game.level.showWindowPixelCoords = !Game.level.showWindowPixelCoords;
 		} else if (character == 'j' || character == 'J') {
 			Game.level.openCloseJournal();
 			return;
@@ -1916,5 +1920,11 @@ public class UserInputLevel {
 			keyStatePeriod = false;
 		}
 
+		if (keyStatePeriod == false && Keyboard.isKeyDown(Keyboard.KEY_SLASH)) {
+			keyTyped('/');
+			keyStateForwardSlash = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_SLASH)) {
+			keyStateForwardSlash = false;
+		}
 	}
 }

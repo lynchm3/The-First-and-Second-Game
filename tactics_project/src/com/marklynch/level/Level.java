@@ -2183,6 +2183,8 @@ public class Level {
 	Color white = Color.WHITE;
 	Color sunsetOrange = new Color(0.44f, 0.37f, 0.33f);
 
+	public boolean showWindowPixelCoords = false;
+
 	public void startPlayerTurn() {
 		System.out.println("----------------START PLAYER TURN-----------------");
 		this.turn++;
