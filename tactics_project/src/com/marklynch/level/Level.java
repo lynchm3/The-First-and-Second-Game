@@ -154,7 +154,7 @@ public class Level {
 	// public transient int currentFactionMovingIndex;
 	public transient Stack<Move> undoList;
 	public ActivityLogger activityLogger;
-	public QuickBar quickBar;
+	public static QuickBar quickBar;
 
 	public transient GameCursor gameCursor;
 

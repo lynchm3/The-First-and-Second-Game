@@ -1111,7 +1111,27 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (character == '.') {
+		if (character == '1') {
+			Level.quickBar.quickBarSquares[0].click();
+		} else if (character == '2') {
+			Level.quickBar.quickBarSquares[1].click();
+		} else if (character == '3') {
+			Level.quickBar.quickBarSquares[2].click();
+		} else if (character == '4') {
+			Level.quickBar.quickBarSquares[3].click();
+		} else if (character == '5') {
+			Level.quickBar.quickBarSquares[4].click();
+		} else if (character == '6') {
+			Level.quickBar.quickBarSquares[5].click();
+		} else if (character == '7') {
+			Level.quickBar.quickBarSquares[6].click();
+		} else if (character == '8') {
+			Level.quickBar.quickBarSquares[7].click();
+		} else if (character == '9') {
+			Level.quickBar.quickBarSquares[8].click();
+		} else if (character == '0') {
+			Level.quickBar.quickBarSquares[9].click();
+		} else if (character == '.') {
 			Game.level.pauseButton.click();
 		} else if (character == '/') {
 			Game.level.showWindowPixelCoords = !Game.level.showWindowPixelCoords;

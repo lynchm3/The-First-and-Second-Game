@@ -15,6 +15,7 @@ public class QuickBar {
 	public static int positionX;
 	public static int positionY;
 	public static final int shortcutWidth = 64;
+	public String[] hotkeys = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
 
 	public QuickBar() {
 		resize();
@@ -38,12 +39,19 @@ public class QuickBar {
 			quickBarSquare.drawBackground();
 		}
 
-		for (QuickBarSquare quickBarSquare : quickBarSquares) {
-			quickBarSquare.drawShortcut();
+		for (int i = 0; i < quickBarSquares.length; i++) {
+			int shortcutHotkey = i + 1;
+			if (shortcutHotkey == 10)
+				shortcutHotkey = 0;
+			quickBarSquares[i].drawShortcut(hotkeys[i]);
 		}
 
+		// for (QuickBarSquare quickBarSquare : quickBarSquares) {
+		// quickBarSquare.drawShortcut();
+		// }
+
 		if (UserInputLevel.draggableMouseIsOver instanceof QuickBarSquare) {
-			((QuickBarSquare) UserInputLevel.draggableMouseIsOver).drawShortcut();
+			((QuickBarSquare) UserInputLevel.draggableMouseIsOver).drawShortcut(null);
 		}
 	}
 
