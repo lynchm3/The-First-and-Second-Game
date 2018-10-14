@@ -21,7 +21,7 @@ public class ActionDig extends Action {
 
 	// Default for hostiles
 	public ActionDig(Actor attacker, GameObject target) {
-		super(ACTION_NAME, "action_dig.png");
+		super(ACTION_NAME, textureDig);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		if (!check()) {

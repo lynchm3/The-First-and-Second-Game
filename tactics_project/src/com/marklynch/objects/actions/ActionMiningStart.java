@@ -23,7 +23,7 @@ public class ActionMiningStart extends Action {
 
 	// Default for hostiles
 	public ActionMiningStart(Actor attacker, Vein vein) {
-		super(ACTION_NAME, "action_mine.png");
+		super(ACTION_NAME, textureMine);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = vein;
 		if (!check()) {

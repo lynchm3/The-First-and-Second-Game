@@ -19,7 +19,7 @@ public class ActionSpot extends Action {
 	public Square specificSquareSpotted;
 
 	public ActionSpot(Actor spotter, Object spotted, Square specificSquareSpotted) {
-		super(ACTION_NAME, "action_spot.png");
+		super(ACTION_NAME, textureSpot);
 		super.gameObjectPerformer = this.performer = spotter;
 		this.spotted = spotted;
 		this.specificSquareSpotted = specificSquareSpotted;

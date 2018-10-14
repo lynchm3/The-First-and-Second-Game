@@ -14,7 +14,7 @@ public class ActionFollow extends Action {
 
 	// Default for hostiles
 	public ActionFollow(Player player, Actor target) {
-		super(ACTION_NAME, "action_move.png");
+		super(ACTION_NAME, textureWalk);
 		super.gameObjectPerformer = this.performer = player;
 		this.target = target;
 		legal = checkLegality();

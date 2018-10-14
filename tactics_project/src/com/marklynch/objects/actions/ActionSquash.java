@@ -17,7 +17,7 @@ public class ActionSquash extends Action {
 
 	// Default for hostiles
 	public ActionSquash(Actor attacker, GameObject target, boolean accidental) {
-		super(ACTION_NAME, "action_squash.png");
+		super(ACTION_NAME, textureSquash);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		this.accidental = accidental;

@@ -17,7 +17,7 @@ public class ActionRead extends Action {
 
 	// Default for hostiles
 	public ActionRead(Actor reader, Readable target) {
-		super(ACTION_NAME, "action_read.png");
+		super(ACTION_NAME, textureRead);
 		super.gameObjectPerformer = this.performer = reader;
 		this.target = target;
 		if (!check()) {

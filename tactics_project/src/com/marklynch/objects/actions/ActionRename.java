@@ -11,7 +11,7 @@ public class ActionRename extends Action {
 	GameObject target;
 
 	public ActionRename(GameObject target) {
-		super(ACTION_NAME, "action_write.png");
+		super(ACTION_NAME, textureWrite);
 		this.target = target;
 		if (!check()) {
 			enabled = false;

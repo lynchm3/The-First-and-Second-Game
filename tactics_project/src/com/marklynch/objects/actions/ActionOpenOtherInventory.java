@@ -20,7 +20,7 @@ public class ActionOpenOtherInventory extends Action {
 	ActionOpen actionOpen;
 
 	public ActionOpenOtherInventory(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, "action_select_object.png");
+		super(ACTION_NAME, textureEllipse);
 		if (gameObject instanceof Openable)
 			this.actionName = ACTION_NAME_2;
 		super.gameObjectPerformer = this.performer = performer;

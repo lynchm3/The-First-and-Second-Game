@@ -14,7 +14,7 @@ public class ActionPet extends Action {
 	GameObject object;
 
 	public ActionPet(Actor performer, GameObject object) {
-		super(ACTION_NAME, "action_pet.png");
+		super(ACTION_NAME, texturePet);
 		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 		if (!check()) {

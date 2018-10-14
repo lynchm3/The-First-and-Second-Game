@@ -21,7 +21,7 @@ public class ActionSkin extends Action {
 
 	// Default for hostiles
 	public ActionSkin(Actor performer, GameObject target) {
-		super(ACTION_NAME, "action_skin.png");
+		super(ACTION_NAME, textureSkin);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		actionLootAll = new ActiontTakeAll(performer, target);

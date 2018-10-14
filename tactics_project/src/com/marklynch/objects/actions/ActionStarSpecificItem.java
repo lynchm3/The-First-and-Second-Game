@@ -10,7 +10,7 @@ public class ActionStarSpecificItem extends Action {
 	GameObject object;
 
 	public ActionStarSpecificItem(GameObject object) {
-		super(ACTION_NAME, "star.png");
+		super(ACTION_NAME, textureStar);
 		this.object = object;
 		if (!check()) {
 			enabled = false;
@@ -26,7 +26,8 @@ public class ActionStarSpecificItem extends Action {
 	}
 
 	@Override
-	public void perform() {super.perform();
+	public void perform() {
+		super.perform();
 
 		if (!enabled)
 			return;

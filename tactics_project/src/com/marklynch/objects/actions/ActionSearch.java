@@ -19,7 +19,7 @@ public class ActionSearch extends Action {
 	Searchable target;
 
 	public ActionSearch(Actor performer, Searchable object) {
-		super(ACTION_NAME, "action_search.png");
+		super(ACTION_NAME, textureSearch);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = object;
 		if (!check()) {

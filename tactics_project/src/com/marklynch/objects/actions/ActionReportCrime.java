@@ -16,7 +16,7 @@ public class ActionReportCrime extends Action {
 
 	// Default for hostiles
 	public ActionReportCrime(Actor performer, Guard guard) {
-		super(ACTION_NAME, "action_scream.png");
+		super(ACTION_NAME, textureScream);
 		super.gameObjectPerformer = this.performer = performer;
 		this.guard = guard;
 		if (!check()) {

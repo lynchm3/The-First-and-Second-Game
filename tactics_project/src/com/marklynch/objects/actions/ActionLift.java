@@ -16,7 +16,7 @@ public class ActionLift extends Action {
 	GameObject target;
 
 	public ActionLift(Actor performer, GameObject object) {
-		super(ACTION_NAME, "action_pick_up.png");
+		super(ACTION_NAME, texturePickUp);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = object;
 		if (!check()) {

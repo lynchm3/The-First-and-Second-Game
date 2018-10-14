@@ -16,7 +16,7 @@ public class ActionInitiateTrade extends Action {
 	Actor target;
 
 	public ActionInitiateTrade(Actor performer, Actor target) {
-		super(ACTION_NAME, "action_select_object.png");
+		super(ACTION_NAME, textureEllipse);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		if (!check()) {

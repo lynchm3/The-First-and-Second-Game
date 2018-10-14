@@ -29,7 +29,6 @@ public abstract class Action {
 	// public static Texture textureAttack;
 	// public static Texture textureBow;
 	// public static Texture textureBird;
-	// public static Texture textureEllipse;
 	// public static Texture textureFishing;
 	// public static Texture textureHelp;
 	// public static Texture textureLeft;
@@ -41,6 +40,12 @@ public abstract class Action {
 	// public static Texture textureWrite;
 	// public static Texture textureX;
 	// public static Texture textureSleep;
+
+	public static Texture textureDouse;
+	public static Texture textureRing;
+	public static Texture textureSkin;
+	public static Texture textureCheckboxChecked;
+	public static Texture textureCheckboxUnchecked;
 
 	public static Texture textureAddMapMarker;
 	public static Texture textureAttack;
@@ -56,10 +61,8 @@ public abstract class Action {
 	public static Texture textureDrop;
 	public static Texture textureEat;
 	public static Texture textureEquip;
-
-	// public static Texture getGlobalImage("action_equip.png", false);
-
 	public static Texture textureElectrical;
+	// public static Texture textureEllipse;
 	public static Texture textureFillContainer;
 	public static Texture textureFishing;
 	public static Texture textureGive;
@@ -221,6 +224,13 @@ public abstract class Action {
 	}
 
 	public static void loadActionImages() {
+
+		textureDouse = getGlobalImage("action_douse.png", false);
+		textureRing = getGlobalImage("action_ring.png", false);
+		textureSkin = getGlobalImage("action_skin.png", false);
+		textureCheckboxChecked = getGlobalImage("check_box_checked.png", false);
+		textureCheckboxUnchecked = getGlobalImage("check_box_unchecked.png", false);
+
 		textureAddMapMarker = getGlobalImage("action_add_map_marker.png", false);
 		textureAttack = getGlobalImage("action_attack.png", false);
 		textureBird = getGlobalImage("bird.png", false);

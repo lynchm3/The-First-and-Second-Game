@@ -22,7 +22,7 @@ public class ActionPourContainerInInventory extends Action {
 	GameObject targetGameObject;
 
 	public ActionPourContainerInInventory(Actor performer, Object target) {
-		super(ACTION_NAME, "action_select_object.png");
+		super(ACTION_NAME, textureEllipse);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		if (target instanceof Square) {

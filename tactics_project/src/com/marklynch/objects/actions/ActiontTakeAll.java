@@ -19,7 +19,7 @@ public class ActiontTakeAll extends Action {
 	ActionOpen actionOpen;
 
 	public ActiontTakeAll(Actor performer, GameObject container) {
-		super(ACTION_NAME, "action_loot_all.png");
+		super(ACTION_NAME, textureLootAll);
 		super.gameObjectPerformer = this.performer = performer;
 		this.container = container;
 		if (container instanceof Openable && !((Openable) container).isOpen()) {

@@ -10,7 +10,7 @@ public class ActionUntrackMapMarker extends Action {
 	MapMarker mapMarker;
 
 	public ActionUntrackMapMarker(MapMarker mapMarker) {
-		super(ACTION_NAME, "check_box_unchecked.png");
+		super(ACTION_NAME, textureCheckboxUnchecked);
 		this.mapMarker = mapMarker;
 		if (!check()) {
 			enabled = false;

@@ -19,7 +19,7 @@ public class ActionUse extends Action {
 	// Default for hostiles
 	public ActionUse(GameObject performer, Switch switchToUse, String actionName, String verb,
 			RequirementToMeet[] requirementsToMeet) {
-		super(actionName, "action_use.png");
+		super(actionName, textureUse);
 		ACTION_NAME = actionName;
 		for (RequirementToMeet requirementToMeet : requirementsToMeet) {
 			ACTION_NAME += " " + requirementToMeet.getText();

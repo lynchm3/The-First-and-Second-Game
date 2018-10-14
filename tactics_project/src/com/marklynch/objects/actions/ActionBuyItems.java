@@ -26,7 +26,7 @@ public class ActionBuyItems extends VariableQtyAction {
 	}
 
 	public ActionBuyItems(Actor performer, Actor target, GameObject[] objects, boolean doesnothing) {
-		super(ACTION_NAME, "action_buy.png");
+		super(ACTION_NAME, textureBuy);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		this.objects = objects;

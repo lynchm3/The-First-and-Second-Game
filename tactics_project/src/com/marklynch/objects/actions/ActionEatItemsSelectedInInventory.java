@@ -18,7 +18,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
-		super(ACTION_NAME, "action_eat.png");
+		super(ACTION_NAME, textureEat);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = object;
 		this.inventorySquare = object.inventorySquare;

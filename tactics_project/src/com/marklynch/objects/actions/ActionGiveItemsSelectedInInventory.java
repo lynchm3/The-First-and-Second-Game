@@ -16,7 +16,7 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 
 	public ActionGiveItemsSelectedInInventory(GameObject performer, GameObject receiver, boolean logAsTake,
 			GameObject object) {
-		super(ACTION_NAME, "right.png");
+		super(ACTION_NAME, textureGive);
 		if (!(receiver instanceof Actor))
 			this.actionName = "Put";
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;

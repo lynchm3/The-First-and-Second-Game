@@ -13,7 +13,7 @@ public class ActionChangeAppearance extends Action {
 	GameObject target;
 
 	public ActionChangeAppearance(GameObject target) {
-		super(ACTION_NAME, "action_select_object.png");
+		super(ACTION_NAME, textureEllipse);
 		this.target = target;
 		if (!check()) {
 			enabled = false;

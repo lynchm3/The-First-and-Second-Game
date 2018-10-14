@@ -23,7 +23,7 @@ public class ActionFishingStart extends Action {
 
 	// Default for hostiles
 	public ActionFishingStart(Actor attacker, GameObject target) {
-		super(ACTION_NAME, "action_fishing.png");
+		super(ACTION_NAME, textureFishing);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		if (!check()) {

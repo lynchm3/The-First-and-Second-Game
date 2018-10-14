@@ -29,7 +29,7 @@ public class ActionEatItems extends VariableQtyAction {
 	}
 
 	public ActionEatItems(Actor performer, GameObject[] objects, boolean doesNothing) {
-		super(ACTION_NAME, "action_eat.png");
+		super(ACTION_NAME, textureEat);
 		super.gameObjectPerformer = this.performer = performer;
 		this.targets = objects;
 		if (!check()) {

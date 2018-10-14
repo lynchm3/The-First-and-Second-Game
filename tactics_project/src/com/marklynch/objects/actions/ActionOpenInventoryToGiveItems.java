@@ -17,7 +17,7 @@ public class ActionOpenInventoryToGiveItems extends Action {
 	GameObject target;
 
 	public ActionOpenInventoryToGiveItems(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, "action_select_object.png");
+		super(ACTION_NAME, textureEllipse);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = gameObject;
 

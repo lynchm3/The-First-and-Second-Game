@@ -14,7 +14,7 @@ public class ActionPin extends Action {
 
 	// Default for hostiles
 	public ActionPin(Actor reader, Object target) {
-		super(ACTION_NAME, "action_search.png");
+		super(ACTION_NAME, textureSearch);
 		super.gameObjectPerformer = this.performer = reader;
 		this.target = target;
 		if (!check()) {

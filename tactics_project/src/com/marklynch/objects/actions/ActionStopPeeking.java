@@ -12,7 +12,7 @@ public class ActionStopPeeking extends Action {
 	Actor performer;
 
 	public ActionStopPeeking(Actor performer) {
-		super(ACTION_NAME, "action_hide.png");
+		super(ACTION_NAME, textureStopHiding);
 		super.gameObjectPerformer = this.performer = performer;
 
 		legal = checkLegality();

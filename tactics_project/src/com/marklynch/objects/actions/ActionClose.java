@@ -16,7 +16,7 @@ public class ActionClose extends Action {
 
 	// Default for hostiles
 	public ActionClose(GameObject opener, Openable openable) {
-		super(ACTION_NAME, "action_close.png");
+		super(ACTION_NAME, textureClose);
 		super.gameObjectPerformer = this.gameObjectPerformer = opener;
 		this.openable = openable;
 		if (!check()) {

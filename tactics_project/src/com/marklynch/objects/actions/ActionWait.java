@@ -13,7 +13,7 @@ public class ActionWait extends Action {
 	Square target;
 
 	public ActionWait(Actor loiterer, Square target) {
-		super(ACTION_NAME, "action_loiter.png");
+		super(ACTION_NAME, textureLoiter);
 		super.gameObjectPerformer = this.performer = loiterer;
 		this.target = target;
 		if (!check()) {

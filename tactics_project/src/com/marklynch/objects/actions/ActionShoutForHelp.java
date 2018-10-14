@@ -15,7 +15,7 @@ public class ActionShoutForHelp extends Action {
 
 	// Default for hostiles
 	public ActionShoutForHelp(Actor performer, GameObject attacker) {
-		super(ACTION_NAME, "action_scream.png");
+		super(ACTION_NAME, textureScream);
 		super.gameObjectPerformer = this.performer = performer;
 		this.attacker = attacker;
 		if (!check()) {

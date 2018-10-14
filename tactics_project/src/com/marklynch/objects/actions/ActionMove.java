@@ -23,7 +23,7 @@ public class ActionMove extends Action {
 	boolean endTurn;
 
 	public ActionMove(Actor performer, Square target, boolean endTurn) {
-		super(ACTION_NAME, "action_move.png");
+		super(ACTION_NAME, textureWalk);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		this.endTurn = endTurn;

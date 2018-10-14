@@ -19,7 +19,7 @@ public class ActionEquip extends Action {
 	ActionTakeItems actionTake;
 
 	public ActionEquip(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, "left.png");
+		super(ACTION_NAME, textureEquip);
 		super.gameObjectPerformer = this.performer = performer;
 		this.gameObject = gameObject;
 		if (!Game.level.player.inventory.contains(gameObject)) {

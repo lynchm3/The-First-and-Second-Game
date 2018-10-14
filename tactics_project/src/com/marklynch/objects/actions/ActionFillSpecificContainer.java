@@ -20,7 +20,7 @@ public class ActionFillSpecificContainer extends Action {
 
 	public ActionFillSpecificContainer(Actor performer, WaterSource waterSource,
 			ContainerForLiquids containerForLiquids) {
-		super(ACTION_NAME, "action_fill_container.png");
+		super(ACTION_NAME, textureFillContainer);
 		super.gameObjectPerformer = this.performer = performer;
 		this.waterSource = waterSource;
 		this.containerForLiquids = containerForLiquids;

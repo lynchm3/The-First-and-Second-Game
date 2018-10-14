@@ -15,7 +15,7 @@ public class ActionPlaceMapMarker extends Action {
 	Square target;
 
 	public ActionPlaceMapMarker(Square target) {
-		super(ACTION_NAME, "action_add_map_marker.png");
+		super(ACTION_NAME, textureAddMapMarker);
 		this.target = target;
 		if (!check()) {
 			enabled = false;

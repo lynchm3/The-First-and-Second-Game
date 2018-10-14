@@ -25,7 +25,7 @@ public class ActionChoppingStart extends Action {
 
 	// Default for hostiles
 	public ActionChoppingStart(Actor attacker, GameObject vein) {
-		super(ACTION_NAME, "action_chop.png");
+		super(ACTION_NAME, textureChop);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = vein;
 		if (!check()) {

@@ -17,7 +17,7 @@ public class ActionInspect extends Action {
 
 	// Default for hostiles
 	public ActionInspect(Actor reader, GameObject target) {
-		super(ACTION_NAME, "action_search.png");
+		super(ACTION_NAME, textureSearch);
 		super.gameObjectPerformer = this.performer = reader;
 		this.target = target;
 		legal = checkLegality();

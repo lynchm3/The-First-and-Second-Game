@@ -18,7 +18,7 @@ public class ActionTakeAll extends Action {
 	Square square;
 
 	public ActionTakeAll(Actor performer, Square square) {
-		super(ACTION_NAME, "action_take_all.png");
+		super(ACTION_NAME, textureTakeAll);
 		super.gameObjectPerformer = this.performer = performer;
 		this.square = square;
 		if (!check()) {

@@ -28,7 +28,7 @@ public class ActionGiveItems extends VariableQtyAction {
 
 	public ActionGiveItems(GameObject performer, GameObject receiver, boolean logAsTake, GameObject[] objects,
 			boolean doesNothing) {
-		super(ACTION_NAME, "right.png");
+		super(ACTION_NAME, textureGive);
 		if (!(receiver instanceof Actor))
 			this.actionName = "Put";
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;

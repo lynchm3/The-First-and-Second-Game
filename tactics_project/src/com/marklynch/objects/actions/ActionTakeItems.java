@@ -35,7 +35,7 @@ public class ActionTakeItems extends VariableQtyAction {
 
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
-		super(ACTION_NAME, "left.png");
+		super(ACTION_NAME, textureLeft);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		if (this.target instanceof Square)
