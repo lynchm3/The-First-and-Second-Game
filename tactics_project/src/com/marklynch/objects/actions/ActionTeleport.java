@@ -209,8 +209,9 @@ public class ActionTeleport extends Action {
 			return false;
 		}
 
-		boolean illegalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, teleportee);
-		if (illegalToPerformOnTeleportee) {
+		boolean legalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, teleportee);
+		System.out.println("illegalToPerformOnTeleportee");
+		if (!legalToPerformOnTeleportee) {
 			return false;
 		}
 
