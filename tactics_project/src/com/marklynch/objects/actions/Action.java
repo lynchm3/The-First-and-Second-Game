@@ -75,10 +75,10 @@ public abstract class Action {
 		this.actionName = actionName;
 	}
 
-	public Action(String actionName, String imageName) {
+	public Action(String actionName, Texture image) {
 		super();
 		this.actionName = actionName;
-		this.image = getGlobalImage(imageName, false);
+		this.image = image;
 	}
 
 	public void perform() {
@@ -155,67 +155,67 @@ public abstract class Action {
 	}
 
 	public static void loadActionImages() {
-		getGlobalImage("action_add_map_marker.png", false);
+		textureAddMapMarker = getGlobalImage("action_add_map_marker.png", false);
 		textureAttack = getGlobalImage("action_attack.png", false);
 		textureBird = getGlobalImage("bird.png", false);
-		getGlobalImage("action_blunt.png", false);
+		textureBlunt = getGlobalImage("action_blunt.png", false);
 		textureBow = getGlobalImage("action_bow.png", false);
-		getGlobalImage("action_burn.png", false);
-		getGlobalImage("action_buy.png", false);
-		getGlobalImage("action_chop.png", false);
-		getGlobalImage("action_close.png", false);
-		getGlobalImage("action_die.png", false);// untested
-		getGlobalImage("action_dig.png", false);
-		getGlobalImage("action_drop.png", false);
-		getGlobalImage("action_eat.png", false);
-		getGlobalImage("action_equip.png", false);
-		getGlobalImage("action_electrical.png", false);
-		getGlobalImage("action_fill_container.png", false);
+		textureBurn = getGlobalImage("action_burn.png", false);
+		textureBuy = getGlobalImage("action_buy.png", false);
+		textureChop = getGlobalImage("action_chop.png", false);
+		textureClose = getGlobalImage("action_close.png", false);
+		textureDie = getGlobalImage("action_die.png", false);// untested
+		textureDig = getGlobalImage("action_dig.png", false);
+		textureDrop = getGlobalImage("action_drop.png", false);
+		textureEat = getGlobalImage("action_eat.png", false);
+		textureEquip = getGlobalImage("action_equip.png", false);
+		textureElectrical = getGlobalImage("action_electrical.png", false);
+		textureFillContainer = getGlobalImage("action_fill_container.png", false);
 		textureFishing = getGlobalImage("action_fishing.png", false);
-		getGlobalImage("action_give.png", false);
-		getGlobalImage("action_heal.png", false);
+		textureGive = getGlobalImage("action_give.png", false);
+		textureHeal = getGlobalImage("action_heal.png", false);
 		textureHelp = getGlobalImage("help.png", false);
-		getGlobalImage("action_hide.png", false);
+		textureHide = getGlobalImage("action_hide.png", false);
 		textureLeft = getGlobalImage("left.png", false);
-		getGlobalImage("action_lock.png", false);
-		getGlobalImage("action_loiter.png", false);
-		getGlobalImage("action_loot_all.png", false);
+		textureLock = getGlobalImage("action_lock.png", false);
+		textureLoiter = getGlobalImage("action_loiter.png", false);
+		textureLootAll = getGlobalImage("action_loot_all.png", false);
 		textureMine = getGlobalImage("action_mine.png", false);
 		textureWalk = getGlobalImage("action_move.png", false);
 		textureMusic = getGlobalImage("music.png", false);
-		getGlobalImage("action_open.png", false);
-		getGlobalImage("action_pet.png", false);
+		textureOpen = getGlobalImage("action_open.png", false);
+		texturePet = getGlobalImage("action_pet.png", false);
 		texturePatrol = getGlobalImage("action_patrol.png", false);
-		getGlobalImage("action_pierce.png", false);
-		getGlobalImage("action_pickpocket_all.png", false);// untested
-		getGlobalImage("action_pick_up.png", false);
-		getGlobalImage("action_posion.png", false);
-		getGlobalImage("action_pour.png", false);
-		getGlobalImage("action_put.png", false);// untested
-		getGlobalImage("action_read.png", false);
-		getGlobalImage("action_ring.png", false);
+		texturePierce = getGlobalImage("action_pierce.png", false);
+		texturePickpocketAll = getGlobalImage("action_pickpocket_all.png", false);// untested
+		texturePickUp = getGlobalImage("action_pick_up.png", false);
+		texturePoison = getGlobalImage("action_posion.png", false);
+		texturePour = getGlobalImage("action_pour.png", false);
+		texturePut = getGlobalImage("action_put.png", false);// untested
+		textureRead = getGlobalImage("action_read.png", false);
+		textureEing = getGlobalImage("action_ring.png", false);
 		textureRight = getGlobalImage("right.png", false);
-		getGlobalImage("action_scream.png", false);// untested
+		textureScream = getGlobalImage("action_scream.png", false);// untested
 		textureEllipse = getGlobalImage("action_select_object.png", false);
-		getGlobalImage("action_search.png", false);
-		getGlobalImage("action_sell.png", false);
-		getGlobalImage("action_slash.png", false);
+		textureSearch = getGlobalImage("action_search.png", false);
+		textureSell = getGlobalImage("action_sell.png", false);
+		textureSlash = getGlobalImage("action_slash.png", false);
 		textureSleep = getGlobalImage("action_sleep.png", false);// untested
-		getGlobalImage("action_smash.png", false);
-		getGlobalImage("action_spot.png", false);// untested
-		getGlobalImage("action_squash.png", false);
-		getGlobalImage("action_stop_hiding.png", false);
-		getGlobalImage("action_take.png", false);
-		getGlobalImage("action_take_all.png", false);
-		getGlobalImage("action_take_bite.png", false);// untested
-		getGlobalImage("action_talk.png", false);
-		getGlobalImage("action_teleport.png", false);
-		getGlobalImage("action_throw.png", false);
-		getGlobalImage("action_trespass.png", false); // untested
-		getGlobalImage("action_unlock.png", false);
-		getGlobalImage("action_use.png", false);
+		textureSmash = getGlobalImage("action_smash.png", false);
+		textureSpot = getGlobalImage("action_spot.png", false);// untested
+		textureSquash = getGlobalImage("action_squash.png", false);
+		textureStopHiding = getGlobalImage("action_stop_hiding.png", false);
+		textureTake = getGlobalImage("action_take.png", false);
+		textureTakeAll = getGlobalImage("action_take_all.png", false);
+		textureTakeBite = getGlobalImage("action_take_bite.png", false);// untested
+		textureTalk = getGlobalImage("action_talk.png", false);
+		textureTeleport = getGlobalImage("action_teleport.png", false);
+		textureThrow = getGlobalImage("action_throw.png", false);
+		textureTrespass = getGlobalImage("action_trespass.png", false); // untested
+		textureUnlock = getGlobalImage("action_unlock.png", false);
+		textureUse = getGlobalImage("action_use.png", false);
 		textureWrite = getGlobalImage("action_write.png", false); // untested
-		getGlobalImage("star.png", false);
+		textureStar = getGlobalImage("star.png", false);
 		textureX = getGlobalImage("x.png", false);
 
 	}
