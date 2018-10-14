@@ -1095,6 +1095,10 @@ public class Level {
 		// Draw actions on sqrs.
 
 		player.squareGameObjectIsOn.drawActionThatWillBePerformed(false);
+		if (Game.gameObjectMouseIsOver != null) {
+			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver));
+			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver.value));
+		}
 
 		if (Player.playerTargetActor != null) {
 			if (Player.playerTargetAction != null)

@@ -59,6 +59,7 @@ public class TooltipGroup extends ArrayList<Tooltip> {
 		} else if (mouseY > Game.halfWindowHeight) {
 			y2 = mouseY;
 			y1 = y2 - toolTipGroupDimensions[1];
+			// System.out.println("toolTipGroupDimensions[1]" + toolTipGroupDimensions[1]);
 		}
 
 		float offsetY = 0;
