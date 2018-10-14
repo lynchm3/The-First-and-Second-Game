@@ -60,6 +60,7 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Tooltip;
+import com.marklynch.ui.button.TooltipGroup;
 import com.marklynch.ui.popups.FullScreenTextBox;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.ui.popups.PopupMenu;
@@ -226,6 +227,8 @@ public class Level {
 	// public static float shadowDarkness = 0 -> 0.2f -> 0;
 
 	public static ArrayList<Animation> blockingAnimations = new ArrayList<Animation>();
+
+	public static TooltipGroup tooltipGroup = new TooltipGroup();
 
 	public static ArrayList<Decoration> decorations = new ArrayList<Decoration>();
 
@@ -1476,11 +1479,15 @@ public class Level {
 			fullScreenTextBox.draw();
 
 		if (Game.buttonHoveringOver != null) {
-			Game.buttonHoveringOver.drawTooltip();
-			Tooltip.lastTooltipGroupShown = Game.buttonHoveringOver.tooltipGroup;
+			Level.tooltipGroup.clear();
+			Level.tooltipGroup.addAll(Game.buttonHoveringOver.tooltips);
+			// Tooltip.lastTooltipGroupShown = Game.buttonHoveringOver.tooltipGroup;
 		} else {
 			Tooltip.lastTooltipGroupShown = null;
 		}
+
+		Level.tooltipGroup.drawStaticUI();
+		Level.tooltipGroup.clear();
 
 	}
 

@@ -74,4 +74,9 @@ public class Tooltip {
 
 	}
 
+	public void setTooltipText(Object[] tooltipText) {
+		this.text = new ArrayList<Object>(Arrays.asList(tooltipText));
+
+	}
+
 }

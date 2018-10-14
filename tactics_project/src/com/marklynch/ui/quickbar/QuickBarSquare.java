@@ -11,6 +11,7 @@ import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.button.Tooltip;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
@@ -63,7 +64,9 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 
 	public void setShortcut(Object shortcut) {
 		this.shortcut = shortcut;
-		this.setTooltipText(this.shortcut);
+		// this.setTooltipText(this.shortcut);
+		this.tooltips.clear();
+		this.tooltips.add(new Tooltip(false, Tooltip.WHITE, this.shortcut));
 		if (shortcut == null) {
 			this.setClickListener(null);
 		} else if (shortcut instanceof Power) {

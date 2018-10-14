@@ -55,7 +55,6 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.button.Tooltip;
-import com.marklynch.ui.button.TooltipGroup;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
@@ -202,8 +201,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public static final HashMap<Texture, Color> tileColors = new HashMap<Texture, Color>();
 
-	public static TooltipGroup tooltipGroup = null;
-	private static Square squareForTooltip;
+	// public static TooltipGroup tooltipGroup = null;
 
 	public static void loadStaticImages() {
 		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png", false);
@@ -600,29 +598,29 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 							UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 							Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16, color);
 
-					Square.tooltipGroup = new TooltipGroup();
+					// Square.tooltipGroup = new TooltipGroup();
 
 					if (Game.level.showWindowPixelCoords) {
-						Square.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE,
+						Level.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE,
 								"" + UserInputLevel.mouseLastX + "," + UserInputLevel.mouseLastY));
 					}
 
-					Square.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.actionName));
+					Level.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.actionName));
 
 					if (action.disabledReason != null) {
-						Square.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.disabledReason));
+						Level.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.disabledReason));
 					}
 
 					if (action.illegalReason != null) {
-						Square.tooltipGroup.add(new Tooltip(false, Tooltip.RED, action.illegalReason));
+						Level.tooltipGroup.add(new Tooltip(false, Tooltip.RED, action.illegalReason));
 					}
 					// } else {
 					// Square.tooltipGroup = null;
 					// }
 
-					if (Square.tooltipGroup != null) {
-						Square.tooltipGroup.drawStaticUI();
-					}
+					// if (Level.tooltipGroup != null) {
+					// Square.tooltipGroup.drawStaticUI();
+					// }
 				} else {
 
 				}

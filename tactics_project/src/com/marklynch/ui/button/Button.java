@@ -15,7 +15,8 @@ public abstract class Button {
 	public ClickListener clickListener;
 	protected Object text;
 	protected boolean highlighted = false;
-	public TooltipGroup tooltipGroup;
+	// public Tooltip tooltip;
+	public ArrayList<Tooltip> tooltips = new ArrayList<Tooltip>();
 
 	public Button(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,
 			Object text, String tooltipText) {
@@ -28,9 +29,11 @@ public abstract class Button {
 		this.disabledTexture = ResourceUtils.getGlobalImage(disabledTexturePath, false);
 		this.text = text;
 		if (tooltipText != null) {
-			tooltipGroup = new TooltipGroup();
-			tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, tooltipText));
+			this.tooltips.add(new Tooltip(false, Tooltip.WHITE, tooltipText));
 		}
+		// this.tooltipText = tooltipGroup = new TooltipGroup();
+		// tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, tooltipText));
+		// }
 
 	}
 
@@ -62,19 +65,21 @@ public abstract class Button {
 
 	}
 
-	public void drawTooltip() {
-		if (tooltipGroup != null)
-			tooltipGroup.drawStaticUI();
-	}
-
+	// public void drawTooltip() {
+	// if (tooltipGroup != null)
+	// tooltipGroup.drawStaticUI();
+	// }
+	//
 	public void setTooltipText(Object... tooltipText) {
-		if (tooltipGroup != null)
-			tooltipGroup.setTooltipText(tooltipText);
+		if (tooltipText != null) {
+			tooltips.clear();
+			tooltips.add(new Tooltip(false, Tooltip.WHITE, tooltipText));
+		}
 	}
-
-	public void setTooltipText(ArrayList<Object> tooltipText) {
-		if (tooltipGroup != null)
-			tooltipGroup.setTooltipText(tooltipText);
-	}
+	//
+	// public void setTooltipText(ArrayList<Object> tooltipText) {
+	// if (tooltipGroup != null)
+	// tooltipGroup.setTooltipText(tooltipText);
+	// }
 
 }
