@@ -23,7 +23,7 @@ public class ActionAttack extends Action {
 
 	// Default for hostiles
 	public ActionAttack(Actor attacker, GameObject target) {
-		super(ACTION_NAME, "action_attack.png");
+		super(ACTION_NAME, textureAttack);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 
