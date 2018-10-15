@@ -1,17 +1,19 @@
 package com.marklynch.objects;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 //import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.utils.Color;
+import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 //import mdesl.graphics.Texture;
 
-public class Wall extends GameObject {
+public class Wall3 extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
@@ -29,19 +31,19 @@ public class Wall extends GameObject {
 	public boolean connectedLeft;
 	public boolean connectedTopLeft;
 
-	// public static Texture textureFullWall;
-	// public static Texture textureFullTopWall;
-	// public static Texture textureFullRightWall;
-	// public static Texture textureFullBottomWall;
-	// public static Texture textureFullLeftWall;
-	// public static Texture textureTop;
-	// public static Texture textureTopRight;
-	// public static Texture textureRight;
-	// public static Texture textureBottomRight;
-	// public static Texture textureBottom;
-	// public static Texture textureBottomLeft;
-	// public static Texture textureLeft;
-	// public static Texture textureTopLeft;
+	public static Texture textureFullWall;
+	public static Texture textureFullTopWall;
+	public static Texture textureFullRightWall;
+	public static Texture textureFullBottomWall;
+	public static Texture textureFullLeftWall;
+	public static Texture textureTop;
+	public static Texture textureTopRight;
+	public static Texture textureRight;
+	public static Texture textureBottomRight;
+	public static Texture textureBottom;
+	public static Texture textureBottomLeft;
+	public static Texture textureLeft;
+	public static Texture textureTopLeft;
 
 	public float drawX1, drawX2, drawY1, drawY2;
 
@@ -64,7 +66,7 @@ public class Wall extends GameObject {
 	public float quarterWidth = Game.SQUARE_WIDTH / 4;
 	public float quarterHeight = Game.SQUARE_HEIGHT / 4;
 
-	public Wall() {
+	public Wall3() {
 		super();
 
 		canBePickedUp = false;
@@ -161,21 +163,21 @@ public class Wall extends GameObject {
 
 	}
 
-	// public static void loadStaticImages() {
-	// textureFullWall = getGlobalImage("wall.png", true);
-	// textureFullTopWall = getGlobalImage("wall_full_top.png", true);
-	// textureFullRightWall = getGlobalImage("wall_full_right.png", true);
-	// textureFullBottomWall = getGlobalImage("wall_full_bottom.png", true);
-	// textureFullLeftWall = getGlobalImage("wall_full_left.png", true);
-	// textureTop = getGlobalImage("wall_top.png", true);
-	// textureTopRight = getGlobalImage("wall_top_right.png", true);
-	// textureRight = getGlobalImage("wall_right.png", true);
-	// textureBottomRight = getGlobalImage("wall_bottom_right.png", true);
-	// textureBottom = getGlobalImage("wall_bottom.png", true);
-	// textureBottomLeft = getGlobalImage("wall_bottom_left.png", true);
-	// textureLeft = getGlobalImage("wall_left.png", true);
-	// textureTopLeft = getGlobalImage("wall_top_left.png", true);
-	// }
+	public static void loadStaticImages() {
+		textureFullWall = getGlobalImage("wall.png", true);
+		textureFullTopWall = getGlobalImage("wall_full_top.png", true);
+		textureFullRightWall = getGlobalImage("wall_full_right.png", true);
+		textureFullBottomWall = getGlobalImage("wall_full_bottom.png", true);
+		textureFullLeftWall = getGlobalImage("wall_full_left.png", true);
+		textureTop = getGlobalImage("wall_top.png", true);
+		textureTopRight = getGlobalImage("wall_top_right.png", true);
+		textureRight = getGlobalImage("wall_right.png", true);
+		textureBottomRight = getGlobalImage("wall_bottom_right.png", true);
+		textureBottom = getGlobalImage("wall_bottom.png", true);
+		textureBottomLeft = getGlobalImage("wall_bottom_left.png", true);
+		textureLeft = getGlobalImage("wall_left.png", true);
+		textureTopLeft = getGlobalImage("wall_top_left.png", true);
+	}
 
 	@Override
 	public void draw1() {
@@ -194,86 +196,62 @@ public class Wall extends GameObject {
 		// Draw object
 		if (squareGameObjectIsOn != null) {
 
-			float alpha = 1.0f;
+			// float alpha = 1.0f;
 
 			if (fullWall) {
-
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + 0, drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
+				TextureUtils.drawTexture(textureFullWall, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			if (fullLeftWall) {
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + 0, drawX1 + Game.HALF_SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT, false, false,
-						Color.WHITE);
+				TextureUtils.drawTexture(textureFullLeftWall, fullLeftDrawX1, fullLeftDrawY1, fullLeftDrawX2,
+						fullLeftDrawY2);
 				return;
 			}
 
 			if (fullRightWall) {
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						drawX1 + Game.HALF_SQUARE_WIDTH, drawY1 + 0, drawX1 + Game.SQUARE_WIDTH,
-						drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
+				TextureUtils.drawTexture(textureFullRightWall, fullRightDrawX1, fullRightDrawY1, fullRightDrawX2,
+						fullRightDrawY2);
 				return;
 			}
 
 			if (fullTopWall) {
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + 0, drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.HALF_SQUARE_HEIGHT, false, false,
-						Color.WHITE);
+				TextureUtils.drawTexture(textureFullTopWall, fullTopDrawX1, fullTopDrawY1, fullTopDrawX2,
+						fullTopDrawY2);
 				return;
 			}
 
 			if (fullBottomWall) {
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + Game.HALF_SQUARE_HEIGHT, drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT,
-						false, false, Color.WHITE);
+				TextureUtils.drawTexture(textureFullBottomWall, fullBottomDrawX1, fullBottomDrawY1, fullBottomDrawX2,
+						fullBottomDrawY2);
 				return;
 			}
 
 			if (connectedTop)
-				// TextureUtils.drawTexture(textureTop, topDrawX1, topDrawY1, topDrawX2,
-				// topDrawY2);
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						drawX1 + Game.QUARTER_SQUARE_WIDTH, drawY1 + 0, drawX1 + Game.THREE_QUARTERS_SQUARE_WIDTH,
-						drawY1 + Game.QUARTER_SQUARE_HEIGHT, false, false, Color.WHITE);
-
-			// if (connectedTopRight)
-			// TextureUtils.drawTexture(textureTopRight, topRightDrawX1, topRightDrawY1,
-			// topRightDrawX2,
-			// topRightDrawY2);
-			//
-			// if (connectedRight)
-			// TextureUtils.drawTexture(textureRight, rightDrawX1, rightDrawY1, rightDrawX2,
-			// rightDrawY2);
-			//
-			// if (connectedBottomRight)
-			// TextureUtils.drawTexture(textureBottomRight, bottomRightDrawX1,
-			// bottomRightDrawY1, bottomRightDrawX2,
-			// bottomRightDrawY2);
-			//
-			// if (connectedBottom)
-			// TextureUtils.drawTexture(textureBottom, bottomDrawX1, bottomDrawY1,
-			// bottomDrawX2, bottomDrawY2);
-			//
-			// if (connectedBottomLeft)
-			// TextureUtils.drawTexture(textureBottomLeft, bottomLeftDrawX1,
-			// bottomLeftDrawY1, bottomLeftDrawX2,
-			// bottomLeftDrawY2);
-			//
-			// if (connectedLeft)
-			// TextureUtils.drawTexture(textureLeft, leftDrawX1, leftDrawY1, leftDrawX2,
-			// leftDrawY2);
-			//
-			// if (connectedTopLeft)
-			// TextureUtils.drawTexture(textureTopLeft, topLeftDrawX1, topLeftDrawY1,
-			// topLeftDrawX2, topLeftDrawY2);
+				TextureUtils.drawTexture(textureTop, topDrawX1, topDrawY1, topDrawX2, topDrawY2);
+			if (connectedTopRight)
+				TextureUtils.drawTexture(textureTopRight, topRightDrawX1, topRightDrawY1, topRightDrawX2,
+						topRightDrawY2);
+			if (connectedRight)
+				TextureUtils.drawTexture(textureRight, rightDrawX1, rightDrawY1, rightDrawX2, rightDrawY2);
+			if (connectedBottomRight)
+				TextureUtils.drawTexture(textureBottomRight, bottomRightDrawX1, bottomRightDrawY1, bottomRightDrawX2,
+						bottomRightDrawY2);
+			if (connectedBottom)
+				TextureUtils.drawTexture(textureBottom, bottomDrawX1, bottomDrawY1, bottomDrawX2, bottomDrawY2);
+			if (connectedBottomLeft)
+				TextureUtils.drawTexture(textureBottomLeft, bottomLeftDrawX1, bottomLeftDrawY1, bottomLeftDrawX2,
+						bottomLeftDrawY2);
+			if (connectedLeft)
+				TextureUtils.drawTexture(textureLeft, leftDrawX1, leftDrawY1, leftDrawX2, leftDrawY2);
+			if (connectedTopLeft)
+				TextureUtils.drawTexture(textureTopLeft, topLeftDrawX1, topLeftDrawY1, topLeftDrawX2, topLeftDrawY2);
 		}
 	}
 
 	@Override
-	public Wall makeCopy(Square square, Actor owner) {
-		Wall wall = new Wall();
+	public Wall3 makeCopy(Square square, Actor owner) {
+		Wall3 wall = new Wall3();
 		setInstances(wall);
 		super.setAttributesForCopy(wall, square, owner);
 		// if (wall.squareGameObjectIsOn != null) {

@@ -175,6 +175,8 @@ public class Game {
 	public static float HALF_SQUARE_HEIGHT = SQUARE_HEIGHT / 2f;
 	public static float QUARTER_SQUARE_WIDTH = SQUARE_WIDTH / 4f;
 	public static float QUARTER_SQUARE_HEIGHT = SQUARE_HEIGHT / 4f;
+	public static float THREE_QUARTERS_SQUARE_WIDTH = QUARTER_SQUARE_WIDTH * 3;
+	public static float THREE_QUARTERS_SQUARE_HEIGHT = QUARTER_SQUARE_HEIGHT * 3;
 
 	public static Square squareMouseIsOver;
 	public static GameObject gameObjectMouseIsOver;

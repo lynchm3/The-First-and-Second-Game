@@ -44,7 +44,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.Vein;
-import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionUsePower;
@@ -250,7 +249,7 @@ public class Level {
 		Actor.loadStaticImages();
 		Action.loadActionImages();
 		Effect.loadEffectImages();
-		Wall.loadStaticImages();
+		// Wall.loadStaticImages();
 		Vein.loadStaticImages();
 		MapMarker.loadStaticImages();
 		Inventory.loadStaticImages();
