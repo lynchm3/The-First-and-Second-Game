@@ -64,7 +64,7 @@ public class TemplatesArmor {
 		Templates.HELMET_ANTLERS.totalHealth = Templates.HELMET_ANTLERS.remainingHealth = 36;
 		Templates.HELMET_ANTLERS.weight = 6f;
 		Templates.HELMET_ANTLERS.value = 65;
-		Templates.HELMET_ANTLERS.anchorX = 177;
+		Templates.HELMET_ANTLERS.anchorX = 128;
 		Templates.HELMET_ANTLERS.anchorY = 98;
 		Templates.HELMET_ANTLERS.templateId = GameObject.generateNewTemplateId();
 
