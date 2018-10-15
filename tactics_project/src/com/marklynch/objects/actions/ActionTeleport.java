@@ -66,6 +66,10 @@ public class ActionTeleport extends Action {
 
 		Square startSquare = teleportee.squareGameObjectIsOn;
 
+		if (teleportee == Level.player) {
+			Level.pausePlayer();
+		}
+
 		teleportee.setPrimaryAnimation(new AnimationTeleport(teleportee, startSquare, targetSquare) {
 
 			@Override

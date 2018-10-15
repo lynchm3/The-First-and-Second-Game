@@ -101,6 +101,10 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 						Level.flashGameObjectCounters.put(gameObject, 0);
 					}
 
+					if (gameObject == Level.player) {
+						Level.pausePlayer();
+					}
+
 					gameObject.setPrimaryAnimation(new AnimationFallFromTheSky(gameObject, 200));
 				}
 			});
