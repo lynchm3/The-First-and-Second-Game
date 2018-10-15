@@ -31,6 +31,7 @@ import com.marklynch.objects.Mirror;
 import com.marklynch.objects.Orb;
 import com.marklynch.objects.Portal;
 import com.marklynch.objects.PressurePlate;
+import com.marklynch.objects.PressurePlateRequiringSpecificItem;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.RemoteDoor;
@@ -268,13 +269,15 @@ public class Templates {
 
 	public static Storage LOST_AND_FOUND;
 
-	public static RemoteDoor OPENABLE_WALL;;
+	public static RemoteDoor OPENABLE_WALL;
+	public static RemoteDoor REMOTE_DOOR;
 
 	public static Key KEY;
 
 	public static Switch ANTLERS_SWITCH;
 
 	public static PressurePlate PRESSURE_PLATE;
+	public static PressurePlateRequiringSpecificItem PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM;
 
 	public static Seesaw SEESAW;
 	public static Seesaw.SeesawPart SEESAW_PART;

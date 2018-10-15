@@ -67,6 +67,18 @@ public class TemplatesEntrances {
 		Templates.OPENABLE_WALL.templateId = GameObject.generateNewTemplateId();
 		Templates.OPENABLE_WALL.flipYAxisInMirror = false;
 
+		Templates.REMOTE_DOOR = new RemoteDoor();
+		Templates.REMOTE_DOOR.name = "Remote Door";
+		Templates.REMOTE_DOOR.baseName = "Remote Door";
+		Templates.REMOTE_DOOR.imageTexturePath = "door.png";
+		Templates.REMOTE_DOOR.imageTexture = getGlobalImage(Templates.REMOTE_DOOR.imageTexturePath, true);
+		Templates.REMOTE_DOOR.totalHealth = Templates.REMOTE_DOOR.remainingHealth = 180;
+		Templates.REMOTE_DOOR.soundDampeningWhenClosed = 5;
+		Templates.REMOTE_DOOR.weight = 100f;
+		Templates.REMOTE_DOOR.value = 37;
+		Templates.REMOTE_DOOR.blocksLineOfSightWhenClosed = true;
+		Templates.REMOTE_DOOR.templateId = GameObject.generateNewTemplateId();
+
 	}
 
 }

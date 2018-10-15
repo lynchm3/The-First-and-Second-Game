@@ -1103,7 +1103,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionChoppingStart(performer, this);
 		}
 
-		if (this instanceof PressurePlate) {
+		if (this instanceof PressurePlate || this instanceof PressurePlateRequiringSpecificItem) {
 			return new ActionMove(performer, this.squareGameObjectIsOn, true);
 		}
 
@@ -1152,7 +1152,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Pressure Plate
-		if (this instanceof PressurePlate) {
+		if (this instanceof PressurePlate || this instanceof PressurePlateRequiringSpecificItem) {
 			return new ActionOpenInventoryToDropItems(performer, this.squareGameObjectIsOn);
 		}
 
@@ -1260,7 +1260,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Switch
-		if (this instanceof PressurePlate) {
+		if (this instanceof PressurePlate || this instanceof PressurePlateRequiringSpecificItem) {
 			if (performer.equipped != null)
 				actions.add(new ActionDropItems(performer, this.squareGameObjectIsOn, performer.equipped));
 			actions.add(new ActionOpenInventoryToDropItems(performer, this.squareGameObjectIsOn));

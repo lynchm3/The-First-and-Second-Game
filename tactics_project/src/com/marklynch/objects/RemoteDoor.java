@@ -3,6 +3,7 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.units.Actor;
 
 public class RemoteDoor extends Door {
 
@@ -52,12 +53,12 @@ public class RemoteDoor extends Door {
 		name = baseName;
 	}
 
-	public RemoteDoor makeCopy(String name, Square square, boolean locked, Key... keys) {
+	public RemoteDoor makeCopy(String name, Square square, boolean locked, Actor owner) {
 
 		RemoteDoor door = new RemoteDoor();
 		setInstances(door);
 
-		super.setAttributesForCopy(door, square, locked, null, keys);
+		super.setAttributesForCopy(door, square, locked, owner);
 		door.soundDampeningWhenClosed = soundDampening;
 		door.blocksLineOfSightWhenClosed = blocksLineOfSight;
 

@@ -14,6 +14,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Mirror;
 import com.marklynch.objects.PressurePlate;
+import com.marklynch.objects.PressurePlateRequiringSpecificItem;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Seesaw;
 import com.marklynch.objects.Stampable;
@@ -181,11 +182,19 @@ public class TemplatesFurniture {
 		Templates.PRESSURE_PLATE.setImageAndExtrapolateSize("pressure_plate.png");
 		Templates.PRESSURE_PLATE.weight = 0f;
 		Templates.PRESSURE_PLATE.value = 27;
-		Templates.PRESSURE_PLATE.anchorX = 0;
-		Templates.PRESSURE_PLATE.anchorY = 0;
 		Templates.PRESSURE_PLATE.templateId = GameObject.generateNewTemplateId();
 		Templates.PRESSURE_PLATE.actionName = "Trigger";
 		Templates.PRESSURE_PLATE.actionVerb = "triggered";
+
+		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM = new PressurePlateRequiringSpecificItem();
+		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.name = "Pressure Plate with inlet";
+		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.totalHealth = Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.remainingHealth = 1;
+		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.setImageAndExtrapolateSize("pressure_plate.png");
+		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.weight = 0f;
+		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.value = 39;
+		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.templateId = GameObject.generateNewTemplateId();
+		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.actionName = "Trigger";
+		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.actionVerb = "triggered";
 
 		Templates.SEESAW = new Seesaw();
 		Templates.SEESAW.name = "Seesaw";
