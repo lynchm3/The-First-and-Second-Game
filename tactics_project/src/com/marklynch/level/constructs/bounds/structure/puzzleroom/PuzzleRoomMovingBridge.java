@@ -73,8 +73,8 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		// this, Switch.SWITCH_TYPE.OPEN_CLOSE,
 		// new RequirementToMeet[] { new
 		// StatRequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) });
-		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX - 1][posY + totalHeightInSquares / 2 - 1], null, Switch.SWITCH_TYPE.OPEN_CLOSE,
-				5, this);
+		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX - 1][posY + totalHeightInSquares / 2 - 1], null,
+				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, this);
 
 		Templates.CRATE.makeCopy("Crate",
 				Level.squares[posX + totalWidthInSquares - 1][posY + totalHeightInSquares / 2], false, null);
@@ -277,7 +277,6 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			public void runCompletionAlgorightm(boolean wait) {
 				super.runCompletionAlgorightm(wait);
 				postRangedAnimation(gameObject, targetSquares1);
-				// postRangedAnimation(arrow);
 			}
 		});
 

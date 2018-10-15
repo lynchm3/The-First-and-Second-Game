@@ -178,7 +178,7 @@ public class TemplatesFurniture {
 		Templates.PRESSURE_PLATE = new PressurePlate();
 		Templates.PRESSURE_PLATE.name = "Pressure Plate";
 		Templates.PRESSURE_PLATE.totalHealth = Templates.PRESSURE_PLATE.remainingHealth = 1;
-		Templates.PRESSURE_PLATE.setImageAndExtrapolateSize("fork.png");
+		Templates.PRESSURE_PLATE.setImageAndExtrapolateSize("pressure_plate.png");
 		Templates.PRESSURE_PLATE.weight = 0f;
 		Templates.PRESSURE_PLATE.value = 27;
 		Templates.PRESSURE_PLATE.anchorX = 0;
