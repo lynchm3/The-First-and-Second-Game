@@ -148,6 +148,10 @@ public class Actor extends GameObject {
 	public float rightArmDrawX = 76;
 	public float rightArmHingeX = 78;
 
+	// head
+	int headAnchorX = 64;
+	int headAnchorY = 26;
+
 	// Toro
 	public Texture torsoImageTexture;// = ResourceUtils.getGlobalImage("hero_upper.png", false);
 
@@ -780,8 +784,8 @@ public class Actor extends GameObject {
 
 		if (helmet != null && !sleeping) {
 
-			int helmetPositionXInPixels = (int) ((x) + 64 - helmet.anchorX);
-			int helmetPositionYInPixels = (int) ((y) + 41 - helmet.anchorY);
+			int helmetPositionXInPixels = (int) ((x) + headAnchorX - helmet.anchorX);
+			int helmetPositionYInPixels = (int) ((y) + headAnchorY - helmet.anchorY);
 
 			TextureUtils.drawTextureWithinBounds(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
 					helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,

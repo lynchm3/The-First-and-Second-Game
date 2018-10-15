@@ -23,8 +23,8 @@ public class TemplatesArmor {
 		Templates.HARD_HAT.totalHealth = Templates.HARD_HAT.remainingHealth = 50;
 		Templates.HARD_HAT.weight = 7;
 		Templates.HARD_HAT.value = 52;
-		Templates.HARD_HAT.anchorX = 20;
-		Templates.HARD_HAT.anchorY = 8;
+		Templates.HARD_HAT.anchorX = 64;
+		Templates.HARD_HAT.anchorY = 25;
 		Templates.HARD_HAT.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(10));
 		Templates.HARD_HAT.templateId = GameObject.generateNewTemplateId();
 
@@ -34,8 +34,8 @@ public class TemplatesArmor {
 		Templates.PINK_HARD_HAT.totalHealth = Templates.PINK_HARD_HAT.remainingHealth = 50;
 		Templates.PINK_HARD_HAT.weight = 7;
 		Templates.PINK_HARD_HAT.value = 82;
-		Templates.PINK_HARD_HAT.anchorX = 20;
-		Templates.PINK_HARD_HAT.anchorY = 8;
+		Templates.PINK_HARD_HAT.anchorX = 64;
+		Templates.PINK_HARD_HAT.anchorY = 25;
 		Templates.PINK_HARD_HAT.templateId = GameObject.generateNewTemplateId();
 
 		Templates.HUNTING_CAP = new Helmet();
@@ -44,8 +44,8 @@ public class TemplatesArmor {
 		Templates.HUNTING_CAP.totalHealth = Templates.HUNTING_CAP.remainingHealth = 50;
 		Templates.HUNTING_CAP.weight = 5;
 		Templates.HUNTING_CAP.value = 21;
-		Templates.HUNTING_CAP.anchorX = 20;
-		Templates.HUNTING_CAP.anchorY = 8;
+		Templates.HUNTING_CAP.anchorX = 64;
+		Templates.HUNTING_CAP.anchorY = 25;
 		Templates.HUNTING_CAP.templateId = GameObject.generateNewTemplateId();
 
 		Templates.COWBOY_HAT = new Helmet();
@@ -54,8 +54,8 @@ public class TemplatesArmor {
 		Templates.COWBOY_HAT.totalHealth = Templates.COWBOY_HAT.remainingHealth = 15;
 		Templates.COWBOY_HAT.weight = 6f;
 		Templates.COWBOY_HAT.value = 34;
-		Templates.COWBOY_HAT.anchorX = 30;
-		Templates.COWBOY_HAT.anchorY = 54;
+		Templates.COWBOY_HAT.anchorX = 64;
+		Templates.COWBOY_HAT.anchorY = 26;
 		Templates.COWBOY_HAT.templateId = GameObject.generateNewTemplateId();
 
 		Templates.HELMET_ANTLERS = new Helmet();
@@ -65,7 +65,7 @@ public class TemplatesArmor {
 		Templates.HELMET_ANTLERS.weight = 6f;
 		Templates.HELMET_ANTLERS.value = 65;
 		Templates.HELMET_ANTLERS.anchorX = 177;
-		Templates.HELMET_ANTLERS.anchorY = 113;
+		Templates.HELMET_ANTLERS.anchorY = 98;
 		Templates.HELMET_ANTLERS.templateId = GameObject.generateNewTemplateId();
 
 		// Body Armor
