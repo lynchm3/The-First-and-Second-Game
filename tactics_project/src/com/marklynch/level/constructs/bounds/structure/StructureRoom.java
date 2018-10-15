@@ -23,6 +23,8 @@ public class StructureRoom {
 
 	public static Color roomColor = new Color(0.7f, 0.7f, 0.7f);
 
+	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
+
 	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
 			ArrayList<Actor> ownersArrayList, Node[] nodes, RoomPart... roomParts) {
 		this(name, x, y, restricted, restrictedAtNight, ownersArrayList, 0, true, nodes, roomParts);

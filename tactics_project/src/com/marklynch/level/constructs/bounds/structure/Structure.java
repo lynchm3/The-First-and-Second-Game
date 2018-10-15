@@ -78,6 +78,20 @@ public class Structure {
 			}
 		}
 
+		for (StructureRoom room : rooms) {
+			for (StructureFeature feature : room.features) {
+				floorSquares.add(feature.gameObject.squareGameObjectIsOn);
+				featureSquares.add(feature.gameObject.squareGameObjectIsOn);
+
+				if (feature.nodes != null && feature.nodes.size() > 0) {
+					feature.gameObject.squareGameObjectIsOn.nodes = feature.nodes;
+					for (Node node : feature.nodes) {
+						node.addSquare(feature.gameObject.squareGameObjectIsOn);
+					}
+				}
+			}
+		}
+
 		// Floor squares
 		for (StructurePath path : paths) {
 			for (Square square : path.squares)
