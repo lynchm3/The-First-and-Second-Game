@@ -1173,7 +1173,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 		if (inventory.contains(Landmine.class)) {
 			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
-			if (landmine.discovered) {
+			if (landmine.discovered) {// This is dumb, there's only a flag for player discovered... needs a change...
 				cost = 10;
 				return;
 			}

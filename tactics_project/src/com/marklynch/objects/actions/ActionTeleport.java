@@ -213,10 +213,12 @@ public class ActionTeleport extends Action {
 			return false;
 		}
 
-		boolean legalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, teleportee);
-		System.out.println("illegalToPerformOnTeleportee");
-		if (!legalToPerformOnTeleportee) {
-			return false;
+		if (teleportee != gameObjectPerformer) {
+			boolean legalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, teleportee);
+			System.out.println("legalToPerformOnTeleportee = " + legalToPerformOnTeleportee);
+			if (!legalToPerformOnTeleportee) {
+				return false;
+			}
 		}
 
 		// If ur going to dmg something...

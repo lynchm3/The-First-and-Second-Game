@@ -142,11 +142,20 @@ public class ActionTeleportSwap extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		boolean illegalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, teleportee);
-
-		if (illegalToPerformOnTeleportee) {
-			return false;
+		if (teleportee != gameObjectPerformer) {
+			boolean illegalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, teleportee);
+			if (illegalToPerformOnTeleportee) {
+				return false;
+			}
 		}
+
+		// if (teleportee != gameO) {
+		// boolean illegalToPerformOnTeleportee =
+		// standardAttackLegalityCheck(gameObjectPerformer, teleportee);
+		// if (illegalToPerformOnTeleportee) {
+		// return false;
+		// }
+		// }
 
 		if (target.restricted() == true && !target.owners.contains(teleportee)) {
 			illegalReason = TRESPASSING;
