@@ -71,7 +71,7 @@ public class ActionDig extends Action {
 		}
 
 		float damage = target.remainingHealth;
-		target.changeHealth(-damage, null, null);
+		target.changeHealthSafetyOff(-damage, null, null);
 		target.checkIfDestroyed(performer, this);
 
 		target.showPow();
