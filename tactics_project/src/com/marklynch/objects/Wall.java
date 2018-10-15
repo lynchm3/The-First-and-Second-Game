@@ -202,72 +202,83 @@ public class Wall extends GameObject {
 						drawY1 + 0, drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
 				return;
 			}
-
-			if (fullLeftWall) {
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + 0, drawX1 + Game.HALF_SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT, false, false,
-						Color.WHITE);
-				return;
-			}
-
-			if (fullRightWall) {
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						drawX1 + Game.HALF_SQUARE_WIDTH, drawY1 + 0, drawX1 + Game.SQUARE_WIDTH,
-						drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
-				return;
-			}
-
-			if (fullTopWall) {
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + 0, drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.HALF_SQUARE_HEIGHT, false, false,
-						Color.WHITE);
-				return;
-			}
-
-			if (fullBottomWall) {
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + Game.HALF_SQUARE_HEIGHT, drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT,
-						false, false, Color.WHITE);
-				return;
-			}
+			//
+			// if (fullLeftWall) {
+			// TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1,
+			// drawX2, drawY2, drawX1 + 0,
+			// drawY1 + 0, drawX1 + Game.HALF_SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT,
+			// false, false,
+			// Color.WHITE);
+			// return;
+			// }
+			//
+			// if (fullRightWall) {
+			// TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1,
+			// drawX2, drawY2,
+			// drawX1 + Game.HALF_SQUARE_WIDTH, drawY1 + 0, drawX1 + Game.SQUARE_WIDTH,
+			// drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
+			// return;
+			// }
+			//
+			// if (fullTopWall) {
+			// TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1,
+			// drawX2, drawY2, drawX1 + 0,
+			// drawY1 + 0, drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.HALF_SQUARE_HEIGHT,
+			// false, false,
+			// Color.WHITE);
+			// return;
+			// }
+			//
+			// if (fullBottomWall) {
+			// TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1,
+			// drawX2, drawY2, drawX1 + 0,
+			// drawY1 + Game.HALF_SQUARE_HEIGHT, drawX1 + Game.SQUARE_WIDTH, drawY1 +
+			// Game.SQUARE_HEIGHT,
+			// false, false, Color.WHITE);
+			// return;
+			// }
 
 			if (connectedTop)
-				// TextureUtils.drawTexture(textureTop, topDrawX1, topDrawY1, topDrawX2,
-				// topDrawY2);
 				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
 						drawX1 + Game.QUARTER_SQUARE_WIDTH, drawY1 + 0, drawX1 + Game.THREE_QUARTERS_SQUARE_WIDTH,
-						drawY1 + Game.QUARTER_SQUARE_HEIGHT, false, false, Color.WHITE);
+						drawY1 + Game.HALF_SQUARE_HEIGHT, false, false, Color.WHITE);
 
-			// if (connectedTopRight)
-			// TextureUtils.drawTexture(textureTopRight, topRightDrawX1, topRightDrawY1,
-			// topRightDrawX2,
-			// topRightDrawY2);
+			if (connectedTopRight)
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
+						drawX1 + Game.THREE_QUARTERS_SQUARE_WIDTH, drawY1 + 0, drawX1 + Game.SQUARE_WIDTH,
+						drawY1 + Game.QUARTER_SQUARE_HEIGHT, false, false, Color.WHITE);
 			//
-			// if (connectedRight)
-			// TextureUtils.drawTexture(textureRight, rightDrawX1, rightDrawY1, rightDrawX2,
-			// rightDrawY2);
+			if (connectedRight)
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
+						drawX1 + Game.HALF_SQUARE_WIDTH, drawY1 + Game.QUARTER_SQUARE_HEIGHT,
+						drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.THREE_QUARTERS_SQUARE_HEIGHT, false, false,
+						Color.WHITE);
 			//
-			// if (connectedBottomRight)
-			// TextureUtils.drawTexture(textureBottomRight, bottomRightDrawX1,
-			// bottomRightDrawY1, bottomRightDrawX2,
-			// bottomRightDrawY2);
+			if (connectedBottomRight)
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
+						drawX1 + Game.THREE_QUARTERS_SQUARE_WIDTH, drawY1 + Game.THREE_QUARTERS_SQUARE_HEIGHT,
+						drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
 			//
-			// if (connectedBottom)
-			// TextureUtils.drawTexture(textureBottom, bottomDrawX1, bottomDrawY1,
-			// bottomDrawX2, bottomDrawY2);
+			if (connectedBottom)
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
+						drawX1 + Game.QUARTER_SQUARE_WIDTH, drawY1 + Game.HALF_SQUARE_HEIGHT,
+						drawX1 + Game.THREE_QUARTERS_SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT, false, false,
+						Color.WHITE);
 			//
-			// if (connectedBottomLeft)
-			// TextureUtils.drawTexture(textureBottomLeft, bottomLeftDrawX1,
-			// bottomLeftDrawY1, bottomLeftDrawX2,
-			// bottomLeftDrawY2);
+			if (connectedBottomLeft)
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
+						drawY1 + Game.THREE_QUARTERS_SQUARE_HEIGHT, drawX1 + Game.QUARTER_SQUARE_WIDTH,
+						drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
 			//
-			// if (connectedLeft)
-			// TextureUtils.drawTexture(textureLeft, leftDrawX1, leftDrawY1, leftDrawX2,
-			// leftDrawY2);
+			if (connectedLeft)
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
+						drawY1 + Game.QUARTER_SQUARE_HEIGHT, drawX1 + Game.HALF_SQUARE_WIDTH,
+						drawY1 + Game.THREE_QUARTERS_SQUARE_HEIGHT, false, false, Color.WHITE);
 			//
-			// if (connectedTopLeft)
-			// TextureUtils.drawTexture(textureTopLeft, topLeftDrawX1, topLeftDrawY1,
-			// topLeftDrawX2, topLeftDrawY2);
+			if (connectedTopLeft)
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
+						drawY1 + 0, drawX1 + Game.QUARTER_SQUARE_WIDTH, drawY1 + Game.QUARTER_SQUARE_HEIGHT, false,
+						false, Color.WHITE);
 		}
 	}
 

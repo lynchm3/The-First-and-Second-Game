@@ -202,6 +202,23 @@ public class Structure {
 							- 1].inventory.contains(Wall.class)) {
 				wall.connectedTopLeft = true;
 			}
+
+			if (wall.connectedLeft && wall.connectedTop) {
+				wall.connectedTopLeft = true;
+			}
+
+			if (wall.connectedLeft && wall.connectedBottom) {
+				wall.connectedBottomLeft = true;
+			}
+
+			if (wall.connectedRight && wall.connectedTop) {
+				wall.connectedTopRight = true;
+			}
+
+			if (wall.connectedRight && wall.connectedBottom) {
+				wall.connectedBottomRight = true;
+			}
+
 			wall.checkIfFullWall();
 		}
 
