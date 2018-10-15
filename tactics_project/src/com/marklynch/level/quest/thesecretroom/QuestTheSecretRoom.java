@@ -3,7 +3,7 @@ package com.marklynch.level.quest.thesecretroom;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.Path;
+import com.marklynch.level.constructs.PavedPathway;
 import com.marklynch.level.constructs.area.town.AreaTown;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
@@ -125,7 +125,7 @@ public class QuestTheSecretRoom extends Quest {
 				Templates.WALL, Square.STONE_TEXTURE, 2));
 
 		// Path to town 24,21 -> 24,29
-		Path pathToTown = new Path(AreaTown.posX + 24, AreaTown.posY + 21, AreaTown.posX + 24, AreaTown.posY + 29);
+		PavedPathway pathToTown = new PavedPathway(AreaTown.posX + 24, AreaTown.posY + 21, AreaTown.posX + 24, AreaTown.posY + 29);
 
 		// Bushed along path to town
 		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 25], null);
@@ -139,7 +139,7 @@ public class QuestTheSecretRoom extends Quest {
 		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 20], null);
 
 		// Town square pavement
-		Path townSquare = new Path(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 19],
+		PavedPathway townSquare = new PavedPathway(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 19],
 				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 19],
 				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 19],
 				Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 20],
@@ -162,15 +162,15 @@ public class QuestTheSecretRoom extends Quest {
 				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 23]);
 
 		// Path left of fountain
-		new Path(AreaTown.posX + 4, AreaTown.posY + 21, AreaTown.posX + 21, AreaTown.posY + 21);
+		new PavedPathway(AreaTown.posX + 4, AreaTown.posY + 21, AreaTown.posX + 21, AreaTown.posY + 21);
 
 		// Path to shop
-		new Path(AreaTown.posX + 4, AreaTown.posY + 4, AreaTown.posX + 4, AreaTown.posY + 21);
+		new PavedPathway(AreaTown.posX + 4, AreaTown.posY + 4, AreaTown.posX + 4, AreaTown.posY + 21);
 
 		// Path to farm
-		new Path(AreaTown.posX + 4, AreaTown.posY + 21, AreaTown.posX + 4, AreaTown.posY + 62);
-		new Path(AreaTown.posX + 4, AreaTown.posY + 62, AreaTown.posX + 18, AreaTown.posY + 62);
-		new Path(AreaTown.posX + 18, AreaTown.posY + 62, AreaTown.posX + 18, AreaTown.posY + 68);
+		new PavedPathway(AreaTown.posX + 4, AreaTown.posY + 21, AreaTown.posX + 4, AreaTown.posY + 62);
+		new PavedPathway(AreaTown.posX + 4, AreaTown.posY + 62, AreaTown.posX + 18, AreaTown.posY + 62);
+		new PavedPathway(AreaTown.posX + 18, AreaTown.posY + 62, AreaTown.posX + 18, AreaTown.posY + 68);
 
 		// Signpost 5,20
 		Sign signpost = Templates.SIGNPOST.makeCopy(Game.level.squares[AreaTown.posX + 5][AreaTown.posY + 20],

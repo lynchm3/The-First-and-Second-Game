@@ -7,7 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.BodyOfWater;
 import com.marklynch.level.constructs.Crime;
-import com.marklynch.level.constructs.Path;
+import com.marklynch.level.constructs.PavedPathway;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -134,8 +134,8 @@ public class AreaTown {
 		doctor.shopRoom = doctorsShopAtriums.get(0);
 		doctor.shopSign = doctorsShopSign;
 		// Path from cotors office to well
-		new Path(posX + 24, posY + 7, posX + 38, posY + 7);
-		new Path(posX + 24, posY + 8, posX + 24, posY + 18);
+		new PavedPathway(posX + 24, posY + 7, posX + 38, posY + 7);
+		new PavedPathway(posX + 24, posY + 8, posX + 24, posY + 18);
 
 		// Wanted Poster
 		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[posX + 27][posY + 8],

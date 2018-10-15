@@ -3,7 +3,7 @@ package com.marklynch.level.quest.betweenthewalls;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.Path;
+import com.marklynch.level.constructs.PavedPathway;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
@@ -134,7 +134,7 @@ public class QuestBetweenTheWalls extends Quest {
 				30, falseWall);
 
 		// Path to town 24,21 -> 40,21
-		Path pathToTown = new Path(posX + 24, posY + 21, posX + 40, posY + 21);
+		PavedPathway pathToTown = new PavedPathway(posX + 24, posY + 21, posX + 40, posY + 21);
 
 		// Bushed along path
 		Templates.BUSH.makeCopy(Game.level.squares[posX + 28][posY + 20], null);

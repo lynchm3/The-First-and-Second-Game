@@ -28,10 +28,12 @@ import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.MapMarker;
+import com.marklynch.objects.Portal;
 import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
+import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.actions.Action;
@@ -1167,33 +1169,39 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	// PATH FINDING
 
 	public void calculatePathCost() {
-		// if (!inventory.canShareSquare())
-		// cost = 999;
 		if (inventory.contains(BrokenGlass.class)) {
 			cost = 10;
 		} else if (inventory.contains(Actor.class)) {
+			cost = 10;
+		} else if (inventory.contains(Portal.class)) {
+			cost = 10;
+		} else if (inventory.contains(VoidHole.class)) {
 			cost = 10;
 		} else if (inventory.contains(PressurePlate.class)) {
 			cost = 10;
 		} else if (this.imageTexture == Square.STONE_TEXTURE) {
 			cost = 1;
-			// } else if (this.imageTexture == Square.WATER_TEXTURE) {
-			// cost = 5;
 		} else {
 			cost = 2;
 		}
 	}
 
 	public void calculatePathCostForPlayer() {
-		if (inventory.contains(BrokenGlass.class))
-			costForPlayer = 9;
-		else if (this.imageTexture == Square.STONE_TEXTURE) {
+		if (inventory.contains(BrokenGlass.class)) {
+			costForPlayer = 10;
+			// } else if (inventory.contains(Actor.class)) {
+			// costForPlayer = 10;
+		} else if (inventory.contains(Portal.class)) {
+			costForPlayer = 10;
+		} else if (inventory.contains(VoidHole.class)) {
+			costForPlayer = 10;
+		} else if (inventory.contains(PressurePlate.class)) {
+			costForPlayer = 10;
+		} else if (this.imageTexture == Square.STONE_TEXTURE) {
 			costForPlayer = 1;
-			// } else if (this.imageTexture == Square.WATER_TEXTURE) {
-			// cost = 5;
-
-		} else
+		} else {
 			costForPlayer = 2;
+		}
 
 	}
 
