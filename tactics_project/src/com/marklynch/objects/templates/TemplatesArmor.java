@@ -58,6 +58,16 @@ public class TemplatesArmor {
 		Templates.COWBOY_HAT.anchorY = 54;
 		Templates.COWBOY_HAT.templateId = GameObject.generateNewTemplateId();
 
+		Templates.HELMET_ANTLERS = new Helmet();
+		Templates.HELMET_ANTLERS.name = "Deer Helmet";
+		Templates.HELMET_ANTLERS.setImageAndExtrapolateSize("helmet_antlers.png");
+		Templates.HELMET_ANTLERS.totalHealth = Templates.HELMET_ANTLERS.remainingHealth = 36;
+		Templates.HELMET_ANTLERS.weight = 6f;
+		Templates.HELMET_ANTLERS.value = 65;
+		Templates.HELMET_ANTLERS.anchorX = 177;
+		Templates.HELMET_ANTLERS.anchorY = 113;
+		Templates.HELMET_ANTLERS.templateId = GameObject.generateNewTemplateId();
+
 		// Body Armor
 		Templates.JUMPER = new BodyArmor();
 		Templates.JUMPER.name = "Jumper";

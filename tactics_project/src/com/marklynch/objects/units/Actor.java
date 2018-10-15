@@ -780,8 +780,8 @@ public class Actor extends GameObject {
 
 		if (helmet != null && !sleeping) {
 
-			int helmetPositionXInPixels = (x);
-			int helmetPositionYInPixels = (y);
+			int helmetPositionXInPixels = (int) ((x) + 64 - helmet.anchorX);
+			int helmetPositionYInPixels = (int) ((y) + 41 - helmet.anchorY);
 
 			TextureUtils.drawTextureWithinBounds(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
 					helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,

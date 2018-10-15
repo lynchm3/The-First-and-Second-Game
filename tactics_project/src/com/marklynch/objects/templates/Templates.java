@@ -210,6 +210,7 @@ public class Templates {
 	public static Helmet PINK_HARD_HAT;
 	public static Helmet COWBOY_HAT;
 	public static Helmet HUNTING_CAP;
+	public static Helmet HELMET_ANTLERS;
 
 	// Body Armor
 	public static BodyArmor JUMPER;

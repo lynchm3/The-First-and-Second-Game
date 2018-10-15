@@ -514,6 +514,7 @@ public class Editor {
 		player.legArmor = playersPants;
 		LegArmor playersDungarees = Templates.DUNGAREES.makeCopy(null, player);
 		player.inventory.add(playersDungarees);
+		player.inventory.add(Templates.HELMET_ANTLERS.makeCopy(null, player));
 		player.inventory.add(Templates.PINK_HARD_HAT.makeCopy(null, player));
 		player.inventory.add(Templates.COWBOY_HAT.makeCopy(null, player));
 		player.inventory.add(Templates.JAR_OF_WATER.makeCopy(null, player));
