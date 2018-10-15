@@ -27,6 +27,7 @@ import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
+import com.marklynch.objects.Landmine;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.Portal;
 import com.marklynch.objects.PressurePlate;
@@ -1169,6 +1170,15 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	// PATH FINDING
 
 	public void calculatePathCost() {
+
+		if (inventory.contains(Landmine.class)) {
+			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
+			if (landmine.discovered) {
+				cost = 10;
+				return;
+			}
+		}
+
 		if (inventory.contains(BrokenGlass.class)) {
 			cost = 10;
 		} else if (inventory.contains(Actor.class)) {
@@ -1187,6 +1197,15 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	}
 
 	public void calculatePathCostForPlayer() {
+
+		if (inventory.contains(Landmine.class)) {
+			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
+			if (landmine.discovered) {
+				cost = 10;
+				return;
+			}
+		}
+
 		if (inventory.contains(BrokenGlass.class)) {
 			costForPlayer = 10;
 			// } else if (inventory.contains(Actor.class)) {
