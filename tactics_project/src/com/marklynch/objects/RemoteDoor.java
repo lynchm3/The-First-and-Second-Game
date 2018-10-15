@@ -38,10 +38,10 @@ public class RemoteDoor extends Door {
 
 	@Override
 	public void open() {
+
 		open = true;
-
+		blocksLineOfSight = false;
 		soundDampening = 1f;
-
 		name = baseName + " (open)";
 	}
 
@@ -60,7 +60,7 @@ public class RemoteDoor extends Door {
 
 		super.setAttributesForCopy(door, square, locked, owner);
 		door.soundDampeningWhenClosed = soundDampening;
-		door.blocksLineOfSightWhenClosed = blocksLineOfSight;
+		door.blocksLineOfSightWhenClosed = blocksLineOfSightWhenClosed;
 
 		return door;
 	}

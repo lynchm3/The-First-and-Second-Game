@@ -72,6 +72,7 @@ public class Door extends Openable {
 
 		blocksLineOfSight = false;
 		soundDampening = 1f;
+		name = baseName + " (open)";
 	}
 
 	@Override
@@ -79,6 +80,7 @@ public class Door extends Openable {
 		open = false;
 		blocksLineOfSight = blocksLineOfSightWhenClosed;
 		soundDampening = soundDampeningWhenClosed;
+		name = baseName;
 	}
 
 	public Door makeCopy(String name, Square square, boolean locked, boolean shouldBeClosed, boolean shouldBeLocked,

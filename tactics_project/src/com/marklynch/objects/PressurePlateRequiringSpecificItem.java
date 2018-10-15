@@ -65,16 +65,19 @@ public class PressurePlateRequiringSpecificItem extends Switch implements Update
 		if (squareGameObjectIsOn == null)
 			return;
 
+		boolean keyObjectOnPlate = false;
 		for (GameObject gameObject : squareGameObjectIsOn.inventory.gameObjects) {
 			if (gameObject == this.keyObject) {
-				pressed = true;
-				use();
-				return;
+				keyObjectOnPlate = true;
+				break;
 			}
 		}
 
-		if (pressed) {
+		if (pressed && !keyObjectOnPlate) {
 			pressed = false;
+			use();
+		} else if (!pressed && keyObjectOnPlate) {
+			pressed = true;
 			use();
 		}
 
