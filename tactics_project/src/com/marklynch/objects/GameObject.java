@@ -1253,8 +1253,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionChoppingStart(performer, this));
 		}
 
-		// Food
-		if (this instanceof Food) {
+		// Food / Drink
+		if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
+				|| this instanceof WaterBody) {
 			actions.add(new ActionEatItems(performer, this));
 		}
 
@@ -1524,7 +1525,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return new ActionBuytemsSelectedInInventory(performer, (Actor) Inventory.target, this);
 		}
 
-		if (this instanceof Food) {
+		// Food / drink
+		if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
+				|| this instanceof WaterBody) {
 			return new ActionEatItemsSelectedInInventory(performer, this);
 		}
 
@@ -1610,7 +1613,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		else
 			actions.add(new ActionEquip(performer, this));
 
-		if (this instanceof Food) {
+		// Food/drink
+		if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
+				|| this instanceof WaterBody) {
 			actions.add(new ActionEatItemsSelectedInInventory(performer, this));
 		}
 

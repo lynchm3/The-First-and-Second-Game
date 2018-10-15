@@ -5,17 +5,23 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Liquid;
+import com.marklynch.objects.WaterBody;
+import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionEatItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Eat";
+	public static final String ACTION_NAME_DRINK = "Drink";
 
 	Actor performer;
 	GameObject[] targets;
@@ -30,6 +36,11 @@ public class ActionEatItems extends VariableQtyAction {
 
 	public ActionEatItems(Actor performer, GameObject[] objects, boolean doesNothing) {
 		super(ACTION_NAME, textureEat);
+		if (objects != null && objects.length > 0 && (objects[0] instanceof Liquid
+				|| objects[0] instanceof ContainerForLiquids || objects[0] instanceof WaterBody)) {
+			this.actionName = ACTION_NAME_DRINK;
+			this.image = textureDrink;
+		}
 		super.gameObjectPerformer = this.performer = performer;
 		this.targets = objects;
 		if (!check()) {
@@ -57,14 +68,19 @@ public class ActionEatItems extends VariableQtyAction {
 		for (int i = 0; i < amountToEat; i++) {
 			GameObject object = targets[i];
 
-			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass) {
+			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass
+					|| object instanceof ContainerForLiquids || object instanceof Liquid) {
+				Inventory inventoryThatHoldsThisObject = object.inventoryThatHoldsThisObject;
 				object.changeHealth(-object.remainingHealth, null, null);
 				if (object.inventoryThatHoldsThisObject.parent instanceof Square) {
 					Game.level.inanimateObjectsOnGroundToRemove.add(object);
 				}
 				object.inventoryThatHoldsThisObject.remove(object);
-			} else {
-				performer.inventory.add(object);
+				if (object instanceof ContainerForLiquids) {
+					inventoryThatHoldsThisObject.add(Templates.JAR.makeCopy(null, null));
+				}
+			} else if (object instanceof WaterBody) {
+
 			}
 
 			if (object.owner == null)
@@ -86,7 +102,12 @@ public class ActionEatItems extends VariableQtyAction {
 			if (amountToEat > 1) {
 				amountText = "x" + amountToEat;
 			}
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ate ", targets[0], amountText }));
+
+			String actionWord = " ate ";
+			if (actionName == ACTION_NAME_DRINK) {
+				actionWord = " drank ";
+			}
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, actionWord, targets[0], amountText }));
 		}
 	}
 

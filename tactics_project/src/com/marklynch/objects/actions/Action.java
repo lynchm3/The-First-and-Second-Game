@@ -58,6 +58,7 @@ public abstract class Action {
 	public static Texture textureClose;
 	public static Texture textureDie;
 	public static Texture textureDig;
+	public static Texture textureDrink;
 	public static Texture textureDrop;
 	public static Texture textureEat;
 	public static Texture textureEquip;
@@ -242,6 +243,7 @@ public abstract class Action {
 		textureClose = getGlobalImage("action_close.png", false);
 		textureDie = getGlobalImage("action_die.png", false);// untested
 		textureDig = getGlobalImage("action_dig.png", false);
+		textureDrink = getGlobalImage("action_eat.png", false);
 		textureDrop = getGlobalImage("action_drop.png", false);
 		textureEat = getGlobalImage("action_eat.png", false);
 		textureEquip = getGlobalImage("action_equip.png", false);

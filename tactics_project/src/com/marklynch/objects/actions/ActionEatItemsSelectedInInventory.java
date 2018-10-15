@@ -4,11 +4,15 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Liquid;
+import com.marklynch.objects.WaterBody;
+import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 
 public class ActionEatItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Eat";
+	public static final String ACTION_NAME_DRINK = "Drink";
 
 	Actor performer;
 	GameObject target;
@@ -19,6 +23,10 @@ public class ActionEatItemsSelectedInInventory extends Action {
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
 		super(ACTION_NAME, textureEat);
+		if (object instanceof Liquid || object instanceof ContainerForLiquids || object instanceof WaterBody) {
+			this.actionName = ACTION_NAME_DRINK;
+			this.image = textureDrink;
+		}
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = object;
 		this.inventorySquare = object.inventorySquare;
