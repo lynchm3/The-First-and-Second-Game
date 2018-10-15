@@ -2,6 +2,8 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gate;
@@ -66,6 +68,15 @@ public class TemplatesEntrances {
 		Templates.OPENABLE_WALL.blocksLineOfSightWhenClosed = true;
 		Templates.OPENABLE_WALL.templateId = GameObject.generateNewTemplateId();
 		Templates.OPENABLE_WALL.flipYAxisInMirror = false;
+		Templates.OPENABLE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
+		Templates.OPENABLE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
+		Templates.OPENABLE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
+		Templates.OPENABLE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
+		Templates.OPENABLE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(100));
+		Templates.OPENABLE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(100));
+		Templates.OPENABLE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
+		Templates.OPENABLE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
+		Templates.OPENABLE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
 		Templates.REMOTE_DOOR = new RemoteDoor();
 		Templates.REMOTE_DOOR.name = "Remote Door";
@@ -78,6 +89,15 @@ public class TemplatesEntrances {
 		Templates.REMOTE_DOOR.value = 37;
 		Templates.REMOTE_DOOR.blocksLineOfSightWhenClosed = true;
 		Templates.REMOTE_DOOR.templateId = GameObject.generateNewTemplateId();
+		Templates.REMOTE_DOOR.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
+		Templates.REMOTE_DOOR.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
+		Templates.REMOTE_DOOR.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
+		Templates.REMOTE_DOOR.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
+		Templates.REMOTE_DOOR.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(100));
+		Templates.REMOTE_DOOR.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(100));
+		Templates.REMOTE_DOOR.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
+		Templates.REMOTE_DOOR.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
+		Templates.REMOTE_DOOR.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
 	}
 
