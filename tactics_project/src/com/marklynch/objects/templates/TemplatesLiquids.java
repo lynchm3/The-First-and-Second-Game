@@ -23,7 +23,7 @@ public class TemplatesLiquids {
 		Templates.WATER.templateId = GameObject.generateNewTemplateId();
 		Templates.WATER.volume = 1;
 		Templates.WATER.touchEffects = new Effect[] { new EffectWet(5) };
-		Templates.WATER.drinkEffects = new Effect[] {};
+		Templates.WATER.consumeEffects = new Effect[] {};
 		Templates.WATER.highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE, new Stat(1));
 
 		Templates.POISON = new Liquid();
@@ -37,7 +37,7 @@ public class TemplatesLiquids {
 		Templates.POISON.templateId = GameObject.generateNewTemplateId();
 		Templates.POISON.volume = 1;
 		Templates.POISON.touchEffects = new Effect[] { new EffectPoison(5) };
-		Templates.POISON.drinkEffects = new Effect[] { new EffectPoison(10) };
+		Templates.POISON.consumeEffects = new Effect[] { new EffectPoison(10) };
 		Templates.POISON.highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(3));
 	}
 

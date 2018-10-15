@@ -231,6 +231,21 @@ public class TemplatesTools {
 		Templates.JAR_OF_WATER.volume = 1;
 		Templates.JAR_OF_WATER.liquid = Templates.WATER.makeCopy(null, null, 1);
 		Templates.JAR_OF_WATER.flipYAxisInMirror = false;
+
+		Templates.JAR_OF_POISON = new ContainerForLiquids();
+		Templates.JAR_OF_POISON.name = "Jar of Poison";
+		Templates.JAR_OF_POISON.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(6));
+		Templates.JAR_OF_POISON.highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(6));
+		Templates.JAR_OF_POISON.setImageAndExtrapolateSize("jar_of_poison.png");
+		Templates.JAR_OF_POISON.totalHealth = Templates.JAR_OF_POISON.remainingHealth = 14;
+		Templates.JAR_OF_POISON.weight = 10f;
+		Templates.JAR_OF_POISON.value = 78;
+		Templates.JAR_OF_POISON.anchorX = 56;
+		Templates.JAR_OF_POISON.anchorY = 100;
+		Templates.JAR_OF_POISON.templateId = GameObject.generateNewTemplateId();
+		Templates.JAR_OF_POISON.volume = 1;
+		Templates.JAR_OF_POISON.liquid = Templates.POISON.makeCopy(null, null, 1);
+		Templates.JAR_OF_POISON.flipYAxisInMirror = false;
 	}
 
 }

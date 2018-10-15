@@ -344,6 +344,7 @@ public class Templates {
 
 	public static ContainerForLiquids JAR;
 	public static ContainerForLiquids JAR_OF_WATER;
+	public static ContainerForLiquids JAR_OF_POISON;
 
 	public static Liquid WATER;
 

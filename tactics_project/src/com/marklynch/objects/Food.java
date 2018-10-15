@@ -2,14 +2,16 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-public class Food extends GameObject {
+public class Food extends GameObject implements Consumable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public float drawOffsetYInTree;
+	public Effect[] consumeEffects;
 
 	public Food() {
 		super();
@@ -26,6 +28,7 @@ public class Food extends GameObject {
 	@Override
 	public Food makeCopy(Square square, Actor owner) {
 		Food food = new Food();
+		food.consumeEffects = consumeEffects;
 		setInstances(food);
 		super.setAttributesForCopy(food, square, owner);
 		return food;
@@ -40,6 +43,11 @@ public class Food extends GameObject {
 	public void draw2() {
 		super.draw1();
 		super.draw2();
+	}
+
+	@Override
+	public Effect[] getConsumeEffects() {
+		return consumeEffects;
 	}
 
 }

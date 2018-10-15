@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Consumable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Liquid;
 import com.marklynch.objects.Wall;
@@ -14,7 +15,7 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ContainerForLiquids extends Tool {
+public class ContainerForLiquids extends Tool implements Consumable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public float volume;
@@ -113,6 +114,11 @@ public class ContainerForLiquids extends Tool {
 			}
 		}
 
+	}
+
+	@Override
+	public Effect[] getConsumeEffects() {
+		return liquid.consumeEffects;
 	}
 
 }

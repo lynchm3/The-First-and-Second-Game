@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Carcass;
+import com.marklynch.objects.Consumable;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.Liquid;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.templates.Templates;
@@ -69,18 +71,43 @@ public class ActionEatItems extends VariableQtyAction {
 			GameObject object = targets[i];
 
 			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass
-					|| object instanceof ContainerForLiquids || object instanceof Liquid) {
-				Inventory inventoryThatHoldsThisObject = object.inventoryThatHoldsThisObject;
-				object.changeHealth(-object.remainingHealth, null, null);
+					|| object instanceof Liquid) {
+				// Inventory inventoryThatHoldsThisObject = object.inventoryThatHoldsThisObject;
 				if (object.inventoryThatHoldsThisObject.parent instanceof Square) {
+					if (object instanceof ContainerForLiquids) {
+						Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
+								Templates.JAR.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
+					}
 					Game.level.inanimateObjectsOnGroundToRemove.add(object);
-				}
-				object.inventoryThatHoldsThisObject.remove(object);
-				if (object instanceof ContainerForLiquids) {
-					inventoryThatHoldsThisObject.add(Templates.JAR.makeCopy(null, null));
+				} else {
+					if (object instanceof ContainerForLiquids) {
+						object.inventoryThatHoldsThisObject.add(Templates.JAR.makeCopy(null, null));
+					}
+					object.inventoryThatHoldsThisObject.remove(object);
 				}
 			} else if (object instanceof WaterBody) {
 
+			}
+
+			if (Game.level.shouldLog(performer)) {
+				String amountText = "";
+				if (amountToEat > 1) {
+					amountText = "x" + amountToEat;
+				}
+
+				String actionWord = " ate ";
+				if (actionName == ACTION_NAME_DRINK) {
+					actionWord = " drank ";
+				}
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, actionWord, targets[0], amountText }));
+			}
+
+			System.out.println("object = " + object);
+			Consumable consumable = (Consumable) object;
+			if (consumable.getConsumeEffects() != null) {
+				for (Effect effect : consumable.getConsumeEffects()) {
+					performer.addEffect(effect.makeCopy(performer, performer));
+				}
 			}
 
 			if (object.owner == null)
@@ -95,19 +122,6 @@ public class ActionEatItems extends VariableQtyAction {
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
 			}
-		}
-
-		if (Game.level.shouldLog(performer)) {
-			String amountText = "";
-			if (amountToEat > 1) {
-				amountText = "x" + amountToEat;
-			}
-
-			String actionWord = " ate ";
-			if (actionName == ACTION_NAME_DRINK) {
-				actionWord = " drank ";
-			}
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, actionWord, targets[0], amountText }));
 		}
 	}
 

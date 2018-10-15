@@ -6,12 +6,12 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-public class Liquid extends GameObject {
+public class Liquid extends GameObject implements Consumable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public float volume;
 	public Effect[] touchEffects;
-	public Effect[] drinkEffects;
+	public Effect[] consumeEffects;
 
 	public Liquid() {
 		super();
@@ -35,7 +35,12 @@ public class Liquid extends GameObject {
 		super.setAttributesForCopy(liquid, square, owner);
 		liquid.volume = volume;
 		liquid.touchEffects = touchEffects;
-		liquid.drinkEffects = drinkEffects;
+		liquid.consumeEffects = consumeEffects;
 		return liquid;
+	}
+
+	@Override
+	public Effect[] getConsumeEffects() {
+		return consumeEffects;
 	}
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.templates.Templates;
@@ -13,9 +14,10 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fish;
 import com.marklynch.utils.Texture;
 
-public class WaterBody extends WaterSource {
+public class WaterBody extends WaterSource implements Consumable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public Effect[] consumeEffects;
 
 	// 3+ connections
 	public boolean fullWall;
@@ -375,6 +377,7 @@ public class WaterBody extends WaterSource {
 	@Override
 	public WaterBody makeCopy(Square square, Actor owner) {
 		WaterBody waterBody = new WaterBody();
+		waterBody.consumeEffects = consumeEffects;
 		setInstances(waterBody);
 		super.setAttributesForCopy(waterBody, square, owner);
 		waterBody.effectsFromInteracting = effectsFromInteracting;
@@ -466,6 +469,11 @@ public class WaterBody extends WaterSource {
 		if (bottomRightCorner = connectedLeft && connectedTop)
 			return;
 
+	}
+
+	@Override
+	public Effect[] getConsumeEffects() {
+		return consumeEffects;
 	}
 
 }
