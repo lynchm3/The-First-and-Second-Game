@@ -116,6 +116,9 @@ public class Structure {
 		// Walls
 		ArrayList<Wall> wallsInCave = new ArrayList<Wall>();
 		wallsInCave.addAll(extraWalls);
+		for (StructureRoom room : rooms) {
+			wallsInCave.addAll(room.extraWalls);
+		}
 
 		for (Wall wallInCave : wallsInCave) {
 			wallSquares.add(wallInCave.squareGameObjectIsOn);

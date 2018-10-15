@@ -15,6 +15,7 @@ import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMine
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMovingBridge;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomTeamwork;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomTeamwork2;
+import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomTeamwork3;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
@@ -74,6 +75,7 @@ public class QuestList extends ArrayList<Quest> {
 		puzzleStructureRooms.add(new PuzzleRoomFallawayFloor(puzzleRoomsX + 36, puzzleRoomsY + 30));
 		puzzleStructureRooms.add(new PuzzleRoomTeamwork(puzzleRoomsX + 67, puzzleRoomsY + 30));
 		puzzleStructureRooms.add(new PuzzleRoomTeamwork2(puzzleRoomsX + 67, puzzleRoomsY + 41));
+		puzzleStructureRooms.add(new PuzzleRoomTeamwork3(puzzleRoomsX + 67, puzzleRoomsY + 52));
 		puzzleStructureRooms.add(new PuzzleRoomCrumblingWall(puzzleRoomsX + 22, puzzleRoomsY + 10));
 		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
 		ArrayList<Square> entrances = new ArrayList<Square>();

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Color;
@@ -24,6 +25,7 @@ public class StructureRoom {
 	public static Color roomColor = new Color(0.7f, 0.7f, 0.7f);
 
 	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
+	public ArrayList<Wall> extraWalls = new ArrayList<Wall>();
 
 	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
 			ArrayList<Actor> ownersArrayList, Node[] nodes, RoomPart... roomParts) {
