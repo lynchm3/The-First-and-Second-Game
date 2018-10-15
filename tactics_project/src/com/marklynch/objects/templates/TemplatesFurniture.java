@@ -39,7 +39,7 @@ public class TemplatesFurniture {
 
 		Templates.MIRROR = new Mirror();
 		Templates.MIRROR.name = "Mirror";
-		Templates.BED.setImageAndExtrapolateSize("mirror.png");
+		Templates.MIRROR.setImageAndExtrapolateSize("mirror.png");
 		Templates.MIRROR.imageTexture = getGlobalImage(Templates.MIRROR.imageTexturePath, true);
 		Templates.MIRROR.imageTextureFront = getGlobalImage("mirror.png", true);
 		Templates.MIRROR.imageTextureBack = getGlobalImage("mirror_back.png", true);
