@@ -18,6 +18,7 @@ import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.button.Tooltip;
 import com.marklynch.ui.quickbar.QuickBarSquare;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
@@ -59,6 +60,16 @@ public class SkillTreeNode extends LevelButton {
 
 	}
 
+	private String getRequirementString() {
+		String s = "Requires knowledge of ";
+		for (int i = 0; i < linkedSkillTreeNodes.size(); i++) {
+			s += linkedSkillTreeNodes.get(i).name;
+			if (i < (linkedSkillTreeNodes.size() - 1))
+				s += " or ";
+		}
+		return s;
+	}
+
 	// public SkillTreeNode(float x, float y, float width, float height, String
 	// enabledTexturePath,
 	// String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop,
@@ -70,12 +81,32 @@ public class SkillTreeNode extends LevelButton {
 	// // TODO Auto-generated constructor stub
 	// }
 
-	public void init() {
+	public void updateTooltip() {
+		tooltips.clear();
+
 		ArrayList<Object> tooltipItems = new ArrayList<Object>();
 
 		tooltipItems.add(this.name);
 		tooltipItems.add(TextUtils.NewLine.NEW_LINE);
 		tooltipItems.add(description);
+		if (activated) {
+			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
+			tooltipItems.add("You know this power");
+		} else {
+			if (!isAvailable()) {
+				tooltipItems.add(TextUtils.NewLine.NEW_LINE);
+				tooltipItems.add(getRequirementString());
+			} else {
+				tooltipItems.add(TextUtils.NewLine.NEW_LINE);
+				tooltipItems.add("Click to learn");
+			}
+		}
+
+		tooltips.add(new Tooltip(Color.WHITE, tooltipItems));
+
+	}
+
+	public void init() {
 
 		for (final Power power : powersUnlocked) {
 			SkillTreeNodePower skillTreeNodePowerButton = new SkillTreeNodePower(power, 0, 0);
@@ -112,21 +143,10 @@ public class SkillTreeNode extends LevelButton {
 
 				}
 			});
-
-			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
-			tooltipItems.add("    ---------------------------------   ");
-			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
-			tooltipItems.add(power);
 		}
 
 		for (Stat stat : statsUnlocked) {
 			this.statButtons.add(new SkillTreeNodeStat(stat, 0, 0));
-			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
-			// tooltipItems.add("_________________________________");
-			tooltipItems.add("    ---------------------------------   ");
-			tooltipItems.add("STAT ");
-			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
-			tooltipItems.add(stat);
 		}
 
 		setLocation();
@@ -143,22 +163,10 @@ public class SkillTreeNode extends LevelButton {
 				}
 
 			}
+
 		});
 
-		this.setDoubleClickListener(new ClickListener() {
-
-			@Override
-			public void click() {
-				if (activated) {
-					for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
-						addToQuickBar(skillTreeNodePower.power);
-					}
-				}
-
-			}
-		});
-
-		this.setTooltipText(tooltipItems);
+		updateTooltip();
 	}
 
 	public void activate(Actor actor) {
@@ -172,6 +180,12 @@ public class SkillTreeNode extends LevelButton {
 
 		for (Stat statUnlocked : statsUnlocked) {
 			Level.player.highLevelStats.get(statUnlocked.type).value += statUnlocked.value;
+		}
+
+		updateTooltip();
+
+		for (SkillTreeNode skillTreeNode : linkedSkillTreeNodes) {
+			skillTreeNode.updateTooltip();
 		}
 
 	}
