@@ -71,7 +71,7 @@ public class ActionEatItems extends VariableQtyAction {
 			GameObject object = targets[i];
 
 			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass
-					|| object instanceof Liquid) {
+					|| object instanceof Liquid || object instanceof ContainerForLiquids) {
 				// Inventory inventoryThatHoldsThisObject = object.inventoryThatHoldsThisObject;
 				if (object.inventoryThatHoldsThisObject.parent instanceof Square) {
 					if (object instanceof ContainerForLiquids) {
