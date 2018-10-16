@@ -2284,7 +2284,7 @@ public class Level {
 			}
 		}
 
-		player.activateEffects();
+		// player.activateEffects();
 
 		// Update player inventory
 		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();

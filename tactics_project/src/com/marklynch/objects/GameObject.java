@@ -1056,6 +1056,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (this.remainingHealth > 0) {
 			activateEffects();
 		}
+
 		for (GameObject gameObjectInInventory : this.inventory.getGameObjects()) {
 			if (!(gameObjectInInventory instanceof Actor))
 				gameObjectInInventory.update(delta);
