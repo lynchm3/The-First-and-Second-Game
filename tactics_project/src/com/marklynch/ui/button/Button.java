@@ -42,6 +42,10 @@ public abstract class Button {
 		this.clickListener = clickListener;
 	}
 
+	public void setDoubleClickListener(ClickListener doubleClickListener) {
+		this.doubleClickListener = doubleClickListener;
+	}
+
 	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
 		if (mouseX > x && mouseX < x + width && mouseY > y && mouseY < y + height) {
 			return true;

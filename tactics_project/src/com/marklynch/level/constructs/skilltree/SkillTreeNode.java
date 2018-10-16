@@ -129,7 +129,7 @@ public class SkillTreeNode extends LevelButton {
 		activated = true;
 		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
 			actor.powers.add(skillTreeNodePower.power);
-			if (actor == Game.level.player) {
+			if (actor == Level.player) {
 				addToQuickBar(skillTreeNodePower);
 			}
 		}
@@ -142,7 +142,11 @@ public class SkillTreeNode extends LevelButton {
 
 	public void addToQuickBar(SkillTreeNodePower skillTreeNodePower) {
 
-		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+		for (QuickBarSquare quickBarSquare : Level.quickBar.quickBarSquares) {
+
+			if (skillTreeNodePower.power.getClass().isInstance(quickBarSquare.getShortcut()))
+				return;
+
 			if (skillTreeNodePower.power.passive == false && quickBarSquare.getShortcut() == null) {
 				quickBarSquare.setShortcut(skillTreeNodePower.power);
 				break;
