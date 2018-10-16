@@ -87,6 +87,8 @@ public class ActionEatItems extends VariableQtyAction {
 				}
 			} else if (object instanceof WaterBody) {
 
+			} else {
+				performer.inventory.add(object);
 			}
 
 			if (Game.level.shouldLog(performer)) {
@@ -102,11 +104,14 @@ public class ActionEatItems extends VariableQtyAction {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, actionWord, targets[0], amountText }));
 			}
 
-			System.out.println("object = " + object);
-			Consumable consumable = (Consumable) object;
-			if (consumable.getConsumeEffects() != null) {
-				for (Effect effect : consumable.getConsumeEffects()) {
-					performer.addEffect(effect.makeCopy(performer, performer));
+			// System.out.println("object = " + object);
+
+			if (object instanceof Consumable) {
+				Consumable consumable = (Consumable) object;
+				if (consumable.getConsumeEffects() != null) {
+					for (Effect effect : consumable.getConsumeEffects()) {
+						performer.addEffect(effect.makeCopy(performer, performer));
+					}
 				}
 			}
 
