@@ -596,7 +596,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 				if (onMouse) {
 
-					if (Game.pinWindowHoveringOver == null) {
+					if (Game.pinWindowHoveringOver == null
+							&& UserInputLevel.scrollableMouseIsOver != Game.level.activityLogger) {
 						TextureUtils.drawTexture(action.image, UserInputLevel.mouseLastX + 16,
 								Game.windowHeight - UserInputLevel.mouseLastY + 16,
 								UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,

@@ -1094,7 +1094,8 @@ public class Level {
 		// Draw actions on sqrs.
 
 		player.squareGameObjectIsOn.drawActionThatWillBePerformed(false);
-		if (Game.gameObjectMouseIsOver != null && Game.pinWindowHoveringOver == null) {
+		if (Game.gameObjectMouseIsOver != null && Game.pinWindowHoveringOver == null
+				&& UserInputLevel.scrollableMouseIsOver != Game.level.activityLogger) {
 			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver));
 			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver.value));
 		}
