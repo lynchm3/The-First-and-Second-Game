@@ -545,8 +545,7 @@ public class UserInputLevel {
 			}
 		}
 
-		if (draggableMouseIsOver == null && scrollableMouseIsOver == null
-				&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+		if (Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
 			scrollableMouseIsOver = Game.level.activityLogger;
 			return;
 		}
@@ -635,8 +634,7 @@ public class UserInputLevel {
 			}
 		}
 
-		if (draggableMouseIsOver == null && scrollableMouseIsOver == null
-				&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+		if (Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
 			draggableMouseIsOver = Game.level.activityLogger;
 			return;
 		}
