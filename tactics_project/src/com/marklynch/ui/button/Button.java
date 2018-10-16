@@ -13,6 +13,7 @@ public abstract class Button {
 	public boolean enabled = true;
 	public boolean down = false;
 	public ClickListener clickListener;
+	public ClickListener doubleClickListener;
 	protected Object text;
 	protected boolean highlighted = false;
 	// public Tooltip tooltip;
@@ -48,9 +49,30 @@ public abstract class Button {
 		return false;
 	}
 
+	long lastClickTime = 0;
+
 	public void click() {
-		if (clickListener != null && enabled)
-			clickListener.click();
+
+		if (!enabled)
+			return;
+
+		long thisClickTime = System.currentTimeMillis();
+		if (thisClickTime - lastClickTime < 500) {
+			doubleClick();
+		} else {
+
+			if (clickListener != null) {
+				clickListener.click();
+			}
+		}
+
+		lastClickTime = thisClickTime;
+	}
+
+	public void doubleClick() {
+		if (doubleClickListener != null && enabled) {
+			doubleClickListener.click();
+		}
 	}
 
 	public abstract void draw();

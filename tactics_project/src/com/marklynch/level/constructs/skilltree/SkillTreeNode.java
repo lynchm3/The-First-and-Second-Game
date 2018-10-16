@@ -109,6 +109,19 @@ public class SkillTreeNode extends LevelButton {
 			}
 		});
 
+		this.setDoubleClickListener(new ClickListener() {
+
+			@Override
+			public void click() {
+				if (activated) {
+					for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
+						addToQuickBar(skillTreeNodePower);
+					}
+				}
+
+			}
+		});
+
 		this.setTooltipText(tooltipItems);
 	}
 
@@ -116,12 +129,8 @@ public class SkillTreeNode extends LevelButton {
 		activated = true;
 		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
 			actor.powers.add(skillTreeNodePower.power);
-			for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
-
-				if (skillTreeNodePower.power.passive == false && quickBarSquare.getShortcut() == null) {
-					quickBarSquare.setShortcut(skillTreeNodePower.power);
-					break;
-				}
+			if (actor == Game.level.player) {
+				addToQuickBar(skillTreeNodePower);
 			}
 		}
 
@@ -129,6 +138,16 @@ public class SkillTreeNode extends LevelButton {
 			Level.player.highLevelStats.get(statUnlocked.type).value += statUnlocked.value;
 		}
 
+	}
+
+	public void addToQuickBar(SkillTreeNodePower skillTreeNodePower) {
+
+		for (QuickBarSquare quickBarSquare : Game.level.quickBar.quickBarSquares) {
+			if (skillTreeNodePower.power.passive == false && quickBarSquare.getShortcut() == null) {
+				quickBarSquare.setShortcut(skillTreeNodePower.power);
+				break;
+			}
+		}
 	}
 
 	public void drawLines() {
