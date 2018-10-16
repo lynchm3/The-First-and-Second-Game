@@ -53,6 +53,7 @@ import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.ActivityLogger;
+import com.marklynch.ui.Dialog;
 import com.marklynch.ui.PinWindow;
 import com.marklynch.ui.TextBox;
 import com.marklynch.ui.button.Button;
@@ -2554,5 +2555,17 @@ public class Level {
 		if (oldNotificationToRemove != null)
 			notifications.remove(oldNotificationToRemove);
 		notifications.add(notificationToAdd);
+	}
+
+	static Dialog dialog;
+
+	public static void showDialog(String text, String positiveButtonText, String negativeButtonText,
+			ClickListener positiveClickListener, ClickListener negativeClickListener) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public static void closeDialog() {
+		dialog = null;
 	}
 }

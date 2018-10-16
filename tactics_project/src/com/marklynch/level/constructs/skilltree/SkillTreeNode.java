@@ -70,17 +70,6 @@ public class SkillTreeNode extends LevelButton {
 		return s;
 	}
 
-	// public SkillTreeNode(float x, float y, float width, float height, String
-	// enabledTexturePath,
-	// String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop,
-	// Color buttonColor,
-	// Color textColor, String tooltipText) {
-	// super(x, y, width, height, enabledTexturePath, disabledTexturePath, text,
-	// xFromLeft, yFromTop, buttonColor, textColor,
-	// tooltipText);
-	// // TODO Auto-generated constructor stub
-	// }
-
 	public void updateTooltip() {
 		tooltips.clear();
 
@@ -159,7 +148,18 @@ public class SkillTreeNode extends LevelButton {
 				if (activated || !isAvailable()) {
 					return;
 				} else {
-					activate(Game.level.player);
+
+					Level.showDialog("Unlock " + name, "UNLOCK", "CANCEL", new ClickListener() {
+						@Override
+						public void click() {
+							activate(Game.level.player);
+						}
+					}, new ClickListener() {
+						@Override
+						public void click() {
+							Level.closeDialog();
+						}
+					});
 				}
 
 			}
@@ -237,11 +237,6 @@ public class SkillTreeNode extends LevelButton {
 			skillTreeNodeStat.drawBackground();
 			skillTreeNodeStat.drawStat();
 		}
-
-		// if (powersUnlocked.size() != 0) {
-		// // ;lkzxdfkjl'
-		// }
-
 	}
 
 	public static void loadStaticImages() {
