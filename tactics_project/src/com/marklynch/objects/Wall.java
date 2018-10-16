@@ -45,10 +45,7 @@ public class Wall extends GameObject {
 
 	public float drawX1, drawX2, drawY1, drawY2;
 
-	public float fullLeftDrawX1, fullLeftDrawX2, fullLeftDrawY1, fullLeftDrawY2;
-	public float fullRightDrawX1, fullRightDrawX2, fullRightDrawY1, fullRightDrawY2;
-	public float fullTopDrawX1, fullTopDrawX2, fullTopDrawY1, fullTopDrawY2;
-	public float fullBottomDrawX1, fullBottomDrawX2, fullBottomDrawY1, fullBottomDrawY2;
+	public float fullDrawX1, fullDrawX2, fullDrawY1, fullDrawY2;
 
 	public float topLeftDrawX1, topLeftDrawX2, topLeftDrawY1, topLeftDrawY2;
 	public float topDrawX1, topDrawX2, topDrawY1, topDrawY2;
@@ -97,25 +94,10 @@ public class Wall extends GameObject {
 			drawY1 = (int) (squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetRatioY);
 			drawY2 = (int) (drawY1 + height);
 
-			fullLeftDrawX1 = drawX1;
-			fullLeftDrawX2 = drawX2 - quarterWidth;
-			fullLeftDrawY1 = drawY1;
-			fullLeftDrawY2 = drawY2;
-
-			fullRightDrawX1 = drawX1 + quarterWidth;
-			fullRightDrawX2 = drawX2;
-			fullRightDrawY1 = drawY1;
-			fullRightDrawY2 = drawY2;
-
-			fullTopDrawX1 = drawX1;
-			fullTopDrawX2 = drawX2;
-			fullTopDrawY1 = drawY1;
-			fullTopDrawY2 = drawY2 - quarterHeight;
-
-			fullBottomDrawX1 = drawX1;
-			fullBottomDrawX2 = drawX2;
-			fullBottomDrawY1 = drawY1 + quarterHeight;
-			fullBottomDrawY2 = drawY2;
+			fullDrawX1 = drawX1;
+			fullDrawY1 = drawY1;
+			fullDrawX2 = drawX1 + width;
+			fullDrawY2 = drawY1 + height;
 
 			topLeftDrawX1 = drawX1;
 			topLeftDrawX2 = drawX1 + quarterWidth;
@@ -161,22 +143,6 @@ public class Wall extends GameObject {
 
 	}
 
-	// public static void loadStaticImages() {
-	// textureFullWall = getGlobalImage("wall.png", true);
-	// textureFullTopWall = getGlobalImage("wall_full_top.png", true);
-	// textureFullRightWall = getGlobalImage("wall_full_right.png", true);
-	// textureFullBottomWall = getGlobalImage("wall_full_bottom.png", true);
-	// textureFullLeftWall = getGlobalImage("wall_full_left.png", true);
-	// textureTop = getGlobalImage("wall_top.png", true);
-	// textureTopRight = getGlobalImage("wall_top_right.png", true);
-	// textureRight = getGlobalImage("wall_right.png", true);
-	// textureBottomRight = getGlobalImage("wall_bottom_right.png", true);
-	// textureBottom = getGlobalImage("wall_bottom.png", true);
-	// textureBottomLeft = getGlobalImage("wall_bottom_left.png", true);
-	// textureLeft = getGlobalImage("wall_left.png", true);
-	// textureTopLeft = getGlobalImage("wall_top_left.png", true);
-	// }
-
 	@Override
 	public void draw1() {
 
@@ -198,87 +164,44 @@ public class Wall extends GameObject {
 
 			if (fullWall) {
 
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + 0, drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, fullDrawX1,
+						fullDrawY1, fullDrawX2, fullDrawY2, false, false, Color.WHITE);
 				return;
 			}
-			//
-			// if (fullLeftWall) {
-			// TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1,
-			// drawX2, drawY2, drawX1 + 0,
-			// drawY1 + 0, drawX1 + Game.HALF_SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT,
-			// false, false,
-			// Color.WHITE);
-			// return;
-			// }
-			//
-			// if (fullRightWall) {
-			// TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1,
-			// drawX2, drawY2,
-			// drawX1 + Game.HALF_SQUARE_WIDTH, drawY1 + 0, drawX1 + Game.SQUARE_WIDTH,
-			// drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
-			// return;
-			// }
-			//
-			// if (fullTopWall) {
-			// TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1,
-			// drawX2, drawY2, drawX1 + 0,
-			// drawY1 + 0, drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.HALF_SQUARE_HEIGHT,
-			// false, false,
-			// Color.WHITE);
-			// return;
-			// }
-			//
-			// if (fullBottomWall) {
-			// TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1,
-			// drawX2, drawY2, drawX1 + 0,
-			// drawY1 + Game.HALF_SQUARE_HEIGHT, drawX1 + Game.SQUARE_WIDTH, drawY1 +
-			// Game.SQUARE_HEIGHT,
-			// false, false, Color.WHITE);
-			// return;
-			// }
 
 			if (connectedTop)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						drawX1 + Game.QUARTER_SQUARE_WIDTH, drawY1 + 0, drawX1 + Game.THREE_QUARTERS_SQUARE_WIDTH,
-						drawY1 + Game.HALF_SQUARE_HEIGHT, false, false, Color.WHITE);
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, topDrawX1,
+						topDrawY1, topDrawX2, topDrawY2, false, false, Color.WHITE);
 
 			if (connectedTopRight)
 				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						drawX1 + Game.THREE_QUARTERS_SQUARE_WIDTH, drawY1 + 0, drawX1 + Game.SQUARE_WIDTH,
-						drawY1 + Game.QUARTER_SQUARE_HEIGHT, false, false, Color.WHITE);
+						topRightDrawX1, topRightDrawY1, topRightDrawX2, topRightDrawY2, false, false, Color.WHITE);
 			//
 			if (connectedRight)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						drawX1 + Game.HALF_SQUARE_WIDTH, drawY1 + Game.QUARTER_SQUARE_HEIGHT,
-						drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.THREE_QUARTERS_SQUARE_HEIGHT, false, false,
-						Color.WHITE);
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, rightDrawX1,
+						rightDrawY1, rightDrawX2, rightDrawY2, false, false, Color.WHITE);
 			//
 			if (connectedBottomRight)
 				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						drawX1 + Game.THREE_QUARTERS_SQUARE_WIDTH, drawY1 + Game.THREE_QUARTERS_SQUARE_HEIGHT,
-						drawX1 + Game.SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
-			//
-			if (connectedBottom)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						drawX1 + Game.QUARTER_SQUARE_WIDTH, drawY1 + Game.HALF_SQUARE_HEIGHT,
-						drawX1 + Game.THREE_QUARTERS_SQUARE_WIDTH, drawY1 + Game.SQUARE_HEIGHT, false, false,
+						bottomRightDrawX1, bottomRightDrawY1, bottomRightDrawX2, bottomRightDrawY2, false, false,
 						Color.WHITE);
 			//
+			if (connectedBottom)
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, bottomDrawX1,
+						bottomDrawY1, bottomDrawX2, bottomDrawY2, false, false, Color.WHITE);
+			//
 			if (connectedBottomLeft)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + Game.THREE_QUARTERS_SQUARE_HEIGHT, drawX1 + Game.QUARTER_SQUARE_WIDTH,
-						drawY1 + Game.SQUARE_HEIGHT, false, false, Color.WHITE);
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
+						bottomLeftDrawX1, bottomLeftDrawY1, bottomLeftDrawX2, bottomLeftDrawY2, false, false,
+						Color.WHITE);
 			//
 			if (connectedLeft)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + Game.QUARTER_SQUARE_HEIGHT, drawX1 + Game.HALF_SQUARE_WIDTH,
-						drawY1 + Game.THREE_QUARTERS_SQUARE_HEIGHT, false, false, Color.WHITE);
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, leftDrawX1,
+						leftDrawY1, leftDrawX2, leftDrawY2, false, false, Color.WHITE);
 			//
 			if (connectedTopLeft)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, drawX1 + 0,
-						drawY1 + 0, drawX1 + Game.QUARTER_SQUARE_WIDTH, drawY1 + Game.QUARTER_SQUARE_HEIGHT, false,
-						false, Color.WHITE);
+				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, topLeftDrawX1,
+						topLeftDrawY1, topLeftDrawX2, topLeftDrawY2, false, false, Color.WHITE);
 		}
 	}
 

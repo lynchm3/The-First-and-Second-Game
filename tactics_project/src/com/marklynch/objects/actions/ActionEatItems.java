@@ -87,7 +87,7 @@ public class ActionEatItems extends VariableQtyAction {
 				}
 			} else if (object instanceof WaterBody) {
 
-			} else {
+			} else if (object.fitsInInventory) {
 				performer.inventory.add(object);
 			}
 
