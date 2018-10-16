@@ -6,11 +6,13 @@ import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -75,8 +77,42 @@ public class SkillTreeNode extends LevelButton {
 		tooltipItems.add(TextUtils.NewLine.NEW_LINE);
 		tooltipItems.add(description);
 
-		for (Power power : powersUnlocked) {
-			this.powerButtons.add(new SkillTreeNodePower(power, 0, 0));
+		for (final Power power : powersUnlocked) {
+			SkillTreeNodePower skillTreeNodePowerButton = new SkillTreeNodePower(power, 0, 0);
+			this.powerButtons.add(skillTreeNodePowerButton);
+
+			skillTreeNodePowerButton.setClickListener(new ClickListener() {
+
+				@Override
+				public void click() {
+					if (activated && power.passive == false) {
+						Level.pausePlayer();
+						if (power.selectTarget) {
+							Level.levelMode = LevelMode.LEVEL_MODE_CAST;
+							Game.level.selectedPower = power.makeCopy(Level.player);
+						} else {
+							new ActionUsePower(Level.player, Game.gameObjectMouseIsOver,
+									Level.player.squareGameObjectIsOn, power.makeCopy(Level.player)).perform();
+						}
+						Game.level.popupMenuObjects.clear();
+						Game.level.popupMenuActions.clear();
+						Game.level.openCloseSkillTree();
+					}
+
+				}
+			});
+
+			skillTreeNodePowerButton.setDoubleClickListener(new ClickListener() {
+
+				@Override
+				public void click() {
+					if (activated) {
+						addToQuickBar(power);
+					}
+
+				}
+			});
+
 			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
 			tooltipItems.add("    ---------------------------------   ");
 			tooltipItems.add(TextUtils.NewLine.NEW_LINE);
@@ -115,7 +151,7 @@ public class SkillTreeNode extends LevelButton {
 			public void click() {
 				if (activated) {
 					for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
-						addToQuickBar(skillTreeNodePower);
+						addToQuickBar(skillTreeNodePower.power);
 					}
 				}
 
@@ -130,7 +166,7 @@ public class SkillTreeNode extends LevelButton {
 		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
 			actor.powers.add(skillTreeNodePower.power);
 			if (actor == Level.player) {
-				addToQuickBar(skillTreeNodePower);
+				addToQuickBar(skillTreeNodePower.power);
 			}
 		}
 
@@ -140,15 +176,15 @@ public class SkillTreeNode extends LevelButton {
 
 	}
 
-	public void addToQuickBar(SkillTreeNodePower skillTreeNodePower) {
+	public void addToQuickBar(Power power) {
 
 		for (QuickBarSquare quickBarSquare : Level.quickBar.quickBarSquares) {
 
-			if (skillTreeNodePower.power.getClass().isInstance(quickBarSquare.getShortcut()))
+			if (power.getClass().isInstance(quickBarSquare.getShortcut()))
 				return;
 
-			if (skillTreeNodePower.power.passive == false && quickBarSquare.getShortcut() == null) {
-				quickBarSquare.setShortcut(skillTreeNodePower.power);
+			if (power.passive == false && quickBarSquare.getShortcut() == null) {
+				quickBarSquare.setShortcut(power);
 				break;
 			}
 		}
