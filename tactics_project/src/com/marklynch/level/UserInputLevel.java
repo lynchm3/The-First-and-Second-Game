@@ -479,6 +479,12 @@ public class UserInputLevel {
 
 		scrollableMouseIsOver = null;
 
+		if (Level.fullScreenTextBox != null)
+			return;
+
+		if (Level.dialog != null)
+			return;
+
 		if (Level.gameOver.showing) {
 			scrollableMouseIsOver = Level.gameOver;
 			return;
@@ -558,6 +564,12 @@ public class UserInputLevel {
 			return;
 
 		if (draggableMouseIsOver != null)
+			return;
+
+		if (Level.fullScreenTextBox != null)
+			return;
+
+		if (Level.dialog != null)
 			return;
 
 		if (Level.gameOver.showing) {

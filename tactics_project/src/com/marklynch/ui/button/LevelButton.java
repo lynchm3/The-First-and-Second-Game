@@ -69,6 +69,12 @@ public class LevelButton extends Button {
 
 		float realX = x;
 		float realY = y;
+
+		// System.out.println("x = " + x);
+		// System.out.println("y = " + y);
+		// System.out.println("mouseX = " + mouseX);
+		// System.out.println("mouseY = " + mouseY);
+
 		if (this.xFromLeft == false)
 			realX = Game.windowWidth - x;
 		if (this.yFromTop == false)

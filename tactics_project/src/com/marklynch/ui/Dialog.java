@@ -17,6 +17,16 @@ public class Dialog {
 	public Dialog(String text, String positiveButtonText, String negativeButtonText,
 			ClickListener positiveClickListener, ClickListener negativeClickListener) {
 
+		this.text = text;
+
+		positiveButton = new LevelButton(0, 0, 100, 20, "end_turn_button.png", "end_turn_button.png",
+				positiveButtonText, true, true, Color.WHITE, Color.BLACK, null);
+		positiveButton.setClickListener(positiveClickListener);
+
+		negativeButton = new LevelButton(0, 0, 100, 20, "end_turn_button.png", "end_turn_button.png",
+				negativeButtonText, true, true, Color.WHITE, Color.BLACK, null);
+		negativeButton.setClickListener(negativeClickListener);
+
 		resize();
 
 	}
@@ -34,8 +44,15 @@ public class Dialog {
 	public void resize() {
 
 		float[] textDimensions = TextUtils.getDimensions(Integer.MAX_VALUE, text);
-		textX = Game.halfWindowWidth - textDimensions[0] / 2;
+		// textX = Game.halfWindowWidth - textDimensions[0] / 2;
+		textX = Game.halfWindowWidth - 110;
 		textY = Game.halfWindowHeight;
+
+		positiveButton.x = Game.halfWindowWidth - 110;
+		positiveButton.y = Game.halfWindowHeight + 100;
+
+		negativeButton.x = Game.halfWindowWidth + 10;
+		negativeButton.y = Game.halfWindowHeight + 100;
 
 	}
 

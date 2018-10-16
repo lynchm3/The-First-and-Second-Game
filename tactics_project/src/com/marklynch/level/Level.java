@@ -1487,6 +1487,9 @@ public class Level {
 		if (fullScreenTextBox != null)
 			fullScreenTextBox.draw();
 
+		if (dialog != null)
+			dialog.drawStaticUI();
+
 		if (Game.buttonHoveringOver != null) {
 			Level.tooltipGroup.clear();
 			Level.tooltipGroup.addAll(Game.buttonHoveringOver.tooltips);
@@ -1812,6 +1815,16 @@ public class Level {
 
 		if (fullScreenTextBox != null)
 			return null;
+
+		if (dialog != null) {
+			if (dialog.positiveButton.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+				return dialog.positiveButton;
+
+			if (dialog.negativeButton.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+				return dialog.negativeButton;
+
+			return null;
+		}
 
 		if (gameOver.showing) {
 			for (Button button : gameOver.buttons) {
@@ -2536,6 +2549,8 @@ public class Level {
 			journal.resize();
 		if (gameOver.showing)
 			gameOver.resize();
+		if (dialog != null)
+			dialog.resize();
 
 		quickBar.resize();
 
@@ -2561,7 +2576,7 @@ public class Level {
 
 	public static void showDialog(String text, String positiveButtonText, String negativeButtonText,
 			ClickListener positiveClickListener, ClickListener negativeClickListener) {
-		// TODO Auto-generated method stub
+		dialog = new Dialog(text, positiveButtonText, negativeButtonText, positiveClickListener, negativeClickListener);
 
 	}
 
