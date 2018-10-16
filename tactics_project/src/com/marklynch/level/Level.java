@@ -1094,7 +1094,7 @@ public class Level {
 		// Draw actions on sqrs.
 
 		player.squareGameObjectIsOn.drawActionThatWillBePerformed(false);
-		if (Game.gameObjectMouseIsOver != null) {
+		if (Game.gameObjectMouseIsOver != null && Game.pinWindowHoveringOver == null) {
 			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver));
 			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver.value));
 		}
@@ -1180,7 +1180,9 @@ public class Level {
 			}
 		}
 
-		if (openInventories.size() == 0 && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
+		if (openInventories.size() == 0 && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null
+				&& Game.pinWindowHoveringOver == null) {
+
 			if (levelMode == LevelMode.LEVEL_MODE_FISHING || levelMode == LevelMode.LEVEL_MODE_CHOPPING
 					|| levelMode == LevelMode.LEVEL_MODE_MINING || levelMode == LevelMode.LEVEL_MODE_DIGGING) {
 				// Game.squareMouseIsOver.drawX(false);
@@ -1224,8 +1226,10 @@ public class Level {
 				// NORMAL MODE
 
 				// if (Player.playerTargetSquare == null) {
+
 				Game.squareMouseIsOver.drawCursor();
 				Game.squareMouseIsOver.drawActionThatWillBePerformed(false);
+
 				// }
 			}
 
@@ -1488,7 +1492,6 @@ public class Level {
 		} else {
 			Tooltip.lastTooltipGroupShown = null;
 		}
-
 		Level.tooltipGroup.drawStaticUI();
 		Level.tooltipGroup.clear();
 
@@ -1937,19 +1940,6 @@ public class Level {
 			}
 		}
 
-		for (int i = pinWindows.size() - 1; i >= 0; i--) {
-			if (pinWindows.get(i).mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
-				return pinWindows.get(i).closeButton;
-			if (pinWindows.get(i).mouseOverMinimiseButton(mouseX, Game.windowHeight - mouseY))
-				return pinWindows.get(i).minimiseButton;
-			if (pinWindows.get(i).mouseOverLineButton(mouseX, Game.windowHeight - mouseY))
-				return pinWindows.get(i).lineButton;
-			if (pinWindows.get(i).mouseOverInvisibleMinimiseButton(mouseX, Game.windowHeight - mouseY))
-				return pinWindows.get(i).titleBarButton;
-			if (pinWindows.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
-				return null;
-		}
-
 		if (conversation != null) {
 			for (Button button : conversation.currentConversationPart.windowSelectConversationResponse.responseButtons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
@@ -1995,6 +1985,19 @@ public class Level {
 				}
 
 			}
+		}
+
+		for (int i = pinWindows.size() - 1; i >= 0; i--) {
+			if (pinWindows.get(i).mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
+				return pinWindows.get(i).closeButton;
+			if (pinWindows.get(i).mouseOverMinimiseButton(mouseX, Game.windowHeight - mouseY))
+				return pinWindows.get(i).minimiseButton;
+			if (pinWindows.get(i).mouseOverLineButton(mouseX, Game.windowHeight - mouseY))
+				return pinWindows.get(i).lineButton;
+			if (pinWindows.get(i).mouseOverInvisibleMinimiseButton(mouseX, Game.windowHeight - mouseY))
+				return pinWindows.get(i).titleBarButton;
+			if (pinWindows.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
+				return null;
 		}
 
 		for (QuickBarSquare quickBarSquare : quickBar.quickBarSquares) {

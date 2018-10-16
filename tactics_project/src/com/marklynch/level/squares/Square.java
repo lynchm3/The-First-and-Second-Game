@@ -603,19 +603,21 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 					// Square.tooltipGroup = new TooltipGroup();
 
-					if (Game.level.showWindowPixelCoords) {
-						Level.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE,
-								"" + UserInputLevel.mouseLastX + "," + UserInputLevel.mouseLastY));
-					}
+					if (Game.pinWindowHoveringOver == null) {
+						if (Game.level.showWindowPixelCoords) {
+							Level.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE,
+									"" + UserInputLevel.mouseLastX + "," + UserInputLevel.mouseLastY));
+						}
 
-					Level.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.actionName));
+						Level.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.actionName));
 
-					if (action.disabledReason != null) {
-						Level.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.disabledReason));
-					}
+						if (action.disabledReason != null) {
+							Level.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE, action.disabledReason));
+						}
 
-					if (action.illegalReason != null) {
-						Level.tooltipGroup.add(new Tooltip(false, Tooltip.RED, action.illegalReason));
+						if (action.illegalReason != null) {
+							Level.tooltipGroup.add(new Tooltip(false, Tooltip.RED, action.illegalReason));
+						}
 					}
 					// } else {
 					// Square.tooltipGroup = null;
