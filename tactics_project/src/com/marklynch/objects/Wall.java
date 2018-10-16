@@ -1,6 +1,7 @@
 package com.marklynch.objects;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
@@ -80,9 +81,12 @@ public class Wall extends GameObject {
 		super.setInstances(gameObject);
 	}
 
-	public void initWall() {
+	public void initWall(float maxRandomness) {
 
 		if (squareGameObjectIsOn != null) {
+
+			Random random = new Random();
+			float randomOffset = random.nextFloat() * maxRandomness;
 
 			halfWidth = Game.HALF_SQUARE_WIDTH;
 			halfHeight = Game.HALF_SQUARE_HEIGHT;
@@ -100,44 +104,44 @@ public class Wall extends GameObject {
 			fullDrawY2 = drawY1 + height;
 
 			topLeftDrawX1 = drawX1;
-			topLeftDrawX2 = drawX1 + quarterWidth;
 			topLeftDrawY1 = drawY1;
-			topLeftDrawY2 = drawY1 + quarterHeight;
+			topLeftDrawX2 = drawX1 + quarterWidth + randomOffset;
+			topLeftDrawY2 = drawY1 + quarterHeight + randomOffset;
 
-			topDrawX1 = drawX1 + quarterWidth;
-			topDrawX2 = drawX2 - quarterWidth;
+			topDrawX1 = drawX1 + quarterWidth - randomOffset;
 			topDrawY1 = drawY1;
-			topDrawY2 = drawY1 + halfHeight;
+			topDrawX2 = drawX2 - quarterWidth + randomOffset;
+			topDrawY2 = drawY1 + halfHeight + randomOffset;
 
-			topRightDrawX1 = drawX2 - quarterWidth;
-			topRightDrawX2 = drawX2;
+			topRightDrawX1 = drawX2 - quarterWidth - randomOffset;
 			topRightDrawY1 = drawY1;
-			topRightDrawY2 = drawY1 + quarterHeight;
+			topRightDrawX2 = drawX2;
+			topRightDrawY2 = drawY1 + quarterHeight + randomOffset;
 
-			rightDrawX1 = drawX1 + halfWidth;
+			rightDrawX1 = drawX1 + halfWidth - randomOffset;
+			rightDrawY1 = drawY1 + quarterHeight - randomOffset;
 			rightDrawX2 = drawX2;
-			rightDrawY1 = drawY1 + quarterHeight;
-			rightDrawY2 = drawY2 - quarterHeight;
+			rightDrawY2 = drawY2 - quarterHeight + randomOffset;
 
-			bottomRightDrawX1 = drawX2 - quarterWidth;
+			bottomRightDrawX1 = drawX2 - quarterWidth - randomOffset;
+			bottomRightDrawY1 = drawY2 - quarterHeight - randomOffset;
 			bottomRightDrawX2 = drawX2;
-			bottomRightDrawY1 = drawY2 - quarterHeight;
 			bottomRightDrawY2 = drawY2;
 
-			bottomDrawX1 = drawX1 + quarterWidth;
-			bottomDrawX2 = drawX2 - quarterWidth;
-			bottomDrawY1 = drawY2 - halfHeight;
+			bottomDrawX1 = drawX1 + quarterWidth - randomOffset;
+			bottomDrawY1 = drawY2 - halfHeight - randomOffset;
+			bottomDrawX2 = drawX2 - quarterWidth + randomOffset;
 			bottomDrawY2 = drawY2;
 
 			bottomLeftDrawX1 = drawX1;
-			bottomLeftDrawX2 = drawX1 + quarterWidth;
-			bottomLeftDrawY1 = drawY2 - quarterHeight;
+			bottomLeftDrawY1 = drawY2 - quarterHeight - randomOffset;
+			bottomLeftDrawX2 = drawX1 + quarterWidth + randomOffset;
 			bottomLeftDrawY2 = drawY2;
 
 			leftDrawX1 = drawX1;
-			leftDrawX2 = drawX1 + halfWidth;
-			leftDrawY1 = drawY1 + quarterHeight;
-			leftDrawY2 = drawY2 - quarterHeight;
+			leftDrawY1 = drawY1 + quarterHeight - randomOffset;
+			leftDrawX2 = drawX1 + halfWidth + randomOffset;
+			leftDrawY2 = drawY2 - quarterHeight + randomOffset;
 
 		}
 
@@ -218,7 +222,7 @@ public class Wall extends GameObject {
 		// wall.drawOffsetRatioY);
 		// wall.drawY2 = (int) (wall.drawY1 + wall.height);
 		// }
-		wall.initWall();
+		wall.initWall(16f);
 		return wall;
 	}
 
