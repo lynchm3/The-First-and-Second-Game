@@ -596,14 +596,14 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 				if (onMouse) {
 
-					TextureUtils.drawTexture(action.image, UserInputLevel.mouseLastX + 16,
-							Game.windowHeight - UserInputLevel.mouseLastY + 16,
-							UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
-							Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16, color);
-
-					// Square.tooltipGroup = new TooltipGroup();
-
 					if (Game.pinWindowHoveringOver == null) {
+						TextureUtils.drawTexture(action.image, UserInputLevel.mouseLastX + 16,
+								Game.windowHeight - UserInputLevel.mouseLastY + 16,
+								UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
+								Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16, color);
+
+						// Square.tooltipGroup = new TooltipGroup();
+
 						if (Game.level.showWindowPixelCoords) {
 							Level.tooltipGroup.add(new Tooltip(false, Tooltip.WHITE,
 									"" + UserInputLevel.mouseLastX + "," + UserInputLevel.mouseLastY));
