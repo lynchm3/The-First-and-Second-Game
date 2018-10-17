@@ -66,7 +66,13 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 		this.shortcut = shortcut;
 		// this.setTooltipText(this.shortcut);
 		this.tooltips.clear();
-		this.tooltips.add(new Tooltip(false, Tooltip.WHITE, this.shortcut));
+		if (this.shortcut instanceof Power) {
+			this.tooltips
+					.add(new Tooltip(false, Tooltip.WHITE, this.shortcut, TextUtils.NewLine.NEW_LINE, "Click to cast"));
+		} else {
+			this.tooltips.add(new Tooltip(false, Tooltip.WHITE, this.shortcut));
+		}
+
 		if (shortcut == null) {
 			this.setClickListener(null);
 		} else if (shortcut instanceof Power) {

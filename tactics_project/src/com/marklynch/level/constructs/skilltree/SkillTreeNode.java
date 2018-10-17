@@ -93,6 +93,10 @@ public class SkillTreeNode extends LevelButton {
 
 		tooltips.add(new Tooltip(Color.WHITE, tooltipItems));
 
+		for (final SkillTreeNodePower powerButton : powerButtons) {
+			powerButton.updateTooltip();
+		}
+
 	}
 
 	public void init() {
@@ -373,11 +377,28 @@ public class SkillTreeNode extends LevelButton {
 
 		public SkillTreeNodePower(Power power, int x, int y) {
 			super(x, y, powerWidth, powerWidth, null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "");
-			setTooltipText(power);
 			this.power = power;
 			this.x = x;
 			this.y = y;
+			updateTooltip();
 
+		}
+
+		public void updateTooltip() {
+
+			tooltips.clear();
+
+			ArrayList<Object> tooltipItems = new ArrayList<Object>();
+
+			tooltipItems.add(power);
+			if (activated && !power.passive) {
+				tooltipItems.add(TextUtils.NewLine.NEW_LINE);
+				tooltipItems.add("Click to cast");
+			} else {
+			}
+
+			tooltips.add(new Tooltip(Color.WHITE, tooltipItems));
+			// setTooltipText(power);
 		}
 
 		private void setLocation(float x, float y) {
