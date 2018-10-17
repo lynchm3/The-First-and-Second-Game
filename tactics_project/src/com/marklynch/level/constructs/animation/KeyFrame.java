@@ -73,6 +73,7 @@ public class KeyFrame {
 	public void animate(double delta) {
 
 		float angleChange = (float) (speed * delta);
+		animation.offsetY = animation.moveTowardsTargetAngleInRadians(animation.offsetY, angleChange, offsetY);
 
 		if (!animation.backwards) {
 
@@ -99,7 +100,8 @@ public class KeyFrame {
 			animation.rightKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.rightKneeAngle, angleChange,
 					rightKneeAngle);
 
-			if (animation.torsoAngle == torsoAngle //
+			if (animation.offsetY == offsetY //
+					&& animation.torsoAngle == torsoAngle //
 					&& animation.leftShoulderAngle == leftShoulderAngle//
 					&& animation.rightShoulderAngle == rightShoulderAngle//
 					&& animation.leftElbowAngle == leftElbowAngle//
@@ -136,7 +138,8 @@ public class KeyFrame {
 			animation.rightKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.rightKneeAngle, angleChange,
 					-leftKneeAngle);
 
-			if (animation.torsoAngle == -torsoAngle //
+			if (animation.offsetY == offsetY//
+					&& animation.torsoAngle == -torsoAngle //
 					&& animation.leftShoulderAngle == -rightShoulderAngle//
 					&& animation.rightShoulderAngle == -leftShoulderAngle//
 					&& animation.leftElbowAngle == -rightElbowAngle//
