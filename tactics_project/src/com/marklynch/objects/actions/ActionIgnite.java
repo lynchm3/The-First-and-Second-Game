@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.primary.AnimationIgnite;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerIgnite;
@@ -48,6 +49,24 @@ public class ActionIgnite extends Action {
 
 		if (!checkRange())
 			return;
+
+		if (performer.squareGameObjectIsOn.xInGrid > targetGameObject.squareGameObjectIsOn.xInGrid) {
+			performer.backwards = true;
+		} else if (performer.squareGameObjectIsOn.xInGrid < targetGameObject.squareGameObjectIsOn.xInGrid) {
+			performer.backwards = false;
+		}
+
+		// Melee weapons
+		performer.setPrimaryAnimation(new AnimationIgnite(performer, targetGameObject, null) {
+			@Override
+			public void runCompletionAlgorightm(boolean wait) {
+				super.runCompletionAlgorightm(wait);
+				postAnimation();
+			}
+		});
+	}
+
+	public void postAnimation() {
 
 		if (Game.level.shouldLog(targetGameObject, performer)) {
 			Object igniteMethod = getIgnitionMethod();
@@ -102,6 +121,7 @@ public class ActionIgnite extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
+
 	}
 
 	@Override
