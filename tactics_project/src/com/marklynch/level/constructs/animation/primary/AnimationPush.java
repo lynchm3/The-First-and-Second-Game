@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
@@ -17,11 +18,6 @@ public class AnimationPush extends Animation {
 		if (!runAnimation)
 			return;
 		this.targetSquare = targetSquare;
-		durationToReachMillis = 400;
-
-		quarterDurationToReach = durationToReachMillis / 4;
-		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
-		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
 		float down = 0f;
 		float up = 3.14f;
@@ -45,6 +41,23 @@ public class AnimationPush extends Animation {
 		}
 		backwards = performer.backwards;
 
+		KeyFrame kf0 = new KeyFrame(performer, this);
+		kf0.torsoAngle = 0;
+		kf0.offsetX = 0;
+		kf0.offsetY = 0;
+		kf0.leftShoulderAngle = targetRadians;
+		kf0.rightShoulderAngle = targetRadians;
+		kf0.leftElbowAngle = 0;
+		kf0.rightElbowAngle = 0;
+		kf0.leftHipAngle = 0;
+		kf0.rightHipAngle = 0;
+		kf0.leftKneeAngle = 0;
+		kf0.rightKneeAngle = 0;
+		kf0.setAllSpeeds(0.02d);
+		kf0.offsetXSpeed = 1;
+		kf0.offsetYSpeed = 1;
+		keyFrames.add(kf0);
+
 		blockAI = true;
 	}
 
@@ -53,52 +66,18 @@ public class AnimationPush extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (getCompleted()) {
+		if (getCompleted())
 			return;
-		}
+
 		super.update(delta);
 
-		durationSoFar += delta;
+		keyFrames.get(phase).animate(delta);
+		if (keyFrames.get(phase).done)
+			phase++;
 
-		float progress = durationSoFar / durationToReachMillis;
-
-		if (progress >= 1) {
-			progress = 1;
-		}
-
-		float angleChange = (float) (0.02d * delta);
-
-		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, 0);
-		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
-		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, 0);
-		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, 0);
-		leftKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-		rightKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-
-		if (progress >= 1) {
+		if (phase == keyFrames.size()) {
 			runCompletionAlgorightm(true);
-			// if (performer.getPrimaryAnimation() == this)
-			// performer.setPrimaryAnimation(new AnimationWait(performer));
 		}
-
-		// If at last square, drop y.
-		if (durationSoFar < quarterDurationToReach) {
-			if (!backwards) {
-				leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetRadians);
-			} else {
-				rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetRadians);
-			}
-		} else {
-			// leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle,
-			// angleChange, 0);
-			// rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle,
-			// angleChange, 0);
-		}
-
-		// if (backwards)
-		// reverseAnimation();
-
 	}
 
 	@Override

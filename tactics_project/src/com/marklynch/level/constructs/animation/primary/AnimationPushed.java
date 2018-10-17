@@ -30,15 +30,6 @@ public class AnimationPushed extends Animation {
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
 
-		float distance = (float) Math.hypot(this.startSquare.xInGrid - this.endSquare.xInGrid,
-				this.startSquare.yInGrid - this.endSquare.yInGrid);
-
-		durationToReachMillis = distance * durationPerSquare;
-
-		quarterDurationToReach = durationToReachMillis / 4;
-		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
-		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
-
 		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
@@ -71,6 +62,8 @@ public class AnimationPushed extends Animation {
 		kf0.torsoAngle = targetRadians;
 		kf0.offsetX = 0;
 		kf0.offsetY = 0;
+		kf0.leftShoulderAngle = targetArmRadians;
+		kf0.rightShoulderAngle = targetArmRadians;
 		kf0.leftElbowAngle = 0;
 		kf0.rightElbowAngle = 0;
 		kf0.leftHipAngle = 0;
