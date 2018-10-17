@@ -21,6 +21,7 @@ public class ActionIgnite extends Action {
 	Actor performer;
 	Square targetSquare;
 	GameObject targetGameObject;
+	Object igniteMethod;
 
 	// Default for hostiles
 	public ActionIgnite(Actor performer, Object target) {
@@ -56,8 +57,19 @@ public class ActionIgnite extends Action {
 			performer.backwards = false;
 		}
 
+		igniteMethod = getIgnitionMethod();
+
+		if (igniteMethod instanceof Power) {
+			igniteMethod = ((Power) igniteMethod).name;
+		}
+
+		GameObject igniteMethodGameObject = null;
+		if (igniteMethod instanceof GameObject) {
+			igniteMethodGameObject = (GameObject) igniteMethod;
+		}
+
 		// Melee weapons
-		performer.setPrimaryAnimation(new AnimationIgnite(performer, targetGameObject, null) {
+		performer.setPrimaryAnimation(new AnimationIgnite(performer, targetGameObject, igniteMethodGameObject) {
 			@Override
 			public void runCompletionAlgorightm(boolean wait) {
 				super.runCompletionAlgorightm(wait);
@@ -69,11 +81,6 @@ public class ActionIgnite extends Action {
 	public void postAnimation() {
 
 		if (Game.level.shouldLog(targetGameObject, performer)) {
-			Object igniteMethod = getIgnitionMethod();
-
-			if (igniteMethod instanceof Power) {
-				igniteMethod = ((Power) igniteMethod).name;
-			}
 
 			if (targetGameObject != null) {
 				Game.level.logOnScreen(new ActivityLog(

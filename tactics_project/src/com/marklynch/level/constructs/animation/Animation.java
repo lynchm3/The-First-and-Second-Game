@@ -45,7 +45,7 @@ public abstract class Animation {
 
 	public abstract void drawStaticUI();
 
-	protected boolean backwards = true;
+	protected boolean backwards = false;
 	public boolean drawEquipped = true;
 
 	// Arrow

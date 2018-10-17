@@ -1,26 +1,45 @@
 package com.marklynch.level.constructs.animation.primary;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
 
 public class AnimationIgnite extends Animation {
 
-	int phase = 1;
+	int phase = 0;
 	float phase1ShoulderAngleToReach = (float) Math.toRadians(-45);
 	float phase2ShoulderAngleToReach = (float) Math.toRadians(0);
 
 	GameObject target;
+	GameObject fireSource;
+	GameObject previouslyEquipped;
+
+	// KEYFRAMEZ
+	ArrayList<KeyFrame> keyFrames = new ArrayList<KeyFrame>();
 
 	public AnimationIgnite(GameObject performer, GameObject target, GameObject fireSource) {
 		super(performer, performer, target);
 		if (!runAnimation)
 			return;
 		this.target = target;
-		durationToReachMillis = 400;
+		previouslyEquipped = performer.equipped;
+		performer.equipped = fireSource;
 
 		backwards = performer.backwards;
 
 		blockAI = true;
+
+		KeyFrame kf0 = new KeyFrame(performer, this);
+		kf0.rightShoulderAngle = (float) Math.toRadians(-45);
+		kf0.speed = 0.001d;
+		keyFrames.add(kf0);
+
+		KeyFrame kf1 = new KeyFrame(performer, this);
+		kf1.rightShoulderAngle = (float) Math.toRadians(0);
+		kf1.speed = 0.005d;
+		keyFrames.add(kf1);
 
 	}
 
@@ -34,21 +53,15 @@ public class AnimationIgnite extends Animation {
 
 		if (getCompleted())
 			return;
+
 		super.update(delta);
 
-		if (phase == 1) {
-			float angleChange = (float) (0.001d * delta);
-			rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange,
-					phase1ShoulderAngleToReach);
-			if (rightShoulderAngle == phase1ShoulderAngleToReach)
-				phase++;
-		} else if (phase == 2) {
-			float angleChange = (float) (0.005d * delta);
-			rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange,
-					phase2ShoulderAngleToReach);
-			if (rightShoulderAngle == phase2ShoulderAngleToReach)
-				phase++;
-		} else {
+		keyFrames.get(phase).animate(delta);
+		if (keyFrames.get(phase).done)
+			phase++;
+
+		if (phase == keyFrames.size()) {
+			performer.equipped = previouslyEquipped;
 			runCompletionAlgorightm(true);
 		}
 	}
