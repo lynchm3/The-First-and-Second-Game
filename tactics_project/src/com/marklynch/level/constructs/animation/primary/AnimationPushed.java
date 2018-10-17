@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
@@ -42,26 +43,6 @@ public class AnimationPushed extends Animation {
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
 		backwards = performer.backwards;
-		// -180 to +180 = -3.14 to 3.14
-
-		// targetLimbRadians = (float) Math.atan2(endSquare.yInGrid -
-		// startSquare.yInGrid,
-		// endSquare.xInGrid - startSquare.xInGrid) + 1.5708f;
-
-		// if (endSquare.yInGrid - startSquare.yInGrid < 0) {
-		// targetLimbRadians = -targetLimbRadians;
-		// }
-		// if (endSquare.xInGrid - startSquare.xInGrid < 0) {
-		// targetLimbRadians = -targetLimbRadians;
-		// }
-		//
-		// while (targetLimbRadians > 3.14f) {
-		// targetLimbRadians -= 3.14f;
-		// }
-		//
-		// while (targetLimbRadians < -3.14f) {
-		// targetLimbRadians += 3.14f;
-		// }
 
 		float up = 0f;
 		float down = 3.14f;
@@ -86,6 +67,21 @@ public class AnimationPushed extends Animation {
 			targetArmRadians = 0.25f;
 		}
 
+		KeyFrame kf0 = new KeyFrame(performer, this);
+		kf0.torsoAngle = targetRadians;
+		kf0.offsetX = 0;
+		kf0.offsetY = 0;
+		kf0.leftElbowAngle = 0;
+		kf0.rightElbowAngle = 0;
+		kf0.leftHipAngle = 0;
+		kf0.rightHipAngle = 0;
+		kf0.leftKneeAngle = 0;
+		kf0.rightKneeAngle = 0;
+		kf0.setAllSpeeds(0.001d);
+		kf0.offsetXSpeed = 1;
+		kf0.offsetYSpeed = 1;
+		keyFrames.add(kf0);
+
 		blockAI = true;
 	}
 
@@ -97,53 +93,16 @@ public class AnimationPushed extends Animation {
 
 		if (getCompleted())
 			return;
+
 		super.update(delta);
 
-		durationSoFar += delta;
+		keyFrames.get(phase).animate(delta);
+		if (keyFrames.get(phase).done)
+			phase++;
 
-		float progress = durationSoFar / durationToReachMillis;
-
-		float durationReamaining = durationToReachMillis - durationSoFar;
-
-		if (progress >= 1) {
-			progress = 1;
-		}
-
-		float angleChange = (float) (0.01d * delta);
-
-		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, targetRadians);
-
-		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
-
-		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, 0);
-		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, 0);
-		leftKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-		rightKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-
-		if (progress >= 1) {
+		if (phase == keyFrames.size()) {
 			runCompletionAlgorightm(true);
-			// if (performer.getPrimaryAnimation() == this)
-			// performer.setPrimaryAnimation(new AnimationWait(performer));
 		}
-
-		offsetX = (int) (startOffsetX * (1 - progress));
-		offsetY = (int) (startOffsetY * (1 - progress));
-
-		// If at last square, drop y.
-		if (durationReamaining <= durationPerSquare) {
-
-			float dropRatio = 1f - (durationReamaining / durationPerSquare);
-			offsetY += dropRatio * 32f;
-			leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, 0);
-			rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, 0);
-
-		} else {
-
-			leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, targetArmRadians);
-			rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, targetArmRadians);
-		}
-
 	}
 
 	@Override

@@ -45,7 +45,8 @@ public class AnimationFlinch extends Animation {
 		kf0.rightHipAngle = -targetRadians;
 		kf0.leftKneeAngle = 0;
 		kf0.rightKneeAngle = 0;
-		kf0.speed = 0.02d;
+		// kf0.speed = 0.02d;
+		kf0.setAllSpeeds(0.02d);
 		keyFrames.add(kf0);
 
 		blockAI = true;

@@ -39,7 +39,21 @@ public class KeyFrame {
 	public int boundsY2 = 128;
 	public boolean drawWeapon = true;
 
-	public double speed = 1;
+	// Speeds
+	// public double speed = 1;
+	public double offsetXSpeed = 1;
+	public double offsetYSpeed = 1;
+	public double torsoAngleSpeed = 1;
+	public double leftShoulderAngleSpeed = 1;
+	public double leftElbowAngleSpeed = 1;
+	public double rightShoulderAngleSpeed = 1;
+	public double rightElbowAngleSpeed = 1;
+	public double scaleXSpeed = 1;
+	public double scaleYSpeed = 1;
+	public double leftHipAngleSpeed = 1;
+	public double leftKneeAngleSpeed = 1;
+	public double rightHipAngleSpeed = 1;
+	public double rightKneeAngleSpeed = 1;
 
 	Animation animation;
 
@@ -72,35 +86,36 @@ public class KeyFrame {
 
 	public void animate(double delta) {
 
-		float angleChange = (float) (speed * delta);
-		animation.offsetY = animation.moveTowardsTargetAngleInRadians(animation.offsetY, angleChange, offsetY);
+		animation.offsetX = animation.moveTowardsTargetAngleInRadians(animation.offsetX, offsetXSpeed * delta, offsetX);
+		animation.offsetY = animation.moveTowardsTargetAngleInRadians(animation.offsetY, offsetYSpeed * delta, offsetY);
 
 		if (!animation.backwards) {
 
-			animation.torsoAngle = animation.moveTowardsTargetAngleInRadians(animation.torsoAngle, angleChange,
-					torsoAngle);
+			animation.torsoAngle = animation.moveTowardsTargetAngleInRadians(animation.torsoAngle,
+					torsoAngleSpeed * delta, torsoAngle);
 
 			animation.leftShoulderAngle = animation.moveTowardsTargetAngleInRadians(animation.leftShoulderAngle,
-					angleChange, leftShoulderAngle);
+					leftShoulderAngleSpeed * delta, leftShoulderAngle);
 			animation.rightShoulderAngle = animation.moveTowardsTargetAngleInRadians(animation.rightShoulderAngle,
-					angleChange, rightShoulderAngle);
+					rightShoulderAngleSpeed * delta, rightShoulderAngle);
 
-			animation.leftElbowAngle = animation.moveTowardsTargetAngleInRadians(animation.leftElbowAngle, angleChange,
-					leftElbowAngle);
+			animation.leftElbowAngle = animation.moveTowardsTargetAngleInRadians(animation.leftElbowAngle,
+					leftElbowAngleSpeed * delta, leftElbowAngle);
 			animation.rightElbowAngle = animation.moveTowardsTargetAngleInRadians(animation.rightElbowAngle,
-					angleChange, rightElbowAngle);
+					rightElbowAngleSpeed * delta, rightElbowAngle);
 
-			animation.leftHipAngle = animation.moveTowardsTargetAngleInRadians(animation.leftHipAngle, angleChange,
-					leftHipAngle);
-			animation.rightHipAngle = animation.moveTowardsTargetAngleInRadians(animation.rightHipAngle, angleChange,
-					rightHipAngle);
+			animation.leftHipAngle = animation.moveTowardsTargetAngleInRadians(animation.leftHipAngle,
+					leftHipAngleSpeed * delta, leftHipAngle);
+			animation.rightHipAngle = animation.moveTowardsTargetAngleInRadians(animation.rightHipAngle,
+					rightHipAngleSpeed * delta, rightHipAngle);
 
-			animation.leftKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.leftKneeAngle, angleChange,
-					leftKneeAngle);
-			animation.rightKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.rightKneeAngle, angleChange,
-					rightKneeAngle);
+			animation.leftKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.leftKneeAngle,
+					leftKneeAngleSpeed * delta, leftKneeAngle);
+			animation.rightKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.rightKneeAngle,
+					rightKneeAngleSpeed * delta, rightKneeAngle);
 
-			if (animation.offsetY == offsetY //
+			if (animation.offsetX == offsetX //
+					&& animation.offsetY == offsetY //
 					&& animation.torsoAngle == torsoAngle //
 					&& animation.leftShoulderAngle == leftShoulderAngle//
 					&& animation.rightShoulderAngle == rightShoulderAngle//
@@ -115,30 +130,31 @@ public class KeyFrame {
 			}
 		} else {// BACKWARDS
 
-			animation.torsoAngle = animation.moveTowardsTargetAngleInRadians(animation.torsoAngle, angleChange,
-					-torsoAngle);
+			animation.torsoAngle = animation.moveTowardsTargetAngleInRadians(animation.torsoAngle,
+					torsoAngleSpeed * delta, -torsoAngle);
 
 			animation.leftShoulderAngle = animation.moveTowardsTargetAngleInRadians(animation.leftShoulderAngle,
-					angleChange, -rightShoulderAngle);
+					rightShoulderAngleSpeed * delta, -rightShoulderAngle);
 			animation.rightShoulderAngle = animation.moveTowardsTargetAngleInRadians(animation.rightShoulderAngle,
-					angleChange, -leftShoulderAngle);
+					leftShoulderAngleSpeed * delta, -leftShoulderAngle);
 
-			animation.leftElbowAngle = animation.moveTowardsTargetAngleInRadians(animation.leftElbowAngle, angleChange,
-					-rightElbowAngle);
+			animation.leftElbowAngle = animation.moveTowardsTargetAngleInRadians(animation.leftElbowAngle,
+					rightElbowAngleSpeed * delta, -rightElbowAngle);
 			animation.rightElbowAngle = animation.moveTowardsTargetAngleInRadians(animation.rightElbowAngle,
-					angleChange, -leftElbowAngle);
+					leftElbowAngleSpeed * delta, -leftElbowAngle);
 
-			animation.leftHipAngle = animation.moveTowardsTargetAngleInRadians(animation.leftHipAngle, angleChange,
-					-rightHipAngle);
-			animation.rightHipAngle = animation.moveTowardsTargetAngleInRadians(animation.rightHipAngle, angleChange,
-					-leftHipAngle);
+			animation.leftHipAngle = animation.moveTowardsTargetAngleInRadians(animation.leftHipAngle,
+					rightHipAngleSpeed * delta, -rightHipAngle);
+			animation.rightHipAngle = animation.moveTowardsTargetAngleInRadians(animation.rightHipAngle,
+					leftHipAngleSpeed * delta, -leftHipAngle);
 
-			animation.leftKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.leftKneeAngle, angleChange,
-					-rightKneeAngle);
-			animation.rightKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.rightKneeAngle, angleChange,
-					-leftKneeAngle);
+			animation.leftKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.leftKneeAngle,
+					rightKneeAngleSpeed * delta, -rightKneeAngle);
+			animation.rightKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.rightKneeAngle,
+					leftKneeAngleSpeed * delta, -leftKneeAngle);
 
-			if (animation.offsetY == offsetY//
+			if (animation.offsetX == offsetX //
+					&& animation.offsetY == offsetY//
 					&& animation.torsoAngle == -torsoAngle //
 					&& animation.leftShoulderAngle == -rightShoulderAngle//
 					&& animation.rightShoulderAngle == -leftShoulderAngle//
@@ -152,6 +168,16 @@ public class KeyFrame {
 				done = true;
 			}
 		}
+
+	}
+
+	public void setAllSpeeds(double d) {
+		offsetXSpeed = offsetYSpeed = torsoAngleSpeed//
+				= leftShoulderAngleSpeed = leftElbowAngleSpeed//
+						= rightShoulderAngleSpeed = rightElbowAngleSpeed//
+								= scaleXSpeed = scaleYSpeed = leftHipAngleSpeed//
+										= leftKneeAngleSpeed = rightHipAngleSpeed//
+												= rightKneeAngleSpeed = d;
 
 	}
 

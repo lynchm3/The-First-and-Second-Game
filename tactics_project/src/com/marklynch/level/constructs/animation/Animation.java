@@ -135,7 +135,7 @@ public abstract class Animation {
 
 	}
 
-	protected float moveTowardsTargetAngleInRadians(float angleToChange, float angleChange, float targetAngle) {
+	protected float moveTowardsTargetAngleInRadians(float angleToChange, double angleChange, float targetAngle) {
 		if (angleToChange == targetAngle) {
 
 			// } else if (Math.abs(angleToChange) < angleChange) {

@@ -31,7 +31,9 @@ public class AnimationWait extends Animation {
 			kf0.rightKneeAngle = 2f;
 			kf0.offsetY = 28f;
 		}
-		kf0.speed = 0.004d;
+
+		kf0.setAllSpeeds(0.004d);
+		kf0.offsetYSpeed = 1;
 		keyFrames.add(kf0);
 	}
 
