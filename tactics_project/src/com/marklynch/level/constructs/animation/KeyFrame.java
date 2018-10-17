@@ -56,11 +56,13 @@ public class KeyFrame {
 
 			this.leftShoulderAngle = performer.getPrimaryAnimation().leftShoulderAngle;
 			this.rightShoulderAngle = performer.getPrimaryAnimation().rightShoulderAngle;
+
 			this.leftElbowAngle = performer.getPrimaryAnimation().leftElbowAngle;
 			this.rightElbowAngle = performer.getPrimaryAnimation().rightElbowAngle;
 
 			this.leftHipAngle = performer.getPrimaryAnimation().leftHipAngle;
 			this.rightHipAngle = performer.getPrimaryAnimation().rightHipAngle;
+
 			this.leftKneeAngle = performer.getPrimaryAnimation().leftKneeAngle;
 			this.rightKneeAngle = performer.getPrimaryAnimation().rightKneeAngle;
 
@@ -72,19 +74,80 @@ public class KeyFrame {
 
 		float angleChange = (float) (speed * delta);
 
-		// Right shoulder
 		if (!animation.backwards) {
+
+			animation.torsoAngle = animation.moveTowardsTargetAngleInRadians(animation.torsoAngle, angleChange,
+					torsoAngle);
+
+			animation.leftShoulderAngle = animation.moveTowardsTargetAngleInRadians(animation.leftShoulderAngle,
+					angleChange, leftShoulderAngle);
 			animation.rightShoulderAngle = animation.moveTowardsTargetAngleInRadians(animation.rightShoulderAngle,
 					angleChange, rightShoulderAngle);
 
-			if (animation.rightShoulderAngle == rightShoulderAngle)
+			animation.leftElbowAngle = animation.moveTowardsTargetAngleInRadians(animation.leftElbowAngle, angleChange,
+					leftElbowAngle);
+			animation.rightElbowAngle = animation.moveTowardsTargetAngleInRadians(animation.rightElbowAngle,
+					angleChange, rightElbowAngle);
+
+			animation.leftHipAngle = animation.moveTowardsTargetAngleInRadians(animation.leftHipAngle, angleChange,
+					leftHipAngle);
+			animation.rightHipAngle = animation.moveTowardsTargetAngleInRadians(animation.rightHipAngle, angleChange,
+					rightHipAngle);
+
+			animation.leftKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.leftKneeAngle, angleChange,
+					leftKneeAngle);
+			animation.rightKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.rightKneeAngle, angleChange,
+					rightKneeAngle);
+
+			if (animation.torsoAngle == torsoAngle //
+					&& animation.leftShoulderAngle == leftShoulderAngle//
+					&& animation.rightShoulderAngle == rightShoulderAngle//
+					&& animation.leftElbowAngle == leftElbowAngle//
+					&& animation.rightElbowAngle == rightElbowAngle//
+					&& animation.leftHipAngle == leftHipAngle//
+					&& animation.rightHipAngle == rightHipAngle//
+					&& animation.leftKneeAngle == leftKneeAngle//
+					&& animation.rightKneeAngle == rightKneeAngle//
+			) {
 				done = true;
-		} else {
+			}
+		} else {// BACKWARDS
+
+			animation.torsoAngle = animation.moveTowardsTargetAngleInRadians(animation.torsoAngle, angleChange,
+					-torsoAngle);
+
 			animation.leftShoulderAngle = animation.moveTowardsTargetAngleInRadians(animation.leftShoulderAngle,
 					angleChange, -rightShoulderAngle);
+			animation.rightShoulderAngle = animation.moveTowardsTargetAngleInRadians(animation.rightShoulderAngle,
+					angleChange, -leftShoulderAngle);
 
-			if (animation.leftShoulderAngle == -rightShoulderAngle)
+			animation.leftElbowAngle = animation.moveTowardsTargetAngleInRadians(animation.leftElbowAngle, angleChange,
+					-rightElbowAngle);
+			animation.rightElbowAngle = animation.moveTowardsTargetAngleInRadians(animation.rightElbowAngle,
+					angleChange, -leftElbowAngle);
+
+			animation.leftHipAngle = animation.moveTowardsTargetAngleInRadians(animation.leftHipAngle, angleChange,
+					-rightHipAngle);
+			animation.rightHipAngle = animation.moveTowardsTargetAngleInRadians(animation.rightHipAngle, angleChange,
+					-leftHipAngle);
+
+			animation.leftKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.leftKneeAngle, angleChange,
+					-rightKneeAngle);
+			animation.rightKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.rightKneeAngle, angleChange,
+					-leftKneeAngle);
+
+			if (animation.torsoAngle == -torsoAngle //
+					&& animation.leftShoulderAngle == -rightShoulderAngle//
+					&& animation.rightShoulderAngle == -leftShoulderAngle//
+					&& animation.leftElbowAngle == -rightElbowAngle//
+					&& animation.rightElbowAngle == -leftElbowAngle//
+					&& animation.leftHipAngle == -rightHipAngle//
+					&& animation.rightHipAngle == -leftHipAngle//
+					&& animation.leftKneeAngle == -rightKneeAngle//
+					&& animation.rightKneeAngle == -leftKneeAngle//
+			) {
 				done = true;
+			}
 		}
 
 	}
