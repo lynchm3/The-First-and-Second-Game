@@ -1,5 +1,7 @@
 package com.marklynch.level.constructs.animation;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
@@ -35,7 +37,6 @@ public abstract class Animation {
 
 	public float durationSoFar = 0;
 	public float durationToReachMillis = 200;
-	public int phase = 0;
 
 	public abstract void draw1();
 
@@ -68,6 +69,9 @@ public abstract class Animation {
 	public boolean runAnimation = false;
 
 	public OnCompletionListener onCompletionListener;
+
+	public int phase = 0;
+	public ArrayList<KeyFrame> keyFrames = new ArrayList<KeyFrame>();
 
 	public Animation(GameObject performer, Object... objectsInvolved) {
 

@@ -1,23 +1,17 @@
 package com.marklynch.level.constructs.animation.primary;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
 
 public class AnimationIgnite extends Animation {
 
-	int phase = 0;
 	float phase1ShoulderAngleToReach = (float) Math.toRadians(-45);
 	float phase2ShoulderAngleToReach = (float) Math.toRadians(0);
 
 	GameObject target;
 	GameObject fireSource;
 	GameObject previouslyEquipped;
-
-	// KEYFRAMEZ
-	ArrayList<KeyFrame> keyFrames = new ArrayList<KeyFrame>();
 
 	public AnimationIgnite(GameObject performer, GameObject target, GameObject fireSource) {
 		super(performer, performer, target);
@@ -40,6 +34,8 @@ public class AnimationIgnite extends Animation {
 		kf1.rightShoulderAngle = (float) Math.toRadians(0);
 		kf1.speed = 0.005d;
 		keyFrames.add(kf1);
+
+		blockAI = true;
 
 	}
 

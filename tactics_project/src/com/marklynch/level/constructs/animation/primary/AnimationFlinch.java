@@ -1,27 +1,18 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
 public class AnimationFlinch extends Animation {
 
-	public Square targetSquare;
-
-	float quarterDurationToReach;
-	float halfDurationToReach;
-	float threeQuarterDurationToReach;
-
 	public AnimationFlinch(GameObject performer, Square squareBeingAttackedFrom, Animation oldAnimation) {
 		super(performer, performer);
 		if (!runAnimation)
 			return;
-		this.targetSquare = squareBeingAttackedFrom;
-		durationToReachMillis = 400;
 
-		quarterDurationToReach = durationToReachMillis / 4;
-		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
-		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
+		durationToReachMillis = 400;
 
 		float down = 0.5f;
 		float up = -0.5f;
@@ -37,13 +28,25 @@ public class AnimationFlinch extends Animation {
 		}
 		if (squareBeingAttackedFrom.xInGrid - performer.squareGameObjectIsOn.xInGrid < 0) {
 			targetRadians = left;
-			performer.backwards = true;
 
 		} else if (squareBeingAttackedFrom.xInGrid - performer.squareGameObjectIsOn.xInGrid > 0) {
 			targetRadians = right;
-			performer.backwards = false;
 		}
 		backwards = performer.backwards;
+
+		KeyFrame kf0 = new KeyFrame(performer, this);
+
+		kf0.torsoAngle = targetRadians;
+		kf0.leftElbowAngle = 0;
+		kf0.rightElbowAngle = 0;
+		kf0.leftShoulderAngle = -targetRadians;
+		kf0.rightShoulderAngle = -targetRadians;
+		kf0.leftHipAngle = -targetRadians;
+		kf0.rightHipAngle = -targetRadians;
+		kf0.leftKneeAngle = 0;
+		kf0.rightKneeAngle = 0;
+		kf0.speed = 0.02d;
+		keyFrames.add(kf0);
 
 		blockAI = true;
 	}
@@ -53,35 +56,17 @@ public class AnimationFlinch extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (getCompleted()) {
+		if (getCompleted())
 			return;
-		}
 
 		super.update(delta);
-		durationSoFar += delta;
 
-		float progress = durationSoFar / durationToReachMillis;
+		keyFrames.get(phase).animate(delta);
+		if (keyFrames.get(phase).done)
+			phase++;
 
-		if (progress >= 1) {
-			progress = 1;
-		}
-
-		float angleChange = (float) (0.02d * delta);
-
-		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, angleChange, targetRadians);
-		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
-		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, -targetRadians);
-		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, -targetRadians);
-		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, -targetRadians);
-		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, -targetRadians);
-		leftKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-		rightKneeAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-
-		if (progress >= 1) {
+		if (phase == keyFrames.size()) {
 			runCompletionAlgorightm(true);
-			// if (performer.getPrimaryAnimation() == this)
-			// performer.setPrimaryAnimation(new AnimationWait(performer));
 		}
 	}
 
@@ -92,7 +77,6 @@ public class AnimationFlinch extends Animation {
 
 	@Override
 	public void draw1() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -102,7 +86,6 @@ public class AnimationFlinch extends Animation {
 
 	@Override
 	public void draw3() {
-		// TODO Auto-generated method stub
 
 	}
 
