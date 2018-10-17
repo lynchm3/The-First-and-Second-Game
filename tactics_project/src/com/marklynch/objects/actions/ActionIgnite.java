@@ -9,6 +9,7 @@ import com.marklynch.level.constructs.power.PowerIgnite;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Matches;
+import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -49,10 +50,17 @@ public class ActionIgnite extends Action {
 			return;
 
 		if (Game.level.shouldLog(targetGameObject, performer)) {
+			Object igniteMethod = getIgnitionMethod();
+
+			if (igniteMethod instanceof Power) {
+				igniteMethod = ((Power) igniteMethod).name;
+			}
+
 			if (targetGameObject != null) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ignited ", targetGameObject }));
+				Game.level.logOnScreen(new ActivityLog(
+						new Object[] { performer, " ignited ", targetGameObject, " with ", igniteMethod }));
 			} else {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ignited" }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ignited with ", igniteMethod }));
 
 			}
 		}
@@ -102,13 +110,31 @@ public class ActionIgnite extends Action {
 		if (targetSquare == null && targetGameObject == null)
 			return false;
 
-		if (performer.inventory.contains(Matches.class) || performer.hasPower(PowerIgnite.class)) {
+		Object ignitionMethod = getIgnitionMethod();
+
+		if (ignitionMethod != null)
 			return true;
-		}
 
 		disabledReason = NEED_MATCHES_OR_IGNITE_POWER;
 
 		return false;
+	}
+
+	public Object getIgnitionMethod() {
+		if (performer.hasPower(PowerIgnite.class)) {
+			return performer.getPower(PowerIgnite.class);
+		}
+
+		if (performer.inventory.contains(Matches.class)) {
+			return performer.inventory.getGameObjectOfClass(Matches.class);
+		}
+
+		for (GameObject flammableLightSource : performer.inventory.getGameObjectsOfClass(FlammableLightSource.class)) {
+			if (((FlammableLightSource) flammableLightSource).lit)
+				return flammableLightSource;
+		}
+
+		return null;
 	}
 
 	@Override
