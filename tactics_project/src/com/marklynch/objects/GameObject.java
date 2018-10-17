@@ -582,7 +582,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			if (drawHealthBar && remainingHealth != totalHealth) {
 				// draw sidebar on square
-				float healthPercentage = (remainingHealth) / (totalHealth);
+				float healthPercentage = ((float) remainingHealth) / ((float) totalHealth);
 				float healthBarHeightInPixels = height * healthPercentage;
 				float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
 				float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
