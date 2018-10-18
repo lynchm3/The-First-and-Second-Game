@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
@@ -38,81 +39,25 @@ public class AnimationStraightLine extends Animation {
 		this.blockAI = blockAI;
 		this.delay = delay;
 
-		// projectileObject.squareGameObjectIsOn.inventory.remove(projectileObject);
-
-		setupForNextSquare();
-
-	}
-
-	public void setupForNextSquare() {
-
-		this.targetX = this.targetSquares[index].xInGridPixels;
-		this.targetY = this.targetSquares[index].yInGridPixels;
-
-		distanceToCoverX = this.targetX - this.x;
-		distanceToCoverY = this.targetY - this.y;
-
-		distanceCoveredX = 0;
-		distanceCoveredY = 0;
-
-		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
-
-		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
-		this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
-
 		if (projectileObject instanceof Arrow && distanceToCoverX < 0) {
 			projectileObject.backwards = true;
 		}
+
+		for (int i = 0; i < targetSquares.length; i++) {
+
+			KeyFrame kf0 = new KeyFrame(performer, this);
+			kf0.setAllSpeeds(1);
+			kf0.offsetX = this.targetSquares[i].xInGridPixels - this.x;
+			kf0.offsetY = this.targetSquares[i].yInGridPixels - this.y;
+			keyFrames.add(kf0);
+		}
+
 	}
 
 	@Override
 	public void update(double delta) {
+		super.keyFrameUpdate(delta);
 
-		if (getCompleted())
-			return;
-
-		if (delay > 0) {
-			delay -= delta;
-			return;
-		}
-
-		float distanceX = (float) (speedX * delta);
-		float distanceY = (float) (speedY * delta);
-
-		angle += rotationSpeed * delta;
-
-		distanceCoveredX += distanceX;
-		distanceCoveredY += distanceY;
-
-		if (distanceToCoverX == 0 && distanceToCoverY == 0) {
-
-			index++;
-			if (index >= targetSquares.length) {
-				runCompletionAlgorightm(true);
-			} else {
-				setupForNextSquare();
-			}
-		} else if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
-				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
-
-			index++;
-			if (index >= targetSquares.length) {
-				offsetX = 0;
-				offsetY = 0;
-				runCompletionAlgorightm(true);
-			} else {
-				setupForNextSquare();
-			}
-
-		} else {
-
-			x += distanceX;
-			y += distanceY;
-
-			offsetX = x - performer.squareGameObjectIsOn.xInGridPixels;// - x;
-			offsetY = y - performer.squareGameObjectIsOn.yInGridPixels;// - y;
-
-		}
 	}
 
 	@Override
