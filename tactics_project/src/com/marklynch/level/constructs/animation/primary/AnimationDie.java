@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Human;
 
@@ -16,6 +17,7 @@ public class AnimationDie extends Animation {
 			return;
 		// durationToReach = 400;
 		blockAI = true;
+		backwards = performer.backwards;
 
 		if (!(performer instanceof Human)) {
 			targetOffsetX = 0f;
@@ -30,75 +32,29 @@ public class AnimationDie extends Animation {
 
 		}
 		targetOffsetY = (float) (32f - Math.random() * 16f);
+
+		KeyFrame kf0 = new KeyFrame(performer, this);
+
+		kf0.offsetX = targetOffsetX;
+		kf0.offsetY = targetOffsetY;
+		kf0.torsoAngle = targetTorsoAngle;
+		kf0.leftElbowAngle = 0;
+		kf0.rightElbowAngle = 0;
+		kf0.leftShoulderAngle = 0;
+		kf0.rightShoulderAngle = 0;
+		kf0.leftHipAngle = 0;
+		kf0.rightHipAngle = 0;
+		kf0.leftKneeAngle = 0;
+		kf0.rightKneeAngle = 0;
+		kf0.setAllSpeeds(0.004d);
+		kf0.offsetXSpeed = 0.5d;
+		kf0.offsetYSpeed = 1d;
+		keyFrames.add(kf0);
 	}
 
 	@Override
 	public void update(double delta) {
-
-		if (getCompleted())
-			return;
-		super.update(delta);
-
-		if (!(performer instanceof Human)) {
-			torsoAngle = 3.14f;
-			runCompletionAlgorightm(true);
-			return;
-		}
-
-		durationSoFar += delta;
-		// double progress = durationSoFar / durationToReach;
-
-		float targetRightHip = 0f;
-		float targetRightKnee = 0f;
-		float targetLeftHip = 0f;
-		float targetLeftKnee = 0f;
-
-		if (offsetY == targetOffsetY &&
-		//
-				offsetX == targetOffsetX &&
-				//
-				torsoAngle == targetTorsoAngle &&
-				//
-				leftShoulderAngle == 0 &&
-				//
-				rightShoulderAngle == 0 &&
-				//
-				leftElbowAngle == 0 &&
-				//
-				rightElbowAngle == 0 &&
-				//
-				leftHipAngle == targetLeftHip &&
-				//
-				rightHipAngle == targetRightHip &&
-				//
-				leftKneeAngle == targetLeftKnee &&
-				//
-				rightKneeAngle == targetRightKnee) {
-			runCompletionAlgorightm(true);
-		}
-
-		float offsetYChange = (float) (1d * delta);
-		float offsetXChange = (float) (0.5d * delta);
-		float torsoAngleChange = (float) (0.1d * delta);
-		float angleChange = (float) (0.002d * delta);
-		float angleChangeKnee = (float) (0.004d * delta);
-
-		offsetY = moveTowardsTargetAngleInRadians(offsetY, offsetYChange, targetOffsetY);
-		offsetX = moveTowardsTargetAngleInRadians(offsetX, offsetYChange, targetOffsetX);
-		torsoAngle = moveTowardsTargetAngleInRadians(torsoAngle, torsoAngleChange, targetTorsoAngle);
-
-		// torsoAngle = 0.5f;
-
-		leftShoulderAngle = moveTowardsTargetAngleInRadians(leftShoulderAngle, angleChange, 0);
-		rightShoulderAngle = moveTowardsTargetAngleInRadians(rightShoulderAngle, angleChange, 0);
-		leftElbowAngle = moveTowardsTargetAngleInRadians(leftElbowAngle, angleChange, 0);
-		rightElbowAngle = moveTowardsTargetAngleInRadians(rightElbowAngle, angleChange, 0);
-
-		leftHipAngle = moveTowardsTargetAngleInRadians(leftHipAngle, angleChange, targetLeftHip);
-		rightHipAngle = moveTowardsTargetAngleInRadians(rightHipAngle, angleChange, targetRightHip);
-		leftKneeAngle = moveTowardsTargetAngleInRadians(leftKneeAngle, angleChangeKnee, targetLeftKnee);
-		rightKneeAngle = moveTowardsTargetAngleInRadians(rightKneeAngle, angleChangeKnee, targetRightKnee);
-
+		keyFrameUpdate(delta);
 	}
 
 	@Override

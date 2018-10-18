@@ -56,19 +56,7 @@ public class AnimationFlinch extends Animation {
 
 	@Override
 	public void update(double delta) {
-
-		if (getCompleted())
-			return;
-
-		super.update(delta);
-
-		keyFrames.get(phase).animate(delta);
-		if (keyFrames.get(phase).done)
-			phase++;
-
-		if (phase == keyFrames.size()) {
-			runCompletionAlgorightm(true);
-		}
+		keyFrameUpdate(delta);
 	}
 
 	@Override

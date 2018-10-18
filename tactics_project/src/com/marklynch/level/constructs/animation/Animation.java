@@ -212,6 +212,22 @@ public abstract class Animation {
 		// } else
 	}
 
+	public void keyFrameUpdate(double delta) {
+
+		if (getCompleted())
+			return;
+
+		update(delta);
+
+		keyFrames.get(phase).animate(delta);
+		if (keyFrames.get(phase).done)
+			phase++;
+
+		if (phase == keyFrames.size()) {
+			runCompletionAlgorightm(true);
+		}
+	}
+
 	public boolean getCompleted() {
 		return completed;
 	}
