@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
 
 public class AnimationSlash extends Animation {
@@ -41,6 +42,22 @@ public class AnimationSlash extends Animation {
 
 		blockAI = true;
 
+		KeyFrame kf0 = new KeyFrame(performer, this);
+		kf0.setAllSpeeds(0.004);
+		kf0.rightShoulderAngle = -2.25f;
+		kf0.rightElbowAngle = -2.25f;
+		kf0.leftShoulderAngle = 0;
+		kf0.leftElbowAngle = 0;
+		keyFrames.add(kf0);
+
+		KeyFrame kf1 = new KeyFrame(performer, this);
+		kf1.setAllSpeeds(0.004);
+		kf1.rightShoulderAngle = 0;
+		kf1.rightElbowAngle = 0;
+		kf1.leftShoulderAngle = 0;
+		kf1.leftElbowAngle = 0;
+		keyFrames.add(kf1);
+
 	}
 
 	@Override
@@ -50,47 +67,7 @@ public class AnimationSlash extends Animation {
 
 	@Override
 	public void update(double delta) {
-
-		if (getCompleted())
-			return;
-		super.update(delta);
-
-		durationSoFar += delta;
-
-		float progress = durationSoFar / durationToReachMillis;
-
-		if (progress >= 1) {
-			progress = 1;
-		}
-
-		if (progress < 0.75f) {
-
-			// leftShoulderAngle = 0.2f * progress;
-			rightShoulderAngle = -3f * progress;
-			rightElbowAngle = -3f * progress;
-
-			leftShoulderAngle = 0;
-			leftElbowAngle = 0;
-
-		} else {
-			rightShoulderAngle = -9f * (1f - progress);
-			rightElbowAngle = -9f * (1f - progress);
-
-			leftShoulderAngle = 0;
-			leftElbowAngle = 0;
-		}
-
-		if (backwards) {
-			reverseAnimation();
-		}
-
-		if (progress >= 1) {
-			target.showPow();
-			rightShoulderAngle = 0;
-			rightElbowAngle = 0;
-			runCompletionAlgorightm(true);
-		} else {
-		}
+		super.keyFrameUpdate(delta);
 
 	}
 

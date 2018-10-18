@@ -76,6 +76,7 @@ public abstract class AnimationShootArrow extends Animation {
 		kf2.rightElbowAngle = 0f;
 		kf2.leftShoulderAngle = -1.1775f;
 		kf2.leftElbowAngle = -0.785f;
+		keyFrames.add(kf2);
 
 		KeyFrame kf3 = new KeyFrame(performer, this);
 		kf3.setAllSpeeds(0.004);
