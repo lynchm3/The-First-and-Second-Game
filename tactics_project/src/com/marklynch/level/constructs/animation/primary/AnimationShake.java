@@ -45,17 +45,6 @@ public class AnimationShake extends Animation {
 		offsetX = (float) (Math.random() * 16) - 8f;
 		offsetY = (float) (Math.random() * 16) - 8f;
 
-		// durationSoFar += delta;
-		// double progress = durationSoFar / durationToReach;
-		// if (progress >= 1) {
-		// completed = true;
-		// offsetX = 0;
-		// offsetY = 0;
-		// } else {
-		// offsetX = (int) (startOffsetX * (1 - progress));
-		// offsetY = (int) (startOffsetY * (1 - progress));
-		// }
-
 	}
 
 	@Override

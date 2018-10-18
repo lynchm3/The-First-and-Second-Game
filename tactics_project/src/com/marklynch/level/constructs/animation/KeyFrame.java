@@ -12,13 +12,13 @@ public class KeyFrame {
 	public float rightShoulderAngle = 0f;
 	public float rightElbowAngle = 0f;
 
-	public float scaleX = 1;
-	public float scaleY = 1;
-
 	public float leftHipAngle = 0;
 	public float leftKneeAngle = 0;
 	public float rightHipAngle = 0;
 	public float rightKneeAngle = 0;
+
+	public float scaleX = 1;
+	public float scaleY = 1;
 
 	public float alpha = 1f;
 
@@ -54,6 +54,11 @@ public class KeyFrame {
 	public double leftKneeAngleSpeed = 1;
 	public double rightHipAngleSpeed = 1;
 	public double rightKneeAngleSpeed = 1;
+
+	public int boundsX1Speed = 1;
+	public int boundsY1Speed = 1;
+	public int boundsX2Speed = 1;
+	public int boundsY2Speed = 1;
 
 	Animation animation;
 
@@ -93,6 +98,14 @@ public class KeyFrame {
 		animation.offsetY = animation.moveTowardsTargetAngleInRadians(animation.offsetY, offsetYSpeed * delta, offsetY);
 		animation.scaleX = animation.moveTowardsTargetAngleInRadians(animation.scaleX, scaleXSpeed * delta, scaleX);
 		animation.scaleY = animation.moveTowardsTargetAngleInRadians(animation.scaleY, scaleYSpeed * delta, scaleY);
+		animation.boundsX1 = (int) animation.moveTowardsTargetAngleInRadians(animation.boundsX1, boundsX1Speed * delta,
+				boundsX1);
+		animation.boundsY1 = (int) animation.moveTowardsTargetAngleInRadians(animation.boundsY1, boundsY1Speed * delta,
+				boundsY1);
+		animation.boundsX2 = (int) animation.moveTowardsTargetAngleInRadians(animation.boundsX2, boundsX2Speed * delta,
+				boundsX2);
+		animation.boundsY2 = (int) animation.moveTowardsTargetAngleInRadians(animation.boundsY2, boundsY2Speed * delta,
+				boundsY2);
 
 		if (!animation.backwards) {
 
@@ -122,7 +135,10 @@ public class KeyFrame {
 			if (animation.offsetX == offsetX //
 					&& animation.offsetY == offsetY //
 					&& animation.scaleX == scaleX //
-					&& animation.scaleY == scaleY //
+					&& animation.boundsX1 == boundsX1 //
+					&& animation.boundsY1 == boundsY1 //
+					&& animation.boundsX2 == boundsX2 //
+					&& animation.boundsY2 == boundsY2 //
 					&& animation.torsoAngle == torsoAngle //
 					&& animation.leftShoulderAngle == leftShoulderAngle//
 					&& animation.rightShoulderAngle == rightShoulderAngle//
@@ -164,6 +180,10 @@ public class KeyFrame {
 					&& animation.offsetY == offsetY//
 					&& animation.scaleX == scaleX //
 					&& animation.scaleY == scaleY //
+					&& animation.boundsX1 == boundsX1 //
+					&& animation.boundsY1 == boundsY1 //
+					&& animation.boundsX2 == boundsX2 //
+					&& animation.boundsY2 == boundsY2 //
 					&& animation.torsoAngle == -torsoAngle //
 					&& animation.leftShoulderAngle == -rightShoulderAngle//
 					&& animation.rightShoulderAngle == -leftShoulderAngle//

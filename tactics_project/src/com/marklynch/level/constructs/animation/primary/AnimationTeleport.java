@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
@@ -42,45 +43,26 @@ public class AnimationTeleport extends Animation {
 		backwards = performer.backwards;
 
 		blockAI = true;
+
+		KeyFrame kf0 = new KeyFrame(performer, this);
+		kf0.setAllSpeeds(1);
+		kf0.boundsY1 = (int) performer.height;
+		keyFrames.add(kf0);
+
+		KeyFrame kf1 = new KeyFrame(performer, this);
+		kf1.offsetX = endOffsetX;
+		kf1.offsetY = endOffsetY;
+		kf1.setAllSpeeds(1);
+		kf1.offsetXSpeed = 9999999;
+		kf1.offsetYSpeed = 9999999;
+		kf1.boundsY1 = -128;
+		keyFrames.add(kf1);
 	}
 
 	@Override
 	public void update(double delta) {
+		super.keyFrameUpdate(delta);
 
-		if (getCompleted())
-			return;
-		super.update(delta);
-
-		durationSoFar += delta;
-
-		float progress = durationSoFar / durationToReachMillis;
-
-		if (progress >= 1) {
-			progress = 1;
-		}
-
-		if (progress >= 1) {
-			runCompletionAlgorightm(true);
-			boundsY1 = 0;
-			// if (performer.getPrimaryAnimation() == this)
-			// performer.setPrimaryAnimation(new AnimationWait(performer));
-
-			// offsetX = 0;
-		} else if (progress >= 0.5f) {
-			offsetX = endOffsetX;
-			offsetY = endOffsetY;
-			// boundsX1 = 0;
-			boundsY1 = (int) ((1 - progress) * 2 * performer.height);
-			// boundsX2 = 0;
-			// boundsY2 = 0;
-		} else {
-			offsetX = startOffsetX;
-			offsetY = startOffsetY;
-			// boundsX1 = 0;
-			boundsY1 = (int) (progress * 2 * performer.height);
-			// boundsX2 = 0;
-			// boundsY2 = 0;
-		}
 	}
 
 	@Override
@@ -90,7 +72,6 @@ public class AnimationTeleport extends Animation {
 
 	@Override
 	public void draw1() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -100,7 +81,6 @@ public class AnimationTeleport extends Animation {
 
 	@Override
 	public void draw3() {
-		// TODO Auto-generated method stub
 
 	}
 
