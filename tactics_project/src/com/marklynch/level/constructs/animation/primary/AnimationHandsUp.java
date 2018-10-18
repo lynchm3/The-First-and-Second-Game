@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
 
 public class AnimationHandsUp extends Animation {
@@ -18,21 +19,17 @@ public class AnimationHandsUp extends Animation {
 		startLeftArmAngle = this.leftShoulderAngle;
 		startRightArmAngle = this.rightShoulderAngle;
 		blockAI = true;
+
+		KeyFrame kf0 = new KeyFrame(performer, this);
+		kf0.setAllSpeeds(0.004);
+		kf0.leftShoulderAngle = targetLeftArmAngle;
+		kf0.rightShoulderAngle = targetRightArmAngle;
+		keyFrames.add(kf0);
 	}
 
 	@Override
 	public void update(double delta) {
-		// runCompletionAlgorightm();
-
-		if (getCompleted())
-			return;
-		super.update(delta);
-		double progress = durationSoFar / durationToReachMillis;
-		leftShoulderAngle = (float) (startLeftArmAngle + progress * (targetLeftArmAngle - startLeftArmAngle));
-		rightShoulderAngle = (float) (startRightArmAngle + progress * (targetRightArmAngle - startRightArmAngle));
-
-		// scaleX = (float) progress * endScale;
-		// scaleY = (float) progress * endScale;
+		super.keyFrameUpdate(delta);
 
 	}
 
