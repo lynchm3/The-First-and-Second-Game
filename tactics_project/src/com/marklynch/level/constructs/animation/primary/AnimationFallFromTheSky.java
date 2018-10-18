@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
 
 public class AnimationFallFromTheSky extends Animation {
@@ -16,34 +17,36 @@ public class AnimationFallFromTheSky extends Animation {
 		super(performer, performer);
 		if (!runAnimation)
 			return;
-		offsetX = 0;
-		startY = offsetY = -1024;
-		scaleX = 1;
-		scaleY = 1;
-		this.durationToReachMillis = durationToReachMillis;
+
+		offsetY = -1024;
+
+		KeyFrame kf0 = new KeyFrame(performer, this);
+		kf0.torsoAngle = 0;
+		kf0.leftElbowAngle = 0;
+		kf0.rightElbowAngle = 0;
+		kf0.leftShoulderAngle = 0;
+		kf0.rightShoulderAngle = 0;
+		kf0.leftHipAngle = -0;
+		kf0.rightHipAngle = -0;
+		kf0.leftKneeAngle = 0;
+		kf0.rightKneeAngle = 0;
+
+		kf0.scaleX = 1;
+		kf0.scaleY = 1;
+
+		kf0.offsetY = 0;
+
+		kf0.setAllSpeeds(0.004d);
+		kf0.offsetYSpeed = 1;
+		kf0.scaleXSpeed = 0.001;
+		kf0.scaleYSpeed = 0.001;
+
+		keyFrames.add(kf0);
 	}
 
 	@Override
 	public void update(double delta) {
-
-		if (getCompleted())
-			return;
-
-		super.update(delta);
-		durationSoFar += delta;
-		double progress = durationSoFar / durationToReachMillis;
-		if (progress >= 1) {
-			progress = 1;
-			offsetY = 0;
-			runCompletionAlgorightm(true);
-			return;
-		}
-		offsetY = (float) (startY + progress * (targetY - startY));
-		// rightShoulderAngle = (float) (startRightArmAngle + progress *
-		// (targetRightArmAngle - startRightArmAngle));
-
-		// scaleX = (float) progress * endScale;
-		// scaleY = (float) progress * endScale;
+		super.keyFrameUpdate(delta);
 
 	}
 
