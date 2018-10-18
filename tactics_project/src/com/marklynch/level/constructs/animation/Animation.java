@@ -105,12 +105,6 @@ public abstract class Animation {
 	}
 
 	public void update(double delta) {
-		float alphaChange = (float) (0.002d * delta);
-		float targetAlpha = 1f;
-		if (performer != null && performer.hiding) {
-			targetAlpha = 0.5f;
-		}
-		alpha = moveTowardsTargetAngleInRadians(alpha, alphaChange, targetAlpha);
 	}
 
 	protected void reverseAnimation() {
@@ -217,7 +211,12 @@ public abstract class Animation {
 		if (getCompleted())
 			return;
 
-		update(delta);
+		float alphaChange = (float) (0.002d * delta);
+		float targetAlpha = 1f;
+		if (performer != null && performer.hiding) {
+			targetAlpha = 0.5f;
+		}
+		alpha = moveTowardsTargetAngleInRadians(alpha, alphaChange, targetAlpha);
 
 		keyFrames.get(phase).animate(delta);
 		if (keyFrames.get(phase).done)

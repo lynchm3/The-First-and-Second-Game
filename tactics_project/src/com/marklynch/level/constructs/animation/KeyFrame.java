@@ -80,6 +80,9 @@ public class KeyFrame {
 			this.leftKneeAngle = performer.getPrimaryAnimation().leftKneeAngle;
 			this.rightKneeAngle = performer.getPrimaryAnimation().rightKneeAngle;
 
+			this.scaleX = performer.getPrimaryAnimation().scaleX;
+			this.scaleY = performer.getPrimaryAnimation().scaleY;
+
 			this.alpha = performer.getPrimaryAnimation().alpha;
 		}
 	}
@@ -88,6 +91,8 @@ public class KeyFrame {
 
 		animation.offsetX = animation.moveTowardsTargetAngleInRadians(animation.offsetX, offsetXSpeed * delta, offsetX);
 		animation.offsetY = animation.moveTowardsTargetAngleInRadians(animation.offsetY, offsetYSpeed * delta, offsetY);
+		animation.scaleX = animation.moveTowardsTargetAngleInRadians(animation.scaleX, scaleXSpeed * delta, scaleX);
+		animation.scaleY = animation.moveTowardsTargetAngleInRadians(animation.scaleY, scaleYSpeed * delta, scaleY);
 
 		if (!animation.backwards) {
 
@@ -116,6 +121,8 @@ public class KeyFrame {
 
 			if (animation.offsetX == offsetX //
 					&& animation.offsetY == offsetY //
+					&& animation.scaleX == scaleX //
+					&& animation.scaleY == scaleY //
 					&& animation.torsoAngle == torsoAngle //
 					&& animation.leftShoulderAngle == leftShoulderAngle//
 					&& animation.rightShoulderAngle == rightShoulderAngle//
@@ -155,6 +162,8 @@ public class KeyFrame {
 
 			if (animation.offsetX == offsetX //
 					&& animation.offsetY == offsetY//
+					&& animation.scaleX == scaleX //
+					&& animation.scaleY == scaleY //
 					&& animation.torsoAngle == -torsoAngle //
 					&& animation.leftShoulderAngle == -rightShoulderAngle//
 					&& animation.rightShoulderAngle == -leftShoulderAngle//
