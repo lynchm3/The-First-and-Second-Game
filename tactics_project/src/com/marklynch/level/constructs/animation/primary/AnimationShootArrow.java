@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
@@ -24,6 +25,8 @@ public abstract class AnimationShootArrow extends Animation {
 	AnimationThrown animationThrown;
 	GameObject weapon;
 
+	KeyFrame kf2;
+
 	public AnimationShootArrow(Actor performer, GameObject target, GameObject weapon, Action action) {
 		super(performer, performer, target);
 		if (!runAnimation)
@@ -38,17 +41,51 @@ public abstract class AnimationShootArrow extends Animation {
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
 		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
-		// this.startSquare = startSquare;
-		// this.endSquare = endSquare;
-
-		// startOffsetX = offsetX = (int) ((this.startSquare.xInGrid -
-		// this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
-		// startOffsetY = offsetY = (int) ((this.startSquare.yInGrid -
-		// this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 		backwards = performer.backwards;
 		blockAI = true;
 		drawArrowInOffHand = true;
 		arrowHandleY = 24;
+
+		KeyFrame kf0 = new KeyFrame(performer, this);
+		kf0.setAllSpeeds(0.004);
+		kf0.rightShoulderAngle = -1.57f;
+		kf0.rightElbowAngle = 0f;
+		kf0.leftShoulderAngle = -1.57f;
+		kf0.leftElbowAngle = 0f;
+		kf0.bowStringHandleY = 0;
+		keyFrames.add(kf0);
+
+		KeyFrame kf1 = new KeyFrame(performer, this);
+		kf1.setAllSpeeds(0.004);
+		kf1.bowStringHandleY = -8;
+		kf1.arrowHandleY = 44;// 12 + 26;
+		kf1.drawArrowInOffHand = false;
+		kf1.drawArrowInMainHand = true;
+		kf1.rightShoulderAngle = -1.57f;
+		kf1.rightElbowAngle = 0f;
+		kf1.leftShoulderAngle = -1.1775f;
+		kf1.leftElbowAngle = -0.785f;
+		keyFrames.add(kf1);
+
+		kf2 = new KeyFrame(performer, this);
+		kf2.setAllSpeeds(0.004);
+		kf2.bowStringHandleY = 0;
+		kf2.drawArrowInOffHand = false;
+		kf2.drawArrowInMainHand = false;
+		kf2.rightShoulderAngle = -1.57f;
+		kf2.rightElbowAngle = 0f;
+		kf2.leftShoulderAngle = -1.1775f;
+		kf2.leftElbowAngle = -0.785f;
+
+		KeyFrame kf3 = new KeyFrame(performer, this);
+		kf3.setAllSpeeds(0.004);
+		kf3.drawArrowInOffHand = false;
+		kf3.drawArrowInMainHand = false;
+		kf3.rightShoulderAngle = 0;
+		kf3.rightElbowAngle = 0f;
+		kf3.leftShoulderAngle = 0;
+		kf3.leftElbowAngle = 0;
+		keyFrames.add(kf3);
 
 	}
 
@@ -63,95 +100,20 @@ public abstract class AnimationShootArrow extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (getCompleted())
-			return;
-		super.update(delta);
-
-		durationSoFar += delta;
-
-		float progress = durationSoFar / durationToReachMillis;
-
-		if (progress >= 1) {
-			progress = 1;
+		if (!shotArrow && keyFrames.get(phase) == kf2) {
+			shootArrow();
+			shotArrow = true;
 		}
 
-		if (progress < 0.1) {
-			arrowHandleY = 64 - (52 * progress * 10);
+		// if (progress < 0.1) {
+		// arrowHandleY = 64 - (52 * progress * 10);
+		//
+		// } else if (progress < 0.25f) {
+		//
+		// arrowHandleY = 12;
+		// }
 
-		} else if (progress < 0.25f) {
-
-			arrowHandleY = 12;
-		}
-
-		if (progress < 0.25f) {
-
-			// arrowHandleY = 64 - (52 * progress * 4);
-
-			bowStringHandleY = 0;
-			rightShoulderAngle = -6.28f * progress;
-			rightElbowAngle = 0f;
-
-			leftShoulderAngle = -6.28f * progress;
-			leftElbowAngle = 0f;
-
-		} else if (progress < 0.5f) {
-
-			bowStringHandleY = (progress - 0.25f) * -32;
-			arrowHandleY = 36 + (progress - 0.25f) * 32;// 12 + 26;
-			drawArrowInOffHand = false;
-			drawArrowInMainHand = true;
-			rightShoulderAngle = -1.57f;
-			rightElbowAngle = 0f * progress;
-
-			leftShoulderAngle = -1.57f + ((progress - 0.25f) * 1.57f);
-			leftElbowAngle = -((progress - 0.25f) * 3.14f);
-
-		} else if (progress < 0.75f) {
-
-			if (!shotArrow) {
-				shootArrow();
-				shotArrow = true;
-			}
-
-			bowStringHandleY = 0;
-			drawArrowInOffHand = false;
-			drawArrowInMainHand = false;
-			rightShoulderAngle = -1.57f;
-			rightElbowAngle = 0f;
-
-			leftShoulderAngle = -1.1775f;
-			leftElbowAngle = -0.785f;
-
-		} else {
-
-			drawArrowInOffHand = false;
-			drawArrowInMainHand = false;
-			rightShoulderAngle = -6.28f * (1f - progress);
-			rightElbowAngle = 0f;
-
-			leftShoulderAngle = -1.1775f * (4 * (1 - progress));
-			leftElbowAngle = -0.785f * (4 * (1 - progress));
-		}
-
-		if (backwards) {
-			float temp = rightShoulderAngle;
-			rightShoulderAngle = -leftShoulderAngle;
-			leftShoulderAngle = -temp;
-
-			temp = rightElbowAngle;
-			rightElbowAngle = -leftElbowAngle;
-			leftElbowAngle = -temp;
-		}
-
-		if (progress >= 1) {
-			// target.showPow();
-			rightShoulderAngle = 0;
-			rightElbowAngle = 0;
-			leftShoulderAngle = 0;
-			leftElbowAngle = 0;
-			runCompletionAlgorightm(true);
-		} else {
-		}
+		super.keyFrameUpdate(delta);
 
 	}
 
