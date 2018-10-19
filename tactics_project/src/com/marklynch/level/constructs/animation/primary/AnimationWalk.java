@@ -129,9 +129,8 @@ public class AnimationWalk extends Animation {
 		// }
 
 		if (walkingPhase == 0 || walkingPhase == 2) {
-			phase = 0;
+
 		} else {
-			phase = 4;
 
 		}
 
@@ -163,6 +162,27 @@ public class AnimationWalk extends Animation {
 		// this.phase = walkingPhase;
 		// setAngles(0f);
 
+		if (walkingPhase == 0) {
+			setUpWalkPart0();
+
+		} else if (walkingPhase == 1) {// 1 or 3
+			setUpWalkPart1();
+
+		} else if (walkingPhase == 2) {// 1 or 3
+			setUpWalkPart0();
+		} else {// 1 or 3
+			setUpWalkPart1();
+		}
+
+	}
+
+	@Override
+	public void update(double delta) {
+		keyFrameUpdate(delta);
+	}
+
+	public void setUpWalkPart0() {
+
 		KeyFrame kf0 = new KeyFrame(performer, this);
 		kf0.setAllSpeeds(0.001);
 		kf0.offsetXSpeed = 0.1;
@@ -176,6 +196,7 @@ public class AnimationWalk extends Animation {
 		kf0.leftKneeAngle = targetLeftKnee0;
 		kf0.leftElbowAngle = 0.1f;
 		kf0.rightElbowAngle = 0.1f;
+		kf0.normaliseSpeeds = true;
 		keyFrames.add(kf0);
 
 		KeyFrame kf1 = new KeyFrame(performer, this);
@@ -191,6 +212,7 @@ public class AnimationWalk extends Animation {
 		kf1.leftKneeAngle = targetLeftKnee1;
 		kf1.leftElbowAngle = 0.1f;
 		kf1.rightElbowAngle = 0.1f;
+		kf1.normaliseSpeeds = true;
 		keyFrames.add(kf1);
 
 		KeyFrame kf2 = new KeyFrame(performer, this);
@@ -206,6 +228,7 @@ public class AnimationWalk extends Animation {
 		kf2.leftKneeAngle = targetLeftKnee2;
 		kf2.leftElbowAngle = 0.1f;
 		kf2.rightElbowAngle = 0.1f;
+		kf2.normaliseSpeeds = true;
 		keyFrames.add(kf2);
 
 		KeyFrame kf3 = new KeyFrame(performer, this);
@@ -221,7 +244,12 @@ public class AnimationWalk extends Animation {
 		kf3.leftKneeAngle = targetLeftKnee3;
 		kf3.leftElbowAngle = 0.1f;
 		kf3.rightElbowAngle = 0.1f;
+		kf3.normaliseSpeeds = true;
 		keyFrames.add(kf3);
+
+	}
+
+	public void setUpWalkPart1() {
 
 		KeyFrame kf4 = new KeyFrame(performer, this);
 		kf4.setAllSpeeds(0.001);
@@ -236,6 +264,7 @@ public class AnimationWalk extends Animation {
 		kf4.leftKneeAngle = targetLeftKnee4;
 		kf4.leftElbowAngle = 0.1f;
 		kf4.rightElbowAngle = 0.1f;
+		kf4.normaliseSpeeds = true;
 		keyFrames.add(kf4);
 
 		KeyFrame kf5 = new KeyFrame(performer, this);
@@ -251,6 +280,7 @@ public class AnimationWalk extends Animation {
 		kf5.leftKneeAngle = targetLeftKnee5;
 		kf5.leftElbowAngle = 0.1f;
 		kf5.rightElbowAngle = 0.1f;
+		kf5.normaliseSpeeds = true;
 		keyFrames.add(kf5);
 
 		KeyFrame kf6 = new KeyFrame(performer, this);
@@ -266,6 +296,7 @@ public class AnimationWalk extends Animation {
 		kf6.leftKneeAngle = targetLeftKnee6;
 		kf6.leftElbowAngle = 0.1f;
 		kf6.rightElbowAngle = 0.1f;
+		kf6.normaliseSpeeds = true;
 		keyFrames.add(kf6);
 
 		KeyFrame kf7 = new KeyFrame(performer, this);
@@ -281,13 +312,9 @@ public class AnimationWalk extends Animation {
 		kf7.leftKneeAngle = targetLeftKnee7;
 		kf7.leftElbowAngle = 0.1f;
 		kf7.rightElbowAngle = 0.1f;
+		kf7.normaliseSpeeds = true;
 		keyFrames.add(kf7);
 
-	}
-
-	@Override
-	public void update(double delta) {
-		keyFrameUpdate(delta);
 	}
 
 	// float frontLegBend = 0.35f;

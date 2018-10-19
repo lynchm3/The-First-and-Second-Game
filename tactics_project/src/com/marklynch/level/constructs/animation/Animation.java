@@ -219,8 +219,13 @@ public abstract class Animation {
 		alpha = moveTowardsTargetAngleInRadians(alpha, alphaChange, targetAlpha);
 
 		keyFrames.get(phase).animate(delta);
-		if (keyFrames.get(phase).done)
+		if (keyFrames.get(phase).done) {
 			phase++;
+
+			if (phase < keyFrames.size()) {
+				keyFrames.get(phase).normaliseSpeeds();
+			}
+		}
 
 		if (phase == keyFrames.size()) {
 			runCompletionAlgorightm(true);
