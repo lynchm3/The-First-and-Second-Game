@@ -105,7 +105,7 @@ public class AnimationWalk extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int phase) {
+	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int walkingPhase) {
 		super(performer, performer, endSquare);
 		if (!runAnimation)
 			return;
@@ -128,10 +128,10 @@ public class AnimationWalk extends Animation {
 		//
 		// }
 
-		if (phase == 0 || phase == 2) {
-			lastKeyFrame = 0;
+		if (walkingPhase == 0 || walkingPhase == 2) {
+			phase = 0;
 		} else {
-			lastKeyFrame = 4;
+			phase = 4;
 
 		}
 
@@ -160,296 +160,147 @@ public class AnimationWalk extends Animation {
 
 		blockAI = false;
 
-		this.phase = phase;
-		setAngles(0f);
+		// this.phase = walkingPhase;
+		// setAngles(0f);
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
-		kf0.setAllSpeeds(1);
+		kf0.setAllSpeeds(0.001);
+		kf0.offsetXSpeed = 0.1;
+		kf0.offsetYSpeed = 0.1;
+		kf0.offsetX = startOffsetX * 3 / 4;
+		kf0.offsetY = startOffsetY * 3 / 4;
 		kf0.torsoAngle = targetTorsoAngle0;
 		kf0.rightHipAngle = targetRightHip0;
 		kf0.rightKneeAngle = targetRightKnee0;
 		kf0.leftHipAngle = targetLeftHip0;
 		kf0.leftKneeAngle = targetLeftKnee0;
+		kf0.leftElbowAngle = 0.1f;
+		kf0.rightElbowAngle = 0.1f;
 		keyFrames.add(kf0);
 
 		KeyFrame kf1 = new KeyFrame(performer, this);
-		kf1.setAllSpeeds(1);
+		kf1.setAllSpeeds(0.001);
+		kf1.offsetXSpeed = 0.1;
+		kf1.offsetYSpeed = 0.1;
+		kf1.offsetX = startOffsetX * 2 / 4;
+		kf1.offsetY = startOffsetY * 2 / 4;
 		kf1.torsoAngle = targetTorsoAngle1;
 		kf1.rightHipAngle = targetRightHip1;
 		kf1.rightKneeAngle = targetRightKnee1;
 		kf1.leftHipAngle = targetLeftHip1;
 		kf1.leftKneeAngle = targetLeftKnee1;
+		kf1.leftElbowAngle = 0.1f;
+		kf1.rightElbowAngle = 0.1f;
 		keyFrames.add(kf1);
 
 		KeyFrame kf2 = new KeyFrame(performer, this);
-		kf2.setAllSpeeds(1);
+		kf2.setAllSpeeds(0.001);
+		kf2.offsetXSpeed = 0.1;
+		kf2.offsetYSpeed = 0.1;
+		kf2.offsetX = startOffsetX * 1 / 4;
+		kf2.offsetY = startOffsetY * 1 / 4;
 		kf2.torsoAngle = targetTorsoAngle2;
 		kf2.rightHipAngle = targetRightHip2;
 		kf2.rightKneeAngle = targetRightKnee2;
 		kf2.leftHipAngle = targetLeftHip2;
 		kf2.leftKneeAngle = targetLeftKnee2;
+		kf2.leftElbowAngle = 0.1f;
+		kf2.rightElbowAngle = 0.1f;
 		keyFrames.add(kf2);
 
 		KeyFrame kf3 = new KeyFrame(performer, this);
-		kf3.setAllSpeeds(1);
+		kf3.setAllSpeeds(0.001);
+		kf3.offsetXSpeed = 0.1;
+		kf3.offsetYSpeed = 0.1;
+		kf3.offsetX = startOffsetX * 0 / 4;
+		kf3.offsetY = startOffsetY * 0 / 4;
 		kf3.torsoAngle = targetTorsoAngle3;
 		kf3.rightHipAngle = targetRightHip3;
 		kf3.rightKneeAngle = targetRightKnee3;
 		kf3.leftHipAngle = targetLeftHip3;
 		kf3.leftKneeAngle = targetLeftKnee3;
+		kf3.leftElbowAngle = 0.1f;
+		kf3.rightElbowAngle = 0.1f;
 		keyFrames.add(kf3);
 
 		KeyFrame kf4 = new KeyFrame(performer, this);
-		kf4.setAllSpeeds(1);
+		kf4.setAllSpeeds(0.001);
+		kf4.offsetXSpeed = 0.1;
+		kf4.offsetYSpeed = 0.1;
+		kf4.offsetX = startOffsetX * 3 / 4;
+		kf4.offsetY = startOffsetY * 3 / 4;
 		kf4.torsoAngle = targetTorsoAngle4;
 		kf4.rightHipAngle = targetRightHip4;
 		kf4.rightKneeAngle = targetRightKnee4;
 		kf4.leftHipAngle = targetLeftHip4;
 		kf4.leftKneeAngle = targetLeftKnee4;
+		kf4.leftElbowAngle = 0.1f;
+		kf4.rightElbowAngle = 0.1f;
 		keyFrames.add(kf4);
 
 		KeyFrame kf5 = new KeyFrame(performer, this);
-		kf5.setAllSpeeds(1);
+		kf5.setAllSpeeds(0.001);
+		kf5.offsetXSpeed = 0.1;
+		kf5.offsetYSpeed = 0.1;
+		kf5.offsetX = startOffsetX * 2 / 4;
+		kf5.offsetY = startOffsetY * 2 / 4;
 		kf5.torsoAngle = targetTorsoAngle5;
 		kf5.rightHipAngle = targetRightHip5;
 		kf5.rightKneeAngle = targetRightKnee5;
 		kf5.leftHipAngle = targetLeftHip5;
 		kf5.leftKneeAngle = targetLeftKnee5;
+		kf5.leftElbowAngle = 0.1f;
+		kf5.rightElbowAngle = 0.1f;
 		keyFrames.add(kf5);
 
 		KeyFrame kf6 = new KeyFrame(performer, this);
-		kf6.setAllSpeeds(1);
+		kf6.setAllSpeeds(0.001);
+		kf6.offsetXSpeed = 0.1;
+		kf6.offsetYSpeed = 0.1;
+		kf6.offsetX = startOffsetX * 1 / 4;
+		kf6.offsetY = startOffsetY * 1 / 4;
 		kf6.torsoAngle = targetTorsoAngle6;
 		kf6.rightHipAngle = targetRightHip6;
 		kf6.rightKneeAngle = targetRightKnee6;
 		kf6.leftHipAngle = targetLeftHip6;
 		kf6.leftKneeAngle = targetLeftKnee6;
+		kf6.leftElbowAngle = 0.1f;
+		kf6.rightElbowAngle = 0.1f;
 		keyFrames.add(kf6);
 
 		KeyFrame kf7 = new KeyFrame(performer, this);
-		kf7.setAllSpeeds(1);
+		kf7.setAllSpeeds(0.001);
+		kf7.offsetXSpeed = 0.1;
+		kf7.offsetYSpeed = 0.1;
+		kf7.offsetX = startOffsetX * 0 / 4;
+		kf7.offsetY = startOffsetY * 0 / 4;
 		kf7.torsoAngle = targetTorsoAngle7;
 		kf7.rightHipAngle = targetRightHip7;
 		kf7.rightKneeAngle = targetRightKnee7;
 		kf7.leftHipAngle = targetLeftHip7;
 		kf7.leftKneeAngle = targetLeftKnee7;
+		kf7.leftElbowAngle = 0.1f;
+		kf7.rightElbowAngle = 0.1f;
 		keyFrames.add(kf7);
 
 	}
 
 	@Override
 	public void update(double delta) {
-
-		if (getCompleted())
-			return;
-		super.update(delta);
-
-		durationSoFar += delta;
-
-		float progress = durationSoFar / durationToReachMillis;
-
-		if (progress >= 1) {
-			progress = 1;
-		}
-
-		// float torsoAngleChange = (float) (0.05d * delta);
-		// offsetY = moveTowardsTargetAngleInRadians(offsetY, offsetYChange, 0);
-		// offsetY = moveTowardsTargetAngleInRadians(offsetY, offsetYChange, 0);
-		// torsoAngle = moveTowardsTargetAngleInRadians(torsoAngleChange,
-		// torsoAngleChange, 0);
-
-		if (progress >= 1) {
-			runCompletionAlgorightm(true);
-			offsetX = 0;
-		} else {
-			offsetX = (int) (startOffsetX * (1 - progress));
-			offsetY = (int) (startOffsetY * (1 - progress));
-		}
-
-		setAngles(progress);
+		keyFrameUpdate(delta);
 	}
 
 	// float frontLegBend = 0.35f;
 	// float backLegBend = 0.10f;
 	// float headBob = 0f;
 
-	int lastKeyFrame = -1;
+	// int lastKeyFrame = -1;
 	float headBobLastKeyFrame = 0;
 	float torsoAngleFromLastKeyFrame = 0;
 	float leftHipAngleFromLastKeyFrame = 0;
 	float leftKneeAngleFromLastKeyFrame = 0;
 	float rightHipAngleFromLastKeyFrame = 0;
 	float rightKneeAngleFromLastKeyFrame = 0;
-
-	public void setAngles(float progress) {
-
-		// arms
-		float intermediateProgress = 0;
-		if (phase == 0 || phase == 2) {
-			// key frames 1,2,3,4
-			if (progress < 0.25f) {
-				// key frame 1
-				keyFrame = 0;
-				intermediateProgress = progress * 4;
-
-			} else if (progress < 0.5f) {
-				// key frame 2
-				keyFrame = 1;
-				intermediateProgress = (progress - 0.25f) * 4;
-			} else if (progress < 0.75f) {
-				// key frame 3
-				keyFrame = 2;
-				intermediateProgress = (progress - 0.5f) * 4;
-			} else if (progress <= 1f) {
-				// key frame 4
-				keyFrame = 3;
-				intermediateProgress = (progress - 0.75f) * 4;
-			}
-
-		} else if (phase == 1 || phase == 3) {
-			// key frames 5,6,7,8
-			if (progress < 0.25f) {
-				// key frame 5
-				keyFrame = 4;
-				intermediateProgress = progress * 4;
-
-			} else if (progress < 0.5f) {
-				// key frame 6
-				keyFrame = 5;
-				intermediateProgress = (progress - 0.25f) * 4;
-			} else if (progress < 0.75f) {
-				// key frame 7
-				keyFrame = 6;
-				intermediateProgress = (progress - 0.5f) * 4;
-			} else if (progress <= 1f) {
-				// key frame 8
-				keyFrame = 7;
-				intermediateProgress = (progress - 0.75f) * 4;
-			}
-
-		}
-
-		if (phase == 0) {
-
-			leftShoulderAngle = 0.2f * progress;
-			rightShoulderAngle = -leftShoulderAngle;
-
-		}
-
-		else if (phase == 1) {
-			leftShoulderAngle = 0.2f * (1f - progress);
-			rightShoulderAngle = -leftShoulderAngle;
-
-		}
-
-		else if (phase == 2) {
-			leftShoulderAngle = 0.2f * -progress;
-			rightShoulderAngle = -leftShoulderAngle;
-		} else if (phase == 3) {
-			leftShoulderAngle = 0.2f * (progress - 1f);
-			rightShoulderAngle = -leftShoulderAngle;
-
-		}
-
-		if (lastKeyFrame != keyFrame) {
-			lastKeyFrame = keyFrame;
-			headBobLastKeyFrame = 0;
-			if (performer.getPrimaryAnimation() instanceof AnimationWalk) {
-				headBobLastKeyFrame = ((AnimationWalk) performer.getPrimaryAnimation()).headBob;
-			}
-			torsoAngleFromLastKeyFrame = performer.getPrimaryAnimation().torsoAngle;
-			leftHipAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftHipAngle;
-			leftKneeAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftKneeAngle;
-			rightHipAngleFromLastKeyFrame = performer.getPrimaryAnimation().rightHipAngle;
-			rightKneeAngleFromLastKeyFrame = performer.getPrimaryAnimation().rightKneeAngle;
-
-			// if (backwards) {
-			// torsoAngleFromLastKeyFrame = -torsoAngleFromLastKeyFrame;
-			//
-			// float temp = rightHipAngleFromLastKeyFrame;
-			// rightHipAngleFromLastKeyFrame = -leftHipAngleFromLastKeyFrame;
-			// leftHipAngleFromLastKeyFrame = -temp;
-			//
-			// temp = rightKneeAngleFromLastKeyFrame;
-			// rightKneeAngleFromLastKeyFrame = -leftKneeAngleFromLastKeyFrame;
-			// leftKneeAngleFromLastKeyFrame = -temp;
-			// }
-		}
-
-		float headBobFromCurrentKeyFrame = targetHeadBobYFrames[keyFrame];
-		float torsoAngleFormCurrentKeyFrame = torsoKeyFrames[keyFrame];
-		float leftHipAngleFormCurrentKeyFrame = leftHipKeyFrames[keyFrame];
-		float leftKneeAngleFormCurrentKeyFrame = leftKneeKeyFrames[keyFrame];
-		float rightHipAngleFormCurrentKeyFrame = rightHipKeyFrames[keyFrame];
-		float rightKneeAngleFormCurrentKeyFrame = rightKneeKeyFrames[keyFrame];
-
-		// if (phase == 2 || phase == 4) {
-
-		float temp = leftHipAngleFormCurrentKeyFrame;
-		leftHipAngleFormCurrentKeyFrame = rightHipAngleFormCurrentKeyFrame;
-		rightHipAngleFormCurrentKeyFrame = temp;
-
-		temp = leftKneeAngleFormCurrentKeyFrame;
-		leftKneeAngleFormCurrentKeyFrame = rightKneeAngleFormCurrentKeyFrame;
-		rightKneeAngleFormCurrentKeyFrame = temp;
-
-		// }
-
-		if (backwards) {
-			torsoAngleFormCurrentKeyFrame = -torsoAngleFormCurrentKeyFrame;
-
-			temp = rightHipAngleFormCurrentKeyFrame;
-			rightHipAngleFormCurrentKeyFrame = -leftHipAngleFormCurrentKeyFrame;
-			leftHipAngleFormCurrentKeyFrame = -temp;
-
-			temp = rightKneeAngleFormCurrentKeyFrame;
-			rightKneeAngleFormCurrentKeyFrame = -leftKneeAngleFormCurrentKeyFrame;
-			leftKneeAngleFormCurrentKeyFrame = -temp;
-		}
-
-		headBob = headBobLastKeyFrame + intermediateProgress * (headBobFromCurrentKeyFrame - headBobLastKeyFrame);
-		offsetY += headBob;
-
-		torsoAngle = torsoAngleFromLastKeyFrame
-				+ intermediateProgress * (torsoAngleFormCurrentKeyFrame - torsoAngleFromLastKeyFrame);
-		leftHipAngle = leftHipAngleFromLastKeyFrame
-				+ intermediateProgress * (leftHipAngleFormCurrentKeyFrame - leftHipAngleFromLastKeyFrame);
-		leftKneeAngle = leftKneeAngleFromLastKeyFrame
-				+ intermediateProgress * (leftKneeAngleFormCurrentKeyFrame - leftKneeAngleFromLastKeyFrame);
-		rightHipAngle = rightHipAngleFromLastKeyFrame
-				+ intermediateProgress * (rightHipAngleFormCurrentKeyFrame - rightHipAngleFromLastKeyFrame);
-		rightKneeAngle = rightKneeAngleFromLastKeyFrame
-				+ intermediateProgress * (rightKneeAngleFormCurrentKeyFrame - rightKneeAngleFromLastKeyFrame);
-
-		// if (phase == 2 || phase == 4) {
-		//
-		//
-		// float temp = leftHipAngle;
-		// leftHipAngle = rightHipAngle;
-		// rightHipAngle = temp;
-		//
-		// temp = leftKneeAngle;
-		// leftKneeAngle = rightKneeAngle;
-		// rightKneeAngle = temp;
-		//
-		// }
-		if (backwards) {
-
-			leftElbowAngle = 0.1f;
-			rightElbowAngle = 0.1f;
-		} else {
-
-			leftElbowAngle = -0.1f;
-			rightElbowAngle = -0.1f;
-
-		}
-
-		// if (backwards) {
-		//
-		// reverseAnimation();
-		// }
-
-	}
 
 	@Override
 	public void draw2() {
@@ -461,8 +312,7 @@ public class AnimationWalk extends Animation {
 	@Override
 	public void draw1() {
 		TextUtils.printTextWithImages(performer.squareGameObjectIsOn.xInGridPixels,
-				performer.squareGameObjectIsOn.yInGridPixels, Integer.MAX_VALUE, false, null, Color.WHITE,
-				"" + keyFrame);
+				performer.squareGameObjectIsOn.yInGridPixels, Integer.MAX_VALUE, false, null, Color.WHITE, "" + phase);
 	}
 
 	@Override
