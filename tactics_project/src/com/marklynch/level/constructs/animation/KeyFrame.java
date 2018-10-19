@@ -61,12 +61,20 @@ public class KeyFrame {
 	public double boundsY2Speed = 1;
 
 	Animation animation;
+	GameObject performer;
 
 	public boolean done = false;
 	public boolean normaliseSpeeds = false;
 
 	public KeyFrame(GameObject performer, Animation animation) {
 		this.animation = animation;
+		this.performer = performer;
+		copyPositions();
+
+	}
+
+	public void copyPositions() {
+
 		if (performer != null && performer.getPrimaryAnimation() != null) {
 
 			this.offsetX = performer.getPrimaryAnimation().offsetX;
@@ -248,23 +256,44 @@ public class KeyFrame {
 				millisToCompleteleftHipAngle, millisToCompleterightHipAngle, millisToCompleteleftKneeAngle,
 				millisToCompleterightKneeAngle);
 
-		offsetXSpeed = offsetXSpeed * maxMillis / millisToCompleteOffsetX;
-		offsetYSpeed = offsetYSpeed * maxMillis / millisToCompleteOffsetX;
-		scaleXSpeed = scaleXSpeed * maxMillis / millisToCompleteOffsetX;
-		scaleYSpeed = scaleYSpeed * maxMillis / millisToCompleteOffsetX;
-		boundsX1Speed = boundsX1Speed * maxMillis / millisToCompleteOffsetX;
-		boundsY1Speed = boundsY1Speed * maxMillis / millisToCompleteOffsetX;
-		boundsX2Speed = boundsX2Speed * maxMillis / millisToCompleteOffsetX;
-		boundsY2Speed = boundsY2Speed * maxMillis / millisToCompleteOffsetX;
-		torsoAngleSpeed = torsoAngleSpeed * maxMillis / millisToCompleteOffsetX;
-		leftShoulderAngleSpeed = leftShoulderAngleSpeed * maxMillis / millisToCompleteOffsetX;
-		rightShoulderAngleSpeed = rightShoulderAngleSpeed * maxMillis / millisToCompleteOffsetX;
-		leftElbowAngleSpeed = leftElbowAngleSpeed * maxMillis / millisToCompleteOffsetX;
-		rightElbowAngleSpeed = rightElbowAngleSpeed * maxMillis / millisToCompleteOffsetX;
-		leftHipAngleSpeed = leftHipAngleSpeed * maxMillis / millisToCompleteOffsetX;
-		rightHipAngleSpeed = rightHipAngleSpeed * maxMillis / millisToCompleteOffsetX;
-		leftKneeAngleSpeed = leftKneeAngleSpeed * maxMillis / millisToCompleteOffsetX;
-		rightKneeAngleSpeed = rightKneeAngleSpeed * maxMillis / millisToCompleteOffsetX;
+		System.out.println("maxMillis = " + maxMillis);
+
+		if (millisToCompleteOffsetX != 0)
+			offsetXSpeed = offsetXSpeed * maxMillis / millisToCompleteOffsetX;
+		System.out.println("millisToCompleteOffsetX = " + millisToCompleteOffsetX);
+		System.out.println("offsetXSpeed = " + offsetXSpeed);
+		if (millisToCompleteOffsetY != 0)
+			offsetYSpeed = offsetYSpeed * maxMillis / millisToCompleteOffsetY;
+		if (millisToCompletescaleX != 0)
+			scaleXSpeed = scaleXSpeed * maxMillis / millisToCompletescaleX;
+		if (millisToCompletescaleY != 0)
+			scaleYSpeed = scaleYSpeed * maxMillis / millisToCompletescaleY;
+		if (millisToCompleteboundsX1 != 0)
+			boundsX1Speed = boundsX1Speed * maxMillis / millisToCompleteboundsX1;
+		if (millisToCompleteboundsY1 != 0)
+			boundsY1Speed = boundsY1Speed * maxMillis / millisToCompleteboundsY1;
+		if (millisToCompleteboundsX2 != 0)
+			boundsX2Speed = boundsX2Speed * maxMillis / millisToCompleteboundsX2;
+		if (millisToCompleteboundsY2 != 0)
+			boundsY2Speed = boundsY2Speed * maxMillis / millisToCompleteboundsY2;
+		if (millisToCompletetorsoAngle != 0)
+			torsoAngleSpeed = torsoAngleSpeed * maxMillis / millisToCompletetorsoAngle;
+		if (millisToCompleteleftShoulderAngle != 0)
+			leftShoulderAngleSpeed = leftShoulderAngleSpeed * maxMillis / millisToCompleteleftShoulderAngle;
+		if (millisToCompleterightShoulderAngle != 0)
+			rightShoulderAngleSpeed = rightShoulderAngleSpeed * maxMillis / millisToCompleterightShoulderAngle;
+		if (millisToCompleteleftElbowAngle != 0)
+			leftElbowAngleSpeed = leftElbowAngleSpeed * maxMillis / millisToCompleteleftElbowAngle;
+		if (millisToCompleterightElbowAngle != 0)
+			rightElbowAngleSpeed = rightElbowAngleSpeed * maxMillis / millisToCompleterightElbowAngle;
+		if (millisToCompleteleftHipAngle != 0)
+			leftHipAngleSpeed = leftHipAngleSpeed * maxMillis / millisToCompleteleftHipAngle;
+		if (millisToCompleterightHipAngle != 0)
+			rightHipAngleSpeed = rightHipAngleSpeed * maxMillis / millisToCompleterightHipAngle;
+		if (millisToCompleteleftKneeAngle != 0)
+			leftKneeAngleSpeed = leftKneeAngleSpeed * maxMillis / millisToCompleteleftKneeAngle;
+		if (millisToCompleterightKneeAngle != 0)
+			rightKneeAngleSpeed = rightKneeAngleSpeed * maxMillis / millisToCompleterightKneeAngle;
 
 	}
 
@@ -274,9 +303,11 @@ public class KeyFrame {
 			return Double.MIN_VALUE;
 
 		double currentMax = values[0];
+		System.out.println("values[0] = " + values[0]);
 
 		for (int i = 1; i < values.length; i++) {
-			currentMax = Math.max(values[i - 1], values[i]);
+			System.out.println("values[i] = " + values[i]);
+			currentMax = Math.max(currentMax, values[i]);
 		}
 
 		return currentMax;

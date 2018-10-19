@@ -75,7 +75,7 @@ public abstract class Animation {
 
 	public Animation(GameObject performer, Object... objectsInvolved) {
 
-		runAnimation = Game.level.shouldLog(objectsInvolved, false);
+		runAnimation = Game.level.shouldLog(objectsInvolved, false) && performer == Game.level.player;
 		if (!runAnimation) {
 			runCompletionAlgorightm(true);
 			return;
@@ -224,6 +224,9 @@ public abstract class Animation {
 
 			if (phase < keyFrames.size()) {
 				keyFrames.get(phase).normaliseSpeeds();
+				// keyFrames.get(phase).copyPositions(); can't do this here coz it'll overwrite
+				// what I've already set :/
+
 			}
 		}
 
