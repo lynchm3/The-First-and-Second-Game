@@ -214,7 +214,8 @@ public abstract class Animation {
 			return;
 
 		if (firstUpdate) {
-			keyFrames.get(0).createSpeeds(100);
+			System.out.println("calling keyFrames.get(0).createSpeeds()");
+			keyFrames.get(0).createSpeeds();
 			firstUpdate = false;
 		}
 
@@ -231,7 +232,8 @@ public abstract class Animation {
 
 			if (phase < keyFrames.size()) {
 				// keyFrames.get(phase).normaliseSpeeds();
-				keyFrames.get(phase).createSpeeds(100);
+				System.out.println("calling keyFrames.get(" + phase + ").createSpeeds()");
+				keyFrames.get(phase).createSpeeds();
 				// keyFrames.get(phase).copyPositions(); can't do this here coz it'll overwrite
 				// what I've already set :/
 
@@ -249,6 +251,19 @@ public abstract class Animation {
 
 	public static interface OnCompletionListener {
 		public void animationComplete(GameObject gameObject);
+	}
+
+	public void swapLegs() {
+		for (KeyFrame keyFrame : keyFrames) {
+			double temp = keyFrame.leftKneeAngle;
+			keyFrame.leftKneeAngle = keyFrame.rightKneeAngle;
+			keyFrame.rightKneeAngle = temp;
+
+			temp = keyFrame.leftHipAngle;
+			keyFrame.leftHipAngle = keyFrame.rightHipAngle;
+			keyFrame.rightHipAngle = temp;
+		}
+
 	}
 
 }

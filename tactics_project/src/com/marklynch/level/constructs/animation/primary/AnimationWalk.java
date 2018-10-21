@@ -5,8 +5,6 @@ import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.utils.Color;
-import com.marklynch.utils.TextUtils;
 
 public class AnimationWalk extends Animation {
 
@@ -121,72 +119,21 @@ public class AnimationWalk extends Animation {
 		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
-		// if (phase == 0 || phase == 2) {
-		// offsetY += 0f;
-		// } else {
-		// offsetY += headBob;
-		//
-		// }
-
-		if (walkingPhase == 0 || walkingPhase == 2) {
-
-		} else {
-
-		}
-
 		backwards = performer.backwards;
-		headBobLastKeyFrame = 0;
-		if (performer.getPrimaryAnimation() instanceof AnimationWalk) {
-			headBobLastKeyFrame = ((AnimationWalk) performer.getPrimaryAnimation()).headBob;
-		}
-
-		torsoAngleFromLastKeyFrame = performer.getPrimaryAnimation().torsoAngle;
-		leftHipAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftHipAngle;
-		leftKneeAngleFromLastKeyFrame = performer.getPrimaryAnimation().leftKneeAngle;
-		rightHipAngleFromLastKeyFrame = performer.getPrimaryAnimation().rightHipAngle;
-		rightKneeAngleFromLastKeyFrame = performer.getPrimaryAnimation().rightKneeAngle;
-		// if (backwards) {
-		// torsoAngleFromLastKeyFrame = -torsoAngleFromLastKeyFrame;
-		//
-		// float temp = rightHipAngleFromLastKeyFrame;
-		// rightHipAngleFromLastKeyFrame = -leftHipAngleFromLastKeyFrame;
-		// leftHipAngleFromLastKeyFrame = -temp;
-		//
-		// temp = rightKneeAngleFromLastKeyFrame;
-		// rightKneeAngleFromLastKeyFrame = -leftKneeAngleFromLastKeyFrame;
-		// leftKneeAngleFromLastKeyFrame = -temp;
-		// }
 
 		blockAI = false;
 
-		// this.phase = walkingPhase;
-		// setAngles(0f);
-
+		System.out.println("walkingPhase = " + walkingPhase);
 		if (walkingPhase == 0) {
 			setUpWalkPart0();
-
-		} else if (walkingPhase == 1) {// 1 or 3
+		} else if (walkingPhase == 1) {
 			setUpWalkPart1();
-
-		} else if (walkingPhase == 2) {// 1 or 3
+		} else if (walkingPhase == 2) {
 			setUpWalkPart0();
 			swapLegs();
-		} else {// 1 or 3
+		} else if (walkingPhase == 3) {
 			setUpWalkPart1();
 			swapLegs();
-		}
-
-	}
-
-	private void swapLegs() {
-		for (KeyFrame keyFrame : keyFrames) {
-			float temp = keyFrame.leftKneeAngle;
-			keyFrame.leftKneeAngle = keyFrame.rightKneeAngle;
-			keyFrame.rightKneeAngle = temp;
-
-			temp = keyFrame.leftHipAngle;
-			keyFrame.leftHipAngle = keyFrame.rightHipAngle;
-			keyFrame.rightHipAngle = temp;
 		}
 
 	}
@@ -196,12 +143,12 @@ public class AnimationWalk extends Animation {
 		keyFrameUpdate(delta);
 	}
 
+	public double keyFramTimeMillis = 100;
+
 	public void setUpWalkPart0() {
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
-		kf0.setAllSpeeds(0.001);
-		kf0.offsetXSpeed = 0.1;
-		kf0.offsetYSpeed = 0.1;
+		kf0.keyFrameTimeMillis = keyFramTimeMillis;
 		kf0.offsetX = startOffsetX * 3 / 4;
 		kf0.offsetY = startOffsetY * 3 / 4;
 		kf0.torsoAngle = targetTorsoAngle0;
@@ -215,9 +162,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf0);
 
 		KeyFrame kf1 = new KeyFrame(performer, this);
-		kf1.setAllSpeeds(0.001);
-		kf1.offsetXSpeed = 0.1;
-		kf1.offsetYSpeed = 0.1;
+		kf1.keyFrameTimeMillis = keyFramTimeMillis;
 		kf1.offsetX = startOffsetX * 2 / 4;
 		kf1.offsetY = startOffsetY * 2 / 4;
 		kf1.torsoAngle = targetTorsoAngle1;
@@ -231,9 +176,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf1);
 
 		KeyFrame kf2 = new KeyFrame(performer, this);
-		kf2.setAllSpeeds(0.001);
-		kf2.offsetXSpeed = 0.1;
-		kf2.offsetYSpeed = 0.1;
+		kf2.keyFrameTimeMillis = keyFramTimeMillis;
 		kf2.offsetX = startOffsetX * 1 / 4;
 		kf2.offsetY = startOffsetY * 1 / 4;
 		kf2.torsoAngle = targetTorsoAngle2;
@@ -247,9 +190,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf2);
 
 		KeyFrame kf3 = new KeyFrame(performer, this);
-		kf3.setAllSpeeds(0.001);
-		kf3.offsetXSpeed = 0.1;
-		kf3.offsetYSpeed = 0.1;
+		kf3.keyFrameTimeMillis = keyFramTimeMillis;
 		kf3.offsetX = startOffsetX * 0 / 4;
 		kf3.offsetY = startOffsetY * 0 / 4;
 		kf3.torsoAngle = targetTorsoAngle3;
@@ -267,9 +208,7 @@ public class AnimationWalk extends Animation {
 	public void setUpWalkPart1() {
 
 		KeyFrame kf4 = new KeyFrame(performer, this);
-		kf4.setAllSpeeds(0.001);
-		kf4.offsetXSpeed = 0.1;
-		kf4.offsetYSpeed = 0.1;
+		kf4.keyFrameTimeMillis = keyFramTimeMillis;
 		kf4.offsetX = startOffsetX * 3 / 4;
 		kf4.offsetY = startOffsetY * 3 / 4;
 		kf4.torsoAngle = targetTorsoAngle4;
@@ -283,9 +222,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf4);
 
 		KeyFrame kf5 = new KeyFrame(performer, this);
-		kf5.setAllSpeeds(0.001);
-		kf5.offsetXSpeed = 0.1;
-		kf5.offsetYSpeed = 0.1;
+		kf5.keyFrameTimeMillis = keyFramTimeMillis;
 		kf5.offsetX = startOffsetX * 2 / 4;
 		kf5.offsetY = startOffsetY * 2 / 4;
 		kf5.torsoAngle = targetTorsoAngle5;
@@ -299,9 +236,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf5);
 
 		KeyFrame kf6 = new KeyFrame(performer, this);
-		kf6.setAllSpeeds(0.001);
-		kf6.offsetXSpeed = 0.1;
-		kf6.offsetYSpeed = 0.1;
+		kf6.keyFrameTimeMillis = keyFramTimeMillis;
 		kf6.offsetX = startOffsetX * 1 / 4;
 		kf6.offsetY = startOffsetY * 1 / 4;
 		kf6.torsoAngle = targetTorsoAngle6;
@@ -315,9 +250,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf6);
 
 		KeyFrame kf7 = new KeyFrame(performer, this);
-		kf7.setAllSpeeds(0.001);
-		kf7.offsetXSpeed = 0.1;
-		kf7.offsetYSpeed = 0.1;
+		kf7.keyFrameTimeMillis = keyFramTimeMillis;
 		kf7.offsetX = startOffsetX * 0 / 4;
 		kf7.offsetY = startOffsetY * 0 / 4;
 		kf7.torsoAngle = targetTorsoAngle7;
@@ -353,8 +286,9 @@ public class AnimationWalk extends Animation {
 
 	@Override
 	public void draw1() {
-		TextUtils.printTextWithImages(performer.squareGameObjectIsOn.xInGridPixels,
-				performer.squareGameObjectIsOn.yInGridPixels, Integer.MAX_VALUE, false, null, Color.WHITE, "" + phase);
+		// TextUtils.printTextWithImages(performer.squareGameObjectIsOn.xInGridPixels,
+		// performer.squareGameObjectIsOn.yInGridPixels, Integer.MAX_VALUE, false, null,
+		// Color.WHITE, "" + phase);
 	}
 
 	@Override
