@@ -170,11 +170,24 @@ public class AnimationWalk extends Animation {
 
 		} else if (walkingPhase == 2) {// 1 or 3
 			setUpWalkPart0();
+			swapLegs();
 		} else {// 1 or 3
 			setUpWalkPart1();
+			swapLegs();
 		}
 
-		keyFrames.get(0).createSpeeds(1000);
+	}
+
+	private void swapLegs() {
+		for (KeyFrame keyFrame : keyFrames) {
+			float temp = keyFrame.leftKneeAngle;
+			keyFrame.leftKneeAngle = keyFrame.rightKneeAngle;
+			keyFrame.rightKneeAngle = temp;
+
+			temp = keyFrame.leftHipAngle;
+			keyFrame.leftHipAngle = keyFrame.rightHipAngle;
+			keyFrame.rightHipAngle = temp;
+		}
 
 	}
 

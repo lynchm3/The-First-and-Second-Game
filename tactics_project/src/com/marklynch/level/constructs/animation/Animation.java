@@ -206,10 +206,17 @@ public abstract class Animation {
 		// } else
 	}
 
+	public boolean firstUpdate = true;
+
 	public void keyFrameUpdate(double delta) {
 
 		if (getCompleted())
 			return;
+
+		if (firstUpdate) {
+			keyFrames.get(0).createSpeeds(100);
+			firstUpdate = false;
+		}
 
 		float alphaChange = (float) (0.002d * delta);
 		float targetAlpha = 1f;
@@ -224,7 +231,7 @@ public abstract class Animation {
 
 			if (phase < keyFrames.size()) {
 				// keyFrames.get(phase).normaliseSpeeds();
-				keyFrames.get(phase).createSpeeds(1000);
+				keyFrames.get(phase).createSpeeds(100);
 				// keyFrames.get(phase).copyPositions(); can't do this here coz it'll overwrite
 				// what I've already set :/
 
