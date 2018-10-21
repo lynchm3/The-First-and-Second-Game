@@ -219,9 +219,44 @@ public class KeyFrame {
 
 	}
 
+	public void createSpeeds(double millisToRun) {
+		if (!normaliseSpeeds)
+			return;
+
+		System.out.println("===================createSpeeds()==========================");
+
+		double distanceToCoverOffsetX = Math.abs(animation.offsetX - offsetX);
+		double distanceToCoverOffsetY = Math.abs(animation.offsetY - offsetY);
+		double distanceToCoverscaleX = Math.abs(animation.scaleX - scaleX);
+		double distanceToCoverscaleY = Math.abs(animation.scaleY - scaleY);
+		double distanceToCoverboundsX1 = Math.abs(animation.boundsX1 - boundsX1);
+		double distanceToCoverboundsY1 = Math.abs(animation.boundsY1 - boundsY1);
+		double distanceToCoverboundsX2 = Math.abs(animation.boundsX2 - boundsX2);
+		double distanceToCoverboundsY2 = Math.abs(animation.boundsY2 - boundsY2);
+		double distanceToCovertorsoAngle = Math.abs(animation.torsoAngle - torsoAngle);
+		double distanceToCoverleftShoulderAngle = Math.abs(animation.leftShoulderAngle - leftShoulderAngle);
+		double distanceToCoverrightShoulderAngle = Math.abs(animation.rightShoulderAngle - rightShoulderAngle);
+		double distanceToCoverleftElbowAngle = Math.abs(animation.leftElbowAngle - leftElbowAngle);
+		double distanceToCoverrightElbowAngle = Math.abs(animation.rightElbowAngle - rightElbowAngle);
+		double distanceToCoverleftHipAngle = Math.abs(animation.leftHipAngle - leftHipAngle);
+		double distanceToCoverrightHipAngle = Math.abs(animation.leftHipAngle - rightHipAngle);
+		double distanceToCoverleftKneeAngle = Math.abs(animation.leftKneeAngle - leftKneeAngle);
+		double distanceToCoverrightKneeAngle = Math.abs(animation.rightKneeAngle - rightKneeAngle);
+
+		offsetXSpeed = distanceToCoverOffsetX / millisToRun;
+		offsetYSpeed = distanceToCoverOffsetY / millisToRun;
+		leftHipAngleSpeed = distanceToCoverleftHipAngle / millisToRun;
+		rightHipAngleSpeed = distanceToCoverrightHipAngle / millisToRun;
+		leftKneeAngleSpeed = distanceToCoverleftKneeAngle / millisToRun;
+		rightKneeAngleSpeed = distanceToCoverrightKneeAngle / millisToRun;
+
+	}
+
 	public void normaliseSpeeds() {
 		if (!normaliseSpeeds)
 			return;
+
+		System.out.println("===================normaliseSpeeds()==========================");
 
 		double millisToCompleteOffsetX = Math.abs(animation.offsetX - offsetX) / Math.abs(offsetXSpeed);
 		double millisToCompleteOffsetY = Math.abs(animation.offsetY - offsetY) / Math.abs(offsetYSpeed);
@@ -261,43 +296,73 @@ public class KeyFrame {
 		System.out.println("maxMillis = " + maxMillis);
 
 		if (millisToCompleteOffsetX != 0)
-			offsetXSpeed = offsetXSpeed *   millisToCompleteOffsetX/ maxMillis;
+			offsetXSpeed = offsetXSpeed * millisToCompleteOffsetX / maxMillis;
 		System.out.println("millisToCompleteOffsetX = " + millisToCompleteOffsetX);
 		System.out.println("offsetXSpeed = " + offsetXSpeed);
 		if (millisToCompleteOffsetY != 0)
-			offsetYSpeed = offsetYSpeed * millisToCompleteOffsetY / maxMillis ;
+			offsetYSpeed = offsetYSpeed * millisToCompleteOffsetY / maxMillis;
 		if (millisToCompletescaleX != 0)
-			scaleXSpeed = scaleXSpeed *   millisToCompletescaleX/ maxMillis;
+			scaleXSpeed = scaleXSpeed * millisToCompletescaleX / maxMillis;
 		if (millisToCompletescaleY != 0)
-			scaleYSpeed = scaleYSpeed *  millisToCompletescaleY / maxMillis;
+			scaleYSpeed = scaleYSpeed * millisToCompletescaleY / maxMillis;
 		if (millisToCompleteboundsX1 != 0)
-			boundsX1Speed = boundsX1Speed *  millisToCompleteboundsX1 / maxMillis;
+			boundsX1Speed = boundsX1Speed * millisToCompleteboundsX1 / maxMillis;
 		if (millisToCompleteboundsY1 != 0)
-			boundsY1Speed = boundsY1Speed *  millisToCompleteboundsY1 / maxMillis;
+			boundsY1Speed = boundsY1Speed * millisToCompleteboundsY1 / maxMillis;
 		if (millisToCompleteboundsX2 != 0)
-			boundsX2Speed = boundsX2Speed *   millisToCompleteboundsX2/ maxMillis;
+			boundsX2Speed = boundsX2Speed * millisToCompleteboundsX2 / maxMillis;
 		if (millisToCompleteboundsY2 != 0)
-			boundsY2Speed = boundsY2Speed *  millisToCompleteboundsY2/ maxMillis ;
+			boundsY2Speed = boundsY2Speed * millisToCompleteboundsY2 / maxMillis;
 		if (millisToCompletetorsoAngle != 0)
-			torsoAngleSpeed = torsoAngleSpeed *  millisToCompletetorsoAngle / maxMillis;
+			torsoAngleSpeed = torsoAngleSpeed * millisToCompletetorsoAngle / maxMillis;
 		if (millisToCompleteleftShoulderAngle != 0)
-			leftShoulderAngleSpeed = leftShoulderAngleSpeed * millisToCompleteleftShoulderAngle  / maxMillis;
+			leftShoulderAngleSpeed = leftShoulderAngleSpeed * millisToCompleteleftShoulderAngle / maxMillis;
 		if (millisToCompleterightShoulderAngle != 0)
-			rightShoulderAngleSpeed = rightShoulderAngleSpeed * millisToCompleterightShoulderAngle / maxMillis ;
+			rightShoulderAngleSpeed = rightShoulderAngleSpeed * millisToCompleterightShoulderAngle / maxMillis;
 		if (millisToCompleteleftElbowAngle != 0)
-			leftElbowAngleSpeed = leftElbowAngleSpeed * millisToCompleteleftElbowAngle  / maxMillis;
+			leftElbowAngleSpeed = leftElbowAngleSpeed * millisToCompleteleftElbowAngle / maxMillis;
 		if (millisToCompleterightElbowAngle != 0)
-			rightElbowAngleSpeed = rightElbowAngleSpeed *  millisToCompleterightElbowAngle / maxMillis;
+			rightElbowAngleSpeed = rightElbowAngleSpeed * millisToCompleterightElbowAngle / maxMillis;
 		if (millisToCompleteleftHipAngle != 0)
-			leftHipAngleSpeed = leftHipAngleSpeed *  millisToCompleteleftHipAngle / maxMillis;
+			leftHipAngleSpeed = leftHipAngleSpeed * millisToCompleteleftHipAngle / maxMillis;
 		if (millisToCompleterightHipAngle != 0)
-			rightHipAngleSpeed = rightHipAngleSpeed *millisToCompleterightHipAngle  / maxMillis ;
+			rightHipAngleSpeed = rightHipAngleSpeed * millisToCompleterightHipAngle / maxMillis;
 		if (millisToCompleteleftKneeAngle != 0)
-			leftKneeAngleSpeed = leftKneeAngleSpeed * millisToCompleteleftKneeAngle / maxMillis ;
+			leftKneeAngleSpeed = leftKneeAngleSpeed * millisToCompleteleftKneeAngle / maxMillis;
 		if (millisToCompleterightKneeAngle != 0)
 			rightKneeAngleSpeed = rightKneeAngleSpeed * millisToCompleterightKneeAngle / maxMillis;
 
 		System.out.println("rightKneeAngleSpeed after = " + rightKneeAngleSpeed);
+		millisToCompleteOffsetX = Math.abs(animation.offsetX - offsetX) / Math.abs(offsetXSpeed);
+		millisToCompleteOffsetY = Math.abs(animation.offsetY - offsetY) / Math.abs(offsetYSpeed);
+		millisToCompletescaleX = Math.abs(animation.scaleX - scaleX) / Math.abs(scaleXSpeed);
+		millisToCompletescaleY = Math.abs(animation.scaleY - scaleY) / Math.abs(scaleYSpeed);
+		millisToCompleteboundsX1 = Math.abs(animation.boundsX1 - boundsX1) / Math.abs(boundsX1Speed);
+		millisToCompleteboundsY1 = Math.abs(animation.boundsY1 - boundsY1) / Math.abs(boundsY1Speed);
+		millisToCompleteboundsX2 = Math.abs(animation.boundsX2 - boundsX2) / Math.abs(boundsX2Speed);
+		millisToCompleteboundsY2 = Math.abs(animation.boundsY2 - boundsY2) / Math.abs(boundsY2Speed);
+		millisToCompletetorsoAngle = Math.abs(animation.torsoAngle - torsoAngle) / Math.abs(torsoAngleSpeed);
+		millisToCompleteleftShoulderAngle = Math.abs(animation.leftShoulderAngle - leftShoulderAngle)
+				/ Math.abs(leftShoulderAngleSpeed);
+		millisToCompleterightShoulderAngle = Math.abs(animation.rightShoulderAngle - rightShoulderAngle)
+				/ Math.abs(rightShoulderAngleSpeed);
+		millisToCompleteleftElbowAngle = Math.abs(animation.leftElbowAngle - leftElbowAngle)
+				/ Math.abs(leftElbowAngleSpeed);
+		millisToCompleterightElbowAngle = Math.abs(animation.rightElbowAngle - rightElbowAngle)
+				/ Math.abs(rightElbowAngleSpeed);
+		millisToCompleteleftHipAngle = Math.abs(animation.leftHipAngle - leftHipAngle) / Math.abs(leftHipAngleSpeed);
+		millisToCompleterightHipAngle = Math.abs(animation.leftHipAngle - rightHipAngle) / Math.abs(rightHipAngleSpeed);
+		millisToCompleteleftKneeAngle = Math.abs(animation.leftKneeAngle - leftKneeAngle)
+				/ Math.abs(leftKneeAngleSpeed);
+		millisToCompleterightKneeAngle = Math.abs(animation.rightKneeAngle - rightKneeAngle)
+				/ Math.abs(rightKneeAngleSpeed);
+
+		System.out.println("millisToCompleteOffsetX after = " + millisToCompleteOffsetX);
+		System.out.println("millisToCompleteOffsetY after = " + millisToCompleteOffsetY);
+		System.out.println("millisToCompleteleftHipAngle after = " + millisToCompleteleftHipAngle);
+		System.out.println("millisToCompleterightHipAngle after = " + millisToCompleterightHipAngle);
+		System.out.println("millisToCompleteleftKneeAngle after = " + millisToCompleteleftKneeAngle);
+		System.out.println("millisToCompleterightKneeAngle after = " + millisToCompleterightKneeAngle);
 
 	}
 

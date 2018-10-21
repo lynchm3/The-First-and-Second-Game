@@ -223,7 +223,8 @@ public abstract class Animation {
 			phase++;
 
 			if (phase < keyFrames.size()) {
-				keyFrames.get(phase).normaliseSpeeds();
+				// keyFrames.get(phase).normaliseSpeeds();
+				keyFrames.get(phase).createSpeeds(1000);
 				// keyFrames.get(phase).copyPositions(); can't do this here coz it'll overwrite
 				// what I've already set :/
 

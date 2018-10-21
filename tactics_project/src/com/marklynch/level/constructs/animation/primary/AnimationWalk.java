@@ -174,6 +174,8 @@ public class AnimationWalk extends Animation {
 			setUpWalkPart1();
 		}
 
+		keyFrames.get(0).createSpeeds(1000);
+
 	}
 
 	@Override
@@ -185,7 +187,7 @@ public class AnimationWalk extends Animation {
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
 		kf0.setAllSpeeds(0.001);
-		kf0.offsetXSpeed = 0.01;
+		kf0.offsetXSpeed = 0.1;
 		kf0.offsetYSpeed = 0.1;
 		kf0.offsetX = startOffsetX * 3 / 4;
 		kf0.offsetY = startOffsetY * 3 / 4;
@@ -194,14 +196,14 @@ public class AnimationWalk extends Animation {
 		kf0.rightKneeAngle = targetRightKnee0;
 		kf0.leftHipAngle = targetLeftHip0;
 		kf0.leftKneeAngle = targetLeftKnee0;
-		kf0.leftElbowAngle = 0.1f;
-		kf0.rightElbowAngle = 0.1f;
+		kf0.leftElbowAngle = -0.1f;
+		kf0.rightElbowAngle = -0.1f;
 		kf0.normaliseSpeeds = true;
 		keyFrames.add(kf0);
 
 		KeyFrame kf1 = new KeyFrame(performer, this);
 		kf1.setAllSpeeds(0.001);
-		kf1.offsetXSpeed = 0.01;
+		kf1.offsetXSpeed = 0.1;
 		kf1.offsetYSpeed = 0.1;
 		kf1.offsetX = startOffsetX * 2 / 4;
 		kf1.offsetY = startOffsetY * 2 / 4;
@@ -210,14 +212,14 @@ public class AnimationWalk extends Animation {
 		kf1.rightKneeAngle = targetRightKnee1;
 		kf1.leftHipAngle = targetLeftHip1;
 		kf1.leftKneeAngle = targetLeftKnee1;
-		kf1.leftElbowAngle = 0.1f;
-		kf1.rightElbowAngle = 0.1f;
+		kf1.leftElbowAngle = -0.1f;
+		kf1.rightElbowAngle = -0.1f;
 		kf1.normaliseSpeeds = true;
 		keyFrames.add(kf1);
 
 		KeyFrame kf2 = new KeyFrame(performer, this);
 		kf2.setAllSpeeds(0.001);
-		kf2.offsetXSpeed = 0.01;
+		kf2.offsetXSpeed = 0.1;
 		kf2.offsetYSpeed = 0.1;
 		kf2.offsetX = startOffsetX * 1 / 4;
 		kf2.offsetY = startOffsetY * 1 / 4;
@@ -226,14 +228,14 @@ public class AnimationWalk extends Animation {
 		kf2.rightKneeAngle = targetRightKnee2;
 		kf2.leftHipAngle = targetLeftHip2;
 		kf2.leftKneeAngle = targetLeftKnee2;
-		kf2.leftElbowAngle = 0.1f;
-		kf2.rightElbowAngle = 0.1f;
+		kf2.leftElbowAngle = -0.1f;
+		kf2.rightElbowAngle = -0.1f;
 		kf2.normaliseSpeeds = true;
 		keyFrames.add(kf2);
 
 		KeyFrame kf3 = new KeyFrame(performer, this);
 		kf3.setAllSpeeds(0.001);
-		kf3.offsetXSpeed = 0.01;
+		kf3.offsetXSpeed = 0.1;
 		kf3.offsetYSpeed = 0.1;
 		kf3.offsetX = startOffsetX * 0 / 4;
 		kf3.offsetY = startOffsetY * 0 / 4;
@@ -242,8 +244,8 @@ public class AnimationWalk extends Animation {
 		kf3.rightKneeAngle = targetRightKnee3;
 		kf3.leftHipAngle = targetLeftHip3;
 		kf3.leftKneeAngle = targetLeftKnee3;
-		kf3.leftElbowAngle = 0.1f;
-		kf3.rightElbowAngle = 0.1f;
+		kf3.leftElbowAngle = -0.1f;
+		kf3.rightElbowAngle = -0.1f;
 		kf3.normaliseSpeeds = true;
 		keyFrames.add(kf3);
 
@@ -253,7 +255,7 @@ public class AnimationWalk extends Animation {
 
 		KeyFrame kf4 = new KeyFrame(performer, this);
 		kf4.setAllSpeeds(0.001);
-		kf4.offsetXSpeed = 0.01;
+		kf4.offsetXSpeed = 0.1;
 		kf4.offsetYSpeed = 0.1;
 		kf4.offsetX = startOffsetX * 3 / 4;
 		kf4.offsetY = startOffsetY * 3 / 4;
@@ -262,14 +264,14 @@ public class AnimationWalk extends Animation {
 		kf4.rightKneeAngle = targetRightKnee4;
 		kf4.leftHipAngle = targetLeftHip4;
 		kf4.leftKneeAngle = targetLeftKnee4;
-		kf4.leftElbowAngle = 0.1f;
-		kf4.rightElbowAngle = 0.1f;
+		kf4.leftElbowAngle = -0.1f;
+		kf4.rightElbowAngle = -0.1f;
 		kf4.normaliseSpeeds = true;
 		keyFrames.add(kf4);
 
 		KeyFrame kf5 = new KeyFrame(performer, this);
 		kf5.setAllSpeeds(0.001);
-		kf5.offsetXSpeed = 0.01;
+		kf5.offsetXSpeed = 0.1;
 		kf5.offsetYSpeed = 0.1;
 		kf5.offsetX = startOffsetX * 2 / 4;
 		kf5.offsetY = startOffsetY * 2 / 4;
@@ -278,14 +280,14 @@ public class AnimationWalk extends Animation {
 		kf5.rightKneeAngle = targetRightKnee5;
 		kf5.leftHipAngle = targetLeftHip5;
 		kf5.leftKneeAngle = targetLeftKnee5;
-		kf5.leftElbowAngle = 0.1f;
-		kf5.rightElbowAngle = 0.1f;
+		kf5.leftElbowAngle = -0.1f;
+		kf5.rightElbowAngle = -0.1f;
 		kf5.normaliseSpeeds = true;
 		keyFrames.add(kf5);
 
 		KeyFrame kf6 = new KeyFrame(performer, this);
 		kf6.setAllSpeeds(0.001);
-		kf6.offsetXSpeed = 0.01;
+		kf6.offsetXSpeed = 0.1;
 		kf6.offsetYSpeed = 0.1;
 		kf6.offsetX = startOffsetX * 1 / 4;
 		kf6.offsetY = startOffsetY * 1 / 4;
@@ -294,14 +296,14 @@ public class AnimationWalk extends Animation {
 		kf6.rightKneeAngle = targetRightKnee6;
 		kf6.leftHipAngle = targetLeftHip6;
 		kf6.leftKneeAngle = targetLeftKnee6;
-		kf6.leftElbowAngle = 0.1f;
-		kf6.rightElbowAngle = 0.1f;
+		kf6.leftElbowAngle = -0.1f;
+		kf6.rightElbowAngle = -0.1f;
 		kf6.normaliseSpeeds = true;
 		keyFrames.add(kf6);
 
 		KeyFrame kf7 = new KeyFrame(performer, this);
 		kf7.setAllSpeeds(0.001);
-		kf7.offsetXSpeed = 0.01;
+		kf7.offsetXSpeed = 0.1;
 		kf7.offsetYSpeed = 0.1;
 		kf7.offsetX = startOffsetX * 0 / 4;
 		kf7.offsetY = startOffsetY * 0 / 4;
@@ -310,8 +312,8 @@ public class AnimationWalk extends Animation {
 		kf7.rightKneeAngle = targetRightKnee7;
 		kf7.leftHipAngle = targetLeftHip7;
 		kf7.leftKneeAngle = targetLeftKnee7;
-		kf7.leftElbowAngle = 0.1f;
-		kf7.rightElbowAngle = 0.1f;
+		kf7.leftElbowAngle = -0.1f;
+		kf7.rightElbowAngle = -0.1f;
 		kf7.normaliseSpeeds = true;
 		keyFrames.add(kf7);
 
