@@ -49,6 +49,7 @@ public class AnimationStraightLine extends Animation {
 			kf0.setAllSpeeds(1);
 			kf0.offsetX = this.targetSquares[i].xInGridPixels - this.x;
 			kf0.offsetY = this.targetSquares[i].yInGridPixels - this.y;
+			// kf0.
 			keyFrames.add(kf0);
 		}
 
@@ -62,7 +63,7 @@ public class AnimationStraightLine extends Animation {
 
 	@Override
 	public String toString() {
-		return "AnimationThrown";
+		return "AnimationStraightLine";
 	}
 
 	@Override
@@ -77,12 +78,19 @@ public class AnimationStraightLine extends Animation {
 	public void drawStaticUI() {
 	}
 
-	public static void postRangedAnimation(GameObject projectileObject, Square... targetSquares) {
+	public void postRangedAnimation(GameObject projectileObject, Square... targetSquares) {
 		postRangedAnimation(projectileObject, targetSquares, false);
 	}
 
-	public static void postRangedAnimation(GameObject projectileObject, Square[] targetSquares, boolean doesNothing) {
-		targetSquares[targetSquares.length - 1].inventory.add(projectileObject);
+	public void postRangedAnimation(GameObject projectileObject, Square[] targetSquares, boolean doesNothing) {
+		if (projectileObject != null) {
+
+			if (projectileObject.getPrimaryAnimation() != null) {
+				projectileObject.getPrimaryAnimation().offsetX = 0;
+				projectileObject.getPrimaryAnimation().offsetY = 0;
+			}
+			targetSquares[targetSquares.length - 1].inventory.add(projectileObject);
+		}
 	}
 
 	@Override

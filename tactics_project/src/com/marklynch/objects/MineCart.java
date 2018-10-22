@@ -74,7 +74,6 @@ public class MineCart extends GameObject {
 					public void runCompletionAlgorightm(boolean wait) {
 						super.runCompletionAlgorightm(wait);
 						postRangedAnimation(gamObject, array);
-						// postRangedAnimation(arrow);
 					}
 				});
 			}
