@@ -238,15 +238,39 @@ public class KeyFrame {
 		double distanceToCoverboundsY1 = Math.abs(animation.boundsY1 - boundsY1);
 		double distanceToCoverboundsX2 = Math.abs(animation.boundsX2 - boundsX2);
 		double distanceToCoverboundsY2 = Math.abs(animation.boundsY2 - boundsY2);
-		double distanceToCovertorsoAngle = Math.abs(animation.torsoAngle - torsoAngle);
-		double distanceToCoverleftShoulderAngle = Math.abs(animation.leftShoulderAngle - leftShoulderAngle);
-		double distanceToCoverrightShoulderAngle = Math.abs(animation.rightShoulderAngle - rightShoulderAngle);
-		double distanceToCoverleftElbowAngle = Math.abs(animation.leftElbowAngle - leftElbowAngle);
-		double distanceToCoverrightElbowAngle = Math.abs(animation.rightElbowAngle - rightElbowAngle);
-		double distanceToCoverleftHipAngle = Math.abs(animation.leftHipAngle - leftHipAngle);
-		double distanceToCoverrightHipAngle = Math.abs(animation.rightHipAngle - rightHipAngle);
-		double distanceToCoverleftKneeAngle = Math.abs(animation.leftKneeAngle - leftKneeAngle);
-		double distanceToCoverrightKneeAngle = Math.abs(animation.rightKneeAngle - rightKneeAngle);
+
+		double distanceToCovertorsoAngle;
+		double distanceToCoverleftShoulderAngle;
+		double distanceToCoverrightShoulderAngle;
+		double distanceToCoverleftElbowAngle;
+		double distanceToCoverrightElbowAngle;
+		double distanceToCoverleftHipAngle;
+		double distanceToCoverrightHipAngle;
+		double distanceToCoverleftKneeAngle;
+		double distanceToCoverrightKneeAngle;
+
+		if (!animation.backwards) {
+			distanceToCovertorsoAngle = Math.abs(animation.torsoAngle - torsoAngle);
+			distanceToCoverleftShoulderAngle = Math.abs(animation.leftShoulderAngle - leftShoulderAngle);
+			distanceToCoverrightShoulderAngle = Math.abs(animation.rightShoulderAngle - rightShoulderAngle);
+			distanceToCoverleftElbowAngle = Math.abs(animation.leftElbowAngle - leftElbowAngle);
+			distanceToCoverrightElbowAngle = Math.abs(animation.rightElbowAngle - rightElbowAngle);
+			distanceToCoverleftHipAngle = Math.abs(animation.leftHipAngle - leftHipAngle);
+			distanceToCoverrightHipAngle = Math.abs(animation.rightHipAngle - rightHipAngle);
+			distanceToCoverleftKneeAngle = Math.abs(animation.leftKneeAngle - leftKneeAngle);
+			distanceToCoverrightKneeAngle = Math.abs(animation.rightKneeAngle - rightKneeAngle);
+		} else {
+			distanceToCovertorsoAngle = Math.abs(animation.torsoAngle + torsoAngle);
+			distanceToCoverleftShoulderAngle = Math.abs(animation.leftShoulderAngle + rightShoulderAngle);
+			distanceToCoverrightShoulderAngle = Math.abs(animation.rightShoulderAngle + leftShoulderAngle);
+			distanceToCoverleftElbowAngle = Math.abs(animation.leftElbowAngle + rightElbowAngle);
+			distanceToCoverrightElbowAngle = Math.abs(animation.rightElbowAngle + leftElbowAngle);
+			distanceToCoverleftHipAngle = Math.abs(animation.leftHipAngle + rightHipAngle);
+			distanceToCoverrightHipAngle = Math.abs(animation.rightHipAngle + leftHipAngle);
+			distanceToCoverleftKneeAngle = Math.abs(animation.leftKneeAngle + rightKneeAngle);
+			distanceToCoverrightKneeAngle = Math.abs(animation.rightKneeAngle + leftKneeAngle);
+
+		}
 
 		offsetXSpeed = distanceToCoverOffsetX / keyFrameTimeMillis;
 		offsetYSpeed = distanceToCoverOffsetY / keyFrameTimeMillis;
@@ -257,23 +281,26 @@ public class KeyFrame {
 		boundsX2Speed = distanceToCoverboundsX2 / keyFrameTimeMillis;
 		boundsY2Speed = distanceToCoverboundsY2 / keyFrameTimeMillis;
 		torsoAngleSpeed = distanceToCovertorsoAngle / keyFrameTimeMillis;
-		leftShoulderAngleSpeed = distanceToCoverleftShoulderAngle / keyFrameTimeMillis;
-		rightShoulderAngleSpeed = distanceToCoverrightShoulderAngle / keyFrameTimeMillis;
-		leftElbowAngleSpeed = distanceToCoverleftElbowAngle / keyFrameTimeMillis;
-		rightElbowAngleSpeed = distanceToCoverrightElbowAngle / keyFrameTimeMillis;
-		scaleXSpeed = distanceToCoverleftHipAngle / keyFrameTimeMillis;
-		scaleYSpeed = distanceToCoverleftHipAngle / keyFrameTimeMillis;
-		leftHipAngleSpeed = distanceToCoverleftHipAngle / keyFrameTimeMillis;
-		rightHipAngleSpeed = distanceToCoverrightHipAngle / keyFrameTimeMillis;
-		leftKneeAngleSpeed = distanceToCoverleftKneeAngle / keyFrameTimeMillis;
-		rightKneeAngleSpeed = distanceToCoverrightKneeAngle / keyFrameTimeMillis;
 
-		System.out.println("distanceToCoverleftKneeAngle = " + distanceToCoverleftKneeAngle);
-		System.out.println("distanceToCoverrightKneeAngle = " + distanceToCoverrightKneeAngle);
-		System.out.println("leftKneeAngleSpeed = " + leftKneeAngleSpeed);
-		System.out.println("rightKneeAngleSpeed = " + rightKneeAngleSpeed);
-		System.out.println("left knee diff = " + Math.abs(animation.leftKneeAngle - leftKneeAngle));
-		System.out.println("right knee diff = " + Math.abs(animation.rightKneeAngle - rightKneeAngle));
+		if (!animation.backwards) {
+			leftShoulderAngleSpeed = distanceToCoverleftShoulderAngle / keyFrameTimeMillis;
+			rightShoulderAngleSpeed = distanceToCoverrightShoulderAngle / keyFrameTimeMillis;
+			leftElbowAngleSpeed = distanceToCoverleftElbowAngle / keyFrameTimeMillis;
+			rightElbowAngleSpeed = distanceToCoverrightElbowAngle / keyFrameTimeMillis;
+			leftHipAngleSpeed = distanceToCoverleftHipAngle / keyFrameTimeMillis;
+			rightHipAngleSpeed = distanceToCoverrightHipAngle / keyFrameTimeMillis;
+			leftKneeAngleSpeed = distanceToCoverleftKneeAngle / keyFrameTimeMillis;
+			rightKneeAngleSpeed = distanceToCoverrightKneeAngle / keyFrameTimeMillis;
+		} else {
+			rightShoulderAngleSpeed = distanceToCoverleftShoulderAngle / keyFrameTimeMillis;
+			leftShoulderAngleSpeed = distanceToCoverrightShoulderAngle / keyFrameTimeMillis;
+			rightElbowAngleSpeed = distanceToCoverleftElbowAngle / keyFrameTimeMillis;
+			leftElbowAngleSpeed = distanceToCoverrightElbowAngle / keyFrameTimeMillis;
+			rightHipAngleSpeed = distanceToCoverleftHipAngle / keyFrameTimeMillis;
+			leftHipAngleSpeed = distanceToCoverrightHipAngle / keyFrameTimeMillis;
+			rightKneeAngleSpeed = distanceToCoverleftKneeAngle / keyFrameTimeMillis;
+			leftKneeAngleSpeed = distanceToCoverrightKneeAngle / keyFrameTimeMillis;
+		}
 
 	}
 
