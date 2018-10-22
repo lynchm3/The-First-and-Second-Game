@@ -48,6 +48,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.actions.ActionWait;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.Weapon;
@@ -622,7 +623,7 @@ public class Level {
 
 		endTurnButton = new LevelButton(110f, 480f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"WAIT [SPACE]", false, false, Color.BLACK, Color.WHITE,
-				"Wait a turn. You can also hold SPACE to wait longer and watch the world go by");
+				"Wait a turn. You can also tap . to play/pause time.");
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {

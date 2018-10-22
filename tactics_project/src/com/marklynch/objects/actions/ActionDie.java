@@ -157,8 +157,8 @@ public class ActionDie extends Action {
 
 		// Actor actor = (Actor) gameObjectPerformer;
 		GameObject blood = Templates.BLOOD.makeCopy(null, null);
-		blood.setPrimaryAnimation(new AnimationScale(blood, 0f, 1f, 2000));
 		gameObjectPerformer.squareGameObjectIsOn.inventory.add(blood);
+		blood.setPrimaryAnimation(new AnimationScale(blood, 0f, 1f, 2000));
 
 	}
 

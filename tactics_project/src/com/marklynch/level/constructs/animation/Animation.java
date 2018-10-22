@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
+import com.marklynch.level.constructs.animation.primary.AnimationScale;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.primary.AnimationWalk;
 import com.marklynch.objects.GameObject;
@@ -75,7 +76,7 @@ public abstract class Animation {
 
 	public Animation(GameObject performer, Object... objectsInvolved) {
 
-		runAnimation = Game.level.shouldLog(objectsInvolved, false) && performer == Game.level.player;
+		runAnimation = Game.level.shouldLog(objectsInvolved, false);// && performer == Game.level.player;
 		if (!runAnimation) {
 			runCompletionAlgorightm(true);
 			return;
@@ -104,30 +105,29 @@ public abstract class Animation {
 		}
 	}
 
-	public void update(double delta) {
-	}
+	public abstract void update(double delta);
 
-	protected void reverseAnimation() {
-
-		torsoAngle = -torsoAngle;
-
-		float temp = rightShoulderAngle;
-		rightShoulderAngle = -leftShoulderAngle;
-		leftShoulderAngle = -temp;
-
-		temp = rightElbowAngle;
-		rightElbowAngle = -leftElbowAngle;
-		leftElbowAngle = -temp;
-
-		temp = rightHipAngle;
-		rightHipAngle = -leftHipAngle;
-		leftHipAngle = -temp;
-
-		temp = rightKneeAngle;
-		rightKneeAngle = -leftKneeAngle;
-		leftKneeAngle = -temp;
-
-	}
+	// protected void reverseAnimation() {
+	//
+	// torsoAngle = -torsoAngle;
+	//
+	// float temp = rightShoulderAngle;
+	// rightShoulderAngle = -leftShoulderAngle;
+	// leftShoulderAngle = -temp;
+	//
+	// temp = rightElbowAngle;
+	// rightElbowAngle = -leftElbowAngle;
+	// leftElbowAngle = -temp;
+	//
+	// temp = rightHipAngle;
+	// rightHipAngle = -leftHipAngle;
+	// leftHipAngle = -temp;
+	//
+	// temp = rightKneeAngle;
+	// rightKneeAngle = -leftKneeAngle;
+	// leftKneeAngle = -temp;
+	//
+	// }
 
 	protected float moveTowardsTargetAngleInRadians(double angleToChange, double angleChange, double targetAngle) {
 		if (angleToChange == targetAngle) {
@@ -214,7 +214,6 @@ public abstract class Animation {
 			return;
 
 		if (firstUpdate) {
-			System.out.println("calling keyFrames.get(0).createSpeeds()");
 			keyFrames.get(0).createSpeeds();
 			firstUpdate = false;
 		}
@@ -232,7 +231,6 @@ public abstract class Animation {
 
 			if (phase < keyFrames.size()) {
 				// keyFrames.get(phase).normaliseSpeeds();
-				System.out.println("calling keyFrames.get(" + phase + ").createSpeeds()");
 				keyFrames.get(phase).createSpeeds();
 				// keyFrames.get(phase).copyPositions(); can't do this here coz it'll overwrite
 				// what I've already set :/

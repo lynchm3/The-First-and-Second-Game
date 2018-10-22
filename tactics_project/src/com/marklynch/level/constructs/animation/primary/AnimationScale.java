@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
 
 public class AnimationScale extends Animation {
@@ -17,34 +18,46 @@ public class AnimationScale extends Animation {
 
 		scaleX = start;
 		scaleY = start;
-		startScale = start;
-		endScale = end;
+
+
+		KeyFrame kf0 = new KeyFrame(performer, this);
+		kf0.scaleX = end;
+		kf0.scaleY = end;
+		kf0.scaleXSpeed = 0.0001d;
+		kf0.scaleYSpeed = 0.0001d;
+		keyFrames.add(kf0);
+
 	}
 
 	@Override
 	public void update(double delta) {
-		// runCompletionAlgorightm();
-
-		if (getCompleted())
-			return;
-		super.update(delta);
-
-		durationSoFar += delta;
-		double progress = durationSoFar / durationToReachMillis;
-		if (progress >= 1) {
-			progress = 1;
-			scaleX = 1;
-			scaleY = 1;
-			runCompletionAlgorightm(true);
-			return;
-		}
-		scaleX = (float) (startScale + progress * (endScale - startScale));
-		scaleY = (float) (startScale + progress * (endScale - startScale));
-
-		// scaleX = (float) progress * endScale;
-		// scaleY = (float) progress * endScale;
-
+		keyFrameUpdate(delta);
 	}
+
+	// @Override
+	// public void update(double delta) {
+	// // runCompletionAlgorightm();
+	//
+	// if (getCompleted())
+	// return;
+	// super.update(delta);
+	//
+	// durationSoFar += delta;
+	// double progress = durationSoFar / durationToReachMillis;
+	// if (progress >= 1) {
+	// progress = 1;
+	// scaleX = 1;
+	// scaleY = 1;
+	// runCompletionAlgorightm(true);
+	// return;
+	// }
+	// scaleX = (float) (startScale + progress * (endScale - startScale));
+	// scaleY = (float) (startScale + progress * (endScale - startScale));
+	//
+	// // scaleX = (float) progress * endScale;
+	// // scaleY = (float) progress * endScale;
+	//
+	// }
 
 	@Override
 	public void draw2() {

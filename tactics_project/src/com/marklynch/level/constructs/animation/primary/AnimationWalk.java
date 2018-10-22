@@ -123,7 +123,6 @@ public class AnimationWalk extends Animation {
 
 		blockAI = false;
 
-		System.out.println("walkingPhase = " + walkingPhase);
 		if (walkingPhase == 0) {
 			setUpWalkPart0();
 		} else if (walkingPhase == 1) {

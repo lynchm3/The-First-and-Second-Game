@@ -19,33 +19,24 @@ public class AnimationShake extends Animation {
 
 	}
 
-	// public AnimationShake(int startX, int startY, int endX, int endY) {
-	//
-	// }
-	//
-	// public AnimationShake(float startX, float startY, float endX, float endY)
-	// {
-	// super();
-	// durationToReach = 200;
-	// // this.startSquare = startSquare;
-	// // this.endSquare = endSquare;
-	//
-	// startOffsetX = offsetX = startX - endX;
-	// startOffsetY = offsetY = startY - endY;
-	// blockAI = false;
-	// }
-
 	@Override
 	public void update(double delta) {
-
-		if (getCompleted())
-			return;
-		super.update(delta);
-
 		offsetX = (float) (Math.random() * 16) - 8f;
 		offsetY = (float) (Math.random() * 16) - 8f;
-
+		// keyFrameUpdate(delta);
 	}
+
+	// @Override
+	// public void update(double delta) {
+	//
+	// if (getCompleted())
+	// return;
+	// super.update(delta);
+	//
+	// offsetX = (float) (Math.random() * 16) - 8f;
+	// offsetY = (float) (Math.random() * 16) - 8f;
+	//
+	// }
 
 	@Override
 	public void draw2() {

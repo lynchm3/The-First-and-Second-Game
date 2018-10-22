@@ -78,8 +78,6 @@ public class KeyFrame {
 
 	public void copyPositions() {
 
-		System.out.println("performer.getPrimaryAnimation() = " + performer.getPrimaryAnimation());
-
 		if (performer != null && performer.getPrimaryAnimation() != null) {
 
 			this.offsetX = performer.getPrimaryAnimation().offsetX;
@@ -228,8 +226,6 @@ public class KeyFrame {
 		if (!normaliseSpeeds)
 			return;
 
-		System.out.println("===================createSpeeds()==========================");
-
 		double distanceToCoverOffsetX = Math.abs(animation.offsetX - offsetX);
 		double distanceToCoverOffsetY = Math.abs(animation.offsetY - offsetY);
 		double distanceToCoverscaleX = Math.abs(animation.scaleX - scaleX);
@@ -308,8 +304,6 @@ public class KeyFrame {
 		if (!normaliseSpeeds)
 			return;
 
-		System.out.println("===================normaliseSpeeds()==========================");
-
 		double millisToCompleteOffsetX = Math.abs(animation.offsetX - offsetX) / Math.abs(offsetXSpeed);
 		double millisToCompleteOffsetY = Math.abs(animation.offsetY - offsetY) / Math.abs(offsetYSpeed);
 		double millisToCompletescaleX = Math.abs(animation.scaleX - scaleX) / Math.abs(scaleXSpeed);
@@ -336,8 +330,6 @@ public class KeyFrame {
 		double millisToCompleterightKneeAngle = Math.abs(animation.rightKneeAngle - rightKneeAngle)
 				/ Math.abs(rightKneeAngleSpeed);
 
-		System.out.println("rightKneeAngleSpeed before = " + rightKneeAngleSpeed);
-
 		double maxMillis = getMax(millisToCompleteOffsetX, millisToCompleteOffsetY, millisToCompletescaleX,
 				millisToCompletescaleY, millisToCompleteboundsX1, millisToCompleteboundsY1, millisToCompleteboundsX2,
 				millisToCompleteboundsY2, millisToCompletetorsoAngle, millisToCompleteleftShoulderAngle,
@@ -345,12 +337,8 @@ public class KeyFrame {
 				millisToCompleteleftHipAngle, millisToCompleterightHipAngle, millisToCompleteleftKneeAngle,
 				millisToCompleterightKneeAngle);
 
-		System.out.println("maxMillis = " + maxMillis);
-
 		if (millisToCompleteOffsetX != 0)
 			offsetXSpeed = offsetXSpeed * millisToCompleteOffsetX / maxMillis;
-		System.out.println("millisToCompleteOffsetX = " + millisToCompleteOffsetX);
-		System.out.println("offsetXSpeed = " + offsetXSpeed);
 		if (millisToCompleteOffsetY != 0)
 			offsetYSpeed = offsetYSpeed * millisToCompleteOffsetY / maxMillis;
 		if (millisToCompletescaleX != 0)
@@ -384,7 +372,6 @@ public class KeyFrame {
 		if (millisToCompleterightKneeAngle != 0)
 			rightKneeAngleSpeed = rightKneeAngleSpeed * millisToCompleterightKneeAngle / maxMillis;
 
-		System.out.println("rightKneeAngleSpeed after = " + rightKneeAngleSpeed);
 		millisToCompleteOffsetX = Math.abs(animation.offsetX - offsetX) / Math.abs(offsetXSpeed);
 		millisToCompleteOffsetY = Math.abs(animation.offsetY - offsetY) / Math.abs(offsetYSpeed);
 		millisToCompletescaleX = Math.abs(animation.scaleX - scaleX) / Math.abs(scaleXSpeed);
@@ -409,13 +396,6 @@ public class KeyFrame {
 		millisToCompleterightKneeAngle = Math.abs(animation.rightKneeAngle - rightKneeAngle)
 				/ Math.abs(rightKneeAngleSpeed);
 
-		System.out.println("millisToCompleteOffsetX after = " + millisToCompleteOffsetX);
-		System.out.println("millisToCompleteOffsetY after = " + millisToCompleteOffsetY);
-		System.out.println("millisToCompleteleftHipAngle after = " + millisToCompleteleftHipAngle);
-		System.out.println("millisToCompleterightHipAngle after = " + millisToCompleterightHipAngle);
-		System.out.println("millisToCompleteleftKneeAngle after = " + millisToCompleteleftKneeAngle);
-		System.out.println("millisToCompleterightKneeAngle after = " + millisToCompleterightKneeAngle);
-
 	}
 
 	public double getMax(double... values) {
@@ -424,10 +404,8 @@ public class KeyFrame {
 			return Double.MIN_VALUE;
 
 		double currentMax = values[0];
-		System.out.println("values[0] = " + values[0]);
 
 		for (int i = 1; i < values.length; i++) {
-			System.out.println("values[i] = " + values[i]);
 			currentMax = Math.max(currentMax, values[i]);
 		}
 
