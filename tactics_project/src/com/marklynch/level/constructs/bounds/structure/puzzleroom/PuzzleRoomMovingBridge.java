@@ -85,17 +85,33 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 		}
 
+		ArrayList<Square> middleSquares = new ArrayList<Square>();
+		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2 - 1][posY + totalHeightInSquares / 2 - 1]);
+		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2 - 1][posY + totalHeightInSquares / 2]);
+		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2][posY + totalHeightInSquares / 2 - 1]);
+		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2][posY + totalHeightInSquares / 2]);
+		for (Square middleSquare : middleSquares) {
+			Floor floor = Templates.STONE_FLOOR.makeCopy(null, null);
+			middleSquare.inventory.add(floor);
+		}
+
 		// bridge vertical points
 		for (int i = 0; i < bridgeWidth; i++) {
 			for (int j = 0; j < bridgeLength; j++) {
-				verticalBridgeSquares.add(Level.squares[posX + gapsWidth + i][bridgePosY + j]);
+				Square square = Level.squares[posX + gapsWidth + i][bridgePosY + j];
+				if (!middleSquares.contains(square)) {
+					verticalBridgeSquares.add(square);
+				}
 			}
 		}
 
 		// bridge horizontal points
 		for (int i = bridgeWidth - 1; i >= 0; i--) {
 			for (int j = 0; j < bridgeLength; j++) {
-				horizontalBridgeSquares.add(Level.squares[bridgePosX + j][posY + gapsWidth + i]);
+				Square square = Level.squares[bridgePosX + j][posY + gapsWidth + i];
+				if (!middleSquares.contains(square)) {
+					horizontalBridgeSquares.add(square);
+				}
 			}
 		}
 
@@ -180,6 +196,11 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		ArrayList<GameObject> teleportationObjectsInOrder = new ArrayList<GameObject>();
 
 		if (bridgeVertical) {
+
+			for (Square newSquare : verticalBridgeSquares) {
+				newSquare.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
+			}
+
 			for (int i = 0; i < horizontalBridgeSquares.size(); i++) {
 				Square oldSquare = horizontalBridgeSquares.get(i);
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
@@ -193,7 +214,6 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 			for (GameObject gameObject : teleportationObjectsInOrder) {
 				move(gameObject, teleportationsToPerform.get(gameObject));
-
 			}
 
 			for (Square oldSquare : horizontalBridgeSquares) {
@@ -201,14 +221,14 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
 			}
+		} else {
 
-			for (Square newSquare : verticalBridgeSquares) {
+			for (Square newSquare : horizontalBridgeSquares) {
 				newSquare.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
-		} else {
+
 			for (int i = 0; i < verticalBridgeSquares.size(); i++) {
 				Square oldSquare = verticalBridgeSquares.get(i);
-				horizontalBridgeSquares.get(i).inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						teleportationObjectsInOrder.add(gameObject);
@@ -220,17 +240,12 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 			for (GameObject gameObject : teleportationObjectsInOrder) {
 				move(gameObject, teleportationsToPerform.get(gameObject));
-
 			}
 
 			for (Square oldSquare : verticalBridgeSquares) {
 				if (!oldSquare.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
-			}
-
-			for (Square newSquare : horizontalBridgeSquares) {
-				newSquare.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 		}
 	}
@@ -275,8 +290,8 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 1f, true, 0f, targetSquares1) {
 			@Override
 			public void runCompletionAlgorightm(boolean wait) {
-				super.runCompletionAlgorightm(wait);
 				postRangedAnimation(gameObject, targetSquares1);
+				super.runCompletionAlgorightm(wait);
 			}
 		});
 

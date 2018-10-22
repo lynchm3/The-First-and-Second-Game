@@ -72,8 +72,8 @@ public class MineCart extends GameObject {
 				gamObject.setPrimaryAnimation(new AnimationStraightLine(this, 2f, true, 0f, array) {
 					@Override
 					public void runCompletionAlgorightm(boolean wait) {
-						super.runCompletionAlgorightm(wait);
 						postRangedAnimation(gamObject, array);
+						super.runCompletionAlgorightm(wait);
 					}
 				});
 			}
