@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -18,6 +19,7 @@ public class ActionDig extends Action {
 
 	Actor performer;
 	GameObject target;
+	Shovel shovel;
 
 	// Default for hostiles
 	public ActionDig(Actor attacker, GameObject target) {
@@ -41,7 +43,27 @@ public class ActionDig extends Action {
 		if (!checkRange())
 			return;
 
-		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
+		if (performer.squareGameObjectIsOn.xInGrid > target.squareGameObjectIsOn.xInGrid) {
+			performer.backwards = true;
+		} else if (performer.squareGameObjectIsOn.xInGrid < target.squareGameObjectIsOn.xInGrid) {
+			performer.backwards = false;
+		}
+
+		shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
+		if (performer.equipped != shovel)
+			performer.equippedBeforePickingUpObject = performer.equipped;
+		performer.equipped = shovel;
+
+		performer.setPrimaryAnimation(new AnimationSlash(performer, target) {
+			@Override
+			public void runCompletionAlgorightm(boolean wait) {
+				super.runCompletionAlgorightm(wait);
+				postMeleeAnimation();
+			}
+		});
+	}
+
+	public void postMeleeAnimation() {
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;

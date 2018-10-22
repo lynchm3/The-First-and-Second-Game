@@ -207,11 +207,11 @@ public class Actor extends GameObject {
 	public AnimationTake fishingAnimation;
 
 	// public GameObject choppingTarget;
-	public AnimationTake choppingAnimation;
-	public GameObject miningTarget;
-	public AnimationTake miningAnimation;
-	public GameObject diggingTarget;
-	public AnimationTake diggingAnimation;
+	// public AnimationTake choppingAnimation;
+	// public GameObject miningTarget;
+	// public AnimationTake miningAnimation;
+	// public GameObject diggingTarget;
+	// public AnimationTake diggingAnimation;
 
 	public static enum HOBBY {
 		FISHING, HUNTING, ARCHERY, SPARRING, BOWLS, BALL_GAMES, EATING, DRINKING, SOCIALISING;

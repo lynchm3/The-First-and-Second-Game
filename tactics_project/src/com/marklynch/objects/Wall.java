@@ -16,7 +16,7 @@ public class Wall extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	public boolean fullWall;
+	public boolean fullWall = true;
 	public boolean fullRightWall;
 	public boolean fullLeftWall;
 	public boolean fullTopWall;
@@ -227,6 +227,9 @@ public class Wall extends GameObject {
 	}
 
 	public void checkIfFullWall() {
+
+		fullWall = false;
+
 		fullWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom
 				&& connectedBottomLeft && connectedLeft && connectedTopLeft;
 

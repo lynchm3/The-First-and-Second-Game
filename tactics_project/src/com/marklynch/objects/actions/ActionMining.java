@@ -5,7 +5,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.primary.AnimationShake;
+import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Vein;
@@ -14,15 +14,16 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionMiningStart extends Action {
+public class ActionMining extends Action {
 
 	public static final String ACTION_NAME = "Mine";
 
 	Actor performer;
 	Vein target;
+	Pickaxe pickaxe;
 
 	// Default for hostiles
-	public ActionMiningStart(Actor attacker, Vein vein) {
+	public ActionMining(Actor attacker, Vein vein) {
 		super(ACTION_NAME, textureMine);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = vein;
@@ -43,20 +44,30 @@ public class ActionMiningStart extends Action {
 		if (!checkRange())
 			return;
 
-		performer.miningTarget = target;
-		target.beingMined = true;
+		if (performer.squareGameObjectIsOn.xInGrid > target.squareGameObjectIsOn.xInGrid) {
+			performer.backwards = true;
+		} else if (performer.squareGameObjectIsOn.xInGrid < target.squareGameObjectIsOn.xInGrid) {
+			performer.backwards = false;
+		}
 
-		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
+		pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
 		if (performer.equipped != pickaxe)
 			performer.equippedBeforePickingUpObject = performer.equipped;
 		performer.equipped = pickaxe;
 
+		performer.setPrimaryAnimation(new AnimationSlash(performer, target) {
+			@Override
+			public void runCompletionAlgorightm(boolean wait) {
+				super.runCompletionAlgorightm(wait);
+				postMeleeAnimation();
+			}
+		});
+	}
+
+	public void postMeleeAnimation() {
+
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
-
-		if (Game.level.shouldLog(target, performer)) {
-			target.setPrimaryAnimation(new AnimationShake(target));
-		}
 
 		if (!target.infinite) {
 			float damage = target.totalHealth / 4f;
@@ -106,7 +117,7 @@ public class ActionMiningStart extends Action {
 				}
 			} else {
 				Level.levelMode = LevelMode.LEVEL_MODE_MINING;
-				Player.playerTargetAction = new ActionMiningStart(performer, target);
+				Player.playerTargetAction = new ActionMining(performer, target);
 				Player.playerTargetSquare = performer.squareGameObjectIsOn;
 				Player.playerFirstMove = true;
 			}
@@ -138,6 +149,7 @@ public class ActionMiningStart extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
+
 	}
 
 	@Override
@@ -155,6 +167,11 @@ public class ActionMiningStart extends Action {
 	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+			return false;
+		}
+
+		if (target.remainingHealth <= 0) {
+			disabledReason = null;
 			return false;
 		}
 

@@ -46,6 +46,9 @@ public class AreaTown {
 				new int[] {}, new HOBBY[] { HOBBY.HUNTING });
 
 		// Some ground hatchets
+		Templates.VEIN.makeCopy(Game.level.squares[posX + 2][posY + 3], null, false, Templates.ORE, 0.1f);
+
+		// (Game.level.squares[posX + 2][posY + 3], null);
 		Templates.HATCHET.makeCopy(Game.level.squares[posX + 3][posY + 3], QuestList.questSmallGame.hunterBrent);
 		Templates.HATCHET.makeCopy(Game.level.squares[posX + 3][posY + 6], QuestList.questSmallGame.hunterBrent);
 		Templates.HATCHET.makeCopy(Game.level.squares[posX + 5][posY + 6], null);

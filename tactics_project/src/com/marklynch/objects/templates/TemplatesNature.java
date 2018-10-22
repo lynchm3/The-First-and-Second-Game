@@ -203,18 +203,19 @@ public class TemplatesNature {
 
 		Templates.VEIN = new Vein();
 		Templates.VEIN.name = "Vein";
-		Templates.VEIN.setImageAndExtrapolateSize("vein.png");
+		Templates.VEIN.imageTexturePath = "wall.png";
+		Templates.VEIN.imageTexture = getGlobalImage(Templates.VEIN.imageTexturePath, true);
 		Templates.VEIN.totalHealth = Templates.VEIN.remainingHealth = 1000;
 		Templates.VEIN.widthRatio = 1f;
 		Templates.VEIN.heightRatio = 1f;
 		Templates.VEIN.drawOffsetRatioX = 0f;
 		Templates.VEIN.drawOffsetRatioY = 0f;
-		Templates.VEIN.soundWhenHit = 1f;
+		Templates.VEIN.soundWhenHit = 10f;
 		Templates.VEIN.soundWhenHitting = 1f;
 		Templates.VEIN.soundDampening = 10f;
 		Templates.VEIN.stackable = false;
-		Templates.VEIN.weight = 1000f;
-		Templates.VEIN.value = 36;
+		Templates.VEIN.weight = 100f;
+		Templates.VEIN.value = 59;
 		Templates.VEIN.anchorX = 0;
 		Templates.VEIN.anchorY = 0;
 		Templates.VEIN.templateId = GameObject.generateNewTemplateId();

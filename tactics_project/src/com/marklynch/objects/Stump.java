@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionChoppingStart;
+import com.marklynch.objects.actions.ActionChopping;
 import com.marklynch.objects.units.Actor;
 
 public class Stump extends GameObject {
@@ -31,7 +31,7 @@ public class Stump extends GameObject {
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionChoppingStart(performer, this);
+		return new ActionChopping(performer, this);
 	}
 
 	@Override

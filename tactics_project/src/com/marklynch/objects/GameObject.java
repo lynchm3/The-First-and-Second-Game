@@ -39,7 +39,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionBuytemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionChangeAppearance;
-import com.marklynch.objects.actions.ActionChoppingStart;
+import com.marklynch.objects.actions.ActionChopping;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDig;
@@ -59,7 +59,7 @@ import com.marklynch.objects.actions.ActionInitiateTrade;
 import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionLock;
-import com.marklynch.objects.actions.ActionMiningStart;
+import com.marklynch.objects.actions.ActionMining;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionOpenInventoryToDropItems;
@@ -244,8 +244,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Actor beingFishedBy = null;
 	public boolean fightingFishingRod = false;
 	// public boolean beingChopped = false;
-	public boolean beingMined = false;
-	public boolean beingDigged = false;
+	// public boolean beingMined = false;
+	// public boolean beingDigged = false;
 	// public static float healthHeightInPixels = Game.SQUARE_HEIGHT;
 
 	// public ArrayList<DestructionListener> destructionListeners = new
@@ -1096,12 +1096,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (this instanceof Vein) {
-			Action action = new ActionMiningStart(performer, (Vein) this);
+			Action action = new ActionMining(performer, (Vein) this);
 			return action;
 		}
 
 		if (this instanceof Stump || this instanceof Tree) {
-			return new ActionChoppingStart(performer, this);
+			return new ActionChopping(performer, this);
 		}
 
 		if (this instanceof PressurePlate || this instanceof PressurePlateRequiringSpecificItem) {
@@ -1144,12 +1144,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (this instanceof Vein) {
-			Action action = new ActionMiningStart(performer, (Vein) this);
+			Action action = new ActionMining(performer, (Vein) this);
 			return action;
 		}
 
 		if (this instanceof Stump || this instanceof Tree) {
-			return new ActionChoppingStart(performer, this);
+			return new ActionChopping(performer, this);
 		}
 
 		// Pressure Plate
@@ -1251,7 +1251,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Tree and stump
 		if (this instanceof Stump || this instanceof Tree) {
-			actions.add(new ActionChoppingStart(performer, this));
+			actions.add(new ActionChopping(performer, this));
 		}
 
 		// Food / Drink
@@ -1273,7 +1273,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Vein
 		if (this instanceof Vein) {
-			actions.add(new ActionMiningStart(performer, (Vein) this));
+			actions.add(new ActionMining(performer, (Vein) this));
 		}
 
 		// Window

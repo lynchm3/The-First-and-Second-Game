@@ -2231,25 +2231,6 @@ public class Level {
 		// player.fishingTarget.setPrimaryAnimation(null);
 		// player.fishingTarget = null;
 		// }
-		// } else if (levelMode != LevelMode.LEVEL_MODE_CHOPPING) {
-		// if (player.choppingTarget != null) {
-		// player.choppingTarget.beingChopped = false;
-		// player.choppingTarget.setPrimaryAnimation(null);
-		// player.choppingTarget = null;
-		// }
-		// } else if (levelMode != LevelMode.LEVEL_MODE_MINING) {
-		// if (player.miningTarget != null) {
-		// player.miningTarget.beingMined = false;
-		// player.miningTarget.setPrimaryAnimation(null);
-		// player.miningTarget = null;
-		// }
-		// } else if (levelMode != LevelMode.LEVEL_MODE_DIGGING) {
-		// if (player.diggingTarget != null) {
-		// player.diggingTarget.beingDigged = false;
-		// player.diggingTarget.setPrimaryAnimation(null);
-		// player.diggingTarget = null;
-		// }
-		// }
 
 		Game.level.activeActor = player;
 		if (player.peekSquare != null) {

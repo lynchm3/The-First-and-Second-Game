@@ -127,7 +127,7 @@ public class ActionDie extends Action {
 			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " smashed ", this.image }));
 		} else if (gameObjectPerformer instanceof Tree
-				&& gameObjectPerformer.destroyedByAction instanceof ActionChoppingStart) {
+				&& gameObjectPerformer.destroyedByAction instanceof ActionChopping) {
 
 			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(
@@ -243,7 +243,7 @@ public class ActionDie extends Action {
 							.perform();
 				}
 			} else if (gameObjectPerformer instanceof Tree
-					&& gameObjectPerformer.destroyedByAction instanceof ActionChoppingStart) {
+					&& gameObjectPerformer.destroyedByAction instanceof ActionChopping) {
 
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
 						Templates.STUMP.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));

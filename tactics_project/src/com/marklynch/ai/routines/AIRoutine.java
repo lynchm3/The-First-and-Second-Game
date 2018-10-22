@@ -39,7 +39,7 @@ import com.marklynch.objects.actions.ActionFishingStart;
 import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLock;
-import com.marklynch.objects.actions.ActionMiningStart;
+import com.marklynch.objects.actions.ActionMining;
 import com.marklynch.objects.actions.ActionReportCrime;
 import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTakeItems;
@@ -702,7 +702,7 @@ public abstract class AIRoutine {
 				accumulatedSeverity += crime.type.severity;
 				if (crime.isResolved() == false) {
 					unresolvedCrimes.add(crime);
-					if (crime.action instanceof ActionMiningStart) {
+					if (crime.action instanceof ActionMining) {
 						unresolvedIllegalMinings.add(crime);
 					}
 					if (crime.stolenItems.length != 0)

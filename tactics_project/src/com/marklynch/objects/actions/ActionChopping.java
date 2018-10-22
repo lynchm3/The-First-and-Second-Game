@@ -12,12 +12,11 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Axe;
-import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionChoppingStart extends Action {
+public class ActionChopping extends Action {
 
 	public static final String ACTION_NAME = "Chop";
 
@@ -26,7 +25,7 @@ public class ActionChoppingStart extends Action {
 	Axe axe;
 
 	// Default for hostiles
-	public ActionChoppingStart(Actor attacker, GameObject vein) {
+	public ActionChopping(Actor attacker, GameObject vein) {
 		super(ACTION_NAME, textureChop);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = vein;
@@ -53,25 +52,18 @@ public class ActionChoppingStart extends Action {
 			performer.backwards = false;
 		}
 
-		// performer.choppingTarget = target;
-		// target.beingChopped = true;
-
-		Axe axe = (Axe) performer.inventory.getGameObjectOfClass(Axe.class);
+		axe = (Axe) performer.inventory.getGameObjectOfClass(Axe.class);
 		if (performer.equipped != axe)
 			performer.equippedBeforePickingUpObject = performer.equipped;
-		performer.equipped = this.axe = axe;
+		performer.equipped = axe;
 
-		// Melee weapons
 		performer.setPrimaryAnimation(new AnimationSlash(performer, target) {
-
 			@Override
 			public void runCompletionAlgorightm(boolean wait) {
 				super.runCompletionAlgorightm(wait);
 				postMeleeAnimation();
 			}
-		}
-
-		);
+		});
 	}
 
 	public void postMeleeAnimation() {
@@ -120,7 +112,7 @@ public class ActionChoppingStart extends Action {
 				}
 			} else {
 				Level.levelMode = LevelMode.LEVEL_MODE_CHOPPING;
-				Player.playerTargetAction = new ActionChoppingStart(performer, target);
+				Player.playerTargetAction = new ActionChopping(performer, target);
 				Player.playerTargetSquare = performer.squareGameObjectIsOn;
 				Player.playerFirstMove = true;
 
@@ -188,10 +180,10 @@ public class ActionChoppingStart extends Action {
 
 	@Override
 	public Sound createSound() {
-		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
-		if (pickaxe != null) {
-			float loudness = Math.max(target.soundWhenHit, pickaxe.soundWhenHitting);
-			return new Sound(performer, pickaxe, target.squareGameObjectIsOn, loudness, legal, this.getClass());
+		Axe axe = (Axe) performer.inventory.getGameObjectOfClass(Axe.class);
+		if (axe != null) {
+			float loudness = Math.max(target.soundWhenHit, axe.soundWhenHitting);
+			return new Sound(performer, axe, target.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
 	}
