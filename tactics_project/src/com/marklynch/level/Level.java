@@ -48,7 +48,6 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.actions.ActionWait;
-import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.Weapon;
@@ -2226,31 +2225,31 @@ public class Level {
 			}
 		}
 
-		if (levelMode != LevelMode.LEVEL_MODE_FISHING) {
-			if (player.fishingTarget != null) {
-				player.fishingTarget.beingFishedBy = null;
-				player.fishingTarget.setPrimaryAnimation(null);
-				player.fishingTarget = null;
-			}
-		} else if (levelMode != LevelMode.LEVEL_MODE_CHOPPING) {
-			if (player.choppingTarget != null) {
-				player.choppingTarget.beingChopped = false;
-				player.choppingTarget.setPrimaryAnimation(null);
-				player.choppingTarget = null;
-			}
-		} else if (levelMode != LevelMode.LEVEL_MODE_MINING) {
-			if (player.miningTarget != null) {
-				player.miningTarget.beingMined = false;
-				player.miningTarget.setPrimaryAnimation(null);
-				player.miningTarget = null;
-			}
-		} else if (levelMode != LevelMode.LEVEL_MODE_DIGGING) {
-			if (player.diggingTarget != null) {
-				player.diggingTarget.beingDigged = false;
-				player.diggingTarget.setPrimaryAnimation(null);
-				player.diggingTarget = null;
-			}
-		}
+		// if (levelMode != LevelMode.LEVEL_MODE_FISHING) {
+		// if (player.fishingTarget != null) {
+		// player.fishingTarget.beingFishedBy = null;
+		// player.fishingTarget.setPrimaryAnimation(null);
+		// player.fishingTarget = null;
+		// }
+		// } else if (levelMode != LevelMode.LEVEL_MODE_CHOPPING) {
+		// if (player.choppingTarget != null) {
+		// player.choppingTarget.beingChopped = false;
+		// player.choppingTarget.setPrimaryAnimation(null);
+		// player.choppingTarget = null;
+		// }
+		// } else if (levelMode != LevelMode.LEVEL_MODE_MINING) {
+		// if (player.miningTarget != null) {
+		// player.miningTarget.beingMined = false;
+		// player.miningTarget.setPrimaryAnimation(null);
+		// player.miningTarget = null;
+		// }
+		// } else if (levelMode != LevelMode.LEVEL_MODE_DIGGING) {
+		// if (player.diggingTarget != null) {
+		// player.diggingTarget.beingDigged = false;
+		// player.diggingTarget.setPrimaryAnimation(null);
+		// player.diggingTarget = null;
+		// }
+		// }
 
 		Game.level.activeActor = player;
 		if (player.peekSquare != null) {

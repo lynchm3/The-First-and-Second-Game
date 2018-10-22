@@ -243,7 +243,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public Actor beingFishedBy = null;
 	public boolean fightingFishingRod = false;
-	public boolean beingChopped = false;
+	// public boolean beingChopped = false;
 	public boolean beingMined = false;
 	public boolean beingDigged = false;
 	// public static float healthHeightInPixels = Game.SQUARE_HEIGHT;

@@ -206,7 +206,7 @@ public class Actor extends GameObject {
 	public int fishingProgress;
 	public AnimationTake fishingAnimation;
 
-	public GameObject choppingTarget;
+	// public GameObject choppingTarget;
 	public AnimationTake choppingAnimation;
 	public GameObject miningTarget;
 	public AnimationTake miningAnimation;

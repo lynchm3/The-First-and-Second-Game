@@ -6,6 +6,7 @@ import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationShake;
+import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
@@ -22,6 +23,7 @@ public class ActionChoppingStart extends Action {
 
 	Actor performer;
 	GameObject target;
+	Axe axe;
 
 	// Default for hostiles
 	public ActionChoppingStart(Actor attacker, GameObject vein) {
@@ -45,13 +47,34 @@ public class ActionChoppingStart extends Action {
 		if (!checkRange())
 			return;
 
-		performer.choppingTarget = target;
-		target.beingChopped = true;
+		if (performer.squareGameObjectIsOn.xInGrid > target.squareGameObjectIsOn.xInGrid) {
+			performer.backwards = true;
+		} else if (performer.squareGameObjectIsOn.xInGrid < target.squareGameObjectIsOn.xInGrid) {
+			performer.backwards = false;
+		}
+
+		// performer.choppingTarget = target;
+		// target.beingChopped = true;
 
 		Axe axe = (Axe) performer.inventory.getGameObjectOfClass(Axe.class);
 		if (performer.equipped != axe)
 			performer.equippedBeforePickingUpObject = performer.equipped;
-		performer.equipped = axe;
+		performer.equipped = this.axe = axe;
+
+		// Melee weapons
+		performer.setPrimaryAnimation(new AnimationSlash(performer, target) {
+
+			@Override
+			public void runCompletionAlgorightm(boolean wait) {
+				super.runCompletionAlgorightm(wait);
+				postMeleeAnimation();
+			}
+		}
+
+		);
+	}
+
+	public void postMeleeAnimation() {
 
 		float damage = target.totalHealth / 4f;
 		target.changeHealth(-damage, null, null);
@@ -126,6 +149,7 @@ public class ActionChoppingStart extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
+
 	}
 
 	@Override
