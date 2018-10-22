@@ -136,6 +136,11 @@ public class ActionChoppingStart extends Action {
 			return false;
 		}
 
+		if (target.remainingHealth <= 0) {
+			disabledReason = null;
+			return false;
+		}
+
 		return true;
 	}
 

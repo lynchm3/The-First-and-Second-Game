@@ -5,8 +5,8 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationShake extends Animation {
 
-	public float baseOffsetX = 0;
-	public float baseOffsetY = 0;
+	double durationToReach = 200;
+	double durationSoFar = 0;
 
 	// for show only, walking actor, primary
 
@@ -14,16 +14,20 @@ public class AnimationShake extends Animation {
 		super(performer, performer);
 		if (!runAnimation)
 			return;
-		// durationToReach = 200;
 		blockAI = false;
 
 	}
 
 	@Override
 	public void update(double delta) {
-		offsetX = (float) (Math.random() * 16) - 8f;
-		offsetY = (float) (Math.random() * 16) - 8f;
-		// keyFrameUpdate(delta);
+		durationSoFar += delta;
+		if (durationSoFar >= durationToReach) {
+			runCompletionAlgorightm(true);
+		} else {
+			offsetX = (float) (Math.random() * 16) - 8f;
+			offsetY = (float) (Math.random() * 16) - 8f;
+
+		}
 	}
 
 	// @Override
