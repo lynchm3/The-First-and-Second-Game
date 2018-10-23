@@ -78,9 +78,7 @@ public class ActionChopping extends Action {
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " chopped at ", target, " with ", axe }));
 
-		if (Game.level.shouldLog(target, performer)) {
-			target.setPrimaryAnimation(new AnimationShake(target));
-		}
+		target.setPrimaryAnimation(new AnimationShake(target));
 
 		boolean destroyed = target.checkIfDestroyed(performer, this);
 
