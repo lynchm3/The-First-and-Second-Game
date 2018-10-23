@@ -7,7 +7,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
-import com.marklynch.objects.Junk;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
@@ -69,32 +69,40 @@ public class ActionMining extends Action {
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
 
-		if (!target.infinite) {
-			float damage = target.totalHealth / 4f;
-			target.changeHealth(-damage, null, null);
-		}
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
 		boolean destroyed = target.checkIfDestroyed(performer, this);
 
-		Junk ore = null;
-		Actor oreOwner = performer;
-		if (target.owner != null)
-			oreOwner = target.owner;
+		GameObject ore = null;
+		// Actor oreOwner = performer;
+		// if (target.owner != null)
+		// oreOwner = target.owner;
 
 		if (Math.random() < target.dropChance) {
-			ore = target.oreTemplate.makeCopy(target.squareGameObjectIsOn, oreOwner);
 
-			if (Game.level.openInventories.size() > 0) {
-			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-				performer.addSecondaryAnimation(new AnimationTake(ore, performer, 0, 0, 1f));
-
+			if (!target.infinite) {
+				float damage = target.totalHealth / Vein.totalOresForExhaustableVeins;
+				target.changeHealth(-damage, null, null);
+				if (target.inventory.gameObjects.size() > 0) {
+					ore = target.inventory.get(0);
+				}
+			} else {
+				ore = target.oreTemplate.makeCopy(target.squareGameObjectIsOn, target.owner);
 			}
-			performer.inventory.add(ore);
 
-			if (Game.level.shouldLog(target, performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", ore }));
+			if (ore != null) {
+				if (Game.level.openInventories.size() > 0) {
+				} else if (performer.squareGameObjectIsOn.onScreen()
+						&& performer.squareGameObjectIsOn.visibleToPlayer) {
+					performer.addSecondaryAnimation(new AnimationTake(ore, performer, 0, 0, 1f));
+
+				}
+				performer.inventory.add(ore);
+
+				if (Game.level.shouldLog(target, performer))
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", ore }));
+			}
 		} else {
 
 			if (Game.level.shouldLog(target, performer))

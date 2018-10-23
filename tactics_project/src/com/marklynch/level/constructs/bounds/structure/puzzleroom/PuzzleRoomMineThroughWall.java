@@ -26,18 +26,18 @@ public class PuzzleRoomMineThroughWall extends StructureRoom {
 		// GameObject rock = Templates.ROCK.makeCopy(Level.squares[posX + 2][posY +
 		// 2], null);
 
-		Vein vein1 = Templates.VEIN.makeCopy(Level.squares[posX + 0][posY + 0], null, false, Templates.ORE, 0.1f);
-		Vein vein2 = Templates.VEIN.makeCopy(Level.squares[posX + 1][posY + 0], null, false, Templates.ORE, 0.1f);
-		Vein vein3 = Templates.VEIN.makeCopy(Level.squares[posX + 2][posY + 0], null, false, Templates.ORE, 0.1f);
-		Vein vein4 = Templates.VEIN.makeCopy(Level.squares[posX + 3][posY + 0], null, false, Templates.ORE, 0.1f);
-		Vein vein5 = Templates.VEIN.makeCopy(Level.squares[posX + 4][posY + 0], null, false, Templates.ORE, 0.1f);
-		Vein vein6 = Templates.VEIN.makeCopy(Level.squares[posX + 1][posY + 1], null, false, Templates.ORE, 0.1f);
-		Vein vein7 = Templates.VEIN.makeCopy(Level.squares[posX + 2][posY + 1], null, false, Templates.ORE, 0.1f);
-		Vein vein8 = Templates.VEIN.makeCopy(Level.squares[posX + 3][posY + 1], null, false, Templates.ORE, 0.1f);
-		Vein vein9 = Templates.VEIN.makeCopy(Level.squares[posX + 4][posY + 1], null, false, Templates.ORE, 0.1f);
-		Vein vein10 = Templates.VEIN.makeCopy(Level.squares[posX + 0][posY + 2], null, false, Templates.ORE, 0.1f);
-		Vein vein11 = Templates.VEIN.makeCopy(Level.squares[posX + 1][posY + 2], null, false, Templates.ORE, 0.1f);
-		Vein vein12 = Templates.VEIN.makeCopy(Level.squares[posX + 4][posY + 2], null, false, Templates.ORE, 0.1f);
+		Vein vein1 = Templates.VEIN.makeCopy(Level.squares[posX + 0][posY + 0], null, false, Templates.ORE, 0.5f);
+		Vein vein2 = Templates.VEIN.makeCopy(Level.squares[posX + 1][posY + 0], null, false, Templates.ORE, 0.5f);
+		Vein vein3 = Templates.VEIN.makeCopy(Level.squares[posX + 2][posY + 0], null, false, Templates.ORE, 0.5f);
+		Vein vein4 = Templates.VEIN.makeCopy(Level.squares[posX + 3][posY + 0], null, false, Templates.ORE, 0.5f);
+		Vein vein5 = Templates.VEIN.makeCopy(Level.squares[posX + 4][posY + 0], null, false, Templates.ORE, 0.5f);
+		Vein vein6 = Templates.VEIN.makeCopy(Level.squares[posX + 1][posY + 1], null, false, Templates.ORE, 0.5f);
+		Vein vein7 = Templates.VEIN.makeCopy(Level.squares[posX + 2][posY + 1], null, false, Templates.ORE, 0.5f);
+		Vein vein8 = Templates.VEIN.makeCopy(Level.squares[posX + 3][posY + 1], null, false, Templates.ORE, 0.5f);
+		Vein vein9 = Templates.VEIN.makeCopy(Level.squares[posX + 4][posY + 1], null, false, Templates.ORE, 0.5f);
+		Vein vein10 = Templates.VEIN.makeCopy(Level.squares[posX + 0][posY + 2], null, false, Templates.ORE, 0.5f);
+		Vein vein11 = Templates.VEIN.makeCopy(Level.squares[posX + 1][posY + 2], null, false, Templates.ORE, 0.5f);
+		Vein vein12 = Templates.VEIN.makeCopy(Level.squares[posX + 4][posY + 2], null, false, Templates.ORE, 0.5f);
 
 		features.add(new StructureFeature(vein1));
 		features.add(new StructureFeature(vein2));
