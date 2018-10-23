@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
-import com.marklynch.level.constructs.animation.primary.AnimationScale;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.primary.AnimationWalk;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 
 public abstract class Animation {
@@ -160,11 +158,11 @@ public abstract class Animation {
 		if (performer == null)
 			return;
 
-		if (!(performer instanceof Actor)) {
-			if (onCompletionListener != null)
-				onCompletionListener.animationComplete(performer);
-			return;
-		}
+		// if (!(performer instanceof Actor)) {
+		// if (onCompletionListener != null)
+		// onCompletionListener.animationComplete(performer);
+		// return;
+		// }
 
 		if (this != performer.getPrimaryAnimation()) {
 			if (onCompletionListener != null)
