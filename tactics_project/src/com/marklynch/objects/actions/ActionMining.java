@@ -80,23 +80,25 @@ public class ActionMining extends Action {
 
 			if (!target.infinite) {
 				float damage = target.totalHealth / Vein.totalOresForExhaustableVeins;
-				target.changeHealth(-damage, null, null);
 				if (target.inventory.gameObjects.size() > 0) {
 					ore = target.inventory.get(0);
+					performer.inventory.add(ore);
 				}
+				target.changeHealth(-damage, null, null);
 			} else {
 				ore = target.oreTemplate.makeCopy(target.squareGameObjectIsOn, target.owner);
+				performer.inventory.add(ore);
 			}
 
 			if (ore != null) {
+
 				if (Game.level.openInventories.size() > 0) {
+
 				} else if (performer.squareGameObjectIsOn.onScreen()
 						&& performer.squareGameObjectIsOn.visibleToPlayer) {
 					performer.addSecondaryAnimation(new AnimationTake(ore, performer, 0, 0, 1f));
 
 				}
-				performer.inventory.add(ore);
-
 				if (Game.level.shouldLog(target, performer))
 					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", ore }));
 			}
