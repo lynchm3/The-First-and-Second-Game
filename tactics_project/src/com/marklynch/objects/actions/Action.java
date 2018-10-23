@@ -133,6 +133,8 @@ public abstract class Action {
 
 	// Illegal Reason
 	public String illegalReason = null;
+
+	public boolean performed = false;
 	public static final String ASSAULT = "Assault";
 	public static final String ARSON = "Arson";
 	public static final String GRAND_THEFT = "Grand Theft";
@@ -152,6 +154,9 @@ public abstract class Action {
 	}
 
 	public void perform() {
+
+		performed = true;
+
 		// Cancel fishing
 		if (gameObjectPerformer != null && gameObjectPerformer.fishingTarget != null
 				&& !(this instanceof ActionFishingStart) && !(this instanceof ActionFishingCompleted)
@@ -325,6 +330,6 @@ public abstract class Action {
 	}
 
 	public boolean shouldContinue() {
-		return false;
+		return !performed;
 	}
 }

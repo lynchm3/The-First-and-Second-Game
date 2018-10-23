@@ -9,7 +9,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionMining extends Action {
@@ -113,20 +112,20 @@ public class ActionMining extends Action {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " depleted ", target }));
 		}
 
-		if (performer == Game.level.player) {
-			if (destroyed) {
-				target.setPrimaryAnimation(null);
-				if (performer.equippedBeforePickingUpObject != null) {
-					performer.equipped = performer.equippedBeforePickingUpObject;
-					performer.equippedBeforePickingUpObject = null;
-				}
-			} else {
-				Player.playerTargetSquare = performer.squareGameObjectIsOn;
-				Player.playerFirstMove = true;
-			}
-		} else {
-
-		}
+		// if (performer == Game.level.player) {
+		// if (destroyed) {
+		// target.setPrimaryAnimation(null);
+		// if (performer.equippedBeforePickingUpObject != null) {
+		// performer.equipped = performer.equippedBeforePickingUpObject;
+		// performer.equippedBeforePickingUpObject = null;
+		// }
+		// } else {
+		// Player.playerTargetSquare = performer.squareGameObjectIsOn;
+		// Player.playerFirstMove = true;
+		// }
+		// } else {
+		//
+		// }
 
 		target.showPow();
 

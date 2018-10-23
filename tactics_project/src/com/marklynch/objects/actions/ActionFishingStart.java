@@ -3,15 +3,12 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Level;
-import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionFishingStart extends Action {
@@ -65,19 +62,19 @@ public class ActionFishingStart extends Action {
 					new ActivityLog(new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
 		}
 
-		if (performer == Game.level.player) {
-			Level.levelMode = LevelMode.LEVEL_MODE_FISHING;
-			Player.playerTargetAction = new ActionFishingInProgress(performer, target);
-			Player.playerTargetSquare = performer.squareGameObjectIsOn;
-			Player.playerFirstMove = true;
-		} else {
-			// if (Math.random() < 2) {
-			// if (Game.level.shouldLog(target, performer))
-			// Game.level.logOnScreen(new ActivityLog(new Object[] { performer,
-			// " went fishing for ", target,
-			// " with ", fishingRod, " but failed!" }));
-			// }
-		}
+		// if (performer == Game.level.player) {
+		// Level.levelMode = LevelMode.LEVEL_MODE_FISHING;
+		// Player.playerTargetAction = new ActionFishingInProgress(performer, target);
+		// Player.playerTargetSquare = performer.squareGameObjectIsOn;
+		// Player.playerFirstMove = true;
+		// } else {
+		// // if (Math.random() < 2) {
+		// // if (Game.level.shouldLog(target, performer))
+		// // Game.level.logOnScreen(new ActivityLog(new Object[] { performer,
+		// // " went fishing for ", target,
+		// // " with ", fishingRod, " but failed!" }));
+		// // }
+		// }
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;

@@ -11,7 +11,6 @@ import com.marklynch.objects.Junk;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionChopping extends Action {
@@ -100,21 +99,21 @@ public class ActionChopping extends Action {
 
 		}
 
-		if (performer == Game.level.player) {
-			if (destroyed) {
-				target.setPrimaryAnimation(null);
-				if (performer.equippedBeforePickingUpObject != null) {
-					performer.equipped = performer.equippedBeforePickingUpObject;
-					performer.equippedBeforePickingUpObject = null;
-				}
-			} else {
-				Player.playerTargetSquare = performer.squareGameObjectIsOn;
-				Player.playerFirstMove = true;
-
-			}
-		} else {
-
-		}
+		// if (performer == Game.level.player) {
+		// if (destroyed) {
+		// target.setPrimaryAnimation(null);
+		// if (performer.equippedBeforePickingUpObject != null) {
+		// performer.equipped = performer.equippedBeforePickingUpObject;
+		// performer.equippedBeforePickingUpObject = null;
+		// }
+		// } else {
+		//// Player.playerTargetSquare = performer.squareGameObjectIsOn;
+		//// Player.playerFirstMove = true;
+		//
+		// }
+		// } else {
+		//
+		// }
 
 		target.showPow();
 

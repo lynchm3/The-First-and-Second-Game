@@ -1655,9 +1655,9 @@ public class Level {
 			activeTextBox.updateRealtime(delta);
 		}
 
-		if (Player.playerTargetActor != null) {
-			Player.playerTargetSquare = Player.playerTargetActor.squareGameObjectIsOn;
-		}
+		// if (Player.playerTargetActor != null) {
+		// Player.playerTargetSquare = Player.playerTargetActor.squareGameObjectIsOn;
+		// }
 
 		if (blockingAnimations.size() != 0)
 			return;
@@ -1687,18 +1687,22 @@ public class Level {
 			}
 
 			actors.removeAll(deadActors);
+		} else if (Game.level.player.playerTargetAction != null
+				&& !Game.level.player.playerTargetAction.shouldContinue()) {
+			pausePlayer();
+			return;
 		} else if (Game.level.player.getPrimaryAnimation().getCompleted()
 				&& Game.level.player.playerTargetAction != null && Game.level.player.playerTargetAction.recheck()
-				&& Game.level.player.playerTargetAction.checkRange())
+				&& Game.level.player.playerTargetAction.checkRange()) {
 
-		{
+			// HERE is where we perform the action...
+			// Then immediately call pauseplayer
+
 			Action playerActionToPerform = Game.level.player.playerTargetAction;
 			playerActionToPerform.perform();
-			// Game.level.player.playerTargetAction.perform();
-			if (playerActionToPerform == Game.level.player.playerTargetAction) {
-				if (!Game.level.player.playerTargetAction.shouldContinue()) {
-					pausePlayer();
-				}
+			if (playerActionToPerform == Game.level.player.playerTargetAction
+					&& !playerActionToPerform.shouldContinue()) {
+				pausePlayer();
 			}
 		} else if (player.playerTargetActor != null && player.straightLineDistanceTo(Player.playerTargetSquare) <= 2) {
 
@@ -1716,6 +1720,13 @@ public class Level {
 			}
 
 		} else if (Game.level.player.getPrimaryAnimation().getCompleted() && Player.playerTargetSquare != null) {
+
+			// if (Game.level.player.playerTargetAction != null
+			// && !Game.level.player.playerTargetAction.shouldContinue()) {
+			// pausePlayer();
+			// return;
+			// }
+
 			// Auto move player
 
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
@@ -2276,6 +2287,11 @@ public class Level {
 		changeTime(20);
 		// changeTime(3600); // was 20
 		// secondString;
+
+		// if (Player.playerTargetAction != null &&
+		// !Player.playerTargetAction.shouldContinue()) {
+		// pausePlayer();
+		// }
 
 		// If hiding in a place, add it's effects
 		if (player.hidingPlace != null) {

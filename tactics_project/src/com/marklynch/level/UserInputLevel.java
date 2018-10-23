@@ -703,6 +703,7 @@ public class UserInputLevel {
 			if (Game.level.settingFollowPlayer && Game.level.player.onScreen()) {
 				Game.level.cameraFollow = true;
 			}
+			Level.pausePlayer();
 			Player.playerTargetAction = action;
 			Player.playerTargetSquare = square;
 			if (!(Level.player.getPrimaryAnimation() instanceof AnimationWalk))
