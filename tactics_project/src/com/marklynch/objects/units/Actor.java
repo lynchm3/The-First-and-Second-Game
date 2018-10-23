@@ -670,6 +670,37 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(-(x + halfWidthAtScale), -(y + hipY)));
 		Game.activeBatch.updateUniforms();
 
+		if (drawHealthBar && remainingHealth != totalHealth && remainingHealth > 0) {
+
+			// draw sidebar on square
+			float healthPercentage = ((float) remainingHealth) / ((float) totalHealth);
+			float healthBarHeightInPixels = height * healthPercentage;
+			float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+			float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
+			if (primaryAnimation != null) {
+				healthXInPixels += primaryAnimation.offsetX;
+				healthYInPixels += primaryAnimation.offsetY;
+			}
+
+			Color aggressionColor = Color.YELLOW;
+			if (thoughtsOnPlayer > 50) {
+				aggressionColor = Color.GREEN;
+			} else if (thoughtsOnPlayer < -50) {
+				aggressionColor = Color.RED;
+			}
+
+			// White bit under health bar
+			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), x + 1, y + 1, x + healthWidthInPixels - 1,
+					y + height - 1);
+
+			// Colored health bar
+			QuadUtils.drawQuad(aggressionColor, x + 1, y + 1, x + healthWidthInPixels - 1,
+					y + healthBarHeightInPixels - 1);
+		}
+
+		drawBackArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
+				reverseRotation, useAnimation);
+
 		for (Arrow arrow : arrowsEmbeddedInThis) {
 
 			float arrowWidth = arrow.width;
@@ -753,35 +784,6 @@ public class Actor extends GameObject {
 
 			}
 		}
-
-		if (drawHealthBar && remainingHealth != totalHealth && remainingHealth > 0) {
-
-			// draw sidebar on square
-			float healthPercentage = ((float) remainingHealth) / ((float) totalHealth);
-			float healthBarHeightInPixels = height * healthPercentage;
-			float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
-			float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
-			if (primaryAnimation != null) {
-				healthXInPixels += primaryAnimation.offsetX;
-				healthYInPixels += primaryAnimation.offsetY;
-			}
-
-			Color aggressionColor = Color.YELLOW;
-			if (thoughtsOnPlayer > 50) {
-				aggressionColor = Color.GREEN;
-			} else if (thoughtsOnPlayer < -50) {
-				aggressionColor = Color.RED;
-			}
-
-			// White bit under health bar
-			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), x + 1, y + 1, x + healthWidthInPixels - 1,
-					y + height - 1);
-
-			// Colored health bar
-			QuadUtils.drawQuad(aggressionColor, x + 1, y + 1, x + healthWidthInPixels - 1,
-					y + healthBarHeightInPixels - 1);
-		}
-
 		if (helmet != null && !sleeping) {
 
 			int helmetPositionXInPixels = (int) ((x) + headAnchorX - helmet.anchorX);
@@ -832,9 +834,6 @@ public class Actor extends GameObject {
 
 			}
 		}
-
-		drawBackArm(x, y, alpha, highlight, boundsX1, boundsY1, boundsX2, boundsY2, color, drawClothes, backwards,
-				reverseRotation, useAnimation);
 
 		// pelvis
 		if (pelvisImageTexture != null) {
