@@ -11,6 +11,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionDig extends Action {
@@ -152,6 +153,11 @@ public class ActionDig extends Action {
 
 	@Override
 	public boolean shouldContinue() {
+
+		if (performed && Player.inFight()) {
+			return false;
+		}
+
 		if (target.remainingHealth <= 0) {
 			disabledReason = null;
 			return false;

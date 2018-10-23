@@ -464,4 +464,14 @@ public class Player extends Human {
 		return false;
 	}
 
+	public static boolean inFight() {
+		for (GameObject attacker : Level.player.attackers) {
+			if (attacker.squareGameObjectIsOn != null && attacker.remainingHealth > 0
+					&& Level.player.straightLineDistanceTo(attacker.squareGameObjectIsOn) < 20) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

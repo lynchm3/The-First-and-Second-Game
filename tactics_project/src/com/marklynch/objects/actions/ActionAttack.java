@@ -11,6 +11,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
@@ -247,4 +248,18 @@ public class ActionAttack extends Action {
 		return null;
 	}
 
+	@Override
+	public boolean shouldContinue() {
+
+		if (performed && Player.inFight()) {
+			return false;
+		}
+
+		if (target.remainingHealth <= 0) {
+			disabledReason = null;
+			return false;
+		}
+
+		return true;
+	}
 }
