@@ -169,7 +169,7 @@ public class Level {
 	public ArrayList<Actor> actorsToRemove = new ArrayList<Actor>();
 
 	public enum LevelMode {
-		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST, LEVEL_SELECT_TELEPORT_SQUARE, LEVEL_MODE_FISHING, LEVEL_MODE_CHOPPING, LEVEL_MODE_MINING, LEVEL_MODE_DIGGING
+		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST, LEVEL_SELECT_TELEPORT_SQUARE, LEVEL_MODE_FISHING
 	}
 
 	public static LevelMode levelMode = LevelMode.LEVEL_MODE_NORMAL;
@@ -1185,8 +1185,7 @@ public class Level {
 		if (openInventories.size() == 0 && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null
 				&& Game.pinWindowHoveringOver == null) {
 
-			if (levelMode == LevelMode.LEVEL_MODE_FISHING || levelMode == LevelMode.LEVEL_MODE_CHOPPING
-					|| levelMode == LevelMode.LEVEL_MODE_MINING || levelMode == LevelMode.LEVEL_MODE_DIGGING) {
+			if (levelMode == LevelMode.LEVEL_MODE_FISHING) {
 				// Game.squareMouseIsOver.drawX(false);
 			} else if (levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
 				Game.squareMouseIsOver.drawX(false);
@@ -1697,7 +1696,9 @@ public class Level {
 			playerActionToPerform.perform();
 			// Game.level.player.playerTargetAction.perform();
 			if (playerActionToPerform == Game.level.player.playerTargetAction) {
-				pausePlayer();
+				if (!Game.level.player.playerTargetAction.shouldContinue()) {
+					pausePlayer();
+				}
 			}
 		} else if (player.playerTargetActor != null && player.straightLineDistanceTo(Player.playerTargetSquare) <= 2) {
 

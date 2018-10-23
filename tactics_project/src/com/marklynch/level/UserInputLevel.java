@@ -661,10 +661,7 @@ public class UserInputLevel {
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		}
 
-		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING
-				|| Game.level.levelMode == LevelMode.LEVEL_MODE_CHOPPING
-				|| Game.level.levelMode == LevelMode.LEVEL_MODE_MINING
-				|| Game.level.levelMode == LevelMode.LEVEL_MODE_DIGGING) {
+		if (Game.level.levelMode == LevelMode.LEVEL_MODE_FISHING) {
 
 			return;
 		}

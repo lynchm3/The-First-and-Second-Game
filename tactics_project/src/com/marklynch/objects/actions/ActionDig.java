@@ -117,6 +117,11 @@ public class ActionDig extends Action {
 			return false;
 		}
 
+		if (target.remainingHealth <= 0) {
+			disabledReason = null;
+			return false;
+		}
+
 		return true;
 	}
 
@@ -143,6 +148,16 @@ public class ActionDig extends Action {
 			return new Sound(performer, shovel, target.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
+	}
+
+	@Override
+	public boolean shouldContinue() {
+		if (target.remainingHealth <= 0) {
+			disabledReason = null;
+			return false;
+		}
+
+		return true;
 	}
 
 }

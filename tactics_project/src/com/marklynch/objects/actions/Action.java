@@ -323,4 +323,8 @@ public abstract class Action {
 		return true;
 
 	}
+
+	public boolean shouldContinue() {
+		return false;
+	}
 }

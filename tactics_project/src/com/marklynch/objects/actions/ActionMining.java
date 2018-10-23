@@ -1,8 +1,6 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
-import com.marklynch.level.Level;
-import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
@@ -117,15 +115,12 @@ public class ActionMining extends Action {
 
 		if (performer == Game.level.player) {
 			if (destroyed) {
-				Level.pausePlayer();
 				target.setPrimaryAnimation(null);
 				if (performer.equippedBeforePickingUpObject != null) {
 					performer.equipped = performer.equippedBeforePickingUpObject;
 					performer.equippedBeforePickingUpObject = null;
 				}
 			} else {
-				Level.levelMode = LevelMode.LEVEL_MODE_MINING;
-				Player.playerTargetAction = new ActionMining(performer, target);
 				Player.playerTargetSquare = performer.squareGameObjectIsOn;
 				Player.playerFirstMove = true;
 			}
@@ -203,6 +198,16 @@ public class ActionMining extends Action {
 			return new Sound(performer, pickaxe, target.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
+	}
+
+	@Override
+	public boolean shouldContinue() {
+		if (target.remainingHealth <= 0) {
+			disabledReason = null;
+			return false;
+		}
+
+		return true;
 	}
 
 }
