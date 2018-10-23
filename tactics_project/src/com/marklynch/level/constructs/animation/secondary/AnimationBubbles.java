@@ -9,15 +9,12 @@ import com.marklynch.utils.TextureUtils;
 public class AnimationBubbles extends Animation {
 
 	float x, y; // originX, originY, targetX, targetY, speedX, speedY;
-	public float originX = 0;
-	public float originY = 0;
-	public float targetX = 0;
-	public float targetY = 0;
 	public GameObject targetGameObject;
 	public float speed = 1f;
 	boolean reachedDestination = false;
 	public Texture texture = Templates.BUBBLE.imageTexture;
 	public float size = 0f;
+	public float targetY;
 
 	public AnimationBubbles(GameObject targetGameObject, float originX, float originY, float speed) {
 
@@ -29,36 +26,24 @@ public class AnimationBubbles extends Animation {
 		this.speed = speed;
 
 		size = (float) (Math.random() * 16d);
-		// if (random < 0.33d) {
-		// texture = Templates.LARGE_ORB.imageTexture;
-		// } else if (random < 0.66d) {
-		// texture = Templates.MEDIUM_ORB.imageTexture;
-		// } else {
-		// texture = Templates.SMALL_ORB.imageTexture;
-		// }
 
-		this.x = this.originX = (float) (originX + Math.random() * 20d - 10d);
-		this.y = this.originY = originY;
-
-		this.durationToReachMillis = 1000f;
-
+		this.x = (float) (originX + Math.random() * 20d - 10d);
+		this.y = originY;
+		targetY = y - 100f;
 		blockAI = false;
 
 	}
 
 	@Override
 	public void update(double delta) {
-
 		if (getCompleted())
 			return;
 
-		durationSoFar += delta;
-		double progress = durationSoFar / durationToReachMillis;
-		if (progress >= 1) {
-			runCompletionAlgorightm(true);
-		} else {
-			y -= delta * 0.1f;
-		}
+		y -= delta * 0.1;
+
+		if (y < targetY)
+			runCompletionAlgorightm(false);
+
 	}
 
 	@Override
@@ -76,8 +61,8 @@ public class AnimationBubbles extends Animation {
 	}
 
 	public void draw() {
-		if (reachedDestination)
-			return;
+		// if (reachedDestination)
+		// return;
 
 		if (getCompleted())
 			return;
