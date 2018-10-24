@@ -42,7 +42,7 @@ import com.marklynch.objects.actions.ActionChangeAppearance;
 import com.marklynch.objects.actions.ActionChopping;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
-import com.marklynch.objects.actions.ActionDig;
+import com.marklynch.objects.actions.ActionDigging;
 import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionEatItems;
@@ -1093,7 +1093,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (diggable) {
-			Action action = new ActionDig(performer, this);
+			Action action = new ActionDigging(performer, this);
 			return action;
 		}
 
@@ -1142,7 +1142,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (diggable) {
-			return new ActionDig(performer, this);
+			return new ActionDigging(performer, this);
 		}
 
 		if (this instanceof Vein) {
@@ -1248,7 +1248,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (diggable) {
-			actions.add(new ActionDig(performer, this));
+			actions.add(new ActionDigging(performer, this));
 		}
 
 		// Tree and stump

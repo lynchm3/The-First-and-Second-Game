@@ -14,7 +14,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionDig extends Action {
+public class ActionDigging extends Action {
 
 	public static final String ACTION_NAME = "Dig";
 
@@ -23,7 +23,7 @@ public class ActionDig extends Action {
 	Shovel shovel;
 
 	// Default for hostiles
-	public ActionDig(Actor attacker, GameObject target) {
+	public ActionDigging(Actor attacker, GameObject target) {
 		super(ACTION_NAME, textureDig);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
@@ -108,6 +108,7 @@ public class ActionDig extends Action {
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
+		performer.equipped = performer.equippedBeforePickingUpObject;
 	}
 
 	@Override

@@ -2211,8 +2211,9 @@ public class Actor extends GameObject {
 	}
 
 	public void equip(GameObject gameObject) {
-		if (canEquipWeapons)
+		if (canEquipWeapons) {
 			this.equipped = gameObject;
+		}
 	}
 
 	public void setMiniDialogue(String miniDialogue, GameObject target) {

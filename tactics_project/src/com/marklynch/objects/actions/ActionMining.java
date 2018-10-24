@@ -157,6 +157,7 @@ public class ActionMining extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
+		performer.equipped = performer.equippedBeforePickingUpObject;
 
 	}
 

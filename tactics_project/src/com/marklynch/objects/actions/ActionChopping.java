@@ -132,6 +132,7 @@ public class ActionChopping extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
+		performer.equipped = performer.equippedBeforePickingUpObject;
 
 	}
 
