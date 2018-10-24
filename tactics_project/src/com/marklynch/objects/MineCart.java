@@ -67,6 +67,8 @@ public class MineCart extends GameObject {
 			for (final GameObject gameObject : (ArrayList<GameObject>) this.squareGameObjectIsOn.inventory.gameObjects
 					.clone()) {
 
+				System.out.println("Minecart gameObject = " + gameObject);
+
 				if (gameObject.isFloorObject)
 					continue;
 
@@ -75,7 +77,7 @@ public class MineCart extends GameObject {
 
 				gameObject.lastTurnThisWasMovedByMinecart = Level.turn;
 
-				gameObject.setPrimaryAnimation(new AnimationStraightLine(this, 2f, true, 0f, null, array));
+				gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 2f, true, 0f, null, array));
 			}
 		}
 	}

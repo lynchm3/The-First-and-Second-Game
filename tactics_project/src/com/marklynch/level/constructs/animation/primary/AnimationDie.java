@@ -50,7 +50,7 @@ public class AnimationDie extends Animation {
 		// kf0.setAllSpeeds(0.004d);
 		// kf0.offsetXSpeed = 0.5d;
 		// kf0.offsetYSpeed = 1d;
-		kf0.keyFrameTimeMillis = 200f;
+		kf0.keyFrameTimeMillis = 100f;
 		kf0.normaliseSpeeds = true;
 		keyFrames.add(kf0);
 	}

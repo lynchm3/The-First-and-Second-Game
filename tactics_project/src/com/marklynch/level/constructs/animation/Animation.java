@@ -82,11 +82,18 @@ public abstract class Animation {
 	public GameObject weapon;
 
 	public Animation(GameObject performer, OnCompletionListener onCompletionListener, Square[] targetSquares,
-			Square targetSquare, GameObject projectileObject, Action action, Actor actor, GameObject weapon, Object... objectsInvolved) {
+			Square targetSquare, GameObject projectileObject, Action action, Actor shooter, GameObject weapon,
+			Object... objectsInvolved) {
 
 		this.performer = performer;
 		this.targetSquares = targetSquares;
 		this.onCompletionListener = onCompletionListener;
+		this.targetSquare = targetSquare;
+		this.projectileObject = projectileObject;
+		this.action = action;
+		this.shooter = shooter;
+		this.weapon = weapon;
+
 		runAnimation = Game.level.shouldLog(objectsInvolved, false);// && performer == Game.level.player;
 		if (!runAnimation) {
 			runCompletionAlgorightm(true);
