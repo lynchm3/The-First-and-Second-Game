@@ -7,6 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationPush;
 import com.marklynch.level.constructs.animation.primary.AnimationTeleport;
 import com.marklynch.level.quest.caveoftheblind.Blind;
@@ -60,8 +61,8 @@ public class ActionTeleport extends Action {
 		}
 
 		if (teleportee != gameObjectPerformer) {
-			gameObjectPerformer.setPrimaryAnimation(
-					new AnimationPush(gameObjectPerformer, targetSquare, gameObjectPerformer.getPrimaryAnimation()));
+			gameObjectPerformer.setPrimaryAnimation(new AnimationPush(gameObjectPerformer, targetSquare,
+					gameObjectPerformer.getPrimaryAnimation(), null));
 		}
 
 		Square startSquare = teleportee.squareGameObjectIsOn;
@@ -70,16 +71,13 @@ public class ActionTeleport extends Action {
 			Level.pausePlayer();
 		}
 
-		teleportee.setPrimaryAnimation(new AnimationTeleport(teleportee, startSquare, targetSquare) {
-
-			@Override
-			public void runCompletionAlgorightm(boolean wait) {
-				offsetX = 0;
-				offsetY = 0;
-				postAnimation();
-				super.runCompletionAlgorightm(wait);
-			}
-		});
+		teleportee.setPrimaryAnimation(
+				new AnimationTeleport(teleportee, startSquare, targetSquare, new OnCompletionListener() {
+					@Override
+					public void animationComplete(GameObject gameObject) {
+						postAnimation();
+					}
+				}));
 
 	}
 

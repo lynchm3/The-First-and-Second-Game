@@ -13,8 +13,8 @@ public class AnimationMovementFade1 extends Animation {
 	GameObject gameObject;
 	float alpha = 0.5f;
 
-	public AnimationMovementFade1(Square square, GameObject gameObject) {
-		super(null, square);
+	public AnimationMovementFade1(Square square, GameObject gameObject, OnCompletionListener onCompletionListener) {
+		super(null, onCompletionListener, square);
 		if (!runAnimation)
 			return;
 		this.square = square;

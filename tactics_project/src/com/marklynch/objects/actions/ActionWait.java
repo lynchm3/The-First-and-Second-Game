@@ -40,7 +40,7 @@ public class ActionWait extends Action {
 			sound.play();
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-			performer.setPrimaryAnimation(new AnimationWait(performer));
+			performer.setPrimaryAnimation(new AnimationWait(performer, null));
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();
 

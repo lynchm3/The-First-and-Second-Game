@@ -4,8 +4,6 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.animation.Animation;
-import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
@@ -70,21 +68,11 @@ public class ActionCastBurn extends Action {
 			// target.squareGameObjectIsOn,
 			// Templates.FIRE_BALL.makeCopy(null, null), performer, 1f, 0f, true));
 
-			Animation animationThrown = new AnimationThrown("Fire Ball", performer, this, target,
-					target.squareGameObjectIsOn, Templates.FIRE_BALL.makeCopy(null, null), performer, 1f, 0f, true) {
-				@Override
-				public void runCompletionAlgorightm(boolean wait) {
-					super.runCompletionAlgorightm(wait);
-					postRangedAnimation(ActionCastBurn.this.performer, ActionCastBurn.this.performer,
-							ActionCastBurn.this.target, ActionCastBurn.this.target.squareGameObjectIsOn, fireBall,
-							ActionCastBurn.this);
-				}
-			};
+			// Animation animationThrown = new AnimationThrown("Fire Ball", performer, this,
+			// target,
+			// target.squareGameObjectIsOn, Templates.FIRE_BALL.makeCopy(null, null),
+			// performer, 1f, 0f, true,null);
 		} else {
-
-			AnimationThrown.postRangedAnimation(ActionCastBurn.this.performer, ActionCastBurn.this.performer,
-					ActionCastBurn.this.target, ActionCastBurn.this.target.squareGameObjectIsOn, fireBall,
-					ActionCastBurn.this);
 		}
 		// else {
 		// performer.showPow(target);

@@ -92,13 +92,7 @@ public class PowerDash extends Power {
 			// delay = 32f;
 
 			pushedObject.gameObject.setPrimaryAnimation(new AnimationStraightLine(pushedObject.gameObject, speed, true,
-					delay, new Square[] { pushedObject.destinationSquare }) {
-				@Override
-				public void runCompletionAlgorightm(boolean wait) {
-					super.runCompletionAlgorightm(wait);
-					postRangedAnimation(pushedObject.gameObject, pushedObject.destinationSquare);
-				}
-			});
+					delay, null, new Square[] { pushedObject.destinationSquare }));
 
 			previousDelay = delay;
 			previousPushedObject = pushedObject;
@@ -158,17 +152,6 @@ public class PowerDash extends Power {
 						// boolean blockAI, Square... targetSquares) {
 
 						pushedObjects.add(new PushedObject(gameObjectThatCantShareSquare, recursiveSquare));
-
-						// gameObjectThatCantShareSquare.setPrimaryAnimation(
-						// new AnimationStraightLine(gameObjectThatCantShareSquare, 2f, true,
-						// finaledSquare) {
-						// @Override
-						// public void runCompletionAlgorightm(boolean wait) {
-						// super.runCompletionAlgorightm(wait);
-						// postRangedAnimation(gameObjectThatCantShareSquare, finaledSquare);
-						// // postRangedAnimation(arrow);
-						// }
-						// });
 
 						int distanceTargetIsPushed = i - 1 + recursiveDistance;
 						if (distanceTargetIsPushed > attemptedDistance) {

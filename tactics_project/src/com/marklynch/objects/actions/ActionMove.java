@@ -79,8 +79,8 @@ public class ActionMove extends Action {
 		}
 
 		if (Game.level.shouldLog(actor, target)) {
-			performer.setPrimaryAnimation(
-					new AnimationWalk(performer, actor.squareGameObjectIsOn, squareToMoveTo, performer.walkPhase));
+			performer.setPrimaryAnimation(new AnimationWalk(performer, actor.squareGameObjectIsOn, squareToMoveTo,
+					performer.walkPhase, null));
 			// performer.primaryAnimation.phase = performer.walkPhase;
 			performer.walkPhase++;
 			if (performer.walkPhase >= 4) {

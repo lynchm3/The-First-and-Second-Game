@@ -81,8 +81,8 @@ public class ActionSellItems extends VariableQtyAction {
 
 		if (Game.level.openInventories.size() > 0) {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.addSecondaryAnimation(new AnimationGive(performer, receiver, objects[0]));
-			receiver.addSecondaryAnimation(new AnimationGive(receiver, performer, AnimationGive.gold));
+			performer.addSecondaryAnimation(new AnimationGive(performer, receiver, objects[0], null));
+			receiver.addSecondaryAnimation(new AnimationGive(receiver, performer, AnimationGive.gold, null));
 		}
 
 		for (int i = 0; i < amountToSell; i++) {

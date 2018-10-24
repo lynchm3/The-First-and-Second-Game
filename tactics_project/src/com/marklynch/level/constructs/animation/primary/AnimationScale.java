@@ -8,9 +8,10 @@ public class AnimationScale extends Animation {
 
 	float startScale, endScale;
 
-	public AnimationScale(GameObject performer, float start, float end, float durationToReachMillis) {
+	public AnimationScale(GameObject performer, float start, float end, float durationToReachMillis,
+			OnCompletionListener onCompletionListener) {
 
-		super(performer, performer);
+		super(performer, onCompletionListener, performer);
 		if (!runAnimation)
 			return;
 		blockAI = false;
@@ -18,7 +19,6 @@ public class AnimationScale extends Animation {
 
 		scaleX = start;
 		scaleY = start;
-
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
 		kf0.scaleX = end;
@@ -33,31 +33,6 @@ public class AnimationScale extends Animation {
 	public void update(double delta) {
 		keyFrameUpdate(delta);
 	}
-
-	// @Override
-	// public void update(double delta) {
-	// // runCompletionAlgorightm();
-	//
-	// if (getCompleted())
-	// return;
-	// super.update(delta);
-	//
-	// durationSoFar += delta;
-	// double progress = durationSoFar / durationToReachMillis;
-	// if (progress >= 1) {
-	// progress = 1;
-	// scaleX = 1;
-	// scaleY = 1;
-	// runCompletionAlgorightm(true);
-	// return;
-	// }
-	// scaleX = (float) (startScale + progress * (endScale - startScale));
-	// scaleY = (float) (startScale + progress * (endScale - startScale));
-	//
-	// // scaleX = (float) progress * endScale;
-	// // scaleY = (float) progress * endScale;
-	//
-	// }
 
 	@Override
 	public void draw2() {

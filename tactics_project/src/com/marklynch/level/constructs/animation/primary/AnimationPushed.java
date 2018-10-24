@@ -23,8 +23,9 @@ public class AnimationPushed extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare, Animation oldAnimation) {
-		super(performer, performer, startSquare, endSquare);
+	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare, Animation oldAnimation,
+			OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, performer, startSquare, endSquare);
 		if (!runAnimation)
 			return;
 		this.startSquare = startSquare;

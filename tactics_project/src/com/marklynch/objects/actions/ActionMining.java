@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationShake;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
@@ -54,13 +55,12 @@ public class ActionMining extends Action {
 			performer.equippedBeforePickingUpObject = performer.equipped;
 		performer.equipped = pickaxe;
 
-		performer.setPrimaryAnimation(new AnimationSlash(performer, target) {
+		performer.setPrimaryAnimation(new AnimationSlash(performer, target, new OnCompletionListener() {
 			@Override
-			public void runCompletionAlgorightm(boolean wait) {
-				super.runCompletionAlgorightm(wait);
+			public void animationComplete(GameObject gameObject) {
 				postMeleeAnimation();
 			}
-		});
+		}));
 	}
 
 	public void postMeleeAnimation() {
@@ -68,7 +68,7 @@ public class ActionMining extends Action {
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
 
-		target.setPrimaryAnimation(new AnimationShake(target));
+		target.setPrimaryAnimation(new AnimationShake(target, null));
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
@@ -100,7 +100,7 @@ public class ActionMining extends Action {
 
 				} else if (performer.squareGameObjectIsOn.onScreen()
 						&& performer.squareGameObjectIsOn.visibleToPlayer) {
-					performer.addSecondaryAnimation(new AnimationTake(ore, performer, 0, 0, 1f));
+					performer.addSecondaryAnimation(new AnimationTake(ore, performer, 0, 0, 1f, null));
 
 				}
 				if (Game.level.shouldLog(target, performer))

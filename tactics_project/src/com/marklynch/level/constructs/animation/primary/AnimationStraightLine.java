@@ -19,9 +19,9 @@ public class AnimationStraightLine extends Animation {
 	double delay;
 
 	public AnimationStraightLine(GameObject projectileObject, float speed, boolean blockAI, double delay,
-			Square... targetSquares) {
+			OnCompletionListener onCompletionListener, Square... targetSquares) {
 
-		super(projectileObject, projectileObject, targetSquares[targetSquares.length - 1]);
+		super(projectileObject, onCompletionListener, projectileObject, targetSquares[targetSquares.length - 1]);
 		if (!runAnimation)
 			return;
 
@@ -78,6 +78,12 @@ public class AnimationStraightLine extends Animation {
 	public void drawStaticUI() {
 	}
 
+	@Override
+	public void runCompletionAlgorightm(boolean wait) {
+		postRangedAnimation(projectileObject, targetSquares, false);
+		super.runCompletionAlgorightm(wait);
+	}
+
 	public void postRangedAnimation(GameObject projectileObject, Square... targetSquares) {
 		postRangedAnimation(projectileObject, targetSquares, false);
 	}
@@ -98,27 +104,6 @@ public class AnimationStraightLine extends Animation {
 
 		if (getCompleted())
 			return;
-
-		// Game.flush();
-		// float radians = (float) Math.toRadians(angle);
-		// Matrix4f view = Game.activeBatch.getViewMatrix();
-		// view.translate(new Vector2f(x, y));
-		// view.rotate(radians, new Vector3f(0f, 0f, 1f));
-		// Game.activeBatch.updateUniforms();
-
-		// TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f,
-		// x + projectileObject.drawOffsetRatioX * Game.SQUARE_WIDTH,
-		// y + projectileObject.drawOffsetRatioY * Game.SQUARE_HEIGHT,
-		// x + projectileObject.width + projectileObject.drawOffsetRatioX *
-		// Game.SQUARE_WIDTH,
-		// y + projectileObject.height + projectileObject.drawOffsetRatioY *
-		// Game.SQUARE_HEIGHT,
-		// projectileObject.backwards);
-
-		// Game.flush();
-		// view.rotate(-radians, new Vector3f(0f, 0f, 1f));
-		// view.translate(new Vector2f(-x, -y));
-		// Game.activeBatch.updateUniforms();
 
 	}
 }

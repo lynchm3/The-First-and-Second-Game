@@ -11,8 +11,8 @@ public class AnimationDie extends Animation {
 	float targetOffsetX = 32f;
 	float targetTorsoAngle = 1.57f;// 3.14/2
 
-	public AnimationDie(GameObject performer) {
-		super(performer, performer);
+	public AnimationDie(GameObject performer, OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, performer);
 		if (!runAnimation)
 			return;
 		// durationToReach = 400;

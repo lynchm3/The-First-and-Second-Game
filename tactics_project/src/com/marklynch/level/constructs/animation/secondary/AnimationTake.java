@@ -37,8 +37,8 @@ public class AnimationTake extends Animation {
 	Color trailColor2 = Color.PINK;
 
 	public AnimationTake(GameObject gameObject, GameObject taker, float originX, float originY, float speed,
-			float targetOffsetX, float targetOffsetY) {
-		super(null, gameObject, taker);
+			float targetOffsetX, float targetOffsetY, OnCompletionListener onCompletionListener) {
+		super(null, onCompletionListener, gameObject, taker);
 		if (!runAnimation)
 			return;
 
@@ -56,9 +56,9 @@ public class AnimationTake extends Animation {
 
 	}
 
-	public AnimationTake(GameObject gameObject, GameObject taker, float targetOffsetX, float targetOffsetY,
-			float speed) {
-		super(null, gameObject, taker);
+	public AnimationTake(GameObject gameObject, GameObject taker, float targetOffsetX, float targetOffsetY, float speed,
+			OnCompletionListener onCompletionListener) {
+		super(null, onCompletionListener, gameObject, taker);
 		if (!runAnimation)
 			return;
 

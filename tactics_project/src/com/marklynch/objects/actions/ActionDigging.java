@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.squares.Square;
@@ -55,13 +56,12 @@ public class ActionDigging extends Action {
 			performer.equippedBeforePickingUpObject = performer.equipped;
 		performer.equipped = shovel;
 
-		performer.setPrimaryAnimation(new AnimationSlash(performer, target) {
+		performer.setPrimaryAnimation(new AnimationSlash(performer, target, new OnCompletionListener() {
 			@Override
-			public void runCompletionAlgorightm(boolean wait) {
-				super.runCompletionAlgorightm(wait);
+			public void animationComplete(GameObject gameObject) {
 				postMeleeAnimation();
 			}
-		});
+		}));
 	}
 
 	public void postMeleeAnimation() {
@@ -77,7 +77,7 @@ public class ActionDigging extends Action {
 		for (GameObject buriedGamObject : (ArrayList<GameObject>) target.inventory.gameObjects.clone()) {
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-				performer.addSecondaryAnimation(new AnimationTake(buriedGamObject, performer, 0, 0, 1f));
+				performer.addSecondaryAnimation(new AnimationTake(buriedGamObject, performer, 0, 0, 1f, null));
 			}
 			performer.inventory.add(buriedGamObject);
 			if (Game.level.shouldLog(target, performer))

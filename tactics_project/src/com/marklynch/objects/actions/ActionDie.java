@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
 import com.marklynch.level.constructs.animation.primary.AnimationScale;
 import com.marklynch.level.constructs.effect.EffectBurning;
@@ -158,7 +159,7 @@ public class ActionDie extends Action {
 		// Actor actor = (Actor) gameObjectPerformer;
 		GameObject blood = Templates.BLOOD.makeCopy(null, null);
 		gameObjectPerformer.squareGameObjectIsOn.inventory.add(blood);
-		blood.setPrimaryAnimation(new AnimationScale(blood, 0f, 1f, 2000));
+		blood.setPrimaryAnimation(new AnimationScale(blood, 0f, 1f, 2000, null));
 
 	}
 
@@ -170,13 +171,13 @@ public class ActionDie extends Action {
 			if (gameObjectPerformer.equipped != null && gameObjectPerformer != Level.player)
 				new ActionDropItems(gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn,
 						gameObjectPerformer.equipped).perform();
-			actor.setPrimaryAnimation(new AnimationDie(gameObjectPerformer) {
+			actor.setPrimaryAnimation(new AnimationDie(gameObjectPerformer, new OnCompletionListener() {
 				@Override
-				public void runCompletionAlgorightm(boolean wait) {
-					super.runCompletionAlgorightm(wait);
+				public void animationComplete(GameObject gameObject) {
 					poolBlood();
+
 				}
-			});
+			}));
 
 			// GameObject body = null;
 			// if (gameObjectPerformer instanceof RockGolem) {

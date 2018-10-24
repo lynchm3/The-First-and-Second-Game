@@ -4,6 +4,7 @@ import org.lwjgl.util.Point;
 
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationPush;
 import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.level.constructs.effect.Effect;
@@ -34,19 +35,19 @@ public class PowerInferno extends Power {
 	}
 
 	@Override
-	public void cast(final GameObject source, GameObject targetGameObject, Square targetSquare, final Action action) {
+	public void cast(final GameObject source, final GameObject targetGameObject, final Square targetSquare,
+			final Action action) {
 
 		if (source instanceof Actor) {
-			source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
+			source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation(), null));
 			final Arrow fireBall = Templates.FIRE_BALL.makeCopy(null, null);
 			Animation animationThrown = new AnimationThrown("Fire Ball", (Actor) source, action, targetGameObject,
-					targetSquare, fireBall, source, 1f, 0f, true) {
-				@Override
-				public void runCompletionAlgorightm(boolean wait) {
-					super.runCompletionAlgorightm(wait);
-					PowerInferno.super.cast(source, targetGameObject, targetSquare, action);
-				}
-			};
+					targetSquare, fireBall, source, 1f, 0f, true, new OnCompletionListener() {
+						@Override
+						public void animationComplete(GameObject gameObject) {
+							PowerInferno.super.cast(source, targetGameObject, targetSquare, action);
+						}
+					});
 			((Actor) source).addSecondaryAnimation(animationThrown);
 		} else {
 			PowerInferno.super.cast(source, targetGameObject, targetSquare, action);

@@ -81,10 +81,9 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 	public void doTheThing(final GameObject gameObject) {
 
 		if (gameObject.isFloorObject == false && gameObject.squareGameObjectIsOn == this.squareGameObjectIsOn) {
-			gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 400) {
+			gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 400, new OnCompletionListener() {
 				@Override
-				public void runCompletionAlgorightm(boolean wait) {
-					super.runCompletionAlgorightm(wait);
+				public void animationComplete(GameObject gameObject) {
 
 					Square square = gameObject.lastSquare;
 					if (square == null)
@@ -105,9 +104,10 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 						Level.pausePlayer();
 					}
 
-					gameObject.setPrimaryAnimation(new AnimationFallFromTheSky(gameObject, 200));
+					gameObject.setPrimaryAnimation(new AnimationFallFromTheSky(gameObject, 200, null));
+
 				}
-			});
+			}));
 
 		}
 	}

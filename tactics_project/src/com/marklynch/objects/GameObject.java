@@ -2347,7 +2347,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
 		this.addSecondaryAnimation(
-				new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f, statType, color));
+				new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f, statType, color, null));
 	}
 
 	public ArrayList<Animation> getSecondaryAnimations() {

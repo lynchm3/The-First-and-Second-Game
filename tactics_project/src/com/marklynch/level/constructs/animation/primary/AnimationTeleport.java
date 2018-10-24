@@ -24,8 +24,9 @@ public class AnimationTeleport extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare) {
-		super(performer, startSquare, endSquare);
+	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare,
+			OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, startSquare, endSquare);
 		if (!runAnimation)
 			return;
 		durationToReachMillis = 400;

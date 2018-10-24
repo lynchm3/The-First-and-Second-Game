@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationFall;
 import com.marklynch.level.constructs.animation.primary.AnimationFallFromTheSky;
 import com.marklynch.level.squares.Square;
@@ -229,14 +230,11 @@ public class Seesaw extends GameObject implements SwitchListener {
 			for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects
 					.clone()) {
 				if (gameObject.isFloorObject == false) {
-					gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 400) {
+					gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 400, null));
+
+					gameObject.getPrimaryAnimation().onCompletionListener = new OnCompletionListener() {
 						@Override
-						public void runCompletionAlgorightm(boolean wait) {
-
-							// performer.primaryAnimation.offsetY = -400;
-
-							super.runCompletionAlgorightm(wait);
-
+						public void animationComplete(GameObject gameObject) {
 							Square square = gameObject.lastSquare;
 							if (square == null)
 								square = connectedSquare;
@@ -252,9 +250,9 @@ public class Seesaw extends GameObject implements SwitchListener {
 								Level.flashGameObjectCounters.put(gameObject, 0);
 							}
 							// squareGameObjectIsOn.inventory.remove(gameObject);
-							gameObject.setPrimaryAnimation(new AnimationFallFromTheSky(gameObject, 200));
+							gameObject.setPrimaryAnimation(new AnimationFallFromTheSky(gameObject, 200, null));
 						}
-					});
+					};
 
 				}
 			}

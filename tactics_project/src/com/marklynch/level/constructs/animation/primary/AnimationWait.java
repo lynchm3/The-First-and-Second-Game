@@ -6,8 +6,8 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationWait extends Animation {
 
-	public AnimationWait(GameObject performer) {
-		super(performer, performer);
+	public AnimationWait(GameObject performer, OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, performer);
 		if (!runAnimation)
 			return;
 		durationToReachMillis = 400;

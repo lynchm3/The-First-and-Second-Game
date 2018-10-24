@@ -255,45 +255,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	Point focalPoint = new Point(focalPointX, focalPointY);
 
 	public void move(final GameObject gameObject, final Square... targetSquares1) {
-
-		// Curve
-		// (GameObject projectileObject, float speed, float focalPoint, float
-		// targetAngle)
-		// if ((gameObject.squareGameObjectIsOn.onScreen() &&
-		// gameObject.squareGameObjectIsOn.visibleToPlayer)
-		// || (targetSquares[0].onScreen() && targetSquares[0].visibleToPlayer)
-		// || (targetSquares[targetSquares.length - 1].onScreen()
-		// && targetSquares[targetSquares.length - 1].visibleToPlayer)) {
-		//
-		// float angle = 1.57f;
-		// if (!bridgeVertical)
-		// angle = -1.57f;
-		//
-		// Level.player.addSecondaryAnimation(new AnimationCurve(gameObject, 0.002f,
-		// focalPoint, angle) {
-		// @Override
-		// public void runCompletionAlgorightm() {
-		// super.runCompletionAlgorightm();
-		// postRangedAnimation(gameObject, targetSquares);
-		// }
-		// });
-		// } else {
-		//
-		// AnimationStraightLine.postRangedAnimation(gameObject, targetSquares);
-		// }
-
-		// Straight
-		// Square startSquare = gameObject.squareGameObjectIsOn;
-		// targetSquares[targetSquares.length - 1].inventory.add(gameObject);
-		// if (Level.player.inventory.groundDisplay != null)
-		// Level.player.inventory.groundDisplay.refreshGameObjects();
-		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 1f, true, 0f, targetSquares1) {
-			@Override
-			public void runCompletionAlgorightm(boolean wait) {
-				postRangedAnimation(gameObject, targetSquares1);
-				super.runCompletionAlgorightm(wait);
-			}
-		});
+		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 1f, true, 0f, null, targetSquares1));
 
 	}
 

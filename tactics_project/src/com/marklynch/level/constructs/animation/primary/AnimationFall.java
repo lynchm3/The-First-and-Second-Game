@@ -11,9 +11,10 @@ public class AnimationFall extends Animation {
 	float targetLeftArmAngle = 3.14f;
 	float targetRightArmAngle = -3.14f;
 
-	public AnimationFall(GameObject performer, float start, float end, float durationToReachMillis) {
+	public AnimationFall(GameObject performer, float start, float end, float durationToReachMillis,
+			OnCompletionListener onCompletionListener) {
 
-		super(performer, performer);
+		super(performer, onCompletionListener, performer);
 		if (!runAnimation)
 			return;
 

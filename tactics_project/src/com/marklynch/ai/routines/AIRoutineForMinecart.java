@@ -27,7 +27,7 @@ public class AIRoutineForMinecart extends AIRoutine {
 		}
 
 		// Hands up WOO!
-		actor.setPrimaryAnimation(new AnimationHandsUp(actor, 100));
+		actor.setPrimaryAnimation(new AnimationHandsUp(actor, 100, null));
 	}
 
 	@Override

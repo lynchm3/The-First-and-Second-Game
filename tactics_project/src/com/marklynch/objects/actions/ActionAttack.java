@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationFlinch;
 import com.marklynch.level.constructs.animation.primary.AnimationShootArrow;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
@@ -67,21 +68,17 @@ public class ActionAttack extends Action {
 		if (weapon.maxRange == 1) {
 
 			// Melee weapons
-			performer.setPrimaryAnimation(new AnimationSlash(performer, target) {
-
+			performer.setPrimaryAnimation(new AnimationSlash(performer, target, new OnCompletionListener() {
 				@Override
-				public void runCompletionAlgorightm(boolean wait) {
-					super.runCompletionAlgorightm(wait);
+				public void animationComplete(GameObject gameObject) {
 					postMeleeAnimation();
 				}
-			}
-
-			);
+			}));
 		} else {
 
 			// Ranged weapon
 
-			performer.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this) {
+			performer.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this, null) {
 
 				@Override
 				public void shootArrow() {
@@ -91,16 +88,7 @@ public class ActionAttack extends Action {
 					arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
 					arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
 					animationThrown = new AnimationThrown("Arrow", (Actor) performer, ActionAttack.this, target,
-							target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true) {
-						@Override
-						public void runCompletionAlgorightm(boolean wait) {
-							super.runCompletionAlgorightm(wait);
-							postRangedAnimation(ActionAttack.this.performer, ActionAttack.this.weapon,
-									ActionAttack.this.target, ActionAttack.this.target.squareGameObjectIsOn, arrow,
-									ActionAttack.this);
-							// postRangedAnimation(arrow);
-						}
-					};
+							target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true, null);
 					performer.addSecondaryAnimation(animationThrown);
 				}
 
@@ -182,8 +170,8 @@ public class ActionAttack extends Action {
 			}
 
 			if (target.remainingHealth > 0)
-				target.setPrimaryAnimation(
-						new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
+				target.setPrimaryAnimation(new AnimationFlinch(target, performer.squareGameObjectIsOn,
+						target.getPrimaryAnimation(), null));
 		}
 
 	}

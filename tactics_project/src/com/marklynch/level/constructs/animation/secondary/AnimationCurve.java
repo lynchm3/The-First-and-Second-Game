@@ -25,9 +25,10 @@ public class AnimationCurve extends Animation {
 	// ...CAH... Cosine: cos(θ) = Adjacent / Hypotenuse
 	// ...TOA Tangent: tan(θ) = Opposite / Adjacent
 
-	public AnimationCurve(GameObject projectileObject, float speed, Point focalPoint, float angleChange) {
+	public AnimationCurve(GameObject projectileObject, float speed, Point focalPoint, float angleChange,
+			OnCompletionListener onCompletionListener) {
 
-		super(null, projectileObject);
+		super(null, onCompletionListener, projectileObject);
 		if (!runAnimation)
 			return;
 
@@ -75,23 +76,6 @@ public class AnimationCurve extends Animation {
 					+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);
 			y = (float) (focalPoint.y + this.hypotanusLength * Math.sin(angleInRadians)) - Game.HALF_SQUARE_HEIGHT
 					+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioY);
-			// runCompletionAlgorightm();
-
-			// SOH... Sine: sin(θ) = Opposite / Hypotenuse
-			// ...CAH... Cosine: cos(θ) = Adjacent / Hypotenuse
-
-			// runCompletionAlgorightm();
-
-			// Hypotenuse*
-			// cos(θ)
-			// =
-			// Adjacent
-
-			// Hypotenuse
-			// *
-			// sin(θ)
-			// =
-			// Opposite
 		}
 	}
 

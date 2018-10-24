@@ -13,8 +13,9 @@ public class AnimationIgnite extends Animation {
 	GameObject fireSource;
 	GameObject previouslyEquipped;
 
-	public AnimationIgnite(GameObject performer, GameObject target, GameObject fireSource) {
-		super(performer, performer, target);
+	public AnimationIgnite(GameObject performer, GameObject target, GameObject fireSource,
+			OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, performer, target);
 		if (!runAnimation)
 			return;
 		this.target = target;

@@ -11,9 +11,10 @@ public class AnimationHandsUp extends Animation {
 	float targetLeftArmAngle = 3.14f;
 	float targetRightArmAngle = -3.14f;
 
-	public AnimationHandsUp(GameObject performer, float durationToReachMillis) {
+	public AnimationHandsUp(GameObject performer, float durationToReachMillis,
+			OnCompletionListener onCompletionListener) {
 
-		super(performer);
+		super(performer, onCompletionListener);
 		if (!runAnimation)
 			return;
 		startLeftArmAngle = this.leftShoulderAngle;

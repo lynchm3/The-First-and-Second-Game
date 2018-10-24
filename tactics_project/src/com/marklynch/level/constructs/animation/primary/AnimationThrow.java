@@ -19,8 +19,8 @@ public class AnimationThrow extends Animation {
 
 	GameObject target;
 
-	public AnimationThrow(GameObject performer, GameObject target) {
-		super(performer, performer, target);
+	public AnimationThrow(GameObject performer, GameObject target, OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, performer, target);
 		if (!runAnimation)
 			return;
 		this.target = target;

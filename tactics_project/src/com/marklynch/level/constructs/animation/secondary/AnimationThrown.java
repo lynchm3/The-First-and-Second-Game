@@ -36,9 +36,10 @@ public class AnimationThrown extends Animation {
 	GameObject weapon;
 
 	public AnimationThrown(String name, Actor shooter, Action action, GameObject targetGameObject, Square targetSquare,
-			GameObject projectileObject, GameObject weapon, float speed, float rotationSpeed, boolean onTarget) {
+			GameObject projectileObject, GameObject weapon, float speed, float rotationSpeed, boolean onTarget,
+			OnCompletionListener onCompletionListener) {
 
-		super(null, shooter, targetGameObject, targetSquare);
+		super(null, onCompletionListener, shooter, targetGameObject, targetSquare);
 
 		if (!runAnimation) {
 			return;
@@ -221,41 +222,47 @@ public class AnimationThrown extends Animation {
 	//
 	// }
 
-	public static void postRangedAnimation(Actor performer, GameObject weapon, GameObject target, Square targetSquare,
-			GameObject projectileObject, Action action) {
+	@Override
+	public void runCompletionAlgorightm(boolean wait) {
+		super.runCompletionAlgorightm(wait);
+		postRangedAnimation();
+	}
 
-		if (target != null && target.attackable)
-			target.showPow();
+	public void postRangedAnimation() {
+
+		if (targetGameObject != null && targetGameObject.attackable)
+			targetGameObject.showPow();
 		if (!(projectileObject instanceof Arrow)) {
-			if (target != null && target instanceof Searchable && projectileObject.canShareSquare) {
-				target.inventory.add(projectileObject);
+			if (targetGameObject != null && targetGameObject instanceof Searchable && projectileObject.canShareSquare) {
+				targetGameObject.inventory.add(projectileObject);
 			} else {
 				targetSquare.inventory.add(projectileObject);
-				projectileObject.landed(performer, action);
+				projectileObject.landed(shooter, action);
 			}
 
-		} else if (target != null) {
-			target.arrowsEmbeddedInThis.add((Arrow) projectileObject);
+		} else if (targetGameObject != null) {
+			targetGameObject.arrowsEmbeddedInThis.add((Arrow) projectileObject);
 		}
 
 		if (Level.player.inventory.groundDisplay != null)
 			Level.player.inventory.groundDisplay.refreshGameObjects();
 
 		// Carry out the dmg, attack, logging...
-		if (target != null && target.attackable && !(target instanceof Searchable)) {
-			float damage = target.changeHealth(performer, action, weapon);
+		if (targetGameObject != null && targetGameObject.attackable && !(targetGameObject instanceof Searchable)) {
+			float damage = targetGameObject.changeHealth(shooter, action, weapon);
 
-			if (performer.squareGameObjectIsOn.visibleToPlayer) {
-				if (Game.level.shouldLog(target, performer))
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw ", weapon, " at ", target,
-							" for " + damage + " damage" }));
+			if (shooter.squareGameObjectIsOn.visibleToPlayer) {
+				if (Game.level.shouldLog(targetGameObject, shooter))
+					Game.level.logOnScreen(new ActivityLog(new Object[] { shooter, " threw ", weapon, " at ",
+							targetGameObject, " for " + damage + " damage" }));
 			}
 
-			if (target instanceof Actor && target.remainingHealth > 0)
-				target.setPrimaryAnimation(
-						new AnimationFlinch(target, performer.squareGameObjectIsOn, target.getPrimaryAnimation()));
-		} else if (target != null && target instanceof Searchable) {
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw ", weapon, " in to ", target }));
+			if (targetGameObject instanceof Actor && targetGameObject.remainingHealth > 0)
+				targetGameObject.setPrimaryAnimation(new AnimationFlinch(targetGameObject, shooter.squareGameObjectIsOn,
+						targetGameObject.getPrimaryAnimation(), null));
+		} else if (targetGameObject != null && targetGameObject instanceof Searchable) {
+			Game.level.logOnScreen(
+					new ActivityLog(new Object[] { shooter, " threw ", weapon, " in to ", targetGameObject }));
 		}
 	}
 

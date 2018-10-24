@@ -29,7 +29,7 @@ public class PowerUnlock extends Power {
 
 	@Override
 	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
-		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
+		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation(), null));
 		ArrayList<GameObject> openables = targetSquare.inventory.getGameObjectsOfClass(Openable.class);
 		for (GameObject openable : openables) {
 			if (((Openable) openable).isLocked()) {

@@ -13,8 +13,9 @@ public class AnimationPush extends Animation {
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
-	public AnimationPush(GameObject performer, Square targetSquare, Animation oldAnimation) {
-		super(performer, performer, targetSquare);
+	public AnimationPush(GameObject performer, Square targetSquare, Animation oldAnimation,
+			OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, performer, targetSquare);
 		if (!runAnimation)
 			return;
 		this.targetSquare = targetSquare;

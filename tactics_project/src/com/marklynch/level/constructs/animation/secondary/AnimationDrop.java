@@ -19,9 +19,9 @@ public class AnimationDrop extends Animation {
 	// Transfer object from person to sqr, for show only, used in drop, primary
 
 	public AnimationDrop(String name, GameObject shooter, Action action, Square targetSquare,
-			GameObject projectileObject, float speed) {
+			GameObject projectileObject, float speed, OnCompletionListener onCompletionListener) {
 
-		super(null, shooter, targetSquare);
+		super(null, onCompletionListener, shooter, targetSquare);
 		if (!runAnimation)
 			return;
 

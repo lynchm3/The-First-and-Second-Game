@@ -29,7 +29,7 @@ public class PowerHealTouch extends Power {
 
 	@Override
 	public void cast(final GameObject source, GameObject targetGameObject, Square targetSquare, final Action action) {
-		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
+		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation(), null));
 		super.cast(source, targetGameObject, targetSquare, action);
 
 	}

@@ -16,9 +16,10 @@ public class AnimationBubbles extends Animation {
 	public float size = 0f;
 	public float targetY;
 
-	public AnimationBubbles(GameObject targetGameObject, float originX, float originY, float speed) {
+	public AnimationBubbles(GameObject targetGameObject, float originX, float originY, float speed,
+			OnCompletionListener onCompletionListener) {
 
-		super(null, targetGameObject);
+		super(null, onCompletionListener, targetGameObject);
 		if (!runAnimation)
 			return;
 		this.targetGameObject = targetGameObject;

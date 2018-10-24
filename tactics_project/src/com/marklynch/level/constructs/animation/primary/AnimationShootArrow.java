@@ -27,8 +27,9 @@ public abstract class AnimationShootArrow extends Animation {
 
 	KeyFrame kf2;
 
-	public AnimationShootArrow(Actor performer, GameObject target, GameObject weapon, Action action) {
-		super(performer, performer, target);
+	public AnimationShootArrow(Actor performer, GameObject target, GameObject weapon, Action action,
+			OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, performer, target);
 		if (!runAnimation)
 			return;
 		// this.performer []

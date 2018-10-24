@@ -8,6 +8,7 @@ import org.lwjgl.util.Point;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationPush;
 import com.marklynch.level.constructs.animation.primary.AnimationPushed;
 import com.marklynch.level.constructs.effect.Effect;
@@ -40,7 +41,7 @@ public class PowerTelekineticPush extends Power {
 		if (targetSquare.inventory.contains(source))
 			return;
 
-		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
+		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation(), null));
 
 		Direction direction = Direction.LEFT;
 
@@ -124,15 +125,12 @@ public class PowerTelekineticPush extends Power {
 			endSquare.inventory.add(pushedGameObject);
 			pushedGameObject.setPrimaryAnimation(
 					new AnimationPushed(pushedGameObject, pushedObjectAndTheirStartSquare.get(pushedGameObject),
-							endSquare, pushedGameObject.getPrimaryAnimation()) {
-						@Override
-						public void runCompletionAlgorightm(boolean wait) {
-							super.runCompletionAlgorightm(wait);
-							postAnimation(pushedGameObject, action, obstacle);
-						}
-					}
-
-			);
+							endSquare, pushedGameObject.getPrimaryAnimation(), new OnCompletionListener() {
+								@Override
+								public void animationComplete(GameObject gameObject) {
+									postAnimation(pushedGameObject, action, obstacle);
+								}
+							}));
 
 		}
 	}

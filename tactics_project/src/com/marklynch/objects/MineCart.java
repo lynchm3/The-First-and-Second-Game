@@ -75,13 +75,7 @@ public class MineCart extends GameObject {
 
 				gameObject.lastTurnThisWasMovedByMinecart = Level.turn;
 
-				gameObject.setPrimaryAnimation(new AnimationStraightLine(this, 2f, true, 0f, array) {
-					@Override
-					public void runCompletionAlgorightm(boolean wait) {
-						postRangedAnimation(gameObject, array);
-						super.runCompletionAlgorightm(wait);
-					}
-				});
+				gameObject.setPrimaryAnimation(new AnimationStraightLine(this, 2f, true, 0f, null, array));
 			}
 		}
 	}

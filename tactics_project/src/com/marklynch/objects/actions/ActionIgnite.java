@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationIgnite;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.power.Power;
@@ -69,13 +70,13 @@ public class ActionIgnite extends Action {
 		}
 
 		// Melee weapons
-		performer.setPrimaryAnimation(new AnimationIgnite(performer, targetGameObject, igniteMethodGameObject) {
-			@Override
-			public void runCompletionAlgorightm(boolean wait) {
-				super.runCompletionAlgorightm(wait);
-				postAnimation();
-			}
-		});
+		performer.setPrimaryAnimation(
+				new AnimationIgnite(performer, targetGameObject, igniteMethodGameObject, new OnCompletionListener() {
+					@Override
+					public void animationComplete(GameObject gameObject) {
+						postAnimation();
+					}
+				}));
 	}
 
 	public void postAnimation() {

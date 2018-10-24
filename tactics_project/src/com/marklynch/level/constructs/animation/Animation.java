@@ -72,9 +72,11 @@ public abstract class Animation {
 	public int phase = 0;
 	public ArrayList<KeyFrame> keyFrames = new ArrayList<KeyFrame>();
 
-	public Animation(GameObject performer, Object... objectsInvolved) {
+	public Animation(GameObject performer, OnCompletionListener onCompletionListener, Object... objectsInvolved) {
 
+		this.performer = performer;
 		runAnimation = Game.level.shouldLog(objectsInvolved, false);// && performer == Game.level.player;
+		this.onCompletionListener = onCompletionListener;
 		if (!runAnimation) {
 			runCompletionAlgorightm(true);
 			return;
@@ -149,7 +151,7 @@ public abstract class Animation {
 
 	}
 
-	public void runCompletionAlgorightm(boolean wait) {
+	protected void runCompletionAlgorightm(boolean wait) {
 
 		Level.blockingAnimations.remove(this);
 
@@ -161,7 +163,7 @@ public abstract class Animation {
 
 		if (shouldWait(wait)) {
 
-			performer.setPrimaryAnimation(new AnimationWait(performer));
+			performer.setPrimaryAnimation(new AnimationWait(performer, null));
 		}
 	}
 

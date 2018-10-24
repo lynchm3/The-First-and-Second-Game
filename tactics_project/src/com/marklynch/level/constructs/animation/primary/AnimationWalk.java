@@ -103,8 +103,9 @@ public class AnimationWalk extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int walkingPhase) {
-		super(performer, performer, endSquare);
+	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int walkingPhase,
+			OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, performer, endSquare);
 		if (!runAnimation)
 			return;
 		durationToReachMillis = 400;

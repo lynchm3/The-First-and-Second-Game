@@ -21,8 +21,9 @@ public class AnimationGive extends Animation {
 	GameObject projectileObject;
 	public static GameObject gold = Templates.GOLD.makeCopy(null, null);
 
-	public AnimationGive(GameObject giver, GameObject receiver, GameObject projectileObject) {
-		super(null, giver, receiver);
+	public AnimationGive(GameObject giver, GameObject receiver, GameObject projectileObject,
+			OnCompletionListener onCompletionListener) {
+		super(null, onCompletionListener, giver, receiver);
 		if (!runAnimation)
 			return;
 

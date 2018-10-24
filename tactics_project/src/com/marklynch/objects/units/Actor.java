@@ -223,7 +223,7 @@ public class Actor extends GameObject {
 
 		super();
 
-		primaryAnimation = new AnimationWait(this);
+		primaryAnimation = new AnimationWait(this, null);
 		Level.animations.add(primaryAnimation);
 
 		canBePickedUp = false;

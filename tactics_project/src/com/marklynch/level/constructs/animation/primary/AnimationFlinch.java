@@ -7,8 +7,9 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationFlinch extends Animation {
 
-	public AnimationFlinch(GameObject performer, Square squareBeingAttackedFrom, Animation oldAnimation) {
-		super(performer, performer);
+	public AnimationFlinch(GameObject performer, Square squareBeingAttackedFrom, Animation oldAnimation,
+			OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, performer);
 		if (!runAnimation)
 			return;
 

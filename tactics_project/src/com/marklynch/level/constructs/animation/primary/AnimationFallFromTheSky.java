@@ -12,9 +12,10 @@ public class AnimationFallFromTheSky extends Animation {
 	float targetY = 0f;
 	float startY = 0f;
 
-	public AnimationFallFromTheSky(GameObject performer, float durationToReachMillis) {
+	public AnimationFallFromTheSky(GameObject performer, float durationToReachMillis,
+			OnCompletionListener onCompletionListener) {
 
-		super(performer, performer);
+		super(performer, onCompletionListener, performer);
 		if (!runAnimation)
 			return;
 

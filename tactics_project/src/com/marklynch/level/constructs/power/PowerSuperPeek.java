@@ -24,7 +24,7 @@ public class PowerSuperPeek extends Power {
 
 	@Override
 	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
-		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation()));
+		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation(), null));
 		if (source == Game.level.player)
 			Game.level.player.calculateVisibleSquares(targetSquare);
 
