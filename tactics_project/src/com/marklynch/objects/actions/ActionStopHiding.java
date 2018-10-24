@@ -37,7 +37,7 @@ public class ActionStopHiding extends Action {
 		if (performer.hiding == true) {
 			performer.hiding = false;
 			if (performer.hidingPlace != null) {
-				performer.hidingPlace.actorsHidingHere.remove(performer);
+				performer.hidingPlace.gameObjectsHiddenHere.remove(performer);
 				performer.hidingPlace = null;
 
 				if (Game.level.shouldLog(object, performer))

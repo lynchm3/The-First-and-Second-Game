@@ -144,10 +144,6 @@ public class ActionUsePower extends Action {
 			for (GameObject gameObject : square.inventory.getGameObjects()) {
 
 				boolean assaultOrVandalism = standardAttackLegalityCheck(gameObjectPerformer, gameObject);
-				System.out.println("gameObjectPerformer = " + gameObjectPerformer);
-				System.out.println("gameObject = " + gameObject);
-
-				System.out.println("assaultOrVandalism = " + assaultOrVandalism);
 
 				if (!assaultOrVandalism) {
 					if (power.illegalReason != null) {

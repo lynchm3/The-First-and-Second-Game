@@ -156,14 +156,12 @@ public class SkillTreeNode extends LevelButton {
 					Level.showDialog("Unlock " + name + "?", "UNLOCK", "CANCEL", new ClickListener() {
 						@Override
 						public void click() {
-							System.out.println("CLICKED POSITIVE");
 							activate(Game.level.player);
 							Level.closeDialog();
 						}
 					}, new ClickListener() {
 						@Override
 						public void click() {
-							System.out.println("CLICKED NEGATIVE");
 							Level.closeDialog();
 						}
 					});

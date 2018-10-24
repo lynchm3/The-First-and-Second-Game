@@ -82,7 +82,6 @@ public class ActionChopping extends Action {
 		if (target.remainingHealth <= 0) {
 
 			GameObject wood = Templates.WOOD.makeCopy(target.squareGameObjectIsOn, treeOwner);
-			System.out.println("wood = " + wood);
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 				performer.addSecondaryAnimation(new AnimationTake(wood, performer, 0, 0, 1f));

@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.animation;
 
-import com.marklynch.level.Level;
 import com.marklynch.objects.GameObject;
 
 public class KeyFrame {
@@ -112,13 +111,6 @@ public class KeyFrame {
 	}
 
 	public void animate(double delta) {
-
-		if (performer == Level.player) {
-			System.out.println("animation.headToToeOffset = " + animation.headToToeOffset);
-			System.out.println("headToToeOffsetSpeed = " + headToToeOffsetSpeed);
-			System.out.println("headToToeOffsetSpeed * delta = " + (headToToeOffsetSpeed * delta));
-			System.out.println("headToToeOffset = " + headToToeOffset);
-		}
 
 		animation.offsetX = animation.moveTowardsTargetAngleInRadians(animation.offsetX, offsetXSpeed * delta, offsetX);
 		animation.offsetY = animation.moveTowardsTargetAngleInRadians(animation.offsetY, offsetYSpeed * delta, offsetY);

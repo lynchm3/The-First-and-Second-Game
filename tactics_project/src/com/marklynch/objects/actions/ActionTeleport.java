@@ -215,7 +215,6 @@ public class ActionTeleport extends Action {
 
 		if (teleportee != gameObjectPerformer) {
 			boolean legalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, teleportee);
-			System.out.println("legalToPerformOnTeleportee = " + legalToPerformOnTeleportee);
 			if (!legalToPerformOnTeleportee) {
 				return false;
 			}

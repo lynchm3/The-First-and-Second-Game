@@ -1872,9 +1872,9 @@ public class Actor extends GameObject {
 				} else if (hidingPlace == hidingPlaceAtSameSquare) {
 					// still have same hiding place, do nothing
 				} else {
-					hidingPlace.actorsHidingHere.remove(this);
+					hidingPlace.gameObjectsHiddenHere.remove(this);
 					hidingPlace = (HidingPlace) squareGameObjectIsOn.inventory.getGameObjectOfClass(HidingPlace.class);
-					hidingPlace.actorsHidingHere.add(this);
+					hidingPlace.gameObjectsHiddenHere.add(this);
 				}
 			} else {
 				if (hidingPlaceAtSameSquare != null && hidingPlaceAtSameSquare.remainingHealth > 0) {
@@ -2401,13 +2401,6 @@ public class Actor extends GameObject {
 			knownCriminals.remove(criminal);
 			mapActorToCrimesWitnessed.remove(criminal);
 		}
-
-		System.out.println("accumulatedCrimeSeverityUnresolved = " + accumulatedCrimeSeverityUnresolved);
-		System.out.println("criminal = " + criminal);
-		System.out.println("crime = " + crime);
-		System.out.println("crime.type = " + crime.type);
-		System.out.println("accumulatedCrimeSeverityUnresolved.get(criminal) = "
-				+ accumulatedCrimeSeverityUnresolved.get(criminal));
 
 		if (accumulatedCrimeSeverityUnresolved.get(criminal) != null) {
 			accumulatedCrimeSeverityUnresolved.put(criminal,

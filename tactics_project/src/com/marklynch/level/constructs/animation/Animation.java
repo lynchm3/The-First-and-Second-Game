@@ -100,6 +100,8 @@ public abstract class Animation {
 			this.leftKneeAngle = performer.getPrimaryAnimation().leftKneeAngle;
 			this.rightKneeAngle = performer.getPrimaryAnimation().rightKneeAngle;
 
+			this.headToToeOffset = performer.getPrimaryAnimation().headToToeOffset;
+
 			this.alpha = performer.getPrimaryAnimation().alpha;
 		}
 	}
