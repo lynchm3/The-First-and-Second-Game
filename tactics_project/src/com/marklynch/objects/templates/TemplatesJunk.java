@@ -3,13 +3,12 @@ package com.marklynch.objects.templates;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Junk;
 
 public class TemplatesJunk {
 
 	public TemplatesJunk() {
 
-		Templates.FUR = new Junk();
+		Templates.FUR = new GameObject();
 		Templates.FUR.name = "Fur";
 		Templates.FUR.setImageAndExtrapolateSize("fur.png");
 		Templates.FUR.totalHealth = Templates.FUR.remainingHealth = 21;
@@ -19,7 +18,7 @@ public class TemplatesJunk {
 		Templates.FUR.anchorY = 64;
 		Templates.FUR.templateId = GameObject.generateNewTemplateId();
 
-		Templates.DIRTY_SHEET_3 = new Junk();
+		Templates.DIRTY_SHEET_3 = new GameObject();
 		Templates.DIRTY_SHEET_3.name = "Dirty Sheet";
 		Templates.DIRTY_SHEET_3.setImageAndExtrapolateSize("dirty_sheet_3.png");
 		Templates.DIRTY_SHEET_3.totalHealth = Templates.DIRTY_SHEET_3.remainingHealth = 1;
@@ -29,7 +28,7 @@ public class TemplatesJunk {
 		Templates.DIRTY_SHEET_3.anchorY = 64;
 		Templates.DIRTY_SHEET_3.templateId = GameObject.generateNewTemplateId();
 
-		Templates.WOOD = new Junk();
+		Templates.WOOD = new GameObject();
 		Templates.WOOD.name = "Wood";
 		Templates.WOOD.setImageAndExtrapolateSize("wood.png");
 		Templates.WOOD.totalHealth = Templates.WOOD.remainingHealth = 16;
@@ -40,7 +39,7 @@ public class TemplatesJunk {
 		Templates.WOOD.templateId = GameObject.generateNewTemplateId();
 		Templates.WOOD.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(4));
 
-		Templates.ORE = new Junk();
+		Templates.ORE = new GameObject();
 		Templates.ORE.name = "Ore";
 		Templates.ORE.setImageAndExtrapolateSize("ore.png");
 		Templates.ORE.totalHealth = Templates.ORE.remainingHealth = 1;

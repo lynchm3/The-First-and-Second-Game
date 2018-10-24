@@ -19,7 +19,6 @@ import com.marklynch.objects.Gate;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Inspectable;
-import com.marklynch.objects.Junk;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Landmine;
 import com.marklynch.objects.Liquid;
@@ -351,13 +350,13 @@ public class Templates {
 	public static Liquid POISON;
 
 	// JUNK
-	public static Junk FUR;
+	public static GameObject FUR;
 
-	public static Junk DIRTY_SHEET_3;
+	public static GameObject DIRTY_SHEET_3;
 
-	public static Junk ORE;
+	public static GameObject ORE;
 
-	public static Junk WOOD;
+	public static GameObject WOOD;
 
 	public static Inspectable DRIED_BLOOD;
 

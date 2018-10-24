@@ -14,7 +14,6 @@ import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
-import com.marklynch.objects.Junk;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTakeItems;
@@ -1758,7 +1757,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 
 			// Junk
-			if (gameObject instanceof Junk) {
+			if (gameObject instanceof GameObject) {
 				gameObject.toSell = true;
 				itemsToSellCount++;
 				continue;

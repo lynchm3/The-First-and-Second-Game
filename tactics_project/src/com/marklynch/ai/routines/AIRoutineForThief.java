@@ -3,19 +3,13 @@ package com.marklynch.ai.routines;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Gold;
-import com.marklynch.objects.Junk;
-import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActiontTakeAll;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Armor;
-import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.Color;
 
 public class AIRoutineForThief extends AIRoutine {
@@ -131,7 +125,7 @@ public class AIRoutineForThief extends AIRoutine {
 			// stupid generic game object
 
 			GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, true, false, false, true, 0,
-					false, true, Weapon.class, Armor.class, Food.class, Junk.class, MeatChunk.class, Gold.class);
+					false, true, GameObject.class);
 			if (loot != null) {
 				if (loot.owner != null && loot.owner != actor)
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;

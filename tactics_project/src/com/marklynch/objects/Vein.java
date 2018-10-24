@@ -15,7 +15,7 @@ public class Vein extends Wall {
 
 	public boolean infinite = false;
 
-	public Junk oreTemplate;
+	public GameObject oreTemplate;
 
 	public double dropChance;
 
@@ -71,7 +71,7 @@ public class Vein extends Wall {
 	}
 
 	// , boolean infinite, Junk oreTemplate, double dropChance) {
-	public Vein makeCopy(Square square, Actor owner, boolean infinite, Junk oreTemplate, double dropChance) {
+	public Vein makeCopy(Square square, Actor owner, boolean infinite, GameObject oreTemplate, double dropChance) {
 		Vein vein = new Vein();
 		setInstances(vein);
 		vein.infinite = infinite;

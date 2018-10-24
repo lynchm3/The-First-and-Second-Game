@@ -7,7 +7,6 @@ import com.marklynch.level.constructs.animation.primary.AnimationShake;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Junk;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.units.Actor;
@@ -82,7 +81,7 @@ public class ActionChopping extends Action {
 
 		boolean destroyed = target.checkIfDestroyed(performer, this);
 
-		Junk wood = null;
+		GameObject wood = null;
 		if (destroyed) {
 			wood = Templates.WOOD.makeCopy(target.squareGameObjectIsOn, oreOwner);
 			if (Game.level.openInventories.size() > 0) {

@@ -20,10 +20,7 @@ import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Gold;
 import com.marklynch.objects.HidingPlace;
-import com.marklynch.objects.Junk;
-import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.ThoughtBubbles;
@@ -61,8 +58,6 @@ import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.TinyNeutralWildAnimal;
 import com.marklynch.objects.units.Trader;
-import com.marklynch.objects.weapons.Armor;
-import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.MapUtil;
@@ -1070,7 +1065,7 @@ public abstract class AIRoutine {
 	public boolean lootFromGround() {
 		// Pick up loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, true, 10, false,
-				true, Junk.class, Food.class, Weapon.class, Armor.class, MeatChunk.class, Gold.class);
+				true, GameObject.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
