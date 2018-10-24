@@ -37,6 +37,7 @@ public class AnimationDie extends Animation {
 
 		kf0.offsetX = targetOffsetX;
 		kf0.offsetY = targetOffsetY;
+		kf0.headToToeOffset = performer.width - 6 - performer.height; // the - 6 is a guess/fluff
 		kf0.torsoAngle = targetTorsoAngle;
 		kf0.leftElbowAngle = 0;
 		kf0.rightElbowAngle = 0;
@@ -46,9 +47,11 @@ public class AnimationDie extends Animation {
 		kf0.rightHipAngle = 0;
 		kf0.leftKneeAngle = 0;
 		kf0.rightKneeAngle = 0;
-		kf0.setAllSpeeds(0.004d);
-		kf0.offsetXSpeed = 0.5d;
-		kf0.offsetYSpeed = 1d;
+		// kf0.setAllSpeeds(0.004d);
+		// kf0.offsetXSpeed = 0.5d;
+		// kf0.offsetYSpeed = 1d;
+		kf0.keyFrameTimeMillis = 200f;
+		kf0.normaliseSpeeds = true;
 		keyFrames.add(kf0);
 	}
 
