@@ -8,6 +8,8 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.PressurePlate;
+import com.marklynch.objects.PressurePlateRequiringSpecificItem;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.units.Actor;
@@ -35,6 +37,12 @@ public class PowerGrabber extends Power {
 
 		ArrayList<GameObject> gameObjectsToTake = new ArrayList<GameObject>();
 		for (Square squareToPickupFrom : source.getAllSquaresWithinDistance(0, 1)) {
+
+			if (squareToPickupFrom.inventory.contains(PressurePlate.class)
+					|| squareToPickupFrom.inventory.contains(PressurePlateRequiringSpecificItem.class)) {
+				continue;
+			}
+
 			gameObjectsToTake.clear();
 			for (GameObject gameObject : squareToPickupFrom.inventory.gameObjects) {
 				if (gameObject.owner == null && gameObject.fitsInInventory && !(gameObject instanceof Actor)) {
