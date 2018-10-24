@@ -11,7 +11,7 @@ public class AnimationScale extends Animation {
 	public AnimationScale(GameObject performer, float start, float end, float durationToReachMillis,
 			OnCompletionListener onCompletionListener) {
 
-		super(performer, onCompletionListener, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
 		if (!runAnimation)
 			return;
 		blockAI = false;
@@ -51,6 +51,12 @@ public class AnimationScale extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

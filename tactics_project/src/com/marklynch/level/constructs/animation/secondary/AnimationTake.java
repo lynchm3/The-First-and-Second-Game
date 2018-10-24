@@ -38,7 +38,7 @@ public class AnimationTake extends Animation {
 
 	public AnimationTake(GameObject gameObject, GameObject taker, float originX, float originY, float speed,
 			float targetOffsetX, float targetOffsetY, OnCompletionListener onCompletionListener) {
-		super(null, onCompletionListener, gameObject, taker);
+		super(null, onCompletionListener, null, null, null, null, null, null, gameObject, taker);
 		if (!runAnimation)
 			return;
 
@@ -58,7 +58,7 @@ public class AnimationTake extends Animation {
 
 	public AnimationTake(GameObject gameObject, GameObject taker, float targetOffsetX, float targetOffsetY, float speed,
 			OnCompletionListener onCompletionListener) {
-		super(null, onCompletionListener, gameObject, taker);
+		super(null, onCompletionListener, null, null, null, null, null, null, gameObject, taker);
 		if (!runAnimation)
 			return;
 
@@ -184,6 +184,12 @@ public class AnimationTake extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

@@ -114,8 +114,6 @@ public class HidingPlace extends Searchable implements UpdatesWhenSquareContents
 		if (squareGameObjectIsOn == null)
 			return;
 
-		System.out.println("HidingPlace.squareContentsChanged()");
-
 		for (GameObject gameObjectHiddenHere : (ArrayList<GameObject>) gameObjectsHiddenHere.clone()) {
 			if (!squareGameObjectIsOn.inventory.contains(gameObjectHiddenHere)) {
 

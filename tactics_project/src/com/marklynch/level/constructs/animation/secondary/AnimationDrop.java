@@ -21,7 +21,7 @@ public class AnimationDrop extends Animation {
 	public AnimationDrop(String name, GameObject shooter, Action action, Square targetSquare,
 			GameObject projectileObject, float speed, OnCompletionListener onCompletionListener) {
 
-		super(null, onCompletionListener, shooter, targetSquare);
+		super(null, onCompletionListener, null, null, null, null, null, null, shooter, targetSquare);
 		if (!runAnimation)
 			return;
 
@@ -94,6 +94,12 @@ public class AnimationDrop extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

@@ -39,7 +39,7 @@ public class AnimationDamageText extends Animation {
 	public AnimationDamageText(int damage, GameObject targetGameObject, float originX, float originY, float speed,
 			HIGH_LEVEL_STATS statType, Color color, OnCompletionListener onCompletionListener) {
 
-		super(null, onCompletionListener, targetGameObject);
+		super(null, onCompletionListener, null, null, null, null, null, null, targetGameObject);
 		if (!runAnimation)
 			return;
 
@@ -140,6 +140,12 @@ public class AnimationDamageText extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

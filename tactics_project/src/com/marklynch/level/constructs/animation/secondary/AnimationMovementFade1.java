@@ -14,7 +14,7 @@ public class AnimationMovementFade1 extends Animation {
 	float alpha = 0.5f;
 
 	public AnimationMovementFade1(Square square, GameObject gameObject, OnCompletionListener onCompletionListener) {
-		super(null, onCompletionListener, square);
+		super(null, onCompletionListener, null, null, null, null, null, null, square);
 		if (!runAnimation)
 			return;
 		this.square = square;
@@ -76,6 +76,12 @@ public class AnimationMovementFade1 extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

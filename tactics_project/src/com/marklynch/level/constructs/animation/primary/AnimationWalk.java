@@ -105,7 +105,7 @@ public class AnimationWalk extends Animation {
 
 	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int walkingPhase,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, performer, endSquare);
+		super(performer, onCompletionListener, null, null, null, null, null, null, performer, endSquare);
 		if (!runAnimation)
 			return;
 		durationToReachMillis = 400;
@@ -307,6 +307,12 @@ public class AnimationWalk extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

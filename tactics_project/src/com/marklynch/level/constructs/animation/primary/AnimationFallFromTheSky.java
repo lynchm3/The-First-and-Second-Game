@@ -15,7 +15,7 @@ public class AnimationFallFromTheSky extends Animation {
 	public AnimationFallFromTheSky(GameObject performer, float durationToReachMillis,
 			OnCompletionListener onCompletionListener) {
 
-		super(performer, onCompletionListener, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
 		if (!runAnimation)
 			return;
 
@@ -68,6 +68,12 @@ public class AnimationFallFromTheSky extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

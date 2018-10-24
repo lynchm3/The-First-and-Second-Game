@@ -11,7 +11,7 @@ public class AnimationShake extends Animation {
 	// for show only, walking actor, primary
 
 	public AnimationShake(GameObject performer, OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
 		if (!runAnimation)
 			return;
 		blockAI = false;
@@ -58,6 +58,12 @@ public class AnimationShake extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

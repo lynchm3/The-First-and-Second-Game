@@ -7,7 +7,7 @@ import com.marklynch.objects.GameObject;
 public class AnimationWait extends Animation {
 
 	public AnimationWait(GameObject performer, OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
 		if (!runAnimation)
 			return;
 		durationToReachMillis = 400;
@@ -64,6 +64,12 @@ public class AnimationWait extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

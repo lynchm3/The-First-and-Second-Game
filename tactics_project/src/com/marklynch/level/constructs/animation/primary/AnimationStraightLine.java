@@ -9,28 +9,26 @@ import com.marklynch.objects.GameObject;
 public class AnimationStraightLine extends Animation {
 
 	public String name;
-	public Square[] targetSquares;
 	private int index = 0;
 	float x, y, targetX, targetY, speed, speedX, speedY;
 	float angle = 0;
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
-	GameObject projectileObject;
 	float rotationSpeed = 0;
 	double delay;
 
-	public AnimationStraightLine(GameObject projectileObject, float speed, boolean blockAI, double delay,
+	public AnimationStraightLine(GameObject performer, float speed, boolean blockAI, double delay,
 			OnCompletionListener onCompletionListener, Square... targetSquares) {
 
-		super(projectileObject, onCompletionListener, projectileObject, targetSquares[targetSquares.length - 1]);
+		super(performer, onCompletionListener, targetSquares, null, null, null, null, null, performer, targetSquares[targetSquares.length - 1]);
 		if (!runAnimation)
 			return;
 
 		this.targetSquares = targetSquares;
-		this.projectileObject = projectileObject;
+		// this.projectileObject = projectileObject;
 		this.speed = speed;
 
-		this.x = projectileObject.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
-		this.y = projectileObject.squareGameObjectIsOn.yInGridPixels;// shooter.getCenterY();
+		this.x = performer.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
+		this.y = performer.squareGameObjectIsOn.yInGridPixels;// shooter.getCenterY();
 		if (speedX < 0)
 			this.rotationSpeed = -rotationSpeed;
 		else
@@ -39,8 +37,8 @@ public class AnimationStraightLine extends Animation {
 		this.blockAI = blockAI;
 		this.delay = delay;
 
-		if (projectileObject instanceof Arrow && distanceToCoverX < 0) {
-			projectileObject.backwards = true;
+		if (performer instanceof Arrow && distanceToCoverX < 0) {
+			performer.backwards = true;
 		}
 
 		for (int i = 0; i < targetSquares.length; i++) {
@@ -79,23 +77,20 @@ public class AnimationStraightLine extends Animation {
 	}
 
 	@Override
-	public void runCompletionAlgorightm(boolean wait) {
-		postRangedAnimation(projectileObject, targetSquares, false);
-		super.runCompletionAlgorightm(wait);
+	public void childRunCompletionAlgorightm(boolean wait) {
+		System.out.println("AnimationStraightLine.childRunCompletionAlgorightm() -projectileObject = " + performer);
+		postRangedAnimation();
+		// super.runCompletionAlgorightm(wait);
 	}
 
-	public void postRangedAnimation(GameObject projectileObject, Square... targetSquares) {
-		postRangedAnimation(projectileObject, targetSquares, false);
-	}
+	public void postRangedAnimation() {
+		if (performer != null) {
 
-	public void postRangedAnimation(GameObject projectileObject, Square[] targetSquares, boolean doesNothing) {
-		if (projectileObject != null) {
-
-			if (projectileObject.getPrimaryAnimation() != null) {
-				projectileObject.getPrimaryAnimation().offsetX = 0;
-				projectileObject.getPrimaryAnimation().offsetY = 0;
+			if (performer.getPrimaryAnimation() != null) {
+				performer.getPrimaryAnimation().offsetX = 0;
+				performer.getPrimaryAnimation().offsetY = 0;
 			}
-			targetSquares[targetSquares.length - 1].inventory.add(projectileObject);
+			targetSquares[targetSquares.length - 1].inventory.add(performer);
 		}
 	}
 
@@ -106,4 +101,10 @@ public class AnimationStraightLine extends Animation {
 			return;
 
 	}
+
+	// @Override
+	// protected void childeRunCompletionAlgorightm(boolean wait) {
+	// // TODO Auto-generated method stub
+	//
+	// }
 }

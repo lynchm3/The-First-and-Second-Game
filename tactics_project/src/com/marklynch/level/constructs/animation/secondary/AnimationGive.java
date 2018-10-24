@@ -23,7 +23,7 @@ public class AnimationGive extends Animation {
 
 	public AnimationGive(GameObject giver, GameObject receiver, GameObject projectileObject,
 			OnCompletionListener onCompletionListener) {
-		super(null, onCompletionListener, giver, receiver);
+		super(null, onCompletionListener, null, null, null, null, null, null, giver, receiver);
 		if (!runAnimation)
 			return;
 
@@ -110,6 +110,12 @@ public class AnimationGive extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

@@ -20,7 +20,7 @@ public class AnimationThrow extends Animation {
 	GameObject target;
 
 	public AnimationThrow(GameObject performer, GameObject target, OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, performer, target);
+		super(performer, onCompletionListener, null, null, null, null, null, null, performer, target);
 		if (!runAnimation)
 			return;
 		this.target = target;
@@ -84,6 +84,12 @@ public class AnimationThrow extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

@@ -12,7 +12,7 @@ public class AnimationDie extends Animation {
 	float targetTorsoAngle = 1.57f;// 3.14/2
 
 	public AnimationDie(GameObject performer, OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
 		if (!runAnimation)
 			return;
 		// durationToReach = 400;
@@ -77,6 +77,12 @@ public class AnimationDie extends Animation {
 
 	@Override
 	public void draw3() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

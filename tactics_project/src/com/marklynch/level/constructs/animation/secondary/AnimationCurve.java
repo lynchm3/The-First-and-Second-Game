@@ -28,7 +28,7 @@ public class AnimationCurve extends Animation {
 	public AnimationCurve(GameObject projectileObject, float speed, Point focalPoint, float angleChange,
 			OnCompletionListener onCompletionListener) {
 
-		super(null, onCompletionListener, projectileObject);
+		super(null, onCompletionListener, null, null, null, null, null, null, projectileObject);
 		if (!runAnimation)
 			return;
 
@@ -129,6 +129,12 @@ public class AnimationCurve extends Animation {
 		// view.rotate(-angleInRadians, new Vector3f(0f, 0f, 1f));
 		// view.translate(new Vector2f(-(x + 64), -(y + 64)));
 		// Game.activeBatch.updateUniforms();
+
+	}
+
+	@Override
+	protected void childRunCompletionAlgorightm(boolean wait) {
+		// TODO Auto-generated method stub
 
 	}
 }

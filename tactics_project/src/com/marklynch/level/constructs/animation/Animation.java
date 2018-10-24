@@ -6,7 +6,10 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 
 public abstract class Animation {
@@ -71,12 +74,20 @@ public abstract class Animation {
 
 	public int phase = 0;
 	public ArrayList<KeyFrame> keyFrames = new ArrayList<KeyFrame>();
+	public Square[] targetSquares;
+	public Square targetSquare;
+	public GameObject projectileObject;
+	public Action action;
+	public Actor shooter;
+	public GameObject weapon;
 
-	public Animation(GameObject performer, OnCompletionListener onCompletionListener, Object... objectsInvolved) {
+	public Animation(GameObject performer, OnCompletionListener onCompletionListener, Square[] targetSquares,
+			Square targetSquare, GameObject projectileObject, Action action, Actor actor, GameObject weapon, Object... objectsInvolved) {
 
 		this.performer = performer;
-		runAnimation = Game.level.shouldLog(objectsInvolved, false);// && performer == Game.level.player;
+		this.targetSquares = targetSquares;
 		this.onCompletionListener = onCompletionListener;
+		runAnimation = Game.level.shouldLog(objectsInvolved, false);// && performer == Game.level.player;
 		if (!runAnimation) {
 			runCompletionAlgorightm(true);
 			return;
@@ -151,7 +162,11 @@ public abstract class Animation {
 
 	}
 
+	protected abstract void childRunCompletionAlgorightm(boolean wait);
+
 	protected void runCompletionAlgorightm(boolean wait) {
+
+		childRunCompletionAlgorightm(wait);
 
 		Level.blockingAnimations.remove(this);
 
