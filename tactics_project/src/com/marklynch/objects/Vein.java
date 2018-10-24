@@ -52,6 +52,15 @@ public class Vein extends Wall {
 			int orePositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ ore.drawOffsetRatioY * Game.SQUARE_HEIGHT);
 
+			if (primaryAnimation != null && !(primaryAnimation.getCompleted())) {
+				orePositionXInPixels += this.primaryAnimation.offsetX;
+				orePositionYInPixels += this.primaryAnimation.offsetY;
+			}
+			// if (ore.primaryAnimation != null) {
+			// orePositionXInPixels += ore.primaryAnimation.offsetX;
+			// orePositionYInPixels += ore.primaryAnimation.offsetY;
+			// }
+
 			float alpha = 1.0f;
 			if (primaryAnimation != null)
 				alpha = primaryAnimation.alpha;

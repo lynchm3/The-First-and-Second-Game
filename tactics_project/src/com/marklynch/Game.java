@@ -57,8 +57,8 @@ public class Game {
 	// PLAYER START POSITION
 
 	// Puzzles yo
-	public static int playerStartPosX = 89;
-	public static int playerStartPosY = 33;
+	public static int playerStartPosX = 2;
+	public static int playerStartPosY = 4;
 
 	// Shop
 	// public static int playerStartPosX = 13;

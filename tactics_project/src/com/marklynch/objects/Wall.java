@@ -164,49 +164,129 @@ public class Wall extends GameObject {
 		// Draw object
 		if (squareGameObjectIsOn != null) {
 
-			float alpha = 1.0f;
-
-			if (fullWall) {
-
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, fullDrawX1,
-						fullDrawY1, fullDrawX2, fullDrawY2, false, false, Color.WHITE);
-				return;
+			if (primaryAnimation != null && !(primaryAnimation.getCompleted())) {
+				draw1WithAnimation();
+			} else {
+				draw1WithoutAnimation();
 			}
-
-			if (connectedTop)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, topDrawX1,
-						topDrawY1, topDrawX2, topDrawY2, false, false, Color.WHITE);
-
-			if (connectedTopRight)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						topRightDrawX1, topRightDrawY1, topRightDrawX2, topRightDrawY2, false, false, Color.WHITE);
-			//
-			if (connectedRight)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, rightDrawX1,
-						rightDrawY1, rightDrawX2, rightDrawY2, false, false, Color.WHITE);
-			//
-			if (connectedBottomRight)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						bottomRightDrawX1, bottomRightDrawY1, bottomRightDrawX2, bottomRightDrawY2, false, false,
-						Color.WHITE);
-			//
-			if (connectedBottom)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, bottomDrawX1,
-						bottomDrawY1, bottomDrawX2, bottomDrawY2, false, false, Color.WHITE);
-			//
-			if (connectedBottomLeft)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2,
-						bottomLeftDrawX1, bottomLeftDrawY1, bottomLeftDrawX2, bottomLeftDrawY2, false, false,
-						Color.WHITE);
-			//
-			if (connectedLeft)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, leftDrawX1,
-						leftDrawY1, leftDrawX2, leftDrawY2, false, false, Color.WHITE);
-			//
-			if (connectedTopLeft)
-				TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, topLeftDrawX1,
-						topLeftDrawY1, topLeftDrawX2, topLeftDrawY2, false, false, Color.WHITE);
 		}
+	}
+
+	private void draw1WithoutAnimation() {
+
+		float alpha = 1.0f;
+
+		if (fullWall) {
+
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, fullDrawX1,
+					fullDrawY1, fullDrawX2, fullDrawY2, false, false, Color.WHITE);
+			return;
+		}
+
+		if (connectedTop)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, topDrawX1,
+					topDrawY1, topDrawX2, topDrawY2, false, false, Color.WHITE);
+
+		if (connectedTopRight)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, topRightDrawX1,
+					topRightDrawY1, topRightDrawX2, topRightDrawY2, false, false, Color.WHITE);
+		//
+		if (connectedRight)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, rightDrawX1,
+					rightDrawY1, rightDrawX2, rightDrawY2, false, false, Color.WHITE);
+		//
+		if (connectedBottomRight)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, bottomRightDrawX1,
+					bottomRightDrawY1, bottomRightDrawX2, bottomRightDrawY2, false, false, Color.WHITE);
+		//
+		if (connectedBottom)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, bottomDrawX1,
+					bottomDrawY1, bottomDrawX2, bottomDrawY2, false, false, Color.WHITE);
+		//
+		if (connectedBottomLeft)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, bottomLeftDrawX1,
+					bottomLeftDrawY1, bottomLeftDrawX2, bottomLeftDrawY2, false, false, Color.WHITE);
+		//
+		if (connectedLeft)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, leftDrawX1,
+					leftDrawY1, leftDrawX2, leftDrawY2, false, false, Color.WHITE);
+		//
+		if (connectedTopLeft)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, topLeftDrawX1,
+					topLeftDrawY1, topLeftDrawX2, topLeftDrawY2, false, false, Color.WHITE);
+
+	}
+
+	private void draw1WithAnimation() {
+
+		float alpha = 1.0f;
+
+		if (fullWall) {
+
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1 + primaryAnimation.offsetX,
+					drawY1 + primaryAnimation.offsetY, drawX2 + primaryAnimation.offsetX,
+					drawY2 + primaryAnimation.offsetY, fullDrawX1 + primaryAnimation.offsetX,
+					fullDrawY1 + primaryAnimation.offsetY, fullDrawX2 + primaryAnimation.offsetX,
+					fullDrawY2 + primaryAnimation.offsetY, false, false, Color.WHITE);
+			return;
+		}
+
+		if (connectedTop)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1 + primaryAnimation.offsetX,
+					drawY1 + primaryAnimation.offsetY, drawX2 + primaryAnimation.offsetX,
+					drawY2 + primaryAnimation.offsetY, topDrawX1 + primaryAnimation.offsetX,
+					topDrawY1 + primaryAnimation.offsetY, topDrawX2 + primaryAnimation.offsetX,
+					topDrawY2 + primaryAnimation.offsetY, false, false, Color.WHITE);
+
+		if (connectedTopRight)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1 + primaryAnimation.offsetX,
+					drawY1 + primaryAnimation.offsetY, drawX2 + primaryAnimation.offsetX,
+					drawY2 + primaryAnimation.offsetY, topRightDrawX1 + primaryAnimation.offsetX,
+					topRightDrawY1 + primaryAnimation.offsetY, topRightDrawX2 + primaryAnimation.offsetX,
+					topRightDrawY2 + primaryAnimation.offsetY, false, false, Color.WHITE);
+		//
+		if (connectedRight)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1 + primaryAnimation.offsetX,
+					drawY1 + primaryAnimation.offsetY, drawX2 + primaryAnimation.offsetX,
+					drawY2 + primaryAnimation.offsetY, rightDrawX1 + primaryAnimation.offsetX,
+					rightDrawY1 + primaryAnimation.offsetY, rightDrawX2 + primaryAnimation.offsetX,
+					rightDrawY2 + primaryAnimation.offsetY, false, false, Color.WHITE);
+		//
+		if (connectedBottomRight)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1 + primaryAnimation.offsetX,
+					drawY1 + primaryAnimation.offsetY, drawX2 + primaryAnimation.offsetX,
+					drawY2 + primaryAnimation.offsetY, bottomRightDrawX1 + primaryAnimation.offsetX,
+					bottomRightDrawY1 + primaryAnimation.offsetY, bottomRightDrawX2 + primaryAnimation.offsetX,
+					bottomRightDrawY2 + primaryAnimation.offsetY, false, false, Color.WHITE);
+		//
+		if (connectedBottom)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1 + primaryAnimation.offsetX,
+					drawY1 + primaryAnimation.offsetY, drawX2 + primaryAnimation.offsetX,
+					drawY2 + primaryAnimation.offsetY, bottomDrawX1 + primaryAnimation.offsetX,
+					bottomDrawY1 + primaryAnimation.offsetY, bottomDrawX2 + primaryAnimation.offsetX,
+					bottomDrawY2 + primaryAnimation.offsetY, false, false, Color.WHITE);
+		//
+		if (connectedBottomLeft)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1 + primaryAnimation.offsetX,
+					drawY1 + primaryAnimation.offsetY, drawX2 + primaryAnimation.offsetX,
+					drawY2 + primaryAnimation.offsetY, bottomLeftDrawX1 + primaryAnimation.offsetX,
+					bottomLeftDrawY1 + primaryAnimation.offsetY, bottomLeftDrawX2 + primaryAnimation.offsetX,
+					bottomLeftDrawY2 + primaryAnimation.offsetY, false, false, Color.WHITE);
+		//
+		if (connectedLeft)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1 + primaryAnimation.offsetX,
+					drawY1 + primaryAnimation.offsetY, drawX2 + primaryAnimation.offsetX,
+					drawY2 + primaryAnimation.offsetY, leftDrawX1 + primaryAnimation.offsetX, leftDrawY1,
+					leftDrawX2 + primaryAnimation.offsetX, leftDrawY2 + primaryAnimation.offsetY, false, false,
+					Color.WHITE);
+		//
+		if (connectedTopLeft)
+			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1 + primaryAnimation.offsetX,
+					drawY1 + primaryAnimation.offsetY, drawX2 + primaryAnimation.offsetX,
+					drawY2 + primaryAnimation.offsetY, topLeftDrawX1 + primaryAnimation.offsetX,
+					topLeftDrawY1 + primaryAnimation.offsetY, topLeftDrawX2 + primaryAnimation.offsetX,
+					topLeftDrawY2 + primaryAnimation.offsetY, false, false, Color.WHITE);
+
 	}
 
 	@Override
