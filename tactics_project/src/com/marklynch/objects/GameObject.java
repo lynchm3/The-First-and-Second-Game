@@ -266,6 +266,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public String type = "Object";
 
+	public int lastTurnThisWasMovedByMinecart = -1;
+
 	public GameObject() {
 
 		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(0));

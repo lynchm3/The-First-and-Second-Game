@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
@@ -63,16 +64,21 @@ public class MineCart extends GameObject {
 			}
 
 			this.direction = squaresForAnimation.get(squaresForAnimation.size() - 1).direction;
-			for (final GameObject gamObject : (ArrayList<GameObject>) this.squareGameObjectIsOn.inventory.gameObjects
+			for (final GameObject gameObject : (ArrayList<GameObject>) this.squareGameObjectIsOn.inventory.gameObjects
 					.clone()) {
 
-				if (gamObject.isFloorObject)
+				if (gameObject.isFloorObject)
 					continue;
 
-				gamObject.setPrimaryAnimation(new AnimationStraightLine(this, 2f, true, 0f, array) {
+				if (gameObject.lastTurnThisWasMovedByMinecart == Level.turn)
+					continue;
+
+				gameObject.lastTurnThisWasMovedByMinecart = Level.turn;
+
+				gameObject.setPrimaryAnimation(new AnimationStraightLine(this, 2f, true, 0f, array) {
 					@Override
 					public void runCompletionAlgorightm(boolean wait) {
-						postRangedAnimation(gamObject, array);
+						postRangedAnimation(gameObject, array);
 						super.runCompletionAlgorightm(wait);
 					}
 				});
