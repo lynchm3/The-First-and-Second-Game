@@ -70,20 +70,19 @@ public class ActionChopping extends Action {
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
-		Actor oreOwner = performer;
+		Actor treeOwner = performer;
 		if (target.owner != null)
-			oreOwner = target.owner;
+			treeOwner = target.owner;
 
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " chopped at ", target, " with ", axe }));
 
 		target.setPrimaryAnimation(new AnimationShake(target));
 
-		boolean destroyed = target.checkIfDestroyed(performer, this);
+		if (target.remainingHealth <= 0) {
 
-		GameObject wood = null;
-		if (destroyed) {
-			wood = Templates.WOOD.makeCopy(target.squareGameObjectIsOn, oreOwner);
+			GameObject wood = Templates.WOOD.makeCopy(target.squareGameObjectIsOn, treeOwner);
+			System.out.println("wood = " + wood);
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 				performer.addSecondaryAnimation(new AnimationTake(wood, performer, 0, 0, 1f));
@@ -126,7 +125,7 @@ public class ActionChopping extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_VANDALISM, wood);
+			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_VANDALISM, target);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
