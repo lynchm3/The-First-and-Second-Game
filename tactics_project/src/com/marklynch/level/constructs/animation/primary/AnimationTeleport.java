@@ -67,6 +67,13 @@ public class AnimationTeleport extends Animation {
 	}
 
 	@Override
+	protected void runCompletionAlgorightm(boolean wait) {
+		offsetX = 0;
+		offsetY = 0;
+		super.runCompletionAlgorightm(wait);
+	}
+
+	@Override
 	public void draw2() {
 
 	}
