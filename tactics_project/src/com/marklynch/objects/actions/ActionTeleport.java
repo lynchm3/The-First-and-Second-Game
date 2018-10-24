@@ -76,8 +76,8 @@ public class ActionTeleport extends Action {
 			public void runCompletionAlgorightm(boolean wait) {
 				offsetX = 0;
 				offsetY = 0;
-				super.runCompletionAlgorightm(wait);
 				postAnimation();
+				super.runCompletionAlgorightm(wait);
 			}
 		});
 

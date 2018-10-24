@@ -6,7 +6,6 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
-import com.marklynch.level.constructs.animation.primary.AnimationWalk;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Player;
 
@@ -157,54 +156,49 @@ public abstract class Animation {
 		Level.animations.remove(this);
 
 		completed = true;
+		if (onCompletionListener != null)
+			onCompletionListener.animationComplete(performer);
+
+		if (shouldWait(wait)) {
+
+			performer.setPrimaryAnimation(new AnimationWait(performer));
+		}
+	}
+
+	private boolean shouldWait(boolean wait) {
 
 		if (performer == null)
-			return;
+			return false;
 
-		// if (!(performer instanceof Actor)) {
-		// if (onCompletionListener != null)
-		// onCompletionListener.animationComplete(performer);
-		// return;
-		// }
+		if (wait == false)
+			return false;
 
+		// Not primary animation
 		if (this != performer.getPrimaryAnimation()) {
 			if (onCompletionListener != null)
 				onCompletionListener.animationComplete(performer);
-			return;
+			return false;
 		}
 
+		// Is a wait or die animation
 		if (this instanceof AnimationWait || this instanceof AnimationDie) {
 			if (onCompletionListener != null)
 				onCompletionListener.animationComplete(performer);
-			return;
+			return false;
 		}
+
+		if (performer.remainingHealth <= 0)
+			return true;
 
 		// Make player do wait animation at end of walk.
-		if (performer == Level.player && Player.playerPathToMove == null && Player.playerTargetSquare == null
-				&& Player.playerTargetAction == null && Player.playerTargetActor == null && wait) {
-			performer.setPrimaryAnimation(new AnimationWait(performer));
-			if (onCompletionListener != null)
-				onCompletionListener.animationComplete(performer);
-			return;
+		if (performer == Level.player) {
+			if (Player.playerPathToMove != null || Player.playerTargetSquare != null
+					|| Player.playerTargetAction != null || Player.playerTargetActor != null) {
+				return false;
+			}
 		}
 
-		if (this instanceof AnimationWalk) {
-			if (onCompletionListener != null)
-				onCompletionListener.animationComplete(performer);
-			return;
-		}
-
-		if (performer.remainingHealth > 0 && wait) {
-			performer.setPrimaryAnimation(new AnimationWait(performer));
-		}
-		if (onCompletionListener != null)
-			onCompletionListener.animationComplete(performer);
-		// else
-		// performer.setPrimaryAnimation(new AnimationDie(performer));
-
-		// if (!(this instanceof AnimationWalk)) {
-		//
-		// } else
+		return true;
 	}
 
 	public boolean firstUpdate = true;
