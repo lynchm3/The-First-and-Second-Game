@@ -24,16 +24,21 @@ public class AnimationWait extends Animation {
 		kf0.leftKneeAngle = 0;
 		kf0.rightKneeAngle = 0;
 		kf0.offsetY = 0;
+		kf0.headToToeOffset = 0f;
+		kf0.keyFrameTimeMillis = 100;
 		if (performer.hiding) {
 			kf0.leftHipAngle = -1.1f;
 			kf0.rightHipAngle = -1.1f;
 			kf0.leftKneeAngle = 2f;
 			kf0.rightKneeAngle = 2f;
 			kf0.offsetY = 28f;
+			kf0.headToToeOffset = -30f;
+			kf0.keyFrameTimeMillis = 1000;
 		}
 
-		kf0.setAllSpeeds(0.004d);
-		kf0.offsetYSpeed = 1;
+		// kf0.setAllSpeeds(0.004d);
+		// kf0.offsetYSpeed = 0.1;
+		kf0.normaliseSpeeds = true;
 		keyFrames.add(kf0);
 	}
 

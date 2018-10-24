@@ -16,6 +16,7 @@ public abstract class Animation {
 	public boolean completed = false;
 	public float offsetX = 0;
 	public float offsetY = 0;
+	public float headToToeOffset = 0f;
 
 	public float torsoAngle = 0f;
 	public float leftShoulderAngle = 0f;

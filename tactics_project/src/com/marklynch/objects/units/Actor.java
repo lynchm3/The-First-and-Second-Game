@@ -650,10 +650,15 @@ public class Actor extends GameObject {
 			view.translate(new Vector2f(-(x + halfWidthAtScale), -(y + halfHeightAtScale)));
 			Game.activeBatch.updateUniforms();
 		}
+
+		float yToRotateAround = y + height;
+		if (primaryAnimation != null)
+			yToRotateAround += primaryAnimation.headToToeOffset;
+
 		Game.flush();
-		view.translate(new Vector2f(x + halfWidthAtScale, y + height));
+		view.translate(new Vector2f(x + halfWidthAtScale, yToRotateAround));
 		view.rotate(rotationRad, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + halfWidthAtScale), -(y + height)));
+		view.translate(new Vector2f(-(x + halfWidthAtScale), -(yToRotateAround)));
 		Game.activeBatch.updateUniforms();
 
 		// torso rotation
@@ -918,9 +923,9 @@ public class Actor extends GameObject {
 		Game.activeBatch.updateUniforms();
 
 		Game.flush();
-		view.translate(new Vector2f(x + halfWidthAtScale, y + height));
+		view.translate(new Vector2f(x + halfWidthAtScale, yToRotateAround));
 		view.rotate(-(rotationRad), new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + halfWidthAtScale), -(y + height)));
+		view.translate(new Vector2f(-(x + halfWidthAtScale), -(yToRotateAround)));
 		Game.activeBatch.updateUniforms();
 
 		if (scaleX != 1 || scaleY != 1) {

@@ -119,6 +119,8 @@ public class AnimationWalk extends Animation {
 		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
+		headToToeOffset = 0f;
+
 		backwards = performer.backwards;
 
 		blockAI = false;
@@ -150,6 +152,7 @@ public class AnimationWalk extends Animation {
 		kf0.keyFrameTimeMillis = keyFramTimeMillis;
 		kf0.offsetX = startOffsetX * 3 / 4;
 		kf0.offsetY = startOffsetY * 3 / 4;
+		kf0.headToToeOffset = 0f;
 		kf0.torsoAngle = targetTorsoAngle0;
 		kf0.rightHipAngle = targetRightHip0;
 		kf0.rightKneeAngle = targetRightKnee0;
@@ -164,6 +167,7 @@ public class AnimationWalk extends Animation {
 		kf1.keyFrameTimeMillis = keyFramTimeMillis;
 		kf1.offsetX = startOffsetX * 2 / 4;
 		kf1.offsetY = startOffsetY * 2 / 4;
+		kf1.headToToeOffset = 0f;
 		kf1.torsoAngle = targetTorsoAngle1;
 		kf1.rightHipAngle = targetRightHip1;
 		kf1.rightKneeAngle = targetRightKnee1;
@@ -178,6 +182,7 @@ public class AnimationWalk extends Animation {
 		kf2.keyFrameTimeMillis = keyFramTimeMillis;
 		kf2.offsetX = startOffsetX * 1 / 4;
 		kf2.offsetY = startOffsetY * 1 / 4;
+		kf2.headToToeOffset = 0f;
 		kf2.torsoAngle = targetTorsoAngle2;
 		kf2.rightHipAngle = targetRightHip2;
 		kf2.rightKneeAngle = targetRightKnee2;
@@ -192,6 +197,7 @@ public class AnimationWalk extends Animation {
 		kf3.keyFrameTimeMillis = keyFramTimeMillis;
 		kf3.offsetX = startOffsetX * 0 / 4;
 		kf3.offsetY = startOffsetY * 0 / 4;
+		kf3.headToToeOffset = 0f;
 		kf3.torsoAngle = targetTorsoAngle3;
 		kf3.rightHipAngle = targetRightHip3;
 		kf3.rightKneeAngle = targetRightKnee3;
@@ -210,6 +216,7 @@ public class AnimationWalk extends Animation {
 		kf4.keyFrameTimeMillis = keyFramTimeMillis;
 		kf4.offsetX = startOffsetX * 3 / 4;
 		kf4.offsetY = startOffsetY * 3 / 4;
+		kf4.headToToeOffset = 0f;
 		kf4.torsoAngle = targetTorsoAngle4;
 		kf4.rightHipAngle = targetRightHip4;
 		kf4.rightKneeAngle = targetRightKnee4;
@@ -224,6 +231,7 @@ public class AnimationWalk extends Animation {
 		kf5.keyFrameTimeMillis = keyFramTimeMillis;
 		kf5.offsetX = startOffsetX * 2 / 4;
 		kf5.offsetY = startOffsetY * 2 / 4;
+		kf5.headToToeOffset = 0f;
 		kf5.torsoAngle = targetTorsoAngle5;
 		kf5.rightHipAngle = targetRightHip5;
 		kf5.rightKneeAngle = targetRightKnee5;
@@ -238,6 +246,7 @@ public class AnimationWalk extends Animation {
 		kf6.keyFrameTimeMillis = keyFramTimeMillis;
 		kf6.offsetX = startOffsetX * 1 / 4;
 		kf6.offsetY = startOffsetY * 1 / 4;
+		kf6.headToToeOffset = 0f;
 		kf6.torsoAngle = targetTorsoAngle6;
 		kf6.rightHipAngle = targetRightHip6;
 		kf6.rightKneeAngle = targetRightKnee6;
@@ -252,6 +261,7 @@ public class AnimationWalk extends Animation {
 		kf7.keyFrameTimeMillis = keyFramTimeMillis;
 		kf7.offsetX = startOffsetX * 0 / 4;
 		kf7.offsetY = startOffsetY * 0 / 4;
+		kf7.headToToeOffset = 0f;
 		kf7.torsoAngle = targetTorsoAngle7;
 		kf7.rightHipAngle = targetRightHip7;
 		kf7.rightKneeAngle = targetRightKnee7;

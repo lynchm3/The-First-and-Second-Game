@@ -1,5 +1,6 @@
 package com.marklynch.level.constructs.animation;
 
+import com.marklynch.level.Level;
 import com.marklynch.objects.GameObject;
 
 public class KeyFrame {
@@ -40,6 +41,8 @@ public class KeyFrame {
 	public int boundsY1 = -128;
 	public int boundsX2 = 128;
 	public int boundsY2 = 128;
+	public double headToToeOffset = 0f;
+
 	public boolean drawWeapon = true;
 
 	// Speeds
@@ -62,6 +65,8 @@ public class KeyFrame {
 	public double boundsY1Speed = 1;
 	public double boundsX2Speed = 1;
 	public double boundsY2Speed = 1;
+
+	public double headToToeOffsetSpeed = 1;
 
 	Animation animation;
 	GameObject performer;
@@ -100,11 +105,20 @@ public class KeyFrame {
 			this.scaleX = performer.getPrimaryAnimation().scaleX;
 			this.scaleY = performer.getPrimaryAnimation().scaleY;
 
+			this.headToToeOffset = performer.getPrimaryAnimation().headToToeOffset;
+
 			this.alpha = performer.getPrimaryAnimation().alpha;
 		}
 	}
 
 	public void animate(double delta) {
+
+		if (performer == Level.player) {
+			System.out.println("animation.headToToeOffset = " + animation.headToToeOffset);
+			System.out.println("headToToeOffsetSpeed = " + headToToeOffsetSpeed);
+			System.out.println("headToToeOffsetSpeed * delta = " + (headToToeOffsetSpeed * delta));
+			System.out.println("headToToeOffset = " + headToToeOffset);
+		}
 
 		animation.offsetX = animation.moveTowardsTargetAngleInRadians(animation.offsetX, offsetXSpeed * delta, offsetX);
 		animation.offsetY = animation.moveTowardsTargetAngleInRadians(animation.offsetY, offsetYSpeed * delta, offsetY);
@@ -118,6 +132,8 @@ public class KeyFrame {
 				boundsX2);
 		animation.boundsY2 = (int) animation.moveTowardsTargetAngleInRadians(animation.boundsY2, boundsY2Speed * delta,
 				boundsY2);
+		animation.headToToeOffset = animation.moveTowardsTargetAngleInRadians(animation.headToToeOffset,
+				headToToeOffsetSpeed * delta, headToToeOffset);
 
 		if (!animation.backwards) {
 
@@ -151,6 +167,7 @@ public class KeyFrame {
 					&& animation.boundsY1 == boundsY1 //
 					&& animation.boundsX2 == boundsX2 //
 					&& animation.boundsY2 == boundsY2 //
+					&& animation.headToToeOffset == headToToeOffset//
 					&& animation.torsoAngle == torsoAngle //
 					&& animation.leftShoulderAngle == leftShoulderAngle//
 					&& animation.rightShoulderAngle == rightShoulderAngle//
@@ -196,6 +213,7 @@ public class KeyFrame {
 					&& animation.boundsY1 == boundsY1 //
 					&& animation.boundsX2 == boundsX2 //
 					&& animation.boundsY2 == boundsY2 //
+					&& animation.headToToeOffset == headToToeOffset//
 					&& animation.torsoAngle == -torsoAngle //
 					&& animation.leftShoulderAngle == -rightShoulderAngle//
 					&& animation.rightShoulderAngle == -leftShoulderAngle//
@@ -234,6 +252,7 @@ public class KeyFrame {
 		double distanceToCoverboundsY1 = Math.abs(animation.boundsY1 - boundsY1);
 		double distanceToCoverboundsX2 = Math.abs(animation.boundsX2 - boundsX2);
 		double distanceToCoverboundsY2 = Math.abs(animation.boundsY2 - boundsY2);
+		double distanceToCoverHeadToToeOffset = Math.abs(animation.headToToeOffset - headToToeOffset);
 
 		double distanceToCovertorsoAngle;
 		double distanceToCoverleftShoulderAngle;
@@ -277,6 +296,7 @@ public class KeyFrame {
 		boundsX2Speed = distanceToCoverboundsX2 / keyFrameTimeMillis;
 		boundsY2Speed = distanceToCoverboundsY2 / keyFrameTimeMillis;
 		torsoAngleSpeed = distanceToCovertorsoAngle / keyFrameTimeMillis;
+		headToToeOffsetSpeed = distanceToCoverHeadToToeOffset / keyFrameTimeMillis;
 
 		if (!animation.backwards) {
 			leftShoulderAngleSpeed = distanceToCoverleftShoulderAngle / keyFrameTimeMillis;
