@@ -125,7 +125,8 @@ public class QuestTheSecretRoom extends Quest {
 				Templates.WALL, Square.STONE_TEXTURE, 2));
 
 		// Path to town 24,21 -> 24,29
-		PavedPathway pathToTown = new PavedPathway(AreaTown.posX + 24, AreaTown.posY + 21, AreaTown.posX + 24, AreaTown.posY + 29);
+		PavedPathway pathToTown = new PavedPathway(AreaTown.posX + 24, AreaTown.posY + 21, AreaTown.posX + 24,
+				AreaTown.posY + 29);
 
 		// Bushed along path to town
 		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 25], null);
@@ -133,6 +134,7 @@ public class QuestTheSecretRoom extends Quest {
 		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 27], null);
 		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 27], null);
 		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 29], null);
+		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 28], null);
 		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 29], null);
 
 		// TownSquare Well 24,21
