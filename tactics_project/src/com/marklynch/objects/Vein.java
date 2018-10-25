@@ -33,17 +33,10 @@ public class Vein extends Wall {
 	}
 
 	@Override
-	public void draw1() {
-
-		if (!Game.fullVisiblity) {
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
-
-		super.draw1();
+	public boolean draw1() {
+		boolean shouldDraw = super.draw1();
+		if (!shouldDraw)
+			return false;
 
 		// DRAW INVENTORY
 		for (GameObject ore : inventory.gameObjects) {
@@ -68,6 +61,7 @@ public class Vein extends Wall {
 			TextureUtils.drawTexture(ore.imageTexture, alpha, orePositionXInPixels, orePositionYInPixels,
 					orePositionXInPixels + ore.width, orePositionYInPixels + ore.height);
 		}
+		return true;
 	}
 
 	// , boolean infinite, Junk oreTemplate, double dropChance) {

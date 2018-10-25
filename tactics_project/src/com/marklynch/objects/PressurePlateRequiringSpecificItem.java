@@ -29,11 +29,6 @@ public class PressurePlateRequiringSpecificItem extends Switch implements Update
 	}
 
 	@Override
-	public void draw1() {
-		super.draw1();
-	}
-
-	@Override
 	public void draw2() {
 		super.draw2();
 		if (Game.showTriggerLines) {

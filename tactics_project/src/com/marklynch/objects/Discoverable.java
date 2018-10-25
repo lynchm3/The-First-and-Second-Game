@@ -52,10 +52,10 @@ public class Discoverable extends GameObject {
 	}
 
 	@Override
-	public void draw1() {
+	public boolean draw1() {
 		if (!discovered)
-			return;
-		super.draw1();
+			return false;
+		return super.draw1();
 	}
 
 	@Override

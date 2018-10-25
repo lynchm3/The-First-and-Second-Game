@@ -22,15 +22,9 @@ public class Roof extends GameObject {
 	}
 
 	@Override
-	public void draw1() {
+	public boolean draw1() {
 
-		if (!Game.fullVisiblity) {
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
+		return false;
 	}
 
 	@Override

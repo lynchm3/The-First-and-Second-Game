@@ -43,17 +43,10 @@ public class BrokenGlass extends Stampable {
 	}
 
 	@Override
-	public void draw1() {
+	public boolean draw1() {
 
-		if (this.remainingHealth <= 0)
-			return;
-
-		// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
-		// persistsWhenCantBeSeen == false)
-		// return;
-		//
-		// if (!this.squareGameObjectIsOn.seenByPlayer)
-		// return;
+		if (!shouldDraw())
+			return false;
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {
@@ -61,6 +54,8 @@ public class BrokenGlass extends Stampable {
 				glassShard.draw1();
 			}
 		}
+
+		return true;
 	}
 
 	private class GlassShard {

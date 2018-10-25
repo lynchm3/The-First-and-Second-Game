@@ -31,6 +31,8 @@ public class Tree extends GameObject {
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
 
+		orderingOnGound = 110;
+
 		type = "Tree";
 	}
 
@@ -69,21 +71,11 @@ public class Tree extends GameObject {
 	}
 
 	@Override
-	public void draw1() {
-	}
+	public boolean draw1() {
 
-	@Override
-	public void draw2() {
-
-		if (!Game.fullVisiblity) {
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
-
-		super.draw1();
+		boolean shouldDraw = super.draw1();
+		if (!shouldDraw)
+			return false;
 
 		// DRAW INVENTORY
 		for (GameObject fruit : inventory.gameObjects) {
@@ -101,7 +93,7 @@ public class Tree extends GameObject {
 			TextureUtils.drawTexture(fruit.imageTexture, alpha, fruitPositionXInPixels, fruitPositionYInPixels,
 					fruitPositionXInPixels + fruit.width, fruitPositionYInPixels + fruit.height);
 		}
-		super.draw2();
+		return true;
 	}
 
 	@Override

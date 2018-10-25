@@ -31,20 +31,10 @@ public class Window extends GameObjectExploder {
 	}
 
 	@Override
-	public void draw1() {
+	public boolean draw1() {
 
-		if (!Game.fullVisiblity) {
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
-
-		// MAYBE THE U AND V ARE A RATIO (0 to 1)? yup...
-		// TRIED THAT below, didnt work, needs tsome debugging...
-
-		// THEYRE INTS, WHOOPS :D:D:D
+		if (!shouldDraw())
+			return false;
 
 		if (this.remainingHealth > 0) {
 			float alpha = this.squareGameObjectIsOn.structureSquareIsIn.roofAlpha;
@@ -62,7 +52,7 @@ public class Window extends GameObjectExploder {
 						actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels + Game.SQUARE_HEIGHT);
 			}
 
-			return;
+			return true;
 		}
 
 		for (int i = 0; trianglePieces != null && i < trianglePieces.length; i++) {
@@ -79,6 +69,7 @@ public class Window extends GameObjectExploder {
 				continue;
 			squarePieces[i].draw();
 		}
+		return true;
 	}
 
 	@Override

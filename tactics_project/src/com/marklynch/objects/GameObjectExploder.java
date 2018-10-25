@@ -3,7 +3,6 @@ package com.marklynch.objects;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
-import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
@@ -139,39 +138,31 @@ public class GameObjectExploder extends GameObject {
 	}
 
 	@Override
-	public void draw1() {
-
-		if (!Game.fullVisiblity) {
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
-
-		// MAYBE THE U AND V ARE A RATIO (0 to 1)? yup...
-		// TRIED THAT below, didnt work, needs tsome debugging...
-
-		// THEYRE INTS, WHOOPS :D:D:D
+	public boolean draw1() {
 
 		if (this.remainingHealth > 0) {
-			super.draw1();
-			return;
+			return super.draw1();
 		}
 
-		for (int i = 0; trianglePieces != null && i < trianglePieces.length; i++) {
+		if (shouldDraw()) {
 
-			if (trianglePieces[i] == null)
-				continue;
+			for (int i = 0; trianglePieces != null && i < trianglePieces.length; i++) {
 
-			trianglePieces[i].draw();
-		}
+				if (trianglePieces[i] == null)
+					continue;
 
-		for (int i = 0; squarePieces != null && i < squarePieces.length; i++) {
+				trianglePieces[i].draw();
+			}
 
-			if (squarePieces[i] == null)
-				continue;
-			squarePieces[i].draw();
+			for (int i = 0; squarePieces != null && i < squarePieces.length; i++) {
+
+				if (squarePieces[i] == null)
+					continue;
+				squarePieces[i].draw();
+			}
+			return true;
+		} else {
+			return false;
 		}
 	}
 

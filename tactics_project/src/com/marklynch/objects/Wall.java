@@ -148,18 +148,10 @@ public class Wall extends GameObject {
 	}
 
 	@Override
-	public void draw1() {
+	public boolean draw1() {
 
-		if (this.remainingHealth <= 0)
-			return;
-
-		if (!Game.fullVisiblity) {
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-		}
+		if (!shouldDraw())
+			return false;
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {
@@ -170,6 +162,8 @@ public class Wall extends GameObject {
 				draw1WithoutAnimation();
 			}
 		}
+
+		return true;
 	}
 
 	private void draw1WithoutAnimation() {

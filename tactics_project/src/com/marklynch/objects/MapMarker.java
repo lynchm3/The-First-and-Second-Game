@@ -63,8 +63,8 @@ public class MapMarker extends GameObject {
 	}
 
 	@Override
-	public void draw1() {
-
+	public boolean draw1() {
+		return false;
 	}
 
 	@Override

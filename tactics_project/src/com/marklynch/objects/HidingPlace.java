@@ -21,6 +21,8 @@ public class HidingPlace extends Searchable implements UpdatesWhenSquareContents
 
 		canContainOtherObjects = true;
 
+		this.orderingOnGound = 115;
+
 		persistsWhenCantBeSeen = true;
 		canShareSquare = true;
 		attackable = true;
@@ -46,16 +48,6 @@ public class HidingPlace extends Searchable implements UpdatesWhenSquareContents
 	@Override
 	public ArrayList<GameObject> search() {
 		return (ArrayList<GameObject>) inventory.gameObjects.clone();
-	}
-
-	@Override
-	public void draw1() {
-	}
-
-	@Override
-	public void draw2() {
-		super.draw1();
-		super.draw2();
 	}
 
 	@Override

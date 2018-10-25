@@ -44,23 +44,9 @@ public class Mirror extends GameObject {
 	}
 
 	@Override
-	public void draw1() {
-
-		if (this.remainingHealth <= 0)
-			return;
-		if (squareGameObjectIsOn == null)
-			return;
-		if (hiding)
-			return;
-
-		if (!Game.fullVisiblity) {
-
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
+	public boolean draw1() {
+		if (!shouldDraw())
+			return false;
 
 		boundsX1 = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 		boundsY1 = (int) (this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
@@ -68,6 +54,7 @@ public class Mirror extends GameObject {
 		boundsY2 = (int) (boundsY1 + height);
 
 		imageTexture = imageTextureBack;
+
 		super.draw1();
 
 		int squareToMirrorX = 0;
@@ -171,6 +158,8 @@ public class Mirror extends GameObject {
 
 		imageTexture = imageTextureFront;
 		super.draw1();
+
+		return true;
 
 	}
 

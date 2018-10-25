@@ -2,7 +2,6 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
-import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
@@ -34,30 +33,13 @@ public class Door extends Openable {
 	}
 
 	@Override
-	public void draw1() {
-
-		// Don't draw if dead
-		if (this.remainingHealth <= 0)
-			return;
-
-		if (!Game.fullVisiblity) {
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
+	public boolean draw1() {
 
 		if (open) {
-
+			return shouldDraw();
 		} else {
-			super.draw1();
+			return super.draw1();
 		}
-
-		// if (!this.squareGameObjectIsOn.inventory.contains(Actor.class)) {
-		// super.draw1();
-		// } else {
-		// }
 
 	}
 

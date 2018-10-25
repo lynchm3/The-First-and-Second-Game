@@ -48,8 +48,7 @@ public class RockGolem extends Monster {
 	}
 
 	@Override
-	public void draw1() {
-
+	public boolean draw1() {
 		// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
 		// persistsWhenCantBeSeen == false)
 		// return;
@@ -57,38 +56,28 @@ public class RockGolem extends Monster {
 		// if (!this.squareGameObjectIsOn.seenByPlayer)
 		// return;
 		if (awake) {
-			super.draw1();
-			return;
+			return super.draw1();
 		}
 
-		if (this.remainingHealth <= 0)
-			return;
-
-		if (!Game.fullVisiblity) {
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
+		if (!shouldDraw())
+			return false;
 
 		// Draw object
-		if (squareGameObjectIsOn != null) {
-			float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
-			float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels;
+		float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels;
 
-			float alpha = 1.0f;
+		float alpha = 1.0f;
 
-			// TextureUtils.skipNormals = true;
+		// TextureUtils.skipNormals = true;
 
-			if (primaryAnimation != null)
-				alpha = primaryAnimation.alpha;
-			if (!this.squareGameObjectIsOn.visibleToPlayer)
-				alpha = 0.5f;
-			TextureUtils.drawTexture(sleepingTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-					actorPositionXInPixels + 64, actorPositionYInPixels + 64, backwards);
-			// TextureUtils.skipNormals = false;
-		}
+		if (primaryAnimation != null)
+			alpha = primaryAnimation.alpha;
+		if (!this.squareGameObjectIsOn.visibleToPlayer)
+			alpha = 0.5f;
+		TextureUtils.drawTexture(sleepingTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+				actorPositionXInPixels + 64, actorPositionYInPixels + 64, backwards);
+		// TextureUtils.skipNormals = false;
+		return true;
 
 	}
 

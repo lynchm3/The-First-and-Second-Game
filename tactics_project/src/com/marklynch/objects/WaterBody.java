@@ -107,7 +107,7 @@ public class WaterBody extends WaterSource implements Consumable {
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		isFloorObject = true;
-		orderingOnGound = 50;
+		orderingOnGound = 130;
 		type = "Water";
 
 	}
@@ -185,17 +185,6 @@ public class WaterBody extends WaterSource implements Consumable {
 
 		return fish;
 
-	}
-
-	@Override
-	public void draw1() {
-
-	}
-
-	@Override
-	public void draw2() {
-		super.draw1();
-		super.draw2();
 	}
 
 	@Override

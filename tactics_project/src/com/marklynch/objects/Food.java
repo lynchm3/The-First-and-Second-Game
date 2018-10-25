@@ -35,17 +35,6 @@ public class Food extends GameObject implements Consumable {
 	}
 
 	@Override
-	public void draw1() {
-
-	}
-
-	@Override
-	public void draw2() {
-		super.draw1();
-		super.draw2();
-	}
-
-	@Override
 	public Effect[] getConsumeEffects() {
 		return consumeEffects;
 	}

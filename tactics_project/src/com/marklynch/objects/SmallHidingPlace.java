@@ -30,6 +30,7 @@ public class SmallHidingPlace extends Searchable {
 
 		persistsWhenCantBeSeen = true;
 		attackable = false;
+		orderingOnGound = 119;
 
 	}
 
@@ -52,16 +53,6 @@ public class SmallHidingPlace extends Searchable {
 	@Override
 	public ArrayList<GameObject> search() {
 		return (ArrayList<GameObject>) inventory.gameObjects.clone();
-	}
-
-	@Override
-	public void draw1() {
-	}
-
-	@Override
-	public void draw2() {
-		super.draw1();
-		super.draw2();
 	}
 
 	@Override

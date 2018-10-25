@@ -17,7 +17,7 @@ public class MineCart extends GameObject {
 		super();
 		canBePickedUp = false;
 		fitsInInventory = false;
-		orderingOnGound = 70;
+		orderingOnGound = 120;
 		type = "Mine Cart";
 	}
 

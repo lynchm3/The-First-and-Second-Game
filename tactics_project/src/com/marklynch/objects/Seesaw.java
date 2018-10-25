@@ -43,12 +43,6 @@ public class Seesaw extends GameObject implements SwitchListener {
 	}
 
 	@Override
-	public void draw1() {
-		super.draw1();
-
-	}
-
-	@Override
 	public void draw2() {
 		super.draw2();
 		QuadUtils.drawQuad(Color.WHITE, square1.xInGridPixels + Game.SQUARE_WIDTH, square1.getCenterY() - 5,

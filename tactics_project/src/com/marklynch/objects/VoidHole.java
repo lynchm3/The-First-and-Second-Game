@@ -29,7 +29,8 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 	}
 
 	@Override
-	public void draw1() {
+	public boolean draw1() {
+		return true;
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
-import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
@@ -33,37 +32,6 @@ public class Storage extends Openable {
 		super.setInstances(gameObject);
 	}
 
-	// @Override
-	// public void loadImages() {
-	// chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png");
-	// chestClosedTexture = ResourceUtils.getGlobalImage("chest.png");
-	// }
-
-	@Override
-	public void draw1() {
-
-		if (!Game.fullVisiblity) {
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
-
-		if (open)
-			imageTexture = chestOpenTexture;
-		else
-			imageTexture = chestClosedTexture;
-
-		super.draw1();
-
-		// if (!this.squareGameObjectIsOn.inventory.contains(Actor.class)) {
-		// super.draw1();
-		// } else {
-		// }
-
-	}
-
 	@Override
 	public boolean isOpen() {
 		return open;
@@ -72,11 +40,13 @@ public class Storage extends Openable {
 	@Override
 	public void open() {
 		open = true;
+		imageTexture = chestOpenTexture;
 	}
 
 	@Override
 	public void close() {
 		open = false;
+		imageTexture = chestClosedTexture;
 	}
 
 	@Override
@@ -130,6 +100,11 @@ public class Storage extends Openable {
 		storage.chestOpenTexture = chestOpenTexture;
 		storage.chestClosedTexture = chestClosedTexture;
 		// this.imagePathWhenOpen = imagePathWhenOpen;
+
+		if (storage.open)
+			storage.imageTexture = storage.chestOpenTexture;
+		else
+			storage.imageTexture = storage.chestClosedTexture;
 
 		return storage;
 

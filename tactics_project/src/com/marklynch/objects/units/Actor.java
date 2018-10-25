@@ -542,23 +542,10 @@ public class Actor extends GameObject {
 	public float scaleY;
 
 	@Override
-	public void draw1() {
+	public boolean draw1() {
 
-		// Don't draw if dead
-		// if (this.remainingHealth <= 0)
-		// return;
-
-		// Don't draw if hiding
-		if (hiding && this != Game.level.player)
-			return;
-
-		if (!Game.fullVisiblity && this != Game.level.player) {
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
+		if (!shouldDraw())
+			return false;
 
 		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 		actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
@@ -630,6 +617,7 @@ public class Actor extends GameObject {
 					boundsY1, boundsX2, boundsY2, color, true, true, this.backwards, false, true);
 			inSoundPreview = false;
 		}
+		return true;
 
 	}
 

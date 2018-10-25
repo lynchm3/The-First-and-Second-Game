@@ -49,31 +49,15 @@ public class WantedPoster extends Sign implements CrimeListener {
 	}
 
 	@Override
-	public void draw1() {
+	public boolean draw1() {
 
-		super.draw1();
+		boolean shouldDraw = super.draw1();
+		if (!shouldDraw)
+			return false;
 
 		// Draw crim on the wanted poster
 		if (criminal == null)
-			return;
-
-		if (this.remainingHealth <= 0)
-			return;
-
-		if (squareGameObjectIsOn == null)
-			return;
-
-		if (hiding)
-			return;
-
-		if (!Game.fullVisiblity) {
-
-			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
-
-			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
-		}
+			return true;
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {
@@ -99,6 +83,7 @@ public class WantedPoster extends Sign implements CrimeListener {
 
 			Game.flush();
 		}
+		return true;
 	}
 
 	@Override

@@ -262,7 +262,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public boolean bigShadow = false;
 
-	public int orderingOnGound = Integer.MAX_VALUE;
+	public int orderingOnGound = 1000;
 
 	public String type = "Object";
 
@@ -371,23 +371,31 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	protected Color flashColor = new Color(255f, 255f, 255f, 0.5f);
 	protected Color underWaterColor = new Color(0.1f, 0.1f, 0.1f, 1f);
 
-	public void draw1() {
-
+	protected boolean shouldDraw() {
 		// if (this.remainingHealth <= 0)
-		// return;
+		// return false;
+
 		if (squareGameObjectIsOn == null)
-			return;
+			return false;
+
 		if (hiding && this != Game.level.player)
-			return;
+			return false;
 
 		if (!Game.fullVisiblity && this != Game.level.player) {
 
 			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-				return;
+				return false;
 
 			if (!this.squareGameObjectIsOn.seenByPlayer)
-				return;
+				return false;
 		}
+		return true;
+	}
+
+	public boolean draw1() {
+
+		if (!shouldDraw())
+			return false;
 
 		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw1();
@@ -455,6 +463,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
 				flash || this == Game.gameObjectMouseIsOver, scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
 				color, true);
+		return true;
 	}
 
 	public void drawGameObject(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY,
@@ -1940,6 +1949,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		gameObject.bigShadow = bigShadow;
 		gameObject.type = type;
+
+		gameObject.orderingOnGound = orderingOnGound;
 
 		gameObject.init();
 	}
