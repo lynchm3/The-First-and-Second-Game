@@ -143,6 +143,8 @@ public class Wall extends GameObject {
 			leftDrawX2 = drawX1 + halfWidth + randomOffset;
 			leftDrawY2 = drawY2 - quarterHeight + randomOffset;
 
+			this.squareGameObjectIsOn.imageTexture = Square.GREY_TEXTURE;
+
 		}
 
 	}
