@@ -15,7 +15,7 @@ public class ActionDropItemsSelectedInInventory extends Action {
 	InventorySquare inventorySquare;
 
 	public ActionDropItemsSelectedInInventory(GameObject performer, Square square, GameObject object) {
-		super(ACTION_NAME, textureDrop);
+		super(ACTION_NAME, textureDrop, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.square = square;
 		this.object = object;

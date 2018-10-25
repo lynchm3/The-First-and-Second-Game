@@ -19,7 +19,7 @@ public class ActionUsePower extends Action {
 
 	// Default for hostiles
 	public ActionUsePower(GameObject attacker, GameObject targetGameObject, Square targetSquare, Power power) {
-		super("Cast " + power.name, null);
+		super("Cast " + power.name, null, gameObjectperformer, gameObjectperformer, target, targetSquare);
 		image = power.image;
 		super.gameObjectPerformer = this.gameObjectSource = attacker;
 		if (attacker instanceof Actor)

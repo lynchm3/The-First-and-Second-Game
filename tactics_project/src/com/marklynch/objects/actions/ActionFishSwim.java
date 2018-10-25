@@ -15,7 +15,7 @@ public class ActionFishSwim extends Action {
 	Fish performer;
 
 	public ActionFishSwim(Fish performer) {
-		super(ACTION_NAME, textureWalk);
+		super(ACTION_NAME, textureWalk, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		if (!check()) {
 			enabled = false;

@@ -11,7 +11,7 @@ public class ActionRename extends Action {
 	GameObject target;
 
 	public ActionRename(GameObject target) {
-		super(ACTION_NAME, textureWrite);
+		super(ACTION_NAME, textureWrite, gameObjectperformer, gameObjectperformer, target, targetSquare);
 		this.target = target;
 		if (!check()) {
 			enabled = false;

@@ -9,14 +9,14 @@ public class ActionFollow extends Action {
 
 	public static final String ACTION_NAME = "Follow";
 
-	public Player performer;
-	public Actor target;
+	// public Player performer;
+	// public Actor target;
 
 	// Default for hostiles
 	public ActionFollow(Player player, Actor target) {
-		super(ACTION_NAME, textureWalk);
-		super.gameObjectPerformer = this.performer = player;
-		this.target = target;
+		super(ACTION_NAME, textureWalk, player, player, target, null);
+		// this.target = target;
+		this.targetGameObject = target;
 		legal = checkLegality();
 		sound = createSound();
 	}
@@ -30,8 +30,6 @@ public class ActionFollow extends Action {
 
 		if (!checkRange())
 			return;
-
-		Player.playerTargetActor = target;
 
 		if (Game.level.settingFollowPlayer && performer == Game.level.player && Game.level.player.onScreen()) {
 			Game.level.cameraFollow = true;
@@ -61,6 +59,16 @@ public class ActionFollow extends Action {
 	@Override
 	public Sound createSound() {
 		return null;
+	}
+
+	@Override
+	public boolean shouldContinue() {
+
+		if (performed && Player.inFight()) {
+			return false;
+		}
+
+		return true;
 	}
 
 }

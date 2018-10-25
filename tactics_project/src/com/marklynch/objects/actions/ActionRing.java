@@ -14,7 +14,7 @@ public class ActionRing extends Action {
 	GameObject object;
 
 	public ActionRing(Actor ringer, GameObject object) {
-		super(ACTION_NAME, textureRing);
+		super(ACTION_NAME, textureRing, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = ringer;
 		this.object = object;
 		if (!check()) {

@@ -20,7 +20,7 @@ public class ActionTalk extends Action {
 	}
 
 	public ActionTalk(Actor talker, Actor target, Conversation conversation) {
-		super(ACTION_NAME, textureTalk);
+		super(ACTION_NAME, textureTalk, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = talker;
 		this.target = target;
 		this.conversation = conversation;

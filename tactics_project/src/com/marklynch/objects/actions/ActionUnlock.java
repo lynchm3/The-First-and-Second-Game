@@ -17,7 +17,7 @@ public class ActionUnlock extends Action {
 
 	// Default for hostiles
 	public ActionUnlock(GameObject unlocker, Openable openable) {
-		super(ACTION_NAME, textureUnlock);
+		super(ACTION_NAME, textureUnlock, gameObjectperformer, gameObjectperformer, target, targetSquare);
 		super.gameObjectPerformer = this.gameObjectPerformer = unlocker;
 		this.openable = openable;
 		if (!check()) {

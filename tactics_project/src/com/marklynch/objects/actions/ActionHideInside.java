@@ -17,7 +17,7 @@ public class ActionHideInside extends Action {
 	// public ActionMove actionMove;
 
 	public ActionHideInside(Actor performer, SmallHidingPlace object) {
-		super(ACTION_NAME, textureHide);
+		super(ACTION_NAME, textureHide, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 		if (!check()) {

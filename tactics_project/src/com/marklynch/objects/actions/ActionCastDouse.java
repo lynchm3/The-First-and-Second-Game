@@ -20,7 +20,7 @@ public class ActionCastDouse extends Action {
 
 	// Default for hostiles
 	public ActionCastDouse(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureDouse);
+		super(ACTION_NAME, textureDouse, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		if (!check()) {

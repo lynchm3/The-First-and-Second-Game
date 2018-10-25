@@ -14,7 +14,7 @@ public class ActionTrespass extends Action {
 	float loudness;
 
 	public ActionTrespass(Actor mover, Square target, float loudness) {
-		super(ACTION_NAME, textureTrespass);
+		super(ACTION_NAME, textureTrespass, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = mover;
 		this.target = target;
 		this.loudness = loudness;

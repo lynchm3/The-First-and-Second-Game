@@ -1101,11 +1101,11 @@ public class Level {
 			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver.value));
 		}
 
-		if (Player.playerTargetActor != null) {
+		if (Player.playerTargetGameObject != null) {
 			if (Player.playerTargetAction != null)
-				Player.playerTargetActor.drawAction(Player.playerTargetAction, false);
+				Player.playerTargetGameObject.drawAction(Player.playerTargetAction, false);
 			else
-				Player.playerTargetActor.drawX(false);
+				Player.playerTargetGameObject.drawX(false);
 		} else if (Player.playerTargetSquare != null) {
 			if (Player.playerTargetAction != null)
 				Player.playerTargetSquare.drawAction(Player.playerTargetAction, false);
@@ -1704,20 +1704,24 @@ public class Level {
 					&& !playerActionToPerform.shouldContinue()) {
 				pausePlayer();
 			}
-		} else if (player.playerTargetActor != null && player.straightLineDistanceTo(Player.playerTargetSquare) <= 2) {
-
-			// Wait if following someone ur beside
-			Action action = new ActionWait(Game.level.player, player.squareGameObjectIsOn);
-
-			if (!action.legal && !player.squareGameObjectIsOn.restricted() && Player.playerFirstMove == false) {
-				Object[] objects = new Object[] { "Stopped before illegal action!" };
-				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
-				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
-				pausePlayer();
-			} else {
-				action.perform();
-				Player.playerFirstMove = false;
-			}
+			// } else if (player.playerTargetActor != null &&
+			// player.straightLineDistanceTo(Player.playerTargetSquare) <= 2) {
+			//
+			// // Wait if following someone ur beside
+			// Action action = new ActionWait(Game.level.player,
+			// player.squareGameObjectIsOn);
+			//
+			// if (!action.legal && !player.squareGameObjectIsOn.restricted() &&
+			// Player.playerFirstMove == false) {
+			// Object[] objects = new Object[] { "Stopped before illegal action!" };
+			// notifications.add(new Notification(objects,
+			// Notification.NotificationType.MISC, null));
+			// Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
+			// pausePlayer();
+			// } else {
+			// action.perform();
+			// Player.playerFirstMove = false;
+			// }
 
 		} else if (Game.level.player.getPrimaryAnimation().getCompleted() && Player.playerTargetSquare != null) {
 
@@ -1806,7 +1810,7 @@ public class Level {
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;
 		Player.playerTargetAction = null;
-		Player.playerTargetActor = null;
+		Player.playerTargetGameObject = null;
 		levelMode = LevelMode.LEVEL_MODE_NORMAL;
 	}
 

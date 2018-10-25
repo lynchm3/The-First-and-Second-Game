@@ -10,7 +10,7 @@ public class ActionStarSpecificItem extends Action {
 	GameObject object;
 
 	public ActionStarSpecificItem(GameObject object) {
-		super(ACTION_NAME, textureStar);
+		super(ACTION_NAME, textureStar, gameObjectperformer, gameObjectperformer, target, targetSquare);
 		this.object = object;
 		if (!check()) {
 			enabled = false;

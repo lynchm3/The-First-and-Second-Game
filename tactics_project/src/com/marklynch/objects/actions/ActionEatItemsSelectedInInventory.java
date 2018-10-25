@@ -22,7 +22,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
-		super(ACTION_NAME, textureEat);
+		super(ACTION_NAME, textureEat, performer, performer, target, targetSquare);
 		if (object instanceof Liquid || object instanceof ContainerForLiquids || object instanceof WaterBody) {
 			this.actionName = ACTION_NAME_DRINK;
 			this.image = textureDrink;

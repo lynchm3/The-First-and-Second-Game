@@ -17,7 +17,7 @@ public class ActionDiscover extends Action {
 	Discoverable target;
 
 	public ActionDiscover(GameObject performer, Discoverable target) {
-		super(ACTION_NAME, textureSearch);
+		super(ACTION_NAME, textureSearch, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.target = target;
 		if (!check()) {

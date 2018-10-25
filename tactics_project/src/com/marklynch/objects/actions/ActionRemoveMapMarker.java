@@ -12,7 +12,7 @@ public class ActionRemoveMapMarker extends Action {
 	MapMarker mapMarker;
 
 	public ActionRemoveMapMarker(MapMarker mapMarker) {
-		super(ACTION_NAME, textureX);
+		super(ACTION_NAME, textureX, gameObjectperformer, gameObjectperformer, target, targetSquare);
 		this.mapMarker = mapMarker;
 		if (!check()) {
 			enabled = false;

@@ -18,7 +18,7 @@ public class ActionWrite extends Action {
 	Object[] text;
 
 	public ActionWrite(Actor writer, Readable sign, Object[] text) {
-		super(ACTION_NAME, textureWrite);
+		super(ACTION_NAME, textureWrite, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = writer;
 		this.sign = sign;
 		this.text = text;

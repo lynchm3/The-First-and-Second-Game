@@ -28,7 +28,7 @@ public class ActionTeleport extends Action {
 	GameObject gameObjectInTheWay;
 
 	public ActionTeleport(GameObject performer, GameObject teleportee, Square target, boolean endTurn) {
-		super(ACTION_NAME, textureTeleport);
+		super(ACTION_NAME, textureTeleport, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		if (performer instanceof Actor)
 			this.actorPerformer = (Actor) performer;

@@ -20,7 +20,7 @@ public class ActionCastBurn extends Action {
 
 	// Default for hostiles
 	public ActionCastBurn(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureBurn);
+		super(ACTION_NAME, textureBurn, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = target;
 		if (!check()) {

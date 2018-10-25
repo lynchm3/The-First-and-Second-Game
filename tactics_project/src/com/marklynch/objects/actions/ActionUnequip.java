@@ -14,7 +14,7 @@ public class ActionUnequip extends Action {
 	GameObject gameObject;
 
 	public ActionUnequip(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, textureX);
+		super(ACTION_NAME, textureX, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		this.gameObject = gameObject;
 		if (!check()) {

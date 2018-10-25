@@ -17,7 +17,7 @@ public class ActionFillContainersInInventory extends Action {
 	WaterSource waterSource;
 
 	public ActionFillContainersInInventory(Actor performer, WaterSource waterSource) {
-		super(ACTION_NAME, textureFillContainer);
+		super(ACTION_NAME, textureFillContainer, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		this.waterSource = waterSource;
 		if (!check()) {

@@ -20,7 +20,7 @@ public class ActionSkin extends Action {
 
 	// Default for hostiles
 	public ActionSkin(Actor performer, GameObject target) {
-		super(ACTION_NAME, textureSkin);
+		super(ACTION_NAME, textureSkin, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		actionLootAll = new ActiontTakeAll(performer, target);

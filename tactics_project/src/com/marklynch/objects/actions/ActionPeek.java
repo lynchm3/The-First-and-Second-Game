@@ -16,7 +16,7 @@ public class ActionPeek extends Action {
 	GameObject object;
 
 	public ActionPeek(Actor performer, GameObject object) {
-		super(ACTION_NAME, textureStopHiding);
+		super(ACTION_NAME, textureStopHiding, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 

@@ -11,7 +11,7 @@ public abstract class VariableQtyAction extends Action {
 	}
 
 	public VariableQtyAction(String actionName, Texture image) {
-		super(actionName, image);
+		super(actionName, image, gameObjectperformer, gameObjectperformer, target, targetSquare);
 	}
 
 }

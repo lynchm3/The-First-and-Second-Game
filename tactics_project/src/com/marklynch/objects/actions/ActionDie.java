@@ -27,7 +27,7 @@ public class ActionDie extends Action {
 	Square target;
 
 	public ActionDie(GameObject performer, Square target) {
-		super(ACTION_NAME, textureDie);
+		super(ACTION_NAME, textureDie, performer, performer, target, targetSquare);
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;
 		this.target = target;
 		if (!check()) {

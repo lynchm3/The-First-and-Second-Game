@@ -3,6 +3,7 @@ package com.marklynch.level.quest.thesecretroom;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.PavedPathway;
 import com.marklynch.level.constructs.area.town.AreaTown;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -23,7 +24,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Sign;
 import com.marklynch.objects.Wall;
-import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextUtils;
@@ -125,43 +125,42 @@ public class QuestTheSecretRoom extends Quest {
 				Templates.WALL, Square.STONE_TEXTURE, 2));
 
 		// Path to town 24,21 -> 24,29
-		PavedPathway pathToTown = new PavedPathway(AreaTown.posX + 24, AreaTown.posY + 21, AreaTown.posX + 24,
-				AreaTown.posY + 29);
+		new PavedPathway(AreaTown.posX + 24, AreaTown.posY + 21, AreaTown.posX + 24, AreaTown.posY + 29);
 
 		// Bushed along path to town
-		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 25], null);
-		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 25], null);
-		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 27], null);
-		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 27], null);
-		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 29], null);
-		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 28], null);
-		Templates.BUSH.makeCopy(Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 29], null);
+		Templates.BUSH.makeCopy(Level.squares[AreaTown.posX + 23][AreaTown.posY + 25], null);
+		Templates.BUSH.makeCopy(Level.squares[AreaTown.posX + 25][AreaTown.posY + 25], null);
+		Templates.BUSH.makeCopy(Level.squares[AreaTown.posX + 23][AreaTown.posY + 27], null);
+		Templates.BUSH.makeCopy(Level.squares[AreaTown.posX + 25][AreaTown.posY + 27], null);
+		Templates.BUSH.makeCopy(Level.squares[AreaTown.posX + 23][AreaTown.posY + 29], null);
+		Templates.BUSH.makeCopy(Level.squares[AreaTown.posX + 25][AreaTown.posY + 28], null);
+		Templates.BUSH.makeCopy(Level.squares[AreaTown.posX + 25][AreaTown.posY + 29], null);
 
 		// TownSquare Well 24,21
-		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 20], null);
+		Templates.WELL.makeCopy(Level.squares[AreaTown.posX + 23][AreaTown.posY + 20], null);
 
 		// Town square pavement
-		PavedPathway townSquare = new PavedPathway(Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 19],
-				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 19],
-				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 19],
-				Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 20],
-				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 20],
-				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 20],
-				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 20],
-				Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 20],
-				Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 21],
-				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 21],
-				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 21],
-				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 21],
-				Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 21],
-				Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 22],
-				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 22],
-				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 22],
-				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 22],
-				Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 22],
-				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 23],
-				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 23],
-				Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 23]);
+		new PavedPathway(Level.squares[AreaTown.posX + 23][AreaTown.posY + 19],
+				Level.squares[AreaTown.posX + 24][AreaTown.posY + 19],
+				Level.squares[AreaTown.posX + 25][AreaTown.posY + 19],
+				Level.squares[AreaTown.posX + 22][AreaTown.posY + 20],
+				Level.squares[AreaTown.posX + 23][AreaTown.posY + 20],
+				Level.squares[AreaTown.posX + 24][AreaTown.posY + 20],
+				Level.squares[AreaTown.posX + 25][AreaTown.posY + 20],
+				Level.squares[AreaTown.posX + 26][AreaTown.posY + 20],
+				Level.squares[AreaTown.posX + 22][AreaTown.posY + 21],
+				Level.squares[AreaTown.posX + 23][AreaTown.posY + 21],
+				Level.squares[AreaTown.posX + 24][AreaTown.posY + 21],
+				Level.squares[AreaTown.posX + 25][AreaTown.posY + 21],
+				Level.squares[AreaTown.posX + 26][AreaTown.posY + 21],
+				Level.squares[AreaTown.posX + 22][AreaTown.posY + 22],
+				Level.squares[AreaTown.posX + 23][AreaTown.posY + 22],
+				Level.squares[AreaTown.posX + 24][AreaTown.posY + 22],
+				Level.squares[AreaTown.posX + 25][AreaTown.posY + 22],
+				Level.squares[AreaTown.posX + 26][AreaTown.posY + 22],
+				Level.squares[AreaTown.posX + 23][AreaTown.posY + 23],
+				Level.squares[AreaTown.posX + 24][AreaTown.posY + 23],
+				Level.squares[AreaTown.posX + 25][AreaTown.posY + 23]);
 
 		// Path left of fountain
 		new PavedPathway(AreaTown.posX + 4, AreaTown.posY + 21, AreaTown.posX + 21, AreaTown.posY + 21);

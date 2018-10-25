@@ -20,14 +20,15 @@ public class ActionAttack extends Action {
 
 	public static final String ACTION_NAME = "Attack";
 
-	Actor performer;
-	GameObject target;
+	// Actor performer;
+	// GameObject targetGameObject;
+	Actor actor;
 
 	// Default for hostiles
-	public ActionAttack(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureAttack);
-		super.gameObjectPerformer = this.performer = attacker;
-		this.target = target;
+	public ActionAttack(Actor performer, GameObject target) {
+		super(ACTION_NAME, textureAttack, performer, performer, target, null);
+		this.gameObjectperformer = performer;
+		this.targetGameObject = target;
 
 		if (performer.equipped != null && performer.equipped.maxRange > 1)
 			this.image = Action.textureBow;
@@ -51,24 +52,24 @@ public class ActionAttack extends Action {
 		if (!checkRange())
 			return;
 
-		if (performer.squareGameObjectIsOn.xInGrid > target.squareGameObjectIsOn.xInGrid) {
-			performer.backwards = true;
-		} else if (performer.squareGameObjectIsOn.xInGrid < target.squareGameObjectIsOn.xInGrid) {
-			performer.backwards = false;
+		if (gameObjectperformer.squareGameObjectIsOn.xInGrid > targetGameObject.squareGameObjectIsOn.xInGrid) {
+			gameObjectperformer.backwards = true;
+		} else if (gameObjectperformer.squareGameObjectIsOn.xInGrid < targetGameObject.squareGameObjectIsOn.xInGrid) {
+			gameObjectperformer.backwards = false;
 		}
 
 		// float damage = 1;
 
-		if (performer.equipped != null) {
-			weapon = performer.equipped;
+		if (gameObjectperformer.equipped != null) {
+			weapon = gameObjectperformer.equipped;
 		} else {
-			weapon = performer;
+			weapon = gameObjectperformer;
 		}
 
 		if (weapon.maxRange == 1) {
 
 			// Melee weapons
-			performer.setPrimaryAnimation(new AnimationSlash(performer, target, new OnCompletionListener() {
+			gameObjectperformer.setPrimaryAnimation(new AnimationSlash(gameObjectperformer, targetGameObject, new OnCompletionListener() {
 				@Override
 				public void animationComplete(GameObject gameObject) {
 					postMeleeAnimation();
@@ -78,7 +79,7 @@ public class ActionAttack extends Action {
 
 			// Ranged weapon
 
-			performer.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this, null) {
+			gameObjectperformer.setPrimaryAnimation(new AnimationShootArrow(actor, targetGameObject, weapon, this, null) {
 
 				@Override
 				public void shootArrow() {
@@ -87,9 +88,9 @@ public class ActionAttack extends Action {
 					arrow = Templates.ARROW.makeCopy(null, null);
 					arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
 					arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
-					animationThrown = new AnimationThrown("Arrow", (Actor) performer, ActionAttack.this, target,
-							target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true, null);
-					performer.addSecondaryAnimation(animationThrown);
+					animationThrown = new AnimationThrown("Arrow", actor, ActionAttack.this, targetGameObject,
+							targetGameObject.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true, null);
+					actor.addSecondaryAnimation(animationThrown);
 				}
 
 				@Override
@@ -100,78 +101,78 @@ public class ActionAttack extends Action {
 			});
 		}
 
-		performer.distanceMovedThisTurn = performer.travelDistance;
-		performer.hasAttackedThisTurn = true;
+		actor.distanceMovedThisTurn = actor.travelDistance;
+		actor.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		// if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) >
+		// if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) >
 		// 1) {
-		// if (performer.squareGameObjectIsOn.onScreen() &&
-		// performer.squareGameObjectIsOn.visibleToPlayer)
+		// if (actor.squareGameObjectIsOn.onScreen() &&
+		// actor.squareGameObjectIsOn.visibleToPlayer)
 		// } else {
 		// }
 
-		if (performer.faction == Game.level.factions.player) {
+		if (actor.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
+		actor.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 
 		if (!legal) {
 
 			Actor victim;
-			if (target instanceof Actor)
-				victim = (Actor) target;
+			if (targetGameObject instanceof Actor)
+				victim = (Actor) targetGameObject;
 			else
-				victim = target.owner;
+				victim = targetGameObject.owner;
 
 			Crime.TYPE type = Crime.TYPE.CRIME_ASSAULT;
-			if (!(target instanceof Actor))
+			if (!(targetGameObject instanceof Actor))
 				type = Crime.TYPE.CRIME_VANDALISM;
-			Crime crime = new Crime(this, this.performer, victim, type);
-			this.performer.crimesPerformedThisTurn.add(crime);
-			this.performer.crimesPerformedInLifetime.add(crime);
+			Crime crime = new Crime(this, this.actor, victim, type);
+			this.actor.crimesPerformedThisTurn.add(crime);
+			this.actor.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
 		} else {
-			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+			trespassingCheck(this, actor, actor.squareGameObjectIsOn);
 		}
 
-		if (performer == Game.level.player)
+		if (actor == Game.level.player)
 			Game.level.endPlayerTurn();
 	}
 
 	public void postMeleeAnimation() {
 
-		if (target.attackable) {
-			float damage = target.changeHealth(performer, ActionAttack.this, weapon);
+		if (targetGameObject.attackable) {
+			float damage = targetGameObject.changeHealth(actor, ActionAttack.this, weapon);
 			String attackTypeString;
 			attackTypeString = "attacked ";
 
-			if (performer.squareGameObjectIsOn.visibleToPlayer) {
+			if (actor.squareGameObjectIsOn.visibleToPlayer) {
 
-				if (weapon != performer) {
-					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-								target, " with ", weapon, " for " + damage + " damage" }));
+				if (weapon != actor) {
+					if (Game.level.shouldLog(targetGameObject, actor))
+						Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " " + attackTypeString + " ",
+								targetGameObject, " with ", weapon, " for " + damage + " damage" }));
 				} else {
-					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-								target, " for " + damage + " damage" }));
+					if (Game.level.shouldLog(targetGameObject, actor))
+						Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " " + attackTypeString + " ",
+								targetGameObject, " for " + damage + " damage" }));
 				}
 			}
 
 			if (weapon instanceof ContainerForLiquids) {
-				target.squareGameObjectIsOn.inventory.add(weapon);
-				((ContainerForLiquids) weapon).landed(performer, this);
-				// AnimationThrown.smashContainer(performer, target, (ContainerForLiquids)
+				targetGameObject.squareGameObjectIsOn.inventory.add(weapon);
+				((ContainerForLiquids) weapon).landed(actor, this);
+				// AnimationThrown.smashContainer(actor, target, (ContainerForLiquids)
 				// weapon);
 			}
 
-			if (target.remainingHealth > 0)
-				target.setPrimaryAnimation(new AnimationFlinch(target, performer.squareGameObjectIsOn,
-						target.getPrimaryAnimation(), null));
+			if (targetGameObject.remainingHealth > 0)
+				targetGameObject.setPrimaryAnimation(new AnimationFlinch(targetGameObject, actor.squareGameObjectIsOn,
+						targetGameObject.getPrimaryAnimation(), null));
 		}
 
 	}
@@ -179,12 +180,12 @@ public class ActionAttack extends Action {
 	@Override
 	public boolean check() {
 
-		if (!target.attackable) {
+		if (!targetGameObject.attackable) {
 			disabledReason = CANT_BE_ATTACKED;
 			return false;
 		}
 
-		if (!performer.canSeeGameObject(target))
+		if (!actor.canSeeGameObject(targetGameObject))
 			return false;
 
 		return true;
@@ -193,16 +194,16 @@ public class ActionAttack extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.equipped == null || !(performer.equipped instanceof Weapon)) {
-			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
+		if (actor.equipped == null || !(actor.equipped instanceof Weapon)) {
+			if (actor.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1)
 				return false;
 		} else {
-			Weapon weapon = (Weapon) performer.equipped;
-			if (!weapon.hasRange(performer.straightLineDistanceTo(target.squareGameObjectIsOn)))
+			Weapon weapon = (Weapon) actor.equipped;
+			if (!weapon.hasRange(actor.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn)))
 				return false;
 		}
 
-		if (!performer.canSeeGameObject(target))
+		if (!actor.canSeeGameObject(targetGameObject))
 			return false;
 
 		return true;
@@ -218,7 +219,7 @@ public class ActionAttack extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(actor, targetGameObject);
 	}
 
 	@Override
@@ -226,12 +227,12 @@ public class ActionAttack extends Action {
 
 		// Sound
 
-		if (performer.equipped == null)
+		if (actor.equipped == null)
 			return null;
 
-		float loudness = Math.max(target.soundWhenHit, performer.equipped.soundWhenHitting);
-		if (performer.equipped != null)
-			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
+		float loudness = Math.max(targetGameObject.soundWhenHit, actor.equipped.soundWhenHitting);
+		if (actor.equipped != null)
+			return new Sound(actor, actor.equipped, targetGameObject.squareGameObjectIsOn, loudness, legal,
 					this.getClass());
 		return null;
 	}
@@ -243,7 +244,7 @@ public class ActionAttack extends Action {
 			return false;
 		}
 
-		if (target.remainingHealth <= 0) {
+		if (targetGameObject.remainingHealth <= 0) {
 			disabledReason = null;
 			return false;
 		}

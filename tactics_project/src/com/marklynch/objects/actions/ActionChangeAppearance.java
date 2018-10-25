@@ -13,7 +13,7 @@ public class ActionChangeAppearance extends Action {
 	GameObject target;
 
 	public ActionChangeAppearance(GameObject target) {
-		super(ACTION_NAME, textureEllipse);
+		super(ACTION_NAME, textureEllipse, gameObjectperformer, gameObjectperformer, target, targetSquare);
 		this.target = target;
 		if (!check()) {
 			enabled = false;

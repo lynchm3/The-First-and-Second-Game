@@ -15,7 +15,7 @@ public class ActionOpen extends Action {
 
 	// Default for hostiles
 	public ActionOpen(GameObject opener, Openable openable) {
-		super(ACTION_NAME, textureOpen);
+		super(ACTION_NAME, textureOpen, gameObjectperformer, gameObjectperformer, target, targetSquare);
 		super.gameObjectPerformer = this.gameObjectPerformer = opener;
 		this.openable = openable;
 		if (!check()) {
