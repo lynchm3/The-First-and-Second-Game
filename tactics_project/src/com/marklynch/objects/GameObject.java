@@ -52,6 +52,7 @@ import com.marklynch.objects.actions.ActionFillContainersInInventory;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
 import com.marklynch.objects.actions.ActionFishingStart;
 import com.marklynch.objects.actions.ActionFollow;
+import com.marklynch.objects.actions.ActionGetIn;
 import com.marklynch.objects.actions.ActionGiveItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionIgnite;
@@ -262,7 +263,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public boolean bigShadow = false;
 
-	public int orderingOnGound = 1000;
+	public int orderingOnGound = 100; // lower value is background, drawn first.
 
 	public String type = "Object";
 
@@ -1124,6 +1125,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionUse(performer, zwitch, zwitch.actionName, zwitch.actionVerb, zwitch.requirementsToMeet);
 		}
 
+		if (this instanceof MineCart) {
+			return new ActionGetIn(performer, this);
+		}
+
 		if (this instanceof Door) {
 			if (((Door) this).open) {
 				return new ActionMove(performer, this.squareGameObjectIsOn, true);
@@ -1280,6 +1285,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			Switch zwitch = (Switch) this;
 			actions.add(
 					new ActionUse(performer, zwitch, zwitch.actionName, zwitch.actionVerb, zwitch.requirementsToMeet));
+		}
+
+		// MineCart
+		if (this instanceof MineCart) {
+			actions.add(new ActionGetIn(performer, this));
 		}
 
 		// Vein

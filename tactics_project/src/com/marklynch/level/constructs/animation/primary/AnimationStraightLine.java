@@ -19,7 +19,8 @@ public class AnimationStraightLine extends Animation {
 	public AnimationStraightLine(GameObject performer, float speed, boolean blockAI, double delay,
 			OnCompletionListener onCompletionListener, Square... targetSquares) {
 
-		super(performer, onCompletionListener, targetSquares, null, null, null, null, null, performer, targetSquares[targetSquares.length - 1]);
+		super(performer, onCompletionListener, targetSquares, null, null, null, null, null, performer,
+				targetSquares[targetSquares.length - 1]);
 		if (!runAnimation)
 			return;
 
@@ -48,6 +49,8 @@ public class AnimationStraightLine extends Animation {
 			kf0.offsetX = this.targetSquares[i].xInGridPixels - this.x;
 			kf0.offsetY = this.targetSquares[i].yInGridPixels - this.y;
 			// kf0.
+			kf0.keyFrameTimeMillis = 25;
+			kf0.normaliseSpeeds = true;
 			keyFrames.add(kf0);
 		}
 

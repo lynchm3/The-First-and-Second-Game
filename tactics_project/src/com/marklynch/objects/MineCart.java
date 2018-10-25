@@ -77,7 +77,7 @@ public class MineCart extends GameObject {
 
 				gameObject.lastTurnThisWasMovedByMinecart = Level.turn;
 
-				gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 2f, true, 0f, null, array));
+				gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 2f, false, 0f, null, array));
 			}
 		}
 	}
