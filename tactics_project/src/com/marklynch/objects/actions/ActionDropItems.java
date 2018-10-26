@@ -15,7 +15,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionDropItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Drop";
-	Square square;
 	GameObject[] objects;
 
 	public ActionDropItems(GameObject performer, Square square, ArrayList<GameObject> objects) {
@@ -27,9 +26,7 @@ public class ActionDropItems extends VariableQtyAction {
 	}
 
 	public ActionDropItems(GameObject performer, Square square, GameObject[] objects, boolean doesnothing) {
-		super(ACTION_NAME, textureDrop);
-		super.gameObjectPerformer = this.gameObjectPerformer = performer;
-		this.square = square;
+		super(ACTION_NAME, textureDrop, null, performer, null, square);
 		this.objects = objects;
 
 		if (!check()) {
@@ -59,8 +56,8 @@ public class ActionDropItems extends VariableQtyAction {
 		if (Game.level.openInventories.size() > 0) {
 		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen()
 				&& gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
-			objects[0].setPrimaryAnimation(
-					new AnimationDrop(objects[0].name, gameObjectPerformer, this, square, objects[0], 0.5f, null));
+			objects[0].setPrimaryAnimation(new AnimationDrop(objects[0].name, gameObjectPerformer, this, targetSquare,
+					objects[0], 0.5f, null));
 		}
 
 		for (int i = 0; i < amountToDrop; i++) {
@@ -95,15 +92,15 @@ public class ActionDropItems extends VariableQtyAction {
 			// if inventory is open, we're not doing animattion, just throw it
 			// on in there
 			// if (Game.level.openInventories.size() > 0) {
-			if (square.inventory.contains(Searchable.class)) {
-				Searchable searchable = (Searchable) square.inventory.getGameObjectOfClass(Searchable.class);
+			if (targetSquare.inventory.contains(Searchable.class)) {
+				Searchable searchable = (Searchable) targetSquare.inventory.getGameObjectOfClass(Searchable.class);
 				searchable.inventory.add(object);
 			} else {
 
 				if (gameObjectPerformer instanceof Actor) {
-					square.inventory.add(object);
+					targetSquare.inventory.add(object);
 				} else {
-					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(object, square));
+					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(object, targetSquare));
 				}
 			}
 
@@ -135,7 +132,7 @@ public class ActionDropItems extends VariableQtyAction {
 	@Override
 	public boolean check() {
 
-		if (objects == null || objects.length == 0 || objects[0] == null || square == null)
+		if (objects == null || objects.length == 0 || objects[0] == null || targetSquare == null)
 			return false;
 
 		if (gameObjectPerformer instanceof Actor) {
@@ -150,7 +147,7 @@ public class ActionDropItems extends VariableQtyAction {
 
 		}
 
-		if (!square.inventory.canShareSquare && !objects[0].canShareSquare) {
+		if (!targetSquare.inventory.canShareSquare && !objects[0].canShareSquare) {
 			disabledReason = NO_SPACE;
 			return false;
 		}
@@ -160,7 +157,7 @@ public class ActionDropItems extends VariableQtyAction {
 
 	@Override
 	public boolean checkRange() {
-		if (gameObjectPerformer.straightLineDistanceTo(square) > 1) {
+		if (gameObjectPerformer.straightLineDistanceTo(targetSquare) > 1) {
 			return false;
 		}
 

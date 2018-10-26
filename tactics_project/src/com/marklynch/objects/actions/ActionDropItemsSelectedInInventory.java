@@ -10,21 +10,18 @@ import com.marklynch.objects.units.Actor;
 public class ActionDropItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Drop";
-	Square square;
-	GameObject object;
+	GameObject objectToDrop;
 	InventorySquare inventorySquare;
 
-	public ActionDropItemsSelectedInInventory(GameObject performer, Square square, GameObject object) {
-		super(ACTION_NAME, textureDrop, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.gameObjectPerformer = performer;
-		this.square = square;
-		this.object = object;
-		this.inventorySquare = object.inventorySquare;
+	public ActionDropItemsSelectedInInventory(GameObject performer, Square square, GameObject objectToDrop) {
+		super(ACTION_NAME, textureDrop, null, performer, null, square);
+		this.objectToDrop = objectToDrop;
+		this.inventorySquare = objectToDrop.inventorySquare;
 
 		if (!check()) {
 			enabled = false;
 		} else {
-			actionName = ACTION_NAME + " " + object.name;
+			actionName = ACTION_NAME + " " + objectToDrop.name;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -41,10 +38,10 @@ public class ActionDropItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionDropItems(gameObjectPerformer, square, object).perform();
+			new ActionDropItems(gameObjectPerformer, targetSquare, objectToDrop).perform();
 		} else {
 			Game.level.player.inventory.showQTYDialog(
-					new ActionDropItems(gameObjectPerformer, square, object.inventorySquare.stack),
+					new ActionDropItems(gameObjectPerformer, targetSquare, objectToDrop.inventorySquare.stack),
 					inventorySquare.stack.size(), "Enter qty to drop (have: " + inventorySquare.stack.size() + ")", 0);
 		}
 	}
@@ -52,22 +49,22 @@ public class ActionDropItemsSelectedInInventory extends Action {
 	@Override
 	public boolean check() {
 
-		if (square == null)
+		if (targetSquare == null)
 			return false;
 
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
-			if (!actor.inventory.contains(object)) {
+			if (!actor.inventory.contains(objectToDrop)) {
 				return false;
 			}
 		} else {
-			if (!gameObjectPerformer.inventory.contains(object)) {
+			if (!gameObjectPerformer.inventory.contains(objectToDrop)) {
 				return false;
 			}
 
 		}
 
-		if (!square.inventory.canShareSquare && !object.canShareSquare) {
+		if (!targetSquare.inventory.canShareSquare && !objectToDrop.canShareSquare) {
 			disabledReason = NO_SPACE;
 			return false;
 		}
@@ -77,7 +74,7 @@ public class ActionDropItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (gameObjectPerformer.straightLineDistanceTo(square) > 1) {
+		if (gameObjectPerformer.straightLineDistanceTo(targetSquare) > 1) {
 			return false;
 		}
 

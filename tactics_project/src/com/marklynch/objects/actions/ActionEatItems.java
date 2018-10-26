@@ -25,7 +25,6 @@ public class ActionEatItems extends VariableQtyAction {
 	public static final String ACTION_NAME = "Eat";
 	public static final String ACTION_NAME_DRINK = "Drink";
 
-	Actor performer;
 	GameObject[] targets;
 
 	public ActionEatItems(Actor performer, ArrayList<GameObject> objects) {
@@ -37,7 +36,7 @@ public class ActionEatItems extends VariableQtyAction {
 	}
 
 	public ActionEatItems(Actor performer, GameObject[] objects, boolean doesNothing) {
-		super(ACTION_NAME, textureEat);
+		super(ACTION_NAME, textureEat, performer, performer, null, null);
 		if (objects != null && objects.length > 0 && (objects[0] instanceof Liquid
 				|| objects[0] instanceof ContainerForLiquids || objects[0] instanceof WaterBody)) {
 			this.actionName = ACTION_NAME_DRINK;

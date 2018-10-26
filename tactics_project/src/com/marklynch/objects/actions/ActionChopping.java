@@ -17,14 +17,11 @@ import com.marklynch.ui.ActivityLog;
 public class ActionChopping extends Action {
 
 	public static final String ACTION_NAME = "Chop";
-
-	Actor performer;
-	GameObject target;
 	Axe axe;
 
 	// Default for hostiles
 	public ActionChopping(Actor attacker, GameObject vein) {
-		super(ACTION_NAME, textureChop, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureChop, attacker, attacker, vein, null);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = vein;
 		if (!check()) {

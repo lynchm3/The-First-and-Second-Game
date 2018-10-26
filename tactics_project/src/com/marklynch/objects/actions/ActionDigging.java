@@ -18,16 +18,11 @@ import com.marklynch.ui.ActivityLog;
 public class ActionDigging extends Action {
 
 	public static final String ACTION_NAME = "Dig";
-
-	Actor performer;
-	GameObject target;
 	Shovel shovel;
 
 	// Default for hostiles
 	public ActionDigging(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureDig, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = attacker;
-		this.target = target;
+		super(ACTION_NAME, textureDig, attacker, attacker, target, null);
 		if (!check()) {
 			enabled = false;
 		}

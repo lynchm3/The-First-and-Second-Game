@@ -24,12 +24,9 @@ import com.marklynch.ui.ActivityLog;
 public class ActionDie extends Action {
 
 	public static final String ACTION_NAME = "Die";
-	Square target;
 
-	public ActionDie(GameObject performer, Square target) {
-		super(ACTION_NAME, textureDie, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.gameObjectPerformer = performer;
-		this.target = target;
+	public ActionDie(GameObject performer, Square targetSquare) {
+		super(ACTION_NAME, textureDie, null, performer, null, targetSquare);
 		if (!check()) {
 			enabled = false;
 		}
@@ -50,7 +47,7 @@ public class ActionDie extends Action {
 
 		logDeath();
 		createCorpse();
-		if (target != null && target.visibleToPlayer && gameObjectPerformer instanceof Actor)
+		if (target != null && targetSquare.visibleToPlayer && gameObjectPerformer instanceof Actor)
 			Game.level.player.addXP(gameObjectPerformer.level, gameObjectPerformer.squareGameObjectIsOn);
 
 		// Remove from draw/update

@@ -15,14 +15,9 @@ public class ActionCastBurn extends Action {
 
 	public static final String ACTION_NAME = "Cast Burn";
 
-	Actor performer;
-	GameObject target;
-
 	// Default for hostiles
 	public ActionCastBurn(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureBurn, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = attacker;
-		this.target = target;
+		super(ACTION_NAME, textureBurn, attacker, attacker, target, null);
 		if (!check()) {
 			enabled = false;
 		} else {

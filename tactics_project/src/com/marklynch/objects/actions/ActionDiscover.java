@@ -14,12 +14,12 @@ import com.marklynch.ui.ActivityLog;
 public class ActionDiscover extends Action {
 
 	public static final String ACTION_NAME = "Discover";
-	Discoverable target;
+	Discoverable discoverable;
 
 	public ActionDiscover(GameObject performer, Discoverable target) {
-		super(ACTION_NAME, textureSearch, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureSearch, null, performer, target, null);
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;
-		this.target = target;
+		this.discoverable = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -38,10 +38,10 @@ public class ActionDiscover extends Action {
 		if (!checkRange())
 			return;
 
-		target.discovered();
+		discoverable.discovered();
 
 		if (Game.level.shouldLog(gameObjectPerformer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " discovered ", target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " discovered ", discoverable }));
 
 		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 

@@ -16,7 +16,7 @@ public class ActionFollow extends Action {
 	public ActionFollow(Player player, Actor target) {
 		super(ACTION_NAME, textureWalk, player, player, target, null);
 		// this.target = target;
-		this.targetGameObject = target;
+		this.target = target;
 		legal = checkLegality();
 		sound = createSound();
 	}

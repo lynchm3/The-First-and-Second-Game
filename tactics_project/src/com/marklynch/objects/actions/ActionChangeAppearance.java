@@ -10,11 +10,9 @@ import com.marklynch.objects.GameObject;
 public class ActionChangeAppearance extends Action {
 
 	public static final String ACTION_NAME = "Appearance";
-	GameObject target;
 
 	public ActionChangeAppearance(GameObject target) {
-		super(ACTION_NAME, textureEllipse, gameObjectperformer, gameObjectperformer, target, targetSquare);
-		this.target = target;
+		super(ACTION_NAME, textureEllipse, null, null, target, null);
 		if (!check()) {
 			enabled = false;
 		}

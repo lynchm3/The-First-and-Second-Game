@@ -13,8 +13,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionBuyItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Buy";
-	Actor performer;
-	Actor target;
 	GameObject[] objects;
 
 	public ActionBuyItems(Actor performer, Actor target, ArrayList<GameObject> objects) {
@@ -28,7 +26,6 @@ public class ActionBuyItems extends VariableQtyAction {
 	public ActionBuyItems(Actor performer, Actor target, GameObject[] objects, boolean doesnothing) {
 		super(ACTION_NAME, textureBuy);
 		super.gameObjectPerformer = this.performer = performer;
-		this.target = target;
 		this.objects = objects;
 		if (!check()) {
 			enabled = false;
@@ -63,7 +60,7 @@ public class ActionBuyItems extends VariableQtyAction {
 			GameObject object = objects[i];
 
 			performer.removeFromCarriedGoldValue(object.value);
-			target.addToCarriedGoldValue(object.value);
+			((Actor) target).addToCarriedGoldValue(object.value);
 			object.owner = performer;
 
 			if (target != null)

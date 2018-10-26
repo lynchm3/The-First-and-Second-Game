@@ -17,8 +17,8 @@ import com.marklynch.utils.Texture;
 public abstract class Action {
 
 	public Actor performer;
-	public GameObject gameObjectperformer;
-	public GameObject targetGameObject;
+	public GameObject gameObjectPerformer;
+	public GameObject target;
 	public Square targetSquare;
 
 	public String actionName;
@@ -153,9 +153,9 @@ public abstract class Action {
 	public Action(String actionName, Texture image, Actor performer, GameObject gameObjectPerformer,
 			GameObject targetGameObject, Square targetSquare) {
 		super();
-		this.gameObjectperformer = gameObjectPerformer;
-		this.gameObjectperformer = gameObjectPerformer;
-		this.targetGameObject = targetGameObject;
+		this.gameObjectPerformer = gameObjectPerformer;
+		this.gameObjectPerformer = gameObjectPerformer;
+		this.target = targetGameObject;
 		this.targetSquare = targetSquare;
 		this.actionName = actionName;
 		this.image = image;
@@ -166,17 +166,17 @@ public abstract class Action {
 		performed = true;
 
 		// Cancel fishing
-		if (gameObjectperformer != null && gameObjectperformer.fishingTarget != null
+		if (gameObjectPerformer != null && gameObjectPerformer.fishingTarget != null
 				&& !(this instanceof ActionFishingStart) && !(this instanceof ActionFishingCompleted)
 				&& !(this instanceof ActionFishingInProgress) && !(this instanceof ActionFishingFailed)) {
 
-			FishingRod fishingRod = (FishingRod) gameObjectperformer.equipped;
+			FishingRod fishingRod = (FishingRod) gameObjectPerformer.equipped;
 			// performer.fishingTarget.primaryAnimation = null;
-			gameObjectperformer.fishingTarget.beingFishedBy = null;
-			gameObjectperformer.fishingTarget = null;
+			gameObjectPerformer.fishingTarget.beingFishedBy = null;
+			gameObjectPerformer.fishingTarget = null;
 			fishingRod.reset();
 
-			if (gameObjectperformer == Level.player) {
+			if (gameObjectPerformer == Level.player) {
 				Level.pausePlayer();
 				if (Level.player.equippedBeforePickingUpObject != null) {
 					Level.player.equipped = Level.player.equippedBeforePickingUpObject;

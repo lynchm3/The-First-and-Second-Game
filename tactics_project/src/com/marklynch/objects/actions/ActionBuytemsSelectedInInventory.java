@@ -10,16 +10,13 @@ import com.marklynch.objects.units.Trader;
 public class ActionBuytemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Buy";
-	Actor performer;
-	Actor seller;
 	GameObject object;
 	InventorySquare inventorySquare;
 
 	public ActionBuytemsSelectedInInventory(Actor performer, Actor seller, GameObject object) {
-		super(ACTION_NAME, textureBuy, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
+		super(ACTION_NAME, textureBuy, performer, performer, seller, null);
+		// super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
-		this.seller = seller;
 		this.inventorySquare = object.inventorySquare;
 
 		if (!check()) {
@@ -42,13 +39,13 @@ public class ActionBuytemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionBuyItems(performer, seller, object).perform();
+			new ActionBuyItems(performer, (Actor) target, object).perform();
 		} else {
 			int maxCanAfford = Math.floorDiv(performer.getCarriedGoldValue(), object.value);
 			int maxCanBuy = Math.min(maxCanAfford, inventorySquare.stack.size());
 
 			Game.level.player.inventory.showQTYDialog(
-					new ActionBuyItems(performer, seller, object.inventorySquare.stack), maxCanBuy,
+					new ActionBuyItems(performer, (Actor) target, object.inventorySquare.stack), maxCanBuy,
 					"Enter qty to buy (max " + maxCanBuy + ")", object.value);
 		}
 	}
@@ -56,7 +53,7 @@ public class ActionBuytemsSelectedInInventory extends Action {
 	@Override
 	public boolean check() {
 
-		if (seller == null || object == null) {
+		if (target == null || object == null) {
 			return false;
 		}
 		if (!(performer instanceof Trader) && performer.getCarriedGoldValue() < object.value) {
@@ -68,7 +65,7 @@ public class ActionBuytemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (!performer.canSeeSquare(seller.squareGameObjectIsOn)) {
+		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
 			return false;
 		}
 		return true;
