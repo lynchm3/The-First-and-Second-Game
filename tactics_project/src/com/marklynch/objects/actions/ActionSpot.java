@@ -14,13 +14,11 @@ public class ActionSpot extends Action {
 
 	public static final String ACTION_NAME = "Spot";
 
-	public Actor performer;
 	public Object spotted;
 	public Square specificSquareSpotted;
 
 	public ActionSpot(Actor spotter, Object spotted, Square specificSquareSpotted) {
-		super(ACTION_NAME, textureSpot, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = spotter;
+		super(ACTION_NAME, textureSpot, spotter, null, null);
 		this.spotted = spotted;
 		this.specificSquareSpotted = specificSquareSpotted;
 		legal = checkLegality();
@@ -44,13 +42,13 @@ public class ActionSpot extends Action {
 		Level.flashSquare = true;
 
 		if (spotted instanceof Area) {
-			Game.level.player.addXP((int) Math.pow(1, ((Area) spotted).level), specificSquareSpotted);
+			Level.player.addXP((int) Math.pow(1, ((Area) spotted).level), specificSquareSpotted);
 		} else if (spotted instanceof Structure) {
-			Game.level.player.addXP((int) Math.pow(1, ((Structure) spotted).level), specificSquareSpotted);
+			Level.player.addXP((int) Math.pow(1, ((Structure) spotted).level), specificSquareSpotted);
 		} else if (spotted instanceof StructureRoom) {
 			StructureRoom structureRoom = (StructureRoom) spotted;
 			if (structureRoom.level != 0)
-				Game.level.player.addXP((int) Math.pow(1, structureRoom.level), specificSquareSpotted);
+				Level.player.addXP((int) Math.pow(1, structureRoom.level), specificSquareSpotted);
 		}
 
 		performer.actionsPerformedThisTurn.add(this);

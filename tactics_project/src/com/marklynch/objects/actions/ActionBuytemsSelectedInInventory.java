@@ -14,7 +14,7 @@ public class ActionBuytemsSelectedInInventory extends Action {
 	InventorySquare inventorySquare;
 
 	public ActionBuytemsSelectedInInventory(Actor performer, Actor seller, GameObject object) {
-		super(ACTION_NAME, textureBuy, performer, performer, seller, null);
+		super(ACTION_NAME, textureBuy, performer, seller, null);
 		// super.gameObjectPerformer = this.performer = performer;
 		this.object = object;
 		this.inventorySquare = object.inventorySquare;

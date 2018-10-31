@@ -15,11 +15,10 @@ import com.marklynch.objects.units.Player;
 public class ActionFishBeingFished extends Action {
 
 	public static final String ACTION_NAME = "Swim";
-	Fish performer;
+	// Fish performer;
 
 	public ActionFishBeingFished(Fish performer) {
-		super(ACTION_NAME, textureWalk, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
+		super(ACTION_NAME, textureWalk, performer, null, null);
 		if (!check()) {
 			enabled = false;
 		}

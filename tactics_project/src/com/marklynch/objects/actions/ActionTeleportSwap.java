@@ -23,7 +23,7 @@ public class ActionTeleportSwap extends Action {
 	boolean endTurn;
 
 	public ActionTeleportSwap(Actor performer, GameObject teleportee, Square target, boolean endTurn) {
-		super(ACTION_NAME, textureTeleport, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureTeleport, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		this.teleportee = teleportee;
 		this.target = target;

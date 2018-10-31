@@ -15,16 +15,16 @@ public class ActionOpenOtherInventory extends Action {
 	public static final String ACTION_NAME = "Loot";
 	public static final String ACTION_NAME_2 = "Open";
 
-	Actor performer;
-	GameObject target;
+	// Actor performer;
+	// GameObject target;
 	ActionOpen actionOpen;
 
 	public ActionOpenOtherInventory(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, textureEllipse, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureEllipse, performer, gameObject, null);
 		if (gameObject instanceof Openable)
 			this.actionName = ACTION_NAME_2;
-		super.gameObjectPerformer = this.performer = performer;
-		this.target = gameObject;
+		// super.gameObjectPerformer = this.performer = performer;
+		// this.target = gameObject;
 		if (target instanceof Openable && !((Openable) gameObject).isOpen()) {
 			actionOpen = new ActionOpen(performer, (Openable) gameObject);
 		}

@@ -11,12 +11,10 @@ public class ActionUnequip extends Action {
 	public static final String ACTION_NAME = "Unequip";
 
 	Actor performer;
-	GameObject gameObject;
+	GameObject target;
 
-	public ActionUnequip(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, textureX, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.gameObject = gameObject;
+	public ActionUnequip(Actor performer, GameObject target) {
+		super(ACTION_NAME, textureX, performer, target, null);
 		if (!check()) {
 			enabled = false;
 		}
@@ -35,15 +33,15 @@ public class ActionUnequip extends Action {
 			return;
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unequipped ", gameObject }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unequipped ", target }));
 
-		if (performer.equipped == gameObject)
+		if (performer.equipped == target)
 			performer.equipped = null;
-		else if (performer.helmet == gameObject)
+		else if (performer.helmet == target)
 			performer.helmet = null;
-		else if (performer.bodyArmor == gameObject)
+		else if (performer.bodyArmor == target)
 			performer.bodyArmor = null;
-		else if (performer.legArmor == gameObject)
+		else if (performer.legArmor == target)
 			performer.legArmor = null;
 
 		performer.actionsPerformedThisTurn.add(this);
@@ -54,16 +52,16 @@ public class ActionUnequip extends Action {
 	@Override
 	public boolean check() {
 
-		if (performer.equipped == gameObject)
+		if (performer.equipped == target)
 			return true;
 
-		if (performer.helmet == gameObject)
+		if (performer.helmet == target)
 			return true;
 
-		if (performer.bodyArmor == gameObject)
+		if (performer.bodyArmor == target)
 			return true;
 
-		if (performer.legArmor == gameObject)
+		if (performer.legArmor == target)
 			return true;
 
 		return false;

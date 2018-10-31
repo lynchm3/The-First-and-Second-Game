@@ -13,13 +13,11 @@ public class ActionWrite extends Action {
 
 	public static final String ACTION_NAME = "Write";
 
-	Actor performer;
 	Readable sign;
 	Object[] text;
 
-	public ActionWrite(Actor writer, Readable sign, Object[] text) {
-		super(ACTION_NAME, textureWrite, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = writer;
+	public ActionWrite(Actor performer, Readable sign, Object[] text) {
+		super(ACTION_NAME, textureWrite, performer, sign, null);
 		this.sign = sign;
 		this.text = text;
 		if (!check()) {

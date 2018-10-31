@@ -21,7 +21,7 @@ public class ActionChopping extends Action {
 
 	// Default for hostiles
 	public ActionChopping(Actor attacker, GameObject vein) {
-		super(ACTION_NAME, textureChop, attacker, attacker, vein, null);
+		super(ACTION_NAME, textureChop, attacker, vein, null);
 		super.gameObjectPerformer = this.performer = attacker;
 		this.target = vein;
 		if (!check()) {

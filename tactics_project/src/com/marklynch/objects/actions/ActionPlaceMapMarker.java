@@ -12,11 +12,9 @@ import com.marklynch.ui.ActivityLog;
 public class ActionPlaceMapMarker extends Action {
 
 	public static final String ACTION_NAME = "Place Map Marker";
-	Square target;
 
 	public ActionPlaceMapMarker(Square target) {
-		super(ACTION_NAME, textureAddMapMarker, gameObjectperformer, gameObjectperformer, target, targetSquare);
-		this.target = target;
+		super(ACTION_NAME, textureAddMapMarker, null, null, target);
 		if (!check()) {
 			enabled = false;
 		}
@@ -35,7 +33,7 @@ public class ActionPlaceMapMarker extends Action {
 		if (!checkRange())
 			return;
 
-		MapMarker mapMarker = Templates.MAP_MARKER_RED.makeCopy(target, null);
+		MapMarker mapMarker = Templates.MAP_MARKER_RED.makeCopy(targetSquare, null);
 		mapMarker.inventory.add(Templates.MAP_MARKER_RED.makeCopy(null, null));
 		mapMarker.inventory.add(Templates.MAP_MARKER_GREEN.makeCopy(null, null));
 		mapMarker.inventory.add(Templates.MAP_MARKER_BLUE.makeCopy(null, null));

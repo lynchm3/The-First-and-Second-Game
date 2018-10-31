@@ -8,13 +8,13 @@ public class ActionGetIn extends Action {
 
 	public static final String ACTION_NAME = "Get In";
 
-	Actor performer;
-	GameObject object;
+	// Actor performer;
+	// GameObject object;
 
 	public ActionGetIn(Actor performer, GameObject object) {
-		super(ACTION_NAME, textureDrop, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.object = object;
+		super(ACTION_NAME, textureDrop, performer, object, null);
+		// super.gameObjectPerformer = this.performer = performer;
+		// this.object = object;
 		if (!check()) {
 			enabled = false;
 		}
@@ -41,7 +41,7 @@ public class ActionGetIn extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 0) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 0) {
 			return false;
 		}
 		return true;

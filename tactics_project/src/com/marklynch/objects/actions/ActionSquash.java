@@ -10,16 +10,11 @@ import com.marklynch.ui.ActivityLog;
 public class ActionSquash extends Action {
 
 	public static final String ACTION_NAME = "Squash";
-
-	Actor performer;
-	GameObject target;
 	boolean accidental;
 
 	// Default for hostiles
 	public ActionSquash(Actor attacker, GameObject target, boolean accidental) {
-		super(ACTION_NAME, textureSquash, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = attacker;
-		this.target = target;
+		super(ACTION_NAME, textureSquash, attacker, target, null);
 		this.accidental = accidental;
 		if (!check()) {
 			enabled = false;

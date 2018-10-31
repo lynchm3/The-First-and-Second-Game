@@ -14,14 +14,12 @@ public class ActionEquip extends Action {
 
 	public static final String ACTION_NAME = "Equip";
 
-	Actor performer;
-	GameObject gameObject;
+	// Actor performer;
+	// GameObject gameObject;
 	ActionTakeItems actionTake;
 
 	public ActionEquip(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, textureEquip, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.gameObject = gameObject;
+		super(ACTION_NAME, textureEquip, performer, gameObject, null);
 		if (!Game.level.player.inventory.contains(gameObject)) {
 			actionTake = new ActionTakeItems(performer, gameObject.inventoryThatHoldsThisObject.parent, gameObject);
 
@@ -50,16 +48,16 @@ public class ActionEquip extends Action {
 			actionTake.perform();
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " equipped ", gameObject }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " equipped ", target }));
 
-		if (gameObject instanceof Helmet) {
-			performer.helmet = (Helmet) gameObject;
-		} else if (gameObject instanceof BodyArmor) {
-			performer.bodyArmor = (BodyArmor) gameObject;
-		} else if (gameObject instanceof LegArmor) {
-			performer.legArmor = (LegArmor) gameObject;
+		if (target instanceof Helmet) {
+			performer.helmet = (Helmet) target;
+		} else if (target instanceof BodyArmor) {
+			performer.bodyArmor = (BodyArmor) target;
+		} else if (target instanceof LegArmor) {
+			performer.legArmor = (LegArmor) target;
 		} else {
-			performer.equip(gameObject);
+			performer.equip(target);
 		}
 
 		performer.actionsPerformedThisTurn.add(this);

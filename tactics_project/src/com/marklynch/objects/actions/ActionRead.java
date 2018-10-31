@@ -12,17 +12,15 @@ public class ActionRead extends Action {
 
 	public static final String ACTION_NAME = "Read";
 
-	public Actor performer;
-	public Readable target;
+	Readable readable;
 
 	// Default for hostiles
 	public ActionRead(Actor reader, Readable target) {
-		super(ACTION_NAME, textureRead, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = reader;
-		this.target = target;
+		super(ACTION_NAME, textureRead, reader, target, null);
 		if (!check()) {
 			enabled = false;
 		}
+		this.readable = target;
 		legal = checkLegality();
 		sound = createSound();
 	}
@@ -48,7 +46,8 @@ public class ActionRead extends Action {
 			ConversationResponseDisplay.updateStandardButtons();
 		}
 
-		target.wasRead();
+		if (performer == Level.player)
+			readable.wasRead();
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

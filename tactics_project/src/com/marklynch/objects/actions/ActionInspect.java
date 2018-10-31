@@ -12,14 +12,9 @@ public class ActionInspect extends Action {
 
 	public static final String ACTION_NAME = "Inspect";
 
-	public Actor performer;
-	public GameObject target;
-
 	// Default for hostiles
 	public ActionInspect(Actor reader, GameObject target) {
-		super(ACTION_NAME, textureSearch, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = reader;
-		this.target = target;
+		super(ACTION_NAME, textureSearch, reader, target, null);
 		legal = checkLegality();
 		sound = createSound();
 	}

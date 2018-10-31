@@ -22,7 +22,7 @@ public class ActionOpenInventoryToThrowItems extends Action {
 	GameObject targetGameObject;
 
 	public ActionOpenInventoryToThrowItems(Actor performer, Object target) {
-		super(ACTION_NAME, textureEllipse, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureEllipse, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		if (target instanceof Square) {

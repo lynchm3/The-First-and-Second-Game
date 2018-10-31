@@ -22,7 +22,7 @@ public class ActionAttack extends Action {
 
 	// Default for hostiles
 	public ActionAttack(Actor performer, GameObject target) {
-		super(ACTION_NAME, textureAttack, performer, performer, target, null);
+		super(ACTION_NAME, textureAttack, performer, target, null);
 
 		if (performer.equipped != null && performer.equipped.maxRange > 1)
 			this.image = Action.textureBow;

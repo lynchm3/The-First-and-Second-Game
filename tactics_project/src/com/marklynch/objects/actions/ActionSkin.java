@@ -14,15 +14,11 @@ public class ActionSkin extends Action {
 
 	public static final String ACTION_NAME = "Skin";
 
-	Actor performer;
-	GameObject target;
 	ActiontTakeAll actionLootAll;
 
 	// Default for hostiles
 	public ActionSkin(Actor performer, GameObject target) {
-		super(ACTION_NAME, textureSkin, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.target = target;
+		super(ACTION_NAME, textureSkin, performer, target, null);
 		actionLootAll = new ActiontTakeAll(performer, target);
 		if (!check()) {
 			enabled = false;

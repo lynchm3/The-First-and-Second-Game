@@ -13,13 +13,11 @@ public class ActionFillContainersInInventory extends Action {
 
 	public static final String ACTION_NAME = "Fill Container(s)";
 
-	Actor performer;
-	WaterSource waterSource;
+	// Actor performer;
+	// WaterSource waterSource;
 
 	public ActionFillContainersInInventory(Actor performer, WaterSource waterSource) {
-		super(ACTION_NAME, textureFillContainer, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.waterSource = waterSource;
+		super(ACTION_NAME, textureFillContainer, performer, waterSource, null);
 		if (!check()) {
 			enabled = false;
 		}
@@ -45,7 +43,7 @@ public class ActionFillContainersInInventory extends Action {
 		} else {
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL);
 			Game.level.player.inventory.open();
-			Inventory.waterSource = this.waterSource;
+			Inventory.waterSource = (WaterSource) this.target;
 			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 			// Game.level.openInventories.add(Game.level.player.inventory);
@@ -86,11 +84,11 @@ public class ActionFillContainersInInventory extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(waterSource.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 
-		if (!performer.canSeeSquare(waterSource.squareGameObjectIsOn)) {
+		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
 			return false;
 		}
 		return true;

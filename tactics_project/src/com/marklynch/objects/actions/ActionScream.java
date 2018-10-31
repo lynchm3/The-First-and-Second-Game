@@ -9,11 +9,9 @@ public class ActionScream extends Action {
 
 	public static final String ACTION_NAME = "Scream";
 
-	Actor performer;
-
 	// Default for hostiles
 	public ActionScream(Actor attacker) {
-		super(ACTION_NAME, textureScream, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureScream, attacker, null, null);
 		super.gameObjectPerformer = this.performer = attacker;
 		if (!check()) {
 			enabled = false;

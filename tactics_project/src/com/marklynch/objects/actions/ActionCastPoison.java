@@ -18,7 +18,7 @@ public class ActionCastPoison extends Action {
 
 	// Default for hostiles
 	public ActionCastPoison(Actor attacker, GameObject target) {
-		super(ACTION_NAME, texturePoison, attacker, attacker, target, null);
+		super(ACTION_NAME, texturePoison, attacker, target, null);
 		this.target = target;
 		if (!check()) {
 			enabled = false;

@@ -13,7 +13,6 @@ import com.marklynch.ui.ActivityLog;
 public class ActionGiveItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Give";
-	GameObject receiver;
 	GameObject[] objects;
 	boolean logAsTake;
 
@@ -28,11 +27,9 @@ public class ActionGiveItems extends VariableQtyAction {
 
 	public ActionGiveItems(GameObject performer, GameObject receiver, boolean logAsTake, GameObject[] objects,
 			boolean doesNothing) {
-		super(ACTION_NAME, textureGive);
+		super(ACTION_NAME, textureGive, performer, receiver, null);
 		if (!(receiver instanceof Actor))
 			this.actionName = "Put";
-		super.gameObjectPerformer = this.gameObjectPerformer = performer;
-		this.receiver = receiver;
 		this.objects = objects;
 		this.logAsTake = logAsTake;
 		if (!check()) {
@@ -62,12 +59,11 @@ public class ActionGiveItems extends VariableQtyAction {
 		if (Game.level.openInventories.size() > 0) {
 		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen()
 				&& gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
-			gameObjectPerformer
-					.addSecondaryAnimation(new AnimationGive(gameObjectPerformer, receiver, objects[0], null));
+			gameObjectPerformer.addSecondaryAnimation(new AnimationGive(gameObjectPerformer, target, objects[0], null));
 		}
 
-		if (receiver instanceof Openable) {
-			((Openable) receiver).open();
+		if (target instanceof Openable) {
+			((Openable) target).open();
 		}
 
 		for (int i = 0; i < amountToGive; i++) {
@@ -95,26 +91,26 @@ public class ActionGiveItems extends VariableQtyAction {
 			}
 			gameObjectPerformer.inventory.remove(object);
 
-			if (receiver instanceof Actor && !logAsTake) {
-				object.owner = (Actor) receiver;
+			if (target instanceof Actor && !logAsTake) {
+				object.owner = (Actor) target;
 			}
 
-			receiver.inventory.add(object);
+			target.inventory.add(object);
 		}
 
-		if (Game.level.shouldLog(receiver, gameObjectPerformer)) {
+		if (Game.level.shouldLog(target, gameObjectPerformer)) {
 			String amountToDropString = "";
 			if (amountToGive > 1)
 				amountToDropString = "x" + amountToGive;
 			if (logAsTake)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { receiver, " took ", objects[0],
-						amountToDropString, " from ", gameObjectPerformer }));
-			else if (receiver instanceof Actor)
+				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " took ", objects[0], amountToDropString,
+						" from ", gameObjectPerformer }));
+			else if (target instanceof Actor)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " gave ", objects[0],
-						amountToDropString, " to ", receiver }));
+						amountToDropString, " to ", target }));
 			else
-				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " put ", objects[0],
-						amountToDropString, " in ", receiver }));
+				Game.level.logOnScreen(new ActivityLog(
+						new Object[] { gameObjectPerformer, " put ", objects[0], amountToDropString, " in ", target }));
 		}
 
 		if (sound != null)
@@ -131,7 +127,7 @@ public class ActionGiveItems extends VariableQtyAction {
 	public boolean checkRange() {
 
 		if (gameObjectPerformer instanceof Actor
-				&& !((Actor) gameObjectPerformer).canSeeSquare(receiver.squareGameObjectIsOn)) {
+				&& !((Actor) gameObjectPerformer).canSeeSquare(target.squareGameObjectIsOn)) {
 			return false;
 		}
 

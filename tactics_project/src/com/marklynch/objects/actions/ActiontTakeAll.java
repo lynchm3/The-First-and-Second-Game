@@ -14,16 +14,12 @@ public class ActiontTakeAll extends Action {
 
 	public static final String ACTION_NAME = "Loot All";
 
-	Actor performer;
-	GameObject container;
 	ActionOpen actionOpen;
 
-	public ActiontTakeAll(Actor performer, GameObject container) {
-		super(ACTION_NAME, textureLootAll, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.container = container;
-		if (container instanceof Openable && !((Openable) container).isOpen()) {
-			actionOpen = new ActionOpen(performer, (Openable) container);
+	public ActiontTakeAll(Actor performer, GameObject target) {
+		super(ACTION_NAME, textureLootAll, performer, target, null);
+		if (target instanceof Openable && !((Openable) target).isOpen()) {
+			actionOpen = new ActionOpen(performer, (Openable) target);
 		}
 		if (!check()) {
 			enabled = false;
@@ -46,24 +42,24 @@ public class ActiontTakeAll extends Action {
 			actionOpen.perform();
 		}
 
-		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();
+		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) target.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 
 			if (Game.level.shouldLog(gameObjectToLoot, performer)) {
 				if (gameObjectToLoot.owner == null || gameObjectToLoot.owner == performer) {
-					Game.level.logOnScreen(new ActivityLog(
-							new Object[] { performer, " took ", gameObjectToLoot, " from ", container }));
+					Game.level.logOnScreen(
+							new ActivityLog(new Object[] { performer, " took ", gameObjectToLoot, " from ", target }));
 				} else {
-					Game.level.logOnScreen(new ActivityLog(
-							new Object[] { performer, " stole ", gameObjectToLoot, " from ", container }));
+					Game.level.logOnScreen(
+							new ActivityLog(new Object[] { performer, " stole ", gameObjectToLoot, " from ", target }));
 				}
 			}
-			container.inventory.remove(gameObjectToLoot);
+			target.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
 			if (gameObjectToLoot.owner == null)
 				gameObjectToLoot.owner = performer;
 		}
-		container.looted();
+		target.looted();
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
@@ -103,7 +99,7 @@ public class ActiontTakeAll extends Action {
 			return actionOpen.checkRange();
 		}
 
-		if (performer.straightLineDistanceTo(container.squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 
@@ -119,7 +115,7 @@ public class ActiontTakeAll extends Action {
 			}
 		}
 
-		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();
+		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) target.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer)
 				return false;

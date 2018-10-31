@@ -12,13 +12,8 @@ public class ActionInitiateTrade extends Action {
 
 	public static final String ACTION_NAME = "Trade";
 
-	Actor performer;
-	Actor target;
-
 	public ActionInitiateTrade(Actor performer, Actor target) {
-		super(ACTION_NAME, textureEllipse, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.target = target;
+		super(ACTION_NAME, textureEllipse, performer, target, null);
 		if (!check()) {
 			enabled = false;
 		}
@@ -84,7 +79,7 @@ public class ActionInitiateTrade extends Action {
 
 	@Override
 	public boolean check() {
-		if (target.knownCriminals.contains(performer)) {
+		if (((Actor) target).knownCriminals.contains(performer)) {
 			disabledReason = NOT_ENOUGH_TRUST;
 			return false;
 		}

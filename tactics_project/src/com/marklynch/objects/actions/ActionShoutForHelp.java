@@ -10,13 +10,11 @@ public class ActionShoutForHelp extends Action {
 
 	public static final String ACTION_NAME = "Shout For Help";
 
-	Actor performer;
 	GameObject attacker;
 
 	// Default for hostiles
 	public ActionShoutForHelp(Actor performer, GameObject attacker) {
-		super(ACTION_NAME, textureScream, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
+		super(ACTION_NAME, textureScream, performer, null, null);
 		this.attacker = attacker;
 		if (!check()) {
 			enabled = false;

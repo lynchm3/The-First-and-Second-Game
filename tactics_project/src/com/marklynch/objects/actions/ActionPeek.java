@@ -12,13 +12,8 @@ public class ActionPeek extends Action {
 
 	public static final String ACTION_NAME = "Peek";
 
-	Actor performer;
-	GameObject object;
-
 	public ActionPeek(Actor performer, GameObject object) {
-		super(ACTION_NAME, textureStopHiding, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.object = object;
+		super(ACTION_NAME, textureStopHiding, performer, object, null);
 
 		legal = checkLegality();
 		sound = createSound();
@@ -33,27 +28,27 @@ public class ActionPeek extends Action {
 
 		if (!checkRange())
 			return;
-		// object.actorsHidingHere.add(performer);
+		// target.actorsHidingHere.add(performer);
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " peeked through ", object }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " peeked through ", target }));
 
 		if (performer == Game.level.player) {
 
-			performer.peekingThrough = object;
-			Game.level.player.peekingThrough = object;
+			performer.peekingThrough = target;
+			Game.level.player.peekingThrough = target;
 
 			Square peekSquare = null;
-			if (object.squareGameObjectIsOn.xInGrid < performer.squareGameObjectIsOn.xInGrid) {
+			if (target.squareGameObjectIsOn.xInGrid < performer.squareGameObjectIsOn.xInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid
 						- 2][performer.squareGameObjectIsOn.yInGrid];
-			} else if (object.squareGameObjectIsOn.xInGrid > performer.squareGameObjectIsOn.xInGrid) {
+			} else if (target.squareGameObjectIsOn.xInGrid > performer.squareGameObjectIsOn.xInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid
 						+ 2][performer.squareGameObjectIsOn.yInGrid];
-			} else if (object.squareGameObjectIsOn.yInGrid < performer.squareGameObjectIsOn.yInGrid) {
+			} else if (target.squareGameObjectIsOn.yInGrid < performer.squareGameObjectIsOn.yInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid][performer.squareGameObjectIsOn.yInGrid
 						- 2];
-			} else if (object.squareGameObjectIsOn.yInGrid > performer.squareGameObjectIsOn.yInGrid) {
+			} else if (target.squareGameObjectIsOn.yInGrid > performer.squareGameObjectIsOn.yInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid][performer.squareGameObjectIsOn.yInGrid
 						+ 2];
 			}
@@ -63,7 +58,7 @@ public class ActionPeek extends Action {
 				Game.level.player.calculateVisibleSquares(peekSquare);
 		}
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, object.owner, Crime.TYPE.CRIME_VOYEURISM);
+			Crime crime = new Crime(this, this.performer, target.owner, Crime.TYPE.CRIME_VOYEURISM);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -80,7 +75,7 @@ public class ActionPeek extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;
@@ -88,8 +83,8 @@ public class ActionPeek extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (object.squareGameObjectIsOn.restricted() == true
-				&& !object.squareGameObjectIsOn.owners.contains(performer)) {
+		if (target.squareGameObjectIsOn.restricted() == true
+				&& !target.squareGameObjectIsOn.owners.contains(performer)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}

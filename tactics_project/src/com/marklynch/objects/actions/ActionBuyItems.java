@@ -24,8 +24,7 @@ public class ActionBuyItems extends VariableQtyAction {
 	}
 
 	public ActionBuyItems(Actor performer, Actor target, GameObject[] objects, boolean doesnothing) {
-		super(ACTION_NAME, textureBuy);
-		super.gameObjectPerformer = this.performer = performer;
+		super(ACTION_NAME, textureBuy, performer, target, null);
 		this.objects = objects;
 		if (!check()) {
 			enabled = false;

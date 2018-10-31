@@ -9,14 +9,10 @@ import com.marklynch.ui.ActivityLog;
 public class ActionTrespass extends Action {
 
 	public static final String ACTION_NAME = "Trespass here";
-	Actor performer;
-	Square target;
 	float loudness;
 
-	public ActionTrespass(Actor mover, Square target, float loudness) {
-		super(ACTION_NAME, textureTrespass, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = mover;
-		this.target = target;
+	public ActionTrespass(Actor performer, Square targetSquare, float loudness) {
+		super(ACTION_NAME, textureTrespass, performer, null, targetSquare);
 		this.loudness = loudness;
 		if (!check()) {
 			enabled = false;
@@ -63,6 +59,6 @@ public class ActionTrespass extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, performer, target, loudness, legal, this.getClass());
+		return new Sound(performer, performer, targetSquare, loudness, legal, this.getClass());
 	}
 }

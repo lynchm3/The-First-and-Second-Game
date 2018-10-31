@@ -13,13 +13,9 @@ public class ActionOpenInventoryToDropItems extends Action {
 
 	public static final String ACTION_NAME = "Drop";
 
-	Actor performer;
-	Square target;
-
-	public ActionOpenInventoryToDropItems(Actor performer, Square target) {
-		super(ACTION_NAME, textureEllipse, performer, performer, target, targetSquare);
+	public ActionOpenInventoryToDropItems(Actor performer, Square targetSquare) {
+		super(ACTION_NAME, textureEllipse, performer, null, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
-		this.target = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -45,7 +41,7 @@ public class ActionOpenInventoryToDropItems extends Action {
 		} else {
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP);
 			Game.level.player.inventory.open();
-			Inventory.target = this.target;
+			Inventory.target = this.targetSquare;
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 		}
@@ -59,7 +55,7 @@ public class ActionOpenInventoryToDropItems extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target) > 1) {
+		if (performer.straightLineDistanceTo(targetSquare) > 1) {
 			return false;
 		}
 		return true;

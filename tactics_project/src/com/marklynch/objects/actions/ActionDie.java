@@ -26,7 +26,7 @@ public class ActionDie extends Action {
 	public static final String ACTION_NAME = "Die";
 
 	public ActionDie(GameObject performer, Square targetSquare) {
-		super(ACTION_NAME, textureDie, null, performer, null, targetSquare);
+		super(ACTION_NAME, textureDie, performer, null, targetSquare);
 		if (!check()) {
 			enabled = false;
 		}

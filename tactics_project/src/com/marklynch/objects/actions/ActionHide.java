@@ -9,15 +9,11 @@ public class ActionHide extends Action {
 
 	public static final String ACTION_NAME = "Hide";
 
-	Actor performer;
-	HidingPlace object;
-
 	public ActionMove actionMove;
 
 	public ActionHide(Actor performer, HidingPlace object) {
-		super(ACTION_NAME, textureHide, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureHide, performer, object, null);
 		super.gameObjectPerformer = this.performer = performer;
-		this.object = object;
 		if (!check()) {
 			enabled = false;
 			if (this.actionMove != null)
@@ -71,8 +67,8 @@ public class ActionHide extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.squareGameObjectIsOn != object.squareGameObjectIsOn) {
-			this.actionMove = new ActionMove(performer, object.squareGameObjectIsOn, false);
+		if (performer.squareGameObjectIsOn != target.squareGameObjectIsOn) {
+			this.actionMove = new ActionMove(performer, target.squareGameObjectIsOn, false);
 			return this.actionMove.enabled;
 		}
 		return true;
@@ -80,7 +76,7 @@ public class ActionHide extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;
@@ -91,8 +87,8 @@ public class ActionHide extends Action {
 		if (actionMove != null)
 			return true;
 
-		if (object.squareGameObjectIsOn.restricted() == true
-				&& !object.squareGameObjectIsOn.owners.contains(performer)) {
+		if (target.squareGameObjectIsOn.restricted() == true
+				&& !target.squareGameObjectIsOn.owners.contains(performer)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}

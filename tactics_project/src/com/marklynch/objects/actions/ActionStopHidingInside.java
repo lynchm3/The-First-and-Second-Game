@@ -12,14 +12,14 @@ public class ActionStopHidingInside extends Action {
 	public static final String ACTION_NAME = "Stop Hiding";
 
 	Actor performer;
-	GameObject object;
+	GameObject hidingPlace;
 
 	// public ActionMove actionMove;
 
-	public ActionStopHidingInside(Actor performer, SmallHidingPlace object) {
-		super(ACTION_NAME, textureStopHiding, performer, performer, target, targetSquare);
+	public ActionStopHidingInside(Actor performer, SmallHidingPlace hidingPlace) {
+		super(ACTION_NAME, textureStopHiding, performer, hidingPlace, null);
 		super.gameObjectPerformer = this.performer = performer;
-		this.object = object;
+		this.hidingPlace = hidingPlace;
 		if (!check()) {
 			enabled = false;
 		}
@@ -39,15 +39,16 @@ public class ActionStopHidingInside extends Action {
 			return;
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", "" + object }));
+			Game.level
+					.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", "" + hidingPlace }));
 
 		// object.inventory.remove(performer);
 		// object.squareGameObjectIsOn.inventory.remove(performer);
 		// performer.squareGameObjectIsOn = object.squareGameObjectIsOn;
 		// performer.inventoryThatHoldsThisObject =
 		// object.squareGameObjectIsOn.inventory;
-		object.inventory.remove(performer);
-		object.squareGameObjectIsOn.inventory.add(performer);
+		hidingPlace.inventory.remove(performer);
+		hidingPlace.squareGameObjectIsOn.inventory.add(performer);
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
@@ -61,7 +62,7 @@ public class ActionStopHidingInside extends Action {
 	@Override
 	public boolean check() {
 
-		if (object.inventory.contains(performer))
+		if (hidingPlace.inventory.contains(performer))
 			return true;
 		else
 			return false;
@@ -74,8 +75,8 @@ public class ActionStopHidingInside extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (object.squareGameObjectIsOn.restricted() == true
-				&& !object.squareGameObjectIsOn.owners.contains(performer)) {
+		if (hidingPlace.squareGameObjectIsOn.restricted() == true
+				&& !hidingPlace.squareGameObjectIsOn.owners.contains(performer)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}

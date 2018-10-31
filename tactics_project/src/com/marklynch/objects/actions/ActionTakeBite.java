@@ -11,14 +11,9 @@ public class ActionTakeBite extends Action {
 
 	public static final String ACTION_NAME = "Take bite";
 
-	Actor performer;
-	GameObject target;
-
 	// Default for hostiles
-	public ActionTakeBite(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureTakeBite, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = attacker;
-		this.target = target;
+	public ActionTakeBite(Actor performer, GameObject target) {
+		super(ACTION_NAME, textureTakeBite, performer, target, null);
 		if (!check()) {
 			enabled = false;
 		}

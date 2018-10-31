@@ -15,13 +15,9 @@ public class ActionFishingInProgress extends Action {
 
 	public static final String ACTION_NAME = "Fishing";
 
-	Actor performer;
-	GameObject target;
-
 	// Default for hostiles
 	public ActionFishingInProgress(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureFishing, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = attacker;
+		super(ACTION_NAME, textureFishing, attacker, target, null);
 		this.target = target;
 		if (!check()) {
 			enabled = false;

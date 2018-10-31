@@ -9,18 +9,18 @@ import com.marklynch.objects.units.Actor;
 public class ActionGiveItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Give";
-	GameObject receiver;
+	// GameObject receiver;
 	GameObject object;
 	boolean logAsTake;
 	InventorySquare inventorySquare;
 
 	public ActionGiveItemsSelectedInInventory(GameObject performer, GameObject receiver, boolean logAsTake,
 			GameObject object) {
-		super(ACTION_NAME, textureGive, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureGive, performer, receiver, null);
 		if (!(receiver instanceof Actor))
 			this.actionName = "Put";
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;
-		this.receiver = receiver;
+		// this.receiver = receiver;
 		this.logAsTake = logAsTake;
 		this.object = object;
 		this.inventorySquare = object.inventorySquare;
@@ -45,14 +45,14 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionGiveItems(gameObjectPerformer, receiver, logAsTake, object).perform();
+			new ActionGiveItems(gameObjectPerformer, target, logAsTake, object).perform();
 		} else {
 			String qtyString = "Enter qty to give (have: " + inventorySquare.stack.size() + ")";
-			if (!(receiver instanceof Actor)) {
+			if (!(target instanceof Actor)) {
 				qtyString = "Enter qty to put (have: " + +inventorySquare.stack.size() + ")";
 			}
 			Game.level.player.inventory.showQTYDialog(
-					new ActionGiveItems(gameObjectPerformer, receiver, logAsTake, object.inventorySquare.stack),
+					new ActionGiveItems(gameObjectPerformer, target, logAsTake, object.inventorySquare.stack),
 					inventorySquare.stack.size(), qtyString, 0);
 		}
 	}
@@ -60,7 +60,7 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 	@Override
 	public boolean check() {
 
-		if (receiver == null)
+		if (target == null)
 			return false;
 
 		return true;
@@ -70,7 +70,7 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 	public boolean checkRange() {
 
 		if (gameObjectPerformer instanceof Actor
-				&& !((Actor) gameObjectPerformer).canSeeSquare(receiver.squareGameObjectIsOn)) {
+				&& !((Actor) gameObjectPerformer).canSeeSquare(target.squareGameObjectIsOn)) {
 			return false;
 		}
 

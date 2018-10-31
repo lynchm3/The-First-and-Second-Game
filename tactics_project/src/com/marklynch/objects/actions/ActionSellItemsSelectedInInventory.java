@@ -10,22 +10,21 @@ import com.marklynch.objects.units.Trader;
 public class ActionSellItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Sell";
-	Actor performer;
 	Actor buyer;
-	GameObject object;
+	GameObject sellObject;
 	InventorySquare inventorySquare;
 
-	public ActionSellItemsSelectedInInventory(Actor performer, Actor buyer, GameObject object) {
-		super(ACTION_NAME, textureSell, performer, performer, target, targetSquare);
+	public ActionSellItemsSelectedInInventory(Actor performer, Actor buyer, GameObject sellObject) {
+		super(ACTION_NAME, textureSell, performer, buyer, null);
 		super.gameObjectPerformer = this.performer = performer;
-		this.object = object;
+		this.sellObject = sellObject;
 		this.buyer = buyer;
-		this.inventorySquare = object.inventorySquare;
+		this.inventorySquare = sellObject.inventorySquare;
 
 		if (!check()) {
 			enabled = false;
 		} else {
-			actionName = ACTION_NAME + " " + object.name;
+			actionName = ACTION_NAME + " " + sellObject.name;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -42,23 +41,23 @@ public class ActionSellItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionSellItems(performer, buyer, object).perform();
+			new ActionSellItems(performer, buyer, sellObject).perform();
 		} else {
-			int maxCanAfford = Math.floorDiv(buyer.getCarriedGoldValue(), object.value);
+			int maxCanAfford = Math.floorDiv(buyer.getCarriedGoldValue(), sellObject.value);
 			int maxCanSell = Math.min(maxCanAfford, inventorySquare.stack.size());
 			Game.level.player.inventory.showQTYDialog(
-					new ActionSellItems(performer, buyer, object.inventorySquare.stack), maxCanSell,
-					"Enter qty to sell (max " + maxCanSell + ")", object.value);
+					new ActionSellItems(performer, buyer, sellObject.inventorySquare.stack), maxCanSell,
+					"Enter qty to sell (max " + maxCanSell + ")", sellObject.value);
 		}
 	}
 
 	@Override
 	public boolean check() {
 
-		if (buyer == null || object == null)
+		if (buyer == null || sellObject == null)
 			return false;
 
-		if (!(buyer instanceof Trader) && buyer.getCarriedGoldValue() < object.value) {
+		if (!(buyer instanceof Trader) && buyer.getCarriedGoldValue() < sellObject.value) {
 			disabledReason = NOT_ENOUGH_GOLD;
 			return false;
 		}

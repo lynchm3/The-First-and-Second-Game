@@ -150,11 +150,12 @@ public abstract class Action {
 		this.actionName = actionName;
 	}
 
-	public Action(String actionName, Texture image, Actor performer, GameObject gameObjectPerformer,
-			GameObject targetGameObject, Square targetSquare) {
+	public Action(String actionName, Texture image, GameObject gameObjectPerformer, GameObject targetGameObject,
+			Square targetSquare) {
 		super();
 		this.gameObjectPerformer = gameObjectPerformer;
-		this.gameObjectPerformer = gameObjectPerformer;
+		if (gameObjectPerformer instanceof Actor)
+			this.performer = (Actor) this.gameObjectPerformer;
 		this.target = targetGameObject;
 		this.targetSquare = targetSquare;
 		this.actionName = actionName;

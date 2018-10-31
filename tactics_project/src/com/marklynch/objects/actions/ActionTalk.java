@@ -11,18 +11,14 @@ public class ActionTalk extends Action {
 
 	public static final String ACTION_NAME = "Talk";
 
-	public Actor performer;
-	public Actor target;
 	public Conversation conversation;
 
 	public ActionTalk(Actor talker, Actor target) {
 		this(talker, target, null);
 	}
 
-	public ActionTalk(Actor talker, Actor target, Conversation conversation) {
-		super(ACTION_NAME, textureTalk, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = talker;
-		this.target = target;
+	public ActionTalk(Actor performer, Actor target, Conversation conversation) {
+		super(ACTION_NAME, textureTalk, performer, target, null);
 		this.conversation = conversation;
 		if (!check()) {
 			enabled = false;

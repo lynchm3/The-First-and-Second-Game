@@ -9,11 +9,8 @@ public class ActionStopPeeking extends Action {
 
 	public static final String ACTION_NAME = "Stop Peeking";
 
-	Actor performer;
-
 	public ActionStopPeeking(Actor performer) {
-		super(ACTION_NAME, textureStopHiding, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
+		super(ACTION_NAME, textureStopHiding, performer, null, null);
 
 		legal = checkLegality();
 		sound = createSound();

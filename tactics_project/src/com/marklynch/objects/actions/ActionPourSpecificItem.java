@@ -24,7 +24,7 @@ public class ActionPourSpecificItem extends Action {
 
 	// Default for hostiles
 	public ActionPourSpecificItem(Actor performer, Object target, ContainerForLiquids container) {
-		super(ACTION_NAME, texturePour, performer, performer, target, targetSquare);
+		super(ACTION_NAME, texturePour, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		if (target instanceof Square) {
 			targetSquare = (Square) target;

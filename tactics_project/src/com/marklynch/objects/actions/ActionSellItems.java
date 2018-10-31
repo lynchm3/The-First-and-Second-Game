@@ -16,9 +16,8 @@ import com.marklynch.ui.ActivityLog;
 public class ActionSellItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Sell";
-	Actor performer;
-	Actor receiver;
 	GameObject[] objects;
+	Actor receiver;
 
 	public ActionSellItems(Actor performer, Actor receiver, ArrayList<GameObject> objects) {
 		this(performer, receiver, objects.toArray(new GameObject[objects.size()]), false);
@@ -29,10 +28,10 @@ public class ActionSellItems extends VariableQtyAction {
 	}
 
 	public ActionSellItems(Actor performer, Actor receiver, GameObject[] objects, boolean doesnothing) {
-		super(ACTION_NAME, textureSell);
-		super.gameObjectPerformer = this.performer = performer;
-		this.receiver = receiver;
+		super(ACTION_NAME, textureSell, performer, receiver, null);
+
 		this.objects = objects;
+		this.receiver = receiver;
 		if (!check()) {
 			enabled = false;
 		} else {

@@ -10,7 +10,7 @@ public class ActionTrackMapMarker extends Action {
 	MapMarker mapMarker;
 
 	public ActionTrackMapMarker(MapMarker mapMarker) {
-		super(ACTION_NAME, textureCheckboxChecked, gameObjectperformer, gameObjectperformer, target, targetSquare);
+		super(ACTION_NAME, textureCheckboxChecked, null, mapMarker, null);
 		this.mapMarker = mapMarker;
 		if (!check()) {
 			enabled = false;

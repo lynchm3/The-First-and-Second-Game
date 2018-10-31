@@ -10,13 +10,8 @@ public class ActionRing extends Action {
 
 	public static final String ACTION_NAME = "Ring Bell";
 
-	Actor performer;
-	GameObject object;
-
 	public ActionRing(Actor ringer, GameObject object) {
-		super(ACTION_NAME, textureRing, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = ringer;
-		this.object = object;
+		super(ACTION_NAME, textureRing, ringer, object, null);
 		if (!check()) {
 			enabled = false;
 		}
@@ -36,7 +31,7 @@ public class ActionRing extends Action {
 			return;
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " rang ", object }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " rang ", target }));
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
@@ -70,7 +65,7 @@ public class ActionRing extends Action {
 	public Sound createSound() {
 
 		// Sound
-		return new Sound(performer, object, performer.squareGameObjectIsOn, object.soundWhenHitting, legal,
+		return new Sound(performer, target, performer.squareGameObjectIsOn, target.soundWhenHitting, legal,
 				this.getClass());
 	}
 

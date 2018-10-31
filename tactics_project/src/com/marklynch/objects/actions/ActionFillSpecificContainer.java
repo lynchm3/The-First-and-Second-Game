@@ -14,15 +14,14 @@ public class ActionFillSpecificContainer extends Action {
 
 	public static final String ACTION_NAME = "Fill Container";
 
-	Actor performer;
-	WaterSource waterSource;
+	// Actor performer;
+	// WaterSource waterSource;
 	ContainerForLiquids containerForLiquids;
 
 	public ActionFillSpecificContainer(Actor performer, WaterSource waterSource,
 			ContainerForLiquids containerForLiquids) {
-		super(ACTION_NAME, textureFillContainer, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureFillContainer, performer, waterSource, null);
 		super.gameObjectPerformer = this.performer = performer;
-		this.waterSource = waterSource;
 		this.containerForLiquids = containerForLiquids;
 		if (!check()) {
 			enabled = false;
@@ -62,7 +61,7 @@ public class ActionFillSpecificContainer extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(waterSource.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;

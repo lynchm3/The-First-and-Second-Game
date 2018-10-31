@@ -10,12 +10,10 @@ public class ActionWait extends Action {
 
 	public static final String ACTION_NAME = "Wait";
 	Actor performer;
-	Square target;
+	Square targetSquare;
 
-	public ActionWait(Actor loiterer, Square target) {
-		super(ACTION_NAME, textureLoiter, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = loiterer;
-		this.target = target;
+	public ActionWait(Actor performer, Square targetSquare) {
+		super(ACTION_NAME, textureLoiter, performer, null, targetSquare);
 		if (!check()) {
 			enabled = false;
 		}
@@ -60,7 +58,7 @@ public class ActionWait extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.restricted() == true && !target.owners.contains(performer)) {
+		if (targetSquare.restricted() == true && !targetSquare.owners.contains(performer)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}

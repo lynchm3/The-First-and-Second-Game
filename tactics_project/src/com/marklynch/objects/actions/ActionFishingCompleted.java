@@ -17,14 +17,12 @@ public class ActionFishingCompleted extends Action {
 
 	public static final String ACTION_NAME = "Fishing";
 
-	Actor performer;
-	GameObject target;
+	// Actor performer;
+	// GameObject target;
 
 	// Default for hostiles
 	public ActionFishingCompleted(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureFishing, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = attacker;
-		this.target = target;
+		super(ACTION_NAME, textureFishing, attacker, target, null);
 		if (!check()) {
 			enabled = false;
 		}

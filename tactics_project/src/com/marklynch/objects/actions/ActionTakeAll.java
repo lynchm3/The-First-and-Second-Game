@@ -14,13 +14,8 @@ public class ActionTakeAll extends Action {
 
 	public static final String ACTION_NAME = "Take All";
 
-	Actor performer;
-	Square square;
-
 	public ActionTakeAll(Actor performer, Square square) {
-		super(ACTION_NAME, textureTakeAll, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.square = square;
+		super(ACTION_NAME, textureTakeAll, performer, null, square);
 		if (!check()) {
 			enabled = false;
 		}
@@ -38,7 +33,7 @@ public class ActionTakeAll extends Action {
 		if (!checkRange())
 			return;
 
-		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) square.inventory
+		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) targetSquare.inventory
 				.getGameObjectsThatFitInInventory().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 			if (Game.level.shouldLog(gameObjectToLoot, performer))
@@ -46,7 +41,7 @@ public class ActionTakeAll extends Action {
 					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", gameObjectToLoot }));
 				else
 					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", gameObjectToLoot }));
-			square.inventory.remove(gameObjectToLoot);
+			targetSquare.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
 			if (gameObjectToLoot.owner == null)
 				gameObjectToLoot.owner = performer;
@@ -81,7 +76,7 @@ public class ActionTakeAll extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(square) < 2) {
+		if (performer.straightLineDistanceTo(targetSquare) < 2) {
 			return true;
 		}
 		return false;
@@ -89,7 +84,8 @@ public class ActionTakeAll extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) square.inventory.getGameObjects().clone();
+		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) targetSquare.inventory.getGameObjects()
+				.clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer) {
 				illegalReason = THEFT;

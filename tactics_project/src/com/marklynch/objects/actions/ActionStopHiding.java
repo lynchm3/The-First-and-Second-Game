@@ -10,13 +10,11 @@ public class ActionStopHiding extends Action {
 
 	public static final String ACTION_NAME = "Stop Hiding";
 
-	Actor performer;
-	HidingPlace object;
+	HidingPlace hidingPlace;
 
-	public ActionStopHiding(Actor performer, HidingPlace object) {
-		super(ACTION_NAME, textureStopHiding, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.object = object;
+	public ActionStopHiding(Actor performer, HidingPlace hidingPlace) {
+		super(ACTION_NAME, textureStopHiding, performer, hidingPlace, null);
+		this.hidingPlace = hidingPlace;
 		if (!check()) {
 			enabled = false;
 		}
@@ -40,11 +38,12 @@ public class ActionStopHiding extends Action {
 				performer.hidingPlace.gameObjectsHiddenHere.remove(performer);
 				performer.hidingPlace = null;
 
-				if (Game.level.shouldLog(object, performer))
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", object }));
+				if (Game.level.shouldLog(hidingPlace, performer))
+					Game.level.logOnScreen(
+							new ActivityLog(new Object[] { performer, " stopped hiding in ", hidingPlace }));
 			} else {
 
-				if (Game.level.shouldLog(object, performer))
+				if (Game.level.shouldLog(hidingPlace, performer))
 					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding" }));
 			}
 		}

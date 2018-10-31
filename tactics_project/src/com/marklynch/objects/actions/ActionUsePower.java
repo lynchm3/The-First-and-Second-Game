@@ -11,21 +11,14 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
 public class ActionUsePower extends Action {
-	GameObject gameObjectSource;
-	Actor actorPerformer;
-	Square targetSquare;
-	GameObject targetGameObject;
 	Power power;
 
 	// Default for hostiles
-	public ActionUsePower(GameObject attacker, GameObject targetGameObject, Square targetSquare, Power power) {
-		super("Cast " + power.name, null, gameObjectperformer, gameObjectperformer, target, targetSquare);
+	public ActionUsePower(GameObject attacker, GameObject target, Square targetSquare, Power power) {
+		super("Cast " + power.name, null, attacker, target, targetSquare);
 		image = power.image;
-		super.gameObjectPerformer = this.gameObjectSource = attacker;
 		if (attacker instanceof Actor)
-			this.actorPerformer = (Actor) attacker;
-		this.targetSquare = targetSquare;
-		this.targetGameObject = targetGameObject;
+			this.performer = (Actor) attacker;
 		this.power = power;
 		if (!check()) {
 			enabled = false;
@@ -45,17 +38,17 @@ public class ActionUsePower extends Action {
 			return;
 
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
-		power.log(gameObjectSource, targetSquare);
-		power.cast(gameObjectSource, targetGameObject, targetSquare, this);
+		power.log(gameObjectPerformer, targetSquare);
+		power.cast(gameObjectPerformer, target, targetSquare, this);
 
-		gameObjectSource.actionsPerformedThisTurn.add(this);
+		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 
 		if (power.hostile) {
 			for (Square square : power.getAffectedSquares(targetSquare)) {
 				for (GameObject gameObject : square.inventory.getGameObjects()) {
-					gameObject.attackedBy(this.gameObjectSource, this);
+					gameObject.attackedBy(this.gameObjectPerformer, this);
 				}
 			}
 		}
@@ -73,32 +66,32 @@ public class ActionUsePower extends Action {
 					if (severity == Crime.TYPE.CRIME_ASSAULT && !(gameObject instanceof Actor))
 						severity = Crime.TYPE.CRIME_VANDALISM;
 
-					if (victim != gameObjectSource && victim != null && actorPerformer != null) {
-						Crime crime = new Crime(this, this.actorPerformer, victim, severity);
-						this.actorPerformer.crimesPerformedThisTurn.add(crime);
-						this.actorPerformer.crimesPerformedInLifetime.add(crime);
+					if (victim != gameObjectPerformer && victim != null && performer != null) {
+						Crime crime = new Crime(this, this.performer, victim, severity);
+						this.performer.crimesPerformedThisTurn.add(crime);
+						this.performer.crimesPerformedInLifetime.add(crime);
 						notifyWitnessesOfCrime(crime);
 					}
 				}
 			}
 
 		} else {
-			if (actorPerformer != null)
-				trespassingCheck(this, actorPerformer, gameObjectSource.squareGameObjectIsOn);
+			if (performer != null)
+				trespassingCheck(this, performer, gameObjectPerformer.squareGameObjectIsOn);
 		}
 
-		if (gameObjectSource == Game.level.player && !power.passive && !(power instanceof PowerTeleportOther))
+		if (gameObjectPerformer == Game.level.player && !power.passive && !(power instanceof PowerTeleportOther))
 			Game.level.endPlayerTurn();
 	}
 
 	@Override
 	public boolean check() {
 
-		if (targetGameObject != null)
-			if (targetGameObject.attackable == false || targetGameObject.isFloorObject)
+		if (target != null)
+			if (target.attackable == false || target.isFloorObject)
 				return false;
 
-		boolean powerCheck = power.check(gameObjectSource, targetSquare);
+		boolean powerCheck = power.check(gameObjectPerformer, targetSquare);
 		if (powerCheck) {
 			return true;
 		} else {
@@ -113,10 +106,10 @@ public class ActionUsePower extends Action {
 		if (!targetSquare.visibleToPlayer && !power.hasRange(Integer.MAX_VALUE))
 			return false;
 
-		if (!power.hasRange(gameObjectSource.straightLineDistanceTo(targetSquare)))
+		if (!power.hasRange(gameObjectPerformer.straightLineDistanceTo(targetSquare)))
 			return false;
 
-		if (!power.squareInCastLocations(gameObjectSource, targetSquare))
+		if (!power.squareInCastLocations(gameObjectPerformer, targetSquare))
 			return false;
 
 		return true;
@@ -165,13 +158,13 @@ public class ActionUsePower extends Action {
 
 		// Sound
 
-		if (gameObjectSource.equipped == null)
+		if (gameObjectPerformer.equipped == null)
 			return null;
 
 		float loudness = power.loudness;
 
-		if (gameObjectSource.equipped != null)
-			return new Sound(gameObjectSource, gameObjectSource, targetSquare, loudness, legal, this.getClass());
+		if (gameObjectPerformer.equipped != null)
+			return new Sound(gameObjectPerformer, gameObjectPerformer, targetSquare, loudness, legal, this.getClass());
 		return null;
 	}
 

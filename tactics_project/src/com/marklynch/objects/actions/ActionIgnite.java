@@ -26,7 +26,7 @@ public class ActionIgnite extends Action {
 
 	// Default for hostiles
 	public ActionIgnite(Actor performer, Object target) {
-		super(ACTION_NAME, textureBurn, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureBurn, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		if (target instanceof Square) {
 			targetSquare = (Square) target;

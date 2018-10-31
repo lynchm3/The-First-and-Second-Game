@@ -10,13 +10,8 @@ public class ActionPet extends Action {
 
 	public static final String ACTION_NAME = "Pet";
 
-	Actor performer;
-	GameObject object;
-
 	public ActionPet(Actor performer, GameObject object) {
-		super(ACTION_NAME, texturePet, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.object = object;
+		super(ACTION_NAME, texturePet, performer, object, null);
 		if (!check()) {
 			enabled = false;
 		}
@@ -34,11 +29,11 @@ public class ActionPet extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(object, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " petted ", object }));
+		if (Game.level.shouldLog(target, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " petted ", target }));
 		if (performer == Game.level.player && Math.random() > 0.9d) {
-			if (Game.level.shouldLog(object, performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { object, " wonders what your deal is" }));
+			if (Game.level.shouldLog(target, performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " wonders what your deal is" }));
 		}
 
 		performer.actionsPerformedThisTurn.add(this);
@@ -54,7 +49,7 @@ public class ActionPet extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;

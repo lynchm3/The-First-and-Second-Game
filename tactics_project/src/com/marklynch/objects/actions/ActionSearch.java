@@ -15,13 +15,11 @@ public class ActionSearch extends Action {
 
 	public static final String ACTION_NAME = "Search";
 
-	Actor performer;
-	Searchable target;
+	Searchable searchable;
 
-	public ActionSearch(Actor performer, Searchable object) {
-		super(ACTION_NAME, textureSearch, performer, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		this.target = object;
+	public ActionSearch(Actor performer, Searchable searchable) {
+		super(ACTION_NAME, textureSearch, performer, searchable, null);
+		this.searchable = searchable;
 		if (!check()) {
 			enabled = false;
 		}
@@ -42,7 +40,7 @@ public class ActionSearch extends Action {
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " searched ", target }));
 
-		ArrayList<GameObject> gameObjectsToLoot = target.search();
+		ArrayList<GameObject> gameObjectsToLoot = searchable.search();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 
 			if (Game.level.shouldLog(gameObjectToLoot, performer))
@@ -58,7 +56,7 @@ public class ActionSearch extends Action {
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " found nothing" }));
 
-		for (Effect effect : target.effectsFromInteracting) {
+		for (Effect effect : searchable.effectsFromInteracting) {
 			performer.addEffect(effect.makeCopy(target, performer));
 		}
 

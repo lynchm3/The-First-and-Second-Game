@@ -21,7 +21,7 @@ public class ActionThrowItem extends Action {
 
 	// Default for hostiles
 	public ActionThrowItem(Actor performer, Object target, GameObject gameObjectToThrow) {
-		super(ACTION_NAME, textureThrow, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureThrow, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		if (target instanceof Square) {
 			targetSquare = (Square) target;

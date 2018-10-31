@@ -23,7 +23,7 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
-		super(ACTION_NAME, textureLeft, performer, performer, target, targetSquare);
+		super(ACTION_NAME, textureLeft, performer, target, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		if (this.target instanceof Square)
