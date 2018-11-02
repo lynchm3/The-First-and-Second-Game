@@ -81,7 +81,6 @@ public class AnimationStraightLine extends Animation {
 
 	@Override
 	public void childRunCompletionAlgorightm(boolean wait) {
-		System.out.println("AnimationStraightLine.childRunCompletionAlgorightm() -projectileObject = " + performer);
 		postRangedAnimation();
 		// super.runCompletionAlgorightm(wait);
 	}

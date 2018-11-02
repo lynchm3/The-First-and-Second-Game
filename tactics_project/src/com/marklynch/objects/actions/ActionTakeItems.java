@@ -17,6 +17,7 @@ public class ActionTakeItems extends VariableQtyAction {
 	public static final String ACTION_NAME_ILLEGAL = "Steal";
 
 	GameObject[] objects;
+	Object objectToTakeFrom;
 
 	public ActionTakeItems(GameObject performer, Object target, ArrayList<GameObject> objects) {
 		this(performer, target, objects.toArray(new GameObject[objects.size()]), false);
@@ -26,13 +27,14 @@ public class ActionTakeItems extends VariableQtyAction {
 		this(performer, target, objects, false);
 	}
 
-	public ActionTakeItems(GameObject performer, Object target, GameObject[] objects, boolean doesnothing) {
+	public ActionTakeItems(GameObject performer, Object objectToTakeFrom, GameObject[] objects, boolean doesnothing) {
 
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
-		super(ACTION_NAME, textureLeft, performer, target);
+		super(ACTION_NAME, textureLeft, performer, objectToTakeFrom);
 
 		this.objects = objects;
+		this.objectToTakeFrom = objectToTakeFrom;
 		if (!check()) {
 			enabled = false;
 		}
@@ -70,14 +72,14 @@ public class ActionTakeItems extends VariableQtyAction {
 		for (int i = 0; i < amountToTake; i++) {
 			GameObject object = objects[i];
 
-			if (targetSquare != null)
+			if (objectToTakeFrom == targetSquare)
 				targetSquare.inventory.remove(object);
 
-			if (target != null)
+			if (objectToTakeFrom == target)
 				target.inventory.remove(object);
 
-			if (target instanceof Openable) {
-				((Openable) target).open();
+			if (objectToTakeFrom instanceof Openable) {
+				((Openable) objectToTakeFrom).open();
 			}
 
 			performer.inventory.add(object);
@@ -102,14 +104,14 @@ public class ActionTakeItems extends VariableQtyAction {
 					amountText = "x" + amountToTake;
 				}
 				if (legal) {
-					if (target == null)
+					if (objectToTakeFrom == targetSquare)
 						Game.level.logOnScreen(
 								new ActivityLog(new Object[] { performer, " took ", objects[0], amountText }));
 					else
 						Game.level.logOnScreen(new ActivityLog(
 								new Object[] { performer, " took ", objects[0], amountText, " from ", target }));
 				} else {
-					if (target == null)
+					if (objectToTakeFrom == targetSquare)
 						Game.level.logOnScreen(
 								new ActivityLog(new Object[] { performer, " stole ", objects[0], amountText }));
 					else
@@ -123,32 +125,36 @@ public class ActionTakeItems extends VariableQtyAction {
 
 	@Override
 	public boolean check() {
+		System.out.println("ActionTakeItems a check()");
 
 		if (objects.length == 0) {
 			return false;
 		}
+		System.out.println("ActionTakeItems b check()");
 
-		if (performer.inventory.contains(target)) {
-			return false;
-		}
+		// if (performer.inventory.contains(target)) {
+		// return false;
+		// }
 
 		// Check it's still on the same spot
-		if (target != null) {
+		if (target == objectToTakeFrom) {
 			for (GameObject object : objects) {
 				if (!target.inventory.contains(object)) {
 					return false;
 				}
 			}
 		}
+		System.out.println("ActionTakeItems c check()");
 
 		// Check it's still on the same spot
-		if (targetSquare != null) {
+		if (targetSquare == objectToTakeFrom) {
 			for (GameObject object : objects) {
 				if (!targetSquare.inventory.contains(object)) {
 					return false;
 				}
 			}
 		}
+		System.out.println("ActionTakeItems d check()");
 
 		return true;
 	}
@@ -156,13 +162,16 @@ public class ActionTakeItems extends VariableQtyAction {
 	@Override
 	public boolean checkRange() {
 
-		if (targetSquare != null && performer.straightLineDistanceTo(targetSquare) < 2) {
+		System.out.println("ActionTakeItems a checkRange()");
+		if (targetSquare == objectToTakeFrom && performer.straightLineDistanceTo(targetSquare) < 2) {
 			return true;
 		}
 
-		if (target != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
+		System.out.println("ActionTakeItems b checkRange()");
+		if (target == objectToTakeFrom && performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;
 		}
+		System.out.println("ActionTakeItems c checkRange()");
 
 		return false;
 	}

@@ -18,8 +18,6 @@ public class ActionUsePower extends Action {
 		super("Cast " + power.name, null, attacker, target);
 		this.targetSquare = targetSquare;
 		this.target = target;
-		System.out.println("ActionUsePower attacker = " + attacker + ", target = " + target + ", targetSquare = "
-				+ targetSquare + ", power = " + power);
 		image = power.image;
 		this.power = power;
 		if (!check()) {

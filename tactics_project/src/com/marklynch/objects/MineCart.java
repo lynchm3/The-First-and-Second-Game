@@ -67,8 +67,6 @@ public class MineCart extends GameObject {
 			for (final GameObject gameObject : (ArrayList<GameObject>) this.squareGameObjectIsOn.inventory.gameObjects
 					.clone()) {
 
-				System.out.println("Minecart gameObject = " + gameObject);
-
 				if (gameObject.isFloorObject)
 					continue;
 
