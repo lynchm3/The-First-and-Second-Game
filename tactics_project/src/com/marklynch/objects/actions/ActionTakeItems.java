@@ -6,7 +6,6 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
@@ -17,10 +16,6 @@ public class ActionTakeItems extends VariableQtyAction {
 	public static final String ACTION_NAME = "Take";
 	public static final String ACTION_NAME_ILLEGAL = "Steal";
 
-	GameObject performer;
-	Object target;
-	Square targetSquare;
-	GameObject targetGameObject;
 	GameObject[] objects;
 
 	public ActionTakeItems(GameObject performer, Object target, ArrayList<GameObject> objects) {
@@ -36,12 +31,7 @@ public class ActionTakeItems extends VariableQtyAction {
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
 		super(ACTION_NAME, textureLeft, performer, target);
-		super.gameObjectPerformer = this.performer = performer;
-		this.target = target;
-		if (this.target instanceof Square)
-			targetSquare = (Square) target;
-		if (this.target instanceof GameObject)
-			targetGameObject = (GameObject) target;
+
 		this.objects = objects;
 		if (!check()) {
 			enabled = false;
@@ -83,8 +73,8 @@ public class ActionTakeItems extends VariableQtyAction {
 			if (targetSquare != null)
 				targetSquare.inventory.remove(object);
 
-			if (targetGameObject != null)
-				targetGameObject.inventory.remove(object);
+			if (target != null)
+				target.inventory.remove(object);
 
 			if (target instanceof Openable) {
 				((Openable) target).open();
@@ -92,15 +82,15 @@ public class ActionTakeItems extends VariableQtyAction {
 
 			performer.inventory.add(object);
 			if (object.owner == null && performer instanceof Actor)
-				object.owner = ((Actor) performer);
+				object.owner = (performer);
 			performer.actionsPerformedThisTurn.add(this);
 			if (sound != null)
 				sound.play();
 
 			if (!legal && performer instanceof Actor) {
-				Crime crime = new Crime(this, ((Actor) performer), object.owner, Crime.TYPE.CRIME_THEFT, object);
-				((Actor) performer).crimesPerformedThisTurn.add(crime);
-				((Actor) performer).crimesPerformedInLifetime.add(crime);
+				Crime crime = new Crime(this, (performer), object.owner, Crime.TYPE.CRIME_THEFT, object);
+				performer.crimesPerformedThisTurn.add(crime);
+				performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
 			}
 		}
@@ -112,19 +102,19 @@ public class ActionTakeItems extends VariableQtyAction {
 					amountText = "x" + amountToTake;
 				}
 				if (legal) {
-					if (targetGameObject == null)
+					if (target == null)
 						Game.level.logOnScreen(
 								new ActivityLog(new Object[] { performer, " took ", objects[0], amountText }));
 					else
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", objects[0],
-								amountText, " from ", targetGameObject }));
+						Game.level.logOnScreen(new ActivityLog(
+								new Object[] { performer, " took ", objects[0], amountText, " from ", target }));
 				} else {
-					if (targetGameObject == null)
+					if (target == null)
 						Game.level.logOnScreen(
 								new ActivityLog(new Object[] { performer, " stole ", objects[0], amountText }));
 					else
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", objects[0],
-								amountText, " from ", targetGameObject }));
+						Game.level.logOnScreen(new ActivityLog(
+								new Object[] { performer, " stole ", objects[0], amountText, " from ", target }));
 				}
 			}
 		}
@@ -138,10 +128,14 @@ public class ActionTakeItems extends VariableQtyAction {
 			return false;
 		}
 
+		if (performer.inventory.contains(target)) {
+			return false;
+		}
+
 		// Check it's still on the same spot
-		if (targetGameObject != null) {
+		if (target != null) {
 			for (GameObject object : objects) {
-				if (!targetGameObject.inventory.contains(object)) {
+				if (!target.inventory.contains(object)) {
 					return false;
 				}
 			}
@@ -166,7 +160,7 @@ public class ActionTakeItems extends VariableQtyAction {
 			return true;
 		}
 
-		if (targetGameObject != null && performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
+		if (target != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 

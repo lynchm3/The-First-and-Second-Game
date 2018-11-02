@@ -22,16 +22,17 @@ public class ActionTeleport extends Action {
 	public static final String ACTION_NAME = "Teleport here";
 	boolean endTurn;
 	GameObject gameObjectInTheWay;
+	Square squareToTeleportTo;
 
-	public ActionTeleport(GameObject performer, GameObject target, Square targetSquare, boolean endTurn) {
+	public ActionTeleport(GameObject performer, GameObject target, Square squareToTeleportTo, boolean endTurn) {
 		super(ACTION_NAME, textureTeleport, performer, target);
-		super.gameObjectPerformer = this.gameObjectPerformer = performer;
+		this.squareToTeleportTo = squareToTeleportTo;
 		this.endTurn = endTurn;
 		if (!check()) {
 			enabled = false;
 		}
 		if (!target.canShareSquare)
-			gameObjectInTheWay = targetSquare.inventory.gameObjectThatCantShareSquare;
+			gameObjectInTheWay = this.squareToTeleportTo.inventory.gameObjectThatCantShareSquare;
 		legal = checkLegality();
 		sound = createSound();
 		movement = true;
@@ -53,7 +54,7 @@ public class ActionTeleport extends Action {
 		}
 
 		if (target != gameObjectPerformer) {
-			gameObjectPerformer.setPrimaryAnimation(new AnimationPush(gameObjectPerformer, targetSquare,
+			gameObjectPerformer.setPrimaryAnimation(new AnimationPush(gameObjectPerformer, squareToTeleportTo,
 					gameObjectPerformer.getPrimaryAnimation(), null));
 		}
 
@@ -63,12 +64,13 @@ public class ActionTeleport extends Action {
 			Level.pausePlayer();
 		}
 
-		target.setPrimaryAnimation(new AnimationTeleport(target, startSquare, targetSquare, new OnCompletionListener() {
-			@Override
-			public void animationComplete(GameObject gameObject) {
-				postAnimation();
-			}
-		}));
+		target.setPrimaryAnimation(
+				new AnimationTeleport(target, startSquare, squareToTeleportTo, new OnCompletionListener() {
+					@Override
+					public void animationComplete(GameObject gameObject) {
+						postAnimation();
+					}
+				}));
 
 	}
 
@@ -77,7 +79,7 @@ public class ActionTeleport extends Action {
 		target.lastSquare = target.squareGameObjectIsOn;
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 
-		teleport(target, targetSquare);
+		teleport(target, squareToTeleportTo);
 
 		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
@@ -144,10 +146,10 @@ public class ActionTeleport extends Action {
 		if (Game.level.shouldLog(gameObjectPerformer, target)) {
 			if (gameObjectPerformer == target)
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { gameObjectPerformer, " teleported to ", targetSquare }));
+						new ActivityLog(new Object[] { gameObjectPerformer, " teleported to ", squareToTeleportTo }));
 			else
 				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { gameObjectPerformer, " teleported ", target, " to ", targetSquare }));
+						new Object[] { gameObjectPerformer, " teleported ", target, " to ", squareToTeleportTo }));
 		}
 
 		// Teleported big object on to big object... someone has to die.
@@ -174,8 +176,8 @@ public class ActionTeleport extends Action {
 	@Override
 	public boolean check() {
 
-		if (targetSquare == target.squareGameObjectIsOn)
-			return false;
+		// if (squareToTeleportTo == target.squareGameObjectIsOn)
+		// return false;
 
 		// if (target.inventory.isPassable(teleportee))
 		// return false;
@@ -196,7 +198,7 @@ public class ActionTeleport extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (targetSquare.restricted() == true && !targetSquare.owners.contains(target)) {
+		if (squareToTeleportTo.restricted() == true && !squareToTeleportTo.owners.contains(target)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}
@@ -220,10 +222,10 @@ public class ActionTeleport extends Action {
 	public Sound createSound() {
 
 		// Sound of glass
-		ArrayList<GameObject> stampables = targetSquare.inventory.getGameObjectsOfClass(Stampable.class);
+		ArrayList<GameObject> stampables = squareToTeleportTo.inventory.getGameObjectsOfClass(Stampable.class);
 		if (!(target instanceof Blind) && stampables.size() > 0) {
 			for (GameObject stampable : stampables) {
-				return new Sound(target, stampable, targetSquare, 10, legal, this.getClass());
+				return new Sound(target, stampable, squareToTeleportTo, 10, legal, this.getClass());
 			}
 		}
 		return null;

@@ -12,7 +12,6 @@ import com.marklynch.objects.units.Fish;
 public class ActionFishSwim extends Action {
 
 	public static final String ACTION_NAME = "Swim";
-	Fish performer;
 
 	public ActionFishSwim(Fish performer) {
 		super(ACTION_NAME, textureWalk, performer, null);

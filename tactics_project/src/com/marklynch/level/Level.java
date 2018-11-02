@@ -1067,13 +1067,15 @@ public class Level {
 		// structure.draw2();
 		// }
 
-		if (Player.playerTargetAction != null) {
-			if (Player.playerTargetAction.target != null) {
-				Player.playerTargetAction.target.squareGameObjectIsOn.drawAction(Player.playerTargetAction, false);
-			} else if (Player.playerTargetAction.targetSquare != null) {
-				Player.playerTargetAction.targetSquare.drawAction(Player.playerTargetAction, false);
-			}
-		}
+		// if (Player.playerTargetAction != null) {
+		// if (Player.playerTargetAction.target != null) {
+		// Player.playerTargetAction.target.drawAction(Player.playerTargetAction,
+		// false);
+		// } else if (Player.playerTargetAction.targetSquare != null) {
+		// Player.playerTargetAction.targetSquare.drawAction(Player.playerTargetAction,
+		// false);
+		// }
+		// }
 
 	}
 
