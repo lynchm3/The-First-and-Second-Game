@@ -19,14 +19,14 @@ public class ActionOpenOtherInventory extends Action {
 	// GameObject target;
 	ActionOpen actionOpen;
 
-	public ActionOpenOtherInventory(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, textureEllipse, performer, gameObject, null);
-		if (gameObject instanceof Openable)
+	public ActionOpenOtherInventory(Actor performer, GameObject target) {
+		super(ACTION_NAME, textureEllipse, performer, target);
+		if (target instanceof Openable)
 			this.actionName = ACTION_NAME_2;
 		// super.gameObjectPerformer = this.performer = performer;
 		// this.target = gameObject;
-		if (target instanceof Openable && !((Openable) gameObject).isOpen()) {
-			actionOpen = new ActionOpen(performer, (Openable) gameObject);
+		if (target instanceof Openable && !((Openable) target).isOpen()) {
+			actionOpen = new ActionOpen(performer, (Openable) target);
 		}
 		if (!check()) {
 			enabled = false;

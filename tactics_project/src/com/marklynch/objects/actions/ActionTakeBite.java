@@ -13,7 +13,7 @@ public class ActionTakeBite extends Action {
 
 	// Default for hostiles
 	public ActionTakeBite(Actor performer, GameObject target) {
-		super(ACTION_NAME, textureTakeBite, performer, target, null);
+		super(ACTION_NAME, textureTakeBite, performer, target);
 		if (!check()) {
 			enabled = false;
 		}

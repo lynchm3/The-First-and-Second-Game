@@ -13,8 +13,8 @@ public class ActionOpenInventoryToGiveItems extends Action {
 
 	public static final String ACTION_NAME = "Give";
 
-	public ActionOpenInventoryToGiveItems(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, textureEllipse, performer, gameObject, null);
+	public ActionOpenInventoryToGiveItems(Actor performer, GameObject target) {
+		super(ACTION_NAME, textureEllipse, performer, target);
 
 		if (!(target instanceof Actor)) {
 			this.actionName = "Put";

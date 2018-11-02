@@ -17,7 +17,7 @@ public class ActionFishingInProgress extends Action {
 
 	// Default for hostiles
 	public ActionFishingInProgress(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureFishing, attacker, target, null);
+		super(ACTION_NAME, textureFishing, attacker, target);
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -42,7 +42,6 @@ public class ActionFishingInProgress extends Action {
 		if (performer == Level.player) {
 			Level.levelMode = LevelMode.LEVEL_MODE_FISHING;
 			Player.playerTargetAction = new ActionFishingInProgress(performer, target);
-			Player.playerTargetSquare = performer.squareGameObjectIsOn;
 			Player.playerFirstMove = true;
 			// }
 		} else {

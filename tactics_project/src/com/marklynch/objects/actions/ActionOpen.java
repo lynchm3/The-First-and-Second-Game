@@ -14,7 +14,7 @@ public class ActionOpen extends Action {
 	Openable openable;
 
 	public ActionOpen(GameObject opener, Openable openable) {
-		super(ACTION_NAME, textureOpen, opener, openable, null);
+		super(ACTION_NAME, textureOpen, opener, openable);
 		this.openable = openable;
 		if (!check()) {
 			enabled = false;

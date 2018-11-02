@@ -14,8 +14,7 @@ public class ActionOpenInventoryToDropItems extends Action {
 	public static final String ACTION_NAME = "Drop";
 
 	public ActionOpenInventoryToDropItems(Actor performer, Square targetSquare) {
-		super(ACTION_NAME, textureEllipse, performer, null, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
+		super(ACTION_NAME, textureEllipse, performer, targetSquare);
 		if (!check()) {
 			enabled = false;
 		}

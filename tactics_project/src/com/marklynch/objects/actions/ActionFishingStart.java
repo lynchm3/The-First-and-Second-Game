@@ -17,7 +17,7 @@ public class ActionFishingStart extends Action {
 
 	// Default for hostiles
 	public ActionFishingStart(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureFishing, attacker, target, null);
+		super(ACTION_NAME, textureFishing, attacker, target);
 		if (!check()) {
 			enabled = false;
 		}

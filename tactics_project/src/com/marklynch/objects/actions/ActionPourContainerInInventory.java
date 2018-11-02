@@ -17,20 +17,17 @@ public class ActionPourContainerInInventory extends Action {
 	public static final String ACTION_NAME = "Pour";
 
 	Actor performer;
-	Object target;
 	Square targetSquare;
-	GameObject targetGameObject;
+	GameObject target;
 
-	public ActionPourContainerInInventory(Actor performer, Object target) {
-		super(ACTION_NAME, textureEllipse, performer, target, targetSquare);
+	public ActionPourContainerInInventory(Actor performer, GameObject target, Square targetSquare) {
+		super(ACTION_NAME, textureEllipse, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
-		if (target instanceof Square) {
-			targetSquare = (Square) target;
-			targetGameObject = targetSquare.inventory.gameObjectThatCantShareSquare;
-		} else if (target instanceof GameObject) {
-			targetGameObject = (GameObject) target;
-			targetSquare = targetGameObject.squareGameObjectIsOn;
+		if (this.targetSquare != null) {
+			this.target = targetSquare.inventory.gameObjectThatCantShareSquare;
+		} else if (this.target != null) {
+			this.targetSquare = target.squareGameObjectIsOn;
 		}
 		if (!check()) {
 			enabled = false;
@@ -89,18 +86,18 @@ public class ActionPourContainerInInventory extends Action {
 	@Override
 	public boolean checkLegality() {
 		// Empty square, it's fine
-		if (targetGameObject == null)
+		if (target == null)
 			return true;
 
 		// Something that belongs to some one else
-		if (targetGameObject.owner != null && targetGameObject.owner != performer) {
+		if (target.owner != null && target.owner != performer) {
 			illegalReason = VANDALISM;
 			return false;
 		}
 
 		// Is human
-		if (targetGameObject instanceof Actor)
-			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal)) {
+		if (target instanceof Actor)
+			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal)) {
 				illegalReason = ASSAULT;
 				return false;
 			}

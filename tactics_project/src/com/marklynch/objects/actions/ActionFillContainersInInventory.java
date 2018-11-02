@@ -17,7 +17,7 @@ public class ActionFillContainersInInventory extends Action {
 	// WaterSource waterSource;
 
 	public ActionFillContainersInInventory(Actor performer, WaterSource waterSource) {
-		super(ACTION_NAME, textureFillContainer, performer, waterSource, null);
+		super(ACTION_NAME, textureFillContainer, performer, waterSource);
 		if (!check()) {
 			enabled = false;
 		}

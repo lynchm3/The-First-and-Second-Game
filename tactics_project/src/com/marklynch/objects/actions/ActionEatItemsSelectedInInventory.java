@@ -14,15 +14,14 @@ public class ActionEatItemsSelectedInInventory extends Action {
 	public static final String ACTION_NAME = "Eat";
 	public static final String ACTION_NAME_DRINK = "Drink";
 
-	Actor performer;
 	GameObject objectToEat;
 	InventorySquare inventorySquare;
 
-	public ActionEatItemsSelectedInInventory(Actor performer, GameObject objectToEat) {
+	public ActionEatItemsSelectedInInventory(Actor performer, GameObject target) {
 
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
-		super(ACTION_NAME, textureEat, performer, objectToEat, null);
+		super(ACTION_NAME, textureEat, performer, target);
 		if (objectToEat instanceof Liquid || objectToEat instanceof ContainerForLiquids
 				|| objectToEat instanceof WaterBody) {
 			this.actionName = ACTION_NAME_DRINK;

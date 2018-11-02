@@ -17,9 +17,9 @@ public class ActionSearch extends Action {
 
 	Searchable searchable;
 
-	public ActionSearch(Actor performer, Searchable searchable) {
-		super(ACTION_NAME, textureSearch, performer, searchable, null);
-		this.searchable = searchable;
+	public ActionSearch(Actor performer, Searchable target) {
+		super(ACTION_NAME, textureSearch, performer, target);
+		this.searchable = target;
 		if (!check()) {
 			enabled = false;
 		}

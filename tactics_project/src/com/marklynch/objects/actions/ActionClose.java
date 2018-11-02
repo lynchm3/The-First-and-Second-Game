@@ -15,10 +15,10 @@ public class ActionClose extends Action {
 	Openable openable;
 
 	// Default for hostiles
-	public ActionClose(GameObject opener, Openable openable) {
-		super(ACTION_NAME, textureClose, opener, openable, null);
+	public ActionClose(GameObject opener, Openable target) {
+		super(ACTION_NAME, textureClose, opener, target);
 		super.gameObjectPerformer = this.gameObjectPerformer = opener;
-		this.openable = openable;
+		this.openable = target;
 		if (!check()) {
 			enabled = false;
 		}

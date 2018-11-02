@@ -22,7 +22,7 @@ public class ActionDigging extends Action {
 
 	// Default for hostiles
 	public ActionDigging(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureDig, attacker, target, null);
+		super(ACTION_NAME, textureDig, attacker, target);
 		if (!check()) {
 			enabled = false;
 		}

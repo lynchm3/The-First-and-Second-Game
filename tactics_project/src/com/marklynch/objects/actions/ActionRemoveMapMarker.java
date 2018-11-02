@@ -3,17 +3,17 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionRemoveMapMarker extends Action {
 
 	public static final String ACTION_NAME = "Remove Map Marker";
-	MapMarker mapMarker;
+	GameObject target;
 
-	public ActionRemoveMapMarker(MapMarker mapMarker) {
-		super(ACTION_NAME, textureX, null, mapMarker, null);
-		this.mapMarker = mapMarker;
+	public ActionRemoveMapMarker(MapMarker target) {
+		super(ACTION_NAME, textureX, null, target);
 		if (!check()) {
 			enabled = false;
 		}
@@ -32,13 +32,13 @@ public class ActionRemoveMapMarker extends Action {
 		if (!checkRange())
 			return;
 
-		Game.level.inanimateObjectsOnGround.remove(mapMarker);
-		mapMarker.squareGameObjectIsOn.inventory.remove(mapMarker);
+		Game.level.inanimateObjectsOnGround.remove(target);
+		target.squareGameObjectIsOn.inventory.remove(target);
 
 		if (Game.level.shouldLog(Game.level.player))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { "Removed map marker" }));
 
-		Level.markerList.remove(mapMarker);
+		Level.markerList.remove(target);
 
 	}
 

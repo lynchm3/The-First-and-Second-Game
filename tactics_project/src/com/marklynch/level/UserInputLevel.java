@@ -432,7 +432,7 @@ public class UserInputLevel {
 
 			} else if (Game.pinWindowHoveringOver != null) {
 
-			} else if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
+			} else if (Game.squareMouseIsOver != null && Player.playerTargetAction != null) {
 				Game.level.pausePlayer();
 			} else if (Game.level.popupMenuObjects.isEmpty() && Game.squareMouseIsOver != null) {
 				interactWith(Game.squareMouseIsOver, -1, true, false, false);
@@ -705,7 +705,6 @@ public class UserInputLevel {
 			}
 			Level.pausePlayer();
 			Player.playerTargetAction = action;
-			Player.playerTargetSquare = square;
 			if (!(Level.player.getPrimaryAnimation() instanceof AnimationWalk))
 				Player.playerFirstMove = true;
 			return;

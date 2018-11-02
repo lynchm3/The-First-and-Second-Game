@@ -14,7 +14,7 @@ public class ActionPlaceMapMarker extends Action {
 	public static final String ACTION_NAME = "Place Map Marker";
 
 	public ActionPlaceMapMarker(Square target) {
-		super(ACTION_NAME, textureAddMapMarker, null, null, target);
+		super(ACTION_NAME, textureAddMapMarker, null, target);
 		if (!check()) {
 			enabled = false;
 		}

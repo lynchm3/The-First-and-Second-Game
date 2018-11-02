@@ -20,26 +20,18 @@ import com.marklynch.ui.ActivityLog;
 public class ActionTeleport extends Action {
 
 	public static final String ACTION_NAME = "Teleport here";
-	Actor actorPerformer;
-	GameObject gameObjectPerformer;
-	GameObject teleportee;
-	Square targetSquare;
 	boolean endTurn;
 	GameObject gameObjectInTheWay;
 
-	public ActionTeleport(GameObject performer, GameObject teleportee, Square target, boolean endTurn) {
-		super(ACTION_NAME, textureTeleport, performer, target, targetSquare);
+	public ActionTeleport(GameObject performer, GameObject target, Square targetSquare, boolean endTurn) {
+		super(ACTION_NAME, textureTeleport, performer, target);
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;
-		if (performer instanceof Actor)
-			this.actorPerformer = (Actor) performer;
-		this.teleportee = teleportee;
-		this.targetSquare = target;
 		this.endTurn = endTurn;
 		if (!check()) {
 			enabled = false;
 		}
-		if (!teleportee.canShareSquare)
-			gameObjectInTheWay = target.inventory.gameObjectThatCantShareSquare;
+		if (!target.canShareSquare)
+			gameObjectInTheWay = targetSquare.inventory.gameObjectThatCantShareSquare;
 		legal = checkLegality();
 		sound = createSound();
 		movement = true;
@@ -56,61 +48,59 @@ public class ActionTeleport extends Action {
 		if (!checkRange())
 			return;
 
-		if (actorPerformer != null && actorPerformer.peekSquare != null) {
-			new ActionStopPeeking(actorPerformer).perform();
+		if (performer != null && performer.peekSquare != null) {
+			new ActionStopPeeking(performer).perform();
 		}
 
-		if (teleportee != gameObjectPerformer) {
+		if (target != gameObjectPerformer) {
 			gameObjectPerformer.setPrimaryAnimation(new AnimationPush(gameObjectPerformer, targetSquare,
 					gameObjectPerformer.getPrimaryAnimation(), null));
 		}
 
-		Square startSquare = teleportee.squareGameObjectIsOn;
+		Square startSquare = target.squareGameObjectIsOn;
 
-		if (teleportee == Level.player) {
+		if (target == Level.player) {
 			Level.pausePlayer();
 		}
 
-		teleportee.setPrimaryAnimation(
-				new AnimationTeleport(teleportee, startSquare, targetSquare, new OnCompletionListener() {
-					@Override
-					public void animationComplete(GameObject gameObject) {
-						postAnimation();
-					}
-				}));
+		target.setPrimaryAnimation(new AnimationTeleport(target, startSquare, targetSquare, new OnCompletionListener() {
+			@Override
+			public void animationComplete(GameObject gameObject) {
+				postAnimation();
+			}
+		}));
 
 	}
 
 	public void postAnimation() {
 
-		teleportee.lastSquare = teleportee.squareGameObjectIsOn;
+		target.lastSquare = target.squareGameObjectIsOn;
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 
-		teleport(teleportee, targetSquare);
+		teleport(target, targetSquare);
 
 		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 
-		if (actorPerformer != null && !legal) {
+		if (performer != null && !legal) {
 
 			// GameObject gameObjectInTheWay = null;
 			if (gameObjectInTheWay != null) {
-				if (teleportee != Game.level.player && teleportee.owner != null
-						&& teleportee.owner != Game.level.player) {
+				if (target != Game.level.player && target.owner != null && target.owner != Game.level.player) {
 					Actor victim;
 					Crime.TYPE severity;
-					if (teleportee instanceof Actor) {
-						victim = (Actor) teleportee;
+					if (target instanceof Actor) {
+						victim = (Actor) target;
 						severity = Crime.TYPE.CRIME_ASSAULT;
 
 					} else {
-						victim = teleportee.owner;
+						victim = target.owner;
 						severity = Crime.TYPE.CRIME_VANDALISM;
 					}
-					Crime crime = new Crime(this, this.actorPerformer, victim, severity);
-					this.actorPerformer.crimesPerformedThisTurn.add(crime);
-					this.actorPerformer.crimesPerformedInLifetime.add(crime);
+					Crime crime = new Crime(this, this.performer, victim, severity);
+					this.performer.crimesPerformedThisTurn.add(crime);
+					this.performer.crimesPerformedInLifetime.add(crime);
 					notifyWitnessesOfCrime(crime);
 
 				}
@@ -126,21 +116,21 @@ public class ActionTeleport extends Action {
 						victim = gameObjectInTheWay.owner;
 						severity = Crime.TYPE.CRIME_VANDALISM;
 					}
-					Crime crime = new Crime(this, this.actorPerformer, victim, severity);
-					this.actorPerformer.crimesPerformedThisTurn.add(crime);
-					this.actorPerformer.crimesPerformedInLifetime.add(crime);
+					Crime crime = new Crime(this, this.performer, victim, severity);
+					this.performer.crimesPerformedThisTurn.add(crime);
+					this.performer.crimesPerformedInLifetime.add(crime);
 					notifyWitnessesOfCrime(crime);
 				}
 			}
-		} else if (actorPerformer != null) {
-			trespassingCheck(this, actorPerformer, actorPerformer.squareGameObjectIsOn);
+		} else if (performer != null) {
+			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
 
 		if (endTurn && gameObjectPerformer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();
 
-		if (actorPerformer != null)
-			trespassingCheck(this, actorPerformer, teleportee.squareGameObjectIsOn);
+		if (performer != null)
+			trespassingCheck(this, performer, target.squareGameObjectIsOn);
 
 		Level.teleportee = null;
 	}
@@ -151,13 +141,13 @@ public class ActionTeleport extends Action {
 		gameObject.squareGameObjectIsOn = square;
 		square.inventory.add(gameObject);
 
-		if (Game.level.shouldLog(gameObjectPerformer, teleportee)) {
-			if (gameObjectPerformer == teleportee)
+		if (Game.level.shouldLog(gameObjectPerformer, target)) {
+			if (gameObjectPerformer == target)
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { gameObjectPerformer, " teleported to ", targetSquare }));
 			else
 				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { gameObjectPerformer, " teleported ", teleportee, " to ", targetSquare }));
+						new Object[] { gameObjectPerformer, " teleported ", target, " to ", targetSquare }));
 		}
 
 		// Teleported big object on to big object... someone has to die.
@@ -170,7 +160,7 @@ public class ActionTeleport extends Action {
 			gameObject.changeHealth(-damage, null, null);
 			gameObjectInTheWay.changeHealth(-damage, null, null);
 
-			if (gameObjectPerformer == teleportee) {
+			if (gameObjectPerformer == target) {
 				gameObject.changeHealth(-damage, gameObjectInTheWay, this);
 				gameObjectInTheWay.changeHealth(-damage, gameObject, this);
 			} else {
@@ -184,7 +174,7 @@ public class ActionTeleport extends Action {
 	@Override
 	public boolean check() {
 
-		if (targetSquare == teleportee.squareGameObjectIsOn)
+		if (targetSquare == target.squareGameObjectIsOn)
 			return false;
 
 		// if (target.inventory.isPassable(teleportee))
@@ -206,13 +196,13 @@ public class ActionTeleport extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (targetSquare.restricted() == true && !targetSquare.owners.contains(teleportee)) {
+		if (targetSquare.restricted() == true && !targetSquare.owners.contains(target)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}
 
-		if (teleportee != gameObjectPerformer) {
-			boolean legalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, teleportee);
+		if (target != gameObjectPerformer) {
+			boolean legalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, target);
 			if (!legalToPerformOnTeleportee) {
 				return false;
 			}
@@ -231,9 +221,9 @@ public class ActionTeleport extends Action {
 
 		// Sound of glass
 		ArrayList<GameObject> stampables = targetSquare.inventory.getGameObjectsOfClass(Stampable.class);
-		if (!(teleportee instanceof Blind) && stampables.size() > 0) {
+		if (!(target instanceof Blind) && stampables.size() > 0) {
 			for (GameObject stampable : stampables) {
-				return new Sound(teleportee, stampable, targetSquare, 10, legal, this.getClass());
+				return new Sound(target, stampable, targetSquare, 10, legal, this.getClass());
 			}
 		}
 		return null;

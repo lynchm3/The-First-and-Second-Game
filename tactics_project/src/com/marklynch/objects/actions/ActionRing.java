@@ -10,8 +10,8 @@ public class ActionRing extends Action {
 
 	public static final String ACTION_NAME = "Ring Bell";
 
-	public ActionRing(Actor ringer, GameObject object) {
-		super(ACTION_NAME, textureRing, ringer, object, null);
+	public ActionRing(Actor ringer, GameObject target) {
+		super(ACTION_NAME, textureRing, ringer, target);
 		if (!check()) {
 			enabled = false;
 		}

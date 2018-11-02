@@ -12,8 +12,8 @@ public class ActionPeek extends Action {
 
 	public static final String ACTION_NAME = "Peek";
 
-	public ActionPeek(Actor performer, GameObject object) {
-		super(ACTION_NAME, textureStopHiding, performer, object, null);
+	public ActionPeek(Actor performer, GameObject target) {
+		super(ACTION_NAME, textureStopHiding, performer, target);
 
 		legal = checkLegality();
 		sound = createSound();

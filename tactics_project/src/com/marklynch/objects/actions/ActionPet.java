@@ -10,8 +10,8 @@ public class ActionPet extends Action {
 
 	public static final String ACTION_NAME = "Pet";
 
-	public ActionPet(Actor performer, GameObject object) {
-		super(ACTION_NAME, texturePet, performer, object, null);
+	public ActionPet(Actor performer, GameObject target) {
+		super(ACTION_NAME, texturePet, performer, target);
 		if (!check()) {
 			enabled = false;
 		}

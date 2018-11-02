@@ -16,7 +16,7 @@ public class ActionRead extends Action {
 
 	// Default for hostiles
 	public ActionRead(Actor reader, Readable target) {
-		super(ACTION_NAME, textureRead, reader, target, null);
+		super(ACTION_NAME, textureRead, reader, target);
 		if (!check()) {
 			enabled = false;
 		}

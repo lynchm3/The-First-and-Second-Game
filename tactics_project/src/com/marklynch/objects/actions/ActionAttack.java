@@ -22,7 +22,7 @@ public class ActionAttack extends Action {
 
 	// Default for hostiles
 	public ActionAttack(Actor performer, GameObject target) {
-		super(ACTION_NAME, textureAttack, performer, target, null);
+		super(ACTION_NAME, textureAttack, performer, target);
 
 		if (performer.equipped != null && performer.equipped.maxRange > 1)
 			this.image = Action.textureBow;
@@ -63,8 +63,8 @@ public class ActionAttack extends Action {
 		if (weapon.maxRange == 1) {
 
 			// Melee weapons
-			gameObjectPerformer.setPrimaryAnimation(
-					new AnimationSlash(gameObjectPerformer, target, new OnCompletionListener() {
+			gameObjectPerformer
+					.setPrimaryAnimation(new AnimationSlash(gameObjectPerformer, target, new OnCompletionListener() {
 						@Override
 						public void animationComplete(GameObject gameObject) {
 							postMeleeAnimation();
@@ -74,28 +74,33 @@ public class ActionAttack extends Action {
 
 			// Ranged weapon
 
-			gameObjectPerformer
-					.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this, null) {
+			gameObjectPerformer.setPrimaryAnimation(new AnimationShootArrow(performer, target, weapon, this, null) {
 
-						@Override
-						public void shootArrow() {
+				@Override
+				public void shootArrow() {
 
-							AnimationThrown animationThrown;
-							arrow = Templates.ARROW.makeCopy(null, null);
-							arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
-							arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
-							animationThrown = new AnimationThrown("Arrow", performer, ActionAttack.this,
-									target, target.squareGameObjectIsOn, arrow, weapon, 2f, 0f,
-									true, null);
-							performer.addSecondaryAnimation(animationThrown);
-						}
+					AnimationThrown animationThrown;
+					arrow = Templates.ARROW.makeCopy(null, null);
+					arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
+					arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
+					animationThrown = new AnimationThrown("Arrow", (Actor) performer, ActionAttack.this, target,
+							target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true, null);
 
-						@Override
-						public void draw3() {
-							// TODO Auto-generated method stub
+					// AnimationThrown(String name, Actor shooter, Action action, GameObject
+					// performer, Square targetSquare,
+					// GameObject projectileObject, GameObject weapon, float speed, float
+					// rotationSpeed, boolean onTarget,
+					// OnCompletionListener onCompletionListener)
 
-						}
-					});
+					performer.addSecondaryAnimation(animationThrown);
+				}
+
+				@Override
+				public void draw3() {
+					// TODO Auto-generated method stub
+
+				}
+			});
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
@@ -151,13 +156,12 @@ public class ActionAttack extends Action {
 
 				if (weapon != performer) {
 					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(
-								new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-										target, " with ", weapon, " for " + damage + " damage" }));
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+								target, " with ", weapon, " for " + damage + " damage" }));
 				} else {
 					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer,
-								" " + attackTypeString + " ", target, " for " + damage + " damage" }));
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+								target, " for " + damage + " damage" }));
 				}
 			}
 
@@ -169,8 +173,8 @@ public class ActionAttack extends Action {
 			}
 
 			if (target.remainingHealth > 0)
-				target.setPrimaryAnimation(new AnimationFlinch(target,
-						performer.squareGameObjectIsOn, target.getPrimaryAnimation(), null));
+				target.setPrimaryAnimation(new AnimationFlinch(target, performer.squareGameObjectIsOn,
+						target.getPrimaryAnimation(), null));
 		}
 
 	}
@@ -230,8 +234,8 @@ public class ActionAttack extends Action {
 
 		float loudness = Math.max(target.soundWhenHit, performer.equipped.soundWhenHitting);
 		if (performer.equipped != null)
-			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness,
-					legal, this.getClass());
+			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
+					this.getClass());
 		return null;
 	}
 

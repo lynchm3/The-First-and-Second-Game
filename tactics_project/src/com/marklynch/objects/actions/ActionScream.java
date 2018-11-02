@@ -11,8 +11,7 @@ public class ActionScream extends Action {
 
 	// Default for hostiles
 	public ActionScream(Actor attacker) {
-		super(ACTION_NAME, textureScream, attacker, null, null);
-		super.gameObjectPerformer = this.performer = attacker;
+		super(ACTION_NAME, textureScream, attacker, null);
 		if (!check()) {
 			enabled = false;
 		}

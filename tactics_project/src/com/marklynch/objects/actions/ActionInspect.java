@@ -14,7 +14,7 @@ public class ActionInspect extends Action {
 
 	// Default for hostiles
 	public ActionInspect(Actor reader, GameObject target) {
-		super(ACTION_NAME, textureSearch, reader, target, null);
+		super(ACTION_NAME, textureSearch, reader, target);
 		legal = checkLegality();
 		sound = createSound();
 	}

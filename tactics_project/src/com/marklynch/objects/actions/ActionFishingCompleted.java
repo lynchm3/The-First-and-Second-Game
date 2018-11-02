@@ -22,7 +22,7 @@ public class ActionFishingCompleted extends Action {
 
 	// Default for hostiles
 	public ActionFishingCompleted(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureFishing, attacker, target, null);
+		super(ACTION_NAME, textureFishing, attacker, target);
 		if (!check()) {
 			enabled = false;
 		}

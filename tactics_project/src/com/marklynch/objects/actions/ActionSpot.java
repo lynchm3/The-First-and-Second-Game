@@ -18,7 +18,7 @@ public class ActionSpot extends Action {
 	public Square specificSquareSpotted;
 
 	public ActionSpot(Actor spotter, Object spotted, Square specificSquareSpotted) {
-		super(ACTION_NAME, textureSpot, spotter, null, null);
+		super(ACTION_NAME, textureSpot, spotter, null);
 		this.spotted = spotted;
 		this.specificSquareSpotted = specificSquareSpotted;
 		legal = checkLegality();

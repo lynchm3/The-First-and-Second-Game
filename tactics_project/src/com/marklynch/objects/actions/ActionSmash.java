@@ -12,7 +12,7 @@ public class ActionSmash extends Action {
 
 	// Default for hostiles
 	public ActionSmash(GameObject attacker, GameObject target) {
-		super(ACTION_NAME, textureSmash, attacker, target, null);
+		super(ACTION_NAME, textureSmash, attacker, target);
 		super.gameObjectPerformer = this.gameObjectPerformer = attacker;
 		if (gameObjectPerformer instanceof Actor)
 			performer = (Actor) gameObjectPerformer;

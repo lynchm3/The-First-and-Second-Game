@@ -17,7 +17,7 @@ public class ActiontTakeAll extends Action {
 	ActionOpen actionOpen;
 
 	public ActiontTakeAll(Actor performer, GameObject target) {
-		super(ACTION_NAME, textureLootAll, performer, target, null);
+		super(ACTION_NAME, textureLootAll, performer, target);
 		if (target instanceof Openable && !((Openable) target).isOpen()) {
 			actionOpen = new ActionOpen(performer, (Openable) target);
 		}

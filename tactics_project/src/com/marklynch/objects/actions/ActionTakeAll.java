@@ -14,8 +14,8 @@ public class ActionTakeAll extends Action {
 
 	public static final String ACTION_NAME = "Take All";
 
-	public ActionTakeAll(Actor performer, Square square) {
-		super(ACTION_NAME, textureTakeAll, performer, null, square);
+	public ActionTakeAll(Actor performer, Square target) {
+		super(ACTION_NAME, textureTakeAll, performer, target);
 		if (!check()) {
 			enabled = false;
 		}

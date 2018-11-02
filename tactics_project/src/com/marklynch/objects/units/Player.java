@@ -40,7 +40,7 @@ public class Player extends Human {
 
 	public static AIPath playerPathToMouse = null;
 	public static AIPath playerPathToMove = null;
-	public static Square playerTargetSquare = null;
+	// public static Square playerTargetSquare = null;
 	// public static Actor playerTargetActor = null;
 	public static boolean playerFirstMove = false;
 	public static Action playerTargetAction = null;

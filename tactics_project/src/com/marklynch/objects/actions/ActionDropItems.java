@@ -26,7 +26,7 @@ public class ActionDropItems extends VariableQtyAction {
 	}
 
 	public ActionDropItems(GameObject performer, Square square, GameObject[] objects, boolean doesnothing) {
-		super(ACTION_NAME, textureDrop, performer, null, square);
+		super(ACTION_NAME, textureDrop, performer, square);
 		this.objects = objects;
 
 		if (!check()) {

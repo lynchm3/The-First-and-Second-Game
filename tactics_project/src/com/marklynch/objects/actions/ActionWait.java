@@ -9,11 +9,9 @@ import com.marklynch.objects.units.Actor;
 public class ActionWait extends Action {
 
 	public static final String ACTION_NAME = "Wait";
-	Actor performer;
-	Square targetSquare;
 
 	public ActionWait(Actor performer, Square targetSquare) {
-		super(ACTION_NAME, textureLoiter, performer, null, targetSquare);
+		super(ACTION_NAME, textureLoiter, performer, targetSquare);
 		if (!check()) {
 			enabled = false;
 		}

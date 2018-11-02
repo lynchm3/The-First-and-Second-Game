@@ -23,10 +23,10 @@ public class ActionMining extends Action {
 	Pickaxe pickaxe;
 
 	// Default for hostiles
-	public ActionMining(Actor attacker, Vein vein) {
-		super(ACTION_NAME, textureMine, attacker, vein, null);
+	public ActionMining(Actor attacker, Vein target) {
+		super(ACTION_NAME, textureMine, attacker, target);
 		// super.gameObjectPerformer = this.performer = attacker;
-		this.vein = vein;
+		this.vein = target;
 		if (!check()) {
 			enabled = false;
 		}

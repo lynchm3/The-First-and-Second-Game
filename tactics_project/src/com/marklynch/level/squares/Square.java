@@ -1050,15 +1050,15 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 		// Throw from inventory
 		if (this != Game.level.player.squareGameObjectIsOn)
-			actions.add(new ActionOpenInventoryToThrowItems(performer, this));
+			actions.add(new ActionOpenInventoryToThrowItems(performer, null, this));
 
 		// Pour from inventory
-		actions.add(new ActionPourContainerInInventory(performer, this));
+		actions.add(new ActionPourContainerInInventory(performer, null, this));
 
 		if (!this.inventory.contains(MapMarker.class))
 			actions.add(new ActionPlaceMapMarker(this));
 
-		actions.add(new ActionPin(performer, this));
+		actions.add(new ActionPin(performer, null, this));
 
 		return actions;
 	}

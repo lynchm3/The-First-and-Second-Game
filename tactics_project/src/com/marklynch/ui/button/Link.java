@@ -9,7 +9,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.actions.ActionPin;
-
 import com.marklynch.utils.Color;
 
 public class Link extends LevelButton {
@@ -36,7 +35,7 @@ public class Link extends LevelButton {
 					Game.level.openCloseJournal();
 			} else if (object instanceof GameObject) {
 
-				new ActionPin(Game.level.player, (GameObject) object).perform();
+				new ActionPin(Game.level.player, (GameObject) object, null).perform();
 			} else if (object instanceof Quest) {
 				// open quest log on that thing
 				Journal.questToDisplayInJournal = (Quest) object;

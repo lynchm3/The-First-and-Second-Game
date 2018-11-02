@@ -2,6 +2,8 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.PinWindow;
 
@@ -13,9 +15,9 @@ public class ActionPin extends Action {
 	public Object target;
 
 	// Default for hostiles
-	public ActionPin(Actor reader, Object target) {
-		super(ACTION_NAME, textureSearch, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = reader;
+	public ActionPin(Actor performer, GameObject target, Square targetSquare) {
+		super(ACTION_NAME, textureSearch, performer, target);
+		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		if (!check()) {
 			enabled = false;

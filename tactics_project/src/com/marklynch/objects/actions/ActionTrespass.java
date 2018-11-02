@@ -12,7 +12,7 @@ public class ActionTrespass extends Action {
 	float loudness;
 
 	public ActionTrespass(Actor performer, Square targetSquare, float loudness) {
-		super(ACTION_NAME, textureTrespass, performer, null, targetSquare);
+		super(ACTION_NAME, textureTrespass, performer, targetSquare);
 		this.loudness = loudness;
 		if (!check()) {
 			enabled = false;

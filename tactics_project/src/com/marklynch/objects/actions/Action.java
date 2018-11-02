@@ -16,19 +16,6 @@ import com.marklynch.utils.Texture;
 
 public abstract class Action {
 
-	public Actor performer;
-	public GameObject gameObjectPerformer;
-	public GameObject target;
-	public Square targetSquare;
-
-	public String actionName;
-	public boolean enabled = true;
-	// public boolean inRange = true;
-	public boolean legal = true;
-	public Sound sound;
-	public boolean movement = false;
-	public Texture image;
-
 	// public static Texture textureAttack;
 	// public static Texture textureBow;
 	// public static Texture textureBird;
@@ -145,19 +132,37 @@ public abstract class Action {
 	public static final String TRESPASSING = "Trespassing";
 	public static final String VANDALISM = "VANDALISM";
 
+	public Actor performer;
+	public GameObject gameObjectPerformer;
+	public GameObject target;
+	public Square targetSquare;
+	public String actionName;
+	public boolean enabled = true;
+	public boolean legal = true;
+	public Sound sound;
+	public boolean movement = false;
+	public Texture image;
+
 	public Action(String actionName) {
 		super();
 		this.actionName = actionName;
 	}
 
-	public Action(String actionName, Texture image, GameObject gameObjectPerformer, GameObject targetGameObject,
-			Square targetSquare) {
+	public Action(String actionName, Texture image, GameObject gameObjectPerformer, Object targetGameObjectOrSquare) {
 		super();
 		this.gameObjectPerformer = gameObjectPerformer;
 		if (gameObjectPerformer instanceof Actor)
 			this.performer = (Actor) this.gameObjectPerformer;
-		this.target = targetGameObject;
-		this.targetSquare = targetSquare;
+
+		if (targetGameObjectOrSquare instanceof GameObject) {
+			this.target = (GameObject) targetGameObjectOrSquare;
+			this.targetSquare = this.target.squareGameObjectIsOn;
+		} else if (targetGameObjectOrSquare instanceof Square) {
+			this.targetSquare = (Square) targetGameObjectOrSquare;
+			this.target = targetSquare.inventory.getGameObjectThatCantShareSquare1();
+
+		}
+
 		this.actionName = actionName;
 		this.image = image;
 	}

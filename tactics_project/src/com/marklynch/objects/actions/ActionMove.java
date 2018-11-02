@@ -23,7 +23,7 @@ public class ActionMove extends Action {
 	boolean endTurn;
 
 	public ActionMove(Actor performer, Square target, boolean endTurn) {
-		super(ACTION_NAME, textureWalk, performer, null, target);
+		super(ACTION_NAME, textureWalk, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
 		this.target = target;
 		this.endTurn = endTurn;
@@ -110,7 +110,8 @@ public class ActionMove extends Action {
 		if (performer == Game.level.player) {
 			if (Game.level.settingFollowPlayer) {
 				if (performer.onScreen()) {
-					if (Game.level.player.playerTargetSquare == null)
+					if (Game.level.player.playerTargetAction != null
+							&& Game.level.player.playerTargetAction.targetSquare == null)
 						Game.level.cameraFollow = true;
 					if (Game.level.cameraFollow)
 						Game.level.dragToFollowPlayer();

@@ -11,9 +11,8 @@ public class ActionHide extends Action {
 
 	public ActionMove actionMove;
 
-	public ActionHide(Actor performer, HidingPlace object) {
-		super(ACTION_NAME, textureHide, performer, object, null);
-		super.gameObjectPerformer = this.performer = performer;
+	public ActionHide(Actor performer, HidingPlace target) {
+		super(ACTION_NAME, textureHide, performer, target);
 		if (!check()) {
 			enabled = false;
 			if (this.actionMove != null)

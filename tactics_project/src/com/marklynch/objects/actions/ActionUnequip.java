@@ -14,7 +14,7 @@ public class ActionUnequip extends Action {
 	GameObject target;
 
 	public ActionUnequip(Actor performer, GameObject target) {
-		super(ACTION_NAME, textureX, performer, target, null);
+		super(ACTION_NAME, textureX, performer, target);
 		if (!check()) {
 			enabled = false;
 		}

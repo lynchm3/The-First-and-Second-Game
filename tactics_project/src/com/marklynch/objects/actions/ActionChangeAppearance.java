@@ -12,7 +12,7 @@ public class ActionChangeAppearance extends Action {
 	public static final String ACTION_NAME = "Appearance";
 
 	public ActionChangeAppearance(GameObject target) {
-		super(ACTION_NAME, textureEllipse, null, target, null);
+		super(ACTION_NAME, textureEllipse, null, target);
 		if (!check()) {
 			enabled = false;
 		}

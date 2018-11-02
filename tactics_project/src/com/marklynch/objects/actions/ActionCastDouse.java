@@ -17,7 +17,7 @@ public class ActionCastDouse extends Action {
 
 	// Default for hostiles
 	public ActionCastDouse(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureDouse, attacker, target, null);
+		super(ACTION_NAME, textureDouse, attacker, target);
 		this.target = target;
 		if (!check()) {
 			enabled = false;

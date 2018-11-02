@@ -18,7 +18,7 @@ public class ActionFishBeingFished extends Action {
 	// Fish performer;
 
 	public ActionFishBeingFished(Fish performer) {
-		super(ACTION_NAME, textureWalk, performer, null, null);
+		super(ACTION_NAME, textureWalk, performer, null);
 		if (!check()) {
 			enabled = false;
 		}
@@ -160,18 +160,15 @@ public class ActionFishBeingFished extends Action {
 		if (performer.beingFishedBy == Game.level.player) {
 			if (fishingRod.lineDamage >= 1) {
 				Player.playerTargetAction = new ActionFishingFailed(Level.player, performer);
-				Player.playerTargetSquare = performer.squareGameObjectIsOn;
 				Player.playerFirstMove = true;
 
 			} else if (hitLand && fishingRod.progressThisTurn > 0 && performer.beingFishedBy == Game.level.player) {
 				Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
-				Player.playerTargetSquare = performer.squareGameObjectIsOn;
 				Player.playerFirstMove = true;
 			}
 
 			else if (totalDistanceToCover < Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH) {
 				Player.playerTargetAction = new ActionFishingCompleted(Level.player, performer);
-				Player.playerTargetSquare = performer.squareGameObjectIsOn;
 				Player.playerFirstMove = true;
 
 			}

@@ -1067,11 +1067,12 @@ public class Level {
 		// structure.draw2();
 		// }
 
-		if (Player.playerTargetSquare != null) {
-			if (Player.playerTargetAction != null)
-				Player.playerTargetSquare.drawAction(Player.playerTargetAction, false);
-			else
-				Player.playerTargetSquare.drawX(false);
+		if (Player.playerTargetAction != null) {
+			if (Player.playerTargetAction.target != null) {
+				Player.playerTargetAction.target.squareGameObjectIsOn.drawAction(Player.playerTargetAction, false);
+			} else if (Player.playerTargetAction.targetSquare != null) {
+				Player.playerTargetAction.targetSquare.drawAction(Player.playerTargetAction, false);
+			}
 		}
 
 	}
@@ -1101,16 +1102,12 @@ public class Level {
 			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver.value));
 		}
 
-		if (Player.playerTargetGameObject != null) {
-			if (Player.playerTargetAction != null)
-				Player.playerTargetGameObject.drawAction(Player.playerTargetAction, false);
-			else
-				Player.playerTargetGameObject.drawX(false);
-		} else if (Player.playerTargetSquare != null) {
-			if (Player.playerTargetAction != null)
-				Player.playerTargetSquare.drawAction(Player.playerTargetAction, false);
-			else
-				Player.playerTargetSquare.drawX(false);
+		if (Player.playerTargetAction != null) {
+			if (Player.playerTargetAction.target != null) {
+				Player.playerTargetAction.target.drawAction(Player.playerTargetAction, false);
+			} else if (Player.playerTargetAction.targetSquare != null) {
+				Player.playerTargetAction.targetSquare.drawAction(Player.playerTargetAction, false);
+			}
 		}
 
 		if (player.squareGameObjectIsOn.getSquareToLeftOf() != null) {
@@ -1723,7 +1720,7 @@ public class Level {
 			// Player.playerFirstMove = false;
 			// }
 
-		} else if (Game.level.player.getPrimaryAnimation().getCompleted() && Player.playerTargetSquare != null) {
+		} else if (Game.level.player.getPrimaryAnimation().getCompleted() && Player.playerTargetAction != null) {
 
 			// if (Game.level.player.playerTargetAction != null
 			// && !Game.level.player.playerTargetAction.shouldContinue()) {
@@ -1733,13 +1730,21 @@ public class Level {
 
 			// Auto move player
 
-			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
+			Square targetSquare = null;
+			if (Player.playerTargetAction.target != null) {
+				targetSquare = Player.playerTargetAction.target.squareGameObjectIsOn;
+			} else if (Player.playerTargetAction.targetSquare != null) {
+				targetSquare = Player.playerTargetAction.targetSquare;
+			}
+
+			Player.playerPathToMove = Level.player.getPathTo(targetSquare);
+
 			if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null
 					|| Player.playerPathToMove.squares.size() == 0) {
-				if (!player.playerTargetSquare.inventory.canShareSquare) {
 
-					Object[] objects = new Object[] { "Theres a ",
-							player.playerTargetSquare.inventory.gameObjectThatCantShareSquare, " there!" };
+				if (!targetSquare.inventory.canShareSquare) {
+					Object[] objects = new Object[] { "Theres a ", targetSquare.inventory.gameObjectThatCantShareSquare,
+							" there!" };
 					notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 					Game.level.logOnScreen(new ActivityLog(objects));
 				} else {
@@ -1770,7 +1775,7 @@ public class Level {
 			} else {
 				action.perform();
 				Player.playerFirstMove = false;
-				if (player.squareGameObjectIsOn == Player.playerTargetSquare) {
+				if (player.squareGameObjectIsOn == targetSquare) {
 					pausePlayer();
 				}
 			}
@@ -1808,9 +1813,9 @@ public class Level {
 	public static void pausePlayer() {
 		// Utils.printStackTrace();
 		Player.playerPathToMove = null;
-		Player.playerTargetSquare = null;
+		// Player.playerTargetSquare = null;
 		Player.playerTargetAction = null;
-		Player.playerTargetGameObject = null;
+		// Player.playerTargetGameObject = null;
 		levelMode = LevelMode.LEVEL_MODE_NORMAL;
 	}
 

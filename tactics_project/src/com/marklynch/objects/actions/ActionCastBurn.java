@@ -17,7 +17,7 @@ public class ActionCastBurn extends Action {
 
 	// Default for hostiles
 	public ActionCastBurn(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureBurn, attacker, target, null);
+		super(ACTION_NAME, textureBurn, attacker, target);
 		if (!check()) {
 			enabled = false;
 		} else {

@@ -36,13 +36,12 @@ public class ActionEatItems extends VariableQtyAction {
 	}
 
 	public ActionEatItems(Actor performer, GameObject[] objects, boolean doesNothing) {
-		super(ACTION_NAME, textureEat, performer, null, null);
+		super(ACTION_NAME, textureEat, performer, null);
 		if (objects != null && objects.length > 0 && (objects[0] instanceof Liquid
 				|| objects[0] instanceof ContainerForLiquids || objects[0] instanceof WaterBody)) {
 			this.actionName = ACTION_NAME_DRINK;
 			this.image = textureDrink;
 		}
-		super.gameObjectPerformer = this.performer = performer;
 		this.targets = objects;
 		if (!check()) {
 			enabled = false;

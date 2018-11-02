@@ -4,7 +4,6 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -16,23 +15,12 @@ import com.marklynch.ui.ActivityLog;
 public class ActionPourSpecificItem extends Action {
 
 	public static final String ACTION_NAME = "Pour";
-
-	Actor performer;
-	Square targetSquare;
-	GameObject targetGameObject;
 	ContainerForLiquids containerForLiquids;
 
 	// Default for hostiles
 	public ActionPourSpecificItem(Actor performer, Object target, ContainerForLiquids container) {
-		super(ACTION_NAME, texturePour, performer, target, targetSquare);
-		super.gameObjectPerformer = this.performer = performer;
-		if (target instanceof Square) {
-			targetSquare = (Square) target;
-			targetGameObject = targetSquare.inventory.gameObjectThatCantShareSquare;
-		} else if (target instanceof GameObject) {
-			targetGameObject = (GameObject) target;
-			targetSquare = targetGameObject.squareGameObjectIsOn;
-		}
+		super(ACTION_NAME, texturePour, performer, target);
+
 		this.containerForLiquids = container;
 		if (!check()) {
 			enabled = false;
@@ -53,10 +41,10 @@ public class ActionPourSpecificItem extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(targetGameObject, performer)) {
-			if (targetGameObject != null) {
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { performer, " poured ", containerForLiquids, " on ", targetGameObject }));
+		if (Game.level.shouldLog(target, performer)) {
+			if (target != null) {
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " poured ", containerForLiquids, " on ", target }));
 			} else {
 				Game.level
 						.logOnScreen(new ActivityLog(new Object[] { performer, " poured out ", containerForLiquids }));
@@ -97,10 +85,10 @@ public class ActionPourSpecificItem extends Action {
 
 			Actor victim = null;
 
-			if (targetGameObject instanceof Actor)
-				victim = (Actor) targetGameObject;
-			else if (targetGameObject != null)
-				victim = targetGameObject.owner;
+			if (target instanceof Actor)
+				victim = (Actor) target;
+			else if (target != null)
+				victim = target.owner;
 			if (victim != null) {
 				Crime crime = new Crime(this, this.performer, victim, Crime.TYPE.CRIME_DOUSE);
 				this.performer.crimesPerformedThisTurn.add(crime);
@@ -115,7 +103,7 @@ public class ActionPourSpecificItem extends Action {
 	@Override
 	public boolean check() {
 
-		if (targetSquare == null && targetGameObject == null)
+		if (targetSquare == null && target == null)
 			return false;
 
 		if (containerForLiquids.liquid == null) {
@@ -143,18 +131,18 @@ public class ActionPourSpecificItem extends Action {
 	@Override
 	public boolean checkLegality() {
 		// Empty square, it's fine
-		if (targetGameObject == null)
+		if (target == null)
 			return true;
 
 		// Something that belongs to some one else
-		if (targetGameObject.owner != null && targetGameObject.owner != performer) {
+		if (target.owner != null && target.owner != performer) {
 			illegalReason = VANDALISM;
 			return false;
 		}
 
 		// Is human
-		if (targetGameObject instanceof Actor)
-			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal)) {
+		if (target instanceof Actor)
+			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal)) {
 				illegalReason = ASSAULT;
 				return false;
 			}

@@ -2,7 +2,6 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -11,15 +10,8 @@ public class ActionHideInside extends Action {
 
 	public static final String ACTION_NAME = "Hide";
 
-	Actor performer;
-	GameObject object;
-
-	// public ActionMove actionMove;
-
-	public ActionHideInside(Actor performer, SmallHidingPlace object) {
-		super(ACTION_NAME, textureHide, performer, object, null);
-		super.gameObjectPerformer = this.performer = performer;
-		this.object = object;
+	public ActionHideInside(Actor performer, SmallHidingPlace target) {
+		super(ACTION_NAME, textureHide, performer, target);
 		if (!check()) {
 			enabled = false;
 		}
@@ -39,10 +31,10 @@ public class ActionHideInside extends Action {
 			return;
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", "" + object }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", "" + target }));
 
 		performer.squareGameObjectIsOn.inventory.remove(performer);
-		object.inventory.add(performer);
+		target.inventory.add(performer);
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
@@ -60,7 +52,7 @@ public class ActionHideInside extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;
@@ -68,8 +60,8 @@ public class ActionHideInside extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (object.squareGameObjectIsOn.restricted() == true
-				&& !object.squareGameObjectIsOn.owners.contains(performer)) {
+		if (target.squareGameObjectIsOn.restricted() == true
+				&& !target.squareGameObjectIsOn.owners.contains(performer)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}

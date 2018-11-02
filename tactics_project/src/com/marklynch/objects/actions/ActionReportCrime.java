@@ -10,15 +10,13 @@ import com.marklynch.ui.ActivityLog;
 public class ActionReportCrime extends Action {
 
 	public static final String ACTION_NAME = "Report Crime";
-
-	Actor performer;
 	Guard guard;
 
 	// Default for hostiles
-	public ActionReportCrime(Actor performer, Guard guard) {
-		super(ACTION_NAME, textureScream, performer, guard, null);
+	public ActionReportCrime(Actor performer, Guard target) {
+		super(ACTION_NAME, textureScream, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
-		this.guard = guard;
+		this.guard = target;
 		if (!check()) {
 			enabled = false;
 		}

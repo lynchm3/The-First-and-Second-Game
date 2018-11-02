@@ -12,8 +12,8 @@ public class ActionLift extends Action {
 
 	public static final String ACTION_NAME = "Lift";
 
-	public ActionLift(Actor performer, GameObject object) {
-		super(ACTION_NAME, texturePickUp, performer, object, null);
+	public ActionLift(Actor performer, GameObject target) {
+		super(ACTION_NAME, texturePickUp, performer, target);
 		if (!check()) {
 			enabled = false;
 		}

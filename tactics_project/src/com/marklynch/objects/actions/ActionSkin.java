@@ -18,7 +18,7 @@ public class ActionSkin extends Action {
 
 	// Default for hostiles
 	public ActionSkin(Actor performer, GameObject target) {
-		super(ACTION_NAME, textureSkin, performer, target, null);
+		super(ACTION_NAME, textureSkin, performer, target);
 		actionLootAll = new ActiontTakeAll(performer, target);
 		if (!check()) {
 			enabled = false;

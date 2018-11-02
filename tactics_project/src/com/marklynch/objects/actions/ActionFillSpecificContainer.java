@@ -20,8 +20,7 @@ public class ActionFillSpecificContainer extends Action {
 
 	public ActionFillSpecificContainer(Actor performer, WaterSource waterSource,
 			ContainerForLiquids containerForLiquids) {
-		super(ACTION_NAME, textureFillContainer, performer, waterSource, null);
-		super.gameObjectPerformer = this.performer = performer;
+		super(ACTION_NAME, textureFillContainer, performer, waterSource);
 		this.containerForLiquids = containerForLiquids;
 		if (!check()) {
 			enabled = false;

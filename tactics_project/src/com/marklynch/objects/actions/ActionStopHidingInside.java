@@ -17,8 +17,7 @@ public class ActionStopHidingInside extends Action {
 	// public ActionMove actionMove;
 
 	public ActionStopHidingInside(Actor performer, SmallHidingPlace hidingPlace) {
-		super(ACTION_NAME, textureStopHiding, performer, hidingPlace, null);
-		super.gameObjectPerformer = this.performer = performer;
+		super(ACTION_NAME, textureStopHiding, performer, null);
 		this.hidingPlace = hidingPlace;
 		if (!check()) {
 			enabled = false;

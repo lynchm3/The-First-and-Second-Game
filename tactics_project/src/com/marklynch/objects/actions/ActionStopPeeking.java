@@ -10,7 +10,7 @@ public class ActionStopPeeking extends Action {
 	public static final String ACTION_NAME = "Stop Peeking";
 
 	public ActionStopPeeking(Actor performer) {
-		super(ACTION_NAME, textureStopHiding, performer, null, null);
+		super(ACTION_NAME, textureStopHiding, performer, null);
 
 		legal = checkLegality();
 		sound = createSound();

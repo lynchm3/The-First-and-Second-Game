@@ -12,9 +12,9 @@ public class ActionStopHiding extends Action {
 
 	HidingPlace hidingPlace;
 
-	public ActionStopHiding(Actor performer, HidingPlace hidingPlace) {
-		super(ACTION_NAME, textureStopHiding, performer, hidingPlace, null);
-		this.hidingPlace = hidingPlace;
+	public ActionStopHiding(Actor performer, HidingPlace target) {
+		super(ACTION_NAME, textureStopHiding, performer, target);
+		this.hidingPlace = target;
 		if (!check()) {
 			enabled = false;
 		}

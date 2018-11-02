@@ -28,7 +28,7 @@ public class ActionSellItems extends VariableQtyAction {
 	}
 
 	public ActionSellItems(Actor performer, Actor receiver, GameObject[] objects, boolean doesnothing) {
-		super(ACTION_NAME, textureSell, performer, receiver, null);
+		super(ACTION_NAME, textureSell, performer, receiver);
 
 		this.objects = objects;
 		this.receiver = receiver;

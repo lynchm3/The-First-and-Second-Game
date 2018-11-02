@@ -54,7 +54,7 @@ public class PopupMenuSelectAction extends PopupMenu {
 								Game.level.cameraFollow = true;
 							}
 							Player.playerTargetAction = action;
-							Player.playerTargetSquare = square;
+							// Player.playerTargetSquare = square;
 							Player.playerFirstMove = true;
 							return;
 						} else {

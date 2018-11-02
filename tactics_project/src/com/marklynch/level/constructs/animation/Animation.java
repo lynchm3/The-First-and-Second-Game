@@ -216,8 +216,7 @@ public abstract class Animation {
 
 		// Make player do wait animation at end of walk.
 		if (performer == Level.player) {
-			if (Player.playerPathToMove != null || Player.playerTargetSquare != null
-					|| Player.playerTargetAction != null || Player.playerTargetGameObject != null) {
+			if (Player.playerPathToMove != null || Player.playerTargetAction != null) {
 				return false;
 			}
 		}

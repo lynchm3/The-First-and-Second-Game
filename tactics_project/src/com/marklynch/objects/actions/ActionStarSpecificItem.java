@@ -8,16 +8,15 @@ public class ActionStarSpecificItem extends Action {
 
 	public static final String ACTION_NAME = "Star";
 
-	public ActionStarSpecificItem(GameObject object) {
-		super(ACTION_NAME, textureStar, null, object, null);
-		this.target = object;
+	public ActionStarSpecificItem(GameObject target) {
+		super(ACTION_NAME, textureStar, null, target);
 		if (!check()) {
 			enabled = false;
 		} else {
-			if (object.starred) {
-				actionName = "Unstar " + object.name;
+			if (target.starred) {
+				actionName = "Unstar " + target.name;
 			} else {
-				actionName = "Star " + object.name;
+				actionName = "Star " + target.name;
 			}
 		}
 		legal = checkLegality();

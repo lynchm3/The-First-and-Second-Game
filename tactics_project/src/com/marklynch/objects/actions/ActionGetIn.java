@@ -12,7 +12,7 @@ public class ActionGetIn extends Action {
 	// GameObject object;
 
 	public ActionGetIn(Actor performer, GameObject object) {
-		super(ACTION_NAME, textureDrop, performer, object, null);
+		super(ACTION_NAME, textureDrop, performer, object);
 		// super.gameObjectPerformer = this.performer = performer;
 		// this.object = object;
 		if (!check()) {

@@ -13,7 +13,7 @@ public class ActionInitiateTrade extends Action {
 	public static final String ACTION_NAME = "Trade";
 
 	public ActionInitiateTrade(Actor performer, Actor target) {
-		super(ACTION_NAME, textureEllipse, performer, target, null);
+		super(ACTION_NAME, textureEllipse, performer, target);
 		if (!check()) {
 			enabled = false;
 		}

@@ -1982,7 +1982,7 @@ public class Actor extends GameObject {
 				}
 			}
 
-			actions.add(new ActionPourContainerInInventory(performer, performer));
+			actions.add(new ActionPourContainerInInventory(performer, performer, null));
 			actions.add(new ActionIgnite(performer, this));
 
 			if (hiding) {
@@ -1993,7 +1993,7 @@ public class Actor extends GameObject {
 				if (hidingPlaceStandingOn != null)
 					actions.add(new ActionHide(this, hidingPlaceStandingOn));
 			}
-			actions.add(new ActionPin(performer, this));
+			actions.add(new ActionPin(performer, this, null));
 		} else {
 			// Talk
 			if (remainingHealth > 0 && this.getConversation() != null)
@@ -2435,31 +2435,6 @@ public class Actor extends GameObject {
 				actorPositionYInPixels += primaryAnimation.offsetY;
 			}
 			TextureUtils.drawTexture(Action.textureX, actorPositionXInPixels + Game.QUARTER_SQUARE_WIDTH,
-					actorPositionYInPixels + Game.QUARTER_SQUARE_WIDTH,
-					actorPositionXInPixels + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
-					actorPositionYInPixels + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
-		}
-
-	}
-
-	public void drawAction(Action action, boolean onMouse) {
-
-		if (onMouse) {
-			TextureUtils.drawTexture(action.image, 1f, UserInputLevel.mouseLastX + 16,
-					Game.windowHeight - UserInputLevel.mouseLastY + 16,
-					UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
-					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
-		} else {
-
-			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
-			if (primaryAnimation != null) {
-				actorPositionXInPixels += primaryAnimation.offsetX;
-				actorPositionYInPixels += primaryAnimation.offsetY;
-			}
-			TextureUtils.drawTexture(action.image, actorPositionXInPixels + Game.QUARTER_SQUARE_WIDTH,
 					actorPositionYInPixels + Game.QUARTER_SQUARE_WIDTH,
 					actorPositionXInPixels + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
 					actorPositionYInPixels + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);

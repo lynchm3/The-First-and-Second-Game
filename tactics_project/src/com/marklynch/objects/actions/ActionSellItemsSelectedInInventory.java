@@ -14,11 +14,10 @@ public class ActionSellItemsSelectedInInventory extends Action {
 	GameObject sellObject;
 	InventorySquare inventorySquare;
 
-	public ActionSellItemsSelectedInInventory(Actor performer, Actor buyer, GameObject sellObject) {
-		super(ACTION_NAME, textureSell, performer, buyer, null);
-		super.gameObjectPerformer = this.performer = performer;
+	public ActionSellItemsSelectedInInventory(Actor performer, Actor target, GameObject sellObject) {
+		super(ACTION_NAME, textureSell, performer, target);
 		this.sellObject = sellObject;
-		this.buyer = buyer;
+		this.buyer = target;
 		this.inventorySquare = sellObject.inventorySquare;
 
 		if (!check()) {

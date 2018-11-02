@@ -8,7 +8,6 @@ import com.marklynch.level.constructs.animation.primary.AnimationIgnite;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerIgnite;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Matches;
 import com.marklynch.objects.tools.FlammableLightSource;
@@ -19,22 +18,13 @@ public class ActionIgnite extends Action {
 
 	public static final String ACTION_NAME = "Ignite";
 
-	Actor performer;
-	Square targetSquare;
-	GameObject targetGameObject;
 	Object igniteMethod;
 
 	// Default for hostiles
-	public ActionIgnite(Actor performer, Object target) {
-		super(ACTION_NAME, textureBurn, performer, target, targetSquare);
+	public ActionIgnite(Actor performer, GameObject target) {
+		super(ACTION_NAME, textureBurn, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
-		if (target instanceof Square) {
-			targetSquare = (Square) target;
-			targetGameObject = targetSquare.inventory.gameObjectThatCantShareSquare;
-		} else if (target instanceof GameObject) {
-			targetGameObject = (GameObject) target;
-			targetSquare = targetGameObject.squareGameObjectIsOn;
-		}
+		this.targetSquare = target.squareGameObjectIsOn;
 		if (!check()) {
 			enabled = false;
 		}
@@ -52,9 +42,9 @@ public class ActionIgnite extends Action {
 		if (!checkRange())
 			return;
 
-		if (performer.squareGameObjectIsOn.xInGrid > targetGameObject.squareGameObjectIsOn.xInGrid) {
+		if (performer.squareGameObjectIsOn.xInGrid > target.squareGameObjectIsOn.xInGrid) {
 			performer.backwards = true;
-		} else if (performer.squareGameObjectIsOn.xInGrid < targetGameObject.squareGameObjectIsOn.xInGrid) {
+		} else if (performer.squareGameObjectIsOn.xInGrid < target.squareGameObjectIsOn.xInGrid) {
 			performer.backwards = false;
 		}
 
@@ -71,7 +61,7 @@ public class ActionIgnite extends Action {
 
 		// Melee weapons
 		performer.setPrimaryAnimation(
-				new AnimationIgnite(performer, targetGameObject, igniteMethodGameObject, new OnCompletionListener() {
+				new AnimationIgnite(performer, target, igniteMethodGameObject, new OnCompletionListener() {
 					@Override
 					public void animationComplete(GameObject gameObject) {
 						postAnimation();
@@ -81,11 +71,11 @@ public class ActionIgnite extends Action {
 
 	public void postAnimation() {
 
-		if (Game.level.shouldLog(targetGameObject, performer)) {
+		if (Game.level.shouldLog(target, performer)) {
 
-			if (targetGameObject != null) {
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { performer, " ignited ", targetGameObject, " with ", igniteMethod }));
+			if (target != null) {
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " ignited ", target, " with ", igniteMethod }));
 			} else {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ignited with ", igniteMethod }));
 
@@ -116,10 +106,10 @@ public class ActionIgnite extends Action {
 
 			Actor victim = null;
 
-			if (targetGameObject instanceof Actor)
-				victim = (Actor) targetGameObject;
-			else if (targetGameObject != null)
-				victim = targetGameObject.owner;
+			if (target instanceof Actor)
+				victim = (Actor) target;
+			else if (target != null)
+				victim = target.owner;
 			if (victim != null) {
 				Crime crime = new Crime(this, this.performer, victim, Crime.TYPE.CRIME_ARSON);
 				this.performer.crimesPerformedThisTurn.add(crime);
@@ -135,7 +125,7 @@ public class ActionIgnite extends Action {
 	@Override
 	public boolean check() {
 
-		if (targetSquare == null && targetGameObject == null)
+		if (targetSquare == null && target == null)
 			return false;
 
 		Object ignitionMethod = getIgnitionMethod();
@@ -189,7 +179,7 @@ public class ActionIgnite extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		boolean illegal = standardAttackLegalityCheck(performer, targetGameObject);
+		boolean illegal = standardAttackLegalityCheck(performer, target);
 		if (illegalReason == VANDALISM)
 			illegalReason = ARSON;
 		return illegal;

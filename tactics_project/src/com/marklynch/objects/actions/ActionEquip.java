@@ -19,7 +19,7 @@ public class ActionEquip extends Action {
 	ActionTakeItems actionTake;
 
 	public ActionEquip(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, textureEquip, performer, gameObject, null);
+		super(ACTION_NAME, textureEquip, performer, gameObject);
 		if (!Game.level.player.inventory.contains(gameObject)) {
 			actionTake = new ActionTakeItems(performer, gameObject.inventoryThatHoldsThisObject.parent, gameObject);
 

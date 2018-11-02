@@ -18,7 +18,7 @@ public class ActionTalk extends Action {
 	}
 
 	public ActionTalk(Actor performer, Actor target, Conversation conversation) {
-		super(ACTION_NAME, textureTalk, performer, target, null);
+		super(ACTION_NAME, textureTalk, performer, target);
 		this.conversation = conversation;
 		if (!check()) {
 			enabled = false;

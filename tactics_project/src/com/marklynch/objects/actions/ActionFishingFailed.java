@@ -16,7 +16,7 @@ public class ActionFishingFailed extends Action {
 
 	// Default for hostiles
 	public ActionFishingFailed(Actor attacker, GameObject target) {
-		super(ACTION_NAME, textureFishing, attacker, target, null);
+		super(ACTION_NAME, textureFishing, attacker, target);
 		if (!check()) {
 			enabled = false;
 		}

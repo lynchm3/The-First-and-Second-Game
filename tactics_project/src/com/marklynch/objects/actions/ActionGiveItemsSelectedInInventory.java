@@ -10,25 +10,23 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Give";
 	// GameObject receiver;
-	GameObject object;
+	GameObject objectToGive;
 	boolean logAsTake;
 	InventorySquare inventorySquare;
 
 	public ActionGiveItemsSelectedInInventory(GameObject performer, GameObject receiver, boolean logAsTake,
-			GameObject object) {
-		super(ACTION_NAME, textureGive, performer, receiver, null);
+			GameObject objectToGive) {
+		super(ACTION_NAME, textureGive, performer, receiver);
 		if (!(receiver instanceof Actor))
 			this.actionName = "Put";
-		super.gameObjectPerformer = this.gameObjectPerformer = performer;
-		// this.receiver = receiver;
 		this.logAsTake = logAsTake;
-		this.object = object;
-		this.inventorySquare = object.inventorySquare;
+		this.inventorySquare = objectToGive.inventorySquare;
+		this.objectToGive = objectToGive;
 
 		if (!check()) {
 			enabled = false;
 		} else {
-			actionName = ACTION_NAME + " " + object.name;
+			actionName = ACTION_NAME + " " + objectToGive.name;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -45,14 +43,14 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionGiveItems(gameObjectPerformer, target, logAsTake, object).perform();
+			new ActionGiveItems(gameObjectPerformer, target, logAsTake, objectToGive).perform();
 		} else {
 			String qtyString = "Enter qty to give (have: " + inventorySquare.stack.size() + ")";
 			if (!(target instanceof Actor)) {
 				qtyString = "Enter qty to put (have: " + +inventorySquare.stack.size() + ")";
 			}
 			Game.level.player.inventory.showQTYDialog(
-					new ActionGiveItems(gameObjectPerformer, target, logAsTake, object.inventorySquare.stack),
+					new ActionGiveItems(gameObjectPerformer, target, logAsTake, objectToGive.inventorySquare.stack),
 					inventorySquare.stack.size(), qtyString, 0);
 		}
 	}
