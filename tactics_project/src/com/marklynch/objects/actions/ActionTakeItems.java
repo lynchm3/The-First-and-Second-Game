@@ -125,7 +125,7 @@ public class ActionTakeItems extends VariableQtyAction {
 	@Override
 	public boolean check() {
 
-		if (objectsTotake.length == 0) {
+		if (objectsTotake.length == 0 || objectToTakeFrom == null) {
 			return false;
 		}
 

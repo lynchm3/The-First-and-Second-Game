@@ -61,16 +61,12 @@ public class Rail extends GameObject implements SwitchListener {
 
 	public void updateNeightborRails() {
 
-		System.out.println("updateNeightborRails " + this.squareGameObjectIsOn);
-
 		for (Direction direction : Direction.values()) {
 			Square neightborSquare = this.getSquareInDirection(direction);
-			System.out.println("neightborSquare " + neightborSquare);
 			if (neightborSquare == null)
 				continue;
 			Rail neighborRail = (Rail) neightborSquare.inventory.getGameObjectWithTemplateId(Templates.RAIL.templateId,
 					Templates.RAIL_INVISIBLE.templateId);
-			System.out.println("neighborRail " + neighborRail);
 			if (neighborRail == null)
 				continue;
 			neighborRail.updateImageTextures();
@@ -180,7 +176,6 @@ public class Rail extends GameObject implements SwitchListener {
 	}
 
 	public void updateImageTextures() {
-		System.out.println("updateImageTexture " + this.squareGameObjectIsOn);
 
 		if ((direction1 == Direction.LEFT || direction1 == Direction.RIGHT)
 				&& (direction2 == Direction.LEFT || direction2 == Direction.RIGHT)) {

@@ -1142,8 +1142,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionOpenOtherInventory(performer, this);
 		}
 
-		if (this.fitsInInventory)
+		if (this.fitsInInventory && !decorative) {
 			return new ActionTakeItems(performer, this.squareGameObjectIsOn, this);
+		}
 
 		return null;
 	}
@@ -1185,8 +1186,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// return new ActionOpenOtherInventory(performer, this);
 		// }
 
-		if (this.fitsInInventory)
+		if (this.fitsInInventory && !decorative) {
 			return new ActionTakeItems(performer, this.squareGameObjectIsOn, this);
+		}
 
 		return null;
 	}
