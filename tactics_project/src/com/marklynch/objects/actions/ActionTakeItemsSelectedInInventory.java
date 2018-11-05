@@ -11,15 +11,15 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 	public static final String ACTION_NAME = "Take";
 	public static final String ACTION_NAME_ILLEGAL = "Steal";
 	GameObject objectToTake;
+	Object objectToTakeFrom;
 	InventorySquare inventorySquare;
 
-	public ActionTakeItemsSelectedInInventory(Actor performer, Object target, GameObject objectToTake) {
+	public ActionTakeItemsSelectedInInventory(Actor performer, Object objectToTakeFrom, GameObject objectToTake) {
 
-		// public ActionTakeItems(Actor performer, Object target, GameObject
-		// object) {
-		super(ACTION_NAME, textureLeft, performer, target);
+		super(ACTION_NAME, textureLeft, performer, objectToTakeFrom);
 		super.gameObjectPerformer = this.performer = performer;
 		this.objectToTake = objectToTake;
+		this.objectToTakeFrom = objectToTakeFrom;
 		this.inventorySquare = objectToTake.inventorySquare;
 		if (!check()) {
 			enabled = false;
@@ -45,10 +45,11 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionTakeItems(performer, target, objectToTake).perform();
+
+			new ActionTakeItems(performer, objectToTakeFrom, objectToTake).perform();
 		} else {
 			Game.level.player.inventory.showQTYDialog(
-					new ActionTakeItems(performer, target, objectToTake.inventorySquare.stack),
+					new ActionTakeItems(performer, objectToTakeFrom, objectToTake.inventorySquare.stack),
 					inventorySquare.stack.size(), "Enter qty to take (available: " + inventorySquare.stack.size() + ")",
 					0);
 		}

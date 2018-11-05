@@ -19,12 +19,12 @@ public class ActionTakeItems extends VariableQtyAction {
 	GameObject[] objects;
 	Object objectToTakeFrom;
 
-	public ActionTakeItems(GameObject performer, Object target, ArrayList<GameObject> objects) {
-		this(performer, target, objects.toArray(new GameObject[objects.size()]), false);
+	public ActionTakeItems(GameObject performer, Object objectToTakeFrom, ArrayList<GameObject> objects) {
+		this(performer, objectToTakeFrom, objects.toArray(new GameObject[objects.size()]), false);
 	}
 
-	public ActionTakeItems(GameObject performer, Object target, GameObject... objects) {
-		this(performer, target, objects, false);
+	public ActionTakeItems(GameObject performer, Object objectToTakeFrom, GameObject... objects) {
+		this(performer, objectToTakeFrom, objects, false);
 	}
 
 	public ActionTakeItems(GameObject performer, Object objectToTakeFrom, GameObject[] objects, boolean doesnothing) {
@@ -125,12 +125,10 @@ public class ActionTakeItems extends VariableQtyAction {
 
 	@Override
 	public boolean check() {
-		System.out.println("ActionTakeItems a check()");
 
 		if (objects.length == 0) {
 			return false;
 		}
-		System.out.println("ActionTakeItems b check()");
 
 		// if (performer.inventory.contains(target)) {
 		// return false;
@@ -144,7 +142,6 @@ public class ActionTakeItems extends VariableQtyAction {
 				}
 			}
 		}
-		System.out.println("ActionTakeItems c check()");
 
 		// Check it's still on the same spot
 		if (targetSquare == objectToTakeFrom) {
@@ -154,7 +151,6 @@ public class ActionTakeItems extends VariableQtyAction {
 				}
 			}
 		}
-		System.out.println("ActionTakeItems d check()");
 
 		return true;
 	}
@@ -162,16 +158,13 @@ public class ActionTakeItems extends VariableQtyAction {
 	@Override
 	public boolean checkRange() {
 
-		System.out.println("ActionTakeItems a checkRange()");
 		if (targetSquare == objectToTakeFrom && performer.straightLineDistanceTo(targetSquare) < 2) {
 			return true;
 		}
 
-		System.out.println("ActionTakeItems b checkRange()");
 		if (target == objectToTakeFrom && performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;
 		}
-		System.out.println("ActionTakeItems c checkRange()");
 
 		return false;
 	}
