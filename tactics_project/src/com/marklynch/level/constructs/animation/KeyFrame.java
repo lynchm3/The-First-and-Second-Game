@@ -1,71 +1,72 @@
 package com.marklynch.level.constructs.animation;
 
+import com.marklynch.level.Level;
 import com.marklynch.objects.GameObject;
 
 public class KeyFrame {
 
-	public double keyFrameTimeMillis = 0;
+	public float keyFrameTimeMillis = 0;
 
-	public double offsetX = 0;
-	public double offsetY = 0;
+	public float offsetX = 0;
+	public float offsetY = 0;
 
-	public double torsoAngle = 0f;
-	public double leftShoulderAngle = 0f;
-	public double leftElbowAngle = 0f;
-	public double rightShoulderAngle = 0f;
-	public double rightElbowAngle = 0f;
+	public float torsoAngle = 0f;
+	public float leftShoulderAngle = 0f;
+	public float leftElbowAngle = 0f;
+	public float rightShoulderAngle = 0f;
+	public float rightElbowAngle = 0f;
 
-	public double leftHipAngle = 0;
-	public double leftKneeAngle = 0;
-	public double rightHipAngle = 0;
-	public double rightKneeAngle = 0;
+	public float leftHipAngle = 0;
+	public float leftKneeAngle = 0;
+	public float rightHipAngle = 0;
+	public float rightKneeAngle = 0;
 
-	public double scaleX = 1;
-	public double scaleY = 1;
+	public float scaleX = 1;
+	public float scaleY = 1;
 
-	public double alpha = 1f;
+	public float alpha = 1f;
 
 	// Arrow
 	public boolean drawArrowInOffHand = false;
 	public boolean drawArrowInMainHand = false;
-	public double arrowHandleY = 0;
+	public float arrowHandleY = 0;
 
 	public boolean drawEquipped = true;
 
 	// Bow string
 	public boolean drawBowString = false;
-	public double bowStringHandleY = 0;
+	public float bowStringHandleY = 0;
 
 	public int boundsX1 = -128;
 	public int boundsY1 = -128;
 	public int boundsX2 = 128;
 	public int boundsY2 = 128;
-	public double headToToeOffset = 0f;
+	public float headToToeOffset = 0f;
 
 	public boolean drawWeapon = true;
 
 	// Speeds
 	// public double speed = 1;
-	public double offsetXSpeed = 1;
-	public double offsetYSpeed = 1;
-	public double torsoAngleSpeed = 1;
-	public double leftShoulderAngleSpeed = 1;
-	public double leftElbowAngleSpeed = 1;
-	public double rightShoulderAngleSpeed = 1;
-	public double rightElbowAngleSpeed = 1;
-	public double scaleXSpeed = 1;
-	public double scaleYSpeed = 1;
-	public double leftHipAngleSpeed = 1;
-	public double leftKneeAngleSpeed = 1;
-	public double rightHipAngleSpeed = 1;
-	public double rightKneeAngleSpeed = 1;
+	public float offsetXSpeed = 1;
+	public float offsetYSpeed = 1;
+	public float torsoAngleSpeed = 1;
+	public float leftShoulderAngleSpeed = 1;
+	public float leftElbowAngleSpeed = 1;
+	public float rightShoulderAngleSpeed = 1;
+	public float rightElbowAngleSpeed = 1;
+	public float scaleXSpeed = 1;
+	public float scaleYSpeed = 1;
+	public float leftHipAngleSpeed = 1;
+	public float leftKneeAngleSpeed = 1;
+	public float rightHipAngleSpeed = 1;
+	public float rightKneeAngleSpeed = 1;
 
-	public double boundsX1Speed = 1;
-	public double boundsY1Speed = 1;
-	public double boundsX2Speed = 1;
-	public double boundsY2Speed = 1;
+	public float boundsX1Speed = 1;
+	public float boundsY1Speed = 1;
+	public float boundsX2Speed = 1;
+	public float boundsY2Speed = 1;
 
-	public double headToToeOffsetSpeed = 1;
+	public float headToToeOffsetSpeed = 1;
 
 	Animation animation;
 	GameObject performer;
@@ -152,6 +153,62 @@ public class KeyFrame {
 			animation.rightKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.rightKneeAngle,
 					rightKneeAngleSpeed * delta, rightKneeAngle);
 
+			if (performer == Level.player) {
+				System.out.println("============================================================");
+				System.out.println("animation.offsetX = " + animation.offsetX);
+				System.out.println("offsetX = " + offsetX);
+				System.out.println("animation.offsetY = " + animation.offsetY);
+				System.out.println("offsetY = " + offsetY);
+				System.out.println("animation.scaleX = " + animation.scaleX);
+				System.out.println("scaleX = " + scaleX);
+				System.out.println("animation.boundsX1 = " + animation.boundsX1);
+				System.out.println("boundsX1 = " + boundsX1);
+				System.out.println("animation.boundsY1 = " + animation.boundsY1);
+				System.out.println("boundsY1 = " + boundsY1);
+				System.out.println("animation.boundsX2 = " + animation.boundsX2);
+				System.out.println("boundsX2 = " + boundsX2);
+				System.out.println("animation.boundsY2 = " + animation.boundsY2);
+				System.out.println("offsetY = " + boundsY2);
+				System.out.println("animation.headToToeOffset = " + animation.headToToeOffset);
+				System.out.println("headToToeOffset = " + headToToeOffset);
+				System.out.println("animation.torsoAngle = " + animation.torsoAngle);
+				System.out.println("torsoAngle = " + torsoAngle);
+				System.out.println("animation.leftShoulderAngle = " + animation.leftShoulderAngle);
+				System.out.println("leftShoulderAngle = " + leftShoulderAngle);
+				System.out.println("animation.rightShoulderAngle = " + animation.rightShoulderAngle);
+				System.out.println("rightShoulderAngle = " + rightShoulderAngle);
+				System.out.println("animation.leftElbowAngle = " + animation.leftElbowAngle);
+				System.out.println("leftElbowAngle = " + leftElbowAngle);
+				System.out.println("animation.rightElbowAngle = " + animation.rightElbowAngle);
+				System.out.println("rightElbowAngle = " + rightElbowAngle);
+				System.out.println("animation.leftHipAngle = " + animation.leftHipAngle);
+				System.out.println("leftHipAngle = " + leftHipAngle);
+				System.out.println("animation.rightHipAngle = " + animation.rightHipAngle);
+				System.out.println("rightHipAngle = " + rightHipAngle);
+				System.out.println("animation.leftKneeAngle = " + animation.leftKneeAngle);
+				System.out.println("leftKneeAngle = " + leftKneeAngle);
+				System.out.println("animation.rightKneeAngle = " + animation.rightKneeAngle);
+				System.out.println("rightKneeAngle = " + rightKneeAngle);
+
+				System.out.println("" + (animation.offsetX == offsetX));
+				System.out.println("" + (animation.offsetY == offsetY));
+				System.out.println("" + (animation.scaleX == scaleX));
+				System.out.println("" + (animation.boundsX1 == boundsX1));
+				System.out.println("" + (animation.boundsY1 == boundsY1));
+				System.out.println("" + (animation.boundsX2 == boundsX2));
+				System.out.println("" + (animation.boundsY2 == boundsY2));
+				System.out.println("" + (animation.headToToeOffset == headToToeOffset));
+				System.out.println("" + (animation.torsoAngle == torsoAngle));
+				System.out.println("" + (animation.leftShoulderAngle == leftShoulderAngle));
+				System.out.println("" + (animation.rightShoulderAngle == rightShoulderAngle));
+				System.out.println("" + (animation.leftElbowAngle == leftElbowAngle));
+				System.out.println("" + (animation.rightElbowAngle == rightElbowAngle));
+				System.out.println("" + (animation.leftHipAngle == leftHipAngle));
+				System.out.println("" + (animation.rightHipAngle == rightHipAngle));
+				System.out.println("" + (animation.leftKneeAngle == leftKneeAngle));
+				System.out.println("" + (animation.rightKneeAngle == rightKneeAngle));
+			}
+
 			if (animation.offsetX == offsetX //
 					&& animation.offsetY == offsetY //
 					&& animation.scaleX == scaleX //
@@ -170,6 +227,10 @@ public class KeyFrame {
 					&& animation.leftKneeAngle == leftKneeAngle//
 					&& animation.rightKneeAngle == rightKneeAngle//
 			) {
+
+				if (performer == Level.player) {
+					System.out.println("SETTING DONE TO TRUE!");
+				}
 				done = true;
 			}
 		} else {// BACKWARDS
@@ -222,7 +283,7 @@ public class KeyFrame {
 
 	}
 
-	public void setAllSpeeds(double d) {
+	public void setAllSpeeds(float d) {
 		offsetXSpeed = offsetYSpeed = torsoAngleSpeed//
 				= leftShoulderAngleSpeed = leftElbowAngleSpeed//
 						= rightShoulderAngleSpeed = rightElbowAngleSpeed//
@@ -236,25 +297,25 @@ public class KeyFrame {
 		if (!normaliseSpeeds)
 			return;
 
-		double distanceToCoverOffsetX = Math.abs(animation.offsetX - offsetX);
-		double distanceToCoverOffsetY = Math.abs(animation.offsetY - offsetY);
-		double distanceToCoverscaleX = Math.abs(animation.scaleX - scaleX);
-		double distanceToCoverscaleY = Math.abs(animation.scaleY - scaleY);
-		double distanceToCoverboundsX1 = Math.abs(animation.boundsX1 - boundsX1);
-		double distanceToCoverboundsY1 = Math.abs(animation.boundsY1 - boundsY1);
-		double distanceToCoverboundsX2 = Math.abs(animation.boundsX2 - boundsX2);
-		double distanceToCoverboundsY2 = Math.abs(animation.boundsY2 - boundsY2);
-		double distanceToCoverHeadToToeOffset = Math.abs(animation.headToToeOffset - headToToeOffset);
+		float distanceToCoverOffsetX = Math.abs(animation.offsetX - offsetX);
+		float distanceToCoverOffsetY = Math.abs(animation.offsetY - offsetY);
+		float distanceToCoverscaleX = Math.abs(animation.scaleX - scaleX);
+		float distanceToCoverscaleY = Math.abs(animation.scaleY - scaleY);
+		float distanceToCoverboundsX1 = Math.abs(animation.boundsX1 - boundsX1);
+		float distanceToCoverboundsY1 = Math.abs(animation.boundsY1 - boundsY1);
+		float distanceToCoverboundsX2 = Math.abs(animation.boundsX2 - boundsX2);
+		float distanceToCoverboundsY2 = Math.abs(animation.boundsY2 - boundsY2);
+		float distanceToCoverHeadToToeOffset = Math.abs(animation.headToToeOffset - headToToeOffset);
 
-		double distanceToCovertorsoAngle;
-		double distanceToCoverleftShoulderAngle;
-		double distanceToCoverrightShoulderAngle;
-		double distanceToCoverleftElbowAngle;
-		double distanceToCoverrightElbowAngle;
-		double distanceToCoverleftHipAngle;
-		double distanceToCoverrightHipAngle;
-		double distanceToCoverleftKneeAngle;
-		double distanceToCoverrightKneeAngle;
+		float distanceToCovertorsoAngle;
+		float distanceToCoverleftShoulderAngle;
+		float distanceToCoverrightShoulderAngle;
+		float distanceToCoverleftElbowAngle;
+		float distanceToCoverrightElbowAngle;
+		float distanceToCoverleftHipAngle;
+		float distanceToCoverrightHipAngle;
+		float distanceToCoverleftKneeAngle;
+		float distanceToCoverrightKneeAngle;
 
 		if (!animation.backwards) {
 			distanceToCovertorsoAngle = Math.abs(animation.torsoAngle - torsoAngle);
@@ -316,33 +377,33 @@ public class KeyFrame {
 		if (!normaliseSpeeds)
 			return;
 
-		double millisToCompleteOffsetX = Math.abs(animation.offsetX - offsetX) / Math.abs(offsetXSpeed);
-		double millisToCompleteOffsetY = Math.abs(animation.offsetY - offsetY) / Math.abs(offsetYSpeed);
-		double millisToCompletescaleX = Math.abs(animation.scaleX - scaleX) / Math.abs(scaleXSpeed);
-		double millisToCompletescaleY = Math.abs(animation.scaleY - scaleY) / Math.abs(scaleYSpeed);
-		double millisToCompleteboundsX1 = Math.abs(animation.boundsX1 - boundsX1) / Math.abs(boundsX1Speed);
-		double millisToCompleteboundsY1 = Math.abs(animation.boundsY1 - boundsY1) / Math.abs(boundsY1Speed);
-		double millisToCompleteboundsX2 = Math.abs(animation.boundsX2 - boundsX2) / Math.abs(boundsX2Speed);
-		double millisToCompleteboundsY2 = Math.abs(animation.boundsY2 - boundsY2) / Math.abs(boundsY2Speed);
-		double millisToCompletetorsoAngle = Math.abs(animation.torsoAngle - torsoAngle) / Math.abs(torsoAngleSpeed);
-		double millisToCompleteleftShoulderAngle = Math.abs(animation.leftShoulderAngle - leftShoulderAngle)
+		float millisToCompleteOffsetX = Math.abs(animation.offsetX - offsetX) / Math.abs(offsetXSpeed);
+		float millisToCompleteOffsetY = Math.abs(animation.offsetY - offsetY) / Math.abs(offsetYSpeed);
+		float millisToCompletescaleX = Math.abs(animation.scaleX - scaleX) / Math.abs(scaleXSpeed);
+		float millisToCompletescaleY = Math.abs(animation.scaleY - scaleY) / Math.abs(scaleYSpeed);
+		float millisToCompleteboundsX1 = Math.abs(animation.boundsX1 - boundsX1) / Math.abs(boundsX1Speed);
+		float millisToCompleteboundsY1 = Math.abs(animation.boundsY1 - boundsY1) / Math.abs(boundsY1Speed);
+		float millisToCompleteboundsX2 = Math.abs(animation.boundsX2 - boundsX2) / Math.abs(boundsX2Speed);
+		float millisToCompleteboundsY2 = Math.abs(animation.boundsY2 - boundsY2) / Math.abs(boundsY2Speed);
+		float millisToCompletetorsoAngle = Math.abs(animation.torsoAngle - torsoAngle) / Math.abs(torsoAngleSpeed);
+		float millisToCompleteleftShoulderAngle = Math.abs(animation.leftShoulderAngle - leftShoulderAngle)
 				/ Math.abs(leftShoulderAngleSpeed);
-		double millisToCompleterightShoulderAngle = Math.abs(animation.rightShoulderAngle - rightShoulderAngle)
+		float millisToCompleterightShoulderAngle = Math.abs(animation.rightShoulderAngle - rightShoulderAngle)
 				/ Math.abs(rightShoulderAngleSpeed);
-		double millisToCompleteleftElbowAngle = Math.abs(animation.leftElbowAngle - leftElbowAngle)
+		float millisToCompleteleftElbowAngle = Math.abs(animation.leftElbowAngle - leftElbowAngle)
 				/ Math.abs(leftElbowAngleSpeed);
-		double millisToCompleterightElbowAngle = Math.abs(animation.rightElbowAngle - rightElbowAngle)
+		float millisToCompleterightElbowAngle = Math.abs(animation.rightElbowAngle - rightElbowAngle)
 				/ Math.abs(rightElbowAngleSpeed);
-		double millisToCompleteleftHipAngle = Math.abs(animation.leftHipAngle - leftHipAngle)
+		float millisToCompleteleftHipAngle = Math.abs(animation.leftHipAngle - leftHipAngle)
 				/ Math.abs(leftHipAngleSpeed);
-		double millisToCompleterightHipAngle = Math.abs(animation.rightHipAngle - rightHipAngle)
+		float millisToCompleterightHipAngle = Math.abs(animation.rightHipAngle - rightHipAngle)
 				/ Math.abs(rightHipAngleSpeed);
-		double millisToCompleteleftKneeAngle = Math.abs(animation.leftKneeAngle - leftKneeAngle)
+		float millisToCompleteleftKneeAngle = Math.abs(animation.leftKneeAngle - leftKneeAngle)
 				/ Math.abs(leftKneeAngleSpeed);
-		double millisToCompleterightKneeAngle = Math.abs(animation.rightKneeAngle - rightKneeAngle)
+		float millisToCompleterightKneeAngle = Math.abs(animation.rightKneeAngle - rightKneeAngle)
 				/ Math.abs(rightKneeAngleSpeed);
 
-		double maxMillis = getMax(millisToCompleteOffsetX, millisToCompleteOffsetY, millisToCompletescaleX,
+		float maxMillis = getMax(millisToCompleteOffsetX, millisToCompleteOffsetY, millisToCompletescaleX,
 				millisToCompletescaleY, millisToCompleteboundsX1, millisToCompleteboundsY1, millisToCompleteboundsX2,
 				millisToCompleteboundsY2, millisToCompletetorsoAngle, millisToCompleteleftShoulderAngle,
 				millisToCompleterightShoulderAngle, millisToCompleteleftElbowAngle, millisToCompleterightElbowAngle,
@@ -410,12 +471,12 @@ public class KeyFrame {
 
 	}
 
-	public double getMax(double... values) {
+	public float getMax(float... values) {
 
 		if (values == null || values.length == 0)
-			return Double.MIN_VALUE;
+			return Float.MIN_VALUE;
 
-		double currentMax = values[0];
+		float currentMax = values[0];
 
 		for (int i = 1; i < values.length; i++) {
 			currentMax = Math.max(currentMax, values[i]);

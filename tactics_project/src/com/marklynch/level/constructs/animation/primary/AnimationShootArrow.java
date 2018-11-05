@@ -48,7 +48,7 @@ public abstract class AnimationShootArrow extends Animation {
 		arrowHandleY = 24;
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
-		kf0.setAllSpeeds(0.004);
+		kf0.setAllSpeeds(0.004f);
 		kf0.rightShoulderAngle = -1.57f;
 		kf0.rightElbowAngle = 0f;
 		kf0.leftShoulderAngle = -1.57f;
@@ -57,7 +57,7 @@ public abstract class AnimationShootArrow extends Animation {
 		keyFrames.add(kf0);
 
 		KeyFrame kf1 = new KeyFrame(performer, this);
-		kf1.setAllSpeeds(0.004);
+		kf1.setAllSpeeds(0.004f);
 		kf1.bowStringHandleY = -8;
 		kf1.arrowHandleY = 44;// 12 + 26;
 		kf1.drawArrowInOffHand = false;
@@ -69,7 +69,7 @@ public abstract class AnimationShootArrow extends Animation {
 		keyFrames.add(kf1);
 
 		kf2 = new KeyFrame(performer, this);
-		kf2.setAllSpeeds(0.004);
+		kf2.setAllSpeeds(0.004f);
 		kf2.bowStringHandleY = 0;
 		kf2.drawArrowInOffHand = false;
 		kf2.drawArrowInMainHand = false;
@@ -80,7 +80,7 @@ public abstract class AnimationShootArrow extends Animation {
 		keyFrames.add(kf2);
 
 		KeyFrame kf3 = new KeyFrame(performer, this);
-		kf3.setAllSpeeds(0.004);
+		kf3.setAllSpeeds(0.004f);
 		kf3.drawArrowInOffHand = false;
 		kf3.drawArrowInMainHand = false;
 		kf3.rightShoulderAngle = 0;

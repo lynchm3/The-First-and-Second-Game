@@ -36,8 +36,8 @@ import mdesl.test.Util;
 
 public class Game {
 
-	public static final double MINIMUM_TURN_TIME_PLAYER = 500d; // ms
-	public static final double MINIMUM_TURN_TIME_NON_PLAYER = 500d; // ms
+	public static final float MINIMUM_TURN_TIME_PLAYER = 500f; // ms
+	public static final float MINIMUM_TURN_TIME_NON_PLAYER = 500f; // ms
 
 	public static int includableInPath;
 	public static int findPath;

@@ -22,7 +22,7 @@ public class AnimationHandsUp extends Animation {
 		blockAI = true;
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
-		kf0.setAllSpeeds(0.004);
+		kf0.setAllSpeeds(0.004f);
 		kf0.leftShoulderAngle = targetLeftArmAngle;
 		kf0.rightShoulderAngle = targetRightArmAngle;
 		keyFrames.add(kf0);

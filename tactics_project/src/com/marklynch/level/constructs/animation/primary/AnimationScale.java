@@ -23,8 +23,8 @@ public class AnimationScale extends Animation {
 		KeyFrame kf0 = new KeyFrame(performer, this);
 		kf0.scaleX = end;
 		kf0.scaleY = end;
-		kf0.scaleXSpeed = 0.0001d;
-		kf0.scaleYSpeed = 0.0001d;
+		kf0.scaleXSpeed = 0.0001f;
+		kf0.scaleYSpeed = 0.0001f;
 		keyFrames.add(kf0);
 
 	}

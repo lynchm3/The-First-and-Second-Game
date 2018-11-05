@@ -54,7 +54,7 @@ public class AnimationPush extends Animation {
 		kf0.rightHipAngle = 0;
 		kf0.leftKneeAngle = 0;
 		kf0.rightKneeAngle = 0;
-		kf0.setAllSpeeds(0.02d);
+		kf0.setAllSpeeds(0.02f);
 		kf0.offsetXSpeed = 1;
 		kf0.offsetYSpeed = 1;
 		keyFrames.add(kf0);

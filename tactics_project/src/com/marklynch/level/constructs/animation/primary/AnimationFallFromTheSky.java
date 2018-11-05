@@ -37,10 +37,10 @@ public class AnimationFallFromTheSky extends Animation {
 
 		kf0.offsetY = 0;
 
-		kf0.setAllSpeeds(0.004d);
+		kf0.setAllSpeeds(0.004f);
 		kf0.offsetYSpeed = 1;
-		kf0.scaleXSpeed = 0.001;
-		kf0.scaleYSpeed = 0.001;
+		kf0.scaleXSpeed = 0.001f;
+		kf0.scaleYSpeed = 0.001f;
 
 		keyFrames.add(kf0);
 	}

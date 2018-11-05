@@ -28,12 +28,12 @@ public class AnimationIgnite extends Animation {
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
 		kf0.rightShoulderAngle = (float) Math.toRadians(-45);
-		kf0.setAllSpeeds(0.001d);
+		kf0.setAllSpeeds(0.001f);
 		keyFrames.add(kf0);
 
 		KeyFrame kf1 = new KeyFrame(performer, this);
 		kf1.rightShoulderAngle = (float) Math.toRadians(0);
-		kf1.setAllSpeeds(0.005d);
+		kf1.setAllSpeeds(0.005f);
 		keyFrames.add(kf1);
 
 		blockAI = true;

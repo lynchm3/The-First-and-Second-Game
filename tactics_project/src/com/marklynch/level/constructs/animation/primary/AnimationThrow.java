@@ -44,7 +44,7 @@ public class AnimationThrow extends Animation {
 		blockAI = true;
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
-		kf0.setAllSpeeds(0.004);
+		kf0.setAllSpeeds(0.004f);
 		kf0.rightShoulderAngle = -2.25f;
 		kf0.rightElbowAngle = -2.25f;
 		kf0.leftShoulderAngle = 0;
@@ -52,7 +52,7 @@ public class AnimationThrow extends Animation {
 		keyFrames.add(kf0);
 
 		KeyFrame kf1 = new KeyFrame(performer, this);
-		kf1.setAllSpeeds(0.004);
+		kf1.setAllSpeeds(0.004f);
 		kf1.rightShoulderAngle = 0;
 		kf1.rightElbowAngle = 0;
 		kf1.leftShoulderAngle = 0;

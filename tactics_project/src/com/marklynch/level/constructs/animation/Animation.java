@@ -271,7 +271,7 @@ public abstract class Animation {
 
 	public void swapLegs() {
 		for (KeyFrame keyFrame : keyFrames) {
-			double temp = keyFrame.leftKneeAngle;
+			float temp = keyFrame.leftKneeAngle;
 			keyFrame.leftKneeAngle = keyFrame.rightKneeAngle;
 			keyFrame.rightKneeAngle = temp;
 

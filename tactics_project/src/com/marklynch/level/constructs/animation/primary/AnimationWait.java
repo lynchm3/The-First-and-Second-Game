@@ -18,19 +18,21 @@ public class AnimationWait extends Animation {
 		kf0.torsoAngle = 0;
 		kf0.leftElbowAngle = 0;
 		kf0.rightElbowAngle = 0;
-		kf0.leftShoulderAngle = -0;
-		kf0.rightShoulderAngle = -0;
-		kf0.leftHipAngle = -0;
-		kf0.rightHipAngle = -0;
+		kf0.leftShoulderAngle = 0;
+		kf0.rightShoulderAngle = 0;
+		kf0.leftHipAngle = 0;
+		kf0.rightHipAngle = 0;
 		kf0.leftKneeAngle = 0;
 		kf0.rightKneeAngle = 0;
 		kf0.offsetY = 0;
 		kf0.headToToeOffset = 0f;
+
 		if (performer == Level.player) {
 			kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER;
 		} else {
 			kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_NON_PLAYER;
 		}
+
 		if (performer.hiding) {
 			kf0.leftHipAngle = -1.1f;
 			kf0.rightHipAngle = -1.1f;
@@ -41,9 +43,10 @@ public class AnimationWait extends Animation {
 			// kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME;
 		}
 
+		// "idle animation"
 		if (this.leftShoulderAngle == 0 && this.rightShoulderAngle == 0) {
-			kf0.leftShoulderAngle = 1d;
-			kf0.rightShoulderAngle = -1d;
+			kf0.leftShoulderAngle = 0.1f;
+			kf0.rightShoulderAngle = -0.1f;
 		}
 
 		// kf0.setAllSpeeds(0.004d);

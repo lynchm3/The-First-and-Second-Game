@@ -27,7 +27,7 @@ public class AnimationStraightLine extends Animation {
 		this.x = performer.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
 		this.y = performer.squareGameObjectIsOn.yInGridPixels;// shooter.getCenterY();
 
-		double keyFrameTimeMillis = 0d;
+		float keyFrameTimeMillis = 0f;
 
 		if (performer == Level.player) {
 			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER;

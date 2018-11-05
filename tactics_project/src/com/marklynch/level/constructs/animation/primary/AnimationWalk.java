@@ -9,7 +9,7 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationWalk extends Animation {
 
-	public double keyFrameTimeMillis = 0; // There's 4 keyframes per walk
+	public float keyFrameTimeMillis = 0; // There's 4 keyframes per walk
 
 	public Square startSquare;
 	public Square endSquare;
@@ -112,9 +112,9 @@ public class AnimationWalk extends Animation {
 		if (!runAnimation)
 			return;
 		if (performer == Level.player) {
-			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER / 4d;
+			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER / 4f;
 		} else {
-			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_NON_PLAYER / 4d;
+			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_NON_PLAYER / 4f;
 		}
 
 		quarterDurationToReach = durationToReachMillis / 4;
