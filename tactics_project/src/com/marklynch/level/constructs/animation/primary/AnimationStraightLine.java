@@ -14,7 +14,7 @@ public class AnimationStraightLine extends Animation {
 	float angle = 0;
 	float rotationSpeed = 0;
 
-	public AnimationStraightLine(GameObject performer, float speed, boolean blockAI, double delay,
+	public AnimationStraightLine(GameObject performer, float time, boolean blockAI, double delay,
 			OnCompletionListener onCompletionListener, Square... targetSquares) {
 
 		super(performer, onCompletionListener, targetSquares, null, null, null, null, null, performer,
@@ -27,13 +27,7 @@ public class AnimationStraightLine extends Animation {
 		this.x = performer.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
 		this.y = performer.squareGameObjectIsOn.yInGridPixels;// shooter.getCenterY();
 
-		float keyFrameTimeMillis = 0f;
-
-		if (performer == Level.player) {
-			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER;
-		} else {
-			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_NON_PLAYER;
-		}
+		float keyFrameTimeMillis = time;
 
 		this.blockAI = blockAI;
 		if (!blockAI) {

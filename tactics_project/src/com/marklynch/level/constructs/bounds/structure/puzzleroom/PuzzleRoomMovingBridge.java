@@ -255,7 +255,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	Point focalPoint = new Point(focalPointX, focalPointY);
 
 	public void move(final GameObject gameObject, final Square... targetSquares1) {
-		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 1f, true, 0f, null, targetSquares1));
+		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 2000f, true, 0f, null, targetSquares1));
 
 	}
 

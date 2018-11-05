@@ -70,7 +70,8 @@ public class PuzzleRoomFallawayFloor extends StructureRoom implements SwitchList
 			// final GameObject floor = square.inventory.getGameObjectOfClass(Floor.class);
 			final Square targetSquare = Level.squares[posX + xOffsetThatSquaresFallawayTo][square.yInGrid];
 			for (final GameObject gameObject : (ArrayList<GameObject>) square.inventory.gameObjects.clone()) {
-				gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 1f, true, 0f, null, targetSquare));
+				gameObject.setPrimaryAnimation(
+						new AnimationStraightLine(gameObject, 2000f, true, 0f, null, targetSquare));
 			}
 			square.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 			square.imageTexture = Square.VOID_SQUARE;

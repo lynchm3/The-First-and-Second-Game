@@ -91,8 +91,8 @@ public class PowerDash extends Power {
 			// if (pushedObject.gameObject != source)
 			// delay = 32f;
 
-			pushedObject.gameObject.setPrimaryAnimation(new AnimationStraightLine(pushedObject.gameObject, speed, true,
-					delay, null, new Square[] { pushedObject.destinationSquare }));
+			pushedObject.gameObject.setPrimaryAnimation(new AnimationStraightLine(pushedObject.gameObject,
+					Game.MINIMUM_TURN_TIME_PLAYER, true, delay, null, new Square[] { pushedObject.destinationSquare }));
 
 			previousDelay = delay;
 			previousPushedObject = pushedObject;
