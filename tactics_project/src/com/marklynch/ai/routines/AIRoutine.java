@@ -1289,7 +1289,7 @@ public abstract class AIRoutine {
 
 		ArrayList<Integer> equipmentNeeded = new ArrayList<Integer>();
 		for (int requiredTemplateId : actor.requiredEquipmentTemplateIds) {
-			if (!actor.inventory.containsObjectWithTemplateId(requiredTemplateId)) {
+			if (!actor.inventory.containsGameObjectWithTemplateId(requiredTemplateId)) {
 				equipmentNeeded.add(requiredTemplateId);
 			}
 		}
@@ -1330,7 +1330,7 @@ public abstract class AIRoutine {
 
 			equipmentNeeded.clear();
 			for (int requiredTemplateId : actor.requiredEquipmentTemplateIds) {
-				if (!actor.inventory.containsObjectWithTemplateId(requiredTemplateId)) {
+				if (!actor.inventory.containsGameObjectWithTemplateId(requiredTemplateId)) {
 					equipmentNeeded.add(requiredTemplateId);
 				}
 			}

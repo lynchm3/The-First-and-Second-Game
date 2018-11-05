@@ -3,6 +3,7 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.utils.Texture;
@@ -51,9 +52,25 @@ public class Rail extends GameObject implements SwitchListener {
 		rail.direction1 = direction1;
 		rail.direction2 = direction2;
 
-		rail.updateImageTexture();
+		rail.updateImageTextures();
+
+		rail.updateNeightborRails();
 
 		return rail;
+	}
+
+	public void updateNeightborRails() {
+
+		for (Direction direction : Direction.values()) {
+			Square square = this.getSquareInDirection(direction);
+			if (square == null)
+				continue;
+			Rail rail = (Rail) square.inventory.getGameObjectWithTemplateId(Templates.RAIL.templateId,
+					Templates.RAIL_INVISIBLE.templateId);
+			if (rail == null)
+				continue;
+			rail.updateImageTextures();
+		}
 	}
 
 	@Override
@@ -125,7 +142,8 @@ public class Rail extends GameObject implements SwitchListener {
 		}
 
 		this.showPow();
-		updateImageTexture();
+		updateImageTextures();
+		updateNeightborRails();
 
 	}
 
@@ -157,7 +175,7 @@ public class Rail extends GameObject implements SwitchListener {
 
 	}
 
-	public void updateImageTexture() {
+	public void updateImageTextures() {
 
 		if ((direction1 == Direction.LEFT || direction1 == Direction.RIGHT)
 				&& (direction2 == Direction.LEFT || direction2 == Direction.RIGHT)) {
@@ -242,6 +260,9 @@ public class Rail extends GameObject implements SwitchListener {
 	}
 
 	public Square getSquareInDirection(Direction direction) {
+
+		if (this.squareGameObjectIsOn == null)
+			return null;
 
 		if (direction == Direction.RIGHT) {
 			return this.squareGameObjectIsOn.getSquareToRightOf();

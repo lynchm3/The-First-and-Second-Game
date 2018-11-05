@@ -167,9 +167,9 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		for (int i = posX; i < posX + totalWidthInSquares; i++) {
 
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
-				if (Level.squares[i][j].inventory.containsObjectWithTemplateId(Templates.STONE_FLOOR.templateId)) {
+				if (Level.squares[i][j].inventory.containsGameObjectWithTemplateId(Templates.STONE_FLOOR.templateId)) {
 				} else if (!Level.squares[i][j].inventory
-						.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
+						.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 					Level.squares[i][j].inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
 			}
@@ -198,7 +198,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		if (bridgeVertical) {
 
 			for (Square newSquare : verticalBridgeSquares) {
-				newSquare.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
+				newSquare.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 
 			for (int i = 0; i < horizontalBridgeSquares.size(); i++) {
@@ -217,14 +217,14 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 
 			for (Square oldSquare : horizontalBridgeSquares) {
-				if (!oldSquare.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
+				if (!oldSquare.inventory.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
 			}
 		} else {
 
 			for (Square newSquare : horizontalBridgeSquares) {
-				newSquare.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
+				newSquare.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 
 			for (int i = 0; i < verticalBridgeSquares.size(); i++) {
@@ -243,7 +243,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 
 			for (Square oldSquare : verticalBridgeSquares) {
-				if (!oldSquare.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
+				if (!oldSquare.inventory.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
 					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
 			}
@@ -266,7 +266,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			// left
 
 			square = Level.squares[posX][posY + gapsWidth + i];
-			square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
+			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			square.imageTexture = Square.GRASS_TEXTURE;
 			// if
 			// (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId))
@@ -277,7 +277,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			// Level.squares[posX][posY + gapsWidth + i].passable = true;
 			// right
 			square = Level.squares[posX + totalWidthInSquares - 1][posY + gapsWidth + i];
-			square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
+			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			square.imageTexture = Square.GRASS_TEXTURE;
 			// square.imageTexture = Square.STONE_TEXTURE;
 			// if
@@ -289,7 +289,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			// = true;
 			// top
 			square = Level.squares[posX + gapsWidth + i][posY];
-			square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
+			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			square.imageTexture = Square.GRASS_TEXTURE;
 			// square.imageTexture = Square.STONE_TEXTURE;
 			// if
@@ -300,7 +300,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			// Level.squares[posX + gapsWidth + i][posY].passable = true;
 			// bottom
 			square = Level.squares[posX + gapsWidth + i][posY + totalHeightInSquares - 1];
-			square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
+			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			square.imageTexture = Square.GRASS_TEXTURE;
 			// square.imageTexture = Square.STONE_TEXTURE;
 			// if

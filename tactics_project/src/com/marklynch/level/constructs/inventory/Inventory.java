@@ -1068,7 +1068,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return false;
 	}
 
-	public boolean containsObjectWithTemplateId(int id) {
+	public boolean containsGameObjectWithTemplateId(int id) {
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.templateId == id) {
 				return true;
@@ -1077,7 +1077,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return false;
 	}
 
-	public void removeObjecstWithTemplateId(int id) {
+	public void removeGameObjecstWithTemplateId(int id) {
 		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.templateId == id) {
@@ -1089,10 +1089,21 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 	}
 
-	public GameObject getObjectWithTemplateId(int id) {
+	public GameObject getGameObjectWithTemplateId(int id) {
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.templateId == id) {
 				return gameObject;
+			}
+		}
+		return null;
+	}
+
+	public GameObject getGameObjectWithTemplateId(int... ids) {
+		for (GameObject gameObject : gameObjects) {
+			for (int id : ids) {
+				if (gameObject.templateId == id) {
+					return gameObject;
+				}
 			}
 		}
 		return null;
