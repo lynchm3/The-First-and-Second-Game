@@ -1692,6 +1692,11 @@ public class Level {
 			return;
 		} else if (Game.level.player.playerTargetAction != null && Game.level.player.playerTargetAction.checkRange()
 				&& !Game.level.player.playerTargetAction.recheck()) {
+			if (Game.level.player.playerTargetAction.disabledReason != null) {
+				Game.level.addNotification(
+						new Notification(new Object[] { Game.level.player.playerTargetAction.disabledReason },
+								Notification.NotificationType.ACTION_DISABLED, null));
+			}
 			pausePlayer();
 			return;
 
