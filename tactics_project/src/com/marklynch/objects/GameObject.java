@@ -1765,16 +1765,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		boolean fullyResisted = true;
 		for (HIGH_LEVEL_STATS offensiveStat : Stat.OFFENSIVE_STATS) {
 
-			// System.out.println("effectToAdd.highLevelStats.get(offensiveStat).value = "
-			// + effectToAdd.highLevelStats.get(offensiveStat).value);
-			// System.out
-			// .println("this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(offensiveStat)).value
-			// = "
-			// +
-			// this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(offensiveStat)).value);
-
-			// if (effectToAdd.highLevelStats.get(offensiveStat).value == 0)
-			// continue;
+			if (effectToAdd.highLevelStats.get(offensiveStat).value == 0)
+				continue;
 
 			if (this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(offensiveStat)).value == 100)
 				continue;

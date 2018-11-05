@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.animation;
 
-import com.marklynch.level.Level;
 import com.marklynch.objects.GameObject;
 
 public class KeyFrame {
@@ -153,62 +152,6 @@ public class KeyFrame {
 			animation.rightKneeAngle = animation.moveTowardsTargetAngleInRadians(animation.rightKneeAngle,
 					rightKneeAngleSpeed * delta, rightKneeAngle);
 
-			if (performer == Level.player) {
-				System.out.println("============================================================");
-				System.out.println("animation.offsetX = " + animation.offsetX);
-				System.out.println("offsetX = " + offsetX);
-				System.out.println("animation.offsetY = " + animation.offsetY);
-				System.out.println("offsetY = " + offsetY);
-				System.out.println("animation.scaleX = " + animation.scaleX);
-				System.out.println("scaleX = " + scaleX);
-				System.out.println("animation.boundsX1 = " + animation.boundsX1);
-				System.out.println("boundsX1 = " + boundsX1);
-				System.out.println("animation.boundsY1 = " + animation.boundsY1);
-				System.out.println("boundsY1 = " + boundsY1);
-				System.out.println("animation.boundsX2 = " + animation.boundsX2);
-				System.out.println("boundsX2 = " + boundsX2);
-				System.out.println("animation.boundsY2 = " + animation.boundsY2);
-				System.out.println("offsetY = " + boundsY2);
-				System.out.println("animation.headToToeOffset = " + animation.headToToeOffset);
-				System.out.println("headToToeOffset = " + headToToeOffset);
-				System.out.println("animation.torsoAngle = " + animation.torsoAngle);
-				System.out.println("torsoAngle = " + torsoAngle);
-				System.out.println("animation.leftShoulderAngle = " + animation.leftShoulderAngle);
-				System.out.println("leftShoulderAngle = " + leftShoulderAngle);
-				System.out.println("animation.rightShoulderAngle = " + animation.rightShoulderAngle);
-				System.out.println("rightShoulderAngle = " + rightShoulderAngle);
-				System.out.println("animation.leftElbowAngle = " + animation.leftElbowAngle);
-				System.out.println("leftElbowAngle = " + leftElbowAngle);
-				System.out.println("animation.rightElbowAngle = " + animation.rightElbowAngle);
-				System.out.println("rightElbowAngle = " + rightElbowAngle);
-				System.out.println("animation.leftHipAngle = " + animation.leftHipAngle);
-				System.out.println("leftHipAngle = " + leftHipAngle);
-				System.out.println("animation.rightHipAngle = " + animation.rightHipAngle);
-				System.out.println("rightHipAngle = " + rightHipAngle);
-				System.out.println("animation.leftKneeAngle = " + animation.leftKneeAngle);
-				System.out.println("leftKneeAngle = " + leftKneeAngle);
-				System.out.println("animation.rightKneeAngle = " + animation.rightKneeAngle);
-				System.out.println("rightKneeAngle = " + rightKneeAngle);
-
-				System.out.println("" + (animation.offsetX == offsetX));
-				System.out.println("" + (animation.offsetY == offsetY));
-				System.out.println("" + (animation.scaleX == scaleX));
-				System.out.println("" + (animation.boundsX1 == boundsX1));
-				System.out.println("" + (animation.boundsY1 == boundsY1));
-				System.out.println("" + (animation.boundsX2 == boundsX2));
-				System.out.println("" + (animation.boundsY2 == boundsY2));
-				System.out.println("" + (animation.headToToeOffset == headToToeOffset));
-				System.out.println("" + (animation.torsoAngle == torsoAngle));
-				System.out.println("" + (animation.leftShoulderAngle == leftShoulderAngle));
-				System.out.println("" + (animation.rightShoulderAngle == rightShoulderAngle));
-				System.out.println("" + (animation.leftElbowAngle == leftElbowAngle));
-				System.out.println("" + (animation.rightElbowAngle == rightElbowAngle));
-				System.out.println("" + (animation.leftHipAngle == leftHipAngle));
-				System.out.println("" + (animation.rightHipAngle == rightHipAngle));
-				System.out.println("" + (animation.leftKneeAngle == leftKneeAngle));
-				System.out.println("" + (animation.rightKneeAngle == rightKneeAngle));
-			}
-
 			if (animation.offsetX == offsetX //
 					&& animation.offsetY == offsetY //
 					&& animation.scaleX == scaleX //
@@ -227,10 +170,6 @@ public class KeyFrame {
 					&& animation.leftKneeAngle == leftKneeAngle//
 					&& animation.rightKneeAngle == rightKneeAngle//
 			) {
-
-				if (performer == Level.player) {
-					System.out.println("SETTING DONE TO TRUE!");
-				}
 				done = true;
 			}
 		} else {// BACKWARDS
