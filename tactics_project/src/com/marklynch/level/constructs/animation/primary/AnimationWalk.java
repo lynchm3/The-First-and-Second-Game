@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
@@ -8,7 +9,7 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationWalk extends Animation {
 
-	public double keyFramTimeMillis = Game.MINIMUM_TURN_TIME / 4d; // There's 4 keyframes per walk
+	public double keyFrameTimeMillis = 0; // There's 4 keyframes per walk
 
 	public Square startSquare;
 	public Square endSquare;
@@ -110,7 +111,11 @@ public class AnimationWalk extends Animation {
 		super(performer, onCompletionListener, null, null, null, null, null, null, performer, endSquare);
 		if (!runAnimation)
 			return;
-		durationToReachMillis = 400;
+		if (performer == Level.player) {
+			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER / 4d;
+		} else {
+			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_NON_PLAYER / 4d;
+		}
 
 		quarterDurationToReach = durationToReachMillis / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
@@ -150,7 +155,7 @@ public class AnimationWalk extends Animation {
 	public void setUpWalkPart0() {
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
-		kf0.keyFrameTimeMillis = keyFramTimeMillis;
+		kf0.keyFrameTimeMillis = keyFrameTimeMillis;
 		kf0.offsetX = startOffsetX * 3 / 4;
 		kf0.offsetY = startOffsetY * 3 / 4;
 		kf0.headToToeOffset = 0f;
@@ -165,7 +170,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf0);
 
 		KeyFrame kf1 = new KeyFrame(performer, this);
-		kf1.keyFrameTimeMillis = keyFramTimeMillis;
+		kf1.keyFrameTimeMillis = keyFrameTimeMillis;
 		kf1.offsetX = startOffsetX * 2 / 4;
 		kf1.offsetY = startOffsetY * 2 / 4;
 		kf1.headToToeOffset = 0f;
@@ -180,7 +185,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf1);
 
 		KeyFrame kf2 = new KeyFrame(performer, this);
-		kf2.keyFrameTimeMillis = keyFramTimeMillis;
+		kf2.keyFrameTimeMillis = keyFrameTimeMillis;
 		kf2.offsetX = startOffsetX * 1 / 4;
 		kf2.offsetY = startOffsetY * 1 / 4;
 		kf2.headToToeOffset = 0f;
@@ -195,7 +200,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf2);
 
 		KeyFrame kf3 = new KeyFrame(performer, this);
-		kf3.keyFrameTimeMillis = keyFramTimeMillis;
+		kf3.keyFrameTimeMillis = keyFrameTimeMillis;
 		kf3.offsetX = startOffsetX * 0 / 4;
 		kf3.offsetY = startOffsetY * 0 / 4;
 		kf3.headToToeOffset = 0f;
@@ -214,7 +219,7 @@ public class AnimationWalk extends Animation {
 	public void setUpWalkPart1() {
 
 		KeyFrame kf4 = new KeyFrame(performer, this);
-		kf4.keyFrameTimeMillis = keyFramTimeMillis;
+		kf4.keyFrameTimeMillis = keyFrameTimeMillis;
 		kf4.offsetX = startOffsetX * 3 / 4;
 		kf4.offsetY = startOffsetY * 3 / 4;
 		kf4.headToToeOffset = 0f;
@@ -229,7 +234,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf4);
 
 		KeyFrame kf5 = new KeyFrame(performer, this);
-		kf5.keyFrameTimeMillis = keyFramTimeMillis;
+		kf5.keyFrameTimeMillis = keyFrameTimeMillis;
 		kf5.offsetX = startOffsetX * 2 / 4;
 		kf5.offsetY = startOffsetY * 2 / 4;
 		kf5.headToToeOffset = 0f;
@@ -244,7 +249,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf5);
 
 		KeyFrame kf6 = new KeyFrame(performer, this);
-		kf6.keyFrameTimeMillis = keyFramTimeMillis;
+		kf6.keyFrameTimeMillis = keyFrameTimeMillis;
 		kf6.offsetX = startOffsetX * 1 / 4;
 		kf6.offsetY = startOffsetY * 1 / 4;
 		kf6.headToToeOffset = 0f;
@@ -259,7 +264,7 @@ public class AnimationWalk extends Animation {
 		keyFrames.add(kf6);
 
 		KeyFrame kf7 = new KeyFrame(performer, this);
-		kf7.keyFrameTimeMillis = keyFramTimeMillis;
+		kf7.keyFrameTimeMillis = keyFrameTimeMillis;
 		kf7.offsetX = startOffsetX * 0 / 4;
 		kf7.offsetY = startOffsetY * 0 / 4;
 		kf7.headToToeOffset = 0f;

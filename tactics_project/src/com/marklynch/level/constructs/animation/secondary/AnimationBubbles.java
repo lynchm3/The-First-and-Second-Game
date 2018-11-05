@@ -43,7 +43,7 @@ public class AnimationBubbles extends Animation {
 		y -= delta * 0.1;
 
 		if (y < targetY)
-			runCompletionAlgorightm(false);
+			runCompletionAlorightm(false);
 
 	}
 

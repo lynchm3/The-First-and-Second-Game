@@ -116,7 +116,7 @@ public class AnimationThrown extends Animation {
 
 		if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
-			runCompletionAlgorightm(true);
+			runCompletionAlorightm(true);
 
 		} else {
 			x += distanceX;

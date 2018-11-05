@@ -96,7 +96,7 @@ public abstract class Animation {
 
 		runAnimation = Game.level.shouldLog(objectsInvolved, false);// && performer == Game.level.player;
 		if (!runAnimation) {
-			runCompletionAlgorightm(true);
+			runCompletionAlorightm(true);
 			return;
 		}
 
@@ -171,7 +171,7 @@ public abstract class Animation {
 
 	protected abstract void childRunCompletionAlgorightm(boolean wait);
 
-	protected void runCompletionAlgorightm(boolean wait) {
+	public void runCompletionAlorightm(boolean wait) {
 
 		childRunCompletionAlgorightm(wait);
 
@@ -257,7 +257,7 @@ public abstract class Animation {
 		}
 
 		if (phase == keyFrames.size()) {
-			runCompletionAlgorightm(true);
+			runCompletionAlorightm(true);
 		}
 	}
 

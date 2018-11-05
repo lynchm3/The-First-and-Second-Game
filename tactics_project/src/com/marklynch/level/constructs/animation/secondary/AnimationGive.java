@@ -79,7 +79,7 @@ public class AnimationGive extends Animation {
 	}
 
 	public void completed() {
-		runCompletionAlgorightm(true);
+		runCompletionAlorightm(true);
 	}
 
 	@Override

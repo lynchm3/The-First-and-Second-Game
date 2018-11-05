@@ -22,7 +22,7 @@ public class AnimationShake extends Animation {
 	public void update(double delta) {
 		durationSoFar += delta;
 		if (durationSoFar >= durationToReach) {
-			runCompletionAlgorightm(true);
+			runCompletionAlorightm(true);
 		} else {
 			offsetX = (float) (Math.random() * 16) - 8f;
 			offsetY = (float) (Math.random() * 16) - 8f;

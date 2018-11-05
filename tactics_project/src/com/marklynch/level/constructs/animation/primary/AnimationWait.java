@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
@@ -25,7 +26,11 @@ public class AnimationWait extends Animation {
 		kf0.rightKneeAngle = 0;
 		kf0.offsetY = 0;
 		kf0.headToToeOffset = 0f;
-		kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME;
+		if (performer == Level.player) {
+			kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER;
+		} else {
+			kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_NON_PLAYER;
+		}
 		if (performer.hiding) {
 			kf0.leftHipAngle = -1.1f;
 			kf0.rightHipAngle = -1.1f;
@@ -33,7 +38,12 @@ public class AnimationWait extends Animation {
 			kf0.rightKneeAngle = 2f;
 			kf0.offsetY = 28f;
 			kf0.headToToeOffset = -30f;
-			kf0.keyFrameTimeMillis = 1000;
+			// kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME;
+		}
+
+		if (this.leftShoulderAngle == 0 && this.rightShoulderAngle == 0) {
+			kf0.leftShoulderAngle = 0.1d;
+			kf0.rightShoulderAngle = 0.1d;
 		}
 
 		// kf0.setAllSpeeds(0.004d);
