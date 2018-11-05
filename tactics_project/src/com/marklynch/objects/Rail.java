@@ -61,15 +61,19 @@ public class Rail extends GameObject implements SwitchListener {
 
 	public void updateNeightborRails() {
 
+		System.out.println("updateNeightborRails " + this.squareGameObjectIsOn);
+
 		for (Direction direction : Direction.values()) {
-			Square square = this.getSquareInDirection(direction);
-			if (square == null)
+			Square neightborSquare = this.getSquareInDirection(direction);
+			System.out.println("neightborSquare " + neightborSquare);
+			if (neightborSquare == null)
 				continue;
-			Rail rail = (Rail) square.inventory.getGameObjectWithTemplateId(Templates.RAIL.templateId,
+			Rail neighborRail = (Rail) neightborSquare.inventory.getGameObjectWithTemplateId(Templates.RAIL.templateId,
 					Templates.RAIL_INVISIBLE.templateId);
-			if (rail == null)
+			System.out.println("neighborRail " + neighborRail);
+			if (neighborRail == null)
 				continue;
-			rail.updateImageTextures();
+			neighborRail.updateImageTextures();
 		}
 	}
 
@@ -176,6 +180,7 @@ public class Rail extends GameObject implements SwitchListener {
 	}
 
 	public void updateImageTextures() {
+		System.out.println("updateImageTexture " + this.squareGameObjectIsOn);
 
 		if ((direction1 == Direction.LEFT || direction1 == Direction.RIGHT)
 				&& (direction2 == Direction.LEFT || direction2 == Direction.RIGHT)) {
@@ -205,7 +210,7 @@ public class Rail extends GameObject implements SwitchListener {
 			imageTexture = imageTextureLeftRight;
 		}
 
-		// BufferStops
+		// Buffer Stops
 		drawLeftBufferStop = false;
 		drawRightBufferStop = false;
 		drawUpBufferStop = false;
@@ -215,15 +220,21 @@ public class Rail extends GameObject implements SwitchListener {
 			if (!checkIfConnected(Direction.LEFT)) {
 				drawLeftBufferStop = true;
 			}
-		} else if (direction1 == Direction.RIGHT || direction2 == Direction.RIGHT) {
+		}
+
+		if (direction1 == Direction.RIGHT || direction2 == Direction.RIGHT) {
 			if (!checkIfConnected(Direction.RIGHT)) {
 				drawRightBufferStop = true;
 			}
-		} else if (direction1 == Direction.UP || direction2 == Direction.UP) {
+		}
+
+		if (direction1 == Direction.UP || direction2 == Direction.UP) {
 			if (!checkIfConnected(Direction.UP)) {
 				drawUpBufferStop = true;
 			}
-		} else if (direction1 == Direction.DOWN || direction2 == Direction.DOWN) {
+		}
+
+		if (direction1 == Direction.DOWN || direction2 == Direction.DOWN) {
 			if (!checkIfConnected(Direction.DOWN)) {
 				drawDownBufferStop = true;
 			}
