@@ -42,8 +42,8 @@ public class AnimationWait extends Animation {
 		}
 
 		if (this.leftShoulderAngle == 0 && this.rightShoulderAngle == 0) {
-			kf0.leftShoulderAngle = 0.1d;
-			kf0.rightShoulderAngle = 0.1d;
+			kf0.leftShoulderAngle = 1d;
+			kf0.rightShoulderAngle = -1d;
 		}
 
 		// kf0.setAllSpeeds(0.004d);
