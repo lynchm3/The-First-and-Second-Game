@@ -87,8 +87,6 @@ public class MineCart extends GameObject {
 
 	public SquareAndDirection move(SquareAndDirection oldSquareAndDirection) {
 		SquareAndDirection newSquareAndDirection = new SquareAndDirection();
-		// System.out.println("squareToMoveTo 1 = " + squareToMoveTo);
-		// System.out.println("direction 1 = " + direction);
 
 		Rail currentRail = (Rail) oldSquareAndDirection.square.inventory.getGameObjectOfClass(Rail.class);
 
@@ -110,6 +108,9 @@ public class MineCart extends GameObject {
 
 		newSquareAndDirection.square = getSquareToMoveTo(newSquareAndDirection.direction, oldSquareAndDirection.square);
 
+		if (newSquareAndDirection.square == null)
+			return null;
+
 		Rail railToMoveTo = (Rail) newSquareAndDirection.square.inventory.getGameObjectOfClass(Rail.class);
 
 		if (railToMoveTo == null) {
@@ -126,23 +127,6 @@ public class MineCart extends GameObject {
 		} else if (newSquareAndDirection.direction == Direction.DOWN && railToMoveTo.direction1 != Direction.UP
 				&& railToMoveTo.direction2 != Direction.UP) {
 			return null;
-		}
-
-		// if (railToMoveTo == null) {
-		// direction = currentRail.getOppositeDirection(this.direction);
-		// setSquareToMoveTo();
-		// railToMoveTo = (Rail)
-		// squareToMoveTo.inventory..getGameObjectOfClass(Rail.class);
-		// }
-		// System.out.println("squareToMoveTo 3 = " + squareToMoveTo);
-		// System.out.println("direction 3 = " + direction);
-
-		// if (railToMoveTo == null)
-		// return;
-
-		if (railToMoveTo != null) {// && newSquareAndDirection.square.inventory.canShareSquare) {
-		} else {
-			newSquareAndDirection.square = null;
 		}
 
 		return newSquareAndDirection;

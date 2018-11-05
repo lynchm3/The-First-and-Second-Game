@@ -21,6 +21,15 @@ public class Rail extends GameObject implements SwitchListener {
 	public static Texture imageTextureRightDown;
 	public boolean turnsClockwiseFirst = true;
 
+	public boolean drawLeftBufferStop = false;
+	public boolean drawRightBufferStop = false;
+	public boolean drawUpBufferStop = false;
+	public boolean drawDownBufferStop = false;
+	public static Texture imageTextureLeftBufferStop;
+	public static Texture imageTextureRightBufferStop;
+	public static Texture imageTextureUpBufferStop;
+	public static Texture imageTextureDownBufferStop;
+
 	public Rail() {
 		super();
 		canBePickedUp = false;
@@ -45,6 +54,40 @@ public class Rail extends GameObject implements SwitchListener {
 		rail.updateImageTexture();
 
 		return rail;
+	}
+
+	@Override
+	public boolean draw1() {
+		boolean shouldDraw = super.draw1();
+		if (!shouldDraw)
+			return false;
+
+		Texture railTexture = imageTexture;
+
+		if (drawLeftBufferStop) {
+			imageTexture = imageTextureLeftBufferStop;
+			super.draw1();
+		}
+
+		if (drawRightBufferStop) {
+			imageTexture = imageTextureRightBufferStop;
+			super.draw1();
+
+		}
+
+		if (drawUpBufferStop) {
+			imageTexture = imageTextureUpBufferStop;
+			super.draw1();
+
+		}
+
+		if (drawDownBufferStop) {
+			imageTexture = imageTextureDownBufferStop;
+			super.draw1();
+		}
+
+		imageTexture = railTexture;
+		return true;
 	}
 
 	public Direction getOppositeDirection(Direction direction) {
@@ -115,6 +158,7 @@ public class Rail extends GameObject implements SwitchListener {
 	}
 
 	public void updateImageTexture() {
+
 		if ((direction1 == Direction.LEFT || direction1 == Direction.RIGHT)
 				&& (direction2 == Direction.LEFT || direction2 == Direction.RIGHT)) {
 			// left right
@@ -143,6 +187,72 @@ public class Rail extends GameObject implements SwitchListener {
 			imageTexture = imageTextureLeftRight;
 		}
 
+		// BufferStops
+		drawLeftBufferStop = false;
+		drawRightBufferStop = false;
+		drawUpBufferStop = false;
+		drawDownBufferStop = false;
+
+		if (direction1 == Direction.LEFT || direction2 == Direction.LEFT) {
+			if (!checkIfConnected(Direction.LEFT)) {
+				drawLeftBufferStop = true;
+			}
+		} else if (direction1 == Direction.RIGHT || direction2 == Direction.RIGHT) {
+			if (!checkIfConnected(Direction.RIGHT)) {
+				drawRightBufferStop = true;
+			}
+		} else if (direction1 == Direction.UP || direction2 == Direction.UP) {
+			if (!checkIfConnected(Direction.UP)) {
+				drawUpBufferStop = true;
+			}
+		} else if (direction1 == Direction.DOWN || direction2 == Direction.DOWN) {
+			if (!checkIfConnected(Direction.DOWN)) {
+				drawDownBufferStop = true;
+			}
+		}
+
+	}
+
+	public boolean checkIfConnected(Direction inDirection) {
+
+		Square squareToCheckIfConnected = getSquareInDirection(inDirection);
+
+		if (squareToCheckIfConnected == null)
+			return false;
+
+		Rail railToCheckIfConnected = (Rail) squareToCheckIfConnected.inventory.getGameObjectOfClass(Rail.class);
+
+		if (railToCheckIfConnected == null) {
+			return false;
+		} else if (inDirection == Direction.RIGHT && railToCheckIfConnected.direction1 != Direction.LEFT
+				&& railToCheckIfConnected.direction2 != Direction.LEFT) {
+			return false;
+		} else if (inDirection == Direction.LEFT && railToCheckIfConnected.direction1 != Direction.RIGHT
+				&& railToCheckIfConnected.direction2 != Direction.RIGHT) {
+			return false;
+		} else if (inDirection == Direction.UP && railToCheckIfConnected.direction1 != Direction.DOWN
+				&& railToCheckIfConnected.direction2 != Direction.DOWN) {
+			return false;
+		} else if (inDirection == Direction.DOWN && railToCheckIfConnected.direction1 != Direction.UP
+				&& railToCheckIfConnected.direction2 != Direction.UP) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public Square getSquareInDirection(Direction direction) {
+
+		if (direction == Direction.RIGHT) {
+			return this.squareGameObjectIsOn.getSquareToRightOf();
+		} else if (direction == Direction.LEFT) {
+			return this.squareGameObjectIsOn.getSquareToLeftOf();
+		} else if (direction == Direction.UP) {
+			return this.squareGameObjectIsOn.getSquareAbove();
+		} else if (direction == Direction.DOWN) {
+			return this.squareGameObjectIsOn.getSquareBelow();
+		}
+		return null;
 	}
 
 }

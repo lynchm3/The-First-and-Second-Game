@@ -93,6 +93,12 @@ public class TemplatesBuilding {
 		Rail.imageTextureRightUp = getGlobalImage("rail_right_up.png", true);
 		Rail.imageTextureLeftDown = getGlobalImage("rail_left_down.png", true);
 		Rail.imageTextureRightDown = getGlobalImage("rail_right_down.png", true);
+
+		Rail.imageTextureLeftBufferStop = getGlobalImage("rail_buffer_stop_left.png", false);
+		Rail.imageTextureRightBufferStop = getGlobalImage("rail_buffer_stop_right.png", false);
+		Rail.imageTextureUpBufferStop = getGlobalImage("rail_buffer_stop_up.png", false);
+		Rail.imageTextureDownBufferStop = getGlobalImage("rail_buffer_stop_down.png", false);
+
 		Templates.RAIL.imageTexture = getGlobalImage(Templates.RAIL.imageTexturePath, true);
 		Templates.RAIL.totalHealth = Templates.RAIL.remainingHealth = 100;
 		Templates.RAIL.weight = 45f;
