@@ -1,20 +1,17 @@
 package com.marklynch.level.constructs.animation.primary;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 
 public class AnimationStraightLine extends Animation {
 
 	public String name;
-	private int index = 0;
-	float x, y, targetX, targetY, speed, speedX, speedY;
+	float x, y;
 	float angle = 0;
-	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	float rotationSpeed = 0;
-	double delay;
 
 	public AnimationStraightLine(GameObject performer, float speed, boolean blockAI, double delay,
 			OnCompletionListener onCompletionListener, Square... targetSquares) {
@@ -25,22 +22,19 @@ public class AnimationStraightLine extends Animation {
 			return;
 
 		this.targetSquares = targetSquares;
-		// this.projectileObject = projectileObject;
-		this.speed = speed;
 
 		this.x = performer.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
 		this.y = performer.squareGameObjectIsOn.yInGridPixels;// shooter.getCenterY();
-		if (speedX < 0)
-			this.rotationSpeed = -rotationSpeed;
-		else
-			this.rotationSpeed = rotationSpeed;
 
+		double keyFrameTimeMillis = Game.MINIMUM_TURN_TIME;
 		this.blockAI = blockAI;
-		this.delay = delay;
-
-		if (performer instanceof Arrow && distanceToCoverX < 0) {
-			performer.backwards = true;
+		if (!blockAI) {
+			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME / targetSquares.length;
 		}
+
+		// if (performer instanceof Arrow && distanceToCoverX < 0) {
+		// performer.backwards = true;
+		// }
 
 		for (int i = 0; i < targetSquares.length; i++) {
 
@@ -49,7 +43,7 @@ public class AnimationStraightLine extends Animation {
 			kf0.offsetX = this.targetSquares[i].xInGridPixels - this.x;
 			kf0.offsetY = this.targetSquares[i].yInGridPixels - this.y;
 			// kf0.
-			kf0.keyFrameTimeMillis = 25;
+			kf0.keyFrameTimeMillis = keyFrameTimeMillis;
 			kf0.normaliseSpeeds = true;
 			keyFrames.add(kf0);
 		}

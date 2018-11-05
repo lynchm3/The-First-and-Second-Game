@@ -1,5 +1,6 @@
 package com.marklynch.level.constructs.animation.primary;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
@@ -10,7 +11,6 @@ public class AnimationWait extends Animation {
 		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
 		if (!runAnimation)
 			return;
-		durationToReachMillis = 400;
 		blockAI = false;
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
@@ -25,7 +25,7 @@ public class AnimationWait extends Animation {
 		kf0.rightKneeAngle = 0;
 		kf0.offsetY = 0;
 		kf0.headToToeOffset = 0f;
-		kf0.keyFrameTimeMillis = 100;
+		kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME;
 		if (performer.hiding) {
 			kf0.leftHipAngle = -1.1f;
 			kf0.rightHipAngle = -1.1f;

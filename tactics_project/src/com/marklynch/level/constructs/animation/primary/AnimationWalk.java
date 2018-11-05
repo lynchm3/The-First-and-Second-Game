@@ -8,6 +8,8 @@ import com.marklynch.objects.GameObject;
 
 public class AnimationWalk extends Animation {
 
+	public double keyFramTimeMillis = Game.MINIMUM_TURN_TIME / 4d; // There's 4 keyframes per walk
+
 	public Square startSquare;
 	public Square endSquare;
 	public float startOffsetX = 0;
@@ -144,8 +146,6 @@ public class AnimationWalk extends Animation {
 	public void update(double delta) {
 		keyFrameUpdate(delta);
 	}
-
-	public double keyFramTimeMillis = 100;
 
 	public void setUpWalkPart0() {
 
