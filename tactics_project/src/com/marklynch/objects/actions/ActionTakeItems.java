@@ -16,24 +16,23 @@ public class ActionTakeItems extends VariableQtyAction {
 	public static final String ACTION_NAME = "Take";
 	public static final String ACTION_NAME_ILLEGAL = "Steal";
 
-	GameObject[] objects;
+	GameObject[] objectsTotake;
 	Object objectToTakeFrom;
 
-	public ActionTakeItems(GameObject performer, Object objectToTakeFrom, ArrayList<GameObject> objects) {
-		this(performer, objectToTakeFrom, objects.toArray(new GameObject[objects.size()]), false);
+	public ActionTakeItems(GameObject performer, Object objectToTakeFrom, ArrayList<GameObject> objectsTotake) {
+		this(performer, objectToTakeFrom, objectsTotake.toArray(new GameObject[objectsTotake.size()]), false);
 	}
 
-	public ActionTakeItems(GameObject performer, Object objectToTakeFrom, GameObject... objects) {
-		this(performer, objectToTakeFrom, objects, false);
+	public ActionTakeItems(GameObject performer, Object objectToTakeFrom, GameObject... objectsTotake) {
+		this(performer, objectToTakeFrom, objectsTotake, false);
 	}
 
-	public ActionTakeItems(GameObject performer, Object objectToTakeFrom, GameObject[] objects, boolean doesnothing) {
+	public ActionTakeItems(GameObject performer, Object objectToTakeFrom, GameObject[] objectsTotake,
+			boolean doesnothing) {
 
-		// public ActionTakeItems(Actor performer, Object target, GameObject
-		// object) {
 		super(ACTION_NAME, textureLeft, performer, objectToTakeFrom);
 
-		this.objects = objects;
+		this.objectsTotake = objectsTotake;
 		this.objectToTakeFrom = objectToTakeFrom;
 		if (!check()) {
 			enabled = false;
@@ -59,18 +58,18 @@ public class ActionTakeItems extends VariableQtyAction {
 		if (!checkRange())
 			return;
 
-		int amountToTake = Math.min(objects.length, qty);
+		int amountToTake = Math.min(objectsTotake.length, qty);
 
 		if (amountToTake == 0)
 			return;
 
 		if (Game.level.openInventories.size() > 0) {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.addSecondaryAnimation(new AnimationTake(objects[0], performer, 0, 0, 1f, null));
+			performer.addSecondaryAnimation(new AnimationTake(objectsTotake[0], performer, 0, 0, 1f, null));
 		}
 
 		for (int i = 0; i < amountToTake; i++) {
-			GameObject object = objects[i];
+			GameObject object = objectsTotake[i];
 
 			if (objectToTakeFrom == targetSquare)
 				targetSquare.inventory.remove(object);
@@ -106,17 +105,17 @@ public class ActionTakeItems extends VariableQtyAction {
 				if (legal) {
 					if (objectToTakeFrom == targetSquare)
 						Game.level.logOnScreen(
-								new ActivityLog(new Object[] { performer, " took ", objects[0], amountText }));
+								new ActivityLog(new Object[] { performer, " took ", objectsTotake[0], amountText }));
 					else
 						Game.level.logOnScreen(new ActivityLog(
-								new Object[] { performer, " took ", objects[0], amountText, " from ", target }));
+								new Object[] { performer, " took ", objectsTotake[0], amountText, " from ", target }));
 				} else {
 					if (objectToTakeFrom == targetSquare)
 						Game.level.logOnScreen(
-								new ActivityLog(new Object[] { performer, " stole ", objects[0], amountText }));
+								new ActivityLog(new Object[] { performer, " stole ", objectsTotake[0], amountText }));
 					else
 						Game.level.logOnScreen(new ActivityLog(
-								new Object[] { performer, " stole ", objects[0], amountText, " from ", target }));
+								new Object[] { performer, " stole ", objectsTotake[0], amountText, " from ", target }));
 				}
 			}
 		}
@@ -126,7 +125,7 @@ public class ActionTakeItems extends VariableQtyAction {
 	@Override
 	public boolean check() {
 
-		if (objects.length == 0) {
+		if (objectsTotake.length == 0) {
 			return false;
 		}
 
@@ -136,7 +135,7 @@ public class ActionTakeItems extends VariableQtyAction {
 
 		// Check it's still on the same spot
 		if (target == objectToTakeFrom) {
-			for (GameObject object : objects) {
+			for (GameObject object : objectsTotake) {
 				if (!target.inventory.contains(object)) {
 					return false;
 				}
@@ -145,7 +144,7 @@ public class ActionTakeItems extends VariableQtyAction {
 
 		// Check it's still on the same spot
 		if (targetSquare == objectToTakeFrom) {
-			for (GameObject object : objects) {
+			for (GameObject object : objectsTotake) {
 				if (!targetSquare.inventory.contains(object)) {
 					return false;
 				}
@@ -171,11 +170,11 @@ public class ActionTakeItems extends VariableQtyAction {
 
 	@Override
 	public boolean checkLegality() {
-		if (objects.length == 0)
+		if (objectsTotake.length == 0)
 			return true;
-		if (objects[0].owner != null && objects[0].owner != performer) {
+		if (objectsTotake[0].owner != null && objectsTotake[0].owner != performer) {
 			illegalReason = THEFT;
-			if (objects[0].value > 100)
+			if (objectsTotake[0].value > 100)
 				illegalReason = GRAND_THEFT;
 			return false;
 		}
