@@ -89,10 +89,10 @@ public class AnimationStraightLine extends Animation {
 	public void postRangedAnimation() {
 		if (performer != null) {
 
-			if (performer.getPrimaryAnimation() != null) {
-				performer.getPrimaryAnimation().offsetX = 0;
-				performer.getPrimaryAnimation().offsetY = 0;
-			}
+			// if (performer.getPrimaryAnimation() != null) {
+			this.offsetX = 0;
+			this.offsetY = 0;
+			// }
 			targetSquares[targetSquares.length - 1].inventory.add(performer);
 		}
 	}

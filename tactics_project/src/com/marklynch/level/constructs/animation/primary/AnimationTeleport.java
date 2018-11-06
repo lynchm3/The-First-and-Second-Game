@@ -68,8 +68,8 @@ public class AnimationTeleport extends Animation {
 
 	@Override
 	protected void childRunCompletionAlgorightm(boolean wait) {
-		offsetX = 0;
-		offsetY = 0;
+		this.offsetX = 0;
+		this.offsetY = 0;
 		// super.runCompletionAlgorightm(wait);
 	}
 
