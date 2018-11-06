@@ -173,20 +173,22 @@ public abstract class Animation {
 
 	public void runCompletionAlorightm(boolean wait) {
 
+		if (completed)
+			return;
+		completed = true;
+
 		childRunCompletionAlgorightm(wait);
 
 		Level.blockingAnimations.remove(this);
 
 		Level.animations.remove(this);
 
-		completed = true;
-		if (onCompletionListener != null)
-			onCompletionListener.animationComplete(performer);
-
 		if (shouldWait(wait)) {
-
 			performer.setPrimaryAnimation(new AnimationWait(performer, null));
 		}
+
+		if (onCompletionListener != null)
+			onCompletionListener.animationComplete(performer);
 	}
 
 	private boolean shouldWait(boolean wait) {
@@ -199,15 +201,11 @@ public abstract class Animation {
 
 		// Not primary animation
 		if (this != performer.getPrimaryAnimation()) {
-			if (onCompletionListener != null)
-				onCompletionListener.animationComplete(performer);
 			return false;
 		}
 
 		// Is a wait or die animation
 		if (this instanceof AnimationWait || this instanceof AnimationDie) {
-			if (onCompletionListener != null)
-				onCompletionListener.animationComplete(performer);
 			return false;
 		}
 

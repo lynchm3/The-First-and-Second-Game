@@ -70,6 +70,11 @@ public class AnimationTeleport extends Animation {
 	protected void childRunCompletionAlgorightm(boolean wait) {
 		this.offsetX = 0;
 		this.offsetY = 0;
+		performer.lastSquare = performer.squareGameObjectIsOn;
+
+		performer.squareGameObjectIsOn.inventory.remove(performer);
+		performer.squareGameObjectIsOn = endSquare;
+		endSquare.inventory.add(performer);
 		// super.runCompletionAlgorightm(wait);
 	}
 

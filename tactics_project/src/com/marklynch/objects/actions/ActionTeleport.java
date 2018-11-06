@@ -76,10 +76,37 @@ public class ActionTeleport extends Action {
 
 	public void postAnimation() {
 
-		target.lastSquare = target.squareGameObjectIsOn;
-		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+		if (performer == Game.level.player)
+			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 
-		teleport(target, squareToTeleportTo);
+		if (Game.level.shouldLog(gameObjectPerformer, target)) {
+			if (gameObjectPerformer == target)
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { gameObjectPerformer, " teleported to ", squareToTeleportTo }));
+			else
+				Game.level.logOnScreen(new ActivityLog(
+						new Object[] { gameObjectPerformer, " teleported ", target, " to ", squareToTeleportTo }));
+		}
+
+		// Teleported big object on to big object... someone has to die.
+		if (gameObjectInTheWay != null) {
+			float damage = Math.min(target.remainingHealth, gameObjectInTheWay.remainingHealth);
+			if (Game.level.shouldLog(target, gameObjectInTheWay))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " teleported in to ", gameObjectInTheWay,
+						", both took " + damage + " damage" }));
+
+			target.changeHealth(-damage, null, null);
+			gameObjectInTheWay.changeHealth(-damage, null, null);
+
+			if (gameObjectPerformer == target) {
+				target.changeHealth(-damage, gameObjectInTheWay, this);
+				gameObjectInTheWay.changeHealth(-damage, target, this);
+			} else {
+				target.changeHealth(-damage, gameObjectPerformer, this);
+				gameObjectInTheWay.changeHealth(-damage, gameObjectPerformer, this);
+			}
+
+		}
 
 		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
@@ -137,40 +164,7 @@ public class ActionTeleport extends Action {
 		Level.teleportee = null;
 	}
 
-	private void teleport(GameObject gameObject, Square square) {
-
-		gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
-		gameObject.squareGameObjectIsOn = square;
-		square.inventory.add(gameObject);
-
-		if (Game.level.shouldLog(gameObjectPerformer, target)) {
-			if (gameObjectPerformer == target)
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { gameObjectPerformer, " teleported to ", squareToTeleportTo }));
-			else
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { gameObjectPerformer, " teleported ", target, " to ", squareToTeleportTo }));
-		}
-
-		// Teleported big object on to big object... someone has to die.
-		if (gameObjectInTheWay != null) {
-			float damage = Math.min(gameObject.remainingHealth, gameObjectInTheWay.remainingHealth);
-			if (Game.level.shouldLog(gameObject, gameObjectInTheWay))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObject, " teleported in to ",
-						gameObjectInTheWay, ", both took " + damage + " damage" }));
-
-			gameObject.changeHealth(-damage, null, null);
-			gameObjectInTheWay.changeHealth(-damage, null, null);
-
-			if (gameObjectPerformer == target) {
-				gameObject.changeHealth(-damage, gameObjectInTheWay, this);
-				gameObjectInTheWay.changeHealth(-damage, gameObject, this);
-			} else {
-				gameObject.changeHealth(-damage, gameObjectPerformer, this);
-				gameObjectInTheWay.changeHealth(-damage, gameObjectPerformer, this);
-			}
-
-		}
+	private void teleport() {
 	}
 
 	@Override

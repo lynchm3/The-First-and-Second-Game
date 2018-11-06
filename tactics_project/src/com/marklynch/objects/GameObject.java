@@ -19,6 +19,7 @@ import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
@@ -2293,13 +2294,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (animation == null || animation.runAnimation == false)
 			return;
 
-		// if (this.primaryAnimation != null && !this.primaryAnimation.completed
-		// && !(this.primaryAnimation instanceof AnimationWait)) {
-		// this.primaryAnimation.runCompletionAlorightm(false);
-		// }
-
-		// if (this.primaryAnimation != null && !this.primaryAnimation.completed)
-		// this.primaryAnimation.runCompletionAlorightm(false);
+		if (this.primaryAnimation != null && !this.primaryAnimation.completed
+				&& !(this.primaryAnimation instanceof AnimationWait)) {
+			this.primaryAnimation.runCompletionAlorightm(false);
+		}
 
 		Level.blockingAnimations.remove(this.primaryAnimation);
 		Level.animations.remove(this.primaryAnimation);
