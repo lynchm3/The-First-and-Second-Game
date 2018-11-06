@@ -2294,7 +2294,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (animation == null || animation.runAnimation == false)
 			return;
 
-		if (this.primaryAnimation != null && !(this.primaryAnimation instanceof AnimationWait))
+		if (this.primaryAnimation != null && !this.primaryAnimation.completed
+				&& !(this.primaryAnimation instanceof AnimationWait))
 			this.primaryAnimation.runCompletionAlorightm(false);
 
 		// if (this.primaryAnimation != null && !this.primaryAnimation.completed)
