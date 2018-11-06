@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
+import com.marklynch.level.constructs.power.PowerTelekineticPush;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 
@@ -76,7 +78,19 @@ public class MineCart extends GameObject {
 				gameObject.lastTurnThisWasMovedByMinecart = Level.turn;
 
 				gameObject.setPrimaryAnimation(
-						new AnimationStraightLine(gameObject, 2f, false, 0f, null, arrayOfSquaresToMoveTo));
+						new AnimationStraightLine(gameObject, 2f, false, 0f, null, arrayOfSquaresToMoveTo) {
+
+							@Override
+							public void initiateNextKeyFrame() {
+								super.initiateNextKeyFrame();
+
+								for (GameObject gameObject : (ArrayList<GameObject>) this.targetSquares[phase].inventory.gameObjects
+										.clone()) {
+									new ActionUsePower(performer, gameObject, this.targetSquares[phase],
+											new PowerTelekineticPush(performer)).perform();
+								}
+							}
+						});
 			}
 		}
 	}

@@ -17,6 +17,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Portal;
 import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.utils.ResourceUtils;
 
@@ -41,7 +42,8 @@ public class PowerTelekineticPush extends Power {
 		if (targetSquare.inventory.contains(source))
 			return;
 
-		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation(), null));
+		if (source instanceof Actor)
+			source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation(), null));
 
 		Direction direction = Direction.LEFT;
 
