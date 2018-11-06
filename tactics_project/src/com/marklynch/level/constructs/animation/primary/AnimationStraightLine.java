@@ -1,11 +1,15 @@
 package com.marklynch.level.constructs.animation.primary;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
+import com.marklynch.level.constructs.power.PowerTelekineticPush;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.ActionUsePower;
 
 public class AnimationStraightLine extends Animation {
 
@@ -13,6 +17,7 @@ public class AnimationStraightLine extends Animation {
 	float x, y;
 	float angle = 0;
 	float rotationSpeed = 0;
+	// Square[] targetSquares;
 
 	public AnimationStraightLine(GameObject performer, float time, boolean blockAI, double delay,
 			OnCompletionListener onCompletionListener, Square... targetSquares) {
@@ -61,6 +66,25 @@ public class AnimationStraightLine extends Animation {
 	public void update(double delta) {
 		super.keyFrameUpdate(delta);
 
+	}
+
+	@Override
+	public void initiateNextKeyFrame() {
+		keyFrames.get(phase).createSpeeds();
+
+		for (GameObject gameObject : (ArrayList<GameObject>) this.targetSquares[phase].inventory.gameObjects.clone()) {
+			new ActionUsePower(performer, gameObject, this.targetSquares[phase], new PowerTelekineticPush(performer))
+					.perform();
+		}
+
+		// if(phase == 0)
+		// {
+		// for
+		// }
+		// else
+		// {
+		//
+		// }
 	}
 
 	@Override

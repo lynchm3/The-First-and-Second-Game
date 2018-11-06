@@ -58,9 +58,9 @@ public class MineCart extends GameObject {
 		}
 
 		if (squaresForAnimation.size() > 0) {
-			final Square[] array = new Square[squaresForAnimation.size()];
+			final Square[] arrayOfSquaresToMoveTo = new Square[squaresForAnimation.size()];
 			for (int i = 0; i < squaresForAnimation.size(); i++) {
-				array[i] = squaresForAnimation.get(i).square;
+				arrayOfSquaresToMoveTo[i] = squaresForAnimation.get(i).square;
 			}
 
 			this.direction = squaresForAnimation.get(squaresForAnimation.size() - 1).direction;
@@ -75,7 +75,8 @@ public class MineCart extends GameObject {
 
 				gameObject.lastTurnThisWasMovedByMinecart = Level.turn;
 
-				gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 2f, false, 0f, null, array));
+				gameObject.setPrimaryAnimation(
+						new AnimationStraightLine(gameObject, 2f, false, 0f, null, arrayOfSquaresToMoveTo));
 			}
 		}
 	}

@@ -232,7 +232,7 @@ public abstract class Animation {
 			return;
 
 		if (firstUpdate) {
-			keyFrames.get(0).createSpeeds();
+			initiateNextKeyFrame();
 			firstUpdate = false;
 		}
 
@@ -248,10 +248,7 @@ public abstract class Animation {
 			phase++;
 
 			if (phase < keyFrames.size()) {
-				// keyFrames.get(phase).normaliseSpeeds();
-				keyFrames.get(phase).createSpeeds();
-				// keyFrames.get(phase).copyPositions(); can't do this here coz it'll overwrite
-				// what I've already set :/
+				initiateNextKeyFrame();
 
 			}
 		}
@@ -259,6 +256,10 @@ public abstract class Animation {
 		if (phase == keyFrames.size()) {
 			runCompletionAlorightm(true);
 		}
+	}
+
+	public void initiateNextKeyFrame() {
+		keyFrames.get(phase).createSpeeds();
 	}
 
 	public boolean getCompleted() {
