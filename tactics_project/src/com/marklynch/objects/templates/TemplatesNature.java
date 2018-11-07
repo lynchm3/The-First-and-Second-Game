@@ -49,6 +49,7 @@ public class TemplatesNature {
 		Templates.TREE_READABLE.weight = Templates.TREE.weight;
 		Templates.TREE_READABLE.value = Templates.TREE.value;
 		Templates.TREE_READABLE.bigShadow = Templates.TREE.bigShadow;
+		Templates.TREE_READABLE.persistsWhenCantBeSeen = Templates.TREE.persistsWhenCantBeSeen;
 		Templates.TREE_READABLE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.TREE_CONTAINER = new Storage();
@@ -62,6 +63,7 @@ public class TemplatesNature {
 		Templates.TREE_CONTAINER.weight = Templates.TREE.weight;
 		Templates.TREE_CONTAINER.value = Templates.TREE.value;
 		Templates.TREE_CONTAINER.bigShadow = Templates.TREE.bigShadow;
+		Templates.TREE_CONTAINER.persistsWhenCantBeSeen = Templates.TREE.persistsWhenCantBeSeen;
 		Templates.TREE_CONTAINER.templateId = GameObject.generateNewTemplateId();
 
 		Templates.BIG_TREE = new Tree();
