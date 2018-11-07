@@ -17,6 +17,8 @@ public abstract class Openable extends GameObject implements SwitchListener {
 	public Key[] keys;
 	public boolean locked = false;
 	public String baseName;
+	public boolean isOpenable = true;
+	public boolean lockable = true;
 
 	public Openable() {
 		super();
@@ -55,6 +57,9 @@ public abstract class Openable extends GameObject implements SwitchListener {
 	public void setAttributesForCopy(Openable openable, Square square, boolean locked, Actor owner, Key... keys) {
 
 		super.setAttributesForCopy(openable, square, owner);
+
+		openable.isOpenable = isOpenable;
+		openable.lockable = lockable;
 		openable.keys = keys;
 		openable.locked = locked;
 
@@ -68,16 +73,20 @@ public abstract class Openable extends GameObject implements SwitchListener {
 	@Override
 	public void zwitch(Switch zwitch) {
 		if (zwitch.switchType == SWITCH_TYPE.OPEN_CLOSE) {
-			if (open) {
-				new ActionClose(zwitch, this).perform();
-			} else {
-				new ActionOpen(zwitch, this).perform();
+			if (isOpenable) {
+				if (open) {
+					new ActionClose(zwitch, this).perform();
+				} else {
+					new ActionOpen(zwitch, this).perform();
+				}
 			}
 		} else if (zwitch.switchType == SWITCH_TYPE.LOCK_UNLOCK) {
-			if (locked) {
-				new ActionUnlock(zwitch, this).perform();
-			} else {
-				new ActionLock(zwitch, this).perform();
+			if (lockable) {
+				if (locked) {
+					new ActionUnlock(zwitch, this).perform();
+				} else {
+					new ActionLock(zwitch, this).perform();
+				}
 			}
 		}
 

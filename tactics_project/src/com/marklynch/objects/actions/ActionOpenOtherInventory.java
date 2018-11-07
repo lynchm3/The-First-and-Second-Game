@@ -13,7 +13,7 @@ import com.marklynch.objects.units.Actor;
 public class ActionOpenOtherInventory extends Action {
 
 	public static final String ACTION_NAME = "Loot";
-	public static final String ACTION_NAME_2 = "Open";
+	public static final String ACTION_NAME_2 = "Loot";
 
 	// Actor performer;
 	// GameObject target;
@@ -25,7 +25,7 @@ public class ActionOpenOtherInventory extends Action {
 			this.actionName = ACTION_NAME_2;
 		// super.gameObjectPerformer = this.performer = performer;
 		// this.target = gameObject;
-		if (target instanceof Openable && !((Openable) target).isOpen()) {
+		if (target instanceof Openable && ((Openable) target).isOpenable && !((Openable) target).isOpen()) {
 			actionOpen = new ActionOpen(performer, (Openable) target);
 		}
 		if (!check()) {

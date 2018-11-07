@@ -52,6 +52,7 @@ public class TemplatesContainers {
 		Templates.CRATE.value = 20;
 		Templates.CRATE.anchorX = 0;
 		Templates.CRATE.anchorY = 0;
+		Templates.CRATE.lockable = false;
 		Templates.CRATE.templateId = GameObject.generateNewTemplateId();
 		Templates.CRATE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(4));
 		Templates.CRATE.flipYAxisInMirror = false;
@@ -68,6 +69,7 @@ public class TemplatesContainers {
 		Templates.LOST_AND_FOUND.value = 40;
 		Templates.LOST_AND_FOUND.anchorX = 0;
 		Templates.LOST_AND_FOUND.anchorY = 0;
+		Templates.LOST_AND_FOUND.lockable = false;
 		Templates.LOST_AND_FOUND.templateId = GameObject.generateNewTemplateId();
 		Templates.LOST_AND_FOUND.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(6));
 		Templates.LOST_AND_FOUND.flipYAxisInMirror = false;

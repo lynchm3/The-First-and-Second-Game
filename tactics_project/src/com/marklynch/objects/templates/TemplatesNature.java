@@ -63,6 +63,8 @@ public class TemplatesNature {
 		Templates.TREE_CONTAINER.weight = Templates.TREE.weight;
 		Templates.TREE_CONTAINER.value = Templates.TREE.value;
 		Templates.TREE_CONTAINER.bigShadow = Templates.TREE.bigShadow;
+		Templates.TREE_CONTAINER.isOpenable = false;
+		Templates.TREE_CONTAINER.lockable = false;
 		Templates.TREE_CONTAINER.persistsWhenCantBeSeen = Templates.TREE.persistsWhenCantBeSeen;
 		Templates.TREE_CONTAINER.templateId = GameObject.generateNewTemplateId();
 

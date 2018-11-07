@@ -39,7 +39,6 @@ public class TemplatesEntrances {
 		Templates.DOOR.soundDampeningWhenClosed = 3;
 		Templates.DOOR.blocksLineOfSightWhenClosed = true;
 		Templates.DOOR.templateId = GameObject.generateNewTemplateId();
-		Templates.DOOR.flipYAxisInMirror = false;
 
 		Templates.GATE = new Gate();
 		Templates.GATE.name = "Gate";

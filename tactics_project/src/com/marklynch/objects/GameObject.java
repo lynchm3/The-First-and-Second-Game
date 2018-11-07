@@ -1318,17 +1318,17 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (this instanceof Openable && !(this instanceof RemoteDoor)) {
 			Openable openable = (Openable) this;
 
-			if (!openable.open) {
+			if (!openable.open && openable.isOpenable) {
 				actions.add(new ActionOpen(performer, openable));
 			}
 
-			if (openable.open)
+			if (openable.open && openable.isOpenable)
 				actions.add(new ActionClose(performer, openable));
 
-			if (openable.locked)
+			if (openable.locked && openable.lockable)
 				actions.add(new ActionUnlock(performer, openable));
 
-			if (!openable.locked)
+			if (!openable.locked && openable.lockable)
 				actions.add(new ActionLock(performer, openable));
 
 			if (this instanceof Door) {
