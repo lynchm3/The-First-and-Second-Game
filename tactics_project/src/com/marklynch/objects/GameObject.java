@@ -45,7 +45,6 @@ import com.marklynch.objects.actions.ActionChopping;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDigging;
-import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionEatItems;
 import com.marklynch.objects.actions.ActionEatItemsSelectedInInventory;
@@ -1098,6 +1097,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return null;
 		}
 
+		if (this instanceof Floor || this instanceof PressurePlate
+				|| this instanceof PressurePlateRequiringSpecificItem) {
+			return new ActionMove(performer, this.squareGameObjectIsOn, true);
+		}
+
 		// Water Source
 		if (!(this instanceof WaterBody) && this.squareGameObjectIsOn != null
 				&& this.squareGameObjectIsOn.inventory.waterBody != null) {
@@ -1116,10 +1120,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (this instanceof Stump || this instanceof Tree) {
 			return new ActionChopping(performer, this);
-		}
-
-		if (this instanceof PressurePlate || this instanceof PressurePlateRequiringSpecificItem) {
-			return new ActionMove(performer, this.squareGameObjectIsOn, true);
 		}
 
 		if (this instanceof Switch) {
@@ -1156,6 +1156,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			Discoverable discoverable = (Discoverable) this;
 			if (!discoverable.discovered)
 				return null;
+		}
+
+		if (this instanceof Floor || this instanceof PressurePlate
+				|| this instanceof PressurePlateRequiringSpecificItem) {
+			return null;
 		}
 
 		if (diggable) {
@@ -1200,6 +1205,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// if (this.remainingHealth <= 0)
 		// return actions;
+
+		if (this instanceof Floor || this instanceof PressurePlate
+				|| this instanceof PressurePlateRequiringSpecificItem) {
+			return actions;
+		}
 
 		if (this instanceof Discoverable) {
 			Discoverable discoverable = (Discoverable) this;
@@ -1281,11 +1291,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Switch
-		if (this instanceof PressurePlate || this instanceof PressurePlateRequiringSpecificItem) {
-			if (performer.equipped != null)
-				actions.add(new ActionDropItems(performer, this.squareGameObjectIsOn, performer.equipped));
-			actions.add(new ActionOpenInventoryToDropItems(performer, this.squareGameObjectIsOn));
-		} else if (this instanceof Switch) {
+		if (this instanceof Switch) {
 			Switch zwitch = (Switch) this;
 			actions.add(
 					new ActionUse(performer, zwitch, zwitch.actionName, zwitch.actionVerb, zwitch.requirementsToMeet));

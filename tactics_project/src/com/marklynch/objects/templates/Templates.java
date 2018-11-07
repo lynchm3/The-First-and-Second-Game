@@ -416,7 +416,7 @@ public class Templates {
 	public static Landmine LANDMINE;
 
 	public static Floor STONE_FLOOR;
-
 	public static Floor CIRCLE_FLOOR;
+	public static Floor LEAVES;
 
 }

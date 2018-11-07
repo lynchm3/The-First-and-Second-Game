@@ -63,6 +63,7 @@ public class AreaTown {
 		treeContainer.inventory.add(Templates.HATCHET.makeCopy(null, null));
 		Templates.TREE_READABLE.makeCopy(Game.level.squares[posX + 1][posY + 9], "Tree",
 				new Object[] { "MARK WAS HERE" }, null);
+		Templates.LEAVES.makeCopy(Game.level.squares[posX + 1][posY + 8], null);
 
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
@@ -155,8 +156,7 @@ public class AreaTown {
 		AreaList.mines.wantedPoster = wantedPoster;
 
 		// Lost and found
-		Storage lostAndFound = Templates.LOST_AND_FOUND.makeCopy(Game.level.squares[posX + 75][posY + 53],
-				false, null);
+		Storage lostAndFound = Templates.LOST_AND_FOUND.makeCopy(Game.level.squares[posX + 75][posY + 53], false, null);
 		AreaList.town.lostAndFound = lostAndFound;
 		AreaList.townForest.lostAndFound = lostAndFound;
 		AreaList.innerTownForest.lostAndFound = lostAndFound;

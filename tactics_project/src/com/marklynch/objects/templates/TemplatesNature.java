@@ -323,6 +323,11 @@ public class TemplatesNature {
 		Templates.CIRCLE_FLOOR.imageTexture = getGlobalImage("circle.png", true);
 		Templates.CIRCLE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
+		Templates.LEAVES = new Floor();
+		Templates.LEAVES.name = "Leaves";
+		Templates.LEAVES.imageTexture = getGlobalImage("leaves.png", true);
+		Templates.LEAVES.templateId = GameObject.generateNewTemplateId();
+
 	}
 
 }
