@@ -76,8 +76,8 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX - 1][posY + totalHeightInSquares / 2 - 1], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, this);
 
-		Templates.CRATE.makeCopy("Crate",
-				Level.squares[posX + totalWidthInSquares - 1][posY + totalHeightInSquares / 2], false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + totalWidthInSquares - 1][posY + totalHeightInSquares / 2],
+				false, null);
 
 		for (int i = posX; i < posX + totalWidthInSquares; i++) {
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {

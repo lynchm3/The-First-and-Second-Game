@@ -385,7 +385,7 @@ public class Templates {
 
 	// NATURE
 	public static Tree TREE;
-	public static Readable TREE_READABLE;
+	public static Sign TREE_READABLE;
 	public static Storage TREE_CONTAINER;
 
 	public static Tree BIG_TREE;

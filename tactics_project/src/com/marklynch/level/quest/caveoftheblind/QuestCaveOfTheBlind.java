@@ -268,7 +268,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.DOCUMENTS.makeCopy(Game.level.squares[258][9], "Ingoing/Outgoing", new Object[] {
 				"In: 1.5kg Grain, 38x Steak, 38x Grapefruit, 1x Replacement pickaxe Out: .2kg Gold Ore, .3kg Silver Ore, 2kg General Waste, 10kg Fecal Matter" },
 				null);
-		Storage securityChest = Templates.CHEST.makeCopy("Security Chest", Game.level.squares[259][9], false, null);
+		Storage securityChest = Templates.CHEST.makeCopy(Game.level.squares[259][9], false, null);
 		securityChest.inventory.add(Templates.PICKAXE.makeCopy(null, null));
 
 		// West Security to outer mine y 17 -> 21 55+56x
@@ -388,7 +388,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.BOULDER.makeCopy(Game.level.squares[290][34], null);
 		Templates.BOULDER.makeCopy(Game.level.squares[291][34], null);
 		Templates.BOULDER.makeCopy(Game.level.squares[293][34], null);
-		Templates.CHEST.makeCopy("Chest", Game.level.squares[291][36], false, null);
+		Templates.CHEST.makeCopy(Game.level.squares[291][36], false, null);
 		Templates.BOULDER.makeCopy(Game.level.squares[293][35], null);
 		Templates.BOULDER.makeCopy(Game.level.squares[292][36], null);
 		Templates.BOULDER.makeCopy(Game.level.squares[292][35], null);
@@ -543,11 +543,11 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.BED.makeCopy(Game.level.squares[287][19], null);
 		Templates.BED.makeCopy(Game.level.squares[289][19], null);
 
-		Templates.CHEST.makeCopy("Al's Gear", Game.level.squares[287][23], true, null, alsKey);
-		Templates.CHEST.makeCopy("Joe's Gear", Game.level.squares[288][23], true, null, joesKey);
-		Templates.CHEST.makeCopy("Sean's Gear", Game.level.squares[289][23], true, null, seansKey);
-		Templates.CHEST.makeCopy("Steve's Gear", Game.level.squares[290][23], false, null);
-		Templates.CHEST.makeCopy("Paul's Gear", Game.level.squares[291][23], true, null, paulsKey);
+		Templates.CHEST.makeCopy(Game.level.squares[287][23], true, null, alsKey);
+		Templates.CHEST.makeCopy(Game.level.squares[288][23], true, null, joesKey);
+		Templates.CHEST.makeCopy(Game.level.squares[289][23], true, null, seansKey);
+		Templates.CHEST.makeCopy(Game.level.squares[290][23], false, null);
+		Templates.CHEST.makeCopy(Game.level.squares[291][23], true, null, paulsKey);
 
 		// Path rec room to quarters
 		cavePaths.add(new StructurePath("Rec Room <-> Inner Mine", false, false, new ArrayList<Actor>(),
@@ -600,8 +600,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		mort.mortsRoom = new StructureRoom("Management", 265, 39, false, false, new ArrayList<Actor>(),
 				new Node[] { Nodes.caveOfTheBlindWest }, new RoomPart(265, 39, 274, 42));
 		rooms.add(mort.mortsRoom);
-		Storage confiscatedChest = Templates.CHEST.makeCopy("Confiscated", Game.level.squares[269][42], false, mort,
-				mortsKey);
+		Storage confiscatedChest = Templates.CHEST.makeCopy(Game.level.squares[269][42], false, mort, mortsKey);
 		confiscatedChest.inventory.add(alsKey);
 		mort.aiRoutine.roomBounds.add(mort.mortsRoom);
 		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[274][39], mort));

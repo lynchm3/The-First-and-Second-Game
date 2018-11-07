@@ -398,7 +398,7 @@ public class QuestSmallGame extends Quest {
 
 		// IF I ATTACK OR TELEPORT ON TO THE SIGN THEY SHOULD BE ANGRY..
 
-		Storage chest = Templates.CHEST.makeCopy("Chest", Game.level.squares[103][1], false, null);
+		Storage chest = Templates.CHEST.makeCopy(Game.level.squares[103][1], false, null);
 		chest.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		chest.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, null));
 		chest.inventory.add(Templates.GOLD.makeCopy(null, null, 101));
@@ -516,7 +516,7 @@ public class QuestSmallGame extends Quest {
 		Discoverable mound3 = Templates.MOUND.makeCopy(Game.level.squares[3][1], null, 1);
 		mound3.inventory.add(Templates.ROCK.makeCopy(null, null));
 
-		Storage crate = Templates.CRATE.makeCopy("Crate", Game.level.squares[123][9], false, null);
+		Storage crate = Templates.CRATE.makeCopy(Game.level.squares[123][9], false, null);
 		crate.inventory.add(Templates.HATCHET.makeCopy(null, null));
 		// mound.discovered();
 		links = TextUtils.getLinks(true, this);

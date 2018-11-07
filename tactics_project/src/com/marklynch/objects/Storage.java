@@ -85,7 +85,7 @@ public class Storage extends Openable {
 		}
 	}
 
-	public Storage makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
+	public Storage makeCopy(Square square, boolean locked, Actor owner, Key... keys) {
 
 		Storage storage = new Storage();
 		setInstances(storage);
@@ -99,7 +99,6 @@ public class Storage extends Openable {
 
 		storage.storageOpenTexture = storageOpenTexture;
 		storage.storageClosedTexture = storageClosedTexture;
-		// this.imagePathWhenOpen = imagePathWhenOpen;
 
 		if (storage.open)
 			storage.imageTexture = storage.storageOpenTexture;

@@ -16,7 +16,7 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Landmine;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Portal;
-import com.marklynch.objects.Readable;
+import com.marklynch.objects.Sign;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.Stump;
@@ -41,7 +41,7 @@ public class TemplatesNature {
 		Templates.TREE.bigShadow = true;
 		Templates.TREE.templateId = GameObject.generateNewTemplateId();
 
-		Templates.TREE_READABLE = new Readable();
+		Templates.TREE_READABLE = new Sign();
 		Templates.TREE_READABLE.name = "Tree with engraving";
 		Templates.TREE_READABLE.setImageAndExtrapolateSize("tree_readable.png");
 		Templates.TREE_READABLE.totalHealth = Templates.TREE_READABLE.remainingHealth = Templates.TREE.totalHealth;
@@ -53,7 +53,7 @@ public class TemplatesNature {
 		Templates.TREE_READABLE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.TREE_CONTAINER = new Storage();
-		Templates.TREE_CONTAINER.name = "Tree with hole";
+		Templates.TREE_CONTAINER.name = Templates.TREE_CONTAINER.baseName = "Tree with hole";
 		Templates.TREE_CONTAINER.setImageAndExtrapolateSize("tree_searchable.png");
 		Templates.TREE_CONTAINER.storageClosedTexture = ResourceUtils.getGlobalImage("tree_searchable.png", true);
 		Templates.TREE_CONTAINER.storageOpenTexture = ResourceUtils.getGlobalImage("tree_searchable.png", true);

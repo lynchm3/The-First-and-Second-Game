@@ -58,6 +58,12 @@ public class AreaTown {
 		trader.inventory.add(Templates.HATCHET.makeCopy(null, null));
 		trader.inventory.add(Templates.HUNTING_BOW.makeCopy(null, null));
 
+		// Some tree to the left
+		Storage treeContainer = Templates.TREE_CONTAINER.makeCopy(Game.level.squares[posX + 0][posY + 8], false, null);
+		treeContainer.inventory.add(Templates.HATCHET.makeCopy(null, null));
+		Templates.TREE_READABLE.makeCopy(Game.level.squares[posX + 1][posY + 9], "Tree",
+				new Object[] { "MARK WAS HERE" }, null);
+
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[posX + 4][posY + 4] }));
@@ -89,18 +95,18 @@ public class AreaTown {
 		trader.shopSign = joesShopSign;
 
 		// Boxws beside Joe's shop
-		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 18][posY + 0], false, null);
-		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 18][posY + 1], false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + 18][posY + 0], false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + 18][posY + 1], false, null);
 		Templates.SHOVEL.makeCopy(Level.squares[posX + 18][posY + 2], null);
 		// Templates.CRATE.makeCopy("Crate", Level.squares[posX + 18][posY + 2], false,
 		// null);
-		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 18][posY + 3], false, null);
-		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 18][posY + 4], false, null);
-		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 19][posY + 0], false, null);
-		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 19][posY + 1], false, null);
-		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 19][posY + 2], false, null);
-		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 19][posY + 3], false, null);
-		Templates.CRATE.makeCopy("Crate", Level.squares[posX + 20][posY + 2], false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + 18][posY + 3], false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + 18][posY + 4], false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + 19][posY + 0], false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + 19][posY + 1], false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + 19][posY + 2], false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + 19][posY + 3], false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + 20][posY + 2], false, null);
 
 		// Doctor's Practice
 		Doctor doctor = Templates.DOCTOR.makeCopy("Doctor Mike", Game.level.squares[posX + 7 + 35][posY + 1 + 3],
@@ -149,8 +155,8 @@ public class AreaTown {
 		AreaList.mines.wantedPoster = wantedPoster;
 
 		// Lost and found
-		Storage lostAndFound = Templates.LOST_AND_FOUND.makeCopy("Town Lost and Found",
-				Game.level.squares[posX + 75][posY + 53], false, null);
+		Storage lostAndFound = Templates.LOST_AND_FOUND.makeCopy(Game.level.squares[posX + 75][posY + 53],
+				false, null);
 		AreaList.town.lostAndFound = lostAndFound;
 		AreaList.townForest.lostAndFound = lostAndFound;
 		AreaList.innerTownForest.lostAndFound = lostAndFound;
@@ -179,8 +185,8 @@ public class AreaTown {
 		new BodyOfWater(posX + 90, posY + 30, posX + 100, posY + 37);
 		Templates.FISH.makeCopy("Fish", Game.level.squares[posX + 107][posY + 34], FactionList.buns, null,
 				new GameObject[] {}, new GameObject[] {}, null);
-		Templates.CHEST.makeCopy("Chest", Game.level.squares[posX + 107][posY + 33], false, null);
-		Templates.CRATE.makeCopy("Crate", Game.level.squares[posX + 106][posY + 31], false, null);
+		Templates.CHEST.makeCopy(Game.level.squares[posX + 107][posY + 33], false, null);
+		Templates.CRATE.makeCopy(Game.level.squares[posX + 106][posY + 31], false, null);
 		// new BodyOfWater(105, 30, 106, 37);
 
 		// River

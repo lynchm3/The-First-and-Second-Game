@@ -474,8 +474,8 @@ public class Editor {
 		player.inventory.add(Templates.CHAINMAIL.makeCopy(null, player));
 		player.inventory.add(Templates.CHAIR.makeCopy(null, player));
 		player.inventory.add(Templates.CHAIR_FALLEN.makeCopy(null, player));
-		player.inventory.add(Templates.CHEST.makeCopy("Locked Chest", null, true, player));
-		player.inventory.add(Templates.CRATE.makeCopy("Crate", null, false, player));
+		player.inventory.add(Templates.CHEST.makeCopy(null, true, player));
+		player.inventory.add(Templates.CRATE.makeCopy(null, false, player));
 		player.inventory.add(Templates.DIRTY_SHEET_3.makeCopy(null, player));
 		player.inventory.add(Templates.DOCUMENTS.makeCopy(null, "Mystery Documents", new Object[] {}, player));
 		player.inventory.add(Templates.DRIED_BLOOD.makeCopy(null, player));

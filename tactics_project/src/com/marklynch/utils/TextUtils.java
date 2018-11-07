@@ -97,6 +97,9 @@ public class TextUtils {
 
 				GameObject gameObject = (GameObject) content;
 
+				System.out.println("content = " + content);
+				System.out.println("gameObject.name = " + gameObject.name);
+
 				float textWidth = Game.smallFont.getWidth(gameObject.name);
 				float textureWidth = 20;
 
