@@ -124,20 +124,19 @@ public class PowerTelekineticPush extends Power {
 		final Square endSquare = tempEndSquare;
 
 		for (final GameObject pushedGameObject : pushedObjectAndTheirStartSquare.keySet()) {
-			endSquare.inventory.add(pushedGameObject);
 			pushedGameObject.setPrimaryAnimation(
 					new AnimationPushed(pushedGameObject, pushedObjectAndTheirStartSquare.get(pushedGameObject),
 							endSquare, pushedGameObject.getPrimaryAnimation(), new OnCompletionListener() {
 								@Override
 								public void animationComplete(GameObject gameObject) {
-									postAnimation(pushedGameObject, action, obstacle);
+									postAnimation(pushedGameObject, action, obstacle, endSquare);
 								}
 							}));
 
 		}
 	}
 
-	public void postAnimation(GameObject pushedGameObject, Action action, GameObject obstacle) {
+	public void postAnimation(GameObject pushedGameObject, Action action, GameObject obstacle, Square endSquare) {
 
 		pushedGameObject.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
 		if (obstacle != null) {

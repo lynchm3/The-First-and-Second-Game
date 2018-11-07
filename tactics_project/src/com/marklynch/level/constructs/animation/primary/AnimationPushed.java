@@ -12,6 +12,8 @@ public class AnimationPushed extends Animation {
 	public Square endSquare;
 	public float startOffsetX = 0;
 	public float startOffsetY = 0;
+	public float endOffsetX = 0;
+	public float endOffsetY = 0;
 
 	float quarterDurationToReach;
 	float halfDurationToReach;
@@ -28,11 +30,16 @@ public class AnimationPushed extends Animation {
 		super(performer, onCompletionListener, null, null, null, null, null, null, performer, startSquare, endSquare);
 		if (!runAnimation)
 			return;
+
+		blockAI = true;
+
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
 
-		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
-		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
+		// startOffsetX = offsetX =
+		// startOffsetY = offsetY =
+		endOffsetX = (int) ((this.endSquare.xInGrid - this.startSquare.xInGrid) * Game.SQUARE_WIDTH);
+		endOffsetY = (int) ((this.endSquare.yInGrid - this.startSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
 		backwards = performer.backwards;
 
@@ -61,8 +68,8 @@ public class AnimationPushed extends Animation {
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
 		kf0.torsoAngle = targetRadians;
-		kf0.offsetX = 0;
-		kf0.offsetY = 0;
+		kf0.offsetX = endOffsetX;
+		kf0.offsetY = endOffsetY;
 		kf0.leftShoulderAngle = targetArmRadians;
 		kf0.rightShoulderAngle = targetArmRadians;
 		kf0.leftElbowAngle = 0;
@@ -75,8 +82,6 @@ public class AnimationPushed extends Animation {
 		kf0.offsetXSpeed = 1;
 		kf0.offsetYSpeed = 1;
 		keyFrames.add(kf0);
-
-		blockAI = true;
 	}
 
 	float targetRadians = 0;
@@ -110,7 +115,9 @@ public class AnimationPushed extends Animation {
 
 	@Override
 	protected void childRunCompletionAlgorightm(boolean wait) {
-		// TODO Auto-generated method stub
+		leftShoulderAngle = 0;
+		rightShoulderAngle = 0;
+		endSquare.inventory.add(performer);
 
 	}
 

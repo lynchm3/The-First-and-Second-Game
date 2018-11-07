@@ -1,5 +1,6 @@
 package com.marklynch.level.constructs.animation.primary;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
@@ -15,8 +16,13 @@ public class AnimationFall extends Animation {
 			OnCompletionListener onCompletionListener) {
 
 		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
+
+		System.out.println("AnimationFall, runAnimation = " + runAnimation);
+
 		if (!runAnimation)
 			return;
+
+		blockAI = true;
 
 		this.durationToReachMillis = durationToReachMillis;
 		startLeftArmAngle = this.leftShoulderAngle;
@@ -41,10 +47,8 @@ public class AnimationFall extends Animation {
 
 		kf0.offsetY = 0;
 
-		kf0.setAllSpeeds(0.004f);
-		kf0.offsetYSpeed = 1;
-		kf0.scaleXSpeed = 0.001f;
-		kf0.scaleYSpeed = 0.001f;
+		kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER;
+		kf0.normaliseSpeeds = true;
 
 		keyFrames.add(kf0);
 
@@ -52,6 +56,7 @@ public class AnimationFall extends Animation {
 
 	@Override
 	public void update(double delta) {
+		// System.out.println("AnimationFall.update");
 		super.keyFrameUpdate(delta);
 	}
 
@@ -62,7 +67,6 @@ public class AnimationFall extends Animation {
 
 	@Override
 	public void draw1() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -72,7 +76,6 @@ public class AnimationFall extends Animation {
 
 	@Override
 	public void draw3() {
-		// TODO Auto-generated method stub
 
 	}
 

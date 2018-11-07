@@ -2291,19 +2291,40 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void setPrimaryAnimation(Animation animation) {
 
+		if (this == Level.player) {
+			System.out.println("=========================");
+			System.out.println("animation a = " + animation);
+		}
+
 		if (animation == null || animation.runAnimation == false)
 			return;
 
+		if (this == Level.player) {
+			System.out.println("animation b = " + animation);
+		}
+
 		if (this.primaryAnimation != null && !this.primaryAnimation.completed
 				&& !(this.primaryAnimation instanceof AnimationWait)) {
+
+			if (this == Level.player) {
+				System.out.println("animation c " + animation + " replacing " + this.primaryAnimation);
+			}
 			this.primaryAnimation.runCompletionAlorightm(false);
+		} else {
+
+			if (this == Level.player) {
+				System.out.println("animation d " + animation + " replacing " + this.primaryAnimation);
+			}
 		}
 
 		Level.blockingAnimations.remove(this.primaryAnimation);
 		Level.animations.remove(this.primaryAnimation);
 
-		// if (remainingHealth > 0) {
 		this.primaryAnimation = animation;
+
+		if (this == Level.player) {
+			System.out.println("animation e this.primaryAnimation has been set to " + this.primaryAnimation);
+		}
 		if (animation != null && animation.blockAI) {
 			Level.blockingAnimations.add(animation);
 		}

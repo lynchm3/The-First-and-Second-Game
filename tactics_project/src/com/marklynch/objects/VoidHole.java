@@ -68,18 +68,30 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 
 		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
 
+			if (gameObject == Level.player)
+				System.out.println("in voidhole.squareContentsChanged");
+
 			if (gameObject == this || gameObject.isFloorObject)
 				continue;
 
 			if (gameObject.primaryAnimation != null && gameObject.primaryAnimation.completed == false) {
 				gameObject.primaryAnimation.onCompletionListener = this;
+
+				if (gameObject == Level.player)
+					System.out.println("void hole is now completion listener for " + gameObject.primaryAnimation);
 			} else {
+
+				if (gameObject == Level.player)
+					System.out.println("calling voidhole.dothething");
 				doTheThing(gameObject);
 			}
 		}
 	}
 
 	public void doTheThing(final GameObject gameObject) {
+
+		if (gameObject == Level.player)
+			System.out.println("voidhole.dothething");
 
 		if (gameObject.isFloorObject == false && gameObject.squareGameObjectIsOn == this.squareGameObjectIsOn) {
 			gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 400, new OnCompletionListener() {

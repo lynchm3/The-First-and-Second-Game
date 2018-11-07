@@ -18,6 +18,7 @@ public class AnimationFallFromTheSky extends Animation {
 		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
 		if (!runAnimation)
 			return;
+		blockAI = true;
 
 		offsetY = -1024;
 
