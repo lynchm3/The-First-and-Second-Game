@@ -1,5 +1,6 @@
 package com.marklynch.level.constructs.animation.primary;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
@@ -33,15 +34,14 @@ public class AnimationFallFromTheSky extends Animation {
 		kf0.leftKneeAngle = 0;
 		kf0.rightKneeAngle = 0;
 
+		// The good stuff
 		kf0.scaleX = 1;
 		kf0.scaleY = 1;
-
+		kf0.offsetX = 0;
 		kf0.offsetY = 0;
 
-		kf0.setAllSpeeds(0.004f);
-		kf0.offsetYSpeed = 1;
-		kf0.scaleXSpeed = 0.001f;
-		kf0.scaleYSpeed = 0.001f;
+		kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER;
+		kf0.normaliseSpeeds = true;
 
 		keyFrames.add(kf0);
 	}

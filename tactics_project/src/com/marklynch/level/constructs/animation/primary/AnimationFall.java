@@ -35,17 +35,18 @@ public class AnimationFall extends Animation {
 		kf0.torsoAngle = 0;
 		kf0.leftElbowAngle = 0;
 		kf0.rightElbowAngle = 0;
-		kf0.leftShoulderAngle = this.targetLeftArmAngle;
-		kf0.rightShoulderAngle = this.targetRightArmAngle;
 		kf0.leftHipAngle = -0;
 		kf0.rightHipAngle = -0;
 		kf0.leftKneeAngle = 0;
 		kf0.rightKneeAngle = 0;
 
+		// the good stuff
+		kf0.leftShoulderAngle = this.targetLeftArmAngle;
+		kf0.rightShoulderAngle = this.targetRightArmAngle;
 		kf0.scaleX = 0;
 		kf0.scaleY = 0;
-
-		kf0.offsetY = 0;
+		kf0.offsetX = 100;
+		kf0.offsetY = 100;
 
 		kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER;
 		kf0.normaliseSpeeds = true;
