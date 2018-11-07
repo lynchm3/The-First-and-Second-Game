@@ -15,9 +15,11 @@ public class PressurePlate extends Switch implements UpdatesWhenSquareContentsCh
 
 	public PressurePlate() {
 		super();
+		canBePickedUp = false;
+		fitsInInventory = false;
+		persistsWhenCantBeSeen = true;
 		attackable = false;
 		isFloorObject = true;
-		attackable = false;
 		orderingOnGound = 30;
 		type = "Pressure Plate";
 	}

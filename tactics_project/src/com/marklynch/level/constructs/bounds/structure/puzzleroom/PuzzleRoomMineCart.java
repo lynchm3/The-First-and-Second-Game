@@ -7,7 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Floor;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Seesaw;
 import com.marklynch.objects.Switch;
@@ -53,7 +53,7 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Rail switchableRight = Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 7], null, Direction.UP,
 				Direction.LEFT);
 		switchableRight.turnsClockwiseFirst = false;
-		Floor circleFloorRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 7][posY + 7], null);
+		GameObject circleFloorRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 7][posY + 7], null);
 		circleFloorRight.drawOffsetRatioY = 0.375f;
 		Templates.RAIL.makeCopy(Level.squares[posX + 6][posY + 7], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 5][posY + 7], null, Direction.LEFT, Direction.RIGHT);
@@ -61,7 +61,7 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.RAIL.makeCopy(Level.squares[posX + 3][posY + 7], null, Direction.LEFT, Direction.RIGHT);
 		Rail switchableLeft = Templates.RAIL.makeCopy(Level.squares[posX + 2][posY + 7], null, Direction.RIGHT,
 				Direction.UP);
-		Floor circleFloorLeft = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 2][posY + 7], null);
+		GameObject circleFloorLeft = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 2][posY + 7], null);
 		circleFloorLeft.drawOffsetRatioY = 0.375f;
 
 		// left
@@ -98,7 +98,7 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Rail switchableBottomRight = Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 16], null, Direction.UP,
 				Direction.LEFT);
 		switchableBottomRight.turnsClockwiseFirst = false;
-		Floor circleFloorBottomRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 11][posY + 16], null);
+		GameObject circleFloorBottomRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 11][posY + 16], null);
 		circleFloorBottomRight.drawOffsetRatioY = 0.375f;
 		Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 15], null, Direction.DOWN, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 15], null, Direction.UP, Direction.LEFT);

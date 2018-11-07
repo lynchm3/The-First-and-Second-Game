@@ -9,7 +9,6 @@ import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Discoverable;
-import com.marklynch.objects.Floor;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -313,19 +312,37 @@ public class TemplatesNature {
 		Templates.LANDMINE.power = new PowerInferno(null);
 		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();
 
-		Templates.STONE_FLOOR = new Floor();
+		Templates.STONE_FLOOR = new GameObject();
 		Templates.STONE_FLOOR.name = "Floor";
 		Templates.STONE_FLOOR.imageTexture = Square.STONE_TEXTURE;
+		Templates.STONE_FLOOR.canBePickedUp = false;
+		Templates.STONE_FLOOR.fitsInInventory = false;
+		Templates.STONE_FLOOR.persistsWhenCantBeSeen = true;
+		Templates.STONE_FLOOR.attackable = false;
+		Templates.STONE_FLOOR.isFloorObject = true;
+		Templates.STONE_FLOOR.orderingOnGound = 20;
 		Templates.STONE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
-		Templates.CIRCLE_FLOOR = new Floor();
+		Templates.CIRCLE_FLOOR = new GameObject();
 		Templates.CIRCLE_FLOOR.name = "Floor";
 		Templates.CIRCLE_FLOOR.imageTexture = getGlobalImage("circle.png", true);
+		Templates.CIRCLE_FLOOR.canBePickedUp = false;
+		Templates.CIRCLE_FLOOR.fitsInInventory = false;
+		Templates.CIRCLE_FLOOR.persistsWhenCantBeSeen = true;
+		Templates.CIRCLE_FLOOR.attackable = false;
+		Templates.CIRCLE_FLOOR.isFloorObject = true;
+		Templates.CIRCLE_FLOOR.orderingOnGound = 20;
 		Templates.CIRCLE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
-		Templates.LEAVES = new Floor();
+		Templates.LEAVES = new GameObject();
 		Templates.LEAVES.name = "Leaves";
 		Templates.LEAVES.imageTexture = getGlobalImage("leaves.png", true);
+		Templates.LEAVES.canBePickedUp = false;
+		Templates.LEAVES.fitsInInventory = false;
+		Templates.LEAVES.persistsWhenCantBeSeen = true;
+		Templates.LEAVES.attackable = false;
+		Templates.LEAVES.isFloorObject = true;
+		Templates.LEAVES.orderingOnGound = 20;
 		Templates.LEAVES.templateId = GameObject.generateNewTemplateId();
 
 	}

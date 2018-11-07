@@ -1097,8 +1097,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return null;
 		}
 
-		if (this instanceof Floor || this instanceof PressurePlate
-				|| this instanceof PressurePlateRequiringSpecificItem) {
+		if (isFloorObject) {
 			return new ActionMove(performer, this.squareGameObjectIsOn, true);
 		}
 
@@ -1158,8 +1157,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return null;
 		}
 
-		if (this instanceof Floor || this instanceof PressurePlate
-				|| this instanceof PressurePlateRequiringSpecificItem) {
+		if (isFloorObject) {
 			return null;
 		}
 
@@ -1206,8 +1204,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// if (this.remainingHealth <= 0)
 		// return actions;
 
-		if (this instanceof Floor || this instanceof PressurePlate
-				|| this instanceof PressurePlateRequiringSpecificItem) {
+		if (isFloorObject) {
 			return actions;
 		}
 
@@ -1963,6 +1960,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.type = type;
 
 		gameObject.orderingOnGound = orderingOnGound;
+
+		gameObject.canBePickedUp = canBePickedUp;
+		gameObject.fitsInInventory = fitsInInventory;
+		gameObject.persistsWhenCantBeSeen = persistsWhenCantBeSeen;
+		gameObject.attackable = attackable;
+		gameObject.isFloorObject = isFloorObject;
 
 		gameObject.init();
 	}

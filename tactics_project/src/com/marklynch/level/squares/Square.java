@@ -25,14 +25,12 @@ import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Discoverable;
-import com.marklynch.objects.Floor;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Landmine;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.Portal;
 import com.marklynch.objects.PressurePlate;
-import com.marklynch.objects.PressurePlateRequiringSpecificItem;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
@@ -796,9 +794,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 					continue;
 			}
 
-			if (gameObject instanceof WaterBody || gameObject instanceof Wall || gameObject instanceof Floor
-					|| gameObject instanceof PressurePlate
-					|| gameObject instanceof PressurePlateRequiringSpecificItem) {
+			if (gameObject instanceof WaterBody || gameObject instanceof Wall || gameObject.isFloorObject) {
 				continue;
 			}
 

@@ -9,7 +9,6 @@ import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Floor;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.SwitchListener;
@@ -76,8 +75,8 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX - 1][posY + totalHeightInSquares / 2 - 1], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, this);
 
-		Templates.CRATE.makeCopy(Level.squares[posX + totalWidthInSquares - 1][posY + totalHeightInSquares / 2],
-				false, null);
+		Templates.CRATE.makeCopy(Level.squares[posX + totalWidthInSquares - 1][posY + totalHeightInSquares / 2], false,
+				null);
 
 		for (int i = posX; i < posX + totalWidthInSquares; i++) {
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
@@ -91,7 +90,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2][posY + totalHeightInSquares / 2 - 1]);
 		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2][posY + totalHeightInSquares / 2]);
 		for (Square middleSquare : middleSquares) {
-			Floor floor = Templates.STONE_FLOOR.makeCopy(null, null);
+			GameObject floor = Templates.STONE_FLOOR.makeCopy(null, null);
 			middleSquare.inventory.add(floor);
 		}
 
@@ -143,7 +142,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			activeBridgeSquares = horizontalBridgeSquares;
 
 		for (Square bridgeSquare : activeBridgeSquares) {
-			Floor floor = Templates.STONE_FLOOR.makeCopy(null, null);
+			GameObject floor = Templates.STONE_FLOOR.makeCopy(null, null);
 
 			// double random = Math.random();
 			//

@@ -8,7 +8,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.utils.Texture;
 
-public class Rail extends Floor implements SwitchListener {
+public class Rail extends GameObject implements SwitchListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	Direction direction1;
@@ -33,9 +33,14 @@ public class Rail extends Floor implements SwitchListener {
 
 	public Rail() {
 		super();
+
 		canBePickedUp = false;
 		fitsInInventory = false;
+		persistsWhenCantBeSeen = true;
+		attackable = false;
 		isFloorObject = true;
+		orderingOnGound = 20;
+
 		type = "Rail";
 	}
 

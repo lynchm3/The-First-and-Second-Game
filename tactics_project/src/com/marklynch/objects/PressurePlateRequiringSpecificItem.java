@@ -15,9 +15,12 @@ public class PressurePlateRequiringSpecificItem extends Switch implements Update
 
 	public PressurePlateRequiringSpecificItem() {
 		super();
+
+		canBePickedUp = false;
+		fitsInInventory = false;
+		persistsWhenCantBeSeen = true;
 		attackable = false;
 		isFloorObject = true;
-		attackable = false;
 		orderingOnGound = 30;
 		type = "Pressure Plate with hole";
 	}

@@ -7,7 +7,6 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.squares.Node;
-import com.marklynch.objects.Floor;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Switch;
@@ -23,8 +22,9 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 	final static int totalHeightInSquares = 20;
 
 	public PuzzleRoomMineCart2(int posX, int posY) {
-		super("Minecart Room 2", posX, posY, false, false, new ArrayList<Actor>(), 1, false, new Node[] {}, new RoomPart[] {
-				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
+		super("Minecart Room 2", posX, posY, false, false, new ArrayList<Actor>(), 1, false, new Node[] {},
+				new RoomPart[] {
+						new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
 		this.posY = posY;
@@ -40,7 +40,7 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 		Rail switchableMiddleLeft = Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 11], null, Direction.LEFT,
 				Direction.RIGHT);
 		switchableMiddleLeft.turnsClockwiseFirst = false;
-		Floor circleFloorMiddleLeft = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 7][posY + 11], null);
+		GameObject circleFloorMiddleLeft = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 7][posY + 11], null);
 		circleFloorMiddleLeft.drawOffsetRatioY = 0.375f;
 		Templates.RAIL.makeCopy(Level.squares[posX + 8][posY + 11], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 9][posY + 11], null, Direction.LEFT, Direction.RIGHT);
@@ -48,7 +48,7 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 		Rail switchableRailMiddleRight = Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 11], null,
 				Direction.LEFT, Direction.RIGHT);
 		switchableRailMiddleRight.turnsClockwiseFirst = true;
-		Floor circleFloorMiddleRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 11][posY + 11], null);
+		GameObject circleFloorMiddleRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 11][posY + 11], null);
 		circleFloorMiddleRight.drawOffsetRatioY = 0.375f;
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 11], null, Direction.LEFT, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 13][posY + 11], null, Direction.LEFT, Direction.RIGHT);
@@ -58,7 +58,7 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 		Rail switchableRailTopLeft = Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 10], null, Direction.LEFT,
 				Direction.UP);
 		switchableRailTopLeft.turnsClockwiseFirst = false;
-		Floor circleFloorTopLeft = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 7][posY + 10], null);
+		GameObject circleFloorTopLeft = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 7][posY + 10], null);
 		circleFloorTopLeft.drawOffsetRatioY = 0.375f;
 		Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 9], null, Direction.DOWN, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 8][posY + 9], null, Direction.LEFT, Direction.RIGHT);
@@ -68,7 +68,7 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 		Rail switchableRailTopRight = Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 10], null, Direction.UP,
 				Direction.RIGHT);
 		switchableRailTopRight.turnsClockwiseFirst = true;
-		Floor circleFloorTopRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 11][posY + 10], null);
+		GameObject circleFloorTopRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 11][posY + 10], null);
 		circleFloorTopRight.drawOffsetRatioY = 0.375f;
 
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 10], null, Direction.LEFT, Direction.UP);
@@ -95,7 +95,7 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 		Rail switchableRailBottomLeft = Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 12], null,
 				Direction.LEFT, Direction.DOWN);
 		switchableRailBottomLeft.turnsClockwiseFirst = true;
-		Floor circleFloorBottomLeft = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 7][posY + 12], null);
+		GameObject circleFloorBottomLeft = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 7][posY + 12], null);
 		circleFloorBottomLeft.drawOffsetRatioY = 0.375f;
 		Templates.RAIL.makeCopy(Level.squares[posX + 7][posY + 13], null, Direction.UP, Direction.RIGHT);
 		Templates.RAIL.makeCopy(Level.squares[posX + 8][posY + 13], null, Direction.LEFT, Direction.RIGHT);
@@ -105,7 +105,7 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 		Rail switchableRailBottomRight = Templates.RAIL.makeCopy(Level.squares[posX + 11][posY + 12], null,
 				Direction.DOWN, Direction.RIGHT);
 		switchableRailBottomRight.turnsClockwiseFirst = false;
-		Floor circleFloorBottomRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 11][posY + 12], null);
+		GameObject circleFloorBottomRight = Templates.CIRCLE_FLOOR.makeCopy(Level.squares[posX + 11][posY + 12], null);
 		circleFloorBottomRight.drawOffsetRatioY = 0.375f;
 
 		Templates.RAIL.makeCopy(Level.squares[posX + 12][posY + 12], null, Direction.LEFT, Direction.DOWN);
