@@ -13,8 +13,8 @@ public class TemplatesContainers {
 		Templates.CHEST = new Storage();
 		Templates.CHEST.name = "Chest";
 		Templates.CHEST.baseName = "Chest";
-		Templates.CHEST.chestClosedTexture = ResourceUtils.getGlobalImage("chest.png", true);
-		Templates.CHEST.chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png", true);
+		Templates.CHEST.storageClosedTexture = ResourceUtils.getGlobalImage("chest.png", true);
+		Templates.CHEST.storageOpenTexture = ResourceUtils.getGlobalImage("chest_open.png", true);
 		Templates.CHEST.totalHealth = Templates.CHEST.remainingHealth = 200;
 		Templates.CHEST.widthRatio = 1f;
 		Templates.CHEST.heightRatio = 1f;
@@ -35,8 +35,8 @@ public class TemplatesContainers {
 		Templates.CRATE = new Storage();
 		Templates.CRATE.name = "Crate";
 		Templates.CRATE.baseName = "Crate";
-		Templates.CRATE.chestClosedTexture = ResourceUtils.getGlobalImage("crate.png", true);
-		Templates.CRATE.chestOpenTexture = ResourceUtils.getGlobalImage("crate_open.png", true);
+		Templates.CRATE.storageClosedTexture = ResourceUtils.getGlobalImage("crate.png", true);
+		Templates.CRATE.storageOpenTexture = ResourceUtils.getGlobalImage("crate_open.png", true);
 		Templates.CRATE.totalHealth = Templates.CRATE.remainingHealth = 60;
 		Templates.CRATE.widthRatio = 1f;
 		Templates.CRATE.heightRatio = 1f;
@@ -59,8 +59,8 @@ public class TemplatesContainers {
 		Templates.LOST_AND_FOUND = new Storage();
 		Templates.LOST_AND_FOUND.name = "Lost and Found";
 		Templates.LOST_AND_FOUND.baseName = "Lost and Found";
-		Templates.LOST_AND_FOUND.chestClosedTexture = ResourceUtils.getGlobalImage("crate.png", true);
-		Templates.LOST_AND_FOUND.chestOpenTexture = ResourceUtils.getGlobalImage("crate_open.png", true);
+		Templates.LOST_AND_FOUND.storageClosedTexture = ResourceUtils.getGlobalImage("crate.png", true);
+		Templates.LOST_AND_FOUND.storageOpenTexture = ResourceUtils.getGlobalImage("crate_open.png", true);
 		Templates.LOST_AND_FOUND.totalHealth = Templates.LOST_AND_FOUND.remainingHealth = 120;
 		Templates.LOST_AND_FOUND.stackable = false;
 		Templates.LOST_AND_FOUND.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));

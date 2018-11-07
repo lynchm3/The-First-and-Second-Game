@@ -16,13 +16,15 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Landmine;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Portal;
+import com.marklynch.objects.Readable;
 import com.marklynch.objects.SmallHidingPlace;
+import com.marklynch.objects.Storage;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.WaterBody;
-import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.ResourceUtils;;
 
 public class TemplatesNature {
 
@@ -32,17 +34,36 @@ public class TemplatesNature {
 		Templates.TREE.name = "Tree";
 		Templates.TREE.setImageAndExtrapolateSize("tree.png");
 		Templates.TREE.totalHealth = Templates.TREE.remainingHealth = 100;
-		Templates.TREE.widthRatio = 1f;
 		Templates.TREE.heightRatio = 1.5f;
-		Templates.TREE.drawOffsetRatioX = 0f;
 		Templates.TREE.drawOffsetRatioY = -0.5f;
 		Templates.TREE.weight = 100f;
 		Templates.TREE.value = 10;
-		Templates.TREE.anchorX = 0;
-		Templates.TREE.anchorY = 0;
 		Templates.TREE.bigShadow = true;
 		Templates.TREE.templateId = GameObject.generateNewTemplateId();
-		Templates.TREE.flipYAxisInMirror = false;
+
+		Templates.TREE_READABLE = new Readable();
+		Templates.TREE_READABLE.name = "Tree with engraving";
+		Templates.TREE_READABLE.setImageAndExtrapolateSize("tree_readable.png");
+		Templates.TREE_READABLE.totalHealth = Templates.TREE_READABLE.remainingHealth = Templates.TREE.totalHealth;
+		Templates.TREE_READABLE.heightRatio = Templates.TREE.heightRatio;
+		Templates.TREE_READABLE.drawOffsetRatioY = Templates.TREE.drawOffsetRatioY;
+		Templates.TREE_READABLE.weight = Templates.TREE.weight;
+		Templates.TREE_READABLE.value = Templates.TREE.value;
+		Templates.TREE_READABLE.bigShadow = Templates.TREE.bigShadow;
+		Templates.TREE_READABLE.templateId = GameObject.generateNewTemplateId();
+
+		Templates.TREE_CONTAINER = new Storage();
+		Templates.TREE_CONTAINER.name = "Tree with hole";
+		Templates.TREE_CONTAINER.setImageAndExtrapolateSize("tree_searchable.png");
+		Templates.TREE_CONTAINER.storageClosedTexture = ResourceUtils.getGlobalImage("tree_searchable.png", true);
+		Templates.TREE_CONTAINER.storageOpenTexture = ResourceUtils.getGlobalImage("tree_searchable.png", true);
+		Templates.TREE_CONTAINER.totalHealth = Templates.TREE_CONTAINER.remainingHealth = Templates.TREE.totalHealth;
+		Templates.TREE_CONTAINER.heightRatio = Templates.TREE.heightRatio;
+		Templates.TREE_CONTAINER.drawOffsetRatioY = Templates.TREE.drawOffsetRatioY;
+		Templates.TREE_CONTAINER.weight = Templates.TREE.weight;
+		Templates.TREE_CONTAINER.value = Templates.TREE.value;
+		Templates.TREE_CONTAINER.bigShadow = Templates.TREE.bigShadow;
+		Templates.TREE_CONTAINER.templateId = GameObject.generateNewTemplateId();
 
 		Templates.BIG_TREE = new Tree();
 		Templates.BIG_TREE.name = "Big Tree";

@@ -10,8 +10,8 @@ public class Storage extends Openable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	public Texture chestOpenTexture;
-	public Texture chestClosedTexture;
+	public Texture storageOpenTexture;
+	public Texture storageClosedTexture;
 	public String imagePathWhenOpen;
 	public ArrayList<Actor> ownersOfContents = new ArrayList<Actor>();
 
@@ -40,13 +40,13 @@ public class Storage extends Openable {
 	@Override
 	public void open() {
 		open = true;
-		imageTexture = chestOpenTexture;
+		imageTexture = storageOpenTexture;
 	}
 
 	@Override
 	public void close() {
 		open = false;
-		imageTexture = chestClosedTexture;
+		imageTexture = storageClosedTexture;
 	}
 
 	@Override
@@ -97,14 +97,14 @@ public class Storage extends Openable {
 		else if (this.inventory.size() == 0)
 			this.name = baseName + " (empty)";
 
-		storage.chestOpenTexture = chestOpenTexture;
-		storage.chestClosedTexture = chestClosedTexture;
+		storage.storageOpenTexture = storageOpenTexture;
+		storage.storageClosedTexture = storageClosedTexture;
 		// this.imagePathWhenOpen = imagePathWhenOpen;
 
 		if (storage.open)
-			storage.imageTexture = storage.chestOpenTexture;
+			storage.imageTexture = storage.storageOpenTexture;
 		else
-			storage.imageTexture = storage.chestClosedTexture;
+			storage.imageTexture = storage.storageClosedTexture;
 
 		return storage;
 

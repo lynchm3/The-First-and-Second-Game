@@ -1436,7 +1436,7 @@ public abstract class AIRoutine {
 
 		Storage lostAndFound = actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound;
 
-		this.actor.thoughtBubbleImageTextureObject = lostAndFound.chestClosedTexture;
+		this.actor.thoughtBubbleImageTextureObject = lostAndFound.storageClosedTexture;
 		this.actor.thoughtBubbleImageTextureAction = Action.textureRight;
 
 		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
@@ -1458,7 +1458,7 @@ public abstract class AIRoutine {
 		if (!lostAndFound.ownersOfContents.contains(actor))
 			return false;
 
-		this.actor.thoughtBubbleImageTextureObject = lostAndFound.chestClosedTexture;
+		this.actor.thoughtBubbleImageTextureObject = lostAndFound.storageClosedTexture;
 		this.actor.thoughtBubbleImageTextureAction = Action.textureLeft;
 
 		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
