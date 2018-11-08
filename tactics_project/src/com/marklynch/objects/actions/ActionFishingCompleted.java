@@ -17,9 +17,6 @@ public class ActionFishingCompleted extends Action {
 
 	public static final String ACTION_NAME = "Fishing";
 
-	// Actor performer;
-	// GameObject target;
-
 	// Default for hostiles
 	public ActionFishingCompleted(Actor attacker, GameObject target) {
 		super(ACTION_NAME, textureFishing, attacker, target);

@@ -18,7 +18,6 @@ public class ActionMining extends Action {
 
 	public static final String ACTION_NAME = "Mine";
 
-	// Actor performer;
 	Vein vein;
 	Pickaxe pickaxe;
 

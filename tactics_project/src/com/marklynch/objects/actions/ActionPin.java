@@ -11,14 +11,13 @@ public class ActionPin extends Action {
 
 	public static final String ACTION_NAME = "Info";
 
-	public Actor performer;
-	public Object target;
+	public Object object;
 
 	// Default for hostiles
 	public ActionPin(Actor performer, GameObject target, Square targetSquare) {
 		super(ACTION_NAME, textureSearch, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
-		this.target = target;
+		this.object = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -36,7 +35,7 @@ public class ActionPin extends Action {
 		if (!checkRange())
 			return;
 
-		Game.level.pinWindows.add(new PinWindow(target));
+		Game.level.pinWindows.add(new PinWindow(object));
 
 		performer.actionsPerformedThisTurn.add(this);
 	}
@@ -44,7 +43,7 @@ public class ActionPin extends Action {
 	@Override
 	public boolean check() {
 		for (PinWindow pinWindow : Game.level.pinWindows) {
-			if (pinWindow.object == target) {
+			if (pinWindow.object == object) {
 				return false;
 			}
 		}

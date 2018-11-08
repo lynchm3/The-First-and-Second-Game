@@ -6,7 +6,6 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.primary.AnimationThrow;
 import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
@@ -14,22 +13,11 @@ public class ActionThrowItem extends Action {
 
 	public static final String ACTION_NAME = "Throw";
 
-	Actor performer;
-	Square targetSquare;
-	GameObject targetGameObject;
 	GameObject gameObjectToThrow;
 
 	// Default for hostiles
 	public ActionThrowItem(Actor performer, Object target, GameObject gameObjectToThrow) {
 		super(ACTION_NAME, textureThrow, performer, target);
-		super.gameObjectPerformer = this.performer = performer;
-		if (target instanceof Square) {
-			targetSquare = (Square) target;
-			targetGameObject = targetSquare.inventory.gameObjectThatCantShareSquare;
-		} else if (target instanceof GameObject) {
-			targetGameObject = (GameObject) target;
-			targetSquare = targetGameObject.squareGameObjectIsOn;
-		}
 		this.gameObjectToThrow = gameObjectToThrow;
 		if (!check()) {
 			enabled = false;
@@ -69,7 +57,7 @@ public class ActionThrowItem extends Action {
 		}
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.setPrimaryAnimation(new AnimationThrow(performer, targetGameObject, null));
+			performer.setPrimaryAnimation(new AnimationThrow(performer, target, null));
 		}
 
 		// if (targetGameObject != null && targetGameObject.attackable) {
@@ -92,7 +80,7 @@ public class ActionThrowItem extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		performer.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this, targetGameObject,
+		performer.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this, target,
 				targetSquare, gameObjectToThrow, gameObjectToThrow, 1f, 0.5f, true, null));
 
 		if (performer.equipped == gameObjectToThrow) {
@@ -137,13 +125,13 @@ public class ActionThrowItem extends Action {
 		if (!legal) {
 
 			Actor victim = null;
-			if (targetGameObject instanceof Actor)
-				victim = (Actor) targetGameObject;
-			else if (targetGameObject != null)
-				victim = targetGameObject.owner;
+			if (target instanceof Actor)
+				victim = (Actor) target;
+			else if (target != null)
+				victim = target.owner;
 			if (victim != null) {
 				Crime.TYPE severity = Crime.TYPE.CRIME_ASSAULT;
-				if (!(targetGameObject instanceof Actor))
+				if (!(target instanceof Actor))
 					severity = Crime.TYPE.CRIME_VANDALISM;
 				Crime crime = new Crime(this, this.performer, victim, Crime.TYPE.CRIME_ASSAULT);
 				this.performer.crimesPerformedThisTurn.add(crime);
@@ -158,7 +146,7 @@ public class ActionThrowItem extends Action {
 	@Override
 	public boolean check() {
 
-		if (targetSquare == null && targetGameObject == null)
+		if (targetSquare == null && target == null)
 			return false;
 
 		float maxDistance = (performer.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH) * 100)
@@ -177,7 +165,7 @@ public class ActionThrowItem extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (targetSquare == null && targetGameObject == null)
+		if (targetSquare == null && target == null)
 			return false;
 
 		if (!performer.canSeeSquare(targetSquare)) {
@@ -190,18 +178,18 @@ public class ActionThrowItem extends Action {
 	@Override
 	public boolean checkLegality() {
 		// Empty square, it's fine
-		if (targetGameObject == null)
+		if (target == null)
 			return true;
 
-		return standardAttackLegalityCheck(performer, targetGameObject);
+		return standardAttackLegalityCheck(performer, target);
 	}
 
 	@Override
 	public Sound createSound() {
 
 		// Sound
-		if (targetGameObject != null) {
-			float loudness = Math.max(targetGameObject.soundWhenHit, gameObjectToThrow.soundWhenHitting);
+		if (target != null) {
+			float loudness = Math.max(target.soundWhenHit, gameObjectToThrow.soundWhenHitting);
 			// float loudness = targetGameObject.soundWhenHit *
 			// projectile.soundWhenHitting;
 			if (performer.equipped != null)

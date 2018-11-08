@@ -18,14 +18,12 @@ import com.marklynch.objects.units.TinyNeutralWildAnimal;
 public class ActionMove extends Action {
 
 	public static final String ACTION_NAME = "Move here";
-	Actor performer;
-	Square target;
 	boolean endTurn;
 
 	public ActionMove(Actor performer, Square target, boolean endTurn) {
 		super(ACTION_NAME, textureWalk, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
-		this.target = target;
+		this.targetSquare = target;
 		this.endTurn = endTurn;
 		if (!check()) {
 			enabled = false;
@@ -46,13 +44,13 @@ public class ActionMove extends Action {
 		if (!checkRange())
 			return;
 
-		if (performer.squareGameObjectIsOn.xInGrid > target.xInGrid) {
+		if (performer.squareGameObjectIsOn.xInGrid > targetSquare.xInGrid) {
 			performer.backwards = true;
-		} else if (performer.squareGameObjectIsOn.xInGrid < target.xInGrid) {
+		} else if (performer.squareGameObjectIsOn.xInGrid < targetSquare.xInGrid) {
 			performer.backwards = false;
 		}
 
-		moveTo(performer, target);
+		moveTo(performer, targetSquare);
 	}
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
@@ -78,7 +76,7 @@ public class ActionMove extends Action {
 			return;
 		}
 
-		if (Game.level.shouldLog(actor, target)) {
+		if (Game.level.shouldLog(actor, targetSquare)) {
 			performer.setPrimaryAnimation(new AnimationWalk(performer, actor.squareGameObjectIsOn, squareToMoveTo,
 					performer.walkPhase, null));
 			// performer.primaryAnimation.phase = performer.walkPhase;
@@ -170,20 +168,20 @@ public class ActionMove extends Action {
 		// return false;
 		// }
 
-		if (!performer.canSeeSquare(target)) {
+		if (!performer.canSeeSquare(targetSquare)) {
 			return true;
 		}
 
-		if (target.inventory.door != null) {
-			if (!target.inventory.door.open
-					&& (!performer.canOpenDoors || target.inventory.door instanceof RemoteDoor)) {
+		if (targetSquare.inventory.door != null) {
+			if (!targetSquare.inventory.door.open
+					&& (!performer.canOpenDoors || targetSquare.inventory.door instanceof RemoteDoor)) {
 				return false;
-			} else if (target.inventory.door.locked && !performer.hasKeyForDoor(target.inventory.door)) {
+			} else if (targetSquare.inventory.door.locked && !performer.hasKeyForDoor(targetSquare.inventory.door)) {
 				return false;
 			}
 		}
 
-		GameObject objectInTheWay = target.inventory.gameObjectThatCantShareSquare;
+		GameObject objectInTheWay = targetSquare.inventory.gameObjectThatCantShareSquare;
 
 		if (objectInTheWay instanceof Actor) {
 			Actor actorInTheWay = (Actor) objectInTheWay;
@@ -217,19 +215,19 @@ public class ActionMove extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target) > 1)
+		if (performer.straightLineDistanceTo(targetSquare) > 1)
 			return false;
 		return true;
 	}
 
 	@Override
 	public boolean checkLegality() {
-		if (target.restricted() == true && !target.owners.contains(performer)) {
+		if (targetSquare.restricted() == true && !targetSquare.owners.contains(performer)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}
 
-		Door door = (Door) target.inventory.getGameObjectOfClass(Door.class);
+		Door door = (Door) targetSquare.inventory.getGameObjectOfClass(Door.class);
 		if (door != null && door.isOpen() == false && !(door instanceof RemoteDoor)) {
 			Action open = new ActionOpen(performer, door);
 			if (!open.legal) {
@@ -245,10 +243,10 @@ public class ActionMove extends Action {
 	public Sound createSound() {
 
 		// Sound of glass
-		ArrayList<GameObject> stampables = target.inventory.getGameObjectsOfClass(Stampable.class);
+		ArrayList<GameObject> stampables = targetSquare.inventory.getGameObjectsOfClass(Stampable.class);
 		if (!(performer instanceof Blind) && stampables.size() > 0) {
 			for (GameObject stampable : stampables) {
-				return new Sound(performer, stampable, target, 10, legal, this.getClass());
+				return new Sound(performer, stampable, targetSquare, 10, legal, this.getClass());
 			}
 		}
 		return null;

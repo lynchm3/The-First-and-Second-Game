@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.lwjgl.input.Keyboard;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory.INVENTORY_MODE;
 import com.marklynch.level.squares.Square;
@@ -179,9 +180,11 @@ public class InventorySquare extends Square {
 	public Action drawActionThatWillBePerformed(boolean onMouse) {
 		Action defaultAction;
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-			defaultAction = this.getSecondaryActionForTheSquareOrObject(Game.level.player, false);
+			System.out.println("Level.player = " + Level.player);
+			defaultAction = this.getSecondaryActionForTheSquareOrObject(Level.player, false);
 		} else {
-			defaultAction = this.getDefaultActionForTheSquareOrObject(Game.level.player, false);
+			System.out.println("Level.player = " + Level.player);
+			defaultAction = this.getDefaultActionForTheSquareOrObject(Level.player, false);
 		}
 
 		if (defaultAction != null && defaultAction.image != null) {
@@ -212,6 +215,9 @@ public class InventorySquare extends Square {
 
 	@Override
 	public Action getDefaultActionForTheSquareOrObject(Actor performer, boolean keyPress) {
+
+		System.out.println("getDefaultActionForTheSquareOrObject performer = " + performer);
+
 		GameObject targetGameObject = this.stack.get(0);
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultActionPerformedOnThisInInventory(performer);

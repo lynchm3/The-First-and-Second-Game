@@ -10,9 +10,6 @@ public class ActionUnequip extends Action {
 
 	public static final String ACTION_NAME = "Unequip";
 
-	Actor performer;
-	GameObject target;
-
 	public ActionUnequip(Actor performer, GameObject target) {
 		super(ACTION_NAME, textureX, performer, target);
 		if (!check()) {
@@ -51,6 +48,10 @@ public class ActionUnequip extends Action {
 
 	@Override
 	public boolean check() {
+
+		System.out.println("unequip.check()");
+		System.out.println("performer  = " + performer);
+		System.out.println("performer.equipped  = " + performer.equipped);
 
 		if (performer.equipped == target)
 			return true;

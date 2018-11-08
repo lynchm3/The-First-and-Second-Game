@@ -14,8 +14,6 @@ public class ActionEquip extends Action {
 
 	public static final String ACTION_NAME = "Equip";
 
-	// Actor performer;
-	// GameObject gameObject;
 	ActionTakeItems actionTake;
 
 	public ActionEquip(Actor performer, GameObject gameObject) {

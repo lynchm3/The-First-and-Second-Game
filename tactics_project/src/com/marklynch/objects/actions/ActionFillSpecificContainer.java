@@ -14,8 +14,6 @@ public class ActionFillSpecificContainer extends Action {
 
 	public static final String ACTION_NAME = "Fill Container";
 
-	// Actor performer;
-	// WaterSource waterSource;
 	ContainerForLiquids containerForLiquids;
 
 	public ActionFillSpecificContainer(Actor performer, WaterSource waterSource,

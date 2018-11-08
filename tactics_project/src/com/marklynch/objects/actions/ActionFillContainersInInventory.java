@@ -13,9 +13,6 @@ public class ActionFillContainersInInventory extends Action {
 
 	public static final String ACTION_NAME = "Fill Container(s)";
 
-	// Actor performer;
-	// WaterSource waterSource;
-
 	public ActionFillContainersInInventory(Actor performer, WaterSource waterSource) {
 		super(ACTION_NAME, textureFillContainer, performer, waterSource);
 		if (!check()) {

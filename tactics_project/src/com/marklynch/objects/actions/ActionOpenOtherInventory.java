@@ -15,8 +15,6 @@ public class ActionOpenOtherInventory extends Action {
 	public static final String ACTION_NAME = "Loot";
 	public static final String ACTION_NAME_2 = "Loot";
 
-	// Actor performer;
-	// GameObject target;
 	ActionOpen actionOpen;
 
 	public ActionOpenOtherInventory(Actor performer, GameObject target) {

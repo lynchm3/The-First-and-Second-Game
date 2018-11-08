@@ -74,27 +74,9 @@ public class HidingPlace extends Searchable implements UpdatesWhenSquareContents
 					gameObjectHiddenHere.hiding = false;
 					gameObjectHiddenHere.hidingPlace = null;
 					this.gameObjectsHiddenHere.remove(gameObjectHiddenHere);
-
-					// if (attacker instanceof GameObject) {
-					// ((GameObject)
-					// attacker).addAttackerForThisAndGroupMembers(gameObjectHidingHere);
-					// }
-					// new ActionStopHiding(gameObjectHidingHere, this).perform();
 				}
 				gameObjectsHiddenHere.clear();
 			}
-
-			// else {
-			// if (attacker != null) {
-			// ArrayList<Square> adjacentSquares = this.getAllSquaresWithinDistance(0, 1);
-			// for (Square adjacentSquare : adjacentSquares) {
-			// HidingPlace hidingPlace = (HidingPlace) adjacentSquare.inventory
-			// .getGameObjectOfClass(HidingPlace.class);
-			// if (hidingPlace != null && attacker instanceof GameObject)
-			// ((GameObject) attacker).addAttackerForThisAndGroupMembers(hidingPlace);
-			// }
-			// }
-			// }
 		}
 		return destroyed;
 

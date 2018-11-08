@@ -8,9 +8,6 @@ public class ActionGetIn extends Action {
 
 	public static final String ACTION_NAME = "Get In";
 
-	// Actor performer;
-	// GameObject object;
-
 	public ActionGetIn(Actor performer, GameObject object) {
 		super(ACTION_NAME, textureDrop, performer, object);
 		// super.gameObjectPerformer = this.performer = performer;

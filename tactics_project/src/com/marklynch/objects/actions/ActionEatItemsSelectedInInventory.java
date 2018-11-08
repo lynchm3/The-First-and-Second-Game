@@ -14,7 +14,6 @@ public class ActionEatItemsSelectedInInventory extends Action {
 	public static final String ACTION_NAME = "Eat";
 	public static final String ACTION_NAME_DRINK = "Drink";
 
-	GameObject objectToEat;
 	InventorySquare inventorySquare;
 
 	public ActionEatItemsSelectedInInventory(Actor performer, GameObject target) {
@@ -22,13 +21,11 @@ public class ActionEatItemsSelectedInInventory extends Action {
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
 		super(ACTION_NAME, textureEat, performer, target);
-		if (objectToEat instanceof Liquid || objectToEat instanceof ContainerForLiquids
-				|| objectToEat instanceof WaterBody) {
+		if (target instanceof Liquid || target instanceof ContainerForLiquids || target instanceof WaterBody) {
 			this.actionName = ACTION_NAME_DRINK;
 			this.image = textureDrink;
 		}
-		this.objectToEat = objectToEat;
-		this.inventorySquare = objectToEat.inventorySquare;
+		this.inventorySquare = target.inventorySquare;
 		if (!check()) {
 			enabled = false;
 		}
@@ -47,9 +44,9 @@ public class ActionEatItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionEatItems(performer, objectToEat).perform();
+			new ActionEatItems(performer, target).perform();
 		} else {
-			Game.level.player.inventory.showQTYDialog(new ActionEatItems(performer, objectToEat.inventorySquare.stack),
+			Game.level.player.inventory.showQTYDialog(new ActionEatItems(performer, target.inventorySquare.stack),
 					inventorySquare.stack.size(), "Enter qty to eat (available: " + inventorySquare.stack.size() + ")",
 					0);
 		}
@@ -63,10 +60,10 @@ public class ActionEatItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(objectToEat.squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;
 		}
-		if (performer.inventory == objectToEat.inventoryThatHoldsThisObject)
+		if (performer.inventory == target.inventoryThatHoldsThisObject)
 			return true;
 
 		return false;
@@ -74,7 +71,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, objectToEat);
+		return standardAttackLegalityCheck(performer, target);
 	}
 
 	@Override

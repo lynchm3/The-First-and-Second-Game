@@ -151,8 +151,9 @@ public abstract class Action {
 	public Action(String actionName, Texture image, GameObject gameObjectPerformer, Object targetGameObjectOrSquare) {
 		super();
 		this.gameObjectPerformer = gameObjectPerformer;
-		if (gameObjectPerformer instanceof Actor)
+		if (gameObjectPerformer instanceof Actor) {
 			this.performer = (Actor) this.gameObjectPerformer;
+		}
 
 		if (targetGameObjectOrSquare instanceof GameObject) {
 			this.target = (GameObject) targetGameObjectOrSquare;

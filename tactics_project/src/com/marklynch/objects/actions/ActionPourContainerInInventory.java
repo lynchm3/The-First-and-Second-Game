@@ -16,10 +16,6 @@ public class ActionPourContainerInInventory extends Action {
 
 	public static final String ACTION_NAME = "Pour";
 
-	Actor performer;
-	Square targetSquare;
-	GameObject target;
-
 	public ActionPourContainerInInventory(Actor performer, GameObject target, Square targetSquare) {
 		super(ACTION_NAME, textureEllipse, performer, target);
 		super.gameObjectPerformer = this.performer = performer;

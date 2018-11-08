@@ -17,16 +17,13 @@ import com.marklynch.ui.ActivityLog;
 public class ActionTeleportSwap extends Action {
 
 	public static final String ACTION_NAME = "Swap here";
-	Actor performer;
 	GameObject teleportee;
-	Square target;
 	boolean endTurn;
 
-	public ActionTeleportSwap(Actor performer, GameObject teleportee, Square target, boolean endTurn) {
-		super(ACTION_NAME, textureTeleport, performer, target);
+	public ActionTeleportSwap(Actor performer, GameObject teleportee, Square targetSquare, boolean endTurn) {
+		super(ACTION_NAME, textureTeleport, performer, targetSquare);
 		super.gameObjectPerformer = this.performer = performer;
 		this.teleportee = teleportee;
-		this.target = target;
 		this.endTurn = endTurn;
 		if (!check()) {
 			enabled = false;
@@ -51,7 +48,7 @@ public class ActionTeleportSwap extends Action {
 			new ActionStopPeeking(performer).perform();
 		}
 
-		Door door = (Door) target.inventory.getGameObjectOfClass(Door.class);
+		Door door = (Door) targetSquare.inventory.getGameObjectOfClass(Door.class);
 		if (door != null && door.isOpen() == false && !(door instanceof RemoteDoor)) {
 			new ActionOpen(teleportee, door).perform();
 		}
@@ -67,7 +64,7 @@ public class ActionTeleportSwap extends Action {
 		// }
 
 		// if (actorInTheWay == null) {
-		teleportSwap(teleportee, target);
+		teleportSwap(teleportee, targetSquare);
 
 		// } else {
 		// move(actorInTheWay, oldSquare);
@@ -99,10 +96,10 @@ public class ActionTeleportSwap extends Action {
 
 		if (Game.level.shouldLog(performer, teleportee)) {
 			if (performer == teleportee)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", target }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", targetSquare }));
 			else
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " teleported ", teleportee, " to ", target }));
+						new ActivityLog(new Object[] { performer, " teleported ", teleportee, " to ", targetSquare }));
 		}
 
 		// Teleported big object on to big object... someone has to die.
@@ -120,7 +117,7 @@ public class ActionTeleportSwap extends Action {
 	@Override
 	public boolean check() {
 
-		if (target == teleportee.squareGameObjectIsOn)
+		if (targetSquare == teleportee.squareGameObjectIsOn)
 			return false;
 
 		// if (target.inventory.isPassable(teleportee))
@@ -157,7 +154,7 @@ public class ActionTeleportSwap extends Action {
 		// }
 		// }
 
-		if (target.restricted() == true && !target.owners.contains(teleportee)) {
+		if (targetSquare.restricted() == true && !targetSquare.owners.contains(teleportee)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}
@@ -168,10 +165,10 @@ public class ActionTeleportSwap extends Action {
 	public Sound createSound() {
 
 		// Sound of glass
-		ArrayList<GameObject> stampables = target.inventory.getGameObjectsOfClass(Stampable.class);
+		ArrayList<GameObject> stampables = targetSquare.inventory.getGameObjectsOfClass(Stampable.class);
 		if (!(teleportee instanceof Blind) && stampables.size() > 0) {
 			for (GameObject stampable : stampables) {
-				return new Sound(teleportee, stampable, target, 10, legal, this.getClass());
+				return new Sound(teleportee, stampable, targetSquare, 10, legal, this.getClass());
 			}
 		}
 		return null;
