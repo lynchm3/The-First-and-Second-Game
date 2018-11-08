@@ -224,8 +224,9 @@ public class AnimationThrown extends Animation {
 
 	public void postRangedAnimation() {
 
-		if (performer != null && performer.attackable)
-			performer.showPow();
+		if (performer == null)
+			return;
+
 		if (!(projectileObject instanceof Arrow)) {
 			if (performer != null && performer instanceof Searchable && projectileObject.canShareSquare) {
 				performer.inventory.add(projectileObject);
@@ -234,15 +235,29 @@ public class AnimationThrown extends Animation {
 				projectileObject.landed(shooter, action);
 			}
 
+			if (Level.player.inventory.groundDisplay != null)
+				Level.player.inventory.groundDisplay.refreshGameObjects();
+
 		} else if (performer != null) {
 			performer.arrowsEmbeddedInThis.add((Arrow) projectileObject);
 		}
 
-		if (Level.player.inventory.groundDisplay != null)
-			Level.player.inventory.groundDisplay.refreshGameObjects();
+		if (projectileObject instanceof Arrow && performer.attackable) {
+			performer.showPow();
+			float damage = performer.changeHealth(shooter, action, weapon);
 
-		// Carry out the dmg, attack, logging...
-		if (performer != null && performer.attackable && !(performer instanceof Searchable)) {
+			if (shooter.squareGameObjectIsOn.visibleToPlayer) {
+				if (Game.level.shouldLog(performer, shooter))
+					Game.level.logOnScreen(new ActivityLog(new Object[] { shooter, " shot ", performer, " with ",
+							weapon, " for " + damage + " damage" }));
+			}
+
+			if (performer.remainingHealth > 0)
+				performer.setPrimaryAnimation(new AnimationFlinch(performer, shooter.squareGameObjectIsOn,
+						performer.getPrimaryAnimation(), null));
+
+		} else if (!(performer instanceof Searchable) && performer.attackable) {
+			performer.showPow();
 			float damage = performer.changeHealth(shooter, action, weapon);
 
 			if (shooter.squareGameObjectIsOn.visibleToPlayer) {
@@ -251,10 +266,10 @@ public class AnimationThrown extends Animation {
 							" for " + damage + " damage" }));
 			}
 
-			if (performer instanceof Actor && performer.remainingHealth > 0)
+			if (performer.remainingHealth > 0)
 				performer.setPrimaryAnimation(new AnimationFlinch(performer, shooter.squareGameObjectIsOn,
 						performer.getPrimaryAnimation(), null));
-		} else if (performer != null && performer instanceof Searchable) {
+		} else {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { shooter, " threw ", weapon, " in to ", performer }));
 		}
 	}
