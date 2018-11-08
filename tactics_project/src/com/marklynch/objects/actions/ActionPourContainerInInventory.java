@@ -19,12 +19,7 @@ public class ActionPourContainerInInventory extends Action {
 	public ActionPourContainerInInventory(Actor performer, GameObject target, Square targetSquare) {
 		super(ACTION_NAME, textureEllipse, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
-		this.target = target;
-		if (this.targetSquare != null) {
-			this.target = targetSquare.inventory.gameObjectThatCantShareSquare;
-		} else if (this.target != null) {
-			this.targetSquare = target.squareGameObjectIsOn;
-		}
+		this.targetSquare = targetSquare;
 		if (!check()) {
 			enabled = false;
 		}
