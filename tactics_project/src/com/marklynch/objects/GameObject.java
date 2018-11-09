@@ -1963,6 +1963,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		gameObject.canBePickedUp = canBePickedUp;
 		gameObject.fitsInInventory = fitsInInventory;
+		if (gameObject.fitsInInventory) {
+			gameObject.backwards = Game.random.nextBoolean();
+		}
 		gameObject.persistsWhenCantBeSeen = persistsWhenCantBeSeen;
 		gameObject.attackable = attackable;
 		gameObject.isFloorObject = isFloorObject;

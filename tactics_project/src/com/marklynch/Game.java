@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL11.glViewport;
 
 import java.awt.Font;
 import java.io.InputStream;
+import java.util.Random;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
@@ -329,6 +330,7 @@ public class Game {
 
 	public static TrueTypeFont font1;
 	public static TrueTypeFont font2;
+	public static Random random = new Random();
 
 	private void initGL(float width, float height) {
 		try {
