@@ -814,8 +814,15 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 			Point point = new Point((int) (UserInputLevel.mouseXTransformed - x),
 					(int) (UserInputLevel.mouseYTransformed - y));
+
+			if (gameObject.backwards) {
+				// how do i flip it?
+				point.x = gameObject.width - point.x;
+			}
+
 			if (gameObject.getPrimaryAnimation() != null && gameObject.getPrimaryAnimation().torsoAngle != 0
 					&& gameObject instanceof Human) {
+
 				point = rotatePoint(gameObject.halfWidth, ((Human) gameObject).hipY,
 						-gameObject.getPrimaryAnimation().torsoAngle, point);
 			}
@@ -827,16 +834,12 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 					Human human = (Human) gameObject;
 
-					// (x + halfWidth, y + hipY
-
 					color = getPixel(human.torsoImageTexture, (int) point.x, (int) point.y);
 					if (color == null || color.a == 0) {
 						color = getPixel(human.pelvisImageTexture, (int) point.x, (int) point.y);
-
 					}
 				} else {
 					color = getPixel(gameObject.imageTexture, (int) point.x, (int) point.y);
-
 				}
 
 				if (color != null && color.a > 0) {
