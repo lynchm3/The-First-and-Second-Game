@@ -33,13 +33,14 @@ public class AnimationPush extends Animation {
 
 		}
 		if (targetSquare.xInGrid - performer.squareGameObjectIsOn.xInGrid < 0) {
-			targetRadians = left;
+			targetRadians = right;
 			performer.backwards = true;
 
 		} else if (targetSquare.xInGrid - performer.squareGameObjectIsOn.xInGrid > 0) {
 			targetRadians = right;
 			performer.backwards = false;
 		}
+
 		backwards = performer.backwards;
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
