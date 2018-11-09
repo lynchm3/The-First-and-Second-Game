@@ -122,10 +122,13 @@ public class AnimationThrown extends Animation {
 		} else {
 			x += distanceX;
 			y += distanceY;
-			Square square = Game.level.squares[(int) Math.floor(x / Game.SQUARE_WIDTH)][(int) Math
-					.floor(y / Game.SQUARE_HEIGHT)];
-			square.inventory.smashWindows(shooter);
 
+			// int squareX = (int) Math.floor(x / Game.SQUARE_WIDTH);
+			// int squareY = (int) Math.floor(y / Game.SQUARE_HEIGHT);
+			// if (Square.squareExists(squareX, squareY)) {
+			// Square square = Level.squares[squareX][squareY];
+			// square.inventory.smashWindows(shooter);
+			// }
 		}
 
 		float progress = distanceCoveredX / distanceToCoverX;

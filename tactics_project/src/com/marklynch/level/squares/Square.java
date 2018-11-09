@@ -1327,4 +1327,12 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 		return false;
 	}
+
+	public static boolean squareExists(int x, int y) {
+
+		if (x > 0 && y > 0 && x < Game.level.squares.length && y < Game.level.squares[0].length)
+			return true;
+
+		return false;
+	}
 }
