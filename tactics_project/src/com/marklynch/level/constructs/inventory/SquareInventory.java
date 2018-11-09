@@ -208,6 +208,9 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	@Override
 	public int compare(GameObject a, GameObject b) {
 
+		if (a.orderingOnGound == b.orderingOnGound)
+			return (int) (a.height - b.height);
+
 		if (a.orderingOnGound != Integer.MAX_VALUE || b.orderingOnGound != Integer.MAX_VALUE)
 			return a.orderingOnGound - b.orderingOnGound;
 
