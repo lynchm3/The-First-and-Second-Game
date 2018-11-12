@@ -20,6 +20,7 @@ public class PressurePlate extends Switch implements UpdatesWhenSquareContentsCh
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		isFloorObject = true;
+		moveable = false;
 		orderingOnGound = 30;
 		type = "Pressure Plate";
 	}

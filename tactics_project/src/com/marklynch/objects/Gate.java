@@ -19,6 +19,7 @@ public class Gate extends Door {
 		fitsInInventory = false;
 
 		persistsWhenCantBeSeen = true;
+		moveable = false;
 
 		soundDampeningWhenClosed = soundDampening;
 		blocksLineOfSightWhenClosed = blocksLineOfSight;

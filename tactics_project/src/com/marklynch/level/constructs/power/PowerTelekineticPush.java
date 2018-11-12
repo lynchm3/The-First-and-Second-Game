@@ -6,8 +6,6 @@ import java.util.HashMap;
 import org.lwjgl.util.Point;
 
 import com.marklynch.level.constructs.Crime;
-import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationPush;
 import com.marklynch.level.constructs.animation.primary.AnimationPushed;
@@ -93,13 +91,6 @@ public class PowerTelekineticPush extends Power {
 					&& currentSquare.inventory.gameObjectThatCantShareSquare != null) {
 				if (tempObstacle != null)
 					tempObstacle = currentSquare.inventory.gameObjectThatCantShareSquare;
-				for (GameObject gameObject : (ArrayList<GameObject>) lastSquare.inventory.gameObjects.clone()) {
-
-					// public float changeHealth(Object attacker, Action action, Stat damage) {
-					// pushedObjectToDamageTaken.put(gameObject, gameObject.weight);
-					// damageToObstacle += gameObject.weight;
-				}
-				break;
 			}
 
 			// Pick up new objects
@@ -107,7 +98,7 @@ public class PowerTelekineticPush extends Power {
 			temp.addAll(lastSquare.inventory.gameObjects);
 			for (GameObject gameObject : temp) {
 
-				if (!gameObject.isFloorObject) {
+				if (!gameObject.isFloorObject && gameObject.moveable) {
 					if (!pushedObjectAndTheirStartSquare.keySet().contains(gameObject)) {
 						pushedObjectAndTheirStartSquare.put(gameObject, gameObject.squareGameObjectIsOn);
 					}
@@ -138,10 +129,12 @@ public class PowerTelekineticPush extends Power {
 
 	public void postAnimation(GameObject pushedGameObject, Action action, GameObject obstacle, Square endSquare) {
 
-		pushedGameObject.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
-		if (obstacle != null) {
-			obstacle.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
-		}
+		// pushedGameObject.changeHealth(source, action, new
+		// Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
+		// if (obstacle != null) {
+		// obstacle.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE,
+		// pushedGameObject.weight));
+		// }
 	}
 
 }

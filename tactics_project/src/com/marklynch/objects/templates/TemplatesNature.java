@@ -50,6 +50,7 @@ public class TemplatesNature {
 		Templates.TREE_READABLE.value = Templates.TREE.value;
 		Templates.TREE_READABLE.bigShadow = Templates.TREE.bigShadow;
 		Templates.TREE_READABLE.persistsWhenCantBeSeen = Templates.TREE.persistsWhenCantBeSeen;
+		Templates.TREE_READABLE.moveable = Templates.TREE.moveable;
 		Templates.TREE_READABLE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.TREE_CONTAINER = new Storage();
@@ -66,6 +67,7 @@ public class TemplatesNature {
 		Templates.TREE_CONTAINER.isOpenable = false;
 		Templates.TREE_CONTAINER.lockable = false;
 		Templates.TREE_CONTAINER.persistsWhenCantBeSeen = Templates.TREE.persistsWhenCantBeSeen;
+		Templates.TREE_CONTAINER.moveable = Templates.TREE.moveable;
 		Templates.TREE_CONTAINER.templateId = GameObject.generateNewTemplateId();
 
 		Templates.BIG_TREE = new Tree();
@@ -110,6 +112,7 @@ public class TemplatesNature {
 		Templates.BUSH.templateId = GameObject.generateNewTemplateId();
 		Templates.BUSH.effectsFromInteracting = new Effect[] {};
 		Templates.BUSH.flipYAxisInMirror = false;
+		Templates.BUSH.moveable = false;
 
 		Templates.POISON_BUSH = new HidingPlace();
 		Templates.POISON_BUSH.name = "Posion Bush";
@@ -124,6 +127,7 @@ public class TemplatesNature {
 		Templates.POISON_BUSH.effectsFromInteracting = new Effect[] { new EffectPoison(3) };
 		Templates.POISON_BUSH.templateId = GameObject.generateNewTemplateId();
 		Templates.POISON_BUSH.flipYAxisInMirror = false;
+		Templates.POISON_BUSH.moveable = false;
 
 		Templates.LONG_GRASS = new HidingPlace();
 		Templates.LONG_GRASS.name = "Long Grass";
@@ -137,6 +141,7 @@ public class TemplatesNature {
 		Templates.LONG_GRASS.templateId = GameObject.generateNewTemplateId();
 		Templates.LONG_GRASS.effectsFromInteracting = new Effect[] {};
 		Templates.LONG_GRASS.flipYAxisInMirror = false;
+		Templates.LONG_GRASS.moveable = false;
 
 		Templates.WHEAT = new HidingPlace();
 		Templates.WHEAT.name = "Wheat";
@@ -150,6 +155,7 @@ public class TemplatesNature {
 		Templates.WHEAT.templateId = GameObject.generateNewTemplateId();
 		Templates.WHEAT.effectsFromInteracting = new Effect[] {};
 		Templates.WHEAT.flipYAxisInMirror = false;
+		Templates.WHEAT.moveable = false;
 
 		Templates.MUSHROOM = new Food();
 		Templates.MUSHROOM.name = "Mushroom";
@@ -200,6 +206,7 @@ public class TemplatesNature {
 		Templates.MOUND.diggable = true;
 		Templates.MOUND.canContainOtherObjects = false;
 		Templates.MOUND.flipYAxisInMirror = false;
+		Templates.MOUND.moveable = false;
 
 		Templates.APPLE = new Food();
 		Templates.APPLE.name = "Apple";
@@ -324,6 +331,7 @@ public class TemplatesNature {
 		Templates.STONE_FLOOR.persistsWhenCantBeSeen = true;
 		Templates.STONE_FLOOR.attackable = false;
 		Templates.STONE_FLOOR.isFloorObject = true;
+		Templates.STONE_FLOOR.moveable = false;
 		Templates.STONE_FLOOR.orderingOnGound = 20;
 		Templates.STONE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
@@ -335,6 +343,7 @@ public class TemplatesNature {
 		Templates.CIRCLE_FLOOR.persistsWhenCantBeSeen = true;
 		Templates.CIRCLE_FLOOR.attackable = false;
 		Templates.CIRCLE_FLOOR.isFloorObject = true;
+		Templates.CIRCLE_FLOOR.moveable = false;
 		Templates.CIRCLE_FLOOR.orderingOnGound = 20;
 		Templates.CIRCLE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
@@ -346,6 +355,7 @@ public class TemplatesNature {
 		Templates.LEAVES.persistsWhenCantBeSeen = true;
 		Templates.LEAVES.attackable = false;
 		Templates.LEAVES.isFloorObject = true;
+		Templates.LEAVES.moveable = false;
 		Templates.LEAVES.orderingOnGound = 20;
 		Templates.LEAVES.templateId = GameObject.generateNewTemplateId();
 

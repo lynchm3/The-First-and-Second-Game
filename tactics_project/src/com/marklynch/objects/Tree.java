@@ -31,6 +31,7 @@ public class Tree extends GameObject {
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
 
+		moveable = false;
 		orderingOnGound = 110;
 
 		type = "Tree";

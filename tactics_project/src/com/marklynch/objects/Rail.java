@@ -39,6 +39,7 @@ public class Rail extends GameObject implements SwitchListener {
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		isFloorObject = true;
+		moveable = false;
 		orderingOnGound = 20;
 
 		type = "Rail";

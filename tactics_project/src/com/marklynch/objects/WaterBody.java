@@ -108,6 +108,7 @@ public class WaterBody extends WaterSource implements Consumable {
 		attackable = false;
 		isFloorObject = true;
 		orderingOnGound = 130;
+		moveable = false;
 		type = "Water";
 
 	}

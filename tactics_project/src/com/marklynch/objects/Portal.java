@@ -22,7 +22,7 @@ public class Portal extends GameObject implements UpdatesWhenSquareContentsChang
 		canContainOtherObjects = false;
 		persistsWhenCantBeSeen = true;
 		attackable = false;
-		isFloorObject = true;
+		moveable = false;
 		type = "Portal";
 	}
 

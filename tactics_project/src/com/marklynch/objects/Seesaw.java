@@ -33,6 +33,7 @@ public class Seesaw extends GameObject implements SwitchListener {
 		canBePickedUp = false;
 		fitsInInventory = false;
 		isFloorObject = true;
+		moveable = false;
 		attackable = false;
 	}
 

@@ -141,6 +141,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean blocksLineOfSight = false;
 	public boolean persistsWhenCantBeSeen = false;
 	public boolean attackable = true;
+	public boolean moveable = true;
 	public boolean canBePickedUp = true;
 	public boolean decorative = false;
 	public boolean floats = false;

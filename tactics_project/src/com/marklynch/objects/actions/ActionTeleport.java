@@ -170,6 +170,9 @@ public class ActionTeleport extends Action {
 	@Override
 	public boolean check() {
 
+		if (!target.moveable || target.isFloorObject)
+			return false;
+
 		// if (squareToTeleportTo == target.squareGameObjectIsOn)
 		// return false;
 

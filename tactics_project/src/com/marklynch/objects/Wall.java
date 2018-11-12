@@ -72,6 +72,7 @@ public class Wall extends GameObject {
 
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
+		moveable = false;
 		type = "Wall";
 	}
 
