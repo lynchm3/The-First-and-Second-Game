@@ -9,7 +9,7 @@ import com.marklynch.objects.GameObject;
 public class AnimationPushed extends Animation {
 
 	public Square startSquare;
-	public Square endSquare;
+	// public Square endSquare;
 	public float startOffsetX = 0;
 	public float startOffsetY = 0;
 	public float endOffsetX = 0;
@@ -25,21 +25,22 @@ public class AnimationPushed extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationPushed(GameObject performer, Square startSquare, Square endSquare, Animation oldAnimation,
+	public AnimationPushed(GameObject performer, Square startSquare, Square targetSquare, Animation oldAnimation,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, performer, startSquare, endSquare);
+		super(performer, onCompletionListener, null, targetSquare, null, null, null, null, performer, startSquare,
+				targetSquare);
 		if (!runAnimation)
 			return;
 
 		blockAI = true;
 
 		this.startSquare = startSquare;
-		this.endSquare = endSquare;
+		// this.endSquare = endSquare;
 
 		// startOffsetX = offsetX =
 		// startOffsetY = offsetY =
-		endOffsetX = (int) ((this.endSquare.xInGrid - this.startSquare.xInGrid) * Game.SQUARE_WIDTH);
-		endOffsetY = (int) ((this.endSquare.yInGrid - this.startSquare.yInGrid) * Game.SQUARE_HEIGHT);
+		endOffsetX = (int) ((this.targetSquare.xInGrid - this.startSquare.xInGrid) * Game.SQUARE_WIDTH);
+		endOffsetY = (int) ((this.targetSquare.yInGrid - this.startSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
 		backwards = performer.backwards;
 
@@ -48,20 +49,20 @@ public class AnimationPushed extends Animation {
 		float left = -1.7f;
 		float right = 1.7f;
 
-		if (endSquare.yInGrid - startSquare.yInGrid < 0) {
+		if (this.targetSquare.yInGrid - startSquare.yInGrid < 0) {
 			targetRadians = up;
 			targetArmRadians = -0.25f;
 
-		} else if (endSquare.yInGrid - startSquare.yInGrid > 0) {
+		} else if (this.targetSquare.yInGrid - startSquare.yInGrid > 0) {
 			targetRadians = down;
 			targetArmRadians = 0.25f;
 
 		}
-		if (endSquare.xInGrid - startSquare.xInGrid < 0) {
+		if (this.targetSquare.xInGrid - startSquare.xInGrid < 0) {
 			targetRadians = left;
 			targetArmRadians = -0.25f;
 
-		} else if (endSquare.xInGrid - startSquare.xInGrid > 0) {
+		} else if (this.targetSquare.xInGrid - startSquare.xInGrid > 0) {
 			targetRadians = right;
 			targetArmRadians = 0.25f;
 		}
@@ -117,7 +118,8 @@ public class AnimationPushed extends Animation {
 	protected void childRunCompletionAlgorightm(boolean wait) {
 		leftShoulderAngle = 0;
 		rightShoulderAngle = 0;
-		endSquare.inventory.add(performer);
+
+		targetSquare.inventory.add(performer);
 
 	}
 
