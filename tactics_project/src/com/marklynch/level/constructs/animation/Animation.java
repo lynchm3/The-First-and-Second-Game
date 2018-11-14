@@ -172,16 +172,8 @@ public abstract class Animation {
 	protected abstract void childRunCompletionAlgorightm(boolean wait);
 
 	public void runCompletionAlorightm(boolean wait) {
-		if (performer == Level.player) {
-			System.out.println("runCompletionAlorightm a for" + this);
-		}
-
 		if (completed)
 			return;
-
-		if (performer == Level.player) {
-			System.out.println("runCompletionAlorightm b for" + this);
-		}
 
 		completed = true;
 

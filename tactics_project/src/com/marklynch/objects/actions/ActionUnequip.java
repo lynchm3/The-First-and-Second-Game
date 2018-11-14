@@ -49,10 +49,6 @@ public class ActionUnequip extends Action {
 	@Override
 	public boolean check() {
 
-		System.out.println("unequip.check()");
-		System.out.println("performer  = " + performer);
-		System.out.println("performer.equipped  = " + performer.equipped);
-
 		if (performer.equipped == target)
 			return true;
 

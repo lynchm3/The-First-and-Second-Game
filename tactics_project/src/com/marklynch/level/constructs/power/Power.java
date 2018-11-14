@@ -16,6 +16,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.Utils;
 
 public abstract class Power {
 
@@ -84,19 +85,15 @@ public abstract class Power {
 
 	public boolean hasRange(int weaponDistanceTo) {
 
+		System.out.println("Power.hasRange()");
+		System.out.println("Power.hasRange() weaponDistanceTo = " + weaponDistanceTo);
+		System.out.println("Power.hasRange() range = " + range);
+		Utils.printStackTrace();
+
 		if (range >= weaponDistanceTo)
 			return true;
 
 		return false;
-
-		// if (getEffectiveMinRange() == 1 && weaponDistanceTo == 0)
-		// return true;
-		//
-		// if (weaponDistanceTo >= getEffectiveMinRange() && weaponDistanceTo <=
-		// getEffectiveMaxRange()) {
-		// return true;
-		// }
-		// return false;
 	}
 
 	public boolean squareInCastLocations(GameObject caster, Square potentialCastLocation) {

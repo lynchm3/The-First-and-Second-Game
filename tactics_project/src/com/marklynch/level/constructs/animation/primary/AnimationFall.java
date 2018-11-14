@@ -17,8 +17,6 @@ public class AnimationFall extends Animation {
 
 		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
 
-		System.out.println("AnimationFall, runAnimation = " + runAnimation);
-
 		if (!runAnimation)
 			return;
 
@@ -57,7 +55,6 @@ public class AnimationFall extends Animation {
 
 	@Override
 	public void update(double delta) {
-		// System.out.println("AnimationFall.update");
 		super.keyFrameUpdate(delta);
 	}
 

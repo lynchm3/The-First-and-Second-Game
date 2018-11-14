@@ -24,8 +24,8 @@ public class PowerTelekineticPush extends Power {
 	private static String NAME = "Telekinetic Push";
 
 	public PowerTelekineticPush(GameObject source) {
-		super(NAME, ResourceUtils.getGlobalImage("right.png", false), source, new Effect[] {}, 3,
-				Power.castLocationsLine10, new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
+		super(NAME, ResourceUtils.getGlobalImage("right.png", false), source, new Effect[] {}, 2,
+				Power.castLocationsLine2, new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 

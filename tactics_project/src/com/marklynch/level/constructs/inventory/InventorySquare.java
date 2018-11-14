@@ -180,10 +180,8 @@ public class InventorySquare extends Square {
 	public Action drawActionThatWillBePerformed(boolean onMouse) {
 		Action defaultAction;
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-			System.out.println("Level.player = " + Level.player);
 			defaultAction = this.getSecondaryActionForTheSquareOrObject(Level.player, false);
 		} else {
-			System.out.println("Level.player = " + Level.player);
 			defaultAction = this.getDefaultActionForTheSquareOrObject(Level.player, false);
 		}
 
@@ -215,8 +213,6 @@ public class InventorySquare extends Square {
 
 	@Override
 	public Action getDefaultActionForTheSquareOrObject(Actor performer, boolean keyPress) {
-
-		System.out.println("getDefaultActionForTheSquareOrObject performer = " + performer);
 
 		GameObject targetGameObject = this.stack.get(0);
 		if (targetGameObject != null) {

@@ -1192,17 +1192,14 @@ public class Level {
 
 				// Highlight sqrs you can cast on
 				if (!selectedPower.hasRange(Integer.MAX_VALUE)) {
-					for (int i = 0; i < selectedPower.range; i++) {
-						if (selectedPower.hasRange(i)) {
-							ArrayList<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
-							for (Square squareToHighlight : squaresToHighlight) {
-								if (selectedPower.squareInCastLocations(Level.player, squareToHighlight)) {
-									if (squareToHighlight.visibleToPlayer || Game.fullVisiblity) {
-										squareToHighlight.drawHighlight();
-									}
+					for (int i = 0; i <= selectedPower.range; i++) {
+						ArrayList<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
+						for (Square squareToHighlight : squaresToHighlight) {
+							if (selectedPower.squareInCastLocations(Level.player, squareToHighlight)) {
+								if (squareToHighlight.visibleToPlayer || Game.fullVisiblity) {
+									squareToHighlight.drawHighlight();
 								}
 							}
-
 						}
 					}
 				}

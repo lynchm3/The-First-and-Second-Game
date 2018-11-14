@@ -58,33 +58,25 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 	@Override
 	public boolean check() {
 
-		System.out.println("ActionTakeItemsSelectedInInventory a check()");
-
 		if (targetSquare == null && target == null)
 			return false;
-
-		System.out.println("ActionTakeItemsSelectedInInventory b check()");
 
 		return true;
 	}
 
 	@Override
 	public boolean checkRange() {
-		System.out.println("ActionTakeItemsSelectedInInventory a checkRange()");
 
 		if (targetSquare == null && target == null)
 			return false;
 
-		System.out.println("ActionTakeItemsSelectedInInventory b checkRange()");
 		if (targetSquare != null && performer.straightLineDistanceTo(targetSquare) < 2) {
 			return true;
 		}
-		System.out.println("ActionTakeItemsSelectedInInventory c checkRange()");
 
 		if (target != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;
 		}
-		System.out.println("ActionTakeItemsSelectedInInventory d checkRange()");
 
 		return false;
 	}
