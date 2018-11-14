@@ -120,6 +120,23 @@ public class PinWindow implements Draggable {
 
 	public void handleResize() {
 
+		if (object instanceof GameObject) {
+			this.gameObject = (GameObject) object;
+			if (object instanceof Actor)
+				this.actor = (Actor) object;
+			if (gameObject.imageTexture != null) {
+				this.width = gameObject.imageTexture.getWidth() + borderWidth * 2;
+				this.height = gameObject.imageTexture.getHeight() + titleBarHeight + borderWidth;
+			} else {
+				this.width = gameObject.width + borderWidth * 2;
+				this.height = gameObject.height + titleBarHeight + borderWidth;
+			}
+		} else if (object instanceof Square) {
+			this.square = (Square) object;
+			this.width = Game.SQUARE_WIDTH;
+			this.height = Game.SQUARE_HEIGHT;
+		}
+
 		if (drawPositionX > Game.windowWidth - 32) {
 			drawPositionX = Game.windowWidth - 32;
 		}
@@ -176,6 +193,7 @@ public class PinWindow implements Draggable {
 
 		titleBarButton.x = drawPositionX;
 		titleBarButton.y = drawPositionY;
+		titleBarButton.width = width;
 	}
 
 	public void drawLine() {
