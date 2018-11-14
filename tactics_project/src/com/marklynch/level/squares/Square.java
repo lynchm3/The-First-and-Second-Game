@@ -1074,7 +1074,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		return yInGridPixels + Game.HALF_SQUARE_HEIGHT;
 	}
 
-	public ArrayList<Square> getAllSquaresAtDistance(float distance) {
+	public ArrayList<Square> getAllSquaresAtDistance(int distance) {
 		ArrayList<Square> squares = new ArrayList<Square>();
 		if (distance == 0) {
 			squares.add(this);
@@ -1083,9 +1083,9 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;
-		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+		for (int i = 0, x = -distance, y = 0; i < distance * 4; i++) {
 			if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + x, this.yInGrid + y)) {
-				squares.add(Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y]);
+				squares.add(Game.level.squares[this.xInGrid + x][this.yInGrid + y]);
 			}
 
 			if (xGoingUp) {
@@ -1333,7 +1333,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public static boolean squareExists(int x, int y) {
 
-		if (x > 0 && y > 0 && x < Game.level.squares.length && y < Game.level.squares[0].length)
+		if (x >= 0 && y >= 0 && x < Game.level.squares.length && y < Game.level.squares[0].length)
 			return true;
 
 		return false;

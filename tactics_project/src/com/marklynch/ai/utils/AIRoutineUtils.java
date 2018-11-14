@@ -460,9 +460,9 @@ public class AIRoutineUtils {
 
 	public static Square calculateSquareToMoveToToBeWithinXSquaresToTarget(Square square, float maxDistance) {
 
-		ArrayList<Float> idealDistances = new ArrayList<Float>();
+		ArrayList<Integer> idealDistances = new ArrayList<Integer>();
 		for (int i = 0; i <= maxDistance; i++) {
-			idealDistances.add((float) i);
+			idealDistances.add(i);
 		}
 
 		ArrayList<Square> targetSquares = new ArrayList<Square>();

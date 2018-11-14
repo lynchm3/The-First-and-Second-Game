@@ -835,7 +835,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return false;
 	}
 
-	public ArrayList<Square> getAllSquaresAtDistance(float distance) {
+	public ArrayList<Square> getAllSquaresAtDistance(int distance) {
 		ArrayList<Square> squares = new ArrayList<Square>();
 		if (distance == 0) {
 			squares.add(this.squareGameObjectIsOn);
@@ -844,11 +844,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;
-		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+		for (int i = 0, x = -distance, y = 0; i < distance * 4; i++) {
 			if (ArrayUtils.inBounds(Game.level.squares, this.squareGameObjectIsOn.xInGrid + x,
 					this.squareGameObjectIsOn.yInGrid + y)) {
-				squares.add(Game.level.squares[this.squareGameObjectIsOn.xInGrid
-						+ (int) x][this.squareGameObjectIsOn.yInGrid + (int) y]);
+				squares.add(Game.level.squares[this.squareGameObjectIsOn.xInGrid + x][this.squareGameObjectIsOn.yInGrid
+						+ y]);
 			}
 
 			if (xGoingUp) {
@@ -905,9 +905,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			boolean xGoingUp = true;
 			boolean yGoingUp = true;
-			for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+			for (int i = 0, x = -distance, y = 0; i < distance * 4; i++) {
 				if (ArrayUtils.inBounds(Game.level.squares, squareFrom.xInGrid + x, squareFrom.yInGrid + y)) {
-					squares.add(Game.level.squares[squareFrom.xInGrid + (int) x][squareFrom.yInGrid + (int) y]);
+					squares.add(Game.level.squares[squareFrom.xInGrid + x][squareFrom.yInGrid + y]);
 				}
 
 				if (xGoingUp) {

@@ -16,7 +16,6 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.Texture;
-import com.marklynch.utils.Utils;
 
 public abstract class Power {
 
@@ -85,11 +84,6 @@ public abstract class Power {
 
 	public boolean hasRange(int weaponDistanceTo) {
 
-		System.out.println("Power.hasRange()");
-		System.out.println("Power.hasRange() weaponDistanceTo = " + weaponDistanceTo);
-		System.out.println("Power.hasRange() range = " + range);
-		Utils.printStackTrace();
-
 		if (range >= weaponDistanceTo)
 			return true;
 
@@ -104,8 +98,7 @@ public abstract class Power {
 		for (Point point : castLocations) {
 			int castLocationSquareX = caster.squareGameObjectIsOn.xInGrid + point.getX();
 			int castLocationSquareY = caster.squareGameObjectIsOn.yInGrid + point.getY();
-			if (castLocationSquareX > 0 && castLocationSquareY > 0 && castLocationSquareX < Level.squares.length
-					&& castLocationSquareY < Level.squares[0].length) {
+			if (Square.squareExists(castLocationSquareX, castLocationSquareY)) {
 				Square castLocationSquare = Level.squares[castLocationSquareX][castLocationSquareY];
 				if (potentialCastLocation == castLocationSquare) {
 					return true;
