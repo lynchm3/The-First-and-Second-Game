@@ -75,8 +75,8 @@ public class PinWindow implements Draggable {
 			this.width = Game.SQUARE_WIDTH;
 			this.height = Game.SQUARE_HEIGHT;
 		}
-		drawPositionX = 500;
-		drawPositionY = 10;
+		drawPositionX = 500 + Game.level.pinWindows.size() * 32;
+		drawPositionY = 10 + Game.level.pinWindows.size() * 32;
 
 		// Sizing if it's a square
 		if (square != null) {
