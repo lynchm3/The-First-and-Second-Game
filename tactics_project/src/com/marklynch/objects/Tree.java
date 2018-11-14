@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionChopping;
 import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -166,10 +164,10 @@ public class Tree extends GameObject {
 		}
 	}
 
-	@Override
-	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionChopping(performer, this);
-	}
+	// @Override
+	// public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+	// return new ActionChopping(performer, this);
+	// }
 
 	@Override
 	public Tree makeCopy(Square square, Actor owner) {

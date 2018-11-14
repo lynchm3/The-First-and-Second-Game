@@ -1160,6 +1160,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+
+		System.out.println("getSecondaryActionPerformedOnThisInWorld() - this = " + this);
+		System.out.println("getSecondaryActionPerformedOnThisInWorld() - this.templateId = " + this.templateId);
+		System.out.println("getSecondaryActionPerformedOnThisInWorld() - Templates.TREE_READABLE.templateId = "
+				+ Templates.TREE_READABLE.templateId);
+
 		if (this instanceof Discoverable) {
 			Discoverable discoverable = (Discoverable) this;
 			if (!discoverable.discovered)
@@ -1179,7 +1185,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return action;
 		}
 
-		if (this instanceof Stump || this instanceof Tree) {
+		if (this instanceof Stump || this instanceof Tree || this.templateId == Templates.TREE_CONTAINER.templateId
+				|| this.templateId == Templates.TREE_READABLE.templateId) {
 			return new ActionChopping(performer, this);
 		}
 
@@ -1286,7 +1293,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Tree and stump
-		if (this instanceof Stump || this instanceof Tree) {
+		if (this instanceof Stump || this instanceof Tree || this.templateId == Templates.TREE_CONTAINER.templateId
+				|| this.templateId == Templates.TREE_READABLE.templateId) {
 			actions.add(new ActionChopping(performer, this));
 		}
 

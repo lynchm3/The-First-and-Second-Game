@@ -245,7 +245,9 @@ public class ActionDie extends Action {
 					new ActionDropItems(gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn, gameObject)
 							.perform();
 				}
-			} else if (gameObjectPerformer instanceof Tree
+			} else if ((gameObjectPerformer instanceof Tree
+					|| gameObjectPerformer.templateId == Templates.TREE_CONTAINER.templateId
+					|| gameObjectPerformer.templateId == Templates.TREE_READABLE.templateId)
 					&& gameObjectPerformer.destroyedByAction instanceof ActionChopping) {
 
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
