@@ -25,6 +25,9 @@ public class BestiaryKnowledge {
 
 	public BestiaryKnowledge(int templateId) {
 		this.templateId = templateId;
+		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+			putHighLevel(statType, false);
+		}
 	}
 
 	public void putHighLevel(HIGH_LEVEL_STATS statType, boolean value) {
