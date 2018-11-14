@@ -2549,6 +2549,10 @@ public class Level {
 		if (conversation != null)
 			conversation.resize();
 
+		for (PinWindow pinWindow : pinWindows) {
+			pinWindow.handleResize();
+		}
+
 	}
 
 	public void addNotification(Notification notificationToAdd) {

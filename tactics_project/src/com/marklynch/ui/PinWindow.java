@@ -75,8 +75,58 @@ public class PinWindow implements Draggable {
 			this.width = Game.SQUARE_WIDTH;
 			this.height = Game.SQUARE_HEIGHT;
 		}
-		drawPositionX = 500 + Game.level.pinWindows.size() * 32;
-		drawPositionY = 10 + Game.level.pinWindows.size() * 32;
+
+		drawPositionX = 32 + Game.level.pinWindows.size() * 32;
+		drawPositionY = 32 + Game.level.pinWindows.size() * 32;
+
+		closeButton = new LevelButton(drawPositionX + width - 20, drawPositionY, 20f, 20f, "end_turn_button.png",
+				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE, "Close window");
+		closeButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.pinWindows.remove(PinWindow.this);
+			}
+		});
+
+		minimiseButton = new LevelButton(drawPositionX + width - 40, drawPositionY, 20f, 20f, "end_turn_button.png",
+				"end_turn_button.png", "_", true, true, Color.BLACK, Color.WHITE, "Minimise window");
+		minimiseButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				PinWindow.this.minimised = !PinWindow.this.minimised;
+			}
+		});
+
+		lineButton = new LevelButton(drawPositionX + width - 60, drawPositionY, 20f, 20f, "end_turn_button.png",
+				"end_turn_button.png", "<->", true, true, Color.BLACK, Color.WHITE, "Turn on/off line");
+		lineButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				PinWindow.this.drawLine = !PinWindow.this.drawLine;
+			}
+		});
+
+		titleBarButton = new LevelButton(drawPositionX, drawPositionY, width, 20f, "end_turn_button.png",
+				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
+		titleBarButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				PinWindow.this.minimised = !PinWindow.this.minimised;
+			}
+		});
+
+		handleResize();
+	}
+
+	public void handleResize() {
+
+		if (drawPositionX > Game.windowWidth - 32) {
+			drawPositionX = Game.windowWidth - 32;
+		}
+
+		if (drawPositionY > Game.windowHeight - 32) {
+			drawPositionY = Game.windowHeight - 32;
+		}
 
 		// Sizing if it's a square
 		if (square != null) {
@@ -115,41 +165,17 @@ public class PinWindow implements Draggable {
 
 		}
 
-		closeButton = new LevelButton(drawPositionX + width - 20, drawPositionY, 20f, 20f, "end_turn_button.png",
-				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE, "Close window");
-		closeButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.level.pinWindows.remove(PinWindow.this);
-			}
-		});
+		closeButton.x = drawPositionX + width - 20;
+		closeButton.y = drawPositionY;
 
-		minimiseButton = new LevelButton(drawPositionX + width - 40, drawPositionY, 20f, 20f, "end_turn_button.png",
-				"end_turn_button.png", "_", true, true, Color.BLACK, Color.WHITE, "Minimise window");
-		minimiseButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				PinWindow.this.minimised = !PinWindow.this.minimised;
-			}
-		});
+		minimiseButton.x = drawPositionX + width - 40;
+		minimiseButton.y = drawPositionY;
 
-		lineButton = new LevelButton(drawPositionX + width - 60, drawPositionY, 20f, 20f, "end_turn_button.png",
-				"end_turn_button.png", "<->", true, true, Color.BLACK, Color.WHITE, "Turn on/off line");
-		lineButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				PinWindow.this.drawLine = !PinWindow.this.drawLine;
-			}
-		});
+		lineButton.x = drawPositionX + width - 60;
+		lineButton.y = drawPositionY;
 
-		titleBarButton = new LevelButton(drawPositionX, drawPositionY, width, 20f, "end_turn_button.png",
-				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE, null);
-		titleBarButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				PinWindow.this.minimised = !PinWindow.this.minimised;
-			}
-		});
+		titleBarButton.x = drawPositionX;
+		titleBarButton.y = drawPositionY;
 	}
 
 	public void drawLine() {
