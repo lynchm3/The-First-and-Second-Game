@@ -137,6 +137,7 @@ public abstract class Action {
 	public GameObject target;
 	public Square targetSquare;
 	public String actionName;
+	public Object targetGameObjectOrSquare;
 	public boolean enabled = true;
 	public boolean legal = true;
 	public Sound sound;
@@ -155,6 +156,7 @@ public abstract class Action {
 			this.performer = (Actor) this.gameObjectPerformer;
 		}
 
+		this.targetGameObjectOrSquare = targetGameObjectOrSquare;
 		if (targetGameObjectOrSquare instanceof GameObject) {
 			this.target = (GameObject) targetGameObjectOrSquare;
 			this.targetSquare = this.target.squareGameObjectIsOn;

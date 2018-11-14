@@ -69,7 +69,6 @@ import com.marklynch.objects.actions.ActionOpenInventoryToGiveItems;
 import com.marklynch.objects.actions.ActionOpenInventoryToThrowItems;
 import com.marklynch.objects.actions.ActionOpenOtherInventory;
 import com.marklynch.objects.actions.ActionPeek;
-import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionPourSpecificItem;
 import com.marklynch.objects.actions.ActionRead;
@@ -91,6 +90,7 @@ import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.actions.ActionUntrackMapMarker;
 import com.marklynch.objects.actions.ActionUse;
 import com.marklynch.objects.actions.ActionUsePower;
+import com.marklynch.objects.actions.ActionViewInfo;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.templates.Templates;
@@ -1431,7 +1431,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// actions.add(new ActionCastPoison(performer, this));
 
 		if (!(this instanceof MapMarker))
-			actions.add(new ActionPin(performer, this, null));
+			actions.add(new ActionViewInfo(performer, this));
 
 		return actions;
 

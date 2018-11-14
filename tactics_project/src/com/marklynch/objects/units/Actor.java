@@ -54,13 +54,13 @@ import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionOpenOtherInventory;
 import com.marklynch.objects.actions.ActionPet;
-import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionSellItems;
 import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTalk;
+import com.marklynch.objects.actions.ActionViewInfo;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Bell;
@@ -1969,7 +1969,7 @@ public class Actor extends GameObject {
 				if (hidingPlaceStandingOn != null)
 					actions.add(new ActionHide(this, hidingPlaceStandingOn));
 			}
-			actions.add(new ActionPin(performer, this, null));
+			actions.add(new ActionViewInfo(performer, this));
 		} else {
 			// Talk
 			if (remainingHealth > 0 && this.getConversation() != null)

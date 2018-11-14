@@ -44,7 +44,6 @@ import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionOpenInventoryToDropItems;
 import com.marklynch.objects.actions.ActionOpenInventoryToThrowItems;
-import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPlaceMapMarker;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionStopHiding;
@@ -52,6 +51,7 @@ import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionTeleportSwap;
 import com.marklynch.objects.actions.ActionThrowItem;
+import com.marklynch.objects.actions.ActionViewInfo;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
@@ -1061,7 +1061,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		if (!this.inventory.contains(MapMarker.class))
 			actions.add(new ActionPlaceMapMarker(this));
 
-		actions.add(new ActionPin(performer, null, this));
+		actions.add(new ActionViewInfo(performer, this));
 
 		return actions;
 	}

@@ -2,22 +2,16 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.PinWindow;
 
-public class ActionPin extends Action {
+public class ActionViewInfo extends Action {
 
 	public static final String ACTION_NAME = "Info";
 
-	public Object object;
-
 	// Default for hostiles
-	public ActionPin(Actor performer, GameObject target, Square targetSquare) {
+	public ActionViewInfo(Actor performer, Object target) {
 		super(ACTION_NAME, textureSearch, performer, target);
-		super.gameObjectPerformer = this.performer = performer;
-		this.object = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -35,7 +29,7 @@ public class ActionPin extends Action {
 		if (!checkRange())
 			return;
 
-		Game.level.pinWindows.add(new PinWindow(object));
+		Game.level.pinWindows.add(new PinWindow(targetGameObjectOrSquare));
 
 		performer.actionsPerformedThisTurn.add(this);
 	}
@@ -43,7 +37,7 @@ public class ActionPin extends Action {
 	@Override
 	public boolean check() {
 		for (PinWindow pinWindow : Game.level.pinWindows) {
-			if (pinWindow.object == object) {
+			if (pinWindow.object == targetGameObjectOrSquare) {
 				return false;
 			}
 		}
