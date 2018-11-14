@@ -1970,6 +1970,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.persistsWhenCantBeSeen = persistsWhenCantBeSeen;
 		gameObject.attackable = attackable;
 		gameObject.isFloorObject = isFloorObject;
+		gameObject.moveable = moveable;
 
 		gameObject.init();
 	}
