@@ -61,7 +61,7 @@ public class ActionChopping extends Action {
 	public void postMeleeAnimation() {
 
 		float damage = target.totalHealth / 4f;
-		target.changeHealth(-damage, null, null);
+		target.changeHealth(-damage, performer, this);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 

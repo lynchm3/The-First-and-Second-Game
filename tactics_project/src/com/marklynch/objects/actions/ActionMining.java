@@ -87,7 +87,7 @@ public class ActionMining extends Action {
 					ore = vein.inventory.get(0);
 					performer.inventory.add(ore);
 				}
-				vein.changeHealth(-damage, null, null);
+				vein.changeHealth(-damage, performer, this);
 			} else {
 				ore = vein.oreTemplate.makeCopy(vein.squareGameObjectIsOn, vein.owner);
 				performer.inventory.add(ore);

@@ -34,7 +34,7 @@ public class ActionSmash extends Action {
 		if (!checkRange())
 			return;
 
-		target.changeHealth(-target.remainingHealth, null, null);
+		target.changeHealth(-target.remainingHealth, performer, this);
 		target.checkIfDestroyed(gameObjectPerformer, this);
 
 		gameObjectPerformer.actionsPerformedThisTurn.add(this);

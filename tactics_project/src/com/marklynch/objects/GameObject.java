@@ -108,6 +108,7 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
+import com.marklynch.utils.Utils;
 
 public class GameObject implements ActionableInWorld, ActionableInInventory, Comparable, InventoryParent, DamageDealer {
 
@@ -779,7 +780,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	protected boolean died = false;
 
 	public boolean checkIfDestroyed(Object attacker, Action action) {
+
 		if (!died && remainingHealth <= 0) {
+
+			Utils.printStackTrace();
+			System.out.println("checkIfDestroyed() - this = " + this);
+			System.out.println("checkIfDestroyed() - attacker = " + attacker);
+			System.out.println("checkIfDestroyed() = action = " + action);
+
 			died = true;
 			destroyedBy = attacker;
 			destroyedByAction = action;

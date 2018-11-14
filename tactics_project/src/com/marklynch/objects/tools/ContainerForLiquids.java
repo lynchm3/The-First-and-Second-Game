@@ -48,7 +48,7 @@ public class ContainerForLiquids extends Tool implements Consumable {
 	@Override
 	public void landed(Actor shooter, Action action) {
 
-		this.changeHealth(-this.remainingHealth, null, null);
+		this.changeHealth(-this.remainingHealth, shooter, action);
 		this.canShareSquare = true;
 		this.blocksLineOfSight = false;
 

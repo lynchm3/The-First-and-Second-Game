@@ -162,6 +162,11 @@ public class ActionDie extends Action {
 
 	public void createCorpse() {
 
+		System.out.println("createCorpse() gameObjectPerformer = " + gameObjectPerformer);
+		System.out.println(
+				"createCorpse() gameObjectPerformer.destroyedByAction = " + gameObjectPerformer.destroyedByAction);
+		// ^ destroyedByAction is null
+
 		if (gameObjectPerformer instanceof Actor) {
 
 			Actor actor = (Actor) gameObjectPerformer;
