@@ -18,6 +18,7 @@ import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMovi
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomTeamwork;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomTeamwork2;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomTeamwork3;
+import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomUndergroundLake;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
@@ -70,7 +71,7 @@ public class QuestList extends ArrayList<Quest> {
 		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>();
 		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
 		structureSections.add(new StructureSection("Puzzle Structure Section", puzzleRoomsX, puzzleRoomsY,
-				puzzleRoomsX + 100, puzzleRoomsY + 100, false, false));
+				puzzleRoomsX + 100, puzzleRoomsY + 150, false, false));
 
 		ArrayList<StructureRoom> puzzleStructureRooms = new ArrayList<StructureRoom>();
 
@@ -128,6 +129,13 @@ public class QuestList extends ArrayList<Quest> {
 
 		// ROOM Chasm
 		puzzleStructureRooms.add(new PuzzleRoomChasm(puzzleRoomsX + 60, puzzleRoomsY + 73));
+
+		// DOORWAY chasm to underground lake
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 69][puzzleRoomsY + 93]);
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 70][puzzleRoomsY + 93]);
+
+		// ROOM underground lake
+		puzzleStructureRooms.add(new PuzzleRoomUndergroundLake(puzzleRoomsX + 60, puzzleRoomsY + 94));
 
 		// ROOM Crumbling wall
 		puzzleStructureRooms.add(new PuzzleRoomCrumblingWall(puzzleRoomsX + 22, puzzleRoomsY + 10));

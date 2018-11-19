@@ -166,9 +166,9 @@ public class WaterBody extends WaterSource implements Consumable {
 			fish = null;
 		}
 
-		if (this.fish == null && Math.random() > 0.99d) {
-			this.fish = addFish();
-		}
+		// if (this.fish == null && Math.random() > 0.99d) {
+		// this.fish = addFish();
+		// }
 	}
 
 	public Fish addFish() {
