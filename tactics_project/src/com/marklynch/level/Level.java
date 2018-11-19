@@ -1412,7 +1412,7 @@ public class Level {
 		else // if (showLog)
 
 		{
-			quickBar.drawStaticUI();
+			// quickBar.drawStaticUI();
 			activityLogger.drawStaticUI();
 		}
 

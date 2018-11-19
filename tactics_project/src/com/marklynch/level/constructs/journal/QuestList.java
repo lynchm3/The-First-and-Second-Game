@@ -11,6 +11,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomChasm;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomCrumblingWall;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomFallawayFloor;
+import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMaze;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMineCart;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMineCart2;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMineThroughWall;
@@ -101,7 +102,16 @@ public class QuestList extends ArrayList<Quest> {
 		// ROOM Fallaway floor
 		puzzleStructureRooms.add(new PuzzleRoomFallawayFloor(puzzleRoomsX + 36, puzzleRoomsY + 30));
 
-		// DOORWAY fallaway floor to team chambers 1
+		// DOORWAY fallaway floor to maze
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 38][puzzleRoomsY + 60]);
+
+		// ROOM maze
+		// puzzleStructureRooms.add(
+		PuzzleRoomMaze puzzleRoomMaze = new PuzzleRoomMaze(puzzleRoomsX + 24, puzzleRoomsY + 61);
+		paths.addAll(puzzleRoomMaze.structurePaths);
+		// );
+
+		// DOORWAY fallaway floor to chambers 1
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 66][puzzleRoomsY + 30]);
 
 		// ROOM Teamwork chambers 1

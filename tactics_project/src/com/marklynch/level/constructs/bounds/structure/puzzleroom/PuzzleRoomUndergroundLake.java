@@ -52,6 +52,15 @@ public class PuzzleRoomUndergroundLake extends StructureRoom {
 		ledges.add(Level.squares[posX + 19][posY + 6]);
 		ledges.add(Level.squares[posX + 19][posY + 16]);
 
+		// Middle
+		ledges.add(Level.squares[posX + 4][posY + 7]);
+		ledges.add(Level.squares[posX + 5][posY + 1]);
+		ledges.add(Level.squares[posX + 8][posY + 9]);
+		ledges.add(Level.squares[posX + 10][posY + 16]);
+		ledges.add(Level.squares[posX + 12][posY + 14]);
+		ledges.add(Level.squares[posX + 14][posY + 11]);
+		ledges.add(Level.squares[posX + 16][posY + 18]);
+
 		// Color ground black and put void hole where there'll be void squares
 		for (int i = posX; i < posX + totalWidthInSquares; i++) {
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
