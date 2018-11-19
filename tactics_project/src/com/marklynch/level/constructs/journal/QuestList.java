@@ -151,6 +151,8 @@ public class QuestList extends ArrayList<Quest> {
 		puzzleStructureRooms.add(new PuzzleRoomCrumblingWall(puzzleRoomsX + 22, puzzleRoomsY + 10));
 
 		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
+		features.addAll(puzzleRoomMaze.features);
+
 		ArrayList<Square> entrances = new ArrayList<Square>();
 		entrances.add(Level.squares[puzzleRoomsX][puzzleRoomsY + 10]);
 		// 2nd top left entrance

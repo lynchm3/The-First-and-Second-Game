@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actions.Action;
 //import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Color;
@@ -144,10 +145,20 @@ public class Wall extends GameObject {
 			leftDrawX2 = drawX1 + halfWidth + randomOffset;
 			leftDrawY2 = drawY2 - quarterHeight + randomOffset;
 
+			// if (!(this instanceof Vein))
 			this.squareGameObjectIsOn.imageTexture = Square.GREY_TEXTURE;
 
 		}
 
+	}
+
+	@Override
+	public boolean checkIfDestroyed(Object attacker, Action action) {
+		boolean destroyed = super.checkIfDestroyed(attacker, action);
+		if (destroyed && this.squareGameObjectIsOn != null) {
+			this.squareGameObjectIsOn.imageTexture = Square.STONE_TEXTURE;
+		}
+		return destroyed;
 	}
 
 	@Override

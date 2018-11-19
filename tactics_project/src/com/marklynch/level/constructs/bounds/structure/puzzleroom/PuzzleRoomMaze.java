@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.bounds.structure.puzzleroom;
 import java.util.ArrayList;
 
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
@@ -21,6 +22,7 @@ public class PuzzleRoomMaze { // extends StructureRoom {
 	int safeBorderWidthOnRight = 5;
 	Square voidSquare;
 	public ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>();
+	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
 
 	public PuzzleRoomMaze(int posX, int posY) {
 		// super("Fallaway floor", posX, posY, false, false, new ArrayList<Actor>(), 1,
@@ -264,12 +266,19 @@ public class PuzzleRoomMaze { // extends StructureRoom {
 				Level.squares[posX + 29][posY + 27], Level.squares[posX + 29][posY + 28],
 				Level.squares[posX + 29][posY + 29]));
 
-		// @5,27 give the skull a gold tooth.
-		Templates.GOLD.makeCopy(Level.squares[posX + 5][posY + 27], null, 5);
-		Templates.GOLD.makeCopy(Level.squares[posX + 5][posY + 27], null, 5);
-		Templates.GOLD.makeCopy(Level.squares[posX + 5][posY + 27], null, 5);
-		Templates.GOLD.makeCopy(Level.squares[posX + 5][posY + 27], null, 5);
-		Templates.GOLD.makeCopy(Level.squares[posX + 5][posY + 27], null, 5);
+		// @5,27 give the skull a gold tooth. Maybe I could put in gold ore or a gold
+		// vein instead...
+		this.features.add(new StructureFeature(
+				Templates.VEIN.makeCopy(Level.squares[posX + 5][posY + 27], null, false, Templates.ORE, 0.5f)));
+
+		// Veins blocking the way
+		// 13,23
+		this.features.add(new StructureFeature(
+				Templates.VEIN.makeCopy(Level.squares[posX + 13][posY + 23], null, false, Templates.ORE, 0.5f)));
+
+		// Cracked walls blocking the way
+
+		// Monsters
 
 		this.posX = posX;
 		this.posY = posY;
