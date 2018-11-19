@@ -45,6 +45,7 @@ import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.WallWithCrack;
 import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.WaterSource;
@@ -290,6 +291,7 @@ public class Templates {
 	public static GameObject DINNER_FORK;
 
 	public static Wall WALL;
+	public static WallWithCrack WALL_WITH_CRACK;
 	public static Wall FALSE_WALL;
 
 	public static Wall FENCE;

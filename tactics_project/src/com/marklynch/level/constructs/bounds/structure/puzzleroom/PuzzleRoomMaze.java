@@ -271,12 +271,15 @@ public class PuzzleRoomMaze { // extends StructureRoom {
 		this.features.add(new StructureFeature(
 				Templates.VEIN.makeCopy(Level.squares[posX + 5][posY + 27], null, false, Templates.ORE, 0.5f)));
 
-		// Veins blocking the way
+		// Veins blocking the way to the monster
 		// 13,23
 		this.features.add(new StructureFeature(
 				Templates.VEIN.makeCopy(Level.squares[posX + 13][posY + 23], null, false, Templates.ORE, 0.5f)));
 
-		// Cracked walls blocking the way
+		// Cracked walls blocking the way to the treasure
+		// x = 26, y = 11
+		this.features.add(
+				new StructureFeature(Templates.WALL_WITH_CRACK.makeCopy(Level.squares[posX + 26][posY + 11], null)));
 
 		// Monsters
 

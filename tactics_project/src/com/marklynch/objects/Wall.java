@@ -95,9 +95,9 @@ public class Wall extends GameObject {
 			quarterWidth = Game.SQUARE_WIDTH / 4;
 			quarterHeight = Game.SQUARE_HEIGHT / 4;
 
-			drawX1 = (int) (squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetRatioX);
+			drawX1 = (int) (squareGameObjectIsOn.xInGridPixels);
 			drawX2 = (int) (drawX1 + width);
-			drawY1 = (int) (squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetRatioY);
+			drawY1 = (int) (squareGameObjectIsOn.yInGridPixels);
 			drawY2 = (int) (drawY1 + height);
 
 			fullDrawX1 = drawX1;
@@ -183,6 +183,9 @@ public class Wall extends GameObject {
 	private void draw1WithoutAnimation() {
 
 		float alpha = 1.0f;
+
+		if (this instanceof WallWithCrack)
+			System.out.println("drawX1 = " + drawX1);
 
 		if (fullWall) {
 

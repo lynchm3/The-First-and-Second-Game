@@ -9,6 +9,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MineCart;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.WallWithCrack;
 
 public class TemplatesBuilding {
 
@@ -19,20 +20,12 @@ public class TemplatesBuilding {
 		Templates.WALL.imageTexturePath = "wall.png";
 		Templates.WALL.imageTexture = getGlobalImage(Templates.WALL.imageTexturePath, true);
 		Templates.WALL.totalHealth = Templates.WALL.remainingHealth = 1000;
-		Templates.WALL.widthRatio = 1f;
-		Templates.WALL.heightRatio = 1f;
-		Templates.WALL.drawOffsetRatioX = 0f;
-		Templates.WALL.drawOffsetRatioY = 0f;
 		Templates.WALL.soundWhenHit = 10f;
 		Templates.WALL.soundWhenHitting = 1f;
 		Templates.WALL.soundDampening = 10f;
-		Templates.WALL.stackable = false;
 		Templates.WALL.weight = 100f;
 		Templates.WALL.value = 24;
-		Templates.WALL.anchorX = 0;
-		Templates.WALL.anchorY = 0;
 		Templates.WALL.templateId = GameObject.generateNewTemplateId();
-		Templates.WALL.flipYAxisInMirror = false;
 		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
 		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
 		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
@@ -43,6 +36,23 @@ public class TemplatesBuilding {
 		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
 		Templates.WALL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
+		Templates.WALL_WITH_CRACK = new WallWithCrack();
+		Templates.WALL_WITH_CRACK.name = "Wall";
+		Templates.WALL_WITH_CRACK.imageTexturePath = "wall.png";
+		Templates.WALL_WITH_CRACK.imageTexture = getGlobalImage(Templates.WALL_WITH_CRACK.imageTexturePath, true);
+		WallWithCrack.wallCrackTexture = getGlobalImage("wall_crack.png", false);
+		Templates.WALL_WITH_CRACK.totalHealth = Templates.WALL_WITH_CRACK.remainingHealth = 30;
+		Templates.WALL_WITH_CRACK.soundWhenHit = 10f;
+		Templates.WALL_WITH_CRACK.soundWhenHitting = 1f;
+		Templates.WALL_WITH_CRACK.soundDampening = 10f;
+		Templates.WALL_WITH_CRACK.weight = 90f;
+		Templates.WALL_WITH_CRACK.value = 2;
+		Templates.WALL_WITH_CRACK.templateId = GameObject.generateNewTemplateId();
+		Templates.WALL_WITH_CRACK.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
+		Templates.WALL_WITH_CRACK.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
+		Templates.WALL_WITH_CRACK.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
+		Templates.WALL_WITH_CRACK.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
+
 		Templates.FALSE_WALL = new Wall();
 		Templates.FALSE_WALL.name = "Wall";
 		Templates.FALSE_WALL.imageTexturePath = "wall.png";
@@ -51,8 +61,8 @@ public class TemplatesBuilding {
 		Templates.FALSE_WALL.soundWhenHit = 10f;
 		Templates.FALSE_WALL.soundDampening = 10f;
 		Templates.FALSE_WALL.stackable = false;
-		Templates.FALSE_WALL.weight = 1f;
-		Templates.FALSE_WALL.value = 1;
+		Templates.FALSE_WALL.weight = 40f;
+		Templates.FALSE_WALL.value = 34;
 		Templates.FALSE_WALL.templateId = GameObject.generateNewTemplateId();
 		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
 		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
