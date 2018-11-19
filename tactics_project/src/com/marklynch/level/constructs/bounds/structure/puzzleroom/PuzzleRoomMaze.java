@@ -6,6 +6,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
 public class PuzzleRoomMaze { // extends StructureRoom {
@@ -79,8 +80,7 @@ public class PuzzleRoomMaze { // extends StructureRoom {
 				Level.squares[posX + 6][posY + 3], Level.squares[posX + 6][posY + 4], Level.squares[posX + 6][posY + 5],
 				Level.squares[posX + 6][posY + 6], Level.squares[posX + 6][posY + 9],
 				Level.squares[posX + 6][posY + 12], Level.squares[posX + 6][posY + 14],
-				Level.squares[posX + 6][posY + 15], Level.squares[posX + 6][posY + 16],
-				Level.squares[posX + 6][posY + 17], Level.squares[posX + 6][posY + 18],
+				Level.squares[posX + 6][posY + 15], Level.squares[posX + 6][posY + 18],
 				Level.squares[posX + 6][posY + 19], Level.squares[posX + 6][posY + 20],
 				Level.squares[posX + 6][posY + 23], Level.squares[posX + 6][posY + 24],
 				Level.squares[posX + 6][posY + 25], Level.squares[posX + 6][posY + 26],
@@ -114,10 +114,11 @@ public class PuzzleRoomMaze { // extends StructureRoom {
 				// x=10
 				Level.squares[posX + 10][posY + 0], Level.squares[posX + 10][posY + 2],
 				Level.squares[posX + 10][posY + 4], Level.squares[posX + 10][posY + 11],
-				Level.squares[posX + 10][posY + 12], Level.squares[posX + 10][posY + 18],
-				Level.squares[posX + 10][posY + 19], Level.squares[posX + 10][posY + 20],
-				Level.squares[posX + 10][posY + 21], Level.squares[posX + 10][posY + 24],
-				Level.squares[posX + 10][posY + 25], Level.squares[posX + 10][posY + 29],
+				Level.squares[posX + 10][posY + 12], Level.squares[posX + 10][posY + 15],
+				Level.squares[posX + 10][posY + 18], Level.squares[posX + 10][posY + 19],
+				Level.squares[posX + 10][posY + 20], Level.squares[posX + 10][posY + 21],
+				Level.squares[posX + 10][posY + 24], Level.squares[posX + 10][posY + 25],
+				Level.squares[posX + 10][posY + 29],
 				// x=11
 				Level.squares[posX + 11][posY + 0], Level.squares[posX + 11][posY + 2],
 				Level.squares[posX + 11][posY + 4], Level.squares[posX + 11][posY + 5],
@@ -133,14 +134,14 @@ public class PuzzleRoomMaze { // extends StructureRoom {
 				Level.squares[posX + 12][posY + 0], Level.squares[posX + 12][posY + 2],
 				Level.squares[posX + 12][posY + 15], Level.squares[posX + 12][posY + 21],
 				Level.squares[posX + 12][posY + 22], Level.squares[posX + 12][posY + 23],
-				Level.squares[posX + 12][posY + 25], Level.squares[posX + 12][posY + 28],
+				Level.squares[posX + 12][posY + 28],
 				// x=13
 				Level.squares[posX + 13][posY + 0], Level.squares[posX + 13][posY + 2],
 				Level.squares[posX + 13][posY + 9], Level.squares[posX + 13][posY + 10],
 				Level.squares[posX + 13][posY + 11], Level.squares[posX + 13][posY + 15],
 				Level.squares[posX + 13][posY + 16], Level.squares[posX + 13][posY + 17],
 				Level.squares[posX + 13][posY + 18], Level.squares[posX + 13][posY + 19],
-				Level.squares[posX + 13][posY + 25], Level.squares[posX + 13][posY + 28],
+				Level.squares[posX + 13][posY + 23], Level.squares[posX + 13][posY + 28],
 				// x=14
 				Level.squares[posX + 14][posY + 0], Level.squares[posX + 14][posY + 1],
 				Level.squares[posX + 14][posY + 2], Level.squares[posX + 14][posY + 3],
@@ -262,6 +263,13 @@ public class PuzzleRoomMaze { // extends StructureRoom {
 				Level.squares[posX + 29][posY + 10], Level.squares[posX + 29][posY + 19],
 				Level.squares[posX + 29][posY + 27], Level.squares[posX + 29][posY + 28],
 				Level.squares[posX + 29][posY + 29]));
+
+		// @5,27 give the skull a gold tooth.
+		Templates.GOLD.makeCopy(Level.squares[posX + 5][posY + 27], null, 5);
+		Templates.GOLD.makeCopy(Level.squares[posX + 5][posY + 27], null, 5);
+		Templates.GOLD.makeCopy(Level.squares[posX + 5][posY + 27], null, 5);
+		Templates.GOLD.makeCopy(Level.squares[posX + 5][posY + 27], null, 5);
+		Templates.GOLD.makeCopy(Level.squares[posX + 5][posY + 27], null, 5);
 
 		this.posX = posX;
 		this.posY = posY;
