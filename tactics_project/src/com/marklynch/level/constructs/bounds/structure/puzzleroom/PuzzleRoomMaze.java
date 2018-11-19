@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.bounds.structure.puzzleroom;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -11,6 +12,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.RockGolem;
 
 public class PuzzleRoomMaze extends StructureRoom {
 	int posX;
@@ -292,9 +294,12 @@ public class PuzzleRoomMaze extends StructureRoom {
 		Templates.PICKAXE.makeCopy(Level.squares[posX + 2][posY + 5], null);
 
 		// Monsters
-		// @17,11
-		Templates.BLIND.makeCopy(Level.squares[posX + 17][posY + 11], Level.factions.blind, 11, this,
+		// @17,11 blind
+		Templates.BLIND.makeCopy(Level.squares[posX + 17][posY + 11], Level.factions.blind, 11, null,
 				new GameObject[] {}, new GameObject[] {});
+		// @23,14 Rock Golem
+		RockGolem rockGolem = Templates.ROCK_GOLEM.makeCopy("Suspicious Boulder", Level.squares[posX + 23][posY + 14],
+				Game.level.factions.rockGolems, null, new GameObject[] {}, new GameObject[] {});
 
 		this.posX = posX;
 		this.posY = posY;
