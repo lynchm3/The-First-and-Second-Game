@@ -66,7 +66,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		this.bridgePosY = posY + 1;
 		this.gapsWidth = (totalWidthInSquares - bridgeWidth) / 2;
 		this.bridgeConnectorsWidth = (totalWidthInSquares - bridgeWidth) / 2;
-		voidSquare = Level.squares[90][40];
+		voidSquare = Level.squares[posX][posY];
 
 		// Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[posX][posY - 1], null,
 		// this, Switch.SWITCH_TYPE.OPEN_CLOSE,
