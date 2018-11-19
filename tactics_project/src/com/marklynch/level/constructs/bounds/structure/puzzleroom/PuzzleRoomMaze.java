@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
-public class PuzzleRoomMaze { // extends StructureRoom {
+public class PuzzleRoomMaze extends StructureRoom {
 	int posX;
 	int posY;
 	final static int totalWidthInSquares = 30;
@@ -25,11 +27,7 @@ public class PuzzleRoomMaze { // extends StructureRoom {
 	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
 
 	public PuzzleRoomMaze(int posX, int posY) {
-		// super("Fallaway floor", posX, posY, false, false, new ArrayList<Actor>(), 1,
-		// false, new Node[] {},
-		// new RoomPart[] {
-		// new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY +
-		// totalHeightInSquares - 1) });
+		super("Maze", posX, posY, false, false, new ArrayList<Actor>(), 1, false, new Node[] {}, new RoomPart[] {});
 
 		structurePaths.add(new StructurePath("Goat's Maze", false, false, new ArrayList<Actor>(), new Node[] {},
 				// x = 0
@@ -281,7 +279,22 @@ public class PuzzleRoomMaze { // extends StructureRoom {
 		this.features.add(
 				new StructureFeature(Templates.WALL_WITH_CRACK.makeCopy(Level.squares[posX + 26][posY + 11], null)));
 
+		// Main treasure @24,2
+		Templates.KATANA.makeCopy(Level.squares[posX + 24][posY + 2], null);
+
+		// Bits and pieces lying around
+		// @27,3 gold
+		Templates.GOLD.makeCopy(Level.squares[posX + 3][posY + 27], null, 23);
+		// @1,5 vein
+		this.features.add(new StructureFeature(
+				Templates.VEIN.makeCopy(Level.squares[posX + 1][posY + 5], null, false, Templates.ORE, 0.5f)));
+		// @1,6 pickaxe
+		Templates.PICKAXE.makeCopy(Level.squares[posX + 2][posY + 5], null);
+
 		// Monsters
+		// @17,11
+		Templates.BLIND.makeCopy(Level.squares[posX + 17][posY + 11], Level.factions.blind, 11, this,
+				new GameObject[] {}, new GameObject[] {});
 
 		this.posX = posX;
 		this.posY = posY;

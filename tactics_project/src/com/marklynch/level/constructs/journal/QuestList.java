@@ -108,6 +108,7 @@ public class QuestList extends ArrayList<Quest> {
 		// ROOM maze
 		// puzzleStructureRooms.add(
 		PuzzleRoomMaze puzzleRoomMaze = new PuzzleRoomMaze(puzzleRoomsX + 24, puzzleRoomsY + 61);
+		puzzleStructureRooms.add(puzzleRoomMaze);
 		paths.addAll(puzzleRoomMaze.structurePaths);
 		// );
 
