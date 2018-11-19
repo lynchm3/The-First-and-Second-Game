@@ -784,9 +784,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (!died && remainingHealth <= 0) {
 
 			Utils.printStackTrace();
-			System.out.println("checkIfDestroyed() - this = " + this);
-			System.out.println("checkIfDestroyed() - attacker = " + attacker);
-			System.out.println("checkIfDestroyed() = action = " + action);
 
 			died = true;
 			destroyedBy = attacker;
@@ -1160,11 +1157,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
-
-		System.out.println("getSecondaryActionPerformedOnThisInWorld() - this = " + this);
-		System.out.println("getSecondaryActionPerformedOnThisInWorld() - this.templateId = " + this.templateId);
-		System.out.println("getSecondaryActionPerformedOnThisInWorld() - Templates.TREE_READABLE.templateId = "
-				+ Templates.TREE_READABLE.templateId);
 
 		if (this instanceof Discoverable) {
 			Discoverable discoverable = (Discoverable) this;

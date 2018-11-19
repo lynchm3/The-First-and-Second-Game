@@ -41,12 +41,6 @@ public class WallWithCrack extends Wall {
 		if (primaryAnimation != null)
 			alpha = primaryAnimation.alpha;
 
-		System.out.println("wallCrackTexture = " + wallCrackTexture);
-		System.out.println("wallCrackTexture.getWidth() = " + wallCrackTexture.getWidth());
-		System.out.println("wallCrackTexture.getHeight() = " + wallCrackTexture.getHeight());
-		System.out.println("crackPositionXInPixels = " + crackPositionXInPixels);
-		System.out.println("crackPositionYInPixels = " + crackPositionYInPixels);
-		System.out.println("alpha = " + alpha);
 		TextureUtils.drawTexture(wallCrackTexture, alpha, crackPositionXInPixels, crackPositionYInPixels,
 				crackPositionXInPixels + wallCrackTexture.getWidth(),
 				crackPositionYInPixels + wallCrackTexture.getHeight());

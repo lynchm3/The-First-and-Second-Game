@@ -184,9 +184,6 @@ public class Wall extends GameObject {
 
 		float alpha = 1.0f;
 
-		if (this instanceof WallWithCrack)
-			System.out.println("drawX1 = " + drawX1);
-
 		if (fullWall) {
 
 			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, fullDrawX1,
