@@ -30,18 +30,6 @@ public class AnimationShake extends Animation {
 		}
 	}
 
-	// @Override
-	// public void update(double delta) {
-	//
-	// if (getCompleted())
-	// return;
-	// super.update(delta);
-	//
-	// offsetX = (float) (Math.random() * 16) - 8f;
-	// offsetY = (float) (Math.random() * 16) - 8f;
-	//
-	// }
-
 	@Override
 	public void draw2() {
 
@@ -58,13 +46,11 @@ public class AnimationShake extends Animation {
 
 	@Override
 	public void draw3() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	protected void childRunCompletionAlgorightm(boolean wait) {
-		// TODO Auto-generated method stub
 
 	}
 

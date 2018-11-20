@@ -2426,4 +2426,28 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 	}
+
+	public ArrayList<GameObject> getSurroundingGameObjects() {
+		ArrayList<GameObject> surroundingGameObjects = new ArrayList<GameObject>();
+		Square squareToLeft = this.squareGameObjectIsOn.getSquareToLeftOf();
+		if (squareToLeft != null) {
+			surroundingGameObjects.addAll(squareToLeft.inventory.gameObjects);
+		}
+
+		Square squareToRight = this.squareGameObjectIsOn.getSquareToRightOf();
+		if (squareToRight != null) {
+			surroundingGameObjects.addAll(squareToRight.inventory.gameObjects);
+		}
+		Square squareAbove = this.squareGameObjectIsOn.getSquareToLeftOf();
+		if (squareAbove != null) {
+			surroundingGameObjects.addAll(squareAbove.inventory.gameObjects);
+		}
+		Square squareBelow = this.squareGameObjectIsOn.getSquareToLeftOf();
+		if (squareBelow != null) {
+			surroundingGameObjects.addAll(squareBelow.inventory.gameObjects);
+		}
+
+		return surroundingGameObjects;
+
+	}
 }

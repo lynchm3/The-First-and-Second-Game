@@ -6,6 +6,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -82,7 +83,7 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 
 		// fallaway walls 1
 		ArrayList<Square> fallawayWallsSquares1 = new ArrayList<Square>();
-		ArrayList<Wall> fallawayWalls1 = new ArrayList<Wall>();
+		ArrayList<GameObject> fallawayWalls1 = new ArrayList<GameObject>();
 		x = 38;
 		for (int y = 17; y <= 17; y++) {
 			fallawayWallsSquares1.add(Level.squares[posX + x][posY + y]);
@@ -116,7 +117,47 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 			fallawayWalls1.add(Templates.WALL.makeCopy(fallawayWallsSquare1, null));
 		}
 
-		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 45][posY + 19], null, fallawayWallsSquares1);
+		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 45][posY + 19], null, fallawayWalls1);
+
+		// fallaway walls 2
+		ArrayList<Square> fallawayWallsSquares2 = new ArrayList<Square>();
+		ArrayList<GameObject> fallawayWalls2 = new ArrayList<GameObject>();
+
+		x = 38;
+
+		for (int y = 31; y <= 31; y++) {
+			fallawayWallsSquares2.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 39;
+		for (int y = 30; y <= 31; y++) {
+			fallawayWallsSquares2.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 40;
+		for (int y = 29; y <= 31; y++) {
+			fallawayWallsSquares2.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 41;
+		for (int y = 28; y <= 31; y++) {
+			fallawayWallsSquares2.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 42;
+		for (int y = 27; y <= 31; y++) {
+			fallawayWallsSquares2.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 43;
+		for (int y = 26; y <= 31; y++) {
+			fallawayWallsSquares2.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 44;
+		for (int y = 25; y <= 31; y++) {
+			fallawayWallsSquares2.add(Level.squares[posX + x][posY + y]);
+		}
+
+		for (Square fallawayWallsSquare2 : fallawayWallsSquares2) {
+			fallawayWalls2.add(Templates.WALL.makeCopy(fallawayWallsSquare2, null));
+		}
+
+		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 45][posY + 30], null, fallawayWalls2);
 
 		/// wall inits
 
@@ -124,8 +165,12 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 			bigArrowWall.checkIfFullWall();
 		}
 
-		for (Wall fallawayWall1 : fallawayWalls1) {
-			fallawayWall1.checkIfFullWall();
+		for (GameObject fallawayWall1 : fallawayWalls1) {
+			((Wall) fallawayWall1).checkIfFullWall();
+		}
+
+		for (GameObject fallawayWall2 : fallawayWalls2) {
+			((Wall) fallawayWall2).checkIfFullWall();
 		}
 	}
 }
