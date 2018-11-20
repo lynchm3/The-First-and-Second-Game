@@ -6,6 +6,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
@@ -25,16 +26,27 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 		Templates.SHOVEL.makeCopy(Level.squares[this.posX + 15][this.posY + 15], null);
 
 		ArrayList<Square> bigArrowSquares = new ArrayList<Square>();
+		ArrayList<Wall> bigArrowWalls = new ArrayList<Wall>();
 
 		// Body of arrow
-		for (int x = 5; x <= 38; x++) {
+		for (int x = 5; x <= 36; x++) {
 			for (int y = 22; y <= 26; y++) {
 				bigArrowSquares.add(Level.squares[posX + x][posY + y]);
 			}
 		}
 
 		// Head of arrow
-		int x = 39;
+		int x = 37;
+		for (int y = 17; y <= 31; y++) {
+			bigArrowSquares.add(Level.squares[posX + x][posY + y]);
+		}
+
+		x = 38;
+		for (int y = 18; y <= 30; y++) {
+			bigArrowSquares.add(Level.squares[posX + x][posY + y]);
+		}
+
+		x = 39;
 		for (int y = 19; y <= 29; y++) {
 			bigArrowSquares.add(Level.squares[posX + x][posY + y]);
 		}
@@ -65,7 +77,55 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 		}
 
 		for (Square bigArrowSquare : bigArrowSquares) {
-			Templates.WALL.makeCopy(bigArrowSquare, null);
+			bigArrowWalls.add(Templates.WALL.makeCopy(bigArrowSquare, null));
+		}
+
+		// fallaway walls 1
+		ArrayList<Square> fallawayWallsSquares1 = new ArrayList<Square>();
+		ArrayList<Wall> fallawayWalls1 = new ArrayList<Wall>();
+		x = 38;
+		for (int y = 17; y <= 17; y++) {
+			fallawayWallsSquares1.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 39;
+		for (int y = 17; y <= 18; y++) {
+			fallawayWallsSquares1.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 40;
+		for (int y = 17; y <= 19; y++) {
+			fallawayWallsSquares1.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 41;
+		for (int y = 17; y <= 20; y++) {
+			fallawayWallsSquares1.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 42;
+		for (int y = 17; y <= 21; y++) {
+			fallawayWallsSquares1.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 43;
+		for (int y = 17; y <= 22; y++) {
+			fallawayWallsSquares1.add(Level.squares[posX + x][posY + y]);
+		}
+		x = 44;
+		for (int y = 17; y <= 23; y++) {
+			fallawayWallsSquares1.add(Level.squares[posX + x][posY + y]);
+		}
+
+		for (Square fallawayWallsSquare1 : fallawayWallsSquares1) {
+			fallawayWalls1.add(Templates.WALL.makeCopy(fallawayWallsSquare1, null));
+		}
+
+		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 45][posY + 19], null, fallawayWallsSquares1);
+
+		/// wall inits
+
+		for (Wall bigArrowWall : bigArrowWalls) {
+			bigArrowWall.checkIfFullWall();
+		}
+
+		for (Wall fallawayWall1 : fallawayWalls1) {
+			fallawayWall1.checkIfFullWall();
 		}
 	}
 }

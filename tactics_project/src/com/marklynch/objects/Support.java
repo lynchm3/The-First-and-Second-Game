@@ -33,6 +33,10 @@ public class Support extends GameObject {
 		return support;
 	}
 
+	public Support makeCopy(Square square, Actor owner, ArrayList<Square> supporteeSquares) {
+		return makeCopy(square, owner, supporteeSquares.toArray(new Square[supporteeSquares.size()]));
+	}
+
 	@Override
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 		boolean destroyed = super.checkIfDestroyed(attacker, action);
