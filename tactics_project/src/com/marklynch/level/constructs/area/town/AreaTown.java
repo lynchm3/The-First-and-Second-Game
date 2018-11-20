@@ -195,7 +195,7 @@ public class AreaTown {
 		new BodyOfWater(posX + 25, posY + 15, posX + 90, posY + 15);
 		new BodyOfWater(posX + 92, posY + 15, posX + 92, posY + 29);
 
-		Game.level.squares[posX + 91][posY + 15].imageTexture = Square.STONE_TEXTURE;
+		Game.level.squares[posX + 91][posY + 15].floorImageTexture = Square.STONE_TEXTURE;
 
 	}
 

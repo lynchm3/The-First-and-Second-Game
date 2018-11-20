@@ -74,7 +74,7 @@ public class PuzzleRoomFallawayFloor extends StructureRoom implements SwitchList
 						new AnimationStraightLine(gameObject, 2000f, true, 0f, null, targetSquare));
 			}
 			square.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
-			square.imageTexture = Square.VOID_SQUARE;
+			square.floorImageTexture = Square.VOID_SQUARE;
 		}
 
 		floorFallenAway = true;

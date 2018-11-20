@@ -64,7 +64,7 @@ public class ActionDigging extends Action {
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
-		target.squareGameObjectIsOn.imageTexture = Square.MUD_TEXTURE;
+		target.squareGameObjectIsOn.floorImageTexture = Square.MUD_TEXTURE;
 
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dug up ", target, " with ", shovel }));

@@ -10,13 +10,14 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomChasm;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomCrumblingWall;
+import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomDigPointer;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomFallawayFloor;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMaze;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMineCart;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMineCart2;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMineThroughWall;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMovingBridge;
-import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomTeamwork;
+import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomTeamwork1;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomTeamwork2;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomTeamwork3;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomUndergroundLake;
@@ -44,25 +45,29 @@ public class QuestList extends ArrayList<Quest> {
 
 	public void makeQuests() {
 
-		questCaveOfTheBlind = new QuestCaveOfTheBlind();
-		add(questCaveOfTheBlind);
-
-		questSmallGame = new QuestSmallGame();
-		add(questSmallGame);
-		questCaveOfTheBlind.objectiveHunters = new Objective("The Hunters", questSmallGame.hunterBrent, null,
-				questSmallGame.hunterBrent.imageTexture);
-
-		questThePigs = new QuestThePigs();
-		add(questThePigs);
-		// Level.fullQuestList.add(questThePigs);
-
-		questBetweenTheWalls = new QuestBetweenTheWalls(10, 10);
-		add(questBetweenTheWalls);
-		// Level.fullQuestList.add(questBetweenTheWalls);
-
-		questTheSecretRoom = new QuestTheSecretRoom();
-		add(questTheSecretRoom);
-		// Level.fullQuestList.add(questTheSecretRoom);
+		// // QUEST - the cave of the blind
+		// questCaveOfTheBlind = new QuestCaveOfTheBlind();
+		// add(questCaveOfTheBlind);
+		//
+		// // QUEST - small game
+		// questSmallGame = new QuestSmallGame();
+		// add(questSmallGame);
+		//
+		// questCaveOfTheBlind.objectiveHunters = new Objective("The Hunters",
+		// questSmallGame.hunterBrent, null,
+		// questSmallGame.hunterBrent.imageTexture);
+		//
+		// // QUEST - the pigs
+		// questThePigs = new QuestThePigs();
+		// add(questThePigs);
+		//
+		// // QUEST - between the walls
+		// questBetweenTheWalls = new QuestBetweenTheWalls(10, 10);
+		// add(questBetweenTheWalls);
+		//
+		// // QUEST - the secret room
+		// questTheSecretRoom = new QuestTheSecretRoom();
+		// add(questTheSecretRoom);
 
 		// PUZZLE ROOMS
 		int puzzleRoomsX = 100;
@@ -112,11 +117,17 @@ public class QuestList extends ArrayList<Quest> {
 		paths.addAll(puzzleRoomMaze.structurePaths);
 		// );
 
+		// DOORWAY maze to dig pointer
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 33][puzzleRoomsY + 91]);
+
+		// ROOM Dig pointer
+		puzzleStructureRooms.add(new PuzzleRoomDigPointer(puzzleRoomsX + 26, puzzleRoomsY + 92));
+
 		// DOORWAY fallaway floor to chambers 1
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 66][puzzleRoomsY + 30]);
 
 		// ROOM Teamwork chambers 1
-		puzzleStructureRooms.add(new PuzzleRoomTeamwork(puzzleRoomsX + 67, puzzleRoomsY + 30));
+		puzzleStructureRooms.add(new PuzzleRoomTeamwork1(puzzleRoomsX + 67, puzzleRoomsY + 30));
 
 		// DOORWAY fallaway floor to team chambers 2
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 66][puzzleRoomsY + 41]);

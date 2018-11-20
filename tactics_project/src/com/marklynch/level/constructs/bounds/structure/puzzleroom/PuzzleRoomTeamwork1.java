@@ -12,13 +12,13 @@ import com.marklynch.objects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
-public class PuzzleRoomTeamwork extends StructureRoom {
+public class PuzzleRoomTeamwork1 extends StructureRoom {
 	int posX;
 	int posY;
 	final static int totalWidthInSquares = 20;
 	final static int totalHeightInSquares = 10;
 
-	public PuzzleRoomTeamwork(int posX, int posY) {
+	public PuzzleRoomTeamwork1(int posX, int posY) {
 		super("Hallway", posX, posY, false, false, new ArrayList<Actor>(), 1, false, new Node[] {}, new RoomPart[] {
 				new RoomPart(posX, posY, posX + 4, posY + totalHeightInSquares - 1),
 				new RoomPart(posX + 6, posY, posX + 9, posY + totalHeightInSquares - 1),

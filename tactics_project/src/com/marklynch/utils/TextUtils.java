@@ -156,7 +156,7 @@ public class TextUtils {
 				}
 
 				offsetX += textWidth;
-				if (structure.image != null) {
+				if (structure.mapIconForStructure != null) {
 					offsetX += textureWidth;
 				}
 
@@ -735,9 +735,9 @@ public class TextUtils {
 				offsetX += textWidth;
 
 				// Image
-				if (structure.image != null) {
+				if (structure.mapIconForStructure != null) {
 					float x = posX + offsetX;
-					TextureUtils.drawTexture(structure.image, x, posY + offsetY, x + 20, posY + offsetY + 20);
+					TextureUtils.drawTexture(structure.mapIconForStructure, x, posY + offsetY, x + 20, posY + offsetY + 20);
 					offsetX += textureWidth;
 				}
 

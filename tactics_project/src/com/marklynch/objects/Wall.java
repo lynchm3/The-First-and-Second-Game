@@ -146,7 +146,7 @@ public class Wall extends GameObject {
 			leftDrawY2 = drawY2 - quarterHeight + randomOffset;
 
 			// if (!(this instanceof Vein))
-			this.squareGameObjectIsOn.imageTexture = Square.GREY_TEXTURE;
+			this.squareGameObjectIsOn.floorImageTexture = Square.GREY_TEXTURE;
 
 		}
 
@@ -156,7 +156,7 @@ public class Wall extends GameObject {
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 		boolean destroyed = super.checkIfDestroyed(attacker, action);
 		if (destroyed && this.squareGameObjectIsOn != null) {
-			this.squareGameObjectIsOn.imageTexture = Square.STONE_TEXTURE;
+			this.squareGameObjectIsOn.floorImageTexture = Square.STONE_TEXTURE;
 		}
 		return destroyed;
 	}

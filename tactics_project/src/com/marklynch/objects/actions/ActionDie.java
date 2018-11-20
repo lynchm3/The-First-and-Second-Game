@@ -249,7 +249,7 @@ public class ActionDie extends Action {
 						Templates.STUMP.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
 			} else if (gameObjectPerformer instanceof Stump) {
 				if (gameObjectPerformer.squareGameObjectIsOn != null) {
-					gameObjectPerformer.squareGameObjectIsOn.imageTexture = Square.MUD_TEXTURE;
+					gameObjectPerformer.squareGameObjectIsOn.floorImageTexture = Square.MUD_TEXTURE;
 				}
 			} else if (gameObjectPerformer instanceof Mirror) {
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(

@@ -165,7 +165,7 @@ public class Mirror extends GameObject {
 
 	public void drawSquare(Square square, int offsetX, int offsetY) {
 
-		Texture textureToDraw = square.imageTexture;
+		Texture textureToDraw = square.floorImageTexture;
 		float squarePositionX = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * offsetX;
 		float squarePositionY = this.squareGameObjectIsOn.yInGridPixels - Game.SQUARE_HEIGHT * offsetY;
 

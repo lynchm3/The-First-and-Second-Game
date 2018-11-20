@@ -167,7 +167,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		conversationForMort = new ConversationForMort(this);
 
 		// Objectives
-		objectiveCave = new Objective("Cave", null, Game.level.squares[281][41], cave.image);
+		objectiveCave = new Objective("Cave", null, Game.level.squares[281][41], cave.mapIconForStructure);
 		allObjectives.add(objectiveCave);
 
 		links = TextUtils.getLinks(true, this);

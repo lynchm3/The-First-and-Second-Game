@@ -80,7 +80,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 		for (int i = posX; i < posX + totalWidthInSquares; i++) {
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
-				Game.level.squares[i][j].imageTexture = Square.VOID_SQUARE;
+				Game.level.squares[i][j].floorImageTexture = Square.VOID_SQUARE;
 			}
 		}
 
@@ -266,7 +266,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 			square = Level.squares[posX][posY + gapsWidth + i];
 			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			square.imageTexture = Square.GRASS_TEXTURE;
+			square.floorImageTexture = Square.GRASS_TEXTURE;
 			// if
 			// (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId))
 			// {
@@ -277,7 +277,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			// right
 			square = Level.squares[posX + totalWidthInSquares - 1][posY + gapsWidth + i];
 			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			square.imageTexture = Square.GRASS_TEXTURE;
+			square.floorImageTexture = Square.GRASS_TEXTURE;
 			// square.imageTexture = Square.STONE_TEXTURE;
 			// if
 			// (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId))
@@ -289,7 +289,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			// top
 			square = Level.squares[posX + gapsWidth + i][posY];
 			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			square.imageTexture = Square.GRASS_TEXTURE;
+			square.floorImageTexture = Square.GRASS_TEXTURE;
 			// square.imageTexture = Square.STONE_TEXTURE;
 			// if
 			// (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId))
@@ -300,7 +300,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			// bottom
 			square = Level.squares[posX + gapsWidth + i][posY + totalHeightInSquares - 1];
 			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			square.imageTexture = Square.GRASS_TEXTURE;
+			square.floorImageTexture = Square.GRASS_TEXTURE;
 			// square.imageTexture = Square.STONE_TEXTURE;
 			// if
 			// (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId))

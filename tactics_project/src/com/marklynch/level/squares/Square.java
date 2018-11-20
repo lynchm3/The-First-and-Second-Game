@@ -85,7 +85,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	// image
 	public String imageTexturePath;
-	public transient Texture imageTexture = null;
+	public transient Texture floorImageTexture = null;
 	public static Texture GRASS_TEXTURE;
 	public static Texture DARK_GRASS_TEXTURE;
 	public static Texture STONE_TEXTURE;
@@ -171,7 +171,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		if (imageTexture == null)
 			loadImages();
 		else
-			this.imageTexture = imageTexture;
+			this.floorImageTexture = imageTexture;
 
 		weaponsThatCanAttack = new ArrayList<Weapon>();
 		this.inventory = inventory;
@@ -258,13 +258,13 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	}
 
 	public void loadImages() {
-		this.imageTexture = getGlobalImage(imageTexturePath, false);
+		this.floorImageTexture = getGlobalImage(imageTexturePath, false);
 
 	}
 
 	public void draw1() {
 
-		Texture textureToDraw = this.imageTexture;
+		Texture textureToDraw = this.floorImageTexture;
 
 		if (!Game.fullVisiblity) {
 
@@ -1195,7 +1195,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			cost = 10;
 		} else if (inventory.contains(PressurePlate.class)) {
 			cost = 10;
-		} else if (this.imageTexture == Square.STONE_TEXTURE) {
+		} else if (this.floorImageTexture == Square.STONE_TEXTURE) {
 			cost = 1;
 		} else {
 			cost = 2;
@@ -1222,7 +1222,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			costForPlayer = 10;
 		} else if (inventory.contains(PressurePlate.class)) {
 			costForPlayer = 10;
-		} else if (this.imageTexture == Square.STONE_TEXTURE) {
+		} else if (this.floorImageTexture == Square.STONE_TEXTURE) {
 			costForPlayer = 1;
 		} else {
 			costForPlayer = 2;

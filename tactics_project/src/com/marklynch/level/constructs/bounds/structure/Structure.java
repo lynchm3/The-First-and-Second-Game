@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.bounds.structure;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
@@ -22,7 +23,7 @@ public class Structure {
 	public boolean seenByPlayer = false;
 	public ArrayList<StructureSection> structureSections;
 	public ArrayList<Square> entranceSquares;
-	public Texture image;
+	public Texture mapIconForStructure;
 	int gridX1, gridX2, gridY1, gridY2;
 	ArrayList<Square> floorSquares;
 	ArrayList<Square> wallSquares;
@@ -36,14 +37,14 @@ public class Structure {
 			ArrayList<StructurePath> paths, ArrayList<StructureFeature> features, ArrayList<Square> entrances,
 			String imageTexturePath, int overlayX1, int overlayY1, int overlayX2, int overlayY2,
 			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls,
-			Wall wallTemplate, Texture imageTexture, int level) {
+			Wall wallTemplate, Texture floorImageTexture, int level) {
 		super();
 
 		this.name = name;
 		this.structureSections = caveSections;
 		this.rooms = rooms;
 		if (imageTexturePath != null)
-			this.image = ResourceUtils.getGlobalImage(imageTexturePath, false);
+			this.mapIconForStructure = ResourceUtils.getGlobalImage(imageTexturePath, false);
 		this.gridX1 = overlayX1;
 		this.gridY1 = overlayY1;
 		this.gridX2 = overlayX2;
@@ -60,7 +61,7 @@ public class Structure {
 
 		// Entrance squares
 		for (Square entranceSquare : entranceSquares) {
-			entranceSquare.imageTexture = imageTexture;
+			entranceSquare.floorImageTexture = floorImageTexture;
 			entranceSquare.calculatePathCost();
 			entranceSquare.calculatePathCostForPlayer();
 		}
@@ -134,10 +135,10 @@ public class Structure {
 						wallSquares.add(Game.level.squares[i][j]);
 					}
 					if (!squaresToRemove.contains(Game.level.squares[i][j])) {
-						Game.level.squares[i][j].structureSquareIsIn = this;
-						Game.level.squares[i][j].structureSectionSquareIsIn = caveSection;
-						if (Game.level.squares[i][j].imageTexture == Square.GRASS_TEXTURE)
-							Game.level.squares[i][j].imageTexture = imageTexture;
+						Level.squares[i][j].structureSquareIsIn = this;
+						Level.squares[i][j].structureSectionSquareIsIn = caveSection;
+						if (Level.squares[i][j].floorImageTexture == Square.GRASS_TEXTURE)
+							Level.squares[i][j].floorImageTexture = floorImageTexture;
 					}
 				}
 			}
@@ -244,7 +245,7 @@ public class Structure {
 
 		// 40sqrs is ideal
 
-		if (this.image == null)
+		if (this.mapIconForStructure == null)
 			return;
 
 		int squarePositionX1 = (gridX1 + ((gridX2 - gridX1 - 40) / 2)) * (int) Game.SQUARE_WIDTH;
@@ -259,7 +260,7 @@ public class Structure {
 				+ (Game.zoom * (squarePositionX2 - Game.windowWidth / 2 + Game.getDragXWithOffset()));
 		float drawPositionY2 = (Game.windowHeight / 2)
 				+ (Game.zoom * (squarePositionY2 - Game.windowHeight / 2 + Game.getDragYWithOffset()));
-		TextureUtils.drawTexture(image, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
+		TextureUtils.drawTexture(mapIconForStructure, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
 
 	}
 

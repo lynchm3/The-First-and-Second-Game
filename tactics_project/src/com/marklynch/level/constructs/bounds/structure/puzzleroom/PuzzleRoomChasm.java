@@ -60,7 +60,7 @@ public class PuzzleRoomChasm extends StructureRoom {
 		for (int i = posX; i < posX + totalWidthInSquares; i++) {
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
 				if (!ledges.contains(Level.squares[i][j])) {
-					Level.squares[i][j].imageTexture = Square.VOID_SQUARE;
+					Level.squares[i][j].floorImageTexture = Square.VOID_SQUARE;
 					Level.squares[i][j].inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
 			}

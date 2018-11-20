@@ -8,7 +8,6 @@ import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -19,12 +18,6 @@ public class PuzzleRoomMaze extends StructureRoom {
 	int posY;
 	final static int totalWidthInSquares = 30;
 	final static int totalHeightInSquares = 30;
-	final static int xOffsetThatSquaresFallawayTo = 26;
-	boolean floorFallenAway = false;
-	ArrayList<Square> squaresToFallaway = new ArrayList<Square>();
-	int safeBorderWidthOnLeft = 5;
-	int safeBorderWidthOnRight = 5;
-	Square voidSquare;
 	public ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>();
 	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
 

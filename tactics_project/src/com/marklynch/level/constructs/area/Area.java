@@ -50,7 +50,7 @@ public class Area {
 		for (int i = gridX1; i <= gridX2; i++) {
 			for (int j = gridY1; j <= gridY2; j++) {
 				Level.squares[i][j].areaSquareIsIn = this;
-				Level.squares[i][j].imageTexture = squareTexture;
+				Level.squares[i][j].floorImageTexture = squareTexture;
 				Level.squares[i][j].nodes = this.nodes;
 				for (Node node : this.nodes) {
 					node.addSquare(Level.squares[i][j]);
