@@ -118,10 +118,10 @@ public class QuestList extends ArrayList<Quest> {
 		// );
 
 		// DOORWAY maze to dig pointer
-		squaresToRemove.add(Level.squares[puzzleRoomsX + 33][puzzleRoomsY + 91]);
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 53][puzzleRoomsY + 91]);
 
 		// ROOM Dig pointer
-		puzzleStructureRooms.add(new PuzzleRoomDigPointer(puzzleRoomsX + 26, puzzleRoomsY + 92));
+		puzzleStructureRooms.add(new PuzzleRoomDigPointer(puzzleRoomsX + 6, puzzleRoomsY + 92));
 
 		// DOORWAY fallaway floor to chambers 1
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 66][puzzleRoomsY + 30]);
