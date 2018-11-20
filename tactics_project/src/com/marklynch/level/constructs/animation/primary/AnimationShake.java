@@ -10,10 +10,12 @@ public class AnimationShake extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationShake(GameObject performer, OnCompletionListener onCompletionListener, boolean alwaysRun) {
+	public AnimationShake(GameObject performer, OnCompletionListener onCompletionListener, boolean alwaysRun,
+			double durationToReach) {
 		super(performer, onCompletionListener, null, null, null, null, null, null, alwaysRun, performer);
 		if (!runAnimation)
 			return;
+		this.durationToReach = 200;
 		blockAI = false;
 
 	}

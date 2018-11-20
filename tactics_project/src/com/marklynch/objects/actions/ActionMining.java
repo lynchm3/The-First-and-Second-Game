@@ -67,7 +67,7 @@ public class ActionMining extends Action {
 		if (Game.level.shouldLog(vein, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", vein, " with ", pickaxe }));
 
-		vein.setPrimaryAnimation(new AnimationShake(vein, null, false));
+		vein.setPrimaryAnimation(new AnimationShake(vein, null, false, 200));
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;

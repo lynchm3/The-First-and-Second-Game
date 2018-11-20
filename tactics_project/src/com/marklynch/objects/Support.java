@@ -3,6 +3,7 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationShake;
 import com.marklynch.level.squares.Square;
@@ -64,27 +65,22 @@ public class Support extends GameObject {
 
 			final GameObject surroundingObjectToCollapse = s;
 
-			System.out.println("collapse surroundingObjectToCollapse = " + surroundingObjectToCollapse);
-			System.out.println("collapse surroundingObjectToCollapse.remainingHealth = "
-					+ surroundingObjectToCollapse.remainingHealth);
-
 			if (surroundingObjectToCollapse.remainingHealth > 0) {
 				OnCompletionListener onShakeCompletionListener = new OnCompletionListener() {
 
 					@Override
 					public void animationComplete(GameObject gameObject) {
 
-						System.out.println("collapse animationcomplete");
-
 						surroundingObjectToCollapse.changeHealthSafetyOff(-surroundingObjectToCollapse.remainingHealth,
 								attacker, action);
 
 						collapseSurroundingObjects(surroundingObjectToCollapse, attacker, action);
+						Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
 					}
 				};
 
 				surroundingObjectToCollapse.setPrimaryAnimation(
-						new AnimationShake(surroundingObjectToCollapse, onShakeCompletionListener, true));
+						new AnimationShake(surroundingObjectToCollapse, onShakeCompletionListener, true, 500));
 			}
 		}
 
