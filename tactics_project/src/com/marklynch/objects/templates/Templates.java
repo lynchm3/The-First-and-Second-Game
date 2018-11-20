@@ -293,6 +293,7 @@ public class Templates {
 	public static Wall WALL;
 	public static WallWithCrack WALL_WITH_CRACK;
 	public static Wall FALSE_WALL;
+	public static GameObject RUBBLE;
 
 	public static Wall FENCE;
 

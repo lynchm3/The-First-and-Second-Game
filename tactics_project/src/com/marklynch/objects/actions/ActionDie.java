@@ -16,6 +16,7 @@ import com.marklynch.objects.Mirror;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
+import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.RockGolem;
@@ -254,6 +255,9 @@ public class ActionDie extends Action {
 			} else if (gameObjectPerformer instanceof Mirror) {
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
 						Templates.BROKEN_GLASS.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
+			} else if (gameObjectPerformer instanceof Wall) {
+				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
+						Templates.RUBBLE.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
 			}
 
 			for (GameObject gameObject : gameObjectPerformer.inventory.gameObjects) {

@@ -74,6 +74,18 @@ public class TemplatesBuilding {
 		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
 		Templates.FALSE_WALL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
+		Templates.RUBBLE = new GameObject();
+		Templates.RUBBLE.name = "Rubble";
+		Templates.RUBBLE.imageTexture = getGlobalImage("rubble.png", true);
+		Templates.RUBBLE.canBePickedUp = false;
+		Templates.RUBBLE.fitsInInventory = false;
+		Templates.RUBBLE.persistsWhenCantBeSeen = true;
+		Templates.RUBBLE.attackable = false;
+		Templates.RUBBLE.isFloorObject = true;
+		Templates.RUBBLE.moveable = false;
+		Templates.RUBBLE.orderingOnGound = 20;
+		Templates.RUBBLE.templateId = GameObject.generateNewTemplateId();
+
 		Templates.FENCE = new Fence();
 		Templates.FENCE.name = "Fence";
 		Templates.FENCE.imageTexturePath = "wall.png";
