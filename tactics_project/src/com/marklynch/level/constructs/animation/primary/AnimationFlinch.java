@@ -9,7 +9,7 @@ public class AnimationFlinch extends Animation {
 
 	public AnimationFlinch(GameObject performer, Square squareBeingAttackedFrom, Animation oldAnimation,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer);
 		if (!runAnimation)
 			return;
 

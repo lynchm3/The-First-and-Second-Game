@@ -15,7 +15,7 @@ public class AnimationPush extends Animation {
 
 	public AnimationPush(GameObject performer, Square targetSquare, Animation oldAnimation,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, performer, targetSquare);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer, targetSquare);
 		if (!runAnimation)
 			return;
 		this.targetSquare = targetSquare;

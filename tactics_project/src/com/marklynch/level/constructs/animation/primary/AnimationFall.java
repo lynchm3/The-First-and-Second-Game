@@ -15,7 +15,7 @@ public class AnimationFall extends Animation {
 	public AnimationFall(GameObject performer, float start, float end, float durationToReachMillis,
 			OnCompletionListener onCompletionListener) {
 
-		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer);
 
 		if (!runAnimation)
 			return;

@@ -10,8 +10,8 @@ public class AnimationShake extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationShake(GameObject performer, OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
+	public AnimationShake(GameObject performer, OnCompletionListener onCompletionListener, boolean alwaysRun) {
+		super(performer, onCompletionListener, null, null, null, null, null, null, alwaysRun, performer);
 		if (!runAnimation)
 			return;
 		blockAI = false;

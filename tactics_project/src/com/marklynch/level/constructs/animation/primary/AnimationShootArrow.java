@@ -29,7 +29,7 @@ public abstract class AnimationShootArrow extends Animation {
 
 	public AnimationShootArrow(Actor performer, GameObject target, GameObject weapon, Action action,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, performer, target);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer, target);
 		if (!runAnimation)
 			return;
 		// this.performer []

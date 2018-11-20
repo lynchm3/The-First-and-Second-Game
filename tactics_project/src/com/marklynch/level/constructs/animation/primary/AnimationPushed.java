@@ -27,8 +27,8 @@ public class AnimationPushed extends Animation {
 
 	public AnimationPushed(GameObject performer, Square startSquare, Square targetSquare, Animation oldAnimation,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, targetSquare, null, null, null, null, performer, startSquare,
-				targetSquare);
+		super(performer, onCompletionListener, null, targetSquare, null, null, null, null, false, performer,
+				startSquare, targetSquare);
 		if (!runAnimation)
 			return;
 

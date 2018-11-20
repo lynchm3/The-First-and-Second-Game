@@ -108,7 +108,6 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
-import com.marklynch.utils.Utils;
 
 public class GameObject implements ActionableInWorld, ActionableInInventory, Comparable, InventoryParent, DamageDealer {
 
@@ -782,8 +781,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 
 		if (!died && remainingHealth <= 0) {
-
-			Utils.printStackTrace();
 
 			died = true;
 			destroyedBy = attacker;
@@ -2438,11 +2435,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (squareToRight != null) {
 			surroundingGameObjects.addAll(squareToRight.inventory.gameObjects);
 		}
-		Square squareAbove = this.squareGameObjectIsOn.getSquareToLeftOf();
+		Square squareAbove = this.squareGameObjectIsOn.getSquareAbove();
 		if (squareAbove != null) {
 			surroundingGameObjects.addAll(squareAbove.inventory.gameObjects);
 		}
-		Square squareBelow = this.squareGameObjectIsOn.getSquareToLeftOf();
+		Square squareBelow = this.squareGameObjectIsOn.getSquareBelow();
 		if (squareBelow != null) {
 			surroundingGameObjects.addAll(squareBelow.inventory.gameObjects);
 		}

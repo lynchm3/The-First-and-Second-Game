@@ -18,8 +18,8 @@ public class AnimationStraightLine extends Animation {
 	public AnimationStraightLine(GameObject performer, float time, boolean blockAI, double delay,
 			OnCompletionListener onCompletionListener, Square... targetSquares) {
 
-		super(performer, onCompletionListener, targetSquares, null, null, null, null, null, performer,
-				targetSquares[targetSquares.length - 1]);
+		super(performer, onCompletionListener, targetSquares, null, null, null, null, null, false,
+				performer, targetSquares[targetSquares.length - 1]);
 		if (!runAnimation)
 			return;
 

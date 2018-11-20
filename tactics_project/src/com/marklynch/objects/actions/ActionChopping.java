@@ -72,7 +72,7 @@ public class ActionChopping extends Action {
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " chopped at ", target, " with ", axe }));
 
-		target.setPrimaryAnimation(new AnimationShake(target, null));
+		target.setPrimaryAnimation(new AnimationShake(target, null, false));
 
 		if (target.remainingHealth <= 0) {
 

@@ -21,7 +21,7 @@ public class AnimationDrop extends Animation {
 	public AnimationDrop(String name, GameObject shooter, Action action, Square targetSquare,
 			GameObject projectileObject, float speed, OnCompletionListener onCompletionListener) {
 
-		super(null, onCompletionListener, null, null, null, null, null, null, shooter, targetSquare);
+		super(null, onCompletionListener, null, null, null, null, null, null, false, shooter, targetSquare);
 		if (!runAnimation)
 			return;
 

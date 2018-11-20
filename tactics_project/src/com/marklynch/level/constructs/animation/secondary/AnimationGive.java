@@ -23,7 +23,7 @@ public class AnimationGive extends Animation {
 
 	public AnimationGive(GameObject giver, GameObject receiver, GameObject projectileObject,
 			OnCompletionListener onCompletionListener) {
-		super(null, onCompletionListener, null, null, null, null, null, null, giver, receiver);
+		super(null, onCompletionListener, null, null, null, null, null, null, false, giver, receiver);
 		if (!runAnimation)
 			return;
 

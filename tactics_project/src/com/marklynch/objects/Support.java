@@ -60,21 +60,31 @@ public class Support extends GameObject {
 		ArrayList<GameObject> surroundingGameObjects = collapser.getSurroundingGameObjects();
 		ArrayList<GameObject> surroundingObjectsToCollapse = Utils.intersection(surroundingGameObjects,
 				supportedGameObjects);
-		for (final GameObject surroundingObjectToCollapse : surroundingObjectsToCollapse) {
+		for (GameObject s : surroundingObjectsToCollapse) {
+
+			final GameObject surroundingObjectToCollapse = s;
+
+			System.out.println("collapse surroundingObjectToCollapse = " + surroundingObjectToCollapse);
+			System.out.println("collapse surroundingObjectToCollapse.remainingHealth = "
+					+ surroundingObjectToCollapse.remainingHealth);
 
 			if (surroundingObjectToCollapse.remainingHealth > 0) {
-
-				AnimationShake animationShake = new AnimationShake(surroundingObjectToCollapse, null);
-				surroundingObjectToCollapse.setPrimaryAnimation(animationShake);
-				animationShake.onCompletionListener = new OnCompletionListener() {
+				OnCompletionListener onShakeCompletionListener = new OnCompletionListener() {
 
 					@Override
 					public void animationComplete(GameObject gameObject) {
-						collapseSurroundingObjects(surroundingObjectToCollapse, attacker, action);
+
+						System.out.println("collapse animationcomplete");
+
 						surroundingObjectToCollapse.changeHealthSafetyOff(-surroundingObjectToCollapse.remainingHealth,
 								attacker, action);
+
+						collapseSurroundingObjects(surroundingObjectToCollapse, attacker, action);
 					}
 				};
+
+				surroundingObjectToCollapse.setPrimaryAnimation(
+						new AnimationShake(surroundingObjectToCollapse, onShakeCompletionListener, true));
 			}
 		}
 

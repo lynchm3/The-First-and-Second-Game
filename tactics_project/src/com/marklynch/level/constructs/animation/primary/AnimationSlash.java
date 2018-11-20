@@ -20,7 +20,7 @@ public class AnimationSlash extends Animation {
 	GameObject target;
 
 	public AnimationSlash(GameObject performer, GameObject target, OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, performer, target);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer, target);
 		if (!runAnimation)
 			return;
 		this.target = target;

@@ -35,7 +35,7 @@ public class AnimationThrown extends Animation {
 			OnCompletionListener onCompletionListener) {
 
 		super(projectileObject, onCompletionListener, null, targetSquare, projectileObject, action, shooter, weapon,
-				shooter, projectileObject, targetSquare);
+				false, shooter, projectileObject, targetSquare);
 
 		if (!runAnimation) {
 			return;

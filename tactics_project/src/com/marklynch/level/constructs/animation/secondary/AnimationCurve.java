@@ -28,7 +28,7 @@ public class AnimationCurve extends Animation {
 	public AnimationCurve(GameObject projectileObject, float speed, Point focalPoint, float angleChange,
 			OnCompletionListener onCompletionListener) {
 
-		super(null, onCompletionListener, null, null, null, null, null, null, projectileObject);
+		super(null, onCompletionListener, null, null, null, null, null, null, false, projectileObject);
 		if (!runAnimation)
 			return;
 

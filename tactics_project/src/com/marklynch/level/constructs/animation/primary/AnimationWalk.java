@@ -108,7 +108,7 @@ public class AnimationWalk extends Animation {
 
 	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int walkingPhase,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, performer, endSquare);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer, endSquare);
 		if (!runAnimation)
 			return;
 		if (performer == Level.player) {

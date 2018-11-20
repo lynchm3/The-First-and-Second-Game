@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
+import com.marklynch.level.constructs.animation.primary.AnimationShake;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -80,10 +81,11 @@ public abstract class Animation {
 	public Action action;
 	public Actor shooter;
 	public GameObject weapon;
+	public boolean alwaysRun = false;
 
 	public Animation(GameObject performer, OnCompletionListener onCompletionListener, Square[] targetSquares,
 			Square targetSquare, GameObject projectileObject, Action action, Actor shooter, GameObject weapon,
-			Object... objectsInvolved) {
+			boolean alwaysRun, Object... objectsInvolved) {
 
 		this.performer = performer;
 		this.targetSquares = targetSquares;
@@ -93,9 +95,14 @@ public abstract class Animation {
 		this.action = action;
 		this.shooter = shooter;
 		this.weapon = weapon;
+		this.alwaysRun = alwaysRun;
 
-		runAnimation = Game.level.shouldLog(objectsInvolved, false);// && performer == Game.level.player;
+		runAnimation = alwaysRun || Game.level.shouldLog(objectsInvolved, false);// && performer == Game.level.player;
+
 		if (!runAnimation) {
+			if (this instanceof AnimationShake)
+				System.out.println("Skipping animation for " + performer);
+
 			runCompletionAlorightm(true);
 			return;
 		}

@@ -38,7 +38,7 @@ public class AnimationTake extends Animation {
 
 	public AnimationTake(GameObject gameObject, GameObject taker, float originX, float originY, float speed,
 			float targetOffsetX, float targetOffsetY, OnCompletionListener onCompletionListener) {
-		super(null, onCompletionListener, null, null, null, null, null, null, gameObject, taker);
+		super(null, onCompletionListener, null, null, null, null, null, null, false, gameObject, taker);
 		if (!runAnimation)
 			return;
 
@@ -58,7 +58,7 @@ public class AnimationTake extends Animation {
 
 	public AnimationTake(GameObject gameObject, GameObject taker, float targetOffsetX, float targetOffsetY, float speed,
 			OnCompletionListener onCompletionListener) {
-		super(null, onCompletionListener, null, null, null, null, null, null, gameObject, taker);
+		super(null, onCompletionListener, null, null, null, null, null, null, false, gameObject, taker);
 		if (!runAnimation)
 			return;
 

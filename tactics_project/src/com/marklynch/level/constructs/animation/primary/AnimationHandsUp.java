@@ -14,7 +14,7 @@ public class AnimationHandsUp extends Animation {
 	public AnimationHandsUp(GameObject performer, float durationToReachMillis,
 			OnCompletionListener onCompletionListener) {
 
-		super(performer, onCompletionListener, null, null, null, null, null, null);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false);
 		if (!runAnimation)
 			return;
 		startLeftArmAngle = this.leftShoulderAngle;

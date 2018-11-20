@@ -39,7 +39,7 @@ public class AnimationDamageText extends Animation {
 	public AnimationDamageText(int damage, GameObject targetGameObject, float originX, float originY, float speed,
 			HIGH_LEVEL_STATS statType, Color color, OnCompletionListener onCompletionListener) {
 
-		super(null, onCompletionListener, null, null, null, null, null, null, targetGameObject);
+		super(null, onCompletionListener, null, null, null, null, null, null, false, targetGameObject);
 		if (!runAnimation)
 			return;
 

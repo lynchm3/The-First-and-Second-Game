@@ -11,7 +11,7 @@ public class AnimationScale extends Animation {
 	public AnimationScale(GameObject performer, float start, float end, float durationToReachMillis,
 			OnCompletionListener onCompletionListener) {
 
-		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer);
 		if (!runAnimation)
 			return;
 		blockAI = false;

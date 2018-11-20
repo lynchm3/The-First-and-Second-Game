@@ -26,7 +26,7 @@ public class AnimationTeleport extends Animation {
 
 	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, startSquare, endSquare);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, startSquare, endSquare);
 		if (!runAnimation)
 			return;
 		durationToReachMillis = 400;

@@ -9,7 +9,7 @@ import com.marklynch.objects.GameObject;
 public class AnimationWait extends Animation {
 
 	public AnimationWait(GameObject performer, OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer);
 		if (!runAnimation)
 			return;
 		blockAI = false;
