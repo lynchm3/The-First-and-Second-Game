@@ -21,6 +21,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
+import com.marklynch.level.constructs.animation.secondary.AnimationPow;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.effect.Effect;
@@ -191,7 +192,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public static transient Audio screamAudio = null;
 
 	// POW
-	public transient boolean showPow = false;
+	// public transient boolean showPow = false;
 
 	// Placement in inventory
 	public transient Inventory inventoryThatHoldsThisObject;
@@ -753,18 +754,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void drawUI() {
-
-		// Draw POW
-		if (showPow == true && this.squareGameObjectIsOn.visibleToPlayer) {
-			float powPositionXInPixels = Math.abs(squareGameObjectIsOn.xInGridPixels);
-			float powPositionYInPixels = squareGameObjectIsOn.yInGridPixels;
-			if (primaryAnimation != null) {
-				powPositionXInPixels += primaryAnimation.offsetX;
-				powPositionYInPixels += primaryAnimation.offsetY;
-			}
-			TextureUtils.drawTexture(this.powTexture, powPositionXInPixels, powPositionYInPixels,
-					powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels + Game.SQUARE_HEIGHT);
-		}
 	}
 
 	public void drawStaticUI() {
@@ -1003,28 +992,29 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void showPow() {
-		showPow = true;
-		new HidePowThread(this).start();
+
+		addSecondaryAnimation(new AnimationPow(this, 0f, 1f, 100, null));
+
 	}
 
-	public class HidePowThread extends Thread {
-
-		GameObject gameObject;
-
-		public HidePowThread(GameObject gameObject) {
-			this.gameObject = gameObject;
-		}
-
-		@Override
-		public void run() {
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			showPow = false;
-		}
-	}
+	// public class HidePowThread extends Thread {
+	//
+	// GameObject gameObject;
+	//
+	// public HidePowThread(GameObject gameObject) {
+	// this.gameObject = gameObject;
+	// }
+	//
+	// @Override
+	// public void run() {
+	// try {
+	// Thread.sleep(500);
+	// } catch (InterruptedException e) {
+	// e.printStackTrace();
+	// }
+	// showPow = false;
+	// }
+	// }
 
 	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon, float range) {
 
