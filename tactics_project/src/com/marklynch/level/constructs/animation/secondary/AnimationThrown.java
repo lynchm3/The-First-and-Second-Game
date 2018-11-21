@@ -12,6 +12,7 @@ import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.Texture;
@@ -131,9 +132,12 @@ public class AnimationThrown extends SecondaryAnimation {
 		}
 
 		float progress = distanceCoveredX / distanceToCoverX;
-		angleInRadians = progress * 6.28f;
-		if (rotationSpeed < 0)
-			angleInRadians = -angleInRadians;
+
+		if (projectileObject.templateId != Templates.ARROW.templateId) {
+			angleInRadians = progress * 6.28f;
+			if (rotationSpeed < 0)
+				angleInRadians = -angleInRadians;
+		}
 	}
 
 	@Override
