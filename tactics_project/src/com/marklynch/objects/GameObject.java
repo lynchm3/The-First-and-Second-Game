@@ -176,6 +176,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	// images
 	public static transient Texture powTexture = null;
+	public static Texture dustCloudTexture = null;
 	public static transient Texture vsTexture = null;
 	public static transient Texture fightTexture = null;
 	public static transient Texture skullTexture = null;
@@ -357,6 +358,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public static void loadStaticImages() {
 
 		powTexture = getGlobalImage("pow.png", false);
+		dustCloudTexture = getGlobalImage("dust_cloud.png", false);
 		vsTexture = getGlobalImage("vs.png", false);
 		fightTexture = getGlobalImage("fight.png", false);
 		skullTexture = getGlobalImage("skull.png", false);

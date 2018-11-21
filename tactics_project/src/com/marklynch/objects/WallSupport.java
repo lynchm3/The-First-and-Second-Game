@@ -11,13 +11,13 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Utils;
 
-public class Support extends GameObject {
+public class WallSupport extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public ArrayList<GameObject> supportedGameObjects;
 
-	public Support() {
+	public WallSupport() {
 		super();
 		canBePickedUp = false;
 		fitsInInventory = false;
@@ -31,14 +31,14 @@ public class Support extends GameObject {
 		super.setInstances(gameObject);
 	}
 
-	public Support makeCopy(Square square, Actor owner, GameObject... supportedGameObjects) {
+	public WallSupport makeCopy(Square square, Actor owner, GameObject... supportedGameObjects) {
 
 		return makeCopy(square, owner, new ArrayList<>(Arrays.asList(supportedGameObjects)));
 	}
 
-	public Support makeCopy(Square square, Actor owner, ArrayList<GameObject> supportedGameObjects) {
+	public WallSupport makeCopy(Square square, Actor owner, ArrayList<GameObject> supportedGameObjects) {
 
-		Support support = new Support();
+		WallSupport support = new WallSupport();
 		setInstances(support);
 		super.setAttributesForCopy(support, square, owner);
 		support.supportedGameObjects = supportedGameObjects;
@@ -71,7 +71,7 @@ public class Support extends GameObject {
 					@Override
 					public void animationComplete(GameObject gameObject) {
 
-						surroundingObjectToCollapse.showPow();
+						surroundingObjectToCollapse.showPow(GameObject.dustCloudTexture, 200, 200);
 
 						surroundingObjectToCollapse.changeHealthSafetyOff(-surroundingObjectToCollapse.remainingHealth,
 								attacker, action);

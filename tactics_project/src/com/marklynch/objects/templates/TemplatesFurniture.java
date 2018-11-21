@@ -18,7 +18,7 @@ import com.marklynch.objects.PressurePlateRequiringSpecificItem;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Seesaw;
 import com.marklynch.objects.Stampable;
-import com.marklynch.objects.Support;
+import com.marklynch.objects.WallSupport;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.WaterSource;
 
@@ -290,7 +290,7 @@ public class TemplatesFurniture {
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
-		Templates.WOODEN_SUPPORT = new Support();
+		Templates.WOODEN_SUPPORT = new WallSupport();
 		Templates.WOODEN_SUPPORT.setImageAndExtrapolateSize("wooden_support.png");
 		Templates.WOODEN_SUPPORT.totalHealth = Templates.WOODEN_SUPPORT.remainingHealth = 10;
 		Templates.WOODEN_SUPPORT.drawOffsetRatioX = -0.25f;
