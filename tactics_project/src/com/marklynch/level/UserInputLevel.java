@@ -667,7 +667,7 @@ public class UserInputLevel {
 		}
 
 		if (Game.level.levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
-			new ActionTeleport(Game.level.player, Level.teleportee, square, true).perform();
+			new ActionTeleport(Game.level.player, Level.teleportee, square, true, true).perform();
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 			return;
 		} else if (Game.level.levelMode == LevelMode.LEVEL_MODE_CAST) {

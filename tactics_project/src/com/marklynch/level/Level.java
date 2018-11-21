@@ -1793,17 +1793,19 @@ public class Level {
 
 		// Move by teleport?
 		int maxAmountToTeleport = Math.min(10, Player.playerPathToMove.squares.size());
+		squaresToMakeVisible.add(Player.playerPathToMove.squares.get(0));
 		for (int i = 1; i < maxAmountToTeleport; i++) {
 			Square potentialSquareToMoveTo = Player.playerPathToMove.squares.get(i);
 			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare) {
 				squareToMoveTo = potentialSquareToMoveTo;
+				squaresToMakeVisible.add(squareToMoveTo);
 			} else {
 				break;
 			}
 		}
 
 		if (squareToMoveTo != null) {
-			action = new ActionTeleport(Level.player, Level.player, squareToMoveTo, true);
+			action = new ActionTeleport(Level.player, Level.player, squareToMoveTo, true, false);
 		}
 
 		// if (Player.playerPathToMove.squares.size() > 1) {
@@ -2267,9 +2269,11 @@ public class Level {
 
 	public boolean showWindowPixelCoords = false;
 
+	ArrayList<Square> squaresToMakeVisible = new ArrayList<Square>();
+
 	public void startPlayerTurn() {
 		System.out.println("----------------START PLAYER TURN-----------------");
-		this.turn++;
+		Level.turn++;
 		loggedThisTurn = false;
 
 		// Do passive powers that run at start of turn.. yo
@@ -2287,10 +2291,20 @@ public class Level {
 		// }
 
 		Game.level.activeActor = player;
+
+		// Make visible squares that u teleported past during movement.
+		for (Square squareToMakeVisible : squaresToMakeVisible) {
+			if (squareToMakeVisible != player.squareGameObjectIsOn) {
+				player.calculateVisibleSquares(squareToMakeVisible);
+			}
+		}
+		squaresToMakeVisible.clear();
+
 		if (player.peekSquare != null) {
 			player.calculateVisibleSquares(player.peekSquare);
 		} else {
-			player.calculateVisibleSquares(Game.level.activeActor.squareGameObjectIsOn);
+			player.calculateVisibleSquares(player.squareGameObjectIsOn);
+
 		}
 		player.discoveryCheck();
 

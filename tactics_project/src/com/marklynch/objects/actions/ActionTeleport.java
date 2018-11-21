@@ -23,8 +23,10 @@ public class ActionTeleport extends Action {
 	boolean endTurn;
 	GameObject gameObjectInTheWay;
 	Square squareToTeleportTo;
+	boolean log;
 
-	public ActionTeleport(GameObject performer, GameObject target, Square squareToTeleportTo, boolean endTurn) {
+	public ActionTeleport(GameObject performer, GameObject target, Square squareToTeleportTo, boolean endTurn,
+			boolean log) {
 		super(ACTION_NAME, textureTeleport, performer, target);
 		this.squareToTeleportTo = squareToTeleportTo;
 		this.endTurn = endTurn;
@@ -36,6 +38,7 @@ public class ActionTeleport extends Action {
 		legal = checkLegality();
 		sound = createSound();
 		movement = true;
+		this.log = log;
 
 	}
 
@@ -75,7 +78,7 @@ public class ActionTeleport extends Action {
 		if (performer == Game.level.player)
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 
-		if (Game.level.shouldLog(gameObjectPerformer, target)) {
+		if (log && Game.level.shouldLog(gameObjectPerformer, target)) {
 			if (gameObjectPerformer == target)
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { gameObjectPerformer, " teleported to ", squareToTeleportTo }));
@@ -87,7 +90,7 @@ public class ActionTeleport extends Action {
 		// Teleported big object on to big object... someone has to die.
 		if (gameObjectInTheWay != null) {
 			float damage = Math.min(target.remainingHealth, gameObjectInTheWay.remainingHealth);
-			if (Game.level.shouldLog(target, gameObjectInTheWay))
+			if (log && Game.level.shouldLog(target, gameObjectInTheWay))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " teleported in to ", gameObjectInTheWay,
 						", both took " + damage + " damage" }));
 

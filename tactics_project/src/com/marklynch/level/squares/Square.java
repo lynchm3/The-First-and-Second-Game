@@ -1014,7 +1014,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		// Move, teleport, loiter
 		if (this != Game.level.player.squareGameObjectIsOn) {
 			actions.add(new ActionMove(performer, this, true));
-			actions.add(new ActionTeleport(performer, performer, this, true));
+			actions.add(new ActionTeleport(performer, performer, this, true, true));
 			actions.add(new ActionTeleportSwap(performer, performer, this, true));
 		} else {
 			actions.add(new ActionWait(performer, performer.squareGameObjectIsOn));

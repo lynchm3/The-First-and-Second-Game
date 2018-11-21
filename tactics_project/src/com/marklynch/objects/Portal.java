@@ -81,7 +81,7 @@ public class Portal extends GameObject implements UpdatesWhenSquareContentsChang
 
 		if (squareGameObjectIsOn == null || gameObject == null || connectedSquare == null)
 			return;
-		new ActionTeleport(Portal.this, gameObject, connectedSquare, true).perform();
+		new ActionTeleport(Portal.this, gameObject, connectedSquare, true, true).perform();
 
 	}
 
