@@ -233,6 +233,8 @@ public class Actor extends GameObject {
 
 		decorative = false;
 
+		orderingOnGound = 101;
+
 	}
 
 	@Override
