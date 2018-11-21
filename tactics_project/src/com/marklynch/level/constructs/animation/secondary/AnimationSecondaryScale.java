@@ -15,15 +15,14 @@ public class AnimationSecondaryScale extends SecondaryAnimation {
 	float startScale, endScale;
 	Texture powTexture;
 
-	public AnimationSecondaryScale(GameObject performer, float start, float end, float durationToReachMillis,
-			Texture powTexture, OnCompletionListener onCompletionListener) {
+	public AnimationSecondaryScale(GameObject performer, float start, float end, float scaleDuration,
+			float stayDuration, Texture powTexture, OnCompletionListener onCompletionListener) {
 
 		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer);
 		if (!runAnimation)
 			return;
 		this.powTexture = powTexture;
 		blockAI = false;
-		this.durationToReachMillis = durationToReachMillis;
 
 		scaleX = start;
 		scaleY = start;
@@ -31,12 +30,12 @@ public class AnimationSecondaryScale extends SecondaryAnimation {
 		KeyFrame kf0 = new KeyFrame(performer, this);
 		kf0.scaleX = end;
 		kf0.scaleY = end;
-		kf0.keyFrameTimeMillis = this.durationToReachMillis;
+		kf0.keyFrameTimeMillis = scaleDuration;
 		kf0.normaliseSpeeds = true;
 		keyFrames.add(kf0);
 
 		KeyFrame kf1 = new KeyFrame(performer, this);
-		kf1.minTime = this.durationToReachMillis;
+		kf1.minTime = stayDuration;
 		keyFrames.add(kf1);
 
 	}

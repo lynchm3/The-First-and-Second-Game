@@ -979,11 +979,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void showPow() {
-		showPow(powTexture, 50);
+		showPow(powTexture, 50, 200);
 	}
 
-	public void showPow(Texture texture, float duration) {
-		Level.addSecondaryAnimation(new AnimationSecondaryScale(this, 0f, 1f, duration, texture, null));
+	public void showPow(Texture texture, float scaleDuration, float stayDuration) {
+		Level.addSecondaryAnimation(
+				new AnimationSecondaryScale(this, 0f, 1f, scaleDuration, stayDuration, texture, null));
 	}
 
 	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon, float range) {

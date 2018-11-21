@@ -71,6 +71,8 @@ public class Support extends GameObject {
 					@Override
 					public void animationComplete(GameObject gameObject) {
 
+						surroundingObjectToCollapse.showPow();
+
 						surroundingObjectToCollapse.changeHealthSafetyOff(-surroundingObjectToCollapse.remainingHealth,
 								attacker, action);
 
