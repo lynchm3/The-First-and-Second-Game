@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
@@ -80,8 +81,8 @@ public class ActionThrowItem extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		performer.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this, target,
-				targetSquare, gameObjectToThrow, gameObjectToThrow, 1f, 0.5f, true, null));
+		Level.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this, target, targetSquare,
+				gameObjectToThrow, gameObjectToThrow, 1f, 0.5f, true, null));
 
 		if (performer.equipped == gameObjectToThrow) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {

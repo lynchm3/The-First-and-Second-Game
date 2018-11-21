@@ -225,7 +225,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Action destroyedByAction = null;
 
 	protected Animation primaryAnimation;
-	private ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
 
 	public boolean toSell = false;
 	public boolean starred = false;
@@ -403,9 +402,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw1();
-
-		for (Animation secondaryAnimation : secondaryAnimations)
-			secondaryAnimation.draw1();
 
 		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 				+ Game.SQUARE_WIDTH * drawOffsetRatioX);
@@ -657,9 +653,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw2();
-		for (Animation secondaryAnimation : secondaryAnimations) {
-			secondaryAnimation.draw2();
-		}
 	}
 
 	public void draw3() {
@@ -685,9 +678,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw3();
-		for (Animation secondaryAnimation : secondaryAnimations) {
-			secondaryAnimation.draw3();
-		}
 
 		// water stuff... i dunno
 
@@ -760,9 +750,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.drawStaticUI();
-
-		for (Animation secondaryAnimation : secondaryAnimations)
-			secondaryAnimation.drawStaticUI();
 	}
 
 	protected boolean died = false;
@@ -992,29 +979,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void showPow() {
-
-		addSecondaryAnimation(new AnimationSecondaryScale(this, 0f, 1f, 100, null));
-
+		showPow(powTexture, 50);
 	}
 
-	// public class HidePowThread extends Thread {
-	//
-	// GameObject gameObject;
-	//
-	// public HidePowThread(GameObject gameObject) {
-	// this.gameObject = gameObject;
-	// }
-	//
-	// @Override
-	// public void run() {
-	// try {
-	// Thread.sleep(500);
-	// } catch (InterruptedException e) {
-	// e.printStackTrace();
-	// }
-	// showPow = false;
-	// }
-	// }
+	public void showPow(Texture texture, float duration) {
+		Level.addSecondaryAnimation(new AnimationSecondaryScale(this, 0f, 1f, duration, texture, null));
+	}
 
 	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon, float range) {
 
@@ -1050,11 +1020,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void update(int delta) {
-
-		for (Animation secondaryAnimation : (ArrayList<Animation>) secondaryAnimations.clone()) {
-			if (secondaryAnimation.getCompleted())
-				secondaryAnimations.remove(secondaryAnimation);
-		}
 
 		if (!(this instanceof Actor))
 			clearActions();
@@ -2323,25 +2288,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return this.primaryAnimation;
 	}
 
-	public void addSecondaryAnimation(Animation animation) {
-
-		if (animation.runAnimation == false)
-			return;
-
-		// if (remainingHealth > 0) {
-		if (animation != null) {
-			this.secondaryAnimations.add(animation);
-			Level.animations.add(animation);
-			if (animation.blockAI) {
-				Level.blockingAnimations.add(animation);
-			}
-		}
-	}
-
-	public Animation getSecondaryAnimation(int i) {
-		return this.secondaryAnimations.get(i);
-	}
-
 	public void doDamageAnimation(float healing, float offsetY, HIGH_LEVEL_STATS statType, float res) {
 
 		if (squareGameObjectIsOn == null)
@@ -2373,12 +2319,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
-		this.addSecondaryAnimation(
+		Level.addSecondaryAnimation(
 				new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f, statType, color, null));
-	}
-
-	public ArrayList<Animation> getSecondaryAnimations() {
-		return secondaryAnimations;
 	}
 
 	public void setImageAndExtrapolateSize(String imagPath) {

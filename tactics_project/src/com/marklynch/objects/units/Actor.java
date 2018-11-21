@@ -24,7 +24,6 @@ import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
@@ -567,9 +566,6 @@ public class Actor extends GameObject {
 
 		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw1();
-
-		for (Animation secondaryAnimation : getSecondaryAnimations())
-			secondaryAnimation.draw1();
 
 		float alpha = 1.0f;
 

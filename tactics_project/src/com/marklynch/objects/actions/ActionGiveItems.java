@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.secondary.AnimationGive;
 import com.marklynch.objects.GameObject;
@@ -59,7 +60,7 @@ public class ActionGiveItems extends VariableQtyAction {
 		if (Game.level.openInventories.size() > 0) {
 		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen()
 				&& gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
-			gameObjectPerformer.addSecondaryAnimation(new AnimationGive(gameObjectPerformer, target, objects[0], null));
+			Level.addSecondaryAnimation(new AnimationGive(gameObjectPerformer, target, objects[0], null));
 		}
 
 		if (target instanceof Openable) {

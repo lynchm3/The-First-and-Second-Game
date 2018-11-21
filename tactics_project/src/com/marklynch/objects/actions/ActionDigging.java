@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
@@ -72,7 +73,7 @@ public class ActionDigging extends Action {
 		for (GameObject buriedGamObject : (ArrayList<GameObject>) target.inventory.gameObjects.clone()) {
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-				performer.addSecondaryAnimation(new AnimationTake(buriedGamObject, performer, 0, 0, 1f, null));
+				Level.addSecondaryAnimation(new AnimationTake(buriedGamObject, performer, 0, 0, 1f, null));
 			}
 			performer.inventory.add(buriedGamObject);
 			if (Game.level.shouldLog(target, performer))

@@ -8,18 +8,21 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
+import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class AnimationSecondaryScale extends Animation {
 
 	float startScale, endScale;
+	Texture powTexture;
 
 	public AnimationSecondaryScale(GameObject performer, float start, float end, float durationToReachMillis,
-			OnCompletionListener onCompletionListener) {
+			Texture powTexture, OnCompletionListener onCompletionListener) {
 
 		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer);
 		if (!runAnimation)
 			return;
+		this.powTexture = powTexture;
 		blockAI = false;
 		this.durationToReachMillis = durationToReachMillis;
 
@@ -65,7 +68,7 @@ public class AnimationSecondaryScale extends Animation {
 			Game.activeBatch.updateUniforms();
 		}
 
-		TextureUtils.drawTexture(GameObject.powTexture, powPositionXInPixels, powPositionYInPixels,
+		TextureUtils.drawTexture(powTexture, powPositionXInPixels, powPositionYInPixels,
 				powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels + Game.SQUARE_HEIGHT);
 
 		if (scaleX != 1 || scaleY != 1) {
@@ -82,7 +85,6 @@ public class AnimationSecondaryScale extends Animation {
 
 	@Override
 	public void draw1() {
-
 	}
 
 	@Override
@@ -91,13 +93,9 @@ public class AnimationSecondaryScale extends Animation {
 
 	@Override
 	public void draw3() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	protected void childRunCompletionAlgorightm(boolean wait) {
-		// TODO Auto-generated method stub
-
 	}
 }

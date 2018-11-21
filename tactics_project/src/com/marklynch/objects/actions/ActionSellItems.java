@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.secondary.AnimationGive;
@@ -80,8 +81,8 @@ public class ActionSellItems extends VariableQtyAction {
 
 		if (Game.level.openInventories.size() > 0) {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.addSecondaryAnimation(new AnimationGive(performer, receiver, objects[0], null));
-			receiver.addSecondaryAnimation(new AnimationGive(receiver, performer, AnimationGive.gold, null));
+			Level.addSecondaryAnimation(new AnimationGive(performer, receiver, objects[0], null));
+			Level.addSecondaryAnimation(new AnimationGive(receiver, performer, AnimationGive.gold, null));
 		}
 
 		for (int i = 0; i < amountToSell; i++) {

@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.secondary.AnimationGive;
 import com.marklynch.objects.GameObject;
@@ -50,8 +51,8 @@ public class ActionBuyItems extends VariableQtyAction {
 
 		if (Game.level.openInventories.size() > 0) {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			target.addSecondaryAnimation(new AnimationGive(target, performer, objects[0], null));
-			performer.addSecondaryAnimation(new AnimationGive(performer, target, AnimationGive.gold, null));
+			Level.addSecondaryAnimation(new AnimationGive(target, performer, objects[0], null));
+			Level.addSecondaryAnimation(new AnimationGive(performer, target, AnimationGive.gold, null));
 		}
 
 		for (int i = 0; i < amountToSell; i++) {

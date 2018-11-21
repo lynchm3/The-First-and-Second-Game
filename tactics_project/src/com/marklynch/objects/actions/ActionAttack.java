@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
@@ -92,7 +93,7 @@ public class ActionAttack extends Action {
 					// rotationSpeed, boolean onTarget,
 					// OnCompletionListener onCompletionListener)
 
-					performer.addSecondaryAnimation(animationThrown);
+					Level.addSecondaryAnimation(animationThrown);
 				}
 
 				@Override

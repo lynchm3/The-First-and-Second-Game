@@ -47,7 +47,7 @@ public class ActionFishingCompleted extends Action {
 			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
 					&& performer.squareGameObjectIsOn.visibleToPlayer) {
 				performer.fishingAnimation = new AnimationTake(target, performer, 0, 0, 1f, null);
-				performer.addSecondaryAnimation(performer.fishingAnimation);
+				Level.addSecondaryAnimation(performer.fishingAnimation);
 			}
 			performer.inventory.add(target);
 		} else {

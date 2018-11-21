@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.power;
 
 import org.lwjgl.util.Point;
 
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
@@ -48,7 +49,7 @@ public class PowerInferno extends Power {
 							PowerInferno.super.cast(source, targetGameObject, targetSquare, action);
 						}
 					});
-			((Actor) source).addSecondaryAnimation(animationThrown);
+			Level.addSecondaryAnimation(animationThrown);
 		} else {
 			PowerInferno.super.cast(source, targetGameObject, targetSquare, action);
 		}

@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
@@ -79,7 +80,7 @@ public class ActionChopping extends Action {
 			GameObject wood = Templates.WOOD.makeCopy(target.squareGameObjectIsOn, treeOwner);
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-				performer.addSecondaryAnimation(new AnimationTake(wood, performer, 0, 0, 1f, null));
+				Level.addSecondaryAnimation(new AnimationTake(wood, performer, 0, 0, 1f, null));
 			}
 			performer.inventory.add(wood);
 			if (Game.level.shouldLog(target, performer)) {

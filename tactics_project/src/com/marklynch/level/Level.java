@@ -1046,6 +1046,12 @@ public class Level {
 			}
 			Game.flush();
 
+			for (Animation animation : (ArrayList<Animation>) secondaryAnimations.clone()) {
+				animation.draw1();
+				animation.draw2();
+				animation.draw3();
+			}
+
 			// Squares draw2
 			// for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 			// for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
@@ -1310,6 +1316,10 @@ public class Level {
 				}
 			}
 			Game.flush();
+		}
+
+		for (Animation animation : (ArrayList<Animation>) secondaryAnimations.clone()) {
+			animation.drawStaticUI();
 		}
 
 		player.drawStaticUI();
@@ -2304,6 +2314,13 @@ public class Level {
 				toRemove.add(gameObjectInInventory);
 			}
 		}
+
+		// delete completed secondary animations
+		for (Animation secondaryAnimation : (ArrayList<Animation>) secondaryAnimations.clone()) {
+			if (secondaryAnimation.getCompleted())
+				secondaryAnimations.remove(secondaryAnimation);
+		}
+
 		for (GameObject gameObject : toRemove) {
 			player.inventory.remove(gameObject);
 		}
@@ -2578,5 +2595,22 @@ public class Level {
 
 	public static void closeDialog() {
 		dialog = null;
+	}
+
+	private static ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
+
+	public static void addSecondaryAnimation(Animation animation) {
+
+		if (animation.runAnimation == false)
+			return;
+
+		if (animation != null) {
+			secondaryAnimations.add(animation);
+			Level.animations.add(animation);
+			if (animation.blockAI) {
+				Level.blockingAnimations.add(animation);
+			}
+		}
+
 	}
 }

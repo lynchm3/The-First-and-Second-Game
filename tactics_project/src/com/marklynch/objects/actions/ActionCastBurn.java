@@ -58,7 +58,7 @@ public class ActionCastBurn extends Action {
 		// shoot projectile
 		final Arrow fireBall = Templates.FIRE_BALL.makeCopy(null, null);
 		if (target.squareGameObjectIsOn != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			// performer.addSecondaryAnimation(
+			// performer.Level.addSecondaryAnimation(
 			// new AnimationThrown("Fire Ball", performer, this, target,
 			// target.squareGameObjectIsOn,
 			// Templates.FIRE_BALL.makeCopy(null, null), performer, 1f, 0f, true));

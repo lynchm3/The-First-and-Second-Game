@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
@@ -65,7 +66,7 @@ public class ActionTakeItems extends VariableQtyAction {
 
 		if (Game.level.openInventories.size() > 0) {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.addSecondaryAnimation(new AnimationTake(objectsTotake[0], performer, 0, 0, 1f, null));
+			Level.addSecondaryAnimation(new AnimationTake(objectsTotake[0], performer, 0, 0, 1f, null));
 		}
 
 		for (int i = 0; i < amountToTake; i++) {

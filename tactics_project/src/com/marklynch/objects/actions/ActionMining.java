@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
@@ -99,7 +100,7 @@ public class ActionMining extends Action {
 
 				} else if (performer.squareGameObjectIsOn.onScreen()
 						&& performer.squareGameObjectIsOn.visibleToPlayer) {
-					performer.addSecondaryAnimation(new AnimationTake(ore, performer, 0, 0, 1f, null));
+					Level.addSecondaryAnimation(new AnimationTake(ore, performer, 0, 0, 1f, null));
 
 				}
 				if (Game.level.shouldLog(vein, performer))
