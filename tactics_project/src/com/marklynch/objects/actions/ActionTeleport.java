@@ -60,10 +60,6 @@ public class ActionTeleport extends Action {
 
 		Square startSquare = target.squareGameObjectIsOn;
 
-		if (target == Level.player) {
-			Level.pausePlayer();
-		}
-
 		target.setPrimaryAnimation(
 				new AnimationTeleport(target, startSquare, squareToTeleportTo, new OnCompletionListener() {
 					@Override

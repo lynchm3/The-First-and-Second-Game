@@ -46,6 +46,7 @@ import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.units.Actor;
@@ -74,6 +75,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.Utils;
 
 public class Level {
 
@@ -1723,57 +1725,7 @@ public class Level {
 
 		} else if (Game.level.player.getPrimaryAnimation().getCompleted() && Player.playerTargetAction != null) {
 
-			// Auto move player
-
-			Square targetSquare = null;
-			if (Player.playerTargetAction.target != null) {
-				targetSquare = Player.playerTargetAction.target.squareGameObjectIsOn;
-			} else if (Player.playerTargetAction.targetSquare != null) {
-				targetSquare = Player.playerTargetAction.targetSquare;
-			}
-
-			Player.playerPathToMove = Level.player.getPathTo(targetSquare);
-
-			if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null
-					|| Player.playerPathToMove.squares.size() == 0) {
-
-				if (!targetSquare.inventory.canShareSquare) {
-					Object[] objects = new Object[] { "Theres a ", targetSquare.inventory.gameObjectThatCantShareSquare,
-							" there!" };
-					notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
-					Game.level.logOnScreen(new ActivityLog(objects));
-				} else {
-					Object[] objects = new Object[] { "There's no available path" };
-					notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
-					Game.level.logOnScreen(new ActivityLog(objects));
-				}
-				pausePlayer();
-				return;
-			}
-
-			Square squareToMoveTo = Game.level.player.playerPathToMove.squares.get(0);
-			Action action;
-
-			action = new ActionMove(Game.level.player, squareToMoveTo, true);
-
-			if (!action.enabled) {
-				Object[] objects = new Object[] { "Path blocked by ",
-						squareToMoveTo.inventory.gameObjectThatCantShareSquare, "!" };
-				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
-				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
-				pausePlayer();
-			} else if (!action.legal && !player.squareGameObjectIsOn.restricted() && Player.playerFirstMove == false) {
-				Object[] objects = new Object[] { "Stopped before illegal action!" };
-				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
-				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
-				pausePlayer();
-			} else {
-				action.perform();
-				Player.playerFirstMove = false;
-				if (player.squareGameObjectIsOn == targetSquare) {
-					pausePlayer();
-				}
-			}
+			movePlayerTowardsTarget();
 		} else if (Game.level.fullScreenTextBox != null) {
 			return;
 		} else if (journal.showing) {
@@ -1805,7 +1757,93 @@ public class Level {
 		}
 	}
 
+	public void movePlayerTowardsTarget() {
+
+		// Work out target square
+		Square targetSquare = null;
+		if (Player.playerTargetAction.target != null) {
+			targetSquare = Player.playerTargetAction.target.squareGameObjectIsOn;
+		} else if (Player.playerTargetAction.targetSquare != null) {
+			targetSquare = Player.playerTargetAction.targetSquare;
+		}
+
+		Player.playerPathToMove = Level.player.getPathTo(targetSquare);
+
+		// No path? Call pausePlayer, let the player know
+		if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null
+				|| Player.playerPathToMove.squares.size() == 0) {
+
+			if (!targetSquare.inventory.canShareSquare) {
+				Object[] objects = new Object[] { "Theres a ", targetSquare.inventory.gameObjectThatCantShareSquare,
+						" there!" };
+				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
+				Game.level.logOnScreen(new ActivityLog(objects));
+			} else {
+				Object[] objects = new Object[] { "There's no available path" };
+				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
+				Game.level.logOnScreen(new ActivityLog(objects));
+			}
+			pausePlayer();
+			return;
+		}
+
+		// Square potentiasquareToTeleportTo = null;
+		Square squareToMoveTo = null;
+		Action action = null;
+
+		// Move by teleport?
+		int maxAmountToTeleport = Math.min(10, Player.playerPathToMove.squares.size());
+		for (int i = 1; i < maxAmountToTeleport; i++) {
+			Square potentialSquareToMoveTo = Player.playerPathToMove.squares.get(i);
+			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare) {
+				squareToMoveTo = potentialSquareToMoveTo;
+			} else {
+				break;
+			}
+		}
+
+		if (squareToMoveTo != null) {
+			action = new ActionTeleport(Level.player, Level.player, squareToMoveTo, true);
+		}
+
+		// if (Player.playerPathToMove.squares.size() > 1) {
+		// squareToMoveTo = Player.playerPathToMove.squares.get(1);
+		// if (squareToMoveTo.visibleToPlayer &&
+		// squareToMoveTo.inventory.canShareSquare) {
+		// action = new ActionTeleport(Level.player, Level.player, squareToMoveTo,
+		// true);
+		// }
+		// }
+
+		// Walk
+		if (action == null) {
+			squareToMoveTo = Player.playerPathToMove.squares.get(0);
+			action = new ActionMove(Level.player, squareToMoveTo, true);
+		}
+
+		if (!action.enabled) {
+			Object[] objects = new Object[] { "Path blocked by ",
+					squareToMoveTo.inventory.gameObjectThatCantShareSquare, "!" };
+			notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
+			pausePlayer();
+		} else if (!action.legal && !player.squareGameObjectIsOn.restricted() && Player.playerFirstMove == false) {
+			Object[] objects = new Object[] { "Stopped before illegal action!" };
+			notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
+			pausePlayer();
+		} else {
+			action.perform();
+			Player.playerFirstMove = false;
+			if (player.squareGameObjectIsOn == targetSquare) {
+				System.out.println("(player.squareGameObjectIsOn == targetSquare) ");
+				pausePlayer();
+			}
+		}
+	}
+
 	public static void pausePlayer() {
+		Utils.printStackTrace();
 		// Utils.printStackTrace();
 		Player.playerPathToMove = null;
 		// Player.playerTargetSquare = null;
