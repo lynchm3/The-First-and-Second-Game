@@ -148,6 +148,9 @@ public class ActionAttack extends Action {
 	public void postMeleeAnimation() {
 
 		if (target.attackable) {
+
+			target.showPow();
+
 			float damage = target.changeHealth(performer, ActionAttack.this, weapon);
 			String attackTypeString;
 			attackTypeString = "attacked ";

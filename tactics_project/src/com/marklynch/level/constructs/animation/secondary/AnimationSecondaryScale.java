@@ -10,11 +10,11 @@ import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationPow extends Animation {
+public class AnimationSecondaryScale extends Animation {
 
 	float startScale, endScale;
 
-	public AnimationPow(GameObject performer, float start, float end, float durationToReachMillis,
+	public AnimationSecondaryScale(GameObject performer, float start, float end, float durationToReachMillis,
 			OnCompletionListener onCompletionListener) {
 
 		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer);

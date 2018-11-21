@@ -21,7 +21,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
-import com.marklynch.level.constructs.animation.secondary.AnimationPow;
+import com.marklynch.level.constructs.animation.secondary.AnimationSecondaryScale;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.effect.Effect;
@@ -993,7 +993,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void showPow() {
 
-		addSecondaryAnimation(new AnimationPow(this, 0f, 1f, 100, null));
+		addSecondaryAnimation(new AnimationSecondaryScale(this, 0f, 1f, 100, null));
 
 	}
 
