@@ -5,13 +5,12 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationSecondaryScale extends Animation {
+public class AnimationSecondaryScale extends SecondaryAnimation {
 
 	float startScale, endScale;
 	Texture powTexture;
@@ -36,6 +35,10 @@ public class AnimationSecondaryScale extends Animation {
 		kf0.normaliseSpeeds = true;
 		keyFrames.add(kf0);
 
+		KeyFrame kf1 = new KeyFrame(performer, this);
+		kf1.minTime = this.durationToReachMillis;
+		keyFrames.add(kf1);
+
 	}
 
 	@Override
@@ -49,37 +52,41 @@ public class AnimationSecondaryScale extends Animation {
 		if (performer.squareGameObjectIsOn == null)
 			return;
 
-		float powPositionXInPixels = performer.squareGameObjectIsOn.xInGridPixels;
-		float powPositionYInPixels = performer.squareGameObjectIsOn.yInGridPixels;
-		if (performer.getPrimaryAnimation() != null) {
-			powPositionXInPixels += performer.getPrimaryAnimation().offsetX;
-			powPositionYInPixels += performer.getPrimaryAnimation().offsetY;
-		}
+		if (scaleX != 0 && scaleY != 0) {
 
-		Matrix4f view = Game.activeBatch.getViewMatrix();
+			float powPositionXInPixels = performer.squareGameObjectIsOn.xInGridPixels;
+			float powPositionYInPixels = performer.squareGameObjectIsOn.yInGridPixels;
+			if (performer.getPrimaryAnimation() != null) {
+				powPositionXInPixels += performer.getPrimaryAnimation().offsetX;
+				powPositionYInPixels += performer.getPrimaryAnimation().offsetY;
+			}
 
-		if (scaleX != 1 || scaleY != 1) {
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+
+			if (scaleX != 1 || scaleY != 1) {
+				Game.flush();
+				view.translate(new Vector2f(powPositionXInPixels + Game.HALF_SQUARE_WIDTH,
+						powPositionYInPixels + Game.HALF_SQUARE_HEIGHT));
+				view.scale(new Vector3f(scaleX, scaleY, 1f));
+				view.translate(new Vector2f(-(powPositionXInPixels + Game.HALF_SQUARE_WIDTH),
+						-(powPositionYInPixels + Game.HALF_SQUARE_HEIGHT)));
+				Game.activeBatch.updateUniforms();
+			}
+
+			TextureUtils.drawTexture(powTexture, powPositionXInPixels, powPositionYInPixels,
+					powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels + Game.SQUARE_HEIGHT);
+
+			if (scaleX != 1 || scaleY != 1) {
+				Game.flush();
+				// Matrix4f view = Game.activeBatch.getViewMatrix();
+				view.translate(new Vector2f(powPositionXInPixels + Game.HALF_SQUARE_WIDTH,
+						powPositionYInPixels + Game.HALF_SQUARE_HEIGHT));
+				view.scale(new Vector3f(1f / scaleX, 1f / scaleY, 1f));
+				view.translate(new Vector2f(-(powPositionXInPixels + Game.HALF_SQUARE_WIDTH),
+						-(powPositionYInPixels + Game.HALF_SQUARE_HEIGHT)));
+				Game.activeBatch.updateUniforms();
+			}
 			Game.flush();
-			view.translate(new Vector2f(powPositionXInPixels + Game.HALF_SQUARE_WIDTH,
-					powPositionYInPixels + Game.HALF_SQUARE_HEIGHT));
-			view.scale(new Vector3f(scaleX, scaleY, 1f));
-			view.translate(new Vector2f(-(powPositionXInPixels + Game.HALF_SQUARE_WIDTH),
-					-(powPositionYInPixels + Game.HALF_SQUARE_HEIGHT)));
-			Game.activeBatch.updateUniforms();
-		}
-
-		TextureUtils.drawTexture(powTexture, powPositionXInPixels, powPositionYInPixels,
-				powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels + Game.SQUARE_HEIGHT);
-
-		if (scaleX != 1 || scaleY != 1) {
-			Game.flush();
-			// Matrix4f view = Game.activeBatch.getViewMatrix();
-			view.translate(new Vector2f(powPositionXInPixels + Game.HALF_SQUARE_WIDTH,
-					powPositionYInPixels + Game.HALF_SQUARE_HEIGHT));
-			view.scale(new Vector3f(1f / scaleX, 1f / scaleY, 1f));
-			view.translate(new Vector2f(-(powPositionXInPixels + Game.HALF_SQUARE_WIDTH),
-					-(powPositionYInPixels + Game.HALF_SQUARE_HEIGHT)));
-			Game.activeBatch.updateUniforms();
 		}
 	}
 

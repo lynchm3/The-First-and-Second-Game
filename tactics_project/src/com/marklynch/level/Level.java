@@ -2316,10 +2316,11 @@ public class Level {
 		}
 
 		// delete completed secondary animations
-		for (Animation secondaryAnimation : (ArrayList<Animation>) secondaryAnimations.clone()) {
-			if (secondaryAnimation.getCompleted())
-				secondaryAnimations.remove(secondaryAnimation);
-		}
+		// for (Animation secondaryAnimation : (ArrayList<Animation>)
+		// secondaryAnimations.clone()) {
+		// if (secondaryAnimation.getCompleted())
+		// secondaryAnimations.remove(secondaryAnimation);
+		// }
 
 		for (GameObject gameObject : toRemove) {
 			player.inventory.remove(gameObject);
@@ -2359,18 +2360,6 @@ public class Level {
 						&& gameObject.getPrimaryAnimation().getCompleted() == false) {
 					continue;
 				}
-
-				// boolean waitingOnSecondaryAnimation = false;
-				// for (Animation secondaryAnimation : gameObject.secondaryAnimations) {
-				// if (secondaryAnimation.getCompleted() == false) {
-				// waitingOnSecondaryAnimation = true;
-				// break;
-				// }
-				// }
-				//
-				// if (waitingOnSecondaryAnimation) {
-				// continue;
-				// }
 
 				inanimateObjectsOnGround.remove(gameObject);
 				if (gameObject.squareGameObjectIsOn != null)
@@ -2597,7 +2586,7 @@ public class Level {
 		dialog = null;
 	}
 
-	private static ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
+	public static ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
 
 	public static void addSecondaryAnimation(Animation animation) {
 

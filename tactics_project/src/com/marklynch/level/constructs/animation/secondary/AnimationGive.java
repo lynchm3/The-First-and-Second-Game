@@ -1,14 +1,13 @@
 package com.marklynch.level.constructs.animation.secondary;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationGive extends Animation {
+public class AnimationGive extends SecondaryAnimation {
 
 	// pass obj person to person, used in buy, sell, give, for show only
 

@@ -1,7 +1,6 @@
 package com.marklynch.level.constructs.animation.secondary;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
@@ -9,7 +8,7 @@ import com.marklynch.objects.Tree;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 
-public class AnimationDrop extends Animation {
+public class AnimationDrop extends SecondaryAnimation {
 
 	public Square targetSquare;
 	float originX, originY, targetX, targetY;

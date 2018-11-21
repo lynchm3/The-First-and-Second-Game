@@ -2,13 +2,12 @@ package com.marklynch.level.constructs.animation.secondary;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.TextureUtils;
 import com.marklynch.utils.Utils.Point;
 
-public class AnimationCurve extends Animation {
+public class AnimationCurve extends SecondaryAnimation {
 
 	public String name;
 	float x, y, speed;

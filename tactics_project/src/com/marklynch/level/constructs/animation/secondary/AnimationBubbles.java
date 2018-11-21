@@ -1,12 +1,11 @@
 package com.marklynch.level.constructs.animation.secondary;
 
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationBubbles extends Animation {
+public class AnimationBubbles extends SecondaryAnimation {
 
 	float x, y; // originX, originY, targetX, targetY, speedX, speedY;
 	public GameObject targetGameObject;

@@ -3,12 +3,11 @@ package com.marklynch.level.constructs.animation.secondary;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationTake extends Animation {
+public class AnimationTake extends SecondaryAnimation {
 
 	public float x, y; // originX, originY, targetX, targetY, speedX, speedY;
 	public float originX = 0;

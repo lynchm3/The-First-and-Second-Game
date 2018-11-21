@@ -6,7 +6,6 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationFlinch;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
@@ -18,7 +17,7 @@ import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationThrown extends Animation {
+public class AnimationThrown extends SecondaryAnimation {
 
 	public String name;
 	float x, y, originX, originY, targetX, targetY, speedX, speedY;

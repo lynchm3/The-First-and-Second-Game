@@ -6,7 +6,6 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
@@ -16,7 +15,7 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationDamageText extends Animation {
+public class AnimationDamageText extends SecondaryAnimation {
 
 	float x, y; // originX, originY, targetX, targetY, speedX, speedY;
 	public float originX = 0;

@@ -67,6 +67,9 @@ public class KeyFrame {
 
 	public float headToToeOffsetSpeed = 1;
 
+	public float timeElapsed = 0f;
+	public float minTime = 0f;
+
 	Animation animation;
 	GameObject performer;
 
@@ -111,6 +114,8 @@ public class KeyFrame {
 	}
 
 	public void animate(double delta) {
+
+		timeElapsed += delta;
 
 		animation.offsetX = animation.moveTowardsTargetAngleInRadians(animation.offsetX, offsetXSpeed * delta, offsetX);
 		animation.offsetY = animation.moveTowardsTargetAngleInRadians(animation.offsetY, offsetYSpeed * delta, offsetY);
@@ -169,7 +174,7 @@ public class KeyFrame {
 					&& animation.rightHipAngle == rightHipAngle//
 					&& animation.leftKneeAngle == leftKneeAngle//
 					&& animation.rightKneeAngle == rightKneeAngle//
-			) {
+					&& timeElapsed >= minTime) {
 				done = true;
 			}
 		} else {// BACKWARDS
@@ -215,7 +220,7 @@ public class KeyFrame {
 					&& animation.rightHipAngle == -leftHipAngle//
 					&& animation.leftKneeAngle == -rightKneeAngle//
 					&& animation.rightKneeAngle == -leftKneeAngle//
-			) {
+					&& timeElapsed >= minTime) {
 				done = true;
 			}
 		}
