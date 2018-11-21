@@ -6,6 +6,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
@@ -16,6 +17,8 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 	int posY;
 	final static int totalWidthInSquares = 49;
 	final static int totalHeightInSquares = 49;
+	final int diggableX = 45;
+	final int diggableY = 24;
 
 	public PuzzleRoomDigPointer(int posX, int posY) {
 		super("Courtyard", posX, posY, false, false, new ArrayList<Actor>(), 1, false, new Node[] {}, new RoomPart[] {
@@ -23,8 +26,6 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 
 		this.posX = posX;
 		this.posY = posY;
-
-		Templates.SHOVEL.makeCopy(Level.squares[this.posX + 15][this.posY + 15], null);
 
 		ArrayList<Square> bigArrowSquares = new ArrayList<Square>();
 		ArrayList<Wall> bigArrowWalls = new ArrayList<Wall>();
@@ -80,6 +81,14 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 		for (Square bigArrowSquare : bigArrowSquares) {
 			bigArrowWalls.add(Templates.WALL.makeCopy(bigArrowSquare, null));
 		}
+
+		// At base of point is 45/24
+		Discoverable mound = Templates.MOUND.makeCopy(Level.squares[posX + diggableX][posY + diggableY], null, 1);
+		mound.inventory.add(Templates.ROCK.makeCopy(null, null));
+		mound.inventory.add(Templates.GOLD.makeCopy(null, null, 34));
+
+		// Arse of arrow is 4/24
+		Templates.SHOVEL.makeCopy(Level.squares[this.posX + 4][this.posY + 24], null);
 
 		// fallaway walls 1
 		ArrayList<Square> fallawayWallsSquares1 = new ArrayList<Square>();
