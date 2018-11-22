@@ -16,6 +16,7 @@ import com.marklynch.utils.ResourceUtils;
 public class PowerTeleportOther extends Power {
 
 	private static String NAME = "Teleport";
+	public String description = "Teleport other to any unoccupied suqare you can see up to range of ...";
 
 	public PowerTeleportOther(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("up.png", false), source, new Effect[] {}, 20, null,
