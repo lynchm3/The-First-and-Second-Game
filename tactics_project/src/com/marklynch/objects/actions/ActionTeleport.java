@@ -63,8 +63,9 @@ public class ActionTeleport extends Action {
 
 		Square startSquare = target.squareGameObjectIsOn;
 
-		target.setPrimaryAnimation(
-				new AnimationTeleport(target, startSquare, squareToTeleportTo, new OnCompletionListener() {
+		boolean straightenUp = performer == target;
+		target.setPrimaryAnimation(new AnimationTeleport(target, startSquare, squareToTeleportTo, straightenUp,
+				new OnCompletionListener() {
 					@Override
 					public void animationComplete(GameObject gameObject) {
 						postAnimation();

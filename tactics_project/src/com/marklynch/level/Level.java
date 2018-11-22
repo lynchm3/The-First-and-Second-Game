@@ -1794,31 +1794,21 @@ public class Level {
 		// Move by teleport?
 		int maxAmountToTeleport = Math.min(10, Player.playerPathToMove.squares.size());
 		squaresToMakeVisible.add(Player.playerPathToMove.squares.get(0));
-		for (int i = 1; i < maxAmountToTeleport; i++) {
+		for (int i = 0; i < maxAmountToTeleport; i++) {
 			Square potentialSquareToMoveTo = Player.playerPathToMove.squares.get(i);
-			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare) {
+			Action potentialTeleportAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo,
+					true, false);
+			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare
+					&& !potentialSquareToMoveTo.inventory.contains(Actor.class) && potentialTeleportAction.enabled) {
 				squareToMoveTo = potentialSquareToMoveTo;
+				action = potentialTeleportAction;
 				squaresToMakeVisible.add(squareToMoveTo);
 			} else {
 				break;
 			}
 		}
 
-		if (squareToMoveTo != null) {
-			action = new ActionTeleport(Level.player, Level.player, squareToMoveTo, true, false);
-		}
-
-		// if (Player.playerPathToMove.squares.size() > 1) {
-		// squareToMoveTo = Player.playerPathToMove.squares.get(1);
-		// if (squareToMoveTo.visibleToPlayer &&
-		// squareToMoveTo.inventory.canShareSquare) {
-		// action = new ActionTeleport(Level.player, Level.player, squareToMoveTo,
-		// true);
-		// }
-		// }
-
-		// Walk
-		if (action == null) {
+		if (action == null || action.enabled == false || squareToMoveTo == Player.playerPathToMove.squares.get(0)) {
 			squareToMoveTo = Player.playerPathToMove.squares.get(0);
 			action = new ActionMove(Level.player, squareToMoveTo, true);
 		}

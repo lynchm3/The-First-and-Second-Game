@@ -24,7 +24,7 @@ public class AnimationTeleport extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare,
+	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare, boolean straightenUp,
 			OnCompletionListener onCompletionListener) {
 		super(performer, onCompletionListener, null, null, null, null, null, null, false, startSquare, endSquare);
 		if (!runAnimation)
@@ -46,17 +46,44 @@ public class AnimationTeleport extends Animation {
 		blockAI = true;
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
-		kf0.setAllSpeeds(1);
+		kf0.setAllSpeeds(0.01f);
 		kf0.boundsY1 = (int) performer.height;
+		kf0.boundsY1Speed = 1;
+
+		if (straightenUp) {
+			kf0.torsoAngle = 0f;
+			kf0.leftShoulderAngle = 0f;
+			kf0.rightShoulderAngle = 0f;
+			kf0.leftElbowAngle = 0f;
+			kf0.rightElbowAngle = 0f;
+			kf0.leftHipAngle = 0f;
+			kf0.rightHipAngle = 0f;
+			kf0.leftKneeAngle = 0f;
+			kf0.rightKneeAngle = 0f;
+		}
+
 		keyFrames.add(kf0);
 
 		KeyFrame kf1 = new KeyFrame(performer, this);
 		kf1.offsetX = endOffsetX;
 		kf1.offsetY = endOffsetY;
-		kf1.setAllSpeeds(1);
+		kf1.setAllSpeeds(0.01f);
 		kf1.offsetXSpeed = 9999999;
 		kf1.offsetYSpeed = 9999999;
 		kf1.boundsY1 = -128;
+		kf1.boundsY1Speed = 1;
+
+		if (straightenUp) {
+			kf1.torsoAngle = 0f;
+			kf1.leftShoulderAngle = 0f;
+			kf1.rightShoulderAngle = 0f;
+			kf1.leftElbowAngle = 0f;
+			kf1.rightElbowAngle = 0f;
+			kf1.leftHipAngle = 0f;
+			kf1.rightHipAngle = 0f;
+			kf1.leftKneeAngle = 0f;
+			kf1.rightKneeAngle = 0f;
+		}
 		keyFrames.add(kf1);
 	}
 
