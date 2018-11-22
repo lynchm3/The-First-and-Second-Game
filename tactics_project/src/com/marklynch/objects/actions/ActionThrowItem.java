@@ -82,7 +82,7 @@ public class ActionThrowItem extends Action {
 
 		// shoot projectile
 		Level.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this, target, targetSquare,
-				gameObjectToThrow, gameObjectToThrow, 1f, 0.5f, true, null));
+				gameObjectToThrow, gameObjectToThrow, 2f, 0.5f, true, null));
 
 		if (performer.equipped == gameObjectToThrow) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {

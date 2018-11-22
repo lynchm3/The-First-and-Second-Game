@@ -1,9 +1,5 @@
 package com.marklynch.level.constructs.animation.secondary;
 
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
-
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationFlinch;
@@ -64,13 +60,17 @@ public class AnimationThrown extends SecondaryAnimation {
 
 		this.y = this.originY = shooter.actorPositionYInPixels + shooter.shoulderY;// shooter.getCenterY();
 
-		this.targetX = this.targetSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH * this.projectileObject.drawOffsetRatioX
-				+ this.projectileObject.width / 2f;
-		this.targetY = this.targetSquare.yInGridPixels
-				+ Game.HALF_SQUARE_HEIGHT * this.projectileObject.drawOffsetRatioY + this.projectileObject.height / 2f;
+		// this.targetX = this.targetSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH *
+		// this.projectileObject.drawOffsetRatioX
+		// + this.projectileObject.width / 2f;
+		// this.targetY = this.targetSquare.yInGridPixels
+		// + Game.HALF_SQUARE_HEIGHT * this.projectileObject.drawOffsetRatioY +
+		// this.projectileObject.height / 2f;
+		// this.targetY += Math.random() * 16f;
+		// this.targetY -= 8;
 
-		this.targetY += Math.random() * 16f;
-		this.targetY -= 8;
+		this.targetX = (int) (targetSquare.xInGridPixels + Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);
+		this.targetY = (int) (targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * projectileObject.drawOffsetRatioY);
 
 		if (projectileObject.backwards) {
 
@@ -153,20 +153,24 @@ public class AnimationThrown extends SecondaryAnimation {
 
 		Game.flush();
 		// float radians = (float) Math.toRadians(angle);
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.translate(new Vector2f(x + projectileObject.halfWidth, y + projectileObject.halfHeight));
-		view.rotate(angleInRadians, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + projectileObject.halfWidth), -(y + projectileObject.halfHeight)));
-		Game.activeBatch.updateUniforms();
+		// Matrix4f view = Game.activeBatch.getViewMatrix();
+		// view.translate(new Vector2f(x + projectileObject.halfWidth, y +
+		// projectileObject.halfHeight));
+		// view.rotate(angleInRadians, new Vector3f(0f, 0f, 1f));
+		// view.translate(new Vector2f(-(x + projectileObject.halfWidth), -(y +
+		// projectileObject.halfHeight)));
+		// Game.activeBatch.updateUniforms();
 
 		TextureUtils.drawTexture(projectileObject.imageTexture, 1.0f, x, y, x + projectileObject.width,
 				y + projectileObject.height, projectileObject.backwards);
 
 		Game.flush();
-		view.translate(new Vector2f(x + projectileObject.halfWidth, y + projectileObject.halfHeight));
-		view.rotate(-angleInRadians, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x + projectileObject.halfWidth), -(y + projectileObject.halfHeight)));
-		Game.activeBatch.updateUniforms();
+		// view.translate(new Vector2f(x + projectileObject.halfWidth, y +
+		// projectileObject.halfHeight));
+		// view.rotate(-angleInRadians, new Vector3f(0f, 0f, 1f));
+		// view.translate(new Vector2f(-(x + projectileObject.halfWidth), -(y +
+		// projectileObject.halfHeight)));
+		// Game.activeBatch.updateUniforms();
 	}
 
 	@Override
