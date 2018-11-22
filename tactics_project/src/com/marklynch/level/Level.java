@@ -1792,8 +1792,7 @@ public class Level {
 		Action action = null;
 
 		// Move by teleport?
-		int maxAmountToTeleport = Math.min(10, Player.playerPathToMove.squares.size());
-		squaresToMakeVisible.add(Player.playerPathToMove.squares.get(0));
+		int maxAmountToTeleport = Math.min(10, Player.playerPathToMove.squares.size() - 1);
 		for (int i = 0; i < maxAmountToTeleport; i++) {
 			Square potentialSquareToMoveTo = Player.playerPathToMove.squares.get(i);
 			Action potentialTeleportAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo,
@@ -1802,7 +1801,6 @@ public class Level {
 					&& !potentialSquareToMoveTo.inventory.contains(Actor.class) && potentialTeleportAction.enabled) {
 				squareToMoveTo = potentialSquareToMoveTo;
 				action = potentialTeleportAction;
-				squaresToMakeVisible.add(squareToMoveTo);
 			} else {
 				break;
 			}
@@ -2259,8 +2257,6 @@ public class Level {
 
 	public boolean showWindowPixelCoords = false;
 
-	ArrayList<Square> squaresToMakeVisible = new ArrayList<Square>();
-
 	public void startPlayerTurn() {
 		System.out.println("----------------START PLAYER TURN-----------------");
 		Level.turn++;
@@ -2281,14 +2277,6 @@ public class Level {
 		// }
 
 		Game.level.activeActor = player;
-
-		// Make visible squares that u teleported past during movement.
-		for (Square squareToMakeVisible : squaresToMakeVisible) {
-			if (squareToMakeVisible != player.squareGameObjectIsOn) {
-				player.calculateVisibleSquares(squareToMakeVisible);
-			}
-		}
-		squaresToMakeVisible.clear();
 
 		if (player.peekSquare != null) {
 			player.calculateVisibleSquares(player.peekSquare);
