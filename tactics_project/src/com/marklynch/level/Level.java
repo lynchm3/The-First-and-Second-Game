@@ -1792,7 +1792,7 @@ public class Level {
 		Square squareToMoveTo = null;
 		Action action = null;
 
-		// Move by teleport?
+		// Move by teleport/dash/wallrun/leap?
 		int maxAmountToTeleport = Math.min(10, Player.playerPathToMove.squares.size() - 1);
 		for (int i = 0; i < maxAmountToTeleport; i++) {
 			Square potentialSquareToMoveTo = Player.playerPathToMove.squares.get(i);
@@ -1801,11 +1801,12 @@ public class Level {
 			potentialAction = new ActionUsePower(Level.player, null, potentialSquareToMoveTo,
 					new PowerDash(Level.player));
 
-			if (potentialAction == null || !potentialAction.enabled)
+			if (potentialAction == null || !potentialAction.enabled || !potentialAction.legal)
 				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false);
 
 			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare
-					&& !potentialSquareToMoveTo.inventory.contains(Actor.class) && potentialAction.enabled) {
+					&& !potentialSquareToMoveTo.inventory.contains(Actor.class) && potentialAction.enabled
+					&& potentialAction.legal) {
 				squareToMoveTo = potentialSquareToMoveTo;
 				action = potentialAction;
 			} else {
