@@ -35,6 +35,7 @@ import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.constructs.journal.MarkerList;
 import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.constructs.power.PowerDash;
 import com.marklynch.level.constructs.skilltree.SkillTree;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
@@ -1795,12 +1796,18 @@ public class Level {
 		int maxAmountToTeleport = Math.min(10, Player.playerPathToMove.squares.size() - 1);
 		for (int i = 0; i < maxAmountToTeleport; i++) {
 			Square potentialSquareToMoveTo = Player.playerPathToMove.squares.get(i);
-			Action potentialTeleportAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo,
-					true, false);
+
+			Action potentialAction = null;
+			potentialAction = new ActionUsePower(Level.player, null, potentialSquareToMoveTo,
+					new PowerDash(Level.player));
+
+			if (potentialAction == null || !potentialAction.enabled)
+				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false);
+
 			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare
-					&& !potentialSquareToMoveTo.inventory.contains(Actor.class) && potentialTeleportAction.enabled) {
+					&& !potentialSquareToMoveTo.inventory.contains(Actor.class) && potentialAction.enabled) {
 				squareToMoveTo = potentialSquareToMoveTo;
-				action = potentialTeleportAction;
+				action = potentialAction;
 			} else {
 				break;
 			}

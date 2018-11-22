@@ -186,7 +186,7 @@ public class PowerDash extends Power {
 		if (attemptedTargetSquare == null)
 			return;
 
-		if (!squareInCastLocations(Level.player, attemptedTargetSquare))
+		if (!squareInCastLocations(source, attemptedTargetSquare))
 			return;
 
 		Direction direction = Direction.LEFT;
@@ -211,8 +211,16 @@ public class PowerDash extends Power {
 
 			new AILine(AILine.AILineType.AI_LINE_TYPE_ESCAPE, pushedObject.gameObject, pushedObject.destinationSquare)
 					.draw2();
-			;
 		}
+	}
+
+	@Override
+	public boolean check(GameObject source, Square targetSquare) {
+
+		if (!squareInCastLocations(source, targetSquare))
+			return false;
+
+		return true;
 	}
 
 	public static class PushedObject {
