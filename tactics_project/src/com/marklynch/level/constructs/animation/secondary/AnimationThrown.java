@@ -179,50 +179,6 @@ public class AnimationThrown extends SecondaryAnimation {
 	public void drawStaticUI() {
 	}
 
-	// public static void smashContainer(Actor performer, GameObject
-	// performer, ContainerForLiquids container) {
-	// if (performer != null)
-	// performer.squareGameObjectIsOn.inventory.add(container);
-	//
-	// new ActionSmash(performer, container).perform();
-	//
-	// // Find a square for broken glass and put it there
-	// Square squareForGlass = null;
-	// if (!container.squareGameObjectIsOn.inventory.contains(Wall.class)) {
-	// squareForGlass = container.squareGameObjectIsOn;
-	// }
-	//
-	// if (squareForGlass != null)
-	// Templates.BROKEN_GLASS.makeCopy(squareForGlass, container.owner);
-	//
-	// System.out.println("container.liquid = " + container.liquid);
-	// System.out.println("squareForGlass = " + squareForGlass);
-	//
-	// if (container.liquid != null && squareForGlass != null) {
-	// Liquid liquid = container.liquid;
-	// for (GameObject gameObject :
-	// container.squareGameObjectIsOn.inventory.getGameObjects()) {
-	// System.out.println("gameObject = " + gameObject);
-	// if (gameObject != container) {
-	// for (Effect effect : liquid.touchEffects) {
-	// System.out.println("effect = " + effect);
-	// gameObject.addEffect(effect.makeCopy(performer, gameObject));
-	// }
-	// if (gameObject instanceof Actor)
-	// gameObject.addEffect(new EffectBleed(performer, performer, 5));
-	// }
-	//
-	// }
-	// }
-	// for (GameObject gameObject :
-	// container.squareGameObjectIsOn.inventory.getGameObjects()) {
-	// if (gameObject instanceof Actor)
-	// gameObject.addEffect(new EffectBleed(performer, performer, 5));
-	//
-	// }
-	//
-	// }
-
 	@Override
 	public void childRunCompletionAlgorightm(boolean wait) {
 		// super.runCompletionAlgorightm(wait);
@@ -266,9 +222,11 @@ public class AnimationThrown extends SecondaryAnimation {
 			if (targetGameObject instanceof Searchable && targetGameObject.remainingHealth > 0) {
 				targetGameObject.inventory.add(projectileObject);
 			} else {
-				targetSquare.inventory.add(projectileObject);
 				if (projectileObject instanceof Arrow)
 					targetGameObject.arrowsEmbeddedInThis.add((Arrow) projectileObject);
+				else
+					targetSquare.inventory.add(projectileObject);
+
 			}
 
 		} else if (targetSquare != null) {
