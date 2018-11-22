@@ -1518,12 +1518,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return new ActionBuytemsSelectedInInventory(performer, (Actor) Inventory.target, this);
 		}
 
-		// Food / drink
-		if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
-				|| this instanceof WaterBody) {
-			return new ActionEatItemsSelectedInInventory(performer, this);
-		}
-
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
 				|| performer.legArmor == this)
 			return new ActionUnequip(performer, this);
@@ -1539,6 +1533,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_NORMAL) {
+
+			// Food / drink
+			if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
+					|| this instanceof WaterBody) {
+				return new ActionEatItemsSelectedInInventory(performer, this);
+			}
+
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
 				return new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this);
 			} else {
