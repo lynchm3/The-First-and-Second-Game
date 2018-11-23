@@ -2095,6 +2095,9 @@ public class Level {
 				return button;
 		}
 
+		if (player.buttonEquippedWeaponAction.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+			return player.buttonEquippedWeaponAction;
+
 		if (Game.zoomLevelIndex >= Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
 			if (showHideLocationIconsButton.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return showHideLocationIconsButton;

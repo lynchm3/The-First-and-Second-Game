@@ -2080,6 +2080,68 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	}
 
+	public Action getDefaultActionForEquippedItem(Actor performer) {
+
+		if (this instanceof Bell) {
+			return new ActionRing(performer, this);
+		}
+
+		// Skinnable
+		if (this instanceof Carcass) {
+			return new ActionSkin(performer, this);
+		}
+
+		// Readable
+		if (this instanceof Readable) {
+			return new ActionRead(performer, (Readable) this);
+		}
+
+		// Searchable
+		if (this instanceof Searchable) {
+			return new ActionSearch(performer, (Searchable) this);
+		}
+
+		// Food / Drink
+		if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
+				|| this instanceof WaterBody) {
+			return new ActionEatItems(performer, this);
+		}
+
+		// Switch
+		if (this instanceof Switch) {
+			Switch zwitch = (Switch) this;
+			return new ActionUse(performer, zwitch, zwitch.actionName, zwitch.actionVerb, zwitch.requirementsToMeet);
+		}
+
+		// Loot
+		if (/* (this instanceof Openable) && */ this.canContainOtherObjects && !(this instanceof Actor)) {
+			return new ActionOpenOtherInventory(performer, this);
+		}
+
+		// Openable, Chests, Doors
+		if (this instanceof Openable && !(this instanceof RemoteDoor)) {
+			Openable openable = (Openable) this;
+
+			if (!openable.open && openable.isOpenable) {
+				return new ActionOpen(performer, openable);
+			}
+
+			if (openable.open && openable.isOpenable)
+				return new ActionClose(performer, openable);
+
+			if (openable.locked && openable.lockable)
+				return new ActionUnlock(performer, openable);
+
+			if (!openable.locked && openable.lockable)
+				return new ActionLock(performer, openable);
+		}
+
+		if (this instanceof Helmet || this instanceof BodyArmor || this instanceof LegArmor)
+			return new ActionEquip(performer, this);
+
+		return null;
+	}
+
 	public ArrayList<Action> getAllActionsForEquippedItem(Actor performer) {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
@@ -2141,15 +2203,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			if (!openable.locked && openable.lockable)
 				actions.add(new ActionLock(performer, openable));
-
-			if (this instanceof Door) {
-				if (!openable.open) {
-					if (Game.level.player.peekingThrough == this)
-						actions.add(new ActionStopPeeking(performer));
-					else
-						actions.add(new ActionPeek(performer, this));
-				}
-			}
 		}
 
 		actions.add(new ActionUnequip(performer, this));

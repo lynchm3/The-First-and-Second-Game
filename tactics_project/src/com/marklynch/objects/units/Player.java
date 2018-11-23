@@ -26,6 +26,8 @@ import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDiscover;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.button.ClickListener;
+import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
@@ -180,6 +182,12 @@ public class Player extends Human {
 		}
 	}
 
+	public LevelButton buttonEquippedWeaponAction = new LevelButton(110, 140, Game.INVENTORY_SQUARE_WIDTH, 30f,
+			//
+			"end_turn_button.png", "end_turn_button.png", "ACTION", false, false,
+			//
+			Color.BLACK, Color.WHITE, null);
+
 	@Override
 	public void drawStaticUI() {
 
@@ -236,6 +244,19 @@ public class Player extends Human {
 			} else if (count > 1) {
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
 						Color.WHITE, new Object[] { count + "x" });
+			}
+
+			// Action button for the equipped item
+			final Action actionForEquipped = equipped.getDefaultActionForEquippedItem(this);
+			if (actionForEquipped != null) {
+				buttonEquippedWeaponAction.textParts = new Object[] { actionForEquipped.actionName };
+				buttonEquippedWeaponAction.setClickListener(new ClickListener() {
+					@Override
+					public void click() {
+						actionForEquipped.perform();
+					}
+				});
+				buttonEquippedWeaponAction.draw();
 			}
 		}
 
