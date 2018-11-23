@@ -64,7 +64,6 @@ import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.FishingRod;
-import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.LegArmor;
@@ -1947,13 +1946,8 @@ public class Actor extends GameObject {
 
 			actions.add(new ActionWait(performer, performer.squareGameObjectIsOn));
 
-			// self action
-			if (equipped instanceof Tool) {
-				Tool tool = (Tool) equipped;
-				Action utilityAction = tool.getUtilityAction(performer);
-				if (utilityAction != null) {
-					actions.add(utilityAction);
-				}
+			if (equipped != null) {
+				actions.addAll(equipped.getAllActionsForEquippedItem(performer));
 			}
 
 			actions.add(new ActionPourContainerInInventory(performer, performer, null));

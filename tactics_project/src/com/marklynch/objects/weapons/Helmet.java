@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 
 public class Helmet extends Armor {
@@ -25,11 +24,6 @@ public class Helmet extends Armor {
 	public void setInstances(GameObject gameObject) {
 		instances.add(gameObject);
 		super.setInstances(gameObject);
-	}
-
-	@Override
-	public Action getUtilityAction(Actor performer) {
-		return null;
 	}
 
 	@Override

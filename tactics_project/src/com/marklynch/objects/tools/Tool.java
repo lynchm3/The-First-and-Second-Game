@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Tool extends Weapon {
@@ -119,10 +117,5 @@ public class Tool extends Weapon {
 
 		return 0;
 
-	}
-
-	@Override
-	public Action getUtilityAction(Actor performer) {
-		return null;
 	}
 }

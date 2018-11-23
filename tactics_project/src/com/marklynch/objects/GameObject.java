@@ -75,6 +75,7 @@ import com.marklynch.objects.actions.ActionPourSpecificItem;
 import com.marklynch.objects.actions.ActionRead;
 import com.marklynch.objects.actions.ActionRemoveMapMarker;
 import com.marklynch.objects.actions.ActionRename;
+import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.actions.ActionSearch;
 import com.marklynch.objects.actions.ActionSellItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionSkin;
@@ -95,10 +96,14 @@ import com.marklynch.objects.actions.ActionViewInfo;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fish;
 import com.marklynch.objects.units.NonHuman;
+import com.marklynch.objects.weapons.BodyArmor;
+import com.marklynch.objects.weapons.Helmet;
+import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayUtils;
@@ -2075,8 +2080,117 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	}
 
-	public Action getUtilityAction(Actor performer) {
-		return null;
+	public ArrayList<Action> getAllActionsForEquippedItem(Actor performer) {
+
+		ArrayList<Action> actions = new ArrayList<Action>();
+
+		if (isFloorObject) {
+			return actions;
+		}
+
+		if (this instanceof Bell) {
+			actions.add(new ActionRing(performer, this));
+		}
+
+		// Skinnable
+		if (this instanceof Carcass) {
+			actions.add(new ActionSkin(performer, this));
+		}
+
+		// Readable
+		if (this instanceof Readable) {
+			actions.add(new ActionRead(performer, (Readable) this));
+		}
+
+		// Searchable
+		if (this instanceof Searchable) {
+			actions.add(new ActionSearch(performer, (Searchable) this));
+		}
+
+		// Food / Drink
+		if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
+				|| this instanceof WaterBody) {
+			actions.add(new ActionEatItems(performer, this));
+		}
+
+		// Switch
+		if (this instanceof Switch) {
+			Switch zwitch = (Switch) this;
+			actions.add(
+					new ActionUse(performer, zwitch, zwitch.actionName, zwitch.actionVerb, zwitch.requirementsToMeet));
+		}
+
+		// Loot
+		if (/* (this instanceof Openable) && */ this.canContainOtherObjects && !(this instanceof Actor)) {
+			actions.add(new ActionOpenOtherInventory(performer, this));
+		}
+
+		// Openable, Chests, Doors
+		if (this instanceof Openable && !(this instanceof RemoteDoor)) {
+			Openable openable = (Openable) this;
+
+			if (!openable.open && openable.isOpenable) {
+				actions.add(new ActionOpen(performer, openable));
+			}
+
+			if (openable.open && openable.isOpenable)
+				actions.add(new ActionClose(performer, openable));
+
+			if (openable.locked && openable.lockable)
+				actions.add(new ActionUnlock(performer, openable));
+
+			if (!openable.locked && openable.lockable)
+				actions.add(new ActionLock(performer, openable));
+
+			if (this instanceof Door) {
+				if (!openable.open) {
+					if (Game.level.player.peekingThrough == this)
+						actions.add(new ActionStopPeeking(performer));
+					else
+						actions.add(new ActionPeek(performer, this));
+				}
+			}
+		}
+
+		actions.add(new ActionUnequip(performer, this));
+
+		if (this instanceof Helmet || this instanceof BodyArmor || this instanceof LegArmor)
+			actions.add(new ActionEquip(performer, this));
+
+		actions.add(new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this));
+
+		if (this.inventoryThatHoldsThisObject == Level.player.inventory && !(this instanceof Gold)) {
+			actions.add(new ActionStarSpecificItem(this));
+		}
+
+		// if (!decorative && this != Game.level.player && attackable)
+		// actions.add(new ActionAttack(performer, this));
+		//
+		// if (!decorative && this != Game.level.player && attackable && !(this
+		// instanceof Wall)
+		// && !(this instanceof Door))
+		// actions.add(new ActionUsePower(Level.player, this, this.squareGameObjectIsOn,
+		// new PowerTeleportOther(Level.player)));
+		//
+		// if (!decorative && this.squareGameObjectIsOn !=
+		// Game.level.player.squareGameObjectIsOn
+		// && performer.equipped != null) {
+		// actions.add(new ActionThrowItem(performer, this, performer.equipped));
+		// }
+		//
+		// // Throw from inventory
+		// if (!decorative && this.squareGameObjectIsOn !=
+		// Game.level.player.squareGameObjectIsOn)
+		// actions.add(new ActionOpenInventoryToThrowItems(performer, this, null));
+		//
+		// // Pour from inventory
+		// if (!decorative)
+		// actions.add(new ActionPourContainerInInventory(performer, this, null));
+		//
+		// if (!decorative)
+		// actions.add(new ActionIgnite(performer, this));
+
+		return actions;
 	}
 
 	@Override
