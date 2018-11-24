@@ -5,22 +5,19 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationResponseDisplay;
-import com.marklynch.objects.Readable;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
 public class ActionRead extends Action {
 
 	public static final String ACTION_NAME = "Read";
 
-	Readable readable;
-
 	// Default for hostiles
-	public ActionRead(Actor reader, Readable target) {
-		super(ACTION_NAME, textureRead, reader, target);
+	public ActionRead(Actor performer, GameObject target) {
+		super(ACTION_NAME, textureRead, performer, target);
 		if (!check()) {
 			enabled = false;
 		}
-		this.readable = target;
 		legal = checkLegality();
 		sound = createSound();
 	}
@@ -47,7 +44,7 @@ public class ActionRead extends Action {
 		}
 
 		if (performer == Level.player)
-			readable.wasRead();
+			target.wasRead();
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
@@ -56,6 +53,12 @@ public class ActionRead extends Action {
 
 	@Override
 	public boolean check() {
+		// if (!target.squareGameObjectIsOn.visibleToPlayer)
+		// return false;
+
+		if (target.getConversation() != null)
+			return false;
+
 		return true;
 	}
 

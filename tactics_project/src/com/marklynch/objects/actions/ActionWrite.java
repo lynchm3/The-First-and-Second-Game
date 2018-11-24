@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
-import com.marklynch.objects.Readable;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -13,12 +13,11 @@ public class ActionWrite extends Action {
 
 	public static final String ACTION_NAME = "Write";
 
-	Readable sign;
+	// Readable123 sign;
 	Object[] text;
 
-	public ActionWrite(Actor performer, Readable sign, Object[] text) {
-		super(ACTION_NAME, textureWrite, performer, sign);
-		this.sign = sign;
+	public ActionWrite(Actor performer, GameObject target, Object[] text) {
+		super(ACTION_NAME, textureWrite, performer, target);
 		this.text = text;
 		if (!check()) {
 			enabled = false;
@@ -38,10 +37,10 @@ public class ActionWrite extends Action {
 			return;
 
 		ConversationPart conversationPart = new ConversationPart(text, new ConversationResponse[] {}, null);
-		Conversation conversation = new Conversation(conversationPart, sign, true);
-		sign.setConversation(conversation);
+		Conversation conversation = new Conversation(conversationPart, target, true);
+		target.setConversation(conversation);
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " updated ", sign }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " updated ", target }));
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
@@ -54,7 +53,7 @@ public class ActionWrite extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(sign.squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 		return false;

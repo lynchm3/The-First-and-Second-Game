@@ -15,7 +15,6 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Landmine;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Portal;
-import com.marklynch.objects.Sign;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.Stump;
@@ -40,7 +39,7 @@ public class TemplatesNature {
 		Templates.TREE.bigShadow = true;
 		Templates.TREE.templateId = GameObject.generateNewTemplateId();
 
-		Templates.TREE_READABLE = new Sign();
+		Templates.TREE_READABLE = new GameObject();
 		Templates.TREE_READABLE.name = "Tree with engraving";
 		Templates.TREE_READABLE.setImageAndExtrapolateSize("tree_readable.png");
 		Templates.TREE_READABLE.totalHealth = Templates.TREE_READABLE.remainingHealth = Templates.TREE.totalHealth;

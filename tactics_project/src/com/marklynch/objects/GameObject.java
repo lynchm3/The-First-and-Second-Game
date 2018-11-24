@@ -18,6 +18,7 @@ import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
@@ -1221,8 +1222,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Readable
-		if (this instanceof Readable) {
-			actions.add(new ActionRead(performer, (Readable) this));
+		if (conversation != null) {
+			actions.add(new ActionRead(performer, this));
 		}
 
 		// Hiding place
@@ -1389,9 +1390,30 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	}
 
+	// Readable SHIIIIT.
+	public Conversation conversation;
+	public ActionListener onReadListener;
+
 	public Conversation getConversation() {
-		return null;
+		return conversation;
 	}
+
+	public void setConversation(Conversation conversation) {
+		this.conversation = conversation;
+		conversation.openingConversationPart.talker = this;
+	}
+
+	public void setOnReadListener(ActionListener actionListener) {
+		this.onReadListener = actionListener;
+
+	}
+
+	public void wasRead() {
+		if (this.onReadListener != null) {
+			onReadListener.onRead();
+		}
+	}
+	// End of readable shiiiiit
 
 	public int straightLineDistanceBetween(Square sourceSquare, Square targetSquare) {
 
@@ -2092,8 +2114,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Readable
-		if (this instanceof Readable) {
-			return new ActionRead(performer, (Readable) this);
+		if (conversation != null) {
+			return new ActionRead(performer, this);
 		}
 
 		// Searchable
@@ -2160,8 +2182,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Readable
-		if (this instanceof Readable) {
-			actions.add(new ActionRead(performer, (Readable) this));
+		if (conversation != null) {
+			actions.add(new ActionRead(performer, this));
 		}
 
 		// Searchable

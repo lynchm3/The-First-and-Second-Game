@@ -3,14 +3,12 @@ package com.marklynch.objects.templates;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Readable;
-import com.marklynch.objects.Sign;
 import com.marklynch.objects.WantedPoster;
 
 public class TemplatesReadables {
 
 	public TemplatesReadables() {
-		Templates.ROCK_WITH_ETCHING = new Sign();
+		Templates.ROCK_WITH_ETCHING = new GameObject();
 		Templates.ROCK_WITH_ETCHING.name = "Rock with Etching";
 		Templates.ROCK_WITH_ETCHING.setImageAndExtrapolateSize("rock_with_etching.png");
 		Templates.ROCK_WITH_ETCHING.totalHealth = Templates.ROCK_WITH_ETCHING.remainingHealth = 200;
@@ -22,7 +20,7 @@ public class TemplatesReadables {
 		Templates.ROCK_WITH_ETCHING.templateId = GameObject.generateNewTemplateId();
 		Templates.ROCK_WITH_ETCHING.flipYAxisInMirror = false;
 
-		Templates.SCROLL = new Readable();
+		Templates.SCROLL = new GameObject();
 		Templates.SCROLL.name = "Scroll";
 		Templates.SCROLL.setImageAndExtrapolateSize("scroll.png");
 		Templates.SCROLL.totalHealth = Templates.SCROLL.remainingHealth = 1;
@@ -32,7 +30,7 @@ public class TemplatesReadables {
 		Templates.SCROLL.anchorY = 16;
 		Templates.SCROLL.templateId = GameObject.generateNewTemplateId();
 
-		Templates.SIGN = new Sign();
+		Templates.SIGN = new GameObject();
 		Templates.SIGN.name = "Sign";
 		Templates.SIGN.setImageAndExtrapolateSize("sign.png");
 		Templates.SIGN.totalHealth = Templates.SIGN.remainingHealth = 100;
@@ -54,7 +52,7 @@ public class TemplatesReadables {
 		Templates.WANTED_POSTER.anchorY = 0;
 		Templates.WANTED_POSTER.templateId = GameObject.generateNewTemplateId();
 
-		Templates.SIGNPOST = new Sign();
+		Templates.SIGNPOST = new GameObject();
 		Templates.SIGNPOST.name = "Signpost";
 		Templates.SIGNPOST.setImageAndExtrapolateSize("signpost.png");
 		Templates.SIGNPOST.totalHealth = Templates.SIGNPOST.remainingHealth = 100;
@@ -70,7 +68,7 @@ public class TemplatesReadables {
 		Templates.SIGNPOST.templateId = GameObject.generateNewTemplateId();
 		Templates.SIGNPOST.flipYAxisInMirror = false;
 
-		Templates.DOCUMENTS = new Readable();
+		Templates.DOCUMENTS = new GameObject();
 		Templates.DOCUMENTS.name = "Documents";
 		Templates.DOCUMENTS.setImageAndExtrapolateSize("documents.png");
 		Templates.DOCUMENTS.totalHealth = Templates.DOCUMENTS.remainingHealth = 5;

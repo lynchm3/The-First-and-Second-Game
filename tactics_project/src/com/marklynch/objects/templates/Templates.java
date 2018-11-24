@@ -31,20 +31,18 @@ import com.marklynch.objects.Portal;
 import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.PressurePlateRequiringSpecificItem;
 import com.marklynch.objects.Rail;
-import com.marklynch.objects.Readable;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Seesaw;
-import com.marklynch.objects.Sign;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.Stump;
-import com.marklynch.objects.WallSupport;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.VoidHole;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.WallSupport;
 import com.marklynch.objects.WallWithCrack;
 import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.WaterBody;
@@ -241,17 +239,17 @@ public class Templates {
 
 	public static BigGameObject BARRICADE;
 
-	public static Sign ROCK_WITH_ETCHING;
+	public static GameObject ROCK_WITH_ETCHING;
 
-	public static Readable SCROLL;
+	public static GameObject SCROLL;
 
-	public static Sign SIGN;
+	public static GameObject SIGN;
 
-	public static Sign SIGNPOST;
+	public static GameObject SIGNPOST;
 
 	public static WantedPoster WANTED_POSTER;
 
-	public static Readable DOCUMENTS;
+	public static GameObject DOCUMENTS;
 
 	public static WallSupport WOODEN_SUPPORT;
 
@@ -387,7 +385,7 @@ public class Templates {
 
 	// NATURE
 	public static Tree TREE;
-	public static Sign TREE_READABLE;
+	public static GameObject TREE_READABLE;
 	public static Storage TREE_CONTAINER;
 
 	public static Tree BIG_TREE;

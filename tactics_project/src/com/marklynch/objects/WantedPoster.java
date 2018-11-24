@@ -13,7 +13,7 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-public class WantedPoster extends Sign implements CrimeListener {
+public class WantedPoster extends GameObject implements CrimeListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 

@@ -7,7 +7,6 @@ import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Readable;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.templates.Templates;
 
@@ -92,10 +91,10 @@ public class AreaTownForest {
 
 		}
 
-		Readable scrollOfPoisonBlast = Templates.SCROLL.makeCopy(Level.squares[160][55], "Scroll of Poison Blast",
-				new Object[] {
-						"[You learn Poison Blast]\nPoisons for base 3 dmg/s Range:10\nUse the power of the forest to murder people with poisons. Nice" },
-				null);
+		GameObject scrollOfPoisonBlast = Templates.SCROLL.makeCopy(Level.squares[160][55], null);
+		scrollOfPoisonBlast.name = "Scroll of Poison Blast";
+		scrollOfPoisonBlast.conversation = scrollOfPoisonBlast.createConversation(new Object[] {
+				"[You learn Poison Blast]\nPoisons for base 3 dmg/s Range:10\nUse the power of the forest to murder people with poisons. Nice" });
 		scrollOfPoisonBlast.setOnReadListener(new ActionListener() {
 			@Override
 			public void onRead() {

@@ -26,7 +26,6 @@ import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Readable;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionTalk;
@@ -244,8 +243,8 @@ public class QuestSmallGame extends Quest {
 				Templates.DOOR.makeCopy("Door", Game.level.squares[105][12], false, false, false, hunterBrent),
 				Nodes.lodgeEntrance));
 		ArrayList<StructureRoom> lodgeRooms = new ArrayList<StructureRoom>();
-		lodgeRooms.add(new StructureRoom("Hunting Lodge", 107, 9, false, false,
-				new ArrayList<Actor>(), new Node[] { Nodes.lodgeEntrance }, new RoomPart(106, 10, 110, 14)));
+		lodgeRooms.add(new StructureRoom("Hunting Lodge", 107, 9, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.lodgeEntrance }, new RoomPart(106, 10, 110, 14)));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
 		lodgeSections.add(new StructureSection("Hunting Lodge", 105, 9, 111, 15, false, false));
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeRooms, new ArrayList<StructurePath>(),
@@ -330,8 +329,8 @@ public class QuestSmallGame extends Quest {
 		featuresBarracks.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[80][61], false, false, false, null),
 				Nodes.barracksSouth));
-		roomsBarracks.add(new StructureRoom("Barracks", 75, 53, false, false,
-				new ArrayList<Actor>(), new Node[] { Nodes.barracksNorth, Nodes.barracksSouth }, new RoomPart(75, 53, 84, 60)));
+		roomsBarracks.add(new StructureRoom("Barracks", 75, 53, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.barracksNorth, Nodes.barracksSouth }, new RoomPart(75, 53, 84, 60)));
 		sectionsBarracks.add(new StructureSection("Barracks", 74, 52, 85, 61, false, false));
 		Structure barracks = new Structure("Barracks", sectionsBarracks, roomsBarracks, pathsBarracks, featuresBarracks,
 				new ArrayList<Square>(), null, 74, 52, 85, 61, true, null, squaresToRemoveBarracks, extraWallsBarracks,
@@ -375,8 +374,8 @@ public class QuestSmallGame extends Quest {
 		featuresThievesHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[113][53], false, false, false, null),
 				Nodes.forestThiefHut));
-		roomsThievesHut.add(new StructureRoom("Hut", 114, 53, false, false,
-				new ArrayList<Actor>(), new Node[] { Nodes.forestThiefHut }, new RoomPart(114, 53, 116, 55)));
+		roomsThievesHut.add(new StructureRoom("Hut", 114, 53, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.forestThiefHut }, new RoomPart(114, 53, 116, 55)));
 		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false, false));
 		Structure thievesHut = new Structure("Hut", sectionsThievesHut, roomsThievesHut, pathsThievesHut,
 				featuresThievesHut, new ArrayList<Square>(), null, 113, 52, 117, 56, true, null,
@@ -393,8 +392,10 @@ public class QuestSmallGame extends Quest {
 			hunter.quest = this;
 		}
 
-		final Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[106][8], "Hunt Action Plan",
-				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" }, hunterBrent);
+		final GameObject huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[106][8], hunterBrent);
+		huntingPlan.name = "Hunt Action Plan";
+		huntingPlan.conversation = huntingPlan.createConversation(
+				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" });
 
 		// IF I ATTACK OR TELEPORT ON TO THE SIGN THEY SHOULD BE ANGRY..
 
@@ -422,8 +423,8 @@ public class QuestSmallGame extends Quest {
 		featuresRangersHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[133][34], false, false, false, rangerBill),
 				Nodes.forestRangersHut));
-		roomsRangersHut.add(new StructureRoom("Ranger's Hut", 130, 34, false, false,
-				new ArrayList<Actor>(), new Node[] { Nodes.forestRangersHut }, new RoomPart(130, 34, 132, 36)));
+		roomsRangersHut.add(new StructureRoom("Ranger's Hut", 130, 34, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.forestRangersHut }, new RoomPart(130, 34, 132, 36)));
 		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false, false));
 		Structure rangerHut = new Structure("Ranger's Hut", sectionsRangersHut, roomsRangersHut, pathsRangersHut,
 				featuresRangersHut, new ArrayList<Square>(), null, 129, 33, 133, 37, true, null,

@@ -9,7 +9,6 @@ import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Readable;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionPet;
@@ -21,7 +20,7 @@ public class Pig extends Animal {
 
 	public StructureRoom room;
 	public Structure shop;
-	public Readable shopSign;
+	public GameObject shopSign;
 	public Weapon broom;
 
 	public Pig() {

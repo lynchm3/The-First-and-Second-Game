@@ -17,7 +17,6 @@ import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Sign;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -41,16 +40,16 @@ public class AreaMinorMine {
 
 		mineSections.add(new StructureSection("Minor Mine", 280, 76, 307, 97, false, false));
 
-		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, false,
-				new ArrayList<Actor>(), new Node[] { Nodes.minorMine }, new RoomPart(281, 77, 306, 88),
-				new RoomPart(281, 89, 301, 91), new RoomPart(292, 92, 301, 96)));
+		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.minorMine }, new RoomPart(281, 77, 306, 88), new RoomPart(281, 89, 301, 91),
+				new RoomPart(292, 92, 301, 96)));
 
 		StructureRoom shopRoom = new StructureRoom("What's Mine is Yours*", 281, 93, false, false,
 				new ArrayList<Actor>(), new Node[] { Nodes.minorMine }, new RoomPart(281, 93, 290, 96));
 		rooms.add(shopRoom);
 
-		rooms.add(new StructureRoom("Minor Mine Quarters", 303, 90, false, false,
-				new ArrayList<Actor>(), new Node[] { Nodes.minorMine }, new RoomPart(303, 90, 306, 96)));
+		rooms.add(new StructureRoom("Minor Mine Quarters", 303, 90, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.minorMine }, new RoomPart(303, 90, 306, 96)));
 
 		// entry to mine
 		squaresToRemove.add(Game.level.squares[280][87]);
@@ -88,8 +87,8 @@ public class AreaMinorMine {
 						Templates.PICKAXE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.mines, new int[] {}, new HOBBY[] { HOBBY.HUNTING });
 
-		Sign shopSign = Templates.SIGN.makeCopy(Game.level.squares[288][91], shopRoom.name + " sign",
-				new Object[] { shopRoom.name }, trader);
+		GameObject shopSign = Templates.SIGN.makeCopy(Game.level.squares[288][91], trader);
+		shopSign.conversation = shopSign.createConversation(new Object[] { shopRoom.name });
 
 		// Random ground pickaxe
 		Templates.PICKAXE.makeCopy(Game.level.squares[292][91], null);

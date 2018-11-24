@@ -12,7 +12,6 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
-import com.marklynch.objects.Sign;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.LegArmor;
@@ -22,7 +21,7 @@ public class Doctor extends Human implements Comparator<GameObject> {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public StructureRoom shopRoom;
-	public Sign shopSign;
+	public GameObject shopSign;
 	// public Weapon broom;
 	public BodyArmor apron;
 	public LegArmor pants;

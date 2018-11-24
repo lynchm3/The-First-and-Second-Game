@@ -21,7 +21,6 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Sign;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.WantedPoster;
@@ -61,8 +60,8 @@ public class AreaTown {
 		// Some tree to the left
 		Storage treeContainer = Templates.TREE_CONTAINER.makeCopy(Game.level.squares[posX + 0][posY + 8], false, null);
 		treeContainer.inventory.add(Templates.HATCHET.makeCopy(null, null));
-		Templates.TREE_READABLE.makeCopy(Game.level.squares[posX + 1][posY + 9], "Tree",
-				new Object[] { "MARK WAS HERE" }, null);
+		GameObject readableTree = Templates.TREE_READABLE.makeCopy(Game.level.squares[posX + 1][posY + 9], null);
+		readableTree.conversation = readableTree.createConversation(new Object[] { "MARK WAS HERE" });
 		Templates.LEAVES.makeCopy(Game.level.squares[posX + 1][posY + 8], null);
 
 		// Joe's shop
@@ -89,8 +88,9 @@ public class AreaTown {
 				posY + 640 + 1664, posX + -100, posY + -100 + 868, true, trader, new ArrayList<Square>(),
 				new ArrayList<Wall>(), Templates.WALL, Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(joesShop);
-		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6][posY + 6], joesShop.name + " sign",
-				new Object[] { joesShop.name }, trader);
+		GameObject joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6][posY + 6], trader);
+		joesShopSign.conversation = joesShopSign.createConversation(new Object[] { joesShop.name });
+		joesShopSign.name = joesShop.name + " sign";
 		Templates.SHOP_COUNTER.makeCopy(Game.level.squares[posX + 7][posY + 1], null);
 		trader.shopRoom = shopAtriums.get(0);
 		trader.shopSign = joesShopSign;
@@ -138,8 +138,9 @@ public class AreaTown {
 				posX + 640 + 35, posY + 640 + 1664 + 3, posX + -100 + 35, posY + -100 + 868 + 3, true, doctor,
 				new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(doctorsShop);
-		Sign doctorsShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6 + 35][posY + 6 + 3],
-				doctorsShop.name + " sign", new Object[] { doctorsShop.name }, doctor);
+		GameObject doctorsShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6 + 35][posY + 6 + 3], doctor);
+		doctorsShopSign.conversation = doctorsShopSign.createConversation(new Object[] { doctorsShop.name });
+		doctorsShopSign.name = doctorsShop.name + " sign";
 		Templates.SHOP_COUNTER.makeCopy(Game.level.squares[posX + 7 + 35][posY + 1 + 3], null);
 		doctor.shopRoom = doctorsShopAtriums.get(0);
 		doctor.shopSign = doctorsShopSign;

@@ -22,7 +22,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
-import com.marklynch.objects.Sign;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -174,12 +173,10 @@ public class QuestTheSecretRoom extends Quest {
 		new PavedPathway(AreaTown.posX + 18, AreaTown.posY + 62, AreaTown.posX + 18, AreaTown.posY + 68);
 
 		// Signpost 5,20
-		Sign signpost = Templates.SIGNPOST.makeCopy(Game.level.squares[AreaTown.posX + 5][AreaTown.posY + 20],
-				"Signpost",
-
-				new Object[] { GameObject.upTexture, " Shop  ", GameObject.rightTexture, " Estates  ",
-						GameObject.downTexture, " Farm" },
+		GameObject signpost = Templates.SIGNPOST.makeCopy(Game.level.squares[AreaTown.posX + 5][AreaTown.posY + 20],
 				null);
+		signpost.conversation = signpost.createConversation(new Object[] { GameObject.upTexture, " Shop  ",
+				GameObject.rightTexture, " Estates  ", GameObject.downTexture, " Farm" });
 
 		// "North - Shop, Hunter's Lodge; East - Estates; South - Farm",
 

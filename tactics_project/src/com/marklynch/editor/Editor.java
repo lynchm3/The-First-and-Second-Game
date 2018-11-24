@@ -477,7 +477,9 @@ public class Editor {
 		player.inventory.add(Templates.CHEST.makeCopy(null, true, player));
 		player.inventory.add(Templates.CRATE.makeCopy(null, false, player));
 		player.inventory.add(Templates.DIRTY_SHEET_3.makeCopy(null, player));
-		player.inventory.add(Templates.DOCUMENTS.makeCopy(null, "Mystery Documents", new Object[] {}, player));
+		GameObject mysteryDocuments = Templates.DOCUMENTS.makeCopy(null, player);
+		mysteryDocuments.name = "Mystery Documents";
+		player.inventory.add(mysteryDocuments);
 		player.inventory.add(Templates.DRIED_BLOOD.makeCopy(null, player));
 		player.inventory.add(Templates.FENCE.makeCopy(null, player));
 		player.inventory.add(Templates.FIRE_BALL.makeCopy(null, player));
@@ -492,7 +494,9 @@ public class Editor {
 		player.inventory.add(Templates.MUSHROOM.makeCopy(null, player));
 		player.inventory.add(Templates.ORE.makeCopy(null, player));
 		player.inventory.add(Templates.ROBE.makeCopy(null, player));
-		player.inventory.add(Templates.SCROLL.makeCopy(null, "Mysterious Scroll", new Object[] {}, player));
+		GameObject mysteryScroll = Templates.SCROLL.makeCopy(null, player);
+		mysteryScroll.name = "Mysterious Scroll";
+		player.inventory.add(mysteryScroll);
 		player.inventory.add(Templates.SICKLE.makeCopy(null, player));
 		player.inventory.add(Templates.SWORD.makeCopy(null, player));
 		player.inventory.add(Templates.TURTLE.makeCopy("Michael", null, FactionList.buns, null, new GameObject[] {},
