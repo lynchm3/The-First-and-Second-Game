@@ -267,4 +267,12 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		return string;
 	}
 
+	public GameObject getDiggable() {
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.diggable)
+				return gameObject;
+		}
+		return null;
+	}
+
 }

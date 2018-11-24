@@ -39,6 +39,7 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionDigging;
 import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
@@ -1057,6 +1058,13 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 		// Pour from inventory
 		actions.add(new ActionPourContainerInInventory(performer, null, this));
+
+		GameObject diggable = this.inventory.getDiggable();
+		if (diggable != null) {
+			actions.add(new ActionDigging(performer, diggable));
+		} else {
+			actions.add(new ActionDigging(performer, this));
+		}
 
 		if (!this.inventory.contains(MapMarker.class))
 			actions.add(new ActionPlaceMapMarker(this));

@@ -10,6 +10,7 @@ import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.units.Actor;
@@ -22,7 +23,7 @@ public class ActionDigging extends Action {
 	Shovel shovel;
 
 	// Default for hostiles
-	public ActionDigging(Actor attacker, GameObject target) {
+	public ActionDigging(Actor attacker, Object target) {
 		super(ACTION_NAME, textureDig, attacker, target);
 		if (!check()) {
 			enabled = false;
@@ -41,9 +42,9 @@ public class ActionDigging extends Action {
 		if (!checkRange())
 			return;
 
-		if (performer.squareGameObjectIsOn.xInGrid > target.squareGameObjectIsOn.xInGrid) {
+		if (performer.squareGameObjectIsOn.xInGrid > targetSquare.xInGrid) {
 			performer.backwards = true;
-		} else if (performer.squareGameObjectIsOn.xInGrid < target.squareGameObjectIsOn.xInGrid) {
+		} else if (performer.squareGameObjectIsOn.xInGrid < targetSquare.xInGrid) {
 			performer.backwards = false;
 		}
 
@@ -55,7 +56,12 @@ public class ActionDigging extends Action {
 		performer.setPrimaryAnimation(new AnimationSlash(performer, target, new OnCompletionListener() {
 			@Override
 			public void animationComplete(GameObject gameObject) {
-				postMeleeAnimation();
+				if (target != null && target.diggable) {
+					postMeleeAnimation();
+				} else {
+					Game.level
+							.logOnScreen(new ActivityLog(new Object[] { performer, " dug up nothing with ", shovel }));
+				}
 			}
 		}));
 	}
@@ -66,6 +72,13 @@ public class ActionDigging extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		target.squareGameObjectIsOn.floorImageTexture = Square.MUD_TEXTURE;
+
+		if (target instanceof Discoverable) {
+			Discoverable discoverable = (Discoverable) target;
+			if (!discoverable.discovered && discoverable.level <= performer.level) {
+				new ActionDiscover(performer, discoverable).perform();
+			}
+		}
 
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dug up ", target, " with ", shovel }));
@@ -115,7 +128,7 @@ public class ActionDigging extends Action {
 			return false;
 		}
 
-		if (target.remainingHealth <= 0) {
+		if (target != null && target.remainingHealth <= 0) {
 			disabledReason = null;
 			return false;
 		}
@@ -126,20 +139,25 @@ public class ActionDigging extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetSquare) > 1)
 			return false;
-		}
 
 		return true;
 	}
 
 	@Override
 	public boolean checkLegality() {
+		if (target == null)
+			return true;
+
 		return standardAttackLegalityCheck(performer, target);
 	}
 
 	@Override
 	public Sound createSound() {
+		if (target == null)
+			return null;
+
 		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
 		if (shovel != null) {
 			float loudness = Math.max(target.soundWhenHit, shovel.soundWhenHitting);
@@ -150,6 +168,12 @@ public class ActionDigging extends Action {
 
 	@Override
 	public boolean shouldContinue() {
+		if (target == null) {
+			if (performed)
+				return false;
+			else
+				return true;
+		}
 
 		if (performed && Player.inFight()) {
 			return false;

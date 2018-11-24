@@ -163,7 +163,6 @@ public abstract class Action {
 		} else if (targetGameObjectOrSquare instanceof Square) {
 			this.targetSquare = (Square) targetGameObjectOrSquare;
 			this.target = targetSquare.inventory.getGameObjectThatCantShareSquare1();
-
 		}
 
 		this.actionName = actionName;

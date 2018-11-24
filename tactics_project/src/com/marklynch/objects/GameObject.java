@@ -1055,11 +1055,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		// if (this instanceof Discoverable) {
-		// Discoverable discoverable = (Discoverable) this;
-		// if (!discoverable.discovered)
-		// return null;
-		// }
+		if (this instanceof Discoverable) {
+			Discoverable discoverable = (Discoverable) this;
+			if (!discoverable.discovered)
+				return null;
+		}
 
 		if (isFloorObject) {
 			return new ActionMove(performer, this.squareGameObjectIsOn, true);
@@ -1116,11 +1116,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 
-		// if (this instanceof Discoverable) {
-		// Discoverable discoverable = (Discoverable) this;
-		// if (!discoverable.discovered)
-		// return null;
-		// }
+		if (this instanceof Discoverable) {
+			Discoverable discoverable = (Discoverable) this;
+			if (!discoverable.discovered)
+				return null;
+		}
 
 		if (isFloorObject) {
 			return null;
@@ -1174,11 +1174,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return actions;
 		}
 
-		// if (this instanceof Discoverable) {
-		// Discoverable discoverable = (Discoverable) this;
-		// if (!discoverable.discovered)
-		// return actions;
-		// }
+		if (this instanceof Discoverable) {
+			Discoverable discoverable = (Discoverable) this;
+			if (!discoverable.discovered)
+				return actions;
+		}
 
 		// Inspectable
 		if (this instanceof Inspectable) {
