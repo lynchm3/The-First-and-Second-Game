@@ -1804,6 +1804,9 @@ public class Actor extends GameObject {
 
 		if (this.remainingHealth > 0) {
 
+			if (!(this instanceof Actor))
+				clearActions();
+
 			// Remove dead attackers from attackers list
 			ArrayList<GameObject> gameObjectsToRemoveFromList = new ArrayList<GameObject>();
 			for (GameObject gameObject : attackers) {

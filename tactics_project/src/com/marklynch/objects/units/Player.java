@@ -266,7 +266,7 @@ public class Player extends Human {
 		for (Square square : squaresVisibleToPlayerOnlyPlayer) {
 			for (GameObject discoverableGameObject : square.inventory.getGameObjectsOfClass(Discoverable.class)) {
 				Discoverable discoverable = ((Discoverable) discoverableGameObject);
-				if (!discoverable.discovered) {
+				if (!discoverable.discovered && discoverable.level <= this.level) {
 					new ActionDiscover(this, discoverable).perform();
 				}
 			}

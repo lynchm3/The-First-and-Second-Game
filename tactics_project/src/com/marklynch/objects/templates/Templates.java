@@ -409,6 +409,7 @@ public class Templates {
 	public static SmallHidingPlace BURROW;
 
 	public static Discoverable MOUND;
+	public static GameObject INVISIBLE_DIGGABLE;
 
 	public static VoidHole VOID_HOLE;
 

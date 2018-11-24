@@ -21,7 +21,6 @@ public class Discoverable extends GameObject {
 	public Discoverable() {
 		super();
 
-		// Settings for BURROW
 		canBePickedUp = false;
 
 		fitsInInventory = false;

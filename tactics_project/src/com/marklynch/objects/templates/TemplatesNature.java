@@ -197,8 +197,6 @@ public class TemplatesNature {
 		Templates.MOUND.totalHealth = Templates.MOUND.remainingHealth = 103;
 		Templates.MOUND.weight = 100f;
 		Templates.MOUND.value = 15;
-		Templates.MOUND.anchorX = 0;
-		Templates.MOUND.anchorY = 0;
 		Templates.MOUND.templateId = GameObject.generateNewTemplateId();
 		Templates.MOUND.preDiscoverTexture = ResourceUtils.getGlobalImage("mound.png", true);
 		Templates.MOUND.postDiscoverTexture = ResourceUtils.getGlobalImage("mound.png", true);
@@ -206,6 +204,22 @@ public class TemplatesNature {
 		Templates.MOUND.canContainOtherObjects = false;
 		Templates.MOUND.flipYAxisInMirror = false;
 		Templates.MOUND.moveable = false;
+
+		Templates.INVISIBLE_DIGGABLE = new GameObject();
+		Templates.INVISIBLE_DIGGABLE.name = "Diggable Spot";
+		// Templates.INVISIBLE_DIGGABLE.setImageAndExtrapolateSize("INVISIBLE_DIGGABLE.png");
+		Templates.INVISIBLE_DIGGABLE.totalHealth = Templates.INVISIBLE_DIGGABLE.remainingHealth = 103;
+		Templates.INVISIBLE_DIGGABLE.weight = 100f;
+		Templates.INVISIBLE_DIGGABLE.value = 15;
+		Templates.INVISIBLE_DIGGABLE.templateId = GameObject.generateNewTemplateId();
+		// Templates.INVISIBLE_DIGGABLE.preDiscoverTexture =
+		// ResourceUtils.getGlobalImage("INVISIBLE_DIGGABLE.png", true);
+		// Templates.INVISIBLE_DIGGABLE.postDiscoverTexture =
+		// ResourceUtils.getGlobalImage("INVISIBLE_DIGGABLE.png", true);
+		Templates.INVISIBLE_DIGGABLE.diggable = true;
+		Templates.INVISIBLE_DIGGABLE.canContainOtherObjects = false;
+		Templates.INVISIBLE_DIGGABLE.flipYAxisInMirror = false;
+		Templates.INVISIBLE_DIGGABLE.moveable = false;
 
 		Templates.APPLE = new Food();
 		Templates.APPLE.name = "Apple";

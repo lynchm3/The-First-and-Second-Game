@@ -6,7 +6,6 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
@@ -85,9 +84,9 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 		for (Square bigArrowSquare : bigArrowSquares) {
 			bigArrowWalls.add(Templates.WALL.makeCopy(bigArrowSquare, null));
 		}
-
+		// s
 		// At base of point is 45/24
-		Discoverable mound = Templates.MOUND.makeCopy(Level.squares[posX + diggableX][posY + diggableY], null, 1);
+		GameObject mound = Templates.MOUND.makeCopy(Level.squares[posX + diggableX][posY + diggableY], null, 50);
 		mound.inventory.add(Templates.ROCK.makeCopy(null, null));
 		mound.inventory.add(Templates.GOLD.makeCopy(null, null, 34));
 

@@ -56,8 +56,8 @@ public class TemplatesContainers {
 				true);
 		Templates.CRATE_WITH_ETCHING.totalHealth = Templates.CRATE.remainingHealth = 58;
 		Templates.CRATE_WITH_ETCHING.floatsInWater = true;
-		Templates.CRATE_WITH_ETCHING.weight = 100f;
-		Templates.CRATE_WITH_ETCHING.value = 20;
+		Templates.CRATE_WITH_ETCHING.weight = Templates.CRATE.weight;
+		Templates.CRATE_WITH_ETCHING.value = 19;
 		Templates.CRATE_WITH_ETCHING.lockable = false;
 		Templates.CRATE_WITH_ETCHING.templateId = GameObject.generateNewTemplateId();
 		Templates.CRATE_WITH_ETCHING.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
