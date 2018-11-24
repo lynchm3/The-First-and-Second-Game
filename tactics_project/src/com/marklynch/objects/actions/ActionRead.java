@@ -56,7 +56,7 @@ public class ActionRead extends Action {
 		// if (!target.squareGameObjectIsOn.visibleToPlayer)
 		// return false;
 
-		if (target.getConversation() != null)
+		if (target.getConversation() == null)
 			return false;
 
 		return true;

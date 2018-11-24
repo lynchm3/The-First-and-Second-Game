@@ -30,6 +30,10 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 		ArrayList<Square> bigArrowSquares = new ArrayList<Square>();
 		ArrayList<Wall> bigArrowWalls = new ArrayList<Wall>();
 
+		GameObject createWithEtching = Templates.CRATE_WITH_ETCHING.makeCopy(Level.squares[posX + 0][posY + 0], false,
+				null);
+		createWithEtching.conversation = createWithEtching.createConversation(new Object[] { "DO NOT OPEN" });
+
 		// Body of arrow
 		for (int x = 5; x <= 36; x++) {
 			for (int y = 22; y <= 26; y++) {

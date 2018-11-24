@@ -38,24 +38,31 @@ public class TemplatesContainers {
 		Templates.CRATE.storageClosedTexture = ResourceUtils.getGlobalImage("crate.png", true);
 		Templates.CRATE.storageOpenTexture = ResourceUtils.getGlobalImage("crate_open.png", true);
 		Templates.CRATE.totalHealth = Templates.CRATE.remainingHealth = 60;
-		Templates.CRATE.widthRatio = 1f;
-		Templates.CRATE.heightRatio = 1f;
-		Templates.CRATE.drawOffsetRatioX = 0f;
-		Templates.CRATE.drawOffsetRatioY = 0f;
-		Templates.CRATE.soundWhenHit = 1f;
-		Templates.CRATE.soundWhenHitting = 1f;
-		Templates.CRATE.soundDampening = 1f;
-		Templates.CRATE.stackable = false;
-		Templates.CRATE.floats = true;
-		Templates.CRATE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
+		Templates.CRATE.floatsInWater = true;
 		Templates.CRATE.weight = 100f;
 		Templates.CRATE.value = 20;
-		Templates.CRATE.anchorX = 0;
-		Templates.CRATE.anchorY = 0;
 		Templates.CRATE.lockable = false;
 		Templates.CRATE.templateId = GameObject.generateNewTemplateId();
+		Templates.CRATE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
 		Templates.CRATE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(4));
 		Templates.CRATE.flipYAxisInMirror = false;
+
+		Templates.CRATE_WITH_ETCHING = new Storage();
+		Templates.CRATE_WITH_ETCHING.name = "Crate with Etching";
+		Templates.CRATE_WITH_ETCHING.baseName = "Crate with Etching";
+		Templates.CRATE_WITH_ETCHING.storageClosedTexture = ResourceUtils.getGlobalImage("crate_with_etching.png",
+				true);
+		Templates.CRATE_WITH_ETCHING.storageOpenTexture = ResourceUtils.getGlobalImage("crate_with_etching_open.png",
+				true);
+		Templates.CRATE_WITH_ETCHING.totalHealth = Templates.CRATE.remainingHealth = 58;
+		Templates.CRATE_WITH_ETCHING.floatsInWater = true;
+		Templates.CRATE_WITH_ETCHING.weight = 100f;
+		Templates.CRATE_WITH_ETCHING.value = 20;
+		Templates.CRATE_WITH_ETCHING.lockable = false;
+		Templates.CRATE_WITH_ETCHING.templateId = GameObject.generateNewTemplateId();
+		Templates.CRATE_WITH_ETCHING.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-50));
+		Templates.CRATE_WITH_ETCHING.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(4));
+		Templates.CRATE_WITH_ETCHING.flipYAxisInMirror = false;
 
 		Templates.LOST_AND_FOUND = new Storage();
 		Templates.LOST_AND_FOUND.name = "Lost and Found";

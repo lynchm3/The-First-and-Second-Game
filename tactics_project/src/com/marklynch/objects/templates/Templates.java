@@ -263,6 +263,7 @@ public class Templates {
 	public static Storage CHEST;
 
 	public static Storage CRATE;
+	public static Storage CRATE_WITH_ETCHING;
 
 	public static Storage LOST_AND_FOUND;
 

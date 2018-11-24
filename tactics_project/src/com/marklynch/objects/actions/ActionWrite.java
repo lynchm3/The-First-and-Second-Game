@@ -38,7 +38,8 @@ public class ActionWrite extends Action {
 
 		ConversationPart conversationPart = new ConversationPart(text, new ConversationResponse[] {}, null);
 		Conversation conversation = new Conversation(conversationPart, target, true);
-		target.setConversation(conversation);
+		target.conversation = conversation;
+
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " updated ", target }));
 		performer.actionsPerformedThisTurn.add(this);

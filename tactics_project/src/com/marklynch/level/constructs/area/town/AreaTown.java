@@ -108,6 +108,9 @@ public class AreaTown {
 		Templates.CRATE.makeCopy(Level.squares[posX + 19][posY + 2], false, null);
 		Templates.CRATE.makeCopy(Level.squares[posX + 19][posY + 3], false, null);
 		Templates.CRATE.makeCopy(Level.squares[posX + 20][posY + 2], false, null);
+		GameObject createWithEtching = Templates.CRATE_WITH_ETCHING.makeCopy(Level.squares[posX + 20][posY + 3], false,
+				null);
+		createWithEtching.conversation = createWithEtching.createConversation(new Object[] { "For Velentine Shop" });
 
 		// Doctor's Practice
 		Doctor doctor = Templates.DOCTOR.makeCopy("Doctor Mike", Game.level.squares[posX + 7 + 35][posY + 1 + 3],

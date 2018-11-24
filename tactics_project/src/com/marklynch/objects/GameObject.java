@@ -151,7 +151,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean moveable = true;
 	public boolean canBePickedUp = true;
 	public boolean decorative = false;
-	public boolean floats = false;
+	public boolean floatsInWater = false;
 	public boolean isFloorObject = false;
 
 	public int value = 1;
@@ -691,7 +691,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (squareGameObjectIsOn.inventory.waterBody == null)
 			return;
-		if (!floats)
+		if (!floatsInWater)
 			return;
 		// Draw object
 		if (squareGameObjectIsOn != null) {
@@ -1398,10 +1398,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return conversation;
 	}
 
-	public void setConversation(Conversation conversation) {
-		this.conversation = conversation;
-		conversation.openingConversationPart.talker = this;
-	}
+	// public void setConversation(Conversation conversation) {
+	// this.conversation = conversation;
+	// conversation.openingConversationPart.talker = this;
+	// }
 
 	public void setOnReadListener(ActionListener actionListener) {
 		this.onReadListener = actionListener;
@@ -1914,7 +1914,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.anchorY = anchorY;
 		gameObject.name = name;
 		gameObject.value = value;
-		gameObject.floats = floats;
+		gameObject.floatsInWater = floatsInWater;
 
 		for (HIGH_LEVEL_STATS statKey : this.highLevelStats.keySet()) {
 			gameObject.highLevelStats.put(statKey, this.highLevelStats.get(statKey).makeCopy());
