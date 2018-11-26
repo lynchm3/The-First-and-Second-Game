@@ -291,6 +291,7 @@ public class TemplatesFurniture {
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
 
 		Templates.WOODEN_SUPPORT = new WallSupport();
+		Templates.WOODEN_SUPPORT.name = "Support";
 		Templates.WOODEN_SUPPORT.setImageAndExtrapolateSize("wooden_support.png");
 		Templates.WOODEN_SUPPORT.totalHealth = Templates.WOODEN_SUPPORT.remainingHealth = 10;
 		Templates.WOODEN_SUPPORT.drawOffsetRatioX = -0.25f;

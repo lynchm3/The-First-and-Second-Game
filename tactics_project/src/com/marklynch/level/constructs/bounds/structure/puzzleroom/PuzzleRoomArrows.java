@@ -29,7 +29,7 @@ public class PuzzleRoomArrows extends StructureRoom {
 		// Diggable
 		GameObject mound = Templates.MOUND.makeCopy(Level.squares[posX + diggableX][posY + diggableY], null, 50);
 		mound.inventory.add(Templates.ROCK.makeCopy(null, null));
-		mound.inventory.add(Templates.GOLD.makeCopy(null, null, 34));
+		mound.inventory.add(Templates.GOLD.makeCopy(null, null, 102));
 
 		// Shovel. Could put shovel in box?
 		Templates.SHOVEL.makeCopy(Level.squares[this.posX + 4][this.posY + 12], null);

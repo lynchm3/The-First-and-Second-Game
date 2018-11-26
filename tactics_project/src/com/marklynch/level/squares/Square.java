@@ -804,8 +804,17 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 			// gameObject.imageTexture.getTexture().
 
-			int x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
+			int x = 0;
+			if (gameObject.backwards) {
+				x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
+						+ Game.SQUARE_WIDTH * -gameObject.drawOffsetRatioX);
+			} else {
+				x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
+						+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
+			}
+
+			// int x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
+			// + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
 			int y = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
 			if (gameObject.getPrimaryAnimation() != null) {
