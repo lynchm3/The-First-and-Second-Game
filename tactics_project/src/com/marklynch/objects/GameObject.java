@@ -411,8 +411,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw1();
 
-		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-				+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+		int actorPositionXInPixels = 0;
+		if (backwards) {
+			actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * -drawOffsetRatioX);
+		} else {
+			actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+		}
 		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
 		float alpha = 1.0f;

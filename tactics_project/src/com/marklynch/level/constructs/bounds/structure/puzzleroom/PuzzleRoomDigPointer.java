@@ -288,7 +288,9 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 			fallawayWalls1.add(Templates.WALL.makeCopy(fallawayWallsSquare1, null));
 		}
 
-		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 36][posY + 33], null, fallawayWalls1);
+		GameObject woodenSupport1 = Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 36][posY + 33], null,
+				fallawayWalls1);
+		woodenSupport1.backwards = true;
 
 		// fallaway walls 2
 		ArrayList<Square> fallawayWallsSquares2 = new ArrayList<Square>();
@@ -326,7 +328,7 @@ public class PuzzleRoomDigPointer extends StructureRoom {
 			fallawayWalls2.add(Templates.WALL.makeCopy(fallawayWallsSquare2, null));
 		}
 
-		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 30][posY + 18], null, fallawayWalls2);
+		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 52][posY + 28], null, fallawayWalls2);
 
 		// wall inits
 
