@@ -133,6 +133,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	// public enum STATS;
 
 	// Template id
+	public long id;
 	public int templateId;
 	public String name = "";
 	public int totalHealth = 0;
@@ -1910,6 +1911,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return currentTemplateIdCount;
 	}
 
+	public static int currentObjectIdCount = 0;
+
+	public static int generateNewObjectId() {
+		currentObjectIdCount++;
+		return currentObjectIdCount;
+	}
+
 	public void setAttributesForCopy(GameObject gameObject, Square square, Actor owner) {
 		gameObject.owner = owner;
 		gameObject.squareGameObjectIsOn = square;
@@ -1947,6 +1955,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.maxRange = maxRange;
 
 		gameObject.templateId = templateId;
+		gameObject.id = generateNewObjectId();
 
 		gameObject.diggable = diggable;
 		gameObject.flipYAxisInMirror = flipYAxisInMirror;
