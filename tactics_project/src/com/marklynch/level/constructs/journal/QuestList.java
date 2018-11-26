@@ -10,7 +10,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomChasm;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomCrumblingWall;
-import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomDigPointer;
+import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomArrows;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomFallawayFloor;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMaze;
 import com.marklynch.level.constructs.bounds.structure.puzzleroom.PuzzleRoomMineCart;
@@ -121,7 +121,7 @@ public class QuestList extends ArrayList<Quest> {
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 53][puzzleRoomsY + 91]);
 
 		// ROOM Dig pointer
-		puzzleStructureRooms.add(new PuzzleRoomDigPointer(puzzleRoomsX + 6, puzzleRoomsY + 92));
+		puzzleStructureRooms.add(new PuzzleRoomArrows(puzzleRoomsX + 6, puzzleRoomsY + 92));
 
 		// DOORWAY fallaway floor to chambers 1
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 66][puzzleRoomsY + 30]);
