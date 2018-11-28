@@ -17,9 +17,7 @@ import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
 
 public class Save {
@@ -102,11 +100,7 @@ public class Save {
 					} else if (value instanceof Square) {
 						preparedStatement.setLong(count, ((Square) value).id);
 					} else if (value instanceof InventorySquare) {
-						preparedStatement.setString(count, "TODO InventroySquare class");
-					} else if (value instanceof Actor) {
-						preparedStatement.setString(count, "TODO Actor class");
-					} else if (value instanceof HidingPlace) {
-						preparedStatement.setString(count, "TODO HidingPlace class");
+						preparedStatement.setLong(count, ((InventorySquare) value).id);
 					} else if (value instanceof Float) {
 						preparedStatement.setFloat(count, (Float) value);
 					} else if (value instanceof Quest) {

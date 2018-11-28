@@ -72,7 +72,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
 
-	public final int elevation;
+	public int elevation;
 	public int travelCost;
 	public SquareInventory inventory;
 	public boolean showInventory;
@@ -86,7 +86,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	// image
 	public String imageTexturePath;
-	public transient Texture floorImageTexture = null;
+	public Texture floorImageTexture = null;
 	public static Texture GRASS_TEXTURE;
 	public static Texture DARK_GRASS_TEXTURE;
 	public static Texture STONE_TEXTURE;
@@ -110,8 +110,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public static Texture ATTACK_TOP_BORDER_TEXTURE;
 	public static Texture ATTACK_BOTTOM_BORDER_TEXTURE;
 	public static Texture SOUND_TEXTURE;
-
-	public transient boolean showingDialogs = false;
 
 	public transient Area areaSquareIsIn;
 	public transient Structure structureSquareIsIn;
@@ -149,10 +147,12 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	// end path finding
 	public Node node;
 
+	public Square() {
+	}
+
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory,
 			boolean restricted, Actor... owners) {
 		this(x, y, imagePath, null, travelCost, elevation, inventory, restricted, owners);
-
 	}
 
 	public Square(int x, int y, String imagePath, Texture imageTexture, int travelCost, int elevation,

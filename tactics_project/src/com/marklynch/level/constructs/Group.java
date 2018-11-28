@@ -5,13 +5,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.Level;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
 public class Group {
-	public long id;
+	public Long id;
 
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 
@@ -28,6 +29,7 @@ public class Group {
 
 	public Group(String name, Actor... members) {
 		super();
+		id = Level.generateNewId(this);
 		this.name = name;
 		this.members = new ArrayList<Actor>(Arrays.asList(members));
 		this.leader = this.members.get(0);

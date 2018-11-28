@@ -151,6 +151,7 @@ public abstract class Action {
 
 	public Action(String actionName, Texture image, GameObject gameObjectPerformer, Object targetGameObjectOrSquare) {
 		super();
+		id = Level.generateNewId(this);
 		this.gameObjectPerformer = gameObjectPerformer;
 		if (gameObjectPerformer instanceof Actor) {
 			this.performer = (Actor) this.gameObjectPerformer;
