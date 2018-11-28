@@ -26,6 +26,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public ArrayList<GameObject> gameObjectsGround = new ArrayList<GameObject>();
 	public ArrayList<GameObject> gameObjectsNonGround = new ArrayList<GameObject>();
 
+	public SquareInventory() {
+
+	}
+
 	@Override
 	public void postLoad1() {
 	}

@@ -133,7 +133,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Square squareGameObjectIsOn = null;
 	public Square lastSquare = null;
 	public InventorySquare inventorySquare = null;
-	public Inventory inventory = new Inventory();
+	public Inventory inventory;
 	public boolean showInventoryInGroundDisplay = false;;
 	public boolean canShareSquare = true;
 	public boolean fitsInInventory = true;

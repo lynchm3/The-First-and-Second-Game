@@ -17,7 +17,57 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Bed;
+import com.marklynch.objects.Carcass;
+import com.marklynch.objects.Consumable;
+import com.marklynch.objects.Corpse;
+import com.marklynch.objects.DamageDealer;
+import com.marklynch.objects.Discoverable;
+import com.marklynch.objects.Door;
+import com.marklynch.objects.Fence;
+import com.marklynch.objects.Food;
+import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.GameObjectExploder;
+import com.marklynch.objects.Gate;
+import com.marklynch.objects.Gold;
+import com.marklynch.objects.HidingPlace;
+import com.marklynch.objects.Inspectable;
+import com.marklynch.objects.Key;
+import com.marklynch.objects.Landmine;
+import com.marklynch.objects.Liquid;
+import com.marklynch.objects.MapMarker;
+import com.marklynch.objects.Matches;
+import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.MineCart;
+import com.marklynch.objects.Mirror;
+import com.marklynch.objects.Openable;
+import com.marklynch.objects.Orb;
+import com.marklynch.objects.Portal;
+import com.marklynch.objects.PressurePlate;
+import com.marklynch.objects.PressurePlateRequiringSpecificItem;
+import com.marklynch.objects.Rail;
+import com.marklynch.objects.RemoteDoor;
+import com.marklynch.objects.Roof;
+import com.marklynch.objects.Searchable;
+import com.marklynch.objects.Seesaw;
+import com.marklynch.objects.SmallHidingPlace;
+import com.marklynch.objects.Stampable;
+import com.marklynch.objects.Storage;
+import com.marklynch.objects.Stump;
+import com.marklynch.objects.Switch;
+import com.marklynch.objects.SwitchListener;
+import com.marklynch.objects.Tree;
+import com.marklynch.objects.UpdatesWhenSquareContentsChange;
+import com.marklynch.objects.Vein;
+import com.marklynch.objects.VoidHole;
+import com.marklynch.objects.Wall;
+import com.marklynch.objects.WallSupport;
+import com.marklynch.objects.WallWithCrack;
+import com.marklynch.objects.WantedPoster;
+import com.marklynch.objects.WaterBody;
+import com.marklynch.objects.WaterSource;
+import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.utils.Texture;
 
@@ -30,8 +80,68 @@ public class Save {
 	// 3. run save
 
 	public static void save() {
+
+		// LVL 3 subclass
+		saveType(Gate.class);
+		saveType(Seesaw.class);
+
+		// LVL 2 subclass
+		saveType(Door.class);
+		saveType(Fence.class);
+		saveType(Furnace.class);
+		saveType(HidingPlace.class);
+		saveType(Landmine.class);
+		saveType(Matches.class);
+		saveType(PressurePlate.class);
+		saveType(PressurePlateRequiringSpecificItem.class);
+		saveType(RemoteDoor.class);
+		saveType(SmallHidingPlace.class);
+		saveType(Storage.class);
+		saveType(Vein.class);
+		saveType(WallWithCrack.class);
+		saveType(WaterBody.class);
+
+		// LVL 1 subclass
+		saveType(Bed.class);
+		saveType(Carcass.class);
+		saveType(Corpse.class);
+		saveType(Discoverable.class);
+		saveType(Food.class);
+		saveType(GameObjectExploder.class);
+		saveType(Gold.class);
+		saveType(Inspectable.class);
+		saveType(Key.class);
+		saveType(Liquid.class);
+		saveType(MapMarker.class);
+		saveType(MeatChunk.class);
+		saveType(MineCart.class);
+		saveType(Mirror.class);
+		saveType(Openable.class);
+		saveType(Orb.class);
+		saveType(Portal.class);
+		saveType(Rail.class);
+		saveType(Roof.class);
+		saveType(Searchable.class);
+		saveType(Stampable.class);
+		saveType(Stump.class);
+		saveType(Switch.class);
+		saveType(Tree.class);
+		saveType(VoidHole.class);
+		saveType(Wall.class);
+		saveType(WallSupport.class);
+		saveType(WantedPoster.class);
+		saveType(WaterSource.class);
+		saveType(Window.class);
+
+		// GameObject itself THE SUPERCLASS
 		saveType(GameObject.class);
-		// saveType(Door.class);
+
+		// interface
+		saveType(Consumable.class);
+		saveType(DamageDealer.class);
+		saveType(SwitchListener.class);
+		saveType(UpdatesWhenSquareContentsChange.class);
+
 	}
 
 	private static void saveType(Class clazz) {

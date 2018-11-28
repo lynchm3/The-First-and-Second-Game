@@ -173,20 +173,40 @@ public class Load {
 							field.set(objectToLoad, square);
 						}
 					} else if (type.isAssignableFrom(Quest.class)) {
-
-					} else if (type.isAssignableFrom(GameObject[].class)) {
+						Long squareId = resultSet.getLong(count);
+						if (squareId != 0) {
+							Quest square = (Quest) Level.ids.get(squareId);
+							field.set(objectToLoad, square);
+						}
 
 					} else if (type.isAssignableFrom(Group.class)) {
+						Long squareId = resultSet.getLong(count);
+						if (squareId != 0) {
+							Group square = (Group) Level.ids.get(squareId);
+							field.set(objectToLoad, square);
+						}
 
 					} else if (type.isAssignableFrom(Action.class)) {
+						Long squareId = resultSet.getLong(count);
+						if (squareId != 0) {
+							Action square = (Action) Level.ids.get(squareId);
+							field.set(objectToLoad, square);
+						}
 
 					} else if (type.isAssignableFrom(Enhancement.class)) {
+						Long squareId = resultSet.getLong(count);
+						if (squareId != 0) {
+							Enhancement square = (Enhancement) Level.ids.get(squareId);
+							field.set(objectToLoad, square);
+						}
 
 					} else if (type.isAssignableFrom(HashMap.class)) {
 
 					} else if (type.isAssignableFrom(ArrayList.class)) {
 
 					} else if (type.isAssignableFrom(Object.class)) {
+
+					} else if (type.isAssignableFrom(GameObject[].class)) {
 
 					} else {
 						// nulls
