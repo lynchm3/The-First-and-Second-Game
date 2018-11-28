@@ -13,8 +13,6 @@ public class Corpse extends GameObject {
 	public Corpse() {
 		super();
 		baseName = new String(name);
-		if (this.inventory.size() == 0)
-			this.name = baseName + " (empty)";
 
 		fitsInInventory = false;
 
