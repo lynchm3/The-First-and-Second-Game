@@ -7,7 +7,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.objects.Bed;
-import com.marklynch.objects.BigGameObject;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
@@ -54,7 +54,7 @@ public class TemplatesFurniture {
 		Templates.MIRROR.templateId = GameObject.generateNewTemplateId();
 		Templates.MIRROR.flipYAxisInMirror = false;
 
-		Templates.SHOP_COUNTER = new BigGameObject();
+		Templates.SHOP_COUNTER = new GameObject();
 		Templates.SHOP_COUNTER.name = "Shop Counter";
 		Templates.SHOP_COUNTER.setImageAndExtrapolateSize("shop_counter.png");
 		Templates.SHOP_COUNTER.totalHealth = Templates.SHOP_COUNTER.remainingHealth = 50;
@@ -65,7 +65,7 @@ public class TemplatesFurniture {
 		Templates.SHOP_COUNTER.templateId = GameObject.generateNewTemplateId();
 		Templates.SHOP_COUNTER.flipYAxisInMirror = false;
 
-		Templates.TABLE = new BigGameObject();
+		Templates.TABLE = new GameObject();
 		Templates.TABLE.name = "Table";
 		Templates.TABLE.setImageAndExtrapolateSize("table.png");
 		Templates.TABLE.totalHealth = Templates.TABLE.remainingHealth = 35;
@@ -76,7 +76,7 @@ public class TemplatesFurniture {
 		Templates.TABLE.templateId = GameObject.generateNewTemplateId();
 		Templates.TABLE.flipYAxisInMirror = false;
 
-		Templates.CHAIR = new BigGameObject();
+		Templates.CHAIR = new GameObject();
 		Templates.CHAIR.name = "Chair";
 		Templates.CHAIR.setImageAndExtrapolateSize("chair.png");
 		Templates.CHAIR.totalHealth = Templates.CHAIR.remainingHealth = 27;
@@ -87,7 +87,7 @@ public class TemplatesFurniture {
 		Templates.CHAIR.templateId = GameObject.generateNewTemplateId();
 		Templates.CHAIR.flipYAxisInMirror = false;
 
-		Templates.BENCH = new BigGameObject();
+		Templates.BENCH = new GameObject();
 		Templates.BENCH.name = "Bench";
 		Templates.BENCH.setImageAndExtrapolateSize("bench.png");
 		Templates.BENCH.totalHealth = Templates.BENCH.remainingHealth = 31;
@@ -98,7 +98,7 @@ public class TemplatesFurniture {
 		Templates.BENCH.templateId = GameObject.generateNewTemplateId();
 		Templates.BENCH.flipYAxisInMirror = false;
 
-		Templates.CHAIR_FALLEN = new BigGameObject();
+		Templates.CHAIR_FALLEN = new GameObject();
 		Templates.CHAIR_FALLEN.name = "Chair";
 		Templates.CHAIR_FALLEN.setImageAndExtrapolateSize("chair_fallen.png");
 		Templates.CHAIR_FALLEN.totalHealth = Templates.CHAIR_FALLEN.remainingHealth = 27;

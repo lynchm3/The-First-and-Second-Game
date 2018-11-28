@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.enchantment.Enhancement;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
@@ -97,12 +98,17 @@ public class Save {
 						preparedStatement.setBoolean(count, (Boolean) value);
 					} else if (value instanceof String) {
 						preparedStatement.setString(count, (String) value);
-					} else if (value instanceof Square) {
-						preparedStatement.setLong(count, ((Square) value).id);
-					} else if (value instanceof InventorySquare) {
-						preparedStatement.setLong(count, ((InventorySquare) value).id);
 					} else if (value instanceof Float) {
 						preparedStatement.setFloat(count, (Float) value);
+					} else if (value instanceof Texture) {
+						preparedStatement.setString(count, ((Texture) value).path);
+						// Non-simple
+					} else if (value instanceof InventorySquare) {
+						preparedStatement.setLong(count, ((InventorySquare) value).id);
+					} else if (value instanceof Inventory) {
+						preparedStatement.setLong(count, ((Inventory) value).id);
+					} else if (value instanceof Square) {
+						preparedStatement.setLong(count, ((Square) value).id);
 					} else if (value instanceof Quest) {
 						preparedStatement.setLong(count, ((Quest) value).id);
 					} else if (value instanceof GameObject[]) {
@@ -119,8 +125,6 @@ public class Save {
 					} else if (value instanceof ArrayList<?>) {
 						// effects array, actions this turn array
 						preparedStatement.setString(count, "TODO ArrayList<?> class");
-					} else if (value instanceof Texture) {
-						preparedStatement.setString(count, ((Texture) value).path);
 					} else if (value instanceof Object) {
 						preparedStatement.setString(count, "TODO Object class");
 					} else if (value == null) {

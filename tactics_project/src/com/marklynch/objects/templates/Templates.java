@@ -5,7 +5,7 @@ import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.level.quest.thesecretroom.Kidnapper;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.Bed;
-import com.marklynch.objects.BigGameObject;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Corpse;
@@ -227,17 +227,17 @@ public class Templates {
 
 	public static Mirror MIRROR;
 
-	public static BigGameObject SHOP_COUNTER;
+	public static GameObject SHOP_COUNTER;
 
-	public static BigGameObject TABLE;
+	public static GameObject TABLE;
 
-	public static BigGameObject CHAIR;
+	public static GameObject CHAIR;
 
-	public static BigGameObject BENCH;
+	public static GameObject BENCH;
 
-	public static BigGameObject CHAIR_FALLEN;
+	public static GameObject CHAIR_FALLEN;
 
-	public static BigGameObject BARRICADE;
+	public static GameObject BARRICADE;
 
 	public static GameObject ROCK_WITH_ETCHING;
 
@@ -305,7 +305,7 @@ public class Templates {
 
 	public static WaterBody WATER_BODY;
 
-	public static BigGameObject BOULDER;
+	public static GameObject BOULDER;
 
 	public static Arrow ARROW;
 
@@ -316,7 +316,7 @@ public class Templates {
 	public static GameObject ROCK;
 
 	// LARGE CONTAINER
-	public static BigGameObject DUMPSTER;
+	public static GameObject DUMPSTER;
 
 	public static GameObject TROUGH;
 

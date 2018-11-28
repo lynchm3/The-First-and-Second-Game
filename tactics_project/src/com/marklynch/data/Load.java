@@ -11,9 +11,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.SquareInventory;
+import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
@@ -165,14 +169,27 @@ public class Load {
 					} else if (type.isAssignableFrom(Square.class)) {
 						Long squareId = resultSet.getLong(count);
 						if (squareId != 0) {
-							System.out.println("squareId = " + squareId);
 							Square square = (Square) Level.ids.get(squareId);
 							field.set(objectToLoad, square);
-							System.out.println("square = " + square);
-							System.out.println("square.inventory =" + square.inventory);
-							square.inventory.add((GameObject) objectToLoad);
 						}
+					} else if (type.isAssignableFrom(Quest.class)) {
 
+					} else if (type.isAssignableFrom(GameObject[].class)) {
+
+					} else if (type.isAssignableFrom(Group.class)) {
+
+					} else if (type.isAssignableFrom(Action.class)) {
+
+					} else if (type.isAssignableFrom(Enhancement.class)) {
+
+					} else if (type.isAssignableFrom(HashMap.class)) {
+
+					} else if (type.isAssignableFrom(ArrayList.class)) {
+
+					} else if (type.isAssignableFrom(Object.class)) {
+
+					} else {
+						// nulls
 					}
 
 					count++;
@@ -182,7 +199,9 @@ public class Load {
 			resultSet.close();
 			conn.close();
 
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			System.err.println("loadType() error");
 			e.printStackTrace();
 		}

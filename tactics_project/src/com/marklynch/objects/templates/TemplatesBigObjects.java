@@ -1,13 +1,13 @@
 package com.marklynch.objects.templates;
 
-import com.marklynch.objects.BigGameObject;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObject;
 
 public class TemplatesBigObjects {
 
 	public TemplatesBigObjects() {
 
-		Templates.BARRICADE = new BigGameObject();
+		Templates.BARRICADE = new GameObject();
 		Templates.BARRICADE.name = "Barricade";
 		Templates.BARRICADE.setImageAndExtrapolateSize("barricade.png");
 		Templates.BARRICADE.totalHealth = Templates.BARRICADE.remainingHealth = 100;
@@ -18,7 +18,7 @@ public class TemplatesBigObjects {
 		Templates.BARRICADE.templateId = GameObject.generateNewTemplateId();
 		Templates.BARRICADE.flipYAxisInMirror = false;
 
-		Templates.BOULDER = new BigGameObject();
+		Templates.BOULDER = new GameObject();
 		Templates.BOULDER.name = "Boulder";
 		Templates.BOULDER.setImageAndExtrapolateSize("boulder.png");
 		Templates.BOULDER.totalHealth = Templates.BOULDER.remainingHealth = 1000;
@@ -30,7 +30,7 @@ public class TemplatesBigObjects {
 		Templates.BOULDER.templateId = GameObject.generateNewTemplateId();
 		Templates.BOULDER.flipYAxisInMirror = false;
 
-		Templates.DUMPSTER = new BigGameObject();
+		Templates.DUMPSTER = new GameObject();
 		Templates.DUMPSTER.name = "Dumpster";
 		Templates.DUMPSTER.setImageAndExtrapolateSize("skip_with_shadow.png");
 		Templates.DUMPSTER.totalHealth = Templates.DUMPSTER.remainingHealth = 100;
@@ -41,7 +41,7 @@ public class TemplatesBigObjects {
 		Templates.DUMPSTER.templateId = GameObject.generateNewTemplateId();
 		Templates.DUMPSTER.flipYAxisInMirror = false;
 
-		Templates.TROUGH = new BigGameObject();
+		Templates.TROUGH = new GameObject();
 		Templates.TROUGH.name = "Trough";
 		Templates.TROUGH.setImageAndExtrapolateSize("trough.png");
 		Templates.TROUGH.totalHealth = Templates.TROUGH.remainingHealth = 29;

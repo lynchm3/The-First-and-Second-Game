@@ -7,7 +7,6 @@ import java.util.HashMap;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Discoverable;
@@ -46,13 +45,11 @@ import com.marklynch.utils.TextureUtils;
 
 public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
-	public Animation animation;
-
-	public enum INVENTORY_STATE {
+	public static enum INVENTORY_STATE {
 		DEFAULT, ADD_OBJECT, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
 	}
 
-	public transient INVENTORY_STATE inventoryState = INVENTORY_STATE.DEFAULT;
+	public static transient INVENTORY_STATE inventoryState = INVENTORY_STATE.DEFAULT;
 
 	public enum INVENTORY_SORT_BY {
 		SORT_ALPHABETICALLY, SORT_BY_NEWEST, SORT_BY_VALUE, SORT_BY_FAVOURITE, SORT_BY_TOTAL_DAMAGE, SORT_BY_SLASH_DAMAGE, SORT_BY_BLUNT_DAMAGE, SORT_BY_PIERCE_DAMAGE, SORT_BY_FIRE_DAMAGE, SORT_BY_WATER_DAMAGE, SORT_BY_POISON_DAMAGE, SORT_BY_ELECTRICAL_DAMAGE, SORT_BY_BLEEDING_DAMAGE, SORT_BY_HEALING, SORT_BY_MAX_RANGE, SORT_BY_MIN_RANGE
@@ -77,86 +74,86 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public int squareGridWidthInSquares = 5;
 	public transient ArrayList<InventorySquare> inventorySquares = new ArrayList<InventorySquare>();
 	public ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-	protected ArrayList<GameObject> filteredGameObjects = new ArrayList<GameObject>();
+	public ArrayList<GameObject> filteredGameObjects = new ArrayList<GameObject>();
 
-	private transient boolean isOpen = false;
+	public transient boolean isOpen = false;
 	public transient float squaresX = 0;
 
-	transient float sortButtonX = 400;
-	transient float sortButtonWidth = 100;
-	transient int actorX = 100;
-	transient int actorWidth = 256;
-	transient static int topBorderHeight = 128;
-	transient float squaresY = topBorderHeight;
-	transient final static float squaresBaseY = topBorderHeight;
+	public transient float sortButtonX = 400;
+	public transient float sortButtonWidth = 100;
+	public transient int actorX = 100;
+	public transient int actorWidth = 256;
+	public transient static int topBorderHeight = 128;
+	public transient float squaresY = topBorderHeight;
+	public transient final static float squaresBaseY = topBorderHeight;
 	public final static float inventoryNamesY = topBorderHeight - 64f;
-	transient static int bottomBorderHeight = 256;
-	transient InventorySquare inventorySquareMouseIsOver;
+	public transient static int bottomBorderHeight = 256;
+	public transient InventorySquare inventorySquareMouseIsOver;
 
 	// Sort buttons
-	static LevelButton selectedSortButton;
+	public static LevelButton selectedSortButton;
 	public static String selectedSortButtonString;
 	public static int selectedSortButtonLength;
 
-	static LevelButton buttonSortAlphabetically;
+	public static LevelButton buttonSortAlphabetically;
 	public final static String stringSortAlphabetically = "A - Z";
 	public final static int lengthSortAlphabetically = Game.smallFont.getWidth(stringSortAlphabetically);
-	static LevelButton buttonSortByNewest;
+	public static LevelButton buttonSortByNewest;
 	public final static String stringSortByNewest = "NEW";
 	public final static int lengthSortByNewest = Game.smallFont.getWidth(stringSortByNewest);
-	static LevelButton buttonSortByFavourite;
+	public static LevelButton buttonSortByFavourite;
 	public final static String stringSortByFavourite = "FAV";
 	public final static int lengthSortByFavourite = Game.smallFont.getWidth(stringSortByFavourite);
-	static LevelButton buttonSortByValue;
+	public static LevelButton buttonSortByValue;
 	public final static String stringSortByValue = "VALUE";
 	public final static int lengthSortByValue = Game.smallFont.getWidth(stringSortByValue);
-	static LevelButton buttonSortByTotalDamage;
+	public static LevelButton buttonSortByTotalDamage;
 	public final static String stringSortByTotalDamage = "DMG";
 	public final static int lengthSortByTotalDamage = Game.smallFont.getWidth(stringSortByTotalDamage);
-	static LevelButton buttonSortBySlashDamage;
+	public static LevelButton buttonSortBySlashDamage;
 	public final static String stringSortBySlashDamage = "SLASH DMG";
 	public final static int lengthSortBySlashDamage = Game.smallFont.getWidth(stringSortBySlashDamage);
 
 	// Filter buttons
-	static LevelButton buttonFilterByAll;
-	static LevelButton buttonFilterByWeapon;
-	static LevelButton buttonFilterByArmor;
-	static LevelButton buttonFilterByEquipped;
-	static LevelButton buttonFilterByFood;
+	public static LevelButton buttonFilterByAll;
+	public static LevelButton buttonFilterByWeapon;
+	public static LevelButton buttonFilterByArmor;
+	public static LevelButton buttonFilterByEquipped;
+	public static LevelButton buttonFilterByFood;
 
 	// Empty text
 	public static final String stringEmpty = "Empty";
 	public static final int lengthEmpty = Game.smallFont.getWidth(stringEmpty);
 
 	// SHIFT text
-	String stringShiftDrop = "[SHIFT] Drop";
-	int lengthShiftDrop = Game.smallFont.getWidth(stringShiftDrop);
-	String stringShiftPut = "[SHIFT] Put";
-	int lengthShiftPut = Game.smallFont.getWidth(stringShiftPut);
-	String stringShiftEquip = "[SHIFT] Equip";
-	int lengthShiftEquip = Game.smallFont.getWidth(stringShiftEquip);
+	public static String stringShiftDrop = "[SHIFT] Drop";
+	public static int lengthShiftDrop = Game.smallFont.getWidth(stringShiftDrop);
+	public static String stringShiftPut = "[SHIFT] Put";
+	public static int lengthShiftPut = Game.smallFont.getWidth(stringShiftPut);
+	public static String stringShiftEquip = "[SHIFT] Equip";
+	public static int lengthShiftEquip = Game.smallFont.getWidth(stringShiftEquip);
 
-	float textShiftX = 0;
-	float textShiftY = 0;
-	float textOtherShiftX = 0;
+	public static float textShiftX = 0;
+	public static float textShiftY = 0;
+	public static float textOtherShiftX = 0;
 
 	// [ENTER] / Search text
-	String stringEnterSearch = "[ENTER] Search";
-	int lengthEnterSearch = Game.smallFont.getWidth(stringEnterSearch);
+	public static String stringEnterSearch = "[ENTER] Search";
+	public static int lengthEnterSearch = Game.smallFont.getWidth(stringEnterSearch);
 
 	// [<-] / Clear search text
-	String stringClearSearch = "[<-] Clear";
-	int lengthClearSearch = Game.smallFont.getWidth(stringClearSearch);
+	public static String stringClearSearch = "[<-] Clear";
+	public static int lengthClearSearch = Game.smallFont.getWidth(stringClearSearch);
 
 	// "Search:" tag
-	String stringSearch = "Search:";
-	int lengthSearch = Game.smallFont.getWidth(stringSearch);
+	public static String stringSearch = "Search:";
+	public static int lengthSearch = Game.smallFont.getWidth(stringSearch);
 
 	// Color beind inventory squares
 	public final static Color inventoryAreaColor = new Color(0f, 0f, 0f, 0.9f);
 
 	// Close button
-	static LevelButton buttonClose;
+	public static LevelButton buttonClose;
 
 	// Loot all button
 	public static LevelButton buttonLootAll;
@@ -173,8 +170,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static ArrayList<Button> buttonsFilter;
 
 	public InventoryParent parent;
-	public GroundDisplay groundDisplay;
-	public Inventory otherInventory;
+	public static GroundDisplay groundDisplay;
+	public static Inventory otherInventory;
 	public static ComparisonDisplay weaponComparisonDisplay;
 
 	public static float squaresAreaWidth;
@@ -197,11 +194,16 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureCornerGradient;
 	public static Texture textureSideGradient;
 	public static Texture textureTopGradient;
+	public static long id;
 
-	public TextBox textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0, TextBox.TYPE.ALL);
-	public TextBox textBoxQty = new TextBox(this, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
+	public static TextBox textBoxSearch = new TextBox(null, "", "Enter Search Term", lengthSearch + 16, 0,
+			TextBox.TYPE.ALL);
+	public static TextBox textBoxQty = new TextBox(null, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
 
 	public Inventory(GameObject... gameObjects) {
+
+		id = Level.generateNewId(this);
+
 		for (GameObject gameObject : gameObjects) {
 			add(gameObject);
 		}
@@ -1553,10 +1555,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		}
 
-		if (animation != null && !animation.getCompleted()) {
-			animation.draw2();
-		}
-
 	}
 
 	public void drawOtherInventoryText() {
@@ -1940,13 +1938,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			Level.activeTextBox = null;
 		} else {
 			Game.level.openCloseInventory();
-		}
-	}
-
-	public void updateRealtime(int delta) {
-		if (animation != null && !animation.getCompleted()) {
-			animation.update(delta);
-		} else {
 		}
 	}
 
