@@ -134,6 +134,7 @@ public class Editor {
 		colors.add(new Color(Color.CYAN));
 		colors.add(new Color(Color.ORANGE));
 
+		// Game.level = new Level(100, 100);
 		Game.level = new Level(360, 360);
 
 		for (int i = 0; i < Game.level.squares.length; i++) {

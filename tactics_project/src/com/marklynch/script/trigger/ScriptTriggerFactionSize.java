@@ -1,6 +1,5 @@
 package com.marklynch.script.trigger;
 
-import com.marklynch.Game;
 import com.marklynch.level.constructs.Faction;
 
 public class ScriptTriggerFactionSize extends ScriptTrigger {
@@ -8,7 +7,6 @@ public class ScriptTriggerFactionSize extends ScriptTrigger {
 	public transient Faction faction;
 	int size;
 	public final static String[] editableAttributes = { "name", "faction", "size" };
-	String factionGUID;
 
 	public ScriptTriggerFactionSize() {
 		this.name = this.getClass().getSimpleName();
@@ -19,7 +17,6 @@ public class ScriptTriggerFactionSize extends ScriptTrigger {
 		this.name = this.getClass().getSimpleName();
 		this.faction = faction;
 		this.size = size;
-		this.factionGUID = faction.guid;
 	}
 
 	@Override
@@ -31,7 +28,6 @@ public class ScriptTriggerFactionSize extends ScriptTrigger {
 
 	@Override
 	public void postLoad() {
-		faction = Game.level.findFactionFromGUID(factionGUID);
 	}
 
 	@Override

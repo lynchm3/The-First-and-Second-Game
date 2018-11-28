@@ -242,7 +242,6 @@ public class AttributesDialog {
 					speechPart.actors.add(Game.level.player);
 					speechPart.positions.add(100f);
 					speechPart.directions.add(true);
-					speechPart.actorsGUIDs.add(Game.level.player.guid);
 
 					Object object = AttributesDialog.this.object;
 
@@ -262,7 +261,8 @@ public class AttributesDialog {
 
 		QuadUtils.drawQuad(Color.WHITE, x, y, x + 200, y + 30);
 
-		TextUtils.printTextWithImages(x, y, 200, true, null, Color.WHITE, new Object[] { new StringWithColor(title, Color.BLACK) });
+		TextUtils.printTextWithImages(x, y, 200, true, null, Color.WHITE,
+				new Object[] { new StringWithColor(title, Color.BLACK) });
 
 		for (AtributesWindowButton button : buttons) {
 			button.draw();

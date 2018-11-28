@@ -14,11 +14,9 @@ import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
-import com.marklynch.utils.ClassUtils;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
-
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 
 public class AttributeSelectionWindow<T> {
@@ -69,20 +67,8 @@ public class AttributeSelectionWindow<T> {
 							GameObject gameObject = (GameObject) objects.get(index);
 							if (arrayList == null) {
 								field.set(ownerOfAttribute, gameObject);
-								if (ClassUtils.classContainsField(objectClass, editor.attributeToEditName + "GUID")) {
-									Field guidField = objectClass.getField(editor.attributeToEditName + "GUID");
-									if (guidField != null) {
-										guidField.set(ownerOfAttribute, gameObject.guid);
-									}
-								}
 							} else {
 								arrayList.set(editor.attributeToEditIndex, gameObject);
-								if (ClassUtils.classContainsField(objectClass, editor.attributeToEditName + "GUIDs")) {
-									Field guidField = objectClass.getField(editor.attributeToEditName + "GUIDs");
-									ArrayList arrayListGUIDs = (ArrayList) guidField.get(editor.objectToEdit);
-									arrayListGUIDs.set(editor.attributeToEditIndex, gameObject.guid);
-
-								}
 							}
 							editor.stopEditingAttribute();
 						} else if (type.isAssignableFrom(Faction.class)) {// faction
@@ -93,17 +79,8 @@ public class AttributeSelectionWindow<T> {
 								actor.faction.actors.remove(actor);
 								faction.actors.add(actor);
 								actor.faction = faction;
-								actor.factionGUID = faction.guid;
 							} else {
 								field.set(ownerOfAttribute, faction);
-								try {
-									Field guidField = objectClass.getField(editor.attributeToEditName + "GUID");
-									if (guidField != null) {
-										guidField.set(ownerOfAttribute, faction.guid);
-									}
-								} catch (Exception e) {
-
-								}
 							}
 							editor.stopEditingAttribute();
 						} else if (type.isAssignableFrom(Square.class)) {
@@ -111,14 +88,6 @@ public class AttributeSelectionWindow<T> {
 							Square square = (Square) objects.get(index);
 
 							field.set(ownerOfAttribute, square);
-							try {
-								Field guidField = objectClass.getField(editor.attributeToEditName + "GUID");
-								if (guidField != null) {
-									guidField.set(ownerOfAttribute, square.guid);
-								}
-							} catch (Exception e) {
-
-							}
 							editor.stopEditingAttribute();
 						} else if (type.isAssignableFrom(ScriptEvent.class)) {
 							ScriptEvent scriptEvent = (ScriptEvent) objects.get(index);
@@ -136,22 +105,8 @@ public class AttributeSelectionWindow<T> {
 							Actor actor = (Actor) objects.get(index);
 							if (arrayList == null) {
 								field.set(ownerOfAttribute, actor);
-								try {
-									Field guidField = objectClass.getField(editor.attributeToEditName + "GUID");
-									if (guidField != null) {
-										guidField.set(ownerOfAttribute, actor.guid);
-									}
-								} catch (Exception e) {
-
-								}
 							} else {
 								arrayList.set(editor.attributeToEditIndex, actor);
-								if (ClassUtils.classContainsField(objectClass, editor.attributeToEditName + "GUIDs")) {
-									Field guidField = objectClass.getField(editor.attributeToEditName + "GUIDs");
-									ArrayList arrayListGUIDs = (ArrayList) guidField.get(editor.objectToEdit);
-									arrayListGUIDs.set(editor.attributeToEditIndex, actor.guid);
-
-								}
 							}
 							editor.stopEditingAttribute();
 						} else if (type.isAssignableFrom(Color.class)) {// color

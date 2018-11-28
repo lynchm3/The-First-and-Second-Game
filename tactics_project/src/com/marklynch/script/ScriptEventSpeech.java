@@ -9,11 +9,10 @@ import org.lwjgl.util.vector.Vector3f;
 import com.marklynch.Game;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.script.trigger.ScriptTrigger;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 
 public class ScriptEventSpeech extends ScriptEvent {
 
@@ -74,18 +73,12 @@ public class ScriptEventSpeech extends ScriptEvent {
 		public ArrayList<String> text;
 		public boolean inline = false;
 
-		// For saving and loading
-		public ArrayList<String> actorsGUIDs = new ArrayList<String>();
-		public String talkerGUID = null;
-
 		public SpeechPart(Actor talker, ArrayList<String> text) {
 			super();
 			this.talker = talker;
 			this.text = text;
 			for (Actor actor : actors) {
-				actorsGUIDs.add(actor.guid);
 			}
-			talkerGUID = talker.guid;
 			inline = true;
 		}
 
@@ -97,10 +90,6 @@ public class ScriptEventSpeech extends ScriptEvent {
 			this.directions = directions;
 			this.talker = talker;
 			this.text = text;
-			for (Actor actor : actors) {
-				actorsGUIDs.add(actor.guid);
-			}
-			talkerGUID = talker.guid;
 			inline = false;
 
 		}

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 import org.lwjgl.input.Keyboard;
 
@@ -69,7 +68,6 @@ import com.marklynch.utils.Utils.Point;
 
 public class Square implements ActionableInWorld, InventoryParent, Comparable<Square> {
 
-	public String guid = UUID.randomUUID().toString();
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
 
 	public final int elevation;

@@ -1,13 +1,11 @@
 package com.marklynch.script.trigger;
 
-import com.marklynch.Game;
 import com.marklynch.objects.units.Actor;
 
 public class ScriptTriggerObjectNotDestroyed extends ScriptTrigger {
 
 	public transient Actor actor;
 	public final static String[] editableAttributes = { "name", "actor" };
-	public String actorGUID = null;
 
 	public ScriptTriggerObjectNotDestroyed() {
 		this.name = this.getClass().getSimpleName();
@@ -16,7 +14,6 @@ public class ScriptTriggerObjectNotDestroyed extends ScriptTrigger {
 	public ScriptTriggerObjectNotDestroyed(Actor actor) {
 		this.name = this.getClass().getSimpleName();
 		this.actor = actor;
-		this.actorGUID = actor.guid;
 
 	}
 
@@ -30,7 +27,6 @@ public class ScriptTriggerObjectNotDestroyed extends ScriptTrigger {
 
 	@Override
 	public void postLoad() {
-		actor = Game.level.findActorFromGUID(actorGUID);
 	}
 
 	@Override

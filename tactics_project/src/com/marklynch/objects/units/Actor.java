@@ -104,13 +104,10 @@ public class Actor extends GameObject {
 	public String miniDialogue = "";
 
 	public transient GameObject bed;
-	public String bedGUID = null;
 
 	public transient Faction faction;
-	public String factionGUID = null;
 
 	public GameObject equippedBeforePickingUpObject = null;
-	public String equippedWeaponGUID = null;
 
 	public Helmet helmet;
 	public BodyArmor bodyArmor;
@@ -248,18 +245,14 @@ public class Actor extends GameObject {
 			Game.level.actors.add(this);
 
 		if (bed != null)
-			this.bedGUID = bed.guid;
-		if (bed != null)
 			bed.owner = this;
 
 		ArrayList<Weapon> weapons = getWeaponsInInventory();
 		if (weapons.size() > 0 && weapons.get(0) != null) {
 			equipped = weapons.get(0);
-			equippedWeaponGUID = weapons.get(0).guid;
 		}
 
 		if (this.faction != null) {
-			factionGUID = this.faction.guid;
 			this.faction.actors.add(this);
 		}
 
@@ -295,11 +288,6 @@ public class Actor extends GameObject {
 		super.postLoad1();
 
 		ArrayList<Weapon> weapons = getWeaponsInInventory();
-
-		if (weapons.size() > 0 && weapons.get(0) != null) {
-			equippedWeaponGUID = weapons.get(0).guid;
-		}
-
 		loadImages();
 	}
 
@@ -307,36 +295,6 @@ public class Actor extends GameObject {
 	public void postLoad2() {
 		super.postLoad2();
 		super.postLoad2();
-
-		// faction
-		if (factionGUID != null) {
-			for (Faction faction : Game.level.factions) {
-				if (factionGUID.equals(faction.guid)) {
-					this.faction = faction;
-					if (!faction.actors.contains(this)) {
-						faction.actors.add(this);
-					}
-				}
-			}
-		}
-
-		// bed
-		if (bedGUID != null) {
-			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
-				if (bedGUID.equals(gameObject.guid)) {
-					this.bed = gameObject;
-				}
-			}
-		}
-
-		// equippedWeapon
-		if (equippedWeaponGUID != null) {
-			for (Weapon weapon : this.getWeaponsInInventory()) {
-				if (equippedWeaponGUID.equals(weapon.guid)) {
-					this.equip(weapon);
-				}
-			}
-		}
 	}
 
 	public final static int aiMaxPathSize = 400;
@@ -517,7 +475,6 @@ public class Actor extends GameObject {
 		for (Weapon weapon : getWeaponsInInventory()) {
 			if (range >= weapon.getEffectiveMinRange() && range <= weapon.getEffectiveMaxRange()) {
 				equip(weapon);
-				equippedWeaponGUID = weapon.guid;
 			}
 		}
 	}
@@ -1767,7 +1724,6 @@ public class Actor extends GameObject {
 
 	public void weaponButtonClicked(Weapon weapon) {
 		this.equip(weapon);
-		equippedWeaponGUID = this.equipped.guid;
 	}
 
 	// @Override

@@ -1,5 +1,6 @@
 package com.marklynch.objects.templates;
 
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inspectable;
 
@@ -53,12 +54,13 @@ public class TemplatesInspectables {
 		Templates.GIANT_FOOTPRINT.totalHealth = Templates.GIANT_FOOTPRINT.remainingHealth = 1;
 		Templates.GIANT_FOOTPRINT.widthRatio = 2f;
 		Templates.GIANT_FOOTPRINT.heightRatio = 1.5f;
-		Templates.GIANT_FOOTPRINT.drawOffsetRatioX = -0.5f;
-		Templates.GIANT_FOOTPRINT.drawOffsetRatioY = -0.25f;
-		Templates.GIANT_FOOTPRINT.weight = 0f;
-		Templates.GIANT_FOOTPRINT.value = 0;
-		Templates.GIANT_FOOTPRINT.anchorX = 0;
-		Templates.GIANT_FOOTPRINT.anchorY = 0;
+		Templates.GIANT_FOOTPRINT.canBePickedUp = false;
+		Templates.GIANT_FOOTPRINT.fitsInInventory = false;
+		Templates.GIANT_FOOTPRINT.persistsWhenCantBeSeen = true;
+		Templates.GIANT_FOOTPRINT.attackable = false;
+		Templates.GIANT_FOOTPRINT.isFloorObject = true;
+		Templates.GIANT_FOOTPRINT.moveable = false;
+		Templates.GIANT_FOOTPRINT.orderingOnGound = 20;
 		Templates.GIANT_FOOTPRINT.templateId = GameObject.generateNewTemplateId();
 
 		Templates.GIANT_FOOTPRINT_LEFT = new Inspectable();
@@ -69,10 +71,13 @@ public class TemplatesInspectables {
 		Templates.GIANT_FOOTPRINT_LEFT.heightRatio = 1.5f;
 		Templates.GIANT_FOOTPRINT_LEFT.drawOffsetRatioX = -0.5f;
 		Templates.GIANT_FOOTPRINT_LEFT.drawOffsetRatioY = -0.25f;
-		Templates.GIANT_FOOTPRINT_LEFT.weight = 0f;
-		Templates.GIANT_FOOTPRINT_LEFT.value = 0;
-		Templates.GIANT_FOOTPRINT_LEFT.anchorX = 0;
-		Templates.GIANT_FOOTPRINT_LEFT.anchorY = 0;
+		Templates.GIANT_FOOTPRINT_LEFT.canBePickedUp = false;
+		Templates.GIANT_FOOTPRINT_LEFT.fitsInInventory = false;
+		Templates.GIANT_FOOTPRINT_LEFT.persistsWhenCantBeSeen = true;
+		Templates.GIANT_FOOTPRINT_LEFT.attackable = false;
+		Templates.GIANT_FOOTPRINT_LEFT.isFloorObject = true;
+		Templates.GIANT_FOOTPRINT_LEFT.moveable = false;
+		Templates.GIANT_FOOTPRINT_LEFT.orderingOnGound = 20;
 		Templates.GIANT_FOOTPRINT_LEFT.templateId = GameObject.generateNewTemplateId();
 	}
 

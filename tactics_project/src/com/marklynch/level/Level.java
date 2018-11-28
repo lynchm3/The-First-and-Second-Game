@@ -2527,54 +2527,6 @@ public class Level {
 		this.squares = newSquares;
 	}
 
-	public Actor findActorFromGUID(String guid) {
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				if (actor.guid.equals(guid)) {
-					return actor;
-				}
-			}
-		}
-		return null;
-	}
-
-	public GameObject findObjectFromGUID(String guid) {
-		for (GameObject object : inanimateObjectsOnGround) {
-			if (object.guid.equals(guid)) {
-				return object;
-			}
-		}
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				if (actor.guid.equals(guid)) {
-					return actor;
-				}
-			}
-		}
-		return null;
-	}
-
-	public Faction findFactionFromGUID(String guid) {
-		for (Faction faction : factions) {
-			if (faction.guid.equals(guid)) {
-				return faction;
-			}
-		}
-		return null;
-	}
-
-	public Square findSquareFromGUID(String guid) {
-
-		ArrayList<Square> squares = new ArrayList<Square>();
-		for (Square[] squareArray : Game.level.squares) {
-			for (Square square : squareArray) {
-				if (square.guid.equals(guid))
-					return square;
-			}
-		}
-		return null;
-	}
-
 	public void resize() {
 		if (openInventories.size() != 0)
 			openInventories.get(0).resize1();

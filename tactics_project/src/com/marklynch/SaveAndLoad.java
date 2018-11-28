@@ -81,9 +81,6 @@ public class SaveAndLoad {
 
 		@Override
 		protected void beforeWrite(Faction object) {
-			for (Faction faction : object.relationships.keySet()) {
-				object.relationshipGUIDs.put(faction.guid, object.relationships.get(faction));
-			}
 		}
 
 		@Override

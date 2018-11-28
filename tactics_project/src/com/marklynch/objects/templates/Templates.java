@@ -373,10 +373,6 @@ public class Templates {
 
 	public static MapMarker MAP_MARKER_PORTAL;
 
-	public static Inspectable GIANT_FOOTPRINT;
-
-	public static Inspectable GIANT_FOOTPRINT_LEFT;
-
 	// TRAPS
 	public static BrokenGlass BROKEN_LAMP;
 
@@ -417,8 +413,11 @@ public class Templates {
 
 	public static Landmine LANDMINE;
 
+	// Floor
 	public static GameObject STONE_FLOOR;
 	public static GameObject CIRCLE_FLOOR;
 	public static GameObject LEAVES;
+	public static GameObject GIANT_FOOTPRINT;
+	public static GameObject GIANT_FOOTPRINT_LEFT;
 
 }

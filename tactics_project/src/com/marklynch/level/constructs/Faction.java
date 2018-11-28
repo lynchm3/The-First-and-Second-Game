@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
@@ -43,7 +41,6 @@ public class Faction {
 	public transient final int STAGE_DURATION = 1000;
 
 	// For saving and loading
-	public String guid = UUID.randomUUID().toString();
 	public Map<String, FactionRelationship> relationshipGUIDs = new HashMap<String, FactionRelationship>();
 
 	public Faction(String name, String imagePath) {
@@ -65,10 +62,6 @@ public class Faction {
 
 		currentStage = STAGE.SELECT;
 		relationships = new HashMap<Faction, FactionRelationship>();
-		for (String factionGUID : relationshipGUIDs.keySet()) {
-			relationships.put(Game.level.findFactionFromGUID(factionGUID), relationshipGUIDs.get(factionGUID));
-		}
-
 		for (Faction faction : relationships.keySet()) {
 			relationships.get(faction).postLoad(this, faction);
 		}

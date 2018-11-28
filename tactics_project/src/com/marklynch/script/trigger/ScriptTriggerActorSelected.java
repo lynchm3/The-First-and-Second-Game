@@ -8,9 +8,6 @@ public class ScriptTriggerActorSelected extends ScriptTrigger {
 	public transient Actor actor;
 	public final static String[] editableAttributes = { "name", "actor" };
 
-	// for saving and loading
-	public String actorGUID = null;
-
 	public ScriptTriggerActorSelected() {
 		this.name = this.getClass().getSimpleName();
 	}
@@ -18,7 +15,6 @@ public class ScriptTriggerActorSelected extends ScriptTrigger {
 	public ScriptTriggerActorSelected(Actor actor) {
 		this.name = this.getClass().getSimpleName();
 		this.actor = actor;
-		this.actorGUID = actor.guid;
 	}
 
 	@Override
@@ -30,7 +26,6 @@ public class ScriptTriggerActorSelected extends ScriptTrigger {
 
 	@Override
 	public void postLoad() {
-		actor = Game.level.findActorFromGUID(actorGUID);
 	}
 
 	@Override

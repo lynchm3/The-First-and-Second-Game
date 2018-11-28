@@ -1,6 +1,5 @@
 package com.marklynch.script.trigger;
 
-import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 
 public class ScriptTriggerObjectDestroyed extends ScriptTrigger {
@@ -16,7 +15,6 @@ public class ScriptTriggerObjectDestroyed extends ScriptTrigger {
 	public ScriptTriggerObjectDestroyed(GameObject gameObject) {
 		this.name = this.getClass().getSimpleName();
 		this.gameObject = gameObject;
-		this.gameObjectGUID = gameObject.guid;
 
 	}
 
@@ -30,7 +28,6 @@ public class ScriptTriggerObjectDestroyed extends ScriptTrigger {
 
 	@Override
 	public void postLoad() {
-		gameObject = Game.level.findObjectFromGUID(gameObjectGUID);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package com.marklynch.script.trigger;
 
-import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 
 public class ScriptTriggerHealthLessThan extends ScriptTrigger {
@@ -8,7 +7,6 @@ public class ScriptTriggerHealthLessThan extends ScriptTrigger {
 	public transient GameObject gameObject;
 	public int healthLimit;
 	public final static String[] editableAttributes = { "name", "gameObject", "healthLimit" };
-	public String gameObjectGUID = null;
 
 	public ScriptTriggerHealthLessThan() {
 		this.name = this.getClass().getSimpleName();
@@ -17,7 +15,6 @@ public class ScriptTriggerHealthLessThan extends ScriptTrigger {
 	public ScriptTriggerHealthLessThan(GameObject gameObject, int healthLimit) {
 		this.name = this.getClass().getSimpleName();
 		this.gameObject = gameObject;
-		this.gameObjectGUID = gameObject.guid;
 		this.healthLimit = healthLimit;
 	}
 
@@ -31,7 +28,6 @@ public class ScriptTriggerHealthLessThan extends ScriptTrigger {
 
 	@Override
 	public void postLoad() {
-		gameObject = Game.level.findObjectFromGUID(gameObjectGUID);
 	}
 
 	@Override

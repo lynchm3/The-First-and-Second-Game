@@ -4,7 +4,6 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
 
 import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Matrix4f;
@@ -122,15 +121,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
-	public String guid = UUID.randomUUID().toString();
 
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
-	// public HashMap<DEFENSIVE_STATS, Stat> highLevelStats = new
-	// HashMap<HIGH_LEVEL_STATS, Stat>();
-
-	// public enum HIGH_LEVEL_STATS {"PIZZA"}
-	// public enum DEFENSIVE_STATS;
-	// public enum STATS;
 
 	// Template id
 	public long id;
@@ -138,9 +130,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public String name = "";
 	public int totalHealth = 0;
 	public String imageTexturePath = null;
-	public transient Square squareGameObjectIsOn = null;
-	public transient Square lastSquare = null;
-	public transient InventorySquare inventorySquare = null;
+	public Square squareGameObjectIsOn = null;
+	public Square lastSquare = null;
+	public InventorySquare inventorySquare = null;
 	public Inventory inventory = new Inventory();
 	public boolean showInventoryInGroundDisplay = false;;
 	public boolean canShareSquare = true;
@@ -213,8 +205,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public float height;
 	public float width;
-	public float halfHeight;
-	public float halfWidth;
+	public transient float halfHeight;
+	public transient float halfWidth;
 	// public float drawOffsetX;
 	// public float drawOffsetY;
 

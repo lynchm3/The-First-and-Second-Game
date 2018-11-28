@@ -240,7 +240,6 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			if (src instanceof ScriptTriggerActorSelected) {
 				ScriptTriggerActorSelected scriptTriggerActorSelected = (ScriptTriggerActorSelected) src;
-				scriptTriggerActorSelected.actorGUID = scriptTriggerActorSelected.actor.guid;
 			}
 
 			JsonObject retValue = new JsonObject();

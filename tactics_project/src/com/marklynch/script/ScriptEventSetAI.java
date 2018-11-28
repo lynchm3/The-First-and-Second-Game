@@ -1,6 +1,5 @@
 package com.marklynch.script;
 
-import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.script.trigger.ScriptTrigger;
@@ -14,9 +13,6 @@ public class ScriptEventSetAI extends ScriptEvent {
 
 	boolean completed = false;
 
-	// for save + load
-	public String actorGUID;
-
 	public ScriptEventSetAI() {
 		name = "ScriptEventSetAI";
 	}
@@ -24,7 +20,6 @@ public class ScriptEventSetAI extends ScriptEvent {
 	public ScriptEventSetAI(boolean blockUserInput, ScriptTrigger scriptTrigger, Actor actor, AIRoutine aiRoutine) {
 		super(blockUserInput, scriptTrigger);
 		this.actor = actor;
-		this.actorGUID = actor.guid;
 		this.aiRoutine = aiRoutine;
 		this.name = "ScriptEventSetAI";
 	}
@@ -32,7 +27,6 @@ public class ScriptEventSetAI extends ScriptEvent {
 	@Override
 	public void postLoad() {
 		scriptTrigger.postLoad();
-		actor = Game.level.findActorFromGUID(actorGUID);
 		// aiRoutine.postLoad();
 	}
 
