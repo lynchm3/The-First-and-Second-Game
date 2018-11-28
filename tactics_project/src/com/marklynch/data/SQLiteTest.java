@@ -16,14 +16,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.marklynch.level.constructs.Group;
-import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.actions.Action;
@@ -46,35 +43,48 @@ public class SQLiteTest {
 	public @interface saved {
 	}
 
-	public final static String tblGameObject = "GameObject";
+	// public final static String tblGameObject = "GameObject";
 
-	public static void saveGameObjects() {
+	public static void save() {
+		saveType(GameObject.class);
+		saveType(Door.class);
+	}
+
+	private static void saveType(Class clazz) {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
 			Statement stat = conn.createStatement();
 
-			stat.executeUpdate("DROP TABLE IF EXISTS " + tblGameObject + ";");
+			System.out.println("saveType clazz.getSimpleName = " + clazz.getSimpleName());
+			stat.executeUpdate("DROP TABLE IF EXISTS " + clazz.getSimpleName() + ";");
 
-			ArrayList<Field> gameObjectFields = new ArrayList<Field>(Arrays.asList(GameObject.class.getFields()));
+			ArrayList<Field> fields = new ArrayList<Field>(Arrays.asList(clazz.getFields()));
+			ArrayList<Field> declaredFields = new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields()));
 
 			// Remove transient and static fields, don't want to save them
-			for (Field gameObjectField : (ArrayList<Field>) gameObjectFields.clone()) {
-				if (Modifier.isTransient(gameObjectField.getModifiers())
-						|| Modifier.isStatic(gameObjectField.getModifiers())) {
-					gameObjectFields.remove(gameObjectField);
+			for (Field field : (ArrayList<Field>) fields.clone()) {
+				if (
+				//
+				Modifier.isTransient(field.getModifiers())
+						//
+						|| Modifier.isStatic(field.getModifiers())
+						//
+						|| (!declaredFields.contains(field) && !field.getName().equals("id")))
+				//
+				{
+					fields.remove(field);
 				}
 			}
 
-			// Make create table query
-
-			String createTableQuery = "CREATE TABLE " + tblGameObject + " (";
-			String insertQueryTemplate = "INSERT INTO " + tblGameObject + " VALUES (";
-			for (Field gameObjectField : gameObjectFields) {
-				createTableQuery += gameObjectField.getName();
+			// Make create table query and insert query template
+			String createTableQuery = "CREATE TABLE " + clazz.getSimpleName() + " (";
+			String insertQueryTemplate = "INSERT INTO " + clazz.getSimpleName() + " VALUES (";
+			for (Field field : fields) {
+				createTableQuery += field.getName();
 				insertQueryTemplate += "?";
-				if (gameObjectFields.get(gameObjectFields.size() - 1) != gameObjectField) {
+				if (fields.get(fields.size() - 1) != field) {
 					createTableQuery += ",";
 					insertQueryTemplate += ",";
 				}
@@ -83,18 +93,17 @@ public class SQLiteTest {
 			insertQueryTemplate += ");";
 
 			stat.executeUpdate(createTableQuery);
-			// stat.executeUpdate("CREATE TABLE gameobject (id, name);");
 
+			// Actually do the big ol' insert
 			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
-			for (GameObject gameObject : GameObject.instances) {
+			for (Object object : (ArrayList<?>) clazz.getField("instances").get(null)) {// GameObject.instances
 
-				// for(Attribute)
 				int count = 1;
-				for (Field gameObjectField : gameObjectFields) {
+				for (Field field : fields) {
 
-					Object value = gameObjectField.get(gameObject);
+					Object value = field.get(object);
 
-					System.out.println("Adding " + gameObjectField.getName() + " @ " + count);
+					// System.out.println("Adding " + field.getName() + " @ " + count);
 					if (value instanceof Boolean) {
 						preparedStatement.setBoolean(count, (Boolean) value);
 					} else if (value instanceof Long) {
@@ -134,16 +143,17 @@ public class SQLiteTest {
 					} else if (value instanceof Object) {
 						preparedStatement.setString(count, "TODO Object class");
 					} else if (value == null) {
-						preparedStatement.setString(count, "null");
+						preparedStatement.setInt(count, 0);
 					} else {
-						System.out.println("FAILED TO ADD");
+						// System.out.println("FAILED TO ADD");
 					}
 
 					count++;
 				}
 
-				System.out.println("preparedStatement.toString() = " + preparedStatement.toString());
-				System.out.println("count = " + count);
+				// System.out.println("preparedStatement.toString() = " +
+				// preparedStatement.toString());
+				// System.out.println("count = " + count);
 
 				preparedStatement.addBatch();
 			}
@@ -152,11 +162,12 @@ public class SQLiteTest {
 			preparedStatement.executeBatch();
 			conn.setAutoCommit(true);
 
-			ResultSet rs = stat.executeQuery("select * from " + tblGameObject + ";");
-			while (rs.next()) {
-				System.out.println("id = " + rs.getLong("id"));
-				System.out.println("name = " + rs.getString("name"));
-			}
+			ResultSet rs = stat.executeQuery("select * from " + clazz.getSimpleName() + ";");
+
+			// while (rs.next()) {
+			// System.out.println("id = " + rs.getLong("id"));
+			// System.out.println("name = " + rs.getString("name"));
+			// }
 			rs.close();
 			conn.close();
 
@@ -165,161 +176,6 @@ public class SQLiteTest {
 			e.printStackTrace();
 		}
 
-	}
-
-	public void saveLongValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName,
-			Object value) {
-
-	}
-
-	public void saveIntValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveStringValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveSquareValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveInventroySquareValue(PreparedStatement preparedStatement, GameObject gameObject,
-			String attributeName) {
-
-	}
-
-	public void saveBooleanValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveFloatValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveQuestValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveActorValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveHidingPlaceValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveGameObjectArrayValue(PreparedStatement preparedStatement, GameObject gameObject,
-			String attributeName) {
-
-	}
-
-	public void saveGroupValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveObjectValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveActionValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveEnhancementValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
-
-	}
-
-	public void saveHIGH_LEVEL_STATSValue(PreparedStatement preparedStatement, GameObject gameObject,
-			String attributeName) {
-
-	}
-
-	public void saveEffectsArrayValue(PreparedStatement preparedStatement, GameObject gameObject,
-			String attributeName) {
-
-	}
-
-	public void saveActionsArrayValue(PreparedStatement preparedStatement, GameObject gameObject,
-			String attributeName) {
-
-	}
-
-	public long id;
-	public int templateId;
-	public String name = "";
-	public int totalHealth = 0;
-	public String imageTexturePath = null; // public transient Texture imageTexture = null;
-	public Square squareGameObjectIsOn = null;
-	public Square lastSquare = null;
-	public InventorySquare inventorySquare = null;
-	public Inventory inventory = new Inventory();
-	public boolean showInventoryInGroundDisplay = false;;
-	public boolean canShareSquare = true;
-	public boolean fitsInInventory = true;
-	public boolean canContainOtherObjects = false;
-	public boolean blocksLineOfSight = false;
-	public boolean persistsWhenCantBeSeen = false;
-	public boolean attackable = true;
-	public boolean moveable = true;
-	public boolean canBePickedUp = true;
-	public boolean decorative = false;
-	public boolean floatsInWater = false;
-	public boolean isFloorObject = false;
-	public int value = 1;
-	public int turnAcquired = 1;
-	public float widthRatio = 1;
-	public float heightRatio = 1;
-	public float drawOffsetRatioX = 0;
-	public float drawOffsetRatioY = 0;
-	public float soundWhenHit = 1;
-	public float soundWhenHitting = 1;
-	public float soundDampening = 1;
-	public float lightHandleX;
-	public float lightHandlY;
-	public boolean stackable = false;
-	public float weight;
-	public int remainingHealth = 1;
-	public boolean favourite = false;
-	public Inventory inventoryThatHoldsThisObject;
-	public Quest quest;
-	public transient Actor owner;
-	public float height;
-	public float width;
-	public float anchorX, anchorY;
-	public boolean backwards = false;
-	public boolean hiding = false;
-	public HidingPlace hidingPlace = null;
-	public ArrayList<GameObject> attackers = new ArrayList<GameObject>();
-	public Group group;
-	public Object destroyedBy = null;
-	public Action destroyedByAction = null;
-	public boolean toSell = false;
-	public boolean starred = false;
-	public boolean flash = false;
-	public float minRange = 1;
-	public float maxRange = 1;
-	public Enhancement enhancement;
-	public int level = 1;
-	public int thoughtsOnPlayer = 0;
-	public boolean diggable = false;
-	public boolean flipYAxisInMirror = true;
-	public Actor beingFishedBy = null;
-	public boolean fightingFishingRod = false;
-	public float swimmingChangeX = 0;
-	public float swimmingChangeY = 0;
-	public GameObject fishingTarget;
-	public GameObject equipped = null;
-	public boolean bigShadow = false;
-	public int orderingOnGound = 100;
-	public String type = "Object";
-	public int lastTurnThisWasMovedByMinecart = -1;
-	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
-	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
-	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
-
-	public static void main(String[] args) throws Exception {
-		saveGameObjects();
 	}
 
 }

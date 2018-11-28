@@ -227,7 +227,7 @@ public class Game {
 		init();
 		getDelta(); // call once before loop to initialise lastFrame
 		lastFPS = getTime(); // call before loop to initialise fps timer
-		SQLiteTest.saveGameObjects();
+		SQLiteTest.save();
 
 		while (!Display.isCloseRequested()) {
 

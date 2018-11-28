@@ -10,8 +10,8 @@ public class Door extends Openable {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public float soundDampeningWhenClosed;
 	public boolean blocksLineOfSightWhenClosed;
-	protected boolean shouldBeClosed;
-	protected boolean shouldBeLocked;
+	public boolean shouldBeClosed;
+	public boolean shouldBeLocked;
 
 	public Door() {
 		super();
