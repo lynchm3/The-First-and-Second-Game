@@ -39,6 +39,7 @@ public class ResourceUtils {
 			try {
 				texture = new com.marklynch.utils.Texture(Util.getResource("res/images/" + path),
 						com.marklynch.utils.Texture.LINEAR, generatePixels);
+				texture.path = path;
 				globalImages.put(path, texture);
 			} catch (Exception e) {
 

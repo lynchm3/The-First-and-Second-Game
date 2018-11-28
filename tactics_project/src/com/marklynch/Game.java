@@ -15,7 +15,8 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
-import com.marklynch.data.SQLiteTest;
+import com.marklynch.data.Load;
+import com.marklynch.data.Save;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.UserInputEditor;
 import com.marklynch.graphics.ShadowLight;
@@ -227,7 +228,8 @@ public class Game {
 		init();
 		getDelta(); // call once before loop to initialise lastFrame
 		lastFPS = getTime(); // call before loop to initialise fps timer
-		SQLiteTest.save();
+		Save.save();
+		Load.load();
 
 		while (!Display.isCloseRequested()) {
 

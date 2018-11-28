@@ -11,8 +11,8 @@ import com.marklynch.utils.Texture;
 public class Rail extends GameObject implements SwitchListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
-	Direction direction1;
-	Direction direction2;
+	public Direction direction1;
+	public Direction direction2;
 	public static Texture imageTextureLeftRight;
 	public static Texture imageTextureUpDown;
 	// boolean up, down, left, right;

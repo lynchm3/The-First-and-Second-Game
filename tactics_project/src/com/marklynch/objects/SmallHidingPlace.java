@@ -16,7 +16,7 @@ public class SmallHidingPlace extends Searchable {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public ArrayList<Actor> actorsHidingHere = new ArrayList<Actor>();
-	Group group;
+	public Group group;
 
 	public SmallHidingPlace() {
 		super();

@@ -1,9 +1,5 @@
 package com.marklynch.data;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.sql.Connection;
@@ -20,13 +16,13 @@ import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Texture;
 
-public class SQLiteTest {
+public class Save {
 
 	// When you decide to save
 	// 1. turn on pause mode (if not already) - Show spinner w/ "Ending Turn"
@@ -34,20 +30,9 @@ public class SQLiteTest {
 	// 3. end all animations - Show spinner w/ "Ending Turn"
 	// 3. run save
 
-	// To be calculated after loading
-	// public float halfHeight;
-	// public float halfWidth;
-
-	@Target({ ElementType.FIELD })
-	@Retention(RetentionPolicy.RUNTIME)
-	public @interface saved {
-	}
-
-	// public final static String tblGameObject = "GameObject";
-
 	public static void save() {
 		saveType(GameObject.class);
-		saveType(Door.class);
+		// saveType(Door.class);
 	}
 
 	private static void saveType(Class clazz) {
@@ -140,6 +125,8 @@ public class SQLiteTest {
 					} else if (value instanceof ArrayList<?>) {
 						// effects array, actions this turn array
 						preparedStatement.setString(count, "TODO ArrayList<?> class");
+					} else if (value instanceof Texture) {
+						preparedStatement.setString(count, ((Texture) value).path);
 					} else if (value instanceof Object) {
 						preparedStatement.setString(count, "TODO Object class");
 					} else if (value == null) {

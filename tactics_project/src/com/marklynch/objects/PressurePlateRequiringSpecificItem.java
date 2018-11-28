@@ -11,7 +11,7 @@ public class PressurePlateRequiringSpecificItem extends Switch implements Update
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	GameObject keyObject = null;
+	public GameObject keyObject = null;
 
 	public PressurePlateRequiringSpecificItem() {
 		super();

@@ -8,8 +8,8 @@ import com.marklynch.objects.units.Actor;
 public class Gate extends Door {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
-	float soundDampeningWhenClosed;
-	boolean blocksLineOfSightWhenClosed;
+	public float soundDampeningWhenClosed;
+	public boolean blocksLineOfSightWhenClosed;
 
 	public Gate() {
 		super();

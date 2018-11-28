@@ -15,7 +15,7 @@ public class Bed extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	String imagePathCovers;
+	public String imagePathCovers;
 	public Texture imageTextureCovers;
 
 	public Bed() {

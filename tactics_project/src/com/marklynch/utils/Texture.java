@@ -5,6 +5,9 @@ import java.net.URL;
 
 public class Texture extends mdesl.graphics.Texture {
 
+	public String path;
+	public boolean generatePixelsArray;
+
 	public Texture() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -43,6 +46,7 @@ public class Texture extends mdesl.graphics.Texture {
 
 	public Texture(URL pngRef, int filter, boolean generatePixelsArray) throws IOException {
 		super(pngRef, filter, generatePixelsArray);
+		this.generatePixelsArray = generatePixelsArray;
 		// TODO Auto-generated constructor stub
 	}
 

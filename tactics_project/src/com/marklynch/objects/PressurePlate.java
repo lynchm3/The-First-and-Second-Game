@@ -11,7 +11,7 @@ public class PressurePlate extends Switch implements UpdatesWhenSquareContentsCh
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	int targetWeight = 10;
+	public int targetWeight = 10;
 
 	public PressurePlate() {
 		super();

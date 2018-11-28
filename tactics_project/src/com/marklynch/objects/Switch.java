@@ -20,7 +20,7 @@ public class Switch extends GameObject {
 	public SWITCH_TYPE switchType;
 	public AILine aiLine;
 
-	boolean pressed = false;
+	public boolean pressed = false;
 
 	public enum SWITCH_TYPE {
 		OPEN_CLOSE, LOCK_UNLOCK

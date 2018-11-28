@@ -13,8 +13,8 @@ public class BrokenGlass extends Stampable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	GlassShard[] glassShards;
-	int glassShardsCount;
+	public GlassShard[] glassShards;
+	public int glassShardsCount;
 
 	public BrokenGlass() {
 		super();

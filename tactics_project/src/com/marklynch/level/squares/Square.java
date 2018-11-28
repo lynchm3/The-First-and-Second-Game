@@ -68,7 +68,7 @@ import com.marklynch.utils.Utils.Point;
 
 public class Square implements ActionableInWorld, InventoryParent, Comparable<Square> {
 
-	public long id;
+	public Long id;
 
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
 
@@ -158,6 +158,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public Square(int x, int y, String imagePath, Texture imageTexture, int travelCost, int elevation,
 			SquareInventory inventory, boolean restricted, Actor... owners) {
 		super();
+		this.id = Level.generateNewId(this);
 		this.xInGrid = x;
 		this.yInGrid = y;
 		name = "Square @ " + this.xInGrid + "," + this.yInGrid;

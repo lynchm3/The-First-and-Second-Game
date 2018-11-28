@@ -13,8 +13,8 @@ public class Tree extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	float appleMaxRatioSize = 0.25f;
-	float healthWhenLastDroppedFruit;
+	public float appleMaxRatioSize = 0.25f;
+	public float healthWhenLastDroppedFruit;
 
 	public Tree() {
 		super();

@@ -164,7 +164,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public float weight;
 
-	public transient Texture imageTexture = null;
+	public Texture imageTexture = null;
 	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
 	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
 
@@ -1903,14 +1903,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return currentTemplateIdCount;
 	}
 
-	public static int currentObjectIdCount = 0;
-
-	public static int generateNewObjectId() {
-		currentObjectIdCount++;
-		return currentObjectIdCount;
-	}
-
 	public void setAttributesForCopy(GameObject gameObject, Square square, Actor owner) {
+
+		gameObject.id = Level.generateNewId(gameObject);
 		gameObject.owner = owner;
 		gameObject.squareGameObjectIsOn = square;
 		gameObject.anchorX = anchorX;
@@ -1947,7 +1942,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.maxRange = maxRange;
 
 		gameObject.templateId = templateId;
-		gameObject.id = generateNewObjectId();
 
 		gameObject.diggable = diggable;
 		gameObject.flipYAxisInMirror = flipYAxisInMirror;

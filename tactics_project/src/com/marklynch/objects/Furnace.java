@@ -10,8 +10,8 @@ public class Furnace extends Openable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	Texture chestOpenTexture;
-	Texture chestClosedTexture;
+	public Texture chestOpeznTexture;
+	public Texture chestClosedTexture;
 
 	public Furnace() {
 		super();

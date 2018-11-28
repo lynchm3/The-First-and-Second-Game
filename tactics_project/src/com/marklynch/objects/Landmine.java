@@ -13,7 +13,7 @@ import com.marklynch.objects.units.Actor;
 public class Landmine extends Discoverable implements UpdatesWhenSquareContentsChange, OnCompletionListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
-	int targetWeight = 10;
+	public int targetWeight = 10;
 	public Power power;
 
 	public Landmine() {

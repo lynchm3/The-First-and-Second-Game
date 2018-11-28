@@ -10,7 +10,7 @@ import com.marklynch.objects.units.Actor;
 public class Carcass extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
-	protected String baseName;
+	public String baseName;
 
 	public Carcass() {
 		super();

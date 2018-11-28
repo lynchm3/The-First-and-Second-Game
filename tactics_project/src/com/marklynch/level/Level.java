@@ -80,6 +80,15 @@ import com.marklynch.utils.Utils;
 
 public class Level {
 
+	public static HashMap<Long, Object> ids = new HashMap<Long, Object>();
+	public static Long currentIdCount = 0L;
+
+	public static Long generateNewId(Object object) {
+		currentIdCount++;
+		ids.put(currentIdCount, object);
+		return currentIdCount;
+	}
+
 	public static boolean loggedThisTurn = false;
 
 	// Controls for tutorial buttons

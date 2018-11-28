@@ -13,7 +13,7 @@ import com.marklynch.objects.units.Actor.Direction;
 public class MineCart extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
-	Direction direction;
+	public Direction direction;
 
 	public MineCart() {
 		super();

@@ -18,10 +18,10 @@ public class Mirror extends GameObject {
 	public Texture imageTextureFront;
 	public Texture imageTextureCrack;
 
-	int boundsX1;
-	int boundsY1;
-	int boundsX2;
-	int boundsY2;
+	public int boundsX1;
+	public int boundsY1;
+	public int boundsX2;
+	public int boundsY2;
 
 	public boolean hasBeenAttackedBefore = false;
 

@@ -9,8 +9,6 @@ public class Key extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	Key key;
-
 	public Key() {
 		super();
 		type = "Key";
