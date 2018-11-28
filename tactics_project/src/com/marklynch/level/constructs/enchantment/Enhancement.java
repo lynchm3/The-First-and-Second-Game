@@ -11,6 +11,8 @@ import com.marklynch.utils.Texture;
 
 public class Enhancement {
 
+	public long id;
+
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
 
 	public String enhancementName = "Enhancement";

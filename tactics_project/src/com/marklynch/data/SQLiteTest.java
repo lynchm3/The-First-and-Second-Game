@@ -69,32 +69,87 @@ public class SQLiteTest {
 
 			// Make create table query
 
-			String createTableQuery = "CREATE TABLE gameobject (";
+			String createTableQuery = "CREATE TABLE " + tblGameObject + " (";
+			String insertQueryTemplate = "INSERT INTO " + tblGameObject + " VALUES (";
 			for (Field gameObjectField : gameObjectFields) {
 				createTableQuery += gameObjectField.getName();
+				insertQueryTemplate += "?";
 				if (gameObjectFields.get(gameObjectFields.size() - 1) != gameObjectField) {
 					createTableQuery += ",";
+					insertQueryTemplate += ",";
 				}
 			}
 			createTableQuery += ");";
+			insertQueryTemplate += ");";
+
 			stat.executeUpdate(createTableQuery);
 			// stat.executeUpdate("CREATE TABLE gameobject (id, name);");
 
-			PreparedStatement prep = conn.prepareStatement("insert into " + tblGameObject + " values (?, ?);");
+			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
 			for (GameObject gameObject : GameObject.instances) {
 
 				// for(Attribute)
+				int count = 1;
 				for (Field gameObjectField : gameObjectFields) {
 
+					Object value = gameObjectField.get(gameObject);
+
+					System.out.println("Adding " + gameObjectField.getName() + " @ " + count);
+					if (value instanceof Boolean) {
+						preparedStatement.setBoolean(count, (Boolean) value);
+					} else if (value instanceof Long) {
+						preparedStatement.setLong(count, (Long) value);
+					} else if (value instanceof Integer) {
+						preparedStatement.setInt(count, (Integer) value);
+					} else if (value instanceof Boolean) {
+						preparedStatement.setBoolean(count, (Boolean) value);
+					} else if (value instanceof String) {
+						preparedStatement.setString(count, (String) value);
+					} else if (value instanceof Square) {
+						preparedStatement.setLong(count, ((Square) value).id);
+					} else if (value instanceof InventorySquare) {
+						preparedStatement.setString(count, "TODO InventroySquare class");
+					} else if (value instanceof Actor) {
+						preparedStatement.setString(count, "TODO Actor class");
+					} else if (value instanceof HidingPlace) {
+						preparedStatement.setString(count, "TODO HidingPlace class");
+					} else if (value instanceof Float) {
+						preparedStatement.setFloat(count, (Float) value);
+					} else if (value instanceof Quest) {
+						preparedStatement.setLong(count, ((Quest) value).id);
+					} else if (value instanceof GameObject[]) {
+						preparedStatement.setString(count, "TODO GameObject[]");
+					} else if (value instanceof Group) {
+						preparedStatement.setLong(count, ((Group) value).id);
+					} else if (value instanceof Action) {
+						preparedStatement.setLong(count, ((Action) value).id);
+					} else if (value instanceof Enhancement) {
+						preparedStatement.setLong(count, ((Enhancement) value).id);
+					} else if (value instanceof HashMap<?, ?>) {
+						// Highlevelstats, may need to create a class HighLevelStats, yey.
+						preparedStatement.setString(count, "TODO HashMap<?, ?> class");
+					} else if (value instanceof ArrayList<?>) {
+						// effects array, actions this turn array
+						preparedStatement.setString(count, "TODO ArrayList<?> class");
+					} else if (value instanceof Object) {
+						preparedStatement.setString(count, "TODO Object class");
+					} else if (value == null) {
+						preparedStatement.setString(count, "null");
+					} else {
+						System.out.println("FAILED TO ADD");
+					}
+
+					count++;
 				}
 
-				prep.setLong(1, gameObject.id);
-				prep.setString(2, gameObject.name);
-				prep.addBatch();
+				System.out.println("preparedStatement.toString() = " + preparedStatement.toString());
+				System.out.println("count = " + count);
+
+				preparedStatement.addBatch();
 			}
 
 			conn.setAutoCommit(false);
-			prep.executeBatch();
+			preparedStatement.executeBatch();
 			conn.setAutoCommit(true);
 
 			ResultSet rs = stat.executeQuery("select * from " + tblGameObject + ";");
@@ -112,11 +167,8 @@ public class SQLiteTest {
 
 	}
 
-	public static void main(String[] args) throws Exception {
-		saveGameObjects();
-	}
-
-	public void saveLongValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName) {
+	public void saveLongValue(PreparedStatement preparedStatement, GameObject gameObject, String attributeName,
+			Object value) {
 
 	}
 
@@ -265,5 +317,9 @@ public class SQLiteTest {
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
 	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
 	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
+
+	public static void main(String[] args) throws Exception {
+		saveGameObjects();
+	}
 
 }

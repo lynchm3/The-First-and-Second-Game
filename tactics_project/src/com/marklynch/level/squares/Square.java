@@ -68,6 +68,8 @@ import com.marklynch.utils.Utils.Point;
 
 public class Square implements ActionableInWorld, InventoryParent, Comparable<Square> {
 
+	public long id;
+
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
 
 	public final int elevation;

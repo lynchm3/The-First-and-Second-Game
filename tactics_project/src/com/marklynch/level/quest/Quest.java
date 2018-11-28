@@ -17,6 +17,7 @@ import com.marklynch.ui.popups.Notification;
 
 public class Quest {
 
+	public long id;
 	public String name;
 	public ArrayList<Objective> allObjectives = new ArrayList<Objective>();
 	public ArrayList<Objective> currentObjectives = new ArrayList<Objective>();

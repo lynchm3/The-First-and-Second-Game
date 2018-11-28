@@ -15,7 +15,7 @@ import com.marklynch.objects.units.Monster;
 import com.marklynch.utils.Texture;
 
 public abstract class Action {
-
+	public long id;
 	// public static Texture textureAttack;
 	// public static Texture textureBow;
 	// public static Texture textureBird;

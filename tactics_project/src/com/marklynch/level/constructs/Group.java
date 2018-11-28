@@ -11,6 +11,8 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
 public class Group {
+	public long id;
+
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 
 	final private static int FIGHT_LOWER_LIMIT = 2;
