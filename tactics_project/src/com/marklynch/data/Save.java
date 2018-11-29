@@ -81,68 +81,35 @@ public class Save {
 	// 3. end all animations - Show spinner w/ "Ending Turn"
 	// 3. run save
 
+	// Keep this in order they should be laoded.
+	public static Class[] classesToSave = new Class[] {
+
+			// LVL 3 GameObject subclass
+			Gate.class, Seesaw.class,
+
+			// LVL 2 GameObject subclass
+			Door.class, Fence.class, Furnace.class, HidingPlace.class, Landmine.class, Matches.class,
+			PressurePlate.class, PressurePlateRequiringSpecificItem.class, RemoteDoor.class, SmallHidingPlace.class,
+			Storage.class, Vein.class, WallWithCrack.class, WaterBody.class,
+
+			// LVL 1 GameObject subclass
+			Bed.class, Carcass.class, Corpse.class, Discoverable.class, Food.class, GameObjectExploder.class,
+			Gold.class, Inspectable.class, Key.class, Liquid.class, MapMarker.class, MeatChunk.class, MineCart.class,
+			Mirror.class, Openable.class, Orb.class, Portal.class, Rail.class, Roof.class, Searchable.class,
+			Stampable.class, Stump.class, Switch.class, Tree.class, VoidHole.class, Wall.class, WallSupport.class,
+			WantedPoster.class, WaterSource.class, Window.class,
+
+			// GameObject itself THE SUPERCLASS
+			GameObject.class,
+
+			// GameObject interfaces
+			Consumable.class, DamageDealer.class, SwitchListener.class, UpdatesWhenSquareContentsChange.class };
+
 	public static void save() {
 
-		// LVL 3 subclass
-		saveType(Gate.class);
-		saveType(Seesaw.class);
-
-		// LVL 2 subclass
-		saveType(Door.class);
-		saveType(Fence.class);
-		saveType(Furnace.class);
-		saveType(HidingPlace.class);
-		saveType(Landmine.class);
-		saveType(Matches.class);
-		saveType(PressurePlate.class);
-		saveType(PressurePlateRequiringSpecificItem.class);
-		saveType(RemoteDoor.class);
-		saveType(SmallHidingPlace.class);
-		saveType(Storage.class);
-		saveType(Vein.class);
-		saveType(WallWithCrack.class);
-		saveType(WaterBody.class);
-
-		// LVL 1 subclass
-		saveType(Bed.class);
-		saveType(Carcass.class);
-		saveType(Corpse.class);
-		saveType(Discoverable.class);
-		saveType(Food.class);
-		saveType(GameObjectExploder.class);
-		saveType(Gold.class);
-		saveType(Inspectable.class);
-		saveType(Key.class);
-		saveType(Liquid.class);
-		saveType(MapMarker.class);
-		saveType(MeatChunk.class);
-		saveType(MineCart.class);
-		saveType(Mirror.class);
-		saveType(Openable.class);
-		saveType(Orb.class);
-		saveType(Portal.class);
-		saveType(Rail.class);
-		saveType(Roof.class);
-		saveType(Searchable.class);
-		saveType(Stampable.class);
-		saveType(Stump.class);
-		saveType(Switch.class);
-		saveType(Tree.class);
-		saveType(VoidHole.class);
-		saveType(Wall.class);
-		saveType(WallSupport.class);
-		saveType(WantedPoster.class);
-		saveType(WaterSource.class);
-		saveType(Window.class);
-
-		// GameObject itself THE SUPERCLASS
-		saveType(GameObject.class);
-
-		// interface
-		saveType(Consumable.class);
-		saveType(DamageDealer.class);
-		saveType(SwitchListener.class);
-		saveType(UpdatesWhenSquareContentsChange.class);
+		for (Class classToSave : classesToSave) {
+			saveType(classToSave);
+		}
 
 	}
 
