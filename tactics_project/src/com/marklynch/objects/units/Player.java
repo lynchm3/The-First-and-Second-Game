@@ -109,7 +109,7 @@ public class Player extends Human {
 		bestiaryKnowledge.image = true;
 		bestiaryKnowledge.totalHealth = true;
 		bestiaryKnowledge.faction = true;
-		bestiaryKnowledge.group = true;
+		bestiaryKnowledge.groupOfActors = true;
 
 		// Stats
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {

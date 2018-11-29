@@ -223,8 +223,8 @@ public abstract class AIRoutine {
 			return false;
 		}
 
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader()
-				&& this.actor.group.getLeader().followersShouldFollow == true) {
+		if (this.actor.groupOfActors != null && this.actor != this.actor.groupOfActors.getLeader()
+				&& this.actor.groupOfActors.getLeader().followersShouldFollow == true) {
 			if (actor.sleeping && Game.level.shouldLog(actor))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { actor, " woke up" }));
 			actor.sleeping = false;
@@ -997,11 +997,11 @@ public abstract class AIRoutine {
 
 	public boolean deferToGroupLeader() {
 
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader()
-				&& this.actor.group.getLeader().followersShouldFollow == true) {
-			if (this.actor.group.update(this.actor)) {
-				this.actor.thoughtBubbleImageTextureAction = this.actor.group.leader.thoughtBubbleImageTextureAction;
-				this.actor.thoughtBubbleImageTextureObject = this.actor.group.leader.thoughtBubbleImageTextureObject;
+		if (this.actor.groupOfActors != null && this.actor != this.actor.groupOfActors.getLeader()
+				&& this.actor.groupOfActors.getLeader().followersShouldFollow == true) {
+			if (this.actor.groupOfActors.update(this.actor)) {
+				this.actor.thoughtBubbleImageTextureAction = this.actor.groupOfActors.leader.thoughtBubbleImageTextureAction;
+				this.actor.thoughtBubbleImageTextureObject = this.actor.groupOfActors.leader.thoughtBubbleImageTextureObject;
 				return true;
 			}
 		}
@@ -1135,8 +1135,8 @@ public abstract class AIRoutine {
 			createSearchLocationsBasedOnVisibleCriminals();
 		}
 		createSearchLocationsBasedOnVisibleAttackers();
-		if (actor.group != null)
-			state = actor.group.getLeader().aiRoutine.state;
+		if (actor.groupOfActors != null)
+			state = actor.groupOfActors.getLeader().aiRoutine.state;
 		if (wokenUpCountdown > 0) {
 			wokenUpCountdown--;
 		}

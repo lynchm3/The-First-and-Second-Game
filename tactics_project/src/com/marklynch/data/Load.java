@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.quest.Quest;
@@ -174,10 +174,10 @@ public class Load {
 							field.set(objectToLoad, square);
 						}
 
-					} else if (type.isAssignableFrom(Group.class)) {
+					} else if (type.isAssignableFrom(GroupOfActors.class)) {
 						Long squareId = resultSet.getLong(count);
 						if (squareId != 0) {
-							Group square = (Group) Level.ids.get(squareId);
+							GroupOfActors square = (GroupOfActors) Level.ids.get(squareId);
 							field.set(objectToLoad, square);
 						}
 

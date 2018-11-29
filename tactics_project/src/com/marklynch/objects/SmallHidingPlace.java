@@ -3,7 +3,7 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
@@ -16,7 +16,7 @@ public class SmallHidingPlace extends Searchable {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public ArrayList<Actor> actorsHidingHere = new ArrayList<Actor>();
-	public Group group;
+	public GroupOfActors groupOfBuns;
 
 	public SmallHidingPlace() {
 		super();
@@ -65,11 +65,12 @@ public class SmallHidingPlace extends Searchable {
 
 	@Override
 	public void update(int delta) {
-		if (group == null || group.size() == 0) {
+
+		if (groupOfBuns == null || groupOfBuns.size() == 0) {
 			if (Math.random() > 0.9f) {
-				Group newGroup = createBunGroup();
+				GroupOfActors newGroup = createBunGroup();
 				if (newGroup != null)
-					group = createBunGroup();
+					groupOfBuns = createBunGroup();
 			}
 		}
 	}
@@ -82,14 +83,16 @@ public class SmallHidingPlace extends Searchable {
 	// }
 	// }
 
-	public Group createBunGroup() {
+	public GroupOfActors createBunGroup() {
 
 		if (squareGameObjectIsOn == null)
 			return null;
 
-		return new Group("Buns", Templates.RABBIT.makeCopy("Female Bun", this.squareGameObjectIsOn.getSquareAbove(),
-				Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-				new GameObject[] { Templates.FUR.makeCopy(null, null) }, this.squareGameObjectIsOn.areaSquareIsIn),
+		return new GroupOfActors("Buns",
+				Templates.RABBIT.makeCopy("Female Bun", this.squareGameObjectIsOn.getSquareAbove(),
+						Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
+						new GameObject[] { Templates.FUR.makeCopy(null, null) },
+						this.squareGameObjectIsOn.areaSquareIsIn),
 				Templates.RABBIT.makeCopy("Male Bun", this.squareGameObjectIsOn.getSquareToLeftOf(),
 						Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
 						new GameObject[] { Templates.FUR.makeCopy(null, null) },

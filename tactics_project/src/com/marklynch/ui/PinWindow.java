@@ -373,7 +373,7 @@ public class PinWindow implements Draggable {
 			// actor.faction);
 		}
 
-		if (bestiaryKnowledge.group && actor.group != null) {
+		if (bestiaryKnowledge.groupOfActors && actor.groupOfActors != null) {
 			// TextUtils.printTextWithImages(drawPositionX + borderWidth,
 			// drawPositionY + titleBarHeight + actor.imageTexture.getHeight() + 30, 128,
 			// false, null, "Group ",

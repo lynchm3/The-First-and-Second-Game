@@ -1,7 +1,7 @@
 package com.marklynch.level.quest.smallgame;
 
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
@@ -164,7 +164,7 @@ public class AreaTownForest {
 
 		// [188][61]
 
-		new Group("Buns",
+		new GroupOfActors("Buns",
 				Templates.RABBIT.makeCopy("Female Bun", Level.squares[183][61], Level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
 						new GameObject[] { Templates.FUR.makeCopy(null, null) }, AreaList.townForest),
@@ -184,7 +184,7 @@ public class AreaTownForest {
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
 						new GameObject[] { Templates.FUR.makeCopy(null, null) }, AreaList.townForest));
 
-		new Group("Buns",
+		new GroupOfActors("Buns",
 				Templates.RABBIT.makeCopy("Female Bun", Level.squares[93][20], Level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
 						new GameObject[] { Templates.FUR.makeCopy(null, null) }, AreaList.townForest),

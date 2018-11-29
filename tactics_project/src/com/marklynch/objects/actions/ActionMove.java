@@ -97,7 +97,7 @@ public class ActionMove extends Action {
 		} else {
 			move(actorInTheWay, oldSquare);
 			move(actor, squareToMoveTo);
-			if (actorInTheWay.group != null && actorInTheWay.group.getLeader() == actor) {
+			if (actorInTheWay.groupOfActors != null && actorInTheWay.groupOfActors.getLeader() == actor) {
 				// No swap cooldown for group leaders moving a member of their
 				// group
 			} else {
@@ -195,7 +195,7 @@ public class ActionMove extends Action {
 					return false;
 			}
 
-			if (performer.group != null && performer.group.getLeader() == actorInTheWay) {
+			if (performer.groupOfActors != null && performer.groupOfActors.getLeader() == actorInTheWay) {
 				// don't try to swap with you group leader
 				return false;
 			}

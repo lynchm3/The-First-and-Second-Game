@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
@@ -232,8 +232,8 @@ public class Save {
 						preparedStatement.setLong(count, ((Quest) value).id);
 					} else if (value instanceof GameObject[]) {
 						preparedStatement.setString(count, "TODO GameObject[]");
-					} else if (value instanceof Group) {
-						preparedStatement.setLong(count, ((Group) value).id);
+					} else if (value instanceof GroupOfActors) {
+						preparedStatement.setLong(count, ((GroupOfActors) value).id);
 					} else if (value instanceof Action) {
 						preparedStatement.setLong(count, ((Action) value).id);
 					} else if (value instanceof Enhancement) {
@@ -249,6 +249,7 @@ public class Save {
 					} else if (value == null) {
 						preparedStatement.setInt(count, 0);
 					} else {
+						preparedStatement.setInt(count, 0);
 						// System.out.println("FAILED TO ADD");
 					}
 

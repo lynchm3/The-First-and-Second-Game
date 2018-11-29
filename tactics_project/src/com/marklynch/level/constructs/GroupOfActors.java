@@ -11,7 +11,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
-public class Group {
+public class GroupOfActors {
 	public Long id;
 
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
@@ -27,24 +27,24 @@ public class Group {
 	public HashMap<Actor, Square> targetSquaresMap = new HashMap<Actor, Square>();
 	public ArrayList<Square> targetSquares = new ArrayList<Square>();
 
-	public Group(String name, Actor... members) {
+	public GroupOfActors(String name, Actor... members) {
 		super();
 		id = Level.generateNewId(this);
 		this.name = name;
 		this.members = new ArrayList<Actor>(Arrays.asList(members));
 		this.leader = this.members.get(0);
 		for (Actor member : members) {
-			member.group = this;
+			member.groupOfActors = this;
 		}
 		attackers = new ArrayList<GameObject>();
 	}
 
 	public void addMember(Actor actor) {
-		if (actor.group != null) {
-			actor.group.removeMember(actor);
+		if (actor.groupOfActors != null) {
+			actor.groupOfActors.removeMember(actor);
 		}
 		members.add(actor);
-		actor.group = this;
+		actor.groupOfActors = this;
 	}
 
 	public void removeMember(Actor actor) {
@@ -58,7 +58,7 @@ public class Group {
 
 	public void setLeader(Actor actor) {
 		this.leader = actor;
-		actor.group = this;
+		actor.groupOfActors = this;
 		if (!members.contains(actor)) {
 			members.add(actor);
 		}

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
@@ -145,9 +145,9 @@ public class QuestSmallGame extends Quest {
 	boolean huntersReleasedFromQuest;
 
 	// Actors
-	Group hunterPack;
+	GroupOfActors hunterPack;
 	Actor rangerBill;
-	Group wolfPack;
+	GroupOfActors wolfPack;
 	Actor superWolf;
 	Actor cub;
 
@@ -384,8 +384,8 @@ public class QuestSmallGame extends Quest {
 
 		Templates.HATCHET.makeCopy(Game.level.squares[10][17], t3);
 
-		hunterPack = new Group("Hunting Party", hunterBrent, hunterBront1, hunterBront2, hunterBront3, hunterBront4,
-				hunterBront5, hunterBront6);
+		hunterPack = new GroupOfActors("Hunting Party", hunterBrent, hunterBront1, hunterBront2, hunterBront3,
+				hunterBront4, hunterBront5, hunterBront6);
 
 		this.hunterPack.quest = this;
 		for (GameObject hunter : hunterPack.getMembers()) {
@@ -444,7 +444,7 @@ public class QuestSmallGame extends Quest {
 
 		// [207][16]
 
-		wolfPack = new Group("Wolf pack", superWolf, wolf2, wolf3);
+		wolfPack = new GroupOfActors("Wolf pack", superWolf, wolf2, wolf3);
 
 		this.wolfPack.quest = this;
 		for (GameObject wolf : wolfPack.getMembers()) {
@@ -494,7 +494,7 @@ public class QuestSmallGame extends Quest {
 					bestiaryKnowledge.image = true;
 					bestiaryKnowledge.totalHealth = true;
 					bestiaryKnowledge.faction = true;
-					bestiaryKnowledge.group = true;
+					bestiaryKnowledge.groupOfActors = true;
 
 					// Stats
 					for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {

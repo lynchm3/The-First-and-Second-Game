@@ -1965,8 +1965,8 @@ public class Actor extends GameObject {
 			return null;
 
 		Quest quest;
-		if (group != null) {
-			quest = group.quest;
+		if (groupOfActors != null) {
+			quest = groupOfActors.quest;
 		} else {
 			quest = this.quest;
 		}
@@ -2021,8 +2021,8 @@ public class Actor extends GameObject {
 		if (canSeeGameObjectFromSpecificSquare(this.squareGameObjectIsOn, gameObject))
 			return true;
 
-		if (group != null) {
-			for (Actor actor : group.getMembers()) {
+		if (groupOfActors != null) {
+			for (Actor actor : groupOfActors.getMembers()) {
 				if (actor == this)
 					continue;
 				if (actor.canSeeGameObjectFromSpecificSquare(this.squareGameObjectIsOn, gameObject)) {
@@ -2253,7 +2253,7 @@ public class Actor extends GameObject {
 		if (crime.performer == this)
 			return;
 
-		if (this.group != null && this.group.contains(crime.performer))
+		if (this.groupOfActors != null && this.groupOfActors.contains(crime.performer))
 			return;
 
 		Actor criminal = crime.performer;

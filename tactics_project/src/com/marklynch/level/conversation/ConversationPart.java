@@ -62,8 +62,8 @@ public class ConversationPart {
 
 	public void drawStaticUI1() {
 
-		if (talker.group != null) {
-			for (Actor actor : talker.group.getMembers()) {
+		if (talker.groupOfActors != null) {
+			for (Actor actor : talker.groupOfActors.getMembers()) {
 
 				if (actor.remainingHealth <= 0)
 					continue;

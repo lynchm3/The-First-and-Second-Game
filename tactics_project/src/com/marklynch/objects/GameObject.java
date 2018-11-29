@@ -14,7 +14,7 @@ import org.newdawn.slick.openal.Audio;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
-import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
@@ -219,7 +219,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public transient ArrayList<GameObject> attackers = new ArrayList<GameObject>();
 
-	public transient Group group;
+	public transient GroupOfActors groupOfActors;
 
 	public Object destroyedBy = null;
 	public Action destroyedByAction = null;
@@ -1843,11 +1843,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		this.addAttacker(attacker);
 
-		if (this.group != null) {
-			if (!this.group.getAttackers().contains(attacker)) {
-				this.group.addAttacker(attacker);
+		if (this.groupOfActors != null) {
+			if (!this.groupOfActors.getAttackers().contains(attacker)) {
+				this.groupOfActors.addAttacker(attacker);
 			}
-			for (Actor groupMember : this.group.getMembers()) {
+			for (Actor groupMember : this.groupOfActors.getMembers()) {
 				if (!groupMember.attackers.contains(attacker)) {
 					groupMember.addAttacker(attacker);
 				}
@@ -1857,11 +1857,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			}
 		}
 
-		if (attacker.group != null) {
-			if (!attacker.group.getAttackers().contains(this)) {
-				attacker.group.addAttacker(this);
+		if (attacker.groupOfActors != null) {
+			if (!attacker.groupOfActors.getAttackers().contains(this)) {
+				attacker.groupOfActors.addAttacker(this);
 			}
-			for (Actor groupMember : attacker.group.getMembers()) {
+			for (Actor groupMember : attacker.groupOfActors.getMembers()) {
 				if (!groupMember.attackers.contains(this)) {
 					groupMember.addAttacker(this);
 				}
@@ -2351,8 +2351,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 						* 0.01f);
 				float resistedDamage = damageDealer.getEffectiveHighLevelStat(statType) * resistance;
 				float friendlyFireReduction = 0;
-				if (gameObjectAttacker != null && gameObjectAttacker.group != null
-						&& gameObjectAttacker.group.contains(this)) {
+				if (gameObjectAttacker != null && gameObjectAttacker.groupOfActors != null
+						&& gameObjectAttacker.groupOfActors.contains(this)) {
 					friendlyFireReduction = gameObjectAttacker.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.FRIENDLY_FIRE)
 							* 0.01f;
 				}
@@ -2410,7 +2410,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				* 0.01f);
 		float resistedDamage = damage.value * resistance;
 		float friendlyFireReduction = 0;
-		if (gameObjectAttacker != null && gameObjectAttacker.group != null && gameObjectAttacker.group.contains(this)) {
+		if (gameObjectAttacker != null && gameObjectAttacker.groupOfActors != null && gameObjectAttacker.groupOfActors.contains(this)) {
 			friendlyFireReduction = gameObjectAttacker.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.FRIENDLY_FIRE)
 					* 0.01f;
 		}

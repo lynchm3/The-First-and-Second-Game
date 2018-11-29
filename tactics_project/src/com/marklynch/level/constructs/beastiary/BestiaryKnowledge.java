@@ -14,7 +14,7 @@ public class BestiaryKnowledge {
 	public boolean image;
 	public boolean totalHealth;
 	public boolean faction;
-	public boolean group;
+	public boolean groupOfActors;
 
 	public HashMap<HIGH_LEVEL_STATS, Boolean> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Boolean>();
 

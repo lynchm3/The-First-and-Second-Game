@@ -2419,8 +2419,8 @@ public class Level {
 
 		for (Actor actor : actorsToRemove) {
 			actor.faction.actors.remove(actor);
-			if (actor.group != null)
-				actor.group.removeMember(actor);
+			if (actor.groupOfActors != null)
+				actor.groupOfActors.removeMember(actor);
 		}
 		actorsToRemove.clear();
 
