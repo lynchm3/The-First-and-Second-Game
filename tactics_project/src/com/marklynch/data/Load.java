@@ -35,7 +35,6 @@ public class Load {
 
 			load1(GameObject.class);
 			// loadType(Door.class);
-			load2(GameObject.class);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,7 +85,6 @@ public class Load {
 			while (resultSet.next()) {
 
 				Long objectToLoadId = resultSet.getLong("id");
-				System.out.println("objectToLoadId = " + objectToLoadId);
 				Object objectToLoad = Level.ids.get(objectToLoadId);
 				if (objectToLoad == null) {
 					Level.ids.put(objectToLoadId, objectToLoad);
@@ -106,7 +104,6 @@ public class Load {
 
 					// Object value = field.get(objectToLoad);
 					Class type = field.getType();
-					System.out.println("field = " + field);
 					// rs.getC
 
 					// System.out.println("Adding " + field.getName() + " @ " + count);
@@ -135,7 +132,7 @@ public class Load {
 			conn.close();
 
 		} catch (Exception e) {
-			System.err.println("loadType() error");
+			System.err.println("load1 error");
 			e.printStackTrace();
 		}
 
@@ -153,7 +150,6 @@ public class Load {
 			while (resultSet.next()) {
 
 				Long objectToLoadId = resultSet.getLong("id");
-				System.out.println("objectToLoadId = " + objectToLoadId);
 				Object objectToLoad = Level.ids.get(objectToLoadId);
 
 				int count = 1;
@@ -161,7 +157,6 @@ public class Load {
 
 					// Object value = field.get(objectToLoad);
 					Class type = field.getType();
-					System.out.println("field = " + field);
 
 					// Non-primitives
 					if (type.isAssignableFrom(SquareInventory.class)) {
@@ -222,7 +217,7 @@ public class Load {
 		} catch (
 
 		Exception e) {
-			System.err.println("loadType() error");
+			System.err.println("load2 error");
 			e.printStackTrace();
 		}
 

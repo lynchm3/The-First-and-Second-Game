@@ -200,13 +200,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			TextBox.TYPE.ALL);
 	public static TextBox textBoxQty = new TextBox(null, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
 
-	public Inventory(GameObject... gameObjects) {
+	public Inventory() {
 
 		id = Level.generateNewId(this);
-
-		for (GameObject gameObject : gameObjects) {
-			add(gameObject);
-		}
 
 		if (weaponComparisonDisplay == null)
 			weaponComparisonDisplay = new ComparisonDisplay();

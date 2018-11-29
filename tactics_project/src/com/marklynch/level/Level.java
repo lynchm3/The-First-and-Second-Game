@@ -76,7 +76,6 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
-import com.marklynch.utils.Utils;
 
 public class Level {
 
@@ -1850,7 +1849,6 @@ public class Level {
 	}
 
 	public static void pausePlayer() {
-		Utils.printStackTrace();
 		// Utils.printStackTrace();
 		Player.playerPathToMove = null;
 		// Player.playerTargetSquare = null;
@@ -1860,13 +1858,13 @@ public class Level {
 	}
 
 	public void dragToFollowPlayer() {
-		if (Game.level.player.squareGameObjectIsOn.xInGrid > Game.level.player.lastSquare.xInGrid) {
+		if (Level.player.squareGameObjectIsOn.xInGrid > Level.player.lastSquare.xInGrid) {
 			Game.dragX -= Game.SQUARE_WIDTH;
-		} else if (Game.level.player.squareGameObjectIsOn.xInGrid < Game.level.player.lastSquare.xInGrid) {
+		} else if (Level.player.squareGameObjectIsOn.xInGrid < Level.player.lastSquare.xInGrid) {
 			Game.dragX += Game.SQUARE_WIDTH;
-		} else if (Game.level.player.squareGameObjectIsOn.yInGrid > Game.level.player.lastSquare.yInGrid) {
+		} else if (Level.player.squareGameObjectIsOn.yInGrid > Level.player.lastSquare.yInGrid) {
 			Game.dragY -= Game.SQUARE_HEIGHT;
-		} else if (Game.level.player.squareGameObjectIsOn.yInGrid < Game.level.player.lastSquare.yInGrid) {
+		} else if (Level.player.squareGameObjectIsOn.yInGrid < Level.player.lastSquare.yInGrid) {
 			Game.dragY += Game.SQUARE_HEIGHT;
 		}
 

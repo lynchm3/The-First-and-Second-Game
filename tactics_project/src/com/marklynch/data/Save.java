@@ -145,17 +145,23 @@ public class Save {
 	}
 
 	private static void saveType(Class clazz) {
+		ArrayList<Field> fields = null;
+		ArrayList<Field> declaredFields = null;
+		Statement statement = null;
+		String createTableQuery = null;
+		String insertQueryTemplate = null;
 
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
-			Statement stat = conn.createStatement();
+			statement = conn.createStatement();
 
-			System.out.println("saveType clazz.getSimpleName = " + clazz.getSimpleName());
-			stat.executeUpdate("DROP TABLE IF EXISTS " + clazz.getSimpleName() + ";");
+			// System.out.println("saveType clazz.getSimpleName = " +
+			// clazz.getSimpleName());
+			statement.executeUpdate("DROP TABLE IF EXISTS " + clazz.getSimpleName() + ";");
 
-			ArrayList<Field> fields = new ArrayList<Field>(Arrays.asList(clazz.getFields()));
-			ArrayList<Field> declaredFields = new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields()));
+			fields = new ArrayList<Field>(Arrays.asList(clazz.getFields()));
+			declaredFields = new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields()));
 
 			// Remove transient and static fields, don't want to save them
 			for (Field field : (ArrayList<Field>) fields.clone()) {
@@ -172,9 +178,12 @@ public class Save {
 				}
 			}
 
+			if (fields.isEmpty())
+				return;
+
 			// Make create table query and insert query template
-			String createTableQuery = "CREATE TABLE " + clazz.getSimpleName() + " (";
-			String insertQueryTemplate = "INSERT INTO " + clazz.getSimpleName() + " VALUES (";
+			createTableQuery = "CREATE TABLE " + clazz.getSimpleName() + " (";
+			insertQueryTemplate = "INSERT INTO " + clazz.getSimpleName() + " VALUES (";
 			for (Field field : fields) {
 				createTableQuery += field.getName();
 				insertQueryTemplate += "?";
@@ -186,7 +195,7 @@ public class Save {
 			createTableQuery += ");";
 			insertQueryTemplate += ");";
 
-			stat.executeUpdate(createTableQuery);
+			statement.executeUpdate(createTableQuery);
 
 			// Actually do the big ol' insert
 			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
@@ -236,7 +245,7 @@ public class Save {
 						// effects array, actions this turn array
 						preparedStatement.setString(count, "TODO ArrayList<?> class");
 					} else if (value instanceof Object) {
-						preparedStatement.setString(count, "TODO Object class");
+						preparedStatement.setString(count, "TODO Object class " + value);
 					} else if (value == null) {
 						preparedStatement.setInt(count, 0);
 					} else {
@@ -257,7 +266,7 @@ public class Save {
 			preparedStatement.executeBatch();
 			conn.setAutoCommit(true);
 
-			ResultSet rs = stat.executeQuery("select * from " + clazz.getSimpleName() + ";");
+			ResultSet rs = statement.executeQuery("select * from " + clazz.getSimpleName() + ";");
 
 			// while (rs.next()) {
 			// System.out.println("id = " + rs.getLong("id"));
@@ -267,8 +276,16 @@ public class Save {
 			conn.close();
 
 		} catch (Exception e) {
+			System.err.println("=======================");
 			System.err.println("saveGameObjects() error");
+			System.err.println("clazz = " + clazz);
+			System.err.println("fields = " + fields);
+			System.err.println("declaredFields = " + declaredFields);
+			System.err.println("statement = " + statement);
+			System.err.println("createTableQuery = " + createTableQuery);
+			System.err.println("insertQueryTemplate = " + insertQueryTemplate);
 			e.printStackTrace();
+			System.err.println("=======================");
 		}
 
 	}

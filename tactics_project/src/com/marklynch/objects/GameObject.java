@@ -133,7 +133,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Square squareGameObjectIsOn = null;
 	public Square lastSquare = null;
 	public InventorySquare inventorySquare = null;
-	public Inventory inventory;
+	public Inventory inventory = new Inventory();
 	public boolean showInventoryInGroundDisplay = false;;
 	public boolean canShareSquare = true;
 	public boolean fitsInInventory = true;
@@ -318,7 +318,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		halfHeight = height / 2;
 		randomisePosition();
 
-		inventory = new Inventory();
 		inventory.parent = this;
 	}
 
