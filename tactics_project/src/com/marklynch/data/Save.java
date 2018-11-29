@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import org.objectweb.asm.Type;
+
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -156,8 +158,6 @@ public class Save {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
 			statement = conn.createStatement();
 
-			// System.out.println("saveType clazz.getSimpleName = " +
-			// clazz.getSimpleName());
 			statement.executeUpdate("DROP TABLE IF EXISTS " + clazz.getSimpleName() + ";");
 
 			fields = new ArrayList<Field>(Arrays.asList(clazz.getFields()));
@@ -199,14 +199,14 @@ public class Save {
 
 			// Actually do the big ol' insert
 			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
+
 			for (Object object : (ArrayList<?>) clazz.getField("instances").get(null)) {// GameObject.instances
 
 				int count = 1;
 				for (Field field : fields) {
 
-					Object value = field.get(object);
+					Object value = field.get(object); // THIS is the crashing line
 
-					// System.out.println("Adding " + field.getName() + " @ " + count);
 					if (value instanceof Boolean) {
 						preparedStatement.setBoolean(count, (Boolean) value);
 					} else if (value instanceof Long) {
@@ -238,6 +238,8 @@ public class Save {
 						preparedStatement.setLong(count, ((Action) value).id);
 					} else if (value instanceof Enhancement) {
 						preparedStatement.setLong(count, ((Enhancement) value).id);
+					} else if (value instanceof GameObject) {
+						preparedStatement.setLong(count, ((GameObject) value).id);
 					} else if (value instanceof HashMap<?, ?>) {
 						// Highlevelstats, may need to create a class HighLevelStats, yey.
 						preparedStatement.setString(count, "TODO HashMap<?, ?> class");
@@ -247,18 +249,11 @@ public class Save {
 					} else if (value instanceof Object) {
 						preparedStatement.setString(count, "TODO Object class " + value);
 					} else if (value == null) {
-						preparedStatement.setInt(count, 0);
-					} else {
-						preparedStatement.setInt(count, 0);
-						// System.out.println("FAILED TO ADD");
+						preparedStatement.setNull(count, Type.VOID);
 					}
 
 					count++;
 				}
-
-				// System.out.println("preparedStatement.toString() = " +
-				// preparedStatement.toString());
-				// System.out.println("count = " + count);
 
 				preparedStatement.addBatch();
 			}
@@ -268,11 +263,6 @@ public class Save {
 			conn.setAutoCommit(true);
 
 			ResultSet rs = statement.executeQuery("select * from " + clazz.getSimpleName() + ";");
-
-			// while (rs.next()) {
-			// System.out.println("id = " + rs.getLong("id"));
-			// System.out.println("name = " + rs.getString("name"));
-			// }
 			rs.close();
 			conn.close();
 

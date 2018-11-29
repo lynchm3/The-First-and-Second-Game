@@ -156,14 +156,14 @@ public class QuestThePigs extends Quest {
 
 		farmHouseFrontSection = new StructureSection("Farm House", 12, 69, 24, 74, false, false, farmer);
 		farmHouseBackSection = new StructureSection("Farm House", 2, 75, 24, 85, false, false, farmer);
-		farmHouseFrontRoom = new StructureRoom("Kitchen", 13, 70, false, false,
-				new ArrayList<Actor>(), new Node[] { Nodes.farmEntrance, Nodes.farmHallway }, new RoomPart(13, 70, 23, 74));
-		farmHouseHallRoom = new StructureRoom("Hall", 3, 76, false, false,
-				new ArrayList<Actor>(), new Node[] { Nodes.farmHallway, Nodes.farmBedroom, Nodes.farmStorage }, new RoomPart(3, 76, 23, 77));
-		farmHouseBedroom = new StructureRoom("Bedroom", 3, 79, false, false,
-				new ArrayList<Actor>(), new Node[] { Nodes.farmBedroom }, new RoomPart(3, 79, 17, 84));
-		farmHouseStorageRoom = new StructureRoom("Storage", 19, 79, false, false,
-				new ArrayList<Actor>(), new Node[] { Nodes.farmStorage, Nodes.farmBackDoor }, new RoomPart(19, 79, 23, 84));
+		farmHouseFrontRoom = new StructureRoom("Kitchen", 13, 70, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.farmEntrance, Nodes.farmHallway }, new RoomPart(13, 70, 23, 74));
+		farmHouseHallRoom = new StructureRoom("Hall", 3, 76, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.farmHallway, Nodes.farmBedroom, Nodes.farmStorage }, new RoomPart(3, 76, 23, 77));
+		farmHouseBedroom = new StructureRoom("Bedroom", 3, 79, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.farmBedroom }, new RoomPart(3, 79, 17, 84));
+		farmHouseStorageRoom = new StructureRoom("Storage", 19, 79, false, false, new ArrayList<Actor>(),
+				new Node[] { Nodes.farmStorage, Nodes.farmBackDoor }, new RoomPart(19, 79, 23, 84));
 
 		farmHouseSections.add(farmHouseFrontSection);
 		farmHouseSections.add(farmHouseBackSection);
@@ -178,7 +178,7 @@ public class QuestThePigs extends Quest {
 
 		Templates.SHELF.makeCopy(Game.level.squares[14][69], farmer);
 		Templates.SHELF.makeCopy(Game.level.squares[15][69], farmer);
-		Templates.FURNACE.makeCopy(Game.level.squares[13][72], farmer);
+		Templates.FURNACE.makeCopy("Furnace", Game.level.squares[13][72], false, farmer);
 		GameObject pigSign = Templates.PIG_SIGN.makeCopy(Game.level.squares[25][70], farmer);
 		Templates.BENCH.makeCopy(Game.level.squares[15][68], farmer);
 		Templates.WELL.makeCopy(Game.level.squares[17][61], farmer);

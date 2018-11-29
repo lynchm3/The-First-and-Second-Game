@@ -2410,7 +2410,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				* 0.01f);
 		float resistedDamage = damage.value * resistance;
 		float friendlyFireReduction = 0;
-		if (gameObjectAttacker != null && gameObjectAttacker.groupOfActors != null && gameObjectAttacker.groupOfActors.contains(this)) {
+		if (gameObjectAttacker != null && gameObjectAttacker.groupOfActors != null
+				&& gameObjectAttacker.groupOfActors.contains(this)) {
 			friendlyFireReduction = gameObjectAttacker.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.FRIENDLY_FIRE)
 					* 0.01f;
 		}

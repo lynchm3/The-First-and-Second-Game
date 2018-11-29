@@ -487,7 +487,7 @@ public class Editor {
 		player.inventory.add(Templates.HAMMER.makeCopy(null, player));
 		player.inventory.add(Templates.HOE.makeCopy(null, player));
 		player.inventory.add(Templates.HUNTING_CAP.makeCopy(null, player));
-		player.inventory.add(Templates.LANDMINE.makeCopy(null, player));
+		player.inventory.add(Templates.LANDMINE.makeCopy(null, player, 1, 10));
 		player.inventory.add(Templates.LEATHERS.makeCopy(null, player));
 		player.inventory.add(Templates.LONG_GRASS.makeCopy(null, player));
 		player.inventory.add(Templates.MEAT_CHUNK.makeCopy(null, player));
