@@ -2,9 +2,16 @@ package com.marklynch.level.constructs.effect;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
@@ -15,7 +22,7 @@ import com.marklynch.utils.TextureUtils;
 
 public abstract class Effect implements DamageDealer {
 
-	public String logString;
+	public transient String logString;
 	public String effectName;
 	public GameObject source;
 	public GameObject target;
@@ -108,5 +115,42 @@ public abstract class Effect implements DamageDealer {
 		result.add(effectName + " " + highLevelStats.get(statType).value);
 		return result;
 	}
+
+	public static String getStringForSavingEffects(ArrayList<Effect> effects) {
+
+		if (effects.size() == 0)
+			return "";
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+
+		// JsonSerializer<GameObject> serializer = serializer; // will implement in a
+		// second
+		gsonBuilder.registerTypeAdapter(GameObject.class, serializer);
+
+		Gson gson = gsonBuilder.create();
+		// String customJSON = customGson.toJson(subscription);
+
+		// Gson gson = new Gson();
+		String jsonInString = gson.toJson(effects);
+		return jsonInString;
+	}
+
+	static JsonSerializer<GameObject> serializer = new JsonSerializer<GameObject>() {
+		// @Override
+		// public JsonElement serialize(GameObject src, Type typeOfSrc,
+		// JsonSerializationContext context) {
+		//
+		// JsonObject jsonMerchant = new JsonObject();
+		// jsonMerchant.addProperty("id", src.id);
+		// return jsonMerchant;
+		// }
+
+		@Override
+		public JsonElement serialize(GameObject src, Type type, JsonSerializationContext context) {
+			JsonObject jsonMerchant = new JsonObject();
+			jsonMerchant.addProperty("id", src.id);
+			return jsonMerchant;
+		}
+	};
 
 }

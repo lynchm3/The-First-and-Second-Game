@@ -97,7 +97,7 @@ public class Stat {
 		return new Stat(value);
 	}
 
-	public static String getObjectIdListForSavingHIGH_LEVEL_STATS(HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats) {
+	public static String getStringForSavingHIGH_LEVEL_STATS(HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats) {
 		String result = "";
 		for (HIGH_LEVEL_STATS highLevelStat : Stat.HIGH_LEVEL_STATS.values()) {
 			result += highLevelStats.get(highLevelStat).value;

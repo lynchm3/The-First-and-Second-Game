@@ -17,6 +17,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
@@ -268,21 +269,36 @@ public class Save {
 					} else if (value instanceof GameObject) {
 						preparedStatement.setLong(count, ((GameObject) value).id);
 					} else if (value instanceof HashMap<?, ?>) {
-						preparedStatement.setString(count,
-								Stat.getObjectIdListForSavingHIGH_LEVEL_STATS((HashMap<HIGH_LEVEL_STATS, Stat>) value));
-					} else if (value instanceof ArrayList<?>) {
-						ArrayList<GameObject> arrayList = (ArrayList<GameObject>) value;
-						if (arrayList.size() == 0)
+
+						HashMap<?, ?> hashMap = (HashMap<?, ?>) value;
+						if (hashMap.size() == 0)
 							preparedStatement.setString(count, "");
 
-						String result = "";
-						for (GameObject gameObject : arrayList) {
-							result += gameObject.id;
-							if (arrayList.get(arrayList.size() - 1) != gameObject) {
-								result += ",";
+						preparedStatement.setString(count,
+								Stat.getStringForSavingHIGH_LEVEL_STATS((HashMap<HIGH_LEVEL_STATS, Stat>) value));
+					} else if (value instanceof ArrayList<?>) {
+						ArrayList<?> arrayList = (ArrayList<?>) value;
+						if (arrayList.size() == 0) {
+
+							preparedStatement.setString(count, "");
+
+						} else if (arrayList.get(0) instanceof GameObject) {
+
+							String result = "";
+							for (GameObject gameObject : (ArrayList<GameObject>) arrayList) {
+								result += gameObject.id;
+								if (arrayList.get(arrayList.size() - 1) != gameObject) {
+									result += ",";
+								}
 							}
+							preparedStatement.setString(count, result);
+
+						} else if (arrayList.get(0) instanceof Effect) {
+
+							String result = Effect.getStringForSavingEffects((ArrayList<Effect>) arrayList);
+							preparedStatement.setString(count, result);
+
 						}
-						preparedStatement.setString(count, result);
 					} else if (value instanceof Object) {
 						preparedStatement.setString(count, "TODO Object class " + value);
 					} else if (value == null) {
