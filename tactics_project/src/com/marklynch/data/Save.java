@@ -5,7 +5,7 @@ import java.lang.reflect.Modifier;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,6 +74,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.utils.Texture;
 
 public class Save {
+	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
 
 	// When you decide to save
 	// 1. turn on pause mode (if not already) - Show spinner w/ "Ending Turn"
@@ -82,9 +83,9 @@ public class Save {
 	// 3. run save
 
 	// Keep this in order they should be laoded.
-	public static Class[] classesToSave = new Class[] {
+	public static Class<?>[] classesToSave = new Class[] {
 
-			// Square
+			// Squares
 			Square.class,
 
 			// LVL 3 GameObject subclass
@@ -108,66 +109,90 @@ public class Save {
 			// GameObject interfaces
 			Consumable.class, DamageDealer.class, SwitchListener.class, UpdatesWhenSquareContentsChange.class };
 
-	public static void save() {
+	static ArrayList<PreparedStatement> preparedStatements = new ArrayList<PreparedStatement>();
+	static Connection conn;
+	static long saveStartTime;
+	static long saveEndTime1;
+	static long saveEndTime2;
 
-		for (Class classToSave : classesToSave) {
-			saveType(classToSave);
+	public static void save() {
+		saveStartTime = System.currentTimeMillis();
+
+		try {
+
+			// Create fields list for each class
+			for (Class<?> classToLoad : Save.classesToSave) {
+				fieldsForEachClass.put(classToLoad, Save.getFields(GameObject.class));
+			}
+
+			conn = DriverManager.getConnection("jdbc:sqlite:test" + System.currentTimeMillis() + ".db");
+
+			// Create table for each class
+			for (Class<?> classToSave : classesToSave) {
+				createTable(classToSave);
+			}
+
+			// Create the insert statements for each class
+			for (Class<?> classToSave : classesToSave) {
+				createInsertPrStatements(classToSave);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
+		saveEndTime1 = System.currentTimeMillis();
+		System.out.println("Non-disk save time = " + (saveEndTime1 - saveStartTime));
 
 	}
 
-	private static void saveType(Class clazz) {
+	static Thread diskWritingThread = new Thread() {
+		@Override
+		public void run() {
+
+			// insert for each class
+			try {
+				conn.setAutoCommit(false);
+				for (PreparedStatement preparedStatement : preparedStatements) {
+					preparedStatement.executeBatch();
+				}
+				conn.setAutoCommit(true);
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			saveEndTime2 = System.currentTimeMillis();
+			System.out.println("Disk save time = " + (saveEndTime2 - saveEndTime1));
+			System.out.println("Total save time = " + (saveEndTime2 - saveStartTime));
+		}
+	};
+
+	// private
+
+	private static void createInsertPrStatements(Class clazz) {
 		ArrayList<Field> fields = null;
-		ArrayList<Field> declaredFields = null;
-		Statement statement = null;
-		String createTableQuery = null;
 		String insertQueryTemplate = null;
 
 		try {
-			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
-			statement = conn.createStatement();
 
-			statement.executeUpdate("DROP TABLE IF EXISTS " + clazz.getSimpleName() + ";");
-
-			fields = new ArrayList<Field>(Arrays.asList(clazz.getFields()));
-			declaredFields = new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields()));
-
-			// Remove transient and static fields, don't want to save them
-			for (Field field : (ArrayList<Field>) fields.clone()) {
-				if (
-				//
-				Modifier.isTransient(field.getModifiers())
-						//
-						|| Modifier.isStatic(field.getModifiers())
-						//
-						|| (!declaredFields.contains(field) && !field.getName().equals("id")))
-				//
-				{
-					fields.remove(field);
-				}
-			}
+			fields = fieldsForEachClass.get(clazz);
 
 			if (fields.isEmpty())
 				return;
 
 			// Make create table query and insert query template
-			createTableQuery = "CREATE TABLE " + clazz.getSimpleName() + " (";
 			insertQueryTemplate = "INSERT INTO " + clazz.getSimpleName() + " VALUES (";
 			for (Field field : fields) {
-				createTableQuery += field.getName();
 				insertQueryTemplate += "?";
 				if (fields.get(fields.size() - 1) != field) {
-					createTableQuery += ",";
 					insertQueryTemplate += ",";
 				}
 			}
-			createTableQuery += ");";
 			insertQueryTemplate += ");";
 
-			statement.executeUpdate(createTableQuery);
-
 			// Actually do the big ol' insert
+
 			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
 
 			for (Object object : (ArrayList<?>) clazz.getField("instances").get(null)) {// GameObject.instances
@@ -228,26 +253,81 @@ public class Save {
 				preparedStatement.addBatch();
 			}
 
-			conn.setAutoCommit(false);
-			preparedStatement.executeBatch();
-			conn.setAutoCommit(true);
-
-			ResultSet rs = statement.executeQuery("select * from " + clazz.getSimpleName() + ";");
-			rs.close();
-			conn.close();
+			preparedStatements.add(preparedStatement);
 
 		} catch (Exception e) {
 			System.err.println("=======================");
 			System.err.println("saveGameObjects() error");
 			System.err.println("clazz = " + clazz);
 			System.err.println("fields = " + fields);
-			System.err.println("declaredFields = " + declaredFields);
-			System.err.println("statement = " + statement);
-			System.err.println("createTableQuery = " + createTableQuery);
 			System.err.println("insertQueryTemplate = " + insertQueryTemplate);
 			e.printStackTrace();
 			System.err.println("=======================");
 		}
+
+	}
+
+	static void createTable(Class<?> clazz) {
+
+		ArrayList<Field> fields = null;
+		Statement statement = null;
+		String createTableQuery = null;
+		try {
+
+			statement = conn.createStatement();
+			fields = fieldsForEachClass.get(clazz);
+
+			if (fields.isEmpty())
+				return;
+
+			// Make create table query and insert query template
+			createTableQuery = "CREATE TABLE " + clazz.getSimpleName() + " (";
+			for (Field field : fields) {
+				createTableQuery += field.getName();
+				if (fields.get(fields.size() - 1) != field) {
+					createTableQuery += ",";
+				}
+			}
+			createTableQuery += ");";
+
+			statement.executeUpdate(createTableQuery);
+		} catch (Exception e) {
+			System.err.println("=======================");
+			System.err.println("saveGameObjects() error");
+			System.err.println("clazz = " + clazz);
+			System.err.println("fields = " + fields);
+			e.printStackTrace();
+			System.err.println("=======================");
+
+		}
+
+	}
+
+	static ArrayList<Field> getFields(Class<?> clazz) {
+
+		try {
+			ArrayList<Field> fields = new ArrayList<Field>(Arrays.asList(clazz.getFields()));
+			ArrayList<Field> declaredFields = new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields()));
+
+			// Remove transient and static fields, don't want to save them
+			for (Field field : (ArrayList<Field>) fields.clone()) {
+				if (
+				//
+				Modifier.isTransient(field.getModifiers())
+						//
+						|| Modifier.isStatic(field.getModifiers())
+						//
+						|| (!declaredFields.contains(field) && !field.getName().equals("id")))
+				//
+				{
+					fields.remove(field);
+				}
+			}
+			return fields;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 
 	}
 

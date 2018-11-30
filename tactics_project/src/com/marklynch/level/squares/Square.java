@@ -1,7 +1,5 @@
 package com.marklynch.level.squares;
 
-import static com.marklynch.utils.ResourceUtils.getGlobalImage;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -74,8 +72,8 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
 
-	public int elevation;
-	public int travelCost;
+	public transient int elevation;
+	public transient int travelCost;
 	public SquareInventory inventory;
 
 	// public transient boolean reachableBySelectedCharater = false;
@@ -86,7 +84,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public transient ArrayList<Weapon> weaponsThatCanAttack;
 
 	// image
-	public String imageTexturePath;
 	public Texture floorImageTexture = null;
 	public static Texture GRASS_TEXTURE;
 	public static Texture DARK_GRASS_TEXTURE;
@@ -117,19 +114,19 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public transient StructureSection structureSectionSquareIsIn;
 	public transient StructureRoom structureRoomSquareIsIn;
 
-	public boolean highlight = false;
-	public boolean drawPathDot = false;
-	public boolean drawEndPathDot = false;
+	public transient boolean highlight = false;
+	public transient boolean drawPathDot = false;
+	public transient boolean drawEndPathDot = false;
 	// public boolean drawX = false;
 
-	public ArrayList<Actor> owners;
-	public boolean restricted;
-	public boolean restrictedAtNight;
-	public String name;
-	public boolean flash;
+	public transient ArrayList<Actor> owners;
+	public transient boolean restricted;
+	public transient boolean restrictedAtNight;
+	public transient String name;
+	public transient boolean flash;
 
 	// path finding
-	public ArrayList<Node> nodes;
+	public transient ArrayList<Node> nodes;
 
 	public transient Square pathParent;
 	public transient float costFromStart;
@@ -138,15 +135,15 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public transient float cost = 1;
 	public transient float costForPlayer = 1;
 
-	public int xInGrid;
-	public int yInGrid;
+	public transient int xInGrid;
+	public transient int yInGrid;
 
-	public float xInGridPixels;
-	public float yInGridPixels;
+	public transient float xInGridPixels;
+	public transient float yInGridPixels;
 
-	public ArrayList<Square> neighbors;
+	public transient ArrayList<Square> neighbors;
 
-	public Node node;
+	public transient Node node;
 
 	public Square() {
 	}
@@ -168,14 +165,9 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		this.xInGridPixels = xInGrid * Game.SQUARE_WIDTH;
 		this.yInGridPixels = yInGrid * Game.SQUARE_HEIGHT;
 
-		this.imageTexturePath = imagePath;
 		this.travelCost = travelCost;
 		this.elevation = elevation;
-
-		if (imageTexture == null)
-			loadImages();
-		else
-			this.floorImageTexture = imageTexture;
+		this.floorImageTexture = imageTexture;
 
 		weaponsThatCanAttack = new ArrayList<Weapon>();
 		this.inventory = inventory;
@@ -252,17 +244,10 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 		inventory.square = this;
 		inventory.postLoad1();
 		weaponsThatCanAttack = new ArrayList<Weapon>();
-
-		loadImages();
 	}
 
 	public void postLoad2() {
 		inventory.postLoad2();
-	}
-
-	public void loadImages() {
-		this.floorImageTexture = getGlobalImage(imageTexturePath, false);
-
 	}
 
 	public void draw1() {

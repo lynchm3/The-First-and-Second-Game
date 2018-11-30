@@ -1,3 +1,4 @@
 tactics_project/res/templates/*
 tactics_project/.settings/org.eclipse.jdt.ui.prefs
 tactics_project/test.db
+*.db

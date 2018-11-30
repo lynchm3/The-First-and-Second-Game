@@ -1,13 +1,11 @@
 package com.marklynch.data;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import com.marklynch.level.Level;
@@ -28,17 +26,22 @@ public class Load {
 	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
 
 	public static void load() {
+		long loadStartTime = System.currentTimeMillis();
+		// System.out.println("Starting load @ " + loadStartTime);
 
-		for (Class<?> classToSave : Save.classesToSave) {
-			resultSets.put(classToSave, getResultSet(GameObject.class));
-			fieldsForEachClass.put(classToSave, getFields(GameObject.class));
-			load1(classToSave);
+		for (Class<?> classToLoad : Save.classesToSave) {
+			resultSets.put(classToLoad, getResultSet(GameObject.class));
+			fieldsForEachClass.put(classToLoad, Save.getFields(GameObject.class));
+			load1(classToLoad);
 		}
 		for (Class<?> classToSave : Save.classesToSave) {
 			load2(classToSave);
 		}
 
 		Level.player = (Player) Player.instances.get(0);
+		long loadEndTime = System.currentTimeMillis();
+		// System.out.println("Ending load @ " + loadEndTime);
+		System.out.println("Total load time = " + (loadEndTime - loadStartTime));
 	}
 
 	private static ResultSet getResultSet(Class<?> clazz) {
@@ -54,34 +57,6 @@ public class Load {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	private static ArrayList<Field> getFields(Class<?> clazz) {
-
-		try {
-			ArrayList<Field> fields = new ArrayList<Field>(Arrays.asList(clazz.getFields()));
-			ArrayList<Field> declaredFields = new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields()));
-
-			// Remove transient and static fields, don't want to save them
-			for (Field field : (ArrayList<Field>) fields.clone()) {
-				if (
-				//
-				Modifier.isTransient(field.getModifiers())
-						//
-						|| Modifier.isStatic(field.getModifiers())
-						//
-						|| (!declaredFields.contains(field) && !field.getName().equals("id")))
-				//
-				{
-					fields.remove(field);
-				}
-			}
-			return fields;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-
 	}
 
 	private static void load1(Class<?> clazz) {

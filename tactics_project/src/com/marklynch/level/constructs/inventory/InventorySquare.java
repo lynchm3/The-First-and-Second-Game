@@ -45,12 +45,6 @@ public class InventorySquare extends Square {
 	}
 
 	@Override
-	public void loadImages() {
-		// this.imageTexture = getGlobalImage(imageTexturePath);
-
-	}
-
-	@Override
 	public void postLoad1() {
 
 	}
