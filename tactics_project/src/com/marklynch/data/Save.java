@@ -121,8 +121,8 @@ public class Save {
 		try {
 
 			// Create fields list for each class
-			for (Class<?> classToLoad : Save.classesToSave) {
-				fieldsForEachClass.put(classToLoad, Save.getFields(GameObject.class));
+			for (Class<?> classToSave : Save.classesToSave) {
+				fieldsForEachClass.put(classToSave, Save.getFields(classToSave));
 			}
 
 			conn = DriverManager.getConnection("jdbc:sqlite:test" + System.currentTimeMillis() + ".db");
@@ -136,6 +136,8 @@ public class Save {
 			for (Class<?> classToSave : classesToSave) {
 				createInsertPrStatements(classToSave);
 			}
+
+			diskWritingThread.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -149,8 +151,9 @@ public class Save {
 		@Override
 		public void run() {
 
-			// insert for each class
 			try {
+
+				// insert for each class
 				conn.setAutoCommit(false);
 				for (PreparedStatement preparedStatement : preparedStatements) {
 					preparedStatement.executeBatch();
