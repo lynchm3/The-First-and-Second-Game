@@ -71,7 +71,7 @@ public class ActionDigging extends Action {
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
-		target.squareGameObjectIsOn.floorImageTexture = Square.MUD_TEXTURE;
+		target.squareGameObjectIsOn.setFloorImageTexture(Square.MUD_TEXTURE);
 
 		if (target instanceof Discoverable) {
 			Discoverable discoverable = (Discoverable) target;

@@ -124,6 +124,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 		square.calculatePathCost();
 		square.calculatePathCostForPlayer();
+		square.updateSquaresToSave();
 
 		updateStacks();
 		matchStacksToSquares();

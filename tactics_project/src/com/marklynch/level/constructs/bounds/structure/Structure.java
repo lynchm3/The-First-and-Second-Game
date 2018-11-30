@@ -61,7 +61,7 @@ public class Structure {
 
 		// Entrance squares
 		for (Square entranceSquare : entranceSquares) {
-			entranceSquare.floorImageTexture = floorImageTexture;
+			entranceSquare.setFloorImageTexture(floorImageTexture);
 			entranceSquare.calculatePathCost();
 			entranceSquare.calculatePathCostForPlayer();
 		}
@@ -137,8 +137,8 @@ public class Structure {
 					if (!squaresToRemove.contains(Game.level.squares[i][j])) {
 						Level.squares[i][j].structureSquareIsIn = this;
 						Level.squares[i][j].structureSectionSquareIsIn = caveSection;
-						if (Level.squares[i][j].floorImageTexture == Square.GRASS_TEXTURE)
-							Level.squares[i][j].floorImageTexture = floorImageTexture;
+						if (Level.squares[i][j].getFloorImageTexture() == Square.GRASS_TEXTURE)
+							Level.squares[i][j].setFloorImageTexture(floorImageTexture);
 					}
 				}
 			}

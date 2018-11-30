@@ -155,7 +155,7 @@ public class AreaTownForest {
 				// centerY) * 2)
 				// continue;
 
-				Level.squares[i][j].floorImageTexture = Square.GRASS_TEXTURE;
+				Level.squares[i][j].setFloorImageTexture(Square.GRASS_TEXTURE);
 			}
 		}
 

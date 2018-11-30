@@ -281,7 +281,7 @@ public class PinWindow implements Draggable {
 					drawStats(actor);
 				}
 			} else if (square != null) {
-				TextureUtils.drawTexture(square.floorImageTexture, drawPositionX + borderWidth,
+				TextureUtils.drawTexture(square.getFloorImageTexture(), drawPositionX + borderWidth,
 						drawPositionY + titleBarHeight, drawPositionX + borderWidth + Game.SQUARE_WIDTH,
 						drawPositionY + titleBarHeight + Game.SQUARE_HEIGHT);
 				drawSquareStats();

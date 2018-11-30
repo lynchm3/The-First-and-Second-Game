@@ -85,7 +85,9 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 
 	// image
 	public transient Texture defaultImageTexture = null;
+
 	public Texture floorImageTexture = null;
+
 	public static Texture GRASS_TEXTURE;
 	public static Texture DARK_GRASS_TEXTURE;
 	public static Texture STONE_TEXTURE;
@@ -1342,5 +1344,26 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			return true;
 
 		return false;
+	}
+
+	public Texture getFloorImageTexture() {
+		return floorImageTexture;
+	}
+
+	public void setFloorImageTexture(Texture floorImageTexture) {
+		if (defaultImageTexture != null && floorImageTexture != defaultImageTexture) {
+		}
+		this.floorImageTexture = floorImageTexture;
+		updateSquaresToSave();
+	}
+
+	public void updateSquaresToSave() {
+		if (inventory.size() == 0 && (defaultImageTexture == null || floorImageTexture == defaultImageTexture)) {
+			Level.squaresToSave.remove(this);
+		} else {
+			if (!Level.squaresToSave.contains(this)) {
+				Level.squaresToSave.add(this);
+			}
+		}
 	}
 }

@@ -1953,4 +1953,17 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	}
 
+	public String getObjectIdListForSaving() {
+		if (size() == 0)
+			return "";
+		String result = "";
+		for (GameObject gameObject : gameObjects) {
+			result += gameObject.id;
+			if (gameObjects.get(gameObjects.size() - 1) != gameObject) {
+				result += ",";
+			}
+		}
+		return result;
+	}
+
 }

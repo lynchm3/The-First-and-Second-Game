@@ -518,10 +518,10 @@ public class Level {
 
 		for (int i = 0; i < Level.squares.length; i++) {
 			for (int j = 0; j < Level.squares[0].length; j++) {
-				squares[i][j].defaultImageTexture = squares[i][j].floorImageTexture;
+				squares[i][j].defaultImageTexture = squares[i][j].getFloorImageTexture();
 			}
 		}
-		squares[0][0].floorImageTexture = Square.DARK_GRASS_TEXTURE;
+		squares[0][0].setFloorImageTexture(Square.DARK_GRASS_TEXTURE);
 	}
 
 	public void createLevelButtons() {
@@ -2449,6 +2449,7 @@ public class Level {
 	}
 
 	public static ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
+	public static ArrayList<Square> squaresToSave = new ArrayList<Square>();
 
 	public static void addSecondaryAnimation(Animation animation) {
 

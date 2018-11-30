@@ -164,19 +164,14 @@ public class Save {
 		// floorImageTexture
 		try {
 			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
-			for (int i = 0; i < Level.squares.length; i++) {
-				for (int j = 0; j < Level.squares[0].length; j++) {
-					if (Level.squares[i][j].defaultImageTexture != Level.squares[i][j].floorImageTexture) {
-						preparedStatement.setLong(1, Level.squares[i][j].id);
-						preparedStatement.setString(2, "TODO " + Level.squares[i][j].inventory);
-						preparedStatement.setString(3, Level.squares[i][j].floorImageTexture.path);
-						preparedStatement.addBatch();
-					}
-				}
+			for (Square square : Level.squaresToSave) {
+				preparedStatement.setLong(1, square.id);
+				preparedStatement.setString(2, square.inventory.getObjectIdListForSaving());
+				preparedStatement.setString(3, square.getFloorImageTexture().path);
+				preparedStatement.addBatch();
 			}
 			preparedStatements.add(preparedStatement);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

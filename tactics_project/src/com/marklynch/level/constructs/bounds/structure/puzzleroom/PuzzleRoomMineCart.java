@@ -154,14 +154,14 @@ public class PuzzleRoomMineCart extends StructureRoom {
 
 		// Single square on it's own to test dash
 		Templates.VOID_HOLE.makeCopy(Level.squares[posX + 2][posY + 1], null, voidSquare);
-		Level.squares[posX + 2][posY + 1].floorImageTexture = Square.VOID_SQUARE;
+		Level.squares[posX + 2][posY + 1].setFloorImageTexture(Square.VOID_SQUARE);
 
 		// Bonus void to get the chest
 		for (int i = 9; i < 13; i++) {
 			for (int j = 2; j < 8; j++) {
 				if (!islandSquares.contains(Level.squares[posX + i][posY + j])) {
 					Templates.VOID_HOLE.makeCopy(Level.squares[posX + i][posY + j], null, voidSquare);
-					Level.squares[posX + i][posY + j].floorImageTexture = Square.VOID_SQUARE;
+					Level.squares[posX + i][posY + j].setFloorImageTexture(Square.VOID_SQUARE);
 				}
 			}
 		}
@@ -173,7 +173,7 @@ public class PuzzleRoomMineCart extends StructureRoom {
 						&& Level.squares[posX + i][posY + j] != seesaw.square2) {
 					Templates.VOID_HOLE.makeCopy(Level.squares[posX + i][posY + j], null, voidSquare);
 				}
-				Level.squares[posX + i][posY + j].floorImageTexture = Square.VOID_SQUARE;
+				Level.squares[posX + i][posY + j].setFloorImageTexture(Square.VOID_SQUARE);
 			}
 		}
 

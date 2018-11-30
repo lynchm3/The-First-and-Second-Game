@@ -25,9 +25,9 @@ import com.marklynch.objects.Storage;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.actors.Doctor;
 import com.marklynch.objects.actors.Trader;
-import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.templates.Templates;
 
 public class AreaTown {
@@ -199,7 +199,7 @@ public class AreaTown {
 		new BodyOfWater(posX + 25, posY + 15, posX + 90, posY + 15);
 		new BodyOfWater(posX + 92, posY + 15, posX + 92, posY + 29);
 
-		Game.level.squares[posX + 91][posY + 15].floorImageTexture = Square.STONE_TEXTURE;
+		Game.level.squares[posX + 91][posY + 15].setFloorImageTexture(Square.STONE_TEXTURE);
 
 	}
 

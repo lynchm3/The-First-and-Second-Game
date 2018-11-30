@@ -8,7 +8,7 @@ public class BodyOfWater {
 
 	public BodyOfWater(Square... squares) {
 		for (Square square : squares) {
-			square.floorImageTexture = Square.WATER_TEXTURE;
+			square.setFloorImageTexture(Square.WATER_TEXTURE);
 			if (!square.inventory.contains(Templates.WATER_BODY.getClass()))
 				square.inventory.add(Templates.WATER_BODY.makeCopy(null, null));
 		}
@@ -18,7 +18,7 @@ public class BodyOfWater {
 		for (int i = x1; i <= x2; i++) {
 			for (int j = y1; j <= y2; j++) {
 				if (!Game.level.squares[i][j].inventory.contains(Templates.WATER_BODY.getClass())) {
-					Game.level.squares[i][j].floorImageTexture = Square.WATER_TEXTURE;
+					Game.level.squares[i][j].setFloorImageTexture(Square.WATER_TEXTURE);
 					Game.level.squares[i][j].inventory.add(Templates.WATER_BODY.makeCopy(null, null));
 				}
 			}
