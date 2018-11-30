@@ -48,7 +48,7 @@ public class Load {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
+			Connection conn = DriverManager.getConnection(Save.dbConn);
 			Statement statement = conn.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from " + clazz.getSimpleName() + ";");
 

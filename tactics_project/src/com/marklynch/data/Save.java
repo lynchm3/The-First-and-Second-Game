@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import org.objectweb.asm.Type;
 
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -86,7 +87,7 @@ public class Save {
 	public static Class<?>[] classesToSave = new Class[] {
 
 			// Squares
-			Square.class,
+			// Square.class,
 
 			// LVL 3 GameObject subclass
 			Gate.class, Seesaw.class,
@@ -114,6 +115,7 @@ public class Save {
 	static long saveStartTime;
 	static long saveEndTime1;
 	static long saveEndTime2;
+	public static String dbConn = "jdbc:sqlite:test" + System.currentTimeMillis() + ".db";
 
 	public static void save() {
 		saveStartTime = System.currentTimeMillis();
@@ -125,7 +127,9 @@ public class Save {
 				fieldsForEachClass.put(classToSave, Save.getFields(classToSave));
 			}
 
-			conn = DriverManager.getConnection("jdbc:sqlite:test" + System.currentTimeMillis() + ".db");
+			conn = DriverManager.getConnection(dbConn);
+
+			createPreparedStatementForSquareInserts();
 
 			// Create table for each class
 			for (Class<?> classToSave : classesToSave) {
@@ -134,7 +138,10 @@ public class Save {
 
 			// Create the insert statements for each class
 			for (Class<?> classToSave : classesToSave) {
-				createInsertPrStatements(classToSave);
+
+				PreparedStatement p = createPreparedStatementForInserts(classToSave);
+				if (p != null)
+					preparedStatements.add(p);
 			}
 
 			diskWritingThread.start();
@@ -145,6 +152,33 @@ public class Save {
 		saveEndTime1 = System.currentTimeMillis();
 		System.out.println("Non-disk save time = " + (saveEndTime1 - saveStartTime));
 
+	}
+
+	public static void createPreparedStatementForSquareInserts() {
+
+		fieldsForEachClass.put(Square.class, Save.getFields(Square.class));
+		createTable(Square.class);
+		String insertQueryTemplate = "INSERT INTO Square VALUES (?,?,?)";
+		// id
+		// inventory
+		// floorImageTexture
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
+			for (int i = 0; i < Level.squares.length; i++) {
+				for (int j = 0; j < Level.squares[0].length; j++) {
+					if (Level.squares[i][j].defaultImageTexture != Level.squares[i][j].floorImageTexture) {
+						preparedStatement.setLong(1, Level.squares[i][j].id);
+						preparedStatement.setString(2, "TODO " + Level.squares[i][j].inventory);
+						preparedStatement.setString(3, Level.squares[i][j].floorImageTexture.path);
+						preparedStatement.addBatch();
+					}
+				}
+			}
+			preparedStatements.add(preparedStatement);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	static Thread diskWritingThread = new Thread() {
@@ -171,9 +205,7 @@ public class Save {
 		}
 	};
 
-	// private
-
-	private static void createInsertPrStatements(Class clazz) {
+	private static PreparedStatement createPreparedStatementForInserts(Class clazz) {
 		ArrayList<Field> fields = null;
 		String insertQueryTemplate = null;
 
@@ -182,7 +214,7 @@ public class Save {
 			fields = fieldsForEachClass.get(clazz);
 
 			if (fields.isEmpty())
-				return;
+				return null;
 
 			// Make create table query and insert query template
 			insertQueryTemplate = "INSERT INTO " + clazz.getSimpleName() + " VALUES (";
@@ -256,7 +288,7 @@ public class Save {
 				preparedStatement.addBatch();
 			}
 
-			preparedStatements.add(preparedStatement);
+			return preparedStatement;
 
 		} catch (Exception e) {
 			System.err.println("=======================");
@@ -267,6 +299,8 @@ public class Save {
 			e.printStackTrace();
 			System.err.println("=======================");
 		}
+
+		return null;
 
 	}
 

@@ -37,12 +37,12 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void enterTyped() {
-				int newWidth = 0;
-				if (this.textEntered.length() > 0)
-					newWidth = Integer.valueOf(this.textEntered).intValue();
-				Game.level.changeSize(newWidth, Game.level.height);
-				LevelSettingsWindow.this.editor.editorState = Editor.EDITOR_STATE.DEFAULT;
-				this.down = false;
+				// int newWidth = 0;
+				// if (this.textEntered.length() > 0)
+				// newWidth = Integer.valueOf(this.textEntered).intValue();
+				// Game.level.changeSize(newWidth, Game.level.height);
+				// LevelSettingsWindow.this.editor.editorState = Editor.EDITOR_STATE.DEFAULT;
+				// this.down = false;
 			}
 
 			@Override
@@ -87,11 +87,11 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void enterTyped() {
-				int newHeight = 0;
-				if (this.textEntered.length() > 0)
-					newHeight = Integer.valueOf(this.textEntered).intValue();
-				Game.level.changeSize(Game.level.width, newHeight);
-				this.down = false;
+				// int newHeight = 0;
+				// if (this.textEntered.length() > 0)
+				// newHeight = Integer.valueOf(this.textEntered).intValue();
+				// Game.level.changeSize(Game.level.width, newHeight);
+				// this.down = false;
 			}
 
 			@Override

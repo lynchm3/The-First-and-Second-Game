@@ -282,416 +282,7 @@ public class Level {
 
 		initGrid(this.squares, this.width, this.height);
 		nodes = new Nodes(squares);
-
-		clearNotificationsButton = new LevelButton(0, 0, 100, 20, "end_turn_button.png", "end_turn_button.png", "CLEAR",
-				true, true, Color.BLACK, Color.WHITE, "Clear All Notifications");
-		clearNotificationsButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.level.notifications.clear();
-			}
-		});
-
-		Button doNothing2Button = new LevelButton(110f, 40f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"Area Colors", false, false, Color.BLACK, Color.WHITE, "DEV - Color code areas");
-		doNothing2Button.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.areaColors = !Game.areaColors;
-			}
-		});
-		buttons.add(doNothing2Button);
-
-		Button nothingButton = new LevelButton(220f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"Show Nodes", false, false, Color.BLACK, Color.WHITE, "DEV - Toggle nodes being drawn");
-		nothingButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.drawNodes = !Game.drawNodes;
-
-			}
-		});
-		nothingButton.enabled = true;
-		buttons.add(nothingButton);
-
-		Button seeAllButton = new LevelButton(330f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"FULL VIS", false, false, Color.BLACK, Color.WHITE, "DEV - Reveal all squares");
-		seeAllButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.fullVisiblity = !Game.fullVisiblity;
-			}
-		});
-		seeAllButton.enabled = true;
-		buttons.add(seeAllButton);
-
-		Button showAILinesButton = new LevelButton(440f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"AI LINES", false, false, Color.BLACK, Color.WHITE, "DEV - Draw AI target Lines");
-		showAILinesButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.showAILines = !Game.showAILines;
-			}
-		});
-		showAILinesButton.enabled = true;
-		buttons.add(showAILinesButton);
-
-		Button showTriggerLinesButton = new LevelButton(550f, 40f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "TRGR LINES", false, false, Color.BLACK, Color.WHITE,
-				"DEV - Draw trigger lines between switches etc.");
-		showTriggerLinesButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.showTriggerLines = !Game.showTriggerLines;
-			}
-		});
-		showTriggerLinesButton.enabled = true;
-		buttons.add(showTriggerLinesButton);
-
-		Button highlightRestrictedButton = new LevelButton(660f, 40f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "RSTRCTD SQRS", false, false, Color.BLACK, Color.WHITE,
-				"DEV - Highlight restricted squares");
-		highlightRestrictedButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.redHighlightOnRestrictedSquares = !Game.redHighlightOnRestrictedSquares;
-			}
-		});
-		highlightRestrictedButton.enabled = true;
-		buttons.add(highlightRestrictedButton);
-
-		Button highlightPathButton = new LevelButton(770f, 40f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "PATH SQRS", false, false, Color.BLACK, Color.WHITE,
-				"DEV - Highlight path");
-		highlightPathButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.highlightPath = !Game.highlightPath;
-				if (Game.highlightPath == false) {
-					if (Player.playerPathToMouse != null) {
-						for (Square square : Player.playerPathToMouse.squares) {
-							square.drawPathDot = false;
-							square.drawEndPathDot = false;
-						}
-					}
-				}
-			}
-		});
-		highlightPathButton.enabled = true;
-		buttons.add(highlightPathButton);
-
-		Button cameraFollowButton = new LevelButton(880f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"CAM FLLW", false, false, Color.BLACK, Color.WHITE,
-				"SETTING - Whether camera should follow the player");
-		cameraFollowButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.level.settingFollowPlayer = !Game.level.settingFollowPlayer;
-
-			}
-		});
-		cameraFollowButton.enabled = true;
-		buttons.add(cameraFollowButton);
-
-		// Button infernoButton = new LevelButton(110f, 80f, 100f, 30f,
-		// "undo_button.png", "undo_button_disabled.png",
-		// "INFERNO", false, false, Color.BLACK, Color.WHITE, "DEV - Cast INFERNO");
-		// infernoButton.setClickListener(new ClickListener() {
-		// @Override
-		// public void click() {
-		// pausePlayer();
-		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-		// Level.this.selectedPower = new PowerInferno(Game.level.player);
-		// Game.level.popupMenuObjects.clear();
-		// Game.level.popupMenuActions.clear();
-		// }
-		// });
-		// infernoButton.enabled = true;
-		// buttons.add(infernoButton);
-		//
-		// Button superPeekButton = new LevelButton(220f, 80f, 100f, 30f,
-		// "undo_button.png", "undo_button_disabled.png",
-		// "SUPERPEEK", false, false, Color.BLACK, Color.WHITE, "DEV - Cast SUPERPEEK");
-		// superPeekButton.setClickListener(new ClickListener() {
-		// @Override
-		// public void click() {
-		// pausePlayer();
-		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-		// Level.this.selectedPower = new PowerSuperPeek(Game.level.player);
-		// Game.level.popupMenuObjects.clear();
-		// Game.level.popupMenuActions.clear();
-		// }
-		// });
-		// superPeekButton.enabled = true;
-		// buttons.add(superPeekButton);
-		//
-		// Button healSelfButton = new LevelButton(330f, 80f, 100f, 30f,
-		// "undo_button.png", "undo_button_disabled.png",
-		// "HEAL SELF", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL SELF");
-		// healSelfButton.setClickListener(new ClickListener() {
-		// @Override
-		// public void click() {
-		// pausePlayer();
-		// new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
-		// new PowerHealSelf(Game.level.player)).perform();
-		// Game.level.popupMenuObjects.clear();
-		// Game.level.popupMenuActions.clear();
-		// }
-		// });
-		// healSelfButton.enabled = true;
-		// buttons.add(healSelfButton);
-		//
-		// Button healTouchButton = new LevelButton(440f, 80f, 100f, 30f,
-		// "undo_button.png", "undo_button_disabled.png",
-		// "HEAL TOUCH", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL
-		// TOUCH");
-		// healTouchButton.setClickListener(new ClickListener() {
-		// @Override
-		// public void click() {
-		// pausePlayer();
-		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-		// Level.this.selectedPower = new PowerHealTouch(Game.level.player);
-		// Game.level.popupMenuObjects.clear();
-		// Game.level.popupMenuActions.clear();
-		// }
-		// });
-		// healTouchButton.enabled = true;
-		// buttons.add(healTouchButton);
-		//
-		// Button healRangedButton = new LevelButton(550f, 80f, 100f, 30f,
-		// "undo_button.png", "undo_button_disabled.png",
-		// "HEAL RANGED", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL
-		// RANGED");
-		// healRangedButton.setClickListener(new ClickListener() {
-		// @Override
-		// public void click() {
-		// pausePlayer();
-		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-		// Level.this.selectedPower = new PowerHealRanged(Game.level.player);
-		// Game.level.popupMenuObjects.clear();
-		// Game.level.popupMenuActions.clear();
-		// }
-		// });
-		// healRangedButton.enabled = true;
-		// buttons.add(healRangedButton);
-		//
-		// Button unlockButton = new LevelButton(110f, 120f, 100f, 30f,
-		// "undo_button.png", "undo_button_disabled.png",
-		// "UNLOCK", false, false, Color.BLACK, Color.WHITE, "DEV - Cast UNLOCK");
-		// unlockButton.setClickListener(new ClickListener() {
-		// @Override
-		// public void click() {
-		// pausePlayer();
-		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-		// Level.this.selectedPower = new PowerUnlock(Game.level.player);
-		// Game.level.popupMenuObjects.clear();
-		// Game.level.popupMenuActions.clear();
-		// }
-		// });
-		// unlockButton.enabled = true;
-		// buttons.add(unlockButton);
-		//
-		// poisonBlastButton = new LevelButton(220f, 120f, 100f, 30f, "undo_button.png",
-		// "undo_button_disabled.png",
-		// "POISON", false, false, Color.BLACK, Color.WHITE, "DEV - Cast POISON BLAST");
-		// poisonBlastButton.setClickListener(new ClickListener() {
-		// @Override
-		// public void click() {
-		// pausePlayer();
-		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-		// Level.this.selectedPower = new PowerPoisonBlast(Game.level.player);
-		// Game.level.popupMenuObjects.clear();
-		// Game.level.popupMenuActions.clear();
-		// }
-		// });
-		// poisonBlastButton.enabled = true;
-		//
-		// Button bleedButton = new LevelButton(330f, 120f, 100f, 30f,
-		// "undo_button.png", "undo_button_disabled.png",
-		// "BLEED", false, false, Color.BLACK, Color.WHITE, "DEV - Cast BLEED");
-		// bleedButton.setClickListener(new ClickListener() {
-		// @Override
-		// public void click() {
-		// pausePlayer();
-		// Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-		// Level.this.selectedPower = new PowerBleed(Game.level.player);
-		// Game.level.popupMenuObjects.clear();
-		// Game.level.popupMenuActions.clear();
-		// }
-		// });
-		// bleedButton.enabled = true;
-		// buttons.add(bleedButton);
-		//
-		// Button timePlusSixButton = new LevelButton(440f, 120f, 100f, 30f,
-		// "undo_button.png", "undo_button_disabled.png",
-		// "Time +6hrs", false, false, Color.BLACK, Color.WHITE, "DEV - Move time
-		// forward 6 hrs");
-		// timePlusSixButton.setClickListener(new ClickListener() {
-		// @Override
-		// public void click() {
-		// pausePlayer();
-		// new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
-		// new PowerTimePlusSixHours(Game.level.player)).perform();
-		// Game.level.popupMenuObjects.clear();
-		// Game.level.popupMenuActions.clear();
-		// }
-		// });
-		// timePlusSixButton.enabled = true;
-		// buttons.add(timePlusSixButton);
-
-		showHideLogButton = new LevelButton(activityLogger.width, 64f, 70f, 30f, "undo_button.png",
-				"undo_button_disabled.png", " LOG [L] <", true, true, Color.BLACK, Color.WHITE,
-				"Show/Hide the Log - [L]");
-		showHideLogButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-
-				if (activityLogger.x != 0 && activityLogger.x != -activityLogger.width)
-					return;
-
-				showLog = !showLog;
-			}
-		});
-		showHideLogButton.enabled = true;
-		buttons.add(showHideLogButton);
-
-		// UI buttons
-		Button inventoryButton = new LevelButton(110f, 400f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"INVENTORY [I]", false, false, Color.BLACK, Color.WHITE, "Open your Inventory - [I]");
-		inventoryButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				openCloseInventory();
-			}
-		});
-		inventoryButton.enabled = true;
-		buttons.add(inventoryButton);
-
-		// UI buttons
-		Button journalButton = new LevelButton(110f, 360f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"ADVENTURES [J]", false, false, Color.BLACK, Color.WHITE, "Take a look at your Journal - [J]");
-		journalButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				openCloseJournal();
-			}
-		});
-		journalButton.enabled = true;
-		buttons.add(journalButton);
-
-		// UI buttons
-		Button characterButton = new LevelButton(110f, 320f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"CHARACTER [C]", false, false, Color.BLACK, Color.WHITE, "View character stats and skills - [C]");
-		characterButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				openCloseCharacterScreen();
-			}
-		});
-		characterButton.enabled = true;
-		buttons.add(characterButton);
-
-		// UI buttons
-		Button skillTreeButton = new LevelButton(110f, 280f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"SKILL TREE [T]", false, false, Color.BLACK, Color.WHITE, "View the Skill Tree - [T]");
-		skillTreeButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				openCloseSkillTree();
-			}
-		});
-		skillTreeButton.enabled = true;
-		buttons.add(skillTreeButton);
-
-		// UI buttons
-		Button activePowerScreenButton = new LevelButton(110f, 240f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "POWERS [P]", false, false, Color.BLACK, Color.WHITE,
-				"View your available powers - [P]");
-		activePowerScreenButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				openCloseActivePowerScreen();
-			}
-		});
-		activePowerScreenButton.enabled = true;
-		buttons.add(activePowerScreenButton);
-
-		centerButton = new LevelButton(110f, 440f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"CENTER [Q]", false, false, Color.BLACK, Color.WHITE, "Center view on self - [Q]");
-		centerButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				if (Game.level.settingFollowPlayer) {
-					cameraFollow = true;
-				}
-				centerToSquare = true;
-				squareToCenterTo = Game.level.player.squareGameObjectIsOn;
-			}
-		});
-		centerButton.enabled = true;
-		buttons.add(centerButton);
-
-		endTurnButton = new LevelButton(110f, 480f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"WAIT [SPACE]", false, false, Color.BLACK, Color.WHITE,
-				"Wait a turn. You can also tap . to play/pause time.");
-		endTurnButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				UserInputLevel.waitPressed(false, false);
-				// new ActionWait(player,
-				// player.squareGameObjectIsOn).perform();
-			}
-		});
-		buttons.add(endTurnButton);
-
-		mapButton = new LevelButton(110f, 520f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "MAP [M]",
-				false, false, Color.BLACK, Color.WHITE, "Zoom out to Map and back again - [M]");
-		mapButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-
-				if (zoomToMap || zoomFromMap)
-					return;
-
-				if (Game.zoom >= 0.1) {
-					zoomToMap = true;
-					nonMapZoomLevelIndex = Game.zoomLevelIndex;
-				} else {
-					zoomFromMap = true;
-				}
-			}
-		});
-		buttons.add(mapButton);
-
-		showHideLocationIconsButton = new LevelButton(110f, 560f, 100f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "LOCATION ICONS", false, false, Color.BLACK, Color.WHITE,
-				"Show/Hide location icons");
-		showHideLocationIconsButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				drawLocationIcons = !drawLocationIcons;
-			}
-		});
-
-		pauseButton = new LevelButton(60f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  >", false,
-				true, Color.BLACK, Color.WHITE, "Let time pass [.]");
-		pauseButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-
-				paused = !paused;
-				if (paused) {
-					pauseButton.textParts = new Object[] { new StringWithColor(" >", pauseButton.textColor) };
-					pauseButton.setTooltipText("Let time pass [.]");
-				} else {
-					pauseButton.textParts = new Object[] { new StringWithColor(" ||", pauseButton.textColor) };
-					pauseButton.setTooltipText("Pause time [.]");
-
-				}
-
-			}
-		});
-		buttons.add(pauseButton);
+		createLevelButtons();
 
 		for (int i = 0; i < 100; i++) {
 			decorations.add(new Cloud());
@@ -921,6 +512,283 @@ public class Level {
 				squares[i][j] = new Square(i, j, "grass.png", Square.GRASS_TEXTURE, 1, 0, new SquareInventory(), false);
 			}
 		}
+	}
+
+	public void setSquareDefaultImageTextures() {
+
+		for (int i = 0; i < Level.squares.length; i++) {
+			for (int j = 0; j < Level.squares[0].length; j++) {
+				squares[i][j].defaultImageTexture = squares[i][j].floorImageTexture;
+			}
+		}
+		squares[0][0].floorImageTexture = Square.DARK_GRASS_TEXTURE;
+	}
+
+	public void createLevelButtons() {
+
+		clearNotificationsButton = new LevelButton(0, 0, 100, 20, "end_turn_button.png", "end_turn_button.png", "CLEAR",
+				true, true, Color.BLACK, Color.WHITE, "Clear All Notifications");
+		clearNotificationsButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.notifications.clear();
+			}
+		});
+
+		Button doNothing2Button = new LevelButton(110f, 40f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"Area Colors", false, false, Color.BLACK, Color.WHITE, "DEV - Color code areas");
+		doNothing2Button.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.areaColors = !Game.areaColors;
+			}
+		});
+		buttons.add(doNothing2Button);
+
+		Button nothingButton = new LevelButton(220f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"Show Nodes", false, false, Color.BLACK, Color.WHITE, "DEV - Toggle nodes being drawn");
+		nothingButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.drawNodes = !Game.drawNodes;
+
+			}
+		});
+		nothingButton.enabled = true;
+		buttons.add(nothingButton);
+
+		Button seeAllButton = new LevelButton(330f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"FULL VIS", false, false, Color.BLACK, Color.WHITE, "DEV - Reveal all squares");
+		seeAllButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.fullVisiblity = !Game.fullVisiblity;
+			}
+		});
+		seeAllButton.enabled = true;
+		buttons.add(seeAllButton);
+
+		Button showAILinesButton = new LevelButton(440f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"AI LINES", false, false, Color.BLACK, Color.WHITE, "DEV - Draw AI target Lines");
+		showAILinesButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.showAILines = !Game.showAILines;
+			}
+		});
+		showAILinesButton.enabled = true;
+		buttons.add(showAILinesButton);
+
+		Button showTriggerLinesButton = new LevelButton(550f, 40f, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "TRGR LINES", false, false, Color.BLACK, Color.WHITE,
+				"DEV - Draw trigger lines between switches etc.");
+		showTriggerLinesButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.showTriggerLines = !Game.showTriggerLines;
+			}
+		});
+		showTriggerLinesButton.enabled = true;
+		buttons.add(showTriggerLinesButton);
+
+		Button highlightRestrictedButton = new LevelButton(660f, 40f, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "RSTRCTD SQRS", false, false, Color.BLACK, Color.WHITE,
+				"DEV - Highlight restricted squares");
+		highlightRestrictedButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.redHighlightOnRestrictedSquares = !Game.redHighlightOnRestrictedSquares;
+			}
+		});
+		highlightRestrictedButton.enabled = true;
+		buttons.add(highlightRestrictedButton);
+
+		Button highlightPathButton = new LevelButton(770f, 40f, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "PATH SQRS", false, false, Color.BLACK, Color.WHITE,
+				"DEV - Highlight path");
+		highlightPathButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.highlightPath = !Game.highlightPath;
+				if (Game.highlightPath == false) {
+					if (Player.playerPathToMouse != null) {
+						for (Square square : Player.playerPathToMouse.squares) {
+							square.drawPathDot = false;
+							square.drawEndPathDot = false;
+						}
+					}
+				}
+			}
+		});
+		highlightPathButton.enabled = true;
+		buttons.add(highlightPathButton);
+
+		Button cameraFollowButton = new LevelButton(880f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"CAM FLLW", false, false, Color.BLACK, Color.WHITE,
+				"SETTING - Whether camera should follow the player");
+		cameraFollowButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.settingFollowPlayer = !Game.level.settingFollowPlayer;
+
+			}
+		});
+		cameraFollowButton.enabled = true;
+		buttons.add(cameraFollowButton);
+
+		showHideLogButton = new LevelButton(activityLogger.width, 64f, 70f, 30f, "undo_button.png",
+				"undo_button_disabled.png", " LOG [L] <", true, true, Color.BLACK, Color.WHITE,
+				"Show/Hide the Log - [L]");
+		showHideLogButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+
+				if (activityLogger.x != 0 && activityLogger.x != -activityLogger.width)
+					return;
+
+				showLog = !showLog;
+			}
+		});
+		showHideLogButton.enabled = true;
+		buttons.add(showHideLogButton);
+
+		// UI buttons
+		Button inventoryButton = new LevelButton(110f, 400f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"INVENTORY [I]", false, false, Color.BLACK, Color.WHITE, "Open your Inventory - [I]");
+		inventoryButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseInventory();
+			}
+		});
+		inventoryButton.enabled = true;
+		buttons.add(inventoryButton);
+
+		// UI buttons
+		Button journalButton = new LevelButton(110f, 360f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"ADVENTURES [J]", false, false, Color.BLACK, Color.WHITE, "Take a look at your Journal - [J]");
+		journalButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseJournal();
+			}
+		});
+		journalButton.enabled = true;
+		buttons.add(journalButton);
+
+		// UI buttons
+		Button characterButton = new LevelButton(110f, 320f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"CHARACTER [C]", false, false, Color.BLACK, Color.WHITE, "View character stats and skills - [C]");
+		characterButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseCharacterScreen();
+			}
+		});
+		characterButton.enabled = true;
+		buttons.add(characterButton);
+
+		// UI buttons
+		Button skillTreeButton = new LevelButton(110f, 280f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"SKILL TREE [T]", false, false, Color.BLACK, Color.WHITE, "View the Skill Tree - [T]");
+		skillTreeButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseSkillTree();
+			}
+		});
+		skillTreeButton.enabled = true;
+		buttons.add(skillTreeButton);
+
+		// UI buttons
+		Button activePowerScreenButton = new LevelButton(110f, 240f, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "POWERS [P]", false, false, Color.BLACK, Color.WHITE,
+				"View your available powers - [P]");
+		activePowerScreenButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseActivePowerScreen();
+			}
+		});
+		activePowerScreenButton.enabled = true;
+		buttons.add(activePowerScreenButton);
+
+		centerButton = new LevelButton(110f, 440f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"CENTER [Q]", false, false, Color.BLACK, Color.WHITE, "Center view on self - [Q]");
+		centerButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				if (Game.level.settingFollowPlayer) {
+					cameraFollow = true;
+				}
+				centerToSquare = true;
+				squareToCenterTo = Game.level.player.squareGameObjectIsOn;
+			}
+		});
+		centerButton.enabled = true;
+		buttons.add(centerButton);
+
+		endTurnButton = new LevelButton(110f, 480f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"WAIT [SPACE]", false, false, Color.BLACK, Color.WHITE,
+				"Wait a turn. You can also tap . to play/pause time.");
+		endTurnButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				UserInputLevel.waitPressed(false, false);
+				// new ActionWait(player,
+				// player.squareGameObjectIsOn).perform();
+			}
+		});
+		buttons.add(endTurnButton);
+
+		mapButton = new LevelButton(110f, 520f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "MAP [M]",
+				false, false, Color.BLACK, Color.WHITE, "Zoom out to Map and back again - [M]");
+		mapButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+
+				if (zoomToMap || zoomFromMap)
+					return;
+
+				if (Game.zoom >= 0.1) {
+					zoomToMap = true;
+					nonMapZoomLevelIndex = Game.zoomLevelIndex;
+				} else {
+					zoomFromMap = true;
+				}
+			}
+		});
+		buttons.add(mapButton);
+
+		showHideLocationIconsButton = new LevelButton(110f, 560f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "LOCATION ICONS", false, false, Color.BLACK, Color.WHITE,
+				"Show/Hide location icons");
+		showHideLocationIconsButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				drawLocationIcons = !drawLocationIcons;
+			}
+		});
+
+		pauseButton = new LevelButton(60f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  >", false,
+				true, Color.BLACK, Color.WHITE, "Let time pass [.]");
+		pauseButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+
+				paused = !paused;
+				if (paused) {
+					pauseButton.textParts = new Object[] { new StringWithColor(" >", pauseButton.textColor) };
+					pauseButton.setTooltipText("Let time pass [.]");
+				} else {
+					pauseButton.textParts = new Object[] { new StringWithColor(" ||", pauseButton.textColor) };
+					pauseButton.setTooltipText("Pause time [.]");
+
+				}
+
+			}
+		});
+		buttons.add(pauseButton);
 	}
 
 	public static int gridX1Bounds;
@@ -2496,37 +2364,37 @@ public class Level {
 		this.ended = true;
 	}
 
-	public void changeSize(int newWidth, int newHeight) {
-		Square[][] newSquares = new Square[newWidth][newHeight];
-		initGrid(newSquares, newWidth, newHeight);
-
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				if (i < newWidth && j < newHeight) {
-					// Transfer old squares over to new grid if they fit
-					newSquares[i][j] = squares[i][j];
-				} else {
-					// Delete old squares if they don't fit
-					if (squares[i][j].inventory.size() == 0) {
-
-					} else {
-						for (int k = 0; k < squares[i][j].inventory.size(); k++) {
-							if (squares[i][j].inventory.get(k) instanceof Actor) {
-								Actor actor = (Actor) squares[i][j].inventory.get(k);
-								actor.faction.actors.remove(actor);
-							} else {
-								inanimateObjectsOnGround.remove(squares[i][j].inventory.get(k));
-							}
-						}
-					}
-				}
-			}
-		}
-
-		this.width = newWidth;
-		this.height = newHeight;
-		this.squares = newSquares;
-	}
+	// public void changeSize(int newWidth, int newHeight) {
+	// Square[][] newSquares = new Square[newWidth][newHeight];
+	// initGrid(newSquares, newWidth, newHeight);
+	//
+	// for (int i = 0; i < width; i++) {
+	// for (int j = 0; j < height; j++) {
+	// if (i < newWidth && j < newHeight) {
+	// // Transfer old squares over to new grid if they fit
+	// newSquares[i][j] = squares[i][j];
+	// } else {
+	// // Delete old squares if they don't fit
+	// if (squares[i][j].inventory.size() == 0) {
+	//
+	// } else {
+	// for (int k = 0; k < squares[i][j].inventory.size(); k++) {
+	// if (squares[i][j].inventory.get(k) instanceof Actor) {
+	// Actor actor = (Actor) squares[i][j].inventory.get(k);
+	// actor.faction.actors.remove(actor);
+	// } else {
+	// inanimateObjectsOnGround.remove(squares[i][j].inventory.get(k));
+	// }
+	// }
+	// }
+	// }
+	// }
+	// }
+	//
+	// this.width = newWidth;
+	// this.height = newHeight;
+	// this.squares = newSquares;
+	// }
 
 	public void resize() {
 		if (openInventories.size() != 0)

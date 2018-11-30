@@ -66,7 +66,7 @@ import com.marklynch.utils.Utils.Point;
 
 public class Square implements ActionableInWorld, InventoryParent, Comparable<Square> {
 
-	public static final ArrayList<Square> instances = new ArrayList<Square>();
+	// public static final ArrayList<Square> instances = new ArrayList<Square>();
 
 	public Long id;
 
@@ -84,6 +84,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public transient ArrayList<Weapon> weaponsThatCanAttack;
 
 	// image
+	public transient Texture defaultImageTexture = null;
 	public Texture floorImageTexture = null;
 	public static Texture GRASS_TEXTURE;
 	public static Texture DARK_GRASS_TEXTURE;
@@ -156,7 +157,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public Square(int x, int y, String imagePath, Texture imageTexture, int travelCost, int elevation,
 			SquareInventory inventory, boolean restricted, Actor... owners) {
 		super();
-		instances.add(this);
+		// instances.add(this);
 		this.id = Level.generateNewId(this);
 		this.xInGrid = x;
 		this.yInGrid = y;

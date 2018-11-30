@@ -35,10 +35,10 @@ import com.marklynch.level.constructs.skilltree.SkillTreeNode;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Switch.SWITCH_TYPE;
-import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.actors.Player;
-import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.ThoughtBubbles;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.HOBBY;
+import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -163,6 +163,8 @@ public class Editor {
 		new AreaList();
 		Game.level.fullQuestList.makeQuests();
 		AreaList.buildAreas();
+
+		Game.level.setSquareDefaultImageTextures();
 
 		// TABS
 		String tabText = "LEVEL";
