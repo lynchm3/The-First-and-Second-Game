@@ -15,6 +15,8 @@ import org.objectweb.asm.Type;
 
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.GroupOfActors;
+import com.marklynch.level.constructs.Stat;
+import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
@@ -266,11 +268,21 @@ public class Save {
 					} else if (value instanceof GameObject) {
 						preparedStatement.setLong(count, ((GameObject) value).id);
 					} else if (value instanceof HashMap<?, ?>) {
-						// Highlevelstats, may need to create a class HighLevelStats, yey.
-						preparedStatement.setString(count, "TODO HashMap<?, ?> class " + value);
+						preparedStatement.setString(count,
+								Stat.getObjectIdListForSavingHIGH_LEVEL_STATS((HashMap<HIGH_LEVEL_STATS, Stat>) value));
 					} else if (value instanceof ArrayList<?>) {
-						// effects array, actions this turn array
-						preparedStatement.setString(count, "TODO ArrayList<?> class " + value);
+						ArrayList<GameObject> arrayList = (ArrayList<GameObject>) value;
+						if (arrayList.size() == 0)
+							preparedStatement.setString(count, "");
+
+						String result = "";
+						for (GameObject gameObject : arrayList) {
+							result += gameObject.id;
+							if (arrayList.get(arrayList.size() - 1) != gameObject) {
+								result += ",";
+							}
+						}
+						preparedStatement.setString(count, result);
 					} else if (value instanceof Object) {
 						preparedStatement.setString(count, "TODO Object class " + value);
 					} else if (value == null) {

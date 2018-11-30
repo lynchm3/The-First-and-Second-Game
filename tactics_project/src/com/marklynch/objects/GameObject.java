@@ -217,7 +217,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean hiding = false;
 	public HidingPlace hidingPlace = null;
 
-	public transient ArrayList<GameObject> attackers = new ArrayList<GameObject>();
+	public ArrayList<GameObject> attackers = new ArrayList<GameObject>();
 
 	public transient GroupOfActors groupOfActors;
 

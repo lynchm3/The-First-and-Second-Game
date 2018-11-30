@@ -173,9 +173,11 @@ public class PowerDash extends Power {
 
 	public void postAnimation(GameObject pushedGameObject, Action action, GameObject obstacle) {
 
-		pushedGameObject.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
+		pushedGameObject.changeHealth(source, action,
+				new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, (int) pushedGameObject.weight));
 		if (obstacle != null) {
-			obstacle.changeHealth(source, action, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, pushedGameObject.weight));
+			obstacle.changeHealth(source, action,
+					new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, (int) pushedGameObject.weight));
 		}
 	}
 
