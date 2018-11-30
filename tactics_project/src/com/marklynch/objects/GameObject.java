@@ -132,7 +132,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public String imageTexturePath = null;
 	public Square squareGameObjectIsOn = null;
 	public Square lastSquare = null;
-	public InventorySquare inventorySquare = null;
+	public transient InventorySquare inventorySquare = null;
 	public Inventory inventory = new Inventory();
 	public boolean showInventoryInGroundDisplay = false;;
 	public boolean canShareSquare = true;
@@ -157,9 +157,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float soundWhenHit = 1;
 	public float soundWhenHitting = 1;
 	public float soundDampening = 1;
-	public Color light;
-	public float lightHandleX;
-	public float lightHandlY;
 	public boolean stackable = false;
 
 	public float weight;
