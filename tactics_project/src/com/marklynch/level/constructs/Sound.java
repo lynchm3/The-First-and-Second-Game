@@ -7,8 +7,8 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Actor.Direction;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.utils.CircleUtils;
 import com.marklynch.utils.Color;
 

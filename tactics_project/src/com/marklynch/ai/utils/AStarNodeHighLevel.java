@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.marklynch.level.squares.Square;
-//import com.marklynch.level.squares.Square;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 /**
  * The AStarNode class, along with the AStarSearch class, implements a generic

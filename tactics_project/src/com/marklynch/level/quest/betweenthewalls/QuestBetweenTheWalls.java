@@ -21,8 +21,8 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextUtils;
 
 public class QuestBetweenTheWalls extends Quest {

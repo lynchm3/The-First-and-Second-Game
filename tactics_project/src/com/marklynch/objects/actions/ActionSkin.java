@@ -4,10 +4,10 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Pickaxe;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionSkin extends Action {

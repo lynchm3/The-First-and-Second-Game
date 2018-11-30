@@ -8,7 +8,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.ui.button.Button;

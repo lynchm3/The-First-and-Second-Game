@@ -15,12 +15,12 @@ import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.level.quest.thesecretroom.AIRoutineForKidnapper;
 import com.marklynch.level.quest.thesecretroom.Kidnapper;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Doctor;
-import com.marklynch.objects.units.Guard;
-import com.marklynch.objects.units.Human;
-import com.marklynch.objects.units.Player;
-import com.marklynch.objects.units.Thief;
-import com.marklynch.objects.units.Trader;
+import com.marklynch.objects.actors.Doctor;
+import com.marklynch.objects.actors.Guard;
+import com.marklynch.objects.actors.Human;
+import com.marklynch.objects.actors.Player;
+import com.marklynch.objects.actors.Thief;
+import com.marklynch.objects.actors.Trader;
 import com.marklynch.utils.ResourceUtils;
 
 public class TemplatesHumans {

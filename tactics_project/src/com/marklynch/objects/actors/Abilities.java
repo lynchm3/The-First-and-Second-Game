@@ -1,4 +1,4 @@
-package com.marklynch.objects.units;
+package com.marklynch.objects.actors;
 
 public class Abilities {
 

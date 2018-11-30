@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public abstract class SecondaryAnimation extends Animation {
 

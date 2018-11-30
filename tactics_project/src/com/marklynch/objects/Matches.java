@@ -3,8 +3,8 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.tools.Tool;
-import com.marklynch.objects.units.Actor;
 
 public class Matches extends Tool {
 

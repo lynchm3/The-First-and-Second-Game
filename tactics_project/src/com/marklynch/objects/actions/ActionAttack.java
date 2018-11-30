@@ -10,10 +10,10 @@ import com.marklynch.level.constructs.animation.primary.AnimationShootArrow;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 

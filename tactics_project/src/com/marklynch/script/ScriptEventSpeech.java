@@ -7,7 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;

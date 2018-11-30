@@ -7,7 +7,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionTakeItemsSelectedInInventory;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.TextureUtils;
 
 public class GroundDisplaySquare extends InventorySquare {

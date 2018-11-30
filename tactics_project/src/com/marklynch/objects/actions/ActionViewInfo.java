@@ -2,7 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.PinWindow;
 
 public class ActionViewInfo extends Action {

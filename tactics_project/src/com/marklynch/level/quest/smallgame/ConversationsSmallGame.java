@@ -8,7 +8,7 @@ import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.conversation.LeaveConversationListener;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionGiveItems;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class ConversationsSmallGame {
 

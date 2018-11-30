@@ -9,8 +9,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.ActionTakeBite;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.RockGolem;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.RockGolem;
 
 public class AIRoutineForBlind extends AIRoutine {
 

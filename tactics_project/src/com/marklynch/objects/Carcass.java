@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionSkin;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class Carcass extends GameObject {
 

@@ -6,7 +6,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.actions.ActionStopHidingInside;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 

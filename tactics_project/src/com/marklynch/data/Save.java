@@ -84,6 +84,9 @@ public class Save {
 	// Keep this in order they should be laoded.
 	public static Class[] classesToSave = new Class[] {
 
+			// Square
+			Square.class,
+
 			// LVL 3 GameObject subclass
 			Gate.class, Seesaw.class,
 
@@ -209,10 +212,10 @@ public class Save {
 						preparedStatement.setLong(count, ((GameObject) value).id);
 					} else if (value instanceof HashMap<?, ?>) {
 						// Highlevelstats, may need to create a class HighLevelStats, yey.
-						preparedStatement.setString(count, "TODO HashMap<?, ?> class");
+						preparedStatement.setString(count, "TODO HashMap<?, ?> class " + value);
 					} else if (value instanceof ArrayList<?>) {
 						// effects array, actions this turn array
-						preparedStatement.setString(count, "TODO ArrayList<?> class");
+						preparedStatement.setString(count, "TODO ArrayList<?> class " + value);
 					} else if (value instanceof Object) {
 						preparedStatement.setString(count, "TODO Object class " + value);
 					} else if (value == null) {

@@ -10,10 +10,10 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionScream;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Monster;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.Tool;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Monster;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Blind extends Monster {

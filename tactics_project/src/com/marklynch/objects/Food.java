@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class Food extends GameObject implements Consumable {
 

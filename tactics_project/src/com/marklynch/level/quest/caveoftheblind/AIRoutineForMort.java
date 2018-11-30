@@ -12,8 +12,8 @@ import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.actions.ActionTalk;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.units.Actor;
 
 public class AIRoutineForMort extends AIRoutine {
 

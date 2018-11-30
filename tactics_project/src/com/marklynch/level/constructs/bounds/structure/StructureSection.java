@@ -3,7 +3,7 @@ package com.marklynch.level.constructs.bounds.structure;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class StructureSection {
 

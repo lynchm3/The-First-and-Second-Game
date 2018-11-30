@@ -12,7 +12,7 @@ import com.marklynch.GameCursor;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.TextureUtils;

@@ -6,8 +6,8 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
 
 public class PuzzleRoomChasm extends StructureRoom {
 	int posX;

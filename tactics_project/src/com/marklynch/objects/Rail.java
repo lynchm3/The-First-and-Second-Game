@@ -3,9 +3,9 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.utils.Texture;
 
 public class Rail extends GameObject implements SwitchListener {

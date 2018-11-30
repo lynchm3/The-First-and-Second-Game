@@ -18,10 +18,10 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Trader;
+import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Actor.HOBBY;
-import com.marklynch.objects.units.Trader;
 
 public class AreaMinorMine {
 

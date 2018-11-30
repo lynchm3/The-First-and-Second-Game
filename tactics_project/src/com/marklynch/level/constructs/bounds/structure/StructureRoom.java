@@ -8,7 +8,7 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionSpot;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Color;
 
 public class StructureRoom {

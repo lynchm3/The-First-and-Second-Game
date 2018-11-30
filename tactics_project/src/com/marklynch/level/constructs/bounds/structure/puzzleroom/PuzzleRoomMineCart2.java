@@ -10,10 +10,10 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Switch;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.Direction;
+import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Actor.Direction;
-import com.marklynch.objects.units.Actor.HOBBY;
 
 public class PuzzleRoomMineCart2 extends StructureRoom {
 	int posX;

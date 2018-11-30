@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 /**
  * The AStarSearch class, along with the AStarNode class, implements a generic

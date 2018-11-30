@@ -1,7 +1,7 @@
 package com.marklynch.script.trigger;
 
 import com.marklynch.Game;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class ScriptTriggerActorSelected extends ScriptTrigger {
 

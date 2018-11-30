@@ -6,7 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionChangeAppearance;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.button.Link;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;

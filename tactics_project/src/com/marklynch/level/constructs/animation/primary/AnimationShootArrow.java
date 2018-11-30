@@ -6,7 +6,7 @@ import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public abstract class AnimationShootArrow extends Animation {
 

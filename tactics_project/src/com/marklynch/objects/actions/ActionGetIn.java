@@ -2,7 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class ActionGetIn extends Action {
 

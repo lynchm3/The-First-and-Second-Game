@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.marklynch.Game;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class Node implements Comparable<Node> {
 

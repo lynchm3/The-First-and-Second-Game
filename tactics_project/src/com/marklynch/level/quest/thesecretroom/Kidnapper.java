@@ -9,8 +9,8 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.units.Human;
 
 public class Kidnapper extends Human {
 

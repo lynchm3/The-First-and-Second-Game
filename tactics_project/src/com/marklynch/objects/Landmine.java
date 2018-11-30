@@ -8,7 +8,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionUsePower;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class Landmine extends Discoverable implements UpdatesWhenSquareContentsChange, OnCompletionListener {
 

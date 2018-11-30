@@ -4,8 +4,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionFishBeingFished;
 import com.marklynch.objects.actions.ActionFishSwim;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Fish;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Fish;
 
 public class AIRoutineForFish extends AIRoutine {
 

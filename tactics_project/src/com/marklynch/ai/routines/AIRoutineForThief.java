@@ -8,8 +8,8 @@ import com.marklynch.objects.Storage;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActiontTakeAll;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Color;
 
 public class AIRoutineForThief extends AIRoutine {

@@ -11,7 +11,7 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Stampable;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionTeleportSwap extends Action {

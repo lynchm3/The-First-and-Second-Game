@@ -22,7 +22,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionUsePower;
-import com.marklynch.objects.units.Player;
+import com.marklynch.objects.actors.Player;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.PinWindow;
 import com.marklynch.ui.Scrollable;

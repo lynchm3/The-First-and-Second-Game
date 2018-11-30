@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.marklynch.ai.utils.AIPath;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Texture;
 
 public class Faction {

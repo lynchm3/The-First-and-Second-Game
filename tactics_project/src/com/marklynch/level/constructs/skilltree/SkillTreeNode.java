@@ -13,7 +13,7 @@ import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionUsePower;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.ClickListener;

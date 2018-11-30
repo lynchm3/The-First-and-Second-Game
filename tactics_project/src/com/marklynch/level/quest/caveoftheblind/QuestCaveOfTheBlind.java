@@ -23,11 +23,11 @@ import com.marklynch.objects.Key;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.TextUtils;
 

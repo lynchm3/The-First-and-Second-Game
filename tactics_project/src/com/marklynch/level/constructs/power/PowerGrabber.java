@@ -12,7 +12,7 @@ import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.PressurePlateRequiringSpecificItem;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTakeItems;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.ResourceUtils;
 
 public class PowerGrabber extends Power {

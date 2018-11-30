@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class ActionWait extends Action {
 

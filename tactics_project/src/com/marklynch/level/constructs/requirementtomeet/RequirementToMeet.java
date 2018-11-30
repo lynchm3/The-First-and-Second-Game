@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.requirementtomeet;
 
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public abstract class RequirementToMeet {
 

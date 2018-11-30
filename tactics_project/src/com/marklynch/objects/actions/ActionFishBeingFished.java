@@ -7,10 +7,10 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Fish;
+import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.tools.FishingRod;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Fish;
-import com.marklynch.objects.units.Player;
 
 public class ActionFishBeingFished extends Action {
 

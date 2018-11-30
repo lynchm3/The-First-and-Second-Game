@@ -10,8 +10,8 @@ import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerIgnite;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Matches;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.tools.FlammableLightSource;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionIgnite extends Action {

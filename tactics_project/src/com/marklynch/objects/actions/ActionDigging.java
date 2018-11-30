@@ -12,9 +12,9 @@ import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.tools.Shovel;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionDigging extends Action {

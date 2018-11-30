@@ -6,7 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.Inventory;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class ActionInitiateTrade extends Action {
 

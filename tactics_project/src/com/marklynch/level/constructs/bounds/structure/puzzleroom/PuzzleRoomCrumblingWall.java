@@ -7,8 +7,8 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
 
 public class PuzzleRoomCrumblingWall extends StructureRoom {
 	int posX;

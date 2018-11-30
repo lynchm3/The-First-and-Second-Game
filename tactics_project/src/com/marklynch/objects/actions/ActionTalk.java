@@ -5,7 +5,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationResponseDisplay;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class ActionTalk extends Action {
 

@@ -9,9 +9,9 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Fish;
 import com.marklynch.utils.Texture;
 
 public class WaterBody extends WaterSource implements Consumable {

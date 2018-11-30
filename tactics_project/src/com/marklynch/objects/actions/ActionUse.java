@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Switch;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionUse extends Action {

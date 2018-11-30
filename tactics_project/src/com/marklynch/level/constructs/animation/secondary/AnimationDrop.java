@@ -6,7 +6,7 @@ import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class AnimationDrop extends SecondaryAnimation {
 

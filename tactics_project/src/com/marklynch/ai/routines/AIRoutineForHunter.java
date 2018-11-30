@@ -2,8 +2,8 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.HerbivoreWildAnimal;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.HerbivoreWildAnimal;
 
 public class AIRoutineForHunter extends AIRoutine {
 

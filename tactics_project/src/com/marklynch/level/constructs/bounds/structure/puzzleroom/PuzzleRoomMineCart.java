@@ -11,9 +11,9 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Rail;
 import com.marklynch.objects.Seesaw;
 import com.marklynch.objects.Switch;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Actor.Direction;
 
 public class PuzzleRoomMineCart extends StructureRoom {
 	int posX;

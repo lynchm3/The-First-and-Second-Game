@@ -14,7 +14,7 @@ import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Stampable;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionTeleport extends Action {

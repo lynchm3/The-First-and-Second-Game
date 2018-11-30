@@ -9,7 +9,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Openable;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionTakeItems extends VariableQtyAction {

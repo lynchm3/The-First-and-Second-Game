@@ -6,7 +6,7 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Openable;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionLock extends Action {

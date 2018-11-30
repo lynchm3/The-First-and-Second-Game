@@ -7,8 +7,8 @@ import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
 import com.marklynch.level.constructs.power.PowerTelekineticPush;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionUsePower;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Actor.Direction;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.Direction;
 
 public class MineCart extends GameObject {
 

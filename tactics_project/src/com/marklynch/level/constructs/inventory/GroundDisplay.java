@@ -6,7 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Openable;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.utils.Color;

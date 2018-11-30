@@ -5,9 +5,9 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionWrite;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Trader;
 
 public class AIRoutineForTrader extends AIRoutine {
 

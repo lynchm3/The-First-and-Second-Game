@@ -12,7 +12,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
@@ -36,7 +36,6 @@ public class InventorySquare extends Square {
 	public InventorySquare(int x, int y, String imagePath, Inventory inventoryThisBelongsTo) {
 		super(x, y, imagePath, 1, 1, null, false);
 
-		this.showInventory = false;
 		this.inventoryThisBelongsTo = inventoryThisBelongsTo;
 
 		if (inventoryThisBelongsTo != null) {

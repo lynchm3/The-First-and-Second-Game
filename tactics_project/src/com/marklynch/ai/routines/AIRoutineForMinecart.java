@@ -2,7 +2,7 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.level.constructs.animation.primary.AnimationHandsUp;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineForMinecart extends AIRoutine {
 

@@ -8,7 +8,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Searchable;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionSearch extends Action {

@@ -7,9 +7,9 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Liquid;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionCastPoison extends Action {

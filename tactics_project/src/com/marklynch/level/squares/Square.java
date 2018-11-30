@@ -54,8 +54,8 @@ import com.marklynch.objects.actions.ActionThrowItem;
 import com.marklynch.objects.actions.ActionViewInfo;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionableInWorld;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Human;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.button.Tooltip;
 import com.marklynch.utils.ArrayUtils;
@@ -68,6 +68,8 @@ import com.marklynch.utils.Utils.Point;
 
 public class Square implements ActionableInWorld, InventoryParent, Comparable<Square> {
 
+	public static final ArrayList<Square> instances = new ArrayList<Square>();
+
 	public Long id;
 
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
@@ -75,7 +77,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public int elevation;
 	public int travelCost;
 	public SquareInventory inventory;
-	public boolean showInventory;
 
 	// public transient boolean reachableBySelectedCharater = false;
 	public transient boolean visibleToSelectedCharacter = false;
@@ -130,12 +131,12 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	// path finding
 	public ArrayList<Node> nodes;
 
-	public Square pathParent;
-	public float costFromStart;
-	public float estimatedCostToGoal;
+	public transient Square pathParent;
+	public transient float costFromStart;
+	public transient float estimatedCostToGoal;
 
-	public float cost = 1;
-	public float costForPlayer = 1;
+	public transient float cost = 1;
+	public transient float costForPlayer = 1;
 
 	public int xInGrid;
 	public int yInGrid;
@@ -144,7 +145,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public float yInGridPixels;
 
 	public ArrayList<Square> neighbors;
-	// end path finding
+
 	public Node node;
 
 	public Square() {
@@ -158,6 +159,7 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 	public Square(int x, int y, String imagePath, Texture imageTexture, int travelCost, int elevation,
 			SquareInventory inventory, boolean restricted, Actor... owners) {
 		super();
+		instances.add(this);
 		this.id = Level.generateNewId(this);
 		this.xInGrid = x;
 		this.yInGrid = y;
@@ -181,7 +183,6 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 			this.inventory.parent = this;
 			this.inventory.square = this;
 		}
-		showInventory = true;
 
 		this.owners = new ArrayList<Actor>();
 		for (Actor owner : owners) {

@@ -5,8 +5,8 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.HerbivoreWildAnimal;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.HerbivoreWildAnimal;
 
 public class AIRoutineForMiner extends AIRoutine {
 

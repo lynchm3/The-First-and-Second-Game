@@ -10,8 +10,8 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Switch;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
 
 public class PuzzleRoomTeamwork2 extends StructureRoom {
 	int posX;

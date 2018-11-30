@@ -22,7 +22,7 @@ import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionSkin;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActiontTakeAll;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineUtils {
 

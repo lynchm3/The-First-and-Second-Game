@@ -1,14 +1,15 @@
-package com.marklynch.objects.units;
+package com.marklynch.objects.actors;
 
 import java.util.ArrayList;
 
 import com.marklynch.objects.GameObject;
 
-public class NonHuman extends Actor {
+public class WildAnimal extends Animal {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	public NonHuman() {
+	public WildAnimal() {
 		super();
+		type = "Wild Animal";
 	}
 
 	@Override

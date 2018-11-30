@@ -6,7 +6,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionWrite extends Action {

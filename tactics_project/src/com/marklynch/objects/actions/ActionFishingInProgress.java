@@ -6,10 +6,10 @@ import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Player;
 
 public class ActionFishingInProgress extends Action {
 

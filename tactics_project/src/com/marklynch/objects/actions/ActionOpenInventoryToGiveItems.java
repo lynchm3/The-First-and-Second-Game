@@ -7,7 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class ActionOpenInventoryToGiveItems extends Action {
 

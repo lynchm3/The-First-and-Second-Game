@@ -5,11 +5,11 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.AggressiveWildAnimal;
+import com.marklynch.objects.actors.Monster;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.Monster;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionPourSpecificItem extends Action {

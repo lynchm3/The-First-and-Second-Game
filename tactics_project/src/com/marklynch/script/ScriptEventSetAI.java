@@ -1,7 +1,7 @@
 package com.marklynch.script;
 
 import com.marklynch.ai.routines.AIRoutine;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.script.trigger.ScriptTrigger;
 
 public class ScriptEventSetAI extends ScriptEvent {

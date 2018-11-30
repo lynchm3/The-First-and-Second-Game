@@ -2,7 +2,7 @@ package com.marklynch.objects.actions;
 
 import java.util.ArrayList;
 
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public interface ActionableInWorld {
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer);

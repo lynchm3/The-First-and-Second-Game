@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class PressurePlateRequiringSpecificItem extends Switch implements UpdatesWhenSquareContentsChange {
 

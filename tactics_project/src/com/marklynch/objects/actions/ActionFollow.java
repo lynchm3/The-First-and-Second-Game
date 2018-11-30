@@ -1,8 +1,8 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Player;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Player;
 
 public class ActionFollow extends Action {
 

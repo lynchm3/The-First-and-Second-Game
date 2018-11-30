@@ -3,7 +3,7 @@ package com.marklynch.level.constructs.animation.secondary;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.TextureUtils;
 
 public class AnimationMovementFade1 extends SecondaryAnimation {

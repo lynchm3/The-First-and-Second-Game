@@ -6,7 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.effect.EffectCurse;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 

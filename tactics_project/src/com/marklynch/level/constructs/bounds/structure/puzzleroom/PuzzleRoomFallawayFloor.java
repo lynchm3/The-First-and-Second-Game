@@ -11,8 +11,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.SwitchListener;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
 
 public class PuzzleRoomFallawayFloor extends StructureRoom implements SwitchListener {
 	int posX;

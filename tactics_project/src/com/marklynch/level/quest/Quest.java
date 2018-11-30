@@ -10,7 +10,7 @@ import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Link;
 import com.marklynch.ui.popups.Notification;

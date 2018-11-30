@@ -4,8 +4,8 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Trader;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Trader;
 
 public class ActionSellItemsSelectedInInventory extends Action {
 

@@ -1,6 +1,6 @@
 package com.marklynch.script.trigger;
 
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class ScriptTriggerActorMoves extends ScriptTrigger {
 

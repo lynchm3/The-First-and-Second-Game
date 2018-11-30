@@ -9,7 +9,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.quest.caveoftheblind.AIRoutineForBlind;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.RockGolem;
+import com.marklynch.objects.actors.RockGolem;
 
 public class TemplatesMonsters {
 

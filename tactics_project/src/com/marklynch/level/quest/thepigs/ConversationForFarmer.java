@@ -3,7 +3,7 @@ package com.marklynch.level.quest.thepigs;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
-import com.marklynch.objects.units.Human;
+import com.marklynch.objects.actors.Human;
 
 public class ConversationForFarmer extends Conversation {
 

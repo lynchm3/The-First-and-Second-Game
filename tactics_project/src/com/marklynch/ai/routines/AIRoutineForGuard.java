@@ -5,9 +5,9 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Guard;
-import com.marklynch.objects.units.HerbivoreWildAnimal;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Guard;
+import com.marklynch.objects.actors.HerbivoreWildAnimal;
 
 public class AIRoutineForGuard extends AIRoutine {
 

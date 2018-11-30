@@ -10,8 +10,8 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.secondary.AnimationGive;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Trader;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Trader;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionSellItems extends VariableQtyAction {

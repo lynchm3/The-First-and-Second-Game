@@ -29,12 +29,12 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionTalk;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Guard;
+import com.marklynch.objects.actors.Human;
+import com.marklynch.objects.actors.Thief;
+import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Actor.HOBBY;
-import com.marklynch.objects.units.Guard;
-import com.marklynch.objects.units.Human;
-import com.marklynch.objects.units.Thief;
 import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.utils.TextUtils;
 

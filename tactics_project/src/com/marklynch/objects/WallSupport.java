@@ -8,7 +8,7 @@ import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationShake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Utils;
 
 public class WallSupport extends GameObject {

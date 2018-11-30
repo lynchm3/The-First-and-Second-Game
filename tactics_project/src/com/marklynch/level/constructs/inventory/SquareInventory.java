@@ -12,7 +12,7 @@ import com.marklynch.objects.UpdatesWhenSquareContentsChange;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actors.Actor;
 
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
 

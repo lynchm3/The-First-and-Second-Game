@@ -10,9 +10,9 @@ import com.marklynch.level.constructs.animation.primary.AnimationSlash;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Vein;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.tools.Pickaxe;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Player;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionMining extends Action {

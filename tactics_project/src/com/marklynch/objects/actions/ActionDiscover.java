@@ -7,8 +7,8 @@ import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.RockGolem;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionDiscover extends Action {

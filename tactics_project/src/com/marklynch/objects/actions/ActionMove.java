@@ -11,9 +11,9 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Stampable;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.RockGolem;
-import com.marklynch.objects.units.TinyNeutralWildAnimal;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.RockGolem;
+import com.marklynch.objects.actors.TinyNeutralWildAnimal;
 
 public class ActionMove extends Action {
 

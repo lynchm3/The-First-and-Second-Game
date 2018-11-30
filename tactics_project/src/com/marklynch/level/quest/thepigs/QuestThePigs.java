@@ -19,11 +19,11 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Human;
+import com.marklynch.objects.actors.Pig;
+import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Actor.HOBBY;
-import com.marklynch.objects.units.Human;
-import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.TextUtils;
 

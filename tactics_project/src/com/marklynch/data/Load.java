@@ -18,62 +18,73 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actors.Player;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
 public class Load {
 
-	public static HashMap<Class, ResultSet> resultSets = new HashMap<Class, ResultSet>();
-	public static HashMap<Class, ArrayList<Field>> fieldsForEachClass = new HashMap<Class, ArrayList<Field>>();
+	public static HashMap<Class<?>, ResultSet> resultSets = new HashMap<Class<?>, ResultSet>();
+	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
 
 	public static void load() {
 
+		for (Class<?> classToSave : Save.classesToSave) {
+			resultSets.put(classToSave, getResultSet(GameObject.class));
+			fieldsForEachClass.put(classToSave, getFields(GameObject.class));
+			load1(classToSave);
+		}
+		for (Class<?> classToSave : Save.classesToSave) {
+			load2(classToSave);
+		}
+
+		Level.player = (Player) Player.instances.get(0);
+	}
+
+	private static ResultSet getResultSet(Class<?> clazz) {
+
 		try {
+			Class.forName("org.sqlite.JDBC");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
+			Statement statement = conn.createStatement();
+			ResultSet resultSet = statement.executeQuery("select * from " + clazz.getSimpleName() + ";");
 
-			resultSets.put(GameObject.class, getResultSet(GameObject.class));
-			fieldsForEachClass.put(GameObject.class, getFields(GameObject.class));
-
-			load1(GameObject.class);
-			// loadType(Door.class);
+			return resultSet;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
-	private static ResultSet getResultSet(Class clazz) throws Exception {
-		Class.forName("org.sqlite.JDBC");
-		Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
-		Statement statement = conn.createStatement();
-		ResultSet resultSet = statement.executeQuery("select * from " + clazz.getSimpleName() + ";");
+	private static ArrayList<Field> getFields(Class<?> clazz) {
 
-		return resultSet;
-	}
+		try {
+			ArrayList<Field> fields = new ArrayList<Field>(Arrays.asList(clazz.getFields()));
+			ArrayList<Field> declaredFields = new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields()));
 
-	private static ArrayList<Field> getFields(Class clazz) throws Exception {
-
-		ArrayList<Field> fields = new ArrayList<Field>(Arrays.asList(clazz.getFields()));
-		ArrayList<Field> declaredFields = new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields()));
-
-		// Remove transient and static fields, don't want to save them
-		for (Field field : (ArrayList<Field>) fields.clone()) {
-			if (
-			//
-			Modifier.isTransient(field.getModifiers())
-					//
-					|| Modifier.isStatic(field.getModifiers())
-					//
-					|| (!declaredFields.contains(field) && !field.getName().equals("id")))
-			//
-			{
-				fields.remove(field);
+			// Remove transient and static fields, don't want to save them
+			for (Field field : (ArrayList<Field>) fields.clone()) {
+				if (
+				//
+				Modifier.isTransient(field.getModifiers())
+						//
+						|| Modifier.isStatic(field.getModifiers())
+						//
+						|| (!declaredFields.contains(field) && !field.getName().equals("id")))
+				//
+				{
+					fields.remove(field);
+				}
 			}
+			return fields;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return fields;
+		return null;
 
 	}
 
-	private static void load1(Class clazz) throws IllegalArgumentException, IllegalAccessException, SecurityException {
+	private static void load1(Class<?> clazz) {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -103,7 +114,7 @@ public class Load {
 				for (Field field : fields) {
 
 					// Object value = field.get(objectToLoad);
-					Class type = field.getType();
+					Class<?> type = field.getType();
 					// rs.getC
 
 					// System.out.println("Adding " + field.getName() + " @ " + count);
@@ -138,7 +149,7 @@ public class Load {
 
 	}
 
-	private static void load2(Class clazz) {
+	private static void load2(Class<?> clazz) {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -156,7 +167,7 @@ public class Load {
 				for (Field field : fields) {
 
 					// Object value = field.get(objectToLoad);
-					Class type = field.getType();
+					Class<?> type = field.getType();
 
 					// Non-primitives
 					if (type.isAssignableFrom(SquareInventory.class)) {
