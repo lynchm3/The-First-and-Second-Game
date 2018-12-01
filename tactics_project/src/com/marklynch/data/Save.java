@@ -21,6 +21,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
@@ -261,6 +262,12 @@ public class Save {
 								getSwitchListenerArrayStringForInsertion((SwitchListener[]) value));
 					} else if (value instanceof Square) {
 						preparedStatement.setLong(count, ((Square) value).id);
+					} else if (value instanceof RequirementToMeet) {
+						preparedStatement.setString(count,
+								RequirementToMeet.getStringForSavingRequirementsToMeet(value));
+					} else if (value instanceof RequirementToMeet[]) {
+						preparedStatement.setString(count,
+								RequirementToMeet.getStringForSavingRequirementsToMeet(value));
 					} else if (value instanceof Power) {
 						preparedStatement.setString(count, value.getClass().getSimpleName());
 					} else if (value instanceof Quest) {

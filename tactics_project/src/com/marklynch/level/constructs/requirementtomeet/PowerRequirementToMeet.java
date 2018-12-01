@@ -3,7 +3,7 @@ package com.marklynch.level.constructs.requirementtomeet;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.actors.Actor;
 
-public class PoweRequirementToMeet extends RequirementToMeet {
+public class PowerRequirementToMeet extends RequirementToMeet {
 
 	Power power;
 
