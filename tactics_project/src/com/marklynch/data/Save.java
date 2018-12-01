@@ -257,7 +257,7 @@ public class Save {
 					} else if (value instanceof Quest) {
 						preparedStatement.setLong(count, ((Quest) value).id);
 					} else if (value instanceof GameObject[]) {
-						preparedStatement.setString(count, "TODO GameObject[]");
+						preparedStatement.setString(count, getGameObjectArrayStringForInsertion((GameObject[]) value));
 					} else if (value instanceof Effect[]) {
 						preparedStatement.setString(count, Effect.getStringForSavingEffects(value));
 					} else if (value instanceof GroupOfActors) {
@@ -298,6 +298,19 @@ public class Save {
 
 		return null;
 
+	}
+
+	private static String getGameObjectArrayStringForInsertion(GameObject[] array) {
+
+		String result = "[";
+		for (GameObject gameObject : array) {
+			result += gameObject.id;
+			if (array[array.length - 1] != gameObject) {
+				result += ",";
+			}
+		}
+		result += "]";
+		return result;
 	}
 
 	private static String getArrayListStringForInsertion(ArrayList<?> arrayList) {
