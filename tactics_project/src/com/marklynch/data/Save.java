@@ -258,6 +258,8 @@ public class Save {
 						preparedStatement.setLong(count, ((Quest) value).id);
 					} else if (value instanceof GameObject[]) {
 						preparedStatement.setString(count, "TODO GameObject[]");
+					} else if (value instanceof Effect[]) {
+						preparedStatement.setString(count, Effect.getStringForSavingEffects(value));
 					} else if (value instanceof GroupOfActors) {
 						preparedStatement.setLong(count, ((GroupOfActors) value).id);
 					} else if (value instanceof Action) {
@@ -316,7 +318,7 @@ public class Save {
 
 		} else if (arrayList.get(0) instanceof Effect) {
 
-			return Effect.getStringForSavingEffects((ArrayList<Effect>) arrayList);
+			return Effect.getStringForSavingEffects(arrayList);
 
 		}
 

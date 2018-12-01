@@ -123,9 +123,9 @@ public abstract class Effect implements DamageDealer {
 		return result;
 	}
 
-	public static String getStringForSavingEffects(ArrayList<Effect> effects) {
+	public static String getStringForSavingEffects(Object effects) {
 
-		if (effects.size() == 0)
+		if (effects == null)
 			return "";
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -136,20 +136,8 @@ public abstract class Effect implements DamageDealer {
 		gsonBuilder.registerTypeAdapter(EffectHeal.class, serializerForEffect);
 		gsonBuilder.registerTypeAdapter(EffectPoison.class, serializerForEffect);
 		gsonBuilder.registerTypeAdapter(EffectWet.class, serializerForEffect);
-		// gsonBuilder.registerTypeAdapter(GameObject.class, serializerForGameObject);
-		// gsonBuilder.registerTypeAdapter(Actor.class, serializerForGameObject);
-		// gsonBuilder.registerTypeAdapter(Texture.class, serializerForTexture);
 		Gson gson = gsonBuilder.create();
-
-		System.out.println("logString = " + effects.get(0).logString);
-		System.out.println("effectName = " + effects.get(0).effectName);
-		System.out.println("source = " + effects.get(0).source);
-		System.out.println("target = " + effects.get(0).target);
-		System.out.println("totalTurns = " + effects.get(0).totalTurns);
-		System.out.println("turnsRemaining = " + effects.get(0).turnsRemaining);
-		System.out.println("imageTexture = " + effects.get(0).imageTexture);
 		String jsonInString = gson.toJson(effects);
-		System.out.println("jsonString = " + jsonInString);
 		return jsonInString;
 	}
 
@@ -160,7 +148,8 @@ public abstract class Effect implements DamageDealer {
 			jsonObject.addProperty("effectName", src.effectName);
 			if (src.source != null)
 				jsonObject.addProperty("source", src.source.id);
-			jsonObject.addProperty("target", src.target.id);
+			if (src.target != null)
+				jsonObject.addProperty("target", src.target.id);
 			jsonObject.addProperty("totalTurns", src.totalTurns);
 			jsonObject.addProperty("turnsRemaining", src.turnsRemaining);
 			jsonObject.addProperty("imageTexture", src.imageTexture.path);
