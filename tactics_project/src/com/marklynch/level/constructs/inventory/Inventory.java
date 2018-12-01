@@ -18,9 +18,10 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.VariableQtyAction;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Animal;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.actors.Human;
-import com.marklynch.objects.actors.NonHuman;
+import com.marklynch.objects.actors.Monster;
 import com.marklynch.objects.actors.Thief;
 import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -1671,7 +1672,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void markItemsToSell() {
 
-		if (!(parent instanceof Actor) || parent instanceof NonHuman)
+		if (!(parent instanceof Actor) || parent instanceof Animal || parent instanceof Monster)
 			return;
 
 		itemsToSellCount = 0;

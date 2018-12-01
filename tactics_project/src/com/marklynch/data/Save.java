@@ -81,6 +81,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
 import com.marklynch.objects.actors.Animal;
 import com.marklynch.objects.actors.CarnivoreNeutralWildAnimal;
+import com.marklynch.objects.actors.Doctor;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.actors.Guard;
 import com.marklynch.objects.actors.HerbivoreWildAnimal;
@@ -118,7 +119,7 @@ public class Save {
 	// 3. end all animations - Show spinner w/ "Ending Turn"
 	// 3. run save
 
-	// Keep this in order they should be laoded.
+	// Keep this in order they should be loaded.
 	public static Class<?>[] classesToSave = new Class[] {
 
 			// Squares
@@ -136,7 +137,8 @@ public class Save {
 			ContainerForLiquids.class, Bell.class, Axe.class,
 
 			// LVL 3 GameObject subclass in Actor package
-			Player.class, WildAnimal.class, Trader.class, Thief.class, Monster.class, Pig.class, Guard.class, Doctor,
+			Player.class, WildAnimal.class, Trader.class, Thief.class, Monster.class, Pig.class, Guard.class,
+			Doctor.class,
 
 			// LVL 2 GameObject subclass in Tool
 			Lantern.class,

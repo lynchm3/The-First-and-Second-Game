@@ -96,8 +96,9 @@ import com.marklynch.objects.actions.ActionViewInfo;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Animal;
 import com.marklynch.objects.actors.Fish;
-import com.marklynch.objects.actors.NonHuman;
+import com.marklynch.objects.actors.Monster;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -1348,7 +1349,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Trade
-		if (!decorative && this.canContainOtherObjects && this instanceof Actor && !(this instanceof NonHuman)) {
+		if (!decorative && this.canContainOtherObjects && this instanceof Actor && !(this instanceof Animal)
+				&& !(this instanceof Monster)) {
 			actions.add(new ActionInitiateTrade(performer, (Actor) this));
 		}
 

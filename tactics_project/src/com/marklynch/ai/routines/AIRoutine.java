@@ -44,17 +44,17 @@ import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrowItem;
 import com.marklynch.objects.actions.ActionWrite;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
 import com.marklynch.objects.actors.Animal;
 import com.marklynch.objects.actors.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.actors.Guard;
 import com.marklynch.objects.actors.HerbivoreWildAnimal;
-import com.marklynch.objects.actors.NonHuman;
+import com.marklynch.objects.actors.Monster;
 import com.marklynch.objects.actors.Pig;
 import com.marklynch.objects.actors.TinyNeutralWildAnimal;
 import com.marklynch.objects.actors.Trader;
-import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Knife;
@@ -1129,7 +1129,7 @@ public abstract class AIRoutine {
 		this.actor.thoughtBubbleImageTextureActionColor = Color.WHITE;
 		this.actor.thoughtBubbleImageTextureObject = null;
 		this.actor.thoughtBubbleImageTextureAction = null;
-		if (actor instanceof NonHuman) {
+		if (actor instanceof Animal || actor instanceof Monster) {
 
 		} else {
 			createSearchLocationsBasedOnVisibleCriminals();
