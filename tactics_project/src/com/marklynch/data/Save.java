@@ -77,6 +77,16 @@ import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.tools.Axe;
+import com.marklynch.objects.tools.Bell;
+import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.FishingRod;
+import com.marklynch.objects.tools.FlammableLightSource;
+import com.marklynch.objects.tools.Knife;
+import com.marklynch.objects.tools.Lantern;
+import com.marklynch.objects.tools.Pickaxe;
+import com.marklynch.objects.tools.Shovel;
+import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -102,6 +112,9 @@ public class Save {
 			// LVL 3 GameObject subclass
 			Gate.class, Seesaw.class,
 
+			// LVL 2 GameObject subclass in Tool
+			Lantern.class,
+
 			// LVL 2 GameObject subclass
 			Door.class, Fence.class, Furnace.class, HidingPlace.class, Landmine.class, Matches.class,
 			PressurePlate.class, PressurePlateRequiringSpecificItem.class, RemoteDoor.class, SmallHidingPlace.class,
@@ -109,6 +122,13 @@ public class Save {
 
 			// LVL 2 GameObject subclass in Weapon package
 			BodyArmor.class, Helmet.class, LegArmor.class,
+
+			// LVL 2 GameObject subclass in Tool
+			Shovel.class, Pickaxe.class, Knife.class, FlammableLightSource.class, FishingRod.class,
+			ContainerForLiquids.class, Bell.class, Axe.class,
+
+			// LVL 2 GameObject subclass in Tool
+			Tool.class,
 
 			// LVL 1 GameObject subclass
 			Bed.class, Carcass.class, Corpse.class, Discoverable.class, Food.class, GameObjectExploder.class,
