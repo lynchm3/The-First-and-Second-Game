@@ -62,6 +62,7 @@ import com.marklynch.objects.Stampable;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Switch;
+import com.marklynch.objects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.SwitchListener;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.UpdatesWhenSquareContentsChange;
@@ -259,6 +260,8 @@ public class Save {
 						preparedStatement.setString(count, value.getClass().getSimpleName());
 					} else if (value instanceof Quest) {
 						preparedStatement.setLong(count, ((Quest) value).id);
+					} else if (value instanceof SWITCH_TYPE) {
+						preparedStatement.setString(count, value.toString());
 					} else if (value instanceof GameObject[]) {
 						preparedStatement.setString(count, getGameObjectArrayStringForInsertion((GameObject[]) value));
 					} else if (value instanceof Effect[]) {
