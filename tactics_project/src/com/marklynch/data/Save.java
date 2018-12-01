@@ -77,6 +77,11 @@ import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.weapons.Armor;
+import com.marklynch.objects.weapons.BodyArmor;
+import com.marklynch.objects.weapons.Helmet;
+import com.marklynch.objects.weapons.LegArmor;
+import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.Texture;
 
 public class Save {
@@ -102,12 +107,18 @@ public class Save {
 			PressurePlate.class, PressurePlateRequiringSpecificItem.class, RemoteDoor.class, SmallHidingPlace.class,
 			Storage.class, Vein.class, WallWithCrack.class, WaterBody.class,
 
+			// LVL 2 GameObject subclass in Weapon package
+			BodyArmor.class, Helmet.class, LegArmor.class,
+
 			// LVL 1 GameObject subclass
 			Bed.class, Carcass.class, Corpse.class, Discoverable.class, Food.class, GameObjectExploder.class,
 			Gold.class, Inspectable.class, Key.class, Liquid.class, MapMarker.class, MeatChunk.class, MineCart.class,
 			Mirror.class, Openable.class, Orb.class, Portal.class, Rail.class, Roof.class, Searchable.class,
 			Stampable.class, Stump.class, Switch.class, Tree.class, VoidHole.class, Wall.class, WallSupport.class,
 			WantedPoster.class, WaterSource.class, Window.class,
+
+			// LVL 1 GameObject subclass in Weapon package
+			Weapon.class, Armor.class,
 
 			// GameObject itself THE SUPERCLASS
 			GameObject.class,
