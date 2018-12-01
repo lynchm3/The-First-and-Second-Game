@@ -254,6 +254,11 @@ public class Save {
 						// Non-simple
 					} else if (value instanceof Inventory) {
 						preparedStatement.setString(count, ((Inventory) value).getObjectIdListForSaving());
+					} else if (value instanceof SwitchListener) {
+						preparedStatement.setLong(count, ((SwitchListener) value).getId());
+					} else if (value instanceof SwitchListener[]) {
+						preparedStatement.setString(count,
+								getSwitchListenerArrayStringForInsertion((SwitchListener[]) value));
 					} else if (value instanceof Square) {
 						preparedStatement.setLong(count, ((Square) value).id);
 					} else if (value instanceof Power) {
@@ -312,6 +317,19 @@ public class Save {
 		for (GameObject gameObject : array) {
 			result += gameObject.id;
 			if (array[array.length - 1] != gameObject) {
+				result += ",";
+			}
+		}
+		result += "]";
+		return result;
+	}
+
+	private static String getSwitchListenerArrayStringForInsertion(SwitchListener[] array) {
+
+		String result = "[";
+		for (SwitchListener switchListener : array) {
+			result += switchListener.getId();
+			if (array[array.length - 1] != switchListener) {
 				result += ",";
 			}
 		}

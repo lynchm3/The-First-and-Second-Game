@@ -27,6 +27,11 @@ public class Storage extends Openable {
 	}
 
 	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
 	public void setInstances(GameObject gameObject) {
 		instances.add(gameObject);
 		super.setInstances(gameObject);

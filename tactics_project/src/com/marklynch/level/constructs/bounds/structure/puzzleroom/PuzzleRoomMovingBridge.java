@@ -178,6 +178,11 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	}
 
 	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
 	public void zwitch(Switch zwitch) {
 		bridgeVertical = !bridgeVertical;
 		if (bridgeVertical)

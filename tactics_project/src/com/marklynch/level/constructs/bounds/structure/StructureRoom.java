@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Wall;
@@ -12,6 +13,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Color;
 
 public class StructureRoom {
+	public Long id;
 	public String name;
 	public RoomPart[] roomParts;
 	public ArrayList<Square> squares = new ArrayList<Square>();
@@ -41,6 +43,9 @@ public class StructureRoom {
 	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
 			ArrayList<Actor> ownersArrayList, int level, boolean doesNothing, Node[] nodes, RoomPart[] roomParts) {
 		super();
+
+		this.id = Level.generateNewId(this);
+
 		this.name = name;
 		this.x = x;
 		this.y = y;

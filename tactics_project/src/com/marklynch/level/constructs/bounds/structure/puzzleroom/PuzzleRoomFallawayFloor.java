@@ -81,4 +81,9 @@ public class PuzzleRoomFallawayFloor extends StructureRoom implements SwitchList
 
 	}
 
+	@Override
+	public Long getId() {
+		return id;
+	}
+
 }
