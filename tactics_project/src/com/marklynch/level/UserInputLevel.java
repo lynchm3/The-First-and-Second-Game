@@ -14,6 +14,7 @@ import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
+import com.marklynch.data.Save;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.animation.primary.AnimationWalk;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -101,6 +102,7 @@ public class UserInputLevel {
 	public static boolean keyStatePeriod = false;
 	public static boolean keyStateQuestionMark = false;
 	public static boolean keyStateForwardSlash = false;
+	public static boolean keyStateF5 = false;
 
 	public static AIPath path;
 	static boolean controllingMenu = false;
@@ -1952,6 +1954,13 @@ public class UserInputLevel {
 			keyStateForwardSlash = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_SLASH)) {
 			keyStateForwardSlash = false;
+		}
+
+		if (keyStateF5 == false && Keyboard.isKeyDown(Keyboard.KEY_F5)) {
+			Save.save();
+			keyStateF5 = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_F5)) {
+			keyStateF5 = false;
 		}
 	}
 }

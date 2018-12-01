@@ -20,7 +20,6 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
-import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
@@ -118,10 +117,11 @@ public class Save {
 	static long saveStartTime;
 	static long saveEndTime1;
 	static long saveEndTime2;
-	public static String dbConn = "jdbc:sqlite:test" + System.currentTimeMillis() + ".db";
+	public static String dbConn;
 
 	public static void save() {
 		saveStartTime = System.currentTimeMillis();
+		dbConn = "jdbc:sqlite:test" + System.currentTimeMillis() + ".db";
 
 		try {
 
@@ -147,7 +147,7 @@ public class Save {
 					preparedStatements.add(p);
 			}
 
-			diskWritingThread.start();
+			new DiskWritingThread().start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -179,7 +179,7 @@ public class Save {
 		}
 	}
 
-	static Thread diskWritingThread = new Thread() {
+	public static class DiskWritingThread extends Thread {
 		@Override
 		public void run() {
 
@@ -201,7 +201,7 @@ public class Save {
 			System.out.println("Disk save time = " + (saveEndTime2 - saveEndTime1));
 			System.out.println("Total save time = " + (saveEndTime2 - saveStartTime));
 		}
-	};
+	}
 
 	private static PreparedStatement createPreparedStatementForInserts(Class clazz) {
 		ArrayList<Field> fields = null;
@@ -250,10 +250,8 @@ public class Save {
 					} else if (value instanceof Texture) {
 						preparedStatement.setString(count, ((Texture) value).path);
 						// Non-simple
-					} else if (value instanceof InventorySquare) {
-						preparedStatement.setLong(count, ((InventorySquare) value).id);
 					} else if (value instanceof Inventory) {
-						preparedStatement.setLong(count, ((Inventory) value).id);
+						preparedStatement.setString(count, ((Inventory) value).getObjectIdListForSaving());
 					} else if (value instanceof Square) {
 						preparedStatement.setLong(count, ((Square) value).id);
 					} else if (value instanceof Quest) {
@@ -269,36 +267,9 @@ public class Save {
 					} else if (value instanceof GameObject) {
 						preparedStatement.setLong(count, ((GameObject) value).id);
 					} else if (value instanceof HashMap<?, ?>) {
-
-						HashMap<?, ?> hashMap = (HashMap<?, ?>) value;
-						if (hashMap.size() == 0)
-							preparedStatement.setString(count, "");
-
-						preparedStatement.setString(count,
-								Stat.getStringForSavingHIGH_LEVEL_STATS((HashMap<HIGH_LEVEL_STATS, Stat>) value));
+						preparedStatement.setString(count, getHashMapStringForInsertion((HashMap<?, ?>) value));
 					} else if (value instanceof ArrayList<?>) {
-						ArrayList<?> arrayList = (ArrayList<?>) value;
-						if (arrayList.size() == 0) {
-
-							preparedStatement.setString(count, "");
-
-						} else if (arrayList.get(0) instanceof GameObject) {
-
-							String result = "";
-							for (GameObject gameObject : (ArrayList<GameObject>) arrayList) {
-								result += gameObject.id;
-								if (arrayList.get(arrayList.size() - 1) != gameObject) {
-									result += ",";
-								}
-							}
-							preparedStatement.setString(count, result);
-
-						} else if (arrayList.get(0) instanceof Effect) {
-
-							String result = Effect.getStringForSavingEffects((ArrayList<Effect>) arrayList);
-							preparedStatement.setString(count, result);
-
-						}
+						preparedStatement.setString(count, getArrayListStringForInsertion((ArrayList<?>) value));
 					} else if (value instanceof Object) {
 						preparedStatement.setString(count, "TODO Object class " + value);
 					} else if (value == null) {
@@ -325,6 +296,39 @@ public class Save {
 
 		return null;
 
+	}
+
+	private static String getArrayListStringForInsertion(ArrayList<?> arrayList) {
+
+		if (arrayList.size() == 0) {
+			return "";
+
+		} else if (arrayList.get(0) instanceof GameObject) {
+
+			String result = "";
+			for (GameObject gameObject : (ArrayList<GameObject>) arrayList) {
+				result += gameObject.id;
+				if (arrayList.get(arrayList.size() - 1) != gameObject) {
+					result += ",";
+				}
+			}
+			return result;
+
+		} else if (arrayList.get(0) instanceof Effect) {
+
+			return Effect.getStringForSavingEffects((ArrayList<Effect>) arrayList);
+
+		}
+
+		return "TODO Object class " + arrayList;
+	}
+
+	public static String getHashMapStringForInsertion(HashMap<?, ?> hashMap) {
+		if (hashMap.size() == 0) {
+			return "";
+		} else {
+			return Stat.getStringForSavingHIGH_LEVEL_STATS((HashMap<HIGH_LEVEL_STATS, Stat>) hashMap);
+		}
 	}
 
 	static void createTable(Class<?> clazz) {

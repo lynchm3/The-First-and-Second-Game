@@ -17,20 +17,27 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.DamageDealer;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public abstract class Effect implements DamageDealer {
 
 	public transient String logString;
+
 	public String effectName;
+
 	public GameObject source;
+
 	public GameObject target;
+
 	public int totalTurns;
+
 	public int turnsRemaining;
+
 	public Texture imageTexture;
 
-	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
+	public transient HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
 
 	public Effect() {
 
@@ -122,34 +129,69 @@ public abstract class Effect implements DamageDealer {
 			return "";
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
-
-		// JsonSerializer<GameObject> serializer = serializer; // will implement in a
-		// second
-		gsonBuilder.registerTypeAdapter(GameObject.class, serializer);
-
+		gsonBuilder.registerTypeAdapter(Effect.class, serializerForEffect);
+		gsonBuilder.registerTypeAdapter(EffectBleed.class, serializerForEffect);
+		gsonBuilder.registerTypeAdapter(EffectBurning.class, serializerForEffect);
+		gsonBuilder.registerTypeAdapter(EffectCurse.class, serializerForEffect);
+		gsonBuilder.registerTypeAdapter(EffectHeal.class, serializerForEffect);
+		gsonBuilder.registerTypeAdapter(EffectPoison.class, serializerForEffect);
+		gsonBuilder.registerTypeAdapter(EffectWet.class, serializerForEffect);
+		// gsonBuilder.registerTypeAdapter(GameObject.class, serializerForGameObject);
+		// gsonBuilder.registerTypeAdapter(Actor.class, serializerForGameObject);
+		// gsonBuilder.registerTypeAdapter(Texture.class, serializerForTexture);
 		Gson gson = gsonBuilder.create();
-		// String customJSON = customGson.toJson(subscription);
 
-		// Gson gson = new Gson();
+		System.out.println("logString = " + effects.get(0).logString);
+		System.out.println("effectName = " + effects.get(0).effectName);
+		System.out.println("source = " + effects.get(0).source);
+		System.out.println("target = " + effects.get(0).target);
+		System.out.println("totalTurns = " + effects.get(0).totalTurns);
+		System.out.println("turnsRemaining = " + effects.get(0).turnsRemaining);
+		System.out.println("imageTexture = " + effects.get(0).imageTexture);
 		String jsonInString = gson.toJson(effects);
+		System.out.println("jsonString = " + jsonInString);
 		return jsonInString;
 	}
 
-	static JsonSerializer<GameObject> serializer = new JsonSerializer<GameObject>() {
-		// @Override
-		// public JsonElement serialize(GameObject src, Type typeOfSrc,
-		// JsonSerializationContext context) {
-		//
-		// JsonObject jsonMerchant = new JsonObject();
-		// jsonMerchant.addProperty("id", src.id);
-		// return jsonMerchant;
-		// }
+	static JsonSerializer<Effect> serializerForEffect = new JsonSerializer<Effect>() {
+		@Override
+		public JsonElement serialize(Effect src, Type type, JsonSerializationContext context) {
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("effectName", src.effectName);
+			if (src.source != null)
+				jsonObject.addProperty("source", src.source.id);
+			jsonObject.addProperty("target", src.target.id);
+			jsonObject.addProperty("totalTurns", src.totalTurns);
+			jsonObject.addProperty("turnsRemaining", src.turnsRemaining);
+			jsonObject.addProperty("imageTexture", src.imageTexture.path);
+			return jsonObject;
+		}
+	};
 
+	static JsonSerializer<GameObject> serializerForGameObject = new JsonSerializer<GameObject>() {
 		@Override
 		public JsonElement serialize(GameObject src, Type type, JsonSerializationContext context) {
-			JsonObject jsonMerchant = new JsonObject();
-			jsonMerchant.addProperty("id", src.id);
-			return jsonMerchant;
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("id", src.id);
+			return jsonObject;
+		}
+	};
+
+	static JsonSerializer<Actor> serializerForActor = new JsonSerializer<Actor>() {
+		@Override
+		public JsonElement serialize(Actor src, Type type, JsonSerializationContext context) {
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("id", src.id);
+			return jsonObject;
+		}
+	};
+
+	static JsonSerializer<Texture> serializerForTexture = new JsonSerializer<Texture>() {
+		@Override
+		public JsonElement serialize(Texture src, Type type, JsonSerializationContext context) {
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("path", src.path);
+			return jsonObject;
 		}
 	};
 

@@ -194,15 +194,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureCornerGradient;
 	public static Texture textureSideGradient;
 	public static Texture textureTopGradient;
-	public static long id;
 
 	public static TextBox textBoxSearch = new TextBox(null, "", "Enter Search Term", lengthSearch + 16, 0,
 			TextBox.TYPE.ALL);
 	public static TextBox textBoxQty = new TextBox(null, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
 
 	public Inventory() {
-
-		id = Level.generateNewId(this);
 
 		if (weaponComparisonDisplay == null)
 			weaponComparisonDisplay = new ComparisonDisplay();

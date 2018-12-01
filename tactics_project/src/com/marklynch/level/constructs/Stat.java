@@ -3,8 +3,11 @@ package com.marklynch.level.constructs;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.annotations.Expose;
+
 public class Stat {
 
+	// @Expose(serialize = false)
 	public static enum HIGH_LEVEL_STATS {
 		STRENGTH, DEXTERITY, ENDURANCE, INTELLIGENCE, FRIENDLY_FIRE,
 		//
@@ -13,12 +16,16 @@ public class Stat {
 		SLASH_RES, BLUNT_RES, PIERCE_RES, FIRE_RES, WATER_RES, ELECTRICAL_RES, POISON_RES, BLEED_RES, HEALING_RES
 	};
 
+	@Expose(serialize = false)
 	public final static ArrayList<HIGH_LEVEL_STATS> GENERAL_STATS = new ArrayList<HIGH_LEVEL_STATS>();
 
+	@Expose(serialize = false)
 	public final static ArrayList<HIGH_LEVEL_STATS> OFFENSIVE_STATS = new ArrayList<HIGH_LEVEL_STATS>();
 
+	@Expose(serialize = false)
 	public final static ArrayList<HIGH_LEVEL_STATS> DEFENSIVE_STATS = new ArrayList<HIGH_LEVEL_STATS>();
 
+	@Expose(serialize = false)
 	public static HashMap<HIGH_LEVEL_STATS, HIGH_LEVEL_STATS> offensiveStatToDefensiveStatMap;
 
 	// public static enum HIGH_LEVEL_STATS {

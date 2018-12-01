@@ -15,7 +15,6 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
-import com.marklynch.data.Load;
 import com.marklynch.data.Save;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.UserInputEditor;
@@ -229,7 +228,7 @@ public class Game {
 		getDelta(); // call once before loop to initialise lastFrame
 		lastFPS = getTime(); // call before loop to initialise fps timer
 		Save.save();
-		Load.load();
+		// Load.load();
 
 		while (!Display.isCloseRequested()) {
 
