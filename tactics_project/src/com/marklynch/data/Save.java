@@ -77,6 +77,21 @@ import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.AggressiveWildAnimal;
+import com.marklynch.objects.actors.Animal;
+import com.marklynch.objects.actors.CarnivoreNeutralWildAnimal;
+import com.marklynch.objects.actors.Fish;
+import com.marklynch.objects.actors.Guard;
+import com.marklynch.objects.actors.HerbivoreWildAnimal;
+import com.marklynch.objects.actors.Human;
+import com.marklynch.objects.actors.Monster;
+import com.marklynch.objects.actors.Pig;
+import com.marklynch.objects.actors.Player;
+import com.marklynch.objects.actors.Thief;
+import com.marklynch.objects.actors.TinyNeutralWildAnimal;
+import com.marklynch.objects.actors.Trader;
+import com.marklynch.objects.actors.WildAnimal;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -109,8 +124,19 @@ public class Save {
 			// Squares
 			// Square.class,
 
+			// LVL 4 GameObject subclass in Actor package
+			TinyNeutralWildAnimal.class, HerbivoreWildAnimal.class, Fish.class, CarnivoreNeutralWildAnimal.class,
+			AggressiveWildAnimal.class,
+
 			// LVL 3 GameObject subclass
 			Gate.class, Seesaw.class,
+
+			// LVL 3 GameObject subclass in Tool
+			Shovel.class, Pickaxe.class, Knife.class, FlammableLightSource.class, FishingRod.class,
+			ContainerForLiquids.class, Bell.class, Axe.class,
+
+			// LVL 3 GameObject subclass in Actor package
+			Player.class, WildAnimal.class, Trader.class, Thief.class, Monster.class, Pig.class, Guard.class, Doctor,
 
 			// LVL 2 GameObject subclass in Tool
 			Lantern.class,
@@ -124,11 +150,10 @@ public class Save {
 			BodyArmor.class, Helmet.class, LegArmor.class,
 
 			// LVL 2 GameObject subclass in Tool
-			Shovel.class, Pickaxe.class, Knife.class, FlammableLightSource.class, FishingRod.class,
-			ContainerForLiquids.class, Bell.class, Axe.class,
-
-			// LVL 2 GameObject subclass in Tool
 			Tool.class,
+
+			// LVL 2 GameObject subclass in Actor package
+			Human.class, Monster.class, Animal.class,
 
 			// LVL 1 GameObject subclass
 			Bed.class, Carcass.class, Corpse.class, Discoverable.class, Food.class, GameObjectExploder.class,
@@ -139,6 +164,9 @@ public class Save {
 
 			// LVL 1 GameObject subclass in Weapon package
 			Weapon.class, Armor.class,
+
+			// LVL 1 GameObject subclass in Actor package
+			Actor.class,
 
 			// GameObject itself THE SUPERCLASS
 			GameObject.class,

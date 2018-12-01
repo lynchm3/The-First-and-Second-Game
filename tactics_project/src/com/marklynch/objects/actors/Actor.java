@@ -1985,7 +1985,7 @@ public class Actor extends GameObject {
 
 		}
 
-		if (!(this instanceof NonHuman)) {
+		if (!(this instanceof Animal) && !(this instanceof Monster)) {
 			Conversation conversation = Conversation.createConversation("Hello!", this);
 			conversation.originalConversationTarget = this;
 			return conversation;

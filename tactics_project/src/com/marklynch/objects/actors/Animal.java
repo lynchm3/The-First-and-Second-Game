@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.objects.GameObject;
 
-public class Animal extends NonHuman {
+public class Animal extends Actor {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public Animal() {
