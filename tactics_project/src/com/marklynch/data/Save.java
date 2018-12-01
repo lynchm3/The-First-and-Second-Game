@@ -137,8 +137,7 @@ public class Save {
 			ContainerForLiquids.class, Bell.class, Axe.class,
 
 			// LVL 3 GameObject subclass in Actor package
-			Player.class, WildAnimal.class, Trader.class, Thief.class, Monster.class, Pig.class, Guard.class,
-			Doctor.class,
+			Player.class, WildAnimal.class, Trader.class, Thief.class, Pig.class, Guard.class, Doctor.class,
 
 			// LVL 2 GameObject subclass in Tool
 			Lantern.class,
