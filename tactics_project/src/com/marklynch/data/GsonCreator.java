@@ -28,6 +28,7 @@ import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectBurning;
@@ -49,6 +50,7 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(Faction.class, serializerForFaction);
 		gsonBuilder.registerTypeAdapter(Crime.class, serializerForCrime);
 		gsonBuilder.registerTypeAdapter(Investigation.class, serializerForInvestigation);
+		gsonBuilder.registerTypeAdapter(Sound.class, serializerForSound);
 
 		// Effects //
 		gsonBuilder.registerTypeAdapter(Effect.class, serializerForEffect);
@@ -175,6 +177,8 @@ public class GsonCreator {
 				jsonObject.addProperty("timeSinceEating", aiRoutineForBlind.timeSinceEating);
 				jsonObject.addProperty("failedToGetPathToBellCount", aiRoutineForBlind.failedToGetPathToBellCount);
 				jsonObject.addProperty("failedToGetPathToFoodCount", aiRoutineForBlind.failedToGetPathToFoodCount);
+				if (aiRoutineForBlind.bellSound != null)
+					jsonObject.addProperty("bellSound", Save.gson.toJson(aiRoutineForBlind.bellSound));
 			} else if (src instanceof AIRoutineForGuard) {
 				jsonObject.addProperty("patrolIndex", ((AIRoutineForGuard) src).patrolIndex);
 			} else if (src instanceof AIRoutineForHerbivoreWildAnimal) {
@@ -220,6 +224,25 @@ public class GsonCreator {
 			if (src.square != null)
 				jsonObject.addProperty("square", src.square.id);
 			jsonObject.addProperty("priority", src.priority);
+			return jsonObject;
+		}
+	};
+
+	static JsonSerializer<Sound> serializerForSound = new JsonSerializer<Sound>() {
+		@Override
+		public JsonElement serialize(Sound src, Type type, JsonSerializationContext context) {
+			JsonObject jsonObject = new JsonObject();
+			if (src.sourcePerformer != null)
+				jsonObject.addProperty("sourcePerformer", src.sourcePerformer.id);
+			if (src.sourceObject != null)
+				jsonObject.addProperty("sourceObject", src.sourceObject.id);
+			if (src.sourceSquare != null)
+				jsonObject.addProperty("sourceSquare", src.sourceSquare.id);
+			jsonObject.addProperty("destinationSquares", Save.getArrayListStringForInsertion(src.destinationSquares));
+			jsonObject.addProperty("loudness", src.loudness);
+			jsonObject.addProperty("legal", src.legal);
+			if (src.actionType != null)
+				jsonObject.addProperty("actionType", src.actionType.getName());
 			return jsonObject;
 		}
 	};

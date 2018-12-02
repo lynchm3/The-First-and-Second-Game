@@ -26,7 +26,6 @@ public class Area {
 	public int level;
 	public Color color;
 	public ArrayList<Node> nodes;
-
 	public Storage lostAndFound;
 	public WantedPoster wantedPoster;
 	public Long id;

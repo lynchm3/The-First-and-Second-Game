@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.objects.actors.Actor;
 
 public class Node implements Comparable<Node> {
+
+	public long id;
 
 	public String name;
 	public final Square square;
@@ -30,6 +33,8 @@ public class Node implements Comparable<Node> {
 	// end path finding
 
 	public Node(String name, Square square) {
+
+		this.id = Level.generateNewId(this);
 		this.name = name;
 		this.square = square;
 		this.xInGrid = square.xInGrid;

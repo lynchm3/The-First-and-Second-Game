@@ -19,6 +19,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.area.Area;
@@ -30,6 +31,7 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Carcass;
@@ -114,6 +116,7 @@ import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 
 public class Save {
@@ -372,6 +375,10 @@ public class Save {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof HOBBY[]) {
 						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Sound) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Sound[]) {
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Texture) {
 						preparedStatement.setString(count, ((Texture) value).path);
 						// Non-simple
@@ -404,6 +411,10 @@ public class Save {
 						preparedStatement.setString(count, getSquareArrayStringForInsertion((Square[]) value));
 					} else if (value instanceof Effect[]) {
 						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Color) {
+						preparedStatement.setString(count, ((Color) value).generateSaveData());
+					} else if (value instanceof Node) {
+						preparedStatement.setLong(count, ((Node) value).id);
 					} else if (value instanceof GroupOfActors) {
 						preparedStatement.setLong(count, ((GroupOfActors) value).id);
 					} else if (value instanceof Shift) {
@@ -516,6 +527,17 @@ public class Save {
 			for (Area area : (ArrayList<Area>) arrayList) {
 				result += area.id;
 				if (arrayList.get(arrayList.size() - 1) != area) {
+					result += ",";
+				}
+			}
+			return result;
+
+		} else if (arrayList.get(0) instanceof Node) {
+
+			String result = "";
+			for (Node node : (ArrayList<Node>) arrayList) {
+				result += node.id;
+				if (arrayList.get(arrayList.size() - 1) != node) {
 					result += ",";
 				}
 			}

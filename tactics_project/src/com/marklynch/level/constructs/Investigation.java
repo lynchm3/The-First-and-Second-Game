@@ -3,7 +3,7 @@ package com.marklynch.level.constructs;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
-public class Investigation implements Comparable {
+public class Investigation implements Comparable<Investigation> {
 
 	public static final int INVESTIGATION_PRIORITY_KEEP_TRACK = 1;
 	public static final int INVESTIGATION_PRIORITY_SOUND_HEARD = 2;
@@ -25,14 +25,8 @@ public class Investigation implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object object) {
-
-		if (object instanceof Investigation) {
-			Investigation otherInvestigation = (Investigation) object;
-			return otherInvestigation.priority - this.priority;
-		}
-
-		return 0;
+	public int compareTo(Investigation otherInvestigation) {
+		return otherInvestigation.priority - this.priority;
 	}
 
 }

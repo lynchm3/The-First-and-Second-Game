@@ -75,4 +75,8 @@ public class Color extends mdesl.graphics.Color {
 		// TODO Auto-generated constructor stub
 	}
 
+	public String generateSaveData() {
+		return "" + r + "," + g + "," + b + "," + a;
+	}
+
 }
