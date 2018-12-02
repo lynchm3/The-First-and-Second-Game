@@ -64,48 +64,55 @@ import com.marklynch.utils.MapUtil;
 
 public abstract class AIRoutine {
 
-	String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
-	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
-	final String ACTIVITY_DESCRIPTION_BEING_A_CHICKEN = "Being a chicken";
-	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";
-	final String ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP = "Shouting for help";
-	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
-	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
-	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling loot";
-	final String ACTIVITY_DESCRIPTION_BUYING_EQUIPMENT = "Buying equipment";
-	final String ACTIVITY_DESCRIPTION_FEEDING = "Feeding";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
+	final static transient String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
+	final static transient String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
+	final static transient String ACTIVITY_DESCRIPTION_BEING_A_CHICKEN = "Being a chicken";
+	final static transient String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";
+	final static transient String ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP = "Shouting for help";
+	final static transient String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
+	final static transient String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
+	final static transient String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling loot";
+	final static transient String ACTIVITY_DESCRIPTION_BUYING_EQUIPMENT = "Buying equipment";
+	final static transient String ACTIVITY_DESCRIPTION_FEEDING = "Feeding";
+	final static transient String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
+	final static transient String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
+	final static transient String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
 
-	public Actor actor;
-	public GameObject target;
-	public int searchCooldown = 0;
-	public GameObject searchCooldownActor = null;
-	public int escapeCooldown = 0;
-	public GameObject escapeCooldownAttacker = null;
-	public int wokenUpCountdown = 0;
+	public transient static String STOP_THAT = "Stop that!";
+	public transient static String TIME_TO_LEAVE = "It's getting late, time for you to go...";
+	public transient static String I_SAW_THAT = "I saw that!!";
+
+	public transient Actor actor;
+	public transient GameObject target;
+	public transient int searchCooldown = 0;
+	public transient GameObject searchCooldownActor = null;
+	public transient int escapeCooldown = 0;
+	public transient GameObject escapeCooldownAttacker = null;
+	public transient int wokenUpCountdown = 0;
 
 	enum STATE {
 		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, PATROL, FREE_TIME, FISHING, SHOPKEEPING, THIEVING, UPDATING_SIGN, SWIMMING
 	};
 
-	public STATE state;
-
-	public ArrayList<GameObject> visibleHazards = new ArrayList<GameObject>();
+	public transient STATE state;
 
 	public static enum AI_TYPE {
 		FIGHTER, RUNNER, GUARD, HOSTILE, ANIMAL
 	};
 
-	public AI_TYPE aiType = AI_TYPE.FIGHTER;
+	public transient AI_TYPE aiType = AI_TYPE.FIGHTER;
 
-	public boolean keepInBounds = false;
-	public ArrayList<Area> areaBounds = new ArrayList<Area>();
-	public ArrayList<StructureSection> sectionBounds = new ArrayList<StructureSection>();
-	public ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>();
-	public ArrayList<Square> squareBounds = new ArrayList<Square>();
+	public transient boolean keepInBounds = false;
+	public transient ArrayList<Area> areaBounds = new ArrayList<Area>();
+	public transient ArrayList<StructureSection> sectionBounds = new ArrayList<StructureSection>();
+	public transient ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>();
+	public transient ArrayList<Square> squareBounds = new ArrayList<Square>();
 
-	HOBBY currentHobby = HOBBY.HUNTING;
+	public transient HOBBY currentHobby = HOBBY.HUNTING;
+
+	public transient Actor actorToKeepTrackOf = null;
+	public transient Square lastLocationSeenActorToKeepTrackOf = null;
+	public transient ArrayList<GameObject> ignoreList = new ArrayList<GameObject>();
 
 	public AIRoutine(Actor actor) {
 		this.actor = actor;
@@ -652,10 +659,6 @@ public abstract class AIRoutine {
 		}
 	}
 
-	public static String STOP_THAT = "Stop that!";
-	public static String TIME_TO_LEAVE = "It's getting late, time for you to go...";
-	public static String I_SAW_THAT = "I saw that!!";
-
 	protected boolean runCrimeReactionRoutine() {
 		for (final Actor criminal : actor.knownCriminals) {
 			int accumulatedSeverity = 0;
@@ -1142,10 +1145,6 @@ public abstract class AIRoutine {
 		}
 	}
 
-	public Actor actorToKeepTrackOf = null;
-	public Square lastLocationSeenActorToKeepTrackOf = null;
-	public ArrayList<GameObject> ignoreList = new ArrayList<GameObject>();
-
 	// public
 	public boolean keepTrackOf(Actor target) {
 
@@ -1491,8 +1490,6 @@ public abstract class AIRoutine {
 
 		return false;
 	}
-
-	final static String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
 
 	public void goToBedAndSleep() {
 

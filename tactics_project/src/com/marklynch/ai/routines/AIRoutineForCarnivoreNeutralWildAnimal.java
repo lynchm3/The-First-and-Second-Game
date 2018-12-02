@@ -34,7 +34,6 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 		}
 		this.wildAnimal = actor;
 		aiType = AI_TYPE.FIGHTER;
-		ACTIVITY_DESCRIPTION_FIGHTING = "Attacking";
 	}
 
 	@Override

@@ -10,21 +10,21 @@ import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 
-	GameObject target;
+	public transient GameObject target;
 	// Square squareToMoveTo;
 
-	final String ACTIVITY_DESCRIPTION_FEEDING = "Feeding";
-	final String ACTIVITY_DESCRIPTION_ESCAPING = "Escaping";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-	final String ACTIVITY_DESCRIPTION_DISGRUNTLED = "Disgruntled";
+	public final static transient String ACTIVITY_DESCRIPTION_FEEDING = "Feeding";
+	public final static transient String ACTIVITY_DESCRIPTION_ESCAPING = "Escaping";
+	public final static transient String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
+	public final static transient String ACTIVITY_DESCRIPTION_DISGRUNTLED = "Disgruntled";
 
-	int sleepCounter = 0;
-	final int SLEEP_TIME = 1000;
+	public transient int sleepCounter = 0;
+	public transient final int SLEEP_TIME = 1000;
 
-	Actor friendlyWildAnimal;
-	Square targetSquare = null;
+	public transient Actor friendlyWildAnimal;
+	public transient Square targetSquare = null;
 
-	int hidingCount = 0;
+	public transient int hidingCount = 0;
 
 	public AIRoutineForHerbivoreWildAnimal(Actor actor) {
 		super(actor);

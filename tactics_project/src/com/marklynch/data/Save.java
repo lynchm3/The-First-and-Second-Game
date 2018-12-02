@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import org.objectweb.asm.Type;
 
+import com.google.gson.Gson;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
@@ -111,6 +112,8 @@ import com.marklynch.utils.Texture;
 public class Save {
 	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
 
+	public static Gson gson;
+
 	// When you decide to save
 	// 1. turn on pause mode (if not already) - Show spinner w/ "Ending Turn"
 	// 2. end the turn - Show spinner w/ "Ending Turn"
@@ -183,6 +186,10 @@ public class Save {
 	public static String dbConn;
 
 	public static void save() {
+
+		if (gson == null)
+			gson = GsonCreator.createGson();
+
 		saveStartTime = System.currentTimeMillis();
 		dbConn = "jdbc:sqlite:test" + System.currentTimeMillis() + ".db";
 
@@ -357,11 +364,9 @@ public class Save {
 					} else if (value instanceof Square) {
 						preparedStatement.setLong(count, ((Square) value).id);
 					} else if (value instanceof RequirementToMeet) {
-						preparedStatement.setString(count,
-								RequirementToMeet.getStringForSavingRequirementsToMeet(value));
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof RequirementToMeet[]) {
-						preparedStatement.setString(count,
-								RequirementToMeet.getStringForSavingRequirementsToMeet(value));
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Power) {
 						preparedStatement.setString(count, value.getClass().getSimpleName());
 					} else if (value instanceof Quest) {
@@ -371,13 +376,17 @@ public class Save {
 					} else if (value instanceof GameObject[]) {
 						preparedStatement.setString(count, getGameObjectArrayStringForInsertion((GameObject[]) value));
 					} else if (value instanceof Effect[]) {
-						preparedStatement.setString(count, Effect.getStringForSavingEffects(value));
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof GroupOfActors) {
 						preparedStatement.setLong(count, ((GroupOfActors) value).id);
 					} else if (value instanceof Action) {
 						preparedStatement.setLong(count, ((Action) value).id);
 					} else if (value instanceof Enhancement) {
 						preparedStatement.setLong(count, ((Enhancement) value).id);
+					} else if (value instanceof Faction) {
+						preparedStatement.setLong(count, ((Faction) value).id);
+						// } else if (value instanceof AIRoutine) {
+						// preparedStatement.setString(count, new Gson().toJson(value));
 					} else if (value instanceof GameObject) {
 						preparedStatement.setLong(count, ((GameObject) value).id);
 					} else if (value instanceof HashMap<?, ?>) {
@@ -457,7 +466,7 @@ public class Save {
 
 		} else if (arrayList.get(0) instanceof Effect) {
 
-			return Effect.getStringForSavingEffects(arrayList);
+			return gson.toJson(arrayList);
 
 		}
 
@@ -473,7 +482,7 @@ public class Save {
 		Class hashMapKeyClass = keySet[0].getClass();
 
 		if (hashMapKeyClass == Faction.class) {
-			return Faction.getStringForSavingFactionRelationships(hashMap);
+			return gson.toJson(hashMap);
 		} else if (hashMapKeyClass == HIGH_LEVEL_STATS.class) {
 			return Stat.getStringForSavingHIGH_LEVEL_STATS((HashMap<HIGH_LEVEL_STATS, Stat>) hashMap);
 		}
