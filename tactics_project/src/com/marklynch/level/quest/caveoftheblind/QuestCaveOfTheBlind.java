@@ -246,7 +246,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// West security extras
 		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[252][9], null));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[259][5], null));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[259][5], null, true, Templates.ORE, 0.1f));
 		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[253][9], null);
 		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[254][10], null),
 				Nodes.caveOfTheBlindWest));

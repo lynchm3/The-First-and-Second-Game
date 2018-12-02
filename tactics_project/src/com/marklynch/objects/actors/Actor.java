@@ -98,14 +98,14 @@ public class Actor extends GameObject {
 	public transient int distanceMovedThisTurn = 0;
 	public transient boolean showWeaponButtons = false;
 
-	public transient AIRoutine aiRoutine;
+	public AIRoutine aiRoutine;
 
 	public String activityDescription = "";
 	public String miniDialogue = "";
 
-	public transient GameObject bed;
+	public GameObject bed;
 
-	public transient Faction faction;
+	public Faction faction;
 
 	public GameObject equippedBeforePickingUpObject = null;
 

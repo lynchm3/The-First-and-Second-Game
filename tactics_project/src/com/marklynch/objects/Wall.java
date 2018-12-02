@@ -79,7 +79,7 @@ public class Wall extends GameObject {
 	@Override
 	public void setInstances(GameObject gameObject) {
 		instances.add(gameObject);
-		super.setInstances(gameObject);
+		// super.setInstances(gameObject);
 	}
 
 	public void initWall(float maxRandomness) {

@@ -69,7 +69,6 @@ import com.marklynch.objects.Tree;
 import com.marklynch.objects.UpdatesWhenSquareContentsChange;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.VoidHole;
-import com.marklynch.objects.Wall;
 import com.marklynch.objects.WallSupport;
 import com.marklynch.objects.WallWithCrack;
 import com.marklynch.objects.WantedPoster;
@@ -160,7 +159,7 @@ public class Save {
 			Bed.class, Carcass.class, Corpse.class, Discoverable.class, Food.class, GameObjectExploder.class,
 			Gold.class, Inspectable.class, Key.class, Liquid.class, MapMarker.class, MeatChunk.class, MineCart.class,
 			Mirror.class, Openable.class, Orb.class, Portal.class, Rail.class, Roof.class, Searchable.class,
-			Stampable.class, Stump.class, Switch.class, Tree.class, VoidHole.class, Wall.class, WallSupport.class,
+			Stampable.class, Stump.class, Switch.class, Tree.class, VoidHole.class, /* Wall.class, */WallSupport.class,
 			WantedPoster.class, WaterSource.class, Window.class,
 
 			// LVL 1 GameObject subclass in Weapon package
