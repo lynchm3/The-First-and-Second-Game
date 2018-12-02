@@ -182,7 +182,6 @@ public class TemplatesNature {
 		Templates.BURROW = new SmallHidingPlace();
 		Templates.BURROW.name = "Burrow";
 		Templates.BURROW.setImageAndExtrapolateSize("burrow.png");
-		Templates.BURROW.imageTexturePath = "burrow.png";
 		Templates.BURROW.drawOffsetRatioX = 16f;
 		Templates.BURROW.drawOffsetRatioY = 16f;
 		Templates.BURROW.weight = 100f;
@@ -247,8 +246,7 @@ public class TemplatesNature {
 
 		Templates.VEIN = new Vein();
 		Templates.VEIN.name = "Vein";
-		Templates.VEIN.imageTexturePath = "vein.png";
-		Templates.VEIN.imageTexture = getGlobalImage(Templates.VEIN.imageTexturePath, true);
+		Templates.VEIN.imageTexture = getGlobalImage("vein.png", true);
 		Templates.VEIN.totalHealth = Templates.VEIN.remainingHealth = 1000;
 		Templates.VEIN.widthRatio = 1f;
 		Templates.VEIN.heightRatio = 1f;
@@ -290,7 +288,6 @@ public class TemplatesNature {
 		Templates.WATER_BODY = new WaterBody();
 		Templates.WATER_BODY.name = "Water";
 		Templates.WATER_BODY.setImageAndExtrapolateSize("water.png");
-		Templates.WATER_BODY.imageTexturePath = "water.png";
 		Templates.WATER_BODY.totalHealth = Templates.WATER_BODY.remainingHealth = 1000;
 		Templates.WATER_BODY.weight = 1000f;
 		Templates.WATER_BODY.value = 36;
@@ -307,7 +304,7 @@ public class TemplatesNature {
 		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
 		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
 		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
-		Templates.WATER_BODY.textures.add(getGlobalImage(Templates.WATER_BODY.imageTexturePath, true));
+		Templates.WATER_BODY.textures.add(getGlobalImage("water.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_2.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_3.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_4.png", true));

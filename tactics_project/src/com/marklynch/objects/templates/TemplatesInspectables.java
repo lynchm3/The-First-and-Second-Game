@@ -1,6 +1,5 @@
 package com.marklynch.objects.templates;
 
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inspectable;
 
@@ -21,7 +20,6 @@ public class TemplatesInspectables {
 		Templates.BLOODY_PULP = new Inspectable();
 		Templates.BLOODY_PULP.name = "Bloody Pulp";
 		Templates.BLOODY_PULP.setImageAndExtrapolateSize("blood.png");
-		Templates.BLOODY_PULP.imageTexturePath = "blood.png";
 		Templates.BLOODY_PULP.weight = 1f;
 		Templates.BLOODY_PULP.value = 3;
 		Templates.BLOODY_PULP.anchorX = 0;

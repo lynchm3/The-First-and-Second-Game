@@ -29,7 +29,7 @@ public abstract class Effect implements DamageDealer {
 
 	public Texture imageTexture;
 
-	public transient HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
+	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
 
 	public Effect() {
 

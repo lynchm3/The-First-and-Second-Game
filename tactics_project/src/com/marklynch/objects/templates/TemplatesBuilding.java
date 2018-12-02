@@ -16,8 +16,7 @@ public class TemplatesBuilding {
 
 		Templates.WALL = new Wall();
 		Templates.WALL.name = "Wall";
-		Templates.WALL.imageTexturePath = "wall.png";
-		Templates.WALL.imageTexture = getGlobalImage(Templates.WALL.imageTexturePath, true);
+		Templates.WALL.imageTexture = getGlobalImage("wall.png", true);
 		Templates.WALL.totalHealth = Templates.WALL.remainingHealth = 1000;
 		Templates.WALL.soundWhenHit = 10f;
 		Templates.WALL.soundWhenHitting = 1f;
@@ -37,8 +36,7 @@ public class TemplatesBuilding {
 
 		Templates.WALL_WITH_CRACK = new WallWithCrack();
 		Templates.WALL_WITH_CRACK.name = "Wall";
-		Templates.WALL_WITH_CRACK.imageTexturePath = "wall.png";
-		Templates.WALL_WITH_CRACK.imageTexture = getGlobalImage(Templates.WALL_WITH_CRACK.imageTexturePath, true);
+		Templates.WALL_WITH_CRACK.imageTexture = getGlobalImage("wall.png", true);
 		WallWithCrack.wallCrackTexture = getGlobalImage("wall_crack.png", false);
 		Templates.WALL_WITH_CRACK.totalHealth = Templates.WALL_WITH_CRACK.remainingHealth = 30;
 		Templates.WALL_WITH_CRACK.soundWhenHit = 10f;
@@ -54,8 +52,7 @@ public class TemplatesBuilding {
 
 		Templates.FALSE_WALL = new Wall();
 		Templates.FALSE_WALL.name = "Wall";
-		Templates.FALSE_WALL.imageTexturePath = "wall.png";
-		Templates.FALSE_WALL.imageTexture = getGlobalImage(Templates.FALSE_WALL.imageTexturePath, true);
+		Templates.FALSE_WALL.imageTexture = getGlobalImage("wall.png", true);
 		Templates.FALSE_WALL.totalHealth = Templates.FALSE_WALL.remainingHealth = 1;
 		Templates.FALSE_WALL.soundWhenHit = 10f;
 		Templates.FALSE_WALL.soundDampening = 10f;
@@ -87,8 +84,7 @@ public class TemplatesBuilding {
 
 		Templates.FENCE = new Wall();
 		Templates.FENCE.name = "Fence";
-		Templates.FENCE.imageTexturePath = "wall.png";
-		Templates.FENCE.imageTexture = getGlobalImage(Templates.FENCE.imageTexturePath, true);
+		Templates.FENCE.imageTexture = getGlobalImage("wall.png", true);
 		Templates.FENCE.totalHealth = Templates.FENCE.remainingHealth = 100;
 		Templates.FENCE.widthRatio = 1f;
 		Templates.FENCE.heightRatio = 1f;
@@ -108,20 +104,17 @@ public class TemplatesBuilding {
 
 		Templates.RAIL = new Rail();
 		Templates.RAIL.name = "Rail";
-		Templates.RAIL.imageTexturePath = "rail.png";
 		Rail.imageTextureLeftRight = getGlobalImage("rail.png", true);
 		Rail.imageTextureUpDown = getGlobalImage("rail_up_down.png", true);
 		Rail.imageTextureLeftUp = getGlobalImage("rail_left_up.png", true);
 		Rail.imageTextureRightUp = getGlobalImage("rail_right_up.png", true);
 		Rail.imageTextureLeftDown = getGlobalImage("rail_left_down.png", true);
 		Rail.imageTextureRightDown = getGlobalImage("rail_right_down.png", true);
-
 		Rail.imageTextureLeftBufferStop = getGlobalImage("rail_buffer_stop_left.png", false);
 		Rail.imageTextureRightBufferStop = getGlobalImage("rail_buffer_stop_right.png", false);
 		Rail.imageTextureUpBufferStop = getGlobalImage("rail_buffer_stop_up.png", false);
 		Rail.imageTextureDownBufferStop = getGlobalImage("rail_buffer_stop_down.png", false);
-
-		Templates.RAIL.imageTexture = getGlobalImage(Templates.RAIL.imageTexturePath, true);
+		Templates.RAIL.imageTexture = getGlobalImage("rail.png", true);
 		Templates.RAIL.totalHealth = Templates.RAIL.remainingHealth = 100;
 		Templates.RAIL.weight = 45f;
 		Templates.RAIL.value = 29;
@@ -139,7 +132,7 @@ public class TemplatesBuilding {
 		Templates.RAIL_INVISIBLE = new Rail();
 		Templates.RAIL_INVISIBLE.name = "RAIL_INVISIBLE";
 		Templates.RAIL_INVISIBLE.hiding = true;
-		Templates.RAIL_INVISIBLE.imageTexture = getGlobalImage(Templates.RAIL_INVISIBLE.imageTexturePath, true);
+		Templates.RAIL_INVISIBLE.imageTexture = getGlobalImage(null, true);
 		Templates.RAIL_INVISIBLE.totalHealth = Templates.RAIL_INVISIBLE.remainingHealth = 100;
 		Templates.RAIL_INVISIBLE.weight = 45f;
 		Templates.RAIL_INVISIBLE.value = 29;

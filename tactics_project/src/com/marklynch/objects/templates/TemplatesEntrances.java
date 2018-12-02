@@ -56,8 +56,7 @@ public class TemplatesEntrances {
 		Templates.OPENABLE_WALL = new RemoteDoor();
 		Templates.OPENABLE_WALL.name = "Wall";
 		Templates.OPENABLE_WALL.baseName = "Wall";
-		Templates.OPENABLE_WALL.imageTexturePath = "wall.png";
-		Templates.OPENABLE_WALL.imageTexture = getGlobalImage(Templates.OPENABLE_WALL.imageTexturePath, true);
+		Templates.OPENABLE_WALL.imageTexture = getGlobalImage("wall.png", true);
 		Templates.OPENABLE_WALL.totalHealth = Templates.OPENABLE_WALL.remainingHealth = 500;
 		Templates.OPENABLE_WALL.soundDampeningWhenClosed = 5;
 		Templates.OPENABLE_WALL.stackable = false;
@@ -81,8 +80,7 @@ public class TemplatesEntrances {
 		Templates.REMOTE_DOOR = new RemoteDoor();
 		Templates.REMOTE_DOOR.name = "Remote Door";
 		Templates.REMOTE_DOOR.baseName = "Remote Door";
-		Templates.REMOTE_DOOR.imageTexturePath = "door.png";
-		Templates.REMOTE_DOOR.imageTexture = getGlobalImage(Templates.REMOTE_DOOR.imageTexturePath, true);
+		Templates.REMOTE_DOOR.imageTexture = getGlobalImage("door.png", true);
 		Templates.REMOTE_DOOR.totalHealth = Templates.REMOTE_DOOR.remainingHealth = 180;
 		Templates.REMOTE_DOOR.soundDampeningWhenClosed = 5;
 		Templates.REMOTE_DOOR.weight = 100f;

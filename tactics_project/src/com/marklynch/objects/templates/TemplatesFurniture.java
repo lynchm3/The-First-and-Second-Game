@@ -7,7 +7,6 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.objects.Bed;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
@@ -18,8 +17,8 @@ import com.marklynch.objects.PressurePlateRequiringSpecificItem;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Seesaw;
 import com.marklynch.objects.Stampable;
-import com.marklynch.objects.WallSupport;
 import com.marklynch.objects.Switch;
+import com.marklynch.objects.WallSupport;
 import com.marklynch.objects.WaterSource;
 
 public class TemplatesFurniture {
@@ -41,7 +40,7 @@ public class TemplatesFurniture {
 		Templates.MIRROR = new Mirror();
 		Templates.MIRROR.name = "Mirror";
 		Templates.MIRROR.setImageAndExtrapolateSize("mirror.png");
-		Templates.MIRROR.imageTexture = getGlobalImage(Templates.MIRROR.imageTexturePath, true);
+		Templates.MIRROR.imageTexture = getGlobalImage("mirror.png", true);
 		Templates.MIRROR.imageTextureFront = getGlobalImage("mirror.png", true);
 		Templates.MIRROR.imageTextureBack = getGlobalImage("mirror_back.png", true);
 		Templates.MIRROR.imageTextureCrack = getGlobalImage("mirror_crack.png", true);
@@ -166,7 +165,6 @@ public class TemplatesFurniture {
 		Templates.ANTLERS_SWITCH = new Switch();
 		Templates.ANTLERS_SWITCH.name = "Obvious Antlers";
 		Templates.ANTLERS_SWITCH.setImageAndExtrapolateSize("antlers.png");
-		Templates.ANTLERS_SWITCH.imageTexturePath = "antlers.png";
 		Templates.ANTLERS_SWITCH.totalHealth = Templates.ANTLERS_SWITCH.remainingHealth = 36;
 		Templates.ANTLERS_SWITCH.weight = 43f;
 		Templates.ANTLERS_SWITCH.value = 130;
@@ -207,7 +205,6 @@ public class TemplatesFurniture {
 
 		Templates.SEESAW_PART = new Seesaw.SeesawPart();
 		Templates.SEESAW_PART.name = "Seesaw";
-		// Templates.SEESAW_PART.imageTexturePath = "SEESAW_PART.png";
 		Templates.SEESAW_PART.imageTexture = getGlobalImage("seesaw_part.png", true);
 		Templates.SEESAW_PART.totalHealth = Templates.SEESAW_PART.remainingHealth = 1;
 		Templates.SEESAW_PART.value = 22;

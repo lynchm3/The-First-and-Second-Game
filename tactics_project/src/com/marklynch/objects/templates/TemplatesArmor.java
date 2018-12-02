@@ -71,8 +71,7 @@ public class TemplatesArmor {
 		// Body Armor
 		Templates.JUMPER = new BodyArmor();
 		Templates.JUMPER.name = "Jumper";
-		Templates.JUMPER.imageTexturePath = "jumper.png";
-		Templates.JUMPER.imageTexture = getGlobalImage(Templates.JUMPER.imageTexturePath, true);
+		Templates.JUMPER.imageTexture = getGlobalImage("jumper.png", true);
 		Templates.JUMPER.armUpperTexture = getGlobalImage("jumper_arm_upper.png", true);
 		Templates.JUMPER.armLowerTexture = getGlobalImage("jumper_arm_lower.png", true);
 		Templates.JUMPER.totalHealth = Templates.JUMPER.remainingHealth = 20;
@@ -91,8 +90,7 @@ public class TemplatesArmor {
 
 		Templates.APRON = new BodyArmor();
 		Templates.APRON.name = "Apron";
-		Templates.APRON.imageTexturePath = "apron.png";
-		Templates.APRON.imageTexture = getGlobalImage(Templates.APRON.imageTexturePath, true);
+		Templates.APRON.imageTexture = getGlobalImage("apron.png", true);
 		Templates.APRON.armUpperTexture = getGlobalImage("apron_arm_upper.png", true);
 		Templates.APRON.armLowerTexture = getGlobalImage("apron_arm_lower.png", true);
 		Templates.APRON.totalHealth = Templates.APRON.remainingHealth = 20;
@@ -104,8 +102,7 @@ public class TemplatesArmor {
 
 		Templates.ROBE = new BodyArmor();
 		Templates.ROBE.name = "Robe";
-		Templates.ROBE.imageTexturePath = "robe.png";
-		Templates.ROBE.imageTexture = getGlobalImage(Templates.ROBE.imageTexturePath, true);
+		Templates.ROBE.imageTexture = getGlobalImage("robe.png", true);
 		Templates.ROBE.armUpperTexture = getGlobalImage("robe_arm_upper.png", true);
 		Templates.ROBE.armLowerTexture = getGlobalImage("robe_arm_lower.png", true);
 		Templates.ROBE.backTexture = getGlobalImage("robe_back.png", true);
@@ -118,8 +115,7 @@ public class TemplatesArmor {
 
 		Templates.LEATHERS = new BodyArmor();
 		Templates.LEATHERS.name = "Leathers";
-		Templates.LEATHERS.imageTexturePath = "leathers.png";
-		Templates.LEATHERS.imageTexture = getGlobalImage(Templates.LEATHERS.imageTexturePath, true);
+		Templates.LEATHERS.imageTexture = getGlobalImage("leathers.png", true);
 		Templates.LEATHERS.armUpperTexture = getGlobalImage("leathers_arm_upper.png", true);
 		Templates.LEATHERS.armLowerTexture = getGlobalImage("leathers_arm_lower.png", true);
 		Templates.LEATHERS.totalHealth = Templates.LEATHERS.remainingHealth = 54;
@@ -131,8 +127,7 @@ public class TemplatesArmor {
 
 		Templates.CHAINMAIL = new BodyArmor();
 		Templates.CHAINMAIL.name = "Chainmail";
-		Templates.CHAINMAIL.imageTexturePath = "chainmail.png";
-		Templates.CHAINMAIL.imageTexture = getGlobalImage(Templates.CHAINMAIL.imageTexturePath, true);
+		Templates.CHAINMAIL.imageTexture = getGlobalImage("chainmail.png", true);
 		Templates.CHAINMAIL.armUpperTexture = getGlobalImage("chainmail_arm_upper.png", true);
 		Templates.CHAINMAIL.armLowerTexture = getGlobalImage("chainmail_arm_lower.png", true);
 		Templates.CHAINMAIL.backTexture = getGlobalImage("chainmail_back.png", true);
@@ -147,8 +142,7 @@ public class TemplatesArmor {
 
 		Templates.PANTS = new LegArmor();
 		Templates.PANTS.name = "Pants";
-		Templates.PANTS.imageTexturePath = "pants.png";
-		Templates.PANTS.imageTexture = getGlobalImage(Templates.PANTS.imageTexturePath, true);
+		Templates.PANTS.imageTexture = getGlobalImage("pants.png", true);
 		Templates.PANTS.legLowerTexture = getGlobalImage("pants_leg_lower.png", true);
 		Templates.PANTS.legUpperTexture = getGlobalImage("pants_leg_upper.png", true);
 		Templates.PANTS.totalHealth = Templates.PANTS.remainingHealth = 20;
@@ -160,8 +154,7 @@ public class TemplatesArmor {
 
 		Templates.DUNGAREES = new LegArmor();
 		Templates.DUNGAREES.name = "Dungarees";
-		Templates.DUNGAREES.imageTexturePath = "dungarees.png";
-		Templates.DUNGAREES.imageTexture = getGlobalImage(Templates.DUNGAREES.imageTexturePath, true);
+		Templates.DUNGAREES.imageTexture = getGlobalImage("dungarees.png", true);
 		Templates.DUNGAREES.legLowerTexture = getGlobalImage("dungarees_leg_lower.png", true);
 		Templates.DUNGAREES.legUpperTexture = getGlobalImage("dungarees_leg_upper.png", true);
 		Templates.DUNGAREES.frontTexture = getGlobalImage("dungarees_front.png", true);
@@ -174,8 +167,7 @@ public class TemplatesArmor {
 
 		Templates.UNDIES = new LegArmor();
 		Templates.UNDIES.name = "Undies";
-		Templates.UNDIES.imageTexturePath = "undies.png";
-		Templates.UNDIES.imageTexture = getGlobalImage(Templates.UNDIES.imageTexturePath, true);
+		Templates.UNDIES.imageTexture = getGlobalImage("undies.png", true);
 		Templates.UNDIES.totalHealth = Templates.UNDIES.remainingHealth = 27;
 		Templates.UNDIES.heightRatio = 1.5f;
 		Templates.UNDIES.weight = 14f;

@@ -39,9 +39,6 @@ public class TemplatesHumans {
 		Templates.PLAYER.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
 		Templates.PLAYER.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
 		Templates.PLAYER.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
-		// Templates.PLAYER.imageTexturePath = "hero.png";
-		// Templates.PLAYER.imageTexture =
-		// getGlobalImage(Templates.PLAYER.imageTexturePath, true);
 		Templates.PLAYER.heightRatio = 1.5f;
 		Templates.PLAYER.drawOffsetRatioY = -0.5f;
 		Templates.PLAYER.weight = 90f;
@@ -99,9 +96,6 @@ public class TemplatesHumans {
 		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(4));
 		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(3));
 		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(11));
-		// Templates.FISHERMAN.imageTexturePath = "hero.png";
-		// Templates.FISHERMAN.imageTexture =
-		// getGlobalImage(Templates.FISHERMAN.imageTexturePath, true);
 		Templates.FISHERMAN.hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
 		Templates.FISHERMAN.heightRatio = 1.5f;
 		Templates.FISHERMAN.drawOffsetRatioY = -0.5f;
@@ -122,9 +116,6 @@ public class TemplatesHumans {
 		Templates.MINER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(5));
 		Templates.MINER.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(4));
 		Templates.MINER.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(12));
-		// Templates.MINER.imageTexturePath = "hunter.png";
-		// Templates.MINER.imageTexture =
-		// getGlobalImage(Templates.MINER.imageTexturePath, true);
 		Templates.MINER.heightRatio = 1.5f;
 		Templates.MINER.drawOffsetRatioY = -0.5f;
 		Templates.MINER.weight = 110f;
@@ -143,9 +134,6 @@ public class TemplatesHumans {
 		Templates.THIEF.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
 		Templates.THIEF.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
 		Templates.THIEF.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
-		// Templates.THIEF.imageTexturePath = "thief.png";
-		// Templates.THIEF.imageTexture =
-		// getGlobalImage(Templates.THIEF.imageTexturePath, true);
 		Templates.THIEF.heightRatio = 1.5f;
 		Templates.THIEF.drawOffsetRatioY = -0.5f;
 		Templates.THIEF.weight = 90f;
@@ -154,7 +142,6 @@ public class TemplatesHumans {
 		Templates.THIEF.aiRoutine = new AIRoutineForThief(Templates.THIEF);
 		Templates.THIEF.templateId = GameObject.generateNewTemplateId();
 		Templates.THIEF.flipYAxisInMirror = false;
-		// Templates.THIEF.helmet = Templates.HOOD.makeCopy(null, null);
 
 		Templates.FARMER = new Human();
 		Templates.FARMER.title = "Farmer";
@@ -165,9 +152,6 @@ public class TemplatesHumans {
 		Templates.FARMER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
 		Templates.FARMER.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
 		Templates.FARMER.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
-		// Templates.FARMER.imageTexturePath = "farmer.png";
-		// Templates.FARMER.imageTexture =
-		// getGlobalImage(Templates.FARMER.imageTexturePath, true);
 		Templates.FARMER.heightRatio = 1.5f;
 		Templates.FARMER.drawOffsetRatioY = -0.5f;
 		Templates.FARMER.weight = 90f;
@@ -178,8 +162,6 @@ public class TemplatesHumans {
 		Templates.FARMER.flipYAxisInMirror = false;
 		Templates.FARMER.bodyArmor = null;
 		Templates.FARMER.legArmor = Templates.UNDIES.makeCopy(null, null);
-		// Templates.FARMER.helmet = Templates.HUNTING_CAP.makeCopy(null, null);
-		// Templates.FARMER.helmet = Templates.HARD_HAT.makeCopy(null, null);
 
 		// Special People
 		Templates.MORT = new Mort();
@@ -224,9 +206,6 @@ public class TemplatesHumans {
 		Templates.TRADER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
 		Templates.TRADER.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
 		Templates.TRADER.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
-		// Templates.TRADER.imageTexturePath = "shopkeeper.png";
-		// Templates.TRADER.imageTexture =
-		// getGlobalImage(Templates.TRADER.imageTexturePath, true);
 		Templates.TRADER.heightRatio = 1.5f;
 		Templates.TRADER.drawOffsetRatioY = -0.5f;
 		Templates.TRADER.weight = 90f;
@@ -245,9 +224,6 @@ public class TemplatesHumans {
 		Templates.DOCTOR.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(12));
 		Templates.DOCTOR.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(20));
 		Templates.DOCTOR.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(7));
-		// Templates.DOCTOR.imageTexturePath = "shopkeeper.png";
-		// Templates.DOCTOR.imageTexture =
-		// getGlobalImage(Templates.DOCTOR.imageTexturePath, true);
 		Templates.DOCTOR.heightRatio = 1.5f;
 		Templates.DOCTOR.drawOffsetRatioY = -0.5f;
 		Templates.DOCTOR.weight = 80f;

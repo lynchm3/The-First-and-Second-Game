@@ -131,7 +131,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public int templateId;
 	public String name = "";
 	public int totalHealth = 0;
-	public String imageTexturePath = null;
 	public Square squareGameObjectIsOn = null;
 	public Square lastSquare = null;
 	public transient InventorySquare inventorySquare = null;
@@ -347,7 +346,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void loadImages() {
-		// this.imageTexture = getGlobalImage(imageTexturePath, true);
 
 	}
 
@@ -1921,7 +1919,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		gameObject.totalHealth = gameObject.remainingHealth = totalHealth;
-		gameObject.imageTexturePath = imageTexturePath;
 		gameObject.imageTexture = imageTexture;
 		gameObject.widthRatio = widthRatio;
 		gameObject.heightRatio = heightRatio;
@@ -2511,7 +2508,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void setImageAndExtrapolateSize(String imagPath) {
-		this.imageTexturePath = imagPath;
 		this.imageTexture = getGlobalImage(imagPath, true);
 		this.widthRatio = imageTexture.getWidth() / Game.SQUARE_WIDTH;
 		this.heightRatio = imageTexture.getHeight() / Game.SQUARE_HEIGHT;

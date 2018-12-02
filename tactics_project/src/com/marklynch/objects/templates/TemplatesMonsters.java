@@ -6,7 +6,6 @@ import com.marklynch.ai.routines.AIRoutineForBlind;
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.RockGolem;
@@ -26,8 +25,7 @@ public class TemplatesMonsters {
 		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
 		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
 		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
-		Templates.BLIND.imageTexturePath = "blind.png";
-		Templates.BLIND.imageTexture = getGlobalImage(Templates.BLIND.imageTexturePath, true);
+		Templates.BLIND.imageTexture = getGlobalImage("blind.png", true);
 		Templates.BLIND.heightRatio = 1f;
 		Templates.BLIND.drawOffsetRatioY = 0f;
 		Templates.BLIND.weight = 70f;
@@ -39,17 +37,14 @@ public class TemplatesMonsters {
 
 		Templates.ROCK_GOLEM = new RockGolem();
 		Templates.ROCK_GOLEM.title = "Suspicious Boulder";
-		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE,
-				new Stat(20));
+		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(20));
 		Templates.ROCK_GOLEM.level = 1;
 		Templates.ROCK_GOLEM.totalHealth = Templates.ROCK_GOLEM.remainingHealth = 300;
 		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
 		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
-		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE,
-				new Stat(10));
+		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
 		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
-		Templates.ROCK_GOLEM.imageTexturePath = "rock_golem_sleeping.png";
-		Templates.ROCK_GOLEM.imageTexture = getGlobalImage(Templates.ROCK_GOLEM.imageTexturePath, true);
+		Templates.ROCK_GOLEM.imageTexture = getGlobalImage("rock_golem_sleeping.png", true);
 		Templates.ROCK_GOLEM.heightRatio = 1f;
 		Templates.ROCK_GOLEM.drawOffsetRatioY = 1f;
 		Templates.ROCK_GOLEM.weight = 210f;
