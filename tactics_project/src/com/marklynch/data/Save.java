@@ -583,14 +583,18 @@ public class Save {
 			return "";
 		}
 
-		Object[] keySet = hashMap.keySet().toArray();
-		Class hashMapKeyClass = keySet[0].getClass();
+		Object[] keysArray = hashMap.keySet().toArray();
+		// Class<?> hashMapKeyClass = keySet[0].getClass();
 
-		if (hashMapKeyClass == Faction.class) {
+		if (keysArray[0] instanceof Faction) {
 			return gson.toJson(hashMap);
-		} else if (hashMapKeyClass == HIGH_LEVEL_STATS.class) {
+		} else if (keysArray[0] instanceof HIGH_LEVEL_STATS) {
 			return Stat.getStringForSavingHIGH_LEVEL_STATS((HashMap<HIGH_LEVEL_STATS, Stat>) hashMap);
+		} else if (keysArray[0] instanceof GameObject) {
+			return gson.toJson(hashMap);
 		}
+
+		System.out.println("keySet[0] = " + keysArray[0]);
 
 		return "TODO Object class " + hashMap;
 	}

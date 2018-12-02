@@ -27,6 +27,7 @@ import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectBurning;
@@ -47,6 +48,7 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(Texture.class, serializerForTexture);
 		gsonBuilder.registerTypeAdapter(Faction.class, serializerForFaction);
 		gsonBuilder.registerTypeAdapter(Crime.class, serializerForCrime);
+		gsonBuilder.registerTypeAdapter(Investigation.class, serializerForInvestigation);
 
 		// Effects //
 		gsonBuilder.registerTypeAdapter(Effect.class, serializerForEffect);
@@ -205,6 +207,19 @@ public class GsonCreator {
 			jsonObject.addProperty("stolenItems", Save.getGameObjectArrayStringForInsertion(src.stolenItems));
 			jsonObject.addProperty("type", "" + src.type);
 			jsonObject.addProperty("crimeListeners", Save.getArrayListStringForInsertion(src.crimeListeners));
+			return jsonObject;
+		}
+	};
+
+	static JsonSerializer<Investigation> serializerForInvestigation = new JsonSerializer<Investigation>() {
+		@Override
+		public JsonElement serialize(Investigation src, Type type, JsonSerializationContext context) {
+			JsonObject jsonObject = new JsonObject();
+			if (src.actor != null)
+				jsonObject.addProperty("actor", src.actor.id);
+			if (src.square != null)
+				jsonObject.addProperty("square", src.square.id);
+			jsonObject.addProperty("priority", src.priority);
 			return jsonObject;
 		}
 	};
