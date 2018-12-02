@@ -14,6 +14,7 @@ import java.util.HashMap;
 import org.objectweb.asm.Type;
 
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
@@ -121,6 +122,8 @@ public class Save {
 
 			// Squares
 			// Square.class,
+			// Faction
+			// Faction.class,
 
 			// LVL 4 GameObject subclass in Actor package
 			TinyNeutralWildAnimal.class, HerbivoreWildAnimal.class, Fish.class, CarnivoreNeutralWildAnimal.class,
@@ -193,6 +196,7 @@ public class Save {
 			conn = DriverManager.getConnection(dbConn);
 
 			createPreparedStatementForSquareInserts();
+			createPreparedStatementForFactionInserts();
 
 			// Create table for each class
 			for (Class<?> classToSave : classesToSave) {
@@ -231,6 +235,35 @@ public class Save {
 				preparedStatement.setLong(1, square.id);
 				preparedStatement.setString(2, square.inventory.getObjectIdListForSaving());
 				preparedStatement.setString(3, square.getFloorImageTexture().path);
+				preparedStatement.addBatch();
+			}
+			preparedStatements.add(preparedStatement);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void createPreparedStatementForFactionInserts() {
+
+		fieldsForEachClass.put(Faction.class, Save.getFields(Faction.class));
+		createTable(Faction.class);
+		String insertQueryTemplate = "INSERT INTO Faction VALUES (?,?,?,?,?)";
+
+		// public long id;
+		// public String name;
+		// public HashMap<Faction, Integer> relationships = new HashMap<Faction,
+		// Integer>();
+		// public ArrayList<Actor> actors = new ArrayList<Actor>();
+		// public Texture imageTexture = null;
+
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
+			for (Faction faction : Level.factions) {
+				preparedStatement.setLong(1, faction.id);
+				preparedStatement.setString(2, faction.name);
+				preparedStatement.setString(3, getHashMapStringForInsertion(faction.relationships));
+				preparedStatement.setString(4, getArrayListStringForInsertion(faction.actors));
+				preparedStatement.setString(5, faction.imageTexture.path);
 				preparedStatement.addBatch();
 			}
 			preparedStatements.add(preparedStatement);
@@ -434,9 +467,18 @@ public class Save {
 	public static String getHashMapStringForInsertion(HashMap<?, ?> hashMap) {
 		if (hashMap.size() == 0) {
 			return "";
-		} else {
+		}
+
+		Object[] keySet = hashMap.keySet().toArray();
+		Class hashMapKeyClass = keySet[0].getClass();
+
+		if (hashMapKeyClass == Faction.class) {
+			return Faction.getStringForSavingFactionRelationships(hashMap);
+		} else if (hashMapKeyClass == HIGH_LEVEL_STATS.class) {
 			return Stat.getStringForSavingHIGH_LEVEL_STATS((HashMap<HIGH_LEVEL_STATS, Stat>) hashMap);
 		}
+
+		return "TODO Object class " + hashMap;
 	}
 
 	static void createTable(Class<?> clazz) {
