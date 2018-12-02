@@ -91,7 +91,7 @@ public class ActionCastBurn extends Action {
 			Crime.TYPE severity = Crime.TYPE.CRIME_ASSAULT;
 			if (!(target instanceof Actor))
 				severity = Crime.TYPE.CRIME_ARSON;
-			Crime crime = new Crime(this, this.performer, victim, severity);
+			Crime crime = new Crime(this.performer, victim, severity);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

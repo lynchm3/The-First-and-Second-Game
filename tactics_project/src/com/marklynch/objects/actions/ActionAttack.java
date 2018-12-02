@@ -133,7 +133,7 @@ public class ActionAttack extends Action {
 			Crime.TYPE type = Crime.TYPE.CRIME_ASSAULT;
 			if (!(target instanceof Actor))
 				type = Crime.TYPE.CRIME_VANDALISM;
-			Crime crime = new Crime(this, this.performer, victim, type);
+			Crime crime = new Crime(this.performer, victim, type);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

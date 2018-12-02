@@ -45,7 +45,7 @@ public class ActionSmash extends Action {
 
 		if (performer != null) {
 			if (!legal) {
-				Crime crime = new Crime(this, this.performer, target.owner, Crime.TYPE.CRIME_VANDALISM);
+				Crime crime = new Crime(this.performer, target.owner, Crime.TYPE.CRIME_VANDALISM);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);

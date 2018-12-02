@@ -126,7 +126,7 @@ public class ActionTeleport extends Action {
 						victim = target.owner;
 						severity = Crime.TYPE.CRIME_VANDALISM;
 					}
-					Crime crime = new Crime(this, this.performer, victim, severity);
+					Crime crime = new Crime(this.performer, victim, severity);
 					this.performer.crimesPerformedThisTurn.add(crime);
 					this.performer.crimesPerformedInLifetime.add(crime);
 					notifyWitnessesOfCrime(crime);
@@ -144,7 +144,7 @@ public class ActionTeleport extends Action {
 						victim = gameObjectInTheWay.owner;
 						severity = Crime.TYPE.CRIME_VANDALISM;
 					}
-					Crime crime = new Crime(this, this.performer, victim, severity);
+					Crime crime = new Crime(this.performer, victim, severity);
 					this.performer.crimesPerformedThisTurn.add(crime);
 					this.performer.crimesPerformedInLifetime.add(crime);
 					notifyWitnessesOfCrime(crime);

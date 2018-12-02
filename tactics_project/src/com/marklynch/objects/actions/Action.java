@@ -236,9 +236,9 @@ public abstract class Action {
 			}
 
 			if (square.owners.size() > 0)
-				crime = new Crime(actionTrespass, performer, square.owners.get(0), trespassingType);
+				crime = new Crime(performer, square.owners.get(0), trespassingType);
 			else
-				crime = new Crime(actionTrespass, performer, null, trespassingType);
+				crime = new Crime(performer, null, trespassingType);
 
 			performer.crimesPerformedThisTurn.add(crime);
 			performer.crimesPerformedInLifetime.add(crime);

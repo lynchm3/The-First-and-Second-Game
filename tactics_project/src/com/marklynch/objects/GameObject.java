@@ -14,6 +14,7 @@ import org.newdawn.slick.openal.Audio;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
@@ -2564,5 +2565,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		return surroundingGameObjects;
 
+	}
+
+	public void crimeUpdate(Crime crime) {
 	}
 }

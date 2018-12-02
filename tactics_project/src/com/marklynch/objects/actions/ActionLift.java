@@ -49,7 +49,7 @@ public class ActionLift extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, target.owner, Crime.TYPE.CRIME_THEFT, target);
+			Crime crime = new Crime(this.performer, target.owner, Crime.TYPE.CRIME_THEFT, target);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

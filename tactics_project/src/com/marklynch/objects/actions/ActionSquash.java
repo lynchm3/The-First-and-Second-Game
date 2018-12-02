@@ -74,7 +74,7 @@ public class ActionSquash extends Action {
 			if (!(target instanceof Actor))
 				severity = Crime.TYPE.CRIME_VANDALISM;
 
-			Crime crime = new Crime(this, this.performer, victim, severity);
+			Crime crime = new Crime(this.performer, victim, severity);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

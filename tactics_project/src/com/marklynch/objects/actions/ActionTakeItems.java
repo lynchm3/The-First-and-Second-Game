@@ -89,7 +89,7 @@ public class ActionTakeItems extends VariableQtyAction {
 				sound.play();
 
 			if (!legal && performer instanceof Actor) {
-				Crime crime = new Crime(this, (performer), object.owner, Crime.TYPE.CRIME_THEFT, object);
+				Crime crime = new Crime((performer), object.owner, Crime.TYPE.CRIME_THEFT, object);
 				performer.crimesPerformedThisTurn.add(crime);
 				performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);

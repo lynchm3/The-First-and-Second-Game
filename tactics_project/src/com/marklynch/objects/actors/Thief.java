@@ -61,7 +61,7 @@ public class Thief extends Human {
 	@Override
 	public void addWitnessedCrime(Crime crime) {
 		// TODO Auto-generated method stub
-		if (crime.visctim == this)
+		if (crime.victim == this)
 			super.addWitnessedCrime(crime);
 	}
 

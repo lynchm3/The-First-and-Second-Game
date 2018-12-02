@@ -7,6 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Crime;
+import com.marklynch.level.constructs.Crime.TYPE;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
@@ -36,7 +37,6 @@ import com.marklynch.objects.actions.ActionFishingStart;
 import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLock;
-import com.marklynch.objects.actions.ActionMining;
 import com.marklynch.objects.actions.ActionReportCrime;
 import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTakeItems;
@@ -716,7 +716,7 @@ public abstract class AIRoutine {
 				accumulatedSeverity += crime.type.severity;
 				if (crime.isResolved() == false) {
 					unresolvedCrimes.add(crime);
-					if (crime.action instanceof ActionMining) {
+					if (crime.type == TYPE.CRIME_ILLEGAL_MINING) {
 						unresolvedIllegalMinings.add(crime);
 					}
 					if (crime.stolenItems.length != 0)

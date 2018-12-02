@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
-import com.marklynch.level.constructs.Crime.CrimeListener;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
@@ -13,7 +12,7 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-public class WantedPoster extends GameObject implements CrimeListener {
+public class WantedPoster extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 

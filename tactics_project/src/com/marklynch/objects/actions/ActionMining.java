@@ -148,7 +148,7 @@ public class ActionMining extends Action {
 
 			// if(ore !=)
 			if (ore != null) {
-				Crime crime = new Crime(this, this.performer, this.vein.owner, Crime.TYPE.CRIME_THEFT, ore);
+				Crime crime = new Crime(this.performer, this.vein.owner, Crime.TYPE.CRIME_ILLEGAL_MINING, ore);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);

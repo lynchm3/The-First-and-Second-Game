@@ -119,7 +119,7 @@ public class ActionChopping extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_VANDALISM, target);
+			Crime crime = new Crime(this.performer, this.target.owner, Crime.TYPE.CRIME_VANDALISM, target);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

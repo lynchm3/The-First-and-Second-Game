@@ -25,6 +25,7 @@ import com.marklynch.ai.routines.AIRoutineForPig;
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.ai.routines.AIRoutineForTrader;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
@@ -45,6 +46,7 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(Actor.class, serializerForActor);
 		gsonBuilder.registerTypeAdapter(Texture.class, serializerForTexture);
 		gsonBuilder.registerTypeAdapter(Faction.class, serializerForFaction);
+		gsonBuilder.registerTypeAdapter(Crime.class, serializerForCrime);
 
 		// Effects //
 		gsonBuilder.registerTypeAdapter(Effect.class, serializerForEffect);
@@ -185,6 +187,24 @@ public class GsonCreator {
 				jsonObject.addProperty("theftCooldown", ((AIRoutineForThief) src).theftCooldown);
 			}
 
+			return jsonObject;
+		}
+	};
+
+	static JsonSerializer<Crime> serializerForCrime = new JsonSerializer<Crime>() {
+		@Override
+		public JsonElement serialize(Crime src, Type type, JsonSerializationContext context) {
+			JsonObject jsonObject = new JsonObject();
+			if (src.performer != null)
+				jsonObject.addProperty("performer", src.performer.id);
+			if (src.victim != null)
+				jsonObject.addProperty("victim", src.victim.id);
+			jsonObject.addProperty("hasBeenToldToStop", src.hasBeenToldToStop);
+			jsonObject.addProperty("resolved", src.resolved);
+			jsonObject.addProperty("reported", src.reported);
+			jsonObject.addProperty("stolenItems", Save.getGameObjectArrayStringForInsertion(src.stolenItems));
+			jsonObject.addProperty("type", "" + src.type);
+			jsonObject.addProperty("crimeListeners", Save.getArrayListStringForInsertion(src.crimeListeners));
 			return jsonObject;
 		}
 	};

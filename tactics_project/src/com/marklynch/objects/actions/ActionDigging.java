@@ -92,8 +92,7 @@ public class ActionDigging extends Action {
 			if (Game.level.shouldLog(target, performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", buriedGamObject }));
 			if (!legal) {
-				Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT,
-						buriedGamObject);
+				Crime crime = new Crime(this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, buriedGamObject);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);

@@ -59,7 +59,7 @@ public class ActionSellItems extends VariableQtyAction {
 
 		for (GameObject object : objects) {
 			if (object.owner == receiver) {
-				Crime crime = new Crime(this, this.performer, object.owner, Crime.TYPE.CRIME_THEFT, object);
+				Crime crime = new Crime(this.performer, object.owner, Crime.TYPE.CRIME_THEFT, object);
 
 				for (Crime c : performer.crimesPerformedInLifetime) {
 					if (Arrays.asList(c.stolenItems).contains(object)) {

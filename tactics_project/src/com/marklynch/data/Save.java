@@ -16,6 +16,7 @@ import org.objectweb.asm.Type;
 import com.google.gson.Gson;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Stat;
@@ -309,7 +310,7 @@ public class Save {
 		}
 	}
 
-	private static PreparedStatement createPreparedStatementForInserts(Class clazz) {
+	public static PreparedStatement createPreparedStatementForInserts(Class clazz) {
 		ArrayList<Field> fields = null;
 		String insertQueryTemplate = null;
 		Object object1 = null;
@@ -393,6 +394,10 @@ public class Save {
 						preparedStatement.setLong(count, ((Quest) value).id);
 					} else if (value instanceof SWITCH_TYPE) {
 						preparedStatement.setString(count, value.toString());
+					} else if (value instanceof Crime) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Crime[]) {
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof GameObject[]) {
 						preparedStatement.setString(count, getGameObjectArrayStringForInsertion((GameObject[]) value));
 					} else if (value instanceof Square[]) {
@@ -450,7 +455,7 @@ public class Save {
 
 	}
 
-	private static String getGameObjectArrayStringForInsertion(GameObject[] array) {
+	public static String getGameObjectArrayStringForInsertion(GameObject[] array) {
 
 		String result = "[";
 		for (GameObject gameObject : array) {
@@ -463,7 +468,7 @@ public class Save {
 		return result;
 	}
 
-	private static String getSquareArrayStringForInsertion(Square[] array) {
+	public static String getSquareArrayStringForInsertion(Square[] array) {
 
 		String result = "[";
 		for (Square square : array) {
@@ -561,6 +566,10 @@ public class Save {
 			return result;
 
 		} else if (arrayList.get(0) instanceof Effect) {
+
+			return gson.toJson(arrayList);
+
+		} else if (arrayList.get(0) instanceof Crime) {
 
 			return gson.toJson(arrayList);
 

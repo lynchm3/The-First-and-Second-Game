@@ -133,7 +133,7 @@ public class ActionThrowItem extends Action {
 				Crime.TYPE severity = Crime.TYPE.CRIME_ASSAULT;
 				if (!(target instanceof Actor))
 					severity = Crime.TYPE.CRIME_VANDALISM;
-				Crime crime = new Crime(this, this.performer, victim, Crime.TYPE.CRIME_ASSAULT);
+				Crime crime = new Crime(this.performer, victim, Crime.TYPE.CRIME_ASSAULT);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);

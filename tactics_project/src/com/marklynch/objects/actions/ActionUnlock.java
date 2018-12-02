@@ -52,7 +52,7 @@ public class ActionUnlock extends Action {
 			}
 
 			if (!legal) {
-				Crime crime = new Crime(this, actor, openable.owner, Crime.TYPE.CRIME_THEFT, key);
+				Crime crime = new Crime(actor, openable.owner, Crime.TYPE.CRIME_THEFT, key);
 				actor.crimesPerformedThisTurn.add(crime);
 				actor.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
