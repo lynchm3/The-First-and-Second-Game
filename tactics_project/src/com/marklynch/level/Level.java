@@ -2240,6 +2240,12 @@ public class Level {
 		}
 
 		for (InanimateObjectToAddOrRemove inanimateObjectToAdd : inanimateObjectsToAdd) {
+
+			System.out.println("inanimateObjectToAdd = " + inanimateObjectToAdd);
+			System.out.println("inanimateObjectToAdd.square = " + inanimateObjectToAdd.square);
+			System.out.println("inanimateObjectToAdd.square.inventory = " + inanimateObjectToAdd.square.inventory);
+			System.out.println("nanimateObjectToAdd.gameObject = " + inanimateObjectToAdd.gameObject);
+
 			inanimateObjectToAdd.square.inventory.add(inanimateObjectToAdd.gameObject);
 		}
 		inanimateObjectsToAdd.clear();

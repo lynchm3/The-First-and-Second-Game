@@ -162,6 +162,9 @@ public class ActionDie extends Action {
 
 	public void createCorpse() {
 
+		// if(gameObjectPerformer.squareGameObjectIsOn == null)
+		// return;
+
 		if (gameObjectPerformer instanceof Actor) {
 
 			Actor actor = (Actor) gameObjectPerformer;
@@ -225,6 +228,11 @@ public class ActionDie extends Action {
 			// GameObjects
 			if (gameObjectPerformer.destroyedBy instanceof EffectBurning) {
 				// Death by fire
+
+				System.out.println("gameObjectPerformer = " + gameObjectPerformer);
+				System.out.println(
+						"gameObjectPerformer.squareGameObjectIsOn = " + gameObjectPerformer.squareGameObjectIsOn);
+
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
 						Templates.ASH.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
 				for (GameObject gameObject : (ArrayList<GameObject>) gameObjectPerformer.inventory.gameObjects
