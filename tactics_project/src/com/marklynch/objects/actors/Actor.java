@@ -91,14 +91,13 @@ public class Actor extends GameObject {
 		UP, RIGHT, DOWN, LEFT
 	}
 
+	public AIRoutine aiRoutine;
 	public String title = "";
 	public int travelDistance = 1;
 	public int sight = 10;
 
 	public transient int distanceMovedThisTurn = 0;
 	public transient boolean showWeaponButtons = false;
-
-	public AIRoutine aiRoutine;
 
 	public String activityDescription = "";
 	public String miniDialogue = "";

@@ -14,6 +14,7 @@ import java.util.HashMap;
 import org.objectweb.asm.Type;
 
 import com.google.gson.Gson;
+import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
@@ -385,8 +386,8 @@ public class Save {
 						preparedStatement.setLong(count, ((Enhancement) value).id);
 					} else if (value instanceof Faction) {
 						preparedStatement.setLong(count, ((Faction) value).id);
-						// } else if (value instanceof AIRoutine) {
-						// preparedStatement.setString(count, new Gson().toJson(value));
+					} else if (value instanceof AIRoutine) {
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof GameObject) {
 						preparedStatement.setLong(count, ((GameObject) value).id);
 					} else if (value instanceof HashMap<?, ?>) {
