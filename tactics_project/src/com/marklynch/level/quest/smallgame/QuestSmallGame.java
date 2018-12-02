@@ -4,11 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.GroupOfActors;
-import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.actionlisteners.ActionListener;
-import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -30,10 +26,10 @@ import com.marklynch.objects.Storage;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.actors.Guard;
 import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.actors.Thief;
-import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.utils.TextUtils;
@@ -215,7 +211,7 @@ public class QuestSmallGame extends Quest {
 	public QuestSmallGame() {
 		super();
 
-		AreaTownForest.createForest();
+		TownForestBuilder.createForest();
 
 		name = "SMALL GAME";
 		// addObjective("No objective");
@@ -474,39 +470,42 @@ public class QuestSmallGame extends Quest {
 		ConversationsSmallGame.quest = this;
 		ConversationsSmallGame.createConversations();
 
-		huntingPlan.setOnReadListener(new ActionListener() {
-			@Override
-			public void onRead() {
-				if (!haveJournalLog(journalLogReadHuntPlan1) && !haveJournalLog(journalLogReadHuntPlan2)) {
-					if (!started) {
-						addJournalLog(journalLogReadHuntPlan1);
-						addObjective(objectiveHunters);
-					} else {
-						addJournalLog(journalLogReadHuntPlan2);
-					}
-					turnUpdated = Level.turn;
-					addJournalLog(new JournalLog(huntingPlan));
-					addJournalLog(new JournalLog(superWolf));
-
-					BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
-					bestiaryKnowledge.name = true;
-					bestiaryKnowledge.level = true;
-					bestiaryKnowledge.image = true;
-					bestiaryKnowledge.totalHealth = true;
-					bestiaryKnowledge.faction = true;
-					bestiaryKnowledge.groupOfActors = true;
-
-					// Stats
-					for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
-						bestiaryKnowledge.putHighLevel(statType, true);
-					}
-
-					// Powers
-					bestiaryKnowledge.powers = true;
-
-				}
-			}
-		});
+		// WAS HAVING TROUBLE SAVING
+		// huntingPlan.setOnReadListener(new ActionListener() {
+		// @Override
+		// public void onRead() {
+		// if (!haveJournalLog(journalLogReadHuntPlan1) &&
+		// !haveJournalLog(journalLogReadHuntPlan2)) {
+		// if (!started) {
+		// addJournalLog(journalLogReadHuntPlan1);
+		// addObjective(objectiveHunters);
+		// } else {
+		// addJournalLog(journalLogReadHuntPlan2);
+		// }
+		// turnUpdated = Level.turn;
+		// addJournalLog(new JournalLog(huntingPlan));
+		// addJournalLog(new JournalLog(superWolf));
+		//
+		// BestiaryKnowledge bestiaryKnowledge =
+		// Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
+		// bestiaryKnowledge.name = true;
+		// bestiaryKnowledge.level = true;
+		// bestiaryKnowledge.image = true;
+		// bestiaryKnowledge.totalHealth = true;
+		// bestiaryKnowledge.faction = true;
+		// bestiaryKnowledge.groupOfActors = true;
+		//
+		// // Stats
+		// for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
+		// bestiaryKnowledge.putHighLevel(statType, true);
+		// }
+		//
+		// // Powers
+		// bestiaryKnowledge.powers = true;
+		//
+		// }
+		// }
+		// });
 
 		Discoverable mound1 = Templates.MOUND.makeCopy(Game.level.squares[1][1], null, 1);
 		mound1.inventory.add(Templates.ROCK.makeCopy(null, null));

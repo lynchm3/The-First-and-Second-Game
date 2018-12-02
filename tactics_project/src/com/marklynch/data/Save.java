@@ -27,6 +27,7 @@ import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
@@ -317,6 +318,7 @@ public class Save {
 		ArrayList<Field> fields = null;
 		String insertQueryTemplate = null;
 		Object object1 = null;
+		Field field1 = null;
 
 		// clazz is FlammableLightSource
 
@@ -346,6 +348,7 @@ public class Save {
 				object1 = object;
 				int count = 1;
 				for (Field field : fields) {
+					field1 = field;
 
 					Object value = field.get(object); // THIS is the crashing line
 
@@ -413,6 +416,8 @@ public class Save {
 						preparedStatement.setString(count, getSquareArrayStringForInsertion((Square[]) value));
 					} else if (value instanceof Effect[]) {
 						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Enhancement) {
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Color) {
 						preparedStatement.setString(count, ((Color) value).generateSaveData());
 					} else if (value instanceof Node) {
@@ -442,6 +447,7 @@ public class Save {
 						System.err.println("Error saving - " + value);
 						System.err.println("clazz = " + clazz);
 						System.err.println("fields = " + fields);
+						System.err.println("field = " + field1);
 						System.err.println("object = " + object1);
 						System.err.println("insertQueryTemplate = " + insertQueryTemplate);
 						System.err.println("=======================");
@@ -463,6 +469,7 @@ public class Save {
 			System.err.println("saveGameObjects() error");
 			System.err.println("clazz = " + clazz);
 			System.err.println("fields = " + fields);
+			System.err.println("field = " + field1);
 			System.err.println("object = " + object1);
 			System.err.println("insertQueryTemplate = " + insertQueryTemplate);
 			e.printStackTrace();
@@ -550,6 +557,17 @@ public class Save {
 			}
 			return result;
 
+		} else if (arrayList.get(0) instanceof Texture) {
+
+			String result = "";
+			for (Texture texture : (ArrayList<Texture>) arrayList) {
+				result += texture.path;
+				if (arrayList.get(arrayList.size() - 1) != texture) {
+					result += ",";
+				}
+			}
+			return result;
+
 		} else if (arrayList.get(0) instanceof StructureSection) {
 
 			String result = "";
@@ -606,7 +624,8 @@ public class Save {
 		System.err.println("=======================");
 		System.err.println("Error saving arrayList - " + arrayList);
 		System.err.println("=======================");
-		return "TODO Object class " + arrayList;
+		// return "TODO Object class " + arrayList;
+		return null;
 	}
 
 	public static String getHashMapStringForInsertion(HashMap<?, ?> hashMap) {

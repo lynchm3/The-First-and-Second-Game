@@ -116,9 +116,9 @@ public class Texture implements ITexture {
 	}
 
 	/**
-	 * Creates an empty OpenGL texture with the given width and height, where
-	 * each pixel is transparent black (0, 0, 0, 0) and the wrap mode is
-	 * CLAMP_TO_EDGE and the filter is NEAREST.
+	 * Creates an empty OpenGL texture with the given width and height, where each
+	 * pixel is transparent black (0, 0, 0, 0) and the wrap mode is CLAMP_TO_EDGE
+	 * and the filter is NEAREST.
 	 * 
 	 * @param width
 	 *            the width of the texture
@@ -130,9 +130,8 @@ public class Texture implements ITexture {
 	}
 
 	/**
-	 * Creates an empty OpenGL texture with the given width and height, where
-	 * each pixel is transparent black (0, 0, 0, 0) and the wrap mode is
-	 * CLAMP_TO_EDGE.
+	 * Creates an empty OpenGL texture with the given width and height, where each
+	 * pixel is transparent black (0, 0, 0, 0) and the wrap mode is CLAMP_TO_EDGE.
 	 * 
 	 * @param width
 	 *            the width of the texture
@@ -146,8 +145,8 @@ public class Texture implements ITexture {
 	}
 
 	/**
-	 * Creates an empty OpenGL texture with the given width and height, where
-	 * each pixel is transparent black (0, 0, 0, 0).
+	 * Creates an empty OpenGL texture with the given width and height, where each
+	 * pixel is transparent black (0, 0, 0, 0).
 	 * 
 	 * @param width
 	 *            the width of the texture

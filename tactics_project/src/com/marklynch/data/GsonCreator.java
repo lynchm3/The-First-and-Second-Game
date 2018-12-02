@@ -37,6 +37,7 @@ import com.marklynch.level.constructs.effect.EffectCurse;
 import com.marklynch.level.constructs.effect.EffectHeal;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
+import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Texture;
@@ -53,6 +54,7 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(Investigation.class, serializerForInvestigation);
 		gsonBuilder.registerTypeAdapter(Sound.class, serializerForSound);
 		gsonBuilder.registerTypeAdapter(AILine.class, serializerForAILine);
+		gsonBuilder.registerTypeAdapter(Enhancement.class, serializerForEnhancement);
 
 		// Effects //
 		gsonBuilder.registerTypeAdapter(Effect.class, serializerForEffect);
@@ -258,6 +260,23 @@ public class GsonCreator {
 			if (src.target != null)
 				jsonObject.addProperty("target", src.target.id);
 			jsonObject.addProperty("aiLineType", "" + src.aiLineType);
+			return jsonObject;
+		}
+	};
+
+	static JsonSerializer<Enhancement> serializerForEnhancement = new JsonSerializer<Enhancement>() {
+		@Override
+		public JsonElement serialize(Enhancement src, Type type, JsonSerializationContext context) {
+			JsonObject jsonObject = new JsonObject();
+
+			jsonObject.addProperty("highLevelStats", Save.getHashMapStringForInsertion(src.highLevelStats));
+			if (src.imageTexture != null)
+				jsonObject.addProperty("imageTexture", src.imageTexture.path);
+			jsonObject.addProperty("minRange", src.minRange);
+			jsonObject.addProperty("maxRange", src.maxRange);
+			jsonObject.addProperty("effect", Save.gson.toJson(src.effect));
+			jsonObject.addProperty("templateId", src.templateId);
+			jsonObject.addProperty("type", "" + src.type);
 			return jsonObject;
 		}
 	};

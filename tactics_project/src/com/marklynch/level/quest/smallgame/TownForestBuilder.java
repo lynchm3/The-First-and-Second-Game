@@ -2,15 +2,13 @@ package com.marklynch.level.quest.smallgame;
 
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.GroupOfActors;
-import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.journal.AreaList;
-import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.templates.Templates;
 
-public class AreaTownForest {
+public class TownForestBuilder {
 
 	public static void createForest() {
 
@@ -95,12 +93,13 @@ public class AreaTownForest {
 		scrollOfPoisonBlast.name = "Scroll of Poison Blast";
 		scrollOfPoisonBlast.conversation = scrollOfPoisonBlast.createConversation(new Object[] {
 				"[You learn Poison Blast]\nPoisons for base 3 dmg/s Range:10\nUse the power of the forest to murder people with poisons. Nice" });
-		scrollOfPoisonBlast.setOnReadListener(new ActionListener() {
-			@Override
-			public void onRead() {
-				Level.player.powers.add(new PowerPoisonThrowingKnives(Level.player));
-			}
-		});
+		// WAS HAVING TROUBLE SAVING
+		// scrollOfPoisonBlast.setOnReadListener(new ActionListener() {
+		// @Override
+		// public void onRead() {
+		// Level.player.powers.add(new PowerPoisonThrowingKnives(Level.player));
+		// }
+		// });
 
 		// corners
 		Templates.BIG_TREE.makeCopy(Level.squares[154][49], null);
