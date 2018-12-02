@@ -1,7 +1,6 @@
 package com.marklynch.data;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,9 +26,6 @@ import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.area.Area;
-import com.marklynch.level.constructs.bounds.structure.StructureRoom;
-import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectBurning;
@@ -37,10 +33,8 @@ import com.marklynch.level.constructs.effect.EffectCurse;
 import com.marklynch.level.constructs.effect.EffectHeal;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.utils.Texture;
 
 public class GsonCreator {
@@ -135,38 +129,6 @@ public class GsonCreator {
 		}
 	};
 
-	public transient Actor actor;
-	public transient GameObject target;
-	public transient int searchCooldown = 0;
-	public transient GameObject searchCooldownActor = null;
-	public transient int escapeCooldown = 0;
-	public transient GameObject escapeCooldownAttacker = null;
-	public transient int wokenUpCountdown = 0;
-
-	enum STATE {
-		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, PATROL, FREE_TIME, FISHING, SHOPKEEPING, THIEVING, UPDATING_SIGN, SWIMMING
-	};
-
-	public transient STATE state;
-
-	public static enum AI_TYPE {
-		FIGHTER, RUNNER, GUARD, HOSTILE, ANIMAL
-	};
-
-	public transient AI_TYPE aiType = AI_TYPE.FIGHTER;
-
-	public transient boolean keepInBounds = false;
-	public transient ArrayList<Area> areaBounds = new ArrayList<Area>();
-	public transient ArrayList<StructureSection> sectionBounds = new ArrayList<StructureSection>();
-	public transient ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>();
-	public transient ArrayList<Square> squareBounds = new ArrayList<Square>();
-
-	public transient HOBBY currentHobby = HOBBY.HUNTING;
-
-	public transient Actor actorToKeepTrackOf = null;
-	public transient Square lastLocationSeenActorToKeepTrackOf = null;
-	public transient ArrayList<GameObject> ignoreList = new ArrayList<GameObject>();
-
 	static JsonSerializer<AIRoutine> serializerForAIRoutine = new JsonSerializer<AIRoutine>() {
 		@Override
 		public JsonElement serialize(AIRoutine src, Type type, JsonSerializationContext context) {
@@ -196,8 +158,33 @@ public class GsonCreator {
 			if (src.lastLocationSeenActorToKeepTrackOf != null)
 				jsonObject.addProperty("lastLocationSeenActorToKeepTrackOf", src.lastLocationSeenActorToKeepTrackOf.id);
 			jsonObject.addProperty("sleepCounter", src.sleepCounter);
-
 			jsonObject.addProperty("ignoreList", Save.getArrayListStringForInsertion(src.ignoreList));
+
+			if (src instanceof AIRoutineForBlind) {
+				// public Sound bellSound = null;
+				AIRoutineForBlind aiRoutineForBlind = (AIRoutineForBlind) src;
+				if (aiRoutineForBlind.meatChunk != null)
+					jsonObject.addProperty("meatChunk", aiRoutineForBlind.meatChunk.id);
+				if (aiRoutineForBlind.originalMeatChunkSquare != null)
+					jsonObject.addProperty("originalMeatChunkSquare", aiRoutineForBlind.originalMeatChunkSquare.id);
+				jsonObject.addProperty("hangry", aiRoutineForBlind.hangry);
+				jsonObject.addProperty("timeSinceEating", aiRoutineForBlind.timeSinceEating);
+				jsonObject.addProperty("failedToGetPathToBellCount", aiRoutineForBlind.failedToGetPathToBellCount);
+				jsonObject.addProperty("failedToGetPathToFoodCount", aiRoutineForBlind.failedToGetPathToFoodCount);
+			} else if (src instanceof AIRoutineForGuard) {
+				jsonObject.addProperty("patrolIndex", ((AIRoutineForGuard) src).patrolIndex);
+			} else if (src instanceof AIRoutineForHerbivoreWildAnimal) {
+				jsonObject.addProperty("hidingCount", ((AIRoutineForHerbivoreWildAnimal) src).hidingCount);
+			} else if (src instanceof AIRoutineForMort) {
+				AIRoutineForMort aiRoutineForMort = (AIRoutineForMort) src;
+				jsonObject.addProperty("rangBellAsLastResort", aiRoutineForMort.rangBellAsLastResort);
+				jsonObject.addProperty("retreatedToRoom", aiRoutineForMort.retreatedToRoom);
+				jsonObject.addProperty("feedingDemoState", "" + aiRoutineForMort.feedingDemoState);
+			} else if (src instanceof AIRoutineForThief) {
+				// int theftCooldown = 0;
+				jsonObject.addProperty("theftCooldown", ((AIRoutineForThief) src).theftCooldown);
+			}
+
 			return jsonObject;
 		}
 	};

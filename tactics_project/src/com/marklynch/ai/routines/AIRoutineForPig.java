@@ -2,29 +2,12 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineForPig extends AIRoutine {
 
-	enum SHOPKEEP_STATE {
-		SHOPKEEPING, UPDATING_SIGN, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
-	};
-
-	final String ACTIVITY_DESCRIPTION_PIGGING_OUT = "Pigging out!";
-	final String ACTIVITY_DESCRIPTION_BEING_A_PIG = "Being a pig";
-	final String ACTIVITY_DESCRIPTION_BEING_A_CHICKEN = "Being a chicken";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-	final String ACTIVITY_DESCRIPTION_DISGRUNTLED = "Disgruntled";
-
-	public SHOPKEEP_STATE shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
-
-	int sleepCounter = 0;
-	final int SLEEP_TIME = 1000;
-
 	Actor pig;
-	Square targetSquare = null;
 
 	public AIRoutineForPig(Actor actor) {
 		super(actor);

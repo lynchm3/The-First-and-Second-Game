@@ -12,7 +12,7 @@ import com.marklynch.objects.actors.HerbivoreWildAnimal;
 public class AIRoutineForGuard extends AIRoutine {
 
 	Guard guard;
-	int patrolIndex = 0;
+	public int patrolIndex = 0;
 
 	public AIRoutineForGuard(Actor actor) {
 

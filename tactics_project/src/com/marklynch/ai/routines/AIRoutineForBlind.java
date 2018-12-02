@@ -14,16 +14,16 @@ import com.marklynch.objects.actors.RockGolem;
 
 public class AIRoutineForBlind extends AIRoutine {
 
-	Blind blind;
+	public Blind blind;
 	public Sound bellSound = null;
 	public MeatChunk meatChunk = null;
-	Square originalMeatChunkSquare = null;
+	public Square originalMeatChunkSquare = null;
 
-	boolean hangry = false;
-	int timeSinceEating = Integer.MAX_VALUE;
+	public boolean hangry = false;
+	public int timeSinceEating = Integer.MAX_VALUE;
 
-	int failedToGetPathToBellCount = 0;
-	int failedToGetPathToFoodCount = 0;
+	public int failedToGetPathToBellCount = 0;
+	public int failedToGetPathToFoodCount = 0;
 
 	public AIRoutineForBlind(Actor blind) {
 		super(blind);

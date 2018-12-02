@@ -13,7 +13,7 @@ import com.marklynch.utils.Color;
 
 public class AIRoutineForThief extends AIRoutine {
 
-	int theftCooldown = 0;
+	public int theftCooldown = 0;
 
 	public AIRoutineForThief(Actor actor) {
 

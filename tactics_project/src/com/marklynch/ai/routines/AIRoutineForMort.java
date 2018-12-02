@@ -18,7 +18,7 @@ import com.marklynch.objects.tools.Bell;
 public class AIRoutineForMort extends AIRoutine {
 
 	Mort mort;
-	boolean rangBellAsLastResort;
+	public boolean rangBellAsLastResort;
 	public boolean retreatedToRoom = false;
 
 	enum FEEDING_DEMO_STATE {
