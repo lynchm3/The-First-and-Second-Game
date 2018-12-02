@@ -20,7 +20,6 @@ import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.Orb;
-import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDiscover;
@@ -309,8 +308,8 @@ public class Player extends Human {
 			if (potentiallyVIsibleSquare.visibleToPlayer)
 				continue;
 
-			if (!potentiallyVIsibleSquare.inventory.contains(Wall.class))
-				continue;
+			// if (!potentiallyVIsibleSquare.inventory.contains(Wall.class))
+			// continue;
 
 			int visibleNeighbors = 0;
 

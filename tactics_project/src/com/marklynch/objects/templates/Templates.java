@@ -5,7 +5,6 @@ import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.level.quest.thesecretroom.Kidnapper;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.Bed;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Corpse;
@@ -14,7 +13,6 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Gate;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Inspectable;
@@ -258,7 +256,7 @@ public class Templates {
 
 	public static Door DOOR;
 
-	public static Gate GATE;
+	public static Door GATE;
 
 	public static Storage CHEST;
 

@@ -4,7 +4,6 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.objects.Fence;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MineCart;
 import com.marklynch.objects.Rail;
@@ -86,7 +85,7 @@ public class TemplatesBuilding {
 		Templates.RUBBLE.orderingOnGound = 20;
 		Templates.RUBBLE.templateId = GameObject.generateNewTemplateId();
 
-		Templates.FENCE = new Fence();
+		Templates.FENCE = new Wall();
 		Templates.FENCE.name = "Fence";
 		Templates.FENCE.imageTexturePath = "wall.png";
 		Templates.FENCE.imageTexture = getGlobalImage(Templates.FENCE.imageTexturePath, true);
@@ -105,6 +104,7 @@ public class TemplatesBuilding {
 		Templates.FENCE.anchorY = 0;
 		Templates.FENCE.templateId = GameObject.generateNewTemplateId();
 		Templates.FENCE.flipYAxisInMirror = false;
+		Templates.FENCE.blocksLineOfSight = false;
 
 		Templates.RAIL = new Rail();
 		Templates.RAIL.name = "Rail";

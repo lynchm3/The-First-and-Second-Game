@@ -1935,6 +1935,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.soundWhenHitting = soundWhenHitting;
 		gameObject.soundDampening = soundDampening;
 		gameObject.weight = weight;
+		gameObject.blocksLineOfSight = blocksLineOfSight;
 
 		gameObject.minRange = minRange;
 		gameObject.maxRange = maxRange;

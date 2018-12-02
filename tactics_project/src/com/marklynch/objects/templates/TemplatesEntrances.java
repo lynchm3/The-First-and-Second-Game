@@ -6,7 +6,6 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Gate;
 import com.marklynch.objects.RemoteDoor;
 
 public class TemplatesEntrances {
@@ -40,7 +39,7 @@ public class TemplatesEntrances {
 		Templates.DOOR.blocksLineOfSightWhenClosed = true;
 		Templates.DOOR.templateId = GameObject.generateNewTemplateId();
 
-		Templates.GATE = new Gate();
+		Templates.GATE = new Door();
 		Templates.GATE.name = "Gate";
 		Templates.GATE.baseName = "Gate";
 		Templates.GATE.setImageAndExtrapolateSize("gate.png");
@@ -51,6 +50,8 @@ public class TemplatesEntrances {
 		Templates.GATE.anchorY = 0;
 		Templates.GATE.templateId = GameObject.generateNewTemplateId();
 		Templates.GATE.flipYAxisInMirror = false;
+		Templates.GATE.blocksLineOfSight = false;
+		Templates.GATE.blocksLineOfSightWhenClosed = false;
 
 		Templates.OPENABLE_WALL = new RemoteDoor();
 		Templates.OPENABLE_WALL.name = "Wall";

@@ -31,12 +31,10 @@ import com.marklynch.objects.Corpse;
 import com.marklynch.objects.DamageDealer;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.Door;
-import com.marklynch.objects.Fence;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObjectExploder;
-import com.marklynch.objects.Gate;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Inspectable;
@@ -129,7 +127,7 @@ public class Save {
 			AggressiveWildAnimal.class,
 
 			// LVL 3 GameObject subclass
-			Gate.class, Seesaw.class,
+			Seesaw.class,
 
 			// LVL 3 GameObject subclass in Tool
 			Shovel.class, Pickaxe.class, Knife.class, FlammableLightSource.class, FishingRod.class,
@@ -142,9 +140,9 @@ public class Save {
 			Lantern.class,
 
 			// LVL 2 GameObject subclass
-			Door.class, Fence.class, Furnace.class, HidingPlace.class, Landmine.class, Matches.class,
-			PressurePlate.class, PressurePlateRequiringSpecificItem.class, RemoteDoor.class, SmallHidingPlace.class,
-			Storage.class, Vein.class, WallWithCrack.class, WaterBody.class,
+			Door.class, Furnace.class, HidingPlace.class, Landmine.class, Matches.class, PressurePlate.class,
+			PressurePlateRequiringSpecificItem.class, RemoteDoor.class, SmallHidingPlace.class, Storage.class,
+			Vein.class, WallWithCrack.class, WaterBody.class,
 
 			// LVL 2 GameObject subclass in Weapon package
 			BodyArmor.class, Helmet.class, LegArmor.class,
