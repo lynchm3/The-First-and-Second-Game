@@ -20,6 +20,9 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.area.Area;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -436,7 +439,7 @@ public class Save {
 		return result;
 	}
 
-	private static String getSwitchListenerArrayStringForInsertion(SwitchListener[] array) {
+	public static String getSwitchListenerArrayStringForInsertion(SwitchListener[] array) {
 
 		String result = "[";
 		for (SwitchListener switchListener : array) {
@@ -449,7 +452,7 @@ public class Save {
 		return result;
 	}
 
-	private static String getArrayListStringForInsertion(ArrayList<?> arrayList) {
+	public static String getArrayListStringForInsertion(ArrayList<?> arrayList) {
 
 		if (arrayList.size() == 0) {
 			return "";
@@ -460,6 +463,50 @@ public class Save {
 			for (GameObject gameObject : (ArrayList<GameObject>) arrayList) {
 				result += gameObject.id;
 				if (arrayList.get(arrayList.size() - 1) != gameObject) {
+					result += ",";
+				}
+			}
+			return result;
+
+		} else if (arrayList.get(0) instanceof Area) {
+
+			String result = "";
+			for (Area area : (ArrayList<Area>) arrayList) {
+				result += area.id;
+				if (arrayList.get(arrayList.size() - 1) != area) {
+					result += ",";
+				}
+			}
+			return result;
+
+		} else if (arrayList.get(0) instanceof StructureSection) {
+
+			String result = "";
+			for (StructureSection structureSection : (ArrayList<StructureSection>) arrayList) {
+				result += structureSection.id;
+				if (arrayList.get(arrayList.size() - 1) != structureSection) {
+					result += ",";
+				}
+			}
+			return result;
+
+		} else if (arrayList.get(0) instanceof StructureRoom) {
+
+			String result = "";
+			for (StructureRoom room : (ArrayList<StructureRoom>) arrayList) {
+				result += room.id;
+				if (arrayList.get(arrayList.size() - 1) != room) {
+					result += ",";
+				}
+			}
+			return result;
+
+		} else if (arrayList.get(0) instanceof Square) {
+
+			String result = "";
+			for (Square square : (ArrayList<Square>) arrayList) {
+				result += square.id;
+				if (arrayList.get(arrayList.size() - 1) != square) {
 					result += ",";
 				}
 			}

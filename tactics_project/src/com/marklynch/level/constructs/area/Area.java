@@ -29,10 +29,12 @@ public class Area {
 
 	public Storage lostAndFound;
 	public WantedPoster wantedPoster;
+	public Long id;
 
 	public Area(String name, String imageString, Texture squareTexture, int gridX1, int gridY1, int gridX2, int gridY2,
 			int level, Color color, Node... nodes) {
 		super();
+		this.id = Level.generateNewId(this);
 		this.name = name;
 		if (imageString != null)
 			this.image = ResourceUtils.getGlobalImage(imageString, false);

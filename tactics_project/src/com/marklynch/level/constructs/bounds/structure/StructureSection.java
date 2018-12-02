@@ -3,16 +3,19 @@ package com.marklynch.level.constructs.bounds.structure;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.objects.actors.Actor;
 
 public class StructureSection {
 
 	public String name;
 	public int gridX1, gridY1, gridX2, gridY2;
+	public Long id;
 
 	public StructureSection(String name, int gridX1, int gridY1, int gridX2, int gridY2, boolean restricted,
 			boolean restrictedAtNight, Actor... ownersArray) {
 		super();
+		this.id = Level.generateNewId(this);
 		this.name = name;
 		this.gridX1 = gridX1;
 		this.gridY1 = gridY1;

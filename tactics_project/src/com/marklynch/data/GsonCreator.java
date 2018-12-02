@@ -184,16 +184,16 @@ public class GsonCreator {
 			jsonObject.addProperty("wokenUpCountdown", src.wokenUpCountdown);
 			jsonObject.addProperty("state", "" + src.state);
 			jsonObject.addProperty("keepInBounds", src.keepInBounds);
-			// jsonObject.addProperty("areaBounds", src.path);
-			// jsonObject.addProperty("sectionBounds", src.path);
-			// jsonObject.addProperty("roomBounds", src.path);
-			// jsonObject.addProperty("squareBounds", src.path);
+			jsonObject.addProperty("areaBounds", Save.getArrayListStringForInsertion(src.areaBounds));
+			jsonObject.addProperty("sectionBounds", Save.getArrayListStringForInsertion(src.sectionBounds));
+			jsonObject.addProperty("roomBounds", Save.getArrayListStringForInsertion(src.roomBounds));
+			jsonObject.addProperty("squareBounds", Save.getArrayListStringForInsertion(src.squareBounds));
 			jsonObject.addProperty("currentHobby", "" + src.currentHobby);
 			if (src.actorToKeepTrackOf != null)
 				jsonObject.addProperty("actorToKeepTrackOf", src.actorToKeepTrackOf.id);
 			if (src.lastLocationSeenActorToKeepTrackOf != null)
 				jsonObject.addProperty("lastLocationSeenActorToKeepTrackOf", src.lastLocationSeenActorToKeepTrackOf.id);
-			// jsonObject.addProperty("ignoreList", src.path);
+			jsonObject.addProperty("ignoreList", Save.getArrayListStringForInsertion(src.ignoreList));
 			return jsonObject;
 		}
 	};
