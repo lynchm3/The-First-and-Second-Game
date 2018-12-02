@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -56,6 +57,9 @@ public class ActionClose extends Action {
 		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
+
+		if (performer == Level.player)
+			Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
 	}
 
 	@Override

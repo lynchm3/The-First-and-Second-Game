@@ -269,6 +269,9 @@ public class Save {
 	private static PreparedStatement createPreparedStatementForInserts(Class clazz) {
 		ArrayList<Field> fields = null;
 		String insertQueryTemplate = null;
+		Object object1 = null;
+
+		// clazz is FlammableLightSource
 
 		try {
 
@@ -293,6 +296,7 @@ public class Save {
 
 			for (Object object : (ArrayList<?>) clazz.getField("instances").get(null)) {// GameObject.instances
 
+				object1 = object;
 				int count = 1;
 				for (Field field : fields) {
 
@@ -369,6 +373,7 @@ public class Save {
 			System.err.println("saveGameObjects() error");
 			System.err.println("clazz = " + clazz);
 			System.err.println("fields = " + fields);
+			System.err.println("object = " + object1);
 			System.err.println("insertQueryTemplate = " + insertQueryTemplate);
 			e.printStackTrace();
 			System.err.println("=======================");

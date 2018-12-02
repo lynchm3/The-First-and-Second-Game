@@ -49,7 +49,7 @@ public class Player extends Human {
 	public static float xp;
 	public static float xpThisLevel;
 	public static float xpPerLevel = 55;
-	public ArrayList<Square> squaresVisibleToPlayerOnlyPlayer = new ArrayList<Square>();
+	public ArrayList<Square> squaresVisibleToPlayer = new ArrayList<Square>();
 
 	public long lastUpdateRealtime = 0;
 
@@ -263,7 +263,7 @@ public class Player extends Human {
 	}
 
 	public void discoveryCheck() {
-		for (Square square : squaresVisibleToPlayerOnlyPlayer) {
+		for (Square square : squaresVisibleToPlayer) {
 			for (GameObject discoverableGameObject : square.inventory.getGameObjectsOfClass(Discoverable.class)) {
 				Discoverable discoverable = ((Discoverable) discoverableGameObject);
 				if (!discoverable.discovered && discoverable.level <= this.level) {
@@ -284,11 +284,11 @@ public class Player extends Human {
 		// }
 		// }
 
-		for (Square squarePreviouslyVisibleToPlayer : squaresVisibleToPlayerOnlyPlayer) {
+		for (Square squarePreviouslyVisibleToPlayer : squaresVisibleToPlayer) {
 			squarePreviouslyVisibleToPlayer.visibleToPlayer = false;
 		}
 
-		squaresVisibleToPlayerOnlyPlayer.clear();
+		squaresVisibleToPlayer.clear();
 
 		double x1 = square.xInGrid;
 		double y1 = square.yInGrid;
@@ -387,9 +387,9 @@ public class Player extends Human {
 		if (y >= Game.level.squares[0].length)
 			return true;
 
-		if (!squaresVisibleToPlayerOnlyPlayer.contains(Game.level.squares[x][y])) {
+		if (!squaresVisibleToPlayer.contains(Game.level.squares[x][y])) {
 			Game.level.squares[x][y].visibleToSelectedCharacter = true;
-			squaresVisibleToPlayerOnlyPlayer.add(Game.level.squares[x][y]);
+			squaresVisibleToPlayer.add(Game.level.squares[x][y]);
 			if (this == Game.level.player) {
 				Game.level.squares[x][y].visibleToPlayer = true;
 				Game.level.squares[x][y].seenByPlayer = true;

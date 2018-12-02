@@ -1,10 +1,15 @@
 package com.marklynch.objects.tools;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Texture;
 
 public class FlammableLightSource extends Tool {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public transient Texture imageTextureUnlit = null;
 	public transient Texture imageTextureLit = null;
@@ -13,6 +18,12 @@ public class FlammableLightSource extends Tool {
 	public FlammableLightSource() {
 		super();
 		type = "Light Source";
+	}
+
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
 	}
 
 	@Override
