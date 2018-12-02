@@ -70,7 +70,6 @@ public class ActionTeleportSwap extends Action {
 		// move(actorInTheWay, oldSquare);
 		// move(teleportee, target);
 		// }
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

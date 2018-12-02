@@ -46,7 +46,6 @@ public class ActionTakeAll extends Action {
 			if (gameObjectToLoot.owner == null)
 				gameObjectToLoot.owner = performer;
 		}
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

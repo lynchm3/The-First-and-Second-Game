@@ -85,7 +85,6 @@ public class ActionTakeItems extends VariableQtyAction {
 			performer.inventory.add(object);
 			if (object.owner == null && performer instanceof Actor)
 				object.owner = (performer);
-			performer.actionsPerformedThisTurn.add(this);
 			if (sound != null)
 				sound.play();
 

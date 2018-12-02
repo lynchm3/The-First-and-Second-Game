@@ -46,7 +46,6 @@ public class ActionRead extends Action {
 		if (performer == Level.player)
 			target.wasRead();
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

@@ -42,7 +42,6 @@ public class ActionStopHidingInside extends Action {
 		target.inventory.remove(performer);
 		target.squareGameObjectIsOn.inventory.add(performer);
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

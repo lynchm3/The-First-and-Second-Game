@@ -32,7 +32,6 @@ public class ActionScream extends Action {
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "screamed" }));
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

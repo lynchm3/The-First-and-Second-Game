@@ -36,7 +36,6 @@ public class ActionPet extends Action {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " wonders what your deal is" }));
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

@@ -236,8 +236,6 @@ public class ActionFishBeingFished extends Action {
 		actor.drawOffsetRatioX = targetOffsetX;
 		actor.drawOffsetRatioY = targetOffsetY;
 
-		performer.actionsPerformedThisTurn.add(this);
-
 		if (sound != null)
 			sound.play();
 	}

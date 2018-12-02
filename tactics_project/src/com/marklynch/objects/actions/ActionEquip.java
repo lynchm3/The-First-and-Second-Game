@@ -58,7 +58,6 @@ public class ActionEquip extends Action {
 			performer.equip(target);
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

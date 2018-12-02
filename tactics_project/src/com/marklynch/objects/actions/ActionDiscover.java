@@ -43,8 +43,6 @@ public class ActionDiscover extends Action {
 		if (Game.level.shouldLog(gameObjectPerformer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " discovered ", discoverable }));
 
-		gameObjectPerformer.actionsPerformedThisTurn.add(this);
-
 		if (sound != null)
 			sound.play();
 	}

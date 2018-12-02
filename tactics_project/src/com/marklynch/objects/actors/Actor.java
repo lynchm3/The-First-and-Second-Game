@@ -2058,9 +2058,7 @@ public class Actor extends GameObject {
 		return null;
 	}
 
-	@Override
 	public void clearActions() {
-		super.clearActions();
 		crimesPerformedThisTurn.clear();
 	}
 

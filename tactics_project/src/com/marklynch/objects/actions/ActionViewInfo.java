@@ -31,7 +31,6 @@ public class ActionViewInfo extends Action {
 
 		Game.level.pinWindows.add(new PinWindow(targetGameObjectOrSquare));
 
-		performer.actionsPerformedThisTurn.add(this);
 	}
 
 	@Override

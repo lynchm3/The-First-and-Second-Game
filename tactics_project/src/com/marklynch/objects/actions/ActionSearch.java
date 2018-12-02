@@ -60,7 +60,6 @@ public class ActionSearch extends Action {
 			performer.addEffect(effect.makeCopy(target, performer));
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

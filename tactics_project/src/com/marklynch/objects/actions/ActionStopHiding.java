@@ -48,8 +48,6 @@ public class ActionStopHiding extends Action {
 			}
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
-
 		if (sound != null)
 			sound.play();
 	}

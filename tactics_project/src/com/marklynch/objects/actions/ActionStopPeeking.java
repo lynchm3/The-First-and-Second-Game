@@ -43,7 +43,6 @@ public class ActionStopPeeking extends Action {
 			Game.level.player.calculateVisibleSquares(performer.squareGameObjectIsOn);
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

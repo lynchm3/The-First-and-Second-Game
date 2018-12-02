@@ -36,7 +36,6 @@ public class ActionHideInside extends Action {
 		performer.squareGameObjectIsOn.inventory.remove(performer);
 		target.inventory.add(performer);
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

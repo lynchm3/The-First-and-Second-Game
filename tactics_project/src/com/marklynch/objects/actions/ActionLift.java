@@ -45,7 +45,6 @@ public class ActionLift extends Action {
 		performer.equip(target);
 		if (target.owner == null)
 			target.owner = performer;
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

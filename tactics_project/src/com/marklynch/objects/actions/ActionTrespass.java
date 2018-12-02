@@ -32,8 +32,6 @@ public class ActionTrespass extends Action {
 		if (!checkRange())
 			return;
 
-		performer.actionsPerformedThisTurn.add(this);
-
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " trespassed" }));
 		if (sound != null)

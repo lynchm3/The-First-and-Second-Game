@@ -51,7 +51,6 @@ public class ActionSpot extends Action {
 				Level.player.addXP((int) Math.pow(1, structureRoom.level), specificSquareSpotted);
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

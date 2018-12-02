@@ -53,7 +53,6 @@ public class ActionTalk extends Action {
 		Game.level.conversation = conversation;
 		Game.level.conversation.updateFlags();
 		ConversationResponseDisplay.updateStandardButtons();
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

@@ -69,7 +69,6 @@ public class ActionBuyItems extends VariableQtyAction {
 			performer.inventory.add(object);
 			if (object.owner == null)
 				object.owner = performer;
-			performer.actionsPerformedThisTurn.add(this);
 			if (sound != null)
 				sound.play();
 		}

@@ -43,7 +43,6 @@ public class ActionInspect extends Action {
 			ConversationResponseDisplay.updateStandardButtons();
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

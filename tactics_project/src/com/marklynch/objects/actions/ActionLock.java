@@ -68,7 +68,6 @@ public class ActionLock extends Action {
 
 			openable.showPow();
 		}
-		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

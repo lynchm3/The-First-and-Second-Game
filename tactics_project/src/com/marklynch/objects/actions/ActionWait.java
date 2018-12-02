@@ -28,8 +28,6 @@ public class ActionWait extends Action {
 		if (!checkRange())
 			return;
 
-		performer.actionsPerformedThisTurn.add(this);
-
 		performer.walkPhase = 0;
 
 		if (sound != null)

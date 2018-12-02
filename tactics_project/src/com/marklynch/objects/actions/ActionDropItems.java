@@ -120,8 +120,6 @@ public class ActionDropItems extends VariableQtyAction {
 		if (gameObjectPerformer.inventory.groundDisplay != null)
 			gameObjectPerformer.inventory.groundDisplay.refreshGameObjects();
 
-		gameObjectPerformer.actionsPerformedThisTurn.add(this);
-
 		// if (performer == Game.level.player)
 		// Game.level.endTurn();
 

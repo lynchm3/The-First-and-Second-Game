@@ -77,7 +77,6 @@ public class ActionDie extends Action {
 
 		// this.faction.actors.remove(this);
 		// gameObjectPerformer.actionsPerformedThisTurn.add(this);
-		gameObjectPerformer.clearActions();
 
 		if (sound != null)
 			sound.play();

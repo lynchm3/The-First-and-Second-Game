@@ -79,7 +79,6 @@ public class ActionCastDouse extends Action {
 			Game.level.undoList.clear();
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

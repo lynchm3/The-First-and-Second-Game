@@ -36,7 +36,6 @@ public class ActionShoutForHelp extends Action {
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "shouted for help" }));
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

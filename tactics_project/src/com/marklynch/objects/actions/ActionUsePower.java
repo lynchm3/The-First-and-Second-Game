@@ -41,7 +41,6 @@ public class ActionUsePower extends Action {
 		power.log(gameObjectPerformer, targetSquare);
 		power.cast(gameObjectPerformer, target, targetSquare, this);
 
-		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

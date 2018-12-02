@@ -60,7 +60,6 @@ public class ActiontTakeAll extends Action {
 				gameObjectToLoot.owner = performer;
 		}
 		target.looted();
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

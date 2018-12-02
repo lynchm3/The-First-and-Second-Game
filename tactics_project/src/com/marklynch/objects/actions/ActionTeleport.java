@@ -108,7 +108,6 @@ public class ActionTeleport extends Action {
 
 		}
 
-		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

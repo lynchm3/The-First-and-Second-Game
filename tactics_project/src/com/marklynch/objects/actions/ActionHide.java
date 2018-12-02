@@ -56,7 +56,6 @@ public class ActionHide extends Action {
 		// object }));
 		// }
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

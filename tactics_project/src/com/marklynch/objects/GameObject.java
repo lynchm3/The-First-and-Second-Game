@@ -164,7 +164,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public Texture imageTexture = null;
 	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
-	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
 
 	// attributes
 	public int remainingHealth = 1;
@@ -1735,10 +1734,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			}
 		}
 		return true;
-	}
-
-	public void clearActions() {
-		actionsPerformedThisTurn.clear();
 	}
 
 	public void attackedBy(Object attacker, Action action) {

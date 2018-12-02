@@ -119,7 +119,6 @@ public class ActionAttack extends Action {
 			Game.level.undoList.clear();
 		}
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

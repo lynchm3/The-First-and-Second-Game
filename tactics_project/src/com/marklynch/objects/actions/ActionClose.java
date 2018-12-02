@@ -54,7 +54,6 @@ public class ActionClose extends Action {
 
 			trespassingCheck(this, actor, actor.squareGameObjectIsOn);
 		}
-		gameObjectPerformer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 

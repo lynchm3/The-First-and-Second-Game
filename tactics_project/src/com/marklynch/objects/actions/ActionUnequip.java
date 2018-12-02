@@ -41,7 +41,6 @@ public class ActionUnequip extends Action {
 		else if (performer.legArmor == target)
 			performer.legArmor = null;
 
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}
