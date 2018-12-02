@@ -13,7 +13,6 @@ import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.ai.utils.Move;
-import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.activepowerscreen.ActivePowerScreen;
 import com.marklynch.level.constructs.animation.Animation;
@@ -452,20 +451,6 @@ public class Level {
 		this.inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 		this.openInventories = new ArrayList<Inventory>();
 
-		// buildings = new ArrayList<Building>();
-
-		// for (Structure building : structures) {
-		// for (int i = building.gridX1; i <= building.gridX2; i++) {
-		// for (int j = building.gridY1; j <= building.gridY2; j++) {
-		// squares[i][j].structureSquareIsIn = building;
-		// }
-		// }
-		// }
-
-		for (Faction faction : factions) {
-			faction.postLoad();
-		}
-
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				squares[i][j].postLoad1();
@@ -496,10 +481,6 @@ public class Level {
 
 		for (GameObject inanimateObject : inanimateObjectsOnGround) {
 			inanimateObject.loadImages();
-		}
-
-		for (Faction faction : factions) {
-			faction.loadImages();
 		}
 	}
 

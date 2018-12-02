@@ -483,7 +483,6 @@ public class Actor extends GameObject {
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 		if (!died && remainingHealth <= 0) {
 			super.checkIfDestroyed(attacker, action);
-			this.faction.checkIfDestroyed();
 			return true;
 		}
 		return false;

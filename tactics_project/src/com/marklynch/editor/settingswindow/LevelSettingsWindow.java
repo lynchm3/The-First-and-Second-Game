@@ -11,7 +11,8 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.marklynch.Game;
-import com.marklynch.SaveAndLoad;
+import com.marklynch.data.Load;
+import com.marklynch.data.Save;
 import com.marklynch.editor.Editor;
 import com.marklynch.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.ui.button.ClickListener;
@@ -183,7 +184,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				SaveAndLoad.save();
+				Save.save();
 
 			}
 		};
@@ -214,7 +215,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				SaveAndLoad.load();
+				Load.load();
 			}
 		};
 		buttons.add(loadLevelButton);

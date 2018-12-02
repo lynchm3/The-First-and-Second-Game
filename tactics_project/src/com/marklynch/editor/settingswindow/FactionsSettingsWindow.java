@@ -4,7 +4,6 @@ import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -54,8 +53,8 @@ public class FactionsSettingsWindow extends SettingsWindow {
 
 				for (Faction faction : Game.level.factions) {
 					if (faction != newFaction) {
-						faction.relationships.put(newFaction, new FactionRelationship(-100, faction, newFaction));
-						newFaction.relationships.put(faction, new FactionRelationship(-100, newFaction, faction));
+						faction.relationships.put(newFaction, -100);
+						newFaction.relationships.put(faction, -100);
 					}
 				}
 

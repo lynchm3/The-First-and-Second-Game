@@ -25,7 +25,6 @@ import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -541,10 +540,8 @@ public class Editor {
 		player.inventory.add(Templates.MATCHES.makeCopy(null, player));
 
 		// relationships
-		Game.level.factions.player.relationships.put(Game.level.factions.get(1),
-				new FactionRelationship(-100, Game.level.factions.player, Game.level.factions.get(1)));
-		Game.level.factions.get(1).relationships.put(Game.level.factions.player,
-				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.player));
+		Game.level.factions.player.relationships.put(Game.level.factions.get(1), -100);
+		Game.level.factions.get(1).relationships.put(Game.level.factions.player, -100);
 
 		// Decorations
 		// Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");

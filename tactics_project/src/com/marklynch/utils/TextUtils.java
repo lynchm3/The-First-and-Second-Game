@@ -9,7 +9,6 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.area.Area;
@@ -232,19 +231,6 @@ public class TextUtils {
 					offsetX = 0;
 				}
 
-				offsetX += textWidth;
-
-			} else if (content instanceof FactionRelationship) {
-
-				FactionRelationship factionRelationship = (FactionRelationship) content;
-				String string = "" + factionRelationship.source + " -> " + factionRelationship.target + " ("
-						+ factionRelationship.relationship + ")";
-
-				float textWidth = Game.smallFont.getWidth(string);
-				if (offsetX + textWidth > maxWidth && offsetX != 0) {
-					offsetY += 20;
-					offsetX = 0;
-				}
 				offsetX += textWidth;
 
 			} else if (content instanceof SpeechPart) {
@@ -737,7 +723,8 @@ public class TextUtils {
 				// Image
 				if (structure.mapIconForStructure != null) {
 					float x = posX + offsetX;
-					TextureUtils.drawTexture(structure.mapIconForStructure, x, posY + offsetY, x + 20, posY + offsetY + 20);
+					TextureUtils.drawTexture(structure.mapIconForStructure, x, posY + offsetY, x + 20,
+							posY + offsetY + 20);
 					offsetX += textureWidth;
 				}
 
@@ -838,20 +825,6 @@ public class TextUtils {
 					linkIndex++;
 				}
 
-				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
-				offsetX += textWidth;
-
-			} else if (content instanceof FactionRelationship) {
-
-				FactionRelationship factionRelationship = (FactionRelationship) content;
-				String string = "" + factionRelationship.source + " -> " + factionRelationship.target + " ("
-						+ factionRelationship.relationship + ")";
-
-				float textWidth = Game.smallFont.getWidth(string);
-				if (offsetX + textWidth > maxWidth && offsetX != 0) {
-					offsetY += 20;
-					offsetX = 0;
-				}
 				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
