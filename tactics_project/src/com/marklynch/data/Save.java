@@ -326,7 +326,7 @@ public class Save {
 
 			fields = fieldsForEachClass.get(clazz);
 
-			if (fields.isEmpty())
+			if (fields.isEmpty() || fields.size() == 1)
 				return null;
 
 			// Make create table query and insert query template
@@ -657,11 +657,11 @@ public class Save {
 		String createTableQuery = null;
 		try {
 
-			statement = conn.createStatement();
 			fields = fieldsForEachClass.get(clazz);
-
-			if (fields.isEmpty())
+			if (fields.isEmpty() || fields.size() == 1)
 				return;
+
+			statement = conn.createStatement();
 
 			// Make create table query and insert query template
 			createTableQuery = "CREATE TABLE " + clazz.getSimpleName() + " (";
