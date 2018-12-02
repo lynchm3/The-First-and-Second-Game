@@ -7,16 +7,6 @@ import com.marklynch.objects.actors.HerbivoreWildAnimal;
 
 public class AIRoutineForFisherman extends AIRoutine {
 
-	GameObject target;
-	// Square squareToMoveTo;
-
-	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
-	// final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
-	final String ACTIVITY_DESCRIPTION_MINING = "Mine Time";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
-	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
-
 	public AIRoutineForFisherman(Actor actor) {
 
 		super(actor);

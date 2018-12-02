@@ -12,6 +12,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
+import com.marklynch.ai.routines.AIRoutineForBlind;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.ai.utils.AStarSearchHighLevel;
@@ -32,7 +33,6 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
-import com.marklynch.level.quest.caveoftheblind.AIRoutineForBlind;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;

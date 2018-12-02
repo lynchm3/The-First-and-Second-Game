@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.marklynch.ai.routines.AIRoutine;
+import com.marklynch.ai.routines.AIRoutineForBlind;
 import com.marklynch.ai.routines.AIRoutineForCarnivoreNeutralWildAnimal;
 import com.marklynch.ai.routines.AIRoutineForDoctor;
 import com.marklynch.ai.routines.AIRoutineForFish;
@@ -17,8 +18,10 @@ import com.marklynch.ai.routines.AIRoutineForFisherman;
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
 import com.marklynch.ai.routines.AIRoutineForHunter;
+import com.marklynch.ai.routines.AIRoutineForKidnapper;
 import com.marklynch.ai.routines.AIRoutineForMinecart;
 import com.marklynch.ai.routines.AIRoutineForMiner;
+import com.marklynch.ai.routines.AIRoutineForMort;
 import com.marklynch.ai.routines.AIRoutineForPig;
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.ai.routines.AIRoutineForThief;
@@ -34,9 +37,6 @@ import com.marklynch.level.constructs.effect.EffectCurse;
 import com.marklynch.level.constructs.effect.EffectHeal;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
-import com.marklynch.level.quest.caveoftheblind.AIRoutineForBlind;
-import com.marklynch.level.quest.caveoftheblind.AIRoutineForMort;
-import com.marklynch.level.quest.thesecretroom.AIRoutineForKidnapper;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
@@ -175,6 +175,8 @@ public class GsonCreator {
 				jsonObject.addProperty("actor", src.actor.id);
 			if (src.target != null)
 				jsonObject.addProperty("target", src.target.id);
+			if (src.targetSquare != null)
+				jsonObject.addProperty("target", src.targetSquare.id);
 			jsonObject.addProperty("searchCooldown", src.searchCooldown);
 			if (src.searchCooldownActor != null)
 				jsonObject.addProperty("searchCooldownActor", src.searchCooldownActor.id);
@@ -193,6 +195,8 @@ public class GsonCreator {
 				jsonObject.addProperty("actorToKeepTrackOf", src.actorToKeepTrackOf.id);
 			if (src.lastLocationSeenActorToKeepTrackOf != null)
 				jsonObject.addProperty("lastLocationSeenActorToKeepTrackOf", src.lastLocationSeenActorToKeepTrackOf.id);
+			jsonObject.addProperty("sleepCounter", src.sleepCounter);
+
 			jsonObject.addProperty("ignoreList", Save.getArrayListStringForInsertion(src.ignoreList));
 			return jsonObject;
 		}

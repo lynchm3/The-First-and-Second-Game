@@ -8,9 +8,6 @@ import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineForPig extends AIRoutine {
 
-	GameObject target;
-	// Square squareToMoveTo;
-
 	enum SHOPKEEP_STATE {
 		SHOPKEEPING, UPDATING_SIGN, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
 	};

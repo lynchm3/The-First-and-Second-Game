@@ -2,29 +2,13 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.HerbivoreWildAnimal;
 
 public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
-	GameObject target;
-	// Square squareToMoveTo;
-
-	enum SHOPKEEP_STATE {
-		SHOPKEEPING, UPDATING_SIGN, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
-	};
-
-	final String ACTIVITY_DESCRIPTION_HUNTING = "Hunting";
-	final String ACTIVITY_DESCRIPTION_ESCAPING = "Escaping";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-	final String ACTIVITY_DESCRIPTION_DISGRUNTLED = "Disgruntled";
-
-	int sleepCounter = 0;
-	final int SLEEP_TIME = 1000;
 	Actor wildAnimal;
-	Square targetSquare = null;
 
 	public AIRoutineForCarnivoreNeutralWildAnimal(Actor actor) {
 		super(actor);

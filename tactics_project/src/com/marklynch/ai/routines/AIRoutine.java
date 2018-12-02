@@ -64,6 +64,7 @@ import com.marklynch.utils.MapUtil;
 
 public abstract class AIRoutine {
 
+	final static transient String ACTIVITY_DESCRIPTION_SHOPKEEPING = "Shopkeeping";
 	final static transient String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final static transient String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
 	final static transient String ACTIVITY_DESCRIPTION_BEING_A_CHICKEN = "Being a chicken";
@@ -77,6 +78,16 @@ public abstract class AIRoutine {
 	final static transient String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final static transient String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
 	final static transient String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
+	final static transient String ACTIVITY_DESCRIPTION_SWIMMING = "Swimming";
+	final static transient String ACTIVITY_DESCRIPTION_MINING = "Mine Time";
+	final static transient String ACTIVITY_DESCRIPTION_RETREATING = "Retreating";
+	final static transient String ACTIVITY_DESCRIPTION_HIDING = "Hiding";
+	final static transient String ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL = "Ringing Dinner Bell";
+	final static transient String ACTIVITY_DESCRIPTION_PIGGING_OUT = "Pigging out!";
+	final static transient String ACTIVITY_DESCRIPTION_BEING_A_PIG = "Being a pig";
+	final static transient String ACTIVITY_DESCRIPTION_THIEVING = "Thieving!";
+	final static transient String ACTIVITY_WANDERING = "Wandering";
+	final static transient String ACTIVITY_DESCRIPTION_UPDATING_SIGN = "Updating Shop Sign";
 
 	public transient static String STOP_THAT = "Stop that!";
 	public transient static String TIME_TO_LEAVE = "It's getting late, time for you to go...";
@@ -84,11 +95,16 @@ public abstract class AIRoutine {
 
 	public transient Actor actor;
 	public transient GameObject target;
+
+	public transient Square targetSquare = null;
 	public transient int searchCooldown = 0;
 	public transient GameObject searchCooldownActor = null;
 	public transient int escapeCooldown = 0;
 	public transient GameObject escapeCooldownAttacker = null;
 	public transient int wokenUpCountdown = 0;
+
+	public int sleepCounter = 0;
+	final static int SLEEP_TIME = 1000;
 
 	enum STATE {
 		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, PATROL, FREE_TIME, FISHING, SHOPKEEPING, THIEVING, UPDATING_SIGN, SWIMMING

@@ -1,7 +1,5 @@
 package com.marklynch.ai.routines;
 
-import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionFishBeingFished;
 import com.marklynch.objects.actions.ActionFishSwim;
 import com.marklynch.objects.actors.Actor;
@@ -9,14 +7,7 @@ import com.marklynch.objects.actors.Fish;
 
 public class AIRoutineForFish extends AIRoutine {
 
-	GameObject target;
-
-	final String ACTIVITY_DESCRIPTION_SWIMMING = "Swimming";
-
 	Fish fish;
-
-	public Square targetSquare = null;
-	// hmm
 
 	public AIRoutineForFish(Actor actor) {
 		super(actor);

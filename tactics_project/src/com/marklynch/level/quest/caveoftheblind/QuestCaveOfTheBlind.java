@@ -3,6 +3,7 @@ package com.marklynch.level.quest.caveoftheblind;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.ai.routines.AIRoutineForMort;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -73,7 +74,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	Mort mort;
 
 	// Blind
-	ArrayList<Blind> blind = new ArrayList<Blind>();
+	public ArrayList<Blind> blind = new ArrayList<Blind>();
 
 	// GameObjects
 	GameObject ore;
@@ -81,13 +82,13 @@ public class QuestCaveOfTheBlind extends Quest {
 	Lantern lantern;
 	Wall oreWall;
 	Key mortsKey;
-	Door mortsGameRoomDoor;
+	public Door mortsGameRoomDoor;
 	Door mortsStoreroomDoor;
 	Searchable dropHole;
 
 	// Squares
-	Square troughSquare;
-	Square safeSquare;
+	public Square troughSquare;
+	public Square safeSquare;
 
 	// Structure Areas
 

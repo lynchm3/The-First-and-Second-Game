@@ -2,7 +2,6 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.actions.Action;
@@ -13,30 +12,6 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.Color;
 
 public class AIRoutineForThief extends AIRoutine {
-	Square targetSquare;
-
-	GameObject target;
-	// Square squareToMoveTo;
-
-	// enum HUNT_STATE {
-	// PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK,
-	// GO_TO_WILD_ANIMAL_AND_LOOT, PICK_SHOP_KEEPER,
-	// GO_TO_SHOP_KEEPER_AND_SELL_JUNK, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
-	// };
-
-	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
-	final String ACTIVITY_DESCRIPTION_THIEVING = "Thieving!";
-	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
-	final String ACTIVITY_WANDERING = "Wandering";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
-	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
-
-	// public HUNT_STATE huntState = HUNT_STATE.PICK_WILD_ANIMAL;
-
-	int sleepCounter = 0;
-	final int SLEEP_TIME = 1000;
 
 	int theftCooldown = 0;
 

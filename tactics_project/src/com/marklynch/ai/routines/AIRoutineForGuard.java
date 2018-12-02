@@ -11,23 +11,8 @@ import com.marklynch.objects.actors.HerbivoreWildAnimal;
 
 public class AIRoutineForGuard extends AIRoutine {
 
-	GameObject target;
 	Guard guard;
 	int patrolIndex = 0;
-	// Square squareToMoveTo;
-
-	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
-	// final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
-	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
-	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
-
-	// guard
-	// their patrol, list of squares. can be on square.
-
-	// Put one beside the lost and found
-	// Put one in the town center
 
 	public AIRoutineForGuard(Actor actor) {
 

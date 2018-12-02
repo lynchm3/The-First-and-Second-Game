@@ -2,8 +2,6 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionWrite;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Trader;
@@ -11,20 +9,7 @@ import com.marklynch.objects.templates.Templates;
 
 public class AIRoutineForTrader extends AIRoutine {
 
-	GameObject target;
-	// Square squareToMoveTo;
-
-	final String ACTIVITY_DESCRIPTION_SHOPKEEPING = "Shopkeeping";
-	final String ACTIVITY_DESCRIPTION_UPDATING_SIGN = "Updating Shop Sign";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";
-
-	int sleepCounter = 0;
-	final int SLEEP_TIME = 1000;
-
 	Trader trader;
-	Square targetSquare = null;
 
 	public AIRoutineForTrader(Actor actor) {
 		super(actor);

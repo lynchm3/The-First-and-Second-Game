@@ -2,28 +2,13 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.actions.ActionStopHidingInside;
 import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 
-	public transient GameObject target;
-	// Square squareToMoveTo;
-
-	public final static transient String ACTIVITY_DESCRIPTION_FEEDING = "Feeding";
-	public final static transient String ACTIVITY_DESCRIPTION_ESCAPING = "Escaping";
-	public final static transient String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-	public final static transient String ACTIVITY_DESCRIPTION_DISGRUNTLED = "Disgruntled";
-
-	public transient int sleepCounter = 0;
-	public transient final int SLEEP_TIME = 1000;
-
 	public transient Actor friendlyWildAnimal;
-	public transient Square targetSquare = null;
-
 	public transient int hidingCount = 0;
 
 	public AIRoutineForHerbivoreWildAnimal(Actor actor) {

@@ -2,6 +2,7 @@ package com.marklynch.level.quest.caveoftheblind;
 
 import java.util.ArrayList;
 
+import com.marklynch.ai.routines.AIRoutineForBlind;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Square;

@@ -1,10 +1,10 @@
-package com.marklynch.level.quest.caveoftheblind;
+package com.marklynch.ai.routines;
 
 import java.util.ArrayList;
 
-import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.ThoughtBubbles;
@@ -14,18 +14,7 @@ import com.marklynch.objects.actors.RockGolem;
 
 public class AIRoutineForBlind extends AIRoutine {
 
-	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
-	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
-	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
-	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-
-	int sleepCounter = 0;
-	final int SLEEP_TIME = 1000;
-
 	Blind blind;
-	public Square targetSquare = null;
 	public Sound bellSound = null;
 	public MeatChunk meatChunk = null;
 	Square originalMeatChunkSquare = null;

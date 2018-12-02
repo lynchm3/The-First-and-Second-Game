@@ -7,9 +7,6 @@ import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineForWildAnimal extends AIRoutine {
-	Square targetSquare;
-
-	final static String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 
 	public AIRoutineForWildAnimal(Actor actor) {
 		super(actor);

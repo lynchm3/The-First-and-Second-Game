@@ -7,9 +7,6 @@ import com.marklynch.objects.actors.HerbivoreWildAnimal;
 
 public class AIRoutineForHunter extends AIRoutine {
 
-	GameObject target;
-	// Square squareToMoveTo;
-
 	public AIRoutineForHunter(Actor actor) {
 
 		super(actor);

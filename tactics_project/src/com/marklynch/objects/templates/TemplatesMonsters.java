@@ -2,11 +2,11 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.ai.routines.AIRoutineForBlind;
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.quest.caveoftheblind.AIRoutineForBlind;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.RockGolem;

@@ -10,16 +10,6 @@ import com.marklynch.objects.actors.HerbivoreWildAnimal;
 
 public class AIRoutineForMiner extends AIRoutine {
 
-	GameObject target;
-	// Square squareToMoveTo;
-
-	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
-	// final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
-	final String ACTIVITY_DESCRIPTION_MINING = "Mine Time";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
-	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
-
 	public AIRoutineForMiner(Actor actor) {
 
 		super(actor);
@@ -136,7 +126,8 @@ public class AIRoutineForMiner extends AIRoutine {
 			this.actor.followersShouldFollow = true;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_MINING;
 			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(30, false, false, false, true, 0, false, true, Vein.class);
+			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(30, false, false, false, true, 0, false, true,
+					Vein.class);
 			if (target == null) {
 				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(actor.area.centreSuqare);
 			} else {

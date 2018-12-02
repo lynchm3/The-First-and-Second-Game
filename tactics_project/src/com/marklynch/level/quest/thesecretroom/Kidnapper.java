@@ -3,6 +3,7 @@ package com.marklynch.level.quest.thesecretroom;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.ai.routines.AIRoutineForKidnapper;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;

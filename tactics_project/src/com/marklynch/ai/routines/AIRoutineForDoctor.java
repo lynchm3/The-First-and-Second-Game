@@ -2,28 +2,13 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Doctor;
 import com.marklynch.objects.templates.Templates;
 
 public class AIRoutineForDoctor extends AIRoutine {
 
-	GameObject target;
-	// Square squareToMoveTo;
-
-	final String ACTIVITY_DESCRIPTION_SHOPKEEPING = "Shopkeeping";
-	final String ACTIVITY_DESCRIPTION_UPDATING_SIGN = "Updating Shop Sign";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";
-
-	int sleepCounter = 0;
-	final int SLEEP_TIME = 1000;
-
 	Doctor doctor;
-	Square targetSquare = null;
 
 	public AIRoutineForDoctor(Actor actor) {
 		super(actor);

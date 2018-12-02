@@ -3,35 +3,13 @@ package com.marklynch.ai.routines;
 import java.util.ArrayList;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
 
 public class AIRoutineForRockGolem extends AIRoutine {
 
-	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
-	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
-	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
-	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-
-	int sleepCounter = 0;
-	final int SLEEP_TIME = 1000;
-
 	RockGolem rockGolem;
-	Square targetSquare = null;
-	Sound bellSound = null;
-	MeatChunk meatChunk = null;
-	Square originalMeatChunkSquare = null;
-
-	boolean hangry = false;
-	int timeSinceEating = Integer.MAX_VALUE;
-
-	int failedToGetPathToBellCount = 0;
-	int failedToGetPathToFoodCount = 0;
 
 	public AIRoutineForRockGolem(Actor rockGolem) {
 		super(rockGolem);

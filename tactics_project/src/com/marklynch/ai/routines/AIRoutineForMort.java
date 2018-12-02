@@ -1,13 +1,13 @@
-package com.marklynch.level.quest.caveoftheblind;
+package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
-import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
+import com.marklynch.level.quest.caveoftheblind.Blind;
+import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionRing;
@@ -18,31 +18,14 @@ import com.marklynch.objects.tools.Bell;
 public class AIRoutineForMort extends AIRoutine {
 
 	Mort mort;
-	GameObject target;
 	boolean rangBellAsLastResort;
-	boolean retreatedToRoom = false;
+	public boolean retreatedToRoom = false;
 
 	enum FEEDING_DEMO_STATE {
 		WALK_TO_TROUGH, PLACE_MEAT, RING_BELL, WALK_AWAY, WAIT_FOR_BLIND_TO_ENTER, WAIT_FOR_BLIND_TO_LEAVE
 	};
 
 	public FEEDING_DEMO_STATE feedingDemoState = FEEDING_DEMO_STATE.WALK_TO_TROUGH;
-
-	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
-	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
-	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
-	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
-	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
-	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
-	final String ACTIVITY_DESCRIPTION_FOLLOWING = "Following";
-	final String ACTIVITY_DESCRIPTION_RETREATING = "Retreating";
-	final String ACTIVITY_DESCRIPTION_HIDING = "Hiding";
-	final String ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL = "Ringing Dinner Bell";
-
-	int sleepCounter = 0;
-	final int SLEEP_TIME = 1000;
 
 	public AIRoutineForMort(Actor mort) {
 
