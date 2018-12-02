@@ -458,46 +458,6 @@ public class AIRoutineUtils {
 	// }
 	// }
 
-	public static Square calculateSquareToMoveToToBeWithinXSquaresToTarget(Square square, float maxDistance) {
-
-		ArrayList<Integer> idealDistances = new ArrayList<Integer>();
-		for (int i = 0; i <= maxDistance; i++) {
-			idealDistances.add(i);
-		}
-
-		ArrayList<Square> targetSquares = new ArrayList<Square>();
-		int bestTravelCostFound = Integer.MAX_VALUE;
-		AIPath pathToSquare = null;
-		for (int i = 0; i < idealDistances.size(); i++) {
-
-			// Check if we're already at this distance
-			if (Game.level.activeActor.straightLineDistanceTo(square) == idealDistances.get(i))
-				return Game.level.activeActor.squareGameObjectIsOn;
-			targetSquares = square.getAllSquaresAtDistance(idealDistances.get(i));
-			for (Square targetSquare : targetSquares) {
-				AIPath currentActorPathToThisSquare = Game.level.activeActor.getPathTo(targetSquare);
-				if (currentActorPathToThisSquare != null
-						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
-					pathToSquare = currentActorPathToThisSquare;
-					bestTravelCostFound = pathToSquare.travelCost;
-				}
-			}
-
-			if (pathToSquare != null)
-				break;
-
-		}
-
-		if (pathToSquare == null) {
-			return null;
-		}
-
-		Game.level.activeActor.path = pathToSquare;
-
-		return getSquareToMoveAlongPath(pathToSquare);
-
-	}
-
 	public static Square getSquareToMoveAlongPath(AIPath path) {
 
 		if (path == null || path.complete == false)
@@ -548,44 +508,6 @@ public class AIRoutineUtils {
 		new ActionMove(Game.level.activeActor, path.squares.get(0), true).perform();
 
 		return true;
-
-	}
-
-	public static Square calculateSquareToMoveToForTargetSquare(Square square) {
-
-		AIPath pathToSquare = Game.level.activeActor.getPathTo(square);
-
-		if (pathToSquare == null) {
-			return null;
-		}
-		if (pathToSquare.travelCost == 0) {
-			return null;
-		}
-
-		// TODO move this to an actor method called moveAlongPath
-		Square squareToMoveTo = null;
-
-		// pathToSquare.s
-
-		// squareToMoveTo = pathToSquare.squares.lastElement(); this line works,
-		// but allows CPU to cheat
-		if (pathToSquare.travelCost <= Game.level.activeActor.travelDistance) {
-
-			squareToMoveTo = pathToSquare.squares.get(pathToSquare.squares.size() - 1);
-			Game.level.activeActor.path = pathToSquare;
-		} else {
-			for (int i = pathToSquare.squares.size() - 1; i >= 0; i--) {
-				AIPath subPath = Game.level.activeActor.getPathTo(pathToSquare.squares.get(i));
-				if (subPath != null && subPath.complete
-						&& subPath.travelCost <= Game.level.activeActor.travelDistance) {
-					squareToMoveTo = pathToSquare.squares.get(i);
-					Game.level.activeActor.path = pathToSquare;
-					break;
-				}
-			}
-		}
-
-		return squareToMoveTo;
 
 	}
 

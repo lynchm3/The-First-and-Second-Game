@@ -349,12 +349,24 @@ public class Save {
 						preparedStatement.setLong(count, (Long) value);
 					} else if (value instanceof Integer) {
 						preparedStatement.setInt(count, (Integer) value);
-					} else if (value instanceof Boolean) {
-						preparedStatement.setBoolean(count, (Boolean) value);
 					} else if (value instanceof String) {
 						preparedStatement.setString(count, (String) value);
 					} else if (value instanceof Float) {
 						preparedStatement.setFloat(count, (Float) value);
+					} else if (value instanceof Double) {
+						preparedStatement.setDouble(count, (Double) value);
+					} else if (value instanceof boolean[]) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof long[]) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof int[]) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof String[]) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof float[]) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof double[]) {
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Texture) {
 						preparedStatement.setString(count, ((Texture) value).path);
 						// Non-simple
@@ -507,6 +519,17 @@ public class Save {
 			for (Square square : (ArrayList<Square>) arrayList) {
 				result += square.id;
 				if (arrayList.get(arrayList.size() - 1) != square) {
+					result += ",";
+				}
+			}
+			return result;
+
+		} else if (arrayList.get(0) instanceof Power) {
+
+			String result = "";
+			for (Power power : (ArrayList<Power>) arrayList) {
+				result += power.getClass().getSimpleName();
+				if (arrayList.get(arrayList.size() - 1) != power) {
 					result += ",";
 				}
 			}

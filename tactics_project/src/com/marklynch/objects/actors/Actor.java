@@ -186,8 +186,6 @@ public class Actor extends GameObject {
 
 	public boolean sleeping = false;
 
-	public AIPath path;
-
 	public ArrayList<Power> powers = new ArrayList<Power>();
 
 	public Area area;
@@ -199,13 +197,6 @@ public class Actor extends GameObject {
 	// fishing stuff
 	public int fishingProgress;
 	public AnimationTake fishingAnimation;
-
-	// public GameObject choppingTarget;
-	// public AnimationTake choppingAnimation;
-	// public GameObject miningTarget;
-	// public AnimationTake miningAnimation;
-	// public GameObject diggingTarget;
-	// public AnimationTake diggingAnimation;
 
 	public static enum HOBBY {
 		FISHING, HUNTING, ARCHERY, SPARRING, BOWLS, BALL_GAMES, EATING, DRINKING, SOCIALISING;
