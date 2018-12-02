@@ -14,7 +14,6 @@ import com.marklynch.objects.templates.Templates;
 public class SmallHidingPlace extends Searchable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
-
 	public ArrayList<Actor> actorsHidingHere = new ArrayList<Actor>();
 	public GroupOfActors groupOfBuns;
 

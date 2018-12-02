@@ -405,7 +405,7 @@ public class Save {
 					} else if (value instanceof Effect[]) {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof GroupOfActors) {
-						preparedStatement.setString(count, gson.toJson(value));
+						preparedStatement.setLong(count, ((GroupOfActors) value).id);
 					} else if (value instanceof Shift) {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof StructureRoom) {
