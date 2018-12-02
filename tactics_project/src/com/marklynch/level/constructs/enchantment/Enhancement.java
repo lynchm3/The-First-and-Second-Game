@@ -4,15 +4,12 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.HashMap;
 
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.utils.Texture;
 
 public class Enhancement {
-
-	public long id;
 
 	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
 
@@ -31,8 +28,6 @@ public class Enhancement {
 	public TYPE type;
 
 	public Enhancement() {
-
-		this.id = Level.generateNewId(this);
 
 		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(0));
 		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(0));

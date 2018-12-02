@@ -26,7 +26,6 @@ import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
@@ -82,7 +81,6 @@ import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.Window;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
@@ -423,10 +421,6 @@ public class Save {
 						preparedStatement.setLong(count, ((StructureRoom) value).id);
 					} else if (value instanceof Area) {
 						preparedStatement.setLong(count, ((Area) value).id);
-					} else if (value instanceof Action) {
-						preparedStatement.setLong(count, ((Action) value).id);
-					} else if (value instanceof Enhancement) {
-						preparedStatement.setLong(count, ((Enhancement) value).id);
 					} else if (value instanceof Faction) {
 						preparedStatement.setLong(count, ((Faction) value).id);
 					} else if (value instanceof AIRoutine) {

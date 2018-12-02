@@ -15,7 +15,6 @@ import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.utils.Texture;
 
 public abstract class Action {
-	public long id;
 	// public static Texture textureAttack;
 	// public static Texture textureBow;
 	// public static Texture textureBird;
@@ -151,7 +150,6 @@ public abstract class Action {
 
 	public Action(String actionName, Texture image, GameObject gameObjectPerformer, Object targetGameObjectOrSquare) {
 		super();
-		id = Level.generateNewId(this);
 		this.gameObjectPerformer = gameObjectPerformer;
 		if (gameObjectPerformer instanceof Actor) {
 			this.performer = (Actor) this.gameObjectPerformer;
