@@ -1385,7 +1385,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	// Readable SHIIIIT.
-	public Conversation conversation;
+	public transient Conversation conversation;
 	public ActionListener onReadListener;
 
 	public Conversation getConversation() {

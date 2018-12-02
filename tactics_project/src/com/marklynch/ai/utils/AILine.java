@@ -15,7 +15,7 @@ public class AILine {
 		AI_LINE_TYPE_ATTACK, AI_LINE_TYPE_SEARCH, AI_LINE_TYPE_CRIME, AI_LINE_TYPE_FOLLOW, AI_LINE_TYPE_ESCAPE, AI_LINE_TYPE_SWITCH
 	};
 
-	AILineType aiLineType;
+	public AILineType aiLineType;
 	public GameObject source;
 	public Square target;
 

@@ -25,6 +25,7 @@ import com.marklynch.ai.routines.AIRoutineForPig;
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.ai.routines.AIRoutineForTrader;
+import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
@@ -51,6 +52,7 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(Crime.class, serializerForCrime);
 		gsonBuilder.registerTypeAdapter(Investigation.class, serializerForInvestigation);
 		gsonBuilder.registerTypeAdapter(Sound.class, serializerForSound);
+		gsonBuilder.registerTypeAdapter(AILine.class, serializerForAILine);
 
 		// Effects //
 		gsonBuilder.registerTypeAdapter(Effect.class, serializerForEffect);
@@ -243,6 +245,19 @@ public class GsonCreator {
 			jsonObject.addProperty("legal", src.legal);
 			if (src.actionType != null)
 				jsonObject.addProperty("actionType", src.actionType.getName());
+			return jsonObject;
+		}
+	};
+
+	static JsonSerializer<AILine> serializerForAILine = new JsonSerializer<AILine>() {
+		@Override
+		public JsonElement serialize(AILine src, Type type, JsonSerializationContext context) {
+			JsonObject jsonObject = new JsonObject();
+			if (src.source != null)
+				jsonObject.addProperty("source", src.source.id);
+			if (src.target != null)
+				jsonObject.addProperty("target", src.target.id);
+			jsonObject.addProperty("aiLineType", "" + src.aiLineType);
 			return jsonObject;
 		}
 	};

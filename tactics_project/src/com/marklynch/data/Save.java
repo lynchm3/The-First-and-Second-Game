@@ -15,6 +15,7 @@ import org.objectweb.asm.Type;
 
 import com.google.gson.Gson;
 import com.marklynch.ai.routines.AIRoutine;
+import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
@@ -82,6 +83,7 @@ import com.marklynch.objects.WaterBody;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
 import com.marklynch.objects.actors.Animal;
@@ -401,6 +403,8 @@ public class Save {
 						preparedStatement.setString(count, value.toString());
 					} else if (value instanceof Crime) {
 						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof AILine) {
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Crime[]) {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof GameObject[]) {
@@ -423,6 +427,8 @@ public class Save {
 						preparedStatement.setLong(count, ((Area) value).id);
 					} else if (value instanceof Faction) {
 						preparedStatement.setLong(count, ((Faction) value).id);
+					} else if (value instanceof Direction) {
+						preparedStatement.setString(count, "" + value);
 					} else if (value instanceof AIRoutine) {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof GameObject) {
@@ -432,6 +438,13 @@ public class Save {
 					} else if (value instanceof ArrayList<?>) {
 						preparedStatement.setString(count, getArrayListStringForInsertion((ArrayList<?>) value));
 					} else if (value instanceof Object) {
+						System.err.println("=======================");
+						System.err.println("Error saving - " + value);
+						System.err.println("clazz = " + clazz);
+						System.err.println("fields = " + fields);
+						System.err.println("object = " + object1);
+						System.err.println("insertQueryTemplate = " + insertQueryTemplate);
+						System.err.println("=======================");
 						preparedStatement.setString(count, "TODO Object class " + value);
 					} else if (value == null) {
 						preparedStatement.setNull(count, Type.VOID);
@@ -590,7 +603,9 @@ public class Save {
 			return gson.toJson(arrayList);
 
 		}
-
+		System.err.println("=======================");
+		System.err.println("Error saving arrayList - " + arrayList);
+		System.err.println("=======================");
 		return "TODO Object class " + arrayList;
 	}
 
@@ -610,8 +625,9 @@ public class Save {
 			return gson.toJson(hashMap);
 		}
 
-		System.out.println("keySet[0] = " + keysArray[0]);
-
+		System.err.println("=======================");
+		System.err.println("Error saving hashMap - " + hashMap);
+		System.err.println("=======================");
 		return "TODO Object class " + hashMap;
 	}
 
