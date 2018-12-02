@@ -164,7 +164,7 @@ public class Actor extends GameObject {
 
 	public Texture thoughtBubbleImageTextureObject = null;
 	public Texture thoughtBubbleImageTextureAction = null;
-	public Color thoughtBubbleImageTextureActionColor = Color.WHITE;
+	public transient Color thoughtBubbleImageTextureActionColor = Color.WHITE;
 	public GameObject peekingThrough = null;
 	public Square peekSquare = null;
 
@@ -202,7 +202,7 @@ public class Actor extends GameObject {
 		FISHING, HUNTING, ARCHERY, SPARRING, BOWLS, BALL_GAMES, EATING, DRINKING, SOCIALISING;
 	}
 
-	public HOBBY hobbies[] = new HOBBY[] {};
+	public HOBBY[] hobbies = new HOBBY[] {};
 
 	public Actor() {
 

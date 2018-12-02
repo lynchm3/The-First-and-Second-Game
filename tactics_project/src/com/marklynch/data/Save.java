@@ -81,12 +81,14 @@ import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
 import com.marklynch.objects.actors.Animal;
 import com.marklynch.objects.actors.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.actors.Doctor;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.actors.Guard;
+import com.marklynch.objects.actors.Guard.Shift;
 import com.marklynch.objects.actors.HerbivoreWildAnimal;
 import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.actors.Monster;
@@ -367,6 +369,8 @@ public class Save {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof double[]) {
 						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof HOBBY[]) {
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Texture) {
 						preparedStatement.setString(count, ((Texture) value).path);
 						// Non-simple
@@ -391,10 +395,18 @@ public class Save {
 						preparedStatement.setString(count, value.toString());
 					} else if (value instanceof GameObject[]) {
 						preparedStatement.setString(count, getGameObjectArrayStringForInsertion((GameObject[]) value));
+					} else if (value instanceof Square[]) {
+						preparedStatement.setString(count, getSquareArrayStringForInsertion((Square[]) value));
 					} else if (value instanceof Effect[]) {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof GroupOfActors) {
-						preparedStatement.setLong(count, ((GroupOfActors) value).id);
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Shift) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof StructureRoom) {
+						preparedStatement.setLong(count, ((StructureRoom) value).id);
+					} else if (value instanceof Area) {
+						preparedStatement.setLong(count, ((Area) value).id);
 					} else if (value instanceof Action) {
 						preparedStatement.setLong(count, ((Action) value).id);
 					} else if (value instanceof Enhancement) {
@@ -444,6 +456,19 @@ public class Save {
 		for (GameObject gameObject : array) {
 			result += gameObject.id;
 			if (array[array.length - 1] != gameObject) {
+				result += ",";
+			}
+		}
+		result += "]";
+		return result;
+	}
+
+	private static String getSquareArrayStringForInsertion(Square[] array) {
+
+		String result = "[";
+		for (Square square : array) {
+			result += square.id;
+			if (array[array.length - 1] != square) {
 				result += ",";
 			}
 		}

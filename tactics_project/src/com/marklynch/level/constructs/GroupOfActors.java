@@ -14,14 +14,9 @@ import com.marklynch.objects.actors.Actor;
 public class GroupOfActors {
 	public Long id;
 
-	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
-
-	final private static int FIGHT_LOWER_LIMIT = 2;
-
 	public String name;
 	protected transient ArrayList<Actor> members;
 	public transient Actor leader;
-	protected transient Square targetSquare;
 	protected transient ArrayList<GameObject> attackers;
 	public transient Quest quest;
 	public HashMap<Actor, Square> targetSquaresMap = new HashMap<Actor, Square>();
