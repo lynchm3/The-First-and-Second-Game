@@ -19,8 +19,8 @@ import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.actors.Actor.HOBBY;
+import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.templates.Templates;
 
 public class AreaMinorMine {
@@ -59,11 +59,11 @@ public class AreaMinorMine {
 		// entry to mine quarters
 		squaresToRemove.add(Game.level.squares[302][91]);
 
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[284][91], null, true, Templates.ORE, 0.1f));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[299][79], null, true, Templates.ORE, 0.1f));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[300][82], null, true, Templates.ORE, 0.1f));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[301][81], null, true, Templates.ORE, 0.1f));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[303][78], null, true, Templates.ORE, 0.1f));
+		Templates.VEIN.makeCopy(Game.level.squares[284][91], null, true, Templates.ORE, 0.1f);
+		Templates.VEIN.makeCopy(Game.level.squares[299][79], null, true, Templates.ORE, 0.1f);
+		Templates.VEIN.makeCopy(Game.level.squares[300][82], null, true, Templates.ORE, 0.1f);
+		Templates.VEIN.makeCopy(Game.level.squares[301][81], null, true, Templates.ORE, 0.1f);
+		Templates.VEIN.makeCopy(Game.level.squares[303][78], null, true, Templates.ORE, 0.1f);
 
 		Structure mine = new Structure("Minor Mine", mineSections, rooms, minePaths, mineFeatures,
 				new ArrayList<Square>(), "map_cave.png", 280, 76, 307, 97, true, null, squaresToRemove, extraWalls,

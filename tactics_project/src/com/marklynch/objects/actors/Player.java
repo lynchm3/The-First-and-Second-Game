@@ -49,9 +49,9 @@ public class Player extends Human {
 	public static float xp;
 	public static float xpThisLevel;
 	public static float xpPerLevel = 55;
-	public ArrayList<Square> squaresVisibleToPlayer = new ArrayList<Square>();
+	public transient ArrayList<Square> squaresVisibleToPlayer = new ArrayList<Square>();
 
-	public long lastUpdateRealtime = 0;
+	public transient long lastUpdateRealtime = 0;
 
 	public Player() {
 		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png", false);
@@ -182,7 +182,8 @@ public class Player extends Human {
 		}
 	}
 
-	public LevelButton buttonEquippedWeaponAction = new LevelButton(110, 140, Game.INVENTORY_SQUARE_WIDTH, 30f,
+	public transient LevelButton buttonEquippedWeaponAction = new LevelButton(110, 140, Game.INVENTORY_SQUARE_WIDTH,
+			30f,
 			//
 			"end_turn_button.png", "end_turn_button.png", "ACTION", false, false,
 			//

@@ -230,7 +230,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(westAtriumPart2);
 
 		// West Atrium extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[243][7], null, true, Templates.ORE, 0.1f));
+		Templates.VEIN.makeCopy(Game.level.squares[243][7], null, true, Templates.ORE, 0.1f);
 
 		// Path West Atrium to West Security
 		cavePaths.add(new StructurePath("West Atrium <-> West Security", false, false, new ArrayList<Actor>(),
@@ -246,7 +246,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// West security extras
 		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[252][9], null));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[259][5], null, true, Templates.ORE, 0.1f));
+		Templates.VEIN.makeCopy(Game.level.squares[259][5], null, true, Templates.ORE, 0.1f);
 		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[253][9], null);
 		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[254][10], null),
 				Nodes.caveOfTheBlindWest));
@@ -288,10 +288,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(outerMine);
 
 		// Outer Mine extra
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[255][30], null, true, Templates.ORE, 0.1f));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[260][29], null, true, Templates.ORE, 0.1f));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[260][30], null, true, Templates.ORE, 0.1f));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[266][33], null, true, Templates.ORE, 0.1f));
+		Templates.VEIN.makeCopy(Game.level.squares[255][30], null, true, Templates.ORE, 0.1f);
+		Templates.VEIN.makeCopy(Game.level.squares[260][29], null, true, Templates.ORE, 0.1f);
+		Templates.VEIN.makeCopy(Game.level.squares[260][30], null, true, Templates.ORE, 0.1f);
+		Templates.VEIN.makeCopy(Game.level.squares[266][33], null, true, Templates.ORE, 0.1f);
 		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[256][20], null);
 
 		// Path outer mine to rec room
@@ -310,7 +310,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(recRoom);
 
 		// REc room extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[285][26], null, true, Templates.ORE, 0.1f));
+		Templates.VEIN.makeCopy(Game.level.squares[285][26], null, true, Templates.ORE, 0.1f);
 
 		// Tunnel section rec room to dungeon
 		caveSections.add(new StructureSection("Mort & Mort Mining", 292, 25, 298, 27, false, false));
@@ -345,10 +345,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(dungeon);
 
 		// Dungeon extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[266][7], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[267][7], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[268][7], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[269][7], null, true, Templates.ORE, 0.1d));
+		Templates.VEIN.makeCopy(Game.level.squares[266][7], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[267][7], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[268][7], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[269][7], null, true, Templates.ORE, 0.1d);
 
 		// Path rec room to toilet
 		cavePaths.add(new StructurePath("Rec Room <-> Latrine", false, false, new ArrayList<Actor>(),
@@ -366,7 +366,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(toilet);
 
 		// toilet extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[303][31], null, true, Templates.ORE, 0.1d));
+		Templates.VEIN.makeCopy(Game.level.squares[303][31], null, true, Templates.ORE, 0.1d);
 		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[292][28], null);
 
 		dropHole = Templates.DROP_HOLE.makeCopy(Game.level.squares[302][30], null);
@@ -419,10 +419,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(diningRoom);
 
 		// Dining room extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[297][39], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[297][40], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[289][49], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[298][37], null, true, Templates.ORE, 0.1d));
+		Templates.VEIN.makeCopy(Game.level.squares[297][39], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[297][40], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[289][49], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[298][37], null, true, Templates.ORE, 0.1d);
 
 		// Floor stuff
 		Templates.PLATE.makeCopy(Game.level.squares[296][44], null);
@@ -513,13 +513,13 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(quarters);
 
 		// Quarters extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[292][13], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[282][17], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[282][18], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[283][17], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[283][18], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[284][17], null, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[284][18], null, true, Templates.ORE, 0.1d));
+		Templates.VEIN.makeCopy(Game.level.squares[292][13], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[282][17], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[282][18], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[283][17], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[283][18], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[284][17], null, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[284][18], null, true, Templates.ORE, 0.1d);
 		Templates.BED.makeCopy(Game.level.squares[277][13], null);
 		Templates.BED.makeCopy(Game.level.squares[279][13], null);
 		Templates.BED.makeCopy(Game.level.squares[281][13], null);
@@ -565,16 +565,16 @@ public class QuestCaveOfTheBlind extends Quest {
 			mort.aiRoutine.roomBounds.add(mort.mortsMine);
 
 		// Inner mine extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[280][35], mort, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[281][35], mort, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[286][39], mort, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[286][47], mort, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[280][43], mort, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[280][44], mort, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[281][43], mort, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[281][44], mort, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[283][38], mort, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[286][37], mort, true, Templates.ORE, 0.1d));
+		Templates.VEIN.makeCopy(Game.level.squares[280][35], mort, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[281][35], mort, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[286][39], mort, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[286][47], mort, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[280][43], mort, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[280][44], mort, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[281][43], mort, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[281][44], mort, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[283][38], mort, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[286][37], mort, true, Templates.ORE, 0.1d);
 
 		Templates.BUSH.makeCopy(Game.level.squares[278][46], null);
 		Templates.BUSH.makeCopy(Game.level.squares[279][46], null);
@@ -614,8 +614,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		mort.aiRoutine.roomBounds.add(mort.mortsVault);
 
 		// Cave featues for Mort
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][45], mort, true, Templates.ORE, 0.1d));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][46], mort, true, Templates.ORE, 0.1d));
+		Templates.VEIN.makeCopy(Game.level.squares[276][45], mort, true, Templates.ORE, 0.1d);
+		Templates.VEIN.makeCopy(Game.level.squares[276][46], mort, true, Templates.ORE, 0.1d);
 		mortsGameRoomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, true, true,
 				mort, mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
 		mort.mortsRoomDoorway = mortsGameRoomDoor.squareGameObjectIsOn;
@@ -645,7 +645,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(equipment);
 
 		// Equipment extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][55], null, true, Templates.ORE, 0.1d));
+		Templates.VEIN.makeCopy(Game.level.squares[276][55], null, true, Templates.ORE, 0.1d);
 
 		// Path Dining Room <-> Kitchen
 		cavePaths.add(new StructurePath("Dining Room <-> Kitchen", false, false, new ArrayList<Actor>(),
@@ -662,7 +662,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(kitchen);
 
 		// Kitchen extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[299][59], null, true, Templates.ORE, 0.1d));
+		Templates.VEIN.makeCopy(Game.level.squares[299][59], null, true, Templates.ORE, 0.1d);
 
 		// Path Dining Room <-> East Security
 		cavePaths.add(new StructurePath("Dining Room <-> East Security", false, false, new ArrayList<Actor>(),
@@ -680,7 +680,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(eastSecurity);
 
 		// East security extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[302][46], null, true, Templates.ORE, 0.1d));
+		Templates.VEIN.makeCopy(Game.level.squares[302][46], null, true, Templates.ORE, 0.1d);
 
 		// East Security <-> East Atrium
 		cavePaths.add(new StructurePath("East Security <-> East Atrium", false, false, new ArrayList<Actor>(),
@@ -697,7 +697,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(eastAtrium);
 
 		// East Atrium Extras
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[312][42], null, true, Templates.ORE, 0.1d));
+		Templates.VEIN.makeCopy(Game.level.squares[312][42], null, true, Templates.ORE, 0.1d);
 
 		// East Atrium <-> East Entrance
 		cavePaths.add(new StructurePath("East Atrium <-> East Entrance", false, false, new ArrayList<Actor>(),

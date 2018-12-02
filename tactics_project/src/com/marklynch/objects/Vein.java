@@ -7,7 +7,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.TextureUtils;
 
-public class Vein extends Wall {
+public class Vein extends GameObject {
 
 	public final static int totalOresForExhaustableVeins = 5;
 
@@ -75,7 +75,7 @@ public class Vein extends Wall {
 		// for(GameObject ore : v)
 
 		super.setAttributesForCopy(vein, square, owner);
-		vein.initWall(16f);
+		// vein.initWall(16f);
 
 		if (!infinite) {
 			for (int i = 0; i < totalOresForExhaustableVeins; i++) {

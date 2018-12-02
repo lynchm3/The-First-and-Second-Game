@@ -7,7 +7,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class WallWithCrack extends Wall {
+public class WallWithCrack extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public static Texture wallCrackTexture;
@@ -53,7 +53,7 @@ public class WallWithCrack extends Wall {
 		WallWithCrack wallWithCrack = new WallWithCrack();
 		setInstances(wallWithCrack);
 		super.setAttributesForCopy(wallWithCrack, square, owner);
-		wallWithCrack.initWall(16f);
+		// wallWithCrack.initWall(16f);
 		return wallWithCrack;
 	}
 
