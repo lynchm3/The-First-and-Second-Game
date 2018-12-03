@@ -8,7 +8,7 @@ import com.marklynch.actions.ActionAttack;
 import com.marklynch.actions.ActionLift;
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.ActivityLog;

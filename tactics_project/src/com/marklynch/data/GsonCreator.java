@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -19,15 +20,20 @@ import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.Seesaw;
+import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 
 public class GsonCreator {
@@ -44,7 +50,12 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(Inventory.class, serializerForInventory);
 		gsonBuilder.registerTypeAdapter(SquareInventory.class, serializerForInventory);
 		gsonBuilder.registerTypeAdapter(Square.class, serializerForIdable);
-		gsonBuilder.registerTypeAdapter(Power.class, serializerForPower);
+		gsonBuilder.registerTypeAdapter(Node.class, serializerForIdable);
+		gsonBuilder.registerTypeAdapter(SWITCH_TYPE.class, serializerForSWITCH_TYPE);
+		gsonBuilder.registerTypeAdapter(Color.class, serializerForColor);
+		gsonBuilder.registerTypeAdapter(GroupOfActors.class, serializerForIdable);
+		gsonBuilder.registerTypeAdapter(Area.class, serializerForIdable);
+
 		// gsonBuilder.registerTypeAdapter(SWITCH_TYPE.class, serializerForSWITCH_TYPE);
 		// gsonBuilder.registerTypeAdapter(Color.class, serializerForColor);
 		// gsonBuilder.registerTypeAdapter(GroupOfActors.class,
@@ -86,6 +97,13 @@ public class GsonCreator {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
 		}
 
+		// Structure Room
+		ArrayList<Class<?>> structureRoomClasses = PackageUtils
+				.getClasses("com.marklynch.level.constructs.bounds.structure.structureroom");
+		for (Class<?> clazz : structureRoomClasses) {
+			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
+		}
+
 		Gson gson = gsonBuilder.create();
 		return gson;
 	}
@@ -97,10 +115,29 @@ public class GsonCreator {
 		}
 	};
 
+	static JsonSerializer<SWITCH_TYPE> serializerForSWITCH_TYPE = new JsonSerializer<SWITCH_TYPE>() {
+		@Override
+		public JsonElement serialize(SWITCH_TYPE src, Type type, JsonSerializationContext context) {
+			return new JsonPrimitive(src.toString());
+		}
+	};
+
 	static JsonSerializer<Power> serializerForPower = new JsonSerializer<Power>() {
 		@Override
 		public JsonElement serialize(Power src, Type type, JsonSerializationContext context) {
 			return new JsonPrimitive(src.getClass().getSimpleName());
+		}
+	};
+
+	static JsonSerializer<Color> serializerForColor = new JsonSerializer<Color>() {
+		@Override
+		public JsonElement serialize(Color src, Type type, JsonSerializationContext context) {
+			JsonArray jsonArray = new JsonArray();
+			jsonArray.add(new JsonPrimitive(src.r));
+			jsonArray.add(new JsonPrimitive(src.g));
+			jsonArray.add(new JsonPrimitive(src.b));
+			jsonArray.add(new JsonPrimitive(src.a));
+			return jsonArray;
 		}
 	};
 

@@ -1,9 +1,9 @@
-package com.marklynch.level.constructs.bounds.structure.puzzleroom;
+package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom;
 
 import java.util.ArrayList;
 
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;

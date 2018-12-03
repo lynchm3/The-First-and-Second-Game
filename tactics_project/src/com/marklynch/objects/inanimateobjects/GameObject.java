@@ -82,7 +82,7 @@ import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.constructs.animation.secondary.AnimationDamageText;
 import com.marklynch.level.constructs.animation.secondary.AnimationSecondaryScale;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
-import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;

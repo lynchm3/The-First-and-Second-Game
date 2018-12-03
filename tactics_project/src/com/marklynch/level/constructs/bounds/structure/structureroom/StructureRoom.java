@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs.bounds.structure;
+package com.marklynch.level.constructs.bounds.structure.structureroom;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +7,8 @@ import com.marklynch.Game;
 import com.marklynch.actions.ActionSpot;
 import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;

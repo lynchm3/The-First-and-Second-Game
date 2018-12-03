@@ -24,8 +24,8 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.area.Area;
-import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -408,33 +408,34 @@ public class Save {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Quest) {
 						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof SWITCH_TYPE) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Node) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof GameObject[]) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Square[]) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Color) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof GroupOfActors) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Shift) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Faction) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Area) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof StructureRoom) {
+						preparedStatement.setString(count, gson.toJson(value));
+						//
+						//
+						//
 					} else if (value instanceof SwitchListener) {
 						preparedStatement.setLong(count, ((SwitchListener) value).getId());
 					} else if (value instanceof SwitchListener[]) {
 						preparedStatement.setString(count,
 								getSwitchListenerArrayStringForInsertion((SwitchListener[]) value));
-					} else if (value instanceof Quest) {
-						preparedStatement.setLong(count, ((Quest) value).id);
-					} else if (value instanceof SWITCH_TYPE) {
-						preparedStatement.setString(count, value.toString());
-					} else if (value instanceof GameObject[]) {
-						preparedStatement.setString(count, getGameObjectArrayStringForInsertion((GameObject[]) value));
-					} else if (value instanceof Square[]) {
-						preparedStatement.setString(count, getSquareArrayStringForInsertion((Square[]) value));
-					} else if (value instanceof Color) {
-						preparedStatement.setString(count, ((Color) value).generateSaveData());
-					} else if (value instanceof Node) {
-						preparedStatement.setLong(count, ((Node) value).id);
-					} else if (value instanceof GroupOfActors) {
-						preparedStatement.setLong(count, ((GroupOfActors) value).id);
-					} else if (value instanceof Shift) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof StructureRoom) {
-						preparedStatement.setLong(count, ((StructureRoom) value).id);
-					} else if (value instanceof Area) {
-						preparedStatement.setLong(count, ((Area) value).id);
-					} else if (value instanceof Faction) {
-						preparedStatement.setLong(count, ((Faction) value).id);
 					} else if (value instanceof Direction) {
 						preparedStatement.setString(count, "" + value);
 					} else if (value instanceof GameObject) {
