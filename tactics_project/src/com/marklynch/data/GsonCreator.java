@@ -1,6 +1,5 @@
 package com.marklynch.data;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -12,33 +11,16 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.routines.AIRoutineForBlind;
-import com.marklynch.ai.routines.AIRoutineForCarnivoreNeutralWildAnimal;
-import com.marklynch.ai.routines.AIRoutineForDoctor;
-import com.marklynch.ai.routines.AIRoutineForFish;
-import com.marklynch.ai.routines.AIRoutineForFisherman;
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
-import com.marklynch.ai.routines.AIRoutineForHunter;
-import com.marklynch.ai.routines.AIRoutineForKidnapper;
-import com.marklynch.ai.routines.AIRoutineForMinecart;
-import com.marklynch.ai.routines.AIRoutineForMiner;
 import com.marklynch.ai.routines.AIRoutineForMort;
-import com.marklynch.ai.routines.AIRoutineForPig;
-import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.ai.routines.AIRoutineForThief;
-import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectBleed;
-import com.marklynch.level.constructs.effect.EffectBurning;
-import com.marklynch.level.constructs.effect.EffectCurse;
-import com.marklynch.level.constructs.effect.EffectHeal;
-import com.marklynch.level.constructs.effect.EffectPoison;
-import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -48,8 +30,6 @@ public class GsonCreator {
 
 	public static Gson createGson() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.registerTypeAdapter(GameObject.class, serializerForGameObject);
-		gsonBuilder.registerTypeAdapter(Actor.class, serializerForActor);
 		gsonBuilder.registerTypeAdapter(Texture.class, serializerForTexture);
 		gsonBuilder.registerTypeAdapter(Faction.class, serializerForFaction);
 		gsonBuilder.registerTypeAdapter(Crime.class, serializerForCrime);
@@ -58,61 +38,26 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(AILine.class, serializerForAILine);
 		gsonBuilder.registerTypeAdapter(Enhancement.class, serializerForEnhancement);
 
-		// GameObjects //
-		// Reflections reflections = new Reflections("com.marklynch");
-		// Set<Class<? extends Object>> allClasses =
-		// reflections.getSubTypesOf(Object.class);
-		try {
-			ArrayList<Class<?>> actorClasses = PackageUtils.getClasses("com.marklynch.objects.actors");
-			ArrayList<Class<?>> inanimateObjectClasses = PackageUtils
-					.getClasses("com.marklynch.objects.inanimateobjects");
-			ArrayList<Class<?>> toolClasses = PackageUtils.getClasses("com.marklynch.objects.tools");
-			ArrayList<Class<?>> weaponClasses = PackageUtils.getClasses("com.marklynch.objects.weapons");
-			for (Class<?> clazz : actorClasses) {
-				System.out.println("actor class = " + clazz);
-			}
-			for (Class<?> clazz : inanimateObjectClasses) {
-				System.out.println("inanimateObject class = " + clazz);
-			}
-			for (Class<?> clazz : toolClasses) {
-				System.out.println("tool class = " + clazz);
-			}
-			for (Class<?> clazz : weaponClasses) {
-				System.out.println("weapon class = " + clazz);
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		// Add serializers for all GamObjects, Effects and aiRoutines
+		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>();
+		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.actors"));
+		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.inanimateobjects"));
+		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.tools"));
+		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.weapons"));
+		for (Class<?> clazz : gameObjectClasses) {
+			gsonBuilder.registerTypeAdapter(clazz, serializerForGameObject);
 		}
 
-		// Effects //
-		gsonBuilder.registerTypeAdapter(Effect.class, serializerForEffect);
-		gsonBuilder.registerTypeAdapter(EffectBleed.class, serializerForEffect);
-		gsonBuilder.registerTypeAdapter(EffectBurning.class, serializerForEffect);
-		gsonBuilder.registerTypeAdapter(EffectCurse.class, serializerForEffect);
-		gsonBuilder.registerTypeAdapter(EffectHeal.class, serializerForEffect);
-		gsonBuilder.registerTypeAdapter(EffectPoison.class, serializerForEffect);
-		gsonBuilder.registerTypeAdapter(EffectWet.class, serializerForEffect);
+		ArrayList<Class<?>> effectClasses = PackageUtils.getClasses("com.marklynch.level.constructs.effect");
+		for (Class<?> clazz : effectClasses) {
+			gsonBuilder.registerTypeAdapter(clazz, serializerForEffect);
+		}
 
-		// AIRoutines //
-		gsonBuilder.registerTypeAdapter(AIRoutine.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForCarnivoreNeutralWildAnimal.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForDoctor.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForFish.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForFisherman.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForGuard.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForHerbivoreWildAnimal.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForHunter.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForMinecart.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForMiner.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForPig.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForRockGolem.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForThief.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForTrader.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForKidnapper.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForBlind.class, serializerForAIRoutine);
-		gsonBuilder.registerTypeAdapter(AIRoutineForMort.class, serializerForAIRoutine);
+		ArrayList<Class<?>> aiRoutineClasses = PackageUtils.getClasses("com.marklynch.ai.routines");
+		for (Class<?> clazz : aiRoutineClasses) {
+			gsonBuilder.registerTypeAdapter(clazz, serializerForAIRoutine);
+		}
+
 		Gson gson = gsonBuilder.create();
 		return gson;
 	}
