@@ -11,39 +11,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import org.objectweb.asm.Type;
-
 import com.google.gson.Gson;
-import com.marklynch.ai.routines.AIRoutine;
-import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.GroupOfActors;
-import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.enchantment.Enhancement;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.power.Power;
-import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
-import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.actors.Actor.Direction;
-import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
 import com.marklynch.objects.actors.Animal;
 import com.marklynch.objects.actors.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.actors.Doctor;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.actors.Guard;
-import com.marklynch.objects.actors.Guard.Shift;
 import com.marklynch.objects.actors.HerbivoreWildAnimal;
 import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.actors.Monster;
@@ -88,7 +75,6 @@ import com.marklynch.objects.inanimateobjects.Stampable;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Stump;
 import com.marklynch.objects.inanimateobjects.Switch;
-import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.inanimateobjects.VoidHole;
@@ -117,7 +103,6 @@ import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 
 public class Save {
@@ -364,98 +349,8 @@ public class Save {
 						preparedStatement.setFloat(count, (Float) value);
 					} else if (value instanceof Double) {
 						preparedStatement.setDouble(count, (Double) value);
-					} else if (value instanceof boolean[]) {
+					} else {
 						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof long[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof int[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof String[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof float[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof double[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof HOBBY[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Sound) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Sound[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Texture) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Inventory) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Effect[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Enhancement) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Crime) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof AILine) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Crime[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof RequirementToMeet) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof RequirementToMeet[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof AIRoutine) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Square) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Power) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Quest) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof SWITCH_TYPE) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Node) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof GameObject[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Square[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Color) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof GroupOfActors) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Shift) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Faction) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Area) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof StructureRoom) {
-						preparedStatement.setString(count, gson.toJson(value));
-						//
-						//
-						//
-					} else if (value instanceof SwitchListener) {
-						preparedStatement.setLong(count, ((SwitchListener) value).getId());
-					} else if (value instanceof SwitchListener[]) {
-						preparedStatement.setString(count,
-								getSwitchListenerArrayStringForInsertion((SwitchListener[]) value));
-					} else if (value instanceof Direction) {
-						preparedStatement.setString(count, "" + value);
-					} else if (value instanceof GameObject) {
-						preparedStatement.setLong(count, ((GameObject) value).id);
-					} else if (value instanceof HashMap<?, ?>) {
-						preparedStatement.setString(count, getHashMapStringForInsertion((HashMap<?, ?>) value));
-					} else if (value instanceof ArrayList<?>) {
-						preparedStatement.setString(count, getArrayListStringForInsertion((ArrayList<?>) value));
-					} else if (value instanceof Object) {
-						System.err.println("=======================");
-						System.err.println("Error saving - " + value);
-						System.err.println("clazz = " + clazz);
-						System.err.println("fields = " + fields);
-						System.err.println("field = " + field1);
-						System.err.println("object = " + object1);
-						System.err.println("insertQueryTemplate = " + insertQueryTemplate);
-						System.err.println("=======================");
-						preparedStatement.setString(count, "TODO Object class " + value);
-					} else if (value == null) {
-						preparedStatement.setNull(count, Type.VOID);
 					}
 
 					count++;

@@ -23,7 +23,9 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.area.Area;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -31,14 +33,17 @@ import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
+import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 
 public class GsonCreator {
 
 	public static Gson createGson() {
+
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(Texture.class, serializerForTexture);
 		gsonBuilder.registerTypeAdapter(Faction.class, serializerForIdable);
@@ -54,13 +59,11 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(SWITCH_TYPE.class, serializerForSWITCH_TYPE);
 		gsonBuilder.registerTypeAdapter(Color.class, serializerForColor);
 		gsonBuilder.registerTypeAdapter(GroupOfActors.class, serializerForIdable);
+		gsonBuilder.registerTypeAdapter(SwitchListener.class, serializerForIdable);
 		gsonBuilder.registerTypeAdapter(Area.class, serializerForIdable);
-
-		// gsonBuilder.registerTypeAdapter(SWITCH_TYPE.class, serializerForSWITCH_TYPE);
-		// gsonBuilder.registerTypeAdapter(Color.class, serializerForColor);
-		// gsonBuilder.registerTypeAdapter(GroupOfActors.class,
-		// serializerForGroupOfActors);
-		// gsonBuilder.registerTypeAdapter(Shift.class, serializerForShift);
+		gsonBuilder.registerTypeAdapter(StructureSection.class, serializerForIdable);
+		gsonBuilder.registerTypeAdapter(Direction.class, serializerForDirection);
+		gsonBuilder.registerTypeAdapter(Stat.class, serializerForStat);
 
 		// Add serializers for all GamObjects, Effects and aiRoutines
 		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>();
@@ -115,9 +118,23 @@ public class GsonCreator {
 		}
 	};
 
+	static JsonSerializer<Stat> serializerForStat = new JsonSerializer<Stat>() {
+		@Override
+		public JsonElement serialize(Stat src, Type type, JsonSerializationContext context) {
+			return new JsonPrimitive(src.value);
+		}
+	};
+
 	static JsonSerializer<SWITCH_TYPE> serializerForSWITCH_TYPE = new JsonSerializer<SWITCH_TYPE>() {
 		@Override
 		public JsonElement serialize(SWITCH_TYPE src, Type type, JsonSerializationContext context) {
+			return new JsonPrimitive(src.toString());
+		}
+	};
+
+	static JsonSerializer<Direction> serializerForDirection = new JsonSerializer<Direction>() {
+		@Override
+		public JsonElement serialize(Direction src, Type type, JsonSerializationContext context) {
 			return new JsonPrimitive(src.toString());
 		}
 	};
