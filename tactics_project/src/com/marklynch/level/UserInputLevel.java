@@ -17,6 +17,7 @@ import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionTeleport;
 import com.marklynch.actions.ActionUsePower;
 import com.marklynch.ai.utils.AIPath;
+import com.marklynch.data.Load;
 import com.marklynch.data.Save;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.animation.primary.AnimationWalk;
@@ -103,6 +104,7 @@ public class UserInputLevel {
 	public static boolean keyStateQuestionMark = false;
 	public static boolean keyStateForwardSlash = false;
 	public static boolean keyStateF5 = false;
+	public static boolean keyStateF9 = false;
 
 	public static AIPath path;
 	static boolean controllingMenu = false;
@@ -1961,6 +1963,13 @@ public class UserInputLevel {
 			keyStateF5 = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_F5)) {
 			keyStateF5 = false;
+		}
+
+		if (keyStateF9 == false && Keyboard.isKeyDown(Keyboard.KEY_F9)) {
+			Load.load();
+			keyStateF9 = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_F9)) {
+			keyStateF9 = false;
 		}
 	}
 }

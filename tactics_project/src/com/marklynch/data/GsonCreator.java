@@ -146,6 +146,13 @@ public class GsonCreator {
 		}
 	};
 
+	static JsonSerializer<Texture> serializerForTexture = new JsonSerializer<Texture>() {
+		@Override
+		public JsonElement serialize(Texture src, Type type, JsonSerializationContext context) {
+			return new JsonPrimitive(src.path);
+		}
+	};
+
 	static JsonSerializer<Color> serializerForColor = new JsonSerializer<Color>() {
 		@Override
 		public JsonElement serialize(Color src, Type type, JsonSerializationContext context) {
@@ -157,27 +164,6 @@ public class GsonCreator {
 			return jsonArray;
 		}
 	};
-
-	// static JsonSerializer<Faction> serializerForFaction = new
-	// JsonSerializer<Faction>() {
-	// @Override
-	// public JsonElement serialize(Faction src, Type type, JsonSerializationContext
-	// context) {
-	// JsonObject jsonObject = new JsonObject();
-	// jsonObject.addProperty("id", src.id);
-	// return jsonObject;
-	// }
-	// };
-
-	// static JsonSerializer<Square> serializerForSquare = new
-	// JsonSerializer<Square>() {
-	// @Override
-	// public JsonElement serialize(Square src, Type type, JsonSerializationContext
-	// context) {
-	// JsonPrimitive jsonPrimitive = new JsonPrimitive(src.id);
-	// return jsonPrimitive;
-	// }
-	// };
 
 	static JsonSerializer<Effect> serializerForEffect = new JsonSerializer<Effect>() {
 		@Override
@@ -191,37 +177,6 @@ public class GsonCreator {
 			jsonObject.addProperty("totalTurns", src.totalTurns);
 			jsonObject.addProperty("turnsRemaining", src.turnsRemaining);
 			jsonObject.addProperty("imageTexture", src.imageTexture.path);
-			return jsonObject;
-		}
-	};
-
-	// static JsonSerializer<GameObject> serializerForGameObject = new
-	// JsonSerializer<GameObject>() {
-	// @Override
-	// public JsonElement serialize(GameObject src, Type type,
-	// JsonSerializationContext context) {
-	// JsonObject jsonObject = new JsonObject();
-	// jsonObject.addProperty("id", src.id);
-	// return jsonObject;
-	// }
-	// };
-
-	// static JsonSerializer<Actor> serializerForActor = new JsonSerializer<Actor>()
-	// {
-	// @Override
-	// public JsonElement serialize(Actor src, Type type, JsonSerializationContext
-	// context) {
-	// JsonObject jsonObject = new JsonObject();
-	// jsonObject.addProperty("id", src.id);
-	// return jsonObject;
-	// }
-	// };
-
-	static JsonSerializer<Texture> serializerForTexture = new JsonSerializer<Texture>() {
-		@Override
-		public JsonElement serialize(Texture src, Type type, JsonSerializationContext context) {
-			JsonObject jsonObject = new JsonObject();
-			jsonObject.addProperty("path", src.path);
 			return jsonObject;
 		}
 	};
