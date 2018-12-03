@@ -404,13 +404,13 @@ public class Save {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Square) {
 						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Power) {
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof SwitchListener) {
 						preparedStatement.setLong(count, ((SwitchListener) value).getId());
 					} else if (value instanceof SwitchListener[]) {
 						preparedStatement.setString(count,
 								getSwitchListenerArrayStringForInsertion((SwitchListener[]) value));
-					} else if (value instanceof Power) {
-						preparedStatement.setString(count, value.getClass().getSimpleName());
 					} else if (value instanceof Quest) {
 						preparedStatement.setLong(count, ((Quest) value).id);
 					} else if (value instanceof SWITCH_TYPE) {

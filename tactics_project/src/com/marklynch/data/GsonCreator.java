@@ -25,6 +25,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.SquareInventory;
+import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.utils.Texture;
@@ -43,7 +44,7 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(Inventory.class, serializerForInventory);
 		gsonBuilder.registerTypeAdapter(SquareInventory.class, serializerForInventory);
 		gsonBuilder.registerTypeAdapter(Square.class, serializerForIdable);
-		// gsonBuilder.registerTypeAdapter(Power.class, serializerForPower);
+		gsonBuilder.registerTypeAdapter(Power.class, serializerForPower);
 		// gsonBuilder.registerTypeAdapter(SWITCH_TYPE.class, serializerForSWITCH_TYPE);
 		// gsonBuilder.registerTypeAdapter(Color.class, serializerForColor);
 		// gsonBuilder.registerTypeAdapter(GroupOfActors.class,
@@ -61,14 +62,22 @@ public class GsonCreator {
 		}
 		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, serializerForIdable);
 
+		// Effects
 		ArrayList<Class<?>> effectClasses = PackageUtils.getClasses("com.marklynch.level.constructs.effect");
 		for (Class<?> clazz : effectClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForEffect);
 		}
 
+		// AI Routines
 		ArrayList<Class<?>> aiRoutineClasses = PackageUtils.getClasses("com.marklynch.ai.routines");
 		for (Class<?> clazz : aiRoutineClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForAIRoutine);
+		}
+
+		// Power
+		ArrayList<Class<?>> powerClasses = PackageUtils.getClasses("com.marklynch.level.constructs.power");
+		for (Class<?> clazz : powerClasses) {
+			gsonBuilder.registerTypeAdapter(clazz, serializerForPower);
 		}
 
 		Gson gson = gsonBuilder.create();
@@ -79,6 +88,13 @@ public class GsonCreator {
 		@Override
 		public JsonElement serialize(Idable src, Type type, JsonSerializationContext context) {
 			return new JsonPrimitive(src.getId());
+		}
+	};
+
+	static JsonSerializer<Power> serializerForPower = new JsonSerializer<Power>() {
+		@Override
+		public JsonElement serialize(Power src, Type type, JsonSerializationContext context) {
+			return new JsonPrimitive(src.getClass().getSimpleName());
 		}
 	};
 
