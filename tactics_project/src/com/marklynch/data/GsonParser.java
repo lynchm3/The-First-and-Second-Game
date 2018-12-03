@@ -10,6 +10,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.marklynch.ai.utils.AILine;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
@@ -32,6 +33,7 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
 public class GsonParser {
+
 	public static Gson createGson() {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -55,52 +57,61 @@ public class GsonParser {
 		gsonBuilder.registerTypeAdapter(Direction.class, deserializerForDirection);
 		gsonBuilder.registerTypeAdapter(Stat.class, deserializerForStat);
 
-		// Add serializers for all GamObjects, Effects and aiRoutines
+		// Add deserializers for all GamObjects, Effects and aiRoutines
 		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>();
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.actors"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.inanimateobjects"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.tools"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.weapons"));
 		for (Class<?> clazz : gameObjectClasses) {
-			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
+			gsonBuilder.registerTypeAdapter(clazz, deserializerForIdable);
 		}
-		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, serializerForIdable);
+		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, deserializerForIdable);
 
 		// Effects
 		ArrayList<Class<?>> effectClasses = PackageUtils.getClasses("com.marklynch.level.constructs.effect");
 		for (Class<?> clazz : effectClasses) {
-			gsonBuilder.registerTypeAdapter(clazz, serializerForEffect);
+			gsonBuilder.registerTypeAdapter(clazz, deserializerForEffect);
 		}
 
 		// AI Routines
 		ArrayList<Class<?>> aiRoutineClasses = PackageUtils.getClasses("com.marklynch.ai.routines");
 		for (Class<?> clazz : aiRoutineClasses) {
-			gsonBuilder.registerTypeAdapter(clazz, serializerForAIRoutine);
+			gsonBuilder.registerTypeAdapter(clazz, deserializerForAIRoutine);
 		}
 
 		// Power
 		ArrayList<Class<?>> powerClasses = PackageUtils.getClasses("com.marklynch.level.constructs.power");
 		for (Class<?> clazz : powerClasses) {
-			gsonBuilder.registerTypeAdapter(clazz, serializerForPower);
+			gsonBuilder.registerTypeAdapter(clazz, deserializerForPower);
 		}
 
 		// Quests
 		ArrayList<Class<?>> questClasses = PackageUtils.getClasses("com.marklynch.level.quest");
 		for (Class<?> clazz : questClasses) {
-			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
+			gsonBuilder.registerTypeAdapter(clazz, deserializerForIdable);
 		}
 
 		// Structure Room
 		ArrayList<Class<?>> structureRoomClasses = PackageUtils
 				.getClasses("com.marklynch.level.constructs.bounds.structure.structureroom");
 		for (Class<?> clazz : structureRoomClasses) {
-			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
+			gsonBuilder.registerTypeAdapter(clazz, deserializerForIdable);
 		}
 
 		Gson gson = gsonBuilder.create();
 		return gson;
 
 	}
+
+	// change serialization for specific types
+	public static JsonDeserializer<Object> deserializerForIdable = new JsonDeserializer<Object>() {
+		@Override
+		public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
+			return Level.ids.get(json.getAsLong());
+		}
+	};
 
 	// change serialization for specific types
 	public static JsonDeserializer<Texture> deserializerForTexture = new JsonDeserializer<Texture>() {
