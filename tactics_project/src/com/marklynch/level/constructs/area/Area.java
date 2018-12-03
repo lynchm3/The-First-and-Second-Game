@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionSpot;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Storage;
-import com.marklynch.objects.WantedPoster;
-import com.marklynch.objects.actions.ActionSpot;
+import com.marklynch.objects.inanimateobjects.Storage;
+import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;

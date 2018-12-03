@@ -1,8 +1,8 @@
 package com.marklynch.level.constructs.animation.secondary;
 
 import com.marklynch.Game;
-import com.marklynch.objects.Arrow;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.Arrow;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;

@@ -1,14 +1,14 @@
 package com.marklynch.level.constructs.animation.secondary;
 
 import com.marklynch.Game;
+import com.marklynch.actions.Action;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationFlinch;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Arrow;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Searchable;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.Arrow;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Searchable;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.Texture;

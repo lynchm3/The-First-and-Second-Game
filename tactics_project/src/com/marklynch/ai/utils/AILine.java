@@ -6,7 +6,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.TextureUtils;
 
 public class AILine {

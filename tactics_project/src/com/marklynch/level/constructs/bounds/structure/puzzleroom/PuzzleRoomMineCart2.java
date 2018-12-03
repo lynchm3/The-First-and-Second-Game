@@ -7,12 +7,12 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.squares.Node;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Rail;
-import com.marklynch.objects.Switch;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.actors.Actor.HOBBY;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Rail;
+import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
 
 public class PuzzleRoomMineCart2 extends StructureRoom {

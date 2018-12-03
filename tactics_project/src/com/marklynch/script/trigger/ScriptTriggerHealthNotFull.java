@@ -1,6 +1,6 @@
 package com.marklynch.script.trigger;
 
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class ScriptTriggerHealthNotFull extends ScriptTrigger {
 

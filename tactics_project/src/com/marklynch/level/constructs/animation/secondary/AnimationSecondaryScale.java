@@ -6,7 +6,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.animation.KeyFrame;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 

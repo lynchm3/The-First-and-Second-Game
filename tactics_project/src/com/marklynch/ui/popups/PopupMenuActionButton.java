@@ -1,6 +1,6 @@
 package com.marklynch.ui.popups;
 
-import com.marklynch.objects.actions.Action;
+import com.marklynch.actions.Action;
 import com.marklynch.ui.button.Tooltip;
 
 public class PopupMenuActionButton extends PopupMenuButton {

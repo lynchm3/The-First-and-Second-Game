@@ -4,8 +4,8 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.objects.Arrow;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.Arrow;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class TemplatesProjectiles {
 

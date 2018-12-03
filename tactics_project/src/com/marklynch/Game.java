@@ -23,7 +23,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.PinWindow;
 import com.marklynch.ui.TextBox;
 import com.marklynch.ui.button.Button;

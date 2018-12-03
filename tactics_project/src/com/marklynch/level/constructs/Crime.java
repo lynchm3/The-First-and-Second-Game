@@ -3,9 +3,9 @@ package com.marklynch.level.constructs;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.Action;
+import com.marklynch.actions.Action;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class Crime {
 

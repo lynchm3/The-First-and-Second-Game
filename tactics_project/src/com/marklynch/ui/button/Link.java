@@ -1,14 +1,14 @@
 package com.marklynch.ui.button;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionViewInfo;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.MapMarker;
-import com.marklynch.objects.actions.ActionViewInfo;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.MapMarker;
 import com.marklynch.utils.Color;
 
 public class Link extends LevelButton {

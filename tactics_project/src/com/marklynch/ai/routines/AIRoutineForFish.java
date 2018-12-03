@@ -1,7 +1,7 @@
 package com.marklynch.ai.routines;
 
-import com.marklynch.objects.actions.ActionFishBeingFished;
-import com.marklynch.objects.actions.ActionFishSwim;
+import com.marklynch.actions.ActionFishBeingFished;
+import com.marklynch.actions.ActionFishSwim;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Fish;
 

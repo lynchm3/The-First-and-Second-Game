@@ -6,12 +6,12 @@ import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
 import com.marklynch.ai.routines.AIRoutineForPig;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.actors.HerbivoreWildAnimal;
 import com.marklynch.objects.actors.Pig;
 import com.marklynch.objects.actors.TinyNeutralWildAnimal;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class TemplatesAnimals {
 

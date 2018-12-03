@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import org.lwjgl.input.Keyboard;
 
 import com.marklynch.Game;
+import com.marklynch.actions.Action;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory.INVENTORY_MODE;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Gold;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;

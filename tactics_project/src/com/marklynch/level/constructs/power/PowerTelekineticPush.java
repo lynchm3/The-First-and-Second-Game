@@ -5,18 +5,18 @@ import java.util.HashMap;
 
 import org.lwjgl.util.Point;
 
+import com.marklynch.actions.Action;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationPush;
 import com.marklynch.level.constructs.animation.primary.AnimationPushed;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Portal;
-import com.marklynch.objects.VoidHole;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Portal;
+import com.marklynch.objects.inanimateobjects.VoidHole;
 import com.marklynch.utils.ResourceUtils;
 
 public class PowerTelekineticPush extends Power {

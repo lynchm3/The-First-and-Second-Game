@@ -5,10 +5,10 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
+import com.marklynch.actions.Action;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;

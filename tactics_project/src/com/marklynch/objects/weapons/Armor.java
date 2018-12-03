@@ -2,7 +2,7 @@ package com.marklynch.objects.weapons;
 
 import java.util.ArrayList;
 
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class Armor extends GameObject {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();

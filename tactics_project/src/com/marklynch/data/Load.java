@@ -8,15 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.marklynch.actions.Action;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actors.Player;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 

@@ -1,8 +1,8 @@
 package com.marklynch.objects.templates;
 
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Gold;
-import com.marklynch.objects.Orb;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Gold;
+import com.marklynch.objects.inanimateobjects.Orb;
 
 public class TemplatesGold {
 

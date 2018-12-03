@@ -2,8 +2,8 @@ package com.marklynch.objects.templates;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.WantedPoster;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.WantedPoster;
 
 public class TemplatesReadables {
 

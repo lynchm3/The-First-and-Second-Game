@@ -7,11 +7,11 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.RemoteDoor;
-import com.marklynch.objects.Switch;
-import com.marklynch.objects.Wall;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.RemoteDoor;
+import com.marklynch.objects.inanimateobjects.Switch;
+import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 
 public class PuzzleRoomTeamwork3 extends StructureRoom {

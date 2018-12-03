@@ -1,13 +1,13 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
+import com.marklynch.actions.Action;
+import com.marklynch.actions.ActionTakeItems;
+import com.marklynch.actions.ActiontTakeAll;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Storage;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionTakeItems;
-import com.marklynch.objects.actions.ActiontTakeAll;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.Color;
 

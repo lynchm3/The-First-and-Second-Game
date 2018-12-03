@@ -2,7 +2,7 @@ package com.marklynch.editor.popup;
 
 import com.marklynch.editor.Editor;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.PopupButton;
 

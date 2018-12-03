@@ -1,12 +1,12 @@
 package com.marklynch.ui.quickbar;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionUsePower;
 import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.ActionUsePower;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.ClickListener;

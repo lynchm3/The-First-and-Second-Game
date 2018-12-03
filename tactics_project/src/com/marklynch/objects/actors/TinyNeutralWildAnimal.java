@@ -2,12 +2,12 @@ package com.marklynch.objects.actors;
 
 import java.util.ArrayList;
 
+import com.marklynch.actions.Action;
+import com.marklynch.actions.ActionSquash;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionSquash;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 

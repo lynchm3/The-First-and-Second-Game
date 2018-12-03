@@ -5,8 +5,8 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Liquid;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Liquid;
 
 public class TemplatesLiquids {
 

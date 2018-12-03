@@ -1,9 +1,9 @@
 package com.marklynch.level.conversation;
 
 import com.marklynch.Game;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Human;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 

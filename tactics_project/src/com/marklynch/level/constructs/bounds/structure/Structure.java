@@ -3,13 +3,13 @@ package com.marklynch.level.constructs.bounds.structure;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionSpot;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Wall;
-import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;

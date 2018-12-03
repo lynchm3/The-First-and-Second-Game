@@ -6,6 +6,7 @@ import java.util.Collections;
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
+import com.marklynch.actions.Action;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
@@ -14,10 +15,9 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Wall;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actors.Actor.Direction;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.utils.ResourceUtils;
 
 public class PowerDash extends Power {

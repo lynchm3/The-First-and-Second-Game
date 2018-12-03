@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionSmash;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Door;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.UpdatesWhenSquareContentsChange;
-import com.marklynch.objects.WaterBody;
-import com.marklynch.objects.Window;
-import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.Door;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.WaterBody;
+import com.marklynch.objects.inanimateobjects.Window;
+import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
 
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
 

@@ -17,11 +17,11 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.RemoteDoor;
-import com.marklynch.objects.Switch;
-import com.marklynch.objects.Wall;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.RemoteDoor;
+import com.marklynch.objects.inanimateobjects.Switch;
+import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.TextUtils;
 

@@ -1,9 +1,9 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionMove;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineForWildAnimal extends AIRoutine {

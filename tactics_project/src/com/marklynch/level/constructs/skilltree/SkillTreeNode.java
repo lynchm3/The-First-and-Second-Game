@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionUsePower;
 import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Stat;
@@ -12,7 +13,6 @@ import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;

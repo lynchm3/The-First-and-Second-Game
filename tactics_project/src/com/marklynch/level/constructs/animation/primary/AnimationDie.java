@@ -2,8 +2,8 @@ package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Human;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class AnimationDie extends Animation {
 

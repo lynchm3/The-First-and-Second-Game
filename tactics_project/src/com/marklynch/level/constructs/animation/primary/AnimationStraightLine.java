@@ -5,7 +5,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class AnimationStraightLine extends Animation {
 

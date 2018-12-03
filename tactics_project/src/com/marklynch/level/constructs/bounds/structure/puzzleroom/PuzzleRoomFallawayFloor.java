@@ -8,11 +8,11 @@ import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Switch;
-import com.marklynch.objects.SwitchListener;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.utils.SwitchListener;
 
 public class PuzzleRoomFallawayFloor extends StructureRoom implements SwitchListener {
 	int posX;

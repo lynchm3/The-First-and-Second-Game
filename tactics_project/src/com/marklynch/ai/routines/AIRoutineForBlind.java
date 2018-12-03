@@ -2,15 +2,15 @@ package com.marklynch.ai.routines;
 
 import java.util.ArrayList;
 
+import com.marklynch.actions.ActionTakeBite;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.MeatChunk;
-import com.marklynch.objects.ThoughtBubbles;
-import com.marklynch.objects.actions.ActionTakeBite;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
+import com.marklynch.objects.inanimateobjects.MeatChunk;
+import com.marklynch.objects.utils.ThoughtBubbles;
 
 public class AIRoutineForBlind extends AIRoutine {
 

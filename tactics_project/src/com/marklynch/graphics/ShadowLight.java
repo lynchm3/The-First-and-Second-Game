@@ -16,8 +16,8 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import com.marklynch.Game;
+import com.marklynch.actions.Action;
 import com.marklynch.level.Level.LevelMode;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.Texture;

@@ -1,7 +1,7 @@
 package com.marklynch.objects.templates;
 
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.MapMarker;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.MapMarker;
 
 public class TemplatesMapMarkers {
 

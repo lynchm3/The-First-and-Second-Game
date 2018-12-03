@@ -4,8 +4,8 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Tree;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.templates.Templates;
 
 public class TownForestBuilder {

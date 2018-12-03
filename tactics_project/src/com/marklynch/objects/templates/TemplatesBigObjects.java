@@ -1,7 +1,6 @@
 package com.marklynch.objects.templates;
 
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class TemplatesBigObjects {
 

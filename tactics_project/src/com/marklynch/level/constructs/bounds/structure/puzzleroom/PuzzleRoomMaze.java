@@ -8,9 +8,9 @@ import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 
 public class PuzzleRoomMaze extends StructureRoom {

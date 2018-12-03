@@ -2,9 +2,9 @@ package com.marklynch.objects.templates;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.objects.Carcass;
-import com.marklynch.objects.Corpse;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.Carcass;
+import com.marklynch.objects.inanimateobjects.Corpse;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class TemplatesCorpses {
 

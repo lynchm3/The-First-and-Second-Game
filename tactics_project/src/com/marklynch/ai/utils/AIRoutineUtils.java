@@ -7,22 +7,22 @@ import java.util.Comparator;
 import java.util.Random;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionAttack;
+import com.marklynch.actions.ActionEatItems;
+import com.marklynch.actions.ActionMining;
+import com.marklynch.actions.ActionMove;
+import com.marklynch.actions.ActionSkin;
+import com.marklynch.actions.ActionTakeItems;
+import com.marklynch.actions.ActiontTakeAll;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Door;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Vein;
-import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionEatItems;
-import com.marklynch.objects.actions.ActionMining;
-import com.marklynch.objects.actions.ActionMove;
-import com.marklynch.objects.actions.ActionSkin;
-import com.marklynch.objects.actions.ActionTakeItems;
-import com.marklynch.objects.actions.ActiontTakeAll;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.Door;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Vein;
 
 public class AIRoutineUtils {
 

@@ -6,8 +6,8 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Node;
-import com.marklynch.objects.Vein;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.templates.Templates;
 
 public class PuzzleRoomMineThroughWall extends StructureRoom {

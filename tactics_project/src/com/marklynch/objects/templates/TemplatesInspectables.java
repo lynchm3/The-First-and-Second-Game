@@ -1,7 +1,7 @@
 package com.marklynch.objects.templates;
 
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Inspectable;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Inspectable;
 
 public class TemplatesInspectables {
 

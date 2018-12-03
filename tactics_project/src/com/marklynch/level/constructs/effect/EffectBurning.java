@@ -8,7 +8,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.ui.ActivityLog;
 

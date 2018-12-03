@@ -1,12 +1,12 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
+import com.marklynch.actions.Action;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Vein;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.HerbivoreWildAnimal;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Vein;
 
 public class AIRoutineForMiner extends AIRoutine {
 

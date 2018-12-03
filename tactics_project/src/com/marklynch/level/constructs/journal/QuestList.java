@@ -28,7 +28,7 @@ import com.marklynch.level.quest.smallgame.QuestSmallGame;
 import com.marklynch.level.quest.thepigs.QuestThePigs;
 import com.marklynch.level.quest.thesecretroom.QuestTheSecretRoom;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Wall;
+import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 
 @SuppressWarnings("serial")

@@ -1,14 +1,14 @@
 package com.marklynch.level.quest.smallgame;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionGiveItems;
 import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.conversation.LeaveConversationListener;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class ConversationsSmallGame {
 

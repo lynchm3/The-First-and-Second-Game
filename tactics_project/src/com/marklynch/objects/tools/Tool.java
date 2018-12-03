@@ -3,7 +3,7 @@ package com.marklynch.objects.tools;
 import java.util.ArrayList;
 
 import com.marklynch.level.constructs.inventory.Inventory;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Tool extends Weapon {

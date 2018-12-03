@@ -2,7 +2,7 @@ package com.marklynch.objects.actors;
 
 import java.util.ArrayList;
 
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class Animal extends Actor {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();

@@ -6,20 +6,20 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
-import com.marklynch.objects.Bed;
-import com.marklynch.objects.BrokenGlass;
-import com.marklynch.objects.Furnace;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Key;
-import com.marklynch.objects.Mirror;
-import com.marklynch.objects.PressurePlate;
-import com.marklynch.objects.PressurePlateRequiringSpecificItem;
-import com.marklynch.objects.Searchable;
-import com.marklynch.objects.Seesaw;
-import com.marklynch.objects.Stampable;
-import com.marklynch.objects.Switch;
-import com.marklynch.objects.WallSupport;
-import com.marklynch.objects.WaterSource;
+import com.marklynch.objects.inanimateobjects.Bed;
+import com.marklynch.objects.inanimateobjects.BrokenGlass;
+import com.marklynch.objects.inanimateobjects.Furnace;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Key;
+import com.marklynch.objects.inanimateobjects.Mirror;
+import com.marklynch.objects.inanimateobjects.PressurePlate;
+import com.marklynch.objects.inanimateobjects.PressurePlateRequiringSpecificItem;
+import com.marklynch.objects.inanimateobjects.Searchable;
+import com.marklynch.objects.inanimateobjects.Seesaw;
+import com.marklynch.objects.inanimateobjects.Stampable;
+import com.marklynch.objects.inanimateobjects.Switch;
+import com.marklynch.objects.inanimateobjects.WallSupport;
+import com.marklynch.objects.inanimateobjects.WaterSource;
 
 public class TemplatesFurniture {
 

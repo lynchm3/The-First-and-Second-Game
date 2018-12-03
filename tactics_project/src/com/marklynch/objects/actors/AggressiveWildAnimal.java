@@ -6,7 +6,7 @@ import com.marklynch.ai.routines.AIRoutineForWildAnimal;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class AggressiveWildAnimal extends WildAnimal {
 

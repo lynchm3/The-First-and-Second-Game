@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.ResourceUtils;
 
 public class Human extends Actor {

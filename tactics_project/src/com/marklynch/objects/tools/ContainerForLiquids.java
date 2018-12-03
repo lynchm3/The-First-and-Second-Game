@@ -3,16 +3,16 @@ package com.marklynch.objects.tools;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.actions.Action;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Consumable;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Liquid;
-import com.marklynch.objects.Wall;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Liquid;
+import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.utils.Consumable;
 import com.marklynch.ui.ActivityLog;
 
 public class ContainerForLiquids extends Tool implements Consumable {

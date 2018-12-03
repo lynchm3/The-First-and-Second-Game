@@ -2,8 +2,8 @@ package com.marklynch.ui.popups;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.MapMarker;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.MapMarker;
 import com.marklynch.ui.TextBox;
 import com.marklynch.ui.TextBoxHolder;
 import com.marklynch.utils.QuadUtils;

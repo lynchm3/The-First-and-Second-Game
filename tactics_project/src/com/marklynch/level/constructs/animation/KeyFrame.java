@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.animation;
 
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class KeyFrame {
 

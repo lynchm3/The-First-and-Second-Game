@@ -3,7 +3,7 @@ package com.marklynch.level.constructs.animation.secondary;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.TextureUtils;
 

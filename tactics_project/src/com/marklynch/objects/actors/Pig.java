@@ -2,16 +2,16 @@ package com.marklynch.objects.actors;
 
 import java.util.ArrayList;
 
+import com.marklynch.actions.Action;
+import com.marklynch.actions.ActionAttack;
+import com.marklynch.actions.ActionPet;
 import com.marklynch.ai.routines.AIRoutineForPig;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionPet;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Pig extends Animal {

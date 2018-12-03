@@ -4,11 +4,11 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.MineCart;
-import com.marklynch.objects.Rail;
-import com.marklynch.objects.Wall;
-import com.marklynch.objects.WallWithCrack;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.MineCart;
+import com.marklynch.objects.inanimateobjects.Rail;
+import com.marklynch.objects.inanimateobjects.Wall;
+import com.marklynch.objects.inanimateobjects.WallWithCrack;
 
 public class TemplatesBuilding {
 

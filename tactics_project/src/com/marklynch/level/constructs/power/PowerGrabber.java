@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 import org.lwjgl.util.Point;
 
+import com.marklynch.actions.Action;
+import com.marklynch.actions.ActionTakeItems;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.PressurePlate;
-import com.marklynch.objects.PressurePlateRequiringSpecificItem;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.PressurePlate;
+import com.marklynch.objects.inanimateobjects.PressurePlateRequiringSpecificItem;
 import com.marklynch.utils.ResourceUtils;
 
 public class PowerGrabber extends Power {

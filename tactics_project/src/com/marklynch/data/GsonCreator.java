@@ -1,6 +1,8 @@
 package com.marklynch.data;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -38,8 +40,8 @@ import com.marklynch.level.constructs.effect.EffectHeal;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.constructs.enchantment.Enhancement;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.Texture;
 
 public class GsonCreator {
@@ -55,6 +57,34 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(Sound.class, serializerForSound);
 		gsonBuilder.registerTypeAdapter(AILine.class, serializerForAILine);
 		gsonBuilder.registerTypeAdapter(Enhancement.class, serializerForEnhancement);
+
+		// GameObjects //
+		// Reflections reflections = new Reflections("com.marklynch");
+		// Set<Class<? extends Object>> allClasses =
+		// reflections.getSubTypesOf(Object.class);
+		try {
+			ArrayList<Class<?>> actorClasses = PackageUtils.getClasses("com.marklynch.objects.actors");
+			ArrayList<Class<?>> inanimateObjectClasses = PackageUtils
+					.getClasses("com.marklynch.objects.inanimateobjects");
+			ArrayList<Class<?>> toolClasses = PackageUtils.getClasses("com.marklynch.objects.tools");
+			ArrayList<Class<?>> weaponClasses = PackageUtils.getClasses("com.marklynch.objects.weapons");
+			for (Class<?> clazz : actorClasses) {
+				System.out.println("actor class = " + clazz);
+			}
+			for (Class<?> clazz : inanimateObjectClasses) {
+				System.out.println("inanimateObject class = " + clazz);
+			}
+			for (Class<?> clazz : toolClasses) {
+				System.out.println("tool class = " + clazz);
+			}
+			for (Class<?> clazz : weaponClasses) {
+				System.out.println("weapon class = " + clazz);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		// Effects //
 		gsonBuilder.registerTypeAdapter(Effect.class, serializerForEffect);

@@ -8,7 +8,7 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.animation.secondary.AnimationBubbles;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class Fish extends WildAnimal {
 

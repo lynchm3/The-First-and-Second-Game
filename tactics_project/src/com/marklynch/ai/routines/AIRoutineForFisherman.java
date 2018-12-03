@@ -1,9 +1,9 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.HerbivoreWildAnimal;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class AIRoutineForFisherman extends AIRoutine {
 

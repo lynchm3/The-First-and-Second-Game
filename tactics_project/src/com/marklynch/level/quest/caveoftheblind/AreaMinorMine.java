@@ -15,11 +15,11 @@ import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Bed;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Wall;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
+import com.marklynch.objects.inanimateobjects.Bed;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.templates.Templates;
 

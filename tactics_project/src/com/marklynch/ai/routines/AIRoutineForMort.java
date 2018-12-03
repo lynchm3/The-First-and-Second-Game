@@ -1,6 +1,10 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionDropItems;
+import com.marklynch.actions.ActionLock;
+import com.marklynch.actions.ActionRing;
+import com.marklynch.actions.ActionTalk;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
@@ -8,10 +12,6 @@ import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.ActionDropItems;
-import com.marklynch.objects.actions.ActionLock;
-import com.marklynch.objects.actions.ActionRing;
-import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.tools.Bell;
 

@@ -1,10 +1,10 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
+import com.marklynch.actions.ActionStopHidingInside;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.objects.SmallHidingPlace;
-import com.marklynch.objects.actions.ActionStopHidingInside;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
 
 public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 

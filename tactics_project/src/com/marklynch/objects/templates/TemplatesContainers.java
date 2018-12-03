@@ -2,8 +2,8 @@ package com.marklynch.objects.templates;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Storage;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.utils.ResourceUtils;
 
 public class TemplatesContainers {
