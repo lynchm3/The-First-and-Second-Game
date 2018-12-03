@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.marklynch.Game;
 import com.marklynch.actions.ActionSpot;
+import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
@@ -12,7 +13,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.utils.Color;
 
-public class StructureRoom {
+public class StructureRoom implements Idable {
 	public Long id;
 	public String name;
 	public RoomPart[] roomParts;
@@ -116,5 +117,10 @@ public class StructureRoom {
 		// for (Square square : featureSquares) {
 		// square.seenByPlayer = true;
 		// }
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 }

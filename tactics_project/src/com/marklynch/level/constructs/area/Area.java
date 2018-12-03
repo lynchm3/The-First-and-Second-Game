@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.marklynch.Game;
 import com.marklynch.actions.ActionSpot;
+import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
@@ -15,7 +16,7 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class Area {
+public class Area implements Idable {
 
 	public String name;
 	public Texture image;
@@ -91,6 +92,11 @@ public class Area {
 				+ (Game.zoom * (squarePositionY2 - Game.windowHeight / 2 + Game.getDragYWithOffset()));
 		TextureUtils.drawTexture(image, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
 
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 
 }

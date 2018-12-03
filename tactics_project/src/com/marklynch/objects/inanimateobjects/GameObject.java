@@ -69,6 +69,7 @@ import com.marklynch.actions.ActionUsePower;
 import com.marklynch.actions.ActionViewInfo;
 import com.marklynch.actions.ActionableInInventory;
 import com.marklynch.actions.ActionableInWorld;
+import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Crime;
@@ -118,7 +119,8 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class GameObject implements ActionableInWorld, ActionableInInventory, Comparable, InventoryParent, DamageDealer {
+public class GameObject
+		implements Idable, ActionableInWorld, ActionableInInventory, Comparable, InventoryParent, DamageDealer {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
@@ -2565,5 +2567,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void crimeUpdate(Crime crime) {
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 }

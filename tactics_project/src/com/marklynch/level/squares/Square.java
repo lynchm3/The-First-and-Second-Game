@@ -27,6 +27,7 @@ import com.marklynch.actions.ActionThrowItem;
 import com.marklynch.actions.ActionViewInfo;
 import com.marklynch.actions.ActionWait;
 import com.marklynch.actions.ActionableInWorld;
+import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.area.Area;
@@ -64,7 +65,7 @@ import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 import com.marklynch.utils.Utils.Point;
 
-public class Square implements ActionableInWorld, InventoryParent, Comparable<Square> {
+public class Square implements Idable, ActionableInWorld, InventoryParent, Comparable<Square> {
 
 	// public static final ArrayList<Square> instances = new ArrayList<Square>();
 
@@ -1365,5 +1366,10 @@ public class Square implements ActionableInWorld, InventoryParent, Comparable<Sq
 				Level.squaresToSave.add(this);
 			}
 		}
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 }

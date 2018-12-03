@@ -3,10 +3,11 @@ package com.marklynch.level.constructs.bounds.structure;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.objects.actors.Actor;
 
-public class StructureSection {
+public class StructureSection implements Idable {
 
 	public String name;
 	public int gridX1, gridY1, gridX2, gridY2;
@@ -50,6 +51,11 @@ public class StructureSection {
 				}
 			}
 		}
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 
 }

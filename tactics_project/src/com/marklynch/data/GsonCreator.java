@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.marklynch.ai.routines.AIRoutine;
@@ -24,8 +25,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.SquareInventory;
-import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.utils.Texture;
 
@@ -34,7 +34,7 @@ public class GsonCreator {
 	public static Gson createGson() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(Texture.class, serializerForTexture);
-		gsonBuilder.registerTypeAdapter(Faction.class, serializerForFaction);
+		gsonBuilder.registerTypeAdapter(Faction.class, serializerForIdable);
 		gsonBuilder.registerTypeAdapter(Crime.class, serializerForCrime);
 		gsonBuilder.registerTypeAdapter(Investigation.class, serializerForInvestigation);
 		gsonBuilder.registerTypeAdapter(Sound.class, serializerForSound);
@@ -42,6 +42,13 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(Enhancement.class, serializerForEnhancement);
 		gsonBuilder.registerTypeAdapter(Inventory.class, serializerForInventory);
 		gsonBuilder.registerTypeAdapter(SquareInventory.class, serializerForInventory);
+		gsonBuilder.registerTypeAdapter(Square.class, serializerForIdable);
+		// gsonBuilder.registerTypeAdapter(Power.class, serializerForPower);
+		// gsonBuilder.registerTypeAdapter(SWITCH_TYPE.class, serializerForSWITCH_TYPE);
+		// gsonBuilder.registerTypeAdapter(Color.class, serializerForColor);
+		// gsonBuilder.registerTypeAdapter(GroupOfActors.class,
+		// serializerForGroupOfActors);
+		// gsonBuilder.registerTypeAdapter(Shift.class, serializerForShift);
 
 		// Add serializers for all GamObjects, Effects and aiRoutines
 		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>();
@@ -50,9 +57,9 @@ public class GsonCreator {
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.tools"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.weapons"));
 		for (Class<?> clazz : gameObjectClasses) {
-			gsonBuilder.registerTypeAdapter(clazz, serializerForGameObject);
+			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
 		}
-		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, serializerForGameObject);
+		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, serializerForIdable);
 
 		ArrayList<Class<?>> effectClasses = PackageUtils.getClasses("com.marklynch.level.constructs.effect");
 		for (Class<?> clazz : effectClasses) {
@@ -68,14 +75,33 @@ public class GsonCreator {
 		return gson;
 	}
 
-	static JsonSerializer<Faction> serializerForFaction = new JsonSerializer<Faction>() {
+	static JsonSerializer<Idable> serializerForIdable = new JsonSerializer<Idable>() {
 		@Override
-		public JsonElement serialize(Faction src, Type type, JsonSerializationContext context) {
-			JsonObject jsonObject = new JsonObject();
-			jsonObject.addProperty("id", src.id);
-			return jsonObject;
+		public JsonElement serialize(Idable src, Type type, JsonSerializationContext context) {
+			return new JsonPrimitive(src.getId());
 		}
 	};
+
+	// static JsonSerializer<Faction> serializerForFaction = new
+	// JsonSerializer<Faction>() {
+	// @Override
+	// public JsonElement serialize(Faction src, Type type, JsonSerializationContext
+	// context) {
+	// JsonObject jsonObject = new JsonObject();
+	// jsonObject.addProperty("id", src.id);
+	// return jsonObject;
+	// }
+	// };
+
+	// static JsonSerializer<Square> serializerForSquare = new
+	// JsonSerializer<Square>() {
+	// @Override
+	// public JsonElement serialize(Square src, Type type, JsonSerializationContext
+	// context) {
+	// JsonPrimitive jsonPrimitive = new JsonPrimitive(src.id);
+	// return jsonPrimitive;
+	// }
+	// };
 
 	static JsonSerializer<Effect> serializerForEffect = new JsonSerializer<Effect>() {
 		@Override
@@ -93,23 +119,27 @@ public class GsonCreator {
 		}
 	};
 
-	static JsonSerializer<GameObject> serializerForGameObject = new JsonSerializer<GameObject>() {
-		@Override
-		public JsonElement serialize(GameObject src, Type type, JsonSerializationContext context) {
-			JsonObject jsonObject = new JsonObject();
-			jsonObject.addProperty("id", src.id);
-			return jsonObject;
-		}
-	};
+	// static JsonSerializer<GameObject> serializerForGameObject = new
+	// JsonSerializer<GameObject>() {
+	// @Override
+	// public JsonElement serialize(GameObject src, Type type,
+	// JsonSerializationContext context) {
+	// JsonObject jsonObject = new JsonObject();
+	// jsonObject.addProperty("id", src.id);
+	// return jsonObject;
+	// }
+	// };
 
-	static JsonSerializer<Actor> serializerForActor = new JsonSerializer<Actor>() {
-		@Override
-		public JsonElement serialize(Actor src, Type type, JsonSerializationContext context) {
-			JsonObject jsonObject = new JsonObject();
-			jsonObject.addProperty("id", src.id);
-			return jsonObject;
-		}
-	};
+	// static JsonSerializer<Actor> serializerForActor = new JsonSerializer<Actor>()
+	// {
+	// @Override
+	// public JsonElement serialize(Actor src, Type type, JsonSerializationContext
+	// context) {
+	// JsonObject jsonObject = new JsonObject();
+	// jsonObject.addProperty("id", src.id);
+	// return jsonObject;
+	// }
+	// };
 
 	static JsonSerializer<Texture> serializerForTexture = new JsonSerializer<Texture>() {
 		@Override

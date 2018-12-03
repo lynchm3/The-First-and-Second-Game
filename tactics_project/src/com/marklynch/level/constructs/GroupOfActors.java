@@ -5,13 +5,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 
-public class GroupOfActors {
+public class GroupOfActors implements Idable {
 	public Long id;
 
 	public String name;
@@ -174,5 +175,10 @@ public class GroupOfActors {
 		}
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 }

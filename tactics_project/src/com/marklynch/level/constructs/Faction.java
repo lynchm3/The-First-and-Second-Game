@@ -5,11 +5,12 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.Texture;
 
-public class Faction {
+public class Faction implements Idable {
 
 	public long id;
 	public String name;
@@ -26,5 +27,10 @@ public class Faction {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 }

@@ -5,10 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.marklynch.Game;
+import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.objects.actors.Actor;
 
-public class Node implements Comparable<Node> {
+public class Node implements Comparable<Node>, Idable {
 
 	public long id;
 
@@ -94,6 +95,11 @@ public class Node implements Comparable<Node> {
 		if (!squares.contains(square)) {
 			squares.add(square);
 		}
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 
 	// public void calculateDistanceToNeighbours() {

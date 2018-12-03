@@ -251,7 +251,6 @@ public class Save {
 			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
 			for (Square square : Level.squaresToSave) {
 				preparedStatement.setLong(1, square.id);
-				System.out.println("square.inventory = " + square.inventory);
 				preparedStatement.setString(2, gson.toJson(square.inventory));
 				preparedStatement.setString(3, square.getFloorImageTexture().path);
 				preparedStatement.addBatch();
@@ -385,40 +384,41 @@ public class Save {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Texture) {
 						preparedStatement.setString(count, gson.toJson(value));
-						// Non-simple
 					} else if (value instanceof Inventory) {
 						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof SwitchListener) {
-						preparedStatement.setLong(count, ((SwitchListener) value).getId());
-					} else if (value instanceof SwitchListener[]) {
-						preparedStatement.setString(count,
-								getSwitchListenerArrayStringForInsertion((SwitchListener[]) value));
-					} else if (value instanceof Square) {
-						preparedStatement.setLong(count, ((Square) value).id);
-					} else if (value instanceof RequirementToMeet) {
+					} else if (value instanceof Effect[]) {
 						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof RequirementToMeet[]) {
+					} else if (value instanceof Enhancement) {
 						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Power) {
-						preparedStatement.setString(count, value.getClass().getSimpleName());
-					} else if (value instanceof Quest) {
-						preparedStatement.setLong(count, ((Quest) value).id);
-					} else if (value instanceof SWITCH_TYPE) {
-						preparedStatement.setString(count, value.toString());
 					} else if (value instanceof Crime) {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof AILine) {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Crime[]) {
 						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof RequirementToMeet) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof RequirementToMeet[]) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof AIRoutine) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Square) {
+						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof SwitchListener) {
+						preparedStatement.setLong(count, ((SwitchListener) value).getId());
+					} else if (value instanceof SwitchListener[]) {
+						preparedStatement.setString(count,
+								getSwitchListenerArrayStringForInsertion((SwitchListener[]) value));
+					} else if (value instanceof Power) {
+						preparedStatement.setString(count, value.getClass().getSimpleName());
+					} else if (value instanceof Quest) {
+						preparedStatement.setLong(count, ((Quest) value).id);
+					} else if (value instanceof SWITCH_TYPE) {
+						preparedStatement.setString(count, value.toString());
 					} else if (value instanceof GameObject[]) {
 						preparedStatement.setString(count, getGameObjectArrayStringForInsertion((GameObject[]) value));
 					} else if (value instanceof Square[]) {
 						preparedStatement.setString(count, getSquareArrayStringForInsertion((Square[]) value));
-					} else if (value instanceof Effect[]) {
-						preparedStatement.setString(count, gson.toJson(value));
-					} else if (value instanceof Enhancement) {
-						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Color) {
 						preparedStatement.setString(count, ((Color) value).generateSaveData());
 					} else if (value instanceof Node) {
@@ -435,8 +435,6 @@ public class Save {
 						preparedStatement.setLong(count, ((Faction) value).id);
 					} else if (value instanceof Direction) {
 						preparedStatement.setString(count, "" + value);
-					} else if (value instanceof AIRoutine) {
-						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof GameObject) {
 						preparedStatement.setLong(count, ((GameObject) value).id);
 					} else if (value instanceof HashMap<?, ?>) {
