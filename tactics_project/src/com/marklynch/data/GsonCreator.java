@@ -80,6 +80,12 @@ public class GsonCreator {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForPower);
 		}
 
+		// Quests
+		ArrayList<Class<?>> questClasses = PackageUtils.getClasses("com.marklynch.level.quest");
+		for (Class<?> clazz : questClasses) {
+			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
+		}
+
 		Gson gson = gsonBuilder.create();
 		return gson;
 	}

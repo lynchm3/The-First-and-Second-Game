@@ -1,4 +1,4 @@
-package com.marklynch.level.quest.smallgame;
+package com.marklynch.level.constructs.area;
 
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.GroupOfActors;

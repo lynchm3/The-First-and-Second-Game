@@ -3,19 +3,20 @@ package com.marklynch.level.quest;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.conversation.Conversation;
+import com.marklynch.level.constructs.conversation.ConversationPart;
 import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
-import com.marklynch.level.conversation.Conversation;
-import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Link;
 import com.marklynch.ui.popups.Notification;
 
-public class Quest {
+public class Quest implements Idable {
 
 	public long id;
 	public String name;
@@ -29,6 +30,10 @@ public class Quest {
 	public int turnUpdated;
 	public boolean updatedSinceLastViewed;
 	public ArrayList<Link> links;
+
+	public Quest() {
+		this.id = Level.generateNewId(this);
+	}
 
 	// Called my members of quest when they dont know what to do
 	public boolean update(Actor actor) {
@@ -151,6 +156,11 @@ public class Quest {
 		Game.level.addNotification(new Notification(new Object[] { "Quest ", this, " resolved!" },
 				Notification.NotificationType.QUEST_RESOLVED, this));
 		Game.level.player.addXP(15, square);
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 
 }

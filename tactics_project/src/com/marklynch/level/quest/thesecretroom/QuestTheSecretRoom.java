@@ -12,9 +12,10 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.conversation.Conversation;
+import com.marklynch.level.constructs.conversation.ConversationForKidnapper;
 import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
-import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
@@ -29,7 +30,7 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.TextUtils;
 
 public class QuestTheSecretRoom extends Quest {
-	Kidnapper kidnapper;
+	public Kidnapper kidnapper;
 
 	final String OBJECTIVE_FIND_OUT_WHAT_THE_WOMAN_WANTS = "Find out what the man wants";
 
@@ -41,8 +42,9 @@ public class QuestTheSecretRoom extends Quest {
 	// Maybe the child is a bit slow
 	// Just insinuate what was happening to the kid, obvs dont say in explicit terms
 
-	JournalLog journalLogMetKidnapper = new JournalLog("I've met a man in town who would like me to help him out.");
-	JournalLog journalLogTheFavour = new JournalLog(
+	public JournalLog journalLogMetKidnapper = new JournalLog(
+			"I've met a man in town who would like me to help him out.");
+	public JournalLog journalLogTheFavour = new JournalLog(
 			"He wants me to fetch his child, who's out playing near the pond to the east of town.");
 	// How do I reword this
 	ConversationForKidnapper conversationForKidnapper;

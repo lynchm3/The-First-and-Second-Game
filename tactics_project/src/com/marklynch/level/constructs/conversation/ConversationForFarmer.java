@@ -1,8 +1,6 @@
-package com.marklynch.level.quest.thepigs;
+package com.marklynch.level.constructs.conversation;
 
-import com.marklynch.level.conversation.Conversation;
-import com.marklynch.level.conversation.ConversationPart;
-import com.marklynch.level.conversation.ConversationResponse;
+import com.marklynch.level.quest.thepigs.QuestThePigs;
 import com.marklynch.objects.actors.Human;
 
 public class ConversationForFarmer extends Conversation {

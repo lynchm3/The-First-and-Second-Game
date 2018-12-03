@@ -6,30 +6,32 @@ import com.marklynch.Game;
 import com.marklynch.actions.ActionTalk;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.GroupOfActors;
+import com.marklynch.level.constructs.area.TownForestBuilder;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.conversation.Conversation;
+import com.marklynch.level.constructs.conversation.ConversationsSmallGame;
 import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
-import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
+import com.marklynch.objects.actors.Guard;
+import com.marklynch.objects.actors.Human;
+import com.marklynch.objects.actors.Thief;
 import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Wall;
-import com.marklynch.objects.actors.Guard;
-import com.marklynch.objects.actors.Human;
-import com.marklynch.objects.actors.Thief;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.utils.TextUtils;
@@ -141,18 +143,18 @@ public class QuestSmallGame extends Quest {
 	boolean huntersReleasedFromQuest;
 
 	// Actors
-	GroupOfActors hunterPack;
-	Actor rangerBill;
-	GroupOfActors wolfPack;
-	Actor superWolf;
+	public GroupOfActors hunterPack;
+	public Actor rangerBill;
+	public GroupOfActors wolfPack;
+	public Actor superWolf;
 	Actor cub;
 
 	// GameObjects
-	ArrayList<GameObject> weaponsBehindLodge;
+	public ArrayList<GameObject> weaponsBehindLodge;
 
 	// Squares
-	Square squareBehindLodge;
-	Square huntPlanningArea;
+	public Square squareBehindLodge;
+	public Square huntPlanningArea;
 	public Actor hunterBrent;
 
 	// Conversations
@@ -168,39 +170,42 @@ public class QuestSmallGame extends Quest {
 	public Objective objectiveEnvironmentalist;
 
 	// journalLog strings
-	JournalLog journalLogSeenHunters = new JournalLog("I've spotted some hunters planning a hunt");
-	JournalLog journalLogSeenWolves = new JournalLog("I've spotted a pack of wolves.");
-	JournalLog journalLogAgreedToJoinHunters = new JournalLog(
+	public JournalLog journalLogSeenHunters = new JournalLog("I've spotted some hunters planning a hunt");
+	public JournalLog journalLogSeenWolves = new JournalLog("I've spotted a pack of wolves.");
+	public JournalLog journalLogAgreedToJoinHunters = new JournalLog(
 			"I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge");
-	JournalLog journalLogSetOffWithHunters = new JournalLog(
+	public JournalLog journalLogSetOffWithHunters = new JournalLog(
 			"I've set off with the hunters towards the creature's lair");
-	JournalLog journalLogRangerWasSpying = new JournalLog("I met a strange figure spying on the hunters of Town Lodge");
-	JournalLog journalLogSaveTheWolfVariant1 = new JournalLog(
+	public JournalLog journalLogRangerWasSpying = new JournalLog(
+			"I met a strange figure spying on the hunters of Town Lodge");
+	public JournalLog journalLogSaveTheWolfVariant1 = new JournalLog(
 			"Behind the hunting lodge, where the weapons were meant to be, stood a strange figure. He told me the the hunters' mark is an intelligent being should be spared.");
-	JournalLog journalLogSaveTheWolfVariant2 = new JournalLog(
+	public JournalLog journalLogSaveTheWolfVariant2 = new JournalLog(
 			"Behind the hunting lodge, where the weapons were meant to be, stood the strange figure from before. He told me the the hunters' mark is an intelligent being and should be spared.");
 
-	JournalLog journalLogRetrievedWeapons = new JournalLog("I've retrieved the weapons from behind the hunter's lodge");
-	JournalLog journalLogReadHuntPlan1 = new JournalLog("In the staging area for a hunt I found the plan for the hunt");
-	JournalLog journalLogReadHuntPlan2 = new JournalLog(
+	public JournalLog journalLogRetrievedWeapons = new JournalLog(
+			"I've retrieved the weapons from behind the hunter's lodge");
+	public JournalLog journalLogReadHuntPlan1 = new JournalLog(
+			"In the staging area for a hunt I found the plan for the hunt");
+	public JournalLog journalLogReadHuntPlan2 = new JournalLog(
 			"In the staging area for the hunt I found the plan for the hunt");
 
-	JournalLog journalLogTalkedToWolves = new JournalLog(
+	public JournalLog journalLogTalkedToWolves = new JournalLog(
 			"A wolf, talked to me. He told me \"They plot\". He showed me hunters in the town nearby planning a hunt.");
 
-	JournalLog journalLogAttackedHunters = new JournalLog("I attacked the hunters");
-	JournalLog journalLogAttackedWolves = new JournalLog("I attacked the wolves");
-	JournalLog journalLogHuntersEngagedWolves = new JournalLog("The hunters have engaged the wolves");
-	JournalLog journalLogHuntersDead = new JournalLog("All the hunters are dead");
-	JournalLog journalLogWolvesDead = new JournalLog("All the wolves are dead");
+	public JournalLog journalLogAttackedHunters = new JournalLog("I attacked the hunters");
+	public JournalLog journalLogAttackedWolves = new JournalLog("I attacked the wolves");
+	public JournalLog journalLogHuntersEngagedWolves = new JournalLog("The hunters have engaged the wolves");
+	public JournalLog journalLogHuntersDead = new JournalLog("All the hunters are dead");
+	public JournalLog journalLogWolvesDead = new JournalLog("All the wolves are dead");
 
 	// Resolutions
-	JournalLog journalLogToldToFuckOffByHunters = new JournalLog(
+	public JournalLog journalLogToldToFuckOffByHunters = new JournalLog(
 			"I didn't help the hunters and they're giving me nothing");
-	JournalLog journalLogRewardedByHunters = new JournalLog("The hunters rewarded me for helping them");
-	JournalLog journalLogIgnoredByWolves = new JournalLog("I didn't help the wolves and they are ignoring me");
-	JournalLog journalLogThankedByWolves = new JournalLog("The wolves thanked me for helping them");
-	JournalLog journalLogAllDead = new JournalLog("The hunters and wolves are all dead");
+	public JournalLog journalLogRewardedByHunters = new JournalLog("The hunters rewarded me for helping them");
+	public JournalLog journalLogIgnoredByWolves = new JournalLog("I didn't help the wolves and they are ignoring me");
+	public JournalLog journalLogThankedByWolves = new JournalLog("The wolves thanked me for helping them");
+	public JournalLog journalLogAllDead = new JournalLog("The hunters and wolves are all dead");
 
 	// Flags
 

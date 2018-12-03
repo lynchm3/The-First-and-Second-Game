@@ -3,8 +3,8 @@ package com.marklynch.actions;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.conversation.Conversation;
-import com.marklynch.level.conversation.ConversationResponseDisplay;
+import com.marklynch.level.constructs.conversation.Conversation;
+import com.marklynch.level.constructs.conversation.ConversationResponseDisplay;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 

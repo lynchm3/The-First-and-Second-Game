@@ -1,8 +1,6 @@
-package com.marklynch.level.quest.thesecretroom;
+package com.marklynch.level.constructs.conversation;
 
-import com.marklynch.level.conversation.Conversation;
-import com.marklynch.level.conversation.ConversationPart;
-import com.marklynch.level.conversation.ConversationResponse;
+import com.marklynch.level.quest.thesecretroom.QuestTheSecretRoom;
 
 public class ConversationForKidnapper extends Conversation {
 

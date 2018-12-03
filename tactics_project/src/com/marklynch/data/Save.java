@@ -406,6 +406,8 @@ public class Save {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Power) {
 						preparedStatement.setString(count, gson.toJson(value));
+					} else if (value instanceof Quest) {
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof SwitchListener) {
 						preparedStatement.setLong(count, ((SwitchListener) value).getId());
 					} else if (value instanceof SwitchListener[]) {

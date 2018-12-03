@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.conversation.ConversationPart;
+import com.marklynch.level.constructs.conversation.ConversationPart;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;

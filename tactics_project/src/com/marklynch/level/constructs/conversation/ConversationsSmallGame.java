@@ -1,18 +1,16 @@
-package com.marklynch.level.quest.smallgame;
+package com.marklynch.level.constructs.conversation;
 
 import com.marklynch.Game;
 import com.marklynch.actions.ActionGiveItems;
 import com.marklynch.level.constructs.journal.QuestList;
-import com.marklynch.level.conversation.Conversation;
-import com.marklynch.level.conversation.ConversationPart;
-import com.marklynch.level.conversation.ConversationResponse;
-import com.marklynch.level.conversation.LeaveConversationListener;
+import com.marklynch.level.quest.smallgame.QuestSmallGame;
+//import com.marklynch.level.quest.smallgame.QuestSmallGame;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class ConversationsSmallGame {
 
-	static QuestSmallGame quest;
+	public static QuestSmallGame quest;
 
 	// Conversations for bill
 	public static Conversation conversationRangerImNotSpying;
@@ -93,9 +91,8 @@ public class ConversationsSmallGame {
 
 	public static void setUpConversationHunterOpening() {
 
-		ConversationPart conversationPartTheresEquipment = new ConversationPart(
-				new Object[] {
-						"There's should be some spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready." },
+		ConversationPart conversationPartTheresEquipment = new ConversationPart(new Object[] {
+				"There's should be some spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready." },
 				new ConversationResponse[] {}, quest.hunterPack.getLeader(), quest);
 
 		ConversationPart conversationPartSuitYourself = new ConversationPart(new Object[] { "Suit yourself." },
@@ -155,9 +152,8 @@ public class ConversationsSmallGame {
 		// feelings
 		// Anime style
 		// try it out
-		ConversationPart conversationPartImNotSpying = new ConversationPart(
-				new Object[] { "What? NO! I'm not spying! You're spying!", quest.superWolf, quest.hunterBrent,
-						quest.rangerBill },
+		ConversationPart conversationPartImNotSpying = new ConversationPart(new Object[] {
+				"What? NO! I'm not spying! You're spying!", quest.superWolf, quest.hunterBrent, quest.rangerBill },
 				new ConversationResponse[] {}, quest.rangerBill, quest);
 
 		conversationPartImNotSpying.leaveConversationListener = new LeaveConversationListener() {
@@ -172,15 +168,14 @@ public class ConversationsSmallGame {
 
 		};
 
-		conversationRangerImNotSpying = new Conversation(conversationPartImNotSpying,
-				quest.hunterPack.getLeader(), true);
+		conversationRangerImNotSpying = new Conversation(conversationPartImNotSpying, quest.hunterPack.getLeader(),
+				true);
 	}
 
 	private static void setUpConversationSaveTheWolf() {
 
-		ConversationPart conversationPartSaveTheWolf = new ConversationPart(
-				new Object[] {
-						"You can't take part in this. She's not just a normal wolf, she's an intelligent being. Smarter than those knuckleheads that want to mount her on a wall anyway." },
+		ConversationPart conversationPartSaveTheWolf = new ConversationPart(new Object[] {
+				"You can't take part in this. She's not just a normal wolf, she's an intelligent being. Smarter than those knuckleheads that want to mount her on a wall anyway." },
 				new ConversationResponse[] {}, quest.rangerBill, quest);
 		// Would like to use the word sentient or something for the above
 
@@ -203,16 +198,15 @@ public class ConversationsSmallGame {
 			}
 
 		};
-		conversationRangerSaveTheWolf = new Conversation(conversationPartSaveTheWolf,
-				quest.hunterPack.getLeader(), true);
+		conversationRangerSaveTheWolf = new Conversation(conversationPartSaveTheWolf, quest.hunterPack.getLeader(),
+				true);
 
 	}
 
 	public static void setUpConversationReady() {
 
-		ConversationPart conversationAlrightLetsGo = new ConversationPart(
-				new Object[] {
-						"Alright! The cave is to the east, past the forest, at the entrance to a now defunct mining operation." },
+		ConversationPart conversationAlrightLetsGo = new ConversationPart(new Object[] {
+				"Alright! The cave is to the east, past the forest, at the entrance to a now defunct mining operation." },
 				new ConversationResponse[] {}, quest.hunterPack.getLeader(), quest, QuestList.questCaveOfTheBlind);
 
 		ConversationPart conversationPartWellHurryOn = new ConversationPart(new Object[] { "Well hurry on!" },

@@ -1,4 +1,4 @@
-package com.marklynch.level.conversation;
+package com.marklynch.level.constructs.conversation;
 
 import java.util.ArrayList;
 
