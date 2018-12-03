@@ -20,6 +20,7 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Kidnapper;
 import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.RemoteDoor;

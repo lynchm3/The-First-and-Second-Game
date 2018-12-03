@@ -1,14 +1,14 @@
 package com.marklynch.objects.templates;
 
-import com.marklynch.level.quest.caveoftheblind.Blind;
-import com.marklynch.level.quest.caveoftheblind.Mort;
-import com.marklynch.level.quest.thesecretroom.Kidnapper;
+import com.marklynch.objects.actors.Blind;
 import com.marklynch.objects.actors.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.actors.Doctor;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.actors.Guard;
 import com.marklynch.objects.actors.HerbivoreWildAnimal;
 import com.marklynch.objects.actors.Human;
+import com.marklynch.objects.actors.Kidnapper;
+import com.marklynch.objects.actors.Mort;
 import com.marklynch.objects.actors.Pig;
 import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.actors.RockGolem;

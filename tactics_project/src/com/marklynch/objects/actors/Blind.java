@@ -1,4 +1,4 @@
-package com.marklynch.level.quest.caveoftheblind;
+package com.marklynch.objects.actors;
 
 import java.util.ArrayList;
 
@@ -9,8 +9,6 @@ import com.marklynch.ai.routines.AIRoutineForBlind;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.actors.Monster;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.Bell;

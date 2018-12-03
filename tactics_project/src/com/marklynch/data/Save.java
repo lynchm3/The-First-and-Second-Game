@@ -44,6 +44,15 @@ import com.marklynch.objects.actors.Doctor;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.actors.Guard;
 import com.marklynch.objects.actors.Guard.Shift;
+import com.marklynch.objects.actors.HerbivoreWildAnimal;
+import com.marklynch.objects.actors.Human;
+import com.marklynch.objects.actors.Monster;
+import com.marklynch.objects.actors.Pig;
+import com.marklynch.objects.actors.Player;
+import com.marklynch.objects.actors.Thief;
+import com.marklynch.objects.actors.TinyNeutralWildAnimal;
+import com.marklynch.objects.actors.Trader;
+import com.marklynch.objects.actors.WildAnimal;
 import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.Carcass;
 import com.marklynch.objects.inanimateobjects.Corpse;
@@ -79,6 +88,7 @@ import com.marklynch.objects.inanimateobjects.Stampable;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Stump;
 import com.marklynch.objects.inanimateobjects.Switch;
+import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.inanimateobjects.VoidHole;
@@ -88,16 +98,6 @@ import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.inanimateobjects.Window;
-import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
-import com.marklynch.objects.actors.HerbivoreWildAnimal;
-import com.marklynch.objects.actors.Human;
-import com.marklynch.objects.actors.Monster;
-import com.marklynch.objects.actors.Pig;
-import com.marklynch.objects.actors.Player;
-import com.marklynch.objects.actors.Thief;
-import com.marklynch.objects.actors.TinyNeutralWildAnimal;
-import com.marklynch.objects.actors.Trader;
-import com.marklynch.objects.actors.WildAnimal;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -251,7 +251,8 @@ public class Save {
 			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
 			for (Square square : Level.squaresToSave) {
 				preparedStatement.setLong(1, square.id);
-				preparedStatement.setString(2, square.inventory.getObjectIdListForSaving());
+				System.out.println("square.inventory = " + square.inventory);
+				preparedStatement.setString(2, gson.toJson(square.inventory));
 				preparedStatement.setString(3, square.getFloorImageTexture().path);
 				preparedStatement.addBatch();
 			}
@@ -383,10 +384,10 @@ public class Save {
 					} else if (value instanceof Sound[]) {
 						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof Texture) {
-						preparedStatement.setString(count, ((Texture) value).path);
+						preparedStatement.setString(count, gson.toJson(value));
 						// Non-simple
 					} else if (value instanceof Inventory) {
-						preparedStatement.setString(count, ((Inventory) value).getObjectIdListForSaving());
+						preparedStatement.setString(count, gson.toJson(value));
 					} else if (value instanceof SwitchListener) {
 						preparedStatement.setLong(count, ((SwitchListener) value).getId());
 					} else if (value instanceof SwitchListener[]) {

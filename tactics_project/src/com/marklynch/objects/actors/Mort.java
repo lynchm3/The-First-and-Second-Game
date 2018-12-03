@@ -1,19 +1,19 @@
-package com.marklynch.level.quest.thesecretroom;
+package com.marklynch.objects.actors;
 
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.ai.routines.AIRoutineForKidnapper;
+import com.marklynch.ai.routines.AIRoutineForMort;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.Bell;
 
-public class Kidnapper extends Human {
+public class Mort extends Human {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
@@ -25,13 +25,13 @@ public class Kidnapper extends Human {
 	public GameObject mortsMeatChunk;
 	public Bell mortsBell;
 	public boolean performingFeedingDemo = false;
-	public QuestTheSecretRoom questTheSecretRoom;
+	public QuestCaveOfTheBlind questCaveOfTheBlind;
 	public Square mortsRoomDoorway;
 	public Square mortsVaultDoorway;
 
-	public Kidnapper() {
+	public Mort() {
 		super();
-		aiRoutine = new AIRoutineForKidnapper(this);
+		aiRoutine = new AIRoutineForMort(this);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class Kidnapper extends Human {
 	@Override
 	public void postLoad1() {
 		super.postLoad1();
-		aiRoutine = new AIRoutineForKidnapper(this);
+		aiRoutine = new AIRoutineForMort(this);
 	}
 
 	@Override
@@ -51,9 +51,9 @@ public class Kidnapper extends Human {
 		super.postLoad2();
 	}
 
-	public Kidnapper makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
-			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
-		Kidnapper actor = new Kidnapper();
+	public Mort makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
+			GameObject[] mightHaves, Area area) {
+		Mort actor = new Mort();
 		setInstances(actor);
 		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
 

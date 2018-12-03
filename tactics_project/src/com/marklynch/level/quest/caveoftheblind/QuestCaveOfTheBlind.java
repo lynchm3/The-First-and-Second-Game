@@ -18,6 +18,8 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Blind;
+import com.marklynch.objects.actors.Mort;
 import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.objects.inanimateobjects.Corpse;
 import com.marklynch.objects.inanimateobjects.Door;

@@ -22,8 +22,11 @@ import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.enchantment.Enhancement;
+import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.utils.Texture;
 
 public class GsonCreator {
@@ -37,6 +40,8 @@ public class GsonCreator {
 		gsonBuilder.registerTypeAdapter(Sound.class, serializerForSound);
 		gsonBuilder.registerTypeAdapter(AILine.class, serializerForAILine);
 		gsonBuilder.registerTypeAdapter(Enhancement.class, serializerForEnhancement);
+		gsonBuilder.registerTypeAdapter(Inventory.class, serializerForInventory);
+		gsonBuilder.registerTypeAdapter(SquareInventory.class, serializerForInventory);
 
 		// Add serializers for all GamObjects, Effects and aiRoutines
 		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>();
@@ -47,6 +52,7 @@ public class GsonCreator {
 		for (Class<?> clazz : gameObjectClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForGameObject);
 		}
+		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, serializerForGameObject);
 
 		ArrayList<Class<?>> effectClasses = PackageUtils.getClasses("com.marklynch.level.constructs.effect");
 		for (Class<?> clazz : effectClasses) {
@@ -252,6 +258,15 @@ public class GsonCreator {
 			jsonObject.addProperty("effect", Save.gson.toJson(src.effect));
 			jsonObject.addProperty("templateId", src.templateId);
 			jsonObject.addProperty("type", "" + src.type);
+			return jsonObject;
+		}
+	};
+
+	static JsonSerializer<Inventory> serializerForInventory = new JsonSerializer<Inventory>() {
+		@Override
+		public JsonElement serialize(Inventory src, Type type, JsonSerializationContext context) {
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("gameObjects", Save.gson.toJson(src.gameObjects));
 			return jsonObject;
 		}
 	};
