@@ -18,6 +18,9 @@ public class Faction implements Idable {
 	public ArrayList<Actor> actors = new ArrayList<Actor>();
 	public Texture imageTexture = null;
 
+	public Faction() {
+	}
+
 	public Faction(String name, String imagePath) {
 		id = Level.generateNewId(this);
 		this.name = name;

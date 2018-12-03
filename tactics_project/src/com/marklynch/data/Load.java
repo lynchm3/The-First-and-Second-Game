@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
 import com.marklynch.actions.Action;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.GroupOfActors;
@@ -22,33 +23,92 @@ import com.marklynch.utils.Texture;
 
 public class Load {
 
+	public static HashMap<Class<?>, ResultSet> resultSetsWithJustIds = new HashMap<Class<?>, ResultSet>();
 	public static HashMap<Class<?>, ResultSet> resultSets = new HashMap<Class<?>, ResultSet>();
 	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
 
+	public static Gson loadDeserializerGson;
+
+	static Connection conn;
+
 	public static void load() {
 		long loadStartTime = System.currentTimeMillis();
-		// System.out.println("Starting load @ " + loadStartTime);
 
-		for (Class<?> classToLoad : Save.classesToSave) {
-			resultSets.put(classToLoad, getResultSet(GameObject.class));
-			fieldsForEachClass.put(classToLoad, Save.getFields(GameObject.class));
-			load1(classToLoad);
-		}
-		for (Class<?> classToSave : Save.classesToSave) {
-			load2(classToSave);
+		try {
+			conn = DriverManager.getConnection(Save.dbConnString);
+
+			if (loadDeserializerGson == null)
+				loadDeserializerGson = loadDeserializerCreatore.createLoadDeserializerGson();
+
+			// Squares
+			fieldsForEachClass.put(Square.class, Save.getFields(Square.class));
+			System.out.println("fieldsForEachClass.get(Square.class)  = " + fieldsForEachClass.get(Square.class));
+			resultSetsWithJustIds.put(Square.class, getResultSetWithJustId(Square.class));
+			resultSets.put(Square.class, getResultSet(Square.class));
+			System.out.println("resultSets.get(Square.class)  = " + resultSets.get(Square.class));
+			load1(Square.class);
+
+			// Factions
+			// fieldsForEachClass.put(Faction.class, Save.getFields(Faction.class));
+			// resultSetsWithJustIds.put(Faction.class,
+			// getResultSetWithJustId(Faction.class));
+			// resultSets.put(Faction.class, getResultSet(Faction.class));
+			// load1(Faction.class);
+
+			// GameObjects
+			// for (Class<?> classToLoad : Save.classesToSave) {
+			// fieldsForEachClass.put(classToLoad, Save.getFields(classToLoad));
+			// resultSetsWithJustIds.put(classToLoad.class,
+			// getResultSetWithJustId(classToLoad.class));
+			// resultSets.put(classToLoad, getResultSet(classToLoad));
+			// load1(classToLoad);
+			// }
+
+			load2(Square.class);
+			// load2(Faction.class);
+			// Gameobject
+			// for (Class<?> classToLoad : Save.classesToSave) {
+			// load2(classToLoad);
+			// }
+
+			Level.player = (Player) Player.instances.get(0);
+
+			if (conn != null)
+				conn.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		Level.player = (Player) Player.instances.get(0);
 		long loadEndTime = System.currentTimeMillis();
-		// System.out.println("Ending load @ " + loadEndTime);
 		System.out.println("Total load time = " + (loadEndTime - loadStartTime));
+	}
+
+	private static ResultSet getResultSetWithJustId(Class<?> clazz) {
+
+		System.out.println("getResultSet - " + clazz.getSimpleName());
+
+		if (fieldsForEachClass.get(clazz).size() < 2)
+			return null;
+
+		try {
+			Statement statement = conn.createStatement();
+			ResultSet resultSet = statement.executeQuery("select id from " + clazz.getSimpleName() + ";");
+			return resultSet;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private static ResultSet getResultSet(Class<?> clazz) {
 
+		System.out.println("getResultSet - " + clazz.getSimpleName());
+
+		if (fieldsForEachClass.get(clazz).size() < 2)
+			return null;
+
 		try {
-			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection(Save.dbConn);
 			Statement statement = conn.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from " + clazz.getSimpleName() + ";");
 
@@ -61,17 +121,20 @@ public class Load {
 
 	private static void load1(Class<?> clazz) {
 
-		try {
-			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
+		System.out.println("load1 - " + clazz.getSimpleName());
 
-			ResultSet resultSet = resultSets.get(clazz);
-			ArrayList<Field> fields = fieldsForEachClass.get(clazz);
+		try {
+
+			ResultSet resultSet = resultSetsWithJustIds.get(clazz);
+
+			if (resultSet == null)
+				return;
 
 			while (resultSet.next()) {
 
 				Long objectToLoadId = resultSet.getLong("id");
 				Object objectToLoad = Level.ids.get(objectToLoadId);
+				System.out.println("objectToLoad = " + objectToLoad);
 				if (objectToLoad == null) {
 					Level.ids.put(objectToLoadId, objectToLoad);
 					objectToLoad = clazz.getDeclaredConstructor().newInstance();
@@ -81,20 +144,49 @@ public class Load {
 						if (instances != null)
 							instances.add(objectToLoad);
 					} catch (NoSuchFieldException e) {
-
+						e.printStackTrace();
 					}
 				}
+			}
+
+			resultSet.close();
+
+		} catch (Exception e) {
+			System.err.println("load1 error");
+			e.printStackTrace();
+		}
+
+	}
+
+	private static void load2(Class<?> clazz) {
+
+		System.out.println("load2 - " + clazz.getSimpleName());
+
+		ResultSet resultSet = resultSets.get(clazz);
+		if (resultSet == null)
+			return;
+
+		try {
+
+			ArrayList<Field> fields = fieldsForEachClass.get(clazz);
+			System.out.println("fields.size() = " + fields.size());
+
+			while (resultSet.next()) {
+
+				Long objectToLoadId = resultSet.getLong("id");
+				Object objectToLoad = Level.ids.get(objectToLoadId);
+				System.out.println("objectToLoad = " + objectToLoad);
 
 				int count = 1;
 				for (Field field : fields) {
 
+					System.out.println("field = " + field);
+
 					// Object value = field.get(objectToLoad);
 					Class<?> type = field.getType();
-					// rs.getC
+					System.out.println("type = " + type);
 
-					// System.out.println("Adding " + field.getName() + " @ " + count);
-
-					// Phase 1 (primitives, textures...)
+					// Non-primitives
 					if (type.isAssignableFrom(Boolean.class)) {
 						field.set(objectToLoad, resultSet.getBoolean(count));
 					} else if (type.isAssignableFrom(Long.class)) {
@@ -107,45 +199,12 @@ public class Load {
 						field.set(objectToLoad, resultSet.getFloat(count));
 					} else if (type.isAssignableFrom(Texture.class)) {
 						String texturePath = resultSet.getString(count);
+						System.out.println("texturePath = " + texturePath);
+						Texture texture = ResourceUtils.getGlobalImage(texturePath, true);
+						System.out.println("texture = " + texture);
 						field.set(objectToLoad, ResourceUtils.getGlobalImage(texturePath, true));
-					}
-
-					count++;
-				}
-			}
-
-			resultSet.close();
-			conn.close();
-
-		} catch (Exception e) {
-			System.err.println("load1 error");
-			e.printStackTrace();
-		}
-
-	}
-
-	private static void load2(Class<?> clazz) {
-
-		try {
-			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
-
-			ResultSet resultSet = resultSets.get(clazz);
-			ArrayList<Field> fields = fieldsForEachClass.get(clazz);
-
-			while (resultSet.next()) {
-
-				Long objectToLoadId = resultSet.getLong("id");
-				Object objectToLoad = Level.ids.get(objectToLoadId);
-
-				int count = 1;
-				for (Field field : fields) {
-
-					// Object value = field.get(objectToLoad);
-					Class<?> type = field.getType();
-
-					// Non-primitives
-					if (type.isAssignableFrom(SquareInventory.class)) {
+						System.out.println("value = " + field.get(objectToLoad));
+					} else if (type.isAssignableFrom(SquareInventory.class)) {
 						// TODO
 					} else if (type.isAssignableFrom(Square.class)) {
 						Long squareId = resultSet.getLong(count);
@@ -198,7 +257,6 @@ public class Load {
 			}
 
 			resultSet.close();
-			conn.close();
 
 		} catch (
 

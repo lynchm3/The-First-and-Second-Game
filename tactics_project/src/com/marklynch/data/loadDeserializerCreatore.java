@@ -9,32 +9,20 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
-import com.marklynch.level.constructs.Investigation;
-import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.area.Area;
-import com.marklynch.level.constructs.bounds.structure.StructureSection;
-import com.marklynch.level.constructs.enchantment.Enhancement;
-import com.marklynch.level.constructs.inventory.Inventory;
-import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.inanimateobjects.Seesaw;
-import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
-public class GsonParser {
+public class loadDeserializerCreatore {
 
-	public static Gson createGson() {
+	public static Gson createLoadDeserializerGson() {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(Texture.class, deserializerForTexture);
@@ -44,18 +32,23 @@ public class GsonParser {
 		gsonBuilder.registerTypeAdapter(Square.class, deserializerForIdable);
 		gsonBuilder.registerTypeAdapter(Node.class, deserializerForIdable);
 		gsonBuilder.registerTypeAdapter(Area.class, deserializerForIdable);
-		gsonBuilder.registerTypeAdapter(Crime.class, deserializerForCrime);
-		gsonBuilder.registerTypeAdapter(Investigation.class, deserializerForInvestigation);
-		gsonBuilder.registerTypeAdapter(Sound.class, deserializerForSound);
-		gsonBuilder.registerTypeAdapter(AILine.class, deserializerForAILine);
-		gsonBuilder.registerTypeAdapter(Enhancement.class, deserializerForEnhancement);
-		gsonBuilder.registerTypeAdapter(Inventory.class, deserializerForInventory);
-		gsonBuilder.registerTypeAdapter(SquareInventory.class, deserializerForInventory);
-		gsonBuilder.registerTypeAdapter(SWITCH_TYPE.class, deserializerForSWITCH_TYPE);
-		gsonBuilder.registerTypeAdapter(Color.class, deserializerForColor);
-		gsonBuilder.registerTypeAdapter(StructureSection.class, deserializerForIdable);
-		gsonBuilder.registerTypeAdapter(Direction.class, deserializerForDirection);
-		gsonBuilder.registerTypeAdapter(Stat.class, deserializerForStat);
+		// gsonBuilder.registerTypeAdapter(Crime.class, deserializerForCrime);
+		// gsonBuilder.registerTypeAdapter(Investigation.class,
+		// deserializerForInvestigation);
+		// gsonBuilder.registerTypeAdapter(Sound.class, deserializerForSound);
+		// gsonBuilder.registerTypeAdapter(AILine.class, deserializerForAILine);
+		// gsonBuilder.registerTypeAdapter(Enhancement.class,
+		// deserializerForEnhancement);
+		// gsonBuilder.registerTypeAdapter(Inventory.class, deserializerForInventory);
+		// gsonBuilder.registerTypeAdapter(SquareInventory.class,
+		// deserializerForInventory);
+		// gsonBuilder.registerTypeAdapter(SWITCH_TYPE.class,
+		// deserializerForSWITCH_TYPE);
+		// gsonBuilder.registerTypeAdapter(Color.class, deserializerForColor);
+		// gsonBuilder.registerTypeAdapter(StructureSection.class,
+		// deserializerForIdable);
+		// gsonBuilder.registerTypeAdapter(Direction.class, deserializerForDirection);
+		// gsonBuilder.registerTypeAdapter(Stat.class, deserializerForStat);
 
 		// Add deserializers for all GamObjects, Effects and aiRoutines
 		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>();
@@ -68,23 +61,26 @@ public class GsonParser {
 		}
 		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, deserializerForIdable);
 
-		// Effects
-		ArrayList<Class<?>> effectClasses = PackageUtils.getClasses("com.marklynch.level.constructs.effect");
-		for (Class<?> clazz : effectClasses) {
-			gsonBuilder.registerTypeAdapter(clazz, deserializerForEffect);
-		}
-
-		// AI Routines
-		ArrayList<Class<?>> aiRoutineClasses = PackageUtils.getClasses("com.marklynch.ai.routines");
-		for (Class<?> clazz : aiRoutineClasses) {
-			gsonBuilder.registerTypeAdapter(clazz, deserializerForAIRoutine);
-		}
-
-		// Power
-		ArrayList<Class<?>> powerClasses = PackageUtils.getClasses("com.marklynch.level.constructs.power");
-		for (Class<?> clazz : powerClasses) {
-			gsonBuilder.registerTypeAdapter(clazz, deserializerForPower);
-		}
+		// // Effects
+		// ArrayList<Class<?>> effectClasses =
+		// PackageUtils.getClasses("com.marklynch.level.constructs.effect");
+		// for (Class<?> clazz : effectClasses) {
+		// gsonBuilder.registerTypeAdapter(clazz, deserializerForEffect);
+		// }
+		//
+		// // AI Routines
+		// ArrayList<Class<?>> aiRoutineClasses =
+		// PackageUtils.getClasses("com.marklynch.ai.routines");
+		// for (Class<?> clazz : aiRoutineClasses) {
+		// gsonBuilder.registerTypeAdapter(clazz, deserializerForAIRoutine);
+		// }
+		//
+		// // Power
+		// ArrayList<Class<?>> powerClasses =
+		// PackageUtils.getClasses("com.marklynch.level.constructs.power");
+		// for (Class<?> clazz : powerClasses) {
+		// gsonBuilder.registerTypeAdapter(clazz, deserializerForPower);
+		// }
 
 		// Quests
 		ArrayList<Class<?>> questClasses = PackageUtils.getClasses("com.marklynch.level.quest");

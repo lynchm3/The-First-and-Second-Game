@@ -40,9 +40,9 @@ import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 
-public class GsonCreator {
+public class SaveSerializationCreator {
 
-	public static Gson createGson() {
+	public static Gson createSaveSerializerGson() {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(Texture.class, serializerForTexture);
@@ -224,7 +224,7 @@ public class GsonCreator {
 				jsonObject.addProperty("failedToGetPathToBellCount", aiRoutineForBlind.failedToGetPathToBellCount);
 				jsonObject.addProperty("failedToGetPathToFoodCount", aiRoutineForBlind.failedToGetPathToFoodCount);
 				if (aiRoutineForBlind.bellSound != null)
-					jsonObject.addProperty("bellSound", Save.gson.toJson(aiRoutineForBlind.bellSound));
+					jsonObject.addProperty("bellSound", Save.saveSerializerGson.toJson(aiRoutineForBlind.bellSound));
 			} else if (src instanceof AIRoutineForGuard) {
 				jsonObject.addProperty("patrolIndex", ((AIRoutineForGuard) src).patrolIndex);
 			} else if (src instanceof AIRoutineForHerbivoreWildAnimal) {
@@ -316,7 +316,7 @@ public class GsonCreator {
 				jsonObject.addProperty("imageTexture", src.imageTexture.path);
 			jsonObject.addProperty("minRange", src.minRange);
 			jsonObject.addProperty("maxRange", src.maxRange);
-			jsonObject.addProperty("effect", Save.gson.toJson(src.effect));
+			jsonObject.addProperty("effect", Save.saveSerializerGson.toJson(src.effect));
 			jsonObject.addProperty("templateId", src.templateId);
 			jsonObject.addProperty("type", "" + src.type);
 			return jsonObject;
@@ -327,7 +327,7 @@ public class GsonCreator {
 		@Override
 		public JsonElement serialize(Inventory src, Type type, JsonSerializationContext context) {
 			JsonObject jsonObject = new JsonObject();
-			jsonObject.addProperty("gameObjects", Save.gson.toJson(src.gameObjects));
+			jsonObject.addProperty("gameObjects", Save.saveSerializerGson.toJson(src.gameObjects));
 			return jsonObject;
 		}
 	};

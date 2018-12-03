@@ -106,9 +106,6 @@ import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.Texture;
 
 public class Save {
-	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
-
-	public static Gson gson;
 
 	// When you decide to save
 	// 1. turn on pause mode (if not already) - Show spinner w/ "Ending Turn"
@@ -174,20 +171,22 @@ public class Save {
 			// GameObject interfaces
 			Consumable.class, DamageDealer.class, SwitchListener.class, UpdatesWhenSquareContentsChange.class };
 
+	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
+	public static Gson saveSerializerGson;
 	static ArrayList<PreparedStatement> preparedStatements = new ArrayList<PreparedStatement>();
 	static Connection conn;
 	static long saveStartTime;
 	static long saveEndTime1;
 	static long saveEndTime2;
-	public static String dbConn;
+	public static String dbConnString;
 
 	public static void save() {
 
-		if (gson == null)
-			gson = GsonCreator.createGson();
+		if (saveSerializerGson == null)
+			saveSerializerGson = SaveSerializationCreator.createSaveSerializerGson();
 
 		saveStartTime = System.currentTimeMillis();
-		dbConn = "jdbc:sqlite:test" + System.currentTimeMillis() + ".db";
+		dbConnString = "jdbc:sqlite:test" + System.currentTimeMillis() + ".db";
 
 		try {
 
@@ -196,7 +195,7 @@ public class Save {
 				fieldsForEachClass.put(classToSave, Save.getFields(classToSave));
 			}
 
-			conn = DriverManager.getConnection(dbConn);
+			conn = DriverManager.getConnection(dbConnString);
 
 			createPreparedStatementForSquareInserts();
 			createPreparedStatementForFactionInserts();
@@ -235,9 +234,11 @@ public class Save {
 		try {
 			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
 			for (Square square : Level.squaresToSave) {
+				if (square.xInGrid != 0 || square.yInGrid != 0)
+					continue;
 				preparedStatement.setLong(1, square.id);
-				preparedStatement.setString(2, gson.toJson(square.inventory));
-				preparedStatement.setString(3, square.getFloorImageTexture().path);
+				preparedStatement.setString(2, saveSerializerGson.toJson(square.inventory));
+				preparedStatement.setString(3, "stone.png");
 				preparedStatement.addBatch();
 			}
 			preparedStatements.add(preparedStatement);
@@ -264,8 +265,8 @@ public class Save {
 			for (Faction faction : Level.factions) {
 				preparedStatement.setLong(1, faction.id);
 				preparedStatement.setString(2, faction.name);
-				preparedStatement.setString(3, getHashMapStringForInsertion(faction.relationships));
-				preparedStatement.setString(4, getArrayListStringForInsertion(faction.actors));
+				preparedStatement.setString(3, saveSerializerGson.toJson(faction.relationships));
+				preparedStatement.setString(4, saveSerializerGson.toJson(faction.actors));
 				preparedStatement.setString(5, faction.imageTexture.path);
 				preparedStatement.addBatch();
 			}
@@ -287,7 +288,6 @@ public class Save {
 					preparedStatement.executeBatch();
 				}
 				conn.setAutoCommit(true);
-				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -350,7 +350,7 @@ public class Save {
 					} else if (value instanceof Double) {
 						preparedStatement.setDouble(count, (Double) value);
 					} else {
-						preparedStatement.setString(count, gson.toJson(value));
+						preparedStatement.setString(count, saveSerializerGson.toJson(value));
 					}
 
 					count++;
@@ -511,11 +511,11 @@ public class Save {
 
 		} else if (arrayList.get(0) instanceof Effect) {
 
-			return gson.toJson(arrayList);
+			return saveSerializerGson.toJson(arrayList);
 
 		} else if (arrayList.get(0) instanceof Crime) {
 
-			return gson.toJson(arrayList);
+			return saveSerializerGson.toJson(arrayList);
 
 		}
 		System.err.println("=======================");
@@ -534,11 +534,11 @@ public class Save {
 		// Class<?> hashMapKeyClass = keySet[0].getClass();
 
 		if (keysArray[0] instanceof Faction) {
-			return gson.toJson(hashMap);
+			return saveSerializerGson.toJson(hashMap);
 		} else if (keysArray[0] instanceof HIGH_LEVEL_STATS) {
 			return Stat.getStringForSavingHIGH_LEVEL_STATS((HashMap<HIGH_LEVEL_STATS, Stat>) hashMap);
 		} else if (keysArray[0] instanceof GameObject) {
-			return gson.toJson(hashMap);
+			return saveSerializerGson.toJson(hashMap);
 		}
 
 		System.err.println("=======================");
