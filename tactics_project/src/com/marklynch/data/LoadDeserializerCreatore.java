@@ -21,7 +21,6 @@ import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
-import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -273,22 +272,21 @@ public class LoadDeserializerCreatore {
 				aiRoutineForBlind.failedToGetPathToFoodCount = jsonObject.get("failedToGetPathToFoodCount").getAsInt();
 
 				JsonElement bellSoundJson = jsonObject.get("bellSound");
-				aiRoutineForBlind.bellSound = Load.loadDeserializerGson.fromJson(bellSoundJson, Sound.class);
+				aiRoutineForBlind.bellSound = Load.loadDeserializerGson.fromJson(bellSoundJson,
+						aiRoutineForBlind.bellSound.getClass());
 
-				if (aiRoutineForBlind.bellSound != null)
-					jsonObject.add("bellSound", Save.saveSerializerGson.toJsonTree(aiRoutineForBlind.bellSound));
 			} else if (aiRoutine instanceof AIRoutineForGuard) {
-				jsonObject.addProperty("patrolIndex", ((AIRoutineForGuard) aiRoutine).patrolIndex);
+				((AIRoutineForGuard) aiRoutine).patrolIndex = jsonObject.get("patrolIndex").getAsInt();
 			} else if (aiRoutine instanceof AIRoutineForHerbivoreWildAnimal) {
-				jsonObject.addProperty("hidingCount", ((AIRoutineForHerbivoreWildAnimal) aiRoutine).hidingCount);
+				((AIRoutineForHerbivoreWildAnimal) aiRoutine).hidingCount = jsonObject.get("hidingCount").getAsInt();
 			} else if (aiRoutine instanceof AIRoutineForMort) {
 				AIRoutineForMort aiRoutineForMort = (AIRoutineForMort) aiRoutine;
-				jsonObject.addProperty("rangBellAsLastResort", aiRoutineForMort.rangBellAsLastResort);
-				jsonObject.addProperty("retreatedToRoom", aiRoutineForMort.retreatedToRoom);
-				jsonObject.addProperty("feedingDemoState", "" + aiRoutineForMort.feedingDemoState);
+				aiRoutineForMort.rangBellAsLastResort = jsonObject.get("rangBellAsLastResort").getAsBoolean();
+				aiRoutineForMort.retreatedToRoom = jsonObject.get("retreatedToRoom").getAsBoolean();
+				aiRoutineForMort.feedingDemoState = Load.loadDeserializerGson.fromJson(jsonObject.get("ignoreList"),
+						aiRoutineForMort.feedingDemoState.getClass());
 			} else if (aiRoutine instanceof AIRoutineForThief) {
-				// int theftCooldown = 0;
-				jsonObject.addProperty("theftCooldown", ((AIRoutineForThief) aiRoutine).theftCooldown);
+				((AIRoutineForThief) aiRoutine).theftCooldown = jsonObject.get("theftCooldown").getAsInt();
 			}
 
 			return aiRoutine;

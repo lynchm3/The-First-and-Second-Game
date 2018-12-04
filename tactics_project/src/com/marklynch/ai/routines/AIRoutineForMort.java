@@ -17,11 +17,11 @@ import com.marklynch.objects.tools.Bell;
 
 public class AIRoutineForMort extends AIRoutine {
 
-	Mort mort;
+	public Mort mort;
 	public boolean rangBellAsLastResort;
 	public boolean retreatedToRoom = false;
 
-	enum FEEDING_DEMO_STATE {
+	public enum FEEDING_DEMO_STATE {
 		WALK_TO_TROUGH, PLACE_MEAT, RING_BELL, WALK_AWAY, WAIT_FOR_BLIND_TO_ENTER, WAIT_FOR_BLIND_TO_LEAVE
 	};
 
