@@ -188,6 +188,7 @@ public class SaveSerializationCreator {
 		@Override
 		public JsonElement serialize(AIRoutine src, Type type, JsonSerializationContext context) {
 			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("class", src.getClass().getName());
 			if (src.actor != null)
 				jsonObject.addProperty("actor", src.actor.id);
 			if (src.target != null)

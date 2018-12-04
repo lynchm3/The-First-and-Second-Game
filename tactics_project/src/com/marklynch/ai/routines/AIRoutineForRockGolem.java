@@ -11,6 +11,11 @@ public class AIRoutineForRockGolem extends AIRoutine {
 
 	RockGolem rockGolem;
 
+	public AIRoutineForRockGolem() {
+		super();
+		aiType = AI_TYPE.HOSTILE;
+	}
+
 	public AIRoutineForRockGolem(Actor rockGolem) {
 		super(rockGolem);
 		this.rockGolem = (RockGolem) rockGolem;

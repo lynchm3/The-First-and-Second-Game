@@ -11,6 +11,11 @@ public class AIRoutineForTrader extends AIRoutine {
 
 	Trader trader;
 
+	public AIRoutineForTrader() {
+		super();
+		aiType = AI_TYPE.RUNNER;
+	}
+
 	public AIRoutineForTrader(Actor actor) {
 		super(actor);
 		this.trader = (Trader) actor;

@@ -27,6 +27,14 @@ public class AIRoutineForMort extends AIRoutine {
 
 	public FEEDING_DEMO_STATE feedingDemoState = FEEDING_DEMO_STATE.WALK_TO_TROUGH;
 
+	public AIRoutineForMort() {
+
+		super();
+		aiType = AI_TYPE.FIGHTER;
+
+		keepInBounds = true;
+	}
+
 	public AIRoutineForMort(Actor mort) {
 
 		super(mort);

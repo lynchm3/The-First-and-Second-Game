@@ -11,6 +11,14 @@ public class AIRoutineForKidnapper extends AIRoutine {
 
 	Kidnapper kidnapper;
 
+	public AIRoutineForKidnapper() {
+
+		super();
+		aiType = AI_TYPE.FIGHTER;
+
+		keepInBounds = true;
+	}
+
 	public AIRoutineForKidnapper(Actor mort) {
 
 		super(mort);

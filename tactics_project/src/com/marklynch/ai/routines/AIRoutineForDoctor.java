@@ -10,6 +10,11 @@ public class AIRoutineForDoctor extends AIRoutine {
 
 	Doctor doctor;
 
+	public AIRoutineForDoctor() {
+		super();
+		aiType = AI_TYPE.RUNNER;
+	}
+
 	public AIRoutineForDoctor(Actor actor) {
 		super(actor);
 		this.doctor = (Doctor) actor;

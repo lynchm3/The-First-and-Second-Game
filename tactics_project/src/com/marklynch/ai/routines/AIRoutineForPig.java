@@ -9,9 +9,13 @@ public class AIRoutineForPig extends AIRoutine {
 
 	Actor pig;
 
+	public AIRoutineForPig() {
+		super();
+		aiType = AI_TYPE.RUNNER;
+	}
+
 	public AIRoutineForPig(Actor actor) {
 		super(actor);
-		this.pig = actor;
 		aiType = AI_TYPE.RUNNER;
 	}
 

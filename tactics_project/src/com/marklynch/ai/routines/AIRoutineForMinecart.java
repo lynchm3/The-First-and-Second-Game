@@ -5,6 +5,13 @@ import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineForMinecart extends AIRoutine {
 
+	public AIRoutineForMinecart() {
+
+		super();
+		aiType = AI_TYPE.FIGHTER;
+
+	}
+
 	public AIRoutineForMinecart(Actor actor) {
 
 		super(actor);

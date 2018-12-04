@@ -15,6 +15,12 @@ public class AIRoutineForThief extends AIRoutine {
 
 	public int theftCooldown = 0;
 
+	public AIRoutineForThief() {
+
+		super();
+		aiType = AI_TYPE.FIGHTER;
+	}
+
 	public AIRoutineForThief(Actor actor) {
 
 		super(actor);

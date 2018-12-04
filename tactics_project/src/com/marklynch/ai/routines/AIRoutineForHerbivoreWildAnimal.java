@@ -11,6 +11,11 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 	public transient Actor friendlyWildAnimal;
 	public transient int hidingCount = 0;
 
+	public AIRoutineForHerbivoreWildAnimal() {
+		super();
+		aiType = AI_TYPE.RUNNER;
+	}
+
 	public AIRoutineForHerbivoreWildAnimal(Actor actor) {
 		super(actor);
 		if (actor.area != null) {

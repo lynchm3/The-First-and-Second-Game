@@ -14,6 +14,12 @@ public class AIRoutineForGuard extends AIRoutine {
 	Guard guard;
 	public int patrolIndex = 0;
 
+	public AIRoutineForGuard() {
+
+		super();
+		aiType = AI_TYPE.FIGHTER;
+	}
+
 	public AIRoutineForGuard(Actor actor) {
 
 		super(actor);

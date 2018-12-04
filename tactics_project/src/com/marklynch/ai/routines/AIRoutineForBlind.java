@@ -25,6 +25,11 @@ public class AIRoutineForBlind extends AIRoutine {
 	public int failedToGetPathToBellCount = 0;
 	public int failedToGetPathToFoodCount = 0;
 
+	public AIRoutineForBlind() {
+		super();
+		aiType = AI_TYPE.HOSTILE;
+	}
+
 	public AIRoutineForBlind(Actor blind) {
 		super(blind);
 		this.blind = (Blind) blind;

@@ -7,6 +7,13 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class AIRoutineForHunter extends AIRoutine {
 
+	public AIRoutineForHunter() {
+
+		super();
+		aiType = AI_TYPE.FIGHTER;
+
+	}
+
 	public AIRoutineForHunter(Actor actor) {
 
 		super(actor);

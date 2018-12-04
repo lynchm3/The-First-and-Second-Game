@@ -36,14 +36,6 @@ import com.marklynch.level.constructs.conversation.LeaveConversationListener;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
-import com.marklynch.objects.inanimateobjects.Carcass;
-import com.marklynch.objects.inanimateobjects.Door;
-import com.marklynch.objects.inanimateobjects.Food;
-import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.objects.inanimateobjects.HidingPlace;
-import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
-import com.marklynch.objects.inanimateobjects.Storage;
-import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
 import com.marklynch.objects.actors.Animal;
 import com.marklynch.objects.actors.CarnivoreNeutralWildAnimal;
@@ -54,6 +46,14 @@ import com.marklynch.objects.actors.Monster;
 import com.marklynch.objects.actors.Pig;
 import com.marklynch.objects.actors.TinyNeutralWildAnimal;
 import com.marklynch.objects.actors.Trader;
+import com.marklynch.objects.inanimateobjects.Carcass;
+import com.marklynch.objects.inanimateobjects.Door;
+import com.marklynch.objects.inanimateobjects.Food;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.HidingPlace;
+import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
+import com.marklynch.objects.inanimateobjects.Storage;
+import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Knife;
@@ -106,7 +106,7 @@ public abstract class AIRoutine {
 	public int sleepCounter = 0;
 	final static int SLEEP_TIME = 1000;
 
-	enum STATE {
+	public enum STATE {
 		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, PATROL, FREE_TIME, FISHING, SHOPKEEPING, THIEVING, UPDATING_SIGN, SWIMMING
 	};
 
@@ -129,6 +129,9 @@ public abstract class AIRoutine {
 	public transient Actor actorToKeepTrackOf = null;
 	public transient Square lastLocationSeenActorToKeepTrackOf = null;
 	public transient ArrayList<GameObject> ignoreList = new ArrayList<GameObject>();
+
+	public AIRoutine() {
+	}
 
 	public AIRoutine(Actor actor) {
 		this.actor = actor;

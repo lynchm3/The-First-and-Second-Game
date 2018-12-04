@@ -8,6 +8,11 @@ import com.marklynch.objects.actors.Actor;
 
 public class AIRoutineForWildAnimal extends AIRoutine {
 
+	public AIRoutineForWildAnimal() {
+		super();
+		aiType = AI_TYPE.ANIMAL;
+	}
+
 	public AIRoutineForWildAnimal(Actor actor) {
 		super(actor);
 		aiType = AI_TYPE.ANIMAL;

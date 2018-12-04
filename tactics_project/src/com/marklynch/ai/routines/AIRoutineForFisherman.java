@@ -7,6 +7,12 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class AIRoutineForFisherman extends AIRoutine {
 
+	public AIRoutineForFisherman() {
+
+		super();
+		aiType = AI_TYPE.RUNNER;
+	}
+
 	public AIRoutineForFisherman(Actor actor) {
 
 		super(actor);

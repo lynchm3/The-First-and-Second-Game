@@ -10,6 +10,12 @@ import com.marklynch.objects.inanimateobjects.Vein;
 
 public class AIRoutineForMiner extends AIRoutine {
 
+	public AIRoutineForMiner() {
+
+		super();
+		aiType = AI_TYPE.FIGHTER;
+	}
+
 	public AIRoutineForMiner(Actor actor) {
 
 		super(actor);

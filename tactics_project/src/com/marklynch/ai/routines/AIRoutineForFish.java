@@ -9,6 +9,11 @@ public class AIRoutineForFish extends AIRoutine {
 
 	Fish fish;
 
+	public AIRoutineForFish() {
+		super();
+		aiType = AI_TYPE.RUNNER;
+	}
+
 	public AIRoutineForFish(Actor actor) {
 		super(actor);
 		if (actor.area != null) {

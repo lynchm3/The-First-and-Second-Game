@@ -10,6 +10,11 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
 	Actor wildAnimal;
 
+	public AIRoutineForCarnivoreNeutralWildAnimal() {
+		super();
+		aiType = AI_TYPE.FIGHTER;
+	}
+
 	public AIRoutineForCarnivoreNeutralWildAnimal(Actor actor) {
 		super(actor);
 		if (actor.area != null) {
