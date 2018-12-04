@@ -140,11 +140,22 @@ public class LoadDeserializerCreatore {
 				e.printStackTrace();
 			}
 			effect.effectName = jsonObject.get("effectName").getAsString();
-			effect.source = (GameObject) Level.ids.get(jsonObject.get("source").getAsLong());
-			effect.target = (GameObject) Level.ids.get(jsonObject.get("target").getAsLong());
+
+			JsonElement sourceJson = jsonObject.get("source");
+			if (sourceJson != null)
+				effect.source = (GameObject) Level.ids.get(sourceJson.getAsLong());
+
+			JsonElement targetJson = jsonObject.get("target");
+			if (targetJson != null)
+				effect.target = (GameObject) Level.ids.get(targetJson.getAsLong());
+
 			effect.totalTurns = jsonObject.get("totalTurns").getAsInt();
 			effect.turnsRemaining = jsonObject.get("turnsRemaining").getAsInt();
-			effect.imageTexture = ResourceUtils.getGlobalImage(jsonObject.get("imageTexture").getAsString(), true);
+
+			JsonElement imageTextureJson = jsonObject.get("imageTexture");
+			if (imageTextureJson != null)
+				effect.imageTexture = ResourceUtils.getGlobalImage(imageTextureJson.getAsString(), true);
+
 			return effect;
 		}
 	};
