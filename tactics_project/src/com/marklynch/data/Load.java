@@ -9,18 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
-import com.marklynch.actions.Action;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.GroupOfActors;
-import com.marklynch.level.constructs.enchantment.Enhancement;
-import com.marklynch.level.constructs.inventory.SquareInventory;
-import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Player;
-import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.utils.ResourceUtils;
-import com.marklynch.utils.Texture;
 
 public class Load {
 
@@ -199,60 +191,66 @@ public class Load {
 						field.set(objectToLoad, resultSet.getString(count));
 					} else if (type.isAssignableFrom(Float.class)) {
 						field.set(objectToLoad, resultSet.getFloat(count));
-					} else if (type.isAssignableFrom(Texture.class)) {
-						String texturePath = resultSet.getString(count);
-						// System.out.println("texturePath = " + texturePath);
-						Texture texture = ResourceUtils.getGlobalImage(texturePath, true);
-						// System.out.println("texture = " + texture);
-						field.set(objectToLoad, ResourceUtils.getGlobalImage(texturePath, true));
-						// System.out.println("value = " + field.get(objectToLoad));
-					} else if (type.isAssignableFrom(SquareInventory.class)) {
-						// TODO
-					} else if (type.isAssignableFrom(Square.class)) {
-						Long squareId = resultSet.getLong(count);
-						if (squareId != 0) {
-							Square square = (Square) Level.ids.get(squareId);
-							field.set(objectToLoad, square);
-						}
-					} else if (type.isAssignableFrom(Quest.class)) {
-						Long squareId = resultSet.getLong(count);
-						if (squareId != 0) {
-							Quest square = (Quest) Level.ids.get(squareId);
-							field.set(objectToLoad, square);
-						}
-
-					} else if (type.isAssignableFrom(GroupOfActors.class)) {
-						Long squareId = resultSet.getLong(count);
-						if (squareId != 0) {
-							GroupOfActors square = (GroupOfActors) Level.ids.get(squareId);
-							field.set(objectToLoad, square);
-						}
-
-					} else if (type.isAssignableFrom(Action.class)) {
-						Long squareId = resultSet.getLong(count);
-						if (squareId != 0) {
-							Action square = (Action) Level.ids.get(squareId);
-							field.set(objectToLoad, square);
-						}
-
-					} else if (type.isAssignableFrom(Enhancement.class)) {
-						Long squareId = resultSet.getLong(count);
-						if (squareId != 0) {
-							Enhancement square = (Enhancement) Level.ids.get(squareId);
-							field.set(objectToLoad, square);
-						}
-
-					} else if (type.isAssignableFrom(HashMap.class)) {
-
-					} else if (type.isAssignableFrom(ArrayList.class)) {
-
-					} else if (type.isAssignableFrom(Object.class)) {
-
-					} else if (type.isAssignableFrom(GameObject[].class)) {
-
+					} else if (type.isAssignableFrom(Double.class)) {
+						field.set(objectToLoad, resultSet.getDouble(count));
 					} else {
-						// nulls
+						loadDeserializerGson.fromJson(resultSet.getString(count), type);
 					}
+
+					// if (type.isAssignableFrom(Texture.class)) {
+					// String texturePath = resultSet.getString(count);
+					// // System.out.println("texturePath = " + texturePath);
+					// Texture texture = ResourceUtils.getGlobalImage(texturePath, true);
+					// // System.out.println("texture = " + texture);
+					// field.set(objectToLoad, ResourceUtils.getGlobalImage(texturePath, true));
+					// // System.out.println("value = " + field.get(objectToLoad));
+					// } else if (type.isAssignableFrom(SquareInventory.class)) {
+					// // TODO
+					// } else if (type.isAssignableFrom(Square.class)) {
+					// Long squareId = resultSet.getLong(count);
+					// if (squareId != 0) {
+					// Square square = (Square) Level.ids.get(squareId);
+					// field.set(objectToLoad, square);
+					// }
+					// } else if (type.isAssignableFrom(Quest.class)) {
+					// Long squareId = resultSet.getLong(count);
+					// if (squareId != 0) {
+					// Quest square = (Quest) Level.ids.get(squareId);
+					// field.set(objectToLoad, square);
+					// }
+					//
+					// } else if (type.isAssignableFrom(GroupOfActors.class)) {
+					// Long squareId = resultSet.getLong(count);
+					// if (squareId != 0) {
+					// GroupOfActors square = (GroupOfActors) Level.ids.get(squareId);
+					// field.set(objectToLoad, square);
+					// }
+					//
+					// } else if (type.isAssignableFrom(Action.class)) {
+					// Long squareId = resultSet.getLong(count);
+					// if (squareId != 0) {
+					// Action square = (Action) Level.ids.get(squareId);
+					// field.set(objectToLoad, square);
+					// }
+					//
+					// } else if (type.isAssignableFrom(Enhancement.class)) {
+					// Long squareId = resultSet.getLong(count);
+					// if (squareId != 0) {
+					// Enhancement square = (Enhancement) Level.ids.get(squareId);
+					// field.set(objectToLoad, square);
+					// }
+					//
+					// } else if (type.isAssignableFrom(HashMap.class)) {
+					//
+					// } else if (type.isAssignableFrom(ArrayList.class)) {
+					//
+					// } else if (type.isAssignableFrom(Object.class)) {
+					//
+					// } else if (type.isAssignableFrom(GameObject[].class)) {
+					//
+					// } else {
+					// // nulls
+					// }
 
 					count++;
 				}

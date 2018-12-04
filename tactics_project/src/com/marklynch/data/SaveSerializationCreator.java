@@ -224,7 +224,7 @@ public class SaveSerializationCreator {
 				jsonObject.addProperty("failedToGetPathToBellCount", aiRoutineForBlind.failedToGetPathToBellCount);
 				jsonObject.addProperty("failedToGetPathToFoodCount", aiRoutineForBlind.failedToGetPathToFoodCount);
 				if (aiRoutineForBlind.bellSound != null)
-					jsonObject.addProperty("bellSound", Save.saveSerializerGson.toJson(aiRoutineForBlind.bellSound));
+					jsonObject.add("bellSound", Save.saveSerializerGson.toJsonTree(aiRoutineForBlind.bellSound));
 			} else if (src instanceof AIRoutineForGuard) {
 				jsonObject.addProperty("patrolIndex", ((AIRoutineForGuard) src).patrolIndex);
 			} else if (src instanceof AIRoutineForHerbivoreWildAnimal) {
@@ -316,7 +316,7 @@ public class SaveSerializationCreator {
 				jsonObject.addProperty("imageTexture", src.imageTexture.path);
 			jsonObject.addProperty("minRange", src.minRange);
 			jsonObject.addProperty("maxRange", src.maxRange);
-			jsonObject.addProperty("effect", Save.saveSerializerGson.toJson(src.effect));
+			jsonObject.add("effect", Save.saveSerializerGson.toJsonTree(src.effect));
 			jsonObject.addProperty("templateId", src.templateId);
 			jsonObject.addProperty("type", "" + src.type);
 			return jsonObject;
@@ -326,9 +326,15 @@ public class SaveSerializationCreator {
 	static JsonSerializer<Inventory> serializerForInventory = new JsonSerializer<Inventory>() {
 		@Override
 		public JsonElement serialize(Inventory src, Type type, JsonSerializationContext context) {
-			JsonObject jsonObject = new JsonObject();
-			jsonObject.addProperty("gameObjects", Save.saveSerializerGson.toJson(src.gameObjects));
-			return jsonObject;
+			// JsonArray jsonArray = new JsonArray();
+
+			// for(GameObject gameObject : )
+
+			// jsonArray.
+
+			// JsonObject jsonObject = new JsonObject();
+			return Save.saveSerializerGson.toJsonTree(src.gameObjects);
+			// return jsonObject;
 		}
 	};
 
