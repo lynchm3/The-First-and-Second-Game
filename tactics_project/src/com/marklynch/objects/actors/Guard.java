@@ -6,10 +6,10 @@ import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.armor.BodyArmor;
+import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.weapons.BodyArmor;
-import com.marklynch.objects.weapons.LegArmor;
 
 public class Guard extends Human {
 

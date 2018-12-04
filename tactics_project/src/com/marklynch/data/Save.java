@@ -40,6 +40,11 @@ import com.marklynch.objects.actors.Thief;
 import com.marklynch.objects.actors.TinyNeutralWildAnimal;
 import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.actors.WildAnimal;
+import com.marklynch.objects.armor.Armor;
+import com.marklynch.objects.armor.BodyArmor;
+import com.marklynch.objects.armor.Helmet;
+import com.marklynch.objects.armor.LegArmor;
+import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.Carcass;
 import com.marklynch.objects.inanimateobjects.Corpse;
@@ -98,11 +103,6 @@ import com.marklynch.objects.utils.Consumable;
 import com.marklynch.objects.utils.DamageDealer;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
-import com.marklynch.objects.weapons.Armor;
-import com.marklynch.objects.weapons.BodyArmor;
-import com.marklynch.objects.weapons.Helmet;
-import com.marklynch.objects.weapons.LegArmor;
-import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.Texture;
 
 public class Save {
@@ -309,7 +309,7 @@ public class Save {
 
 			fields = fieldsForEachClass.get(clazz);
 
-			if (fields.isEmpty() || fields.size() == 1)
+			if (fields.isEmpty())
 				return null;
 
 			// Make create table query and insert query template
@@ -553,7 +553,7 @@ public class Save {
 		try {
 
 			fields = fieldsForEachClass.get(clazz);
-			if (fields.isEmpty() || fields.size() == 1)
+			if (fields.isEmpty())
 				return;
 
 			statement = conn.createStatement();

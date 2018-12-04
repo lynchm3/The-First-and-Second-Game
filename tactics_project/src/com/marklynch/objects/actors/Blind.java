@@ -9,11 +9,11 @@ import com.marklynch.ai.routines.AIRoutineForBlind;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.Tool;
-import com.marklynch.objects.weapons.Weapon;
 
 public class Blind extends Monster {
 

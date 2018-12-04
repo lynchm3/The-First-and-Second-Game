@@ -1,4 +1,4 @@
-package com.marklynch.objects.weapons;
+package com.marklynch.objects.armor;
 
 import java.util.ArrayList;
 
@@ -7,21 +7,21 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.Texture;
 
-public class BodyArmor extends Armor {
-
-	public Texture armUpperTexture;
-	public Texture armLowerTexture;
-	public Texture backTexture;
+public class LegArmor extends Armor {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
 			"totalHealth", "remainingHealth", "owner", "inventory", "showInventory", "fitsInInventory",
 			"canContainOtherObjects" };
 
-	public BodyArmor() {
+	public Texture legUpperTexture;
+	public Texture legLowerTexture;
+	public Texture frontTexture;
+
+	public LegArmor() {
 
 		super();
-		type = "Body Armor";
+		type = "Leg Armor";
 
 	}
 
@@ -32,13 +32,13 @@ public class BodyArmor extends Armor {
 	}
 
 	@Override
-	public BodyArmor makeCopy(Square square, Actor owner) {
-		BodyArmor bodyArmor = new BodyArmor();
-		setInstances(bodyArmor);
-		setAttributesForCopy(bodyArmor, square, owner);
-		bodyArmor.armUpperTexture = this.armUpperTexture;
-		bodyArmor.armLowerTexture = this.armLowerTexture;
-		bodyArmor.backTexture = this.backTexture;
-		return bodyArmor;
+	public LegArmor makeCopy(Square square, Actor owner) {
+		LegArmor legArmor = new LegArmor();
+		setInstances(legArmor);
+		setAttributesForCopy(legArmor, square, owner);
+		legArmor.legUpperTexture = this.legUpperTexture;
+		legArmor.legLowerTexture = this.legLowerTexture;
+		legArmor.frontTexture = this.frontTexture;
+		return legArmor;
 	}
 }

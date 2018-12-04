@@ -1,4 +1,4 @@
-package com.marklynch.objects.weapons;
+package com.marklynch.objects.armor;
 
 import java.util.ArrayList;
 

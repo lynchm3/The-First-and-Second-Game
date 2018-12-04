@@ -15,6 +15,10 @@ import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.objects.actors.Thief;
 import com.marklynch.objects.actors.TinyNeutralWildAnimal;
 import com.marklynch.objects.actors.Trader;
+import com.marklynch.objects.armor.BodyArmor;
+import com.marklynch.objects.armor.Helmet;
+import com.marklynch.objects.armor.LegArmor;
+import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.Arrow;
 import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
@@ -65,10 +69,6 @@ import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.tools.Shovel;
-import com.marklynch.objects.weapons.BodyArmor;
-import com.marklynch.objects.weapons.Helmet;
-import com.marklynch.objects.weapons.LegArmor;
-import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 

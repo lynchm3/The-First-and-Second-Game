@@ -88,11 +88,6 @@ public class Load {
 
 	private static ResultSet getResultSetWithJustId(Class<?> clazz) {
 
-		// System.out.println("getResultSet - " + clazz.getSimpleName());
-
-		if (fieldsForEachClass.get(clazz).size() < 2)
-			return null;
-
 		try {
 			Statement statement = conn.createStatement();
 			ResultSet resultSet = statement.executeQuery("select id from " + clazz.getSimpleName() + ";");
@@ -104,11 +99,6 @@ public class Load {
 	}
 
 	private static ResultSet getResultSet(Class<?> clazz) {
-
-		// System.out.println("getResultSet - " + clazz.getSimpleName());
-
-		if (fieldsForEachClass.get(clazz).size() < 2)
-			return null;
 
 		try {
 			Statement statement = conn.createStatement();
@@ -123,8 +113,6 @@ public class Load {
 
 	private static void load1(Class<?> clazz) {
 
-		// System.out.println("load1 - " + clazz.getSimpleName());
-
 		try {
 
 			ResultSet resultSet = resultSetsWithJustIds.get(clazz);
@@ -138,6 +126,7 @@ public class Load {
 
 				if (objectToLoadId != 129651)
 					continue;
+				System.out.println("LOAD1 clazz = " + clazz);
 
 				Object objectToLoad = Level.ids.get(objectToLoadId);
 				// System.out.println("objectToLoad = " + objectToLoad);
@@ -183,6 +172,8 @@ public class Load {
 				if (objectToLoadId != 129651)
 					continue;
 				System.out.println("========================================");
+
+				System.out.println("LOAD2 clazz = " + clazz);
 				System.out.println("objectToLoadId = " + objectToLoadId);
 				Object objectToLoad = Level.ids.get(objectToLoadId);
 				System.out.println("objectToLoad = " + objectToLoad);

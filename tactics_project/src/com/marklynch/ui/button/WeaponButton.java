@@ -1,7 +1,7 @@
 package com.marklynch.ui.button;
 
 import com.marklynch.Game;
-import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.objects.armor.Weapon;
 
 public class WeaponButton extends ActorButton {
 

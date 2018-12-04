@@ -55,7 +55,7 @@ public class loadDeserializerCreatore {
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.actors"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.inanimateobjects"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.tools"));
-		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.weapons"));
+		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.armor"));
 		for (Class<?> clazz : gameObjectClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForIdable);
 		}

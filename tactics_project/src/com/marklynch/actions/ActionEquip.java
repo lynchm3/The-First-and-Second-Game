@@ -3,10 +3,10 @@ package com.marklynch.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.armor.BodyArmor;
+import com.marklynch.objects.armor.Helmet;
+import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.objects.weapons.BodyArmor;
-import com.marklynch.objects.weapons.Helmet;
-import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ResourceUtils;
 

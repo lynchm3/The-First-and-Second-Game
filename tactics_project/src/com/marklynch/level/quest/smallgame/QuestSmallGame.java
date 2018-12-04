@@ -25,6 +25,7 @@ import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
+import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.actors.Guard;
 import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.actors.Thief;
@@ -33,7 +34,6 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.utils.TextUtils;
 
 public class QuestSmallGame extends Quest {
