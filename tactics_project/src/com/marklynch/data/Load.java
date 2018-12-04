@@ -107,9 +107,11 @@ public class Load {
 
 			Long objectToLoadId = resultSet.getLong("id");
 
-			if (objectToLoadId != 129651)
-				continue;
-			System.out.println("LOAD1 clazz = " + clazz);
+			// Player id
+			// if (objectToLoadId != 129651)
+			// continue;
+
+			// System.out.println("LOAD1 clazz = " + clazz);
 
 			Object objectToLoad = Level.ids.get(objectToLoadId);
 			// System.out.println("objectToLoad = " + objectToLoad);
@@ -145,14 +147,15 @@ public class Load {
 		while (resultSet.next()) {
 
 			Long objectToLoadId = resultSet.getLong("id");
-			if (objectToLoadId != 129651)
-				continue;
-			System.out.println("========================================");
+			// if (objectToLoadId != 129651)
+			// continue;
 
-			System.out.println("LOAD2 clazz = " + clazz);
-			System.out.println("objectToLoadId = " + objectToLoadId);
+			// System.out.println("========================================");
+
+			// System.out.println("LOAD2 clazz = " + clazz);
+			// System.out.println("objectToLoadId = " + objectToLoadId);
 			Object objectToLoad = Level.ids.get(objectToLoadId);
-			System.out.println("objectToLoad = " + objectToLoad);
+			// System.out.println("objectToLoad = " + objectToLoad);
 
 			int count = 1;
 			for (Field field : fields) {
@@ -163,7 +166,7 @@ public class Load {
 				// Object value = field.get(objectToLoad);
 				Class<?> type = field.getType();
 				System.out.println("type = " + type);
-				// System.out.println("value = " + value);
+				System.out.println("value = " + resultSet.getString(count));
 
 				// Non-primitives
 				if (type.isAssignableFrom(boolean.class)) {

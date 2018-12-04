@@ -15,6 +15,7 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -43,8 +44,7 @@ public class loadDeserializerCreatore {
 		// gsonBuilder.registerTypeAdapter(Enhancement.class,
 		// deserializerForEnhancement);
 		gsonBuilder.registerTypeAdapter(Inventory.class, deserializerForInventory);
-		// gsonBuilder.registerTypeAdapter(SquareInventory.class,
-		// deserializerForInventory);
+		gsonBuilder.registerTypeAdapter(SquareInventory.class, deserializerForInventory);
 		// gsonBuilder.registerTypeAdapter(SWITCH_TYPE.class,
 		// deserializerForSWITCH_TYPE);
 		// gsonBuilder.registerTypeAdapter(Color.class, deserializerForColor);
@@ -129,7 +129,12 @@ public class loadDeserializerCreatore {
 		public Inventory deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
 
-			Inventory inventory = new Inventory();
+			Inventory inventory;
+			if (typeOfT == SquareInventory.class) {
+				inventory = new SquareInventory();
+			} else {
+				inventory = new Inventory();
+			}
 			ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
 			JsonArray jsonArray = json.getAsJsonArray();

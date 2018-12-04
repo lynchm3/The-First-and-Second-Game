@@ -218,7 +218,7 @@ public class Save {
 		}
 
 		saveEndTime1 = System.currentTimeMillis();
-		System.out.println("Non-disk save time = " + (saveEndTime1 - saveStartTime));
+		// System.out.println("Non-disk save time = " + (saveEndTime1 - saveStartTime));
 
 	}
 
@@ -291,8 +291,8 @@ public class Save {
 			}
 
 			saveEndTime2 = System.currentTimeMillis();
-			System.out.println("Disk save time = " + (saveEndTime2 - saveEndTime1));
-			System.out.println("Total save time = " + (saveEndTime2 - saveStartTime));
+			// System.out.println("Disk save time = " + (saveEndTime2 - saveEndTime1));
+			// System.out.println("Total save time = " + (saveEndTime2 - saveStartTime));
 		}
 	}
 

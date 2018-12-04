@@ -46,43 +46,45 @@ public class FishingRod extends Tool {
 		return weapon;
 	}
 
-	public float lineDamage = 0f;
-	public float progressThisTurn = 0f;
-	public boolean caught = false;
+	public transient float lineDamage = 0f;
+	public transient float progressThisTurn = 0f;
+	public transient boolean caught = false;
 
-	boolean fishingTargetInTheWater;
+	public transient boolean fishingTargetInTheWater;
 
-	public float fishingLineX1;
-	public float fishingLineY1;
+	public transient float fishingLineX1;
+	public transient float fishingLineY1;
 
-	public float fishCenterX;
-	public float fishCenterY;
+	public transient float fishCenterX;
+	public transient float fishCenterY;
 
-	public final float fishCircleRadius = 128;
-	public float circleX1;
-	public float circleY1;
-	public float circleX2;
-	public float circleY2;
+	public transient final float fishCircleRadius = 128;
+	public transient float circleX1;
+	public transient float circleY1;
+	public transient float circleX2;
+	public transient float circleY2;
 
 	// Mouse circle
-	public final float mouseCircleRadius = 32;
-	public float mouseCircleCenterX;
-	public float mouseCircleCenterY;
-	public float mouseCircleX1;
-	public float mouseCircleY1;
-	public float mouseCircleX2;
-	public float mouseCircleY2;
+	public transient final float mouseCircleRadius = 32;
+	public transient float mouseCircleCenterX;
+	public transient float mouseCircleCenterY;
+	public transient float mouseCircleX1;
+	public transient float mouseCircleY1;
+	public transient float mouseCircleX2;
+	public transient float mouseCircleY2;
 
 	// Directions of stuff
-	public final static float maxDirectionChangeInRadiansPerSecond = 1f;
-	public final static float maxDirectionChangeInRadiansPerMillisecond = maxDirectionChangeInRadiansPerSecond / 1000f;
+	public transient final static float maxDirectionChangeInRadiansPerSecond = 1f;
+	public transient final static float maxDirectionChangeInRadiansPerMillisecond = maxDirectionChangeInRadiansPerSecond
+			/ 1000f;
+
 	// degrees
-	public float fishDirectionRadians;
-	public float oppositOfFishDirectionRadians;
-	public float gradualTarget = -1f;
-	public float targetDirectionRadians = -1f;
-	public float mouseDistanceToTargetRadians = 0f;
-	public float mouseToFishAngleRadians;
+	public transient float fishDirectionRadians;
+	public transient float oppositOfFishDirectionRadians;
+	public transient float gradualTarget = -1f;
+	public transient float targetDirectionRadians = -1f;
+	public transient float mouseDistanceToTargetRadians = 0f;
+	public transient float mouseToFishAngleRadians;
 
 	public void updateFishingMinigame(Actor fisher, int weaponPositionXInPixels, int weaponPositionYInPixels,
 			float delta) {
