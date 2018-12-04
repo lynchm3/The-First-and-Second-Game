@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -13,8 +14,10 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.area.Area;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ResourceUtils;
@@ -39,7 +42,7 @@ public class loadDeserializerCreatore {
 		// gsonBuilder.registerTypeAdapter(AILine.class, deserializerForAILine);
 		// gsonBuilder.registerTypeAdapter(Enhancement.class,
 		// deserializerForEnhancement);
-		// gsonBuilder.registerTypeAdapter(Inventory.class, deserializerForInventory);
+		gsonBuilder.registerTypeAdapter(Inventory.class, deserializerForInventory);
 		// gsonBuilder.registerTypeAdapter(SquareInventory.class,
 		// deserializerForInventory);
 		// gsonBuilder.registerTypeAdapter(SWITCH_TYPE.class,
@@ -105,6 +108,8 @@ public class loadDeserializerCreatore {
 		@Override
 		public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
+			System.out.println("json = " + json);
+			System.out.println("typeOfT = " + typeOfT);
 			return Level.ids.get(json.getAsLong());
 		}
 	};
@@ -115,6 +120,27 @@ public class loadDeserializerCreatore {
 		public Texture deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
 			return ResourceUtils.getGlobalImage(json.getAsString(), true);
+		}
+	};
+
+	// change serialization for specific types
+	public static JsonDeserializer<Inventory> deserializerForInventory = new JsonDeserializer<Inventory>() {
+		@Override
+		public Inventory deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
+
+			Inventory inventory = new Inventory();
+			ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+
+			JsonArray jsonArray = json.getAsJsonArray();
+			for (int i = 0; i < jsonArray.size(); i++) {
+				Long id = jsonArray.get(i).getAsLong();
+				gameObjects.add((GameObject) Level.ids.get(id));
+			}
+
+			inventory.gameObjects = gameObjects;
+
+			return inventory;
 		}
 	};
 }

@@ -34,6 +34,7 @@ import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor.Direction;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.utils.SwitchListener;
@@ -70,7 +71,8 @@ public class SaveSerializationCreator {
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.actors"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.inanimateobjects"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.tools"));
-		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.weapons"));
+		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.armor"));
+		System.out.println("gameObjectClasses = " + gameObjectClasses);
 		for (Class<?> clazz : gameObjectClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
 		}
@@ -326,14 +328,17 @@ public class SaveSerializationCreator {
 	static JsonSerializer<Inventory> serializerForInventory = new JsonSerializer<Inventory>() {
 		@Override
 		public JsonElement serialize(Inventory src, Type type, JsonSerializationContext context) {
-			// JsonArray jsonArray = new JsonArray();
+			JsonArray jsonArray = new JsonArray();
 
-			// for(GameObject gameObject : )
+			for (GameObject gameObject : src.gameObjects) {
+				jsonArray.add(new JsonPrimitive(gameObject.id));
+			}
 
 			// jsonArray.
 
 			// JsonObject jsonObject = new JsonObject();
-			return Save.saveSerializerGson.toJsonTree(src.gameObjects);
+
+			return jsonArray;
 			// return jsonObject;
 		}
 	};

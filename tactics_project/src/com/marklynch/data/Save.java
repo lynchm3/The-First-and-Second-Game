@@ -99,10 +99,7 @@ import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.tools.Tool;
-import com.marklynch.objects.utils.Consumable;
-import com.marklynch.objects.utils.DamageDealer;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
 import com.marklynch.utils.Texture;
 
 public class Save {
@@ -169,7 +166,9 @@ public class Save {
 			GameObject.class,
 
 			// GameObject interfaces
-			Consumable.class, DamageDealer.class, SwitchListener.class, UpdatesWhenSquareContentsChange.class };
+			// Consumable.class, DamageDealer.class, SwitchListener.class,
+			// UpdatesWhenSquareContentsChange.class
+	};
 
 	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
 	public static Gson saveSerializerGson;

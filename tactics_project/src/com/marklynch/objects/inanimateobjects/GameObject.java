@@ -222,7 +222,7 @@ public class GameObject
 	public transient GroupOfActors groupOfActors;
 
 	public Object destroyedBy = null;
-	public Action destroyedByAction = null;
+	public transient Action destroyedByAction = null;
 
 	protected Animation primaryAnimation;
 
@@ -270,6 +270,10 @@ public class GameObject
 	public String type = "Object";
 
 	public int lastTurnThisWasMovedByMinecart = -1;
+
+	// Readable SHIIIIT.
+	public transient Conversation conversation;
+	public transient ActionListener onReadListener;
 
 	public GameObject() {
 
@@ -1384,10 +1388,6 @@ public class GameObject
 		return actions;
 
 	}
-
-	// Readable SHIIIIT.
-	public transient Conversation conversation;
-	public ActionListener onReadListener;
 
 	public Conversation getConversation() {
 		return conversation;
