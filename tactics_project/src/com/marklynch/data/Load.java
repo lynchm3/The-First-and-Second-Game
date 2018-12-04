@@ -11,6 +11,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import com.marklynch.actions.Action;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.SquareInventory;
@@ -33,6 +34,7 @@ public class Load {
 
 	public static void load() {
 		long loadStartTime = System.currentTimeMillis();
+		System.out.println("Loading...");
 
 		try {
 			conn = DriverManager.getConnection(Save.dbConnString);
@@ -42,34 +44,34 @@ public class Load {
 
 			// Squares
 			fieldsForEachClass.put(Square.class, Save.getFields(Square.class));
-			System.out.println("fieldsForEachClass.get(Square.class)  = " + fieldsForEachClass.get(Square.class));
+			// System.out.println("fieldsForEachClass.get(Square.class) = " +
+			// fieldsForEachClass.get(Square.class));
 			resultSetsWithJustIds.put(Square.class, getResultSetWithJustId(Square.class));
 			resultSets.put(Square.class, getResultSet(Square.class));
-			System.out.println("resultSets.get(Square.class)  = " + resultSets.get(Square.class));
+			// System.out.println("resultSets.get(Square.class) = " +
+			// resultSets.get(Square.class));
 			load1(Square.class);
 
 			// Factions
-			// fieldsForEachClass.put(Faction.class, Save.getFields(Faction.class));
-			// resultSetsWithJustIds.put(Faction.class,
-			// getResultSetWithJustId(Faction.class));
-			// resultSets.put(Faction.class, getResultSet(Faction.class));
-			// load1(Faction.class);
+			fieldsForEachClass.put(Faction.class, Save.getFields(Faction.class));
+			resultSetsWithJustIds.put(Faction.class, getResultSetWithJustId(Faction.class));
+			resultSets.put(Faction.class, getResultSet(Faction.class));
+			load1(Faction.class);
 
 			// GameObjects
-			// for (Class<?> classToLoad : Save.classesToSave) {
-			// fieldsForEachClass.put(classToLoad, Save.getFields(classToLoad));
-			// resultSetsWithJustIds.put(classToLoad.class,
-			// getResultSetWithJustId(classToLoad.class));
-			// resultSets.put(classToLoad, getResultSet(classToLoad));
-			// load1(classToLoad);
-			// }
+			for (Class<?> classToLoad : Save.classesToSave) {
+				fieldsForEachClass.put(classToLoad, Save.getFields(classToLoad));
+				resultSetsWithJustIds.put(classToLoad, getResultSetWithJustId(classToLoad));
+				resultSets.put(classToLoad, getResultSet(classToLoad));
+				load1(classToLoad);
+			}
 
 			load2(Square.class);
-			// load2(Faction.class);
+			load2(Faction.class);
 			// Gameobject
-			// for (Class<?> classToLoad : Save.classesToSave) {
-			// load2(classToLoad);
-			// }
+			for (Class<?> classToLoad : Save.classesToSave) {
+				load2(classToLoad);
+			}
 
 			Level.player = (Player) Player.instances.get(0);
 
@@ -86,7 +88,7 @@ public class Load {
 
 	private static ResultSet getResultSetWithJustId(Class<?> clazz) {
 
-		System.out.println("getResultSet - " + clazz.getSimpleName());
+		// System.out.println("getResultSet - " + clazz.getSimpleName());
 
 		if (fieldsForEachClass.get(clazz).size() < 2)
 			return null;
@@ -103,7 +105,7 @@ public class Load {
 
 	private static ResultSet getResultSet(Class<?> clazz) {
 
-		System.out.println("getResultSet - " + clazz.getSimpleName());
+		// System.out.println("getResultSet - " + clazz.getSimpleName());
 
 		if (fieldsForEachClass.get(clazz).size() < 2)
 			return null;
@@ -121,7 +123,7 @@ public class Load {
 
 	private static void load1(Class<?> clazz) {
 
-		System.out.println("load1 - " + clazz.getSimpleName());
+		// System.out.println("load1 - " + clazz.getSimpleName());
 
 		try {
 
@@ -133,11 +135,15 @@ public class Load {
 			while (resultSet.next()) {
 
 				Long objectToLoadId = resultSet.getLong("id");
+
+				if (objectToLoadId != 129651)
+					continue;
+
 				Object objectToLoad = Level.ids.get(objectToLoadId);
-				System.out.println("objectToLoad = " + objectToLoad);
+				// System.out.println("objectToLoad = " + objectToLoad);
 				if (objectToLoad == null) {
-					Level.ids.put(objectToLoadId, objectToLoad);
 					objectToLoad = clazz.getDeclaredConstructor().newInstance();
+					Level.ids.put(objectToLoadId, objectToLoad);
 					ArrayList<Object> instances = null;
 					try {
 						instances = (ArrayList<Object>) clazz.getField("instances").get(null);
@@ -160,7 +166,7 @@ public class Load {
 
 	private static void load2(Class<?> clazz) {
 
-		System.out.println("load2 - " + clazz.getSimpleName());
+		// System.out.println("load2 - " + clazz.getSimpleName());
 
 		ResultSet resultSet = resultSets.get(clazz);
 		if (resultSet == null)
@@ -169,11 +175,15 @@ public class Load {
 		try {
 
 			ArrayList<Field> fields = fieldsForEachClass.get(clazz);
-			System.out.println("fields.size() = " + fields.size());
+			// System.out.println("fields.size() = " + fields.size());
 
 			while (resultSet.next()) {
 
 				Long objectToLoadId = resultSet.getLong("id");
+				if (objectToLoadId != 129651)
+					continue;
+				System.out.println("========================================");
+				System.out.println("objectToLoadId = " + objectToLoadId);
 				Object objectToLoad = Level.ids.get(objectToLoadId);
 				System.out.println("objectToLoad = " + objectToLoad);
 
@@ -185,6 +195,7 @@ public class Load {
 					// Object value = field.get(objectToLoad);
 					Class<?> type = field.getType();
 					System.out.println("type = " + type);
+					// System.out.println("value = " + value);
 
 					// Non-primitives
 					if (type.isAssignableFrom(Boolean.class)) {
@@ -199,11 +210,11 @@ public class Load {
 						field.set(objectToLoad, resultSet.getFloat(count));
 					} else if (type.isAssignableFrom(Texture.class)) {
 						String texturePath = resultSet.getString(count);
-						System.out.println("texturePath = " + texturePath);
+						// System.out.println("texturePath = " + texturePath);
 						Texture texture = ResourceUtils.getGlobalImage(texturePath, true);
-						System.out.println("texture = " + texture);
+						// System.out.println("texture = " + texture);
 						field.set(objectToLoad, ResourceUtils.getGlobalImage(texturePath, true));
-						System.out.println("value = " + field.get(objectToLoad));
+						// System.out.println("value = " + field.get(objectToLoad));
 					} else if (type.isAssignableFrom(SquareInventory.class)) {
 						// TODO
 					} else if (type.isAssignableFrom(Square.class)) {

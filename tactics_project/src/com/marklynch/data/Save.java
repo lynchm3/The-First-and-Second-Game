@@ -234,11 +234,9 @@ public class Save {
 		try {
 			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
 			for (Square square : Level.squaresToSave) {
-				if (square.xInGrid != 0 || square.yInGrid != 0)
-					continue;
 				preparedStatement.setLong(1, square.id);
 				preparedStatement.setString(2, saveSerializerGson.toJson(square.inventory));
-				preparedStatement.setString(3, "stone.png");
+				preparedStatement.setString(3, square.getFloorImageTexture().path);
 				preparedStatement.addBatch();
 			}
 			preparedStatements.add(preparedStatement);
