@@ -11,6 +11,9 @@ import com.marklynch.ui.ActivityLog;
 
 public class EffectPoison extends Effect {
 
+	public EffectPoison() {
+	}
+
 	public EffectPoison(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " poisoned by ";
 		this.effectName = "Posion";

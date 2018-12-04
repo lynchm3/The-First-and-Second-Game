@@ -171,6 +171,7 @@ public class SaveSerializationCreator {
 		@Override
 		public JsonElement serialize(Effect src, Type type, JsonSerializationContext context) {
 			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("class", src.getClass().getName());
 			jsonObject.addProperty("effectName", src.effectName);
 			if (src.source != null)
 				jsonObject.addProperty("source", src.source.id);

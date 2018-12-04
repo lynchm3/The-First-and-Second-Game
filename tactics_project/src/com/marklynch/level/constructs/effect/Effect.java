@@ -13,7 +13,7 @@ import com.marklynch.objects.utils.DamageDealer;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public abstract class Effect implements DamageDealer {
+public class Effect implements DamageDealer {
 
 	public transient String logString;
 
@@ -59,9 +59,12 @@ public abstract class Effect implements DamageDealer {
 
 	}
 
-	public abstract void activate();
+	public void activate() {
+	}
 
-	public abstract Effect makeCopy(GameObject source, GameObject target);
+	public Effect makeCopy(GameObject source, GameObject target) {
+		return new EffectWet(source, target, totalTurns);
+	}
 
 	public void draw2() {
 		// Draw object

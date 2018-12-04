@@ -7,6 +7,9 @@ import com.marklynch.objects.tools.FlammableLightSource;
 
 public class EffectWet extends Effect {
 
+	public EffectWet() {
+	}
+
 	public EffectWet(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " wet by ";
 		this.effectName = "Wet";

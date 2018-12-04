@@ -11,6 +11,9 @@ import com.marklynch.ui.ActivityLog;
 
 public class EffectHeal extends Effect {
 
+	public EffectHeal() {
+	}
+
 	public EffectHeal(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " healed by ";
 		this.effectName = "Heal";

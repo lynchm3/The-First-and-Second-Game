@@ -14,6 +14,9 @@ import com.marklynch.ui.ActivityLog;
 
 public class EffectBurning extends Effect {
 
+	public EffectBurning() {
+	}
+
 	public EffectBurning(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " burned by ";
 		this.effectName = "Burn";

@@ -10,6 +10,9 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.ActivityLog;
 
 public class EffectCurse extends Effect {
+	public EffectCurse() {
+
+	}
 
 	public EffectCurse(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " cursed by ";

@@ -9,11 +9,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.area.Area;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.constructs.power.Power;
@@ -65,13 +67,12 @@ public class LoadDeserializerCreatore {
 		}
 		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, deserializerForIdable);
 
-		// // Effects
-		// ArrayList<Class<?>> effectClasses =
-		// PackageUtils.getClasses("com.marklynch.level.constructs.effect");
-		// for (Class<?> clazz : effectClasses) {
-		// gsonBuilder.registerTypeAdapter(clazz, deserializerForEffect);
-		// }
-		//
+		// Effects
+		ArrayList<Class<?>> effectClasses = PackageUtils.getClasses("com.marklynch.level.constructs.effect");
+		for (Class<?> clazz : effectClasses) {
+			gsonBuilder.registerTypeAdapter(clazz, deserializerForEffect);
+		}
+
 		// // AI Routines
 		// ArrayList<Class<?>> aiRoutineClasses =
 		// PackageUtils.getClasses("com.marklynch.ai.routines");
@@ -108,13 +109,11 @@ public class LoadDeserializerCreatore {
 		@Override
 		public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
-			System.out.println("json = " + json);
-			System.out.println("typeOfT = " + typeOfT);
 			return Level.ids.get(json.getAsLong());
 		}
 	};
 
-	// change serialization for specific types
+	// Texture
 	public static JsonDeserializer<Texture> deserializerForTexture = new JsonDeserializer<Texture>() {
 		@Override
 		public Texture deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
@@ -123,7 +122,34 @@ public class LoadDeserializerCreatore {
 		}
 	};
 
-	// change serialization for specific types
+	// Effect
+	public static JsonDeserializer<Effect> deserializerForEffect = new JsonDeserializer<Effect>() {
+		@Override
+		public Effect deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
+
+			Effect effect = null;
+
+			JsonObject jsonObject = json.getAsJsonObject();
+			String classString = jsonObject.get("class").getAsString();
+			Class<?> clazz;
+			try {
+				clazz = Class.forName(classString);
+				effect = (Effect) clazz.getDeclaredConstructor().newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			effect.effectName = jsonObject.get("effectName").getAsString();
+			effect.source = (GameObject) Level.ids.get(jsonObject.get("source").getAsLong());
+			effect.target = (GameObject) Level.ids.get(jsonObject.get("target").getAsLong());
+			effect.totalTurns = jsonObject.get("totalTurns").getAsInt();
+			effect.turnsRemaining = jsonObject.get("turnsRemaining").getAsInt();
+			effect.imageTexture = ResourceUtils.getGlobalImage(jsonObject.get("imageTexture").getAsString(), true);
+			return effect;
+		}
+	};
+
+	// Power
 	public static JsonDeserializer<Power> deserializerForPower = new JsonDeserializer<Power>() {
 		@Override
 		public Power deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
@@ -144,7 +170,7 @@ public class LoadDeserializerCreatore {
 		}
 	};
 
-	// change serialization for specific types
+	// Inventory
 	public static JsonDeserializer<Inventory> deserializerForInventory = new JsonDeserializer<Inventory>() {
 		@Override
 		public Inventory deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

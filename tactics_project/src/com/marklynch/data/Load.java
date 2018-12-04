@@ -114,7 +114,6 @@ public class Load {
 			// System.out.println("LOAD1 clazz = " + clazz);
 
 			Object objectToLoad = Level.ids.get(objectToLoadId);
-			// System.out.println("objectToLoad = " + objectToLoad);
 			if (objectToLoad == null) {
 				objectToLoad = clazz.getDeclaredConstructor().newInstance();
 				Level.ids.put(objectToLoadId, objectToLoad);
@@ -135,38 +134,22 @@ public class Load {
 
 	private static void load2(Class<?> clazz) throws SQLException, IllegalArgumentException, IllegalAccessException {
 
-		// System.out.println("load2 - " + clazz.getSimpleName());
-
 		ResultSet resultSet = resultSets.get(clazz);
 		if (resultSet == null)
 			return;
 
 		ArrayList<Field> fields = fieldsForEachClass.get(clazz);
-		// System.out.println("fields.size() = " + fields.size());
 
 		while (resultSet.next()) {
 
 			Long objectToLoadId = resultSet.getLong("id");
-			// if (objectToLoadId != 129651)
-			// continue;
-
-			// System.out.println("========================================");
-
-			// System.out.println("LOAD2 clazz = " + clazz);
-			// System.out.println("objectToLoadId = " + objectToLoadId);
 			Object objectToLoad = Level.ids.get(objectToLoadId);
-			// System.out.println("objectToLoad = " + objectToLoad);
 
 			int count = 1;
 			for (Field field : fields) {
 
-				System.out.println("-----------------");
-				System.out.println("field = " + field);
-
 				// Object value = field.get(objectToLoad);
 				Class<?> type = field.getType();
-				System.out.println("type = " + type);
-				System.out.println("value = " + resultSet.getString(count));
 
 				// Non-primitives
 				if (type.isAssignableFrom(boolean.class)) {
@@ -194,61 +177,6 @@ public class Load {
 				} else {
 					loadDeserializerGson.fromJson(resultSet.getString(count), type);
 				}
-
-				// if (type.isAssignableFrom(Texture.class)) {
-				// String texturePath = resultSet.getString(count);
-				// // System.out.println("texturePath = " + texturePath);
-				// Texture texture = ResourceUtils.getGlobalImage(texturePath, true);
-				// // System.out.println("texture = " + texture);
-				// field.set(objectToLoad, ResourceUtils.getGlobalImage(texturePath, true));
-				// // System.out.println("value = " + field.get(objectToLoad));
-				// } else if (type.isAssignableFrom(SquareInventory.class)) {
-				// // TODO
-				// } else if (type.isAssignableFrom(Square.class)) {
-				// Long squareId = resultSet.getLong(count);
-				// if (squareId != 0) {
-				// Square square = (Square) Level.ids.get(squareId);
-				// field.set(objectToLoad, square);
-				// }
-				// } else if (type.isAssignableFrom(Quest.class)) {
-				// Long squareId = resultSet.getLong(count);
-				// if (squareId != 0) {
-				// Quest square = (Quest) Level.ids.get(squareId);
-				// field.set(objectToLoad, square);
-				// }
-				//
-				// } else if (type.isAssignableFrom(GroupOfActors.class)) {
-				// Long squareId = resultSet.getLong(count);
-				// if (squareId != 0) {
-				// GroupOfActors square = (GroupOfActors) Level.ids.get(squareId);
-				// field.set(objectToLoad, square);
-				// }
-				//
-				// } else if (type.isAssignableFrom(Action.class)) {
-				// Long squareId = resultSet.getLong(count);
-				// if (squareId != 0) {
-				// Action square = (Action) Level.ids.get(squareId);
-				// field.set(objectToLoad, square);
-				// }
-				//
-				// } else if (type.isAssignableFrom(Enhancement.class)) {
-				// Long squareId = resultSet.getLong(count);
-				// if (squareId != 0) {
-				// Enhancement square = (Enhancement) Level.ids.get(squareId);
-				// field.set(objectToLoad, square);
-				// }
-				//
-				// } else if (type.isAssignableFrom(HashMap.class)) {
-				//
-				// } else if (type.isAssignableFrom(ArrayList.class)) {
-				//
-				// } else if (type.isAssignableFrom(Object.class)) {
-				//
-				// } else if (type.isAssignableFrom(GameObject[].class)) {
-				//
-				// } else {
-				// // nulls
-				// }
 
 				count++;
 			}

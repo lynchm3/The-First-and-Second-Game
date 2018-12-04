@@ -16,6 +16,9 @@ public class EffectBleed extends Effect {
 	// Template id
 	public int templateId;
 
+	public EffectBleed() {
+	}
+
 	public EffectBleed(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " cut by ";
 		this.effectName = "Bleed";
@@ -37,20 +40,11 @@ public class EffectBleed extends Effect {
 
 		if (!(target instanceof Actor))
 			return;
-
-		// float damage = 5 - (10 * (target.getEffectiveSlashResistance() /
-		// 100f));
 		float damage = target.changeHealth(this, null, this);
 		if (Game.level.shouldLog(target))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
-		// target.attackedBy(this, null);
-
-		// Spread fire if not turn 1
-		// if (totalTurns != turnsRemaining) {
 		Game.level.inanimateObjectsToAdd.add(
 				new InanimateObjectToAddOrRemove(Templates.BLOOD.makeCopy(null, null), target.squareGameObjectIsOn));
-		// }
-
 		turnsRemaining--;
 
 	}
