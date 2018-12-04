@@ -15,6 +15,10 @@ public class PowerPoisonThrowingKnives extends Power {
 
 	private static String NAME = "Poison";
 
+	public PowerPoisonThrowingKnives() {
+		this(null);
+	}
+
 	public PowerPoisonThrowingKnives(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_poison.png", false), source,
 				new Effect[] { new EffectPoison(source, null, 3) }, 10, null,

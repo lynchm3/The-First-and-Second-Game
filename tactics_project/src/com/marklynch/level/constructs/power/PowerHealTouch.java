@@ -15,6 +15,10 @@ public class PowerHealTouch extends Power {
 
 	private static String NAME = "Heal Self";
 
+	public PowerHealTouch() {
+		this(null);
+	}
+
 	public PowerHealTouch(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_heal.png", false), source,
 				new Effect[] { new EffectHeal(source, null, 1) }, 1, null, new Point[] { new Point(0, 0) }, 5, false,

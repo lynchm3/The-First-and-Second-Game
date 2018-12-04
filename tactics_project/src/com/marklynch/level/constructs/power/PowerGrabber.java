@@ -19,6 +19,10 @@ public class PowerGrabber extends Power {
 
 	private static String NAME = "Grabber";
 
+	public PowerGrabber() {
+		this(null);
+	}
+
 	public PowerGrabber(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("left.png", false), source, new Effect[] {}, 0, null,
 				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);

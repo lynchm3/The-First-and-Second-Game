@@ -15,6 +15,10 @@ public class PowerDouse extends Power {
 
 	private static String NAME = "Douse";
 
+	public PowerDouse() {
+		this(null);
+	}
+
 	public PowerDouse(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_douse.png", false), source,
 				new Effect[] { new EffectWet(source, null, 3) }, 5, null, new Point[] { new Point(0, 0) }, 10, true,

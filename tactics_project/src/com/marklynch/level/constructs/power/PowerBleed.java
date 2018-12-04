@@ -15,6 +15,10 @@ public class PowerBleed extends Power {
 
 	private static String NAME = "bleed";
 
+	public PowerBleed() {
+		this(null);
+	}
+
 	public PowerBleed(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("effect_bleed.png", false), source,
 				new Effect[] { new EffectBleed(source, null, 3) }, 5, null, new Point[] { new Point(0, 0) }, 10, true,

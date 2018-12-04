@@ -22,6 +22,10 @@ public class PowerInferno extends Power {
 
 	private static String NAME = "Inferno";
 
+	public PowerInferno() {
+		this(null);
+	}
+
 	public PowerInferno(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_burn.png", false), source,
 				new Effect[] { new EffectBurning(source, null, 3) }, 5, null,

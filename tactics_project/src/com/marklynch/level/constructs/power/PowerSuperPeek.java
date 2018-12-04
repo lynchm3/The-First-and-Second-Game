@@ -16,6 +16,10 @@ public class PowerSuperPeek extends Power {
 
 	private static String NAME = "SUPER PEEK";
 
+	public PowerSuperPeek() {
+		this(null);
+	}
+
 	public PowerSuperPeek(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_stop_hiding.png", false), source, new Effect[] {},
 				Integer.MAX_VALUE, null, new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);

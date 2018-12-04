@@ -24,6 +24,10 @@ public class PowerDash extends Power {
 
 	private static String NAME = "Dash";
 
+	public PowerDash() {
+		this(null);
+	}
+
 	public PowerDash(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("right.png", false), source, new Effect[] {}, 3,
 				Power.castLocationsOnly2, new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);

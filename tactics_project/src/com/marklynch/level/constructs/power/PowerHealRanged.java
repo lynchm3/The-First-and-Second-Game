@@ -16,6 +16,10 @@ public class PowerHealRanged extends Power {
 
 	private static String NAME = "Heal Self";
 
+	public PowerHealRanged() {
+		this(null);
+	}
+
 	public PowerHealRanged(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_heal.png", false), source,
 				new Effect[] { new EffectHeal(source, null, 1) }, 5, null,

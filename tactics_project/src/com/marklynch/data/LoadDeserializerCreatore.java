@@ -16,6 +16,7 @@ import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.SquareInventory;
+import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -24,7 +25,7 @@ import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
-public class loadDeserializerCreatore {
+public class LoadDeserializerCreatore {
 
 	public static Gson createLoadDeserializerGson() {
 
@@ -79,11 +80,10 @@ public class loadDeserializerCreatore {
 		// }
 		//
 		// // Power
-		// ArrayList<Class<?>> powerClasses =
-		// PackageUtils.getClasses("com.marklynch.level.constructs.power");
-		// for (Class<?> clazz : powerClasses) {
-		// gsonBuilder.registerTypeAdapter(clazz, deserializerForPower);
-		// }
+		ArrayList<Class<?>> powerClasses = PackageUtils.getClasses("com.marklynch.level.constructs.power");
+		for (Class<?> clazz : powerClasses) {
+			gsonBuilder.registerTypeAdapter(clazz, deserializerForPower);
+		}
 
 		// Quests
 		ArrayList<Class<?>> questClasses = PackageUtils.getClasses("com.marklynch.level.quest");
@@ -120,6 +120,27 @@ public class loadDeserializerCreatore {
 		public Texture deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
 			return ResourceUtils.getGlobalImage(json.getAsString(), true);
+		}
+	};
+
+	// change serialization for specific types
+	public static JsonDeserializer<Power> deserializerForPower = new JsonDeserializer<Power>() {
+		@Override
+		public Power deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
+
+			Power power = null;
+			String classString = json.getAsString();
+			Class<?> clazz;
+
+			try {
+				clazz = Class.forName(classString);
+				power = (Power) clazz.getDeclaredConstructor().newInstance();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return power;
 		}
 	};
 

@@ -15,6 +15,10 @@ public class PowerIgnite extends Power {
 
 	private static String NAME = "Ignite";
 
+	public PowerIgnite() {
+		this(null);
+	}
+
 	public PowerIgnite(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_burn.png", false), source,
 				new Effect[] { new EffectBurning(source, null, 3) }, 5, null, new Point[] { new Point(0, 0) }, 10, true,

@@ -20,6 +20,10 @@ public class PowerUnlock extends Power {
 
 	private static String NAME = "UNLOCK";
 
+	public PowerUnlock() {
+		this(null);
+	}
+
 	public PowerUnlock(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_unlock.png", false), source, new Effect[] {}, 1, null,
 				new Point[] { new Point(0, 0) }, 3, false, true, Crime.TYPE.CRIME_THEFT);

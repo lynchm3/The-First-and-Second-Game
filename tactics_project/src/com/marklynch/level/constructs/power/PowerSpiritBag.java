@@ -13,6 +13,10 @@ public class PowerSpiritBag extends Power {
 
 	private static String NAME = "Spirit Bag";
 
+	public PowerSpiritBag() {
+		this(null);
+	}
+
 	public PowerSpiritBag(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("bag.png", false), source, new Effect[] {}, 0, null,
 				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);

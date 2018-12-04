@@ -144,7 +144,7 @@ public class SaveSerializationCreator {
 	static JsonSerializer<Power> serializerForPower = new JsonSerializer<Power>() {
 		@Override
 		public JsonElement serialize(Power src, Type type, JsonSerializationContext context) {
-			return new JsonPrimitive(src.getClass().getSimpleName());
+			return new JsonPrimitive(src.getClass().getName());
 		}
 	};
 

@@ -18,6 +18,10 @@ public class PowerTeleportOther extends Power {
 	private static String NAME = "Teleport";
 	public String description = "Teleport other to any unoccupied suqare you can see up to range of ...";
 
+	public PowerTeleportOther() {
+		this(null);
+	}
+
 	public PowerTeleportOther(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("up.png", false), source, new Effect[] {}, 20, null,
 				new Point[] { new Point(0, 0) }, 10, true, true, Crime.TYPE.CRIME_ASSAULT);
