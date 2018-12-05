@@ -128,7 +128,10 @@ public class LoadDeserializerCreator {
 		@Override
 		public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
-			return Level.ids.get(json.getAsLong());
+			Object o = Level.ids.get(json.getAsLong());
+			System.out.println("ID to serialize = " + json.getAsLong());
+			System.out.println("Deserialized Idable = " + o);
+			return o;
 		}
 	};
 

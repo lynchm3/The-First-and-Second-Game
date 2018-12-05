@@ -77,7 +77,7 @@ public class Load {
 		}
 
 		long loadEndTime = System.currentTimeMillis();
-		System.out.println("Total load time = " + (loadEndTime - loadStartTime));
+		// System.out.println("Total load time = " + (loadEndTime - loadStartTime));
 	}
 
 	private static ResultSet getResultSetWithJustId(Class<?> clazz) throws SQLException {
@@ -108,12 +108,13 @@ public class Load {
 			Long objectToLoadId = resultSet.getLong("id");
 
 			// Player id
-			// if (objectToLoadId != 129651)
+			// if (objectToLoadId != 129651 && objectToLoadId != 9082)
 			// continue;
 
 			// System.out.println("LOAD1 clazz = " + clazz);
 
 			Object objectToLoad = Level.ids.get(objectToLoadId);
+			// System.out.println("LOAD1 objectToLoad 1 = " + objectToLoad);
 			if (objectToLoad == null) {
 				objectToLoad = clazz.getDeclaredConstructor().newInstance();
 				Level.ids.put(objectToLoadId, objectToLoad);
@@ -143,13 +144,26 @@ public class Load {
 		while (resultSet.next()) {
 
 			Long objectToLoadId = resultSet.getLong("id");
+
+			// Player id
+			// if (objectToLoadId != 129651 && objectToLoadId != 9082)
+			// continue;
+
 			Object objectToLoad = Level.ids.get(objectToLoadId);
+			// System.out.println("LOAD2 =======================");
+			// System.out.println("LOAD2 objectToLoad = " + objectToLoad);
+			// System.out.println("LOAD2 clazz = " + clazz);
+			// System.out.println("LOAD2 fields = " + fields);
 
 			int count = 1;
 			for (Field field : fields) {
 
 				// Object value = field.get(objectToLoad);
 				Class<?> type = field.getType();
+				String value = resultSet.getString(count);
+				String fieldName = field.getName();
+				// System.out.println("LOAD2 fieldName = " + fieldName + ", type = " + type + ",
+				// value = " + value);
 
 				// Non-primitives
 				if (type.isAssignableFrom(boolean.class)) {
@@ -175,11 +189,13 @@ public class Load {
 				} else if (type.isAssignableFrom(String.class)) {
 					field.set(objectToLoad, resultSet.getString(count));
 				} else {
-					loadDeserializerGson.fromJson(resultSet.getString(count), type);
+					field.set(objectToLoad, loadDeserializerGson.fromJson(resultSet.getString(count), type));
 				}
 
 				count++;
 			}
+			// System.out.println("LOAD2 objectToLoad AFTER load = " + objectToLoad);
+			// System.out.println("END LOAD2 =======================");
 		}
 
 		resultSet.close();
