@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
@@ -8,7 +8,7 @@ import com.marklynch.objects.actors.Actor;
 
 public class Orb extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public Orb() {
 		super();

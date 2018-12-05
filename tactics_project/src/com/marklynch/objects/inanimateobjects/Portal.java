@@ -1,7 +1,5 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
-
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionMove;
 import com.marklynch.actions.ActionTeleport;
@@ -9,10 +7,11 @@ import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
+import com.marklynch.utils.ArrayList;
 
 public class Portal extends GameObject implements UpdatesWhenSquareContentsChange, OnCompletionListener {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public Square connectedSquare = null;
 
 	public Portal() {
@@ -98,7 +97,7 @@ public class Portal extends GameObject implements UpdatesWhenSquareContentsChang
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 		actions.add(new ActionMove(performer, squareGameObjectIsOn, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;

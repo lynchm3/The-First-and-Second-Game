@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
@@ -11,7 +11,7 @@ import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
 
 public class PressurePlateRequiringSpecificItem extends Switch implements UpdatesWhenSquareContentsChange {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public GameObject keyObject = null;
 

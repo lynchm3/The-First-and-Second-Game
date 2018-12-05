@@ -1,7 +1,5 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
-
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionMove;
 import com.marklynch.actions.ActionUsePower;
@@ -10,10 +8,11 @@ import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
+import com.marklynch.utils.ArrayList;
 
 public class Landmine extends Discoverable implements UpdatesWhenSquareContentsChange, OnCompletionListener {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public int targetWeight = 10;
 	public Power power;
 
@@ -97,7 +96,7 @@ public class Landmine extends Discoverable implements UpdatesWhenSquareContentsC
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 		if (!this.discovered)
 			return actions;
 		actions.add(new ActionMove(performer, squareGameObjectIsOn, true));

@@ -1,6 +1,6 @@
 package com.marklynch.objects.actors;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.level.constructs.Crime;
@@ -14,7 +14,7 @@ import com.marklynch.objects.templates.Templates;
 
 public class Thief extends Human {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public Thief() {
 		super();

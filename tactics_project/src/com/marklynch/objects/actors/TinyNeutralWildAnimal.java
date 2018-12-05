@@ -1,17 +1,16 @@
 package com.marklynch.objects.actors;
 
-import java.util.ArrayList;
-
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionSquash;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 
 public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public TinyNeutralWildAnimal() {
 		super();
@@ -30,7 +29,7 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 		actions.add(new ActionSquash(performer, this, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;

@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionHide;
@@ -10,9 +10,9 @@ import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
 
 public class HidingPlace extends Searchable implements UpdatesWhenSquareContentsChange {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
-	public ArrayList<GameObject> gameObjectsHiddenHere = new ArrayList<GameObject>();
+	public ArrayList<GameObject> gameObjectsHiddenHere = new ArrayList<GameObject>(GameObject.class);
 
 	public HidingPlace() {
 		super();

@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -13,7 +13,7 @@ import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
 
 public class VoidHole extends GameObject implements UpdatesWhenSquareContentsChange, OnCompletionListener {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public Square connectedSquare = null;
 
 	public VoidHole() {

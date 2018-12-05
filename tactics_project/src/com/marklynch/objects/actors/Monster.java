@@ -1,11 +1,11 @@
 package com.marklynch.objects.actors;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class Monster extends Actor {
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public Monster() {
 		super();

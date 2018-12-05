@@ -6,10 +6,11 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MapMarker;
 import com.marklynch.ui.TextBox;
 import com.marklynch.ui.TextBoxHolder;
+import com.marklynch.ui.button.Link;
+import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
-
-import com.marklynch.utils.Color;
 
 public class FullScreenTextBox implements TextBoxHolder {
 
@@ -66,10 +67,13 @@ public class FullScreenTextBox implements TextBoxHolder {
 				mapMarker.baseName = textBox.getText();
 				if (mapMarker.baseName.length() == 0) {
 					mapMarker.name = "Marker";
-					mapMarker.links = TextUtils.getLinks(true, this);
+					mapMarker.links = new ArrayList<Link>(Link.class);
+					mapMarker.links.addAll(TextUtils.getLinks(true, this));
+					;
 				} else {
 					mapMarker.name = mapMarker.baseName;
-					mapMarker.links = TextUtils.getLinks(true, this);
+					mapMarker.links = new ArrayList<Link>(Link.class);
+					mapMarker.links.addAll(TextUtils.getLinks(true, this));
 				}
 				Level.activeTextBox = null;
 				Level.closeFullScreenTextBox();

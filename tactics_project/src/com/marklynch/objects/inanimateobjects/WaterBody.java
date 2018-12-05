@@ -2,7 +2,6 @@ package com.marklynch.objects.inanimateobjects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import com.marklynch.Game;
@@ -13,11 +12,12 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.Consumable;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
 public class WaterBody extends WaterSource implements Consumable {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public Effect[] consumeEffects;
 
 	// 3+ connections
@@ -93,7 +93,7 @@ public class WaterBody extends WaterSource implements Consumable {
 	public float quarterWidth = Game.SQUARE_WIDTH / 4;
 	public float quarterHeight = Game.SQUARE_HEIGHT / 4;
 
-	public ArrayList<Texture> textures = new ArrayList<Texture>();
+	public ArrayList<Texture> textures = new ArrayList<Texture>(Texture.class);
 	public int texturesIndex = 0;
 
 	public WaterBody() {

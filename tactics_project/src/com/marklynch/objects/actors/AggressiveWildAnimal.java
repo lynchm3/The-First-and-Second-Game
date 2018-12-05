@@ -1,16 +1,15 @@
 package com.marklynch.objects.actors;
 
-import java.util.ArrayList;
-
 import com.marklynch.ai.routines.AIRoutineForWildAnimal;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 
 public class AggressiveWildAnimal extends WildAnimal {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public AggressiveWildAnimal() {
 		super();

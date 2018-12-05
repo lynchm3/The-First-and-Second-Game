@@ -1,13 +1,13 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 
 public class MeatChunk extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public MeatChunk() {
 		super();

@@ -1,13 +1,12 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionChangeAppearance;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.button.Link;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
@@ -16,7 +15,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class MapMarker extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public static Texture RED_MAP_MARKER_TEXTURE;
 	public static Texture TREASURE_MAP_MARKER_TEXTURE;
@@ -24,7 +23,7 @@ public class MapMarker extends GameObject {
 	public static Texture GREEN_MAP_MARKER_TEXTURE;
 	public static Texture BLUE_MAP_MARKER_TEXTURE;
 
-	public static ArrayList<Texture> MAP_MARKER_TEXTURES = new ArrayList<Texture>();
+	public static ArrayList<Texture> MAP_MARKER_TEXTURES = new ArrayList<Texture>(Texture.class);
 
 	public String baseName = "";
 	public ArrayList<Link> links;
@@ -32,7 +31,8 @@ public class MapMarker extends GameObject {
 	public MapMarker() {
 		super();
 		name = "Marker";
-		links = TextUtils.getLinks(true, this);
+		links = new ArrayList<Link>(Link.class);
+		links.addAll(TextUtils.getLinks(true, this));
 		canBePickedUp = false;
 
 		fitsInInventory = false;
@@ -50,7 +50,7 @@ public class MapMarker extends GameObject {
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 		actions.add(new ActionChangeAppearance(this));
 		return actions;
 

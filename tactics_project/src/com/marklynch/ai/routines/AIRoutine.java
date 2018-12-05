@@ -1399,6 +1399,7 @@ public abstract class AIRoutine {
 		this.actor.thoughtBubbleImageTextureAction = Action.textureWrite;
 
 		if (actor.straightLineDistanceTo(wantedPoster.squareGameObjectIsOn) < 2) {
+
 			wantedPoster.updateCrimes(
 					(ArrayList<Crime>) actor.mapActorToCrimesWitnessed
 							.get(actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity).clone(),

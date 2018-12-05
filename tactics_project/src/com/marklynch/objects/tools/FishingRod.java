@@ -1,6 +1,5 @@
 package com.marklynch.objects.tools;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.util.vector.Matrix4f;
@@ -13,6 +12,7 @@ import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.TextureUtils;
@@ -21,7 +21,7 @@ import com.marklynch.utils.Utils.Point;
 
 public class FishingRod extends Tool {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public float lineAnchorX = 93;
 	public float lineAnchorY = 0;
 	public int fishingRange = 1;

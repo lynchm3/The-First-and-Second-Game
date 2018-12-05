@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 import java.util.Random;
 
 import com.marklynch.Game;
@@ -14,7 +14,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class Wall extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public boolean fullWall = true;
 	public boolean fullRightWall;

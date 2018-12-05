@@ -1,13 +1,12 @@
 package com.marklynch.objects.tools;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 
 public class Tool extends Weapon {
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public Tool() {
 

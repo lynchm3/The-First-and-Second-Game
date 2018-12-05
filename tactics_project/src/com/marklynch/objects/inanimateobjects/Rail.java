@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
@@ -11,7 +11,7 @@ import com.marklynch.utils.Texture;
 
 public class Rail extends GameObject implements SwitchListener {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public Direction direction1;
 	public Direction direction2;
 	public static Texture imageTextureLeftRight;

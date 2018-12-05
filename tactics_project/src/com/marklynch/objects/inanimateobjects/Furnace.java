@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
@@ -8,7 +8,7 @@ import com.marklynch.utils.Texture;
 
 public class Furnace extends Openable {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public Texture chestOpenTexture;
 	public Texture chestClosedTexture;

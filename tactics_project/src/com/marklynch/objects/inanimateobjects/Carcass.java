@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionSkin;
@@ -9,7 +9,7 @@ import com.marklynch.objects.actors.Actor;
 
 public class Carcass extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public String baseName;
 
 	public Carcass() {

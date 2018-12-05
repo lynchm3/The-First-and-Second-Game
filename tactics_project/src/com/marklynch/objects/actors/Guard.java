@@ -1,6 +1,6 @@
 package com.marklynch.objects.actors;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.level.constructs.Faction;
@@ -13,7 +13,7 @@ import com.marklynch.objects.templates.Templates;
 
 public class Guard extends Human {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public Shift shift;
 	public Square[] patrolSquares;

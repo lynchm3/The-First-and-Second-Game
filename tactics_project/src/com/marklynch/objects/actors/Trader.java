@@ -1,6 +1,6 @@
 package com.marklynch.objects.actors;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -19,7 +19,7 @@ import com.marklynch.objects.templates.Templates;
 
 public class Trader extends Human implements Comparator<GameObject> {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public StructureRoom shopRoom;
 	// public StructureRoom shop;

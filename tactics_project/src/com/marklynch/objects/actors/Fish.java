@@ -1,6 +1,6 @@
 package com.marklynch.objects.actors;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -12,7 +12,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class Fish extends WildAnimal {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public Fish() {
 		super();

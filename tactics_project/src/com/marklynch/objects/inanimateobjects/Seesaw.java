@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
@@ -20,7 +20,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class Seesaw extends GameObject implements SwitchListener {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public Square square1;
 	public Square square2;

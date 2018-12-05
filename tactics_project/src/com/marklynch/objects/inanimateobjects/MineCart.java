@@ -1,7 +1,5 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
-
 import com.marklynch.actions.ActionUsePower;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
@@ -9,10 +7,11 @@ import com.marklynch.level.constructs.power.PowerTelekineticPush;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
+import com.marklynch.utils.ArrayList;
 
 public class MineCart extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public Direction direction;
 
 	public MineCart() {
@@ -44,7 +43,7 @@ public class MineCart extends GameObject {
 		if (squareGameObjectIsOn == null)
 			return;
 
-		ArrayList<SquareAndDirection> squaresForAnimation = new ArrayList<SquareAndDirection>();
+		ArrayList<SquareAndDirection> squaresForAnimation = new ArrayList<SquareAndDirection>(SquareAndDirection.class);
 
 		SquareAndDirection currentSquareAndDirection = new SquareAndDirection();
 		currentSquareAndDirection.direction = this.direction;

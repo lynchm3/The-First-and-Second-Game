@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
@@ -8,7 +8,7 @@ import com.marklynch.objects.tools.Tool;
 
 public class Matches extends Tool {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public Matches() {
 		super();

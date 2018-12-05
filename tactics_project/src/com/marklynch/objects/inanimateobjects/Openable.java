@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.actions.ActionClose;
 import com.marklynch.actions.ActionLock;
@@ -12,7 +12,7 @@ import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.utils.SwitchListener;
 
 public abstract class Openable extends GameObject implements SwitchListener {
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public boolean open = false;
 	public Key[] keys;

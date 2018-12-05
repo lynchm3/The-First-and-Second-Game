@@ -1,6 +1,5 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.marklynch.Game;
@@ -8,13 +7,14 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class WantedPoster extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public ArrayList<Crime> crimes;
 	public Actor criminal;
@@ -33,17 +33,19 @@ public class WantedPoster extends GameObject {
 		super.setInstances(gameObject);
 	}
 
-	public WantedPoster makeCopy(Square square, String name, ArrayList<Crime> crimes, Actor owner) {
+	public WantedPoster makeCopy(Square square, String name, java.util.ArrayList<Crime> arrayList, Actor owner) {
 		WantedPoster wantedPoster = new WantedPoster();
 		setInstances(wantedPoster);
 		super.setAttributesForCopy(wantedPoster, square, owner);
-		wantedPoster.crimes = crimes;
+		wantedPoster.crimes = new ArrayList<Crime>(Crime.class);
+		wantedPoster.crimes.addAll(arrayList);
 		conversation = createConversation(wantedPoster.generateText());
 		return wantedPoster;
 	}
 
-	public void updateCrimes(ArrayList<Crime> crimes, Actor criminal) {
-		this.crimes = crimes;
+	public void updateCrimes(java.util.ArrayList<Crime> crimes, Actor criminal) {
+		this.crimes = new ArrayList<Crime>(Crime.class);
+		this.crimes.addAll(crimes);
 		this.criminal = criminal;
 	}
 
@@ -105,7 +107,7 @@ public class WantedPoster extends GameObject {
 			return conversationText;
 
 		}
-		ArrayList<Crime.TYPE> uniqueCrimes = new ArrayList<Crime.TYPE>();
+		ArrayList<Crime.TYPE> uniqueCrimes = new ArrayList<Crime.TYPE>(Crime.TYPE.class);
 		HashMap<Crime.TYPE, Integer> crimeTypeCounts = new HashMap<Crime.TYPE, Integer>();
 		for (Crime crime : crimes) {
 			if (!uniqueCrimes.contains(crime.type)) {

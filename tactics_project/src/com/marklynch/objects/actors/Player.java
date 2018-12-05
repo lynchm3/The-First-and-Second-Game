@@ -1,7 +1,5 @@
 package com.marklynch.objects.actors;
 
-import java.util.ArrayList;
-
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
@@ -28,6 +26,7 @@ import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.popups.Notification;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
@@ -37,7 +36,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class Player extends Human {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public static AIPath playerPathToMouse = null;
 	public static AIPath playerPathToMove = null;
@@ -48,7 +47,7 @@ public class Player extends Human {
 	public static float xp;
 	public static float xpThisLevel;
 	public static float xpPerLevel = 55;
-	public transient ArrayList<Square> squaresVisibleToPlayer = new ArrayList<Square>();
+	public transient ArrayList<Square> squaresVisibleToPlayer = new ArrayList<Square>(Square.class);
 
 	public transient long lastUpdateRealtime = 0;
 
@@ -302,7 +301,7 @@ public class Player extends Human {
 
 		// Awkward corner squares (the inner corner ones that u cant tecnically
 		// see)
-		ArrayList<Square> awkwardSquaresToMakeVisible = new ArrayList<Square>();
+		ArrayList<Square> awkwardSquaresToMakeVisible = new ArrayList<Square>(Square.class);
 		for (Square potentiallyVIsibleSquare : this.getAllSquaresWithinDistance(0, sight, square)) {
 
 			if (potentiallyVIsibleSquare.visibleToPlayer)

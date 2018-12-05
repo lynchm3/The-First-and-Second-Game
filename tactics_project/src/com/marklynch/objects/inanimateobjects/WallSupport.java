@@ -1,6 +1,5 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.actions.Action;
@@ -9,11 +8,12 @@ import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationShake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Utils;
 
 public class WallSupport extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public ArrayList<GameObject> supportedGameObjects;
 
@@ -33,15 +33,16 @@ public class WallSupport extends GameObject {
 
 	public WallSupport makeCopy(Square square, Actor owner, GameObject... supportedGameObjects) {
 
-		return makeCopy(square, owner, new ArrayList<>(Arrays.asList(supportedGameObjects)));
+		return makeCopy(square, owner, new java.util.ArrayList<>(Arrays.asList(supportedGameObjects)));
 	}
 
-	public WallSupport makeCopy(Square square, Actor owner, ArrayList<GameObject> supportedGameObjects) {
+	public WallSupport makeCopy(Square square, Actor owner, java.util.ArrayList<GameObject> supportedGameObjects) {
 
 		WallSupport support = new WallSupport();
 		setInstances(support);
 		super.setAttributesForCopy(support, square, owner);
-		support.supportedGameObjects = supportedGameObjects;
+		support.supportedGameObjects = new ArrayList<GameObject>(GameObject.class);
+		support.supportedGameObjects.addAll(supportedGameObjects);
 		return support;
 	}
 
@@ -59,8 +60,8 @@ public class WallSupport extends GameObject {
 	public void collapseSurroundingObjects(GameObject collapser, final Object attacker, final Action action) {
 
 		ArrayList<GameObject> surroundingGameObjects = collapser.getSurroundingGameObjects();
-		ArrayList<GameObject> surroundingObjectsToCollapse = Utils.intersection(surroundingGameObjects,
-				supportedGameObjects);
+		ArrayList<GameObject> surroundingObjectsToCollapse = new ArrayList<GameObject>(GameObject.class);
+		surroundingObjectsToCollapse.addAll(Utils.intersection(surroundingGameObjects, supportedGameObjects));
 		for (GameObject s : surroundingObjectsToCollapse) {
 
 			final GameObject surroundingObjectToCollapse = s;

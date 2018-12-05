@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
@@ -9,7 +9,7 @@ import com.marklynch.utils.Texture;
 
 public class Discoverable extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public boolean discovered = false;
 	public Texture preDiscoverTexture; // if null the object is invisible if not

@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.actions.ActionDropItems;
@@ -11,7 +11,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class Tree extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public float appleMaxRatioSize = 0.25f;
 	public float healthWhenLastDroppedFruit;
@@ -102,7 +102,7 @@ public class Tree extends GameObject {
 		// WE were hit, drop all fruit
 		if (remainingHealth < healthWhenLastDroppedFruit && inventory.size() > 0) {
 
-			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>();
+			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>(GameObject.class);
 			objectsToDropFromHit.addAll(this.inventory.gameObjects);
 			for (GameObject objectToDrop : objectsToDropFromHit) {
 				objectToDrop.drawOffsetRatioY = 1 - (objectToDrop.height / Game.SQUARE_HEIGHT);
@@ -150,7 +150,7 @@ public class Tree extends GameObject {
 		}
 
 		// Drop apples?
-		ArrayList<GameObject> objectsToDropRandomly = new ArrayList<GameObject>();
+		ArrayList<GameObject> objectsToDropRandomly = new ArrayList<GameObject>(GameObject.class);
 		for (GameObject gameObject : inventory.gameObjects) {
 
 			if (gameObject.widthRatio >= appleMaxRatioSize) {

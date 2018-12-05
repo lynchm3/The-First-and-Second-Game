@@ -1,7 +1,7 @@
 package com.marklynch.objects.inanimateobjects;
 
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.actions.Action;
 import com.marklynch.level.squares.Square;
@@ -11,7 +11,7 @@ import com.marklynch.utils.TriangleUtils;
 
 public class GameObjectExploder extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public GameObjectExploder() {
 		super();

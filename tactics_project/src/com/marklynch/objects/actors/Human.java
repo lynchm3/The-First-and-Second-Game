@@ -1,6 +1,6 @@
 package com.marklynch.objects.actors;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
@@ -10,7 +10,7 @@ import com.marklynch.utils.ResourceUtils;
 
 public class Human extends Actor {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public Human() {
 		torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", true);

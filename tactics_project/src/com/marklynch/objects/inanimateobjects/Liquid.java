@@ -1,6 +1,6 @@
 package com.marklynch.objects.inanimateobjects;
 
-import java.util.ArrayList;
+import com.marklynch.utils.ArrayList;
 
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
@@ -9,7 +9,7 @@ import com.marklynch.objects.utils.Consumable;
 
 public class Liquid extends GameObject implements Consumable {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public float volume;
 	public Effect[] touchEffects;
 	public Effect[] consumeEffects;

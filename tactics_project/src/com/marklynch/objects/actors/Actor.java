@@ -1,6 +1,5 @@
 package com.marklynch.objects.actors;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -69,6 +68,7 @@ import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
@@ -79,7 +79,7 @@ import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class Actor extends GameObject {
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "travelDistance", "inventory",
 			"showInventory", "fitsInInventory", "canContainOtherObjects" };
@@ -122,8 +122,8 @@ public class Actor extends GameObject {
 
 	public HashMap<GameObject, Investigation> investigationsMap = new HashMap<GameObject, Investigation>();
 
-	public ArrayList<Crime> crimesPerformedThisTurn = new ArrayList<Crime>();
-	public ArrayList<Crime> crimesPerformedInLifetime = new ArrayList<Crime>();
+	public ArrayList<Crime> crimesPerformedThisTurn = new ArrayList<Crime>(Crime.class);
+	public ArrayList<Crime> crimesPerformedInLifetime = new ArrayList<Crime>(Crime.class);
 
 	public Texture standingTexture = null;
 	public Texture stepLeftTexture = null;
@@ -170,8 +170,8 @@ public class Actor extends GameObject {
 	public int timePerStep = 100;
 	public int thisStepTime = timePerStep;
 
-	public ArrayList<Crime> crimesWitnessedUnresolved = new ArrayList<Crime>();
-	public ArrayList<Actor> knownCriminals = new ArrayList<Actor>();
+	public ArrayList<Crime> crimesWitnessedUnresolved = new ArrayList<Crime>(Crime.class);
+	public ArrayList<Actor> knownCriminals = new ArrayList<Actor>(Actor.class);
 	public Map<Actor, ArrayList<Crime>> mapActorToCrimesWitnessed = new HashMap<Actor, ArrayList<Crime>>();
 	public Map<Actor, Integer> accumulatedCrimeSeverityWitnessed = new HashMap<Actor, Integer>();
 	public Map<Actor, Integer> accumulatedCrimeSeverityUnresolved = new HashMap<Actor, Integer>();
@@ -180,16 +180,17 @@ public class Actor extends GameObject {
 
 	public AILine aiLine;
 
-	public ArrayList<Door> doors = new ArrayList<Door>();
+	public ArrayList<Door> doors = new ArrayList<Door>(Door.class);
 	public boolean followersShouldFollow = false;
 
 	public boolean sleeping = false;
 
-	public ArrayList<Power> powers = new ArrayList<Power>();
+	public ArrayList<Power> powers = new ArrayList<Power>(Power.class);
 
 	public Area area;
 
-	public ArrayList<GameObject> gameObjectsInInventoryThatBelongToAnother = new ArrayList<GameObject>();
+	public ArrayList<GameObject> gameObjectsInInventoryThatBelongToAnother = new ArrayList<GameObject>(
+			GameObject.class);
 
 	public int[] requiredEquipmentTemplateIds = new int[0];
 
@@ -378,7 +379,7 @@ public class Actor extends GameObject {
 				maxPathSize);
 
 		if (aStarNodesPath != null) {
-			ArrayList<Square> squarePath = new ArrayList<Square>();
+			ArrayList<Square> squarePath = new ArrayList<Square>(Square.class);
 
 			for (Square aStarNode : aStarNodesPath) {
 				squarePath.add(aStarNode);
@@ -1752,7 +1753,7 @@ public class Actor extends GameObject {
 				clearActions();
 
 			// Remove dead attackers from attackers list
-			ArrayList<GameObject> gameObjectsToRemoveFromList = new ArrayList<GameObject>();
+			ArrayList<GameObject> gameObjectsToRemoveFromList = new ArrayList<GameObject>(GameObject.class);
 			for (GameObject gameObject : attackers) {
 				if (gameObject.remainingHealth <= 0) {
 					gameObjectsToRemoveFromList.add(gameObject);
@@ -1881,7 +1882,7 @@ public class Actor extends GameObject {
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 
 		// if (this.remainingHealth <= 0)
 		// return actions;
@@ -2097,7 +2098,7 @@ public class Actor extends GameObject {
 
 	public void removeHidingPlacesFromAttackersList() {
 
-		ArrayList<GameObject> hidingPlacesToRemove = new ArrayList<GameObject>();
+		ArrayList<GameObject> hidingPlacesToRemove = new ArrayList<GameObject>(GameObject.class);
 		for (GameObject attacker : this.getAttackers()) {
 			if (attacker instanceof HidingPlace) {
 				hidingPlacesToRemove.add(attacker);
@@ -2185,7 +2186,7 @@ public class Actor extends GameObject {
 				if (gameObjectStacks.containsKey(gameObject.templateId)) {
 					gameObjectStacks.get(gameObject.templateId).add(gameObject);
 				} else {
-					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
+					ArrayList<GameObject> newStack = new ArrayList<GameObject>(GameObject.class);
 					newStack.add(gameObject);
 					gameObjectStacks.put(gameObject.templateId, newStack);
 				}
@@ -2213,7 +2214,7 @@ public class Actor extends GameObject {
 	// HashMap<Actor, Integer>();
 
 	public void manageWitnessedCrimes() {
-		ArrayList<Crime> crimesToRemove = new ArrayList<Crime>();
+		ArrayList<Crime> crimesToRemove = new ArrayList<Crime>(Crime.class);
 		for (Crime crime : crimesWitnessedUnresolved) {
 			if (crime.isResolved())
 				crimesToRemove.add(crime);
@@ -2255,7 +2256,7 @@ public class Actor extends GameObject {
 		if (mapActorToCrimesWitnessed.containsKey(criminal)) {
 			mapActorToCrimesWitnessed.get(criminal).add(crime);
 		} else {
-			ArrayList<Crime> newCrimeList = new ArrayList<Crime>();
+			ArrayList<Crime> newCrimeList = new ArrayList<Crime>(Crime.class);
 			newCrimeList.add(crime);
 			mapActorToCrimesWitnessed.put(crime.performer, newCrimeList);
 		}
@@ -2360,7 +2361,8 @@ public class Actor extends GameObject {
 
 	public void createSearchLocationsBasedOnSound(Sound sound) {
 
-		ArrayList<Class> classesArrayList = new ArrayList<Class>(Arrays.asList(soundClassesToReactTo));
+		ArrayList<Class> classesArrayList = new ArrayList<Class>(Class.class);
+		classesArrayList.addAll(Arrays.asList(soundClassesToReactTo));
 
 		if (this.canSeeGameObject(sound.sourcePerformer))
 			return;
@@ -2485,7 +2487,7 @@ public class Actor extends GameObject {
 
 	@Override
 	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
-		ArrayList<Object> result = new ArrayList<Object>();
+		ArrayList<Object> result = new ArrayList<Object>(Object.class);
 
 		result.add("Inherent " + highLevelStats.get(statType).value);
 		if (equipped != null && equipped.highLevelStats.get(statType).value != 0) {

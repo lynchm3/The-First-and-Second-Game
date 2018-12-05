@@ -2,8 +2,6 @@ package com.marklynch.objects.inanimateobjects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.ArrayList;
-
 import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
@@ -110,6 +108,7 @@ import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.utils.DamageDealer;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
@@ -122,7 +121,7 @@ import com.marklynch.utils.TextureUtils;
 public class GameObject
 		implements Idable, ActionableInWorld, ActionableInInventory, Comparable, InventoryParent, DamageDealer {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
@@ -166,7 +165,7 @@ public class GameObject
 	public float weight;
 
 	public Texture imageTexture = null;
-	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
+	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>(Effect.class);
 
 	// attributes
 	public int remainingHealth = 1;
@@ -217,7 +216,7 @@ public class GameObject
 	public boolean hiding = false;
 	public HidingPlace hidingPlace = null;
 
-	public ArrayList<GameObject> attackers = new ArrayList<GameObject>();
+	public ArrayList<GameObject> attackers = new ArrayList<GameObject>(GameObject.class);
 
 	public transient GroupOfActors groupOfActors;
 
@@ -258,7 +257,7 @@ public class GameObject
 	public float swimmingChangeX = 0;
 	public float swimmingChangeY = 0;
 
-	public ArrayList<Arrow> arrowsEmbeddedInThis = new ArrayList<Arrow>();
+	public ArrayList<Arrow> arrowsEmbeddedInThis = new ArrayList<Arrow>(Arrow.class);
 
 	public GameObject fishingTarget;
 	public GameObject equipped = null;
@@ -823,7 +822,7 @@ public class GameObject
 	}
 
 	public ArrayList<Square> getAllSquaresAtDistance(int distance) {
-		ArrayList<Square> squares = new ArrayList<Square>();
+		ArrayList<Square> squares = new ArrayList<Square>(Square.class);
 		if (distance == 0) {
 			squares.add(this.squareGameObjectIsOn);
 			return squares;
@@ -879,7 +878,7 @@ public class GameObject
 	}
 
 	public static ArrayList<Square> getAllSquaresWithinDistance(int minDistance, int maxDistance, Square squareFrom) {
-		ArrayList<Square> squares = new ArrayList<Square>();
+		ArrayList<Square> squares = new ArrayList<Square>(Square.class);
 
 		for (int distance = minDistance; distance <= maxDistance; distance++) {
 
@@ -940,7 +939,7 @@ public class GameObject
 	}
 
 	public ArrayList<Point> getAllCoordinatesAtDistanceFromSquare(int distance, Square square) {
-		ArrayList<Point> coordinates = new ArrayList<Point>();
+		ArrayList<Point> coordinates = new ArrayList<Point>(Point.class);
 		if (distance == 0) {
 			coordinates.add(new Point(square.xInGrid, square.yInGrid));
 			return coordinates;
@@ -1020,7 +1019,7 @@ public class GameObject
 	}
 
 	public ArrayList<Weapon> getWeaponsInInventory() {
-		ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+		ArrayList<Weapon> weapons = new ArrayList<Weapon>(Weapon.class);
 		for (GameObject gameObject : inventory.getGameObjects()) {
 			if (gameObject instanceof Weapon) {
 				weapons.add((Weapon) gameObject);
@@ -1166,7 +1165,7 @@ public class GameObject
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 
 		// if (this.remainingHealth <= 0)
 		// return actions;
@@ -1585,7 +1584,7 @@ public class GameObject
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
 
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 
 		if (this.inventoryThatHoldsThisObject == null) {
 			return actions;
@@ -1654,7 +1653,7 @@ public class GameObject
 	}
 
 	public ArrayList<Action> getAllActionsPerformedOnThisInOtherInventory(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 		if (!(this.inventoryThatHoldsThisObject.parent instanceof Actor)) {
 			actions.add(new ActionTakeItemsSelectedInInventory(performer, Inventory.target, this));
 			actions.add(new ActionEquip(performer, this));
@@ -1796,7 +1795,7 @@ public class GameObject
 
 		// boolean wet = isWet();
 
-		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>();
+		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>(Effect.class);
 		for (Effect effect : (ArrayList<Effect>) this.activeEffectsOnGameObject.clone()) {
 
 			effect.activate();
@@ -2159,7 +2158,7 @@ public class GameObject
 
 	public ArrayList<Action> getAllActionsForEquippedItem(Actor performer) {
 
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 
 		if (isFloorObject) {
 			return actions;
@@ -2271,7 +2270,7 @@ public class GameObject
 
 	@Override
 	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
-		ArrayList<Object> result = new ArrayList<Object>();
+		ArrayList<Object> result = new ArrayList<Object>(Object.class);
 		result.add(name + " " + highLevelStats.get(statType).value);
 		if (enhancement != null && enhancement.highLevelStats.get(statType).value != 0) {
 			result.add(TextUtils.NewLine.NEW_LINE);
@@ -2543,7 +2542,7 @@ public class GameObject
 	}
 
 	public ArrayList<GameObject> getSurroundingGameObjects() {
-		ArrayList<GameObject> surroundingGameObjects = new ArrayList<GameObject>();
+		ArrayList<GameObject> surroundingGameObjects = new ArrayList<GameObject>(GameObject.class);
 		Square squareToLeft = this.squareGameObjectIsOn.getSquareToLeftOf();
 		if (squareToLeft != null) {
 			surroundingGameObjects.addAll(squareToLeft.inventory.gameObjects);
