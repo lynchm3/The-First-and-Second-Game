@@ -1,7 +1,6 @@
 package com.marklynch.data;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -47,6 +46,7 @@ import com.marklynch.objects.inanimateobjects.MeatChunk;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.utils.SwitchListener;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
@@ -93,32 +93,37 @@ public class LoadDeserializerCreator {
 		System.out.println("Deserializer - gameObjectClasses = " + gameObjectClasses);
 
 		// Effects
-		ArrayList<Class<?>> effectClasses = PackageUtils.getClasses("com.marklynch.level.constructs.effect");
+		ArrayList<Class> effectClasses = new ArrayList<Class>(Class.class);
+		effectClasses.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.effect"));
 		for (Class<?> clazz : effectClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForEffect);
 		}
 
 		// AI Routines
-		ArrayList<Class<?>> aiRoutineClasses = PackageUtils.getClasses("com.marklynch.ai.routines");
+		ArrayList<Class> aiRoutineClasses = new ArrayList<Class>(Class.class);
+		aiRoutineClasses.addAll(PackageUtils.getClasses("com.marklynch.ai.routines"));
 		for (Class<?> clazz : aiRoutineClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForAIRoutine);
 		}
 
 		// // Power
-		ArrayList<Class<?>> powerClasses = PackageUtils.getClasses("com.marklynch.level.constructs.power");
+		ArrayList<Class> powerClasses = new ArrayList<Class>(Class.class);
+		powerClasses.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.power"));
 		for (Class<?> clazz : powerClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForPower);
 		}
 
 		// Quests
-		ArrayList<Class<?>> questClasses = PackageUtils.getClasses("com.marklynch.level.quest");
+		ArrayList<Class> questClasses = new ArrayList<Class>(Class.class);
+		questClasses.addAll(PackageUtils.getClasses("com.marklynch.level.quest"));
 		for (Class<?> clazz : questClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForIdable);
 		}
 
 		// Structure Room
-		ArrayList<Class<?>> structureRoomClasses = PackageUtils
-				.getClasses("com.marklynch.level.constructs.bounds.structure.structureroom");
+		ArrayList<Class> structureRoomClasses = new ArrayList<Class>(Class.class);
+		structureRoomClasses
+				.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.bounds.structure.structureroom"));
 		for (Class<?> clazz : structureRoomClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForIdable);
 		}
@@ -374,11 +379,23 @@ public class LoadDeserializerCreator {
 				SquareInventory squareInventory = (SquareInventory) inventory;
 				squareInventory.square = (Square) Level.ids.get(jsonObject.get("square").getAsLong());
 				squareInventory.canShareSquare = jsonObject.get("canShareSquare").getAsBoolean();
-				squareInventory.gameObjectThatCantShareSquare = (GameObject) Level.ids
-						.get(jsonObject.get("gameObjectThatCantShareSquare").getAsLong());
-				squareInventory.actor = (Actor) Level.ids.get(jsonObject.get("actor").getAsLong());
-				squareInventory.door = (Door) Level.ids.get(jsonObject.get("door").getAsLong());
-				squareInventory.waterBody = (WaterBody) Level.ids.get(jsonObject.get("waterBody").getAsLong());
+
+				JsonElement j = jsonObject.get("gameObjectThatCantShareSquare");
+				if (j != null)
+					squareInventory.gameObjectThatCantShareSquare = (GameObject) Level.ids.get(j.getAsLong());
+
+				j = jsonObject.get("actor");
+				if (j != null)
+					squareInventory.actor = (Actor) Level.ids.get(jsonObject.get("actor").getAsLong());
+
+				j = jsonObject.get("door");
+				if (j != null)
+					squareInventory.door = (Door) Level.ids.get(jsonObject.get("door").getAsLong());
+
+				j = jsonObject.get("waterBody");
+				if (j != null)
+					squareInventory.waterBody = (WaterBody) Level.ids.get(jsonObject.get("waterBody").getAsLong());
+
 				squareInventory.gameObjectsGround = Load.loadDeserializerGson
 						.fromJson(jsonObject.get("gameObjectsGround"), typeToken);
 				squareInventory.gameObjectsNonGround = Load.loadDeserializerGson

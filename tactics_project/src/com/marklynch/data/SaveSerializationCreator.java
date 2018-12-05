@@ -352,11 +352,15 @@ public class SaveSerializationCreator {
 				SquareInventory squareInventory = (SquareInventory) src;
 				jsonObject.add("square", new JsonPrimitive(squareInventory.square.id));
 				jsonObject.add("canShareSquare", new JsonPrimitive(squareInventory.canShareSquare));
-				jsonObject.add("gameObjectThatCantShareSquare",
-						new JsonPrimitive(squareInventory.gameObjectThatCantShareSquare.id));
-				jsonObject.add("actor", new JsonPrimitive(squareInventory.actor.id));
-				jsonObject.add("door", new JsonPrimitive(squareInventory.door.id));
-				jsonObject.add("waterBody", new JsonPrimitive(squareInventory.waterBody.id));
+				if (squareInventory.gameObjectThatCantShareSquare != null)
+					jsonObject.add("gameObjectThatCantShareSquare",
+							new JsonPrimitive(squareInventory.gameObjectThatCantShareSquare.id));
+				if (squareInventory.actor != null)
+					jsonObject.add("actor", new JsonPrimitive(squareInventory.actor.id));
+				if (squareInventory.door != null)
+					jsonObject.add("door", new JsonPrimitive(squareInventory.door.id));
+				if (squareInventory.waterBody != null)
+					jsonObject.add("waterBody", new JsonPrimitive(squareInventory.waterBody.id));
 				jsonObject.add("gameObjectsGround",
 						Save.saveSerializerGson.toJsonTree(squareInventory.gameObjectsGround));
 				jsonObject.add("gameObjectsNonGround",
