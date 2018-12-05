@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.routines.AIRoutine.STATE;
 import com.marklynch.ai.routines.AIRoutineForBlind;
@@ -28,6 +28,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.inventory.InventoryParent;
 import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Node;
@@ -40,9 +41,11 @@ import com.marklynch.objects.actors.Guard;
 import com.marklynch.objects.actors.Mort;
 import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.objects.actors.Trader;
+import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MeatChunk;
 import com.marklynch.objects.inanimateobjects.Seesaw;
+import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
@@ -358,15 +361,30 @@ public class LoadDeserializerCreator {
 			} else {
 				inventory = new Inventory();
 			}
-			ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
-			JsonArray jsonArray = json.getAsJsonArray();
-			for (int i = 0; i < jsonArray.size(); i++) {
-				Long id = jsonArray.get(i).getAsLong();
-				gameObjects.add((GameObject) Level.ids.get(id));
+			JsonObject jsonObject = json.getAsJsonObject();
+			Type typeToken = new TypeToken<ArrayList<GameObject>>() {
+			}.getType();
+
+			inventory.gameObjects = Load.loadDeserializerGson.fromJson(jsonObject.get("gameObjects"), typeToken);
+
+			inventory.parent = (InventoryParent) Level.ids.get(jsonObject.get("parent").getAsLong());
+
+			if (inventory instanceof SquareInventory) {
+				SquareInventory squareInventory = (SquareInventory) inventory;
+				squareInventory.square = (Square) Level.ids.get(jsonObject.get("square").getAsLong());
+				squareInventory.canShareSquare = jsonObject.get("canShareSquare").getAsBoolean();
+				squareInventory.gameObjectThatCantShareSquare = (GameObject) Level.ids
+						.get(jsonObject.get("gameObjectThatCantShareSquare").getAsLong());
+				squareInventory.actor = (Actor) Level.ids.get(jsonObject.get("actor").getAsLong());
+				squareInventory.door = (Door) Level.ids.get(jsonObject.get("door").getAsLong());
+				squareInventory.waterBody = (WaterBody) Level.ids.get(jsonObject.get("waterBody").getAsLong());
+				squareInventory.gameObjectsGround = Load.loadDeserializerGson
+						.fromJson(jsonObject.get("gameObjectsGround"), typeToken);
+				squareInventory.gameObjectsNonGround = Load.loadDeserializerGson
+						.fromJson(jsonObject.get("gameObjectsNonGround"), typeToken);
+
 			}
-
-			inventory.gameObjects = gameObjects;
 
 			return inventory;
 		}

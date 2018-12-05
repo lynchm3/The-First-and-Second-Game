@@ -8,16 +8,24 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.journal.QuestList;
+import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Player;
+import com.marklynch.objects.inanimateobjects.Arrow;
+import com.marklynch.objects.inanimateobjects.Door;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.Texture;
 
 public class Load {
 
@@ -216,8 +224,39 @@ public class Load {
 					// }
 					Object deserialized = null;
 					if (type == ArrayList.class) {
-						Type typeToken = new TypeToken<ArrayList<Idable>>() {
-						}.getType();
+						ArrayList arrayList = (ArrayList) field.get(objectToLoad);
+						Class c = arrayList.clazz;
+						System.out.println("c = " + c);
+						Type typeToken = null;
+						if (c == Square.class) {
+							typeToken = new TypeToken<ArrayList<Square>>() {
+							}.getType();
+						} else if (c == GameObject.class) {
+							typeToken = new TypeToken<ArrayList<GameObject>>() {
+							}.getType();
+						} else if (c == Actor.class) {
+							typeToken = new TypeToken<ArrayList<Actor>>() {
+							}.getType();
+						} else if (c == Texture.class) {
+							typeToken = new TypeToken<ArrayList<Texture>>() {
+							}.getType();
+						} else if (c == Crime.class) {
+							typeToken = new TypeToken<ArrayList<Crime>>() {
+							}.getType();
+						} else if (c == Door.class) {
+							typeToken = new TypeToken<ArrayList<Door>>() {
+							}.getType();
+						} else if (c == Power.class) {
+							typeToken = new TypeToken<ArrayList<Power>>() {
+							}.getType();
+						} else if (c == Effect.class) {
+							typeToken = new TypeToken<ArrayList<Effect>>() {
+							}.getType();
+						} else if (c == Arrow.class) {
+							typeToken = new TypeToken<ArrayList<Arrow>>() {
+							}.getType();
+						}
+
 						deserialized = loadDeserializerGson.fromJson(resultSet.getString(count), typeToken);
 					} else {
 						deserialized = loadDeserializerGson.fromJson(resultSet.getString(count), type);

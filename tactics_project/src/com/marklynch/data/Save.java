@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -90,6 +89,7 @@ import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.tools.Tool;
+import com.marklynch.utils.ArrayList;
 
 public class Save {
 
@@ -161,7 +161,7 @@ public class Save {
 
 	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
 	public static Gson saveSerializerGson;
-	static ArrayList<PreparedStatement> preparedStatements = new ArrayList<PreparedStatement>();
+	static ArrayList<PreparedStatement> preparedStatements = new ArrayList<PreparedStatement>(PreparedStatement.class);
 	static Connection conn;
 	static long saveStartTime;
 	static long saveEndTime1;
@@ -443,8 +443,11 @@ public class Save {
 	static ArrayList<Field> getFields(Class<?> clazz) {
 
 		try {
-			ArrayList<Field> fields = new ArrayList<Field>(Arrays.asList(clazz.getFields()));
-			ArrayList<Field> declaredFields = new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields()));
+			ArrayList<Field> fields = new ArrayList<Field>(Field.class);
+			fields.addAll(Arrays.asList(clazz.getFields()));
+
+			ArrayList<Field> declaredFields = new ArrayList<Field>(Field.class);
+			declaredFields.addAll(Arrays.asList(clazz.getDeclaredFields()));
 
 			// Remove transient and static fields, don't want to save them
 			for (Field field : (ArrayList<Field>) fields.clone()) {

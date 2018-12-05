@@ -4,4 +4,6 @@ public interface InventoryParent {
 
 	public void inventoryChanged();
 
+	public Long getId();
+
 }

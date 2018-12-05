@@ -36,7 +36,6 @@ import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor.Direction;
-import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.utils.SwitchListener;
@@ -344,18 +343,28 @@ public class SaveSerializationCreator {
 	static JsonSerializer<Inventory> serializerForInventory = new JsonSerializer<Inventory>() {
 		@Override
 		public JsonElement serialize(Inventory src, Type type, JsonSerializationContext context) {
-			JsonArray jsonArray = new JsonArray();
 
-			for (GameObject gameObject : src.gameObjects) {
-				jsonArray.add(new JsonPrimitive(gameObject.id));
+			JsonObject jsonObject = new JsonObject();
+
+			jsonObject.add("gameObjects", Save.saveSerializerGson.toJsonTree(src.gameObjects));
+			jsonObject.add("parent", new JsonPrimitive(src.parent.getId()));
+			if (src instanceof SquareInventory) {
+				SquareInventory squareInventory = (SquareInventory) src;
+				jsonObject.add("square", new JsonPrimitive(squareInventory.square.id));
+				jsonObject.add("canShareSquare", new JsonPrimitive(squareInventory.canShareSquare));
+				jsonObject.add("gameObjectThatCantShareSquare",
+						new JsonPrimitive(squareInventory.gameObjectThatCantShareSquare.id));
+				jsonObject.add("actor", new JsonPrimitive(squareInventory.actor.id));
+				jsonObject.add("door", new JsonPrimitive(squareInventory.door.id));
+				jsonObject.add("waterBody", new JsonPrimitive(squareInventory.waterBody.id));
+				jsonObject.add("gameObjectsGround",
+						Save.saveSerializerGson.toJsonTree(squareInventory.gameObjectsGround));
+				jsonObject.add("gameObjectsNonGround",
+						Save.saveSerializerGson.toJsonTree(squareInventory.gameObjectsNonGround));
+
 			}
 
-			// jsonArray.
-
-			// JsonObject jsonObject = new JsonObject();
-
-			return jsonArray;
-			// return jsonObject;
+			return jsonObject;
 		}
 	};
 
