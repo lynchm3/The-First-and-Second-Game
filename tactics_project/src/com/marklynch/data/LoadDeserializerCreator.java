@@ -223,7 +223,7 @@ public class LoadDeserializerCreator {
 
 			// System.out.println("aiRoutine.areaBounds.getClass() = " +
 			// aiRoutine.areaBounds.getClass());
-			System.out.println("areaBoundsJson = " + areaBoundsJson);
+			// System.out.println("areaBoundsJson = " + areaBoundsJson);
 			// System.out.println("areaBoundsJson.getAsString().isEmpty() = " +
 			// areaBoundsJson.getAsString().isEmpty());
 
@@ -235,7 +235,7 @@ public class LoadDeserializerCreator {
 					aiRoutine.sectionBounds.getClass());
 
 			JsonElement roomBoundsJson = jsonObject.get("roomBounds");
-			System.out.println("roomBoundsJson = " + roomBoundsJson);
+			// System.out.println("roomBoundsJson = " + roomBoundsJson);
 			aiRoutine.roomBounds = Load.loadDeserializerGson.fromJson(roomBoundsJson, aiRoutine.roomBounds.getClass());
 
 			JsonElement squareBoundsJson = jsonObject.get("squareBounds");

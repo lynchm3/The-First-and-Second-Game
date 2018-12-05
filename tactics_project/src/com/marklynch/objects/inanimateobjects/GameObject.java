@@ -3,7 +3,6 @@ package com.marklynch.objects.inanimateobjects;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Matrix4f;
@@ -76,6 +75,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.Stats;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
@@ -127,7 +127,7 @@ public class GameObject
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
 
-	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
+	public Stats highLevelStats = new Stats();
 
 	// Template id
 	public long id;

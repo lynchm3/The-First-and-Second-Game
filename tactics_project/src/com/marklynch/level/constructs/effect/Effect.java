@@ -3,11 +3,11 @@ package com.marklynch.level.constructs.effect;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.Stats;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.utils.DamageDealer;
 import com.marklynch.utils.Texture;
@@ -29,7 +29,7 @@ public class Effect implements DamageDealer {
 
 	public Texture imageTexture;
 
-	public HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Stat>();
+	public Stats highLevelStats = new Stats();
 
 	public Effect() {
 

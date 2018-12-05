@@ -104,15 +104,18 @@ public class Stat {
 		return new Stat(value);
 	}
 
-	public static String getStringForSavingHIGH_LEVEL_STATS(HashMap<HIGH_LEVEL_STATS, Stat> highLevelStats) {
-		String result = "";
-		for (HIGH_LEVEL_STATS highLevelStat : Stat.HIGH_LEVEL_STATS.values()) {
-			result += highLevelStats.get(highLevelStat).value;
-			if (Stat.HIGH_LEVEL_STATS.values()[Stat.HIGH_LEVEL_STATS.values().length - 1] != highLevelStat) {
-				result += ",";
-			}
-		}
-		return result;
-	}
+	// public static String
+	// getStringForSavingHIGH_LEVEL_STATS(HashMap<HIGH_LEVEL_STATS, Stat>
+	// highLevelStats) {
+	// String result = "";
+	// for (HIGH_LEVEL_STATS highLevelStat : Stat.HIGH_LEVEL_STATS.values()) {
+	// result += highLevelStats.get(highLevelStat).value;
+	// if (Stat.HIGH_LEVEL_STATS.values()[Stat.HIGH_LEVEL_STATS.values().length - 1]
+	// != highLevelStat) {
+	// result += ",";
+	// }
+	// }
+	// return result;
+	// }
 
 }

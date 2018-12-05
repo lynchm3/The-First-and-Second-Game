@@ -23,7 +23,6 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.effect.Effect;
@@ -64,7 +63,7 @@ public class SaveSerializationCreator {
 		gsonBuilder.registerTypeAdapter(Area.class, serializerForIdable);
 		gsonBuilder.registerTypeAdapter(StructureSection.class, serializerForIdable);
 		gsonBuilder.registerTypeAdapter(Direction.class, serializerForDirection);
-		gsonBuilder.registerTypeAdapter(Stat.class, serializerForStat);
+		// gsonBuilder.registerTypeAdapter(Stat.class, serializerForStat);
 
 		// Add serializers for all GamObjects, Effects and aiRoutines
 		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>();
@@ -120,12 +119,13 @@ public class SaveSerializationCreator {
 		}
 	};
 
-	static JsonSerializer<Stat> serializerForStat = new JsonSerializer<Stat>() {
-		@Override
-		public JsonElement serialize(Stat src, Type type, JsonSerializationContext context) {
-			return new JsonPrimitive(src.value);
-		}
-	};
+	// static JsonSerializer<Stat> serializerForStat = new JsonSerializer<Stat>() {
+	// @Override
+	// public JsonElement serialize(Stat src, Type type, JsonSerializationContext
+	// context) {
+	// return new JsonPrimitive(src.value);
+	// }
+	// };
 
 	static JsonSerializer<SWITCH_TYPE> serializerForSWITCH_TYPE = new JsonSerializer<SWITCH_TYPE>() {
 		@Override
