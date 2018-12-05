@@ -13,10 +13,13 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.routines.AIRoutineForBlind;
+import com.marklynch.ai.routines.AIRoutineForDoctor;
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
 import com.marklynch.ai.routines.AIRoutineForMort;
+import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.ai.routines.AIRoutineForThief;
+import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
@@ -219,6 +222,8 @@ public class SaveSerializationCreator {
 			if (src instanceof AIRoutineForBlind) {
 				// public Sound bellSound = null;
 				AIRoutineForBlind aiRoutineForBlind = (AIRoutineForBlind) src;
+
+				jsonObject.addProperty("blind", aiRoutineForBlind.blind.id);
 				if (aiRoutineForBlind.meatChunk != null)
 					jsonObject.addProperty("meatChunk", aiRoutineForBlind.meatChunk.id);
 				if (aiRoutineForBlind.originalMeatChunkSquare != null)
@@ -231,16 +236,25 @@ public class SaveSerializationCreator {
 					jsonObject.add("bellSound", Save.saveSerializerGson.toJsonTree(aiRoutineForBlind.bellSound));
 			} else if (src instanceof AIRoutineForGuard) {
 				jsonObject.addProperty("patrolIndex", ((AIRoutineForGuard) src).patrolIndex);
+			} else if (src instanceof AIRoutineForTrader) {
+				jsonObject.addProperty("trader", ((AIRoutineForTrader) src).trader.id);
 			} else if (src instanceof AIRoutineForHerbivoreWildAnimal) {
 				jsonObject.addProperty("hidingCount", ((AIRoutineForHerbivoreWildAnimal) src).hidingCount);
 			} else if (src instanceof AIRoutineForMort) {
 				AIRoutineForMort aiRoutineForMort = (AIRoutineForMort) src;
+				jsonObject.addProperty("mort", aiRoutineForMort.mort.id);
 				jsonObject.addProperty("rangBellAsLastResort", aiRoutineForMort.rangBellAsLastResort);
 				jsonObject.addProperty("retreatedToRoom", aiRoutineForMort.retreatedToRoom);
 				jsonObject.addProperty("feedingDemoState", "" + aiRoutineForMort.feedingDemoState);
 			} else if (src instanceof AIRoutineForThief) {
 				// int theftCooldown = 0;
 				jsonObject.addProperty("theftCooldown", ((AIRoutineForThief) src).theftCooldown);
+			} else if (src instanceof AIRoutineForRockGolem) {
+				jsonObject.addProperty("rockGolem", ((AIRoutineForRockGolem) src).rockGolem.id);
+			} else if (src instanceof AIRoutineForGuard) {
+				jsonObject.addProperty("guard", ((AIRoutineForGuard) src).guard.id);
+			} else if (src instanceof AIRoutineForDoctor) {
+				jsonObject.addProperty("doctor", ((AIRoutineForDoctor) src).doctor.id);
 			}
 
 			return jsonObject;

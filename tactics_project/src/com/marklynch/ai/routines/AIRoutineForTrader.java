@@ -9,7 +9,7 @@ import com.marklynch.objects.templates.Templates;
 
 public class AIRoutineForTrader extends AIRoutine {
 
-	Trader trader;
+	public Trader trader;
 
 	public AIRoutineForTrader() {
 		super();

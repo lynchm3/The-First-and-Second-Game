@@ -8,8 +8,6 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
-	Actor wildAnimal;
-
 	public AIRoutineForCarnivoreNeutralWildAnimal() {
 		super();
 		aiType = AI_TYPE.FIGHTER;
@@ -21,7 +19,6 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 			keepInBounds = true;
 			this.areaBounds.add(actor.area);
 		}
-		this.wildAnimal = actor;
 		aiType = AI_TYPE.FIGHTER;
 	}
 
@@ -104,8 +101,8 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 			if (smallWildAnimal != null) {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 				this.actor.thoughtBubbleImageTextureObject = smallWildAnimal.imageTexture;
-				if (this.wildAnimal.canSeeSquare(smallWildAnimal.squareGameObjectIsOn)) {
-					this.wildAnimal.addAttackerForThisAndGroupMembers(smallWildAnimal);
+				if (this.actor.canSeeSquare(smallWildAnimal.squareGameObjectIsOn)) {
+					this.actor.addAttackerForThisAndGroupMembers(smallWildAnimal);
 				} else {
 					AIRoutineUtils.moveTowards(smallWildAnimal.squareGameObjectIsOn);
 				}
@@ -115,7 +112,7 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 			// Move about a bit
 			if (targetSquare != null) {
 				boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-				if (wildAnimal.squareGameObjectIsOn == targetSquare || moved == false)
+				if (actor.squareGameObjectIsOn == targetSquare || moved == false)
 					targetSquare = null;
 				if (moved)
 					return;

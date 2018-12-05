@@ -8,7 +8,7 @@ import com.marklynch.objects.templates.Templates;
 
 public class AIRoutineForDoctor extends AIRoutine {
 
-	Doctor doctor;
+	public Doctor doctor;
 
 	public AIRoutineForDoctor() {
 		super();

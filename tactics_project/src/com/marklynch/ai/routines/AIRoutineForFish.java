@@ -7,8 +7,6 @@ import com.marklynch.objects.actors.Fish;
 
 public class AIRoutineForFish extends AIRoutine {
 
-	Fish fish;
-
 	public AIRoutineForFish() {
 		super();
 		aiType = AI_TYPE.RUNNER;
@@ -20,14 +18,13 @@ public class AIRoutineForFish extends AIRoutine {
 			keepInBounds = true;
 			this.areaBounds.add(actor.area);
 		}
-		this.fish = (Fish) actor;
 		aiType = AI_TYPE.RUNNER;
 	}
 
 	@Override
 	public void update() {
 
-		if (fish.squareGameObjectIsOn == null)
+		if (actor.squareGameObjectIsOn == null)
 			return;
 
 		state = STATE.SWIMMING;
@@ -38,10 +35,10 @@ public class AIRoutineForFish extends AIRoutine {
 			return;
 
 		if (state == STATE.SWIMMING) {
-			if (fish.beingFishedBy != null) {
-				new ActionFishBeingFished(fish).perform();
+			if (actor.beingFishedBy != null) {
+				new ActionFishBeingFished((Fish) actor).perform();
 			} else {
-				new ActionFishSwim(fish).perform();
+				new ActionFishSwim((Fish) actor).perform();
 			}
 		}
 	}

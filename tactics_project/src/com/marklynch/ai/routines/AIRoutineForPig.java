@@ -7,8 +7,6 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class AIRoutineForPig extends AIRoutine {
 
-	Actor pig;
-
 	public AIRoutineForPig() {
 		super();
 		aiType = AI_TYPE.RUNNER;
@@ -68,7 +66,7 @@ public class AIRoutineForPig extends AIRoutine {
 			// Move about a bit
 			if (targetSquare != null) {
 				boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-				if (pig.squareGameObjectIsOn == targetSquare || !moved)
+				if (actor.squareGameObjectIsOn == targetSquare || !moved)
 					targetSquare = null;
 				if (moved)
 					return;

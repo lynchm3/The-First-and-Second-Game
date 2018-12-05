@@ -8,7 +8,6 @@ import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
 
 public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 
-	public transient Actor friendlyWildAnimal;
 	public transient int hidingCount = 0;
 
 	public AIRoutineForHerbivoreWildAnimal() {
@@ -22,7 +21,6 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 			keepInBounds = true;
 			this.areaBounds.add(actor.area);
 		}
-		this.friendlyWildAnimal = actor;
 		aiType = AI_TYPE.RUNNER;
 	}
 
@@ -96,7 +94,7 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 			// Move about a bit
 			if (targetSquare != null) {
 				boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-				if (friendlyWildAnimal.squareGameObjectIsOn == targetSquare || !moved)
+				if (actor.squareGameObjectIsOn == targetSquare || !moved)
 					targetSquare = null;
 				if (moved)
 					return;

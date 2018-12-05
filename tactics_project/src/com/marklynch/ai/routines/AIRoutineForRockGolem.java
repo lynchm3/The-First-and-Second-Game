@@ -9,7 +9,7 @@ import com.marklynch.objects.actors.RockGolem;
 
 public class AIRoutineForRockGolem extends AIRoutine {
 
-	RockGolem rockGolem;
+	public RockGolem rockGolem;
 
 	public AIRoutineForRockGolem() {
 		super();

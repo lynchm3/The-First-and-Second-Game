@@ -3,13 +3,9 @@ package com.marklynch.ai.routines;
 import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.constructs.conversation.ConversationPart;
 import com.marklynch.level.constructs.conversation.ConversationResponse;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.actors.Kidnapper;
 
 public class AIRoutineForKidnapper extends AIRoutine {
-
-	Kidnapper kidnapper;
 
 	public AIRoutineForKidnapper() {
 
@@ -22,7 +18,6 @@ public class AIRoutineForKidnapper extends AIRoutine {
 	public AIRoutineForKidnapper(Actor mort) {
 
 		super(mort);
-		this.kidnapper = (Kidnapper) mort;
 		aiType = AI_TYPE.FIGHTER;
 
 		keepInBounds = true;
@@ -54,35 +49,12 @@ public class AIRoutineForKidnapper extends AIRoutine {
 			return;
 	}
 
-	public boolean targetInTerritory(Actor target) {
-		if (target.squareGameObjectIsOn.structureRoomSquareIsIn != kidnapper.mortsMine
-				&& target.squareGameObjectIsOn.structureRoomSquareIsIn != kidnapper.mortsRoom
-				&& target.squareGameObjectIsOn.structureRoomSquareIsIn != kidnapper.mortsVault
-				&& target.squareGameObjectIsOn != kidnapper.mortsRoomDoorway
-				&& target.squareGameObjectIsOn != kidnapper.mortsVaultDoorway)
-			return false;
-
-		return true;
-
-	}
-
-	public boolean squareInTerritory(Square square) {
-		if (square.structureRoomSquareIsIn != kidnapper.mortsMine
-				&& square.structureRoomSquareIsIn != kidnapper.mortsRoom
-				&& square.structureRoomSquareIsIn != kidnapper.mortsVault && square != kidnapper.mortsRoomDoorway
-				&& square != kidnapper.mortsVaultDoorway)
-			return false;
-
-		return true;
-
-	}
-
 	private Conversation getConversationLastResort() {
 
 		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
 		ConversationPart conversationPartYouWontGetOut = new ConversationPart(
 				new Object[] { "You won't get out of here alive [Mort rings his bell]" },
-				new ConversationResponse[] { conversationReponseDone }, kidnapper);
+				new ConversationResponse[] { conversationReponseDone }, actor);
 
 		return new Conversation(conversationPartYouWontGetOut, actor, true);
 

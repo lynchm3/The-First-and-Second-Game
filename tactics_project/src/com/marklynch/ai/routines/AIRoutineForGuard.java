@@ -11,7 +11,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class AIRoutineForGuard extends AIRoutine {
 
-	Guard guard;
+	public Guard guard;
 	public int patrolIndex = 0;
 
 	public AIRoutineForGuard() {

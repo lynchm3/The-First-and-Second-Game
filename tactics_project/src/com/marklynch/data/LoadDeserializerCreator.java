@@ -14,10 +14,13 @@ import com.google.gson.JsonParseException;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.routines.AIRoutine.STATE;
 import com.marklynch.ai.routines.AIRoutineForBlind;
+import com.marklynch.ai.routines.AIRoutineForDoctor;
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
 import com.marklynch.ai.routines.AIRoutineForMort;
+import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.ai.routines.AIRoutineForThief;
+import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
@@ -31,6 +34,12 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
+import com.marklynch.objects.actors.Blind;
+import com.marklynch.objects.actors.Doctor;
+import com.marklynch.objects.actors.Guard;
+import com.marklynch.objects.actors.Mort;
+import com.marklynch.objects.actors.RockGolem;
+import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MeatChunk;
 import com.marklynch.objects.inanimateobjects.Seesaw;
@@ -261,6 +270,9 @@ public class LoadDeserializerCreator {
 			if (aiRoutine instanceof AIRoutineForBlind) {
 
 				AIRoutineForBlind aiRoutineForBlind = (AIRoutineForBlind) aiRoutine;
+
+				aiRoutineForBlind.blind = (Blind) Level.ids.get(jsonObject.get("blind").getAsLong());
+
 				JsonElement meatChunkJson = jsonObject.get("meatChunk");
 				if (meatChunkJson != null)
 					aiRoutineForBlind.meatChunk = (MeatChunk) Level.ids.get(meatChunkJson.getAsLong());
@@ -282,16 +294,28 @@ public class LoadDeserializerCreator {
 				((AIRoutineForGuard) aiRoutine).patrolIndex = jsonObject.get("patrolIndex").getAsInt();
 			} else if (aiRoutine instanceof AIRoutineForHerbivoreWildAnimal) {
 				((AIRoutineForHerbivoreWildAnimal) aiRoutine).hidingCount = jsonObject.get("hidingCount").getAsInt();
+			} else if (aiRoutine instanceof AIRoutineForTrader) {
+				AIRoutineForTrader aiRoutineForTrader = (AIRoutineForTrader) aiRoutine;
+				aiRoutineForTrader.trader = (Trader) Level.ids.get(jsonObject.get("trader").getAsLong());
 			} else if (aiRoutine instanceof AIRoutineForMort) {
 				AIRoutineForMort aiRoutineForMort = (AIRoutineForMort) aiRoutine;
+				aiRoutineForMort.mort = (Mort) Level.ids.get(jsonObject.get("mort").getAsLong());
 				aiRoutineForMort.rangBellAsLastResort = jsonObject.get("rangBellAsLastResort").getAsBoolean();
 				aiRoutineForMort.retreatedToRoom = jsonObject.get("retreatedToRoom").getAsBoolean();
 				aiRoutineForMort.feedingDemoState = Load.loadDeserializerGson
 						.fromJson(jsonObject.get("feedingDemoState"), aiRoutineForMort.feedingDemoState.getClass());
 			} else if (aiRoutine instanceof AIRoutineForThief) {
 				((AIRoutineForThief) aiRoutine).theftCooldown = jsonObject.get("theftCooldown").getAsInt();
+			} else if (aiRoutine instanceof AIRoutineForRockGolem) {
+				AIRoutineForRockGolem aiRoutineForRockGolem = (AIRoutineForRockGolem) aiRoutine;
+				aiRoutineForRockGolem.rockGolem = (RockGolem) Level.ids.get(jsonObject.get("rockGolem").getAsLong());
+			} else if (aiRoutine instanceof AIRoutineForGuard) {
+				AIRoutineForGuard aiRoutineForguard = (AIRoutineForGuard) aiRoutine;
+				aiRoutineForguard.guard = (Guard) Level.ids.get(jsonObject.get("guard").getAsLong());
+			} else if (aiRoutine instanceof AIRoutineForDoctor) {
+				AIRoutineForDoctor aiRoutineFordoctor = (AIRoutineForDoctor) aiRoutine;
+				aiRoutineFordoctor.doctor = (Doctor) Level.ids.get(jsonObject.get("doctor").getAsLong());
 			}
-
 			return aiRoutine;
 		}
 	};
