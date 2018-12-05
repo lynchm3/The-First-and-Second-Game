@@ -34,7 +34,7 @@ public class Load {
 			conn = DriverManager.getConnection(Save.dbConnString);
 
 			if (loadDeserializerGson == null)
-				loadDeserializerGson = LoadDeserializerCreatore.createLoadDeserializerGson();
+				loadDeserializerGson = LoadDeserializerCreator.createLoadDeserializerGson();
 
 			// Squares
 			fieldsForEachClass.put(Square.class, Save.getFields(Square.class));

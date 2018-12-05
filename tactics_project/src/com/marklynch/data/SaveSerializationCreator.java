@@ -204,17 +204,17 @@ public class SaveSerializationCreator {
 			jsonObject.addProperty("wokenUpCountdown", src.wokenUpCountdown);
 			jsonObject.addProperty("state", "" + src.state);
 			jsonObject.addProperty("keepInBounds", src.keepInBounds);
-			jsonObject.addProperty("areaBounds", Save.getArrayListStringForInsertion(src.areaBounds));
-			jsonObject.addProperty("sectionBounds", Save.getArrayListStringForInsertion(src.sectionBounds));
-			jsonObject.addProperty("roomBounds", Save.getArrayListStringForInsertion(src.roomBounds));
-			jsonObject.addProperty("squareBounds", Save.getArrayListStringForInsertion(src.squareBounds));
+			jsonObject.add("areaBounds", Save.saveSerializerGson.toJsonTree(src.areaBounds));
+			jsonObject.add("sectionBounds", Save.saveSerializerGson.toJsonTree(src.sectionBounds));
+			jsonObject.add("roomBounds", Save.saveSerializerGson.toJsonTree(src.roomBounds));
+			jsonObject.add("squareBounds", Save.saveSerializerGson.toJsonTree(src.squareBounds));
 			jsonObject.addProperty("currentHobby", "" + src.currentHobby);
 			if (src.actorToKeepTrackOf != null)
 				jsonObject.addProperty("actorToKeepTrackOf", src.actorToKeepTrackOf.id);
 			if (src.lastLocationSeenActorToKeepTrackOf != null)
 				jsonObject.addProperty("lastLocationSeenActorToKeepTrackOf", src.lastLocationSeenActorToKeepTrackOf.id);
 			jsonObject.addProperty("sleepCounter", src.sleepCounter);
-			jsonObject.addProperty("ignoreList", Save.getArrayListStringForInsertion(src.ignoreList));
+			jsonObject.add("ignoreList", Save.saveSerializerGson.toJsonTree(src.ignoreList));
 
 			if (src instanceof AIRoutineForBlind) {
 				// public Sound bellSound = null;
@@ -260,7 +260,7 @@ public class SaveSerializationCreator {
 			jsonObject.addProperty("reported", src.reported);
 			jsonObject.addProperty("stolenItems", Save.getGameObjectArrayStringForInsertion(src.stolenItems));
 			jsonObject.addProperty("type", "" + src.type);
-			jsonObject.addProperty("crimeListeners", Save.getArrayListStringForInsertion(src.crimeListeners));
+			jsonObject.add("crimeListeners", Save.saveSerializerGson.toJsonTree(src.crimeListeners));
 			return jsonObject;
 		}
 	};
@@ -288,7 +288,7 @@ public class SaveSerializationCreator {
 				jsonObject.addProperty("sourceObject", src.sourceObject.id);
 			if (src.sourceSquare != null)
 				jsonObject.addProperty("sourceSquare", src.sourceSquare.id);
-			jsonObject.addProperty("destinationSquares", Save.getArrayListStringForInsertion(src.destinationSquares));
+			jsonObject.add("destinationSquares", Save.saveSerializerGson.toJsonTree(src.destinationSquares));
 			jsonObject.addProperty("loudness", src.loudness);
 			jsonObject.addProperty("legal", src.legal);
 			if (src.actionType != null)

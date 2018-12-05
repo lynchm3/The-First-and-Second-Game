@@ -13,16 +13,9 @@ import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.area.Area;
-import com.marklynch.level.constructs.bounds.structure.StructureSection;
-import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
-import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.power.Power;
-import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
@@ -100,7 +93,6 @@ import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.Texture;
 
 public class Save {
 
@@ -411,115 +403,6 @@ public class Save {
 		}
 		result += "]";
 		return result;
-	}
-
-	public static String getArrayListStringForInsertion(ArrayList<?> arrayList) {
-
-		if (arrayList.size() == 0) {
-			return "";
-
-		} else if (arrayList.get(0) instanceof GameObject) {
-
-			String result = "";
-			for (GameObject gameObject : (ArrayList<GameObject>) arrayList) {
-				result += gameObject.id;
-				if (arrayList.get(arrayList.size() - 1) != gameObject) {
-					result += ",";
-				}
-			}
-			return result;
-
-		} else if (arrayList.get(0) instanceof Area) {
-
-			String result = "";
-			for (Area area : (ArrayList<Area>) arrayList) {
-				result += area.id;
-				if (arrayList.get(arrayList.size() - 1) != area) {
-					result += ",";
-				}
-			}
-			return result;
-
-		} else if (arrayList.get(0) instanceof Node) {
-
-			String result = "";
-			for (Node node : (ArrayList<Node>) arrayList) {
-				result += node.id;
-				if (arrayList.get(arrayList.size() - 1) != node) {
-					result += ",";
-				}
-			}
-			return result;
-
-		} else if (arrayList.get(0) instanceof Texture) {
-
-			String result = "";
-			for (Texture texture : (ArrayList<Texture>) arrayList) {
-				result += texture.path;
-				if (arrayList.get(arrayList.size() - 1) != texture) {
-					result += ",";
-				}
-			}
-			return result;
-
-		} else if (arrayList.get(0) instanceof StructureSection) {
-
-			String result = "";
-			for (StructureSection structureSection : (ArrayList<StructureSection>) arrayList) {
-				result += structureSection.id;
-				if (arrayList.get(arrayList.size() - 1) != structureSection) {
-					result += ",";
-				}
-			}
-			return result;
-
-		} else if (arrayList.get(0) instanceof StructureRoom) {
-
-			String result = "";
-			for (StructureRoom room : (ArrayList<StructureRoom>) arrayList) {
-				result += room.id;
-				if (arrayList.get(arrayList.size() - 1) != room) {
-					result += ",";
-				}
-			}
-			return result;
-
-		} else if (arrayList.get(0) instanceof Square) {
-
-			String result = "";
-			for (Square square : (ArrayList<Square>) arrayList) {
-				result += square.id;
-				if (arrayList.get(arrayList.size() - 1) != square) {
-					result += ",";
-				}
-			}
-			return result;
-
-		} else if (arrayList.get(0) instanceof Power) {
-
-			String result = "";
-			for (Power power : (ArrayList<Power>) arrayList) {
-				result += power.getClass().getSimpleName();
-				if (arrayList.get(arrayList.size() - 1) != power) {
-					result += ",";
-				}
-			}
-			return result;
-
-		} else if (arrayList.get(0) instanceof Effect) {
-
-			return saveSerializerGson.toJson(arrayList);
-
-		} else if (arrayList.get(0) instanceof Crime) {
-
-			return saveSerializerGson.toJson(arrayList);
-
-		}
-		System.err.println("=======================");
-		System.err.println("Error saving arrayList - " + arrayList);
-		System.err.println("=======================");
-		// return "TODO Object class " + arrayList;
-		return null;
 	}
 
 	public static String getHashMapStringForInsertion(HashMap<?, ?> hashMap) {

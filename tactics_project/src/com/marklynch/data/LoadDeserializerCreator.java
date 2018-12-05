@@ -21,6 +21,7 @@ import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.GroupOfActors;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -37,7 +38,7 @@ import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
-public class LoadDeserializerCreatore {
+public class LoadDeserializerCreator {
 
 	public static Gson createLoadDeserializerGson() {
 
@@ -219,24 +220,27 @@ public class LoadDeserializerCreatore {
 			aiRoutine.keepInBounds = jsonObject.get("keepInBounds").getAsBoolean();
 
 			JsonElement areaBoundsJson = jsonObject.get("areaBounds");
-			if (areaBoundsJson != null)
-				aiRoutine.areaBounds = Load.loadDeserializerGson.fromJson(areaBoundsJson,
-						aiRoutine.areaBounds.getClass());
+
+			// System.out.println("aiRoutine.areaBounds.getClass() = " +
+			// aiRoutine.areaBounds.getClass());
+			System.out.println("areaBoundsJson = " + areaBoundsJson);
+			// System.out.println("areaBoundsJson.getAsString().isEmpty() = " +
+			// areaBoundsJson.getAsString().isEmpty());
+
+			// if (areaBoundsJson != null && !areaBoundsJson.getAsString().isEmpty())
+			aiRoutine.areaBounds = Load.loadDeserializerGson.fromJson(areaBoundsJson, aiRoutine.areaBounds.getClass());
 
 			JsonElement sectionBoundsJson = jsonObject.get("sectionBounds");
-			if (sectionBoundsJson != null)
-				aiRoutine.sectionBounds = Load.loadDeserializerGson.fromJson(sectionBoundsJson,
-						aiRoutine.sectionBounds.getClass());
+			aiRoutine.sectionBounds = Load.loadDeserializerGson.fromJson(sectionBoundsJson,
+					aiRoutine.sectionBounds.getClass());
 
 			JsonElement roomBoundsJson = jsonObject.get("roomBounds");
-			if (roomBoundsJson != null)
-				aiRoutine.roomBounds = Load.loadDeserializerGson.fromJson(roomBoundsJson,
-						aiRoutine.roomBounds.getClass());
+			System.out.println("roomBoundsJson = " + roomBoundsJson);
+			aiRoutine.roomBounds = Load.loadDeserializerGson.fromJson(roomBoundsJson, aiRoutine.roomBounds.getClass());
 
 			JsonElement squareBoundsJson = jsonObject.get("squareBounds");
-			if (squareBoundsJson != null)
-				aiRoutine.squareBounds = Load.loadDeserializerGson.fromJson(squareBoundsJson,
-						aiRoutine.squareBounds.getClass());
+			aiRoutine.squareBounds = Load.loadDeserializerGson.fromJson(squareBoundsJson,
+					aiRoutine.squareBounds.getClass());
 
 			JsonElement currentHobbyJson = jsonObject.get("currentHobby");
 			aiRoutine.currentHobby = Load.loadDeserializerGson.fromJson(currentHobbyJson, HOBBY.class);
@@ -245,12 +249,12 @@ public class LoadDeserializerCreatore {
 			if (actorToKeepTrackOfJson != null)
 				aiRoutine.actorToKeepTrackOf = (Actor) Level.ids.get(actorToKeepTrackOfJson.getAsLong());
 
-			aiRoutine.lastLocationSeenActorToKeepTrackOf = Load.loadDeserializerGson.fromJson(
-					jsonObject.get("lastLocationSeenActorToKeepTrackOf"),
-					aiRoutine.lastLocationSeenActorToKeepTrackOf.getClass());
+			aiRoutine.lastLocationSeenActorToKeepTrackOf = Load.loadDeserializerGson
+					.fromJson(jsonObject.get("lastLocationSeenActorToKeepTrackOf"), Square.class);
 
 			aiRoutine.sleepCounter = jsonObject.get("sleepCounter").getAsInt();
 
+			JsonElement ignoreListJson = jsonObject.get("ignoreList");
 			aiRoutine.ignoreList = Load.loadDeserializerGson.fromJson(jsonObject.get("ignoreList"),
 					aiRoutine.ignoreList.getClass());
 
@@ -272,8 +276,7 @@ public class LoadDeserializerCreatore {
 				aiRoutineForBlind.failedToGetPathToFoodCount = jsonObject.get("failedToGetPathToFoodCount").getAsInt();
 
 				JsonElement bellSoundJson = jsonObject.get("bellSound");
-				aiRoutineForBlind.bellSound = Load.loadDeserializerGson.fromJson(bellSoundJson,
-						aiRoutineForBlind.bellSound.getClass());
+				aiRoutineForBlind.bellSound = Load.loadDeserializerGson.fromJson(bellSoundJson, Sound.class);
 
 			} else if (aiRoutine instanceof AIRoutineForGuard) {
 				((AIRoutineForGuard) aiRoutine).patrolIndex = jsonObject.get("patrolIndex").getAsInt();
@@ -283,8 +286,8 @@ public class LoadDeserializerCreatore {
 				AIRoutineForMort aiRoutineForMort = (AIRoutineForMort) aiRoutine;
 				aiRoutineForMort.rangBellAsLastResort = jsonObject.get("rangBellAsLastResort").getAsBoolean();
 				aiRoutineForMort.retreatedToRoom = jsonObject.get("retreatedToRoom").getAsBoolean();
-				aiRoutineForMort.feedingDemoState = Load.loadDeserializerGson.fromJson(jsonObject.get("ignoreList"),
-						aiRoutineForMort.feedingDemoState.getClass());
+				aiRoutineForMort.feedingDemoState = Load.loadDeserializerGson
+						.fromJson(jsonObject.get("feedingDemoState"), aiRoutineForMort.feedingDemoState.getClass());
 			} else if (aiRoutine instanceof AIRoutineForThief) {
 				((AIRoutineForThief) aiRoutine).theftCooldown = jsonObject.get("theftCooldown").getAsInt();
 			}
