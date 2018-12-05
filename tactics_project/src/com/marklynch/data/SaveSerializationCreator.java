@@ -258,7 +258,7 @@ public class SaveSerializationCreator {
 			jsonObject.addProperty("hasBeenToldToStop", src.hasBeenToldToStop);
 			jsonObject.addProperty("resolved", src.resolved);
 			jsonObject.addProperty("reported", src.reported);
-			jsonObject.addProperty("stolenItems", Save.getGameObjectArrayStringForInsertion(src.stolenItems));
+			jsonObject.add("stolenItems", Save.saveSerializerGson.toJsonTree(src.stolenItems));
 			jsonObject.addProperty("type", "" + src.type);
 			jsonObject.add("crimeListeners", Save.saveSerializerGson.toJsonTree(src.crimeListeners));
 			return jsonObject;
@@ -315,7 +315,7 @@ public class SaveSerializationCreator {
 		public JsonElement serialize(Enhancement src, Type type, JsonSerializationContext context) {
 			JsonObject jsonObject = new JsonObject();
 
-			jsonObject.addProperty("highLevelStats", Save.getHashMapStringForInsertion(src.highLevelStats));
+			jsonObject.add("highLevelStats", Save.saveSerializerGson.toJsonTree(src.highLevelStats));
 			if (src.imageTexture != null)
 				jsonObject.addProperty("imageTexture", src.imageTexture.path);
 			jsonObject.addProperty("minRange", src.minRange);

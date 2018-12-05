@@ -14,8 +14,6 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
@@ -92,7 +90,6 @@ import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.tools.Tool;
-import com.marklynch.objects.utils.SwitchListener;
 
 public class Save {
 
@@ -366,66 +363,46 @@ public class Save {
 
 	}
 
-	public static String getGameObjectArrayStringForInsertion(GameObject[] array) {
-
-		String result = "[";
-		for (GameObject gameObject : array) {
-			result += gameObject.id;
-			if (array[array.length - 1] != gameObject) {
-				result += ",";
-			}
-		}
-		result += "]";
-		return result;
-	}
-
-	public static String getSquareArrayStringForInsertion(Square[] array) {
-
-		String result = "[";
-		for (Square square : array) {
-			result += square.id;
-			if (array[array.length - 1] != square) {
-				result += ",";
-			}
-		}
-		result += "]";
-		return result;
-	}
-
-	public static String getSwitchListenerArrayStringForInsertion(SwitchListener[] array) {
-
-		String result = "[";
-		for (SwitchListener switchListener : array) {
-			result += switchListener.getId();
-			if (array[array.length - 1] != switchListener) {
-				result += ",";
-			}
-		}
-		result += "]";
-		return result;
-	}
-
-	public static String getHashMapStringForInsertion(HashMap<?, ?> hashMap) {
-		if (hashMap.size() == 0) {
-			return "";
-		}
-
-		Object[] keysArray = hashMap.keySet().toArray();
-		// Class<?> hashMapKeyClass = keySet[0].getClass();
-
-		if (keysArray[0] instanceof Faction) {
-			return saveSerializerGson.toJson(hashMap);
-		} else if (keysArray[0] instanceof HIGH_LEVEL_STATS) {
-			return Stat.getStringForSavingHIGH_LEVEL_STATS((HashMap<HIGH_LEVEL_STATS, Stat>) hashMap);
-		} else if (keysArray[0] instanceof GameObject) {
-			return saveSerializerGson.toJson(hashMap);
-		}
-
-		System.err.println("=======================");
-		System.err.println("Error saving hashMap - " + hashMap);
-		System.err.println("=======================");
-		return "TODO Object class " + hashMap;
-	}
+	// public static String getGameObjectArrayStringForInsertion(GameObject[] array)
+	// {
+	//
+	// String result = "[";
+	// for (GameObject gameObject : array) {
+	// result += gameObject.id;
+	// if (array[array.length - 1] != gameObject) {
+	// result += ",";
+	// }
+	// }
+	// result += "]";
+	// return result;
+	// }
+	//
+	// public static String getSquareArrayStringForInsertion(Square[] array) {
+	//
+	// String result = "[";
+	// for (Square square : array) {
+	// result += square.id;
+	// if (array[array.length - 1] != square) {
+	// result += ",";
+	// }
+	// }
+	// result += "]";
+	// return result;
+	// }
+	//
+	// public static String
+	// getSwitchListenerArrayStringForInsertion(SwitchListener[] array) {
+	//
+	// String result = "[";
+	// for (SwitchListener switchListener : array) {
+	// result += switchListener.getId();
+	// if (array[array.length - 1] != switchListener) {
+	// result += ",";
+	// }
+	// }
+	// result += "]";
+	// return result;
+	// }
 
 	static void createTable(Class<?> clazz) {
 
