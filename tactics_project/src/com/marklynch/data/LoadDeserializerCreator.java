@@ -86,6 +86,8 @@ public class LoadDeserializerCreator {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForIdable);
 		}
 		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, deserializerForIdable);
+		gsonBuilder.registerTypeAdapter(Idable.class, deserializerForIdable);
+		System.out.println("Deserializer - gameObjectClasses = " + gameObjectClasses);
 
 		// Effects
 		ArrayList<Class<?>> effectClasses = PackageUtils.getClasses("com.marklynch.level.constructs.effect");
@@ -129,8 +131,8 @@ public class LoadDeserializerCreator {
 		public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
 			Object o = Level.ids.get(json.getAsLong());
-			System.out.println("ID to serialize = " + json.getAsLong());
-			System.out.println("Deserialized Idable = " + o);
+			// System.out.println("ID to serialize = " + json.getAsLong());
+			// System.out.println("Deserialized Idable = " + o);
 			return o;
 		}
 	};

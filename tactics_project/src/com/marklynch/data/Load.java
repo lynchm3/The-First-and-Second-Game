@@ -2,6 +2,7 @@ package com.marklynch.data;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,8 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Player;
 
@@ -76,8 +79,24 @@ public class Load {
 			e.printStackTrace();
 		}
 
+		System.out.println("QuestList.questCaveOfTheBlind.mort = " + QuestList.questCaveOfTheBlind.mort);
+		System.out.println("QuestList.questCaveOfTheBlind.mort.doors = " + QuestList.questCaveOfTheBlind.mort.doors);
+		System.out.println("QuestList.questCaveOfTheBlind.mort.bed = " + QuestList.questCaveOfTheBlind.mort.bed);
+		System.out.println("QuestList.questCaveOfTheBlind.mort.doors = " + QuestList.questCaveOfTheBlind.mort.doors);
+		System.out.println(
+				"QuestList.questCaveOfTheBlind.mort.inventory = " + QuestList.questCaveOfTheBlind.mort.inventory);
+		System.out.println("QuestList.questCaveOfTheBlind.mort.inventory.gameObjects = "
+				+ QuestList.questCaveOfTheBlind.mort.inventory.gameObjects);
+		System.out.println("QuestList.questCaveOfTheBlind.mort.squareGameObjectIsOn = "
+				+ QuestList.questCaveOfTheBlind.mort.squareGameObjectIsOn);
+		System.out.println("QuestList.questCaveOfTheBlind.mort.squareGameObjectIsOn.inventory.gameObjects = "
+				+ QuestList.questCaveOfTheBlind.mort.squareGameObjectIsOn.inventory.gameObjects);
+
+		;
+
 		long loadEndTime = System.currentTimeMillis();
-		// System.out.println("Total load time = " + (loadEndTime - loadStartTime));
+
+		System.out.println("Total load time = " + (loadEndTime - loadStartTime));
 	}
 
 	private static ResultSet getResultSetWithJustId(Class<?> clazz) throws SQLException {
@@ -189,7 +208,22 @@ public class Load {
 				} else if (type.isAssignableFrom(String.class)) {
 					field.set(objectToLoad, resultSet.getString(count));
 				} else {
-					field.set(objectToLoad, loadDeserializerGson.fromJson(resultSet.getString(count), type));
+
+					// if (type == ArrayList.class) {
+					// System.out.println("type = " + type);
+					// type = (Class<?>) new TypeToken<ArrayList<Float>>() {
+					// }.getType();
+					// }
+					Object deserialized = null;
+					if (type == ArrayList.class) {
+						Type typeToken = new TypeToken<ArrayList<Idable>>() {
+						}.getType();
+						deserialized = loadDeserializerGson.fromJson(resultSet.getString(count), typeToken);
+					} else {
+						deserialized = loadDeserializerGson.fromJson(resultSet.getString(count), type);
+					}
+
+					field.set(objectToLoad, deserialized);
 				}
 
 				count++;
