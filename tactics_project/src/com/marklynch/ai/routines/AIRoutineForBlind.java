@@ -1,7 +1,5 @@
 package com.marklynch.ai.routines;
 
-import java.util.ArrayList;
-
 import com.marklynch.actions.ActionTakeBite;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Sound;
@@ -11,6 +9,7 @@ import com.marklynch.objects.actors.Blind;
 import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.objects.inanimateobjects.MeatChunk;
 import com.marklynch.objects.utils.ThoughtBubbles;
+import com.marklynch.utils.ArrayList;
 
 public class AIRoutineForBlind extends AIRoutine {
 

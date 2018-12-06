@@ -1,6 +1,5 @@
 package com.marklynch.ai.routines;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import com.marklynch.Game;
@@ -59,6 +58,7 @@ import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.utils.ThoughtBubbles;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.MapUtil;
 
@@ -119,16 +119,17 @@ public abstract class AIRoutine {
 	public transient AI_TYPE aiType = AI_TYPE.FIGHTER;
 
 	public transient boolean keepInBounds = false;
-	public transient ArrayList<Area> areaBounds = new ArrayList<Area>();
-	public transient ArrayList<StructureSection> sectionBounds = new ArrayList<StructureSection>();
-	public transient ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>();
-	public transient ArrayList<Square> squareBounds = new ArrayList<Square>();
+	public transient ArrayList<Area> areaBounds = new ArrayList<Area>(Area.class);
+	public transient ArrayList<StructureSection> sectionBounds = new ArrayList<StructureSection>(
+			StructureSection.class);
+	public transient ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>(StructureRoom.class);
+	public transient ArrayList<Square> squareBounds = new ArrayList<Square>(Square.class);
 
 	public transient HOBBY currentHobby = HOBBY.HUNTING;
 
 	public transient Actor actorToKeepTrackOf = null;
 	public transient Square lastLocationSeenActorToKeepTrackOf = null;
-	public transient ArrayList<GameObject> ignoreList = new ArrayList<GameObject>();
+	public transient ArrayList<GameObject> ignoreList = new ArrayList<GameObject>(GameObject.class);
 
 	public AIRoutine() {
 	}
@@ -491,7 +492,7 @@ public abstract class AIRoutine {
 		// Remove dead objects
 		// and remove gameObjects you can see from investigation list
 		// and remove out of bounds squares from investigation list
-		ArrayList<GameObject> gameObjectsToStopSearchingFor = new ArrayList<GameObject>();
+		ArrayList<GameObject> gameObjectsToStopSearchingFor = new ArrayList<GameObject>(GameObject.class);
 		for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
 			if (actorToSearchFor.remainingHealth <= 0) {
 				gameObjectsToStopSearchingFor.add(actorToSearchFor);
@@ -511,7 +512,7 @@ public abstract class AIRoutine {
 		MapUtil.sortByValue(this.actor.investigationsMap);
 
 		// this.actor.locationsToSearch.sort(AIRoutineUtils.sortLocationsToSearch);
-		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+		ArrayList<GameObject> toRemove = new ArrayList<GameObject>(GameObject.class);
 		boolean moved = false;
 
 		Square searchSquare = null;
@@ -681,12 +682,12 @@ public abstract class AIRoutine {
 	protected boolean runCrimeReactionRoutine() {
 		for (final Actor criminal : actor.knownCriminals) {
 			int accumulatedSeverity = 0;
-			final ArrayList<Crime> unresolvedIllegalMinings = new ArrayList<Crime>();
-			final ArrayList<Crime> unresolvedThefts = new ArrayList<Crime>();
-			final ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>();
-			final ArrayList<GameObject> stolenItemsOnCriminal = new ArrayList<GameObject>();
-			final ArrayList<GameObject> stolenItemsEquippedByCriminal = new ArrayList<GameObject>();
-			final ArrayList<GameObject> stolenItemsOnGroundToPickUp = new ArrayList<GameObject>();
+			final ArrayList<Crime> unresolvedIllegalMinings = new ArrayList<Crime>(Crime.class);
+			final ArrayList<Crime> unresolvedThefts = new ArrayList<Crime>(Crime.class);
+			final ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>(Crime.class);
+			final ArrayList<GameObject> stolenItemsOnCriminal = new ArrayList<GameObject>(GameObject.class);
+			final ArrayList<GameObject> stolenItemsEquippedByCriminal = new ArrayList<GameObject>(GameObject.class);
+			final ArrayList<GameObject> stolenItemsOnGroundToPickUp = new ArrayList<GameObject>(GameObject.class);
 			boolean newCrime = false;
 			// final ArrayList<GameObject> stolenItemsOnInContainer = new
 			// ArrayList<GameObject>();
@@ -922,7 +923,7 @@ public abstract class AIRoutine {
 				demand = new Object[] { "Give me that ", stolenItemsOnCriminal.get(0), "!" };
 			}
 		} else {
-			ArrayList<Object> demandArrayList = new ArrayList<Object>();
+			ArrayList<Object> demandArrayList = new ArrayList<Object>(Object.class);
 			for (int i = 0; i < stolenItemsOnCriminal.size(); i++) {
 				if (i == 0) {
 					// first item
@@ -1305,7 +1306,7 @@ public abstract class AIRoutine {
 
 	public boolean replenishEquipment() {
 
-		ArrayList<Integer> equipmentNeeded = new ArrayList<Integer>();
+		ArrayList<Integer> equipmentNeeded = new ArrayList<Integer>(Integer.class);
 		for (int requiredTemplateId : actor.requiredEquipmentTemplateIds) {
 			if (!actor.inventory.containsGameObjectWithTemplateId(requiredTemplateId)) {
 				equipmentNeeded.add(requiredTemplateId);
@@ -1482,7 +1483,7 @@ public abstract class AIRoutine {
 
 		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
 
-			ArrayList<GameObject> gameObjectsToPickUp = new ArrayList<GameObject>();
+			ArrayList<GameObject> gameObjectsToPickUp = new ArrayList<GameObject>(GameObject.class);
 			for (GameObject gameObject : lostAndFound.inventory.gameObjects) {
 				if (gameObject.owner == actor) {
 					gameObjectsToPickUp.add(gameObject);

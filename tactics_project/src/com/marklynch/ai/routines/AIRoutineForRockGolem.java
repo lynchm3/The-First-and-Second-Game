@@ -1,11 +1,10 @@
 package com.marklynch.ai.routines;
 
-import java.util.ArrayList;
-
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
+import com.marklynch.utils.ArrayList;
 
 public class AIRoutineForRockGolem extends AIRoutine {
 

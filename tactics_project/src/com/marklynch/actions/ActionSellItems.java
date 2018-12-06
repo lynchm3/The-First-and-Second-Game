@@ -70,7 +70,8 @@ public class ActionSellItems extends VariableQtyAction {
 				receiver.addWitnessedCrime(crime);
 				if (Game.level.openInventories.size() > 0)
 					Game.level.openCloseInventory();
-				ArrayList<GameObject> stolenObjects = new ArrayList<GameObject>();
+				com.marklynch.utils.ArrayList<GameObject> stolenObjects = new com.marklynch.utils.ArrayList<GameObject>(
+						GameObject.class);
 				stolenObjects.add(object);
 				new ActionTalk(this.receiver, performer,
 						AIRoutine.createJusticeReclaimConversation(receiver, performer, stolenObjects)).perform();
