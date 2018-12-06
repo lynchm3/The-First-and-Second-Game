@@ -44,7 +44,6 @@ import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MeatChunk;
-import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ArrayList;
@@ -90,7 +89,8 @@ public class LoadDeserializerCreator {
 		for (Class<?> clazz : gameObjectClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForIdable);
 		}
-		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, deserializerForIdable);
+		// gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class,
+		// deserializerForIdable);
 		gsonBuilder.registerTypeAdapter(Idable.class, deserializerForIdable);
 		System.out.println("Deserializer - gameObjectClasses = " + gameObjectClasses);
 
@@ -421,10 +421,10 @@ public class LoadDeserializerCreator {
 				if (j != null)
 					squareInventory.waterBody = (WaterBody) Level.ids.get(jsonObject.get("waterBody").getAsLong());
 
-				squareInventory.gameObjectsGround = Load.loadDeserializerGson
-						.fromJson(jsonObject.get("gameObjectsGround"), typeToken);
-				squareInventory.gameObjectsNonGround = Load.loadDeserializerGson
-						.fromJson(jsonObject.get("gameObjectsNonGround"), typeToken);
+				// squareInventory.gameObjectsGround = Load.loadDeserializerGson
+				// .fromJson(jsonObject.get("gameObjectsGround"), typeToken);
+				// squareInventory.gameObjectsNonGround = Load.loadDeserializerGson
+				// .fromJson(jsonObject.get("gameObjectsNonGround"), typeToken);
 
 			}
 

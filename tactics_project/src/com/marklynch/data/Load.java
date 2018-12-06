@@ -12,8 +12,8 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Player;
 import com.marklynch.utils.ArrayList;
 
@@ -30,6 +30,43 @@ public class Load {
 	public static void load() {
 		long loadStartTime = System.currentTimeMillis();
 		System.out.println("Loading...");
+
+		// Clear data
+		ArrayList<Long> toRemove = new ArrayList<Long>(Long.class);
+		for (Long id : Level.ids.keySet()) {
+			if (Level.ids.get(id) instanceof Square) {
+
+			} else if (Level.ids.get(id) instanceof Faction) {
+
+			} else {
+				toRemove.add(id);
+			}
+		}
+
+		for (Long id : toRemove) {
+			Level.ids.remove(id);
+		}
+
+		for (Class clazz : Save.classesToSave) {
+			if (clazz == Square.class) {
+
+			} else if (clazz == Faction.class) {
+
+			} else {
+				try {
+					ArrayList<Object> instances = (ArrayList<Object>) clazz.getField("instances").get(null);
+					if (instances != null)
+						instances.clear();
+				} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException
+						| SecurityException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		Level.actors.clear();
+
+		// End of clearage
 
 		try {
 			conn = DriverManager.getConnection(Save.dbConnString);
@@ -77,19 +114,6 @@ public class Load {
 			e.printStackTrace();
 		}
 
-		System.out.println("QuestList.questCaveOfTheBlind.mort = " + QuestList.questCaveOfTheBlind.mort);
-		System.out.println("QuestList.questCaveOfTheBlind.mort.doors = " + QuestList.questCaveOfTheBlind.mort.doors);
-		System.out.println("QuestList.questCaveOfTheBlind.mort.bed = " + QuestList.questCaveOfTheBlind.mort.bed);
-		System.out.println("QuestList.questCaveOfTheBlind.mort.doors = " + QuestList.questCaveOfTheBlind.mort.doors);
-		System.out.println(
-				"QuestList.questCaveOfTheBlind.mort.inventory = " + QuestList.questCaveOfTheBlind.mort.inventory);
-		System.out.println("QuestList.questCaveOfTheBlind.mort.inventory.gameObjects = "
-				+ QuestList.questCaveOfTheBlind.mort.inventory.gameObjects);
-		System.out.println("QuestList.questCaveOfTheBlind.mort.squareGameObjectIsOn = "
-				+ QuestList.questCaveOfTheBlind.mort.squareGameObjectIsOn);
-		System.out.println("QuestList.questCaveOfTheBlind.mort.squareGameObjectIsOn.inventory.gameObjects = "
-				+ QuestList.questCaveOfTheBlind.mort.squareGameObjectIsOn.inventory.gameObjects);
-
 		;
 
 		long loadEndTime = System.currentTimeMillis();
@@ -124,25 +148,25 @@ public class Load {
 
 			Long objectToLoadId = resultSet.getLong("id");
 
-			// Player id
-			// if (objectToLoadId != 129651 && objectToLoadId != 9082)
-			// continue;
-
-			// System.out.println("LOAD1 clazz = " + clazz);
-
 			Object objectToLoad = Level.ids.get(objectToLoadId);
+
 			// System.out.println("LOAD1 objectToLoad 1 = " + objectToLoad);
 			if (objectToLoad == null) {
 				objectToLoad = clazz.getDeclaredConstructor().newInstance();
 				Level.ids.put(objectToLoadId, objectToLoad);
 				ArrayList<Object> instances = null;
 				try {
+					System.out.println("class = " + clazz);
 					instances = (ArrayList<Object>) clazz.getField("instances").get(null);
 					if (instances != null)
 						instances.add(objectToLoad);
 				} catch (NoSuchFieldException e) {
 					e.printStackTrace();
 				}
+			}
+
+			if (clazz == Actor.class) {
+				Level.actors.add((Actor) objectToLoad);
 			}
 		}
 
@@ -206,62 +230,7 @@ public class Load {
 				} else if (type.isAssignableFrom(String.class)) {
 					field.set(objectToLoad, resultSet.getString(count));
 				} else {
-
-					// if (type == ArrayList.class) {
-					// System.out.println("type = " + type);
-					// type = (Class<?>) new TypeToken<ArrayList<Float>>() {
-					// }.getType();
-					// }
-					// Object deserialized = null;
-					// if (type == ArrayList.class) {
-					// ArrayList arrayList = (ArrayList) field.get(objectToLoad);
-					// Class c = arrayList.clazz;
-					// System.out.println("c = " + c);
-					// Type typeToken = null;
-					// if (c == Square.class) {
-					// typeToken = new TypeToken<ArrayList<Square>>() {
-					// }.getType();
-					// } else if (c == GameObject.class) {
-					// typeToken = new TypeToken<ArrayList<GameObject>>() {
-					// }.getType();
-					// } else if (c == Actor.class) {
-					// typeToken = new TypeToken<ArrayList<Actor>>() {
-					// }.getType();
-					// } else if (c == Texture.class) {
-					// typeToken = new TypeToken<ArrayList<Texture>>() {
-					// }.getType();
-					// } else if (c == Crime.class) {
-					// typeToken = new TypeToken<ArrayList<Crime>>() {
-					// }.getType();
-					// } else if (c == Door.class) {
-					// typeToken = new TypeToken<ArrayList<Door>>() {
-					// }.getType();
-					// } else if (c == Power.class) {
-					// typeToken = new TypeToken<ArrayList<Power>>() {
-					// }.getType();
-					// } else if (c == Effect.class) {
-					// typeToken = new TypeToken<ArrayList<Effect>>() {
-					// }.getType();
-					// } else if (c == Arrow.class) {
-					// typeToken = new TypeToken<ArrayList<Arrow>>() {
-					// }.getType();
-					// } else if (c == Area.class) {
-					// typeToken = new TypeToken<ArrayList<Area>>() {
-					// }.getType();
-					// } else if (c == StructureRoom.class) {
-					// typeToken = new TypeToken<ArrayList<StructureRoom>>() {
-					// }.getType();
-					// } else if (c == StructureSection.class) {
-					// typeToken = new TypeToken<ArrayList<StructureSection>>() {
-					// }.getType();
-					// }
-					//
-					// deserialized = loadDeserializerGson.fromJson(resultSet.getString(count),
-					// typeToken);
-					// } else {
 					Object deserialized = loadDeserializerGson.fromJson(resultSet.getString(count), type);
-					// }
-
 					field.set(objectToLoad, deserialized);
 				}
 

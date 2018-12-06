@@ -113,6 +113,7 @@ public class Save {
 
 			// LVL 3 GameObject subclass
 			Seesaw.class,
+			// SeesawPart.class,
 
 			// LVL 3 GameObject subclass in Tool
 			Shovel.class, Pickaxe.class, Knife.class, FlammableLightSource.class, FishingRod.class,

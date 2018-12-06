@@ -15,6 +15,7 @@ import com.marklynch.objects.inanimateobjects.Mirror;
 import com.marklynch.objects.inanimateobjects.PressurePlate;
 import com.marklynch.objects.inanimateobjects.PressurePlateRequiringSpecificItem;
 import com.marklynch.objects.inanimateobjects.Searchable;
+import com.marklynch.objects.inanimateobjects.SeesawPart;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.Stampable;
 import com.marklynch.objects.inanimateobjects.Switch;
@@ -203,7 +204,7 @@ public class TemplatesFurniture {
 		Templates.SEESAW.value = 33;
 		Templates.SEESAW.templateId = GameObject.generateNewTemplateId();
 
-		Templates.SEESAW_PART = new Seesaw.SeesawPart();
+		Templates.SEESAW_PART = new SeesawPart();
 		Templates.SEESAW_PART.name = "Seesaw";
 		Templates.SEESAW_PART.imageTexture = getGlobalImage("seesaw_part.png", true);
 		Templates.SEESAW_PART.totalHealth = Templates.SEESAW_PART.remainingHealth = 1;

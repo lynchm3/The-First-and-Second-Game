@@ -23,8 +23,6 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public Actor actor = null;
 	public Door door = null;
 	public WaterBody waterBody = null;
-	public ArrayList<GameObject> gameObjectsGround = new ArrayList<GameObject>(GameObject.class);
-	public ArrayList<GameObject> gameObjectsNonGround = new ArrayList<GameObject>(GameObject.class);
 
 	public SquareInventory() {
 
@@ -72,14 +70,6 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			gameObject.inventoryThatHoldsThisObject = this;
 			gameObject.squareGameObjectIsOn = square;
 
-			if (gameObject.isFloorObject) {
-				gameObjectsGround.add(gameObject);
-				this.gameObjectsGround.sort(this);
-			} else {
-				gameObjectsNonGround.add(gameObject);
-				this.gameObjectsNonGround.sort(this);
-			}
-
 			if (!Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor))
 				Game.level.inanimateObjectsOnGround.add(gameObject);
 
@@ -105,12 +95,6 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 			gameObject.lastSquare = this.square;
 			gameObjects.remove(gameObject);
-
-			if (gameObject.isFloorObject) {
-				gameObjectsGround.remove(gameObject);
-			} else {
-				gameObjectsNonGround.remove(gameObject);
-			}
 
 			if (Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor))
 				Game.level.inanimateObjectsOnGround.remove(gameObject);
@@ -241,22 +225,6 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		}
 		return null;
 
-	}
-
-	public ArrayList<GameObject> getGameObjectsGround() {
-		return gameObjectsGround;
-	}
-
-	public void setGameObjectsGround(ArrayList<GameObject> gameObjectsGround) {
-		this.gameObjectsGround = gameObjectsGround;
-	}
-
-	public ArrayList<GameObject> getGameObjectsNonGround() {
-		return gameObjectsNonGround;
-	}
-
-	public void setGameObjectsNonGround(ArrayList<GameObject> gameObjectsNonGround) {
-		this.gameObjectsNonGround = gameObjectsNonGround;
 	}
 
 	@Override

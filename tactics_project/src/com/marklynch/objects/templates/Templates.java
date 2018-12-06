@@ -47,6 +47,7 @@ import com.marklynch.objects.inanimateobjects.PressurePlateRequiringSpecificItem
 import com.marklynch.objects.inanimateobjects.Rail;
 import com.marklynch.objects.inanimateobjects.RemoteDoor;
 import com.marklynch.objects.inanimateobjects.Searchable;
+import com.marklynch.objects.inanimateobjects.SeesawPart;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
 import com.marklynch.objects.inanimateobjects.Storage;
@@ -276,7 +277,7 @@ public class Templates {
 	public static PressurePlateRequiringSpecificItem PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM;
 
 	public static Seesaw SEESAW;
-	public static Seesaw.SeesawPart SEESAW_PART;
+	public static SeesawPart SEESAW_PART;
 
 	// Kitchenware
 	public static GameObject PLATE;

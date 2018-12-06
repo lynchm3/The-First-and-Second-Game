@@ -35,7 +35,6 @@ import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor.Direction;
-import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ArrayList;
@@ -78,7 +77,8 @@ public class SaveSerializationCreator {
 		for (Class<?> clazz : gameObjectClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
 		}
-		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, serializerForIdable);
+		// gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class,
+		// serializerForIdable);
 
 		// Effects
 		ArrayList<Class> effectClasses = new ArrayList<Class>(Class.class);
@@ -384,10 +384,10 @@ public class SaveSerializationCreator {
 					jsonObject.add("door", new JsonPrimitive(squareInventory.door.id));
 				if (squareInventory.waterBody != null)
 					jsonObject.add("waterBody", new JsonPrimitive(squareInventory.waterBody.id));
-				jsonObject.add("gameObjectsGround",
-						Save.saveSerializerGson.toJsonTree(squareInventory.gameObjectsGround));
-				jsonObject.add("gameObjectsNonGround",
-						Save.saveSerializerGson.toJsonTree(squareInventory.gameObjectsNonGround));
+				// jsonObject.add("gameObjectsGround",
+				// Save.saveSerializerGson.toJsonTree(squareInventory.gameObjectsGround));
+				// jsonObject.add("gameObjectsNonGround",
+				// Save.saveSerializerGson.toJsonTree(squareInventory.gameObjectsNonGround));
 
 			}
 
