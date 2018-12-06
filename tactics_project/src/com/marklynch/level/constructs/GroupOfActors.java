@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -11,28 +10,29 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 
 public class GroupOfActors implements Idable {
 	public Long id;
 
 	public String name;
-	protected transient ArrayList<Actor> members;
+	protected transient ArrayList<Actor> members = new ArrayList<Actor>(Actor.class);
 	public transient Actor leader;
-	protected transient ArrayList<GameObject> attackers;
+	protected transient ArrayList<GameObject> attackers = new ArrayList<GameObject>(GameObject.class);
 	public transient Quest quest;
 	public HashMap<Actor, Square> targetSquaresMap = new HashMap<Actor, Square>();
-	public ArrayList<Square> targetSquares = new ArrayList<Square>();
+	public ArrayList<Square> targetSquares = new ArrayList<Square>(Square.class);
 
 	public GroupOfActors(String name, Actor... members) {
 		super();
 		id = Level.generateNewId(this);
 		this.name = name;
-		this.members = new ArrayList<Actor>(Arrays.asList(members));
+		this.members = new ArrayList<Actor>(Actor.class, Arrays.asList(members));
 		this.leader = this.members.get(0);
 		for (Actor member : members) {
 			member.groupOfActors = this;
 		}
-		attackers = new ArrayList<GameObject>();
+		attackers = new ArrayList<GameObject>(GameObject.class);
 	}
 
 	public void addMember(Actor actor) {
@@ -63,7 +63,7 @@ public class GroupOfActors implements Idable {
 	public boolean update(Actor actor) {
 
 		// Manage attackers list
-		ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>();
+		ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>(GameObject.class);
 		for (GameObject attacker : attackers) {
 			if (attacker.remainingHealth <= 0) {
 				attackersToRemoveFromList.add(attacker);
@@ -86,7 +86,7 @@ public class GroupOfActors implements Idable {
 			if (currentTarget == leader.squareGameObjectIsOn
 					|| actor.straightLineDistanceTo(leader.squareGameObjectIsOn) > maxDistanceFromLeader) {
 
-				ArrayList<Square> possibleSquares = new ArrayList<Square>();
+				ArrayList<Square> possibleSquares = new ArrayList<Square>(Square.class);
 				for (int i = 1; i <= maxDistanceFromLeader; i++) {
 					ArrayList<Square> squaresISquareAway = leader.getAllSquaresAtDistance(i);
 					for (Square square : squaresISquareAway) {

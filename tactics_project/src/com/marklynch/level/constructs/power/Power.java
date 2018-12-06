@@ -2,8 +2,6 @@ package com.marklynch.level.constructs.power;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.ArrayList;
-
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
@@ -15,6 +13,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
 public abstract class Power {
@@ -69,7 +68,7 @@ public abstract class Power {
 	}
 
 	public ArrayList<Square> getAffectedSquares(Square targetSquare) {
-		ArrayList<Square> affectedSquares = new ArrayList<Square>();
+		ArrayList<Square> affectedSquares = new ArrayList<Square>(Square.class);
 		for (Point point : areaOfEffect) {
 			int squareX = targetSquare.xInGrid + point.getX();
 			int squareY = targetSquare.yInGrid + point.getY();

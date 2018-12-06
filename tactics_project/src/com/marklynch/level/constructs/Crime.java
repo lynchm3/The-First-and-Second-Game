@@ -1,11 +1,10 @@
 package com.marklynch.level.constructs;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 
 public class Crime {
 
@@ -32,7 +31,7 @@ public class Crime {
 	public boolean reported;
 	public GameObject stolenItems[];
 	public TYPE type;
-	public ArrayList<GameObject> crimeListeners = new ArrayList<GameObject>();;
+	public ArrayList<GameObject> crimeListeners = new ArrayList<GameObject>(GameObject.class);
 
 	public Crime(Actor performer, Actor visctim, TYPE type, GameObject... stolenItems) {
 		super();

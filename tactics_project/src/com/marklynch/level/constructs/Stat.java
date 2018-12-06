@@ -1,9 +1,9 @@
 package com.marklynch.level.constructs;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.annotations.Expose;
+import com.marklynch.utils.ArrayList;
 
 public class Stat {
 
@@ -17,13 +17,16 @@ public class Stat {
 	};
 
 	@Expose(serialize = false)
-	public final static ArrayList<HIGH_LEVEL_STATS> GENERAL_STATS = new ArrayList<HIGH_LEVEL_STATS>();
+	public final static ArrayList<HIGH_LEVEL_STATS> GENERAL_STATS = new ArrayList<HIGH_LEVEL_STATS>(
+			HIGH_LEVEL_STATS.class);
 
 	@Expose(serialize = false)
-	public final static ArrayList<HIGH_LEVEL_STATS> OFFENSIVE_STATS = new ArrayList<HIGH_LEVEL_STATS>();
+	public final static ArrayList<HIGH_LEVEL_STATS> OFFENSIVE_STATS = new ArrayList<HIGH_LEVEL_STATS>(
+			HIGH_LEVEL_STATS.class);
 
 	@Expose(serialize = false)
-	public final static ArrayList<HIGH_LEVEL_STATS> DEFENSIVE_STATS = new ArrayList<HIGH_LEVEL_STATS>();
+	public final static ArrayList<HIGH_LEVEL_STATS> DEFENSIVE_STATS = new ArrayList<HIGH_LEVEL_STATS>(
+			HIGH_LEVEL_STATS.class);
 
 	@Expose(serialize = false)
 	public static HashMap<HIGH_LEVEL_STATS, HIGH_LEVEL_STATS> offensiveStatToDefensiveStatMap;

@@ -1,7 +1,5 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
@@ -9,6 +7,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.ArrayList;
 
 public class ActionTakeAll extends Action {
 
@@ -51,7 +50,7 @@ public class ActionTakeAll extends Action {
 
 		if (!legal) {
 
-			ArrayList<GameObject> stolenObjects = new ArrayList<GameObject>();
+			ArrayList<GameObject> stolenObjects = new ArrayList<GameObject>(GameObject.class);
 			for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 				if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer) {
 					stolenObjects.add(gameObjectToLoot);

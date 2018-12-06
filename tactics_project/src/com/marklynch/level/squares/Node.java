@@ -1,6 +1,5 @@
 package com.marklynch.level.squares;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,6 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.utils.ArrayList;
 
 public class Node implements Comparable<Node>, Idable {
 
@@ -27,10 +27,10 @@ public class Node implements Comparable<Node>, Idable {
 	public final int xInGrid;
 	public final int yInGrid;
 
-	public ArrayList<Node> neighbors = new ArrayList<Node>();
+	public ArrayList<Node> neighbors = new ArrayList<Node>(Node.class);
 
 	public HashMap<Node, Integer> costToNeighbors;
-	public ArrayList<Square> squares = new ArrayList<Square>();
+	public ArrayList<Square> squares = new ArrayList<Square>(Square.class);
 	// end path finding
 
 	public Node(String name, Square square) {
@@ -69,7 +69,7 @@ public class Node implements Comparable<Node>, Idable {
 	public List getAllNeighbourNodesThatCanBeMovedTo(Actor actor, Square goalSquare) {
 		Game.getNeighborsThatCanBeMovedTo++;
 		Game.getAllNeighbourSquaresThatCanBeMovedTo++;
-		ArrayList<Node> squares = new ArrayList<Node>();
+		ArrayList<Node> squares = new ArrayList<Node>(Node.class);
 
 		for (Node node : neighbors) {
 			if (node.includableInPath(actor, goalSquare)) {

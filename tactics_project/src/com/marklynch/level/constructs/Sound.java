@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.marklynch.Game;
@@ -9,6 +8,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.CircleUtils;
 import com.marklynch.utils.Color;
 
@@ -16,7 +16,7 @@ public class Sound {
 	public GameObject sourcePerformer;
 	public GameObject sourceObject;
 	public Square sourceSquare;
-	public ArrayList<Square> destinationSquares;
+	public ArrayList<Square> destinationSquares = new ArrayList<Square>(Square.class);
 	public float loudness;
 	public boolean legal;
 	public Class actionType;
@@ -101,20 +101,20 @@ public class Sound {
 
 		highestPathCostSeen = 0;
 		squareToPath.clear();
-		destinationSquares = new ArrayList<Square>();
+		destinationSquares = new ArrayList<Square>(Square.class);
 		// destinationSquares.clear();
 
 		Square currentSquare = this.sourceSquare;
 		this.destinationSquares.add(currentSquare);
 
-		ArrayList<Square> startPath = new ArrayList<Square>();
+		ArrayList<Square> startPath = new ArrayList<Square>(Square.class);
 		startPath.add(currentSquare);
 		squareToPath.put(currentSquare, new AIPath((ArrayList<Square>) startPath.clone(), 0, false));
 
 		for (int i = 0; i <= highestPathCostSeen; i++) {
 			// get all paths with that cost
-			ArrayList<AIPath> pathsWithCurrentCost = new ArrayList<AIPath>();
-			ArrayList<AIPath> pathsArrayList = new ArrayList<AIPath>();
+			ArrayList<AIPath> pathsWithCurrentCost = new ArrayList<AIPath>(AIPath.class);
+			ArrayList<AIPath> pathsArrayList = new ArrayList<AIPath>(AIPath.class);
 			for (AIPath path : squareToPath.values()) {
 				pathsArrayList.add(path);
 			}

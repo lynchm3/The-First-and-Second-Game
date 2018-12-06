@@ -2,14 +2,13 @@ package com.marklynch.level.constructs.effect;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.Stats;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.utils.DamageDealer;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
@@ -113,7 +112,7 @@ public class Effect implements DamageDealer {
 
 	@Override
 	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
-		ArrayList<Object> result = new ArrayList<Object>();
+		ArrayList<Object> result = new ArrayList<Object>(Object.class);
 		result.add(effectName + " " + highLevelStats.get(statType).value);
 		return result;
 	}
