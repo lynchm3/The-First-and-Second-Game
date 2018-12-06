@@ -1,7 +1,5 @@
 package com.marklynch.level.constructs.journal;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
@@ -30,6 +28,7 @@ import com.marklynch.level.quest.thesecretroom.QuestTheSecretRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.utils.ArrayList;
 
 @SuppressWarnings("serial")
 public class QuestList extends ArrayList<Quest> {
@@ -40,7 +39,7 @@ public class QuestList extends ArrayList<Quest> {
 	public static QuestTheSecretRoom questTheSecretRoom;
 
 	public QuestList() {
-
+		super(Quest.class);
 	}
 
 	public void makeQuests() {
@@ -73,13 +72,13 @@ public class QuestList extends ArrayList<Quest> {
 		int puzzleRoomsX = 100;
 		int puzzleRoomsY = 100;
 
-		ArrayList<StructurePath> paths = new ArrayList<StructurePath>();
-		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>();
-		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
+		ArrayList<StructurePath> paths = new ArrayList<StructurePath>(StructurePath.class);
+		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>(StructureSection.class);
+		ArrayList<Square> squaresToRemove = new ArrayList<Square>(Square.class);
 		structureSections.add(new StructureSection("Puzzle Structure Section", puzzleRoomsX, puzzleRoomsY,
 				puzzleRoomsX + 100, puzzleRoomsY + 150, false, false));
 
-		ArrayList<StructureRoom> puzzleStructureRooms = new ArrayList<StructureRoom>();
+		ArrayList<StructureRoom> puzzleStructureRooms = new ArrayList<StructureRoom>(StructureRoom.class);
 
 		// DOORWAY top left entrance
 		squaresToRemove.add(Level.squares[puzzleRoomsX][puzzleRoomsY + 10]);
@@ -162,15 +161,15 @@ public class QuestList extends ArrayList<Quest> {
 		// ROOM Crumbling wall
 		puzzleStructureRooms.add(new PuzzleRoomCrumblingWall(puzzleRoomsX + 22, puzzleRoomsY + 10));
 
-		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
+		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>(StructureFeature.class);
 		features.addAll(puzzleRoomMaze.features);
 
-		ArrayList<Square> entrances = new ArrayList<Square>();
+		ArrayList<Square> entrances = new ArrayList<Square>(Square.class);
 		entrances.add(Level.squares[puzzleRoomsX][puzzleRoomsY + 10]);
 		// 2nd top left entrance
 		// squaresToRemove.add(Level.squares[x][y + 31]);
 		// squaresToRemove.add(Level.squares[x][y + 32]);
-		ArrayList<Wall> extraWalls = new ArrayList<Wall>();
+		ArrayList<Wall> extraWalls = new ArrayList<Wall>(Wall.class);
 		extraWalls.add(Templates.FALSE_WALL.makeCopy(Level.squares[puzzleRoomsX + 1 + 1][puzzleRoomsY + 22 + 0], null));
 
 		Structure puzzleStructure = new Structure("Puzzle Structure", structureSections, puzzleStructureRooms, paths,

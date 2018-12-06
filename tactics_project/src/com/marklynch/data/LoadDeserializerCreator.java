@@ -82,7 +82,7 @@ public class LoadDeserializerCreator {
 		// gsonBuilder.registerTypeAdapter(Stat.class, deserializerForStat);
 
 		// Add deserializers for all GamObjects, Effects and aiRoutines
-		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>();
+		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>(Class.class);
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.actors"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.inanimateobjects"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.tools"));

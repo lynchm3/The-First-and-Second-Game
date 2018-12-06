@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.Game;
@@ -13,13 +12,14 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Wall;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 
 public class StructureRoom implements Idable {
 	public Long id;
 	public String name;
 	public RoomPart[] roomParts;
-	public ArrayList<Square> squares = new ArrayList<Square>();
+	public ArrayList<Square> squares = new ArrayList<Square>(Square.class);
 	public float x;// where to draw name of room
 	public float y;
 	public boolean seenByPlayer = false;
@@ -29,8 +29,8 @@ public class StructureRoom implements Idable {
 
 	public static Color roomColor = new Color(0.7f, 0.7f, 0.7f);
 
-	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
-	public ArrayList<Wall> extraWalls = new ArrayList<Wall>();
+	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>(StructureFeature.class);
+	public ArrayList<Wall> extraWalls = new ArrayList<Wall>(Wall.class);
 
 	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
 			ArrayList<Actor> ownersArrayList, Node[] nodes, RoomPart... roomParts) {
@@ -54,7 +54,7 @@ public class StructureRoom implements Idable {
 		this.y = y;
 		this.level = level;
 		this.roomParts = roomParts;// Floor squares
-		this.nodes = new ArrayList<>(Arrays.asList(nodes));
+		this.nodes = new ArrayList<>(Node.class, Arrays.asList(nodes));
 		for (RoomPart roomPart : this.roomParts) {
 			for (int i = roomPart.gridX1; i <= roomPart.gridX2; i++) {
 				for (int j = roomPart.gridY1; j <= roomPart.gridY2; j++) {

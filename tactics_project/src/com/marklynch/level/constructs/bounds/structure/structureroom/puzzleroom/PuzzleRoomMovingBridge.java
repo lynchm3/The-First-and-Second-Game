@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.marklynch.Game;
@@ -14,26 +13,10 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Utils.Point;
 
 public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListener {
-
-	// oooxxooo
-	// oooxxooo
-	// oooxxooo
-	// oooxxooo
-
-	// to
-
-	// oooooooo
-	// xxxxxxxx
-	// xxxxxxxx
-	// oooooooo
-
-	// When switch is hit
-
-	// o = chasm / drop /death/ impassable
-	// x = bridge
 
 	boolean bridgeVertical = false;
 	int posX;
@@ -47,16 +30,17 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	int gapsWidth;
 	int bridgeConnectorsWidth;
 
-	ArrayList<Square> verticalBridgeSquares = new ArrayList<Square>();
-	ArrayList<Square> horizontalBridgeSquares = new ArrayList<Square>();
+	ArrayList<Square> verticalBridgeSquares = new ArrayList<Square>(Square.class);
+	ArrayList<Square> horizontalBridgeSquares = new ArrayList<Square>(Square.class);
 	// ArrayList<Square> midBridgeSquares = new ArrayList<Square>();
 	ArrayList<Square> activeBridgeSquares;
 
 	Square voidSquare;
 
 	public PuzzleRoomMovingBridge(int posX, int posY) {
-		super("Bridge Room", posX, posY, false, false, new ArrayList<Actor>(), 1, false, new Node[] {}, new RoomPart[] {
-				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
+		super("Bridge Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
+				new RoomPart[] {
+						new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
 		this.posY = posY;
@@ -84,7 +68,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 		}
 
-		ArrayList<Square> middleSquares = new ArrayList<Square>();
+		ArrayList<Square> middleSquares = new ArrayList<Square>(Square.class);
 		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2 - 1][posY + totalHeightInSquares / 2 - 1]);
 		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2 - 1][posY + totalHeightInSquares / 2]);
 		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2][posY + totalHeightInSquares / 2 - 1]);
@@ -197,7 +181,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 		HashMap<GameObject, Square> teleportationsToPerform = new HashMap<GameObject, Square>();
 		// HashMap<GameObject, Square> midTeleportationsToPerform = new
 		// HashMap<GameObject, Square>();
-		ArrayList<GameObject> teleportationObjectsInOrder = new ArrayList<GameObject>();
+		ArrayList<GameObject> teleportationObjectsInOrder = new ArrayList<GameObject>(GameObject.class);
 
 		if (bridgeVertical) {
 

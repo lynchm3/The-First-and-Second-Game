@@ -1,7 +1,5 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
@@ -13,6 +11,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
+import com.marklynch.utils.ArrayList;
 
 public class PuzzleRoomFallawayFloor extends StructureRoom implements SwitchListener {
 	int posX;
@@ -21,13 +20,13 @@ public class PuzzleRoomFallawayFloor extends StructureRoom implements SwitchList
 	final static int totalHeightInSquares = 30;
 	final static int xOffsetThatSquaresFallawayTo = 26;
 	boolean floorFallenAway = false;
-	ArrayList<Square> squaresToFallaway = new ArrayList<Square>();
+	ArrayList<Square> squaresToFallaway = new ArrayList<Square>(Square.class);
 	int safeBorderWidthOnLeft = 5;
 	int safeBorderWidthOnRight = 5;
 	Square voidSquare;
 
 	public PuzzleRoomFallawayFloor(int posX, int posY) {
-		super("Fallaway floor", posX, posY, false, false, new ArrayList<Actor>(), 1, false, new Node[] {},
+		super("Fallaway floor", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
 				new RoomPart[] {
 						new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 

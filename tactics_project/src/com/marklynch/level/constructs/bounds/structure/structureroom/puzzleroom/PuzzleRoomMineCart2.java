@@ -1,7 +1,5 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
@@ -14,6 +12,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Rail;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.utils.ArrayList;
 
 public class PuzzleRoomMineCart2 extends StructureRoom {
 	int posX;
@@ -22,7 +21,7 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 	final static int totalHeightInSquares = 20;
 
 	public PuzzleRoomMineCart2(int posX, int posY) {
-		super("Minecart Room 2", posX, posY, false, false, new ArrayList<Actor>(), 1, false, new Node[] {},
+		super("Minecart Room 2", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
 				new RoomPart[] {
 						new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 

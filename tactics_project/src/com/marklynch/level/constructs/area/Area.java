@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.area;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.Game;
@@ -11,6 +10,7 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
@@ -26,7 +26,7 @@ public class Area implements Idable {
 	boolean showOnMap = false;
 	public int level;
 	public Color color;
-	public ArrayList<Node> nodes;
+	public ArrayList<Node> nodes = new ArrayList<Node>(Node.class);
 	public Storage lostAndFound;
 	public WantedPoster wantedPoster;
 	public Long id;
@@ -47,7 +47,8 @@ public class Area implements Idable {
 		this.centreSuqare = Level.squares[gridCenterX][gridCenterY];
 		this.level = level;
 		this.color = color;
-		this.nodes = new ArrayList<>(Arrays.asList(nodes));
+		this.nodes.clear();
+		this.nodes.addAll(Arrays.asList(nodes));
 
 		for (int i = gridX1; i <= gridX2; i++) {
 			for (int j = gridY1; j <= gridY2; j++) {

@@ -1,7 +1,5 @@
 package com.marklynch.level.constructs.inventory;
 
-import java.util.ArrayList;
-
 import org.lwjgl.input.Keyboard;
 
 import com.marklynch.Game;
@@ -13,6 +11,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
@@ -29,7 +28,7 @@ public class InventorySquare extends Square {
 
 	public static Texture imageTexture;
 
-	public transient ArrayList<GameObject> stack = new ArrayList<GameObject>();
+	public transient ArrayList<GameObject> stack = new ArrayList<GameObject>(GameObject.class);
 
 	static Color translucentBlack = new Color(0.5f, 0f, 0f, 0f);
 
@@ -232,7 +231,7 @@ public class InventorySquare extends Square {
 				return targetGameObject.getAllActionsPerformedOnThisInOtherInventory(performer);
 
 		}
-		return new ArrayList<Action>();
+		return new ArrayList<Action>(Action.class);
 	}
 
 	@Override
@@ -242,12 +241,12 @@ public class InventorySquare extends Square {
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 		return actions;
 	}
 
 	public ArrayList<InventorySquare> getAllInventorySquaresAtDistance(float distance) {
-		ArrayList<InventorySquare> squares = new ArrayList<InventorySquare>();
+		ArrayList<InventorySquare> squares = new ArrayList<InventorySquare>(InventorySquare.class);
 		if (distance == 0) {
 			squares.add(this);
 			return squares;

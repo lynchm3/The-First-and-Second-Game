@@ -1,7 +1,5 @@
 package com.marklynch.level.constructs.inventory;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
@@ -9,6 +7,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Openable;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
@@ -18,14 +17,15 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	int x, y;
 
-	ArrayList<ArrayList<GameObject>> stacks = new ArrayList<ArrayList<GameObject>>();
+	ArrayList<ArrayList<GameObject>> stacks = new ArrayList<ArrayList<GameObject>>(GameObject.class);
 
 	public int squareGridWidthInSquares = 5;
 
-	ArrayList<Square> squares = new ArrayList<Square>();
+	ArrayList<Square> squares = new ArrayList<Square>(Square.class);
 	int squaresX;
 	float squaresY;
-	public transient ArrayList<GroundDisplaySquare> groundDisplaySquares = new ArrayList<GroundDisplaySquare>();
+	public transient ArrayList<GroundDisplaySquare> groundDisplaySquares = new ArrayList<GroundDisplaySquare>(
+			GroundDisplaySquare.class);
 	transient private GroundDisplaySquare groundDisplaySquareMouseIsOver;
 
 	public static final String stringEmpty = "Nothing nearby";

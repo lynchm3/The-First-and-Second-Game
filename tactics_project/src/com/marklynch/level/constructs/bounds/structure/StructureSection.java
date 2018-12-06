@@ -1,11 +1,10 @@
 package com.marklynch.level.constructs.bounds.structure;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.utils.ArrayList;
 
 public class StructureSection implements Idable {
 
@@ -23,7 +22,7 @@ public class StructureSection implements Idable {
 		this.gridX2 = gridX2;
 		this.gridY2 = gridY2;
 
-		ArrayList<Actor> ownersArrayList = new ArrayList<Actor>();
+		ArrayList<Actor> ownersArrayList = new ArrayList<Actor>(Actor.class);
 		for (Actor owner : ownersArray) {
 			ownersArrayList.add(owner);
 		}

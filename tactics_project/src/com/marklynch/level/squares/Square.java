@@ -1,6 +1,5 @@
 package com.marklynch.level.squares;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +56,7 @@ import com.marklynch.objects.inanimateobjects.VoidHole;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.ui.button.Tooltip;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
@@ -82,7 +82,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public transient boolean visibleToPlayer = false;
 	public transient boolean seenByPlayer = false;
 	public transient boolean inPath = false;
-	public transient ArrayList<Weapon> weaponsThatCanAttack;
+	public transient ArrayList<Weapon> weaponsThatCanAttack = new ArrayList<Weapon>(Weapon.class);
 
 	// image
 	public transient Texture defaultImageTexture = null;
@@ -123,14 +123,14 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public transient boolean drawEndPathDot = false;
 	// public boolean drawX = false;
 
-	public transient ArrayList<Actor> owners;
+	public transient ArrayList<Actor> owners = new ArrayList<Actor>(Actor.class);
 	public transient boolean restricted;
 	public transient boolean restrictedAtNight;
 	public transient String name;
 	public transient boolean flash;
 
 	// path finding
-	public transient ArrayList<Node> nodes;
+	public transient ArrayList<Node> nodes = new ArrayList<Node>(Node.class);
 
 	public transient Square pathParent;
 	public transient float costFromStart;
@@ -145,7 +145,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public transient float xInGridPixels;
 	public transient float yInGridPixels;
 
-	public transient ArrayList<Square> neighbors;
+	public transient ArrayList<Square> neighbors = new ArrayList<Square>(Square.class);
 
 	public transient Node node;
 
@@ -173,14 +173,14 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		this.elevation = elevation;
 		this.floorImageTexture = imageTexture;
 
-		weaponsThatCanAttack = new ArrayList<Weapon>();
+		weaponsThatCanAttack = new ArrayList<Weapon>(Weapon.class);
 		this.inventory = inventory;
 		if (this.inventory != null) {
 			this.inventory.parent = this;
 			this.inventory.square = this;
 		}
 
-		this.owners = new ArrayList<Actor>();
+		this.owners = new ArrayList<Actor>(Actor.class);
 		for (Actor owner : owners) {
 			this.owners.add(owner);
 		}
@@ -247,7 +247,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public void postLoad1() {
 		inventory.square = this;
 		inventory.postLoad1();
-		weaponsThatCanAttack = new ArrayList<Weapon>();
+		weaponsThatCanAttack = new ArrayList<Weapon>(Weapon.class);
 	}
 
 	public void postLoad2() {
@@ -718,7 +718,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		// if (!this.seenByPlayer)
 		// return null;
 
-		ArrayList<GameObject> gameObjectsToCheck = new ArrayList<GameObject>();
+		ArrayList<GameObject> gameObjectsToCheck = new ArrayList<GameObject>(GameObject.class);
 
 		// GameObject gameObject = null;
 
@@ -1011,7 +1011,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 		// Move, teleport, loiter
 		if (this != Game.level.player.squareGameObjectIsOn) {
 			actions.add(new ActionMove(performer, this, true));
@@ -1083,7 +1083,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	}
 
 	public ArrayList<Square> getAllSquaresAtDistance(int distance) {
-		ArrayList<Square> squares = new ArrayList<Square>();
+		ArrayList<Square> squares = new ArrayList<Square>(Square.class);
 		if (distance == 0) {
 			squares.add(this);
 			return squares;
@@ -1259,7 +1259,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, Square goalSquare) {
 		Game.getNeighborsThatCanBeMovedTo++;
 		Game.getAllNeighbourSquaresThatCanBeMovedTo++;
-		ArrayList<Square> squares = new ArrayList<Square>();
+		ArrayList<Square> squares = new ArrayList<Square>(Square.class);
 
 		for (Square square : neighbors) {
 			if (square.includableInPath(actor, goalSquare, false)) {

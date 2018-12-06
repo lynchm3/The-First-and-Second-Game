@@ -1,7 +1,5 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
@@ -12,19 +10,22 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.utils.ArrayList;
 
 public class PuzzleRoomMaze extends StructureRoom {
 	int posX;
 	int posY;
 	final static int totalWidthInSquares = 30;
 	final static int totalHeightInSquares = 30;
-	public ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>();
-	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>();
+	public ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>(StructurePath.class);
+	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>(StructureFeature.class);
 
 	public PuzzleRoomMaze(int posX, int posY) {
-		super("Maze", posX, posY, false, false, new ArrayList<Actor>(), 1, false, new Node[] {}, new RoomPart[] {});
+		super("Maze", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
+				new RoomPart[] {});
 
-		structurePaths.add(new StructurePath("Goat's Maze", false, false, new ArrayList<Actor>(), new Node[] {},
+		structurePaths.add(new StructurePath("Goat's Maze", false, false, new ArrayList<Actor>(Actor.class),
+				new Node[] {},
 				// x = 0
 				Level.squares[posX + 0][posY + 0], Level.squares[posX + 0][posY + 28],
 				Level.squares[posX + 0][posY + 29], //

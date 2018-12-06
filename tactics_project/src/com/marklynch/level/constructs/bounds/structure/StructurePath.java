@@ -1,24 +1,24 @@
 package com.marklynch.level.constructs.bounds.structure;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.utils.ArrayList;
 
 public class StructurePath {
 
 	String name;
 	Square[] squares;
-	ArrayList<Node> nodes;
+	ArrayList<Node> nodes = new ArrayList<Node>(Node.class);
 
 	public StructurePath(String name, boolean restricted, boolean restrictedAtNight, ArrayList<Actor> ownersArrayList,
 			Node[] nodes, Square... squares) {
 		super();
 		this.name = name;
 		this.squares = squares;
-		this.nodes = new ArrayList<>(Arrays.asList(nodes));
+		this.nodes = new ArrayList<>(Node.class, Arrays.asList(nodes));
 
 		if (restricted) {
 			for (Square square : squares) {

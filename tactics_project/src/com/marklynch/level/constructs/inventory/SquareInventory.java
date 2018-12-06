@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.inventory;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 import com.marklynch.Game;
@@ -13,6 +12,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.inanimateobjects.Window;
 import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
+import com.marklynch.utils.ArrayList;
 
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
 
@@ -23,8 +23,8 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public Actor actor = null;
 	public Door door = null;
 	public WaterBody waterBody = null;
-	public ArrayList<GameObject> gameObjectsGround = new ArrayList<GameObject>();
-	public ArrayList<GameObject> gameObjectsNonGround = new ArrayList<GameObject>();
+	public ArrayList<GameObject> gameObjectsGround = new ArrayList<GameObject>(GameObject.class);
+	public ArrayList<GameObject> gameObjectsNonGround = new ArrayList<GameObject>(GameObject.class);
 
 	public SquareInventory() {
 
@@ -165,7 +165,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	}
 
 	public ArrayList<GameObject> getGameObjectsThatFitInInventory() {
-		ArrayList<GameObject> gameObjectsThatFitInInventory = new ArrayList<GameObject>();
+		ArrayList<GameObject> gameObjectsThatFitInInventory = new ArrayList<GameObject>(GameObject.class);
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.fitsInInventory)
 				gameObjectsThatFitInInventory.add(gameObject);

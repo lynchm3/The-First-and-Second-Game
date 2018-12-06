@@ -1,7 +1,5 @@
 package com.marklynch.level.quest.thesecretroom;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.PavedPathway;
@@ -27,6 +25,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.RemoteDoor;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.TextUtils;
 
 public class QuestTheSecretRoom extends Quest {
@@ -58,16 +57,16 @@ public class QuestTheSecretRoom extends Quest {
 				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 32], Game.level.factions.townsPeople, bed, 100,
 				new GameObject[] {}, new GameObject[] {}, null);
 		kidnapper.quest = this;
-		ArrayList<Actor> ownershipArrayList = new ArrayList<Actor>();
+		ArrayList<Actor> ownershipArrayList = new ArrayList<Actor>(Actor.class);
 		ownershipArrayList.add(kidnapper);
 
-		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>();
-		ArrayList<StructureFeature> structureFeatures = new ArrayList<StructureFeature>();
-		ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>();
-		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>();
-		ArrayList<StructureRoom> structureRooms = new ArrayList<StructureRoom>();
-		ArrayList<Square> structureSquaresToRemove = new ArrayList<Square>();
-		ArrayList<Square> structureEntranceSquares = new ArrayList<Square>();
+		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>(Wall.class);
+		ArrayList<StructureFeature> structureFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
+		ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>(StructurePath.class);
+		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>(StructureSection.class);
+		ArrayList<StructureRoom> structureRooms = new ArrayList<StructureRoom>(StructureRoom.class);
+		ArrayList<Square> structureSquaresToRemove = new ArrayList<Square>(Square.class);
+		ArrayList<Square> structureEntranceSquares = new ArrayList<Square>(Square.class);
 
 		// Front section
 		structureSections.add(new StructureSection("A Cozy Place", AreaTown.posX + 21, AreaTown.posY + 30,

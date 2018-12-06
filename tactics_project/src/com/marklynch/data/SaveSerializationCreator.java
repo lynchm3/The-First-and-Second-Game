@@ -129,8 +129,7 @@ public class SaveSerializationCreator {
 
 			JsonArray jsonArray = new JsonArray();
 			for (Object object : src) {
-				jsonArray.add(Load.loadDeserializerGson.toJsonTree(object));
-				;
+				jsonArray.add(Save.saveSerializerGson.toJsonTree(object));
 			}
 
 			jsonObject.add("objects", jsonArray);

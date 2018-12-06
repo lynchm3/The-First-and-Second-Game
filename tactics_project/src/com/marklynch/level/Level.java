@@ -1022,7 +1022,8 @@ public class Level {
 
 		// In attack mode, draw attackable sqrs.
 		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
-			ArrayList<Square> attackableSquares = new ArrayList<Square>();
+			com.marklynch.utils.ArrayList<Square> attackableSquares = new com.marklynch.utils.ArrayList<Square>(
+					Square.class);
 
 			if (Game.level.player == null || !(Game.level.player.equipped instanceof Weapon)) {
 				attackableSquares.addAll(Game.level.player.getAllSquaresAtDistance(1));
