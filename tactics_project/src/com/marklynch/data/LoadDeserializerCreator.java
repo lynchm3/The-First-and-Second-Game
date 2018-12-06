@@ -4,6 +4,7 @@ import java.lang.reflect.Type;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -55,6 +56,7 @@ public class LoadDeserializerCreator {
 	public static Gson createLoadDeserializerGson() {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.registerTypeAdapter(ArrayList.class, deserializerForArrayList);
 		gsonBuilder.registerTypeAdapter(Texture.class, deserializerForTexture);
 		gsonBuilder.registerTypeAdapter(Faction.class, deserializerForIdable);
 		gsonBuilder.registerTypeAdapter(GroupOfActors.class, deserializerForIdable);
@@ -132,6 +134,31 @@ public class LoadDeserializerCreator {
 		return gson;
 
 	}
+
+	// change serialization for specific types
+	public static JsonDeserializer<ArrayList> deserializerForArrayList = new JsonDeserializer<ArrayList>() {
+		@Override
+		public ArrayList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
+
+			JsonObject jsonObject = json.getAsJsonObject();
+			String classString = jsonObject.getAsJsonPrimitive("clazz").getAsString();
+			Class c = null;
+			try {
+				c = Class.forName(classString);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			ArrayList arrayList = new ArrayList<>(c);
+
+			JsonArray jsonArray = jsonObject.getAsJsonArray("objects");
+			for (JsonElement jsonElement : jsonArray) {
+				arrayList.add(Load.loadDeserializerGson.fromJson(jsonElement, c));
+			}
+
+			return arrayList;
+		}
+	};
 
 	// change serialization for specific types
 	public static JsonDeserializer<Object> deserializerForIdable = new JsonDeserializer<Object>() {
@@ -305,6 +332,7 @@ public class LoadDeserializerCreator {
 
 			} else if (aiRoutine instanceof AIRoutineForGuard) {
 				((AIRoutineForGuard) aiRoutine).patrolIndex = jsonObject.get("patrolIndex").getAsInt();
+				((AIRoutineForGuard) aiRoutine).guard = (Guard) Level.ids.get(jsonObject.get("guard").getAsLong());
 			} else if (aiRoutine instanceof AIRoutineForHerbivoreWildAnimal) {
 				((AIRoutineForHerbivoreWildAnimal) aiRoutine).hidingCount = jsonObject.get("hidingCount").getAsInt();
 			} else if (aiRoutine instanceof AIRoutineForTrader) {
@@ -322,9 +350,6 @@ public class LoadDeserializerCreator {
 			} else if (aiRoutine instanceof AIRoutineForRockGolem) {
 				AIRoutineForRockGolem aiRoutineForRockGolem = (AIRoutineForRockGolem) aiRoutine;
 				aiRoutineForRockGolem.rockGolem = (RockGolem) Level.ids.get(jsonObject.get("rockGolem").getAsLong());
-			} else if (aiRoutine instanceof AIRoutineForGuard) {
-				AIRoutineForGuard aiRoutineForguard = (AIRoutineForGuard) aiRoutine;
-				aiRoutineForguard.guard = (Guard) Level.ids.get(jsonObject.get("guard").getAsLong());
 			} else if (aiRoutine instanceof AIRoutineForDoctor) {
 				AIRoutineForDoctor aiRoutineFordoctor = (AIRoutineForDoctor) aiRoutine;
 				aiRoutineFordoctor.doctor = (Doctor) Level.ids.get(jsonObject.get("doctor").getAsLong());

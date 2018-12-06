@@ -33,6 +33,9 @@ public class AIRoutineForGuard extends AIRoutine {
 		// 18:03 patrolling
 		// 00:04 nothing
 
+		System.out.println("guard = " + guard);
+		System.out.println("guard.shift = " + guard.shift);
+
 		aiRoutineStart();
 		if (guard.shift.sleepStart > guard.shift.sleepEnd
 				&& (Game.level.hour >= guard.shift.sleepStart || Game.level.hour <= guard.shift.sleepEnd)) {

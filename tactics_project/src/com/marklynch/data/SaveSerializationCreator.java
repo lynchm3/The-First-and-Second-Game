@@ -1,7 +1,6 @@
 package com.marklynch.data;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,6 +38,7 @@ import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.utils.SwitchListener;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 
@@ -47,6 +47,7 @@ public class SaveSerializationCreator {
 	public static Gson createSaveSerializerGson() {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.registerTypeAdapter(ArrayList.class, serializerForArrayList);
 		gsonBuilder.registerTypeAdapter(Texture.class, serializerForTexture);
 		gsonBuilder.registerTypeAdapter(Faction.class, serializerForIdable);
 		gsonBuilder.registerTypeAdapter(Crime.class, serializerForCrime);
@@ -68,7 +69,7 @@ public class SaveSerializationCreator {
 		// gsonBuilder.registerTypeAdapter(Stat.class, serializerForStat);
 
 		// Add serializers for all GamObjects, Effects and aiRoutines
-		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>();
+		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>(Class.class);
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.actors"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.inanimateobjects"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.tools"));
@@ -80,32 +81,37 @@ public class SaveSerializationCreator {
 		gsonBuilder.registerTypeAdapter(Seesaw.SeesawPart.class, serializerForIdable);
 
 		// Effects
-		ArrayList<Class<?>> effectClasses = PackageUtils.getClasses("com.marklynch.level.constructs.effect");
+		ArrayList<Class> effectClasses = new ArrayList<Class>(Class.class);
+		effectClasses.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.effect"));
 		for (Class<?> clazz : effectClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForEffect);
 		}
 
 		// AI Routines
-		ArrayList<Class<?>> aiRoutineClasses = PackageUtils.getClasses("com.marklynch.ai.routines");
+		ArrayList<Class> aiRoutineClasses = new ArrayList<Class>(Class.class);
+		aiRoutineClasses.addAll(PackageUtils.getClasses("com.marklynch.ai.routines"));
 		for (Class<?> clazz : aiRoutineClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForAIRoutine);
 		}
 
 		// Power
-		ArrayList<Class<?>> powerClasses = PackageUtils.getClasses("com.marklynch.level.constructs.power");
+		ArrayList<Class> powerClasses = new ArrayList<Class>(Class.class);
+		powerClasses.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.power"));
 		for (Class<?> clazz : powerClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForPower);
 		}
 
 		// Quests
-		ArrayList<Class<?>> questClasses = PackageUtils.getClasses("com.marklynch.level.quest");
+		ArrayList<Class> questClasses = new ArrayList<Class>(Class.class);
+		questClasses.addAll(PackageUtils.getClasses("com.marklynch.level.quest"));
 		for (Class<?> clazz : questClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
 		}
 
 		// Structure Room
-		ArrayList<Class<?>> structureRoomClasses = PackageUtils
-				.getClasses("com.marklynch.level.constructs.bounds.structure.structureroom");
+		ArrayList<Class> structureRoomClasses = new ArrayList<Class>(Class.class);
+		structureRoomClasses
+				.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.bounds.structure.structureroom"));
 		for (Class<?> clazz : structureRoomClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
 		}
@@ -113,6 +119,25 @@ public class SaveSerializationCreator {
 		Gson gson = gsonBuilder.create();
 		return gson;
 	}
+
+	static JsonSerializer<ArrayList<?>> serializerForArrayList = new JsonSerializer<ArrayList<?>>() {
+		@Override
+		public JsonElement serialize(ArrayList<?> src, Type type, JsonSerializationContext context) {
+
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("clazz", src.clazz.getName());
+
+			JsonArray jsonArray = new JsonArray();
+			for (Object object : src) {
+				jsonArray.add(Load.loadDeserializerGson.toJsonTree(object));
+				;
+			}
+
+			jsonObject.add("objects", jsonArray);
+
+			return jsonObject;
+		}
+	};
 
 	static JsonSerializer<Idable> serializerForIdable = new JsonSerializer<Idable>() {
 		@Override
@@ -235,6 +260,7 @@ public class SaveSerializationCreator {
 					jsonObject.add("bellSound", Save.saveSerializerGson.toJsonTree(aiRoutineForBlind.bellSound));
 			} else if (src instanceof AIRoutineForGuard) {
 				jsonObject.addProperty("patrolIndex", ((AIRoutineForGuard) src).patrolIndex);
+				jsonObject.addProperty("guard", ((AIRoutineForGuard) src).guard.id);
 			} else if (src instanceof AIRoutineForTrader) {
 				jsonObject.addProperty("trader", ((AIRoutineForTrader) src).trader.id);
 			} else if (src instanceof AIRoutineForHerbivoreWildAnimal) {
@@ -250,8 +276,6 @@ public class SaveSerializationCreator {
 				jsonObject.addProperty("theftCooldown", ((AIRoutineForThief) src).theftCooldown);
 			} else if (src instanceof AIRoutineForRockGolem) {
 				jsonObject.addProperty("rockGolem", ((AIRoutineForRockGolem) src).rockGolem.id);
-			} else if (src instanceof AIRoutineForGuard) {
-				jsonObject.addProperty("guard", ((AIRoutineForGuard) src).guard.id);
 			} else if (src instanceof AIRoutineForDoctor) {
 				jsonObject.addProperty("doctor", ((AIRoutineForDoctor) src).doctor.id);
 			}
