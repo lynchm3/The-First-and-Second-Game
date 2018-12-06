@@ -220,7 +220,7 @@ public class SaveSerializationCreator {
 			if (src.target != null)
 				jsonObject.addProperty("target", src.target.id);
 			if (src.targetSquare != null)
-				jsonObject.addProperty("target", src.targetSquare.id);
+				jsonObject.addProperty("targetSquare", src.targetSquare.id);
 			jsonObject.addProperty("searchCooldown", src.searchCooldown);
 			if (src.searchCooldownActor != null)
 				jsonObject.addProperty("searchCooldownActor", src.searchCooldownActor.id);

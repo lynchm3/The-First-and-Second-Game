@@ -482,7 +482,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		updateStacks();
 		matchStacksToSquares();
-		if (otherInventory != null) {
+		if (otherInventory != null && otherInventory != this) {
 			otherInventory.updateStacks();
 			otherInventory.matchStacksToSquares();
 		}
@@ -504,7 +504,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			Game.level.openInventories.remove(this);
 		this.inventorySquares = new ArrayList<InventorySquare>(InventorySquare.class);
 		this.groundDisplay = null;
-		if (this.otherInventory != null) {
+		if (otherInventory != null && otherInventory != this) {
 			otherInventory.isOpen = false;
 			this.otherInventory.inventorySquares = new ArrayList<InventorySquare>(InventorySquare.class);
 			this.otherInventory = null;
@@ -514,7 +514,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void sort(INVENTORY_SORT_BY inventorySortBy, boolean filterFirst, boolean fromSortButtonPress) {
 
-		if (otherInventory != null) {
+		if (otherInventory != null && otherInventory != this) {
 			otherInventory.sort(inventorySortBy, filterFirst, false);
 			otherInventory.updateStacks();
 			otherInventory.matchStacksToSquares();
@@ -669,7 +669,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		sort(Inventory.inventorySortBy, false, false);
 
-		if (otherInventory != null) {
+		if (otherInventory != null && otherInventory != this) {
 			otherInventory.filter(inventoryFilterBy, temporary);
 		}
 	}
@@ -985,7 +985,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		this.squaresX = pixelsToLeftOfSquares;
 		squaresAreaHeight = Game.windowHeight - Inventory.topBorderHeight - Inventory.bottomBorderHeight;
 
-		if (otherInventory != null) {
+		if (otherInventory != null && otherInventory != this) {
 			otherInventory.squareGridWidthInSquares = this.squareGridWidthInSquares;
 			otherInventory.squaresX = pixelsToLeftOfSquares + (squareGridWidthInSquares * Game.INVENTORY_SQUARE_WIDTH)
 					+ pixelsBetweenSquares;
@@ -1017,7 +1017,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			buttonLootAll.y = bottomBorderHeight - 30;
 			textOtherShiftX = this.groundDisplay.squaresX;
 		}
-		if (this.otherInventory != null) {
+		if (this.otherInventory != null && this.otherInventory != this) {
 			this.otherInventory.fixScroll();
 			this.otherInventory.resize2();
 			buttonLootAll.x = this.otherInventory.squaresX;
@@ -1245,7 +1245,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		// Other Gameobject / actor inventory squares
-		if (otherInventory != null) {
+		if (otherInventory != null && otherInventory != this) {
 			GameObject otherGameObject = (GameObject) target;
 			float otherTextureX = otherInventory.squaresX + otherInventory.squaresAreaWidth / 2
 					- (otherGameObject.width);
@@ -1395,7 +1395,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					false, null, Color.WHITE, new Object[] { stringShiftEquip });
 		}
 
-		if (otherInventory != null && inventoryMode != INVENTORY_MODE.MODE_TRADE) {
+		if (otherInventory != null && otherInventory != this && inventoryMode != INVENTORY_MODE.MODE_TRADE) {
 			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					new Object[] { stringShiftPut });
 			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
@@ -1432,7 +1432,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			groundDisplay.drawText();
 		}
 
-		if (otherInventory != null) {
+		if (otherInventory != null && otherInventory != this) {
 			otherInventory.drawOtherInventoryText();
 		}
 
@@ -1501,7 +1501,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		// Gold for other actor
-		if (otherInventory != null && otherInventory.parent instanceof Actor) {
+		if (otherInventory != null && otherInventory != this && otherInventory.parent instanceof Actor) {
 			// && !(otherInventory.parent instanceof Trader)) {
 			Actor actor = (Actor) otherInventory.parent;
 			String goldText = "Gold: " + actor.getCarriedGoldValue();
@@ -1598,7 +1598,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 		}
 
-		if (otherInventory != null) {
+		if (otherInventory != null && otherInventory != this) {
 			InventorySquare inventorySquareMouseIsOver = otherInventory.getInventorySquareMouseIsOver(mouseXInPixels,
 					mouseYInPixels);
 			if (inventorySquareMouseIsOver != null) {
@@ -1650,7 +1650,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			return this;
 		}
 
-		if (this.otherInventory != null) {
+		if (otherInventory != null && otherInventory != this) {
 			if (mouseX > otherInventory.squaresX && mouseX < otherInventory.squaresX + squaresAreaWidth
 					&& mouseY > squaresBaseY && mouseY < squaresBaseY + squaresAreaHeight) {
 				return otherInventory;
@@ -1908,7 +1908,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public void textChanged(TextBox textBox) {
 		if (textBox == textBoxSearch) {
 			filter(inventoryFilterBy, false);
-			if (otherInventory != null) {
+			if (otherInventory != null && otherInventory != this) {
 				otherInventory.filter(inventoryFilterBy, false);
 			}
 		} else if (textBox == textBoxQty) {
