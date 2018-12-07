@@ -12,6 +12,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Player;
@@ -31,7 +32,7 @@ public class Load {
 		long loadStartTime = System.currentTimeMillis();
 		System.out.println("Loading...");
 
-		// Clear data
+		// Clear current data in mem data
 		ArrayList<Long> toRemove = new ArrayList<Long>(Long.class);
 		for (Long id : Level.ids.keySet()) {
 			if (Level.ids.get(id) instanceof Square) {
@@ -45,6 +46,11 @@ public class Load {
 
 		for (Long id : toRemove) {
 			Level.ids.remove(id);
+		}
+
+		for (Square square : Level.squaresToSave) {
+			square.inventory = new SquareInventory();
+			square.floorImageTexture = square.defaultImageTexture;
 		}
 
 		for (Class clazz : Save.classesToSave) {
