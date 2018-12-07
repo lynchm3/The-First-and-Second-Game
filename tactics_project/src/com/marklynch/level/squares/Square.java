@@ -1359,14 +1359,23 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	}
 
 	public void updateSquaresToSave() {
-		if (inventory.size() == 0 && (defaultImageTexture == null || floorImageTexture == defaultImageTexture)
-				&& seenByPlayer == false) {
-			Level.squaresToSave.remove(this);
-		} else {
+
+		if (inventory.size() > 0) {
 			if (!Level.squaresToSave.contains(this)) {
 				Level.squaresToSave.add(this);
 			}
+		} else if (seenByPlayer) {
+			if (!Level.squaresToSave.contains(this)) {
+				Level.squaresToSave.add(this);
+			}
+		} else if (floorImageTexture != defaultImageTexture) {
+			if (!Level.squaresToSave.contains(this)) {
+				Level.squaresToSave.add(this);
+			}
+		} else {
+			Level.squaresToSave.remove(this);
 		}
+
 	}
 
 	@Override
