@@ -227,18 +227,18 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 	}
 
-	@Override
-	public String toString() {
-		String string = "";
-		string += "SquareInventory { ";
-		string += "gameObjects [";
-		for (GameObject gameObject : gameObjects) {
-			string += "" + gameObject + ", ";
-		}
-		string += " ]";
-		string += " }";
-		return string;
-	}
+	// @Override
+	// public String toString() {
+	// String string = "";
+	// string += "SquareInventory { ";
+	// string += "gameObjects [";
+	// for (GameObject gameObject : gameObjects) {
+	// string += "" + gameObject + ", ";
+	// }
+	// string += " ]";
+	// string += " }";
+	// return string;
+	// }
 
 	public GameObject getDiggable() {
 		for (GameObject gameObject : gameObjects) {

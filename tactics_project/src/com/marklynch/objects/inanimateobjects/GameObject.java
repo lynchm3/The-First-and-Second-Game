@@ -169,7 +169,7 @@ public class GameObject
 
 	// attributes
 	public int remainingHealth = 1;
-	boolean favourite = false;
+	protected boolean favourite = false;
 	public transient boolean hasAttackedThisTurn = false;
 
 	// images

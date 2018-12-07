@@ -1934,10 +1934,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 	}
 
-	@Override
-	public String toString() {
-		return "Inventory [parent=" + parent + "]";
-	}
+	// @Override
+	// public String toString() {
+	// return "Inventory [parent=" + parent + "]";
+	// }
 
 	public void drawActor(Actor actor, int x, int y) {
 		actor.drawActor(x, y, 1, false, 2f, 2f, 0f, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE,

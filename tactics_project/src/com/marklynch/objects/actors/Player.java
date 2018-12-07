@@ -1,5 +1,7 @@
 package com.marklynch.objects.actors;
 
+import java.util.Arrays;
+
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
@@ -35,6 +37,82 @@ import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class Player extends Human {
+
+	@Override
+	public String toString() {
+		return "Player [squaresVisibleToPlayer=" + squaresVisibleToPlayer + ", lastUpdateRealtime=" + lastUpdateRealtime
+				+ ", buttonEquippedWeaponAction=" + buttonEquippedWeaponAction + ", aiRoutine=" + aiRoutine + ", title="
+				+ title + ", travelDistance=" + travelDistance + ", sight=" + sight + ", distanceMovedThisTurn="
+				+ distanceMovedThisTurn + ", showWeaponButtons=" + showWeaponButtons + ", activityDescription="
+				+ activityDescription + ", miniDialogue=" + miniDialogue + ", bed=" + bed + ", faction=" + faction
+				+ ", equippedBeforePickingUpObject=" + equippedBeforePickingUpObject + ", helmet=" + helmet
+				+ ", bodyArmor=" + bodyArmor + ", legArmor=" + legArmor + ", canOpenDoors=" + canOpenDoors
+				+ ", canEquipWeapons=" + canEquipWeapons + ", wasSwappedWithThisTurn=" + wasSwappedWithThisTurn
+				+ ", swapCooldown=" + swapCooldown + ", highestPathCostSeen=" + highestPathCostSeen
+				+ ", investigationsMap=" + investigationsMap + ", crimesPerformedThisTurn=" + crimesPerformedThisTurn
+				+ ", crimesPerformedInLifetime=" + crimesPerformedInLifetime + ", standingTexture=" + standingTexture
+				+ ", stepLeftTexture=" + stepLeftTexture + ", stepRightTexture=" + stepRightTexture
+				+ ", currentStepTexture=" + currentStepTexture + ", hairImageTexture=" + hairImageTexture
+				+ ", armImageTexture=" + armImageTexture + ", shoulderY=" + shoulderY + ", elbowY=" + elbowY
+				+ ", handY=" + handY + ", leftArmDrawX=" + leftArmDrawX + ", leftArmHingeX=" + leftArmHingeX
+				+ ", rightArmDrawX=" + rightArmDrawX + ", rightArmHingeX=" + rightArmHingeX + ", headAnchorX="
+				+ headAnchorX + ", headAnchorY=" + headAnchorY + ", torsoImageTexture=" + torsoImageTexture
+				+ ", pelvisImageTexture=" + pelvisImageTexture + ", legImageTexture=" + legImageTexture + ", hipY="
+				+ hipY + ", kneeY=" + kneeY + ", footY=" + footY + ", leftLegDrawX=" + leftLegDrawX + ", leftLegHingeX="
+				+ leftLegHingeX + ", rightLegDrawX=" + rightLegDrawX + ", rightLegHingeX=" + rightLegHingeX
+				+ ", thoughtBubbleImageTextureObject=" + thoughtBubbleImageTextureObject
+				+ ", thoughtBubbleImageTextureAction=" + thoughtBubbleImageTextureAction
+				+ ", thoughtBubbleImageTextureActionColor=" + thoughtBubbleImageTextureActionColor + ", peekingThrough="
+				+ peekingThrough + ", peekSquare=" + peekSquare + ", timePerStep=" + timePerStep + ", thisStepTime="
+				+ thisStepTime + ", crimesWitnessedUnresolved=" + crimesWitnessedUnresolved + ", knownCriminals="
+				+ knownCriminals + ", mapActorToCrimesWitnessed=" + mapActorToCrimesWitnessed
+				+ ", accumulatedCrimeSeverityWitnessed=" + accumulatedCrimeSeverityWitnessed
+				+ ", accumulatedCrimeSeverityUnresolved=" + accumulatedCrimeSeverityUnresolved
+				+ ", highestAccumulatedUnresolvedCrimeSeverity=" + highestAccumulatedUnresolvedCrimeSeverity
+				+ ", criminalWithHighestAccumulatedUnresolvedCrimeSeverity="
+				+ criminalWithHighestAccumulatedUnresolvedCrimeSeverity + ", aiLine=" + aiLine + ", doors=" + doors
+				+ ", followersShouldFollow=" + followersShouldFollow + ", sleeping=" + sleeping + ", powers=" + powers
+				+ ", area=" + area + ", gameObjectsInInventoryThatBelongToAnother="
+				+ gameObjectsInInventoryThatBelongToAnother + ", requiredEquipmentTemplateIds="
+				+ Arrays.toString(requiredEquipmentTemplateIds) + ", fishingProgress=" + fishingProgress
+				+ ", fishingAnimation=" + fishingAnimation + ", hobbies=" + Arrays.toString(hobbies)
+				+ ", lastNodeReached=" + lastNodeReached + ", lastPathTarget=" + lastPathTarget
+				+ ", actorPositionXInPixels=" + actorPositionXInPixels + ", actorPositionYInPixels="
+				+ actorPositionYInPixels + ", boundsX1=" + boundsX1 + ", boundsY1=" + boundsY1 + ", boundsX2="
+				+ boundsX2 + ", boundsY2=" + boundsY2 + ", scaleX=" + scaleX + ", scaleY=" + scaleY
+				+ ", inSoundPreview=" + inSoundPreview + ", bowStringColor=" + bowStringColor
+				+ ", soundClassesToReactTo=" + Arrays.toString(soundClassesToReactTo) + ", walkPhase=" + walkPhase
+				+ ", highLevelStats=" + highLevelStats + ", id=" + id + ", templateId=" + templateId + ", name=" + name
+				+ ", totalHealth=" + totalHealth + ", squareGameObjectIsOn=" + squareGameObjectIsOn + ", lastSquare="
+				+ lastSquare + ", inventorySquare=" + inventorySquare + ", inventory=" + inventory
+				+ ", showInventoryInGroundDisplay=" + showInventoryInGroundDisplay + ", canShareSquare="
+				+ canShareSquare + ", fitsInInventory=" + fitsInInventory + ", canContainOtherObjects="
+				+ canContainOtherObjects + ", blocksLineOfSight=" + blocksLineOfSight + ", persistsWhenCantBeSeen="
+				+ persistsWhenCantBeSeen + ", attackable=" + attackable + ", moveable=" + moveable + ", canBePickedUp="
+				+ canBePickedUp + ", decorative=" + decorative + ", floatsInWater=" + floatsInWater + ", isFloorObject="
+				+ isFloorObject + ", value=" + value + ", turnAcquired=" + turnAcquired + ", widthRatio=" + widthRatio
+				+ ", heightRatio=" + heightRatio + ", drawOffsetRatioX=" + drawOffsetRatioX + ", drawOffsetRatioY="
+				+ drawOffsetRatioY + ", soundWhenHit=" + soundWhenHit + ", soundWhenHitting=" + soundWhenHitting
+				+ ", soundDampening=" + soundDampening + ", stackable=" + stackable + ", weight=" + weight
+				+ ", imageTexture=" + imageTexture + ", activeEffectsOnGameObject=" + activeEffectsOnGameObject
+				+ ", remainingHealth=" + remainingHealth + ", favourite=" + favourite + ", hasAttackedThisTurn="
+				+ hasAttackedThisTurn + ", inventoryThatHoldsThisObject=" + inventoryThatHoldsThisObject + ", quest="
+				+ quest + ", owner=" + owner + ", height=" + height + ", width=" + width + ", halfHeight=" + halfHeight
+				+ ", halfWidth=" + halfWidth + ", anchorX=" + anchorX + ", anchorY=" + anchorY + ", backwards="
+				+ backwards + ", hiding=" + hiding + ", hidingPlace=" + hidingPlace + ", attackers=" + attackers
+				+ ", groupOfActors=" + groupOfActors + ", destroyedBy=" + destroyedBy + ", destroyedByAction="
+				+ destroyedByAction + ", primaryAnimation=" + primaryAnimation + ", toSell=" + toSell + ", starred="
+				+ starred + ", flash=" + flash + ", minRange=" + minRange + ", maxRange=" + maxRange + ", enhancement="
+				+ enhancement + ", level=" + level + ", thoughtsOnPlayer=" + thoughtsOnPlayer + ", diggable=" + diggable
+				+ ", flipYAxisInMirror=" + flipYAxisInMirror + ", beingFishedBy=" + beingFishedBy
+				+ ", fightingFishingRod=" + fightingFishingRod + ", swimmingChangeX=" + swimmingChangeX
+				+ ", swimmingChangeY=" + swimmingChangeY + ", arrowsEmbeddedInThis=" + arrowsEmbeddedInThis
+				+ ", fishingTarget=" + fishingTarget + ", equipped=" + equipped + ", bigShadow=" + bigShadow
+				+ ", orderingOnGound=" + orderingOnGound + ", type=" + type + ", lastTurnThisWasMovedByMinecart="
+				+ lastTurnThisWasMovedByMinecart + ", conversation=" + conversation + ", onReadListener="
+				+ onReadListener + ", flashColor=" + flashColor + ", underWaterColor=" + underWaterColor + ", died="
+				+ died + "]";
+	}
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 

@@ -534,24 +534,14 @@ public class Actor extends GameObject {
 			super.draw1();
 		else {
 
-			// Shadow
+			// Draw actor's shadow
 			if (Level.shadowDarkness > 0 && this.squareGameObjectIsOn.structureSquareIsIn == null) {
-				drawActor((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, scaleX,
+				drawActor(actorPositionXInPixels, actorPositionYInPixels, Level.shadowDarkness, false, scaleX,
 						scaleY * Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2,
 						Color.BLACK, false, false, !this.backwards, true, true);
 			}
 
-			// drawActor((int) (actorPositionXInPixels + -Level.shadowOffSetX * height),
-			// (int) (actorPositionYInPixels + Level.shadowOffSetY * height + 64), 0.1f,
-			// false, 1f,
-			// Level.shadowLength, -Level.shadowAngle, boundsX1 + -Level.shadowOffSetX *
-			// height,
-			// boundsY1 + Level.shadowOffSetY * height + 64, boundsX2 + -Level.shadowOffSetX
-			// * height,
-			// boundsY2 + Level.shadowOffSetY * height + 64, Color.BLACK, false);
-
-			// Actor
-
+			// Draw actual actor
 			Color color = Level.dayTimeOverlayColor;
 			if (this.squareGameObjectIsOn.structureSquareIsIn != null)
 				color = StructureRoom.roomColor;

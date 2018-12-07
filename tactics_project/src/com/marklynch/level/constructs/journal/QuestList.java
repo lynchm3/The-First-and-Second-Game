@@ -23,8 +23,8 @@ public class QuestList extends ArrayList<Quest> {
 	public void makeQuests() {
 
 		// QUEST - the pigs
-		questThePigs = new QuestThePigs();
-		add(questThePigs);
+		// questThePigs = new QuestThePigs();
+		// add(questThePigs);
 
 		// // QUEST - the cave of the blind
 		// questCaveOfTheBlind = new QuestCaveOfTheBlind();

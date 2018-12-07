@@ -16,6 +16,8 @@ import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Player;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.utils.ArrayList;
 
 public class Load {
@@ -29,6 +31,8 @@ public class Load {
 	static Connection conn;
 
 	public static void load() {
+
+		printPlayerInfo();
 		long loadStartTime = System.currentTimeMillis();
 		System.out.println("Loading...");
 
@@ -112,7 +116,11 @@ public class Load {
 				load2(classToLoad);
 			}
 
+			Level.lastUpdate = 0;
 			Level.player = (Player) Player.instances.get(0);
+			Level.lastActorUpdatedIndex = -1;
+			Level.startPlayerTurn();
+			Level.aiTurn = false;
 
 			if (conn != null)
 				conn.close();
@@ -126,6 +134,11 @@ public class Load {
 		long loadEndTime = System.currentTimeMillis();
 
 		System.out.println("Total load time = " + (loadEndTime - loadStartTime));
+		printPlayerInfo();
+	}
+
+	public static void printPlayerInfo() {
+		System.out.println("Player = " + Level.player.toString());
 	}
 
 	private static ResultSet getResultSetWithJustId(Class<?> clazz) throws SQLException {
@@ -163,7 +176,7 @@ public class Load {
 				Level.ids.put(objectToLoadId, objectToLoad);
 				ArrayList<Object> instances = null;
 				try {
-					System.out.println("class = " + clazz);
+					// System.out.println("class = " + clazz);
 					instances = (ArrayList<Object>) clazz.getField("instances").get(null);
 					if (instances != null)
 						instances.add(objectToLoad);
@@ -242,6 +255,16 @@ public class Load {
 
 					if (objectToLoad instanceof Square) {
 						Level.squaresToSave.add((Square) objectToLoad);
+					} else if (objectToLoad instanceof Wall) {
+						((Wall) objectToLoad).initWall(16f);
+					}
+
+					if (objectToLoad instanceof GameObject) {
+						GameObject gameObject = (GameObject) objectToLoad;
+
+						gameObject.halfWidth = gameObject.width / 2;
+						gameObject.halfHeight = gameObject.height / 2;
+
 					}
 
 				}

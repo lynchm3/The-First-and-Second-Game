@@ -132,7 +132,7 @@ public class Level {
 	// public ArrayList<Actor> actors;
 	public static transient Player player;
 	public transient Actor activeActor;
-	public transient ArrayListMappedInanimateObjects<GameObject> inanimateObjectsOnGround;
+	public transient static ArrayListMappedInanimateObjects<GameObject> inanimateObjectsOnGround;
 
 	public ArrayList<PopupMenuSelectObject> popupMenuObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
@@ -163,7 +163,7 @@ public class Level {
 	// public ArrayList<Faction> factions;
 	// public transient Faction currentFactionMoving;
 	// public transient int currentFactionMovingIndex;
-	public transient Stack<Move> undoList;
+	public transient static Stack<Move> undoList;
 	public ActivityLogger activityLogger;
 	public static QuickBar quickBar;
 
@@ -1335,9 +1335,9 @@ public class Level {
 
 	public static long lastUpdate = 0;
 
-	int lastActorUpdatedIndex = -1;
-	boolean aiTurn = false;
-	int timeToMoveAll = 200;// ms
+	public static int lastActorUpdatedIndex = -1;
+	public static boolean aiTurn = false;
+	public static int timeToMoveAll = 200;// ms
 
 	public static ArrayList<Animation> animations = new ArrayList<Animation>();
 
@@ -2085,7 +2085,7 @@ public class Level {
 
 	public boolean showWindowPixelCoords = false;
 
-	public void startPlayerTurn() {
+	public static void startPlayerTurn() {
 		System.out.println("----------------START PLAYER TURN-----------------");
 		Level.turn++;
 		loggedThisTurn = false;

@@ -398,6 +398,10 @@ public class LoadDeserializerCreator {
 
 			inventory.gameObjects = Load.loadDeserializerGson.fromJson(jsonObject.get("gameObjects"), typeToken);
 
+			for (GameObject gameObject : inventory.gameObjects) {
+				gameObject.inventoryThatHoldsThisObject = inventory;
+			}
+
 			inventory.parent = (InventoryParent) Level.ids.get(jsonObject.get("parent").getAsLong());
 
 			if (inventory instanceof SquareInventory) {
