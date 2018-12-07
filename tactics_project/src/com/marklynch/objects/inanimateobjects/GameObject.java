@@ -220,7 +220,7 @@ public class GameObject
 
 	public transient GroupOfActors groupOfActors;
 
-	public Object destroyedBy = null;
+	public transient Object destroyedBy = null;
 	public transient Action destroyedByAction = null;
 
 	protected Animation primaryAnimation;
@@ -276,31 +276,29 @@ public class GameObject
 
 	public GameObject() {
 
-		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.FRIENDLY_FIRE, new Stat(0));
-
-		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(0));
-
-		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(0));
-		highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(0));
+		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FRIENDLY_FIRE, new Stat(HIGH_LEVEL_STATS.FRIENDLY_FIRE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(HIGH_LEVEL_STATS.FIRE_DAMAGE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE, new Stat(HIGH_LEVEL_STATS.WATER_DAMAGE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, new Stat(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(HIGH_LEVEL_STATS.POISON_DAMAGE,0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLEED_DAMAGE, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(HIGH_LEVEL_STATS.HEALING, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES,0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES,0));
+		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 0));
+		highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(HIGH_LEVEL_STATS.POISON_RES,0));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES,0));
+		highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(HIGH_LEVEL_STATS.HEALING_RES, 0));
 	}
 
 	public void setInstances(GameObject gameObject) {

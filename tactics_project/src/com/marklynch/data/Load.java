@@ -139,6 +139,10 @@ public class Load {
 
 	public static void printPlayerInfo() {
 		System.out.println("Player = " + Level.player.toString());
+		System.out.println("Player.inventory = " + Level.player.inventory.toString());
+		System.out.println(
+				"Player.squareGameObjectIsOn.inventory = " + Level.player.squareGameObjectIsOn.inventory.toString());
+		System.out.println("Player.highLevelStats = " + Level.player.highLevelStats.toString());
 	}
 
 	private static ResultSet getResultSetWithJustId(Class<?> clazz) throws SQLException {

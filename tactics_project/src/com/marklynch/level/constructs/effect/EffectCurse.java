@@ -22,7 +22,7 @@ public class EffectCurse extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_poison.png", false);
-		highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(5));
+		highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(HIGH_LEVEL_STATS.POISON_DAMAGE,5));
 	}
 
 	public EffectCurse(int totalTurns) {

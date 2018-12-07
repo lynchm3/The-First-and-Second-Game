@@ -19,7 +19,7 @@ public class TemplatesCorpses {
 		Templates.CARCASS.anchorX = 0;
 		Templates.CARCASS.anchorY = 0;
 		Templates.CARCASS.templateId = GameObject.generateNewTemplateId();
-		Templates.CARCASS.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
+		Templates.CARCASS.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 3));
 
 		Templates.CORPSE = new Corpse();
 		Templates.CORPSE.name = "Corpse";
@@ -30,13 +30,13 @@ public class TemplatesCorpses {
 		Templates.CORPSE.anchorX = 0;
 		Templates.CORPSE.anchorY = 0;
 		Templates.CORPSE.templateId = GameObject.generateNewTemplateId();
-		Templates.CORPSE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(3));
+		Templates.CORPSE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 3));
 
 		Templates.ASH = new GameObject();
 		Templates.ASH.name = "Ash";
 		Templates.ASH.setImageAndExtrapolateSize("ash.png");
 		Templates.ASH.totalHealth = Templates.ASH.remainingHealth = 1000;
-		Templates.ASH.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
+		Templates.ASH.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
 		Templates.ASH.weight = 2f;
 		Templates.ASH.value = 3;
 		Templates.ASH.anchorX = 16;
@@ -53,7 +53,7 @@ public class TemplatesCorpses {
 		Templates.WOOD_CHIPS.soundWhenHit = 1f;
 		Templates.WOOD_CHIPS.soundWhenHitting = 1f;
 		Templates.WOOD_CHIPS.soundDampening = 1f;
-		Templates.WOOD_CHIPS.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(-100));
+		Templates.WOOD_CHIPS.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, -100));
 		Templates.WOOD_CHIPS.stackable = true;
 		Templates.WOOD_CHIPS.weight = 12f;
 		Templates.WOOD_CHIPS.value = 6;

@@ -117,7 +117,7 @@ public class TemplatesFurniture {
 		Templates.KEY.anchorX = 6;
 		Templates.KEY.anchorY = 6;
 		Templates.KEY.templateId = GameObject.generateNewTemplateId();
-		Templates.KEY.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(1));
+		Templates.KEY.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 1));
 
 		Templates.PLATE = new Stampable();
 		Templates.PLATE.name = "Plate";
@@ -128,7 +128,7 @@ public class TemplatesFurniture {
 		Templates.PLATE.anchorX = 16;
 		Templates.PLATE.anchorY = 16;
 		Templates.PLATE.templateId = GameObject.generateNewTemplateId();
-		Templates.PLATE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(1));
+		Templates.PLATE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
 
 		Templates.BROKEN_PLATE = new Stampable();
 		Templates.BROKEN_PLATE.name = "Broken Plate";
@@ -139,7 +139,7 @@ public class TemplatesFurniture {
 		Templates.BROKEN_PLATE.anchorX = 16;
 		Templates.BROKEN_PLATE.anchorY = 16;
 		Templates.BROKEN_PLATE.templateId = GameObject.generateNewTemplateId();
-		Templates.BROKEN_PLATE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(1));
+		Templates.BROKEN_PLATE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
 
 		Templates.DINNER_KNIFE = new GameObject();
 		Templates.DINNER_KNIFE.name = "Dinner Knife";
@@ -150,7 +150,7 @@ public class TemplatesFurniture {
 		Templates.DINNER_KNIFE.anchorX = 4;
 		Templates.DINNER_KNIFE.anchorY = 4;
 		Templates.DINNER_KNIFE.templateId = GameObject.generateNewTemplateId();
-		Templates.DINNER_KNIFE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(2));
+		Templates.DINNER_KNIFE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
 
 		Templates.DINNER_FORK = new GameObject();
 		Templates.DINNER_FORK.name = "Dinner Fork";
@@ -161,7 +161,7 @@ public class TemplatesFurniture {
 		Templates.DINNER_FORK.anchorX = 4;
 		Templates.DINNER_FORK.anchorY = 4;
 		Templates.DINNER_FORK.templateId = GameObject.generateNewTemplateId();
-		Templates.DINNER_FORK.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(1));
+		Templates.DINNER_FORK.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 1));
 
 		Templates.ANTLERS_SWITCH = new Switch();
 		Templates.ANTLERS_SWITCH.name = "Obvious Antlers";
@@ -232,7 +232,7 @@ public class TemplatesFurniture {
 		Templates.BROKEN_LAMP.anchorX = 0;
 		Templates.BROKEN_LAMP.anchorY = 0;
 		Templates.BROKEN_LAMP.templateId = GameObject.generateNewTemplateId();
-		Templates.BROKEN_LAMP.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(2));
+		Templates.BROKEN_LAMP.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
 
 		Templates.BROKEN_GLASS = new BrokenGlass();
 		Templates.BROKEN_GLASS.name = "Broken Glass";
@@ -243,7 +243,7 @@ public class TemplatesFurniture {
 		Templates.BROKEN_GLASS.anchorX = 0;
 		Templates.BROKEN_GLASS.anchorY = 0;
 		Templates.BROKEN_GLASS.templateId = GameObject.generateNewTemplateId();
-		Templates.BROKEN_GLASS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(2));
+		Templates.BROKEN_GLASS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
 
 		Templates.DROP_HOLE = new Searchable();
 		Templates.DROP_HOLE.name = "Drop Hole";
@@ -278,15 +278,15 @@ public class TemplatesFurniture {
 		Templates.WELL.anchorY = 0;
 		Templates.WELL.templateId = GameObject.generateNewTemplateId();
 		Templates.WELL.effectsFromInteracting = new Effect[] {};
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES,100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES,100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(HIGH_LEVEL_STATS.POISON_RES,100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES,100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 
 		Templates.WOODEN_SUPPORT = new WallSupport();
 		Templates.WOODEN_SUPPORT.name = "Support";

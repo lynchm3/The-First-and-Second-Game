@@ -77,7 +77,7 @@ public class TemplatesReadables {
 		Templates.DOCUMENTS.anchorX = 12;
 		Templates.DOCUMENTS.anchorY = 28;
 		Templates.DOCUMENTS.templateId = GameObject.generateNewTemplateId();
-		Templates.DOCUMENTS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(1));
+		Templates.DOCUMENTS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
 
 	}
 

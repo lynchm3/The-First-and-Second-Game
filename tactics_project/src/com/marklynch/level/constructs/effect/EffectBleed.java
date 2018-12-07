@@ -28,7 +28,7 @@ public class EffectBleed extends Effect {
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_bleed.png", false);
 
-		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(5));
+		highLevelStats.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLEED_DAMAGE, 5));
 	}
 
 	public EffectBleed(int totalTurns) {

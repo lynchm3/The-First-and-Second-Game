@@ -19,12 +19,12 @@ public class TemplatesMonsters {
 		Templates.BLIND = new Blind();
 		Templates.BLIND.title = "Blind";
 		Templates.BLIND.level = 1;
-		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(6));
+		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 6));
 		Templates.BLIND.totalHealth = Templates.BLIND.remainingHealth = 100;
-		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
-		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
-		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
-		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
+		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 10));
+		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
+		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 10));
+		Templates.BLIND.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE,10));
 		Templates.BLIND.imageTexture = getGlobalImage("blind.png", true);
 		Templates.BLIND.heightRatio = 1f;
 		Templates.BLIND.drawOffsetRatioY = 0f;
@@ -37,13 +37,13 @@ public class TemplatesMonsters {
 
 		Templates.ROCK_GOLEM = new RockGolem();
 		Templates.ROCK_GOLEM.title = "Suspicious Boulder";
-		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(20));
+		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 20));
 		Templates.ROCK_GOLEM.level = 1;
 		Templates.ROCK_GOLEM.totalHealth = Templates.ROCK_GOLEM.remainingHealth = 300;
-		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(10));
-		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(10));
-		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(10));
-		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(10));
+		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 10));
+		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
+		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 10));
+		Templates.ROCK_GOLEM.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE,10));
 		Templates.ROCK_GOLEM.imageTexture = getGlobalImage("rock_golem_sleeping.png", true);
 		Templates.ROCK_GOLEM.heightRatio = 1f;
 		Templates.ROCK_GOLEM.drawOffsetRatioY = 1f;

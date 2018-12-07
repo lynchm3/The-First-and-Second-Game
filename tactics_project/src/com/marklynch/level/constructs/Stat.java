@@ -43,16 +43,14 @@ public class Stat {
 	public int value;
 	public HIGH_LEVEL_STATS type;
 
-	public Stat(int value) {
-		super();
-
-		this.value = value;
-	}
+	// public Stat(int value) {
+	// super();
+	//
+	// this.value = value;
+	// }
 
 	public Stat(HIGH_LEVEL_STATS type, int value) {
 		super();
-
-		this.type = type;
 		this.value = value;
 	}
 
@@ -97,14 +95,13 @@ public class Stat {
 
 	}
 
-	public Stat(int value, HIGH_LEVEL_STATS type) {
-		super();
-		this.value = value;
-		this.type = type;
+	public Stat makeCopy() {
+		return new Stat(type, value);
 	}
 
-	public Stat makeCopy() {
-		return new Stat(value);
+	@Override
+	public String toString() {
+		return "Stat [value=" + value + ", type=" + type + "]";
 	}
 
 	// public static String

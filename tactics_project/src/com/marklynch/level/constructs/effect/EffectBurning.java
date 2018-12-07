@@ -25,7 +25,7 @@ public class EffectBurning extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_burn.png", false);
-		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(5));
+		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(HIGH_LEVEL_STATS.FIRE_DAMAGE, 5));
 	}
 
 	@Override

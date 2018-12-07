@@ -37,7 +37,7 @@ public class TemplatesJunk {
 		Templates.WOOD.anchorX = 32;
 		Templates.WOOD.anchorY = 16;
 		Templates.WOOD.templateId = GameObject.generateNewTemplateId();
-		Templates.WOOD.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(4));
+		Templates.WOOD.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 4));
 
 		Templates.ORE = new GameObject();
 		Templates.ORE.name = "Ore";
@@ -48,7 +48,7 @@ public class TemplatesJunk {
 		Templates.ORE.anchorX = 16;
 		Templates.ORE.anchorY = 16;
 		Templates.ORE.templateId = GameObject.generateNewTemplateId();
-		Templates.ORE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(6));
+		Templates.ORE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 6));
 
 	}
 

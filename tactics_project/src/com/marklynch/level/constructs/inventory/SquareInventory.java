@@ -248,4 +248,14 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		return null;
 	}
 
+	@Override
+	public String toString() {
+		String s = "SquareInventory - parent = " + parent + " gameObjects = [";
+		for (GameObject gameObject : gameObjects) {
+			s += gameObject + ", ";
+		}
+		s += "]";
+		return s;
+	}
+
 }

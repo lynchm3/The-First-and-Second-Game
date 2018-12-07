@@ -1949,4 +1949,15 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public String toString() {
+		String s = "Inventory - parent = " + parent + " gameObjects = [";
+		for (GameObject gameObject : gameObjects) {
+			s += gameObject + ", ";
+		}
+		s += "]";
+		return s;
+	}
+
 }

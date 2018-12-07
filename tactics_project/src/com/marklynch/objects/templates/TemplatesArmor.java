@@ -25,7 +25,7 @@ public class TemplatesArmor {
 		Templates.HARD_HAT.value = 52;
 		Templates.HARD_HAT.anchorX = 64;
 		Templates.HARD_HAT.anchorY = 25;
-		Templates.HARD_HAT.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(10));
+		Templates.HARD_HAT.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 10));
 		Templates.HARD_HAT.templateId = GameObject.generateNewTemplateId();
 
 		Templates.PINK_HARD_HAT = new Helmet();
@@ -85,7 +85,7 @@ public class TemplatesArmor {
 		Templates.JUMPER.stackable = false;
 		Templates.JUMPER.weight = 14f;
 		Templates.JUMPER.value = 30;
-		Templates.JUMPER.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(1));
+		Templates.JUMPER.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 1));
 		Templates.JUMPER.templateId = GameObject.generateNewTemplateId();
 
 		Templates.APRON = new BodyArmor();
@@ -149,7 +149,7 @@ public class TemplatesArmor {
 		Templates.PANTS.heightRatio = 1.5f;
 		Templates.PANTS.weight = 12f;
 		Templates.PANTS.value = 24;
-		Templates.PANTS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(2));
+		Templates.PANTS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 2));
 		Templates.PANTS.templateId = GameObject.generateNewTemplateId();
 
 		Templates.DUNGAREES = new LegArmor();
@@ -162,7 +162,7 @@ public class TemplatesArmor {
 		Templates.DUNGAREES.heightRatio = 1.5f;
 		Templates.DUNGAREES.weight = 14f;
 		Templates.DUNGAREES.value = 29;
-		Templates.DUNGAREES.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(10));
+		Templates.DUNGAREES.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 10));
 		Templates.DUNGAREES.templateId = GameObject.generateNewTemplateId();
 
 		Templates.UNDIES = new LegArmor();

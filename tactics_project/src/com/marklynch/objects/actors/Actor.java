@@ -478,14 +478,14 @@ public class Actor extends GameObject {
 		return false;
 	}
 
-	public int actorPositionXInPixels;
-	public int actorPositionYInPixels;
-	public float boundsX1;
-	public float boundsY1;
-	public float boundsX2;
-	public float boundsY2;
-	public float scaleX;
-	public float scaleY;
+	public transient int actorPositionXInPixels;
+	public transient int actorPositionYInPixels;
+	public transient float boundsX1;
+	public transient float boundsY1;
+	public transient float boundsX2;
+	public transient float boundsY2;
+	public transient float scaleX;
+	public transient float scaleY;
 
 	@Override
 	public boolean draw1() {

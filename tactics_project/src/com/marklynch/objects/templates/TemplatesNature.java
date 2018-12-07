@@ -229,7 +229,7 @@ public class TemplatesNature {
 		Templates.APPLE.anchorX = 16;
 		Templates.APPLE.anchorY = 16;
 		Templates.APPLE.templateId = GameObject.generateNewTemplateId();
-		Templates.APPLE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(1));
+		Templates.APPLE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 1));
 		Templates.APPLE.flipYAxisInMirror = false;
 
 		Templates.ROCK = new GameObject();
@@ -241,7 +241,7 @@ public class TemplatesNature {
 		Templates.ROCK.anchorX = 12;
 		Templates.ROCK.anchorY = 14;
 		Templates.ROCK.templateId = GameObject.generateNewTemplateId();
-		Templates.ROCK.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(5));
+		Templates.ROCK.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 5));
 		Templates.ROCK.flipYAxisInMirror = false;
 
 		Templates.VEIN = new Vein();
@@ -262,15 +262,15 @@ public class TemplatesNature {
 		Templates.VEIN.anchorY = 0;
 		Templates.VEIN.templateId = GameObject.generateNewTemplateId();
 		Templates.VEIN.flipYAxisInMirror = false;
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES,100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES,100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(HIGH_LEVEL_STATS.POISON_RES,100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES,100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 
 		// Food?
 		Templates.MEAT_CHUNK = new MeatChunk();
@@ -282,7 +282,7 @@ public class TemplatesNature {
 		Templates.MEAT_CHUNK.anchorX = 12;
 		Templates.MEAT_CHUNK.anchorY = 20;
 		Templates.MEAT_CHUNK.templateId = GameObject.generateNewTemplateId();
-		Templates.MEAT_CHUNK.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(2));
+		Templates.MEAT_CHUNK.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 2));
 
 		// WATER_BODY
 		Templates.WATER_BODY = new WaterBody();
@@ -295,15 +295,15 @@ public class TemplatesNature {
 		Templates.WATER_BODY.anchorY = 0;
 		Templates.WATER_BODY.templateId = GameObject.generateNewTemplateId();
 		Templates.WATER_BODY.flipYAxisInMirror = false;
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES,100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES,100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(HIGH_LEVEL_STATS.POISON_RES,100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES,100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_2.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_3.png", true));

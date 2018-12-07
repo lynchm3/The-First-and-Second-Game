@@ -20,4 +20,9 @@ public class Stats {
 		return highLevelStats.keySet();
 	}
 
+	@Override
+	public String toString() {
+		return "Stats [highLevelStats=" + highLevelStats + "]";
+	}
+
 }

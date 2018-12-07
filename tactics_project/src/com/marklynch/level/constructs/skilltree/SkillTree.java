@@ -89,7 +89,7 @@ public class SkillTree implements Draggable, Scrollable {
 		healOther.name = "Heal Ranged";
 		healOther.description = "\"Love evveryone\" - God, probably";
 		healOther.powersUnlocked.add(new PowerHealRanged(null));
-		healOther.statsUnlocked.add(new Stat(10, HIGH_LEVEL_STATS.DEXTERITY));
+		healOther.statsUnlocked.add(new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
 		skillTreeNodes.add(healOther);
 		healTouch.linkedSkillTreeNodes.add(healOther);
 		healOther.linkedSkillTreeNodes.add(healTouch);

@@ -22,7 +22,7 @@ public class EffectHeal extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("action_heal.png", false);
-		highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(5));
+		highLevelStats.put(HIGH_LEVEL_STATS.HEALING, new Stat(HIGH_LEVEL_STATS.HEALING, 5));
 	}
 
 	public EffectHeal(int totalTurns) {
