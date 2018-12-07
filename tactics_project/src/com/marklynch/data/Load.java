@@ -52,6 +52,7 @@ public class Load {
 			square.inventory = new SquareInventory();
 			square.floorImageTexture = square.defaultImageTexture;
 		}
+		Level.squaresToSave.clear();
 
 		for (Class clazz : Save.classesToSave) {
 			if (clazz == Square.class) {
@@ -238,6 +239,11 @@ public class Load {
 				} else {
 					Object deserialized = loadDeserializerGson.fromJson(resultSet.getString(count), type);
 					field.set(objectToLoad, deserialized);
+
+					if (objectToLoad instanceof Square) {
+						Level.squaresToSave.add((Square) objectToLoad);
+					}
+
 				}
 
 				count++;
