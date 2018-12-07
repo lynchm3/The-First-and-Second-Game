@@ -55,6 +55,7 @@ public class Load {
 		for (Square square : Level.squaresToSave) {
 			square.inventory = new SquareInventory();
 			square.floorImageTexture = square.defaultImageTexture;
+			square.seenByPlayer = false;
 		}
 		Level.squaresToSave.clear();
 
@@ -76,6 +77,8 @@ public class Load {
 		}
 
 		Level.actors.clear();
+
+		Level.player.clearVisibleSquares();
 
 		// End of clearage
 

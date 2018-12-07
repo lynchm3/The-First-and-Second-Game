@@ -217,7 +217,7 @@ public class Save {
 
 		fieldsForEachClass.put(Square.class, Save.getFields(Square.class));
 		createTable(Square.class);
-		String insertQueryTemplate = "INSERT INTO Square VALUES (?,?,?)";
+		String insertQueryTemplate = "INSERT INTO Square VALUES (?,?,?,?)";
 		// id
 		// inventory
 		// floorImageTexture
@@ -226,7 +226,8 @@ public class Save {
 			for (Square square : Level.squaresToSave) {
 				preparedStatement.setLong(1, square.id);
 				preparedStatement.setString(2, saveSerializerGson.toJson(square.inventory));
-				preparedStatement.setString(3, square.getFloorImageTexture().path);
+				preparedStatement.setBoolean(3, square.seenByPlayer);
+				preparedStatement.setString(4, square.getFloorImageTexture().path);
 				preparedStatement.addBatch();
 			}
 			preparedStatements.add(preparedStatement);
@@ -417,6 +418,10 @@ public class Save {
 			if (fields.isEmpty())
 				return;
 
+			if (clazz == Square.class) {
+				System.out.println("fields 2 = " + fields);
+			}
+
 			statement = conn.createStatement();
 
 			// Make create table query and insert query template
@@ -428,6 +433,9 @@ public class Save {
 				}
 			}
 			createTableQuery += ");";
+			if (clazz == Square.class) {
+				System.out.println("fcreateTableQuery = " + createTableQuery);
+			}
 
 			statement.executeUpdate(createTableQuery);
 		} catch (Exception e) {
@@ -465,6 +473,12 @@ public class Save {
 					fields.remove(field);
 				}
 			}
+
+			if (clazz == Square.class) {
+				System.out.println("fields = " + fields);
+				System.out.println("declaredFields = " + declaredFields);
+			}
+
 			return fields;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -51,6 +51,7 @@ public class Stat {
 
 	public Stat(HIGH_LEVEL_STATS type, int value) {
 		super();
+		this.type = type;
 		this.value = value;
 	}
 

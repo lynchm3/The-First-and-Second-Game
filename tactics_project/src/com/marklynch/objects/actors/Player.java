@@ -272,6 +272,14 @@ public class Player extends Human {
 		}
 	}
 
+	public void clearVisibleSquares() {
+		for (Square squarePreviouslyVisibleToPlayer : squaresVisibleToPlayer) {
+			squarePreviouslyVisibleToPlayer.visibleToPlayer = false;
+		}
+
+		squaresVisibleToPlayer.clear();
+	}
+
 	public void calculateVisibleSquares(Square square) {
 
 		// for (int x = 0; x < Game.level.squares.length; x++) {
@@ -283,11 +291,7 @@ public class Player extends Human {
 		// }
 		// }
 
-		for (Square squarePreviouslyVisibleToPlayer : squaresVisibleToPlayer) {
-			squarePreviouslyVisibleToPlayer.visibleToPlayer = false;
-		}
-
-		squaresVisibleToPlayer.clear();
+		clearVisibleSquares();
 
 		double x1 = square.xInGrid;
 		double y1 = square.yInGrid;
@@ -391,7 +395,10 @@ public class Player extends Human {
 			squaresVisibleToPlayer.add(Game.level.squares[x][y]);
 			if (this == Game.level.player) {
 				Game.level.squares[x][y].visibleToPlayer = true;
-				Game.level.squares[x][y].seenByPlayer = true;
+				if (!Game.level.squares[x][y].seenByPlayer) {
+					Game.level.squares[x][y].seenByPlayer = true;
+					Game.level.squares[x][y].updateSquaresToSave();
+				}
 				// Seen area for first time?
 				if (Game.level.squares[x][y].areaSquareIsIn != null
 						&& Game.level.squares[x][y].areaSquareIsIn.seenByPlayer == false) {

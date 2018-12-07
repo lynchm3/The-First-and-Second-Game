@@ -80,7 +80,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	// public transient boolean reachableBySelectedCharater = false;
 	public transient boolean visibleToSelectedCharacter = false;
 	public transient boolean visibleToPlayer = false;
-	public transient boolean seenByPlayer = false;
+	public boolean seenByPlayer = false;
 	public transient boolean inPath = false;
 	public transient ArrayList<Weapon> weaponsThatCanAttack = new ArrayList<Weapon>(Weapon.class);
 
@@ -1359,7 +1359,8 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	}
 
 	public void updateSquaresToSave() {
-		if (inventory.size() == 0 && (defaultImageTexture == null || floorImageTexture == defaultImageTexture)) {
+		if (inventory.size() == 0 && (defaultImageTexture == null || floorImageTexture == defaultImageTexture)
+				&& seenByPlayer == false) {
 			Level.squaresToSave.remove(this);
 		} else {
 			if (!Level.squaresToSave.contains(this)) {
