@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.area.Area;
+import com.marklynch.level.constructs.area.town.AreaTown;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
@@ -46,7 +47,7 @@ public class AreaList extends ArrayList<Quest> {
 	}
 
 	public static void buildAreas() {
-		// new AreaTown();
+		new AreaTown();
 	}
 
 	public void makeQuests() {

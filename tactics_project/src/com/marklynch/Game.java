@@ -15,7 +15,6 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
-import com.marklynch.data.Save;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.UserInputEditor;
 import com.marklynch.graphics.ShadowLight;
@@ -62,8 +61,8 @@ public class Game {
 	// PLAYER START POSITION
 
 	// Puzzles yo
-	public static int playerStartPosX = 25;
-	public static int playerStartPosY = 72;
+	public static int playerStartPosX = 105;
+	public static int playerStartPosY = 141;
 
 	// Shop
 	// public static int playerStartPosX = 13;
@@ -227,7 +226,7 @@ public class Game {
 		init();
 		getDelta(); // call once before loop to initialise lastFrame
 		lastFPS = getTime(); // call before loop to initialise fps timer
-		Save.save();
+		// Save.save();
 		// Load.load();
 
 		while (!Display.isCloseRequested()) {
