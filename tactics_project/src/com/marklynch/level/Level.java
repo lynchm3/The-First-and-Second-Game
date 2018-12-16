@@ -1214,15 +1214,13 @@ public class Level {
 			if (Game.zoomLevelIndex >= Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
 				showHideLocationIconsButton.draw();
 			}
+
+			new LevelButton(60f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  >", false, true,
+					Color.BLACK, Color.WHITE, "Let time pass [.]");
 		}
 
 		// Current objective quest
 		journal.drawTrackedStuffInTopRight();
-
-		Game.font2.drawString(0, 0, "TEXT ETXT ETXTT TEXT TEX T", org.newdawn.slick.Color.green);
-
-		Game.font1.drawString(100, 50, "THE LIGHTWEIGHT JAVA GAMES LIBRARY", org.newdawn.slick.Color.yellow);
-		Game.font2.drawString(100, 100, "NICE LOOKING FONTS!", org.newdawn.slick.Color.green);
 
 		// Turn text
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, null, Color.WHITE,
@@ -1239,6 +1237,13 @@ public class Level {
 		// TIME
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 140, Integer.MAX_VALUE, true, null, Color.WHITE,
 				new Object[] { timeString });
+
+		// Square mouse is over
+		if (Game.squareMouseIsOver != null) {
+
+			TextUtils.printTextWithImages(Game.windowWidth - 150, 160, Integer.MAX_VALUE, true, null, Color.WHITE,
+					new Object[] { Game.squareMouseIsOver });
+		}
 
 		if (conversation != null)
 
