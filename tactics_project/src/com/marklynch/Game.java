@@ -65,7 +65,7 @@ public class Game {
 
 	// Puzzles yo
 	public static int playerStartPosX = 105;
-	public static int playerStartPosY = 145;
+	public static int playerStartPosY = 164;
 
 	// Shop
 	// public static int playerStartPosX = 13;
