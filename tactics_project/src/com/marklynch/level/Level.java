@@ -807,6 +807,9 @@ public class Level {
 
 		if (Game.gameObjectMouseIsOver != null && Game.gameObjectMouseIsOver.squareGameObjectIsOn != null) {
 			Game.gameObjectMouseIsOver.squareGameObjectIsOn.drawHighlight();
+			for (Square square : Game.gameObjectMouseIsOver.squaresToHighlight) {
+				square.drawHighlight();
+			}
 		} else if (Game.squareMouseIsOver != null) {
 			Game.squareMouseIsOver.drawHighlight();
 		}

@@ -40,7 +40,7 @@ public class AnimationFallFromTheSky extends Animation {
 		kf0.offsetX = 0;
 		kf0.offsetY = 0;
 
-		kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER;
+		kf0.keyFrameTimeMillis = Math.min(Game.MINIMUM_TURN_TIME_PLAYER, durationToReachMillis);
 		kf0.normaliseSpeeds = true;
 
 		keyFrames.add(kf0);

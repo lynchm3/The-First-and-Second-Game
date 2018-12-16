@@ -91,7 +91,8 @@ public class SeesawPart extends PressurePlate implements UpdatesWhenSquareConten
 							Level.flashGameObjectCounters.put(gameObject, 0);
 						}
 						// squareGameObjectIsOn.inventory.remove(gameObject);
-						gameObject.setPrimaryAnimation(new AnimationFallFromTheSky(gameObject, 200, null));
+						gameObject.setPrimaryAnimation(
+								new AnimationFallFromTheSky(gameObject, Game.MINIMUM_TURN_TIME_PLAYER, null));
 					}
 				};
 

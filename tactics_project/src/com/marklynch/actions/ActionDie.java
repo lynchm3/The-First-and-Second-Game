@@ -75,6 +75,9 @@ public class ActionDie extends Action {
 		if (gameObjectPerformer.squareGameObjectIsOn != null)
 			gameObjectPerformer.squareGameObjectIsOn.inventory.refresh();
 
+		if (gameObjectPerformer.deathListener != null)
+			gameObjectPerformer.deathListener.thisThingDied(gameObjectPerformer);
+
 		// this.faction.actors.remove(this);
 		// gameObjectPerformer.actionsPerformedThisTurn.add(this);
 

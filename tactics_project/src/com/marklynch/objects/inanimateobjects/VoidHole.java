@@ -1,7 +1,5 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
@@ -10,6 +8,7 @@ import com.marklynch.level.constructs.animation.primary.AnimationFallFromTheSky;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
+import com.marklynch.utils.ArrayList;
 
 public class VoidHole extends GameObject implements UpdatesWhenSquareContentsChange, OnCompletionListener {
 
@@ -107,7 +106,8 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 						Level.pausePlayer();
 					}
 
-					gameObject.setPrimaryAnimation(new AnimationFallFromTheSky(gameObject, 200, null));
+					gameObject.setPrimaryAnimation(
+							new AnimationFallFromTheSky(gameObject, Game.MINIMUM_TURN_TIME_PLAYER, null));
 
 				}
 			}));

@@ -1,12 +1,12 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
 import java.util.Random;
 
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.TextureUtils;
 
