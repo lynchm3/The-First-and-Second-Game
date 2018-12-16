@@ -292,13 +292,13 @@ public class Actor extends GameObject {
 	Square lastPathTarget = null;
 
 	public AIPath getPathTo(Square target) {
-		// 81,56 is Guard John's BED
 
 		if (target == null) {
 			return null;
 		}
 
-		if (this.squareGameObjectIsOn.nodes == null || target.nodes == null) {
+		if (this.squareGameObjectIsOn.nodes == null || this.squareGameObjectIsOn.nodes.size() == 0
+				|| target.nodes == null || target.nodes.size() == 0) {
 			lastNodeReached = null;
 			lastPathTarget = target;
 			return getPathAtSquareLevel(target);
