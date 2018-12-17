@@ -1952,6 +1952,7 @@ public class GameObject
 		gameObject.attackable = attackable;
 		gameObject.isFloorObject = isFloorObject;
 		gameObject.moveable = moveable;
+		gameObject.canShareSquare = canShareSquare;
 
 		gameObject.init();
 	}

@@ -39,6 +39,7 @@ public class TemplatesBuilding {
 		Templates.WALL_WITH_CRACK.canBePickedUp = false;
 		Templates.WALL_WITH_CRACK.fitsInInventory = false;
 		Templates.WALL_WITH_CRACK.persistsWhenCantBeSeen = true;
+		Templates.WALL_WITH_CRACK.canShareSquare = false;
 		Templates.WALL_WITH_CRACK.moveable = false;
 		Templates.WALL_WITH_CRACK.templateId = GameObject.generateNewTemplateId();
 		Templates.WALL_WITH_CRACK.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES,

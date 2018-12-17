@@ -7,15 +7,15 @@ import com.marklynch.level.constructs.Faction;
 
 @SuppressWarnings("serial")
 public class FactionList extends ArrayList<Faction> {
-	public Faction player;
-	public Faction townsPeople;
-	public Faction wolves;
-	public Faction blind;
-	public Faction rockGolems;
-	public Faction rats;
+	public static Faction player;
+	public static Faction townsPeople;
+	public static Faction wolves;
+	public static Faction blind;
+	public static Faction rockGolems;
+	public static Faction rats;
 	public static Faction buns;
-	public Faction foxes;
-	public Faction outsiders;
+	public static Faction foxes;
+	public static Faction outsiders;
 
 	public FactionList() {
 
