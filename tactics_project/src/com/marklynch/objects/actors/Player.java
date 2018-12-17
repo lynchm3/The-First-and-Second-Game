@@ -136,7 +136,7 @@ public class Player extends Human {
 					Level.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
 							(float) (Math.random() * 0.25f + 0.75f), -0f, -0f, null));
 
-					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
+					Game.level.inanimateObjectsOnGround.add(orb);
 					orbs -= 1;
 				}
 				if (orbs >= 5) {
@@ -146,7 +146,7 @@ public class Player extends Human {
 					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
 					Level.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
 							(float) (Math.random() * 0.25f + 0.75f), 0f, 0f, null));
-					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
+					Game.level.inanimateObjectsOnGround.add(orb);
 					orbs -= 5;
 				}
 				if (orbs >= 10) {
@@ -156,7 +156,7 @@ public class Player extends Human {
 					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
 					Level.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
 							(float) (Math.random() * 0.25f + 0.75f), 0f, 0f, null));
-					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
+					Game.level.inanimateObjectsOnGround.add(orb);
 					orbs -= 10;
 				}
 			}

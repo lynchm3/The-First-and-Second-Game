@@ -324,6 +324,8 @@ public class GameObject
 		randomisePosition();
 
 		inventory.parent = this;
+
+		// if(this instanceof )
 	}
 
 	public void randomisePosition() {
@@ -1026,22 +1028,11 @@ public class GameObject
 		return weapons;
 	}
 
-	public void update(int delta) {
-
+	public void runEffects() {
 		if (this.remainingHealth > 0) {
 			activateEffects();
 		}
-
-		for (GameObject gameObjectInInventory : this.inventory.getGameObjects()) {
-			if (!(gameObjectInInventory instanceof Actor))
-				gameObjectInInventory.update(delta);
-		}
 	}
-
-	// public void updateRealtime(int delta) {
-	//
-	//
-	// }
 
 	public float getCenterX() {
 		return squareGameObjectIsOn.xInGridPixels + Game.HALF_SQUARE_WIDTH;
@@ -1780,8 +1771,14 @@ public class GameObject
 			}
 		}
 
-		this.activeEffectsOnGameObject.remove(effectToRemove);
+		this.removeEffect(effectToRemove);
 		this.activeEffectsOnGameObject.add(effectToAdd);
+		effectToAdd.target = this;
+
+		if (!(this instanceof Actor)) {
+			Level.effectsOnInanimateGameObjects.add(effectToAdd);
+		}
+
 		if (Game.level.shouldLog(this))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
 	}
@@ -1963,6 +1960,7 @@ public class GameObject
 
 	public void removeEffect(Effect effect) {
 		this.activeEffectsOnGameObject.remove(effect);
+		Level.effectsOnInanimateGameObjects.remove(effect);
 	}
 
 	public boolean isWet() {

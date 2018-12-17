@@ -32,7 +32,6 @@ public class ActionRemoveMapMarker extends Action {
 		if (!checkRange())
 			return;
 
-		Game.level.inanimateObjectsOnGround.remove(target);
 		target.squareGameObjectIsOn.inventory.remove(target);
 
 		if (Game.level.shouldLog(Game.level.player))

@@ -1734,7 +1734,6 @@ public class Actor extends GameObject {
 	// // END FISHING
 	// }
 
-	@Override
 	public void update(int delta) {
 
 		if (this.remainingHealth > 0) {
@@ -1789,7 +1788,8 @@ public class Actor extends GameObject {
 			}
 		}
 
-		super.update(delta);
+		runEffects();
+		// super.update(delta);
 
 	}
 

@@ -17,7 +17,6 @@ import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.utils.Consumable;
-import com.marklynch.objects.utils.InanimateObjectToAddOrRemove;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionEatItems extends VariableQtyAction {
@@ -73,10 +72,8 @@ public class ActionEatItems extends VariableQtyAction {
 				// Inventory inventoryThatHoldsThisObject = object.inventoryThatHoldsThisObject;
 				if (object.inventoryThatHoldsThisObject.parent instanceof Square) {
 					if (object instanceof ContainerForLiquids) {
-						Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
-								Templates.JAR.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
+						Templates.JAR.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
 					}
-					Game.level.inanimateObjectsOnGroundToRemove.add(object);
 				} else {
 					if (object instanceof ContainerForLiquids) {
 						object.inventoryThatHoldsThisObject.add(Templates.JAR.makeCopy(null, null));

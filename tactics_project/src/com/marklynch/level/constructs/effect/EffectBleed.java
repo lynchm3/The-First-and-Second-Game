@@ -8,7 +8,6 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.utils.InanimateObjectToAddOrRemove;
 import com.marklynch.ui.ActivityLog;
 
 public class EffectBleed extends Effect {
@@ -43,8 +42,7 @@ public class EffectBleed extends Effect {
 		float damage = target.changeHealth(this, null, this);
 		if (Game.level.shouldLog(target))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
-		Game.level.inanimateObjectsToAdd.add(
-				new InanimateObjectToAddOrRemove(Templates.BLOOD.makeCopy(null, null), target.squareGameObjectIsOn));
+		Templates.BLOOD.makeCopy(target.squareGameObjectIsOn, null);
 		turnsRemaining--;
 
 	}

@@ -1,15 +1,15 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.actions.ActionDropItems;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.utils.UpdatableGameObject;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.TextureUtils;
 
-public class Tree extends GameObject {
+public class Tree extends GameObject implements UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
@@ -97,7 +97,6 @@ public class Tree extends GameObject {
 
 	@Override
 	public void update(int delta) {
-		super.update(delta);
 
 		// WE were hit, drop all fruit
 		if (remainingHealth < healthWhenLastDroppedFruit && inventory.size() > 0) {

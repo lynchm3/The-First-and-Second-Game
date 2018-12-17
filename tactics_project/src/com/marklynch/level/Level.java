@@ -51,7 +51,7 @@ import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MapMarker;
 import com.marklynch.objects.inanimateobjects.Vein;
-import com.marklynch.objects.utils.InanimateObjectToAddOrRemove;
+import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.ActivityLogger;
 import com.marklynch.ui.Dialog;
@@ -133,6 +133,8 @@ public class Level {
 	public static transient Player player;
 	public transient Actor activeActor;
 	public transient static ArrayListMappedInanimateObjects<GameObject> inanimateObjectsOnGround;
+	public transient static ArrayList<Effect> effectsOnInanimateGameObjects = new ArrayList<Effect>();
+	public transient static ArrayList<UpdatableGameObject> updatableGameObjects = new ArrayList<UpdatableGameObject>();
 
 	public ArrayList<PopupMenuSelectObject> popupMenuObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
@@ -174,8 +176,10 @@ public class Level {
 
 	public transient boolean ended = false;
 	public Texture textureUndiscovered;
-	public ArrayList<InanimateObjectToAddOrRemove> inanimateObjectsToAdd = new ArrayList<InanimateObjectToAddOrRemove>();
-	public ArrayList<GameObject> inanimateObjectsOnGroundToRemove = new ArrayList<GameObject>();
+	// public ArrayList<InanimateObjectToAddOrRemove> inanimateObjectsToAdd = new
+	// ArrayList<InanimateObjectToAddOrRemove>();
+	// public ArrayList<GameObject> inanimateObjectsOnGroundToRemove = new
+	// ArrayList<GameObject>();
 	public ArrayList<Actor> actorsToRemove = new ArrayList<Actor>();
 
 	public enum LevelMode {
@@ -2134,8 +2138,21 @@ public class Level {
 		}
 
 		// Game.level.activeActor = null;
-		for (GameObject inanimateObject : (ArrayList<GameObject>) inanimateObjectsOnGround.clone()) {
-			inanimateObject.update(0);
+		for (UpdatableGameObject updatableGameObject : (ArrayList<UpdatableGameObject>) updatableGameObjects.clone()) {
+			updatableGameObject.update(0);
+		}
+
+		// Run effects on inanimate objects
+		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>();
+		for (Effect effect : effectsOnInanimateGameObjects) {
+			effect.activate();
+			if (effect.turnsRemaining == 0)
+				effectsToRemove.add(effect);
+		}
+
+		for (Effect effect : effectsToRemove) {
+			effectsOnInanimateGameObjects.remove(effect);
+			effect.target.removeEffect(effect);
 		}
 
 		undoList.clear();
@@ -2170,28 +2187,6 @@ public class Level {
 			}
 		}
 
-		// player.activateEffects();
-
-		// Update player inventory
-		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
-		for (GameObject gameObjectInInventory : player.inventory.getGameObjects()) {
-			gameObjectInInventory.update(0);
-			if (gameObjectInInventory.remainingHealth <= 0) {
-				toRemove.add(gameObjectInInventory);
-			}
-		}
-
-		// delete completed secondary animations
-		// for (Animation secondaryAnimation : (ArrayList<Animation>)
-		// secondaryAnimations.clone()) {
-		// if (secondaryAnimation.getCompleted())
-		// secondaryAnimations.remove(secondaryAnimation);
-		// }
-
-		for (GameObject gameObject : toRemove) {
-			player.inventory.remove(gameObject);
-		}
-
 		for (Quest quest : fullQuestList)
 			quest.update();
 
@@ -2209,48 +2204,45 @@ public class Level {
 
 	public void addRemoveObjectToFromGround() {
 
-		if (inanimateObjectsToAdd.size() == 0 && inanimateObjectsOnGroundToRemove.size() == 0
-				&& actorsToRemove.size() == 0) {
-			return;
-		}
-
-		for (InanimateObjectToAddOrRemove inanimateObjectToAdd : inanimateObjectsToAdd) {
-
-			System.out.println("inanimateObjectToAdd = " + inanimateObjectToAdd);
-			System.out.println("inanimateObjectToAdd.square = " + inanimateObjectToAdd.square);
-			System.out.println("inanimateObjectToAdd.square.inventory = " + inanimateObjectToAdd.square.inventory);
-			System.out.println("nanimateObjectToAdd.gameObject = " + inanimateObjectToAdd.gameObject);
-
-			inanimateObjectToAdd.square.inventory.add(inanimateObjectToAdd.gameObject);
-		}
-		inanimateObjectsToAdd.clear();
-
-		ArrayList<GameObject> removed = new ArrayList<GameObject>();
-		for (GameObject gameObject : inanimateObjectsOnGroundToRemove) {
-			if ((inanimateObjectsOnGround).contains(gameObject)) {
-				if (gameObject.getPrimaryAnimation() != null
-						&& gameObject.getPrimaryAnimation().getCompleted() == false) {
-					continue;
-				}
-
-				inanimateObjectsOnGround.remove(gameObject);
-				if (gameObject.squareGameObjectIsOn != null)
-					gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
-				removed.add(gameObject);
-			}
-		}
-		inanimateObjectsOnGroundToRemove.removeAll(removed);
-
-		for (Actor actor : actorsToRemove) {
-			actor.faction.actors.remove(actor);
-			if (actor.groupOfActors != null)
-				actor.groupOfActors.removeMember(actor);
-		}
-		actorsToRemove.clear();
-
-		if (Game.level.player.inventory.groundDisplay != null) {
-			Game.level.player.inventory.groundDisplay.refreshGameObjects();
-		}
+		// if (inanimateObjectsToAdd.size() == 0 &&
+		// inanimateObjectsOnGroundToRemove.size() == 0
+		// && actorsToRemove.size() == 0) {
+		// return;
+		// }
+		//
+		// for (InanimateObjectToAddOrRemove inanimateObjectToAdd :
+		// inanimateObjectsToAdd) {
+		//
+		// inanimateObjectToAdd.square.inventory.add(inanimateObjectToAdd.gameObject);
+		// }
+		// inanimateObjectsToAdd.clear();
+		//
+		// ArrayList<GameObject> removed = new ArrayList<GameObject>();
+		// for (GameObject gameObject : inanimateObjectsOnGroundToRemove) {
+		// if ((inanimateObjectsOnGround).contains(gameObject)) {
+		// if (gameObject.getPrimaryAnimation() != null
+		// && gameObject.getPrimaryAnimation().getCompleted() == false) {
+		// continue;
+		// }
+		//
+		// inanimateObjectsOnGround.remove(gameObject);
+		// if (gameObject.squareGameObjectIsOn != null)
+		// gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+		// removed.add(gameObject);
+		// }
+		// }
+		// inanimateObjectsOnGroundToRemove.removeAll(removed);
+		//
+		// for (Actor actor : actorsToRemove) {
+		// actor.faction.actors.remove(actor);
+		// if (actor.groupOfActors != null)
+		// actor.groupOfActors.removeMember(actor);
+		// }
+		// actorsToRemove.clear();
+		//
+		// if (Game.level.player.inventory.groundDisplay != null) {
+		// Game.level.player.inventory.groundDisplay.refreshGameObjects();
+		// }
 
 	}
 

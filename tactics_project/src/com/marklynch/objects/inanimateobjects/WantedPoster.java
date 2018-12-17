@@ -7,12 +7,13 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-public class WantedPoster extends GameObject {
+public class WantedPoster extends GameObject implements UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
@@ -89,7 +90,6 @@ public class WantedPoster extends GameObject {
 
 	@Override
 	public void update(int delta) {
-		super.update(delta);
 		for (Crime crime : crimes) {
 			crime.notifyWitnessesOfCrime();
 		}

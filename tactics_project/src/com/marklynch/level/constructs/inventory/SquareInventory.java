@@ -11,6 +11,7 @@ import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.inanimateobjects.Window;
+import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
 import com.marklynch.utils.ArrayList;
 
@@ -70,8 +71,12 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			gameObject.inventoryThatHoldsThisObject = this;
 			gameObject.squareGameObjectIsOn = square;
 
-			if (!Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor))
+			if (!Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor)) {
 				Game.level.inanimateObjectsOnGround.add(gameObject);
+				if (gameObject instanceof UpdatableGameObject) {
+					Level.updatableGameObjects.add((UpdatableGameObject) gameObject);
+				}
+			}
 
 			// this.gameObjects.sort(this);
 

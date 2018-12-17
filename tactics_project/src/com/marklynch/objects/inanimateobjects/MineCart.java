@@ -7,9 +7,10 @@ import com.marklynch.level.constructs.power.PowerTelekineticPush;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
+import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
 
-public class MineCart extends GameObject {
+public class MineCart extends GameObject implements UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public Direction direction;
@@ -39,7 +40,6 @@ public class MineCart extends GameObject {
 
 	@Override
 	public void update(int delta) {
-		super.update(delta);
 		if (squareGameObjectIsOn == null)
 			return;
 

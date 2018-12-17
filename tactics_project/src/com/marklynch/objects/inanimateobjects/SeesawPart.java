@@ -41,11 +41,6 @@ public class SeesawPart extends PressurePlate implements UpdatesWhenSquareConten
 	}
 
 	@Override
-	public void update(int delta) {
-		super.update(delta);
-	}
-
-	@Override
 	public void squareContentsChanged() {
 
 		if (squareGameObjectIsOn == null)

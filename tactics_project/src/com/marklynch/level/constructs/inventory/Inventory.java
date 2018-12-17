@@ -737,8 +737,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			gameObject.squareGameObjectIsOn = null;
 
 			// Remove from ground squares index
-			if (Game.level.inanimateObjectsOnGround.contains(gameObject))
-				Game.level.inanimateObjectsOnGround.remove(gameObject);
+			Game.level.inanimateObjectsOnGround.remove(gameObject);
+			Game.level.updatableGameObjects.remove(gameObject);
 
 			// Remove from another gameObjects inventory
 			if (gameObject.inventoryThatHoldsThisObject != null) {

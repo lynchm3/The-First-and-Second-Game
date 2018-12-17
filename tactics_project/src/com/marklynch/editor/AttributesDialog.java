@@ -182,7 +182,6 @@ public class AttributesDialog {
 				@Override
 				public void click() {
 					depressButtons();
-					Game.level.inanimateObjectsOnGround.remove(gameObject);
 					gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
 					editor.clearSelectedObject();
 					editor.settingsWindow.update();

@@ -9,7 +9,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Searchable;
-import com.marklynch.objects.utils.InanimateObjectToAddOrRemove;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionDropItems extends VariableQtyAction {
@@ -96,12 +95,7 @@ public class ActionDropItems extends VariableQtyAction {
 				Searchable searchable = (Searchable) targetSquare.inventory.getGameObjectOfClass(Searchable.class);
 				searchable.inventory.add(object);
 			} else {
-
-				if (gameObjectPerformer instanceof Actor) {
-					targetSquare.inventory.add(object);
-				} else {
-					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(object, targetSquare));
-				}
+				targetSquare.inventory.add(object);
 			}
 
 			if (Game.level.player.inventory.groundDisplay != null)

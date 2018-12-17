@@ -19,7 +19,6 @@ import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.utils.InanimateObjectToAddOrRemove;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionDie extends Action {
@@ -68,7 +67,7 @@ public class ActionDie extends Action {
 				// gameObjectPerformer);
 				// Utils.printStackTrace();
 				// }
-				Game.level.inanimateObjectsOnGroundToRemove.add(gameObjectPerformer);
+				// Game.level.inanimateObjectsOnGround.add(gameObjectPerformer);
 			}
 		}
 
@@ -231,13 +230,7 @@ public class ActionDie extends Action {
 			// GameObjects
 			if (gameObjectPerformer.destroyedBy instanceof EffectBurning) {
 				// Death by fire
-
-				System.out.println("gameObjectPerformer = " + gameObjectPerformer);
-				System.out.println(
-						"gameObjectPerformer.squareGameObjectIsOn = " + gameObjectPerformer.squareGameObjectIsOn);
-
-				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
-						Templates.ASH.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
+				Templates.ASH.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
 				for (GameObject gameObject : (ArrayList<GameObject>) gameObjectPerformer.inventory.gameObjects
 						.clone()) {
 					new ActionDropItems(gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn, gameObject)
@@ -255,24 +248,19 @@ public class ActionDie extends Action {
 					|| gameObjectPerformer.templateId == Templates.TREE_CONTAINER.templateId
 					|| gameObjectPerformer.templateId == Templates.TREE_READABLE.templateId)
 					&& gameObjectPerformer.destroyedByAction instanceof ActionChopping) {
-
-				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
-						Templates.STUMP.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
+				Templates.STUMP.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
 			} else if (gameObjectPerformer instanceof Stump) {
 				if (gameObjectPerformer.squareGameObjectIsOn != null) {
 					gameObjectPerformer.squareGameObjectIsOn.setFloorImageTexture(Square.MUD_TEXTURE);
 				}
 			} else if (gameObjectPerformer instanceof Mirror) {
-				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
-						Templates.BROKEN_GLASS.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
+				Templates.BROKEN_GLASS.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
 			} else if (gameObjectPerformer instanceof Wall) {
-				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
-						Templates.RUBBLE.makeCopy(null, null), gameObjectPerformer.squareGameObjectIsOn));
+				Templates.RUBBLE.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
 			}
 
 			for (GameObject gameObject : gameObjectPerformer.inventory.gameObjects) {
-				Game.level.inanimateObjectsToAdd
-						.add(new InanimateObjectToAddOrRemove(gameObject, gameObjectPerformer.squareGameObjectIsOn));
+				gameObjectPerformer.squareGameObjectIsOn.inventory.add(gameObject);
 			}
 
 		}

@@ -53,11 +53,6 @@ public class Portal extends GameObject implements UpdatesWhenSquareContentsChang
 	}
 
 	@Override
-	public void update(int delta) {
-		super.update(delta);
-	}
-
-	@Override
 	public void squareContentsChanged() {
 
 		if (squareGameObjectIsOn == null)

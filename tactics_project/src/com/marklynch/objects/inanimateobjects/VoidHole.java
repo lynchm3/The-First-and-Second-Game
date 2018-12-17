@@ -57,11 +57,6 @@ public class VoidHole extends GameObject implements UpdatesWhenSquareContentsCha
 	}
 
 	@Override
-	public void update(int delta) {
-		super.update(delta);
-	}
-
-	@Override
 	public void squareContentsChanged() {
 
 		if (squareGameObjectIsOn == null)

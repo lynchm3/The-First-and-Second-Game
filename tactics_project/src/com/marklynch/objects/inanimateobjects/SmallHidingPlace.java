@@ -8,9 +8,10 @@ import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
 
-public class SmallHidingPlace extends Searchable {
+public class SmallHidingPlace extends Searchable implements UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public ArrayList<Actor> actorsHidingHere = new ArrayList<Actor>(Actor.class);

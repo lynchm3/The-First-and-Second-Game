@@ -155,23 +155,6 @@ public class WaterBody extends WaterSource implements Consumable {
 
 	public Fish fish;
 
-	@Override
-	public void update(int delta) {
-		super.update(delta);
-		texturesIndex++;
-		if (texturesIndex == textures.size())
-			texturesIndex = 0;
-		imageTexture = textures.get(texturesIndex);
-
-		if (fish != null && fish.squareGameObjectIsOn == null) {
-			fish = null;
-		}
-
-		// if (this.fish == null && Math.random() > 0.99d) {
-		// this.fish = addFish();
-		// }
-	}
-
 	public Fish addFish() {
 		Fish fish;
 		if (new Random().nextBoolean()) {
@@ -190,180 +173,22 @@ public class WaterBody extends WaterSource implements Consumable {
 	}
 
 	@Override
-	public void draw3() {
-		super.draw3();
-	}
+	public boolean draw1() {
+		boolean draw = super.draw1();
 
-	//
-	// @Override
-	// public void draw2() {
-	//
-	// if (this.remainingHealth <= 0)
-	// return;
-	// super.draw1();
-	//
-	// if (!Game.fullVisiblity) {
-	// if (!this.squareGameObjectIsOn.seenByPlayer)
-	// return;
-	//
-	// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
-	// persistsWhenCantBeSeen == false)
-	// return;
-	// }
-	//
-	// // Draw object
-	// if (squareGameObjectIsOn != null) {
-	//
-	// float alpha = 1.0f;
-	//
-	// // 8
-	// if (fullWall) {
-	// TextureUtils.drawTexture(textureFullWall, alpha, drawX1, drawY1, drawX2,
-	// drawY2);
-	// return;
-	// }
-	//
-	// // 7
-	// else if (topLeftInnerCorner) {
-	// TextureUtils.drawTexture(textureTopLeftInnerCorner, alpha, drawX1,
-	// drawY1, drawX2, drawY2);
-	//
-	// }
-	//
-	// else if (topRightInnerCorner) {
-	// TextureUtils.drawTexture(textureTopRightInnerCorner, alpha, drawX1,
-	// drawY1, drawX2, drawY2);
-	//
-	// }
-	//
-	// else if (bottomRightInnerCorner) {
-	// TextureUtils.drawTexture(textureBottomRightInnerCorner, alpha, drawX1,
-	// drawY1, drawX2, drawY2);
-	//
-	// }
-	//
-	// else if (bottomLeftInnerCorner) {
-	// TextureUtils.drawTexture(textureBottomLeftInnerCorner, alpha, drawX1,
-	// drawY1, drawX2, drawY2);
-	//
-	// }
-	//
-	// // 5
-	// else if (fullLeftWall) {
-	// TextureUtils.drawTexture(textureFullLeftWall, alpha, drawX1, drawY1,
-	// drawX2, drawY2);
-	// }
-	//
-	// else if (fullRightWall) {
-	// TextureUtils.drawTexture(textureFullRightWall, alpha, drawX1, drawY1,
-	// drawX2, drawY2);
-	// }
-	//
-	// else if (fullTopWall) {
-	// TextureUtils.drawTexture(textureFullTopWall, alpha, drawX1, drawY1,
-	// drawX2, drawY2);
-	// }
-	//
-	// else if (fullBottomWall) {
-	// TextureUtils.drawTexture(textureFullBottomWall, alpha, drawX1, drawY1,
-	// drawX2, drawY2);
-	// }
-	//
-	// // 4
-	// else if (cross) {
-	// TextureUtils.drawTexture(textureCross, alpha, drawX1, drawY1, drawX2,
-	// drawY2);
-	//
-	// }
-	//
-	// // 3
-	// else if (topLeftOuterCorner) {
-	// TextureUtils.drawTexture(textureTopLeftOuterCorner, alpha, drawX1,
-	// drawY1, drawX2, drawY2);
-	//
-	// }
-	//
-	// else if (topRightOuterCorner) {
-	// TextureUtils.drawTexture(textureTopRightOuterCorner, alpha, drawX1,
-	// drawY1, drawX2, drawY2);
-	//
-	// }
-	//
-	// else if (bottomRightOuterCorner) {
-	// TextureUtils.drawTexture(textureBottomRightOuterCorner, alpha, drawX1,
-	// drawY1, drawX2, drawY2);
-	//
-	// }
-	//
-	// else if (bottomLeftOuterCorner) {
-	// TextureUtils.drawTexture(textureBottomLeftOuterCorner, alpha, drawX1,
-	// drawY1, drawX2, drawY2);
-	//
-	// }
-	//
-	// // 2
-	// else if (horizontalWall) {
-	// TextureUtils.drawTexture(textureHorizontalWall, alpha, drawX1, drawY1,
-	// drawX2, drawY2);
-	// }
-	//
-	// else if (verticalWall) {
-	// TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawY1,
-	// drawX2, drawY2);
-	// }
-	//
-	// else if (topLeftCorner) {
-	// TextureUtils.drawTexture(textureTopLeft, alpha, drawX1, drawY1, drawX2,
-	// drawY2);
-	// }
-	//
-	// else if (topRightCorner) {
-	// TextureUtils.drawTexture(textureTopRight, alpha, drawX1, drawY1, drawX2,
-	// drawY2);
-	// }
-	//
-	// else if (bottomLeftCorner) {
-	// TextureUtils.drawTexture(textureBottomLeft, alpha, drawX1, drawY1,
-	// drawX2, drawY2);
-	// }
-	//
-	// else if (bottomRightCorner) {
-	// TextureUtils.drawTexture(textureBottomRight, alpha, drawX1, drawY1,
-	// drawX2, drawY2);
-	// }
-	//
-	// // if (connectedTop)
-	// // TextureUtils.drawTexture(textureTop, alpha, topDrawX1, topDrawX2,
-	// // topDrawY1, topDrawY2);
-	// // if (connectedTopRight)
-	// // TextureUtils.drawTexture(textureTopRight, alpha, topRightDrawX1,
-	// // topRightDrawX2, topRightDrawY1,
-	// // topRightDrawY2);
-	// // if (connectedRight)
-	// // TextureUtils.drawTexture(textureRight, alpha, rightDrawX1,
-	// // rightDrawX2, rightDrawY1, rightDrawY2);
-	// // if (connectedBottomRight)
-	// // TextureUtils.drawTexture(textureBottomRight, alpha,
-	// // bottomRightDrawX1, bottomRightDrawX2,
-	// // bottomRightDrawY1, bottomRightDrawY2);
-	// // if (connectedBottom)
-	// // TextureUtils.drawTexture(textureBottom, alpha, bottomDrawX1,
-	// // bottomDrawX2, bottomDrawY1, bottomDrawY2);
-	// // if (connectedBottomLeft)
-	// // TextureUtils.drawTexture(textureBottomLeft, alpha,
-	// // bottomLeftDrawX1, bottomLeftDrawX2, bottomLeftDrawY1,
-	// // bottomLeftDrawY2);
-	// // if (connectedLeft)
-	// // TextureUtils.drawTexture(textureLeft, alpha, leftDrawX1,
-	// // leftDrawX2, leftDrawY1, leftDrawY2);
-	// // if (connectedTopLeft)
-	// // TextureUtils.drawTexture(textureTopLeft, alpha, topLeftDrawX1,
-	// // topLeftDrawX2, topLeftDrawY1,
-	// // topLeftDrawY2);
-	//
-	// Game.flush();
-	// }
-	// }
+		if (!draw)
+			return false;
+
+		texturesIndex++;
+		if (texturesIndex == textures.size())
+			texturesIndex = 0;
+		imageTexture = textures.get(texturesIndex);
+
+		if (fish != null && fish.squareGameObjectIsOn == null) {
+			fish = null;
+		}
+		return true;
+	}
 
 	@Override
 	public WaterBody makeCopy(Square square, Actor owner) {
@@ -384,82 +209,6 @@ public class WaterBody extends WaterSource implements Consumable {
 		waterBody.imageTexture = waterBody.textures.get(texturesIndex);
 
 		return waterBody;
-	}
-
-	public void checkIfFullWall() {
-		// 8
-		if (fullWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom
-				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
-			return;
-
-		// 7
-		if (topLeftInnerCorner = connectedTop && connectedTopRight && connectedRight && connectedBottom
-				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
-			return;
-
-		if (topRightInnerCorner = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
-				&& connectedBottom && connectedLeft && connectedTopLeft)
-			return;
-
-		if (bottomRightInnerCorner = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
-				&& connectedBottom && connectedBottomLeft && connectedLeft)
-			return;
-
-		if (bottomLeftInnerCorner = connectedTop && connectedRight && connectedBottomRight && connectedBottom
-				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
-			return;
-
-		// 5
-		if (fullLeftWall = connectedTop && connectedBottom && connectedBottomLeft && connectedLeft && connectedTopLeft)
-			return;
-
-		if (fullRightWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
-				&& connectedBottom)
-			return;
-
-		if (fullTopWall = connectedTop && connectedTopRight && connectedRight && connectedLeft && connectedTopLeft)
-			return;
-
-		if (fullBottomWall = connectedRight && connectedBottomRight && connectedBottom && connectedBottomLeft
-				&& connectedLeft)
-			return;
-
-		// 4
-		if (cross = connectedTop && connectedBottom && connectedLeft && connectedRight)
-			return;
-
-		// 3
-		if (topLeftOuterCorner = connectedRight && connectedBottom && connectedBottomRight)
-			return;
-
-		if (topRightOuterCorner = connectedLeft && connectedBottom && connectedBottomLeft)
-			return;
-
-		if (bottomRightOuterCorner = connectedLeft && connectedTop && connectedTopLeft)
-			return;
-
-		if (bottomLeftOuterCorner = connectedRight && connectedTop && connectedTopRight)
-			return;
-
-		// 2
-		if (horizontalWall = connectedRight && connectedLeft)
-			return;
-
-		if (verticalWall = connectedTop && connectedBottom)
-			return;
-
-		if (topLeftCorner = connectedRight && connectedBottom)
-			return;
-
-		if (topRightCorner = connectedLeft && connectedBottom)
-			return;
-
-		if (bottomLeftCorner = connectedRight && connectedTop)
-			return;
-
-		if (bottomRightCorner = connectedLeft && connectedTop)
-			return;
-
 	}
 
 	@Override
