@@ -1470,7 +1470,8 @@ public abstract class AIRoutine {
 	// Pick up from lost and found
 	public boolean pickUpFromLostAndFoundRoutine() {
 
-		if (actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound == null)
+		if (actor.squareGameObjectIsOn == null || actor.squareGameObjectIsOn.areaSquareIsIn == null
+				|| actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound == null)
 			return false;
 
 		Storage lostAndFound = actor.squareGameObjectIsOn.areaSquareIsIn.lostAndFound;

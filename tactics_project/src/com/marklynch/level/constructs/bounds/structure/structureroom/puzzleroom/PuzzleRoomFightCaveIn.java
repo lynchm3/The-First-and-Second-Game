@@ -102,7 +102,7 @@ public class PuzzleRoomFightCaveIn extends StructureRoom implements DeathListene
 
 		for (Square square : caveInSquares) {
 
-			for (GameObject gameObject : square.inventory.gameObjects) {
+			for (GameObject gameObject : (ArrayList<GameObject>) square.inventory.gameObjects.clone()) {
 
 				System.out.println("Calling changeHealth on - " + gameObject);
 				gameObject.changeHealthSafetyOff(-gameObject.remainingHealth, deadThing.destroyedBy,

@@ -2,8 +2,10 @@ package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom
 
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
+import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.squares.Node;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
 
@@ -26,6 +28,27 @@ public class PuzzleRoomFightBushesSneak extends StructureRoom {
 				Templates.BUSH.makeCopy(Level.squares[i][j], null);
 			}
 		}
+
+		Templates.BLIND.makeCopy(Level.squares[posX + 4][posY + 5], FactionList.blind, 14, this, new GameObject[] {},
+				new GameObject[] {});
+
+		Templates.BLIND.makeCopy(Level.squares[posX + 3][posY + 10], FactionList.blind, 29, this, new GameObject[] {},
+				new GameObject[] {});
+
+		Templates.BLIND.makeCopy(Level.squares[posX + 9][posY + 4], FactionList.blind, 13, this, new GameObject[] {},
+				new GameObject[] {});
+
+		Templates.BLIND.makeCopy(Level.squares[posX + 11][posY + 1], FactionList.blind, 22, this, new GameObject[] {},
+				new GameObject[] {});
+
+		Templates.BLIND.makeCopy(Level.squares[posX + 3][posY + 2], FactionList.blind, 9, this, new GameObject[] {},
+				new GameObject[] {});
+
+		Templates.BLIND.makeCopy(Level.squares[posX + 11][posY + 15], FactionList.blind, 22, this, new GameObject[] {},
+				new GameObject[] {});
+
+		Templates.BLIND.makeCopy(Level.squares[posX + 3][posY + 17], FactionList.blind, 9, this, new GameObject[] {},
+				new GameObject[] {});
 
 	}
 
