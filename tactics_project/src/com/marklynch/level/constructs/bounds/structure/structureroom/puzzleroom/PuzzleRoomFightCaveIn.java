@@ -65,6 +65,7 @@ public class PuzzleRoomFightCaveIn extends StructureRoom implements DeathListene
 		supportingWall.squaresToHighlight.addAll(caveInSquares);
 		supportingWall.squaresToHighlight.remove(supportingWall.squareGameObjectIsOn);
 		supportingWall.deathListener = this;
+		supportingWall.name = "Load bearing column";
 
 		// NOTE
 		// 1 enemy should be standing under the cave in

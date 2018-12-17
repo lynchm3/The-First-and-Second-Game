@@ -54,6 +54,7 @@ public class PuzzleRoomFriendlyCaveIn extends StructureRoom implements DeathList
 		supportingWall.squaresToHighlight.addAll(caveInSquares);
 		supportingWall.squaresToHighlight.remove(supportingWall.squareGameObjectIsOn);
 		supportingWall.deathListener = this;
+		supportingWall.name = "Load bearing column";
 
 		// NOTE
 		// Shopkeeper in cave, has a little random shop that no on eever visits :P Wju
