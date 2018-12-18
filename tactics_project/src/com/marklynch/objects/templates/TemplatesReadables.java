@@ -17,6 +17,8 @@ public class TemplatesReadables {
 		Templates.ROCK_WITH_ETCHING.anchorX = 0;
 		Templates.ROCK_WITH_ETCHING.anchorY = 0;
 		Templates.ROCK_WITH_ETCHING.bigShadow = true;
+		Templates.ROCK_WITH_ETCHING.canShareSquare = false;
+		Templates.ROCK_WITH_ETCHING.fitsInInventory = false;
 		Templates.ROCK_WITH_ETCHING.templateId = GameObject.generateNewTemplateId();
 		Templates.ROCK_WITH_ETCHING.flipYAxisInMirror = false;
 
@@ -39,6 +41,9 @@ public class TemplatesReadables {
 		Templates.SIGN.anchorX = 0;
 		Templates.SIGN.anchorY = 0;
 		Templates.SIGN.bigShadow = true;
+		Templates.SIGN.canShareSquare = false;
+		Templates.SIGN.fitsInInventory = false;
+		Templates.SIGN.moveable = false;
 		Templates.SIGN.templateId = GameObject.generateNewTemplateId();
 		Templates.SIGN.flipYAxisInMirror = false;
 
@@ -64,6 +69,9 @@ public class TemplatesReadables {
 		Templates.SIGNPOST.value = 31;
 		Templates.SIGNPOST.anchorX = 0;
 		Templates.SIGNPOST.anchorY = 0;
+		Templates.SIGNPOST.canShareSquare = false;
+		Templates.SIGNPOST.fitsInInventory = false;
+		Templates.SIGNPOST.moveable = false;
 		Templates.SIGNPOST.bigShadow = true;
 		Templates.SIGNPOST.templateId = GameObject.generateNewTemplateId();
 		Templates.SIGNPOST.flipYAxisInMirror = false;
@@ -77,7 +85,8 @@ public class TemplatesReadables {
 		Templates.DOCUMENTS.anchorX = 12;
 		Templates.DOCUMENTS.anchorY = 28;
 		Templates.DOCUMENTS.templateId = GameObject.generateNewTemplateId();
-		Templates.DOCUMENTS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
+		Templates.DOCUMENTS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
 
 	}
 

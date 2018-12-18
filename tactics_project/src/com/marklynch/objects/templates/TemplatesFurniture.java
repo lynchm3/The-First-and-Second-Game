@@ -15,8 +15,8 @@ import com.marklynch.objects.inanimateobjects.Mirror;
 import com.marklynch.objects.inanimateobjects.PressurePlate;
 import com.marklynch.objects.inanimateobjects.PressurePlateRequiringSpecificItem;
 import com.marklynch.objects.inanimateobjects.Searchable;
-import com.marklynch.objects.inanimateobjects.SeesawPart;
 import com.marklynch.objects.inanimateobjects.Seesaw;
+import com.marklynch.objects.inanimateobjects.SeesawPart;
 import com.marklynch.objects.inanimateobjects.Stampable;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.inanimateobjects.WallSupport;
@@ -36,6 +36,8 @@ public class TemplatesFurniture {
 		Templates.BED.value = 150;
 		Templates.BED.anchorX = 0;
 		Templates.BED.anchorY = 0;
+		Templates.BED.canShareSquare = false;
+		Templates.BED.fitsInInventory = false;
 		Templates.BED.templateId = GameObject.generateNewTemplateId();
 
 		Templates.MIRROR = new Mirror();
@@ -51,6 +53,8 @@ public class TemplatesFurniture {
 		Templates.MIRROR.stackable = false;
 		Templates.MIRROR.weight = 52f;
 		Templates.MIRROR.value = 104;
+		Templates.MIRROR.canShareSquare = false;
+		Templates.MIRROR.fitsInInventory = false;
 		Templates.MIRROR.templateId = GameObject.generateNewTemplateId();
 		Templates.MIRROR.flipYAxisInMirror = false;
 
@@ -63,6 +67,8 @@ public class TemplatesFurniture {
 		Templates.SHOP_COUNTER.anchorX = 0;
 		Templates.SHOP_COUNTER.anchorY = 0;
 		Templates.SHOP_COUNTER.templateId = GameObject.generateNewTemplateId();
+		Templates.SHOP_COUNTER.canShareSquare = false;
+		Templates.SHOP_COUNTER.fitsInInventory = false;
 		Templates.SHOP_COUNTER.flipYAxisInMirror = false;
 
 		Templates.TABLE = new GameObject();
@@ -74,6 +80,8 @@ public class TemplatesFurniture {
 		Templates.TABLE.anchorX = 0;
 		Templates.TABLE.anchorY = 0;
 		Templates.TABLE.templateId = GameObject.generateNewTemplateId();
+		Templates.TABLE.canShareSquare = false;
+		Templates.TABLE.fitsInInventory = false;
 		Templates.TABLE.flipYAxisInMirror = false;
 
 		Templates.CHAIR = new GameObject();
@@ -85,6 +93,8 @@ public class TemplatesFurniture {
 		Templates.CHAIR.anchorX = 0;
 		Templates.CHAIR.anchorY = 0;
 		Templates.CHAIR.templateId = GameObject.generateNewTemplateId();
+		Templates.CHAIR.canShareSquare = false;
+		Templates.CHAIR.fitsInInventory = false;
 		Templates.CHAIR.flipYAxisInMirror = false;
 
 		Templates.BENCH = new GameObject();
@@ -96,6 +106,8 @@ public class TemplatesFurniture {
 		Templates.BENCH.anchorX = 0;
 		Templates.BENCH.anchorY = 0;
 		Templates.BENCH.templateId = GameObject.generateNewTemplateId();
+		Templates.BENCH.canShareSquare = false;
+		Templates.BENCH.fitsInInventory = false;
 		Templates.BENCH.flipYAxisInMirror = false;
 
 		Templates.CHAIR_FALLEN = new GameObject();
@@ -106,6 +118,8 @@ public class TemplatesFurniture {
 		Templates.CHAIR_FALLEN.value = 24;
 		Templates.CHAIR_FALLEN.anchorX = 0;
 		Templates.CHAIR_FALLEN.anchorY = 0;
+		Templates.CHAIR_FALLEN.canShareSquare = false;
+		Templates.CHAIR_FALLEN.fitsInInventory = false;
 		Templates.CHAIR_FALLEN.templateId = GameObject.generateNewTemplateId();
 
 		Templates.KEY = new Key();
@@ -139,7 +153,8 @@ public class TemplatesFurniture {
 		Templates.BROKEN_PLATE.anchorX = 16;
 		Templates.BROKEN_PLATE.anchorY = 16;
 		Templates.BROKEN_PLATE.templateId = GameObject.generateNewTemplateId();
-		Templates.BROKEN_PLATE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
+		Templates.BROKEN_PLATE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
 
 		Templates.DINNER_KNIFE = new GameObject();
 		Templates.DINNER_KNIFE.name = "Dinner Knife";
@@ -150,7 +165,8 @@ public class TemplatesFurniture {
 		Templates.DINNER_KNIFE.anchorX = 4;
 		Templates.DINNER_KNIFE.anchorY = 4;
 		Templates.DINNER_KNIFE.templateId = GameObject.generateNewTemplateId();
-		Templates.DINNER_KNIFE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
+		Templates.DINNER_KNIFE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
 
 		Templates.DINNER_FORK = new GameObject();
 		Templates.DINNER_FORK.name = "Dinner Fork";
@@ -161,7 +177,8 @@ public class TemplatesFurniture {
 		Templates.DINNER_FORK.anchorX = 4;
 		Templates.DINNER_FORK.anchorY = 4;
 		Templates.DINNER_FORK.templateId = GameObject.generateNewTemplateId();
-		Templates.DINNER_FORK.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 1));
+		Templates.DINNER_FORK.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 1));
 
 		Templates.ANTLERS_SWITCH = new Switch();
 		Templates.ANTLERS_SWITCH.name = "Obvious Antlers";
@@ -172,6 +189,7 @@ public class TemplatesFurniture {
 		Templates.ANTLERS_SWITCH.anchorX = 0;
 		Templates.ANTLERS_SWITCH.anchorY = 0;
 		Templates.ANTLERS_SWITCH.templateId = GameObject.generateNewTemplateId();
+		Templates.ANTLERS_SWITCH.fitsInInventory = false;
 		Templates.ANTLERS_SWITCH.actionName = "Touch";
 		Templates.ANTLERS_SWITCH.actionVerb = "touched";
 
@@ -232,7 +250,8 @@ public class TemplatesFurniture {
 		Templates.BROKEN_LAMP.anchorX = 0;
 		Templates.BROKEN_LAMP.anchorY = 0;
 		Templates.BROKEN_LAMP.templateId = GameObject.generateNewTemplateId();
-		Templates.BROKEN_LAMP.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
+		Templates.BROKEN_LAMP.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
 
 		Templates.BROKEN_GLASS = new BrokenGlass();
 		Templates.BROKEN_GLASS.name = "Broken Glass";
@@ -243,7 +262,8 @@ public class TemplatesFurniture {
 		Templates.BROKEN_GLASS.anchorX = 0;
 		Templates.BROKEN_GLASS.anchorY = 0;
 		Templates.BROKEN_GLASS.templateId = GameObject.generateNewTemplateId();
-		Templates.BROKEN_GLASS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
+		Templates.BROKEN_GLASS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
 
 		Templates.DROP_HOLE = new Searchable();
 		Templates.DROP_HOLE.name = "Drop Hole";
@@ -257,6 +277,7 @@ public class TemplatesFurniture {
 		Templates.DROP_HOLE.effectsFromInteracting = new Effect[] { new EffectPoison(3) };
 		Templates.DROP_HOLE.isFloorObject = true;
 		Templates.DROP_HOLE.moveable = false;
+		Templates.DROP_HOLE.fitsInInventory = false;
 
 		Templates.SHELF = new GameObject();
 		Templates.SHELF.name = "Shelf";
@@ -278,14 +299,17 @@ public class TemplatesFurniture {
 		Templates.WELL.anchorY = 0;
 		Templates.WELL.templateId = GameObject.generateNewTemplateId();
 		Templates.WELL.effectsFromInteracting = new Effect[] {};
+		Templates.WELL.canShareSquare = false;
+		Templates.WELL.fitsInInventory = false;
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES,100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES, 100));
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES,100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(HIGH_LEVEL_STATS.POISON_RES,100));
-		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES,100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES, 100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES,
+				new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(HIGH_LEVEL_STATS.POISON_RES, 100));
+		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES, 100));
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 
 		Templates.WOODEN_SUPPORT = new WallSupport();
@@ -296,6 +320,7 @@ public class TemplatesFurniture {
 		Templates.WOODEN_SUPPORT.soundWhenHit = 10f;
 		Templates.WOODEN_SUPPORT.weight = 112f;
 		Templates.WOODEN_SUPPORT.value = 24;
+		Templates.WOODEN_SUPPORT.fitsInInventory = false;
 		Templates.WOODEN_SUPPORT.templateId = GameObject.generateNewTemplateId();
 
 	}

@@ -17,6 +17,7 @@ public class TemplatesBigObjects {
 		Templates.BARRICADE.templateId = GameObject.generateNewTemplateId();
 		Templates.BARRICADE.flipYAxisInMirror = false;
 		Templates.BARRICADE.canShareSquare = false;
+		Templates.BARRICADE.fitsInInventory = false;
 		Templates.BARRICADE.persistsWhenCantBeSeen = true;
 
 		Templates.BOULDER = new GameObject();
@@ -47,6 +48,7 @@ public class TemplatesBigObjects {
 		Templates.DUMPSTER.templateId = GameObject.generateNewTemplateId();
 		Templates.DUMPSTER.flipYAxisInMirror = false;
 		Templates.DUMPSTER.canShareSquare = false;
+		Templates.DUMPSTER.fitsInInventory = false;
 		Templates.DUMPSTER.persistsWhenCantBeSeen = true;
 
 		Templates.TROUGH = new GameObject();
@@ -60,6 +62,7 @@ public class TemplatesBigObjects {
 		Templates.TROUGH.templateId = GameObject.generateNewTemplateId();
 		Templates.TROUGH.flipYAxisInMirror = false;
 		Templates.TROUGH.canShareSquare = false;
+		Templates.TROUGH.fitsInInventory = false;
 		Templates.TROUGH.persistsWhenCantBeSeen = true;
 	}
 

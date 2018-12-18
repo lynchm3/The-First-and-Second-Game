@@ -37,6 +37,9 @@ public class TemplatesNature {
 		Templates.TREE.weight = 100f;
 		Templates.TREE.value = 10;
 		Templates.TREE.bigShadow = true;
+		Templates.TREE.moveable = false;
+		Templates.TREE.canShareSquare = false;
+		Templates.TREE.fitsInInventory = false;
 		Templates.TREE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.TREE_READABLE = new GameObject();
@@ -50,6 +53,8 @@ public class TemplatesNature {
 		Templates.TREE_READABLE.bigShadow = Templates.TREE.bigShadow;
 		Templates.TREE_READABLE.persistsWhenCantBeSeen = Templates.TREE.persistsWhenCantBeSeen;
 		Templates.TREE_READABLE.moveable = Templates.TREE.moveable;
+		Templates.TREE_READABLE.canShareSquare = Templates.TREE.canShareSquare;
+		Templates.TREE_READABLE.fitsInInventory = Templates.TREE.fitsInInventory;
 		Templates.TREE_READABLE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.TREE_CONTAINER = new Storage();
@@ -65,6 +70,9 @@ public class TemplatesNature {
 		Templates.TREE_CONTAINER.bigShadow = Templates.TREE.bigShadow;
 		Templates.TREE_CONTAINER.isOpenable = false;
 		Templates.TREE_CONTAINER.lockable = false;
+		Templates.TREE_CONTAINER.moveable = false;
+		Templates.TREE_CONTAINER.canShareSquare = false;
+		Templates.TREE_CONTAINER.fitsInInventory = false;
 		Templates.TREE_CONTAINER.persistsWhenCantBeSeen = Templates.TREE.persistsWhenCantBeSeen;
 		Templates.TREE_CONTAINER.moveable = Templates.TREE.moveable;
 		Templates.TREE_CONTAINER.templateId = GameObject.generateNewTemplateId();
@@ -85,6 +93,9 @@ public class TemplatesNature {
 		Templates.BIG_TREE.bigShadow = true;
 		Templates.BIG_TREE.templateId = GameObject.generateNewTemplateId();
 		Templates.BIG_TREE.flipYAxisInMirror = false;
+		Templates.BIG_TREE.moveable = false;
+		Templates.BIG_TREE.canShareSquare = false;
+		Templates.BIG_TREE.fitsInInventory = false;
 
 		Templates.STUMP = new Stump();
 		Templates.STUMP.name = "Stump";
@@ -97,6 +108,9 @@ public class TemplatesNature {
 		Templates.STUMP.bigShadow = true;
 		Templates.STUMP.templateId = GameObject.generateNewTemplateId();
 		Templates.STUMP.flipYAxisInMirror = false;
+		Templates.STUMP.moveable = false;
+		Templates.STUMP.canShareSquare = false;
+		Templates.STUMP.fitsInInventory = false;
 
 		Templates.BUSH = new HidingPlace();
 		Templates.BUSH.name = "Bush";
@@ -112,6 +126,8 @@ public class TemplatesNature {
 		Templates.BUSH.effectsFromInteracting = new Effect[] {};
 		Templates.BUSH.flipYAxisInMirror = false;
 		Templates.BUSH.moveable = false;
+		Templates.BUSH.canShareSquare = false;
+		Templates.BUSH.fitsInInventory = false;
 
 		Templates.POISON_BUSH = new HidingPlace();
 		Templates.POISON_BUSH.name = "Posion Bush";
@@ -127,6 +143,8 @@ public class TemplatesNature {
 		Templates.POISON_BUSH.templateId = GameObject.generateNewTemplateId();
 		Templates.POISON_BUSH.flipYAxisInMirror = false;
 		Templates.POISON_BUSH.moveable = false;
+		Templates.POISON_BUSH.canShareSquare = false;
+		Templates.POISON_BUSH.fitsInInventory = false;
 
 		Templates.LONG_GRASS = new HidingPlace();
 		Templates.LONG_GRASS.name = "Long Grass";
@@ -262,14 +280,18 @@ public class TemplatesNature {
 		Templates.VEIN.anchorY = 0;
 		Templates.VEIN.templateId = GameObject.generateNewTemplateId();
 		Templates.VEIN.flipYAxisInMirror = false;
+		Templates.VEIN.canShareSquare = false;
+		Templates.VEIN.fitsInInventory = false;
+		Templates.VEIN.moveable = false;
 		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
 		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES,100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES, 100));
 		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES,100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(HIGH_LEVEL_STATS.POISON_RES,100));
-		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES,100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES, 100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES,
+				new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(HIGH_LEVEL_STATS.POISON_RES, 100));
+		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES, 100));
 		Templates.VEIN.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 
 		// Food?
@@ -282,7 +304,8 @@ public class TemplatesNature {
 		Templates.MEAT_CHUNK.anchorX = 12;
 		Templates.MEAT_CHUNK.anchorY = 20;
 		Templates.MEAT_CHUNK.templateId = GameObject.generateNewTemplateId();
-		Templates.MEAT_CHUNK.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 2));
+		Templates.MEAT_CHUNK.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 2));
 
 		// WATER_BODY
 		Templates.WATER_BODY = new WaterBody();
@@ -295,15 +318,22 @@ public class TemplatesNature {
 		Templates.WATER_BODY.anchorY = 0;
 		Templates.WATER_BODY.templateId = GameObject.generateNewTemplateId();
 		Templates.WATER_BODY.flipYAxisInMirror = false;
+		Templates.WATER_BODY.canShareSquare = false;
+		Templates.WATER_BODY.fitsInInventory = false;
+		Templates.WATER_BODY.moveable = false;
 		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
 		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES,100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES,
+				new Stat(HIGH_LEVEL_STATS.PIERCE_RES, 100));
 		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES,100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(HIGH_LEVEL_STATS.POISON_RES,100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES,100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES, 100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES,
+				new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES,
+				new Stat(HIGH_LEVEL_STATS.POISON_RES, 100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES, 100));
+		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES,
+				new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_2.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_3.png", true));
