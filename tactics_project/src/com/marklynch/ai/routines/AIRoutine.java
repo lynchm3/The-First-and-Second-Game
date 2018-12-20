@@ -1087,13 +1087,42 @@ public abstract class AIRoutine {
 
 	public boolean lootFromGround() {
 		// Pick up loot on ground
-		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, true, 10, false,
-				true, GameObject.class);
+		GameObject loot = null;
+		if (actor.name.contains("Farmer")) {
+			System.out.println("target = " + target);
+		}
+		if (target != null
+				&& AIRoutineUtils.passesChecks(target, true, false, true, true, 10, true, GameObject.class)) {
+			loot = target;
+			AIRoutineUtils.tempPath = Game.level.activeActor.getPathTo(target.squareGameObjectIsOn);
+			if (AIRoutineUtils.tempPath == null)
+				Game.level.activeActor.aiRoutine.ignoreList.add(loot);
+			if (actor.name.contains("Farmer")) {
+				System.out.println("target being resused");
+			}
+		} else {
+			loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, true, 10, false, true,
+					GameObject.class);
+			if (actor.name.contains("Farmer")) {
+				System.out.println("target not being resused");
+			}
+			target = loot;
+		}
+
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
 			this.actor.thoughtBubbleImageTextureAction = Action.textureLeft;
+
+			if (actor.name.contains("Farmer")) {
+				System.out.println("actor = " + actor);
+				System.out.println("LOOT = " + loot);
+			}
+
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
+			if (actor.name.contains("Farmer")) {
+				System.out.println("pickedUpLoot = " + pickedUpLoot);
+			}
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);
