@@ -1060,6 +1060,12 @@ public class GameObject
 			return new ActionFishingStart(performer, this);
 		}
 
+		if (conversation != null && !(this instanceof Actor)) {
+			Action action = new ActionRead(performer, this);
+			return action;
+
+		}
+
 		if (diggable) {
 			Action action = new ActionDigging(performer, this);
 			return action;
