@@ -1,14 +1,12 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionHide;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
+import com.marklynch.utils.ArrayList;
 
-public class HidingPlace extends Searchable implements UpdatesWhenSquareContentsChange {
+public class HidingPlace extends Searchable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 

@@ -7,10 +7,9 @@ import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
 import com.marklynch.utils.ArrayList;
 
-public class Landmine extends Discoverable implements UpdatesWhenSquareContentsChange, OnCompletionListener {
+public class Landmine extends Discoverable implements OnCompletionListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public int targetWeight = 10;

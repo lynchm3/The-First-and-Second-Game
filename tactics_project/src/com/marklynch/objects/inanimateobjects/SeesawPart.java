@@ -9,10 +9,9 @@ import com.marklynch.level.constructs.animation.primary.AnimationFallFromTheSky;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
 import com.marklynch.utils.ArrayList;
 
-public class SeesawPart extends PressurePlate implements UpdatesWhenSquareContentsChange {
+public class SeesawPart extends PressurePlate {
 
 	public int weightOnPlate = 0;
 	public boolean up;

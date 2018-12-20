@@ -2592,4 +2592,8 @@ public class GameObject
 		highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 
 	}
+
+	public void squareContentsChanged() {
+
+	}
 }

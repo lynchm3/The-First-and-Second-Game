@@ -1,15 +1,13 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
+import com.marklynch.utils.ArrayList;
 
-public class PressurePlate extends Switch implements UpdatesWhenSquareContentsChange {
+public class PressurePlate extends Switch {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 

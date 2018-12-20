@@ -1,6 +1,5 @@
 package com.marklynch.objects.actors;
 
-import com.marklynch.utils.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -16,6 +15,7 @@ import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.utils.ArrayList;
 
 public class Trader extends Human implements Comparator<GameObject> {
 
@@ -28,6 +28,8 @@ public class Trader extends Human implements Comparator<GameObject> {
 	public Weapon broom;
 	public BodyArmor apron;
 	public LegArmor pants;
+
+	public Object[] textForSign;
 
 	public Trader() {
 		super();
@@ -44,7 +46,12 @@ public class Trader extends Human implements Comparator<GameObject> {
 		return Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn == shopRoom;
 	}
 
-	public Object[] getTextForSign() {
+	@Override
+	public void inventoryChanged() {
+		textForSign = genereateTextForSign();
+	}
+
+	public Object[] genereateTextForSign() {
 
 		if (shopSign == null)
 			return null;

@@ -12,7 +12,6 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.inanimateobjects.Window;
 import com.marklynch.objects.utils.UpdatableGameObject;
-import com.marklynch.objects.utils.UpdatesWhenSquareContentsChange;
 import com.marklynch.utils.ArrayList;
 
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
@@ -93,11 +92,6 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public int remove(GameObject gameObject) {
 		if (gameObjects.contains(gameObject)) {
 
-			// if (gameObject instanceof VoidHole) {
-			// System.out.println("Remove!");
-			// Utils.printStackTrace();
-			// }
-
 			gameObject.lastSquare = this.square;
 			gameObjects.remove(gameObject);
 
@@ -127,10 +121,8 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		door = (Door) getGameObjectOfClass(Door.class);
 		waterBody = (WaterBody) getGameObjectOfClass(WaterBody.class);
 
-		UpdatesWhenSquareContentsChange updatesWhenSquareContentsChange = (UpdatesWhenSquareContentsChange) getGameObjectOfClass(
-				UpdatesWhenSquareContentsChange.class);
-		if (updatesWhenSquareContentsChange != null) {
-			updatesWhenSquareContentsChange.squareContentsChanged();
+		for (GameObject gameObject : gameObjects) {
+			gameObject.squareContentsChanged();
 		}
 
 	}

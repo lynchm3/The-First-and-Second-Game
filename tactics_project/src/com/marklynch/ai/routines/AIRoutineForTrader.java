@@ -85,12 +85,10 @@ public class AIRoutineForTrader extends AIRoutine {
 			return;
 
 		// Shopkeeper AI 1 - hang in shop
-		if (state == STATE.SHOPKEEPING)
-
-		{
+		if (state == STATE.SHOPKEEPING) {
 			actor.thoughtBubbleImageTextureObject = Templates.GOLD.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOPKEEPING;
-			if (!trader.isPlayerInTheShop() && trader.getTextForSign() != null)
+			if (!trader.isPlayerInTheShop() && trader.textForSign != null)
 				state = STATE.UPDATING_SIGN;
 			else {
 				if (trader.equipped != trader.broom && trader.inventory.contains(trader.broom))
@@ -116,14 +114,14 @@ public class AIRoutineForTrader extends AIRoutine {
 
 		// Shopkeeper AI 2 - update sign
 		if (state == STATE.UPDATING_SIGN) {
-			Object[] textForSign = trader.getTextForSign();
-			if (textForSign == null) {
+			if (trader.textForSign == null) {
 				state = STATE.SHOPKEEPING;
 			} else {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_UPDATING_SIGN;
 				this.actor.thoughtBubbleImageTextureObject = trader.shopSign.imageTexture;
 				if (trader.straightLineDistanceTo(trader.shopSign.squareGameObjectIsOn) < 2) {
-					new ActionWrite(trader, trader.shopSign, textForSign).perform();
+					new ActionWrite(trader, trader.shopSign, trader.textForSign).perform();
+					trader.textForSign = null;
 					state = STATE.SHOPKEEPING;
 				} else {
 					AIRoutineUtils.moveTowards(trader.shopSign.squareGameObjectIsOn);
