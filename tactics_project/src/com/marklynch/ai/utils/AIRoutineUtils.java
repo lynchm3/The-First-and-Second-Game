@@ -131,6 +131,18 @@ public class AIRoutineUtils {
 			boolean mustContainObjects, boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumGoldValue,
 			boolean REMOVETHIS, boolean actorsAlive, Class... types) {
 
+		// Check our current target first, maybe it's a good 'un
+		GameObject existingTarget = Game.level.activeActor.aiRoutine.target;
+		if (existingTarget != null && passesChecks(existingTarget, fitsInInventory, mustContainObjects, mustBeUnowned,
+				ignoreQuestObjects, minimumGoldValue, actorsAlive, null, false)) {
+			AIRoutineUtils.tempPath = Game.level.activeActor.getPathTo(existingTarget.squareGameObjectIsOn);
+			if (AIRoutineUtils.tempPath == null) {
+				Game.level.activeActor.aiRoutine.ignoreList.add(existingTarget);
+			} else {
+				return existingTarget;
+			}
+		}
+
 		if (maxDistance > Game.level.width + Game.level.height) {
 			maxDistance = Game.level.width + Game.level.height;
 		}

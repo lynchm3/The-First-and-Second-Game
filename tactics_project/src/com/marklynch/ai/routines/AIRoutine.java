@@ -1091,22 +1091,10 @@ public abstract class AIRoutine {
 		if (actor.name.contains("Farmer")) {
 			System.out.println("target = " + target);
 		}
-		if (target != null
-				&& AIRoutineUtils.passesChecks(target, true, false, true, true, 10, true, GameObject.class)) {
-			loot = target;
-			AIRoutineUtils.tempPath = Game.level.activeActor.getPathTo(target.squareGameObjectIsOn);
-			if (AIRoutineUtils.tempPath == null)
-				Game.level.activeActor.aiRoutine.ignoreList.add(loot);
-			if (actor.name.contains("Farmer")) {
-				System.out.println("target being resused");
-			}
-		} else {
-			loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, true, 10, false, true,
-					GameObject.class);
-			if (actor.name.contains("Farmer")) {
-				System.out.println("target not being resused");
-			}
-			target = loot;
+		loot = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, true, 10, false, true,
+				GameObject.class);
+		if (actor.name.contains("Farmer")) {
+			System.out.println("target not being resused");
 		}
 
 		if (loot != null) {
