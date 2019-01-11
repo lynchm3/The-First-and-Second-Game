@@ -109,9 +109,6 @@ public class ActionThrowItem extends Action {
 
 		gameObjectToThrow.thrown(performer);
 
-		if (Game.level.openInventories.size() > 0)
-			Game.level.openInventories.get(0).close();
-
 		if (performer.faction == Game.level.factions.player)
 
 		{

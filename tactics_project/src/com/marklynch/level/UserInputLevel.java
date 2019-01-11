@@ -696,9 +696,14 @@ public class UserInputLevel {
 		}
 
 		if (action != null && !action.enabled) {
-			if (action.disabledReason != null)
+			if (action.disabledReason != null) {
 				Game.level.addNotification(new Notification(new Object[] { action.disabledReason },
 						Notification.NotificationType.ACTION_DISABLED, null));
+
+				if (Game.level.openInventories.size() > 0)
+					Game.level.openCloseInventory();
+
+			}
 			return;
 		}
 

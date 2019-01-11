@@ -1282,10 +1282,12 @@ public class Level {
 			clearNotificationsButton.draw();
 		}
 
+		// Inventories
 		for (Inventory inventory : openInventories) {
 			inventory.drawStaticUI();
 		}
 
+		// Journal
 		if (journal.showing) {
 			journal.drawStaticUI();
 		}
@@ -1536,6 +1538,8 @@ public class Level {
 				Game.level.addNotification(
 						new Notification(new Object[] { Game.level.player.playerTargetAction.disabledReason },
 								Notification.NotificationType.ACTION_DISABLED, null));
+				if (Game.level.openInventories.size() > 0)
+					openCloseInventory();
 			}
 			pausePlayer();
 			return;
