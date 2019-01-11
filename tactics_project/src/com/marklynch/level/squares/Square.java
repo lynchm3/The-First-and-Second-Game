@@ -1054,7 +1054,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 		// Throw from inventory
 		if (this != Game.level.player.squareGameObjectIsOn)
-			actions.add(new ActionOpenInventoryToThrowItems(performer, null, this));
+			actions.add(new ActionOpenInventoryToThrowItems(performer, this));
 
 		// Pour from inventory
 		actions.add(new ActionPourContainerInInventory(performer, null, this));

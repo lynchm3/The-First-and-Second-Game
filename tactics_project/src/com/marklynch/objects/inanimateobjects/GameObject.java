@@ -1364,7 +1364,7 @@ public class GameObject
 
 		// Throw from inventory
 		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn)
-			actions.add(new ActionOpenInventoryToThrowItems(performer, this, null));
+			actions.add(new ActionOpenInventoryToThrowItems(performer, this));
 
 		// Pour from inventory
 		if (!decorative)

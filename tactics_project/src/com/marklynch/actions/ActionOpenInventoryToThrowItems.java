@@ -6,23 +6,16 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.Inventory;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
 import com.marklynch.objects.actors.Monster;
-import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class ActionOpenInventoryToThrowItems extends Action {
 
 	public static final String ACTION_NAME = "Throw";
 
-	public ActionOpenInventoryToThrowItems(Actor performer, GameObject target, Square targetSquare) {
+	public ActionOpenInventoryToThrowItems(Actor performer, Object target) {
 		super(ACTION_NAME, textureEllipse, performer, target);
-		if (targetSquare != null) {
-			this.target = targetSquare.inventory.gameObjectThatCantShareSquare;
-		} else if (target instanceof GameObject) {
-			this.targetSquare = target.squareGameObjectIsOn;
-		}
 		if (!check()) {
 			enabled = false;
 		}

@@ -1592,6 +1592,9 @@ public class Level {
 
 		// Work out target square
 		Square targetSquare = null;
+		System.out.println("Player.playerTargetAction = " + Player.playerTargetAction);
+		System.out.println("Player.playerTargetAction.target = " + Player.playerTargetAction.target);
+		System.out.println("Player.playerTargetAction.targetSquare = " + Player.playerTargetAction.targetSquare);
 		if (Player.playerTargetAction.target != null) {
 			targetSquare = Player.playerTargetAction.target.squareGameObjectIsOn;
 		} else if (Player.playerTargetAction.targetSquare != null) {
@@ -1603,6 +1606,9 @@ public class Level {
 		// No path? Call pausePlayer, let the player know
 		if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null
 				|| Player.playerPathToMove.squares.size() == 0) {
+
+			System.out.println("targetSquare = " + targetSquare);
+			System.out.println("targetSquare.inventory = " + targetSquare.inventory);
 
 			if (!targetSquare.inventory.canShareSquare) {
 				Object[] objects = new Object[] { "Theres a ", targetSquare.inventory.gameObjectThatCantShareSquare,
