@@ -91,9 +91,9 @@ public class ActionOpenInventoryToGiveItems extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			return false;
-		}
+//		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+//			return false;
+//		}
 
 		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
 			return false;
