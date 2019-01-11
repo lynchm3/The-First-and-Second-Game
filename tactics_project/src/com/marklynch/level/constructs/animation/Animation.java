@@ -6,7 +6,6 @@ import com.marklynch.Game;
 import com.marklynch.actions.Action;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
-import com.marklynch.level.constructs.animation.primary.AnimationShake;
 import com.marklynch.level.constructs.animation.primary.AnimationWait;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
@@ -100,8 +99,6 @@ public abstract class Animation {
 		runAnimation = alwaysRun || Game.level.shouldLog(objectsInvolved, false);// && performer == Game.level.player;
 
 		if (!runAnimation) {
-			if (this instanceof AnimationShake)
-				System.out.println("Skipping animation for " + performer);
 
 			runCompletionAlorightm(true);
 			return;

@@ -16,6 +16,7 @@ public class TemplatesInspectables {
 		Templates.PIG_SIGN.anchorX = 0;
 		Templates.PIG_SIGN.anchorY = 0;
 		Templates.PIG_SIGN.templateId = GameObject.generateNewTemplateId();
+		Templates.PIG_SIGN.moveable = false;
 
 		Templates.BLOODY_PULP = new Inspectable();
 		Templates.BLOODY_PULP.name = "Bloody Pulp";

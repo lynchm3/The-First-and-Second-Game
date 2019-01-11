@@ -402,10 +402,6 @@ public class TextUtils {
 
 				Stat stat = (Stat) content;
 
-				System.out.println("stat = " + stat);
-				System.out.println("CharacterScreen.highLevelStatNames.get(stat.type) = "
-						+ CharacterScreen.highLevelStatNames.get(stat.type));
-
 				float textWidth = Game.smallFont.getWidth(CharacterScreen.highLevelStatNames.get(stat.type));
 				float textureWidth = 20;
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {

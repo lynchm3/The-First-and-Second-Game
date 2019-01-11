@@ -21,6 +21,7 @@ public class TemplatesReadables {
 		Templates.ROCK_WITH_ETCHING.fitsInInventory = false;
 		Templates.ROCK_WITH_ETCHING.templateId = GameObject.generateNewTemplateId();
 		Templates.ROCK_WITH_ETCHING.flipYAxisInMirror = false;
+		Templates.ROCK_WITH_ETCHING.moveable = false;
 
 		Templates.SCROLL = new GameObject();
 		Templates.SCROLL.name = "Scroll";
@@ -46,6 +47,7 @@ public class TemplatesReadables {
 		Templates.SIGN.moveable = false;
 		Templates.SIGN.templateId = GameObject.generateNewTemplateId();
 		Templates.SIGN.flipYAxisInMirror = false;
+		Templates.SIGN.moveable = false;
 
 		Templates.WANTED_POSTER = new WantedPoster();
 		Templates.WANTED_POSTER.name = "Wanted Poster";
@@ -75,6 +77,7 @@ public class TemplatesReadables {
 		Templates.SIGNPOST.bigShadow = true;
 		Templates.SIGNPOST.templateId = GameObject.generateNewTemplateId();
 		Templates.SIGNPOST.flipYAxisInMirror = false;
+		Templates.SIGNPOST.moveable = false;
 
 		Templates.DOCUMENTS = new GameObject();
 		Templates.DOCUMENTS.name = "Documents";

@@ -768,10 +768,7 @@ public class GameObject
 
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 
-		System.out.println("checkIfDestroyed() died = " + died + ", remainingHealth = " + remainingHealth);
-
 		if (!died && remainingHealth <= 0) {
-			System.out.println("checkIfDestroyed() dying! :o");
 
 			died = true;
 			destroyedBy = attacker;
@@ -1316,11 +1313,11 @@ public class GameObject
 			actions.add(new ActionTakeItems(performer, this.squareGameObjectIsOn, this));
 		}
 
-		if (!decorative && canBePickedUp && !fitsInInventory) {
+		if (moveable && !decorative && canBePickedUp && !fitsInInventory) {
 			actions.add(new ActionLift(performer, this));
 		}
 
-		if (!decorative && canBePickedUp && fitsInInventory) {
+		if (moveable && !decorative && canBePickedUp && fitsInInventory) {
 			actions.add(new ActionEquip(performer, this));
 		}
 
@@ -1334,7 +1331,7 @@ public class GameObject
 		if (!decorative && this != Game.level.player && attackable)
 			actions.add(new ActionAttack(performer, this));
 
-		if (!decorative && this != Game.level.player && attackable && !(this instanceof Wall)
+		if (moveable && !decorative && this != Game.level.player && attackable && !(this instanceof Wall)
 				&& !(this instanceof Door))
 			actions.add(new ActionUsePower(Level.player, this, this.squareGameObjectIsOn,
 					new PowerTeleportOther(Level.player)));
@@ -2534,10 +2531,6 @@ public class GameObject
 					UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
 		} else {
-
-			System.out.println("this = " + this);
-			System.out.println("this.squareGameObjectIsOn = " + this.squareGameObjectIsOn);
-			System.out.println("this.squareGameObjectIsOn.xInGridPixels = " + this.squareGameObjectIsOn.xInGridPixels);
 
 			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 					+ Game.SQUARE_WIDTH * drawOffsetRatioX);

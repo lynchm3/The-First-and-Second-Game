@@ -107,7 +107,8 @@ public abstract class AIRoutine {
 	final static int SLEEP_TIME = 1000;
 
 	public enum STATE {
-		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, PATROL, FREE_TIME, FISHING, SHOPKEEPING, THIEVING, UPDATING_SIGN, SWIMMING
+		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, PATROL,
+		FREE_TIME, FISHING, SHOPKEEPING, THIEVING, UPDATING_SIGN, SWIMMING
 	};
 
 	public transient STATE state;
@@ -1088,29 +1089,15 @@ public abstract class AIRoutine {
 	public boolean lootFromGround() {
 		// Pick up loot on ground
 		GameObject loot = null;
-		if (actor.name.contains("Farmer")) {
-			System.out.println("target = " + target);
-		}
 		loot = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, true, 10, false, true,
 				GameObject.class);
-		if (actor.name.contains("Farmer")) {
-			System.out.println("target not being resused");
-		}
 
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
 			this.actor.thoughtBubbleImageTextureAction = Action.textureLeft;
 
-			if (actor.name.contains("Farmer")) {
-				System.out.println("actor = " + actor);
-				System.out.println("LOOT = " + loot);
-			}
-
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
-			if (actor.name.contains("Farmer")) {
-				System.out.println("pickedUpLoot = " + pickedUpLoot);
-			}
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);

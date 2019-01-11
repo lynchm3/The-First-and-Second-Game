@@ -1664,7 +1664,6 @@ public class Level {
 			action.perform();
 			Player.playerFirstMove = false;
 			if (player.squareGameObjectIsOn == targetSquare) {
-				System.out.println("(player.squareGameObjectIsOn == targetSquare) ");
 				pausePlayer();
 			}
 		}

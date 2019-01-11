@@ -74,7 +74,6 @@ public class ActionDie extends Action {
 		}
 
 		if (gameObjectPerformer.squareGameObjectIsOn != null) {
-			System.out.println("gameObjectPerformer.squareGameObjectIsOn.inventory.remove(performer)");
 			gameObjectPerformer.squareGameObjectIsOn.inventory.remove(gameObjectPerformer);
 		}
 

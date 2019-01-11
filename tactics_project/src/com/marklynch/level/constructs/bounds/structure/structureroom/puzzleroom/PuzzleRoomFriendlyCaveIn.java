@@ -94,8 +94,6 @@ public class PuzzleRoomFriendlyCaveIn extends StructureRoom implements DeathList
 		for (Square square : caveInSquares) {
 
 			for (GameObject gameObject : (ArrayList<GameObject>) square.inventory.gameObjects.clone()) {
-
-				System.out.println("Calling changeHealth on - " + gameObject);
 				gameObject.changeHealthSafetyOff(-gameObject.remainingHealth, deadThing.destroyedBy,
 						deadThing.destroyedByAction);
 			}

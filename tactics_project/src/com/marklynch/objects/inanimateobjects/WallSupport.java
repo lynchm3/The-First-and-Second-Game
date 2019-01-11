@@ -22,6 +22,7 @@ public class WallSupport extends GameObject {
 		canBePickedUp = false;
 		fitsInInventory = false;
 		canShareSquare = false;
+		moveable = false;
 		type = "Support";
 	}
 

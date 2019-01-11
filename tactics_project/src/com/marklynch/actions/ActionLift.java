@@ -58,6 +58,9 @@ public class ActionLift extends Action {
 
 	@Override
 	public boolean check() {
+		if (target.moveable == false)
+			return false;
+
 		float maxWeightForPerformer = 50f + performer.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH) * 10f;
 		if (target.weight > maxWeightForPerformer) {
 			disabledReason = TOO_HEAVY;
