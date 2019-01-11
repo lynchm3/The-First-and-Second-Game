@@ -42,7 +42,7 @@ public class ActionOpenInventoryToThrowItems extends Action {
 
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW);
 			Game.level.player.inventory.open();
-			Inventory.target = this.target;
+			Inventory.target = this.targetGameObjectOrSquare;// Inventory.target
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 			// Game.level.openInventories.add(Game.level.player.inventory);

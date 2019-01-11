@@ -19,6 +19,8 @@ public class ActionThrowItem extends Action {
 	// Default for hostiles
 	public ActionThrowItem(Actor performer, Object target, GameObject gameObjectToThrow) {
 		super(ACTION_NAME, textureThrow, performer, target);
+		System.out.println("ActionThrowItem() target = " + target);
+		System.out.println("ActionThrowItem() gameObjectToThrow = " + gameObjectToThrow);
 		this.gameObjectToThrow = gameObjectToThrow;
 		if (!check()) {
 			enabled = false;
@@ -165,12 +167,15 @@ public class ActionThrowItem extends Action {
 	@Override
 	public boolean checkRange() {
 
+		System.out.println("ActionThrowItem.checkRange() a");
 		if (targetSquare == null && target == null)
 			return false;
 
+		System.out.println("ActionThrowItem.checkRange() b");
 		if (!performer.canSeeSquare(targetSquare)) {
 			return false;
 		}
+		System.out.println("ActionThrowItem.checkRange() c");
 
 		return true;
 	}
