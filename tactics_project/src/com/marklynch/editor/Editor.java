@@ -34,13 +34,13 @@ import com.marklynch.level.constructs.skilltree.SkillTreeNode;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
+import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.armor.BodyArmor;
 import com.marklynch.objects.armor.Helmet;
 import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
-import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.ThoughtBubbles;
 import com.marklynch.script.ScriptEvent;
@@ -1035,7 +1035,7 @@ public class Editor {
 						gameObjects.add(actor);
 					}
 				}
-				gameObjects.addAll(Game.level.inanimateObjectsOnGround);
+//				gameObjects.addAll(Game.level.inanimateObjectsOnGround);
 				attributeSelectionWindow = new AttributeSelectionWindow(gameObjects, false, this, objectToEdit,
 						"Select an Object");
 			} else if (type.isAssignableFrom(Actor.class)) {

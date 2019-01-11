@@ -768,7 +768,10 @@ public class GameObject
 
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 
+		System.out.println("checkIfDestroyed() died = " + died + ", remainingHealth = " + remainingHealth);
+
 		if (!died && remainingHealth <= 0) {
+			System.out.println("checkIfDestroyed() dying! :o");
 
 			died = true;
 			destroyedBy = attacker;

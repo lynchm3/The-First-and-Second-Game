@@ -47,7 +47,7 @@ public class ActionDie extends Action {
 
 		logDeath();
 		createCorpse();
-		if (target != null && targetSquare.visibleToPlayer && gameObjectPerformer instanceof Actor)
+		if (gameObjectPerformer != null && targetSquare.visibleToPlayer && gameObjectPerformer instanceof Actor)
 			Game.level.player.addXP(gameObjectPerformer.level, gameObjectPerformer.squareGameObjectIsOn);
 
 		// Remove from draw/update
@@ -62,6 +62,8 @@ public class ActionDie extends Action {
 				// Game.level.actorsToRemove.add((Actor) gameObjectPerformer);
 
 			} else {
+
+//				targetSquare.inventory.remove(target);
 				// if (gameObjectPerformer instanceof VoidHole) {
 				// System.out.println("inanimateObjectsOnGroundToRemove.add " +
 				// gameObjectPerformer);
@@ -69,6 +71,11 @@ public class ActionDie extends Action {
 				// }
 				// Game.level.inanimateObjectsOnGround.add(gameObjectPerformer);
 			}
+		}
+
+		if (gameObjectPerformer.squareGameObjectIsOn != null) {
+			System.out.println("gameObjectPerformer.squareGameObjectIsOn.inventory.remove(performer)");
+			gameObjectPerformer.squareGameObjectIsOn.inventory.remove(gameObjectPerformer);
 		}
 
 		if (gameObjectPerformer.squareGameObjectIsOn != null)

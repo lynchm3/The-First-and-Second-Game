@@ -2,7 +2,6 @@ package com.marklynch.level.constructs.inventory;
 
 import java.util.Comparator;
 
-import com.marklynch.Game;
 import com.marklynch.actions.ActionSmash;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
@@ -70,12 +69,12 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			gameObject.inventoryThatHoldsThisObject = this;
 			gameObject.squareGameObjectIsOn = square;
 
-			if (!Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor)) {
-				Game.level.inanimateObjectsOnGround.add(gameObject);
-				if (gameObject instanceof UpdatableGameObject) {
-					Level.updatableGameObjects.add((UpdatableGameObject) gameObject);
-				}
+//			if (!Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor)) {
+//				Game.level.inanimateObjectsOnGround.add(gameObject);
+			if (gameObject instanceof UpdatableGameObject && !Level.updatableGameObjects.contains(gameObject)) {
+				Level.updatableGameObjects.add((UpdatableGameObject) gameObject);
 			}
+//			}
 
 			// this.gameObjects.sort(this);
 
@@ -90,13 +89,18 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 	@Override
 	public int remove(GameObject gameObject) {
+		System.out.println("SquareInventory.remove()");
+		System.out.println("SquareInventory.remove() gameObject = " + gameObject);
+		System.out.println("SquareInventory.remove() gameObjects = " + gameObjects);
 		if (gameObjects.contains(gameObject)) {
+			System.out.println("SquareInventory.remove() 2");
 
 			gameObject.lastSquare = this.square;
 			gameObjects.remove(gameObject);
 
-			if (Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor))
-				Game.level.inanimateObjectsOnGround.remove(gameObject);
+			if (gameObject instanceof UpdatableGameObject && Level.updatableGameObjects.contains(gameObject)) {
+				Level.updatableGameObjects.remove((UpdatableGameObject) gameObject);
+			}
 
 			refresh();
 		}

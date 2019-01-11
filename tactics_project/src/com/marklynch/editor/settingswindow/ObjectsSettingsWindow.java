@@ -7,7 +7,6 @@ import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.Editor.EDITOR_STATE;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
@@ -197,7 +196,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 
 		final ArrayList<GameObject> objects = new ArrayList<GameObject>();
 		if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.ALL) {
-			objects.addAll(Game.level.inanimateObjectsOnGround);
+//			objects.addAll(Game.level.inanimateObjectsOnGround);
 			for (Faction faction : Game.level.factions) {
 				objects.addAll(faction.actors);
 			}
@@ -214,19 +213,19 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			objectsFilterButton.down = false;
 			weaponsFilterButton.down = false;
 		} else if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.OBJECTS) {
-			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
-				if (!(gameObject instanceof Weapon))
-					objects.add(gameObject);
-			}
+//			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
+//				if (!(gameObject instanceof Weapon))
+//					objects.add(gameObject);
+//			}
 			allFilterButton.down = false;
 			actorsFilterButton.down = false;
 			objectsFilterButton.down = true;
 			weaponsFilterButton.down = false;
 		} else if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.WEAPONS) {
-			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
-				if (gameObject instanceof Weapon)
-					objects.add(gameObject);
-			}
+//			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
+//				if (gameObject instanceof Weapon)
+//					objects.add(gameObject);
+//			}
 			allFilterButton.down = false;
 			actorsFilterButton.down = false;
 			objectsFilterButton.down = false;
