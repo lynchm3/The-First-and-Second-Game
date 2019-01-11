@@ -43,6 +43,7 @@ public class WallSupport extends GameObject {
 		super.setAttributesForCopy(support, square, owner);
 		support.supportedGameObjects = new ArrayList<GameObject>(GameObject.class);
 		support.supportedGameObjects.addAll(supportedGameObjects);
+		support.gameObjectsToHighlight.addAll(supportedGameObjects);
 		return support;
 	}
 

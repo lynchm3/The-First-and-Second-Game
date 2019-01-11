@@ -246,8 +246,9 @@ public class UserInputLevel {
 			if ((int) mouseXInSquares > -1 && (int) mouseXInSquares < Game.level.squares.length
 					&& (int) mouseYInSquares > -1 && (int) mouseYInSquares < Game.level.squares[0].length) {
 				Game.squareMouseIsOver = Game.level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
-				if (Game.squareMouseIsOver != null)
+				if (Game.squareMouseIsOver != null) {
 					Game.gameObjectMouseIsOver = Game.squareMouseIsOver.getGameObjectMouseIsOver();
+				}
 			}
 		}
 

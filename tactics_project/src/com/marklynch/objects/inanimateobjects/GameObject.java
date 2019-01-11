@@ -278,6 +278,8 @@ public class GameObject
 	public DeathListener deathListener = null;
 	public ArrayList<Square> squaresToHighlight = new ArrayList<Square>(Square.class);
 
+	public ArrayList<GameObject> gameObjectsToHighlight = new ArrayList<GameObject>(GameObject.class);
+
 	public GameObject() {
 
 		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 0));
@@ -473,8 +475,10 @@ public class GameObject
 		if (this.squareGameObjectIsOn.structureSquareIsIn != null)
 			color = StructureRoom.roomColor;
 		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
-				flash || this == Game.gameObjectMouseIsOver, scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2,
-				color, true);
+				flash || this == Game.gameObjectMouseIsOver
+						|| (Game.gameObjectMouseIsOver != null
+								&& Game.gameObjectMouseIsOver.gameObjectsToHighlight.contains(this)),
+				scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color, true);
 		return true;
 	}
 

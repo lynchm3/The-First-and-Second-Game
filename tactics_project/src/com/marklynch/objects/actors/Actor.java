@@ -546,8 +546,11 @@ public class Actor extends GameObject {
 			if (this.squareGameObjectIsOn.structureSquareIsIn != null)
 				color = StructureRoom.roomColor;
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
-					flash || this == Game.gameObjectMouseIsOver || inSoundPreview, scaleX, scaleY, 0f, boundsX1,
-					boundsY1, boundsX2, boundsY2, color, true, true, this.backwards, false, true);
+					flash || this == Game.gameObjectMouseIsOver || inSoundPreview
+							|| (Game.gameObjectMouseIsOver != null
+									&& Game.gameObjectMouseIsOver.gameObjectsToHighlight.contains(this)),
+					scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color, true, true, this.backwards,
+					false, true);
 			inSoundPreview = false;
 		}
 		return true;

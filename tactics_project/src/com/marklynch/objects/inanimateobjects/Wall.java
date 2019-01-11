@@ -166,20 +166,28 @@ public class Wall extends GameObject {
 		if (!shouldDraw())
 			return false;
 
+		boolean highlight = false;
+		if (Game.gameObjectMouseIsOver != null && Game.gameObjectMouseIsOver.gameObjectsToHighlight.contains(this)) {
+			highlight = true;
+		}
+
+//		if (highlight)
+//			return true;
+
 		// Draw object
 		if (squareGameObjectIsOn != null) {
 
 			if (primaryAnimation != null && !(primaryAnimation.getCompleted())) {
-				draw1WithAnimation();
+				draw1WithAnimation(highlight);
 			} else {
-				draw1WithoutAnimation();
+				draw1WithoutAnimation(highlight);
 			}
 		}
 
 		return true;
 	}
 
-	private void draw1WithoutAnimation() {
+	private void draw1WithoutAnimation(boolean highlight) {
 
 		float alpha = 1.0f;
 
@@ -222,9 +230,14 @@ public class Wall extends GameObject {
 			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1, drawY1, drawX2, drawY2, topLeftDrawX1,
 					topLeftDrawY1, topLeftDrawX2, topLeftDrawY2, false, false, Color.WHITE);
 
+//		if (highlight) {
+//			TextureUtils.drawTextureWithinBounds(imageTexture, 0.5f, drawX1, drawY1, drawX2, drawY2, fullDrawX1,
+//					fullDrawY1, fullDrawX2, fullDrawY2, false, false, flashColor);
+//		}
+
 	}
 
-	private void draw1WithAnimation() {
+	private void draw1WithAnimation(boolean highlight) {
 
 		float alpha = 1.0f;
 
@@ -293,6 +306,11 @@ public class Wall extends GameObject {
 					drawY2 + primaryAnimation.offsetY, topLeftDrawX1 + primaryAnimation.offsetX,
 					topLeftDrawY1 + primaryAnimation.offsetY, topLeftDrawX2 + primaryAnimation.offsetX,
 					topLeftDrawY2 + primaryAnimation.offsetY, false, false, Color.WHITE);
+
+//		if (highlight) {
+//			TextureUtils.drawTextureWithinBounds(imageTexture, 0.5f, drawX1, drawY1, drawX2, drawY2, fullDrawX1,
+//					fullDrawY1, fullDrawX2, fullDrawY2, false, false, flashColor);
+//		}
 
 	}
 

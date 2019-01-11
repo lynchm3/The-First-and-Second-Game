@@ -157,6 +157,7 @@ public class TemplatesBuilding {
 		Templates.MINE_CART.totalHealth = Templates.MINE_CART.remainingHealth = 300;
 		Templates.MINE_CART.weight = 68f;
 		Templates.MINE_CART.value = 97;
+		Templates.MINE_CART.moveable = false;
 		Templates.MINE_CART.templateId = GameObject.generateNewTemplateId();
 	}
 
