@@ -8,12 +8,14 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationSlash;
+import com.marklynch.level.constructs.animation.secondary.AnimationFanOut;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.ui.ActivityLog;
 
@@ -64,6 +66,16 @@ public class ActionDigging extends Action {
 				}
 			}
 		}));
+
+//Kicking up stones
+		int x = (int) (targetSquare.xInGridPixels + Game.SQUARE_WIDTH);
+		int y = (int) (targetSquare.yInGridPixels + Game.SQUARE_HEIGHT);
+		Level.addSecondaryAnimation(
+				new AnimationFanOut(performer, Actor.Direction.DOWN, x, y, 0.1f, Templates.ROCK.imageTexture, null));
+
+//	AnimationFanOut(GameObject targetGameObject, Direction direction, float originX, float originY, float speed,
+//				Texture texture, OnCompletionListener onCompletionListener) {
+
 	}
 
 	public void postMeleeAnimation() {
