@@ -22,7 +22,6 @@ public class Fireplace extends FlammableLightSource {
 		fitsInInventory = false;
 		canContainOtherObjects = false;
 		persistsWhenCantBeSeen = false;
-		// attackable = false;
 		canBePickedUp = false;
 		floatsInWater = false;
 		canShareSquare = false;

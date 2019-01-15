@@ -171,6 +171,19 @@ public class TemplatesBuilding {
 		Templates.FIRE_PLACE.value = 254;
 		Templates.FIRE_PLACE.lit = true;
 		Templates.FIRE_PLACE.templateId = GameObject.generateNewTemplateId();
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES,
+				new Stat(HIGH_LEVEL_STATS.PIERCE_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES,
+				new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES,
+				new Stat(HIGH_LEVEL_STATS.POISON_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES,
+				new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 	}
 
 }
