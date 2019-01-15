@@ -132,7 +132,8 @@ public class Level {
 	// public ArrayList<Actor> actors;
 	public static transient Player player;
 	public transient Actor activeActor;
-//	public transient static ArrayListMappedInanimateObjects<GameObject> inanimateObjectsOnGround;
+	// public transient static ArrayListMappedInanimateObjects<GameObject>
+	// inanimateObjectsOnGround;
 	public transient static ArrayList<Effect> effectsOnInanimateGameObjects = new ArrayList<Effect>();
 	public transient static ArrayList<UpdatableGameObject> updatableGameObjects = new ArrayList<UpdatableGameObject>();
 
@@ -281,7 +282,7 @@ public class Level {
 		structures = new ArrayList<Structure>();
 
 		factions.makeFactions();
-//		inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
+		// inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 
 		initGrid(this.squares, this.width, this.height);
 		nodes = new Nodes(squares);
@@ -452,7 +453,8 @@ public class Level {
 		buttons = new ArrayList<Button>();
 		gameCursor = new GameCursor();
 
-//		this.inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
+		// this.inanimateObjectsOnGround = new
+		// ArrayListMappedInanimateObjects<GameObject>();
 		this.openInventories = new ArrayList<Inventory>();
 
 		for (int i = 0; i < width; i++) {
@@ -481,12 +483,12 @@ public class Level {
 		// waitingForPlayerClickToBeginTurn = true;
 	}
 
-//	public void loadImages() {
-//
-//		for (GameObject inanimateObject : inanimateObjectsOnGround) {
-//			inanimateObject.loadImages();
-//		}
-//	}
+	// public void loadImages() {
+	//
+	// for (GameObject inanimateObject : inanimateObjectsOnGround) {
+	// inanimateObject.loadImages();
+	// }
+	// }
 
 	private void initGrid(final Square[][] squares, final int width, final int height) {
 
@@ -1152,9 +1154,9 @@ public class Level {
 
 		player.drawStaticUI();
 
-//		for (GameObject mapMarker : inanimateObjectsOnGround.get(MapMarker.class)) {
-//			((MapMarker) mapMarker).drawStaticUI();
-//		}
+		// for (GameObject mapMarker : inanimateObjectsOnGround.get(MapMarker.class)) {
+		// ((MapMarker) mapMarker).drawStaticUI();
+		// }
 
 		if (openInventories.size() == 0 && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 
@@ -1596,9 +1598,6 @@ public class Level {
 
 		// Work out target square
 		Square targetSquare = null;
-		System.out.println("Player.playerTargetAction = " + Player.playerTargetAction);
-		System.out.println("Player.playerTargetAction.target = " + Player.playerTargetAction.target);
-		System.out.println("Player.playerTargetAction.targetSquare = " + Player.playerTargetAction.targetSquare);
 		if (Player.playerTargetAction.target != null) {
 			targetSquare = Player.playerTargetAction.target.squareGameObjectIsOn;
 		} else if (Player.playerTargetAction.targetSquare != null) {
@@ -1610,9 +1609,6 @@ public class Level {
 		// No path? Call pausePlayer, let the player know
 		if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null
 				|| Player.playerPathToMove.squares.size() == 0) {
-
-			System.out.println("targetSquare = " + targetSquare);
-			System.out.println("targetSquare.inventory = " + targetSquare.inventory);
 
 			if (!targetSquare.inventory.canShareSquare) {
 				Object[] objects = new Object[] { "Theres a ", targetSquare.inventory.gameObjectThatCantShareSquare,
@@ -2213,11 +2209,11 @@ public class Level {
 
 	public void addRemoveObjectToFromGround() {
 
-//		 if (inanimateObjectsToAdd.size() == 0 &&
-//		 inanimateObjectsOnGroundToRemove.size() == 0
-//		 && actorsToRemove.size() == 0) {
-//		 return;
-//		 }
+		// if (inanimateObjectsToAdd.size() == 0 &&
+		// inanimateObjectsOnGroundToRemove.size() == 0
+		// && actorsToRemove.size() == 0) {
+		// return;
+		// }
 		//
 		// for (InanimateObjectToAddOrRemove inanimateObjectToAdd :
 		// inanimateObjectsToAdd) {

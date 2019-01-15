@@ -32,8 +32,8 @@ public class FlammableLightSource extends Tool {
 		setAttributesForCopy(weapon, square, owner);
 		weapon.imageTextureUnlit = this.imageTextureUnlit;
 		weapon.imageTextureLit = this.imageTextureLit;
-		weapon.lit = this.lit;
-		setLighting(lit);
+		// weapon.lit = this.lit;
+		weapon.setLighting(this.lit);
 		return weapon;
 	}
 
