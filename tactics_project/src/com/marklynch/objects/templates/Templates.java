@@ -26,6 +26,7 @@ import com.marklynch.objects.inanimateobjects.Carcass;
 import com.marklynch.objects.inanimateobjects.Corpse;
 import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.Door;
+import com.marklynch.objects.inanimateobjects.FirePlace;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.Furnace;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -47,8 +48,8 @@ import com.marklynch.objects.inanimateobjects.PressurePlateRequiringSpecificItem
 import com.marklynch.objects.inanimateobjects.Rail;
 import com.marklynch.objects.inanimateobjects.RemoteDoor;
 import com.marklynch.objects.inanimateobjects.Searchable;
-import com.marklynch.objects.inanimateobjects.SeesawPart;
 import com.marklynch.objects.inanimateobjects.Seesaw;
+import com.marklynch.objects.inanimateobjects.SeesawPart;
 import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Stump;
@@ -292,6 +293,7 @@ public class Templates {
 	public static WallWithCrack WALL_WITH_CRACK;
 	public static Wall FALSE_WALL;
 	public static GameObject RUBBLE;
+	public static FirePlace FIRE_PLACE;
 
 	public static Wall FENCE;
 

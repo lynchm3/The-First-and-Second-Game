@@ -40,6 +40,7 @@ import com.marklynch.objects.inanimateobjects.Carcass;
 import com.marklynch.objects.inanimateobjects.Corpse;
 import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.Door;
+import com.marklynch.objects.inanimateobjects.FirePlace;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.Furnace;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -124,7 +125,7 @@ public class Save {
 			Player.class, WildAnimal.class, Trader.class, Thief.class, Pig.class, Guard.class, Doctor.class,
 
 			// LVL 2 GameObject subclass in Tool
-			Lantern.class,
+			Lantern.class, FirePlace.class,
 
 			// LVL 2 GameObject subclass
 			Door.class, Furnace.class, HidingPlace.class, Landmine.class, Matches.class, PressurePlate.class,
