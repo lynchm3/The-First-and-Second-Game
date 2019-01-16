@@ -202,9 +202,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureSideGradient;
 	public static Texture textureTopGradient;
 
-	public static TextBox textBoxSearch = new TextBox(null, "", "Enter Search Term", lengthSearch + 16, 0,
-			TextBox.TYPE.ALL);
-	public static TextBox textBoxQty = new TextBox(null, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
+	public static TextBox textBoxSearch;
+	public static TextBox textBoxQty;
 
 	public Inventory() {
 
@@ -214,6 +213,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void open() {
+
+		if (textBoxSearch == null && parent == Level.player) {
+			textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0, TextBox.TYPE.ALL);
+			textBoxQty = new TextBox(this, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
+		}
 
 		if (Level.activeTextBox == textBoxSearch) {
 			Level.activeTextBox = null;
