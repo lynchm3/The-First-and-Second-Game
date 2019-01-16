@@ -78,7 +78,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Bedroom room
 		StructureRoom bedRoom = new StructureRoom("wallHouseBedroom", posX + 42, posY + 30, false, false,
-				new ArrayList<Actor>(Actor.class), new Node[] { Nodes.wallHouseBedroom },
+				new ArrayList<Actor>(Actor.class), new Node[] { Nodes.wallHouseBedroom, Nodes.wallHouseFireplace },
 				new RoomPart(posX + 42, posY + 30, posX + 53, posY + 34));
 		structureRooms.add(bedRoom);
 
@@ -89,7 +89,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Path between the walls
 		StructurePath pathBetweenTheWalls = new StructurePath("Between the walls", false, false,
-				new ArrayList(Actor.class), new Node[] { Nodes.wallHouseFalseWall },
+				new ArrayList(Actor.class), new Node[] { Nodes.wallHouseFalseWall, Nodes.wallHouseFireplace },
 				Game.level.squares[posX + 44][posY + 28], Game.level.squares[posX + 45][posY + 28],
 				Game.level.squares[posX + 46][posY + 28], Game.level.squares[posX + 47][posY + 28],
 				Game.level.squares[posX + 48][posY + 28], Game.level.squares[posX + 49][posY + 28],
@@ -113,7 +113,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Hidden room
 		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", posX + 42, posY + 36, false, false,
-				new ArrayList<Actor>(Actor.class), 4, new Node[] { Nodes.wallHouseFalseWall },
+				new ArrayList<Actor>(Actor.class), 4, new Node[] { Nodes.wallHouseFalseWall, Nodes.wallHouseFireplace },
 				new RoomPart(posX + 42, posY + 36, posX + 55, posY + 37));
 		structureRooms.add(hiddenRoom);
 
