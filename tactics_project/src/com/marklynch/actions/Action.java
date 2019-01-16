@@ -114,6 +114,7 @@ public abstract class Action {
 	public static final String NEED_A_SHOVEL = "Need a shovel";
 	public static final String NEED_AN_AXE = "Need an axe";
 	public static final String NEED_MATCHES_OR_IGNITE_POWER = "Need Fire source or Ignite Power";
+	public static final String NEED_WATER_OR_DOUSE_POWER = "Need Fire source or Ignite Power";
 	public static final String NO_SPACE = "No space";
 	public static final String NOT_ENOUGH_GOLD = "Not enough gold";
 	public static final String NOT_ENOUGH_TRUST = "Not enough trust";
