@@ -63,7 +63,7 @@ public class QuestList extends ArrayList<Quest> {
 				questSmallGame.hunterBrent.imageTexture);
 
 		// QUEST - between the walls
-		questBetweenTheWalls = new QuestBetweenTheWalls(10, 10);
+		questBetweenTheWalls = new QuestBetweenTheWalls(0, 0);
 		add(questBetweenTheWalls);
 
 		// QUEST - the secret room

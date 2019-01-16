@@ -45,12 +45,12 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Front door
 		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Front Door",
-				Game.level.squares[posX + 41][posY + 21], false, false, false, null), Nodes.wallsHouseOuter));
+				Game.level.squares[posX + 41][posY + 21], false, false, false, null), Nodes.wallHouseOuter));
 
 		// Front room
 		StructureRoom frontRoom = new StructureRoom("Front Room", posX + 42, posY + 20, false, false,
 				new ArrayList<Actor>(Actor.class),
-				new Node[] { Nodes.wallsHouseOuter, Nodes.wallHouseHiddenArea, Nodes.wallHouseBedroom },
+				new Node[] { Nodes.wallHouseOuter, Nodes.wallHouseFalseWall, Nodes.wallHouseBedroom },
 				new RoomPart(posX + 42, posY + 20, posX + 55, posY + 26));
 		structureRooms.add(frontRoom);
 
@@ -66,7 +66,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Bedroom door
 		structurePaths.add(new StructurePath("Front Room", false, false, new ArrayList(Actor.class),
-				new Node[] { Nodes.wallsHouseOuter }, Game.level.squares[posX + 42][posY + 27]));
+				new Node[] { Nodes.wallHouseOuter }, Game.level.squares[posX + 42][posY + 27]));
 		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Bedroom Door",
 				Game.level.squares[posX + 42][posY + 28], false, true, true, null), Nodes.wallHouseBedroom));
 		structureFeatures.add(
@@ -89,7 +89,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Path between the walls
 		StructurePath pathBetweenTheWalls = new StructurePath("Between the walls", false, false,
-				new ArrayList(Actor.class), new Node[] { Nodes.wallHouseHiddenArea },
+				new ArrayList(Actor.class), new Node[] { Nodes.wallHouseFalseWall },
 				Game.level.squares[posX + 44][posY + 28], Game.level.squares[posX + 45][posY + 28],
 				Game.level.squares[posX + 46][posY + 28], Game.level.squares[posX + 47][posY + 28],
 				Game.level.squares[posX + 48][posY + 28], Game.level.squares[posX + 49][posY + 28],
@@ -105,7 +105,7 @@ public class QuestBetweenTheWalls extends Quest {
 		// False wall
 		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall", Game.level.squares[posX + 52][posY + 27], false,
 				null);
-		structureFeatures.add(new StructureFeature(falseWall, Nodes.wallHouseHiddenArea));
+		structureFeatures.add(new StructureFeature(falseWall, Nodes.wallHouseFalseWall));
 
 		// Rat
 		Templates.RAT.makeCopy("Rat", Game.level.squares[posX + 44][posY + 28], Game.level.factions.rats, null,
@@ -113,7 +113,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Hidden room
 		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", posX + 42, posY + 36, false, false,
-				new ArrayList<Actor>(Actor.class), 4, new Node[] { Nodes.wallHouseHiddenArea },
+				new ArrayList<Actor>(Actor.class), 4, new Node[] { Nodes.wallHouseFalseWall },
 				new RoomPart(posX + 42, posY + 36, posX + 55, posY + 37));
 		structureRooms.add(hiddenRoom);
 

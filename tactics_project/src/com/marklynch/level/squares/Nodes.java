@@ -28,9 +28,10 @@ public class Nodes {
 	public static Node dungeonHouseOuter; // 24,30
 	public static Node dungeonHouseHiddenArea; // 22,36
 
-	public static Node wallsHouseOuter; // 41,21
+	public static Node wallHouseOuter; // 41,21
 	public static Node wallHouseBedroom; // 42,28
-	public static Node wallHouseHiddenArea; // 52,27
+	public static Node wallHouseFireplace;
+	public static Node wallHouseFalseWall; // 52,27
 
 	public static Node barracksNorth; // 80,52
 	public static Node barracksSouth; // 80,61
@@ -77,14 +78,17 @@ public class Nodes {
 		dungeonHouseHiddenArea = new Node("Dungeon House Secret", squares[AreaTown.posX + 22][AreaTown.posY + 36]); // 22,36
 		nodes.add(dungeonHouseHiddenArea);
 
-		wallsHouseOuter = new Node("Walls House", squares[AreaTown.posX + 41][AreaTown.posY + 21]);
-		nodes.add(wallsHouseOuter);
+		wallHouseOuter = new Node("Walls House", squares[AreaTown.posX + 41][AreaTown.posY + 21]);
+		nodes.add(wallHouseOuter);
 
 		wallHouseBedroom = new Node("Walls House Bedroom", squares[AreaTown.posX + 42][AreaTown.posY + 28]);// 42,28
 		nodes.add(wallHouseBedroom);
 
-		wallHouseHiddenArea = new Node("Walls House Secret", squares[AreaTown.posX + 52][AreaTown.posY + 27]); // 52,27
-		nodes.add(wallHouseHiddenArea);
+		wallHouseFireplace = new Node("Walls House Fireplace", squares[AreaTown.posX + 48][AreaTown.posY + 29]);// 42,28
+		nodes.add(wallHouseFireplace);
+
+		wallHouseFalseWall = new Node("Walls House Secret", squares[AreaTown.posX + 52][AreaTown.posY + 27]); // 52,27
+		nodes.add(wallHouseFalseWall);
 
 		townNorth = new Node("Town North", squares[AreaTown.posX + 24][AreaTown.posY + 7]);
 		nodes.add(townNorth);
@@ -178,7 +182,7 @@ public class Nodes {
 
 		townCenter.neighbors.add(townShopCrossRoads);
 		townCenter.neighbors.add(dungeonHouseOuter);
-		townCenter.neighbors.add(wallsHouseOuter);
+		townCenter.neighbors.add(wallHouseOuter);
 		townCenter.neighbors.add(townNorth);
 		townCenter.neighbors.add(townNorthEast);
 		// townCenter.neighbors.add(townEast);
@@ -199,13 +203,16 @@ public class Nodes {
 
 		dungeonHouseHiddenArea.neighbors.add(dungeonHouseOuter);
 
-		wallsHouseOuter.neighbors.add(townCenter);
-		wallsHouseOuter.neighbors.add(wallHouseBedroom);
-		wallsHouseOuter.neighbors.add(wallHouseHiddenArea);
+		wallHouseOuter.neighbors.add(townCenter);
+		wallHouseOuter.neighbors.add(wallHouseBedroom);
+		wallHouseOuter.neighbors.add(wallHouseFalseWall);
 
-		wallHouseHiddenArea.neighbors.add(wallsHouseOuter);
+		wallHouseFalseWall.neighbors.add(wallHouseOuter);
 
-		wallHouseBedroom.neighbors.add(wallsHouseOuter);
+		wallHouseBedroom.neighbors.add(wallHouseOuter);
+
+		wallHouseFireplace.neighbors.add(wallHouseFalseWall);
+		wallHouseFireplace.neighbors.add(wallHouseBedroom);
 
 		townNorth.neighbors.add(townCenter);
 		// townNorth.neighbors.add(townNorthEast);
