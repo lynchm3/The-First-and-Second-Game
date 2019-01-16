@@ -107,6 +107,7 @@ import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.objects.utils.DamageDealer;
 import com.marklynch.objects.utils.DeathListener;
 import com.marklynch.ui.ActivityLog;
@@ -1763,6 +1764,20 @@ public class GameObject
 			fullyResisted = false;
 			break;
 
+		}
+
+		if (this instanceof FlammableLightSource) {
+			if (effectToAdd instanceof EffectBurning) {
+				((FlammableLightSource) this).setLighting(true);
+			} else if (effectToAdd instanceof EffectWet) {
+				((FlammableLightSource) this).setLighting(false);
+			}
+		}
+
+		if ((effectToAdd instanceof EffectWet)) {
+
+		} else if (fullyResisted) {
+			return;
 		}
 
 		if (fullyResisted && !(effectToAdd instanceof EffectWet))
