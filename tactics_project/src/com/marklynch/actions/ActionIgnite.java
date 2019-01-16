@@ -25,6 +25,10 @@ public class ActionIgnite extends Action {
 		super(ACTION_NAME, textureBurn, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
 		this.targetSquare = target.squareGameObjectIsOn;
+		if (performer.equipped == target) {
+			this.targetSquare = performer.squareGameObjectIsOn;
+			this.actionName = ACTION_NAME + " " + target.name;
+		}
 		if (!check()) {
 			enabled = false;
 		}
@@ -42,9 +46,9 @@ public class ActionIgnite extends Action {
 		if (!checkRange())
 			return;
 
-		if (performer.squareGameObjectIsOn.xInGrid > target.squareGameObjectIsOn.xInGrid) {
+		if (performer.squareGameObjectIsOn.xInGrid > targetSquare.xInGrid) {
 			performer.backwards = true;
-		} else if (performer.squareGameObjectIsOn.xInGrid < target.squareGameObjectIsOn.xInGrid) {
+		} else if (performer.squareGameObjectIsOn.xInGrid < targetSquare.xInGrid) {
 			performer.backwards = false;
 		}
 
@@ -82,9 +86,9 @@ public class ActionIgnite extends Action {
 			}
 		}
 
-		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
-			gameObject.addEffect(new EffectBurning(performer, gameObject, 3));
-		}
+//		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
+		target.addEffect(new EffectBurning(performer, target, 3));
+//		}
 
 		if (Game.level.openInventories.size() > 0)
 			Game.level.openInventories.get(0).close();
@@ -186,10 +190,9 @@ public class ActionIgnite extends Action {
 
 	@Override
 	public Sound createSound() {
-
 		// Sound
 		float loudness = 3;
-		return new Sound(performer, performer, targetSquare, loudness, legal, this.getClass());
+		return new Sound(performer, target, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 	}
 
 }

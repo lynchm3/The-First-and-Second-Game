@@ -61,7 +61,8 @@ public class TemplatesTools {
 
 		Templates.FISHING_ROD = new FishingRod(); // 93,0
 		Templates.FISHING_ROD.name = "Fishing Rod";
-		Templates.FISHING_ROD.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 4));
+		Templates.FISHING_ROD.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 4));
 		Templates.FISHING_ROD.fishingRange = 10;
 		Templates.FISHING_ROD.lineAnchorX = 93;
 		Templates.FISHING_ROD.lineAnchorY = 0;
@@ -88,7 +89,8 @@ public class TemplatesTools {
 
 		Templates.HUNTING_KNIFE = new Knife();
 		Templates.HUNTING_KNIFE.name = "Hunting Knife";
-		Templates.HUNTING_KNIFE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 9));
+		Templates.HUNTING_KNIFE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 9));
 		Templates.HUNTING_KNIFE.setImageAndExtrapolateSize("hunting_knife.png");
 		Templates.HUNTING_KNIFE.totalHealth = Templates.HUNTING_KNIFE.remainingHealth = 25;
 		Templates.HUNTING_KNIFE.weight = 12f;
@@ -159,7 +161,8 @@ public class TemplatesTools {
 
 		Templates.SERRATED_SPOON = new Weapon();
 		Templates.SERRATED_SPOON.name = "Serrated Spoon";
-		Templates.SERRATED_SPOON.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
+		Templates.SERRATED_SPOON.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
 		Templates.SERRATED_SPOON.setImageAndExtrapolateSize("serrated_spoon.png");
 		Templates.SERRATED_SPOON.totalHealth = Templates.SERRATED_SPOON.remainingHealth = 23;
 		Templates.SERRATED_SPOON.weight = 7f;
@@ -170,7 +173,8 @@ public class TemplatesTools {
 
 		Templates.DINNER_BELL = new Bell();
 		Templates.DINNER_BELL.name = "Dinner Bell";
-		Templates.DINNER_BELL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 2));
+		Templates.DINNER_BELL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 2));
 		Templates.DINNER_BELL.setImageAndExtrapolateSize("bell.png");
 		Templates.DINNER_BELL.totalHealth = Templates.DINNER_BELL.remainingHealth = 25;
 		Templates.DINNER_BELL.weight = 8f;
@@ -203,6 +207,7 @@ public class TemplatesTools {
 		Templates.LANTERN.anchorY = 7;
 		Templates.LANTERN.templateId = GameObject.generateNewTemplateId();
 		Templates.LANTERN.flipYAxisInMirror = false;
+		Templates.LANTERN.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
 
 		Templates.JAR = new ContainerForLiquids();
 		Templates.JAR.name = "Empty Jar";
@@ -220,7 +225,8 @@ public class TemplatesTools {
 
 		Templates.JAR_OF_WATER = new ContainerForLiquids();
 		Templates.JAR_OF_WATER.name = "Jar of Water";
-		Templates.JAR_OF_WATER.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
+		Templates.JAR_OF_WATER.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
 		Templates.JAR_OF_WATER.setImageAndExtrapolateSize("water_jar.png");
 		Templates.JAR_OF_WATER.totalHealth = Templates.JAR_OF_WATER.remainingHealth = 14;
 		Templates.JAR_OF_WATER.weight = 10f;
@@ -234,8 +240,10 @@ public class TemplatesTools {
 
 		Templates.JAR_OF_POISON = new ContainerForLiquids();
 		Templates.JAR_OF_POISON.name = "Jar of Poison";
-		Templates.JAR_OF_POISON.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
-		Templates.JAR_OF_POISON.highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(HIGH_LEVEL_STATS.POISON_DAMAGE,6));
+		Templates.JAR_OF_POISON.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
+		Templates.JAR_OF_POISON.highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.POISON_DAMAGE, 6));
 		Templates.JAR_OF_POISON.setImageAndExtrapolateSize("jar_of_poison.png");
 		Templates.JAR_OF_POISON.totalHealth = Templates.JAR_OF_POISON.remainingHealth = 14;
 		Templates.JAR_OF_POISON.weight = 10f;

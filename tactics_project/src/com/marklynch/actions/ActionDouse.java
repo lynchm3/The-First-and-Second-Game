@@ -24,6 +24,10 @@ public class ActionDouse extends Action {
 		super(ACTION_NAME, textureDouse, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
 		this.targetSquare = target.squareGameObjectIsOn;
+		if (performer.equipped == target) {
+			this.targetSquare = performer.squareGameObjectIsOn;
+			this.actionName = ACTION_NAME + " " + target.name;
+		}
 		if (!check()) {
 			enabled = false;
 		}
@@ -41,9 +45,9 @@ public class ActionDouse extends Action {
 		if (!checkRange())
 			return;
 
-		if (performer.squareGameObjectIsOn.xInGrid > target.squareGameObjectIsOn.xInGrid) {
+		if (performer.squareGameObjectIsOn.xInGrid > targetSquare.xInGrid) {
 			performer.backwards = true;
-		} else if (performer.squareGameObjectIsOn.xInGrid < target.squareGameObjectIsOn.xInGrid) {
+		} else if (performer.squareGameObjectIsOn.xInGrid < targetSquare.xInGrid) {
 			performer.backwards = false;
 		}
 
@@ -81,9 +85,9 @@ public class ActionDouse extends Action {
 			}
 		}
 
-		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
-			gameObject.addEffect(new EffectWet(performer, gameObject, 3));
-		}
+//		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
+		target.addEffect(new EffectWet(performer, target, 3));
+//		}
 
 		if (Game.level.openInventories.size() > 0)
 			Game.level.openInventories.get(0).close();
@@ -109,7 +113,7 @@ public class ActionDouse extends Action {
 			else if (target != null)
 				victim = target.owner;
 			if (victim != null) {
-				Crime crime = new Crime(this.performer, victim, Crime.TYPE.CRIME_ARSON);
+				Crime crime = new Crime(this.performer, victim, Crime.TYPE.CRIME_DOUSE);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
@@ -186,9 +190,8 @@ public class ActionDouse extends Action {
 	@Override
 	public Sound createSound() {
 
-		// Sound
 		float loudness = 3;
-		return new Sound(performer, performer, targetSquare, loudness, legal, this.getClass());
+		return new Sound(performer, target, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 	}
 
 }

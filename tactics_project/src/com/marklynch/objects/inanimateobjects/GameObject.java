@@ -1772,6 +1772,8 @@ public class GameObject
 			} else if (effectToAdd instanceof EffectWet) {
 				((FlammableLightSource) this).setLighting(false);
 			}
+			if (fullyResisted)
+				return;
 		}
 
 		if ((effectToAdd instanceof EffectWet)) {
@@ -2192,6 +2194,11 @@ public class GameObject
 
 		if (this instanceof Bell) {
 			actions.add(new ActionRing(performer, this));
+		}
+
+		if (this instanceof FlammableLightSource) {
+			actions.add(new ActionIgnite(performer, this));
+			actions.add(new ActionDouse(performer, this));
 		}
 
 		// Skinnable
