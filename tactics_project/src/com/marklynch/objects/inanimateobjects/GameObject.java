@@ -17,6 +17,7 @@ import com.marklynch.actions.ActionChopping;
 import com.marklynch.actions.ActionClose;
 import com.marklynch.actions.ActionDie;
 import com.marklynch.actions.ActionDigging;
+import com.marklynch.actions.ActionDouse;
 import com.marklynch.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.actions.ActionEatItems;
 import com.marklynch.actions.ActionEatItemsSelectedInInventory;
@@ -1372,6 +1373,9 @@ public class GameObject
 
 		if (!decorative)
 			actions.add(new ActionIgnite(performer, this));
+
+		if (!decorative)
+			actions.add(new ActionDouse(performer, this));
 
 		// if (!decorative)
 		// actions.add(new ActionCastBurn(performer, this));

@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationIgnite;
-import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerDouse;
 import com.marklynch.objects.actors.Actor;
@@ -21,7 +21,7 @@ public class ActionDouse extends Action {
 
 	// Default for hostiles
 	public ActionDouse(Actor performer, GameObject target) {
-		super(ACTION_NAME, textureBurn, performer, target);
+		super(ACTION_NAME, textureDouse, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
 		this.targetSquare = target.squareGameObjectIsOn;
 		if (!check()) {
@@ -82,7 +82,7 @@ public class ActionDouse extends Action {
 		}
 
 		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
-			gameObject.addEffect(new EffectBurning(performer, gameObject, 3));
+			gameObject.addEffect(new EffectWet(performer, gameObject, 3));
 		}
 
 		if (Game.level.openInventories.size() > 0)

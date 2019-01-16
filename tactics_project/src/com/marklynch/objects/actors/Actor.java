@@ -12,6 +12,7 @@ import org.lwjgl.util.vector.Vector3f;
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionAttack;
+import com.marklynch.actions.ActionDouse;
 import com.marklynch.actions.ActionFishingStart;
 import com.marklynch.actions.ActionHide;
 import com.marklynch.actions.ActionIgnite;
@@ -1893,6 +1894,7 @@ public class Actor extends GameObject {
 
 			actions.add(new ActionPourContainerInInventory(performer, performer, null));
 			actions.add(new ActionIgnite(performer, this));
+			actions.add(new ActionDouse(performer, this));
 
 			if (hiding) {
 				actions.add(new ActionStopHiding(this, this.hidingPlace));
