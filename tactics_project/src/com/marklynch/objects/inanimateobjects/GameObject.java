@@ -1761,7 +1761,7 @@ public class GameObject
 
 		}
 
-		if (fullyResisted)
+		if (fullyResisted && !(effectToAdd instanceof EffectWet))
 			return;
 
 		if (effectToAdd instanceof EffectBleed && !(this instanceof Actor))

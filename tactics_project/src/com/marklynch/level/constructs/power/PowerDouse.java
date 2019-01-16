@@ -35,7 +35,6 @@ public class PowerDouse extends Power {
 	public void cast(final GameObject source, GameObject targetGameObject, Square targetSquare, final Action action) {
 		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation(), null));
 		super.cast(source, targetGameObject, targetSquare, action);
-
 	}
 
 }

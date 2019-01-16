@@ -4,7 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.objects.inanimateobjects.FirePlace;
+import com.marklynch.objects.inanimateobjects.Fireplace;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MineCart;
 import com.marklynch.objects.inanimateobjects.Rail;
@@ -161,15 +161,29 @@ public class TemplatesBuilding {
 		Templates.MINE_CART.moveable = false;
 		Templates.MINE_CART.templateId = GameObject.generateNewTemplateId();
 
-		Templates.FIRE_PLACE = new FirePlace();
+		Templates.FIRE_PLACE = new Fireplace();
 		Templates.FIRE_PLACE.name = "Fireplace";
 		Templates.FIRE_PLACE.setImageAndExtrapolateSize("fireplace_lit.png");
 		Templates.FIRE_PLACE.imageTextureLit = getGlobalImage("fireplace_lit.png", true);
 		Templates.FIRE_PLACE.imageTextureUnlit = getGlobalImage("fireplace_unlit.png", true);
-		Templates.FIRE_PLACE.totalHealth = Templates.FIRE_PLACE.remainingHealth = 100;
+		Templates.FIRE_PLACE.totalHealth = Templates.FIRE_PLACE.remainingHealth = 112;
 		Templates.FIRE_PLACE.weight = 300f;
 		Templates.FIRE_PLACE.value = 254;
+		Templates.FIRE_PLACE.lit = true;
 		Templates.FIRE_PLACE.templateId = GameObject.generateNewTemplateId();
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES,
+				new Stat(HIGH_LEVEL_STATS.PIERCE_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES,
+				new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES,
+				new Stat(HIGH_LEVEL_STATS.POISON_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES, 100));
+		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES,
+				new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 	}
 
 }
