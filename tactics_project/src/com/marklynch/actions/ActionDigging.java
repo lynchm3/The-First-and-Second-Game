@@ -12,6 +12,7 @@ import com.marklynch.level.constructs.animation.secondary.AnimationFanOut;
 import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -67,11 +68,22 @@ public class ActionDigging extends Action {
 			}
 		}));
 
-//Kicking up stones
-		int x = (int) (targetSquare.xInGridPixels + Game.SQUARE_WIDTH);
-		int y = (int) (targetSquare.yInGridPixels + Game.SQUARE_HEIGHT);
+		// Animation for kicking up stones
+		Direction direction = Direction.RIGHT;
+		if (performer.squareGameObjectIsOn.xInGrid < targetSquare.xInGrid) {
+			direction = Direction.RIGHT;
+		} else if (performer.squareGameObjectIsOn.xInGrid > targetSquare.xInGrid) {
+			direction = Direction.LEFT;
+		} else if (performer.squareGameObjectIsOn.yInGrid < targetSquare.yInGrid) {
+			direction = Direction.UP;
+		} else if (performer.squareGameObjectIsOn.yInGrid > targetSquare.yInGrid) {
+			direction = Direction.DOWN;
+		}
+
+		float x = (targetSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH);
+		float y = (targetSquare.yInGridPixels + Game.HALF_SQUARE_HEIGHT);
 		Level.addSecondaryAnimation(
-				new AnimationFanOut(performer, Actor.Direction.DOWN, x, y, 0.1f, Templates.ROCK.imageTexture, null));
+				new AnimationFanOut(performer, direction, x, y, 0.1f, Templates.ROCK.imageTexture, null));
 
 //	AnimationFanOut(GameObject targetGameObject, Direction direction, float originX, float originY, float speed,
 //				Texture texture, OnCompletionListener onCompletionListener) {

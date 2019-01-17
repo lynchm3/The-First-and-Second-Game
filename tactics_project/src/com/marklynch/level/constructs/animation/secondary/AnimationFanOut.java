@@ -23,12 +23,15 @@ public class AnimationFanOut extends SecondaryAnimation {
 	public GameObject targetGameObject;
 
 	public float speed = 1f;
+	public float speedX = 0.f;
+	public float speedY = 0.1f;
 
 	boolean reachedDestination = false;
 
 	public Texture texture;
 
 	Color color;
+	private Direction direction;
 
 	public AnimationFanOut(GameObject targetGameObject, Direction direction, float originX, float originY, float speed,
 			Texture texture, OnCompletionListener onCompletionListener) {
@@ -41,6 +44,25 @@ public class AnimationFanOut extends SecondaryAnimation {
 		this.texture = texture;
 
 		this.speed = speed;
+
+		this.direction = direction;
+
+		if (direction == Direction.LEFT) {
+			speedX = -0.1f;
+			speedY = 0f;
+		} else if (direction == Direction.RIGHT) {
+			speedX = 0.1f;
+			speedY = 0f;
+
+		} else if (direction == Direction.DOWN) {
+			speedX = 0f;
+			speedY = -0.1f;
+
+		} else if (direction == Direction.UP) {
+			speedX = 0f;
+			speedY = 0.1f;
+
+		}
 
 		this.x = this.originX = originX;
 		this.y = this.originY = originY;
@@ -62,7 +84,8 @@ public class AnimationFanOut extends SecondaryAnimation {
 		if (progress >= 1) {
 			runCompletionAlorightm(true);
 		} else {
-			y -= delta * 0.1f;
+			x += delta * speedX;
+			y += delta * speedY;
 		}
 	}
 
@@ -87,8 +110,8 @@ public class AnimationFanOut extends SecondaryAnimation {
 		if (getCompleted())
 			return;
 
-		float size = 2f;
-		float inverseSize = 0.5f;
+		float size = 1f;
+		float inverseSize = 1f;
 
 		Game.activeBatch.flush();
 		Matrix4f view = Game.activeBatch.getViewMatrix();
