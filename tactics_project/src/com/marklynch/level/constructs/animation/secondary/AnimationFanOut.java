@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Vector3f;
 import com.marklynch.Game;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.Texture;
@@ -14,7 +15,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class AnimationFanOut extends SecondaryAnimation {
 
-	float x, y; // originX, originY, targetX, targetY, speedX, speedY;
+//	float x, y; // originX, originY, targetX, targetY, speedX, speedY;
 	public float originX = 0;
 	public float originY = 0;
 	public int damageStringLength;
@@ -22,50 +23,62 @@ public class AnimationFanOut extends SecondaryAnimation {
 
 	public GameObject targetGameObject;
 
-	public float speed = 1f;
-	public float speedX = 0.f;
-	public float speedY = 0.1f;
+	public float baseSpeed = 1f;
+	public float baseSpeedX = 0.f;
+	public float baseSpeedY = 0.1f;
 
 	boolean reachedDestination = false;
+
+	int debrisCount = 10;
 
 	public Texture texture;
 
 	Color color;
 	private Direction direction;
 
-	public AnimationFanOut(GameObject targetGameObject, Direction direction, float originX, float originY, float speed,
-			Texture texture, OnCompletionListener onCompletionListener) {
+	public ArrayList<Float> xs = new ArrayList<Float>(Float.class);
+	public ArrayList<Float> ys = new ArrayList<Float>(Float.class);
+	public ArrayList<Float> speedXs = new ArrayList<Float>(Float.class);
+	public ArrayList<Float> speedYs = new ArrayList<Float>(Float.class);
+
+	public AnimationFanOut(GameObject targetGameObject, Direction direction, float originX, float originY,
+			float baseSpeed, Texture texture, OnCompletionListener onCompletionListener) {
 
 		super(null, onCompletionListener, null, null, null, null, null, null, false, targetGameObject);
+
 		if (!runAnimation)
 			return;
 
 		this.targetGameObject = targetGameObject;
 		this.texture = texture;
 
-		this.speed = speed;
+		this.baseSpeed = baseSpeed;
 
 		this.direction = direction;
 
 		if (direction == Direction.LEFT) {
-			speedX = -0.1f;
-			speedY = 0f;
+			baseSpeedX = -0.1f;
+			baseSpeedY = 0f;
 		} else if (direction == Direction.RIGHT) {
-			speedX = 0.1f;
-			speedY = 0f;
+			baseSpeedX = 0.1f;
+			baseSpeedY = 0f;
 
 		} else if (direction == Direction.DOWN) {
-			speedX = 0f;
-			speedY = -0.1f;
+			baseSpeedX = 0f;
+			baseSpeedY = -0.1f;
 
 		} else if (direction == Direction.UP) {
-			speedX = 0f;
-			speedY = 0.1f;
+			baseSpeedX = 0f;
+			baseSpeedY = 0.1f;
 
 		}
 
-		this.x = this.originX = originX;
-		this.y = this.originY = originY;
+		for (int i = 0; i < debrisCount; i++) {
+			xs.add(originX);
+			ys.add(originY);
+			speedXs.add(baseSpeedX - 0.01f + Game.random.nextFloat() * 0.02f);
+			speedYs.add(baseSpeedY - 0.01f + Game.random.nextFloat() * 0.02f);
+		}
 
 		this.durationToReachMillis = 1000f;
 
@@ -84,8 +97,11 @@ public class AnimationFanOut extends SecondaryAnimation {
 		if (progress >= 1) {
 			runCompletionAlorightm(true);
 		} else {
-			x += delta * speedX;
-			y += delta * speedY;
+
+			for (int i = 0; i < debrisCount; i++) {
+				xs.set(i, (float) (xs.get(i) + delta * baseSpeedX));
+				ys.set(i, (float) (ys.get(i) + delta * baseSpeedY));
+			}
 		}
 	}
 
@@ -104,6 +120,7 @@ public class AnimationFanOut extends SecondaryAnimation {
 	}
 
 	public void draw() {
+
 		if (reachedDestination)
 			return;
 
@@ -120,14 +137,16 @@ public class AnimationFanOut extends SecondaryAnimation {
 		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
 		Game.activeBatch.updateUniforms();
 
-		float drawPositionX = (Game.halfWindowWidth) + (Game.zoom * inverseSize
-				* (x + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
-		float drawPositionY = (Game.halfWindowHeight) + (Game.zoom * inverseSize
-				* (y + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
+		for (int i = 0; i < debrisCount; i++) {
+			float drawPositionX = (Game.halfWindowWidth) + (Game.zoom * inverseSize
+					* (xs.get(i) + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
+			float drawPositionY = (Game.halfWindowHeight) + (Game.zoom * inverseSize
+					* (ys.get(i) + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
 
 //		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null, Color.WHITE,
 //				damageStringWithColor);
-		TextureUtils.drawTexture(texture, 1, drawPositionX - 16, drawPositionY, drawPositionX, drawPositionY + 16);
+			TextureUtils.drawTexture(texture, 1, drawPositionX - 16, drawPositionY, drawPositionX, drawPositionY + 16);
+		}
 
 		Game.activeBatch.flush();
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
@@ -135,18 +154,6 @@ public class AnimationFanOut extends SecondaryAnimation {
 		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
 		Game.activeBatch.updateUniforms();
 
-	}
-
-	public class Line {
-		public float x1, y1, x2, y2;
-
-		public Line(float x1, float y1, float x2, float y2) {
-			super();
-			this.x1 = x1;
-			this.y1 = y1;
-			this.x2 = x2;
-			this.y2 = y2;
-		}
 	}
 
 	@Override
