@@ -76,8 +76,10 @@ public class AnimationFanOut extends SecondaryAnimation {
 		for (int i = 0; i < debrisCount; i++) {
 			xs.add(originX);
 			ys.add(originY);
-			speedXs.add(baseSpeedX - 0.01f + Game.random.nextFloat() * 0.02f);
-			speedYs.add(baseSpeedY - 0.01f + Game.random.nextFloat() * 0.02f);
+			speedXs.add(baseSpeedX - 0.04f + Game.random.nextFloat() * 0.08f);
+			speedYs.add(baseSpeedY - 0.04f + Game.random.nextFloat() * 0.08f);
+
+			System.out.println("speedXs.get(i) = " + speedXs.get(i));
 		}
 
 		this.durationToReachMillis = 1000f;
@@ -99,8 +101,8 @@ public class AnimationFanOut extends SecondaryAnimation {
 		} else {
 
 			for (int i = 0; i < debrisCount; i++) {
-				xs.set(i, (float) (xs.get(i) + delta * baseSpeedX));
-				ys.set(i, (float) (ys.get(i) + delta * baseSpeedY));
+				xs.set(i, (float) (xs.get(i) + delta * speedXs.get(i)));
+				ys.set(i, (float) (ys.get(i) + delta * speedYs.get(i)));
 			}
 		}
 	}
