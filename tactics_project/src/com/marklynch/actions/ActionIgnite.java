@@ -19,12 +19,14 @@ public class ActionIgnite extends Action {
 	public static final String ACTION_NAME = "Ignite";
 
 	Object igniteMethod;
+	GameObject source;
 
 	// Default for hostiles
-	public ActionIgnite(Actor performer, GameObject target) {
+	public ActionIgnite(Actor performer, GameObject target, GameObject source) {
 		super(ACTION_NAME, textureBurn, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
 		this.targetSquare = target.squareGameObjectIsOn;
+		this.source = source;
 		if (performer.equipped == target) {
 			this.targetSquare = performer.squareGameObjectIsOn;
 			this.actionName = ACTION_NAME + " " + target.name;
@@ -54,12 +56,12 @@ public class ActionIgnite extends Action {
 
 		igniteMethod = getIgnitionMethod();
 
-		if (igniteMethod instanceof Power) {
-			igniteMethod = ((Power) igniteMethod).name;
-		}
-
 		GameObject igniteMethodGameObject = null;
-		if (igniteMethod instanceof GameObject) {
+		if (source != null) {
+			igniteMethodGameObject = target;
+		} else if (igniteMethod instanceof Power) {
+			igniteMethod = ((Power) igniteMethod).name;
+		} else if (igniteMethod instanceof GameObject) {
 			igniteMethodGameObject = (GameObject) igniteMethod;
 		}
 
@@ -142,6 +144,11 @@ public class ActionIgnite extends Action {
 	}
 
 	public Object getIgnitionMethod() {
+
+		if (source != null) {
+			return source;
+		}
+
 		if (performer.hasPower(PowerIgnite.class)) {
 			return performer.getPower(PowerIgnite.class);
 		}

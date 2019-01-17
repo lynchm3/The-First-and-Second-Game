@@ -1214,6 +1214,14 @@ public class GameObject
 			actions.add(new ActionFishingStart(performer, this));
 		}
 
+		// FlammableLightSoure
+		if ((this instanceof FlammableLightSource) && ((FlammableLightSource) this).lit && (performer.equipped != null))
+			actions.add(new ActionIgnite(performer, performer.equipped, this));
+
+		// This object is on fire
+		else if (this.hasActiveEffectOfType(EffectBurning.class) && (performer.equipped != null))
+			actions.add(new ActionIgnite(performer, performer.equipped, this));
+
 		// Skinnable
 		if (this instanceof Carcass) {
 			actions.add(new ActionSkin(performer, this));
@@ -1373,7 +1381,7 @@ public class GameObject
 			actions.add(new ActionPourContainerInInventory(performer, this, null));
 
 		if (!decorative)
-			actions.add(new ActionIgnite(performer, this));
+			actions.add(new ActionIgnite(performer, this, null));
 
 		if (!decorative)
 			actions.add(new ActionDouse(performer, this));
@@ -2197,7 +2205,7 @@ public class GameObject
 		}
 
 		if (this instanceof FlammableLightSource) {
-			actions.add(new ActionIgnite(performer, this));
+			actions.add(new ActionIgnite(performer, this, null));
 			actions.add(new ActionDouse(performer, this));
 		}
 

@@ -1893,7 +1893,7 @@ public class Actor extends GameObject {
 			}
 
 			actions.add(new ActionPourContainerInInventory(performer, performer, null));
-			actions.add(new ActionIgnite(performer, this));
+			actions.add(new ActionIgnite(performer, this, null));
 			actions.add(new ActionDouse(performer, this));
 
 			if (hiding) {

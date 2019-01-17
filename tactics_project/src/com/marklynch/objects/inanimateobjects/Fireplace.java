@@ -36,12 +36,8 @@ public class Fireplace extends FlammableLightSource implements UpdatableGameObje
 		Fireplace firePlace = new Fireplace();
 		setInstances(firePlace);
 		setAttributesForCopy(firePlace, square, owner);
-		System.out.println("this.imageTextureUnlit = " + this.imageTextureUnlit);
-		System.out.println("this.imageTextureLit = " + this.imageTextureLit);
 		firePlace.imageTextureUnlit = this.imageTextureUnlit;
 		firePlace.imageTextureLit = this.imageTextureLit;
-		System.out.println("firePlace.imageTextureUnlit = " + firePlace.imageTextureUnlit);
-		System.out.println("firePlace.imageTextureLit = " + firePlace.imageTextureLit);
 		firePlace.setLighting(this.lit);
 		return firePlace;
 	}
