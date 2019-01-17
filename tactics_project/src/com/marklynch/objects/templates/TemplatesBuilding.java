@@ -166,6 +166,8 @@ public class TemplatesBuilding {
 		Templates.FIRE_PLACE.setImageAndExtrapolateSize("fireplace_lit.png");
 		Templates.FIRE_PLACE.imageTextureLit = getGlobalImage("fireplace_lit.png", true);
 		Templates.FIRE_PLACE.imageTextureUnlit = getGlobalImage("fireplace_unlit.png", true);
+		System.out.println("Templates.FIRE_PLACE.imageTextureLit = " + Templates.FIRE_PLACE.imageTextureLit);
+		System.out.println("Templates.FIRE_PLACE.imageTextureUnlit = " + Templates.FIRE_PLACE.imageTextureUnlit);
 		Templates.FIRE_PLACE.totalHealth = Templates.FIRE_PLACE.remainingHealth = 112;
 		Templates.FIRE_PLACE.weight = 300f;
 		Templates.FIRE_PLACE.value = 254;

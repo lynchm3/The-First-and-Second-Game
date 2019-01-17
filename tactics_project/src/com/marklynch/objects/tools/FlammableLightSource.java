@@ -44,6 +44,9 @@ public class FlammableLightSource extends Tool {
 		} else {
 			imageTexture = this.imageTextureUnlit;
 		}
+		System.out.println(this + " imageTextureLit = " + imageTextureLit);
+		System.out.println(this + " imageTextureUnlit = " + imageTextureUnlit);
+		System.out.println(this + " imageTexture = " + imageTexture);
 	}
 
 }

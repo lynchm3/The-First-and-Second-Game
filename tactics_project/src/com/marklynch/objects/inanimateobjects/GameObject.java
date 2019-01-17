@@ -2622,4 +2622,13 @@ public class GameObject
 	public void squareContentsChanged() {
 
 	}
+
+	public boolean hasActiveEffectOfType(Class type) {
+		for (Effect effect : this.activeEffectsOnGameObject) {
+			if (effect.getClass().isAssignableFrom(type)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

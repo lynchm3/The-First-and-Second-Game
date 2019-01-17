@@ -1,19 +1,17 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.level.Level;
+import com.marklynch.Game;
+import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.tools.FlammableLightSource;
+import com.marklynch.objects.utils.UpdatableGameObject;
+import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
-import com.marklynch.utils.Texture;
 
-public class Fireplace extends FlammableLightSource {
+public class Fireplace extends FlammableLightSource implements UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
-
-	public transient Texture imageTextureUnlit = null;
-	public transient Texture imageTextureLit = null;
-	public boolean lit = false;
 
 	public Fireplace() {
 		super();
@@ -35,34 +33,46 @@ public class Fireplace extends FlammableLightSource {
 
 	@Override
 	public Fireplace makeCopy(Square square, Actor owner) {
-		Fireplace weapon = new Fireplace();
-		setInstances(weapon);
-		setAttributesForCopy(weapon, square, owner);
-		weapon.imageTextureUnlit = this.imageTextureUnlit;
-		weapon.imageTextureLit = this.imageTextureLit;
-		weapon.setLighting(this.lit);
-		return weapon;
+		Fireplace firePlace = new Fireplace();
+		setInstances(firePlace);
+		setAttributesForCopy(firePlace, square, owner);
+		System.out.println("this.imageTextureUnlit = " + this.imageTextureUnlit);
+		System.out.println("this.imageTextureLit = " + this.imageTextureLit);
+		firePlace.imageTextureUnlit = this.imageTextureUnlit;
+		firePlace.imageTextureLit = this.imageTextureLit;
+		System.out.println("firePlace.imageTextureUnlit = " + firePlace.imageTextureUnlit);
+		System.out.println("firePlace.imageTextureLit = " + firePlace.imageTextureLit);
+		firePlace.setLighting(this.lit);
+		return firePlace;
 	}
 
 	@Override
-	public void setLighting(boolean lit) {
+	public void update(int delta) {
 
-		System.out.println("Fireplace.setLighting() - lit = " + lit);
+		System.out.println("Fireplace.update lit = " + lit);
 
-		this.lit = lit;
-		if (lit) {
-			imageTexture = this.imageTextureLit;
-			blocksLineOfSight = true;
-			canShareSquare = false;
-			this.squareGameObjectIsOn.inventory.refresh();
-			Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
-		} else {
-			imageTexture = this.imageTextureUnlit;
-			blocksLineOfSight = false;
-			canShareSquare = true;
-			this.squareGameObjectIsOn.inventory.refresh();
-			Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
+		if (!lit)
+			return;
+
+		for (GameObject gameObject : this.squareGameObjectIsOn.inventory.gameObjects) {
+			System.out.println("Fireplace.update gameObject = " + gameObject);
+
+			if (gameObject == this || gameObject.attackable == false)
+				continue;
+
+			EffectBurning effectBurning = new EffectBurning(this, gameObject, 3);
+
+			System.out.println("Fireplace.update effectBurning = " + effectBurning);
+			if (!gameObject.hasActiveEffectOfType(EffectBurning.class)) {
+				if (Game.level.shouldLog(gameObject)) {
+					Game.level.logOnScreen(new ActivityLog(new Object[] { effectBurning, " spread to ", gameObject }));
+				}
+			}
+
+			gameObject.removeWetEffect();
+			gameObject.addEffect(effectBurning);
 		}
+
 	}
 
 }
