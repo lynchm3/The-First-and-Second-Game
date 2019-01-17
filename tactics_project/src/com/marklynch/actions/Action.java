@@ -324,6 +324,9 @@ public abstract class Action {
 		if (target == null)
 			return true;
 
+		if (target == performer)
+			return true;
+
 		if (performer.attackers.contains(target))
 			return true;
 
