@@ -68,8 +68,16 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 		// this.setTooltipText(this.shortcut);
 		this.tooltips.clear();
 		if (this.shortcut instanceof Power) {
-			this.tooltips
-					.add(new Tooltip(false, Tooltip.WHITE, this.shortcut, TextUtils.NewLine.NEW_LINE, "Click to cast"));
+
+			Power power = (Power) this.shortcut;
+
+			if (!power.passive) {
+				this.tooltips.add(
+						new Tooltip(false, Tooltip.WHITE, this.shortcut, TextUtils.NewLine.NEW_LINE, "Click to cast"));
+			} else {
+				this.tooltips.add(new Tooltip(false, Tooltip.WHITE, this.shortcut, TextUtils.NewLine.NEW_LINE,
+						"Click to toggle on/off"));
+			}
 		} else {
 			this.tooltips.add(new Tooltip(false, Tooltip.WHITE, this.shortcut));
 		}
@@ -105,22 +113,21 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 			TextureUtils.drawTexture(power.image, tempSwap.x1, tempSwap.y1, tempSwap.x2, tempSwap.y2);
 			if (power.passive) {
 				if (power.toggledOn) {
-					TextureUtils.drawTexture(Action.textureCheckboxChecked, tempSwap.x1, tempSwap.y1, tempSwap.x1 + 16,
-							tempSwap.y1 + 16);
+//					TextureUtils.drawTexture(Action.textureCheckboxChecked, tempSwap.x1, tempSwap.y1, tempSwap.x1 + 16,
+//							tempSwap.y1 + 16);
 				} else {
-					TextureUtils.drawTexture(Action.textureX, tempSwap.x1, tempSwap.y1, tempSwap.x1 + 16,
-							tempSwap.y1 + 16);
+					TextureUtils.drawTexture(Action.textureX, tempSwap.x1, tempSwap.y1, tempSwap.x2, tempSwap.y2);
 				}
 			}
 		} else {
 			TextureUtils.drawTexture(power.image, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
 			if (power.passive) {
 				if (power.toggledOn) {
-					TextureUtils.drawTexture(Action.textureCheckboxChecked, x1 + dragX, y1 + dragY, x1 + dragX + 16,
-							y1 + dragY + 16);
+//					TextureUtils.drawTexture(Action.textureCheckboxChecked, x1 + dragX, y1 + dragY, x1 + dragX,
+//							y1 + dragY + 16);
 
 				} else {
-					TextureUtils.drawTexture(Action.textureX, x1 + dragX, y1 + dragY, x1 + dragX + 16, y1 + dragY + 16);
+					TextureUtils.drawTexture(Action.textureX, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
 
 				}
 			}
