@@ -193,6 +193,38 @@ public class TemplatesFurniture {
 		Templates.ANTLERS_SWITCH.actionName = "Touch";
 		Templates.ANTLERS_SWITCH.actionVerb = "touched";
 
+		Templates.REMOTE_SWITCH = new Switch();
+		Templates.REMOTE_SWITCH.name = "Remote Button";
+		Templates.REMOTE_SWITCH.setImageAndExtrapolateSize("remote_button.png");
+		Templates.REMOTE_SWITCH.totalHealth = Templates.REMOTE_SWITCH.remainingHealth = 27;
+		Templates.REMOTE_SWITCH.weight = 5f;
+		Templates.REMOTE_SWITCH.value = 200;
+		Templates.REMOTE_SWITCH.templateId = GameObject.generateNewTemplateId();
+		Templates.REMOTE_SWITCH.fitsInInventory = true;
+		Templates.REMOTE_SWITCH.canBePickedUp = true;
+		Templates.REMOTE_SWITCH.persistsWhenCantBeSeen = false;
+		Templates.REMOTE_SWITCH.actionName = "Press";
+		Templates.REMOTE_SWITCH.actionVerb = "pressed";
+		Templates.REMOTE_SWITCH.anchorX = 6;
+		Templates.REMOTE_SWITCH.anchorY = 26;
+		Templates.REMOTE_SWITCH.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES,
+				new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
+		Templates.REMOTE_SWITCH.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES,
+				new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
+		Templates.REMOTE_SWITCH.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES,
+				new Stat(HIGH_LEVEL_STATS.PIERCE_RES, 100));
+		Templates.REMOTE_SWITCH.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
+		Templates.REMOTE_SWITCH.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES,
+				new Stat(HIGH_LEVEL_STATS.WATER_RES, 100));
+		Templates.REMOTE_SWITCH.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES,
+				new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
+		Templates.REMOTE_SWITCH.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES,
+				new Stat(HIGH_LEVEL_STATS.POISON_RES, 100));
+		Templates.REMOTE_SWITCH.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES,
+				new Stat(HIGH_LEVEL_STATS.BLEED_RES, 100));
+		Templates.REMOTE_SWITCH.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES,
+				new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
+
 		Templates.PRESSURE_PLATE = new PressurePlate();
 		Templates.PRESSURE_PLATE.name = "Pressure Plate";
 		Templates.PRESSURE_PLATE.totalHealth = Templates.PRESSURE_PLATE.remainingHealth = 1;

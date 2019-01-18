@@ -136,7 +136,10 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Pressure Plate
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + 51][posY + 21], null, Switch.SWITCH_TYPE.OPEN_CLOSE,
-				30, falseWall);
+				new RequirementToMeet[] { new RequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) }, falseWall);
+
+		Templates.REMOTE_SWITCH.makeCopy(Game.level.squares[posX + 53][posY + 21], null, Switch.SWITCH_TYPE.OPEN_CLOSE,
+				new RequirementToMeet[] { new RequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) }, falseWall);
 
 		// Path to town 24,21 -> 40,21
 		PavedPathway pathToTown = new PavedPathway(posX + 24, posY + 21, posX + 40, posY + 21);

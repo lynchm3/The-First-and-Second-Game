@@ -273,6 +273,7 @@ public class Templates {
 	public static Key KEY;
 
 	public static Switch ANTLERS_SWITCH;
+	public static Switch REMOTE_SWITCH;
 
 	public static PressurePlate PRESSURE_PLATE;
 	public static PressurePlateRequiringSpecificItem PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM;
