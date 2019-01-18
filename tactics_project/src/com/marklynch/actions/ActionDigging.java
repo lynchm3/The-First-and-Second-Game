@@ -80,10 +80,10 @@ public class ActionDigging extends Action {
 			direction = Direction.DOWN;
 		}
 
-		float x = (targetSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH);
-		float y = (targetSquare.yInGridPixels + Game.HALF_SQUARE_HEIGHT);
+		float x = (targetSquare.xInGridPixels);// + Game.HALF_SQUARE_WIDTH);
+		float y = (targetSquare.yInGridPixels);// - Game.HALF_SQUARE_HEIGHT);
 		Level.addSecondaryAnimation(
-				new AnimationFanOut(performer, direction, x, y, 0.1f, Templates.ROCK.imageTexture, null));
+				new AnimationFanOut(performer, direction, x, y, 0.5f, Templates.ROCK.imageTexture, null));
 
 //	AnimationFanOut(GameObject targetGameObject, Direction direction, float originX, float originY, float speed,
 //				Texture texture, OnCompletionListener onCompletionListener) {

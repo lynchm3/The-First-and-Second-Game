@@ -1,9 +1,5 @@
 package com.marklynch.level.constructs.animation.secondary;
 
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
-
 import com.marklynch.Game;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -57,19 +53,19 @@ public class AnimationFanOut extends SecondaryAnimation {
 		this.direction = direction;
 
 		if (direction == Direction.LEFT) {
-			baseSpeedX = -0.1f;
+			baseSpeedX = -baseSpeed;
 			baseSpeedY = 0f;
 		} else if (direction == Direction.RIGHT) {
-			baseSpeedX = 0.1f;
+			baseSpeedX = baseSpeed;
 			baseSpeedY = 0f;
 
 		} else if (direction == Direction.DOWN) {
 			baseSpeedX = 0f;
-			baseSpeedY = -0.1f;
+			baseSpeedY = -baseSpeed;
 
 		} else if (direction == Direction.UP) {
 			baseSpeedX = 0f;
-			baseSpeedY = 0.1f;
+			baseSpeedY = baseSpeed;
 
 		}
 
@@ -129,45 +125,26 @@ public class AnimationFanOut extends SecondaryAnimation {
 		if (getCompleted())
 			return;
 
-		float size = 1f;
-		float inverseSize = 1f;
-
-		Game.activeBatch.flush();
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
-		view.scale(new Vector3f(size, size, 1f));
-		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-		Game.activeBatch.updateUniforms();
-
 		for (int i = 0; i < debrisCount; i++) {
-			float drawPositionX = (Game.halfWindowWidth) + (Game.zoom * inverseSize
+
+			float drawPositionX = (Game.halfWindowWidth) + (Game.zoom
 					* (xs.get(i) + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
-			float drawPositionY = (Game.halfWindowHeight) + (Game.zoom * inverseSize
+
+			float drawPositionY = (Game.halfWindowHeight) + (Game.zoom
 					* (ys.get(i) + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
 
-//		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null, Color.WHITE,
-//				damageStringWithColor);
-			TextureUtils.drawTexture(texture, 1, drawPositionX - 16, drawPositionY, drawPositionX, drawPositionY + 16);
+			TextureUtils.drawTexture(texture, 1, drawPositionX - 2, drawPositionY - 2, drawPositionX + 2,
+					drawPositionY + 2);
 		}
-
-		Game.activeBatch.flush();
-		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
-		view.scale(new Vector3f(inverseSize, inverseSize, 1f));
-		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-		Game.activeBatch.updateUniforms();
 
 	}
 
 	@Override
 	public void draw3() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	protected void childRunCompletionAlgorightm(boolean wait) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
