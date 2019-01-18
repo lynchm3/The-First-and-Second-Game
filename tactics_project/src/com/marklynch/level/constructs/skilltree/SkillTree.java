@@ -146,7 +146,6 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(douse);
 		ignite.linkedSkillTreeNodes.add(douse);
 		douse.linkedSkillTreeNodes.add(ignite);
-		respite.powersUnlocked.add(new PowerDouse(null));
 
 		// Fire Damage +1
 		// SkillTreeNode fire1 = new SkillTreeNode(512, 512 + 512);
@@ -364,13 +363,11 @@ public class SkillTree implements Draggable, Scrollable {
 		return null;
 	}
 
-	private float getDragYWithOffset() {
-		// TODO Auto-generated method stub
+	private float getDragXWithOffset() {
 		return 0;
 	}
 
-	private float getDragXWithOffset() {
-		// TODO Auto-generated method stub
+	private float getDragYWithOffset() {
 		return 0;
 	}
 
