@@ -49,7 +49,8 @@ public class PowerGrabber extends Power {
 
 			gameObjectsToTake.clear();
 			for (GameObject gameObject : squareToPickupFrom.inventory.gameObjects) {
-				if (gameObject.owner == null && gameObject.fitsInInventory && !(gameObject instanceof Actor)) {
+				if (gameObject.owner == null && gameObject.fitsInInventory && !(gameObject instanceof Actor)
+						&& gameObject.quest == null) {
 					gameObjectsToTake.add(gameObject);
 				}
 			}

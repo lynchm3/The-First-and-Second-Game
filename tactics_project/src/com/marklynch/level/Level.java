@@ -1598,9 +1598,10 @@ public class Level {
 
 		// Work out target square
 		Square targetSquare = null;
-		if (Player.playerTargetAction.target != null) {
-			targetSquare = Player.playerTargetAction.target.squareGameObjectIsOn;
-		} else if (Player.playerTargetAction.targetSquare != null) {
+//		if (Player.playerTargetAction.target != null) {
+//			targetSquare = Player.playerTargetAction.target.squareGameObjectIsOn;
+//		} else 
+		if (Player.playerTargetAction.targetSquare != null) {
 			targetSquare = Player.playerTargetAction.targetSquare;
 		}
 

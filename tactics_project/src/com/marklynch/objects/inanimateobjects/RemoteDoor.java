@@ -1,9 +1,9 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
+import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.utils.ArrayList;
 
 public class RemoteDoor extends Door {
 
@@ -43,6 +43,7 @@ public class RemoteDoor extends Door {
 		blocksLineOfSight = false;
 		soundDampening = 1f;
 		name = baseName + " (open)";
+		Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
 	}
 
 	@Override
@@ -51,6 +52,7 @@ public class RemoteDoor extends Door {
 		blocksLineOfSight = blocksLineOfSightWhenClosed;
 		soundDampening = soundDampeningWhenClosed;
 		name = baseName;
+		Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
 	}
 
 	public RemoteDoor makeCopy(String name, Square square, boolean locked, Actor owner) {

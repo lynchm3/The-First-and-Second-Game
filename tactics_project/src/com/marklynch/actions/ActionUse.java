@@ -24,6 +24,10 @@ public class ActionUse extends Action {
 		for (RequirementToMeet requirementToMeet : requirementsToMeet) {
 			ACTION_NAME += " " + requirementToMeet.getText();
 		}
+		if (performer.equipped == switchToUse) {
+			this.targetSquare = performer.squareGameObjectIsOn;
+			this.actionName = ACTION_NAME + " " + target.name;
+		}
 		this.actionName = ACTION_NAME;
 		this.switchToUse = switchToUse;
 		this.verb = verb;
@@ -92,8 +96,14 @@ public class ActionUse extends Action {
 
 	@Override
 	public boolean checkRange() {
+
 		if (gameObjectPerformer instanceof Actor) {
+
 			Actor actor = (Actor) gameObjectPerformer;
+
+			if (actor.equipped == switchToUse)
+				return true;
+
 			if (!actor.canSeeGameObject(switchToUse)) {
 				return false;
 			}
@@ -113,7 +123,7 @@ public class ActionUse extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(gameObjectPerformer, switchToUse, switchToUse.squareGameObjectIsOn, 1, legal, this.getClass());
+		return new Sound(gameObjectPerformer, switchToUse, targetSquare, 1, legal, this.getClass());
 	}
 
 }
