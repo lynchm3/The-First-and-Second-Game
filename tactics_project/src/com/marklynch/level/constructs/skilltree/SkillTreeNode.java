@@ -121,6 +121,8 @@ public class SkillTreeNode extends LevelButton {
 						Game.level.popupMenuObjects.clear();
 						Game.level.popupMenuActions.clear();
 						Game.level.openCloseSkillTree();
+					} else if (activated && power.passive == true) {
+						power.toggledOn = !power.toggledOn;
 					}
 
 				}
@@ -202,7 +204,7 @@ public class SkillTreeNode extends LevelButton {
 			if (power.getClass().isInstance(quickBarSquare.getShortcut()))
 				return;
 
-			if (power.passive == false && quickBarSquare.getShortcut() == null) {
+			if (quickBarSquare.getShortcut() == null) {
 				quickBarSquare.setShortcut(power);
 				break;
 			}
@@ -392,6 +394,9 @@ public class SkillTreeNode extends LevelButton {
 			if (activated && !power.passive) {
 				tooltipItems.add(TextUtils.NewLine.NEW_LINE);
 				tooltipItems.add("Click to cast");
+			} else if (activated && power.passive) {
+				tooltipItems.add(TextUtils.NewLine.NEW_LINE);
+				tooltipItems.add("Click to toggle on/off");
 			} else {
 			}
 
@@ -456,7 +461,7 @@ public class SkillTreeNode extends LevelButton {
 
 		public void drawDragged() {
 
-			if (power.passive || !SkillTreeNode.this.activated)
+			if (!SkillTreeNode.this.activated)
 				return;
 			// TextureUtils.drawTexture(this.power.image, x1 + dragX, y1 + dragY, x2 +
 			// dragX, y2 + dragY);
@@ -473,7 +478,7 @@ public class SkillTreeNode extends LevelButton {
 		@Override
 		public void drag(float drawOffsetX, float dragOffsetY) {
 
-			if (power.passive || !SkillTreeNode.this.activated)
+			if (!SkillTreeNode.this.activated)
 				return;
 
 			this.dragX = this.dragX + drawOffsetX;
@@ -492,7 +497,7 @@ public class SkillTreeNode extends LevelButton {
 		@Override
 		public void dragDropped() {
 
-			if (power.passive || !SkillTreeNode.this.activated)
+			if (!SkillTreeNode.this.activated)
 				return;
 
 			float centerX = Mouse.getX();
@@ -508,7 +513,7 @@ public class SkillTreeNode extends LevelButton {
 
 			if (quickBarSquareToSwapWith == null) {
 
-			} else if (power.passive == false && SkillTreeNode.this.activated) {
+			} else if (SkillTreeNode.this.activated) {
 				quickBarSquareToSwapWith.setShortcut(this.power);
 			}
 

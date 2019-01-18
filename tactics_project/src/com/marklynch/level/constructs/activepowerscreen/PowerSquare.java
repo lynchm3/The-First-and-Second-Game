@@ -95,8 +95,8 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 
 	public void drawDragged() {
 
-		if (power.passive)
-			return;
+//		if (power.passive)
+//			return;
 		// TextureUtils.drawTexture(this.power.image, x1 + dragX, y1 + dragY, x2 +
 		// dragX, y2 + dragY);
 		TextureUtils.drawTexture(this.power.image, Mouse.getX() - draggedPowerHalfWidth,
@@ -112,8 +112,8 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 	@Override
 	public void drag(float drawOffsetX, float dragOffsetY) {
 
-		if (power.passive)
-			return;
+//		if (power.passive)
+//			return;
 
 		this.dragX = this.dragX + drawOffsetX;
 		this.dragY = this.dragY - dragOffsetY;
@@ -133,8 +133,8 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 	@Override
 	public void dragDropped() {
 
-		if (power.passive)
-			return;
+//		if (power.passive)
+//			return;
 
 		float centerX = Mouse.getX();
 		float centerY = Game.windowHeight - Mouse.getY();

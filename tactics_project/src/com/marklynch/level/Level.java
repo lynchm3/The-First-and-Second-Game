@@ -2110,7 +2110,7 @@ public class Level {
 
 		// Do passive powers that run at start of turn.. yo
 		for (Power power : player.powers) {
-			if (power.activateAtStartOfTurn) {
+			if (power.activateAtStartOfTurn && power.toggledOn == true) {
 				new ActionUsePower(player, null, player.squareGameObjectIsOn, power.makeCopy(player)).perform();
 			}
 		}

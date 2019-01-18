@@ -31,6 +31,7 @@ public abstract class Power {
 	public Crime.TYPE crimeSeverity;
 	public String disabledReason = null;
 	public boolean passive = false;
+	public boolean toggledOn = true;
 	public boolean activateAtStartOfTurn = false;
 
 	public int range;
