@@ -2,9 +2,10 @@ package com.marklynch.level.constructs.power;
 
 import org.lwjgl.util.Point;
 
-import com.marklynch.Game;
 import com.marklynch.actions.Action;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
+import com.marklynch.level.constructs.animation.secondary.AnimationChangeTime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -26,7 +27,9 @@ public class PowerTimePlusSixHours extends Power {
 	@Override
 	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
 		// Game.level.changeTime(60 * 60 * 6);
-		Game.level.changeTime(60 * 60 * 10);
+//		Game.level.changeTime(60 * 60 * 6);
+
+		Level.addSecondaryAnimation(new AnimationChangeTime(source, 60 * 60 * 6, 1000f));
 	}
 
 	@Override
