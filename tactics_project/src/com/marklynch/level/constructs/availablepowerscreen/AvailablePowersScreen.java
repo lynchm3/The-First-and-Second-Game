@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs.activepowerscreen;
+package com.marklynch.level.constructs.availablepowerscreen;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 
-public class ActivePowerScreen implements Draggable, Scrollable {
+public class AvailablePowersScreen implements Draggable, Scrollable {
 
 	static ArrayList<PowerSquare> powerSquares = new ArrayList<PowerSquare>();
 
@@ -25,7 +25,7 @@ public class ActivePowerScreen implements Draggable, Scrollable {
 
 	public ArrayList<PowerSquare> activateAtStart = new ArrayList<PowerSquare>();
 
-	public ActivePowerScreen() {
+	public AvailablePowersScreen() {
 
 	}
 

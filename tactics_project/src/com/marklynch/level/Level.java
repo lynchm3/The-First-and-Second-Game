@@ -19,9 +19,9 @@ import com.marklynch.actions.ActionWait;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.ai.utils.Move;
 import com.marklynch.level.constructs.Stat;
-import com.marklynch.level.constructs.activepowerscreen.ActivePowerScreen;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.area.Area;
+import com.marklynch.level.constructs.availablepowerscreen.AvailablePowersScreen;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
@@ -123,7 +123,7 @@ public class Level {
 	public static transient MarkerList markerList = new MarkerList();
 	public static transient CharacterScreen characterScreen = new CharacterScreen();
 	public static transient SkillTree skillTree = new SkillTree();
-	public static transient ActivePowerScreen activePowerScreen = new ActivePowerScreen();
+	public static transient AvailablePowersScreen availablePowerScreen = new AvailablePowersScreen();
 	public static transient FactionList factions = new FactionList();
 	public static transient ArrayList<Actor> actors = new ArrayList<Actor>();
 	public static transient GameOver gameOver = new GameOver();
@@ -273,7 +273,7 @@ public class Level {
 		Journal.loadStaticImages();
 		CharacterScreen.loadStaticImages();
 		SkillTree.loadStaticImages();
-		ActivePowerScreen.loadStaticImages();
+		AvailablePowersScreen.loadStaticImages();
 		ActivityLogger.loadStaticImages();
 		GameOver.loadStaticImages();
 		Decoration.loadStaticImages();
@@ -346,7 +346,7 @@ public class Level {
 		}
 		characterScreen.close();
 		skillTree.close();
-		activePowerScreen.close();
+		availablePowerScreen.close();
 
 		if (journal.showing) {
 			journal.close();
@@ -363,7 +363,7 @@ public class Level {
 		}
 		journal.close();
 		skillTree.close();
-		activePowerScreen.close();
+		availablePowerScreen.close();
 
 		if (characterScreen.showing) {
 			characterScreen.close();
@@ -380,7 +380,7 @@ public class Level {
 		}
 		journal.close();
 		characterScreen.close();
-		activePowerScreen.close();
+		availablePowerScreen.close();
 
 		if (skillTree.showing) {
 			skillTree.close();
@@ -399,10 +399,10 @@ public class Level {
 		characterScreen.close();
 		skillTree.close();
 
-		if (activePowerScreen.showing) {
-			activePowerScreen.close();
+		if (availablePowerScreen.showing) {
+			availablePowerScreen.close();
 		} else {
-			activePowerScreen.open();
+			availablePowerScreen.open();
 			pausePlayer();
 		}
 		closeAllPopups();
@@ -415,7 +415,7 @@ public class Level {
 		journal.close();
 		skillTree.close();
 		characterScreen.close();
-		activePowerScreen.close();
+		availablePowerScreen.close();
 
 		if (gameOver.showing) {
 			gameOver.close();
@@ -1302,8 +1302,8 @@ public class Level {
 			skillTree.drawStaticUI();
 		}
 
-		if (activePowerScreen.showing) {
-			activePowerScreen.drawStaticUI();
+		if (availablePowerScreen.showing) {
+			availablePowerScreen.drawStaticUI();
 		}
 
 		if (gameOver.showing) {
@@ -1571,7 +1571,7 @@ public class Level {
 			return;
 		} else if (skillTree.showing) {
 			return;
-		} else if (activePowerScreen.showing) {
+		} else if (availablePowerScreen.showing) {
 			return;
 		} else if (gameOver.showing) {
 			return;
@@ -1745,13 +1745,13 @@ public class Level {
 			return skillTree.getButtonFromMousePosition(mouseX, mouseY);
 		}
 
-		if (activePowerScreen.showing) {
+		if (availablePowerScreen.showing) {
 
 			for (QuickBarSquare quickBarSquare : quickBar.quickBarSquares) {
 				if (quickBarSquare.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return quickBarSquare;
 			}
-			for (Button button : ActivePowerScreen.buttons) {
+			for (Button button : AvailablePowersScreen.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
@@ -1951,7 +1951,7 @@ public class Level {
 	public PinWindow getWindowFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
 
 		if (openInventories.size() != 0 || journal.showing || gameOver.showing || characterScreen.showing
-				|| skillTree.showing || activePowerScreen.showing)
+				|| skillTree.showing || availablePowerScreen.showing)
 			return null;
 
 		for (int i = pinWindows.size() - 1; i >= 0; i--) {
@@ -2363,8 +2363,8 @@ public class Level {
 			characterScreen.resize();
 		if (skillTree.showing)
 			skillTree.resize();
-		if (activePowerScreen.showing)
-			activePowerScreen.resize();
+		if (availablePowerScreen.showing)
+			availablePowerScreen.resize();
 		if (journal.showing)
 			journal.resize();
 		if (gameOver.showing)

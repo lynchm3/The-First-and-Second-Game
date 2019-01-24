@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs.activepowerscreen;
+package com.marklynch.level.constructs.availablepowerscreen;
 
 import org.lwjgl.input.Mouse;
 
@@ -39,6 +39,34 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 		this.power = power;
 		setLocation(x, y);
 
+		this.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				powerClicked(power);
+
+			}
+		});
+
+	}
+
+	public static void powerClicked(Power power) {
+		if (power.passive) {
+			power.toggledOn = !power.toggledOn;
+		} else if (power.selectTarget) {
+			Level.pausePlayer();
+			if (Level.availablePowerScreen.showing)
+				Level.availablePowerScreen.close();
+			Level.levelMode = LevelMode.LEVEL_MODE_CAST;
+			Game.level.selectedPower = power.makeCopy(Level.player);
+		} else {
+			Level.pausePlayer();
+			if (Level.availablePowerScreen.showing)
+				Level.availablePowerScreen.close();
+			new ActionUsePower(Level.player, Game.gameObjectMouseIsOver, Level.player.squareGameObjectIsOn,
+					power.makeCopy(Level.player)).perform();
+		}
+		Game.level.popupMenuObjects.clear();
+		Game.level.popupMenuActions.clear();
 	}
 
 	private void setLocation(float x, float y) {

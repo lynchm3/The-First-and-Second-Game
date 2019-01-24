@@ -1,9 +1,7 @@
 package com.marklynch.ui.quickbar;
 
 import com.marklynch.Game;
-import com.marklynch.actions.ActionUsePower;
-import com.marklynch.level.Level;
-import com.marklynch.level.Level.LevelMode;
+import com.marklynch.level.constructs.availablepowerscreen.PowerSquare;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -88,18 +86,7 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 				@Override
 				public void click() {
 					Power power = (Power) QuickBarSquare.this.shortcut;
-					Level.pausePlayer();
-					if (power.passive) {
-						power.toggledOn = !power.toggledOn;
-					} else if (power.selectTarget) {
-						Level.levelMode = LevelMode.LEVEL_MODE_CAST;
-						Game.level.selectedPower = power.makeCopy(Level.player);
-					} else {
-						new ActionUsePower(Level.player, Game.gameObjectMouseIsOver, Level.player.squareGameObjectIsOn,
-								power.makeCopy(Level.player)).perform();
-					}
-					Game.level.popupMenuObjects.clear();
-					Game.level.popupMenuActions.clear();
+					PowerSquare.powerClicked(power);
 				}
 			});
 		} else if (shortcut instanceof GameObject) {
