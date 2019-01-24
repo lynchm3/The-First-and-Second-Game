@@ -42,12 +42,12 @@ public class ActivePowerScreen implements Draggable, Scrollable {
 		powerSquares.clear();
 		for (Power power : Level.player.powers) {
 
-			if (power.passive == false) {
-				PowerSquare powerSquare = new PowerSquare(power, offsetX, 64);
-				powerSquares.add(powerSquare);
-				offsetX += (128 + 64);
-				buttons.add(powerSquare);
-			}
+//			if (power.passive == false) {
+			PowerSquare powerSquare = new PowerSquare(power, offsetX, 64);
+			powerSquares.add(powerSquare);
+			offsetX += (128 + 64);
+			buttons.add(powerSquare);
+//			}
 		}
 
 		resize();

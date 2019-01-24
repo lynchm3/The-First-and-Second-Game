@@ -149,7 +149,7 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 
 		if (quickBarSquareToSwapWith == null) {
 
-		} else if (power.passive == false) {
+		} else {
 			quickBarSquareToSwapWith.setShortcut(this.power);
 		}
 
