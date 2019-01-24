@@ -15,6 +15,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerDash;
 import com.marklynch.level.constructs.power.PowerDouse;
+import com.marklynch.level.constructs.power.PowerFindMatch;
 import com.marklynch.level.constructs.power.PowerGrabber;
 import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
@@ -122,6 +123,14 @@ public class SkillTree implements Draggable, Scrollable {
 		spiritBag.powersUnlocked.add(new PowerSpiritBag(null));
 		skillTreeNodes.add(spiritBag);
 
+		// Find Match
+		SkillTreeNode findMatch = new SkillTreeNode(5120, 1280);
+		activateAtStart.add(findMatch);
+		findMatch.name = "Find Match";
+		findMatch.description = "Find Match";
+		findMatch.powersUnlocked.add(new PowerFindMatch(null));
+		skillTreeNodes.add(findMatch);
+
 		// Superpeek
 		SkillTreeNode superPeek = new SkillTreeNode(5120, 1024);
 		activateAtStart.add(superPeek);
@@ -129,6 +138,8 @@ public class SkillTree implements Draggable, Scrollable {
 		superPeek.description = "Superpeek";
 		superPeek.powersUnlocked.add(new PowerSuperPeek(null));
 		skillTreeNodes.add(superPeek);
+		superPeek.linkedSkillTreeNodes.add(findMatch);
+		findMatch.linkedSkillTreeNodes.add(superPeek);
 
 		// Ignite
 		SkillTreeNode ignite = new SkillTreeNode(4096, 1536);

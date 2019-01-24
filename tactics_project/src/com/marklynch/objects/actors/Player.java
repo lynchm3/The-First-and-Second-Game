@@ -16,6 +16,7 @@ import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.InventorySquare;
+import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -192,16 +193,17 @@ public class Player extends Human {
 
 		super.drawStaticUI();// dmg numbers probably
 
+		// Draw powers that draw
+		for (Power power : this.powers) {
+			if (power.draws) {
+				power.drawUI();
+			}
+		}
+
 		// XP Bar!
 		float percentage = xpThisLevel / xpPerLevel;
 		float xpBarWidth = Game.windowWidth * percentage;
 		QuadUtils.drawQuad(Color.YELLOW, 0, Game.windowHeight - 20, xpBarWidth, Game.windowHeight);
-
-		// Equipped item!
-		Texture squareTexture = InventorySquare.YELLOW_SQUARE; // yellow is used
-																// for equipped
-																// items in
-																// inventory
 
 		// Trespassing notification
 		if (this.squareGameObjectIsOn.restricted() == true && !this.squareGameObjectIsOn.owners.contains(this)) {
@@ -213,6 +215,9 @@ public class Player extends Human {
 					"TRESPASSING");
 
 		}
+
+		// Equipped item!
+		Texture squareTexture = InventorySquare.YELLOW_SQUARE;
 
 		float xInPixels = Game.windowWidth - 110;
 		float yInPixels = Game.windowHeight - 140 - Game.INVENTORY_SQUARE_HEIGHT;

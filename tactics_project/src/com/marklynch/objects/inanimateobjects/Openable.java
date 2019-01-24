@@ -1,7 +1,5 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.actions.ActionClose;
 import com.marklynch.actions.ActionLock;
 import com.marklynch.actions.ActionOpen;
@@ -10,6 +8,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.utils.SwitchListener;
+import com.marklynch.utils.ArrayList;
 
 public abstract class Openable extends GameObject implements SwitchListener {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
@@ -62,6 +61,9 @@ public abstract class Openable extends GameObject implements SwitchListener {
 		openable.isOpenable = isOpenable;
 		openable.lockable = lockable;
 		openable.keys = keys;
+		for (Key key : keys) {
+			openable.linkedGameObjects.add(key);
+		}
 		openable.locked = locked;
 
 		openable.baseName = this.baseName;

@@ -768,6 +768,8 @@ public class GameObject
 
 	protected boolean died = false;
 
+	public ArrayList<GameObject> linkedGameObjects = new ArrayList<GameObject>(GameObject.class);
+
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 
 		if (!died && remainingHealth <= 0) {
