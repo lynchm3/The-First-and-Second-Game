@@ -463,8 +463,7 @@ public class SkillTreeNode extends LevelButton {
 
 			if (!SkillTreeNode.this.activated)
 				return;
-			// TextureUtils.drawTexture(this.power.image, x1 + dragX, y1 + dragY, x2 +
-			// dragX, y2 + dragY);
+
 			TextureUtils.drawTexture(this.power.image, Mouse.getX() - powerHalfWidth,
 					Game.windowHeight - Mouse.getY() - powerHalfWidth, Mouse.getX() + powerHalfWidth,
 					Game.windowHeight - Mouse.getY() + powerHalfWidth);

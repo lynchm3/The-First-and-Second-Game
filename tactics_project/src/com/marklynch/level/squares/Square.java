@@ -95,6 +95,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public static Texture MUD_TEXTURE;
 	public static Texture WATER_TEXTURE;
 	public static Texture GREY_TEXTURE;
+	public static Texture GREY_OUT;
 	public static Texture WHITE_SQUARE;
 	public static Texture YELLOW_SQUARE;
 	public static Texture RED_SQUARE;
@@ -218,6 +219,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		tileColors.put(WATER_TEXTURE, Color.BLUE);
 		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png", false);
 		tileColors.put(GREY_TEXTURE, Color.GRAY);
+		GREY_OUT = ResourceUtils.getGlobalImage("grey_out.png", false);
 		WHITE_SQUARE = ResourceUtils.getGlobalImage("white_square.png", false);
 		tileColors.put(WHITE_SQUARE, Color.WHITE);
 		YELLOW_SQUARE = ResourceUtils.getGlobalImage("yellow_square.png", false);

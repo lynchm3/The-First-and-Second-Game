@@ -1,7 +1,6 @@
 package com.marklynch.ui.quickbar;
 
 import com.marklynch.Game;
-import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionUsePower;
 import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
@@ -116,7 +115,7 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 //					TextureUtils.drawTexture(Action.textureCheckboxChecked, tempSwap.x1, tempSwap.y1, tempSwap.x1 + 16,
 //							tempSwap.y1 + 16);
 				} else {
-					TextureUtils.drawTexture(Action.textureX, tempSwap.x1, tempSwap.y1, tempSwap.x2, tempSwap.y2);
+					TextureUtils.drawTexture(Square.GREY_OUT, tempSwap.x1, tempSwap.y1, tempSwap.x2, tempSwap.y2);
 				}
 			}
 		} else {
@@ -127,7 +126,7 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 //							y1 + dragY + 16);
 
 				} else {
-					TextureUtils.drawTexture(Action.textureX, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
+					TextureUtils.drawTexture(Square.GREY_OUT, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
 
 				}
 			}
