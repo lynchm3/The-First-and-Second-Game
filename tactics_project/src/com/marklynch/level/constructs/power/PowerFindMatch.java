@@ -16,7 +16,7 @@ import com.marklynch.utils.ResourceUtils;
 public class PowerFindMatch extends Power {
 
 	private static String NAME = "Find Match";
-	private static GameObject target = null;
+	private static GameObject targetToMatch = null;
 
 	public PowerFindMatch() {
 		this(null);
@@ -50,12 +50,12 @@ public class PowerFindMatch extends Power {
 		if (target == null && targetGameObject != null) {
 			System.out.println("PowerFindMatch.cast() b");
 			Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
-			playersFindMathchPower.target = targetGameObject;
+			playersFindMathchPower.target = targetToMatch = targetGameObject;
 			playersFindMathchPower.toggledOn = true;
 			playersFindMathchPower.selectTarget = false;
 		} else {
 			Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
-			playersFindMathchPower.target = null;
+			playersFindMathchPower.target = targetToMatch = null;
 			playersFindMathchPower.toggledOn = false;
 			playersFindMathchPower.selectTarget = true;
 		}
@@ -75,36 +75,41 @@ public class PowerFindMatch extends Power {
 	@Override
 	public void drawUI() {
 
-		if (target == null)
+		System.out.println("drawUI() a");
+		if (targetToMatch == null)
 			return;
+		System.out.println("drawUI() b");
 
-		if (toggledOn == false)
+		Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
+		if (playersFindMathchPower.toggledOn == false)
 			return;
+		System.out.println("drawUI() c");
 
-		float x1 = (Game.halfWindowWidth) + (Game.zoom * (target.squareGameObjectIsOn.xInGridPixels
-				+ Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
+		System.out.println("links size = " + targetToMatch.linkedGameObjects.size());
 
-		float y1 = (Game.halfWindowHeight) + (Game.zoom * (target.squareGameObjectIsOn.yInGridPixels
-				+ Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
+		Square square = targetToMatch.getWorldSquareGameObjectIsOn();
+		System.out.println("square = " + square);
+		if (square == null)
+			return;
+		float x1 = (Game.halfWindowWidth) + (Game.zoom
+				* (square.xInGridPixels + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
 
-		for (GameObject linkedGameObject : target.linkedGameObjects) {
-			float x2 = (Game.halfWindowWidth) + (Game.zoom * (linkedGameObject.squareGameObjectIsOn.xInGridPixels
+		float y1 = (Game.halfWindowHeight) + (Game.zoom
+				* (square.yInGridPixels + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
+
+		for (GameObject linkedGameObject : targetToMatch.linkedGameObjects) {
+			Square linkedGameObjectSquare = linkedGameObject.getWorldSquareGameObjectIsOn();
+			if (linkedGameObjectSquare == null)
+				continue;
+
+			float x2 = (Game.halfWindowWidth) + (Game.zoom * (linkedGameObjectSquare.xInGridPixels
 					+ Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
 
-			float y2 = (Game.halfWindowHeight) + (Game.zoom * (linkedGameObject.squareGameObjectIsOn.yInGridPixels
+			float y2 = (Game.halfWindowHeight) + (Game.zoom * (linkedGameObjectSquare.yInGridPixels
 					+ Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
 
 			LineUtils.drawLine(Color.RED, x1, y1, x2, y2, 10);
 		}
-
-		// cast on an object? to see what it has a connection to.
-		// key-door
-
-//		ehhhhhh
-		// dunno how this wull work...
-		// object ur holding to other shit...
-		// do keys have a list of objs that they open?
-		// i did not think this thruu
 	}
 
 }

@@ -92,6 +92,7 @@ import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventoryParent;
 import com.marklynch.level.constructs.inventory.InventorySquare;
+import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.constructs.power.PowerTeleportOther;
 import com.marklynch.level.quest.Quest;
@@ -2640,5 +2641,16 @@ public class GameObject
 			}
 		}
 		return false;
+	}
+
+	public Square getWorldSquareGameObjectIsOn() {
+
+		if (inventoryThatHoldsThisObject == null) {
+			return null;
+		} else if (inventoryThatHoldsThisObject instanceof SquareInventory) {
+			return (Square) inventoryThatHoldsThisObject.parent;
+		} else {
+			return ((GameObject) inventoryThatHoldsThisObject.parent).getWorldSquareGameObjectIsOn();
+		}
 	}
 }
