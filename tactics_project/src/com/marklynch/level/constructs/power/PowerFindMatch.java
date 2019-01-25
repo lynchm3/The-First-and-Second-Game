@@ -4,6 +4,7 @@ import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
@@ -22,12 +23,13 @@ public class PowerFindMatch extends Power {
 	}
 
 	public PowerFindMatch(GameObject source) {
-		super(NAME, ResourceUtils.getGlobalImage("bag.png", false), source, new Effect[] {}, 0, null,
-				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
+		super(NAME, ResourceUtils.getGlobalImage("find_match.png", false), source, new Effect[] {}, Integer.MAX_VALUE,
+				null, new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
 //		passive = true;
 		draws = true;
 		selectTarget = true;
 		activateAtStartOfTurn = false;
+		toggledOn = false;
 	}
 
 	@Override
@@ -41,14 +43,21 @@ public class PowerFindMatch extends Power {
 		// when u press on obj
 		// maybe i change the state between 2 click and one click
 
-		if (target == null) {
-			target = targetGameObject;
-			toggledOn = true;
-			this.selectTarget = false;
+		System.out.println("PowerFindMatch.cast() a");
+		System.out.println("target = " + target);
+		System.out.println("targetGameObject = " + targetGameObject);
+
+		if (target == null && targetGameObject != null) {
+			System.out.println("PowerFindMatch.cast() b");
+			Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
+			playersFindMathchPower.target = targetGameObject;
+			playersFindMathchPower.toggledOn = true;
+			playersFindMathchPower.selectTarget = false;
 		} else {
-			target = null;
-			toggledOn = false;
-			this.selectTarget = true;
+			Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
+			playersFindMathchPower.target = null;
+			playersFindMathchPower.toggledOn = false;
+			playersFindMathchPower.selectTarget = true;
 		}
 	}
 

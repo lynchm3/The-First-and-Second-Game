@@ -95,27 +95,18 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 	}
 
 	public void drawPower(Power power) {
+//		if (power instanceof PowerFindMatch)
+//			System.out.println("drawPower power.toggledOn = " + power.toggledOn);
+
 		if (tempSwap != null) {
 			TextureUtils.drawTexture(power.image, tempSwap.x1, tempSwap.y1, tempSwap.x2, tempSwap.y2);
-			if (power.passive) {
-				if (power.toggledOn) {
-//					TextureUtils.drawTexture(Action.textureCheckboxChecked, tempSwap.x1, tempSwap.y1, tempSwap.x1 + 16,
-//							tempSwap.y1 + 16);
-				} else {
-					TextureUtils.drawTexture(Square.GREY_OUT, tempSwap.x1, tempSwap.y1, tempSwap.x2, tempSwap.y2);
-				}
+			if (!power.toggledOn) {
+				TextureUtils.drawTexture(Square.GREY_OUT, tempSwap.x1, tempSwap.y1, tempSwap.x2, tempSwap.y2);
 			}
 		} else {
 			TextureUtils.drawTexture(power.image, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
-			if (power.passive) {
-				if (power.toggledOn) {
-//					TextureUtils.drawTexture(Action.textureCheckboxChecked, x1 + dragX, y1 + dragY, x1 + dragX,
-//							y1 + dragY + 16);
-
-				} else {
-					TextureUtils.drawTexture(Square.GREY_OUT, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
-
-				}
+			if (!power.toggledOn) {
+				TextureUtils.drawTexture(Square.GREY_OUT, x1 + dragX, y1 + dragY, x2 + dragX, y2 + dragY);
 			}
 		}
 	}
