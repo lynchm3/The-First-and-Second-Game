@@ -60,7 +60,7 @@ public class Cloud extends Decoration {
 			for (int squareY = y1InSquares; squareY <= y2InSquares; squareY++) {
 
 				Square squareCloudIsOver = Level.squares[squareX][squareY];
-				if (squareCloudIsOver.structureSquareIsIn == null) {
+				if (squareCloudIsOver.visibleToPlayer && squareCloudIsOver.structureSquareIsIn == null) {
 
 					TextureUtils.drawTextureWithinBounds(Decoration.cloudTexture, Level.shadowDarkness, x1, y1, x2, y2,
 							squareCloudIsOver.xInGridPixels, squareCloudIsOver.yInGridPixels,
