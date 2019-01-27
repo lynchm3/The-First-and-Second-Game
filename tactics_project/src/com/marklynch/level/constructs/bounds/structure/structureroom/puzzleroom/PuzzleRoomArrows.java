@@ -96,7 +96,7 @@ public class PuzzleRoomArrows extends StructureRoom {
 		}
 
 		for (Square bigArrowSquare : bigArrowSquares) {
-			bigArrowWalls.add(Templates.WALL.makeCopy(bigArrowSquare, null));
+			bigArrowWalls.add(Templates.WALL_CAVE.makeCopy(bigArrowSquare, null));
 		}
 
 		// fallaway walls 1
@@ -132,7 +132,7 @@ public class PuzzleRoomArrows extends StructureRoom {
 		}
 
 		for (Square fallawayWallsSquare1 : fallawayWallsSquares1) {
-			fallawayWalls1.add(Templates.WALL.makeCopy(fallawayWallsSquare1, null));
+			fallawayWalls1.add(Templates.WALL_CAVE.makeCopy(fallawayWallsSquare1, null));
 		}
 
 		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 30][posY + 7], null, fallawayWalls1);
@@ -172,7 +172,7 @@ public class PuzzleRoomArrows extends StructureRoom {
 		}
 
 		for (Square fallawayWallsSquare2 : fallawayWallsSquares2) {
-			fallawayWalls2.add(Templates.WALL.makeCopy(fallawayWallsSquare2, null));
+			fallawayWalls2.add(Templates.WALL_CAVE.makeCopy(fallawayWallsSquare2, null));
 		}
 
 		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 30][posY + 18], null, fallawayWalls2);
@@ -247,7 +247,7 @@ public class PuzzleRoomArrows extends StructureRoom {
 		}
 
 		for (Square bigArrowSquare : bigArrowSquares) {
-			bigArrowWalls.add(Templates.WALL.makeCopy(bigArrowSquare, null));
+			bigArrowWalls.add(Templates.WALL_CAVE.makeCopy(bigArrowSquare, null));
 		}
 
 		// fallaway walls 1
@@ -283,7 +283,7 @@ public class PuzzleRoomArrows extends StructureRoom {
 		}
 
 		for (Square fallawayWallsSquare1 : fallawayWallsSquares1) {
-			fallawayWalls1.add(Templates.WALL.makeCopy(fallawayWallsSquare1, null));
+			fallawayWalls1.add(Templates.WALL_CAVE.makeCopy(fallawayWallsSquare1, null));
 		}
 
 		GameObject woodenSupport1 = Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 36 - 4][posY + 33 - 4], null,
@@ -323,7 +323,7 @@ public class PuzzleRoomArrows extends StructureRoom {
 		}
 
 		for (Square fallawayWallsSquare2 : fallawayWallsSquares2) {
-			fallawayWalls2.add(Templates.WALL.makeCopy(fallawayWallsSquare2, null));
+			fallawayWalls2.add(Templates.WALL_CAVE.makeCopy(fallawayWallsSquare2, null));
 		}
 
 		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 52 - 4][posY + 28 - 4], null, fallawayWalls2);

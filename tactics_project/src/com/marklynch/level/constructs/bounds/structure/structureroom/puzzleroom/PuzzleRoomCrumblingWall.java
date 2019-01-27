@@ -31,11 +31,11 @@ public class PuzzleRoomCrumblingWall extends StructureRoom {
 		// But the wall jus isnt there...
 		// There was a suggestion to move it left from me in notes, so can try that...
 		ArrayList<GameObject> walls = new ArrayList<GameObject>(GameObject.class);
-		walls.add(Templates.WALL.makeCopy(Level.squares[posX - 1][posY], null));
-		walls.add(Templates.WALL.makeCopy(Level.squares[posX - 1][posY + 1], null));
-		walls.add(Templates.WALL.makeCopy(Level.squares[posX - 1][posY + 2], null));
-		walls.add(Templates.WALL.makeCopy(Level.squares[posX - 1][posY + 3], null));
-		walls.add(Templates.WALL.makeCopy(Level.squares[posX - 1][posY + 4], null));
+		walls.add(Templates.WALL_CAVE.makeCopy(Level.squares[posX - 1][posY], null));
+		walls.add(Templates.WALL_CAVE.makeCopy(Level.squares[posX - 1][posY + 1], null));
+		walls.add(Templates.WALL_CAVE.makeCopy(Level.squares[posX - 1][posY + 2], null));
+		walls.add(Templates.WALL_CAVE.makeCopy(Level.squares[posX - 1][posY + 3], null));
+		walls.add(Templates.WALL_CAVE.makeCopy(Level.squares[posX - 1][posY + 4], null));
 
 		woodenSupport = Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX][posY + 2], null, walls);
 	}

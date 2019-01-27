@@ -123,7 +123,7 @@ public class QuestTheSecretRoom extends Quest {
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
 				structureFeatures, structureEntranceSquares, null, AreaTown.posX + 0, AreaTown.posY + 0,
 				AreaTown.posX + 0, AreaTown.posY + 0, true, kidnapper, structureSquaresToRemove, structureExtraWalls,
-				Templates.WALL, Square.STONE_TEXTURE, 2));
+				Templates.WALL_CAVE, Square.STONE_TEXTURE, 2));
 
 		// Path to town 24,21 -> 24,29
 		new PavedPathway(AreaTown.posX + 24, AreaTown.posY + 21, AreaTown.posX + 24, AreaTown.posY + 29);

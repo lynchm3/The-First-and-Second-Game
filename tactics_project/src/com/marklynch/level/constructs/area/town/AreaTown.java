@@ -86,7 +86,7 @@ public class AreaTown {
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
 				new ArrayList<StructurePath>(StructurePath.class), shopFeatures, entranceSquares, "building2.png",
 				posX + 640, posY + 640 + 1664, posX + -100, posY + -100 + 868, true, trader,
-				new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL,
+				new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_BUILDING,
 				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(joesShop);
 		GameObject joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6][posY + 6], trader);
@@ -141,7 +141,7 @@ public class AreaTown {
 		Structure doctorsShop = new Structure("Doctor Mike's Practice", doctorsShopSections, doctorsShopAtriums,
 				new ArrayList<StructurePath>(StructurePath.class), doctorsShopFeatures, doctorsEntranceSquares,
 				"building2.png", posX + 640 + 35, posY + 640 + 1664 + 3, posX + -100 + 35, posY + -100 + 868 + 3, true,
-				doctor, new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL,
+				doctor, new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
 				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(doctorsShop);
 		GameObject doctorsShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6 + 35][posY + 6 + 3], doctor);

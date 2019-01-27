@@ -174,7 +174,7 @@ public class QuestThePigs extends Quest {
 
 		Game.level.structures.add(new Structure("Farm House", farmHouseSections, farmHouseRooms, farmHousePaths,
 				farmHouseFeatures, new ArrayList<Square>(Square.class), null, 0, 0, 0, 0, true, farmer,
-				farmHouseSquaresToRemove, farmHouseWalls, Templates.WALL, Square.STONE_TEXTURE, 3));
+				farmHouseSquaresToRemove, farmHouseWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 3));
 
 		Templates.SHELF.makeCopy(Game.level.squares[14][69], farmer);
 		Templates.SHELF.makeCopy(Game.level.squares[15][69], farmer);

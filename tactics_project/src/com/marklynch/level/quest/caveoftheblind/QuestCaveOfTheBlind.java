@@ -250,7 +250,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(westSecurity1);
 
 		// West security extras
-		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[252][9], null));
+		extraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[252][9], null));
 		Templates.VEIN.makeCopy(Game.level.squares[259][5], null, true, Templates.ORE, 0.1f);
 		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[253][9], null);
 		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[254][10], null),
@@ -609,8 +609,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		Storage confiscatedChest = Templates.CHEST.makeCopy(Game.level.squares[269][42], false, mort, mortsKey);
 		confiscatedChest.inventory.add(alsKey);
 		mort.aiRoutine.roomBounds.add(mort.mortsRoom);
-		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[274][39], mort));
-		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[274][42], mort));
+		extraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[274][39], mort));
+		extraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[274][42], mort));
 
 		// Morts Vault Room
 		mort.mortsVault = new StructureRoom("Vault", 249, 39, false, false, new ArrayList<Actor>(Actor.class),
@@ -726,7 +726,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		cave = new Structure("Mort & Mort Mining", caveSections, rooms, cavePaths, caveFeatures,
 				new ArrayList<Square>(Square.class), "map_cave.png", 223, 0, 321, 74, true, mort, squaresToRemove,
-				extraWalls, Templates.WALL, Square.STONE_TEXTURE, 5);
+				extraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(cave);
 
 		// Dirty Sheet

@@ -55,10 +55,10 @@ public class QuestBetweenTheWalls extends Quest {
 		structureRooms.add(frontRoom);
 
 		// Front room decorative walls
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 55][posY + 20], null));
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 55][posY + 26], null));
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 46][posY + 23], null));
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 51][posY + 23], null));
+		structureExtraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[posX + 55][posY + 20], null));
+		structureExtraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[posX + 55][posY + 26], null));
+		structureExtraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[posX + 46][posY + 23], null));
+		structureExtraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[posX + 51][posY + 23], null));
 
 		// Bedroom Section
 		structureSections
@@ -83,9 +83,9 @@ public class QuestBetweenTheWalls extends Quest {
 		structureRooms.add(bedRoom);
 
 		// Bedroom decorative walls
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 53][posY + 30], null));
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 53][posY + 34], null));
-		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[posX + 42][posY + 34], null));
+		structureExtraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[posX + 53][posY + 30], null));
+		structureExtraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[posX + 53][posY + 34], null));
+		structureExtraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[posX + 42][posY + 34], null));
 
 		// Path between the walls
 		StructurePath pathBetweenTheWalls = new StructurePath("Between the walls", false, false,
@@ -128,7 +128,7 @@ public class QuestBetweenTheWalls extends Quest {
 		// null));
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
 				structureFeatures, structureEntranceSquares, null, posX + 0, posY + 0, posX + 0, posY + 0, true, null,
-				structureSquaresToRemove, structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE, 2));
+				structureSquaresToRemove, structureExtraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 2));
 
 		// Antler switch
 		Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[posX + 53][posY + 19], null, Switch.SWITCH_TYPE.OPEN_CLOSE,

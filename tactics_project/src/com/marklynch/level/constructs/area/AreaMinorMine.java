@@ -65,7 +65,7 @@ public class AreaMinorMine {
 
 		Structure mine = new Structure("Minor Mine", mineSections, rooms, minePaths, mineFeatures,
 				new ArrayList<Square>(Square.class), "map_cave.png", 280, 76, 307, 97, true, null, squaresToRemove,
-				extraWalls, Templates.WALL, Square.STONE_TEXTURE, 5);
+				extraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(mine);
 
 		Bed bed = Templates.BED.makeCopy(Game.level.squares[303][90], null);

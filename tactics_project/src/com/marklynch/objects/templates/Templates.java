@@ -290,7 +290,8 @@ public class Templates {
 
 	public static GameObject DINNER_FORK;
 
-	public static Wall WALL;
+	public static Wall WALL_CAVE;
+	public static Wall WALL_BUILDING;
 	public static WallWithCrack WALL_WITH_CRACK;
 	public static Wall FALSE_WALL;
 	public static GameObject RUBBLE;

@@ -62,6 +62,8 @@ public class Wall extends GameObject {
 	public float quarterWidth = Game.SQUARE_WIDTH / 4;
 	public float quarterHeight = Game.SQUARE_HEIGHT / 4;
 
+	public float maxRandomness = 0f;
+
 	public Wall() {
 		super();
 
@@ -82,7 +84,7 @@ public class Wall extends GameObject {
 		// super.setInstances(gameObject);
 	}
 
-	public void initWall(float maxRandomness) {
+	public void initWall() {
 
 		if (squareGameObjectIsOn != null) {
 
@@ -318,6 +320,7 @@ public class Wall extends GameObject {
 	public Wall makeCopy(Square square, Actor owner) {
 		Wall wall = new Wall();
 		setInstances(wall);
+		wall.maxRandomness = this.maxRandomness;
 		super.setAttributesForCopy(wall, square, owner);
 		// if (wall.squareGameObjectIsOn != null) {
 		// wall.drawX1 = (int) (wall.squareGameObjectIsOn.xInGridPixels +
@@ -327,7 +330,7 @@ public class Wall extends GameObject {
 		// wall.drawOffsetRatioY);
 		// wall.drawY2 = (int) (wall.drawY1 + wall.height);
 		// }
-		wall.initWall(16f);
+		wall.initWall();
 		return wall;
 	}
 

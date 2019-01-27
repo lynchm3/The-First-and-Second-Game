@@ -15,17 +15,31 @@ public class TemplatesBuilding {
 
 	public TemplatesBuilding() {
 
-		Templates.WALL = new Wall();
-		Templates.WALL.name = "Wall";
-		Templates.WALL.imageTexture = getGlobalImage("wall.png", true);
-		Templates.WALL.totalHealth = Templates.WALL.remainingHealth = 1000;
-		Templates.WALL.soundWhenHit = 10f;
-		Templates.WALL.soundWhenHitting = 1f;
-		Templates.WALL.soundDampening = 10f;
-		Templates.WALL.weight = 100f;
-		Templates.WALL.value = 24;
-		Templates.WALL.templateId = GameObject.generateNewTemplateId();
-		Templates.WALL.makeIndestructible();
+		Templates.WALL_CAVE = new Wall();
+		Templates.WALL_CAVE.name = "Cave Wall";
+		Templates.WALL_CAVE.imageTexture = getGlobalImage("wall_cave.png", true);
+		Templates.WALL_CAVE.totalHealth = Templates.WALL_CAVE.remainingHealth = 1000;
+		Templates.WALL_CAVE.soundWhenHit = 10f;
+		Templates.WALL_CAVE.soundWhenHitting = 1f;
+		Templates.WALL_CAVE.soundDampening = 10f;
+		Templates.WALL_CAVE.weight = 1000f;
+		Templates.WALL_CAVE.value = 24;
+		Templates.WALL_CAVE.maxRandomness = 16f;
+		Templates.WALL_CAVE.templateId = GameObject.generateNewTemplateId();
+		Templates.WALL_CAVE.makeIndestructible();
+
+		Templates.WALL_BUILDING = new Wall();
+		Templates.WALL_BUILDING.name = "Building Wall";
+		Templates.WALL_BUILDING.imageTexture = getGlobalImage("wall_building.png", true);
+		Templates.WALL_BUILDING.totalHealth = Templates.WALL_BUILDING.remainingHealth = 1000;
+		Templates.WALL_BUILDING.soundWhenHit = 10f;
+		Templates.WALL_BUILDING.soundWhenHitting = 1f;
+		Templates.WALL_BUILDING.soundDampening = 10f;
+		Templates.WALL_BUILDING.weight = 1000f;
+		Templates.WALL_BUILDING.value = 29;
+		Templates.WALL_CAVE.maxRandomness = 4f;
+		Templates.WALL_BUILDING.templateId = GameObject.generateNewTemplateId();
+		Templates.WALL_BUILDING.makeIndestructible();
 
 		Templates.WALL_WITH_CRACK = new WallWithCrack();
 		Templates.WALL_WITH_CRACK.name = "Wall";

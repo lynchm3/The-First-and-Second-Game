@@ -47,8 +47,8 @@ public class PuzzleRoomFriendlyCaveIn extends StructureRoom implements DeathList
 		caveInSquares.add(Level.squares[posX + 3][posY + 2]);
 		caveInSquares.add(Level.squares[posX + 3][posY + 3]);
 
-		Wall wall = Templates.WALL.makeCopy(Level.squares[posX + 1][posY], null);
-		wall.initWall(0);
+		Wall wall = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 1][posY], null);
+		wall.initWall();
 
 		supportingWall = Templates.WALL_WITH_CRACK.makeCopy(Level.squares[posX][posY], null);
 		supportingWall.squaresToHighlight.addAll(caveInSquares);

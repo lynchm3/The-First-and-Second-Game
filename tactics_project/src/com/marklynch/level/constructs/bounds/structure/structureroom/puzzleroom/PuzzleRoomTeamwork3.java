@@ -38,18 +38,18 @@ public class PuzzleRoomTeamwork3 extends StructureRoom {
 		RemoteDoor remoteDoor3 = Templates.REMOTE_DOOR.makeCopy("Remote Door", Level.squares[posX + 15][posY + 5],
 				false, null);
 
-		Wall wall1 = Templates.WALL.makeCopy(Level.squares[posX + 2][posY + 1], null);
-		Wall wall2 = Templates.WALL.makeCopy(Level.squares[posX + 2][posY + 2], null);
-		Wall wall3 = Templates.WALL.makeCopy(Level.squares[posX + 2][posY + 3], null);
-		Wall wall4 = Templates.WALL.makeCopy(Level.squares[posX + 2][posY + 4], null);
+		Wall wall1 = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 2][posY + 1], null);
+		Wall wall2 = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 2][posY + 2], null);
+		Wall wall3 = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 2][posY + 3], null);
+		Wall wall4 = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 2][posY + 4], null);
 
-		Wall wall5 = Templates.WALL.makeCopy(Level.squares[posX + 8][posY + 3], null);
-		Wall wall6 = Templates.WALL.makeCopy(Level.squares[posX + 8][posY + 4], null);
-		Wall wall7 = Templates.WALL.makeCopy(Level.squares[posX + 8][posY + 5], null);
+		Wall wall5 = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 8][posY + 3], null);
+		Wall wall6 = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 8][posY + 4], null);
+		Wall wall7 = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 8][posY + 5], null);
 
-		Wall wall8 = Templates.WALL.makeCopy(Level.squares[posX + 12][posY + 8], null);
-		Wall wall9 = Templates.WALL.makeCopy(Level.squares[posX + 13][posY + 8], null);
-		Wall wall10 = Templates.WALL.makeCopy(Level.squares[posX + 14][posY + 8], null);
+		Wall wall8 = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 12][posY + 8], null);
+		Wall wall9 = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 13][posY + 8], null);
+		Wall wall10 = Templates.WALL_CAVE.makeCopy(Level.squares[posX + 14][posY + 8], null);
 
 		features.add(new StructureFeature(remoteDoor1));
 		features.add(new StructureFeature(remoteDoor2));

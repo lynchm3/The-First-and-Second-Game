@@ -250,7 +250,7 @@ public class QuestSmallGame extends Quest {
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeRooms,
 				new ArrayList<StructurePath>(StructurePath.class), lodgeFeatures, new ArrayList<Square>(Square.class),
 				"building.png", 896, 896 + 640, 896, 896 + 640, true, hunterBrent, new ArrayList<Square>(Square.class),
-				new ArrayList<Wall>(Wall.class), Templates.WALL, Square.STONE_TEXTURE, 2);
+				new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE, Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(lodge);
 
 		// Add hunters
@@ -335,7 +335,7 @@ public class QuestSmallGame extends Quest {
 		sectionsBarracks.add(new StructureSection("Barracks", 74, 52, 85, 61, false, false));
 		Structure barracks = new Structure("Barracks", sectionsBarracks, roomsBarracks, pathsBarracks, featuresBarracks,
 				new ArrayList<Square>(Square.class), null, 74, 52, 85, 61, true, null, squaresToRemoveBarracks,
-				extraWallsBarracks, Templates.WALL, Square.STONE_TEXTURE, 5);
+				extraWallsBarracks, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(barracks);
 
 		// Fisherman
@@ -380,7 +380,7 @@ public class QuestSmallGame extends Quest {
 		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false, false));
 		Structure thievesHut = new Structure("Hut", sectionsThievesHut, roomsThievesHut, pathsThievesHut,
 				featuresThievesHut, new ArrayList<Square>(Square.class), null, 113, 52, 117, 56, true, null,
-				squaresToRemoveThievesHut, extraWallsThievesHut, Templates.WALL, Square.STONE_TEXTURE, 5);
+				squaresToRemoveThievesHut, extraWallsThievesHut, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(thievesHut);
 
 		Templates.HATCHET.makeCopy(Game.level.squares[10][17], t3);
@@ -429,7 +429,7 @@ public class QuestSmallGame extends Quest {
 		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false, false));
 		Structure rangerHut = new Structure("Ranger's Hut", sectionsRangersHut, roomsRangersHut, pathsRangersHut,
 				featuresRangersHut, new ArrayList<Square>(Square.class), null, 129, 33, 133, 37, true, null,
-				squaresToRemoveRangersHut, extraWallsRangersHut, Templates.WALL, Square.STONE_TEXTURE, 5);
+				squaresToRemoveRangersHut, extraWallsRangersHut, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(rangerHut);
 
 		// wolf

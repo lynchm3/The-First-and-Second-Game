@@ -263,7 +263,7 @@ public class Load {
 					if (objectToLoad instanceof Square) {
 						Level.squaresToSave.add((Square) objectToLoad);
 					} else if (objectToLoad instanceof Wall) {
-						((Wall) objectToLoad).initWall(16f);
+						((Wall) objectToLoad).initWall();
 					}
 
 					if (objectToLoad instanceof GameObject) {

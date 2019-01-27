@@ -196,7 +196,7 @@ public class QuestList extends ArrayList<Quest> {
 
 		Structure puzzleStructure = new Structure("Puzzle Structure", structureSections, puzzleStructureRooms, paths,
 				features, entrances, "building2.png", puzzleRoomsX, puzzleRoomsY, puzzleRoomsX + 100,
-				puzzleRoomsY + 100, true, null, squaresToRemove, extraWalls, Templates.WALL, Square.STONE_TEXTURE, 10);
+				puzzleRoomsY + 100, true, null, squaresToRemove, extraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 10);
 
 	}
 
