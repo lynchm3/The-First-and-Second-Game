@@ -39,22 +39,16 @@ public class PowerFindMatch extends Power {
 
 	@Override
 	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
-		// sumthing like this, altho omne will happen after u press on target, other
-		// when u press on obj
-		// maybe i change the state between 2 click and one click
 
-		System.out.println("PowerFindMatch.cast() a");
-		System.out.println("target = " + target);
-		System.out.println("targetGameObject = " + targetGameObject);
+		Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
+		if (playersFindMathchPower == null)
+			return;
 
-		if (target == null && targetGameObject != null) {
-			System.out.println("PowerFindMatch.cast() b");
-			Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
+		if (playersFindMathchPower.target == null && targetGameObject != null) {
 			playersFindMathchPower.target = targetToMatch = targetGameObject;
 			playersFindMathchPower.toggledOn = true;
 			playersFindMathchPower.selectTarget = false;
 		} else {
-			Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
 			playersFindMathchPower.target = targetToMatch = null;
 			playersFindMathchPower.toggledOn = false;
 			playersFindMathchPower.selectTarget = true;
@@ -75,20 +69,14 @@ public class PowerFindMatch extends Power {
 	@Override
 	public void drawUI() {
 
-		System.out.println("drawUI() a");
 		if (targetToMatch == null)
 			return;
-		System.out.println("drawUI() b");
 
 		Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
 		if (playersFindMathchPower.toggledOn == false)
 			return;
-		System.out.println("drawUI() c");
-
-		System.out.println("links size = " + targetToMatch.linkedGameObjects.size());
 
 		Square square = targetToMatch.getWorldSquareGameObjectIsOn();
-		System.out.println("square = " + square);
 		if (square == null)
 			return;
 		float x1 = (Game.halfWindowWidth) + (Game.zoom

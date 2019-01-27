@@ -50,41 +50,13 @@ public class ActionDie extends Action {
 		if (gameObjectPerformer != null && targetSquare.visibleToPlayer && gameObjectPerformer instanceof Actor)
 			Game.level.player.addXP(gameObjectPerformer.level, gameObjectPerformer.squareGameObjectIsOn);
 
-		// Remove from draw/update
-		if (gameObjectPerformer != Game.level.player) {
-			if (gameObjectPerformer instanceof Actor) {
-				// if (gameObjectPerformer.squareGameObjectIsOn != null) {
-				// Game.level.inanimateObjectsOnGround.remove(gameObjectPerformer);
-				// gameObjectPerformer.squareGameObjectIsOn.inventory.remove(gameObjectPerformer);
-				// } else if (gameObjectPerformer.inventoryThatHoldsThisObject != null) {
-				// gameObjectPerformer.inventoryThatHoldsThisObject.remove(gameObjectPerformer);
-				// }
-				// Game.level.actorsToRemove.add((Actor) gameObjectPerformer);
-
-			} else {
-
-//				targetSquare.inventory.remove(target);
-				// if (gameObjectPerformer instanceof VoidHole) {
-				// System.out.println("inanimateObjectsOnGroundToRemove.add " +
-				// gameObjectPerformer);
-				// Utils.printStackTrace();
-				// }
-				// Game.level.inanimateObjectsOnGround.add(gameObjectPerformer);
-			}
-		}
-
-		if (gameObjectPerformer.squareGameObjectIsOn != null) {
+		if (gameObjectPerformer.squareGameObjectIsOn != null && !(gameObjectPerformer instanceof Actor)) {
 			gameObjectPerformer.squareGameObjectIsOn.inventory.remove(gameObjectPerformer);
-		}
-
-		if (gameObjectPerformer.squareGameObjectIsOn != null)
 			gameObjectPerformer.squareGameObjectIsOn.inventory.refresh();
+		}
 
 		if (gameObjectPerformer.deathListener != null)
 			gameObjectPerformer.deathListener.thisThingDied(gameObjectPerformer);
-
-		// this.faction.actors.remove(this);
-		// gameObjectPerformer.actionsPerformedThisTurn.add(this);
 
 		if (sound != null)
 			sound.play();

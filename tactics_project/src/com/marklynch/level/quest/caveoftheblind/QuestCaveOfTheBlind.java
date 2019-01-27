@@ -259,10 +259,10 @@ public class QuestCaveOfTheBlind extends Quest {
 				Nodes.caveOfTheBlindWest));
 		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[256][10], null),
 				Nodes.caveOfTheBlindWest));
-		caveFeatures.add(new StructureFeature(
-				Templates.WEAK_WOODEN_DOOR.makeCopy("Security Door", Game.level.squares[257][10], true, true, true,
-						null, mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class)),
-				Nodes.caveOfTheBlindWest));
+
+		Door mortsDoor = Templates.WEAK_WOODEN_DOOR.makeCopy("Security Door", Game.level.squares[257][10], true, true,
+				true, null, mortsKey);
+		caveFeatures.add(new StructureFeature(mortsDoor, Nodes.caveOfTheBlindWest));
 		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[258][10], null),
 				Nodes.caveOfTheBlindWest));
 		caveFeatures.add(new StructureFeature(Templates.BARRICADE.makeCopy(Game.level.squares[259][10], null),
