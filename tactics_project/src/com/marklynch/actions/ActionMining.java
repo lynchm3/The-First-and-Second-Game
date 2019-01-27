@@ -156,7 +156,11 @@ public class ActionMining extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
-		performer.equipped = performer.equippedBeforePickingUpObject;
+
+		if (performer == Level.player) {
+			if (!(Player.playerTargetAction instanceof ActionMining) || !shouldContinue())
+				performer.equipped = performer.equippedBeforePickingUpObject;
+		}
 
 	}
 

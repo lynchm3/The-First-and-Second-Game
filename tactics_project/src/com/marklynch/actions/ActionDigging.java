@@ -139,7 +139,11 @@ public class ActionDigging extends Action {
 			Game.level.endPlayerTurn();
 		if (sound != null)
 			sound.play();
-		performer.equipped = performer.equippedBeforePickingUpObject;
+
+		if (performer == Level.player) {
+			if (!(Player.playerTargetAction instanceof ActionDigging) || !shouldContinue())
+				performer.equipped = performer.equippedBeforePickingUpObject;
+		}
 	}
 
 	@Override

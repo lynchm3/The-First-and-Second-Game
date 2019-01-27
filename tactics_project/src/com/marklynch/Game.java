@@ -37,6 +37,9 @@ import mdesl.test.Util;
 
 public class Game {
 
+	public static int playerStartPosX = 167;
+	public static int playerStartPosY = 165;
+
 	// 104,151 boulder kill do it.
 	// Or even stand on that spot urself
 
@@ -62,10 +65,6 @@ public class Game {
 	public static boolean highlightPath = false;;
 
 	// PLAYER START POSITION
-
-	// Puzzles yo
-	public static int playerStartPosX = 125;
-	public static int playerStartPosY = 112;
 
 	// Shop
 	// public static int playerStartPosX = 13;
