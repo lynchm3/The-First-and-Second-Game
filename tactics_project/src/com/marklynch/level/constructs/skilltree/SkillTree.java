@@ -16,7 +16,7 @@ import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerDash;
 import com.marklynch.level.constructs.power.PowerDouse;
 import com.marklynch.level.constructs.power.PowerFindMatch;
-import com.marklynch.level.constructs.power.PowerGrabber;
+import com.marklynch.level.constructs.power.PowerQuickFingers;
 import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerHealTouch;
@@ -100,7 +100,7 @@ public class SkillTree implements Draggable, Scrollable {
 		activateAtStart.add(grabber);
 		grabber.name = "Grabber";
 		grabber.description = "Grabber";
-		grabber.powersUnlocked.add(new PowerGrabber(null));
+		grabber.powersUnlocked.add(new PowerQuickFingers(null));
 		skillTreeNodes.add(grabber);
 		// respite.linkedSkillTreeNodes.add(grabber);
 		// grabber.linkedSkillTreeNodes.add(respite);
