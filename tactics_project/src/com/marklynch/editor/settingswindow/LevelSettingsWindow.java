@@ -150,10 +150,11 @@ public class LevelSettingsWindow extends SettingsWindow {
 				Game.level.activeActor = Game.level.player;
 				System.out.println(Game.level.activeActor);
 				// Game.level.activeActor.equip(Game.level.activeActor.getWeaponsInInventory().get(0));
-				Game.level.player.calculateVisibleSquares(Game.level.activeActor.squareGameObjectIsOn);
 				Game.level.turn = 1;
 				Game.level = Game.level;
 				Game.editorMode = false;
+				Game.level.player.calculateVisibleSquares(Game.level.activeActor.squareGameObjectIsOn);
+
 				// Game.runBlurAnimation();
 			}
 		};

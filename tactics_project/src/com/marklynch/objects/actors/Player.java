@@ -298,6 +298,11 @@ public class Player extends Human {
 
 	public void calculateVisibleSquares(Square square) {
 
+		if (Game.editorMode)
+			return;
+
+//		Utils.printStackTrace();
+
 		// for (int x = 0; x < Game.level.squares.length; x++) {
 		// for (int y = 0; y < Game.level.squares[0].length; y++) {
 		// Game.level.squares[x][y].visibleToSelectedCharacter = false;

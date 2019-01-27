@@ -23,6 +23,7 @@ public class Vein extends GameObject {
 	public Vein() {
 		super();
 		type = "Vein";
+		blocksLineOfSight = true;
 	}
 
 	@Override
