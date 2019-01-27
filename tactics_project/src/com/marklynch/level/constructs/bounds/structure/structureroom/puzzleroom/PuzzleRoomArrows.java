@@ -41,6 +41,12 @@ public class PuzzleRoomArrows extends StructureRoom {
 
 		buildHorizontalArrow();
 		buildVerticalArrow();
+
+		for (int i = posX; i < posX + totalWidthInSquares; i++) {
+			for (int j = posY; j < posY + totalHeightInSquares; j++) {
+				Level.squares[i][j].setFloorImageTexture(Square.DARK_GRASS_TEXTURE);
+			}
+		}
 	}
 
 	private void buildHorizontalArrow() {
