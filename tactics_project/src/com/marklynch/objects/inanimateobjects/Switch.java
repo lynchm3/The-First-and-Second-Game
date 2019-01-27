@@ -1,13 +1,12 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.SwitchListener;
+import com.marklynch.utils.ArrayList;
 
 public class Switch extends GameObject {
 
@@ -74,6 +73,14 @@ public class Switch extends GameObject {
 		zwitch.actionName = actionName;
 		zwitch.actionVerb = actionVerb;
 		zwitch.switchListeners = switchListeners;
+		for (SwitchListener switchListener : switchListeners) {
+
+			if (switchListener instanceof GameObject) {
+				GameObject switchListenerGameObject = (GameObject) switchListener;
+				zwitch.linkedGameObjects.add(switchListenerGameObject);
+				switchListenerGameObject.linkedGameObjects.add(zwitch);
+			}
+		}
 		zwitch.switchType = switchType;
 		zwitch.requirementsToMeet = requirementsToMeet;
 		for (SwitchListener switchListener : switchListeners) {

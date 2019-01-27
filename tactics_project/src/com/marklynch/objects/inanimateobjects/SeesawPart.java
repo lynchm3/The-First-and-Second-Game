@@ -23,6 +23,14 @@ public class SeesawPart extends PressurePlate {
 		SeesawPart seesawPart = new SeesawPart();
 		seesawPart.connectedSquare = connectedSquare;
 		seesawPart.switchListeners = switchListeners;
+		for (SwitchListener switchListener : switchListeners) {
+
+			if (switchListener instanceof GameObject) {
+				GameObject switchListenerGameObject = (GameObject) switchListener;
+				seesawPart.linkedGameObjects.add(switchListenerGameObject);
+				switchListenerGameObject.linkedGameObjects.add(seesawPart);
+			}
+		}
 		setInstances(seesawPart);
 		super.setAttributesForCopy(seesawPart, square, owner);
 		seesawPart.actionName = actionName;

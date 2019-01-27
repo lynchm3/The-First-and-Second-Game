@@ -93,12 +93,23 @@ public class PressurePlateRequiringSpecificItem extends Switch {
 
 		PressurePlateRequiringSpecificItem pressurePlate = new PressurePlateRequiringSpecificItem();
 		pressurePlate.switchListeners = switchListeners;
+		for (SwitchListener switchListener : switchListeners) {
+
+			if (switchListener instanceof GameObject) {
+				GameObject switchListenerGameObject = (GameObject) switchListener;
+				pressurePlate.linkedGameObjects.add(switchListenerGameObject);
+				switchListenerGameObject.linkedGameObjects.add(pressurePlate);
+			}
+		}
+
 		setInstances(pressurePlate);
 		super.setAttributesForCopy(pressurePlate, square, owner);
 		pressurePlate.actionName = actionName;
 		pressurePlate.actionVerb = actionVerb;
 		pressurePlate.switchType = switchType;
 		pressurePlate.keyObject = keyObject;
+		keyObject.linkedGameObjects.add(pressurePlate);
+		pressurePlate.linkedGameObjects.add(keyObject);
 
 		for (SwitchListener switchListener : switchListeners) {
 			if (switchListener != null && switchListener instanceof GameObject)

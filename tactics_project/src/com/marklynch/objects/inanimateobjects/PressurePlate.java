@@ -92,6 +92,14 @@ public class PressurePlate extends Switch {
 
 		PressurePlate pressurePlate = new PressurePlate();
 		pressurePlate.switchListeners = switchListeners;
+		for (SwitchListener switchListener : switchListeners) {
+
+			if (switchListener instanceof GameObject) {
+				GameObject switchListenerGameObject = (GameObject) switchListener;
+				pressurePlate.linkedGameObjects.add(switchListenerGameObject);
+				switchListenerGameObject.linkedGameObjects.add(pressurePlate);
+			}
+		}
 		setInstances(pressurePlate);
 		super.setAttributesForCopy(pressurePlate, square, owner);
 		pressurePlate.actionName = actionName;
