@@ -83,6 +83,9 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkLegality() {
+
+		System.out.println("objectToTake.owner = " + objectToTake.owner);
+
 		if (objectToTake.owner != null && objectToTake.owner != performer) {
 			illegalReason = THEFT;
 			return false;

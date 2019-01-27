@@ -118,15 +118,15 @@ public class Trader extends Human implements Comparator<GameObject> {
 		actor.requiredEquipmentTemplateIds = requiredEquipmentTemplateIds;
 		actor.hobbies = hobbies;
 
-		actor.broom = Templates.BROOM.makeCopy(null, null);
+		actor.broom = Templates.BROOM.makeCopy(null, actor);
 		actor.inventory.add(actor.broom);
 		actor.equip(actor.broom);
 
-		actor.apron = Templates.APRON.makeCopy(null, null);
+		actor.apron = Templates.APRON.makeCopy(null, actor);
 		actor.inventory.add(actor.apron);
 		actor.bodyArmor = actor.apron;
 
-		actor.pants = Templates.PANTS.makeCopy(null, null);
+		actor.pants = Templates.PANTS.makeCopy(null, actor);
 		actor.inventory.add(actor.pants);
 		actor.legArmor = actor.pants;
 

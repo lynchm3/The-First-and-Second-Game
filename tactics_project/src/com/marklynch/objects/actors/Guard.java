@@ -1,7 +1,5 @@
 package com.marklynch.objects.actors;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
@@ -10,6 +8,7 @@ import com.marklynch.objects.armor.BodyArmor;
 import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.utils.ArrayList;
 
 public class Guard extends Human {
 
@@ -50,11 +49,11 @@ public class Guard extends Human {
 		actor.patrolSquares = patrolSquares;
 		actor.hobbies = hobbies;
 
-		BodyArmor chainmail = Templates.CHAINMAIL.makeCopy(null, null);
+		BodyArmor chainmail = Templates.CHAINMAIL.makeCopy(null, actor);
 		actor.inventory.add(chainmail);
 		actor.bodyArmor = chainmail;
 
-		LegArmor pants = Templates.PANTS.makeCopy(null, null);
+		LegArmor pants = Templates.PANTS.makeCopy(null, actor);
 		actor.inventory.add(pants);
 		actor.legArmor = pants;
 

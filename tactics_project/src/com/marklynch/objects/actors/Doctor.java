@@ -1,6 +1,5 @@
 package com.marklynch.objects.actors;
 
-import com.marklynch.utils.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -15,6 +14,7 @@ import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.utils.ArrayList;
 
 public class Doctor extends Human implements Comparator<GameObject> {
 
@@ -111,11 +111,11 @@ public class Doctor extends Human implements Comparator<GameObject> {
 		// actor.inventory.add(actor.broom);
 		// actor.equip(actor.broom);
 
-		actor.apron = Templates.APRON.makeCopy(null, null);
+		actor.apron = Templates.APRON.makeCopy(null, actor);
 		actor.inventory.add(actor.apron);
 		actor.bodyArmor = actor.apron;
 
-		actor.pants = Templates.PANTS.makeCopy(null, null);
+		actor.pants = Templates.PANTS.makeCopy(null, actor);
 		actor.inventory.add(actor.pants);
 		actor.legArmor = actor.pants;
 

@@ -1,7 +1,5 @@
 package com.marklynch.objects.actors;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
@@ -11,6 +9,7 @@ import com.marklynch.objects.armor.BodyArmor;
 import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.utils.ArrayList;
 
 public class Thief extends Human {
 
@@ -47,11 +46,11 @@ public class Thief extends Human {
 		actor.requiredEquipmentTemplateIds = requiredEquipmentTemplateIds;
 		actor.hobbies = hobbies;
 
-		BodyArmor robe = Templates.ROBE.makeCopy(null, null);
+		BodyArmor robe = Templates.ROBE.makeCopy(null, actor);
 		actor.inventory.add(robe);
 		actor.bodyArmor = robe;
 
-		LegArmor pants = Templates.PANTS.makeCopy(null, null);
+		LegArmor pants = Templates.PANTS.makeCopy(null, actor);
 		actor.inventory.add(pants);
 		actor.legArmor = pants;
 

@@ -1,11 +1,10 @@
 package com.marklynch.objects.actors;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ResourceUtils;
 
 public class Human extends Actor {
@@ -42,17 +41,17 @@ public class Human extends Actor {
 		actor.hobbies = hobbies;
 
 		if (bodyArmor != null) {
-			actor.bodyArmor = bodyArmor.makeCopy(null, null);
+			actor.bodyArmor = bodyArmor.makeCopy(null, actor);
 			actor.inventory.add(actor.bodyArmor);
 		}
 
 		if (legArmor != null) {
-			actor.legArmor = legArmor.makeCopy(null, null);
+			actor.legArmor = legArmor.makeCopy(null, actor);
 			actor.inventory.add(actor.legArmor);
 		}
 
 		if (helmet != null) {
-			actor.helmet = helmet.makeCopy(null, null);
+			actor.helmet = helmet.makeCopy(null, actor);
 			actor.inventory.add(actor.helmet);
 		}
 
