@@ -24,12 +24,20 @@ public class PuzzleRoomCrumblingWall extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 		// Wall wall = Templates.WALL.makeCopy(Level.squares[posX - 1][posY + 2], null);
-		woodenSupport = Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX][posY + 2], null,
-				Level.squares[posX - 1][posY].inventory.getGameObjectOfClass(Wall.class),
-				Level.squares[posX - 1][posY + 1].inventory.getGameObjectOfClass(Wall.class),
-				Level.squares[posX - 1][posY + 2].inventory.getGameObjectOfClass(Wall.class),
-				Level.squares[posX - 1][posY + 3].inventory.getGameObjectOfClass(Wall.class),
-				Level.squares[posX - 1][posY + 4].inventory.getGameObjectOfClass(Wall.class));
+
+		System.out.println("posX - 1 = " + (posX - 1) + ", posY = " + (posY));
+		System.out.println("Wall @ that = " + Level.squares[posX - 1][posY].inventory.getGameObjectOfClass(Wall.class));
+		// So... the square is correct
+		// But the wall jus isnt there...
+		// There was a suggestion to move it left from me in notes, so can try that...
+		ArrayList<GameObject> walls = new ArrayList<GameObject>(GameObject.class);
+		walls.add(Templates.WALL.makeCopy(Level.squares[posX - 1][posY], null));
+		walls.add(Templates.WALL.makeCopy(Level.squares[posX - 1][posY + 1], null));
+		walls.add(Templates.WALL.makeCopy(Level.squares[posX - 1][posY + 2], null));
+		walls.add(Templates.WALL.makeCopy(Level.squares[posX - 1][posY + 3], null));
+		walls.add(Templates.WALL.makeCopy(Level.squares[posX - 1][posY + 4], null));
+
+		woodenSupport = Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX][posY + 2], null, walls);
 	}
 
 }

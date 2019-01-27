@@ -7,7 +7,7 @@ import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 
-public class AnimationWalk extends Animation {
+public class AnimationWalkOLD extends Animation {
 
 	public float keyFrameTimeMillis = 0; // There's 4 keyframes per walk
 
@@ -20,17 +20,6 @@ public class AnimationWalk extends Animation {
 	float quarterDurationToReach;
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
-
-	// y
-	// torso angle
-	// left hip
-	// left knee
-	// right hip
-	// right knee
-	//
-	//
-	//
-	//
 
 	// 0
 	static final float targetOffsetY0 = 0;
@@ -117,7 +106,7 @@ public class AnimationWalk extends Animation {
 
 	// for show only, walking actor, primary
 
-	public AnimationWalk(GameObject performer, Square startSquare, Square endSquare, int walkingPhase,
+	public AnimationWalkOLD(GameObject performer, Square startSquare, Square endSquare, int walkingPhase,
 			OnCompletionListener onCompletionListener) {
 		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer, endSquare);
 		if (!runAnimation)

@@ -33,12 +33,10 @@ public class WallSupport extends GameObject {
 	}
 
 	public WallSupport makeCopy(Square square, Actor owner, GameObject... supportedGameObjects) {
-
 		return makeCopy(square, owner, new java.util.ArrayList<>(Arrays.asList(supportedGameObjects)));
 	}
 
 	public WallSupport makeCopy(Square square, Actor owner, java.util.ArrayList<GameObject> supportedGameObjects) {
-
 		WallSupport support = new WallSupport();
 		setInstances(support);
 		super.setAttributesForCopy(support, square, owner);
