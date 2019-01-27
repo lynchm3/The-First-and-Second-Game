@@ -34,6 +34,7 @@ public abstract class Power {
 	public boolean passive = false;
 	public boolean toggledOn = true;
 	public boolean activateAtStartOfTurn = false;
+	public boolean endsTurn = true;
 
 	public int range;
 	public Point[] castLocations;

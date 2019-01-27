@@ -203,6 +203,7 @@ public class TemplatesFurniture {
 		Templates.REMOTE_SWITCH.fitsInInventory = true;
 		Templates.REMOTE_SWITCH.canBePickedUp = true;
 		Templates.REMOTE_SWITCH.persistsWhenCantBeSeen = false;
+		Templates.REMOTE_SWITCH.backwards = false;
 		Templates.REMOTE_SWITCH.actionName = "Press";
 		Templates.REMOTE_SWITCH.actionVerb = "pressed";
 		Templates.REMOTE_SWITCH.anchorX = 6;

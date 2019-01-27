@@ -422,6 +422,7 @@ public class GameObject
 			actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
 		}
+
 		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
 		float alpha = 1.0f;

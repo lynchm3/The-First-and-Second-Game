@@ -22,6 +22,7 @@ public class PowerRespite extends Power {
 		super(NAME, ResourceUtils.getGlobalImage("bed.png", false), source, new Effect[] {}, 0, null,
 				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
 		passive = true;
+		endsTurn = false;
 		activateAtStartOfTurn = true;
 	}
 

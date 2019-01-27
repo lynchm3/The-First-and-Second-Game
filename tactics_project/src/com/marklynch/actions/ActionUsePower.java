@@ -79,7 +79,7 @@ public class ActionUsePower extends Action {
 				trespassingCheck(this, performer, gameObjectPerformer.squareGameObjectIsOn);
 		}
 
-		if (gameObjectPerformer == Game.level.player && !power.passive && !(power instanceof PowerTeleportOther))
+		if (gameObjectPerformer == Game.level.player && power.endsTurn && !(power instanceof PowerTeleportOther))
 			Game.level.endPlayerTurn();
 	}
 
