@@ -116,10 +116,11 @@ public class AnimationPushed extends Animation {
 
 	@Override
 	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
-		leftShoulderAngle = 0;
-		rightShoulderAngle = 0;
-
-		targetSquare.inventory.add(performer);
+		if (performer != null) {
+			offsetX = 0;
+			offsetY = 0;
+			targetSquare.inventory.add(performer);
+		}
 
 	}
 

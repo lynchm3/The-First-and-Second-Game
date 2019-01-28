@@ -75,7 +75,6 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
-import com.marklynch.utils.Utils;
 
 public class Level {
 
@@ -2107,7 +2106,6 @@ public class Level {
 	public static void startPlayerTurn() {
 		System.out.println("----------------START PLAYER TURN----------------- st = ");
 
-		Utils.printStackTrace();
 		Level.turn++;
 		loggedThisTurn = false;
 
@@ -2147,7 +2145,6 @@ public class Level {
 		}
 
 		// Game.level.activeActor = null;
-		System.out.println("calling update on updatable objects");
 		for (UpdatableGameObject updatableGameObject : (ArrayList<UpdatableGameObject>) updatableGameObjects.clone()) {
 			updatableGameObject.update(0);
 		}
@@ -2177,7 +2174,6 @@ public class Level {
 	public void endPlayerTurn() {
 
 		System.out.println("----------------END PLAYER TURN----------------- st = ");
-		Utils.printStackTrace();
 
 		// Utils.printStackTrace();
 

@@ -2496,6 +2496,9 @@ public class GameObject
 
 	public void setPrimaryAnimation(Animation animation) {
 
+		if (this == Level.player)
+			System.out.println("new animation for player = " + animation);
+
 		if (animation == null || animation.runAnimation == false)
 			return;
 

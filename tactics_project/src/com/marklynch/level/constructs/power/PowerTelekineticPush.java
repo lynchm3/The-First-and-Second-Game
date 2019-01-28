@@ -41,8 +41,6 @@ public class PowerTelekineticPush extends Power {
 	@Override
 	public void cast(final GameObject source, GameObject targetGameObject, Square targetSquare, final Action action) {
 
-		System.out.println("PowerTelekineticPush.cast targetGameObject = " + targetGameObject);
-
 		if (targetSquare.inventory.contains(source))
 			return;
 

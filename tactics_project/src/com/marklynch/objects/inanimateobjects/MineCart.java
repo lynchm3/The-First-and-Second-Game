@@ -114,14 +114,8 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 									if (gameObject.moveable == false)
 										continue;
 
-									System.out.println("gameObject to push = " + gameObject);
-									System.out.println("phase = " + phase);
-									System.out.println("performer = " + performer);
-
 									Action telekineticPushAction = new ActionUsePower(performer, gameObject,
 											this.targetSquares[phase], new PowerTelekineticPush10(performer));
-									System.out.println(
-											"telekineticPushAction.enabled = " + telekineticPushAction.enabled);
 
 									telekineticPushAction.perform();
 								}

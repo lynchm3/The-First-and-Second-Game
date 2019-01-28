@@ -45,9 +45,6 @@ public class PowerFindMatch extends Power {
 		if (playersFindMathchPower == null)
 			return;
 
-		System.out.println("targetGameObject = " + targetGameObject);
-		System.out.println("targetSquare = " + targetSquare);
-
 		if (targetGameObject == null && targetSquare != null) {
 			for (GameObject gameObjectOnTargetSquare : targetSquare.inventory.gameObjects) {
 				if (gameObjectOnTargetSquare.linkedGameObjects.size() > 0) {
@@ -57,7 +54,6 @@ public class PowerFindMatch extends Power {
 			}
 		}
 
-		System.out.println("targetGameObject = " + targetGameObject);
 		if (playersFindMathchPower.target == null && targetGameObject != null) {
 			playersFindMathchPower.target = targetToMatch = targetGameObject;
 			playersFindMathchPower.toggledOn = true;

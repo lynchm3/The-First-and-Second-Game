@@ -23,9 +23,6 @@ public class AnimationStraightLine extends Animation {
 		if (!runAnimation)
 			return;
 
-		System.out.println("AnimationStraightLine");
-		System.out.println("AnimationStraightLine performer = " + performer);
-
 		this.targetSquares = targetSquares;
 
 		this.x = performer.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
@@ -56,11 +53,7 @@ public class AnimationStraightLine extends Animation {
 			kf0.keyFrameTimeMillis = keyFrameTimeMillis;
 			kf0.normaliseSpeeds = true;
 			keyFrames.add(kf0);
-			System.out.println("AnimationStraightLine kf0.offsetX = " + kf0.offsetX);
-			System.out.println("AnimationStraightLine kf0.offsetY = " + kf0.offsetY);
-			System.out.println("AnimationStraightLine kf0.keyFrameTimeMillis = " + kf0.keyFrameTimeMillis);
 		}
-
 	}
 
 	@Override
