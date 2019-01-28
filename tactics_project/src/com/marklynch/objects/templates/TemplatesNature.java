@@ -375,18 +375,6 @@ public class TemplatesNature {
 		Templates.STONE_FLOOR.orderingOnGound = 20;
 		Templates.STONE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
-		Templates.CIRCLE_FLOOR = new GameObject();
-		Templates.CIRCLE_FLOOR.name = "Floor";
-		Templates.CIRCLE_FLOOR.imageTexture = getGlobalImage("circle.png", true);
-		Templates.CIRCLE_FLOOR.canBePickedUp = false;
-		Templates.CIRCLE_FLOOR.fitsInInventory = false;
-		Templates.CIRCLE_FLOOR.persistsWhenCantBeSeen = true;
-		Templates.CIRCLE_FLOOR.attackable = false;
-		Templates.CIRCLE_FLOOR.isFloorObject = true;
-		Templates.CIRCLE_FLOOR.moveable = false;
-		Templates.CIRCLE_FLOOR.orderingOnGound = 20;
-		Templates.CIRCLE_FLOOR.templateId = GameObject.generateNewTemplateId();
-
 		Templates.LEAVES = new GameObject();
 		Templates.LEAVES.name = "Leaves";
 		Templates.LEAVES.imageTexture = getGlobalImage("leaves.png", true);

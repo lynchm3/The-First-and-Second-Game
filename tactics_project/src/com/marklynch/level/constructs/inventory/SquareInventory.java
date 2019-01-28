@@ -76,7 +76,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			}
 //			}
 
-			// this.gameObjects.sort(this);
+			this.gameObjects.sort(this);
 
 			if (gameObject == Level.player) {
 				Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);

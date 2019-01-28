@@ -166,6 +166,18 @@ public class TemplatesBuilding {
 		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES,
 				new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 
+		Templates.CIRCLE_FLOOR = new GameObject();
+		Templates.CIRCLE_FLOOR.name = "Floor";
+		Templates.CIRCLE_FLOOR.imageTexture = getGlobalImage("circle.png", true);
+		Templates.CIRCLE_FLOOR.canBePickedUp = false;
+		Templates.CIRCLE_FLOOR.fitsInInventory = false;
+		Templates.CIRCLE_FLOOR.persistsWhenCantBeSeen = true;
+		Templates.CIRCLE_FLOOR.attackable = false;
+		Templates.CIRCLE_FLOOR.isFloorObject = true;
+		Templates.CIRCLE_FLOOR.moveable = false;
+		Templates.CIRCLE_FLOOR.orderingOnGound = 19;
+		Templates.CIRCLE_FLOOR.templateId = GameObject.generateNewTemplateId();
+
 		Templates.MINE_CART = new MineCart();
 		Templates.MINE_CART.name = "Mine Cart";
 		Templates.MINE_CART.setImageAndExtrapolateSize("mine_cart.png");
