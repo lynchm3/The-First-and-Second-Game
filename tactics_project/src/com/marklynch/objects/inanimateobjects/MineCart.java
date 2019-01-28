@@ -1,9 +1,10 @@
 package com.marklynch.objects.inanimateobjects;
 
+import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionUsePower;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
-import com.marklynch.level.constructs.power.PowerTelekineticPush;
+import com.marklynch.level.constructs.power.PowerTelekineticPush10;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
@@ -40,10 +41,10 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 
 	@Override
 	public void update(int delta) {
-		System.out.println("minecart.update a");
+//		System.out.println("minecart.update a");
 		if (squareGameObjectIsOn == null)
 			return;
-		System.out.println("minecart.update b");
+//		System.out.println("minecart.update b");
 
 		this.killOldPrimaryAnimation();
 
@@ -73,18 +74,18 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 			for (final GameObject gameObject : (ArrayList<GameObject>) this.squareGameObjectIsOn.inventory.gameObjects
 					.clone()) {
 
-				System.out.println("minecart.update loop go = " + gameObject + " a");
-				System.out.println("minecart.update loop go = " + gameObject + " gameObject.isFloorObject = "
-						+ gameObject.isFloorObject);
+//				System.out.println("minecart.update loop go = " + gameObject + " a");
+//				System.out.println("minecart.update loop go = " + gameObject + " gameObject.isFloorObject = "
+//						+ gameObject.isFloorObject);
 
 				if (gameObject.isFloorObject)
 					continue;
-				System.out.println("minecart.update loop go = " + gameObject + " b");
-				System.out.println("minecart.update loop go = " + gameObject + " turn = " + Level.turn);
+//				System.out.println("minecart.update loop go = " + gameObject + " b");
+//				System.out.println("minecart.update loop go = " + gameObject + " turn = " + Level.turn);
 
 				if (gameObject.lastTurnThisWasMovedByMinecart == Level.turn)
 					continue;
-				System.out.println("minecart.update loop go = " + gameObject + " c");
+//				System.out.println("minecart.update loop go = " + gameObject + " c");
 
 				gameObject.lastTurnThisWasMovedByMinecart = Level.turn;
 
@@ -94,11 +95,35 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 							@Override
 							public void initiateNextKeyFrame() {
 								super.initiateNextKeyFrame();
+								pushShitInTheWay();
+							}
 
+//							public void postRangedAnimation() {
+//								pushShitInTheWay();
+//								if (performer != null) {
+//									this.offsetX = 0;
+//									this.offsetY = 0;
+//									targetSquares[targetSquares.length - 1].inventory.add(performer);
+//								}
+//							}
+
+							public void pushShitInTheWay() {
 								for (GameObject gameObject : (ArrayList<GameObject>) this.targetSquares[phase].inventory.gameObjects
 										.clone()) {
-									new ActionUsePower(performer, gameObject, this.targetSquares[phase],
-											new PowerTelekineticPush(performer)).perform();
+
+									if (gameObject.moveable == false)
+										continue;
+
+									System.out.println("gameObject to push = " + gameObject);
+									System.out.println("phase = " + phase);
+									System.out.println("performer = " + performer);
+
+									Action telekineticPushAction = new ActionUsePower(performer, gameObject,
+											this.targetSquares[phase], new PowerTelekineticPush10(performer));
+									System.out.println(
+											"telekineticPushAction.enabled = " + telekineticPushAction.enabled);
+
+									telekineticPushAction.perform();
 								}
 							}
 						});

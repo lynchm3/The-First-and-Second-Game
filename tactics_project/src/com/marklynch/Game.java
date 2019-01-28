@@ -340,8 +340,8 @@ public class Game {
 		try {
 			Display.setDisplayMode(new DisplayMode((int) width, (int) height));
 			Display.setResizable(true);
-//			Display.setLocation(500, 0);
-			Display.setLocation(1000, 0);
+			Display.setLocation(500, 0);
+//			Display.setLocation(1000, 0);
 			// Display.setLocation(1000, -1080);
 			Display.create();
 			Display.setVSyncEnabled(true);

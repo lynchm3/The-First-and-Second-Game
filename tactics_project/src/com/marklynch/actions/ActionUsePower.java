@@ -30,12 +30,15 @@ public class ActionUsePower extends Action {
 	@Override
 	public void perform() {
 		super.perform();
+		System.out.println("perform a");
 
 		if (!enabled)
 			return;
+		System.out.println("perform b");
 
 		if (!checkRange())
 			return;
+		System.out.println("perform c");
 
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		power.log(gameObjectPerformer, targetSquare);
