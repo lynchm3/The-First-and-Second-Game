@@ -45,20 +45,16 @@ public class Fireplace extends FlammableLightSource implements UpdatableGameObje
 	@Override
 	public void update(int delta) {
 
-		System.out.println("Fireplace.update lit = " + lit);
-
 		if (!lit)
 			return;
 
 		for (GameObject gameObject : this.squareGameObjectIsOn.inventory.gameObjects) {
-			System.out.println("Fireplace.update gameObject = " + gameObject);
 
 			if (gameObject == this || gameObject.attackable == false)
 				continue;
 
 			EffectBurning effectBurning = new EffectBurning(this, gameObject, 3);
 
-			System.out.println("Fireplace.update effectBurning = " + effectBurning);
 			if (!gameObject.hasActiveEffectOfType(EffectBurning.class)) {
 				if (Game.level.shouldLog(gameObject)) {
 					Game.level.logOnScreen(new ActivityLog(new Object[] { effectBurning, " spread to ", gameObject }));

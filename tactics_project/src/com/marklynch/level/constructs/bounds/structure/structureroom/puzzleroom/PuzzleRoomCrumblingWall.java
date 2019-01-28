@@ -5,7 +5,6 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.squares.Node;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
 
@@ -23,13 +22,7 @@ public class PuzzleRoomCrumblingWall extends StructureRoom {
 
 		this.posX = posX;
 		this.posY = posY;
-		// Wall wall = Templates.WALL.makeCopy(Level.squares[posX - 1][posY + 2], null);
 
-		System.out.println("posX - 1 = " + (posX - 1) + ", posY = " + (posY));
-		System.out.println("Wall @ that = " + Level.squares[posX - 1][posY].inventory.getGameObjectOfClass(Wall.class));
-		// So... the square is correct
-		// But the wall jus isnt there...
-		// There was a suggestion to move it left from me in notes, so can try that...
 		ArrayList<GameObject> walls = new ArrayList<GameObject>(GameObject.class);
 		walls.add(Templates.WALL_CAVE.makeCopy(Level.squares[posX - 1][posY], null));
 		walls.add(Templates.WALL_CAVE.makeCopy(Level.squares[posX - 1][posY + 1], null));

@@ -13,7 +13,7 @@ public abstract class SecondaryAnimation extends Animation {
 			Square targetSquare, GameObject projectileObject, Action action, Actor shooter, GameObject weapon,
 			boolean alwaysRun, Object... objectsInvolved) {
 		super(performer, onCompletionListener, targetSquares, targetSquare, projectileObject, action, shooter, weapon,
-				alwaysRun, objectsInvolved);
+				alwaysRun, false, objectsInvolved);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public abstract class SecondaryAnimation extends Animation {
 
 		completed = true;
 
-		childRunCompletionAlgorightm(wait);
+		animationSubclassRunCompletionAlgorightm(wait);
 
 		Level.blockingAnimations.remove(this);
 

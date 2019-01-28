@@ -9,7 +9,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 public class AnimationWait extends Animation {
 
 	public AnimationWait(GameObject performer, OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer);
 		if (!runAnimation)
 			return;
 		blockAI = false;
@@ -82,7 +82,7 @@ public class AnimationWait extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

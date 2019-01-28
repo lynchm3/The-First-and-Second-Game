@@ -15,7 +15,8 @@ public class AnimationPush extends Animation {
 
 	public AnimationPush(GameObject performer, Square targetSquare, Animation oldAnimation,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer, targetSquare);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer,
+				targetSquare);
 		if (!runAnimation)
 			return;
 		this.targetSquare = targetSquare;
@@ -92,7 +93,7 @@ public class AnimationPush extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

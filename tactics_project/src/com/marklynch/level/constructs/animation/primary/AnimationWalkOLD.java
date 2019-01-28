@@ -108,7 +108,7 @@ public class AnimationWalkOLD extends Animation {
 
 	public AnimationWalkOLD(GameObject performer, Square startSquare, Square endSquare, int walkingPhase,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer, endSquare);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer, endSquare);
 		if (!runAnimation)
 			return;
 		if (performer == Level.player) {
@@ -317,7 +317,7 @@ public class AnimationWalkOLD extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

@@ -184,7 +184,7 @@ public class AnimationThrown extends SecondaryAnimation {
 	}
 
 	@Override
-	public void childRunCompletionAlgorightm(boolean wait) {
+	public void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		// super.runCompletionAlgorightm(wait);
 		postRangedAnimation();
 	}

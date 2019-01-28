@@ -15,7 +15,7 @@ public class AnimationFall extends Animation {
 	public AnimationFall(GameObject performer, float start, float end, float durationToReachMillis,
 			OnCompletionListener onCompletionListener) {
 
-		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer);
 
 		if (!runAnimation)
 			return;
@@ -78,7 +78,7 @@ public class AnimationFall extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

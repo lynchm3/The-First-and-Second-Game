@@ -40,8 +40,12 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 
 	@Override
 	public void update(int delta) {
+		System.out.println("minecart.update a");
 		if (squareGameObjectIsOn == null)
 			return;
+		System.out.println("minecart.update b");
+
+		this.killOldPrimaryAnimation();
 
 		ArrayList<SquareAndDirection> squaresForAnimation = new ArrayList<SquareAndDirection>(SquareAndDirection.class);
 
@@ -69,11 +73,18 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 			for (final GameObject gameObject : (ArrayList<GameObject>) this.squareGameObjectIsOn.inventory.gameObjects
 					.clone()) {
 
+				System.out.println("minecart.update loop go = " + gameObject + " a");
+				System.out.println("minecart.update loop go = " + gameObject + " gameObject.isFloorObject = "
+						+ gameObject.isFloorObject);
+
 				if (gameObject.isFloorObject)
 					continue;
+				System.out.println("minecart.update loop go = " + gameObject + " b");
+				System.out.println("minecart.update loop go = " + gameObject + " turn = " + Level.turn);
 
 				if (gameObject.lastTurnThisWasMovedByMinecart == Level.turn)
 					continue;
+				System.out.println("minecart.update loop go = " + gameObject + " c");
 
 				gameObject.lastTurnThisWasMovedByMinecart = Level.turn;
 

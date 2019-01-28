@@ -3,11 +3,9 @@ package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
-import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.squares.Node;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
-import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Rail;
 import com.marklynch.objects.inanimateobjects.Switch;
@@ -133,22 +131,22 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 
 		Templates.ROCK.makeCopy(Game.level.squares[posX + 9][posY + 10], null);
 
-		Templates.MINE_CART.makeCopy(Level.squares[posX + 12][posY + 10], null, Direction.RIGHT);
-		Templates.MINECART_RIDER.makeCopy("Dan", Level.squares[posX + 12][posY + 10], Game.level.factions.townsPeople,
-				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
-				AreaList.town, new int[] {}, new HOBBY[] {});
-		Templates.MINE_CART.makeCopy(Level.squares[posX + 6][posY + 10], null, Direction.DOWN);
-		Templates.MINECART_RIDER.makeCopy("Don", Level.squares[posX + 6][posY + 10], Game.level.factions.townsPeople,
-				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
-				AreaList.town, new int[] {}, new HOBBY[] {});
-		Templates.MINE_CART.makeCopy(Level.squares[posX + 12][posY + 12], null, Direction.UP);
-		Templates.MINECART_RIDER.makeCopy("Dar", Level.squares[posX + 12][posY + 12], Game.level.factions.townsPeople,
-				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
-				AreaList.town, new int[] {}, new HOBBY[] {});
-		Templates.MINE_CART.makeCopy(Level.squares[posX + 6][posY + 12], null, Direction.LEFT);
-		Templates.MINECART_RIDER.makeCopy("Dank", Level.squares[posX + 6][posY + 12], Game.level.factions.townsPeople,
-				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
-				AreaList.town, new int[] {}, new HOBBY[] {});
+//		Templates.MINE_CART.makeCopy(Level.squares[posX + 12][posY + 10], null, Direction.RIGHT);
+//		Templates.MINECART_RIDER.makeCopy("Dan", Level.squares[posX + 12][posY + 10], Game.level.factions.townsPeople,
+//				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
+//				AreaList.town, new int[] {}, new HOBBY[] {});
+//		Templates.MINE_CART.makeCopy(Level.squares[posX + 6][posY + 10], null, Direction.DOWN);
+//		Templates.MINECART_RIDER.makeCopy("Don", Level.squares[posX + 6][posY + 10], Game.level.factions.townsPeople,
+//				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
+//				AreaList.town, new int[] {}, new HOBBY[] {});
+//		Templates.MINE_CART.makeCopy(Level.squares[posX + 12][posY + 12], null, Direction.UP);
+//		Templates.MINECART_RIDER.makeCopy("Dar", Level.squares[posX + 12][posY + 12], Game.level.factions.townsPeople,
+//				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
+//				AreaList.town, new int[] {}, new HOBBY[] {});
+//		Templates.MINE_CART.makeCopy(Level.squares[posX + 6][posY + 12], null, Direction.LEFT);
+//		Templates.MINECART_RIDER.makeCopy("Dank", Level.squares[posX + 6][posY + 12], Game.level.factions.townsPeople,
+//				null, 14, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {},
+//				AreaList.town, new int[] {}, new HOBBY[] {});
 
 	}
 

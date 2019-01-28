@@ -9,7 +9,7 @@ public class AnimationFlinch extends Animation {
 
 	public AnimationFlinch(GameObject performer, Square squareBeingAttackedFrom, Animation oldAnimation,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer);
 		if (!runAnimation)
 			return;
 
@@ -80,7 +80,7 @@ public class AnimationFlinch extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

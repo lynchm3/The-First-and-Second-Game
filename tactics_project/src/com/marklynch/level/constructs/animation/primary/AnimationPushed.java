@@ -27,7 +27,7 @@ public class AnimationPushed extends Animation {
 
 	public AnimationPushed(GameObject performer, Square startSquare, Square targetSquare, Animation oldAnimation,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, targetSquare, null, null, null, null, false, performer,
+		super(performer, onCompletionListener, null, targetSquare, null, null, null, null, false, true, performer,
 				startSquare, targetSquare);
 		if (!runAnimation)
 			return;
@@ -115,7 +115,7 @@ public class AnimationPushed extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		leftShoulderAngle = 0;
 		rightShoulderAngle = 0;
 

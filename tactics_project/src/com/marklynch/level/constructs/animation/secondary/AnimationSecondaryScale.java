@@ -102,6 +102,6 @@ public class AnimationSecondaryScale extends SecondaryAnimation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 	}
 }

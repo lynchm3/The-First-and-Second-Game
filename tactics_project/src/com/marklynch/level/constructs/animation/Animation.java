@@ -84,8 +84,13 @@ public abstract class Animation {
 
 	public Animation(GameObject performer, OnCompletionListener onCompletionListener, Square[] targetSquares,
 			Square targetSquare, GameObject projectileObject, Action action, Actor shooter, GameObject weapon,
-			boolean alwaysRun, Object... objectsInvolved) {
+			boolean alwaysRun, boolean primary, Object... objectsInvolved) {
 
+		if (primary) {
+			performer.killOldPrimaryAnimation();
+		}
+
+		// As you were
 		this.performer = performer;
 		this.targetSquares = targetSquares;
 		this.onCompletionListener = onCompletionListener;
@@ -173,7 +178,7 @@ public abstract class Animation {
 
 	}
 
-	protected abstract void childRunCompletionAlgorightm(boolean wait);
+	protected abstract void animationSubclassRunCompletionAlgorightm(boolean wait);
 
 	public void runCompletionAlorightm(boolean wait) {
 		if (completed)
@@ -181,7 +186,7 @@ public abstract class Animation {
 
 		completed = true;
 
-		childRunCompletionAlgorightm(wait);
+		animationSubclassRunCompletionAlgorightm(wait);
 
 		Level.blockingAnimations.remove(this);
 

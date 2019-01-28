@@ -14,7 +14,7 @@ public class AnimationHandsUp extends Animation {
 	public AnimationHandsUp(GameObject performer, float durationToReachMillis,
 			OnCompletionListener onCompletionListener) {
 
-		super(performer, onCompletionListener, null, null, null, null, null, null, false);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, true);
 		if (!runAnimation)
 			return;
 		startLeftArmAngle = this.leftShoulderAngle;
@@ -56,7 +56,7 @@ public class AnimationHandsUp extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

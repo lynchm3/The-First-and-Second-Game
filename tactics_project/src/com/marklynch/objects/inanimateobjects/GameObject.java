@@ -227,7 +227,7 @@ public class GameObject
 	public transient Object destroyedBy = null;
 	public transient Action destroyedByAction = null;
 
-	protected Animation primaryAnimation;
+	public Animation primaryAnimation;
 
 	public boolean toSell = false;
 	public boolean starred = false;
@@ -2499,14 +2499,6 @@ public class GameObject
 		if (animation == null || animation.runAnimation == false)
 			return;
 
-		if (this.primaryAnimation != null && !this.primaryAnimation.completed
-				&& !(this.primaryAnimation instanceof AnimationWait)) {
-			this.primaryAnimation.runCompletionAlorightm(false);
-		}
-
-		Level.blockingAnimations.remove(this.primaryAnimation);
-		Level.animations.remove(this.primaryAnimation);
-
 		this.primaryAnimation = animation;
 
 		if (animation != null && animation.blockAI) {
@@ -2653,5 +2645,18 @@ public class GameObject
 		} else {
 			return ((GameObject) inventoryThatHoldsThisObject.parent).getWorldSquareGameObjectIsOn();
 		}
+	}
+
+	public void killOldPrimaryAnimation() {
+
+		// End primary animation if it's already there
+		if (this.primaryAnimation != null && !this.primaryAnimation.completed
+				&& !(this.primaryAnimation instanceof AnimationWait)) {
+			this.primaryAnimation.runCompletionAlorightm(false);
+		}
+
+		Level.blockingAnimations.remove(this.primaryAnimation);
+		Level.animations.remove(this.primaryAnimation);
+
 	}
 }

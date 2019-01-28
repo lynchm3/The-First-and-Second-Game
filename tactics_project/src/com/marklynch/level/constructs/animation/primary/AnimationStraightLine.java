@@ -18,10 +18,13 @@ public class AnimationStraightLine extends Animation {
 	public AnimationStraightLine(GameObject performer, float time, boolean blockAI, double delay,
 			OnCompletionListener onCompletionListener, Square... targetSquares) {
 
-		super(performer, onCompletionListener, targetSquares, null, null, null, null, null, false,
-				performer, targetSquares[targetSquares.length - 1]);
+		super(performer, onCompletionListener, targetSquares, null, null, null, null, null, false, true, performer,
+				targetSquares[targetSquares.length - 1]);
 		if (!runAnimation)
 			return;
+
+		System.out.println("AnimationStraightLine");
+		System.out.println("AnimationStraightLine performer = " + performer);
 
 		this.targetSquares = targetSquares;
 
@@ -50,10 +53,12 @@ public class AnimationStraightLine extends Animation {
 			kf0.setAllSpeeds(1);
 			kf0.offsetX = this.targetSquares[i].xInGridPixels - this.x;
 			kf0.offsetY = this.targetSquares[i].yInGridPixels - this.y;
-			// kf0.
 			kf0.keyFrameTimeMillis = keyFrameTimeMillis;
 			kf0.normaliseSpeeds = true;
 			keyFrames.add(kf0);
+			System.out.println("AnimationStraightLine kf0.offsetX = " + kf0.offsetX);
+			System.out.println("AnimationStraightLine kf0.offsetY = " + kf0.offsetY);
+			System.out.println("AnimationStraightLine kf0.keyFrameTimeMillis = " + kf0.keyFrameTimeMillis);
 		}
 
 	}
@@ -87,33 +92,21 @@ public class AnimationStraightLine extends Animation {
 	}
 
 	@Override
-	public void childRunCompletionAlgorightm(boolean wait) {
+	public void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		postRangedAnimation();
-		// super.runCompletionAlgorightm(wait);
 	}
 
 	public void postRangedAnimation() {
 		if (performer != null) {
-
-			// if (performer.getPrimaryAnimation() != null) {
 			this.offsetX = 0;
 			this.offsetY = 0;
-			// }
 			targetSquares[targetSquares.length - 1].inventory.add(performer);
 		}
 	}
 
 	@Override
 	public void draw3() {
-
 		if (getCompleted())
 			return;
-
 	}
-
-	// @Override
-	// protected void childeRunCompletionAlgorightm(boolean wait) {
-	// // TODO Auto-generated method stub
-	//
-	// }
 }

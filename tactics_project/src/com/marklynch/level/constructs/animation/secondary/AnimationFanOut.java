@@ -74,8 +74,6 @@ public class AnimationFanOut extends SecondaryAnimation {
 			ys.add(originY);
 			speedXs.add(baseSpeedX - 0.04f + Game.random.nextFloat() * 0.08f);
 			speedYs.add(baseSpeedY - 0.04f + Game.random.nextFloat() * 0.08f);
-
-			System.out.println("speedXs.get(i) = " + speedXs.get(i));
 		}
 
 		this.durationToReachMillis = 1000f;
@@ -144,7 +142,7 @@ public class AnimationFanOut extends SecondaryAnimation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 	}
 
 }

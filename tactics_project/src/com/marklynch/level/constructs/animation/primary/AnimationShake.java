@@ -12,7 +12,7 @@ public class AnimationShake extends Animation {
 
 	public AnimationShake(GameObject performer, OnCompletionListener onCompletionListener, boolean alwaysRun,
 			double durationToReach) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, alwaysRun, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, alwaysRun, true, performer);
 		if (!runAnimation)
 			return;
 		this.durationToReach = 200;
@@ -52,7 +52,7 @@ public class AnimationShake extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 
 	}
 

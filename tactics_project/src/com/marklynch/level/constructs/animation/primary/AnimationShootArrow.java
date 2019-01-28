@@ -29,7 +29,7 @@ public abstract class AnimationShootArrow extends Animation {
 
 	public AnimationShootArrow(Actor performer, GameObject target, GameObject weapon, Action action,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer, target);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer, target);
 		if (!runAnimation)
 			return;
 		// this.performer []
@@ -140,7 +140,7 @@ public abstract class AnimationShootArrow extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}

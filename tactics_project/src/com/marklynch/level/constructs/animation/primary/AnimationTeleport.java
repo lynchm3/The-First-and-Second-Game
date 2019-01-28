@@ -26,7 +26,7 @@ public class AnimationTeleport extends Animation {
 
 	public AnimationTeleport(GameObject performer, Square startSquare, Square endSquare, boolean straightenUp,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, false, startSquare, endSquare);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, startSquare, endSquare);
 		if (!runAnimation)
 			return;
 		durationToReachMillis = 400;
@@ -94,7 +94,7 @@ public class AnimationTeleport extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		this.offsetX = 0;
 		this.offsetY = 0;
 		performer.lastSquare = performer.squareGameObjectIsOn;

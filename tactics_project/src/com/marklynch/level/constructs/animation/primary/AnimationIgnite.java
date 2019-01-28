@@ -15,7 +15,7 @@ public class AnimationIgnite extends Animation {
 
 	public AnimationIgnite(GameObject performer, GameObject target, GameObject fireSource,
 			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, false, performer, target);
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer, target);
 		if (!runAnimation)
 			return;
 		this.target = target;
@@ -77,7 +77,7 @@ public class AnimationIgnite extends Animation {
 	}
 
 	@Override
-	protected void childRunCompletionAlgorightm(boolean wait) {
+	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 		// TODO Auto-generated method stub
 
 	}
