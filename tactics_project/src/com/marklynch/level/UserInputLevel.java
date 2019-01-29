@@ -1086,7 +1086,7 @@ public class UserInputLevel {
 		} else if (Level.skillTree.showing) {
 			Game.level.openCloseSkillTree();
 		} else if (Level.availablePowerScreen.showing) {
-			Game.level.openCloseActivePowerScreen();
+			Game.level.openCloseAvailablePowerScreen();
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -1162,7 +1162,7 @@ public class UserInputLevel {
 			Game.level.openCloseSkillTree();
 			return;
 		} else if (character == 'p' || character == 'P') {
-			Game.level.openCloseActivePowerScreen();
+			Game.level.openCloseAvailablePowerScreen();
 			return;
 		} else if (Level.gameOver.showing) {
 			return;

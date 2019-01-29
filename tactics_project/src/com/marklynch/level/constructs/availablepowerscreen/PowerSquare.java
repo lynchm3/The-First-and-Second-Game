@@ -104,7 +104,7 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 				}
 				Game.level.popupMenuObjects.clear();
 				Game.level.popupMenuActions.clear();
-				Game.level.openCloseActivePowerScreen();
+				Game.level.openCloseAvailablePowerScreen();
 
 			}
 		});

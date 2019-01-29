@@ -138,6 +138,8 @@ public class ActionThrowItem extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
+
+		Level.closeAllScreens();
 	}
 
 	@Override

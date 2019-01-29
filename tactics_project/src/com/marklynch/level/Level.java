@@ -117,7 +117,7 @@ public class Level {
 	public static ArrayList<Area> areas = new ArrayList<Area>();
 	public ArrayList<Structure> structures;
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
-	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
+	public static transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
 	public static transient Journal journal = new Journal();
 	public static transient QuestList fullQuestList = new QuestList();
 	public static transient MarkerList markerList = new MarkerList();
@@ -321,7 +321,7 @@ public class Level {
 	public static final int flashGameObjectFrequency = 200;// ms
 	public static final int flashGameObjectTotalTime = 1200;// ms
 
-	public void openCloseInventory() {
+	public static void openCloseInventory() {
 		characterScreen.close();
 		journal.close();
 		skillTree.close();
@@ -391,7 +391,7 @@ public class Level {
 		closeAllPopups();
 	}
 
-	public void openCloseActivePowerScreen() {
+	public void openCloseAvailablePowerScreen() {
 		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
 			inventory.close();
 		}
@@ -694,7 +694,7 @@ public class Level {
 		activePowerScreenButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				openCloseActivePowerScreen();
+				openCloseAvailablePowerScreen();
 			}
 		});
 		activePowerScreenButton.enabled = true;
@@ -2104,7 +2104,7 @@ public class Level {
 	public boolean showWindowPixelCoords = false;
 
 	public static void startPlayerTurn() {
-		System.out.println("----------------START PLAYER TURN----------------- st = ");
+		System.out.println("----------------START PLAYER TURN-----------------");
 
 		Level.turn++;
 		loggedThisTurn = false;
@@ -2173,7 +2173,7 @@ public class Level {
 
 	public void endPlayerTurn() {
 
-		System.out.println("----------------END PLAYER TURN----------------- st = ");
+		System.out.println("----------------END PLAYER TURN-----------------");
 
 		// Utils.printStackTrace();
 
@@ -2424,6 +2424,30 @@ public class Level {
 			if (animation.blockAI) {
 				Level.blockingAnimations.add(animation);
 			}
+		}
+
+	}
+
+	public static void closeAllScreens() {
+
+		if (Level.journal.showing) {
+			Game.level.openCloseJournal();
+		}
+
+		if (Level.characterScreen.showing) {
+			Game.level.openCloseCharacterScreen();
+		}
+
+		if (Level.skillTree.showing) {
+			Game.level.openCloseSkillTree();
+		}
+
+		if (Level.availablePowerScreen.showing) {
+			Game.level.openCloseAvailablePowerScreen();
+		}
+
+		if (Level.openInventories.size() != 0) {
+			Level.openCloseInventory();
 		}
 
 	}
