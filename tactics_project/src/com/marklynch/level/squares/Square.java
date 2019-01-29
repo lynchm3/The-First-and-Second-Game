@@ -798,13 +798,12 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			// gameObject.imageTexture.getTexture().
 
 			int x = 0;
-			if (gameObject.backwards) {
-				x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
-						+ Game.SQUARE_WIDTH * -gameObject.drawOffsetRatioX);
-			} else {
-				x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
-						+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
-			}
+//			if (gameObject.backwards) {
+//				x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
+//						+ Game.SQUARE_WIDTH * -gameObject.drawOffsetRatioX);
+//			} else {
+			x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
+//			}
 
 			// int x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
 			// + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);

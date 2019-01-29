@@ -415,13 +415,12 @@ public class GameObject
 			primaryAnimation.draw1();
 
 		int actorPositionXInPixels = 0;
-		if (backwards) {
-			actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * -drawOffsetRatioX);
-		} else {
-			actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-		}
+//		if (backwards) {
+//			actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+//					+ Game.SQUARE_WIDTH * -drawOffsetRatioX);
+//		} else {
+		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
+//		}
 
 		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
