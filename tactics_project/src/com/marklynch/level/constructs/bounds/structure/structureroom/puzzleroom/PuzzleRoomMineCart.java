@@ -178,6 +178,9 @@ public class PuzzleRoomMineCart extends StructureRoom {
 
 		Templates.MINE_CART.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.RIGHT);
 
+		// Tester mine cart @ 103,135
+		Templates.MINE_CART.makeCopy(Level.squares[posX + 3][posY + 16], null, Direction.RIGHT);
+
 		Templates.PORTAL.makeCopy(Level.squares[posX + 1][posY + 1], null, voidSquare);
 		Templates.LANDMINE.makeCopy(Level.squares[posX + 3][posY + 1], null, 1, 10);
 
