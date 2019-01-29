@@ -43,8 +43,7 @@ public class TemplatesBuilding {
 
 		Templates.WALL_WITH_CRACK = new WallWithCrack();
 		Templates.WALL_WITH_CRACK.name = "Wall";
-		Templates.WALL_WITH_CRACK.imageTexture = getGlobalImage("wall.png", true);
-		WallWithCrack.wallCrackTexture = getGlobalImage("wall_crack.png", false);
+		Templates.WALL_WITH_CRACK.imageTexture = getGlobalImage("wall_crack.png", true);
 		Templates.WALL_WITH_CRACK.totalHealth = Templates.WALL_WITH_CRACK.remainingHealth = 30;
 		Templates.WALL_WITH_CRACK.soundWhenHit = 10f;
 		Templates.WALL_WITH_CRACK.soundWhenHitting = 1f;

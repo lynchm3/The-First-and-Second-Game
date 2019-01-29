@@ -53,8 +53,6 @@ import com.marklynch.objects.inanimateobjects.RemoteDoor;
 import com.marklynch.objects.inanimateobjects.Stump;
 import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.VoidHole;
-import com.marklynch.objects.inanimateobjects.Wall;
-import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.ui.button.Tooltip;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ArrayUtils;
@@ -788,9 +786,9 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 					continue;
 			}
 
-			if (gameObject instanceof WaterBody || gameObject instanceof Wall || gameObject.isFloorObject) {
-				continue;
-			}
+//			if (gameObject instanceof WaterBody || gameObject instanceof Wall || gameObject.isFloorObject) {
+//				continue;
+//			}
 
 			if (!gameObject.squareGameObjectIsOn.visibleToPlayer && !gameObject.persistsWhenCantBeSeen)
 				continue;
