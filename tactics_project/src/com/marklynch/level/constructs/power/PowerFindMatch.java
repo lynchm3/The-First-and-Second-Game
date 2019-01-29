@@ -3,10 +3,9 @@ package com.marklynch.level.constructs.power;
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
-import com.marklynch.actions.Action;
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.Color;
@@ -16,7 +15,6 @@ import com.marklynch.utils.ResourceUtils;
 public class PowerFindMatch extends Power {
 
 	private static String NAME = "Find Match";
-	private static GameObject targetToMatch = null;
 
 	public PowerFindMatch() {
 		this(null);
@@ -25,12 +23,12 @@ public class PowerFindMatch extends Power {
 	public PowerFindMatch(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("find_match.png", false), source, new Effect[] {}, Integer.MAX_VALUE,
 				null, new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
-//		passive = true;
+		passive = true;
 		endsTurn = false;
 		draws = true;
-		selectTarget = true;
-		activateAtStartOfTurn = false;
-		toggledOn = false;
+//		selectTarget = true;
+//		activateAtStartOfTurn = false;
+		toggledOn = true;
 	}
 
 	@Override
@@ -38,32 +36,32 @@ public class PowerFindMatch extends Power {
 		return true;
 	}
 
-	@Override
-	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
-
-		Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
-		if (playersFindMathchPower == null)
-			return;
-
-		if (targetGameObject == null && targetSquare != null) {
-			for (GameObject gameObjectOnTargetSquare : targetSquare.inventory.gameObjects) {
-				if (gameObjectOnTargetSquare.linkedGameObjects.size() > 0) {
-					targetGameObject = gameObjectOnTargetSquare;
-					break;
-				}
-			}
-		}
-
-		if (playersFindMathchPower.target == null && targetGameObject != null) {
-			playersFindMathchPower.target = targetToMatch = targetGameObject;
-			playersFindMathchPower.toggledOn = true;
-			playersFindMathchPower.selectTarget = false;
-		} else {
-			playersFindMathchPower.target = targetToMatch = null;
-			playersFindMathchPower.toggledOn = false;
-			playersFindMathchPower.selectTarget = true;
-		}
-	}
+//	@Override
+//	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
+//
+//		Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
+//		if (playersFindMathchPower == null)
+//			return;
+//
+//		if (targetGameObject == null && targetSquare != null) {
+//			for (GameObject gameObjectOnTargetSquare : targetSquare.inventory.gameObjects) {
+//				if (gameObjectOnTargetSquare.linkedGameObjects.size() > 0) {
+//					targetGameObject = gameObjectOnTargetSquare;
+//					break;
+//				}
+//			}
+//		}
+//
+//		if (playersFindMathchPower.target == null && targetGameObject != null) {
+//			playersFindMathchPower.target = targetToMatch = targetGameObject;
+//			playersFindMathchPower.toggledOn = true;
+//			playersFindMathchPower.selectTarget = false;
+//		} else {
+//			playersFindMathchPower.target = targetToMatch = null;
+//			playersFindMathchPower.toggledOn = false;
+//			playersFindMathchPower.selectTarget = true;
+//		}
+//	}
 
 	@Override
 	public void log(GameObject performer, Square target2) {
@@ -79,14 +77,37 @@ public class PowerFindMatch extends Power {
 	@Override
 	public void drawUI() {
 
-		if (targetToMatch == null)
+		if (toggledOn == false)
 			return;
 
-		Power playersFindMathchPower = Level.player.getPower(PowerFindMatch.class);
-		if (playersFindMathchPower.toggledOn == false)
+		GameObject targetGameObject = Game.gameObjectMouseIsOver;
+
+		// If we don't have direct object, check the sqr for objects with links
+		if (targetGameObject == null) {
+			if (Game.squareMouseIsOver != null && !(Game.squareMouseIsOver instanceof InventorySquare)) {
+				for (GameObject gameObjectOnTargetSquare : Game.squareMouseIsOver.inventory.gameObjects) {
+					if (gameObjectOnTargetSquare.linkedGameObjects.size() > 0) {
+						targetGameObject = gameObjectOnTargetSquare;
+						break;
+					}
+				}
+			}
+		}
+
+		// Still no gameObject :/
+		if (targetGameObject == null)
 			return;
 
-		Square square = targetToMatch.getWorldSquareGameObjectIsOn();
+		// If gameObject has no links, check it's equipped item...
+		if (targetGameObject.linkedGameObjects.size() == 0) {
+			if (targetGameObject.equipped != null)
+				targetGameObject = targetGameObject.equipped;
+		}
+
+		if (targetGameObject.linkedGameObjects.size() == 0)
+			return;
+
+		Square square = targetGameObject.getWorldSquareGameObjectIsOn();
 		if (square == null)
 			return;
 		float x1 = (Game.halfWindowWidth) + (Game.zoom
@@ -95,7 +116,7 @@ public class PowerFindMatch extends Power {
 		float y1 = (Game.halfWindowHeight) + (Game.zoom
 				* (square.yInGridPixels + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
 
-		for (GameObject linkedGameObject : targetToMatch.linkedGameObjects) {
+		for (GameObject linkedGameObject : targetGameObject.linkedGameObjects) {
 			Square linkedGameObjectSquare = linkedGameObject.getWorldSquareGameObjectIsOn();
 			if (linkedGameObjectSquare == null)
 				continue;
