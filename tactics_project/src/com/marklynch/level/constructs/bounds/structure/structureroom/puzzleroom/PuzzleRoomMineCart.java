@@ -144,6 +144,8 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		Templates.CRATE.makeCopy(Level.squares[posX + 7][posY + 0], false, null);
 
 		Templates.CANDY.makeCopy(Level.squares[posX + 8][posY + 0], null);
+		GameObject candy2 = Templates.CANDY.makeCopy(Level.squares[posX + 8][posY + 0], null);
+		candy2.backwards = true;
 
 		ArrayList<Square> islandSquares = new ArrayList<Square>(Square.class);
 		islandSquares.add(Level.squares[posX + 11][posY + 4]);
