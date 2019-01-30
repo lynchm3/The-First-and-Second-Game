@@ -805,8 +805,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 			// int x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
 			// + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
-			int y = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
+			int y = (int) (gameObject.squareGameObjectIsOn.yInGridPixels + gameObject.drawOffsetY);
 			if (gameObject.getPrimaryAnimation() != null) {
 				x += gameObject.getPrimaryAnimation().offsetX;
 				y += gameObject.getPrimaryAnimation().offsetY;

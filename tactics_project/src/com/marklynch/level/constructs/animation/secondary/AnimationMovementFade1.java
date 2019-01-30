@@ -1,6 +1,5 @@
 package com.marklynch.level.constructs.animation.secondary;
 
-import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -47,17 +46,15 @@ public class AnimationMovementFade1 extends SecondaryAnimation {
 		if (gameObject instanceof Actor) {
 			Actor actor = (Actor) gameObject;
 
-			int actorPositionXInPixels = (int) (this.square.xInGridPixels + Game.SQUARE_WIDTH * actor.drawOffsetRatioX);
-			int actorPositionYInPixels = (int) (this.square.yInGridPixels
-					+ Game.SQUARE_HEIGHT * actor.drawOffsetRatioY);
+			int actorPositionXInPixels = (int) (this.square.xInGridPixels + actor.drawOffsetX);
+			int actorPositionYInPixels = (int) (this.square.yInGridPixels + actor.drawOffsetY);
 			actor.drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha, true, 1f, 1f, 0f, Integer.MIN_VALUE,
 					Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false,
 					actor.backwards, false, true);
 		} else {
 
-			int actorPositionXInPixels = (int) (square.xInGridPixels + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
-			int actorPositionYInPixels = (int) (square.yInGridPixels
-					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
+			int actorPositionXInPixels = (int) (square.xInGridPixels + gameObject.drawOffsetX);
+			int actorPositionYInPixels = (int) (square.yInGridPixels + gameObject.drawOffsetY);
 			TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + gameObject.width, actorPositionYInPixels + gameObject.height,
 					gameObject.backwards);

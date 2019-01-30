@@ -40,10 +40,8 @@ public class Vein extends GameObject {
 
 		// DRAW INVENTORY
 		for (GameObject ore : inventory.gameObjects) {
-			int orePositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ ore.drawOffsetRatioX * Game.SQUARE_WIDTH);
-			int orePositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ ore.drawOffsetRatioY * Game.SQUARE_HEIGHT);
+			int orePositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + ore.drawOffsetX);
+			int orePositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + ore.drawOffsetY);
 
 			if (primaryAnimation != null && !(primaryAnimation.getCompleted())) {
 				orePositionXInPixels += this.primaryAnimation.offsetX;
@@ -87,8 +85,10 @@ public class Vein extends GameObject {
 
 				ore.drawOffsetRatioX = oreDrawOffsetXMin
 						+ (float) (Math.random() * (oreDrawOffsetXMax - oreDrawOffsetXMin));
+				ore.drawOffsetX = ore.drawOffsetRatioX * Game.SQUARE_WIDTH;
 				ore.drawOffsetRatioY = oreDrawOffsetYMin
 						+ (float) (Math.random() * (oreDrawOffsetYMax - oreDrawOffsetYMin));
+				ore.drawOffsetY = ore.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 				vein.inventory.add(ore);
 
 			}

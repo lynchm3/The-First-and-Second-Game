@@ -1,10 +1,9 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.utils.ArrayList;
 
 public class Orb extends GameObject {
 
@@ -50,7 +49,10 @@ public class Orb extends GameObject {
 				drawOffsetYMax = 0;
 			}
 			this.drawOffsetRatioX = (float) (Math.random() * drawOffsetXMax);
+			this.drawOffsetX = this.drawOffsetRatioX * Game.SQUARE_WIDTH;
 			this.drawOffsetRatioY = (float) (Math.random() * drawOffsetYMax);
+			this.drawOffsetY = this.drawOffsetRatioY * Game.SQUARE_HEIGHT;
+
 		}
 	}
 }

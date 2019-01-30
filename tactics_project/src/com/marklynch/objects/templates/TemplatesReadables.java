@@ -1,5 +1,6 @@
 package com.marklynch.objects.templates;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -65,8 +66,8 @@ public class TemplatesReadables {
 		Templates.SIGNPOST.totalHealth = Templates.SIGNPOST.remainingHealth = 100;
 		Templates.SIGNPOST.widthRatio = 1f;
 		Templates.SIGNPOST.heightRatio = 1.25f;
-		Templates.SIGNPOST.drawOffsetRatioX = 0f;
 		Templates.SIGNPOST.drawOffsetRatioY = -0.25f;
+		Templates.SIGNPOST.drawOffsetY = Templates.SIGNPOST.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		Templates.SIGNPOST.weight = 124f;
 		Templates.SIGNPOST.value = 31;
 		Templates.SIGNPOST.anchorX = 0;

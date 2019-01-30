@@ -234,7 +234,9 @@ public class ActionFishBeingFished extends Action {
 
 		// move(actor, squareToMoveTo);
 		actor.drawOffsetRatioX = targetOffsetX;
+		actor.drawOffsetX = actor.drawOffsetRatioX * Game.SQUARE_WIDTH;
 		actor.drawOffsetRatioY = targetOffsetY;
+		actor.drawOffsetY = actor.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 
 		if (sound != null)
 			sound.play();

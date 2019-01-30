@@ -110,24 +110,29 @@ public class PowerFindMatch extends Power {
 		Square square = targetGameObject.getWorldSquareGameObjectIsOn();
 		if (square == null)
 			return;
-		float x1 = (Game.halfWindowWidth) + (Game.zoom
-				* (square.xInGridPixels + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
+		float x1 = (Game.halfWindowWidth) + (Game.zoom * (square.xInGridPixels + targetGameObject.drawOffsetX
+				+ targetGameObject.halfWidth - Game.halfWindowWidth + Game.getDragXWithOffset()));
 
-		float y1 = (Game.halfWindowHeight) + (Game.zoom
-				* (square.yInGridPixels + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
+		float y1 = (Game.halfWindowHeight) + (Game.zoom * (square.yInGridPixels + targetGameObject.drawOffsetY
+				+ targetGameObject.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
+
+		System.out.println("targetGameObject.drawOffsetX = " + targetGameObject.drawOffsetX);
+		System.out.println("targetGameObject.halfWidth = " + targetGameObject.halfWidth);
 
 		for (GameObject linkedGameObject : targetGameObject.linkedGameObjects) {
 			Square linkedGameObjectSquare = linkedGameObject.getWorldSquareGameObjectIsOn();
 			if (linkedGameObjectSquare == null)
 				continue;
 
-			float x2 = (Game.halfWindowWidth) + (Game.zoom * (linkedGameObjectSquare.xInGridPixels
-					+ Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
+			float x2 = (Game.halfWindowWidth)
+					+ (Game.zoom * (linkedGameObjectSquare.xInGridPixels + linkedGameObject.drawOffsetX
+							+ linkedGameObject.halfWidth - Game.halfWindowWidth + Game.getDragXWithOffset()));
 
-			float y2 = (Game.halfWindowHeight) + (Game.zoom * (linkedGameObjectSquare.yInGridPixels
-					+ Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
+			float y2 = (Game.halfWindowHeight)
+					+ (Game.zoom * (linkedGameObjectSquare.yInGridPixels + linkedGameObject.drawOffsetY
+							+ linkedGameObject.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
 
-			LineUtils.drawLine(Color.RED, x1, y1, x2, y2, 10);
+			LineUtils.drawLine(Color.RED, x1, y1, x2, y2, 1);
 		}
 	}
 

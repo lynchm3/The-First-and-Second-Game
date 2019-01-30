@@ -69,8 +69,8 @@ public class AnimationThrown extends SecondaryAnimation {
 		// this.targetY += Math.random() * 16f;
 		// this.targetY -= 8;
 
-		this.targetX = (int) (targetSquare.xInGridPixels + Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);
-		this.targetY = (int) (targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * projectileObject.drawOffsetRatioY);
+		this.targetX = (int) (targetSquare.xInGridPixels + projectileObject.drawOffsetX);
+		this.targetY = (int) (targetSquare.yInGridPixels + projectileObject.drawOffsetY);
 
 		if (projectileObject.backwards) {
 

@@ -96,8 +96,6 @@ public class TemplatesBuilding {
 		Templates.FENCE.totalHealth = Templates.FENCE.remainingHealth = 100;
 		Templates.FENCE.widthRatio = 1f;
 		Templates.FENCE.heightRatio = 1f;
-		Templates.FENCE.drawOffsetRatioX = 0f;
-		Templates.FENCE.drawOffsetRatioY = 0f;
 		Templates.FENCE.soundWhenHit = 1f;
 		Templates.FENCE.soundWhenHitting = 1f;
 		Templates.FENCE.soundDampening = 1f;

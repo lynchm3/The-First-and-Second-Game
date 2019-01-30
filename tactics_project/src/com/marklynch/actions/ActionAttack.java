@@ -83,7 +83,9 @@ public class ActionAttack extends Action {
 					AnimationThrown animationThrown;
 					arrow = Templates.ARROW.makeCopy(null, null);
 					arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
+					arrow.drawOffsetX = arrow.drawOffsetRatioX * Game.SQUARE_WIDTH;
 					arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
+					arrow.drawOffsetY = arrow.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 					animationThrown = new AnimationThrown("Arrow", (Actor) performer, ActionAttack.this, target,
 							target.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true, null);
 

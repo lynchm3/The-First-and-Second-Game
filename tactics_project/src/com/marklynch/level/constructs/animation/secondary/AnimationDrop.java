@@ -32,13 +32,13 @@ public class AnimationDrop extends SecondaryAnimation {
 
 		if (shooter instanceof Actor) {
 			Actor shooterActor = (Actor) shooter;
-			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + shooter.drawOffsetRatioX * Game.SQUARE_WIDTH
+			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + shooter.drawOffsetX
 					+ shooterActor.rightArmHingeX - projectileObject.anchorX);
-			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + shooter.drawOffsetRatioY * Game.SQUARE_HEIGHT
-					+ shooterActor.handY - projectileObject.anchorY);
+			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + shooter.drawOffsetY + shooterActor.handY
+					- projectileObject.anchorY);
 		} else if (shooter instanceof Tree && projectileObject instanceof Food) {
 			Food fruit = (Food) projectileObject;
-			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + fruit.drawOffsetRatioX * Game.SQUARE_WIDTH);
+			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + fruit.drawOffsetX);
 			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + fruit.drawOffsetYInTree * Game.SQUARE_HEIGHT);
 		} else {
 			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels

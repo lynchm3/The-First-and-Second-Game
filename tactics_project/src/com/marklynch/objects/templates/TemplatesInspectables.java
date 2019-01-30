@@ -1,5 +1,6 @@
 package com.marklynch.objects.templates;
 
+import com.marklynch.Game;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Inspectable;
 
@@ -11,6 +12,7 @@ public class TemplatesInspectables {
 		Templates.PIG_SIGN.setImageAndExtrapolateSize("pig_sign.png");
 		Templates.PIG_SIGN.totalHealth = Templates.PIG_SIGN.remainingHealth = 26;
 		Templates.PIG_SIGN.drawOffsetRatioX = -0.25f;
+		Templates.PIG_SIGN.drawOffsetX = Templates.PIG_SIGN.drawOffsetRatioX * Game.SQUARE_WIDTH;
 		Templates.PIG_SIGN.weight = 38f;
 		Templates.PIG_SIGN.value = 36;
 		Templates.PIG_SIGN.anchorX = 0;
@@ -69,7 +71,11 @@ public class TemplatesInspectables {
 		Templates.GIANT_FOOTPRINT_LEFT.widthRatio = 2f;
 		Templates.GIANT_FOOTPRINT_LEFT.heightRatio = 1.5f;
 		Templates.GIANT_FOOTPRINT_LEFT.drawOffsetRatioX = -0.5f;
+		Templates.GIANT_FOOTPRINT_LEFT.drawOffsetX = Templates.GIANT_FOOTPRINT_LEFT.drawOffsetRatioX
+				* Game.SQUARE_WIDTH;
 		Templates.GIANT_FOOTPRINT_LEFT.drawOffsetRatioY = -0.25f;
+		Templates.GIANT_FOOTPRINT_LEFT.drawOffsetY = Templates.GIANT_FOOTPRINT_LEFT.drawOffsetRatioY
+				* Game.SQUARE_HEIGHT;
 		Templates.GIANT_FOOTPRINT_LEFT.canBePickedUp = false;
 		Templates.GIANT_FOOTPRINT_LEFT.fitsInInventory = false;
 		Templates.GIANT_FOOTPRINT_LEFT.persistsWhenCantBeSeen = true;

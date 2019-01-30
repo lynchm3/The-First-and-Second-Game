@@ -62,8 +62,10 @@ public class Tree extends GameObject implements UpdatableGameObject {
 
 		apple.drawOffsetRatioX = appleDrawOffsetXMin
 				+ (float) (Math.random() * (appleDrawOffsetXMax - appleDrawOffsetXMin));
+		apple.drawOffsetX = apple.drawOffsetRatioX * Game.SQUARE_WIDTH;
 		apple.drawOffsetRatioY = apple.drawOffsetYInTree = appleDrawOffsetYMin
 				+ (float) (Math.random() * (appleDrawOffsetYMax - appleDrawOffsetYMin));
+		apple.drawOffsetY = apple.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 
 		inventory.add(apple);
 

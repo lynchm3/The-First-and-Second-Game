@@ -67,10 +67,8 @@ public class AnimationTake extends SecondaryAnimation {
 
 		if (gameObject.squareGameObjectIsOn != null) {
 			// on the ground
-			this.x = originX = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
-			this.y = originY = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
+			this.x = originX = (int) (gameObject.squareGameObjectIsOn.xInGridPixels + gameObject.drawOffsetX);
+			this.y = originY = (int) (gameObject.squareGameObjectIsOn.yInGridPixels + gameObject.drawOffsetY);
 		} else {
 			// in a container
 			this.x = originX = (int) (((GameObject) gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn.xInGridPixels

@@ -2,6 +2,7 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
@@ -49,6 +50,7 @@ public class TemplatesFurniture {
 		Templates.MIRROR.imageTextureCrack = getGlobalImage("mirror_crack.png", true);
 		Templates.MIRROR.totalHealth = Templates.MIRROR.remainingHealth = 50;
 		Templates.MIRROR.drawOffsetRatioY = -0.5f;
+		Templates.MIRROR.drawOffsetY = Templates.MIRROR.drawOffsetRatioY * Game.SQUARE_WIDTH;
 		Templates.MIRROR.soundWhenHit = 10f;
 		Templates.MIRROR.stackable = false;
 		Templates.MIRROR.weight = 52f;
@@ -350,6 +352,7 @@ public class TemplatesFurniture {
 		Templates.WOODEN_SUPPORT.setImageAndExtrapolateSize("wooden_support.png");
 		Templates.WOODEN_SUPPORT.totalHealth = Templates.WOODEN_SUPPORT.remainingHealth = 10;
 		Templates.WOODEN_SUPPORT.drawOffsetRatioX = -0.25f;
+		Templates.WOODEN_SUPPORT.drawOffsetX = Templates.WOODEN_SUPPORT.drawOffsetRatioX * Game.SQUARE_WIDTH;
 		Templates.WOODEN_SUPPORT.soundWhenHit = 10f;
 		Templates.WOODEN_SUPPORT.weight = 112f;
 		Templates.WOODEN_SUPPORT.value = 24;

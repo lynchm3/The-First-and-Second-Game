@@ -48,8 +48,6 @@ public class TemplatesCorpses {
 		Templates.WOOD_CHIPS.name = "Whood Chips";
 		Templates.WOOD_CHIPS.setImageAndExtrapolateSize("wood_chips.png");
 		Templates.WOOD_CHIPS.totalHealth = Templates.WOOD_CHIPS.remainingHealth = 16;
-		Templates.WOOD_CHIPS.drawOffsetRatioX = 0f;
-		Templates.WOOD_CHIPS.drawOffsetRatioY = 0f;
 		Templates.WOOD_CHIPS.soundWhenHit = 1f;
 		Templates.WOOD_CHIPS.soundWhenHitting = 1f;
 		Templates.WOOD_CHIPS.soundDampening = 1f;

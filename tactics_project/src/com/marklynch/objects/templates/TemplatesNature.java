@@ -2,6 +2,7 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
@@ -34,6 +35,7 @@ public class TemplatesNature {
 		Templates.TREE.totalHealth = Templates.TREE.remainingHealth = 100;
 		Templates.TREE.heightRatio = 1.5f;
 		Templates.TREE.drawOffsetRatioY = -0.5f;
+		Templates.TREE.drawOffsetY = Templates.TREE.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		Templates.TREE.weight = 100f;
 		Templates.TREE.value = 10;
 		Templates.TREE.bigShadow = true;
@@ -48,6 +50,7 @@ public class TemplatesNature {
 		Templates.TREE_READABLE.totalHealth = Templates.TREE_READABLE.remainingHealth = Templates.TREE.totalHealth;
 		Templates.TREE_READABLE.heightRatio = Templates.TREE.heightRatio;
 		Templates.TREE_READABLE.drawOffsetRatioY = Templates.TREE.drawOffsetRatioY;
+		Templates.TREE_READABLE.drawOffsetY = Templates.TREE_READABLE.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		Templates.TREE_READABLE.weight = Templates.TREE.weight;
 		Templates.TREE_READABLE.value = Templates.TREE.value;
 		Templates.TREE_READABLE.bigShadow = Templates.TREE.bigShadow;
@@ -65,6 +68,7 @@ public class TemplatesNature {
 		Templates.TREE_CONTAINER.totalHealth = Templates.TREE_CONTAINER.remainingHealth = Templates.TREE.totalHealth;
 		Templates.TREE_CONTAINER.heightRatio = Templates.TREE.heightRatio;
 		Templates.TREE_CONTAINER.drawOffsetRatioY = Templates.TREE.drawOffsetRatioY;
+		Templates.TREE_CONTAINER.drawOffsetY = Templates.TREE_CONTAINER.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		Templates.TREE_CONTAINER.weight = Templates.TREE.weight;
 		Templates.TREE_CONTAINER.value = Templates.TREE.value;
 		Templates.TREE_CONTAINER.bigShadow = Templates.TREE.bigShadow;
@@ -84,7 +88,9 @@ public class TemplatesNature {
 		Templates.BIG_TREE.widthRatio = 1.5f;
 		Templates.BIG_TREE.heightRatio = 1.5f;
 		Templates.BIG_TREE.drawOffsetRatioX = -0.25f;
+		Templates.BIG_TREE.drawOffsetX = Templates.BIG_TREE.drawOffsetRatioX * Game.SQUARE_WIDTH;
 		Templates.BIG_TREE.drawOffsetRatioY = -0.5f;
+		Templates.BIG_TREE.drawOffsetY = Templates.BIG_TREE.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		Templates.BIG_TREE.soundDampening = 2f;
 		Templates.BIG_TREE.weight = 200f;
 		Templates.BIG_TREE.value = 13;
@@ -201,7 +207,9 @@ public class TemplatesNature {
 		Templates.BURROW.name = "Burrow";
 		Templates.BURROW.setImageAndExtrapolateSize("burrow.png");
 		Templates.BURROW.drawOffsetRatioX = 16f;
+		Templates.BURROW.drawOffsetX = Templates.BURROW.drawOffsetRatioX * Game.SQUARE_WIDTH;
 		Templates.BURROW.drawOffsetRatioY = 16f;
+		Templates.BURROW.drawOffsetY = Templates.BURROW.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		Templates.BURROW.weight = 100f;
 		Templates.BURROW.value = 14;
 		Templates.BURROW.anchorX = 0;
@@ -268,8 +276,6 @@ public class TemplatesNature {
 		Templates.VEIN.totalHealth = Templates.VEIN.remainingHealth = 1000;
 		Templates.VEIN.widthRatio = 1f;
 		Templates.VEIN.heightRatio = 1f;
-		Templates.VEIN.drawOffsetRatioX = 0f;
-		Templates.VEIN.drawOffsetRatioY = 0f;
 		Templates.VEIN.soundWhenHit = 10f;
 		Templates.VEIN.soundWhenHitting = 1f;
 		Templates.VEIN.soundDampening = 10f;

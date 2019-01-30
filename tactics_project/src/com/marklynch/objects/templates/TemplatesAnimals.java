@@ -1,5 +1,6 @@
 package com.marklynch.objects.templates;
 
+import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForCarnivoreNeutralWildAnimal;
 import com.marklynch.ai.routines.AIRoutineForFish;
 import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
@@ -22,14 +23,15 @@ public class TemplatesAnimals {
 		Templates.PIG = new Pig();
 		Templates.PIG.title = "Pig";
 		Templates.PIG.level = 1;
-		Templates.PIG.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE,4));
+		Templates.PIG.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 4));
 		Templates.PIG.totalHealth = Templates.PIG.remainingHealth = 100;
 		Templates.PIG.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 10));
 		Templates.PIG.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
-		Templates.PIG.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE,10));
+		Templates.PIG.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 10));
 		Templates.PIG.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 10));
 		Templates.PIG.setImageAndExtrapolateSize("pig.png");
 		Templates.PIG.drawOffsetRatioY = 0.75f;
+		Templates.PIG.drawOffsetY = Templates.PIG.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		Templates.PIG.weight = 70f;
 		Templates.PIG.canOpenDoors = false;
 		Templates.PIG.canEquipWeapons = false;
@@ -41,14 +43,15 @@ public class TemplatesAnimals {
 		Templates.RAT = new TinyNeutralWildAnimal();
 		Templates.RAT.title = "Rat";
 		Templates.RAT.level = 1;
-		Templates.RAT.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE,2));
+		Templates.RAT.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 2));
 		Templates.RAT.totalHealth = Templates.RAT.remainingHealth = 5;
 		Templates.RAT.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 10));
 		Templates.RAT.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
-		Templates.RAT.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE,10));
+		Templates.RAT.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 10));
 		Templates.RAT.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 10));
 		Templates.RAT.setImageAndExtrapolateSize("rat.png");
 		Templates.RAT.drawOffsetRatioY = 0.75f;
+		Templates.RAT.drawOffsetY = Templates.RAT.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		Templates.RAT.weight = 70f;
 		Templates.RAT.canOpenDoors = false;
 		Templates.RAT.canEquipWeapons = false;
@@ -61,11 +64,12 @@ public class TemplatesAnimals {
 		Templates.RABBIT = new HerbivoreWildAnimal();
 		Templates.RABBIT.title = "Rabbit";
 		Templates.RABBIT.level = 1;
-		Templates.RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE,1));
+		Templates.RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 1));
 		Templates.RABBIT.totalHealth = Templates.RABBIT.remainingHealth = 10;
 		Templates.RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 10));
 		Templates.RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
-		Templates.RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE,10));
+		Templates.RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 10));
 		Templates.RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 10));
 		Templates.RABBIT.setImageAndExtrapolateSize("rabbit.png");
 		Templates.RABBIT.weight = 10f;
@@ -78,11 +82,13 @@ public class TemplatesAnimals {
 		Templates.BABY_RABBIT = new TinyNeutralWildAnimal();
 		Templates.BABY_RABBIT.title = "Baby Rabbit";
 		Templates.BABY_RABBIT.level = 1;
-		Templates.BABY_RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE,1));
+		Templates.BABY_RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 1));
 		Templates.BABY_RABBIT.totalHealth = Templates.BABY_RABBIT.remainingHealth = 5;
 		Templates.BABY_RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 10));
 		Templates.BABY_RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
-		Templates.BABY_RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE,10));
+		Templates.BABY_RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE,
+				new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 10));
 		Templates.BABY_RABBIT.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 10));
 		Templates.BABY_RABBIT.setImageAndExtrapolateSize("baby_rabbit.png");
 		Templates.BABY_RABBIT.weight = 10f;
@@ -97,11 +103,11 @@ public class TemplatesAnimals {
 		Templates.FOX = new CarnivoreNeutralWildAnimal();
 		Templates.FOX.title = "Fox";
 		Templates.FOX.level = 1;
-		Templates.FOX.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE,6));
+		Templates.FOX.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 6));
 		Templates.FOX.totalHealth = Templates.FOX.remainingHealth = 15;
 		Templates.FOX.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 10));
 		Templates.FOX.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
-		Templates.FOX.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE,10));
+		Templates.FOX.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 10));
 		Templates.FOX.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 10));
 		Templates.FOX.setImageAndExtrapolateSize("fox.png");
 		Templates.FOX.weight = 60f;
@@ -114,11 +120,11 @@ public class TemplatesAnimals {
 		Templates.WOLF = new CarnivoreNeutralWildAnimal();
 		Templates.WOLF.title = "Wolf";
 		Templates.WOLF.level = 1;
-		Templates.WOLF.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE,10));
+		Templates.WOLF.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 10));
 		Templates.WOLF.totalHealth = Templates.WOLF.remainingHealth = 20;
 		Templates.WOLF.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 10));
 		Templates.WOLF.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
-		Templates.WOLF.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE,10));
+		Templates.WOLF.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 10));
 		Templates.WOLF.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 10));
 		Templates.WOLF.setImageAndExtrapolateSize("wolf_pink.png");
 		Templates.WOLF.weight = 80f;
@@ -136,11 +142,13 @@ public class TemplatesAnimals {
 		Templates.FISH.totalHealth = Templates.FISH.remainingHealth = 5;
 		Templates.FISH.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 1));
 		Templates.FISH.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 1));
-		Templates.FISH.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE,1));
+		Templates.FISH.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 1));
 		Templates.FISH.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 1));
 		Templates.FISH.setImageAndExtrapolateSize("fish.png");
-		Templates.FISH.drawOffsetRatioY = 0.75f;
 		Templates.FISH.drawOffsetRatioX = 0.75f;
+		Templates.FISH.drawOffsetX = Templates.FISH.drawOffsetRatioX * Game.SQUARE_WIDTH;
+		Templates.FISH.drawOffsetRatioY = 0.75f;
+		Templates.FISH.drawOffsetY = Templates.FISH.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		Templates.FISH.weight = 2f;
 		Templates.FISH.canOpenDoors = false;
 		Templates.FISH.canEquipWeapons = false;
@@ -157,11 +165,13 @@ public class TemplatesAnimals {
 		Templates.TURTLE.totalHealth = Templates.TURTLE.remainingHealth = 5;
 		Templates.TURTLE.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 1));
 		Templates.TURTLE.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 1));
-		Templates.TURTLE.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE,1));
+		Templates.TURTLE.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE, new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 1));
 		Templates.TURTLE.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 1));
 		Templates.TURTLE.setImageAndExtrapolateSize("turtle.png");
 		Templates.TURTLE.drawOffsetRatioY = 0.75f;
+		Templates.TURTLE.drawOffsetY = Templates.TURTLE.drawOffsetRatioY * Game.SQUARE_WIDTH;
 		Templates.TURTLE.drawOffsetRatioX = 0.5f;
+		Templates.TURTLE.drawOffsetX = Templates.TURTLE.drawOffsetRatioX * Game.SQUARE_HEIGHT;
 		Templates.TURTLE.anchorX = 32;
 		Templates.TURTLE.anchorY = 16;
 		Templates.TURTLE.weight = 4f;

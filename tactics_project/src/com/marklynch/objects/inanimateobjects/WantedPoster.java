@@ -64,10 +64,10 @@ public class WantedPoster extends GameObject implements UpdatableGameObject {
 		// Draw object
 		if (squareGameObjectIsOn != null) {
 
-			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetRatioX + Game.QUARTER_SQUARE_WIDTH);
-			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * drawOffsetRatioY + Game.QUARTER_SQUARE_HEIGHT);
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX
+					+ Game.QUARTER_SQUARE_WIDTH);
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY
+					+ Game.QUARTER_SQUARE_HEIGHT);
 			float alpha = 1.0f;
 			if (primaryAnimation != null)
 				alpha = primaryAnimation.alpha;

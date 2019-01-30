@@ -1,14 +1,12 @@
 package com.marklynch.objects.actors;
 
-import com.marklynch.utils.ArrayList;
-
-import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.animation.secondary.AnimationBubbles;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 
 public class Fish extends WildAnimal {
 
@@ -42,8 +40,8 @@ public class Fish extends WildAnimal {
 		super.update(delta);
 
 		if (squareGameObjectIsOn != null && delta % 3 == 0) {
-			int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
-			int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			int x = (int) (squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+			int y = (int) (squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 			Level.addSecondaryAnimation(new AnimationBubbles(this, x + width, y, 0.1f, null));
 		}
 	}

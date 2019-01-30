@@ -77,8 +77,6 @@ public class TemplatesArmor {
 		Templates.JUMPER.totalHealth = Templates.JUMPER.remainingHealth = 20;
 		Templates.JUMPER.widthRatio = 1f;
 		Templates.JUMPER.heightRatio = 1.5f;
-		Templates.JUMPER.drawOffsetRatioX = 0f;
-		Templates.JUMPER.drawOffsetRatioY = 0f;
 		Templates.JUMPER.soundWhenHit = 1f;
 		Templates.JUMPER.soundWhenHitting = 1f;
 		Templates.JUMPER.soundDampening = 1f;

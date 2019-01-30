@@ -1,12 +1,11 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
 import com.marklynch.level.constructs.effect.EffectCurse;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
@@ -48,8 +47,8 @@ public class Mirror extends GameObject {
 		if (!shouldDraw())
 			return false;
 
-		boundsX1 = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
-		boundsY1 = (int) (this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
+		boundsX1 = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+		boundsY1 = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 		boundsX2 = (int) (boundsX1 + width);
 		boundsY2 = (int) (boundsY1 + height);
 
@@ -194,13 +193,12 @@ public class Mirror extends GameObject {
 
 		float actorPositionYInPixels = 0;
 		if (gameObject.flipYAxisInMirror == false) {
-			actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY - Game.SQUARE_HEIGHT * offsetY;
+			actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + gameObject.drawOffsetY
+					- Game.SQUARE_HEIGHT * offsetY;
 			actorPositionYInPixels -= gameObject.primaryAnimation.offsetY;
 		} else {
-			actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY - Game.SQUARE_HEIGHT * offsetY
-					- (Game.SQUARE_HEIGHT - gameObject.height);
+			actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + gameObject.drawOffsetY
+					- Game.SQUARE_HEIGHT * offsetY - (Game.SQUARE_HEIGHT - gameObject.height);
 			actorPositionYInPixels += gameObject.primaryAnimation.offsetY;
 		}
 
@@ -223,9 +221,9 @@ public class Mirror extends GameObject {
 	public void drawActor(Actor actor, int offsetX, int offsetY) {
 
 		float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * offsetX
-				+ Game.SQUARE_WIDTH * actor.drawOffsetRatioX;
-		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
-				+ Game.SQUARE_HEIGHT * actor.drawOffsetRatioY - Game.SQUARE_HEIGHT * offsetY;
+				+ actor.drawOffsetX;
+		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + actor.drawOffsetY
+				- Game.SQUARE_HEIGHT * offsetY;
 		if (actor.primaryAnimation != null) {
 			actorPositionXInPixels += actor.primaryAnimation.offsetX;
 			actorPositionYInPixels -= actor.primaryAnimation.offsetY;

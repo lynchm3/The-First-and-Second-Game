@@ -52,10 +52,8 @@ public class Seesaw extends GameObject implements SwitchListener {
 		if (pressurePlate1.up == true && pressurePlate2.up == true) {
 
 		} else {
-			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 
 			if (pressurePlate1.up) {
 				TextureUtils.drawTexture(gradientLeftUp, 1f, actorPositionXInPixels - 256, actorPositionYInPixels,

@@ -494,9 +494,8 @@ public class Actor extends GameObject {
 		if (!shouldDraw())
 			return false;
 
-		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
-		actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+		actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 
 		boundsX1 = actorPositionXInPixels;
 		boundsY1 = actorPositionYInPixels;
@@ -637,25 +636,21 @@ public class Actor extends GameObject {
 
 			if (arrow.backwards) {
 				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								+ arrowWidth + primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ primaryAnimation.offsetY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
+						this.squareGameObjectIsOn.xInGridPixels + arrow.drawOffsetX + arrowWidth
 								+ primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ arrow.height + primaryAnimation.offsetY,
+						this.squareGameObjectIsOn.yInGridPixels + arrow.drawOffsetY + primaryAnimation.offsetY,
+						this.squareGameObjectIsOn.xInGridPixels + arrow.drawOffsetX + primaryAnimation.offsetX,
+						this.squareGameObjectIsOn.yInGridPixels + arrow.drawOffsetY + arrow.height
+								+ primaryAnimation.offsetY,
 						color);
 			} else {
 				TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								+ primaryAnimation.offsetX - arrowWidth,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
+						this.squareGameObjectIsOn.xInGridPixels + arrow.drawOffsetX + primaryAnimation.offsetX
+								- arrowWidth,
+						this.squareGameObjectIsOn.yInGridPixels + arrow.drawOffsetY + primaryAnimation.offsetY,
+						this.squareGameObjectIsOn.xInGridPixels + arrow.drawOffsetX + primaryAnimation.offsetX,
+						this.squareGameObjectIsOn.yInGridPixels + arrow.drawOffsetY + arrow.height
 								+ primaryAnimation.offsetY,
-						this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-								+ primaryAnimation.offsetX,
-						this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-								+ arrow.height + primaryAnimation.offsetY,
 						color);
 
 			}
@@ -1491,10 +1486,8 @@ public class Actor extends GameObject {
 	}
 
 	public void drawFishing(boolean useAnimation) {
-		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-				+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 		if (primaryAnimation != null && useAnimation) {
 			actorPositionXInPixels += primaryAnimation.offsetX;
 			actorPositionYInPixels += primaryAnimation.offsetY;
@@ -2335,10 +2328,8 @@ public class Actor extends GameObject {
 			// float squarePositionX = squareGameObjectIsOn.xInGridPixels;
 			// float squarePositionY = squareGameObjectIsOn.yInGridPixels;
 
-			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 			if (primaryAnimation != null) {
 				actorPositionXInPixels += primaryAnimation.offsetX;
 				actorPositionYInPixels += primaryAnimation.offsetY;

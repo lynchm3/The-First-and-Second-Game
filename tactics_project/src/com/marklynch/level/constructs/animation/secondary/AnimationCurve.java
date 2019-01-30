@@ -38,10 +38,8 @@ public class AnimationCurve extends SecondaryAnimation {
 				new Point(projectileObject.squareGameObjectIsOn.xInGridPixels + Game.HALF_SQUARE_WIDTH,
 						projectileObject.squareGameObjectIsOn.yInGridPixels + Game.HALF_SQUARE_HEIGHT));
 		this.targetAngle = angleInRadians + angleChange;
-		this.x = projectileObject.squareGameObjectIsOn.xInGridPixels
-				+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);// shooter.getCenterX();
-		this.y = projectileObject.squareGameObjectIsOn.yInGridPixels
-				+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioY);// shooter.getCenterY();
+		this.x = projectileObject.squareGameObjectIsOn.xInGridPixels + projectileObject.drawOffsetX;// shooter.getCenterX();
+		this.y = projectileObject.squareGameObjectIsOn.yInGridPixels + projectileObject.drawOffsetY;// shooter.getCenterY();
 		this.hypotanusLength = (float) Math.hypot(Math.abs((x + projectileObject.halfWidth) - focalPoint.x),
 				Math.abs((y + projectileObject.halfHeight) - focalPoint.y));
 
@@ -72,9 +70,9 @@ public class AnimationCurve extends SecondaryAnimation {
 			runCompletionAlorightm(true);
 		} else {
 			x = (float) (focalPoint.x + this.hypotanusLength * Math.cos(angleInRadians)) - Game.HALF_SQUARE_WIDTH
-					+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);
+					+ projectileObject.drawOffsetX;
 			y = (float) (focalPoint.y + this.hypotanusLength * Math.sin(angleInRadians)) - Game.HALF_SQUARE_HEIGHT
-					+ (Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioY);
+					+ projectileObject.drawOffsetY;
 		}
 	}
 

@@ -161,6 +161,8 @@ public class GameObject
 
 	public float drawOffsetRatioX = 0;
 	public float drawOffsetRatioY = 0;
+	public float drawOffsetX = 0;
+	public float drawOffsetY = 0;
 	public float soundWhenHit = 1;
 	public float soundWhenHitting = 1;
 	public float soundDampening = 1;
@@ -341,14 +343,14 @@ public class GameObject
 				drawOffsetYMax = 0;
 			}
 			this.drawOffsetRatioX = (float) (Math.random() * drawOffsetXMax);
+			this.drawOffsetX = this.drawOffsetRatioX * Game.SQUARE_WIDTH;
 			this.drawOffsetRatioY = (/* Math.random() * */ drawOffsetYMax);
+			this.drawOffsetY = this.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		}
 	}
 
 	public void postLoad1() {
 		inventory.postLoad1();
-		// loadImages();
-		// paths = new HashMap<Square, Path>();
 		if (squareGameObjectIsOn != null) {
 			this.squareGameObjectIsOn.inventory.add(this);
 		}
@@ -419,11 +421,10 @@ public class GameObject
 //			actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 //					+ Game.SQUARE_WIDTH * -drawOffsetRatioX);
 //		} else {
-		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
+		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
 //		}
 
-		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 		float alpha = 1.0f;
 
 		// TextureUtils.skipNormals = true;
@@ -537,22 +538,16 @@ public class GameObject
 				if (arrow.backwards) {
 					TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
 
-							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-									+ arrowWidth,
-							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
-							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-									+ arrow.height,
-							color);
+							this.squareGameObjectIsOn.xInGridPixels + arrow.drawOffsetX + arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + arrow.drawOffsetY,
+							this.squareGameObjectIsOn.xInGridPixels + arrow.drawOffsetX,
+							this.squareGameObjectIsOn.yInGridPixels + arrow.drawOffsetY + arrow.height, color);
 				} else {
 					TextureUtils.drawTexture(arrow.textureEmbeddedPoint, alpha,
-							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX
-									- arrowWidth,
-							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY,
-							this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * arrow.drawOffsetRatioX,
-							this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * arrow.drawOffsetRatioY
-									+ arrow.height,
-							color);
+							this.squareGameObjectIsOn.xInGridPixels + arrow.drawOffsetX - arrowWidth,
+							this.squareGameObjectIsOn.yInGridPixels + arrow.drawOffsetY,
+							this.squareGameObjectIsOn.xInGridPixels + arrow.drawOffsetX,
+							this.squareGameObjectIsOn.yInGridPixels + arrow.drawOffsetY + arrow.height, color);
 
 				}
 			}
@@ -705,15 +700,13 @@ public class GameObject
 			int actorPositionXInPixels = 0;
 			int actorPositionYInPixels = 0;
 			if (primaryAnimation != null) {
-				actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-						+ Game.SQUARE_WIDTH * drawOffsetRatioX + primaryAnimation.offsetX);
-				actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-						+ Game.SQUARE_HEIGHT * drawOffsetRatioY + primaryAnimation.offsetY);
+				actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX
+						+ primaryAnimation.offsetX);
+				actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY
+						+ primaryAnimation.offsetY);
 			} else {
-				actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-						+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-				actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-						+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+				actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+				actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 
 			}
 
@@ -1962,7 +1955,9 @@ public class GameObject
 		gameObject.widthRatio = widthRatio;
 		gameObject.heightRatio = heightRatio;
 		gameObject.drawOffsetRatioX = drawOffsetRatioX;
+		gameObject.drawOffsetX = drawOffsetX;
 		gameObject.drawOffsetRatioY = drawOffsetRatioY;
+		gameObject.drawOffsetY = drawOffsetY;
 		gameObject.soundWhenHit = soundWhenHit;
 		gameObject.soundWhenHitting = soundWhenHitting;
 		gameObject.soundDampening = soundDampening;
@@ -2541,8 +2536,8 @@ public class GameObject
 		// CRIT large red, HIGH DMG red, NORMAL DMG white, resisted DMG grey,
 		// HEAL green
 
-		int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
-		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
+		int x = (int) (squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+		int y = (int) (squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 
 		Level.addSecondaryAnimation(
 				new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f, statType, color, null));
@@ -2564,10 +2559,8 @@ public class GameObject
 					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
 		} else {
 
-			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
-			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 			if (primaryAnimation != null) {
 				actorPositionXInPixels += primaryAnimation.offsetX;
 				actorPositionYInPixels += primaryAnimation.offsetY;
