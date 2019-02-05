@@ -16,13 +16,13 @@ import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerDash;
 import com.marklynch.level.constructs.power.PowerDouse;
 import com.marklynch.level.constructs.power.PowerFindMatch;
-import com.marklynch.level.constructs.power.PowerQuickFingers;
 import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerHealTouch;
 import com.marklynch.level.constructs.power.PowerIgnite;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
+import com.marklynch.level.constructs.power.PowerQuickFingers;
 import com.marklynch.level.constructs.power.PowerRespite;
 import com.marklynch.level.constructs.power.PowerSpiritBag;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
@@ -30,6 +30,7 @@ import com.marklynch.level.constructs.power.PowerTelekineticPush;
 import com.marklynch.level.constructs.power.PowerTeleportOther;
 import com.marklynch.level.constructs.power.PowerTimePlusSixHours;
 import com.marklynch.level.constructs.power.PowerUnlock;
+import com.marklynch.level.constructs.power.PowerWall;
 import com.marklynch.level.constructs.skilltree.SkillTreeNode.SkillTreeNodePower;
 import com.marklynch.level.constructs.skilltree.SkillTreeNode.SkillTreeNodeStat;
 import com.marklynch.ui.Draggable;
@@ -60,7 +61,7 @@ public class SkillTree implements Draggable, Scrollable {
 	public SkillTree() {
 
 		// Respite
-		SkillTreeNode respite = new SkillTreeNode(2816, 1792);
+		SkillTreeNode respite = new SkillTreeNode(11, 7);
 		activateAtStart.add(respite);
 		respite.name = "Respite";
 		respite.description = "\"The human body requires 8 hours of sleep per night, or at least 5 secs between fights.\" - Unknown";
@@ -68,7 +69,7 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(respite);
 
 		// Heal Self
-		SkillTreeNode healSelf = new SkillTreeNode(2560, 1792);
+		SkillTreeNode healSelf = new SkillTreeNode(10, 7);
 		healSelf.name = "Heal Self";
 		healSelf.description = "\"There's nothing wrong with some self-love\" - Unknown";
 		healSelf.powersUnlocked.add(new PowerHealSelf(null));
@@ -77,7 +78,7 @@ public class SkillTree implements Draggable, Scrollable {
 		healSelf.linkedSkillTreeNodes.add(respite);
 
 		// Heal Touch
-		SkillTreeNode healTouch = new SkillTreeNode(2560, 1536);
+		SkillTreeNode healTouch = new SkillTreeNode(10, 6);
 		healTouch.name = "Heal Touch";
 		healTouch.description = "\"Love thy neighbor\" - God";
 		healTouch.powersUnlocked.add(new PowerHealTouch(null));
@@ -86,7 +87,7 @@ public class SkillTree implements Draggable, Scrollable {
 		healSelf.linkedSkillTreeNodes.add(healTouch);
 
 		// Heal Other
-		SkillTreeNode healOther = new SkillTreeNode(2816, 1536);
+		SkillTreeNode healOther = new SkillTreeNode(11, 6);
 		healOther.name = "Heal Ranged";
 		healOther.description = "\"Love evveryone\" - God, probably";
 		healOther.powersUnlocked.add(new PowerHealRanged(null));
@@ -96,7 +97,7 @@ public class SkillTree implements Draggable, Scrollable {
 		healOther.linkedSkillTreeNodes.add(healTouch);
 
 		// Grabber
-		SkillTreeNode grabber = new SkillTreeNode(256, 512);
+		SkillTreeNode grabber = new SkillTreeNode(1, 2);
 		activateAtStart.add(grabber);
 		grabber.name = "Grabber";
 		grabber.description = "Grabber";
@@ -106,7 +107,7 @@ public class SkillTree implements Draggable, Scrollable {
 		// grabber.linkedSkillTreeNodes.add(respite);
 
 		// Dash
-		SkillTreeNode dash = new SkillTreeNode(512, 512);
+		SkillTreeNode dash = new SkillTreeNode(2, 2);
 		activateAtStart.add(dash);
 		dash.name = "Dash";
 		dash.description = "Dash";
@@ -116,7 +117,7 @@ public class SkillTree implements Draggable, Scrollable {
 		grabber.linkedSkillTreeNodes.add(dash);
 
 		// Spirit bag
-		SkillTreeNode spiritBag = new SkillTreeNode(512, 1792);
+		SkillTreeNode spiritBag = new SkillTreeNode(2, 7);
 		activateAtStart.add(spiritBag);
 		spiritBag.name = "spiritBag";
 		spiritBag.description = "spiritBag";
@@ -124,7 +125,7 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(spiritBag);
 
 		// Find Match
-		SkillTreeNode findMatch = new SkillTreeNode(5120, 1280);
+		SkillTreeNode findMatch = new SkillTreeNode(20, 5);
 		activateAtStart.add(findMatch);
 		findMatch.name = "Find Match";
 		findMatch.description = "Find Match";
@@ -132,7 +133,7 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(findMatch);
 
 		// Superpeek
-		SkillTreeNode superPeek = new SkillTreeNode(5120, 1024);
+		SkillTreeNode superPeek = new SkillTreeNode(20, 4);
 		activateAtStart.add(superPeek);
 		superPeek.name = "Superpeek";
 		superPeek.description = "Superpeek";
@@ -142,7 +143,7 @@ public class SkillTree implements Draggable, Scrollable {
 		findMatch.linkedSkillTreeNodes.add(superPeek);
 
 		// Ignite
-		SkillTreeNode ignite = new SkillTreeNode(4096, 1536);
+		SkillTreeNode ignite = new SkillTreeNode(16, 6);
 		// activateAtStart.add(ignite);
 		ignite.name = "Ignite";
 		ignite.description = "Ignite";
@@ -150,13 +151,23 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(ignite);
 
 		// Douse
-		SkillTreeNode douse = new SkillTreeNode(3840, 1536);
-		douse.name = "douse";
-		douse.description = "douse";
+		SkillTreeNode douse = new SkillTreeNode(15, 6);
+		douse.name = "Douse";
+		douse.description = "Douse";
 		douse.powersUnlocked.add(new PowerDouse(null));
 		skillTreeNodes.add(douse);
 		ignite.linkedSkillTreeNodes.add(douse);
 		douse.linkedSkillTreeNodes.add(ignite);
+
+		// Wall
+		SkillTreeNode wall = new SkillTreeNode(15, 5);
+		activateAtStart.add(wall);
+		wall.name = "Wall";
+		wall.description = "Wall";
+		wall.powersUnlocked.add(new PowerWall(null));
+		skillTreeNodes.add(wall);
+		wall.linkedSkillTreeNodes.add(douse);
+		douse.linkedSkillTreeNodes.add(wall);
 
 		// Fire Damage +1
 		// SkillTreeNode fire1 = new SkillTreeNode(512, 512 + 512);
@@ -168,7 +179,7 @@ public class SkillTree implements Draggable, Scrollable {
 		// fire1.linkedSkillTreeNodes.add(spark);
 
 		// Inferno
-		SkillTreeNode inferno = new SkillTreeNode(4096, 1792);
+		SkillTreeNode inferno = new SkillTreeNode(16, 7);
 		activateAtStart.add(inferno);
 		inferno.name = "Inferno";
 		inferno.description = "Inferno";
@@ -178,7 +189,7 @@ public class SkillTree implements Draggable, Scrollable {
 		inferno.linkedSkillTreeNodes.add(ignite);
 
 		// Poison Knife
-		SkillTreeNode poisonKnives = new SkillTreeNode(1280, 1024);
+		SkillTreeNode poisonKnives = new SkillTreeNode(5, 4);
 		activateAtStart.add(poisonKnives);
 		poisonKnives.name = "Poison Knives";
 		poisonKnives.description = "";
@@ -186,7 +197,7 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(poisonKnives);
 
 		// Bleed
-		SkillTreeNode bleed = new SkillTreeNode(1280, 1280);
+		SkillTreeNode bleed = new SkillTreeNode(5, 5);
 		bleed.name = "Bleed";
 		bleed.description = "";
 		bleed.powersUnlocked.add(new PowerBleed(null));
@@ -195,7 +206,7 @@ public class SkillTree implements Draggable, Scrollable {
 		poisonKnives.linkedSkillTreeNodes.add(bleed);
 
 		// Time +6 hrs
-		SkillTreeNode timePlus6 = new SkillTreeNode(3328, 2816);
+		SkillTreeNode timePlus6 = new SkillTreeNode(13, 11);
 		activateAtStart.add(timePlus6);
 		timePlus6.name = "timePlus6";
 		timePlus6.description = "";
@@ -203,7 +214,7 @@ public class SkillTree implements Draggable, Scrollable {
 		skillTreeNodes.add(timePlus6);
 
 		// Unlock
-		SkillTreeNode unlock = new SkillTreeNode(3328, 3072);
+		SkillTreeNode unlock = new SkillTreeNode(13, 12);
 		unlock.name = "unlock";
 		unlock.description = "";
 		unlock.powersUnlocked.add(new PowerUnlock(null));
@@ -212,7 +223,7 @@ public class SkillTree implements Draggable, Scrollable {
 		unlock.linkedSkillTreeNodes.add(timePlus6);
 
 		// Telekinteic push
-		SkillTreeNode telekineticPush = new SkillTreeNode(3072, 3072);
+		SkillTreeNode telekineticPush = new SkillTreeNode(12, 12);
 		activateAtStart.add(telekineticPush);
 		telekineticPush.name = "Telekinetic Push";
 		telekineticPush.description = "\"The bigger they are, the harder they fall\" - Stranger";
@@ -222,7 +233,7 @@ public class SkillTree implements Draggable, Scrollable {
 		unlock.linkedSkillTreeNodes.add(telekineticPush);
 
 		// Teleportation +1
-		SkillTreeNode teleportation1 = new SkillTreeNode(2816, 3072);
+		SkillTreeNode teleportation1 = new SkillTreeNode(11, 12);
 		activateAtStart.add(teleportation1);
 		teleportation1.name = "Teleport";
 		teleportation1.description = "\"Teleportation! WOW!\" - Stranger";
@@ -336,7 +347,8 @@ public class SkillTree implements Draggable, Scrollable {
 
 		for (SkillTreeNode skillTreeNode : skillTreeNodes) {
 
-			skillTreeNode.updatePosition(skillTreeNode.x + dragX / zoom, skillTreeNode.y - dragY / zoom);
+			skillTreeNode.updatePosition(skillTreeNode.xInPixels + dragX / zoom,
+					skillTreeNode.yInPixels - dragY / zoom);
 		}
 
 		// fixScroll();

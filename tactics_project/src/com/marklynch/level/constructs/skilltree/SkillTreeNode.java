@@ -40,7 +40,7 @@ public class SkillTreeNode extends LevelButton {
 	public ArrayList<SkillTreeNodePower> powerButtons = new ArrayList<SkillTreeNodePower>();
 	public ArrayList<SkillTreeNodeStat> statButtons = new ArrayList<SkillTreeNodeStat>();
 	public ArrayList<Stat> statsUnlocked = new ArrayList<Stat>();
-	public float x, y, circleX1, circleY1, circleX2, circleY2, textX, textY;
+	public float xInPixels, yInPixels, circleX1, circleY1, circleX2, circleY2, textX, textY;
 
 	float powerOffsetX = 16;
 	float powerOffsetY = 16;
@@ -52,11 +52,11 @@ public class SkillTreeNode extends LevelButton {
 	public static float circleCircumference = circleRadius * 2;
 	// public float dragX = 0, dragY = 0;
 
-	public SkillTreeNode(int x, int y) {
-		super(x - circleRadius, y - circleRadius, circleCircumference, circleCircumference, null, null, "", true, true,
-				Color.TRANSPARENT, Color.WHITE, "BUTTON");
-		this.x = x;
-		this.y = y;
+	public SkillTreeNode(int xInGrid, int yInGrid) {
+		super(xInGrid * 256 - circleRadius, yInGrid * 256 - circleRadius, circleCircumference, circleCircumference,
+				null, null, "", true, true, Color.TRANSPARENT, Color.WHITE, "BUTTON");
+		this.xInPixels = xInGrid * 256;
+		this.yInPixels = yInGrid * 256;
 
 	}
 
@@ -214,11 +214,14 @@ public class SkillTreeNode extends LevelButton {
 	public void drawLines() {
 		for (SkillTreeNode linkedSkillTreeNode : linkedSkillTreeNodes) {
 			if (this.activated && linkedSkillTreeNode.activated)
-				LineUtils.drawLine(Color.BLUE, this.x, this.y, linkedSkillTreeNode.x, linkedSkillTreeNode.y, 4);
+				LineUtils.drawLine(Color.BLUE, this.xInPixels, this.yInPixels, linkedSkillTreeNode.xInPixels,
+						linkedSkillTreeNode.yInPixels, 4);
 			else if (this.activated || linkedSkillTreeNode.activated)
-				LineUtils.drawLine(Color.LIGHT_GRAY, this.x, this.y, linkedSkillTreeNode.x, linkedSkillTreeNode.y, 4);
+				LineUtils.drawLine(Color.LIGHT_GRAY, this.xInPixels, this.yInPixels, linkedSkillTreeNode.xInPixels,
+						linkedSkillTreeNode.yInPixels, 4);
 			else
-				LineUtils.drawLine(Color.DARK_GRAY, this.x, this.y, linkedSkillTreeNode.x, linkedSkillTreeNode.y, 4);
+				LineUtils.drawLine(Color.DARK_GRAY, this.xInPixels, this.yInPixels, linkedSkillTreeNode.xInPixels,
+						linkedSkillTreeNode.yInPixels, 4);
 		}
 
 	}
@@ -254,7 +257,7 @@ public class SkillTreeNode extends LevelButton {
 	@Override
 	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
 		if (super.calculateIfPointInBoundsOfButton(mouseX, mouseY)) {
-			return Math.hypot(this.x - mouseX, this.y - mouseY) <= circleRadius;
+			return Math.hypot(this.xInPixels - mouseX, this.yInPixels - mouseY) <= circleRadius;
 		}
 		return false;
 	}
@@ -264,8 +267,8 @@ public class SkillTreeNode extends LevelButton {
 
 		super.updatePosition(x - circleRadius, y - circleRadius);
 
-		this.x = x;
-		this.y = y;
+		this.xInPixels = x;
+		this.yInPixels = y;
 
 		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
 			skillTreeNodePower.updatePosition(x + powerOffsetX, y + powerOffsetY);
@@ -281,19 +284,19 @@ public class SkillTreeNode extends LevelButton {
 
 	private void setLocation() {
 
-		circleX1 = x - circleRadius;
-		circleY1 = y - circleRadius;
-		circleX2 = x + circleRadius;
-		circleY2 = y + circleRadius;
-		textX = x - Game.smallFont.getWidth(name) / 2;
-		textY = y - 10;
+		circleX1 = xInPixels - circleRadius;
+		circleY1 = yInPixels - circleRadius;
+		circleX2 = xInPixels + circleRadius;
+		circleY2 = yInPixels + circleRadius;
+		textX = xInPixels - Game.smallFont.getWidth(name) / 2;
+		textY = yInPixels - 10;
 
 		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
-			skillTreeNodePower.setLocation(x + powerOffsetX, y + powerOffsetY);
+			skillTreeNodePower.setLocation(xInPixels + powerOffsetX, yInPixels + powerOffsetY);
 		}
 
 		for (SkillTreeNodeStat skillTreeNodeStat : statButtons) {
-			skillTreeNodeStat.setLocation(x + statOffsetX, y + statOffsetY);
+			skillTreeNodeStat.setLocation(xInPixels + statOffsetX, yInPixels + statOffsetY);
 		}
 
 		// powerX =
