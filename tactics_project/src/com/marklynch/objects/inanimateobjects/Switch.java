@@ -77,8 +77,8 @@ public class Switch extends GameObject {
 
 			if (switchListener instanceof GameObject) {
 				GameObject switchListenerGameObject = (GameObject) switchListener;
-				zwitch.linkedGameObjects.add(switchListenerGameObject);
-				switchListenerGameObject.linkedGameObjects.add(zwitch);
+				zwitch.linkedObjects.add(switchListenerGameObject);
+				switchListenerGameObject.linkedObjects.add(zwitch);
 			}
 		}
 		zwitch.switchType = switchType;

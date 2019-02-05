@@ -62,8 +62,8 @@ public abstract class Openable extends GameObject implements SwitchListener {
 		openable.lockable = lockable;
 		openable.keys = keys;
 		for (Key key : keys) {
-			openable.linkedGameObjects.add(key);
-			key.linkedGameObjects.add(openable);
+			openable.linkedObjects.add(key);
+			key.linkedObjects.add(openable);
 		}
 		openable.locked = locked;
 

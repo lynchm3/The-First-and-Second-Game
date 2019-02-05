@@ -48,6 +48,7 @@ public class Portal extends GameObject implements OnCompletionListener {
 		setInstances(portal);
 		super.setAttributesForCopy(portal, square, owner);
 		portal.connectedSquare = connectedSquare;
+		portal.linkedObjects.add(connectedSquare);
 		return portal;
 	}
 

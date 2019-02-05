@@ -16,6 +16,8 @@ public class PowerFindMatch extends Power {
 
 	private static String NAME = "Find Match";
 
+	// Keys to doors, switches to what they activeate, portals to where they go
+
 	public PowerFindMatch() {
 		this(null);
 	}
@@ -86,7 +88,7 @@ public class PowerFindMatch extends Power {
 		if (targetGameObject == null) {
 			if (Game.squareMouseIsOver != null && !(Game.squareMouseIsOver instanceof InventorySquare)) {
 				for (GameObject gameObjectOnTargetSquare : Game.squareMouseIsOver.inventory.gameObjects) {
-					if (gameObjectOnTargetSquare.linkedGameObjects.size() > 0) {
+					if (gameObjectOnTargetSquare.linkedObjects.size() > 0) {
 						targetGameObject = gameObjectOnTargetSquare;
 						break;
 					}
@@ -99,12 +101,12 @@ public class PowerFindMatch extends Power {
 			return;
 
 		// If gameObject has no links, check it's equipped item...
-		if (targetGameObject.linkedGameObjects.size() == 0) {
+		if (targetGameObject.linkedObjects.size() == 0) {
 			if (targetGameObject.equipped != null)
 				targetGameObject = targetGameObject.equipped;
 		}
 
-		if (targetGameObject.linkedGameObjects.size() == 0)
+		if (targetGameObject.linkedObjects.size() == 0)
 			return;
 
 		Square square = targetGameObject.getWorldSquareGameObjectIsOn();
@@ -119,20 +121,36 @@ public class PowerFindMatch extends Power {
 		System.out.println("targetGameObject.drawOffsetX = " + targetGameObject.drawOffsetX);
 		System.out.println("targetGameObject.halfWidth = " + targetGameObject.halfWidth);
 
-		for (GameObject linkedGameObject : targetGameObject.linkedGameObjects) {
-			Square linkedGameObjectSquare = linkedGameObject.getWorldSquareGameObjectIsOn();
-			if (linkedGameObjectSquare == null)
-				continue;
+		for (Object linkedObject : targetGameObject.linkedObjects) {
 
-			float x2 = (Game.halfWindowWidth)
-					+ (Game.zoom * (linkedGameObjectSquare.xInGridPixels + linkedGameObject.drawOffsetX
-							+ linkedGameObject.halfWidth - Game.halfWindowWidth + Game.getDragXWithOffset()));
+			if (linkedObject instanceof Square) {
 
-			float y2 = (Game.halfWindowHeight)
-					+ (Game.zoom * (linkedGameObjectSquare.yInGridPixels + linkedGameObject.drawOffsetY
-							+ linkedGameObject.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
+				Square linkedSquare = (Square) linkedObject;
+				float x2 = (Game.halfWindowWidth) + (Game.zoom * (linkedSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH
+						- Game.halfWindowWidth + Game.getDragXWithOffset()));
 
-			LineUtils.drawLine(Color.RED, x1, y1, x2, y2, 1);
+				float y2 = (Game.halfWindowHeight) + (Game.zoom * (linkedSquare.yInGridPixels + Game.HALF_SQUARE_HEIGHT
+						- Game.halfWindowHeight + Game.getDragYWithOffset()));
+
+				LineUtils.drawLine(Color.RED, x1, y1, x2, y2, 1);
+
+			} else {
+
+				GameObject linkedGameObject = (GameObject) linkedObject;
+				Square linkedGameObjectSquare = linkedGameObject.getWorldSquareGameObjectIsOn();
+				if (linkedGameObjectSquare == null)
+					continue;
+
+				float x2 = (Game.halfWindowWidth)
+						+ (Game.zoom * (linkedGameObjectSquare.xInGridPixels + linkedGameObject.drawOffsetX
+								+ linkedGameObject.halfWidth - Game.halfWindowWidth + Game.getDragXWithOffset()));
+
+				float y2 = (Game.halfWindowHeight)
+						+ (Game.zoom * (linkedGameObjectSquare.yInGridPixels + linkedGameObject.drawOffsetY
+								+ linkedGameObject.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
+
+				LineUtils.drawLine(Color.RED, x1, y1, x2, y2, 1);
+			}
 		}
 	}
 

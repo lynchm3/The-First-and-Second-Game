@@ -27,8 +27,8 @@ public class SeesawPart extends PressurePlate {
 
 			if (switchListener instanceof GameObject) {
 				GameObject switchListenerGameObject = (GameObject) switchListener;
-				seesawPart.linkedGameObjects.add(switchListenerGameObject);
-				switchListenerGameObject.linkedGameObjects.add(seesawPart);
+				seesawPart.linkedObjects.add(switchListenerGameObject);
+				switchListenerGameObject.linkedObjects.add(seesawPart);
 			}
 		}
 		setInstances(seesawPart);

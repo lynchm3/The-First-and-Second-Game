@@ -96,8 +96,8 @@ public class PressurePlate extends Switch {
 
 			if (switchListener instanceof GameObject) {
 				GameObject switchListenerGameObject = (GameObject) switchListener;
-				pressurePlate.linkedGameObjects.add(switchListenerGameObject);
-				switchListenerGameObject.linkedGameObjects.add(pressurePlate);
+				pressurePlate.linkedObjects.add(switchListenerGameObject);
+				switchListenerGameObject.linkedObjects.add(pressurePlate);
 			}
 		}
 		setInstances(pressurePlate);

@@ -762,7 +762,7 @@ public class GameObject
 
 	protected boolean died = false;
 
-	public ArrayList<GameObject> linkedGameObjects = new ArrayList<GameObject>(GameObject.class);
+	public ArrayList<Object> linkedObjects = new ArrayList<Object>(Object.class);
 
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 
