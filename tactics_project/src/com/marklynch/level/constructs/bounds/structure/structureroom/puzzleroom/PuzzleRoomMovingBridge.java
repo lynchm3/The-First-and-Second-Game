@@ -178,10 +178,10 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 	public void moveBridge() {
 
-		HashMap<GameObject, Square> teleportationsToPerform = new HashMap<GameObject, Square>();
+		HashMap<GameObject, Square> movesToPerform = new HashMap<GameObject, Square>();
 		// HashMap<GameObject, Square> midTeleportationsToPerform = new
 		// HashMap<GameObject, Square>();
-		ArrayList<GameObject> teleportationObjectsInOrder = new ArrayList<GameObject>(GameObject.class);
+		ArrayList<GameObject> objectsToMoveInOrder = new ArrayList<GameObject>(GameObject.class);
 
 		if (bridgeVertical) {
 
@@ -193,15 +193,15 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				Square oldSquare = horizontalBridgeSquares.get(i);
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
-						teleportationObjectsInOrder.add(gameObject);
+						objectsToMoveInOrder.add(gameObject);
 						// midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
-						teleportationsToPerform.put(gameObject, verticalBridgeSquares.get(i));
+						movesToPerform.put(gameObject, verticalBridgeSquares.get(i));
 					}
 				}
 			}
 
-			for (GameObject gameObject : teleportationObjectsInOrder) {
-				move(gameObject, teleportationsToPerform.get(gameObject));
+			for (GameObject gameObject : objectsToMoveInOrder) {
+				move(gameObject, movesToPerform.get(gameObject));
 			}
 
 			for (Square oldSquare : horizontalBridgeSquares) {
@@ -219,15 +219,15 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				Square oldSquare = verticalBridgeSquares.get(i);
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
-						teleportationObjectsInOrder.add(gameObject);
+						objectsToMoveInOrder.add(gameObject);
 						// midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
-						teleportationsToPerform.put(gameObject, horizontalBridgeSquares.get(i));
+						movesToPerform.put(gameObject, horizontalBridgeSquares.get(i));
 					}
 				}
 			}
 
-			for (GameObject gameObject : teleportationObjectsInOrder) {
-				move(gameObject, teleportationsToPerform.get(gameObject));
+			for (GameObject gameObject : objectsToMoveInOrder) {
+				move(gameObject, movesToPerform.get(gameObject));
 			}
 
 			for (Square oldSquare : verticalBridgeSquares) {

@@ -206,6 +206,7 @@ public class TemplatesNature {
 		Templates.BURROW = new SmallHidingPlace();
 		Templates.BURROW.name = "Burrow";
 		Templates.BURROW.setImageAndExtrapolateSize("burrow.png");
+		Templates.BURROW.totalHealth = Templates.BURROW.remainingHealth = 100;
 		Templates.BURROW.drawOffsetRatioX = 16f;
 		Templates.BURROW.drawOffsetX = Templates.BURROW.drawOffsetRatioX * Game.SQUARE_WIDTH;
 		Templates.BURROW.drawOffsetRatioY = 16f;
