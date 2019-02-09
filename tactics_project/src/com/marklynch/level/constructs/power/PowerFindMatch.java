@@ -118,9 +118,6 @@ public class PowerFindMatch extends Power {
 		float y1 = (Game.halfWindowHeight) + (Game.zoom * (square.yInGridPixels + targetGameObject.drawOffsetY
 				+ targetGameObject.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
 
-		System.out.println("targetGameObject.drawOffsetX = " + targetGameObject.drawOffsetX);
-		System.out.println("targetGameObject.halfWidth = " + targetGameObject.halfWidth);
-
 		for (Object linkedObject : targetGameObject.linkedObjects) {
 
 			if (linkedObject instanceof Square) {

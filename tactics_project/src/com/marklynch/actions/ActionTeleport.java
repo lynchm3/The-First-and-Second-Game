@@ -154,6 +154,15 @@ public class ActionTeleport extends Action {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
 
+		if (target == Level.player && !squareToTeleportTo.onScreen()) {
+			Game.level.centerToSquare = true;
+			Game.level.squareToCenterTo = squareToTeleportTo;
+		}
+//		else {
+//			Level.gameObjectsToFlash.add(gameObject);
+//			Level.flashGameObjectCounters.put(gameObject, 0);
+//		}
+
 		if (endTurn && gameObjectPerformer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();
 
