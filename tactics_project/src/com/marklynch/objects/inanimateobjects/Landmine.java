@@ -66,7 +66,7 @@ public class Landmine extends Discoverable implements OnCompletionListener {
 		boolean destroyed = super.checkIfDestroyed(attacker, action);
 
 		if (destroyed) {
-			new ActionUsePower(this, null, this.squareGameObjectIsOn, power.makeCopy(this)).perform();
+			new ActionUsePower(this, null, this.squareGameObjectIsOn, power.makeCopy(this), true).perform();
 		}
 
 		return destroyed;

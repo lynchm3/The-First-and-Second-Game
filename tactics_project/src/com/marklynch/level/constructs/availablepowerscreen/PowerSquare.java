@@ -63,7 +63,7 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 			if (Level.availablePowerScreen.showing)
 				Level.availablePowerScreen.close();
 			new ActionUsePower(Level.player, Game.gameObjectMouseIsOver, Level.player.squareGameObjectIsOn,
-					power.makeCopy(Level.player)).perform();
+					power.makeCopy(Level.player), true).perform();
 		}
 		Game.level.popupMenuObjects.clear();
 		Game.level.popupMenuActions.clear();
@@ -100,7 +100,7 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 					Game.level.selectedPower = power.makeCopy(Level.player);
 				} else {
 					new ActionUsePower(Level.player, Game.gameObjectMouseIsOver, Level.player.squareGameObjectIsOn,
-							power.makeCopy(Level.player)).perform();
+							power.makeCopy(Level.player), true).perform();
 				}
 				Game.level.popupMenuObjects.clear();
 				Game.level.popupMenuActions.clear();

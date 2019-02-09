@@ -12,14 +12,16 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class ActionUsePower extends Action {
 	Power power;
+	boolean log;
 
 	// Default for hostiles
-	public ActionUsePower(GameObject attacker, GameObject target, Square targetSquare, Power power) {
+	public ActionUsePower(GameObject attacker, GameObject target, Square targetSquare, Power power, boolean log) {
 		super("Cast " + power.name, null, attacker, target);
 		this.targetSquare = targetSquare;
 		this.target = target;
 		image = power.image;
 		this.power = power;
+		this.log = log;
 		if (!check()) {
 			enabled = false;
 		}
@@ -38,7 +40,8 @@ public class ActionUsePower extends Action {
 			return;
 
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
-		power.log(gameObjectPerformer, targetSquare);
+		if (log)
+			power.log(gameObjectPerformer, targetSquare);
 		power.cast(gameObjectPerformer, target, targetSquare, this);
 
 		if (sound != null)

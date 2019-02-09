@@ -115,7 +115,7 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 										continue;
 
 									Action telekineticPushAction = new ActionUsePower(performer, gameObject,
-											this.targetSquares[phase], new PowerTelekineticPush10(performer));
+											this.targetSquares[phase], new PowerTelekineticPush10(performer), true);
 
 									telekineticPushAction.perform();
 								}

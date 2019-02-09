@@ -677,7 +677,7 @@ public class UserInputLevel {
 			return;
 		} else if (Game.level.levelMode == LevelMode.LEVEL_MODE_CAST) {
 			new ActionUsePower(Game.level.player, Game.gameObjectMouseIsOver, Game.squareMouseIsOver,
-					Game.level.selectedPower).perform();
+					Game.level.selectedPower, true).perform();
 			// Game.level.selectedPower.cast(Game.level.player, square);
 			// Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 			return;

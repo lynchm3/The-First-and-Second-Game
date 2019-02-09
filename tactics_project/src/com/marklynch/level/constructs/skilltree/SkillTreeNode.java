@@ -116,7 +116,7 @@ public class SkillTreeNode extends LevelButton {
 							Game.level.selectedPower = power.makeCopy(Level.player);
 						} else {
 							new ActionUsePower(Level.player, Game.gameObjectMouseIsOver,
-									Level.player.squareGameObjectIsOn, power.makeCopy(Level.player)).perform();
+									Level.player.squareGameObjectIsOn, power.makeCopy(Level.player), true).perform();
 						}
 						Game.level.popupMenuObjects.clear();
 						Game.level.popupMenuActions.clear();

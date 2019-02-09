@@ -1340,7 +1340,7 @@ public class GameObject
 		if (moveable && !decorative && this != Game.level.player && attackable && !(this instanceof Wall)
 				&& !(this instanceof Door))
 			actions.add(new ActionUsePower(Level.player, this, this.squareGameObjectIsOn,
-					new PowerTeleportOther(Level.player)));
+					new PowerTeleportOther(Level.player), true));
 		// actions.add(new ActionSelectTeleportTarget(performer, this));
 		// }
 		if (!decorative && this != Game.level.player && this instanceof Actor)
