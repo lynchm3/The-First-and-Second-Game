@@ -87,8 +87,7 @@ public class VoidHole extends GameObject implements OnCompletionListener {
 
 					square.inventory.add(gameObject);
 
-					if (gameObject == Level.player) {
-						// Game.ca
+					if (gameObject == Level.player && !square.onScreen()) {
 						Game.level.centerToSquare = true;
 						Game.level.squareToCenterTo = square;
 					} else {
