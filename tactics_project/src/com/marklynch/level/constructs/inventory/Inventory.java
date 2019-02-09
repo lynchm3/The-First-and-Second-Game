@@ -133,12 +133,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static final int lengthEmpty = Game.smallFont.getWidth(stringEmpty);
 
 	// SHIFT text
-	public static String stringShiftDrop = "[SHIFT] Drop";
-	public static int lengthShiftDrop = Game.smallFont.getWidth(stringShiftDrop);
-	public static String stringShiftPut = "[SHIFT] Put";
-	public static int lengthShiftPut = Game.smallFont.getWidth(stringShiftPut);
-	public static String stringShiftEquip = "[SHIFT] Equip";
-	public static int lengthShiftEquip = Game.smallFont.getWidth(stringShiftEquip);
+//	public static String stringShiftDrop = "[SHIFT] Drop";
+//	public static int lengthShiftDrop = Game.smallFont.getWidth(stringShiftDrop);
+//	public static String stringShiftPut = "[SHIFT] Put";
+//	public static int lengthShiftPut = Game.smallFont.getWidth(stringShiftPut);
+//	public static String stringShiftEquip = "[SHIFT] Equip";
+//	public static int lengthShiftEquip = Game.smallFont.getWidth(stringShiftEquip);
 
 	public static float textShiftX = 0;
 	public static float textShiftY = 0;
@@ -1395,21 +1395,21 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] { stringSearch });
 
 		// [SHIFT]
-		if (groundDisplay != null)
-
-		{
-			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					new Object[] { stringShiftDrop });
-			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, null, Color.WHITE, new Object[] { stringShiftEquip });
-		}
-
-		if (otherInventory != null && otherInventory != this && inventoryMode != INVENTORY_MODE.MODE_TRADE) {
-			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					new Object[] { stringShiftPut });
-			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, null, Color.WHITE, new Object[] { stringShiftEquip });
-		}
+//		if (groundDisplay != null)
+//
+//		{
+//			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null, Color.WHITE,
+//					new Object[] { stringShiftDrop });
+//			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
+//					false, null, Color.WHITE, new Object[] { stringShiftEquip });
+//		}
+//
+//		if (otherInventory != null && otherInventory != this && inventoryMode != INVENTORY_MODE.MODE_TRADE) {
+//			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null, Color.WHITE,
+//					new Object[] { stringShiftPut });
+//			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
+//					false, null, Color.WHITE, new Object[] { stringShiftEquip });
+//		}
 
 		// [ENTER] Search
 		buttonSearch.draw();
