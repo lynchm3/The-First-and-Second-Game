@@ -18,6 +18,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomMineCart2;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomMineThroughWall;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomMovingBridge;
+import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomSpikeFloor1;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomTeamwork1;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomTeamwork2;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomTeamwork3;
@@ -180,6 +181,12 @@ public class QuestList extends ArrayList<Quest> {
 		// ROOM bush sneak fight
 		puzzleStructureRooms.add(new PuzzleRoomFightBushesSneak(puzzleRoomsX + 1, puzzleRoomsY + 64));
 
+		// Doorway bush sneak room and spike room 1
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 2][puzzleRoomsY + 84]);
+
+		// Spike room 1
+		puzzleStructureRooms.add(new PuzzleRoomSpikeFloor1(puzzleRoomsX + 1, puzzleRoomsY + 85));
+
 		// ROOM Crumbling wall
 		puzzleStructureRooms.add(new PuzzleRoomCrumblingWall(puzzleRoomsX + 22, puzzleRoomsY + 10));
 
@@ -196,7 +203,8 @@ public class QuestList extends ArrayList<Quest> {
 
 		Structure puzzleStructure = new Structure("Puzzle Structure", structureSections, puzzleStructureRooms, paths,
 				features, entrances, "building2.png", puzzleRoomsX, puzzleRoomsY, puzzleRoomsX + 100,
-				puzzleRoomsY + 100, true, null, squaresToRemove, extraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 10);
+				puzzleRoomsY + 100, true, null, squaresToRemove, extraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE,
+				10);
 
 	}
 
