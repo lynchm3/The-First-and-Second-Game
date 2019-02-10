@@ -117,12 +117,12 @@ public class TextureUtils {
 																	// proper
 																	// color
 
-		glActiveTexture(GL_TEXTURE1);
-		if (!skipNormals) {
-			GameObject.grassNormalTexture.bind();
-		} else {
-			GameObject.skipNormalTexture.bind();
-		}
+//		glActiveTexture(GL_TEXTURE1);
+//		if (!skipNormals) {
+//			GameObject.grassNormalTexture.bind();
+//		} else {
+//			GameObject.skipNormalTexture.bind();
+//		}
 		// bind diffuse color to texture unit 0
 		glActiveTexture(GL_TEXTURE0);
 		texture.bind();

@@ -1161,11 +1161,6 @@ public class Actor extends GameObject {
 		if (primaryAnimation != null && primaryAnimation.drawEquipped == false && useAnimation)
 			return;
 
-		// weapon
-		// float alpha = 1.0f;
-
-		// if (primaryAnimation != null)
-		// alpha = primaryAnimation.alpha;
 		TextureUtils.drawTextureWithinBounds(this.equipped.imageTexture, alpha, x, y, x + equipped.width,
 				y + equipped.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards, false, color);
 		if (highlight) {

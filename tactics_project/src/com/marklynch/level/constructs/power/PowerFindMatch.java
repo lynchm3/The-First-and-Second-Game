@@ -11,6 +11,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.TextUtils;
 
 public class PowerFindMatch extends Power {
 
@@ -83,14 +84,14 @@ public class PowerFindMatch extends Power {
 			return;
 
 		GameObject targetGameObject = Game.gameObjectMouseIsOver;
-		GameObject gameObjectForX1 = Game.gameObjectMouseIsOver;
+		GameObject topLevelGameObject = Game.gameObjectMouseIsOver;
 
 		// If we don't have direct object, check the sqr for objects with links
 		if (targetGameObject == null) {
 			if (Game.squareMouseIsOver != null && !(Game.squareMouseIsOver instanceof InventorySquare)) {
 				for (GameObject gameObjectOnTargetSquare : Game.squareMouseIsOver.inventory.gameObjects) {
 					if (gameObjectOnTargetSquare.linkedObjects.size() > 0) {
-						targetGameObject = gameObjectForX1 = gameObjectOnTargetSquare;
+						targetGameObject = topLevelGameObject = gameObjectOnTargetSquare;
 						break;
 					}
 				}
@@ -103,35 +104,38 @@ public class PowerFindMatch extends Power {
 
 		// If gameObject has no links, check it's equipped item...
 		if (targetGameObject.linkedObjects.size() == 0) {
-			if (targetGameObject.equipped != null)
+			if (targetGameObject.equipped != null) {
 				targetGameObject = targetGameObject.equipped;
+			}
 		}
 
 		if (targetGameObject.linkedObjects.size() == 0)
 			return;
 
-		Square square = gameObjectForX1.getWorldSquareGameObjectIsOn();
+		Square square = topLevelGameObject.getWorldSquareGameObjectIsOn();
 		if (square == null)
 			return;
 
-		float x1 = (Game.halfWindowWidth) + (Game.zoom * (square.xInGridPixels + gameObjectForX1.drawOffsetX
-				+ gameObjectForX1.halfWidth - Game.halfWindowWidth + Game.getDragXWithOffset()));
+		float x1 = 0;
+		float y1 = 0;
+		x1 = (Game.halfWindowWidth) + (Game.zoom * (square.xInGridPixels + topLevelGameObject.drawOffsetX
+				+ topLevelGameObject.halfWidth - Game.halfWindowWidth + Game.getDragXWithOffset()));
 
-		float y1 = (Game.halfWindowHeight) + (Game.zoom * (square.yInGridPixels + gameObjectForX1.drawOffsetY
-				+ gameObjectForX1.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
+		y1 = (Game.halfWindowHeight) + (Game.zoom * (square.yInGridPixels + topLevelGameObject.drawOffsetY
+				+ topLevelGameObject.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
 
 		for (Object linkedObject : targetGameObject.linkedObjects) {
 
+			float x2 = 0;
+			float y2 = 0;
 			if (linkedObject instanceof Square) {
 
 				Square linkedSquare = (Square) linkedObject;
-				float x2 = (Game.halfWindowWidth) + (Game.zoom * (linkedSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH
+				x2 = (Game.halfWindowWidth) + (Game.zoom * (linkedSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH
 						- Game.halfWindowWidth + Game.getDragXWithOffset()));
 
-				float y2 = (Game.halfWindowHeight) + (Game.zoom * (linkedSquare.yInGridPixels + Game.HALF_SQUARE_HEIGHT
+				y2 = (Game.halfWindowHeight) + (Game.zoom * (linkedSquare.yInGridPixels + Game.HALF_SQUARE_HEIGHT
 						- Game.halfWindowHeight + Game.getDragYWithOffset()));
-
-				LineUtils.drawLine(Color.RED, x1, y1, x2, y2, 1);
 
 			} else {
 
@@ -140,16 +144,21 @@ public class PowerFindMatch extends Power {
 				if (linkedGameObjectSquare == null)
 					continue;
 
-				float x2 = (Game.halfWindowWidth)
+				x2 = (Game.halfWindowWidth)
 						+ (Game.zoom * (linkedGameObjectSquare.xInGridPixels + linkedGameObject.drawOffsetX
 								+ linkedGameObject.halfWidth - Game.halfWindowWidth + Game.getDragXWithOffset()));
 
-				float y2 = (Game.halfWindowHeight)
+				y2 = (Game.halfWindowHeight)
 						+ (Game.zoom * (linkedGameObjectSquare.yInGridPixels + linkedGameObject.drawOffsetY
 								+ linkedGameObject.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
-
-				LineUtils.drawLine(Color.RED, x1, y1, x2, y2, 1);
 			}
+
+			LineUtils.drawLine(Color.RED, x1, y1, x2, y2, 1);
+
+			float centerX = (x1 + x2) / 2;
+			float centerY = (y1 + y2) / 2;
+			TextUtils.printTextWithImages(centerX, centerY, Integer.MAX_VALUE, false, null, Color.WHITE,
+					targetGameObject, " / ", linkedObject);
 		}
 	}
 
