@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.objects.inanimateobjects.Key;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Openable;
 import com.marklynch.ui.ActivityLog;
 
@@ -39,7 +39,7 @@ public class ActionLock extends Action {
 
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
-			Key key = actor.getKeyFor(openable);
+			GameObject key = actor.getKeyFor(openable);
 
 			if (openable.isOpen())
 				new ActionClose(gameObjectPerformer, openable).perform();

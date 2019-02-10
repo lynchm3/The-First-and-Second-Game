@@ -48,7 +48,7 @@ import com.marklynch.objects.inanimateobjects.GameObjectExploder;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
 import com.marklynch.objects.inanimateobjects.Inspectable;
-import com.marklynch.objects.inanimateobjects.Key;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Landmine;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.MapMarker;
@@ -143,7 +143,7 @@ public class Save {
 
 			// LVL 1 GameObject subclass
 			Bed.class, Carcass.class, Corpse.class, Discoverable.class, Food.class, GameObjectExploder.class,
-			Gold.class, Inspectable.class, Key.class, Liquid.class, MapMarker.class, MeatChunk.class, MineCart.class,
+			Gold.class, Inspectable.class, GameObject.class, Liquid.class, MapMarker.class, MeatChunk.class, MineCart.class,
 			Mirror.class, Openable.class, Orb.class, Portal.class, Rail.class, Roof.class, Searchable.class,
 			Stampable.class, Stump.class, Switch.class, Tree.class, VoidHole.class, Wall.class, WallSupport.class,
 			WantedPoster.class, WaterSource.class, Window.class,

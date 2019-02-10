@@ -82,7 +82,7 @@ public class Furnace extends Openable {
 			this.name = baseName;
 	}
 
-	public Furnace makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
+	public Furnace makeCopy(String name, Square square, boolean locked, Actor owner, GameObject... keys) {
 		Furnace furnace = new Furnace();
 		setInstances(furnace);
 		super.setAttributesForCopy(furnace, square, locked, owner, keys);

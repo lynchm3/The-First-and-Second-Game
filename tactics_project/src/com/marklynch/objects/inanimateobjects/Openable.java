@@ -14,7 +14,7 @@ public abstract class Openable extends GameObject implements SwitchListener {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public boolean open = false;
-	public Key[] keys;
+	public GameObject[] keys;
 	public boolean locked = false;
 	public String baseName;
 	public boolean isOpenable = true;
@@ -54,14 +54,14 @@ public abstract class Openable extends GameObject implements SwitchListener {
 		return locked;
 	}
 
-	public void setAttributesForCopy(Openable openable, Square square, boolean locked, Actor owner, Key... keys) {
+	public void setAttributesForCopy(Openable openable, Square square, boolean locked, Actor owner, GameObject... keys) {
 
 		super.setAttributesForCopy(openable, square, owner);
 
 		openable.isOpenable = isOpenable;
 		openable.lockable = lockable;
 		openable.keys = keys;
-		for (Key key : keys) {
+		for (GameObject key : keys) {
 			openable.linkedObjects.add(key);
 			key.linkedObjects.add(openable);
 		}

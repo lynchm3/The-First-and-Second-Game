@@ -33,7 +33,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
 import com.marklynch.objects.inanimateobjects.Inspectable;
-import com.marklynch.objects.inanimateobjects.Key;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Landmine;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.MapMarker;
@@ -270,7 +270,7 @@ public class Templates {
 	public static RemoteDoor OPENABLE_WALL;
 	public static RemoteDoor REMOTE_DOOR;
 
-	public static Key KEY;
+	public static GameObject KEY;
 
 	public static Switch ANTLERS_SWITCH;
 	public static Switch REMOTE_SWITCH;

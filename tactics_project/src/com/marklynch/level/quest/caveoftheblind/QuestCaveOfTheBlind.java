@@ -25,7 +25,6 @@ import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.Corpse;
 import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.objects.inanimateobjects.Key;
 import com.marklynch.objects.inanimateobjects.Searchable;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Wall;
@@ -84,7 +83,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	Weapon serratedSpoon;
 	Lantern lantern;
 	Wall oreWall;
-	Key mortsKey;
+	GameObject mortsKey;
 	public Door mortsGameRoomDoor;
 	Door mortsStoreroomDoor;
 	Searchable dropHole;
@@ -98,10 +97,10 @@ public class QuestCaveOfTheBlind extends Quest {
 	// Conversations
 	ConversationForMort conversationForMort;
 
-	Key alsKey;
-	Key joesKey;
-	Key seansKey;
-	Key paulsKey;
+	GameObject alsKey;
+	GameObject joesKey;
+	GameObject seansKey;
+	GameObject paulsKey;
 
 	Structure cave;
 
@@ -119,7 +118,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Mort and his bed
 		GameObject mortsBed = Templates.BED.makeCopy(Game.level.squares[267][42], null);
 		mortsBed.quest = this;
-		mortsKey = Templates.KEY.makeCopy("Mort's Key", null, mort);
+		mortsKey = Templates.KEY.makeCopy(null, mort);
+		mortsKey.name = "Mort's Key (" + name + ")";
 		mortsKey.quest = this;
 		// [147][21]
 		mort = Templates.MORT.makeCopy("Mort", Game.level.squares[281][41], Game.level.factions.townsPeople, mortsBed,
@@ -137,13 +137,17 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Hide Quarters keys
 		// Als Key - in management confiscated desk
-		alsKey = Templates.KEY.makeCopy("Al's Key", null, mort);
+		alsKey = Templates.KEY.makeCopy(null, mort);
+		alsKey.name = "Al's Key (" + name + ")";
 		// On blind3 in dining room
-		seansKey = Templates.KEY.makeCopy("Sean's Key", null, null);
+		seansKey = Templates.KEY.makeCopy(null, null);
+		seansKey.name = "Sean's Key (" + name + ")";
 		// In latrine drop hole
-		paulsKey = Templates.KEY.makeCopy("Paul's Key", null, null);
+		paulsKey = Templates.KEY.makeCopy(null, null);
+		paulsKey.name = "Paul's Key (" + name + ")";
 		// Key on dining table
-		joesKey = Templates.KEY.makeCopy("Joe's Key", null, null);
+		joesKey = Templates.KEY.makeCopy(null, null);
+		joesKey.name = "Joe's Key (" + name + ")";
 
 		for (GameObject gameObject : mort.inventory.getGameObjects()) {
 			gameObject.quest = this;
@@ -622,12 +626,12 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.VEIN.makeCopy(Game.level.squares[276][45], mort, true, Templates.ORE, 0.1d);
 		Templates.VEIN.makeCopy(Game.level.squares[276][46], mort, true, Templates.ORE, 0.1d);
 		mortsGameRoomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, true, true,
-				mort, mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
+				mort, mortsKey, (GameObject) Game.level.player.inventory.getGameObjectOfClass(GameObject.class));
 		mort.mortsRoomDoorway = mortsGameRoomDoor.squareGameObjectIsOn;
 		caveFeatures.add(new StructureFeature(mortsGameRoomDoor, Nodes.caveOfTheBlindWest));
 		mort.aiRoutine.squareBounds.add(mort.mortsRoomDoorway);
 		mortsStoreroomDoor = Templates.DOOR.makeCopy("Vault Door", Game.level.squares[264][40], true, true, true, mort,
-				mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
+				mortsKey, (GameObject) Game.level.player.inventory.getGameObjectOfClass(GameObject.class));
 		mort.mortsVaultDoorway = mortsStoreroomDoor.squareGameObjectIsOn;
 		caveFeatures.add(new StructureFeature(mortsStoreroomDoor, Nodes.caveOfTheBlindWest));
 

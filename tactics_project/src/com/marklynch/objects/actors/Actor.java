@@ -62,7 +62,7 @@ import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
-import com.marklynch.objects.inanimateobjects.Key;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Openable;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Bell;
@@ -2016,7 +2016,7 @@ public class Actor extends GameObject {
 			return false;
 
 		for (GameObject gameObject : inventory.getGameObjects()) {
-			for (Key key : door.keys) {
+			for (GameObject key : door.keys) {
 				if (key == gameObject) {
 					return true;
 				}
@@ -2026,12 +2026,12 @@ public class Actor extends GameObject {
 		return false;
 	}
 
-	public Key getKeyFor(Openable door) {
+	public GameObject getKeyFor(Openable door) {
 		if (door.keys == null)
 			return null;
 
 		for (GameObject gameObject : inventory.getGameObjects()) {
-			for (Key key : door.keys) {
+			for (GameObject key : door.keys) {
 				if (key == gameObject) {
 					return key;
 				}

@@ -89,7 +89,7 @@ public class Storage extends Openable {
 		}
 	}
 
-	public Storage makeCopy(Square square, boolean locked, Actor owner, Key... keys) {
+	public Storage makeCopy(Square square, boolean locked, Actor owner, GameObject... keys) {
 
 		Storage storage = new Storage();
 		setInstances(storage);

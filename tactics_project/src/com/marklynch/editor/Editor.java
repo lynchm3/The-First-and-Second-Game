@@ -40,7 +40,6 @@ import com.marklynch.objects.armor.Helmet;
 import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.objects.inanimateobjects.Key;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.ThoughtBubbles;
@@ -440,7 +439,9 @@ public class Editor {
 		player.inventory.add(Templates.CLEAVER.makeCopy(null, player));
 		player.inventory.add(Templates.CLEAVER.makeCopy(null, player));
 		player.inventory.add(Templates.LANTERN.makeCopy(null, player));
-		player.inventory.add(Templates.KEY.makeCopy("Player test key", null, player));
+		GameObject playersTestKey = Templates.KEY.makeCopy(null, player);
+		playersTestKey.name = "Key (You've had this as long as you can remember)";
+		player.inventory.add(playersTestKey);
 		player.inventory.add(Templates.PICKAXE.makeCopy(null, player));
 		player.inventory.add(Templates.SHOVEL.makeCopy(null, player));
 		player.inventory.add(Templates.FISHING_ROD.makeCopy(null, player));
@@ -539,7 +540,7 @@ public class Editor {
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.MATCHES.makeCopy(null, player));
-		player.equip(player.inventory.getGameObjectOfClass(Key.class));
+		player.equip(player.inventory.getGameObjectOfClass(GameObject.class));
 
 		// relationships
 		Game.level.factions.player.relationships.put(Game.level.factions.get(1), -100);

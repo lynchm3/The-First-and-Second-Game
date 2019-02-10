@@ -11,7 +11,7 @@ import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.Furnace;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.objects.inanimateobjects.Key;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Mirror;
 import com.marklynch.objects.inanimateobjects.PressurePlate;
 import com.marklynch.objects.inanimateobjects.PressurePlateRequiringSpecificItem;
@@ -124,7 +124,7 @@ public class TemplatesFurniture {
 		Templates.CHAIR_FALLEN.fitsInInventory = false;
 		Templates.CHAIR_FALLEN.templateId = GameObject.generateNewTemplateId();
 
-		Templates.KEY = new Key();
+		Templates.KEY = new GameObject();
 		Templates.KEY.name = "Key";
 		Templates.KEY.setImageAndExtrapolateSize("key.png");
 		Templates.KEY.totalHealth = Templates.KEY.remainingHealth = 10;

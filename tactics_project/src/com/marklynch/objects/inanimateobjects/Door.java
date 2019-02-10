@@ -75,7 +75,7 @@ public class Door extends Openable {
 	}
 
 	public Door makeCopy(String name, Square square, boolean locked, boolean shouldBeClosed, boolean shouldBeLocked,
-			Actor owner, Key... keys) {
+			Actor owner, GameObject... keys) {
 
 		Door door = new Door();
 		setInstances(door);
