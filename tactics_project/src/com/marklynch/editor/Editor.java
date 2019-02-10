@@ -40,6 +40,7 @@ import com.marklynch.objects.armor.Helmet;
 import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Key;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.ThoughtBubbles;
@@ -538,6 +539,7 @@ public class Editor {
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.MATCHES.makeCopy(null, player));
+		player.equip(player.inventory.getGameObjectOfClass(Key.class));
 
 		// relationships
 		Game.level.factions.player.relationships.put(Game.level.factions.get(1), -100);

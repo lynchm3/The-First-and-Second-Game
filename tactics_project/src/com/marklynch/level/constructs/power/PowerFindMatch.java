@@ -83,13 +83,14 @@ public class PowerFindMatch extends Power {
 			return;
 
 		GameObject targetGameObject = Game.gameObjectMouseIsOver;
+		GameObject gameObjectForX1 = Game.gameObjectMouseIsOver;
 
 		// If we don't have direct object, check the sqr for objects with links
 		if (targetGameObject == null) {
 			if (Game.squareMouseIsOver != null && !(Game.squareMouseIsOver instanceof InventorySquare)) {
 				for (GameObject gameObjectOnTargetSquare : Game.squareMouseIsOver.inventory.gameObjects) {
 					if (gameObjectOnTargetSquare.linkedObjects.size() > 0) {
-						targetGameObject = gameObjectOnTargetSquare;
+						targetGameObject = gameObjectForX1 = gameObjectOnTargetSquare;
 						break;
 					}
 				}
@@ -109,14 +110,15 @@ public class PowerFindMatch extends Power {
 		if (targetGameObject.linkedObjects.size() == 0)
 			return;
 
-		Square square = targetGameObject.getWorldSquareGameObjectIsOn();
+		Square square = gameObjectForX1.getWorldSquareGameObjectIsOn();
 		if (square == null)
 			return;
-		float x1 = (Game.halfWindowWidth) + (Game.zoom * (square.xInGridPixels + targetGameObject.drawOffsetX
-				+ targetGameObject.halfWidth - Game.halfWindowWidth + Game.getDragXWithOffset()));
 
-		float y1 = (Game.halfWindowHeight) + (Game.zoom * (square.yInGridPixels + targetGameObject.drawOffsetY
-				+ targetGameObject.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
+		float x1 = (Game.halfWindowWidth) + (Game.zoom * (square.xInGridPixels + gameObjectForX1.drawOffsetX
+				+ gameObjectForX1.halfWidth - Game.halfWindowWidth + Game.getDragXWithOffset()));
+
+		float y1 = (Game.halfWindowHeight) + (Game.zoom * (square.yInGridPixels + gameObjectForX1.drawOffsetY
+				+ gameObjectForX1.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
 
 		for (Object linkedObject : targetGameObject.linkedObjects) {
 
