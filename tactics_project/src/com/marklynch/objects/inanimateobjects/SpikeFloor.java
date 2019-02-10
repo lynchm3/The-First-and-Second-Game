@@ -2,18 +2,21 @@ package com.marklynch.objects.inanimateobjects;
 
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionMove;
+import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.SwitchListener;
+import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
-public class SpikeFloor extends GameObject implements SwitchListener {
+public class SpikeFloor extends GameObject implements SwitchListener, UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public boolean spikesOut = true;
 	public Texture spikesOutImage;
 	public Texture spikesRetractedImage;
+	public int lastTurnDidDamage;
 
 	public SpikeFloor() {
 		super();
@@ -44,8 +47,11 @@ public class SpikeFloor extends GameObject implements SwitchListener {
 		return spikeFloor;
 	}
 
-	@Override
-	public void squareContentsChanged() {
+	public void doDamage() {
+
+		System.out.println("DODAMAGE");
+
+		lastTurnDidDamage = Level.turn;
 
 		if (squareGameObjectIsOn == null)
 			return;
@@ -55,19 +61,14 @@ public class SpikeFloor extends GameObject implements SwitchListener {
 
 		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
 
+			System.out.println("DODAMAGE - gameObject B = " + gameObject);
+
 			if (gameObject == this || gameObject.isFloorObject || gameObject.attackable == false)
 				continue;
+			System.out.println("DODAMAGE - gameObject  C= " + gameObject);
 
-			gameObject.changeHealthSafetyOff(5f, this, null);
-
-//			float change, Object attacker, Action action)
-
-//			What other inanimate objects do dmg?
-//			gameObject.attackPIERCE_DMG
-			// mine cart casts push...
-			// falling rocks!
+			gameObject.changeHealthSafetyOff(-5f, this, null);
 		}
-
 	}
 
 	@Override
@@ -92,6 +93,7 @@ public class SpikeFloor extends GameObject implements SwitchListener {
 	public void zwitch(Switch zwitch) {
 		spikesOut = !spikesOut;
 		updateImageTexture();
+		doDamage();
 	}
 
 	public void updateImageTexture() {
@@ -101,6 +103,13 @@ public class SpikeFloor extends GameObject implements SwitchListener {
 			imageTexture = spikesRetractedImage;
 		}
 
+	}
+
+	@Override
+	public void update(int delta) {
+		if (lastTurnDidDamage == Level.turn)
+			return;
+		doDamage();
 	}
 
 }
