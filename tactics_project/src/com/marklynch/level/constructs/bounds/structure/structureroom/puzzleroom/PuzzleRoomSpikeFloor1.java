@@ -1,8 +1,12 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom;
 
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.SpikeFloor;
+import com.marklynch.objects.inanimateobjects.Switch;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
 
 public class PuzzleRoomSpikeFloor1 extends StructureRoom {
@@ -18,6 +22,12 @@ public class PuzzleRoomSpikeFloor1 extends StructureRoom {
 
 		this.posX = posX;
 		this.posY = posY;
+
+		SpikeFloor spikeFloor = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 3][this.posY + 1], null);
+
+		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 1][this.posY + 3], null,
+				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeFloor);
+
 	}
 
 }

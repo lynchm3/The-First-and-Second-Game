@@ -10,8 +10,8 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomChasm;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomCrumblingWall;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFallawayFloor;
-import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFightBushesSneak;
-import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFightCaveIn;
+import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomBushesFight;
+import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomCaveInFight;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFriendlyCaveIn;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomMaze;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomMineCart;
@@ -173,13 +173,13 @@ public class QuestList extends ArrayList<Quest> {
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 5][puzzleRoomsY + 42]);
 
 		// ROOM fight cave in
-		puzzleStructureRooms.add(new PuzzleRoomFightCaveIn(puzzleRoomsX + 1, puzzleRoomsY + 43));
+		puzzleStructureRooms.add(new PuzzleRoomCaveInFight(puzzleRoomsX + 1, puzzleRoomsY + 43));
 
 		// Doorway between cave in and bush sneak room
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 5][puzzleRoomsY + 63]);
 
 		// ROOM bush sneak fight
-		puzzleStructureRooms.add(new PuzzleRoomFightBushesSneak(puzzleRoomsX + 1, puzzleRoomsY + 64));
+		puzzleStructureRooms.add(new PuzzleRoomBushesFight(puzzleRoomsX + 1, puzzleRoomsY + 64));
 
 		// Doorway bush sneak room and spike room 1
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 2][puzzleRoomsY + 84]);

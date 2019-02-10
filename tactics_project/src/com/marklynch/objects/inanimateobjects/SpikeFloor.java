@@ -2,7 +2,6 @@ package com.marklynch.objects.inanimateobjects;
 
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionMove;
-import com.marklynch.actions.ActionTeleport;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.SwitchListener;
@@ -37,6 +36,10 @@ public class SpikeFloor extends GameObject implements SwitchListener {
 	public SpikeFloor makeCopy(Square square, Actor owner) {
 		SpikeFloor spikeFloor = new SpikeFloor();
 		setInstances(spikeFloor);
+		spikeFloor.spikesOut = spikesOut;
+		spikeFloor.spikesOutImage = spikesOutImage;
+		spikeFloor.spikesRetractedImage = spikesRetractedImage;
+		spikeFloor.updateImageTexture();
 		super.setAttributesForCopy(spikeFloor, square, owner);
 		return spikeFloor;
 	}
@@ -46,16 +49,23 @@ public class SpikeFloor extends GameObject implements SwitchListener {
 
 		if (squareGameObjectIsOn == null)
 			return;
-		
-		if(!spikesOut)
+
+		if (!spikesOut)
 			return;
 
 		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
 
 			if (gameObject == this || gameObject.isFloorObject || gameObject.attackable == false)
 				continue;
-			
-			gameObject.attackPIERCE_DMG
+
+			gameObject.changeHealthSafetyOff(5f, this, null);
+
+//			float change, Object attacker, Action action)
+
+//			What other inanimate objects do dmg?
+//			gameObject.attackPIERCE_DMG
+			// mine cart casts push...
+			// falling rocks!
 		}
 
 	}
@@ -81,11 +91,16 @@ public class SpikeFloor extends GameObject implements SwitchListener {
 	@Override
 	public void zwitch(Switch zwitch) {
 		spikesOut = !spikesOut;
+		updateImageTexture();
+	}
+
+	public void updateImageTexture() {
 		if (spikesOut) {
 			imageTexture = spikesOutImage;
 		} else {
 			imageTexture = spikesRetractedImage;
 		}
+
 	}
 
 }

@@ -33,7 +33,6 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
 import com.marklynch.objects.inanimateobjects.Inspectable;
-import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Landmine;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.MapMarker;
@@ -51,6 +50,7 @@ import com.marklynch.objects.inanimateobjects.Searchable;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.SeesawPart;
 import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
+import com.marklynch.objects.inanimateobjects.SpikeFloor;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Stump;
 import com.marklynch.objects.inanimateobjects.Switch;
@@ -415,6 +415,7 @@ public class Templates {
 	public static Portal PORTAL;
 
 	public static Landmine LANDMINE;
+	public static SpikeFloor SPIKE_FLOOR;
 
 	// Floor
 	public static GameObject STONE_FLOOR;

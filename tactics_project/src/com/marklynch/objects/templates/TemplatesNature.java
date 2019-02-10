@@ -17,6 +17,7 @@ import com.marklynch.objects.inanimateobjects.Landmine;
 import com.marklynch.objects.inanimateobjects.MeatChunk;
 import com.marklynch.objects.inanimateobjects.Portal;
 import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
+import com.marklynch.objects.inanimateobjects.SpikeFloor;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Stump;
 import com.marklynch.objects.inanimateobjects.Tree;
@@ -365,10 +366,25 @@ public class TemplatesNature {
 		Templates.LANDMINE.value = 110;
 		Templates.LANDMINE.anchorX = 16;
 		Templates.LANDMINE.anchorY = 4;
+
 		Templates.LANDMINE.preDiscoverTexture = ResourceUtils.getGlobalImage("landmine.png", true);
 		Templates.LANDMINE.postDiscoverTexture = ResourceUtils.getGlobalImage("landmine.png", true);
 		Templates.LANDMINE.power = new PowerInferno(null);
 		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();
+
+		Templates.SPIKE_FLOOR = new SpikeFloor();
+		Templates.SPIKE_FLOOR.name = "Spike Floor";
+		Templates.SPIKE_FLOOR.setImageAndExtrapolateSize("spike_trap_spikes_out.png");
+		Templates.SPIKE_FLOOR.spikesOut = true;
+		Templates.SPIKE_FLOOR.spikesRetractedImage = ResourceUtils.getGlobalImage("spike_trap_spikes_retracted.png",
+				true);
+		Templates.SPIKE_FLOOR.spikesOutImage = ResourceUtils.getGlobalImage("spike_trap_spikes_out.png", true);
+		Templates.SPIKE_FLOOR.templateId = GameObject.generateNewTemplateId();
+		Templates.SPIKE_FLOOR.totalHealth = Templates.SPIKE_FLOOR.remainingHealth = 1000;
+		Templates.SPIKE_FLOOR.weight = 19f;
+		Templates.SPIKE_FLOOR.value = 34;
+		Templates.SPIKE_FLOOR.drawOffsetY = -16f;
+		Templates.SPIKE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
 		Templates.STONE_FLOOR = new GameObject();
 		Templates.STONE_FLOOR.name = "Floor";

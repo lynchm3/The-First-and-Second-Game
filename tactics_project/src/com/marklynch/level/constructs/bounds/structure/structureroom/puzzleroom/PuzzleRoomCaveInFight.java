@@ -15,7 +15,7 @@ import com.marklynch.objects.utils.DeathListener;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
 
-public class PuzzleRoomFightCaveIn extends StructureRoom implements DeathListener {
+public class PuzzleRoomCaveInFight extends StructureRoom implements DeathListener {
 	int posX;
 	int posY;
 	final static int totalWidthInSquares = 13;
@@ -24,7 +24,7 @@ public class PuzzleRoomFightCaveIn extends StructureRoom implements DeathListene
 	ArrayList<Square> caveInSquares = new ArrayList<Square>(Square.class);
 	WallWithCrack supportingWall;
 
-	public PuzzleRoomFightCaveIn(int posX, int posY) {
+	public PuzzleRoomCaveInFight(int posX, int posY) {
 		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
 				new RoomPart[] {
 						new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });

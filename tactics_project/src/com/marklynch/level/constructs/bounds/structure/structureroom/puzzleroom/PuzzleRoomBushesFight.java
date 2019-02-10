@@ -9,13 +9,13 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
 
-public class PuzzleRoomFightBushesSneak extends StructureRoom {
+public class PuzzleRoomBushesFight extends StructureRoom {
 	int posX;
 	int posY;
 	final static int totalWidthInSquares = 13;
 	final static int totalHeightInSquares = 20;
 
-	public PuzzleRoomFightBushesSneak(int posX, int posY) {
+	public PuzzleRoomBushesFight(int posX, int posY) {
 		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
 				new RoomPart[] {
 						new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
