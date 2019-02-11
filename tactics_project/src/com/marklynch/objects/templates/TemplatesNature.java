@@ -225,8 +225,6 @@ public class TemplatesNature {
 		Templates.MOUND.weight = 100f;
 		Templates.MOUND.value = 15;
 		Templates.MOUND.templateId = GameObject.generateNewTemplateId();
-		Templates.MOUND.preDiscoverTexture = ResourceUtils.getGlobalImage("mound.png", true);
-		Templates.MOUND.postDiscoverTexture = ResourceUtils.getGlobalImage("mound.png", true);
 		Templates.MOUND.diggable = true;
 		Templates.MOUND.canContainOtherObjects = false;
 		Templates.MOUND.flipYAxisInMirror = false;
@@ -366,9 +364,6 @@ public class TemplatesNature {
 		Templates.LANDMINE.value = 110;
 		Templates.LANDMINE.anchorX = 16;
 		Templates.LANDMINE.anchorY = 4;
-
-		Templates.LANDMINE.preDiscoverTexture = ResourceUtils.getGlobalImage("landmine.png", true);
-		Templates.LANDMINE.postDiscoverTexture = ResourceUtils.getGlobalImage("landmine.png", true);
 		Templates.LANDMINE.power = new PowerInferno(null);
 		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();
 

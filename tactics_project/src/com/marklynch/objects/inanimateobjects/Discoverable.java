@@ -1,20 +1,15 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.utils.Texture;
+import com.marklynch.utils.ArrayList;
 
 public class Discoverable extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public boolean discovered = false;
-	public Texture preDiscoverTexture; // if null the object is invisible if not
-										// discovered
-	public Texture postDiscoverTexture;
 	public int level;
 	public String imagePathWhenPrediscovered;
 
@@ -42,7 +37,6 @@ public class Discoverable extends GameObject {
 
 	public void discovered() {
 		discovered = true;
-		imageTexture = postDiscoverTexture;
 
 		if (squareGameObjectIsOn != null) {
 			Level.gameObjectsToFlash.add(this);
@@ -69,8 +63,6 @@ public class Discoverable extends GameObject {
 		setInstances(discoverable);
 		super.setAttributesForCopy(discoverable, square, owner);
 		discoverable.level = level;
-		discoverable.preDiscoverTexture = preDiscoverTexture;
-		discoverable.postDiscoverTexture = postDiscoverTexture;
 		return discoverable;
 	}
 

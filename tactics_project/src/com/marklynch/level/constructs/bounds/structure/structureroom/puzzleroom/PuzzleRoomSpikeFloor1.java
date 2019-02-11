@@ -23,7 +23,7 @@ public class PuzzleRoomSpikeFloor1 extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 
-		SpikeFloor spikeFloor = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 3][this.posY + 1], null);
+		SpikeFloor spikeFloor = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 3][this.posY + 1], null, 1);
 
 		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 1][this.posY + 3], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeFloor);

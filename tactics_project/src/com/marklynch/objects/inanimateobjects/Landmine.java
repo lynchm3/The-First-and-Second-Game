@@ -104,8 +104,6 @@ public class Landmine extends Discoverable implements OnCompletionListener {
 		super.setAttributesForCopy(landmine, square, owner);
 		landmine.level = level;
 		landmine.targetWeight = targetWeight;
-		landmine.preDiscoverTexture = preDiscoverTexture;
-		landmine.postDiscoverTexture = postDiscoverTexture;
 		landmine.power = power;
 		return landmine;
 	}
