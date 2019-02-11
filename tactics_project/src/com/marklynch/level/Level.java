@@ -74,7 +74,6 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.Texture;
 
 public class Level {
 
@@ -176,7 +175,6 @@ public class Level {
 	// public transient boolean waitingForPlayerClickToBeginTurn = true;
 
 	public transient boolean ended = false;
-	public Texture textureUndiscovered;
 	// public ArrayList<InanimateObjectToAddOrRemove> inanimateObjectsToAdd = new
 	// ArrayList<InanimateObjectToAddOrRemove>();
 	// public ArrayList<GameObject> inanimateObjectsOnGroundToRemove = new
@@ -2131,7 +2129,7 @@ public class Level {
 			player.calculateVisibleSquares(player.squareGameObjectIsOn);
 
 		}
-		player.discoveryCheck();
+		player.hiddenObjectDiscoveryCheck();
 
 		ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>();
 		for (GameObject gameObject : player.getAttackers()) {

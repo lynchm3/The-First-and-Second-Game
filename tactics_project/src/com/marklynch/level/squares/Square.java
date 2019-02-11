@@ -42,7 +42,6 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
-import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
 import com.marklynch.objects.inanimateobjects.Landmine;
@@ -780,11 +779,9 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		for (int i = gameObjectsToCheck.size() - 1; i >= 0; i--) {
 
 			GameObject gameObject = gameObjectsToCheck.get(i);
-			if (gameObject instanceof Discoverable) {
-				Discoverable d = (Discoverable) gameObject;
-				if (!d.discovered)
-					continue;
-			}
+			if (!gameObject.hiddenObject)
+				continue;
+//			}
 
 //			if (gameObject instanceof WaterBody || gameObject instanceof Wall || gameObject.isFloorObject) {
 //				continue;
@@ -1185,7 +1182,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 		if (inventory.contains(Landmine.class)) {
 			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
-			if (landmine.discovered) {// This is dumb, there's only a flag for player discovered... needs a change...
+			if (landmine.hiddenObject) {// This is dumb, there's only a flag for player discovered... needs a change...
 				cost = 10;
 				return;
 			}
@@ -1212,7 +1209,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 		if (inventory.contains(Landmine.class)) {
 			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
-			if (landmine.discovered) {
+			if (landmine.hiddenObject) {
 				cost = 10;
 				return;
 			}

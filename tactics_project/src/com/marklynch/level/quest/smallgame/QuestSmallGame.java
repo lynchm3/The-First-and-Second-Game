@@ -27,7 +27,6 @@ import com.marklynch.objects.actors.Guard;
 import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.actors.Thief;
 import com.marklynch.objects.armor.LegArmor;
-import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Wall;
@@ -512,18 +511,17 @@ public class QuestSmallGame extends Quest {
 		// }
 		// });
 
-		Discoverable mound1 = Templates.MOUND.makeCopy(Game.level.squares[1][1], null, 1);
+		GameObject mound1 = Templates.MOUND.makeCopy(Game.level.squares[1][1], null);
 		mound1.inventory.add(Templates.ROCK.makeCopy(null, null));
 
-		Discoverable mound2 = Templates.MOUND.makeCopy(Game.level.squares[2][1], null, 1);
+		GameObject mound2 = Templates.MOUND.makeCopy(Game.level.squares[2][1], null);
 		mound2.inventory.add(Templates.ROCK.makeCopy(null, null));
 
-		Discoverable mound3 = Templates.MOUND.makeCopy(Game.level.squares[3][1], null, 1);
+		GameObject mound3 = Templates.MOUND.makeCopy(Game.level.squares[3][1], null);
 		mound3.inventory.add(Templates.ROCK.makeCopy(null, null));
 
 		Storage crate = Templates.CRATE.makeCopy(Game.level.squares[123][9], false, null);
 		crate.inventory.add(Templates.HATCHET.makeCopy(null, null));
-		// mound.discovered();
 		links = TextUtils.getLinks(true, this);
 	}
 

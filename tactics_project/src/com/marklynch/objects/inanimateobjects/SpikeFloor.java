@@ -10,7 +10,7 @@ import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
-public class SpikeFloor extends Discoverable implements SwitchListener, UpdatableGameObject {
+public class SpikeFloor extends GameObject implements SwitchListener, UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public boolean spikesOut = true;

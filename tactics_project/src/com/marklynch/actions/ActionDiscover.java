@@ -5,7 +5,6 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
-import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.Vein;
@@ -14,12 +13,12 @@ import com.marklynch.ui.ActivityLog;
 public class ActionDiscover extends Action {
 
 	public static final String ACTION_NAME = "Discover";
-	Discoverable discoverable;
+	GameObject hiddenObject;
 
-	public ActionDiscover(GameObject performer, Discoverable target) {
+	public ActionDiscover(GameObject performer, GameObject target) {
 		super(ACTION_NAME, textureSearch, performer, target);
 		super.gameObjectPerformer = this.gameObjectPerformer = performer;
-		this.discoverable = target;
+		this.hiddenObject = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -38,10 +37,10 @@ public class ActionDiscover extends Action {
 		if (!checkRange())
 			return;
 
-		discoverable.discovered();
+		hiddenObject.hiddenObjectDiscovered();
 
 		if (Game.level.shouldLog(gameObjectPerformer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " discovered ", discoverable }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " discovered ", hiddenObject }));
 
 		if (sound != null)
 			sound.play();

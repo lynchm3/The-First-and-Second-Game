@@ -7,7 +7,6 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
@@ -117,11 +116,8 @@ public class PowerFindMatch extends Power {
 		if (square == null)
 			return;
 
-		if (targetGameObject instanceof Discoverable) {
-			Discoverable discoverable = (Discoverable) targetGameObject;
-			if (!discoverable.discovered)
-				return;
-		}
+		if (!targetGameObject.hiddenObject)
+			return;
 
 		float x1 = 0;
 		float y1 = 0;
@@ -130,6 +126,8 @@ public class PowerFindMatch extends Power {
 
 		y1 = (Game.halfWindowHeight) + (Game.zoom * (square.yInGridPixels + topLevelGameObject.drawOffsetY
 				+ topLevelGameObject.halfHeight - Game.halfWindowHeight + Game.getDragYWithOffset()));
+
+		boolean linkedObjectDiscovered = true;
 
 		for (Object linkedObject : targetGameObject.linkedObjects) {
 
@@ -147,6 +145,8 @@ public class PowerFindMatch extends Power {
 			} else {
 
 				GameObject linkedGameObject = (GameObject) linkedObject;
+				if (!linkedGameObject.hiddenObject)
+					linkedObjectDiscovered = false;
 				Square linkedGameObjectSquare = linkedGameObject.getWorldSquareGameObjectIsOn();
 				if (linkedGameObjectSquare == null)
 					continue;
@@ -166,11 +166,8 @@ public class PowerFindMatch extends Power {
 			float centerY = (y1 + y2) / 2;
 
 			Object linkedObjectText = linkedObject;
-			if (linkedObject instanceof Discoverable) {
-				Discoverable discoverable = (Discoverable) linkedObject;
-				if (!discoverable.discovered)
-					linkedObjectText = "???";
-			}
+			if (!linkedObjectDiscovered)
+				linkedObjectText = "???";
 
 			TextUtils.printTextWithImages(centerX, centerY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					targetGameObject, " / ", linkedObjectText);

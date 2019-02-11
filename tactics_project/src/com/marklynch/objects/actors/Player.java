@@ -18,7 +18,6 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.Orb;
@@ -277,12 +276,11 @@ public class Player extends Human {
 
 	}
 
-	public void discoveryCheck() {
+	public void hiddenObjectDiscoveryCheck() {
 		for (Square square : squaresVisibleToPlayer) {
-			for (GameObject discoverableGameObject : square.inventory.getGameObjectsOfClass(Discoverable.class)) {
-				Discoverable discoverable = ((Discoverable) discoverableGameObject);
-				if (!discoverable.discovered && discoverable.level <= this.level) {
-					new ActionDiscover(this, discoverable).perform();
+			for (GameObject gameObject : square.inventory.getGameObjects()) {
+				if (!gameObject.hiddenObject && gameObject.level <= this.level) {
+					new ActionDiscover(this, gameObject).perform();
 				}
 			}
 		}

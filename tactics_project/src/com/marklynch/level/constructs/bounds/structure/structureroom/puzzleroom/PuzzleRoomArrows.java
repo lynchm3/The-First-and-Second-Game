@@ -27,7 +27,8 @@ public class PuzzleRoomArrows extends StructureRoom {
 		this.posY = posY;
 
 		// Diggable
-		GameObject mound = Templates.MOUND.makeCopy(Level.squares[posX + diggableX][posY + diggableY], null, 50);
+		GameObject mound = Templates.MOUND.makeCopy(Level.squares[posX + diggableX][posY + diggableY], null);
+		mound.level = 50;
 		mound.inventory.add(Templates.ROCK.makeCopy(null, null));
 		mound.inventory.add(Templates.GOLD.makeCopy(null, null, 102));
 

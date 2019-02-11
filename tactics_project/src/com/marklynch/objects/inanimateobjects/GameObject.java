@@ -240,6 +240,7 @@ public class GameObject
 
 	public Enhancement enhancement;
 	public int level = 1;
+	public boolean hiddenObject = true;
 
 	public int thoughtsOnPlayer = 0;
 
@@ -395,6 +396,9 @@ public class GameObject
 			return false;
 
 		if (hiding && this != Game.level.player)
+			return false;
+
+		if (!hiddenObject)
 			return false;
 
 		if (!Game.fullVisiblity && this != Game.level.player) {
@@ -1046,11 +1050,8 @@ public class GameObject
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		if (this instanceof Discoverable) {
-			Discoverable discoverable = (Discoverable) this;
-			if (!discoverable.discovered)
-				return null;
-		}
+		if (!this.hiddenObject)
+			return null;
 
 		if (isFloorObject) {
 			return new ActionMove(performer, this.squareGameObjectIsOn, true);
@@ -1113,11 +1114,8 @@ public class GameObject
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 
-		if (this instanceof Discoverable) {
-			Discoverable discoverable = (Discoverable) this;
-			if (!discoverable.discovered)
-				return null;
-		}
+		if (!this.hiddenObject)
+			return null;
 
 		if (isFloorObject) {
 			return null;
@@ -1171,11 +1169,8 @@ public class GameObject
 			return actions;
 		}
 
-		if (this instanceof Discoverable) {
-			Discoverable discoverable = (Discoverable) this;
-			if (!discoverable.discovered)
-				return actions;
-		}
+		if (!this.hiddenObject)
+			return actions;
 
 		// Inspectable
 		if (this instanceof Inspectable) {
@@ -2653,5 +2648,14 @@ public class GameObject
 		Level.blockingAnimations.remove(this.primaryAnimation);
 		Level.animations.remove(this.primaryAnimation);
 
+	}
+
+	public void hiddenObjectDiscovered() {
+		hiddenObject = true;
+
+		if (squareGameObjectIsOn != null) {
+			Level.gameObjectsToFlash.add(this);
+			Level.flashGameObjectCounters.put(this, 0);
+		}
 	}
 }

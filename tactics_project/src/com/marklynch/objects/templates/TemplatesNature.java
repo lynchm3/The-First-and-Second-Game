@@ -9,7 +9,6 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
@@ -218,7 +217,7 @@ public class TemplatesNature {
 		Templates.BURROW.anchorY = 0;
 		Templates.BURROW.templateId = GameObject.generateNewTemplateId();
 
-		Templates.MOUND = new Discoverable();
+		Templates.MOUND = new GameObject();
 		Templates.MOUND.name = "Mound of Dirt";
 		Templates.MOUND.setImageAndExtrapolateSize("mound.png");
 		Templates.MOUND.totalHealth = Templates.MOUND.remainingHealth = 103;

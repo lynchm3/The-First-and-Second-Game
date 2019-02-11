@@ -38,7 +38,6 @@ import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.Carcass;
 import com.marklynch.objects.inanimateobjects.Corpse;
-import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.Fireplace;
 import com.marklynch.objects.inanimateobjects.Food;
@@ -48,7 +47,6 @@ import com.marklynch.objects.inanimateobjects.GameObjectExploder;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
 import com.marklynch.objects.inanimateobjects.Inspectable;
-import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Landmine;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.MapMarker;
@@ -67,6 +65,7 @@ import com.marklynch.objects.inanimateobjects.Roof;
 import com.marklynch.objects.inanimateobjects.Searchable;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
+import com.marklynch.objects.inanimateobjects.SpikeFloor;
 import com.marklynch.objects.inanimateobjects.Stampable;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Stump;
@@ -128,9 +127,9 @@ public class Save {
 			Lantern.class, Fireplace.class,
 
 			// LVL 2 GameObject subclass
-			Door.class, Furnace.class, HidingPlace.class, Landmine.class, Matches.class, PressurePlate.class,
-			PressurePlateRequiringSpecificItem.class, RemoteDoor.class, SmallHidingPlace.class, Storage.class,
-			Vein.class, WallWithCrack.class, WaterBody.class,
+			Door.class, Furnace.class, HidingPlace.class, Landmine.class, SpikeFloor.class, Matches.class,
+			PressurePlate.class, PressurePlateRequiringSpecificItem.class, RemoteDoor.class, SmallHidingPlace.class,
+			Storage.class, Vein.class, WallWithCrack.class, WaterBody.class,
 
 			// LVL 2 GameObject subclass in Weapon package
 			BodyArmor.class, Helmet.class, LegArmor.class,
@@ -142,11 +141,11 @@ public class Save {
 			Human.class, Monster.class, Animal.class,
 
 			// LVL 1 GameObject subclass
-			Bed.class, Carcass.class, Corpse.class, Discoverable.class, Food.class, GameObjectExploder.class,
-			Gold.class, Inspectable.class, GameObject.class, Liquid.class, MapMarker.class, MeatChunk.class, MineCart.class,
-			Mirror.class, Openable.class, Orb.class, Portal.class, Rail.class, Roof.class, Searchable.class,
-			Stampable.class, Stump.class, Switch.class, Tree.class, VoidHole.class, Wall.class, WallSupport.class,
-			WantedPoster.class, WaterSource.class, Window.class,
+			Bed.class, Carcass.class, Corpse.class, Food.class, GameObjectExploder.class, Gold.class, Inspectable.class,
+			GameObject.class, Liquid.class, MapMarker.class, MeatChunk.class, MineCart.class, Mirror.class,
+			Openable.class, Orb.class, Portal.class, Rail.class, Roof.class, Searchable.class, Stampable.class,
+			Stump.class, Switch.class, Tree.class, VoidHole.class, Wall.class, WallSupport.class, WantedPoster.class,
+			WaterSource.class, Window.class,
 
 			// LVL 1 GameObject subclass in Weapon package
 			Weapon.class, Armor.class,

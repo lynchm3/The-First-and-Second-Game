@@ -14,7 +14,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.actors.Player;
-import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Shovel;
@@ -97,11 +96,8 @@ public class ActionDigging extends Action {
 
 		target.squareGameObjectIsOn.setFloorImageTexture(Square.MUD_TEXTURE);
 
-		if (target instanceof Discoverable) {
-			Discoverable discoverable = (Discoverable) target;
-			if (!discoverable.discovered && discoverable.level <= performer.level) {
-				new ActionDiscover(performer, discoverable).perform();
-			}
+		if (!target.hiddenObject && target.level <= performer.level) {
+			new ActionDiscover(performer, target).perform();
 		}
 
 		if (Game.level.shouldLog(target, performer))

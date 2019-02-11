@@ -9,7 +9,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.ArrayList;
 
-public class Landmine extends Discoverable implements OnCompletionListener {
+public class Landmine extends GameObject implements OnCompletionListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public int targetWeight = 10;
@@ -74,7 +74,7 @@ public class Landmine extends Discoverable implements OnCompletionListener {
 	}
 
 	public void explode() {
-		discovered();
+		hiddenObjectDiscovered();
 		this.changeHealthSafetyOff(-this.remainingHealth, this, null);
 	}
 
@@ -91,7 +91,7 @@ public class Landmine extends Discoverable implements OnCompletionListener {
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
-		if (!this.discovered)
+		if (!this.hiddenObject)
 			return actions;
 		actions.add(new ActionMove(performer, squareGameObjectIsOn, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));

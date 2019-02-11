@@ -20,7 +20,6 @@ import com.marklynch.objects.actors.Thief;
 import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.armor.Armor;
 import com.marklynch.objects.armor.Weapon;
-import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
@@ -793,8 +792,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
 
-			if (parent == Level.player && gameObject instanceof Discoverable) {
-				((Discoverable) gameObject).discovered();
+			if (parent == Level.player && !gameObject.hiddenObject) {
+				gameObject.hiddenObjectDiscovered();
 			}
 
 			updateStacks();

@@ -24,7 +24,6 @@ import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.Carcass;
 import com.marklynch.objects.inanimateobjects.Corpse;
-import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.Fireplace;
 import com.marklynch.objects.inanimateobjects.Food;
@@ -407,7 +406,7 @@ public class Templates {
 
 	public static SmallHidingPlace BURROW;
 
-	public static Discoverable MOUND;
+	public static GameObject MOUND;
 	public static GameObject INVISIBLE_DIGGABLE;
 
 	public static VoidHole VOID_HOLE;
