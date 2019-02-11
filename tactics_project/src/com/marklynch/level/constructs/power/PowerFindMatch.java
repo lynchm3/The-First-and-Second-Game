@@ -7,6 +7,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.inanimateobjects.Discoverable;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
@@ -116,6 +117,12 @@ public class PowerFindMatch extends Power {
 		if (square == null)
 			return;
 
+		if (targetGameObject instanceof Discoverable) {
+			Discoverable discoverable = (Discoverable) targetGameObject;
+			if (!discoverable.discovered)
+				return;
+		}
+
 		float x1 = 0;
 		float y1 = 0;
 		x1 = (Game.halfWindowWidth) + (Game.zoom * (square.xInGridPixels + topLevelGameObject.drawOffsetX
@@ -157,8 +164,16 @@ public class PowerFindMatch extends Power {
 
 			float centerX = (x1 + x2) / 2;
 			float centerY = (y1 + y2) / 2;
+
+			Object linkedObjectText = linkedObject;
+			if (linkedObject instanceof Discoverable) {
+				Discoverable discoverable = (Discoverable) linkedObject;
+				if (!discoverable.discovered)
+					linkedObjectText = "???";
+			}
+
 			TextUtils.printTextWithImages(centerX, centerY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					targetGameObject, " / ", linkedObject);
+					targetGameObject, " / ", linkedObjectText);
 		}
 	}
 
