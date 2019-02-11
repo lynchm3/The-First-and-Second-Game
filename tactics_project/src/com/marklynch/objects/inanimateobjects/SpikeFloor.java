@@ -27,6 +27,7 @@ public class SpikeFloor extends GameObject implements SwitchListener, UpdatableG
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		moveable = false;
+		isFloorObject = true;
 		type = "Trap";
 	}
 
