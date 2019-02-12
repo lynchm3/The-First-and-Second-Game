@@ -65,7 +65,7 @@ import com.marklynch.objects.inanimateobjects.Roof;
 import com.marklynch.objects.inanimateobjects.Searchable;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
-import com.marklynch.objects.inanimateobjects.SpikeFloor;
+import com.marklynch.objects.inanimateobjects.Spikes;
 import com.marklynch.objects.inanimateobjects.Stampable;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Stump;
@@ -127,7 +127,7 @@ public class Save {
 			Lantern.class, Fireplace.class,
 
 			// LVL 2 GameObject subclass
-			Door.class, Furnace.class, HidingPlace.class, Landmine.class, SpikeFloor.class, Matches.class,
+			Door.class, Furnace.class, HidingPlace.class, Landmine.class, Spikes.class, Matches.class,
 			PressurePlate.class, PressurePlateRequiringSpecificItem.class, RemoteDoor.class, SmallHidingPlace.class,
 			Storage.class, Vein.class, WallWithCrack.class, WaterBody.class,
 

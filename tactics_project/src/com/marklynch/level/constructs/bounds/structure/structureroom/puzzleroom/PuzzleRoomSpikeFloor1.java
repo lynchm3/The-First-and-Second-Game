@@ -4,7 +4,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.inanimateobjects.SpikeFloor;
+import com.marklynch.objects.inanimateobjects.Spikes;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
@@ -23,22 +23,28 @@ public class PuzzleRoomSpikeFloor1 extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 
-		SpikeFloor spikeFloor1 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 3], null, 1);
+		Spikes spikeFloor1 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 3], null, 1);
 
 		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 1][this.posY + 3], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeFloor1);
 
-		SpikeFloor spikeFloor2 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 2], null, 1);
+		Spikes spikeFloor2 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 2], null, 1);
 		spikeFloor2.zwitch(null);
 
 		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 1][this.posY + 2], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeFloor2);
 
-		SpikeFloor spikeFloor3 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 4], null, 1);
+		Spikes spikeFloor3 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 4], null, 1);
 		spikeFloor3.zwitch(null);
 
 		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 2][this.posY + 4], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeFloor3);
+
+		Spikes spikeWallDown = Templates.SPIKE_WALL_DOWN.makeCopy(Level.squares[this.posX + 5][this.posY + 0], null, 1);
+		spikeWallDown.zwitch(null);
+
+		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 2][this.posY + 5], null,
+				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeWallDown);
 
 	}
 

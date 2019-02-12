@@ -10,7 +10,7 @@ import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
-public class SpikeFloor extends GameObject implements SwitchListener, UpdatableGameObject {
+public class Spikes extends GameObject implements SwitchListener, UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public boolean spikesOut = true;
@@ -18,7 +18,7 @@ public class SpikeFloor extends GameObject implements SwitchListener, UpdatableG
 	public Texture spikesRetractedImage;
 	public int lastTurnDidDamage;
 
-	public SpikeFloor() {
+	public Spikes() {
 		super();
 		canBePickedUp = false;
 		fitsInInventory = false;
@@ -37,8 +37,8 @@ public class SpikeFloor extends GameObject implements SwitchListener, UpdatableG
 		super.setInstances(gameObject);
 	}
 
-	public SpikeFloor makeCopy(Square square, Actor owner, int level) {
-		SpikeFloor spikeFloor = new SpikeFloor();
+	public Spikes makeCopy(Square square, Actor owner, int level) {
+		Spikes spikeFloor = new Spikes();
 		setInstances(spikeFloor);
 		spikeFloor.spikesOut = spikesOut;
 		spikeFloor.spikesOutImage = spikesOutImage;

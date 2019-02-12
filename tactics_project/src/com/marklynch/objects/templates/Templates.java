@@ -49,7 +49,7 @@ import com.marklynch.objects.inanimateobjects.Searchable;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.SeesawPart;
 import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
-import com.marklynch.objects.inanimateobjects.SpikeFloor;
+import com.marklynch.objects.inanimateobjects.Spikes;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Stump;
 import com.marklynch.objects.inanimateobjects.Switch;
@@ -414,7 +414,8 @@ public class Templates {
 	public static Portal PORTAL;
 
 	public static Landmine LANDMINE;
-	public static SpikeFloor SPIKE_FLOOR;
+	public static Spikes SPIKE_FLOOR;
+	public static Spikes SPIKE_WALL_DOWN;
 
 	// Floor
 	public static GameObject STONE_FLOOR;

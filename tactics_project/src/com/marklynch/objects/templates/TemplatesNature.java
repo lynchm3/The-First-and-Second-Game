@@ -16,7 +16,7 @@ import com.marklynch.objects.inanimateobjects.Landmine;
 import com.marklynch.objects.inanimateobjects.MeatChunk;
 import com.marklynch.objects.inanimateobjects.Portal;
 import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
-import com.marklynch.objects.inanimateobjects.SpikeFloor;
+import com.marklynch.objects.inanimateobjects.Spikes;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Stump;
 import com.marklynch.objects.inanimateobjects.Tree;
@@ -366,7 +366,7 @@ public class TemplatesNature {
 		Templates.LANDMINE.power = new PowerInferno(null);
 		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();
 
-		Templates.SPIKE_FLOOR = new SpikeFloor();
+		Templates.SPIKE_FLOOR = new Spikes();
 		Templates.SPIKE_FLOOR.name = "Spike Floor";
 		Templates.SPIKE_FLOOR.setImageAndExtrapolateSize("spike_trap_spikes_out.png");
 		Templates.SPIKE_FLOOR.spikesOut = true;
@@ -379,6 +379,20 @@ public class TemplatesNature {
 		Templates.SPIKE_FLOOR.value = 34;
 		Templates.SPIKE_FLOOR.drawOffsetY = -16f;
 		Templates.SPIKE_FLOOR.templateId = GameObject.generateNewTemplateId();
+
+		Templates.SPIKE_WALL_DOWN = new Spikes();
+		Templates.SPIKE_WALL_DOWN.name = "Spike Wall";
+		Templates.SPIKE_WALL_DOWN.setImageAndExtrapolateSize("spike_wall_down_spikes_out.png");
+		Templates.SPIKE_WALL_DOWN.spikesOut = true;
+		Templates.SPIKE_WALL_DOWN.spikesRetractedImage = ResourceUtils
+				.getGlobalImage("spike_wall_down_spikes_retracted.png", true);
+		Templates.SPIKE_WALL_DOWN.spikesOutImage = ResourceUtils.getGlobalImage("spike_wall_down_spikes_out.png", true);
+		Templates.SPIKE_WALL_DOWN.templateId = GameObject.generateNewTemplateId();
+		Templates.SPIKE_WALL_DOWN.totalHealth = Templates.SPIKE_FLOOR.remainingHealth = 1000;
+		Templates.SPIKE_WALL_DOWN.weight = 19f;
+		Templates.SPIKE_WALL_DOWN.value = 34;
+		Templates.SPIKE_WALL_DOWN.drawOffsetY = -32f;
+		Templates.SPIKE_WALL_DOWN.templateId = GameObject.generateNewTemplateId();
 
 		Templates.STONE_FLOOR = new GameObject();
 		Templates.STONE_FLOOR.name = "Floor";
