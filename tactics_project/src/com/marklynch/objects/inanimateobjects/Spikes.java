@@ -14,8 +14,10 @@ public class Spikes extends GameObject implements SwitchListener, UpdatableGameO
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public boolean spikesOut = true;
-	public Texture spikesOutImage;
-	public Texture spikesRetractedImage;
+	public Texture spikesOutImage1;
+	public Texture spikesOutImage2;
+	public Texture spikesRetractedImage1;
+	public Texture spikesRetractedImage2;
 	public int lastTurnDidDamage;
 
 	public Spikes() {
@@ -41,8 +43,10 @@ public class Spikes extends GameObject implements SwitchListener, UpdatableGameO
 		Spikes spikeFloor = new Spikes();
 		setInstances(spikeFloor);
 		spikeFloor.spikesOut = spikesOut;
-		spikeFloor.spikesOutImage = spikesOutImage;
-		spikeFloor.spikesRetractedImage = spikesRetractedImage;
+		spikeFloor.spikesOutImage1 = spikesOutImage1;
+		spikeFloor.spikesOutImage2 = spikesOutImage2;
+		spikeFloor.spikesRetractedImage1 = spikesRetractedImage1;
+		spikeFloor.spikesRetractedImage2 = spikesRetractedImage2;
 		spikeFloor.level = level;
 		spikeFloor.updateImageTexture();
 		super.setAttributesForCopy(spikeFloor, square, owner);
@@ -100,9 +104,11 @@ public class Spikes extends GameObject implements SwitchListener, UpdatableGameO
 
 	public void updateImageTexture() {
 		if (spikesOut) {
-			imageTexture = spikesOutImage;
+			imageTexture = spikesOutImage1;
+			imageTexture2 = spikesOutImage2;
 		} else {
-			imageTexture = spikesRetractedImage;
+			imageTexture = spikesRetractedImage1;
+			imageTexture2 = spikesRetractedImage2;
 		}
 
 	}

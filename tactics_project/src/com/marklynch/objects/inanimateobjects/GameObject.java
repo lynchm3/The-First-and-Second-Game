@@ -171,6 +171,7 @@ public class GameObject
 	public float weight;
 
 	public Texture imageTexture = null;
+	public Texture imageTexture2 = null;
 	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>(Effect.class);
 
 	// attributes
@@ -421,17 +422,10 @@ public class GameObject
 			primaryAnimation.draw1();
 
 		int actorPositionXInPixels = 0;
-//		if (backwards) {
-//			actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-//					+ Game.SQUARE_WIDTH * -drawOffsetRatioX);
-//		} else {
 		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
-//		}
 
 		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 		float alpha = 1.0f;
-
-		// TextureUtils.skipNormals = true;
 
 		if (primaryAnimation != null)
 			alpha = primaryAnimation.alpha;
@@ -464,19 +458,14 @@ public class GameObject
 				&& this.squareGameObjectIsOn.structureSquareIsIn == null) {
 			drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, scaleX,
 					Level.shadowLength * scaleY, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
-					false);
+					false, imageTexture);
 		} else if (Level.shadowDarkness > 0 && this.squareGameObjectIsOn.structureSquareIsIn == null) {
-			// drawGameObject((actorPositionXInPixels), (actorPositionYInPixels),
-			// Level.shadowDarkness, false, 1f, 1f,
-			// Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
-			// false);
-
-			// Level.shadowDarkness
+			// shadow again...
 			drawGameObject((int) (actorPositionXInPixels + Level.smallShadowOffSetX),
 					(int) (actorPositionYInPixels + Level.smallShadowOffSetY), Level.shadowDarkness, false, scaleX,
 					Level.shadowLength * scaleY, 0f, boundsX1 + Level.smallShadowOffSetX,
 					boundsY1 + Level.smallShadowOffSetY, boundsX2 + Level.smallShadowOffSetX,
-					boundsY2 + Level.smallShadowOffSetY, Color.BLACK, false);
+					boundsY2 + Level.smallShadowOffSetY, Color.BLACK, false, imageTexture);
 		}
 
 		Color color = Level.dayTimeOverlayColor;
@@ -486,13 +475,13 @@ public class GameObject
 				flash || this == Game.gameObjectMouseIsOver
 						|| (Game.gameObjectMouseIsOver != null
 								&& Game.gameObjectMouseIsOver.gameObjectsToHighlight.contains(this)),
-				scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color, true);
+				scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color, true, imageTexture);
 		return true;
 	}
 
 	public void drawGameObject(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY,
 			float rotationRad, float boundsX1, float boundsY1, float boundsX2, float boundsY2, Color color,
-			boolean drawHealthBar) {
+			boolean drawHealthBar, Texture image) {
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {
@@ -556,16 +545,16 @@ public class GameObject
 				}
 			}
 
-			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, x, y, x + width, y + height, boundsX1, boundsY1,
+			TextureUtils.drawTextureWithinBounds(image, alpha, x, y, x + width, y + height, boundsX1, boundsY1,
 					boundsX2, boundsY2, backwards, false, color);
 
 			if (highlight) {
-				TextureUtils.drawTexture(imageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
+				TextureUtils.drawTexture(image, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
 						flashColor, false);
 			} else if (squareGameObjectIsOn.inventory.waterBody != null && !(this instanceof Fish)
 					&& !(this instanceof WaterBody)) {
 
-				TextureUtils.drawTexture(imageTexture, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
+				TextureUtils.drawTexture(image, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
 						underWaterColor, false);
 				TextureUtils.drawTexture(Templates.WATER_BODY.imageTexture, alpha, x, y, x + width, y + height,
 						backwards);
@@ -661,6 +650,57 @@ public class GameObject
 	}
 
 	public void draw2() {
+
+		if (!shouldDraw())
+			return;
+
+		if (imageTexture2 != null) {
+
+			System.out.println("imageTexture2 != null");
+
+			int actorPositionXInPixels = 0;
+			actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
+			float alpha = 1.0f;
+
+			if (primaryAnimation != null)
+				alpha = primaryAnimation.alpha;
+			if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
+				alpha = 0.5f;
+
+			float boundsX1 = actorPositionXInPixels;
+			float boundsY1 = actorPositionYInPixels;
+			float boundsX2 = actorPositionXInPixels + width;
+			float boundsY2 = actorPositionYInPixels + height;
+
+			if (primaryAnimation != null) {
+				actorPositionXInPixels += primaryAnimation.offsetX;
+				actorPositionYInPixels += primaryAnimation.offsetY;
+				boundsX1 += primaryAnimation.offsetX + primaryAnimation.boundsX1;
+				boundsY1 += primaryAnimation.offsetY + primaryAnimation.boundsY1;
+				boundsX2 += primaryAnimation.offsetX + primaryAnimation.boundsX2;
+				boundsY2 += primaryAnimation.offsetY + primaryAnimation.boundsY2;
+			}
+
+			float scaleX = 1;
+			float scaleY = 1;
+			if (primaryAnimation != null) {
+				scaleX = primaryAnimation.scaleX;
+				scaleY = primaryAnimation.scaleY;
+			}
+
+			Color color = Level.dayTimeOverlayColor;
+			if (this.squareGameObjectIsOn.structureSquareIsIn != null)
+				color = StructureRoom.roomColor;
+
+			drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
+					flash || this == Game.gameObjectMouseIsOver
+							|| (Game.gameObjectMouseIsOver != null
+									&& Game.gameObjectMouseIsOver.gameObjectsToHighlight.contains(this)),
+					scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color, true, imageTexture2);
+		}
+
 		for (Effect effect : activeEffectsOnGameObject) {
 			effect.draw2();
 		}
