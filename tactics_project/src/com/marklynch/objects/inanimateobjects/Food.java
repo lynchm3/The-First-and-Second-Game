@@ -1,18 +1,16 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.Consumable;
+import com.marklynch.utils.ArrayList;
 
 public class Food extends GameObject implements Consumable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
 	public float drawOffsetYInTree;
-	public Effect[] consumeEffects;
 
 	public Food() {
 		super();

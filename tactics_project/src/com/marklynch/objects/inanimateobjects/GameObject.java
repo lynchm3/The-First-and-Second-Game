@@ -287,6 +287,9 @@ public class GameObject
 
 	public ArrayList<GameObject> gameObjectsToHighlight = new ArrayList<GameObject>(GameObject.class);
 
+	public Effect[] touchEffects;
+	public Effect[] consumeEffects;
+
 	public GameObject() {
 
 		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 0));
@@ -2022,6 +2025,8 @@ public class GameObject
 		gameObject.isFloorObject = isFloorObject;
 		gameObject.moveable = moveable;
 		gameObject.canShareSquare = canShareSquare;
+		gameObject.touchEffects = touchEffects;
+		gameObject.consumeEffects = consumeEffects;
 
 		gameObject.init();
 	}

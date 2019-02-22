@@ -18,7 +18,6 @@ import com.marklynch.utils.Texture;
 public class WaterBody extends WaterSource implements Consumable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
-	public Effect[] consumeEffects;
 
 	// 3+ connections
 	public boolean fullWall;
