@@ -88,16 +88,14 @@ public class ActionUsePower extends Action {
 
 	@Override
 	public boolean check() {
-
-		if (target != null)
-			if (target.attackable == false || target.isFloorObject)
-				return false;
-
+		System.out.println("check b");
 		boolean powerCheck = power.check(gameObjectPerformer, targetSquare);
 		if (powerCheck) {
+			System.out.println("check c");
 			return true;
 		} else {
 			disabledReason = power.disabledReason;
+			System.out.println("check d");
 			return false;
 		}
 	}

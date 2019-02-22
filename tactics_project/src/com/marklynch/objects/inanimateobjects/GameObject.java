@@ -85,7 +85,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
-import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.constructs.enchantment.Enhancement;
@@ -1253,7 +1253,7 @@ public class GameObject
 			actions.add(new ActionIgnite(performer, performer.equipped, this));
 
 		// This object is on fire
-		else if (this.hasActiveEffectOfType(EffectBurning.class) && (performer.equipped != null))
+		else if (this.hasActiveEffectOfType(EffectBurn.class) && (performer.equipped != null))
 			actions.add(new ActionIgnite(performer, performer.equipped, this));
 
 		// Skinnable
@@ -1809,7 +1809,7 @@ public class GameObject
 		}
 
 		if (this instanceof FlammableLightSource) {
-			if (effectToAdd instanceof EffectBurning) {
+			if (effectToAdd instanceof EffectBurn) {
 				((FlammableLightSource) this).setLighting(true);
 			} else if (effectToAdd instanceof EffectWet) {
 				((FlammableLightSource) this).setLighting(false);
@@ -1833,6 +1833,14 @@ public class GameObject
 		if (effectToAdd instanceof EffectWet)
 			this.removeBurningEffect();
 
+		addEffectSafetyOff(effectToAdd);
+
+		if (Game.level.shouldLog(this))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
+	}
+
+	public void addEffectSafetyOff(Effect effectToAdd) {
+
 		Effect effectToRemove = null;
 		for (Effect existingEffect : this.activeEffectsOnGameObject) {
 			if (existingEffect.getClass() == effectToAdd.getClass()) {
@@ -1851,9 +1859,6 @@ public class GameObject
 		if (!(this instanceof Actor)) {
 			Level.effectsOnInanimateGameObjects.add(effectToAdd);
 		}
-
-		if (Game.level.shouldLog(this))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
 	}
 
 	public void activateEffects() {
@@ -2063,7 +2068,7 @@ public class GameObject
 	public void removeBurningEffect() {
 		Effect effectBurning = null;
 		for (Effect effect : activeEffectsOnGameObject) {
-			if (effect instanceof EffectBurning) {
+			if (effect instanceof EffectBurn) {
 				effectBurning = effect;
 			}
 		}
@@ -2585,8 +2590,12 @@ public class GameObject
 
 	public void setImageAndExtrapolateSize(String imagPath) {
 		this.imageTexture = getGlobalImage(imagPath, true);
-		this.widthRatio = imageTexture.getWidth() / Game.SQUARE_WIDTH;
-		this.heightRatio = imageTexture.getHeight() / Game.SQUARE_HEIGHT;
+		if (imageTexture != null) {
+			this.widthRatio = imageTexture.getWidth() / Game.SQUARE_WIDTH;
+			this.heightRatio = imageTexture.getHeight() / Game.SQUARE_HEIGHT;
+		} else {
+
+		}
 
 	}
 

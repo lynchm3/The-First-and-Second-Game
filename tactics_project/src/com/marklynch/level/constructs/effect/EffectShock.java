@@ -9,23 +9,24 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.ui.ActivityLog;
 
-public class EffectBurning extends Effect {
+public class EffectShock extends Effect {
 
-	public EffectBurning() {
+	public EffectShock() {
 	}
 
-	public EffectBurning(GameObject source, GameObject target, int totalTurns) {
-		this.logString = " burned by ";
-		this.effectName = "Burn";
+	public EffectShock(GameObject source, GameObject target, int totalTurns) {
+		this.logString = " shocked by ";
+		this.effectName = "Shock";
 		this.source = source;
 		this.target = target;
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
-		this.imageTexture = getGlobalImage("effect_burn.png", false);
-		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(HIGH_LEVEL_STATS.FIRE_DAMAGE, 5));
+		this.imageTexture = getGlobalImage("spark.png", false);
+		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, new Stat(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, 5));
 	}
 
 	@Override
@@ -45,32 +46,19 @@ public class EffectBurning extends Effect {
 		// target.attackedBy(this, null);
 
 		// Spread fire if not turn 1
-		if (totalTurns != turnsRemaining) {
+		if (totalTurns == turnsRemaining) {
 
 			// If in world (not in inventory)
 			Square squareTargetIsOn = target.squareGameObjectIsOn;
 			if (squareTargetIsOn != null) {
-				for (GameObject gameObject : squareTargetIsOn.inventory.getGameObjects()) {
-
-					if (gameObject != target && Math.random()
-							* 100 > gameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
-						gameObject.removeWetEffect();
-						gameObject.addEffect(this.makeCopy(source, gameObject));
-						if (Game.level.shouldLog(gameObject))
-							Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
-					}
-				}
-
 				ArrayList<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
 				for (Square adjacentSquare : adjacentSquares) {
 					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
-						if (Math.random() * 100 > gameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
-							gameObject.removeWetEffect();
+						if (gameObject instanceof WaterSource) {
 							gameObject.addEffect(this.makeCopy(source, gameObject));
-
-							if (Game.level.shouldLog(gameObject))
-								Game.level
-										.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
+//							if (Game.level.shouldLog(gameObject))
+//								Game.level
+//										.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
 						}
 					}
 				}
@@ -82,8 +70,8 @@ public class EffectBurning extends Effect {
 	}
 
 	@Override
-	public EffectBurning makeCopy(GameObject source, GameObject target) {
-		return new EffectBurning(source, target, totalTurns);
+	public EffectShock makeCopy(GameObject source, GameObject target) {
+		return new EffectShock(source, target, totalTurns);
 	}
 
 }

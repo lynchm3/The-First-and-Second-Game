@@ -10,7 +10,7 @@ import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationPush;
 import com.marklynch.level.constructs.animation.secondary.AnimationThrown;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Arrow;
@@ -28,7 +28,7 @@ public class PowerInferno extends Power {
 
 	public PowerInferno(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_burn.png", false), source,
-				new Effect[] { new EffectBurning(source, null, 3) }, 5, null,
+				new Effect[] { new EffectBurn(source, null, 3) }, 5, null,
 				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
 				10, true, true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;

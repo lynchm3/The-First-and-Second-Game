@@ -2,7 +2,7 @@ package com.marklynch.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -74,7 +74,7 @@ public class ActionDiscover extends Action {
 				Game.level.logOnScreen(new ActivityLog(
 						new Object[] { gameObjectPerformer.destroyedBy, " broke ", gameObjectPerformer, this.image }));
 
-		} else if (gameObjectPerformer instanceof Actor && gameObjectPerformer.destroyedBy instanceof EffectBurning) {
+		} else if (gameObjectPerformer instanceof Actor && gameObjectPerformer.destroyedBy instanceof EffectBurn) {
 
 			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(
@@ -94,7 +94,7 @@ public class ActionDiscover extends Action {
 			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { gameObjectPerformer, " was chopped down ", this.image }));
-		} else if (gameObjectPerformer.destroyedBy instanceof EffectBurning) {
+		} else if (gameObjectPerformer.destroyedBy instanceof EffectBurn) {
 
 			if (Game.level.shouldLog(gameObjectPerformer))
 				Game.level.logOnScreen(

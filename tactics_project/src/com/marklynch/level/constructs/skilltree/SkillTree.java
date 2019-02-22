@@ -24,6 +24,7 @@ import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
 import com.marklynch.level.constructs.power.PowerQuickFingers;
 import com.marklynch.level.constructs.power.PowerRespite;
+import com.marklynch.level.constructs.power.PowerSpark;
 import com.marklynch.level.constructs.power.PowerSpiritBag;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerTelekineticPush;
@@ -144,11 +145,21 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Ignite
 		SkillTreeNode ignite = new SkillTreeNode(16, 6);
-		// activateAtStart.add(ignite);
+		activateAtStart.add(ignite);
 		ignite.name = "Ignite";
 		ignite.description = "Ignite";
 		ignite.powersUnlocked.add(new PowerIgnite(null));
 		skillTreeNodes.add(ignite);
+
+		// Spark
+		SkillTreeNode spark = new SkillTreeNode(17, 6);
+		activateAtStart.add(spark);
+		spark.name = "Spark";
+		spark.description = "Spark";
+		spark.powersUnlocked.add(new PowerSpark(null));
+		skillTreeNodes.add(spark);
+		spark.linkedSkillTreeNodes.add(ignite);
+		ignite.linkedSkillTreeNodes.add(spark);
 
 		// Douse
 		SkillTreeNode douse = new SkillTreeNode(15, 6);

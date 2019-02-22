@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationIgnite;
-import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerIgnite;
 import com.marklynch.objects.actors.Actor;
@@ -89,7 +89,7 @@ public class ActionIgnite extends Action {
 		}
 
 //		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
-		target.addEffect(new EffectBurning(performer, target, 3));
+		target.addEffect(new EffectBurn(performer, target, 3));
 //		}
 
 		if (Game.level.openInventories.size() > 0)

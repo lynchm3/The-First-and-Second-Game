@@ -62,7 +62,7 @@ public abstract class Power {
 		ArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
 
 		for (Square square : affectedSquares) {
-			for (GameObject gameObject : square.inventory.getGameObjects()) {
+			for (GameObject gameObject : (ArrayList<GameObject>) square.inventory.getGameObjects().clone()) {
 				for (Effect effect : effects) {
 					gameObject.addEffect(effect.makeCopy(source, gameObject));
 				}

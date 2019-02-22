@@ -1,7 +1,7 @@
 package com.marklynch.objects.inanimateobjects;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.tools.FlammableLightSource;
@@ -53,9 +53,9 @@ public class Fireplace extends FlammableLightSource implements UpdatableGameObje
 			if (gameObject == this || gameObject.attackable == false)
 				continue;
 
-			EffectBurning effectBurning = new EffectBurning(this, gameObject, 3);
+			EffectBurn effectBurning = new EffectBurn(this, gameObject, 3);
 
-			if (!gameObject.hasActiveEffectOfType(EffectBurning.class)) {
+			if (!gameObject.hasActiveEffectOfType(EffectBurn.class)) {
 				if (Game.level.shouldLog(gameObject)) {
 					Game.level.logOnScreen(new ActivityLog(new Object[] { effectBurning, " spread to ", gameObject }));
 				}

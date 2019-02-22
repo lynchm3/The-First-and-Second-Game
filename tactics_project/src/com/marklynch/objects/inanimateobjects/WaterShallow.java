@@ -3,6 +3,8 @@ package com.marklynch.objects.inanimateobjects;
 import java.util.Random;
 
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.effect.EffectBurn;
+import com.marklynch.level.constructs.effect.EffectShock;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
@@ -30,10 +32,11 @@ public class WaterShallow extends WaterSource implements Consumable, UpdatableGa
 
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = true;
-		attackable = false;
+		attackable = true;
 		isFloorObject = true;
 		orderingOnGound = 99;
 		moveable = false;
+		canContainOtherObjects = false;
 
 		flipYAxisInMirror = false;
 
@@ -104,6 +107,15 @@ public class WaterShallow extends WaterSource implements Consumable, UpdatableGa
 	@Override
 	public Effect[] getConsumeEffects() {
 		return consumeEffects;
+	}
+
+	@Override
+	public void addEffect(Effect effectToAdd) {
+		if (effectToAdd instanceof EffectBurn) {
+			this.changeHealthSafetyOff(-this.remainingHealth, effectToAdd.source, null);
+		} else if (effectToAdd instanceof EffectShock) {
+			addEffectSafetyOff(effectToAdd);
+		}
 	}
 
 }

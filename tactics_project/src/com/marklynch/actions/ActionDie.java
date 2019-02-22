@@ -8,7 +8,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
 import com.marklynch.level.constructs.animation.primary.AnimationScale;
-import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
@@ -18,6 +18,7 @@ import com.marklynch.objects.inanimateobjects.Stump;
 import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.inanimateobjects.Wall;
+import com.marklynch.objects.inanimateobjects.WaterShallow;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
 
@@ -84,44 +85,43 @@ public class ActionDie extends Action {
 
 	public void logDeath() {
 
+		if (!Game.level.shouldLog(gameObjectPerformer))
+			return;
+
 		if (gameObjectPerformer instanceof RockGolem) {
 
-			if (Game.level.shouldLog(gameObjectPerformer))
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { gameObjectPerformer.destroyedBy, " broke ", gameObjectPerformer, this.image }));
+			Game.level.logOnScreen(new ActivityLog(
+					new Object[] { gameObjectPerformer.destroyedBy, " broke ", gameObjectPerformer, this.image }));
 
-		} else if (gameObjectPerformer instanceof Actor && gameObjectPerformer.destroyedBy instanceof EffectBurning) {
+		} else if (gameObjectPerformer instanceof Actor && gameObjectPerformer.destroyedBy instanceof EffectBurn) {
 
-			if (Game.level.shouldLog(gameObjectPerformer))
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { gameObjectPerformer, " burned to death ", this.image }));
+			Game.level.logOnScreen(
+					new ActivityLog(new Object[] { gameObjectPerformer, " burned to death ", this.image }));
 		} else if (gameObjectPerformer instanceof Vein) {
 
-			if (Game.level.shouldLog(gameObjectPerformer))
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { gameObjectPerformer, " was depleted ", this.image }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " was depleted ", this.image }));
 		} else if (gameObjectPerformer.destroyedByAction instanceof ActionSmash) {
 
-			if (Game.level.shouldLog(gameObjectPerformer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " smashed ", this.image }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " smashed ", this.image }));
 		} else if (gameObjectPerformer instanceof Tree
 				&& gameObjectPerformer.destroyedByAction instanceof ActionChopping) {
 
-			if (Game.level.shouldLog(gameObjectPerformer))
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { gameObjectPerformer, " was chopped down ", this.image }));
-		} else if (gameObjectPerformer.destroyedBy instanceof EffectBurning) {
+			Game.level.logOnScreen(
+					new ActivityLog(new Object[] { gameObjectPerformer, " was chopped down ", this.image }));
+		} else if (gameObjectPerformer.destroyedBy instanceof EffectBurn) {
 
-			if (Game.level.shouldLog(gameObjectPerformer))
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { gameObjectPerformer, " burned down ", this.image }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " burned down ", this.image }));
 		} else if (gameObjectPerformer instanceof Actor) {
 
-			if (Game.level.shouldLog(gameObjectPerformer))
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { gameObjectPerformer.destroyedBy, " killed ", gameObjectPerformer, this.image }));
+			Game.level.logOnScreen(new ActivityLog(
+					new Object[] { gameObjectPerformer.destroyedBy, " killed ", gameObjectPerformer, this.image }));
 
 		} else if (gameObjectPerformer.diggable == true) {
+		} else if (gameObjectPerformer instanceof WaterShallow) {
+
+			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer.destroyedBy, " evaporated a ",
+					gameObjectPerformer, this.image }));
+
 		} else {
 
 			if (Game.level.shouldLog(gameObjectPerformer))
@@ -206,7 +206,7 @@ public class ActionDie extends Action {
 			// }
 		} else {
 			// GameObjects
-			if (gameObjectPerformer.destroyedBy instanceof EffectBurning) {
+			if (gameObjectPerformer.destroyedBy instanceof EffectBurn) {
 				// Death by fire
 				Templates.ASH.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
 				for (GameObject gameObject : (ArrayList<GameObject>) gameObjectPerformer.inventory.gameObjects

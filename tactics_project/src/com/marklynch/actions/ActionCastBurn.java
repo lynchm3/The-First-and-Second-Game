@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Arrow;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -42,7 +42,7 @@ public class ActionCastBurn extends Action {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", target }));
 		if (Math.random() * 100 > target.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
 			target.removeWetEffect();
-			target.addEffect(new EffectBurning(performer, target, 5));
+			target.addEffect(new EffectBurn(performer, target, 5));
 
 		} else {
 

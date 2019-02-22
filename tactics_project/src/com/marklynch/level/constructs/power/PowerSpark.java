@@ -6,29 +6,29 @@ import com.marklynch.actions.Action;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.animation.primary.AnimationPush;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectBurn;
+import com.marklynch.level.constructs.effect.EffectShock;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.ResourceUtils;
 
-public class PowerIgnite extends Power {
+public class PowerSpark extends Power {
 
-	private static String NAME = "Ignite";
+	private static String NAME = "Spark";
 
-	public PowerIgnite() {
+	public PowerSpark() {
 		this(null);
 	}
 
-	public PowerIgnite(GameObject source) {
-		super(NAME, ResourceUtils.getGlobalImage("action_burn.png", false), source,
-				new Effect[] { new EffectBurn(source, null, 3) }, 5, null, new Point[] { new Point(0, 0) }, 10, true,
+	public PowerSpark(GameObject source) {
+		super(NAME, ResourceUtils.getGlobalImage("spark.png", false), source,
+				new Effect[] { new EffectShock(source, null, 3) }, 5, null, new Point[] { new Point(0, 0) }, 10, true,
 				true, Crime.TYPE.CRIME_ASSAULT);
 		selectTarget = true;
 	}
 
 	@Override
 	public Power makeCopy(GameObject source) {
-		return new PowerIgnite(source);
+		return new PowerSpark(source);
 	}
 
 	@Override
