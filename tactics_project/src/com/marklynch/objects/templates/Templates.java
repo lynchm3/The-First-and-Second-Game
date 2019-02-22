@@ -61,6 +61,7 @@ import com.marklynch.objects.inanimateobjects.WallSupport;
 import com.marklynch.objects.inanimateobjects.WallWithCrack;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.inanimateobjects.WaterBody;
+import com.marklynch.objects.inanimateobjects.WaterShallow;
 import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
@@ -306,6 +307,7 @@ public class Templates {
 	public static Vein VEIN;
 
 	public static WaterBody WATER_BODY;
+	public static WaterShallow WATER_SHALLOW;
 
 	public static GameObject BOULDER;
 

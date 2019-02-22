@@ -23,6 +23,7 @@ import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.inanimateobjects.VoidHole;
 import com.marklynch.objects.inanimateobjects.WaterBody;
+import com.marklynch.objects.inanimateobjects.WaterShallow;
 import com.marklynch.utils.ResourceUtils;;
 
 public class TemplatesNature {
@@ -322,27 +323,25 @@ public class TemplatesNature {
 		Templates.WATER_BODY.anchorX = 0;
 		Templates.WATER_BODY.anchorY = 0;
 		Templates.WATER_BODY.templateId = GameObject.generateNewTemplateId();
-		Templates.WATER_BODY.flipYAxisInMirror = false;
-		Templates.WATER_BODY.canShareSquare = false;
-		Templates.WATER_BODY.fitsInInventory = false;
-		Templates.WATER_BODY.moveable = false;
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES,
-				new Stat(HIGH_LEVEL_STATS.PIERCE_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES,
-				new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES,
-				new Stat(HIGH_LEVEL_STATS.POISON_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES, 100));
-		Templates.WATER_BODY.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES,
-				new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
+		Templates.WATER_BODY.setAllResistances100();
 		Templates.WATER_BODY.textures.add(getGlobalImage("water.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_2.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_3.png", true));
 		Templates.WATER_BODY.textures.add(getGlobalImage("water_4.png", true));
+
+		// WATER_SHALLOW
+		Templates.WATER_SHALLOW = new WaterShallow();
+		Templates.WATER_SHALLOW.name = "Shallow Water";
+		Templates.WATER_SHALLOW.setImageAndExtrapolateSize("water.png");
+		Templates.WATER_SHALLOW.totalHealth = Templates.WATER_SHALLOW.remainingHealth = 1000;
+		Templates.WATER_SHALLOW.weight = 1000f;
+		Templates.WATER_SHALLOW.value = 36;
+		Templates.WATER_SHALLOW.templateId = GameObject.generateNewTemplateId();
+		Templates.WATER_SHALLOW.setAllResistances100();
+		Templates.WATER_SHALLOW.textures.add(getGlobalImage("water.png", true));
+		Templates.WATER_SHALLOW.textures.add(getGlobalImage("water_2.png", true));
+		Templates.WATER_SHALLOW.textures.add(getGlobalImage("water_3.png", true));
+		Templates.WATER_SHALLOW.textures.add(getGlobalImage("water_4.png", true));
 
 		Templates.VOID_HOLE = new VoidHole();
 		Templates.VOID_HOLE.name = "Void";

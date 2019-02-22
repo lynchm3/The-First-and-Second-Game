@@ -109,6 +109,8 @@ public class WaterBody extends WaterSource implements Consumable {
 		isFloorObject = true;
 		orderingOnGound = 130;
 		moveable = false;
+
+		flipYAxisInMirror = false;
 		type = "Water";
 
 	}

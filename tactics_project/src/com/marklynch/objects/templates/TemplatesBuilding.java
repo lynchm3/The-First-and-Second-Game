@@ -26,7 +26,7 @@ public class TemplatesBuilding {
 		Templates.WALL_CAVE.value = 24;
 		Templates.WALL_CAVE.maxRandomness = 16f;
 		Templates.WALL_CAVE.templateId = GameObject.generateNewTemplateId();
-		Templates.WALL_CAVE.makeIndestructible();
+		Templates.WALL_CAVE.setAllResistances100();
 
 		Templates.WALL_BUILDING = new Wall();
 		Templates.WALL_BUILDING.name = "Building Wall";
@@ -39,7 +39,7 @@ public class TemplatesBuilding {
 		Templates.WALL_BUILDING.value = 29;
 		Templates.WALL_CAVE.maxRandomness = 4f;
 		Templates.WALL_BUILDING.templateId = GameObject.generateNewTemplateId();
-		Templates.WALL_BUILDING.makeIndestructible();
+		Templates.WALL_BUILDING.setAllResistances100();
 
 		Templates.WALL_WITH_CRACK = new WallWithCrack();
 		Templates.WALL_WITH_CRACK.name = "Wall";
@@ -76,7 +76,7 @@ public class TemplatesBuilding {
 		Templates.FALSE_WALL.weight = 40f;
 		Templates.FALSE_WALL.value = 34;
 		Templates.FALSE_WALL.templateId = GameObject.generateNewTemplateId();
-		Templates.FALSE_WALL.makeIndestructible();
+		Templates.FALSE_WALL.setAllResistances100();
 
 		Templates.RUBBLE = new GameObject();
 		Templates.RUBBLE.name = "Rubble";

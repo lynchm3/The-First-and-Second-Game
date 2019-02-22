@@ -7,11 +7,11 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomArrows;
+import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomBushesFight;
+import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomCaveInFight;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomChasm;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomCrumblingWall;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFallawayFloor;
-import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomBushesFight;
-import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomCaveInFight;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFriendlyCaveIn;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomMaze;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomMineCart;
@@ -23,6 +23,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomTeamwork2;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomTeamwork3;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomUndergroundLake;
+import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomWaterShallows;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
@@ -156,6 +157,13 @@ public class QuestList extends ArrayList<Quest> {
 		puzzleStructureRooms.add(new PuzzleRoomChasm(puzzleRoomsX + 60, puzzleRoomsY + 73));
 
 		// DOORWAY chasm to underground lake
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 80][puzzleRoomsY + 78]);
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 80][puzzleRoomsY + 79]);
+
+		// ROOM Shallows
+		puzzleStructureRooms.add(new PuzzleRoomWaterShallows(puzzleRoomsX + 81, puzzleRoomsY + 75));
+
+		// DOORWAY chasm to shallows
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 69][puzzleRoomsY + 93]);
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 70][puzzleRoomsY + 93]);
 

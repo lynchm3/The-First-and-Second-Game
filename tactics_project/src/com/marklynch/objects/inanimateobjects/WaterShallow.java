@@ -7,10 +7,11 @@ import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.Consumable;
+import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
-public class WaterShallow extends WaterSource implements Consumable {
+public class WaterShallow extends WaterSource implements Consumable, UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
@@ -25,14 +26,17 @@ public class WaterShallow extends WaterSource implements Consumable {
 		canBePickedUp = false;
 
 		fitsInInventory = false;
-		canShareSquare = false;
+		canShareSquare = true;
 
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		isFloorObject = true;
-		orderingOnGound = 130;
+		orderingOnGound = 99;
 		moveable = false;
+
+		flipYAxisInMirror = false;
+
 		type = "Shallow Water";
 
 		touchEffects = new Effect[] { new EffectWet(3) };
@@ -67,9 +71,11 @@ public class WaterShallow extends WaterSource implements Consumable {
 		super.setAttributesForCopy(waterShallow, square, owner);
 		waterShallow.effectsFromInteracting = effectsFromInteracting;
 		if (waterShallow.squareGameObjectIsOn != null) {
-			waterShallow.drawX1 = (int) (waterShallow.squareGameObjectIsOn.xInGridPixels + waterShallow.drawOffsetRatioX);
+			waterShallow.drawX1 = (int) (waterShallow.squareGameObjectIsOn.xInGridPixels
+					+ waterShallow.drawOffsetRatioX);
 			waterShallow.drawX2 = (int) (waterShallow.drawX1 + waterShallow.width);
-			waterShallow.drawY1 = (int) (waterShallow.squareGameObjectIsOn.yInGridPixels + waterShallow.drawOffsetRatioY);
+			waterShallow.drawY1 = (int) (waterShallow.squareGameObjectIsOn.yInGridPixels
+					+ waterShallow.drawOffsetRatioY);
 			waterShallow.drawY2 = (int) (waterShallow.drawY1 + waterShallow.height);
 		}
 
@@ -78,6 +84,21 @@ public class WaterShallow extends WaterSource implements Consumable {
 		waterShallow.imageTexture = waterShallow.textures.get(texturesIndex);
 
 		return waterShallow;
+	}
+
+	@Override
+	public void update(int delta) {
+		if (this.squareGameObjectIsOn == null)
+			return;
+
+		for (GameObject gameObject : this.squareGameObjectIsOn.inventory.gameObjects) {
+			if (gameObject == this)
+				continue;
+
+			for (Effect effect : this.touchEffects) {
+				gameObject.addEffect(effect.makeCopy(this, gameObject));
+			}
+		}
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class TemplatesBigObjects {
 		Templates.BOULDER.blocksLineOfSight = true;
 		Templates.BOULDER.fitsInInventory = false;
 		Templates.BOULDER.persistsWhenCantBeSeen = true;
-		Templates.BOULDER.makeIndestructible();
+		Templates.BOULDER.setAllResistances100();
 
 		Templates.DUMPSTER = new GameObject();
 		Templates.DUMPSTER.name = "Dumpster";
