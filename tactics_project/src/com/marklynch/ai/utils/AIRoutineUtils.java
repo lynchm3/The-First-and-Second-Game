@@ -663,26 +663,26 @@ public class AIRoutineUtils {
 				+ (int) Math.round((Math.random() * ((structureSection.gridY2 - 1) - (structureSection.gridY1 + 1))));
 
 		if (randomX > 0) {
-			if (Game.level.squares[randomX - 1][randomY].inventory.contains(Door.class)) {
+			if (Game.level.squares[randomX - 1][randomY].inventory.containsGameObjectOfType(Door.class)) {
 				return null;
 			}
 		}
 
 		if (randomX < Game.level.squares.length - 1) {
-			if (Game.level.squares[randomX + 1][randomY].inventory.contains(Door.class)) {
+			if (Game.level.squares[randomX + 1][randomY].inventory.containsGameObjectOfType(Door.class)) {
 				return null;
 			}
 
 		}
 
 		if (randomY > 0) {
-			if (Game.level.squares[randomX][randomY - 1].inventory.contains(Door.class)) {
+			if (Game.level.squares[randomX][randomY - 1].inventory.containsGameObjectOfType(Door.class)) {
 				return null;
 			}
 		}
 
 		if (randomY < Game.level.squares[0].length - 1) {
-			if (Game.level.squares[randomX][randomY + 1].inventory.contains(Door.class)) {
+			if (Game.level.squares[randomX][randomY + 1].inventory.containsGameObjectOfType(Door.class)) {
 				return null;
 			}
 

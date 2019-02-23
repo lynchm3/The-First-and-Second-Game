@@ -129,7 +129,7 @@ public class PowerDash extends Power {
 
 			if (squareX > 0 && squareY > 0 && squareX < Level.squares.length && squareY < Level.squares[0].length) {
 				square = Level.squares[squareX][squareY];
-				if (square.inventory.contains(Wall.class)) {
+				if (square.inventory.containsGameObjectOfType(Wall.class)) {
 					return i - 1;
 				} else {
 					final GameObject gameObjectThatCantShareSquare = square.inventory.gameObjectThatCantShareSquare;

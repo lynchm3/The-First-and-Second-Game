@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.ArrayList;
@@ -354,6 +355,11 @@ public class Wall extends GameObject {
 		fullBottomWall = connectedRight && connectedBottomRight && connectedBottom && connectedBottomLeft
 				&& connectedLeft;
 
+	}
+
+	@Override
+	public void addEffect(Effect e) {
+		return;
 	}
 
 }

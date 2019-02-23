@@ -137,7 +137,7 @@ public class ActionChopping extends Action {
 	@Override
 	public boolean check() {
 
-		if (!performer.inventory.contains(Axe.class)) {
+		if (!performer.inventory.containsGameObjectOfType(Axe.class)) {
 			disabledReason = NEED_AN_AXE;
 			return false;
 		}

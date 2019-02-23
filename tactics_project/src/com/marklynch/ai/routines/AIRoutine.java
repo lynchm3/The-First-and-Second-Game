@@ -1067,7 +1067,7 @@ public abstract class AIRoutine {
 
 	public boolean skinCarcass() {
 
-		if (!actor.inventory.contains(Knife.class))
+		if (!actor.inventory.containsGameObjectOfType(Knife.class))
 			return false;
 
 		// 1. loot carcasses

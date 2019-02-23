@@ -129,7 +129,7 @@ public class Structure {
 			for (int i = caveSection.gridX1; i <= caveSection.gridX2; i++) {
 				for (int j = caveSection.gridY1; j <= caveSection.gridY2; j++) {
 					if (!floorSquares.contains(Game.level.squares[i][j])
-							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
+							&& !Game.level.squares[i][j].inventory.containsGameObjectOfType(Wall.class)) {
 
 						wallsInCave.add(wallTemplate.makeCopy(Game.level.squares[i][j], this.owner));
 						wallSquares.add(Game.level.squares[i][j]);
@@ -180,27 +180,27 @@ public class Structure {
 			if (wall.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1
 					&& wall.squareGameObjectIsOn.yInGrid > 0
 					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid + 1][wall.squareGameObjectIsOn.yInGrid
-							- 1].inventory.contains(Wall.class)) {
+							- 1].inventory.containsGameObjectOfType(Wall.class)) {
 				wall.connectedTopRight = true;
 			}
 			// Bottom Right
 			if (wall.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1
 					&& wall.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1
 					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid + 1][wall.squareGameObjectIsOn.yInGrid
-							+ 1].inventory.contains(Wall.class)) {
+							+ 1].inventory.containsGameObjectOfType(Wall.class)) {
 				wall.connectedBottomRight = true;
 			}
 			// BOttom left
 			if (wall.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1
 					&& wall.squareGameObjectIsOn.xInGrid > 0
 					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid - 1][wall.squareGameObjectIsOn.yInGrid
-							+ 1].inventory.contains(Wall.class)) {
+							+ 1].inventory.containsGameObjectOfType(Wall.class)) {
 				wall.connectedBottomLeft = true;
 			}
 			// Top left
 			if (wall.squareGameObjectIsOn.xInGrid > 0 && wall.squareGameObjectIsOn.yInGrid > 0
 					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid - 1][wall.squareGameObjectIsOn.yInGrid
-							- 1].inventory.contains(Wall.class)) {
+							- 1].inventory.containsGameObjectOfType(Wall.class)) {
 				wall.connectedTopLeft = true;
 			}
 

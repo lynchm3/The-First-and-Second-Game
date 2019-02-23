@@ -56,7 +56,7 @@ public class ContainerForLiquids extends Tool implements Consumable {
 
 		// Find a square for broken glass and put it there
 		Square squareForGlass = null;
-		if (!this.squareGameObjectIsOn.inventory.contains(Wall.class)) {
+		if (!this.squareGameObjectIsOn.inventory.containsGameObjectOfType(Wall.class)) {
 			squareForGlass = this.squareGameObjectIsOn;
 		} else {
 			if (squareForGlass == null && this.squareGameObjectIsOn.xInGrid > shooter.squareGameObjectIsOn.xInGrid
@@ -106,8 +106,12 @@ public class ContainerForLiquids extends Tool implements Consumable {
 					// new ActionDouse(shooter, gameObject).perform();
 					for (Effect effect : liquid.touchEffects) {
 						gameObject.addEffect(effect.makeCopy(shooter, gameObject));
-						if (effect instanceof EffectWet)
+						if (effect instanceof EffectWet) {
 							gameObject.removeBurningEffect();
+							if (gameObject.squareGameObjectIsOn != null) {
+								gameObject.squareGameObjectIsOn.waterSpread();
+							}
+						}
 					}
 				}
 			}

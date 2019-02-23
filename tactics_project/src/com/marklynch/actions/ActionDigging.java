@@ -145,7 +145,7 @@ public class ActionDigging extends Action {
 	@Override
 	public boolean check() {
 
-		if (!performer.inventory.contains(Shovel.class)) {
+		if (!performer.inventory.containsGameObjectOfType(Shovel.class)) {
 			disabledReason = NEED_A_SHOVEL;
 			return false;
 		}

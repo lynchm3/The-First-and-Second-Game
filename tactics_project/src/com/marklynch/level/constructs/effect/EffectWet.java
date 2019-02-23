@@ -37,4 +37,8 @@ public class EffectWet extends Effect {
 		return new EffectWet(source, target, totalTurns);
 	}
 
+	public void onAdd() {
+		target.removeBurningEffect();
+	}
+
 }

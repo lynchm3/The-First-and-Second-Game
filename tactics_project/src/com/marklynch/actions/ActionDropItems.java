@@ -91,7 +91,7 @@ public class ActionDropItems extends VariableQtyAction {
 			// if inventory is open, we're not doing animattion, just throw it
 			// on in there
 			// if (Game.level.openInventories.size() > 0) {
-			if (targetSquare.inventory.contains(Searchable.class)) {
+			if (targetSquare.inventory.containsGameObjectOfType(Searchable.class)) {
 				Searchable searchable = (Searchable) targetSquare.inventory.getGameObjectOfClass(Searchable.class);
 				searchable.inventory.add(object);
 			} else {

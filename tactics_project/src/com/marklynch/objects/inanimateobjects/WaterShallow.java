@@ -111,6 +111,9 @@ public class WaterShallow extends WaterSource implements Consumable, UpdatableGa
 
 	@Override
 	public void addEffect(Effect effectToAdd) {
+		if (remainingHealth <= 0)
+			return;
+
 		if (effectToAdd instanceof EffectBurn) {
 			this.changeHealthSafetyOff(-this.remainingHealth, effectToAdd.source, null);
 		} else if (effectToAdd instanceof EffectShock) {
@@ -135,5 +138,4 @@ public class WaterShallow extends WaterSource implements Consumable, UpdatableGa
 			}
 		}
 	}
-
 }

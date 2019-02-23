@@ -83,7 +83,7 @@ public class ActionSkin extends Action {
 
 	@Override
 	public boolean check() {
-		if (!performer.inventory.contains(Knife.class)) {
+		if (!performer.inventory.containsGameObjectOfType(Knife.class)) {
 			disabledReason = NEED_A_KNIFE;
 			return false;
 		}

@@ -98,7 +98,7 @@ public class ActionFishSwim extends Action {
 		if (performer.drawOffsetRatioX + performer.swimmingChangeX < -halfWidthRatio) {
 
 			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareToLeftOf();
-			if (dontOverlap && potentialNewSquare.inventory.contains(Fish.class)) {
+			if (dontOverlap && potentialNewSquare.inventory.containsGameObjectOfType(Fish.class)) {
 				performer.swimmingChangeX = 0;
 			} else {
 				newSquare = potentialNewSquare;
@@ -106,7 +106,7 @@ public class ActionFishSwim extends Action {
 			}
 		} else if (performer.drawOffsetRatioX + performer.swimmingChangeX >= 1 - halfWidthRatio) {
 			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareToRightOf();
-			if (dontOverlap && potentialNewSquare.inventory.contains(Fish.class)) {
+			if (dontOverlap && potentialNewSquare.inventory.containsGameObjectOfType(Fish.class)) {
 				performer.swimmingChangeX = 0;
 			} else {
 				newSquare = potentialNewSquare;
@@ -114,7 +114,7 @@ public class ActionFishSwim extends Action {
 			}
 		} else if (performer.drawOffsetRatioY + performer.swimmingChangeY < -halfHeightRatio) {
 			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareAbove();
-			if (dontOverlap && potentialNewSquare.inventory.contains(Fish.class)) {
+			if (dontOverlap && potentialNewSquare.inventory.containsGameObjectOfType(Fish.class)) {
 				performer.swimmingChangeY = 0;
 			} else {
 				newSquare = potentialNewSquare;
@@ -122,7 +122,7 @@ public class ActionFishSwim extends Action {
 			}
 		} else if (performer.drawOffsetRatioY + performer.swimmingChangeY >= 1 - halfHeightRatio) {
 			Square potentialNewSquare = performer.squareGameObjectIsOn.getSquareBelow();
-			if (dontOverlap && potentialNewSquare.inventory.contains(Fish.class)) {
+			if (dontOverlap && potentialNewSquare.inventory.containsGameObjectOfType(Fish.class)) {
 				performer.swimmingChangeY = 0;
 			} else {
 				newSquare = potentialNewSquare;

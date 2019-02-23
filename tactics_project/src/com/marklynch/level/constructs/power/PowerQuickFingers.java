@@ -43,8 +43,8 @@ public class PowerQuickFingers extends Power {
 		ArrayList<GameObject> gameObjectsToTake = new ArrayList<GameObject>();
 		for (Square squareToPickupFrom : source.getAllSquaresWithinDistance(0, 1)) {
 
-			if (squareToPickupFrom.inventory.contains(PressurePlate.class)
-					|| squareToPickupFrom.inventory.contains(PressurePlateRequiringSpecificItem.class)) {
+			if (squareToPickupFrom.inventory.containsGameObjectOfType(PressurePlate.class)
+					|| squareToPickupFrom.inventory.containsGameObjectOfType(PressurePlateRequiringSpecificItem.class)) {
 				continue;
 			}
 

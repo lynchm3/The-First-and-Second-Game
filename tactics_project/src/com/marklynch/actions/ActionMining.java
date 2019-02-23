@@ -167,7 +167,7 @@ public class ActionMining extends Action {
 	@Override
 	public boolean check() {
 
-		if (!performer.inventory.contains(Pickaxe.class)) {
+		if (!performer.inventory.containsGameObjectOfType(Pickaxe.class)) {
 			disabledReason = NEED_A_PICKAXE;
 			return false;
 		}

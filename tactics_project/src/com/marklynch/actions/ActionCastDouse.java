@@ -50,6 +50,9 @@ public class ActionCastDouse extends Action {
 			}
 		} else {
 			target.addEffect(new EffectWet(performer, target, 5));
+			if (target.squareGameObjectIsOn != null) {
+				target.squareGameObjectIsOn.waterSpread();
+			}
 		}
 		// if (Math.random() * 100 > target.fireResistance) {
 		// target.addEffect(new EffectBurn(performer, target, 5));

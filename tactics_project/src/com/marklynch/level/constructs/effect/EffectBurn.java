@@ -86,4 +86,7 @@ public class EffectBurn extends Effect {
 		return new EffectBurn(source, target, totalTurns);
 	}
 
+	public void onAdd() {
+	}
+
 }

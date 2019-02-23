@@ -52,6 +52,8 @@ import com.marklynch.objects.inanimateobjects.RemoteDoor;
 import com.marklynch.objects.inanimateobjects.Stump;
 import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.VoidHole;
+import com.marklynch.objects.inanimateobjects.Wall;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.button.Tooltip;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ArrayUtils;
@@ -1061,7 +1063,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			actions.add(new ActionDigging(performer, this));
 		}
 
-		if (!this.inventory.contains(MapMarker.class))
+		if (!this.inventory.containsGameObjectOfType(MapMarker.class))
 			actions.add(new ActionPlaceMapMarker(this));
 
 		actions.add(new ActionViewInfo(performer, this));
@@ -1180,7 +1182,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 	public void calculatePathCost() {
 
-		if (inventory.contains(Landmine.class)) {
+		if (inventory.containsGameObjectOfType(Landmine.class)) {
 			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
 			if (landmine.hiddenObject) {// This is dumb, there's only a flag for player discovered... needs a change...
 				cost = 10;
@@ -1188,15 +1190,15 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			}
 		}
 
-		if (inventory.contains(BrokenGlass.class)) {
+		if (inventory.containsGameObjectOfType(BrokenGlass.class)) {
 			cost = 10;
-		} else if (inventory.contains(Actor.class)) {
+		} else if (inventory.containsGameObjectOfType(Actor.class)) {
 			cost = 10;
-		} else if (inventory.contains(Portal.class)) {
+		} else if (inventory.containsGameObjectOfType(Portal.class)) {
 			cost = 10;
-		} else if (inventory.contains(VoidHole.class)) {
+		} else if (inventory.containsGameObjectOfType(VoidHole.class)) {
 			cost = 10;
-		} else if (inventory.contains(PressurePlate.class)) {
+		} else if (inventory.containsGameObjectOfType(PressurePlate.class)) {
 			cost = 10;
 		} else if (this.floorImageTexture == Square.STONE_TEXTURE) {
 			cost = 1;
@@ -1207,7 +1209,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 	public void calculatePathCostForPlayer() {
 
-		if (inventory.contains(Landmine.class)) {
+		if (inventory.containsGameObjectOfType(Landmine.class)) {
 			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
 			if (landmine.hiddenObject) {
 				cost = 10;
@@ -1215,15 +1217,15 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			}
 		}
 
-		if (inventory.contains(BrokenGlass.class)) {
+		if (inventory.containsGameObjectOfType(BrokenGlass.class)) {
 			costForPlayer = 10;
 			// } else if (inventory.contains(Actor.class)) {
 			// costForPlayer = 10;
-		} else if (inventory.contains(Portal.class)) {
+		} else if (inventory.containsGameObjectOfType(Portal.class)) {
 			costForPlayer = 10;
-		} else if (inventory.contains(VoidHole.class)) {
+		} else if (inventory.containsGameObjectOfType(VoidHole.class)) {
 			costForPlayer = 10;
-		} else if (inventory.contains(PressurePlate.class)) {
+		} else if (inventory.containsGameObjectOfType(PressurePlate.class)) {
 			costForPlayer = 10;
 		} else if (this.floorImageTexture == Square.STONE_TEXTURE) {
 			costForPlayer = 1;
@@ -1376,5 +1378,19 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	@Override
 	public Long getId() {
 		return id;
+	}
+
+	public void waterSpread() {
+		for (int i = 0; i < 10; i++) {
+			ArrayList<Square> squareToMakeWet = this.getAllSquaresAtDistance(i);
+			for (Square square : squareToMakeWet) {
+				if (!square.inventory.containsGameObjectWithTemplateId(Templates.WATER_SHALLOW.templateId)
+						&& !square.inventory.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)
+						&& !square.inventory.containsGameObjectOfType(Wall.class)) {
+					square.inventory.add(Templates.WATER_SHALLOW.makeCopy(null, null));
+					return;
+				}
+			}
+		}
 	}
 }

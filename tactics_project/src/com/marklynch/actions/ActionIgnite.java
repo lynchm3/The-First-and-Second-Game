@@ -153,7 +153,7 @@ public class ActionIgnite extends Action {
 			return performer.getPower(PowerIgnite.class);
 		}
 
-		if (performer.inventory.contains(Matches.class)) {
+		if (performer.inventory.containsGameObjectOfType(Matches.class)) {
 			return performer.inventory.getGameObjectOfClass(Matches.class);
 		}
 

@@ -1795,43 +1795,30 @@ public class GameObject
 			return;
 
 		boolean fullyResisted = true;
-		for (HIGH_LEVEL_STATS offensiveStat : Stat.OFFENSIVE_STATS) {
 
-			if (effectToAdd.highLevelStats.get(offensiveStat).value == 0)
-				continue;
-
-			if (this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(offensiveStat)).value == 100)
-				continue;
-
+		if (effectToAdd instanceof EffectWet) {
 			fullyResisted = false;
-			break;
+		} else {
+			for (HIGH_LEVEL_STATS offensiveStat : Stat.OFFENSIVE_STATS) {
 
-		}
+				if (effectToAdd.highLevelStats.get(offensiveStat).value == 0)
+					continue;
 
-		if (this instanceof FlammableLightSource) {
-			if (effectToAdd instanceof EffectBurn) {
-				((FlammableLightSource) this).setLighting(true);
-			} else if (effectToAdd instanceof EffectWet) {
-				((FlammableLightSource) this).setLighting(false);
+				if (this.highLevelStats.get(Stat.offensiveStatToDefensiveStatMap.get(offensiveStat)).value == 100)
+					continue;
+
+				fullyResisted = false;
+				break;
+
 			}
-			if (fullyResisted)
-				return;
 		}
 
-		if ((effectToAdd instanceof EffectWet)) {
-
-		} else if (fullyResisted) {
+		if (fullyResisted) {
 			return;
 		}
-
-		if (fullyResisted && !(effectToAdd instanceof EffectWet))
-			return;
 
 		if (effectToAdd instanceof EffectBleed && !(this instanceof Actor))
 			return;
-
-		if (effectToAdd instanceof EffectWet)
-			this.removeBurningEffect();
 
 		addEffectSafetyOff(effectToAdd);
 

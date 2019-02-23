@@ -1062,7 +1062,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return gameObjects.contains(gameObject);
 	}
 
-	public boolean contains(Class clazz) {
+	public boolean containsGameObjectOfType(Class clazz) {
 		for (GameObject gameObject : gameObjects) {
 			if (clazz.isInstance(gameObject)) {
 				return true;

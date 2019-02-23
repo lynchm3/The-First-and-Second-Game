@@ -1640,7 +1640,7 @@ public class Level {
 				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false);
 
 			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare
-					&& !potentialSquareToMoveTo.inventory.contains(Actor.class) && potentialAction.enabled
+					&& !potentialSquareToMoveTo.inventory.containsGameObjectOfType(Actor.class) && potentialAction.enabled
 					&& potentialAction.legal) {
 				squareToMoveTo = potentialSquareToMoveTo;
 				action = potentialAction;

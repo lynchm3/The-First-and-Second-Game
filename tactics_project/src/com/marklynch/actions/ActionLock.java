@@ -86,7 +86,7 @@ public class ActionLock extends Action {
 				disabledReason = DOORWAY_BLOCKED;
 			}
 
-			if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.contains(Actor.class)) {
+			if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.containsGameObjectOfType(Actor.class)) {
 				disabledReason = DOORWAY_BLOCKED;
 				return false;
 			}

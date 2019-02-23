@@ -1,5 +1,8 @@
 package com.marklynch.objects.tools;
 
+import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.effect.EffectBurn;
+import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -43,6 +46,19 @@ public class FlammableLightSource extends Tool {
 			imageTexture = this.imageTextureLit;
 		} else {
 			imageTexture = this.imageTextureUnlit;
+		}
+	}
+
+	@Override
+	public void addEffect(Effect effectToAdd) {
+		if (remainingHealth <= 0)
+			return;
+		if (effectToAdd instanceof EffectBurn) {
+			((FlammableLightSource) this).setLighting(true);
+		} else if (effectToAdd instanceof EffectWet) {
+			((FlammableLightSource) this).setLighting(false);
+		} else {
+			super.addEffect(effectToAdd);
 		}
 	}
 

@@ -87,6 +87,9 @@ public class ActionDouse extends Action {
 
 //		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
 		target.addEffect(new EffectWet(performer, target, 3));
+		if (target.squareGameObjectIsOn != null) {
+			target.squareGameObjectIsOn.waterSpread();
+		}
 //		}
 
 		if (Game.level.openInventories.size() > 0)

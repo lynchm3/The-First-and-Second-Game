@@ -163,6 +163,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Douse
 		SkillTreeNode douse = new SkillTreeNode(15, 6);
+		activateAtStart.add(douse);
 		douse.name = "Douse";
 		douse.description = "Douse";
 		douse.powersUnlocked.add(new PowerDouse(null));

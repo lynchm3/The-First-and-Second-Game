@@ -72,7 +72,7 @@ public class ActionFishingInProgress extends Action {
 	@Override
 	public boolean check() {
 
-		if (!performer.inventory.contains(FishingRod.class)) {
+		if (!performer.inventory.containsGameObjectOfType(FishingRod.class)) {
 			disabledReason = NEED_A_FISHING_ROD;
 			return false;
 		}

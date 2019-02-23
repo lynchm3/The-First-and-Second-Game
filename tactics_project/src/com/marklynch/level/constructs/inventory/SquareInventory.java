@@ -139,7 +139,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		if (canShareSquare) {
 			return true;
 		} else {
-			if (contains(Actor.class))
+			if (containsGameObjectOfType(Actor.class))
 				return true;
 		}
 		return false;
