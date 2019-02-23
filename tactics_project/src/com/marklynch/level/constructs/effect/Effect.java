@@ -64,7 +64,9 @@ public class Effect implements DamageDealer {
 		return new EffectWet(source, target, totalTurns);
 	}
 
-	public void draw2() {
+	private static final int height = 32;
+
+	public void draw2(int offsetY) {
 		// Draw object
 
 		if (!target.squareGameObjectIsOn.visibleToPlayer)
@@ -88,8 +90,9 @@ public class Effect implements DamageDealer {
 			// if (target.hiding)
 			alpha = 0.75f;
 
-			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-					actorPositionXInPixels + target.width, actorPositionYInPixels + target.height, target.backwards);
+			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
+					actorPositionYInPixels + offsetY * height, actorPositionXInPixels + height,
+					actorPositionYInPixels + offsetY * height + height, target.backwards);
 			// TextureUtils.skipNormals = false;
 		}
 	}

@@ -704,8 +704,8 @@ public class GameObject
 					scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color, true, imageTexture2);
 		}
 
-		for (Effect effect : activeEffectsOnGameObject) {
-			effect.draw2();
+		for (int i = 0; i < activeEffectsOnGameObject.size(); i++) {
+			activeEffectsOnGameObject.get(i).draw2(i);
 		}
 
 		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)

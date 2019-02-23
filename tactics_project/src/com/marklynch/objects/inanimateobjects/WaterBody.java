@@ -12,10 +12,11 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.Consumable;
+import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
-public class WaterBody extends WaterSource implements Consumable {
+public class WaterBody extends WaterSource implements Consumable, UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
@@ -174,24 +175,6 @@ public class WaterBody extends WaterSource implements Consumable {
 	}
 
 	@Override
-	public boolean draw1() {
-		boolean draw = super.draw1();
-
-		if (!draw)
-			return false;
-
-		texturesIndex++;
-		if (texturesIndex == textures.size())
-			texturesIndex = 0;
-		imageTexture = textures.get(texturesIndex);
-
-		if (fish != null && fish.squareGameObjectIsOn == null) {
-			fish = null;
-		}
-		return true;
-	}
-
-	@Override
 	public WaterBody makeCopy(Square square, Actor owner) {
 		WaterBody waterBody = new WaterBody();
 		waterBody.consumeEffects = consumeEffects;
@@ -215,6 +198,33 @@ public class WaterBody extends WaterSource implements Consumable {
 	@Override
 	public Effect[] getConsumeEffects() {
 		return consumeEffects;
+	}
+
+	@Override
+	public void update(int delta) {
+
+		if (this.squareGameObjectIsOn == null)
+			return;
+
+		if (fish != null && fish.squareGameObjectIsOn == null) {
+			fish = null;
+		}
+
+		for (GameObject gameObject : this.squareGameObjectIsOn.inventory.gameObjects) {
+			if (gameObject == this)
+				continue;
+
+			for (Effect effect : this.touchEffects) {
+				gameObject.addEffect(effect.makeCopy(this, gameObject));
+			}
+		}
+
+		if (this.squareGameObjectIsOn.visibleToPlayer && Math.random() > 0.9d) {
+			texturesIndex++;
+			if (texturesIndex == textures.size())
+				texturesIndex = 0;
+			imageTexture = textures.get(texturesIndex);
+		}
 	}
 
 }

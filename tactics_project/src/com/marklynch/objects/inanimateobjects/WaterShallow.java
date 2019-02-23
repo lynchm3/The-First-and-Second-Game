@@ -53,20 +53,6 @@ public class WaterShallow extends WaterSource implements Consumable, UpdatableGa
 	}
 
 	@Override
-	public boolean draw1() {
-		boolean draw = super.draw1();
-
-		if (!draw)
-			return false;
-
-		texturesIndex++;
-		if (texturesIndex == textures.size())
-			texturesIndex = 0;
-		imageTexture = textures.get(texturesIndex);
-		return true;
-	}
-
-	@Override
 	public WaterShallow makeCopy(Square square, Actor owner) {
 		WaterShallow waterShallow = new WaterShallow();
 		waterShallow.consumeEffects = consumeEffects;
@@ -91,8 +77,16 @@ public class WaterShallow extends WaterSource implements Consumable, UpdatableGa
 
 	@Override
 	public void update(int delta) {
+
 		if (this.squareGameObjectIsOn == null)
 			return;
+
+		if (this.squareGameObjectIsOn.visibleToPlayer && Math.random() > 0.99d) {
+			texturesIndex++;
+			if (texturesIndex == textures.size())
+				texturesIndex = 0;
+			imageTexture = textures.get(texturesIndex);
+		}
 
 		for (GameObject gameObject : this.squareGameObjectIsOn.inventory.gameObjects) {
 			if (gameObject == this)
