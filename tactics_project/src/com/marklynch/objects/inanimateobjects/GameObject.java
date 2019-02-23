@@ -2682,6 +2682,15 @@ public class GameObject
 		return false;
 	}
 
+	public Effect getActiveEffectOfType(Class type) {
+		for (Effect effect : this.activeEffectsOnGameObject) {
+			if (effect.getClass().isAssignableFrom(type)) {
+				return effect;
+			}
+		}
+		return null;
+	}
+
 	public Square getWorldSquareGameObjectIsOn() {
 
 		if (inventoryThatHoldsThisObject == null) {

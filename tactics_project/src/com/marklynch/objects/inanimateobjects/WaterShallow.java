@@ -118,4 +118,22 @@ public class WaterShallow extends WaterSource implements Consumable, UpdatableGa
 		}
 	}
 
+	@Override
+	public void squareContentsChanged() {
+		if (!this.hasActiveEffectOfType(EffectShock.class)) {
+			return;
+		}
+
+		if (this.squareGameObjectIsOn == null)
+			return;
+
+		EffectShock shockEffect = (EffectShock) this.getActiveEffectOfType(EffectShock.class);
+
+		for (GameObject gameObject : this.squareGameObjectIsOn.inventory.getGameObjects()) {
+			if (!gameObject.hasActiveEffectOfType(EffectShock.class)) {
+				gameObject.addEffect(new EffectShock(this, gameObject, shockEffect.turnsRemaining));
+			}
+		}
+	}
+
 }
