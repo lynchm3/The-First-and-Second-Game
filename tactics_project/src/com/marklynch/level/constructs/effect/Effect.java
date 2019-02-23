@@ -94,6 +94,10 @@ public class Effect implements DamageDealer {
 		}
 	}
 
+	public void onAdd() {
+
+	}
+
 	public static void loadEffectImages() {
 		getGlobalImage("effect_bleed.png", false);
 		getGlobalImage("effect_burn.png", false);

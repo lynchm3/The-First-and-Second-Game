@@ -5,8 +5,11 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.ArrayList;
 
 public class EffectShock extends Effect {
 
@@ -37,6 +40,24 @@ public class EffectShock extends Effect {
 	@Override
 	public EffectShock makeCopy(GameObject source, GameObject target) {
 		return new EffectShock(source, target, totalTurns);
+	}
+
+	public void onAdd() {
+
+		// If in world (not in inventory)
+		Square squareTargetIsOn = target.squareGameObjectIsOn;
+		if (squareTargetIsOn != null) {
+			ArrayList<Square> adjacentSquares = target.getAllSquaresWithinDistance(0, 1);
+			for (Square adjacentSquare : adjacentSquares) {
+				if (adjacentSquare.inventory.containsGameObjectWithTemplateId(Templates.WATER_SHALLOW.templateId)) {
+					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
+						if (!gameObject.hasActiveEffectOfType(EffectShock.class)) {
+							gameObject.addEffect(this.makeCopy(this.source, gameObject));
+						}
+					}
+				}
+			}
+		}
 	}
 
 }

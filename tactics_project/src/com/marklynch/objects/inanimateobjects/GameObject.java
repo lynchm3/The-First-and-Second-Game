@@ -1859,6 +1859,8 @@ public class GameObject
 		if (!(this instanceof Actor)) {
 			Level.effectsOnInanimateGameObjects.add(effectToAdd);
 		}
+
+		effectToAdd.onAdd();
 	}
 
 	public void activateEffects() {

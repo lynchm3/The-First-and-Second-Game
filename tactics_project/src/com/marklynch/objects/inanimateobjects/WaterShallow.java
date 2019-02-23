@@ -115,19 +115,6 @@ public class WaterShallow extends WaterSource implements Consumable, UpdatableGa
 			this.changeHealthSafetyOff(-this.remainingHealth, effectToAdd.source, null);
 		} else if (effectToAdd instanceof EffectShock) {
 			addEffectSafetyOff(effectToAdd);
-
-			// If in world (not in inventory)
-			Square squareTargetIsOn = this.squareGameObjectIsOn;
-			if (squareTargetIsOn != null) {
-				ArrayList<Square> adjacentSquares = this.getAllSquaresAtDistance(1);
-				for (Square adjacentSquare : adjacentSquares) {
-					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
-						if (gameObject instanceof WaterSource && !gameObject.hasActiveEffectOfType(EffectShock.class)) {
-							gameObject.addEffect(effectToAdd.makeCopy(effectToAdd.source, gameObject));
-						}
-					}
-				}
-			}
 		}
 	}
 
