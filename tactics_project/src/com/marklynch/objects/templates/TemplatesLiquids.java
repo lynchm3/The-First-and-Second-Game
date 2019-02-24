@@ -24,7 +24,7 @@ public class TemplatesLiquids {
 		Templates.WATER.anchorY = 0;
 		Templates.WATER.templateId = GameObject.generateNewTemplateId();
 		Templates.WATER.volume = 1;
-		Templates.WATER.touchEffects = new Effect[] { new EffectWet(5) };
+		Templates.WATER.touchEffects = new Effect[] { new EffectWet(3) };
 		Templates.WATER.consumeEffects = new Effect[] {};
 		Templates.WATER.highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE, new Stat(HIGH_LEVEL_STATS.WATER_DAMAGE, 1));
 		Templates.WATER.textures.add(getGlobalImage("water.png", true));
@@ -44,8 +44,8 @@ public class TemplatesLiquids {
 		Templates.POISON.anchorY = 0;
 		Templates.POISON.templateId = GameObject.generateNewTemplateId();
 		Templates.POISON.volume = 1;
-		Templates.POISON.touchEffects = new Effect[] { new EffectPoison(5) };
-		Templates.POISON.consumeEffects = new Effect[] { new EffectPoison(10) };
+		Templates.POISON.touchEffects = new Effect[] { new EffectPoison(3) };
+		Templates.POISON.consumeEffects = new Effect[] { new EffectPoison(5) };
 		Templates.POISON.highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.POISON_DAMAGE, 3));
 		Templates.POISON.textures.add(getGlobalImage("poison.png", true));

@@ -1390,7 +1390,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 						&& !square.inventory.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)
 						&& !square.inventory.containsGameObjectOfType(Wall.class)) {
 					square.inventory.removeGameObjecsOfType(Liquid.class);
-					square.inventory.add(templateLiquid.makeCopy(null, null));
+					square.inventory.add(templateLiquid.makeCopy(null, null, 1));
 					return;
 				}
 			}
