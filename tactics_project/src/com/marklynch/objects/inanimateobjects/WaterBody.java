@@ -180,7 +180,7 @@ public class WaterBody extends WaterSource implements Consumable, UpdatableGameO
 		waterBody.consumeEffects = consumeEffects;
 		setInstances(waterBody);
 		super.setAttributesForCopy(waterBody, square, owner);
-		waterBody.effectsFromInteracting = effectsFromInteracting;
+		waterBody.consumeEffects = consumeEffects;
 		if (waterBody.squareGameObjectIsOn != null) {
 			waterBody.drawX1 = (int) (waterBody.squareGameObjectIsOn.xInGridPixels + waterBody.drawOffsetRatioX);
 			waterBody.drawX2 = (int) (waterBody.drawX1 + waterBody.width);

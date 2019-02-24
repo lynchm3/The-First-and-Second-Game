@@ -307,7 +307,6 @@ public class Templates {
 	public static Vein VEIN;
 
 	public static WaterBody WATER_BODY;
-	public static WaterShallow WATER_SHALLOW;
 
 	public static GameObject BOULDER;
 
@@ -350,7 +349,7 @@ public class Templates {
 	public static ContainerForLiquids JAR_OF_WATER;
 	public static ContainerForLiquids JAR_OF_POISON;
 
-	public static Liquid WATER;
+	public static WaterShallow WATER;
 
 	public static Liquid POISON;
 

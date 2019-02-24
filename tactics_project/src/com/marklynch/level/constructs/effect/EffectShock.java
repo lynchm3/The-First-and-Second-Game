@@ -49,7 +49,7 @@ public class EffectShock extends Effect {
 		if (squareTargetIsOn != null) {
 			ArrayList<Square> adjacentSquares = target.getAllSquaresWithinDistance(0, 1);
 			for (Square adjacentSquare : adjacentSquares) {
-				if (adjacentSquare.inventory.containsGameObjectWithTemplateId(Templates.WATER_SHALLOW.templateId)) {
+				if (adjacentSquare.inventory.containsGameObjectWithTemplateId(Templates.WATER.templateId)) {
 					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
 						if (!gameObject.hasActiveEffectOfType(EffectShock.class)) {
 							gameObject.addEffect(this.makeCopy(this.source, gameObject));

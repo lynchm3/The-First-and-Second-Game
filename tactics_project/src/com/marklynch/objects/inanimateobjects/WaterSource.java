@@ -1,16 +1,12 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
-
-import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.utils.ArrayList;
 
 public class WaterSource extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
-
-	public Effect[] effectsFromInteracting;
 
 	public WaterSource() {
 		super();
@@ -41,7 +37,7 @@ public class WaterSource extends GameObject {
 		WaterSource waterSource = new WaterSource();
 		setInstances(waterSource);
 		super.setAttributesForCopy(waterSource, square, owner);
-		waterSource.effectsFromInteracting = effectsFromInteracting;
+		waterSource.consumeEffects = consumeEffects;
 		return waterSource;
 	}
 

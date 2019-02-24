@@ -11,7 +11,6 @@ import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.Furnace;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Mirror;
 import com.marklynch.objects.inanimateobjects.PressurePlate;
 import com.marklynch.objects.inanimateobjects.PressurePlateRequiringSpecificItem;
@@ -333,7 +332,7 @@ public class TemplatesFurniture {
 		Templates.WELL.anchorX = 0;
 		Templates.WELL.anchorY = 0;
 		Templates.WELL.templateId = GameObject.generateNewTemplateId();
-		Templates.WELL.effectsFromInteracting = new Effect[] {};
+		Templates.WELL.consumeEffects = new Effect[] {};
 		Templates.WELL.canShareSquare = false;
 		Templates.WELL.fitsInInventory = false;
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));

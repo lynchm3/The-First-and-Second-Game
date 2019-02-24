@@ -1384,11 +1384,11 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		for (int i = 0; i < 10; i++) {
 			ArrayList<Square> squareToMakeWet = this.getAllSquaresAtDistance(i);
 			for (Square square : squareToMakeWet) {
-				if (!square.inventory.containsGameObjectWithTemplateId(Templates.WATER_SHALLOW.templateId)
+				if (!square.inventory.containsGameObjectWithTemplateId(Templates.WATER.templateId)
 						&& !square.inventory.containsGameObjectWithTemplateId(Templates.WATER_BODY.templateId)
 						&& !square.inventory.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)
 						&& !square.inventory.containsGameObjectOfType(Wall.class)) {
-					square.inventory.add(Templates.WATER_SHALLOW.makeCopy(null, null));
+					square.inventory.add(Templates.WATER.makeCopy(null, null));
 					return;
 				}
 			}

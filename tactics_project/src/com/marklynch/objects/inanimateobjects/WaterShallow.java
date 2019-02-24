@@ -13,7 +13,7 @@ import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
-public class WaterShallow extends WaterSource implements Consumable, UpdatableGameObject {
+public class WaterShallow extends Liquid implements Consumable, UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
@@ -58,7 +58,7 @@ public class WaterShallow extends WaterSource implements Consumable, UpdatableGa
 		waterShallow.consumeEffects = consumeEffects;
 		setInstances(waterShallow);
 		super.setAttributesForCopy(waterShallow, square, owner);
-		waterShallow.effectsFromInteracting = effectsFromInteracting;
+		waterShallow.consumeEffects = consumeEffects;
 		if (waterShallow.squareGameObjectIsOn != null) {
 			waterShallow.drawX1 = (int) (waterShallow.squareGameObjectIsOn.xInGridPixels
 					+ waterShallow.drawOffsetRatioX);
