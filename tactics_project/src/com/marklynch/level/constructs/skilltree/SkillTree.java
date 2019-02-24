@@ -109,7 +109,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Dash
 		SkillTreeNode dash = new SkillTreeNode(2, 2);
-		activateAtStart.add(dash);
+//		activateAtStart.add(dash);
 		dash.name = "Dash";
 		dash.description = "Dash";
 		dash.powersUnlocked.add(new PowerDash(null));
@@ -135,7 +135,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Superpeek
 		SkillTreeNode superPeek = new SkillTreeNode(20, 4);
-		activateAtStart.add(superPeek);
+//		activateAtStart.add(superPeek);
 		superPeek.name = "Superpeek";
 		superPeek.description = "Superpeek";
 		superPeek.powersUnlocked.add(new PowerSuperPeek(null));
@@ -173,7 +173,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Wall
 		SkillTreeNode wall = new SkillTreeNode(15, 5);
-		activateAtStart.add(wall);
+//		activateAtStart.add(wall);
 		wall.name = "Wall";
 		wall.description = "Wall";
 		wall.powersUnlocked.add(new PowerWall(null));

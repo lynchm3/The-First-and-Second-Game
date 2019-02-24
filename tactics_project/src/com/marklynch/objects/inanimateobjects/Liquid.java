@@ -17,6 +17,8 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public float volume;
+	public GameObject gasForm;
+	public GameObject solidForm;
 
 	public ArrayList<Texture> textures = new ArrayList<Texture>(Texture.class);
 	public int texturesIndex = 0;
@@ -65,6 +67,8 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 		liquid.textures = this.textures;
 		liquid.texturesIndex = new Random().nextInt(liquid.textures.size());
 		liquid.imageTexture = liquid.textures.get(texturesIndex);
+		liquid.solidForm = solidForm;
+		liquid.gasForm = gasForm;
 		return liquid;
 	}
 
