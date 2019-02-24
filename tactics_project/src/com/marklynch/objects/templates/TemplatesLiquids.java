@@ -26,6 +26,7 @@ public class TemplatesLiquids {
 		Templates.WATER.volume = 1;
 		Templates.WATER.touchEffects = new Effect[] { new EffectWet(5) };
 		Templates.WATER.consumeEffects = new Effect[] {};
+		Templates.WATER.highLevelStats.put(HIGH_LEVEL_STATS.WATER_DAMAGE, new Stat(HIGH_LEVEL_STATS.WATER_DAMAGE, 1));
 		Templates.WATER.textures.add(getGlobalImage("water.png", true));
 		Templates.WATER.textures.add(getGlobalImage("water_2.png", true));
 		Templates.WATER.textures.add(getGlobalImage("water_3.png", true));
@@ -35,8 +36,8 @@ public class TemplatesLiquids {
 
 		Templates.POISON = new Liquid();
 		Templates.POISON.name = "Poison";
-		Templates.POISON.setImageAndExtrapolateSize("effect_poison.png");
-		Templates.POISON.totalHealth = Templates.POISON.remainingHealth = 10;
+		Templates.POISON.setImageAndExtrapolateSize("poison.png");
+		Templates.POISON.totalHealth = Templates.POISON.remainingHealth = 1000;
 		Templates.POISON.weight = 6f;
 		Templates.POISON.value = 16;
 		Templates.POISON.anchorX = 0;
@@ -47,6 +48,10 @@ public class TemplatesLiquids {
 		Templates.POISON.consumeEffects = new Effect[] { new EffectPoison(10) };
 		Templates.POISON.highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.POISON_DAMAGE, 3));
+		Templates.POISON.textures.add(getGlobalImage("poison.png", true));
+		Templates.POISON.textures.add(getGlobalImage("poison_2.png", true));
+		Templates.POISON.textures.add(getGlobalImage("poison_3.png", true));
+		Templates.POISON.textures.add(getGlobalImage("poison_4.png", true));
 	}
 
 }

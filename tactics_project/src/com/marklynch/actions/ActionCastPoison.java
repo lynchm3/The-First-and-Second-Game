@@ -50,6 +50,10 @@ public class ActionCastPoison extends Action {
 		} else {
 			if (Math.random() * 100 > target.highLevelStats.get(HIGH_LEVEL_STATS.POISON_DAMAGE).value) {
 				target.addEffect(new EffectPoison(performer, target, 5));
+
+				if (target.squareGameObjectIsOn != null) {
+					target.squareGameObjectIsOn.liquidSpread(Templates.POISON);
+				}
 			} else {
 
 				if (Game.level.shouldLog(target, performer))

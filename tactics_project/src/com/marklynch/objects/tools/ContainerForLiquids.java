@@ -109,7 +109,7 @@ public class ContainerForLiquids extends Tool implements Consumable {
 						if (effect instanceof EffectWet) {
 							gameObject.removeBurningEffect();
 							if (gameObject.squareGameObjectIsOn != null) {
-								gameObject.squareGameObjectIsOn.waterSpread();
+								gameObject.squareGameObjectIsOn.liquidSpread(liquid);
 							}
 						}
 					}

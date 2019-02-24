@@ -45,6 +45,7 @@ import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
 import com.marklynch.objects.inanimateobjects.Landmine;
+import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.MapMarker;
 import com.marklynch.objects.inanimateobjects.Portal;
 import com.marklynch.objects.inanimateobjects.PressurePlate;
@@ -1380,15 +1381,15 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		return id;
 	}
 
-	public void waterSpread() {
+	public void liquidSpread(Liquid templateLiquid) {
 		for (int i = 0; i < 10; i++) {
 			ArrayList<Square> squareToMakeWet = this.getAllSquaresAtDistance(i);
 			for (Square square : squareToMakeWet) {
-				if (!square.inventory.containsGameObjectWithTemplateId(Templates.WATER.templateId)
+				if (!square.inventory.containsGameObjectWithTemplateId(templateLiquid.templateId)
 						&& !square.inventory.containsGameObjectWithTemplateId(Templates.WATER_BODY.templateId)
 						&& !square.inventory.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)
 						&& !square.inventory.containsGameObjectOfType(Wall.class)) {
-					square.inventory.add(Templates.WATER.makeCopy(null, null));
+					square.inventory.add(templateLiquid.makeCopy(null, null));
 					return;
 				}
 			}

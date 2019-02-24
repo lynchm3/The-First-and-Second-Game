@@ -9,6 +9,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ResourceUtils;
 
 public class PowerPoisonThrowingKnives extends Power {
@@ -36,6 +37,10 @@ public class PowerPoisonThrowingKnives extends Power {
 	public void cast(final GameObject source, GameObject targetGameObject, Square targetSquare, final Action action) {
 		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation(), null));
 		super.cast(source, targetGameObject, targetSquare, action);
+
+		if (targetSquare != null) {
+			targetSquare.liquidSpread(Templates.POISON);
+		}
 
 	}
 }
