@@ -13,12 +13,12 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.Mirror;
 import com.marklynch.objects.inanimateobjects.Stump;
 import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.inanimateobjects.Wall;
-import com.marklynch.objects.inanimateobjects.WaterShallow;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
 
@@ -117,7 +117,7 @@ public class ActionDie extends Action {
 					new Object[] { gameObjectPerformer.destroyedBy, " killed ", gameObjectPerformer, this.image }));
 
 		} else if (gameObjectPerformer.diggable == true) {
-		} else if (gameObjectPerformer instanceof WaterShallow) {
+		} else if (gameObjectPerformer instanceof Liquid) {
 
 			Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer.destroyedBy, " evaporated a ",
 					gameObjectPerformer, this.image }));

@@ -9,13 +9,12 @@ import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
-import com.marklynch.objects.inanimateobjects.WaterShallow;
 
 public class TemplatesLiquids {
 
 	public TemplatesLiquids() {
 
-		Templates.WATER = new WaterShallow();
+		Templates.WATER = new Liquid();
 		Templates.WATER.name = "Water";
 		Templates.WATER.setImageAndExtrapolateSize("water.png");
 		Templates.WATER.totalHealth = Templates.WATER.remainingHealth = 1000;

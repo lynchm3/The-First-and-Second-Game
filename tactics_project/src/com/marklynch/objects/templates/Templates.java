@@ -61,7 +61,6 @@ import com.marklynch.objects.inanimateobjects.WallSupport;
 import com.marklynch.objects.inanimateobjects.WallWithCrack;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.inanimateobjects.WaterBody;
-import com.marklynch.objects.inanimateobjects.WaterShallow;
 import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
@@ -349,7 +348,7 @@ public class Templates {
 	public static ContainerForLiquids JAR_OF_WATER;
 	public static ContainerForLiquids JAR_OF_POISON;
 
-	public static WaterShallow WATER;
+	public static Liquid WATER;
 
 	public static Liquid POISON;
 
