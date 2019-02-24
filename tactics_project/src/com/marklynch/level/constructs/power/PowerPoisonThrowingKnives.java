@@ -10,6 +10,7 @@ import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ResourceUtils;
 
 public class PowerPoisonThrowingKnives extends Power {
@@ -39,7 +40,10 @@ public class PowerPoisonThrowingKnives extends Power {
 		super.cast(source, targetGameObject, targetSquare, action);
 
 		if (targetSquare != null) {
-			targetSquare.liquidSpread(Templates.POISON);
+			ArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
+			for (Square square : affectedSquares) {
+				targetSquare.liquidSpread(Templates.POISON);
+			}
 		}
 
 	}
