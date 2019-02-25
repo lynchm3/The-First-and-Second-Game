@@ -339,7 +339,7 @@ public class Templates {
 	public static GameObject WOOD_CHIPS;
 
 	public static Inspectable BLOODY_PULP;
-	public static Inspectable BLOOD;
+//	public static Inspectable BLOOD;
 
 	// Food?
 	public static MeatChunk MEAT_CHUNK;
@@ -347,10 +347,17 @@ public class Templates {
 	public static ContainerForLiquids JAR;
 	public static ContainerForLiquids JAR_OF_WATER;
 	public static ContainerForLiquids JAR_OF_POISON;
+	public static ContainerForLiquids JAR_OF_OIL;
+	public static ContainerForLiquids JAR_OF_LAVA;
+	public static ContainerForLiquids JAR_OF_BLOOD;
+	public static ContainerForLiquids JAR_OF_SOUP;
 
 	public static Liquid WATER;
-
 	public static Liquid POISON;
+	public static Liquid OIL;
+	public static Liquid LAVA;
+	public static Liquid BLOOD;
+	public static Liquid SOUP;
 
 	// JUNK
 	public static GameObject FUR;

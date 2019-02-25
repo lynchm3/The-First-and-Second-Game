@@ -134,9 +134,9 @@ public class ActionDie extends Action {
 	private void poolBlood() {
 
 		// Actor actor = (Actor) gameObjectPerformer;
-		GameObject blood = Templates.BLOOD.makeCopy(null, null);
-		gameObjectPerformer.squareGameObjectIsOn.inventory.add(blood);
-		blood.setPrimaryAnimation(new AnimationScale(blood, 0f, 1f, 2000, null));
+		Liquid blood = gameObjectPerformer.squareGameObjectIsOn.liquidSpread(Templates.BLOOD);
+		if (blood != null)
+			blood.setPrimaryAnimation(new AnimationScale(blood, 0f, 1f, 2000, null));
 
 	}
 

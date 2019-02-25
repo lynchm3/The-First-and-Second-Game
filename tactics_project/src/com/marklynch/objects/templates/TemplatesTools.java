@@ -257,6 +257,40 @@ public class TemplatesTools {
 		Templates.JAR_OF_POISON.liquid = Templates.POISON.makeCopy(null, null, 1);
 		Templates.JAR_OF_POISON.flipYAxisInMirror = false;
 
+		Templates.JAR_OF_OIL = new ContainerForLiquids();
+		Templates.JAR_OF_OIL.name = "Jar of Oil";
+		Templates.JAR_OF_OIL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
+		Templates.JAR_OF_OIL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.POISON_DAMAGE, 6));
+		Templates.JAR_OF_OIL.setImageAndExtrapolateSize("jar_of_poison.png");
+		Templates.JAR_OF_OIL.totalHealth = Templates.JAR_OF_OIL.remainingHealth = 14;
+		Templates.JAR_OF_OIL.weight = 10f;
+		Templates.JAR_OF_OIL.value = 78;
+		Templates.JAR_OF_OIL.anchorX = 56;
+		Templates.JAR_OF_OIL.anchorY = 100;
+		Templates.JAR_OF_OIL.templateId = GameObject.generateNewTemplateId();
+		Templates.JAR_OF_OIL.volume = 1;
+		Templates.OIL.jarForm = Templates.JAR_OF_OIL;
+		Templates.JAR_OF_OIL.liquid = Templates.OIL.makeCopy(null, null, 1);
+		Templates.JAR_OF_OIL.flipYAxisInMirror = false;
+
+		Templates.JAR_OF_BLOOD = new ContainerForLiquids();
+		Templates.JAR_OF_BLOOD.name = "Jar of Blood";
+		Templates.JAR_OF_BLOOD.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
+		Templates.JAR_OF_BLOOD.setImageAndExtrapolateSize("jar_of_poison.png");
+		Templates.JAR_OF_BLOOD.totalHealth = Templates.JAR_OF_BLOOD.remainingHealth = 14;
+		Templates.JAR_OF_BLOOD.weight = 10f;
+		Templates.JAR_OF_BLOOD.value = 78;
+		Templates.JAR_OF_BLOOD.anchorX = 56;
+		Templates.JAR_OF_BLOOD.anchorY = 100;
+		Templates.JAR_OF_BLOOD.templateId = GameObject.generateNewTemplateId();
+		Templates.JAR_OF_BLOOD.volume = 1;
+		Templates.BLOOD.jarForm = Templates.JAR_OF_BLOOD;
+		Templates.JAR_OF_BLOOD.liquid = Templates.BLOOD.makeCopy(null, null, 1);
+		Templates.JAR_OF_BLOOD.flipYAxisInMirror = false;
+
 	}
 
 }

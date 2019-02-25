@@ -65,11 +65,8 @@ public class Spikes extends GameObject implements SwitchListener, UpdatableGameO
 
 		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
 
-			System.out.println("DODAMAGE - gameObject B = " + gameObject);
-
 			if (gameObject == this || gameObject.isFloorObject || gameObject.attackable == false)
 				continue;
-			System.out.println("DODAMAGE - gameObject  C= " + gameObject);
 
 			gameObject.changeHealthSafetyOff(-5f, this, null);
 		}

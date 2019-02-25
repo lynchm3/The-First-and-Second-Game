@@ -29,16 +29,6 @@ public class TemplatesInspectables {
 		Templates.BLOODY_PULP.anchorY = 0;
 		Templates.BLOODY_PULP.templateId = GameObject.generateNewTemplateId();
 
-		Templates.BLOOD = new Inspectable();
-		Templates.BLOOD.name = "Blood";
-		Templates.BLOOD.setImageAndExtrapolateSize("blood.png");
-		Templates.BLOOD.totalHealth = Templates.BLOOD.remainingHealth = 1;
-		Templates.BLOOD.weight = 1f;
-		Templates.BLOOD.value = 5;
-		Templates.BLOOD.anchorX = 0;
-		Templates.BLOOD.anchorY = 0;
-		Templates.BLOOD.templateId = GameObject.generateNewTemplateId();
-
 		Templates.DRIED_BLOOD = new Inspectable();
 		Templates.DRIED_BLOOD.name = "Dried Blood";
 		Templates.DRIED_BLOOD.setImageAndExtrapolateSize("blood.png");

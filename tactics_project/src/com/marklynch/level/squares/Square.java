@@ -1381,7 +1381,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		return id;
 	}
 
-	public void liquidSpread(Liquid templateLiquid) {
+	public Liquid liquidSpread(Liquid templateLiquid) {
 		for (int i = 0; i < 10; i++) {
 			ArrayList<Square> squareToMakeWet = this.getAllSquaresAtDistance(i);
 			for (Square square : squareToMakeWet) {
@@ -1390,10 +1390,12 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 						&& !square.inventory.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)
 						&& !square.inventory.containsGameObjectOfType(Wall.class)) {
 					square.inventory.removeGameObjecsOfType(Liquid.class);
-					square.inventory.add(templateLiquid.makeCopy(null, null, 1));
-					return;
+					Liquid liquidToSpread = templateLiquid.makeCopy(null, null, 1);
+					square.inventory.add(liquidToSpread);
+					return liquidToSpread;
 				}
 			}
 		}
+		return null;
 	}
 }

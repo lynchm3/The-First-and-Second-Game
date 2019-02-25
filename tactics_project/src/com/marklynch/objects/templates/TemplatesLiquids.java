@@ -5,7 +5,9 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.effect.EffectBloodCovered;
 import com.marklynch.level.constructs.effect.EffectPoison;
+import com.marklynch.level.constructs.effect.EffectSlow;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
@@ -53,6 +55,43 @@ public class TemplatesLiquids {
 		Templates.POISON.textures.add(getGlobalImage("poison_3.png", true));
 		Templates.POISON.textures.add(getGlobalImage("poison_4.png", true));
 		Templates.POISON.setAllResistances100();
+
+		Templates.OIL = new Liquid();
+		Templates.OIL.name = "Oil";
+		Templates.OIL.setImageAndExtrapolateSize("oil.png");
+		Templates.OIL.totalHealth = Templates.OIL.remainingHealth = 1000;
+		Templates.OIL.weight = 6f;
+		Templates.OIL.value = 16;
+		Templates.OIL.anchorX = 0;
+		Templates.OIL.anchorY = 0;
+		Templates.OIL.templateId = GameObject.generateNewTemplateId();
+		Templates.OIL.volume = 1;
+		Templates.OIL.touchEffects = new Effect[] { new EffectSlow(3) };
+		Templates.OIL.consumeEffects = new Effect[] { new EffectSlow(5) };
+		Templates.OIL.textures.add(getGlobalImage("oil.png", true));
+		Templates.OIL.textures.add(getGlobalImage("oil_2.png", true));
+		Templates.OIL.textures.add(getGlobalImage("oil_3.png", true));
+		Templates.OIL.textures.add(getGlobalImage("oil_4.png", true));
+		Templates.OIL.setAllResistances100();
+		Templates.OIL.setAllResistances100();
+
+		Templates.BLOOD = new Liquid();
+		Templates.BLOOD.name = "Blood";
+		Templates.BLOOD.setImageAndExtrapolateSize("blood.png");
+		Templates.BLOOD.totalHealth = Templates.BLOOD.remainingHealth = 1000;
+		Templates.BLOOD.weight = 6f;
+		Templates.BLOOD.value = 16;
+		Templates.BLOOD.anchorX = 0;
+		Templates.BLOOD.anchorY = 0;
+		Templates.BLOOD.templateId = GameObject.generateNewTemplateId();
+		Templates.BLOOD.volume = 1;
+		Templates.BLOOD.touchEffects = new Effect[] { new EffectBloodCovered(3) };
+		Templates.BLOOD.consumeEffects = new Effect[] { new EffectBloodCovered(5) };
+		Templates.BLOOD.textures.add(getGlobalImage("blood.png", true));
+		Templates.BLOOD.textures.add(getGlobalImage("blood_2.png", true));
+		Templates.BLOOD.textures.add(getGlobalImage("blood_3.png", true));
+		Templates.BLOOD.textures.add(getGlobalImage("blood_4.png", true));
+		Templates.BLOOD.setAllResistances100();
 	}
 
 }
