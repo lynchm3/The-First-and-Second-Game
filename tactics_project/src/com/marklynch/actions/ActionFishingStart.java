@@ -35,14 +35,14 @@ public class ActionFishingStart extends Action {
 		if (!checkRange())
 			return;
 
-		performer.fishingTarget = target;
+		performer.fishingTarget = targetGameObject;
 		performer.fishingProgress = 0;
-		target.beingFishedBy = performer;
+		targetGameObject.beingFishedBy = performer;
 
 		FishingRod fishingRod = null;
 		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
 		for (GameObject f : fishingRods) {
-			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) <= ((FishingRod) f).fishingRange) {
+			if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) <= ((FishingRod) f).fishingRange) {
 				fishingRod = (FishingRod) f;
 			}
 		}
@@ -52,9 +52,9 @@ public class ActionFishingStart extends Action {
 			performer.equippedBeforePickingUpObject = performer.equipped;
 		performer.equipped = fishingRod;
 
-		if (Game.level.shouldLog(target, performer)) {
+		if (Game.level.shouldLog(targetGameObject, performer)) {
 			Game.level.logOnScreen(
-					new ActivityLog(new Object[] { performer, " went fishing for ", target, " with ", fishingRod }));
+					new ActivityLog(new Object[] { performer, " went fishing for ", targetGameObject, " with ", fishingRod }));
 		}
 
 		// if (performer == Game.level.player) {
@@ -75,7 +75,7 @@ public class ActionFishingStart extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		if (!legal) {
-			Crime crime = new Crime(this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, target);
+			Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_THEFT, targetGameObject);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -101,7 +101,7 @@ public class ActionFishingStart extends Action {
 			return false;
 		}
 
-		if (target.beingFishedBy != null) {
+		if (targetGameObject.beingFishedBy != null) {
 			disabledReason = ALREADY_BEING_FISHED;
 			return false;
 		}
@@ -116,7 +116,7 @@ public class ActionFishingStart extends Action {
 
 		for (GameObject fishingRod : fishingRods) {
 			if (performer
-					.straightLineDistanceTo(target.squareGameObjectIsOn) <= ((FishingRod) fishingRod).fishingRange) {
+					.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) <= ((FishingRod) fishingRod).fishingRange) {
 				return true;
 			}
 		}
@@ -125,15 +125,15 @@ public class ActionFishingStart extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
 		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
 		if (shovel != null) {
-			float loudness = Math.max(target.soundWhenHit, shovel.soundWhenHitting);
-			return new Sound(performer, shovel, target.squareGameObjectIsOn, loudness, legal, this.getClass());
+			float loudness = Math.max(targetGameObject.soundWhenHit, shovel.soundWhenHitting);
+			return new Sound(performer, shovel, targetGameObject.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
 	}

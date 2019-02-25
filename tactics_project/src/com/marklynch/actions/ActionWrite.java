@@ -36,12 +36,12 @@ public class ActionWrite extends Action {
 		if (!checkRange())
 			return;
 
-		ConversationPart conversationPart = new ConversationPart(text, new ConversationResponse[] {}, target);
-		Conversation conversation = new Conversation(conversationPart, target, true);
-		target.conversation = conversation;
+		ConversationPart conversationPart = new ConversationPart(text, new ConversationResponse[] {}, targetGameObject);
+		Conversation conversation = new Conversation(conversationPart, targetGameObject, true);
+		targetGameObject.conversation = conversation;
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " updated ", target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " updated ", targetGameObject }));
 		if (sound != null)
 			sound.play();
 	}
@@ -53,7 +53,7 @@ public class ActionWrite extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 		return false;

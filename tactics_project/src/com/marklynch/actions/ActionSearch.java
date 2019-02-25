@@ -36,16 +36,16 @@ public class ActionSearch extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " searched ", target }));
+		if (Game.level.shouldLog(targetGameObject, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " searched ", targetGameObject }));
 
 		ArrayList<GameObject> gameObjectsToLoot = searchable.search();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 
 			if (Game.level.shouldLog(gameObjectToLoot, performer))
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " found ", gameObjectToLoot, " in ", target }));
-			target.inventory.remove(gameObjectToLoot);
+						new ActivityLog(new Object[] { performer, " found ", gameObjectToLoot, " in ", targetGameObject }));
+			targetGameObject.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
 			if (gameObjectToLoot.owner == null)
 				gameObjectToLoot.owner = performer;
@@ -56,7 +56,7 @@ public class ActionSearch extends Action {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " found nothing" }));
 
 		for (Effect effect : searchable.effectsFromInteracting) {
-			performer.addEffect(effect.makeCopy(target, performer));
+			performer.addEffect(effect.makeCopy(targetGameObject, performer));
 		}
 
 		if (sound != null)
@@ -87,7 +87,7 @@ public class ActionSearch extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 		return false;
@@ -95,7 +95,7 @@ public class ActionSearch extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.owner != null && target.owner != performer) {
+		if (targetGameObject.owner != null && targetGameObject.owner != performer) {
 			illegalReason = THEFT;
 			return false;
 		}

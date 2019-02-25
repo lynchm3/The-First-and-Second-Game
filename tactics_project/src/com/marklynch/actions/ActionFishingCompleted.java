@@ -37,31 +37,31 @@ public class ActionFishingCompleted extends Action {
 		if (!checkRange())
 			return;
 
-		performer.fishingTarget = target;
+		performer.fishingTarget = targetGameObject;
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
-		if (target.fitsInInventory) {
+		if (targetGameObject.fitsInInventory) {
 
 			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
 					&& performer.squareGameObjectIsOn.visibleToPlayer) {
-				performer.fishingAnimation = new AnimationTake(target, performer, 0, 0, 1f, null);
+				performer.fishingAnimation = new AnimationTake(targetGameObject, performer, 0, 0, 1f, null);
 				Level.addSecondaryAnimation(performer.fishingAnimation);
 			}
-			performer.inventory.add(target);
+			performer.inventory.add(targetGameObject);
 		} else {
-			Square oldSquare = target.squareGameObjectIsOn;
-			performer.squareGameObjectIsOn.inventory.add(target);
+			Square oldSquare = targetGameObject.squareGameObjectIsOn;
+			performer.squareGameObjectIsOn.inventory.add(targetGameObject);
 			if (Game.level.openInventories.size() == 0 && performer.squareGameObjectIsOn.onScreen()
 					&& performer.squareGameObjectIsOn.visibleToPlayer) {
-				target.setPrimaryAnimation(
-						new AnimationWalk(target, oldSquare, performer.squareGameObjectIsOn, 0, null));
+				targetGameObject.setPrimaryAnimation(
+						new AnimationWalk(targetGameObject, oldSquare, performer.squareGameObjectIsOn, 0, null));
 			}
 		}
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " caught ", target }));
+		if (Game.level.shouldLog(targetGameObject, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " caught ", targetGameObject }));
 
 		FishingRod fishingRod = (FishingRod) performer.equipped;
 		performer.fishingTarget.beingFishedBy = null;
@@ -70,7 +70,7 @@ public class ActionFishingCompleted extends Action {
 
 		if (performer == Game.level.player) {
 			Level.pausePlayer();
-			target.setPrimaryAnimation(null);
+			targetGameObject.setPrimaryAnimation(null);
 			if (performer.equippedBeforePickingUpObject != null) {
 				performer.equipped = performer.equippedBeforePickingUpObject;
 				performer.equippedBeforePickingUpObject = null;
@@ -79,7 +79,7 @@ public class ActionFishingCompleted extends Action {
 		}
 
 		if (!legal) {
-			Crime crime = new Crime(this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, target);
+			Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_THEFT, targetGameObject);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -127,15 +127,15 @@ public class ActionFishingCompleted extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
 		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
 		if (shovel != null) {
-			float loudness = Math.max(target.soundWhenHit, shovel.soundWhenHitting);
-			return new Sound(performer, shovel, target.squareGameObjectIsOn, loudness, legal, this.getClass());
+			float loudness = Math.max(targetGameObject.soundWhenHit, shovel.soundWhenHitting);
+			return new Sound(performer, shovel, targetGameObject.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
 	}

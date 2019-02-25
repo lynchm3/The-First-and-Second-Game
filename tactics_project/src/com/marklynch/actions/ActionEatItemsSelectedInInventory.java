@@ -44,9 +44,9 @@ public class ActionEatItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionEatItems(performer, target).perform();
+			new ActionEatItems(performer, targetGameObject).perform();
 		} else {
-			Game.level.player.inventory.showQTYDialog(new ActionEatItems(performer, target.inventorySquare.stack),
+			Game.level.player.inventory.showQTYDialog(new ActionEatItems(performer, targetGameObject.inventorySquare.stack),
 					inventorySquare.stack.size(), "Enter qty to eat (available: " + inventorySquare.stack.size() + ")",
 					0);
 		}
@@ -60,10 +60,10 @@ public class ActionEatItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
 			return true;
 		}
-		if (performer.inventory == target.inventoryThatHoldsThisObject)
+		if (performer.inventory == targetGameObject.inventoryThatHoldsThisObject)
 			return true;
 
 		return false;
@@ -71,7 +71,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override

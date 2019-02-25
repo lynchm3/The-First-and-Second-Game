@@ -65,8 +65,8 @@ public class ActionHide extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.squareGameObjectIsOn != target.squareGameObjectIsOn) {
-			this.actionMove = new ActionMove(performer, target.squareGameObjectIsOn, false);
+		if (performer.squareGameObjectIsOn != targetGameObject.squareGameObjectIsOn) {
+			this.actionMove = new ActionMove(performer, targetGameObject.squareGameObjectIsOn, false);
 			return this.actionMove.enabled;
 		}
 		return true;
@@ -74,7 +74,7 @@ public class ActionHide extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;
@@ -85,8 +85,8 @@ public class ActionHide extends Action {
 		if (actionMove != null)
 			return true;
 
-		if (target.squareGameObjectIsOn.restricted() == true
-				&& !target.squareGameObjectIsOn.owners.contains(performer)) {
+		if (targetGameObject.squareGameObjectIsOn.restricted() == true
+				&& !targetGameObject.squareGameObjectIsOn.owners.contains(performer)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}

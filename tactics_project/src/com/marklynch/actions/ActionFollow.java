@@ -54,7 +54,7 @@ public class ActionFollow extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 3) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 3) {
 			return false;
 		}
 

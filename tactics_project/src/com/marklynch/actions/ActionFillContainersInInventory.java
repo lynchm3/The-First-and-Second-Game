@@ -40,7 +40,7 @@ public class ActionFillContainersInInventory extends Action {
 		} else {
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL);
 			Game.level.player.inventory.open();
-			Inventory.waterSource = (WaterSource) this.target;
+			Inventory.waterSource = (WaterSource) this.targetGameObject;
 			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 			// Game.level.openInventories.add(Game.level.player.inventory);
@@ -81,11 +81,11 @@ public class ActionFillContainersInInventory extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 
-		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
+		if (!performer.canSeeSquare(targetGameObject.squareGameObjectIsOn)) {
 			return false;
 		}
 		return true;

@@ -79,18 +79,18 @@ public class ActionOpenInventoryToPourItems extends Action {
 	@Override
 	public boolean checkLegality() {
 		// Empty square, it's fine
-		if (target == null)
+		if (targetGameObject == null)
 			return true;
 
 		// Something that belongs to some one else
-		if (target.owner != null && target.owner != performer) {
+		if (targetGameObject.owner != null && targetGameObject.owner != performer) {
 			illegalReason = VANDALISM;
 			return false;
 		}
 
 		// Is human
-		if (target instanceof Actor)
-			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal)) {
+		if (targetGameObject instanceof Actor)
+			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal)) {
 				illegalReason = ASSAULT;
 				return false;
 			}

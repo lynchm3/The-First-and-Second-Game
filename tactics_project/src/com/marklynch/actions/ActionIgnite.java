@@ -58,7 +58,7 @@ public class ActionIgnite extends Action {
 
 		GameObject igniteMethodGameObject = null;
 		if (source != null) {
-			igniteMethodGameObject = target;
+			igniteMethodGameObject = targetGameObject;
 		} else if (igniteMethod instanceof Power) {
 			igniteMethod = ((Power) igniteMethod).name;
 		} else if (igniteMethod instanceof GameObject) {
@@ -67,7 +67,7 @@ public class ActionIgnite extends Action {
 
 		// Melee weapons
 		performer.setPrimaryAnimation(
-				new AnimationIgnite(performer, target, igniteMethodGameObject, new OnCompletionListener() {
+				new AnimationIgnite(performer, targetGameObject, igniteMethodGameObject, new OnCompletionListener() {
 					@Override
 					public void animationComplete(GameObject gameObject) {
 						postAnimation();
@@ -77,11 +77,11 @@ public class ActionIgnite extends Action {
 
 	public void postAnimation() {
 
-		if (Game.level.shouldLog(target, performer)) {
+		if (Game.level.shouldLog(targetGameObject, performer)) {
 
-			if (target != null) {
+			if (targetGameObject != null) {
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " ignited ", target, " with ", igniteMethod }));
+						new ActivityLog(new Object[] { performer, " ignited ", targetGameObject, " with ", igniteMethod }));
 			} else {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ignited with ", igniteMethod }));
 
@@ -89,7 +89,7 @@ public class ActionIgnite extends Action {
 		}
 
 //		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
-		target.addEffect(new EffectBurn(performer, target, 3));
+		targetGameObject.addEffect(new EffectBurn(performer, targetGameObject, 3));
 //		}
 
 		if (Game.level.openInventories.size() > 0)
@@ -111,10 +111,10 @@ public class ActionIgnite extends Action {
 
 			Actor victim = null;
 
-			if (target instanceof Actor)
-				victim = (Actor) target;
-			else if (target != null)
-				victim = target.owner;
+			if (targetGameObject instanceof Actor)
+				victim = (Actor) targetGameObject;
+			else if (targetGameObject != null)
+				victim = targetGameObject.owner;
 			if (victim != null) {
 				Crime crime = new Crime(this.performer, victim, Crime.TYPE.CRIME_ARSON);
 				this.performer.crimesPerformedThisTurn.add(crime);
@@ -130,7 +130,7 @@ public class ActionIgnite extends Action {
 	@Override
 	public boolean check() {
 
-		if (targetSquare == null && target == null)
+		if (targetSquare == null && targetGameObject == null)
 			return false;
 
 		Object ignitionMethod = getIgnitionMethod();
@@ -189,7 +189,7 @@ public class ActionIgnite extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		boolean illegal = standardAttackLegalityCheck(performer, target);
+		boolean illegal = standardAttackLegalityCheck(performer, targetGameObject);
 		if (illegalReason == VANDALISM)
 			illegalReason = ARSON;
 		return illegal;
@@ -199,7 +199,7 @@ public class ActionIgnite extends Action {
 	public Sound createSound() {
 		// Sound
 		float loudness = 3;
-		return new Sound(performer, target, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
+		return new Sound(performer, targetGameObject, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 	}
 
 }

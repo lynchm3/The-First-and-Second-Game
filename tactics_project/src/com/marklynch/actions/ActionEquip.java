@@ -46,16 +46,16 @@ public class ActionEquip extends Action {
 			actionTake.perform();
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " equipped ", target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " equipped ", targetGameObject }));
 
-		if (target instanceof Helmet) {
-			performer.helmet = (Helmet) target;
-		} else if (target instanceof BodyArmor) {
-			performer.bodyArmor = (BodyArmor) target;
-		} else if (target instanceof LegArmor) {
-			performer.legArmor = (LegArmor) target;
+		if (targetGameObject instanceof Helmet) {
+			performer.helmet = (Helmet) targetGameObject;
+		} else if (targetGameObject instanceof BodyArmor) {
+			performer.bodyArmor = (BodyArmor) targetGameObject;
+		} else if (targetGameObject instanceof LegArmor) {
+			performer.legArmor = (LegArmor) targetGameObject;
 		} else {
-			performer.equip(target);
+			performer.equip(targetGameObject);
 		}
 
 		if (sound != null)

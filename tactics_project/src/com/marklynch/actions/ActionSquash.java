@@ -33,19 +33,19 @@ public class ActionSquash extends Action {
 		if (!checkRange())
 			return;
 
-		if (target.attackable) {
-			target.changeHealth(-target.remainingHealth, performer, this);
+		if (targetGameObject.attackable) {
+			targetGameObject.changeHealth(-targetGameObject.remainingHealth, performer, this);
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
 
 				if (accidental) {
 
-					if (Game.level.shouldLog(target, performer))
+					if (Game.level.shouldLog(targetGameObject, performer))
 						Game.level.logOnScreen(new ActivityLog(
-								new Object[] { performer, "accidentally squashed ", target, " ...whoops" }));
+								new Object[] { performer, "accidentally squashed ", targetGameObject, " ...whoops" }));
 				} else {
 
-					if (Game.level.shouldLog(target, performer))
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " squashed", target }));
+					if (Game.level.shouldLog(targetGameObject, performer))
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " squashed", targetGameObject }));
 				}
 			}
 		}
@@ -63,15 +63,15 @@ public class ActionSquash extends Action {
 		if (!legal) {
 
 			Actor victim;
-			if (target instanceof Actor)
-				victim = (Actor) target;
+			if (targetGameObject instanceof Actor)
+				victim = (Actor) targetGameObject;
 			else
-				victim = target.owner;
+				victim = targetGameObject.owner;
 
 			Crime.TYPE severity = Crime.TYPE.CRIME_MANSLAUGHTER;
 			if (!accidental)
 				severity = Crime.TYPE.CRIME_ASSAULT;
-			if (!(target instanceof Actor))
+			if (!(targetGameObject instanceof Actor))
 				severity = Crime.TYPE.CRIME_VANDALISM;
 
 			Crime crime = new Crime(this.performer, victim, severity);
@@ -95,7 +95,7 @@ public class ActionSquash extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1)
 			return false;
 
 		return true;
@@ -103,7 +103,7 @@ public class ActionSquash extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public class ActionSquash extends Action {
 
 		float loudness = 10f;
 		if (performer.equipped != null)
-			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
+			return new Sound(performer, performer.equipped, targetGameObject.squareGameObjectIsOn, loudness, legal,
 					this.getClass());
 		return null;
 	}

@@ -31,7 +31,7 @@ public class ActionRing extends Action {
 			return;
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " rang ", target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " rang ", targetGameObject }));
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
@@ -64,7 +64,7 @@ public class ActionRing extends Action {
 	public Sound createSound() {
 
 		// Sound
-		return new Sound(performer, target, performer.squareGameObjectIsOn, target.soundWhenHitting, legal,
+		return new Sound(performer, targetGameObject, performer.squareGameObjectIsOn, targetGameObject.soundWhenHitting, legal,
 				this.getClass());
 	}
 

@@ -12,7 +12,7 @@ public class ActionStopHidingInside extends Action {
 
 	public ActionStopHidingInside(Actor performer, SmallHidingPlace target) {
 		super(ACTION_NAME, textureStopHiding, performer, null);
-		this.target = target;
+		this.targetGameObject = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -32,15 +32,15 @@ public class ActionStopHidingInside extends Action {
 			return;
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", "" + target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", "" + targetGameObject }));
 
 		// object.inventory.remove(performer);
 		// object.squareGameObjectIsOn.inventory.remove(performer);
 		// performer.squareGameObjectIsOn = object.squareGameObjectIsOn;
 		// performer.inventoryThatHoldsThisObject =
 		// object.squareGameObjectIsOn.inventory;
-		target.inventory.remove(performer);
-		target.squareGameObjectIsOn.inventory.add(performer);
+		targetGameObject.inventory.remove(performer);
+		targetGameObject.squareGameObjectIsOn.inventory.add(performer);
 
 		if (sound != null)
 			sound.play();
@@ -53,7 +53,7 @@ public class ActionStopHidingInside extends Action {
 	@Override
 	public boolean check() {
 
-		if (target.inventory.contains(performer))
+		if (targetGameObject.inventory.contains(performer))
 			return true;
 		else
 			return false;
@@ -66,8 +66,8 @@ public class ActionStopHidingInside extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.squareGameObjectIsOn.restricted() == true
-				&& !target.squareGameObjectIsOn.owners.contains(performer)) {
+		if (targetGameObject.squareGameObjectIsOn.restricted() == true
+				&& !targetGameObject.squareGameObjectIsOn.owners.contains(performer)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}

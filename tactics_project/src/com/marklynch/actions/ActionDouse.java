@@ -64,7 +64,7 @@ public class ActionDouse extends Action {
 
 		// Melee weapons
 		performer.setPrimaryAnimation(
-				new AnimationIgnite(performer, target, douseMethodGameObject, new OnCompletionListener() {
+				new AnimationIgnite(performer, targetGameObject, douseMethodGameObject, new OnCompletionListener() {
 					@Override
 					public void animationComplete(GameObject gameObject) {
 						postAnimation();
@@ -74,11 +74,11 @@ public class ActionDouse extends Action {
 
 	public void postAnimation() {
 
-		if (Game.level.shouldLog(target, performer)) {
+		if (Game.level.shouldLog(targetGameObject, performer)) {
 
-			if (target != null) {
+			if (targetGameObject != null) {
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " doused ", target, " with ", douseMethod }));
+						new ActivityLog(new Object[] { performer, " doused ", targetGameObject, " with ", douseMethod }));
 			} else {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " doused with ", douseMethod }));
 
@@ -86,9 +86,9 @@ public class ActionDouse extends Action {
 		}
 
 //		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
-		target.addEffect(new EffectWet(performer, target, 3));
-		if (target.squareGameObjectIsOn != null) {
-			target.squareGameObjectIsOn.liquidSpread(Templates.WATER);
+		targetGameObject.addEffect(new EffectWet(performer, targetGameObject, 3));
+		if (targetGameObject.squareGameObjectIsOn != null) {
+			targetGameObject.squareGameObjectIsOn.liquidSpread(Templates.WATER);
 		}
 //		}
 
@@ -111,10 +111,10 @@ public class ActionDouse extends Action {
 
 			Actor victim = null;
 
-			if (target instanceof Actor)
-				victim = (Actor) target;
-			else if (target != null)
-				victim = target.owner;
+			if (targetGameObject instanceof Actor)
+				victim = (Actor) targetGameObject;
+			else if (targetGameObject != null)
+				victim = targetGameObject.owner;
 			if (victim != null) {
 				Crime crime = new Crime(this.performer, victim, Crime.TYPE.CRIME_DOUSE);
 				this.performer.crimesPerformedThisTurn.add(crime);
@@ -130,7 +130,7 @@ public class ActionDouse extends Action {
 	@Override
 	public boolean check() {
 
-		if (targetSquare == null && target == null)
+		if (targetSquare == null && targetGameObject == null)
 			return false;
 
 		Object ignitionMethod = getDouseMethod();
@@ -184,7 +184,7 @@ public class ActionDouse extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		boolean illegal = standardAttackLegalityCheck(performer, target);
+		boolean illegal = standardAttackLegalityCheck(performer, targetGameObject);
 		if (illegalReason == VANDALISM)
 			illegalReason = ARSON;
 		return illegal;
@@ -194,7 +194,7 @@ public class ActionDouse extends Action {
 	public Sound createSound() {
 
 		float loudness = 3;
-		return new Sound(performer, target, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
+		return new Sound(performer, targetGameObject, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 	}
 
 }

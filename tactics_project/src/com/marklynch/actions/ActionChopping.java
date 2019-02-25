@@ -40,9 +40,9 @@ public class ActionChopping extends Action {
 		if (!checkRange())
 			return;
 
-		if (performer.squareGameObjectIsOn.xInGrid > target.squareGameObjectIsOn.xInGrid) {
+		if (performer.squareGameObjectIsOn.xInGrid > targetGameObject.squareGameObjectIsOn.xInGrid) {
 			performer.backwards = true;
-		} else if (performer.squareGameObjectIsOn.xInGrid < target.squareGameObjectIsOn.xInGrid) {
+		} else if (performer.squareGameObjectIsOn.xInGrid < targetGameObject.squareGameObjectIsOn.xInGrid) {
 			performer.backwards = false;
 		}
 
@@ -51,7 +51,7 @@ public class ActionChopping extends Action {
 			performer.equippedBeforePickingUpObject = performer.equipped;
 		performer.equipped = axe;
 
-		performer.setPrimaryAnimation(new AnimationSlash(performer, target, new OnCompletionListener() {
+		performer.setPrimaryAnimation(new AnimationSlash(performer, targetGameObject, new OnCompletionListener() {
 			@Override
 			public void animationComplete(GameObject gameObject) {
 				postMeleeAnimation();
@@ -61,29 +61,29 @@ public class ActionChopping extends Action {
 
 	public void postMeleeAnimation() {
 
-		float damage = target.totalHealth / 4f;
-		target.changeHealth(-damage, performer, this);
+		float damage = targetGameObject.totalHealth / 4f;
+		targetGameObject.changeHealth(-damage, performer, this);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
 		Actor treeOwner = performer;
-		if (target.owner != null)
-			treeOwner = target.owner;
+		if (targetGameObject.owner != null)
+			treeOwner = targetGameObject.owner;
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " chopped at ", target, " with ", axe }));
+		if (Game.level.shouldLog(targetGameObject, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " chopped at ", targetGameObject, " with ", axe }));
 
-		target.setPrimaryAnimation(new AnimationShake(target, null, false, 200));
+		targetGameObject.setPrimaryAnimation(new AnimationShake(targetGameObject, null, false, 200));
 
-		if (target.remainingHealth <= 0) {
+		if (targetGameObject.remainingHealth <= 0) {
 
-			GameObject wood = Templates.WOOD.makeCopy(target.squareGameObjectIsOn, treeOwner);
+			GameObject wood = Templates.WOOD.makeCopy(targetGameObject.squareGameObjectIsOn, treeOwner);
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 				Level.addSecondaryAnimation(new AnimationTake(wood, performer, 0, 0, 1f, null));
 			}
 			performer.inventory.add(wood);
-			if (Game.level.shouldLog(target, performer)) {
+			if (Game.level.shouldLog(targetGameObject, performer)) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", wood }));
 			}
 
@@ -107,7 +107,7 @@ public class ActionChopping extends Action {
 		//
 		// }
 
-		target.showPow();
+		targetGameObject.showPow();
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
@@ -119,7 +119,7 @@ public class ActionChopping extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this.performer, this.target.owner, Crime.TYPE.CRIME_VANDALISM, target);
+			Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_VANDALISM, targetGameObject);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -142,7 +142,7 @@ public class ActionChopping extends Action {
 			return false;
 		}
 
-		if (target.remainingHealth <= 0) {
+		if (targetGameObject.remainingHealth <= 0) {
 			disabledReason = null;
 			return false;
 		}
@@ -153,11 +153,11 @@ public class ActionChopping extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 
-		if (!performer.canSeeGameObject(target))
+		if (!performer.canSeeGameObject(targetGameObject))
 			return false;
 
 		return true;
@@ -165,15 +165,15 @@ public class ActionChopping extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
 		Axe axe = (Axe) performer.inventory.getGameObjectOfClass(Axe.class);
 		if (axe != null) {
-			float loudness = Math.max(target.soundWhenHit, axe.soundWhenHitting);
-			return new Sound(performer, axe, target.squareGameObjectIsOn, loudness, legal, this.getClass());
+			float loudness = Math.max(targetGameObject.soundWhenHit, axe.soundWhenHitting);
+			return new Sound(performer, axe, targetGameObject.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
 	}
@@ -184,7 +184,7 @@ public class ActionChopping extends Action {
 		if (performed && Player.inFight()) {
 			return false;
 		}
-		if (target.remainingHealth <= 0) {
+		if (targetGameObject.remainingHealth <= 0) {
 			disabledReason = null;
 			return false;
 		}

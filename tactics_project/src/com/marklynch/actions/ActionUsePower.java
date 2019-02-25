@@ -18,7 +18,7 @@ public class ActionUsePower extends Action {
 	public ActionUsePower(GameObject attacker, GameObject target, Square targetSquare, Power power, boolean log) {
 		super("Cast " + power.name, null, attacker, target);
 		this.targetSquare = targetSquare;
-		this.target = target;
+		this.targetGameObject = target;
 		image = power.image;
 		this.power = power;
 		this.log = log;
@@ -42,7 +42,7 @@ public class ActionUsePower extends Action {
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		if (log)
 			power.log(gameObjectPerformer, targetSquare);
-		power.cast(gameObjectPerformer, target, targetSquare, this);
+		power.cast(gameObjectPerformer, targetGameObject, targetSquare, this);
 
 		if (sound != null)
 			sound.play();

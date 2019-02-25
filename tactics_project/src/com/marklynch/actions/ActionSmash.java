@@ -16,7 +16,7 @@ public class ActionSmash extends Action {
 		super.gameObjectPerformer = this.gameObjectPerformer = attacker;
 		if (gameObjectPerformer instanceof Actor)
 			performer = (Actor) gameObjectPerformer;
-		this.target = target;
+		this.targetGameObject = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -34,8 +34,8 @@ public class ActionSmash extends Action {
 		if (!checkRange())
 			return;
 
-		target.changeHealth(-target.remainingHealth, performer, this);
-		target.checkIfDestroyed(gameObjectPerformer, this);
+		targetGameObject.changeHealth(-targetGameObject.remainingHealth, performer, this);
+		targetGameObject.checkIfDestroyed(gameObjectPerformer, this);
 
 		if (sound != null)
 			sound.play();
@@ -45,7 +45,7 @@ public class ActionSmash extends Action {
 
 		if (performer != null) {
 			if (!legal) {
-				Crime crime = new Crime(this.performer, target.owner, Crime.TYPE.CRIME_VANDALISM);
+				Crime crime = new Crime(this.performer, targetGameObject.owner, Crime.TYPE.CRIME_VANDALISM);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
@@ -107,16 +107,16 @@ public class ActionSmash extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
 
 		if (gameObjectPerformer instanceof Actor)
-			return new Sound(gameObjectPerformer, target, target.squareGameObjectIsOn, 20, legal, this.getClass());
+			return new Sound(gameObjectPerformer, targetGameObject, targetGameObject.squareGameObjectIsOn, 20, legal, this.getClass());
 		else
-			return new Sound(null, target, target.squareGameObjectIsOn, 20, legal, this.getClass());
+			return new Sound(null, targetGameObject, targetGameObject.squareGameObjectIsOn, 20, legal, this.getClass());
 
 	}
 

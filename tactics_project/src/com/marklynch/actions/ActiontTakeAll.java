@@ -41,24 +41,24 @@ public class ActiontTakeAll extends Action {
 			actionOpen.perform();
 		}
 
-		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) target.inventory.getGameObjects().clone();
+		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) targetGameObject.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 
 			if (Game.level.shouldLog(gameObjectToLoot, performer)) {
 				if (gameObjectToLoot.owner == null || gameObjectToLoot.owner == performer) {
 					Game.level.logOnScreen(
-							new ActivityLog(new Object[] { performer, " took ", gameObjectToLoot, " from ", target }));
+							new ActivityLog(new Object[] { performer, " took ", gameObjectToLoot, " from ", targetGameObject }));
 				} else {
 					Game.level.logOnScreen(
-							new ActivityLog(new Object[] { performer, " stole ", gameObjectToLoot, " from ", target }));
+							new ActivityLog(new Object[] { performer, " stole ", gameObjectToLoot, " from ", targetGameObject }));
 				}
 			}
-			target.inventory.remove(gameObjectToLoot);
+			targetGameObject.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
 			if (gameObjectToLoot.owner == null)
 				gameObjectToLoot.owner = performer;
 		}
-		target.looted();
+		targetGameObject.looted();
 		if (sound != null)
 			sound.play();
 
@@ -97,7 +97,7 @@ public class ActiontTakeAll extends Action {
 			return actionOpen.checkRange();
 		}
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 
@@ -113,7 +113,7 @@ public class ActiontTakeAll extends Action {
 			}
 		}
 
-		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) target.inventory.getGameObjects().clone();
+		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) targetGameObject.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer)
 				return false;

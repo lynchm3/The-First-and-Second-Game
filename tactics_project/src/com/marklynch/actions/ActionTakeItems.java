@@ -75,8 +75,8 @@ public class ActionTakeItems extends VariableQtyAction {
 			if (objectToTakeFrom == targetSquare)
 				targetSquare.inventory.remove(object);
 
-			if (objectToTakeFrom == target)
-				target.inventory.remove(object);
+			if (objectToTakeFrom == targetGameObject)
+				targetGameObject.inventory.remove(object);
 
 			if (objectToTakeFrom instanceof Openable) {
 				((Openable) objectToTakeFrom).open();
@@ -108,14 +108,14 @@ public class ActionTakeItems extends VariableQtyAction {
 								new ActivityLog(new Object[] { performer, " took ", objectsTotake[0], amountText }));
 					else
 						Game.level.logOnScreen(new ActivityLog(
-								new Object[] { performer, " took ", objectsTotake[0], amountText, " from ", target }));
+								new Object[] { performer, " took ", objectsTotake[0], amountText, " from ", targetGameObject }));
 				} else {
 					if (objectToTakeFrom == targetSquare)
 						Game.level.logOnScreen(
 								new ActivityLog(new Object[] { performer, " stole ", objectsTotake[0], amountText }));
 					else
 						Game.level.logOnScreen(new ActivityLog(
-								new Object[] { performer, " stole ", objectsTotake[0], amountText, " from ", target }));
+								new Object[] { performer, " stole ", objectsTotake[0], amountText, " from ", targetGameObject }));
 				}
 			}
 		}
@@ -134,9 +134,9 @@ public class ActionTakeItems extends VariableQtyAction {
 		// }
 
 		// Check it's still on the same spot
-		if (target == objectToTakeFrom) {
+		if (targetGameObject == objectToTakeFrom) {
 			for (GameObject object : objectsTotake) {
-				if (!target.inventory.contains(object)) {
+				if (!targetGameObject.inventory.contains(object)) {
 					return false;
 				}
 			}
@@ -161,7 +161,7 @@ public class ActionTakeItems extends VariableQtyAction {
 			return true;
 		}
 
-		if (target == objectToTakeFrom && performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
+		if (targetGameObject == objectToTakeFrom && performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 

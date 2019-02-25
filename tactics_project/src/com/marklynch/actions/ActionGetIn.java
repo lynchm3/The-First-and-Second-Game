@@ -38,7 +38,7 @@ public class ActionGetIn extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 0) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 0) {
 			return false;
 		}
 		return true;

@@ -51,8 +51,8 @@ public class ActionBuyItems extends VariableQtyAction {
 
 		if (Game.level.openInventories.size() > 0) {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			Level.addSecondaryAnimation(new AnimationGive(target, performer, objects[0], null));
-			Level.addSecondaryAnimation(new AnimationGive(performer, target, AnimationGive.gold, null));
+			Level.addSecondaryAnimation(new AnimationGive(targetGameObject, performer, objects[0], null));
+			Level.addSecondaryAnimation(new AnimationGive(performer, targetGameObject, AnimationGive.gold, null));
 		}
 
 		for (int i = 0; i < amountToSell; i++) {
@@ -60,11 +60,11 @@ public class ActionBuyItems extends VariableQtyAction {
 			GameObject object = objects[i];
 
 			performer.removeFromCarriedGoldValue(object.value);
-			((Actor) target).addToCarriedGoldValue(object.value);
+			((Actor) targetGameObject).addToCarriedGoldValue(object.value);
 			object.owner = performer;
 
-			if (target != null)
-				target.inventory.remove(object);
+			if (targetGameObject != null)
+				targetGameObject.inventory.remove(object);
 
 			performer.inventory.add(object);
 			if (object.owner == null)
@@ -73,12 +73,12 @@ public class ActionBuyItems extends VariableQtyAction {
 				sound.play();
 		}
 
-		if (Game.level.shouldLog(target, performer)) {
+		if (Game.level.shouldLog(targetGameObject, performer)) {
 			String amountToDropString = "";
 			if (amountToSell > 1)
 				amountToDropString = "x" + amountToSell;
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " bought ", objects[0], amountToDropString,
-					" from ", target, " for ", (objects[0].value * amountToSell), " gold" }));
+					" from ", targetGameObject, " for ", (objects[0].value * amountToSell), " gold" }));
 		}
 	}
 
@@ -93,7 +93,7 @@ public class ActionBuyItems extends VariableQtyAction {
 
 	@Override
 	public boolean checkRange() {
-		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
+		if (!performer.canSeeSquare(targetGameObject.squareGameObjectIsOn)) {
 			return false;
 		}
 		return true;

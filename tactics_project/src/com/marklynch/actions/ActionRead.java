@@ -33,7 +33,7 @@ public class ActionRead extends Action {
 			return;
 
 		Conversation conversation = null;
-		conversation = target.getConversation();
+		conversation = targetGameObject.getConversation();
 
 		if (conversation != null) {
 			Level.pausePlayer();
@@ -44,7 +44,7 @@ public class ActionRead extends Action {
 		}
 
 		if (performer == Level.player)
-			target.wasRead();
+			targetGameObject.wasRead();
 
 		if (sound != null)
 			sound.play();
@@ -55,7 +55,7 @@ public class ActionRead extends Action {
 		// if (!target.squareGameObjectIsOn.visibleToPlayer)
 		// return false;
 
-		if (target.getConversation() == null)
+		if (targetGameObject.getConversation() == null)
 			return false;
 
 		return true;
@@ -63,7 +63,7 @@ public class ActionRead extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.canSeeGameObject(target))
+		if (performer.canSeeGameObject(targetGameObject))
 			return true;
 		return false;
 	}

@@ -31,8 +31,8 @@ public class ActionTakeBite extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took a bite of ", target }));
+		if (Game.level.shouldLog(targetGameObject, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took a bite of ", targetGameObject }));
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
@@ -45,7 +45,7 @@ public class ActionTakeBite extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this.performer, target.owner, Crime.TYPE.CRIME_THEFT);
+			Crime crime = new Crime(this.performer, targetGameObject.owner, Crime.TYPE.CRIME_THEFT);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -61,19 +61,19 @@ public class ActionTakeBite extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1)
 			return false;
 		return true;
 	}
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, target, target.squareGameObjectIsOn, 1, legal, this.getClass());
+		return new Sound(performer, targetGameObject, targetGameObject.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

@@ -58,7 +58,7 @@ public class ActionFillSpecificContainer extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;

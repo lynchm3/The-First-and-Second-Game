@@ -39,13 +39,13 @@ public class ActionBuytemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionBuyItems(performer, (Actor) target, object).perform();
+			new ActionBuyItems(performer, (Actor) targetGameObject, object).perform();
 		} else {
 			int maxCanAfford = Math.floorDiv(performer.getCarriedGoldValue(), object.value);
 			int maxCanBuy = Math.min(maxCanAfford, inventorySquare.stack.size());
 
 			Game.level.player.inventory.showQTYDialog(
-					new ActionBuyItems(performer, (Actor) target, object.inventorySquare.stack), maxCanBuy,
+					new ActionBuyItems(performer, (Actor) targetGameObject, object.inventorySquare.stack), maxCanBuy,
 					"Enter qty to buy (max " + maxCanBuy + ")", object.value);
 		}
 	}
@@ -53,7 +53,7 @@ public class ActionBuytemsSelectedInInventory extends Action {
 	@Override
 	public boolean check() {
 
-		if (target == null || object == null) {
+		if (targetGameObject == null || object == null) {
 			return false;
 		}
 		if (!(performer instanceof Trader) && performer.getCarriedGoldValue() < object.value) {
@@ -65,7 +65,7 @@ public class ActionBuytemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
+		if (!performer.canSeeSquare(targetGameObject.squareGameObjectIsOn)) {
 			return false;
 		}
 		return true;

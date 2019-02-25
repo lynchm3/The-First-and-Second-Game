@@ -31,10 +31,10 @@ public class ActionHideInside extends Action {
 			return;
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", "" + target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", "" + targetGameObject }));
 
 		performer.squareGameObjectIsOn.inventory.remove(performer);
-		target.inventory.add(performer);
+		targetGameObject.inventory.add(performer);
 
 		if (sound != null)
 			sound.play();
@@ -51,7 +51,7 @@ public class ActionHideInside extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;
@@ -59,8 +59,8 @@ public class ActionHideInside extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.squareGameObjectIsOn.restricted() == true
-				&& !target.squareGameObjectIsOn.owners.contains(performer)) {
+		if (targetGameObject.squareGameObjectIsOn.restricted() == true
+				&& !targetGameObject.squareGameObjectIsOn.owners.contains(performer)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}

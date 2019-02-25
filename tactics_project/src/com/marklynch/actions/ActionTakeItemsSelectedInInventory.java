@@ -58,7 +58,7 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 	@Override
 	public boolean check() {
 
-		if (targetSquare == null && target == null)
+		if (targetSquare == null && targetGameObject == null)
 			return false;
 
 		return true;
@@ -67,14 +67,14 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (targetSquare == null && target == null)
+		if (targetSquare == null && targetGameObject == null)
 			return false;
 
 		if (targetSquare != null && performer.straightLineDistanceTo(targetSquare) < 2) {
 			return true;
 		}
 
-		if (target != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
+		if (targetGameObject != null && performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 

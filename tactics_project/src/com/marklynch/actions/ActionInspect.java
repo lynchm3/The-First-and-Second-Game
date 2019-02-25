@@ -29,7 +29,7 @@ public class ActionInspect extends Action {
 		if (!checkRange())
 			return;
 		Conversation conversation = null;
-		conversation = target.getConversation();
+		conversation = targetGameObject.getConversation();
 
 		if (conversation != null) {
 			Level.pausePlayer();

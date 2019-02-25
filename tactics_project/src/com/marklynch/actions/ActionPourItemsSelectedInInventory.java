@@ -56,8 +56,8 @@ public class ActionPourItemsSelectedInInventory extends Action {
 
 		System.out.println("ActionPourItemsSelectedInInventory.check() 1");
 		System.out.println("targetSquare = " + targetSquare);
-		System.out.println("target = " + target);
-		if (targetSquare == null && target == null)
+		System.out.println("target = " + targetGameObject);
+		if (targetSquare == null && targetGameObject == null)
 			return false;
 		System.out.println("ActionPourItemsSelectedInInventory.check() 2");
 

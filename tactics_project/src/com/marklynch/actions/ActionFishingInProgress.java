@@ -18,7 +18,7 @@ public class ActionFishingInProgress extends Action {
 	// Default for hostiles
 	public ActionFishingInProgress(Actor attacker, GameObject target) {
 		super(ACTION_NAME, textureFishing, attacker, target);
-		this.target = target;
+		this.targetGameObject = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -36,12 +36,12 @@ public class ActionFishingInProgress extends Action {
 		if (!checkRange())
 			return;
 
-		performer.fishingTarget = target;
-		target.beingFishedBy = performer;
+		performer.fishingTarget = targetGameObject;
+		targetGameObject.beingFishedBy = performer;
 
 		if (performer == Level.player) {
 			Level.levelMode = LevelMode.LEVEL_MODE_FISHING;
-			Player.playerTargetAction = new ActionFishingInProgress(performer, target);
+			Player.playerTargetAction = new ActionFishingInProgress(performer, targetGameObject);
 			Player.playerFirstMove = true;
 			// }
 		} else {
@@ -51,7 +51,7 @@ public class ActionFishingInProgress extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		if (!legal) {
-			Crime crime = new Crime(this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, target);
+			Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_THEFT, targetGameObject);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -77,7 +77,7 @@ public class ActionFishingInProgress extends Action {
 			return false;
 		}
 
-		if (target.remainingHealth <= 0)
+		if (targetGameObject.remainingHealth <= 0)
 			return false;
 
 		return true;
@@ -102,15 +102,15 @@ public class ActionFishingInProgress extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
 		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
 		if (shovel != null) {
-			float loudness = Math.max(target.soundWhenHit, shovel.soundWhenHitting);
-			return new Sound(performer, shovel, target.squareGameObjectIsOn, loudness, legal, this.getClass());
+			float loudness = Math.max(targetGameObject.soundWhenHit, shovel.soundWhenHitting);
+			return new Sound(performer, shovel, targetGameObject.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
 	}

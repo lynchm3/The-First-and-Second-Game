@@ -45,14 +45,14 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionGiveItems(gameObjectPerformer, target, logAsTake, objectToGive).perform();
+			new ActionGiveItems(gameObjectPerformer, targetGameObject, logAsTake, objectToGive).perform();
 		} else {
 			String qtyString = "Enter qty to give (have: " + inventorySquare.stack.size() + ")";
-			if (!(target instanceof Actor)) {
+			if (!(targetGameObject instanceof Actor)) {
 				qtyString = "Enter qty to put (have: " + +inventorySquare.stack.size() + ")";
 			}
 			Game.level.player.inventory.showQTYDialog(
-					new ActionGiveItems(gameObjectPerformer, target, logAsTake, objectToGive.inventorySquare.stack),
+					new ActionGiveItems(gameObjectPerformer, targetGameObject, logAsTake, objectToGive.inventorySquare.stack),
 					inventorySquare.stack.size(), qtyString, 0);
 		}
 	}
@@ -60,7 +60,7 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 	@Override
 	public boolean check() {
 
-		if (target == null)
+		if (targetGameObject == null)
 			return false;
 
 		return true;
@@ -70,7 +70,7 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 	public boolean checkRange() {
 
 		if (gameObjectPerformer instanceof Actor
-				&& !((Actor) gameObjectPerformer).canSeeSquare(target.squareGameObjectIsOn)) {
+				&& !((Actor) gameObjectPerformer).canSeeSquare(targetGameObject.squareGameObjectIsOn)) {
 			return false;
 		}
 

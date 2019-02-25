@@ -26,7 +26,7 @@ public class ActionUse extends Action {
 		}
 		if (performer.equipped == switchToUse) {
 			this.targetSquare = performer.squareGameObjectIsOn;
-			this.actionName = ACTION_NAME + " " + target.name;
+			this.actionName = ACTION_NAME + " " + targetGameObject.name;
 		}
 		this.actionName = ACTION_NAME;
 		this.switchToUse = switchToUse;

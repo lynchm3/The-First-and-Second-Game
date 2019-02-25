@@ -55,10 +55,10 @@ public class ActionOpenOtherInventory extends Action {
 		} else {
 
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_LOOT);
-			Game.level.player.inventory.otherInventory = target.inventory;
+			Game.level.player.inventory.otherInventory = targetGameObject.inventory;
 			// target.inventory.squaresX = 900;
 			Game.level.player.inventory.open();
-			Inventory.target = this.target;
+			Inventory.target = this.targetGameObject;
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 		}
@@ -83,11 +83,11 @@ public class ActionOpenOtherInventory extends Action {
 			return actionOpen.checkRange();
 		}
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 
-		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
+		if (!performer.canSeeSquare(targetGameObject.squareGameObjectIsOn)) {
 			return false;
 		}
 

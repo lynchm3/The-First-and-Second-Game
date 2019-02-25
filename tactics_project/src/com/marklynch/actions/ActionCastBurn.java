@@ -38,26 +38,26 @@ public class ActionCastBurn extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", target }));
-		if (Math.random() * 100 > target.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
-			target.removeWetEffect();
-			target.addEffect(new EffectBurn(performer, target, 5));
+		if (Game.level.shouldLog(targetGameObject, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", targetGameObject }));
+		if (Math.random() * 100 > targetGameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
+			targetGameObject.removeWetEffect();
+			targetGameObject.addEffect(new EffectBurn(performer, targetGameObject, 5));
 
 		} else {
 
-			if (Game.level.shouldLog(target, performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " resisted burn cast by ", performer }));
+			if (Game.level.shouldLog(targetGameObject, performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { targetGameObject, " resisted burn cast by ", performer }));
 
 		}
 
-		target.attackedBy(performer, this);
+		targetGameObject.attackedBy(performer, this);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
 		final Arrow fireBall = Templates.FIRE_BALL.makeCopy(null, null);
-		if (target.squareGameObjectIsOn != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (targetGameObject.squareGameObjectIsOn != null && performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			// performer.Level.addSecondaryAnimation(
 			// new AnimationThrown("Fire Ball", performer, this, target,
 			// target.squareGameObjectIsOn,
@@ -83,13 +83,13 @@ public class ActionCastBurn extends Action {
 		if (!legal) {
 
 			Actor victim;
-			if (target instanceof Actor)
-				victim = (Actor) target;
+			if (targetGameObject instanceof Actor)
+				victim = (Actor) targetGameObject;
 			else
-				victim = target.owner;
+				victim = targetGameObject.owner;
 
 			Crime.TYPE severity = Crime.TYPE.CRIME_ASSAULT;
-			if (!(target instanceof Actor))
+			if (!(targetGameObject instanceof Actor))
 				severity = Crime.TYPE.CRIME_ARSON;
 			Crime crime = new Crime(this.performer, victim, severity);
 			this.performer.crimesPerformedThisTurn.add(crime);
@@ -109,12 +109,12 @@ public class ActionCastBurn extends Action {
 		// if (!performer.canSeeGameObject(target))
 		// return false;
 
-		if (!target.attackable) {
+		if (!targetGameObject.attackable) {
 			disabledReason = CANT_BE_ATTACKED;
 			return false;
 		}
 
-		if (!performer.canSeeGameObject(target))
+		if (!performer.canSeeGameObject(targetGameObject))
 			return false;
 
 		return true;
@@ -136,13 +136,13 @@ public class ActionCastBurn extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
 
-		if (target.squareGameObjectIsOn == null)
+		if (targetGameObject.squareGameObjectIsOn == null)
 			return null;
 
 		// Sound
@@ -152,7 +152,7 @@ public class ActionCastBurn extends Action {
 
 		float loudness = 10f;
 		if (performer.equipped != null)
-			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
+			return new Sound(performer, performer.equipped, targetGameObject.squareGameObjectIsOn, loudness, legal,
 					this.getClass());
 		return null;
 	}

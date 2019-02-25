@@ -31,13 +31,13 @@ public class ActionChangeAppearance extends Action {
 		if (!checkRange())
 			return;
 
-		if (target.squareGameObjectIsOn != null) {
-			target.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_MAP_MARKER);
-			target.inventory.open();
-			target.inventory.filter(Inventory.inventoryFilterBy, true);
-			target.inventory.sort(Inventory.inventorySortBy, true, false);
+		if (targetGameObject.squareGameObjectIsOn != null) {
+			targetGameObject.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_MAP_MARKER);
+			targetGameObject.inventory.open();
+			targetGameObject.inventory.filter(Inventory.inventoryFilterBy, true);
+			targetGameObject.inventory.sort(Inventory.inventorySortBy, true, false);
 		} else {
-			((GameObject) target.inventoryThatHoldsThisObject.parent).imageTexture = target.imageTexture;
+			((GameObject) targetGameObject.inventoryThatHoldsThisObject.parent).imageTexture = targetGameObject.imageTexture;
 			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
 				inventory.close();
 			}

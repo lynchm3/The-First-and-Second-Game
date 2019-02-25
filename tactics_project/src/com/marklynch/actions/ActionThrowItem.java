@@ -58,7 +58,7 @@ public class ActionThrowItem extends Action {
 		}
 
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.setPrimaryAnimation(new AnimationThrow(performer, target, null));
+			performer.setPrimaryAnimation(new AnimationThrow(performer, targetGameObject, null));
 		}
 
 		// if (targetGameObject != null && targetGameObject.attackable) {
@@ -81,7 +81,7 @@ public class ActionThrowItem extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		Level.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this, target, targetSquare,
+		Level.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this, targetGameObject, targetSquare,
 				gameObjectToThrow, gameObjectToThrow, 2f, 0.5f, true, null));
 
 		if (performer.equipped == gameObjectToThrow) {
@@ -122,13 +122,13 @@ public class ActionThrowItem extends Action {
 		if (!legal) {
 
 			Actor victim = null;
-			if (target instanceof Actor)
-				victim = (Actor) target;
-			else if (target != null)
-				victim = target.owner;
+			if (targetGameObject instanceof Actor)
+				victim = (Actor) targetGameObject;
+			else if (targetGameObject != null)
+				victim = targetGameObject.owner;
 			if (victim != null) {
 				Crime.TYPE severity = Crime.TYPE.CRIME_ASSAULT;
-				if (!(target instanceof Actor))
+				if (!(targetGameObject instanceof Actor))
 					severity = Crime.TYPE.CRIME_VANDALISM;
 				Crime crime = new Crime(this.performer, victim, Crime.TYPE.CRIME_ASSAULT);
 				this.performer.crimesPerformedThisTurn.add(crime);
@@ -145,7 +145,7 @@ public class ActionThrowItem extends Action {
 	@Override
 	public boolean check() {
 
-		if (targetSquare == null && target == null)
+		if (targetSquare == null && targetGameObject == null)
 			return false;
 
 		float maxDistance = (performer.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH) * 100)
@@ -164,7 +164,7 @@ public class ActionThrowItem extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (targetSquare == null && target == null)
+		if (targetSquare == null && targetGameObject == null)
 			return false;
 
 		if (!performer.canSeeSquare(targetSquare)) {
@@ -177,18 +177,18 @@ public class ActionThrowItem extends Action {
 	@Override
 	public boolean checkLegality() {
 		// Empty square, it's fine
-		if (target == null)
+		if (targetGameObject == null)
 			return true;
 
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
 
 		// Sound
-		if (target != null) {
-			float loudness = Math.max(target.soundWhenHit, gameObjectToThrow.soundWhenHitting);
+		if (targetGameObject != null) {
+			float loudness = Math.max(targetGameObject.soundWhenHit, gameObjectToThrow.soundWhenHitting);
 			// float loudness = targetGameObject.soundWhenHit *
 			// projectile.soundWhenHitting;
 			if (performer.equipped != null)

@@ -29,11 +29,11 @@ public class ActionPet extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " petted ", target }));
+		if (Game.level.shouldLog(targetGameObject, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " petted ", targetGameObject }));
 		if (performer == Game.level.player && Math.random() > 0.9d) {
-			if (Game.level.shouldLog(target, performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " wonders what your deal is" }));
+			if (Game.level.shouldLog(targetGameObject, performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { targetGameObject, " wonders what your deal is" }));
 		}
 
 		if (sound != null)
@@ -48,7 +48,7 @@ public class ActionPet extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;

@@ -31,25 +31,25 @@ public class ActionLift extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(target, performer))
+		if (Game.level.shouldLog(targetGameObject, performer))
 			if (legal)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", target }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", targetGameObject }));
 			else
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", target }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", targetGameObject }));
 
 		if (performer.inventory.contains(performer.equipped))
 			performer.equippedBeforePickingUpObject = performer.equipped;
-		target.squareGameObjectIsOn.inventory.remove(target);
-		if (target.fitsInInventory)
-			performer.inventory.add(target);
-		performer.equip(target);
-		if (target.owner == null)
-			target.owner = performer;
+		targetGameObject.squareGameObjectIsOn.inventory.remove(targetGameObject);
+		if (targetGameObject.fitsInInventory)
+			performer.inventory.add(targetGameObject);
+		performer.equip(targetGameObject);
+		if (targetGameObject.owner == null)
+			targetGameObject.owner = performer;
 		if (sound != null)
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this.performer, target.owner, Crime.TYPE.CRIME_THEFT, target);
+			Crime crime = new Crime(this.performer, targetGameObject.owner, Crime.TYPE.CRIME_THEFT, targetGameObject);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -58,11 +58,11 @@ public class ActionLift extends Action {
 
 	@Override
 	public boolean check() {
-		if (target.moveable == false)
+		if (targetGameObject.moveable == false)
 			return false;
 
 		float maxWeightForPerformer = 50f + performer.getEffectiveHighLevelStat(HIGH_LEVEL_STATS.STRENGTH) * 10f;
-		if (target.weight > maxWeightForPerformer) {
+		if (targetGameObject.weight > maxWeightForPerformer) {
 			disabledReason = TOO_HEAVY;
 			return false;
 		}
@@ -72,7 +72,7 @@ public class ActionLift extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;
@@ -80,9 +80,9 @@ public class ActionLift extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.owner != null && target.owner != performer) {
+		if (targetGameObject.owner != null && targetGameObject.owner != performer) {
 			illegalReason = THEFT;
-			if (target.value > 100)
+			if (targetGameObject.value > 100)
 				illegalReason = GRAND_THEFT;
 
 			return false;

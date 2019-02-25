@@ -19,7 +19,7 @@ public class ActionCastPoison extends Action {
 	// Default for hostiles
 	public ActionCastPoison(Actor attacker, GameObject target) {
 		super(ACTION_NAME, texturePoison, attacker, target);
-		this.target = target;
+		this.targetGameObject = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -37,32 +37,32 @@ public class ActionCastPoison extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast poison on ", target }));
-		if (target instanceof ContainerForLiquids && target.inventory.size() != 0) {
-			ContainerForLiquids containerForLiquids = (ContainerForLiquids) target;
-			target.inventory.remove(target.inventory.get(0));
+		if (Game.level.shouldLog(targetGameObject, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast poison on ", targetGameObject }));
+		if (targetGameObject instanceof ContainerForLiquids && targetGameObject.inventory.size() != 0) {
+			ContainerForLiquids containerForLiquids = (ContainerForLiquids) targetGameObject;
+			targetGameObject.inventory.remove(targetGameObject.inventory.get(0));
 			Liquid poison = Templates.POISON.makeCopy(null, containerForLiquids.owner, containerForLiquids.volume);
-			target.inventory.add(poison);
+			targetGameObject.inventory.add(poison);
 
-			if (Game.level.shouldLog(target, performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " made ", poison, " in ", target }));
+			if (Game.level.shouldLog(targetGameObject, performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " made ", poison, " in ", targetGameObject }));
 		} else {
-			if (Math.random() * 100 > target.highLevelStats.get(HIGH_LEVEL_STATS.POISON_DAMAGE).value) {
-				target.addEffect(new EffectPoison(performer, target, 5));
+			if (Math.random() * 100 > targetGameObject.highLevelStats.get(HIGH_LEVEL_STATS.POISON_DAMAGE).value) {
+				targetGameObject.addEffect(new EffectPoison(performer, targetGameObject, 5));
 
-				if (target.squareGameObjectIsOn != null) {
-					target.squareGameObjectIsOn.liquidSpread(Templates.POISON);
+				if (targetGameObject.squareGameObjectIsOn != null) {
+					targetGameObject.squareGameObjectIsOn.liquidSpread(Templates.POISON);
 				}
 			} else {
 
-				if (Game.level.shouldLog(target, performer))
+				if (Game.level.shouldLog(targetGameObject, performer))
 					Game.level.logOnScreen(
-							new ActivityLog(new Object[] { target, " resisted poison cast by ", performer }));
+							new ActivityLog(new Object[] { targetGameObject, " resisted poison cast by ", performer }));
 			}
 		}
 
-		target.attackedBy(performer, this);
+		targetGameObject.attackedBy(performer, this);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
@@ -87,13 +87,13 @@ public class ActionCastPoison extends Action {
 		if (!legal) {
 
 			Actor victim;
-			if (target instanceof Actor)
-				victim = (Actor) target;
+			if (targetGameObject instanceof Actor)
+				victim = (Actor) targetGameObject;
 			else
-				victim = target.owner;
+				victim = targetGameObject.owner;
 
 			Crime.TYPE severity = Crime.TYPE.CRIME_ASSAULT;
-			if (!(target instanceof Actor))
+			if (!(targetGameObject instanceof Actor))
 				severity = Crime.TYPE.CRIME_VANDALISM;
 			Crime crime = new Crime(this.performer, victim, severity);
 			this.performer.crimesPerformedThisTurn.add(crime);
@@ -113,12 +113,12 @@ public class ActionCastPoison extends Action {
 		// if (!performer.canSeeGameObject(target))
 		// return false;
 
-		if (!target.attackable) {
+		if (!targetGameObject.attackable) {
 			disabledReason = CANT_BE_ATTACKED;
 			return false;
 		}
 
-		if (!performer.canSeeGameObject(target))
+		if (!performer.canSeeGameObject(targetGameObject))
 			return false;
 
 		return true;
@@ -139,13 +139,13 @@ public class ActionCastPoison extends Action {
 	// }
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
 
-		if (target.squareGameObjectIsOn == null)
+		if (targetGameObject.squareGameObjectIsOn == null)
 			return null;
 
 		// Sound
@@ -155,7 +155,7 @@ public class ActionCastPoison extends Action {
 
 		float loudness = 5;
 		if (performer.equipped != null)
-			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
+			return new Sound(performer, performer.equipped, targetGameObject.squareGameObjectIsOn, loudness, legal,
 					this.getClass());
 		return null;
 	}

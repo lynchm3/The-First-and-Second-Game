@@ -60,11 +60,11 @@ public class ActionGiveItems extends VariableQtyAction {
 		if (Game.level.openInventories.size() > 0) {
 		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen()
 				&& gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
-			Level.addSecondaryAnimation(new AnimationGive(gameObjectPerformer, target, objects[0], null));
+			Level.addSecondaryAnimation(new AnimationGive(gameObjectPerformer, targetGameObject, objects[0], null));
 		}
 
-		if (target instanceof Openable) {
-			((Openable) target).open();
+		if (targetGameObject instanceof Openable) {
+			((Openable) targetGameObject).open();
 		}
 
 		for (int i = 0; i < amountToGive; i++) {
@@ -92,26 +92,26 @@ public class ActionGiveItems extends VariableQtyAction {
 			}
 			gameObjectPerformer.inventory.remove(object);
 
-			if (target instanceof Actor && !logAsTake) {
-				object.owner = (Actor) target;
+			if (targetGameObject instanceof Actor && !logAsTake) {
+				object.owner = (Actor) targetGameObject;
 			}
 
-			target.inventory.add(object);
+			targetGameObject.inventory.add(object);
 		}
 
-		if (Game.level.shouldLog(target, gameObjectPerformer)) {
+		if (Game.level.shouldLog(targetGameObject, gameObjectPerformer)) {
 			String amountToDropString = "";
 			if (amountToGive > 1)
 				amountToDropString = "x" + amountToGive;
 			if (logAsTake)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " took ", objects[0], amountToDropString,
+				Game.level.logOnScreen(new ActivityLog(new Object[] { targetGameObject, " took ", objects[0], amountToDropString,
 						" from ", gameObjectPerformer }));
-			else if (target instanceof Actor)
+			else if (targetGameObject instanceof Actor)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " gave ", objects[0],
-						amountToDropString, " to ", target }));
+						amountToDropString, " to ", targetGameObject }));
 			else
 				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { gameObjectPerformer, " put ", objects[0], amountToDropString, " in ", target }));
+						new Object[] { gameObjectPerformer, " put ", objects[0], amountToDropString, " in ", targetGameObject }));
 		}
 
 		if (sound != null)
@@ -128,7 +128,7 @@ public class ActionGiveItems extends VariableQtyAction {
 	public boolean checkRange() {
 
 		if (gameObjectPerformer instanceof Actor
-				&& !((Actor) gameObjectPerformer).canSeeSquare(target.squareGameObjectIsOn)) {
+				&& !((Actor) gameObjectPerformer).canSeeSquare(targetGameObject.squareGameObjectIsOn)) {
 			return false;
 		}
 

@@ -41,26 +41,26 @@ public class ActionSkin extends Action {
 
 		Knife knife = (Knife) performer.inventory.getGameObjectOfClass(Knife.class);
 
-		target.changeHealth(-target.remainingHealth, performer, this);
+		targetGameObject.changeHealth(-targetGameObject.remainingHealth, performer, this);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
 		Actor oreOwner = performer;
-		if (target.owner != null)
-			oreOwner = target.owner;
+		if (targetGameObject.owner != null)
+			oreOwner = targetGameObject.owner;
 
 		GameObject fur = Templates.FUR.makeCopy(null, oreOwner);
 		performer.inventory.add(fur);
 
-		if (Game.level.shouldLog(target, performer))
+		if (Game.level.shouldLog(targetGameObject, performer))
 			Game.level.logOnScreen(
-					new ActivityLog(new Object[] { performer, " skinned ", fur, " from ", target, " with ", knife }));
+					new ActivityLog(new Object[] { performer, " skinned ", fur, " from ", targetGameObject, " with ", knife }));
 
-		new ActiontTakeAll(performer, target).perform();
+		new ActiontTakeAll(performer, targetGameObject).perform();
 
-		target.checkIfDestroyed(performer, this);
+		targetGameObject.checkIfDestroyed(performer, this);
 
-		target.showPow();
+		targetGameObject.showPow();
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
@@ -72,7 +72,7 @@ public class ActionSkin extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, fur);
+			Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_THEFT, fur);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -94,7 +94,7 @@ public class ActionSkin extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 
@@ -109,7 +109,7 @@ public class ActionSkin extends Action {
 			return false;
 		}
 
-		if (target.owner != null && target.owner != performer) {
+		if (targetGameObject.owner != null && targetGameObject.owner != performer) {
 			illegalReason = THEFT;
 			return false;
 		}
@@ -121,8 +121,8 @@ public class ActionSkin extends Action {
 	public Sound createSound() {
 		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
 		if (pickaxe != null) {
-			float loudness = Math.max(target.soundWhenHit, pickaxe.soundWhenHitting);
-			return new Sound(performer, pickaxe, target.squareGameObjectIsOn, loudness, legal, this.getClass());
+			float loudness = Math.max(targetGameObject.soundWhenHit, pickaxe.soundWhenHitting);
+			return new Sound(performer, pickaxe, targetGameObject.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
 	}

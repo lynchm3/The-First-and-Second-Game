@@ -55,10 +55,10 @@ public class ActionDigging extends Action {
 			performer.equippedBeforePickingUpObject = performer.equipped;
 		performer.equipped = shovel;
 
-		performer.setPrimaryAnimation(new AnimationSlash(performer, target, new OnCompletionListener() {
+		performer.setPrimaryAnimation(new AnimationSlash(performer, targetGameObject, new OnCompletionListener() {
 			@Override
 			public void animationComplete(GameObject gameObject) {
-				if (target != null && target.diggable) {
+				if (targetGameObject != null && targetGameObject.diggable) {
 					postMeleeAnimation();
 				} else {
 					Game.level
@@ -94,25 +94,25 @@ public class ActionDigging extends Action {
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
-		target.squareGameObjectIsOn.setFloorImageTexture(Square.MUD_TEXTURE);
+		targetGameObject.squareGameObjectIsOn.setFloorImageTexture(Square.MUD_TEXTURE);
 
-		if (!target.hiddenObject && target.level <= performer.level) {
-			new ActionDiscover(performer, target).perform();
+		if (!targetGameObject.hiddenObject && targetGameObject.level <= performer.level) {
+			new ActionDiscover(performer, targetGameObject).perform();
 		}
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dug up ", target, " with ", shovel }));
+		if (Game.level.shouldLog(targetGameObject, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dug up ", targetGameObject, " with ", shovel }));
 
-		for (GameObject buriedGamObject : (ArrayList<GameObject>) target.inventory.gameObjects.clone()) {
+		for (GameObject buriedGamObject : (ArrayList<GameObject>) targetGameObject.inventory.gameObjects.clone()) {
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 				Level.addSecondaryAnimation(new AnimationTake(buriedGamObject, performer, 0, 0, 1f, null));
 			}
 			performer.inventory.add(buriedGamObject);
-			if (Game.level.shouldLog(target, performer))
+			if (Game.level.shouldLog(targetGameObject, performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", buriedGamObject }));
 			if (!legal) {
-				Crime crime = new Crime(this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, buriedGamObject);
+				Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_THEFT, buriedGamObject);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
@@ -121,11 +121,11 @@ public class ActionDigging extends Action {
 			}
 		}
 
-		float damage = target.remainingHealth;
-		target.changeHealthSafetyOff(-damage, null, null);
-		target.checkIfDestroyed(performer, this);
+		float damage = targetGameObject.remainingHealth;
+		targetGameObject.changeHealthSafetyOff(-damage, null, null);
+		targetGameObject.checkIfDestroyed(performer, this);
 
-		target.showPow();
+		targetGameObject.showPow();
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
@@ -150,7 +150,7 @@ public class ActionDigging extends Action {
 			return false;
 		}
 
-		if (target != null && target.remainingHealth <= 0) {
+		if (targetGameObject != null && targetGameObject.remainingHealth <= 0) {
 			disabledReason = null;
 			return false;
 		}
@@ -169,28 +169,28 @@ public class ActionDigging extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target == null)
+		if (targetGameObject == null)
 			return true;
 
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
-		if (target == null)
+		if (targetGameObject == null)
 			return null;
 
 		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
 		if (shovel != null) {
-			float loudness = Math.max(target.soundWhenHit, shovel.soundWhenHitting);
-			return new Sound(performer, shovel, target.squareGameObjectIsOn, loudness, legal, this.getClass());
+			float loudness = Math.max(targetGameObject.soundWhenHit, shovel.soundWhenHitting);
+			return new Sound(performer, shovel, targetGameObject.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
 	}
 
 	@Override
 	public boolean shouldContinue() {
-		if (target == null) {
+		if (targetGameObject == null) {
 			if (performed)
 				return false;
 			else
@@ -201,7 +201,7 @@ public class ActionDigging extends Action {
 			return false;
 		}
 
-		if (target.remainingHealth <= 0) {
+		if (targetGameObject.remainingHealth <= 0) {
 			disabledReason = null;
 			return false;
 		}

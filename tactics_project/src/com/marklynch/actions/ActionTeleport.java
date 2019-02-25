@@ -56,15 +56,15 @@ public class ActionTeleport extends Action {
 			new ActionStopPeeking(performer).perform();
 		}
 
-		if (target != gameObjectPerformer) {
+		if (targetGameObject != gameObjectPerformer) {
 			gameObjectPerformer.setPrimaryAnimation(new AnimationPush(gameObjectPerformer, squareToTeleportTo,
 					gameObjectPerformer.getPrimaryAnimation(), null));
 		}
 
-		Square startSquare = target.squareGameObjectIsOn;
+		Square startSquare = targetGameObject.squareGameObjectIsOn;
 
-		boolean straightenUp = performer == target;
-		target.setPrimaryAnimation(new AnimationTeleport(target, startSquare, squareToTeleportTo, straightenUp,
+		boolean straightenUp = performer == targetGameObject;
+		targetGameObject.setPrimaryAnimation(new AnimationTeleport(targetGameObject, startSquare, squareToTeleportTo, straightenUp,
 				new OnCompletionListener() {
 					@Override
 					public void animationComplete(GameObject gameObject) {
@@ -79,30 +79,30 @@ public class ActionTeleport extends Action {
 		if (performer == Game.level.player)
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 
-		if (log && Game.level.shouldLog(gameObjectPerformer, target)) {
-			if (gameObjectPerformer == target)
+		if (log && Game.level.shouldLog(gameObjectPerformer, targetGameObject)) {
+			if (gameObjectPerformer == targetGameObject)
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { gameObjectPerformer, " teleported to ", squareToTeleportTo }));
 			else
 				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { gameObjectPerformer, " teleported ", target, " to ", squareToTeleportTo }));
+						new Object[] { gameObjectPerformer, " teleported ", targetGameObject, " to ", squareToTeleportTo }));
 		}
 
 		// Teleported big object on to big object... someone has to die.
 		if (gameObjectInTheWay != null) {
-			float damage = Math.min(target.remainingHealth, gameObjectInTheWay.remainingHealth);
-			if (log && Game.level.shouldLog(target, gameObjectInTheWay))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " teleported in to ", gameObjectInTheWay,
+			float damage = Math.min(targetGameObject.remainingHealth, gameObjectInTheWay.remainingHealth);
+			if (log && Game.level.shouldLog(targetGameObject, gameObjectInTheWay))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { targetGameObject, " teleported in to ", gameObjectInTheWay,
 						", both took " + damage + " damage" }));
 
-			target.changeHealth(-damage, gameObjectPerformer, this);
+			targetGameObject.changeHealth(-damage, gameObjectPerformer, this);
 			gameObjectInTheWay.changeHealth(-damage, gameObjectPerformer, this);
 
-			if (gameObjectPerformer == target) {
-				target.changeHealth(-damage, gameObjectInTheWay, this);
-				gameObjectInTheWay.changeHealth(-damage, target, this);
+			if (gameObjectPerformer == targetGameObject) {
+				targetGameObject.changeHealth(-damage, gameObjectInTheWay, this);
+				gameObjectInTheWay.changeHealth(-damage, targetGameObject, this);
 			} else {
-				target.changeHealth(-damage, gameObjectPerformer, this);
+				targetGameObject.changeHealth(-damage, gameObjectPerformer, this);
 				gameObjectInTheWay.changeHealth(-damage, gameObjectPerformer, this);
 			}
 
@@ -115,15 +115,15 @@ public class ActionTeleport extends Action {
 
 			// GameObject gameObjectInTheWay = null;
 			if (gameObjectInTheWay != null) {
-				if (target != Game.level.player && target.owner != null && target.owner != Game.level.player) {
+				if (targetGameObject != Game.level.player && targetGameObject.owner != null && targetGameObject.owner != Game.level.player) {
 					Actor victim;
 					Crime.TYPE severity;
-					if (target instanceof Actor) {
-						victim = (Actor) target;
+					if (targetGameObject instanceof Actor) {
+						victim = (Actor) targetGameObject;
 						severity = Crime.TYPE.CRIME_ASSAULT;
 
 					} else {
-						victim = target.owner;
+						victim = targetGameObject.owner;
 						severity = Crime.TYPE.CRIME_VANDALISM;
 					}
 					Crime crime = new Crime(this.performer, victim, severity);
@@ -154,7 +154,7 @@ public class ActionTeleport extends Action {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
 
-		if (target == Level.player && !squareToTeleportTo.onScreen()) {
+		if (targetGameObject == Level.player && !squareToTeleportTo.onScreen()) {
 			Game.level.centerToSquare = true;
 			Game.level.squareToCenterTo = squareToTeleportTo;
 		}
@@ -167,7 +167,7 @@ public class ActionTeleport extends Action {
 			Game.level.endPlayerTurn();
 
 		if (performer != null)
-			trespassingCheck(this, performer, target.squareGameObjectIsOn);
+			trespassingCheck(this, performer, targetGameObject.squareGameObjectIsOn);
 
 		Level.teleportee = null;
 	}
@@ -178,7 +178,7 @@ public class ActionTeleport extends Action {
 	@Override
 	public boolean check() {
 
-		if (!target.moveable || target.isFloorObject)
+		if (!targetGameObject.moveable || targetGameObject.isFloorObject)
 			return false;
 
 		// if (squareToTeleportTo == target.squareGameObjectIsOn)
@@ -203,13 +203,13 @@ public class ActionTeleport extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (squareToTeleportTo.restricted() == true && !squareToTeleportTo.owners.contains(target)) {
+		if (squareToTeleportTo.restricted() == true && !squareToTeleportTo.owners.contains(targetGameObject)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}
 
-		if (target != gameObjectPerformer) {
-			boolean legalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, target);
+		if (targetGameObject != gameObjectPerformer) {
+			boolean legalToPerformOnTeleportee = standardAttackLegalityCheck(gameObjectPerformer, targetGameObject);
 			if (!legalToPerformOnTeleportee) {
 				return false;
 			}
@@ -228,9 +228,9 @@ public class ActionTeleport extends Action {
 
 		// Sound of glass
 		ArrayList<GameObject> stampables = squareToTeleportTo.inventory.getGameObjectsOfClass(Stampable.class);
-		if (!(target instanceof Blind) && stampables.size() > 0) {
+		if (!(targetGameObject instanceof Blind) && stampables.size() > 0) {
 			for (GameObject stampable : stampables) {
-				return new Sound(target, stampable, squareToTeleportTo, 10, legal, this.getClass());
+				return new Sound(targetGameObject, stampable, squareToTeleportTo, 10, legal, this.getClass());
 			}
 		}
 		return null;

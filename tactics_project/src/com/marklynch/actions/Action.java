@@ -134,7 +134,7 @@ public abstract class Action {
 
 	public Actor performer;
 	public GameObject gameObjectPerformer;
-	public GameObject target;
+	public GameObject targetGameObject;
 	public Square targetSquare;
 	public String actionName;
 	public Object targetGameObjectOrSquare;
@@ -158,11 +158,11 @@ public abstract class Action {
 
 		this.targetGameObjectOrSquare = targetGameObjectOrSquare;
 		if (targetGameObjectOrSquare instanceof GameObject) {
-			this.target = (GameObject) targetGameObjectOrSquare;
-			this.targetSquare = this.target.squareGameObjectIsOn;
+			this.targetGameObject = (GameObject) targetGameObjectOrSquare;
+			this.targetSquare = this.targetGameObject.squareGameObjectIsOn;
 		} else if (targetGameObjectOrSquare instanceof Square) {
 			this.targetSquare = (Square) targetGameObjectOrSquare;
-			this.target = targetSquare.inventory.getGameObjectThatCantShareSquare1();
+			this.targetGameObject = targetSquare.inventory.getGameObjectThatCantShareSquare1();
 		}
 
 		this.actionName = actionName;

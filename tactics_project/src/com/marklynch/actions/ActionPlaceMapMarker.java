@@ -42,7 +42,7 @@ public class ActionPlaceMapMarker extends Action {
 		mapMarker.inventory.add(Templates.MAP_MARKER_PORTAL.makeCopy(null, null));
 
 		if (Game.level.shouldLog(Game.level.player))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { "Added map marker to ", target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { "Added map marker to ", targetGameObject }));
 
 		Level.markerList.add(mapMarker);
 

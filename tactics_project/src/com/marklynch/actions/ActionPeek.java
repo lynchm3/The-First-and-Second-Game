@@ -31,24 +31,24 @@ public class ActionPeek extends Action {
 		// target.actorsHidingHere.add(performer);
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " peeked through ", target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " peeked through ", targetGameObject }));
 
 		if (performer == Game.level.player) {
 
-			performer.peekingThrough = target;
-			Game.level.player.peekingThrough = target;
+			performer.peekingThrough = targetGameObject;
+			Game.level.player.peekingThrough = targetGameObject;
 
 			Square peekSquare = null;
-			if (target.squareGameObjectIsOn.xInGrid < performer.squareGameObjectIsOn.xInGrid) {
+			if (targetGameObject.squareGameObjectIsOn.xInGrid < performer.squareGameObjectIsOn.xInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid
 						- 2][performer.squareGameObjectIsOn.yInGrid];
-			} else if (target.squareGameObjectIsOn.xInGrid > performer.squareGameObjectIsOn.xInGrid) {
+			} else if (targetGameObject.squareGameObjectIsOn.xInGrid > performer.squareGameObjectIsOn.xInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid
 						+ 2][performer.squareGameObjectIsOn.yInGrid];
-			} else if (target.squareGameObjectIsOn.yInGrid < performer.squareGameObjectIsOn.yInGrid) {
+			} else if (targetGameObject.squareGameObjectIsOn.yInGrid < performer.squareGameObjectIsOn.yInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid][performer.squareGameObjectIsOn.yInGrid
 						- 2];
-			} else if (target.squareGameObjectIsOn.yInGrid > performer.squareGameObjectIsOn.yInGrid) {
+			} else if (targetGameObject.squareGameObjectIsOn.yInGrid > performer.squareGameObjectIsOn.yInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid][performer.squareGameObjectIsOn.yInGrid
 						+ 2];
 			}
@@ -58,7 +58,7 @@ public class ActionPeek extends Action {
 				Game.level.player.calculateVisibleSquares(peekSquare);
 		}
 		if (!legal) {
-			Crime crime = new Crime(this.performer, target.owner, Crime.TYPE.CRIME_VOYEURISM);
+			Crime crime = new Crime(this.performer, targetGameObject.owner, Crime.TYPE.CRIME_VOYEURISM);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -74,7 +74,7 @@ public class ActionPeek extends Action {
 
 	@Override
 	public boolean checkRange() {
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;
@@ -82,8 +82,8 @@ public class ActionPeek extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.squareGameObjectIsOn.restricted() == true
-				&& !target.squareGameObjectIsOn.owners.contains(performer)) {
+		if (targetGameObject.squareGameObjectIsOn.restricted() == true
+				&& !targetGameObject.squareGameObjectIsOn.owners.contains(performer)) {
 			illegalReason = TRESPASSING;
 			return false;
 		}

@@ -18,7 +18,7 @@ public class ActionCastDouse extends Action {
 	// Default for hostiles
 	public ActionCastDouse(Actor attacker, GameObject target) {
 		super(ACTION_NAME, textureDouse, attacker, target);
-		this.target = target;
+		this.targetGameObject = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -36,22 +36,22 @@ public class ActionCastDouse extends Action {
 		if (!checkRange())
 			return;
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast douse on ", target }));
-		target.removeBurningEffect();
-		if (target instanceof ContainerForLiquids) {
-			if (target.inventory.size() == 0) {
-				Liquid water = Templates.WATER.makeCopy(null, performer, ((ContainerForLiquids) target).volume);
-				target.inventory.add(water);
+		if (Game.level.shouldLog(targetGameObject, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast douse on ", targetGameObject }));
+		targetGameObject.removeBurningEffect();
+		if (targetGameObject instanceof ContainerForLiquids) {
+			if (targetGameObject.inventory.size() == 0) {
+				Liquid water = Templates.WATER.makeCopy(null, performer, ((ContainerForLiquids) targetGameObject).volume);
+				targetGameObject.inventory.add(water);
 
-				if (Game.level.shouldLog(target, performer))
+				if (Game.level.shouldLog(targetGameObject, performer))
 					Game.level.logOnScreen(
-							new ActivityLog(new Object[] { performer, " filled ", target, " with ", water }));
+							new ActivityLog(new Object[] { performer, " filled ", targetGameObject, " with ", water }));
 			}
 		} else {
-			target.addEffect(new EffectWet(performer, target, 5));
-			if (target.squareGameObjectIsOn != null) {
-				target.squareGameObjectIsOn.liquidSpread(Templates.WATER);
+			targetGameObject.addEffect(new EffectWet(performer, targetGameObject, 5));
+			if (targetGameObject.squareGameObjectIsOn != null) {
+				targetGameObject.squareGameObjectIsOn.liquidSpread(Templates.WATER);
 			}
 		}
 		// if (Math.random() * 100 > target.fireResistance) {
@@ -88,10 +88,10 @@ public class ActionCastDouse extends Action {
 		if (!legal) {
 
 			Actor victim;
-			if (target instanceof Actor)
-				victim = (Actor) target;
+			if (targetGameObject instanceof Actor)
+				victim = (Actor) targetGameObject;
 			else
-				victim = target.owner;
+				victim = targetGameObject.owner;
 
 			Crime crime = new Crime(this.performer, victim, Crime.TYPE.CRIME_DOUSE);
 			this.performer.crimesPerformedThisTurn.add(crime);
@@ -111,12 +111,12 @@ public class ActionCastDouse extends Action {
 		// if (!performer.canSeeGameObject(target))
 		// return false;
 
-		if (!target.attackable) {
+		if (!targetGameObject.attackable) {
 			disabledReason = CANT_BE_ATTACKED;
 			return false;
 		}
 
-		if (!performer.canSeeGameObject(target))
+		if (!performer.canSeeGameObject(targetGameObject))
 			return false;
 
 		return true;
@@ -125,7 +125,7 @@ public class ActionCastDouse extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (!target.attackable)
+		if (!targetGameObject.attackable)
 			return false;
 
 		return true;
@@ -141,13 +141,13 @@ public class ActionCastDouse extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
 
-		if (target.squareGameObjectIsOn == null)
+		if (targetGameObject.squareGameObjectIsOn == null)
 			return null;
 
 		// Sound
@@ -157,7 +157,7 @@ public class ActionCastDouse extends Action {
 
 		float loudness = 5;
 		if (performer.equipped != null)
-			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
+			return new Sound(performer, performer.equipped, targetGameObject.squareGameObjectIsOn, loudness, legal,
 					this.getClass());
 		return null;
 	}

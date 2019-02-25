@@ -46,10 +46,10 @@ public class ActionPourItem extends Action {
 			return;
 		System.out.println("Pouritem.perform 3");
 
-		if (Game.level.shouldLog(target, performer)) {
-			if (target != null) {
+		if (Game.level.shouldLog(targetGameObject, performer)) {
+			if (targetGameObject != null) {
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " poured ", containerForLiquids, " on ", target }));
+						new ActivityLog(new Object[] { performer, " poured ", containerForLiquids, " on ", targetGameObject }));
 			} else {
 				Game.level
 						.logOnScreen(new ActivityLog(new Object[] { performer, " poured out ", containerForLiquids }));
@@ -65,6 +65,8 @@ public class ActionPourItem extends Action {
 			}
 		}
 		System.out.println("Pouritem.perform 5");
+
+		targetSquare.liquidSpread(containerForLiquids.liquid);
 
 		GameObject newJar = Templates.JAR.makeCopy(null, containerForLiquids.owner);
 		performer.inventory.add(newJar);
@@ -91,10 +93,10 @@ public class ActionPourItem extends Action {
 
 			Actor victim = null;
 
-			if (target instanceof Actor)
-				victim = (Actor) target;
-			else if (target != null)
-				victim = target.owner;
+			if (targetGameObject instanceof Actor)
+				victim = (Actor) targetGameObject;
+			else if (targetGameObject != null)
+				victim = targetGameObject.owner;
 			if (victim != null) {
 				Crime crime = new Crime(this.performer, victim, Crime.TYPE.CRIME_DOUSE);
 				this.performer.crimesPerformedThisTurn.add(crime);
@@ -110,10 +112,10 @@ public class ActionPourItem extends Action {
 	@Override
 	public boolean check() {
 
-		if (targetSquare == null && target == null) {
+		if (targetSquare == null && targetGameObject == null) {
 			System.out.println("ActionPourSpecificItem cehck false 1");
 			System.out.println("targetSquare = " + targetSquare);
-			System.out.println("target = " + target);
+			System.out.println("target = " + targetGameObject);
 			return false;
 		}
 
@@ -147,18 +149,18 @@ public class ActionPourItem extends Action {
 	@Override
 	public boolean checkLegality() {
 		// Empty square, it's fine
-		if (target == null)
+		if (targetGameObject == null)
 			return true;
 
 		// Something that belongs to some one else
-		if (target.owner != null && target.owner != performer) {
+		if (targetGameObject.owner != null && targetGameObject.owner != performer) {
 			illegalReason = VANDALISM;
 			return false;
 		}
 
 		// Is human
-		if (target instanceof Actor)
-			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal)) {
+		if (targetGameObject instanceof Actor)
+			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal)) {
 				illegalReason = ASSAULT;
 				return false;
 			}

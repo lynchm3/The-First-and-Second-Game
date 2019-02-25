@@ -30,15 +30,15 @@ public class ActionUnequip extends Action {
 			return;
 
 		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unequipped ", target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unequipped ", targetGameObject }));
 
-		if (performer.equipped == target)
+		if (performer.equipped == targetGameObject)
 			performer.equipped = null;
-		else if (performer.helmet == target)
+		else if (performer.helmet == targetGameObject)
 			performer.helmet = null;
-		else if (performer.bodyArmor == target)
+		else if (performer.bodyArmor == targetGameObject)
 			performer.bodyArmor = null;
-		else if (performer.legArmor == target)
+		else if (performer.legArmor == targetGameObject)
 			performer.legArmor = null;
 
 		if (sound != null)
@@ -48,16 +48,16 @@ public class ActionUnequip extends Action {
 	@Override
 	public boolean check() {
 
-		if (performer.equipped == target)
+		if (performer.equipped == targetGameObject)
 			return true;
 
-		if (performer.helmet == target)
+		if (performer.helmet == targetGameObject)
 			return true;
 
-		if (performer.bodyArmor == target)
+		if (performer.bodyArmor == targetGameObject)
 			return true;
 
-		if (performer.legArmor == target)
+		if (performer.legArmor == targetGameObject)
 			return true;
 
 		return false;

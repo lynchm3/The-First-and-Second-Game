@@ -938,8 +938,8 @@ public class Level {
 		}
 
 		if (Player.playerTargetAction != null) {
-			if (Player.playerTargetAction.target != null) {
-				Player.playerTargetAction.target.drawAction(Player.playerTargetAction, false);
+			if (Player.playerTargetAction.targetGameObject != null) {
+				Player.playerTargetAction.targetGameObject.drawAction(Player.playerTargetAction, false);
 			} else if (Player.playerTargetAction.targetSquare != null) {
 				Player.playerTargetAction.targetSquare.drawAction(Player.playerTargetAction, false);
 			}

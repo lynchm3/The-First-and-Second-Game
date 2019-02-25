@@ -39,10 +39,10 @@ public class ActionTalk extends Action {
 
 		if (conversation != null) {
 
-		} else if (target == Game.level.player) {
+		} else if (targetGameObject == Game.level.player) {
 			conversation = performer.getConversation();
 		} else {
-			conversation = target.getConversation();
+			conversation = targetGameObject.getConversation();
 		}
 
 		if (conversation == null)
@@ -66,7 +66,7 @@ public class ActionTalk extends Action {
 	@Override
 	public boolean checkRange() {
 		// TODO Auto-generated method stub
-		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
+		if (!performer.canSeeSquare(targetGameObject.squareGameObjectIsOn)) {
 			return false;
 		}
 
@@ -80,7 +80,7 @@ public class ActionTalk extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, target, target.squareGameObjectIsOn, 1, legal, this.getClass());
+		return new Sound(performer, targetGameObject, targetGameObject.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

@@ -34,19 +34,19 @@ public class ActionFishingFailed extends Action {
 		if (!checkRange())
 			return;
 
-		performer.fishingTarget = target;
+		performer.fishingTarget = targetGameObject;
 
 		if (performer == Game.level.player) {
 			Level.pausePlayer();
-			target.setPrimaryAnimation(null);
+			targetGameObject.setPrimaryAnimation(null);
 		} else {
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " failed to catch ", target }));
+		if (Game.level.shouldLog(targetGameObject, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " failed to catch ", targetGameObject }));
 
 		FishingRod fishingRod = (FishingRod) performer.equipped;
 		performer.fishingTarget.beingFishedBy = null;
@@ -55,7 +55,7 @@ public class ActionFishingFailed extends Action {
 
 		if (performer == Game.level.player) {
 			Level.pausePlayer();
-			target.setPrimaryAnimation(null);
+			targetGameObject.setPrimaryAnimation(null);
 			if (performer.equippedBeforePickingUpObject != null) {
 				performer.equipped = performer.equippedBeforePickingUpObject;
 				performer.equippedBeforePickingUpObject = null;
@@ -64,7 +64,7 @@ public class ActionFishingFailed extends Action {
 		}
 
 		if (!legal) {
-			Crime crime = new Crime(this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, target);
+			Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_THEFT, targetGameObject);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -112,15 +112,15 @@ public class ActionFishingFailed extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		return standardAttackLegalityCheck(performer, target);
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
 	public Sound createSound() {
 		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
 		if (shovel != null) {
-			float loudness = Math.max(target.soundWhenHit, shovel.soundWhenHitting);
-			return new Sound(performer, shovel, target.squareGameObjectIsOn, loudness, legal, this.getClass());
+			float loudness = Math.max(targetGameObject.soundWhenHit, shovel.soundWhenHitting);
+			return new Sound(performer, shovel, targetGameObject.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
 	}

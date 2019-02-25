@@ -47,7 +47,7 @@ public class ActionOpenInventoryToGiveItems extends Action {
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE);
 			// Game.level.player.inventory.otherInventory = target.inventory;
 			Game.level.player.inventory.open();
-			Inventory.target = this.target;
+			Inventory.target = this.targetGameObject;
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 			// Game.level.openInventories.add(Game.level.player.inventory);
@@ -95,7 +95,7 @@ public class ActionOpenInventoryToGiveItems extends Action {
 //			return false;
 //		}
 
-		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
+		if (!performer.canSeeSquare(targetGameObject.squareGameObjectIsOn)) {
 			return false;
 		}
 
