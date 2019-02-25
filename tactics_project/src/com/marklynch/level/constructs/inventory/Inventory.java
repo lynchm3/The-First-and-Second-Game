@@ -23,7 +23,6 @@ import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
-import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.ui.ActivityLogger;
 import com.marklynch.ui.Draggable;
@@ -184,7 +183,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static float squaresAreaHeight;
 	public float totalSquaresHeight;
 
-	public static WaterSource waterSource;
 	// public static InventorySquare square;
 	public static Object target;
 

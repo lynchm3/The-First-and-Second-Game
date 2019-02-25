@@ -1239,7 +1239,10 @@ public class GameObject
 
 		// Water Source
 		if (this instanceof WaterSource) {
-			actions.add(new ActionFillContainersInInventory(performer, (WaterSource) this));
+			actions.add(new ActionFillContainersInInventory(performer, this));
+		}
+		if (this instanceof Liquid) {
+			actions.add(new ActionFillContainersInInventory(performer, this));
 		}
 
 		// Water Body
@@ -1550,9 +1553,15 @@ public class GameObject
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			if (this instanceof ContainerForLiquids)
-				return new ActionFillSpecificContainer(performer, Inventory.waterSource, (ContainerForLiquids) this);
-			else
-				return null;
+				if (Inventory.target instanceof WaterSource) {
+					return new ActionFillSpecificContainer(performer, ((WaterSource) Inventory.target).liquid,
+							(WaterSource) Inventory.target, (ContainerForLiquids) this);
+				} else if (Inventory.target instanceof Liquid) {
+					return new ActionFillSpecificContainer(performer, (Liquid) Inventory.target,
+							(Liquid) Inventory.target, (ContainerForLiquids) this);
+
+				} else
+					return null;
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {

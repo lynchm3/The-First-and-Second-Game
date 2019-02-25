@@ -2,11 +2,13 @@ package com.marklynch.objects.inanimateobjects;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
 
 public class WaterSource extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public Liquid liquid;
 
 	public WaterSource() {
 		super();
@@ -19,6 +21,7 @@ public class WaterSource extends GameObject {
 
 		persistsWhenCantBeSeen = true;
 		type = "Water Source";
+		liquid = Templates.WATER;
 
 	}
 
@@ -37,7 +40,7 @@ public class WaterSource extends GameObject {
 		WaterSource waterSource = new WaterSource();
 		setInstances(waterSource);
 		super.setAttributesForCopy(waterSource, square, owner);
-		waterSource.consumeEffects = consumeEffects;
+		waterSource.liquid = liquid;
 		return waterSource;
 	}
 

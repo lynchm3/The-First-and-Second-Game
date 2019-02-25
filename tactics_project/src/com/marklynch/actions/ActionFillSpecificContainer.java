@@ -5,7 +5,6 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
-import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.ui.ActivityLog;
@@ -15,11 +14,13 @@ public class ActionFillSpecificContainer extends Action {
 	public static final String ACTION_NAME = "Fill Container";
 
 	ContainerForLiquids containerForLiquids;
+	Liquid liquid;
 
-	public ActionFillSpecificContainer(Actor performer, WaterSource waterSource,
+	public ActionFillSpecificContainer(Actor performer, Liquid liquid, GameObject source,
 			ContainerForLiquids containerForLiquids) {
-		super(ACTION_NAME, textureFillContainer, performer, waterSource);
+		super(ACTION_NAME, textureFillContainer, performer, source);
 		this.containerForLiquids = containerForLiquids;
+		this.liquid = liquid;
 		if (!check()) {
 			enabled = false;
 		}
@@ -48,6 +49,10 @@ public class ActionFillSpecificContainer extends Action {
 		if (performer.equipped == containerForLiquids)
 			performer.equipped = newJar;
 		performer.inventory.remove(containerForLiquids);
+
+		if (liquid.squareGameObjectIsOn != null) {
+			liquid.squareGameObjectIsOn.inventory.remove(liquid);
+		}
 	}
 
 	@Override

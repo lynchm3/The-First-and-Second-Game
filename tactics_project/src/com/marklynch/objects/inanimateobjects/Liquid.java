@@ -19,6 +19,7 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 	public float volume;
 	public GameObject gasForm;
 	public GameObject solidForm;
+	public GameObject jarForm;
 
 	public ArrayList<Texture> textures = new ArrayList<Texture>(Texture.class);
 	public int texturesIndex = 0;
@@ -38,7 +39,7 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = true;
-		isFloorObject = true;
+		isFloorObject = false;
 		orderingOnGound = 99;
 		moveable = false;
 		canContainOtherObjects = false;

@@ -7,14 +7,14 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.inanimateobjects.WaterSource;
+import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class ActionFillContainersInInventory extends Action {
 
 	public static final String ACTION_NAME = "Fill Container(s)";
 
-	public ActionFillContainersInInventory(Actor performer, WaterSource waterSource) {
-		super(ACTION_NAME, textureFillContainer, performer, waterSource);
+	public ActionFillContainersInInventory(Actor performer, GameObject target) {
+		super(ACTION_NAME, textureFillContainer, performer, target);
 		if (!check()) {
 			enabled = false;
 		}
@@ -40,7 +40,7 @@ public class ActionFillContainersInInventory extends Action {
 		} else {
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL);
 			Game.level.player.inventory.open();
-			Inventory.waterSource = (WaterSource) this.targetGameObject;
+			Inventory.target = this.targetGameObject;
 			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 			// Game.level.openInventories.add(Game.level.player.inventory);
