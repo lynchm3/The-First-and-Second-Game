@@ -1096,7 +1096,7 @@ public class GameObject
 		if (!this.hiddenObject)
 			return null;
 
-		if (isFloorObject) {
+		if (isFloorObject || (this instanceof Liquid)) {
 			return new ActionMove(performer, this.squareGameObjectIsOn, true);
 		}
 

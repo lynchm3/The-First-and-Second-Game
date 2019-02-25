@@ -52,8 +52,8 @@ public class EffectBurn extends Effect {
 			if (squareTargetIsOn != null) {
 				for (GameObject gameObject : squareTargetIsOn.inventory.getGameObjects()) {
 
-					if (gameObject != target && Math.random()
-							* 100 > gameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
+					if (gameObject != target
+							&& Math.random() * 100 > gameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_RES).value) {
 						gameObject.removeWetEffect();
 						gameObject.addEffect(this.makeCopy(source, gameObject));
 						if (Game.level.shouldLog(gameObject))
@@ -64,7 +64,8 @@ public class EffectBurn extends Effect {
 				ArrayList<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
 				for (Square adjacentSquare : adjacentSquares) {
 					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
-						if (Math.random() * 100 > gameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_DAMAGE).value) {
+
+						if (Math.random() * 100 > gameObject.highLevelStats.get(HIGH_LEVEL_STATS.FIRE_RES).value) {
 							gameObject.removeWetEffect();
 							gameObject.addEffect(this.makeCopy(source, gameObject));
 
@@ -78,7 +79,6 @@ public class EffectBurn extends Effect {
 		}
 
 		turnsRemaining--;
-
 	}
 
 	@Override
