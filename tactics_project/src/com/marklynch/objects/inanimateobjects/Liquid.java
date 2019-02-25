@@ -31,7 +31,7 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 
 		fitsInInventory = false;
 
-		attackable = true;
+		attackable = false;
 		type = "Liquid";
 
 		canShareSquare = true;
