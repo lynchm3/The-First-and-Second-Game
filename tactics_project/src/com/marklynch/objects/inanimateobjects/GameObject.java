@@ -39,11 +39,11 @@ import com.marklynch.actions.ActionMove;
 import com.marklynch.actions.ActionOpen;
 import com.marklynch.actions.ActionOpenInventoryToDropItems;
 import com.marklynch.actions.ActionOpenInventoryToGiveItems;
+import com.marklynch.actions.ActionOpenInventoryToPourItems;
 import com.marklynch.actions.ActionOpenInventoryToThrowItems;
 import com.marklynch.actions.ActionOpenOtherInventory;
 import com.marklynch.actions.ActionPeek;
-import com.marklynch.actions.ActionPourContainerInInventory;
-import com.marklynch.actions.ActionPourSpecificItem;
+import com.marklynch.actions.ActionPourItemsSelectedInInventory;
 import com.marklynch.actions.ActionRead;
 import com.marklynch.actions.ActionRemoveMapMarker;
 import com.marklynch.actions.ActionRename;
@@ -1412,7 +1412,7 @@ public class GameObject
 
 		// Pour from inventory
 		if (!decorative)
-			actions.add(new ActionPourContainerInInventory(performer, this, null));
+			actions.add(new ActionOpenInventoryToPourItems(performer, this));
 
 		if (!decorative)
 			actions.add(new ActionIgnite(performer, this, null));
@@ -1568,7 +1568,8 @@ public class GameObject
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
-			return new ActionPourSpecificItem(performer, Inventory.target, (ContainerForLiquids) this);
+			System.out.println("Inventory.target = " + Inventory.target);
+			return new ActionPourItemsSelectedInInventory(performer, Inventory.target, (ContainerForLiquids) this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
@@ -1679,6 +1680,10 @@ public class GameObject
 				|| this instanceof WaterBody) {
 			actions.add(new ActionEatItemsSelectedInInventory(performer, this));
 		}
+
+//		if (this instanceof ContainerForLiquids)
+//			actions.add(new ActionPourItemsSelectedInInventory(performer, performer.squareGameObjectIsOn,
+//					(ContainerForLiquids) this));
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			actions.add(new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this));
@@ -2298,6 +2303,10 @@ public class GameObject
 			actions.add(new ActionEquip(performer, this));
 
 		actions.add(new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this));
+
+//		if (this instanceof ContainerForLiquids)
+//			actions.add(new ActionPourItemsSelectedInInventory(performer, performer.squareGameObjectIsOn,
+//					(ContainerForLiquids) this));
 
 		if (this.inventoryThatHoldsThisObject == Level.player.inventory && !(this instanceof Gold)) {
 			actions.add(new ActionStarSpecificItem(this));

@@ -15,9 +15,9 @@ import com.marklynch.actions.ActionDropItems;
 import com.marklynch.actions.ActionHide;
 import com.marklynch.actions.ActionMove;
 import com.marklynch.actions.ActionOpenInventoryToDropItems;
+import com.marklynch.actions.ActionOpenInventoryToPourItems;
 import com.marklynch.actions.ActionOpenInventoryToThrowItems;
 import com.marklynch.actions.ActionPlaceMapMarker;
-import com.marklynch.actions.ActionPourContainerInInventory;
 import com.marklynch.actions.ActionStopHiding;
 import com.marklynch.actions.ActionTakeAll;
 import com.marklynch.actions.ActionTeleport;
@@ -1055,7 +1055,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			actions.add(new ActionOpenInventoryToThrowItems(performer, this));
 
 		// Pour from inventory
-		actions.add(new ActionPourContainerInInventory(performer, null, this));
+		actions.add(new ActionOpenInventoryToPourItems(performer, this));
 
 		GameObject diggable = this.inventory.getDiggable();
 		if (diggable != null) {

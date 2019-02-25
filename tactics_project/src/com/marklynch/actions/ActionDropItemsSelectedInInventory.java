@@ -6,6 +6,7 @@ import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.Utils;
 
 public class ActionDropItemsSelectedInInventory extends Action {
 
@@ -30,6 +31,7 @@ public class ActionDropItemsSelectedInInventory extends Action {
 	@Override
 	public void perform() {
 		super.perform();
+		Utils.printStackTrace();
 
 		if (!enabled)
 			return;

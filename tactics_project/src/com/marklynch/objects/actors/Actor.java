@@ -18,9 +18,9 @@ import com.marklynch.actions.ActionHide;
 import com.marklynch.actions.ActionIgnite;
 import com.marklynch.actions.ActionLift;
 import com.marklynch.actions.ActionMove;
+import com.marklynch.actions.ActionOpenInventoryToPourItems;
 import com.marklynch.actions.ActionOpenOtherInventory;
 import com.marklynch.actions.ActionPet;
-import com.marklynch.actions.ActionPourContainerInInventory;
 import com.marklynch.actions.ActionSellItems;
 import com.marklynch.actions.ActionShoutForHelp;
 import com.marklynch.actions.ActionStopHiding;
@@ -62,7 +62,6 @@ import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
-import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Openable;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Bell;
@@ -1880,7 +1879,7 @@ public class Actor extends GameObject {
 				actions.addAll(equipped.getAllActionsForEquippedItem(performer));
 			}
 
-			actions.add(new ActionPourContainerInInventory(performer, performer, null));
+			actions.add(new ActionOpenInventoryToPourItems(performer, this));
 			actions.add(new ActionIgnite(performer, this, null));
 			actions.add(new ActionDouse(performer, this));
 

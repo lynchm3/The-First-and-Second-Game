@@ -12,14 +12,15 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionPourSpecificItem extends Action {
+public class ActionPourItem extends Action {
 
 	public static final String ACTION_NAME = "Pour";
 	ContainerForLiquids containerForLiquids;
 
 	// Default for hostiles
-	public ActionPourSpecificItem(Actor performer, Object target, ContainerForLiquids container) {
+	public ActionPourItem(GameObject performer, Object target, ContainerForLiquids container) {
 		super(ACTION_NAME, texturePour, performer, target);
+		System.out.println("ActionPourSpecificItem");
 
 		this.containerForLiquids = container;
 		if (!check()) {
@@ -35,11 +36,15 @@ public class ActionPourSpecificItem extends Action {
 	public void perform() {
 		super.perform();
 
+		System.out.println("Pouritem.perform 1");
+
 		if (!enabled)
 			return;
+		System.out.println("Pouritem.perform 2");
 
 		if (!checkRange())
 			return;
+		System.out.println("Pouritem.perform 3");
 
 		if (Game.level.shouldLog(target, performer)) {
 			if (target != null) {
@@ -51,6 +56,7 @@ public class ActionPourSpecificItem extends Action {
 
 			}
 		}
+		System.out.println("Pouritem.perform 4");
 
 		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
 			// new ActionDouse(shooter, gameObject).perform();
@@ -58,6 +64,7 @@ public class ActionPourSpecificItem extends Action {
 				gameObject.addEffect(effect.makeCopy(performer, gameObject));
 			}
 		}
+		System.out.println("Pouritem.perform 5");
 
 		GameObject newJar = Templates.JAR.makeCopy(null, containerForLiquids.owner);
 		performer.inventory.add(newJar);
@@ -97,19 +104,26 @@ public class ActionPourSpecificItem extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
+		System.out.println("Pouritem.perform 6");
 	}
 
 	@Override
 	public boolean check() {
 
-		if (targetSquare == null && target == null)
-			return false;
-
-		if (containerForLiquids.liquid == null) {
-			disabledReason = CONTAINER_IS_EMPTY;
+		if (targetSquare == null && target == null) {
+			System.out.println("ActionPourSpecificItem cehck false 1");
+			System.out.println("targetSquare = " + targetSquare);
+			System.out.println("target = " + target);
 			return false;
 		}
 
+		if (containerForLiquids.liquid == null) {
+			disabledReason = CONTAINER_IS_EMPTY;
+			System.out.println("ActionPourSpecificItem cehck false 2");
+			return false;
+		}
+
+		System.out.println("ActionPourSpecificItem cehck true 1");
 		return true;
 	}
 
@@ -117,13 +131,16 @@ public class ActionPourSpecificItem extends Action {
 	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(targetSquare) > 1) {
+			System.out.println("ActionPourSpecificItem cehck range false 1");
 			return false;
 		}
 
 		if (!performer.canSeeSquare(targetSquare)) {
+			System.out.println("ActionPourSpecificItem cehck range false 2");
 			return false;
 		}
 
+		System.out.println("ActionPourSpecificItem cehck range true 1");
 		return true;
 	}
 
