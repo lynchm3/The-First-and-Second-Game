@@ -16,7 +16,6 @@ public class ActionOpenInventoryToPourItems extends Action {
 
 	public ActionOpenInventoryToPourItems(Actor performer, Object target) {
 		super(ACTION_NAME, textureEllipse, performer, target);
-		System.out.println("ActionOpenInventoryToPourItems");
 		super.gameObjectPerformer = this.performer = performer;
 		if (!check()) {
 			enabled = false;
@@ -53,26 +52,21 @@ public class ActionOpenInventoryToPourItems extends Action {
 
 	@Override
 	public boolean check() {
-		System.out.println("CHECK TRUE");
 		return true;
 	}
 
 	@Override
 	public boolean checkRange() {
 		float maxDistance = 1;
-		System.out.println("CHECK RANGE");
 
 		if (performer.straightLineDistanceTo(targetSquare) > maxDistance) {
-			System.out.println("CHECK RANGE false a");
 			return false;
 		}
 
 		if (!performer.canSeeSquare(targetSquare)) {
-			System.out.println("CHECK RANGE false b");
 			return false;
 		}
 
-		System.out.println("CHECK RANGE true");
 		return true;
 	}
 

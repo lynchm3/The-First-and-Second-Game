@@ -659,8 +659,6 @@ public class GameObject
 
 		if (imageTexture2 != null) {
 
-			System.out.println("imageTexture2 != null");
-
 			int actorPositionXInPixels = 0;
 			actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
 
@@ -1577,7 +1575,6 @@ public class GameObject
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
-			System.out.println("Inventory.target = " + Inventory.target);
 			return new ActionPourItemsSelectedInInventory(performer, Inventory.target, (ContainerForLiquids) this);
 		}
 
@@ -2545,9 +2542,6 @@ public class GameObject
 	// };
 
 	public void setPrimaryAnimation(Animation animation) {
-
-		if (this == Level.player)
-			System.out.println("new animation for player = " + animation);
 
 		if (animation == null || animation.runAnimation == false)
 			return;

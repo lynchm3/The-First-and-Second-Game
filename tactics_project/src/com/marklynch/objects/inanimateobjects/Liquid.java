@@ -8,7 +8,6 @@ import com.marklynch.level.constructs.effect.EffectShock;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.Consumable;
 import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
@@ -71,15 +70,6 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 		liquid.imageTexture = liquid.textures.get(texturesIndex);
 		liquid.solidForm = solidForm;
 		liquid.gasForm = gasForm;
-
-		if (templateId == Templates.POISON.templateId) {
-			System.out.println("Templates.POISON.jarForm = " + Templates.POISON.jarForm);
-			System.out.println("POISON jarForm = " + jarForm);
-		}
-
-		if (templateId == Templates.WATER.templateId) {
-			System.out.println("WATER jarForm = " + jarForm);
-		}
 
 		liquid.jarForm = jarForm;
 		return liquid;

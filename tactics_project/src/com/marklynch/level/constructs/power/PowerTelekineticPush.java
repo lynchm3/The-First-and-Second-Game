@@ -89,8 +89,6 @@ public class PowerTelekineticPush extends Power {
 			}
 
 			// Hit an obstacle?
-			System.out.println("currentSquare.inventory.gameObjectThatCantShareSquare = "
-					+ currentSquare.inventory.gameObjectThatCantShareSquare);
 			if (!currentSquare.inventory.canShareSquare
 					&& !(currentSquare.inventory.gameObjectThatCantShareSquare instanceof VoidHole)
 					&& !(currentSquare.inventory.gameObjectThatCantShareSquare instanceof Portal)
@@ -123,9 +121,6 @@ public class PowerTelekineticPush extends Power {
 
 		final GameObject obstacle = tempObstacle;
 		final Square endSquare = tempEndSquare;
-
-		System.out.println("obstacle = " + obstacle);
-		System.out.println("endSquare = " + endSquare);
 
 		for (final GameObject pushedGameObject : pushedObjectAndTheirStartSquare.keySet()) {
 			pushedGameObject.setPrimaryAnimation(

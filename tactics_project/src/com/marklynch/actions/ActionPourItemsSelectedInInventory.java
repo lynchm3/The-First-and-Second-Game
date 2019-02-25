@@ -14,7 +14,6 @@ public class ActionPourItemsSelectedInInventory extends Action {
 
 	public ActionPourItemsSelectedInInventory(GameObject performer, Object target, ContainerForLiquids objectToPour) {
 		super(ACTION_NAME, textureDrop, performer, target);
-		System.out.println("ActionPourItemsSelectedInInventory");
 		this.objectToPour = objectToPour;
 		this.inventorySquare = objectToPour.inventorySquare;
 
@@ -30,15 +29,12 @@ public class ActionPourItemsSelectedInInventory extends Action {
 	@Override
 	public void perform() {
 		super.perform();
-		System.out.println("ActionPourItemsSelectedInInventory.perform 1");
 
 		if (!enabled)
 			return;
-		System.out.println("ActionPourItemsSelectedInInventory.perform 2");
 
 		if (!checkRange())
 			return;
-		System.out.println("ActionPourItemsSelectedInInventory.perform 3");
 
 //		if (inventorySquare.stack.size() <= 5) {
 		new ActionPourItem(gameObjectPerformer, targetGameObjectOrSquare, objectToPour).perform();
@@ -53,13 +49,8 @@ public class ActionPourItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean check() {
-
-		System.out.println("ActionPourItemsSelectedInInventory.check() 1");
-		System.out.println("targetSquare = " + targetSquare);
-		System.out.println("target = " + targetGameObject);
 		if (targetSquare == null && targetGameObject == null)
 			return false;
-		System.out.println("ActionPourItemsSelectedInInventory.check() 2");
 
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
@@ -67,7 +58,6 @@ public class ActionPourItemsSelectedInInventory extends Action {
 				return false;
 			}
 		}
-		System.out.println("ActionPourItemsSelectedInInventory.check() 3");
 
 //		else {
 //			if (!gameObjectPerformer.inventory.contains(objectToPour)) {

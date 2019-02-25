@@ -20,7 +20,6 @@ public class ActionPourItem extends Action {
 	// Default for hostiles
 	public ActionPourItem(GameObject performer, Object target, ContainerForLiquids container) {
 		super(ACTION_NAME, texturePour, performer, target);
-		System.out.println("ActionPourSpecificItem");
 
 		this.containerForLiquids = container;
 		if (!check()) {
@@ -36,27 +35,22 @@ public class ActionPourItem extends Action {
 	public void perform() {
 		super.perform();
 
-		System.out.println("Pouritem.perform 1");
-
 		if (!enabled)
 			return;
-		System.out.println("Pouritem.perform 2");
 
 		if (!checkRange())
 			return;
-		System.out.println("Pouritem.perform 3");
 
 		if (Game.level.shouldLog(targetGameObject, performer)) {
 			if (targetGameObject != null) {
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " poured ", containerForLiquids, " on ", targetGameObject }));
+				Game.level.logOnScreen(new ActivityLog(
+						new Object[] { performer, " poured ", containerForLiquids, " on ", targetGameObject }));
 			} else {
 				Game.level
 						.logOnScreen(new ActivityLog(new Object[] { performer, " poured out ", containerForLiquids }));
 
 			}
 		}
-		System.out.println("Pouritem.perform 4");
 
 		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
 			// new ActionDouse(shooter, gameObject).perform();
@@ -64,7 +58,6 @@ public class ActionPourItem extends Action {
 				gameObject.addEffect(effect.makeCopy(performer, gameObject));
 			}
 		}
-		System.out.println("Pouritem.perform 5");
 
 		targetSquare.liquidSpread(containerForLiquids.liquid);
 
@@ -106,26 +99,20 @@ public class ActionPourItem extends Action {
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
-		System.out.println("Pouritem.perform 6");
 	}
 
 	@Override
 	public boolean check() {
 
 		if (targetSquare == null && targetGameObject == null) {
-			System.out.println("ActionPourSpecificItem cehck false 1");
-			System.out.println("targetSquare = " + targetSquare);
-			System.out.println("target = " + targetGameObject);
 			return false;
 		}
 
 		if (containerForLiquids.liquid == null) {
 			disabledReason = CONTAINER_IS_EMPTY;
-			System.out.println("ActionPourSpecificItem cehck false 2");
 			return false;
 		}
 
-		System.out.println("ActionPourSpecificItem cehck true 1");
 		return true;
 	}
 
@@ -133,16 +120,13 @@ public class ActionPourItem extends Action {
 	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(targetSquare) > 1) {
-			System.out.println("ActionPourSpecificItem cehck range false 1");
 			return false;
 		}
 
 		if (!performer.canSeeSquare(targetSquare)) {
-			System.out.println("ActionPourSpecificItem cehck range false 2");
 			return false;
 		}
 
-		System.out.println("ActionPourSpecificItem cehck range true 1");
 		return true;
 	}
 

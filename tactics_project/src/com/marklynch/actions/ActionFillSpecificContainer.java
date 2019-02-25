@@ -44,10 +44,6 @@ public class ActionFillSpecificContainer extends Action {
 			Game.level.logOnScreen(
 					new ActivityLog(new Object[] { performer, " filled ", containerForLiquids, " with ", water }));
 
-		System.out.println("liquid = " + liquid);
-		System.out.println("liquid.jarForm = " + liquid.jarForm);
-		System.out.println("containerForLiquids = " + containerForLiquids);
-		System.out.println("containerForLiquids.owner = " + containerForLiquids.owner);
 		GameObject newJar = liquid.jarForm.makeCopy(null, containerForLiquids.owner);
 		performer.inventory.add(newJar);
 		if (performer.equipped == containerForLiquids)

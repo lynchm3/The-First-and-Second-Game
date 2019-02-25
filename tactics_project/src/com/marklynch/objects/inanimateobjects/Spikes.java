@@ -55,8 +55,6 @@ public class Spikes extends GameObject implements SwitchListener, UpdatableGameO
 
 	public void doDamage() {
 
-		System.out.println("DODAMAGE");
-
 		lastTurnDidDamage = Level.turn;
 
 		if (squareGameObjectIsOn == null)
