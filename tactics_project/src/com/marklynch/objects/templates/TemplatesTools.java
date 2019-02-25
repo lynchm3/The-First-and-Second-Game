@@ -235,6 +235,7 @@ public class TemplatesTools {
 		Templates.JAR_OF_WATER.anchorY = 100;
 		Templates.JAR_OF_WATER.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR_OF_WATER.volume = 1;
+		Templates.WATER.jarForm = Templates.JAR_OF_WATER;
 		Templates.JAR_OF_WATER.liquid = Templates.WATER.makeCopy(null, null, 1);
 		Templates.JAR_OF_WATER.flipYAxisInMirror = false;
 
@@ -252,8 +253,10 @@ public class TemplatesTools {
 		Templates.JAR_OF_POISON.anchorY = 100;
 		Templates.JAR_OF_POISON.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR_OF_POISON.volume = 1;
+		Templates.POISON.jarForm = Templates.JAR_OF_POISON;
 		Templates.JAR_OF_POISON.liquid = Templates.POISON.makeCopy(null, null, 1);
 		Templates.JAR_OF_POISON.flipYAxisInMirror = false;
+
 	}
 
 }

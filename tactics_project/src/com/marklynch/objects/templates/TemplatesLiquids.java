@@ -52,6 +52,7 @@ public class TemplatesLiquids {
 		Templates.POISON.textures.add(getGlobalImage("poison_2.png", true));
 		Templates.POISON.textures.add(getGlobalImage("poison_3.png", true));
 		Templates.POISON.textures.add(getGlobalImage("poison_4.png", true));
+		Templates.POISON.setAllResistances100();
 	}
 
 }
