@@ -35,6 +35,9 @@ public class EffectBurn extends Effect {
 		// 100f));
 		if (target instanceof FlammableLightSource) {
 			((FlammableLightSource) target).setLighting(true);
+			if (Game.level.shouldLog(this)) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " was lit" }));
+			}
 			turnsRemaining = 0;
 			return;
 		} else {

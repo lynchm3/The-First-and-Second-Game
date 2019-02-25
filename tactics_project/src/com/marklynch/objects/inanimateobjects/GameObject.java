@@ -2075,8 +2075,12 @@ public class GameObject
 				effectBurning = effect;
 			}
 		}
-		if (effectBurning != null)
+		if (effectBurning != null) {
+			if (Game.level.shouldLog(this)) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " burning was doused" }));
+			}
 			removeEffect(effectBurning);
+		}
 	}
 
 	public void removePosionEffect() {

@@ -2,8 +2,10 @@ package com.marklynch.level.constructs.effect;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.Game;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.FlammableLightSource;
+import com.marklynch.ui.ActivityLog;
 
 public class EffectWet extends Effect {
 
@@ -28,6 +30,10 @@ public class EffectWet extends Effect {
 	public void activate() {
 		if (target instanceof FlammableLightSource) {
 			((FlammableLightSource) target).setLighting(false);
+
+			if (Game.level.shouldLog(this)) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " was doused" }));
+			}
 		}
 		turnsRemaining--;
 	}
