@@ -17,6 +17,11 @@ public class EffectBurn extends Effect {
 	public EffectBurn() {
 	}
 
+	public EffectBurn(int totalTurns) {
+		this.totalTurns = totalTurns;
+		this.turnsRemaining = totalTurns;
+	}
+
 	public EffectBurn(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " burned by ";
 		this.effectName = "Burn";

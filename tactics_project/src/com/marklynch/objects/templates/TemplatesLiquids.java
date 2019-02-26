@@ -6,6 +6,8 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBloodCovered;
+import com.marklynch.level.constructs.effect.EffectBurn;
+import com.marklynch.level.constructs.effect.EffectHeal;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectSlow;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -92,6 +94,42 @@ public class TemplatesLiquids {
 		Templates.BLOOD.textures.add(getGlobalImage("blood_3.png", true));
 		Templates.BLOOD.textures.add(getGlobalImage("blood_4.png", true));
 		Templates.BLOOD.setAllResistances100();
+
+		Templates.LAVA = new Liquid();
+		Templates.LAVA.name = "Lava";
+		Templates.LAVA.setImageAndExtrapolateSize("lava.png");
+		Templates.LAVA.totalHealth = Templates.LAVA.remainingHealth = 1000;
+		Templates.LAVA.weight = 6f;
+		Templates.LAVA.value = 16;
+		Templates.LAVA.anchorX = 0;
+		Templates.LAVA.anchorY = 0;
+		Templates.LAVA.templateId = GameObject.generateNewTemplateId();
+		Templates.LAVA.volume = 1;
+		Templates.LAVA.touchEffects = new Effect[] { new EffectBurn(10) };
+		Templates.LAVA.consumeEffects = new Effect[] { new EffectBurn(15) };
+		Templates.LAVA.textures.add(getGlobalImage("lava.png", true));
+		Templates.LAVA.textures.add(getGlobalImage("lava_2.png", true));
+		Templates.LAVA.textures.add(getGlobalImage("lava_3.png", true));
+		Templates.LAVA.textures.add(getGlobalImage("lava_4.png", true));
+		Templates.LAVA.setAllResistances100();
+
+		Templates.SOUP = new Liquid();
+		Templates.SOUP.name = "Soup";
+		Templates.SOUP.setImageAndExtrapolateSize("soup.png");
+		Templates.SOUP.totalHealth = Templates.SOUP.remainingHealth = 1000;
+		Templates.SOUP.weight = 6f;
+		Templates.SOUP.value = 16;
+		Templates.SOUP.anchorX = 0;
+		Templates.SOUP.anchorY = 0;
+		Templates.SOUP.templateId = GameObject.generateNewTemplateId();
+		Templates.SOUP.volume = 1;
+		Templates.SOUP.touchEffects = new Effect[] {};
+		Templates.SOUP.consumeEffects = new Effect[] { new EffectHeal(5) };
+		Templates.SOUP.textures.add(getGlobalImage("soup.png", true));
+		Templates.SOUP.textures.add(getGlobalImage("soup_2.png", true));
+		Templates.SOUP.textures.add(getGlobalImage("soup_3.png", true));
+		Templates.SOUP.textures.add(getGlobalImage("soup_4.png", true));
+		Templates.SOUP.setAllResistances100();
 	}
 
 }

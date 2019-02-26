@@ -227,7 +227,7 @@ public class TemplatesTools {
 		Templates.JAR_OF_WATER.name = "Jar of Water";
 		Templates.JAR_OF_WATER.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
-		Templates.JAR_OF_WATER.setImageAndExtrapolateSize("water_jar.png");
+		Templates.JAR_OF_WATER.setImageAndExtrapolateSize("jar_of_water.png");
 		Templates.JAR_OF_WATER.totalHealth = Templates.JAR_OF_WATER.remainingHealth = 14;
 		Templates.JAR_OF_WATER.weight = 10f;
 		Templates.JAR_OF_WATER.value = 48;
@@ -263,7 +263,7 @@ public class TemplatesTools {
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
 		Templates.JAR_OF_OIL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.POISON_DAMAGE, 6));
-		Templates.JAR_OF_OIL.setImageAndExtrapolateSize("jar_of_poison.png");
+		Templates.JAR_OF_OIL.setImageAndExtrapolateSize("jar_of_oil.png");
 		Templates.JAR_OF_OIL.totalHealth = Templates.JAR_OF_OIL.remainingHealth = 14;
 		Templates.JAR_OF_OIL.weight = 10f;
 		Templates.JAR_OF_OIL.value = 78;
@@ -279,7 +279,7 @@ public class TemplatesTools {
 		Templates.JAR_OF_BLOOD.name = "Jar of Blood";
 		Templates.JAR_OF_BLOOD.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
-		Templates.JAR_OF_BLOOD.setImageAndExtrapolateSize("jar_of_poison.png");
+		Templates.JAR_OF_BLOOD.setImageAndExtrapolateSize("jar_of_blood.png");
 		Templates.JAR_OF_BLOOD.totalHealth = Templates.JAR_OF_BLOOD.remainingHealth = 14;
 		Templates.JAR_OF_BLOOD.weight = 10f;
 		Templates.JAR_OF_BLOOD.value = 78;
@@ -290,6 +290,40 @@ public class TemplatesTools {
 		Templates.BLOOD.jarForm = Templates.JAR_OF_BLOOD;
 		Templates.JAR_OF_BLOOD.liquid = Templates.BLOOD.makeCopy(null, null, 1);
 		Templates.JAR_OF_BLOOD.flipYAxisInMirror = false;
+
+		Templates.JAR_OF_LAVA = new ContainerForLiquids();
+		Templates.JAR_OF_LAVA.name = "Jar of Lava";
+		Templates.JAR_OF_LAVA.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
+		Templates.JAR_OF_LAVA.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.FIRE_DAMAGE, 20));
+		Templates.JAR_OF_LAVA.setImageAndExtrapolateSize("jar_of_lava.png");
+		Templates.JAR_OF_LAVA.totalHealth = Templates.JAR_OF_BLOOD.remainingHealth = 14;
+		Templates.JAR_OF_LAVA.weight = 10f;
+		Templates.JAR_OF_LAVA.value = 78;
+		Templates.JAR_OF_LAVA.anchorX = 56;
+		Templates.JAR_OF_LAVA.anchorY = 100;
+		Templates.JAR_OF_LAVA.templateId = GameObject.generateNewTemplateId();
+		Templates.JAR_OF_LAVA.volume = 1;
+		Templates.LAVA.jarForm = Templates.JAR_OF_LAVA;
+		Templates.JAR_OF_LAVA.liquid = Templates.LAVA.makeCopy(null, null, 1);
+		Templates.JAR_OF_LAVA.flipYAxisInMirror = false;
+
+		Templates.JAR_OF_SOUP = new ContainerForLiquids();
+		Templates.JAR_OF_SOUP.name = "Jar of Soup";
+		Templates.JAR_OF_SOUP.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
+		Templates.JAR_OF_SOUP.setImageAndExtrapolateSize("jar_of_soup.png");
+		Templates.JAR_OF_SOUP.totalHealth = Templates.JAR_OF_BLOOD.remainingHealth = 14;
+		Templates.JAR_OF_SOUP.weight = 10f;
+		Templates.JAR_OF_SOUP.value = 78;
+		Templates.JAR_OF_SOUP.anchorX = 56;
+		Templates.JAR_OF_SOUP.anchorY = 100;
+		Templates.JAR_OF_SOUP.templateId = GameObject.generateNewTemplateId();
+		Templates.JAR_OF_SOUP.volume = 1;
+		Templates.SOUP.jarForm = Templates.JAR_OF_SOUP;
+		Templates.JAR_OF_SOUP.liquid = Templates.SOUP.makeCopy(null, null, 1);
+		Templates.JAR_OF_SOUP.flipYAxisInMirror = false;
 
 	}
 

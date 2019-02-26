@@ -466,8 +466,8 @@ public class Editor {
 		player.inventory.add(Templates.BIG_TREE.makeCopy(null, player));
 		player.inventory.add(Templates.JAR_OF_BLOOD.makeCopy(null, player));
 		player.inventory.add(Templates.JAR_OF_OIL.makeCopy(null, player));
-//		player.inventory.add(Templates.JAR_OF_LAVA.makeCopy(null, player));
-//		player.inventory.add(Templates.JAR_OF_SOUP.makeCopy(null, player));
+		player.inventory.add(Templates.JAR_OF_LAVA.makeCopy(null, player));
+		player.inventory.add(Templates.JAR_OF_SOUP.makeCopy(null, player));
 		player.inventory.add(Templates.BLOODY_PULP.makeCopy(null, player));
 		player.inventory.add(Templates.BOULDER.makeCopy(null, player));
 		player.inventory.add(Templates.BROKEN_GLASS.makeCopy(null, player));
