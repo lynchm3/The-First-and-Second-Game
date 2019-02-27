@@ -153,6 +153,7 @@ public class GameObject
 	public boolean decorative = false;
 	public boolean floatsInWater = false;
 	public boolean isFloorObject = false;
+	public boolean drawShadow = true;
 
 	public int value = 1;
 	public int turnAcquired = 1;
@@ -457,18 +458,21 @@ public class GameObject
 		}
 
 		// shadow
-		if (!isFloorObject && Level.shadowDarkness > 0 && bigShadow
-				&& this.squareGameObjectIsOn.structureSquareIsIn == null) {
-			drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, scaleX,
-					Level.shadowLength * scaleY, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2, Color.BLACK,
-					false, imageTexture);
-		} else if (Level.shadowDarkness > 0 && this.squareGameObjectIsOn.structureSquareIsIn == null) {
-			// shadow again...
-			drawGameObject((int) (actorPositionXInPixels + Level.smallShadowOffSetX),
-					(int) (actorPositionYInPixels + Level.smallShadowOffSetY), Level.shadowDarkness, false, scaleX,
-					Level.shadowLength * scaleY, 0f, boundsX1 + Level.smallShadowOffSetX,
-					boundsY1 + Level.smallShadowOffSetY, boundsX2 + Level.smallShadowOffSetX,
-					boundsY2 + Level.smallShadowOffSetY, Color.BLACK, false, imageTexture);
+		if (drawShadow) {
+			// big shadow
+			if (!isFloorObject && Level.shadowDarkness > 0 && bigShadow
+					&& this.squareGameObjectIsOn.structureSquareIsIn == null) {
+				drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, scaleX,
+						Level.shadowLength * scaleY, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2,
+						Color.BLACK, false, imageTexture);
+			} else if (Level.shadowDarkness > 0 && this.squareGameObjectIsOn.structureSquareIsIn == null) {
+				// shadow again... small shadow
+				drawGameObject((int) (actorPositionXInPixels + Level.smallShadowOffSetX),
+						(int) (actorPositionYInPixels + Level.smallShadowOffSetY), Level.shadowDarkness, false, scaleX,
+						Level.shadowLength * scaleY, 0f, boundsX1 + Level.smallShadowOffSetX,
+						boundsY1 + Level.smallShadowOffSetY, boundsX2 + Level.smallShadowOffSetX,
+						boundsY2 + Level.smallShadowOffSetY, Color.BLACK, false, imageTexture);
+			}
 		}
 
 		Color color = Level.dayTimeOverlayColor;

@@ -390,6 +390,7 @@ public class TemplatesNature {
 		Templates.STONE_FLOOR.persistsWhenCantBeSeen = true;
 		Templates.STONE_FLOOR.attackable = false;
 		Templates.STONE_FLOOR.isFloorObject = true;
+		Templates.STONE_FLOOR.drawShadow = false;
 		Templates.STONE_FLOOR.moveable = false;
 		Templates.STONE_FLOOR.orderingOnGound = 20;
 		Templates.STONE_FLOOR.templateId = GameObject.generateNewTemplateId();
@@ -402,6 +403,7 @@ public class TemplatesNature {
 		Templates.LEAVES.persistsWhenCantBeSeen = true;
 		Templates.LEAVES.attackable = false;
 		Templates.LEAVES.isFloorObject = true;
+		Templates.STONE_FLOOR.drawShadow = false;
 		Templates.LEAVES.moveable = false;
 		Templates.LEAVES.orderingOnGound = 20;
 		Templates.LEAVES.templateId = GameObject.generateNewTemplateId();

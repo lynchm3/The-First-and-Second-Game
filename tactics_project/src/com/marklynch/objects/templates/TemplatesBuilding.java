@@ -86,6 +86,7 @@ public class TemplatesBuilding {
 		Templates.RUBBLE.persistsWhenCantBeSeen = true;
 		Templates.RUBBLE.attackable = false;
 		Templates.RUBBLE.isFloorObject = true;
+		Templates.RUBBLE.drawShadow = false;
 		Templates.RUBBLE.moveable = false;
 		Templates.RUBBLE.orderingOnGound = 20;
 		Templates.RUBBLE.templateId = GameObject.generateNewTemplateId();
@@ -171,6 +172,7 @@ public class TemplatesBuilding {
 		Templates.CIRCLE_FLOOR.persistsWhenCantBeSeen = true;
 		Templates.CIRCLE_FLOOR.attackable = false;
 		Templates.CIRCLE_FLOOR.isFloorObject = true;
+		Templates.CIRCLE_FLOOR.drawShadow = false;
 		Templates.CIRCLE_FLOOR.moveable = false;
 		Templates.CIRCLE_FLOOR.orderingOnGound = 19;
 		Templates.CIRCLE_FLOOR.templateId = GameObject.generateNewTemplateId();

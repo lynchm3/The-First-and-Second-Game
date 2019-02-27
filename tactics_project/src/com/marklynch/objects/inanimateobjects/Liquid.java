@@ -44,6 +44,7 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 		moveable = false;
 		canContainOtherObjects = false;
 		flipYAxisInMirror = false;
+		drawShadow = false;
 		touchEffects = new Effect[] { new EffectWet(3) };
 
 	}

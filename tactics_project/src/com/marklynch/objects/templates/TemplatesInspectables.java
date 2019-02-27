@@ -50,6 +50,7 @@ public class TemplatesInspectables {
 		Templates.GIANT_FOOTPRINT.persistsWhenCantBeSeen = true;
 		Templates.GIANT_FOOTPRINT.attackable = false;
 		Templates.GIANT_FOOTPRINT.isFloorObject = true;
+		Templates.GIANT_FOOTPRINT.drawShadow = false;
 		Templates.GIANT_FOOTPRINT.moveable = false;
 		Templates.GIANT_FOOTPRINT.orderingOnGound = 20;
 		Templates.GIANT_FOOTPRINT.templateId = GameObject.generateNewTemplateId();
@@ -71,6 +72,7 @@ public class TemplatesInspectables {
 		Templates.GIANT_FOOTPRINT_LEFT.persistsWhenCantBeSeen = true;
 		Templates.GIANT_FOOTPRINT_LEFT.attackable = false;
 		Templates.GIANT_FOOTPRINT_LEFT.isFloorObject = true;
+		Templates.GIANT_FOOTPRINT.drawShadow = false;
 		Templates.GIANT_FOOTPRINT_LEFT.moveable = false;
 		Templates.GIANT_FOOTPRINT_LEFT.orderingOnGound = 20;
 		Templates.GIANT_FOOTPRINT_LEFT.templateId = GameObject.generateNewTemplateId();

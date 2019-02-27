@@ -310,6 +310,7 @@ public class TemplatesFurniture {
 		Templates.DROP_HOLE.templateId = GameObject.generateNewTemplateId();
 		Templates.DROP_HOLE.effectsFromInteracting = new Effect[] { new EffectPoison(3) };
 		Templates.DROP_HOLE.isFloorObject = true;
+		Templates.DROP_HOLE.drawShadow = false;
 		Templates.DROP_HOLE.moveable = false;
 		Templates.DROP_HOLE.fitsInInventory = false;
 
