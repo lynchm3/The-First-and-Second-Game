@@ -137,8 +137,9 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public transient float costFromStart;
 	public transient float estimatedCostToGoal;
 
-	public transient float cost = 1;
-	public transient float costForPlayer = 1;
+	public transient float pathCostForAI = 1;
+	public transient float pathCostForPlayer = 1;
+	public transient float pathCostForLiquid = 1;
 
 	public transient int xInGrid;
 	public transient int yInGrid;
@@ -1186,25 +1187,25 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		if (inventory.containsGameObjectOfType(Landmine.class)) {
 			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
 			if (landmine.hiddenObject) {// This is dumb, there's only a flag for player discovered... needs a change...
-				cost = 10;
+				pathCostForAI = 10;
 				return;
 			}
 		}
 
 		if (inventory.containsGameObjectOfType(BrokenGlass.class)) {
-			cost = 10;
+			pathCostForAI = 10;
 		} else if (inventory.containsGameObjectOfType(Actor.class)) {
-			cost = 10;
+			pathCostForAI = 10;
 		} else if (inventory.containsGameObjectOfType(Portal.class)) {
-			cost = 10;
+			pathCostForAI = 10;
 		} else if (inventory.containsGameObjectOfType(VoidHole.class)) {
-			cost = 10;
+			pathCostForAI = 10;
 		} else if (inventory.containsGameObjectOfType(PressurePlate.class)) {
-			cost = 10;
+			pathCostForAI = 10;
 		} else if (this.floorImageTexture == Square.STONE_TEXTURE) {
-			cost = 1;
+			pathCostForAI = 1;
 		} else {
-			cost = 2;
+			pathCostForAI = 2;
 		}
 	}
 
@@ -1213,25 +1214,25 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		if (inventory.containsGameObjectOfType(Landmine.class)) {
 			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
 			if (landmine.hiddenObject) {
-				cost = 10;
+				pathCostForPlayer = 10;
 				return;
 			}
 		}
 
 		if (inventory.containsGameObjectOfType(BrokenGlass.class)) {
-			costForPlayer = 10;
+			pathCostForPlayer = 10;
 			// } else if (inventory.contains(Actor.class)) {
 			// costForPlayer = 10;
 		} else if (inventory.containsGameObjectOfType(Portal.class)) {
-			costForPlayer = 10;
+			pathCostForPlayer = 10;
 		} else if (inventory.containsGameObjectOfType(VoidHole.class)) {
-			costForPlayer = 10;
+			pathCostForPlayer = 10;
 		} else if (inventory.containsGameObjectOfType(PressurePlate.class)) {
-			costForPlayer = 10;
+			pathCostForPlayer = 10;
 		} else if (this.floorImageTexture == Square.STONE_TEXTURE) {
-			costForPlayer = 1;
+			pathCostForPlayer = 1;
 		} else {
-			costForPlayer = 2;
+			pathCostForPlayer = 2;
 		}
 
 	}
@@ -1269,7 +1270,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 	public float getEstimatedCost(Square node) {
 		Game.getEstimatedCost++;
-		return this.straightLineDistanceTo(node) + this.cost - 1;
+		return this.straightLineDistanceTo(node) + this.pathCostForAI - 1;
 	}
 
 	public List getNeighborsThatCanBeMovedTo(Actor actor) {
@@ -1382,17 +1383,39 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	}
 
 	public Liquid liquidSpread(Liquid templateLiquid) {
-		for (int i = 0; i < 10; i++) {
-			ArrayList<Square> squareToMakeWet = this.getAllSquaresAtDistance(i);
-			for (Square square : squareToMakeWet) {
-				if (!square.inventory.containsGameObjectWithTemplateId(templateLiquid.templateId)
-						&& !square.inventory.containsGameObjectWithTemplateId(Templates.WATER_BODY.templateId)
+
+//		int depth = 0;
+		final int maxDepth = 10;
+//		costForLiquid?
+//		passableForLiquid?
+//		sdjkndfjk
+//		go damn these people dont shut up
+//		fsklnsdklsdgkljsd
+
+		ArrayList<Square> squaresAtCurrentLevel = new ArrayList<Square>(Square.class);
+		ArrayList<Square> squaresAtNextLevel = new ArrayList<Square>(Square.class);
+		squaresAtNextLevel.add(this);
+		for (int i = 0; i < maxDepth; i++) {
+			squaresAtCurrentLevel.clear();
+			squaresAtCurrentLevel.addAll(squaresAtNextLevel);
+			Collections.shuffle(squaresAtCurrentLevel);
+			squaresAtNextLevel.clear();
+			for (Square square : squaresAtCurrentLevel) {
+				if (!square.inventory.containsGameObjectWithTemplateId(Templates.WATER_BODY.templateId)
 						&& !square.inventory.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)
 						&& !square.inventory.containsGameObjectOfType(Wall.class)) {
-					square.inventory.removeGameObjecsOfType(Liquid.class);
-					Liquid liquidToSpread = templateLiquid.makeCopy(null, null, 1);
-					square.inventory.add(liquidToSpread);
-					return liquidToSpread;
+					if (square.inventory.containsGameObjectWithTemplateId(templateLiquid.templateId)) {
+						for (Square squareAtNextLevel : square.getAllSquaresAtDistance(1)) {
+							if (!squaresAtNextLevel.contains(squareAtNextLevel)) {
+								squaresAtNextLevel.add(squareAtNextLevel);
+							}
+						}
+					} else {
+						square.inventory.removeGameObjecsOfType(Liquid.class);
+						Liquid liquidToSpread = templateLiquid.makeCopy(null, null, 1);
+						square.inventory.add(liquidToSpread);
+						return liquidToSpread;
+					}
 				}
 			}
 		}

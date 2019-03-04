@@ -79,9 +79,9 @@ public class AStarSearchSquare {
 				boolean isClosed = closedList.contains(neighborNode);
 				float costFromStart = node.costFromStart;
 				if (actor == Game.level.player)
-					costFromStart += node.costForPlayer;
+					costFromStart += node.pathCostForPlayer;
 				else
-					costFromStart += node.cost;
+					costFromStart += node.pathCostForAI;
 				// check if the neighbor node has not been
 				// traversed or if a shorter path to this
 				// neighbor node is found.
