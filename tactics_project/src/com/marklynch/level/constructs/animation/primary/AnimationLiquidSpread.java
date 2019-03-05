@@ -50,11 +50,13 @@ public class AnimationLiquidSpread extends Animation {
 		boolean atLeastOneDirection = false;
 
 		if (fromLeft) {
-//			boundsX2 = 0;
-//			kf0.boundsX2 = (int) performer.width;
-//			kf0.boundsX2Speed = 0.1f;
-//			atLeastOneDirection = true;
+			// DOESNT WORK
+			boundsX2 = (int) performer.width;
+			kf0.boundsX2 = 0;
+			kf0.boundsX2Speed = 0.1f;
+			atLeastOneDirection = true;
 		} else if (fromRight) {
+			// WORKS
 			boundsX1 = (int) performer.width;
 			kf0.boundsX1 = 0;
 			kf0.boundsX1Speed = 0.1f;
@@ -62,12 +64,14 @@ public class AnimationLiquidSpread extends Animation {
 		}
 
 		if (fromAbove) {
-//			boundsY1 = (int) performer.width;
-//			kf0.boundsY1 = 0;
-//			kf0.boundsY1Speed = 0.1f;
-//			atLeastOneDirection = true;
+//			DOESNT WORK
+			boundsY2 = 0;
+			kf0.boundsX2 = (int) performer.height;
+			kf0.boundsX2Speed = -0.1f;
+			atLeastOneDirection = true;
 		} else if (fromBelow) {
-			boundsY1 = (int) performer.width;
+			// WORKS
+			boundsY1 = (int) performer.height;
 			kf0.boundsY1 = 0;
 			kf0.boundsY1Speed = 0.1f;
 			atLeastOneDirection = true;

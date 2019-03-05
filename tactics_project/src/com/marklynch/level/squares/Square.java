@@ -1402,22 +1402,26 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			squaresAtCurrentLevel.addAll(squaresAtNextLevel);
 			Collections.shuffle(squaresAtCurrentLevel);
 			squaresAtNextLevel.clear();
-			for (Square square : squaresAtCurrentLevel) {
-				if (!square.inventory.containsGameObjectWithTemplateId(Templates.WATER_BODY.templateId)
-						&& !square.inventory.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)
-						&& !square.inventory.containsGameObjectOfType(Wall.class)) {
-					if (square.inventory.containsGameObjectWithTemplateId(templateLiquid.templateId)) {
-						for (Square squareAtNextLevel : square.getAllSquaresAtDistance(1)) {
+			for (Square squareToPotentiallySpreadTo : squaresAtCurrentLevel) {
+				if (!squareToPotentiallySpreadTo.inventory
+						.containsGameObjectWithTemplateId(Templates.WATER_BODY.templateId)
+						&& !squareToPotentiallySpreadTo.inventory
+								.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)
+						&& !squareToPotentiallySpreadTo.inventory.containsGameObjectOfType(Wall.class)) {
+					if (squareToPotentiallySpreadTo.inventory
+							.containsGameObjectWithTemplateId(templateLiquid.templateId)) {
+						for (Square squareAtNextLevel : squareToPotentiallySpreadTo.getAllSquaresAtDistance(1)) {
 							if (!squaresAtNextLevel.contains(squareAtNextLevel)) {
 								squaresAtNextLevel.add(squareAtNextLevel);
 							}
 						}
 					} else {
-						square.inventory.removeGameObjecsOfType(Liquid.class);
+						squareToPotentiallySpreadTo.inventory.removeGameObjecsOfType(Liquid.class);
 						Liquid liquidToSpread = templateLiquid.makeCopy(null, null, 1);
-						square.inventory.add(liquidToSpread);
+						squareToPotentiallySpreadTo.inventory.add(liquidToSpread);
 //						liquidToSpread.setPrimaryAnimation(new AnimationScale(liquidToSpread, 0f, 1f, 2000, null));
-						liquidToSpread.setPrimaryAnimation(new AnimationLiquidSpread(liquidToSpread, this, 2000, null));
+						liquidToSpread.setPrimaryAnimation(
+								new AnimationLiquidSpread(liquidToSpread, squareToPotentiallySpreadTo, 2000, null));
 						return liquidToSpread;
 					}
 				}
