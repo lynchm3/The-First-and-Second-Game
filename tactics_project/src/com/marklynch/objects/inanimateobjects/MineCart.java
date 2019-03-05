@@ -74,18 +74,11 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 			for (final GameObject gameObject : (ArrayList<GameObject>) this.squareGameObjectIsOn.inventory.gameObjects
 					.clone()) {
 
-//				System.out.println("minecart.update loop go = " + gameObject + " a");
-//				System.out.println("minecart.update loop go = " + gameObject + " gameObject.isFloorObject = "
-//						+ gameObject.isFloorObject);
-
-				if (gameObject.isFloorObject)
+				if (gameObject != this && (gameObject.isFloorObject || !gameObject.moveable))
 					continue;
-//				System.out.println("minecart.update loop go = " + gameObject + " b");
-//				System.out.println("minecart.update loop go = " + gameObject + " turn = " + Level.turn);
 
 				if (gameObject.lastTurnThisWasMovedByMinecart == Level.turn)
 					continue;
-//				System.out.println("minecart.update loop go = " + gameObject + " c");
 
 				gameObject.lastTurnThisWasMovedByMinecart = Level.turn;
 
