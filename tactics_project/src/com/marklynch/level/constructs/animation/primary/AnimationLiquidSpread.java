@@ -16,57 +16,72 @@ public class AnimationLiquidSpread extends Animation {
 		super(performer, onCompletionListener, null, targetSquare, null, null, null, null, false, true, performer);
 		if (!runAnimation)
 			return;
+
 		blockAI = false;
 
 		backwards = performer.backwards;
 
-		blockAI = true;
-
-		boundsY1 = 128;
+		Square squareToLeft = targetSquare.getSquareToLeftOf();
+		if (squareToLeft != null) {
+			if (squareToLeft.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
+				fromLeft = true;
+			}
+		}
+		Square squareToRight = targetSquare.getSquareToRightOf();
+		if (squareToRight != null) {
+			if (squareToRight.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
+				fromRight = true;
+			}
+		}
+		Square squareAbove = targetSquare.getSquareAbove();
+		if (squareAbove != null) {
+			if (squareAbove.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
+				fromAbove = true;
+			}
+		}
+		Square squareBelow = targetSquare.getSquareBelow();
+		if (squareBelow != null) {
+			if (squareBelow.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
+				fromBelow = true;
+			}
+		}
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
-		kf0.setAllSpeeds(0.01f);
-		kf0.boundsY1 = 0;
-		kf0.boundsY1Speed = 0.1f;
+		boolean atLeastOneDirection = false;
 
+		if (fromLeft) {
+//			boundsX2 = 0;
+//			kf0.boundsX2 = (int) performer.width;
+//			kf0.boundsX2Speed = 0.1f;
+//			atLeastOneDirection = true;
+		} else if (fromRight) {
+			boundsX1 = (int) performer.width;
+			kf0.boundsX1 = 0;
+			kf0.boundsX1Speed = 0.1f;
+			atLeastOneDirection = true;
+		}
+
+		if (fromAbove) {
+//			boundsY1 = (int) performer.width;
+//			kf0.boundsY1 = 0;
+//			kf0.boundsY1Speed = 0.1f;
+//			atLeastOneDirection = true;
+		} else if (fromBelow) {
+			boundsY1 = (int) performer.width;
+			kf0.boundsY1 = 0;
+			kf0.boundsY1Speed = 0.1f;
+			atLeastOneDirection = true;
+		}
+
+		if (!atLeastOneDirection) {
+			scaleX = 0;
+			scaleY = 0;
+			kf0.scaleX = 1;
+			kf0.scaleY = 1;
+			kf0.scaleXSpeed = 0.001f;
+			kf0.scaleYSpeed = 0.001f;
+		}
 		keyFrames.add(kf0);
-
-//		KeyFrame kf1 = new KeyFrame(performer, this);
-////		kf1.offsetX = 64;
-////		kf1.offsetY = 64;
-//		kf1.setAllSpeeds(0.01f);
-////		kf1.offsetXSpeed = 9999999;
-////		kf1.offsetYSpeed = 9999999;
-//		kf1.boundsY1 = -128;
-//		kf1.boundsY1Speed = 1;
-//		keyFrames.add(kf1);
-
-//		ArrayList<Square> neighborSquares = targetSquare.getAllSquaresAtDistance(1);
-//
-//		Square squareToLeft = targetSquare.getSquareToLeftOf();
-//		if (squareToLeft != null) {
-//			if (squareToLeft.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
-//				fromLeft = true;
-//			}
-//		}
-//		Square squareToRight = targetSquare.getSquareToRightOf();
-//		if (squareToRight != null) {
-//			if (squareToRight.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
-//				fromRight = true;
-//			}
-//		}
-//		Square squareAbove = targetSquare.getSquareAbove();
-//		if (squareAbove != null) {
-//			if (squareAbove.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
-//				fromAbove = true;
-//			}
-//		}
-//		Square squareBelow = targetSquare.getSquareBelow();
-//		if (squareBelow != null) {
-//			if (squareBelow.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
-//				fromBelow = true;
-//			}
-//		}
 
 	}
 
@@ -77,9 +92,6 @@ public class AnimationLiquidSpread extends Animation {
 
 	@Override
 	public void draw1() {
-//		if (fromLeft) {
-
-//		}
 	}
 
 	@Override
