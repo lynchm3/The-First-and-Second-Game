@@ -63,8 +63,8 @@ public abstract class Animation {
 
 	public int boundsX1 = -128;
 	public int boundsY1 = -128;
-	public int boundsX2 = 128;
-	public int boundsY2 = 128;
+	public int boundsX2 = 256;
+	public int boundsY2 = 256;
 	public boolean drawWeapon = true;
 
 	public GameObject performer;

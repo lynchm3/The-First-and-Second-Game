@@ -449,10 +449,10 @@ public class GameObject
 		if (primaryAnimation != null) {
 			actorPositionXInPixels += primaryAnimation.offsetX;
 			actorPositionYInPixels += primaryAnimation.offsetY;
-			boundsX1 += primaryAnimation.offsetX + primaryAnimation.boundsX1;
-			boundsY1 += primaryAnimation.offsetY + primaryAnimation.boundsY1;
-			boundsX2 += primaryAnimation.offsetX + primaryAnimation.boundsX2;
-			boundsY2 += primaryAnimation.offsetY + primaryAnimation.boundsY2;
+			boundsX1 = actorPositionXInPixels + primaryAnimation.boundsX1;
+			boundsY1 = actorPositionYInPixels + primaryAnimation.boundsY1;
+			boundsX2 = actorPositionXInPixels + primaryAnimation.boundsX2;
+			boundsY2 = actorPositionYInPixels + primaryAnimation.boundsY2;
 		}
 
 		float scaleX = 1;

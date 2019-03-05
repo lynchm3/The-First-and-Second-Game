@@ -8,8 +8,8 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBloody;
 import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.level.constructs.effect.EffectHeal;
-import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectOily;
+import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
@@ -22,7 +22,7 @@ public class TemplatesLiquids {
 		Templates.WATER.name = "Water";
 		Templates.WATER.setImageAndExtrapolateSize("water.png");
 		Templates.WATER.totalHealth = Templates.WATER.remainingHealth = 1000;
-		Templates.WATER.weight = 5f;
+		Templates.WATER.weight = 1f;
 		Templates.WATER.value = 36;
 		Templates.WATER.anchorX = 0;
 		Templates.WATER.anchorY = 0;
@@ -42,7 +42,7 @@ public class TemplatesLiquids {
 		Templates.POISON.name = "Poison";
 		Templates.POISON.setImageAndExtrapolateSize("poison.png");
 		Templates.POISON.totalHealth = Templates.POISON.remainingHealth = 1000;
-		Templates.POISON.weight = 6f;
+		Templates.POISON.weight = 1f;
 		Templates.POISON.value = 16;
 		Templates.POISON.anchorX = 0;
 		Templates.POISON.anchorY = 0;
@@ -62,7 +62,7 @@ public class TemplatesLiquids {
 		Templates.OIL.name = "Oil";
 		Templates.OIL.setImageAndExtrapolateSize("oil.png");
 		Templates.OIL.totalHealth = Templates.OIL.remainingHealth = 1000;
-		Templates.OIL.weight = 6f;
+		Templates.OIL.weight = 1f;
 		Templates.OIL.value = 16;
 		Templates.OIL.anchorX = 0;
 		Templates.OIL.anchorY = 0;
@@ -81,7 +81,7 @@ public class TemplatesLiquids {
 		Templates.BLOOD.name = "Blood";
 		Templates.BLOOD.setImageAndExtrapolateSize("blood.png");
 		Templates.BLOOD.totalHealth = Templates.BLOOD.remainingHealth = 1000;
-		Templates.BLOOD.weight = 6f;
+		Templates.BLOOD.weight = 1f;
 		Templates.BLOOD.value = 16;
 		Templates.BLOOD.anchorX = 0;
 		Templates.BLOOD.anchorY = 0;
@@ -99,7 +99,7 @@ public class TemplatesLiquids {
 		Templates.LAVA.name = "Lava";
 		Templates.LAVA.setImageAndExtrapolateSize("lava.png");
 		Templates.LAVA.totalHealth = Templates.LAVA.remainingHealth = 1000;
-		Templates.LAVA.weight = 6f;
+		Templates.LAVA.weight = 1f;
 		Templates.LAVA.value = 16;
 		Templates.LAVA.anchorX = 0;
 		Templates.LAVA.anchorY = 0;
@@ -117,7 +117,7 @@ public class TemplatesLiquids {
 		Templates.SOUP.name = "Soup";
 		Templates.SOUP.setImageAndExtrapolateSize("soup.png");
 		Templates.SOUP.totalHealth = Templates.SOUP.remainingHealth = 1000;
-		Templates.SOUP.weight = 6f;
+		Templates.SOUP.weight = 1f;
 		Templates.SOUP.value = 16;
 		Templates.SOUP.anchorX = 0;
 		Templates.SOUP.anchorY = 0;

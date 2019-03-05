@@ -38,8 +38,8 @@ public class KeyFrame {
 
 	public int boundsX1 = -128;
 	public int boundsY1 = -128;
-	public int boundsX2 = 128;
-	public int boundsY2 = 128;
+	public int boundsX2 = 256;
+	public int boundsY2 = 256;
 	public float headToToeOffset = 0f;
 
 	public boolean drawWeapon = true;
@@ -110,6 +110,11 @@ public class KeyFrame {
 			this.headToToeOffset = performer.getPrimaryAnimation().headToToeOffset;
 
 			this.alpha = performer.getPrimaryAnimation().alpha;
+
+			this.boundsX1 = performer.getPrimaryAnimation().boundsX1;
+			this.boundsX2 = performer.getPrimaryAnimation().boundsX2;
+			this.boundsY1 = performer.getPrimaryAnimation().boundsY1;
+			this.boundsY2 = performer.getPrimaryAnimation().boundsY2;
 		}
 	}
 

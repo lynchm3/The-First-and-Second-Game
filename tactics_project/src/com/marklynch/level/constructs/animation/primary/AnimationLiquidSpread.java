@@ -8,7 +8,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 public class AnimationLiquidSpread extends Animation {
 
 	float startScale, endScale;
-	boolean fromLeft, fromRight, fromAbove, fromBelow;
+	boolean spreadFromLeft, spreadFromRight, spreadFromAbove, spreadFromBelow;
 
 	public AnimationLiquidSpread(GameObject performer, Square targetSquare, float durationToReachMillis,
 			OnCompletionListener onCompletionListener) {
@@ -24,38 +24,38 @@ public class AnimationLiquidSpread extends Animation {
 		Square squareToLeft = targetSquare.getSquareToLeftOf();
 		if (squareToLeft != null) {
 			if (squareToLeft.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
-				fromLeft = true;
+				spreadFromLeft = true;
 			}
 		}
 		Square squareToRight = targetSquare.getSquareToRightOf();
 		if (squareToRight != null) {
 			if (squareToRight.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
-				fromRight = true;
+				spreadFromRight = true;
 			}
 		}
 		Square squareAbove = targetSquare.getSquareAbove();
 		if (squareAbove != null) {
 			if (squareAbove.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
-				fromAbove = true;
+				spreadFromAbove = true;
 			}
 		}
 		Square squareBelow = targetSquare.getSquareBelow();
 		if (squareBelow != null) {
 			if (squareBelow.inventory.containsGameObjectWithTemplateId(performer.templateId)) {
-				fromBelow = true;
+				spreadFromBelow = true;
 			}
 		}
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
 		boolean atLeastOneDirection = false;
 
-		if (fromLeft) {
+		if (spreadFromLeft) {
 			// DOESNT WORK
-			boundsX2 = (int) performer.width;
-			kf0.boundsX2 = 0;
+			boundsX2 = 0;
+			kf0.boundsX2 = (int) performer.width;
 			kf0.boundsX2Speed = 0.1f;
 			atLeastOneDirection = true;
-		} else if (fromRight) {
+		} else if (spreadFromRight) {
 			// WORKS
 			boundsX1 = (int) performer.width;
 			kf0.boundsX1 = 0;
@@ -63,13 +63,13 @@ public class AnimationLiquidSpread extends Animation {
 			atLeastOneDirection = true;
 		}
 
-		if (fromAbove) {
+		if (spreadFromAbove) {
 //			DOESNT WORK
 			boundsY2 = 0;
-			kf0.boundsX2 = (int) performer.height;
-			kf0.boundsX2Speed = -0.1f;
+			kf0.boundsY2 = (int) performer.height;
+			kf0.boundsY2Speed = 0.1f;
 			atLeastOneDirection = true;
-		} else if (fromBelow) {
+		} else if (spreadFromBelow) {
 			// WORKS
 			boundsY1 = (int) performer.height;
 			kf0.boundsY1 = 0;
