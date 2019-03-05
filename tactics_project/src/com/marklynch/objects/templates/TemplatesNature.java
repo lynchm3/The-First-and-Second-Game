@@ -347,6 +347,7 @@ public class TemplatesNature {
 		Templates.LANDMINE.value = 110;
 		Templates.LANDMINE.anchorX = 16;
 		Templates.LANDMINE.anchorY = 4;
+		Templates.LANDMINE.discoveredObject = false;
 		Templates.LANDMINE.power = new PowerInferno(null);
 		Templates.LANDMINE.templateId = GameObject.generateNewTemplateId();
 

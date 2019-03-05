@@ -29,11 +29,6 @@ public class AnimationTeleport extends Animation {
 		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, startSquare, endSquare);
 		if (!runAnimation)
 			return;
-		durationToReachMillis = 400;
-
-		quarterDurationToReach = durationToReachMillis / 4;
-		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;
-		threeQuarterDurationToReach = halfDurationToReach + quarterDurationToReach;
 
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;

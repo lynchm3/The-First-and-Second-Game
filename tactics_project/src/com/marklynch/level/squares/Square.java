@@ -29,6 +29,7 @@ import com.marklynch.actions.ActionableInWorld;
 import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
+import com.marklynch.level.constructs.animation.primary.AnimationLiquidSpread;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
@@ -783,7 +784,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		for (int i = gameObjectsToCheck.size() - 1; i >= 0; i--) {
 
 			GameObject gameObject = gameObjectsToCheck.get(i);
-			if (!gameObject.hiddenObject)
+			if (!gameObject.discoveredObject)
 				continue;
 //			}
 
@@ -1186,7 +1187,8 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 		if (inventory.containsGameObjectOfType(Landmine.class)) {
 			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
-			if (landmine.hiddenObject) {// This is dumb, there's only a flag for player discovered... needs a change...
+			if (landmine.discoveredObject) {// This is dumb, there's only a flag for player discovered... needs a
+											// change...
 				pathCostForAI = 10;
 				return;
 			}
@@ -1213,7 +1215,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 		if (inventory.containsGameObjectOfType(Landmine.class)) {
 			Landmine landmine = (Landmine) inventory.getGameObjectOfClass(Landmine.class);
-			if (landmine.hiddenObject) {
+			if (landmine.discoveredObject) {
 				pathCostForPlayer = 10;
 				return;
 			}
@@ -1414,6 +1416,8 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 						square.inventory.removeGameObjecsOfType(Liquid.class);
 						Liquid liquidToSpread = templateLiquid.makeCopy(null, null, 1);
 						square.inventory.add(liquidToSpread);
+//						liquidToSpread.setPrimaryAnimation(new AnimationScale(liquidToSpread, 0f, 1f, 2000, null));
+						liquidToSpread.setPrimaryAnimation(new AnimationLiquidSpread(liquidToSpread, this, 2000, null));
 						return liquidToSpread;
 					}
 				}

@@ -116,7 +116,7 @@ public class PowerFindMatch extends Power {
 		if (square == null)
 			return;
 
-		if (!targetGameObject.hiddenObject)
+		if (!targetGameObject.discoveredObject)
 			return;
 
 		float x1 = 0;
@@ -145,7 +145,7 @@ public class PowerFindMatch extends Power {
 			} else {
 
 				GameObject linkedGameObject = (GameObject) linkedObject;
-				if (!linkedGameObject.hiddenObject)
+				if (!linkedGameObject.discoveredObject)
 					linkedObjectDiscovered = false;
 				Square linkedGameObjectSquare = linkedGameObject.getWorldSquareGameObjectIsOn();
 				if (linkedGameObjectSquare == null)

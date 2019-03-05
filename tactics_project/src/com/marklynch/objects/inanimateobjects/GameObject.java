@@ -242,7 +242,7 @@ public class GameObject
 
 	public Enhancement enhancement;
 	public int level = 1;
-	public boolean hiddenObject = true;
+	public boolean discoveredObject = true;
 
 	public int thoughtsOnPlayer = 0;
 
@@ -403,8 +403,13 @@ public class GameObject
 		if (hiding && this != Game.level.player)
 			return false;
 
-		if (!hiddenObject)
+		if (!discoveredObject)
 			return false;
+
+		if (primaryAnimation != null && !primaryAnimation.getCompleted() && !primaryAnimation.shouldDraw)
+			return false;
+
+//		if()
 
 		if (!Game.fullVisiblity && this != Game.level.player) {
 
@@ -1095,7 +1100,7 @@ public class GameObject
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		if (!this.hiddenObject)
+		if (!this.discoveredObject)
 			return null;
 
 		if (isFloorObject || (this instanceof Liquid)) {
@@ -1159,7 +1164,7 @@ public class GameObject
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 
-		if (!this.hiddenObject)
+		if (!this.discoveredObject)
 			return null;
 
 		if (isFloorObject) {
@@ -1214,7 +1219,7 @@ public class GameObject
 			return actions;
 		}
 
-		if (!this.hiddenObject)
+		if (!this.discoveredObject)
 			return actions;
 
 		// Inspectable
@@ -2037,6 +2042,8 @@ public class GameObject
 		gameObject.touchEffects = touchEffects;
 		gameObject.consumeEffects = consumeEffects;
 
+		gameObject.discoveredObject = discoveredObject;
+
 		gameObject.init();
 	}
 
@@ -2723,7 +2730,7 @@ public class GameObject
 	}
 
 	public void hiddenObjectDiscovered() {
-		hiddenObject = true;
+		discoveredObject = true;
 
 		if (squareGameObjectIsOn != null) {
 			Level.gameObjectsToFlash.add(this);

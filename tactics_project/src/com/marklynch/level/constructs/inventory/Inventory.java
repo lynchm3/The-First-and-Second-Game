@@ -790,7 +790,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
 
-			if (parent == Level.player && !gameObject.hiddenObject) {
+			if (parent == Level.player && !gameObject.discoveredObject) {
 				gameObject.hiddenObjectDiscovered();
 			}
 

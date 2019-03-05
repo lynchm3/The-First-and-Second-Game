@@ -16,6 +16,7 @@ public abstract class Animation {
 	public boolean blockAI = false;
 	// public boolean blockPlayer = false;
 	public boolean completed = false;
+	public boolean shouldDraw = true;
 	public float offsetX = 0;
 	public float offsetY = 0;
 	public float headToToeOffset = 0f;

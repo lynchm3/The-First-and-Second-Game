@@ -96,7 +96,7 @@ public class ActionDigging extends Action {
 
 		targetGameObject.squareGameObjectIsOn.setFloorImageTexture(Square.MUD_TEXTURE);
 
-		if (!targetGameObject.hiddenObject && targetGameObject.level <= performer.level) {
+		if (!targetGameObject.discoveredObject && targetGameObject.level <= performer.level) {
 			new ActionDiscover(performer, targetGameObject).perform();
 		}
 

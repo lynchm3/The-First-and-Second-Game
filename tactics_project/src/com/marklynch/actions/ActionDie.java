@@ -7,7 +7,6 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationDie;
-import com.marklynch.level.constructs.animation.primary.AnimationScale;
 import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
@@ -135,8 +134,6 @@ public class ActionDie extends Action {
 
 		// Actor actor = (Actor) gameObjectPerformer;
 		Liquid blood = gameObjectPerformer.squareGameObjectIsOn.liquidSpread(Templates.BLOOD);
-		if (blood != null)
-			blood.setPrimaryAnimation(new AnimationScale(blood, 0f, 1f, 2000, null));
 
 	}
 

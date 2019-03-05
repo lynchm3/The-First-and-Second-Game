@@ -91,7 +91,7 @@ public class Landmine extends GameObject implements OnCompletionListener {
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
-		if (!this.hiddenObject)
+		if (!this.discoveredObject)
 			return actions;
 		actions.add(new ActionMove(performer, squareGameObjectIsOn, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));

@@ -279,7 +279,7 @@ public class Player extends Human {
 	public void hiddenObjectDiscoveryCheck() {
 		for (Square square : squaresVisibleToPlayer) {
 			for (GameObject gameObject : square.inventory.getGameObjects()) {
-				if (!gameObject.hiddenObject && gameObject.level <= this.level) {
+				if (!gameObject.discoveredObject && gameObject.level <= this.level) {
 					new ActionDiscover(this, gameObject).perform();
 				}
 			}
