@@ -245,9 +245,15 @@ public class AnimationThrown extends SecondaryAnimation {
 					Game.level.logOnScreen(new ActivityLog(new Object[] { shooter, " threw ", projectileObject }));
 			}
 
-			if (!(projectileObject instanceof Arrow))
+			if (!(projectileObject instanceof Arrow)) {
+				System.out.println("projectileObject.squareGameObjectIsOn = " + projectileObject.squareGameObjectIsOn);
+				System.out.println("targetSquare.inventory.add(projectileObject);");
 				targetSquare.inventory.add(projectileObject);
+				System.out.println("projectileObject.squareGameObjectIsOn = " + projectileObject.squareGameObjectIsOn);
+				System.out.println("projectileObject = " + projectileObject);
+			}
 		}
+		System.out.println("targetSquare = " + targetSquare);
 
 		projectileObject.landed(shooter, action);
 

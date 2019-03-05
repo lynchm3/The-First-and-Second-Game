@@ -52,7 +52,6 @@ public class ActionDie extends Action {
 
 		if (gameObjectPerformer.squareGameObjectIsOn != null && !(gameObjectPerformer instanceof Actor)) {
 			gameObjectPerformer.squareGameObjectIsOn.inventory.remove(gameObjectPerformer);
-			gameObjectPerformer.squareGameObjectIsOn.inventory.refresh();
 		}
 
 		if (gameObjectPerformer.deathListener != null)
