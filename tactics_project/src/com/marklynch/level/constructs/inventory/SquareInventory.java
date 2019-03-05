@@ -92,6 +92,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		if (gameObjects.contains(gameObject)) {
 
 			gameObject.lastSquare = this.square;
+			gameObject.squareGameObjectIsOn = null;
 			gameObjects.remove(gameObject);
 
 			if (gameObject instanceof UpdatableGameObject && Level.updatableGameObjects.contains(gameObject)) {

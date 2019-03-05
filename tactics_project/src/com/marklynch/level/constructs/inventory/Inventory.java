@@ -736,11 +736,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null) {
-				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
-				gameObject.squareGameObjectIsOn.inventory.updateStacks();
-				gameObject.squareGameObjectIsOn.inventory.matchStacksToSquares();
+				Square oldSquare = gameObject.squareGameObjectIsOn;
+				oldSquare.inventory.remove(gameObject);
+				oldSquare.inventory.updateStacks();
+				oldSquare.inventory.matchStacksToSquares();
 			}
-			gameObject.squareGameObjectIsOn = null;
+//			gameObject.squareGameObjectIsOn = null;
 
 			// Remove from ground squares index
 //			Game.level.inanimateObjectsOnGround.remove(gameObject);

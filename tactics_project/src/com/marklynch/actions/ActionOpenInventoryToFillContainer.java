@@ -9,11 +9,11 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 
-public class ActionFillContainersInInventory extends Action {
+public class ActionOpenInventoryToFillContainer extends Action {
 
 	public static final String ACTION_NAME = "Fill Container(s)";
 
-	public ActionFillContainersInInventory(Actor performer, GameObject target) {
+	public ActionOpenInventoryToFillContainer(Actor performer, GameObject target) {
 		super(ACTION_NAME, textureFillContainer, performer, target);
 		if (!check()) {
 			enabled = false;

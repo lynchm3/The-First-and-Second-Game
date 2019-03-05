@@ -22,7 +22,7 @@ import com.marklynch.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.actions.ActionEatItems;
 import com.marklynch.actions.ActionEatItemsSelectedInInventory;
 import com.marklynch.actions.ActionEquip;
-import com.marklynch.actions.ActionFillContainersInInventory;
+import com.marklynch.actions.ActionOpenInventoryToFillContainer;
 import com.marklynch.actions.ActionFillSpecificContainer;
 import com.marklynch.actions.ActionFishingStart;
 import com.marklynch.actions.ActionFollow;
@@ -1246,10 +1246,10 @@ public class GameObject
 
 		// Water Source
 		if (this instanceof WaterSource) {
-			actions.add(new ActionFillContainersInInventory(performer, this));
+			actions.add(new ActionOpenInventoryToFillContainer(performer, this));
 		}
 		if (this instanceof Liquid) {
-			actions.add(new ActionFillContainersInInventory(performer, this));
+			actions.add(new ActionOpenInventoryToFillContainer(performer, this));
 		}
 
 		// Water Body
