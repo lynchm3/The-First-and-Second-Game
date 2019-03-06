@@ -57,51 +57,52 @@ public class ContainerForLiquids extends Tool implements Consumable {
 		this.activeEffectsOnGameObject.clear();
 
 		// Find a square for broken glass and put it there
-		Square squareForGlass = null;
+		Square squareFoGlassAndLiquid = null;
 
 		if (!squareLandedOn.inventory.containsGameObjectOfType(Wall.class)) {
-			squareForGlass = squareLandedOn;
+			squareFoGlassAndLiquid = squareLandedOn;
 		} else {
-			if (squareForGlass == null && squareLandedOn.xInGrid > shooter.squareGameObjectIsOn.xInGrid
+			if (squareFoGlassAndLiquid == null && squareLandedOn.xInGrid > shooter.squareGameObjectIsOn.xInGrid
 					&& squareLandedOn.xInGrid < Game.level.squares.length - 1) {
-				squareForGlass = Game.level.squares[squareLandedOn.xInGrid - 1][squareLandedOn.yInGrid];
-				if (!squareForGlass.inventory.canShareSquare) {
-					squareForGlass = null;
+				squareFoGlassAndLiquid = Game.level.squares[squareLandedOn.xInGrid - 1][squareLandedOn.yInGrid];
+				if (!squareFoGlassAndLiquid.inventory.canShareSquare) {
+					squareFoGlassAndLiquid = null;
 				}
 			}
-			if (squareForGlass == null && squareLandedOn.xInGrid < shooter.squareGameObjectIsOn.xInGrid
+			if (squareFoGlassAndLiquid == null && squareLandedOn.xInGrid < shooter.squareGameObjectIsOn.xInGrid
 					&& squareLandedOn.xInGrid > 0) {
-				squareForGlass = Game.level.squares[squareLandedOn.xInGrid + 1][squareLandedOn.yInGrid];
-				if (!squareForGlass.inventory.canShareSquare) {
-					squareForGlass = null;
+				squareFoGlassAndLiquid = Game.level.squares[squareLandedOn.xInGrid + 1][squareLandedOn.yInGrid];
+				if (!squareFoGlassAndLiquid.inventory.canShareSquare) {
+					squareFoGlassAndLiquid = null;
 				}
 			}
-			if (squareForGlass == null && squareLandedOn.yInGrid > shooter.squareGameObjectIsOn.yInGrid
+			if (squareFoGlassAndLiquid == null && squareLandedOn.yInGrid > shooter.squareGameObjectIsOn.yInGrid
 					&& squareLandedOn.yInGrid < Game.level.squares[0].length - 1) {
-				squareForGlass = Game.level.squares[squareLandedOn.xInGrid][squareLandedOn.yInGrid - 1];
-				if (!squareForGlass.inventory.canShareSquare) {
-					squareForGlass = null;
+				squareFoGlassAndLiquid = Game.level.squares[squareLandedOn.xInGrid][squareLandedOn.yInGrid - 1];
+				if (!squareFoGlassAndLiquid.inventory.canShareSquare) {
+					squareFoGlassAndLiquid = null;
 				}
 			}
-			if (squareForGlass == null && squareLandedOn.yInGrid < shooter.squareGameObjectIsOn.yInGrid
+			if (squareFoGlassAndLiquid == null && squareLandedOn.yInGrid < shooter.squareGameObjectIsOn.yInGrid
 					&& squareLandedOn.yInGrid > 0) {
-				squareForGlass = Game.level.squares[squareLandedOn.xInGrid][squareLandedOn.yInGrid + 1];
-				if (!squareForGlass.inventory.canShareSquare) {
-					squareForGlass = null;
+				squareFoGlassAndLiquid = Game.level.squares[squareLandedOn.xInGrid][squareLandedOn.yInGrid + 1];
+				if (!squareFoGlassAndLiquid.inventory.canShareSquare) {
+					squareFoGlassAndLiquid = null;
 				}
 			}
 		}
 
-		if (squareForGlass != null)
-			Templates.BROKEN_GLASS.makeCopy(squareForGlass, this.owner);
+		if (squareFoGlassAndLiquid != null)
+			Templates.BROKEN_GLASS.makeCopy(squareFoGlassAndLiquid, this.owner);
 
 		if (Game.level.shouldLog(this))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " smashed" }));
 
-		if (this.liquid != null && squareLandedOn != null) {
+		if (this.liquid != null && squareFoGlassAndLiquid != null) {
 			Liquid liquid = this.liquid;
-			squareLandedOn.liquidSpread(liquid);
-			for (GameObject gameObject : (ArrayList<GameObject>) squareLandedOn.inventory.getGameObjects().clone()) {
+			squareFoGlassAndLiquid.liquidSpread(liquid);
+			for (GameObject gameObject : (ArrayList<GameObject>) squareFoGlassAndLiquid.inventory.getGameObjects()
+					.clone()) {
 				if (gameObject != this) {
 					// new ActionDouse(shooter, gameObject).perform();
 					for (Effect effect : liquid.touchEffects) {

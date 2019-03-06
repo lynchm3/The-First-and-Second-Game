@@ -37,8 +37,8 @@ import mdesl.test.Util;
 
 public class Game {
 
-	public static int playerStartPosX = 108;
-	public static int playerStartPosY = 31;
+	public static int playerStartPosX = 169;
+	public static int playerStartPosY = 166;
 
 	// 104,151 boulder kill do it.
 	// Or even stand on that spot urself
