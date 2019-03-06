@@ -662,8 +662,6 @@ public class UserInputLevel {
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
 
-		System.out.println("interactWith 1");
-
 		if (openMenu) {
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		}
@@ -672,7 +670,6 @@ public class UserInputLevel {
 
 			return;
 		}
-		System.out.println("interactWith 2");
 
 		if (Game.level.levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
 			new ActionTeleport(Game.level.player, Level.teleportee, square, true, true).perform();
@@ -685,7 +682,6 @@ public class UserInputLevel {
 			// Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 			return;
 		}
-		System.out.println("interactWith 3");
 
 		Action action = null;
 
@@ -698,11 +694,6 @@ public class UserInputLevel {
 				action = square.getDefaultActionForTheSquareOrObject(Game.level.player, key != -1);
 			}
 		}
-		System.out.println("interactWith 4");
-		System.out.println("action =  " + action);
-		if (action != null)
-			System.out.println("action.enabled =  " + action.enabled);
-//		System.out.println("action =  \" + action);
 
 		if (action != null && !action.enabled) {
 			if (action.disabledReason != null) {
@@ -716,9 +707,6 @@ public class UserInputLevel {
 			return;
 		}
 
-		System.out.println("interactWith - action = " + action);
-		System.out.println("interactWith - square = " + square);
-		System.out.println("interactWith - square.class = " + square.getClass());
 		if (action != null && (square instanceof InventorySquare)) {
 			action.perform();
 		} else if (action != null && !(square instanceof InventorySquare)) {

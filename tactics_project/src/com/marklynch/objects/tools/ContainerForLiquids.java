@@ -59,9 +59,6 @@ public class ContainerForLiquids extends Tool implements Consumable {
 		// Find a square for broken glass and put it there
 		Square squareForGlass = null;
 
-		System.out.println("this = " + this);
-		System.out.println("this.squareGameObjectIsOn = " + this.squareGameObjectIsOn);
-
 		if (!squareLandedOn.inventory.containsGameObjectOfType(Wall.class)) {
 			squareForGlass = squareLandedOn;
 		} else {
@@ -101,8 +98,9 @@ public class ContainerForLiquids extends Tool implements Consumable {
 		if (Game.level.shouldLog(this))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " smashed" }));
 
-		if (this.liquid != null) {
+		if (this.liquid != null && squareLandedOn != null) {
 			Liquid liquid = this.liquid;
+			squareLandedOn.liquidSpread(liquid);
 			for (GameObject gameObject : (ArrayList<GameObject>) squareLandedOn.inventory.getGameObjects().clone()) {
 				if (gameObject != this) {
 					// new ActionDouse(shooter, gameObject).perform();
@@ -110,9 +108,6 @@ public class ContainerForLiquids extends Tool implements Consumable {
 						gameObject.addEffect(effect.makeCopy(shooter, gameObject));
 						if (effect instanceof EffectWet) {
 							gameObject.removeBurningEffect();
-							if (gameObject.squareGameObjectIsOn != null) {
-								gameObject.squareGameObjectIsOn.liquidSpread(liquid);
-							}
 						}
 					}
 				}

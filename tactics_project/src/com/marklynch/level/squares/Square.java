@@ -64,6 +64,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
+import com.marklynch.utils.Utils;
 import com.marklynch.utils.Utils.Point;
 
 public class Square implements Idable, ActionableInWorld, InventoryParent, Comparable<Square> {
@@ -1386,13 +1387,9 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 	public Liquid liquidSpread(Liquid templateLiquid) {
 
-//		int depth = 0;
+		Utils.printStackTrace();
+
 		final int maxDepth = 10;
-//		costForLiquid?
-//		passableForLiquid?
-//		sdjkndfjk
-//		go damn these people dont shut up
-//		fsklnsdklsdgkljsd
 
 		ArrayList<Square> squaresAtCurrentLevel = new ArrayList<Square>(Square.class);
 		ArrayList<Square> squaresAtNextLevel = new ArrayList<Square>(Square.class);
@@ -1419,7 +1416,6 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 						squareToPotentiallySpreadTo.inventory.removeGameObjecsOfType(Liquid.class);
 						Liquid liquidToSpread = templateLiquid.makeCopy(null, null, 1);
 						squareToPotentiallySpreadTo.inventory.add(liquidToSpread);
-//						liquidToSpread.setPrimaryAnimation(new AnimationScale(liquidToSpread, 0f, 1f, 2000, null));
 						liquidToSpread.setPrimaryAnimation(
 								new AnimationLiquidSpread(liquidToSpread, squareToPotentiallySpreadTo, 2000, null));
 						return liquidToSpread;
