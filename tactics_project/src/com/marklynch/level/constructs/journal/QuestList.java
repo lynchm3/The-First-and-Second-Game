@@ -23,6 +23,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomTeamwork2;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomTeamwork3;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomUndergroundLake;
+import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomWaterDrain;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomWaterShallows;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
@@ -194,6 +195,12 @@ public class QuestList extends ArrayList<Quest> {
 
 		// Spike room 1
 		puzzleStructureRooms.add(new PuzzleRoomSpikeFloor1(puzzleRoomsX + 1, puzzleRoomsY + 85));
+
+		// Doorway spike room 1 to drain room
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 16][puzzleRoomsY + 84]);
+
+		// Spike room 1
+		puzzleStructureRooms.add(new PuzzleRoomWaterDrain(puzzleRoomsX + 15, puzzleRoomsY + 75));
 
 		// ROOM Crumbling wall
 		puzzleStructureRooms.add(new PuzzleRoomCrumblingWall(puzzleRoomsX + 22, puzzleRoomsY + 10));

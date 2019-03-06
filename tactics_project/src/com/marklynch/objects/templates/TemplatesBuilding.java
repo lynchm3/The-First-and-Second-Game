@@ -28,6 +28,20 @@ public class TemplatesBuilding {
 		Templates.WALL_CAVE.templateId = GameObject.generateNewTemplateId();
 		Templates.WALL_CAVE.setAllResistances100();
 
+		Templates.WALL_WINDOW = new Wall();
+		Templates.WALL_WINDOW.name = "Window Wall";
+		Templates.WALL_WINDOW.imageTexture = getGlobalImage("wall_window.png", true);
+		Templates.WALL_WINDOW.totalHealth = Templates.WALL_WINDOW.remainingHealth = 1000;
+		Templates.WALL_WINDOW.soundWhenHit = 10f;
+		Templates.WALL_WINDOW.soundWhenHitting = 1f;
+		Templates.WALL_WINDOW.soundDampening = 10f;
+		Templates.WALL_WINDOW.weight = 1000f;
+		Templates.WALL_WINDOW.value = 68;
+		Templates.WALL_WINDOW.maxRandomness = 16f;
+		Templates.WALL_WINDOW.blocksLineOfSight = false;
+		Templates.WALL_WINDOW.templateId = GameObject.generateNewTemplateId();
+		Templates.WALL_WINDOW.setAllResistances100();
+
 		Templates.WALL_BUILDING = new Wall();
 		Templates.WALL_BUILDING.name = "Building Wall";
 		Templates.WALL_BUILDING.imageTexture = getGlobalImage("wall_building.png", true);
