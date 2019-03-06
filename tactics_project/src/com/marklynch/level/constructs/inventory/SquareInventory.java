@@ -79,7 +79,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			this.gameObjects.sort(this);
 
 			if (gameObject == Level.player) {
-				Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
+				Level.player.calculateVisibleAndCastableSquares(Level.player.squareGameObjectIsOn);
 				Level.player.peekSquare = null;
 			}
 
@@ -166,6 +166,14 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 	public boolean blocksLineOfSight() {
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.blocksLineOfSight)
+				return true;
+		}
+		return false;
+	}
+
+	public boolean blocksCasting() {
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.blocksCasting)
 				return true;
 		}
 		return false;

@@ -153,7 +153,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 				Game.level.turn = 1;
 				Game.level = Game.level;
 				Game.editorMode = false;
-				Game.level.player.calculateVisibleSquares(Game.level.activeActor.squareGameObjectIsOn);
+				Game.level.player.calculateVisibleAndCastableSquares(Game.level.activeActor.squareGameObjectIsOn);
 
 				// Game.runBlurAnimation();
 			}

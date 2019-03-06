@@ -62,7 +62,7 @@ public class Door extends Openable {
 		soundDampening = 1f;
 		name = baseName + " (open)";
 
-		Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
+		Level.player.calculateVisibleAndCastableSquares(Level.player.squareGameObjectIsOn);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class Door extends Openable {
 		blocksLineOfSight = blocksLineOfSightWhenClosed;
 		soundDampening = soundDampeningWhenClosed;
 		name = baseName;
-		Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
+		Level.player.calculateVisibleAndCastableSquares(Level.player.squareGameObjectIsOn);
 	}
 
 	public Door makeCopy(String name, Square square, boolean locked, boolean shouldBeClosed, boolean shouldBeLocked,

@@ -79,9 +79,9 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public transient int travelCost;
 	public SquareInventory inventory;
 
-	// public transient boolean reachableBySelectedCharater = false;
-	public transient boolean visibleToSelectedCharacter = false;
 	public transient boolean visibleToPlayer = false;
+	public transient boolean playerCanCastTo = false;
+
 	public boolean seenByPlayer = false;
 	public transient boolean inPath = false;
 	public transient ArrayList<Weapon> weaponsThatCanAttack = new ArrayList<Weapon>(Weapon.class);

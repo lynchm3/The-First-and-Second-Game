@@ -40,7 +40,7 @@ public class ActionStopPeeking extends Action {
 		if (performer == Game.level.player) {
 			Game.level.player.peekingThrough = null;
 			performer.peekSquare = null;
-			Game.level.player.calculateVisibleSquares(performer.squareGameObjectIsOn);
+			Game.level.player.calculateVisibleAndCastableSquares(performer.squareGameObjectIsOn);
 		}
 
 		if (sound != null)

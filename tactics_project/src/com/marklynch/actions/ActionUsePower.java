@@ -103,6 +103,9 @@ public class ActionUsePower extends Action {
 		if (!targetSquare.visibleToPlayer && !power.hasRange(Integer.MAX_VALUE))
 			return false;
 
+		if (!targetSquare.playerCanCastTo && !power.hasRange(Integer.MAX_VALUE))
+			return false;
+
 		if (!power.hasRange(gameObjectPerformer.straightLineDistanceTo(targetSquare)))
 			return false;
 

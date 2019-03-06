@@ -64,8 +64,8 @@ public class ActionAttack extends Action {
 		if (weapon.maxRange == 1) {
 
 			// Melee weapons
-			gameObjectPerformer
-					.setPrimaryAnimation(new AnimationSlash(gameObjectPerformer, targetGameObject, new OnCompletionListener() {
+			gameObjectPerformer.setPrimaryAnimation(
+					new AnimationSlash(gameObjectPerformer, targetGameObject, new OnCompletionListener() {
 						@Override
 						public void animationComplete(GameObject gameObject) {
 							postMeleeAnimation();
@@ -75,35 +75,37 @@ public class ActionAttack extends Action {
 
 			// Ranged weapon
 
-			gameObjectPerformer.setPrimaryAnimation(new AnimationShootArrow(performer, targetGameObject, weapon, this, null) {
+			gameObjectPerformer
+					.setPrimaryAnimation(new AnimationShootArrow(performer, targetGameObject, weapon, this, null) {
 
-				@Override
-				public void shootArrow() {
+						@Override
+						public void shootArrow() {
 
-					AnimationThrown animationThrown;
-					arrow = Templates.ARROW.makeCopy(null, null);
-					arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
-					arrow.drawOffsetX = arrow.drawOffsetRatioX * Game.SQUARE_WIDTH;
-					arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
-					arrow.drawOffsetY = arrow.drawOffsetRatioY * Game.SQUARE_HEIGHT;
-					animationThrown = new AnimationThrown("Arrow", (Actor) performer, ActionAttack.this, targetGameObject,
-							targetGameObject.squareGameObjectIsOn, arrow, weapon, 2f, 0f, true, null);
+							AnimationThrown animationThrown;
+							arrow = Templates.ARROW.makeCopy(null, null);
+							arrow.drawOffsetRatioX = (float) (0.45f + Math.random() * 0.1f);
+							arrow.drawOffsetX = arrow.drawOffsetRatioX * Game.SQUARE_WIDTH;
+							arrow.drawOffsetRatioY = (float) (0.45f + Math.random() * 0.1f);
+							arrow.drawOffsetY = arrow.drawOffsetRatioY * Game.SQUARE_HEIGHT;
+							animationThrown = new AnimationThrown("Arrow", (Actor) performer, ActionAttack.this,
+									targetGameObject, targetGameObject.squareGameObjectIsOn, arrow, weapon, 2f, 0f,
+									true, null);
 
-					// AnimationThrown(String name, Actor shooter, Action action, GameObject
-					// performer, Square targetSquare,
-					// GameObject projectileObject, GameObject weapon, float speed, float
-					// rotationSpeed, boolean onTarget,
-					// OnCompletionListener onCompletionListener)
+							// AnimationThrown(String name, Actor shooter, Action action, GameObject
+							// performer, Square targetSquare,
+							// GameObject projectileObject, GameObject weapon, float speed, float
+							// rotationSpeed, boolean onTarget,
+							// OnCompletionListener onCompletionListener)
 
-					Level.addSecondaryAnimation(animationThrown);
-				}
+							Level.addSecondaryAnimation(animationThrown);
+						}
 
-				@Override
-				public void draw3() {
-					// TODO Auto-generated method stub
+						@Override
+						public void draw3() {
+							// TODO Auto-generated method stub
 
-				}
-			});
+						}
+					});
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
@@ -178,8 +180,8 @@ public class ActionAttack extends Action {
 			}
 
 			if (targetGameObject.remainingHealth > 0)
-				targetGameObject.setPrimaryAnimation(new AnimationFlinch(targetGameObject, performer.squareGameObjectIsOn,
-						targetGameObject.getPrimaryAnimation(), null));
+				targetGameObject.setPrimaryAnimation(new AnimationFlinch(targetGameObject,
+						performer.squareGameObjectIsOn, targetGameObject.getPrimaryAnimation(), null));
 		}
 
 	}
@@ -211,6 +213,9 @@ public class ActionAttack extends Action {
 		}
 
 		if (!performer.canSeeGameObject(targetGameObject))
+			return false;
+
+		if (performer == Game.level.player && !targetSquare.playerCanCastTo)
 			return false;
 
 		return true;

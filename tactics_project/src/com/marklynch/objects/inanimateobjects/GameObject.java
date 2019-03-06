@@ -22,7 +22,6 @@ import com.marklynch.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.actions.ActionEatItems;
 import com.marklynch.actions.ActionEatItemsSelectedInInventory;
 import com.marklynch.actions.ActionEquip;
-import com.marklynch.actions.ActionOpenInventoryToFillContainer;
 import com.marklynch.actions.ActionFillSpecificContainer;
 import com.marklynch.actions.ActionFishingStart;
 import com.marklynch.actions.ActionFollow;
@@ -38,6 +37,7 @@ import com.marklynch.actions.ActionMining;
 import com.marklynch.actions.ActionMove;
 import com.marklynch.actions.ActionOpen;
 import com.marklynch.actions.ActionOpenInventoryToDropItems;
+import com.marklynch.actions.ActionOpenInventoryToFillContainer;
 import com.marklynch.actions.ActionOpenInventoryToGiveItems;
 import com.marklynch.actions.ActionOpenInventoryToPourItems;
 import com.marklynch.actions.ActionOpenInventoryToThrowItems;
@@ -146,6 +146,7 @@ public class GameObject
 	public boolean fitsInInventory = true;
 	public boolean canContainOtherObjects = false;
 	public boolean blocksLineOfSight = false;
+	public boolean blocksCasting = false;
 	public boolean persistsWhenCantBeSeen = false;
 	public boolean attackable = true;
 	public boolean moveable = true;
@@ -2015,6 +2016,7 @@ public class GameObject
 		gameObject.soundDampening = soundDampening;
 		gameObject.weight = weight;
 		gameObject.blocksLineOfSight = blocksLineOfSight;
+		gameObject.blocksCasting = blocksCasting;
 
 		gameObject.minRange = minRange;
 		gameObject.maxRange = maxRange;

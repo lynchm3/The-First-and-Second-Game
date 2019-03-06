@@ -48,6 +48,7 @@ public class Player extends Human {
 	public static float xpThisLevel;
 	public static float xpPerLevel = 55;
 	public transient ArrayList<Square> squaresVisibleToPlayer = new ArrayList<Square>(Square.class);
+	public transient ArrayList<Square> squaresPlayerCanCastTo = new ArrayList<Square>(Square.class);
 
 	public transient long lastUpdateRealtime = 0;
 
@@ -286,15 +287,19 @@ public class Player extends Human {
 		}
 	}
 
-	public void clearVisibleSquares() {
+	public void clearVisibleAndCastableSquares() {
 		for (Square squarePreviouslyVisibleToPlayer : squaresVisibleToPlayer) {
 			squarePreviouslyVisibleToPlayer.visibleToPlayer = false;
 		}
+		for (Square squarePreviouslyVisibleToPlayer : squaresPlayerCanCastTo) {
+			squarePreviouslyVisibleToPlayer.playerCanCastTo = false;
+		}
 
 		squaresVisibleToPlayer.clear();
+		squaresPlayerCanCastTo.clear();
 	}
 
-	public void calculateVisibleSquares(Square square) {
+	public void calculateVisibleAndCastableSquares(Square square) {
 
 		if (Game.editorMode)
 			return;
@@ -310,7 +315,7 @@ public class Player extends Human {
 		// }
 		// }
 
-		clearVisibleSquares();
+		clearVisibleAndCastableSquares();
 
 		double x1 = square.xInGrid;
 		double y1 = square.yInGrid;
@@ -329,9 +334,6 @@ public class Player extends Human {
 
 			if (potentiallyVIsibleSquare.visibleToPlayer)
 				continue;
-
-			// if (!potentiallyVIsibleSquare.inventory.contains(Wall.class))
-			// continue;
 
 			int visibleNeighbors = 0;
 
@@ -393,12 +395,13 @@ public class Player extends Human {
 			}
 		}
 		for (Square awkwardSquareToMakeVisible : awkwardSquaresToMakeVisible) {
-			markSquareAsVisibleToActiveCharacter(awkwardSquareToMakeVisible.xInGrid,
-					awkwardSquareToMakeVisible.yInGrid);
+			markSquareAsVisibleToPlayer(awkwardSquareToMakeVisible.xInGrid, awkwardSquareToMakeVisible.yInGrid);
+			markSquareAsCastableForPlayer(awkwardSquareToMakeVisible.xInGrid, awkwardSquareToMakeVisible.yInGrid);
+
 		}
 	}
 
-	public boolean markSquareAsVisibleToActiveCharacter(int x, int y) {
+	public boolean markSquareAsVisibleToPlayer(int x, int y) {
 
 		if (x < 0)
 			return true;
@@ -410,29 +413,26 @@ public class Player extends Human {
 			return true;
 
 		if (!squaresVisibleToPlayer.contains(Game.level.squares[x][y])) {
-			Game.level.squares[x][y].visibleToSelectedCharacter = true;
 			squaresVisibleToPlayer.add(Game.level.squares[x][y]);
-			if (this == Game.level.player) {
-				Game.level.squares[x][y].visibleToPlayer = true;
-				if (!Game.level.squares[x][y].seenByPlayer) {
-					Game.level.squares[x][y].seenByPlayer = true;
-					Game.level.squares[x][y].updateSquaresToSave();
-				}
-				// Seen area for first time?
-				if (Game.level.squares[x][y].areaSquareIsIn != null
-						&& Game.level.squares[x][y].areaSquareIsIn.seenByPlayer == false) {
-					Game.level.squares[x][y].areaSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
-				}
-				// Seen structure for first time?
-				if (Game.level.squares[x][y].structureSquareIsIn != null
-						&& Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
-					Game.level.squares[x][y].structureSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
-				}
-				// Seen room for first time?
-				if (Game.level.squares[x][y].structureRoomSquareIsIn != null
-						&& Game.level.squares[x][y].structureRoomSquareIsIn.seenByPlayer == false) {
-					Game.level.squares[x][y].structureRoomSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
-				}
+			Game.level.squares[x][y].visibleToPlayer = true;
+			if (!Game.level.squares[x][y].seenByPlayer) {
+				Game.level.squares[x][y].seenByPlayer = true;
+				Game.level.squares[x][y].updateSquaresToSave();
+			}
+			// Seen area for first time?
+			if (Game.level.squares[x][y].areaSquareIsIn != null
+					&& Game.level.squares[x][y].areaSquareIsIn.seenByPlayer == false) {
+				Game.level.squares[x][y].areaSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
+			}
+			// Seen structure for first time?
+			if (Game.level.squares[x][y].structureSquareIsIn != null
+					&& Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
+				Game.level.squares[x][y].structureSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
+			}
+			// Seen room for first time?
+			if (Game.level.squares[x][y].structureRoomSquareIsIn != null
+					&& Game.level.squares[x][y].structureRoomSquareIsIn.seenByPlayer == false) {
+				Game.level.squares[x][y].structureRoomSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
 			}
 		}
 
@@ -440,6 +440,29 @@ public class Player extends Human {
 			return false;
 
 		return Game.level.squares[x][y].inventory.blocksLineOfSight();
+	}
+
+	public boolean markSquareAsCastableForPlayer(int x, int y) {
+
+		if (x < 0)
+			return true;
+		if (y < 0)
+			return true;
+		if (x >= Game.level.squares.length)
+			return true;
+		if (y >= Game.level.squares[0].length)
+			return true;
+
+		if (!squaresPlayerCanCastTo.contains(Game.level.squares[x][y])) {
+			squaresPlayerCanCastTo.add(Game.level.squares[x][y]);
+			Game.level.squares[x][y].playerCanCastTo = true;
+		}
+
+		if (Game.level.squares[x][y] == squareGameObjectIsOn)
+			return false;
+
+		return Game.level.squares[x][y].inventory.blocksLineOfSight()
+				|| Game.level.squares[x][y].inventory.blocksCasting();
 	}
 
 	// SUPERCOVER algorithm
@@ -470,6 +493,7 @@ public class Player extends Human {
 		}
 
 		boolean done = false;
+		boolean doneForCastingChecks = false;
 		double len = Math.sqrt(vx * vx + vy * vy);
 
 		while (done == false) {
@@ -483,16 +507,19 @@ public class Player extends Human {
 					ey = ey + dy;
 					iy = iy + sy;
 				}
-				done = markSquareAsVisibleToActiveCharacter((int) rx, (int) ry);
+				done = markSquareAsVisibleToPlayer((int) rx, (int) ry);
+				if (!doneForCastingChecks)
+					doneForCastingChecks = markSquareAsCastableForPlayer((int) rx, (int) ry);
 			} else if (!done) {
 				done = true;
-				markSquareAsVisibleToActiveCharacter((int) ix, (int) iy);
+				markSquareAsVisibleToPlayer((int) ix, (int) iy);
+				if (!doneForCastingChecks)
+					markSquareAsCastableForPlayer((int) ix, (int) iy);
+				doneForCastingChecks = true;
 			}
 		}
 
 	}
-
-	// boolean died = false;
 
 	@Override
 	public boolean checkIfDestroyed(Object attacker, Action action) {

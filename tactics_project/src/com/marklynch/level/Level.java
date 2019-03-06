@@ -1009,7 +1009,7 @@ public class Level {
 			}
 
 			for (Square attackableSquare : attackableSquares) {
-				if (attackableSquare.visibleToPlayer) {
+				if (attackableSquare.visibleToPlayer && attackableSquare.playerCanCastTo) {
 					attackableSquare.drawAttackHighlight(attackableSquares);
 				}
 			}
@@ -1030,7 +1030,7 @@ public class Level {
 						ArrayList<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
 						for (Square squareToHighlight : squaresToHighlight) {
 							if (selectedPower.squareInCastLocations(Level.player, squareToHighlight)) {
-								if (squareToHighlight.visibleToPlayer || Game.fullVisiblity) {
+								if (squareToHighlight.visibleToPlayer && squareToHighlight.playerCanCastTo) {
 									squareToHighlight.drawHighlight();
 								}
 							}
@@ -1640,8 +1640,8 @@ public class Level {
 				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false);
 
 			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare
-					&& !potentialSquareToMoveTo.inventory.containsGameObjectOfType(Actor.class) && potentialAction.enabled
-					&& potentialAction.legal) {
+					&& !potentialSquareToMoveTo.inventory.containsGameObjectOfType(Actor.class)
+					&& potentialAction.enabled && potentialAction.legal) {
 				squareToMoveTo = potentialSquareToMoveTo;
 				action = potentialAction;
 			} else {
@@ -2124,9 +2124,9 @@ public class Level {
 		Game.level.activeActor = player;
 
 		if (player.peekSquare != null) {
-			player.calculateVisibleSquares(player.peekSquare);
+			player.calculateVisibleAndCastableSquares(player.peekSquare);
 		} else {
-			player.calculateVisibleSquares(player.squareGameObjectIsOn);
+			player.calculateVisibleAndCastableSquares(player.squareGameObjectIsOn);
 
 		}
 		player.hiddenObjectDiscoveryCheck();

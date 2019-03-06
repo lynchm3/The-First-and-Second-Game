@@ -58,7 +58,7 @@ public class ActionClose extends Action {
 			sound.play();
 
 		if (performer == Level.player)
-			Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
+			Level.player.calculateVisibleAndCastableSquares(Level.player.squareGameObjectIsOn);
 	}
 
 	@Override

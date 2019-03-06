@@ -78,7 +78,7 @@ public class Load {
 
 		Level.actors.clear();
 
-		Level.player.clearVisibleSquares();
+		Level.player.clearVisibleAndCastableSquares();
 
 		// End of clearage
 

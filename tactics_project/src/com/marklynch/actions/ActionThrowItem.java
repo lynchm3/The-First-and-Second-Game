@@ -81,8 +81,8 @@ public class ActionThrowItem extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		Level.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this, targetGameObject, targetSquare,
-				gameObjectToThrow, gameObjectToThrow, 2f, 0.5f, true, null));
+		Level.addSecondaryAnimation(new AnimationThrown(gameObjectToThrow.name, performer, this, targetGameObject,
+				targetSquare, gameObjectToThrow, gameObjectToThrow, 2f, 0.5f, true, null));
 
 		if (performer.equipped == gameObjectToThrow) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
@@ -170,6 +170,9 @@ public class ActionThrowItem extends Action {
 		if (!performer.canSeeSquare(targetSquare)) {
 			return false;
 		}
+
+		if (performer == Game.level.player && !targetSquare.playerCanCastTo)
+			return false;
 
 		return true;
 	}

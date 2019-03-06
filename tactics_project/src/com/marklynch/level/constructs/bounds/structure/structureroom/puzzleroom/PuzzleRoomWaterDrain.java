@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom
 import com.marklynch.Game;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.squares.Node;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
@@ -24,6 +25,7 @@ public class PuzzleRoomWaterDrain extends StructureRoom {
 		int windowWallY = 5;
 		for (int i = 0; i < totalWidthInSquares; i++) {
 			Templates.WALL_WINDOW.makeCopy(Game.level.squares[posX + i][posY + windowWallY], null);
+			Game.level.squares[posX + i][posY + windowWallY].setFloorImageTexture(Square.STONE_TEXTURE);
 		}
 //
 //		Spikes spikeFloor1 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 3], null, 1);

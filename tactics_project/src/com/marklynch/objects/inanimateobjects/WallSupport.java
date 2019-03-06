@@ -78,7 +78,7 @@ public class WallSupport extends GameObject {
 								attacker, action);
 
 						collapseSurroundingObjects(surroundingObjectToCollapse, attacker, action);
-						Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
+						Level.player.calculateVisibleAndCastableSquares(Level.player.squareGameObjectIsOn);
 					}
 				};
 

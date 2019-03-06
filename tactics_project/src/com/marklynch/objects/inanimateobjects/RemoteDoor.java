@@ -43,7 +43,7 @@ public class RemoteDoor extends Door {
 		blocksLineOfSight = false;
 		soundDampening = 1f;
 		name = baseName + " (open)";
-		Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
+		Level.player.calculateVisibleAndCastableSquares(Level.player.squareGameObjectIsOn);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class RemoteDoor extends Door {
 		blocksLineOfSight = blocksLineOfSightWhenClosed;
 		soundDampening = soundDampeningWhenClosed;
 		name = baseName;
-		Level.player.calculateVisibleSquares(Level.player.squareGameObjectIsOn);
+		Level.player.calculateVisibleAndCastableSquares(Level.player.squareGameObjectIsOn);
 	}
 
 	public RemoteDoor makeCopy(String name, Square square, boolean locked, Actor owner) {

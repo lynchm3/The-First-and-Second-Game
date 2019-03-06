@@ -39,6 +39,7 @@ public class TemplatesBuilding {
 		Templates.WALL_WINDOW.value = 68;
 		Templates.WALL_WINDOW.maxRandomness = 16f;
 		Templates.WALL_WINDOW.blocksLineOfSight = false;
+		Templates.WALL_WINDOW.blocksCasting = true;
 		Templates.WALL_WINDOW.templateId = GameObject.generateNewTemplateId();
 		Templates.WALL_WINDOW.setAllResistances100();
 

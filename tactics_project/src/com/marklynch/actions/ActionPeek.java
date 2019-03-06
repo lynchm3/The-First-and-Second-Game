@@ -55,7 +55,7 @@ public class ActionPeek extends Action {
 			performer.peekSquare = peekSquare;
 			Game.level.player.peekSquare = peekSquare;
 			if (peekSquare != null && performer == Game.level.player)
-				Game.level.player.calculateVisibleSquares(peekSquare);
+				Game.level.player.calculateVisibleAndCastableSquares(peekSquare);
 		}
 		if (!legal) {
 			Crime crime = new Crime(this.performer, targetGameObject.owner, Crime.TYPE.CRIME_VOYEURISM);
