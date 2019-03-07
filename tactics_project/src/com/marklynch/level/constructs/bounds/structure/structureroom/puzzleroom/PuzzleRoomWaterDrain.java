@@ -36,6 +36,8 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 	int wellX = 6;
 	int wellY = 7;
 
+	ArrayList<GameObject> glassWalls = new ArrayList<GameObject>(GameObject.class);
+
 	public PuzzleRoomWaterDrain(int posX, int posY) {
 		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
 				new RoomPart[] {
@@ -45,7 +47,7 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 		this.posY = posY;
 
 		for (int i = 0; i < totalWidthInSquares; i++) {
-			Templates.WALL_WINDOW.makeCopy(Game.level.squares[posX + i][posY + windowWallY], null);
+			glassWalls.add(Templates.WALL_WINDOW.makeCopy(Game.level.squares[posX + i][posY + windowWallY], null));
 			Game.level.squares[posX + i][posY + windowWallY].setFloorImageTexture(Square.STONE_TEXTURE);
 		}
 
@@ -68,9 +70,16 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 
 	}
 
+	boolean switchTriggered = false;
+
 	@Override
 	public void zwitch(Switch zwitch) {
-		System.out.println("switch");
+		if (switchTriggered)
+			return;
+		switchTriggered = true;
+		for (GameObject glassWall : glassWalls) {
+			glassWall.changeHealthSafetyOff(-glassWall.remainingHealth, null, null);
+		}
 	}
 
 }
