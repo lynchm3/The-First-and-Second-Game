@@ -199,8 +199,11 @@ public class QuestList extends ArrayList<Quest> {
 		// Doorway spike room 1 to drain room
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 16][puzzleRoomsY + 84]);
 
-		// Spike room 1
+		// Drain room 1
 		puzzleStructureRooms.add(new PuzzleRoomWaterDrain(puzzleRoomsX + 15, puzzleRoomsY + 75));
+
+		// Doorway drain room top left
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 14][puzzleRoomsY + 76]);
 
 		// ROOM Crumbling wall
 		puzzleStructureRooms.add(new PuzzleRoomCrumblingWall(puzzleRoomsX + 22, puzzleRoomsY + 10));

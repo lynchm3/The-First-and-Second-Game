@@ -12,23 +12,25 @@ import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ArrayList;
 
 public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListener {
+
 	int posX;
 	int posY;
+
 	final static int totalWidthInSquares = 6;
 	final static int totalHeightInSquares = 9;
 
 	int windowWallY = 5;
 
-	int inputDrainX = 2;
+	int inputDrainX = 1;
 	int inputDrainY = 7;
 
-	int outputDrainX = 2;
+	int outputDrainX = 1;
 	int outputDrainY = 1;
 
-	int electricalX = 2;
+	int electricalX = 1;
 	int electricalY = 0;
 
-	int pressurePlateX = 4;
+	int pressurePlateX = 3;
 	int pressurePlateY = 1;
 
 	public PuzzleRoomWaterDrain(int posX, int posY) {
