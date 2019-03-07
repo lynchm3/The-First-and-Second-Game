@@ -4,6 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.objects.inanimateobjects.InputDrain;
 import com.marklynch.objects.inanimateobjects.Fireplace;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MineCart;
@@ -224,6 +225,11 @@ public class TemplatesBuilding {
 		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES, 100));
 		Templates.FIRE_PLACE.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES,
 				new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
+
+		Templates.INPUT_DRAIN = new InputDrain();
+		Templates.INPUT_DRAIN.name = "Drain";
+		Templates.INPUT_DRAIN.setImageAndExtrapolateSize("drain.png");
+		Templates.INPUT_DRAIN.templateId = GameObject.generateNewTemplateId();
 
 	}
 

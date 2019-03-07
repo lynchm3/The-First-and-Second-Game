@@ -27,6 +27,9 @@ public class PuzzleRoomWaterDrain extends StructureRoom {
 			Templates.WALL_WINDOW.makeCopy(Game.level.squares[posX + i][posY + windowWallY], null);
 			Game.level.squares[posX + i][posY + windowWallY].setFloorImageTexture(Square.STONE_TEXTURE);
 		}
+
+		Templates.INPUT_DRAIN.makeCopy(Game.level.squares[posX + 2][posY + 7], null,
+				Game.level.squares[posX + 2][posY + 2]);
 //
 //		Spikes spikeFloor1 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 3], null, 1);
 //
