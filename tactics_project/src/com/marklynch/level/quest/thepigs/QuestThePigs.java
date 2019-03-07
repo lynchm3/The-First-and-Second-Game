@@ -181,7 +181,8 @@ public class QuestThePigs extends Quest {
 		Templates.FURNACE.makeCopy("Furnace", Game.level.squares[13][72], false, farmer);
 		GameObject pigSign = Templates.PIG_SIGN.makeCopy(Game.level.squares[25][70], farmer);
 		Templates.BENCH.makeCopy(Game.level.squares[15][68], farmer);
-		Templates.WELL.makeCopy(Game.level.squares[17][61], farmer);
+		GameObject well = Templates.WELL.makeCopy(Game.level.squares[17][61], farmer);
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 57));
 
 		// Giant footprints
 		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[1][93], null);

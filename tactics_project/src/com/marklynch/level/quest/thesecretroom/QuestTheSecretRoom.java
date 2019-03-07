@@ -138,7 +138,8 @@ public class QuestTheSecretRoom extends Quest {
 		Templates.BUSH.makeCopy(Level.squares[AreaTown.posX + 25][AreaTown.posY + 29], null);
 
 		// TownSquare Well 24,21
-		Templates.WELL.makeCopy(Level.squares[AreaTown.posX + 23][AreaTown.posY + 20], null);
+		GameObject well = Templates.WELL.makeCopy(Level.squares[AreaTown.posX + 23][AreaTown.posY + 20], null);
+		well.inventory.add(Templates.GOLD.makeCopy(null, null, 79));
 
 		// Town square pavement
 		new PavedPathway(Level.squares[AreaTown.posX + 23][AreaTown.posY + 19],

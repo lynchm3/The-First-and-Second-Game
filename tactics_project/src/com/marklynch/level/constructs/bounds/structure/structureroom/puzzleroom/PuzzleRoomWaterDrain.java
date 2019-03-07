@@ -7,6 +7,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Switch;
+import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ArrayList;
@@ -66,7 +67,8 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + pressurePlateX][posY + pressurePlateY], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 1, this);
 
-		Templates.WELL.makeCopy(Game.level.squares[posX + wellX][posY + wellY], null);
+		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[posX + wellX][posY + wellY], null);
+		well.inventory.add(Templates.GOLD.makeCopy(null, null, 23));
 
 	}
 
