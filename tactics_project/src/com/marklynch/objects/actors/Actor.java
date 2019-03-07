@@ -2008,6 +2008,9 @@ public class Actor extends GameObject {
 
 	public boolean canSeeSquare(Square square) {
 
+		if (square == null)
+			return false;
+
 		if (this == Game.level.player)
 			return square.visibleToPlayer;
 

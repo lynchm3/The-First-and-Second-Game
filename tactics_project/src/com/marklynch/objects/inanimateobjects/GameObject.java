@@ -1105,6 +1105,8 @@ public class GameObject
 			return null;
 
 		if (isFloorObject || (this instanceof Liquid)) {
+			if (this.squareGameObjectIsOn == null)
+				return null;
 			return new ActionMove(performer, this.squareGameObjectIsOn, true);
 		}
 

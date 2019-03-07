@@ -5,14 +5,30 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ArrayList;
 
-public class PuzzleRoomWaterDrain extends StructureRoom {
+public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListener {
 	int posX;
 	int posY;
 	final static int totalWidthInSquares = 6;
 	final static int totalHeightInSquares = 9;
+
+	int windowWallY = 5;
+
+	int inputDrainX = 2;
+	int inputDrainY = 7;
+
+	int outputDrainX = 2;
+	int outputDrainY = 1;
+
+	int electricalX = 2;
+	int electricalY = 0;
+
+	int pressurePlateX = 4;
+	int pressurePlateY = 1;
 
 	public PuzzleRoomWaterDrain(int posX, int posY) {
 		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
@@ -22,16 +38,20 @@ public class PuzzleRoomWaterDrain extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 
-		int windowWallY = 5;
 		for (int i = 0; i < totalWidthInSquares; i++) {
 			Templates.WALL_WINDOW.makeCopy(Game.level.squares[posX + i][posY + windowWallY], null);
 			Game.level.squares[posX + i][posY + windowWallY].setFloorImageTexture(Square.STONE_TEXTURE);
 		}
 
-		Templates.INPUT_DRAIN.makeCopy(Game.level.squares[posX + 2][posY + 7], null,
-				Game.level.squares[posX + 2][posY + 2]);
+		Templates.INPUT_DRAIN.makeCopy(Game.level.squares[posX + inputDrainX][posY + inputDrainY], null,
+				Game.level.squares[posX + outputDrainX][posY + outputDrainY]);
 
-		Templates.DRAIN_FLOOR.makeCopy(Game.level.squares[posX + 2][posY + 1], null);
+		Templates.DRAIN_FLOOR.makeCopy(Game.level.squares[posX + outputDrainX][posY + outputDrainY], null);
+
+		Templates.CIRCLE_FLOOR.makeCopy(Game.level.squares[posX + electricalX][posY + electricalY], null);
+
+		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + pressurePlateX][posY + pressurePlateY], null,
+				Switch.SWITCH_TYPE.OPEN_CLOSE, 1, this);
 //
 //		Spikes spikeFloor1 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 3], null, 1);
 //
@@ -56,6 +76,11 @@ public class PuzzleRoomWaterDrain extends StructureRoom {
 //		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 2][this.posY + 5], null,
 //				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeWallDown);
 
+	}
+
+	@Override
+	public void zwitch(Switch zwitch) {
+		System.out.println("switch");
 	}
 
 }
