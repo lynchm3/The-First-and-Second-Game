@@ -233,16 +233,16 @@ public abstract class Animation {
 		return true;
 	}
 
-	public boolean firstUpdate = true;
+	public boolean firstKeyFrameUpdate = true;
 
 	public void keyFrameUpdate(double delta) {
 
 		if (getCompleted())
 			return;
 
-		if (firstUpdate) {
+		if (firstKeyFrameUpdate) {
 			initiateNextKeyFrame();
-			firstUpdate = false;
+			firstKeyFrameUpdate = false;
 		}
 
 		float alphaChange = (float) (0.002d * delta);

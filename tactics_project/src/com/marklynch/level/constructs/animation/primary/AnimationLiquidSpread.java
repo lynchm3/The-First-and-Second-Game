@@ -15,7 +15,6 @@ public class AnimationLiquidSpread extends Animation {
 		super(performer, onCompletionListener, null, targetSquare, null, null, null, null, false, true, performer,
 				targetSquare);
 
-
 		if (!runAnimation)
 			return;
 
@@ -52,30 +51,34 @@ public class AnimationLiquidSpread extends Animation {
 		boolean atLeastOneDirection = false;
 
 		if (spreadFromLeft) {
-			// DOESNT WORK
+			boundsX1 = 0;
 			boundsX2 = 0;
-			kf0.boundsX2 = (int) performer.width;
-			kf0.boundsX2Speed = 0.1f;
+			kf0.boundsX1 = 0;
+			kf0.boundsX2 = 128;
+			kf0.boundsX2Speed = 0.5f;
 			atLeastOneDirection = true;
 		} else if (spreadFromRight) {
-			// WORKS
-			boundsX1 = (int) performer.width;
+			boundsX1 = 128;
+			boundsX2 = 128;
 			kf0.boundsX1 = 0;
-			kf0.boundsX1Speed = 0.1f;
+			kf0.boundsX2 = 128;
+			kf0.boundsX1Speed = 0.5f;
 			atLeastOneDirection = true;
 		}
 
 		if (spreadFromAbove) {
-//			DOESNT WORK
+			boundsY1 = 0;
 			boundsY2 = 0;
-			kf0.boundsY2 = (int) performer.height;
-			kf0.boundsY2Speed = 0.1f;
+			kf0.boundsY1 = 0;
+			kf0.boundsY2 = 128;
+			kf0.boundsY2Speed = 0.5f;
 			atLeastOneDirection = true;
 		} else if (spreadFromBelow) {
-			// WORKS
-			boundsY1 = (int) performer.height;
+			boundsY1 = 128;
+			boundsY2 = 128;
 			kf0.boundsY1 = 0;
-			kf0.boundsY1Speed = 0.1f;
+			kf0.boundsY2 = 128;
+			kf0.boundsY1Speed = 0.5f;
 			atLeastOneDirection = true;
 		}
 
@@ -84,8 +87,8 @@ public class AnimationLiquidSpread extends Animation {
 			scaleY = 0;
 			kf0.scaleX = 1;
 			kf0.scaleY = 1;
-			kf0.scaleXSpeed = 0.001f;
-			kf0.scaleYSpeed = 0.001f;
+			kf0.scaleXSpeed = 0.005f;
+			kf0.scaleYSpeed = 0.005f;
 		}
 		keyFrames.add(kf0);
 
@@ -111,13 +114,11 @@ public class AnimationLiquidSpread extends Animation {
 
 	@Override
 	public void draw3() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
-		// TODO Auto-generated method stub
 
 	}
 }
