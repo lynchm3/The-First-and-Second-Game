@@ -54,6 +54,7 @@ public class Fireplace extends FlammableLightSource implements UpdatableGameObje
 				continue;
 
 			EffectBurn effectBurning = new EffectBurn(this, gameObject, 3);
+			gameObject.addEffect(effectBurning);
 
 			if (!gameObject.hasActiveEffectOfType(EffectBurn.class)) {
 				if (Game.level.shouldLog(gameObject)) {

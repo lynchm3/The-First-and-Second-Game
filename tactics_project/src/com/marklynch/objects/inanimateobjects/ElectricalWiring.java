@@ -48,20 +48,26 @@ public class ElectricalWiring extends GameObject implements UpdatableGameObject 
 	@Override
 	public void update() {
 
+		System.out.println("eletrical.update");
+
 //		new ActionUsePower(this, null, this.squareGameObjectIsOn, powerSpark, true);
 
 		for (GameObject gameObject : this.squareGameObjectIsOn.inventory.gameObjects) {
 
-			if (gameObject == this || gameObject.attackable == false)
+			if (gameObject == this)
+				continue;
+
+			if (gameObject.attackable == false && !(gameObject instanceof Liquid))
 				continue;
 
 			EffectShock effectShock = new EffectShock(this, gameObject, 3);
+			gameObject.addEffect(effectShock);
 
-			if (!gameObject.hasActiveEffectOfType(EffectShock.class)) {
-				if (Game.level.shouldLog(gameObject)) {
-					Game.level.logOnScreen(new ActivityLog(new Object[] { effectShock, " spread to ", gameObject }));
-				}
+//			if (!gameObject.hasActiveEffectOfType(EffectShock.class)) {
+			if (Game.level.shouldLog(gameObject)) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { effectShock, " spread to ", gameObject }));
 			}
+//			}
 		}
 
 	}

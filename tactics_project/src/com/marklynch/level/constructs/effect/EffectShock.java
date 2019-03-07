@@ -52,9 +52,7 @@ public class EffectShock extends Effect {
 			for (Square adjacentSquare : adjacentSquares) {
 				if (adjacentSquare.inventory.containsGameObjectWithTemplateId(Templates.WATER.templateId)) {
 					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
-						if (!gameObject.hasActiveEffectOfType(EffectShock.class)) {
-							gameObject.addEffect(this.makeCopy(this.source, gameObject));
-						}
+						gameObject.addEffect(this.makeCopy(this.source, gameObject));
 					}
 				}
 			}

@@ -1854,7 +1854,7 @@ public class GameObject
 		Effect effectToRemove = null;
 		for (Effect existingEffect : this.activeEffectsOnGameObject) {
 			if (existingEffect.getClass() == effectToAdd.getClass()) {
-				if (effectToAdd.turnsRemaining >= existingEffect.turnsRemaining) {
+				if (effectToAdd.turnsRemaining > existingEffect.turnsRemaining) {
 					effectToRemove = existingEffect;
 				} else {
 					return;
