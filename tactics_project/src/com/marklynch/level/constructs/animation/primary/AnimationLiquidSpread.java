@@ -10,10 +10,12 @@ public class AnimationLiquidSpread extends Animation {
 	float startScale, endScale;
 	boolean spreadFromLeft, spreadFromRight, spreadFromAbove, spreadFromBelow;
 
-	public AnimationLiquidSpread(GameObject performer, Square targetSquare, float durationToReachMillis,
-			OnCompletionListener onCompletionListener) {
+	public AnimationLiquidSpread(GameObject performer, Square targetSquare, OnCompletionListener onCompletionListener) {
 
-		super(performer, onCompletionListener, null, targetSquare, null, null, null, null, false, true, performer);
+		super(performer, onCompletionListener, null, targetSquare, null, null, null, null, false, true, performer,
+				targetSquare);
+
+
 		if (!runAnimation)
 			return;
 

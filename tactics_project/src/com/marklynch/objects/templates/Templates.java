@@ -25,13 +25,13 @@ import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.Carcass;
 import com.marklynch.objects.inanimateobjects.Corpse;
 import com.marklynch.objects.inanimateobjects.Door;
-import com.marklynch.objects.inanimateobjects.InputDrain;
 import com.marklynch.objects.inanimateobjects.Fireplace;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.Furnace;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
+import com.marklynch.objects.inanimateobjects.InputDrain;
 import com.marklynch.objects.inanimateobjects.Inspectable;
 import com.marklynch.objects.inanimateobjects.Landmine;
 import com.marklynch.objects.inanimateobjects.Liquid;
@@ -430,6 +430,7 @@ public class Templates {
 	// Floor
 	public static GameObject STONE_FLOOR;
 	public static GameObject CIRCLE_FLOOR;
+	public static GameObject DRAIN_FLOOR;
 	public static GameObject LEAVES;
 	public static GameObject GIANT_FOOTPRINT;
 	public static GameObject GIANT_FOOTPRINT_LEFT;

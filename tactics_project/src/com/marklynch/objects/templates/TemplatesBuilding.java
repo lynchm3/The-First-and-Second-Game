@@ -4,9 +4,9 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.objects.inanimateobjects.InputDrain;
 import com.marklynch.objects.inanimateobjects.Fireplace;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.InputDrain;
 import com.marklynch.objects.inanimateobjects.MineCart;
 import com.marklynch.objects.inanimateobjects.Rail;
 import com.marklynch.objects.inanimateobjects.Wall;
@@ -192,6 +192,19 @@ public class TemplatesBuilding {
 		Templates.CIRCLE_FLOOR.moveable = false;
 		Templates.CIRCLE_FLOOR.orderingOnGound = 19;
 		Templates.CIRCLE_FLOOR.templateId = GameObject.generateNewTemplateId();
+
+		Templates.DRAIN_FLOOR = new GameObject();
+		Templates.DRAIN_FLOOR.name = "Drain";
+		Templates.DRAIN_FLOOR.imageTexture = getGlobalImage("drain.png", true);
+		Templates.DRAIN_FLOOR.canBePickedUp = false;
+		Templates.DRAIN_FLOOR.fitsInInventory = false;
+		Templates.DRAIN_FLOOR.persistsWhenCantBeSeen = true;
+		Templates.DRAIN_FLOOR.attackable = false;
+		Templates.DRAIN_FLOOR.isFloorObject = true;
+		Templates.DRAIN_FLOOR.drawShadow = false;
+		Templates.DRAIN_FLOOR.moveable = false;
+		Templates.DRAIN_FLOOR.orderingOnGound = 19;
+		Templates.DRAIN_FLOOR.templateId = GameObject.generateNewTemplateId();
 
 		Templates.MINE_CART = new MineCart();
 		Templates.MINE_CART.name = "Mine Cart";

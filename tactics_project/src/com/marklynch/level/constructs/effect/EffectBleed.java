@@ -5,7 +5,6 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
-import com.marklynch.level.constructs.animation.primary.AnimationScale;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
@@ -45,8 +44,6 @@ public class EffectBleed extends Effect {
 		if (Game.level.shouldLog(target))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
 		Liquid blood = target.squareGameObjectIsOn.liquidSpread(Templates.BLOOD);
-		if (blood != null)
-			blood.setPrimaryAnimation(new AnimationScale(blood, 0f, 1f, 2000, null));
 		turnsRemaining--;
 
 	}

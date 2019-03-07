@@ -85,7 +85,7 @@ public abstract class Animation {
 
 	public Animation(GameObject performer, OnCompletionListener onCompletionListener, Square[] targetSquares,
 			Square targetSquare, GameObject projectileObject, Action action, Actor shooter, GameObject weapon,
-			boolean alwaysRun, boolean primary, Object... objectsInvolved) {
+			boolean alwaysRun, boolean primary, Object... objectsAndSquaresInvolved) {
 
 		if (primary) {
 			performer.killOldPrimaryAnimation();
@@ -102,7 +102,8 @@ public abstract class Animation {
 		this.weapon = weapon;
 		this.alwaysRun = alwaysRun;
 
-		runAnimation = alwaysRun || Game.level.shouldLog(objectsInvolved, false);// && performer == Game.level.player;
+		runAnimation = alwaysRun || Game.level.shouldLog(objectsAndSquaresInvolved, false);// && performer ==
+		// Game.level.player;
 
 		if (!runAnimation) {
 

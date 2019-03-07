@@ -1,6 +1,7 @@
 package com.marklynch.objects.inanimateobjects;
 
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
+import com.marklynch.level.constructs.animation.primary.AnimationScale;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.ArrayList;
@@ -46,20 +47,39 @@ public class InputDrain extends GameObject implements OnCompletionListener {
 
 		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
 
-			if (gameObject == this || gameObject.isFloorObject || !(gameObject instanceof Liquid))
+			if (gameObject == this || !(gameObject instanceof Liquid))
 				continue;
 
-//			if (gameObject.primaryAnimation != null && gameObject.primaryAnimation.completed == false) {
-//				gameObject.primaryAnimation.onCompletionListener = this;
-//			} else {
-			doTheThing((Liquid) gameObject);
-//			}
+			if (gameObject.primaryAnimation != null && gameObject.primaryAnimation.completed == false) {
+				gameObject.primaryAnimation.onCompletionListener = this;
+			} else {
+				doTheThing((Liquid) gameObject);
+			}
 		}
 	}
 
-	public void doTheThing(final Liquid gameObject) {
-		this.squareGameObjectIsOn.inventory.remove(gameObject);
-		this.connectedSquare.liquidSpread(gameObject);
+	public void doTheThing(final Liquid liquid) {
+		liquid.setPrimaryAnimation(new AnimationScale(liquid, 1f, 0f, 500, new OnCompletionListener() {
+			@Override
+			public void animationComplete(GameObject gameObject) {
+				InputDrain.this.squareGameObjectIsOn.inventory.remove(liquid);
+				InputDrain.this.connectedSquare.liquidSpread(liquid);
+			}
+		}));
+
+//		liquid.setPrimaryAnimation(new AnimationLiquidSpread(liquid, new OnCompletionListener() {
+//			@Override
+//			public void animationComplete(GameObject gameObject) {
+//
+//				liquid.setPrimaryAnimation(new AnimationScale(liquid, 1f, 0f, 2000, new OnCompletionListener() {
+//					@Override
+//					public void animationComplete(GameObject gameObject) {
+//						InputDrain.this.squareGameObjectIsOn.inventory.remove(liquid);
+//						InputDrain.this.connectedSquare.liquidSpread(liquid);
+//					}
+//				}));
+//			}
+//		}));
 	}
 
 	@Override
