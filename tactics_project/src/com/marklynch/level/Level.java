@@ -2144,7 +2144,7 @@ public class Level {
 
 		// Game.level.activeActor = null;
 		for (UpdatableGameObject updatableGameObject : (ArrayList<UpdatableGameObject>) updatableGameObjects.clone()) {
-			updatableGameObject.update(0);
+			updatableGameObject.update();
 		}
 
 		// Run effects on inanimate objects

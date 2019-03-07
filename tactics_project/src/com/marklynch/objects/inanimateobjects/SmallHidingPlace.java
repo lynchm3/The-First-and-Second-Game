@@ -63,7 +63,7 @@ public class SmallHidingPlace extends Searchable implements UpdatableGameObject 
 	}
 
 	@Override
-	public void update(int delta) {
+	public void update() {
 
 		if (groupOfBuns == null || groupOfBuns.size() == 0) {
 			if (Math.random() > 0.9f) {

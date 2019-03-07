@@ -109,7 +109,7 @@ public class Spikes extends GameObject implements SwitchListener, UpdatableGameO
 	}
 
 	@Override
-	public void update(int delta) {
+	public void update() {
 		if (lastTurnDidDamage == Level.turn)
 			return;
 		doDamage();

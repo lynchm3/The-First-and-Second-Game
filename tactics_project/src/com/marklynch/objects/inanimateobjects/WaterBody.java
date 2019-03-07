@@ -201,7 +201,7 @@ public class WaterBody extends WaterSource implements Consumable, UpdatableGameO
 	}
 
 	@Override
-	public void update(int delta) {
+	public void update() {
 
 		if (this.squareGameObjectIsOn == null)
 			return;

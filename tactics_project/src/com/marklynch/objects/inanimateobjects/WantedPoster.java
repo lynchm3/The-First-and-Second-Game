@@ -89,7 +89,7 @@ public class WantedPoster extends GameObject implements UpdatableGameObject {
 	}
 
 	@Override
-	public void update(int delta) {
+	public void update() {
 		for (Crime crime : crimes) {
 			crime.notifyWitnessesOfCrime();
 		}

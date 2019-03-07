@@ -5,6 +5,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
@@ -43,12 +44,17 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 			Game.level.squares[posX + i][posY + windowWallY].setFloorImageTexture(Square.STONE_TEXTURE);
 		}
 
-		Templates.INPUT_DRAIN.makeCopy(Game.level.squares[posX + inputDrainX][posY + inputDrainY], null,
+		GameObject inputDrain = Templates.INPUT_DRAIN.makeCopy(
+				Game.level.squares[posX + inputDrainX][posY + inputDrainY], null,
 				Game.level.squares[posX + outputDrainX][posY + outputDrainY]);
 
-		Templates.DRAIN_FLOOR.makeCopy(Game.level.squares[posX + outputDrainX][posY + outputDrainY], null);
+		GameObject outputDrain = Templates.DRAIN_FLOOR
+				.makeCopy(Game.level.squares[posX + outputDrainX][posY + outputDrainY], null);
 
-		Templates.CIRCLE_FLOOR.makeCopy(Game.level.squares[posX + electricalX][posY + electricalY], null);
+		inputDrain.linkedObjects.add(outputDrain);
+		outputDrain.linkedObjects.add(inputDrain);
+
+		Templates.ELECTRICAL_WIRING.makeCopy(Game.level.squares[posX + electricalX][posY + electricalY], null);
 
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + pressurePlateX][posY + pressurePlateY], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 1, this);

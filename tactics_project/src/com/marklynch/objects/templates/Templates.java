@@ -25,6 +25,7 @@ import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.Carcass;
 import com.marklynch.objects.inanimateobjects.Corpse;
 import com.marklynch.objects.inanimateobjects.Door;
+import com.marklynch.objects.inanimateobjects.ElectricalWiring;
 import com.marklynch.objects.inanimateobjects.Fireplace;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.Furnace;
@@ -298,6 +299,7 @@ public class Templates {
 	public static GameObject RUBBLE;
 	public static Fireplace FIRE_PLACE;
 	public static InputDrain INPUT_DRAIN;
+	public static ElectricalWiring ELECTRICAL_WIRING;
 
 	public static Wall FENCE;
 

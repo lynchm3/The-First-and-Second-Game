@@ -40,7 +40,7 @@ public class ActionUsePower extends Action {
 			return;
 
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
-		if (log)
+		if (log && Game.level.shouldLog(gameObjectPerformer, targetSquare))
 			power.log(gameObjectPerformer, targetSquare);
 		power.cast(gameObjectPerformer, targetGameObject, targetSquare, this);
 

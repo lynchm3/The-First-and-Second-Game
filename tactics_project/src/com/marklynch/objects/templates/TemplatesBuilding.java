@@ -4,6 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.objects.inanimateobjects.ElectricalWiring;
 import com.marklynch.objects.inanimateobjects.Fireplace;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.InputDrain;
@@ -243,6 +244,11 @@ public class TemplatesBuilding {
 		Templates.INPUT_DRAIN.name = "Drain";
 		Templates.INPUT_DRAIN.setImageAndExtrapolateSize("drain.png");
 		Templates.INPUT_DRAIN.templateId = GameObject.generateNewTemplateId();
+
+		Templates.ELECTRICAL_WIRING = new ElectricalWiring();
+		Templates.ELECTRICAL_WIRING.name = "Electrical Wiring";
+		Templates.ELECTRICAL_WIRING.setImageAndExtrapolateSize("electrical_wiring.png");
+		Templates.ELECTRICAL_WIRING.templateId = GameObject.generateNewTemplateId();
 
 	}
 

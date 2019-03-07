@@ -40,7 +40,7 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 	}
 
 	@Override
-	public void update(int delta) {
+	public void update() {
 //		System.out.println("minecart.update a");
 		if (squareGameObjectIsOn == null)
 			return;

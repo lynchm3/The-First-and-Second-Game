@@ -98,7 +98,7 @@ public class Tree extends GameObject implements UpdatableGameObject {
 	}
 
 	@Override
-	public void update(int delta) {
+	public void update() {
 
 		// WE were hit, drop all fruit
 		if (remainingHealth < healthWhenLastDroppedFruit && inventory.size() > 0) {

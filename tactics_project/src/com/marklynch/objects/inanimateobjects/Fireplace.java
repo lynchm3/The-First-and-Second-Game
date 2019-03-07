@@ -43,7 +43,7 @@ public class Fireplace extends FlammableLightSource implements UpdatableGameObje
 	}
 
 	@Override
-	public void update(int delta) {
+	public void update() {
 
 		if (!lit)
 			return;

@@ -82,7 +82,7 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 	}
 
 	@Override
-	public void update(int delta) {
+	public void update() {
 
 		if (this.squareGameObjectIsOn == null)
 			return;
