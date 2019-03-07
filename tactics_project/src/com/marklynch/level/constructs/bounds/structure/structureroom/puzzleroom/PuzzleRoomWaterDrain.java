@@ -33,6 +33,9 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 	int pressurePlateX = 3;
 	int pressurePlateY = 1;
 
+	int wellX = 6;
+	int wellY = 7;
+
 	public PuzzleRoomWaterDrain(int posX, int posY) {
 		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
 				new RoomPart[] {
@@ -60,29 +63,8 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + pressurePlateX][posY + pressurePlateY], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 1, this);
-//
-//		Spikes spikeFloor1 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 3], null, 1);
-//
-//		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 1][this.posY + 3], null,
-//				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeFloor1);
-//
-//		Spikes spikeFloor2 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 2], null, 1);
-//		spikeFloor2.zwitch(null);
-//
-//		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 1][this.posY + 2], null,
-//				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeFloor2);
-//
-//		Spikes spikeFloor3 = Templates.SPIKE_FLOOR.makeCopy(Level.squares[this.posX + 2][this.posY + 4], null, 1);
-//		spikeFloor3.zwitch(null);
-//
-//		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 2][this.posY + 4], null,
-//				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeFloor3);
-//
-//		Spikes spikeWallDown = Templates.SPIKE_WALL_DOWN.makeCopy(Level.squares[this.posX + 5][this.posY + 0], null, 1);
-//		spikeWallDown.zwitch(null);
-//
-//		Templates.PRESSURE_PLATE.makeCopy(Level.squares[this.posX + 2][this.posY + 5], null,
-//				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, spikeWallDown);
+
+		Templates.WELL.makeCopy(Game.level.squares[posX + wellX][posY + wellY], null);
 
 	}
 
