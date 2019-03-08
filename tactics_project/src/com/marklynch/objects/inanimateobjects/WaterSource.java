@@ -23,6 +23,8 @@ public class WaterSource extends GameObject {
 		type = "Water Source";
 		liquid = Templates.WATER;
 
+		orderingOnGound = 101;
+
 	}
 
 	@Override

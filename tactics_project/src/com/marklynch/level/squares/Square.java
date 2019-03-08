@@ -51,8 +51,6 @@ import com.marklynch.objects.inanimateobjects.MapMarker;
 import com.marklynch.objects.inanimateobjects.Portal;
 import com.marklynch.objects.inanimateobjects.PressurePlate;
 import com.marklynch.objects.inanimateobjects.RemoteDoor;
-import com.marklynch.objects.inanimateobjects.Stump;
-import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.VoidHole;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
@@ -694,29 +692,6 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 	}
 
-	public Action getDefaultActionForTheSquareOrObject(Actor performer, boolean keyPress) {
-		if (keyPress == false && !seenByPlayer) {
-			return new ActionMove(performer, this, true);
-		}
-
-		GameObject targetGameObject = null;
-
-		if (keyPress == false && Game.gameObjectMouseIsOver != null) {
-			targetGameObject = Game.gameObjectMouseIsOver;
-		}
-
-		if (targetGameObject == null) {
-			targetGameObject = this.inventory.gameObjectThatCantShareSquare;
-		}
-
-		if (targetGameObject != null) {
-			return targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
-		} else {
-			return getDefaultActionPerformedOnThisInWorld(performer);
-		}
-		// return
-	}
-
 	public GameObject getGameObjectMouseIsOver() {
 
 		// if (!this.seenByPlayer)
@@ -899,35 +874,49 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	// mouseXTransformed
 	// mouseYTransformed
 
+	public Action getDefaultActionForTheSquareOrObject(Actor performer, boolean keyPress) {
+		if (keyPress == false && !seenByPlayer) {
+			return new ActionMove(performer, this, true);
+		}
+
+		GameObject targetGameObject = null;
+
+		if (keyPress == false && Game.gameObjectMouseIsOver != null) {
+			targetGameObject = Game.gameObjectMouseIsOver;
+		}
+
+		if (targetGameObject == null) {
+			targetGameObject = this.inventory.gameObjectThatCantShareSquare;
+		}
+
+		if (targetGameObject != null) {
+			return targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
+		} else {
+			return getDefaultActionPerformedOnThisInWorld(performer);
+		}
+	}
+
 	public Action getSecondaryActionForTheSquareOrObject(Actor performer, boolean keyPress) {
 
-		GameObject targetGameObject = this.inventory.gameObjectThatCantShareSquare;
-		if (keyPress == false && targetGameObject != null) {
+		if (keyPress == false && !seenByPlayer) {
+			return new ActionMove(performer, this, true);
+		}
+
+		GameObject targetGameObject = null;
+
+		if (keyPress == false && Game.gameObjectMouseIsOver != null) {
+			targetGameObject = Game.gameObjectMouseIsOver;
+		}
+
+		if (targetGameObject == null) {
+			targetGameObject = this.inventory.gameObjectThatCantShareSquare;
+		}
+
+		if (targetGameObject != null) {
 			return targetGameObject.getSecondaryActionPerformedOnThisInWorld(performer);
+		} else {
+			return getSecondaryActionPerformedOnThisInWorld(performer);
 		}
-
-		Tree tree = (Tree) this.inventory.getGameObjectOfClass(Tree.class);
-		if (tree != null) {
-			return tree.getSecondaryActionPerformedOnThisInWorld(performer);
-		}
-
-		Stump stump = (Stump) this.inventory.getGameObjectOfClass(Stump.class);
-		if (stump != null) {
-			return stump.getSecondaryActionPerformedOnThisInWorld(performer);
-		}
-
-		if (this.inventory.size() == 1) {
-			return this.inventory.get(0).getSecondaryActionPerformedOnThisInWorld(performer);
-		}
-
-		if (this.inventory.getDecorativeCount() == this.inventory.size() - 1) {
-			GameObject onlyNonDecorativeObject = this.inventory.getNonDecorativeGameObject();
-			if (onlyNonDecorativeObject != null)
-				return onlyNonDecorativeObject.getSecondaryActionPerformedOnThisInWorld(performer);
-		}
-
-		return null;
-
 	}
 
 	public Action getAttackActionForTheSquareOrObject(Actor performer, boolean keyPress) {

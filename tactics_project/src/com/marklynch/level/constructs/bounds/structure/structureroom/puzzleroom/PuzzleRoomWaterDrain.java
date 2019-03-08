@@ -81,6 +81,8 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 		AttackableSwitch attackableSwitch = Templates.ATTACKABLE_SWITCH.makeCopy(
 				Game.level.squares[posX + attackableSwitchX][posY + attackableSwitchY], null, SWITCH_TYPE.ON_OFF,
 				eletricalWiring);
+
+		Templates.WATER.makeCopy(Game.level.squares[posX - 1][posY + 1], null, 1);
 	}
 
 	boolean switchTriggered = false;

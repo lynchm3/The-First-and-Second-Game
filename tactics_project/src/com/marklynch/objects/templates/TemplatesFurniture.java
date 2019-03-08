@@ -249,7 +249,7 @@ public class TemplatesFurniture {
 		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.actionVerb = "triggered";
 
 		Templates.ATTACKABLE_SWITCH = new AttackableSwitch();
-		Templates.ATTACKABLE_SWITCH.name = "Attackable Switch";
+		Templates.ATTACKABLE_SWITCH.name = "Switch";
 		Templates.ATTACKABLE_SWITCH.totalHealth = Templates.PRESSURE_PLATE.remainingHealth = 1;
 		Templates.ATTACKABLE_SWITCH.setImageAndExtrapolateSize("lever.png");
 		Templates.ATTACKABLE_SWITCH.weight = 0f;
@@ -347,6 +347,7 @@ public class TemplatesFurniture {
 		Templates.WELL.consumeEffects = new Effect[] {};
 		Templates.WELL.canShareSquare = false;
 		Templates.WELL.fitsInInventory = false;
+		Templates.WELL.canContainOtherObjects = true;
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
 		Templates.WELL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES, 100));
