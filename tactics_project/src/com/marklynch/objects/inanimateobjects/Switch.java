@@ -14,7 +14,7 @@ public class Switch extends GameObject {
 
 	public String actionName;
 	public String actionVerb;
-	public RequirementToMeet[] requirementsToMeet;
+	public RequirementToMeet[] requirementsToMeet = new RequirementToMeet[] {};
 
 	public SwitchListener[] switchListeners;
 	public SWITCH_TYPE switchType;

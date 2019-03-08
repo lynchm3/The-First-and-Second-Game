@@ -7,6 +7,7 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
+import com.marklynch.objects.inanimateobjects.AttackableSwitch;
 import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.Furnace;
@@ -246,6 +247,16 @@ public class TemplatesFurniture {
 		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.templateId = GameObject.generateNewTemplateId();
 		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.actionName = "Trigger";
 		Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.actionVerb = "triggered";
+
+		Templates.ATTACKABLE_SWITCH = new AttackableSwitch();
+		Templates.ATTACKABLE_SWITCH.name = "Attackable Switch";
+		Templates.ATTACKABLE_SWITCH.totalHealth = Templates.PRESSURE_PLATE.remainingHealth = 1;
+		Templates.ATTACKABLE_SWITCH.setImageAndExtrapolateSize("attackable_switch.png");
+		Templates.ATTACKABLE_SWITCH.weight = 0f;
+		Templates.ATTACKABLE_SWITCH.value = 29;
+		Templates.ATTACKABLE_SWITCH.templateId = GameObject.generateNewTemplateId();
+		Templates.ATTACKABLE_SWITCH.actionName = "Trigger";
+		Templates.ATTACKABLE_SWITCH.actionVerb = "triggered";
 
 		Templates.SEESAW = new Seesaw();
 		Templates.SEESAW.name = "Seesaw";

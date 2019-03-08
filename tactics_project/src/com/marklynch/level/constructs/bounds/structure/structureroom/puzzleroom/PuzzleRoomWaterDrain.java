@@ -5,8 +5,11 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.inanimateobjects.AttackableSwitch;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.PressurePlate;
 import com.marklynch.objects.inanimateobjects.Switch;
+import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
@@ -33,6 +36,9 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 
 	int pressurePlateX = 3;
 	int pressurePlateY = 1;
+
+	int attackableSwitchX = 0;
+	int attackableSwitchY = -1;
 
 	int wellX = 6;
 	int wellY = 7;
@@ -70,17 +76,24 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[posX + wellX][posY + wellY], null);
 		well.inventory.add(Templates.GOLD.makeCopy(null, null, 23));
 
+		AttackableSwitch attackableSwitch = Templates.ATTACKABLE_SWITCH.makeCopy(
+				Game.level.squares[posX + attackableSwitchX][posY + attackableSwitchY], null, SWITCH_TYPE.OPEN_CLOSE,
+				this);
 	}
 
 	boolean switchTriggered = false;
 
 	@Override
 	public void zwitch(Switch zwitch) {
-		if (switchTriggered)
-			return;
-		switchTriggered = true;
-		for (GameObject glassWall : glassWalls) {
-			glassWall.changeHealthSafetyOff(-glassWall.remainingHealth, null, null);
+		if (zwitch instanceof PressurePlate) {
+			if (switchTriggered)
+				return;
+			switchTriggered = true;
+			for (GameObject glassWall : glassWalls) {
+				glassWall.changeHealthSafetyOff(-glassWall.remainingHealth, null, null);
+			}
+		} else {
+			System.out.println("RRRRR");
 		}
 	}
 

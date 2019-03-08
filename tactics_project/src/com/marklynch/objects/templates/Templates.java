@@ -20,6 +20,7 @@ import com.marklynch.objects.armor.Helmet;
 import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.Arrow;
+import com.marklynch.objects.inanimateobjects.AttackableSwitch;
 import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.Carcass;
@@ -278,6 +279,7 @@ public class Templates {
 
 	public static PressurePlate PRESSURE_PLATE;
 	public static PressurePlateRequiringSpecificItem PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM;
+	public static AttackableSwitch ATTACKABLE_SWITCH;
 
 	public static Seesaw SEESAW;
 	public static SeesawPart SEESAW_PART;

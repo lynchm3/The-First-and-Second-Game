@@ -17,10 +17,9 @@ public class AttackableSwitch extends Switch {
 		canBePickedUp = false;
 		fitsInInventory = false;
 		persistsWhenCantBeSeen = true;
-		attackable = false;
-		isFloorObject = true;
+		attackable = true;
 		moveable = false;
-		orderingOnGound = 30;
+		orderingOnGound = 0;
 		type = "Switch";
 	}
 
@@ -53,7 +52,7 @@ public class AttackableSwitch extends Switch {
 		return 0;
 	}
 
-	public AttackableSwitch makeCopy(Square square, Actor owner, SWITCH_TYPE switchType, int targetWeight,
+	public AttackableSwitch makeCopy(Square square, Actor owner, SWITCH_TYPE switchType,
 			SwitchListener... switchListeners) {
 
 		AttackableSwitch attackableSwitch = new AttackableSwitch();
