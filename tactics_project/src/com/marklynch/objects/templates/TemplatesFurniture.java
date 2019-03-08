@@ -251,7 +251,7 @@ public class TemplatesFurniture {
 		Templates.ATTACKABLE_SWITCH = new AttackableSwitch();
 		Templates.ATTACKABLE_SWITCH.name = "Attackable Switch";
 		Templates.ATTACKABLE_SWITCH.totalHealth = Templates.PRESSURE_PLATE.remainingHealth = 1;
-		Templates.ATTACKABLE_SWITCH.setImageAndExtrapolateSize("attackable_switch.png");
+		Templates.ATTACKABLE_SWITCH.setImageAndExtrapolateSize("lever.png");
 		Templates.ATTACKABLE_SWITCH.weight = 0f;
 		Templates.ATTACKABLE_SWITCH.value = 29;
 		Templates.ATTACKABLE_SWITCH.templateId = GameObject.generateNewTemplateId();

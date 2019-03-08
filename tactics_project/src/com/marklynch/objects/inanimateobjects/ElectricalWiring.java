@@ -4,14 +4,15 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.effect.EffectShock;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
 
-public class ElectricalWiring extends GameObject implements UpdatableGameObject {
+public class ElectricalWiring extends GameObject implements UpdatableGameObject, SwitchListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
-//	public boolean on = true;
+	public boolean on = true;
 
 	public ElectricalWiring() {
 		super();
@@ -24,6 +25,7 @@ public class ElectricalWiring extends GameObject implements UpdatableGameObject 
 		floatsInWater = false;
 		canShareSquare = true;
 		isFloorObject = true;
+		orderingOnGound = 101;
 	}
 
 	@Override
@@ -48,6 +50,9 @@ public class ElectricalWiring extends GameObject implements UpdatableGameObject 
 	@Override
 	public void update() {
 
+		if (!on)
+			return;
+
 		System.out.println("eletrical.update");
 
 //		new ActionUsePower(this, null, this.squareGameObjectIsOn, powerSpark, true);
@@ -70,6 +75,11 @@ public class ElectricalWiring extends GameObject implements UpdatableGameObject 
 //			}
 		}
 
+	}
+
+	@Override
+	public void zwitch(Switch zwitch) {
+		on = !on;
 	}
 
 }

@@ -23,7 +23,7 @@ public class Switch extends GameObject {
 	public boolean pressed = false;
 
 	public enum SWITCH_TYPE {
-		OPEN_CLOSE, LOCK_UNLOCK
+		OPEN_CLOSE, LOCK_UNLOCK, ON_OFF
 	}
 
 	public Switch() {

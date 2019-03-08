@@ -6,6 +6,7 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.AttackableSwitch;
+import com.marklynch.objects.inanimateobjects.ElectricalWiring;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.PressurePlate;
 import com.marklynch.objects.inanimateobjects.Switch;
@@ -38,7 +39,7 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 	int pressurePlateY = 1;
 
 	int attackableSwitchX = 0;
-	int attackableSwitchY = -1;
+	int attackableSwitchY = 0;
 
 	int wellX = 6;
 	int wellY = 7;
@@ -68,7 +69,8 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 		inputDrain.linkedObjects.add(outputDrain);
 		outputDrain.linkedObjects.add(inputDrain);
 
-		Templates.ELECTRICAL_WIRING.makeCopy(Game.level.squares[posX + electricalX][posY + electricalY], null);
+		ElectricalWiring eletricalWiring = Templates.ELECTRICAL_WIRING
+				.makeCopy(Game.level.squares[posX + electricalX][posY + electricalY], null);
 
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + pressurePlateX][posY + pressurePlateY], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 1, this);
@@ -77,8 +79,8 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 		well.inventory.add(Templates.GOLD.makeCopy(null, null, 23));
 
 		AttackableSwitch attackableSwitch = Templates.ATTACKABLE_SWITCH.makeCopy(
-				Game.level.squares[posX + attackableSwitchX][posY + attackableSwitchY], null, SWITCH_TYPE.OPEN_CLOSE,
-				this);
+				Game.level.squares[posX + attackableSwitchX][posY + attackableSwitchY], null, SWITCH_TYPE.ON_OFF,
+				eletricalWiring);
 	}
 
 	boolean switchTriggered = false;
@@ -92,8 +94,6 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 			for (GameObject glassWall : glassWalls) {
 				glassWall.changeHealthSafetyOff(-glassWall.remainingHealth, null, null);
 			}
-		} else {
-			System.out.println("RRRRR");
 		}
 	}
 
