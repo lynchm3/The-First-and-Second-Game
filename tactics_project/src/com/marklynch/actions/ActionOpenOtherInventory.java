@@ -18,7 +18,7 @@ public class ActionOpenOtherInventory extends Action {
 	ActionOpen actionOpen;
 
 	public ActionOpenOtherInventory(Actor performer, GameObject target) {
-		super(ACTION_NAME, textureEllipse, performer, target);
+		super(ACTION_NAME, textureLoot, performer, target);
 		if (target instanceof Openable)
 			this.actionName = ACTION_NAME_2;
 		// super.gameObjectPerformer = this.performer = performer;

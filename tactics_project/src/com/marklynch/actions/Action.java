@@ -31,7 +31,6 @@ public abstract class Action {
 	// public static Texture textureSleep;
 
 	public static Texture textureDouse;
-	public static Texture textureRing;
 	public static Texture textureSkin;
 	public static Texture textureCheckboxChecked;
 	public static Texture textureCheckboxUnchecked;
@@ -62,6 +61,7 @@ public abstract class Action {
 	public static Texture textureLeft;
 	public static Texture textureLock;
 	public static Texture textureLoiter;
+	public static Texture textureLoot;
 	public static Texture textureLootAll;
 	public static Texture textureMine;
 	public static Texture textureWalk;
@@ -76,7 +76,7 @@ public abstract class Action {
 	public static Texture texturePour;
 	public static Texture texturePut;
 	public static Texture textureRead;
-	public static Texture textureEing;
+	public static Texture textureRing;
 	public static Texture textureRight;
 	public static Texture textureScream;
 	public static Texture textureEllipse;
@@ -278,6 +278,7 @@ public abstract class Action {
 		textureLeft = getGlobalImage("left.png", false);
 		textureLock = getGlobalImage("action_lock.png", false);
 		textureLoiter = getGlobalImage("action_loiter.png", false);
+		textureLoot = getGlobalImage("action_loot.png", false);
 		textureLootAll = getGlobalImage("action_loot_all.png", false);
 		textureMine = getGlobalImage("action_mine.png", false);
 		textureWalk = getGlobalImage("action_move.png", false);
@@ -292,7 +293,7 @@ public abstract class Action {
 		texturePour = getGlobalImage("action_pour.png", false);
 		texturePut = getGlobalImage("action_put.png", false);// untested
 		textureRead = getGlobalImage("action_read.png", false);
-		textureEing = getGlobalImage("action_ring.png", false);
+		textureRing = getGlobalImage("action_ring.png", false);
 		textureRight = getGlobalImage("right.png", false);
 		textureScream = getGlobalImage("action_scream.png", false);// untested
 		textureEllipse = getGlobalImage("action_select_object.png", false);

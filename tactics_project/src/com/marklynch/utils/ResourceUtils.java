@@ -42,10 +42,6 @@ public class ResourceUtils {
 				texture.path = path;
 				globalImages.put(path, texture);
 			} catch (Exception e) {
-
-				// e.printStackTrace();
-				// System.err.println("Failed to load texture @ path = " +
-				// path);
 			}
 		}
 

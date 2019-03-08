@@ -1166,11 +1166,8 @@ public class GameObject
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 
-		System.out.println("SECONDARY");
-
 		if (!this.discoveredObject)
 			return null;
-		System.out.println("SECONDARY 2");
 
 		if (isFloorObject) {
 			return null;
@@ -1184,7 +1181,6 @@ public class GameObject
 		if (diggable) {
 			return new ActionDigging(performer, this);
 		}
-		System.out.println("SECONDARY 2");
 
 		if (this instanceof Vein) {
 			Action action = new ActionMining(performer, (Vein) this);
@@ -1206,7 +1202,6 @@ public class GameObject
 				return new ActionClose(performer, ((Door) this));
 			}
 		}
-		System.out.println("SECONDARY 3");
 
 		// if ((this instanceof Openable) && this.canContainOtherObjects &&
 		// !(this instanceof Actor)) {
@@ -1218,10 +1213,8 @@ public class GameObject
 		}
 
 		if (this.canContainOtherObjects) {
-			System.out.println("SECONDARY 3 - OPEN INVENTORY");
 			return new ActionOpenOtherInventory(performer, this);
 		}
-		System.out.println("SECONDARY 4 this = " + this);
 
 		return null;
 	}
