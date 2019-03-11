@@ -43,6 +43,7 @@ import com.marklynch.actions.ActionOpenInventoryToPourItems;
 import com.marklynch.actions.ActionOpenInventoryToThrowItems;
 import com.marklynch.actions.ActionOpenOtherInventory;
 import com.marklynch.actions.ActionPeek;
+import com.marklynch.actions.ActionPourItem;
 import com.marklynch.actions.ActionPourItemsSelectedInInventory;
 import com.marklynch.actions.ActionRead;
 import com.marklynch.actions.ActionRemoveMapMarker;
@@ -2200,7 +2201,17 @@ public class GameObject
 
 	}
 
-	public Action getDefaultActionForEquippedItem(Actor performer) {
+	public Action getDefaultActionForEquippedItem(Actor performer, Square square) {
+
+		System.out.println("getDefaultActionForEquippedItem");
+		System.out.println("getDefaultActionForEquippedItem performer = " + performer);
+		System.out.println("getDefaultActionForEquippedItem square = " + square);
+		System.out.println("getDefaultActionForEquippedItem this = " + this);
+
+		if (this instanceof ContainerForLiquids && ((ContainerForLiquids) this).liquid != null) {
+			System.out.println("getDefaultActionForEquippedItem POUR");
+			return new ActionPourItem(performer, square, (ContainerForLiquids) this);
+		}
 
 		if (this instanceof Bell) {
 			return new ActionRing(performer, this);
@@ -2222,8 +2233,7 @@ public class GameObject
 		}
 
 		// Food / Drink
-		if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
-				|| this instanceof WaterBody) {
+		if (this instanceof Food || this instanceof Liquid || this instanceof WaterBody) {
 			return new ActionEatItems(performer, this);
 		}
 

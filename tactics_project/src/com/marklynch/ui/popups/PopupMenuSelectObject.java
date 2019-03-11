@@ -2,7 +2,6 @@ package com.marklynch.ui.popups;
 
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
-import com.marklynch.actions.ActionMove;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
@@ -86,38 +85,47 @@ public class PopupMenuSelectObject extends PopupMenu {
 
 		}
 
-		final Action action = new ActionMove(Level.player, square, true);
-		final PopupMenuActionButton actionButton = new PopupMenuActionButton(0, buttons.size() * 30, 128, 30, null,
-				null, action.actionName, true, true, action, this);
-		actionButton.enabled = action.enabled;
+		Action action = null;
 
-		actionButton.clickListener = new ClickListener() {
+		if (Level.player.equipped != null) {
+			action = Level.player.equipped.getDefaultActionForEquippedItem(Level.player, square);
+//			action = new ActionMove(Level.player, square, true);
+		}
 
-			@Override
-			public void click() {
-				if (actionButton.enabled) {
-					for (Button button : buttons) {
-						button.down = false;
-					}
-					highlightedButton.down = true;
-					Game.level.popupMenuObjects.clear();
-					Game.level.popupMenuActions.clear();
+		if (action != null) {
+			final PopupMenuActionButton actionButton = new PopupMenuActionButton(0, buttons.size() * 30, 128, 30, null,
+					null, action.actionName, true, true, action, this);
+			actionButton.enabled = action.enabled;
+			final Action finalAction = action;
 
-					if (!(square instanceof InventorySquare) && !action.checkRange()) {
-						if (Game.level.settingFollowPlayer && Game.level.player.onScreen()) {
-							Game.level.cameraFollow = true;
+			actionButton.clickListener = new ClickListener() {
+
+				@Override
+				public void click() {
+					if (actionButton.enabled) {
+						for (Button button : buttons) {
+							button.down = false;
 						}
-						Player.playerTargetAction = action;
-						// Player.playerTargetSquare = square;
-						Player.playerFirstMove = true;
-						return;
-					} else {
-						action.perform();
+						highlightedButton.down = true;
+						Game.level.popupMenuObjects.clear();
+						Game.level.popupMenuActions.clear();
+
+						if (!(square instanceof InventorySquare) && !finalAction.checkRange()) {
+							if (Game.level.settingFollowPlayer && Game.level.player.onScreen()) {
+								Game.level.cameraFollow = true;
+							}
+							Player.playerTargetAction = finalAction;
+							// Player.playerTargetSquare = square;
+							Player.playerFirstMove = true;
+							return;
+						} else {
+							finalAction.perform();
+						}
 					}
 				}
-			}
-		};
-		buttons.add(actionButton);
+			};
+			buttons.add(actionButton);
+		}
 
 		if (keyControl && buttons.size() > 0) {
 			highlightedButton = buttons.get(highlightedButtonIndex);

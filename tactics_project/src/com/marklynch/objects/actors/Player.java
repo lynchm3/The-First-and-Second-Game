@@ -23,7 +23,6 @@ import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.Orb;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.utils.ArrayList;
