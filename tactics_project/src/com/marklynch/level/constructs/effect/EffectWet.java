@@ -7,12 +7,15 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class EffectWet extends Effect {
 
 	public EffectWet() {
 	}
+
+	public static Texture dropletTexture = getGlobalImage("droplet.png", false);
 
 	public EffectWet(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " wet by ";
@@ -88,31 +91,37 @@ public class EffectWet extends Effect {
 	private class Droplet {
 
 		public static final float maxDropletScale = 16;
+		public static final float minX = 48;
+		public static final float maxX = 66;
+		public static final float minY = 48;
+		public static final float maxY = 156;
 		public float x, y;
 		public float scale = 0;
 
 		public Droplet() {
 			scale = (float) (maxDropletScale * Math.random());
-			x = (float) (Math.random() * 64) + 32;
-			y = (float) (Math.random() * 128);
-
+			x = (float) (Math.random() * (maxX - minX)) + minX;
+			y = (float) (Math.random() * (maxY - minY)) + minY;
 		}
 
 		public void draw2(int actorPositionXInPixels, int actorPositionYInPixels) {
 
 			y++;
-			if (y > 128) {
-				y = 0;
+			if (y > maxY) {
+				y = minY;
 				scale = 0;
-				x = (float) (Math.random() * 64) + 32;
+				x = (float) (Math.random() * (maxX - minX)) + minX;
 			}
 
 			if (scale < maxDropletScale) {
 				scale++;
 			}
 
-			TextureUtils.drawTexture(imageTexture, 1, actorPositionXInPixels + x, actorPositionYInPixels + y,
+			TextureUtils.drawTexture(dropletTexture, 1f, actorPositionXInPixels + x, actorPositionYInPixels + y,
 					actorPositionXInPixels + x + scale, actorPositionYInPixels + y + scale, target.backwards);
+
+//			QuadUtils.drawQuad(Color.RED, actorPositionXInPixels + minX, actorPositionYInPixels + minY,
+//					actorPositionXInPixels + maxX + maxDropletScale, actorPositionYInPixels + maxY);
 
 		}
 
