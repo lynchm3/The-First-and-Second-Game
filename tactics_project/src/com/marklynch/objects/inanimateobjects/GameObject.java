@@ -1170,6 +1170,10 @@ public class GameObject
 		if (!this.discoveredObject)
 			return null;
 
+		if (this.templateId == Templates.INPUT_DRAIN.templateId) {
+			return new ActionOpenInventoryToPourItems(performer, this);
+		}
+
 		if (isFloorObject) {
 			return null;
 		}

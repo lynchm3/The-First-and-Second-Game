@@ -41,7 +41,8 @@ public class ActionOpenInventoryToFillContainer extends Action {
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL);
 			Game.level.player.inventory.open();
 			Inventory.target = this.targetGameObject;
-			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
+			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_EMPTY_CONTAINER_FOR_LIQUIDS,
+					true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 			// Game.level.openInventories.add(Game.level.player.inventory);
 

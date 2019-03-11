@@ -61,7 +61,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public enum INVENTORY_FILTER_BY {
 		FILTER_BY_ALL, FILTER_BY_WEAPON, FILTER_BY_ARMOR, FILTER_BY_EQUIPPED, FILTER_BY_FOOD,
-		FILTER_BY_CONTAINER_FOR_LIQUIDS
+		FILTER_BY_FULL_CONTAINER_FOR_LIQUIDS, FILTER_BY_EMPTY_CONTAINER_FOR_LIQUIDS
 	}
 
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
@@ -664,11 +664,20 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					filteredGameObjects.add(gameObject);
 				}
 			}
-		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS) {
-			buttonFilterByFood.down = true;
+		}
+
+		else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_EMPTY_CONTAINER_FOR_LIQUIDS) {
 			for (GameObject gameObject : gameObjects) {
 				if (gameObject instanceof ContainerForLiquids) {
 					if (((ContainerForLiquids) gameObject).liquid == null) {
+						filteredGameObjects.add(gameObject);
+					}
+				}
+			}
+		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_FULL_CONTAINER_FOR_LIQUIDS) {
+			for (GameObject gameObject : gameObjects) {
+				if (gameObject instanceof ContainerForLiquids) {
+					if (((ContainerForLiquids) gameObject).liquid != null) {
 						filteredGameObjects.add(gameObject);
 					}
 				}

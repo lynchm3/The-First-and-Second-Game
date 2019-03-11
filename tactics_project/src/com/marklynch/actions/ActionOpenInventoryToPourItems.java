@@ -44,7 +44,8 @@ public class ActionOpenInventoryToPourItems extends Action {
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR);
 			Game.level.player.inventory.open();
 			Inventory.target = this.targetGameObjectOrSquare;
-			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
+			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_FULL_CONTAINER_FOR_LIQUIDS,
+					true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 		}
 		Level.closeAllPopups();
