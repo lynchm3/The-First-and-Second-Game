@@ -6,6 +6,8 @@ import com.marklynch.Game;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.TextureUtils;
 
 public class EffectWet extends Effect {
 
@@ -20,6 +22,9 @@ public class EffectWet extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_wet.png", false);
+		for (int i = 0; i < 5; i++) {
+			droplets.add(new Droplet());
+		}
 	}
 
 	public EffectWet(int totalTurns) {
@@ -45,6 +50,60 @@ public class EffectWet extends Effect {
 
 	public void onAdd() {
 		target.removeBurningEffect();
+	}
+
+	ArrayList<Droplet> droplets = new ArrayList<Droplet>(Droplet.class);
+
+	@Override
+	public void draw2(int offsetY) {
+
+		super.draw2(offsetY);
+
+		if (!target.squareGameObjectIsOn.visibleToPlayer)
+			return;
+
+		if (target.squareGameObjectIsOn != null) {
+//			target.actor
+
+			int actorPositionXInPixels = (int) (target.squareGameObjectIsOn.xInGridPixels + target.drawOffsetX);
+			int actorPositionYInPixels = (int) (target.squareGameObjectIsOn.yInGridPixels + target.drawOffsetY);
+			if (target != null && target.getPrimaryAnimation() != null) {
+				actorPositionXInPixels += target.getPrimaryAnimation().offsetX;
+				actorPositionYInPixels += target.getPrimaryAnimation().offsetY;
+			}
+
+			float alpha = 1.0f;
+			alpha = 0.75f;
+//			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
+//					actorPositionYInPixels + offsetY * maxDropletHeight, actorPositionXInPixels + maxDropletHeight,
+//					actorPositionYInPixels + offsetY * maxDropletHeight + maxDropletHeight, target.backwards);
+
+			for (Droplet droplet : droplets) {
+				droplet.draw2(actorPositionXInPixels, actorPositionYInPixels);
+			}
+		}
+
+	}
+
+	private class Droplet {
+
+		public static final float maxDropletScale = 32;
+		public float x, y;
+		public float scale = 0;
+
+		public Droplet() {
+			scale = (float) (maxDropletScale * Math.random());
+			x = (float) (Math.random() * 128);
+			y = (float) (Math.random() * 128);
+
+		}
+
+		public void draw2(int actorPositionXInPixels, int actorPositionYInPixels) {
+			TextureUtils.drawTexture(imageTexture, 1, actorPositionXInPixels + x, actorPositionYInPixels + y,
+					actorPositionXInPixels + x + scale, actorPositionYInPixels + y + scale, target.backwards);
+
+		}
+
 	}
 
 }

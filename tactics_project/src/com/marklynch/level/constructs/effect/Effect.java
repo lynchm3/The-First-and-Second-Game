@@ -82,18 +82,10 @@ public class Effect implements DamageDealer {
 			}
 
 			float alpha = 1.0f;
-
-			// TextureUtils.skipNormals = true;
-
-			// if (!target.squareGameObjectIsOn.visibleToPlayer)
-			// alpha = 0.5f;
-			// if (target.hiding)
 			alpha = 0.75f;
-
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
 					actorPositionYInPixels + offsetY * height, actorPositionXInPixels + height,
 					actorPositionYInPixels + offsetY * height + height, target.backwards);
-			// TextureUtils.skipNormals = false;
 		}
 	}
 
