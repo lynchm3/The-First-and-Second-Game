@@ -66,7 +66,6 @@ import com.marklynch.ui.popups.FullScreenTextBox;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.ui.popups.PopupMenu;
 import com.marklynch.ui.popups.PopupMenuActionButton;
-import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
 import com.marklynch.ui.quickbar.QuickBar;
 import com.marklynch.ui.quickbar.QuickBarSquare;
@@ -136,8 +135,8 @@ public class Level {
 	public transient static ArrayList<Effect> effectsOnInanimateGameObjects = new ArrayList<Effect>();
 	public transient static ArrayList<UpdatableGameObject> updatableGameObjects = new ArrayList<UpdatableGameObject>();
 
-	public ArrayList<PopupMenuSelectObject> popupMenuObjects = new ArrayList<PopupMenuSelectObject>();
-	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
+	public ArrayList<PopupMenu> popupMenuObjects = new ArrayList<PopupMenu>();
+	public ArrayList<PopupMenu> popupMenuActions = new ArrayList<PopupMenu>();
 	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
 	public Color popUpMenuOverlayColor = new Color(0f, 0f, 0f, 0.5f);
 	static FullScreenTextBox fullScreenTextBox = null;
