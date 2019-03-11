@@ -7,6 +7,7 @@ import com.marklynch.utils.TextUtils;
 
 public class PopupMenuButton extends Button {
 
+	boolean drawArrow;
 	boolean xFromLeft;
 	boolean yFromTop;
 	public Object object;
@@ -19,12 +20,13 @@ public class PopupMenuButton extends Button {
 
 	public PopupMenuButton(float x, float y, float width, float height, String enabledTexturePath,
 			String disabledTexturePath, boolean xFromLeft, boolean yFromTop, Object object, PopupMenu popup,
-			String text, String tooltipText) {
+			String text, String tooltipText, boolean drawArrow) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text, tooltipText);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 		this.object = object;
 		this.popup = popup;
+		this.drawArrow = drawArrow;
 
 	}
 
@@ -62,6 +64,10 @@ public class PopupMenuButton extends Button {
 			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE,
 					new Object[] { object });
 		}
+
+		if (drawArrow)
+			TextUtils.printTextWithImages(realX + width - 10, realY, Integer.MAX_VALUE, true, null, Color.WHITE,
+					new Object[] { ">" });
 
 	}
 

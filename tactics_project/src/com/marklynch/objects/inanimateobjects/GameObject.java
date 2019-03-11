@@ -2203,13 +2203,7 @@ public class GameObject
 
 	public Action getDefaultActionForEquippedItem(Actor performer, Square square) {
 
-		System.out.println("getDefaultActionForEquippedItem");
-		System.out.println("getDefaultActionForEquippedItem performer = " + performer);
-		System.out.println("getDefaultActionForEquippedItem square = " + square);
-		System.out.println("getDefaultActionForEquippedItem this = " + this);
-
 		if (this instanceof ContainerForLiquids && ((ContainerForLiquids) this).liquid != null) {
-			System.out.println("getDefaultActionForEquippedItem POUR");
 			return new ActionPourItem(performer, square, (ContainerForLiquids) this);
 		}
 

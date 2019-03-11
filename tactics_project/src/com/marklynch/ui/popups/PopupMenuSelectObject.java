@@ -28,7 +28,7 @@ public class PopupMenuSelectObject extends PopupMenu {
 		if (showSquare) {
 
 			selectSquareButton = new PopupMenuButton(0, 0, 128, 30, null, null, true, true, square, this, "" + square,
-					null);
+					null, true);
 
 			selectSquareButton.clickListener = new ClickListener() {
 
@@ -66,7 +66,7 @@ public class PopupMenuSelectObject extends PopupMenu {
 
 			if (gameObject.getAllActionsPerformedOnThisInWorld(Level.player).size() > 0) {
 				final PopupMenuButton objectButton = new PopupMenuButton(0, buttons.size() * 30, 128, 30, null, null,
-						true, true, gameObject, this, "" + gameObject, null);
+						true, true, gameObject, this, "" + gameObject, null, true);
 
 				objectButton.clickListener = new ClickListener() {
 

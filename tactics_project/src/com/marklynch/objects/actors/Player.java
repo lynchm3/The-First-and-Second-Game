@@ -23,6 +23,7 @@ import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.Orb;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.utils.ArrayList;
@@ -261,7 +262,7 @@ public class Player extends Human {
 			}
 
 			// Action button for the equipped item
-			final Action actionForEquipped = equipped.getDefaultActionForEquippedItem(this);
+			final Action actionForEquipped = equipped.getDefaultActionForEquippedItem(this, this.squareGameObjectIsOn);
 			if (actionForEquipped != null) {
 				buttonEquippedWeaponAction.textParts = new Object[] { actionForEquipped.actionName };
 				buttonEquippedWeaponAction.setClickListener(new ClickListener() {

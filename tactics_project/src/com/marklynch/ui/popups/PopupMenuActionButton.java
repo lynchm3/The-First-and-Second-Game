@@ -11,7 +11,7 @@ public class PopupMenuActionButton extends PopupMenuButton {
 			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop, Action action,
 			PopupMenu popup) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath, xFromLeft, yFromTop, action, popup, text,
-				null);
+				null, false);
 		this.action = action;
 
 		// if (action.disabledReason != null) {
