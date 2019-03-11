@@ -87,18 +87,30 @@ public class EffectWet extends Effect {
 
 	private class Droplet {
 
-		public static final float maxDropletScale = 32;
+		public static final float maxDropletScale = 16;
 		public float x, y;
 		public float scale = 0;
 
 		public Droplet() {
 			scale = (float) (maxDropletScale * Math.random());
-			x = (float) (Math.random() * 128);
+			x = (float) (Math.random() * 64) + 32;
 			y = (float) (Math.random() * 128);
 
 		}
 
 		public void draw2(int actorPositionXInPixels, int actorPositionYInPixels) {
+
+			y++;
+			if (y > 128) {
+				y = 0;
+				scale = 0;
+				x = (float) (Math.random() * 64) + 32;
+			}
+
+			if (scale < maxDropletScale) {
+				scale++;
+			}
+
 			TextureUtils.drawTexture(imageTexture, 1, actorPositionXInPixels + x, actorPositionYInPixels + y,
 					actorPositionXInPixels + x + scale, actorPositionYInPixels + y + scale, target.backwards);
 
