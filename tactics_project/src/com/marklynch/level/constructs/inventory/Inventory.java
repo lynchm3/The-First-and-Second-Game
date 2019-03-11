@@ -668,7 +668,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			buttonFilterByFood.down = true;
 			for (GameObject gameObject : gameObjects) {
 				if (gameObject instanceof ContainerForLiquids) {
-					filteredGameObjects.add(gameObject);
+					if (((ContainerForLiquids) gameObject).liquid == null) {
+						filteredGameObjects.add(gameObject);
+					}
 				}
 			}
 		}
