@@ -90,11 +90,11 @@ public class EffectWet extends Effect {
 
 	private class Droplet {
 
-		public static final float maxDropletScale = 16;
+		public static final float maxDropletScale = 8;
 		public static final float minX = 48;
 		public static final float maxX = 66;
-		public static final float minY = 48;
-		public static final float maxY = 156;
+		public static final float minY = 40;
+		public static final float maxY = 188;
 		public float x, y;
 		public float scale = 0;
 
@@ -106,7 +106,7 @@ public class EffectWet extends Effect {
 
 		public void draw2(int actorPositionXInPixels, int actorPositionYInPixels) {
 
-			y++;
+			y += 0.5f;
 			if (y > maxY) {
 				y = minY;
 				scale = 0;
@@ -114,11 +114,12 @@ public class EffectWet extends Effect {
 			}
 
 			if (scale < maxDropletScale) {
-				scale++;
+				scale += 0.5f;
 			}
 
-			TextureUtils.drawTexture(dropletTexture, 1f, actorPositionXInPixels + x, actorPositionYInPixels + y,
-					actorPositionXInPixels + x + scale, actorPositionYInPixels + y + scale, target.backwards);
+			TextureUtils.drawTexture(dropletTexture, 1f, actorPositionXInPixels + x + maxDropletScale / 2 - scale / 2,
+					actorPositionYInPixels + y, actorPositionXInPixels + x + scale, actorPositionYInPixels + y + scale,
+					target.backwards);
 
 //			QuadUtils.drawQuad(Color.RED, actorPositionXInPixels + minX, actorPositionYInPixels + minY,
 //					actorPositionXInPixels + maxX + maxDropletScale, actorPositionYInPixels + maxY);
