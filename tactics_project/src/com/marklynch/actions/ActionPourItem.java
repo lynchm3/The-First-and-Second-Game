@@ -63,8 +63,19 @@ public class ActionPourItem extends Action {
 
 		GameObject newJar = Templates.JAR.makeCopy(null, containerForLiquids.owner);
 		performer.inventory.add(newJar);
-		if (performer.equipped == containerForLiquids)
-			performer.equipped = newJar;
+		if (performer.equipped == containerForLiquids) {
+			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
+				performer.equip(performer.equippedBeforePickingUpObject);
+			} else if (performer.inventory.containsDuplicateOf(containerForLiquids)) {
+				performer.equip(performer.inventory.getDuplicateOf(containerForLiquids));
+			} else {
+				performer.equip(newJar);
+			}
+			performer.equippedBeforePickingUpObject = null;
+		}
+
+//		if (performer.equipped == containerForLiquids)
+//			performer.equipped = newJar;
 		performer.inventory.remove(containerForLiquids);
 
 		if (Game.level.openInventories.size() > 0)
