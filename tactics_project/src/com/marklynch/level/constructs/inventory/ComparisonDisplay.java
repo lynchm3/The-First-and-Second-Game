@@ -8,6 +8,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
+import com.marklynch.level.constructs.rarity.Rarity;
 import com.marklynch.objects.armor.BodyArmor;
 import com.marklynch.objects.armor.Helmet;
 import com.marklynch.objects.armor.LegArmor;
@@ -138,10 +139,16 @@ public class ComparisonDisplay {
 		currentY += fieldHeight;
 
 		// Squares
+		Color squareOutlineColorForEquipped = Rarity.COMMON.color;
+		if (gameObjectEquipped != null) {
+			squareOutlineColorForEquipped = gameObjectEquipped.rarity.color;
+		}
 		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon1DrawX, currentY, weapon1DrawX + weaponWidth,
-				currentY + weaponHeight);
+				currentY + weaponHeight, squareOutlineColorForEquipped);
+
+		Color squareOutlineColorForObjectMouseIsOverInInventory = gameObjectMouseIsOverInInventory.rarity.color;
 		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon2DrawX, currentY, weapon2DrawX + weaponWidth,
-				currentY + weaponHeight);
+				currentY + weaponHeight, squareOutlineColorForObjectMouseIsOverInInventory);
 
 		// Images
 		if (gameObjectEquipped != null) {
