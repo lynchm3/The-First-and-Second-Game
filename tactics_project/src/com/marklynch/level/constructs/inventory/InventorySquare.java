@@ -61,21 +61,10 @@ public class InventorySquare extends Square {
 
 		// square texture
 		Color squareOutlineColor = Rarity.COMMON.color;
-		Color backgroundColor = defaultBackgroundColor;
+		Color backgroundColor = getBackgroundColorForInventorySquare(stack.get(0));
+
 		if (stack.get(0) != null) {
 			squareOutlineColor = stack.get(0).rarity.color;
-			boolean equipped = (this.stack.get(0) != null && (Level.player.equipped == this.stack.get(0)
-					|| Level.player.helmet == this.stack.get(0) || Level.player.bodyArmor == this.stack.get(0)
-					|| Level.player.legArmor == this.stack.get(0)));
-			boolean illegal = !objectLegal(stack.get(0));
-			if (equipped && illegal) {
-				backgroundColor = equippedAndIllegalBackgroundColor;
-			} else if (equipped) {
-				backgroundColor = equippedBackgroundColor;
-			} else if (illegal) {
-				backgroundColor = illegalBackgroundColor;
-			}
-
 		}
 
 		TextureUtils.drawTexture(GREY_TRANSLUCENT_SQUARE, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
@@ -160,8 +149,29 @@ public class InventorySquare extends Square {
 
 	}
 
-	private boolean objectLegal(GameObject gameObject) {
-		return Inventory.objectLegal(gameObject, this.inventoryThisBelongsTo);
+	public static Color getBackgroundColorForInventorySquare(GameObject gameObject) {
+
+		if (gameObject != null) {
+			boolean equipped = (gameObject != null
+					&& (Level.player.equipped == gameObject || Level.player.helmet == gameObject
+							|| Level.player.bodyArmor == gameObject || Level.player.legArmor == gameObject));
+			boolean illegal = !objectLegal(gameObject, gameObject.inventoryThatHoldsThisObject);
+			if (equipped && illegal) {
+				return equippedAndIllegalBackgroundColor;
+			} else if (equipped) {
+				return equippedBackgroundColor;
+			} else if (illegal) {
+				return illegalBackgroundColor;
+			}
+
+		}
+
+		return defaultBackgroundColor;
+
+	}
+
+	private static boolean objectLegal(GameObject gameObject, Inventory inventoryThisBelongsTo) {
+		return Inventory.objectLegal(gameObject, inventoryThisBelongsTo);
 	}
 
 	@Override

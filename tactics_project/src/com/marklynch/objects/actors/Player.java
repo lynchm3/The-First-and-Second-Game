@@ -225,8 +225,9 @@ public class Player extends Human {
 		float xInPixels = Game.windowWidth - 110;
 		float yInPixels = Game.windowHeight - 140 - Game.INVENTORY_SQUARE_HEIGHT;
 
+		Color backgroundColor = InventorySquare.getBackgroundColorForInventorySquare(equipped);
 		TextureUtils.drawTexture(InventorySquare.GREY_TRANSLUCENT_SQUARE, xInPixels, yInPixels,
-				xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+				xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT, backgroundColor);
 		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, xInPixels, yInPixels,
 				xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT, squareColor);
 

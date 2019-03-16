@@ -143,10 +143,17 @@ public class ComparisonDisplay {
 		if (gameObjectEquipped != null) {
 			squareOutlineColorForEquipped = gameObjectEquipped.rarity.color;
 		}
+
+		TextureUtils.drawTexture(InventorySquare.GREY_TRANSLUCENT_SQUARE, weapon1DrawX, currentY,
+				weapon1DrawX + weaponWidth, currentY + weaponHeight,
+				InventorySquare.getBackgroundColorForInventorySquare(gameObjectEquipped));
 		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon1DrawX, currentY, weapon1DrawX + weaponWidth,
 				currentY + weaponHeight, squareOutlineColorForEquipped);
 
 		Color squareOutlineColorForObjectMouseIsOverInInventory = gameObjectMouseIsOverInInventory.rarity.color;
+		TextureUtils.drawTexture(InventorySquare.GREY_TRANSLUCENT_SQUARE, weapon2DrawX, currentY,
+				weapon2DrawX + weaponWidth, currentY + weaponHeight,
+				InventorySquare.getBackgroundColorForInventorySquare(gameObjectMouseIsOverInInventory));
 		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon2DrawX, currentY, weapon2DrawX + weaponWidth,
 				currentY + weaponHeight, squareOutlineColorForObjectMouseIsOverInInventory);
 
