@@ -4,6 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.rarity.Rarity;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Matches;
@@ -211,6 +212,7 @@ public class TemplatesTools {
 
 		Templates.JAR = new ContainerForLiquids();
 		Templates.JAR.name = "Empty Jar";
+		Templates.JAR.rarity = Rarity.LEGEND;
 		Templates.JAR.description = "Very good at containing liquids, also fairies. Surprisingly rare, so try not to lose them.";
 		Templates.JAR.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
 		Templates.JAR.setImageAndExtrapolateSize("jar.png");

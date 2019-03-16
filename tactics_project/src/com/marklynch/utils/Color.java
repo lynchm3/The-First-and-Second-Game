@@ -50,22 +50,22 @@ public class Color extends mdesl.graphics.Color {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Color(float r, float g, float b, float a) {
+	public Color(float r, float g, float b, float a) {// 1.0f,1.0f,1.0f is white
 		super(r, g, b, a);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Color(float r, float g, float b) {
+	public Color(float r, float g, float b) {// 1.0f,1.0f,1.0f is white
 		super(r, g, b);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Color(int r, int g, int b, int a) {
+	public Color(int r, int g, int b, int a) {// 255,255,255 is white
 		super(r, g, b, a);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Color(int r, int g, int b) {
+	public Color(int r, int g, int b) {// 255,255,255 is white
 		super(r, g, b);
 		// TODO Auto-generated constructor stub
 	}

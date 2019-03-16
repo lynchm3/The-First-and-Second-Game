@@ -7,6 +7,7 @@ import com.marklynch.actions.Action;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory.INVENTORY_MODE;
+import com.marklynch.level.constructs.rarity.Rarity;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -56,22 +57,26 @@ public class InventorySquare extends Square {
 	public void drawStaticUI() {
 
 		// square texture
-		Texture squareTexture = WHITE_SQUARE;
-
-		// Red border on sqr if illegal to take
-		if (!objectLegal(stack.get(0))) {
-			squareTexture = RED_SQUARE;
+		Color squareOutlineColor = Rarity.COMMON.color;
+		if (stack.get(0) != null) {
+			squareOutlineColor = stack.get(0).rarity.color;
 		}
 
-		// Yellow border on sqr if item is equipped
-		if (this.stack.get(0) != null && (Game.level.player.equipped == this.stack.get(0)
-				|| Game.level.player.helmet == this.stack.get(0) || Game.level.player.bodyArmor == this.stack.get(0)
-				|| Game.level.player.legArmor == this.stack.get(0))) {
-			squareTexture = YELLOW_SQUARE;
-		}
-
-		TextureUtils.drawTexture(squareTexture, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
+//		// Red border on sqr if illegal to take
+//		if (!objectLegal(stack.get(0))) {
+//			squareTexture = RED_SQUARE;
+//		}
+//
+//		// Yellow border on sqr if item is equipped
+//		if (this.stack.get(0) != null && (Game.level.player.equipped == this.stack.get(0)
+//				|| Game.level.player.helmet == this.stack.get(0) || Game.level.player.bodyArmor == this.stack.get(0)
+//				|| Game.level.player.legArmor == this.stack.get(0))) {
+//			squareTexture = YELLOW_SQUARE;
+//		}		
+		TextureUtils.drawTexture(GREY_TRANSLUCENT_SQUARE, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
 				yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+		TextureUtils.drawTexture(WHITE_SQUARE, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
+				yInPixels + Game.INVENTORY_SQUARE_HEIGHT, squareOutlineColor);
 
 		if (stack.get(0) != null) {
 
