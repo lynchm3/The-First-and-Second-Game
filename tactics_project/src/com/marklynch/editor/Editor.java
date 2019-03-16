@@ -416,7 +416,10 @@ public class Editor {
 		Weapon playersHuntingBow = Templates.HUNTING_BOW.makeCopy(null, player);
 		playersHuntingBow.enhancement = new Enhancement();
 		player.inventory.add(playersHuntingBow);
+		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.KATANA.makeCopy(null, player));
+		player.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, player));
+		player.inventory.add(Templates.DINNER_BELL.makeCopy(null, player));
 		player.inventory.add(Templates.KATANA.makeCopy(null, player));
 		player.inventory.add(Templates.SWORD.makeCopy(null, player));
 		player.inventory.add(Templates.HATCHET.makeCopy(null, player));
@@ -433,8 +436,6 @@ public class Editor {
 		player.inventory.add(Templates.FUR.makeCopy(null, player));
 		player.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, player));
 		player.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, player));
-		player.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, player));
-		player.inventory.add(Templates.DINNER_BELL.makeCopy(null, player));
 		player.inventory.add(Templates.DINNER_BELL.makeCopy(null, player));
 		player.inventory.add(Templates.CLEAVER.makeCopy(null, player));
 		player.inventory.add(Templates.CLEAVER.makeCopy(null, player));

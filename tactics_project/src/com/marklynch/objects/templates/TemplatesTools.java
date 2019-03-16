@@ -162,6 +162,7 @@ public class TemplatesTools {
 
 		Templates.SERRATED_SPOON = new Weapon();
 		Templates.SERRATED_SPOON.name = "Serrated Spoon";
+		Templates.SERRATED_SPOON.rarity = Rarity.FIGHTER;
 		Templates.SERRATED_SPOON.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 2));
 		Templates.SERRATED_SPOON.setImageAndExtrapolateSize("serrated_spoon.png");
@@ -174,6 +175,7 @@ public class TemplatesTools {
 
 		Templates.DINNER_BELL = new Bell();
 		Templates.DINNER_BELL.name = "Dinner Bell";
+		Templates.DINNER_BELL.rarity = Rarity.HERO;
 		Templates.DINNER_BELL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 2));
 		Templates.DINNER_BELL.setImageAndExtrapolateSize("bell.png");

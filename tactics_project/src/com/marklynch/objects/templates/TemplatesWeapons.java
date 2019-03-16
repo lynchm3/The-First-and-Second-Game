@@ -2,6 +2,7 @@ package com.marklynch.objects.templates;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.level.constructs.rarity.Rarity;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
 
@@ -14,8 +15,10 @@ public class TemplatesWeapons {
 		// Weapons
 		Templates.KATANA = new Weapon();
 		Templates.KATANA.name = "Katana";
+		Templates.KATANA.rarity = Rarity.GOD;
 		Templates.KATANA.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 11));
-		Templates.KATANA.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 3));
+		Templates.KATANA.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 3));
 		Templates.KATANA.setImageAndExtrapolateSize("katana.png");
 		Templates.KATANA.totalHealth = Templates.KATANA.remainingHealth = 22;
 		Templates.KATANA.soundWhenHitting = 5f;
@@ -51,7 +54,8 @@ public class TemplatesWeapons {
 
 		Templates.HUNTING_BOW = new Weapon();
 		Templates.HUNTING_BOW.name = "Hunting Bow";
-		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 5));
+		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 5));
 		Templates.HUNTING_BOW.maxRange = 9;
 		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
 		Templates.HUNTING_BOW.setImageAndExtrapolateSize("a2r2.png");
@@ -62,7 +66,8 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.value = 54;
 		Templates.HUNTING_BOW.anchorX = 64;
 		Templates.HUNTING_BOW.anchorY = 112;
-		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
+		Templates.HUNTING_BOW.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
 		Templates.HUNTING_BOW.templateId = GameObject.generateNewTemplateId();
 	}
 
