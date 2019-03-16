@@ -22,6 +22,11 @@ import com.marklynch.utils.TextureUtils;
 
 public class InventorySquare extends Square {
 
+	public static Color defaultBackgroundColor = new Color(50, 50, 50);
+	public static Color equippedBackgroundColor = new Color(200, 200, 200);
+	public static Color illegalBackgroundColor = new Color(200, 50, 50);
+	public static Color equippedAndIllegalBackgroundColor = new Color(250, 100, 100);
+
 	public transient Inventory inventoryThisBelongsTo;
 
 	public int xInPixels = 0;
@@ -30,8 +35,6 @@ public class InventorySquare extends Square {
 	public static Texture imageTexture;
 
 	public transient ArrayList<GameObject> stack = new ArrayList<GameObject>(GameObject.class);
-
-	static Color translucentBlack = new Color(0.5f, 0f, 0f, 0f);
 
 	public InventorySquare(int x, int y, String imagePath, Inventory inventoryThisBelongsTo) {
 		super(x, y, imagePath, 1, 1, null, false);
@@ -58,23 +61,25 @@ public class InventorySquare extends Square {
 
 		// square texture
 		Color squareOutlineColor = Rarity.COMMON.color;
+		Color backgroundColor = defaultBackgroundColor;
 		if (stack.get(0) != null) {
 			squareOutlineColor = stack.get(0).rarity.color;
+			boolean equipped = (this.stack.get(0) != null && (Level.player.equipped == this.stack.get(0)
+					|| Level.player.helmet == this.stack.get(0) || Level.player.bodyArmor == this.stack.get(0)
+					|| Level.player.legArmor == this.stack.get(0)));
+			boolean illegal = !objectLegal(stack.get(0));
+			if (equipped && illegal) {
+				backgroundColor = equippedAndIllegalBackgroundColor;
+			} else if (equipped) {
+				backgroundColor = equippedBackgroundColor;
+			} else if (illegal) {
+				backgroundColor = illegalBackgroundColor;
+			}
+
 		}
 
-//		// Red border on sqr if illegal to take
-//		if (!objectLegal(stack.get(0))) {
-//			squareTexture = RED_SQUARE;
-//		}
-//
-//		// Yellow border on sqr if item is equipped
-//		if (this.stack.get(0) != null && (Game.level.player.equipped == this.stack.get(0)
-//				|| Game.level.player.helmet == this.stack.get(0) || Game.level.player.bodyArmor == this.stack.get(0)
-//				|| Game.level.player.legArmor == this.stack.get(0))) {
-//			squareTexture = YELLOW_SQUARE;
-//		}		
 		TextureUtils.drawTexture(GREY_TRANSLUCENT_SQUARE, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
-				yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+				yInPixels + Game.INVENTORY_SQUARE_HEIGHT, backgroundColor);
 		TextureUtils.drawTexture(WHITE_SQUARE, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
 				yInPixels + Game.INVENTORY_SQUARE_HEIGHT, squareOutlineColor);
 
