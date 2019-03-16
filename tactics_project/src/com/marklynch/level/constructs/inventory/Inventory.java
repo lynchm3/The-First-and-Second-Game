@@ -1573,8 +1573,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void drawBorder() {
-		QuadUtils.drawQuad(inventoryAreaColor, squaresX, this.squaresY, squaresX + squaresAreaWidth,
-				this.squaresY + squaresAreaHeight);
+		QuadUtils.drawQuad(inventoryAreaColor, squaresX, Inventory.topBorderHeight, squaresX + squaresAreaWidth,
+				Inventory.topBorderHeight + squaresAreaHeight);
 	}
 
 	public void drawSquares() {
