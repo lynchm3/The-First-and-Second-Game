@@ -195,7 +195,7 @@ public class TemplatesBuilding {
 		Templates.CIRCLE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
 		Templates.DRAIN_FLOOR = new GameObject();
-		Templates.DRAIN_FLOOR.name = "Drain";
+		Templates.DRAIN_FLOOR.name = "Drain Out";
 		Templates.DRAIN_FLOOR.imageTexture = getGlobalImage("drain.png", true);
 		Templates.DRAIN_FLOOR.canBePickedUp = false;
 		Templates.DRAIN_FLOOR.fitsInInventory = false;
@@ -241,7 +241,7 @@ public class TemplatesBuilding {
 				new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 
 		Templates.INPUT_DRAIN = new InputDrain();
-		Templates.INPUT_DRAIN.name = "Drain";
+		Templates.INPUT_DRAIN.name = "Drain In";
 		Templates.INPUT_DRAIN.setImageAndExtrapolateSize("drain.png");
 		Templates.INPUT_DRAIN.templateId = GameObject.generateNewTemplateId();
 

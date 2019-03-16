@@ -19,7 +19,7 @@ public class AttackableSwitch extends Switch {
 		persistsWhenCantBeSeen = true;
 		attackable = true;
 		moveable = false;
-		orderingOnGound = 0;
+		orderingOnGound = 100;
 		type = "Switch";
 	}
 

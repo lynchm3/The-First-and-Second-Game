@@ -211,7 +211,7 @@ public class TemplatesTools {
 
 		Templates.JAR = new ContainerForLiquids();
 		Templates.JAR.name = "Empty Jar";
-		Templates.JAR.description = "Very good at containing liquids, also fairies. Surprisingly rare, so probably don't lose them.";
+		Templates.JAR.description = "Very good at containing liquids, also fairies. Surprisingly rare, so try not to lose them.";
 		Templates.JAR.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
 		Templates.JAR.setImageAndExtrapolateSize("jar.png");
 		Templates.JAR.totalHealth = Templates.JAR.remainingHealth = 14;

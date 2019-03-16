@@ -26,16 +26,16 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 
 	int windowWallY = 5;
 
-	int inputDrainX = 1;
+	int inputDrainX = 3;
 	int inputDrainY = 7;
 
-	int outputDrainX = 1;
+	int outputDrainX = 3;
 	int outputDrainY = 1;
 
-	int electricalX = 1;
+	int electricalX = 3;
 	int electricalY = 0;
 
-	int pressurePlateX = 3;
+	int pressurePlateX = 5;
 	int pressurePlateY = 1;
 
 	int attackableSwitchX = 0;
@@ -77,12 +77,20 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 
 		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[posX + wellX][posY + wellY], null);
 		well.inventory.add(Templates.GOLD.makeCopy(null, null, 23));
+		Templates.WATER.makeCopy(Game.level.squares[posX + wellX - 1][posY + wellY], null, 1);
 
+		// Left hand side, water and switch
 		AttackableSwitch attackableSwitch = Templates.ATTACKABLE_SWITCH.makeCopy(
 				Game.level.squares[posX + attackableSwitchX][posY + attackableSwitchY], null, SWITCH_TYPE.ON_OFF,
 				eletricalWiring);
 
 		Templates.WATER.makeCopy(Game.level.squares[posX - 1][posY + 1], null, 1);
+		Templates.WATER.makeCopy(Game.level.squares[posX + 0][posY + 0], null, 1);
+		Templates.WATER.makeCopy(Game.level.squares[posX + 0][posY + 1], null, 1);
+		Templates.WATER.makeCopy(Game.level.squares[posX + 0][posY + 2], null, 1);
+		Templates.WATER.makeCopy(Game.level.squares[posX + 0][posY + 3], null, 1);
+		Templates.WATER.makeCopy(Game.level.squares[posX + 1][posY + 1], null, 1);
+		Templates.WATER.makeCopy(Game.level.squares[posX + 1][posY + 2], null, 1);
 	}
 
 	boolean switchTriggered = false;
