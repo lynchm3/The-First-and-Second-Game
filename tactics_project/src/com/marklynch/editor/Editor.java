@@ -29,6 +29,7 @@ import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.journal.AreaList;
+import com.marklynch.level.constructs.rarity.Rarity;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.constructs.skilltree.SkillTreeNode;
 import com.marklynch.level.squares.Square;
@@ -442,6 +443,7 @@ public class Editor {
 		player.inventory.add(Templates.LANTERN.makeCopy(null, player));
 		GameObject playersTestKey = Templates.KEY.makeCopy(null, player);
 		playersTestKey.description = "You've had this as long as you can remember.";
+		playersTestKey.rarity = Rarity.GOD;
 		player.inventory.add(playersTestKey);
 		player.inventory.add(Templates.PICKAXE.makeCopy(null, player));
 		player.inventory.add(Templates.SHOVEL.makeCopy(null, player));

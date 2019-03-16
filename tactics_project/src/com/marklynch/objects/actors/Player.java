@@ -17,6 +17,7 @@ import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.constructs.rarity.Rarity;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
@@ -31,7 +32,6 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class Player extends Human {
@@ -217,13 +217,18 @@ public class Player extends Human {
 		}
 
 		// Equipped item!
-		Texture squareTexture = InventorySquare.YELLOW_SQUARE;
+		Color squareColor = Rarity.COMMON.color;
+		if (equipped != null) {
+			squareColor = equipped.rarity.color;
+		}
 
 		float xInPixels = Game.windowWidth - 110;
 		float yInPixels = Game.windowHeight - 140 - Game.INVENTORY_SQUARE_HEIGHT;
 
-		TextureUtils.drawTexture(squareTexture, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
-				yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+		TextureUtils.drawTexture(InventorySquare.GREY_TRANSLUCENT_SQUARE, xInPixels, yInPixels,
+				xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, xInPixels, yInPixels,
+				xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT, squareColor);
 
 		if (equipped != null) {
 
