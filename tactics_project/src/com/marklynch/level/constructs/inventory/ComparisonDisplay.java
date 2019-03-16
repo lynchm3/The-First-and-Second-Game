@@ -37,7 +37,6 @@ public class ComparisonDisplay {
 	int equippedStringX;
 	int equippedStringY;
 	int weapon1DrawX;
-	int weaponDrawY;
 	int weapon2DrawX;
 
 	int statsOfEquippedRightX;
@@ -86,22 +85,21 @@ public class ComparisonDisplay {
 		equippedStringX = x + 32;
 		equippedStringY = y;
 		weapon1DrawX = x;
-		weaponDrawY = y + 32;
 		weapon2DrawX = x + width - weaponWidth;
 
 		statsOfEquippedRightX = x + halfWidth - 10;
 		statsOfHoveredX = x + halfWidth + 10;
 		iconsX = x + halfWidth - 8;
 
-		GameObject gameObject2 = Level.player.inventory.inventorySquareMouseIsOver.stack.get(0);
+		GameObject gameObjectMouseIsOverInInventory = Level.player.inventory.inventorySquareMouseIsOver.stack.get(0);
 
-		GameObject gameObject1 = Level.player.equipped;
-		if (gameObject2 instanceof BodyArmor) {
-			gameObject1 = Level.player.bodyArmor;
-		} else if (gameObject2 instanceof LegArmor) {
-			gameObject1 = Level.player.legArmor;
-		} else if (gameObject2 instanceof Helmet) {
-			gameObject1 = Level.player.helmet;
+		GameObject gameObjectEquipped = Level.player.equipped;
+		if (gameObjectMouseIsOverInInventory instanceof BodyArmor) {
+			gameObjectEquipped = Level.player.bodyArmor;
+		} else if (gameObjectMouseIsOverInInventory instanceof LegArmor) {
+			gameObjectEquipped = Level.player.legArmor;
+		} else if (gameObjectMouseIsOverInInventory instanceof Helmet) {
+			gameObjectEquipped = Level.player.helmet;
 		}
 
 		QuadUtils.drawQuad(backgroundColor, x, y, x + width, y + height);
@@ -110,44 +108,59 @@ public class ComparisonDisplay {
 		// TextUtils.printTextWithImages(equippedStringX, equippedStringY,
 		// Integer.MAX_VALUE, false, null, stringEquipped);
 
-		// Squares
-		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon1DrawX, weaponDrawY, weapon1DrawX + weaponWidth,
-				weaponDrawY + weaponHeight);
-		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon2DrawX, weaponDrawY, weapon2DrawX + weaponWidth,
-				weaponDrawY + weaponHeight);
-
-		// Weapon images
-		if (gameObject1 != null)
-			TextureUtils.drawTexture(gameObject1.imageTexture, weapon1DrawX, weaponDrawY, weapon1DrawX + weaponWidth,
-					weaponDrawY + weaponHeight);
-		TextureUtils.drawTexture(gameObject2.imageTexture, weapon2DrawX, weaponDrawY, weapon2DrawX + weaponWidth,
-				weaponDrawY + weaponHeight);
-
 		Color color1 = Color.WHITE;
 		Color color2 = Color.WHITE;
 
 		int currentY = y;
 
 		// Name
-		if (gameObject1 != null)
-			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + gameObject1.name),
+		if (gameObjectEquipped != null) {
+			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + gameObjectEquipped.name),
 					currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					new Object[] { new StringWithColor("" + gameObject1.name, color1) });
+					new Object[] { new StringWithColor("" + gameObjectEquipped.name, color1) });
+		}
 		TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
-				new Object[] { new StringWithColor("" + gameObject2.name, color2) });
+				new Object[] { new StringWithColor("" + gameObjectMouseIsOverInInventory.name, color2) });
+
+		currentY += fieldHeight;
+
+		// Description
+		if (gameObjectEquipped != null) {
+			TextUtils.printTextWithImages(
+					statsOfEquippedRightX - Game.smallFont.getWidth("" + gameObjectEquipped.description), currentY,
+					Integer.MAX_VALUE, false, null, Color.WHITE,
+					new Object[] { new StringWithColor("" + gameObjectEquipped.description, color1) });
+		}
+		TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+				new Object[] { new StringWithColor("" + gameObjectMouseIsOverInInventory.description, color2) });
+
 		currentY += fieldHeight;
 		currentY += fieldHeight;
+
+		// Squares
+		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon1DrawX, currentY, weapon1DrawX + weaponWidth,
+				currentY + weaponHeight);
+		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon2DrawX, currentY, weapon2DrawX + weaponWidth,
+				currentY + weaponHeight);
+
+		// Images
+		if (gameObjectEquipped != null) {
+			TextureUtils.drawTexture(gameObjectEquipped.imageTexture, weapon1DrawX, currentY,
+					weapon1DrawX + weaponWidth, currentY + weaponHeight);
+		}
+		TextureUtils.drawTexture(gameObjectMouseIsOverInInventory.imageTexture, weapon2DrawX, currentY,
+				weapon2DrawX + weaponWidth, currentY + weaponHeight);
 
 		// Offensive stats
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			float equippedStat = Level.player.highLevelStats.get(statType).value;
-			if (gameObject1 != null)
-				equippedStat = gameObject1.highLevelStats.get(statType).value;
-			if (equippedStat != 0 || gameObject2.highLevelStats.get(statType).value != 0) {
-				if (equippedStat == gameObject2.highLevelStats.get(statType).value) {
+			if (gameObjectEquipped != null)
+				equippedStat = gameObjectEquipped.highLevelStats.get(statType).value;
+			if (equippedStat != 0 || gameObjectMouseIsOverInInventory.highLevelStats.get(statType).value != 0) {
+				if (equippedStat == gameObjectMouseIsOverInInventory.highLevelStats.get(statType).value) {
 					color1 = Color.WHITE;
 					color2 = Color.WHITE;
-				} else if (equippedStat < gameObject2.highLevelStats.get(statType).value) {
+				} else if (equippedStat < gameObjectMouseIsOverInInventory.highLevelStats.get(statType).value) {
 					color1 = Color.RED;
 					color2 = Color.GREEN;
 				} else {
@@ -158,9 +171,11 @@ public class ComparisonDisplay {
 				TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedStat),
 						currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
 						new Object[] { new StringWithColor("" + equippedStat, color1) });
-				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
-						new Object[] {
-								new StringWithColor("" + gameObject2.highLevelStats.get(statType).value, color2) });
+				TextUtils
+						.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+								new Object[] { new StringWithColor(
+										"" + gameObjectMouseIsOverInInventory.highLevelStats.get(statType).value,
+										color2) });
 				TextureUtils.drawTexture(CharacterScreen.highLevelStatImages.get(statType), iconsX, currentY,
 						iconsX + 16, currentY + 16);
 				currentY += fieldHeight;
@@ -170,13 +185,13 @@ public class ComparisonDisplay {
 		// Defensive stats
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			float equippedStat = Level.player.highLevelStats.get(statType).value;
-			if (gameObject1 != null)
-				equippedStat = gameObject1.highLevelStats.get(statType).value;
-			if (equippedStat != 0 || gameObject2.highLevelStats.get(statType).value != 0) {
-				if (equippedStat == gameObject2.highLevelStats.get(statType).value) {
+			if (gameObjectEquipped != null)
+				equippedStat = gameObjectEquipped.highLevelStats.get(statType).value;
+			if (equippedStat != 0 || gameObjectMouseIsOverInInventory.highLevelStats.get(statType).value != 0) {
+				if (equippedStat == gameObjectMouseIsOverInInventory.highLevelStats.get(statType).value) {
 					color1 = Color.WHITE;
 					color2 = Color.WHITE;
-				} else if (equippedStat < gameObject2.highLevelStats.get(statType).value) {
+				} else if (equippedStat < gameObjectMouseIsOverInInventory.highLevelStats.get(statType).value) {
 					color1 = Color.RED;
 					color2 = Color.GREEN;
 				} else {
@@ -187,9 +202,11 @@ public class ComparisonDisplay {
 				TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedStat),
 						currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
 						new Object[] { new StringWithColor("" + equippedStat, color1) });
-				TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
-						new Object[] {
-								new StringWithColor("" + gameObject2.highLevelStats.get(statType).value, color2) });
+				TextUtils
+						.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
+								new Object[] { new StringWithColor(
+										"" + gameObjectMouseIsOverInInventory.highLevelStats.get(statType).value,
+										color2) });
 				TextureUtils.drawTexture(CharacterScreen.highLevelStatImages.get(statType), iconsX, currentY,
 						iconsX + 16, currentY + 16);
 				currentY += fieldHeight;
@@ -198,13 +215,13 @@ public class ComparisonDisplay {
 
 		// Range
 		float equippedMaxRange = 0;
-		if (gameObject1 != null)
-			equippedMaxRange = gameObject1.maxRange;
-		if (equippedMaxRange != 1 || gameObject2.maxRange != 1) {
-			if (equippedMaxRange == gameObject2.maxRange) {
+		if (gameObjectEquipped != null)
+			equippedMaxRange = gameObjectEquipped.maxRange;
+		if (equippedMaxRange != 1 || gameObjectMouseIsOverInInventory.maxRange != 1) {
+			if (equippedMaxRange == gameObjectMouseIsOverInInventory.maxRange) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedMaxRange < gameObject2.maxRange) {
+			} else if (equippedMaxRange < gameObjectMouseIsOverInInventory.maxRange) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -216,20 +233,20 @@ public class ComparisonDisplay {
 					currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					new Object[] { new StringWithColor("" + equippedMaxRange, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					new Object[] { new StringWithColor("" + gameObject2.maxRange, color2) });
+					new Object[] { new StringWithColor("" + gameObjectMouseIsOverInInventory.maxRange, color2) });
 			TextureUtils.drawTexture(imageRange, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
 
 		// Weight
 		float equippedWeight = 0;
-		if (gameObject1 != null)
-			equippedWeight = gameObject1.weight;
-		if (equippedWeight != 0 || gameObject2.weight != 0) {
-			if (equippedWeight == gameObject2.weight) {
+		if (gameObjectEquipped != null)
+			equippedWeight = gameObjectEquipped.weight;
+		if (equippedWeight != 0 || gameObjectMouseIsOverInInventory.weight != 0) {
+			if (equippedWeight == gameObjectMouseIsOverInInventory.weight) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedWeight < gameObject2.weight) {
+			} else if (equippedWeight < gameObjectMouseIsOverInInventory.weight) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -241,20 +258,20 @@ public class ComparisonDisplay {
 					currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
 					new Object[] { new StringWithColor("" + equippedWeight, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					new Object[] { new StringWithColor("" + gameObject2.weight, color2) });
+					new Object[] { new StringWithColor("" + gameObjectMouseIsOverInInventory.weight, color2) });
 			TextureUtils.drawTexture(imageWeight, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}
 
 		// value
 		float equippedValue = 0;
-		if (gameObject1 != null)
-			equippedValue = gameObject1.value;
-		if (equippedValue != 0 || gameObject2.value != 0) {
-			if (equippedValue == gameObject2.value) {
+		if (gameObjectEquipped != null)
+			equippedValue = gameObjectEquipped.value;
+		if (equippedValue != 0 || gameObjectMouseIsOverInInventory.value != 0) {
+			if (equippedValue == gameObjectMouseIsOverInInventory.value) {
 				color1 = Color.WHITE;
 				color2 = Color.WHITE;
-			} else if (equippedValue < gameObject2.value) {
+			} else if (equippedValue < gameObjectMouseIsOverInInventory.value) {
 				color1 = Color.RED;
 				color2 = Color.GREEN;
 			} else {
@@ -266,7 +283,7 @@ public class ComparisonDisplay {
 					Integer.MAX_VALUE, false, null, Color.WHITE,
 					new Object[] { new StringWithColor("" + equippedValue, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					new Object[] { new StringWithColor("" + gameObject2.value, color2) });
+					new Object[] { new StringWithColor("" + gameObjectMouseIsOverInInventory.value, color2) });
 			TextureUtils.drawTexture(imageValue, iconsX, currentY, iconsX + 16, currentY + 16);
 			currentY += fieldHeight;
 		}

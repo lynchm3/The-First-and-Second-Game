@@ -137,6 +137,7 @@ public class GameObject
 	public long id;
 	public int templateId;
 	public String name = "";
+	public String description = "";
 	public int totalHealth = 0;
 	public Square squareGameObjectIsOn = null;
 	public Square lastSquare = null;
@@ -2003,6 +2004,7 @@ public class GameObject
 		gameObject.anchorX = anchorX;
 		gameObject.anchorY = anchorY;
 		gameObject.name = name;
+		gameObject.description = description;
 		gameObject.value = value;
 		gameObject.floatsInWater = floatsInWater;
 

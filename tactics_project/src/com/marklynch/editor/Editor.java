@@ -440,7 +440,7 @@ public class Editor {
 		player.inventory.add(Templates.CLEAVER.makeCopy(null, player));
 		player.inventory.add(Templates.LANTERN.makeCopy(null, player));
 		GameObject playersTestKey = Templates.KEY.makeCopy(null, player);
-		playersTestKey.name = "Key (You've had this as long as you can remember)";
+		playersTestKey.description = "You've had this as long as you can remember.";
 		player.inventory.add(playersTestKey);
 		player.inventory.add(Templates.PICKAXE.makeCopy(null, player));
 		player.inventory.add(Templates.SHOVEL.makeCopy(null, player));
