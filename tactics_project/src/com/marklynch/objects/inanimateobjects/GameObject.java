@@ -488,6 +488,7 @@ public class GameObject
 		Color color = Level.dayTimeOverlayColor;
 		if (this.squareGameObjectIsOn.structureSquareIsIn != null)
 			color = StructureRoom.roomColor;
+		color = calculateColor(color);
 		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
 				flash || this == Game.gameObjectMouseIsOver
 						|| (Game.gameObjectMouseIsOver != null
@@ -1829,6 +1830,22 @@ public class GameObject
 		if (attackable) {
 			checkIfDestroyed(attacker, action);
 		}
+	}
+
+	public Color calculateColor(Color baseColor) {
+
+		if (activeEffectsOnGameObject.size() > 0) {
+
+			ArrayList<Color> colors = new ArrayList<Color>(Color.class);
+			colors.add(baseColor);
+			for (Effect effect : activeEffectsOnGameObject) {
+				colors.add(effect.getColor());
+			}
+			baseColor = Color.average(colors);
+		}
+
+		// TODO Auto-generated method stub
+		return baseColor;
 	}
 
 	public void addEffect(Effect effectToAdd) {
