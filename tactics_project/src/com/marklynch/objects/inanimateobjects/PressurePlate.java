@@ -83,6 +83,7 @@ public class PressurePlate extends Switch {
 
 	@Override
 	public void use() {
+		showPow();
 		for (SwitchListener switchListener : switchListeners)
 			switchListener.zwitch(this);
 	}

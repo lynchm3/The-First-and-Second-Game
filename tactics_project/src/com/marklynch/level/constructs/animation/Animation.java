@@ -61,10 +61,10 @@ public abstract class Animation {
 	public boolean drawBowString = false;
 	public float bowStringHandleY = 0;
 
-	public int boundsX1 = -128;
-	public int boundsY1 = -128;
-	public int boundsX2 = 256;
-	public int boundsY2 = 256;
+	public float boundsX1 = 0;
+	public float boundsY1 = 0;
+	public float boundsX2 = 256;
+	public float boundsY2 = 256;
 	public boolean drawWeapon = true;
 
 	public GameObject performer;

@@ -244,13 +244,20 @@ public class Wall extends GameObject {
 
 		float alpha = 1.0f;
 
+		float boundsX1 = +primaryAnimation.boundsX1;
+		float boundsY1 = +primaryAnimation.boundsY1;
+		float boundsX2 = +primaryAnimation.boundsX2;
+		float boundsY2 = +primaryAnimation.boundsY2;
+
 		if (fullWall) {
 
 			TextureUtils.drawTextureWithinBounds(imageTexture, alpha, drawX1 + primaryAnimation.offsetX,
 					drawY1 + primaryAnimation.offsetY, drawX2 + primaryAnimation.offsetX,
-					drawY2 + primaryAnimation.offsetY, fullDrawX1 + primaryAnimation.offsetX,
-					fullDrawY1 + primaryAnimation.offsetY, fullDrawX2 + primaryAnimation.offsetX,
-					fullDrawY2 + primaryAnimation.offsetY, false, false, Color.WHITE);
+					drawY2 + primaryAnimation.offsetY,
+					fullDrawX1 + primaryAnimation.offsetX + primaryAnimation.boundsX1,
+					fullDrawY1 + primaryAnimation.offsetY + primaryAnimation.boundsY1,
+					fullDrawX1 + primaryAnimation.offsetX + primaryAnimation.boundsX2,
+					fullDrawY1 + primaryAnimation.offsetY + primaryAnimation.boundsY2, false, false, Color.WHITE);
 			return;
 		}
 

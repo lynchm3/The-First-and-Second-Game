@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.animation.primary.AnimationLowerInToGround;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
@@ -55,7 +56,7 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 		this.posY = posY;
 
 		for (int i = 0; i < totalWidthInSquares; i++) {
-			glassWalls.add(Templates.WALL_WINDOW.makeCopy(Game.level.squares[posX + i][posY + windowWallY], null));
+			glassWalls.add(Templates.WALL_GLASS.makeCopy(Game.level.squares[posX + i][posY + windowWallY], null));
 			Game.level.squares[posX + i][posY + windowWallY].setFloorImageTexture(Square.STONE_TEXTURE);
 		}
 
@@ -93,16 +94,20 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 		Templates.WATER.makeCopy(Game.level.squares[posX + 1][posY + 2], null, 1);
 	}
 
-	boolean switchTriggered = false;
+//	boolean switchTriggered = false;
 
 	@Override
 	public void zwitch(Switch zwitch) {
 		if (zwitch instanceof PressurePlate) {
-			if (switchTriggered)
-				return;
-			switchTriggered = true;
+//			if (switchTriggered)
+//				return;
+//			switchTriggered = true;
+
 			for (GameObject glassWall : glassWalls) {
-				glassWall.changeHealthSafetyOff(-glassWall.remainingHealth, null, null);
+				glassWall.setPrimaryAnimation(new AnimationLowerInToGround(glassWall, null) {
+
+				});
+
 			}
 		}
 	}

@@ -562,6 +562,9 @@ public class GameObject
 				}
 			}
 
+			if (this.templateId == Templates.WALL_GLASS.templateId)
+				System.out.println("boundsY2 = " + boundsY2);
+
 			TextureUtils.drawTextureWithinBounds(image, alpha, x, y, x + width, y + height, boundsX1, boundsY1,
 					boundsX2, boundsY2, backwards, false, color);
 

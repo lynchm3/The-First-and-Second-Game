@@ -36,10 +36,10 @@ public class KeyFrame {
 	public boolean drawBowString = false;
 	public float bowStringHandleY = 0;
 
-	public int boundsX1 = -128;
-	public int boundsY1 = -128;
-	public int boundsX2 = 256;
-	public int boundsY2 = 256;
+	public float boundsX1 = 0;
+	public float boundsY1 = 0;
+	public float boundsX2 = 256;
+	public float boundsY2 = 256;
 	public float headToToeOffset = 0f;
 
 	public boolean drawWeapon = true;
@@ -126,13 +126,13 @@ public class KeyFrame {
 		animation.offsetY = animation.moveTowardsTargetAngleInRadians(animation.offsetY, offsetYSpeed * delta, offsetY);
 		animation.scaleX = animation.moveTowardsTargetAngleInRadians(animation.scaleX, scaleXSpeed * delta, scaleX);
 		animation.scaleY = animation.moveTowardsTargetAngleInRadians(animation.scaleY, scaleYSpeed * delta, scaleY);
-		animation.boundsX1 = (int) animation.moveTowardsTargetAngleInRadians(animation.boundsX1, boundsX1Speed * delta,
+		animation.boundsX1 = animation.moveTowardsTargetAngleInRadians(animation.boundsX1, boundsX1Speed * delta,
 				boundsX1);
-		animation.boundsY1 = (int) animation.moveTowardsTargetAngleInRadians(animation.boundsY1, boundsY1Speed * delta,
+		animation.boundsY1 = animation.moveTowardsTargetAngleInRadians(animation.boundsY1, boundsY1Speed * delta,
 				boundsY1);
-		animation.boundsX2 = (int) animation.moveTowardsTargetAngleInRadians(animation.boundsX2, boundsX2Speed * delta,
+		animation.boundsX2 = animation.moveTowardsTargetAngleInRadians(animation.boundsX2, boundsX2Speed * delta,
 				boundsX2);
-		animation.boundsY2 = (int) animation.moveTowardsTargetAngleInRadians(animation.boundsY2, boundsY2Speed * delta,
+		animation.boundsY2 = animation.moveTowardsTargetAngleInRadians(animation.boundsY2, boundsY2Speed * delta,
 				boundsY2);
 		animation.headToToeOffset = animation.moveTowardsTargetAngleInRadians(animation.headToToeOffset,
 				headToToeOffsetSpeed * delta, headToToeOffset);
