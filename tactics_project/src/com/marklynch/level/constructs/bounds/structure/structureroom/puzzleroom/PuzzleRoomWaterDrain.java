@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationLowerInToGround;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.squares.Node;
@@ -12,6 +13,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.PressurePlate;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
+import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
@@ -46,6 +48,7 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 	int wellY = 7;
 
 	ArrayList<GameObject> glassWalls = new ArrayList<GameObject>(GameObject.class);
+	PressurePlate pressurePlate;
 
 	public PuzzleRoomWaterDrain(int posX, int posY) {
 		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
@@ -54,11 +57,16 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 
 		this.posX = posX;
 		this.posY = posY;
-
+		pressurePlate = Templates.PRESSURE_PLATE.makeCopy(Level.squares[posX + pressurePlateX][posY + pressurePlateY],
+				null, Switch.SWITCH_TYPE.OPEN_CLOSE, 1, this);
 		for (int i = 0; i < totalWidthInSquares; i++) {
-			glassWalls.add(Templates.WALL_GLASS.makeCopy(Game.level.squares[posX + i][posY + windowWallY], null));
+			Wall glassWall = Templates.WALL_GLASS.makeCopy(Level.squares[posX + i][posY + windowWallY], null);
+			glassWalls.add(glassWall);
+			glassWall.linkedObjects.add(pressurePlate);
 			Game.level.squares[posX + i][posY + windowWallY].setFloorImageTexture(Square.STONE_TEXTURE);
 		}
+
+		pressurePlate.linkedObjects.add(glassWalls.get(glassWalls.size() - 1));
 
 		GameObject inputDrain = Templates.INPUT_DRAIN.makeCopy(
 				Game.level.squares[posX + inputDrainX][posY + inputDrainY], null,
@@ -73,25 +81,22 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 		ElectricalWiring eletricalWiring = Templates.ELECTRICAL_WIRING
 				.makeCopy(Game.level.squares[posX + electricalX][posY + electricalY], null);
 
-		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX + pressurePlateX][posY + pressurePlateY], null,
-				Switch.SWITCH_TYPE.OPEN_CLOSE, 1, this);
-
 		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[posX + wellX][posY + wellY], null);
 		well.inventory.add(Templates.GOLD.makeCopy(null, null, 23));
 		Templates.WATER.makeCopy(Game.level.squares[posX + wellX - 1][posY + wellY], null, 1);
 
 		// Left hand side, water and switch
 		AttackableSwitch attackableSwitch = Templates.ATTACKABLE_SWITCH.makeCopy(
-				Game.level.squares[posX + attackableSwitchX][posY + attackableSwitchY], null, SWITCH_TYPE.ON_OFF,
+				Level.squares[posX + attackableSwitchX][posY + attackableSwitchY], null, SWITCH_TYPE.ON_OFF,
 				eletricalWiring);
 
-		Templates.WATER.makeCopy(Game.level.squares[posX - 1][posY + 1], null, 1);
-		Templates.WATER.makeCopy(Game.level.squares[posX + 0][posY + 0], null, 1);
-		Templates.WATER.makeCopy(Game.level.squares[posX + 0][posY + 1], null, 1);
-		Templates.WATER.makeCopy(Game.level.squares[posX + 0][posY + 2], null, 1);
-		Templates.WATER.makeCopy(Game.level.squares[posX + 0][posY + 3], null, 1);
-		Templates.WATER.makeCopy(Game.level.squares[posX + 1][posY + 1], null, 1);
-		Templates.WATER.makeCopy(Game.level.squares[posX + 1][posY + 2], null, 1);
+		Templates.WATER.makeCopy(Level.squares[posX - 1][posY + 1], null, 1);
+		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 0], null, 1);
+		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 1], null, 1);
+		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 2], null, 1);
+		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 3], null, 1);
+		Templates.WATER.makeCopy(Level.squares[posX + 1][posY + 1], null, 1);
+		Templates.WATER.makeCopy(Level.squares[posX + 1][posY + 2], null, 1);
 	}
 
 //	boolean switchTriggered = false;
