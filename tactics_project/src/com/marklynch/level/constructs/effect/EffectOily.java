@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.effect;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.Color;
 
 public class EffectOily extends Effect {
 
@@ -42,6 +43,11 @@ public class EffectOily extends Effect {
 
 	public void onAdd() {
 		target.removeBurningEffect();
+	}
+
+	@Override
+	public Color getColor() {
+		return Color.DARK_GRAY;
 	}
 
 }

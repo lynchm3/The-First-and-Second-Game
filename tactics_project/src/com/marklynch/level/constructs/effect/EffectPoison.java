@@ -8,6 +8,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.Color;
 
 public class EffectPoison extends Effect {
 
@@ -22,7 +23,7 @@ public class EffectPoison extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_poison.png", false);
-		highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(HIGH_LEVEL_STATS.POISON_DAMAGE,5));
+		highLevelStats.put(HIGH_LEVEL_STATS.POISON_DAMAGE, new Stat(HIGH_LEVEL_STATS.POISON_DAMAGE, 5));
 	}
 
 	public EffectPoison(int totalTurns) {
@@ -45,6 +46,11 @@ public class EffectPoison extends Effect {
 	@Override
 	public EffectPoison makeCopy(GameObject source, GameObject target) {
 		return new EffectPoison(source, target, totalTurns);
+	}
+
+	@Override
+	public Color getColor() {
+		return Color.GREEN;
 	}
 
 }

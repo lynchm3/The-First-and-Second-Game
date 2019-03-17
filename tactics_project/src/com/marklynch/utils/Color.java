@@ -79,4 +79,21 @@ public class Color extends mdesl.graphics.Color {
 		return "" + r + "," + g + "," + b + "," + a;
 	}
 
+	public static Color average(ArrayList<Color> colors) {
+
+		float totalRed = 0f;
+		float totalGreen = 0f;
+		float totalBlue = 0f;
+		for (int i = 1; i < colors.size(); i++) {
+			totalRed += colors.get(i).r;
+			totalGreen += colors.get(i).g;
+			totalBlue += colors.get(i).b;
+		}
+
+		float colorsSize = colors.size();
+		Color color = new Color(totalRed / colorsSize, totalGreen / colorsSize, totalBlue / colorsSize);
+
+		return color;
+	}
+
 }

@@ -10,6 +10,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
@@ -142,6 +143,11 @@ public class EffectShock extends Effect {
 
 		}
 
+	}
+
+	@Override
+	public Color getColor() {
+		return Color.CYAN;
 	}
 
 }

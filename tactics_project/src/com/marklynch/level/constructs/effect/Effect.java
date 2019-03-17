@@ -8,10 +8,11 @@ import com.marklynch.level.constructs.Stats;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.utils.DamageDealer;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class Effect implements DamageDealer {
+public abstract class Effect implements DamageDealer {
 
 	public transient String logString;
 
@@ -112,4 +113,6 @@ public class Effect implements DamageDealer {
 		result.add(effectName + " " + highLevelStats.get(statType).value);
 		return result;
 	}
+
+	public abstract Color getColor();
 }

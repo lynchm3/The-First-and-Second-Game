@@ -8,6 +8,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.Color;
 
 public class EffectHeal extends Effect {
 
@@ -53,6 +54,11 @@ public class EffectHeal extends Effect {
 	@Override
 	public EffectHeal makeCopy(GameObject source, GameObject target) {
 		return new EffectHeal(source, target, totalTurns);
+	}
+
+	@Override
+	public Color getColor() {
+		return Color.GREEN;
 	}
 
 }

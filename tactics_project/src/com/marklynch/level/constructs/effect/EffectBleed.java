@@ -10,6 +10,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.Color;
 
 public class EffectBleed extends Effect {
 
@@ -51,5 +52,10 @@ public class EffectBleed extends Effect {
 	@Override
 	public EffectBleed makeCopy(GameObject source, GameObject target) {
 		return new EffectBleed(source, target, totalTurns);
+	}
+
+	@Override
+	public Color getColor() {
+		return Color.RED;
 	}
 }

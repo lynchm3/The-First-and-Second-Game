@@ -544,6 +544,17 @@ public class Actor extends GameObject {
 			Color color = Level.dayTimeOverlayColor;
 			if (this.squareGameObjectIsOn.structureSquareIsIn != null)
 				color = StructureRoom.roomColor;
+
+			if (activeEffectsOnGameObject.size() > 0) {
+
+				ArrayList<Color> colors = new ArrayList<Color>(Color.class);
+				colors.add(color);
+				for (Effect effect : activeEffectsOnGameObject) {
+					colors.add(effect.getColor());
+				}
+				color = Color.average(colors);
+			}
+
 			drawActor(actorPositionXInPixels, actorPositionYInPixels, alpha,
 					flash || this == Game.gameObjectMouseIsOver || inSoundPreview
 							|| (Game.gameObjectMouseIsOver != null
