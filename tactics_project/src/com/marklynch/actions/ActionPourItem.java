@@ -18,6 +18,7 @@ public class ActionPourItem extends Action {
 
 	public static final String ACTION_NAME = "Pour";
 	ContainerForLiquids containerForLiquids;
+	private GameObject previouslyEquipped;
 
 	// Default for hostiles
 	public ActionPourItem(GameObject performer, Object target, ContainerForLiquids container) {
@@ -42,6 +43,9 @@ public class ActionPourItem extends Action {
 
 		if (!checkRange())
 			return;
+
+		previouslyEquipped = performer.equipped;
+		performer.equipped = containerForLiquids;
 
 		if (targetGameObject != gameObjectPerformer) {
 			gameObjectPerformer.setPrimaryAnimation(new AnimationPour(gameObjectPerformer, targetSquare,
@@ -76,6 +80,7 @@ public class ActionPourItem extends Action {
 
 		targetSquare.liquidSpread(containerForLiquids.liquid);
 
+		performer.equip(previouslyEquipped);
 		GameObject newJar = Templates.JAR.makeCopy(null, containerForLiquids.owner);
 		performer.inventory.add(newJar);
 		if (performer.equipped == containerForLiquids) {
