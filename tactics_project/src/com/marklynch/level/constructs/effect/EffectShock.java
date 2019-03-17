@@ -11,10 +11,13 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class EffectShock extends Effect {
 
 	public static Texture electricityTexture = getGlobalImage("electricity.png", false);
+
+	ArrayList<Electricity> electricities = new ArrayList<Electricity>(Electricity.class);
 
 	public EffectShock() {
 	}
@@ -28,6 +31,9 @@ public class EffectShock extends Effect {
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("spark.png", false);
 		highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, new Stat(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, 5));
+		for (int i = 0; i < 5; i++) {
+			electricities.add(new Electricity());
+		}
 	}
 
 	@Override
@@ -60,6 +66,82 @@ public class EffectShock extends Effect {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void draw2(int offsetY) {
+
+		super.draw2(offsetY);
+
+		if (!target.squareGameObjectIsOn.visibleToPlayer)
+			return;
+
+		if (target.squareGameObjectIsOn != null) {
+//			target.actor
+
+			int actorPositionXInPixels = (int) (target.squareGameObjectIsOn.xInGridPixels + target.drawOffsetX);
+			int actorPositionYInPixels = (int) (target.squareGameObjectIsOn.yInGridPixels + target.drawOffsetY);
+			if (target != null && target.getPrimaryAnimation() != null) {
+				actorPositionXInPixels += target.getPrimaryAnimation().offsetX;
+				actorPositionYInPixels += target.getPrimaryAnimation().offsetY;
+			}
+
+//			float alpha = 1.0f;
+//			alpha = 0.75f;
+//			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
+//					actorPositionYInPixels + offsetY * maxDropletHeight, actorPositionXInPixels + maxDropletHeight,
+//					actorPositionYInPixels + offsetY * maxDropletHeight + maxDropletHeight, target.backwards);
+
+			for (Electricity electricity : electricities) {
+				electricity.draw2(actorPositionXInPixels, actorPositionYInPixels);
+			}
+		}
+
+	}
+
+	private class Electricity {
+
+		public static final float maxDropletScale = 32;
+		public static final float minX = 52;
+		public static final float maxX = 70;
+		public static final float minY = 40;
+		public static final float maxY = 188;
+		public float x, y;
+		public float scale = 0;
+		boolean gettingBigger = true;
+
+		public Electricity() {
+			scale = (float) (maxDropletScale * Math.random());
+			x = (float) (Math.random() * (maxX - minX)) + minX;
+			y = (float) (Math.random() * (maxY - minY)) + minY;
+		}
+
+		public void draw2(int actorPositionXInPixels, int actorPositionYInPixels) {
+
+			if (gettingBigger) {
+				scale += 0.5f;
+				if (scale >= maxDropletScale) {
+					scale = maxDropletScale;
+					gettingBigger = false;
+				}
+
+			} else {
+				scale -= 0.5f;
+				if (scale <= 0) {
+					scale = 0;
+					x = (float) (Math.random() * (maxX - minX)) + minX;
+					y = (float) (Math.random() * (maxY - minY)) + minY;
+					gettingBigger = true;
+				}
+
+			}
+
+			TextureUtils.drawTexture(electricityTexture, 1f,
+					actorPositionXInPixels + x + maxDropletScale / 2 - scale / 2, actorPositionYInPixels + y - scale,
+					actorPositionXInPixels + x + scale, actorPositionYInPixels + y, target.backwards);
+
+		}
+
 	}
 
 }

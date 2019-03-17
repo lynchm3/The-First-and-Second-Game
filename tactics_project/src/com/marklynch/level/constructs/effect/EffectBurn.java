@@ -17,6 +17,8 @@ public class EffectBurn extends Effect {
 
 	public static Texture flameTexture = getGlobalImage("flame.png", false);
 
+	ArrayList<Flame> flames = new ArrayList<Flame>(Flame.class);
+
 	public EffectBurn() {
 	}
 
@@ -103,8 +105,6 @@ public class EffectBurn extends Effect {
 	public void onAdd() {
 	}
 
-	ArrayList<Flame> flames = new ArrayList<Flame>(Flame.class);
-
 	@Override
 	public void draw2(int offsetY) {
 
@@ -123,8 +123,8 @@ public class EffectBurn extends Effect {
 				actorPositionYInPixels += target.getPrimaryAnimation().offsetY;
 			}
 
-			float alpha = 1.0f;
-			alpha = 0.75f;
+//			float alpha = 1.0f;
+//			alpha = 0.75f;
 //			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
 //					actorPositionYInPixels + offsetY * maxDropletHeight, actorPositionXInPixels + maxDropletHeight,
 //					actorPositionYInPixels + offsetY * maxDropletHeight + maxDropletHeight, target.backwards);
@@ -176,9 +176,6 @@ public class EffectBurn extends Effect {
 			TextureUtils.drawTexture(flameTexture, 1f, actorPositionXInPixels + x + maxDropletScale / 2 - scale / 2,
 					actorPositionYInPixels + y - scale, actorPositionXInPixels + x + scale, actorPositionYInPixels + y,
 					target.backwards);
-
-//			QuadUtils.drawQuad(Color.RED, actorPositionXInPixels + minX, actorPositionYInPixels + minY,
-//					actorPositionXInPixels + maxX + maxDropletScale, actorPositionYInPixels + maxY);
 
 		}
 
