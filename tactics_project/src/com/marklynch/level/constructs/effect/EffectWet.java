@@ -13,6 +13,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class EffectWet extends Effect {
 
+	private static Color wetColor = new Color(0, 0, 255);
+
 	public EffectWet() {
 	}
 
@@ -131,7 +133,7 @@ public class EffectWet extends Effect {
 
 	@Override
 	public Color getColor() {
-		return Color.BLUE;
+		return wetColor;
 	}
 
 }

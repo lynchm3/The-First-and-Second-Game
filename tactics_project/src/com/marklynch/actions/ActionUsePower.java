@@ -9,6 +9,7 @@ import com.marklynch.level.constructs.power.PowerTeleportOther;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.utils.ArrayList;
 
 public class ActionUsePower extends Action {
 	Power power;
@@ -49,7 +50,7 @@ public class ActionUsePower extends Action {
 
 		if (power.hostile) {
 			for (Square square : power.getAffectedSquares(targetSquare)) {
-				for (GameObject gameObject : square.inventory.getGameObjects()) {
+				for (GameObject gameObject : (ArrayList<GameObject>) square.inventory.gameObjects.clone()) {
 					gameObject.attackedBy(this.gameObjectPerformer, this);
 				}
 			}
