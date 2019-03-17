@@ -43,6 +43,7 @@ import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.utils.ThoughtBubbles;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.trigger.ScriptTrigger;
@@ -531,6 +532,8 @@ public class Editor {
 		player.inventory.add(Templates.HELMET_ANTLERS.makeCopy(null, player));
 		player.inventory.add(Templates.PINK_HARD_HAT.makeCopy(null, player));
 		player.inventory.add(Templates.COWBOY_HAT.makeCopy(null, player));
+		ContainerForLiquids jarOfWater = Templates.JAR_OF_WATER.makeCopy(null, player);
+		player.inventory.add(jarOfWater);
 		player.inventory.add(Templates.JAR_OF_POISON.makeCopy(null, player));
 		player.inventory.add(Templates.JAR_OF_WATER.makeCopy(null, player));
 		player.inventory.add(Templates.JAR_OF_WATER.makeCopy(null, player));
@@ -546,7 +549,7 @@ public class Editor {
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
 		player.inventory.add(Templates.MATCHES.makeCopy(null, player));
-		player.equip(playersTestKey);
+		player.equip(jarOfWater);
 
 		// relationships
 		Game.level.factions.player.relationships.put(Game.level.factions.get(1), -100);

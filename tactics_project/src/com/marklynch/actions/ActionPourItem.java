@@ -3,6 +3,8 @@ package com.marklynch.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
+import com.marklynch.level.constructs.animation.primary.AnimationPour;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.AggressiveWildAnimal;
@@ -40,6 +42,19 @@ public class ActionPourItem extends Action {
 
 		if (!checkRange())
 			return;
+
+		if (targetGameObject != gameObjectPerformer) {
+			gameObjectPerformer.setPrimaryAnimation(new AnimationPour(gameObjectPerformer, targetSquare,
+					gameObjectPerformer.getPrimaryAnimation(), new OnCompletionListener() {
+						@Override
+						public void animationComplete(GameObject gameObject) {
+							postAnimation();
+						}
+					}));
+		}
+	}
+
+	public void postAnimation() {
 
 		if (Game.level.shouldLog(targetGameObject, performer)) {
 			if (targetGameObject != null) {
