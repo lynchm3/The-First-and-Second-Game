@@ -165,7 +165,7 @@ public class Level {
 	// public transient Faction currentFactionMoving;
 	// public transient int currentFactionMovingIndex;
 	public transient static Stack<Move> undoList;
-	public ActivityLogger activityLogger;
+	public static ActivityLogger activityLogger;
 	public static QuickBar quickBar;
 
 	public transient GameCursor gameCursor;
@@ -2251,7 +2251,7 @@ public class Level {
 
 	}
 
-	public void logOnScreen(ActivityLog stringToLog) {
+	public static void logOnScreen(ActivityLog stringToLog) {
 		if (!Level.loggedThisTurn) {
 			Level.loggedThisTurn = true;
 			Game.level.logOnScreen(new ActivityLog(new Object[] { "-----TURN " + Level.turn + "-----" }));
@@ -2259,11 +2259,11 @@ public class Level {
 		activityLogger.addActivityLog(stringToLog);
 	}
 
-	public boolean shouldLog(Object... objects) {
+	public static boolean shouldLog(Object... objects) {
 		return shouldLog(objects, false);
 	}
 
-	public boolean shouldLog(Object[] objects, boolean doesNothing) {
+	public static boolean shouldLog(Object[] objects, boolean doesNothing) {
 		for (Object object : objects) {
 
 			if (object == null)

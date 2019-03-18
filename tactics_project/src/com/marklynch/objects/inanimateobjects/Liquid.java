@@ -2,6 +2,7 @@ package com.marklynch.objects.inanimateobjects;
 
 import java.util.Random;
 
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.level.constructs.effect.EffectShock;
@@ -10,6 +11,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.Consumable;
 import com.marklynch.objects.utils.UpdatableGameObject;
+import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
@@ -110,7 +112,13 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 			return;
 
 		if (effectToAdd instanceof EffectBurn) {
-			this.changeHealthSafetyOff(-this.remainingHealth, effectToAdd.source, null);
+			if (this.squareGameObjectIsOn != null) {
+				if (Level.shouldLog(this)) {
+					Level.logOnScreen(new ActivityLog(new Object[] { this, " evaporated" }));
+				}
+				this.squareGameObjectIsOn.inventory.remove(this);
+			}
+//			this.changeHealthSafetyOff(-this.remainingHealth, effectToAdd.source, null);
 		} else if (effectToAdd instanceof EffectShock) {
 			addEffectSafetyOff(effectToAdd);
 		}
