@@ -1882,9 +1882,6 @@ public class GameObject
 			return;
 
 		addEffectSafetyOff(effectToAdd);
-
-		if (Game.level.shouldLog(this))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
 	}
 
 	public void addEffectSafetyOff(Effect effectToAdd) {
@@ -1909,6 +1906,9 @@ public class GameObject
 		}
 
 		effectToAdd.onAdd();
+
+		if (Game.level.shouldLog(this) && !(effectToRemove instanceof EffectWet))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
 	}
 
 	public void activateEffects() {
