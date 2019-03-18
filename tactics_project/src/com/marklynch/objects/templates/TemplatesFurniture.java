@@ -21,7 +21,7 @@ import com.marklynch.objects.inanimateobjects.SeesawPart;
 import com.marklynch.objects.inanimateobjects.Stampable;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.inanimateobjects.WallSupport;
-import com.marklynch.objects.inanimateobjects.WaterSource;
+import com.marklynch.objects.inanimateobjects.Well;
 
 public class TemplatesFurniture {
 
@@ -335,9 +335,12 @@ public class TemplatesFurniture {
 		Templates.SHELF.anchorY = 8;
 		Templates.SHELF.templateId = GameObject.generateNewTemplateId();
 
-		Templates.WELL = new WaterSource();
+		Templates.WELL = new Well();
 		Templates.WELL.name = "Well";
+		Templates.WELL.name = "Source of water. People drop things in here.";
 		Templates.WELL.setImageAndExtrapolateSize("well.png");
+		Templates.WELL.normalTexture = getGlobalImage("well.png", true);
+		Templates.WELL.waterTexture = getGlobalImage("well_water.png", false);
 		Templates.WELL.totalHealth = Templates.WELL.remainingHealth = 138;
 		Templates.WELL.weight = 213f;
 		Templates.WELL.value = 89;

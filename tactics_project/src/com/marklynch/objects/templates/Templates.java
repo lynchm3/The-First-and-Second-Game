@@ -64,7 +64,7 @@ import com.marklynch.objects.inanimateobjects.WallSupport;
 import com.marklynch.objects.inanimateobjects.WallWithCrack;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.inanimateobjects.WaterBody;
-import com.marklynch.objects.inanimateobjects.WaterSource;
+import com.marklynch.objects.inanimateobjects.Well;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -331,7 +331,7 @@ public class Templates {
 
 	public static Furnace FURNACE;
 
-	public static WaterSource WELL;
+	public static Well WELL;
 
 	public static GameObject SHELF;
 
