@@ -140,7 +140,7 @@ public class GameObject
 	public String name = "";
 	public String description = "";
 	public Rarity rarity = Rarity.COMMON;
-	public int totalHealth = 0;
+	public int totalHealth = 1;
 	public Square squareGameObjectIsOn = null;
 	public Square lastSquare = null;
 	public transient InventorySquare inventorySquare = null;
