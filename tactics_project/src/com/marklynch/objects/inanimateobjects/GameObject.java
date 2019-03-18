@@ -167,8 +167,10 @@ public class GameObject
 
 	public float drawOffsetRatioX = 0;
 	public float drawOffsetRatioY = 0;
+	public float drawOffsetRatioYInWell = 0;
 	public float drawOffsetX = 0;
 	public float drawOffsetY = 0;
+	public float drawOffsetYInWell = 0;
 	public float soundWhenHit = 1;
 	public float soundWhenHitting = 1;
 	public float soundDampening = 1;
@@ -347,9 +349,9 @@ public class GameObject
 	}
 
 	public void randomisePosition() {
-		if (widthRatio < 1f && heightRatio < 1f) {
+		if (widthRatio < 1f || heightRatio < 1f) {
 			float drawOffsetXMax = 1 - width / Game.SQUARE_WIDTH;
-			float drawOffsetYMax = 1 - height / Game.SQUARE_WIDTH;
+			float drawOffsetYMax = 1 - height / Game.SQUARE_HEIGHT;
 			if (drawOffsetYMax < 0) {
 				drawOffsetYMax = 0;
 			}
@@ -357,6 +359,8 @@ public class GameObject
 			this.drawOffsetX = this.drawOffsetRatioX * Game.SQUARE_WIDTH;
 			this.drawOffsetRatioY = (/* Math.random() * */ drawOffsetYMax);
 			this.drawOffsetY = this.drawOffsetRatioY * Game.SQUARE_HEIGHT;
+			this.drawOffsetRatioYInWell = (float) (Math.random() * drawOffsetYMax);
+			this.drawOffsetYInWell = this.drawOffsetRatioYInWell * Game.SQUARE_HEIGHT;
 		}
 	}
 

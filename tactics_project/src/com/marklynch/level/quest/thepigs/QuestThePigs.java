@@ -182,7 +182,25 @@ public class QuestThePigs extends Quest {
 		GameObject pigSign = Templates.PIG_SIGN.makeCopy(Game.level.squares[25][70], farmer);
 		Templates.BENCH.makeCopy(Game.level.squares[15][68], farmer);
 		GameObject well = Templates.WELL.makeCopy(Game.level.squares[17][61], farmer);
-		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 57));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
+		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
 
 		// Giant footprints
 		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[1][93], null);

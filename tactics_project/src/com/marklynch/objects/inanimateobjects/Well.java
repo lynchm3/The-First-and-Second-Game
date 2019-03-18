@@ -54,7 +54,7 @@ public class Well extends WaterSource {
 						+ gameObjectInWell.drawOffsetX);
 
 				int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-						+ gameObjectInWell.drawOffsetY);
+						+ gameObjectInWell.drawOffsetYInWell);
 
 				TextureUtils.drawTexture(gameObjectInWell.imageTexture, 1, actorPositionXInPixels,
 						actorPositionYInPixels, actorPositionXInPixels + gameObjectInWell.width,
