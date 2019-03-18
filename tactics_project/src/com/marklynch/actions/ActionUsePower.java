@@ -51,7 +51,7 @@ public class ActionUsePower extends Action {
 		if (power.hostile) {
 			for (Square square : power.getAffectedSquares(targetSquare)) {
 				for (GameObject gameObject : (ArrayList<GameObject>) square.inventory.gameObjects.clone()) {
-					gameObject.attackedBy(this.gameObjectPerformer, this);
+					gameObject.attackedBy(this.gameObjectPerformer, this);// here
 				}
 			}
 		}

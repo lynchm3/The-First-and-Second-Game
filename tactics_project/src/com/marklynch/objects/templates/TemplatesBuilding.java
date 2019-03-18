@@ -242,12 +242,16 @@ public class TemplatesBuilding {
 
 		Templates.INPUT_DRAIN = new InputDrain();
 		Templates.INPUT_DRAIN.name = "Drain In";
+		Templates.INPUT_DRAIN.totalHealth = Templates.INPUT_DRAIN.remainingHealth = 1000;
 		Templates.INPUT_DRAIN.setImageAndExtrapolateSize("drain.png");
 		Templates.INPUT_DRAIN.templateId = GameObject.generateNewTemplateId();
 
 		Templates.ELECTRICAL_WIRING = new ElectricalWiring();
 		Templates.ELECTRICAL_WIRING.name = "Electrical Wiring";
+		Templates.ELECTRICAL_WIRING.totalHealth = Templates.ELECTRICAL_WIRING.remainingHealth = 1000;
 		Templates.ELECTRICAL_WIRING.setImageAndExtrapolateSize("electrical_wiring.png");
+		Templates.ELECTRICAL_WIRING.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES,
+				new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
 		Templates.ELECTRICAL_WIRING.templateId = GameObject.generateNewTemplateId();
 
 	}
