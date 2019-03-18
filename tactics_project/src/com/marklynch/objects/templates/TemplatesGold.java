@@ -18,6 +18,8 @@ public class TemplatesGold {
 		Templates.GOLD.value = 1;
 		Templates.GOLD.anchorX = 0;
 		Templates.GOLD.anchorY = 0;
+		Templates.GOLD.widthRatio = 0.25f;
+		Templates.GOLD.heightRatio = 0.25f;
 		Templates.GOLD.templateId = GameObject.generateNewTemplateId();
 
 		Templates.SMALL_ORB = new Orb();

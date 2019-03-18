@@ -337,7 +337,7 @@ public class TemplatesFurniture {
 
 		Templates.WELL = new Well();
 		Templates.WELL.name = "Well";
-		Templates.WELL.name = "Source of water. People drop things in here.";
+		Templates.WELL.description = "Source of water. People drop things in here.";
 		Templates.WELL.setImageAndExtrapolateSize("well.png");
 		Templates.WELL.normalTexture = getGlobalImage("well.png", true);
 		Templates.WELL.waterTexture = getGlobalImage("well_water.png", false);

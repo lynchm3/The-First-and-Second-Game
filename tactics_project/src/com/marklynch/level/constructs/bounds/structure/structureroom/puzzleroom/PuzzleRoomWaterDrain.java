@@ -83,6 +83,7 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 
 		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[posX + wellX][posY + wellY], null);
 		well.inventory.add(Templates.GOLD.makeCopy(null, null, 23));
+		well.inventory.add(Templates.SWORD.makeCopy(null, null));
 		Templates.WATER.makeCopy(Game.level.squares[posX + wellX - 1][posY + wellY], null, 1);
 
 		// Left hand side, water and switch

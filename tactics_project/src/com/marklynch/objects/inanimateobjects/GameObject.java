@@ -472,16 +472,17 @@ public class GameObject
 			// big shadow
 			if (!isFloorObject && Level.shadowDarkness > 0 && bigShadow
 					&& this.squareGameObjectIsOn.structureSquareIsIn == null) {
-				drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), Level.shadowDarkness, false, scaleX,
-						Level.shadowLength * scaleY, Level.shadowAngle, boundsX1, boundsY1, boundsX2, boundsY2,
-						Color.BLACK, false, imageTexture);
+				drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), width, height, halfWidth, halfHeight,
+						Level.shadowDarkness, false, scaleX, Level.shadowLength * scaleY, Level.shadowAngle, boundsX1,
+						boundsY1, boundsX2, boundsY2, Color.BLACK, false, imageTexture);
 			} else if (Level.shadowDarkness > 0 && this.squareGameObjectIsOn.structureSquareIsIn == null) {
 				// shadow again... small shadow
 				drawGameObject((int) (actorPositionXInPixels + Level.smallShadowOffSetX),
-						(int) (actorPositionYInPixels + Level.smallShadowOffSetY), Level.shadowDarkness, false, scaleX,
-						Level.shadowLength * scaleY, 0f, boundsX1 + Level.smallShadowOffSetX,
-						boundsY1 + Level.smallShadowOffSetY, boundsX2 + Level.smallShadowOffSetX,
-						boundsY2 + Level.smallShadowOffSetY, Color.BLACK, false, imageTexture);
+						(int) (actorPositionYInPixels + Level.smallShadowOffSetY), width, height, halfWidth, halfHeight,
+						Level.shadowDarkness, false, scaleX, Level.shadowLength * scaleY, 0f,
+						boundsX1 + Level.smallShadowOffSetX, boundsY1 + Level.smallShadowOffSetY,
+						boundsX2 + Level.smallShadowOffSetX, boundsY2 + Level.smallShadowOffSetY, Color.BLACK, false,
+						imageTexture);
 			}
 		}
 
@@ -489,7 +490,7 @@ public class GameObject
 		if (this.squareGameObjectIsOn.structureSquareIsIn != null)
 			color = StructureRoom.roomColor;
 		color = calculateColor(color);
-		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
+		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, width, height, halfWidth, halfHeight, alpha,
 				flash || this == Game.gameObjectMouseIsOver
 						|| (Game.gameObjectMouseIsOver != null
 								&& Game.gameObjectMouseIsOver.gameObjectsToHighlight.contains(this)),
@@ -497,9 +498,9 @@ public class GameObject
 		return true;
 	}
 
-	public void drawGameObject(int x, int y, float alpha, boolean highlight, float scaleX, float scaleY,
-			float rotationRad, float boundsX1, float boundsY1, float boundsX2, float boundsY2, Color color,
-			boolean drawHealthBar, Texture image) {
+	public void drawGameObject(int x, int y, float width, float height, float halfWidth, float halfHeight, float alpha,
+			boolean highlight, float scaleX, float scaleY, float rotationRad, float boundsX1, float boundsY1,
+			float boundsX2, float boundsY2, Color color, boolean drawHealthBar, Texture image) {
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {
@@ -562,9 +563,6 @@ public class GameObject
 
 				}
 			}
-
-			if (this.templateId == Templates.WALL_GLASS.templateId)
-				System.out.println("boundsY2 = " + boundsY2);
 
 			TextureUtils.drawTextureWithinBounds(image, alpha, x, y, x + width, y + height, boundsX1, boundsY1,
 					boundsX2, boundsY2, backwards, false, color);
@@ -713,7 +711,7 @@ public class GameObject
 			if (this.squareGameObjectIsOn.structureSquareIsIn != null)
 				color = StructureRoom.roomColor;
 
-			drawGameObject(actorPositionXInPixels, actorPositionYInPixels, alpha,
+			drawGameObject(actorPositionXInPixels, actorPositionYInPixels, width, height, halfWidth, halfHeight, alpha,
 					flash || this == Game.gameObjectMouseIsOver
 							|| (Game.gameObjectMouseIsOver != null
 									&& Game.gameObjectMouseIsOver.gameObjectsToHighlight.contains(this)),
