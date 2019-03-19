@@ -43,10 +43,10 @@ public class Rail extends Line implements SwitchListener {
 		super.imageTextureRightUp = imageTextureRightUpStatic;
 		super.imageTextureLeftDown = imageTextureLeftDownStatic;
 		super.imageTextureRightDown = imageTextureRightDownStatic;
-		super.imageTextureLeftBufferStop = imageTextureLeftBufferStopStatic;
-		super.imageTextureRightBufferStop = imageTextureRightBufferStopStatic;
-		super.imageTextureUpBufferStop = imageTextureUpBufferStopStatic;
-		super.imageTextureDownBufferStop = imageTextureDownBufferStopStatic;
+		super.imageTextureLeftEnd = imageTextureLeftBufferStopStatic;
+		super.imageTextureRightEnd = imageTextureRightBufferStopStatic;
+		super.imageTextureUpEnd = imageTextureUpBufferStopStatic;
+		super.imageTextureDownEnd = imageTextureDownBufferStopStatic;
 	}
 
 	@Override

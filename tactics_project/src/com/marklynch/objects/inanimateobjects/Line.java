@@ -22,10 +22,10 @@ public abstract class Line extends GameObject implements SwitchListener {
 	public Texture imageTextureRightUp;
 	public Texture imageTextureLeftDown;
 	public Texture imageTextureRightDown;
-	public Texture imageTextureLeftBufferStop;
-	public Texture imageTextureRightBufferStop;
-	public Texture imageTextureUpBufferStop;
-	public Texture imageTextureDownBufferStop;
+	public Texture imageTextureLeftEnd;
+	public Texture imageTextureRightEnd;
+	public Texture imageTextureUpEnd;
+	public Texture imageTextureDownEnd;
 
 	public Line() {
 		super();
@@ -64,24 +64,24 @@ public abstract class Line extends GameObject implements SwitchListener {
 		Texture lineTexture = imageTexture;
 
 		if (drawLeftBufferStop) {
-			imageTexture = imageTextureLeftBufferStop;
+			imageTexture = imageTextureLeftEnd;
 			super.draw1();
 		}
 
 		if (drawRightBufferStop) {
-			imageTexture = imageTextureRightBufferStop;
+			imageTexture = imageTextureRightEnd;
 			super.draw1();
 
 		}
 
 		if (drawUpBufferStop) {
-			imageTexture = imageTextureUpBufferStop;
+			imageTexture = imageTextureUpEnd;
 			super.draw1();
 
 		}
 
 		if (drawDownBufferStop) {
-			imageTexture = imageTextureDownBufferStop;
+			imageTexture = imageTextureDownEnd;
 			super.draw1();
 		}
 

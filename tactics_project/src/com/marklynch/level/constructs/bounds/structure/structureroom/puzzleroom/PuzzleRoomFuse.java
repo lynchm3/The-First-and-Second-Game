@@ -22,16 +22,16 @@ public class PuzzleRoomFuse extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 
-		Templates.FUSE.makeCopy(Level.squares[posX + 2][posY + 2], null, Direction.LEFT, Direction.RIGHT);
-		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.LEFT, Direction.RIGHT);
-		Templates.FUSE.makeCopy(Level.squares[posX + 4][posY + 2], null, Direction.LEFT, Direction.RIGHT);
-		Templates.FUSE.makeCopy(Level.squares[posX + 5][posY + 2], null, Direction.LEFT, Direction.DOWN);
-		Templates.FUSE.makeCopy(Level.squares[posX + 5][posY + 3], null, Direction.UP, Direction.DOWN);
-		Templates.FUSE.makeCopy(Level.squares[posX + 5][posY + 4], null, Direction.UP, Direction.LEFT);
-		Templates.FUSE.makeCopy(Level.squares[posX + 4][posY + 4], null, Direction.LEFT, Direction.RIGHT);
-		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 4], null, Direction.UP, Direction.RIGHT);
-		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 3], null, Direction.DOWN, Direction.RIGHT);
-		Templates.CRATE.makeCopy(Level.squares[posX + 4][posY + 3], null);
+		Templates.FUSE.makeCopy(Level.squares[posX + 2][posY + 2], null, Direction.LEFT, Direction.RIGHT, true);
+		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.LEFT, Direction.RIGHT, false);
+		Templates.FUSE.makeCopy(Level.squares[posX + 4][posY + 2], null, Direction.LEFT, Direction.RIGHT, false);
+		Templates.FUSE.makeCopy(Level.squares[posX + 5][posY + 2], null, Direction.LEFT, Direction.DOWN, false);
+		Templates.FUSE.makeCopy(Level.squares[posX + 5][posY + 3], null, Direction.UP, Direction.DOWN, false);
+		Templates.FUSE.makeCopy(Level.squares[posX + 5][posY + 4], null, Direction.UP, Direction.LEFT, false);
+		Templates.FUSE.makeCopy(Level.squares[posX + 4][posY + 4], null, Direction.LEFT, Direction.RIGHT, false);
+		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 4], null, Direction.UP, Direction.RIGHT, false);
+		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 3], null, Direction.DOWN, Direction.RIGHT, false);
+		Templates.CRATE.makeCopy(Level.squares[posX + 4][posY + 3], false, null);
 
 	}
 

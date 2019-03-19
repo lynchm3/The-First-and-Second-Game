@@ -161,13 +161,25 @@ public class TemplatesBuilding {
 		Fuse.imageTextureLeftRightStatic = getGlobalImage("fuse.png", true);
 		Fuse.imageTextureUpDownStatic = getGlobalImage("fuse_up_down.png", true);
 		Fuse.imageTextureLeftUpStatic = getGlobalImage("fuse_left_up.png", true);
-		Fuse.imageTextureRightUpStatic = getGlobalImage("FUSE_right_up.png", true);
+		Fuse.imageTextureRightUpStatic = getGlobalImage("fuse_right_up.png", true);
 		Fuse.imageTextureLeftDownStatic = getGlobalImage("fuse_left_down.png", true);
 		Fuse.imageTextureRightDownStatic = getGlobalImage("fuse_right_down.png", true);
-		Fuse.imageTextureLeftBufferStopStatic = getGlobalImage("rail_buffer_stop_left.png", false);
-		Fuse.imageTextureRightBufferStopStatic = getGlobalImage("rail_buffer_stop_right.png", false);
-		Fuse.imageTextureUpBufferStopStatic = getGlobalImage("rail_buffer_stop_up.png", false);
-		Fuse.imageTextureDownBufferStopStatic = getGlobalImage("rail_buffer_stop_down.png", false);
+
+//		Fuse.imageTextureLeftNonLightableEndStatic = getGlobalImage("rail_buffer_stop_left.png", false);
+//		Fuse.imageTextureRightNonLightableEndStatic = getGlobalImage("rail_buffer_stop_right.png", false);
+//		Fuse.imageTextureUpNonLightableEndStatic = getGlobalImage("rail_buffer_stop_up.png", false);
+//		Fuse.imageTextureDownNonLightableEndStatic = getGlobalImage("rail_buffer_stop_down.png", false);
+
+		Fuse.imageTextureLeftLightableEndStatic = getGlobalImage("fuse_left_lightable_end.png", false);
+		Fuse.imageTextureRightLightableEndStatic = getGlobalImage("fuse_right_lightable_end.png", false);
+		Fuse.imageTextureUpLightableEndStatic = getGlobalImage("fuse_up_lightable_end.png", false);
+		Fuse.imageTextureDownLightableEndStatic = getGlobalImage("fuse_down_lightable_end.png", false);
+
+		Fuse.imageTextureLeftLitEndStatic = getGlobalImage("fuse_left_lit_end.png", false);
+		Fuse.imageTextureRightLitEndStatic = getGlobalImage("fuse_right_lit_end.png", false);
+		Fuse.imageTextureUpLitEndStatic = getGlobalImage("fuse_up_lit_end.png", false);
+		Fuse.imageTextureDownLitEndStatic = getGlobalImage("fuse_down_lit_end.png", false);
+
 		Templates.FUSE.imageTexture = getGlobalImage("fuse.png", true);
 		Templates.FUSE.totalHealth = Templates.FUSE.remainingHealth = 100;
 		Templates.FUSE.weight = 5f;
