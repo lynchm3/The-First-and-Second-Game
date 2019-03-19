@@ -44,7 +44,7 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 
 	private boolean lightable = false;
 	private boolean lit = false;
-	private ArrayList<GameObject> gameObjectsToExplode = new ArrayList<GameObject>(GameObject.class);
+	public ArrayList<GameObject> gameObjectsToExplode = new ArrayList<GameObject>(GameObject.class);
 
 	private int turnLit = -1;
 
@@ -154,18 +154,22 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 	@Override
 	public void update() {
 		if (lit && this.turnLit != Level.turn && this.squareGameObjectIsOn != null) {
-			ArrayList<Square> neighborSquares = this.getAllSquaresAtDistance(1);
-			for (Square neighborSquare : neighborSquares) {
+			ArrayList<Square> connectedSquares = new ArrayList<Square>(Square.class);
+			connectedSquares.add(this.getSquareInDirection(direction1));
+			connectedSquares.add(this.getSquareInDirection(direction2));
+
+			for (Square neighborSquare : connectedSquares) {
 				Fuse fuse = (Fuse) neighborSquare.inventory.getGameObjectWithTemplateId(this.templateId);
 				if (fuse != null)
 					fuse.setLit(true);
 			}
 
 			for (GameObject gameObject : this.gameObjectsToExplode) {
-				gameObject.changeHealthSafetyOff(-1, null, null);
+				gameObject.changeHealthSafetyOff(-gameObject.remainingHealth, null, null);
 			}
 
 			this.squareGameObjectIsOn.inventory.remove(this);
+			this.updateNeighborLines();
 		}
 
 	}

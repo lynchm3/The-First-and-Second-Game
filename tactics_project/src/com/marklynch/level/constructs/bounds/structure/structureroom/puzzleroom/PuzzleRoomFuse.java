@@ -5,6 +5,8 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.squares.Node;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
+import com.marklynch.objects.inanimateobjects.Fuse;
+import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
 
@@ -22,6 +24,8 @@ public class PuzzleRoomFuse extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 
+		GameObject crate = Templates.CRATE.makeCopy(Level.squares[posX + 4][posY + 3], false, null);
+
 		Templates.FUSE.makeCopy(Level.squares[posX + 2][posY + 2], null, Direction.LEFT, Direction.RIGHT, true);
 		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.LEFT, Direction.RIGHT, false);
 		Templates.FUSE.makeCopy(Level.squares[posX + 4][posY + 2], null, Direction.LEFT, Direction.RIGHT, false);
@@ -30,8 +34,9 @@ public class PuzzleRoomFuse extends StructureRoom {
 		Templates.FUSE.makeCopy(Level.squares[posX + 5][posY + 4], null, Direction.UP, Direction.LEFT, false);
 		Templates.FUSE.makeCopy(Level.squares[posX + 4][posY + 4], null, Direction.LEFT, Direction.RIGHT, false);
 		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 4], null, Direction.UP, Direction.RIGHT, false);
-		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 3], null, Direction.DOWN, Direction.RIGHT, false);
-		Templates.CRATE.makeCopy(Level.squares[posX + 4][posY + 3], false, null);
+		Fuse endFuse = Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 3], null, Direction.DOWN, Direction.RIGHT,
+				false);
+		endFuse.gameObjectsToExplode.add(crate);
 
 	}
 
