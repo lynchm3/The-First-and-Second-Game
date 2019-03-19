@@ -42,16 +42,16 @@ public abstract class Line extends GameObject implements SwitchListener {
 		super.setInstances(gameObject);
 	}
 
-	public void updateNeighborLines() {
+	public void updateNeighborLines(Square square) {
 
 		for (Direction direction : Direction.values()) {
-			Square neightborSquare = this.getSquareInDirection(direction);
-			if (neightborSquare == null)
+			Square neighborSquare = this.getSquareInDirection(direction, square);
+			if (neighborSquare == null)
 				continue;
-			Line neighborLine = (Line) neightborSquare.inventory.getGameObjectWithTemplateId(this.templateId);
+			Line neighborLine = (Line) neighborSquare.inventory.getGameObjectWithTemplateId(this.templateId);
 			if (neighborLine == null)
 				continue;
-			neighborLine.updateImageTextures();
+			neighborLine.updateImageTextures(square);
 		}
 	}
 
@@ -98,7 +98,7 @@ public abstract class Line extends GameObject implements SwitchListener {
 		return null;
 	}
 
-	public void updateImageTextures() {
+	public void updateImageTextures(Square square) {
 
 		if ((direction1 == Direction.LEFT || direction1 == Direction.RIGHT)
 				&& (direction2 == Direction.LEFT || direction2 == Direction.RIGHT)) {
@@ -135,34 +135,34 @@ public abstract class Line extends GameObject implements SwitchListener {
 		drawDownBufferStop = false;
 
 		if (direction1 == Direction.LEFT || direction2 == Direction.LEFT) {
-			if (!checkIfConnected(Direction.LEFT)) {
+			if (!checkIfConnected(Direction.LEFT, square)) {
 				drawLeftBufferStop = true;
 			}
 		}
 
 		if (direction1 == Direction.RIGHT || direction2 == Direction.RIGHT) {
-			if (!checkIfConnected(Direction.RIGHT)) {
+			if (!checkIfConnected(Direction.RIGHT, square)) {
 				drawRightBufferStop = true;
 			}
 		}
 
 		if (direction1 == Direction.UP || direction2 == Direction.UP) {
-			if (!checkIfConnected(Direction.UP)) {
+			if (!checkIfConnected(Direction.UP, square)) {
 				drawUpBufferStop = true;
 			}
 		}
 
 		if (direction1 == Direction.DOWN || direction2 == Direction.DOWN) {
-			if (!checkIfConnected(Direction.DOWN)) {
+			if (!checkIfConnected(Direction.DOWN, square)) {
 				drawDownBufferStop = true;
 			}
 		}
 
 	}
 
-	public boolean checkIfConnected(Direction inDirection) {
+	public boolean checkIfConnected(Direction inDirection, Square square) {
 
-		Square squareToCheckIfConnected = getSquareInDirection(inDirection);
+		Square squareToCheckIfConnected = getSquareInDirection(inDirection, square);
 
 		if (squareToCheckIfConnected == null)
 			return false;
@@ -188,19 +188,19 @@ public abstract class Line extends GameObject implements SwitchListener {
 		return true;
 	}
 
-	public Square getSquareInDirection(Direction direction) {
+	public Square getSquareInDirection(Direction direction, Square fromSquare) {
 
 		if (this.squareGameObjectIsOn == null)
 			return null;
 
 		if (direction == Direction.RIGHT) {
-			return this.squareGameObjectIsOn.getSquareToRightOf();
+			return fromSquare.getSquareToRightOf();
 		} else if (direction == Direction.LEFT) {
-			return this.squareGameObjectIsOn.getSquareToLeftOf();
+			return fromSquare.getSquareToLeftOf();
 		} else if (direction == Direction.UP) {
-			return this.squareGameObjectIsOn.getSquareAbove();
+			return fromSquare.getSquareAbove();
 		} else if (direction == Direction.DOWN) {
-			return this.squareGameObjectIsOn.getSquareBelow();
+			return fromSquare.getSquareBelow();
 		}
 		return null;
 	}

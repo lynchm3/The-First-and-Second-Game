@@ -92,9 +92,9 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 		fuse.direction2 = direction2;
 		fuse.lightable = lightable;
 
-		fuse.updateImageTextures();
+		fuse.updateImageTextures(square);
 
-		fuse.updateNeighborLines();
+		fuse.updateNeighborLines(square);
 
 		fuse.updateEndTextures();
 
@@ -116,13 +116,30 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 		updateEndTextures();
 	}
 
+	public void updateNeighborLines(Square square) {
+		super.updateNeighborLines(square);
+
+		System.out.println("updateNeighborLines()");
+		for (Direction direction : Direction.values()) {
+			Square neighborSquare = this.getSquareInDirection(direction, square);
+			System.out.println("neighborSquare = " + neighborSquare);
+			if (neighborSquare == null)
+				continue;
+			Fuse neighborFuse = (Fuse) neighborSquare.inventory.getGameObjectWithTemplateId(this.templateId);
+			System.out.println("neighborFuse = " + neighborFuse);
+			if (neighborFuse == null)
+				continue;
+			System.out.println("neighborFuse = " + neighborFuse);
+			neighborFuse.updateEndTextures();
+		}
+	}
+
 	public void updateEndTextures() {
 		if (lit) {
 			super.imageTextureLeftEnd = imageTextureLeftLitEndStatic;
 			super.imageTextureRightEnd = imageTextureRightLitEndStatic;
 			super.imageTextureUpEnd = imageTextureUpLitEndStatic;
 			super.imageTextureDownEnd = imageTextureDownLitEndStatic;
-
 		} else if (lightable) {
 			super.imageTextureLeftEnd = imageTextureLeftLightableEndStatic;
 			super.imageTextureRightEnd = imageTextureRightLightableEndStatic;
@@ -154,11 +171,14 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 	@Override
 	public void update() {
 		if (lit && this.turnLit != Level.turn && this.squareGameObjectIsOn != null) {
+			Square square = this.squareGameObjectIsOn;
 			ArrayList<Square> connectedSquares = new ArrayList<Square>(Square.class);
-			connectedSquares.add(this.getSquareInDirection(direction1));
-			connectedSquares.add(this.getSquareInDirection(direction2));
+			connectedSquares.add(this.getSquareInDirection(direction1, square));
+			connectedSquares.add(this.getSquareInDirection(direction2, square));
 
 			for (Square neighborSquare : connectedSquares) {
+				if (neighborSquare == null)
+					continue;
 				Fuse fuse = (Fuse) neighborSquare.inventory.getGameObjectWithTemplateId(this.templateId);
 				if (fuse != null)
 					fuse.setLit(true);
@@ -169,7 +189,7 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 			}
 
 			this.squareGameObjectIsOn.inventory.remove(this);
-			this.updateNeighborLines();
+			this.updateNeighborLines(square);
 		}
 
 	}
