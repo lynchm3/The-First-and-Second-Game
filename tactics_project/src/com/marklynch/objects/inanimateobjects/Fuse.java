@@ -92,7 +92,7 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 		fuse.direction2 = direction2;
 		fuse.lightable = lightable;
 
-		fuse.updateImageTextures(square);
+		fuse.updateImageTextures();
 
 		fuse.updateNeighborLines(square);
 

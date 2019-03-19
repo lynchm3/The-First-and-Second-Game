@@ -67,7 +67,7 @@ public class Rail extends Line implements SwitchListener {
 		rail.direction1 = direction1;
 		rail.direction2 = direction2;
 
-		rail.updateImageTextures(square);
+		rail.updateImageTextures();
 
 		rail.updateNeighborLines(square);
 
@@ -100,7 +100,7 @@ public class Rail extends Line implements SwitchListener {
 		}
 
 		this.showPow();
-		updateImageTextures(this.squareGameObjectIsOn);
+		updateImageTextures();
 		updateNeighborLines(this.squareGameObjectIsOn);
 
 	}
