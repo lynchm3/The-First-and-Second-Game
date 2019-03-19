@@ -11,22 +11,21 @@ public abstract class Line extends GameObject implements SwitchListener {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public Direction direction1;
 	public Direction direction2;
-	public static Texture imageTextureLeftRight;
-	public static Texture imageTextureUpDown;
-	// boolean up, down, left, right;
-	public static Texture imageTextureLeftUp;
-	public static Texture imageTextureRightUp;
-	public static Texture imageTextureLeftDown;
-	public static Texture imageTextureRightDown;
-//	public boolean turnsClockwiseFirst = true;
 	public boolean drawLeftBufferStop = false;
 	public boolean drawRightBufferStop = false;
 	public boolean drawUpBufferStop = false;
 	public boolean drawDownBufferStop = false;
-	public static Texture imageTextureLeftBufferStop;
-	public static Texture imageTextureRightBufferStop;
-	public static Texture imageTextureUpBufferStop;
-	public static Texture imageTextureDownBufferStop;
+
+	public Texture imageTextureLeftRight;
+	public Texture imageTextureUpDown;
+	public Texture imageTextureLeftUp;
+	public Texture imageTextureRightUp;
+	public Texture imageTextureLeftDown;
+	public Texture imageTextureRightDown;
+	public Texture imageTextureLeftBufferStop;
+	public Texture imageTextureRightBufferStop;
+	public Texture imageTextureUpBufferStop;
+	public Texture imageTextureDownBufferStop;
 
 	public Line() {
 		super();
@@ -204,6 +203,34 @@ public abstract class Line extends GameObject implements SwitchListener {
 			return this.squareGameObjectIsOn.getSquareBelow();
 		}
 		return null;
+	}
+
+	public Direction rotate90Degrees(Direction direction) {
+		if (direction == Direction.RIGHT) {
+			return Direction.DOWN;
+		} else if (direction == Direction.DOWN) {
+			return Direction.LEFT;
+		} else if (direction == Direction.LEFT) {
+			return Direction.UP;
+		} else if (direction == Direction.UP) {
+			return Direction.RIGHT;
+		}
+		return Direction.DOWN;
+
+	}
+
+	public Direction rotateMinus90Degrees(Direction direction) {
+		if (direction == Direction.RIGHT) {
+			return Direction.UP;
+		} else if (direction == Direction.DOWN) {
+			return Direction.RIGHT;
+		} else if (direction == Direction.LEFT) {
+			return Direction.DOWN;
+		} else if (direction == Direction.UP) {
+			return Direction.LEFT;
+		}
+		return Direction.DOWN;
+
 	}
 
 }
