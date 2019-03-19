@@ -31,7 +31,7 @@ public class Fuse extends Line implements SwitchListener {
 		attackable = false;
 		isFloorObject = true;
 		moveable = false;
-		orderingOnGound = 20;
+		orderingOnGound = 21;
 		type = "Fuse";
 
 		super.imageTextureLeftRight = imageTextureLeftRightStatic;

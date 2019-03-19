@@ -13,6 +13,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomCrumblingWall;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFallawayFloor;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFriendlyCaveIn;
+import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFuse;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomMaze;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomMineCart;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomMineCart2;
@@ -99,6 +100,12 @@ public class QuestList extends ArrayList<Quest> {
 
 		// ROOM Minecart room 1
 		puzzleStructureRooms.add(new PuzzleRoomMineCart(puzzleRoomsX + 1, puzzleRoomsY + 22));
+
+		// Doorway minecart room 1 to fuse room
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 14][puzzleRoomsY + 23]);
+
+		// Fuse room 1
+		puzzleStructureRooms.add(new PuzzleRoomFuse(puzzleRoomsX + 15, puzzleRoomsY + 22));
 
 		// DOORWAY minecart 1 to minecart 2
 		squaresToRemove.add(Level.squares[puzzleRoomsX + 14][puzzleRoomsY + 41]);
