@@ -30,6 +30,7 @@ import com.marklynch.objects.inanimateobjects.ElectricalWiring;
 import com.marklynch.objects.inanimateobjects.Fireplace;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.Furnace;
+import com.marklynch.objects.inanimateobjects.Fuse;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
@@ -307,6 +308,7 @@ public class Templates {
 
 	public static Rail RAIL;
 	public static Rail RAIL_INVISIBLE;
+	public static Fuse FUSE;
 
 	public static MineCart MINE_CART;
 

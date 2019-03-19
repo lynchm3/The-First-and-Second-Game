@@ -1,14 +1,12 @@
 package com.marklynch.objects.inanimateobjects;
 
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
-import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
-public class Rail extends Line implements SwitchListener {
+public abstract class Line extends GameObject implements SwitchListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public Direction direction1;
@@ -20,8 +18,7 @@ public class Rail extends Line implements SwitchListener {
 	public static Texture imageTextureRightUp;
 	public static Texture imageTextureLeftDown;
 	public static Texture imageTextureRightDown;
-	public boolean turnsClockwiseFirst = true;
-
+//	public boolean turnsClockwiseFirst = true;
 	public boolean drawLeftBufferStop = false;
 	public boolean drawRightBufferStop = false;
 	public boolean drawUpBufferStop = false;
@@ -31,18 +28,8 @@ public class Rail extends Line implements SwitchListener {
 	public static Texture imageTextureUpBufferStop;
 	public static Texture imageTextureDownBufferStop;
 
-	public Rail() {
+	public Line() {
 		super();
-
-		canBePickedUp = false;
-		fitsInInventory = false;
-		persistsWhenCantBeSeen = true;
-		attackable = false;
-		isFloorObject = true;
-		moveable = false;
-		orderingOnGound = 20;
-
-		type = "Rail";
 	}
 
 	@Override
@@ -56,31 +43,16 @@ public class Rail extends Line implements SwitchListener {
 		super.setInstances(gameObject);
 	}
 
-	public Rail makeCopy(Square square, Actor owner, Direction direction1, Direction direction2) {
-		Rail rail = new Rail();
-		setInstances(rail);
-		super.setAttributesForCopy(rail, square, owner);
-		rail.direction1 = direction1;
-		rail.direction2 = direction2;
-
-		rail.updateImageTextures();
-
-		rail.updateNeightborRails();
-
-		return rail;
-	}
-
-	public void updateNeightborRails() {
+	public void updateNeighborLines() {
 
 		for (Direction direction : Direction.values()) {
 			Square neightborSquare = this.getSquareInDirection(direction);
 			if (neightborSquare == null)
 				continue;
-			Rail neighborRail = (Rail) neightborSquare.inventory.getGameObjectWithTemplateId(Templates.RAIL.templateId,
-					Templates.RAIL_INVISIBLE.templateId);
-			if (neighborRail == null)
+			Line neighborLine = (Line) neightborSquare.inventory.getGameObjectWithTemplateId(this.templateId);
+			if (neighborLine == null)
 				continue;
-			neighborRail.updateImageTextures();
+			neighborLine.updateImageTextures();
 		}
 	}
 
@@ -90,7 +62,7 @@ public class Rail extends Line implements SwitchListener {
 		if (!shouldDraw)
 			return false;
 
-		Texture railTexture = imageTexture;
+		Texture lineTexture = imageTexture;
 
 		if (drawLeftBufferStop) {
 			imageTexture = imageTextureLeftBufferStop;
@@ -114,7 +86,7 @@ public class Rail extends Line implements SwitchListener {
 			super.draw1();
 		}
 
-		imageTexture = railTexture;
+		imageTexture = lineTexture;
 		return true;
 	}
 
@@ -125,65 +97,6 @@ public class Rail extends Line implements SwitchListener {
 			return direction1;
 		}
 		return null;
-	}
-
-	@Override
-	public void zwitch(Switch zwitch) {
-		// rotate 90 degrees
-		// if(direction)
-		if (turnsClockwiseFirst) {
-			if (zwitch.pressed) {
-				direction1 = rotate90Degrees(direction1);
-				direction2 = rotate90Degrees(direction2);
-			} else {
-
-				direction1 = rotateMinus90Degrees(direction1);
-				direction2 = rotateMinus90Degrees(direction2);
-			}
-		} else {
-
-			if (zwitch.pressed) {
-				direction1 = rotateMinus90Degrees(direction1);
-				direction2 = rotateMinus90Degrees(direction2);
-			} else {
-
-				direction1 = rotate90Degrees(direction1);
-				direction2 = rotate90Degrees(direction2);
-			}
-		}
-
-		this.showPow();
-		updateImageTextures();
-		updateNeightborRails();
-
-	}
-
-	public Direction rotate90Degrees(Direction direction) {
-		if (direction == Direction.RIGHT) {
-			return Direction.DOWN;
-		} else if (direction == Direction.DOWN) {
-			return Direction.LEFT;
-		} else if (direction == Direction.LEFT) {
-			return Direction.UP;
-		} else if (direction == Direction.UP) {
-			return Direction.RIGHT;
-		}
-		return Direction.DOWN;
-
-	}
-
-	public Direction rotateMinus90Degrees(Direction direction) {
-		if (direction == Direction.RIGHT) {
-			return Direction.UP;
-		} else if (direction == Direction.DOWN) {
-			return Direction.RIGHT;
-		} else if (direction == Direction.LEFT) {
-			return Direction.DOWN;
-		} else if (direction == Direction.UP) {
-			return Direction.LEFT;
-		}
-		return Direction.DOWN;
-
 	}
 
 	public void updateImageTextures() {
@@ -255,7 +168,7 @@ public class Rail extends Line implements SwitchListener {
 		if (squareToCheckIfConnected == null)
 			return false;
 
-		Rail railToCheckIfConnected = (Rail) squareToCheckIfConnected.inventory.getGameObjectOfClass(Rail.class);
+		Line railToCheckIfConnected = (Line) squareToCheckIfConnected.inventory.getGameObjectOfClass(Line.class);
 
 		if (railToCheckIfConnected == null) {
 			return false;

@@ -6,6 +6,7 @@ import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.inanimateobjects.ElectricalWiring;
 import com.marklynch.objects.inanimateobjects.Fireplace;
+import com.marklynch.objects.inanimateobjects.Fuse;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.InputDrain;
 import com.marklynch.objects.inanimateobjects.MineCart;
@@ -142,17 +143,8 @@ public class TemplatesBuilding {
 		Templates.RAIL.totalHealth = Templates.RAIL.remainingHealth = 100;
 		Templates.RAIL.weight = 45f;
 		Templates.RAIL.value = 29;
+		Templates.RAIL.setAllResistances100();
 		Templates.RAIL.templateId = GameObject.generateNewTemplateId();
-		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
-		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES, new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
-		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES, new Stat(HIGH_LEVEL_STATS.PIERCE_RES, 100));
-		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
-		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES, new Stat(HIGH_LEVEL_STATS.WATER_RES, 100));
-		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES,
-				new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
-		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES, new Stat(HIGH_LEVEL_STATS.POISON_RES, 100));
-		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES, new Stat(HIGH_LEVEL_STATS.BLEED_RES, 100));
-		Templates.RAIL.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES, new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
 
 		Templates.RAIL_INVISIBLE = new Rail();
 		Templates.RAIL_INVISIBLE.name = "RAIL_INVISIBLE";
@@ -161,25 +153,27 @@ public class TemplatesBuilding {
 		Templates.RAIL_INVISIBLE.totalHealth = Templates.RAIL_INVISIBLE.remainingHealth = 100;
 		Templates.RAIL_INVISIBLE.weight = 45f;
 		Templates.RAIL_INVISIBLE.value = 29;
+		Templates.RAIL.setAllResistances100();
 		Templates.RAIL_INVISIBLE.templateId = GameObject.generateNewTemplateId();
-		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES,
-				new Stat(HIGH_LEVEL_STATS.SLASH_RES, 100));
-		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_RES,
-				new Stat(HIGH_LEVEL_STATS.BLUNT_RES, 100));
-		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_RES,
-				new Stat(HIGH_LEVEL_STATS.PIERCE_RES, 100));
-		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES,
-				new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
-		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.WATER_RES,
-				new Stat(HIGH_LEVEL_STATS.WATER_RES, 100));
-		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.ELECTRICAL_RES,
-				new Stat(HIGH_LEVEL_STATS.ELECTRICAL_RES, 100));
-		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.POISON_RES,
-				new Stat(HIGH_LEVEL_STATS.POISON_RES, 100));
-		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.BLEED_RES,
-				new Stat(HIGH_LEVEL_STATS.BLEED_RES, 100));
-		Templates.RAIL_INVISIBLE.highLevelStats.put(HIGH_LEVEL_STATS.HEALING_RES,
-				new Stat(HIGH_LEVEL_STATS.HEALING_RES, 100));
+
+		Templates.FUSE = new Fuse();
+		Templates.FUSE.name = "Fuse";
+		Fuse.imageTextureLeftRight = getGlobalImage("fuse.png", true);
+		Fuse.imageTextureUpDown = getGlobalImage("fuse_up_down.png", true);
+		Fuse.imageTextureLeftUp = getGlobalImage("fuse_left_up.png", true);
+		Fuse.imageTextureRightUp = getGlobalImage("FUSE_right_up.png", true);
+		Fuse.imageTextureLeftDown = getGlobalImage("fuse_left_down.png", true);
+		Fuse.imageTextureRightDown = getGlobalImage("fuse_right_down.png", true);
+		Fuse.imageTextureLeftBufferStop = getGlobalImage("rail_buffer_stop_left.png", false);
+		Fuse.imageTextureRightBufferStop = getGlobalImage("rail_buffer_stop_right.png", false);
+		Fuse.imageTextureUpBufferStop = getGlobalImage("rail_buffer_stop_up.png", false);
+		Fuse.imageTextureDownBufferStop = getGlobalImage("rail_buffer_stop_down.png", false);
+		Templates.FUSE.imageTexture = getGlobalImage("fuse.png", true);
+		Templates.FUSE.totalHealth = Templates.FUSE.remainingHealth = 100;
+		Templates.FUSE.weight = 5f;
+		Templates.FUSE.value = 14;
+		Templates.FUSE.setAllResistances100();
+		Templates.FUSE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.CIRCLE_FLOOR = new GameObject();
 		Templates.CIRCLE_FLOOR.name = "Floor";
