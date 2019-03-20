@@ -176,10 +176,10 @@ public class TemplatesBuilding {
 		Fuse.imageTextureUpLightableEndStatic = getGlobalImage("fuse_up_lightable_end.png", false);
 		Fuse.imageTextureDownLightableEndStatic = getGlobalImage("fuse_down_lightable_end.png", false);
 
-		Fuse.imageTextureLeftLitEndStatic = getGlobalImage("fuse_left_lit_end.png", false);
-		Fuse.imageTextureRightLitEndStatic = getGlobalImage("fuse_right_lit_end.png", false);
-		Fuse.imageTextureUpLitEndStatic = getGlobalImage("fuse_up_lit_end.png", false);
-		Fuse.imageTextureDownLitEndStatic = getGlobalImage("fuse_down_lit_end.png", false);
+//		Fuse.imageTextureLeftLitEndStatic = getGlobalImage("fuse_left_lit_end.png", false);
+//		Fuse.imageTextureRightLitEndStatic = getGlobalImage("fuse_right_lit_end.png", false);
+//		Fuse.imageTextureUpLitEndStatic = getGlobalImage("fuse_up_lit_end.png", false);
+//		Fuse.imageTextureDownLitEndStatic = getGlobalImage("fuse_down_lit_end.png", false);
 
 		Templates.FUSE.imageTexture = getGlobalImage("fuse.png", true);
 		Templates.FUSE.totalHealth = Templates.FUSE.remainingHealth = 100;
