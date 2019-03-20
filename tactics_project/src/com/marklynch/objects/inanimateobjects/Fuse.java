@@ -2,6 +2,7 @@ package com.marklynch.objects.inanimateobjects;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.animation.primary.AnimationFuse;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -189,7 +190,7 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 			ArrayList<Square> connectedSquares = new ArrayList<Square>(Square.class);
 			connectedSquares.add(this.getSquareInDirection(direction1, square));
 			connectedSquares.add(this.getSquareInDirection(direction2, square));
-			ArrayList<Fuse> neighborFuses = new ArrayList<Fuse>(Fuse.class);
+			final ArrayList<Fuse> neighborFuses = new ArrayList<Fuse>(Fuse.class);
 
 			for (Square neighborSquare : connectedSquares) {
 				if (neighborSquare == null)
@@ -202,15 +203,26 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 				}
 			}
 
-			for (GameObject gameObject : this.gameObjectsToExplode) {
-				gameObject.changeHealthSafetyOff(-gameObject.remainingHealth, null, null);
-			}
+			this.setPrimaryAnimation(new AnimationFuse(this, direction1, direction2, null
 
-			this.squareGameObjectIsOn.inventory.remove(this);
-			for (Fuse neighborFuse : neighborFuses) {
-				neighborFuse.updateImageTextures();
-				neighborFuse.updateEndTextures();
-			}
+			) {
+
+				@Override
+				protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
+					super.animationSubclassRunCompletionAlgorightm(wait);
+
+					for (GameObject gameObject : Fuse.this.gameObjectsToExplode) {
+						gameObject.changeHealthSafetyOff(-gameObject.remainingHealth, null, null);
+					}
+					Fuse.this.changeHealthSafetyOff(Fuse.this.remainingHealth, null, null);
+					for (Fuse neighborFuse : neighborFuses) {
+						neighborFuse.updateImageTextures();
+						neighborFuse.updateEndTextures();
+					}
+
+				}
+
+			});
 		}
 
 	}
