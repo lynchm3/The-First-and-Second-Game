@@ -203,7 +203,7 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 				}
 			}
 
-			this.setPrimaryAnimation(new AnimationFuse(this, direction1, direction2, null
+			this.setPrimaryAnimation(new AnimationFuse(this, null
 
 			) {
 
@@ -214,7 +214,8 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 					for (GameObject gameObject : Fuse.this.gameObjectsToExplode) {
 						gameObject.changeHealthSafetyOff(-gameObject.remainingHealth, null, null);
 					}
-					Fuse.this.changeHealthSafetyOff(Fuse.this.remainingHealth, null, null);
+//					Fuse.this.changeHealthSafetyOff(Fuse.this.remainingHealth, null, null);
+					Fuse.this.squareGameObjectIsOn.inventory.remove(Fuse.this);
 					for (Fuse neighborFuse : neighborFuses) {
 						neighborFuse.updateImageTextures();
 						neighborFuse.updateEndTextures();
