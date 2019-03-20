@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurn;
+import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
@@ -176,6 +177,8 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " was ignited" }));
 
 			this.setLit(true);
+		} else if (effectToAdd instanceof EffectWet && this.lit) {
+			this.setLit(false);
 		}
 	}
 
@@ -195,6 +198,7 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 				if (fuse != null) {
 					neighborFuses.add(fuse);
 					fuse.setLit(true);
+					fuse.setLightable(true);
 				}
 			}
 

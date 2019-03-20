@@ -1829,9 +1829,9 @@ public class GameObject
 	}
 
 	public void attackedBy(Object attacker, Action action) {
-		if (attackable) {
-			checkIfDestroyed(attacker, action);
-		}
+//		if (attackable) {
+		checkIfDestroyed(attacker, action);
+//		}
 	}
 
 	public Color calculateColor(Color baseColor) {
