@@ -48,6 +48,8 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 
 	private int turnLit = -1;
 
+	public Direction connectedToExplosiveDirection = null;
+
 	public Fuse() {
 		super();
 
@@ -119,17 +121,13 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 	public void updateNeighborLines(Square square) {
 		super.updateNeighborLines(square);
 
-		System.out.println("updateNeighborLines()");
 		for (Direction direction : Direction.values()) {
 			Square neighborSquare = this.getSquareInDirection(direction, square);
-			System.out.println("neighborSquare = " + neighborSquare);
 			if (neighborSquare == null)
 				continue;
 			Fuse neighborFuse = (Fuse) neighborSquare.inventory.getGameObjectWithTemplateId(this.templateId);
-			System.out.println("neighborFuse = " + neighborFuse);
 			if (neighborFuse == null)
 				continue;
-			System.out.println("neighborFuse = " + neighborFuse);
 			neighborFuse.updateEndTextures();
 		}
 	}
@@ -150,6 +148,19 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 			super.imageTextureRightEnd = imageTextureRightNonLightableEndStatic;
 			super.imageTextureUpEnd = imageTextureUpNonLightableEndStatic;
 			super.imageTextureDownEnd = imageTextureDownNonLightableEndStatic;
+		}
+
+		if (connectedToExplosiveDirection != null) {
+			if (connectedToExplosiveDirection == Direction.RIGHT) {
+				super.imageTextureRightEnd = imageTextureRightNonLightableEndStatic;
+			} else if (connectedToExplosiveDirection == Direction.LEFT) {
+				super.imageTextureLeftEnd = imageTextureLeftNonLightableEndStatic;
+			} else if (connectedToExplosiveDirection == Direction.UP) {
+				super.imageTextureUpEnd = imageTextureUpNonLightableEndStatic;
+			} else if (connectedToExplosiveDirection == Direction.DOWN) {
+				super.imageTextureDownEnd = imageTextureDownNonLightableEndStatic;
+
+			}
 		}
 
 	}
@@ -196,8 +207,6 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 				neighborFuse.updateImageTextures();
 				neighborFuse.updateEndTextures();
 			}
-
-//			this.updateNeighborLines(square);
 		}
 
 	}

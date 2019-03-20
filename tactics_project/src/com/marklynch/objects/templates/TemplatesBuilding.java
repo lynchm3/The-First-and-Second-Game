@@ -2,6 +2,7 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.inanimateobjects.ElectricalWiring;
@@ -212,6 +213,22 @@ public class TemplatesBuilding {
 		Templates.DRAIN_FLOOR.moveable = false;
 		Templates.DRAIN_FLOOR.orderingOnGound = 19;
 		Templates.DRAIN_FLOOR.templateId = GameObject.generateNewTemplateId();
+
+		Templates.EXPLOSIVE_CRATE = new GameObject();
+		Templates.EXPLOSIVE_CRATE.name = "Explosive Crate";
+		Templates.EXPLOSIVE_CRATE.setImageAndExtrapolateSize("explosive_crate.png");
+		Templates.EXPLOSIVE_CRATE.drawOffsetRatioX = -0.125f;
+		Templates.EXPLOSIVE_CRATE.drawOffsetX = Templates.EXPLOSIVE_CRATE.drawOffsetRatioX * Game.SQUARE_WIDTH;
+		Templates.EXPLOSIVE_CRATE.drawOffsetRatioY = -0.125f;
+		Templates.EXPLOSIVE_CRATE.drawOffsetY = Templates.EXPLOSIVE_CRATE.drawOffsetRatioY * Game.SQUARE_HEIGHT;
+		Templates.EXPLOSIVE_CRATE.canBePickedUp = false;
+		Templates.EXPLOSIVE_CRATE.fitsInInventory = false;
+		Templates.EXPLOSIVE_CRATE.persistsWhenCantBeSeen = true;
+		Templates.EXPLOSIVE_CRATE.attackable = false;
+		Templates.EXPLOSIVE_CRATE.isFloorObject = false;
+		Templates.EXPLOSIVE_CRATE.drawShadow = true;
+		Templates.EXPLOSIVE_CRATE.moveable = false;
+		Templates.EXPLOSIVE_CRATE.templateId = GameObject.generateNewTemplateId();
 
 		Templates.MINE_CART = new MineCart();
 		Templates.MINE_CART.name = "Mine Cart";

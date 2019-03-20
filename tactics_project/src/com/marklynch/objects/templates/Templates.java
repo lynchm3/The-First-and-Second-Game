@@ -309,6 +309,7 @@ public class Templates {
 	public static Rail RAIL;
 	public static Rail RAIL_INVISIBLE;
 	public static Fuse FUSE;
+	public static GameObject EXPLOSIVE_CRATE;
 
 	public static MineCart MINE_CART;
 

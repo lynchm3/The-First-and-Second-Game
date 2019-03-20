@@ -24,7 +24,7 @@ public class PuzzleRoomFuse extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 
-		GameObject crate = Templates.CRATE.makeCopy(Level.squares[posX + 4][posY + 3], false, null);
+		GameObject crate = Templates.EXPLOSIVE_CRATE.makeCopy(Level.squares[posX + 4][posY + 3], null);
 
 		Templates.FUSE.makeCopy(Level.squares[posX + 2][posY + 2], null, Direction.LEFT, Direction.RIGHT, true);
 		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 2], null, Direction.LEFT, Direction.RIGHT, false);
@@ -36,6 +36,7 @@ public class PuzzleRoomFuse extends StructureRoom {
 		Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 4], null, Direction.UP, Direction.RIGHT, false);
 		Fuse endFuse = Templates.FUSE.makeCopy(Level.squares[posX + 3][posY + 3], null, Direction.DOWN, Direction.RIGHT,
 				false);
+		endFuse.connectedToExplosiveDirection = Direction.RIGHT;
 		endFuse.gameObjectsToExplode.add(crate);
 
 	}
