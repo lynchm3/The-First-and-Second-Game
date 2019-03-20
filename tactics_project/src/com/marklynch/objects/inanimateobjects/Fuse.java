@@ -175,13 +175,16 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 			ArrayList<Square> connectedSquares = new ArrayList<Square>(Square.class);
 			connectedSquares.add(this.getSquareInDirection(direction1, square));
 			connectedSquares.add(this.getSquareInDirection(direction2, square));
+			ArrayList<Fuse> neighborFuses = new ArrayList<Fuse>(Fuse.class);
 
 			for (Square neighborSquare : connectedSquares) {
 				if (neighborSquare == null)
 					continue;
 				Fuse fuse = (Fuse) neighborSquare.inventory.getGameObjectWithTemplateId(this.templateId);
-				if (fuse != null)
+				if (fuse != null) {
+					neighborFuses.add(fuse);
 					fuse.setLit(true);
+				}
 			}
 
 			for (GameObject gameObject : this.gameObjectsToExplode) {
@@ -189,7 +192,12 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 			}
 
 			this.squareGameObjectIsOn.inventory.remove(this);
-			this.updateNeighborLines(square);
+			for (Fuse neighborFuse : neighborFuses) {
+				neighborFuse.updateImageTextures();
+				neighborFuse.updateEndTextures();
+			}
+
+//			this.updateNeighborLines(square);
 		}
 
 	}
