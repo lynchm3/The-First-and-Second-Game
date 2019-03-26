@@ -39,7 +39,8 @@ public class AnimationFuse extends Animation {
 		}
 
 		blockAI = true;
-		boundsY2 = (int) performer.height;
+		boundsX2 = 128;
+		boundsY2 = 128;
 
 		setUpKf0();
 		setUpKf1();
@@ -133,21 +134,28 @@ public class AnimationFuse extends Animation {
 		float offSetX = 34;
 		float offSetY = 99;
 
+		System.out.println("==================");
+		System.out.println("boundsX1 = " + boundsX1);
+		System.out.println("boundsX2 = " + boundsX2);
+		System.out.println("boundsY1 = " + boundsX2);
+		System.out.println("boundsY2 = " + boundsX2);
+
 		if (boundsX1 != 0)
 			offSetX = boundsX1;
 		else if (boundsX2 != 128)
-			offSetX = 128 - boundsX2;
+			offSetX = boundsX2;
 
 		if (boundsY1 != 0)
 			offSetY = boundsY1;
 		else if (boundsY2 != 128)
-			offSetY = 128 - boundsY2;
+			offSetY = boundsY2;
 
 		TextureUtils.drawTexture(EffectBurn.flameTexture, //
-				performer.squareGameObjectIsOn.xInGridPixels + offSetX - 8, //
-				performer.squareGameObjectIsOn.yInGridPixels + offSetY - 16, //
-				performer.squareGameObjectIsOn.xInGridPixels + offSetX + 8, //
-				performer.squareGameObjectIsOn.yInGridPixels + offSetY);
+				performer.squareGameObjectIsOn.xInGridPixels - 8 + offSetX, //
+				performer.squareGameObjectIsOn.yInGridPixels - 16, // + offSetY, //
+				performer.squareGameObjectIsOn.xInGridPixels + 8 + offSetX, //
+				performer.squareGameObjectIsOn.yInGridPixels// + offSetY //
+		);
 
 	}
 
