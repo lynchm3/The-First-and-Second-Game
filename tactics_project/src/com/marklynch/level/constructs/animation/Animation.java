@@ -73,7 +73,7 @@ public abstract class Animation {
 
 	public OnCompletionListener onCompletionListener;
 
-	public int phase = 0;
+	public int keyFrameIndex = 0;
 	public ArrayList<KeyFrame> keyFrames = new ArrayList<KeyFrame>();
 	public Square[] targetSquares;
 	public Square targetSquare;
@@ -252,23 +252,23 @@ public abstract class Animation {
 		}
 		alpha = moveTowardsTargetAngleInRadians(alpha, alphaChange, targetAlpha);
 
-		keyFrames.get(phase).animate(delta);
-		if (keyFrames.get(phase).done) {
-			phase++;
+		keyFrames.get(keyFrameIndex).animate(delta);
+		if (keyFrames.get(keyFrameIndex).done) {
+			keyFrameIndex++;
 
-			if (phase < keyFrames.size()) {
+			if (keyFrameIndex < keyFrames.size()) {
 				initiateNextKeyFrame();
 
 			}
 		}
 
-		if (phase == keyFrames.size()) {
+		if (keyFrameIndex == keyFrames.size()) {
 			runCompletionAlorightm(true);
 		}
 	}
 
 	public void initiateNextKeyFrame() {
-		keyFrames.get(phase).createSpeeds();
+		keyFrames.get(keyFrameIndex).createSpeeds();
 	}
 
 	public boolean getCompleted() {

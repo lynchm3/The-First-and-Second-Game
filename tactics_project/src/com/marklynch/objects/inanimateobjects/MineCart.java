@@ -101,14 +101,14 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 //							}
 
 							public void pushShitInTheWay() {
-								for (GameObject gameObject : (ArrayList<GameObject>) this.targetSquares[phase].inventory.gameObjects
+								for (GameObject gameObject : (ArrayList<GameObject>) this.targetSquares[keyFrameIndex].inventory.gameObjects
 										.clone()) {
 
 									if (gameObject.moveable == false)
 										continue;
 
 									Action telekineticPushAction = new ActionUsePower(performer, gameObject,
-											this.targetSquares[phase], new PowerTelekineticPush10(performer), true);
+											this.targetSquares[keyFrameIndex], new PowerTelekineticPush10(performer), true);
 
 									telekineticPushAction.perform();
 								}

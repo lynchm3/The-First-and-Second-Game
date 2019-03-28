@@ -138,17 +138,22 @@ public class AnimationFuse extends Animation {
 	@Override
 	public void draw1() {
 
+		if (keyFrameIndex >= keyFrames.size())
+			return;
+
+		KeyFrame currentKeyFrame = keyFrames.get(keyFrameIndex);
+
 		float offSetX = 34;
 		float offSetY = 99;
 
-		if (boundsX1 != 0)
+		if (currentKeyFrame.boundsX1 != 0)
 			offSetX = boundsX1;
-		else if (boundsX2 != 128)
+		else if (currentKeyFrame.boundsX2 != 128)
 			offSetX = boundsX2;
 
-		if (boundsY1 != 0)
+		if (currentKeyFrame.boundsY1 != 0)
 			offSetY = boundsY1;
-		else if (boundsY2 != 128)
+		else if (currentKeyFrame.boundsY2 != 128)
 			offSetY = boundsY2;
 
 		System.out.println("==================");

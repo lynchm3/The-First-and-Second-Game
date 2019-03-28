@@ -50,7 +50,7 @@ public class AnimationIgnite extends Animation {
 		if (getCompleted())
 			return;
 		keyFrameUpdate(delta);
-		if (phase == keyFrames.size()) {
+		if (keyFrameIndex == keyFrames.size()) {
 			performer.equipped = previouslyEquipped;
 		}
 	}

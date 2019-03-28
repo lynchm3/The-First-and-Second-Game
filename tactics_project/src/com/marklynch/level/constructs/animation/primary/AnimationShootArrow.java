@@ -102,7 +102,7 @@ public abstract class AnimationShootArrow extends Animation {
 	@Override
 	public void update(double delta) {
 
-		if (!shotArrow && keyFrames.get(phase) == kf2) {
+		if (!shotArrow && keyFrames.get(keyFrameIndex) == kf2) {
 			shootArrow();
 			shotArrow = true;
 		}

@@ -64,7 +64,7 @@ public class AnimationStraightLine extends Animation {
 
 	@Override
 	public void initiateNextKeyFrame() {
-		keyFrames.get(phase).createSpeeds();
+		keyFrames.get(keyFrameIndex).createSpeeds();
 	}
 
 	@Override
