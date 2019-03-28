@@ -50,6 +50,9 @@ public class AnimationFuse extends Animation {
 
 		KeyFrame kf0 = new KeyFrame(performer, this);
 
+		kf0.boundsX2 = 128;
+		kf0.boundsY2 = 128;
+
 		if (direction1 == Direction.LEFT) {
 			kf0.boundsX1 = 32;
 			kf0.boundsX1Speed = 0.1f;
@@ -97,6 +100,10 @@ public class AnimationFuse extends Animation {
 		KeyFrame kf1 = new KeyFrame(performer, this);
 		// x 32,35
 		// y 96,99
+
+		kf1.boundsX2 = 128;
+		kf1.boundsY2 = 128;
+
 		if (direction2 == Direction.LEFT) {
 			kf1.boundsX2 = 0;
 			kf1.boundsX2Speed = 0.1f;
@@ -134,12 +141,6 @@ public class AnimationFuse extends Animation {
 		float offSetX = 34;
 		float offSetY = 99;
 
-		System.out.println("==================");
-		System.out.println("boundsX1 = " + boundsX1);
-		System.out.println("boundsX2 = " + boundsX2);
-		System.out.println("boundsY1 = " + boundsX2);
-		System.out.println("boundsY2 = " + boundsX2);
-
 		if (boundsX1 != 0)
 			offSetX = boundsX1;
 		else if (boundsX2 != 128)
@@ -150,11 +151,19 @@ public class AnimationFuse extends Animation {
 		else if (boundsY2 != 128)
 			offSetY = boundsY2;
 
+		System.out.println("==================");
+		System.out.println("boundsX1 = " + boundsX1);
+		System.out.println("boundsX2 = " + boundsX2);
+		System.out.println("offSetX = " + offSetX);
+		System.out.println("boundsY1 = " + boundsY1);
+		System.out.println("boundsY2 = " + boundsY2);
+		System.out.println("offSetY = " + offSetY);
+
 		TextureUtils.drawTexture(EffectBurn.flameTexture, //
 				performer.squareGameObjectIsOn.xInGridPixels - 8 + offSetX, //
-				performer.squareGameObjectIsOn.yInGridPixels - 16, // + offSetY, //
+				performer.squareGameObjectIsOn.yInGridPixels - 16 + offSetY, //
 				performer.squareGameObjectIsOn.xInGridPixels + 8 + offSetX, //
-				performer.squareGameObjectIsOn.yInGridPixels// + offSetY //
+				performer.squareGameObjectIsOn.yInGridPixels + offSetY //
 		);
 
 	}
