@@ -14,6 +14,7 @@ import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 
@@ -183,6 +184,39 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 		}
 	}
 
+	public boolean draw1() {
+
+		boolean shouldDraw = super.draw1();
+		if (shouldDraw && lit && primaryAnimation == null) {
+
+			float offSetX = 34;
+			float offSetY = 99;
+
+			if (drawLeftBufferStop && connectedToExplosiveDirection != Direction.LEFT) {
+				offSetX = 0;
+			} else if (drawRightBufferStop && connectedToExplosiveDirection != Direction.RIGHT) {
+				offSetX = 128;
+			} else if (drawUpBufferStop && connectedToExplosiveDirection != Direction.UP) {
+				offSetY = 0;
+			} else if (drawDownBufferStop && connectedToExplosiveDirection != Direction.DOWN) {
+				offSetY = 128;
+			} else {
+				return shouldDraw;
+			}
+
+			TextureUtils.drawTexture(EffectBurn.flameTexture, //
+					squareGameObjectIsOn.xInGridPixels - 8 + offSetX, //
+					squareGameObjectIsOn.yInGridPixels - 16 + offSetY, //
+					squareGameObjectIsOn.xInGridPixels + 8 + offSetX, //
+					squareGameObjectIsOn.yInGridPixels + offSetY //
+			);
+
+		}
+
+		return shouldDraw;
+
+	}
+
 	@Override
 	public void update() {
 		if (lit && this.turnLit != Level.turn && this.squareGameObjectIsOn != null) {
@@ -192,17 +226,6 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 			connectedSquares.add(this.getSquareInDirection(direction2, square));
 			final ArrayList<Fuse> neighborFuses = new ArrayList<Fuse>(Fuse.class);
 
-			for (Square neighborSquare : connectedSquares) {
-				if (neighborSquare == null)
-					continue;
-				Fuse fuse = (Fuse) neighborSquare.inventory.getGameObjectWithTemplateId(this.templateId);
-				if (fuse != null) {
-					neighborFuses.add(fuse);
-					fuse.setLit(true);
-					fuse.setLightable(true);
-				}
-			}
-
 			this.setPrimaryAnimation(new AnimationFuse(this, null
 
 			) {
@@ -210,6 +233,17 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 				@Override
 				protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
 					super.animationSubclassRunCompletionAlgorightm(wait);
+
+					for (Square neighborSquare : connectedSquares) {
+						if (neighborSquare == null)
+							continue;
+						Fuse fuse = (Fuse) neighborSquare.inventory.getGameObjectWithTemplateId(Fuse.this.templateId);
+						if (fuse != null) {
+							neighborFuses.add(fuse);
+							fuse.setLit(true);
+							fuse.setLightable(true);
+						}
+					}
 
 					for (GameObject gameObject : Fuse.this.gameObjectsToExplode) {
 						gameObject.changeHealthSafetyOff(-gameObject.remainingHealth, null, null);
