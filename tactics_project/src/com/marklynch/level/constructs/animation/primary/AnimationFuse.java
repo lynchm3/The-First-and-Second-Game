@@ -22,13 +22,13 @@ public class AnimationFuse extends Animation {
 		if (!runAnimation)
 			return;
 
-		if (performer.drawLeftBufferStop) {
+		if (performer.drawLeftBufferStop && performer.connectedToExplosiveDirection != Direction.LEFT) {
 			direction1 = Direction.LEFT;
-		} else if (performer.drawRightBufferStop) {
+		} else if (performer.drawRightBufferStop && performer.connectedToExplosiveDirection != Direction.RIGHT) {
 			direction1 = Direction.RIGHT;
-		} else if (performer.drawUpBufferStop) {
+		} else if (performer.drawUpBufferStop && performer.connectedToExplosiveDirection != Direction.UP) {
 			direction1 = Direction.UP;
-		} else if (performer.drawDownBufferStop) {
+		} else if (performer.drawDownBufferStop && performer.connectedToExplosiveDirection != Direction.DOWN) {
 			direction1 = Direction.DOWN;
 		}
 
@@ -155,14 +155,6 @@ public class AnimationFuse extends Animation {
 			offSetY = boundsY1;
 		else if (currentKeyFrame.boundsY2 != 128)
 			offSetY = boundsY2;
-
-		System.out.println("==================");
-		System.out.println("boundsX1 = " + boundsX1);
-		System.out.println("boundsX2 = " + boundsX2);
-		System.out.println("offSetX = " + offSetX);
-		System.out.println("boundsY1 = " + boundsY1);
-		System.out.println("boundsY2 = " + boundsY2);
-		System.out.println("offSetY = " + offSetY);
 
 		TextureUtils.drawTexture(EffectBurn.flameTexture, //
 				performer.squareGameObjectIsOn.xInGridPixels - 8 + offSetX, //

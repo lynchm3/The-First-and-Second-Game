@@ -157,7 +157,6 @@ public abstract class Line extends GameObject implements SwitchListener {
 				drawDownBufferStop = true;
 			}
 		}
-
 	}
 
 	public boolean checkIfConnected(Direction inDirection, Square square) {
