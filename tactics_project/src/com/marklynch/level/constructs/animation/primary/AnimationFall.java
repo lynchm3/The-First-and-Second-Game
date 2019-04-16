@@ -46,7 +46,7 @@ public class AnimationFall extends Animation {
 		kf0.offsetX = 100;
 		kf0.offsetY = 100;
 
-		kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER;
+		kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME;
 		kf0.normaliseSpeeds = true;
 
 		keyFrames.add(kf0);

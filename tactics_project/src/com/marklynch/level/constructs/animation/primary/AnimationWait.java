@@ -1,7 +1,6 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.Game;
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -27,11 +26,7 @@ public class AnimationWait extends Animation {
 		kf0.offsetY = 0;
 		kf0.headToToeOffset = 0f;
 
-		if (performer == Level.player) {
-			kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER;
-		} else {
-			kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_NON_PLAYER;
-		}
+		kf0.keyFrameTimeMillis = Game.MINIMUM_TURN_TIME;
 
 		if (performer.hiding) {
 			kf0.leftHipAngle = -1.1f;

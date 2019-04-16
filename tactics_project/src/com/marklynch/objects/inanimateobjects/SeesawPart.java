@@ -94,7 +94,7 @@ public class SeesawPart extends PressurePlate {
 						}
 						// squareGameObjectIsOn.inventory.remove(gameObject);
 						gameObject.setPrimaryAnimation(
-								new AnimationFallFromTheSky(gameObject, Game.MINIMUM_TURN_TIME_PLAYER, null));
+								new AnimationFallFromTheSky(gameObject, Game.MINIMUM_TURN_TIME, null));
 					}
 				};
 

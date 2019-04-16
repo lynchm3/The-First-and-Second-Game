@@ -100,7 +100,7 @@ public class VoidHole extends GameObject implements OnCompletionListener {
 					}
 
 					gameObject.setPrimaryAnimation(
-							new AnimationFallFromTheSky(gameObject, Game.MINIMUM_TURN_TIME_PLAYER, null));
+							new AnimationFallFromTheSky(gameObject, Game.MINIMUM_TURN_TIME, null));
 
 				}
 			}));

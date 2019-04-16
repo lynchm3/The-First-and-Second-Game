@@ -1,7 +1,6 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.Game;
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
@@ -122,11 +121,8 @@ public class AnimationWalk extends Animation {
 		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer, endSquare);
 		if (!runAnimation)
 			return;
-		if (performer == Level.player) {
-			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER / 4f;
-		} else {
-			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_NON_PLAYER / 4f;
-		}
+
+		keyFrameTimeMillis = Game.MINIMUM_TURN_TIME / 4f;
 
 		quarterDurationToReach = durationToReachMillis / 4;
 		halfDurationToReach = quarterDurationToReach + quarterDurationToReach;

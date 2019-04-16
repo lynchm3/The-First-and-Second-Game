@@ -43,8 +43,7 @@ public class Game {
 	// 104,151 boulder kill do it.
 	// Or even stand on that spot urself
 
-	public static final float MINIMUM_TURN_TIME_PLAYER = 500f; // ms
-	public static final float MINIMUM_TURN_TIME_NON_PLAYER = 500f; // ms
+	public static final float MINIMUM_TURN_TIME = 500f; // ms
 
 	public static int includableInPath;
 	public static int findPath;

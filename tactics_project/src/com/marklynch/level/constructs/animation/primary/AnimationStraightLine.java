@@ -1,7 +1,6 @@
 package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.Game;
-import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
@@ -33,11 +32,7 @@ public class AnimationStraightLine extends Animation {
 		this.blockAI = blockAI;
 		if (!blockAI) {
 
-			if (performer == Level.player) {
-				keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_PLAYER / targetSquares.length;
-			} else {
-				keyFrameTimeMillis = Game.MINIMUM_TURN_TIME_NON_PLAYER / targetSquares.length;
-			}
+			keyFrameTimeMillis = Game.MINIMUM_TURN_TIME / targetSquares.length;
 		}
 
 		// if (performer instanceof Arrow && distanceToCoverX < 0) {

@@ -1350,7 +1350,6 @@ public class Level {
 
 	public static int lastActorUpdatedIndex = -1;
 	public static boolean aiTurn = false;
-	public static int timeToMoveAll = 200;// ms
 
 	public static ArrayList<Animation> animations = new ArrayList<Animation>();
 
@@ -1503,7 +1502,7 @@ public class Level {
 			return;
 
 		if (aiTurn) {
-			float amountOfAiToUpdate = actors.size() * ((float) delta / (float) timeToMoveAll);
+			float amountOfAiToUpdate = actors.size() * ((float) delta / (float) Game.MINIMUM_TURN_TIME);
 			int start = lastActorUpdatedIndex + 1;
 			int end = (int) (start + amountOfAiToUpdate);
 			if (end >= actors.size())

@@ -96,7 +96,7 @@ public class PowerDash extends Power {
 			// delay = 32f;
 
 			pushedObject.gameObject.setPrimaryAnimation(new AnimationStraightLine(pushedObject.gameObject,
-					Game.MINIMUM_TURN_TIME_PLAYER, true, delay, null, new Square[] { pushedObject.destinationSquare }));
+					Game.MINIMUM_TURN_TIME, true, delay, null, new Square[] { pushedObject.destinationSquare }));
 
 			previousDelay = delay;
 			previousPushedObject = pushedObject;
