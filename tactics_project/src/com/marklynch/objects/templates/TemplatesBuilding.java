@@ -32,6 +32,19 @@ public class TemplatesBuilding {
 		Templates.WALL_CAVE.templateId = GameObject.generateNewTemplateId();
 		Templates.WALL_CAVE.setAllResistances100();
 
+		Templates.FENCE = new Wall();
+		Templates.FENCE.name = "Fence";
+		Templates.FENCE.imageTexture = getGlobalImage("fence.png", true);
+		Templates.FENCE.totalHealth = Templates.FENCE.remainingHealth = 100;
+		Templates.FENCE.soundWhenHit = 9f;
+		Templates.FENCE.stackable = false;
+		Templates.FENCE.weight = 50f;
+		Templates.FENCE.value = 17;
+		Templates.FENCE.maxRandomness = 0f;
+		Templates.FENCE.templateId = GameObject.generateNewTemplateId();
+		Templates.FENCE.flipYAxisInMirror = false;
+		Templates.FENCE.blocksLineOfSight = false;
+
 		Templates.WALL_GLASS = new Wall();
 		Templates.WALL_GLASS.name = "Glass Wall";
 		Templates.WALL_GLASS.imageTexture = getGlobalImage("wall_window.png", true);
@@ -56,7 +69,7 @@ public class TemplatesBuilding {
 		Templates.WALL_BUILDING.soundDampening = 10f;
 		Templates.WALL_BUILDING.weight = 1000f;
 		Templates.WALL_BUILDING.value = 29;
-		Templates.WALL_CAVE.maxRandomness = 4f;
+		Templates.WALL_BUILDING.maxRandomness = 4f;
 		Templates.WALL_BUILDING.templateId = GameObject.generateNewTemplateId();
 		Templates.WALL_BUILDING.setAllResistances100();
 
@@ -109,24 +122,6 @@ public class TemplatesBuilding {
 		Templates.RUBBLE.moveable = false;
 		Templates.RUBBLE.orderingOnGound = 20;
 		Templates.RUBBLE.templateId = GameObject.generateNewTemplateId();
-
-		Templates.FENCE = new Wall();
-		Templates.FENCE.name = "Fence";
-		Templates.FENCE.imageTexture = getGlobalImage("wall.png", true);
-		Templates.FENCE.totalHealth = Templates.FENCE.remainingHealth = 100;
-		Templates.FENCE.widthRatio = 1f;
-		Templates.FENCE.heightRatio = 1f;
-		Templates.FENCE.soundWhenHit = 1f;
-		Templates.FENCE.soundWhenHitting = 1f;
-		Templates.FENCE.soundDampening = 1f;
-		Templates.FENCE.stackable = false;
-		Templates.FENCE.weight = 50f;
-		Templates.FENCE.value = 17;
-		Templates.FENCE.anchorX = 0;
-		Templates.FENCE.anchorY = 0;
-		Templates.FENCE.templateId = GameObject.generateNewTemplateId();
-		Templates.FENCE.flipYAxisInMirror = false;
-		Templates.FENCE.blocksLineOfSight = false;
 
 		Templates.RAIL = new Rail();
 		Templates.RAIL.name = "Rail";
