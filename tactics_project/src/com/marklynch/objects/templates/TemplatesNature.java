@@ -229,6 +229,7 @@ public class TemplatesNature {
 		Templates.MOUND.flipYAxisInMirror = false;
 		Templates.MOUND.moveable = false;
 		Templates.MOUND.fitsInInventory = false;
+		Templates.MOUND.discoveredObject = false;
 
 		Templates.INVISIBLE_DIGGABLE = new GameObject();
 		Templates.INVISIBLE_DIGGABLE.name = "Diggable Spot";
