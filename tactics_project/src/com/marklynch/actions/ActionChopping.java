@@ -71,13 +71,14 @@ public class ActionChopping extends Action {
 			treeOwner = targetGameObject.owner;
 
 		if (Game.level.shouldLog(targetGameObject, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " chopped at ", targetGameObject, " with ", axe }));
+			Game.level.logOnScreen(
+					new ActivityLog(new Object[] { performer, " chopped at ", targetGameObject, " with ", axe }));
 
 		targetGameObject.setPrimaryAnimation(new AnimationShake(targetGameObject, null, false, 200));
 
 		if (targetGameObject.remainingHealth <= 0) {
 
-			GameObject wood = Templates.WOOD.makeCopy(targetGameObject.squareGameObjectIsOn, treeOwner);
+			GameObject wood = Templates.WOOD.makeCopy(this.targetSquare, treeOwner);
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 				Level.addSecondaryAnimation(new AnimationTake(wood, performer, 0, 0, 1f, null));
@@ -119,7 +120,8 @@ public class ActionChopping extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_VANDALISM, targetGameObject);
+			Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_VANDALISM,
+					targetGameObject);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

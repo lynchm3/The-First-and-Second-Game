@@ -2669,7 +2669,7 @@ public class GameObject
 					Game.windowHeight - UserInputLevel.mouseLastY + 16,
 					UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
-		} else {
+		} else if (this.squareGameObjectIsOn != null) {
 
 			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
