@@ -230,6 +230,7 @@ public class UserInputLevel {
 		} else if (Level.characterScreen.showing) {
 		} else if (Level.skillTree.showing) {
 		} else if (Level.availablePowerScreen.showing) {
+		} else if (Level.mainMenu.showing) {
 		} else if (Level.gameOver.showing) {
 		} else if (Game.level.openInventories.size() > 0) {
 			InventorySquare inventorySquareMouseIsOver = Game.level.openInventories.get(0)
@@ -490,6 +491,11 @@ public class UserInputLevel {
 		if (Level.dialog != null)
 			return;
 
+		if (Level.mainMenu.showing) {
+			scrollableMouseIsOver = Level.mainMenu;
+			return;
+		}
+
 		if (Level.gameOver.showing) {
 			scrollableMouseIsOver = Level.gameOver;
 			return;
@@ -576,6 +582,11 @@ public class UserInputLevel {
 
 		if (Level.dialog != null)
 			return;
+
+		if (Level.mainMenu.showing) {
+			draggableMouseIsOver = Level.mainMenu;
+			return;
+		}
 
 		if (Level.gameOver.showing) {
 			draggableMouseIsOver = Level.gameOver;
@@ -764,6 +775,8 @@ public class UserInputLevel {
 			return;
 		} else if (Level.availablePowerScreen.showing) {
 			return;
+		} else if (Level.mainMenu.showing) {
+			return;
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -821,6 +834,8 @@ public class UserInputLevel {
 			return;
 		} else if (Level.availablePowerScreen.showing) {
 			return;
+		} else if (Level.mainMenu.showing) {
+			return;
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -871,6 +886,8 @@ public class UserInputLevel {
 			return;
 		} else if (Level.characterScreen.showing) {
 			return;
+		} else if (Level.mainMenu.showing) {
+			return;
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -919,6 +936,8 @@ public class UserInputLevel {
 		} else if (Level.skillTree.showing) {
 			return;
 		} else if (Level.availablePowerScreen.showing) {
+			return;
+		} else if (Level.mainMenu.showing) {
 			return;
 		} else if (Level.gameOver.showing) {
 			return;
@@ -970,6 +989,8 @@ public class UserInputLevel {
 		} else if (Level.skillTree.showing) {
 			return;
 		} else if (Level.availablePowerScreen.showing) {
+			return;
+		} else if (Level.mainMenu.showing) {
 			return;
 		} else if (Level.gameOver.showing) {
 			return;
@@ -1073,7 +1094,10 @@ public class UserInputLevel {
 
 		Game.level.levelMode = Level.LevelMode.LEVEL_MODE_NORMAL;
 
-		if (Game.level.popupMenuObjects.size() != 0 || Game.level.popupMenuActions.size() != 0) {
+		if (Level.mainMenu.showing) {
+			Game.level.openCloseMainMenu();
+			return;
+		} else if (Game.level.popupMenuObjects.size() != 0 || Game.level.popupMenuActions.size() != 0) {
 			Level.closeAllPopups();
 		} else if (Level.activeTextBox != null) {
 			Level.activeTextBox = null;
@@ -1096,9 +1120,14 @@ public class UserInputLevel {
 				&& Game.level.conversation.currentConversationPart.windowSelectConversationResponse.buttonLeave != null) {
 			Game.level.conversation.currentConversationPart.windowSelectConversationResponse.buttonLeave.click();
 			return;
+		} else if (Game.level.popupMenuObjects.size() != 0 || Game.level.popupMenuActions.size() != 0) {
+			Level.closeAllPopups();
+			return;
+		} else {
+			Game.level.openCloseMainMenu();
+			return;
 		}
 
-		Level.closeAllPopups();
 		return;
 	}
 
@@ -1163,6 +1192,8 @@ public class UserInputLevel {
 			return;
 		} else if (character == 'p' || character == 'P') {
 			Game.level.openCloseAvailablePowerScreen();
+			return;
+		} else if (Level.mainMenu.showing) {
 			return;
 		} else if (Level.gameOver.showing) {
 			return;
