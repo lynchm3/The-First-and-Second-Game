@@ -37,7 +37,7 @@ public class MainMenu implements Draggable, Scrollable {
 	int buttonsX = 100;
 	int buttonsY = 100;
 
-	public boolean showing = false;
+	public boolean showing = true;
 
 	int titleX;
 	int titleY;

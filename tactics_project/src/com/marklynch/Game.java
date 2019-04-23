@@ -177,7 +177,7 @@ public class Game {
 	long timeBetweenMoveCommands = 1l;
 	public static Level level;
 	public static Editor editor;
-	public static boolean editorMode = true;
+	public static boolean editorMode = false;
 	public static float INVENTORY_SQUARE_WIDTH = 64f;
 	public static float INVENTORY_SQUARE_HEIGHT = 64f;
 	public static float HALF_SQUARE_WIDTH = SQUARE_WIDTH / 2f;
