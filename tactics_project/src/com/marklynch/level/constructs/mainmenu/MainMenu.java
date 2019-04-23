@@ -59,7 +59,7 @@ public class MainMenu implements Draggable, Scrollable {
 		buttonExitGame.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.openCloseMainMenu();
+				Game.level.ended = true;
 			}
 		});
 		buttons.add(buttonExitGame);
