@@ -936,17 +936,27 @@ public class Level {
 
 	public void drawUI() {
 
-		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
-
+		if (mainMenu.showing) {
 			Game.flush();
-			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				// is it better to bind once and draw all the same ones?
-				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
-					gameObject.drawUI(); // HERE
-				}
-			}
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+			view.setIdentity();
+			Game.activeBatch.updateUniforms();
+			mainMenu.drawStaticUI();
 			Game.flush();
+			return;
 		}
+
+//		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+//
+//			Game.flush();
+//			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+//				// is it better to bind once and draw all the same ones?
+//				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
+//					gameObject.drawUI(); // HERE
+//				}
+//			}
+//			Game.flush();
+//		}
 
 		// Draw actions on sqrs.
 
@@ -1322,10 +1332,6 @@ public class Level {
 
 		if (availablePowerScreen.showing) {
 			availablePowerScreen.drawStaticUI();
-		}
-
-		if (mainMenu.showing) {
-			mainMenu.drawStaticUI();
 		}
 
 		if (gameOver.showing) {

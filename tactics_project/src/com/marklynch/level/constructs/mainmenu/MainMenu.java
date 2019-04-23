@@ -17,10 +17,27 @@ import com.marklynch.utils.TextureUtils;
 
 public class MainMenu implements Draggable, Scrollable {
 
+	String continue_ = "Continue";
+	String newGame = "New Game";
+	String save = "Save";
+	String load = "Load";
+	String options = "Options";
+	String exitGame = "Exit Game";
+
+	static LevelButton buttonContinue;
+	static LevelButton buttonNewGame;
+	static LevelButton buttonSave;
+	static LevelButton buttonLoad;
+	static LevelButton buttonOptions;
+	static LevelButton buttonExitGame;
+
+	int buttonsX = 100;
+	int buttonsY = 100;
+
 	public boolean showing = false;
 
-	int contentX;
-	int contentY;
+	int titleX;
+	int titleY;
 
 	transient static int bottomBorderHeight;
 
@@ -30,47 +47,91 @@ public class MainMenu implements Draggable, Scrollable {
 	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
 	public ArrayList<Link> objectiveLinks = new ArrayList<Link>();
 
-	static LevelButton buttonClose;
-
-	public static Texture youDied;
+	public static Texture textureMainMenu;
 
 	Color translucentBlack = new Color(0f, 0f, 0f, 0.5f);
+	public final static float blackBarWidth = 300;
 
 	public MainMenu() {
 
-		buttonClose = new LevelButton(Game.halfWindowWidth - 35f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "GO!", true, false, Color.BLACK, Color.WHITE, null);
-		buttonClose.setClickListener(new ClickListener() {
+		buttonExitGame = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+				"end_turn_button.png", exitGame, true, false, Color.BLACK, Color.WHITE, null);
+		buttonExitGame.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.player.remainingHealth = Game.level.player.totalHealth;
 				Game.level.openCloseMainMenu();
 			}
 		});
-		buttons.add(buttonClose);
+		buttons.add(buttonExitGame);
+
+		buttonOptions = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+				"end_turn_button.png", options, true, false, Color.BLACK, Color.WHITE, null);
+		buttonOptions.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.openCloseMainMenu();
+			}
+		});
+		buttons.add(buttonOptions);
+
+		buttonLoad = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+				"end_turn_button.png", load, true, false, Color.BLACK, Color.WHITE, null);
+		buttonLoad.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.openCloseMainMenu();
+			}
+		});
+		buttons.add(buttonLoad);
+
+		buttonSave = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+				"end_turn_button.png", save, true, false, Color.BLACK, Color.WHITE, null);
+		buttonSave.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.openCloseMainMenu();
+			}
+		});
+		buttons.add(buttonSave);
+
+		buttonNewGame = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+				"end_turn_button.png", newGame, true, false, Color.BLACK, Color.WHITE, null);
+		buttonNewGame.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.openCloseMainMenu();
+			}
+		});
+		buttons.add(buttonNewGame);
+
+		buttonContinue = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+				"end_turn_button.png", continue_, true, false, Color.BLACK, Color.WHITE, null);
+		buttonContinue.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.openCloseMainMenu();
+			}
+		});
+		buttons.add(buttonContinue);
+
 		resize();
 	}
 
 	public static void loadStaticImages() {
-		youDied = ResourceUtils.getGlobalImage("main_menu.png", false);
+		textureMainMenu = ResourceUtils.getGlobalImage("main_menu.png", false);
 	}
 
 	public void resize() {
 
-		contentX = (int) (Game.windowWidth / 2 - 640 / 2);
-		contentY = (int) (Game.windowHeight / 2 - 128 / 2);
+		titleX = (int) (Game.windowWidth / 2 - 640 / 2);
+		titleY = (int) (Game.windowHeight / 2 - 128 / 2);
 		bottomBorderHeight = 384;
-
-		buttonClose.updatePosition(Game.halfWindowWidth - 35f, bottomBorderHeight);
 
 	}
 
 	public void open() {
 		resize();
 		showing = true;
-
-		buttons.clear();
-		buttons.add(buttonClose);
 
 	}
 
@@ -85,7 +146,9 @@ public class MainMenu implements Draggable, Scrollable {
 		// Black cover
 		QuadUtils.drawQuad(translucentBlack, 0, 0, Game.windowWidth, Game.windowHeight);
 
-		TextureUtils.drawTexture(youDied, contentX, contentY, contentX + 640, contentY + 128);
+		QuadUtils.drawQuad(Color.BLACK, 0, 0, blackBarWidth, Game.windowHeight);
+
+		TextureUtils.drawTexture(textureMainMenu, titleX, titleY, titleX + 640, titleY + 128);
 
 		// Buttons
 		for (Button button : buttons) {
