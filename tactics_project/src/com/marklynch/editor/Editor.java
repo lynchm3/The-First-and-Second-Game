@@ -135,15 +135,9 @@ public class Editor {
 		colors.add(new Color(Color.CYAN));
 		colors.add(new Color(Color.ORANGE));
 
-		// Game.level = new Level(100, 100);
-		Game.level = new Level(360, 360);
+		createDefaultLevel();
 
-		for (int i = 0; i < Game.level.squares.length; i++) {
-			for (int j = 0; j < Game.level.squares[0].length; j++) {
-				Game.level.squares[i][j].afterContructor();
-			}
-		}
-
+		// Editor Window
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
 		objectsSettingsWindow = new ObjectsSettingsWindow(200, this);
@@ -156,16 +150,7 @@ public class Editor {
 		aisSettingsWindow = new AIsSettingsWindow(200, this);
 		relationsSettingsWindow = new RelationsSettingsWindow(200, this);
 		speechPartSettingsWindow = new SpeechPartSettingsWindow(200, this);
-
 		settingsWindow = levelSettingsWindow;
-
-		generateTestObjects();
-
-		new AreaList();
-		Game.level.fullQuestList.makeQuests();
-		AreaList.buildAreas();
-
-		Game.level.setSquareDefaultImageTextures();
 
 		// TABS
 		String tabText = "LEVEL";
@@ -366,6 +351,24 @@ public class Editor {
 
 	}
 
+	public static void createDefaultLevel() {
+
+		// Game.level = new Level(100, 100);
+		Game.level = new Level(360, 360);
+
+		for (int i = 0; i < Game.level.squares.length; i++) {
+			for (int j = 0; j < Game.level.squares[0].length; j++) {
+				Game.level.squares[i][j].afterContructor();
+			}
+		}
+
+		generateTestObjects();
+		new AreaList();
+		Game.level.fullQuestList.makeQuests();
+		AreaList.buildAreas();
+		Game.level.setSquareDefaultImageTextures();
+	}
+
 	public void resize() {
 		placeTabs();
 	}
@@ -400,7 +403,7 @@ public class Editor {
 		}
 	}
 
-	public void generateTestObjects() {
+	public static void generateTestObjects() {
 
 		// Expressions
 		ThoughtBubbles.loadExpressions();

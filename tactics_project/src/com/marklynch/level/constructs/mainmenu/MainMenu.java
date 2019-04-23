@@ -3,6 +3,9 @@ package com.marklynch.level.constructs.mainmenu;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.data.Load;
+import com.marklynch.data.Save;
+import com.marklynch.editor.Editor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
@@ -69,7 +72,6 @@ public class MainMenu implements Draggable, Scrollable {
 		buttonOptions.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.openCloseMainMenu();
 			}
 		});
 		buttons.add(buttonOptions);
@@ -79,7 +81,7 @@ public class MainMenu implements Draggable, Scrollable {
 		buttonLoad.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.openCloseMainMenu();
+				Load.load();
 			}
 		});
 		buttons.add(buttonLoad);
@@ -89,7 +91,7 @@ public class MainMenu implements Draggable, Scrollable {
 		buttonSave.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.openCloseMainMenu();
+				Save.save();
 			}
 		});
 		buttons.add(buttonSave);
@@ -99,7 +101,10 @@ public class MainMenu implements Draggable, Scrollable {
 		buttonNewGame.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.openCloseMainMenu();
+
+				Load.clearEverything();
+				Editor.createDefaultLevel();
+
 			}
 		});
 		buttons.add(buttonNewGame);

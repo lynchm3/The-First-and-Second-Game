@@ -36,51 +36,7 @@ public class Load {
 		long loadStartTime = System.currentTimeMillis();
 		System.out.println("Loading...");
 
-		// Clear current data in mem data
-		ArrayList<Long> toRemove = new ArrayList<Long>(Long.class);
-		for (Long id : Level.ids.keySet()) {
-			if (Level.ids.get(id) instanceof Square) {
-
-			} else if (Level.ids.get(id) instanceof Faction) {
-
-			} else {
-				toRemove.add(id);
-			}
-		}
-
-		for (Long id : toRemove) {
-			Level.ids.remove(id);
-		}
-
-		for (Square square : Level.squaresToSave) {
-			square.inventory = new SquareInventory();
-			square.floorImageTexture = square.defaultImageTexture;
-			square.seenByPlayer = false;
-		}
-		Level.squaresToSave.clear();
-
-		for (Class clazz : Save.classesToSave) {
-			if (clazz == Square.class) {
-
-			} else if (clazz == Faction.class) {
-
-			} else {
-				try {
-					ArrayList<Object> instances = (ArrayList<Object>) clazz.getField("instances").get(null);
-					if (instances != null)
-						instances.clear();
-				} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException
-						| SecurityException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		Level.actors.clear();
-
-		Level.player.clearVisibleAndCastableSquares();
-
-		// End of clearage
+		clearEverything();
 
 		try {
 			conn = DriverManager.getConnection(Save.dbConnString);
@@ -284,5 +240,54 @@ public class Load {
 
 		resultSet.close();
 
+	}
+
+	public static void clearEverything() {
+
+		// Clear current data in mem data
+		ArrayList<Long> toRemove = new ArrayList<Long>(Long.class);
+		for (Long id : Level.ids.keySet()) {
+			if (Level.ids.get(id) instanceof Square) {
+
+			} else if (Level.ids.get(id) instanceof Faction) {
+
+			} else {
+				toRemove.add(id);
+			}
+		}
+
+		for (Long id : toRemove) {
+			Level.ids.remove(id);
+		}
+
+		for (Square square : Level.squaresToSave) {
+			square.inventory = new SquareInventory();
+			square.floorImageTexture = square.defaultImageTexture;
+			square.seenByPlayer = false;
+		}
+		Level.squaresToSave.clear();
+
+		for (Class clazz : Save.classesToSave) {
+			if (clazz == Square.class) {
+
+			} else if (clazz == Faction.class) {
+
+			} else {
+				try {
+					ArrayList<Object> instances = (ArrayList<Object>) clazz.getField("instances").get(null);
+					if (instances != null)
+						instances.clear();
+				} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException
+						| SecurityException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		Level.actors.clear();
+
+		Level.player.clearVisibleAndCastableSquares();
+
+		// End of clearage
 	}
 }
