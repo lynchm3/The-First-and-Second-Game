@@ -132,16 +132,16 @@ public class UserInputEditor {
 		}
 
 		// Getting button that we have clicked, if any
-		Game.buttonHoveringOver = null;
+		Game.buttonMouseIsOver = null;
 		if (dragging == false) {
-			Game.buttonHoveringOver = editor.getButtonFromMousePosition(Mouse.getX(), Mouse.getY());
+			Game.buttonMouseIsOver = editor.getButtonFromMousePosition(Mouse.getX(), Mouse.getY());
 		}
 
 		// left click logic
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
-				&& Game.buttonHoveringOver != null) {
+				&& Game.buttonMouseIsOver != null) {
 			// click button
-			Game.buttonHoveringOver.click();
+			Game.buttonMouseIsOver.click();
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
 				&& Game.squareMouseIsOver != null) {
 			// click square/game object if we're on one

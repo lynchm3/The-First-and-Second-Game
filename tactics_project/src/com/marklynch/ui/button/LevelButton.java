@@ -40,6 +40,14 @@ public class LevelButton extends Button {
 
 	@Override
 	public void draw() {
+
+		boolean mouseOverThis = false;
+		Color buttonColorToUse = this.buttonColor;
+		if (this == Game.buttonMouseIsOver) {
+			mouseOverThis = true;
+			buttonColorToUse = Color.RED;
+		}
+
 		realX = x;
 		if (this.xFromLeft == false)
 			realX = Game.windowWidth - x;
@@ -53,7 +61,7 @@ public class LevelButton extends Button {
 				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realY, realX + width, realY + height);
 				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE, this.textParts);
 			} else {
-				QuadUtils.drawQuad(buttonColor, realX, realY, realX + width, realY + height);
+				QuadUtils.drawQuad(buttonColorToUse, realX, realY, realX + width, realY + height);
 				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE, this.textParts);
 			}
 		} else {

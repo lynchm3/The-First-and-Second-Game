@@ -577,7 +577,7 @@ public class Editor {
 
 		// Draw a move line if click will result in move
 		if (selectedGameObject != null && selectedGameObject.squareGameObjectIsOn != null
-				&& Game.buttonHoveringOver == null && editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED
+				&& Game.buttonMouseIsOver == null && editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED
 				&& Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 

@@ -1365,7 +1365,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		// cursor and action over squares
-		if (this.inventorySquareMouseIsOver != null && Game.buttonHoveringOver == null) {
+		if (this.inventorySquareMouseIsOver != null && Game.buttonMouseIsOver == null) {
 			this.inventorySquareMouseIsOver.drawCursor();
 			this.inventorySquareMouseIsOver.drawActionThatWillBePerformed(false);
 

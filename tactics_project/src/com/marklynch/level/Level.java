@@ -1045,7 +1045,7 @@ public class Level {
 			}
 		}
 
-		if (openInventories.size() == 0 && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null
+		if (openInventories.size() == 0 && Game.buttonMouseIsOver == null && Game.squareMouseIsOver != null
 				&& Game.pinWindowHoveringOver == null) {
 
 			if (levelMode == LevelMode.LEVEL_MODE_FISHING) {
@@ -1186,7 +1186,7 @@ public class Level {
 		// ((MapMarker) mapMarker).drawStaticUI();
 		// }
 
-		if (openInventories.size() == 0 && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
+		if (openInventories.size() == 0 && Game.buttonMouseIsOver == null && Game.squareMouseIsOver != null) {
 
 			if (levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
 			} else if (levelMode == LevelMode.LEVEL_MODE_CAST) {
@@ -1360,9 +1360,9 @@ public class Level {
 		if (dialog != null)
 			dialog.drawStaticUI();
 
-		if (Game.buttonHoveringOver != null) {
+		if (Game.buttonMouseIsOver != null) {
 			Level.tooltipGroup.clear();
-			Level.tooltipGroup.addAll(Game.buttonHoveringOver.tooltips);
+			Level.tooltipGroup.addAll(Game.buttonMouseIsOver.tooltips);
 			// Tooltip.lastTooltipGroupShown = Game.buttonHoveringOver.tooltipGroup;
 		} else {
 			Tooltip.lastTooltipGroupShown = null;

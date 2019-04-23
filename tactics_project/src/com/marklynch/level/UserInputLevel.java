@@ -308,12 +308,12 @@ public class UserInputLevel {
 		}
 
 		// Getting button that the mouse is over, if any
-		Game.oldButtonHoveringOver = Game.buttonHoveringOver;
-		Game.buttonHoveringOver = null;
+		Game.oldButtonHoveringOver = Game.buttonMouseIsOver;
+		Game.buttonMouseIsOver = null;
 		Game.pinWindowHoveringOver = null;
 		Game.textBoxHoveringOver = null;
 		if (draggingMap == false) {
-			Game.buttonHoveringOver = Game.level.getButtonFromMousePosition(Mouse.getX(), Mouse.getY(),
+			Game.buttonMouseIsOver = Game.level.getButtonFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
 			Game.pinWindowHoveringOver = Game.level.getWindowFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
@@ -343,20 +343,20 @@ public class UserInputLevel {
 				popupMenu.clearHighlights();
 			}
 
-			if (Game.buttonHoveringOver != null) {
+			if (Game.buttonMouseIsOver != null) {
 				for (PopupMenu popUp : Game.level.popupMenuActions) {
-					if (popUp.buttons.contains(Game.buttonHoveringOver)) {
-						popUp.highlightedButton = Game.buttonHoveringOver;
-						popUp.highlightedButtonIndex = popUp.buttons.indexOf(Game.buttonHoveringOver);
+					if (popUp.buttons.contains(Game.buttonMouseIsOver)) {
+						popUp.highlightedButton = Game.buttonMouseIsOver;
+						popUp.highlightedButtonIndex = popUp.buttons.indexOf(Game.buttonMouseIsOver);
 					}
 				}
 				for (PopupMenu popUp : Game.level.popupMenuObjects) {
-					if (popUp.buttons.contains(Game.buttonHoveringOver)) {
-						popUp.highlightedButton = Game.buttonHoveringOver;
-						popUp.highlightedButtonIndex = popUp.buttons.indexOf(Game.buttonHoveringOver);
+					if (popUp.buttons.contains(Game.buttonMouseIsOver)) {
+						popUp.highlightedButton = Game.buttonMouseIsOver;
+						popUp.highlightedButtonIndex = popUp.buttons.indexOf(Game.buttonMouseIsOver);
 					}
 				}
-				Game.buttonHoveringOver.highlight();
+				Game.buttonMouseIsOver.highlight();
 			}
 		}
 
@@ -384,9 +384,9 @@ public class UserInputLevel {
 
 			if (scriptInterceptsClick) {
 				// Continue script
-			} else if (Game.buttonHoveringOver != null) {
+			} else if (Game.buttonMouseIsOver != null) {
 				// Click button
-				Game.buttonHoveringOver.click();
+				Game.buttonMouseIsOver.click();
 			} else if (Level.journal.showing) {
 
 			} else if (Level.characterScreen.showing) {
