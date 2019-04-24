@@ -1110,7 +1110,7 @@ public class UserInputLevel {
 		} else if (Level.skillTree.showing) {
 			Game.level.openCloseSkillTree();
 		} else if (Level.availablePowerScreen.showing) {
-			Game.level.openCloseAvailablePowerScreen();
+			Game.level.openClosePowersScreen();
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -1191,7 +1191,7 @@ public class UserInputLevel {
 			Game.level.openCloseSkillTree();
 			return;
 		} else if (character == 'p' || character == 'P') {
-			Game.level.openCloseAvailablePowerScreen();
+			Game.level.openClosePowersScreen();
 			return;
 		} else if (Level.mainMenu.showing) {
 			return;
@@ -1231,9 +1231,9 @@ public class UserInputLevel {
 				lastCopy = now;
 			}
 		} else if (character == 'm' || character == 'M') {
-			Game.level.mapButton.click();
+			Game.level.mapZoomInOut();
 		} else if (character == 'q' || character == 'Q') {
-			Game.level.centerButton.click();
+			Game.level.centerOnPlayer();
 		} else if (character == 'l' || character == 'L') {
 			Game.level.showHideLogButton.click();
 		} else if (character == 'w' || character == 'W') {

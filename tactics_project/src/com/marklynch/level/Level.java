@@ -147,17 +147,21 @@ public class Level {
 	public ArrayList<PinWindow> pinWindows = new ArrayList<PinWindow>();
 
 	public Conversation conversation;
+
+//	public transient LevelButton mapButton;
+//	public transient LevelButton waitButton;
+//	public transient LevelButton centerButton;
+//	public transient LevelButton menuButton;
+
+	public transient ArrayList<Button> buttons;
+
+	public transient Button poisonBlastButton;
+
 	public transient LevelButton clearNotificationsButton;
-	public transient LevelButton endTurnButton;
-	public transient LevelButton centerButton;
-	public transient LevelButton mapButton;
 	public transient LevelButton showHideLocationIconsButton;
 	public transient LevelButton showHideLogButton;
-	// public transient LevelButton playButton;
 	public transient LevelButton pauseButton;
 	public transient LevelButton editorButton;
-	public transient ArrayList<Button> buttons;
-	public transient Button poisonBlastButton;
 
 	public static boolean paused = true;
 	public boolean showLog = true;
@@ -391,7 +395,7 @@ public class Level {
 		closeAllPopups();
 	}
 
-	public void openCloseAvailablePowerScreen() {
+	public void openClosePowersScreen() {
 		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
 			inventory.close();
 		}
@@ -657,45 +661,37 @@ public class Level {
 		showHideLogButton.enabled = true;
 		buttons.add(showHideLogButton);
 
-		// UI buttons
-		Button inventoryButton = new LevelButton(110f, 400f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"INVENTORY [I]", false, false, Color.BLACK, Color.WHITE, "Open your Inventory - [I]");
-		inventoryButton.setClickListener(new ClickListener() {
+		// BUTTONS ON THE RIGHT HAND SIDE OF THE SCREEN
+		float sideBarButtonCount = 0;
+		Button menuButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "MENU - [ESC]", false, false, Color.BLACK, Color.WHITE,
+				"Open game menu [ESC]");
+		menuButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				openCloseInventory();
+				openCloseMainMenu();
 			}
 		});
-		inventoryButton.enabled = true;
-		buttons.add(inventoryButton);
+		menuButton.enabled = true;
+		buttons.add(menuButton);
+		sideBarButtonCount++;
 
-		// UI buttons
-		Button journalButton = new LevelButton(110f, 360f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"ADVENTURES [J]", false, false, Color.BLACK, Color.WHITE, "Take a look at your Journal - [J]");
-		journalButton.setClickListener(new ClickListener() {
+		Button powersButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "POWERS [P]", false, false, Color.BLACK, Color.WHITE,
+				"View your available powers - [P]");
+		powersButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				openCloseJournal();
+				openClosePowersScreen();
 			}
 		});
-		journalButton.enabled = true;
-		buttons.add(journalButton);
+		powersButton.enabled = true;
+		buttons.add(powersButton);
+		sideBarButtonCount++;
 
-		// UI buttons
-		Button characterButton = new LevelButton(110f, 320f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"CHARACTER [C]", false, false, Color.BLACK, Color.WHITE, "View character stats and skills - [C]");
-		characterButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				openCloseCharacterScreen();
-			}
-		});
-		characterButton.enabled = true;
-		buttons.add(characterButton);
-
-		// UI buttons
-		Button skillTreeButton = new LevelButton(110f, 280f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"SKILL TREE [T]", false, false, Color.BLACK, Color.WHITE, "View the Skill Tree - [T]");
+		Button skillTreeButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "SKILL TREE [T]", false, false, Color.BLACK, Color.WHITE,
+				"View the Skill Tree - [T]");
 		skillTreeButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -704,39 +700,64 @@ public class Level {
 		});
 		skillTreeButton.enabled = true;
 		buttons.add(skillTreeButton);
+		sideBarButtonCount++;
 
-		// UI buttons
-		Button activePowerScreenButton = new LevelButton(110f, 240f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "POWERS [P]", false, false, Color.BLACK, Color.WHITE,
-				"View your available powers - [P]");
-		activePowerScreenButton.setClickListener(new ClickListener() {
+		Button characterButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "CHARACTER [C]", false, false, Color.BLACK, Color.WHITE,
+				"View character stats and skills - [C]");
+		characterButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				openCloseAvailablePowerScreen();
+				openCloseCharacterScreen();
 			}
 		});
-		activePowerScreenButton.enabled = true;
-		buttons.add(activePowerScreenButton);
+		characterButton.enabled = true;
+		buttons.add(characterButton);
+		sideBarButtonCount++;
 
-		centerButton = new LevelButton(110f, 440f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"CENTER [Q]", false, false, Color.BLACK, Color.WHITE, "Center view on self - [Q]");
+		Button journalButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "JOURNAL [J]", false, false, Color.BLACK, Color.WHITE,
+				"Take a look at your Journal - [J]");
+		journalButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseJournal();
+			}
+		});
+		journalButton.enabled = true;
+		buttons.add(journalButton);
+		sideBarButtonCount++;
+
+		Button inventoryButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "INVENTORY [I]", false, false, Color.BLACK, Color.WHITE,
+				"Open your Inventory - [I]");
+		inventoryButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseInventory();
+			}
+		});
+		inventoryButton.enabled = true;
+		buttons.add(inventoryButton);
+		sideBarButtonCount++;
+
+		Button centerButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "CENTER [Q]", false, false, Color.BLACK, Color.WHITE,
+				"Center view on self - [Q]");
 		centerButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				if (Game.level.settingFollowPlayer) {
-					cameraFollow = true;
-				}
-				centerToSquare = true;
-				squareToCenterTo = Game.level.player.squareGameObjectIsOn;
+				centerOnPlayer();
 			}
 		});
 		centerButton.enabled = true;
 		buttons.add(centerButton);
+		sideBarButtonCount++;
 
-		endTurnButton = new LevelButton(110f, 480f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"WAIT [SPACE]", false, false, Color.BLACK, Color.WHITE,
+		Button waitButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "WAIT [SPACE]", false, false, Color.BLACK, Color.WHITE,
 				"Wait a turn. You can also tap . to play/pause time.");
-		endTurnButton.setClickListener(new ClickListener() {
+		waitButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
 				UserInputLevel.waitPressed(false, false);
@@ -744,26 +765,20 @@ public class Level {
 				// player.squareGameObjectIsOn).perform();
 			}
 		});
-		buttons.add(endTurnButton);
+		buttons.add(waitButton);
+		sideBarButtonCount++;
 
-		mapButton = new LevelButton(110f, 520f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "MAP [M]",
-				false, false, Color.BLACK, Color.WHITE, "Zoom out to Map and back again - [M]");
+		Button mapButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "MAP [M]", false, false, Color.BLACK, Color.WHITE,
+				"Zoom out to Map and back again - [M]");
 		mapButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-
-				if (zoomToMap || zoomFromMap)
-					return;
-
-				if (Game.zoom >= 0.1) {
-					zoomToMap = true;
-					nonMapZoomLevelIndex = Game.zoomLevelIndex;
-				} else {
-					zoomFromMap = true;
-				}
+				mapZoomInOut();
 			}
 		});
 		buttons.add(mapButton);
+		sideBarButtonCount++;
 
 		showHideLocationIconsButton = new LevelButton(110f, 560f, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "LOCATION ICONS", false, false, Color.BLACK, Color.WHITE,
@@ -794,6 +809,27 @@ public class Level {
 			}
 		});
 		buttons.add(pauseButton);
+	}
+
+	public void centerOnPlayer() {
+
+		if (Level.settingFollowPlayer) {
+			cameraFollow = true;
+		}
+		centerToSquare = true;
+		squareToCenterTo = Level.player.squareGameObjectIsOn;
+	}
+
+	public void mapZoomInOut() {
+		if (zoomToMap || zoomFromMap)
+			return;
+
+		if (Game.zoom >= 0.1) {
+			zoomToMap = true;
+			nonMapZoomLevelIndex = Game.zoomLevelIndex;
+		} else {
+			zoomFromMap = true;
+		}
 	}
 
 	public static int gridX1Bounds;
@@ -2483,7 +2519,7 @@ public class Level {
 		}
 
 		if (Level.availablePowerScreen.showing) {
-			Game.level.openCloseAvailablePowerScreen();
+			Game.level.openClosePowersScreen();
 		}
 
 		if (Level.openInventories.size() != 0) {
