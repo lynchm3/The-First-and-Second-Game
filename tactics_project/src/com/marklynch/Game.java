@@ -230,9 +230,13 @@ public class Game {
 		// Save.save();
 		// Load.load();
 
-		while (!Display.isCloseRequested()) {
+		Game.level.activeActor = Level.player;
+		// Game.level.activeActor.equip(Game.level.activeActor.getWeaponsInInventory().get(0));
+		Level.turn = 1;
+		Game.editorMode = false;
+		Level.player.calculateVisibleAndCastableSquares(Game.level.activeActor.squareGameObjectIsOn);
 
-			boolean wasActive = displayActive;
+		while (!Display.isCloseRequested()) {
 
 			if (!Display.isActive()) {
 				// pausedUpdatesDisplayNotActive = true;
