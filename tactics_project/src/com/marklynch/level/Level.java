@@ -24,6 +24,7 @@ import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.availablepowerscreen.AvailablePowersScreen;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.charactercreation.CharacterCreation;
 import com.marklynch.level.constructs.characterscreen.CharacterScreen;
 import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.constructs.decoration.Cloud;
@@ -127,6 +128,7 @@ public class Level {
 	public static transient ArrayList<Actor> actors = new ArrayList<Actor>();
 	public static transient GameOver gameOver = new GameOver();
 	public static transient MainMenu mainMenu = new MainMenu();
+	public static transient CharacterCreation characterCreation = new CharacterCreation();
 	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
 
 	// public ArrayList<Actor> actors;
@@ -430,6 +432,24 @@ public class Level {
 		closeAllPopups();
 	}
 
+	public void openCloseCharacterCreation() {
+		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+			inventory.close();
+		}
+		journal.close();
+		skillTree.close();
+		characterScreen.close();
+		availablePowerScreen.close();
+
+		if (characterCreation.showing) {
+			characterCreation.close();
+		} else {
+			characterCreation.open();
+			pausePlayer();
+		}
+		closeAllPopups();
+	}
+
 	public void openCloseMainMenu() {
 		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
 			inventory.close();
@@ -663,9 +683,23 @@ public class Level {
 
 		// BUTTONS ON THE RIGHT HAND SIDE OF THE SCREEN
 		float sideBarButtonCount = 0;
+
+		Button characterCreationButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f,
+				"undo_button.png", "undo_button_disabled.png", "CHARACTER CREATION", false, false, Color.BLACK,
+				Color.WHITE, "Charcter Creation");
+		characterCreationButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseCharacterCreation();
+			}
+		});
+		characterCreationButton.enabled = true;
+		buttons.add(characterCreationButton);
+		sideBarButtonCount++;
+
 		Button menuButton = new LevelButton(110f, 240f + 40f * sideBarButtonCount, 100f, 30f, "undo_button.png",
 				"undo_button_disabled.png", "MENU - [ESC]", false, false, Color.BLACK, Color.WHITE,
-				"Open game menu [ESC]");
+				"Open game menu - [ESC]");
 		menuButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -978,6 +1012,16 @@ public class Level {
 			view.setIdentity();
 			Game.activeBatch.updateUniforms();
 			mainMenu.drawStaticUI();
+			Game.flush();
+			return;
+		}
+
+		if (characterCreation.showing) {
+			Game.flush();
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+			view.setIdentity();
+			Game.activeBatch.updateUniforms();
+			characterCreation.drawStaticUI();
 			Game.flush();
 			return;
 		}
@@ -1638,6 +1682,8 @@ public class Level {
 			return;
 		} else if (mainMenu.showing) {
 			return;
+		} else if (characterCreation.showing) {
+			return;
 		} else if (gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
@@ -1780,6 +1826,15 @@ public class Level {
 
 		if (mainMenu.showing) {
 			for (Button button : mainMenu.buttons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
+
+			return null;
+		}
+
+		if (characterCreation.showing) {
+			for (Button button : CharacterCreation.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
@@ -2025,7 +2080,8 @@ public class Level {
 	public PinWindow getWindowFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
 
 		if (openInventories.size() != 0 || journal.showing || gameOver.showing || mainMenu.showing
-				|| characterScreen.showing || skillTree.showing || availablePowerScreen.showing)
+				|| characterCreation.showing || characterScreen.showing || skillTree.showing
+				|| availablePowerScreen.showing)
 			return null;
 
 		for (int i = pinWindows.size() - 1; i >= 0; i--) {
@@ -2445,6 +2501,8 @@ public class Level {
 			journal.resize();
 		if (mainMenu.showing)
 			mainMenu.resize();
+		if (characterCreation.showing)
+			characterCreation.resize();
 		if (gameOver.showing)
 			gameOver.resize();
 		if (dialog != null)
