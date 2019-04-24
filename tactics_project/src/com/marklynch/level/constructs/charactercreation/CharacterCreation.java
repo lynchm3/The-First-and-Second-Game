@@ -25,13 +25,36 @@ public class CharacterCreation implements Draggable, Scrollable {
 	String weapon = "Weapon";
 	String item = "Item";
 
+	String left = "<";
+	String right = ">";
+
 	static LevelButton buttonHair;
+	static LevelButton buttonHairLeft;
+	static LevelButton buttonHairRight;
+
 	static LevelButton buttonSkin;
+	static LevelButton buttonSkinLeft;
+	static LevelButton buttonSkinRight;
+
 	static LevelButton buttonOnTorso;
+	static LevelButton buttonOnTorsoLeft;
+	static LevelButton buttonOnTorsoRight;
+
 	static LevelButton buttonOnLegs;
+	static LevelButton buttonOnLegsLeft;
+	static LevelButton buttonOnLegsRight;
+
 	static LevelButton buttonOnHead;
+	static LevelButton buttonOnHeadLeft;
+	static LevelButton buttonOnHeadRight;
+
 	static LevelButton buttonWeapon;
+	static LevelButton buttonWeaponLeft;
+	static LevelButton buttonWeaponRight;
+
 	static LevelButton buttonItem;
+	static LevelButton buttonItemLeft;
+	static LevelButton buttonItemRight;
 
 	int buttonsX = 100;
 	int buttonsY = 100;
@@ -56,7 +79,9 @@ public class CharacterCreation implements Draggable, Scrollable {
 
 	public CharacterCreation() {
 
-		buttonItem = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+		float mainButtonCount = 0;
+
+		buttonItem = new LevelButton(buttonsX, buttonsY + 30f * mainButtonCount, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", item, true, false, Color.BLACK, Color.WHITE, null);
 		buttonItem.setClickListener(new ClickListener() {
 			@Override
@@ -65,7 +90,27 @@ public class CharacterCreation implements Draggable, Scrollable {
 		});
 		buttons.add(buttonItem);
 
-		buttonWeapon = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+		buttonItemLeft = new LevelButton(buttonsX - 10, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", left, true, false, Color.BLACK, Color.WHITE, null);
+		buttonItemLeft.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonItemLeft);
+
+		buttonItemRight = new LevelButton(buttonsX + 70, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", right, true, false, Color.BLACK, Color.WHITE, null);
+		buttonItemRight.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonItemRight);
+
+		mainButtonCount++;
+
+		buttonWeapon = new LevelButton(buttonsX, buttonsY + 30 * mainButtonCount, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", weapon, true, false, Color.BLACK, Color.WHITE, null);
 		buttonWeapon.setClickListener(new ClickListener() {
 			@Override
@@ -74,7 +119,27 @@ public class CharacterCreation implements Draggable, Scrollable {
 		});
 		buttons.add(buttonWeapon);
 
-		buttonOnHead = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+		buttonWeaponLeft = new LevelButton(buttonsX - 10, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", left, true, false, Color.BLACK, Color.WHITE, null);
+		buttonWeaponLeft.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonWeaponLeft);
+
+		buttonWeaponRight = new LevelButton(buttonsX + 70, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", right, true, false, Color.BLACK, Color.WHITE, null);
+		buttonWeaponRight.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonWeaponRight);
+
+		mainButtonCount++;
+
+		buttonOnHead = new LevelButton(buttonsX, buttonsY + 30 * mainButtonCount, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", onHead, true, false, Color.BLACK, Color.WHITE, null);
 		buttonOnHead.setClickListener(new ClickListener() {
 			@Override
@@ -83,7 +148,27 @@ public class CharacterCreation implements Draggable, Scrollable {
 		});
 		buttons.add(buttonOnHead);
 
-		buttonOnLegs = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+		buttonOnHeadLeft = new LevelButton(buttonsX - 10, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", left, true, false, Color.BLACK, Color.WHITE, null);
+		buttonOnHeadLeft.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonOnHeadLeft);
+
+		buttonOnHeadRight = new LevelButton(buttonsX + 70, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", right, true, false, Color.BLACK, Color.WHITE, null);
+		buttonOnHeadRight.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonOnHeadRight);
+
+		mainButtonCount++;
+
+		buttonOnLegs = new LevelButton(buttonsX, buttonsY + 30 * mainButtonCount, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", onLegs, true, false, Color.BLACK, Color.WHITE, null);
 		buttonOnLegs.setClickListener(new ClickListener() {
 			@Override
@@ -92,7 +177,27 @@ public class CharacterCreation implements Draggable, Scrollable {
 		});
 		buttons.add(buttonOnLegs);
 
-		buttonOnTorso = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+		buttonOnLegsLeft = new LevelButton(buttonsX - 10, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", left, true, false, Color.BLACK, Color.WHITE, null);
+		buttonOnLegsLeft.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonOnLegsLeft);
+
+		buttonOnLegsRight = new LevelButton(buttonsX + 70, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", right, true, false, Color.BLACK, Color.WHITE, null);
+		buttonOnLegsRight.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonOnLegsRight);
+
+		mainButtonCount++;
+
+		buttonOnTorso = new LevelButton(buttonsX, buttonsY + 30 * mainButtonCount, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", onTorso, true, false, Color.BLACK, Color.WHITE, null);
 		buttonOnTorso.setClickListener(new ClickListener() {
 			@Override
@@ -101,7 +206,27 @@ public class CharacterCreation implements Draggable, Scrollable {
 		});
 		buttons.add(buttonOnTorso);
 
-		buttonSkin = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+		buttonOnTorsoLeft = new LevelButton(buttonsX - 10, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", left, true, false, Color.BLACK, Color.WHITE, null);
+		buttonOnTorsoLeft.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonOnTorsoLeft);
+
+		buttonOnTorsoRight = new LevelButton(buttonsX + 70, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", right, true, false, Color.BLACK, Color.WHITE, null);
+		buttonOnTorsoRight.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonOnTorsoRight);
+
+		mainButtonCount++;
+
+		buttonSkin = new LevelButton(buttonsX, buttonsY + 30 * mainButtonCount, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", skin, true, false, Color.BLACK, Color.WHITE, null);
 		buttonSkin.setClickListener(new ClickListener() {
 			@Override
@@ -111,7 +236,27 @@ public class CharacterCreation implements Draggable, Scrollable {
 		});
 		buttons.add(buttonSkin);
 
-		buttonHair = new LevelButton(buttonsX, buttonsY + 30 * buttons.size(), 70f, 30f, "end_turn_button.png",
+		buttonSkinLeft = new LevelButton(buttonsX - 10, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", left, true, false, Color.BLACK, Color.WHITE, null);
+		buttonSkinLeft.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonSkinLeft);
+
+		buttonSkinRight = new LevelButton(buttonsX + 70, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", right, true, false, Color.BLACK, Color.WHITE, null);
+		buttonSkinRight.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonSkinRight);
+
+		mainButtonCount++;
+
+		buttonHair = new LevelButton(buttonsX, buttonsY + 30 * mainButtonCount, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", hair, true, false, Color.BLACK, Color.WHITE, null);
 		buttonHair.setClickListener(new ClickListener() {
 			@Override
@@ -119,6 +264,26 @@ public class CharacterCreation implements Draggable, Scrollable {
 			}
 		});
 		buttons.add(buttonHair);
+
+		buttonHairLeft = new LevelButton(buttonsX - 10, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", left, true, false, Color.BLACK, Color.WHITE, null);
+		buttonHairLeft.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonHairLeft);
+
+		buttonHairRight = new LevelButton(buttonsX + 70, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", right, true, false, Color.BLACK, Color.WHITE, null);
+		buttonHairRight.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonHairRight);
+
+		mainButtonCount++;
 
 		resize();
 	}
