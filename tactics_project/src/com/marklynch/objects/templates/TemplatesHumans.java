@@ -102,7 +102,7 @@ public class TemplatesHumans {
 		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE,
 				new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 3));
 		Templates.FISHERMAN.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 11));
-		Templates.FISHERMAN.hairImageTexture = ResourceUtils.getGlobalImage("hair.png", false);
+		Templates.FISHERMAN.hairImageTexture = ResourceUtils.getGlobalImage("hair_1.png", false);
 		Templates.FISHERMAN.heightRatio = 1.5f;
 		Templates.FISHERMAN.drawOffsetRatioY = -0.5f;
 		Templates.FISHERMAN.drawOffsetY = Templates.FISHERMAN.drawOffsetRatioY * Game.SQUARE_HEIGHT;

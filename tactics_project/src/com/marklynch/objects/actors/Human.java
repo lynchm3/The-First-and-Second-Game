@@ -6,20 +6,33 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.Texture;
 
 public class Human extends Actor {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+
+	public static Texture hair1 = ResourceUtils.getGlobalImage("hair_1.png", true);
+	public static Texture hair2 = ResourceUtils.getGlobalImage("hair_2.png", true);
+	public static ArrayList<Texture> hairTextures;
 
 	public Human() {
 		torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", true);
 		pelvisImageTexture = ResourceUtils.getGlobalImage("hero_lower.png", true);
 		armImageTexture = ResourceUtils.getGlobalImage("arm.png", true);
 		legImageTexture = ResourceUtils.getGlobalImage("leg.png", true);
-		hairImageTexture = ResourceUtils.getGlobalImage("hair.png", true);
+		hairImageTexture = ResourceUtils.getGlobalImage("hair_1.png", true);
 		canOpenDoors = true;
 		canEquipWeapons = true;
 		type = "Human";
+	}
+
+	public static void loadStaticImages() {
+		hair1 = ResourceUtils.getGlobalImage("hair_1.png", true);
+		hair2 = ResourceUtils.getGlobalImage("hair_1.png", true);
+		hairTextures = new ArrayList<Texture>(Texture.class);
+		hairTextures.add(hair1);
+		hairTextures.add(hair2);
 	}
 
 	@Override

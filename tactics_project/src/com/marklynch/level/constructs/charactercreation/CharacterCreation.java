@@ -3,6 +3,8 @@ package com.marklynch.level.constructs.charactercreation;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
+import com.marklynch.objects.actors.Human;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
@@ -31,6 +33,7 @@ public class CharacterCreation implements Draggable, Scrollable {
 	static LevelButton buttonHair;
 	static LevelButton buttonHairLeft;
 	static LevelButton buttonHairRight;
+	static int hairIndex = 1;
 
 	static LevelButton buttonSkin;
 	static LevelButton buttonSkinLeft;
@@ -270,6 +273,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonHairLeft.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				hairIndex--;
+				if (hairIndex < 0) {
+					hairIndex = Human.hairTextures.size() - 1;
+				}
+				Level.player.hairImageTexture = Human.hairTextures.get(hairIndex);
 			}
 		});
 		buttons.add(buttonHairLeft);
@@ -279,6 +287,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonHairRight.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				hairIndex++;
+				if (hairIndex >= Human.hairTextures.size()) {
+					hairIndex = 0;
+				}
+				Level.player.hairImageTexture = Human.hairTextures.get(hairIndex);
 			}
 		});
 		buttons.add(buttonHairRight);

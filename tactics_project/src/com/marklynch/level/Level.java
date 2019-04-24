@@ -48,6 +48,7 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
+import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -268,6 +269,7 @@ public class Level {
 		Square.loadStaticImages();
 		GameObject.loadStaticImages();
 		Actor.loadStaticImages();
+		Human.loadStaticImages();
 		Action.loadActionImages();
 		Effect.loadEffectImages();
 		// Wall.loadStaticImages();

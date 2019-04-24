@@ -129,7 +129,7 @@ public class Actor extends GameObject {
 	public Texture stepLeftTexture = null;
 	public Texture stepRightTexture = null;
 	public Texture currentStepTexture = null;
-	public Texture hairImageTexture;// = ResourceUtils.getGlobalImage("hair.png", false);
+	public Texture hairImageTexture;// = ResourceUtils.getGlobalImage("hair_1.png", false);
 
 	// Arms
 	public Texture armImageTexture;// = ResourceUtils.getGlobalImage("arm.png", false);
