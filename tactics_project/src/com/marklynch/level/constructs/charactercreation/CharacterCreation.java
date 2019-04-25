@@ -292,6 +292,10 @@ public class CharacterCreation implements Draggable, Scrollable {
 					hairIndex = 0;
 				}
 				Level.player.hairImageTexture = Human.hairTextures.get(hairIndex);
+				System.out.println("Human.hairTextures = " + Human.hairTextures);
+				System.out.println("Human.hair1 = " + Human.hair1);
+				System.out.println("Human.hair2 = " + Human.hair2);
+				System.out.println("Level.player.hairImageTexture = " + Level.player.hairImageTexture);
 			}
 		});
 		buttons.add(buttonHairRight);

@@ -523,7 +523,7 @@ public class Editor {
 		// player.inventory.add(Templates.PICKAXE.makeCopy(null));
 		Helmet playersHardHat = Templates.HARD_HAT.makeCopy(null, player);
 		player.inventory.add(playersHardHat);
-		player.helmet = playersHardHat;
+//		player.helmet = playersHardHat;
 		BodyArmor playersJumper = Templates.JUMPER.makeCopy(null, player);
 		player.inventory.add(playersJumper);
 		player.bodyArmor = playersJumper;

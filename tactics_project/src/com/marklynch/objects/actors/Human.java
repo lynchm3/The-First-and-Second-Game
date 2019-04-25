@@ -29,7 +29,7 @@ public class Human extends Actor {
 
 	public static void loadStaticImages() {
 		hair1 = ResourceUtils.getGlobalImage("hair_1.png", true);
-		hair2 = ResourceUtils.getGlobalImage("hair_1.png", true);
+		hair2 = ResourceUtils.getGlobalImage("hair_2.png", true);
 		hairTextures = new ArrayList<Texture>(Texture.class);
 		hairTextures.add(hair1);
 		hairTextures.add(hair2);
