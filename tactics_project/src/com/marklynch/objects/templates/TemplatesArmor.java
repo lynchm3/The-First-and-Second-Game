@@ -72,7 +72,7 @@ public class TemplatesArmor {
 		// Body Armor
 		Templates.JUMPER = new BodyArmor();
 		Templates.JUMPER.name = "Jumper";
-		Templates.JUMPER.imageTexture = getGlobalImage("jumper_1.png", true);
+		Templates.JUMPER.imageTexture = getGlobalImage("jumper.png", true);
 		Templates.JUMPER.armUpperTexture = getGlobalImage("jumper_arm_upper.png", true);
 		Templates.JUMPER.armLowerTexture = getGlobalImage("jumper_arm_lower.png", true);
 		Templates.JUMPER.totalHealth = Templates.JUMPER.remainingHealth = 20;
@@ -86,7 +86,7 @@ public class TemplatesArmor {
 		Templates.JUMPER.value = 30;
 		Templates.JUMPER.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 1));
 		Templates.JUMPER.templateId = GameObject.generateNewTemplateId();
-		Human.bodyArmors.add(Templates.JUMPER);
+		Human.bodyArmors.add(Templates.JUMPER.makeCopy(null, null));
 
 		Templates.APRON = new BodyArmor();
 		Templates.APRON.name = "Apron";
@@ -99,7 +99,7 @@ public class TemplatesArmor {
 		Templates.APRON.weight = 17f;
 		Templates.APRON.value = 38;
 		Templates.APRON.templateId = GameObject.generateNewTemplateId();
-		Human.bodyArmors.add(Templates.APRON);
+		Human.bodyArmors.add(Templates.APRON.makeCopy(null, null));
 
 		Templates.ROBE = new BodyArmor();
 		Templates.ROBE.name = "Robe";
