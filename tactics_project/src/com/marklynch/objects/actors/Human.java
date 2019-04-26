@@ -33,6 +33,9 @@ public class Human extends Actor {
 	public static Texture bodyArmor2 = ResourceUtils.getGlobalImage("jumper_2.png", true);
 	public static Color bodyArmorColor1 = Color.BLACK;
 	public static Color bodyArmorColor2 = Color.WHITE;
+	public static Color bodyArmorColor3 = Color.RED;
+	public static Color bodyArmorColor4 = Color.GREEN;
+	public static Color bodyArmorColor5 = Color.BLUE;
 	public static ArrayList<Color> bodyArmorColors;
 
 	public static ArrayList<Texture> legArmorTextures;
@@ -84,6 +87,9 @@ public class Human extends Actor {
 		bodyArmorColors = new ArrayList<Color>(Color.class);
 		bodyArmorColors.add(bodyArmorColor1);
 		bodyArmorColors.add(bodyArmorColor2);
+		bodyArmorColors.add(bodyArmorColor3);
+		bodyArmorColors.add(bodyArmorColor4);
+		bodyArmorColors.add(bodyArmorColor5);
 
 		// Leg Armor
 

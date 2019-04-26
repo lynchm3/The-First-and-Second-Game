@@ -71,7 +71,7 @@ public class TemplatesArmor {
 		// Body Armor
 		Templates.JUMPER = new BodyArmor();
 		Templates.JUMPER.name = "Jumper";
-		Templates.JUMPER.imageTexture = getGlobalImage("jumper.png", true);
+		Templates.JUMPER.imageTexture = getGlobalImage("jumper_1.png", true);
 		Templates.JUMPER.armUpperTexture = getGlobalImage("jumper_arm_upper.png", true);
 		Templates.JUMPER.armLowerTexture = getGlobalImage("jumper_arm_lower.png", true);
 		Templates.JUMPER.totalHealth = Templates.JUMPER.remainingHealth = 20;
