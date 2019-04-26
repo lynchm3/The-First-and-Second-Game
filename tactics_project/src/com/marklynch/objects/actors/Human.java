@@ -21,13 +21,26 @@ public class Human extends Actor {
 	public static Color hairColor2 = Color.WHITE;
 	public static ArrayList<Color> hairColors;
 
-	public static Texture jumper1 = ResourceUtils.getGlobalImage("jumper_1.png", true);
-	public static Texture jumper2 = ResourceUtils.getGlobalImage("jumper_2.png", true);
-	public static ArrayList<Texture> jumperTextures;
+	public static ArrayList<Texture> helmetTextures;
+	public static Texture helmet1 = ResourceUtils.getGlobalImage("helmet_1.png", true);
+	public static Texture helmet2 = ResourceUtils.getGlobalImage("helmet_2.png", true);
+	public static Color helmetColor1 = Color.BLACK;
+	public static Color helmetColor2 = Color.WHITE;
+	public static ArrayList<Color> helmetColors;
 
-	public static Color jumperColor1 = Color.BLACK;
-	public static Color jumperColor2 = Color.WHITE;
-	public static ArrayList<Color> jumperColors;
+	public static ArrayList<Texture> bodyArmorTextures;
+	public static Texture bodyArmor1 = ResourceUtils.getGlobalImage("jumper_1.png", true);
+	public static Texture bodyArmor2 = ResourceUtils.getGlobalImage("jumper_2.png", true);
+	public static Color bodyArmorColor1 = Color.BLACK;
+	public static Color bodyArmorColor2 = Color.WHITE;
+	public static ArrayList<Color> bodyArmorColors;
+
+	public static ArrayList<Texture> legArmorTextures;
+	public static Texture legArmor1 = ResourceUtils.getGlobalImage("leg_armor_1.png", true);
+	public static Texture legArmor2 = ResourceUtils.getGlobalImage("leg_armor_2.png", true);
+	public static Color legArmorColor1 = Color.BLACK;
+	public static Color legArmorColor2 = Color.WHITE;
+	public static ArrayList<Color> legArmorColors;
 
 	public Human() {
 		torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", true);
@@ -44,9 +57,6 @@ public class Human extends Actor {
 	public static void loadStaticImages() {
 
 		// Hair
-		hair1 = ResourceUtils.getGlobalImage("hair_1.png", true);
-		hair2 = ResourceUtils.getGlobalImage("hair_2.png", true);
-
 		hairTextures = new ArrayList<Texture>(Texture.class);
 		hairTextures.add(hair1);
 		hairTextures.add(hair2);
@@ -55,17 +65,35 @@ public class Human extends Actor {
 		hairColors.add(hairColor1);
 		hairColors.add(hairColor2);
 
-		// Jumper
-		jumper1 = ResourceUtils.getGlobalImage("jumper_1.png", true);
-		jumper2 = ResourceUtils.getGlobalImage("jumper_2.png", true);
+		// Helmet
 
-		jumperTextures = new ArrayList<Texture>(Texture.class);
-		jumperTextures.add(jumper1);
-		jumperTextures.add(jumper2);
+		helmetTextures = new ArrayList<Texture>(Texture.class);
+		helmetTextures.add(helmet1);
+		helmetTextures.add(helmet2);
 
-		jumperColors = new ArrayList<Color>(Color.class);
-		jumperColors.add(jumperColor1);
-		jumperColors.add(jumperColor2);
+		helmetColors = new ArrayList<Color>(Color.class);
+		helmetColors.add(helmetColor1);
+		helmetColors.add(helmetColor2);
+
+		// Body Armor
+
+		bodyArmorTextures = new ArrayList<Texture>(Texture.class);
+		bodyArmorTextures.add(bodyArmor1);
+		bodyArmorTextures.add(bodyArmor2);
+
+		bodyArmorColors = new ArrayList<Color>(Color.class);
+		bodyArmorColors.add(bodyArmorColor1);
+		bodyArmorColors.add(bodyArmorColor2);
+
+		// Leg Armor
+
+		legArmorTextures = new ArrayList<Texture>(Texture.class);
+		legArmorTextures.add(legArmor1);
+		legArmorTextures.add(legArmor2);
+
+		legArmorColors = new ArrayList<Color>(Color.class);
+		legArmorColors.add(legArmorColor1);
+		legArmorColors.add(legArmorColor2);
 
 	}
 

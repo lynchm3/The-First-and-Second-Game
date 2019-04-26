@@ -108,9 +108,11 @@ public class Actor extends GameObject {
 	public GameObject equippedBeforePickingUpObject = null;
 
 	public Helmet helmet;
+	public Color helmetColor = Human.helmetColors.get(0);
 	public BodyArmor bodyArmor;
-	public Color bodyArmorColor = Color.GREEN;
+	public Color bodyArmorColor = Human.bodyArmorColors.get(0);
 	public LegArmor legArmor;
+	public Color legArmorColor = Human.legArmorColors.get(0);
 
 	public boolean canOpenDoors = false;
 	public boolean canEquipWeapons = false;
@@ -131,7 +133,7 @@ public class Actor extends GameObject {
 	public Texture stepRightTexture = null;
 	public Texture currentStepTexture = null;
 	public Texture hairImageTexture;
-	public Color hairColor = Color.GREEN;// = ResourceUtils.getGlobalImage("hair_1.png", false);
+	public Color hairColor = Human.hairColors.get(0);// = ResourceUtils.getGlobalImage("hair_1.png", false);
 
 	// Arms
 	public Texture armImageTexture;// = ResourceUtils.getGlobalImage("arm.png", false);
@@ -721,7 +723,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
 					helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,
 					helmetPositionYInPixels + helmet.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards, false,
-					color);
+					helmetColor);
 			if (highlight) {
 				TextureUtils.drawTexture(this.helmet.imageTexture, 0.5f, helmetPositionXInPixels,
 						helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,
@@ -783,7 +785,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
 					legArmorPositionYInPixels + legArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
-					false, color);
+					false, legArmorColor);
 			if (highlight) {
 				TextureUtils.drawTexture(this.legArmor.imageTexture, 0.5f, legArmorPositionXInPixels,
 						legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
@@ -945,7 +947,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(this.bodyArmor.armLowerTexture, alpha, rightArmDrawX, elbowDrawY,
 					rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
 					elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
-					false, color);
+					false, bodyArmorColor);
 			if (highlight) {
 				TextureUtils.drawTexture(this.bodyArmor.armLowerTexture, 0.5f, rightArmDrawX, elbowDrawY,
 						rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
@@ -996,7 +998,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(bodyArmor.armUpperTexture, alpha, rightArmDrawX, shoulderDrawY,
 					rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
 					shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
-					false, false, color);
+					false, false, bodyArmorColor);
 			if (highlight) {
 
 				TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, rightArmDrawX, shoulderDrawY,
@@ -1087,7 +1089,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(bodyArmor.armLowerTexture, alpha, leftArmDrawX, elbowDrawY,
 					leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
 					elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
-					false, color);
+					false, bodyArmorColor);
 			if (highlight) {
 
 				TextureUtils.drawTexture(bodyArmor.armLowerTexture, 0.5f, leftArmDrawX, elbowDrawY,
@@ -1138,7 +1140,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(bodyArmor.armUpperTexture, alpha, leftArmDrawX, shoulderDrawY,
 					leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
 					shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
-					false, false, color);
+					false, false, bodyArmorColor);
 			if (highlight) {
 				TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, leftArmDrawX, shoulderDrawY,
 						leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
@@ -1267,7 +1269,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(legArmor.legLowerTexture, 1f, leftLegDrawX, kneeDrawY,
 					leftLegDrawX + legArmor.legLowerTexture.getWidth(),
 					kneeDrawY + legArmor.legLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
-					false, color);
+					false, legArmorColor);
 			if (highlight) {
 
 				TextureUtils.drawTexture(legArmor.legLowerTexture, 0.5f, leftLegDrawX, kneeDrawY,
@@ -1302,7 +1304,7 @@ public class Actor extends GameObject {
 
 			TextureUtils.drawTextureWithinBounds(legArmor.legUpperTexture, alpha, leftLegDrawX, hipDrawY,
 					leftLegDrawX + legArmor.legUpperTexture.getWidth(), hipDrawY + legArmor.legUpperTexture.getHeight(),
-					boundsX1, boundsY1, boundsX2, boundsY2, false, false, color);
+					boundsX1, boundsY1, boundsX2, boundsY2, false, false, legArmorColor);
 			if (highlight) {
 				TextureUtils.drawTexture(legArmor.legUpperTexture, 0.5f, leftLegDrawX, hipDrawY,
 						leftLegDrawX + legArmor.legUpperTexture.getWidth(),
@@ -1387,7 +1389,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(legArmor.legLowerTexture, 1f, rightLegDrawX, kneeDrawY,
 					rightLegDrawX + legArmor.legLowerTexture.getWidth(),
 					kneeDrawY + legArmor.legLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
-					false, color);
+					false, legArmorColor);
 			if (highlight) {
 
 				TextureUtils.drawTexture(legArmor.legLowerTexture, 0.5f, rightLegDrawX, kneeDrawY,
@@ -1423,7 +1425,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(legArmor.legUpperTexture, alpha, rightLegDrawX, hipDrawY,
 					rightLegDrawX + legArmor.legUpperTexture.getWidth(),
 					hipDrawY + legArmor.legUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
-					false, color);
+					false, legArmorColor);
 			if (highlight) {
 				TextureUtils.drawTexture(legArmor.legUpperTexture, 0.5f, rightLegDrawX, hipDrawY,
 						rightLegDrawX + legArmor.legUpperTexture.getWidth(),

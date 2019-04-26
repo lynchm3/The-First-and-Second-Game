@@ -53,10 +53,12 @@ public class CharacterCreation implements Draggable, Scrollable {
 	static LevelButton buttonOnLegs;
 	static LevelButton buttonOnLegsLeft;
 	static LevelButton buttonOnLegsRight;
+	static int onLegsColorIndex = 0;
 
 	static LevelButton buttonOnHead;
 	static LevelButton buttonOnHeadLeft;
 	static LevelButton buttonOnHeadRight;
+	static int onHeadColorIndex = 0;
 
 	static LevelButton buttonWeapon;
 	static LevelButton buttonWeaponLeft;
@@ -105,6 +107,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonItemLeft.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+//				itemTypeIndex--;
+//				if (itemTypeIndex < 0) {
+//					itemTypeIndex = Human.itemTextures.size() - 1;
+//				}
+//				Level.player.itemImageTexture = Human.itemTextures.get(itemTypeIndex);
 			}
 		});
 		buttons.add(buttonItemLeft);
@@ -114,6 +121,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonItemRight.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+//				itemTypeIndex++;
+//				if (itemTypeIndex >= Human.itemTextures.size()) {
+//					itemTypeIndex = 0;
+//				}
+//				Level.player.itemImageTexture = Human.itemTextures.get(itemTypeIndex);
 			}
 		});
 		buttons.add(buttonItemRight);
@@ -134,6 +146,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonWeaponLeft.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+//				weaponTypeIndex--;
+//				if (weaponTypeIndex < 0) {
+//					weaponTypeIndex = Human.weaponTextures.size() - 1;
+//				}
+//				Level.player.weaponTexture = Human.weaponTextures.get(weaponTypeIndex);
 			}
 		});
 		buttons.add(buttonWeaponLeft);
@@ -143,6 +160,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonWeaponRight.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+//				weaponTypeIndex++;
+//				if (weaponTypeIndex >= Human.weaponTextures.size()) {
+//					weaponTypeIndex = 0;
+//				}
+//				Level.player.weaponTexture = Human.weaponTextures.get(weaponTypeIndex);
 			}
 		});
 		buttons.add(buttonWeaponRight);
@@ -163,6 +185,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonOnHeadLeft.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				onHeadColorIndex--;
+				if (onHeadColorIndex < 0) {
+					onHeadColorIndex = Human.helmetColors.size() - 1;
+				}
+				Level.player.helmetColor = Human.helmetColors.get(onHeadColorIndex);
 			}
 		});
 		buttons.add(buttonOnHeadLeft);
@@ -172,6 +199,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonOnHeadRight.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				onHeadColorIndex++;
+				if (onHeadColorIndex >= Human.helmetColors.size()) {
+					onHeadColorIndex = 0;
+				}
+				Level.player.helmetColor = Human.helmetColors.get(onHeadColorIndex);
 			}
 		});
 		buttons.add(buttonOnHeadRight);
@@ -192,6 +224,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonOnLegsLeft.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				onLegsColorIndex--;
+				if (onLegsColorIndex < 0) {
+					onLegsColorIndex = Human.legArmorColors.size() - 1;
+				}
+				Level.player.legArmorColor = Human.legArmorColors.get(onLegsColorIndex);
 			}
 		});
 		buttons.add(buttonOnLegsLeft);
@@ -201,6 +238,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonOnLegsRight.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				onLegsColorIndex++;
+				if (onLegsColorIndex >= Human.legArmorColors.size()) {
+					onLegsColorIndex = 0;
+				}
+				Level.player.legArmorColor = Human.legArmorColors.get(hairColorIndex);
 			}
 		});
 		buttons.add(buttonOnLegsRight);
@@ -223,9 +265,9 @@ public class CharacterCreation implements Draggable, Scrollable {
 			public void click() {
 				onTorsoColorIndex--;
 				if (onTorsoColorIndex < 0) {
-					onTorsoColorIndex = Human.jumperColors.size() - 1;
+					onTorsoColorIndex = Human.bodyArmorColors.size() - 1;
 				}
-				Level.player.bodyArmorColor = Human.jumperColors.get(onTorsoColorIndex);
+				Level.player.bodyArmorColor = Human.bodyArmorColors.get(onTorsoColorIndex);
 			}
 		});
 		buttons.add(buttonOnTorsoLeft);
@@ -236,10 +278,10 @@ public class CharacterCreation implements Draggable, Scrollable {
 			@Override
 			public void click() {
 				onTorsoColorIndex++;
-				if (onTorsoColorIndex >= Human.jumperColors.size()) {
+				if (onTorsoColorIndex >= Human.bodyArmorColors.size()) {
 					onTorsoColorIndex = 0;
 				}
-				Level.player.bodyArmorColor = Human.jumperColors.get(onTorsoColorIndex);
+				Level.player.bodyArmorColor = Human.bodyArmorColors.get(onTorsoColorIndex);
 			}
 		});
 		buttons.add(buttonOnTorsoRight);
@@ -261,6 +303,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonSkinLeft.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				hairTypeIndex--;
+				if (hairTypeIndex < 0) {
+					hairTypeIndex = Human.hairTextures.size() - 1;
+				}
+				Level.player.hairImageTexture = Human.hairTextures.get(hairTypeIndex);
 			}
 		});
 		buttons.add(buttonSkinLeft);
@@ -270,6 +317,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonSkinRight.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				hairColorIndex++;
+				if (hairColorIndex >= Human.hairTextures.size()) {
+					hairColorIndex = 0;
+				}
+				Level.player.hairColor = Human.hairColors.get(hairColorIndex);
 			}
 		});
 		buttons.add(buttonSkinRight);
@@ -292,7 +344,7 @@ public class CharacterCreation implements Draggable, Scrollable {
 			public void click() {
 				hairColorIndex--;
 				if (hairColorIndex < 0) {
-					hairColorIndex = Human.hairTextures.size() - 1;
+					hairColorIndex = Human.hairColors.size() - 1;
 				}
 				Level.player.hairColor = Human.hairColors.get(hairColorIndex);
 			}
@@ -305,7 +357,7 @@ public class CharacterCreation implements Draggable, Scrollable {
 			@Override
 			public void click() {
 				hairColorIndex++;
-				if (hairColorIndex >= Human.hairTextures.size()) {
+				if (hairColorIndex >= Human.hairColors.size()) {
 					hairColorIndex = 0;
 				}
 				Level.player.hairColor = Human.hairColors.get(hairColorIndex);
