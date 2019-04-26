@@ -21,6 +21,14 @@ public class Human extends Actor {
 	public static Color hairColor2 = Color.WHITE;
 	public static ArrayList<Color> hairColors;
 
+	public static Texture jumper1 = ResourceUtils.getGlobalImage("jumper_1.png", true);
+	public static Texture jumper2 = ResourceUtils.getGlobalImage("jumper_2.png", true);
+	public static ArrayList<Texture> jumperTextures;
+
+	public static Color jumperColor1 = Color.BLACK;
+	public static Color jumperColor2 = Color.WHITE;
+	public static ArrayList<Color> jumperColors;
+
 	public Human() {
 		torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", true);
 		pelvisImageTexture = ResourceUtils.getGlobalImage("hero_lower.png", true);
@@ -34,8 +42,11 @@ public class Human extends Actor {
 	}
 
 	public static void loadStaticImages() {
+
+		// Hair
 		hair1 = ResourceUtils.getGlobalImage("hair_1.png", true);
 		hair2 = ResourceUtils.getGlobalImage("hair_2.png", true);
+
 		hairTextures = new ArrayList<Texture>(Texture.class);
 		hairTextures.add(hair1);
 		hairTextures.add(hair2);
@@ -43,6 +54,19 @@ public class Human extends Actor {
 		hairColors = new ArrayList<Color>(Color.class);
 		hairColors.add(hairColor1);
 		hairColors.add(hairColor2);
+
+		// Jumper
+		jumper1 = ResourceUtils.getGlobalImage("jumper_1.png", true);
+		jumper2 = ResourceUtils.getGlobalImage("jumper_2.png", true);
+
+		jumperTextures = new ArrayList<Texture>(Texture.class);
+		jumperTextures.add(jumper1);
+		jumperTextures.add(jumper2);
+
+		jumperColors = new ArrayList<Color>(Color.class);
+		jumperColors.add(jumperColor1);
+		jumperColors.add(jumperColor2);
+
 	}
 
 	@Override

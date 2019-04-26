@@ -22,7 +22,7 @@ public class CharacterCreation implements Draggable, Scrollable {
 	String hairType = "Hair Type";
 	String hairColor = "Hair Color";
 	String skin = "Skin";
-	String onTorso = "On Torso";
+	String onTorso = "Jumper";
 	String onLegs = "On Legs";
 	String onHead = "On Head";
 	String weapon = "Weapon";
@@ -48,6 +48,7 @@ public class CharacterCreation implements Draggable, Scrollable {
 	static LevelButton buttonOnTorso;
 	static LevelButton buttonOnTorsoLeft;
 	static LevelButton buttonOnTorsoRight;
+	static int onTorsoColorIndex = 0;
 
 	static LevelButton buttonOnLegs;
 	static LevelButton buttonOnLegsLeft;
@@ -220,6 +221,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonOnTorsoLeft.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				onTorsoColorIndex--;
+				if (onTorsoColorIndex < 0) {
+					onTorsoColorIndex = Human.jumperColors.size() - 1;
+				}
+				Level.player.bodyArmorColor = Human.jumperColors.get(onTorsoColorIndex);
 			}
 		});
 		buttons.add(buttonOnTorsoLeft);
@@ -229,6 +235,11 @@ public class CharacterCreation implements Draggable, Scrollable {
 		buttonOnTorsoRight.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				onTorsoColorIndex++;
+				if (onTorsoColorIndex >= Human.jumperColors.size()) {
+					onTorsoColorIndex = 0;
+				}
+				Level.player.bodyArmorColor = Human.jumperColors.get(onTorsoColorIndex);
 			}
 		});
 		buttons.add(buttonOnTorsoRight);

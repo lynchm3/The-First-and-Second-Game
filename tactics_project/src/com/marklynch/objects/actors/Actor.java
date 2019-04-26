@@ -109,6 +109,7 @@ public class Actor extends GameObject {
 
 	public Helmet helmet;
 	public BodyArmor bodyArmor;
+	public Color bodyArmorColor = Color.GREEN;
 	public LegArmor legArmor;
 
 	public boolean canOpenDoors = false;
@@ -753,7 +754,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(this.bodyArmor.backTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels + bodyArmor.width, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels + bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
-					false, color);
+					false, bodyArmorColor);
 			if (highlight) {
 				TextureUtils.drawTexture(this.bodyArmor.backTexture, 0.5f, bodyArmorPositionXInPixels,
 						bodyArmorPositionYInPixels + bodyArmor.width, bodyArmorPositionXInPixels,
@@ -805,7 +806,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
 					bodyArmorPositionYInPixels + bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
-					false, color);
+					false, bodyArmorColor);
 
 			if (highlight) {
 				TextureUtils.drawTexture(this.bodyArmor.imageTexture, 0.5f, bodyArmorPositionXInPixels,
