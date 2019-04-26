@@ -110,7 +110,6 @@ public class Actor extends GameObject {
 	public Helmet helmet;
 	public Color helmetColor = Human.helmetColors.get(0);
 	public BodyArmor bodyArmor;
-	public Color bodyArmorColor = Human.bodyArmorColors.get(0);
 	public LegArmor legArmor;
 	public Color legArmorColor = Human.legArmorColors.get(0);
 
@@ -756,7 +755,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(this.bodyArmor.backTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels + bodyArmor.width, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels + bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
-					false, bodyArmorColor);
+					false, color);
 			if (highlight) {
 				TextureUtils.drawTexture(this.bodyArmor.backTexture, 0.5f, bodyArmorPositionXInPixels,
 						bodyArmorPositionYInPixels + bodyArmor.width, bodyArmorPositionXInPixels,
@@ -808,7 +807,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
 					bodyArmorPositionYInPixels + bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, backwards,
-					false, bodyArmorColor);
+					false, color);
 
 			if (highlight) {
 				TextureUtils.drawTexture(this.bodyArmor.imageTexture, 0.5f, bodyArmorPositionXInPixels,
@@ -947,7 +946,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(this.bodyArmor.armLowerTexture, alpha, rightArmDrawX, elbowDrawY,
 					rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
 					elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
-					false, bodyArmorColor);
+					false, color);
 			if (highlight) {
 				TextureUtils.drawTexture(this.bodyArmor.armLowerTexture, 0.5f, rightArmDrawX, elbowDrawY,
 						rightArmDrawX + bodyArmor.armLowerTexture.getWidth(),
@@ -998,7 +997,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(bodyArmor.armUpperTexture, alpha, rightArmDrawX, shoulderDrawY,
 					rightArmDrawX + bodyArmor.armUpperTexture.getWidth(),
 					shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
-					false, false, bodyArmorColor);
+					false, false, color);
 			if (highlight) {
 
 				TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, rightArmDrawX, shoulderDrawY,
@@ -1089,7 +1088,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(bodyArmor.armLowerTexture, alpha, leftArmDrawX, elbowDrawY,
 					leftArmDrawX + bodyArmor.armLowerTexture.getWidth(),
 					elbowDrawY + bodyArmor.armLowerTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2, false,
-					false, bodyArmorColor);
+					false, color);
 			if (highlight) {
 
 				TextureUtils.drawTexture(bodyArmor.armLowerTexture, 0.5f, leftArmDrawX, elbowDrawY,
@@ -1140,7 +1139,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(bodyArmor.armUpperTexture, alpha, leftArmDrawX, shoulderDrawY,
 					leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),
 					shoulderDrawY + bodyArmor.armUpperTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
-					false, false, bodyArmorColor);
+					false, false, color);
 			if (highlight) {
 				TextureUtils.drawTexture(bodyArmor.armUpperTexture, 0.5f, leftArmDrawX, shoulderDrawY,
 						leftArmDrawX + bodyArmor.armUpperTexture.getWidth(),

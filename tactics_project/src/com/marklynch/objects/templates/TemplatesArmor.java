@@ -4,6 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
+import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.armor.BodyArmor;
 import com.marklynch.objects.armor.Helmet;
 import com.marklynch.objects.armor.LegArmor;
@@ -85,6 +86,7 @@ public class TemplatesArmor {
 		Templates.JUMPER.value = 30;
 		Templates.JUMPER.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_RES, new Stat(HIGH_LEVEL_STATS.SLASH_RES, 1));
 		Templates.JUMPER.templateId = GameObject.generateNewTemplateId();
+		Human.bodyArmors.add(Templates.JUMPER);
 
 		Templates.APRON = new BodyArmor();
 		Templates.APRON.name = "Apron";
@@ -97,6 +99,7 @@ public class TemplatesArmor {
 		Templates.APRON.weight = 17f;
 		Templates.APRON.value = 38;
 		Templates.APRON.templateId = GameObject.generateNewTemplateId();
+		Human.bodyArmors.add(Templates.APRON);
 
 		Templates.ROBE = new BodyArmor();
 		Templates.ROBE.name = "Robe";

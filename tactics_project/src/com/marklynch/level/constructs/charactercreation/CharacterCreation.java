@@ -13,8 +13,6 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
-import com.marklynch.utils.ResourceUtils;
-import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class CharacterCreation implements Draggable, Scrollable {
@@ -84,7 +82,7 @@ public class CharacterCreation implements Draggable, Scrollable {
 	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
 	public ArrayList<Link> objectiveLinks = new ArrayList<Link>();
 
-	public static Texture textureMainMenu;
+//	public static Texture textureMainMenu;
 
 	Color translucentBlack = new Color(0f, 0f, 0f, 0.5f);
 	public final static float blackBarWidth = 300;
@@ -265,9 +263,9 @@ public class CharacterCreation implements Draggable, Scrollable {
 			public void click() {
 				onTorsoColorIndex--;
 				if (onTorsoColorIndex < 0) {
-					onTorsoColorIndex = Human.bodyArmorColors.size() - 1;
+					onTorsoColorIndex = Human.bodyArmors.size() - 1;
 				}
-				Level.player.bodyArmorColor = Human.bodyArmorColors.get(onTorsoColorIndex);
+				Level.player.bodyArmor = Human.bodyArmors.get(onTorsoColorIndex);
 			}
 		});
 		buttons.add(buttonOnTorsoLeft);
@@ -278,10 +276,10 @@ public class CharacterCreation implements Draggable, Scrollable {
 			@Override
 			public void click() {
 				onTorsoColorIndex++;
-				if (onTorsoColorIndex >= Human.bodyArmorColors.size()) {
+				if (onTorsoColorIndex >= Human.bodyArmors.size()) {
 					onTorsoColorIndex = 0;
 				}
-				Level.player.bodyArmorColor = Human.bodyArmorColors.get(onTorsoColorIndex);
+				Level.player.bodyArmor = Human.bodyArmors.get(onTorsoColorIndex);
 			}
 		});
 		buttons.add(buttonOnTorsoRight);
@@ -410,7 +408,7 @@ public class CharacterCreation implements Draggable, Scrollable {
 	}
 
 	public static void loadStaticImages() {
-		textureMainMenu = ResourceUtils.getGlobalImage("main_menu.png", false);
+//		textureMainMenu = ResourceUtils.getGlobalImage("main_menu.png", false);
 	}
 
 	public void resize() {
@@ -432,8 +430,6 @@ public class CharacterCreation implements Draggable, Scrollable {
 	}
 
 	public void drawStaticUI() {
-
-		// links.clear();
 
 		// Black cover
 		QuadUtils.drawQuad(translucentBlack, 0, 0, Game.windowWidth, Game.windowHeight);

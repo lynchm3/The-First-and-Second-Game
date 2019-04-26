@@ -3,6 +3,7 @@ package com.marklynch.objects.actors;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.armor.BodyArmor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
@@ -28,15 +29,12 @@ public class Human extends Actor {
 	public static Color helmetColor2 = Color.WHITE;
 	public static ArrayList<Color> helmetColors;
 
-	public static ArrayList<Texture> bodyArmorTextures;
-	public static Texture bodyArmor1 = ResourceUtils.getGlobalImage("jumper_1.png", true);
-	public static Texture bodyArmor2 = ResourceUtils.getGlobalImage("jumper_2.png", true);
+	public static ArrayList<BodyArmor> bodyArmors;
 	public static Color bodyArmorColor1 = new Color(170, 193, 201);
 	public static Color bodyArmorColor2 = Color.WHITE;
 	public static Color bodyArmorColor3 = Color.RED;
 	public static Color bodyArmorColor4 = Color.GREEN;
 	public static Color bodyArmorColor5 = Color.BLUE;
-	public static ArrayList<Color> bodyArmorColors;
 
 	public static ArrayList<Texture> legArmorTextures;
 	public static Texture legArmor1 = ResourceUtils.getGlobalImage("leg_armor_1.png", true);
@@ -79,17 +77,7 @@ public class Human extends Actor {
 		helmetColors.add(helmetColor2);
 
 		// Body Armor
-
-		bodyArmorTextures = new ArrayList<Texture>(Texture.class);
-		bodyArmorTextures.add(bodyArmor1);
-		bodyArmorTextures.add(bodyArmor2);
-
-		bodyArmorColors = new ArrayList<Color>(Color.class);
-		bodyArmorColors.add(bodyArmorColor1);
-		bodyArmorColors.add(bodyArmorColor2);
-		bodyArmorColors.add(bodyArmorColor3);
-		bodyArmorColors.add(bodyArmorColor4);
-		bodyArmorColors.add(bodyArmorColor5);
+		bodyArmors = new ArrayList<BodyArmor>(BodyArmor.class);
 
 		// Leg Armor
 
