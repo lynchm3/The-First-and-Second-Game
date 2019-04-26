@@ -5,6 +5,7 @@ import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
@@ -16,12 +17,17 @@ public class Human extends Actor {
 	public static Texture hair2 = ResourceUtils.getGlobalImage("hair_2.png", true);
 	public static ArrayList<Texture> hairTextures;
 
+	public static Color hairColor1 = Color.BLACK;
+	public static Color hairColor2 = Color.WHITE;
+	public static ArrayList<Color> hairColors;
+
 	public Human() {
 		torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", true);
 		pelvisImageTexture = ResourceUtils.getGlobalImage("hero_lower.png", true);
 		armImageTexture = ResourceUtils.getGlobalImage("arm.png", true);
 		legImageTexture = ResourceUtils.getGlobalImage("leg.png", true);
-		hairImageTexture = ResourceUtils.getGlobalImage("hair_1.png", true);
+		hairImageTexture = hairTextures.get(0);
+		hairColor = hairColors.get(0);
 		canOpenDoors = true;
 		canEquipWeapons = true;
 		type = "Human";
@@ -33,6 +39,10 @@ public class Human extends Actor {
 		hairTextures = new ArrayList<Texture>(Texture.class);
 		hairTextures.add(hair1);
 		hairTextures.add(hair2);
+
+		hairColors = new ArrayList<Color>(Color.class);
+		hairColors.add(hairColor1);
+		hairColors.add(hairColor2);
 	}
 
 	@Override

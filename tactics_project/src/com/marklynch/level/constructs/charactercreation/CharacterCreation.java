@@ -19,7 +19,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class CharacterCreation implements Draggable, Scrollable {
 
-	String hair = "Hair";
+	String hairType = "Hair Type";
+	String hairColor = "Hair Color";
 	String skin = "Skin";
 	String onTorso = "On Torso";
 	String onLegs = "On Legs";
@@ -30,10 +31,15 @@ public class CharacterCreation implements Draggable, Scrollable {
 	String left = "<";
 	String right = ">";
 
-	static LevelButton buttonHair;
-	static LevelButton buttonHairLeft;
-	static LevelButton buttonHairRight;
-	static int hairIndex = 1;
+	static LevelButton buttonHairType;
+	static LevelButton buttonHairTypeLeft;
+	static LevelButton buttonHairTypeRight;
+	static int hairTypeIndex = 0;
+
+	static LevelButton buttonHairColor;
+	static LevelButton buttonHairColorLeft;
+	static LevelButton buttonHairColorRight;
+	static int hairColorIndex = 0;
 
 	static LevelButton buttonSkin;
 	static LevelButton buttonSkinLeft;
@@ -259,46 +265,81 @@ public class CharacterCreation implements Draggable, Scrollable {
 
 		mainButtonCount++;
 
-		buttonHair = new LevelButton(buttonsX, buttonsY + 30 * mainButtonCount, 70f, 30f, "end_turn_button.png",
-				"end_turn_button.png", hair, true, false, Color.BLACK, Color.WHITE, null);
-		buttonHair.setClickListener(new ClickListener() {
+		buttonHairColor = new LevelButton(buttonsX, buttonsY + 30 * mainButtonCount, 70f, 30f, "end_turn_button.png",
+				"end_turn_button.png", hairColor, true, false, Color.BLACK, Color.WHITE, null);
+		buttonHairColor.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
 			}
 		});
-		buttons.add(buttonHair);
+		buttons.add(buttonHairColor);
 
-		buttonHairLeft = new LevelButton(buttonsX - 10, buttonsY + 30 * mainButtonCount, 10f, 30f,
+		buttonHairColorLeft = new LevelButton(buttonsX - 10, buttonsY + 30 * mainButtonCount, 10f, 30f,
 				"end_turn_button.png", "end_turn_button.png", left, true, false, Color.BLACK, Color.WHITE, null);
-		buttonHairLeft.setClickListener(new ClickListener() {
+		buttonHairColorLeft.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				hairIndex--;
-				if (hairIndex < 0) {
-					hairIndex = Human.hairTextures.size() - 1;
+				hairColorIndex--;
+				if (hairColorIndex < 0) {
+					hairColorIndex = Human.hairTextures.size() - 1;
 				}
-				Level.player.hairImageTexture = Human.hairTextures.get(hairIndex);
+				Level.player.hairColor = Human.hairColors.get(hairColorIndex);
 			}
 		});
-		buttons.add(buttonHairLeft);
+		buttons.add(buttonHairColorLeft);
 
-		buttonHairRight = new LevelButton(buttonsX + 70, buttonsY + 30 * mainButtonCount, 10f, 30f,
+		buttonHairColorRight = new LevelButton(buttonsX + 70, buttonsY + 30 * mainButtonCount, 10f, 30f,
 				"end_turn_button.png", "end_turn_button.png", right, true, false, Color.BLACK, Color.WHITE, null);
-		buttonHairRight.setClickListener(new ClickListener() {
+		buttonHairColorRight.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				hairIndex++;
-				if (hairIndex >= Human.hairTextures.size()) {
-					hairIndex = 0;
+				hairColorIndex++;
+				if (hairColorIndex >= Human.hairTextures.size()) {
+					hairColorIndex = 0;
 				}
-				Level.player.hairImageTexture = Human.hairTextures.get(hairIndex);
-				System.out.println("Human.hairTextures = " + Human.hairTextures);
-				System.out.println("Human.hair1 = " + Human.hair1);
-				System.out.println("Human.hair2 = " + Human.hair2);
-				System.out.println("Level.player.hairImageTexture = " + Level.player.hairImageTexture);
+				Level.player.hairColor = Human.hairColors.get(hairColorIndex);
 			}
 		});
-		buttons.add(buttonHairRight);
+		buttons.add(buttonHairColorRight);
+
+		mainButtonCount++;
+
+		buttonHairType = new LevelButton(buttonsX, buttonsY + 30 * mainButtonCount, 70f, 30f, "end_turn_button.png",
+				"end_turn_button.png", hairType, true, false, Color.BLACK, Color.WHITE, null);
+		buttonHairType.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+			}
+		});
+		buttons.add(buttonHairType);
+
+		buttonHairTypeLeft = new LevelButton(buttonsX - 10, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", left, true, false, Color.BLACK, Color.WHITE, null);
+		buttonHairTypeLeft.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				hairTypeIndex--;
+				if (hairTypeIndex < 0) {
+					hairTypeIndex = Human.hairTextures.size() - 1;
+				}
+				Level.player.hairImageTexture = Human.hairTextures.get(hairTypeIndex);
+			}
+		});
+		buttons.add(buttonHairTypeLeft);
+
+		buttonHairTypeRight = new LevelButton(buttonsX + 70, buttonsY + 30 * mainButtonCount, 10f, 30f,
+				"end_turn_button.png", "end_turn_button.png", right, true, false, Color.BLACK, Color.WHITE, null);
+		buttonHairTypeRight.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				hairTypeIndex++;
+				if (hairTypeIndex >= Human.hairTextures.size()) {
+					hairTypeIndex = 0;
+				}
+				Level.player.hairImageTexture = Human.hairTextures.get(hairTypeIndex);
+			}
+		});
+		buttons.add(buttonHairTypeRight);
 
 		mainButtonCount++;
 

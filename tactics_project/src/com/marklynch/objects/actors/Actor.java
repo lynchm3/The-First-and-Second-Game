@@ -129,7 +129,8 @@ public class Actor extends GameObject {
 	public Texture stepLeftTexture = null;
 	public Texture stepRightTexture = null;
 	public Texture currentStepTexture = null;
-	public Texture hairImageTexture;// = ResourceUtils.getGlobalImage("hair_1.png", false);
+	public Texture hairImageTexture;
+	public Color hairColor = Color.GREEN;// = ResourceUtils.getGlobalImage("hair_1.png", false);
 
 	// Arms
 	public Texture armImageTexture;// = ResourceUtils.getGlobalImage("arm.png", false);
@@ -734,7 +735,7 @@ public class Actor extends GameObject {
 			TextureUtils.drawTextureWithinBounds(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
 					bodyArmorPositionYInPixels + hairImageTexture.getHeight(), boundsX1, boundsY1, boundsX2, boundsY2,
-					backwards, false, color);
+					backwards, false, hairColor);
 			if (highlight) {
 				TextureUtils.drawTexture(this.hairImageTexture, 0.5f, bodyArmorPositionXInPixels,
 						bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
