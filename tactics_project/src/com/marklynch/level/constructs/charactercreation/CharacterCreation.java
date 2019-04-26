@@ -23,8 +23,8 @@ public class CharacterCreation implements Draggable, Scrollable {
 	String hairColor = "Hair Color";
 	String skin = "Skin";
 	String onTorso = "Jumper";
-	String onLegs = "On Legs";
-	String onHead = "On Head";
+	String onLegs = "Pants";
+	String onHead = "Hat";
 	String weapon = "Weapon";
 	String item = "Item";
 
@@ -440,12 +440,21 @@ public class CharacterCreation implements Draggable, Scrollable {
 
 		QuadUtils.drawQuad(Color.BLACK, 0, 0, blackBarWidth, Game.windowHeight);
 
-		TextureUtils.drawTexture(textureMainMenu, titleX, titleY, titleX + 640, titleY + 128);
+//		TextureUtils.drawTexture(textureMainMenu, titleX, titleY, titleX + 640, titleY + 128);
 
 		// Buttons
 		for (Button button : buttons) {
 			button.draw();
 		}
+
+		// Draw actor
+		float actorScale = 2f;
+		int actorX = (int) (Game.halfWindowWidth);// - Game.level.player.width / 2 * actorScale);
+		int actorY = (int) (Game.halfWindowHeight);// - Game.level.player.height / 2 * actorScale);
+
+		Level.player.drawActor(actorX, actorY, 1, false, actorScale, actorScale, 0f, Integer.MIN_VALUE,
+				Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, TextureUtils.neutralColor, true, false,
+				Level.player.backwards, false, false);
 	}
 
 	@Override
