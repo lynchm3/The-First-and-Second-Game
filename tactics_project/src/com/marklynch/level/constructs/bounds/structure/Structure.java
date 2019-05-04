@@ -24,7 +24,8 @@ public class Structure {
 	public ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>(StructureSection.class);
 	public ArrayList<Square> entranceSquares = new ArrayList<Square>(Square.class);
 	public Texture mapIconForStructure;
-	int gridX1, gridX2, gridY1, gridY2;
+	int gridX1, gridX2, gridY1, gridY2, gridCenterX, gridCenterY;
+	public Square centreSquare;
 	ArrayList<Square> floorSquares = new ArrayList<Square>(Square.class);
 	ArrayList<Square> wallSquares = new ArrayList<Square>(Square.class);
 	ArrayList<Square> featureSquares = new ArrayList<Square>(Square.class);
@@ -49,6 +50,9 @@ public class Structure {
 		this.gridY1 = overlayY1;
 		this.gridX2 = overlayX2;
 		this.gridY2 = overlayY2;
+		this.gridCenterX = (gridX1 + gridX2) / 2;
+		this.gridCenterY = (gridY1 + gridY2) / 2;
+		this.centreSquare = Level.squares[gridCenterX][gridCenterY];
 		this.entranceSquares = entrances;
 		this.blocksLineOfSight = blocksLineOfSight;
 		this.level = level;

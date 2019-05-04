@@ -364,8 +364,8 @@ public class Editor {
 
 		generateTestObjects();
 		new AreaList();
-		Game.level.fullQuestList.makeQuests();
 		AreaList.buildAreas();
+		Game.level.fullQuestList.makeQuests();
 		Game.level.setSquareDefaultImageTextures();
 	}
 

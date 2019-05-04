@@ -52,6 +52,7 @@ import com.marklynch.objects.inanimateobjects.RemoteDoor;
 import com.marklynch.objects.inanimateobjects.Searchable;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.SeesawPart;
+import com.marklynch.objects.inanimateobjects.Signpost;
 import com.marklynch.objects.inanimateobjects.SmallHidingPlace;
 import com.marklynch.objects.inanimateobjects.Spikes;
 import com.marklynch.objects.inanimateobjects.Storage;
@@ -248,7 +249,7 @@ public class Templates {
 
 	public static GameObject SIGN;
 
-	public static GameObject SIGNPOST;
+	public static Signpost SIGNPOST;
 
 	public static WantedPoster WANTED_POSTER;
 

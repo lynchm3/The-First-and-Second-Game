@@ -65,10 +65,9 @@ public class Conversation {
 	}
 
 	public static Conversation createConversation(Object[] text, GameObject gameObject) {
-		ConversationPart conversationPartYouWontGetOut = new ConversationPart(text, new ConversationResponse[] {},
-				gameObject);
+		ConversationPart conversationPart = new ConversationPart(text, new ConversationResponse[] {}, gameObject);
 
-		return new Conversation(conversationPartYouWontGetOut, gameObject, true);
+		return new Conversation(conversationPart, gameObject, true);
 	}
 
 	public static Conversation createConversation(String text, GameObject gameObject) {

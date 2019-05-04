@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Signpost;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
 
 public class TemplatesReadables {
@@ -60,18 +61,15 @@ public class TemplatesReadables {
 		Templates.WANTED_POSTER.anchorY = 0;
 		Templates.WANTED_POSTER.templateId = GameObject.generateNewTemplateId();
 
-		Templates.SIGNPOST = new GameObject();
+		Templates.SIGNPOST = new Signpost();
 		Templates.SIGNPOST.name = "Signpost";
 		Templates.SIGNPOST.setImageAndExtrapolateSize("signpost.png");
 		Templates.SIGNPOST.totalHealth = Templates.SIGNPOST.remainingHealth = 100;
-		Templates.SIGNPOST.widthRatio = 1f;
 		Templates.SIGNPOST.heightRatio = 1.25f;
 		Templates.SIGNPOST.drawOffsetRatioY = -0.25f;
 		Templates.SIGNPOST.drawOffsetY = Templates.SIGNPOST.drawOffsetRatioY * Game.SQUARE_HEIGHT;
 		Templates.SIGNPOST.weight = 124f;
 		Templates.SIGNPOST.value = 31;
-		Templates.SIGNPOST.anchorX = 0;
-		Templates.SIGNPOST.anchorY = 0;
 		Templates.SIGNPOST.canShareSquare = false;
 		Templates.SIGNPOST.fitsInInventory = false;
 		Templates.SIGNPOST.moveable = false;

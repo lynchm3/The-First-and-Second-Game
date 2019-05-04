@@ -93,13 +93,17 @@ public class StructureRoom implements Idable {
 	}
 
 	public static class RoomPart {
-		public int gridX1, gridY1, gridX2, gridY2;
+		public int gridX1, gridY1, gridX2, gridY2, gridCenterX, gridCenterY;
+		public Square centreSquare;
 
 		public RoomPart(int gridX1, int gridY1, int gridX2, int gridY2) {
 			this.gridX1 = gridX1;
 			this.gridY1 = gridY1;
 			this.gridX2 = gridX2;
 			this.gridY2 = gridY2;
+			this.gridCenterX = (gridX1 + gridX2) / 2;
+			this.gridCenterY = (gridY1 + gridY2) / 2;
+			this.centreSquare = Level.squares[gridCenterX][gridCenterY];
 
 		}
 	}

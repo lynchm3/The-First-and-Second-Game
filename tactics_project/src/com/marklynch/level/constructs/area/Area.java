@@ -21,7 +21,7 @@ public class Area implements Idable {
 	public String name;
 	public Texture image;
 	public int gridX1, gridY1, gridX2, gridY2, gridCenterX, gridCenterY;
-	public Square centreSuqare;
+	public Square centreSquare;
 	public boolean seenByPlayer = false;
 	boolean showOnMap = false;
 	public int level;
@@ -44,7 +44,7 @@ public class Area implements Idable {
 		this.gridY2 = gridY2;
 		this.gridCenterX = (gridX1 + gridX2) / 2;
 		this.gridCenterY = (gridY1 + gridY2) / 2;
-		this.centreSuqare = Level.squares[gridCenterX][gridCenterY];
+		this.centreSquare = Level.squares[gridCenterX][gridCenterY];
 		this.level = level;
 		this.color = color;
 		this.nodes.clear();

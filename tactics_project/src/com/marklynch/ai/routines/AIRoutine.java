@@ -1629,7 +1629,7 @@ public abstract class AIRoutine {
 				AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
 				TinyNeutralWildAnimal.class);
 		if (target == null) {
-			AIRoutineUtils.moveTowards(actor.area.centreSuqare);
+			AIRoutineUtils.moveTowards(actor.area.centreSquare);
 			return true;
 		} else {
 			if (target == null || target.squareGameObjectIsOn == null) {

@@ -5,6 +5,7 @@ import com.marklynch.actions.ActionTalk;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.GroupOfActors;
 import com.marklynch.level.constructs.area.TownForestBuilder;
+import com.marklynch.level.constructs.area.town.AreaTown;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -248,9 +249,12 @@ public class QuestSmallGame extends Quest {
 		lodgeSections.add(new StructureSection("Hunting Lodge", 105, 9, 111, 15, false, false));
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeRooms,
 				new ArrayList<StructurePath>(StructurePath.class), lodgeFeatures, new ArrayList<Square>(Square.class),
-				"building.png", 896, 896 + 640, 896, 896 + 640, true, hunterBrent, new ArrayList<Square>(Square.class),
-				new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE, Square.STONE_TEXTURE, 2);
+				"building.png", AreaTown.posX + 105, AreaTown.posY + 9, AreaTown.posX + 111, AreaTown.posY + 15, true,
+				hunterBrent, new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
+				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(lodge);
+		Templates.HATCHET.makeCopy(Game.level.squares[AreaTown.posX + 3][AreaTown.posY + 3], hunterBrent);
+		Templates.HATCHET.makeCopy(Game.level.squares[AreaTown.posX + 3][AreaTown.posY + 6], hunterBrent);
 
 		// Add hunters
 		GameObject brontsBed = Templates.BED.makeCopy(Game.level.squares[108][10], null);

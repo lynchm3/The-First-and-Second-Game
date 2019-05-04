@@ -89,6 +89,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public Texture floorImageTexture = null;
 
 	public static Texture GRASS_TEXTURE;
+	public static Texture DIGGABLE_GRASS_TEXTURE;
 	public static Texture DARK_GRASS_TEXTURE;
 	public static Texture STONE_TEXTURE;
 	public static Texture MUD_TEXTURE;
@@ -210,6 +211,8 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public static void loadStaticImages() {
 		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png", false);
 		tileColors.put(GRASS_TEXTURE, Color.GREEN);
+		DIGGABLE_GRASS_TEXTURE = ResourceUtils.getGlobalImage("diggable_grass.png", false);
+		tileColors.put(DIGGABLE_GRASS_TEXTURE, Color.GREEN);
 		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png", false);
 		tileColors.put(DARK_GRASS_TEXTURE, Color.GREEN);
 		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png", false);

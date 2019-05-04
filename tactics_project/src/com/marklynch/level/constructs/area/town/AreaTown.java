@@ -15,7 +15,6 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.constructs.journal.AreaList;
-import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
@@ -33,6 +32,7 @@ import com.marklynch.utils.ArrayList;
 public class AreaTown {
 
 	public static int posX = 0, posY = 0;
+	public static Structure joesShop;
 
 	public AreaTown() {
 
@@ -48,8 +48,6 @@ public class AreaTown {
 		Templates.VEIN.makeCopy(Game.level.squares[posX + 2][posY + 3], null, false, Templates.ORE, 0.1f);
 
 		// (Game.level.squares[posX + 2][posY + 3], null);
-		Templates.HATCHET.makeCopy(Game.level.squares[posX + 3][posY + 3], QuestList.questSmallGame.hunterBrent);
-		Templates.HATCHET.makeCopy(Game.level.squares[posX + 3][posY + 6], QuestList.questSmallGame.hunterBrent);
 		Templates.HATCHET.makeCopy(Game.level.squares[posX + 5][posY + 6], null);
 		Templates.HATCHET.makeCopy(Game.level.squares[posX + 1][posY + 6], null);
 		Templates.BLOOD.makeCopy(Game.level.squares[posX + 5][posY + 6], null, 1);
@@ -83,11 +81,10 @@ public class AreaTown {
 		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>(StructureSection.class);
 		shopSections
 				.add(new StructureSection("Trader Joe's Shop", posX + 5, posY + 0, posX + 17, posY + 5, false, false));
-		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
+		joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
 				new ArrayList<StructurePath>(StructurePath.class), shopFeatures, entranceSquares, "building2.png",
-				posX + 640, posY + 640 + 1664, posX + -100, posY + -100 + 868, true, trader,
-				new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_BUILDING,
-				Square.STONE_TEXTURE, 2);
+				posX + 5, posY + 0, posX + 17, posY + 5, true, trader, new ArrayList<Square>(Square.class),
+				new ArrayList<Wall>(Wall.class), Templates.WALL_BUILDING, Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(joesShop);
 		GameObject joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6][posY + 6], trader);
 		joesShopSign.conversation = joesShopSign.createConversation(new Object[] { joesShop.name });
@@ -140,8 +137,8 @@ public class AreaTown {
 				posX + 17 + 35, posY + 5 + 3, false, false));
 		Structure doctorsShop = new Structure("Doctor Mike's Practice", doctorsShopSections, doctorsShopAtriums,
 				new ArrayList<StructurePath>(StructurePath.class), doctorsShopFeatures, doctorsEntranceSquares,
-				"building2.png", posX + 640 + 35, posY + 640 + 1664 + 3, posX + -100 + 35, posY + -100 + 868 + 3, true,
-				doctor, new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
+				"building2.png", posX + 40, posY + 3, posX + 52, posY + 8, true, doctor,
+				new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
 				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(doctorsShop);
 		GameObject doctorsShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6 + 35][posY + 6 + 3], doctor);
@@ -179,6 +176,13 @@ public class AreaTown {
 		Templates.FUR.makeCopy(Game.level.squares[posX + 0][posY + 7], null);
 		Templates.MUSHROOM.makeCopy(Game.level.squares[posX + 0][posY + 8], null);
 		Templates.TREE.makeCopy(Game.level.squares[posX + 1][posY + 2], null);
+		// Diggable 1
+		GameObject mound1 = Templates.MOUND.makeCopy(Level.squares[posX + 13][posY + 8], null);
+		mound1.level = 50;
+		mound1.inventory.add(Templates.ROCK.makeCopy(null, null));
+		mound1.inventory.add(Templates.ROCK.makeCopy(null, null));
+		mound1.inventory.add(Templates.GOLD.makeCopy(null, null, 13));
+		Game.level.squares[posX + 13][posY + 8].setFloorImageTexture(Square.DIGGABLE_GRASS_TEXTURE);
 		Templates.TREE.makeCopy(Game.level.squares[posX + 14][posY + 8], null);
 		Templates.TREE.makeCopy(Game.level.squares[posX + 19][posY + 3], null);
 		Templates.TREE.makeCopy(Game.level.squares[posX + 18][posY + 13], null);
@@ -186,6 +190,11 @@ public class AreaTown {
 		Templates.TREE.makeCopy(Game.level.squares[posX + 12][posY + 8], null);
 		Templates.TREE.makeCopy(Game.level.squares[posX + 27][posY + 3], null);
 		Templates.TREE.makeCopy(Game.level.squares[posX + 23][posY + 5], null);
+		GameObject mound2 = Templates.MOUND.makeCopy(Level.squares[posX + 23][posY + 5], null);
+		mound2.level = 50;
+		mound2.inventory.add(Templates.ROCK.makeCopy(null, null));
+		mound2.inventory.add(Templates.GOLD.makeCopy(null, null, 23));
+		Game.level.squares[posX + 23][posY + 5].setFloorImageTexture(Square.DIGGABLE_GRASS_TEXTURE);
 		Templates.BUSH.makeCopy(Game.level.squares[posX + 17][posY + 19], null);
 
 		// Lake
