@@ -3,6 +3,7 @@ package com.marklynch.objects.inanimateobjects;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
+import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
@@ -54,9 +55,20 @@ public class Signpost extends GameObject {
 			}
 		}
 
-//		conversation = createConversation(generateText());
-		conversation = createConversation(new Object[] { "TST" });
+		signpost.conversation = createConversation(generateText());
+
+//		signpost.conversation = signpost.createConversation(new Object[] { GameObject.upTexture, " Shop  ",
+//				GameObject.rightTexture, " Estates  ", GameObject.downTexture, " Farm" });
+
 		return signpost;
+	}
+
+	public Conversation createConversation(Object[] text) {
+
+		Conversation c = Conversation.createConversation(text, this);
+		System.out.println("c =  " + c);
+
+		return c;
 	}
 
 	public Direction getDirectionObjectIsIn(Object object, Square from) {
@@ -113,12 +125,15 @@ public class Signpost extends GameObject {
 	public Object[] generateText() {
 
 		ArrayList<Object> arrayListOfText = new ArrayList<Object>(Object.class);
+
+		// North
 		if (upObjects.size() > 0) {
 			System.out.println("upObjects.size() > 0");
 			if (arrayListOfText.size() != 0)
 				arrayListOfText.add(TextUtils.NewLine.NEW_LINE);
 			System.out.println("NRTH");
-			arrayListOfText.add("North: ");
+			arrayListOfText.add(GameObject.upTexture);
+			arrayListOfText.add(" ");
 			for (int i = 0; i < upObjects.size(); i++) {
 				arrayListOfText.add(upObjects.get(i));
 				if (i != upObjects.size() - 1)
@@ -127,6 +142,8 @@ public class Signpost extends GameObject {
 		}
 
 		Object[] conversationText = arrayListOfText.toArray(new Object[arrayListOfText.size()]);
+		System.out.println("arrayListOfText.get(0) = " + arrayListOfText.get(0));
+		System.out.println("conversationText = " + conversationText);
 
 //		Object[] conversationText = { "WANTED!", TextUtils.NewLine.NEW_LINE, crimesString, TextUtils.NewLine.NEW_LINE,
 //				Templates.GOLD.imageTexture, "Reward " + reward };
