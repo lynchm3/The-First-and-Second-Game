@@ -145,6 +145,19 @@ public class Signpost extends GameObject {
 			}
 		}
 
+		// East
+		if (rightObjects.size() > 0) {
+			if (arrayListOfText.size() != 0)
+				arrayListOfText.add(TextUtils.NewLine.NEW_LINE);
+			arrayListOfText.add(GameObject.rightTexture);
+			arrayListOfText.add(" ");
+			for (int i = 0; i < rightObjects.size(); i++) {
+				arrayListOfText.add(rightObjects.get(i));
+				if (i != rightObjects.size() - 1)
+					arrayListOfText.add(", ");
+			}
+		}
+
 		// South
 		if (downObjects.size() > 0) {
 			if (arrayListOfText.size() != 0)
@@ -154,6 +167,19 @@ public class Signpost extends GameObject {
 			for (int i = 0; i < downObjects.size(); i++) {
 				arrayListOfText.add(downObjects.get(i));
 				if (i != downObjects.size() - 1)
+					arrayListOfText.add(", ");
+			}
+		}
+
+		// West
+		if (leftObjects.size() > 0) {
+			if (arrayListOfText.size() != 0)
+				arrayListOfText.add(TextUtils.NewLine.NEW_LINE);
+			arrayListOfText.add(GameObject.leftTexture);
+			arrayListOfText.add(" ");
+			for (int i = 0; i < leftObjects.size(); i++) {
+				arrayListOfText.add(leftObjects.get(i));
+				if (i != leftObjects.size() - 1)
 					arrayListOfText.add(", ");
 			}
 		}

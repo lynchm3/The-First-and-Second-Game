@@ -12,6 +12,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.constructs.conversation.ConversationForKidnapper;
+import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.quest.Quest;
@@ -194,7 +195,8 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Signpost 5,20
 		GameObject signpost = Templates.SIGNPOST.makeCopy(Game.level.squares[AreaTown.posX + 5][AreaTown.posY + 20],
-				null, AreaTown.joesShop, QuestThePigs.farmHouseStructure);
+				null, AreaTown.joesShop, QuestThePigs.farmHouseStructure, AreaTown.doctorsShop, AreaList.townForest,
+				AreaList.mines);
 
 		// "North - Shop, Hunter's Lodge; East - Estates; South - Farm",
 

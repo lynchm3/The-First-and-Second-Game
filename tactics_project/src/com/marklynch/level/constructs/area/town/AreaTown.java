@@ -33,6 +33,7 @@ public class AreaTown {
 
 	public static int posX = 0, posY = 0;
 	public static Structure joesShop;
+	public static Structure doctorsShop;
 
 	public AreaTown() {
 
@@ -135,7 +136,7 @@ public class AreaTown {
 		ArrayList<StructureSection> doctorsShopSections = new ArrayList<StructureSection>(StructureSection.class);
 		doctorsShopSections.add(new StructureSection("Doctor Mike's Practice", posX + 5 + 35, posY + 0 + 3,
 				posX + 17 + 35, posY + 5 + 3, false, false));
-		Structure doctorsShop = new Structure("Doctor Mike's Practice", doctorsShopSections, doctorsShopAtriums,
+		doctorsShop = new Structure("Doctor Mike's Practice", doctorsShopSections, doctorsShopAtriums,
 				new ArrayList<StructurePath>(StructurePath.class), doctorsShopFeatures, doctorsEntranceSquares,
 				"building2.png", posX + 40, posY + 3, posX + 52, posY + 8, true, doctor,
 				new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
