@@ -34,6 +34,7 @@ public class QuestThePigs extends Quest {
 	StructureRoom penRoom;
 
 	// Farmhouse
+	public static Structure farmHouseStructure;
 	StructureSection farmHouseFrontSection;
 	StructureSection farmHouseBackSection;
 	StructureRoom farmHouseFrontRoom;
@@ -172,9 +173,11 @@ public class QuestThePigs extends Quest {
 		farmHouseRooms.add(farmHouseBedroom);
 		farmHouseRooms.add(farmHouseStorageRoom);
 
-		Game.level.structures.add(new Structure("Farm House", farmHouseSections, farmHouseRooms, farmHousePaths,
-				farmHouseFeatures, new ArrayList<Square>(Square.class), null, 0, 0, 0, 0, true, farmer,
-				farmHouseSquaresToRemove, farmHouseWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 3));
+		farmHouseStructure = new Structure("Farm House", farmHouseSections, farmHouseRooms, farmHousePaths,
+				farmHouseFeatures, new ArrayList<Square>(Square.class), null, 2, 69, 24, 85, true, farmer,
+				farmHouseSquaresToRemove, farmHouseWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 3);
+
+		Game.level.structures.add(farmHouseStructure);
 
 		Templates.SHELF.makeCopy(Game.level.squares[14][69], farmer);
 		Templates.SHELF.makeCopy(Game.level.squares[15][69], farmer);

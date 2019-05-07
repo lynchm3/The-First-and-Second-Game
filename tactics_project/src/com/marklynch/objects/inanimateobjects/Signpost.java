@@ -72,6 +72,8 @@ public class Signpost extends GameObject {
 	}
 
 	public Direction getDirectionObjectIsIn(Object object, Square from) {
+		System.out.println("getDirectionObjectIsIn object = " + object);
+
 		Square to = null;
 		if (object instanceof Area) {
 			Area area = (Area) object;
@@ -91,6 +93,8 @@ public class Signpost extends GameObject {
 	}
 
 	public Direction getDirectionSquareIsIn(Square to, Square from) {
+		System.out.println("getDirectionObjectIsIn to = " + to);
+		System.out.println("getDirectionObjectIsIn from = " + from);
 
 		int leftRightDifference = to.xInGrid - from.xInGrid;
 		int upDownDifference = to.yInGrid - from.yInGrid;
@@ -137,6 +141,19 @@ public class Signpost extends GameObject {
 			for (int i = 0; i < upObjects.size(); i++) {
 				arrayListOfText.add(upObjects.get(i));
 				if (i != upObjects.size() - 1)
+					arrayListOfText.add(", ");
+			}
+		}
+
+		// South
+		if (downObjects.size() > 0) {
+			if (arrayListOfText.size() != 0)
+				arrayListOfText.add(TextUtils.NewLine.NEW_LINE);
+			arrayListOfText.add(GameObject.downTexture);
+			arrayListOfText.add(" ");
+			for (int i = 0; i < downObjects.size(); i++) {
+				arrayListOfText.add(downObjects.get(i));
+				if (i != downObjects.size() - 1)
 					arrayListOfText.add(", ");
 			}
 		}
