@@ -36,6 +36,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.ResourceUtils;
 
 @SuppressWarnings("serial")
 public class QuestList extends ArrayList<Quest> {
@@ -227,9 +228,9 @@ public class QuestList extends ArrayList<Quest> {
 		extraWalls.add(Templates.FALSE_WALL.makeCopy(Level.squares[puzzleRoomsX + 1 + 1][puzzleRoomsY + 22 + 0], null));
 
 		Structure puzzleStructure = new Structure("Puzzle Structure", structureSections, puzzleStructureRooms, paths,
-				features, entrances, "building2.png", puzzleRoomsX, puzzleRoomsY, puzzleRoomsX + 100,
-				puzzleRoomsY + 100, true, null, squaresToRemove, extraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE,
-				10);
+				features, entrances, "building2.png", ResourceUtils.getGlobalImage("icon_cave.png", false),
+				puzzleRoomsX, puzzleRoomsY, puzzleRoomsX + 100, puzzleRoomsY + 100, true, null, squaresToRemove,
+				extraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 10);
 
 	}
 

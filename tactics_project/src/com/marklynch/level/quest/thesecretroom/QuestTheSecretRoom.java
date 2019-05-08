@@ -12,7 +12,6 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.constructs.conversation.ConversationForKidnapper;
-import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.quest.Quest;
@@ -28,6 +27,7 @@ import com.marklynch.objects.inanimateobjects.RemoteDoor;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 
 public class QuestTheSecretRoom extends Quest {
@@ -122,10 +122,11 @@ public class QuestTheSecretRoom extends Quest {
 		Templates.RAT.makeCopy("Rat", Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 39],
 				Game.level.factions.rats, null, new GameObject[] {}, new GameObject[] {}, null);
 
-		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
-				structureFeatures, structureEntranceSquares, null, AreaTown.posX + 0, AreaTown.posY + 0,
-				AreaTown.posX + 0, AreaTown.posY + 0, true, kidnapper, structureSquaresToRemove, structureExtraWalls,
-				Templates.WALL_CAVE, Square.STONE_TEXTURE, 2));
+		Game.level.structures.add(
+				new Structure("A Lovely House", structureSections, structureRooms, structurePaths, structureFeatures,
+						structureEntranceSquares, null, ResourceUtils.getGlobalImage("icon_house.png", false),
+						AreaTown.posX + 0, AreaTown.posY + 0, AreaTown.posX + 0, AreaTown.posY + 0, true, kidnapper,
+						structureSquaresToRemove, structureExtraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 2));
 
 		// Path to town 24,21 -> 24,29
 		new PavedPathway(AreaTown.posX + 24, AreaTown.posY + 21, AreaTown.posX + 24, AreaTown.posY + 29);
@@ -195,8 +196,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Signpost 5,20
 		GameObject signpost = Templates.SIGNPOST.makeCopy(Game.level.squares[AreaTown.posX + 5][AreaTown.posY + 20],
-				null, AreaTown.joesShop, QuestThePigs.farmHouseStructure, AreaTown.doctorsShop, AreaList.townForest,
-				AreaList.mines);
+				null, AreaTown.joesShop, QuestThePigs.farmHouseStructure, AreaTown.doctorsShop);
 
 		// "North - Shop, Hunter's Lodge; East - Estates; South - Farm",
 

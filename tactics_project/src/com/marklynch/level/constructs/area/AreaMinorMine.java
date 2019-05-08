@@ -20,6 +20,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.ResourceUtils;
 
 public class AreaMinorMine {
 
@@ -64,7 +65,8 @@ public class AreaMinorMine {
 		Templates.VEIN.makeCopy(Game.level.squares[303][78], null, true, Templates.ORE, 0.1f);
 
 		Structure mine = new Structure("Minor Mine", mineSections, rooms, minePaths, mineFeatures,
-				new ArrayList<Square>(Square.class), "map_cave.png", 280, 76, 307, 97, true, null, squaresToRemove,
+				new ArrayList<Square>(Square.class), "map_cave.png",
+				ResourceUtils.getGlobalImage("icon_mine.png", false), 280, 76, 307, 97, true, null, squaresToRemove,
 				extraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(mine);
 

@@ -32,6 +32,7 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 
 public class QuestCaveOfTheBlind extends Quest {
@@ -729,7 +730,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		squaresToRemove.add(Game.level.squares[224][10]);
 
 		cave = new Structure("Mort & Mort Mining", caveSections, rooms, cavePaths, caveFeatures,
-				new ArrayList<Square>(Square.class), "map_cave.png", 223, 0, 321, 74, true, mort, squaresToRemove,
+				new ArrayList<Square>(Square.class), "map_cave.png",
+				ResourceUtils.getGlobalImage("icon_cave.png", false), 223, 0, 321, 74, true, mort, squaresToRemove,
 				extraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(cave);
 

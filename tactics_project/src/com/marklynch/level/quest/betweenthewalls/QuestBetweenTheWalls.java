@@ -21,6 +21,7 @@ import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 
 public class QuestBetweenTheWalls extends Quest {
@@ -127,8 +128,9 @@ public class QuestBetweenTheWalls extends Quest {
 		// structureExtraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[243][7],
 		// null));
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
-				structureFeatures, structureEntranceSquares, null, posX + 0, posY + 0, posX + 0, posY + 0, true, null,
-				structureSquaresToRemove, structureExtraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 2));
+				structureFeatures, structureEntranceSquares, null,
+				ResourceUtils.getGlobalImage("icon_house.png", false), posX + 0, posY + 0, posX + 0, posY + 0, true,
+				null, structureSquaresToRemove, structureExtraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 2));
 
 		// Antler switch
 		Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[posX + 53][posY + 19], null, Switch.SWITCH_TYPE.OPEN_CLOSE,

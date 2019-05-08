@@ -9,7 +9,9 @@ import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class Signpost extends GameObject {
@@ -22,6 +24,11 @@ public class Signpost extends GameObject {
 	public ArrayList<Place> downPlaces = new ArrayList<Place>(Place.class);
 	public ArrayList<Place> leftPlaces = new ArrayList<Place>(Place.class);
 	public ArrayList<Place> rightPlaces = new ArrayList<Place>(Place.class);
+
+	public static Texture upPoint = ResourceUtils.getGlobalImage("signpost_up_point.png", false);
+	public static Texture downPoint = ResourceUtils.getGlobalImage("signpost_down_point.png", false);
+	public static Texture leftPoint = ResourceUtils.getGlobalImage("signpost_left_point.png", false);
+	public static Texture rightPoint = ResourceUtils.getGlobalImage("signpost_right_point.png", false);
 
 	public Signpost() {
 		super();
@@ -128,7 +135,7 @@ public class Signpost extends GameObject {
 		float poleY1 = squareY2;
 		float poleX2 = poleX1 + poleWidth;
 		float poleY2 = poleY1 + poleHeight;
-		QuadUtils.drawQuad(Color.WHITE, poleX1, poleY1, poleX2, poleY2);
+		QuadUtils.drawQuad(Color.LIGHT_GRAY, poleX1, poleY1, poleX2, poleY2);
 
 		// Up
 		for (int i = 0; i < upPlaces.size(); i++) {
@@ -141,7 +148,9 @@ public class Signpost extends GameObject {
 			TextureUtils.drawTexture(upPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
 
 			if (i == upPlaces.size() - 1) {
-				// Schtick an arrow on the end
+				y1 -= squareHeight;
+				y2 -= squareHeight;
+				TextureUtils.drawTexture(upPoint, squareX1, y1, squareX2, y2);
 			}
 		}
 
@@ -153,10 +162,12 @@ public class Signpost extends GameObject {
 
 			QuadUtils.drawQuad(Color.WHITE, squareX1, y1, squareX2, y2);
 
-			TextureUtils.drawTexture(upPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
+			TextureUtils.drawTexture(downPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
 
 			if (i == downPlaces.size() - 1) {
-				// Schtick an arrow on the end
+				y1 += squareHeight;
+				y2 += squareHeight;
+				TextureUtils.drawTexture(downPoint, squareX1, y1, squareX2, y2);
 			}
 		}
 
@@ -171,7 +182,9 @@ public class Signpost extends GameObject {
 			TextureUtils.drawTexture(leftPlaces.get(i).getIcon(), x1, squareY1, x2, squareY2);
 
 			if (i == leftPlaces.size() - 1) {
-				// Schtick an arrow on the end
+				x1 -= squareWidth;
+				x2 -= squareWidth;
+				TextureUtils.drawTexture(leftPoint, x1, squareY1, x2, squareY2);
 			}
 		}
 
@@ -186,7 +199,9 @@ public class Signpost extends GameObject {
 			TextureUtils.drawTexture(rightPlaces.get(i).getIcon(), x1, squareY1, x2, squareY2);
 
 			if (i == rightPlaces.size() - 1) {
-				// Schtick an arrow on the end
+				x1 += squareWidth;
+				x2 += squareWidth;
+				TextureUtils.drawTexture(rightPoint, x1, squareY1, x2, squareY2);
 			}
 		}
 

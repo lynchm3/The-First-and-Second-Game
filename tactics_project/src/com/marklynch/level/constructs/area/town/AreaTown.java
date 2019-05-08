@@ -28,6 +28,7 @@ import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.ResourceUtils;
 
 public class AreaTown {
 
@@ -84,8 +85,9 @@ public class AreaTown {
 				.add(new StructureSection("Trader Joe's Shop", posX + 5, posY + 0, posX + 17, posY + 5, false, false));
 		joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
 				new ArrayList<StructurePath>(StructurePath.class), shopFeatures, entranceSquares, "building2.png",
-				posX + 5, posY + 0, posX + 17, posY + 5, true, trader, new ArrayList<Square>(Square.class),
-				new ArrayList<Wall>(Wall.class), Templates.WALL_BUILDING, Square.STONE_TEXTURE, 2);
+				Templates.GOLD.imageTexture, posX + 5, posY + 0, posX + 17, posY + 5, true, trader,
+				new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_BUILDING,
+				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(joesShop);
 		GameObject joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6][posY + 6], trader);
 		joesShopSign.conversation = joesShopSign.createConversation(new Object[] { joesShop.name });
@@ -138,9 +140,9 @@ public class AreaTown {
 				posX + 17 + 35, posY + 5 + 3, false, false));
 		doctorsShop = new Structure("Doctor Mike's Practice", doctorsShopSections, doctorsShopAtriums,
 				new ArrayList<StructurePath>(StructurePath.class), doctorsShopFeatures, doctorsEntranceSquares,
-				"building2.png", posX + 40, posY + 3, posX + 52, posY + 8, true, doctor,
-				new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
-				Square.STONE_TEXTURE, 2);
+				"building2.png", ResourceUtils.getGlobalImage("icon_doctor.png", false), posX + 40, posY + 3, posX + 52,
+				posY + 8, true, doctor, new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class),
+				Templates.WALL_CAVE, Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(doctorsShop);
 		GameObject doctorsShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6 + 35][posY + 6 + 3], doctor);
 		doctorsShopSign.conversation = doctorsShopSign.createConversation(new Object[] { doctorsShop.name });

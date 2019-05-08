@@ -40,7 +40,7 @@ public class Structure implements Idable, Place {
 
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
 			ArrayList<StructurePath> paths, ArrayList<StructureFeature> features, ArrayList<Square> entrances,
-			String imageTexturePath, int overlayX1, int overlayY1, int overlayX2, int overlayY2,
+			String imageTexturePath, Texture iconTexture, int overlayX1, int overlayY1, int overlayX2, int overlayY2,
 			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls,
 			Wall wallTemplate, Texture floorImageTexture, int level) {
 		super();
@@ -51,6 +51,7 @@ public class Structure implements Idable, Place {
 		this.rooms = rooms;
 		if (imageTexturePath != null)
 			this.mapIconForStructure = ResourceUtils.getGlobalImage(imageTexturePath, false);
+		this.icon = iconTexture;
 		this.gridX1 = overlayX1;
 		this.gridY1 = overlayY1;
 		this.gridX2 = overlayX2;
