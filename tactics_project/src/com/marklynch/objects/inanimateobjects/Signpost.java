@@ -1,25 +1,27 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.level.constructs.area.Area;
-import com.marklynch.level.constructs.bounds.structure.Structure;
-import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
+import com.marklynch.Game;
+import com.marklynch.level.constructs.area.Place;
 import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.Color;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.TextureUtils;
 
 public class Signpost extends GameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
-	public Object[] objects;
+	public Place[] places;
 
-	public ArrayList<Object> upObjects = new ArrayList<Object>(Object.class);
-	public ArrayList<Object> downObjects = new ArrayList<Object>(Object.class);
-	public ArrayList<Object> leftObjects = new ArrayList<Object>(Object.class);
-	public ArrayList<Object> rightObjects = new ArrayList<Object>(Object.class);
+	public ArrayList<Place> upPlaces = new ArrayList<Place>(Place.class);
+	public ArrayList<Place> downPlaces = new ArrayList<Place>(Place.class);
+	public ArrayList<Place> leftPlaces = new ArrayList<Place>(Place.class);
+	public ArrayList<Place> rightPlaces = new ArrayList<Place>(Place.class);
 
 	public Signpost() {
 		super();
@@ -31,31 +33,31 @@ public class Signpost extends GameObject {
 		super.setInstances(gameObject);
 	}
 
-	public Signpost makeCopy(Square square, Actor owner, Object... objects) {
+	public Signpost makeCopy(Square square, Actor owner, Place... places) {
 		Signpost signpost = new Signpost();
 		setInstances(signpost);
 		super.setAttributesForCopy(signpost, square, owner);
-		this.objects = objects;
+		signpost.places = places;
 
 		// sort out objects
-		for (Object object : objects) {
-			Direction direction = getDirectionObjectIsIn(object, square);
+		for (Place place : places) {
+			Direction direction = getDirectionObjectIsIn(place, square);
 			if (direction == Direction.UP) {
-				System.out.println("Putting obj in up - " + object);
-				upObjects.add(object);
+				System.out.println("Putting obj in up - " + place);
+				signpost.upPlaces.add(place);
 			} else if (direction == Direction.DOWN) {
-				System.out.println("Putting obj in down - " + object);
-				downObjects.add(object);
+				System.out.println("Putting obj in down - " + place);
+				signpost.downPlaces.add(place);
 			} else if (direction == Direction.LEFT) {
-				System.out.println("Putting obj in left - " + object);
-				leftObjects.add(object);
+				System.out.println("Putting obj in left - " + place);
+				signpost.leftPlaces.add(place);
 			} else if (direction == Direction.RIGHT) {
-				System.out.println("Putting obj in right - " + object);
-				rightObjects.add(object);
+				System.out.println("Putting obj in right - " + place);
+				signpost.rightPlaces.add(place);
 			}
 		}
 
-		signpost.conversation = createConversation(generateText());
+		signpost.conversation = signpost.createConversation(signpost.generateText());
 
 //		signpost.conversation = signpost.createConversation(new Object[] { GameObject.upTexture, " Shop  ",
 //				GameObject.rightTexture, " Estates  ", GameObject.downTexture, " Farm" });
@@ -71,20 +73,10 @@ public class Signpost extends GameObject {
 		return c;
 	}
 
-	public Direction getDirectionObjectIsIn(Object object, Square from) {
-		System.out.println("getDirectionObjectIsIn object = " + object);
+	public Direction getDirectionObjectIsIn(Place place, Square from) {
+		System.out.println("getDirectionObjectIsIn object = " + place);
 
-		Square to = null;
-		if (object instanceof Area) {
-			Area area = (Area) object;
-			to = area.centreSquare;
-		} else if (object instanceof Structure) {
-			Structure structure = (Structure) object;
-			to = structure.centreSquare;
-		} else if (object instanceof StructureRoom) {
-			StructureRoom structureRoom = (StructureRoom) object;
-			to = structureRoom.roomParts[0].centreSquare;
-		}
+		Square to = place.getCentreSquare();
 
 		if (to != null)
 			return getDirectionSquareIsIn(to, from);
@@ -116,13 +108,88 @@ public class Signpost extends GameObject {
 	@Override
 	public boolean draw1() {
 
-		boolean shouldDraw = super.draw1();
+		boolean shouldDraw = super.shouldDraw();
 		if (!shouldDraw)
 			return false;
 
-		// Draw object
-		if (squareGameObjectIsOn != null) {
+		// Square part
+		float squareWidth = 16f;
+		float squareHeight = 16f;
+		float squareX1 = this.squareGameObjectIsOn.xInGridPixels + Game.HALF_SQUARE_WIDTH - squareWidth / 2f;
+		float squareY1 = this.squareGameObjectIsOn.yInGridPixels;
+		float squareX2 = squareX1 + squareWidth;
+		float squareY2 = squareY1 + squareHeight;
+		QuadUtils.drawQuad(Color.WHITE, squareX1, squareY1, squareX2, squareY2);
+
+		// Pole
+		float poleWidth = 8f;
+		float poleHeight = Game.SQUARE_HEIGHT - squareHeight;
+		float poleX1 = this.squareGameObjectIsOn.xInGridPixels + Game.HALF_SQUARE_WIDTH - poleWidth / 2;
+		float poleY1 = squareY2;
+		float poleX2 = poleX1 + poleWidth;
+		float poleY2 = poleY1 + poleHeight;
+		QuadUtils.drawQuad(Color.WHITE, poleX1, poleY1, poleX2, poleY2);
+
+		// Up
+		for (int i = 0; i < upPlaces.size(); i++) {
+
+			float y1 = squareY1 - (i + 1) * squareHeight;
+			float y2 = y1 + squareHeight;
+
+			QuadUtils.drawQuad(Color.WHITE, squareX1, y1, squareX2, y2);
+
+			TextureUtils.drawTexture(upPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
+
+			if (i == upPlaces.size() - 1) {
+				// Schtick an arrow on the end
+			}
 		}
+
+		// Down
+		for (int i = 0; i < downPlaces.size(); i++) {
+
+			float y1 = squareY2 + (i) * squareHeight;
+			float y2 = y1 + squareHeight;
+
+			QuadUtils.drawQuad(Color.WHITE, squareX1, y1, squareX2, y2);
+
+			TextureUtils.drawTexture(upPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
+
+			if (i == downPlaces.size() - 1) {
+				// Schtick an arrow on the end
+			}
+		}
+
+		// Left
+		for (int i = 0; i < leftPlaces.size(); i++) {
+
+			float x1 = squareX1 - (i + 1) * squareWidth;
+			float x2 = x1 + squareWidth;
+
+			QuadUtils.drawQuad(Color.WHITE, x1, squareY1, x2, squareY2);
+
+			TextureUtils.drawTexture(leftPlaces.get(i).getIcon(), x1, squareY1, x2, squareY2);
+
+			if (i == leftPlaces.size() - 1) {
+				// Schtick an arrow on the end
+			}
+		}
+
+		// Right
+		for (int i = 0; i < rightPlaces.size(); i++) {
+
+			float x1 = squareX2 + (i) * squareWidth;
+			float x2 = x1 + squareWidth;
+
+			QuadUtils.drawQuad(Color.WHITE, x1, squareY1, x2, squareY2);
+
+			TextureUtils.drawTexture(rightPlaces.get(i).getIcon(), x1, squareY1, x2, squareY2);
+
+			if (i == rightPlaces.size() - 1) {
+				// Schtick an arrow on the end
+			}
+		}
+
 		return true;
 	}
 
@@ -131,55 +198,55 @@ public class Signpost extends GameObject {
 		ArrayList<Object> arrayListOfText = new ArrayList<Object>(Object.class);
 
 		// North
-		if (upObjects.size() > 0) {
+		if (upPlaces.size() > 0) {
 			System.out.println("upObjects.size() > 0");
 			if (arrayListOfText.size() != 0)
 				arrayListOfText.add(TextUtils.NewLine.NEW_LINE);
 			System.out.println("NRTH");
 			arrayListOfText.add(GameObject.upTexture);
 			arrayListOfText.add(" ");
-			for (int i = 0; i < upObjects.size(); i++) {
-				arrayListOfText.add(upObjects.get(i));
-				if (i != upObjects.size() - 1)
+			for (int i = 0; i < upPlaces.size(); i++) {
+				arrayListOfText.add(upPlaces.get(i));
+				if (i != upPlaces.size() - 1)
 					arrayListOfText.add(", ");
 			}
 		}
 
 		// East
-		if (rightObjects.size() > 0) {
+		if (rightPlaces.size() > 0) {
 			if (arrayListOfText.size() != 0)
 				arrayListOfText.add(TextUtils.NewLine.NEW_LINE);
 			arrayListOfText.add(GameObject.rightTexture);
 			arrayListOfText.add(" ");
-			for (int i = 0; i < rightObjects.size(); i++) {
-				arrayListOfText.add(rightObjects.get(i));
-				if (i != rightObjects.size() - 1)
+			for (int i = 0; i < rightPlaces.size(); i++) {
+				arrayListOfText.add(rightPlaces.get(i));
+				if (i != rightPlaces.size() - 1)
 					arrayListOfText.add(", ");
 			}
 		}
 
 		// South
-		if (downObjects.size() > 0) {
+		if (downPlaces.size() > 0) {
 			if (arrayListOfText.size() != 0)
 				arrayListOfText.add(TextUtils.NewLine.NEW_LINE);
 			arrayListOfText.add(GameObject.downTexture);
 			arrayListOfText.add(" ");
-			for (int i = 0; i < downObjects.size(); i++) {
-				arrayListOfText.add(downObjects.get(i));
-				if (i != downObjects.size() - 1)
+			for (int i = 0; i < downPlaces.size(); i++) {
+				arrayListOfText.add(downPlaces.get(i));
+				if (i != downPlaces.size() - 1)
 					arrayListOfText.add(", ");
 			}
 		}
 
 		// West
-		if (leftObjects.size() > 0) {
+		if (leftPlaces.size() > 0) {
 			if (arrayListOfText.size() != 0)
 				arrayListOfText.add(TextUtils.NewLine.NEW_LINE);
 			arrayListOfText.add(GameObject.leftTexture);
 			arrayListOfText.add(" ");
-			for (int i = 0; i < leftObjects.size(); i++) {
-				arrayListOfText.add(leftObjects.get(i));
-				if (i != leftObjects.size() - 1)
+			for (int i = 0; i < leftPlaces.size(); i++) {
+				arrayListOfText.add(leftPlaces.get(i));
+				if (i != leftPlaces.size() - 1)
 					arrayListOfText.add(", ");
 			}
 		}

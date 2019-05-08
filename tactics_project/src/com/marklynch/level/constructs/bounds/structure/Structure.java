@@ -2,7 +2,9 @@ package com.marklynch.level.constructs.bounds.structure;
 
 import com.marklynch.Game;
 import com.marklynch.actions.ActionSpot;
+import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.area.Place;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom.RoomPart;
 import com.marklynch.level.squares.Node;
@@ -16,7 +18,7 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class Structure {
+public class Structure implements Idable, Place {
 
 	public String name;
 	public ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>(StructureRoom.class);
@@ -33,6 +35,7 @@ public class Structure {
 	public Actor owner;
 	ArrayList<Square> squaresToRemove = new ArrayList<Square>(Square.class);
 	boolean showOnMap = false;
+	public Long id;
 
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
 			ArrayList<StructurePath> paths, ArrayList<StructureFeature> features, ArrayList<Square> entrances,
@@ -40,6 +43,7 @@ public class Structure {
 			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls,
 			Wall wallTemplate, Texture floorImageTexture, int level) {
 		super();
+		this.id = Level.generateNewId(this);
 
 		this.name = name;
 		this.structureSections = caveSections;
@@ -272,5 +276,20 @@ public class Structure {
 		this.seenByPlayer = true;
 		new ActionSpot(Game.level.player, this, squareSeen).perform();
 		this.showOnMap = true;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public Texture getIcon() {
+		return mapIconForStructure;
+	}
+
+	@Override
+	public Square getCentreSquare() {
+		return centreSquare;
 	}
 }

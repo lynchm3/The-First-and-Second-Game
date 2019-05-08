@@ -16,7 +16,7 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class Area implements Idable {
+public class Area implements Idable, Place {
 
 	public String name;
 	public Texture image;
@@ -98,6 +98,16 @@ public class Area implements Idable {
 	@Override
 	public Long getId() {
 		return id;
+	}
+
+	@Override
+	public Texture getIcon() {
+		return image;
+	}
+
+	@Override
+	public Square getCentreSquare() {
+		return centreSquare;
 	}
 
 }
