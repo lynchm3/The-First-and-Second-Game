@@ -48,13 +48,13 @@ public class AnimationSecondaryScale extends SecondaryAnimation {
 	@Override
 	public void draw2() {
 
-		if (performer.squareGameObjectIsOn == null)
+		if (performer.lastSquare == null)
 			return;
 
 		if (scaleX != 0 && scaleY != 0) {
 
-			float powPositionXInPixels = performer.squareGameObjectIsOn.xInGridPixels;
-			float powPositionYInPixels = performer.squareGameObjectIsOn.yInGridPixels;
+			float powPositionXInPixels = performer.lastSquare.xInGridPixels;
+			float powPositionYInPixels = performer.lastSquare.yInGridPixels;
 			if (performer.getPrimaryAnimation() != null) {
 				powPositionXInPixels += performer.getPrimaryAnimation().offsetX;
 				powPositionYInPixels += performer.getPrimaryAnimation().offsetY;
