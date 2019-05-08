@@ -11,6 +11,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomCaveInFight;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomChasm;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomCrumblingWall;
+import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomExtendableBridge;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFallawayFloor;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFriendlyCaveIn;
 import com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom.PuzzleRoomFuse;
@@ -215,6 +216,13 @@ public class QuestList extends ArrayList<Quest> {
 
 		// ROOM Crumbling wall
 		puzzleStructureRooms.add(new PuzzleRoomCrumblingWall(puzzleRoomsX + 22, puzzleRoomsY + 10));
+
+		// Crumbling wall to extendable bridge
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 27][puzzleRoomsY + 11]);
+		squaresToRemove.add(Level.squares[puzzleRoomsX + 27][puzzleRoomsY + 12]);
+
+		// ROOM extendable bridge
+		puzzleStructureRooms.add(new PuzzleRoomExtendableBridge(puzzleRoomsX + 28, puzzleRoomsY + 11));
 
 		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>(StructureFeature.class);
 		features.addAll(puzzleRoomMaze.features);
