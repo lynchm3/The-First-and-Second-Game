@@ -262,7 +262,7 @@ public class Load {
 
 		for (Square square : Level.squaresToSave) {
 			square.inventory = new SquareInventory();
-			square.floorImageTexture = square.defaultImageTexture;
+			square.setFloorImageTexture(square.defaultImageTexture);
 			square.seenByPlayer = false;
 		}
 		Level.squaresToSave.clear();

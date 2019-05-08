@@ -2687,20 +2687,24 @@ public class GameObject
 
 	public ArrayList<GameObject> getSurroundingGameObjects() {
 		ArrayList<GameObject> surroundingGameObjects = new ArrayList<GameObject>(GameObject.class);
-		Square squareToLeft = this.squareGameObjectIsOn.getSquareToLeftOf();
+
+		System.out.println("this = " + this);
+		System.out.println("this.lastSquare = " + this.lastSquare);
+
+		Square squareToLeft = this.lastSquare.getSquareToLeftOf();
 		if (squareToLeft != null) {
 			surroundingGameObjects.addAll(squareToLeft.inventory.gameObjects);
 		}
 
-		Square squareToRight = this.squareGameObjectIsOn.getSquareToRightOf();
+		Square squareToRight = this.lastSquare.getSquareToRightOf();
 		if (squareToRight != null) {
 			surroundingGameObjects.addAll(squareToRight.inventory.gameObjects);
 		}
-		Square squareAbove = this.squareGameObjectIsOn.getSquareAbove();
+		Square squareAbove = this.lastSquare.getSquareAbove();
 		if (squareAbove != null) {
 			surroundingGameObjects.addAll(squareAbove.inventory.gameObjects);
 		}
-		Square squareBelow = this.squareGameObjectIsOn.getSquareBelow();
+		Square squareBelow = this.lastSquare.getSquareBelow();
 		if (squareBelow != null) {
 			surroundingGameObjects.addAll(squareBelow.inventory.gameObjects);
 		}

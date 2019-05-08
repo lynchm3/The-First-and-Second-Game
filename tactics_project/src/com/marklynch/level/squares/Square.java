@@ -86,7 +86,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	// image
 	public transient Texture defaultImageTexture = null;
 
-	public Texture floorImageTexture = null;
+	private Texture floorImageTexture = null;
 
 	public static Texture GRASS_TEXTURE;
 	public static Texture DIGGABLE_GRASS_TEXTURE;
