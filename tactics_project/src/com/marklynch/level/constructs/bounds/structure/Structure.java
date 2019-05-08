@@ -26,6 +26,7 @@ public class Structure implements Idable, Place {
 	public ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>(StructureSection.class);
 	public ArrayList<Square> entranceSquares = new ArrayList<Square>(Square.class);
 	public Texture mapIconForStructure;
+	public Texture icon;
 	int gridX1, gridX2, gridY1, gridY2, gridCenterX, gridCenterY;
 	public Square centreSquare;
 	ArrayList<Square> floorSquares = new ArrayList<Square>(Square.class);
@@ -285,7 +286,7 @@ public class Structure implements Idable, Place {
 
 	@Override
 	public Texture getIcon() {
-		return mapIconForStructure;
+		return icon;
 	}
 
 	@Override

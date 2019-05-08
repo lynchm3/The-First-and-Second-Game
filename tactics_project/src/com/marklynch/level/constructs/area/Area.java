@@ -20,6 +20,7 @@ public class Area implements Idable, Place {
 
 	public String name;
 	public Texture image;
+	public Texture icon;
 	public int gridX1, gridY1, gridX2, gridY2, gridCenterX, gridCenterY;
 	public Square centreSquare;
 	public boolean seenByPlayer = false;
@@ -31,13 +32,14 @@ public class Area implements Idable, Place {
 	public WantedPoster wantedPoster;
 	public Long id;
 
-	public Area(String name, String imageString, Texture squareTexture, int gridX1, int gridY1, int gridX2, int gridY2,
-			int level, Color color, Node... nodes) {
+	public Area(String name, String imageString, Texture iconTexture, Texture squareTexture, int gridX1, int gridY1,
+			int gridX2, int gridY2, int level, Color color, Node... nodes) {
 		super();
 		this.id = Level.generateNewId(this);
 		this.name = name;
 		if (imageString != null)
 			this.image = ResourceUtils.getGlobalImage(imageString, false);
+		this.icon = iconTexture;
 		this.gridX1 = gridX1;
 		this.gridY1 = gridY1;
 		this.gridX2 = gridX2;
@@ -102,7 +104,7 @@ public class Area implements Idable, Place {
 
 	@Override
 	public Texture getIcon() {
-		return image;
+		return icon;
 	}
 
 	@Override
