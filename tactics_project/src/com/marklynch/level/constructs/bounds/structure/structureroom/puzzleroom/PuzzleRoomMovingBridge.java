@@ -14,7 +14,6 @@ import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ArrayList;
-import com.marklynch.utils.Utils.Point;
 
 public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListener {
 
@@ -194,7 +193,6 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						objectsToMoveInOrder.add(gameObject);
-						// midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
 						movesToPerform.put(gameObject, verticalBridgeSquares.get(i));
 					}
 				}
@@ -209,7 +207,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
 			}
-		} else {
+		} else { /////////////////////////////////////////////////////////////////////////////////////////////
 
 			for (Square newSquare : horizontalBridgeSquares) {
 				newSquare.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
@@ -220,7 +218,6 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						objectsToMoveInOrder.add(gameObject);
-						// midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
 						movesToPerform.put(gameObject, horizontalBridgeSquares.get(i));
 					}
 				}
@@ -237,10 +234,6 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 		}
 	}
-
-	float focalPointX = posX * Game.SQUARE_WIDTH + (totalWidthInSquares / 2) * Game.SQUARE_WIDTH;
-	float focalPointY = posY * Game.SQUARE_HEIGHT + (totalHeightInSquares / 2) * Game.SQUARE_HEIGHT;
-	Point focalPoint = new Point(focalPointX, focalPointY);
 
 	public void move(final GameObject gameObject, final Square... targetSquares1) {
 		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 2000f, true, 0f, null, targetSquares1));

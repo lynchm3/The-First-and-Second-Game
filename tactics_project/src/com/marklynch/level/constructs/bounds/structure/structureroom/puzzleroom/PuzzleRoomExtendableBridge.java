@@ -14,7 +14,6 @@ import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ArrayList;
-import com.marklynch.utils.Utils.Point;
 
 public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchListener {
 
@@ -29,8 +28,6 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 	int bridgePosY = 0;
 
 	ArrayList<Square> extendedBridgeSquares = new ArrayList<Square>(Square.class);
-	ArrayList<Square> unextendedBridgeSquares = new ArrayList<Square>(Square.class);
-	ArrayList<Square> activeBridgeSquares;
 
 	Square voidSquare;
 
@@ -63,30 +60,19 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 			}
 		}
 
-//unextendedBridgeSquares
-		for (int i = bridgeWidth - 1; i >= 0; i--) {
-			for (int j = 0; j < bridgeLength; j++) {
-				Square square = Level.squares[bridgePosX + j][posY + i];
-				unextendedBridgeSquares.add(square);
-			}
-		}
+		System.out.println("EXEXEXEX ");
 
 		// extended points
-		for (int i = bridgeWidth - 1; i >= 0; i--) {
+		for (int i = 0; i < bridgeWidth; i++) {
 			for (int j = 0; j < bridgeLength; j++) {
 				Square square = Level.squares[bridgePosX + j][posY + i];
 				extendedBridgeSquares.add(square);
 			}
 		}
 
-		if (!bridgeExtended)
-			activeBridgeSquares = unextendedBridgeSquares;
-		else
-			activeBridgeSquares = extendedBridgeSquares;
-
-		for (Square bridgeSquare : activeBridgeSquares) {
+		for (Square bridgeSquare : extendedBridgeSquares) {
 			GameObject floor = Templates.STONE_FLOOR.makeCopy(null, null);
-			bridgeSquare.inventory.add(floor);
+			Game.level.squares[bridgePosX][bridgeSquare.yInGrid].inventory.add(floor);
 		}
 
 		// Put void hole on all the squares
@@ -100,8 +86,6 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 				}
 			}
 		}
-
-		setupBridgeConnections();
 	}
 
 	@Override
@@ -111,34 +95,25 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 
 	@Override
 	public void zwitch(Switch zwitch) {
+
+		System.out.println("zwitch - " + zwitch);
 		bridgeExtended = !bridgeExtended;
-		if (bridgeExtended)
-			activeBridgeSquares = extendedBridgeSquares;
-		else
-			activeBridgeSquares = unextendedBridgeSquares;
 		moveBridge();
 	}
 
 	public void moveBridge() {
 
 		HashMap<GameObject, Square> movesToPerform = new HashMap<GameObject, Square>();
-		// HashMap<GameObject, Square> midTeleportationsToPerform = new
-		// HashMap<GameObject, Square>();
 		ArrayList<GameObject> objectsToMoveInOrder = new ArrayList<GameObject>(GameObject.class);
 
 		if (!bridgeExtended) {
-
-			for (Square newSquare : unextendedBridgeSquares) {
-				newSquare.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			}
 
 			for (int i = 0; i < extendedBridgeSquares.size(); i++) {
 				Square oldSquare = extendedBridgeSquares.get(i);
 				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						objectsToMoveInOrder.add(gameObject);
-						// midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
-						movesToPerform.put(gameObject, unextendedBridgeSquares.get(i));
+						movesToPerform.put(gameObject, Game.level.squares[bridgePosX][oldSquare.yInGrid]);
 					}
 				}
 			}
@@ -152,96 +127,44 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
 				}
 			}
-		} else {
+		} else {///////////////////////////////////////////////////////////////////////////////////
 
 			for (Square newSquare : extendedBridgeSquares) {
 				newSquare.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 
-			for (int i = 0; i < unextendedBridgeSquares.size(); i++) {
-				Square oldSquare = unextendedBridgeSquares.get(i);
-				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
-					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
-						objectsToMoveInOrder.add(gameObject);
-						// midTeleportationsToPerform.put(gameObject, midBridgeSquares.get(i));
-						movesToPerform.put(gameObject, extendedBridgeSquares.get(i));
-					}
-				}
+			ArrayList<Square> unextendedBridgeSquares = new ArrayList<Square>(Square.class);
+			unextendedBridgeSquares.add(Level.squares[bridgePosX][bridgePosY]);
+			unextendedBridgeSquares.add(Level.squares[bridgePosX][bridgePosY + 1]);
+
+			for (int i = 0; i < extendedBridgeSquares.size(); i++) {
+				Square oldSquare = Game.level.squares[bridgePosX][extendedBridgeSquares.get(i).yInGrid];
+
+//				if (i < oldSquare.inventory.size()) {
+				GameObject gameObject = oldSquare.inventory.get(i % oldSquare.inventory.size());
+				objectsToMoveInOrder.add(gameObject);
+				movesToPerform.put(gameObject, extendedBridgeSquares.get(i));
+//				}
+
+//				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
+//					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
+//						objectsToMoveInOrder.add(gameObject);
+//						movesToPerform.put(gameObject, extendedBridgeSquares.get(extendedSquaresIndex));
+//					}
+//				}
 			}
+			System.out.println("extendedBridgeSquares.size() = " + extendedBridgeSquares.size());
 
 			for (GameObject gameObject : objectsToMoveInOrder) {
 				move(gameObject, movesToPerform.get(gameObject));
 			}
-
-			for (Square oldSquare : unextendedBridgeSquares) {
-				if (!oldSquare.inventory.containsGameObjectWithTemplateId(Templates.VOID_HOLE.templateId)) {
-					oldSquare.inventory.add(Templates.VOID_HOLE.makeCopy(null, null, voidSquare));
-				}
-			}
 		}
 	}
-
-	float focalPointX = posX * Game.SQUARE_WIDTH + (totalWidthInSquares / 2) * Game.SQUARE_WIDTH;
-	float focalPointY = posY * Game.SQUARE_HEIGHT + (totalHeightInSquares / 2) * Game.SQUARE_HEIGHT;
-	Point focalPoint = new Point(focalPointX, focalPointY);
 
 	public void move(final GameObject gameObject, final Square... targetSquares1) {
+
+//		System.out.println("move(gameObject = " + gameObject + ", targetSquare = " + targetSquares1[0] + ")");
 		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 2000f, true, 0f, null, targetSquares1));
-
-	}
-
-	public void setupBridgeConnections() {
-		Square square;
-		// bridge connector parts on the edges
-		for (int i = 0; i < bridgeWidth; i++) {
-			// left
-
-			square = Level.squares[posX][posY + i];
-			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			square.setFloorImageTexture(Square.GRASS_TEXTURE);
-			// if
-			// (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId))
-			// {
-			// square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			// }
-
-			// Level.squares[posX][posY + gapsWidth + i].passable = true;
-			// right
-			square = Level.squares[posX + totalWidthInSquares - 1][posY + i];
-			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			square.setFloorImageTexture(Square.GRASS_TEXTURE);
-			// square.imageTexture = Square.STONE_TEXTURE;
-			// if
-			// (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId))
-			// {
-			// square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			// }
-			// Level.squares[posX + totalWidthInSquares - 1][posY + gapsWidth + i].passable
-			// = true;
-			// top
-			square = Level.squares[posX + i][posY];
-			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			square.setFloorImageTexture(Square.GRASS_TEXTURE);
-			// square.imageTexture = Square.STONE_TEXTURE;
-			// if
-			// (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId))
-			// {
-			// square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			// }
-			// Level.squares[posX + gapsWidth + i][posY].passable = true;
-			// bottom
-			square = Level.squares[posX + i][posY + totalHeightInSquares - 1];
-			square.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			square.setFloorImageTexture(Square.GRASS_TEXTURE);
-			// square.imageTexture = Square.STONE_TEXTURE;
-			// if
-			// (square.inventory.containsObjectWithTemplateId(Templates.VOID_HOLE.templateId))
-			// {
-			// square.inventory.removeObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
-			// }
-			// Level.squares[posX + gapsWidth + i][posY + totalHeightInSquares - 1].passable
-			// = true;
-		}
 	}
 
 }

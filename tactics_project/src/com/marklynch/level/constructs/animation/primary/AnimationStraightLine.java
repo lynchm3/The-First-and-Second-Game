@@ -19,8 +19,9 @@ public class AnimationStraightLine extends Animation {
 
 		super(performer, onCompletionListener, targetSquares, null, null, null, null, null, false, true, performer,
 				targetSquares[targetSquares.length - 1]);
-		if (!runAnimation)
+		if (!runAnimation) {
 			return;
+		}
 
 		this.targetSquares = targetSquares;
 
