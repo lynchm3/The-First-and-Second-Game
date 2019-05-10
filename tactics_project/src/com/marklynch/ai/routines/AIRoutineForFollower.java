@@ -3,6 +3,7 @@ package com.marklynch.ai.routines;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Follower;
@@ -67,10 +68,13 @@ public class AIRoutineForFollower extends AIRoutine {
 
 		{
 			if (Level.player.squareGameObjectIsOn != null
-					&& Level.player.squareGameObjectIsOn.areaSquareIsIn == actor.area) {
+					&& Level.player.squareGameObjectIsOn.areaSquareIsIn == actor.area
+					&& this.actor.canSeeGameObject(Level.player)) {
 				this.actor.thoughtBubbleImageTextureObject = Level.player.imageTexture;
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_FOLLOWING;
 				AIRoutineUtils.moveTowardsTargetSquare(Level.player.squareGameObjectIsOn);
+				this.actor.addInvestigation(Level.player, Level.player.squareGameObjectIsOn,
+						Investigation.INVESTIGATION_PRIORITY_KEEP_TRACK);
 				return;
 			}
 		}
