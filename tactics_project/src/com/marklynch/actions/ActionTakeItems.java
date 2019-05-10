@@ -46,6 +46,9 @@ public class ActionTakeItems extends VariableQtyAction {
 			}
 		}
 
+		if (this.objectsTotake.length == 1)
+			actionName += " ($" + this.objectsTotake[0].value + ")";
+
 		sound = createSound();
 	}
 
@@ -107,15 +110,15 @@ public class ActionTakeItems extends VariableQtyAction {
 						Game.level.logOnScreen(
 								new ActivityLog(new Object[] { performer, " took ", objectsTotake[0], amountText }));
 					else
-						Game.level.logOnScreen(new ActivityLog(
-								new Object[] { performer, " took ", objectsTotake[0], amountText, " from ", targetGameObject }));
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", objectsTotake[0],
+								amountText, " from ", targetGameObject }));
 				} else {
 					if (objectToTakeFrom == targetSquare)
 						Game.level.logOnScreen(
 								new ActivityLog(new Object[] { performer, " stole ", objectsTotake[0], amountText }));
 					else
-						Game.level.logOnScreen(new ActivityLog(
-								new Object[] { performer, " stole ", objectsTotake[0], amountText, " from ", targetGameObject }));
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", objectsTotake[0],
+								amountText, " from ", targetGameObject }));
 				}
 			}
 		}
@@ -161,7 +164,8 @@ public class ActionTakeItems extends VariableQtyAction {
 			return true;
 		}
 
-		if (targetGameObject == objectToTakeFrom && performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
+		if (targetGameObject == objectToTakeFrom
+				&& performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 

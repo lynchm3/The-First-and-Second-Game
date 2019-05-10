@@ -1046,7 +1046,9 @@ public class Level {
 		if (Game.gameObjectMouseIsOver != null && Game.pinWindowHoveringOver == null
 				&& UserInputLevel.scrollableMouseIsOver != Game.level.activityLogger) {
 			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver));
-			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver.value));
+
+//			THIS LINE
+//			tooltipGroup.add(new Tooltip(false, Color.WHITE, Game.gameObjectMouseIsOver.value));
 		}
 
 		if (Player.playerTargetAction != null) {
