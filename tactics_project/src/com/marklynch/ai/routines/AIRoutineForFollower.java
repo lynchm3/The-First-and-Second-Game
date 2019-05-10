@@ -3,7 +3,6 @@ package com.marklynch.ai.routines;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.area.Area;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Follower;
 import com.marklynch.objects.templates.Templates;
@@ -11,7 +10,6 @@ import com.marklynch.objects.templates.Templates;
 public class AIRoutineForFollower extends AIRoutine {
 
 	public Follower follower;
-	public Area area;
 
 	public AIRoutineForFollower() {
 		super();
@@ -21,12 +19,12 @@ public class AIRoutineForFollower extends AIRoutine {
 	public AIRoutineForFollower(Actor actor) {
 		super(actor);
 		this.follower = (Follower) actor;
-		this.area = actor.area;
 		aiType = AI_TYPE.RUNNER;
 	}
 
 	@Override
 	public void update() {
+		System.out.println("AI FOLLOW 1");
 
 		aiRoutineStart();
 
@@ -63,6 +61,19 @@ public class AIRoutineForFollower extends AIRoutine {
 			return;
 		}
 
+		// Follower AI 1 - follow
+		if (state == STATE.FOLLOWING)
+
+		{
+			if (Level.player.squareGameObjectIsOn != null
+					&& Level.player.squareGameObjectIsOn.areaSquareIsIn == actor.area) {
+				this.actor.thoughtBubbleImageTextureObject = Level.player.imageTexture;
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_FOLLOWING;
+				AIRoutineUtils.moveTowardsTargetSquare(Level.player.squareGameObjectIsOn);
+				return;
+			}
+		}
+
 		// Loot from ground
 		if (lootFromGround())
 			return;
@@ -86,18 +97,6 @@ public class AIRoutineForFollower extends AIRoutine {
 		// Door maintenance routine
 		if (runDoorRoutine())
 			return;
-
-		// Shopkeeper AI 1 - hang in shop
-		if (state == STATE.FOLLOWING)
-
-		{
-			if (Level.player.area == this.area) {
-				this.actor.thoughtBubbleImageTextureObject = Level.player.imageTexture;
-				this.actor.activityDescription = ACTIVITY_DESCRIPTION_FOLLOWING;
-				AIRoutineUtils.moveTowardsTargetSquare(Level.player.squareGameObjectIsOn);
-				return;
-			}
-		}
 
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
 			actor.thoughtBubbleImageTextureObject = Templates.BED.imageTexture;

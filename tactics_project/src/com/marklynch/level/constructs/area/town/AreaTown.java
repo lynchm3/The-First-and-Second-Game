@@ -116,8 +116,8 @@ public class AreaTown {
 		createWithEtching.conversation = createWithEtching.createConversation(new Object[] { "For Velentine Shop" });
 
 		// Follower
-		Follower follower = Templates.FOLLOWER.makeCopy("???", Game.level.squares[posX + 38][posY + 38],
-				FactionList.townsPeople, Templates.BED.makeCopy(Game.level.squares[posX + 38][posY + 39], null), 32,
+		Follower follower = Templates.FOLLOWER.makeCopy("???", Game.level.squares[posX + 14][posY + 17],
+				FactionList.townsPeople, Templates.BED.makeCopy(Game.level.squares[posX + 15][posY + 17], null), 32,
 				new GameObject[] {}, new GameObject[] {}, AreaList.town, new int[] {}, new HOBBY[] {});
 
 		// Doctor's Practice
