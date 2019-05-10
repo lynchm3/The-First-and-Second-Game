@@ -1,6 +1,7 @@
 package com.marklynch.objects.inanimateobjects;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.area.Place;
 import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.squares.Square;
@@ -275,6 +276,21 @@ public class Signpost extends GameObject {
 				x2 += squareWidth;
 				TextureUtils.drawTexture(rightPoint, x1, squareY1, x2, squareY2);
 			}
+		}
+
+		// shadow
+		if (drawShadow) {
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
+
+			float boundsX1 = actorPositionXInPixels;
+			float boundsY1 = actorPositionYInPixels;
+			float boundsX2 = actorPositionXInPixels + width;
+			float boundsY2 = actorPositionYInPixels + height;
+
+			drawGameObject((actorPositionXInPixels), (actorPositionYInPixels), width, height, halfWidth, halfHeight,
+					Level.shadowDarkness, false, 1, Level.shadowLength, Level.shadowAngle, boundsX1, boundsY1, boundsX2,
+					boundsY2, Color.BLACK, false, imageTexture);
 		}
 
 		return true;
