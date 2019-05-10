@@ -4,6 +4,7 @@ import com.marklynch.objects.actors.Blind;
 import com.marklynch.objects.actors.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.actors.Doctor;
 import com.marklynch.objects.actors.Fish;
+import com.marklynch.objects.actors.Follower;
 import com.marklynch.objects.actors.Guard;
 import com.marklynch.objects.actors.HerbivoreWildAnimal;
 import com.marklynch.objects.actors.Human;
@@ -136,6 +137,7 @@ public class Templates {
 
 	public static Trader TRADER;
 	public static Doctor DOCTOR;
+	public static Follower FOLLOWER;
 
 	public static Human MINECART_RIDER;
 

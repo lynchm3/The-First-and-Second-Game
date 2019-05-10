@@ -88,6 +88,7 @@ public abstract class AIRoutine {
 	final static transient String ACTIVITY_DESCRIPTION_THIEVING = "Thieving!";
 	final static transient String ACTIVITY_WANDERING = "Wandering";
 	final static transient String ACTIVITY_DESCRIPTION_UPDATING_SIGN = "Updating Shop Sign";
+	final static transient String ACTIVITY_DESCRIPTION_FOLLOWING = "Following";
 
 	public transient static String STOP_THAT = "Stop that!";
 	public transient static String TIME_TO_LEAVE = "It's getting late, time for you to go...";
@@ -108,7 +109,7 @@ public abstract class AIRoutine {
 
 	public enum STATE {
 		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, PATROL,
-		FREE_TIME, FISHING, SHOPKEEPING, THIEVING, UPDATING_SIGN, SWIMMING
+		FREE_TIME, FISHING, SHOPKEEPING, THIEVING, UPDATING_SIGN, SWIMMING, FOLLOWING
 	};
 
 	public transient STATE state;

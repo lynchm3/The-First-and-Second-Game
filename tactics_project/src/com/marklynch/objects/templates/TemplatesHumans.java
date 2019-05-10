@@ -3,6 +3,7 @@ package com.marklynch.objects.templates;
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForDoctor;
 import com.marklynch.ai.routines.AIRoutineForFisherman;
+import com.marklynch.ai.routines.AIRoutineForFollower;
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.routines.AIRoutineForKidnapper;
@@ -14,6 +15,7 @@ import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.objects.actors.Doctor;
+import com.marklynch.objects.actors.Follower;
 import com.marklynch.objects.actors.Guard;
 import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.actors.Kidnapper;
@@ -245,6 +247,24 @@ public class TemplatesHumans {
 		Templates.DOCTOR.weight = 80f;
 		Templates.DOCTOR.aiRoutine = new AIRoutineForDoctor(Templates.DOCTOR);
 		Templates.DOCTOR.templateId = GameObject.generateNewTemplateId();
+
+		Templates.FOLLOWER = new Follower();
+		Templates.FOLLOWER.title = "???";
+		Templates.FOLLOWER.level = 1;
+		Templates.FOLLOWER.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 4));
+		Templates.FOLLOWER.totalHealth = Templates.FOLLOWER.remainingHealth = 10;
+		Templates.FOLLOWER.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 7));
+		Templates.FOLLOWER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 12));
+		Templates.FOLLOWER.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE,
+				new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 20));
+		Templates.FOLLOWER.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 7));
+		Templates.FOLLOWER.heightRatio = 1.5f;
+		Templates.FOLLOWER.drawOffsetRatioY = -0.5f;
+		Templates.FOLLOWER.drawOffsetY = Templates.FOLLOWER.drawOffsetRatioY * Game.SQUARE_HEIGHT;
+		Templates.FOLLOWER.weight = 80f;
+		Templates.FOLLOWER.aiRoutine = new AIRoutineForFollower(Templates.FOLLOWER);
+		Templates.FOLLOWER.templateId = GameObject.generateNewTemplateId();
 
 		Templates.MINECART_RIDER = new Human();
 		Templates.MINECART_RIDER.title = "MINECART_RIDER";

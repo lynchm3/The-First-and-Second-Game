@@ -21,6 +21,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.actors.Doctor;
+import com.marklynch.objects.actors.Follower;
 import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Storage;
@@ -35,6 +36,7 @@ public class AreaTown {
 	public static int posX = 0, posY = 0;
 	public static Structure joesShop;
 	public static Structure doctorsShop;
+	public static Follower follower;
 
 	public AreaTown() {
 
@@ -112,6 +114,11 @@ public class AreaTown {
 		GameObject createWithEtching = Templates.CRATE_WITH_ETCHING.makeCopy(Level.squares[posX + 20][posY + 3], false,
 				null);
 		createWithEtching.conversation = createWithEtching.createConversation(new Object[] { "For Velentine Shop" });
+
+		// Follower
+		Follower follower = Templates.FOLLOWER.makeCopy("???", Game.level.squares[posX + 38][posY + 38],
+				FactionList.townsPeople, Templates.BED.makeCopy(Game.level.squares[posX + 38][posY + 39], null), 32,
+				new GameObject[] {}, new GameObject[] {}, AreaList.town, new int[] {}, new HOBBY[] {});
 
 		// Doctor's Practice
 		Doctor doctor = Templates.DOCTOR.makeCopy("Doctor Mike", Game.level.squares[posX + 7 + 35][posY + 1 + 3],
