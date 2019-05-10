@@ -24,6 +24,7 @@ public class PowerRespite extends Power {
 		passive = true;
 		endsTurn = false;
 		activateAtStartOfTurn = true;
+		description = "When not under threat the spirits will heal you";
 	}
 
 	@Override

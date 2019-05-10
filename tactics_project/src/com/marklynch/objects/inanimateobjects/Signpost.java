@@ -12,7 +12,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
-import com.marklynch.utils.TextureUtils;
+import com.marklynch.utils.Utils.Quad;
 
 public class Signpost extends GameObject {
 
@@ -29,6 +29,8 @@ public class Signpost extends GameObject {
 	public static Texture downPoint = ResourceUtils.getGlobalImage("signpost_down_point.png", false);
 	public static Texture leftPoint = ResourceUtils.getGlobalImage("signpost_left_point.png", false);
 	public static Texture rightPoint = ResourceUtils.getGlobalImage("signpost_right_point.png", false);
+
+	public static ArrayList<Quad> quads = new ArrayList<Quad>(Quad.class);
 
 	public Signpost() {
 		super();
@@ -50,21 +52,18 @@ public class Signpost extends GameObject {
 		for (Place place : places) {
 			Direction direction = getDirectionObjectIsIn(place, square);
 			if (direction == Direction.UP) {
-				System.out.println("Putting obj in up - " + place);
 				signpost.upPlaces.add(place);
 			} else if (direction == Direction.DOWN) {
-				System.out.println("Putting obj in down - " + place);
 				signpost.downPlaces.add(place);
 			} else if (direction == Direction.LEFT) {
-				System.out.println("Putting obj in left - " + place);
 				signpost.leftPlaces.add(place);
 			} else if (direction == Direction.RIGHT) {
-				System.out.println("Putting obj in right - " + place);
 				signpost.rightPlaces.add(place);
 			}
 		}
 
 		signpost.conversation = signpost.createConversation(signpost.generateText());
+		signpost.createQuads();
 
 //		signpost.conversation = signpost.createConversation(new Object[] { GameObject.upTexture, " Shop  ",
 //				GameObject.rightTexture, " Estates  ", GameObject.downTexture, " Farm" });
@@ -81,7 +80,6 @@ public class Signpost extends GameObject {
 	}
 
 	public Direction getDirectionObjectIsIn(Place place, Square from) {
-		System.out.println("getDirectionObjectIsIn object = " + place);
 
 		Square to = place.getCentreSquare();
 
@@ -92,8 +90,6 @@ public class Signpost extends GameObject {
 	}
 
 	public Direction getDirectionSquareIsIn(Square to, Square from) {
-		System.out.println("getDirectionObjectIsIn to = " + to);
-		System.out.println("getDirectionObjectIsIn from = " + from);
 
 		int leftRightDifference = to.xInGrid - from.xInGrid;
 		int upDownDifference = to.yInGrid - from.yInGrid;
@@ -112,12 +108,7 @@ public class Signpost extends GameObject {
 		}
 	}
 
-	@Override
-	public boolean draw1() {
-
-		boolean shouldDraw = super.shouldDraw();
-		if (!shouldDraw)
-			return false;
+	public void createQuads() {
 
 		// Square part
 		float squareWidth = 16f;
@@ -126,7 +117,7 @@ public class Signpost extends GameObject {
 		float squareY1 = this.squareGameObjectIsOn.yInGridPixels;
 		float squareX2 = squareX1 + squareWidth;
 		float squareY2 = squareY1 + squareHeight;
-		QuadUtils.drawQuad(Color.WHITE, squareX1, squareY1, squareX2, squareY2);
+		quads.add(new Quad(squareX1, squareY1, squareX2, squareY2));
 
 		// Pole
 		float poleWidth = 8f;
@@ -135,7 +126,7 @@ public class Signpost extends GameObject {
 		float poleY1 = squareY2;
 		float poleX2 = poleX1 + poleWidth;
 		float poleY2 = poleY1 + poleHeight;
-		QuadUtils.drawQuad(Color.LIGHT_GRAY, poleX1, poleY1, poleX2, poleY2);
+		quads.add(new Quad(poleX1, poleY1, poleX2, poleY2));
 
 		// Up
 		for (int i = 0; i < upPlaces.size(); i++) {
@@ -143,15 +134,15 @@ public class Signpost extends GameObject {
 			float y1 = squareY1 - (i + 1) * squareHeight;
 			float y2 = y1 + squareHeight;
 
-			QuadUtils.drawQuad(Color.WHITE, squareX1, y1, squareX2, y2);
+			quads.add(new Quad(squareX1, y1, squareX2, y2));
 
-			TextureUtils.drawTexture(upPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
+//			TextureUtils.drawTexture(upPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
 
-			if (i == upPlaces.size() - 1) {
-				y1 -= squareHeight;
-				y2 -= squareHeight;
-				TextureUtils.drawTexture(upPoint, squareX1, y1, squareX2, y2);
-			}
+//			if (i == upPlaces.size() - 1) {
+//				y1 -= squareHeight;
+//				y2 -= squareHeight;
+//				TextureUtils.drawTexture(upPoint, squareX1, y1, squareX2, y2);
+//			}
 		}
 
 		// Down
@@ -160,15 +151,15 @@ public class Signpost extends GameObject {
 			float y1 = squareY2 + (i) * squareHeight;
 			float y2 = y1 + squareHeight;
 
-			QuadUtils.drawQuad(Color.WHITE, squareX1, y1, squareX2, y2);
+			quads.add(new Quad(squareX1, y1, squareX2, y2));
 
-			TextureUtils.drawTexture(downPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
+//			TextureUtils.drawTexture(downPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
 
-			if (i == downPlaces.size() - 1) {
-				y1 += squareHeight;
-				y2 += squareHeight;
-				TextureUtils.drawTexture(downPoint, squareX1, y1, squareX2, y2);
-			}
+//			if (i == downPlaces.size() - 1) {
+//				y1 += squareHeight;
+//				y2 += squareHeight;
+//				TextureUtils.drawTexture(downPoint, squareX1, y1, squareX2, y2);
+//			}
 		}
 
 		// Left
@@ -177,15 +168,15 @@ public class Signpost extends GameObject {
 			float x1 = squareX1 - (i + 1) * squareWidth;
 			float x2 = x1 + squareWidth;
 
-			QuadUtils.drawQuad(Color.WHITE, x1, squareY1, x2, squareY2);
+			quads.add(new Quad(x1, squareY1, x2, squareY2));
 
-			TextureUtils.drawTexture(leftPlaces.get(i).getIcon(), x1, squareY1, x2, squareY2);
+//			TextureUtils.drawTexture(leftPlaces.get(i).getIcon(), x1, squareY1, x2, squareY2);
 
-			if (i == leftPlaces.size() - 1) {
-				x1 -= squareWidth;
-				x2 -= squareWidth;
-				TextureUtils.drawTexture(leftPoint, x1, squareY1, x2, squareY2);
-			}
+//			if (i == leftPlaces.size() - 1) {
+//				x1 -= squareWidth;
+//				x2 -= squareWidth;
+//				TextureUtils.drawTexture(leftPoint, x1, squareY1, x2, squareY2);
+//			}
 		}
 
 		// Right
@@ -194,15 +185,28 @@ public class Signpost extends GameObject {
 			float x1 = squareX2 + (i) * squareWidth;
 			float x2 = x1 + squareWidth;
 
-			QuadUtils.drawQuad(Color.WHITE, x1, squareY1, x2, squareY2);
+			quads.add(new Quad(x1, squareY1, x2, squareY2));
 
-			TextureUtils.drawTexture(rightPlaces.get(i).getIcon(), x1, squareY1, x2, squareY2);
+//			TextureUtils.drawTexture(rightPlaces.get(i).getIcon(), x1, squareY1, x2, squareY2);
 
-			if (i == rightPlaces.size() - 1) {
-				x1 += squareWidth;
-				x2 += squareWidth;
-				TextureUtils.drawTexture(rightPoint, x1, squareY1, x2, squareY2);
-			}
+//			if (i == rightPlaces.size() - 1) {
+//				x1 += squareWidth;
+//				x2 += squareWidth;
+//				TextureUtils.drawTexture(rightPoint, x1, squareY1, x2, squareY2);
+//			}
+		}
+
+	}
+
+	@Override
+	public boolean draw1() {
+
+		boolean shouldDraw = super.shouldDraw();
+		if (!shouldDraw)
+			return false;
+
+		for (Quad quad : quads) {
+			QuadUtils.drawQuad(Color.WHITE, quad.x1, quad.y1, quad.x2, quad.y2);
 		}
 
 		return true;
