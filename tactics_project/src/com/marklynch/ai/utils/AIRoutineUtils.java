@@ -15,6 +15,7 @@ import com.marklynch.actions.ActionSkin;
 import com.marklynch.actions.ActionTakeItems;
 import com.marklynch.actions.ActiontTakeAll;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
@@ -33,7 +34,7 @@ public class AIRoutineUtils {
 	}
 
 	public static Square getRandomSquare(int minDistance, int maxDistance, boolean mustBeOutdoors,
-			boolean squareMustShare) {
+			boolean squareMustShare, Area area) {
 
 		int attempts = 0;
 		int maxAttempts = 5;
@@ -48,6 +49,11 @@ public class AIRoutineUtils {
 		while (attempts < maxAttempts) {
 
 			randomSquare = squaresInRange.get((int) (Math.random() * (squaresInRange.size() - 1)));
+
+			if (area != null && randomSquare.areaSquareIsIn != area) {
+				attempts++;
+				continue;
+			}
 
 			// AIPath currentActorPathToThisSquare =
 			// Game.level.activeActor.getPathTo(randomSquare);

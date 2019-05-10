@@ -55,7 +55,7 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 		if (state == STATE.HUNTING) {
 			// Go about ur business...
 			if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {
-				targetSquare = AIRoutineUtils.getRandomSquare(0, 10, true, true);
+				targetSquare = AIRoutineUtils.getRandomSquare(0, 10, true, true, null);
 			}
 
 			if (targetSquare != null) {

@@ -3,6 +3,7 @@ package com.marklynch.ai.routines;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Follower;
 import com.marklynch.objects.templates.Templates;
@@ -98,9 +99,16 @@ public class AIRoutineForFollower extends AIRoutine {
 		if (runDoorRoutine())
 			return;
 
+		if (state == STATE.FOLLOWING) {
+			Square randomSquare = AIRoutineUtils.getRandomSquare(10, 10, true, true, actor.area);
+			AIRoutineUtils.moveTowardsTargetSquare(randomSquare);
+			return;
+		}
+
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
 			actor.thoughtBubbleImageTextureObject = Templates.BED.imageTexture;
 			goToBedAndSleep();
+			return;
 		}
 	}
 

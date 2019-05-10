@@ -158,7 +158,7 @@ public class AIRoutineForThief extends AIRoutine {
 		if (state == STATE.THIEVING) {
 			// Go about ur business... (move around randomly...)
 			if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {
-				targetSquare = AIRoutineUtils.getRandomSquare(7, 10, true, true);
+				targetSquare = AIRoutineUtils.getRandomSquare(7, 10, true, true, null);
 			}
 
 			if (targetSquare != null) {

@@ -60,7 +60,7 @@ public class AIRoutineForRockGolem extends AIRoutine {
 				targetSquare = null;
 		} else if (rockGolem.squareGameObjectIsOn.structureRoomSquareIsIn != rockGolem.roomLivingIn) {
 			if (rockGolem.roomLivingIn == null) {
-				targetSquare = AIRoutineUtils.getRandomSquare(0, 5, true, true);
+				targetSquare = AIRoutineUtils.getRandomSquare(0, 5, true, true, null);
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			} else {
 				targetSquare = AIRoutineUtils.getRandomSquareInRoom(rockGolem.roomLivingIn);
