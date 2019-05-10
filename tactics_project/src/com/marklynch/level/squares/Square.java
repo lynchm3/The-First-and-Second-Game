@@ -767,27 +767,13 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			GameObject gameObject = gameObjectsToCheck.get(i);
 			if (!gameObject.discoveredObject)
 				continue;
-//			}
-
-//			if (gameObject instanceof WaterBody || gameObject instanceof Wall || gameObject.isFloorObject) {
-//				continue;
-//			}
 
 			if (!gameObject.squareGameObjectIsOn.visibleToPlayer && !gameObject.persistsWhenCantBeSeen)
 				continue;
 
-			// gameObject.imageTexture.getTexture().
+			int x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
 
-			int x = 0;
-//			if (gameObject.backwards) {
-//				x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
-//						+ Game.SQUARE_WIDTH * -gameObject.drawOffsetRatioX);
-//			} else {
-			x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
-//			}
-
-			// int x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
-			// + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
 			int y = (int) (gameObject.squareGameObjectIsOn.yInGridPixels + gameObject.drawOffsetY);
 			if (gameObject.getPrimaryAnimation() != null) {
 				x += gameObject.getPrimaryAnimation().offsetX;

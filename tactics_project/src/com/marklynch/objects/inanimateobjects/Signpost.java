@@ -12,6 +12,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 import com.marklynch.utils.Utils.Quad;
 
 public class Signpost extends GameObject {
@@ -31,6 +32,13 @@ public class Signpost extends GameObject {
 	public static Texture rightPoint = ResourceUtils.getGlobalImage("signpost_right_point.png", false);
 
 	public static ArrayList<Quad> quads = new ArrayList<Quad>(Quad.class);
+
+	float squareWidth;
+	float squareHeight;
+	float squareX1;
+	float squareY1;
+	float squareX2;
+	float squareY2;
 
 	public Signpost() {
 		super();
@@ -111,12 +119,12 @@ public class Signpost extends GameObject {
 	public void createQuads() {
 
 		// Square part
-		float squareWidth = 16f;
-		float squareHeight = 16f;
-		float squareX1 = this.squareGameObjectIsOn.xInGridPixels + Game.HALF_SQUARE_WIDTH - squareWidth / 2f;
-		float squareY1 = this.squareGameObjectIsOn.yInGridPixels;
-		float squareX2 = squareX1 + squareWidth;
-		float squareY2 = squareY1 + squareHeight;
+		squareWidth = 16f;
+		squareHeight = 16f;
+		squareX1 = this.squareGameObjectIsOn.xInGridPixels + Game.HALF_SQUARE_WIDTH - squareWidth / 2f;
+		squareY1 = this.squareGameObjectIsOn.yInGridPixels;
+		squareX2 = squareX1 + squareWidth;
+		squareY2 = squareY1 + squareHeight;
 		quads.add(new Quad(squareX1, squareY1, squareX2, squareY2));
 
 		// Pole
@@ -207,6 +215,66 @@ public class Signpost extends GameObject {
 
 		for (Quad quad : quads) {
 			QuadUtils.drawQuad(Color.WHITE, quad.x1, quad.y1, quad.x2, quad.y2);
+		}
+
+		// Up
+		for (int i = 0; i < upPlaces.size(); i++) {
+
+			float y1 = squareY1 - (i + 1) * squareHeight;
+			float y2 = y1 + squareHeight;
+
+			TextureUtils.drawTexture(upPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
+
+			if (i == upPlaces.size() - 1) {
+				y1 -= squareHeight;
+				y2 -= squareHeight;
+				TextureUtils.drawTexture(upPoint, squareX1, y1, squareX2, y2);
+			}
+		}
+
+		// Down
+		for (int i = 0; i < downPlaces.size(); i++) {
+
+			float y1 = squareY2 + (i) * squareHeight;
+			float y2 = y1 + squareHeight;
+
+			TextureUtils.drawTexture(downPlaces.get(i).getIcon(), squareX1, y1, squareX2, y2);
+
+			if (i == downPlaces.size() - 1) {
+				y1 += squareHeight;
+				y2 += squareHeight;
+				TextureUtils.drawTexture(downPoint, squareX1, y1, squareX2, y2);
+			}
+		}
+
+		// Left
+		for (int i = 0; i < leftPlaces.size(); i++) {
+
+			float x1 = squareX1 - (i + 1) * squareWidth;
+			float x2 = x1 + squareWidth;
+
+			TextureUtils.drawTexture(leftPlaces.get(i).getIcon(), x1, squareY1, x2, squareY2);
+
+			if (i == leftPlaces.size() - 1) {
+				x1 -= squareWidth;
+				x2 -= squareWidth;
+				TextureUtils.drawTexture(leftPoint, x1, squareY1, x2, squareY2);
+			}
+		}
+
+		// Right
+		for (int i = 0; i < rightPlaces.size(); i++) {
+
+			float x1 = squareX2 + (i) * squareWidth;
+			float x2 = x1 + squareWidth;
+
+			TextureUtils.drawTexture(rightPlaces.get(i).getIcon(), x1, squareY1, x2, squareY2);
+
+			if (i == rightPlaces.size() - 1) {
+				x1 += squareWidth;
+				x2 += squareWidth;
+				TextureUtils.drawTexture(rightPoint, x1, squareY1, x2, squareY2);
+			}
 		}
 
 		return true;
