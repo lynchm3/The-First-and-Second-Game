@@ -45,6 +45,7 @@ public class Nodes {
 	public static Node farmStorage; // 4,62
 	public static Node farmBackDoor; // 18,62
 	public static Node farmPigPen; // 4,62
+	public static Node farmBarnDoorway; // 19,95
 
 	// Forest
 	public static Node forestNorthWest; // 111,18
@@ -145,6 +146,9 @@ public class Nodes {
 
 		farmPigPen = new Node("Farm Pig Pen", squares[32][72]);
 		nodes.add(farmPigPen);
+
+		farmBarnDoorway = new Node("Farm Pig Pen", squares[21][95]);
+		nodes.add(farmBarnDoorway);
 
 		// forest
 		forestNorthWest = new Node("Town North East", squares[111][18]);
@@ -249,6 +253,7 @@ public class Nodes {
 		farmRoadEast.neighbors.add(farmRoadWest);
 		farmRoadEast.neighbors.add(farmEntrance);
 		farmRoadEast.neighbors.add(farmPigPen);
+		farmRoadEast.neighbors.add(farmBarnDoorway);
 		farmRoadEast.neighbors.add(farmBackDoor);
 		farmRoadEast.neighbors.add(townSouthEast);
 		// farmRoadEast.neighbors.add(townCenter);
@@ -269,6 +274,7 @@ public class Nodes {
 		farmBackDoor.neighbors.add(farmRoadEast);
 
 		farmPigPen.neighbors.add(farmRoadEast);
+		farmBarnDoorway.neighbors.add(farmRoadEast);
 
 		// forest
 		forestNorthWest.neighbors.add(lodgeJunction);

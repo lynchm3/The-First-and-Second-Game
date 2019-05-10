@@ -42,6 +42,11 @@ public class QuestThePigs extends Quest {
 	StructureRoom farmHouseBedroom;
 	StructureRoom farmHouseHallRoom;
 
+	// Barn
+	public static Structure barnStructure;
+	StructureSection barnSection;
+	StructureRoom barnRoom;
+
 	// Actors
 	Pig larry, wendy, jane, steve, prescilla;
 	Human farmer;
@@ -185,6 +190,34 @@ public class QuestThePigs extends Quest {
 		GameObject pigSign = Templates.PIG_SIGN.makeCopy(Game.level.squares[25][70], farmer);
 		Templates.BENCH.makeCopy(Game.level.squares[15][68], farmer);
 		GameObject well = Templates.WELL.makeCopy(Game.level.squares[17][61], farmer);
+
+		/// BARN
+
+		ArrayList<Wall> barnWalls = new ArrayList<Wall>(Wall.class);
+		ArrayList<StructureFeature> barnFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
+		ArrayList<StructurePath> barnPaths = new ArrayList<StructurePath>(StructurePath.class);
+		ArrayList<StructureSection> barnSections = new ArrayList<StructureSection>(StructureSection.class);
+		ArrayList<StructureRoom> barnRooms = new ArrayList<StructureRoom>(StructureRoom.class);
+		ArrayList<Square> barnSquaresToRemove = new ArrayList<Square>(Square.class);
+
+		// Barn door
+		Door barnDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][95], false, false, false, farmer);
+		barnFeatures.add(new StructureFeature(barnDoor, Nodes.farmBarnDoorway));
+
+		barnSection = new StructureSection("Barn", 14, 95, 27, 110, false, false, farmer);
+		barnRoom = new StructureRoom("Barn", 15, 96, false, false, new ArrayList<Actor>(Actor.class),
+				new Node[] { Nodes.farmBarnDoorway }, new RoomPart(15, 96, 26, 109));
+
+		barnSections.add(barnSection);
+		barnRooms.add(barnRoom);
+
+		barnStructure = new Structure("Farm House", barnSections, barnRooms, barnPaths, barnFeatures,
+				new ArrayList<Square>(Square.class), null, Templates.PIG.imageTexture, 14, 95, 27, 110, true, farmer,
+				barnSquaresToRemove, barnWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 3);
+
+		Game.level.structures.add(barnStructure);
+		// END OF BARN
+
 		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
 		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
 		well.inventory.add(Templates.GOLD.makeCopy(null, farmer, 1));
