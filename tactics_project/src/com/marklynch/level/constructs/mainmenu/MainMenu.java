@@ -2,6 +2,10 @@ package com.marklynch.level.constructs.mainmenu;
 
 import java.util.ArrayList;
 
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
 import com.marklynch.Game;
 import com.marklynch.data.Load;
 import com.marklynch.data.Save;
@@ -45,6 +49,8 @@ public class MainMenu implements Draggable, Scrollable {
 	int titleY2;
 	int titleWidth = 640;
 	int titleHeight = 128;
+	int pixelToZoomOnX;
+	int pixelToZoomOnY;
 
 	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 
@@ -56,6 +62,13 @@ public class MainMenu implements Draggable, Scrollable {
 
 	Color translucentBlack = new Color(0f, 0f, 0f, 0.5f);
 	public final static float blackBarWidth = 300;
+
+	boolean animatingOpen = false;
+	boolean animatingClose = false;
+	float zoom = 1f;
+	float openedZoom = 1f;
+	float closedZoom = 600f;
+	float zoomSpeed = 1.1f;
 
 	public MainMenu() {
 
@@ -130,29 +143,69 @@ public class MainMenu implements Draggable, Scrollable {
 
 	public void resize() {
 
-		titleX1 = 0;// (int) (Game.windowWidth / 2 - titleWidth / 2);
-		titleY1 = (int) ((Game.windowHeight / 2 - titleHeight / 2) * (Game.windowWidth / titleWidth));
-		titleX2 = (int) Game.windowWidth;// titleX1 + titleWidth;
+		titleX1 = (int) (Game.windowWidth / 2 - titleWidth / 2);
+		titleY1 = (int) (Game.windowHeight / 2 - titleHeight / 2);
+		titleX2 = titleX1 + titleWidth;
 		titleY2 = titleY1 + titleHeight;
+		pixelToZoomOnX = titleX1 + 190;
+		pixelToZoomOnY = titleY1 + 64;
 
 	}
 
 	public void open() {
 		resize();
+		this.animatingOpen = true;
+		this.animatingClose = false;
+		this.zoom = closedZoom;
 		showing = true;
 
 	}
 
 	public void close() {
-		showing = false;
+		this.animatingOpen = false;
+		this.animatingClose = true;
+		this.zoom = openedZoom;
 	}
 
 	public void drawStaticUI() {
 
+		if (animatingClose) {
+			zoom *= zoomSpeed;
+
+			if (zoom >= closedZoom) {
+				animatingClose = false;
+				zoom = closedZoom;
+				showing = false;
+			}
+		}
+
+		if (animatingOpen) {
+			zoom /= zoomSpeed;
+
+			if (zoom <= openedZoom) {
+				this.animatingOpen = false;
+				zoom = openedZoom;
+			}
+
+		}
+
+		if (zoom != 1) {
+
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+			view.setIdentity();
+			view.translate(new Vector2f(pixelToZoomOnX, pixelToZoomOnY));
+			view.scale(new Vector3f(zoom, zoom, 1f));
+			view.translate(new Vector2f(-pixelToZoomOnX, -pixelToZoomOnY));
+			Game.activeBatch.updateUniforms();
+			Game.flush();
+		}
+
+		// 190,64
+
 		// links.clear();
 
-		// Black cover
-		QuadUtils.drawQuad(translucentBlack, 0, 0, Game.windowWidth, Game.windowHeight);
+		// Black translucent cover
+//		QuadUtils.drawQuad(translucentBlack, 0, 0, Game.windowWidth, Game.windowHeight);
 
 		// Left black
 		QuadUtils.drawQuad(Color.BLACK, 0, 0, titleX1, Game.windowHeight);
@@ -169,8 +222,10 @@ public class MainMenu implements Draggable, Scrollable {
 		TextureUtils.drawTexture(textureMainMenu, titleX1, titleY1, titleX2, titleY2);
 
 		// Buttons
-		for (Button button : buttons) {
-			button.draw();
+		if (!animatingClose && !animatingOpen) {
+			for (Button button : buttons) {
+				button.draw();
+			}
 		}
 	}
 
