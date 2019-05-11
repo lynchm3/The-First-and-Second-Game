@@ -15,7 +15,7 @@ public class Follower extends Human implements Comparator<GameObject> {
 
 	public Follower() {
 		super();
-		type = "Doctor";
+		type = "Follower";
 	}
 
 	@Override

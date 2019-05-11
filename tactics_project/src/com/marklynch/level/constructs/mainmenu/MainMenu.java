@@ -39,10 +39,12 @@ public class MainMenu implements Draggable, Scrollable {
 
 	public boolean showing = true;
 
-	int titleX;
-	int titleY;
-
-	transient static int bottomBorderHeight;
+	int titleX1;
+	int titleY1;
+	int titleX2;
+	int titleY2;
+	int titleWidth = 640;
+	int titleHeight = 128;
 
 	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 
@@ -128,9 +130,10 @@ public class MainMenu implements Draggable, Scrollable {
 
 	public void resize() {
 
-		titleX = (int) (Game.windowWidth / 2 - 640 / 2);
-		titleY = (int) (Game.windowHeight / 2 - 128 / 2);
-		bottomBorderHeight = 384;
+		titleX1 = 0;// (int) (Game.windowWidth / 2 - titleWidth / 2);
+		titleY1 = (int) ((Game.windowHeight / 2 - titleHeight / 2) * (Game.windowWidth / titleWidth));
+		titleX2 = (int) Game.windowWidth;// titleX1 + titleWidth;
+		titleY2 = titleY1 + titleHeight;
 
 	}
 
@@ -151,9 +154,19 @@ public class MainMenu implements Draggable, Scrollable {
 		// Black cover
 		QuadUtils.drawQuad(translucentBlack, 0, 0, Game.windowWidth, Game.windowHeight);
 
-		QuadUtils.drawQuad(Color.BLACK, 0, 0, blackBarWidth, Game.windowHeight);
+		// Left black
+		QuadUtils.drawQuad(Color.BLACK, 0, 0, titleX1, Game.windowHeight);
 
-		TextureUtils.drawTexture(textureMainMenu, titleX, titleY, titleX + 640, titleY + 128);
+		// Top black
+		QuadUtils.drawQuad(Color.BLACK, 0, 0, titleX2, titleY1);
+
+		// Right black
+		QuadUtils.drawQuad(Color.BLACK, titleX2, 0, Game.windowWidth, Game.windowHeight);
+
+		// Bottom black
+		QuadUtils.drawQuad(Color.BLACK, 0, titleY2, Game.windowWidth, Game.windowHeight);
+
+		TextureUtils.drawTexture(textureMainMenu, titleX1, titleY1, titleX2, titleY2);
 
 		// Buttons
 		for (Button button : buttons) {
