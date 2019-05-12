@@ -942,32 +942,50 @@ public class Level {
 	}
 
 	public void drawForeground() {
-		// Background decorations
 
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
 			Game.flush();
-			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				// is it better to bind once and draw all the same ones?
-				for (GameObject gameObject : squares[i][j].inventory.gameObjects) {
 
+			// Floor objects
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				for (GameObject gameObject : squares[i][j].inventory.floorObjects) {
 					gameObject.draw1();
 				}
 			}
 
 			Game.flush();
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				// is it better to bind once and draw all the same ones?
-				for (GameObject gameObject : squares[i][j].inventory.gameObjects) {
-
+				for (GameObject gameObject : squares[i][j].inventory.floorObjects) {
 					gameObject.draw2();
 				}
 			}
 
 			Game.flush();
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				// is it better to bind once and draw all the same ones?
-				for (GameObject gameObject : squares[i][j].inventory.gameObjects) {
+				for (GameObject gameObject : squares[i][j].inventory.floorObjects) {
+					gameObject.draw3();
+				}
+			}
+			Game.flush();
+
+			// Non-floor objects
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				for (GameObject gameObject : squares[i][j].inventory.nonFloorObjects) {
+					gameObject.draw1();
+				}
+			}
+
+			Game.flush();
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				for (GameObject gameObject : squares[i][j].inventory.nonFloorObjects) {
+					gameObject.draw2();
+				}
+			}
+
+			Game.flush();
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				for (GameObject gameObject : squares[i][j].inventory.nonFloorObjects) {
 					gameObject.draw3();
 				}
 			}

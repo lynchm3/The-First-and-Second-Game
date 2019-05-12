@@ -79,6 +79,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public transient ArrayList<InventorySquare> inventorySquares = new ArrayList<InventorySquare>(
 			InventorySquare.class);
 	public ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(GameObject.class);
+	public ArrayList<GameObject> floorObjects = new ArrayList<GameObject>(GameObject.class);
+	public ArrayList<GameObject> nonFloorObjects = new ArrayList<GameObject>(GameObject.class);
 	public ArrayList<GameObject> filteredGameObjects = new ArrayList<GameObject>(GameObject.class);
 
 	public transient boolean isOpen = false;

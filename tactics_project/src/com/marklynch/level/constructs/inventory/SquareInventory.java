@@ -62,6 +62,12 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 			// add to this inventory
 			gameObjects.add(gameObject);
+			if (gameObject.isFloorObject) {
+				floorObjects.add(gameObject);
+			} else {
+				nonFloorObjects.add(gameObject);
+			}
+
 			for (GameObject gameObjectsInInventory : gameObject.inventory.gameObjects) {
 				gameObjectsInInventory.lastSquare = this.square;
 			}
@@ -94,6 +100,11 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			gameObject.lastSquare = this.square;
 			gameObject.squareGameObjectIsOn = null;
 			gameObjects.remove(gameObject);
+			if (gameObject.isFloorObject) {
+				floorObjects.remove(gameObject);
+			} else {
+				nonFloorObjects.remove(gameObject);
+			}
 
 			if (gameObject instanceof UpdatableGameObject && Level.updatableGameObjects.contains(gameObject)) {
 				Level.updatableGameObjects.remove((UpdatableGameObject) gameObject);
