@@ -302,6 +302,7 @@ public class Templates {
 	public static Wall WALL_BUILDING;
 	public static WallWithCrack WALL_WITH_CRACK;
 	public static Wall FALSE_WALL;
+	public static Wall READABLE_WALL;
 	public static GameObject RUBBLE;
 	public static Fireplace FIRE_PLACE;
 	public static InputDrain INPUT_DRAIN;
@@ -444,5 +445,6 @@ public class Templates {
 	public static GameObject LEAVES;
 	public static GameObject GIANT_FOOTPRINT;
 	public static GameObject GIANT_FOOTPRINT_LEFT;
+	public static GameObject READABLE_FLOOR;
 
 }

@@ -32,6 +32,19 @@ public class TemplatesBuilding {
 		Templates.WALL_CAVE.templateId = GameObject.generateNewTemplateId();
 		Templates.WALL_CAVE.setAllResistances100();
 
+		Templates.READABLE_WALL = new Wall();
+		Templates.READABLE_WALL.name = "Engraved Wall";
+		Templates.READABLE_WALL.imageTexture = getGlobalImage("readable_wall.png", true);
+		Templates.READABLE_WALL.totalHealth = Templates.READABLE_WALL.remainingHealth = 1000;
+		Templates.READABLE_WALL.soundWhenHit = 10f;
+		Templates.READABLE_WALL.soundWhenHitting = 1f;
+		Templates.READABLE_WALL.soundDampening = 10f;
+		Templates.READABLE_WALL.weight = 1000f;
+		Templates.READABLE_WALL.value = 24;
+		Templates.READABLE_WALL.maxRandomness = 16f;
+		Templates.READABLE_WALL.templateId = GameObject.generateNewTemplateId();
+		Templates.READABLE_WALL.setAllResistances100();
+
 		Templates.FENCE = new Wall();
 		Templates.FENCE.name = "Fence";
 		Templates.FENCE.imageTexture = getGlobalImage("fence.png", true);

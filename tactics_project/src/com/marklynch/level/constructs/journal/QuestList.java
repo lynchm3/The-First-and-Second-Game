@@ -226,6 +226,9 @@ public class QuestList extends ArrayList<Quest> {
 
 		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>(StructureFeature.class);
 		features.addAll(puzzleRoomMaze.features);
+		Wall readableWall = Templates.READABLE_WALL.makeCopy(Level.squares[puzzleRoomsX + 27][puzzleRoomsY + 10], null);
+		readableWall.conversation = readableWall.createConversation("Watup, I'm a wall");
+		features.add(new StructureFeature(readableWall));
 
 		ArrayList<Square> entrances = new ArrayList<Square>(Square.class);
 		entrances.add(Level.squares[puzzleRoomsX][puzzleRoomsY + 10]);
