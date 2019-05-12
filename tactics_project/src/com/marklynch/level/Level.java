@@ -945,6 +945,7 @@ public class Level {
 
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
+			// Floor objects
 			Game.flush();
 
 			// Floor objects
@@ -967,6 +968,11 @@ public class Level {
 					gameObject.draw3();
 				}
 			}
+			Game.flush();
+		}
+
+		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+
 			Game.flush();
 
 			// Non-floor objects
