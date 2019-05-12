@@ -231,6 +231,9 @@ public class ActionDie extends Action {
 				Templates.BROKEN_GLASS.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
 			} else if (gameObjectPerformer instanceof Wall) {
 				Templates.RUBBLE.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+				gameObjectPerformer.squareGameObjectIsOn.setFloorImageTexture(Square.STONE_TEXTURE);
+
+				gameObjectPerformer.showPow(GameObject.dustCloudTexture, 200, 200);
 			}
 
 			for (GameObject gameObject : gameObjectPerformer.inventory.gameObjects) {

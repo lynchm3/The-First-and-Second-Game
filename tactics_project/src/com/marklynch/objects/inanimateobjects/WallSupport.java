@@ -72,7 +72,7 @@ public class WallSupport extends GameObject {
 					@Override
 					public void animationComplete(GameObject gameObject) {
 
-						surroundingObjectToCollapse.showPow(GameObject.dustCloudTexture, 200, 200);
+//						surroundingObjectToCollapse.showPow(GameObject.dustCloudTexture, 200, 200);
 
 						surroundingObjectToCollapse.changeHealthSafetyOff(-surroundingObjectToCollapse.remainingHealth,
 								attacker, action);
