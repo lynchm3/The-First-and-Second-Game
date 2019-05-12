@@ -13,6 +13,7 @@ import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
+import com.marklynch.utils.Utils;
 
 public class EffectBurn extends Effect {
 
@@ -131,7 +132,7 @@ public class EffectBurn extends Effect {
 //					actorPositionYInPixels + offsetY * maxDropletHeight + maxDropletHeight, target.backwards);
 
 			for (Flame flame : flames) {
-				flame.draw2(actorPositionXInPixels, actorPositionYInPixels);
+				flame.draw2(target, actorPositionXInPixels, actorPositionYInPixels);
 			}
 		}
 
@@ -154,7 +155,7 @@ public class EffectBurn extends Effect {
 			y = (float) (Math.random() * (maxY - minY)) + minY;
 		}
 
-		public void draw2(int actorPositionXInPixels, int actorPositionYInPixels) {
+		public void draw2(GameObject gameObject, int actorPositionXInPixels, int actorPositionYInPixels) {
 
 			if (gettingBigger) {
 				scale += 0.5f;
@@ -174,9 +175,14 @@ public class EffectBurn extends Effect {
 
 			}
 
-			TextureUtils.drawTexture(flameTexture, 1f, actorPositionXInPixels + x + maxDropletScale / 2 - scale / 2,
-					actorPositionYInPixels + y - scale, actorPositionXInPixels + x + scale, actorPositionYInPixels + y,
-					target.backwards);
+			if (gameObject.checkIfPointOnGameObject(
+					new Utils.Point(actorPositionYInPixels + x, actorPositionYInPixels + y))) {
+
+				TextureUtils.drawTexture(flameTexture, 1f, actorPositionXInPixels + x + maxDropletScale / 2 - scale / 2,
+						actorPositionYInPixels + y - scale, actorPositionXInPixels + x + scale,
+						actorPositionYInPixels + y, target.backwards);
+
+			}
 
 		}
 
