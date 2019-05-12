@@ -272,8 +272,7 @@ public class PuzzleRoomMaze extends StructureRoom {
 
 		// Cracked walls blocking the way to the treasure
 		// x = 26, y = 11
-		this.features.add(
-				new StructureFeature(Templates.WALL_WITH_CRACK.makeCopy(Level.squares[posX + 26][posY + 11], null)));
+		this.extraWalls.add(Templates.WALL_WITH_CRACK.makeCopy(Level.squares[posX + 26][posY + 11], null));
 
 		// Main treasure @24,2
 		Templates.KATANA.makeCopy(Level.squares[posX + 24][posY + 2], null);

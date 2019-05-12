@@ -226,9 +226,6 @@ public class QuestList extends ArrayList<Quest> {
 
 		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>(StructureFeature.class);
 		features.addAll(puzzleRoomMaze.features);
-		Wall readableWall = Templates.READABLE_WALL.makeCopy(Level.squares[puzzleRoomsX + 27][puzzleRoomsY + 10], null);
-		readableWall.conversation = readableWall.createConversation("Watup, I'm a wall");
-		features.add(new StructureFeature(readableWall));
 
 		ArrayList<Square> entrances = new ArrayList<Square>(Square.class);
 		entrances.add(Level.squares[puzzleRoomsX][puzzleRoomsY + 10]);
@@ -237,6 +234,9 @@ public class QuestList extends ArrayList<Quest> {
 		// squaresToRemove.add(Level.squares[x][y + 32]);
 		ArrayList<Wall> extraWalls = new ArrayList<Wall>(Wall.class);
 		extraWalls.add(Templates.FALSE_WALL.makeCopy(Level.squares[puzzleRoomsX + 1 + 1][puzzleRoomsY + 22 + 0], null));
+		Wall readableWall = Templates.READABLE_WALL.makeCopy(Level.squares[puzzleRoomsX + 27][puzzleRoomsY + 10], null);
+		readableWall.conversation = readableWall.createConversation("Watup, I'm a wall");
+		extraWalls.add(readableWall);
 
 		Structure puzzleStructure = new Structure("Puzzle Structure", structureSections, puzzleStructureRooms, paths,
 				features, entrances, "building2.png", ResourceUtils.getGlobalImage("icon_cave.png", false),
