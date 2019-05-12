@@ -175,14 +175,26 @@ public class EffectBurn extends Effect {
 
 			}
 
-			if (gameObject.checkIfPointOnGameObject(
-					new Utils.Point(actorPositionYInPixels + x, actorPositionYInPixels + y))) {
+//FLAME - 
+//checkIfPointOnGameObject point = Point [x=15668.897, y=15787.899]
+//
+//MOUSE - 
+//checkIfPointOnGameObject point = Point [x=13886.0, y=15718.0]
+//
+//WEIRD
+//The Y is a bit off
+//The X is WAY off
 
-				TextureUtils.drawTexture(flameTexture, 1f, actorPositionXInPixels + x + maxDropletScale / 2 - scale / 2,
-						actorPositionYInPixels + y - scale, actorPositionXInPixels + x + scale,
-						actorPositionYInPixels + y, target.backwards);
+			if (gameObject.checkIfPointOnGameObject(
+					new Utils.Point(actorPositionYInPixels + x, actorPositionYInPixels + y), false)) {
 
 			}
+
+			TextureUtils.drawTexture(flameTexture, 1f, actorPositionXInPixels + x + maxDropletScale / 2 - scale / 2,
+					actorPositionYInPixels + y - scale, actorPositionXInPixels + x + scale, actorPositionYInPixels + y,
+					target.backwards);
+
+//			}
 
 		}
 

@@ -773,8 +773,9 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			if (!gameObjectToCheck.squareGameObjectIsOn.visibleToPlayer && !gameObjectToCheck.persistsWhenCantBeSeen)
 				continue;
 
-			boolean pointOnGameObject = gameObjectToCheck.checkIfPointOnGameObject(new Utils.Point(
-					(int) (UserInputLevel.mouseXTransformed), (int) (UserInputLevel.mouseYTransformed)));
+			boolean pointOnGameObject = gameObjectToCheck.checkIfPointOnGameObject(
+					new Utils.Point((int) (UserInputLevel.mouseXTransformed), (int) (UserInputLevel.mouseYTransformed)),
+					true);
 			if (pointOnGameObject)
 				return gameObjectToCheck;
 		}

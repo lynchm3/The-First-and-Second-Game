@@ -2791,7 +2791,11 @@ public class GameObject
 		}
 	}
 
-	public boolean checkIfPointOnGameObject(Utils.Point point) {
+	public boolean checkIfPointOnGameObject(Utils.Point point, boolean fromMouse) {
+
+		if (!fromMouse) {
+			System.out.println("checkIfPointOnGameObject point = " + point);
+		}
 
 		int x = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * this.drawOffsetRatioX);
 
