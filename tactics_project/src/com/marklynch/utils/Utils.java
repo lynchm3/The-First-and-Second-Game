@@ -105,4 +105,46 @@ public class Utils {
 		return list;
 	}
 
+	public static Point rotatePoint(float cx, float cy, float angle, Point p) {
+		double s = Math.sin(angle);
+		double c = Math.cos(angle);
+
+		// translate point back to origin:
+		p.x -= cx;
+		p.y -= cy;
+
+		// rotate point
+		double xnew = p.x * c - p.y * s;
+		double ynew = p.x * s + p.y * c;
+
+		// translate point back:
+		p.x = (float) (xnew + cx);
+		p.y = (float) (ynew + cy);
+		return p;
+	}
+
+	public static Color getPixel(Texture texture, int x, int y) {
+
+		if (texture == null || texture.pixels == null)
+			return null;
+		// in method
+		if (x < 0 || y < 0)
+			return null;
+
+		if (x > texture.getWidth() - 1 || y > texture.getHeight() - 1) {
+			return null;
+		}
+
+		int index = (x + y * texture.getWidth());
+		if (index + 3 >= texture.pixels.length)
+			return null;
+
+		// int r = texture.pixels[index] & 0xFF;
+		// int g = texture.pixels[index + 1] & 0xFF;
+		// int b = texture.pixels[index + 2] & 0xFF;
+		int a = texture.pixels[index + 3] & 0xFF;
+
+		return new Color(0, 0, 0, a);
+	}
+
 }

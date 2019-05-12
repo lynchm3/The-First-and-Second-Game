@@ -102,6 +102,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Animal;
 import com.marklynch.objects.actors.Fish;
+import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.actors.Monster;
 import com.marklynch.objects.armor.BodyArmor;
 import com.marklynch.objects.armor.Helmet;
@@ -123,6 +124,7 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
+import com.marklynch.utils.Utils;
 
 public class GameObject
 		implements Idable, ActionableInWorld, ActionableInInventory, Comparable, InventoryParent, DamageDealer {
@@ -2787,5 +2789,51 @@ public class GameObject
 			Level.gameObjectsToFlash.add(this);
 			Level.flashGameObjectCounters.put(this, 0);
 		}
+	}
+
+	public boolean checkIfPointOnGameObject(Utils.Point point) {
+
+		int x = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * this.drawOffsetRatioX);
+
+		int y = (int) (this.squareGameObjectIsOn.yInGridPixels + this.drawOffsetY);
+		if (this.getPrimaryAnimation() != null) {
+			x += this.getPrimaryAnimation().offsetX;
+			y += this.getPrimaryAnimation().offsetY;
+		}
+
+		point.x -= x;
+		point.y -= y;
+
+		if (this.backwards) {
+			// how do i flip it?
+			point.x = this.width - point.x;
+		}
+
+		if (this.getPrimaryAnimation() != null && this.getPrimaryAnimation().torsoAngle != 0 && this instanceof Human) {
+
+			point = Utils.rotatePoint(this.halfWidth, ((Human) this).hipY, -this.getPrimaryAnimation().torsoAngle,
+					point);
+		}
+
+		// FirstCheckBounding box :P
+		if (point.x > 0 && point.x < this.width && point.y > 0 && point.y < this.height) {
+			Color color = null;
+			if (this instanceof Human) {
+
+				Human human = (Human) this;
+
+				color = Utils.getPixel(human.torsoImageTexture, (int) point.x, (int) point.y);
+				if (color == null || color.a == 0) {
+					color = Utils.getPixel(human.pelvisImageTexture, (int) point.x, (int) point.y);
+				}
+			} else {
+				color = Utils.getPixel(this.imageTexture, (int) point.x, (int) point.y);
+			}
+
+			if (color != null && color.a > 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
