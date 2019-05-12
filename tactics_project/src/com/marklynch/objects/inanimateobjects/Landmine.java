@@ -61,13 +61,17 @@ public class Landmine extends GameObject implements OnCompletionListener {
 
 	}
 
+	boolean exploded = false;
+
 	@Override
 	public boolean checkIfDestroyed(Object attacker, Action action) {
-		boolean destroyed = super.checkIfDestroyed(attacker, action);
 
-		if (destroyed) {
-			new ActionUsePower(this, null, this.squareGameObjectIsOn, power.makeCopy(this), true).perform();
+		if (!exploded && !died && remainingHealth <= 0) {
+			exploded = true;
+			new ActionUsePower(this, null, this.lastSquare, power.makeCopy(this), true).perform();
 		}
+
+		boolean destroyed = super.checkIfDestroyed(attacker, action);
 
 		return destroyed;
 

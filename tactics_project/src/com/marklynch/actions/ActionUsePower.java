@@ -1,6 +1,7 @@
 package com.marklynch.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
@@ -43,6 +44,7 @@ public class ActionUsePower extends Action {
 		Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 		if (log && Game.level.shouldLog(gameObjectPerformer, targetSquare))
 			power.log(gameObjectPerformer, targetSquare);
+
 		power.cast(gameObjectPerformer, targetGameObject, targetSquare, this);
 
 		if (sound != null)
@@ -101,7 +103,7 @@ public class ActionUsePower extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (!targetSquare.visibleToPlayer && !power.hasRange(Integer.MAX_VALUE))
+		if (performer == Level.player && !targetSquare.visibleToPlayer && !power.hasRange(Integer.MAX_VALUE))
 			return false;
 
 		if (!targetSquare.playerCanCastTo && !power.hasRange(Integer.MAX_VALUE))

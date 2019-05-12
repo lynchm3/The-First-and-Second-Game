@@ -167,7 +167,7 @@ public class Level {
 	public transient LevelButton editorButton;
 
 	public static boolean paused = true;
-	public boolean showLog = true;
+	public boolean showLog = false;
 
 	public transient static int turn = 1;
 	// public ArrayList<Faction> factions;
@@ -2295,7 +2295,7 @@ public class Level {
 
 		// Run effects on inanimate objects
 		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>();
-		for (Effect effect : effectsOnInanimateGameObjects) {
+		for (Effect effect : (ArrayList<Effect>) effectsOnInanimateGameObjects.clone()) {
 			effect.activate();
 			if (effect.turnsRemaining == 0)
 				effectsToRemove.add(effect);
