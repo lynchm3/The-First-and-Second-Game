@@ -37,13 +37,8 @@ import mdesl.test.Util;
 
 public class Game {
 
-	public static int playerStartPosX = 5;
-	public static int playerStartPosY = 19;
-//	public static int playerStartPosX = 145;
-//	public static int playerStartPosY = 203;
-
-	// 104,151 boulder kill do it.
-	// Or even stand on that spot urself
+	public static int playerStartPosX = 150;
+	public static int playerStartPosY = 173;
 
 	public static final float MINIMUM_TURN_TIME = 500f; // ms
 

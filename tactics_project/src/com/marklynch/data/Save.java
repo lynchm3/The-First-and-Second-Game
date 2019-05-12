@@ -75,7 +75,6 @@ import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.inanimateobjects.VoidHole;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.inanimateobjects.WallSupport;
-import com.marklynch.objects.inanimateobjects.WallWithCrack;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.inanimateobjects.WaterSource;
@@ -129,7 +128,7 @@ public class Save {
 			// LVL 2 GameObject subclass
 			Door.class, Furnace.class, HidingPlace.class, Landmine.class, Spikes.class, Matches.class,
 			PressurePlate.class, PressurePlateRequiringSpecificItem.class, RemoteDoor.class, SmallHidingPlace.class,
-			Storage.class, Vein.class, WallWithCrack.class, WaterBody.class,
+			Storage.class, Vein.class, WaterBody.class,
 
 			// LVL 2 GameObject subclass in Weapon package
 			BodyArmor.class, Helmet.class, LegArmor.class,

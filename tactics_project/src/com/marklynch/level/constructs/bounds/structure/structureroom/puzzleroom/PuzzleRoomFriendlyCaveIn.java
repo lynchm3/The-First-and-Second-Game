@@ -12,7 +12,6 @@ import com.marklynch.objects.actors.Actor.HOBBY;
 import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Wall;
-import com.marklynch.objects.inanimateobjects.WallWithCrack;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.DeathListener;
 import com.marklynch.ui.ActivityLog;
@@ -25,7 +24,7 @@ public class PuzzleRoomFriendlyCaveIn extends StructureRoom implements DeathList
 	final static int totalHeightInSquares = 20;
 	final static int caveInYOffset = 10;
 	ArrayList<Square> caveInSquares = new ArrayList<Square>(Square.class);
-	WallWithCrack supportingWall;
+	Wall supportingWall;
 
 	public PuzzleRoomFriendlyCaveIn(int posX, int posY) {
 		super("Cave Shop", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},

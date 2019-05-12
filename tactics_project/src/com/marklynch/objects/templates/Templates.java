@@ -64,7 +64,6 @@ import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.inanimateobjects.VoidHole;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.inanimateobjects.WallSupport;
-import com.marklynch.objects.inanimateobjects.WallWithCrack;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.inanimateobjects.Well;
@@ -300,7 +299,7 @@ public class Templates {
 	public static Wall WALL_CAVE;
 	public static Wall WALL_GLASS;
 	public static Wall WALL_BUILDING;
-	public static WallWithCrack WALL_WITH_CRACK;
+	public static Wall WALL_WITH_CRACK;
 	public static Wall FALSE_WALL;
 	public static Wall READABLE_WALL;
 	public static GameObject RUBBLE;

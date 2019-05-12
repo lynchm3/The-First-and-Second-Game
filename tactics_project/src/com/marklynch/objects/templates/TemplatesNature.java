@@ -398,6 +398,19 @@ public class TemplatesNature {
 		Templates.STONE_FLOOR.orderingOnGound = 20;
 		Templates.STONE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
+		Templates.READABLE_FLOOR = new GameObject();
+		Templates.READABLE_FLOOR.name = "Etched Floor";
+		Templates.READABLE_FLOOR.imageTexture = Square.ETCHED_FLOOR_TEXTURE;
+		Templates.READABLE_FLOOR.canBePickedUp = false;
+		Templates.READABLE_FLOOR.fitsInInventory = false;
+		Templates.READABLE_FLOOR.persistsWhenCantBeSeen = true;
+		Templates.READABLE_FLOOR.attackable = false;
+//		Templates.READABLE_FLOOR.isFloorObject = true;
+		Templates.READABLE_FLOOR.drawShadow = false;
+		Templates.READABLE_FLOOR.moveable = false;
+		Templates.READABLE_FLOOR.orderingOnGound = 20;
+		Templates.READABLE_FLOOR.templateId = GameObject.generateNewTemplateId();
+
 		Templates.LEAVES = new GameObject();
 		Templates.LEAVES.name = "Leaves";
 		Templates.LEAVES.imageTexture = getGlobalImage("leaves.png", true);

@@ -13,7 +13,6 @@ import com.marklynch.objects.inanimateobjects.InputDrain;
 import com.marklynch.objects.inanimateobjects.MineCart;
 import com.marklynch.objects.inanimateobjects.Rail;
 import com.marklynch.objects.inanimateobjects.Wall;
-import com.marklynch.objects.inanimateobjects.WallWithCrack;
 
 public class TemplatesBuilding {
 
@@ -86,7 +85,7 @@ public class TemplatesBuilding {
 		Templates.WALL_BUILDING.templateId = GameObject.generateNewTemplateId();
 		Templates.WALL_BUILDING.setAllResistances100();
 
-		Templates.WALL_WITH_CRACK = new WallWithCrack();
+		Templates.WALL_WITH_CRACK = new Wall();
 		Templates.WALL_WITH_CRACK.name = "Wall";
 		Templates.WALL_WITH_CRACK.imageTexture = getGlobalImage("wall_crack.png", true);
 		Templates.WALL_WITH_CRACK.totalHealth = Templates.WALL_WITH_CRACK.remainingHealth = 30;

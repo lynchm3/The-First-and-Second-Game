@@ -48,13 +48,17 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 		// this, Switch.SWITCH_TYPE.OPEN_CLOSE,
 		// new RequirementToMeet[] { new
 		// StatRequirementToMeet(HIGH_LEVEL_STATS.STRENGTH, 1) });
+
+		GameObject readableFloor = Templates.READABLE_FLOOR.makeCopy(Game.level.squares[posX][posY], null);
+		readableFloor.conversation = readableFloor.createConversation("Watup, I'm a floor");
+
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[posX - 1][posY + totalHeightInSquares / 2 - 1], null,
 				Switch.SWITCH_TYPE.OPEN_CLOSE, 5, this);
 
 		Templates.CRATE.makeCopy(Level.squares[posX + totalWidthInSquares - 1][posY + totalHeightInSquares / 2], false,
 				null);
 
-		for (int i = posX; i < posX + totalWidthInSquares; i++) {
+		for (int i = posX + 1; i < posX + totalWidthInSquares; i++) {
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
 				Game.level.squares[i][j].setFloorImageTexture(Square.VOID_SQUARE);
 			}
@@ -76,7 +80,7 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 		}
 
 		// Put void hole on all the squares
-		for (int i = posX; i < posX + totalWidthInSquares; i++) {
+		for (int i = posX + 1; i < posX + totalWidthInSquares; i++) {
 
 			for (int j = posY; j < posY + totalHeightInSquares; j++) {
 				if (Level.squares[i][j].inventory.containsGameObjectWithTemplateId(Templates.STONE_FLOOR.templateId)) {

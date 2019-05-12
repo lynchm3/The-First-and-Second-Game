@@ -9,7 +9,7 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.objects.inanimateobjects.WallWithCrack;
+import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.DeathListener;
 import com.marklynch.ui.ActivityLog;
@@ -22,7 +22,7 @@ public class PuzzleRoomCaveInFight extends StructureRoom implements DeathListene
 	final static int totalHeightInSquares = 20;
 	final static int caveInYOffset = 10;
 	ArrayList<Square> caveInSquares = new ArrayList<Square>(Square.class);
-	WallWithCrack supportingWall;
+	Wall supportingWall;
 
 	public PuzzleRoomCaveInFight(int posX, int posY) {
 		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
