@@ -901,48 +901,7 @@ public class Level {
 			}
 		}
 
-		if (Game.gameObjectMouseIsOver != null && Game.gameObjectMouseIsOver.squareGameObjectIsOn != null) {
-			Game.gameObjectMouseIsOver.squareGameObjectIsOn.drawHighlight();
-			for (Square square : Game.gameObjectMouseIsOver.squaresToHighlight) {
-				square.drawHighlight();
-			}
-		} else if (Game.squareMouseIsOver != null) {
-			Game.squareMouseIsOver.drawHighlight();
-		}
-
-		Game.flush();
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.setIdentity();
-		Game.activeBatch.updateUniforms();
-
-		// Quest lines
-		// Journal.drawQuestMarkersForOffScreenObjectives();
-
-		// Draw lines for the popup windows
-		for (PinWindow window : this.pinWindows) {
-			window.drawLine();
-		}
-		Game.flush();
-		// if (levelMode == LevelMode.LEVEL_MODE_CAST) {
-		// for (int i = 0; i < 10; i++) {
-		// if (selectedPower.hasRange(i)) {
-		// ArrayList<Square> squaresToHighlight =
-		// Game.level.player.getAllSquaresWithinDistance(i,
-		// Game.level.player.squareGameObjectIsOn);
-		// for (Square squareToHighlight : squaresToHighlight) {
-		// if (squareToHighlight.visibleToPlayer) {
-		// squareToHighlight.drawHighlight();
-		// }
-		// }
-		//
-		// }
-		// }
-		// }
-
-	}
-
-	public void drawForeground() {
-
+		// Floor objects
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
 			// Floor objects
@@ -971,11 +930,38 @@ public class Level {
 			Game.flush();
 		}
 
+		if (Game.gameObjectMouseIsOver != null && Game.gameObjectMouseIsOver.squareGameObjectIsOn != null) {
+			Game.gameObjectMouseIsOver.squareGameObjectIsOn.drawHighlight();
+			for (Square square : Game.gameObjectMouseIsOver.squaresToHighlight) {
+				square.drawHighlight();
+			}
+		} else if (Game.squareMouseIsOver != null) {
+			Game.squareMouseIsOver.drawHighlight();
+		}
+
+		Game.flush();
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.setIdentity();
+		Game.activeBatch.updateUniforms();
+
+		// Quest lines
+		// Journal.drawQuestMarkersForOffScreenObjectives();
+
+		// Draw lines for the popup windows
+		for (PinWindow window : this.pinWindows) {
+			window.drawLine();
+		}
+		Game.flush();
+
+	}
+
+	public void drawForeground() {
+
+		// Non floor objects
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
 			Game.flush();
 
-			// Non-floor objects
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				for (GameObject gameObject : squares[i][j].inventory.nonFloorObjects) {
 					gameObject.draw1();
