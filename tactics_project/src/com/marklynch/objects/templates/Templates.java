@@ -445,5 +445,6 @@ public class Templates {
 	public static GameObject GIANT_FOOTPRINT;
 	public static GameObject GIANT_FOOTPRINT_LEFT;
 	public static GameObject READABLE_FLOOR;
+	public static GameObject STONE_BRIDGE_HORIZONTAL;
 
 }

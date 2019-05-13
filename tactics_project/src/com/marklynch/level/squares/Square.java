@@ -209,32 +209,32 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	// public static TooltipGroup tooltipGroup = null;
 
 	public static void loadStaticImages() {
-		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png", false);
+		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png", true);
 		tileColors.put(GRASS_TEXTURE, Color.GREEN);
-		DIGGABLE_GRASS_TEXTURE = ResourceUtils.getGlobalImage("diggable_grass.png", false);
+		DIGGABLE_GRASS_TEXTURE = ResourceUtils.getGlobalImage("diggable_grass.png", true);
 		tileColors.put(DIGGABLE_GRASS_TEXTURE, Color.GREEN);
-		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png", false);
+		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png", true);
 		tileColors.put(DARK_GRASS_TEXTURE, Color.GREEN);
-		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png", false);
+		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png", true);
 		tileColors.put(STONE_TEXTURE, Color.LIGHT_GRAY);
-		ETCHED_FLOOR_TEXTURE = ResourceUtils.getGlobalImage("etched_floor.png", false);
+		ETCHED_FLOOR_TEXTURE = ResourceUtils.getGlobalImage("etched_floor.png", true);
 		tileColors.put(ETCHED_FLOOR_TEXTURE, Color.LIGHT_GRAY);
-		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png", false);
+		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png", true);
 		tileColors.put(MUD_TEXTURE, Color.ORANGE);
-		WATER_TEXTURE = ResourceUtils.getGlobalImage("water_tile.png", false);
+		WATER_TEXTURE = ResourceUtils.getGlobalImage("water_tile.png", true);
 		tileColors.put(WATER_TEXTURE, Color.BLUE);
-		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png", false);
+		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png", true);
 		tileColors.put(GREY_TEXTURE, Color.GRAY);
-		GREY_OUT = ResourceUtils.getGlobalImage("grey_out.png", false);
-		WHITE_SQUARE = ResourceUtils.getGlobalImage("white_square.png", false);
+		GREY_OUT = ResourceUtils.getGlobalImage("grey_out.png", true);
+		WHITE_SQUARE = ResourceUtils.getGlobalImage("white_square.png", true);
 		tileColors.put(WHITE_SQUARE, Color.WHITE);
-		GREY_TRANSLUCENT_SQUARE = ResourceUtils.getGlobalImage("grey_translucent_square.png", false);
+		GREY_TRANSLUCENT_SQUARE = ResourceUtils.getGlobalImage("grey_translucent_square.png", true);
 		tileColors.put(GREY_TRANSLUCENT_SQUARE, Color.DARK_GRAY);
 //		YELLOW_SQUARE = ResourceUtils.getGlobalImage("yellow_square.png", false);
 //		tileColors.put(YELLOW_SQUARE, Color.YELLOW);
-		RED_SQUARE = ResourceUtils.getGlobalImage("red_square.png", false);
+		RED_SQUARE = ResourceUtils.getGlobalImage("red_square.png", true);
 		tileColors.put(RED_SQUARE, Color.RED);
-		VOID_SQUARE = ResourceUtils.getGlobalImage("void_hole.png", false);
+		VOID_SQUARE = ResourceUtils.getGlobalImage("void_hole.png", true);
 		tileColors.put(VOID_SQUARE, Color.BLACK);
 
 		W_TEXTURE = ResourceUtils.getGlobalImage("w.png", false);
@@ -773,8 +773,8 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			if (!gameObjectToCheck.squareGameObjectIsOn.visibleToPlayer && !gameObjectToCheck.persistsWhenCantBeSeen)
 				continue;
 
-			boolean pointOnGameObject = gameObjectToCheck.checkIfPointOnGameObject(
-					new Utils.Point((int) (UserInputLevel.mouseXTransformed), (int) (UserInputLevel.mouseYTransformed)));
+			boolean pointOnGameObject = gameObjectToCheck.checkIfPointOnGameObject(new Utils.Point(
+					(int) (UserInputLevel.mouseXTransformed), (int) (UserInputLevel.mouseYTransformed)));
 			if (pointOnGameObject)
 				return gameObjectToCheck;
 		}

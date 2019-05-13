@@ -398,6 +398,19 @@ public class TemplatesNature {
 		Templates.STONE_FLOOR.orderingOnGound = 20;
 		Templates.STONE_FLOOR.templateId = GameObject.generateNewTemplateId();
 
+		Templates.STONE_BRIDGE_HORIZONTAL = new GameObject();
+		Templates.STONE_BRIDGE_HORIZONTAL.name = "Floor";
+		Templates.STONE_BRIDGE_HORIZONTAL.imageTexture = getGlobalImage("stone_bridge_horizontal.png", true);
+		Templates.STONE_BRIDGE_HORIZONTAL.canBePickedUp = false;
+		Templates.STONE_BRIDGE_HORIZONTAL.fitsInInventory = false;
+		Templates.STONE_BRIDGE_HORIZONTAL.persistsWhenCantBeSeen = true;
+		Templates.STONE_BRIDGE_HORIZONTAL.attackable = false;
+		Templates.STONE_BRIDGE_HORIZONTAL.isFloorObject = true;
+		Templates.STONE_BRIDGE_HORIZONTAL.drawShadow = false;
+		Templates.STONE_BRIDGE_HORIZONTAL.moveable = false;
+		Templates.STONE_BRIDGE_HORIZONTAL.orderingOnGound = 20;
+		Templates.STONE_BRIDGE_HORIZONTAL.templateId = GameObject.generateNewTemplateId();
+
 		Templates.READABLE_FLOOR = new GameObject();
 		Templates.READABLE_FLOOR.name = "Etched Floor";
 		Templates.READABLE_FLOOR.imageTexture = Square.ETCHED_FLOOR_TEXTURE;

@@ -75,7 +75,7 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 		}
 
 		for (Square bridgeSquare : extendedBridgeSquares) {
-			GameObject floor = Templates.STONE_FLOOR.makeCopy(null, null);
+			GameObject floor = Templates.STONE_BRIDGE_HORIZONTAL.makeCopy(null, null);
 			Game.level.squares[bridgePosX][bridgeSquare.yInGrid].inventory.add(floor);
 		}
 
