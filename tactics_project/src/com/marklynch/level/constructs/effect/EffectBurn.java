@@ -38,8 +38,10 @@ public class EffectBurn extends Effect {
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_burn.png", false);
 		highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, new Stat(HIGH_LEVEL_STATS.FIRE_DAMAGE, 5));
-		for (int i = 0; i < 5; i++) {
-			flames.add(new Flame());
+		if (target != null) {
+			for (int i = 0; i < 5; i++) {
+				flames.add(new Flame(target));
+			}
 		}
 	}
 
@@ -141,15 +143,17 @@ public class EffectBurn extends Effect {
 	private class Flame {
 
 		public static final float maxDropletScale = 8;
-		public static final float minX = 52;
-		public static final float maxX = 70;
-		public static final float minY = 40;
-		public static final float maxY = 188;
+		public static final float minX = 0;
+		public float maxX = 128;
+		public static final float minY = 0;
+		public float maxY = 188;
 		public float x, y;
 		public float scale = 0;
 		boolean gettingBigger = true;
 
-		public Flame() {
+		public Flame(GameObject gameObject) {
+			maxX = gameObject.width;
+			maxY = gameObject.height;
 			scale = (float) (maxDropletScale * Math.random());
 			x = (float) (Math.random() * (maxX - minX)) + minX;
 			y = (float) (Math.random() * (maxY - minY)) + minY;
@@ -186,13 +190,13 @@ public class EffectBurn extends Effect {
 //The X is WAY off
 
 			if (gameObject.checkIfPointOnGameObject(
-					new Utils.Point(actorPositionYInPixels + x, actorPositionYInPixels + y), false)) {
+					new Utils.Point(actorPositionXInPixels + x, actorPositionYInPixels + y))) {
+
+				TextureUtils.drawTexture(flameTexture, 1f, actorPositionXInPixels + x + maxDropletScale / 2 - scale / 2,
+						actorPositionYInPixels + y - scale, actorPositionXInPixels + x + scale,
+						actorPositionYInPixels + y, target.backwards);
 
 			}
-
-			TextureUtils.drawTexture(flameTexture, 1f, actorPositionXInPixels + x + maxDropletScale / 2 - scale / 2,
-					actorPositionYInPixels + y - scale, actorPositionXInPixels + x + scale, actorPositionYInPixels + y,
-					target.backwards);
 
 //			}
 

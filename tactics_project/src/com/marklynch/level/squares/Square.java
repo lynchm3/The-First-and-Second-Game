@@ -774,8 +774,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 				continue;
 
 			boolean pointOnGameObject = gameObjectToCheck.checkIfPointOnGameObject(
-					new Utils.Point((int) (UserInputLevel.mouseXTransformed), (int) (UserInputLevel.mouseYTransformed)),
-					true);
+					new Utils.Point((int) (UserInputLevel.mouseXTransformed), (int) (UserInputLevel.mouseYTransformed)));
 			if (pointOnGameObject)
 				return gameObjectToCheck;
 		}
