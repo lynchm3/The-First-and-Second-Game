@@ -210,17 +210,17 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 	public static void loadStaticImages() {
 		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png", true);
-		tileColors.put(GRASS_TEXTURE, Color.GREEN);
+		tileColors.put(GRASS_TEXTURE, new Color(135, 163, 71));
 		DIGGABLE_GRASS_TEXTURE = ResourceUtils.getGlobalImage("diggable_grass.png", true);
-		tileColors.put(DIGGABLE_GRASS_TEXTURE, Color.GREEN);
+		tileColors.put(DIGGABLE_GRASS_TEXTURE, new Color(135, 163, 71));
 		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png", true);
-		tileColors.put(DARK_GRASS_TEXTURE, Color.GREEN);
+		tileColors.put(DARK_GRASS_TEXTURE, new Color(103, 135, 47));
 		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png", true);
 		tileColors.put(STONE_TEXTURE, Color.LIGHT_GRAY);
 		ETCHED_FLOOR_TEXTURE = ResourceUtils.getGlobalImage("etched_floor.png", true);
 		tileColors.put(ETCHED_FLOOR_TEXTURE, Color.LIGHT_GRAY);
 		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png", true);
-		tileColors.put(MUD_TEXTURE, Color.ORANGE);
+		tileColors.put(MUD_TEXTURE, new Color(144, 88, 31));
 		WATER_TEXTURE = ResourceUtils.getGlobalImage("water_tile.png", true);
 		tileColors.put(WATER_TEXTURE, Color.BLUE);
 		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png", true);

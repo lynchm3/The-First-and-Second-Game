@@ -33,12 +33,12 @@ public class AreaList extends ArrayList<Quest> {
 		Level.areas.add(town);
 
 		townForest = new Area("Town Forest", "map_forest.png", ResourceUtils.getGlobalImage("icon_forest.png", false),
-				Square.DARK_GRASS_TEXTURE, 111, 0, 209, 99, 1, colorG, Nodes.forestNorthWest, Nodes.forestNorth,
+				Square.GRASS_TEXTURE, 111, 0, 209, 99, 1, colorG, Nodes.forestNorthWest, Nodes.forestNorth,
 				Nodes.forestNorthEast, Nodes.townNorthEast, Nodes.townEast, Nodes.townSouthEast);
 		Level.areas.add(townForest);
 
 		AreaList.innerTownForest = new Area("Inner Town Forest", null,
-				ResourceUtils.getGlobalImage("icon_forest.png", false), Square.DARK_GRASS_TEXTURE, 146, 33, 180, 63, 2,
+				ResourceUtils.getGlobalImage("icon_forest.png", false), Square.GRASS_TEXTURE, 146, 33, 180, 63, 2,
 				colorR, Nodes.forestNorthWest, Nodes.forestNorth, Nodes.forestNorthEast);
 		Level.areas.add(innerTownForest);
 

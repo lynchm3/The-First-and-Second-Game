@@ -144,7 +144,7 @@ public class TownForestBuilder {
 		for (int i = 121; i < 200; i++) {
 			for (int j = 11; j < 91; j++) {
 				float distanceFromCenter = Math.abs(i - centerX) + Math.abs(j - centerY);
-				if (Math.random() * 50 > distanceFromCenter)
+				if (Math.random() * 50 < distanceFromCenter)
 					continue;
 
 				// if (Math.random() * maxDiffFromCenterX > Math.abs(i -
@@ -154,7 +154,7 @@ public class TownForestBuilder {
 				// centerY) * 2)
 				// continue;
 
-				Level.squares[i][j].setFloorImageTexture(Square.GRASS_TEXTURE);
+				Level.squares[i][j].setFloorImageTexture(Square.DARK_GRASS_TEXTURE);
 			}
 		}
 
