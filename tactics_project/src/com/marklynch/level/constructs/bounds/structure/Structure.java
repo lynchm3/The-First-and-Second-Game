@@ -13,7 +13,6 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
-import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
@@ -40,17 +39,15 @@ public class Structure implements Idable, Place {
 
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
 			ArrayList<StructurePath> paths, ArrayList<StructureFeature> features, ArrayList<Square> entrances,
-			String imageTexturePath, Texture iconTexture, int overlayX1, int overlayY1, int overlayX2, int overlayY2,
-			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls,
-			Wall wallTemplate, Texture floorImageTexture, int level) {
+			Texture iconTexture, int overlayX1, int overlayY1, int overlayX2, int overlayY2, boolean blocksLineOfSight,
+			Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls, Wall wallTemplate,
+			Texture floorImageTexture, int level) {
 		super();
 		this.id = Level.generateNewId(this);
 
 		this.name = name;
 		this.structureSections = caveSections;
 		this.rooms = rooms;
-		if (imageTexturePath != null)
-			this.mapIconForStructure = ResourceUtils.getGlobalImage(imageTexturePath, false);
 		this.icon = iconTexture;
 		this.gridX1 = overlayX1;
 		this.gridY1 = overlayY1;

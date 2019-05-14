@@ -246,7 +246,7 @@ public class SkillTree implements Draggable, Scrollable {
 
 		// Teleportation +1
 		SkillTreeNode teleportation1 = new SkillTreeNode(11, 12);
-		activateAtStart.add(teleportation1);
+//		activateAtStart.add(teleportation1);
 		teleportation1.name = "Teleport";
 		teleportation1.description = "\"Teleportation! WOW!\" - Stranger";
 		teleportation1.powersUnlocked.add(new PowerTeleportOther(null));

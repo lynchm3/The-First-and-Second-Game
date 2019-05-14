@@ -610,18 +610,6 @@ public class Level {
 		showAILinesButton.enabled = true;
 		buttons.add(showAILinesButton);
 
-		Button showTriggerLinesButton = new LevelButton(550f, 40f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "TRGR LINES", false, false, Color.BLACK, Color.WHITE,
-				"DEV - Draw trigger lines between switches etc.");
-		showTriggerLinesButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.showTriggerLines = !Game.showTriggerLines;
-			}
-		});
-		showTriggerLinesButton.enabled = true;
-		buttons.add(showTriggerLinesButton);
-
 		Button highlightRestrictedButton = new LevelButton(660f, 40f, 100f, 30f, "undo_button.png",
 				"undo_button_disabled.png", "RSTRCTD SQRS", false, false, Color.BLACK, Color.WHITE,
 				"DEV - Highlight restricted squares");

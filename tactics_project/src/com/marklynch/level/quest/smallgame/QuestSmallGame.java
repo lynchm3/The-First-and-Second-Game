@@ -250,10 +250,10 @@ public class QuestSmallGame extends Quest {
 		lodgeSections.add(new StructureSection("Hunting Lodge", 105, 9, 111, 15, false, false));
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeRooms,
 				new ArrayList<StructurePath>(StructurePath.class), lodgeFeatures, new ArrayList<Square>(Square.class),
-				"building.png", ResourceUtils.getGlobalImage("icon_house.png", false), AreaTown.posX + 105,
-				AreaTown.posY + 9, AreaTown.posX + 111, AreaTown.posY + 15, true, hunterBrent,
-				new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
-				Square.STONE_TEXTURE, 2);
+				ResourceUtils.getGlobalImage("icon_house.png", false), AreaTown.posX + 105, AreaTown.posY + 9,
+				AreaTown.posX + 111, AreaTown.posY + 15, true, hunterBrent, new ArrayList<Square>(Square.class),
+				new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE, Square.STONE_TEXTURE,
+				2);
 		Game.level.structures.add(lodge);
 		Templates.HATCHET.makeCopy(Game.level.squares[AreaTown.posX + 3][AreaTown.posY + 3], hunterBrent);
 		Templates.HATCHET.makeCopy(Game.level.squares[AreaTown.posX + 3][AreaTown.posY + 6], hunterBrent);
@@ -339,9 +339,9 @@ public class QuestSmallGame extends Quest {
 				new Node[] { Nodes.barracksNorth, Nodes.barracksSouth }, new RoomPart(75, 53, 84, 60)));
 		sectionsBarracks.add(new StructureSection("Barracks", 74, 52, 85, 61, false, false));
 		Structure barracks = new Structure("Barracks", sectionsBarracks, roomsBarracks, pathsBarracks, featuresBarracks,
-				new ArrayList<Square>(Square.class), null, ResourceUtils.getGlobalImage("icon_house.png", false), 74,
-				52, 85, 61, true, null, squaresToRemoveBarracks, extraWallsBarracks, Templates.WALL_CAVE,
-				Square.STONE_TEXTURE, 5);
+				new ArrayList<Square>(Square.class), ResourceUtils.getGlobalImage("icon_house.png", false), 74, 52,
+				85, 61, true, null, squaresToRemoveBarracks, extraWallsBarracks, Templates.WALL_CAVE, Square.STONE_TEXTURE,
+				5);
 		Game.level.structures.add(barracks);
 
 		// Fisherman
@@ -385,9 +385,9 @@ public class QuestSmallGame extends Quest {
 				new Node[] { Nodes.forestThiefHut }, new RoomPart(114, 53, 116, 55)));
 		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false, false));
 		Structure thievesHut = new Structure("Hut", sectionsThievesHut, roomsThievesHut, pathsThievesHut,
-				featuresThievesHut, new ArrayList<Square>(Square.class), null,
-				ResourceUtils.getGlobalImage("icon_house.png", false), 113, 52, 117, 56, true, null,
-				squaresToRemoveThievesHut, extraWallsThievesHut, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
+				featuresThievesHut, new ArrayList<Square>(Square.class), ResourceUtils.getGlobalImage("icon_house.png", false),
+				113, 52, 117, 56, true, null, squaresToRemoveThievesHut,
+				extraWallsThievesHut, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(thievesHut);
 
 		Templates.HATCHET.makeCopy(Game.level.squares[10][17], t3);
@@ -435,9 +435,9 @@ public class QuestSmallGame extends Quest {
 				new Node[] { Nodes.forestRangersHut }, new RoomPart(130, 34, 132, 36)));
 		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false, false));
 		Structure rangerHut = new Structure("Ranger's Hut", sectionsRangersHut, roomsRangersHut, pathsRangersHut,
-				featuresRangersHut, new ArrayList<Square>(Square.class), null,
-				ResourceUtils.getGlobalImage("icon_house.png", false), 129, 33, 133, 37, true, null,
-				squaresToRemoveRangersHut, extraWallsRangersHut, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
+				featuresRangersHut, new ArrayList<Square>(Square.class), ResourceUtils.getGlobalImage("icon_house.png", false),
+				129, 33, 133, 37, true, null, squaresToRemoveRangersHut,
+				extraWallsRangersHut, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(rangerHut);
 
 		// wolf

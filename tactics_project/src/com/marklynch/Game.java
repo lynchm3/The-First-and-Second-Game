@@ -57,7 +57,6 @@ public class Game {
 	public static boolean redHighlightOnRestrictedSquares = false;
 
 	public static boolean showAILines = false;
-	public static boolean showTriggerLines = false;
 	public static boolean highlightPath = false;;
 
 	// PLAYER START POSITION

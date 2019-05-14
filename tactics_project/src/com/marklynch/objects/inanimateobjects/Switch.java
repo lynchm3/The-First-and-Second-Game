@@ -1,6 +1,5 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.squares.Square;
@@ -41,19 +40,6 @@ public class Switch extends GameObject {
 	public void setInstances(GameObject gameObject) {
 		instances.add(gameObject);
 		super.setInstances(gameObject);
-	}
-
-	@Override
-	public void draw2() {
-		if (Game.showTriggerLines) {
-			for (SwitchListener switchListener : switchListeners) {
-				if (switchListener instanceof GameObject) {
-					aiLine.target = ((GameObject) switchListener).squareGameObjectIsOn;
-				}
-				aiLine.draw2();
-			}
-		}
-		super.draw2();
 	}
 
 	public void use() {
