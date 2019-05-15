@@ -5,7 +5,7 @@ import com.marklynch.utils.QuadUtils;
 
 import com.marklynch.utils.Color;
 
-public class EditorToast {
+public class Toast {
 
 	float x;
 	float y;
@@ -14,7 +14,7 @@ public class EditorToast {
 	float width;
 	float height;
 
-	public EditorToast(String text) {
+	public Toast(String text) {
 		this.x = 200f;
 		this.y = 50f;
 		this.text = text;
@@ -22,7 +22,7 @@ public class EditorToast {
 		this.height = 30;
 	}
 
-	public EditorToast(float x, float y, String text) {
+	public Toast(float x, float y, String text) {
 		this.x = x;
 		this.y = y;
 		this.text = text;

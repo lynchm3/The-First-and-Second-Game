@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.editor.Editor.EDITOR_STATE;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.ui.EditorToast;
+import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
@@ -52,7 +52,7 @@ public class InstanceSelectionWindow<T> {
 							editor.depressButtonsSettingsAndDetailsButtons();
 							editor.clearSelectedObject();
 							editor.editorState = EDITOR_STATE.ADD_OBJECT;
-							editor.toast = new EditorToast(200, 50, "Select location to add object");
+							editor.toast = new Toast(200, 50, "Select location to add object");
 
 						}
 

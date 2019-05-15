@@ -11,6 +11,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Openable;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.popups.Notification;
 
 public class ActionTakeItems extends VariableQtyAction {
 
@@ -106,20 +107,26 @@ public class ActionTakeItems extends VariableQtyAction {
 					amountText = "x" + amountToTake;
 				}
 				if (legal) {
-					if (objectToTakeFrom == targetSquare)
+					if (objectToTakeFrom == targetSquare) {
 						Game.level.logOnScreen(
 								new ActivityLog(new Object[] { performer, " took ", objectsTotake[0], amountText }));
-					else
+					} else {
 						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", objectsTotake[0],
 								amountText, " from ", targetGameObject }));
+					}
 				} else {
-					if (objectToTakeFrom == targetSquare)
+					if (objectToTakeFrom == targetSquare) {
 						Game.level.logOnScreen(
 								new ActivityLog(new Object[] { performer, " stole ", objectsTotake[0], amountText }));
-					else
+					} else {
 						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", objectsTotake[0],
 								amountText, " from ", targetGameObject }));
+					}
 				}
+
+				if (performer == Level.player)
+					Level.notifications.add(new Notification(new Object[] { objectsTotake[0], amountText },
+							Notification.NotificationType.MISC, null));
 			}
 		}
 

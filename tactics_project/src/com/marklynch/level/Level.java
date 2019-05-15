@@ -146,7 +146,7 @@ public class Level {
 	public Color popUpMenuOverlayColor = new Color(0f, 0f, 0f, 0.5f);
 	static FullScreenTextBox fullScreenTextBox = null;
 	public static TextBox activeTextBox = null;
-	public ArrayList<Notification> notifications = new ArrayList<Notification>();
+	public static ArrayList<Notification> notifications = new ArrayList<Notification>();
 	public ArrayList<PinWindow> pinWindows = new ArrayList<PinWindow>();
 
 	public Conversation conversation;
