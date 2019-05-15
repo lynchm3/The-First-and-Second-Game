@@ -70,6 +70,7 @@ import com.marklynch.ui.popups.Notification;
 import com.marklynch.ui.popups.PopupMenu;
 import com.marklynch.ui.popups.PopupMenuActionButton;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
+import com.marklynch.ui.popups.Toast;
 import com.marklynch.ui.quickbar.QuickBar;
 import com.marklynch.ui.quickbar.QuickBarSquare;
 import com.marklynch.utils.Color;
@@ -146,7 +147,8 @@ public class Level {
 	public Color popUpMenuOverlayColor = new Color(0f, 0f, 0f, 0.5f);
 	static FullScreenTextBox fullScreenTextBox = null;
 	public static TextBox activeTextBox = null;
-	public static ArrayList<Notification> notifications = new ArrayList<Notification>();
+	private static ArrayList<Notification> notifications = new ArrayList<Notification>();
+	private static ArrayList<Toast> toasts = new ArrayList<Toast>();
 	public ArrayList<PinWindow> pinWindows = new ArrayList<PinWindow>();
 
 	public Conversation conversation;
@@ -1380,6 +1382,7 @@ public class Level {
 		Notification.x = Game.halfWindowWidth - Notification.halfWidth;
 		Notification.textX = Notification.x + Notification.border;
 		Notification.closeButtonX = Notification.x + Notification.width - Notification.closeButtonWidth;
+
 		for (Notification notification : notifications) {
 			notification.y = notification.closeButton.y = notificationsHeight;
 			notification.textY = notification.y + 4;
@@ -1392,6 +1395,18 @@ public class Level {
 			clearNotificationsButton.x = Notification.x;
 			clearNotificationsButton.y = notificationsHeight - Notification.border + 8;
 			clearNotificationsButton.draw();
+		}
+
+		// Toasts
+		float toastsHeight = Game.halfWindowHeight;
+		Toast.x = Toast.border;
+		Toast.textX = Toast.x + Toast.border;
+
+		for (Toast toast : toasts) {
+			toast.y = toastsHeight;
+			toast.textY = toast.y + 4;
+			toast.draw();
+			toastsHeight += toast.height + Toast.border;
 		}
 
 		// Inventories
@@ -1727,7 +1742,7 @@ public class Level {
 			if (!targetSquare.inventory.canShareSquare) {
 				Object[] objects = new Object[] { "Theres a ", targetSquare.inventory.gameObjectThatCantShareSquare,
 						" there!" };
-				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
+				addNotification(new Notification(objects, Notification.NotificationType.MISC, null));
 				Game.level.logOnScreen(new ActivityLog(objects));
 			} else {
 				Object[] objects = new Object[] { "There's no available path" };
@@ -2521,7 +2536,7 @@ public class Level {
 
 	}
 
-	public void addNotification(Notification notificationToAdd) {
+	public static void addNotification(Notification notificationToAdd) {
 		Notification oldNotificationToRemove = null;
 		for (Notification notification : notifications) {
 			if (notification.equals(notificationToAdd)) {
@@ -2532,6 +2547,18 @@ public class Level {
 		if (oldNotificationToRemove != null)
 			notifications.remove(oldNotificationToRemove);
 		notifications.add(notificationToAdd);
+	}
+
+	public static void addToast(Toast toastToAdd) {
+		toasts.add(toastToAdd);
+	}
+
+	public static void removeNotification(Notification notificationToRemove) {
+		notifications.remove(notificationToRemove);
+	}
+
+	public static void removeToast(Notification toastToRemove) {
+		toasts.remove(toastToRemove);
 	}
 
 	static Dialog dialog;

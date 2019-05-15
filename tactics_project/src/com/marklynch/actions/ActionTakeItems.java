@@ -11,7 +11,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Openable;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.ui.popups.Notification;
+import com.marklynch.ui.popups.Toast;
 
 public class ActionTakeItems extends VariableQtyAction {
 
@@ -125,8 +125,7 @@ public class ActionTakeItems extends VariableQtyAction {
 				}
 
 				if (performer == Level.player)
-					Level.notifications.add(new Notification(new Object[] { objectsTotake[0], amountText },
-							Notification.NotificationType.MISC, null));
+					Level.addToast(new Toast(new Object[] { objectsTotake[0], amountText }, null));
 			}
 		}
 
