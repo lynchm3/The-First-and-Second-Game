@@ -1341,26 +1341,26 @@ public class Level {
 		journal.drawTrackedStuffInTopRight();
 
 		// Turn text
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, null, Color.WHITE,
-				1f, new Object[] { "TURN " + turn });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, null, Color.WHITE, 1f,
+				new Object[] { "TURN " + turn });
 
 		// Zoom
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 100, Integer.MAX_VALUE, true, null, Color.WHITE,
-				1f, new Object[] { "Zoom " + Game.zoom });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 100, Integer.MAX_VALUE, true, null, Color.WHITE, 1f,
+				new Object[] { "Zoom " + Game.zoom });
 
 		// FPS
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 120, Integer.MAX_VALUE, true, null, Color.WHITE,
-				1f, new Object[] { "FPS " + Game.displayFPS });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 120, Integer.MAX_VALUE, true, null, Color.WHITE, 1f,
+				new Object[] { "FPS " + Game.displayFPS });
 
 		// TIME
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 140, Integer.MAX_VALUE, true, null, Color.WHITE,
-				1f, new Object[] { timeString });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 140, Integer.MAX_VALUE, true, null, Color.WHITE, 1f,
+				new Object[] { timeString });
 
 		// Square mouse is over
 		if (Game.squareMouseIsOver != null) {
 
-			TextUtils.printTextWithImages(Game.windowWidth - 150, 160, Integer.MAX_VALUE, true, null, Color.WHITE,
-					1f, new Object[] { Game.squareMouseIsOver });
+			TextUtils.printTextWithImages(Game.windowWidth - 150, 160, Integer.MAX_VALUE, true, null, Color.WHITE, 1f,
+					new Object[] { Game.squareMouseIsOver });
 		}
 
 		if (conversation != null)
@@ -1383,7 +1383,7 @@ public class Level {
 		Notification.textX = Notification.x + Notification.border;
 		Notification.closeButtonX = Notification.x + Notification.width - Notification.closeButtonWidth;
 
-		for (Notification notification : notifications) {
+		for (Notification notification : (ArrayList<Notification>) notifications.clone()) {
 			notification.y = notification.closeButton.y = notificationsHeight;
 			notification.textY = notification.y + 4;
 			notification.closeButton.x = Notification.closeButtonX;
