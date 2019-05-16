@@ -114,7 +114,7 @@ public class AnimationDamageText extends SecondaryAnimation {
 				* (y + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
 
 		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null, Color.WHITE,
-				damageStringWithColor);
+				1f, damageStringWithColor);
 		TextureUtils.drawTexture(texture, 1, drawPositionX - 16, drawPositionY, drawPositionX, drawPositionY + 16);
 
 		Game.activeBatch.flush();

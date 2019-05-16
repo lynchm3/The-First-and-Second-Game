@@ -114,7 +114,7 @@ public class PowerSquare extends LevelButton implements Draggable, Scrollable {
 		TextureUtils.drawTexture(Square.WHITE_SQUARE, x1, y1, x2, y2);
 		TextureUtils.drawTexture(power.image, x1, y1, x2, y2);
 		QuadUtils.drawQuad(Color.BLACK, textBarX1, textBarY1, textBarX2, textBarY2);
-		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, power.name);
+		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, 1f, power.name);
 	}
 
 	public void drawPower() {

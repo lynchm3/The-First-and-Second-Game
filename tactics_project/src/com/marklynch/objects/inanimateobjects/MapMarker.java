@@ -103,7 +103,7 @@ public class MapMarker extends GameObject {
 
 		if (baseName.length() > 0) {
 			TextUtils.printTextWithImages(drawPositionX1, drawPositionY1 + Game.HALF_SQUARE_HEIGHT,
-					(int) Game.SQUARE_WIDTH, false, null, Color.WHITE, new Object[] { baseName });
+					(int) Game.SQUARE_WIDTH, false, null, Color.WHITE, 1f, new Object[] { baseName });
 		}
 
 	}

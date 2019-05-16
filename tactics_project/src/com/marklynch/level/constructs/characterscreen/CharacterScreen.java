@@ -309,17 +309,17 @@ public class CharacterScreen implements Draggable, Scrollable {
 		drawStatY = statsY;
 
 		// BASIC STATS
-		TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE, HEALTH);
+		TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE, 1f, HEALTH);
 		TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
-				Level.player.remainingHealth + "/" + Level.player.totalHealth);
+				1f, Level.player.remainingHealth + "/" + Level.player.totalHealth);
 		healthButton.width = Game.smallFont.getWidth(Level.player.remainingHealth + "/" + Level.player.totalHealth);
 		drawStatY += statsLineHeight;
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					highLevelStatNamesToUse.get(statType));
+					1f, highLevelStatNamesToUse.get(statType));
 			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					"" + Level.player.getEffectiveHighLevelStat(statType));
+					1f, "" + Level.player.getEffectiveHighLevelStat(statType));
 			highLevelStatButtons.get(statType).width = Game.smallFont
 					.getWidth("" + Level.player.getEffectiveHighLevelStat(statType));
 			drawStatY += statsLineHeight;

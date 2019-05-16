@@ -70,7 +70,7 @@ public class Tooltip {
 		QuadUtils.drawQuad(backgroundColor, x1, y1, x2, y2);// WAT
 
 		textColor.a = alpha;
-		TextUtils.printTextWithImages(this.text, x1, y1, wrapWidth, true, textColor, null);
+		TextUtils.printTextWithImages(this.text, x1, y1, wrapWidth, true, textColor, 1f, null);
 
 	}
 

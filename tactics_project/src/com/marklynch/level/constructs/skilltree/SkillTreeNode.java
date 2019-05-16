@@ -236,7 +236,7 @@ public class SkillTreeNode extends LevelButton {
 				TextureUtils.drawTexture(textureCircle, circleX1, circleY1, circleX2, circleY2, Color.DARK_GRAY);
 			}
 		}
-		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, name);
+		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, 1f, name);
 
 		for (SkillTreeNodePower skillTreeNodePower : powerButtons) {
 			skillTreeNodePower.drawBackground();

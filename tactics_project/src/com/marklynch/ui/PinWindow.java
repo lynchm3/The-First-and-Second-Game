@@ -267,12 +267,12 @@ public class PinWindow implements Draggable {
 					// Draw Effect
 					for (Effect effect : gameObject.activeEffectsOnGameObject) {
 						TextUtils.printTextWithImages(drawPositionX + borderWidth, drawPositionY + titleBarHeight,
-								Integer.MAX_VALUE, false, null, Color.WHITE, effect);
+								Integer.MAX_VALUE, false, null, Color.WHITE, 1f, effect);
 					}
 
 					// Draw Type
 					TextUtils.printTextWithImages(drawPositionX + borderWidth, drawPositionY + titleBarHeight + 30,
-							Integer.MAX_VALUE, false, null, Color.WHITE, gameObject.type);
+							Integer.MAX_VALUE, false, null, Color.WHITE, 1f, gameObject.type);
 
 				}
 				if (actor != null) {
@@ -290,7 +290,7 @@ public class PinWindow implements Draggable {
 		titleBarButton.draw();
 
 		// Title bar text
-		TextUtils.printTextWithImages(drawPositionX + 2, drawPositionY, width - 40, false, null, Color.WHITE, object);
+		TextUtils.printTextWithImages(drawPositionX + 2, drawPositionY, width - 40, false, null, Color.WHITE, 1f, object);
 
 		// Title bar buttons
 		this.closeButton.draw();
@@ -314,50 +314,50 @@ public class PinWindow implements Draggable {
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY, drawPositionX + statsImageX + 20, drawPositionY + statsY + 20);
 		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, null,
-				Color.WHITE, "Location ", square.name);
+				Color.WHITE, 1f, "Location ", square.name);
 
 		// elevation
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 30, drawPositionX + statsImageX + 20, drawPositionY + statsY + 30 + 20);
 		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false, null,
-				Color.WHITE, "Elevation ", square.elevation);
+				Color.WHITE, 1f, "Elevation ", square.elevation);
 
 		// travelCost
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 60 + 20);
 		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false, null,
-				Color.WHITE, "Movement Cost ", square.travelCost);
+				Color.WHITE, 1f, "Movement Cost ", square.travelCost);
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 90, drawPositionX + statsImageX + 20, drawPositionY + statsY + 90 + 20);
 		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 90, width - 40, false, null,
-				Color.WHITE, "Restricted ", square.restricted);
+				Color.WHITE, 1f, "Restricted ", square.restricted);
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 90, drawPositionX + statsImageX + 20, drawPositionY + statsY + 120 + 20);
 		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 120, width - 40, false, null,
-				Color.WHITE, "Restricted at night (22:00 - 06:00) ", square.restrictedAtNight);
+				Color.WHITE, 1f, "Restricted at night (22:00 - 06:00) ", square.restrictedAtNight);
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 120, drawPositionX + statsImageX + 20, drawPositionY + statsY + 150 + 20);
 		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false, null,
-				Color.WHITE, "Area ", square.areaSquareIsIn);
+				Color.WHITE, 1f, "Area ", square.areaSquareIsIn);
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 150, drawPositionX + statsImageX + 20, drawPositionY + statsY + 180 + 20);
 		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false, null,
-				Color.WHITE, "Structure ", square.structureSquareIsIn);
+				Color.WHITE, 1f, "Structure ", square.structureSquareIsIn);
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 180, drawPositionX + statsImageX + 20, drawPositionY + statsY + 210 + 20);
 		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false, null,
-				Color.WHITE, "SubStructure ", square.structureSectionSquareIsIn);
+				Color.WHITE, 1f, "SubStructure ", square.structureSectionSquareIsIn);
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 210, drawPositionX + statsImageX + 20, drawPositionY + statsY + 240 + 20);
 		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false, null,
-				Color.WHITE, "Room ", square.structureRoomSquareIsIn);
+				Color.WHITE, 1f, "Room ", square.structureRoomSquareIsIn);
 	}
 
 	private void drawStats(Actor actor) {
@@ -383,11 +383,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY, drawPositionX + statsImageX + 20, drawPositionY + statsY + 20);
 		if (bestiaryKnowledge.name) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, null,
-					Color.WHITE, "Name ", actor.name);
+					Color.WHITE, 1f, "Name ", actor.name);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, null,
-					Color.WHITE, "Name ", unknownStats);
+					Color.WHITE, 1f, "Name ", unknownStats);
 
 		}
 
@@ -397,11 +397,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 30, drawPositionX + statsImageX + 20, drawPositionY + statsY + 30 + 20);
 		if (bestiaryKnowledge.level) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false,
-					null, Color.WHITE, "Level ", "" + actor.level);
+					null, Color.WHITE, 1f, "Level ", "" + actor.level);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false,
-					null, Color.WHITE, "Level ", unknownStats);
+					null, Color.WHITE, 1f, "Level ", unknownStats);
 
 		}
 
@@ -411,17 +411,17 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 60 + 20);
 		if (bestiaryKnowledge.totalHealth) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false,
-					null, Color.WHITE, "Max HP ", "" + actor.totalHealth);
+					null, Color.WHITE, 1f, "Max HP ", "" + actor.totalHealth);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false,
-					null, Color.WHITE, "Max HP ", unknownStats);
+					null, Color.WHITE, 1f, "Max HP ", unknownStats);
 
 		}
 
 		// HIGH LVL STATS
 		TextUtils.printTextWithImages(drawPositionX + statsImageX, drawPositionY + statsY + 120, width - 40, false,
-				null, Color.WHITE, "STATS");
+				null, Color.WHITE, 1f, "STATS");
 
 		float offsetY = 150;
 
@@ -432,11 +432,11 @@ public class PinWindow implements Draggable {
 					drawPositionY + statsY + offsetY + 20);
 			if (bestiaryKnowledge.getHighLevel(statType)) {
 				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
-						false, null, Color.WHITE, CharacterScreen.highLevelStatNamesShort.get(statType),
-						"" + actor.highLevelStats.get(statType).value);
+						false, null, Color.WHITE, 1f,
+						CharacterScreen.highLevelStatNamesShort.get(statType), "" + actor.highLevelStats.get(statType).value);
 			} else {
 				TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + offsetY, width - 40,
-						false, null, Color.WHITE, CharacterScreen.highLevelStatNamesShort.get(statType), unknownStats);
+						false, null, Color.WHITE, 1f, CharacterScreen.highLevelStatNamesShort.get(statType), unknownStats);
 
 			}
 			offsetY += 30;
@@ -444,7 +444,7 @@ public class PinWindow implements Draggable {
 
 		// RESISTANCES
 		TextUtils.printTextWithImages(drawPositionX + resistancesImageX, drawPositionY + resistancesY + 30, width - 40,
-				false, null, Color.WHITE, "RESISTANCES");
+				false, null, Color.WHITE, 1f, "RESISTANCES");
 
 		offsetY = 60;
 
@@ -455,12 +455,12 @@ public class PinWindow implements Draggable {
 					drawPositionX + resistancesImageX + 20, drawPositionY + resistancesY + offsetY + 20);
 			if (bestiaryKnowledge.getHighLevel(statType)) {
 				TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + offsetY,
-						width - 40, false, null, Color.WHITE, CharacterScreen.highLevelStatNamesShort.get(statType),
-						"" + actor.highLevelStats.get(statType).value);
+						width - 40, false, null, Color.WHITE, 1f,
+						CharacterScreen.highLevelStatNamesShort.get(statType), "" + actor.highLevelStats.get(statType).value);
 			} else {
 				TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + offsetY,
-						width - 40, false, null, Color.WHITE, CharacterScreen.highLevelStatNamesShort.get(statType),
-						unknownStats);
+						width - 40, false, null, Color.WHITE, 1f,
+						CharacterScreen.highLevelStatNamesShort.get(statType), unknownStats);
 
 			}
 			offsetY += 30;
@@ -468,11 +468,11 @@ public class PinWindow implements Draggable {
 
 		// POWERS
 		TextUtils.printTextWithImages(drawPositionX + powersImageX, drawPositionY + powersTitleY, width - 40, false,
-				null, Color.WHITE, "POWERS");
+				null, Color.WHITE, 1f, "POWERS");
 
 		if (bestiaryKnowledge.powers && actor.powers.size() == 0) {
 			TextUtils.printTextWithImages(drawPositionX + powersTextX, drawPositionY + powersListY, width - 40, false,
-					null, Color.WHITE, "None");
+					null, Color.WHITE, 1f, "None");
 		} else if (bestiaryKnowledge.powers) {
 			int powersDrawn = 0;
 			for (Power power : actor.powers) {
@@ -481,12 +481,12 @@ public class PinWindow implements Draggable {
 						drawPositionY + powersListY + powersDrawn * 30 + 20);
 				TextUtils.printTextWithImages(drawPositionX + powersTextX,
 						drawPositionY + powersListY + powersDrawn * 30, width - 40, false, null, Color.WHITE,
-						power.name);
+						1f, power.name);
 				powersDrawn++;
 			}
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + powersTextX, drawPositionY + powersListY, width - 40, false,
-					null, Color.WHITE, unknownStats);
+					null, Color.WHITE, 1f, unknownStats);
 		}
 
 		// PRACTICAL DAMAGE

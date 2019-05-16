@@ -25,6 +25,7 @@ public class Toast {
 	public float timeRemaingMS = toastTimeMS;
 	public Color color = new Color(Color.PINK);
 	public Color textColor = new Color(Color.WHITE);
+	public float imageAlpha = 1f;
 
 	// Specifics
 	public static enum NotificationType {
@@ -50,6 +51,7 @@ public class Toast {
 		if (timeRemaingMS < disapearTime) {
 			color.setAlpha(timeRemaingMS / disapearTime);
 			textColor.setAlpha(timeRemaingMS / disapearTime);
+			imageAlpha = timeRemaingMS / disapearTime;
 		}
 
 		if (timeRemaingMS < shrinkTime) {
@@ -64,6 +66,6 @@ public class Toast {
 		}
 
 		QuadUtils.drawQuad(color, x, y, x + width, y + height);
-		TextUtils.printTextWithImages(textX, textY, textWidth, true, null, textColor, objects);
+		TextUtils.printTextWithImages(textX, textY, textWidth, true, null, textColor, imageAlpha, objects);
 	}
 }

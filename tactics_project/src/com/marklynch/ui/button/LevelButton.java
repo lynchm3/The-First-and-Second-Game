@@ -59,15 +59,15 @@ public class LevelButton extends Button {
 		if (enabled) {
 			if (down) {
 				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realY, realX + width, realY + height);
-				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE, this.textParts);
+				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE, 1f, this.textParts);
 			} else {
 				QuadUtils.drawQuad(buttonColorToUse, realX, realY, realX + width, realY + height);
-				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE, this.textParts);
+				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE, 1f, this.textParts);
 			}
 		} else {
 
 			QuadUtils.drawQuad(Color.RED, realX, realY, realX + width, realY + height);
-			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE, this.textParts);
+			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE, 1f, this.textParts);
 		}
 
 	}

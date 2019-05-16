@@ -511,9 +511,9 @@ public class TextUtils {
 	}
 
 	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, ArrayList<Link> links,
-			Color defaultColor, Object... contents) {
+			Color defaultColor, float imageAlpha, Object... contents) {
 		printTextWithImages(new ArrayList<Object>(Arrays.asList(contents)), posX, posY, maxWidth, wrap, defaultColor,
-				links);
+				imageAlpha, links);
 	}
 
 	public static class NewLine {
@@ -521,7 +521,7 @@ public class TextUtils {
 	}
 
 	public static void printTextWithImages(ArrayList<Object> contents, float posX, float posY, float maxWidth,
-			boolean wrap, Color defaultColor, ArrayList<Link> links) {
+			boolean wrap, Color defaultColor, float imageAlpha, ArrayList<Link> links) {
 
 		if (contents == null)
 			return;
@@ -637,7 +637,7 @@ public class TextUtils {
 							false, false, false, false);
 				} else {
 					Texture imageTexture = gameObject.imageTexture;
-					TextureUtils.drawTexture(imageTexture, x, posY + offsetY, x + textureWidth,
+					TextureUtils.drawTexture(imageTexture, imageAlpha, x, posY + offsetY, x + textureWidth,
 							posY + offsetY + textureWidth);
 				}
 				offsetX += textureWidth;

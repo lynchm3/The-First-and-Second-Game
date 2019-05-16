@@ -70,12 +70,12 @@ public class TextBox {
 		if (text.length() > 0) {
 			// Text string
 			TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, true, null,
-					Color.WHITE, new Object[] { text });
+					Color.WHITE, 1f, new Object[] { text });
 
 		} else {
 			// Text string
 			TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, true, null,
-					Color.WHITE, new Object[] { hintWithColor });
+					Color.WHITE, 1f, new Object[] { hintWithColor });
 
 		}
 

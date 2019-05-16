@@ -79,9 +79,9 @@ public class Notification {
 			QuadUtils.drawQuad(Color.PINK, x, y, x + width, y + height);
 		}
 
-		TextUtils.printTextWithImages(textX, textY, textWidth, true, links, Color.WHITE, objects);
+		TextUtils.printTextWithImages(textX, textY, textWidth, true, links, Color.WHITE, 1f, objects);
 		QuadUtils.drawQuad(Color.BLACK, x + 12, y - 16, x + 76, y + 4);
-		TextUtils.printTextWithImages(textX, y - 16, 999, false, null, Color.WHITE, turn);
+		TextUtils.printTextWithImages(textX, y - 16, 999, false, null, Color.WHITE, 1f, turn);
 
 		if (!toast)
 			closeButton.draw();

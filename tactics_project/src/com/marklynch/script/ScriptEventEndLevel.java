@@ -56,7 +56,7 @@ public class ScriptEventEndLevel extends ScriptEvent {
 			width = 100;
 
 		// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
-		TextUtils.printTextWithImages(textX1, posY, width, true, null, Color.WHITE, text);
+		TextUtils.printTextWithImages(textX1, posY, width, true, null, Color.WHITE, 1f, text);
 	}
 
 	@Override

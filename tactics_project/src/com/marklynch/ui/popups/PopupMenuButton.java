@@ -46,28 +46,28 @@ public class PopupMenuButton extends Button {
 			if (down) {
 				QuadUtils.drawQuad(colorSelected, realX, realY, realX + width, realY + height);
 				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE,
-						new Object[] { object });
+						1f, new Object[] { object });
 			} else {
 				if (highlighted) {
 					QuadUtils.drawQuad(colorHighlighted, realX, realY, realX + width, realY + height);
 					TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE,
-							new Object[] { object });
+							1f, new Object[] { object });
 				} else {
 					QuadUtils.drawQuad(colorNormal, realX, realY, realX + width, realY + height);
 					TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE,
-							new Object[] { object });
+							1f, new Object[] { object });
 				}
 			}
 		} else {
 
 			QuadUtils.drawQuad(colorDisabled, realX, realY, realX + width, realY + height);
 			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE,
-					new Object[] { object });
+					1f, new Object[] { object });
 		}
 
 		if (drawArrow)
 			TextUtils.printTextWithImages(realX + width - 10, realY, Integer.MAX_VALUE, true, null, Color.WHITE,
-					new Object[] { ">" });
+					1f, new Object[] { ">" });
 
 	}
 

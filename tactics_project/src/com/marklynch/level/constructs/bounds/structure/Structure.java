@@ -240,7 +240,7 @@ public class Structure implements Idable, Place {
 		for (StructureRoom room : rooms) {
 			if (room.seenByPlayer)
 				TextUtils.printTextWithImages(room.x * Game.SQUARE_WIDTH, room.y * Game.SQUARE_HEIGHT, 100, true, null,
-						Color.WHITE, new Object[] { room.name });
+						Color.WHITE, 1f, new Object[] { room.name });
 		}
 
 	}

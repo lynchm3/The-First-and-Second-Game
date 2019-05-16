@@ -371,7 +371,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 				// Marker
 				TextUtils.printTextWithImages(listX + listBorder, contentY + contentBorder + height, Integer.MAX_VALUE,
-						true, marker.links, Color.WHITE, new Object[] { marker });
+						true, marker.links, Color.WHITE, 1f, new Object[] { marker });
 
 				// Check box
 				Texture checkBoxTextureToUse = checkBoxUnchecked;
@@ -388,7 +388,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 			}
 			if (Level.markerList.size() == 0)
-				TextUtils.printTextWithImages(0, 256, Integer.MAX_VALUE, true, null, Color.WHITE, new Object[] {
+				TextUtils.printTextWithImages(0, 256, Integer.MAX_VALUE, true, null, Color.WHITE, 1f, new Object[] {
 						"NO MARKERS", TextUtils.NewLine.NEW_LINE, "(Markers you add to the map will appear here)" });
 		} else {
 			for (Button button : questButtons) {
@@ -403,7 +403,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 					for (JournalLog journalLog : questToDisplayInJournal.logList) {
 						TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
 								Integer.MAX_VALUE, true, journalLog.links, Color.WHITE,
-								new Object[] { journalLog.getTurnString(), journalLog.getArea(), journalLog.getSquare(),
+								1f, new Object[] { journalLog.getTurnString(), journalLog.getArea(), journalLog.getSquare(),
 										TextUtils.NewLine.NEW_LINE, journalLog.object });
 						height += journalLog.height + 20;
 					}
@@ -411,7 +411,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 					for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
 						TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
 								Integer.MAX_VALUE, true, conversationPart.linksForJournal, Color.WHITE,
-								new Object[] { conversationPart.getTurnString(), conversationPart.talker,
+								1f, new Object[] { conversationPart.getTurnString(), conversationPart.talker,
 										conversationPart.getArea(), conversationPart.getSquare(),
 										TextUtils.NewLine.NEW_LINE, conversationPart.text[0] });
 						height += conversationPart.height + 20;
@@ -421,7 +421,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 			if (tabButtons.size() == 1) {
 				TextUtils.printTextWithImages(0, 256, Integer.MAX_VALUE, true, null, Color.WHITE,
-						new Object[] { "NO QUESTS" });
+						1f, new Object[] { "NO QUESTS" });
 			} else {
 			}
 
@@ -479,7 +479,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			questLinksTopRight.add(activeQuest.links.get(0));
 			TextUtils.printTextWithImages(Game.windowWidth - Game.smallFont.getWidth(activeQuest.name) - 202,
 					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, activeQuest.links, Color.WHITE,
-					new Object[] { activeQuest });
+					1f, new Object[] { activeQuest });
 			TextureUtils.drawTexture(x, Game.windowWidth - 180, 20 + 20 * linesPrinted, Game.windowWidth - 160,
 					20 + 20 * linesPrinted + 20);
 			linesPrinted++;
@@ -487,7 +487,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 				// Here's the problem text
 				TextUtils.printTextWithImages(Game.windowWidth - Game.smallFont.getWidth(objective.text) - 202,
-						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, objective.links, Color.WHITE, objective);
+						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, objective.links, Color.WHITE, 1f, objective);
 
 				if (objective.objectiveDestroyedAndWitnessed) {
 					QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - Game.smallFont.getWidth(objective.text) - 202,
@@ -520,12 +520,12 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		if (markersToTrack.size() > 0) {
 			TextUtils.printTextWithImages(Game.windowWidth - mapMarkersLength - 202, 20 + 20 * linesPrinted,
 					Integer.MAX_VALUE, false, null, Color.WHITE,
-					new Object[] { new StringWithColor(mapMarkers, Color.WHITE) });
+					1f, new Object[] { new StringWithColor(mapMarkers, Color.WHITE) });
 			linesPrinted++;
 			for (MapMarker trackedMapMarker : markersToTrack) {
 				TextUtils.printTextWithImages(Game.windowWidth - Game.smallFont.getWidth(trackedMapMarker.name) - 202,
 						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, trackedMapMarker.links, Color.WHITE,
-						new Object[] { trackedMapMarker });
+						1f, new Object[] { trackedMapMarker });
 
 				markerLinksTopRight.add(trackedMapMarker.links.get(0));
 
@@ -686,7 +686,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				TextureUtils.drawTexture(texture, intersect[0] - 20, drawY1, intersect[0], drawY2);
 
 				TextUtils.printTextWithImages(intersect[0] - 20 - distanceStringWidth - 4, drawY1, Integer.MAX_VALUE,
-						false, null, Color.WHITE, distanceString);
+						false, null, Color.WHITE, 1f, distanceString);
 				return;
 			}
 
@@ -714,7 +714,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				TextureUtils.drawTexture(texture, intersect[0], drawY1, intersect[0] + 20, drawY2);
 
 				TextUtils.printTextWithImages(intersect[0] + 20 + 4, drawY1, Integer.MAX_VALUE, false, null,
-						Color.WHITE, distanceString);
+						Color.WHITE, 1f, distanceString);
 				return;
 			}
 
@@ -741,7 +741,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				QuadUtils.drawQuad(Color.WHITE, drawX1, intersect[1], drawX2, intersect[1] + 20);
 				TextureUtils.drawTexture(texture, drawX1, intersect[1], drawX2, intersect[1] + 20);
 				TextUtils.printTextWithImages(drawX1, intersect[1] + 20 + 4, Integer.MAX_VALUE, false, null,
-						Color.WHITE, distanceString);
+						Color.WHITE, 1f, distanceString);
 
 				return;
 			}
@@ -769,7 +769,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				QuadUtils.drawQuad(Color.WHITE, drawX1, intersect[1] - 20, drawX2, intersect[1]);
 				TextureUtils.drawTexture(texture, drawX1, intersect[1] - 20, drawX2, intersect[1]);
 				TextUtils.printTextWithImages(drawX1, intersect[1] - 20 - 24, Integer.MAX_VALUE, false, null,
-						Color.WHITE, distanceString);
+						Color.WHITE, 1f, distanceString);
 
 				return;
 			}

@@ -170,7 +170,7 @@ public class PowerFindMatch extends Power {
 				linkedObjectText = "???";
 
 			TextUtils.printTextWithImages(centerX, centerY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					targetGameObject, " / ", linkedObjectText);
+					1f, targetGameObject, " / ", linkedObjectText);
 		}
 	}
 

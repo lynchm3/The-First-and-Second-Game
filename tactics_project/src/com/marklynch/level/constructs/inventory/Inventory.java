@@ -1250,7 +1250,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringY - 8,
 						emptyStringX + GroundDisplay.lengthEmpty + 8, emptyStringY + 28);
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, null, Color.WHITE,
-						new Object[] { GroundDisplay.stringEmpty });
+						1f, new Object[] { GroundDisplay.stringEmpty });
 			}
 
 			boolean containsLegalStuff = false;
@@ -1316,7 +1316,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringY - 8, emptyStringX + lengthEmpty + 8,
 						emptyStringY + 28);
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, null, Color.WHITE,
-						new Object[] { stringEmpty });
+						1f, new Object[] { stringEmpty });
 			}
 
 			boolean containsLegalStuff = false;
@@ -1415,11 +1415,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				Game.windowHeight - textureCornerGradient.getHeight(), Color.BLACK);
 
 		// "Search:" text
-		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, Color.WHITE, new Object[] { stringSearch });
+		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, Color.WHITE, 1f, new Object[] { stringSearch });
 
 		// [SHIFT]
 		TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null, Color.WHITE,
-				new Object[] { stringShiftForSecondary });
+				1f, new Object[] { stringShiftForSecondary });
 
 		// [ENTER] Search
 		buttonSearch.draw();
@@ -1427,25 +1427,25 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// text
 		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
+					1f, new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
 			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
+					1f, new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
 			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
+					1f, new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
 			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
+					1f, new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
 			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
+					1f, new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
 			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
+					1f, new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 		}
 
-		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, null, Color.WHITE, "Bag");
+		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, null, Color.WHITE, 1f, "Bag");
 
 		if (groundDisplay != null) {
 			groundDisplay.drawText();
@@ -1516,7 +1516,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			float goldWidth = Game.smallFont.getWidth(goldText);
 			float goldPositionX = squaresX + squaresAreaWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, null, Color.WHITE, new Object[] { goldText });
+					false, null, Color.WHITE, 1f, new Object[] { goldText });
 		}
 
 		// Gold for other actor
@@ -1527,7 +1527,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			float goldWidth = Game.smallFont.getWidth(goldText);
 			float goldPositionX = otherInventory.squaresX + squaresAreaWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, null, Color.WHITE, new Object[] { goldText });
+					false, null, Color.WHITE, 1f, new Object[] { goldText });
 
 		}
 
@@ -1554,14 +1554,14 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, 0, Game.windowWidth, Game.windowHeight);
 			// Instructions
 			TextUtils.printTextWithImages(textBoxQty.drawPositionX, textBoxQty.drawPositionY - 36, Integer.MAX_VALUE,
-					true, null, Color.WHITE, new Object[] { qtyStringWithColor });
+					true, null, Color.WHITE, 1f, new Object[] { qtyStringWithColor });
 			textBoxQty.draw();
 			if (valuePerQty != 0 && textBoxQty.numericValue > 0) {
 				int totalValue = valuePerQty * textBoxQty.numericValue;
 				String totalValueString = "Total value " + totalValue + " gold";
 				TextUtils.printTextWithImages(textBoxQty.drawPositionX, textBoxQty.drawPositionY + 36,
 						Integer.MAX_VALUE, true, null, Color.WHITE,
-						new Object[] { new StringWithColor(totalValueString, Color.WHITE) });
+						1f, new Object[] { new StringWithColor(totalValueString, Color.WHITE) });
 
 			}
 
@@ -1571,7 +1571,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void drawOtherInventoryText() {
 		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, null, Color.WHITE,
-				new Object[] { ((GameObject) this.parent).name });
+				1f, new Object[] { ((GameObject) this.parent).name });
 	}
 
 	public void drawBorder() {

@@ -212,7 +212,7 @@ public class Player extends Human {
 			float yInPixels = Game.windowHeight - 140 + Game.INVENTORY_SQUARE_WIDTH;
 			QuadUtils.drawQuad(Color.RED, xInPixels, yInPixels, Game.windowWidth, yInPixels + 30);
 			TextUtils.printTextWithImages(xInPixels, yInPixels, Integer.MAX_VALUE, false, null, Color.BLACK,
-					"TRESPASSING");
+					1f, "TRESPASSING");
 
 		}
 
@@ -260,11 +260,11 @@ public class Player extends Human {
 
 			if (equipped instanceof Gold) {
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						Color.WHITE, new Object[] { equipped.value });
+						Color.WHITE, 1f, new Object[] { equipped.value });
 
 			} else if (count > 1) {
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						Color.WHITE, new Object[] { count + "x" });
+						Color.WHITE, 1f, new Object[] { count + "x" });
 			}
 
 			// Action button for the equipped item

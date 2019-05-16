@@ -34,7 +34,7 @@ public class Dialog {
 	public void drawStaticUI() {
 
 		QuadUtils.drawQuad(Color.BLACK, 0, 0, Game.windowWidth, Game.windowHeight);
-		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, text);
+		TextUtils.printTextWithImages(textX, textY, Integer.MAX_VALUE, false, null, Color.WHITE, 1f, text);
 
 		positiveButton.draw();
 		negativeButton.draw();

@@ -112,7 +112,7 @@ public class InventorySquare extends Square {
 
 				TextUtils.printTextWithImages(xInPixels + Game.INVENTORY_SQUARE_WIDTH - goldTextLength - 10,
 						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27, Integer.MAX_VALUE, false, null, Color.WHITE,
-						new Object[] { goldTextStringWithColor });
+						1f, new Object[] { goldTextStringWithColor });
 
 				TextureUtils.drawTexture(Inventory.textureGold,
 						xInPixels + Game.INVENTORY_SQUARE_WIDTH - goldTextLength - 10 - 16,
@@ -126,14 +126,14 @@ public class InventorySquare extends Square {
 				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels,
 						xInPixels + 10 + Game.smallFont.getWidth(amtString), yInPixels + 7 + 20);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						Color.WHITE, new Object[] { amtString });
+						Color.WHITE, 1f, new Object[] { amtString });
 
 			} else {
 				String amtString = stack.size() + "x";
 				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels,
 						xInPixels + 10 + Game.smallFont.getWidth(amtString), yInPixels + 7 + 20);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						Color.WHITE, new Object[] { amtString });
+						Color.WHITE, 1f, new Object[] { amtString });
 
 			}
 
