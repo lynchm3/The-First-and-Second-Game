@@ -564,7 +564,9 @@ public class Level {
 		clearNotificationsButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.notifications.clear();
+				for (Notification notificationToRemove : notifications) {
+					notificationToRemove.closeButton.click();
+				}
 			}
 		});
 
