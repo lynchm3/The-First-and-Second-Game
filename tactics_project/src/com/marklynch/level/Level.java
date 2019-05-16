@@ -1402,7 +1402,7 @@ public class Level {
 		Toast.x = Toast.border;
 		Toast.textX = Toast.x + Toast.border;
 
-		for (Toast toast : toasts) {
+		for (Toast toast : (ArrayList<Toast>) toasts.clone()) {
 			toast.y = toastsHeight;
 			toast.textY = toast.y + 4;
 			toast.draw();
@@ -2557,7 +2557,7 @@ public class Level {
 		notifications.remove(notificationToRemove);
 	}
 
-	public static void removeToast(Notification toastToRemove) {
+	public static void removeToast(Toast toastToRemove) {
 		toasts.remove(toastToRemove);
 	}
 

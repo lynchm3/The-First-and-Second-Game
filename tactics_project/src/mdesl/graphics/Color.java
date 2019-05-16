@@ -78,14 +78,10 @@ public class Color {
 	/**
 	 * Create a 4 component colour
 	 * 
-	 * @param r
-	 *            The red component of the colour (0.0 -> 1.0)
-	 * @param g
-	 *            The green component of the colour (0.0 -> 1.0)
-	 * @param b
-	 *            The blue component of the colour (0.0 -> 1.0)
-	 * @param a
-	 *            The alpha component of the colour (0.0 -> 1.0)
+	 * @param r The red component of the colour (0.0 -> 1.0)
+	 * @param g The green component of the colour (0.0 -> 1.0)
+	 * @param b The blue component of the colour (0.0 -> 1.0)
+	 * @param a The alpha component of the colour (0.0 -> 1.0)
 	 */
 	public Color(float r, float g, float b, float a) {
 		this.r = r;
@@ -97,12 +93,9 @@ public class Color {
 	/**
 	 * Create a 3 component colour; alpha is passed as 1.0 (255).
 	 * 
-	 * @param r
-	 *            The red component of the colour (0.0 -> 1.0)
-	 * @param g
-	 *            The green component of the colour (0.0 -> 1.0)
-	 * @param b
-	 *            The blue component of the colour (0.0 -> 1.0)
+	 * @param r The red component of the colour (0.0 -> 1.0)
+	 * @param g The green component of the colour (0.0 -> 1.0)
+	 * @param b The blue component of the colour (0.0 -> 1.0)
 	 */
 	public Color(float r, float g, float b) {
 		this(r, g, b, 1f);
@@ -111,14 +104,10 @@ public class Color {
 	/**
 	 * Create a 4 component colour
 	 * 
-	 * @param r
-	 *            The red component of the colour (0 -> 255)
-	 * @param g
-	 *            The green component of the colour (0 -> 255)
-	 * @param b
-	 *            The blue component of the colour (0 -> 255)
-	 * @param a
-	 *            The alpha component of the colour (0 -> 255)
+	 * @param r The red component of the colour (0 -> 255)
+	 * @param g The green component of the colour (0 -> 255)
+	 * @param b The blue component of the colour (0 -> 255)
+	 * @param a The alpha component of the colour (0 -> 255)
 	 */
 	public Color(int r, int g, int b, int a) {
 		this(r / 255f, g / 255f, b / 255f, a / 255f);
@@ -127,12 +116,9 @@ public class Color {
 	/**
 	 * Create a 3 component colour; alpha is passed as 255 (1.0).
 	 * 
-	 * @param r
-	 *            The red component of the colour (0 -> 255)
-	 * @param g
-	 *            The green component of the colour (0 -> 255)
-	 * @param b
-	 *            The blue component of the colour (0 -> 255)
+	 * @param r The red component of the colour (0 -> 255)
+	 * @param g The green component of the colour (0 -> 255)
+	 * @param b The blue component of the colour (0 -> 255)
 	 */
 	public Color(int r, int g, int b) {
 		this(r, g, b, 255);
@@ -146,20 +132,18 @@ public class Color {
 	/**
 	 * Copy constructor
 	 * 
-	 * @param color
-	 *            The color to copy into the new instance
+	 * @param color The color to copy into the new instance
 	 */
 	public Color(Color color) {
 		this(color.r, color.g, color.b, color.a);
 	}
 
 	/**
-	 * Create a colour from an integer packed 0xAARRGGBB. If AA is specified as
-	 * zero then it will be interpreted as unspecified and hence a value of 255
-	 * will be recorded.
+	 * Create a colour from an integer packed 0xAARRGGBB. If AA is specified as zero
+	 * then it will be interpreted as unspecified and hence a value of 255 will be
+	 * recorded.
 	 * 
-	 * @param value
-	 *            The value to interpret for the colour
+	 * @param value The value to interpret for the colour
 	 */
 	public Color(int value) {
 		int r = (value & 0x00FF0000) >> 16;
@@ -179,11 +163,9 @@ public class Color {
 	/**
 	 * Decode a number in a string and process it as a colour.
 	 * 
-	 * @param nm
-	 *            The number string to decode
+	 * @param nm The number string to decode
 	 * @return The color created from the number read
-	 * @throws NumberFormatException
-	 *             if the string was invalid
+	 * @throws NumberFormatException if the string was invalid
 	 */
 	public static Color decode(String nm) {
 		return new Color(Integer.decode(nm).intValue());
@@ -231,6 +213,10 @@ public class Color {
 
 	public void set(float r, float g, float b, float a) {
 		set(r, g, b);
+		this.a = a;
+	}
+
+	public void setAlpha(float a) {
 		this.a = a;
 	}
 
