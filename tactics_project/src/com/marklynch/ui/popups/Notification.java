@@ -109,6 +109,8 @@ public class Notification {
 		TextUtils.printTextWithImages(textX, textY, textWidth, true, links, textColor, 1f, objects);
 		QuadUtils.drawQuad(buttonColor, x + 12, y - 16, x + 76, y + 4);
 		TextUtils.printTextWithImages(textX, y - 16, 999, false, null, textColor, 1f, turn);
+		closeButton.buttonColor = buttonColor;
+		closeButton.textColor = textColor;
 		closeButton.draw();
 	}
 

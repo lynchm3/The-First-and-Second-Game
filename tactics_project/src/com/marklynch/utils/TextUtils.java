@@ -618,7 +618,9 @@ public class TextUtils {
 				}
 
 				if (links != null) {
-					Game.activeBatch.setColor(Color.YELLOW);
+					Color textColor = new Color(Color.YELLOW);
+					textColor.setAlpha(defaultColor.a);
+					Game.activeBatch.setColor(textColor);
 					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
 					linkIndex++;
 				}
@@ -820,7 +822,9 @@ public class TextUtils {
 				}
 
 				if (links != null) {
-					Game.activeBatch.setColor(Color.YELLOW);
+					Color textColor = new Color(Color.YELLOW);
+					textColor.setAlpha(defaultColor.a);
+					Game.activeBatch.setColor(textColor);
 					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
 					linkIndex++;
 				}
@@ -911,7 +915,9 @@ public class TextUtils {
 				}
 
 				if (links != null) {
-					Game.activeBatch.setColor(Color.YELLOW);
+					Color textColor = new Color(Color.YELLOW);
+					textColor.setAlpha(defaultColor.a);
+					Game.activeBatch.setColor(textColor);
 					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
 					linkIndex++;
 				}
@@ -952,7 +958,9 @@ public class TextUtils {
 				}
 
 				if (links != null) {
-					Game.activeBatch.setColor(Color.YELLOW);
+					Color textColor = new Color(Color.YELLOW);
+					textColor.setAlpha(defaultColor.a);
+					Game.activeBatch.setColor(textColor);
 					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
 					linkIndex++;
 				}
@@ -1121,7 +1129,9 @@ public class TextUtils {
 				}
 
 				if (links != null) {
-					Game.activeBatch.setColor(Color.YELLOW);
+					Color textColor = new Color(Color.YELLOW);
+					textColor.setAlpha(defaultColor.a);
+					Game.activeBatch.setColor(textColor);
 					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
 					linkIndex++;
 				}
