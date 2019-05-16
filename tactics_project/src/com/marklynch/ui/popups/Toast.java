@@ -49,7 +49,9 @@ public class Toast {
 		}
 
 		if (timeRemaingMS < disapearTime) { /// 1000 to 100
-			float alpha = timeRemaingMS - shrinkTime / disapearTime - shrinkTime;
+			float alpha = (timeRemaingMS - shrinkTime) / (disapearTime - shrinkTime);
+			if (alpha < 0)
+				alpha = 0;
 			color.setAlpha(alpha);
 			textColor.setAlpha(alpha);
 			imageAlpha = alpha;
