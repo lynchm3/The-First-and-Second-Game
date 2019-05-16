@@ -44,7 +44,8 @@ public class PowerQuickFingers extends Power {
 		for (Square squareToPickupFrom : source.getAllSquaresWithinDistance(0, 1)) {
 
 			if (squareToPickupFrom.inventory.containsGameObjectOfType(PressurePlate.class)
-					|| squareToPickupFrom.inventory.containsGameObjectOfType(PressurePlateRequiringSpecificItem.class)) {
+					|| squareToPickupFrom.inventory
+							.containsGameObjectOfType(PressurePlateRequiringSpecificItem.class)) {
 				continue;
 			}
 
@@ -55,8 +56,9 @@ public class PowerQuickFingers extends Power {
 					gameObjectsToTake.add(gameObject);
 				}
 			}
-			if (gameObjectsToTake.size() > 0) {
-				new ActionTakeItems(source, squareToPickupFrom, gameObjectsToTake).perform();
+
+			for (GameObject gameObjectToTake : gameObjectsToTake) {
+				new ActionTakeItems(source, squareToPickupFrom, gameObjectToTake).perform();
 			}
 		}
 

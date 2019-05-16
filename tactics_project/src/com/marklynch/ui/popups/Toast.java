@@ -15,7 +15,7 @@ public class Toast {
 	public static float halfWidth = width / 2;
 	public float y;
 	public float textY;
-	public static float border = 20f;
+	public static float border = 10f;
 	public static float textWidth = width - border * 2;
 	public static float x;
 	public static float textX;
@@ -48,10 +48,11 @@ public class Toast {
 			return;
 		}
 
-		if (timeRemaingMS < disapearTime) {
-			color.setAlpha(timeRemaingMS / disapearTime);
-			textColor.setAlpha(timeRemaingMS / disapearTime);
-			imageAlpha = timeRemaingMS / disapearTime;
+		if (timeRemaingMS < disapearTime) { /// 1000 to 100
+			float alpha = timeRemaingMS - shrinkTime / disapearTime - shrinkTime;
+			color.setAlpha(alpha);
+			textColor.setAlpha(alpha);
+			imageAlpha = alpha;
 		}
 
 		if (timeRemaingMS < shrinkTime) {
