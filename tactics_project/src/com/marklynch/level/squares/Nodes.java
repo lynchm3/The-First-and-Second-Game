@@ -28,7 +28,7 @@ public class Nodes {
 	public static Node dungeonHouseOuter; // 24,30
 	public static Node dungeonHouseHiddenArea; // 22,36
 
-	public static Node wallHouseOuter; // 41,21
+	public static Node wallHouseOuter; // 41,26
 	public static Node wallHouseBedroom; // 42,28
 	public static Node wallHouseFireplace;
 	public static Node wallHouseFalseWall; // 52,27
@@ -79,16 +79,16 @@ public class Nodes {
 		dungeonHouseHiddenArea = new Node("Dungeon House Secret", squares[AreaTown.posX + 22][AreaTown.posY + 36]); // 22,36
 		nodes.add(dungeonHouseHiddenArea);
 
-		wallHouseOuter = new Node("Walls House", squares[AreaTown.posX + 41][AreaTown.posY + 21]);
+		wallHouseOuter = new Node("Walls House", squares[AreaTown.posX + 41][AreaTown.posY + 26]);
 		nodes.add(wallHouseOuter);
 
-		wallHouseBedroom = new Node("Walls House Bedroom", squares[AreaTown.posX + 42][AreaTown.posY + 28]);// 42,28
+		wallHouseBedroom = new Node("Walls House Bedroom", squares[AreaTown.posX + 42][AreaTown.posY + 33]);// 42,28
 		nodes.add(wallHouseBedroom);
 
-		wallHouseFireplace = new Node("Walls House Fireplace", squares[AreaTown.posX + 48][AreaTown.posY + 29]);// 42,28
+		wallHouseFireplace = new Node("Walls House Fireplace", squares[AreaTown.posX + 48][AreaTown.posY + 34]);// 42,28
 		nodes.add(wallHouseFireplace);
 
-		wallHouseFalseWall = new Node("Walls House Secret", squares[AreaTown.posX + 52][AreaTown.posY + 27]); // 52,27
+		wallHouseFalseWall = new Node("Walls House Secret", squares[AreaTown.posX + 52][AreaTown.posY + 31]); // 52,27
 		nodes.add(wallHouseFalseWall);
 
 		townNorth = new Node("Town North", squares[AreaTown.posX + 24][AreaTown.posY + 7]);

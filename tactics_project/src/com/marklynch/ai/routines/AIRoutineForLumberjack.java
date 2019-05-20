@@ -142,13 +142,16 @@ public class AIRoutineForLumberjack extends AIRoutine {
 					AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 				}
 			} else {
-				System.out.println("moving towards tree");
-				target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, false, false,
-						true, 0, false, true, Tree.class, Stump.class);
+				target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10, false, false, true, true, 0, false,
+						true, Tree.class, Stump.class);
 				if (target != null) {
 					this.actor.thoughtBubbleImageTextureAction = Action.textureChop;
 					this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
 					AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+				} else {
+					System.out.println("actor.area = " + actor.area);
+					System.out.println("actor.area.centreSquare = " + actor.area.centreSquare);
+					AIRoutineUtils.moveTowards(actor.area.centreSquare);
 				}
 			}
 

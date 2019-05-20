@@ -69,7 +69,7 @@ public class QuestList extends ArrayList<Quest> {
 				questSmallGame.hunterBrent.imageTexture);
 
 		// QUEST - between the walls
-		questBetweenTheWalls = new QuestBetweenTheWalls(0, 0);
+		questBetweenTheWalls = new QuestBetweenTheWalls(0, 5);
 		add(questBetweenTheWalls);
 
 		// QUEST - the secret room
@@ -239,9 +239,9 @@ public class QuestList extends ArrayList<Quest> {
 		extraWalls.add(readableWall);
 
 		Structure puzzleStructure = new Structure("Puzzle Structure", structureSections, puzzleStructureRooms, paths,
-				features, entrances, ResourceUtils.getGlobalImage("icon_cave.png", false), puzzleRoomsX,
-				puzzleRoomsY, puzzleRoomsX + 100, puzzleRoomsY + 100, true, null, squaresToRemove, extraWalls,
-				Templates.WALL_CAVE, Square.STONE_TEXTURE, 10);
+				features, entrances, ResourceUtils.getGlobalImage("icon_cave.png", false), puzzleRoomsX, puzzleRoomsY,
+				puzzleRoomsX + 100, puzzleRoomsY + 100, true, null, squaresToRemove, extraWalls, Templates.WALL_CAVE,
+				Square.STONE_TEXTURE, 10);
 
 	}
 

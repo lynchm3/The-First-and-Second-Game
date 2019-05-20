@@ -60,9 +60,10 @@ public class AreaTown {
 		trader.inventory.add(Templates.HUNTING_BOW.makeCopy(null, null));
 
 		// Some tree to the left
-		Storage treeContainer = Templates.TREE_CONTAINER.makeCopy(Game.level.squares[posX + 0][posY + 8], false, null);
+		Storage treeContainer = Templates.TREE_CONTAINER.makeCopy(Game.level.squares[posX + 0][posY + 8], false,
+				trader);
 		treeContainer.inventory.add(Templates.HATCHET.makeCopy(null, null));
-		GameObject readableTree = Templates.TREE_READABLE.makeCopy(Game.level.squares[posX + 1][posY + 9], null);
+		GameObject readableTree = Templates.TREE_READABLE.makeCopy(Game.level.squares[posX + 1][posY + 9], trader);
 		readableTree.conversation = readableTree.createConversation(new Object[] { "MARK WAS HERE" });
 		Templates.LEAVES.makeCopy(Game.level.squares[posX + 1][posY + 8], null);
 
@@ -166,6 +167,7 @@ public class AreaTown {
 				Level.factions.townsPeople, null, 0, new GameObject[] { Templates.HATCHET.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.mines, new int[] { Templates.HATCHET.templateId },
 				new HOBBY[] { HOBBY.HUNTING });
+		lumberjack.area = AreaList.townForest;
 
 		// Wanted Poster
 		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[posX + 27][posY + 8],
@@ -199,13 +201,13 @@ public class AreaTown {
 		mound1.inventory.add(Templates.ROCK.makeCopy(null, null));
 		mound1.inventory.add(Templates.GOLD.makeCopy(null, null, 13));
 		Game.level.squares[posX + 13][posY + 8].setFloorImageTexture(Square.DIGGABLE_GRASS_TEXTURE);
-		Templates.TREE.makeCopy(Game.level.squares[posX + 14][posY + 8], null);
-		Templates.TREE.makeCopy(Game.level.squares[posX + 19][posY + 3], null);
-		Templates.TREE.makeCopy(Game.level.squares[posX + 18][posY + 13], null);
-		Templates.TREE.makeCopy(Game.level.squares[posX + 9][posY + 16], null);
-		Templates.TREE.makeCopy(Game.level.squares[posX + 12][posY + 8], null);
-		Templates.TREE.makeCopy(Game.level.squares[posX + 27][posY + 3], null);
-		Templates.TREE.makeCopy(Game.level.squares[posX + 23][posY + 5], null);
+		Templates.TREE.makeCopy(Game.level.squares[posX + 14][posY + 8], trader);
+		Templates.TREE.makeCopy(Game.level.squares[posX + 19][posY + 3], trader);
+		Templates.TREE.makeCopy(Game.level.squares[posX + 18][posY + 13], trader);
+		Templates.TREE.makeCopy(Game.level.squares[posX + 9][posY + 16], trader);
+		Templates.TREE.makeCopy(Game.level.squares[posX + 12][posY + 8], trader);
+		Templates.TREE.makeCopy(Game.level.squares[posX + 27][posY + 3], trader);
+		Templates.TREE.makeCopy(Game.level.squares[posX + 23][posY + 5], trader);
 		GameObject mound2 = Templates.MOUND.makeCopy(Level.squares[posX + 23][posY + 5], null);
 		mound2.level = 50;
 		mound2.inventory.add(Templates.ROCK.makeCopy(null, null));

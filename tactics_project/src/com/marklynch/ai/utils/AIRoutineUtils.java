@@ -141,7 +141,7 @@ public class AIRoutineUtils {
 		// Check our current target first, maybe it's a good 'un
 		GameObject existingTarget = Game.level.activeActor.aiRoutine.target;
 		if (existingTarget != null && passesChecks(existingTarget, fitsInInventory, mustContainObjects, mustBeUnowned,
-				ignoreQuestObjects, minimumGoldValue, actorsAlive, null, false)) {
+				ignoreQuestObjects, minimumGoldValue, actorsAlive, types, false)) {
 			AIRoutineUtils.tempPath = Game.level.activeActor.getPathTo(existingTarget.squareGameObjectIsOn);
 			if (AIRoutineUtils.tempPath == null) {
 				Game.level.activeActor.aiRoutine.ignoreList.add(existingTarget);

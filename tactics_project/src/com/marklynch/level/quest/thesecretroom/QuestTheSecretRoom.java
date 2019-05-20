@@ -123,11 +123,10 @@ public class QuestTheSecretRoom extends Quest {
 		Templates.RAT.makeCopy("Rat", Game.level.squares[AreaTown.posX + 25][AreaTown.posY + 39],
 				Game.level.factions.rats, null, new GameObject[] {}, new GameObject[] {}, null);
 
-		Game.level.structures.add(
-				new Structure("A Lovely House", structureSections, structureRooms, structurePaths, structureFeatures,
-						structureEntranceSquares, ResourceUtils.getGlobalImage("icon_house.png", false), AreaTown.posX + 0,
-						AreaTown.posY + 0, AreaTown.posX + 0, AreaTown.posY + 0, true, kidnapper, structureSquaresToRemove,
-						structureExtraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 2));
+		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
+				structureFeatures, structureEntranceSquares, ResourceUtils.getGlobalImage("icon_house.png", false),
+				AreaTown.posX + 0, AreaTown.posY + 0, AreaTown.posX + 0, AreaTown.posY + 0, true, kidnapper,
+				structureSquaresToRemove, structureExtraWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 2));
 
 		// Path to town 24,21 -> 24,29
 		new PavedPathway(AreaTown.posX + 24, AreaTown.posY + 21, AreaTown.posX + 24, AreaTown.posY + 29);
@@ -202,10 +201,10 @@ public class QuestTheSecretRoom extends Quest {
 		// "North - Shop, Hunter's Lodge; East - Estates; South - Farm",
 
 		// Trees around town square
-		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 19], null);
-		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 23], null);
-		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 19], null);
-		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 23], null);
+		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 19], kidnapper);
+		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 23], kidnapper);
+		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 19], kidnapper);
+		Templates.TREE.makeCopy(Game.level.squares[AreaTown.posX + 26][AreaTown.posY + 23], kidnapper);
 
 		conversationForKidnapper = new ConversationForKidnapper(this);
 
