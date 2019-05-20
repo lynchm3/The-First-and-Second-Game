@@ -128,27 +128,27 @@ public class AIRoutineForLumberjack extends AIRoutine {
 
 		// Go about your business
 		if (state == STATE.CHOPPING_WOOD) {
-			System.out.println("state == STATE.CHOPPING_WOOD");
-			this.actor.followersShouldFollow = true;
+			System.out.println("target = " + target);
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_CHOPPING_WOODG;
-			System.out.println("target b4 = " + target);
-			if (target == null || target.remainingHealth == 0 || target.squareGameObjectIsOn == null) {
-				target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, false, false,
-						true, 0, false, true, Tree.class, Stump.class);
-			}
-			System.out.println("target after = " + target);
-			if (target == null) {
-				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(actor.area.centreSuqare);
-			} else {
-				this.actor.activityDescription = ACTIVITY_DESCRIPTION_CHOPPING_WOODG;
+			this.actor.followersShouldFollow = true;
+
+			if (target != null && actor.straightLineDistanceTo(target.squareGameObjectIsOn) == 1
+					&& target.remainingHealth > 0) {
+				System.out.println("attempting to chop");
 				this.actor.thoughtBubbleImageTextureAction = Action.textureChop;
 				this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
-				if (target.remainingHealth <= 0) {
-				} else {
-					boolean chopped = AIRoutineUtils.chop(target);
-					if (!chopped) {
-						AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
-					}
+				boolean chopped = AIRoutineUtils.chop(target);
+				if (!chopped) {
+					AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+				}
+			} else {
+				System.out.println("moving towards tree");
+				target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, false, false,
+						true, 0, false, true, Tree.class, Stump.class);
+				if (target != null) {
+					this.actor.thoughtBubbleImageTextureAction = Action.textureChop;
+					this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
+					AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 				}
 			}
 

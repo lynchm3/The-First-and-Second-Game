@@ -176,6 +176,11 @@ public class AIRoutineUtils {
 
 				if (passesChecks(object, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
 						minimumGoldValue, actorsAlive, null, false)) {
+
+//					if (Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn) == 1) {
+//
+//					}
+
 					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn);
 
 					if (path == null) {

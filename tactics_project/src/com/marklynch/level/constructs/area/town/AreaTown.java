@@ -162,7 +162,7 @@ public class AreaTown {
 		new PavedPathway(posX + 24, posY + 8, posX + 24, posY + 18);
 
 		// Lumberjack
-		Actor lumberjack = Templates.LUMBERJACK.makeCopy("Lumberjack Ian", Game.level.squares[posX + 45][posY + 14],
+		Actor lumberjack = Templates.LUMBERJACK.makeCopy("Lumberjack Ian", Game.level.squares[posX + 19][posY + 9],
 				Level.factions.townsPeople, null, 0, new GameObject[] { Templates.HATCHET.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.mines, new int[] { Templates.HATCHET.templateId },
 				new HOBBY[] { HOBBY.HUNTING });

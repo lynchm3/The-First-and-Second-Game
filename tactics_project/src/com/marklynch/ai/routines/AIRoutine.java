@@ -1095,10 +1095,11 @@ public abstract class AIRoutine {
 	public boolean lootFromGround() {
 		// Pick up loot on ground
 		GameObject loot = null;
-		loot = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, true, 10, false, true,
+		loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, true, 10, false, true,
 				GameObject.class);
 
 		if (loot != null) {
+			target = loot;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
 			this.actor.thoughtBubbleImageTextureAction = Action.textureLeft;
@@ -1116,9 +1117,10 @@ public abstract class AIRoutine {
 	}
 
 	public boolean eatFoodOnGround() {
-		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, false, false, 0,
-				false, false, Food.class);
+		GameObject food = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, false, false, 0, false,
+				false, Food.class);
 		if (food != null) {
+			target = food;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTextureObject = food.imageTexture;
 			boolean ateFood = AIRoutineUtils.eatTarget(food);
@@ -1134,9 +1136,10 @@ public abstract class AIRoutine {
 	}
 
 	public boolean eatCarcassOnGround() {
-		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, false, false,
-				0, false, false, Animal.class);
+		GameObject corpse = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, false, false, 0, false,
+				false, Animal.class);
 		if (corpse != null) {
+			target = corpse;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTextureObject = corpse.imageTexture;
 			boolean ateCorpse = AIRoutineUtils.eatTarget(corpse);
@@ -1627,16 +1630,17 @@ public abstract class AIRoutine {
 		this.actor.followersShouldFollow = true;
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 		// if (target == null)
-		target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false, true, 0, false, true,
-				AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
+		GameObject gameObjectToHunt = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, false, true,
+				0, false, true, AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
 				TinyNeutralWildAnimal.class);
-		if (target == null) {
+		if (gameObjectToHunt == null) {
 			AIRoutineUtils.moveTowards(actor.area.centreSquare);
 			return true;
 		} else {
-			if (target == null || target.squareGameObjectIsOn == null) {
-				target = null;
+			if (gameObjectToHunt == null || gameObjectToHunt.squareGameObjectIsOn == null) {
+//				target = null;
 			} else {
+				target = gameObjectToHunt;
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 				if (target.remainingHealth <= 0) {
 				} else {
