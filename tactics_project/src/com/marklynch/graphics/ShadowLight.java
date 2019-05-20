@@ -227,7 +227,7 @@ public class ShadowLight {
 		Game.flush();
 
 		// Draw foreground
-		if (Game.zoomLevelIndex < Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
+		if (Game.zoom > Game.zoomLevels[Game.MAP_MODE_ZOOM_LEVEL_INDEX]) {
 			Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
 			Game.activeBatch.getViewMatrix().setIdentity();
 			Game.activeBatch.updateUniforms();

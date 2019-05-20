@@ -23,7 +23,7 @@ public class Toast {
 	public static final float disapearTime = 1000f;
 	public static final float shrinkTime = 100f;
 	public float timeRemaingMS = toastTimeMS;
-	public Color color = new Color(Color.PINK);
+	public Color color = new Color(Color.BLACK);
 	public Color textColor = new Color(Color.WHITE);
 	public float imageAlpha = 1f;
 	public float baseBackgroundAlpha = 0.75f;

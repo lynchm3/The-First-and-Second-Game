@@ -86,7 +86,7 @@ public class MapMarker extends GameObject {
 	public void drawStaticUI() {
 
 		float alpha = 1;
-		if (Game.zoomLevelIndex < Game.MAP_MODE_ZOOM_LEVEL_INDEX)
+		if (Game.zoom > Game.zoomLevels[Game.MAP_MODE_ZOOM_LEVEL_INDEX])
 			alpha = 0.5f;
 
 		float squarePositionX1 = this.squareGameObjectIsOn.xInGridPixels;

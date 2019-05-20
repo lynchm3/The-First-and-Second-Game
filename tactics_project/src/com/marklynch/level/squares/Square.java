@@ -285,7 +285,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		if (!this.visibleToPlayer)
 			alpha = 0.5f;
 
-		if (Game.zoomLevelIndex == Game.zoomLevels.length - 1) {
+		if (Game.zoom <= Game.zoomLevels[Game.MAP_MODE_ZOOM_LEVEL_INDEX]) {
 			if ((!Game.fullVisiblity && !this.seenByPlayer) || textureToDraw == null) {
 
 			} else {

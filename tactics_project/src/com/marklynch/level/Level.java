@@ -894,41 +894,44 @@ public class Level {
 		}
 
 		// Floor objects
-		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+		if (Game.zoom > Game.zoomLevels[Game.MAP_MODE_ZOOM_LEVEL_INDEX]) {
 
-			// Floor objects
-			Game.flush();
+			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
-			// Floor objects
-			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				for (GameObject gameObject : squares[i][j].inventory.floorObjects) {
-					gameObject.draw1();
+				// Floor objects
+				Game.flush();
+
+				// Floor objects
+				for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+					for (GameObject gameObject : squares[i][j].inventory.floorObjects) {
+						gameObject.draw1();
+					}
 				}
-			}
 
-			Game.flush();
-			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				for (GameObject gameObject : squares[i][j].inventory.floorObjects) {
-					gameObject.draw2();
+				Game.flush();
+				for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+					for (GameObject gameObject : squares[i][j].inventory.floorObjects) {
+						gameObject.draw2();
+					}
 				}
-			}
 
-			Game.flush();
-			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-				for (GameObject gameObject : squares[i][j].inventory.floorObjects) {
-					gameObject.draw3();
+				Game.flush();
+				for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+					for (GameObject gameObject : squares[i][j].inventory.floorObjects) {
+						gameObject.draw3();
+					}
 				}
+				Game.flush();
 			}
-			Game.flush();
-		}
 
-		if (Game.gameObjectMouseIsOver != null && Game.gameObjectMouseIsOver.squareGameObjectIsOn != null) {
-			Game.gameObjectMouseIsOver.squareGameObjectIsOn.drawHighlight();
-			for (Square square : Game.gameObjectMouseIsOver.squaresToHighlight) {
-				square.drawHighlight();
+			if (Game.gameObjectMouseIsOver != null && Game.gameObjectMouseIsOver.squareGameObjectIsOn != null) {
+				Game.gameObjectMouseIsOver.squareGameObjectIsOn.drawHighlight();
+				for (Square square : Game.gameObjectMouseIsOver.squaresToHighlight) {
+					square.drawHighlight();
+				}
+			} else if (Game.squareMouseIsOver != null) {
+				Game.squareMouseIsOver.drawHighlight();
 			}
-		} else if (Game.squareMouseIsOver != null) {
-			Game.squareMouseIsOver.drawHighlight();
 		}
 
 		Game.flush();
