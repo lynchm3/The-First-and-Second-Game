@@ -12,6 +12,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.popups.Toast;
 
 public class ActionFishingCompleted extends Action {
 
@@ -50,6 +51,8 @@ public class ActionFishingCompleted extends Action {
 				Level.addSecondaryAnimation(performer.fishingAnimation);
 			}
 			performer.inventory.add(targetGameObject);
+			if (performer == Level.player)
+				Level.addToast(new Toast(new Object[] { this.image, " ", targetGameObject }));
 		} else {
 			Square oldSquare = targetGameObject.squareGameObjectIsOn;
 			performer.squareGameObjectIsOn.inventory.add(targetGameObject);
@@ -79,7 +82,8 @@ public class ActionFishingCompleted extends Action {
 		}
 
 		if (!legal) {
-			Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_THEFT, targetGameObject);
+			Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_THEFT,
+					targetGameObject);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -135,7 +139,8 @@ public class ActionFishingCompleted extends Action {
 		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
 		if (shovel != null) {
 			float loudness = Math.max(targetGameObject.soundWhenHit, shovel.soundWhenHitting);
-			return new Sound(performer, shovel, targetGameObject.squareGameObjectIsOn, loudness, legal, this.getClass());
+			return new Sound(performer, shovel, targetGameObject.squareGameObjectIsOn, loudness, legal,
+					this.getClass());
 		}
 		return null;
 	}

@@ -14,6 +14,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.popups.Toast;
 
 public class ActionChopping extends Action {
 
@@ -84,6 +85,10 @@ public class ActionChopping extends Action {
 				Level.addSecondaryAnimation(new AnimationTake(wood, performer, 0, 0, 1f, null));
 			}
 			performer.inventory.add(wood);
+
+			if (performer == Level.player)
+				Level.addToast(new Toast(new Object[] { this.image, " ", wood }));
+
 			if (Game.level.shouldLog(targetGameObject, performer)) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", wood }));
 			}

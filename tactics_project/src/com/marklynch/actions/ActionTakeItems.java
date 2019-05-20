@@ -11,7 +11,6 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Openable;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.ui.popups.Toast;
 
 public class ActionTakeItems extends VariableQtyAction {
 
@@ -123,9 +122,6 @@ public class ActionTakeItems extends VariableQtyAction {
 								amountText, " from ", targetGameObject }));
 					}
 				}
-
-				if (performer == Level.player)
-					Level.addToast(new Toast(new Object[] { this.image, " ", objectsTotake[0], amountText }));
 			}
 		}
 

@@ -18,6 +18,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.popups.Toast;
 
 public class ActionDigging extends Action {
 
@@ -101,7 +102,8 @@ public class ActionDigging extends Action {
 		}
 
 		if (Game.level.shouldLog(targetGameObject, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dug up ", targetGameObject, " with ", shovel }));
+			Game.level.logOnScreen(
+					new ActivityLog(new Object[] { performer, " dug up ", targetGameObject, " with ", shovel }));
 
 		for (GameObject buriedGamObject : (ArrayList<GameObject>) targetGameObject.inventory.gameObjects.clone()) {
 			if (Game.level.openInventories.size() > 0) {
@@ -109,10 +111,14 @@ public class ActionDigging extends Action {
 				Level.addSecondaryAnimation(new AnimationTake(buriedGamObject, performer, 0, 0, 1f, null));
 			}
 			performer.inventory.add(buriedGamObject);
+
+			if (performer == Level.player)
+				Level.addToast(new Toast(new Object[] { this.image, " ", buriedGamObject }));
 			if (Game.level.shouldLog(targetGameObject, performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", buriedGamObject }));
 			if (!legal) {
-				Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_THEFT, buriedGamObject);
+				Crime crime = new Crime(this.performer, this.targetGameObject.owner, Crime.TYPE.CRIME_THEFT,
+						buriedGamObject);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
@@ -183,7 +189,8 @@ public class ActionDigging extends Action {
 		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
 		if (shovel != null) {
 			float loudness = Math.max(targetGameObject.soundWhenHit, shovel.soundWhenHitting);
-			return new Sound(performer, shovel, targetGameObject.squareGameObjectIsOn, loudness, legal, this.getClass());
+			return new Sound(performer, shovel, targetGameObject.squareGameObjectIsOn, loudness, legal,
+					this.getClass());
 		}
 		return null;
 	}

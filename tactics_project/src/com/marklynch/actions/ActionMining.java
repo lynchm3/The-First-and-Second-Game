@@ -14,6 +14,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.popups.Toast;
 
 public class ActionMining extends Action {
 
@@ -87,11 +88,15 @@ public class ActionMining extends Action {
 				if (vein.inventory.gameObjects.size() > 0) {
 					ore = vein.inventory.get(0);
 					performer.inventory.add(ore);
+					if (performer == Level.player)
+						Level.addToast(new Toast(new Object[] { this.image, " ", targetGameObject }));
 				}
 				vein.changeHealth(-damage, performer, this);
 			} else {
 				ore = vein.oreTemplate.makeCopy(vein.squareGameObjectIsOn, vein.owner);
 				performer.inventory.add(ore);
+				if (performer == Level.player)
+					Level.addToast(new Toast(new Object[] { this.image, " ", ore }));
 			}
 
 			if (ore != null) {
