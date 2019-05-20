@@ -7,6 +7,7 @@ import com.marklynch.ai.routines.AIRoutineForFollower;
 import com.marklynch.ai.routines.AIRoutineForGuard;
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.routines.AIRoutineForKidnapper;
+import com.marklynch.ai.routines.AIRoutineForLumberjack;
 import com.marklynch.ai.routines.AIRoutineForMinecart;
 import com.marklynch.ai.routines.AIRoutineForMiner;
 import com.marklynch.ai.routines.AIRoutineForMort;
@@ -134,6 +135,27 @@ public class TemplatesHumans {
 		Templates.MINER.aiRoutine = new AIRoutineForMiner(Templates.MINER);
 		Templates.MINER.templateId = GameObject.generateNewTemplateId();
 		Templates.MINER.flipYAxisInMirror = false;
+
+		Templates.LUMBERJACK = new Human();
+		Templates.LUMBERJACK.title = "Lumberjack";
+		Templates.LUMBERJACK.level = 1;
+		Templates.LUMBERJACK.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 3));
+		Templates.LUMBERJACK.totalHealth = Templates.LUMBERJACK.remainingHealth = 10;
+		Templates.LUMBERJACK.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 13));
+		Templates.LUMBERJACK.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 5));
+		Templates.LUMBERJACK.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE,
+				new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 4));
+		Templates.LUMBERJACK.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 12));
+		Templates.LUMBERJACK.heightRatio = 1.5f;
+		Templates.LUMBERJACK.drawOffsetRatioY = -0.5f;
+		Templates.LUMBERJACK.drawOffsetY = Templates.LUMBERJACK.drawOffsetRatioY * Game.SQUARE_HEIGHT;
+		Templates.LUMBERJACK.weight = 110f;
+		Templates.LUMBERJACK.canOpenDoors = true;
+		Templates.LUMBERJACK.canEquipWeapons = true;
+		Templates.LUMBERJACK.aiRoutine = new AIRoutineForLumberjack(Templates.LUMBERJACK);
+		Templates.LUMBERJACK.templateId = GameObject.generateNewTemplateId();
+		Templates.LUMBERJACK.flipYAxisInMirror = false;
 
 		Templates.THIEF = new Thief();
 		Templates.THIEF.title = "Thief";

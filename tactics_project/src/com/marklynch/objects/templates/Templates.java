@@ -129,6 +129,7 @@ public class Templates {
 	public static Guard GUARD;
 	public static Human FISHERMAN;
 	public static Human MINER;
+	public static Human LUMBERJACK;
 
 	public static Thief THIEF;
 

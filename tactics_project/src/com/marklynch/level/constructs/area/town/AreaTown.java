@@ -86,10 +86,10 @@ public class AreaTown {
 		shopSections
 				.add(new StructureSection("Trader Joe's Shop", posX + 5, posY + 0, posX + 17, posY + 5, false, false));
 		joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
-				new ArrayList<StructurePath>(StructurePath.class), shopFeatures, entranceSquares, Templates.GOLD.imageTexture,
-				posX + 5, posY + 0, posX + 17, posY + 5, true, trader, new ArrayList<Square>(Square.class),
-				new ArrayList<Wall>(Wall.class), Templates.WALL_BUILDING, Square.STONE_TEXTURE,
-				2);
+				new ArrayList<StructurePath>(StructurePath.class), shopFeatures, entranceSquares,
+				Templates.GOLD.imageTexture, posX + 5, posY + 0, posX + 17, posY + 5, true, trader,
+				new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_BUILDING,
+				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(joesShop);
 		GameObject joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6][posY + 6], trader);
 		joesShopSign.conversation = joesShopSign.createConversation(new Object[] { joesShop.name });
@@ -147,8 +147,8 @@ public class AreaTown {
 				posX + 17 + 35, posY + 5 + 3, false, false));
 		doctorsShop = new Structure("Doctor Mike's Practice", doctorsShopSections, doctorsShopAtriums,
 				new ArrayList<StructurePath>(StructurePath.class), doctorsShopFeatures, doctorsEntranceSquares,
-				ResourceUtils.getGlobalImage("icon_doctor.png", false), posX + 40, posY + 3, posX + 52, posY + 8,
-				true, doctor, new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
+				ResourceUtils.getGlobalImage("icon_doctor.png", false), posX + 40, posY + 3, posX + 52, posY + 8, true,
+				doctor, new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
 				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(doctorsShop);
 		GameObject doctorsShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6 + 35][posY + 6 + 3], doctor);
@@ -160,6 +160,12 @@ public class AreaTown {
 		// Path from cotors office to well
 		new PavedPathway(posX + 24, posY + 7, posX + 38, posY + 7);
 		new PavedPathway(posX + 24, posY + 8, posX + 24, posY + 18);
+
+		// Lumberjack
+		Actor lumberjack = Templates.LUMBERJACK.makeCopy("Lumberjack Ian", Game.level.squares[posX + 45][posY + 14],
+				Level.factions.townsPeople, null, 0, new GameObject[] { Templates.HATCHET.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.mines, new int[] { Templates.HATCHET.templateId },
+				new HOBBY[] { HOBBY.HUNTING });
 
 		// Wanted Poster
 		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[posX + 27][posY + 8],

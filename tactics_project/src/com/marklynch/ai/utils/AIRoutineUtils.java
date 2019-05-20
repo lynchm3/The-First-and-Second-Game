@@ -8,6 +8,7 @@ import java.util.Random;
 
 import com.marklynch.Game;
 import com.marklynch.actions.ActionAttack;
+import com.marklynch.actions.ActionChopping;
 import com.marklynch.actions.ActionEatItems;
 import com.marklynch.actions.ActionMining;
 import com.marklynch.actions.ActionMove;
@@ -637,6 +638,17 @@ public class AIRoutineUtils {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
 		if (weaponDistance <= 1) {
 			new ActionMining(Game.level.activeActor, (Vein) target).perform();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean chop(GameObject target) {
+		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
+		System.out.println("weaponDistance = " + weaponDistance);
+		if (weaponDistance <= 1) {
+			new ActionChopping(Game.level.activeActor, target).perform();
 			return true;
 		} else {
 			return false;

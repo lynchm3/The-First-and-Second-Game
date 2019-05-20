@@ -746,6 +746,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			// Farmer went to buy knife
 			// then got null pointer at the next line there...
+			// Lumberjack tried to buy a hatchet, same issue.
 
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null) {
@@ -1415,34 +1416,35 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				Game.windowHeight - textureCornerGradient.getHeight(), Color.BLACK);
 
 		// "Search:" text
-		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, Color.WHITE, 1f, new Object[] { stringSearch });
+		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, Color.WHITE, 1f,
+				new Object[] { stringSearch });
 
 		// [SHIFT]
-		TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null, Color.WHITE,
-				1f, new Object[] { stringShiftForSecondary });
+		TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null, Color.WHITE, 1f,
+				new Object[] { stringShiftForSecondary });
 
 		// [ENTER] Search
 		buttonSearch.draw();
 
 		// text
 		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					1f, new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE, 1f,
+					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					1f, new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE, 1f,
+					new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					1f, new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE, 1f,
+					new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					1f, new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE, 1f,
+					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					1f, new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE, 1f,
+					new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
-			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE,
-					1f, new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE, 1f,
+					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 		}
 
 		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, null, Color.WHITE, 1f, "Bag");
@@ -1560,8 +1562,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				int totalValue = valuePerQty * textBoxQty.numericValue;
 				String totalValueString = "Total value " + totalValue + " gold";
 				TextUtils.printTextWithImages(textBoxQty.drawPositionX, textBoxQty.drawPositionY + 36,
-						Integer.MAX_VALUE, true, null, Color.WHITE,
-						1f, new Object[] { new StringWithColor(totalValueString, Color.WHITE) });
+						Integer.MAX_VALUE, true, null, Color.WHITE, 1f,
+						new Object[] { new StringWithColor(totalValueString, Color.WHITE) });
 
 			}
 
@@ -1570,8 +1572,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void drawOtherInventoryText() {
-		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, null, Color.WHITE,
-				1f, new Object[] { ((GameObject) this.parent).name });
+		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, null, Color.WHITE, 1f,
+				new Object[] { ((GameObject) this.parent).name });
 	}
 
 	public void drawBorder() {
