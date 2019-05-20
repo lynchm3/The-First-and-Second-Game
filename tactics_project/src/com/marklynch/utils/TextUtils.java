@@ -594,8 +594,8 @@ public class TextUtils {
 						return;
 					}
 				}
-				TextureUtils.drawTexture((Texture) content, posX + offsetX, posY + offsetY, posX + offsetX + 20,
-						posY + offsetY + 20);
+				TextureUtils.drawTexture((Texture) content, imageAlpha, posX + offsetX, posY + offsetY,
+						posX + offsetX + 20, posY + offsetY + 20);
 				offsetX += width;
 
 			} else if (content instanceof GameObject) {

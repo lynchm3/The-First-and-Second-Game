@@ -38,6 +38,7 @@ public class Toast {
 
 		this.objects = objects;
 		height = originalHeight = TextUtils.getDimensions(textWidth, objects)[1] + 8;
+		width = TextUtils.getDimensions(Integer.MAX_VALUE, objects)[0] + border * 2;
 	}
 
 	public void draw() {

@@ -125,7 +125,7 @@ public class ActionTakeItems extends VariableQtyAction {
 				}
 
 				if (performer == Level.player)
-					Level.addToast(new Toast(new Object[] { objectsTotake[0], amountText }));
+					Level.addToast(new Toast(new Object[] { this.image, " ", objectsTotake[0], amountText }));
 			}
 		}
 
