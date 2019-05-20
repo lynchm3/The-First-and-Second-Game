@@ -72,6 +72,7 @@ public class AIRoutineForThief extends AIRoutine {
 			GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, false, true, false, true, 0,
 					false, false, Actor.class, Storage.class);
 			if (container != null) {
+				target = container;
 				if (container.owner != null && container.owner != actor)
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
 				else
@@ -102,12 +103,10 @@ public class AIRoutineForThief extends AIRoutine {
 				}
 			}
 
-			// 1. pick up loot on ground, even if owned, all specific stuff, no
-			// stupid generic game object
-
 			GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(10f, true, false, false, true, 0,
 					false, true, GameObject.class);
 			if (loot != null) {
+				target = loot;
 				if (loot.owner != null && loot.owner != actor)
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
 				else
