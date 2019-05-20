@@ -26,7 +26,7 @@ public class AreaList extends ArrayList<Quest> {
 
 	public AreaList() {
 
-		town = new Area("Town", "map_forest.png", ResourceUtils.getGlobalImage("icon_town.png", false),
+		town = new Area("Town", "map_town.png", ResourceUtils.getGlobalImage("icon_town.png", false),
 				Square.GRASS_TEXTURE, 0, 0, 110, 99, 1, colorR, Nodes.townShopCrossRoads, Nodes.townCenter,
 				Nodes.townNorth, Nodes.townNorthEast, Nodes.townEast, Nodes.townSouthEast, Nodes.forestNorthWest,
 				Nodes.lodgeJunction, Nodes.farmRoadWest, Nodes.farmRoadEast);
