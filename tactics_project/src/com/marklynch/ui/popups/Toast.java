@@ -26,6 +26,8 @@ public class Toast {
 	public Color color = new Color(Color.PINK);
 	public Color textColor = new Color(Color.WHITE);
 	public float imageAlpha = 1f;
+	public float baseBackgroundAlpha = 0.75f;
+	public float fadeInTime = 500f;
 
 	// Specifics
 	public static enum NotificationType {
@@ -39,25 +41,43 @@ public class Toast {
 		this.objects = objects;
 		height = originalHeight = TextUtils.getDimensions(textWidth, objects)[1] + 8;
 		width = TextUtils.getDimensions(Integer.MAX_VALUE, objects)[0] + border * 2;
+		color.setAlpha(baseBackgroundAlpha);
 	}
 
 	public void draw() {
 
 		timeRemaingMS -= Game.delta;
+
 		if (timeRemaingMS <= 0) {
 			Level.removeToast(this);
 			return;
 		}
 
-		if (timeRemaingMS < disapearTime) { /// 1000 to 100
-			float alpha = (timeRemaingMS - shrinkTime) / (disapearTime - shrinkTime);
+		color.setAlpha(baseBackgroundAlpha);
+		textColor.setAlpha(1f);
+		imageAlpha = 1f;
+
+		// Fade in
+		if (toastTimeMS - timeRemaingMS < fadeInTime) {
+			float alpha = (toastTimeMS - timeRemaingMS) / fadeInTime;
 			if (alpha < 0)
 				alpha = 0;
-			color.setAlpha(alpha);
+			color.setAlpha(alpha * baseBackgroundAlpha);
 			textColor.setAlpha(alpha);
 			imageAlpha = alpha;
 		}
 
+//		Fade out
+		if (timeRemaingMS < disapearTime) { /// 1000 to 100
+			float alpha = (timeRemaingMS - shrinkTime) / (disapearTime - shrinkTime);
+			if (alpha < 0)
+				alpha = 0;
+			color.setAlpha(alpha * baseBackgroundAlpha);
+			textColor.setAlpha(alpha);
+			imageAlpha = alpha;
+		}
+
+		// Shrink
 		if (timeRemaingMS < shrinkTime) {
 			height = originalHeight * timeRemaingMS / shrinkTime;
 		}
