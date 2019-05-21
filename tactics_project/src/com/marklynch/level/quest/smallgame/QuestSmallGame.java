@@ -19,7 +19,6 @@ import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.quest.Quest;
-import com.marklynch.level.squares.NodeList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
@@ -240,8 +239,7 @@ public class QuestSmallGame extends Quest {
 		// Hunting lodge
 		ArrayList<StructureFeature> lodgeFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
 		lodgeFeatures.add(new StructureFeature(
-				Templates.DOOR.makeCopy("Door", Game.level.squares[105][12], false, false, false, hunterBrent),
-				NodeList.lodgeEntrance));
+				Templates.DOOR.makeCopy("Door", Game.level.squares[105][12], false, false, false, hunterBrent)));
 		ArrayList<StructureRoom> lodgeRooms = new ArrayList<StructureRoom>(StructureRoom.class);
 		lodgeRooms.add(new StructureRoom("Hunting Lodge", 107, 9, false, false, new ArrayList<Actor>(Actor.class),
 				new RoomPart(106, 10, 110, 14)));
@@ -329,11 +327,9 @@ public class QuestSmallGame extends Quest {
 		ArrayList<StructureRoom> roomsBarracks = new ArrayList<StructureRoom>(StructureRoom.class);
 		ArrayList<Square> squaresToRemoveBarracks = new ArrayList<Square>(Square.class);
 		featuresBarracks.add(new StructureFeature(
-				Templates.DOOR.makeCopy("Door", Game.level.squares[80][52], false, false, false, null),
-				NodeList.barracksNorth));
+				Templates.DOOR.makeCopy("Door", Game.level.squares[80][52], false, false, false, null)));
 		featuresBarracks.add(new StructureFeature(
-				Templates.DOOR.makeCopy("Door", Game.level.squares[80][61], false, false, false, null),
-				NodeList.barracksSouth));
+				Templates.DOOR.makeCopy("Door", Game.level.squares[80][61], false, false, false, null)));
 		roomsBarracks.add(new StructureRoom("Barracks", 75, 53, false, false, new ArrayList<Actor>(Actor.class),
 				new RoomPart(75, 53, 84, 60)));
 		sectionsBarracks.add(new StructureSection("Barracks", 74, 52, 85, 61, false, false));
@@ -378,8 +374,7 @@ public class QuestSmallGame extends Quest {
 		ArrayList<StructureRoom> roomsThievesHut = new ArrayList<StructureRoom>(StructureRoom.class);
 		ArrayList<Square> squaresToRemoveThievesHut = new ArrayList<Square>(Square.class);
 		featuresThievesHut.add(new StructureFeature(
-				Templates.DOOR.makeCopy("Door", Game.level.squares[113][53], false, false, false, null),
-				NodeList.forestThiefHut));
+				Templates.DOOR.makeCopy("Door", Game.level.squares[113][53], false, false, false, null)));
 		roomsThievesHut.add(new StructureRoom("Hut", 114, 53, false, false, new ArrayList<Actor>(Actor.class),
 				new RoomPart(114, 53, 116, 55)));
 		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false, false));
@@ -428,8 +423,7 @@ public class QuestSmallGame extends Quest {
 		ArrayList<StructureRoom> roomsRangersHut = new ArrayList<StructureRoom>(StructureRoom.class);
 		ArrayList<Square> squaresToRemoveRangersHut = new ArrayList<Square>(Square.class);
 		featuresRangersHut.add(new StructureFeature(
-				Templates.DOOR.makeCopy("Door", Game.level.squares[133][34], false, false, false, rangerBill),
-				NodeList.forestRangersHut));
+				Templates.DOOR.makeCopy("Door", Game.level.squares[133][34], false, false, false, rangerBill)));
 		roomsRangersHut.add(new StructureRoom("Ranger's Hut", 130, 34, false, false, new ArrayList<Actor>(Actor.class),
 				new RoomPart(130, 34, 132, 36)));
 		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false, false));

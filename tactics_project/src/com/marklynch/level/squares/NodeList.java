@@ -7,6 +7,7 @@ import com.marklynch.level.constructs.area.town.AreaTown;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.Utils.Point;
 
 public class NodeList {
 
@@ -22,7 +23,7 @@ public class NodeList {
 	public static Node townNorthEast; // 24,18
 	public static Node townEast; // 24,18
 	public static Node townSouthEast; // 24,18
-	public static Node lodgeJunction; // 104,18
+//	public static Node lodgeJunction; // 104,18
 	public static Node lodgeEntrance; // 105,12
 
 	public static Node dungeonHouseOuter; // 24,30
@@ -60,18 +61,43 @@ public class NodeList {
 
 	public NodeList(Square[][] squares) {
 
-		// town
+		// Town outdoors
+		townShopCrossRoads = new Node("Town Shop Crossroads", squares[AreaTown.posX + 4][AreaTown.posY + 21],
+				new Point(0, 0), new Point(14, 38));
+		nodes.add(townShopCrossRoads);
+
+		townNorth = new Node("Town North", squares[AreaTown.posX + 24][AreaTown.posY + 7], new Point(15, 0),
+				new Point(69, 14));
+		nodes.add(townNorth);
+
+		townNorthEast = new Node("Town North East", squares[AreaTown.posX + 89][AreaTown.posY + 19], new Point(70, 0),
+				new Point(100, 38));
+		nodes.add(townNorthEast);
+
+		townCenter = new Node("Town Center", squares[AreaTown.posX + 24][AreaTown.posY + 21], new Point(15, 15),
+				new Point(69, 38));
+		nodes.add(townCenter);
+
+		townEast = new Node("Town East", squares[AreaTown.posX + 89][AreaTown.posY + 40], new Point(70, 39),
+				new Point(100, 56));
+		nodes.add(townEast);
+
+		townSouthEast = new Node("Town South East", squares[AreaTown.posX + 89][AreaTown.posY + 63], new Point(70, 57),
+				new Point(100, 86));
+		nodes.add(townSouthEast);
+
+		farmRoadWest = new Node("Farm Road West", squares[4][62]);/// ???
+		nodes.add(farmRoadWest);
+
+		farmRoadEast = new Node("Farm Road East", squares[18][62]);/// ???
+		nodes.add(farmRoadEast);
+
+		// Town indoors
 		townShopInner = new Node("Town Shop Private Quarters", squares[AreaTown.posX + 11][AreaTown.posY + 4]);
 		nodes.add(townShopInner);
 
 		townShopOuter = new Node("Town Shop", squares[AreaTown.posX + 5][AreaTown.posY + 4]);
 		nodes.add(townShopOuter);
-
-		townShopCrossRoads = new Node("Town Shop Crossroads", squares[AreaTown.posX + 4][AreaTown.posY + 21]);
-		nodes.add(townShopCrossRoads);
-
-		townCenter = new Node("Town Center", squares[AreaTown.posX + 24][AreaTown.posY + 21]);
-		nodes.add(townCenter);
 
 		dungeonHouseOuter = new Node("Dungeon House", squares[AreaTown.posX + 24][AreaTown.posY + 30]);
 		nodes.add(dungeonHouseOuter);
@@ -91,9 +117,6 @@ public class NodeList {
 		wallHouseFalseWall = new Node("Walls House Secret", squares[AreaTown.posX + 52][AreaTown.posY + 31]); // 52,27
 		nodes.add(wallHouseFalseWall);
 
-		townNorth = new Node("Town North", squares[AreaTown.posX + 24][AreaTown.posY + 7]);
-		nodes.add(townNorth);
-
 		townDoctorsOuter = new Node("Doctor's Practice", squares[AreaTown.posX + 40][AreaTown.posY + 7]);
 		nodes.add(townDoctorsOuter);
 
@@ -101,33 +124,14 @@ public class NodeList {
 				squares[AreaTown.posX + 46][AreaTown.posY + 7]);
 		nodes.add(townDoctorsInner);
 
-		townNorthEast = new Node("Town North East", squares[AreaTown.posX + 89][AreaTown.posY + 19]);
-		nodes.add(townNorthEast);
-
-		townEast = new Node("Town East", squares[AreaTown.posX + 89][AreaTown.posY + 40]);
-		nodes.add(townEast);
-
-		townSouthEast = new Node("Town South East", squares[AreaTown.posX + 89][AreaTown.posY + 63]);
-		nodes.add(townSouthEast);
-
 		barracksNorth = new Node("Barracks North", squares[AreaTown.posX + 80][AreaTown.posY + 52]);
 		nodes.add(barracksNorth);
 
 		barracksSouth = new Node("Barracks South", squares[AreaTown.posX + 80][AreaTown.posY + 61]);
 		nodes.add(barracksSouth);
 
-		lodgeJunction = new Node("Lodge Junction", squares[104][18]);
-		nodes.add(lodgeJunction);
-
 		lodgeEntrance = new Node("Lodge", squares[105][12]);
 		nodes.add(lodgeEntrance);
-
-		// Farm
-		farmRoadWest = new Node("Farm Road West", squares[4][62]);
-		nodes.add(farmRoadWest);
-
-		farmRoadEast = new Node("Farm Road East", squares[18][62]);
-		nodes.add(farmRoadEast);
 
 		farmEntrance = new Node("Farm Entrance", squares[18][69]);
 		nodes.add(farmEntrance);
@@ -229,7 +233,8 @@ public class NodeList {
 
 		townNorthEast.neighbors.add(townCenter);
 		townNorthEast.neighbors.add(townEast);
-		townNorthEast.neighbors.add(lodgeJunction);
+		townNorthEast.neighbors.add(lodgeEntrance);
+		townNorthEast.neighbors.add(forestNorthWest);
 
 		// townEast.neighbors.add(townCenter);
 		townEast.neighbors.add(townNorthEast);
@@ -240,11 +245,7 @@ public class NodeList {
 		townSouthEast.neighbors.add(barracksSouth);
 		townSouthEast.neighbors.add(farmRoadEast);
 
-		lodgeJunction.neighbors.add(forestNorthWest);
-		lodgeJunction.neighbors.add(lodgeEntrance);
-		lodgeJunction.neighbors.add(townNorthEast);
-
-		lodgeEntrance.neighbors.add(lodgeJunction);
+		lodgeEntrance.neighbors.add(townNorthEast);
 
 		// Farm
 		farmRoadWest.neighbors.add(townShopCrossRoads);
@@ -277,7 +278,7 @@ public class NodeList {
 		farmBarnDoorway.neighbors.add(farmRoadEast);
 
 		// forest
-		forestNorthWest.neighbors.add(lodgeJunction);
+		forestNorthWest.neighbors.add(townNorthEast);
 		forestNorthWest.neighbors.add(forestNorth);
 		forestNorthWest.neighbors.add(forestThiefHut);
 		forestNorthWest.neighbors.add(forestRangersHut);

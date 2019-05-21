@@ -8,6 +8,7 @@ import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.Utils.Point;
 
 public class Node implements Comparable<Node>, Idable {
 
@@ -34,14 +35,46 @@ public class Node implements Comparable<Node>, Idable {
 	// end path finding
 
 	public Node(String name, Square square) {
+		this(name, square, null, null);
+	}
+
+	public Node(String name, Square square, Point p1, Point p2) {
 
 		this.id = Level.generateNewId(this);
 		this.name = name;
 		this.square = square;
 		this.xInGrid = square.xInGrid;
 		this.yInGrid = square.yInGrid;
-		square.node = this;
+		this.square.node = this;
+		if (p1 != null && p2 != null) {
+			for (int x = (int) p1.x; x <= p2.x; x++) {
+				for (int y = (int) p1.y; y <= p2.y; y++) {
+					squares.add(Level.squares[x][y]);
+				}
+			}
+		}
+
+		for (Square squareInSquares : squares) {
+			squareInSquares.nodes.clear();
+			squareInSquares.nodes.add(this);
+		}
+
 	}
+
+//	public Node(String name, Square square, ArrayList<Square> squares) {
+//
+//		this.id = Level.generateNewId(this);
+//		this.name = name;
+//		this.square = square;
+//		this.xInGrid = square.xInGrid;
+//		this.yInGrid = square.yInGrid;
+//		this.square.node = this;
+//		this.squares = squares;
+//		for (Square squareInSquares : squares) {
+//			squareInSquares.nodes.clear();
+//			squareInSquares.nodes.add(this);
+//		}
+//	}
 
 	@Override
 	public String toString() {

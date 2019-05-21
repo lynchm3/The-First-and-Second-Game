@@ -11,7 +11,6 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.quest.Quest;
-import com.marklynch.level.squares.NodeList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -45,7 +44,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Front door
 		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Front Door",
-				Game.level.squares[posX + 41][posY + 21], false, false, false, null), NodeList.wallHouseOuter));
+				Game.level.squares[posX + 41][posY + 21], false, false, false, null)));
 
 		// Front room
 		StructureRoom frontRoom = new StructureRoom("Front Room", posX + 42, posY + 20, false, false,
@@ -67,7 +66,7 @@ public class QuestBetweenTheWalls extends Quest {
 		structurePaths.add(new StructurePath("Front Room", false, false, new ArrayList(Actor.class),
 				Game.level.squares[posX + 42][posY + 27]));
 		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Bedroom Door",
-				Game.level.squares[posX + 42][posY + 28], false, true, true, null), NodeList.wallHouseBedroom));
+				Game.level.squares[posX + 42][posY + 28], false, true, true, null)));
 		structureFeatures.add(
 				new StructureFeature(Templates.FIRE_PLACE.makeCopy(Game.level.squares[posX + 48][posY + 29], null)));
 
@@ -102,7 +101,7 @@ public class QuestBetweenTheWalls extends Quest {
 		// False wall
 		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall", Game.level.squares[posX + 52][posY + 27], false,
 				null);
-		structureFeatures.add(new StructureFeature(falseWall, NodeList.wallHouseFalseWall));
+		structureFeatures.add(new StructureFeature(falseWall));
 
 		// Rat
 		Templates.RAT.makeCopy("Rat", Game.level.squares[posX + 44][posY + 28], Game.level.factions.rats, null,

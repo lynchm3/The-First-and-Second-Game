@@ -15,7 +15,6 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.constructs.journal.AreaList;
-import com.marklynch.level.squares.NodeList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
@@ -71,9 +70,9 @@ public class AreaTown {
 				Arrays.asList(new Square[] { Game.level.squares[posX + 4][posY + 4] }));
 		ArrayList<StructureFeature> shopFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
 		shopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Shop Door",
-				Game.level.squares[posX + 5][posY + 4], false, false, false, trader), NodeList.townShopOuter));
+				Game.level.squares[posX + 5][posY + 4], false, false, false, trader)));
 		shopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Private Quarters Door",
-				Game.level.squares[posX + 11][posY + 4], false, true, true, trader), NodeList.townShopInner));
+				Game.level.squares[posX + 11][posY + 4], false, true, true, trader)));
 		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>(StructureRoom.class);
 		shopAtriums.add(new StructureRoom("Trader Joe's Shop", posX + 6, posY + 1, false, false,
 				new ArrayList<Actor>(Actor.class, Arrays.asList(new Actor[] { trader })),
@@ -129,9 +128,9 @@ public class AreaTown {
 				Arrays.asList(new Square[] { Game.level.squares[posX + 4 + 35][posY + 4 + 3] }));
 		ArrayList<StructureFeature> doctorsShopFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
 		doctorsShopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Shop Door",
-				Game.level.squares[posX + 5 + 35][posY + 4 + 3], false, false, false, doctor), NodeList.townShopOuter));
+				Game.level.squares[posX + 5 + 35][posY + 4 + 3], false, false, false, doctor)));
 		doctorsShopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Private Quarters Door",
-				Game.level.squares[posX + 11 + 35][posY + 4 + 3], false, true, true, doctor), NodeList.townShopInner));
+				Game.level.squares[posX + 11 + 35][posY + 4 + 3], false, true, true, doctor)));
 		ArrayList<StructureRoom> doctorsShopAtriums = new ArrayList<StructureRoom>(StructureRoom.class);
 		doctorsShopAtriums.add(new StructureRoom("Doctor Mike's Practice", posX + 6 + 35, posY + 1 + 3, false, false,
 				new ArrayList<Actor>(Actor.class, Arrays.asList(new Actor[] { doctor })),

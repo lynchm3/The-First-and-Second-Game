@@ -17,7 +17,6 @@ import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.quest.thepigs.QuestThePigs;
-import com.marklynch.level.squares.NodeList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Kidnapper;
@@ -76,8 +75,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Front door
 		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Front Door",
-				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 30], false, false, false, kidnapper),
-				NodeList.dungeonHouseOuter));
+				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 30], false, false, false, kidnapper)));
 
 		// Front room
 		StructureRoom livingRoom = new StructureRoom("Living Room", AreaTown.posX + 22, AreaTown.posY + 31, false, true,
@@ -101,7 +99,7 @@ public class QuestTheSecretRoom extends Quest {
 		// False wall
 		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall",
 				Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 36], false, null);
-		structureFeatures.add(new StructureFeature(falseWall, NodeList.dungeonHouseHiddenArea));
+		structureFeatures.add(new StructureFeature(falseWall));
 
 		// Back room
 		StructureRoom backRoom = new StructureRoom("Back room", AreaTown.posX + 20, AreaTown.posY + 37, false, true,

@@ -1,7 +1,5 @@
 package com.marklynch.level.constructs.area;
 
-import java.util.Arrays;
-
 import com.marklynch.Game;
 import com.marklynch.actions.ActionSpot;
 import com.marklynch.data.Idable;
@@ -10,7 +8,6 @@ import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
-import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
@@ -27,7 +24,6 @@ public class Area implements Idable, Place {
 	boolean showOnMap = false;
 	public int level;
 	public Color color;
-	public ArrayList<Node> nodes = new ArrayList<Node>(Node.class);
 	public Storage lostAndFound;
 	public WantedPoster wantedPoster;
 	public Long id;
@@ -49,17 +45,11 @@ public class Area implements Idable, Place {
 		this.centreSquare = Level.squares[gridCenterX][gridCenterY];
 		this.level = level;
 		this.color = color;
-		this.nodes.clear();
-		this.nodes.addAll(Arrays.asList(nodes));
 
 		for (int i = gridX1; i <= gridX2; i++) {
 			for (int j = gridY1; j <= gridY2; j++) {
 				Level.squares[i][j].areaSquareIsIn = this;
 				Level.squares[i][j].setFloorImageTexture(squareTexture);
-				Level.squares[i][j].nodes = this.nodes;
-				for (Node node : this.nodes) {
-					node.addSquare(Level.squares[i][j]);
-				}
 
 			}
 		}

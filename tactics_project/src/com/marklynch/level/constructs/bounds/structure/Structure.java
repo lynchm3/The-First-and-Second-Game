@@ -7,7 +7,6 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.area.Place;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom.RoomPart;
-import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Wall;
@@ -77,26 +76,12 @@ public class Structure implements Idable, Place {
 		for (StructureFeature feature : features) {
 			floorSquares.add(feature.gameObject.squareGameObjectIsOn);
 			featureSquares.add(feature.gameObject.squareGameObjectIsOn);
-
-			if (feature.nodes != null && feature.nodes.size() > 0) {
-				feature.gameObject.squareGameObjectIsOn.nodes = feature.nodes;
-				for (Node node : feature.nodes) {
-					node.addSquare(feature.gameObject.squareGameObjectIsOn);
-				}
-			}
 		}
 
 		for (StructureRoom room : rooms) {
 			for (StructureFeature feature : room.features) {
 				floorSquares.add(feature.gameObject.squareGameObjectIsOn);
 				featureSquares.add(feature.gameObject.squareGameObjectIsOn);
-
-				if (feature.nodes != null && feature.nodes.size() > 0) {
-					feature.gameObject.squareGameObjectIsOn.nodes = feature.nodes;
-					for (Node node : feature.nodes) {
-						node.addSquare(feature.gameObject.squareGameObjectIsOn);
-					}
-				}
 			}
 		}
 
