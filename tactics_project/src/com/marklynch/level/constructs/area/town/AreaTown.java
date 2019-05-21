@@ -222,9 +222,13 @@ public class AreaTown {
 		new BodyOfWater(posX + 0, posY + 15, posX + 3, posY + 15);
 		new BodyOfWater(posX + 5, posY + 15, posX + 23, posY + 15);
 		new BodyOfWater(posX + 25, posY + 15, posX + 90, posY + 15);
-		new BodyOfWater(posX + 92, posY + 15, posX + 92, posY + 29);
+		new BodyOfWater(posX + 92, posY + 15, posX + 92, posY + 18);
+		new BodyOfWater(posX + 92, posY + 21, posX + 92, posY + 29);
 
+		// bridges
 		Game.level.squares[posX + 91][posY + 15].setFloorImageTexture(Square.STONE_TEXTURE);
+		Game.level.squares[posX + 92][posY + 19].setFloorImageTexture(Square.STONE_TEXTURE);
+		Game.level.squares[posX + 92][posY + 20].setFloorImageTexture(Square.STONE_TEXTURE);
 
 	}
 
