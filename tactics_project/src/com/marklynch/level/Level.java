@@ -45,7 +45,7 @@ import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerDash;
 import com.marklynch.level.constructs.skilltree.SkillTree;
 import com.marklynch.level.quest.Quest;
-import com.marklynch.level.squares.Nodes;
+import com.marklynch.level.squares.NodeList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Human;
@@ -115,7 +115,7 @@ public class Level {
 	public int width;
 	public int height;
 	public static Square[][] squares;
-	public Nodes nodes;
+	public NodeList nodes;
 	public static ArrayList<Area> areas = new ArrayList<Area>();
 	public ArrayList<Structure> structures;
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
@@ -295,7 +295,7 @@ public class Level {
 		// inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 
 		initGrid(this.squares, this.width, this.height);
-		nodes = new Nodes(squares);
+		nodes = new NodeList(squares);
 		createLevelButtons();
 
 		for (int i = 0; i < 100; i++) {
@@ -1189,7 +1189,7 @@ public class Level {
 			((PopupMenuActionButton) popupMenuActions.get(0).highlightedButton).drawSound();
 		}
 
-		Nodes.draw();
+		NodeList.draw();
 		AreaList.draw();
 
 		Game.flush();

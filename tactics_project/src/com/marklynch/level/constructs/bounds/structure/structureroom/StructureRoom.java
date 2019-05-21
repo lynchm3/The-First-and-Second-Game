@@ -1,14 +1,11 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom;
 
-import java.util.Arrays;
-
 import com.marklynch.Game;
 import com.marklynch.actions.ActionSpot;
 import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
-import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Wall;
@@ -25,7 +22,6 @@ public class StructureRoom implements Idable {
 	public boolean seenByPlayer = false;
 	public Structure structure;
 	public int level = 0;
-	public ArrayList<Node> nodes;
 
 	public static Color roomColor = new Color(0.7f, 0.7f, 0.7f);
 
@@ -33,18 +29,18 @@ public class StructureRoom implements Idable {
 	public ArrayList<Wall> extraWalls = new ArrayList<Wall>(Wall.class);
 
 	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
-			ArrayList<Actor> ownersArrayList, Node[] nodes, RoomPart... roomParts) {
-		this(name, x, y, restricted, restrictedAtNight, ownersArrayList, 0, true, nodes, roomParts);
+			ArrayList<Actor> ownersArrayList, RoomPart... roomParts) {
+		this(name, x, y, restricted, restrictedAtNight, ownersArrayList, 0, true, roomParts);
 	}
 
 	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
-			ArrayList<Actor> ownersArrayList, int level, Node[] nodes, RoomPart... roomParts) {
-		this(name, x, y, restricted, restrictedAtNight, ownersArrayList, level, true, nodes, roomParts);
+			ArrayList<Actor> ownersArrayList, int level, RoomPart... roomParts) {
+		this(name, x, y, restricted, restrictedAtNight, ownersArrayList, level, true, roomParts);
 
 	}
 
 	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
-			ArrayList<Actor> ownersArrayList, int level, boolean doesNothing, Node[] nodes, RoomPart[] roomParts) {
+			ArrayList<Actor> ownersArrayList, int level, boolean doesNothing, RoomPart[] roomParts) {
 		super();
 
 		this.id = Level.generateNewId(this);
@@ -54,7 +50,6 @@ public class StructureRoom implements Idable {
 		this.y = y;
 		this.level = level;
 		this.roomParts = roomParts;// Floor squares
-		this.nodes = new ArrayList<>(Node.class, Arrays.asList(nodes));
 		for (RoomPart roomPart : this.roomParts) {
 			for (int i = roomPart.gridX1; i <= roomPart.gridX2; i++) {
 				for (int j = roomPart.gridY1; j <= roomPart.gridY2; j++) {
@@ -78,15 +73,6 @@ public class StructureRoom implements Idable {
 		if (ownersArrayList.size() > 0) {
 			for (Square square : squares) {
 				square.owners = ownersArrayList;
-			}
-		}
-
-		if (this.nodes != null && this.nodes.size() > 0) {
-			for (Square square : squares) {
-				square.nodes = this.nodes;
-				for (Node node : this.nodes) {
-					node.addSquare(square);
-				}
 			}
 		}
 

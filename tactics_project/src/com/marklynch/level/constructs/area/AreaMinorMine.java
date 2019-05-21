@@ -9,8 +9,6 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.journal.AreaList;
-import com.marklynch.level.squares.Node;
-import com.marklynch.level.squares.Nodes;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
@@ -40,15 +38,14 @@ public class AreaMinorMine {
 		mineSections.add(new StructureSection("Minor Mine", 280, 76, 307, 97, false, false));
 
 		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, false, new ArrayList<Actor>(Actor.class),
-				new Node[] { Nodes.minorMine }, new RoomPart(281, 77, 306, 88), new RoomPart(281, 89, 301, 91),
-				new RoomPart(292, 92, 301, 96)));
+				new RoomPart(281, 77, 306, 88), new RoomPart(281, 89, 301, 91), new RoomPart(292, 92, 301, 96)));
 
 		StructureRoom shopRoom = new StructureRoom("What's Mine is Yours*", 281, 93, false, false,
-				new ArrayList<Actor>(Actor.class), new Node[] { Nodes.minorMine }, new RoomPart(281, 93, 290, 96));
+				new ArrayList<Actor>(Actor.class), new RoomPart(281, 93, 290, 96));
 		rooms.add(shopRoom);
 
 		rooms.add(new StructureRoom("Minor Mine Quarters", 303, 90, false, false, new ArrayList<Actor>(Actor.class),
-				new Node[] { Nodes.minorMine }, new RoomPart(303, 90, 306, 96)));
+				new RoomPart(303, 90, 306, 96)));
 
 		// entry to mine
 		squaresToRemove.add(Game.level.squares[280][87]);

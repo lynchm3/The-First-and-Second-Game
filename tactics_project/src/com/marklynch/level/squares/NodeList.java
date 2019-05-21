@@ -8,7 +8,7 @@ import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
 
-public class Nodes {
+public class NodeList {
 
 	public static ArrayList<Node> nodes = new ArrayList<Node>();
 	// Town
@@ -58,7 +58,7 @@ public class Nodes {
 	public static Node caveOfTheBlindWest; // 224,16
 	public static Node minorMine; // 280,87
 
-	public Nodes(Square[][] squares) {
+	public NodeList(Square[][] squares) {
 
 		// town
 		townShopInner = new Node("Town Shop Private Quarters", squares[AreaTown.posX + 11][AreaTown.posY + 4]);

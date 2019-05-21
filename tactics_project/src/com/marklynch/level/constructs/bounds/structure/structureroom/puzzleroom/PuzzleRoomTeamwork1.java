@@ -3,7 +3,6 @@ package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
-import com.marklynch.level.squares.Node;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.RemoteDoor;
@@ -18,11 +17,10 @@ public class PuzzleRoomTeamwork1 extends StructureRoom {
 	final static int totalHeightInSquares = 10;
 
 	public PuzzleRoomTeamwork1(int posX, int posY) {
-		super("Hallway", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
-				new RoomPart[] { new RoomPart(posX, posY, posX + 4, posY + totalHeightInSquares - 1),
-						new RoomPart(posX + 6, posY, posX + 9, posY + totalHeightInSquares - 1),
-						new RoomPart(posX + 11, posY, posX + 14, posY + totalHeightInSquares - 1), new RoomPart(
-								posX + 16, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
+		super("Hallway", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] { new RoomPart(posX, posY, posX + 4, posY + totalHeightInSquares - 1),
+				new RoomPart(posX + 6, posY, posX + 9, posY + totalHeightInSquares - 1),
+				new RoomPart(posX + 11, posY, posX + 14, posY + totalHeightInSquares - 1), new RoomPart(
+						posX + 16, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
 		this.posY = posY;

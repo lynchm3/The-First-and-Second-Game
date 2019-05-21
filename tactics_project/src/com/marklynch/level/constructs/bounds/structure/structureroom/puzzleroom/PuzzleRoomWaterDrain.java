@@ -4,7 +4,6 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.primary.AnimationLowerInToGround;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
-import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.AttackableSwitch;
@@ -51,9 +50,8 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 	PressurePlate pressurePlate;
 
 	public PuzzleRoomWaterDrain(int posX, int posY) {
-		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
-				new RoomPart[] {
-						new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
+		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
 		this.posY = posY;

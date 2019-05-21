@@ -2,7 +2,6 @@ package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom
 
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
-import com.marklynch.level.squares.Node;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
@@ -17,7 +16,7 @@ public class PuzzleRoomCrumblingWall extends StructureRoom {
 
 	public PuzzleRoomCrumblingWall(int posX, int posY) {
 		super("Crumbling Wall Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false,
-				new Node[] {}, new RoomPart[] {
+				new RoomPart[] {
 						new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;

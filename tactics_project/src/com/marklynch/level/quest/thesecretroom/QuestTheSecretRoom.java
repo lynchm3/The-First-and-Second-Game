@@ -17,8 +17,7 @@ import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.quest.thepigs.QuestThePigs;
-import com.marklynch.level.squares.Node;
-import com.marklynch.level.squares.Nodes;
+import com.marklynch.level.squares.NodeList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Kidnapper;
@@ -78,12 +77,11 @@ public class QuestTheSecretRoom extends Quest {
 		// Front door
 		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Front Door",
 				Game.level.squares[AreaTown.posX + 24][AreaTown.posY + 30], false, false, false, kidnapper),
-				Nodes.dungeonHouseOuter));
+				NodeList.dungeonHouseOuter));
 
 		// Front room
 		StructureRoom livingRoom = new StructureRoom("Living Room", AreaTown.posX + 22, AreaTown.posY + 31, false, true,
-				ownershipArrayList, new Node[] { Nodes.dungeonHouseOuter, Nodes.dungeonHouseHiddenArea },
-				new RoomPart(AreaTown.posX + 22, AreaTown.posY + 31, AreaTown.posX + 28, AreaTown.posY + 35));
+				ownershipArrayList, new RoomPart(AreaTown.posX + 22, AreaTown.posY + 31, AreaTown.posX + 28, AreaTown.posY + 35));
 		structureRooms.add(livingRoom);
 
 		// Front room decorative walls
@@ -103,12 +101,11 @@ public class QuestTheSecretRoom extends Quest {
 		// False wall
 		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall",
 				Game.level.squares[AreaTown.posX + 22][AreaTown.posY + 36], false, null);
-		structureFeatures.add(new StructureFeature(falseWall, Nodes.dungeonHouseHiddenArea));
+		structureFeatures.add(new StructureFeature(falseWall, NodeList.dungeonHouseHiddenArea));
 
 		// Back room
 		StructureRoom backRoom = new StructureRoom("Back room", AreaTown.posX + 20, AreaTown.posY + 37, false, true,
-				ownershipArrayList, 4, new Node[] { Nodes.dungeonHouseHiddenArea },
-				new RoomPart(AreaTown.posX + 20, AreaTown.posY + 37, AreaTown.posX + 35, AreaTown.posY + 45));
+				ownershipArrayList, 4, new RoomPart(AreaTown.posX + 20, AreaTown.posY + 37, AreaTown.posX + 35, AreaTown.posY + 45));
 		structureRooms.add(backRoom);
 
 		// back room decorative walls

@@ -11,8 +11,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.quest.Quest;
-import com.marklynch.level.squares.Node;
-import com.marklynch.level.squares.Nodes;
+import com.marklynch.level.squares.NodeList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -46,12 +45,11 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Front door
 		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Front Door",
-				Game.level.squares[posX + 41][posY + 21], false, false, false, null), Nodes.wallHouseOuter));
+				Game.level.squares[posX + 41][posY + 21], false, false, false, null), NodeList.wallHouseOuter));
 
 		// Front room
 		StructureRoom frontRoom = new StructureRoom("Front Room", posX + 42, posY + 20, false, false,
 				new ArrayList<Actor>(Actor.class),
-				new Node[] { Nodes.wallHouseOuter, Nodes.wallHouseFalseWall, Nodes.wallHouseBedroom },
 				new RoomPart(posX + 42, posY + 20, posX + 55, posY + 26));
 		structureRooms.add(frontRoom);
 
@@ -67,20 +65,19 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Bedroom door
 		structurePaths.add(new StructurePath("Front Room", false, false, new ArrayList(Actor.class),
-				new Node[] { Nodes.wallHouseOuter }, Game.level.squares[posX + 42][posY + 27]));
+				Game.level.squares[posX + 42][posY + 27]));
 		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Bedroom Door",
-				Game.level.squares[posX + 42][posY + 28], false, true, true, null), Nodes.wallHouseBedroom));
+				Game.level.squares[posX + 42][posY + 28], false, true, true, null), NodeList.wallHouseBedroom));
 		structureFeatures.add(
 				new StructureFeature(Templates.FIRE_PLACE.makeCopy(Game.level.squares[posX + 48][posY + 29], null)));
 
 		// 57,39
 		structurePaths.add(new StructurePath("Bedroom", false, false, new ArrayList(Actor.class),
-				new Node[] { Nodes.wallHouseBedroom }, Game.level.squares[posX + 42][posY + 29]));
+				Game.level.squares[posX + 42][posY + 29]));
 
 		// Bedroom room
 		StructureRoom bedRoom = new StructureRoom("wallHouseBedroom", posX + 42, posY + 30, false, false,
-				new ArrayList<Actor>(Actor.class), new Node[] { Nodes.wallHouseBedroom, Nodes.wallHouseFireplace },
-				new RoomPart(posX + 42, posY + 30, posX + 53, posY + 34));
+				new ArrayList<Actor>(Actor.class), new RoomPart(posX + 42, posY + 30, posX + 53, posY + 34));
 		structureRooms.add(bedRoom);
 
 		// Bedroom decorative walls
@@ -90,23 +87,22 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Path between the walls
 		StructurePath pathBetweenTheWalls = new StructurePath("Between the walls", false, false,
-				new ArrayList(Actor.class), new Node[] { Nodes.wallHouseFalseWall, Nodes.wallHouseFireplace },
-				Game.level.squares[posX + 44][posY + 28], Game.level.squares[posX + 45][posY + 28],
-				Game.level.squares[posX + 46][posY + 28], Game.level.squares[posX + 47][posY + 28],
-				Game.level.squares[posX + 48][posY + 28], Game.level.squares[posX + 49][posY + 28],
-				Game.level.squares[posX + 50][posY + 28], Game.level.squares[posX + 51][posY + 28],
-				Game.level.squares[posX + 52][posY + 28], Game.level.squares[posX + 53][posY + 28],
-				Game.level.squares[posX + 54][posY + 28], Game.level.squares[posX + 55][posY + 28],
-				Game.level.squares[posX + 55][posY + 29], Game.level.squares[posX + 55][posY + 30],
-				Game.level.squares[posX + 55][posY + 31], Game.level.squares[posX + 55][posY + 32],
-				Game.level.squares[posX + 55][posY + 33], Game.level.squares[posX + 55][posY + 34],
-				Game.level.squares[posX + 55][posY + 35]);
+				new ArrayList(Actor.class), Game.level.squares[posX + 44][posY + 28],
+				Game.level.squares[posX + 45][posY + 28], Game.level.squares[posX + 46][posY + 28],
+				Game.level.squares[posX + 47][posY + 28], Game.level.squares[posX + 48][posY + 28],
+				Game.level.squares[posX + 49][posY + 28], Game.level.squares[posX + 50][posY + 28],
+				Game.level.squares[posX + 51][posY + 28], Game.level.squares[posX + 52][posY + 28],
+				Game.level.squares[posX + 53][posY + 28], Game.level.squares[posX + 54][posY + 28],
+				Game.level.squares[posX + 55][posY + 28], Game.level.squares[posX + 55][posY + 29],
+				Game.level.squares[posX + 55][posY + 30], Game.level.squares[posX + 55][posY + 31],
+				Game.level.squares[posX + 55][posY + 32], Game.level.squares[posX + 55][posY + 33],
+				Game.level.squares[posX + 55][posY + 34], Game.level.squares[posX + 55][posY + 35]);
 		structurePaths.add(pathBetweenTheWalls);
 
 		// False wall
 		RemoteDoor falseWall = Templates.OPENABLE_WALL.makeCopy("Wall", Game.level.squares[posX + 52][posY + 27], false,
 				null);
-		structureFeatures.add(new StructureFeature(falseWall, Nodes.wallHouseFalseWall));
+		structureFeatures.add(new StructureFeature(falseWall, NodeList.wallHouseFalseWall));
 
 		// Rat
 		Templates.RAT.makeCopy("Rat", Game.level.squares[posX + 44][posY + 28], Game.level.factions.rats, null,
@@ -114,8 +110,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Hidden room
 		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", posX + 42, posY + 36, false, false,
-				new ArrayList<Actor>(Actor.class), 4, new Node[] { Nodes.wallHouseFalseWall, Nodes.wallHouseFireplace },
-				new RoomPart(posX + 42, posY + 36, posX + 55, posY + 37));
+				new ArrayList<Actor>(Actor.class), 4, new RoomPart(posX + 42, posY + 36, posX + 55, posY + 37));
 		structureRooms.add(hiddenRoom);
 
 		// Path west entrance to west atrium

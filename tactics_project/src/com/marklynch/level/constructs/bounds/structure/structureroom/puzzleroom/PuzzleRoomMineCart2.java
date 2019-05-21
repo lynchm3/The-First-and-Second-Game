@@ -4,7 +4,6 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.constructs.journal.AreaList;
-import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
@@ -22,9 +21,8 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 	final static int totalHeightInSquares = 20;
 
 	public PuzzleRoomMineCart2(int posX, int posY) {
-		super("Minecart Room 2", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new Node[] {},
-				new RoomPart[] {
-						new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
+		super("Minecart Room 2", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
 		this.posY = posY;

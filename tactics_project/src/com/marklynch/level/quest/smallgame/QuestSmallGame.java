@@ -19,8 +19,7 @@ import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.quest.Quest;
-import com.marklynch.level.squares.Node;
-import com.marklynch.level.squares.Nodes;
+import com.marklynch.level.squares.NodeList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
@@ -242,10 +241,10 @@ public class QuestSmallGame extends Quest {
 		ArrayList<StructureFeature> lodgeFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
 		lodgeFeatures.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[105][12], false, false, false, hunterBrent),
-				Nodes.lodgeEntrance));
+				NodeList.lodgeEntrance));
 		ArrayList<StructureRoom> lodgeRooms = new ArrayList<StructureRoom>(StructureRoom.class);
 		lodgeRooms.add(new StructureRoom("Hunting Lodge", 107, 9, false, false, new ArrayList<Actor>(Actor.class),
-				new Node[] { Nodes.lodgeEntrance }, new RoomPart(106, 10, 110, 14)));
+				new RoomPart(106, 10, 110, 14)));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>(StructureSection.class);
 		lodgeSections.add(new StructureSection("Hunting Lodge", 105, 9, 111, 15, false, false));
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeRooms,
@@ -331,12 +330,12 @@ public class QuestSmallGame extends Quest {
 		ArrayList<Square> squaresToRemoveBarracks = new ArrayList<Square>(Square.class);
 		featuresBarracks.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[80][52], false, false, false, null),
-				Nodes.barracksNorth));
+				NodeList.barracksNorth));
 		featuresBarracks.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[80][61], false, false, false, null),
-				Nodes.barracksSouth));
+				NodeList.barracksSouth));
 		roomsBarracks.add(new StructureRoom("Barracks", 75, 53, false, false, new ArrayList<Actor>(Actor.class),
-				new Node[] { Nodes.barracksNorth, Nodes.barracksSouth }, new RoomPart(75, 53, 84, 60)));
+				new RoomPart(75, 53, 84, 60)));
 		sectionsBarracks.add(new StructureSection("Barracks", 74, 52, 85, 61, false, false));
 		Structure barracks = new Structure("Barracks", sectionsBarracks, roomsBarracks, pathsBarracks, featuresBarracks,
 				new ArrayList<Square>(Square.class), ResourceUtils.getGlobalImage("icon_house.png", false), 74, 52,
@@ -380,9 +379,9 @@ public class QuestSmallGame extends Quest {
 		ArrayList<Square> squaresToRemoveThievesHut = new ArrayList<Square>(Square.class);
 		featuresThievesHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[113][53], false, false, false, null),
-				Nodes.forestThiefHut));
+				NodeList.forestThiefHut));
 		roomsThievesHut.add(new StructureRoom("Hut", 114, 53, false, false, new ArrayList<Actor>(Actor.class),
-				new Node[] { Nodes.forestThiefHut }, new RoomPart(114, 53, 116, 55)));
+				new RoomPart(114, 53, 116, 55)));
 		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false, false));
 		Structure thievesHut = new Structure("Hut", sectionsThievesHut, roomsThievesHut, pathsThievesHut,
 				featuresThievesHut, new ArrayList<Square>(Square.class), ResourceUtils.getGlobalImage("icon_house.png", false),
@@ -430,9 +429,9 @@ public class QuestSmallGame extends Quest {
 		ArrayList<Square> squaresToRemoveRangersHut = new ArrayList<Square>(Square.class);
 		featuresRangersHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[133][34], false, false, false, rangerBill),
-				Nodes.forestRangersHut));
+				NodeList.forestRangersHut));
 		roomsRangersHut.add(new StructureRoom("Ranger's Hut", 130, 34, false, false, new ArrayList<Actor>(Actor.class),
-				new Node[] { Nodes.forestRangersHut }, new RoomPart(130, 34, 132, 36)));
+				new RoomPart(130, 34, 132, 36)));
 		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false, false));
 		Structure rangerHut = new Structure("Ranger's Hut", sectionsRangersHut, roomsRangersHut, pathsRangersHut,
 				featuresRangersHut, new ArrayList<Square>(Square.class), ResourceUtils.getGlobalImage("icon_house.png", false),

@@ -304,6 +304,10 @@ public class Actor extends GameObject {
 				|| target.nodes == null || target.nodes.size() == 0) {
 			lastNodeReached = null;
 			lastPathTarget = target;
+
+			if (this.name.contains("Ian"))
+				System.out.println("getPathTo A");
+
 			return getPathAtSquareLevel(target);
 		}
 
@@ -312,6 +316,15 @@ public class Actor extends GameObject {
 				if (node1 == node2) {
 					lastNodeReached = null;
 					lastPathTarget = target;
+
+					if (this.name.contains("Ian")) {
+						System.out.println("target = " + target);
+						System.out.println("squareGameObjectIsOn = " + squareGameObjectIsOn);
+						System.out.println("node1 = " + node1);
+						System.out.println("node2 = " + node2);
+						System.out.println("this = " + this);
+						System.out.println("getPathTo B");
+					}
 					return getPathAtSquareLevel(target);
 				}
 			}
@@ -357,10 +370,16 @@ public class Actor extends GameObject {
 
 		if (aStarNodesPath != null) {
 			lastPathTarget = target;
+
+			if (this.name.contains("Ian"))
+				System.out.println("getPathTo C");
 			return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
 		}
 
 		lastPathTarget = target;
+
+		if (this.name.contains("Ian"))
+			System.out.println("getPathTo D");
 		return null;
 
 	}
@@ -1556,8 +1575,8 @@ public class Actor extends GameObject {
 					expressionBubblePositionYInPixels + expressionBubbleHeight);
 
 			TextUtils.printTextWithImages(expressionBubblePositionXInPixels + 4, expressionBubblePositionYInPixels + 38,
-					Integer.MAX_VALUE, false, null, Color.WHITE,
-					1f, new Object[] { new StringWithColor(miniDialogue, Color.BLACK) });
+					Integer.MAX_VALUE, false, null, Color.WHITE, 1f,
+					new Object[] { new StringWithColor(miniDialogue, Color.BLACK) });
 		} else {
 
 			// bubble

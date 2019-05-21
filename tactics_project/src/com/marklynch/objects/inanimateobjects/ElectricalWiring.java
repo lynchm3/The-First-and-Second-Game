@@ -53,8 +53,6 @@ public class ElectricalWiring extends GameObject implements UpdatableGameObject,
 		if (!on)
 			return;
 
-		System.out.println("eletrical.update");
-
 //		new ActionUsePower(this, null, this.squareGameObjectIsOn, powerSpark, true);
 
 		for (GameObject gameObject : this.squareGameObjectIsOn.inventory.gameObjects) {
