@@ -300,31 +300,30 @@ public class Actor extends GameObject {
 			return null;
 		}
 
+		// Short hop
+		if (this.straightLineDistanceTo(target) <= 10) {
+			AIPath path = getPathAtSquareLevel(target);
+			if (path != null && path.complete) {
+				lastNodeReached = null;
+				lastPathTarget = target;
+				return path;
+			}
+		}
+
+		// No nodes, so just go for it
 		if (this.squareGameObjectIsOn.nodes == null || this.squareGameObjectIsOn.nodes.size() == 0
 				|| target.nodes == null || target.nodes.size() == 0) {
 			lastNodeReached = null;
 			lastPathTarget = target;
-
-			if (this.name.contains("Ian"))
-				System.out.println("getPathTo A");
-
 			return getPathAtSquareLevel(target);
 		}
 
+		// Both actor and target in same node area
 		for (Node node1 : this.squareGameObjectIsOn.nodes) {
 			for (Node node2 : target.nodes) {
 				if (node1 == node2) {
 					lastNodeReached = null;
 					lastPathTarget = target;
-
-					if (this.name.contains("Ian")) {
-						System.out.println("target = " + target);
-						System.out.println("squareGameObjectIsOn = " + squareGameObjectIsOn);
-						System.out.println("node1 = " + node1);
-						System.out.println("node2 = " + node2);
-						System.out.println("this = " + this);
-						System.out.println("getPathTo B");
-					}
 					return getPathAtSquareLevel(target);
 				}
 			}
@@ -370,16 +369,10 @@ public class Actor extends GameObject {
 
 		if (aStarNodesPath != null) {
 			lastPathTarget = target;
-
-			if (this.name.contains("Ian"))
-				System.out.println("getPathTo C");
 			return getPathAtSquareLevel(aStarNodesPath.getFirst().square);
 		}
 
 		lastPathTarget = target;
-
-		if (this.name.contains("Ian"))
-			System.out.println("getPathTo D");
 		return null;
 
 	}
