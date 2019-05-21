@@ -86,23 +86,27 @@ public class NodeList {
 				new Point(100, 86));
 		nodes.add(townSouthEast);
 
-		farmRoadWest = new Node("Farm Road West", squares[4][62]);/// ???
+		farmRoadWest = new Node("Farm Road West", squares[4][62], new Point(0, 39), new Point(14, 86));
 		nodes.add(farmRoadWest);
 
-		farmRoadEast = new Node("Farm Road East", squares[18][62]);/// ???
+		farmRoadEast = new Node("Farm Road East", squares[18][62], new Point(15, 39), new Point(69, 86));
 		nodes.add(farmRoadEast);
 
 		// Town indoors
-		townShopInner = new Node("Town Shop Private Quarters", squares[AreaTown.posX + 11][AreaTown.posY + 4]);
+		townShopInner = new Node("Town Shop Private Quarters", squares[AreaTown.posX + 11][AreaTown.posY + 4],
+				new Point(11, 0), new Point(17, 5));
 		nodes.add(townShopInner);
 
-		townShopOuter = new Node("Town Shop", squares[AreaTown.posX + 5][AreaTown.posY + 4]);
+		townShopOuter = new Node("Town Shop", squares[AreaTown.posX + 5][AreaTown.posY + 4], new Point(5, 0),
+				new Point(10, 5));
 		nodes.add(townShopOuter);
 
-		dungeonHouseOuter = new Node("Dungeon House", squares[AreaTown.posX + 24][AreaTown.posY + 30]);
+		dungeonHouseOuter = new Node("Dungeon House", squares[AreaTown.posX + 24][AreaTown.posY + 30],
+				new Point(21, 30), new Point(29, 35));
 		nodes.add(dungeonHouseOuter);
 
-		dungeonHouseHiddenArea = new Node("Dungeon House Secret", squares[AreaTown.posX + 22][AreaTown.posY + 36]); // 22,36
+		dungeonHouseHiddenArea = new Node("Dungeon House Secret", squares[AreaTown.posX + 22][AreaTown.posY + 36],
+				new Point(19, 36), new Point(36, 46));
 		nodes.add(dungeonHouseHiddenArea);
 
 		wallHouseOuter = new Node("Walls House", squares[AreaTown.posX + 41][AreaTown.posY + 26]);

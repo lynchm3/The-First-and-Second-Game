@@ -4,7 +4,6 @@ import com.marklynch.Game;
 import com.marklynch.actions.ActionSpot;
 import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
-import com.marklynch.level.squares.Node;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
@@ -29,7 +28,7 @@ public class Area implements Idable, Place {
 	public Long id;
 
 	public Area(String name, String imageString, Texture iconTexture, Texture squareTexture, int gridX1, int gridY1,
-			int gridX2, int gridY2, int level, Color color, Node... nodes) {
+			int gridX2, int gridY2, int level, Color color) {
 		super();
 		this.id = Level.generateNewId(this);
 		this.name = name;
