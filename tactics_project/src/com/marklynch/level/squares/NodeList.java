@@ -131,64 +131,70 @@ public class NodeList {
 		wallHouseFalseWall.setSquares(wallHouseFalseWallSquares);
 		nodes.add(wallHouseFalseWall);
 
-		townDoctorsOuter = new Node("Doctor's Practice", squares[AreaTown.posX + 40][AreaTown.posY + 7]);
+		townDoctorsOuter = new Node("Doctor's Practice", squares[AreaTown.posX + 40][AreaTown.posY + 7],
+				new Point(40, 3), new Point(45, 8));
 		nodes.add(townDoctorsOuter);
 
 		townDoctorsInner = new Node("Doctor's Practice Private Quarters",
-				squares[AreaTown.posX + 46][AreaTown.posY + 7]);
+				squares[AreaTown.posX + 46][AreaTown.posY + 7], new Point(46, 3), new Point(52, 8));
 		nodes.add(townDoctorsInner);
 
-		barracksNorth = new Node("Barracks North", squares[AreaTown.posX + 80][AreaTown.posY + 52]);
+		barracksNorth = new Node("Barracks North", squares[AreaTown.posX + 80][AreaTown.posY + 52], new Point(74, 52),
+				new Point(85, 56));
 		nodes.add(barracksNorth);
 
-		barracksSouth = new Node("Barracks South", squares[AreaTown.posX + 80][AreaTown.posY + 61]);
+		barracksSouth = new Node("Barracks South", squares[AreaTown.posX + 80][AreaTown.posY + 61], new Point(74, 57),
+				new Point(85, 61));
 		nodes.add(barracksSouth);
 
-		lodgeEntrance = new Node("Lodge", squares[105][12]);
-		nodes.add(lodgeEntrance);
-
-		farmEntrance = new Node("Farm Entrance", squares[18][69]);
+		farmEntrance = new Node("Farm Entrance", squares[18][69], new Point(12, 69), new Point(24, 74));
 		nodes.add(farmEntrance);
 
-		farmHallway = new Node("Farm Hallway", squares[18][75]);
+		farmHallway = new Node("Farm Hallway", squares[18][75], new Point(2, 75), new Point(24, 77));
 		nodes.add(farmHallway);
 
-		farmBedroom = new Node("Farm Bedroom", squares[17][78]);
+		farmBedroom = new Node("Farm Bedroom", squares[17][78], new Point(2, 78), new Point(17, 85));
 		nodes.add(farmBedroom);
 
-		farmStorage = new Node("Farm Storage", squares[21][78]);
+		farmStorage = new Node("Farm Storage", squares[21][78], new Point(18, 78), new Point(24, 85));
 		nodes.add(farmStorage);
 
-		farmBackDoor = new Node("Farm Back Door", squares[21][85]);
+		farmBackDoor = new Node("Farm Back Door", squares[21][85], new Point(21, 85), new Point(21, 85));
 		nodes.add(farmBackDoor);
 
-		farmPigPen = new Node("Farm Pig Pen", squares[32][72]);
+		farmPigPen = new Node("Farm Pig Pen", squares[32][72], new Point(28, 72), new Point(46, 82));
 		nodes.add(farmPigPen);
 
-		farmBarnDoorway = new Node("Farm Pig Pen", squares[21][95]);
+		farmBarnDoorway = new Node("Farm Pig Pen", squares[21][95], new Point(14, 95), new Point(27, 110));
 		nodes.add(farmBarnDoorway);
 
-		// forest
-		forestNorthWest = new Node("Town North East", squares[111][18]);
+		// forest outdoors
+		forestNorthWest = new Node("Forest North West", squares[111][18], new Point(101, 0), new Point(134, 110));
 		nodes.add(forestNorthWest);
 
-		forestNorth = new Node("Forest North", squares[160][18]);
+		forestNorth = new Node("Forest North", squares[160][18], new Point(135, 0), new Point(187, 110));
 		nodes.add(forestNorth);
 
-		forestNorthEast = new Node("Forest North East", squares[210][18]);
+		forestNorthEast = new Node("Forest North East", squares[210][18], new Point(188, 0), new Point(223, 110));
 		nodes.add(forestNorthEast);
 
-		forestThiefHut = new Node("Hut", squares[113][53]);
-		nodes.add(forestThiefHut);
+		// forest indoors
 
-		forestRangersHut = new Node("Forest Ranger's Hut", squares[133][34]);
+		lodgeEntrance = new Node("Lodge", squares[105][12], new Point(105, 9), new Point(111, 15));
+		nodes.add(lodgeEntrance);
+
+		forestRangersHut = new Node("Forest Ranger's Hut", squares[133][34], new Point(129, 33), new Point(133, 37));
 		nodes.add(forestRangersHut);
 
+		forestThiefHut = new Node("Hut", squares[113][53], new Point(113, 52), new Point(117, 56));
+		nodes.add(forestThiefHut);
+
 		// Mine
-		caveOfTheBlindWest = new Node("Cave of the Blind West", squares[234][16]);
+		caveOfTheBlindWest = new Node("Cave of the Blind West", squares[234][16], new Point(224, 0),
+				new Point(321, 75));
 		nodes.add(caveOfTheBlindWest);
 
-		minorMine = new Node("Minor Mine", squares[280][87]);
+		minorMine = new Node("Minor Mine", squares[280][87], new Point(224, 76), new Point(321, 110));
 		nodes.add(minorMine);
 
 		// Making links
