@@ -31,7 +31,7 @@ public class Node implements Comparable<Node>, Idable {
 	public ArrayList<Node> neighbors = new ArrayList<Node>(Node.class);
 
 	public HashMap<Node, Integer> costToNeighbors;
-	public ArrayList<Square> squares = new ArrayList<Square>(Square.class);
+	private ArrayList<Square> squares = new ArrayList<Square>(Square.class);
 	// end path finding
 
 	public Node(String name, Square square) {
@@ -49,12 +49,15 @@ public class Node implements Comparable<Node>, Idable {
 		if (p1 != null && p2 != null) {
 			for (int x = (int) p1.x; x <= p2.x; x++) {
 				for (int y = (int) p1.y; y <= p2.y; y++) {
-					squares.add(Level.squares[x][y]);
+					getSquares().add(Level.squares[x][y]);
 				}
 			}
 		}
 
-		for (Square squareInSquares : squares) {
+		for (Square squareInSquares : getSquares()) {
+			for (Node node : squareInSquares.nodes) {
+				node.squares.remove(squareInSquares);
+			}
 			squareInSquares.nodes.clear();
 			squareInSquares.nodes.add(this);
 		}
@@ -127,12 +130,33 @@ public class Node implements Comparable<Node>, Idable {
 	public void addSquare(Square square) {
 		if (!squares.contains(square)) {
 			squares.add(square);
+			for (Node node : square.nodes) {
+				node.squares.remove(square);
+			}
+			square.nodes.clear();
+			square.nodes.add(this);
+		}
+	}
+
+	public void setSquares(ArrayList<Square> squares) {
+		for (Square square : squares) {
+			addSquare(square);
+		}
+	}
+
+	public void setSquares(Square[] squares) {
+		for (Square square : squares) {
+			addSquare(square);
 		}
 	}
 
 	@Override
 	public Long getId() {
 		return id;
+	}
+
+	public ArrayList<Square> getSquares() {
+		return squares;
 	}
 
 	// public void calculateDistanceToNeighbours() {

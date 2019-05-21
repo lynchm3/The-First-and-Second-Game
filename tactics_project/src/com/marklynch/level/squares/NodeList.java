@@ -1,9 +1,11 @@
 package com.marklynch.level.squares;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.area.town.AreaTown;
+import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
+import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
@@ -11,7 +13,7 @@ import com.marklynch.utils.Utils.Point;
 
 public class NodeList {
 
-	public static ArrayList<Node> nodes = new ArrayList<Node>();
+	public static ArrayList<Node> nodes = new ArrayList<Node>(Node.class);
 	// Town
 	public static Node townShopInner; // 11,4
 	public static Node townShopOuter; // 5,4
@@ -109,16 +111,24 @@ public class NodeList {
 				new Point(19, 36), new Point(36, 46));
 		nodes.add(dungeonHouseHiddenArea);
 
-		wallHouseOuter = new Node("Walls House", squares[AreaTown.posX + 41][AreaTown.posY + 26]);
+		wallHouseOuter = new Node("Walls House", squares[AreaTown.posX + 41][AreaTown.posY + 26], new Point(41, 24),
+				new Point(56, 32));
 		nodes.add(wallHouseOuter);
 
-		wallHouseBedroom = new Node("Walls House Bedroom", squares[AreaTown.posX + 42][AreaTown.posY + 33]);// 42,28
+		wallHouseBedroom = new Node("Walls House Bedroom", squares[AreaTown.posX + 42][AreaTown.posY + 33],
+				new Point(41, 33), new Point(54, 40));
 		nodes.add(wallHouseBedroom);
 
-		wallHouseFireplace = new Node("Walls House Fireplace", squares[AreaTown.posX + 48][AreaTown.posY + 34]);// 42,28
+		wallHouseFireplace = new Node("Walls House Fireplace", squares[AreaTown.posX + 48][AreaTown.posY + 34],
+				new Point(47, 34), new Point(49, 36));
 		nodes.add(wallHouseFireplace);
 
-		wallHouseFalseWall = new Node("Walls House Secret", squares[AreaTown.posX + 52][AreaTown.posY + 31]); // 52,27
+		ArrayList<Square> wallHouseFalseWallSquares = new ArrayList<Square>(Square.class);
+		wallHouseFalseWallSquares.addAll(
+				new ArrayList<Square>(Square.class, Arrays.asList(QuestBetweenTheWalls.pathBetweenTheWalls.squares)));
+		wallHouseFalseWallSquares.addAll(QuestBetweenTheWalls.hiddenRoom.squares);
+		wallHouseFalseWall = new Node("Walls House Secret", squares[AreaTown.posX + 52][AreaTown.posY + 32]); // 52,27
+		wallHouseFalseWall.setSquares(wallHouseFalseWallSquares);
 		nodes.add(wallHouseFalseWall);
 
 		townDoctorsOuter = new Node("Doctor's Practice", squares[AreaTown.posX + 40][AreaTown.posY + 7]);

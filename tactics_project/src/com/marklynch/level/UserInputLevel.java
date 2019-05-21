@@ -261,7 +261,7 @@ public class UserInputLevel {
 		}
 		nodeHighlights.clear();
 		if (Game.squareMouseIsOver != null && Game.squareMouseIsOver.node != null) {
-			for (Square square : Game.squareMouseIsOver.node.squares) {
+			for (Square square : Game.squareMouseIsOver.node.getSquares()) {
 				square.highlight = true;
 				nodeHighlights.add(square);
 			}

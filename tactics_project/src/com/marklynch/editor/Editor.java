@@ -32,6 +32,7 @@ import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.rarity.Rarity;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.constructs.skilltree.SkillTreeNode;
+import com.marklynch.level.squares.NodeList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.HOBBY;
@@ -366,6 +367,7 @@ public class Editor {
 		new AreaList();
 		AreaList.buildAreas();
 		Game.level.fullQuestList.makeQuests();
+		Level.nodes = new NodeList(Level.squares);
 		Game.level.setSquareDefaultImageTextures();
 	}
 

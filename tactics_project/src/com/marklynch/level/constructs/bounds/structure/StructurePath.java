@@ -7,7 +7,7 @@ import com.marklynch.utils.ArrayList;
 public class StructurePath {
 
 	String name;
-	Square[] squares;
+	public Square[] squares;
 
 	public StructurePath(String name, boolean restricted, boolean restrictedAtNight, ArrayList<Actor> ownersArrayList,
 			Square... squares) {

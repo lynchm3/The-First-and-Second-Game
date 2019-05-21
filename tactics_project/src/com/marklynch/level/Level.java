@@ -115,7 +115,7 @@ public class Level {
 	public int width;
 	public int height;
 	public static Square[][] squares;
-	public NodeList nodes;
+	public static NodeList nodes;
 	public static ArrayList<Area> areas = new ArrayList<Area>();
 	public ArrayList<Structure> structures;
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
@@ -295,7 +295,6 @@ public class Level {
 		// inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 
 		initGrid(this.squares, this.width, this.height);
-		nodes = new NodeList(squares);
 		createLevelButtons();
 
 		for (int i = 0; i < 100; i++) {
