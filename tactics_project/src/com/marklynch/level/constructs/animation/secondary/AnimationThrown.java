@@ -203,7 +203,7 @@ public class AnimationThrown extends SecondaryAnimation {
 							shooter.squareGameObjectIsOn, targetGameObject.getPrimaryAnimation(), null));
 				if (projectileObject instanceof Arrow) {
 					if (Game.level.shouldLog(targetGameObject, shooter))
-						Game.level.logOnScreen(new ActivityLog(new Object[] { shooter, " shot ", projectileObject,
+						Game.level.logOnScreen(new ActivityLog(new Object[] { shooter, " shot ", targetGameObject,
 								" with ", weapon, " for " + damage + " damage" }));
 				} else {
 					if (Game.level.shouldLog(targetGameObject, shooter))
