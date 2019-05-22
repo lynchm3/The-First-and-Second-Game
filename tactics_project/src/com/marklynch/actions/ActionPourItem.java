@@ -7,8 +7,8 @@ import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationPour;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.actors.AggressiveWildAnimal;
 import com.marklynch.objects.actors.Monster;
+import com.marklynch.objects.actors.WildAnimal;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -175,7 +175,7 @@ public class ActionPourItem extends Action {
 
 		// Is human
 		if (targetGameObject instanceof Actor)
-			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal)) {
+			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof WildAnimal)) {
 				illegalReason = ASSAULT;
 				return false;
 			}

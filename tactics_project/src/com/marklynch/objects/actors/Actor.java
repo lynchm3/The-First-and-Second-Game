@@ -1846,7 +1846,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (this instanceof AggressiveWildAnimal) {
+		if (this instanceof WildAnimal) {
 			return new ActionAttack(performer, this);
 		}
 

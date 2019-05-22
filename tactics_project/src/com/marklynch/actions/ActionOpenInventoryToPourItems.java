@@ -7,8 +7,8 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.actors.AggressiveWildAnimal;
 import com.marklynch.objects.actors.Monster;
+import com.marklynch.objects.actors.WildAnimal;
 
 public class ActionOpenInventoryToPourItems extends Action {
 
@@ -85,7 +85,7 @@ public class ActionOpenInventoryToPourItems extends Action {
 
 		// Is human
 		if (targetGameObject instanceof Actor)
-			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal)) {
+			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof WildAnimal)) {
 				illegalReason = ASSAULT;
 				return false;
 			}

@@ -8,8 +8,8 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.actors.AggressiveWildAnimal;
 import com.marklynch.objects.actors.Monster;
+import com.marklynch.objects.actors.WildAnimal;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.utils.Texture;
@@ -339,7 +339,7 @@ public abstract class Action {
 
 		// Is human
 		if (target instanceof Actor) {
-			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal)) {
+			if (!(target instanceof Monster) && !(target instanceof WildAnimal)) {
 				illegalReason = ASSAULT;
 				return false;
 			}
