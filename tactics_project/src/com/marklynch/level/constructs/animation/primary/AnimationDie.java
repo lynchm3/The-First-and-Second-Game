@@ -12,7 +12,7 @@ public class AnimationDie extends Animation {
 	float targetTorsoAngle = 1.57f;// 3.14/2
 
 	public AnimationDie(GameObject performer, OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer);
+		super(performer, onCompletionListener, null, null, null, null, null, null, true, true, performer);
 		if (!runAnimation)
 			return;
 		// durationToReach = 400;
@@ -83,7 +83,21 @@ public class AnimationDie extends Animation {
 
 	@Override
 	protected void animationSubclassRunCompletionAlgorightm(boolean wait) {
-		// TODO Auto-generated method stub
+//		System.out.println("postdie performer = " + performer);
+//		System.out.println("postdie this = " + this);
+//		System.out.println("postdie performer.primaryAnimation" + performer.primaryAnimation);
+//		this.offsetX = targetOffsetX;
+//		this.offsetY = targetOffsetY;
+//		this.headToToeOffset = performer.width - 6 - performer.height; // the - 6 is a guess/fluff
+//		this.torsoAngle = targetTorsoAngle;
+//		this.leftElbowAngle = 0;
+//		this.rightElbowAngle = 0;
+//		this.leftShoulderAngle = 0;
+//		this.rightShoulderAngle = 0;
+//		this.leftHipAngle = 0;
+//		this.rightHipAngle = 0;
+//		this.leftKneeAngle = 0;
+//		this.rightKneeAngle = 0;
 
 	}
 }

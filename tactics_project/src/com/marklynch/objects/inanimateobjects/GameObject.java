@@ -2597,10 +2597,6 @@ public class GameObject
 		return totalDamage;
 	}
 
-	// public enum DAMAGE_TYPE {
-	// SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, BLEEDING, HEALING
-	// };
-
 	public void setPrimaryAnimation(Animation animation) {
 
 		if (animation == null || animation.runAnimation == false)
