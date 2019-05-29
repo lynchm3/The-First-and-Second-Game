@@ -26,7 +26,6 @@ public class AIRoutineForFollower extends AIRoutine {
 
 	@Override
 	public void update() {
-		System.out.println("AI FOLLOW 1");
 
 		aiRoutineStart();
 

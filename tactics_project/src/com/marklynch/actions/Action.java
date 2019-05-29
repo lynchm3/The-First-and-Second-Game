@@ -352,4 +352,8 @@ public abstract class Action {
 	public boolean shouldContinue() {
 		return !performed;
 	}
+
+//	public Square getTargetSquare() {
+//		return targetSquare;
+//	}
 }

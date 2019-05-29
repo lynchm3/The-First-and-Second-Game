@@ -651,7 +651,6 @@ public class AIRoutineUtils {
 
 	public static boolean chop(GameObject target) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
-		System.out.println("weaponDistance = " + weaponDistance);
 		if (weaponDistance <= 1) {
 			new ActionChopping(Game.level.activeActor, target).perform();
 			return true;

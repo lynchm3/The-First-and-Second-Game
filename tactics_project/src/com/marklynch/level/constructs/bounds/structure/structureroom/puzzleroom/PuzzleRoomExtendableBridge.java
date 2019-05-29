@@ -62,8 +62,6 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 			}
 		}
 
-		System.out.println("EXEXEXEX ");
-
 		// extended points
 		for (int i = 0; i < bridgeWidth; i++) {
 			for (int j = 0; j < bridgeLength; j++) {
@@ -97,8 +95,6 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 
 	@Override
 	public void zwitch(Switch zwitch) {
-
-		System.out.println("zwitch - " + zwitch);
 		bridgeExtended = !bridgeExtended;
 		moveBridge();
 	}
@@ -155,7 +151,6 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 //					}
 //				}
 			}
-			System.out.println("extendedBridgeSquares.size() = " + extendedBridgeSquares.size());
 
 			for (GameObject gameObject : objectsToMoveInOrder) {
 				move(gameObject, movesToPerform.get(gameObject));

@@ -83,7 +83,6 @@ public class Signpost extends GameObject {
 	public Conversation createConversation(Object[] text) {
 
 		Conversation c = Conversation.createConversation(text, this);
-		System.out.println("c =  " + c);
 
 		return c;
 	}
@@ -302,10 +301,8 @@ public class Signpost extends GameObject {
 
 		// North
 		if (upPlaces.size() > 0) {
-			System.out.println("upObjects.size() > 0");
 			if (arrayListOfText.size() != 0)
 				arrayListOfText.add(TextUtils.NewLine.NEW_LINE);
-			System.out.println("NRTH");
 			arrayListOfText.add(GameObject.upTexture);
 			arrayListOfText.add(" ");
 			for (int i = 0; i < upPlaces.size(); i++) {
@@ -355,8 +352,6 @@ public class Signpost extends GameObject {
 		}
 
 		Object[] conversationText = arrayListOfText.toArray(new Object[arrayListOfText.size()]);
-		System.out.println("arrayListOfText.get(0) = " + arrayListOfText.get(0));
-		System.out.println("conversationText = " + conversationText);
 
 //		Object[] conversationText = { "WANTED!", TextUtils.NewLine.NEW_LINE, crimesString, TextUtils.NewLine.NEW_LINE,
 //				Templates.GOLD.imageTexture, "Reward " + reward };

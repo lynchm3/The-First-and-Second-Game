@@ -2686,9 +2686,6 @@ public class GameObject
 	public ArrayList<GameObject> getSurroundingGameObjects() {
 		ArrayList<GameObject> surroundingGameObjects = new ArrayList<GameObject>(GameObject.class);
 
-		System.out.println("this = " + this);
-		System.out.println("this.lastSquare = " + this.lastSquare);
-
 		Square squareToLeft = this.lastSquare.getSquareToLeftOf();
 		if (squareToLeft != null) {
 			surroundingGameObjects.addAll(squareToLeft.inventory.gameObjects);

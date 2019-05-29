@@ -128,13 +128,11 @@ public class AIRoutineForLumberjack extends AIRoutine {
 
 		// Go about your business
 		if (state == STATE.CHOPPING_WOOD) {
-			System.out.println("target = " + target);
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_CHOPPING_WOODG;
 			this.actor.followersShouldFollow = true;
 
 			if (target != null && actor.straightLineDistanceTo(target.squareGameObjectIsOn) == 1
 					&& target.remainingHealth > 0) {
-				System.out.println("attempting to chop");
 				this.actor.thoughtBubbleImageTextureAction = Action.textureChop;
 				this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
 				boolean chopped = AIRoutineUtils.chop(target);
@@ -149,8 +147,6 @@ public class AIRoutineForLumberjack extends AIRoutine {
 					this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
 					AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 				} else {
-					System.out.println("actor.area = " + actor.area);
-					System.out.println("actor.area.centreSquare = " + actor.area.centreSquare);
 					AIRoutineUtils.moveTowards(actor.area.centreSquare);
 				}
 			}

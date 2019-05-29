@@ -249,8 +249,6 @@ public class AnimationThrown extends SecondaryAnimation {
 				targetSquare.inventory.add(projectileObject);
 			}
 		}
-		System.out.println("targetSquare = " + targetSquare);
-		System.out.println("this = " + this);
 
 		projectileObject.landed(shooter, action);
 
