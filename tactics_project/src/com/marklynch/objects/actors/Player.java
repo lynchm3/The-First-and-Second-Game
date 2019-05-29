@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionDie;
 import com.marklynch.actions.ActionDiscover;
+import com.marklynch.actions.ActionSpot;
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level;
@@ -19,6 +20,7 @@ import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.rarity.Rarity;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.inanimateobjects.FastTravelLocation;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.inanimateobjects.Orb;
@@ -211,8 +213,8 @@ public class Player extends Human {
 			float xInPixels = Game.windowWidth - 110;
 			float yInPixels = Game.windowHeight - 140 + Game.INVENTORY_SQUARE_WIDTH;
 			QuadUtils.drawQuad(Color.RED, xInPixels, yInPixels, Game.windowWidth, yInPixels + 30);
-			TextUtils.printTextWithImages(xInPixels, yInPixels, Integer.MAX_VALUE, false, null, Color.BLACK,
-					1f, "TRESPASSING");
+			TextUtils.printTextWithImages(xInPixels, yInPixels, Integer.MAX_VALUE, false, null, Color.BLACK, 1f,
+					"TRESPASSING");
 
 		}
 
@@ -422,23 +424,32 @@ public class Player extends Human {
 			squaresVisibleToPlayer.add(Game.level.squares[x][y]);
 			Game.level.squares[x][y].visibleToPlayer = true;
 			if (!Game.level.squares[x][y].seenByPlayer) {
+
+				// Haven't seen sqr before
 				Game.level.squares[x][y].seenByPlayer = true;
 				Game.level.squares[x][y].updateSquaresToSave();
-			}
-			// Seen area for first time?
-			if (Game.level.squares[x][y].areaSquareIsIn != null
-					&& Game.level.squares[x][y].areaSquareIsIn.seenByPlayer == false) {
-				Game.level.squares[x][y].areaSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
-			}
-			// Seen structure for first time?
-			if (Game.level.squares[x][y].structureSquareIsIn != null
-					&& Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
-				Game.level.squares[x][y].structureSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
-			}
-			// Seen room for first time?
-			if (Game.level.squares[x][y].structureRoomSquareIsIn != null
-					&& Game.level.squares[x][y].structureRoomSquareIsIn.seenByPlayer == false) {
-				Game.level.squares[x][y].structureRoomSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
+				// Seen area for first time?
+				if (Game.level.squares[x][y].areaSquareIsIn != null
+						&& Game.level.squares[x][y].areaSquareIsIn.seenByPlayer == false) {
+					Game.level.squares[x][y].areaSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
+				}
+				// Seen structure for first time?
+				if (Game.level.squares[x][y].structureSquareIsIn != null
+						&& Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
+					Game.level.squares[x][y].structureSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
+				}
+				// Seen room for first time?
+				if (Game.level.squares[x][y].structureRoomSquareIsIn != null
+						&& Game.level.squares[x][y].structureRoomSquareIsIn.seenByPlayer == false) {
+					Game.level.squares[x][y].structureRoomSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
+				}
+
+				if (Game.level.squares[x][y].inventory.containsGameObjectOfType(FastTravelLocation.class)) {
+					System.out.println("Spotted FastTravelLocation");
+					new ActionSpot(Game.level.player,
+							Game.level.squares[x][y].inventory.getGameObjectOfClass(FastTravelLocation.class),
+							Game.level.squares[x][y]).perform();
+				}
 			}
 		}
 
