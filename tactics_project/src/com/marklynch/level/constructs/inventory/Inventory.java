@@ -213,7 +213,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void open() {
 
-		if (textBoxSearch == null && parent == Level.player) {
+		if (textBoxSearch == null) {
 			textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0, TextBox.TYPE.ALL);
 			textBoxQty = new TextBox(this, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
 		}
@@ -622,7 +622,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			button.down = false;
 
 		filteredGameObjects.clear();
-		if (Game.level.player.inventory.textBoxSearch.getText().length() > 0) {
+
+		if (Inventory.textBoxSearch != null && Inventory.textBoxSearch.getText() != null
+				&& Inventory.textBoxSearch.getText().length() > 0) {
 			String searchText = Game.level.player.inventory.textBoxSearch.getText();
 			for (GameObject gameObject : gameObjects) {
 				if (TextUtils.containsIgnoreCase(gameObject.name, searchText)
@@ -1536,7 +1538,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		weaponComparisonDisplay.drawStaticUI();
 
 		// if (this.parent == Game.level.player && searching)
-		textBoxSearch.draw();
+		if (textBoxSearch != null)
+			textBoxSearch.draw();
 
 		// Fade for scroll
 		if (this.squaresY < squaresBaseY) {
