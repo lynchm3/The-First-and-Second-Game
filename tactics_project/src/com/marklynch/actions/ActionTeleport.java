@@ -20,14 +20,20 @@ import com.marklynch.ui.ActivityLog;
 public class ActionTeleport extends Action {
 
 	public static final String ACTION_NAME = "Teleport here";
+	public static final String ACTION_NAME_FAST_TRAVEL = "Fast travel";
 	boolean endTurn;
 	GameObject gameObjectInTheWay;
 	Square squareToTeleportTo;
 	boolean log;
+	boolean fastTravel;
 
 	public ActionTeleport(GameObject performer, GameObject target, Square squareToTeleportTo, boolean endTurn,
-			boolean log) {
+			boolean log, boolean fastTravel) {
 		super(ACTION_NAME, textureTeleport, performer, target);
+		this.fastTravel = fastTravel;
+		if (fastTravel) {
+			this.actionName = ACTION_NAME_FAST_TRAVEL;
+		}
 		this.squareToTeleportTo = squareToTeleportTo;
 		this.endTurn = endTurn;
 		if (!check()) {
@@ -64,8 +70,8 @@ public class ActionTeleport extends Action {
 		Square startSquare = targetGameObject.squareGameObjectIsOn;
 
 		boolean straightenUp = performer == targetGameObject;
-		targetGameObject.setPrimaryAnimation(new AnimationTeleport(targetGameObject, startSquare, squareToTeleportTo, straightenUp,
-				new OnCompletionListener() {
+		targetGameObject.setPrimaryAnimation(new AnimationTeleport(targetGameObject, startSquare, squareToTeleportTo,
+				straightenUp, new OnCompletionListener() {
 					@Override
 					public void animationComplete(GameObject gameObject) {
 						postAnimation();
@@ -80,20 +86,27 @@ public class ActionTeleport extends Action {
 			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 
 		if (log && Game.level.shouldLog(gameObjectPerformer, targetGameObject)) {
-			if (gameObjectPerformer == targetGameObject)
+			if (gameObjectPerformer == targetGameObject) {
+
+				String actionString = " teleported to ";
+				if (fastTravel) {
+					actionString = " fast traveled to ";
+				}
+
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { gameObjectPerformer, " teleported to ", squareToTeleportTo }));
-			else
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { gameObjectPerformer, " teleported ", targetGameObject, " to ", squareToTeleportTo }));
+						new ActivityLog(new Object[] { gameObjectPerformer, actionString, squareToTeleportTo }));
+			} else {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObjectPerformer, " teleported ",
+						targetGameObject, " to ", squareToTeleportTo }));
+			}
 		}
 
 		// Teleported big object on to big object... someone has to die.
 		if (gameObjectInTheWay != null) {
 			float damage = Math.min(targetGameObject.remainingHealth, gameObjectInTheWay.remainingHealth);
 			if (log && Game.level.shouldLog(targetGameObject, gameObjectInTheWay))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { targetGameObject, " teleported in to ", gameObjectInTheWay,
-						", both took " + damage + " damage" }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { targetGameObject, " teleported in to ",
+						gameObjectInTheWay, ", both took " + damage + " damage" }));
 
 			targetGameObject.changeHealth(-damage, gameObjectPerformer, this);
 			gameObjectInTheWay.changeHealth(-damage, gameObjectPerformer, this);
@@ -115,7 +128,8 @@ public class ActionTeleport extends Action {
 
 			// GameObject gameObjectInTheWay = null;
 			if (gameObjectInTheWay != null) {
-				if (targetGameObject != Game.level.player && targetGameObject.owner != null && targetGameObject.owner != Game.level.player) {
+				if (targetGameObject != Game.level.player && targetGameObject.owner != null
+						&& targetGameObject.owner != Game.level.player) {
 					Actor victim;
 					Crime.TYPE severity;
 					if (targetGameObject instanceof Actor) {

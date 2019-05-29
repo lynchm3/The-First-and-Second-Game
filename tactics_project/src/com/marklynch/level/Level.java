@@ -1772,7 +1772,7 @@ public class Level {
 					new PowerDash(Level.player), false);
 
 			if (potentialAction == null || !potentialAction.enabled || !potentialAction.legal)
-				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false);
+				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false, false);
 
 			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare
 					&& !potentialSquareToMoveTo.inventory.containsGameObjectOfType(Actor.class)

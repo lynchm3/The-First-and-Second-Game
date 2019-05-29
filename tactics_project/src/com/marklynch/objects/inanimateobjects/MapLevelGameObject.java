@@ -42,8 +42,8 @@ public class MapLevelGameObject extends GameObject {
 		float drawPositionY1 = (Game.windowHeight / 2)
 				+ (Game.zoom * (squarePositionY1 - Game.windowHeight / 2 + Game.getDragYWithOffset()))
 				- (Game.SQUARE_HEIGHT - Game.SQUARE_HEIGHT * Game.zoom) - (Game.HALF_SQUARE_HEIGHT * Game.zoom);
-		float drawPositionX2 = drawPositionX1 + (int) Game.SQUARE_WIDTH;
-		float drawPositionY2 = drawPositionY1 + (int) Game.SQUARE_HEIGHT;
+		float drawPositionX2 = drawPositionX1 + (int) this.width;
+		float drawPositionY2 = drawPositionY1 + (int) this.height;
 		TextureUtils.drawTexture(imageTexture, alpha, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
 
 		if (name.length() > 0) {

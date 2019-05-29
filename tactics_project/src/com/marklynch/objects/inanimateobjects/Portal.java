@@ -76,7 +76,7 @@ public class Portal extends GameObject implements OnCompletionListener {
 
 		if (squareGameObjectIsOn == null || gameObject == null || connectedSquare == null)
 			return;
-		new ActionTeleport(Portal.this, gameObject, connectedSquare, true, true).perform();
+		new ActionTeleport(Portal.this, gameObject, connectedSquare, true, true, false).perform();
 
 	}
 

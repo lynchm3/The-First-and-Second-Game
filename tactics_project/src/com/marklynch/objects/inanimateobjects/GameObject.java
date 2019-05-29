@@ -58,7 +58,6 @@ import com.marklynch.actions.ActionStopHiding;
 import com.marklynch.actions.ActionStopPeeking;
 import com.marklynch.actions.ActionTakeItems;
 import com.marklynch.actions.ActionTakeItemsSelectedInInventory;
-import com.marklynch.actions.ActionTeleport;
 import com.marklynch.actions.ActionThrowItem;
 import com.marklynch.actions.ActionTrackMapMarker;
 import com.marklynch.actions.ActionUnequip;
@@ -1118,10 +1117,10 @@ public class GameObject
 			return null;
 
 		// FastTravelLocation
-		if (this instanceof FastTravelLocation) {
-//			FastTravelLocation fastTravelLocation = (FastTravelLocation) this;
-			return new ActionTeleport(performer, performer, this.squareGameObjectIsOn, true, true);
-		}
+//		if (this instanceof FastTravelLocation) {
+////			FastTravelLocation fastTravelLocation = (FastTravelLocation) this;
+//			return new ActionTeleport(performer, performer, this.squareGameObjectIsOn, true, true);
+//		}
 
 		if (isFloorObject || (this instanceof Liquid)) {
 			if (this.squareGameObjectIsOn == null)
@@ -1279,14 +1278,14 @@ public class GameObject
 		}
 
 		// FastTravelLocation
-		if (this instanceof FastTravelLocation) {
-//			FastTravelLocation fastTravelLocation = (FastTravelLocation) this;
-//			actions.add(new ActionFastTravel(fastTravelLocation));
-			actions.add(new ActionTeleport(performer, null, this.squareGameObjectIsOn, true, true));
-
-//			actions.add(new ActionInspect(performer, fastTravelLocation));
-			return actions;
-		}
+//		if (this instanceof FastTravelLocation) {
+////			FastTravelLocation fastTravelLocation = (FastTravelLocation) this;
+////			actions.add(new ActionFastTravel(fastTravelLocation));
+//			actions.add(new ActionTeleport(performer, null, this.squareGameObjectIsOn, true, true));
+//
+////			actions.add(new ActionInspect(performer, fastTravelLocation));
+//			return actions;
+//		}
 
 		// Water Source
 		if (this instanceof WaterSource) {

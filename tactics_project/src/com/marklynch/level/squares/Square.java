@@ -42,10 +42,12 @@ import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
+import com.marklynch.objects.inanimateobjects.FastTravelLocation;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
 import com.marklynch.objects.inanimateobjects.Landmine;
 import com.marklynch.objects.inanimateobjects.Liquid;
+import com.marklynch.objects.inanimateobjects.MapLevelGameObject;
 import com.marklynch.objects.inanimateobjects.MapMarker;
 import com.marklynch.objects.inanimateobjects.Portal;
 import com.marklynch.objects.inanimateobjects.PressurePlate;
@@ -773,6 +775,9 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			if (!gameObjectToCheck.squareGameObjectIsOn.visibleToPlayer && !gameObjectToCheck.persistsWhenCantBeSeen)
 				continue;
 
+			if (gameObjectToCheck instanceof MapLevelGameObject)
+				continue;
+
 			boolean pointOnGameObject = gameObjectToCheck.checkIfPointOnGameObject(new Utils.Point(
 					(int) (UserInputLevel.mouseXTransformed), (int) (UserInputLevel.mouseYTransformed)));
 			if (pointOnGameObject)
@@ -917,7 +922,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		// Move, teleport, loiter
 		if (this != Game.level.player.squareGameObjectIsOn) {
 			actions.add(new ActionMove(performer, this, true));
-			actions.add(new ActionTeleport(performer, performer, this, true, true));
+			actions.add(new ActionTeleport(performer, performer, this, true, true, false));
 			actions.add(new ActionTeleportSwap(performer, performer, this, true));
 		} else {
 			actions.add(new ActionWait(performer, performer.squareGameObjectIsOn));
@@ -970,6 +975,10 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 		if (!this.inventory.containsGameObjectOfType(MapMarker.class))
 			actions.add(new ActionPlaceMapMarker(this));
+
+		if (!this.inventory.containsGameObjectOfType(FastTravelLocation.class)) {
+			actions.add(new ActionTeleport(performer, performer, this, true, true, true));
+		}
 
 		actions.add(new ActionViewInfo(performer, this));
 
