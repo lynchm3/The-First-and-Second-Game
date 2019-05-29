@@ -38,6 +38,8 @@ public class AreaTown {
 
 	public AreaTown() {
 
+		Templates.FAST_TRAVEL_LOCATION.makeCopy(Level.squares[73][32], null, "Town");
+
 		Templates.MIRROR.makeCopy(Game.level.squares[posX + 27][posY + 31], null);
 
 		// Trader Joe
@@ -158,7 +160,7 @@ public class AreaTown {
 		new PavedPathway(posX + 24, posY + 8, posX + 24, posY + 18);
 
 		// Lumberjack
-		Actor lumberjack = Templates.LUMBERJACK.makeCopy("Lumberjack Ian", Game.level.squares[posX + 19][posY + 9],
+		Actor lumberjack = Templates.LUMBERJACK.makeCopy("Lumberjack Ian", Game.level.squares[posX + 100][posY + 9],
 				Level.factions.townsPeople, null, 0, new GameObject[] { Templates.HATCHET.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.mines, new int[] { Templates.HATCHET.templateId },
 				new HOBBY[] { HOBBY.HUNTING });

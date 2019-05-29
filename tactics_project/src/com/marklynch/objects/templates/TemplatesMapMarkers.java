@@ -1,5 +1,6 @@
 package com.marklynch.objects.templates;
 
+import com.marklynch.objects.inanimateobjects.FastTravelLocation;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MapMarker;
 
@@ -89,6 +90,16 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_PORTAL.templateId = GameObject.generateNewTemplateId();
 		Templates.MAP_MARKER_PORTAL.flipYAxisInMirror = false;
 
+		Templates.FAST_TRAVEL_LOCATION = new FastTravelLocation();
+		Templates.FAST_TRAVEL_LOCATION.setImageAndExtrapolateSize("fast_travel_location.png");
+		Templates.FAST_TRAVEL_LOCATION.totalHealth = Templates.FAST_TRAVEL_LOCATION.remainingHealth = 1;
+		Templates.FAST_TRAVEL_LOCATION.soundWhenHit = 0f;
+		Templates.FAST_TRAVEL_LOCATION.soundWhenHitting = 0f;
+		Templates.FAST_TRAVEL_LOCATION.soundDampening = 0f;
+		Templates.FAST_TRAVEL_LOCATION.weight = 0f;
+		Templates.FAST_TRAVEL_LOCATION.value = 0;
+		Templates.FAST_TRAVEL_LOCATION.templateId = GameObject.generateNewTemplateId();
+		Templates.FAST_TRAVEL_LOCATION.flipYAxisInMirror = false;
 	}
 
 }

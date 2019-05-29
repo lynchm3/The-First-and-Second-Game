@@ -146,7 +146,7 @@ public class Tree extends GameObject implements UpdatableGameObject {
 			}
 		}
 
-		if (Math.random() > 0.999d) {
+		if (Math.random() > 0.99999d) {
 			addApple(0.1f);
 		}
 

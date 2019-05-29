@@ -51,6 +51,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.armor.Weapon;
+import com.marklynch.objects.inanimateobjects.FastTravelLocation;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MapMarker;
 import com.marklynch.objects.inanimateobjects.Vein;
@@ -277,6 +278,7 @@ public class Level {
 		// Wall.loadStaticImages();
 		Vein.loadStaticImages();
 		MapMarker.loadStaticImages();
+		FastTravelLocation.loadStaticImages();
 		Inventory.loadStaticImages();
 		ComparisonDisplay.loadStaticImages();
 		Journal.loadStaticImages();

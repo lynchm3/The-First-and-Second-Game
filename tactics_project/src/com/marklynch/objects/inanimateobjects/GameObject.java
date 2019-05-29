@@ -58,6 +58,7 @@ import com.marklynch.actions.ActionStopHiding;
 import com.marklynch.actions.ActionStopPeeking;
 import com.marklynch.actions.ActionTakeItems;
 import com.marklynch.actions.ActionTakeItemsSelectedInInventory;
+import com.marklynch.actions.ActionTeleport;
 import com.marklynch.actions.ActionThrowItem;
 import com.marklynch.actions.ActionTrackMapMarker;
 import com.marklynch.actions.ActionUnequip;
@@ -1116,6 +1117,12 @@ public class GameObject
 		if (!this.discoveredObject)
 			return null;
 
+		// FastTravelLocation
+		if (this instanceof FastTravelLocation) {
+//			FastTravelLocation fastTravelLocation = (FastTravelLocation) this;
+			return new ActionTeleport(performer, performer, this.squareGameObjectIsOn, true, true);
+		}
+
 		if (isFloorObject || (this instanceof Liquid)) {
 			if (this.squareGameObjectIsOn == null)
 				return null;
@@ -1268,6 +1275,16 @@ public class GameObject
 			actions.add(new ActionRename(mapMarker));
 			actions.add(new ActionChangeAppearance(mapMarker));
 			actions.add(new ActionRemoveMapMarker(mapMarker));
+			return actions;
+		}
+
+		// FastTravelLocation
+		if (this instanceof FastTravelLocation) {
+//			FastTravelLocation fastTravelLocation = (FastTravelLocation) this;
+//			actions.add(new ActionFastTravel(fastTravelLocation));
+			actions.add(new ActionTeleport(performer, null, this.squareGameObjectIsOn, true, true));
+
+//			actions.add(new ActionInspect(performer, fastTravelLocation));
 			return actions;
 		}
 

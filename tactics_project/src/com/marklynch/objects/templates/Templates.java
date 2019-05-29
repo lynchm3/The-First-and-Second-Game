@@ -28,6 +28,7 @@ import com.marklynch.objects.inanimateobjects.Carcass;
 import com.marklynch.objects.inanimateobjects.Corpse;
 import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.ElectricalWiring;
+import com.marklynch.objects.inanimateobjects.FastTravelLocation;
 import com.marklynch.objects.inanimateobjects.Fireplace;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.Furnace;
@@ -395,6 +396,8 @@ public class Templates {
 	public static MapMarker MAP_MARKER_TREASURE;
 
 	public static MapMarker MAP_MARKER_PORTAL;
+
+	public static FastTravelLocation FAST_TRAVEL_LOCATION;
 
 	// TRAPS
 	public static BrokenGlass BROKEN_LAMP;
