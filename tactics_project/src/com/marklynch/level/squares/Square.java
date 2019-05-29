@@ -976,7 +976,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		if (!this.inventory.containsGameObjectOfType(MapMarker.class))
 			actions.add(new ActionPlaceMapMarker(this));
 
-		if (!this.inventory.containsGameObjectOfType(FastTravelLocation.class)) {
+		if (!this.inventory.containsGameObjectOfType(FastTravelLocation.class) && this.seenByPlayer) {
 			actions.add(new ActionTeleport(performer, performer, this, true, true, true));
 		}
 

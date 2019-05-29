@@ -41,8 +41,15 @@ public class FastTravelLocation extends MapLevelGameObject {
 		FastTravelLocation fastTravelLocation = new FastTravelLocation();
 		setInstances(fastTravelLocation);
 		super.setAttributesForCopy(fastTravelLocation, square, owner);
-		fastTravelLocation.name = "Fast Travel (" + locationName + ")";
+		fastTravelLocation.name = locationName;// "Fast Travel (" + locationName + ")";
 		return fastTravelLocation;
+	}
+
+	@Override
+	public void drawStaticUI() {
+		if (this.squareGameObjectIsOn.seenByPlayer) {
+			super.drawStaticUI();
+		}
 	}
 
 	public static void loadStaticImages() {

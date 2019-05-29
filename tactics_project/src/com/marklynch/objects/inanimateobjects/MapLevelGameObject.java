@@ -47,8 +47,8 @@ public class MapLevelGameObject extends GameObject {
 		TextureUtils.drawTexture(imageTexture, alpha, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
 
 		if (name.length() > 0) {
-			TextUtils.printTextWithImages(drawPositionX1, drawPositionY1 + Game.HALF_SQUARE_HEIGHT,
-					(int) Game.SQUARE_WIDTH, false, null, Color.WHITE, 1f, new Object[] { name });
+			TextUtils.printTextWithImages(drawPositionX1, drawPositionY1 + Game.HALF_SQUARE_HEIGHT, Integer.MAX_VALUE,
+					false, null, Color.WHITE, 1f, new Object[] { name });
 		}
 
 	}

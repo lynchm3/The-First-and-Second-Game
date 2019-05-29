@@ -38,7 +38,7 @@ public class AreaTown {
 
 	public AreaTown() {
 
-		Templates.FAST_TRAVEL_LOCATION.makeCopy(Level.squares[73][32], null, "Town");
+		Templates.FAST_TRAVEL_LOCATION.makeCopy(Level.squares[posX + 73][posY + 32], null, "Town");
 
 		Templates.MIRROR.makeCopy(Game.level.squares[posX + 27][posY + 31], null);
 
