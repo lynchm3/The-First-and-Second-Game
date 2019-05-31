@@ -704,6 +704,9 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 	public GameObject getGameObjectMouseIsOver() {
 
+		if (Game.zoom == Game.zoomLevels[Game.MAP_MODE_ZOOM_LEVEL_INDEX])
+			return null;
+
 		// if (!this.seenByPlayer)
 		// return null;
 

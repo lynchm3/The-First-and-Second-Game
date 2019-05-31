@@ -25,6 +25,8 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Player;
+import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.MapLevelGameObject;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.PinWindow;
 import com.marklynch.ui.Scrollable;
@@ -245,7 +247,17 @@ public class UserInputLevel {
 		} else if (draggableMouseIsOver != null) {
 
 		} else {
-			if ((int) mouseXInSquares > -1 && (int) mouseXInSquares < Game.level.squares.length
+
+			if (Game.zoom == Game.zoomLevels[Game.MAP_MODE_ZOOM_LEVEL_INDEX]) {
+				System.out.println("MapLevelGameObject.instances = " + MapLevelGameObject.instances);
+				for (GameObject gameObject : MapLevelGameObject.instances) {
+					if (gameObject.squareGameObjectIsOn != null && gameObject.squareGameObjectIsOn.seenByPlayer) {
+						if (((MapLevelGameObject) gameObject).checkIfPointOnGameObject()) {
+							Game.gameObjectMouseIsOver = gameObject;
+						}
+					}
+				}
+			} else if ((int) mouseXInSquares > -1 && (int) mouseXInSquares < Game.level.squares.length
 					&& (int) mouseYInSquares > -1 && (int) mouseYInSquares < Game.level.squares[0].length) {
 				Game.squareMouseIsOver = Game.level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
 				if (Game.squareMouseIsOver != null) {
