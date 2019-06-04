@@ -2007,6 +2007,12 @@ public class Actor extends GameObject {
 		if (sleeping)
 			return false;
 
+		if (this.equipped == gameObject)
+			return true;
+
+		if (this.inventory.contains(gameObject))
+			return true;
+
 		if (canSeeGameObjectFromSpecificSquare(this.squareGameObjectIsOn, gameObject))
 			return true;
 

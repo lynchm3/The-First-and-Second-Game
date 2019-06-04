@@ -1740,6 +1740,11 @@ public class GameObject
 			actions.add(new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this));
 		}
 
+		// Readable
+		if (conversation != null) {
+			actions.add(new ActionRead(performer, this));
+		}
+
 		actions.add(new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this));
 
 		if (this.inventoryThatHoldsThisObject == Game.level.player.inventory && !(this instanceof Gold)) {

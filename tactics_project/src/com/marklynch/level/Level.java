@@ -1732,9 +1732,11 @@ public class Level {
 
 		// Work out target square
 		Square targetSquare = null;
-		if (Player.playerTargetAction.targetGameObject != null) {
-			targetSquare = Player.playerTargetAction.targetGameObject.squareGameObjectIsOn;
-		} else if (Player.playerTargetAction.targetSquare != null) {
+//		if (Player.playerTargetAction.targetGameObject != null) {
+//			targetSquare = Player.playerTargetAction.targetGameObject.squareGameObjectIsOn;
+//		} 
+
+		if (Player.playerTargetAction.targetSquare != null) {
 			targetSquare = Player.playerTargetAction.targetSquare;
 		}
 
@@ -1772,7 +1774,8 @@ public class Level {
 					new PowerDash(Level.player), false);
 
 			if (potentialAction == null || !potentialAction.enabled || !potentialAction.legal)
-				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false, false);
+				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false,
+						false);
 
 			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare
 					&& !potentialSquareToMoveTo.inventory.containsGameObjectOfType(Actor.class)

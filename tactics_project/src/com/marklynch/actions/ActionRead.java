@@ -41,6 +41,8 @@ public class ActionRead extends Action {
 			Game.level.conversation = conversation;
 			Game.level.conversation.updateFlags();
 			ConversationResponseDisplay.updateStandardButtons();
+			if (Level.player.inventory.isOpen)
+				Level.openCloseInventory();
 		}
 
 		if (performer == Level.player)
