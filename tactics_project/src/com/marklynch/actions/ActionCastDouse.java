@@ -8,7 +8,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionCastDouse extends Action {
@@ -39,9 +39,9 @@ public class ActionCastDouse extends Action {
 		if (Game.level.shouldLog(targetGameObject, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast douse on ", targetGameObject }));
 		targetGameObject.removeBurningEffect();
-		if (targetGameObject instanceof ContainerForLiquids) {
+		if (targetGameObject instanceof Jar) {
 			if (targetGameObject.inventory.size() == 0) {
-				Liquid water = Templates.WATER.makeCopy(null, performer, ((ContainerForLiquids) targetGameObject).volume);
+				Liquid water = Templates.WATER.makeCopy(null, performer);
 				targetGameObject.inventory.add(water);
 
 				if (Game.level.shouldLog(targetGameObject, performer))

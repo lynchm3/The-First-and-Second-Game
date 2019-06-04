@@ -9,7 +9,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionCastPoison extends Action {
@@ -39,14 +39,15 @@ public class ActionCastPoison extends Action {
 
 		if (Game.level.shouldLog(targetGameObject, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast poison on ", targetGameObject }));
-		if (targetGameObject instanceof ContainerForLiquids && targetGameObject.inventory.size() != 0) {
-			ContainerForLiquids containerForLiquids = (ContainerForLiquids) targetGameObject;
+		if (targetGameObject instanceof Jar && targetGameObject.inventory.size() != 0) {
+			Jar jar = (Jar) targetGameObject;
 			targetGameObject.inventory.remove(targetGameObject.inventory.get(0));
-			Liquid poison = Templates.POISON.makeCopy(null, containerForLiquids.owner, containerForLiquids.volume);
+			Liquid poison = Templates.POISON.makeCopy(null, jar.owner);
 			targetGameObject.inventory.add(poison);
 
 			if (Game.level.shouldLog(targetGameObject, performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " made ", poison, " in ", targetGameObject }));
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " made ", poison, " in ", targetGameObject }));
 		} else {
 			if (Math.random() * 100 > targetGameObject.highLevelStats.get(HIGH_LEVEL_STATS.POISON_DAMAGE).value) {
 				targetGameObject.addEffect(new EffectPoison(performer, targetGameObject, 5));

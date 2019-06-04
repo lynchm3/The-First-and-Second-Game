@@ -23,7 +23,7 @@ import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.ui.ActivityLogger;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -672,16 +672,16 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_EMPTY_CONTAINER_FOR_LIQUIDS) {
 			for (GameObject gameObject : gameObjects) {
-				if (gameObject instanceof ContainerForLiquids) {
-					if (((ContainerForLiquids) gameObject).liquid == null) {
+				if (gameObject instanceof Jar) {
+					if (((Jar) gameObject).contents == null) {
 						filteredGameObjects.add(gameObject);
 					}
 				}
 			}
 		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_FULL_CONTAINER_FOR_LIQUIDS) {
 			for (GameObject gameObject : gameObjects) {
-				if (gameObject instanceof ContainerForLiquids) {
-					if (((ContainerForLiquids) gameObject).liquid != null) {
+				if (gameObject instanceof Jar) {
+					if (((Jar) gameObject).contents != null) {
 						filteredGameObjects.add(gameObject);
 					}
 				}
@@ -1750,7 +1750,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (gameObject instanceof Gold)
 				continue;
 
-			if (gameObject instanceof ContainerForLiquids)
+			if (gameObject instanceof Jar)
 				continue;
 
 			if (actor != null) {

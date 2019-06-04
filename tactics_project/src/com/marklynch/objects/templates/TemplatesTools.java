@@ -10,8 +10,8 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Matches;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.tools.FishingRod;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
@@ -212,7 +212,7 @@ public class TemplatesTools {
 		Templates.LANTERN.flipYAxisInMirror = false;
 		Templates.LANTERN.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_RES, new Stat(HIGH_LEVEL_STATS.FIRE_RES, 100));
 
-		Templates.JAR = new ContainerForLiquids();
+		Templates.JAR = new Jar();
 		Templates.JAR.name = "Empty Jar";
 		Templates.JAR.rarity = Rarity.LEGEND;
 		Templates.JAR.description = "Very good at containing liquids, also fairies. Surprisingly rare, so try not to lose them.";
@@ -225,10 +225,10 @@ public class TemplatesTools {
 		Templates.JAR.anchorY = 100;
 		Templates.JAR.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR.volume = 1;
-		Templates.JAR.liquid = null;
+		Templates.JAR.contents = null;
 		Templates.JAR.flipYAxisInMirror = false;
 
-		Templates.JAR_OF_WATER = new ContainerForLiquids();
+		Templates.JAR_OF_WATER = new Jar();
 		Templates.JAR_OF_WATER.name = "Jar of Water";
 		Templates.JAR_OF_WATER.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
@@ -241,10 +241,10 @@ public class TemplatesTools {
 		Templates.JAR_OF_WATER.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR_OF_WATER.volume = 1;
 		Templates.WATER.jarForm = Templates.JAR_OF_WATER;
-		Templates.JAR_OF_WATER.liquid = Templates.WATER.makeCopy(null, null, 1);
+		Templates.JAR_OF_WATER.contents = Templates.WATER.makeCopy(null, null);
 		Templates.JAR_OF_WATER.flipYAxisInMirror = false;
 
-		Templates.JAR_OF_POISON = new ContainerForLiquids();
+		Templates.JAR_OF_POISON = new Jar();
 		Templates.JAR_OF_POISON.name = "Jar of Poison";
 		Templates.JAR_OF_POISON.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
@@ -259,10 +259,10 @@ public class TemplatesTools {
 		Templates.JAR_OF_POISON.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR_OF_POISON.volume = 1;
 		Templates.POISON.jarForm = Templates.JAR_OF_POISON;
-		Templates.JAR_OF_POISON.liquid = Templates.POISON.makeCopy(null, null, 1);
+		Templates.JAR_OF_POISON.contents = Templates.POISON.makeCopy(null, null);
 		Templates.JAR_OF_POISON.flipYAxisInMirror = false;
 
-		Templates.JAR_OF_OIL = new ContainerForLiquids();
+		Templates.JAR_OF_OIL = new Jar();
 		Templates.JAR_OF_OIL.name = "Jar of Oil";
 		Templates.JAR_OF_OIL.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
@@ -277,10 +277,10 @@ public class TemplatesTools {
 		Templates.JAR_OF_OIL.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR_OF_OIL.volume = 1;
 		Templates.OIL.jarForm = Templates.JAR_OF_OIL;
-		Templates.JAR_OF_OIL.liquid = Templates.OIL.makeCopy(null, null, 1);
+		Templates.JAR_OF_OIL.contents = Templates.OIL.makeCopy(null, null);
 		Templates.JAR_OF_OIL.flipYAxisInMirror = false;
 
-		Templates.JAR_OF_BLOOD = new ContainerForLiquids();
+		Templates.JAR_OF_BLOOD = new Jar();
 		Templates.JAR_OF_BLOOD.name = "Jar of Blood";
 		Templates.JAR_OF_BLOOD.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
@@ -293,10 +293,10 @@ public class TemplatesTools {
 		Templates.JAR_OF_BLOOD.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR_OF_BLOOD.volume = 1;
 		Templates.BLOOD.jarForm = Templates.JAR_OF_BLOOD;
-		Templates.JAR_OF_BLOOD.liquid = Templates.BLOOD.makeCopy(null, null, 1);
+		Templates.JAR_OF_BLOOD.contents = Templates.BLOOD.makeCopy(null, null);
 		Templates.JAR_OF_BLOOD.flipYAxisInMirror = false;
 
-		Templates.JAR_OF_LAVA = new ContainerForLiquids();
+		Templates.JAR_OF_LAVA = new Jar();
 		Templates.JAR_OF_LAVA.name = "Jar of Lava";
 		Templates.JAR_OF_LAVA.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
@@ -311,10 +311,10 @@ public class TemplatesTools {
 		Templates.JAR_OF_LAVA.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR_OF_LAVA.volume = 1;
 		Templates.LAVA.jarForm = Templates.JAR_OF_LAVA;
-		Templates.JAR_OF_LAVA.liquid = Templates.LAVA.makeCopy(null, null, 1);
+		Templates.JAR_OF_LAVA.contents = Templates.LAVA.makeCopy(null, null);
 		Templates.JAR_OF_LAVA.flipYAxisInMirror = false;
 
-		Templates.JAR_OF_SOUP = new ContainerForLiquids();
+		Templates.JAR_OF_SOUP = new Jar();
 		Templates.JAR_OF_SOUP.name = "Jar of Soup";
 		Templates.JAR_OF_SOUP.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
@@ -327,10 +327,10 @@ public class TemplatesTools {
 		Templates.JAR_OF_SOUP.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR_OF_SOUP.volume = 1;
 		Templates.SOUP.jarForm = Templates.JAR_OF_SOUP;
-		Templates.JAR_OF_SOUP.liquid = Templates.SOUP.makeCopy(null, null, 1);
+		Templates.JAR_OF_SOUP.contents = Templates.SOUP.makeCopy(null, null);
 		Templates.JAR_OF_SOUP.flipYAxisInMirror = false;
 
-		Templates.MESSAGE_IN_A_JAR = new ContainerForLiquids();
+		Templates.MESSAGE_IN_A_JAR = new Jar();
 		Templates.MESSAGE_IN_A_JAR.name = "Message in a jar";
 		Templates.MESSAGE_IN_A_JAR.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
@@ -343,7 +343,7 @@ public class TemplatesTools {
 		Templates.MESSAGE_IN_A_JAR.templateId = GameObject.generateNewTemplateId();
 		Templates.MESSAGE_IN_A_JAR.volume = 1;
 //		Templates.MESSAGE.jarForm = Templates.MESSAGE_IN_A_JAR;
-		Templates.MESSAGE_IN_A_JAR.liquid = Templates.SOUP.makeCopy(null, null, 1);
+		Templates.MESSAGE_IN_A_JAR.contents = Templates.SOUP.makeCopy(null, null);
 		Templates.MESSAGE_IN_A_JAR.flipYAxisInMirror = false;
 
 //		Templates.MESSAGE_IN_A_BOTTLE = new GameObject();

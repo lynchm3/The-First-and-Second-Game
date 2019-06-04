@@ -4,15 +4,15 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 
 public class ActionPourItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Pour";
-	ContainerForLiquids objectToPour;
+	Jar objectToPour;
 	InventorySquare inventorySquare;
 
-	public ActionPourItemsSelectedInInventory(GameObject performer, Object target, ContainerForLiquids objectToPour) {
+	public ActionPourItemsSelectedInInventory(GameObject performer, Object target, Jar objectToPour) {
 		super(ACTION_NAME, textureDrop, performer, target);
 		this.objectToPour = objectToPour;
 		this.inventorySquare = objectToPour.inventorySquare;

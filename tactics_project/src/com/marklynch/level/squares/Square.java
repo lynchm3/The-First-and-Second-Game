@@ -1325,7 +1325,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 						}
 					} else {
 						squareToPotentiallySpreadTo.inventory.removeGameObjecsOfType(Liquid.class);
-						Liquid liquidToSpread = templateLiquid.makeCopy(null, null, 1);
+						Liquid liquidToSpread = templateLiquid.makeCopy(null, null);
 						liquidToSpread.setPrimaryAnimation(
 								new AnimationLiquidSpread(liquidToSpread, squareToPotentiallySpreadTo, null));
 						squareToPotentiallySpreadTo.inventory.add(liquidToSpread);

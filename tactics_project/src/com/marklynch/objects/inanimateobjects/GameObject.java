@@ -22,7 +22,7 @@ import com.marklynch.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.actions.ActionEatItems;
 import com.marklynch.actions.ActionEatItemsSelectedInInventory;
 import com.marklynch.actions.ActionEquip;
-import com.marklynch.actions.ActionFillSpecificContainer;
+import com.marklynch.actions.ActionFillSpecificJar;
 import com.marklynch.actions.ActionFishingStart;
 import com.marklynch.actions.ActionFollow;
 import com.marklynch.actions.ActionGetIn;
@@ -110,8 +110,8 @@ import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.tools.FlammableLightSource;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.utils.DamageDealer;
 import com.marklynch.objects.utils.DeathListener;
 import com.marklynch.ui.ActivityLog;
@@ -1345,8 +1345,7 @@ public class GameObject
 		}
 
 		// Food / Drink
-		if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
-				|| this instanceof WaterBody) {
+		if (this instanceof Food || this instanceof Liquid || this instanceof Jar || this instanceof WaterBody) {
 			actions.add(new ActionEatItems(performer, this));
 		}
 
@@ -1602,13 +1601,13 @@ public class GameObject
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
-			if (this instanceof ContainerForLiquids)
+			if (this instanceof Jar)
 				if (Inventory.target instanceof WaterSource) {
-					return new ActionFillSpecificContainer(performer, ((WaterSource) Inventory.target).liquid,
-							(WaterSource) Inventory.target, (ContainerForLiquids) this);
+					return new ActionFillSpecificJar(performer, ((WaterSource) Inventory.target).liquid,
+							(WaterSource) Inventory.target, (Jar) this);
 				} else if (Inventory.target instanceof Liquid) {
-					return new ActionFillSpecificContainer(performer, (Liquid) Inventory.target,
-							(Liquid) Inventory.target, (ContainerForLiquids) this);
+					return new ActionFillSpecificJar(performer, (Liquid) Inventory.target, (Liquid) Inventory.target,
+							(Jar) this);
 
 				} else
 					return null;
@@ -1627,7 +1626,7 @@ public class GameObject
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
-			return new ActionPourItemsSelectedInInventory(performer, Inventory.target, (ContainerForLiquids) this);
+			return new ActionPourItemsSelectedInInventory(performer, Inventory.target, (Jar) this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
@@ -1661,8 +1660,7 @@ public class GameObject
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_NORMAL) {
 
 			// Food / drink
-			if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
-					|| this instanceof WaterBody) {
+			if (this instanceof Food || this instanceof Liquid || this instanceof Jar || this instanceof WaterBody) {
 				return new ActionEatItemsSelectedInInventory(performer, this);
 			}
 
@@ -1734,14 +1732,9 @@ public class GameObject
 			actions.add(new ActionEquip(performer, this));
 
 		// Food/drink
-		if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
-				|| this instanceof WaterBody) {
+		if (this instanceof Food || this instanceof Liquid || this instanceof Jar || this instanceof WaterBody) {
 			actions.add(new ActionEatItemsSelectedInInventory(performer, this));
 		}
-
-//		if (this instanceof ContainerForLiquids)
-//			actions.add(new ActionPourItemsSelectedInInventory(performer, performer.squareGameObjectIsOn,
-//					(ContainerForLiquids) this));
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			actions.add(new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this));
@@ -2252,8 +2245,8 @@ public class GameObject
 
 	public Action getDefaultActionForEquippedItem(Actor performer, Square square) {
 
-		if (this instanceof ContainerForLiquids && ((ContainerForLiquids) this).liquid != null) {
-			return new ActionPourItem(performer, square, (ContainerForLiquids) this);
+		if (this instanceof Jar && ((Jar) this).contents != null) {
+			return new ActionPourItem(performer, square, (Jar) this);
 		}
 
 		if (this instanceof Bell) {
@@ -2348,8 +2341,7 @@ public class GameObject
 		}
 
 		// Food / Drink
-		if (this instanceof Food || this instanceof Liquid || this instanceof ContainerForLiquids
-				|| this instanceof WaterBody) {
+		if (this instanceof Food || this instanceof Liquid || this instanceof Jar || this instanceof WaterBody) {
 			actions.add(new ActionEatItems(performer, this));
 		}
 
@@ -2389,10 +2381,6 @@ public class GameObject
 			actions.add(new ActionEquip(performer, this));
 
 		actions.add(new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this));
-
-//		if (this instanceof ContainerForLiquids)
-//			actions.add(new ActionPourItemsSelectedInInventory(performer, performer.squareGameObjectIsOn,
-//					(ContainerForLiquids) this));
 
 		if (this.inventoryThatHoldsThisObject == Level.player.inventory && !(this instanceof Gold)) {
 			actions.add(new ActionStarSpecificItem(this));

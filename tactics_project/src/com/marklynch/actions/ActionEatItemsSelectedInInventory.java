@@ -7,7 +7,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.WaterBody;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 
 public class ActionEatItemsSelectedInInventory extends Action {
 
@@ -21,7 +21,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
 		super(ACTION_NAME, textureEat, performer, target);
-		if (target instanceof Liquid || target instanceof ContainerForLiquids || target instanceof WaterBody) {
+		if (target instanceof Liquid || target instanceof Jar || target instanceof WaterBody) {
 			this.actionName = ACTION_NAME_DRINK;
 			this.image = textureDrink;
 		}

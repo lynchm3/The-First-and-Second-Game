@@ -70,7 +70,7 @@ import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.inanimateobjects.Well;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
@@ -359,14 +359,14 @@ public class Templates {
 	// Food?
 	public static MeatChunk MEAT_CHUNK;
 
-	public static ContainerForLiquids JAR;
-	public static ContainerForLiquids JAR_OF_WATER;
-	public static ContainerForLiquids JAR_OF_POISON;
-	public static ContainerForLiquids JAR_OF_OIL;
-	public static ContainerForLiquids JAR_OF_LAVA;
-	public static ContainerForLiquids JAR_OF_BLOOD;
-	public static ContainerForLiquids JAR_OF_SOUP;
-	public static ContainerForLiquids MESSAGE_IN_A_JAR;
+	public static Jar JAR;
+	public static Jar JAR_OF_WATER;
+	public static Jar JAR_OF_POISON;
+	public static Jar JAR_OF_OIL;
+	public static Jar JAR_OF_LAVA;
+	public static Jar JAR_OF_BLOOD;
+	public static Jar JAR_OF_SOUP;
+	public static Jar MESSAGE_IN_A_JAR;
 
 	public static Liquid WATER;
 	public static Liquid POISON;

@@ -14,13 +14,13 @@ import com.marklynch.objects.utils.Consumable;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
 
-public class ContainerForLiquids extends Tool implements Consumable {
+public class Jar extends Tool implements Consumable {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public float volume;
-	public Liquid liquid;
+	public GameObject contents;
 
-	public ContainerForLiquids() {
+	public Jar() {
 
 		super();
 		type = "Container";
@@ -34,13 +34,13 @@ public class ContainerForLiquids extends Tool implements Consumable {
 	}
 
 	@Override
-	public ContainerForLiquids makeCopy(Square square, Actor owner) {
-		ContainerForLiquids weapon = new ContainerForLiquids();
+	public Jar makeCopy(Square square, Actor owner) {
+		Jar weapon = new Jar();
 		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
 		weapon.volume = volume;
-		if (this.liquid != null)
-			weapon.liquid = liquid.makeCopy(null, owner, volume);
+		if (this.contents != null)
+			weapon.contents = contents.makeCopy(null, owner);
 		return weapon;
 	}
 
@@ -98,20 +98,25 @@ public class ContainerForLiquids extends Tool implements Consumable {
 		if (Game.level.shouldLog(this))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " smashed" }));
 
-		if (this.liquid != null && squareFoGlassAndLiquid != null) {
-			Liquid liquid = this.liquid;
-			squareFoGlassAndLiquid.liquidSpread(liquid);
-			for (GameObject gameObject : (ArrayList<GameObject>) squareFoGlassAndLiquid.inventory.getGameObjects()
-					.clone()) {
-				if (gameObject != this) {
-					// new ActionDouse(shooter, gameObject).perform();
-					for (Effect effect : liquid.touchEffects) {
-						gameObject.addEffect(effect.makeCopy(shooter, gameObject));
-						if (effect instanceof EffectWet) {
-							gameObject.removeBurningEffect();
+		if (this.contents != null && squareFoGlassAndLiquid != null) {
+
+			if (this.contents instanceof Liquid) {
+				Liquid liquid = (Liquid) this.contents;
+				squareFoGlassAndLiquid.liquidSpread(liquid);
+				for (GameObject gameObject : (ArrayList<GameObject>) squareFoGlassAndLiquid.inventory.getGameObjects()
+						.clone()) {
+					if (gameObject != this) {
+						// new ActionDouse(shooter, gameObject).perform();
+						for (Effect effect : liquid.touchEffects) {
+							gameObject.addEffect(effect.makeCopy(shooter, gameObject));
+							if (effect instanceof EffectWet) {
+								gameObject.removeBurningEffect();
+							}
 						}
 					}
 				}
+			} else { // Not a liquid
+				squareFoGlassAndLiquid.inventory.add(contents);
 			}
 		}
 
@@ -119,7 +124,7 @@ public class ContainerForLiquids extends Tool implements Consumable {
 
 	@Override
 	public Effect[] getConsumeEffects() {
-		return liquid.consumeEffects;
+		return contents.consumeEffects;
 	}
 
 }

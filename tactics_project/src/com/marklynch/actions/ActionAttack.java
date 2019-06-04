@@ -14,7 +14,7 @@ import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionAttack extends Action {
@@ -172,11 +172,9 @@ public class ActionAttack extends Action {
 				}
 			}
 
-			if (weapon instanceof ContainerForLiquids) {
+			if (weapon instanceof Jar) {
 				targetGameObject.squareGameObjectIsOn.inventory.add(weapon);
-				((ContainerForLiquids) weapon).landed(performer, this);
-				// AnimationThrown.smashContainer(actor, target, (ContainerForLiquids)
-				// weapon);
+				((Jar) weapon).landed(performer, this);
 			}
 
 			if (targetGameObject.remainingHealth > 0)

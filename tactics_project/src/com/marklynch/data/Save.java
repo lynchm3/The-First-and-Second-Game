@@ -81,7 +81,7 @@ import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.inanimateobjects.Window;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.objects.tools.Knife;
@@ -117,7 +117,7 @@ public class Save {
 
 			// LVL 3 GameObject subclass in Tool
 			Shovel.class, Pickaxe.class, Knife.class, FlammableLightSource.class, FishingRod.class,
-			ContainerForLiquids.class, Bell.class, Axe.class,
+			Jar.class, Bell.class, Axe.class,
 
 			// LVL 3 GameObject subclass in Actor package
 			Player.class, WildAnimal.class, Trader.class, Thief.class, Pig.class, Guard.class, Doctor.class,

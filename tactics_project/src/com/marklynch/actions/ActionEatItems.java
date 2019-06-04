@@ -15,7 +15,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.utils.Consumable;
 import com.marklynch.ui.ActivityLog;
 
@@ -37,7 +37,7 @@ public class ActionEatItems extends VariableQtyAction {
 	public ActionEatItems(Actor performer, GameObject[] objects, boolean doesNothing) {
 		super(ACTION_NAME, textureEat, performer, null);
 		if (objects != null && objects.length > 0 && (objects[0] instanceof Liquid
-				|| objects[0] instanceof ContainerForLiquids || objects[0] instanceof WaterBody)) {
+				|| objects[0] instanceof Jar || objects[0] instanceof WaterBody)) {
 			this.actionName = ACTION_NAME_DRINK;
 			this.image = textureDrink;
 		}
@@ -68,14 +68,14 @@ public class ActionEatItems extends VariableQtyAction {
 			GameObject object = targets[i];
 
 			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass
-					|| object instanceof Liquid || object instanceof ContainerForLiquids) {
+					|| object instanceof Liquid || object instanceof Jar) {
 				// Inventory inventoryThatHoldsThisObject = object.inventoryThatHoldsThisObject;
 				if (object.inventoryThatHoldsThisObject.parent instanceof Square) {
-					if (object instanceof ContainerForLiquids) {
+					if (object instanceof Jar) {
 						Templates.JAR.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
 					}
 				} else {
-					if (object instanceof ContainerForLiquids) {
+					if (object instanceof Jar) {
 						object.inventoryThatHoldsThisObject.add(Templates.JAR.makeCopy(null, null));
 					}
 					object.inventoryThatHoldsThisObject.remove(object);

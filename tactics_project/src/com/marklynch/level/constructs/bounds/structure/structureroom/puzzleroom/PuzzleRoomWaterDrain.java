@@ -97,20 +97,20 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 		well.inventory.add(Templates.GOLD.makeCopy(null, null, 1));
 		well.inventory.add(Templates.GOLD.makeCopy(null, null, 1));
 		well.inventory.add(Templates.SWORD.makeCopy(null, null));
-		Templates.WATER.makeCopy(Game.level.squares[posX + wellX - 1][posY + wellY], null, 1);
+		Templates.WATER.makeCopy(Game.level.squares[posX + wellX - 1][posY + wellY], null);
 
 		// Left hand side, water and switch
 		AttackableSwitch attackableSwitch = Templates.ATTACKABLE_SWITCH.makeCopy(
 				Level.squares[posX + attackableSwitchX][posY + attackableSwitchY], null, SWITCH_TYPE.ON_OFF,
 				eletricalWiring);
 
-		Templates.WATER.makeCopy(Level.squares[posX - 1][posY + 1], null, 1);
-		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 0], null, 1);
-		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 1], null, 1);
-		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 2], null, 1);
-		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 3], null, 1);
-		Templates.WATER.makeCopy(Level.squares[posX + 1][posY + 1], null, 1);
-		Templates.WATER.makeCopy(Level.squares[posX + 1][posY + 2], null, 1);
+		Templates.WATER.makeCopy(Level.squares[posX - 1][posY + 1], null);
+		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 0], null);
+		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 1], null);
+		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 2], null);
+		Templates.WATER.makeCopy(Level.squares[posX + 0][posY + 3], null);
+		Templates.WATER.makeCopy(Level.squares[posX + 1][posY + 1], null);
+		Templates.WATER.makeCopy(Level.squares[posX + 1][posY + 2], null);
 	}
 
 //	boolean switchTriggered = false;

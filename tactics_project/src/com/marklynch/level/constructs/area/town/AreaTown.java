@@ -54,7 +54,7 @@ public class AreaTown {
 		// (Game.level.squares[posX + 2][posY + 3], null);
 		Templates.HATCHET.makeCopy(Game.level.squares[posX + 5][posY + 6], null);
 		Templates.HATCHET.makeCopy(Game.level.squares[posX + 1][posY + 6], null);
-		Templates.BLOOD.makeCopy(Game.level.squares[posX + 5][posY + 6], null, 1);
+		Templates.BLOOD.makeCopy(Game.level.squares[posX + 5][posY + 6], null);
 		trader.inventory.add(Templates.KATANA.makeCopy(null, null));
 		trader.inventory.add(Templates.HATCHET.makeCopy(null, null));
 		trader.inventory.add(Templates.HUNTING_BOW.makeCopy(null, null));

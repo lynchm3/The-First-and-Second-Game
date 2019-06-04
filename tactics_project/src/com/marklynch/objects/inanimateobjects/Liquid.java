@@ -18,7 +18,7 @@ import com.marklynch.utils.Texture;
 public class Liquid extends GameObject implements Consumable, UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
-	public float volume;
+	public float volume = 1;
 	public GameObject gasForm;
 	public GameObject solidForm;
 	public GameObject jarForm;
@@ -57,7 +57,7 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 		super.setInstances(gameObject);
 	}
 
-	public Liquid makeCopy(Square square, Actor owner, float volume) {
+	public Liquid makeCopy(Square square, Actor owner) {
 		Liquid liquid = new Liquid();
 		setInstances(liquid);
 		super.setAttributesForCopy(liquid, square, owner);

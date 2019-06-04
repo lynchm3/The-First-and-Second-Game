@@ -10,21 +10,22 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Monster;
 import com.marklynch.objects.actors.WildAnimal;
 import com.marklynch.objects.inanimateobjects.GameObject;
+import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionPourItem extends Action {
 
 	public static final String ACTION_NAME = "Pour";
-	ContainerForLiquids containerForLiquids;
+	Jar jar;
 	private GameObject previouslyEquipped;
 
 	// Default for hostiles
-	public ActionPourItem(GameObject performer, Object target, ContainerForLiquids container) {
+	public ActionPourItem(GameObject performer, Object target, Jar container) {
 		super(ACTION_NAME, texturePour, performer, target);
 
-		this.containerForLiquids = container;
+		this.jar = container;
 		if (!check()) {
 			enabled = false;
 		} else {
@@ -45,7 +46,7 @@ public class ActionPourItem extends Action {
 			return;
 
 		previouslyEquipped = performer.equipped;
-		performer.equipped = containerForLiquids;
+		performer.equipped = jar;
 
 		if (targetGameObject != gameObjectPerformer) {
 			gameObjectPerformer.setPrimaryAnimation(new AnimationPour(gameObjectPerformer, targetSquare,
@@ -62,41 +63,42 @@ public class ActionPourItem extends Action {
 
 		if (Game.level.shouldLog(targetGameObject, performer)) {
 			if (targetGameObject != null) {
-				Game.level.logOnScreen(new ActivityLog(
-						new Object[] { performer, " poured ", containerForLiquids, " on ", targetGameObject }));
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " poured ", jar, " on ", targetGameObject }));
 			} else {
-				Game.level
-						.logOnScreen(new ActivityLog(new Object[] { performer, " poured out ", containerForLiquids }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " poured out ", jar }));
 
 			}
 		}
 
 		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
 			// new ActionDouse(shooter, gameObject).perform();
-			for (Effect effect : containerForLiquids.liquid.touchEffects) {
+			for (Effect effect : jar.contents.touchEffects) {
 				gameObject.addEffect(effect.makeCopy(performer, gameObject));
 			}
 		}
 
-		targetSquare.liquidSpread(containerForLiquids.liquid);
+		if (jar.contents instanceof Liquid) {
+			targetSquare.liquidSpread((Liquid) jar.contents);
+		} else {
+			targetSquare.inventory.add(jar.contents);
+		}
 
 		performer.equip(previouslyEquipped);
-		GameObject newJar = Templates.JAR.makeCopy(null, containerForLiquids.owner);
+		GameObject newJar = Templates.JAR.makeCopy(null, jar.owner);
 		performer.inventory.add(newJar);
-		if (performer.equipped == containerForLiquids) {
+		if (performer.equipped == jar) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
 				performer.equip(performer.equippedBeforePickingUpObject);
-			} else if (performer.inventory.containsDuplicateOf(containerForLiquids)) {
-				performer.equip(performer.inventory.getDuplicateOf(containerForLiquids));
+			} else if (performer.inventory.containsDuplicateOf(jar)) {
+				performer.equip(performer.inventory.getDuplicateOf(jar));
 			} else {
 				performer.equip(newJar);
 			}
 			performer.equippedBeforePickingUpObject = null;
 		}
 
-//		if (performer.equipped == containerForLiquids)
-//			performer.equipped = newJar;
-		performer.inventory.remove(containerForLiquids);
+		performer.inventory.remove(jar);
 
 		if (Game.level.openInventories.size() > 0)
 			Game.level.openInventories.get(0).close();
@@ -139,7 +141,7 @@ public class ActionPourItem extends Action {
 			return false;
 		}
 
-		if (containerForLiquids.liquid == null) {
+		if (jar.contents == null) {
 			disabledReason = CONTAINER_IS_EMPTY;
 			return false;
 		}
@@ -188,7 +190,7 @@ public class ActionPourItem extends Action {
 
 		// Sound
 		float loudness = 3;
-		return new Sound(performer, containerForLiquids, targetSquare, loudness, legal, this.getClass());
+		return new Sound(performer, jar, targetSquare, loudness, legal, this.getClass());
 	}
 
 }

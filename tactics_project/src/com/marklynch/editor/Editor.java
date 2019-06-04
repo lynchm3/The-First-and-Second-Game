@@ -44,7 +44,7 @@ import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.utils.ThoughtBubbles;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.trigger.ScriptTrigger;
@@ -537,7 +537,7 @@ public class Editor {
 		player.inventory.add(Templates.HELMET_ANTLERS.makeCopy(null, player));
 		player.inventory.add(Templates.PINK_HARD_HAT.makeCopy(null, player));
 		player.inventory.add(Templates.COWBOY_HAT.makeCopy(null, player));
-		ContainerForLiquids jarOfWater = Templates.JAR_OF_WATER.makeCopy(null, player);
+		Jar jarOfWater = Templates.JAR_OF_WATER.makeCopy(null, player);
 		player.inventory.add(jarOfWater);
 		player.inventory.add(Templates.JAR_OF_POISON.makeCopy(null, player));
 		player.inventory.add(Templates.JAR_OF_WATER.makeCopy(null, player));
