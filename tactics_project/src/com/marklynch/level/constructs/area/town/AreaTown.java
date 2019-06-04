@@ -26,6 +26,7 @@ import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ResourceUtils;
 
@@ -218,8 +219,11 @@ public class AreaTown {
 				new GameObject[] {}, new GameObject[] {}, null);
 		Templates.CHEST.makeCopy(Game.level.squares[posX + 107][posY + 33], false, null);
 		Templates.CRATE.makeCopy(Game.level.squares[posX + 106][posY + 31], false, null);
-		Templates.MESSAGE_IN_A_JAR.makeCopy(Game.level.squares[posX + 89][posY + 34], null);
-		Templates.MESSAGE_IN_A_JAR.makeCopy(Game.level.squares[posX + 90][posY + 34], null);
+		Jar jar1 = Templates.MESSAGE_IN_A_JAR.makeCopy(Game.level.squares[posX + 89][posY + 34], null);
+		jar1.contents.conversation = jar1.contents.createConversation(new Object[] { "SPOOOKY!!!" });
+
+		Jar jar2 = Templates.MESSAGE_IN_A_JAR.makeCopy(Game.level.squares[posX + 90][posY + 34], null);
+		jar2.contents.conversation = jar2.contents.createConversation(new Object[] { "SPOOPY!!!!!" });
 		// new BodyOfWater(105, 30, 106, 37);
 
 		// River

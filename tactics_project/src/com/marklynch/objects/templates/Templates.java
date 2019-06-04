@@ -70,8 +70,8 @@ import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.inanimateobjects.Well;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.tools.FishingRod;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
@@ -257,6 +257,8 @@ public class Templates {
 	public static WantedPoster WANTED_POSTER;
 
 	public static GameObject DOCUMENTS;
+
+	public static GameObject MESSAGE;
 
 	public static WallSupport WOODEN_SUPPORT;
 

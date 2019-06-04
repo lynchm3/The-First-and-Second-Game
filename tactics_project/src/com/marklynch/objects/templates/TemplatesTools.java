@@ -343,7 +343,7 @@ public class TemplatesTools {
 		Templates.MESSAGE_IN_A_JAR.templateId = GameObject.generateNewTemplateId();
 		Templates.MESSAGE_IN_A_JAR.volume = 1;
 //		Templates.MESSAGE.jarForm = Templates.MESSAGE_IN_A_JAR;
-		Templates.MESSAGE_IN_A_JAR.contents = Templates.SOUP.makeCopy(null, null);
+		Templates.MESSAGE_IN_A_JAR.contents = Templates.MESSAGE.makeCopy(null, null);
 		Templates.MESSAGE_IN_A_JAR.flipYAxisInMirror = false;
 
 //		Templates.MESSAGE_IN_A_BOTTLE = new GameObject();

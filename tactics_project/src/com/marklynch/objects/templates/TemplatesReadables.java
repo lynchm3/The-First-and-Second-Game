@@ -90,6 +90,17 @@ public class TemplatesReadables {
 		Templates.DOCUMENTS.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
 
+		Templates.MESSAGE = new GameObject();
+		Templates.MESSAGE.name = "Message";
+		Templates.MESSAGE.setImageAndExtrapolateSize("message.png");
+		Templates.MESSAGE.totalHealth = Templates.DOCUMENTS.remainingHealth = 5;
+		Templates.MESSAGE.weight = 2f;
+		Templates.MESSAGE.value = 0;
+		Templates.MESSAGE.anchorX = 12;
+		Templates.MESSAGE.anchorY = 28;
+		Templates.MESSAGE.templateId = GameObject.generateNewTemplateId();
+		Templates.MESSAGE.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 1));
+
 	}
 
 }
