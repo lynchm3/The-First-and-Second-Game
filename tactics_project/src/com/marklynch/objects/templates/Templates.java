@@ -441,6 +441,8 @@ public class Templates {
 	public static Spikes SPIKE_FLOOR;
 	public static Spikes SPIKE_WALL_DOWN;
 
+	public static GameObject MESSAGE_IN_A_BOTTLE;
+
 	// Floor
 	public static GameObject STONE_FLOOR;
 	public static GameObject CIRCLE_FLOOR;

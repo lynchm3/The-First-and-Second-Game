@@ -218,6 +218,8 @@ public class AreaTown {
 				new GameObject[] {}, new GameObject[] {}, null);
 		Templates.CHEST.makeCopy(Game.level.squares[posX + 107][posY + 33], false, null);
 		Templates.CRATE.makeCopy(Game.level.squares[posX + 106][posY + 31], false, null);
+		Templates.MESSAGE_IN_A_BOTTLE.makeCopy(Game.level.squares[posX + 89][posY + 34], null);
+		Templates.MESSAGE_IN_A_BOTTLE.makeCopy(Game.level.squares[posX + 90][posY + 34], null);
 		// new BodyOfWater(105, 30, 106, 37);
 
 		// River

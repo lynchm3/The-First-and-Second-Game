@@ -73,9 +73,6 @@ public class MapLevelGameObject extends GameObject {
 		float mouseX = Mouse.getX();
 		float mouseY = Game.windowHeight - Mouse.getY();
 
-		System.out.println("MapLevelGameObject mouseX = " + mouseX);
-		System.out.println("MapLevelGameObject mouseY = " + mouseY);
-
 //		point.x -= x;
 //		point.y -= y;
 
@@ -89,9 +86,6 @@ public class MapLevelGameObject extends GameObject {
 				- (Game.SQUARE_HEIGHT - Game.SQUARE_HEIGHT * Game.zoom) - (Game.HALF_SQUARE_HEIGHT * Game.zoom);
 		float drawPositionX2 = drawPositionX1 + (int) this.width;
 		float drawPositionY2 = drawPositionY1 + (int) this.height;
-
-		System.out.println("MapLevelGameObject drawPositionX1 = " + drawPositionX1);
-		System.out.println("MapLevelGameObject drawPositionY1 = " + drawPositionY1);
 
 		mouseX -= drawPositionX1;
 		mouseY -= drawPositionY1;

@@ -437,6 +437,14 @@ public class TemplatesNature {
 		Templates.LEAVES.orderingOnGound = 20;
 		Templates.LEAVES.templateId = GameObject.generateNewTemplateId();
 
+		Templates.MESSAGE_IN_A_BOTTLE = new GameObject();
+		Templates.MESSAGE_IN_A_BOTTLE.name = "Message in a bottle";
+		Templates.MESSAGE_IN_A_BOTTLE.setImageAndExtrapolateSize("message_in_a_bottle.png");
+		Templates.MESSAGE_IN_A_BOTTLE.totalHealth = Templates.MESSAGE_IN_A_BOTTLE.remainingHealth = 24;
+		Templates.MESSAGE_IN_A_BOTTLE.weight = 17;
+		Templates.MESSAGE_IN_A_BOTTLE.value = 152;
+		Templates.MESSAGE_IN_A_BOTTLE.templateId = GameObject.generateNewTemplateId();
+
 	}
 
 }

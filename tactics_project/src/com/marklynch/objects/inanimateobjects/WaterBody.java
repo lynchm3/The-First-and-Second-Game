@@ -214,8 +214,10 @@ public class WaterBody extends WaterSource implements Consumable, UpdatableGameO
 			if (gameObject == this)
 				continue;
 
-			for (Effect effect : this.touchEffects) {
-				gameObject.addEffect(effect.makeCopy(this, gameObject));
+			if (touchEffects != null) {
+				for (Effect effect : this.touchEffects) {
+					gameObject.addEffect(effect.makeCopy(this, gameObject));
+				}
 			}
 		}
 

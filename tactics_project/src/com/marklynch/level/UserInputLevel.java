@@ -249,7 +249,7 @@ public class UserInputLevel {
 		} else {
 
 			if (Game.zoom == Game.zoomLevels[Game.MAP_MODE_ZOOM_LEVEL_INDEX]) {
-				System.out.println("MapLevelGameObject.instances = " + MapLevelGameObject.instances);
+//				System.out.println("MapLevelGameObject.instances = " + MapLevelGameObject.instances);
 				for (GameObject gameObject : MapLevelGameObject.instances) {
 					if (gameObject.squareGameObjectIsOn != null && gameObject.squareGameObjectIsOn.seenByPlayer) {
 						if (((MapLevelGameObject) gameObject).checkIfPointOnGameObject()) {
