@@ -366,6 +366,7 @@ public class Templates {
 	public static ContainerForLiquids JAR_OF_LAVA;
 	public static ContainerForLiquids JAR_OF_BLOOD;
 	public static ContainerForLiquids JAR_OF_SOUP;
+	public static ContainerForLiquids MESSAGE_IN_A_JAR;
 
 	public static Liquid WATER;
 	public static Liquid POISON;
@@ -440,8 +441,6 @@ public class Templates {
 	public static Landmine LANDMINE;
 	public static Spikes SPIKE_FLOOR;
 	public static Spikes SPIKE_WALL_DOWN;
-
-	public static GameObject MESSAGE_IN_A_BOTTLE;
 
 	// Floor
 	public static GameObject STONE_FLOOR;

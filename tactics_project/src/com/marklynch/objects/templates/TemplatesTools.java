@@ -303,7 +303,7 @@ public class TemplatesTools {
 		Templates.JAR_OF_LAVA.highLevelStats.put(HIGH_LEVEL_STATS.FIRE_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.FIRE_DAMAGE, 20));
 		Templates.JAR_OF_LAVA.setImageAndExtrapolateSize("jar_of_lava.png");
-		Templates.JAR_OF_LAVA.totalHealth = Templates.JAR_OF_BLOOD.remainingHealth = 14;
+		Templates.JAR_OF_LAVA.totalHealth = Templates.JAR_OF_LAVA.remainingHealth = 14;
 		Templates.JAR_OF_LAVA.weight = 10f;
 		Templates.JAR_OF_LAVA.value = 78;
 		Templates.JAR_OF_LAVA.anchorX = 56;
@@ -319,7 +319,7 @@ public class TemplatesTools {
 		Templates.JAR_OF_SOUP.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
 				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
 		Templates.JAR_OF_SOUP.setImageAndExtrapolateSize("jar_of_soup.png");
-		Templates.JAR_OF_SOUP.totalHealth = Templates.JAR_OF_BLOOD.remainingHealth = 14;
+		Templates.JAR_OF_SOUP.totalHealth = Templates.JAR_OF_SOUP.remainingHealth = 14;
 		Templates.JAR_OF_SOUP.weight = 10f;
 		Templates.JAR_OF_SOUP.value = 78;
 		Templates.JAR_OF_SOUP.anchorX = 56;
@@ -329,6 +329,30 @@ public class TemplatesTools {
 		Templates.SOUP.jarForm = Templates.JAR_OF_SOUP;
 		Templates.JAR_OF_SOUP.liquid = Templates.SOUP.makeCopy(null, null, 1);
 		Templates.JAR_OF_SOUP.flipYAxisInMirror = false;
+
+		Templates.MESSAGE_IN_A_JAR = new ContainerForLiquids();
+		Templates.MESSAGE_IN_A_JAR.name = "Message in a jar";
+		Templates.MESSAGE_IN_A_JAR.highLevelStats.put(HIGH_LEVEL_STATS.SLASH_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.SLASH_DAMAGE, 6));
+		Templates.MESSAGE_IN_A_JAR.setImageAndExtrapolateSize("jar_message.png");
+		Templates.MESSAGE_IN_A_JAR.totalHealth = Templates.MESSAGE_IN_A_JAR.remainingHealth = 14;
+		Templates.MESSAGE_IN_A_JAR.weight = 10f;
+		Templates.MESSAGE_IN_A_JAR.value = 78;
+		Templates.MESSAGE_IN_A_JAR.anchorX = 56;
+		Templates.MESSAGE_IN_A_JAR.anchorY = 100;
+		Templates.MESSAGE_IN_A_JAR.templateId = GameObject.generateNewTemplateId();
+		Templates.MESSAGE_IN_A_JAR.volume = 1;
+//		Templates.MESSAGE.jarForm = Templates.MESSAGE_IN_A_JAR;
+		Templates.MESSAGE_IN_A_JAR.liquid = Templates.SOUP.makeCopy(null, null, 1);
+		Templates.MESSAGE_IN_A_JAR.flipYAxisInMirror = false;
+
+//		Templates.MESSAGE_IN_A_BOTTLE = new GameObject();
+//		Templates.MESSAGE_IN_A_BOTTLE.name = "Message in a bottle";
+//		Templates.MESSAGE_IN_A_BOTTLE.setImageAndExtrapolateSize("message_in_a_bottle.png");
+//		Templates.MESSAGE_IN_A_BOTTLE.totalHealth = Templates.MESSAGE_IN_A_BOTTLE.remainingHealth = 24;
+//		Templates.MESSAGE_IN_A_BOTTLE.weight = 17;
+//		Templates.MESSAGE_IN_A_BOTTLE.value = 152;
+//		Templates.MESSAGE_IN_A_BOTTLE.templateId = GameObject.generateNewTemplateId();
 
 	}
 
