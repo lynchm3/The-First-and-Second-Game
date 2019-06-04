@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.animation.KeyFrame;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 
-public class AnimationPour extends Animation {
+public class AnimationEmpty extends Animation {
 
 	public Square targetSquare;
 
@@ -13,7 +13,7 @@ public class AnimationPour extends Animation {
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
-	public AnimationPour(GameObject performer, Square targetSquare, Animation oldAnimation,
+	public AnimationEmpty(GameObject performer, Square targetSquare, Animation oldAnimation,
 			OnCompletionListener onCompletionListener) {
 		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer,
 				targetSquare);

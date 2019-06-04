@@ -18,7 +18,7 @@ import com.marklynch.actions.ActionHide;
 import com.marklynch.actions.ActionIgnite;
 import com.marklynch.actions.ActionLift;
 import com.marklynch.actions.ActionMove;
-import com.marklynch.actions.ActionOpenInventoryToPourItems;
+import com.marklynch.actions.ActionOpenInventoryToEmptyItems;
 import com.marklynch.actions.ActionOpenOtherInventory;
 import com.marklynch.actions.ActionPet;
 import com.marklynch.actions.ActionSellItems;
@@ -1897,7 +1897,7 @@ public class Actor extends GameObject {
 				actions.addAll(equipped.getAllActionsForEquippedItem(performer));
 			}
 
-			actions.add(new ActionOpenInventoryToPourItems(performer, this));
+			actions.add(new ActionOpenInventoryToEmptyItems(performer, this));
 			actions.add(new ActionIgnite(performer, this, null));
 			actions.add(new ActionDouse(performer, this));
 

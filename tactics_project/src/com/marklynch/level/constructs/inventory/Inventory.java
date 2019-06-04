@@ -60,8 +60,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_NEWEST;
 
 	public enum INVENTORY_FILTER_BY {
-		FILTER_BY_ALL, FILTER_BY_WEAPON, FILTER_BY_ARMOR, FILTER_BY_EQUIPPED, FILTER_BY_FOOD,
-		FILTER_BY_FULL_CONTAINER_FOR_LIQUIDS, FILTER_BY_EMPTY_CONTAINER_FOR_LIQUIDS
+		FILTER_BY_ALL, FILTER_BY_WEAPON, FILTER_BY_ARMOR, FILTER_BY_EQUIPPED, FILTER_BY_FOOD, FILTER_BY_FULL_JAR,
+		FILTER_BY_EMPTY_CONTAINER_FOR_LIQUIDS
 	}
 
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
@@ -69,7 +69,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public enum INVENTORY_MODE {
 		MODE_NORMAL, MODE_SELECT_ITEM_TO_FILL, MODE_SELECT_ITEM_TO_DROP, MODE_SELECT_ITEM_TO_THROW,
-		MODE_SELECT_ITEM_TO_GIVE, MODE_SELECT_ITEM_TO_POUR, MODE_SELECT_MAP_MARKER, MODE_TRADE, MODE_LOOT
+		MODE_SELECT_ITEM_TO_GIVE, MODE_SELECT_ITEM_TO_EMPTY, MODE_SELECT_MAP_MARKER, MODE_TRADE, MODE_LOOT
 	}
 
 	public static transient INVENTORY_MODE inventoryMode = INVENTORY_MODE.MODE_NORMAL;
@@ -467,7 +467,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			buttons.addAll(buttonsFilter);
 			buttons.addAll(buttonsSort);
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL
-				|| inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
+				|| inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_EMPTY) {
 			buttons.addAll(buttonsSort);
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
 
@@ -678,7 +678,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					}
 				}
 			}
-		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_FULL_CONTAINER_FOR_LIQUIDS) {
+		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_FULL_JAR) {
 			for (GameObject gameObject : gameObjects) {
 				if (gameObject instanceof Jar) {
 					if (((Jar) gameObject).contents != null) {
@@ -1432,9 +1432,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE, 1f,
 					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
-		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
+		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_EMPTY) {
 			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE, 1f,
-					new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
+					new Object[] { new StringWithColor("Please Select a Container to Empty Out", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
 			TextUtils.printTextWithImages(100f, 32f, 300f, true, null, Color.WHITE, 1f,
 					new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });

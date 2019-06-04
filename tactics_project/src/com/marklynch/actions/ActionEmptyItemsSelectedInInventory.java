@@ -6,21 +6,21 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.Jar;
 
-public class ActionPourItemsSelectedInInventory extends Action {
+public class ActionEmptyItemsSelectedInInventory extends Action {
 
-	public static final String ACTION_NAME = "Pour";
-	Jar objectToPour;
+	public static final String ACTION_NAME = "Empty";
+	Jar jar;
 	InventorySquare inventorySquare;
 
-	public ActionPourItemsSelectedInInventory(GameObject performer, Object target, Jar objectToPour) {
+	public ActionEmptyItemsSelectedInInventory(GameObject performer, Object target, Jar jar) {
 		super(ACTION_NAME, textureDrop, performer, target);
-		this.objectToPour = objectToPour;
-		this.inventorySquare = objectToPour.inventorySquare;
+		this.jar = jar;
+		this.inventorySquare = jar.inventorySquare;
 
 		if (!check()) {
 			enabled = false;
 		} else {
-			actionName = ACTION_NAME + " " + objectToPour.name;
+			actionName = ACTION_NAME + " " + jar.name;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -37,7 +37,7 @@ public class ActionPourItemsSelectedInInventory extends Action {
 			return;
 
 //		if (inventorySquare.stack.size() <= 5) {
-		new ActionPourItem(gameObjectPerformer, targetGameObjectOrSquare, objectToPour).perform();
+		new ActionEmptyItem(gameObjectPerformer, targetGameObjectOrSquare, jar).perform();
 //		} else
 //
 //		{
@@ -54,21 +54,10 @@ public class ActionPourItemsSelectedInInventory extends Action {
 
 		if (gameObjectPerformer instanceof Actor) {
 			Actor actor = (Actor) gameObjectPerformer;
-			if (!actor.inventory.contains(objectToPour)) {
+			if (!actor.inventory.contains(jar)) {
 				return false;
 			}
 		}
-
-//		else {
-//			if (!gameObjectPerformer.inventory.contains(objectToPour)) {
-//				return false;
-//			}
-//		}
-
-//		if (!targetSquare.inventory.canShareSquare && !objectToPour.canShareSquare) {
-//			disabledReason = NO_SPACE;
-//			return false;
-//		}
 
 		return true;
 	}

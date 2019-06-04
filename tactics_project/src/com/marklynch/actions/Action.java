@@ -73,7 +73,7 @@ public abstract class Action {
 	public static Texture texturePickpocketAll;
 	public static Texture texturePickUp;
 	public static Texture texturePoison;
-	public static Texture texturePour;
+	public static Texture textureEmpty;
 	public static Texture texturePut;
 	public static Texture textureRead;
 	public static Texture textureRing;
@@ -290,7 +290,7 @@ public abstract class Action {
 		texturePickpocketAll = getGlobalImage("action_pickpocket_all.png", false);// untested
 		texturePickUp = getGlobalImage("action_pick_up.png", false);
 		texturePoison = getGlobalImage("action_posion.png", false);
-		texturePour = getGlobalImage("action_pour.png", false);
+		textureEmpty = getGlobalImage("action_empty.png", false);
 		texturePut = getGlobalImage("action_put.png", false);// untested
 		textureRead = getGlobalImage("action_read.png", false);
 		textureRing = getGlobalImage("action_ring.png", false);

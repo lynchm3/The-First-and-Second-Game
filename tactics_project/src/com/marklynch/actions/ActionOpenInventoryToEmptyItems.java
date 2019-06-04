@@ -10,11 +10,11 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Monster;
 import com.marklynch.objects.actors.WildAnimal;
 
-public class ActionOpenInventoryToPourItems extends Action {
+public class ActionOpenInventoryToEmptyItems extends Action {
 
-	public static final String ACTION_NAME = "Pour";
+	public static final String ACTION_NAME = "Empty";
 
-	public ActionOpenInventoryToPourItems(Actor performer, Object target) {
+	public ActionOpenInventoryToEmptyItems(Actor performer, Object target) {
 		super(ACTION_NAME, textureEllipse, performer, target);
 		super.gameObjectPerformer = this.performer = performer;
 		if (!check()) {
@@ -41,10 +41,10 @@ public class ActionOpenInventoryToPourItems extends Action {
 			}
 		} else {
 
-			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR);
+			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_EMPTY);
 			Game.level.player.inventory.open();
 			Inventory.target = this.targetGameObjectOrSquare;
-			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_FULL_CONTAINER_FOR_LIQUIDS,
+			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_FULL_JAR,
 					true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 		}

@@ -21,6 +21,8 @@ import com.marklynch.actions.ActionDouse;
 import com.marklynch.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.actions.ActionEatItems;
 import com.marklynch.actions.ActionEatItemsSelectedInInventory;
+import com.marklynch.actions.ActionEmptyItem;
+import com.marklynch.actions.ActionEmptyItemsSelectedInInventory;
 import com.marklynch.actions.ActionEquip;
 import com.marklynch.actions.ActionFillSpecificJar;
 import com.marklynch.actions.ActionFishingStart;
@@ -37,14 +39,12 @@ import com.marklynch.actions.ActionMining;
 import com.marklynch.actions.ActionMove;
 import com.marklynch.actions.ActionOpen;
 import com.marklynch.actions.ActionOpenInventoryToDropItems;
+import com.marklynch.actions.ActionOpenInventoryToEmptyItems;
 import com.marklynch.actions.ActionOpenInventoryToFillContainer;
 import com.marklynch.actions.ActionOpenInventoryToGiveItems;
-import com.marklynch.actions.ActionOpenInventoryToPourItems;
 import com.marklynch.actions.ActionOpenInventoryToThrowItems;
 import com.marklynch.actions.ActionOpenOtherInventory;
 import com.marklynch.actions.ActionPeek;
-import com.marklynch.actions.ActionPourItem;
-import com.marklynch.actions.ActionPourItemsSelectedInInventory;
 import com.marklynch.actions.ActionRead;
 import com.marklynch.actions.ActionRemoveMapMarker;
 import com.marklynch.actions.ActionRename;
@@ -1188,7 +1188,7 @@ public class GameObject
 			return null;
 
 		if (this.templateId == Templates.INPUT_DRAIN.templateId) {
-			return new ActionOpenInventoryToPourItems(performer, this);
+			return new ActionOpenInventoryToEmptyItems(performer, this);
 		}
 
 		if (isFloorObject) {
@@ -1462,9 +1462,9 @@ public class GameObject
 		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn)
 			actions.add(new ActionOpenInventoryToThrowItems(performer, this));
 
-		// Pour from inventory
+		// Empty from inventory
 		if (!decorative)
-			actions.add(new ActionOpenInventoryToPourItems(performer, this));
+			actions.add(new ActionOpenInventoryToEmptyItems(performer, this));
 
 		if (!decorative)
 			actions.add(new ActionIgnite(performer, this, null));
@@ -1625,8 +1625,8 @@ public class GameObject
 			return new ActionThrowItem(performer, Inventory.target, this);
 		}
 
-		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
-			return new ActionPourItemsSelectedInInventory(performer, Inventory.target, (Jar) this);
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_EMPTY) {
+			return new ActionEmptyItemsSelectedInInventory(performer, Inventory.target, (Jar) this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
@@ -1709,7 +1709,7 @@ public class GameObject
 			return actions;
 		}
 
-		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_EMPTY) {
 			return actions;
 		}
 
@@ -2246,7 +2246,7 @@ public class GameObject
 	public Action getDefaultActionForEquippedItem(Actor performer, Square square) {
 
 		if (this instanceof Jar && ((Jar) this).contents != null) {
-			return new ActionPourItem(performer, square, (Jar) this);
+			return new ActionEmptyItem(performer, square, (Jar) this);
 		}
 
 		if (this instanceof Bell) {
@@ -2406,9 +2406,9 @@ public class GameObject
 		// Game.level.player.squareGameObjectIsOn)
 		// actions.add(new ActionOpenInventoryToThrowItems(performer, this, null));
 		//
-		// // Pour from inventory
+		// // Empty from inventory
 		// if (!decorative)
-		// actions.add(new ActionPourContainerInInventory(performer, this, null));
+		// actions.add(new ActionEmptyContainerInInventory(performer, this, null));
 		//
 		// if (!decorative)
 		// actions.add(new ActionIgnite(performer, this));

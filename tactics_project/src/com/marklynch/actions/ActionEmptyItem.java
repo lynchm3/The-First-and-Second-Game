@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
-import com.marklynch.level.constructs.animation.primary.AnimationPour;
+import com.marklynch.level.constructs.animation.primary.AnimationEmpty;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Monster;
@@ -15,15 +15,15 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Jar;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionPourItem extends Action {
+public class ActionEmptyItem extends Action {
 
-	public static final String ACTION_NAME = "Pour";
+	public static final String ACTION_NAME = "Empty";
 	Jar jar;
 	private GameObject previouslyEquipped;
 
 	// Default for hostiles
-	public ActionPourItem(GameObject performer, Object target, Jar container) {
-		super(ACTION_NAME, texturePour, performer, target);
+	public ActionEmptyItem(GameObject performer, Object target, Jar container) {
+		super(ACTION_NAME, textureEmpty, performer, target);
 
 		this.jar = container;
 		if (!check()) {
@@ -49,7 +49,7 @@ public class ActionPourItem extends Action {
 		performer.equipped = jar;
 
 		if (targetGameObject != gameObjectPerformer) {
-			gameObjectPerformer.setPrimaryAnimation(new AnimationPour(gameObjectPerformer, targetSquare,
+			gameObjectPerformer.setPrimaryAnimation(new AnimationEmpty(gameObjectPerformer, targetSquare,
 					gameObjectPerformer.getPrimaryAnimation(), new OnCompletionListener() {
 						@Override
 						public void animationComplete(GameObject gameObject) {
@@ -64,9 +64,9 @@ public class ActionPourItem extends Action {
 		if (Game.level.shouldLog(targetGameObject, performer)) {
 			if (targetGameObject != null) {
 				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " poured ", jar, " on ", targetGameObject }));
+						new ActivityLog(new Object[] { performer, " emptied ", jar, " on ", targetGameObject }));
 			} else {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " poured out ", jar }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " emptied out ", jar }));
 
 			}
 		}
