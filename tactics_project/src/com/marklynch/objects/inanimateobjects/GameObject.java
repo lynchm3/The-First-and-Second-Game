@@ -1345,8 +1345,14 @@ public class GameObject
 		}
 
 		// Food / Drink
-		if (this instanceof Food || this instanceof Liquid || this instanceof Jar || this instanceof WaterBody) {
+		if (this instanceof Food || this instanceof Liquid || this instanceof WaterBody) {
 			actions.add(new ActionEatItems(performer, this));
+		}
+
+		if (this instanceof Jar) {
+			if (((Jar) this).contents instanceof Liquid) {
+				actions.add(new ActionEatItems(performer, this));
+			}
 		}
 
 		// Switch
@@ -1660,7 +1666,7 @@ public class GameObject
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_NORMAL) {
 
 			// Food / drink
-			if (this instanceof Food || this instanceof Liquid || this instanceof Jar || this instanceof WaterBody) {
+			if (this instanceof Food || this instanceof Liquid || this instanceof WaterBody) {
 				return new ActionEatItemsSelectedInInventory(performer, this);
 			}
 
@@ -1732,8 +1738,14 @@ public class GameObject
 			actions.add(new ActionEquip(performer, this));
 
 		// Food/drink
-		if (this instanceof Food || this instanceof Liquid || this instanceof Jar || this instanceof WaterBody) {
+		if (this instanceof Food || this instanceof Liquid || this instanceof WaterBody) {
 			actions.add(new ActionEatItemsSelectedInInventory(performer, this));
+		}
+
+		if (this instanceof Jar) {
+			if (((Jar) this).contents instanceof Liquid) {
+				actions.add(new ActionEatItemsSelectedInInventory(performer, this));
+			}
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
@@ -2346,8 +2358,14 @@ public class GameObject
 		}
 
 		// Food / Drink
-		if (this instanceof Food || this instanceof Liquid || this instanceof Jar || this instanceof WaterBody) {
+		if (this instanceof Food || this instanceof Liquid || this instanceof WaterBody) {
 			actions.add(new ActionEatItems(performer, this));
+		}
+
+		if (this instanceof Jar) {
+			if (((Jar) this).contents instanceof Liquid) {
+				actions.add(new ActionEatItems(performer, this));
+			}
 		}
 
 		// Switch
