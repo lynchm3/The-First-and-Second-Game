@@ -9,6 +9,7 @@ import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
+import com.marklynch.utils.ArrayList;
 
 public class PopupMenuSelectObject extends PopupMenu {
 	public PopupMenuButton selectSquareButton;
@@ -85,14 +86,14 @@ public class PopupMenuSelectObject extends PopupMenu {
 
 		}
 
-		Action action = null;
+		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 
 		if (Level.player.equipped != null) {
-			action = Level.player.equipped.getDefaultActionForEquippedItem(Level.player, square);
+			actions = Level.player.equipped.getAllActionsForEquippedItem(Level.player);
 //			action = new ActionMove(Level.player, square, true);
 		}
 
-		if (action != null) {
+		for (Action action : actions) {
 			final PopupMenuActionButton actionButton = new PopupMenuActionButton(0, buttons.size() * 30, 128, 30, null,
 					null, action.actionName, true, true, action, this);
 			actionButton.enabled = action.enabled;

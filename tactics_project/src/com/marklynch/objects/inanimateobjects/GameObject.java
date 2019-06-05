@@ -2333,6 +2333,10 @@ public class GameObject
 			return actions;
 		}
 
+		if (this instanceof Jar && ((Jar) this).contents != null) {
+			actions.add(new ActionEmptyItem(performer, performer.squareGameObjectIsOn, (Jar) this));
+		}
+
 		if (this instanceof Bell) {
 			actions.add(new ActionRing(performer, this));
 		}
