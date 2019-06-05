@@ -35,6 +35,7 @@ public class ActionEmptyItem extends Action {
 
 	@Override
 	public void perform() {
+
 		super.perform();
 
 		if (!enabled)
@@ -46,15 +47,15 @@ public class ActionEmptyItem extends Action {
 		previouslyEquipped = performer.equipped;
 		performer.equipped = jar;
 
-		if (targetGameObject != gameObjectPerformer) {
-			gameObjectPerformer.setPrimaryAnimation(new AnimationEmpty(gameObjectPerformer, targetSquare,
-					gameObjectPerformer.getPrimaryAnimation(), new OnCompletionListener() {
-						@Override
-						public void animationComplete(GameObject gameObject) {
-							postAnimation();
-						}
-					}));
-		}
+//		if (targetGameObject != gameObjectPerformer) {
+		gameObjectPerformer.setPrimaryAnimation(new AnimationEmpty(gameObjectPerformer, targetSquare,
+				gameObjectPerformer.getPrimaryAnimation(), new OnCompletionListener() {
+					@Override
+					public void animationComplete(GameObject gameObject) {
+						postAnimation();
+					}
+				}));
+//		}
 	}
 
 	public void postAnimation() {
