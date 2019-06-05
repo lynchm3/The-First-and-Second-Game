@@ -18,6 +18,7 @@ import com.marklynch.actions.ActionClose;
 import com.marklynch.actions.ActionDie;
 import com.marklynch.actions.ActionDigging;
 import com.marklynch.actions.ActionDouse;
+import com.marklynch.actions.ActionDropItems;
 import com.marklynch.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.actions.ActionEatDrinkItems;
 import com.marklynch.actions.ActionEatDrinkItemsSelectedInInventory;
@@ -2325,7 +2326,7 @@ public class GameObject
 		return null;
 	}
 
-	public ArrayList<Action> getAllActionsForEquippedItem(Actor performer) {
+	public ArrayList<Action> getAllActionsForEquippedItem(Actor performer, Square square) {
 
 		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 
@@ -2334,7 +2335,7 @@ public class GameObject
 		}
 
 		if (this instanceof Jar && ((Jar) this).contents != null) {
-			actions.add(new ActionEmptyItem(performer, performer.squareGameObjectIsOn, (Jar) this));
+			actions.add(new ActionEmptyItem(performer, square, (Jar) this));
 		}
 
 		if (this instanceof Bell) {
@@ -2407,7 +2408,7 @@ public class GameObject
 		if (this instanceof Helmet || this instanceof BodyArmor || this instanceof LegArmor)
 			actions.add(new ActionEquip(performer, this));
 
-		actions.add(new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this));
+		actions.add(new ActionDropItems(performer, square, this));
 
 		if (this.inventoryThatHoldsThisObject == Level.player.inventory && !(this instanceof Gold)) {
 			actions.add(new ActionStarSpecificItem(this));

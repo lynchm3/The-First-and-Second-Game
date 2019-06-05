@@ -1894,7 +1894,7 @@ public class Actor extends GameObject {
 			actions.add(new ActionWait(performer, performer.squareGameObjectIsOn));
 
 			if (equipped != null) {
-				actions.addAll(equipped.getAllActionsForEquippedItem(performer));
+				actions.addAll(equipped.getAllActionsForEquippedItem(performer, this.squareGameObjectIsOn));
 			}
 
 			actions.add(new ActionOpenInventoryToEmptyItems(performer, this));

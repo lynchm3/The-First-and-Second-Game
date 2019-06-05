@@ -89,7 +89,8 @@ public class PopupMenuSelectObject extends PopupMenu {
 		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 
 		if (Level.player.equipped != null) {
-			actions = Level.player.equipped.getAllActionsForEquippedItem(Level.player);
+			actions = Level.player.equipped.getAllActionsForEquippedItem(Level.player,
+					PopupMenuSelectObject.this.square);
 //			action = new ActionMove(Level.player, square, true);
 		}
 
