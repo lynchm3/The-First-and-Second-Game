@@ -7,8 +7,6 @@ import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationEmpty;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.actors.Monster;
-import com.marklynch.objects.actors.WildAnimal;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.templates.Templates;
@@ -165,24 +163,7 @@ public class ActionEmptyItem extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		// Empty square, it's fine
-		if (targetGameObject == null)
-			return true;
-
-		// Something that belongs to some one else
-		if (targetGameObject.owner != null && targetGameObject.owner != performer) {
-			illegalReason = VANDALISM;
-			return false;
-		}
-
-		// Is human
-		if (targetGameObject instanceof Actor)
-			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof WildAnimal)) {
-				illegalReason = ASSAULT;
-				return false;
-			}
-
-		return true;
+		return standardAttackLegalityCheck(performer, targetGameObject);
 	}
 
 	@Override
