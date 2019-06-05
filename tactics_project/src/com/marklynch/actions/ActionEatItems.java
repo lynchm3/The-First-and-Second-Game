@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
+import com.marklynch.level.constructs.animation.primary.AnimationEmpty;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
@@ -25,6 +27,8 @@ public class ActionEatItems extends VariableQtyAction {
 	public static final String ACTION_NAME_DRINK = "Drink";
 
 	GameObject[] targets;
+	private GameObject previouslyEquipped;
+	int amountToEat;
 
 	public ActionEatItems(Actor performer, ArrayList<GameObject> objects) {
 		this(performer, objects.toArray(new GameObject[objects.size()]), false);
@@ -36,8 +40,8 @@ public class ActionEatItems extends VariableQtyAction {
 
 	public ActionEatItems(Actor performer, GameObject[] objects, boolean doesNothing) {
 		super(ACTION_NAME, textureEat, performer, null);
-		if (objects != null && objects.length > 0 && (objects[0] instanceof Liquid
-				|| objects[0] instanceof Jar || objects[0] instanceof WaterBody)) {
+		if (objects != null && objects.length > 0
+				&& (objects[0] instanceof Liquid || objects[0] instanceof Jar || objects[0] instanceof WaterBody)) {
 			this.actionName = ACTION_NAME_DRINK;
 			this.image = textureDrink;
 		}
@@ -59,10 +63,25 @@ public class ActionEatItems extends VariableQtyAction {
 		if (!checkRange())
 			return;
 
-		int amountToEat = Math.min(targets.length, qty);
+		amountToEat = Math.min(targets.length, qty);
 
 		if (amountToEat == 0)
 			return;
+
+		previouslyEquipped = performer.equipped;
+		performer.equipped = targets[0];
+
+		gameObjectPerformer.setPrimaryAnimation(
+				new AnimationEmpty(gameObjectPerformer, performer.squareGameObjectIsOn.getSquareToRightOf(),
+						gameObjectPerformer.getPrimaryAnimation(), new OnCompletionListener() {
+							@Override
+							public void animationComplete(GameObject gameObject) {
+								postAnimation();
+							}
+						}));
+	}
+
+	private void postAnimation() {
 
 		for (int i = 0; i < amountToEat; i++) {
 			GameObject object = targets[i];
@@ -122,6 +141,7 @@ public class ActionEatItems extends VariableQtyAction {
 				notifyWitnessesOfCrime(crime);
 			}
 		}
+
 	}
 
 	@Override
