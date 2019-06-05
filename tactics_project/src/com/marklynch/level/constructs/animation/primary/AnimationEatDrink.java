@@ -14,8 +14,9 @@ public class AnimationEatDrink extends Animation {
 		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer, null);
 		if (!runAnimation)
 			return;
-		float right = -1.5f;
-		targetRadians = right;
+
+		float targetShoulderRadians = -1.5f;
+		float targetElbowRadians = -2.5f;
 
 		backwards = performer.backwards;
 
@@ -25,14 +26,14 @@ public class AnimationEatDrink extends Animation {
 		kf0.offsetX = 0;
 		kf0.offsetY = 0;
 		kf0.leftShoulderAngle = 0;
-		kf0.rightShoulderAngle = targetRadians;
+		kf0.rightShoulderAngle = targetShoulderRadians;
 		kf0.leftElbowAngle = 0;
-		kf0.rightElbowAngle = 0;
+		kf0.rightElbowAngle = targetElbowRadians;
 		kf0.leftHipAngle = 0;
 		kf0.rightHipAngle = 0;
 		kf0.leftKneeAngle = 0;
 		kf0.rightKneeAngle = 0;
-		kf0.setAllSpeeds(0.01f);
+		kf0.setAllSpeeds(0.005f);
 		kf0.offsetXSpeed = 1;
 		kf0.offsetYSpeed = 1;
 		keyFrames.add(kf0);
@@ -44,8 +45,6 @@ public class AnimationEatDrink extends Animation {
 
 		blockAI = true;
 	}
-
-	float targetRadians = 0;
 
 	@Override
 	public void update(double delta) {
