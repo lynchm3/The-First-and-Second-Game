@@ -11,12 +11,11 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.utils.Consumable;
 import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
-public class WaterBody extends WaterSource implements Consumable, UpdatableGameObject {
+public class WaterBody extends WaterSource implements UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
@@ -193,11 +192,6 @@ public class WaterBody extends WaterSource implements Consumable, UpdatableGameO
 		waterBody.imageTexture = waterBody.textures.get(texturesIndex);
 
 		return waterBody;
-	}
-
-	@Override
-	public Effect[] getConsumeEffects() {
-		return consumeEffects;
 	}
 
 	@Override

@@ -9,14 +9,14 @@ import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.tools.Jar;
 
-public class ActionEatItemsSelectedInInventory extends Action {
+public class ActionEatDrinkItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Eat";
 	public static final String ACTION_NAME_DRINK = "Drink";
 
 	InventorySquare inventorySquare;
 
-	public ActionEatItemsSelectedInInventory(Actor performer, GameObject target) {
+	public ActionEatDrinkItemsSelectedInInventory(Actor performer, GameObject target) {
 
 		// public ActionTakeItems(Actor performer, Object target, GameObject
 		// object) {
@@ -44,9 +44,9 @@ public class ActionEatItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionEatItems(performer, targetGameObject).perform();
+			new ActionEatDrinkItems(performer, targetGameObject).perform();
 		} else {
-			Game.level.player.inventory.showQTYDialog(new ActionEatItems(performer, targetGameObject.inventorySquare.stack),
+			Game.level.player.inventory.showQTYDialog(new ActionEatDrinkItems(performer, targetGameObject.inventorySquare.stack),
 					inventorySquare.stack.size(), "Enter qty to eat (available: " + inventorySquare.stack.size() + ")",
 					0);
 		}

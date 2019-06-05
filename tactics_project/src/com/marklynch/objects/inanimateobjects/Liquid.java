@@ -9,13 +9,12 @@ import com.marklynch.level.constructs.effect.EffectShock;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.utils.Consumable;
 import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Texture;
 
-public class Liquid extends GameObject implements Consumable, UpdatableGameObject {
+public class Liquid extends GameObject implements UpdatableGameObject {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public float volume = 1;
@@ -76,11 +75,6 @@ public class Liquid extends GameObject implements Consumable, UpdatableGameObjec
 
 		liquid.jarForm = jarForm;
 		return liquid;
-	}
-
-	@Override
-	public Effect[] getConsumeEffects() {
-		return consumeEffects;
 	}
 
 	@Override

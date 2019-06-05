@@ -9,7 +9,7 @@ import java.util.Random;
 import com.marklynch.Game;
 import com.marklynch.actions.ActionAttack;
 import com.marklynch.actions.ActionChopping;
-import com.marklynch.actions.ActionEatItems;
+import com.marklynch.actions.ActionEatDrinkItems;
 import com.marklynch.actions.ActionMining;
 import com.marklynch.actions.ActionMove;
 import com.marklynch.actions.ActionSkin;
@@ -632,7 +632,7 @@ public class AIRoutineUtils {
 	public static boolean eatTarget(GameObject target) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
 		if (weaponDistance <= 1) {
-			new ActionEatItems(Game.level.activeActor, target).perform();
+			new ActionEatDrinkItems(Game.level.activeActor, target).perform();
 			return true;
 		} else {
 			return false;

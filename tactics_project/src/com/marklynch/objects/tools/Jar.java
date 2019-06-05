@@ -10,11 +10,10 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.utils.Consumable;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayList;
 
-public class Jar extends Tool implements Consumable {
+public class Jar extends Tool {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public float volume;

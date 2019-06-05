@@ -18,10 +18,9 @@ import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Jar;
-import com.marklynch.objects.utils.Consumable;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionEatItems extends VariableQtyAction {
+public class ActionEatDrinkItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Eat";
 	public static final String ACTION_NAME_DRINK = "Drink";
@@ -30,15 +29,15 @@ public class ActionEatItems extends VariableQtyAction {
 	private GameObject previouslyEquipped;
 	int amountToEat;
 
-	public ActionEatItems(Actor performer, ArrayList<GameObject> objects) {
+	public ActionEatDrinkItems(Actor performer, ArrayList<GameObject> objects) {
 		this(performer, objects.toArray(new GameObject[objects.size()]), false);
 	}
 
-	public ActionEatItems(Actor performer, GameObject... objects) {
+	public ActionEatDrinkItems(Actor performer, GameObject... objects) {
 		this(performer, objects, false);
 	}
 
-	public ActionEatItems(Actor performer, GameObject[] objects, boolean doesNothing) {
+	public ActionEatDrinkItems(Actor performer, GameObject[] objects, boolean doesNothing) {
 		super(ACTION_NAME, textureEat, performer, null);
 		if (objects != null && objects.length > 0
 				&& (objects[0] instanceof Liquid || objects[0] instanceof Jar || objects[0] instanceof WaterBody)) {
@@ -133,12 +132,9 @@ public class ActionEatItems extends VariableQtyAction {
 				performer.equippedBeforePickingUpObject = null;
 			}
 
-			if (object instanceof Consumable) {
-				Consumable consumable = (Consumable) object;
-				if (consumable.getConsumeEffects() != null) {
-					for (Effect effect : consumable.getConsumeEffects()) {
-						performer.addEffect(effect.makeCopy(performer, performer));
-					}
+			if (object.getConsumeEffects() != null) {
+				for (Effect effect : object.getConsumeEffects()) {
+					performer.addEffect(effect.makeCopy(performer, performer));
 				}
 			}
 

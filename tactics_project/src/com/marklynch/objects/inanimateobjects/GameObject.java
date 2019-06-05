@@ -19,8 +19,8 @@ import com.marklynch.actions.ActionDie;
 import com.marklynch.actions.ActionDigging;
 import com.marklynch.actions.ActionDouse;
 import com.marklynch.actions.ActionDropItemsSelectedInInventory;
-import com.marklynch.actions.ActionEatItems;
-import com.marklynch.actions.ActionEatItemsSelectedInInventory;
+import com.marklynch.actions.ActionEatDrinkItems;
+import com.marklynch.actions.ActionEatDrinkItemsSelectedInInventory;
 import com.marklynch.actions.ActionEmptyItem;
 import com.marklynch.actions.ActionEmptyItemsSelectedInInventory;
 import com.marklynch.actions.ActionEquip;
@@ -1346,12 +1346,12 @@ public class GameObject
 
 		// Food / Drink
 		if (this instanceof Food || this instanceof Liquid || this instanceof WaterBody) {
-			actions.add(new ActionEatItems(performer, this));
+			actions.add(new ActionEatDrinkItems(performer, this));
 		}
 
 		if (this instanceof Jar) {
 			if (((Jar) this).contents instanceof Liquid) {
-				actions.add(new ActionEatItems(performer, this));
+				actions.add(new ActionEatDrinkItems(performer, this));
 			}
 		}
 
@@ -1667,7 +1667,7 @@ public class GameObject
 
 			// Food / drink
 			if (this instanceof Food || this instanceof Liquid || this instanceof WaterBody) {
-				return new ActionEatItemsSelectedInInventory(performer, this);
+				return new ActionEatDrinkItemsSelectedInInventory(performer, this);
 			}
 
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
@@ -1739,12 +1739,12 @@ public class GameObject
 
 		// Food/drink
 		if (this instanceof Food || this instanceof Liquid || this instanceof WaterBody) {
-			actions.add(new ActionEatItemsSelectedInInventory(performer, this));
+			actions.add(new ActionEatDrinkItemsSelectedInInventory(performer, this));
 		}
 
 		if (this instanceof Jar) {
 			if (((Jar) this).contents instanceof Liquid) {
-				actions.add(new ActionEatItemsSelectedInInventory(performer, this));
+				actions.add(new ActionEatDrinkItemsSelectedInInventory(performer, this));
 			}
 		}
 
@@ -2287,7 +2287,7 @@ public class GameObject
 
 		// Food / Drink
 		if (this instanceof Food || this instanceof Liquid || this instanceof WaterBody) {
-			return new ActionEatItems(performer, this);
+			return new ActionEatDrinkItems(performer, this);
 		}
 
 		// Switch
@@ -2359,12 +2359,12 @@ public class GameObject
 
 		// Food / Drink
 		if (this instanceof Food || this instanceof Liquid || this instanceof WaterBody) {
-			actions.add(new ActionEatItems(performer, this));
+			actions.add(new ActionEatDrinkItems(performer, this));
 		}
 
 		if (this instanceof Jar) {
 			if (((Jar) this).contents instanceof Liquid) {
-				actions.add(new ActionEatItems(performer, this));
+				actions.add(new ActionEatDrinkItems(performer, this));
 			}
 		}
 
@@ -2853,5 +2853,9 @@ public class GameObject
 			}
 		}
 		return false;
+	}
+
+	public Effect[] getConsumeEffects() {
+		return consumeEffects;
 	}
 }
