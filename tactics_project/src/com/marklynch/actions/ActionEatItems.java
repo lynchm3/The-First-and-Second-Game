@@ -71,14 +71,13 @@ public class ActionEatItems extends VariableQtyAction {
 		previouslyEquipped = performer.equipped;
 		performer.equipped = targets[0];
 
-		gameObjectPerformer.setPrimaryAnimation(
-				new AnimationEatDrink(gameObjectPerformer, performer.squareGameObjectIsOn.getSquareToRightOf(),
-						gameObjectPerformer.getPrimaryAnimation(), new OnCompletionListener() {
-							@Override
-							public void animationComplete(GameObject gameObject) {
-								postAnimation();
-							}
-						}));
+		gameObjectPerformer.setPrimaryAnimation(new AnimationEatDrink(gameObjectPerformer,
+				gameObjectPerformer.getPrimaryAnimation(), new OnCompletionListener() {
+					@Override
+					public void animationComplete(GameObject gameObject) {
+						postAnimation();
+					}
+				}));
 	}
 
 	private void postAnimation() {

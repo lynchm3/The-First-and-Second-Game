@@ -218,6 +218,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			textBoxQty = new TextBox(this, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
 		}
 
+		if (inventoryMode != INVENTORY_MODE.MODE_NORMAL) {
+			textBoxSearch.clearText();
+		}
+
 		if (Level.activeTextBox == textBoxSearch) {
 			Level.activeTextBox = null;
 		}

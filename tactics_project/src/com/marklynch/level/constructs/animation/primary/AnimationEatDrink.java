@@ -2,46 +2,20 @@ package com.marklynch.level.constructs.animation.primary;
 
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.KeyFrame;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class AnimationEatDrink extends Animation {
-
-	public Square targetSquare;
 
 	float quarterDurationToReach;
 	float halfDurationToReach;
 	float threeQuarterDurationToReach;
 
-	public AnimationEatDrink(GameObject performer, Square targetSquare, Animation oldAnimation,
-			OnCompletionListener onCompletionListener) {
-		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer,
-				targetSquare);
+	public AnimationEatDrink(GameObject performer, Animation oldAnimation, OnCompletionListener onCompletionListener) {
+		super(performer, onCompletionListener, null, null, null, null, null, null, false, true, performer, null);
 		if (!runAnimation)
 			return;
-
-		this.targetSquare = targetSquare;
-
-		float down = 0f;
-		float up = 3.14f;
 		float right = -1.5f;
-		float left = 1.5f;
-
-		if (targetSquare.yInGrid - performer.squareGameObjectIsOn.yInGrid < 0) {
-			targetRadians = up;
-
-		} else if (targetSquare.yInGrid - performer.squareGameObjectIsOn.yInGrid > 0) {
-			targetRadians = down;
-
-		}
-		if (targetSquare.xInGrid - performer.squareGameObjectIsOn.xInGrid < 0) {
-			targetRadians = right;
-			performer.backwards = true;
-
-		} else if (targetSquare.xInGrid - performer.squareGameObjectIsOn.xInGrid > 0) {
-			targetRadians = right;
-			performer.backwards = false;
-		}
+		targetRadians = right;
 
 		backwards = performer.backwards;
 
