@@ -6,7 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
-import com.marklynch.level.constructs.animation.primary.AnimationEmpty;
+import com.marklynch.level.constructs.animation.primary.AnimationEatDrink;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
@@ -72,7 +72,7 @@ public class ActionEatItems extends VariableQtyAction {
 		performer.equipped = targets[0];
 
 		gameObjectPerformer.setPrimaryAnimation(
-				new AnimationEmpty(gameObjectPerformer, performer.squareGameObjectIsOn.getSquareToRightOf(),
+				new AnimationEatDrink(gameObjectPerformer, performer.squareGameObjectIsOn.getSquareToRightOf(),
 						gameObjectPerformer.getPrimaryAnimation(), new OnCompletionListener() {
 							@Override
 							public void animationComplete(GameObject gameObject) {
@@ -83,42 +83,56 @@ public class ActionEatItems extends VariableQtyAction {
 
 	private void postAnimation() {
 
+		// Logging
+		if (Game.level.shouldLog(performer)) {
+			String amountText = "";
+			if (amountToEat > 1) {
+				amountText = "x" + amountToEat;
+			}
+
+			String actionWord = " ate ";
+			if (actionName == ACTION_NAME_DRINK) {
+				actionWord = " drank ";
+			}
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, actionWord, targets[0], amountText }));
+		}
+
 		for (int i = 0; i < amountToEat; i++) {
 			GameObject object = targets[i];
-
+			Jar newJar = null;
+			// Management of objects
 			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass
 					|| object instanceof Liquid || object instanceof Jar) {
-				// Inventory inventoryThatHoldsThisObject = object.inventoryThatHoldsThisObject;
+
+				// Object on the ground
 				if (object.inventoryThatHoldsThisObject.parent instanceof Square) {
 					if (object instanceof Jar) {
-						Templates.JAR.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
+						newJar = Templates.JAR.makeCopy(gameObjectPerformer.squareGameObjectIsOn, object.owner);
 					}
-				} else {
+				} else { // object in hand
 					if (object instanceof Jar) {
-						object.inventoryThatHoldsThisObject.add(Templates.JAR.makeCopy(null, null));
+						newJar = Templates.JAR.makeCopy(null, object.owner);
 					}
-					object.inventoryThatHoldsThisObject.remove(object);
 				}
 			} else if (object instanceof WaterBody) {
 
-			} else if (object.fitsInInventory) {
-				performer.inventory.add(object);
 			}
+			object.inventoryThatHoldsThisObject.remove(object);
 
-			if (Game.level.shouldLog(performer)) {
-				String amountText = "";
-				if (amountToEat > 1) {
-					amountText = "x" + amountToEat;
+			// Put stuff in actor's hand
+			performer.equip(previouslyEquipped);
+			if (newJar != null)
+				performer.inventory.add(newJar);
+			if (performer.equipped == targets[0]) {
+				if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
+					performer.equip(performer.equippedBeforePickingUpObject);
+				} else if (performer.inventory.containsDuplicateOf(targets[0])) {
+					performer.equip(performer.inventory.getDuplicateOf(targets[0]));
+				} else if (newJar != null) {
+					performer.equip(newJar);
 				}
-
-				String actionWord = " ate ";
-				if (actionName == ACTION_NAME_DRINK) {
-					actionWord = " drank ";
-				}
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, actionWord, targets[0], amountText }));
+				performer.equippedBeforePickingUpObject = null;
 			}
-
-			// System.out.println("object = " + object);
 
 			if (object instanceof Consumable) {
 				Consumable consumable = (Consumable) object;
@@ -129,8 +143,6 @@ public class ActionEatItems extends VariableQtyAction {
 				}
 			}
 
-			if (object.owner == null)
-				object.owner = performer;
 			if (sound != null)
 				sound.play();
 

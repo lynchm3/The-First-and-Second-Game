@@ -60,6 +60,7 @@ public class ActionEmptyItem extends Action {
 
 	public void postAnimation() {
 
+		// Logging
 		if (Game.level.shouldLog(targetGameObject, performer)) {
 			if (targetGameObject != null) {
 				Game.level.logOnScreen(
@@ -70,19 +71,23 @@ public class ActionEmptyItem extends Action {
 			}
 		}
 
-		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
-			// new ActionDouse(shooter, gameObject).perform();
-			for (Effect effect : jar.contents.touchEffects) {
-				gameObject.addEffect(effect.makeCopy(performer, gameObject));
+		// Add effect from liquid to all objects on the sqr
+		if (jar.contents instanceof Liquid) {
+			for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
+				for (Effect effect : jar.contents.touchEffects) {
+					gameObject.addEffect(effect.makeCopy(performer, gameObject));
+				}
 			}
 		}
 
+		// Spread liquid or just drop object on ground if not liquid
 		if (jar.contents instanceof Liquid) {
 			targetSquare.liquidSpread((Liquid) jar.contents);
 		} else {
 			targetSquare.inventory.add(jar.contents);
 		}
 
+		// Put stuff in actor's hand
 		performer.equip(previouslyEquipped);
 		GameObject newJar = Templates.JAR.makeCopy(null, jar.owner);
 		performer.inventory.add(newJar);
@@ -103,10 +108,6 @@ public class ActionEmptyItem extends Action {
 			Game.level.openInventories.get(0).close();
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
-
-		if (performer.faction == Game.level.factions.player) {
-			Game.level.undoList.clear();
-		}
 
 		if (performer == Game.level.player)
 			Game.level.endPlayerTurn();
