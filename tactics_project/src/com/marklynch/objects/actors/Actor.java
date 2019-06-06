@@ -2545,7 +2545,8 @@ public class Actor extends GameObject {
 			// y + handY - equipped.anchorY
 		} else {
 
-			return new Point(leftArmHingeX, handY);
+			return new Point(actorPositionXInPixels + rightArmHingeX, actorPositionYInPixels + handY);
+//			rightArmHingeX - equipped.anchorX, y + handY - equipped.anchorY
 		}
 
 	}

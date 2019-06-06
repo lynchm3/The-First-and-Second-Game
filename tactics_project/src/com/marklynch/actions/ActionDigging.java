@@ -108,8 +108,9 @@ public class ActionDigging extends Action {
 		for (GameObject buriedGamObject : (ArrayList<GameObject>) targetGameObject.inventory.gameObjects.clone()) {
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-				Level.addSecondaryAnimation(new AnimationTake(buriedGamObject, performer, performer.getHandOffset().x,
-						performer.getHandOffset().y, 1f, null));
+				Level.addSecondaryAnimation(new AnimationTake(buriedGamObject, performer,
+						performer.getHandOffset().x - buriedGamObject.anchorX,
+						performer.getHandOffset().y - buriedGamObject.anchorY, 1f, null));
 			}
 			performer.inventory.add(buriedGamObject);
 
