@@ -219,12 +219,16 @@ public class AreaTown {
 				new GameObject[] {}, new GameObject[] {}, null);
 		Templates.CHEST.makeCopy(Game.level.squares[posX + 107][posY + 33], false, null);
 		Templates.CRATE.makeCopy(Game.level.squares[posX + 106][posY + 31], false, null);
-		Jar jar1 = Templates.MESSAGE_IN_A_JAR.makeCopy(Game.level.squares[posX + 89][posY + 34], null);
-		jar1.contents.conversation = jar1.contents.createConversation(new Object[] { "SPOOOKY!!!" });
+		Jar messageInAJar1 = Templates.MESSAGE_IN_A_JAR.makeCopy(Game.level.squares[posX + 89][posY + 34], null);
+		messageInAJar1.contents.conversation = messageInAJar1.contents
+				.createConversation(new Object[] { "SPOOOKY!!!" });
 
-		Jar jar2 = Templates.MESSAGE_IN_A_JAR.makeCopy(Game.level.squares[posX + 90][posY + 34], null);
-		jar2.contents.conversation = jar2.contents.createConversation(new Object[] { "SPOOPY!!!!!" });
+		Jar messageInAJar2 = Templates.MESSAGE_IN_A_JAR.makeCopy(Game.level.squares[posX + 90][posY + 34], null);
+		messageInAJar2.contents.conversation = messageInAJar2.contents
+				.createConversation(new Object[] { "SPOOPY!!!!!" });
 		// new BodyOfWater(105, 30, 106, 37);
+
+		Templates.APPLE.makeCopy(Game.level.squares[posX + 74][posY + 35], null);
 
 		// River
 		new BodyOfWater(posX + 0, posY + 15, posX + 3, posY + 15);

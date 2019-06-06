@@ -3,10 +3,12 @@ package com.marklynch.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationEatDrink;
+import com.marklynch.level.constructs.animation.secondary.AnimationTake;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
@@ -64,9 +66,24 @@ public class ActionEatDrinkItems extends VariableQtyAction {
 		if (amountToEat == 0)
 			return;
 
-		if (targets[0].inventoryThatHoldsThisObject.parent instanceof Square) {
-			performer.inventory.add(targets[0]);
+		if (targets[0].inventoryThatHoldsThisObject.parent instanceof Square && !(targets[0] instanceof WaterBody)) {
+//			performer.inventory.add(targets[0]);
+			Level.addSecondaryAnimation(new AnimationTake(targets[0], performer, 0, 0, 1f, new OnCompletionListener() {
+				@Override
+				public void animationComplete(GameObject gameObject) {
+					postPickupAnimation();
+				}
+			}));
+		} else {
+			postPickupAnimation();
 		}
+	}
+
+	private void postPickupAnimation() {
+
+//		if (targets[0].inventoryThatHoldsThisObject.parent instanceof Square) {
+//			performer.inventory.add(targets[0]);
+//		}
 
 		if (performer.equipped != targets[0])
 			previouslyEquipped = performer.equipped;
