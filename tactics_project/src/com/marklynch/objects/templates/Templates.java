@@ -430,6 +430,7 @@ public class Templates {
 	public static Food CANDY;
 
 	public static Food APPLE;
+	public static GameObject APPLE_CORE;
 
 	public static SmallHidingPlace BURROW;
 

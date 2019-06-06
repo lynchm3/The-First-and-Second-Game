@@ -259,6 +259,19 @@ public class TemplatesNature {
 		Templates.APPLE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 1));
 		Templates.APPLE.flipYAxisInMirror = false;
 
+		Templates.APPLE_CORE = new GameObject();
+		Templates.APPLE_CORE.name = "Apple Core";
+		Templates.APPLE_CORE.setImageAndExtrapolateSize("apple_core.png");
+		Templates.APPLE_CORE.totalHealth = Templates.APPLE_CORE.remainingHealth = 2;
+		Templates.APPLE_CORE.weight = 2f;
+		Templates.APPLE_CORE.value = 1;
+		Templates.APPLE_CORE.anchorX = 16;
+		Templates.APPLE_CORE.anchorY = 16;
+		Templates.APPLE_CORE.templateId = GameObject.generateNewTemplateId();
+		Templates.APPLE_CORE.highLevelStats.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.BLUNT_DAMAGE, 1));
+		Templates.APPLE_CORE.flipYAxisInMirror = false;
+
 		Templates.ROCK = new GameObject();
 		Templates.ROCK.name = "Rock";
 		Templates.ROCK.setImageAndExtrapolateSize("rock.png");

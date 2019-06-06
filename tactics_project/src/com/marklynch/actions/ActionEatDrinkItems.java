@@ -97,7 +97,7 @@ public class ActionEatDrinkItems extends VariableQtyAction {
 
 		for (int i = 0; i < amountToEat; i++) {
 			GameObject object = targets[i];
-			Jar newJar = null;
+			GameObject replacement = null;
 			// Management of objects
 			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass
 					|| object instanceof Liquid || object instanceof Jar) {
@@ -105,11 +105,16 @@ public class ActionEatDrinkItems extends VariableQtyAction {
 				// Object on the ground
 				if (object.inventoryThatHoldsThisObject.parent instanceof Square) {
 					if (object instanceof Jar) {
-						newJar = Templates.JAR.makeCopy(gameObjectPerformer.squareGameObjectIsOn, object.owner);
+						replacement = Templates.JAR.makeCopy(gameObjectPerformer.squareGameObjectIsOn, object.owner);
+					} else if (object.templateId == Templates.APPLE.templateId) {
+						replacement = Templates.APPLE_CORE.makeCopy(gameObjectPerformer.squareGameObjectIsOn,
+								object.owner);
 					}
 				} else { // object in hand
 					if (object instanceof Jar) {
-						newJar = Templates.JAR.makeCopy(null, object.owner);
+						replacement = Templates.JAR.makeCopy(null, object.owner);
+					} else if (object.templateId == Templates.APPLE.templateId) {
+						replacement = Templates.APPLE_CORE.makeCopy(null, object.owner);
 					}
 				}
 			} else if (object instanceof WaterBody) {
@@ -119,15 +124,15 @@ public class ActionEatDrinkItems extends VariableQtyAction {
 
 			// Put stuff in actor's hand
 			performer.equip(previouslyEquipped);
-			if (newJar != null)
-				performer.inventory.add(newJar);
+			if (replacement != null)
+				performer.inventory.add(replacement);
 			if (performer.equipped == targets[0]) {
 				if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
 					performer.equip(performer.equippedBeforePickingUpObject);
 				} else if (performer.inventory.containsDuplicateOf(targets[0])) {
 					performer.equip(performer.inventory.getDuplicateOf(targets[0]));
-				} else if (newJar != null) {
-					performer.equip(newJar);
+				} else if (replacement != null) {
+					performer.equip(replacement);
 				} else {
 					performer.equip(null);
 				}
