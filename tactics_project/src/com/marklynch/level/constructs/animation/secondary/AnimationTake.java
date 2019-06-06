@@ -91,10 +91,14 @@ public class AnimationTake extends SecondaryAnimation {
 		float oldX = x;
 		float oldY = y;
 
-		targetX = (int) (targetGameObject.squareGameObjectIsOn.xInGridPixels
-				+ (Game.SQUARE_WIDTH - gameObject.width) / 2) + targetOffsetX;
-		targetY = (int) (targetGameObject.squareGameObjectIsOn.yInGridPixels
-				+ (Game.SQUARE_HEIGHT - gameObject.height) / 2) + targetOffsetY;
+		targetX = (int) targetGameObject.squareGameObjectIsOn.xInGridPixels//
+//				+ (Game.SQUARE_WIDTH - gameObject.width) / 2)//
+				+ targetOffsetX;
+
+		targetY = (int) targetGameObject.squareGameObjectIsOn.yInGridPixels//
+//				+ (Game.SQUARE_HEIGHT - gameObject.height) / 2)//
+				+ targetOffsetY;
+
 		if (targetGameObject.getPrimaryAnimation() != null) {
 			targetX += targetGameObject.getPrimaryAnimation().offsetX;
 			targetY += targetGameObject.getPrimaryAnimation().offsetY;

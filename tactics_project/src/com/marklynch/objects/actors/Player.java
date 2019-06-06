@@ -136,8 +136,9 @@ public class Player extends Human {
 					float x = square.xInGridPixels + orb.drawOffsetX;
 					float y = square.yInGridPixels + orb.drawOffsetY;
 
-					Level.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
-							(float) (Math.random() * 0.25f + 0.75f), -0f, -0f, null));
+					Level.addSecondaryAnimation(new AnimationTake(orb, Level.player, x, y,
+							(float) (Math.random() * 0.25f + 0.75f), (Game.SQUARE_WIDTH - Level.player.width) / 2,
+							(Game.SQUARE_HEIGHT - Level.player.height) / 2, null));
 
 					// Game.level.inanimateObjectsOnGround.add(orb);
 					orbs -= 1;
@@ -147,8 +148,9 @@ public class Player extends Human {
 
 					float x = square.xInGridPixels + orb.drawOffsetX;
 					float y = square.yInGridPixels + orb.drawOffsetY;
-					Level.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
-							(float) (Math.random() * 0.25f + 0.75f), 0f, 0f, null));
+					Level.addSecondaryAnimation(new AnimationTake(orb, Level.player, x, y,
+							(float) (Math.random() * 0.25f + 0.75f), (Game.SQUARE_WIDTH - Level.player.width) / 2,
+							(Game.SQUARE_HEIGHT - Level.player.height) / 2, null));
 					// Game.level.inanimateObjectsOnGround.add(orb);
 					orbs -= 5;
 				}
@@ -157,8 +159,9 @@ public class Player extends Human {
 
 					float x = square.xInGridPixels + orb.drawOffsetX;
 					float y = square.yInGridPixels + orb.drawOffsetY;
-					Level.addSecondaryAnimation(new AnimationTake(orb, Game.level.player, x, y,
-							(float) (Math.random() * 0.25f + 0.75f), 0f, 0f, null));
+					Level.addSecondaryAnimation(new AnimationTake(orb, Level.player, x, y,
+							(float) (Math.random() * 0.25f + 0.75f), (Game.SQUARE_WIDTH - Level.player.width) / 2,
+							(Game.SQUARE_HEIGHT - Level.player.height) / 2, null));
 					// Game.level.inanimateObjectsOnGround.add(orb);
 					orbs -= 10;
 				}

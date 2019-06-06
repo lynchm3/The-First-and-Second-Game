@@ -67,13 +67,14 @@ public class ActionEatDrinkItems extends VariableQtyAction {
 			return;
 
 		if (targets[0].inventoryThatHoldsThisObject.parent instanceof Square && !(targets[0] instanceof WaterBody)) {
-//			performer.inventory.add(targets[0]);
-			Level.addSecondaryAnimation(new AnimationTake(targets[0], performer, 0, 0, 1f, new OnCompletionListener() {
-				@Override
-				public void animationComplete(GameObject gameObject) {
-					postPickupAnimation();
-				}
-			}));
+			Level.addSecondaryAnimation(new AnimationTake(targets[0], performer, performer.getHandOffset().x,
+					performer.getHandOffset().y, 1f, new OnCompletionListener() {
+						@Override
+						public void animationComplete(GameObject gameObject) {
+							postPickupAnimation();
+						}
+					}));
+			performer.inventory.add(targets[0]);
 		} else {
 			postPickupAnimation();
 		}

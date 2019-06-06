@@ -105,7 +105,8 @@ public class ActionMining extends Action {
 
 				} else if (performer.squareGameObjectIsOn.onScreen()
 						&& performer.squareGameObjectIsOn.visibleToPlayer) {
-					Level.addSecondaryAnimation(new AnimationTake(ore, performer, 0, 0, 1f, null));
+					Level.addSecondaryAnimation(new AnimationTake(ore, performer, performer.getHandOffset().x,
+							performer.getHandOffset().y, 1f, null));
 
 				}
 				if (Game.level.shouldLog(vein, performer))

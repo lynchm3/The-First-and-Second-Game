@@ -77,6 +77,7 @@ import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
+import com.marklynch.utils.Utils.Point;
 
 public class Actor extends GameObject {
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
@@ -2534,5 +2535,18 @@ public class Actor extends GameObject {
 			}
 		}
 		return null;
+	}
+
+	public Point getHandOffset() {
+		if (backwards) {
+
+			return new Point(leftArmHingeX, handY);// - (equipped.width - equipped.anchorX));
+			// x = leftArmHingeX - (equipped.width - equipped.anchorX)
+			// y + handY - equipped.anchorY
+		} else {
+
+			return new Point(leftArmHingeX, handY);
+		}
+
 	}
 }
