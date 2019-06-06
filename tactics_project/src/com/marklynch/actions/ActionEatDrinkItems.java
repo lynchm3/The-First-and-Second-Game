@@ -10,9 +10,6 @@ import com.marklynch.level.constructs.animation.primary.AnimationEatDrink;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.objects.inanimateobjects.Carcass;
-import com.marklynch.objects.inanimateobjects.Corpse;
-import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.WaterBody;
@@ -67,8 +64,13 @@ public class ActionEatDrinkItems extends VariableQtyAction {
 		if (amountToEat == 0)
 			return;
 
-		previouslyEquipped = performer.equipped;
-		performer.equipped = targets[0];
+		if (targets[0].inventoryThatHoldsThisObject.parent instanceof Square) {
+			performer.inventory.add(targets[0]);
+		}
+
+		if (performer.equipped != targets[0])
+			previouslyEquipped = performer.equipped;
+		performer.equip(targets[0]);
 
 		gameObjectPerformer.setPrimaryAnimation(new AnimationEatDrink(gameObjectPerformer,
 				gameObjectPerformer.getPrimaryAnimation(), new OnCompletionListener() {
@@ -99,45 +101,42 @@ public class ActionEatDrinkItems extends VariableQtyAction {
 			GameObject object = targets[i];
 			GameObject replacement = null;
 			// Management of objects
-			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass
-					|| object instanceof Liquid || object instanceof Jar) {
+			if (object instanceof WaterBody) {
 
-				// Object on the ground
-				if (object.inventoryThatHoldsThisObject.parent instanceof Square) {
-					if (object instanceof Jar) {
-						replacement = Templates.JAR.makeCopy(gameObjectPerformer.squareGameObjectIsOn, object.owner);
-					} else if (object.templateId == Templates.APPLE.templateId) {
-						replacement = Templates.APPLE_CORE.makeCopy(gameObjectPerformer.squareGameObjectIsOn,
-								object.owner);
-					}
-				} else { // object in hand
-					if (object instanceof Jar) {
-						replacement = Templates.JAR.makeCopy(null, object.owner);
-					} else if (object.templateId == Templates.APPLE.templateId) {
-						replacement = Templates.APPLE_CORE.makeCopy(null, object.owner);
-					}
+			} else {
+
+				if (object instanceof Jar) {
+					replacement = Templates.JAR.makeCopy(null, object.owner);
+				} else if (object.templateId == Templates.APPLE.templateId) {
+					replacement = Templates.APPLE_CORE.makeCopy(null, object.owner);
 				}
-			} else if (object instanceof WaterBody) {
 
 			}
+
 			object.inventoryThatHoldsThisObject.remove(object);
 
+			System.out.println("previouslyEquipped = " + previouslyEquipped);
+			System.out.println("performer.equippedBeforePickingUpObject = " + performer.equippedBeforePickingUpObject);
+			System.out.println("replacement = " + replacement);
+
 			// Put stuff in actor's hand
-			performer.equip(previouslyEquipped);
+
 			if (replacement != null)
 				performer.inventory.add(replacement);
-			if (performer.equipped == targets[0]) {
-				if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
-					performer.equip(performer.equippedBeforePickingUpObject);
-				} else if (performer.inventory.containsDuplicateOf(targets[0])) {
-					performer.equip(performer.inventory.getDuplicateOf(targets[0]));
-				} else if (replacement != null) {
-					performer.equip(replacement);
-				} else {
-					performer.equip(null);
-				}
-				performer.equippedBeforePickingUpObject = null;
+
+			if (previouslyEquipped != null)
+				performer.equip(previouslyEquipped);
+			else if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
+				performer.equip(performer.equippedBeforePickingUpObject);
+			} else if (performer.inventory.containsDuplicateOf(targets[0])) {
+				performer.equip(performer.inventory.getDuplicateOf(targets[0]));
+			} else if (replacement != null) {
+				performer.equip(replacement);
+			} else {
+				performer.equip(null);
 			}
+
+			performer.equippedBeforePickingUpObject = null;
 
 			if (object.getConsumeEffects() != null) {
 				for (Effect effect : object.getConsumeEffects()) {
