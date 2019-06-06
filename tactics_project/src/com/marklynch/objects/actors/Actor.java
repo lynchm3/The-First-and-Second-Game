@@ -2138,12 +2138,11 @@ public class Actor extends GameObject {
 
 	public void setMiniDialogue(String miniDialogue, GameObject target) {
 		this.miniDialogue = miniDialogue;
-		if (Game.level.shouldLog(this)) {
+		if (Level.shouldLog(this)) {
 			if (target != null)
-				Game.level
-						.logOnScreen(new ActivityLog(new Object[] { this, " @", target, ": \"", miniDialogue, "\"" }));
+				Level.logOnScreen(new ActivityLog(new Object[] { this, " @", target, ": \"", miniDialogue, "\"" }));
 			else
-				Game.level.logOnScreen(new ActivityLog(new Object[] { this, ": \"", miniDialogue, "\"" }));
+				Level.logOnScreen(new ActivityLog(new Object[] { this, ": \"", miniDialogue, "\"" }));
 		}
 	}
 
@@ -2156,7 +2155,6 @@ public class Actor extends GameObject {
 
 			return true;
 		}
-		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -128,6 +128,8 @@ public class ActionEatDrinkItems extends VariableQtyAction {
 					performer.equip(performer.inventory.getDuplicateOf(targets[0]));
 				} else if (newJar != null) {
 					performer.equip(newJar);
+				} else {
+					performer.equip(null);
 				}
 				performer.equippedBeforePickingUpObject = null;
 			}
