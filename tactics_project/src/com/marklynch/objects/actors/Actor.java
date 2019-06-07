@@ -2537,10 +2537,13 @@ public class Actor extends GameObject {
 		return null;
 	}
 
-	public Point getHandOffset() {
+	public Point getHandXY() {
 		if (backwards) {
 
-			return new Point(leftArmHingeX, handY);// - (equipped.width - equipped.anchorX));
+			return new Point(actorPositionXInPixels + leftArmHingeX, actorPositionYInPixels + handY);// -
+																										// (equipped.width
+																										// -
+																										// equipped.anchorX));
 			// x = leftArmHingeX - (equipped.width - equipped.anchorX)
 			// y + handY - equipped.anchorY
 		} else {

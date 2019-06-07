@@ -70,8 +70,8 @@ public class ActionTakeItems extends VariableQtyAction {
 		if (Game.level.openInventories.size() > 0) {
 		} else {
 			Level.addSecondaryAnimation(new AnimationTake(objectsTotake[0], performer,
-					performer.getHandOffset().x - objectsTotake[0].anchorX,
-					performer.getHandOffset().y - objectsTotake[0].anchorY, 1f, null));
+					performer.getHandXY().x - objectsTotake[0].anchorX,
+					performer.getHandXY().y - objectsTotake[0].anchorY, 1f, null));
 		}
 
 		for (int i = 0; i < amountToTake; i++) {

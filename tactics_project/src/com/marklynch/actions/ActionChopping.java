@@ -83,8 +83,8 @@ public class ActionChopping extends Action {
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 				Level.addSecondaryAnimation(
-						new AnimationTake(wood, performer, performer.getHandOffset().x - wood.anchorX,
-								performer.getHandOffset().y - wood.anchorY, 1f, null));
+						new AnimationTake(wood, performer, performer.getHandXY().x - wood.anchorX,
+								performer.getHandXY().y - wood.anchorY, 1f, null));
 			}
 			performer.inventory.add(wood);
 
