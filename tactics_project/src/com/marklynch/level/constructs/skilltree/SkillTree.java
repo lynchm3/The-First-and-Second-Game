@@ -21,6 +21,7 @@ import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerHealTouch;
 import com.marklynch.level.constructs.power.PowerIgnite;
 import com.marklynch.level.constructs.power.PowerInferno;
+import com.marklynch.level.constructs.power.PowerMinorTelekinesis;
 import com.marklynch.level.constructs.power.PowerPoisonThrowingKnives;
 import com.marklynch.level.constructs.power.PowerQuickFingers;
 import com.marklynch.level.constructs.power.PowerRespite;
@@ -120,8 +121,8 @@ public class SkillTree implements Draggable, Scrollable {
 		// Spirit bag
 		SkillTreeNode spiritBag = new SkillTreeNode(2, 7);
 		activateAtStart.add(spiritBag);
-		spiritBag.name = "spiritBag";
-		spiritBag.description = "spiritBag";
+		spiritBag.name = "Spirit Bag";
+		spiritBag.description = "Spirit Bag";
 		spiritBag.powersUnlocked.add(new PowerSpiritBag(null));
 		skillTreeNodes.add(spiritBag);
 
@@ -234,6 +235,14 @@ public class SkillTree implements Draggable, Scrollable {
 		timePlus6.linkedSkillTreeNodes.add(unlock);
 		unlock.linkedSkillTreeNodes.add(timePlus6);
 
+		// Minor Telekinesis
+		SkillTreeNode minorTelekinesis = new SkillTreeNode(12, 13);
+		activateAtStart.add(minorTelekinesis);
+		minorTelekinesis.name = "Minor Telekinesis";
+		minorTelekinesis.description = "Minor Telekinesis";
+		minorTelekinesis.powersUnlocked.add(new PowerMinorTelekinesis(null));
+		skillTreeNodes.add(minorTelekinesis);
+
 		// Telekinteic push
 		SkillTreeNode telekineticPush = new SkillTreeNode(12, 12);
 		activateAtStart.add(telekineticPush);
@@ -241,6 +250,8 @@ public class SkillTree implements Draggable, Scrollable {
 		telekineticPush.description = "\"The bigger they are, the harder they fall\" - Stranger";
 		telekineticPush.powersUnlocked.add(new PowerTelekineticPush(null));
 		skillTreeNodes.add(telekineticPush);
+		telekineticPush.linkedSkillTreeNodes.add(minorTelekinesis);
+		minorTelekinesis.linkedSkillTreeNodes.add(telekineticPush);
 		telekineticPush.linkedSkillTreeNodes.add(unlock);
 		unlock.linkedSkillTreeNodes.add(telekineticPush);
 

@@ -9,18 +9,19 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.utils.ResourceUtils;
 
-public class PowerSpiritBag extends Power {
+public class PowerMinorTelekinesis extends Power {
 
-	private static String NAME = "Spirit Bag";
+	private static String NAME = "Minor Telekinesis";
 
-	public PowerSpiritBag() {
+	public PowerMinorTelekinesis() {
 		this(null);
 	}
 
-	public PowerSpiritBag(GameObject source) {
-		super(NAME, ResourceUtils.getGlobalImage("bag.png", false), source, new Effect[] {}, 0, null,
-				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
+	public PowerMinorTelekinesis(GameObject source) {
+		super(NAME, ResourceUtils.getGlobalImage("power_minor_telekinesis.png", false), source, new Effect[] {}, 0,
+				null, new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
 		passive = true;
+		description = "Pull items from adjacent squares towards you";
 		activateAtStartOfTurn = false;
 		endsTurn = false;
 	}
@@ -43,6 +44,6 @@ public class PowerSpiritBag extends Power {
 
 	@Override
 	public Power makeCopy(GameObject source) {
-		return new PowerSpiritBag(source);
+		return new PowerMinorTelekinesis(source);
 	}
 }
