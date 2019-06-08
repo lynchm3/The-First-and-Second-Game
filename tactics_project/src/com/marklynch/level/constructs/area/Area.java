@@ -82,7 +82,7 @@ public class Area implements Idable, Place {
 				+ (Game.zoom * (squarePositionX2 - Game.windowWidth / 2 + Game.getDragXWithOffset()));
 		float drawPositionY2 = (Game.windowHeight / 2)
 				+ (Game.zoom * (squarePositionY2 - Game.windowHeight / 2 + Game.getDragYWithOffset()));
-		TextureUtils.drawTexture(image, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
+		TextureUtils.drawTexture(image, 0.80f, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
 
 	}
 

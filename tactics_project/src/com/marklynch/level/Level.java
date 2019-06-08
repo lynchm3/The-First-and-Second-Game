@@ -1770,9 +1770,12 @@ public class Level {
 			Square potentialSquareToMoveTo = Player.playerPathToMove.squares.get(i);
 
 			Action potentialAction = null;
-			potentialAction = new ActionUsePower(Level.player, null, potentialSquareToMoveTo,
-					new PowerDash(Level.player), false);
+			if (Level.player.hasPower(PowerDash.class)) {
+				potentialAction = new ActionUsePower(Level.player, null, potentialSquareToMoveTo,
+						new PowerDash(Level.player), false);
+			}
 
+//			Level.player.hasPower(PowerT.class)
 			if (potentialAction == null || !potentialAction.enabled || !potentialAction.legal)
 				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false,
 						false);
