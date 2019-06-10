@@ -21,7 +21,10 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 	public Square connectedSquare = null;
 	public Direction direction = Direction.LEFT;
 
+	public Texture topImageTexture, bottomImageTexture;
+
 	public static Texture textureUp, textureDown, textureLeft, textureRight;
+	public static Texture textureUpUnder, textureDownUnder, textureLeftUnder, textureRightUnder;
 
 	public ConveyerBelt() {
 		super();
@@ -41,6 +44,10 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		textureDown = ResourceUtils.getGlobalImage("conveyer_belt_down.png", true);
 		textureLeft = ResourceUtils.getGlobalImage("conveyer_belt_left.png", true);
 		textureRight = ResourceUtils.getGlobalImage("conveyer_belt_right.png", true);
+		textureUpUnder = ResourceUtils.getGlobalImage("conveyer_belt_right_under.png", true);
+		textureDownUnder = ResourceUtils.getGlobalImage("conveyer_belt_right_under.png", true);
+		textureLeftUnder = ResourceUtils.getGlobalImage("conveyer_belt_right_under.png", true);
+		textureRightUnder = ResourceUtils.getGlobalImage("conveyer_belt_right_under.png", true);
 	}
 
 	@Override
@@ -62,24 +69,32 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		if (conveyorBelt.direction == Direction.LEFT) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareToLeftOf();
 			conveyorBelt.imageTexture = textureLeft;
+			conveyorBelt.topImageTexture = textureLeft;
+			conveyorBelt.bottomImageTexture = textureLeftUnder;
 			conveyorBelt.width = 192;
 			conveyorBelt.halfWidth = 192 / 2;
 			conveyorBelt.widthRatio = 1.5f;
 		} else if (conveyorBelt.direction == Direction.RIGHT) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareToRightOf();
 			conveyorBelt.imageTexture = textureRight;
+			conveyorBelt.topImageTexture = textureRight;
+			conveyorBelt.bottomImageTexture = textureRightUnder;
 			conveyorBelt.width = 192;
 			conveyorBelt.halfWidth = 192 / 2;
 			conveyorBelt.widthRatio = 1.5f;
 		} else if (conveyorBelt.direction == Direction.UP) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareAbove();
 			conveyorBelt.imageTexture = textureUp;
+			conveyorBelt.topImageTexture = textureUp;
+			conveyorBelt.bottomImageTexture = textureUpUnder;
 			conveyorBelt.height = 192;
 			conveyorBelt.halfHeight = 192 / 2;
 			conveyorBelt.heightRatio = 1.5f;
 		} else if (conveyorBelt.direction == Direction.DOWN) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareBelow();
 			conveyorBelt.imageTexture = textureDown;
+			conveyorBelt.topImageTexture = textureDown;
+			conveyorBelt.bottomImageTexture = textureDownUnder;
 			conveyorBelt.height = 192;
 			conveyorBelt.halfHeight = 192 / 2;
 			conveyorBelt.heightRatio = 1.5f;
@@ -95,7 +110,8 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		return conveyorBelt;
 	}
 
-	float offsetX = 0;
+	float offsetLeftX = 0;
+	float offsetRightX = 0;
 	float offsetY = 0;
 
 	public boolean draw1() {
@@ -103,14 +119,16 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		if (!shouldDraw())
 			return false;
 
-		if (direction == Direction.LEFT) {
-			offsetX -= Game.delta / 128f;
-			if (offsetX <= -64)
-				offsetX = 0;
-		} else if (direction == Direction.RIGHT) {
-			offsetX += Game.delta / 128f;
-			if (offsetX >= 0)
-				offsetX = -64;
+		if (direction == Direction.LEFT || direction == Direction.RIGHT) {
+
+			offsetLeftX -= Game.delta / 128f;
+			if (offsetLeftX <= -64)
+				offsetLeftX = 0;
+
+			offsetRightX += Game.delta / 128f;
+			if (offsetRightX >= 0)
+				offsetRightX = -64;
+
 		} else if (direction == Direction.UP) {
 			offsetY -= Game.delta / 128f;
 			if (offsetY <= -64)
@@ -122,9 +140,18 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		}
 
 //		int offset = Game.delta % maxOffset;
-
-		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + offsetX);
+		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels);
+		int actorUnderPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels);
 		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + offsetY);
+
+		if (direction == Direction.LEFT) {
+			actorPositionXInPixels += (int) (offsetLeftX);
+			actorUnderPositionXInPixels += (int) (offsetRightX);
+		} else if (direction == Direction.RIGHT) {
+			actorPositionXInPixels += (int) (offsetRightX);
+			actorUnderPositionXInPixels += (int) (offsetLeftX);
+		}
+
 		float alpha = 1.0f;
 
 		if (primaryAnimation != null)
@@ -144,11 +171,19 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		if (this.squareGameObjectIsOn.structureSquareIsIn != null)
 			color = StructureRoom.roomColor;
 		color = calculateColor(color);
+
+		drawGameObject(actorUnderPositionXInPixels, actorPositionYInPixels, width, height, halfWidth, halfHeight, alpha,
+				flash || this == Game.gameObjectMouseIsOver
+						|| (Game.gameObjectMouseIsOver != null
+								&& Game.gameObjectMouseIsOver.gameObjectsToHighlight.contains(this)),
+				scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color, true, bottomImageTexture);
+
 		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, width, height, halfWidth, halfHeight, alpha,
 				flash || this == Game.gameObjectMouseIsOver
 						|| (Game.gameObjectMouseIsOver != null
 								&& Game.gameObjectMouseIsOver.gameObjectsToHighlight.contains(this)),
-				scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color, true, imageTexture);
+				scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color, true, topImageTexture);
+
 		return true;
 	}
 
