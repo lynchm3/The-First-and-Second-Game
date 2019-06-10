@@ -37,8 +37,8 @@ import mdesl.test.Util;
 
 public class Game {
 
-	public static int playerStartPosX = 73;
-	public static int playerStartPosY = 35;
+	public static int playerStartPosX = 148;
+	public static int playerStartPosY = 112;
 
 	public static final float MINIMUM_TURN_TIME = 500f; // ms
 

@@ -37,6 +37,7 @@ import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.Carcass;
+import com.marklynch.objects.inanimateobjects.ConveyerBelt;
 import com.marklynch.objects.inanimateobjects.Corpse;
 import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.Fireplace;
@@ -81,9 +82,9 @@ import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.inanimateobjects.Window;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.FlammableLightSource;
+import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
@@ -116,8 +117,8 @@ public class Save {
 			// SeesawPart.class,
 
 			// LVL 3 GameObject subclass in Tool
-			Shovel.class, Pickaxe.class, Knife.class, FlammableLightSource.class, FishingRod.class,
-			Jar.class, Bell.class, Axe.class,
+			Shovel.class, Pickaxe.class, Knife.class, FlammableLightSource.class, FishingRod.class, Jar.class,
+			Bell.class, Axe.class,
 
 			// LVL 3 GameObject subclass in Actor package
 			Player.class, WildAnimal.class, Trader.class, Thief.class, Pig.class, Guard.class, Doctor.class,
@@ -142,9 +143,9 @@ public class Save {
 			// LVL 1 GameObject subclass
 			Bed.class, Carcass.class, Corpse.class, Food.class, GameObjectExploder.class, Gold.class, Inspectable.class,
 			GameObject.class, Liquid.class, MapMarker.class, MeatChunk.class, MineCart.class, Mirror.class,
-			Openable.class, Orb.class, Portal.class, Rail.class, Roof.class, Searchable.class, Stampable.class,
-			Stump.class, Switch.class, Tree.class, VoidHole.class, Wall.class, WallSupport.class, WantedPoster.class,
-			WaterSource.class, Window.class,
+			Openable.class, Orb.class, Portal.class, ConveyerBelt.class, Rail.class, Roof.class, Searchable.class,
+			Stampable.class, Stump.class, Switch.class, Tree.class, VoidHole.class, Wall.class, WallSupport.class,
+			WantedPoster.class, WaterSource.class, Window.class,
 
 			// LVL 1 GameObject subclass in Weapon package
 			Weapon.class, Armor.class,

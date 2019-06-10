@@ -25,6 +25,7 @@ import com.marklynch.objects.inanimateobjects.AttackableSwitch;
 import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
 import com.marklynch.objects.inanimateobjects.Carcass;
+import com.marklynch.objects.inanimateobjects.ConveyerBelt;
 import com.marklynch.objects.inanimateobjects.Corpse;
 import com.marklynch.objects.inanimateobjects.Door;
 import com.marklynch.objects.inanimateobjects.ElectricalWiring;
@@ -440,6 +441,7 @@ public class Templates {
 	public static VoidHole VOID_HOLE;
 
 	public static Portal PORTAL;
+	public static ConveyerBelt CONVEYER_BELT;
 
 	public static Landmine LANDMINE;
 	public static Spikes SPIKE_FLOOR;

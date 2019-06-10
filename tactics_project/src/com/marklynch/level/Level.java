@@ -51,6 +51,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Human;
 import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.armor.Weapon;
+import com.marklynch.objects.inanimateobjects.ConveyerBelt;
 import com.marklynch.objects.inanimateobjects.FastTravelLocation;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MapMarker;
@@ -273,6 +274,7 @@ public class Level {
 		GameObject.loadStaticImages();
 		Actor.loadStaticImages();
 		Human.loadStaticImages();
+		ConveyerBelt.loadStaticImages();
 		Action.loadActionImages();
 		Effect.loadEffectImages();
 		// Wall.loadStaticImages();

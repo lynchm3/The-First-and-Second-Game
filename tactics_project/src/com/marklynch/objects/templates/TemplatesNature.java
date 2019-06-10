@@ -9,6 +9,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.inanimateobjects.ConveyerBelt;
 import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
@@ -352,6 +353,11 @@ public class TemplatesNature {
 		Templates.PORTAL.name = "Portal";
 		Templates.PORTAL.setImageAndExtrapolateSize("portal.png");
 		Templates.PORTAL.templateId = GameObject.generateNewTemplateId();
+
+		Templates.CONVEYER_BELT = new ConveyerBelt();
+		Templates.CONVEYER_BELT.name = "Conveyer Belt";
+		Templates.CONVEYER_BELT.setImageAndExtrapolateSize("conveyer_belt_right.png");
+		Templates.CONVEYER_BELT.templateId = GameObject.generateNewTemplateId();
 
 		Templates.LANDMINE = new Landmine();
 		Templates.LANDMINE.name = "Landmine";

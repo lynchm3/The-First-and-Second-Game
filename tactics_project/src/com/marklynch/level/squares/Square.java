@@ -42,6 +42,7 @@ import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.BrokenGlass;
+import com.marklynch.objects.inanimateobjects.ConveyerBelt;
 import com.marklynch.objects.inanimateobjects.FastTravelLocation;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.HidingPlace;
@@ -1114,6 +1115,8 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			pathCostForAI = 10;
 		} else if (inventory.containsGameObjectOfType(Portal.class)) {
 			pathCostForAI = 10;
+		} else if (inventory.containsGameObjectOfType(ConveyerBelt.class)) {
+			pathCostForAI = 10;
 		} else if (inventory.containsGameObjectOfType(VoidHole.class)) {
 			pathCostForAI = 10;
 		} else if (inventory.containsGameObjectOfType(PressurePlate.class)) {
@@ -1140,6 +1143,8 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 			// } else if (inventory.contains(Actor.class)) {
 			// costForPlayer = 10;
 		} else if (inventory.containsGameObjectOfType(Portal.class)) {
+			pathCostForPlayer = 10;
+		} else if (inventory.containsGameObjectOfType(ConveyerBelt.class)) {
 			pathCostForPlayer = 10;
 		} else if (inventory.containsGameObjectOfType(VoidHole.class)) {
 			pathCostForPlayer = 10;
