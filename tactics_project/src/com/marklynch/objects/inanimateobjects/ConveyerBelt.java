@@ -118,25 +118,18 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 
 		if (!shouldDraw())
 			return false;
+		
+//		float generalOffset = Game.delta / 128f;
 
+		float generalOffset = Game.timeThisFrame/10%64;///128f;
+		
 		if (direction == Direction.LEFT || direction == Direction.RIGHT) {
-
-			offsetLeftX -= Game.delta / 128f;
-			if (offsetLeftX <= -64)
-				offsetLeftX = 0;
-
-			offsetRightX += Game.delta / 128f;
-			if (offsetRightX >= 0)
-				offsetRightX = -64;
-
+			offsetLeftX =- generalOffset;
+			offsetRightX = generalOffset-64;
 		} else if (direction == Direction.UP) {
-			offsetY -= Game.delta / 128f;
-			if (offsetY <= -64)
-				offsetY = 0;
+			offsetY =- generalOffset;
 		} else if (direction == Direction.DOWN) {
-			offsetY += Game.delta / 128f;
-			if (offsetY >= 0)
-				offsetY = -64;
+			offsetY = generalOffset-64;
 		}
 
 //		int offset = Game.delta % maxOffset;
