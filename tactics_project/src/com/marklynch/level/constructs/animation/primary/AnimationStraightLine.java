@@ -46,6 +46,19 @@ public class AnimationStraightLine extends Animation {
 			kf0.setAllSpeeds(1);
 			kf0.offsetX = this.targetSquares[i].xInGridPixels - this.x;
 			kf0.offsetY = this.targetSquares[i].yInGridPixels - this.y;
+
+			kf0.torsoAngle = 0;
+			kf0.leftElbowAngle = 0;
+			kf0.rightElbowAngle = 0;
+			kf0.leftShoulderAngle = 0;
+			kf0.rightShoulderAngle = 0;
+			kf0.leftHipAngle = 0;
+			kf0.rightHipAngle = 0;
+			kf0.leftKneeAngle = 0;
+			kf0.rightKneeAngle = 0;
+//			kf0.offsetY = 0;
+			kf0.headToToeOffset = 0f;
+
 			kf0.keyFrameTimeMillis = keyFrameTimeMillis;
 			kf0.normaliseSpeeds = true;
 			keyFrames.add(kf0);
