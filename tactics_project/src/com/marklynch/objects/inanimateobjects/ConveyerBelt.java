@@ -28,6 +28,7 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		moveable = false;
+		isFloorObject = true;
 		type = "Conveyer Belt";
 	}
 
@@ -38,18 +39,6 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		textureRight = ResourceUtils.getGlobalImage("conveyer_belt_right.png", true);
 	}
 
-	// @Override
-	// public void draw1() {
-	// }
-	//
-	// @Override
-	// public void draw2() {
-	// }
-	//
-	// @Override
-	// public void draw3() {
-	// }
-
 	@Override
 	public void setInstances(GameObject gameObject) {
 		instances.add(gameObject);
@@ -57,24 +46,24 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 	}
 
 	public ConveyerBelt makeCopy(Square square, Actor owner, Direction direction) {
-		ConveyerBelt portal = new ConveyerBelt();
-		setInstances(portal);
-		super.setAttributesForCopy(portal, square, owner);
-		portal.direction = direction;
-		if (portal.direction == Direction.LEFT) {
-			portal.connectedSquare = portal.squareGameObjectIsOn.getSquareToLeftOf();
-			portal.imageTexture = textureLeft;
-		} else if (portal.direction == Direction.RIGHT) {
-			portal.connectedSquare = portal.squareGameObjectIsOn.getSquareToRightOf();
-			portal.imageTexture = textureRight;
-		} else if (portal.direction == Direction.UP) {
-			portal.connectedSquare = portal.squareGameObjectIsOn.getSquareAbove();
-			portal.imageTexture = textureUp;
-		} else if (portal.direction == Direction.DOWN) {
-			portal.connectedSquare = portal.squareGameObjectIsOn.getSquareBelow();
-			portal.imageTexture = textureDown;
+		ConveyerBelt conveyorBelt = new ConveyerBelt();
+		setInstances(conveyorBelt);
+		super.setAttributesForCopy(conveyorBelt, square, owner);
+		conveyorBelt.direction = direction;
+		if (conveyorBelt.direction == Direction.LEFT) {
+			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareToLeftOf();
+			conveyorBelt.imageTexture = textureLeft;
+		} else if (conveyorBelt.direction == Direction.RIGHT) {
+			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareToRightOf();
+			conveyorBelt.imageTexture = textureRight;
+		} else if (conveyorBelt.direction == Direction.UP) {
+			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareAbove();
+			conveyorBelt.imageTexture = textureUp;
+		} else if (conveyorBelt.direction == Direction.DOWN) {
+			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareBelow();
+			conveyorBelt.imageTexture = textureDown;
 		}
-		return portal;
+		return conveyorBelt;
 	}
 
 	@Override
@@ -101,6 +90,7 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 
 		if (squareGameObjectIsOn == null || gameObject == null || connectedSquare == null)
 			return;
+
 		new ActionTeleport(ConveyerBelt.this, gameObject, connectedSquare, true, true, false).perform();
 
 	}

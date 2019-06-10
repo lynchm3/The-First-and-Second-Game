@@ -62,7 +62,7 @@ public class ActionTeleport extends Action {
 			new ActionStopPeeking(performer).perform();
 		}
 
-		if (targetGameObject != gameObjectPerformer) {
+		if (targetGameObject != gameObjectPerformer && performer instanceof Actor) {
 			gameObjectPerformer.setPrimaryAnimation(new AnimationPush(gameObjectPerformer, squareToTeleportTo,
 					gameObjectPerformer.getPrimaryAnimation(), null));
 		}
