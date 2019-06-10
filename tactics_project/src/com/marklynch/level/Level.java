@@ -1794,7 +1794,7 @@ public class Level {
 
 		if (action == null || action.enabled == false || squareToMoveTo == Player.playerPathToMove.squares.get(0)) {
 			squareToMoveTo = Player.playerPathToMove.squares.get(0);
-			action = new ActionMove(Level.player, squareToMoveTo, true);
+			action = new ActionMove(Level.player, squareToMoveTo, true, true);
 		}
 
 		if (!action.enabled) {

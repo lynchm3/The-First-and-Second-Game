@@ -129,7 +129,7 @@ public class AIRoutineUtils {
 		if (path.squares.size() == 0)
 			return false;
 
-		new ActionMove(Game.level.activeActor, path.squares.get(0), true).perform();
+		new ActionMove(Game.level.activeActor, path.squares.get(0), true, true).perform();
 		return true;
 
 	}
@@ -385,7 +385,7 @@ public class AIRoutineUtils {
 		if (squareActorOn.xInGrid > target.squareGameObjectIsOn.xInGrid
 				&& squareActorOn.xInGrid < Game.level.squares.length - 1) {
 			ActionMove actionMove = new ActionMove(Game.level.activeActor,
-					Game.level.squares[squareActorOn.xInGrid + 1][squareActorOn.yInGrid], false);
+					Game.level.squares[squareActorOn.xInGrid + 1][squareActorOn.yInGrid], false, true);
 			if (actionMove.check()) {
 				actionMove.perform();
 				return true;
@@ -393,7 +393,7 @@ public class AIRoutineUtils {
 
 		} else if (squareActorOn.xInGrid < target.squareGameObjectIsOn.xInGrid && squareActorOn.xInGrid > 0) {
 			ActionMove actionMove = new ActionMove(Game.level.activeActor,
-					Game.level.squares[squareActorOn.xInGrid - 1][squareActorOn.yInGrid], false);
+					Game.level.squares[squareActorOn.xInGrid - 1][squareActorOn.yInGrid], false, true);
 			if (actionMove.check()) {
 				actionMove.perform();
 				return true;
@@ -403,14 +403,14 @@ public class AIRoutineUtils {
 		if (squareActorOn.yInGrid > target.squareGameObjectIsOn.yInGrid
 				&& squareActorOn.yInGrid < Game.level.squares[0].length - 1) {
 			ActionMove actionMove = new ActionMove(Game.level.activeActor,
-					Game.level.squares[squareActorOn.xInGrid][squareActorOn.yInGrid + 1], false);
+					Game.level.squares[squareActorOn.xInGrid][squareActorOn.yInGrid + 1], false, true);
 			if (actionMove.check()) {
 				actionMove.perform();
 				return true;
 			}
 		} else if (squareActorOn.yInGrid < target.squareGameObjectIsOn.yInGrid && squareActorOn.yInGrid > 0) {
 			ActionMove actionMove = new ActionMove(Game.level.activeActor,
-					Game.level.squares[squareActorOn.xInGrid][squareActorOn.yInGrid - 1], false);
+					Game.level.squares[squareActorOn.xInGrid][squareActorOn.yInGrid - 1], false, true);
 			if (actionMove.check()) {
 				actionMove.perform();
 				return true;
@@ -529,7 +529,7 @@ public class AIRoutineUtils {
 		if (path == null || path.squares.size() == 0 || path.squares.get(0) == null)
 			return true;
 
-		new ActionMove(Game.level.activeActor, path.squares.get(0), true).perform();
+		new ActionMove(Game.level.activeActor, path.squares.get(0), true, true).perform();
 
 		return true;
 

@@ -82,18 +82,18 @@ public class Portal extends GameObject implements OnCompletionListener {
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionMove(performer, squareGameObjectIsOn, true);
+		return new ActionMove(performer, squareGameObjectIsOn, true, true);
 	}
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionMove(performer, squareGameObjectIsOn, true);
+		return new ActionMove(performer, squareGameObjectIsOn, true, true);
 	}
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
-		actions.add(new ActionMove(performer, squareGameObjectIsOn, true));
+		actions.add(new ActionMove(performer, squareGameObjectIsOn, true, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;
 	}

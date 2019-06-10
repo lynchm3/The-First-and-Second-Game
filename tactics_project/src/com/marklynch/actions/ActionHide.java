@@ -66,7 +66,7 @@ public class ActionHide extends Action {
 	@Override
 	public boolean check() {
 		if (performer.squareGameObjectIsOn != targetGameObject.squareGameObjectIsOn) {
-			this.actionMove = new ActionMove(performer, targetGameObject.squareGameObjectIsOn, false);
+			this.actionMove = new ActionMove(performer, targetGameObject.squareGameObjectIsOn, false, true);
 			return this.actionMove.enabled;
 		}
 		return true;

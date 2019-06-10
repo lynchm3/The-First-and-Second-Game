@@ -19,12 +19,16 @@ public class ActionMove extends Action {
 
 	public static final String ACTION_NAME = "Move here";
 	boolean endTurn;
+	boolean animate = true;
 
-	public ActionMove(Actor performer, Square target, boolean endTurn) {
+	public ActionMove(GameObject performer, Square target, boolean endTurn, boolean animate) {
 		super(ACTION_NAME, textureWalk, performer, target);
-		super.gameObjectPerformer = this.performer = performer;
+		super.gameObjectPerformer = performer;
+		if (performer instanceof Actor)
+			this.performer = (Actor) performer;
 		this.targetSquare = target;
 		this.endTurn = endTurn;
+		this.animate = animate;
 		if (!check()) {
 			enabled = false;
 		}
@@ -76,7 +80,7 @@ public class ActionMove extends Action {
 			return;
 		}
 
-		if (Game.level.shouldLog(actor, targetSquare)) {
+		if (animate && Game.level.shouldLog(actor, targetSquare)) {
 			performer.setPrimaryAnimation(new AnimationWalk(performer, actor.squareGameObjectIsOn, squareToMoveTo,
 					performer.walkPhase, null));
 			// performer.primaryAnimation.phase = performer.walkPhase;

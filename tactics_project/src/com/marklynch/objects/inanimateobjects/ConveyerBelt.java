@@ -1,13 +1,17 @@
 package com.marklynch.objects.inanimateobjects;
 
+import com.marklynch.Game;
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionMove;
-import com.marklynch.actions.ActionTeleport;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
+import com.marklynch.level.constructs.animation.primary.AnimationStraightLine;
+import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
@@ -45,6 +49,11 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		super.setInstances(gameObject);
 	}
 
+//	public void draw1()
+//	{
+//		
+//	}
+
 	public ConveyerBelt makeCopy(Square square, Actor owner, Direction direction) {
 		ConveyerBelt conveyorBelt = new ConveyerBelt();
 		setInstances(conveyorBelt);
@@ -53,6 +62,9 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		if (conveyorBelt.direction == Direction.LEFT) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareToLeftOf();
 			conveyorBelt.imageTexture = textureLeft;
+			width = 192;
+			halfWidth = 192 / 2;
+			widthRatio = 1.5f;
 		} else if (conveyorBelt.direction == Direction.RIGHT) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareToRightOf();
 			conveyorBelt.imageTexture = textureRight;
@@ -63,7 +75,58 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareBelow();
 			conveyorBelt.imageTexture = textureDown;
 		}
+
+//		conveyorBelt.widthRatio = 1;
+//		conveyorBelt.heightRatio = 1;
+//		conveyorBelt.drawOffsetX = -128f;
+//		conveyorBelt.drawOffsetY = 0f;
+
+//		conveyorBelt.continueAnimation();
+
 		return conveyorBelt;
+	}
+
+	int maxOffset = -64;
+	float offset = 0;
+
+	public boolean draw1() {
+
+		if (!shouldDraw())
+			return false;
+
+		offset -= Game.delta / 1000f;
+		if (offset <= maxOffset)
+			offset = 0;
+
+//		int offset = Game.delta % maxOffset;
+
+		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + offset);
+		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels);
+		float alpha = 1.0f;
+
+		if (primaryAnimation != null)
+			alpha = primaryAnimation.alpha;
+		if (!this.squareGameObjectIsOn.visibleToPlayer)
+			alpha = 0.5f;
+
+		float boundsX1 = this.squareGameObjectIsOn.xInGridPixels;
+		float boundsY1 = this.squareGameObjectIsOn.yInGridPixels;
+		float boundsX2 = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH;
+		float boundsY2 = this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT;
+
+		float scaleX = 1;
+		float scaleY = 1;
+
+		Color color = Level.dayTimeOverlayColor;
+		if (this.squareGameObjectIsOn.structureSquareIsIn != null)
+			color = StructureRoom.roomColor;
+		color = calculateColor(color);
+		drawGameObject(actorPositionXInPixels, actorPositionYInPixels, width, height, halfWidth, halfHeight, alpha,
+				flash || this == Game.gameObjectMouseIsOver
+						|| (Game.gameObjectMouseIsOver != null
+								&& Game.gameObjectMouseIsOver.gameObjectsToHighlight.contains(this)),
+				scaleX, scaleY, 0f, boundsX1, boundsY1, boundsX2, boundsY2, color, true, imageTexture);
+		return true;
 	}
 
 	@Override
@@ -91,30 +154,40 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		if (squareGameObjectIsOn == null || gameObject == null || connectedSquare == null)
 			return;
 
-		new ActionTeleport(ConveyerBelt.this, gameObject, connectedSquare, true, true, false).perform();
+//		new ActionMove(gameObject, connectedSquare, false, true);
+
+//		new ActionTeleport(ConveyerBelt.this, gameObject, connectedSquare, true, true, false).perform();
+
+//		AnimationStraightLine(GameObject performer, float time, boolean blockAI, double delay,
+//				OnCompletionListener onCompletionListener, Square... targetSquares) {
+
+		gameObject.setPrimaryAnimation(new AnimationStraightLine(gameObject, 2f, false, 0f, null, connectedSquare));
 
 	}
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionMove(performer, squareGameObjectIsOn, true);
+		return new ActionMove(performer, squareGameObjectIsOn, true, true);
 	}
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionMove(performer, squareGameObjectIsOn, true);
+		return new ActionMove(performer, squareGameObjectIsOn, true, true);
 	}
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
-		actions.add(new ActionMove(performer, squareGameObjectIsOn, true));
+		actions.add(new ActionMove(performer, squareGameObjectIsOn, true, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;
 	}
 
 	@Override
 	public void animationComplete(GameObject gameObject) {
+//		if (gameObject == this)
+//			this.continueAnimation();
+//		else
 		doTheThing(gameObject);
 	}
 

@@ -1126,7 +1126,7 @@ public class GameObject
 		if (isFloorObject || (this instanceof Liquid)) {
 			if (this.squareGameObjectIsOn == null)
 				return null;
-			return new ActionMove(performer, this.squareGameObjectIsOn, true);
+			return new ActionMove(performer, this.squareGameObjectIsOn, true, true);
 		}
 
 		// Water Source
@@ -1165,7 +1165,7 @@ public class GameObject
 
 		if (this instanceof Door) {
 			if (((Door) this).open) {
-				return new ActionMove(performer, this.squareGameObjectIsOn, true);
+				return new ActionMove(performer, this.squareGameObjectIsOn, true, true);
 			} else if (!(this instanceof RemoteDoor)) {
 				return new ActionOpen(performer, ((Door) this));
 			}

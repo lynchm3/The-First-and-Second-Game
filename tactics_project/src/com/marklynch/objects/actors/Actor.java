@@ -1875,7 +1875,7 @@ public class Actor extends GameObject {
 				return new ActionWait(performer, performer.squareGameObjectIsOn);
 			}
 		} else {
-			return new ActionMove(performer, this.squareGameObjectIsOn, true);
+			return new ActionMove(performer, this.squareGameObjectIsOn, true, true);
 		}
 	}
 
@@ -1925,7 +1925,7 @@ public class Actor extends GameObject {
 			actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		}
 
-		actions.add(new ActionMove(performer, this.squareGameObjectIsOn, true));
+		actions.add(new ActionMove(performer, this.squareGameObjectIsOn, true, true));
 
 		return actions;
 	}

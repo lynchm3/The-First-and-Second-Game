@@ -798,7 +798,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 
 	public Action getDefaultActionForTheSquareOrObject(Actor performer, boolean keyPress) {
 		if (keyPress == false && !seenByPlayer) {
-			return new ActionMove(performer, this, true);
+			return new ActionMove(performer, this, true, true);
 		}
 
 		GameObject targetGameObject = null;
@@ -821,7 +821,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public Action getSecondaryActionForTheSquareOrObject(Actor performer, boolean keyPress) {
 
 		if (keyPress == false && !seenByPlayer) {
-			return new ActionMove(performer, this, true);
+			return new ActionMove(performer, this, true, true);
 		}
 
 		GameObject targetGameObject = null;
@@ -876,7 +876,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 
 		if (!seenByPlayer) {
-			return new ActionMove(performer, this, true);
+			return new ActionMove(performer, this, true, true);
 		} else if (this == Game.level.player.squareGameObjectIsOn) {
 			return new ActionWait(performer, this);
 		} else {
@@ -890,7 +890,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 				}
 			}
 
-			return new ActionMove(performer, this, true);
+			return new ActionMove(performer, this, true, true);
 
 		}
 
@@ -912,7 +912,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 				}
 			}
 
-			return new ActionMove(performer, this, true);
+			return new ActionMove(performer, this, true, true);
 
 		} else {
 			return null;
@@ -925,7 +925,7 @@ public class Square implements Idable, ActionableInWorld, InventoryParent, Compa
 		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
 		// Move, teleport, loiter
 		if (this != Game.level.player.squareGameObjectIsOn) {
-			actions.add(new ActionMove(performer, this, true));
+			actions.add(new ActionMove(performer, this, true, true));
 			actions.add(new ActionTeleport(performer, performer, this, true, true, false));
 			actions.add(new ActionTeleportSwap(performer, performer, this, true));
 		} else {
