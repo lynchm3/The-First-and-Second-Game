@@ -12,7 +12,7 @@ public class PuzzleRoomConveyerBelt extends StructureRoom {
 
 	int posX;
 	int posY;
-	final static int totalWidthInSquares = 20;
+	final static int totalWidthInSquares = 14;
 	final static int totalHeightInSquares = 2;
 
 	ArrayList<Square> extendedBridgeSquares = new ArrayList<Square>(Square.class);
@@ -28,9 +28,29 @@ public class PuzzleRoomConveyerBelt extends StructureRoom {
 
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 1][posY], null, Direction.RIGHT);
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 2][posY], null, Direction.RIGHT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 3][posY], null, Direction.RIGHT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 4][posY], null, Direction.RIGHT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 5][posY], null, Direction.RIGHT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 6][posY], null, Direction.RIGHT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 7][posY], null, Direction.RIGHT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 8][posY], null, Direction.RIGHT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 9][posY], null, Direction.RIGHT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 10][posY], null, Direction.RIGHT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 11][posY], null, Direction.RIGHT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 12][posY], null, Direction.RIGHT);
 
-		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 2][posY + 1], null, Direction.LEFT);
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 1][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 2][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 3][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 4][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 5][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 6][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 7][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 8][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 9][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 10][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 11][posY + 1], null, Direction.LEFT);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 12][posY + 1], null, Direction.LEFT);
 	}
 
 	@Override
