@@ -51,6 +51,12 @@ public class PuzzleRoomConveyerBelt extends StructureRoom {
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 10][posY + 1], null, Direction.LEFT);
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 11][posY + 1], null, Direction.LEFT);
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 12][posY + 1], null, Direction.LEFT);
+
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 13][posY], null, Direction.UP);
+		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 13][posY + 1], null, Direction.UP);
+
+//		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 14][posY], null, Direction.DOWN);
+//		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 14][posY + 1], null, Direction.DOWN);
 	}
 
 	@Override

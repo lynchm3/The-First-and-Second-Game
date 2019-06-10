@@ -68,12 +68,21 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		} else if (conveyorBelt.direction == Direction.RIGHT) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareToRightOf();
 			conveyorBelt.imageTexture = textureRight;
+			conveyorBelt.width = 192;
+			conveyorBelt.halfWidth = 192 / 2;
+			conveyorBelt.widthRatio = 1.5f;
 		} else if (conveyorBelt.direction == Direction.UP) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareAbove();
 			conveyorBelt.imageTexture = textureUp;
+			conveyorBelt.height = 192;
+			conveyorBelt.halfHeight = 192 / 2;
+			conveyorBelt.heightRatio = 1.5f;
 		} else if (conveyorBelt.direction == Direction.DOWN) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareBelow();
 			conveyorBelt.imageTexture = textureDown;
+			conveyorBelt.height = 192;
+			conveyorBelt.halfHeight = 192 / 2;
+			conveyorBelt.heightRatio = 1.5f;
 		}
 
 //		conveyorBelt.widthRatio = 1;
@@ -86,22 +95,36 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		return conveyorBelt;
 	}
 
-	int maxOffset = -64;
-	float offset = 0;
+	float offsetX = 0;
+	float offsetY = 0;
 
 	public boolean draw1() {
 
 		if (!shouldDraw())
 			return false;
 
-		offset -= Game.delta / 128f;
-		if (offset <= maxOffset)
-			offset = 0;
+		if (direction == Direction.LEFT) {
+			offsetX -= Game.delta / 128f;
+			if (offsetX <= -64)
+				offsetX = 0;
+		} else if (direction == Direction.RIGHT) {
+			offsetX += Game.delta / 128f;
+			if (offsetX >= 0)
+				offsetX = -64;
+		} else if (direction == Direction.UP) {
+			offsetY -= Game.delta / 128f;
+			if (offsetY <= -64)
+				offsetY = 0;
+		} else if (direction == Direction.DOWN) {
+			offsetY += Game.delta / 128f;
+			if (offsetY >= 0)
+				offsetY = -64;
+		}
 
 //		int offset = Game.delta % maxOffset;
 
-		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + offset);
-		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels);
+		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + offsetX);
+		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + offsetY);
 		float alpha = 1.0f;
 
 		if (primaryAnimation != null)
