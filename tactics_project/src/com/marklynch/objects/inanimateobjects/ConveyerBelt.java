@@ -62,9 +62,9 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		if (conveyorBelt.direction == Direction.LEFT) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareToLeftOf();
 			conveyorBelt.imageTexture = textureLeft;
-			width = 192;
-			halfWidth = 192 / 2;
-			widthRatio = 1.5f;
+			conveyorBelt.width = 192;
+			conveyorBelt.halfWidth = 192 / 2;
+			conveyorBelt.widthRatio = 1.5f;
 		} else if (conveyorBelt.direction == Direction.RIGHT) {
 			conveyorBelt.connectedSquare = conveyorBelt.squareGameObjectIsOn.getSquareToRightOf();
 			conveyorBelt.imageTexture = textureRight;
@@ -94,7 +94,7 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 		if (!shouldDraw())
 			return false;
 
-		offset -= Game.delta / 1000f;
+		offset -= Game.delta / 128f;
 		if (offset <= maxOffset)
 			offset = 0;
 
