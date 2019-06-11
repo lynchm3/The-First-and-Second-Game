@@ -10,12 +10,13 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
+import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
-public class ConveyerBelt extends GameObject implements OnCompletionListener {
+public class ConveyerBelt extends GameObject implements OnCompletionListener, SwitchListener {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 	public Square connectedSquare = null;
@@ -104,7 +105,7 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 
 //		Time this frame showing same value every fucking time.
 
-		long generalOffset = (Game.timeThisFrame / 10l) % 64l;
+		long generalOffset = (Game.timeThisFrame / 4l) % 64l;
 //		float generalOffset = 1f;
 //		System.out.println("generalOffset = " + generalOffset);
 //		System.out.println("Game.timeThisFrame = " + Game.timeThisFrame);
@@ -233,6 +234,32 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener {
 //			this.continueAnimation();
 //		else
 		doTheThing(gameObject);
+	}
+
+	@Override
+	public void zwitch(Switch zwitch) {
+		if (direction == Direction.LEFT) {
+			direction = Direction.RIGHT;
+		} else if (direction == Direction.RIGHT) {
+
+			direction = Direction.LEFT;
+		} else if (direction == Direction.UP) {
+			direction = Direction.DOWN;
+
+		} else if (direction == Direction.DOWN) {
+			direction = Direction.UP;
+
+		}
+
+		if (direction == Direction.LEFT) {
+			connectedSquare = squareGameObjectIsOn.getSquareToLeftOf();
+		} else if (direction == Direction.RIGHT) {
+			connectedSquare = squareGameObjectIsOn.getSquareToRightOf();
+		} else if (direction == Direction.UP) {
+			connectedSquare = squareGameObjectIsOn.getSquareAbove();
+		} else if (direction == Direction.DOWN) {
+			connectedSquare = squareGameObjectIsOn.getSquareBelow();
+		}
 	}
 
 }

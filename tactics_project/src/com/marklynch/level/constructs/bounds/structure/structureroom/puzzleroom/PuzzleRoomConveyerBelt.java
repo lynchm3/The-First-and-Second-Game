@@ -5,10 +5,14 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
+import com.marklynch.objects.inanimateobjects.ConveyerBelt;
+import com.marklynch.objects.inanimateobjects.Switch;
+import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.utils.ArrayList;
 
-public class PuzzleRoomConveyerBelt extends StructureRoom {
+public class PuzzleRoomConveyerBelt extends StructureRoom implements SwitchListener {
 
 	int posX;
 	int posY;
@@ -19,6 +23,8 @@ public class PuzzleRoomConveyerBelt extends StructureRoom {
 
 	Square voidSquare;
 
+	ArrayList<ConveyerBelt> conveyerBelts = new ArrayList<ConveyerBelt>(ConveyerBelt.class);
+
 	public PuzzleRoomConveyerBelt(int posX, int posY) {
 		super("Bridge Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
@@ -26,7 +32,7 @@ public class PuzzleRoomConveyerBelt extends StructureRoom {
 		this.posX = posX;
 		this.posY = posY;
 
-		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 1][posY], null, Direction.RIGHT);
+		conveyerBelts.add(Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 1][posY], null, Direction.RIGHT));
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 2][posY], null, Direction.RIGHT);
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 3][posY], null, Direction.RIGHT);
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 4][posY], null, Direction.RIGHT);
@@ -55,13 +61,21 @@ public class PuzzleRoomConveyerBelt extends StructureRoom {
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 13][posY], null, Direction.DOWN);
 		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 13][posY + 1], null, Direction.DOWN);
 
-//		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 14][posY], null, Direction.DOWN);
-//		Templates.CONVEYER_BELT.makeCopy(Level.squares[posX + 14][posY + 1], null, Direction.DOWN);
+		Templates.PRESSURE_PLATE.makeCopy(Level.squares[posX + 4][posY + 4], null, SWITCH_TYPE.ON_OFF, 1,
+				conveyerBelts.toArray(new ConveyerBelt[conveyerBelts.size()]));
 	}
 
 	@Override
 	public Long getId() {
 		return id;
+	}
+
+	@Override
+	public void zwitch(Switch zwitch) {
+		for (ConveyerBelt conveyerBelt : conveyerBelts) {
+
+		}
+
 	}
 
 }
