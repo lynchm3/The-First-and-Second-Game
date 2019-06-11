@@ -575,8 +575,8 @@ public class GameObject
 					boundsX2, boundsY2, backwards, false, color);
 
 			if (highlight) {
-				TextureUtils.drawTexture(image, 0.5f, x, y, x + width, y + height, 0, 0, 0, 0, backwards, false,
-						flashColor, false);
+				TextureUtils.drawTextureWithinBounds(image, 0.5f, x, y, x + width, y + height, boundsX1, boundsY1,
+						boundsX2, boundsY2, backwards, false, flashColor);
 			} else if (squareGameObjectIsOn.inventory.waterBody != null && !(this instanceof Fish)
 					&& !(this instanceof WaterBody)) {
 
