@@ -59,6 +59,11 @@ public class AnimationStraightLine extends Animation {
 //			kf0.offsetY = 0;
 			kf0.headToToeOffset = 0f;
 
+			if (this.leftShoulderAngle == 0 && this.rightShoulderAngle == 0) {
+				kf0.leftShoulderAngle = 0.1f;
+				kf0.rightShoulderAngle = -0.1f;
+			}
+
 			kf0.keyFrameTimeMillis = keyFrameTimeMillis;
 			kf0.normaliseSpeeds = true;
 			keyFrames.add(kf0);

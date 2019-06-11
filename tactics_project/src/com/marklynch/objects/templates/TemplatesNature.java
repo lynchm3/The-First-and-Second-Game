@@ -356,7 +356,7 @@ public class TemplatesNature {
 
 		Templates.CONVEYER_BELT = new ConveyerBelt();
 		Templates.CONVEYER_BELT.name = "Conveyer Belt";
-		Templates.CONVEYER_BELT.setImageAndExtrapolateSize("conveyer_belt_right.png");
+		Templates.CONVEYER_BELT.setImageAndExtrapolateSize("conveyer_belt_left_right.png");
 		Templates.CONVEYER_BELT.templateId = GameObject.generateNewTemplateId();
 
 		Templates.LANDMINE = new Landmine();

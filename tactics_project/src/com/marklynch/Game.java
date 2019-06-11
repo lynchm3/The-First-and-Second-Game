@@ -186,7 +186,7 @@ public class Game {
 	public static GameObject gameObjectMouseIsOver;
 
 	public static int delta = 0;
-	public static float timeThisFrame = 0;
+	public static long timeThisFrame = 0;
 
 	public static void main(String[] argv) {
 		Game game = new Game();
@@ -246,7 +246,7 @@ public class Game {
 					ticksSinceDisplayInactive++;
 			}
 
-			timeThisFrame = getTime();
+			timeThisFrame = System.currentTimeMillis();
 			delta = getDelta();
 
 			// Resize?
