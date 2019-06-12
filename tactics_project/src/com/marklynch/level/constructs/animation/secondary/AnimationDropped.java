@@ -8,7 +8,7 @@ import com.marklynch.objects.inanimateobjects.Food;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Tree;
 
-public class AnimationDrop extends SecondaryAnimation {
+public class AnimationDropped extends SecondaryAnimation {
 
 	public Square targetSquare;
 	float originX, originY, targetX, targetY;
@@ -17,7 +17,7 @@ public class AnimationDrop extends SecondaryAnimation {
 
 	// Transfer object from person to sqr, for show only, used in drop, primary
 
-	public AnimationDrop(String name, GameObject shooter, Action action, Square targetSquare,
+	public AnimationDropped(String name, GameObject shooter, Action action, Square targetSquare,
 			GameObject projectileObject, float speed, OnCompletionListener onCompletionListener) {
 
 		super(null, onCompletionListener, null, null, null, null, null, null, false, shooter, targetSquare);
@@ -32,10 +32,21 @@ public class AnimationDrop extends SecondaryAnimation {
 
 		if (shooter instanceof Actor) {
 			Actor shooterActor = (Actor) shooter;
-			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + shooter.drawOffsetX
-					+ shooterActor.rightArmHingeX - projectileObject.anchorX);
-			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + shooter.drawOffsetY + shooterActor.handY
-					- projectileObject.anchorY);
+//			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + shooter.drawOffsetX
+//					+ shooterActor.rightArmHingeX - projectileObject.anchorX);
+//			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + shooter.drawOffsetY + shooterActor.handY
+//					- projectileObject.anchorY);
+
+			if (shooter.backwards)
+				this.originX = shooterActor.getHandXY().x - projectileObject.halfWidth;// shooter.getCenterX();
+			else
+				this.originX = shooterActor.getHandXY().x - projectileObject.halfWidth;
+			;// + Game.SQUARE_WIDTH;//
+				// shooter.getCenterX();
+
+			projectileObject.backwards = shooter.backwards;
+
+			this.originY = shooterActor.getHandXY().y - projectileObject.halfHeight;// shooter.getCenterY();
 		} else if (shooter instanceof Tree && projectileObject instanceof Food) {
 			Food fruit = (Food) projectileObject;
 			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + fruit.drawOffsetX);

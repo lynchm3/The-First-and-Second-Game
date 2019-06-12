@@ -51,14 +51,15 @@ public class AnimationThrown extends SecondaryAnimation {
 		this.projectileObject = projectileObject;
 
 		if (shooter.backwards)
-			this.x = this.originX = shooter.squareGameObjectIsOn.xInGridPixels;// shooter.getCenterX();
+			this.x = this.originX = shooter.getHandXY().x - projectileObject.halfWidth;// shooter.getCenterX();
 		else
-			this.x = this.originX = shooter.squareGameObjectIsOn.xInGridPixels;// + Game.SQUARE_WIDTH;//
-																				// shooter.getCenterX();
+			this.x = this.originX = shooter.getHandXY().x - projectileObject.halfWidth;
+		;// + Game.SQUARE_WIDTH;//
+			// shooter.getCenterX();
 
 		projectileObject.backwards = shooter.backwards;
 
-		this.y = this.originY = shooter.actorPositionYInPixels + shooter.shoulderY;// shooter.getCenterY();
+		this.y = this.originY = shooter.getHandXY().y - projectileObject.halfHeight;// shooter.getCenterY();
 
 		// this.targetX = this.targetSquare.xInGridPixels + Game.HALF_SQUARE_WIDTH *
 		// this.projectileObject.drawOffsetRatioX
@@ -86,6 +87,7 @@ public class AnimationThrown extends SecondaryAnimation {
 		distanceToCoverY = this.targetY - this.originY;
 		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
 
+//		speed = 0.001f;
 		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
 		this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
 

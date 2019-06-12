@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.secondary.AnimationDrop;
+import com.marklynch.level.constructs.animation.secondary.AnimationDropped;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -55,7 +55,7 @@ public class ActionDropItems extends VariableQtyAction {
 		if (Game.level.openInventories.size() > 0) {
 		} else if (gameObjectPerformer.squareGameObjectIsOn.onScreen()
 				&& gameObjectPerformer.squareGameObjectIsOn.visibleToPlayer) {
-			objects[0].setPrimaryAnimation(new AnimationDrop(objects[0].name, gameObjectPerformer, this, targetSquare,
+			objects[0].setPrimaryAnimation(new AnimationDropped(objects[0].name, gameObjectPerformer, this, targetSquare,
 					objects[0], 0.5f, null));
 		}
 
