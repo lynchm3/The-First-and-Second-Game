@@ -244,10 +244,10 @@ public class Wall extends GameObject {
 
 		float alpha = 1.0f;
 
-		float boundsX1 = +primaryAnimation.boundsX1;
-		float boundsY1 = +primaryAnimation.boundsY1;
-		float boundsX2 = +primaryAnimation.boundsX2;
-		float boundsY2 = +primaryAnimation.boundsY2;
+		boundsX1 = +primaryAnimation.boundsX1;
+		boundsY1 = +primaryAnimation.boundsY1;
+		boundsX2 = +primaryAnimation.boundsX2;
+		boundsY2 = +primaryAnimation.boundsY2;
 
 		if (fullWall) {
 

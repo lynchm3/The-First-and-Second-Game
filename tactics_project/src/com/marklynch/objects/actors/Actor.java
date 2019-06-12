@@ -512,19 +512,25 @@ public class Actor extends GameObject {
 		actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
 		actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 
-		boundsX1 = actorPositionXInPixels;
-		boundsY1 = actorPositionYInPixels;
-		boundsX2 = actorPositionXInPixels + width;
-		boundsY2 = actorPositionYInPixels + height;
+		boundsX1Relative = 0;
+		boundsY1Relative = 0;
+		boundsX2Relative = width;
+		boundsY2Relative = height;
 
 		if (primaryAnimation != null) {
 			actorPositionXInPixels += primaryAnimation.offsetX;
 			actorPositionYInPixels += primaryAnimation.offsetY;
-			boundsX1 = actorPositionXInPixels + primaryAnimation.boundsX1;
-			boundsY1 = actorPositionYInPixels + primaryAnimation.boundsY1;
-			boundsX2 = actorPositionXInPixels + primaryAnimation.boundsX2;
-			boundsY2 = actorPositionYInPixels + primaryAnimation.boundsY2;
+
+			boundsX1Relative = primaryAnimation.boundsX1;
+			boundsY1Relative = primaryAnimation.boundsY1;
+			boundsX2Relative = primaryAnimation.boundsX2;
+			boundsY2Relative = primaryAnimation.boundsY2;
 		}
+
+		boundsX1 = actorPositionXInPixels + boundsX1Relative;
+		boundsY1 = actorPositionYInPixels + boundsY1Relative;
+		boundsX2 = actorPositionXInPixels + boundsX2Relative;
+		boundsY2 = actorPositionYInPixels + boundsY2Relative;
 
 		if (primaryAnimation != null && primaryAnimation.getCompleted() == false)
 			primaryAnimation.draw1();

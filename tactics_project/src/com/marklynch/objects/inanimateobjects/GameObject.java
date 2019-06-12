@@ -301,6 +301,16 @@ public class GameObject
 	public Effect[] touchEffects;
 	public Effect[] consumeEffects;
 
+	public float boundsX1;
+	public float boundsY1;
+	public float boundsX2;
+	public float boundsY2;
+
+	public float boundsX1Relative;
+	public float boundsY1Relative;
+	public float boundsX2Relative;
+	public float boundsY2Relative;
+
 	public GameObject() {
 
 		highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 0));
@@ -453,19 +463,25 @@ public class GameObject
 		if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
 			alpha = 0.5f;
 
-		float boundsX1 = actorPositionXInPixels;
-		float boundsY1 = actorPositionYInPixels;
-		float boundsX2 = actorPositionXInPixels + width;
-		float boundsY2 = actorPositionYInPixels + height;
+		boundsX1Relative = 0;
+		boundsY1Relative = 0;
+		boundsX2Relative = width;
+		boundsY2Relative = height;
 
 		if (primaryAnimation != null) {
 			actorPositionXInPixels += primaryAnimation.offsetX;
 			actorPositionYInPixels += primaryAnimation.offsetY;
-			boundsX1 = actorPositionXInPixels + primaryAnimation.boundsX1;
-			boundsY1 = actorPositionYInPixels + primaryAnimation.boundsY1;
-			boundsX2 = actorPositionXInPixels + primaryAnimation.boundsX2;
-			boundsY2 = actorPositionYInPixels + primaryAnimation.boundsY2;
+
+			boundsX1Relative = primaryAnimation.boundsX1;
+			boundsY1Relative = primaryAnimation.boundsY1;
+			boundsX2Relative = primaryAnimation.boundsX2;
+			boundsY2Relative = primaryAnimation.boundsY2;
 		}
+
+		boundsX1 = actorPositionXInPixels + boundsX1Relative;
+		boundsY1 = actorPositionYInPixels + boundsY1Relative;
+		boundsX2 = actorPositionXInPixels + boundsX2Relative;
+		boundsY2 = actorPositionYInPixels + boundsY2Relative;
 
 		float scaleX = 1;
 		float scaleY = 1;
@@ -2838,8 +2854,12 @@ public class GameObject
 					point);
 		}
 
-		// FirstCheckBounding box :P
-		if (point.x > 0 && point.x < this.width && point.y > 0 && point.y < this.height) {
+		// FirstCheckBounding box of image and bounding box set by animation :P
+		if (point.x > 0 && point.x < this.width && point.y > 0 && point.y < this.height
+
+				&& point.x > boundsX1Relative && point.x < boundsX2Relative && point.y > boundsY1Relative
+				&& point.y < boundsY2Relative) {
+
 			Color color = null;
 			if (this instanceof Human) {
 

@@ -143,10 +143,15 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener, Sw
 		if (!this.squareGameObjectIsOn.visibleToPlayer)
 			alpha = 0.5f;
 
-		float boundsX1 = this.squareGameObjectIsOn.xInGridPixels;
-		float boundsY1 = this.squareGameObjectIsOn.yInGridPixels;
-		float boundsX2 = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH;
-		float boundsY2 = this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT;
+		boundsX1Relative = 0;
+		boundsY1Relative = 0;
+		boundsX2Relative = Game.SQUARE_WIDTH;
+		boundsY2Relative = Game.SQUARE_HEIGHT;
+
+		boundsX1 = actorPositionXInPixels + boundsX1Relative;
+		boundsY1 = actorPositionYInPixels + boundsY1Relative;
+		boundsX2 = actorPositionXInPixels + boundsX2Relative;
+		boundsY2 = actorPositionYInPixels + boundsY2Relative;
 
 		float scaleX = 1;
 		float scaleY = 1;
