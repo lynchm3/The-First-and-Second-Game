@@ -155,8 +155,8 @@ public class Game {
 
 	// public static float windowWidth = 800;
 	// public static float windowHeight = 600;
-	public static float windowWidth = 9999;
-	public static float windowHeight = 9999;
+	public static float windowWidth = 1800;
+	public static float windowHeight = 900;
 	public static float halfWindowWidth = windowWidth / 2;
 	public static float halfWindowHeight = windowHeight / 2;
 
