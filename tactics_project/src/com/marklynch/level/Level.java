@@ -13,7 +13,6 @@ import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionMove;
-import com.marklynch.actions.ActionTeleport;
 import com.marklynch.actions.ActionUsePower;
 import com.marklynch.actions.ActionWait;
 import com.marklynch.ai.utils.AIRoutineUtils;
@@ -42,7 +41,6 @@ import com.marklynch.level.constructs.journal.MarkerList;
 import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.constructs.mainmenu.MainMenu;
 import com.marklynch.level.constructs.power.Power;
-import com.marklynch.level.constructs.power.PowerDash;
 import com.marklynch.level.constructs.skilltree.SkillTree;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.NodeList;
@@ -1638,7 +1636,7 @@ public class Level {
 			return;
 
 		if (aiTurn) {
-			float amountOfAiToUpdate = actors.size() * ((float) delta / (float) Game.MINIMUM_TURN_TIME);
+			float amountOfAiToUpdate = actors.size() * (delta / Game.MINIMUM_TURN_TIME);
 			int start = lastActorUpdatedIndex + 1;
 			int end = (int) (start + amountOfAiToUpdate);
 			if (end >= actors.size())
@@ -1772,17 +1770,17 @@ public class Level {
 			Square potentialSquareToMoveTo = Player.playerPathToMove.squares.get(i);
 
 			Action potentialAction = null;
-			if (Level.player.hasPower(PowerDash.class)) {
-				potentialAction = new ActionUsePower(Level.player, null, potentialSquareToMoveTo,
-						new PowerDash(Level.player), false);
-			}
+//			if (Level.player.hasPower(PowerDash.class)) {
+//				potentialAction = new ActionUsePower(Level.player, null, potentialSquareToMoveTo,
+//						new PowerDash(Level.player), false);
+//			}
+//
+//			if (potentialAction == null || !potentialAction.enabled || !potentialAction.legal)
+//				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false,
+//						false);
 
-//			Level.player.hasPower(PowerT.class)
-			if (potentialAction == null || !potentialAction.enabled || !potentialAction.legal)
-				potentialAction = new ActionTeleport(Level.player, Level.player, potentialSquareToMoveTo, true, false,
-						false);
-
-			if (potentialSquareToMoveTo.visibleToPlayer && potentialSquareToMoveTo.inventory.canShareSquare
+			if (potentialAction != null && potentialSquareToMoveTo.visibleToPlayer
+					&& potentialSquareToMoveTo.inventory.canShareSquare
 					&& !potentialSquareToMoveTo.inventory.containsGameObjectOfType(Actor.class)
 					&& potentialAction.enabled && potentialAction.legal) {
 				squareToMoveTo = potentialSquareToMoveTo;

@@ -37,8 +37,8 @@ import mdesl.test.Util;
 
 public class Game {
 
-	public static int playerStartPosX = 148;
-	public static int playerStartPosY = 112;
+	public static int playerStartPosX = 8;
+	public static int playerStartPosY = 10;
 
 	public static final float MINIMUM_TURN_TIME = 500f; // ms
 
@@ -155,8 +155,8 @@ public class Game {
 
 	// public static float windowWidth = 800;
 	// public static float windowHeight = 600;
-	public static float windowWidth = 900;
-	public static float windowHeight = 1000;
+	public static float windowWidth = 9999;
+	public static float windowHeight = 9999;
 	public static float halfWindowWidth = windowWidth / 2;
 	public static float halfWindowHeight = windowHeight / 2;
 
@@ -339,8 +339,9 @@ public class Game {
 	private void initGL(float width, float height) {
 		try {
 			Display.setDisplayMode(new DisplayMode((int) width, (int) height));
+//			Display.setDisplayModeAndFullscreen(new DisplayMode((int) width, (int) height));
 			Display.setResizable(true);
-			Display.setLocation(500, 0);
+			Display.setLocation(0, 0);
 //			Display.setLocation(1000, 0);
 			// Display.setLocation(1000, -1080);
 			Display.create();
