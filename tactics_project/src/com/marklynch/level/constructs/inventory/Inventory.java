@@ -353,7 +353,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		buttonLootAll = new LevelButton(900f, bottomBorderHeight, 150f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "[SPACE] LOOT ALL", true, false, inventoryAreaColor, Color.WHITE,
-				"Loot all items nearby (legal if white, illegal if red)");
+				"Loot all items (red if illegal)");
 		buttonLootAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
