@@ -23,10 +23,14 @@ import com.marklynch.objects.actors.Follower;
 import com.marklynch.objects.actors.Trader;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Storage;
+import com.marklynch.objects.inanimateobjects.Switch;
+import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.inanimateobjects.WantedPoster;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Jar;
+import com.marklynch.objects.utils.SwitchListener;
+import com.marklynch.ui.popups.Toast;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ResourceUtils;
 
@@ -115,6 +119,33 @@ public class AreaTown {
 		GameObject createWithEtching = Templates.CRATE_WITH_ETCHING.makeCopy(Level.squares[posX + 20][posY + 3], false,
 				null);
 		createWithEtching.conversation = createWithEtching.createConversation(new Object[] { "For Velentine Shop" });
+
+		// Rock alignment puzzle
+		Templates.BOULDER.makeCopy(Level.squares[posX + 20][posY + 8], null);
+		Level.squares[posX + 20][posY + 8].setFloorImageTexture(Square.MUD_TEXTURE);
+		Templates.BOULDER.makeCopy(Level.squares[posX + 20][posY + 9], null);
+		Level.squares[posX + 20][posY + 9].setFloorImageTexture(Square.MUD_TEXTURE);
+		GameObject puzzleBoulder = Templates.BOULDER.makeCopy(Level.squares[posX + 21][posY + 10], null);
+		GameObject puzzlePressurePlate = Templates.PRESSURE_PLATE_REQUIRING_SPECIFIC_ITEM.makeCopy(
+				Level.squares[posX + 20][posY + 10], null, SWITCH_TYPE.OPEN_CLOSE, puzzleBoulder, new SwitchListener() {
+					@Override
+					public void zwitch(Switch zwitch) {
+						Level.addToast(new Toast(new Object[] { "PUZZLE SOLVED!" }));
+					}
+
+					@Override
+					public Long getId() {
+						return 0L;
+					}
+				});
+
+		puzzlePressurePlate.level = 9999;
+		puzzlePressurePlate.discoveredObject = false;
+		Level.squares[posX + 20][posY + 10].setFloorImageTexture(Square.MUD_TEXTURE);
+		Templates.BOULDER.makeCopy(Level.squares[posX + 20][posY + 11], null);
+		Level.squares[posX + 20][posY + 11].setFloorImageTexture(Square.MUD_TEXTURE);
+		Templates.BOULDER.makeCopy(Level.squares[posX + 20][posY + 12], null);
+		Level.squares[posX + 20][posY + 12].setFloorImageTexture(Square.MUD_TEXTURE);
 
 		// Follower
 		Follower follower = Templates.FOLLOWER.makeCopy("???", Game.level.squares[posX + 14][posY + 17],
