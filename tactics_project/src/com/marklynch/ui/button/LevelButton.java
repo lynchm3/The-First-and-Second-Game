@@ -66,7 +66,7 @@ public class LevelButton extends Button {
 			}
 		} else {
 
-			QuadUtils.drawQuad(Color.RED, realX, realY, realX + width, realY + height);
+			QuadUtils.drawQuad(Color.LIGHT_GRAY, realX, realY, realX + width, realY + height);
 			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, Color.WHITE, 1f, this.textParts);
 		}
 

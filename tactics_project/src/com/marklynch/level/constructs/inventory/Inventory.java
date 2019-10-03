@@ -32,7 +32,6 @@ import com.marklynch.ui.TextBoxHolder;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.ui.popups.Notification;
 import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
@@ -384,20 +383,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				}
 
 				// Close inventory if emptied
-				if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
-					if (otherInventory.size() == 0) {
-						Game.level.openCloseInventory();
-						Object[] objects = new Object[] { "Looted everything!" };
-						Game.level.addNotification(new Notification(objects, Notification.NotificationType.MISC, null));
-					}
-				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
-					if (groundDisplay.groundDisplaySquares.size() == 0) {
-						Game.level.openCloseInventory();
-						Object[] objects = new Object[] { "Looted everything!" };
-						Game.level.addNotification(new Notification(objects, Notification.NotificationType.MISC, null));
-					}
+				if (inventoryMode == INVENTORY_MODE.MODE_LOOT && otherInventory.size() == 0) {
+					Level.openCloseInventory();
+				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL
+						&& groundDisplay.groundDisplaySquares.size() == 0) {
+					Level.openCloseInventory();
 				}
-
 			}
 		});
 
@@ -1269,15 +1260,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 			if (groundDisplay.groundDisplaySquares.size() == 0) {
 				Inventory.buttonLootAll.textParts = LOOT_ALL;
-				Inventory.buttonLootAll.enabled = false;
-				// Inventory.buttonLootAll.setTextColor(Color.WHITE);
 			} else {
 				if (containsLegalStuff) {
 					Inventory.buttonLootAll.textParts = LOOT_ALL;
-					// Inventory.buttonLootAll.setTextColor(Color.WHITE);
 				} else {
 					Inventory.buttonLootAll.textParts = STEAL_ALL;
-					// Inventory.buttonLootAll.setTextColor(Color.RED);
 				}
 				Inventory.buttonLootAll.enabled = true;
 			}
@@ -1335,15 +1322,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 			if (otherInventory.size() == 0) {
 				Inventory.buttonLootAll.textParts = LOOT_ALL;
-				Inventory.buttonLootAll.enabled = false;
-				// Inventory.buttonLootAll.setTextColor(Color.WHITE);
 			} else {
 				if (containsLegalStuff) {
 					Inventory.buttonLootAll.textParts = LOOT_ALL;
-					// Inventory.buttonLootAll.setTextColor(Color.WHITE);
 				} else {
 					Inventory.buttonLootAll.textParts = STEAL_ALL;
-					// Inventory.buttonLootAll.setTextColor(Color.RED);
 				}
 				Inventory.buttonLootAll.enabled = true;
 			}
