@@ -131,6 +131,12 @@ public class AreaTown {
 					@Override
 					public void zwitch(Switch zwitch) {
 						Level.addToast(new Toast(new Object[] { "PUZZLE SOLVED!" }));
+						Level.player.addXP(100, Level.squares[posX + 20][posY + 10]);
+						for (int i = 19; i <= 21; i += 2) {
+							for (int j = 8; j <= 12; j++) {
+								Templates.GOLD.makeCopy(Level.squares[posX + i][posY + j], null, 1);
+							}
+						}
 					}
 
 					@Override

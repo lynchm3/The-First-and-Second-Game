@@ -109,7 +109,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			}
 
 			if (gameObject instanceof UpdatableGameObject && Level.updatableGameObjects.contains(gameObject)) {
-				Level.updatableGameObjects.remove((UpdatableGameObject) gameObject);
+				Level.updatableGameObjects.remove(gameObject);
 			}
 
 			refresh();
@@ -135,7 +135,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		door = (Door) getGameObjectOfClass(Door.class);
 		waterBody = (WaterBody) getGameObjectOfClass(WaterBody.class);
 
-		for (GameObject gameObject : gameObjects) {
+		for (GameObject gameObject : (ArrayList<GameObject>) gameObjects.clone()) {
 			gameObject.squareContentsChanged();
 		}
 

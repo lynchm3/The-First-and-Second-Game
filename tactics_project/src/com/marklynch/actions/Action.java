@@ -222,10 +222,6 @@ public abstract class Action {
 
 	public void trespassingCheck(Action action, Actor performer, Square square) {
 		if (square.restricted() == true && !square.owners.contains(performer)) {
-			float loudness = 0;
-			if (action.sound != null)
-				loudness = action.sound.loudness;
-			ActionTrespass actionTrespass = new ActionTrespass(performer, square, loudness);
 			Crime crime = null;
 
 			Crime.TYPE trespassingType = Crime.TYPE.CRIME_TRESPASSING;
