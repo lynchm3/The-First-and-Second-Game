@@ -1,7 +1,7 @@
 .gallery {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(20, 1fr);
+    grid-template-rows: repeat(10, 1fr);
 }
 
 .gallery__img {
@@ -10,11 +10,9 @@
     object-fit: cover;
 }
 
-
 .gallery__item {
-	margin: 5px;	
+	margin: 5px;
 }
-
 .gallery__item--1 {
     grid-column-start: 1;
     grid-column-end: 3;
