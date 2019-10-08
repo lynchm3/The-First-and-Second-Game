@@ -1,7 +1,7 @@
 .gallery {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-rows: repeat(13, 1fr);
 	margin: 8px;
 }
 
@@ -112,4 +112,11 @@
     grid-column-end: 3;
     grid-row-start: 9;
     grid-row-end: 11;
+}
+
+.gallery__item--11 {
+    grid-column-start: 1;
+    grid-column-end: 9;
+    grid-row-start: 11;
+    grid-row-end: 14;
 }
