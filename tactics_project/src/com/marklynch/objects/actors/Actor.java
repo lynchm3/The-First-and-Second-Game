@@ -236,7 +236,7 @@ public class Actor extends GameObject {
 	public void init(int gold, GameObject[] mustHaves, GameObject[] mightHaves) {
 
 		if (!(this instanceof Player))
-			Game.level.actors.add(this);
+			Level.actors.add(this);
 
 		if (bed != null)
 			bed.owner = this;
@@ -281,7 +281,6 @@ public class Actor extends GameObject {
 
 		super.postLoad1();
 
-		ArrayList<Weapon> weapons = getWeaponsInInventory();
 		loadImages();
 	}
 
@@ -541,7 +540,7 @@ public class Actor extends GameObject {
 
 		if (primaryAnimation != null)
 			alpha = primaryAnimation.alpha;
-		if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
+		if (!this.squareGameObjectIsOn.visibleToPlayer && this != Level.player)
 			alpha = 0.5f;
 
 		scaleX = 1;
@@ -628,12 +627,6 @@ public class Actor extends GameObject {
 			// draw sidebar on square
 			float healthPercentage = ((float) remainingHealth) / ((float) totalHealth);
 			float healthBarHeightInPixels = height * healthPercentage;
-			float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
-			float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
-			if (primaryAnimation != null) {
-				healthXInPixels += primaryAnimation.offsetX;
-				healthYInPixels += primaryAnimation.offsetY;
-			}
 
 			Color aggressionColor = Color.YELLOW;
 			if (thoughtsOnPlayer > 50) {
@@ -1533,7 +1526,7 @@ public class Actor extends GameObject {
 		// if (this.remainingHealth <= 0)
 		// return;
 
-		if (!Game.fullVisiblity && this != Game.level.player) {
+		if (!Game.fullVisiblity && this != Level.player) {
 
 			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
 				return;
@@ -1827,7 +1820,7 @@ public class Actor extends GameObject {
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		if (this == Game.level.player) {
+		if (this == Level.player) {
 			return new ActionWait(performer, performer.squareGameObjectIsOn);
 		}
 
@@ -1874,8 +1867,8 @@ public class Actor extends GameObject {
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
-		if (this == Game.level.player) {
-			if (Game.level.player.peekingThrough != null) {
+		if (this == Level.player) {
+			if (Level.player.peekingThrough != null) {
 				return new ActionStopPeeking(performer);
 			} else {
 				return new ActionWait(performer, performer.squareGameObjectIsOn);
@@ -1893,8 +1886,8 @@ public class Actor extends GameObject {
 		// if (this.remainingHealth <= 0)
 		// return actions;
 
-		if (this == Game.level.player) {
-			if (Game.level.player.peekingThrough != null) {
+		if (this == Level.player) {
+			if (Level.player.peekingThrough != null) {
 				actions.add(new ActionStopPeeking(performer));
 			}
 
@@ -1967,7 +1960,7 @@ public class Actor extends GameObject {
 			quest = this.quest;
 		}
 
-		if (this.knownCriminals.contains(Game.level.player)) {
+		if (this.knownCriminals.contains(Level.player)) {
 			return null;
 		}
 
@@ -2042,7 +2035,7 @@ public class Actor extends GameObject {
 		if (square == null)
 			return false;
 
-		if (this == Game.level.player)
+		if (this == Level.player)
 			return square.visibleToPlayer;
 
 		return canSeeSquareFromSpecificSquare(this.squareGameObjectIsOn, square);
@@ -2087,8 +2080,8 @@ public class Actor extends GameObject {
 
 		super.attackedBy(attacker, action);
 
-		if (sleeping && Game.level.shouldLog(this))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " woke up" }));
+		if (sleeping && Level.shouldLog(this))
+			Level.logOnScreen(new ActivityLog(new Object[] { this, " woke up" }));
 		sleeping = false;
 
 		removeHidingPlacesFromAttackersList();// prioritize actors
@@ -2372,12 +2365,12 @@ public class Actor extends GameObject {
 
 	}
 
-	protected Class[] soundClassesToReactTo = new Class[] { Weapon.class, BrokenGlass.class };
+	protected Class<?>[] soundClassesToReactTo = new Class[] { Weapon.class, BrokenGlass.class };
 	public int walkPhase = 0;
 
 	public void createSearchLocationsBasedOnSound(Sound sound) {
 
-		ArrayList<Class> classesArrayList = new ArrayList<Class>(Class.class);
+		ArrayList<Class<?>> classesArrayList = new ArrayList<Class<?>>(Class.class);
 		classesArrayList.addAll(Arrays.asList(soundClassesToReactTo));
 
 		if (this.canSeeGameObject(sound.sourcePerformer))
@@ -2392,8 +2385,8 @@ public class Actor extends GameObject {
 		if (this.sleeping) {
 			this.sleeping = false;
 			this.aiRoutine.wokenUpCountdown = 5;
-			if (Game.level.shouldLog(this))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " woke up" }));
+			if (Level.shouldLog(this))
+				Level.logOnScreen(new ActivityLog(new Object[] { this, " woke up" }));
 		}
 
 		if (!this.investigationsMap.containsValue(sound.sourceSquare)) {
@@ -2401,7 +2394,7 @@ public class Actor extends GameObject {
 			// Check if sound is in passed in list of classes
 			boolean soundInTypeList = false;
 			if (sound.sourceObject != null) {
-				for (Class clazz : soundClassesToReactTo) {
+				for (Class<?> clazz : soundClassesToReactTo) {
 					if (clazz.isInstance(sound.sourceObject)) {
 						soundInTypeList = true;
 					}
@@ -2534,7 +2527,7 @@ public class Actor extends GameObject {
 		return false;
 	}
 
-	public Power getPower(Class powerClazz) {
+	public Power getPower(Class<?> powerClazz) {
 		for (Power power : powers) {
 			if (powerClazz.isInstance(power)) {
 				return power;

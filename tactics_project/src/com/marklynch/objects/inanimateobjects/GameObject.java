@@ -128,7 +128,7 @@ import com.marklynch.utils.TextureUtils;
 import com.marklynch.utils.Utils;
 
 public class GameObject
-		implements Idable, ActionableInWorld, ActionableInInventory, Comparable, InventoryParent, DamageDealer {
+		implements Idable, ActionableInWorld, ActionableInInventory, Comparable<Object>, InventoryParent, DamageDealer {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
 
@@ -422,7 +422,7 @@ public class GameObject
 		if (squareGameObjectIsOn == null)
 			return false;
 
-		if (hiding && this != Game.level.player)
+		if (hiding && this != Level.player)
 			return false;
 
 		if (!discoveredObject)
@@ -433,7 +433,7 @@ public class GameObject
 
 //		if()
 
-		if (!Game.fullVisiblity && this != Game.level.player) {
+		if (!Game.fullVisiblity && this != Level.player) {
 
 			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
 				return false;
@@ -460,7 +460,7 @@ public class GameObject
 
 		if (primaryAnimation != null)
 			alpha = primaryAnimation.alpha;
-		if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
+		if (!this.squareGameObjectIsOn.visibleToPlayer && this != Level.player)
 			alpha = 0.5f;
 
 		boundsX1Relative = 0;
@@ -644,11 +644,7 @@ public class GameObject
 				// draw sidebar on square
 				float healthPercentage = ((float) remainingHealth) / ((float) totalHealth);
 				float healthBarHeightInPixels = height * healthPercentage;
-				float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
-				float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
 				if (primaryAnimation != null) {
-					healthXInPixels += primaryAnimation.offsetX;
-					healthYInPixels += primaryAnimation.offsetY;
 				}
 
 				Color healthColor = Color.YELLOW;
@@ -706,7 +702,7 @@ public class GameObject
 
 			if (primaryAnimation != null)
 				alpha = primaryAnimation.alpha;
-			if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
+			if (!this.squareGameObjectIsOn.visibleToPlayer && this != Level.player)
 				alpha = 0.5f;
 
 			float boundsX1 = actorPositionXInPixels;
@@ -917,10 +913,10 @@ public class GameObject
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;
 		for (int i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-			if (ArrayUtils.inBounds(Game.level.squares, this.squareGameObjectIsOn.xInGrid + x,
+			if (ArrayUtils.inBounds(Level.squares, this.squareGameObjectIsOn.xInGrid + x,
 					this.squareGameObjectIsOn.yInGrid + y)) {
-				squares.add(Game.level.squares[this.squareGameObjectIsOn.xInGrid + x][this.squareGameObjectIsOn.yInGrid
-						+ y]);
+				squares.add(
+						Level.squares[this.squareGameObjectIsOn.xInGrid + x][this.squareGameObjectIsOn.yInGrid + y]);
 			}
 
 			if (xGoingUp) {
@@ -978,8 +974,8 @@ public class GameObject
 			boolean xGoingUp = true;
 			boolean yGoingUp = true;
 			for (int i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-				if (ArrayUtils.inBounds(Game.level.squares, squareFrom.xInGrid + x, squareFrom.yInGrid + y)) {
-					squares.add(Game.level.squares[squareFrom.xInGrid + x][squareFrom.yInGrid + y]);
+				if (ArrayUtils.inBounds(Level.squares, squareFrom.xInGrid + x, squareFrom.yInGrid + y)) {
+					squares.add(Level.squares[squareFrom.xInGrid + x][squareFrom.yInGrid + y]);
 				}
 
 				if (xGoingUp) {
@@ -1418,7 +1414,7 @@ public class GameObject
 
 			if (this instanceof Door) {
 				if (!openable.open) {
-					if (Game.level.player.peekingThrough == this)
+					if (Level.player.peekingThrough == this)
 						actions.add(new ActionStopPeeking(performer));
 					else
 						actions.add(new ActionPeek(performer, this));
@@ -1447,17 +1443,17 @@ public class GameObject
 		// && Game.level.activeActor.equippedWeapon
 		// .hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn)))
 		// {
-		if (!decorative && this != Game.level.player && attackable)
+		if (!decorative && this != Level.player && attackable)
 			actions.add(new ActionAttack(performer, this));
 
-		if (moveable && !decorative && this != Game.level.player && attackable && !(this instanceof Wall)
+		if (moveable && !decorative && this != Level.player && attackable && !(this instanceof Wall)
 				&& !(this instanceof Door))
 			actions.add(new ActionUsePower(Level.player, this, this.squareGameObjectIsOn,
 					new PowerTeleportOther(Level.player), true));
 		// actions.add(new ActionSelectTeleportTarget(performer, this));
 		// }
-		if (!decorative && this != Game.level.player && this instanceof Actor)
-			actions.add(new ActionFollow(Game.level.player, (Actor) this));
+		if (!decorative && this != Level.player && this instanceof Actor)
+			actions.add(new ActionFollow(Level.player, (Actor) this));
 
 		// if (!decorative && performer.equipped != null &&
 		// this.canContainOtherObjects) {
@@ -1476,13 +1472,13 @@ public class GameObject
 			actions.add(new ActionInitiateTrade(performer, (Actor) this));
 		}
 
-		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn
+		if (!decorative && this.squareGameObjectIsOn != Level.player.squareGameObjectIsOn
 				&& performer.equipped != null) {
 			actions.add(new ActionThrowItem(performer, this, performer.equipped));
 		}
 
 		// Throw from inventory
-		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn)
+		if (!decorative && this.squareGameObjectIsOn != Level.player.squareGameObjectIsOn)
 			actions.add(new ActionOpenInventoryToThrowItems(performer, this));
 
 		// Empty from inventory
@@ -1690,7 +1686,7 @@ public class GameObject
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
 				return new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this);
 			} else {
-				return new ActionEquip(Game.level.player, this);
+				return new ActionEquip(Level.player, this);
 			}
 
 		}
@@ -1776,7 +1772,7 @@ public class GameObject
 
 		actions.add(new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this));
 
-		if (this.inventoryThatHoldsThisObject == Game.level.player.inventory && !(this instanceof Gold)) {
+		if (this.inventoryThatHoldsThisObject == Level.player.inventory && !(this instanceof Gold)) {
 			actions.add(new ActionStarSpecificItem(this));
 		}
 
@@ -1851,8 +1847,8 @@ public class GameObject
 					iy = iy + sy;
 				}
 
-				if (Game.level.squares[(int) rx][(int) ry] != squareGameObjectIsOn) {
-					if (Game.level.squares[(int) rx][(int) ry].inventory.blocksLineOfSight()) {
+				if (Level.squares[(int) rx][(int) ry] != squareGameObjectIsOn) {
+					if (Level.squares[(int) rx][(int) ry].inventory.blocksLineOfSight()) {
 
 						if ((int) x0 == (int) rx && (int) y0 == (int) ry) {
 							return true;
@@ -1952,16 +1948,14 @@ public class GameObject
 
 		effectToAdd.onAdd();
 
-		if (Game.level.shouldLog(this) && !(effectToRemove instanceof EffectWet))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
+		if (Level.shouldLog(this) && !(effectToRemove instanceof EffectWet))
+			Level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
 	}
 
 	public void activateEffects() {
 
 		if (activeEffectsOnGameObject.size() == 0)
 			return;
-
-		// boolean wet = isWet();
 
 		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>(Effect.class);
 		for (Effect effect : (ArrayList<Effect>) this.activeEffectsOnGameObject.clone()) {
@@ -2173,8 +2167,8 @@ public class GameObject
 			}
 		}
 		if (effectBurning != null) {
-			if (Game.level.shouldLog(this)) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " burning was doused" }));
+			if (Level.shouldLog(this)) {
+				Level.logOnScreen(new ActivityLog(new Object[] { this, " burning was doused" }));
 			}
 			removeEffect(effectBurning);
 		}
@@ -2560,11 +2554,11 @@ public class GameObject
 					thisIsAnAttack = true;
 
 				// Update bestiary
-				if (Game.level.shouldLog(this))
+				if (Level.shouldLog(this))
 					Level.bestiaryKnowledgeCollection.get(this.templateId).putHighLevel(statType, true);
 
 				if (gameObjectAttacker != null)
-					if (Game.level.shouldLog(gameObjectAttacker))
+					if (Level.shouldLog(gameObjectAttacker))
 						Level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).putHighLevel(statType,
 								true);
 
@@ -2619,11 +2613,11 @@ public class GameObject
 			thisIsAnAttack = true;
 
 		// Update bestiary
-		if (Game.level.shouldLog(this))
+		if (Level.shouldLog(this))
 			Level.bestiaryKnowledgeCollection.get(this.templateId).putHighLevel(damage.type, true);
 
 		if (gameObjectAttacker != null)
-			if (Game.level.shouldLog(gameObjectAttacker))
+			if (Level.shouldLog(gameObjectAttacker))
 				Level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).putHighLevel(damage.type, true);
 
 		offsetY += 48;
@@ -2671,20 +2665,20 @@ public class GameObject
 
 		// Heal
 		if (res > 100)
-			color = color.GREEN;
+			color = Color.GREEN;
 
 		// bad hit
 		else if (res > 50)
-			color = color.DARK_GRAY;
+			color = Color.DARK_GRAY;
 		else if (res > 0)
-			color = color.LIGHT_GRAY;
+			color = Color.LIGHT_GRAY;
 
 		// good hit
 		else if (res < -50)
 
-			color = color.RED;
+			color = Color.RED;
 		else if (res < 0)
-			color = color.ORANGE;
+			color = Color.ORANGE;
 
 		// TYPES
 		// CRIT large red, HIGH DMG red, NORMAL DMG white, resisted DMG grey,
@@ -2781,7 +2775,7 @@ public class GameObject
 
 	}
 
-	public boolean hasActiveEffectOfType(Class type) {
+	public boolean hasActiveEffectOfType(Class<EffectBurn> type) {
 		for (Effect effect : this.activeEffectsOnGameObject) {
 			if (effect.getClass().isAssignableFrom(type)) {
 				return true;
@@ -2790,7 +2784,7 @@ public class GameObject
 		return false;
 	}
 
-	public Effect getActiveEffectOfType(Class type) {
+	public Effect getActiveEffectOfType(Class<?> type) {
 		for (Effect effect : this.activeEffectsOnGameObject) {
 			if (effect.getClass().isAssignableFrom(type)) {
 				return effect;
