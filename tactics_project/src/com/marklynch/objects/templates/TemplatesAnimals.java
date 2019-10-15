@@ -100,6 +100,25 @@ public class TemplatesAnimals {
 		Templates.BABY_RABBIT.fitsInInventory = true;
 		Templates.BABY_RABBIT.flipYAxisInMirror = false;
 
+		Templates.GIANT_SPIDER = new CarnivoreNeutralWildAnimal();
+		Templates.GIANT_SPIDER.title = "Giant Spider";
+		Templates.GIANT_SPIDER.level = 1;
+		Templates.GIANT_SPIDER.highLevelStats.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE,
+				new Stat(HIGH_LEVEL_STATS.PIERCE_DAMAGE, 4));
+		Templates.GIANT_SPIDER.totalHealth = Templates.GIANT_SPIDER.remainingHealth = 50;
+		Templates.GIANT_SPIDER.highLevelStats.put(HIGH_LEVEL_STATS.STRENGTH, new Stat(HIGH_LEVEL_STATS.STRENGTH, 10));
+		Templates.GIANT_SPIDER.highLevelStats.put(HIGH_LEVEL_STATS.DEXTERITY, new Stat(HIGH_LEVEL_STATS.DEXTERITY, 10));
+		Templates.GIANT_SPIDER.highLevelStats.put(HIGH_LEVEL_STATS.INTELLIGENCE,
+				new Stat(HIGH_LEVEL_STATS.INTELLIGENCE, 10));
+		Templates.GIANT_SPIDER.highLevelStats.put(HIGH_LEVEL_STATS.ENDURANCE, new Stat(HIGH_LEVEL_STATS.ENDURANCE, 10));
+		Templates.GIANT_SPIDER.setImageAndExtrapolateSize("spider.png");
+		Templates.GIANT_SPIDER.weight = 25f;
+		Templates.GIANT_SPIDER.canOpenDoors = false;
+		Templates.GIANT_SPIDER.canEquipWeapons = false;
+		Templates.GIANT_SPIDER.templateId = GameObject.generateNewTemplateId();
+		Templates.GIANT_SPIDER.aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(Templates.GIANT_SPIDER);
+		Templates.GIANT_SPIDER.flipYAxisInMirror = false;
+
 		Templates.FOX = new CarnivoreNeutralWildAnimal();
 		Templates.FOX.title = "Fox";
 		Templates.FOX.level = 1;

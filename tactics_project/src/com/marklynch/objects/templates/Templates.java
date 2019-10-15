@@ -156,6 +156,8 @@ public class Templates {
 
 	public static TinyNeutralWildAnimal BABY_RABBIT;
 
+	public static CarnivoreNeutralWildAnimal GIANT_SPIDER;
+
 	public static CarnivoreNeutralWildAnimal FOX;
 
 	public static CarnivoreNeutralWildAnimal WOLF;

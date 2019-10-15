@@ -257,8 +257,8 @@ public class AreaTown {
 		Templates.BUSH.makeCopy(squares[posX + 17][posY + 19], null);
 
 		// Fishing Shed
-		Actor spider = Templates.HUNTER.makeCopy("Spider", Level.squares[78][32], FactionList.outsiders, null, 2,
-				new GameObject[] {}, new GameObject[] {}, AreaList.townForest, new int[] {}, new HOBBY[] {});
+		Actor giantSpider = Templates.GIANT_SPIDER.makeCopy("Giant Spider", squares[78][32], FactionList.outsiders,
+				null, new GameObject[] {}, new GameObject[] {}, null);
 		CopyOnWriteArrayList<Square> fishingShedEntranceSquares = new CopyOnWriteArrayList<Square>(Square.class,
 				Arrays.asList(new Square[] { Level.squares[posX + 81][posY + 36] }));
 		CopyOnWriteArrayList<StructureFeature> fishingShedFeatures = new CopyOnWriteArrayList<StructureFeature>(
