@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.beastiary;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 
@@ -16,7 +16,7 @@ public class BestiaryKnowledge {
 	public boolean faction;
 	public boolean groupOfActors;
 
-	public HashMap<HIGH_LEVEL_STATS, Boolean> highLevelStats = new HashMap<HIGH_LEVEL_STATS, Boolean>();
+	public ConcurrentHashMap<HIGH_LEVEL_STATS, Boolean> highLevelStats = new ConcurrentHashMap<HIGH_LEVEL_STATS, Boolean>();
 
 	public boolean range;
 

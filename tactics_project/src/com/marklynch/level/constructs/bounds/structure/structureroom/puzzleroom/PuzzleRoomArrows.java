@@ -7,7 +7,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomArrows extends StructureRoom {
 	int posX;
@@ -18,7 +18,7 @@ public class PuzzleRoomArrows extends StructureRoom {
 	final int diggableY = 12;
 
 	public PuzzleRoomArrows(int posX, int posY) {
-		super("Courtyard", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Courtyard", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
@@ -50,8 +50,8 @@ public class PuzzleRoomArrows extends StructureRoom {
 
 	private void buildHorizontalArrow() {
 
-		ArrayList<Square> bigArrowSquares = new ArrayList<Square>(Square.class);
-		ArrayList<Wall> bigArrowWalls = new ArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<Square> bigArrowSquares = new CopyOnWriteArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> bigArrowWalls = new CopyOnWriteArrayList<Wall>(Wall.class);
 		// Body of arrow
 		for (int x = 5; x <= 21; x++) {
 			for (int y = 10; y <= 14; y++) {
@@ -106,8 +106,8 @@ public class PuzzleRoomArrows extends StructureRoom {
 		}
 
 		// fallaway walls 1
-		ArrayList<Square> fallawayWallsSquares1 = new ArrayList<Square>(Square.class);
-		ArrayList<GameObject> fallawayWalls1 = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<Square> fallawayWallsSquares1 = new CopyOnWriteArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<GameObject> fallawayWalls1 = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		x = 23;
 		for (int y = 5; y <= 5; y++) {
 			fallawayWallsSquares1.add(Level.squares[posX + x][posY + y]);
@@ -144,8 +144,8 @@ public class PuzzleRoomArrows extends StructureRoom {
 		Templates.WOODEN_SUPPORT.makeCopy(Level.squares[posX + 30][posY + 7], null, fallawayWalls1);
 
 		// fallaway walls 2
-		ArrayList<Square> fallawayWallsSquares2 = new ArrayList<Square>(Square.class);
-		ArrayList<GameObject> fallawayWalls2 = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<Square> fallawayWallsSquares2 = new CopyOnWriteArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<GameObject> fallawayWalls2 = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 		x = 23;
 
@@ -201,8 +201,8 @@ public class PuzzleRoomArrows extends StructureRoom {
 
 	private void buildVerticalArrow() {
 
-		ArrayList<Square> bigArrowSquares = new ArrayList<Square>(Square.class);
-		ArrayList<Wall> bigArrowWalls = new ArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<Square> bigArrowSquares = new CopyOnWriteArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> bigArrowWalls = new CopyOnWriteArrayList<Wall>(Wall.class);
 
 		// Body of arrow
 		for (int x = 42 - 4; x <= 46 - 4; x++) {
@@ -257,8 +257,8 @@ public class PuzzleRoomArrows extends StructureRoom {
 		}
 
 		// fallaway walls 1
-		ArrayList<Square> fallawayWallsSquares1 = new ArrayList<Square>(Square.class);
-		ArrayList<GameObject> fallawayWalls1 = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<Square> fallawayWallsSquares1 = new CopyOnWriteArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<GameObject> fallawayWalls1 = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		y = 33 - 4;
 		for (int x = 37 - 4; x <= 37 - 4; x++) {
 			fallawayWallsSquares1.add(Level.squares[posX + x][posY + y]);
@@ -297,8 +297,8 @@ public class PuzzleRoomArrows extends StructureRoom {
 		woodenSupport1.backwards = true;
 
 		// fallaway walls 2
-		ArrayList<Square> fallawayWallsSquares2 = new ArrayList<Square>(Square.class);
-		ArrayList<GameObject> fallawayWalls2 = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<Square> fallawayWallsSquares2 = new CopyOnWriteArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<GameObject> fallawayWalls2 = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		y = 33 - 4;
 		for (int x = 51 - 4; x <= 51 - 4; x++) {
 			fallawayWallsSquares2.add(Level.squares[posX + x][posY + y]);

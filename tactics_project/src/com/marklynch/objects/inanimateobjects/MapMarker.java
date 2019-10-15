@@ -5,14 +5,14 @@ import com.marklynch.actions.ActionChangeAppearance;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.button.Link;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 
 public class MapMarker extends MapLevelGameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public static Texture RED_MAP_MARKER_TEXTURE;
 	public static Texture TREASURE_MAP_MARKER_TEXTURE;
@@ -20,15 +20,15 @@ public class MapMarker extends MapLevelGameObject {
 	public static Texture GREEN_MAP_MARKER_TEXTURE;
 	public static Texture BLUE_MAP_MARKER_TEXTURE;
 
-	public static ArrayList<Texture> MAP_MARKER_TEXTURES = new ArrayList<Texture>(Texture.class);
+	public static CopyOnWriteArrayList<Texture> MAP_MARKER_TEXTURES = new CopyOnWriteArrayList<Texture>(Texture.class);
 
 	public String baseName = "";
-	public ArrayList<Link> links;
+	public CopyOnWriteArrayList<Link> links;
 
 	public MapMarker() {
 		super();
 		name = "Marker";
-		links = new ArrayList<Link>(Link.class);
+		links = new CopyOnWriteArrayList<Link>(Link.class);
 		links.addAll(TextUtils.getLinks(true, this));
 		canBePickedUp = false;
 
@@ -46,8 +46,8 @@ public class MapMarker extends MapLevelGameObject {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 		actions.add(new ActionChangeAppearance(this));
 		return actions;
 

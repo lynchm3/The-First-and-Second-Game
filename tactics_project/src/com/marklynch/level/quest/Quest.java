@@ -1,6 +1,6 @@
 package com.marklynch.level.quest;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.data.Idable;
@@ -20,16 +20,16 @@ public class Quest implements Idable {
 
 	public long id;
 	public String name;
-	public ArrayList<Objective> allObjectives = new ArrayList<Objective>();
-	public ArrayList<Objective> currentObjectives = new ArrayList<Objective>();
-	public ArrayList<JournalLog> logList = new ArrayList<JournalLog>();
-	public ArrayList<ConversationPart> conversationLog = new ArrayList<ConversationPart>();
+	public CopyOnWriteArrayList<Objective> allObjectives = new CopyOnWriteArrayList<Objective>();
+	public CopyOnWriteArrayList<Objective> currentObjectives = new CopyOnWriteArrayList<Objective>();
+	public CopyOnWriteArrayList<JournalLog> logList = new CopyOnWriteArrayList<JournalLog>();
+	public CopyOnWriteArrayList<ConversationPart> conversationLog = new CopyOnWriteArrayList<ConversationPart>();
 	public boolean started = false;
 	public boolean resolved = false;
 	public int turnStarted;
 	public int turnUpdated;
 	public boolean updatedSinceLastViewed;
-	public ArrayList<Link> links;
+	public CopyOnWriteArrayList<Link> links;
 
 	public Quest() {
 		this.id = Level.generateNewId(this);

@@ -2,8 +2,8 @@ package com.marklynch.level.constructs.characterscreen;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -38,10 +38,10 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static String INTELLIGENCE_SHORT = "INT";
 	public static String ENDURANCE_SHORT = "ENDE";
 
-	public static HashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons = new HashMap<HIGH_LEVEL_STATS, LevelButton>();
-	public static HashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new HashMap<HIGH_LEVEL_STATS, String>();
-	public static HashMap<HIGH_LEVEL_STATS, String> highLevelStatNamesShort = new HashMap<HIGH_LEVEL_STATS, String>();
-	public static HashMap<HIGH_LEVEL_STATS, Texture> highLevelStatImages = new HashMap<HIGH_LEVEL_STATS, Texture>();
+	public static ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons = new ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton>();
+	public static ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new ConcurrentHashMap<HIGH_LEVEL_STATS, String>();
+	public static ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNamesShort = new ConcurrentHashMap<HIGH_LEVEL_STATS, String>();
+	public static ConcurrentHashMap<HIGH_LEVEL_STATS, Texture> highLevelStatImages = new ConcurrentHashMap<HIGH_LEVEL_STATS, Texture>();
 
 	// DMG and Healing
 	public static String SLASH_DAMAGE = "SLASH DAMAGE";
@@ -62,14 +62,14 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static String POISON_SHORT = "PSN ";
 	public static String BLEED_SHORT = "BLD ";
 	public static String HEALING_SHORT = "HEAL";
-	// public static HashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons =
-	// new HashMap<HIGH_LEVEL_STATS, LevelButton>();
-	// public static HashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new
-	// HashMap<HIGH_LEVEL_STATS, String>();
-	// public static HashMap<HIGH_LEVEL_STATS, String> highLevelStatNamesShort = new
-	// HashMap<HIGH_LEVEL_STATS, String>();
-	// public static HashMap<HIGH_LEVEL_STATS, Texture> highLevelStatImages = new
-	// HashMap<HIGH_LEVEL_STATS, Texture>();
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons =
+	// new ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton>();
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new
+	// ConcurrentHashMap<HIGH_LEVEL_STATS, String>();
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNamesShort = new
+	// ConcurrentHashMap<HIGH_LEVEL_STATS, String>();
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, Texture> highLevelStatImages = new
+	// ConcurrentHashMap<HIGH_LEVEL_STATS, Texture>();
 
 	// Resistances
 	public static String SLASH_RESISTANCE = "SLASH RESISTANCE";
@@ -81,12 +81,12 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static String POISON_RESISTANCE = "POSION RESISTANCE";
 	public static String BLEED_RESISTANCE = "BLEEDING RESISTANCE";
 	public static String HEALING_RESISTANCE = "HEALING RESISTANCE";
-	// public static HashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons =
-	// new HashMap<HIGH_LEVEL_STATS, LevelButton>();
-	// public static HashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new
-	// HashMap<HIGH_LEVEL_STATS, String>();
-	// public static HashMap<HIGH_LEVEL_STATS, Texture> highLevelStatImages = new
-	// HashMap<HIGH_LEVEL_STATS, Texture>();
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons =
+	// new ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton>();
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new
+	// ConcurrentHashMap<HIGH_LEVEL_STATS, String>();
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, Texture> highLevelStatImages = new
+	// ConcurrentHashMap<HIGH_LEVEL_STATS, Texture>();
 
 	public static LevelButton healthButton;
 
@@ -114,15 +114,15 @@ public class CharacterScreen implements Draggable, Scrollable {
 	// transient int actorX;
 	// transient int actorY;
 
-	public ArrayList<Link> logLinks = new ArrayList<Link>();
-	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
-	public ArrayList<Link> objectiveLinksTopRight = new ArrayList<Link>();
-	public ArrayList<Link> questLinksTopRight = new ArrayList<Link>();
-	public ArrayList<Link> markerLinksTopRight = new ArrayList<Link>();
-	public ArrayList<Link> markerLinksInJournal = new ArrayList<Link>();
+	public CopyOnWriteArrayList<Link> logLinks = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> conversationLinks = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> objectiveLinksTopRight = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> questLinksTopRight = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> markerLinksTopRight = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> markerLinksInJournal = new CopyOnWriteArrayList<Link>();
 
 	// Close button
-	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> buttons = new CopyOnWriteArrayList<LevelButton>();
 	static LevelButton buttonClose;
 
 	public CharacterScreen() {
@@ -272,7 +272,7 @@ public class CharacterScreen implements Draggable, Scrollable {
 		int statsY = 100 + y;
 		int statsLineHeight = 30;
 		int drawStatY = statsY;
-		HashMap<HIGH_LEVEL_STATS, String> highLevelStatNamesToUse = highLevelStatNames;
+		ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNamesToUse = highLevelStatNames;
 
 		if (smallVersion) {
 			actorY = 0 + x;

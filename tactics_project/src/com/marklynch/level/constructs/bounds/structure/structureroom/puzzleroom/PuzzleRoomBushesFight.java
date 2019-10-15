@@ -6,7 +6,7 @@ import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomBushesFight extends StructureRoom {
 	int posX;
@@ -15,7 +15,7 @@ public class PuzzleRoomBushesFight extends StructureRoom {
 	final static int totalHeightInSquares = 20;
 
 	public PuzzleRoomBushesFight(int posX, int posY) {
-		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Cave In Room", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;

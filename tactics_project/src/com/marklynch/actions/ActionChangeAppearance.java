@@ -1,8 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
-
-import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -38,7 +36,7 @@ public class ActionChangeAppearance extends Action {
 			targetGameObject.inventory.sort(Inventory.inventorySortBy, true, false);
 		} else {
 			((GameObject) targetGameObject.inventoryThatHoldsThisObject.parent).imageTexture = targetGameObject.imageTexture;
-			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+			for (Inventory inventory : Level.openInventories) {
 				inventory.close();
 			}
 		}

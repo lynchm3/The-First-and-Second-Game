@@ -8,7 +8,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.RemoteDoor;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomTeamwork1 extends StructureRoom {
 	int posX;
@@ -17,7 +17,7 @@ public class PuzzleRoomTeamwork1 extends StructureRoom {
 	final static int totalHeightInSquares = 10;
 
 	public PuzzleRoomTeamwork1(int posX, int posY) {
-		super("Hallway", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] { new RoomPart(posX, posY, posX + 4, posY + totalHeightInSquares - 1),
+		super("Hallway", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] { new RoomPart(posX, posY, posX + 4, posY + totalHeightInSquares - 1),
 				new RoomPart(posX + 6, posY, posX + 9, posY + totalHeightInSquares - 1),
 				new RoomPart(posX + 11, posY, posX + 14, posY + totalHeightInSquares - 1), new RoomPart(
 						posX + 16, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });

@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.skilltree;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Matrix4f;
@@ -48,17 +48,17 @@ public class SkillTree implements Draggable, Scrollable {
 		STATS, SKILLS
 	};
 
-	public static ArrayList<SkillTreeNode> skillTreeNodes = new ArrayList<SkillTreeNode>();
+	public static CopyOnWriteArrayList<SkillTreeNode> skillTreeNodes = new CopyOnWriteArrayList<SkillTreeNode>();
 
 	public static MODE mode = MODE.SKILLS;
 
 	public boolean showing = false;
 
 	// Close button
-	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> buttons = new CopyOnWriteArrayList<LevelButton>();
 	static LevelButton buttonClose;
 
-	public ArrayList<SkillTreeNode> activateAtStart = new ArrayList<SkillTreeNode>();
+	public CopyOnWriteArrayList<SkillTreeNode> activateAtStart = new CopyOnWriteArrayList<SkillTreeNode>();
 
 	public SkillTree() {
 

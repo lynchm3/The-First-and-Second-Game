@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -18,7 +18,7 @@ public class ActionGiveItems extends VariableQtyAction {
 	boolean logAsTake;
 
 	public ActionGiveItems(GameObject performer, GameObject receiver, boolean logAsTake,
-			ArrayList<GameObject> objects) {
+			CopyOnWriteArrayList<GameObject> objects) {
 		this(performer, receiver, logAsTake, objects.toArray(new GameObject[objects.size()]), false);
 	}
 

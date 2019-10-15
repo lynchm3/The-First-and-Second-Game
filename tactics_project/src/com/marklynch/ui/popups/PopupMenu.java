@@ -1,6 +1,6 @@
 package com.marklynch.ui.popups;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.input.Mouse;
 
@@ -15,7 +15,7 @@ import com.marklynch.ui.button.Button;
 public class PopupMenu implements Draggable, Scrollable {
 
 	public float width;
-	public ArrayList<PopupMenuButton> buttons = new ArrayList<PopupMenuButton>();
+	public CopyOnWriteArrayList<PopupMenuButton> buttons = new CopyOnWriteArrayList<PopupMenuButton>();
 	public Level level;
 	public Square square;
 	public PopupMenuButton selectSquareButton;

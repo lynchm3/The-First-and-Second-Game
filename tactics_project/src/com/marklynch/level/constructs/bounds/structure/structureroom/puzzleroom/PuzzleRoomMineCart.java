@@ -11,7 +11,7 @@ import com.marklynch.objects.inanimateobjects.Rail;
 import com.marklynch.objects.inanimateobjects.Seesaw;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomMineCart extends StructureRoom {
 	int posX;
@@ -20,7 +20,7 @@ public class PuzzleRoomMineCart extends StructureRoom {
 	final static int totalHeightInSquares = 20;
 
 	public PuzzleRoomMineCart(int posX, int posY) {
-		super("Minecart Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Minecart Room", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
@@ -145,7 +145,7 @@ public class PuzzleRoomMineCart extends StructureRoom {
 		GameObject candy2 = Templates.CANDY.makeCopy(Level.squares[posX + 8][posY + 0], null);
 		candy2.backwards = true;
 
-		ArrayList<Square> islandSquares = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Square> islandSquares = new CopyOnWriteArrayList<Square>(Square.class);
 		islandSquares.add(Level.squares[posX + 11][posY + 4]);
 		islandSquares.add(Level.squares[posX + 11][posY + 5]);
 		islandSquares.add(Level.squares[posX + 12][posY + 4]);

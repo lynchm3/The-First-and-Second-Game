@@ -2,8 +2,8 @@ package com.marklynch.level;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Stack;
 
 import org.lwjgl.input.Keyboard;
@@ -80,7 +80,7 @@ import com.marklynch.utils.TextUtils;
 
 public class Level {
 
-	public static HashMap<Long, Object> ids = new HashMap<Long, Object>();
+	public static ConcurrentHashMap<Long, Object> ids = new ConcurrentHashMap<Long, Object>();
 	public static Long currentIdCount = 0L;
 
 	public static Long generateNewId(Object object) {
@@ -116,10 +116,10 @@ public class Level {
 	public int height;
 	public static Square[][] squares;
 	public static NodeList nodes;
-	public static ArrayList<Area> areas = new ArrayList<Area>();
-	public ArrayList<Structure> structures;
-	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
-	public static transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
+	public static CopyOnWriteArrayList<Area> areas = new CopyOnWriteArrayList<Area>();
+	public CopyOnWriteArrayList<Structure> structures;
+	public transient CopyOnWriteArrayList<AIRoutineUtils> ais = new CopyOnWriteArrayList<AIRoutineUtils>();
+	public static transient CopyOnWriteArrayList<Inventory> openInventories = new CopyOnWriteArrayList<Inventory>();
 	public static transient Journal journal = new Journal();
 	public static transient QuestList fullQuestList = new QuestList();
 	public static transient MarkerList markerList = new MarkerList();
@@ -127,29 +127,29 @@ public class Level {
 	public static transient SkillTree skillTree = new SkillTree();
 	public static transient AvailablePowersScreen availablePowerScreen = new AvailablePowersScreen();
 	public static transient FactionList factions = new FactionList();
-	public static transient ArrayList<Actor> actors = new ArrayList<Actor>();
+	public static transient CopyOnWriteArrayList<Actor> actors = new CopyOnWriteArrayList<Actor>();
 	public static transient GameOver gameOver = new GameOver();
 	public static transient MainMenu mainMenu = new MainMenu();
 	public static transient CharacterCreation characterCreation = new CharacterCreation();
-	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
+	public static transient ConcurrentHashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new ConcurrentHashMap<Integer, BestiaryKnowledge>();
 
-	// public ArrayList<Actor> actors;
+	// public CopyOnWriteArrayList<Actor> actors;
 	public static transient Player player;
 	public transient Actor activeActor;
-	// public transient static ArrayListMappedInanimateObjects<GameObject>
+	// public transient static CopyOnWriteArrayListMappedInanimateObjects<GameObject>
 	// inanimateObjectsOnGround;
-	public transient static ArrayList<Effect> effectsOnInanimateGameObjects = new ArrayList<Effect>();
-	public transient static ArrayList<UpdatableGameObject> updatableGameObjects = new ArrayList<UpdatableGameObject>();
+	public transient static CopyOnWriteArrayList<Effect> effectsOnInanimateGameObjects = new CopyOnWriteArrayList<Effect>();
+	public transient static CopyOnWriteArrayList<UpdatableGameObject> updatableGameObjects = new CopyOnWriteArrayList<UpdatableGameObject>();
 
-	public ArrayList<PopupMenu> popupMenuObjects = new ArrayList<PopupMenu>();
-	public ArrayList<PopupMenu> popupMenuActions = new ArrayList<PopupMenu>();
-	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
+	public CopyOnWriteArrayList<PopupMenu> popupMenuObjects = new CopyOnWriteArrayList<PopupMenu>();
+	public CopyOnWriteArrayList<PopupMenu> popupMenuActions = new CopyOnWriteArrayList<PopupMenu>();
+	public CopyOnWriteArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new CopyOnWriteArrayList<PopupMenuSelectObject>();
 	public Color popUpMenuOverlayColor = new Color(0f, 0f, 0f, 0.5f);
 	static FullScreenTextBox fullScreenTextBox = null;
 	public static TextBox activeTextBox = null;
-	private static ArrayList<Notification> notifications = new ArrayList<Notification>();
-	private static ArrayList<Toast> toasts = new ArrayList<Toast>();
-	public ArrayList<PinWindow> pinWindows = new ArrayList<PinWindow>();
+	private static CopyOnWriteArrayList<Notification> notifications = new CopyOnWriteArrayList<Notification>();
+	private static CopyOnWriteArrayList<Toast> toasts = new CopyOnWriteArrayList<Toast>();
+	public CopyOnWriteArrayList<PinWindow> pinWindows = new CopyOnWriteArrayList<PinWindow>();
 
 	public Conversation conversation;
 
@@ -158,7 +158,7 @@ public class Level {
 //	public transient LevelButton centerButton;
 //	public transient LevelButton menuButton;
 
-	public transient ArrayList<Button> buttons;
+	public transient CopyOnWriteArrayList<Button> buttons;
 
 	public transient Button poisonBlastButton;
 
@@ -172,7 +172,7 @@ public class Level {
 	public boolean showLog = false;
 
 	public transient static int turn = 1;
-	// public ArrayList<Faction> factions;
+	// public CopyOnWriteArrayList<Faction> factions;
 	// public transient Faction currentFactionMoving;
 	// public transient int currentFactionMovingIndex;
 	public transient static Stack<Move> undoList;
@@ -185,11 +185,11 @@ public class Level {
 	// public transient boolean waitingForPlayerClickToBeginTurn = true;
 
 	public transient boolean ended = false;
-	// public ArrayList<InanimateObjectToAddOrRemove> inanimateObjectsToAdd = new
-	// ArrayList<InanimateObjectToAddOrRemove>();
-	// public ArrayList<GameObject> inanimateObjectsOnGroundToRemove = new
-	// ArrayList<GameObject>();
-	public ArrayList<Actor> actorsToRemove = new ArrayList<Actor>();
+	// public CopyOnWriteArrayList<InanimateObjectToAddOrRemove> inanimateObjectsToAdd = new
+	// CopyOnWriteArrayList<InanimateObjectToAddOrRemove>();
+	// public CopyOnWriteArrayList<GameObject> inanimateObjectsOnGroundToRemove = new
+	// CopyOnWriteArrayList<GameObject>();
+	public CopyOnWriteArrayList<Actor> actorsToRemove = new CopyOnWriteArrayList<Actor>();
 
 	public enum LevelMode {
 		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST, LEVEL_SELECT_TELEPORT_SQUARE, LEVEL_MODE_FISHING
@@ -249,11 +249,11 @@ public class Level {
 	// public static float shadowOffSetY = 0->0.86f->0;
 	// public static float shadowDarkness = 0 -> 0.2f -> 0;
 
-	public static ArrayList<Animation> blockingAnimations = new ArrayList<Animation>();
+	public static CopyOnWriteArrayList<Animation> blockingAnimations = new CopyOnWriteArrayList<Animation>();
 
 	public static TooltipGroup tooltipGroup = new TooltipGroup();
 
-	public static ArrayList<Decoration> decorations = new ArrayList<Decoration>();
+	public static CopyOnWriteArrayList<Decoration> decorations = new CopyOnWriteArrayList<Decoration>();
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -263,7 +263,7 @@ public class Level {
 		activityLogger = new ActivityLogger();
 		quickBar = new QuickBar();
 		undoList = new Stack<Move>();
-		buttons = new ArrayList<Button>();
+		buttons = new CopyOnWriteArrayList<Button>();
 		gameCursor = new GameCursor();
 
 		// textureUndiscovered =
@@ -291,10 +291,10 @@ public class Level {
 		Decoration.loadStaticImages();
 		Stat.init();
 
-		structures = new ArrayList<Structure>();
+		structures = new CopyOnWriteArrayList<Structure>();
 
 		factions.makeFactions();
-		// inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
+		// inanimateObjectsOnGround = new CopyOnWriteArrayListMappedInanimateObjects<GameObject>();
 
 		initGrid(this.squares, this.width, this.height);
 		createLevelButtons();
@@ -327,8 +327,8 @@ public class Level {
 
 	// values for square gameObject animation
 	// public static boolean flashGameObject;
-	public static ArrayList<GameObject> gameObjectsToFlash = new ArrayList<GameObject>();
-	public static HashMap<GameObject, Integer> flashGameObjectCounters = new HashMap<GameObject, Integer>();
+	public static CopyOnWriteArrayList<GameObject> gameObjectsToFlash = new CopyOnWriteArrayList<GameObject>();
+	public static ConcurrentHashMap<GameObject, Integer> flashGameObjectCounters = new ConcurrentHashMap<GameObject, Integer>();
 	public static final int flashGameObjectFrequency = 200;// ms
 	public static final int flashGameObjectTotalTime = 1200;// ms
 
@@ -337,7 +337,7 @@ public class Level {
 		journal.close();
 		skillTree.close();
 		if (Game.level.openInventories.size() > 0) {
-			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+			for (Inventory inventory : (CopyOnWriteArrayList<Inventory>) Game.level.openInventories) {
 				inventory.close();
 			}
 		} else {
@@ -352,7 +352,7 @@ public class Level {
 	}
 
 	public void openCloseJournal() {
-		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+		for (Inventory inventory : (CopyOnWriteArrayList<Inventory>) Game.level.openInventories) {
 			inventory.close();
 		}
 		characterScreen.close();
@@ -369,7 +369,7 @@ public class Level {
 	}
 
 	public void openCloseCharacterScreen() {
-		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+		for (Inventory inventory : (CopyOnWriteArrayList<Inventory>) Game.level.openInventories) {
 			inventory.close();
 		}
 		journal.close();
@@ -386,7 +386,7 @@ public class Level {
 	}
 
 	public void openCloseSkillTree() {
-		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+		for (Inventory inventory : (CopyOnWriteArrayList<Inventory>) Game.level.openInventories) {
 			inventory.close();
 		}
 		journal.close();
@@ -403,7 +403,7 @@ public class Level {
 	}
 
 	public void openClosePowersScreen() {
-		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+		for (Inventory inventory : (CopyOnWriteArrayList<Inventory>) Game.level.openInventories) {
 			inventory.close();
 		}
 		journal.close();
@@ -420,7 +420,7 @@ public class Level {
 	}
 
 	public void openCloseGameOver() {
-		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+		for (Inventory inventory : (CopyOnWriteArrayList<Inventory>) Game.level.openInventories) {
 			inventory.close();
 		}
 		journal.close();
@@ -438,7 +438,7 @@ public class Level {
 	}
 
 	public void openCloseCharacterCreation() {
-		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+		for (Inventory inventory : (CopyOnWriteArrayList<Inventory>) Game.level.openInventories) {
 			inventory.close();
 		}
 		journal.close();
@@ -456,7 +456,7 @@ public class Level {
 	}
 
 	public void openCloseMainMenu() {
-		for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+		for (Inventory inventory : (CopyOnWriteArrayList<Inventory>) Game.level.openInventories) {
 			inventory.close();
 		}
 		journal.close();
@@ -497,12 +497,12 @@ public class Level {
 	public void postLoad() {
 		activityLogger = new ActivityLogger();
 		undoList = new Stack<Move>();
-		buttons = new ArrayList<Button>();
+		buttons = new CopyOnWriteArrayList<Button>();
 		gameCursor = new GameCursor();
 
 		// this.inanimateObjectsOnGround = new
-		// ArrayListMappedInanimateObjects<GameObject>();
-		this.openInventories = new ArrayList<Inventory>();
+		// CopyOnWriteArrayListMappedInanimateObjects<GameObject>();
+		this.openInventories = new CopyOnWriteArrayList<Inventory>();
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
@@ -979,7 +979,7 @@ public class Level {
 			}
 			Game.flush();
 
-			for (Animation animation : (ArrayList<Animation>) secondaryAnimations.clone()) {
+			for (Animation animation : (CopyOnWriteArrayList<Animation>) secondaryAnimations) {
 				animation.draw1();
 				animation.draw2();
 				animation.draw3();
@@ -1115,7 +1115,7 @@ public class Level {
 
 		// In attack mode, draw attackable sqrs.
 		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
-			com.marklynch.utils.ArrayList<Square> attackableSquares = new com.marklynch.utils.ArrayList<Square>(
+			com.marklynch.utils.CopyOnWriteArrayList<Square> attackableSquares = new com.marklynch.utils.CopyOnWriteArrayList<Square>(
 					Square.class);
 
 			if (Game.level.player == null || !(Game.level.player.equipped instanceof Weapon)) {
@@ -1147,7 +1147,7 @@ public class Level {
 				// Highlight sqrs you can cast on
 				if (!selectedPower.hasRange(Integer.MAX_VALUE)) {
 					for (int i = 0; i <= selectedPower.range; i++) {
-						ArrayList<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
+						CopyOnWriteArrayList<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
 						for (Square squareToHighlight : squaresToHighlight) {
 							if (selectedPower.squareInCastLocations(Level.player, squareToHighlight)) {
 								if (squareToHighlight.visibleToPlayer && squareToHighlight.playerCanCastTo) {
@@ -1164,7 +1164,7 @@ public class Level {
 				ActionUsePower actionUsePower = new ActionUsePower(this.player, Game.gameObjectMouseIsOver,
 						Game.squareMouseIsOver, selectedPower, true);
 				if (actionUsePower.enabled) {
-					ArrayList<Square> affectedSquares = selectedPower.getAffectedSquares(Game.squareMouseIsOver);
+					CopyOnWriteArrayList<Square> affectedSquares = selectedPower.getAffectedSquares(Game.squareMouseIsOver);
 					for (Square affectedSquare : affectedSquares) {
 						affectedSquare.drawPower(selectedPower);
 					}
@@ -1266,7 +1266,7 @@ public class Level {
 			Game.flush();
 		}
 
-		for (Animation animation : (ArrayList<Animation>) secondaryAnimations.clone()) {
+		for (Animation animation : (CopyOnWriteArrayList<Animation>) secondaryAnimations) {
 			animation.drawStaticUI();
 		}
 
@@ -1389,7 +1389,7 @@ public class Level {
 		Notification.textX = Notification.x + Notification.border;
 		Notification.closeButtonX = Notification.x + Notification.width - Notification.closeButtonWidth;
 
-		for (Notification notification : (ArrayList<Notification>) notifications.clone()) {
+		for (Notification notification : (CopyOnWriteArrayList<Notification>) notifications) {
 			notification.y = notification.closeButton.y = notificationsHeight;
 			notification.textY = notification.y + 4;
 			notification.closeButton.x = Notification.closeButtonX;
@@ -1408,7 +1408,7 @@ public class Level {
 		Toast.x = Toast.border;
 		Toast.textX = Toast.x + Toast.border;
 
-		for (Toast toast : (ArrayList<Toast>) toasts.clone()) {
+		for (Toast toast : (CopyOnWriteArrayList<Toast>) toasts) {
 			toast.y = toastsHeight;
 			toast.textY = toast.y + 4;
 			toast.draw();
@@ -1477,21 +1477,21 @@ public class Level {
 
 	// To stop java.util.ConcurrentModificationException in inanimate object
 	// loop
-	// public static ArrayList<Action> actionQueueForInanimateObjects = new
-	// ArrayList<Action>();
+	// public static CopyOnWriteArrayList<Action> actionQueueForInanimateObjects = new
+	// CopyOnWriteArrayList<Action>();
 
 	public static long lastUpdate = 0;
 
 	public static int lastActorUpdatedIndex = -1;
 	public static boolean aiTurn = false;
 
-	public static ArrayList<Animation> animations = new ArrayList<Animation>();
+	public static CopyOnWriteArrayList<Animation> animations = new CopyOnWriteArrayList<Animation>();
 
 	public void update(int delta) {
 		lastUpdate = System.currentTimeMillis();
 		addRemoveObjectToFromGround();
 
-		for (Animation animation : (ArrayList<Animation>) animations.clone()) {
+		for (Animation animation : (CopyOnWriteArrayList<Animation>) animations) {
 			animation.update(delta);
 		}
 
@@ -1567,7 +1567,7 @@ public class Level {
 			}
 		}
 
-		for (GameObject gameObjectToFlash : (ArrayList<GameObject>) gameObjectsToFlash.clone()) {
+		for (GameObject gameObjectToFlash : (CopyOnWriteArrayList<GameObject>) gameObjectsToFlash) {
 
 			if (flashGameObjectCounters.get(gameObjectToFlash) == null)
 				continue;
@@ -1653,7 +1653,7 @@ public class Level {
 				aiTurn = false;
 			}
 
-			ArrayList<Actor> deadActors = new ArrayList<Actor>();
+			CopyOnWriteArrayList<Actor> deadActors = new CopyOnWriteArrayList<Actor>();
 			for (Actor actor : actors) {
 				if (actor.remainingHealth <= 0)
 					deadActors.add(actor);
@@ -2291,7 +2291,7 @@ public class Level {
 		}
 		player.hiddenObjectDiscoveryCheck();
 
-		ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>();
+		CopyOnWriteArrayList<GameObject> attackersToRemoveFromList = new CopyOnWriteArrayList<GameObject>();
 		for (GameObject gameObject : player.getAttackers()) {
 			if (gameObject.remainingHealth <= 0) {
 				attackersToRemoveFromList.add(gameObject);
@@ -2303,13 +2303,13 @@ public class Level {
 		}
 
 		// Game.level.activeActor = null;
-		for (UpdatableGameObject updatableGameObject : (ArrayList<UpdatableGameObject>) updatableGameObjects.clone()) {
+		for (UpdatableGameObject updatableGameObject : (CopyOnWriteArrayList<UpdatableGameObject>) updatableGameObjects) {
 			updatableGameObject.update();
 		}
 
 		// Run effects on inanimate objects
-		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>();
-		for (Effect effect : (ArrayList<Effect>) effectsOnInanimateGameObjects.clone()) {
+		CopyOnWriteArrayList<Effect> effectsToRemove = new CopyOnWriteArrayList<Effect>();
+		for (Effect effect : (CopyOnWriteArrayList<Effect>) effectsOnInanimateGameObjects) {
 			effect.activate();
 			if (effect.turnsRemaining == 0)
 				effectsToRemove.add(effect);
@@ -2383,7 +2383,7 @@ public class Level {
 		// }
 		// inanimateObjectsToAdd.clear();
 		//
-		// ArrayList<GameObject> removed = new ArrayList<GameObject>();
+		// CopyOnWriteArrayList<GameObject> removed = new CopyOnWriteArrayList<GameObject>();
 		// for (GameObject gameObject : inanimateObjectsOnGroundToRemove) {
 		// if ((inanimateObjectsOnGround).contains(gameObject)) {
 		// if (gameObject.getPrimaryAnimation() != null
@@ -2584,8 +2584,8 @@ public class Level {
 		dialog = null;
 	}
 
-	public static ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
-	public static ArrayList<Square> squaresToSave = new ArrayList<Square>();
+	public static CopyOnWriteArrayList<Animation> secondaryAnimations = new CopyOnWriteArrayList<Animation>();
+	public static CopyOnWriteArrayList<Square> squaresToSave = new CopyOnWriteArrayList<Square>();
 
 	public static void addSecondaryAnimation(Animation animation) {
 

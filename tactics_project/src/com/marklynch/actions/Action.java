@@ -211,7 +211,7 @@ public abstract class Action {
 	// public void notifyWitnessesOfCrime(Action action, Actor performer, Actor
 	// visctim, int severity) {
 	//
-	// // public ArrayList<Actor> witnesses;
+	// // public CopyOnWriteArrayList<Actor> witnesses;
 	// // public boolean resolved;
 	//
 	// }
@@ -220,7 +220,11 @@ public abstract class Action {
 		crime.notifyWitnessesOfCrime();
 	}
 
-	public void trespassingCheck(Action action, Actor performer, Square square) {
+	public void trespassingCheck(Actor performer, Square square) {
+
+		if (performer == null || square == null)
+			return;
+
 		if (square.restricted() == true && !square.owners.contains(performer)) {
 			Crime crime = null;
 

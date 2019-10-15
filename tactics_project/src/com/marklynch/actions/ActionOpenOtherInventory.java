@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -49,7 +49,7 @@ public class ActionOpenOtherInventory extends Action {
 
 		if (Game.level.openInventories.size() > 0) {
 
-			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+			for (Inventory inventory : (CopyOnWriteArrayList<Inventory>) Game.level.openInventories) {
 				inventory.close();
 			}
 		} else {

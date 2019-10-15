@@ -10,14 +10,14 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class RockGolem extends Monster {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public StructureRoom roomLivingIn;
 	public boolean awake = false;
@@ -108,8 +108,8 @@ public class RockGolem extends Monster {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 		// Pick up
 		if (!awake)
 			actions.add(new ActionLift(performer, this));

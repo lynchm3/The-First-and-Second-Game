@@ -7,7 +7,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Openable;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class ActiontTakeAll extends Action {
 
@@ -41,7 +41,7 @@ public class ActiontTakeAll extends Action {
 			actionOpen.perform();
 		}
 
-		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) targetGameObject.inventory.getGameObjects().clone();
+		CopyOnWriteArrayList<GameObject> gameObjectsToLoot = (CopyOnWriteArrayList<GameObject>) targetGameObject.inventory.getGameObjects();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 
 			if (Game.level.shouldLog(gameObjectToLoot, performer)) {
@@ -64,7 +64,7 @@ public class ActiontTakeAll extends Action {
 
 		if (!legal) {
 
-			ArrayList<GameObject> stolenObjects = new ArrayList<GameObject>(GameObject.class);
+			CopyOnWriteArrayList<GameObject> stolenObjects = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 			for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 				if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer) {
 					stolenObjects.add(gameObjectToLoot);
@@ -113,7 +113,7 @@ public class ActiontTakeAll extends Action {
 			}
 		}
 
-		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) targetGameObject.inventory.getGameObjects().clone();
+		CopyOnWriteArrayList<GameObject> gameObjectsToLoot = (CopyOnWriteArrayList<GameObject>) targetGameObject.inventory.getGameObjects();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer)
 				return false;

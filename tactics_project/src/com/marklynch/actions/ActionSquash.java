@@ -79,7 +79,7 @@ public class ActionSquash extends Action {
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
 		} else {
-			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+			trespassingCheck(performer, performer.squareGameObjectIsOn);
 		}
 
 		if (performer == Game.level.player)

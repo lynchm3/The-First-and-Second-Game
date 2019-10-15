@@ -1,6 +1,6 @@
 package com.marklynch.ui.quickbar;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.UserInputLevel;
@@ -11,7 +11,7 @@ public class QuickBar {
 	public QuickBarSquare[] quickBarSquares = new QuickBarSquare[] { new QuickBarSquare(0), new QuickBarSquare(1),
 			new QuickBarSquare(2), new QuickBarSquare(3), new QuickBarSquare(4), new QuickBarSquare(5),
 			new QuickBarSquare(6), new QuickBarSquare(7), new QuickBarSquare(8), new QuickBarSquare(9) };
-	ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	CopyOnWriteArrayList<LevelButton> buttons = new CopyOnWriteArrayList<LevelButton>();
 	public static int positionX;
 	public static int positionY;
 	public static final int shortcutWidth = 64;

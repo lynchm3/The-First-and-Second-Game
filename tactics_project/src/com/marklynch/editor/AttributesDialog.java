@@ -1,7 +1,7 @@
 package com.marklynch.editor;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor.EDITOR_STATE;
@@ -41,7 +41,7 @@ public class AttributesDialog {
 
 	public Object object;
 
-	public ArrayList<AtributesWindowButton> buttons = new ArrayList<AtributesWindowButton>();
+	public CopyOnWriteArrayList<AtributesWindowButton> buttons = new CopyOnWriteArrayList<AtributesWindowButton>();
 
 	public Editor editor;
 
@@ -117,12 +117,12 @@ public class AttributesDialog {
 		for (; i < fields.length; i++) {
 			final int fieldIndex = i;
 			Field field = null;
-			ArrayList arrayList = null;
+			CopyOnWriteArrayList arrayList = null;
 
 			try {
 				field = object.getClass().getField(fields[i]);
-				if (field.getType().isAssignableFrom(ArrayList.class)) {
-					arrayList = (ArrayList) field.get(object);
+				if (field.getType().isAssignableFrom(CopyOnWriteArrayList.class)) {
+					arrayList = (CopyOnWriteArrayList) field.get(object);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

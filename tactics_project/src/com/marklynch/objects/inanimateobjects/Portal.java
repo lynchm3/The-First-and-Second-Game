@@ -6,11 +6,11 @@ import com.marklynch.actions.ActionTeleport;
 import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Portal extends GameObject implements OnCompletionListener {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	public Square connectedSquare = null;
 
 	public Portal() {
@@ -58,7 +58,7 @@ public class Portal extends GameObject implements OnCompletionListener {
 		if (squareGameObjectIsOn == null)
 			return;
 
-		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
+		for (final GameObject gameObject : (CopyOnWriteArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects) {
 
 			if (gameObject == this || gameObject.isFloorObject)
 				continue;
@@ -91,8 +91,8 @@ public class Portal extends GameObject implements OnCompletionListener {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 		actions.add(new ActionMove(performer, squareGameObjectIsOn, true, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;

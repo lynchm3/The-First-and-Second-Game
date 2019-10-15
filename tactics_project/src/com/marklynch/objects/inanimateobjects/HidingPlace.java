@@ -4,13 +4,13 @@ import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionHide;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class HidingPlace extends Searchable {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
-	public ArrayList<GameObject> gameObjectsHiddenHere = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> gameObjectsHiddenHere = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public HidingPlace() {
 		super();
@@ -45,8 +45,8 @@ public class HidingPlace extends Searchable {
 	}
 
 	@Override
-	public ArrayList<GameObject> search() {
-		return (ArrayList<GameObject>) inventory.gameObjects.clone();
+	public CopyOnWriteArrayList<GameObject> search() {
+		return (CopyOnWriteArrayList<GameObject>) inventory.gameObjects;
 	}
 
 	@Override
@@ -65,10 +65,10 @@ public class HidingPlace extends Searchable {
 		if (destroyed) {
 
 			if (gameObjectsHiddenHere.size() > 0) {
-				// ArrayList<Actor> actorsToRemove = (ArrayList<Actor>)
-				// gameObjectsHiddenHere.clone();
+				// CopyOnWriteArrayList<Actor> actorsToRemove = (CopyOnWriteArrayList<Actor>)
+				// gameObjectsHiddenHere;
 
-				for (GameObject gameObjectHiddenHere : (ArrayList<GameObject>) gameObjectsHiddenHere.clone()) {
+				for (GameObject gameObjectHiddenHere : (CopyOnWriteArrayList<GameObject>) gameObjectsHiddenHere) {
 
 					gameObjectHiddenHere.hiding = false;
 					gameObjectHiddenHere.hidingPlace = null;
@@ -87,7 +87,7 @@ public class HidingPlace extends Searchable {
 		if (squareGameObjectIsOn == null)
 			return;
 
-		for (GameObject gameObjectHiddenHere : (ArrayList<GameObject>) gameObjectsHiddenHere.clone()) {
+		for (GameObject gameObjectHiddenHere : (CopyOnWriteArrayList<GameObject>) gameObjectsHiddenHere) {
 			if (!squareGameObjectIsOn.inventory.contains(gameObjectHiddenHere)) {
 
 				gameObjectHiddenHere.hiding = false;

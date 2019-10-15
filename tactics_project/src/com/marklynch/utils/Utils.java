@@ -1,6 +1,6 @@
 package com.marklynch.utils;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +15,7 @@ public class Utils {
 
 	public static List<Point> getCircleLineIntersectionPoint2(Point pointA, Point pointB, Point center, float radius) {
 
-		List<Point> points = new ArrayList<Point>();
+		List<Point> points = new CopyOnWriteArrayList<Point>();
 		float offX = pointA.x - pointB.x;
 		float offY = pointA.y - pointB.y;
 		float ls = offX * offX + offY * offY;
@@ -90,11 +90,11 @@ public class Utils {
 		set.addAll(list1);
 		set.addAll(list2);
 
-		return new ArrayList<T>(set);
+		return new CopyOnWriteArrayList<T>(set);
 	}
 
-	public static <T> ArrayList<T> intersection(ArrayList<T> list1, ArrayList<T> list2) {
-		ArrayList<T> list = new ArrayList<T>();
+	public static <T> CopyOnWriteArrayList<T> intersection(CopyOnWriteArrayList<T> list1, CopyOnWriteArrayList<T> list2) {
+		CopyOnWriteArrayList<T> list = new CopyOnWriteArrayList<T>();
 
 		for (T t : list1) {
 			if (list2.contains(t)) {

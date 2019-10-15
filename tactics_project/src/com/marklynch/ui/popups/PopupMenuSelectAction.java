@@ -1,6 +1,6 @@
 package com.marklynch.ui.popups;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
@@ -13,11 +13,11 @@ import com.marklynch.ui.button.ClickListener;
 
 public class PopupMenuSelectAction extends PopupMenu {
 	public PopupMenuButton selectSquareButton;
-	public ArrayList<Action> actions;
+	public CopyOnWriteArrayList<Action> actions;
 	public float offsetX;
 	public float height = 40f;
 
-	public PopupMenuSelectAction(float offsetX, float width, Level level, Square square, ArrayList<Action> actions) {
+	public PopupMenuSelectAction(float offsetX, float width, Level level, Square square, CopyOnWriteArrayList<Action> actions) {
 
 		super(width, level, square);
 		this.actions = actions;

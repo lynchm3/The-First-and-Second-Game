@@ -9,20 +9,20 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomMaze extends StructureRoom {
 	int posX;
 	int posY;
 	final static int totalWidthInSquares = 30;
 	final static int totalHeightInSquares = 30;
-	public ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>(StructurePath.class);
-	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>(StructureFeature.class);
+	public CopyOnWriteArrayList<StructurePath> structurePaths = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+	public CopyOnWriteArrayList<StructureFeature> features = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
 
 	public PuzzleRoomMaze(int posX, int posY) {
-		super("Maze", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {});
+		super("Maze", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {});
 
-		structurePaths.add(new StructurePath("Goat's Maze", false, false, new ArrayList<Actor>(Actor.class),
+		structurePaths.add(new StructurePath("Goat's Maze", false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				// x = 0
 				Level.squares[posX + 0][posY + 0],
 				Level.squares[posX + 0][posY + 28], Level.squares[posX + 0][posY + 29],

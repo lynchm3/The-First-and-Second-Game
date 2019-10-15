@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -12,7 +12,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchListener {
 
@@ -26,12 +26,12 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 	int bridgePosX = 4;
 	int bridgePosY = 0;
 
-	ArrayList<Square> extendedBridgeSquares = new ArrayList<Square>(Square.class);
+	CopyOnWriteArrayList<Square> extendedBridgeSquares = new CopyOnWriteArrayList<Square>(Square.class);
 
 	Square voidSquare;
 
 	public PuzzleRoomExtendableBridge(int posX, int posY) {
-		super("Bridge Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Bridge Room", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
@@ -101,14 +101,14 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 
 	public void moveBridge() {
 
-		HashMap<GameObject, Square> movesToPerform = new HashMap<GameObject, Square>();
-		ArrayList<GameObject> objectsToMoveInOrder = new ArrayList<GameObject>(GameObject.class);
+		ConcurrentHashMap<GameObject, Square> movesToPerform = new ConcurrentHashMap<GameObject, Square>();
+		CopyOnWriteArrayList<GameObject> objectsToMoveInOrder = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 		if (!bridgeExtended) {
 
 			for (int i = 0; i < extendedBridgeSquares.size(); i++) {
 				Square oldSquare = extendedBridgeSquares.get(i);
-				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
+				for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) oldSquare.inventory.gameObjects) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						objectsToMoveInOrder.add(gameObject);
 						movesToPerform.put(gameObject, Game.level.squares[bridgePosX][oldSquare.yInGrid]);
@@ -131,7 +131,7 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 				newSquare.inventory.removeGameObjecstWithTemplateId(Templates.VOID_HOLE.templateId);
 			}
 
-			ArrayList<Square> unextendedBridgeSquares = new ArrayList<Square>(Square.class);
+			CopyOnWriteArrayList<Square> unextendedBridgeSquares = new CopyOnWriteArrayList<Square>(Square.class);
 			unextendedBridgeSquares.add(Level.squares[bridgePosX][bridgePosY]);
 			unextendedBridgeSquares.add(Level.squares[bridgePosX][bridgePosY + 1]);
 
@@ -144,7 +144,7 @@ public class PuzzleRoomExtendableBridge extends StructureRoom implements SwitchL
 				movesToPerform.put(gameObject, extendedBridgeSquares.get(i));
 //				}
 
-//				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
+//				for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) oldSquare.inventory.gameObjects) {
 //					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 //						objectsToMoveInOrder.add(gameObject);
 //						movesToPerform.put(gameObject, extendedBridgeSquares.get(extendedSquaresIndex));

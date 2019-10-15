@@ -11,18 +11,18 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Texture;
 
 public class Liquid extends GameObject implements UpdatableGameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	public float volume = 1;
 	public GameObject gasForm;
 	public GameObject solidForm;
 	public GameObject jarForm;
 
-	public ArrayList<Texture> textures = new ArrayList<Texture>(Texture.class);
+	public CopyOnWriteArrayList<Texture> textures = new CopyOnWriteArrayList<Texture>(Texture.class);
 	public int texturesIndex = 0;
 
 	public float drawX1, drawX2, drawY1, drawY2;

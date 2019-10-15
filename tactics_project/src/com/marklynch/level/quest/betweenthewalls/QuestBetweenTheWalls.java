@@ -18,7 +18,7 @@ import com.marklynch.objects.inanimateobjects.RemoteDoor;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 
@@ -33,13 +33,13 @@ public class QuestBetweenTheWalls extends Quest {
 	public QuestBetweenTheWalls(int posX, int posY) {
 		name = "BETWEEN THE WALLS";
 
-		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>(Wall.class);
-		ArrayList<StructureFeature> structureFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
-		ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>(StructurePath.class);
-		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>(StructureSection.class);
-		ArrayList<StructureRoom> structureRooms = new ArrayList<StructureRoom>(StructureRoom.class);
-		ArrayList<Square> structureSquaresToRemove = new ArrayList<Square>(Square.class);
-		ArrayList<Square> structureEntranceSquares = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> structureExtraWalls = new CopyOnWriteArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<StructureFeature> structureFeatures = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructurePath> structurePaths = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+		CopyOnWriteArrayList<StructureSection> structureSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureRoom> structureRooms = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<Square> structureSquaresToRemove = new CopyOnWriteArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Square> structureEntranceSquares = new CopyOnWriteArrayList<Square>(Square.class);
 
 		// Front section
 		structureSections
@@ -51,7 +51,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Front room
 		StructureRoom frontRoom = new StructureRoom("Front Room", posX + 42, posY + 20, false, false,
-				new ArrayList<Actor>(Actor.class), new RoomPart(posX + 42, posY + 20, posX + 55, posY + 26));
+				new CopyOnWriteArrayList<Actor>(Actor.class), new RoomPart(posX + 42, posY + 20, posX + 55, posY + 26));
 		structureRooms.add(frontRoom);
 
 		// Front room decorative walls
@@ -65,7 +65,7 @@ public class QuestBetweenTheWalls extends Quest {
 				.add(new StructureSection("A Lovely House", posX + 41, posY + 28, posX + 56, posY + 38, false, false));
 
 		// Bedroom door
-		structurePaths.add(new StructurePath("Front Room", false, false, new ArrayList(Actor.class),
+		structurePaths.add(new StructurePath("Front Room", false, false, new CopyOnWriteArrayList(Actor.class),
 				Game.level.squares[posX + 42][posY + 27]));
 		structureFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Bedroom Door",
 				Game.level.squares[posX + 42][posY + 28], false, true, true, null)));
@@ -73,12 +73,12 @@ public class QuestBetweenTheWalls extends Quest {
 				new StructureFeature(Templates.FIRE_PLACE.makeCopy(Game.level.squares[posX + 48][posY + 29], null)));
 
 		// 57,39
-		structurePaths.add(new StructurePath("Bedroom", false, false, new ArrayList(Actor.class),
+		structurePaths.add(new StructurePath("Bedroom", false, false, new CopyOnWriteArrayList(Actor.class),
 				Game.level.squares[posX + 42][posY + 29]));
 
 		// Bedroom room
 		StructureRoom bedRoom = new StructureRoom("wallHouseBedroom", posX + 42, posY + 30, false, false,
-				new ArrayList<Actor>(Actor.class), new RoomPart(posX + 42, posY + 30, posX + 53, posY + 34));
+				new CopyOnWriteArrayList<Actor>(Actor.class), new RoomPart(posX + 42, posY + 30, posX + 53, posY + 34));
 		structureRooms.add(bedRoom);
 
 		// Bedroom decorative walls
@@ -87,7 +87,7 @@ public class QuestBetweenTheWalls extends Quest {
 		structureExtraWalls.add(Templates.WALL_CAVE.makeCopy(Game.level.squares[posX + 42][posY + 34], null));
 
 		// Path between the walls
-		pathBetweenTheWalls = new StructurePath("Between the walls", false, false, new ArrayList(Actor.class),
+		pathBetweenTheWalls = new StructurePath("Between the walls", false, false, new CopyOnWriteArrayList(Actor.class),
 				Game.level.squares[posX + 44][posY + 28], Game.level.squares[posX + 45][posY + 28],
 				Game.level.squares[posX + 46][posY + 28], Game.level.squares[posX + 47][posY + 28],
 				Game.level.squares[posX + 48][posY + 28], Game.level.squares[posX + 49][posY + 28],
@@ -111,12 +111,12 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Hidden room
 		hiddenRoom = new StructureRoom("Hidey-Hole", posX + 42, posY + 36, false, false,
-				new ArrayList<Actor>(Actor.class), 4, new RoomPart(posX + 42, posY + 36, posX + 55, posY + 37));
+				new CopyOnWriteArrayList<Actor>(Actor.class), 4, new RoomPart(posX + 42, posY + 36, posX + 55, posY + 37));
 		structureRooms.add(hiddenRoom);
 
 		// Path west entrance to west atrium
 		// structurePaths.add(new StructurePath("Between the walls", false, new
-		// ArrayList<Actor>(),
+		// CopyOnWriteArrayList<Actor>(),
 		// Game.level.squares[238][15], Game.level.squares[239][15],
 		// Game.level.squares[240][15],
 		// Game.level.squares[241][15], Game.level.squares[242][15]));

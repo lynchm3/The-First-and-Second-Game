@@ -1,6 +1,6 @@
 package com.marklynch.ai.utils;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.List;
 
 import com.marklynch.level.squares.Square;
@@ -27,7 +27,7 @@ public abstract class AStarNodeHighLevel implements Comparable {
 	public float xInGridPixels;
 	public float yInGridPixels;
 
-	public ArrayList<Square> neighbors;
+	public CopyOnWriteArrayList<Square> neighbors;
 
 	// added by me
 	public int straightLineDistanceTo(AStarNodeHighLevel otherNode) {

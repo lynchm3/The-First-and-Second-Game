@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.bounds.structure.structureroom.puzzleroom;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -12,7 +12,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListener {
 
@@ -28,15 +28,15 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 	int gapsWidth;
 	int bridgeConnectorsWidth;
 
-	ArrayList<Square> verticalBridgeSquares = new ArrayList<Square>(Square.class);
-	ArrayList<Square> horizontalBridgeSquares = new ArrayList<Square>(Square.class);
-	// ArrayList<Square> midBridgeSquares = new ArrayList<Square>();
-	ArrayList<Square> activeBridgeSquares;
+	CopyOnWriteArrayList<Square> verticalBridgeSquares = new CopyOnWriteArrayList<Square>(Square.class);
+	CopyOnWriteArrayList<Square> horizontalBridgeSquares = new CopyOnWriteArrayList<Square>(Square.class);
+	// CopyOnWriteArrayList<Square> midBridgeSquares = new CopyOnWriteArrayList<Square>();
+	CopyOnWriteArrayList<Square> activeBridgeSquares;
 
 	Square voidSquare;
 
 	public PuzzleRoomMovingBridge(int posX, int posY) {
-		super("Bridge Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Bridge Room", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
@@ -65,7 +65,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 			}
 		}
 
-		ArrayList<Square> middleSquares = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Square> middleSquares = new CopyOnWriteArrayList<Square>(Square.class);
 		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2 - 1][posY + totalHeightInSquares / 2 - 1]);
 		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2 - 1][posY + totalHeightInSquares / 2]);
 		middleSquares.add(Level.squares[posX + totalWidthInSquares / 2][posY + totalHeightInSquares / 2 - 1]);
@@ -175,10 +175,10 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 	public void moveBridge() {
 
-		HashMap<GameObject, Square> movesToPerform = new HashMap<GameObject, Square>();
-		// HashMap<GameObject, Square> midTeleportationsToPerform = new
-		// HashMap<GameObject, Square>();
-		ArrayList<GameObject> objectsToMoveInOrder = new ArrayList<GameObject>(GameObject.class);
+		ConcurrentHashMap<GameObject, Square> movesToPerform = new ConcurrentHashMap<GameObject, Square>();
+		// ConcurrentHashMap<GameObject, Square> midTeleportationsToPerform = new
+		// ConcurrentHashMap<GameObject, Square>();
+		CopyOnWriteArrayList<GameObject> objectsToMoveInOrder = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 		if (bridgeVertical) {
 
@@ -188,7 +188,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 			for (int i = 0; i < horizontalBridgeSquares.size(); i++) {
 				Square oldSquare = horizontalBridgeSquares.get(i);
-				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
+				for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) oldSquare.inventory.gameObjects) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						objectsToMoveInOrder.add(gameObject);
 						movesToPerform.put(gameObject, verticalBridgeSquares.get(i));
@@ -213,7 +213,7 @@ public class PuzzleRoomMovingBridge extends StructureRoom implements SwitchListe
 
 			for (int i = 0; i < verticalBridgeSquares.size(); i++) {
 				Square oldSquare = verticalBridgeSquares.get(i);
-				for (GameObject gameObject : (ArrayList<GameObject>) oldSquare.inventory.gameObjects.clone()) {
+				for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) oldSquare.inventory.gameObjects) {
 					if (gameObject.templateId != Templates.VOID_HOLE.templateId) {
 						objectsToMoveInOrder.add(gameObject);
 						movesToPerform.put(gameObject, horizontalBridgeSquares.get(i));

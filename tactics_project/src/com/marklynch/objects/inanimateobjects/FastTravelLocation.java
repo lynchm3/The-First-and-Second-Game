@@ -3,24 +3,24 @@ package com.marklynch.objects.inanimateobjects;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.ui.button.Link;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
 
 public class FastTravelLocation extends MapLevelGameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public static Texture FAST_TRAVEL_LOCATION_TEXTURE;
 
-	public static ArrayList<Texture> MAP_MARKER_TEXTURES = new ArrayList<Texture>(Texture.class);
+	public static CopyOnWriteArrayList<Texture> MAP_MARKER_TEXTURES = new CopyOnWriteArrayList<Texture>(Texture.class);
 
-	public ArrayList<Link> links;
+	public CopyOnWriteArrayList<Link> links;
 
 	public FastTravelLocation() {
 		super();
-		links = new ArrayList<Link>(Link.class);
+		links = new CopyOnWriteArrayList<Link>(Link.class);
 		links.addAll(TextUtils.getLinks(true, this));
 		canBePickedUp = false;
 

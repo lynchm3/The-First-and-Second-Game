@@ -52,7 +52,7 @@ public class ActionClose extends Action {
 				Game.level.undoList.clear();
 			}
 
-			trespassingCheck(this, actor, actor.squareGameObjectIsOn);
+			trespassingCheck(actor, actor.squareGameObjectIsOn);
 		}
 		if (sound != null)
 			sound.play();

@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -165,8 +165,8 @@ public class ActionDie extends Action {
 			// } else if (gameObjectPerformer.destroyedBy instanceof EffectBurning) {
 			// // Death by fire
 			// Templates.ASH.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
-			// for (GameObject gameObject : (ArrayList<GameObject>)
-			// gameObjectPerformer.inventory.gameObjects.clone()) {
+			// for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>)
+			// gameObjectPerformer.inventory.gameObjects) {
 			// new ActionDropItems(gameObjectPerformer,
 			// gameObjectPerformer.squareGameObjectIsOn, gameObject).perform();
 			// }
@@ -191,9 +191,10 @@ public class ActionDie extends Action {
 			// gameObjectPerformer.weight);
 			// }
 			// if (body != null) {
-			// ArrayList<GameObject> gameObjectsInInventory = (ArrayList<GameObject>)
+			// CopyOnWriteArrayList<GameObject> gameObjectsInInventory =
+			// (CopyOnWriteArrayList<GameObject>)
 			// gameObjectPerformer.inventory
-			// .getGameObjects().clone();
+			// .getGameObjects();
 			// for (GameObject gameObjectInInventory : gameObjectsInInventory) {
 			// gameObjectPerformer.inventory.remove(gameObjectInInventory);
 			// body.inventory.add(gameObjectInInventory);
@@ -205,16 +206,14 @@ public class ActionDie extends Action {
 			if (gameObjectPerformer.destroyedBy instanceof EffectBurn) {
 				// Death by fire
 				Templates.ASH.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
-				for (GameObject gameObject : (ArrayList<GameObject>) gameObjectPerformer.inventory.gameObjects
-						.clone()) {
+				for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) gameObjectPerformer.inventory.gameObjects) {
 					new ActionDropItems(gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn, gameObject)
 							.perform();
 				}
 			} else if (gameObjectPerformer.templateId == Templates.CRATE.templateId) {
 				// Death by fire
 				Templates.WOOD_CHIPS.makeCopy(gameObjectPerformer.squareGameObjectIsOn, null);
-				for (GameObject gameObject : (ArrayList<GameObject>) gameObjectPerformer.inventory.gameObjects
-						.clone()) {
+				for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) gameObjectPerformer.inventory.gameObjects) {
 					new ActionDropItems(gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn, gameObject)
 							.perform();
 				}

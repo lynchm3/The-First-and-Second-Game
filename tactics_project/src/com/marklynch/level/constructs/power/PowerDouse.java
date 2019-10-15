@@ -10,7 +10,7 @@ import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 
 public class PowerDouse extends Power {
@@ -39,7 +39,7 @@ public class PowerDouse extends Power {
 		super.cast(source, targetGameObject, targetSquare, action);
 		if (targetSquare != null) {
 
-			ArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
+			CopyOnWriteArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
 			for (Square square : affectedSquares) {
 				targetSquare.liquidSpread(Templates.WATER);
 			}

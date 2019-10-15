@@ -9,7 +9,7 @@ import com.marklynch.objects.actors.Blind;
 import com.marklynch.objects.actors.RockGolem;
 import com.marklynch.objects.inanimateobjects.MeatChunk;
 import com.marklynch.objects.utils.ThoughtBubbles;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class AIRoutineForBlind extends AIRoutine {
 
@@ -216,7 +216,7 @@ public class AIRoutineForBlind extends AIRoutine {
 	}
 
 	public void addNonBlindNonGolemToAttackersList() {
-		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(0, this.actor.sight);
+		CopyOnWriteArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(0, this.actor.sight);
 		for (Square square : squares) {
 			if (this.actor.canSeeSquare(square)) {
 				Actor actorOnSquare = (Actor) square.inventory.getGameObjectOfClass(Actor.class);

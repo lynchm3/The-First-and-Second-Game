@@ -11,14 +11,14 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
 public class ConveyerBelt extends GameObject implements OnCompletionListener, SwitchListener {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	public Square connectedSquare = null;
 	public Direction direction = Direction.LEFT;
 
@@ -185,7 +185,7 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener, Sw
 		if (squareGameObjectIsOn == null)
 			return;
 
-		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
+		for (final GameObject gameObject : (CopyOnWriteArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects) {
 
 			if (gameObject == this || gameObject.isFloorObject)
 				continue;
@@ -226,8 +226,8 @@ public class ConveyerBelt extends GameObject implements OnCompletionListener, Sw
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 		actions.add(new ActionMove(performer, squareGameObjectIsOn, true, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;

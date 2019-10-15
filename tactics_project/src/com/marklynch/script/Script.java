@@ -1,25 +1,25 @@
 package com.marklynch.script;
 
-import java.util.ArrayList;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
 
 public class Script {
 
-	public ArrayList<ScriptEvent> scriptEvents = new ArrayList<ScriptEvent>();
-	public ArrayList<ScriptEvent> activeScriptEvents = new ArrayList<ScriptEvent>();
-	public ArrayList<ScriptTrigger> scriptTriggers = new ArrayList<ScriptTrigger>();
-	public ArrayList<SpeechPart> speechParts = new ArrayList<SpeechPart>();
+	public CopyOnWriteArrayList<ScriptEvent> scriptEvents = new CopyOnWriteArrayList<ScriptEvent>();
+	public CopyOnWriteArrayList<ScriptEvent> activeScriptEvents = new CopyOnWriteArrayList<ScriptEvent>();
+	public CopyOnWriteArrayList<ScriptTrigger> scriptTriggers = new CopyOnWriteArrayList<ScriptTrigger>();
+	public CopyOnWriteArrayList<SpeechPart> speechParts = new CopyOnWriteArrayList<SpeechPart>();
 
 	public Script() {
 		super();
 
-		scriptEvents = new ArrayList<ScriptEvent>();
-		activeScriptEvents = new ArrayList<ScriptEvent>();
-		scriptTriggers = new ArrayList<ScriptTrigger>();
-		speechParts = new ArrayList<SpeechPart>();
+		scriptEvents = new CopyOnWriteArrayList<ScriptEvent>();
+		activeScriptEvents = new CopyOnWriteArrayList<ScriptEvent>();
+		scriptTriggers = new CopyOnWriteArrayList<ScriptTrigger>();
+		speechParts = new CopyOnWriteArrayList<SpeechPart>();
 
 		// for (ScriptEvent scriptEvent : this.scriptEvents) {
 		// scriptTriggers.add(scriptEvent.scriptTrigger.makeCopy());
@@ -66,7 +66,7 @@ public class Script {
 	public void update(int delta) {
 		activateScriptEvent();
 
-		ArrayList<ScriptEvent> completedScriptEvents = new ArrayList<ScriptEvent>();
+		CopyOnWriteArrayList<ScriptEvent> completedScriptEvents = new CopyOnWriteArrayList<ScriptEvent>();
 
 		for (ScriptEvent activeScriptEvent : activeScriptEvents) {
 			activeScriptEvent.update(delta);

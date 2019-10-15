@@ -37,7 +37,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 
@@ -46,7 +46,7 @@ public class SaveSerializationCreator {
 	public static Gson createSaveSerializerGson() {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.registerTypeAdapter(ArrayList.class, serializerForArrayList);
+		gsonBuilder.registerTypeAdapter(CopyOnWriteArrayList.class, serializerForCopyOnWriteArrayList);
 		gsonBuilder.registerTypeAdapter(Texture.class, serializerForTexture);
 		gsonBuilder.registerTypeAdapter(Faction.class, serializerForIdable);
 		gsonBuilder.registerTypeAdapter(Crime.class, serializerForCrime);
@@ -68,7 +68,7 @@ public class SaveSerializationCreator {
 		// gsonBuilder.registerTypeAdapter(Stat.class, serializerForStat);
 
 		// Add serializers for all GamObjects, Effects and aiRoutines
-		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>(Class.class);
+		CopyOnWriteArrayList<Class<?>> gameObjectClasses = new CopyOnWriteArrayList<Class<?>>(Class.class);
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.actors"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.inanimateobjects"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.tools"));
@@ -81,35 +81,35 @@ public class SaveSerializationCreator {
 		// serializerForIdable);
 
 		// Effects
-		ArrayList<Class> effectClasses = new ArrayList<Class>(Class.class);
+		CopyOnWriteArrayList<Class> effectClasses = new CopyOnWriteArrayList<Class>(Class.class);
 		effectClasses.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.effect"));
 		for (Class<?> clazz : effectClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForEffect);
 		}
 
 		// AI Routines
-		ArrayList<Class> aiRoutineClasses = new ArrayList<Class>(Class.class);
+		CopyOnWriteArrayList<Class> aiRoutineClasses = new CopyOnWriteArrayList<Class>(Class.class);
 		aiRoutineClasses.addAll(PackageUtils.getClasses("com.marklynch.ai.routines"));
 		for (Class<?> clazz : aiRoutineClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForAIRoutine);
 		}
 
 		// Power
-		ArrayList<Class> powerClasses = new ArrayList<Class>(Class.class);
+		CopyOnWriteArrayList<Class> powerClasses = new CopyOnWriteArrayList<Class>(Class.class);
 		powerClasses.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.power"));
 		for (Class<?> clazz : powerClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForPower);
 		}
 
 		// Quests
-		ArrayList<Class> questClasses = new ArrayList<Class>(Class.class);
+		CopyOnWriteArrayList<Class> questClasses = new CopyOnWriteArrayList<Class>(Class.class);
 		questClasses.addAll(PackageUtils.getClasses("com.marklynch.level.quest"));
 		for (Class<?> clazz : questClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, serializerForIdable);
 		}
 
 		// Structure Room
-		ArrayList<Class> structureRoomClasses = new ArrayList<Class>(Class.class);
+		CopyOnWriteArrayList<Class> structureRoomClasses = new CopyOnWriteArrayList<Class>(Class.class);
 		structureRoomClasses
 				.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.bounds.structure.structureroom"));
 		for (Class<?> clazz : structureRoomClasses) {
@@ -120,9 +120,9 @@ public class SaveSerializationCreator {
 		return gson;
 	}
 
-	static JsonSerializer<ArrayList<?>> serializerForArrayList = new JsonSerializer<ArrayList<?>>() {
+	static JsonSerializer<CopyOnWriteArrayList<?>> serializerForCopyOnWriteArrayList = new JsonSerializer<CopyOnWriteArrayList<?>>() {
 		@Override
-		public JsonElement serialize(ArrayList<?> src, Type type, JsonSerializationContext context) {
+		public JsonElement serialize(CopyOnWriteArrayList<?> src, Type type, JsonSerializationContext context) {
 
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("clazz", src.clazz.getName());

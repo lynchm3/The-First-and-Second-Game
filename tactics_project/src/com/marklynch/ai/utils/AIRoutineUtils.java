@@ -1,7 +1,7 @@
 package com.marklynch.ai.utils;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
@@ -40,7 +40,7 @@ public class AIRoutineUtils {
 		int attempts = 0;
 		int maxAttempts = 5;
 		Square randomSquare = null;
-		ArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(minDistance, maxDistance);
+		CopyOnWriteArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(minDistance, maxDistance);
 
 		Collections.shuffle(squaresInRange);
 
@@ -157,9 +157,9 @@ public class AIRoutineUtils {
 		AIPath bestPath = null;
 		GameObject bestObject = null;
 		int bestPathTravelCost = Integer.MAX_VALUE;
-		ArrayList<GameObject> objects = new ArrayList<GameObject>();
+		CopyOnWriteArrayList<GameObject> objects = new CopyOnWriteArrayList<GameObject>();
 		for (Class clazz : types) {
-			objects.addAll((ArrayList<GameObject>) getFieldValue(clazz, "instances"));
+			objects.addAll((CopyOnWriteArrayList<GameObject>) getFieldValue(clazz, "instances"));
 		}
 
 		if (objects.size() > maxDistance * maxDistance) {
@@ -219,7 +219,7 @@ public class AIRoutineUtils {
 		}
 
 		for (int i = 1; i < maxDistance; i++) {
-			ArrayList<Square> squares = Game.level.activeActor.getAllSquaresAtDistance(i);
+			CopyOnWriteArrayList<Square> squares = Game.level.activeActor.getAllSquaresAtDistance(i);
 			for (Square square : squares) {
 				for (GameObject gameObject : square.inventory.gameObjects) {
 					if (passesChecks(gameObject, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
@@ -247,7 +247,7 @@ public class AIRoutineUtils {
 	//
 	// if (checkActors) {
 	//
-	// ArrayList<Integer> ranges = new ArrayList<Integer>();
+	// CopyOnWriteArrayList<Integer> ranges = new CopyOnWriteArrayList<Integer>();
 	// for (int i = 0; i < maxDistance; i += 10) {
 	// ranges.add(i);
 	// }
@@ -284,7 +284,7 @@ public class AIRoutineUtils {
 	// // Takes first one that returns a path
 	// if (checkInanimateObjects) {
 	//
-	// ArrayList<Integer> ranges = new ArrayList<Integer>();
+	// CopyOnWriteArrayList<Integer> ranges = new CopyOnWriteArrayList<Integer>();
 	// for (int i = 0; i < maxDistance; i += 10) {
 	// ranges.add(i);
 	// }
@@ -461,7 +461,7 @@ public class AIRoutineUtils {
 
 	// public boolean moveTowardsNearestEnemyToAttack() {
 	//
-	// // ArrayList<Integer> idealWeaponDistances = new ArrayList<Integer>();
+	// // CopyOnWriteArrayList<Integer> idealWeaponDistances = new CopyOnWriteArrayList<Integer>();
 	// // idealWeaponDistances.add(2);
 	//
 	// // TODO this needs to be calculated based on
@@ -538,7 +538,7 @@ public class AIRoutineUtils {
 	public boolean attackRandomEnemy() {
 
 		// make a list of attackable enemies
-		ArrayList<Actor> attackableActors = new ArrayList<Actor>();
+		CopyOnWriteArrayList<Actor> attackableActors = new CopyOnWriteArrayList<Actor>();
 		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
 				int weaponDistance = Game.level.activeActor.straightLineDistanceTo(actor.squareGameObjectIsOn);
@@ -564,7 +564,7 @@ public class AIRoutineUtils {
 	public boolean attackRandomEnemyOrAlly() {
 		// TODO needs to be tested
 		// make a list of attackable enemies
-		ArrayList<Actor> attackableActors = new ArrayList<Actor>();
+		CopyOnWriteArrayList<Actor> attackableActors = new CopyOnWriteArrayList<Actor>();
 		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
 				int weaponDistance = Game.level.activeActor.straightLineDistanceTo(actor.squareGameObjectIsOn);
@@ -661,7 +661,7 @@ public class AIRoutineUtils {
 
 	public static Square getRandomSquareInBuilding(Structure building) {
 
-		ArrayList<Square> randomSquares = new ArrayList<Square>();
+		CopyOnWriteArrayList<Square> randomSquares = new CopyOnWriteArrayList<Square>();
 		for (StructureRoom room : building.rooms) {
 			randomSquares.add(getRandomSquareInRoom(room));
 		}

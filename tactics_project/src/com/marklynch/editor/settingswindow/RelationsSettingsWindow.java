@@ -12,8 +12,8 @@ public class RelationsSettingsWindow extends SettingsWindow {
 	public void updateRelationsButtons() {
 		buttons.clear();
 
-		// final ArrayList<FactionRelationship> factionRelationships = new
-		// ArrayList<FactionRelationship>();
+		// final CopyOnWriteArrayList<FactionRelationship> factionRelationships = new
+		// CopyOnWriteArrayList<FactionRelationship>();
 		// for (Faction faction : Game.level.factions) {
 		// for (FactionRelationship factionRelationship :
 		// faction.relationships.values()) {

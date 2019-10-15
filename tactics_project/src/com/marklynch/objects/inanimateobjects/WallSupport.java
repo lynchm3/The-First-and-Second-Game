@@ -8,14 +8,15 @@ import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationShake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Utils;
 
 public class WallSupport extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(
+			GameObject.class);
 
-	public ArrayList<GameObject> supportedGameObjects;
+	public CopyOnWriteArrayList<GameObject> supportedGameObjects;
 
 	public WallSupport() {
 		super();
@@ -33,14 +34,16 @@ public class WallSupport extends GameObject {
 	}
 
 	public WallSupport makeCopy(Square square, Actor owner, GameObject... supportedGameObjects) {
-		return makeCopy(square, owner, new java.util.ArrayList<>(Arrays.asList(supportedGameObjects)));
+		return makeCopy(square, owner,
+				new java.util.concurrent.CopyOnWriteArrayList<>(Arrays.asList(supportedGameObjects)));
 	}
 
-	public WallSupport makeCopy(Square square, Actor owner, java.util.ArrayList<GameObject> supportedGameObjects) {
+	public WallSupport makeCopy(Square square, Actor owner,
+			java.util.concurrent.CopyOnWriteArrayList<GameObject> supportedGameObjects) {
 		WallSupport support = new WallSupport();
 		setInstances(support);
 		super.setAttributesForCopy(support, square, owner);
-		support.supportedGameObjects = new ArrayList<GameObject>(GameObject.class);
+		support.supportedGameObjects = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		support.supportedGameObjects.addAll(supportedGameObjects);
 		support.gameObjectsToHighlight.addAll(supportedGameObjects);
 		return support;
@@ -59,8 +62,9 @@ public class WallSupport extends GameObject {
 
 	public void collapseSurroundingObjects(GameObject collapser, final Object attacker, final Action action) {
 
-		ArrayList<GameObject> surroundingGameObjects = collapser.getSurroundingGameObjects();
-		ArrayList<GameObject> surroundingObjectsToCollapse = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<GameObject> surroundingGameObjects = collapser.getSurroundingGameObjects();
+		CopyOnWriteArrayList<GameObject> surroundingObjectsToCollapse = new CopyOnWriteArrayList<GameObject>(
+				GameObject.class);
 		surroundingObjectsToCollapse.addAll(Utils.intersection(surroundingGameObjects, supportedGameObjects));
 		for (GameObject s : surroundingObjectsToCollapse) {
 

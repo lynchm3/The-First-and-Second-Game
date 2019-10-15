@@ -1,6 +1,6 @@
 package com.marklynch.ui.button;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
@@ -17,7 +17,7 @@ public abstract class Button {
 	protected Object text;
 	protected boolean highlighted = false;
 	// public Tooltip tooltip;
-	public ArrayList<Tooltip> tooltips = new ArrayList<Tooltip>();
+	public CopyOnWriteArrayList<Tooltip> tooltips = new CopyOnWriteArrayList<Tooltip>();
 
 	public Button(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,
 			Object text, String tooltipText) {
@@ -103,7 +103,7 @@ public abstract class Button {
 		}
 	}
 	//
-	// public void setTooltipText(ArrayList<Object> tooltipText) {
+	// public void setTooltipText(CopyOnWriteArrayList<Object> tooltipText) {
 	// if (tooltipGroup != null)
 	// tooltipGroup.setTooltipText(tooltipText);
 	// }

@@ -30,7 +30,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Storage;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 
@@ -148,7 +148,7 @@ public class QuestSmallGame extends Quest {
 	Actor cub;
 
 	// GameObjects
-	public ArrayList<GameObject> weaponsBehindLodge = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> weaponsBehindLodge = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	// Squares
 	public Square squareBehindLodge;
@@ -237,19 +237,19 @@ public class QuestSmallGame extends Quest {
 		hunter = hunterBrent;
 
 		// Hunting lodge
-		ArrayList<StructureFeature> lodgeFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructureFeature> lodgeFeatures = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
 		lodgeFeatures.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[105][12], false, false, false, hunterBrent)));
-		ArrayList<StructureRoom> lodgeRooms = new ArrayList<StructureRoom>(StructureRoom.class);
-		lodgeRooms.add(new StructureRoom("Hunting Lodge", 107, 9, false, false, new ArrayList<Actor>(Actor.class),
+		CopyOnWriteArrayList<StructureRoom> lodgeRooms = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+		lodgeRooms.add(new StructureRoom("Hunting Lodge", 107, 9, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(106, 10, 110, 14)));
-		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureSection> lodgeSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
 		lodgeSections.add(new StructureSection("Hunting Lodge", 105, 9, 111, 15, false, false));
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeRooms,
-				new ArrayList<StructurePath>(StructurePath.class), lodgeFeatures, new ArrayList<Square>(Square.class),
+				new CopyOnWriteArrayList<StructurePath>(StructurePath.class), lodgeFeatures, new CopyOnWriteArrayList<Square>(Square.class),
 				ResourceUtils.getGlobalImage("icon_house.png", false), AreaTown.posX + 105, AreaTown.posY + 9,
-				AreaTown.posX + 111, AreaTown.posY + 15, true, hunterBrent, new ArrayList<Square>(Square.class),
-				new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE, Square.STONE_TEXTURE, 2);
+				AreaTown.posX + 111, AreaTown.posY + 15, true, hunterBrent, new CopyOnWriteArrayList<Square>(Square.class),
+				new CopyOnWriteArrayList<Wall>(Wall.class), Templates.WALL_CAVE, Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(lodge);
 		Templates.HATCHET.makeCopy(Game.level.squares[AreaTown.posX + 3][AreaTown.posY + 3], hunterBrent);
 		Templates.HATCHET.makeCopy(Game.level.squares[AreaTown.posX + 3][AreaTown.posY + 6], hunterBrent);
@@ -319,21 +319,21 @@ public class QuestSmallGame extends Quest {
 				new GameObject[] { Templates.SWORD.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
 				new int[] { Templates.SWORD.templateId }, new HOBBY[] { HOBBY.HUNTING, HOBBY.FISHING }, Guard.dayShift,
 				Game.level.squares[4][21], Game.level.squares[32][21]);
-		ArrayList<Wall> extraWallsBarracks = new ArrayList<Wall>(Wall.class);
-		ArrayList<StructureFeature> featuresBarracks = new ArrayList<StructureFeature>(StructureFeature.class);
-		ArrayList<StructurePath> pathsBarracks = new ArrayList<StructurePath>(StructurePath.class);
-		ArrayList<StructureSection> sectionsBarracks = new ArrayList<StructureSection>(StructureSection.class);
-		ArrayList<StructureRoom> roomsBarracks = new ArrayList<StructureRoom>(StructureRoom.class);
-		ArrayList<Square> squaresToRemoveBarracks = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> extraWallsBarracks = new CopyOnWriteArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<StructureFeature> featuresBarracks = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructurePath> pathsBarracks = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+		CopyOnWriteArrayList<StructureSection> sectionsBarracks = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureRoom> roomsBarracks = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<Square> squaresToRemoveBarracks = new CopyOnWriteArrayList<Square>(Square.class);
 		featuresBarracks.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[80][52], false, false, false, null)));
 		featuresBarracks.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[80][61], false, false, false, null)));
-		roomsBarracks.add(new StructureRoom("Barracks", 75, 53, false, false, new ArrayList<Actor>(Actor.class),
+		roomsBarracks.add(new StructureRoom("Barracks", 75, 53, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(75, 53, 84, 60)));
 		sectionsBarracks.add(new StructureSection("Barracks", 74, 52, 85, 61, false, false));
 		Structure barracks = new Structure("Barracks", sectionsBarracks, roomsBarracks, pathsBarracks, featuresBarracks,
-				new ArrayList<Square>(Square.class), ResourceUtils.getGlobalImage("icon_house.png", false), 74, 52, 85,
+				new CopyOnWriteArrayList<Square>(Square.class), ResourceUtils.getGlobalImage("icon_house.png", false), 74, 52, 85,
 				61, true, null, squaresToRemoveBarracks, extraWallsBarracks, Templates.WALL_CAVE, Square.STONE_TEXTURE,
 				5);
 		Game.level.structures.add(barracks);
@@ -366,19 +366,19 @@ public class QuestSmallGame extends Quest {
 						Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.town, new int[] {}, new HOBBY[] { HOBBY.HUNTING });
 		t3.aiRoutine = null;
-		ArrayList<Wall> extraWallsThievesHut = new ArrayList<Wall>(Wall.class);
-		ArrayList<StructureFeature> featuresThievesHut = new ArrayList<StructureFeature>(StructureFeature.class);
-		ArrayList<StructurePath> pathsThievesHut = new ArrayList<StructurePath>(StructurePath.class);
-		ArrayList<StructureSection> sectionsThievesHut = new ArrayList<StructureSection>(StructureSection.class);
-		ArrayList<StructureRoom> roomsThievesHut = new ArrayList<StructureRoom>(StructureRoom.class);
-		ArrayList<Square> squaresToRemoveThievesHut = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> extraWallsThievesHut = new CopyOnWriteArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<StructureFeature> featuresThievesHut = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructurePath> pathsThievesHut = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+		CopyOnWriteArrayList<StructureSection> sectionsThievesHut = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureRoom> roomsThievesHut = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<Square> squaresToRemoveThievesHut = new CopyOnWriteArrayList<Square>(Square.class);
 		featuresThievesHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[113][53], false, false, false, null)));
-		roomsThievesHut.add(new StructureRoom("Hut", 114, 53, false, false, new ArrayList<Actor>(Actor.class),
+		roomsThievesHut.add(new StructureRoom("Hut", 114, 53, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(114, 53, 116, 55)));
 		sectionsThievesHut.add(new StructureSection("Hut", 113, 52, 117, 56, false, false));
 		Structure thievesHut = new Structure("Hut", sectionsThievesHut, roomsThievesHut, pathsThievesHut,
-				featuresThievesHut, new ArrayList<Square>(Square.class),
+				featuresThievesHut, new CopyOnWriteArrayList<Square>(Square.class),
 				ResourceUtils.getGlobalImage("icon_house.png", false), 113, 52, 117, 56, true, null,
 				squaresToRemoveThievesHut, extraWallsThievesHut, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(thievesHut);
@@ -415,19 +415,19 @@ public class QuestSmallGame extends Quest {
 				new HOBBY[] { HOBBY.HUNTING });
 		rangerBill.quest = this;
 
-		ArrayList<Wall> extraWallsRangersHut = new ArrayList<Wall>(Wall.class);
-		ArrayList<StructureFeature> featuresRangersHut = new ArrayList<StructureFeature>(StructureFeature.class);
-		ArrayList<StructurePath> pathsRangersHut = new ArrayList<StructurePath>(StructurePath.class);
-		ArrayList<StructureSection> sectionsRangersHut = new ArrayList<StructureSection>(StructureSection.class);
-		ArrayList<StructureRoom> roomsRangersHut = new ArrayList<StructureRoom>(StructureRoom.class);
-		ArrayList<Square> squaresToRemoveRangersHut = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> extraWallsRangersHut = new CopyOnWriteArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<StructureFeature> featuresRangersHut = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructurePath> pathsRangersHut = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+		CopyOnWriteArrayList<StructureSection> sectionsRangersHut = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureRoom> roomsRangersHut = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<Square> squaresToRemoveRangersHut = new CopyOnWriteArrayList<Square>(Square.class);
 		featuresRangersHut.add(new StructureFeature(
 				Templates.DOOR.makeCopy("Door", Game.level.squares[133][34], false, false, false, rangerBill)));
-		roomsRangersHut.add(new StructureRoom("Ranger's Hut", 130, 34, false, false, new ArrayList<Actor>(Actor.class),
+		roomsRangersHut.add(new StructureRoom("Ranger's Hut", 130, 34, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(130, 34, 132, 36)));
 		sectionsRangersHut.add(new StructureSection("Ranger's Hut", 129, 33, 133, 37, false, false));
 		Structure rangerHut = new Structure("Ranger's Hut", sectionsRangersHut, roomsRangersHut, pathsRangersHut,
-				featuresRangersHut, new ArrayList<Square>(Square.class),
+				featuresRangersHut, new CopyOnWriteArrayList<Square>(Square.class),
 				ResourceUtils.getGlobalImage("icon_house.png", false), 129, 33, 133, 37, true, null,
 				squaresToRemoveRangersHut, extraWallsRangersHut, Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(rangerHut);
@@ -453,7 +453,7 @@ public class QuestSmallGame extends Quest {
 			wolf.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		}
 
-		weaponsBehindLodge = new ArrayList<GameObject>(GameObject.class);
+		weaponsBehindLodge = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		weaponsBehindLodge.add(Templates.HATCHET.makeCopy(squareBehindLodge, hunterBrent));
 		weaponsBehindLodge.add(Templates.HUNTING_BOW.makeCopy(squareBehindLodge, hunterBrent));
 

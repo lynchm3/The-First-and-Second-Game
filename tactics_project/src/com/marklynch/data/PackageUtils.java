@@ -2,20 +2,20 @@ package com.marklynch.data;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Enumeration;
 
 public class PackageUtils {
 
-	public static ArrayList<Class<?>> getClasses(String packageName) {
-		ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+	public static CopyOnWriteArrayList<Class<?>> getClasses(String packageName) {
+		CopyOnWriteArrayList<Class<?>> classes = new CopyOnWriteArrayList<Class<?>>();
 		try {
 
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 			assert classLoader != null;
 			String path = packageName.replace('.', '/');
 			Enumeration<URL> resources = classLoader.getResources(path);
-			ArrayList<File> dirs = new ArrayList<File>();
+			CopyOnWriteArrayList<File> dirs = new CopyOnWriteArrayList<File>();
 			while (resources.hasMoreElements()) {
 				URL resource = resources.nextElement();
 				dirs.add(new File(resource.getFile()));
@@ -29,8 +29,8 @@ public class PackageUtils {
 		return classes;
 	}
 
-	public static ArrayList<Class<?>> findClasses(File directory, String packageName) {
-		ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+	public static CopyOnWriteArrayList<Class<?>> findClasses(File directory, String packageName) {
+		CopyOnWriteArrayList<Class<?>> classes = new CopyOnWriteArrayList<Class<?>>();
 		try {
 			if (!directory.exists()) {
 				return classes;

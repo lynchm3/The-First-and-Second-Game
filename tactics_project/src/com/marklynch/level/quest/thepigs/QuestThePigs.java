@@ -22,7 +22,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Tree;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.TextUtils;
 
 public class QuestThePigs extends Quest {
@@ -111,35 +111,35 @@ public class QuestThePigs extends Quest {
 		// conversationForFarmer = new ConversationForFarmer(this);
 
 		// Pig pen
-		ArrayList<Wall> pigPenWalls = new ArrayList<Wall>(Wall.class);
-		ArrayList<StructureFeature> pigPenFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
-		ArrayList<StructurePath> pigPenPaths = new ArrayList<StructurePath>(StructurePath.class);
-		ArrayList<StructureSection> pigPenSections = new ArrayList<StructureSection>(StructureSection.class);
-		ArrayList<StructureRoom> pigPenRooms = new ArrayList<StructureRoom>(StructureRoom.class);
-		ArrayList<Square> pigPenSquaresToRemove = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> pigPenWalls = new CopyOnWriteArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<StructureFeature> pigPenFeatures = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructurePath> pigPenPaths = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+		CopyOnWriteArrayList<StructureSection> pigPenSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureRoom> pigPenRooms = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<Square> pigPenSquaresToRemove = new CopyOnWriteArrayList<Square>(Square.class);
 
 		// gate
 		Door gate = Templates.GATE.makeCopy("Gate", Game.level.squares[32][72], false, true, false, farmer);
 		pigPenFeatures.add(new StructureFeature(gate));
 
 		penSection = new StructureSection("Pen", 28, 72, 46, 82, false, false, larry);
-		penRoom = new StructureRoom("Pen", 29, 73, false, false, new ArrayList<Actor>(Actor.class),
+		penRoom = new StructureRoom("Pen", 29, 73, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(29, 73, 45, 81));
 
 		pigPenSections.add(penSection);
 		pigPenRooms.add(penRoom);
 
 		Game.level.structures.add(new Structure("Pen", pigPenSections, pigPenRooms, pigPenPaths, pigPenFeatures,
-				new ArrayList<Square>(Square.class), Templates.PIG.imageTexture, 0, 0, 0, 0, true, larry, pigPenSquaresToRemove,
+				new CopyOnWriteArrayList<Square>(Square.class), Templates.PIG.imageTexture, 0, 0, 0, 0, true, larry, pigPenSquaresToRemove,
 				pigPenWalls, Templates.FENCE, Square.MUD_TEXTURE, 3));
 
 		// Farm house 2,69 -> 24,85
-		ArrayList<Wall> farmHouseWalls = new ArrayList<Wall>(Wall.class);
-		ArrayList<StructureFeature> farmHouseFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
-		ArrayList<StructurePath> farmHousePaths = new ArrayList<StructurePath>(StructurePath.class);
-		ArrayList<StructureSection> farmHouseSections = new ArrayList<StructureSection>(StructureSection.class);
-		ArrayList<StructureRoom> farmHouseRooms = new ArrayList<StructureRoom>(StructureRoom.class);
-		ArrayList<Square> farmHouseSquaresToRemove = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> farmHouseWalls = new CopyOnWriteArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<StructureFeature> farmHouseFeatures = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructurePath> farmHousePaths = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+		CopyOnWriteArrayList<StructureSection> farmHouseSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureRoom> farmHouseRooms = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<Square> farmHouseSquaresToRemove = new CopyOnWriteArrayList<Square>(Square.class);
 
 		// Farm house door
 		Door farmHouseFrontDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[18][69], false, false, false,
@@ -160,13 +160,13 @@ public class QuestThePigs extends Quest {
 
 		farmHouseFrontSection = new StructureSection("Farm House", 12, 69, 24, 74, false, false, farmer);
 		farmHouseBackSection = new StructureSection("Farm House", 2, 75, 24, 85, false, false, farmer);
-		farmHouseFrontRoom = new StructureRoom("Kitchen", 13, 70, false, false, new ArrayList<Actor>(Actor.class),
+		farmHouseFrontRoom = new StructureRoom("Kitchen", 13, 70, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(13, 70, 23, 74));
-		farmHouseHallRoom = new StructureRoom("Hall", 3, 76, false, false, new ArrayList<Actor>(Actor.class),
+		farmHouseHallRoom = new StructureRoom("Hall", 3, 76, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(3, 76, 23, 77));
-		farmHouseBedroom = new StructureRoom("Bedroom", 3, 79, false, false, new ArrayList<Actor>(Actor.class),
+		farmHouseBedroom = new StructureRoom("Bedroom", 3, 79, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(3, 79, 17, 84));
-		farmHouseStorageRoom = new StructureRoom("Storage", 19, 79, false, false, new ArrayList<Actor>(Actor.class),
+		farmHouseStorageRoom = new StructureRoom("Storage", 19, 79, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(19, 79, 23, 84));
 
 		farmHouseSections.add(farmHouseFrontSection);
@@ -177,7 +177,7 @@ public class QuestThePigs extends Quest {
 		farmHouseRooms.add(farmHouseStorageRoom);
 
 		farmHouseStructure = new Structure("Farm House", farmHouseSections, farmHouseRooms, farmHousePaths,
-				farmHouseFeatures, new ArrayList<Square>(Square.class), Templates.PIG.imageTexture, 2, 69, 24, 85, true,
+				farmHouseFeatures, new CopyOnWriteArrayList<Square>(Square.class), Templates.PIG.imageTexture, 2, 69, 24, 85, true,
 				farmer, farmHouseSquaresToRemove, farmHouseWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 3);
 
 		Game.level.structures.add(farmHouseStructure);
@@ -191,26 +191,26 @@ public class QuestThePigs extends Quest {
 
 		/// BARN
 
-		ArrayList<Wall> barnWalls = new ArrayList<Wall>(Wall.class);
-		ArrayList<StructureFeature> barnFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
-		ArrayList<StructurePath> barnPaths = new ArrayList<StructurePath>(StructurePath.class);
-		ArrayList<StructureSection> barnSections = new ArrayList<StructureSection>(StructureSection.class);
-		ArrayList<StructureRoom> barnRooms = new ArrayList<StructureRoom>(StructureRoom.class);
-		ArrayList<Square> barnSquaresToRemove = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> barnWalls = new CopyOnWriteArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<StructureFeature> barnFeatures = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructurePath> barnPaths = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+		CopyOnWriteArrayList<StructureSection> barnSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureRoom> barnRooms = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<Square> barnSquaresToRemove = new CopyOnWriteArrayList<Square>(Square.class);
 
 		// Barn door
 		Door barnDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][95], false, false, false, farmer);
 		barnFeatures.add(new StructureFeature(barnDoor));
 
 		barnSection = new StructureSection("Barn", 14, 95, 27, 110, false, false, farmer);
-		barnRoom = new StructureRoom("Barn", 15, 96, false, false, new ArrayList<Actor>(Actor.class),
+		barnRoom = new StructureRoom("Barn", 15, 96, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(15, 96, 26, 109));
 
 		barnSections.add(barnSection);
 		barnRooms.add(barnRoom);
 
 		barnStructure = new Structure("Farm House", barnSections, barnRooms, barnPaths, barnFeatures,
-				new ArrayList<Square>(Square.class), Templates.PIG.imageTexture, 14, 95, 27, 110, true, farmer, barnSquaresToRemove,
+				new CopyOnWriteArrayList<Square>(Square.class), Templates.PIG.imageTexture, 14, 95, 27, 110, true, farmer, barnSquaresToRemove,
 				barnWalls, Templates.WALL_CAVE, Square.STONE_TEXTURE, 3);
 
 		Game.level.structures.add(barnStructure);

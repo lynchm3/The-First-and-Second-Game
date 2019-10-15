@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.journal;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.area.Area;
@@ -16,7 +16,7 @@ public class JournalLog {
 	private Area area;
 	private Square square;
 	public float height;
-	public ArrayList<Link> links;
+	public CopyOnWriteArrayList<Link> links;
 
 	public JournalLog(Object object) {
 		super();

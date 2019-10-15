@@ -3,14 +3,14 @@ package com.marklynch.objects.inanimateobjects;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.TextureUtils;
 
 public class Vein extends GameObject {
 
 	public final static int totalOresForExhaustableVeins = 5;
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public boolean infinite = false;
 
@@ -18,7 +18,7 @@ public class Vein extends GameObject {
 
 	public double dropChance;
 
-	public ArrayList<GameObject> ores = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> ores = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public Vein() {
 		super();

@@ -4,11 +4,11 @@ import com.marklynch.level.constructs.animation.Animation.OnCompletionListener;
 import com.marklynch.level.constructs.animation.primary.AnimationScale;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class InputDrain extends GameObject implements OnCompletionListener {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	public Square connectedSquare = null;
 
 	public InputDrain() {
@@ -45,7 +45,7 @@ public class InputDrain extends GameObject implements OnCompletionListener {
 		if (squareGameObjectIsOn == null)
 			return;
 
-		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
+		for (final GameObject gameObject : (CopyOnWriteArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects) {
 
 			if (gameObject == this || !(gameObject instanceof Liquid))
 				continue;

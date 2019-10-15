@@ -1,7 +1,7 @@
 package com.marklynch.ui.button;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
@@ -70,12 +70,12 @@ public class AtributesWindowButton extends Button {
 			try {
 
 				Field field = null;
-				ArrayList arrayList = null;
+				CopyOnWriteArrayList arrayList = null;
 
 				field = objectClass.getField(attribute);
 
-				if (field.getType().isAssignableFrom(ArrayList.class)) {
-					arrayList = (ArrayList) field.get(object);
+				if (field.getType().isAssignableFrom(CopyOnWriteArrayList.class)) {
+					arrayList = (CopyOnWriteArrayList) field.get(object);
 				}
 
 				if (arrayList != null) {

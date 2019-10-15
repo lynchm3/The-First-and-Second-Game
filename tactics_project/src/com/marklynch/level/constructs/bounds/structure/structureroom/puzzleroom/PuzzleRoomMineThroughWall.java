@@ -6,7 +6,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Vein;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomMineThroughWall extends StructureRoom {
 	int posX;
@@ -15,7 +15,7 @@ public class PuzzleRoomMineThroughWall extends StructureRoom {
 	final static int totalHeightInSquares = 10;
 
 	public PuzzleRoomMineThroughWall(int posX, int posY) {
-		super("Hallway", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Hallway", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;

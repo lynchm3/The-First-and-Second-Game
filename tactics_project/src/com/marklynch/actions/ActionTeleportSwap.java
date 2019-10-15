@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -76,7 +76,7 @@ public class ActionTeleportSwap extends Action {
 		if (endTurn && performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();
 
-		trespassingCheck(this, performer, teleportee.squareGameObjectIsOn);
+		trespassingCheck(performer, teleportee.squareGameObjectIsOn);
 
 		Level.teleportee = null;
 
@@ -164,7 +164,7 @@ public class ActionTeleportSwap extends Action {
 	public Sound createSound() {
 
 		// Sound of glass
-		ArrayList<GameObject> stampables = targetSquare.inventory.getGameObjectsOfClass(Stampable.class);
+		CopyOnWriteArrayList<GameObject> stampables = targetSquare.inventory.getGameObjectsOfClass(Stampable.class);
 		if (!(teleportee instanceof Blind) && stampables.size() > 0) {
 			for (GameObject stampable : stampables) {
 				return new Sound(teleportee, stampable, targetSquare, 10, legal, this.getClass());

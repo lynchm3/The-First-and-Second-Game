@@ -10,7 +10,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomFallawayFloor extends StructureRoom implements SwitchListener {
 	int posX;
@@ -19,13 +19,13 @@ public class PuzzleRoomFallawayFloor extends StructureRoom implements SwitchList
 	final static int totalHeightInSquares = 30;
 	final static int xOffsetThatSquaresFallawayTo = 26;
 	boolean floorFallenAway = false;
-	ArrayList<Square> squaresToFallaway = new ArrayList<Square>(Square.class);
+	CopyOnWriteArrayList<Square> squaresToFallaway = new CopyOnWriteArrayList<Square>(Square.class);
 	int safeBorderWidthOnLeft = 5;
 	int safeBorderWidthOnRight = 5;
 	Square voidSquare;
 
 	public PuzzleRoomFallawayFloor(int posX, int posY) {
-		super("Fallaway floor", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Fallaway floor", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
@@ -66,7 +66,7 @@ public class PuzzleRoomFallawayFloor extends StructureRoom implements SwitchList
 		for (Square square : squaresToFallaway) {
 			// final GameObject floor = square.inventory.getGameObjectOfClass(Floor.class);
 			final Square targetSquare = Level.squares[posX + xOffsetThatSquaresFallawayTo][square.yInGrid];
-			for (final GameObject gameObject : (ArrayList<GameObject>) square.inventory.gameObjects.clone()) {
+			for (final GameObject gameObject : (CopyOnWriteArrayList<GameObject>) square.inventory.gameObjects) {
 				gameObject.setPrimaryAnimation(
 						new AnimationStraightLine(gameObject, 2000f, true, 0f, null, targetSquare));
 			}

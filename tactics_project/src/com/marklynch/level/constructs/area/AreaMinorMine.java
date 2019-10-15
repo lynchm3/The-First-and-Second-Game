@@ -17,7 +17,7 @@ import com.marklynch.objects.inanimateobjects.Bed;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 
 public class AreaMinorMine {
@@ -28,23 +28,23 @@ public class AreaMinorMine {
 
 		// 280, 87
 
-		ArrayList<Wall> extraWalls = new ArrayList<Wall>(Wall.class);
-		ArrayList<StructureFeature> mineFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
-		ArrayList<StructurePath> minePaths = new ArrayList<StructurePath>(StructurePath.class);
-		ArrayList<StructureSection> mineSections = new ArrayList<StructureSection>(StructureSection.class);
-		ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>(StructureRoom.class);
-		ArrayList<Square> squaresToRemove = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> extraWalls = new CopyOnWriteArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<StructureFeature> mineFeatures = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructurePath> minePaths = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+		CopyOnWriteArrayList<StructureSection> mineSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureRoom> rooms = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<Square> squaresToRemove = new CopyOnWriteArrayList<Square>(Square.class);
 
 		mineSections.add(new StructureSection("Minor Mine", 280, 76, 307, 97, false, false));
 
-		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, false, new ArrayList<Actor>(Actor.class),
+		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(281, 77, 306, 88), new RoomPart(281, 89, 301, 91), new RoomPart(292, 92, 301, 96)));
 
 		StructureRoom shopRoom = new StructureRoom("What's Mine is Yours*", 281, 93, false, false,
-				new ArrayList<Actor>(Actor.class), new RoomPart(281, 93, 290, 96));
+				new CopyOnWriteArrayList<Actor>(Actor.class), new RoomPart(281, 93, 290, 96));
 		rooms.add(shopRoom);
 
-		rooms.add(new StructureRoom("Minor Mine Quarters", 303, 90, false, false, new ArrayList<Actor>(Actor.class),
+		rooms.add(new StructureRoom("Minor Mine Quarters", 303, 90, false, false, new CopyOnWriteArrayList<Actor>(Actor.class),
 				new RoomPart(303, 90, 306, 96)));
 
 		// entry to mine
@@ -62,7 +62,7 @@ public class AreaMinorMine {
 		Templates.VEIN.makeCopy(Game.level.squares[303][78], null, true, Templates.ORE, 0.1f);
 
 		Structure mine = new Structure("Minor Mine", mineSections, rooms, minePaths, mineFeatures,
-				new ArrayList<Square>(Square.class), ResourceUtils.getGlobalImage("icon_mine.png", false),
+				new CopyOnWriteArrayList<Square>(Square.class), ResourceUtils.getGlobalImage("icon_mine.png", false),
 				280, 76, 307, 97, true, null, squaresToRemove, extraWalls,
 				Templates.WALL_CAVE, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(mine);

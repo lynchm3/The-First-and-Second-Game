@@ -1,6 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor;
@@ -40,7 +40,7 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				ArrayList<String> arrayList1 = new ArrayList<String>();
+				CopyOnWriteArrayList<String> arrayList1 = new CopyOnWriteArrayList<String>();
 				arrayList1.add("TEXT IN SPEECH PART");
 				SpeechPart newSpeechPart = new SpeechPart(Game.level.player, arrayList1);
 				updateSpeechPartsButtons();

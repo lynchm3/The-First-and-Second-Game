@@ -1,6 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
@@ -45,7 +45,7 @@ public class AIsSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				ArrayList<Class> classes = new ArrayList<Class>();
+				CopyOnWriteArrayList<Class> classes = new CopyOnWriteArrayList<Class>();
 
 				editor.classSelectionWindow = new ClassSelectionWindow(classes, editor, AIRoutineUtils.class,
 						"Select an AI routine");

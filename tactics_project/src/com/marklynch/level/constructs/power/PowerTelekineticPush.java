@@ -1,7 +1,7 @@
 package com.marklynch.level.constructs.power;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.lwjgl.util.Point;
 
@@ -63,10 +63,10 @@ public class PowerTelekineticPush extends Power {
 		int pushCount = 0;
 		Square lastSquare = targetSquare;
 		Square tempEndSquare = lastSquare;
-		HashMap<GameObject, Square> pushedObjectAndTheirStartSquare = new HashMap<GameObject, Square>();
+		ConcurrentHashMap<GameObject, Square> pushedObjectAndTheirStartSquare = new ConcurrentHashMap<GameObject, Square>();
 		GameObject tempObstacle = null;
-		// final HashMap<GameObject, Float> pushedObjectToDamageTaken = new
-		// HashMap<GameObject, Float>();
+		// final ConcurrentHashMap<GameObject, Float> pushedObjectToDamageTaken = new
+		// ConcurrentHashMap<GameObject, Float>();
 		while (pushCount < maxPushCount) {
 
 			Square currentSquare = null;
@@ -102,7 +102,7 @@ public class PowerTelekineticPush extends Power {
 			}
 
 			// Pick up new objects
-			ArrayList<GameObject> temp = new ArrayList<GameObject>();
+			CopyOnWriteArrayList<GameObject> temp = new CopyOnWriteArrayList<GameObject>();
 			temp.addAll(lastSquare.inventory.gameObjects);
 			for (GameObject gameObject : temp) {
 

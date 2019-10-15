@@ -6,7 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
@@ -58,7 +58,7 @@ public class EffectWet extends Effect {
 		target.removeBurningEffect();
 	}
 
-	ArrayList<Droplet> droplets = new ArrayList<Droplet>(Droplet.class);
+	CopyOnWriteArrayList<Droplet> droplets = new CopyOnWriteArrayList<Droplet>(Droplet.class);
 
 	@Override
 	public void draw2(int offsetY) {

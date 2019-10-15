@@ -9,7 +9,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
@@ -19,7 +19,7 @@ public class EffectBurn extends Effect {
 
 	public static Texture flameTexture = getGlobalImage("flame.png", false);
 
-	ArrayList<Flame> flames = new ArrayList<Flame>(Flame.class);
+	CopyOnWriteArrayList<Flame> flames = new CopyOnWriteArrayList<Flame>(Flame.class);
 
 	public EffectBurn() {
 	}
@@ -81,7 +81,7 @@ public class EffectBurn extends Effect {
 					}
 				}
 
-				ArrayList<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
+				CopyOnWriteArrayList<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
 				for (Square adjacentSquare : adjacentSquares) {
 					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
 

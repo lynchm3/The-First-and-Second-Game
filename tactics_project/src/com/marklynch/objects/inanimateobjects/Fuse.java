@@ -12,13 +12,13 @@ import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public static Texture imageTextureLeftRightStatic;
 	public static Texture imageTextureUpDownStatic;
@@ -47,7 +47,7 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 
 	private boolean lightable = false;
 	private boolean lit = false;
-	public ArrayList<GameObject> gameObjectsToExplode = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> gameObjectsToExplode = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	private int turnLit = -1;
 
@@ -221,10 +221,10 @@ public class Fuse extends Line implements SwitchListener, UpdatableGameObject {
 	public void update() {
 		if (lit && this.turnLit != Level.turn && this.squareGameObjectIsOn != null) {
 			Square square = this.squareGameObjectIsOn;
-			ArrayList<Square> connectedSquares = new ArrayList<Square>(Square.class);
+			CopyOnWriteArrayList<Square> connectedSquares = new CopyOnWriteArrayList<Square>(Square.class);
 			connectedSquares.add(this.getSquareInDirection(direction1, square));
 			connectedSquares.add(this.getSquareInDirection(direction2, square));
-			final ArrayList<Fuse> neighborFuses = new ArrayList<Fuse>(Fuse.class);
+			final CopyOnWriteArrayList<Fuse> neighborFuses = new CopyOnWriteArrayList<Fuse>(Fuse.class);
 
 			this.setPrimaryAnimation(new AnimationFuse(this, null
 

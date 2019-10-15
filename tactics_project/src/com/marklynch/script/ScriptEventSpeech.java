@@ -1,6 +1,6 @@
 package com.marklynch.script;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
@@ -19,19 +19,19 @@ public class ScriptEventSpeech extends ScriptEvent {
 	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "speechParts",
 			"intTest" };
 
-	public ArrayList<SpeechPart> speechParts;
-	public ArrayList<Integer> intTest;
+	public CopyOnWriteArrayList<SpeechPart> speechParts;
+	public CopyOnWriteArrayList<Integer> intTest;
 	public int speechIndex = 0;
 
 	public ScriptEventSpeech() {
 		name = "ScriptEventSpeech";
 	}
 
-	public ScriptEventSpeech(boolean blockUserInput, ArrayList<SpeechPart> speechParts, ScriptTrigger scriptTrigger) {
+	public ScriptEventSpeech(boolean blockUserInput, CopyOnWriteArrayList<SpeechPart> speechParts, ScriptTrigger scriptTrigger) {
 		super(blockUserInput, scriptTrigger);
 		this.speechParts = speechParts;
 		name = "ScriptEventSpeech";
-		intTest = new ArrayList<Integer>();
+		intTest = new CopyOnWriteArrayList<Integer>();
 		intTest.add(1);
 		intTest.add(2);
 	}
@@ -66,14 +66,14 @@ public class ScriptEventSpeech extends ScriptEvent {
 		public final static String[] editableAttributes = { "actors", "positions", "directions", "talker", "text",
 				"inline" };
 
-		public transient ArrayList<Actor> actors = new ArrayList<Actor>();
-		public ArrayList<Float> positions = new ArrayList<Float>();
-		public ArrayList<Boolean> directions = new ArrayList<Boolean>();
+		public transient CopyOnWriteArrayList<Actor> actors = new CopyOnWriteArrayList<Actor>();
+		public CopyOnWriteArrayList<Float> positions = new CopyOnWriteArrayList<Float>();
+		public CopyOnWriteArrayList<Boolean> directions = new CopyOnWriteArrayList<Boolean>();
 		public transient Actor talker;
-		public ArrayList<String> text;
+		public CopyOnWriteArrayList<String> text;
 		public boolean inline = false;
 
-		public SpeechPart(Actor talker, ArrayList<String> text) {
+		public SpeechPart(Actor talker, CopyOnWriteArrayList<String> text) {
 			super();
 			this.talker = talker;
 			this.text = text;
@@ -82,8 +82,8 @@ public class ScriptEventSpeech extends ScriptEvent {
 			inline = true;
 		}
 
-		public SpeechPart(ArrayList<Actor> actors, ArrayList<Float> positions, ArrayList<Boolean> directions,
-				Actor talker, ArrayList<String> text) {
+		public SpeechPart(CopyOnWriteArrayList<Actor> actors, CopyOnWriteArrayList<Float> positions, CopyOnWriteArrayList<Boolean> directions,
+				Actor talker, CopyOnWriteArrayList<String> text) {
 			super();
 			this.actors = actors;
 			this.positions = positions;
@@ -166,20 +166,20 @@ public class ScriptEventSpeech extends ScriptEvent {
 		public SpeechPart makeCopy() {
 
 			if (inline) {
-				ArrayList<String> text = new ArrayList<String>();
+				CopyOnWriteArrayList<String> text = new CopyOnWriteArrayList<String>();
 				for (int i = 0; i < this.text.size(); i++) {
 					text.add(this.text.get(i));
 				}
 				return new SpeechPart(talker, text);
 			} else {
 
-				ArrayList<Actor> actors = new ArrayList<Actor>();
+				CopyOnWriteArrayList<Actor> actors = new CopyOnWriteArrayList<Actor>();
 				actors.addAll(actors);
-				ArrayList<Float> positions = new ArrayList<Float>();
+				CopyOnWriteArrayList<Float> positions = new CopyOnWriteArrayList<Float>();
 				positions.addAll(positions);
-				ArrayList<Boolean> directions = new ArrayList<Boolean>();
+				CopyOnWriteArrayList<Boolean> directions = new CopyOnWriteArrayList<Boolean>();
 				directions.addAll(directions);
-				ArrayList<String> text = new ArrayList<String>();
+				CopyOnWriteArrayList<String> text = new CopyOnWriteArrayList<String>();
 				for (int i = 0; i < this.text.size(); i++) {
 					text.add(this.text.get(i));
 				}

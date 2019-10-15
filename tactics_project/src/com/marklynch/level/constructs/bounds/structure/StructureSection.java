@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class StructureSection implements Idable {
 
@@ -22,9 +22,9 @@ public class StructureSection implements Idable {
 		this.gridX2 = gridX2;
 		this.gridY2 = gridY2;
 
-		ArrayList<Actor> ownersArrayList = new ArrayList<Actor>(Actor.class);
+		CopyOnWriteArrayList<Actor> ownersCopyOnWriteArrayList = new CopyOnWriteArrayList<Actor>(Actor.class);
 		for (Actor owner : ownersArray) {
-			ownersArrayList.add(owner);
+			ownersCopyOnWriteArrayList.add(owner);
 		}
 
 		if (restricted) {
@@ -43,10 +43,10 @@ public class StructureSection implements Idable {
 			}
 		}
 
-		if (ownersArrayList.size() > 0) {
+		if (ownersCopyOnWriteArrayList.size() > 0) {
 			for (int i = gridX1; i <= gridX2; i++) {
 				for (int j = gridY1; j <= gridY2; j++) {
-					Game.level.squares[i][j].owners = ownersArrayList;
+					Game.level.squares[i][j].owners = ownersCopyOnWriteArrayList;
 				}
 			}
 		}

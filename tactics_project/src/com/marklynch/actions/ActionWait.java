@@ -38,7 +38,7 @@ public class ActionWait extends Action {
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();
 
-		trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+		trespassingCheck(performer, performer.squareGameObjectIsOn);
 
 	}
 

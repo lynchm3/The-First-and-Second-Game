@@ -122,7 +122,7 @@ public class ActionIgnite extends Action {
 				notifyWitnessesOfCrime(crime);
 			}
 		} else {
-			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+			trespassingCheck(performer, performer.squareGameObjectIsOn);
 		}
 
 	}

@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomCrumblingWall extends StructureRoom {
 	int posX;
@@ -15,14 +15,14 @@ public class PuzzleRoomCrumblingWall extends StructureRoom {
 	GameObject woodenSupport;
 
 	public PuzzleRoomCrumblingWall(int posX, int posY) {
-		super("Crumbling Wall Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false,
+		super("Crumbling Wall Room", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false,
 				new RoomPart[] {
 						new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
 		this.posY = posY;
 
-		ArrayList<GameObject> walls = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<GameObject> walls = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		walls.add(Templates.WALL_CAVE.makeCopy(Level.squares[posX - 1][posY], null));
 		walls.add(Templates.WALL_CAVE.makeCopy(Level.squares[posX - 1][posY + 1], null));
 		walls.add(Templates.WALL_CAVE.makeCopy(Level.squares[posX - 1][posY + 2], null));

@@ -37,8 +37,8 @@ public class PowerSuperPeek extends Power {
 	}
 
 	// @Override
-	// public ArrayList<Square> getAffectedSquares(Square target) {
-	// // ArrayList<Square> squares = new ArrayList<Square>();
+	// public CopyOnWriteArrayList<Square> getAffectedSquares(Square target) {
+	// // CopyOnWriteArrayList<Square> squares = new CopyOnWriteArrayList<Square>();
 	// return Actor.getAllSquaresWithinDistance(0, 10, target);
 	//
 	// // for (int i = -5; i <= 5; i++) {

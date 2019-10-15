@@ -1,6 +1,6 @@
 package com.marklynch.ui.button;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Arrays;
 
 import org.lwjgl.input.Mouse;
@@ -20,7 +20,7 @@ public class Tooltip {
 	public static final int wrapWidth = 200;
 	// LevelButton levelButton;
 	float[] dimensions;
-	ArrayList<Object> text;
+	CopyOnWriteArrayList<Object> text;
 	// float alpha = 0f;
 	Color backgroundColor = null;
 	public static final Color WHITE = new Color(1f, 1f, 1f, 0f);
@@ -29,17 +29,17 @@ public class Tooltip {
 
 	public Tooltip(boolean doesNothing, Color color, Object... text) {
 		backgroundColor = color;
-		this.text = new ArrayList<Object>(Arrays.asList(text));
+		this.text = new CopyOnWriteArrayList<Object>(Arrays.asList(text));
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
 	}
 
 	public Tooltip(Color color, Object[] text) {
 		backgroundColor = color;
-		this.text = new ArrayList<Object>(Arrays.asList(text));
+		this.text = new CopyOnWriteArrayList<Object>(Arrays.asList(text));
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
 	}
 
-	public Tooltip(Color color, ArrayList<Object> text) {
+	public Tooltip(Color color, CopyOnWriteArrayList<Object> text) {
 		backgroundColor = color;
 		this.text = text;
 		dimensions = TextUtils.getDimensions(this.text, wrapWidth);
@@ -75,7 +75,7 @@ public class Tooltip {
 	}
 
 	public void setTooltipText(Object[] tooltipText) {
-		this.text = new ArrayList<Object>(Arrays.asList(tooltipText));
+		this.text = new CopyOnWriteArrayList<Object>(Arrays.asList(tooltipText));
 
 	}
 

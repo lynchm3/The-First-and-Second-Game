@@ -1,6 +1,6 @@
 package com.marklynch.editor.popup;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor;
@@ -11,7 +11,7 @@ import com.marklynch.ui.button.PopupButton;
 public class Popup {
 
 	public float width;
-	public ArrayList<PopupButton> buttons = new ArrayList<PopupButton>();
+	public CopyOnWriteArrayList<PopupButton> buttons = new CopyOnWriteArrayList<PopupButton>();
 	public Editor editor;
 	public Square square;
 	public PopupButton selectSquareButton;

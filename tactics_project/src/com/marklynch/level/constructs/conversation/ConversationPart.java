@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.conversation;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Arrays;
 //import com.marklynch.utils.Color;
 
@@ -17,8 +17,8 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class ConversationPart {
-	public ArrayList<Link> links;
-	public ArrayList<Link> linksForJournal;
+	public CopyOnWriteArrayList<Link> links;
+	public CopyOnWriteArrayList<Link> linksForJournal;
 
 	protected ConversationResponse[] conversationResponses;
 	public Object[] text;
@@ -31,12 +31,12 @@ public class ConversationPart {
 
 	public float height;
 
-	public ArrayList<Quest> quests;
+	public CopyOnWriteArrayList<Quest> quests;
 	private int turn;
 	private String turnString;
 	private Area area;
 	private Square square;
-	public ArrayList<Object> squareAndText;
+	public CopyOnWriteArrayList<Object> squareAndText;
 
 	public ConversationPart(Object[] text, ConversationResponse[] conversationResponses, GameObject talker,
 			Quest... quests) {
@@ -44,7 +44,7 @@ public class ConversationPart {
 		this.conversationResponses = conversationResponses;
 		this.text = text;
 		this.talker = talker;
-		this.quests = new ArrayList<Quest>(Arrays.asList(quests));
+		this.quests = new CopyOnWriteArrayList<Quest>(Arrays.asList(quests));
 		// textWidth = Game.font.getWidth(text);
 		// halfTextWidth = textWidth / 2;
 
@@ -176,13 +176,13 @@ public class ConversationPart {
 		this.turnString = Game.level.timeString + " (Turn " + turn + ") ";
 
 		this.square = square;
-		squareAndText = new ArrayList<Object>();
+		squareAndText = new CopyOnWriteArrayList<Object>();
 		squareAndText.add(square);
 		squareAndText.addAll(Arrays.asList(text));
 
 		this.area = area;
 
-		linksForJournal = new ArrayList<Link>();
+		linksForJournal = new CopyOnWriteArrayList<Link>();
 		linksForJournal.addAll(TextUtils.getLinks(true, talker, square));
 		linksForJournal.addAll(links);
 

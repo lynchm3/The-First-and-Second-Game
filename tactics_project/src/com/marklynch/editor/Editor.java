@@ -1,7 +1,7 @@
 package com.marklynch.editor;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.input.Mouse;
 
@@ -63,7 +63,7 @@ public class Editor {
 
 	public String json = null;
 
-	public ArrayList<Button> tabs = new ArrayList<Button>();
+	public CopyOnWriteArrayList<Button> tabs = new CopyOnWriteArrayList<Button>();
 
 	// faction, actors, object, scriptevent, script
 	// trigger, weapon,
@@ -109,8 +109,8 @@ public class Editor {
 	public AtributesWindowButton attributeButton = null;
 	public SettingsWindowButton settingsButton = null;
 
-	public ArrayList<Texture> textures = new ArrayList<Texture>();
-	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+	public CopyOnWriteArrayList<Texture> textures = new CopyOnWriteArrayList<Texture>();
+	public CopyOnWriteArrayList<Weapon> weapons = new CopyOnWriteArrayList<Weapon>();
 	public AttributeSelectionWindow attributeSelectionWindow;
 	public GameObject gameObject;
 	public Actor actorTemplate;
@@ -121,7 +121,7 @@ public class Editor {
 
 	public EDITOR_STATE editorState = EDITOR_STATE.DEFAULT;
 
-	public ArrayList<Color> colors = new ArrayList<Color>();
+	public CopyOnWriteArrayList<Color> colors = new CopyOnWriteArrayList<Color>();
 
 	public ClassSelectionWindow classSelectionWindow;
 	public InstanceSelectionWindow instanceSelectionWindow;
@@ -875,9 +875,9 @@ public class Editor {
 				try {
 					Class<? extends Object> objectClass = objectToEdit.getClass();
 					Field field = objectClass.getField(attributeToEditName);
-					if (field.getType().isAssignableFrom(ArrayList.class)) {
+					if (field.getType().isAssignableFrom(CopyOnWriteArrayList.class)) {
 
-						ArrayList arrayList = (ArrayList) field.get(objectToEdit);
+						CopyOnWriteArrayList arrayList = (CopyOnWriteArrayList) field.get(objectToEdit);
 						Class attributeClass = arrayList.get(attributeToEditIndex).getClass();
 						if (attributeClass.isAssignableFrom(Integer.class)) { // int
 							if (48 <= character && character <= 57 && textEntered.length() < 8) {
@@ -991,14 +991,14 @@ public class Editor {
 		attributeToEditIndex = index;
 		try {
 
-			// if (field.getType().isAssignableFrom(ArrayList.class)) {
+			// if (field.getType().isAssignableFrom(CopyOnWriteArrayList.class)) {
 
 			Class<? extends Object> objectClass = objectToEdit.getClass();
 			Field field = objectClass.getField(attributeToEditName);
 			Class type = null;
-			ArrayList arrayList = null;
-			if (field.getType().isAssignableFrom(ArrayList.class)) {
-				arrayList = (ArrayList) field.get(objectToEdit);
+			CopyOnWriteArrayList arrayList = null;
+			if (field.getType().isAssignableFrom(CopyOnWriteArrayList.class)) {
+				arrayList = (CopyOnWriteArrayList) field.get(objectToEdit);
 				type = arrayList.get(attributeToEditIndex).getClass();
 			} else {
 				type = field.getType();
@@ -1017,7 +1017,7 @@ public class Editor {
 						"Select a Color");
 			} else if (type.isAssignableFrom(Square.class)) {
 				// square
-				ArrayList<Square> squares = new ArrayList<Square>();
+				CopyOnWriteArrayList<Square> squares = new CopyOnWriteArrayList<Square>();
 				for (Square[] squareArray : Game.level.squares) {
 					for (Square square : squareArray) {
 						squares.add(square);
@@ -1046,7 +1046,7 @@ public class Editor {
 			} else if (type.isAssignableFrom(GameObject.class)) {
 				// actor
 
-				ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+				CopyOnWriteArrayList<GameObject> gameObjects = new CopyOnWriteArrayList<GameObject>();
 				for (Faction faction : Game.level.factions) {
 					for (Actor actor : faction.actors) {
 						gameObjects.add(actor);
@@ -1057,7 +1057,7 @@ public class Editor {
 						"Select an Object");
 			} else if (type.isAssignableFrom(Actor.class)) {
 				// actor
-				ArrayList<Actor> actors = new ArrayList<Actor>();
+				CopyOnWriteArrayList<Actor> actors = new CopyOnWriteArrayList<Actor>();
 				for (Faction faction : Game.level.factions) {
 					for (Actor actor : faction.actors) {
 						actors.add(actor);

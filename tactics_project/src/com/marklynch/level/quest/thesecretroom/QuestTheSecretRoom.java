@@ -25,7 +25,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.RemoteDoor;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 
@@ -58,16 +58,16 @@ public class QuestTheSecretRoom extends Quest {
 				Game.level.squares[AreaTown.posX + 23][AreaTown.posY + 32], Game.level.factions.townsPeople, bed, 100,
 				new GameObject[] {}, new GameObject[] {}, null);
 		kidnapper.quest = this;
-		ArrayList<Actor> ownershipArrayList = new ArrayList<Actor>(Actor.class);
-		ownershipArrayList.add(kidnapper);
+		CopyOnWriteArrayList<Actor> ownershipCopyOnWriteArrayList = new CopyOnWriteArrayList<Actor>(Actor.class);
+		ownershipCopyOnWriteArrayList.add(kidnapper);
 
-		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>(Wall.class);
-		ArrayList<StructureFeature> structureFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
-		ArrayList<StructurePath> structurePaths = new ArrayList<StructurePath>(StructurePath.class);
-		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>(StructureSection.class);
-		ArrayList<StructureRoom> structureRooms = new ArrayList<StructureRoom>(StructureRoom.class);
-		ArrayList<Square> structureSquaresToRemove = new ArrayList<Square>(Square.class);
-		ArrayList<Square> structureEntranceSquares = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Wall> structureExtraWalls = new CopyOnWriteArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<StructureFeature> structureFeatures = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructurePath> structurePaths = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+		CopyOnWriteArrayList<StructureSection> structureSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureRoom> structureRooms = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<Square> structureSquaresToRemove = new CopyOnWriteArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Square> structureEntranceSquares = new CopyOnWriteArrayList<Square>(Square.class);
 
 		// Front section
 		structureSections.add(new StructureSection("A Cozy Place", AreaTown.posX + 21, AreaTown.posY + 30,
@@ -79,7 +79,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Front room
 		StructureRoom livingRoom = new StructureRoom("Living Room", AreaTown.posX + 22, AreaTown.posY + 31, false, true,
-				ownershipArrayList, new RoomPart(AreaTown.posX + 22, AreaTown.posY + 31, AreaTown.posX + 28, AreaTown.posY + 35));
+				ownershipCopyOnWriteArrayList, new RoomPart(AreaTown.posX + 22, AreaTown.posY + 31, AreaTown.posX + 28, AreaTown.posY + 35));
 		structureRooms.add(livingRoom);
 
 		// Front room decorative walls
@@ -103,7 +103,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		// Back room
 		StructureRoom backRoom = new StructureRoom("Back room", AreaTown.posX + 20, AreaTown.posY + 37, false, true,
-				ownershipArrayList, 4, new RoomPart(AreaTown.posX + 20, AreaTown.posY + 37, AreaTown.posX + 35, AreaTown.posY + 45));
+				ownershipCopyOnWriteArrayList, 4, new RoomPart(AreaTown.posX + 20, AreaTown.posY + 37, AreaTown.posX + 35, AreaTown.posY + 45));
 		structureRooms.add(backRoom);
 
 		// back room decorative walls

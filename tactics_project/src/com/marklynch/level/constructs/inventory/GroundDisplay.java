@@ -7,7 +7,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Openable;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
@@ -17,14 +17,14 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	int x, y;
 
-	ArrayList<ArrayList<GameObject>> stacks = new ArrayList<ArrayList<GameObject>>(GameObject.class);
+	CopyOnWriteArrayList<CopyOnWriteArrayList<GameObject>> stacks = new CopyOnWriteArrayList<CopyOnWriteArrayList<GameObject>>(GameObject.class);
 
 	public int squareGridWidthInSquares = 5;
 
-	ArrayList<Square> squares = new ArrayList<Square>(Square.class);
+	CopyOnWriteArrayList<Square> squares = new CopyOnWriteArrayList<Square>(Square.class);
 	int squaresX;
 	float squaresY;
-	public transient ArrayList<GroundDisplaySquare> groundDisplaySquares = new ArrayList<GroundDisplaySquare>(
+	public transient CopyOnWriteArrayList<GroundDisplaySquare> groundDisplaySquares = new CopyOnWriteArrayList<GroundDisplaySquare>(
 			GroundDisplaySquare.class);
 	transient private GroundDisplaySquare groundDisplaySquareMouseIsOver;
 
@@ -81,12 +81,12 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	public void matchStacksToSquaresForInventory(Inventory inventory) {
 
-		for (ArrayList<GameObject> stack : inventory.allStacks) {
+		for (CopyOnWriteArrayList<GameObject> stack : inventory.allStacks) {
 			matchStackToSquare(stack);
 		}
 	}
 
-	public void matchStackToSquare(ArrayList<GameObject> stack) {
+	public void matchStackToSquare(CopyOnWriteArrayList<GameObject> stack) {
 
 		GroundDisplaySquare inventorySquare = new GroundDisplaySquare(0, 0, null, this);
 		inventorySquare.stack = stack;

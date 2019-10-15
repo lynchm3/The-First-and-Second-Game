@@ -10,7 +10,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Wall;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.Texture;
@@ -19,27 +19,27 @@ import com.marklynch.utils.TextureUtils;
 public class Structure implements Idable, Place {
 
 	public String name;
-	public ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>(StructureRoom.class);
+	public CopyOnWriteArrayList<StructureRoom> rooms = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
 	public boolean seenByPlayer = false;
-	public ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>(StructureSection.class);
-	public ArrayList<Square> entranceSquares = new ArrayList<Square>(Square.class);
+	public CopyOnWriteArrayList<StructureSection> structureSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+	public CopyOnWriteArrayList<Square> entranceSquares = new CopyOnWriteArrayList<Square>(Square.class);
 	public Texture mapIconForStructure;
 	public Texture icon;
 	int gridX1, gridX2, gridY1, gridY2, gridCenterX, gridCenterY;
 	public Square centreSquare;
-	ArrayList<Square> floorSquares = new ArrayList<Square>(Square.class);
-	ArrayList<Square> wallSquares = new ArrayList<Square>(Square.class);
-	ArrayList<Square> featureSquares = new ArrayList<Square>(Square.class);
+	CopyOnWriteArrayList<Square> floorSquares = new CopyOnWriteArrayList<Square>(Square.class);
+	CopyOnWriteArrayList<Square> wallSquares = new CopyOnWriteArrayList<Square>(Square.class);
+	CopyOnWriteArrayList<Square> featureSquares = new CopyOnWriteArrayList<Square>(Square.class);
 	boolean blocksLineOfSight;
 	public Actor owner;
-	ArrayList<Square> squaresToRemove = new ArrayList<Square>(Square.class);
+	CopyOnWriteArrayList<Square> squaresToRemove = new CopyOnWriteArrayList<Square>(Square.class);
 	boolean showOnMap = false;
 	public Long id;
 
-	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
-			ArrayList<StructurePath> paths, ArrayList<StructureFeature> features, ArrayList<Square> entrances,
+	public Structure(String name, CopyOnWriteArrayList<StructureSection> caveSections, CopyOnWriteArrayList<StructureRoom> rooms,
+			CopyOnWriteArrayList<StructurePath> paths, CopyOnWriteArrayList<StructureFeature> features, CopyOnWriteArrayList<Square> entrances,
 			Texture iconTexture, int overlayX1, int overlayY1, int overlayX2, int overlayY2, boolean blocksLineOfSight,
-			Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls, Wall wallTemplate,
+			Actor owner, CopyOnWriteArrayList<Square> squaresToRemove, CopyOnWriteArrayList<Wall> extraWalls, Wall wallTemplate,
 			Texture floorImageTexture, int level) {
 		super();
 		this.id = Level.generateNewId(this);
@@ -58,9 +58,9 @@ public class Structure implements Idable, Place {
 		this.entranceSquares = entrances;
 		this.blocksLineOfSight = blocksLineOfSight;
 		this.level = level;
-		floorSquares = new ArrayList<Square>(Square.class);
-		wallSquares = new ArrayList<Square>(Square.class);
-		featureSquares = new ArrayList<Square>(Square.class);
+		floorSquares = new CopyOnWriteArrayList<Square>(Square.class);
+		wallSquares = new CopyOnWriteArrayList<Square>(Square.class);
+		featureSquares = new CopyOnWriteArrayList<Square>(Square.class);
 
 		// SquaresToRemove
 		floorSquares.addAll(squaresToRemove);
@@ -107,7 +107,7 @@ public class Structure implements Idable, Place {
 		}
 
 		// Walls
-		ArrayList<Wall> wallsInCave = new ArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<Wall> wallsInCave = new CopyOnWriteArrayList<Wall>(Wall.class);
 		wallsInCave.addAll(extraWalls);
 		for (StructureRoom room : rooms) {
 			wallsInCave.addAll(room.extraWalls);

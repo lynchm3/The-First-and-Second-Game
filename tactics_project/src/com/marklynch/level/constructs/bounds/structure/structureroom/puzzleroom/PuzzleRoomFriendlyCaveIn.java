@@ -14,7 +14,7 @@ import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.DeathListener;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomFriendlyCaveIn extends StructureRoom implements DeathListener {
 	int posX;
@@ -22,11 +22,11 @@ public class PuzzleRoomFriendlyCaveIn extends StructureRoom implements DeathList
 	final static int totalWidthInSquares = 13;
 	final static int totalHeightInSquares = 20;
 	final static int caveInYOffset = 10;
-	ArrayList<Square> caveInSquares = new ArrayList<Square>(Square.class);
+	CopyOnWriteArrayList<Square> caveInSquares = new CopyOnWriteArrayList<Square>(Square.class);
 	Wall supportingWall;
 
 	public PuzzleRoomFriendlyCaveIn(int posX, int posY) {
-		super("Cave Shop", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Cave Shop", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
@@ -90,7 +90,7 @@ public class PuzzleRoomFriendlyCaveIn extends StructureRoom implements DeathList
 
 		for (Square square : caveInSquares) {
 
-			for (GameObject gameObject : (ArrayList<GameObject>) square.inventory.gameObjects.clone()) {
+			for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) square.inventory.gameObjects) {
 				gameObject.changeHealthSafetyOff(-gameObject.remainingHealth, deadThing.destroyedBy,
 						deadThing.destroyedByAction);
 			}

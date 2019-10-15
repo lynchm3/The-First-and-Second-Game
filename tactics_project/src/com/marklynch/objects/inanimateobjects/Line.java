@@ -3,12 +3,12 @@ package com.marklynch.objects.inanimateobjects;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Texture;
 
 public abstract class Line extends GameObject implements SwitchListener {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	public Direction direction1;
 	public Direction direction2;
 	public boolean drawLeftBufferStop = false;

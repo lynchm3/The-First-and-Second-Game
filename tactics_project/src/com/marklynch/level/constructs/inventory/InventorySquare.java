@@ -12,7 +12,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
@@ -34,7 +34,7 @@ public class InventorySquare extends Square {
 
 	public static Texture imageTexture;
 
-	public transient ArrayList<GameObject> stack = new ArrayList<GameObject>(GameObject.class);
+	public transient CopyOnWriteArrayList<GameObject> stack = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public InventorySquare(int x, int y, String imagePath, Inventory inventoryThisBelongsTo) {
 		super(x, y, imagePath, 1, 1, null, false);
@@ -242,7 +242,7 @@ public class InventorySquare extends Square {
 		return null;
 	}
 
-	public ArrayList<Action> getAllActionsForTheSquareOrObject(Actor performer) {
+	public CopyOnWriteArrayList<Action> getAllActionsForTheSquareOrObject(Actor performer) {
 		GameObject targetGameObject = this.stack.get(0);
 		if (targetGameObject != null) {
 			if (this.inventoryThisBelongsTo == Game.level.player.inventory)
@@ -251,7 +251,7 @@ public class InventorySquare extends Square {
 				return targetGameObject.getAllActionsPerformedOnThisInOtherInventory(performer);
 
 		}
-		return new ArrayList<Action>(Action.class);
+		return new CopyOnWriteArrayList<Action>(Action.class);
 	}
 
 	@Override
@@ -260,13 +260,13 @@ public class InventorySquare extends Square {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 		return actions;
 	}
 
-	public ArrayList<InventorySquare> getAllInventorySquaresAtDistance(float distance) {
-		ArrayList<InventorySquare> squares = new ArrayList<InventorySquare>(InventorySquare.class);
+	public CopyOnWriteArrayList<InventorySquare> getAllInventorySquaresAtDistance(float distance) {
+		CopyOnWriteArrayList<InventorySquare> squares = new CopyOnWriteArrayList<InventorySquare>(InventorySquare.class);
 		if (distance == 0) {
 			squares.add(this);
 			return squares;

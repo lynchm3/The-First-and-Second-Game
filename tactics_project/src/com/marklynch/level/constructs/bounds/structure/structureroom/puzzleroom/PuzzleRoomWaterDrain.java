@@ -16,7 +16,7 @@ import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.inanimateobjects.WaterSource;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListener {
 
@@ -46,11 +46,11 @@ public class PuzzleRoomWaterDrain extends StructureRoom implements SwitchListene
 	int wellX = 6;
 	int wellY = 7;
 
-	ArrayList<GameObject> glassWalls = new ArrayList<GameObject>(GameObject.class);
+	CopyOnWriteArrayList<GameObject> glassWalls = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	PressurePlate pressurePlate;
 
 	public PuzzleRoomWaterDrain(int posX, int posY) {
-		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Cave In Room", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;

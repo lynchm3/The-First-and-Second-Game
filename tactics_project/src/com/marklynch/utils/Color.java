@@ -79,7 +79,7 @@ public class Color extends mdesl.graphics.Color {
 		return "" + r + "," + g + "," + b + "," + a;
 	}
 
-	public static Color average(ArrayList<Color> colors) {
+	public static Color average(CopyOnWriteArrayList<Color> colors) {
 
 		float totalRed = 0f;
 		float totalGreen = 0f;

@@ -1,6 +1,6 @@
 package com.marklynch.script;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.script.trigger.ScriptTrigger;
@@ -13,14 +13,14 @@ public class ScriptEventEndLevel extends ScriptEvent {
 
 	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "text" };
 
-	public ArrayList<String> text = new ArrayList<String>();
+	public CopyOnWriteArrayList<String> text = new CopyOnWriteArrayList<String>();
 	public boolean completed = false;
 
 	public ScriptEventEndLevel() {
 		name = "ScriptEventEndLevel";
 	}
 
-	public ScriptEventEndLevel(boolean blockUserInput, ScriptTrigger scriptTrigger, ArrayList<String> text) {
+	public ScriptEventEndLevel(boolean blockUserInput, ScriptTrigger scriptTrigger, CopyOnWriteArrayList<String> text) {
 		super(blockUserInput, scriptTrigger);
 		name = "ScriptEventEndLevel";
 		this.text = text;

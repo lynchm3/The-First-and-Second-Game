@@ -31,7 +31,7 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.ui.popups.Toast;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 
 public class AreaTown {
@@ -73,27 +73,27 @@ public class AreaTown {
 		Templates.LEAVES.makeCopy(Game.level.squares[posX + 1][posY + 8], null);
 
 		// Joe's shop
-		ArrayList<Square> entranceSquares = new ArrayList<Square>(Square.class,
+		CopyOnWriteArrayList<Square> entranceSquares = new CopyOnWriteArrayList<Square>(Square.class,
 				Arrays.asList(new Square[] { Game.level.squares[posX + 4][posY + 4] }));
-		ArrayList<StructureFeature> shopFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructureFeature> shopFeatures = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
 		shopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Shop Door",
 				Game.level.squares[posX + 5][posY + 4], false, false, false, trader)));
 		shopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Private Quarters Door",
 				Game.level.squares[posX + 11][posY + 4], false, true, true, trader)));
-		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<StructureRoom> shopAtriums = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
 		shopAtriums.add(new StructureRoom("Trader Joe's Shop", posX + 6, posY + 1, false, false,
-				new ArrayList<Actor>(Actor.class, Arrays.asList(new Actor[] { trader })),
+				new CopyOnWriteArrayList<Actor>(Actor.class, Arrays.asList(new Actor[] { trader })),
 				new RoomPart(posX + 6, posY + 1, posX + 10, posY + 4)));
 		shopAtriums.add(new StructureRoom("Trader Joe's Shop", posX + 12, posY + 1, true, false,
-				new ArrayList<Actor>(Actor.class, Arrays.asList(new Actor[] { trader })),
+				new CopyOnWriteArrayList<Actor>(Actor.class, Arrays.asList(new Actor[] { trader })),
 				new RoomPart(posX + 12, posY + 1, posX + 16, posY + 4)));
-		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureSection> shopSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
 		shopSections
 				.add(new StructureSection("Trader Joe's Shop", posX + 5, posY + 0, posX + 17, posY + 5, false, false));
 		joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
-				new ArrayList<StructurePath>(StructurePath.class), shopFeatures, entranceSquares,
+				new CopyOnWriteArrayList<StructurePath>(StructurePath.class), shopFeatures, entranceSquares,
 				Templates.GOLD.imageTexture, posX + 5, posY + 0, posX + 17, posY + 5, true, trader,
-				new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_BUILDING,
+				new CopyOnWriteArrayList<Square>(Square.class), new CopyOnWriteArrayList<Wall>(Wall.class), Templates.WALL_BUILDING,
 				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(joesShop);
 		GameObject joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6][posY + 6], trader);
@@ -164,27 +164,27 @@ public class AreaTown {
 				Templates.BED.makeCopy(Game.level.squares[posX + 16 + 35][posY + 1 + 3], null), 10000,
 				new GameObject[] { Templates.APRON.makeCopy(null, null) }, new GameObject[] {}, AreaList.town,
 				new int[] {}, new HOBBY[] { HOBBY.HUNTING });
-		ArrayList<Square> doctorsEntranceSquares = new ArrayList<Square>(Square.class,
+		CopyOnWriteArrayList<Square> doctorsEntranceSquares = new CopyOnWriteArrayList<Square>(Square.class,
 				Arrays.asList(new Square[] { Game.level.squares[posX + 4 + 35][posY + 4 + 3] }));
-		ArrayList<StructureFeature> doctorsShopFeatures = new ArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructureFeature> doctorsShopFeatures = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
 		doctorsShopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Shop Door",
 				Game.level.squares[posX + 5 + 35][posY + 4 + 3], false, false, false, doctor)));
 		doctorsShopFeatures.add(new StructureFeature(Templates.DOOR.makeCopy("Private Quarters Door",
 				Game.level.squares[posX + 11 + 35][posY + 4 + 3], false, true, true, doctor)));
-		ArrayList<StructureRoom> doctorsShopAtriums = new ArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<StructureRoom> doctorsShopAtriums = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
 		doctorsShopAtriums.add(new StructureRoom("Doctor Mike's Practice", posX + 6 + 35, posY + 1 + 3, false, false,
-				new ArrayList<Actor>(Actor.class, Arrays.asList(new Actor[] { doctor })),
+				new CopyOnWriteArrayList<Actor>(Actor.class, Arrays.asList(new Actor[] { doctor })),
 				new RoomPart(posX + 6 + 35, posY + 1 + 3, posX + 10 + 35, posY + 4 + 3)));
 		doctorsShopAtriums.add(new StructureRoom("Doctor Mike's Practice", posX + 12 + 35, posY + 1 + 3, true, false,
-				new ArrayList<Actor>(Actor.class, Arrays.asList(new Actor[] { doctor })),
+				new CopyOnWriteArrayList<Actor>(Actor.class, Arrays.asList(new Actor[] { doctor })),
 				new RoomPart(posX + 12 + 35, posY + 1 + 3, posX + 16 + 35, posY + 4 + 3)));
-		ArrayList<StructureSection> doctorsShopSections = new ArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<StructureSection> doctorsShopSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
 		doctorsShopSections.add(new StructureSection("Doctor Mike's Practice", posX + 5 + 35, posY + 0 + 3,
 				posX + 17 + 35, posY + 5 + 3, false, false));
 		doctorsShop = new Structure("Doctor Mike's Practice", doctorsShopSections, doctorsShopAtriums,
-				new ArrayList<StructurePath>(StructurePath.class), doctorsShopFeatures, doctorsEntranceSquares,
+				new CopyOnWriteArrayList<StructurePath>(StructurePath.class), doctorsShopFeatures, doctorsEntranceSquares,
 				ResourceUtils.getGlobalImage("icon_doctor.png", false), posX + 40, posY + 3, posX + 52, posY + 8, true,
-				doctor, new ArrayList<Square>(Square.class), new ArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
+				doctor, new CopyOnWriteArrayList<Square>(Square.class), new CopyOnWriteArrayList<Wall>(Wall.class), Templates.WALL_CAVE,
 				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(doctorsShop);
 		GameObject doctorsShopSign = Templates.SIGN.makeCopy(Game.level.squares[posX + 6 + 35][posY + 6 + 3], doctor);
@@ -206,7 +206,7 @@ public class AreaTown {
 
 		// Wanted Poster
 		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[posX + 27][posY + 8],
-				"Wanter Poster", new ArrayList<Crime>(Crime.class), trader);
+				"Wanter Poster", new CopyOnWriteArrayList<Crime>(Crime.class), trader);
 		AreaList.town.wantedPoster = wantedPoster;
 		AreaList.townForest.wantedPoster = wantedPoster;
 		AreaList.innerTownForest.wantedPoster = wantedPoster;
@@ -219,7 +219,7 @@ public class AreaTown {
 		AreaList.innerTownForest.lostAndFound = lostAndFound;
 		AreaList.mines.lostAndFound = lostAndFound;
 		// trader.wantedPoster = wantedPoster;
-		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();
+		// CopyOnWriteArrayList<Square> doorLocations2 = new CopyOnWriteArrayList<Square>();
 		// doorLocations2.add(Game.level.squares[7][9]);
 		// // doorLocations2.add(Game.level.squares[11][9]);
 		// Game.level.structures.add(new Building("Hunting Lodge", 7, 7, 11, 11,

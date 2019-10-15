@@ -37,11 +37,11 @@ import com.marklynch.level.quest.thesecretroom.QuestTheSecretRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 
 @SuppressWarnings("serial")
-public class QuestList extends ArrayList<Quest> {
+public class QuestList extends CopyOnWriteArrayList<Quest> {
 	public static QuestSmallGame questSmallGame;
 	public static QuestCaveOfTheBlind questCaveOfTheBlind;
 	public static QuestThePigs questThePigs;
@@ -82,13 +82,13 @@ public class QuestList extends ArrayList<Quest> {
 		int puzzleRoomsX = 100;
 		int puzzleRoomsY = 100;
 
-		ArrayList<StructurePath> paths = new ArrayList<StructurePath>(StructurePath.class);
-		ArrayList<StructureSection> structureSections = new ArrayList<StructureSection>(StructureSection.class);
-		ArrayList<Square> squaresToRemove = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<StructurePath> paths = new CopyOnWriteArrayList<StructurePath>(StructurePath.class);
+		CopyOnWriteArrayList<StructureSection> structureSections = new CopyOnWriteArrayList<StructureSection>(StructureSection.class);
+		CopyOnWriteArrayList<Square> squaresToRemove = new CopyOnWriteArrayList<Square>(Square.class);
 		structureSections.add(new StructureSection("Puzzle Structure Section", puzzleRoomsX, puzzleRoomsY,
 				puzzleRoomsX + 100, puzzleRoomsY + 150, false, false));
 
-		ArrayList<StructureRoom> puzzleStructureRooms = new ArrayList<StructureRoom>(StructureRoom.class);
+		CopyOnWriteArrayList<StructureRoom> puzzleStructureRooms = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
 
 		// DOORWAY top left entrance
 		squaresToRemove.add(Level.squares[puzzleRoomsX][puzzleRoomsY + 10]);
@@ -232,15 +232,15 @@ public class QuestList extends ArrayList<Quest> {
 		// Conveyer belt room
 		puzzleStructureRooms.add(new PuzzleRoomConveyerBelt(puzzleRoomsX + 49, puzzleRoomsY + 11));
 
-		ArrayList<StructureFeature> features = new ArrayList<StructureFeature>(StructureFeature.class);
+		CopyOnWriteArrayList<StructureFeature> features = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
 		features.addAll(puzzleRoomMaze.features);
 
-		ArrayList<Square> entrances = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Square> entrances = new CopyOnWriteArrayList<Square>(Square.class);
 		entrances.add(Level.squares[puzzleRoomsX][puzzleRoomsY + 10]);
 		// 2nd top left entrance
 		// squaresToRemove.add(Level.squares[x][y + 31]);
 		// squaresToRemove.add(Level.squares[x][y + 32]);
-		ArrayList<Wall> extraWalls = new ArrayList<Wall>(Wall.class);
+		CopyOnWriteArrayList<Wall> extraWalls = new CopyOnWriteArrayList<Wall>(Wall.class);
 		extraWalls.add(Templates.FALSE_WALL.makeCopy(Level.squares[puzzleRoomsX + 1 + 1][puzzleRoomsY + 22 + 0], null));
 		Wall readableWall = Templates.READABLE_WALL.makeCopy(Level.squares[puzzleRoomsX + 27][puzzleRoomsY + 10], null);
 		readableWall.conversation = readableWall.createConversation("Watup, I'm a wall");

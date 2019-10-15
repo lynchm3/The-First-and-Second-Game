@@ -6,11 +6,11 @@ import com.marklynch.level.constructs.animation.secondary.AnimationBubbles;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Fish extends WildAnimal {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public Fish() {
 		super();

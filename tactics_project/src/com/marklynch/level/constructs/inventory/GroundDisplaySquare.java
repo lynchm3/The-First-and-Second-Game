@@ -6,7 +6,7 @@ import com.marklynch.actions.ActionEquip;
 import com.marklynch.actions.ActionTakeItemsSelectedInInventory;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.TextureUtils;
 
 public class GroundDisplaySquare extends InventorySquare {
@@ -27,9 +27,9 @@ public class GroundDisplaySquare extends InventorySquare {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsForTheSquareOrObject(Actor performer) {
+	public CopyOnWriteArrayList<Action> getAllActionsForTheSquareOrObject(Actor performer) {
 
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 		if (stack.get(0) != null) {
 			actions.add(new ActionTakeItemsSelectedInInventory(performer,
 					this.stack.get(0).inventoryThatHoldsThisObject.parent, this.stack.get(0)));

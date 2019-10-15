@@ -1,6 +1,6 @@
 package com.marklynch.editor.popup;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.editor.Editor;
 import com.marklynch.level.squares.Square;
@@ -35,7 +35,7 @@ public class PopupInventory extends Popup {
 		if (selectSquareButton != null)
 			buttons.add(selectSquareButton);
 
-		final ArrayList<GameObject> gameObjectsThatCanContainOtherObjects = square.inventory
+		final CopyOnWriteArrayList<GameObject> gameObjectsThatCanContainOtherObjects = square.inventory
 				.getGameObjectsThatCanContainOtherObjects();
 
 		for (int i = 0; i < gameObjectsThatCanContainOtherObjects.size(); i++) {

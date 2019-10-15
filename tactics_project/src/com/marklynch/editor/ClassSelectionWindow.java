@@ -1,6 +1,6 @@
 package com.marklynch.editor;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ui.button.Button;
@@ -12,13 +12,13 @@ import com.marklynch.utils.Color;
 
 public class ClassSelectionWindow<T> {
 
-	ArrayList<Class> classes;
-	public ArrayList<SelectionWindowButton> buttons = new ArrayList<SelectionWindowButton>();
+	CopyOnWriteArrayList<Class> classes;
+	public CopyOnWriteArrayList<SelectionWindowButton> buttons = new CopyOnWriteArrayList<SelectionWindowButton>();
 	public Editor editor;
 	public Class superClass;
 	public String title;
 
-	public ClassSelectionWindow(final ArrayList<Class> classes, final Editor editor, final Class superClass,
+	public ClassSelectionWindow(final CopyOnWriteArrayList<Class> classes, final Editor editor, final Class superClass,
 			String title) {
 		this.editor = editor;
 		this.classes = classes;

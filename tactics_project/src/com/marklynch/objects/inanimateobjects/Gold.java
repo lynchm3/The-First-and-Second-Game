@@ -1,13 +1,13 @@
 package com.marklynch.objects.inanimateobjects;
 
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 
 public class Gold extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public Gold() {
 		super();

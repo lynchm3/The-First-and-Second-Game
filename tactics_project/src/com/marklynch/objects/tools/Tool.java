@@ -3,10 +3,10 @@ package com.marklynch.objects.tools;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Tool extends Weapon {
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public Tool() {
 
@@ -25,7 +25,7 @@ public class Tool extends Weapon {
 	// if (squares[i][j].reachableBySelectedCharater) {
 	// for (float range = getEffectiveMinRange(); range <=
 	// getEffectiveMaxRange(); range++) {
-	// ArrayList<Square> squaresInThisPath = new ArrayList<Square>();
+	// CopyOnWriteArrayList<Square> squaresInThisPath = new CopyOnWriteArrayList<Square>();
 	// squaresInThisPath.add(squares[i][j]);
 	// calculateAttackableSquares(squares, range, squares[i][j], Direction.UP,
 	// squaresInThisPath);
@@ -43,7 +43,7 @@ public class Tool extends Weapon {
 	//
 	// public void calculateAttackableSquares(Square[][] squares, float
 	// remainingRange, Square parentSquare,
-	// Direction direction, ArrayList<Square> squaresInThisPath) {
+	// Direction direction, CopyOnWriteArrayList<Square> squaresInThisPath) {
 	// Square currentSquare = null;
 	//
 	// if (direction == Direction.UP) {

@@ -12,12 +12,12 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Fish;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.UpdatableGameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Texture;
 
 public class WaterBody extends WaterSource implements UpdatableGameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	// 3+ connections
 	public boolean fullWall;
@@ -92,7 +92,7 @@ public class WaterBody extends WaterSource implements UpdatableGameObject {
 	public float quarterWidth = Game.SQUARE_WIDTH / 4;
 	public float quarterHeight = Game.SQUARE_HEIGHT / 4;
 
-	public ArrayList<Texture> textures = new ArrayList<Texture>(Texture.class);
+	public CopyOnWriteArrayList<Texture> textures = new CopyOnWriteArrayList<Texture>(Texture.class);
 	public int texturesIndex = 0;
 
 	public WaterBody() {

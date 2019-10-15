@@ -1,6 +1,6 @@
 package com.marklynch.objects.actors;
 
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 import com.marklynch.actions.Action;
 import com.marklynch.actions.ActionAttack;
@@ -17,7 +17,7 @@ import com.marklynch.objects.tools.Tool;
 
 public class Blind extends Monster {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public StructureRoom roomLivingIn;
 
@@ -49,13 +49,13 @@ public class Blind extends Monster {
 	}
 
 	// @Override
-	// public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor
+	// public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor
 	// performer) {
-	// ArrayList<Action> actions = new ArrayList<Action>();
+	// CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>();
 	// actions.add(new ActionAttack(performer, this));
 	// actions.add(new ActionThrow(performer, this, performer.equipped));
 	//
-	// // ArrayList<Action> actions = new ArrayList<Action>();
+	// // CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>();
 	// // if (this != Game.level.player) {
 	// // // Talk
 	// // actions.add(new ActionTalk(performer, this));

@@ -58,7 +58,7 @@ import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.utils.ThoughtBubbles;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.MapUtil;
 
@@ -122,17 +122,17 @@ public abstract class AIRoutine {
 	public transient AI_TYPE aiType = AI_TYPE.FIGHTER;
 
 	public transient boolean keepInBounds = false;
-	public transient ArrayList<Area> areaBounds = new ArrayList<Area>(Area.class);
-	public transient ArrayList<StructureSection> sectionBounds = new ArrayList<StructureSection>(
+	public transient CopyOnWriteArrayList<Area> areaBounds = new CopyOnWriteArrayList<Area>(Area.class);
+	public transient CopyOnWriteArrayList<StructureSection> sectionBounds = new CopyOnWriteArrayList<StructureSection>(
 			StructureSection.class);
-	public transient ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>(StructureRoom.class);
-	public transient ArrayList<Square> squareBounds = new ArrayList<Square>(Square.class);
+	public transient CopyOnWriteArrayList<StructureRoom> roomBounds = new CopyOnWriteArrayList<StructureRoom>(StructureRoom.class);
+	public transient CopyOnWriteArrayList<Square> squareBounds = new CopyOnWriteArrayList<Square>(Square.class);
 
 	public transient HOBBY currentHobby = HOBBY.HUNTING;
 
 	public transient Actor actorToKeepTrackOf = null;
 	public transient Square lastLocationSeenActorToKeepTrackOf = null;
-	public transient ArrayList<GameObject> ignoreList = new ArrayList<GameObject>(GameObject.class);
+	public transient CopyOnWriteArrayList<GameObject> ignoreList = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public AIRoutine() {
 	}
@@ -499,7 +499,7 @@ public abstract class AIRoutine {
 		// Remove dead objects
 		// and remove gameObjects you can see from investigation list
 		// and remove out of bounds squares from investigation list
-		ArrayList<GameObject> gameObjectsToStopSearchingFor = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<GameObject> gameObjectsToStopSearchingFor = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
 			if (actorToSearchFor.remainingHealth <= 0) {
 				gameObjectsToStopSearchingFor.add(actorToSearchFor);
@@ -519,7 +519,7 @@ public abstract class AIRoutine {
 		MapUtil.sortByValue(this.actor.investigationsMap);
 
 		// this.actor.locationsToSearch.sort(AIRoutineUtils.sortLocationsToSearch);
-		ArrayList<GameObject> toRemove = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<GameObject> toRemove = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		boolean moved = false;
 
 		Square searchSquare = null;
@@ -689,15 +689,15 @@ public abstract class AIRoutine {
 	protected boolean runCrimeReactionRoutine() {
 		for (final Actor criminal : actor.knownCriminals) {
 			int accumulatedSeverity = 0;
-			final ArrayList<Crime> unresolvedIllegalMinings = new ArrayList<Crime>(Crime.class);
-			final ArrayList<Crime> unresolvedThefts = new ArrayList<Crime>(Crime.class);
-			final ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>(Crime.class);
-			final ArrayList<GameObject> stolenItemsOnCriminal = new ArrayList<GameObject>(GameObject.class);
-			final ArrayList<GameObject> stolenItemsEquippedByCriminal = new ArrayList<GameObject>(GameObject.class);
-			final ArrayList<GameObject> stolenItemsOnGroundToPickUp = new ArrayList<GameObject>(GameObject.class);
+			final CopyOnWriteArrayList<Crime> unresolvedIllegalMinings = new CopyOnWriteArrayList<Crime>(Crime.class);
+			final CopyOnWriteArrayList<Crime> unresolvedThefts = new CopyOnWriteArrayList<Crime>(Crime.class);
+			final CopyOnWriteArrayList<Crime> unresolvedCrimes = new CopyOnWriteArrayList<Crime>(Crime.class);
+			final CopyOnWriteArrayList<GameObject> stolenItemsOnCriminal = new CopyOnWriteArrayList<GameObject>(GameObject.class);
+			final CopyOnWriteArrayList<GameObject> stolenItemsEquippedByCriminal = new CopyOnWriteArrayList<GameObject>(GameObject.class);
+			final CopyOnWriteArrayList<GameObject> stolenItemsOnGroundToPickUp = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 			boolean newCrime = false;
-			// final ArrayList<GameObject> stolenItemsOnInContainer = new
-			// ArrayList<GameObject>();
+			// final CopyOnWriteArrayList<GameObject> stolenItemsOnInContainer = new
+			// CopyOnWriteArrayList<GameObject>();
 
 			// Mark issues as resolved
 			for (Crime crime : actor.mapActorToCrimesWitnessed.get(criminal)) {
@@ -899,7 +899,7 @@ public abstract class AIRoutine {
 	}
 
 	public static Conversation createJusticeReclaimConversation(final Actor accuser, final Actor criminal,
-			final ArrayList<GameObject> stolenItemsOnCriminal) {
+			final CopyOnWriteArrayList<GameObject> stolenItemsOnCriminal) {
 		ConversationResponse accept = new ConversationResponse("Comply [Give items]", null) {
 			@Override
 			public void select() {
@@ -930,25 +930,25 @@ public abstract class AIRoutine {
 				demand = new Object[] { "Give me that ", stolenItemsOnCriminal.get(0), "!" };
 			}
 		} else {
-			ArrayList<Object> demandArrayList = new ArrayList<Object>(Object.class);
+			CopyOnWriteArrayList<Object> demandCopyOnWriteArrayList = new CopyOnWriteArrayList<Object>(Object.class);
 			for (int i = 0; i < stolenItemsOnCriminal.size(); i++) {
 				if (i == 0) {
 					// first item
-					demandArrayList.add("Give me that ");
-					demandArrayList.add(stolenItemsOnCriminal.get(i));
+					demandCopyOnWriteArrayList.add("Give me that ");
+					demandCopyOnWriteArrayList.add(stolenItemsOnCriminal.get(i));
 				} else if (i == stolenItemsOnCriminal.size() - 1) {
 					// last item
-					demandArrayList.add(" and ");
-					demandArrayList.add(stolenItemsOnCriminal.get(i));
-					demandArrayList.add("!");
+					demandCopyOnWriteArrayList.add(" and ");
+					demandCopyOnWriteArrayList.add(stolenItemsOnCriminal.get(i));
+					demandCopyOnWriteArrayList.add("!");
 				} else {
 					// middle items
-					demandArrayList.add(", ");
-					demandArrayList.add(stolenItemsOnCriminal.get(i));
+					demandCopyOnWriteArrayList.add(", ");
+					demandCopyOnWriteArrayList.add(stolenItemsOnCriminal.get(i));
 				}
 			}
 
-			demand = demandArrayList.toArray();
+			demand = demandCopyOnWriteArrayList.toArray();
 		}
 
 		ConversationPart conversationPartJustice = new ConversationPart(demand,
@@ -970,7 +970,7 @@ public abstract class AIRoutine {
 	}
 
 	public Conversation createJusticeDropConversation(final Actor criminal,
-			final ArrayList<GameObject> stolenItemsEquippedByCriminal) {
+			final CopyOnWriteArrayList<GameObject> stolenItemsEquippedByCriminal) {
 		ConversationResponse accept = new ConversationResponse("Comply", null) {
 			@Override
 			public void select() {
@@ -1319,7 +1319,7 @@ public abstract class AIRoutine {
 
 	public boolean replenishEquipment() {
 
-		ArrayList<Integer> equipmentNeeded = new ArrayList<Integer>(Integer.class);
+		CopyOnWriteArrayList<Integer> equipmentNeeded = new CopyOnWriteArrayList<Integer>(Integer.class);
 		for (int requiredTemplateId : actor.requiredEquipmentTemplateIds) {
 			if (!actor.inventory.containsGameObjectWithTemplateId(requiredTemplateId)) {
 				equipmentNeeded.add(requiredTemplateId);
@@ -1351,8 +1351,8 @@ public abstract class AIRoutine {
 			AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 			// AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
 		} else {
-			for (GameObject tradersGameObject : (ArrayList<GameObject>) target.inventory.gameObjects.clone()) {
-				for (Integer requiredTemplateId : (ArrayList<Integer>) equipmentNeeded.clone()) {
+			for (GameObject tradersGameObject : (CopyOnWriteArrayList<GameObject>) target.inventory.gameObjects) {
+				for (Integer requiredTemplateId : (CopyOnWriteArrayList<Integer>) equipmentNeeded) {
 					if (tradersGameObject.toSell == true && tradersGameObject.templateId == requiredTemplateId) {
 						new ActionBuyItems(actor, target, tradersGameObject).perform();
 						continue;
@@ -1415,8 +1415,8 @@ public abstract class AIRoutine {
 		if (actor.straightLineDistanceTo(wantedPoster.squareGameObjectIsOn) < 2) {
 
 			wantedPoster.updateCrimes(
-					(ArrayList<Crime>) actor.mapActorToCrimesWitnessed
-							.get(actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity).clone(),
+					(CopyOnWriteArrayList<Crime>) actor.mapActorToCrimesWitnessed
+							.get(actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity),
 					actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity);
 			new ActionWrite(actor, wantedPoster, wantedPoster.generateText()).perform();
 			return true;
@@ -1497,7 +1497,7 @@ public abstract class AIRoutine {
 
 		if (actor.straightLineDistanceTo(lostAndFound.squareGameObjectIsOn) < 2) {
 
-			ArrayList<GameObject> gameObjectsToPickUp = new ArrayList<GameObject>(GameObject.class);
+			CopyOnWriteArrayList<GameObject> gameObjectsToPickUp = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 			for (GameObject gameObject : lostAndFound.inventory.gameObjects) {
 				if (gameObject.owner == actor) {
 					gameObjectsToPickUp.add(gameObject);
@@ -1515,7 +1515,7 @@ public abstract class AIRoutine {
 	}
 
 	protected boolean canSeeAnyone() {
-		ArrayList<Square> visibleSquares = actor.getAllSquaresWithinDistance(1, actor.sight);
+		CopyOnWriteArrayList<Square> visibleSquares = actor.getAllSquaresWithinDistance(1, actor.sight);
 		for (Square visibleSquare : visibleSquares) {
 			Actor actorOnVisibleSquare = visibleSquare.inventory.actor;
 			if (actorOnVisibleSquare != null && this.actor.canSeeGameObject(actorOnVisibleSquare)) {
@@ -1578,7 +1578,7 @@ public abstract class AIRoutine {
 				false, true, Fish.class); // target is null, wtf
 
 		FishingRod fishingRod = null;
-		ArrayList<GameObject> fishingRods = actor.inventory.getGameObjectsOfClass(FishingRod.class);
+		CopyOnWriteArrayList<GameObject> fishingRods = actor.inventory.getGameObjectsOfClass(FishingRod.class);
 		for (GameObject f : fishingRods) {
 			fishingRod = (FishingRod) f;
 		}

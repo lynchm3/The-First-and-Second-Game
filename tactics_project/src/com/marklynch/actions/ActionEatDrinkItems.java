@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -28,7 +28,7 @@ public class ActionEatDrinkItems extends VariableQtyAction {
 	private GameObject previouslyEquipped;
 	int amountToEat;
 
-	public ActionEatDrinkItems(Actor performer, ArrayList<GameObject> objects) {
+	public ActionEatDrinkItems(Actor performer, CopyOnWriteArrayList<GameObject> objects) {
 		this(performer, objects.toArray(new GameObject[objects.size()]), false);
 	}
 

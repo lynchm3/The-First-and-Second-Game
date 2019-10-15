@@ -7,11 +7,11 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.tools.FlammableLightSource;
 import com.marklynch.objects.utils.UpdatableGameObject;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Fireplace extends FlammableLightSource implements UpdatableGameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public Fireplace() {
 		super();

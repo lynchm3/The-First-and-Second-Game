@@ -3,7 +3,7 @@ package com.marklynch.level.constructs.animation.secondary;
 import com.marklynch.Game;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.Texture;
@@ -32,10 +32,10 @@ public class AnimationFanOut extends SecondaryAnimation {
 	Color color;
 	private Direction direction;
 
-	public ArrayList<Float> xs = new ArrayList<Float>(Float.class);
-	public ArrayList<Float> ys = new ArrayList<Float>(Float.class);
-	public ArrayList<Float> speedXs = new ArrayList<Float>(Float.class);
-	public ArrayList<Float> speedYs = new ArrayList<Float>(Float.class);
+	public CopyOnWriteArrayList<Float> xs = new CopyOnWriteArrayList<Float>(Float.class);
+	public CopyOnWriteArrayList<Float> ys = new CopyOnWriteArrayList<Float>(Float.class);
+	public CopyOnWriteArrayList<Float> speedXs = new CopyOnWriteArrayList<Float>(Float.class);
+	public CopyOnWriteArrayList<Float> speedYs = new CopyOnWriteArrayList<Float>(Float.class);
 
 	public AnimationFanOut(GameObject targetGameObject, Direction direction, float originX, float originY,
 			float baseSpeed, Texture texture, OnCompletionListener onCompletionListener) {

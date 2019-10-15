@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.power;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Collections;
 
 import org.lwjgl.util.Point;
@@ -57,7 +57,7 @@ public class PowerDash extends Power {
 
 		int distance = 2;
 
-		ArrayList<PushedObject> pushedObjects = new ArrayList<PushedObject>();
+		CopyOnWriteArrayList<PushedObject> pushedObjects = new CopyOnWriteArrayList<PushedObject>();
 		int correctedDistance = push(source, direction, distance, false, pushedObjects);
 		Square correctedTargetSquare = null;
 		if (direction == direction.LEFT) {
@@ -105,7 +105,7 @@ public class PowerDash extends Power {
 	}
 
 	public int push(GameObject source, Direction direction, int attemptedDistance, boolean doAnimation,
-			ArrayList<PushedObject> pushedObjects) {
+			CopyOnWriteArrayList<PushedObject> pushedObjects) {
 
 		// int actualPush = attemptedDistance;
 		// boolean hitWall = false;
@@ -209,7 +209,7 @@ public class PowerDash extends Power {
 
 		int distance = 2;
 
-		ArrayList<PushedObject> pushedObjects = new ArrayList<PushedObject>();
+		CopyOnWriteArrayList<PushedObject> pushedObjects = new CopyOnWriteArrayList<PushedObject>();
 		int correctedDistance = push(source, direction, distance, false, pushedObjects);
 
 		for (PushedObject pushedObject : pushedObjects) {

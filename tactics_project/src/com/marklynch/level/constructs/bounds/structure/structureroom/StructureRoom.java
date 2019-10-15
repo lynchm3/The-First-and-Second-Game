@@ -9,14 +9,14 @@ import com.marklynch.level.constructs.bounds.structure.StructureFeature;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Wall;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 
 public class StructureRoom implements Idable {
 	public Long id;
 	public String name;
 	public RoomPart[] roomParts;
-	public ArrayList<Square> squares = new ArrayList<Square>(Square.class);
+	public CopyOnWriteArrayList<Square> squares = new CopyOnWriteArrayList<Square>(Square.class);
 	public float x;// where to draw name of room
 	public float y;
 	public boolean seenByPlayer = false;
@@ -25,22 +25,22 @@ public class StructureRoom implements Idable {
 
 	public static Color roomColor = new Color(0.7f, 0.7f, 0.7f);
 
-	public ArrayList<StructureFeature> features = new ArrayList<StructureFeature>(StructureFeature.class);
-	public ArrayList<Wall> extraWalls = new ArrayList<Wall>(Wall.class);
+	public CopyOnWriteArrayList<StructureFeature> features = new CopyOnWriteArrayList<StructureFeature>(StructureFeature.class);
+	public CopyOnWriteArrayList<Wall> extraWalls = new CopyOnWriteArrayList<Wall>(Wall.class);
 
 	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
-			ArrayList<Actor> ownersArrayList, RoomPart... roomParts) {
-		this(name, x, y, restricted, restrictedAtNight, ownersArrayList, 0, true, roomParts);
+			CopyOnWriteArrayList<Actor> ownersCopyOnWriteArrayList, RoomPart... roomParts) {
+		this(name, x, y, restricted, restrictedAtNight, ownersCopyOnWriteArrayList, 0, true, roomParts);
 	}
 
 	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
-			ArrayList<Actor> ownersArrayList, int level, RoomPart... roomParts) {
-		this(name, x, y, restricted, restrictedAtNight, ownersArrayList, level, true, roomParts);
+			CopyOnWriteArrayList<Actor> ownersCopyOnWriteArrayList, int level, RoomPart... roomParts) {
+		this(name, x, y, restricted, restrictedAtNight, ownersCopyOnWriteArrayList, level, true, roomParts);
 
 	}
 
 	public StructureRoom(String name, float x, float y, boolean restricted, boolean restrictedAtNight,
-			ArrayList<Actor> ownersArrayList, int level, boolean doesNothing, RoomPart[] roomParts) {
+			CopyOnWriteArrayList<Actor> ownersCopyOnWriteArrayList, int level, boolean doesNothing, RoomPart[] roomParts) {
 		super();
 
 		this.id = Level.generateNewId(this);
@@ -70,9 +70,9 @@ public class StructureRoom implements Idable {
 			}
 		}
 
-		if (ownersArrayList.size() > 0) {
+		if (ownersCopyOnWriteArrayList.size() > 0) {
 			for (Square square : squares) {
-				square.owners = ownersArrayList;
+				square.owners = ownersCopyOnWriteArrayList;
 			}
 		}
 

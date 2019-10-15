@@ -6,11 +6,11 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public TinyNeutralWildAnimal() {
 		super();
@@ -28,8 +28,8 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 	// }
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 		actions.add(new ActionSquash(performer, this, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;

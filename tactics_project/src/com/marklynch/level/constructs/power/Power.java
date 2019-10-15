@@ -13,7 +13,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Texture;
 
 public abstract class Power {
@@ -59,10 +59,10 @@ public abstract class Power {
 
 	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
 
-		ArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
+		CopyOnWriteArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
 
 		for (Square square : affectedSquares) {
-			for (GameObject gameObject : (ArrayList<GameObject>) square.inventory.getGameObjects().clone()) {
+			for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) square.inventory.getGameObjects()) {
 				for (Effect effect : effects) {
 					gameObject.addEffect(effect.makeCopy(source, gameObject));
 				}
@@ -70,8 +70,8 @@ public abstract class Power {
 		}
 	}
 
-	public ArrayList<Square> getAffectedSquares(Square targetSquare) {
-		ArrayList<Square> affectedSquares = new ArrayList<Square>(Square.class);
+	public CopyOnWriteArrayList<Square> getAffectedSquares(Square targetSquare) {
+		CopyOnWriteArrayList<Square> affectedSquares = new CopyOnWriteArrayList<Square>(Square.class);
 		for (Point point : areaOfEffect) {
 			int squareX = targetSquare.xInGrid + point.getX();
 			int squareY = targetSquare.yInGrid + point.getY();

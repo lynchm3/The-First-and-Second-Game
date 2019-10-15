@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.availablepowerscreen;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -15,15 +15,15 @@ import com.marklynch.utils.QuadUtils;
 
 public class AvailablePowersScreen implements Draggable, Scrollable {
 
-	static ArrayList<PowerSquare> powerSquares = new ArrayList<PowerSquare>();
+	static CopyOnWriteArrayList<PowerSquare> powerSquares = new CopyOnWriteArrayList<PowerSquare>();
 
 	public boolean showing = false;
 
 	// Close button
-	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> buttons = new CopyOnWriteArrayList<LevelButton>();
 	static LevelButton buttonClose;
 
-	public ArrayList<PowerSquare> activateAtStart = new ArrayList<PowerSquare>();
+	public CopyOnWriteArrayList<PowerSquare> activateAtStart = new CopyOnWriteArrayList<PowerSquare>();
 
 	public AvailablePowersScreen() {
 

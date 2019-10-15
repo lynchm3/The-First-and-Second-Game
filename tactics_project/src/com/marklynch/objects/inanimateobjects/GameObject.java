@@ -116,9 +116,9 @@ import com.marklynch.objects.tools.Jar;
 import com.marklynch.objects.utils.DamageDealer;
 import com.marklynch.objects.utils.DeathListener;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.Color;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
@@ -130,7 +130,8 @@ import com.marklynch.utils.Utils;
 public class GameObject
 		implements Idable, ActionableInWorld, ActionableInInventory, Comparable<Object>, InventoryParent, DamageDealer {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(
+			GameObject.class);
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
@@ -183,7 +184,7 @@ public class GameObject
 
 	public Texture imageTexture = null;
 	public Texture imageTexture2 = null;
-	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>(Effect.class);
+	public CopyOnWriteArrayList<Effect> activeEffectsOnGameObject = new CopyOnWriteArrayList<Effect>(Effect.class);
 
 	// attributes
 	public int remainingHealth = 1;
@@ -234,7 +235,7 @@ public class GameObject
 	public boolean hiding = false;
 	public HidingPlace hidingPlace = null;
 
-	public ArrayList<GameObject> attackers = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> attackers = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public transient GroupOfActors groupOfActors;
 
@@ -269,14 +270,14 @@ public class GameObject
 	// public boolean beingDigged = false;
 	// public static float healthHeightInPixels = Game.SQUARE_HEIGHT;
 
-	// public ArrayList<DestructionListener> destructionListeners = new
-	// ArrayList<DestructionListener>();
+	// public CopyOnWriteArrayList<DestructionListener> destructionListeners = new
+	// CopyOnWriteArrayList<DestructionListener>();
 
 	// Fishing stuff
 	public float swimmingChangeX = 0;
 	public float swimmingChangeY = 0;
 
-	public ArrayList<Arrow> arrowsEmbeddedInThis = new ArrayList<Arrow>(Arrow.class);
+	public CopyOnWriteArrayList<Arrow> arrowsEmbeddedInThis = new CopyOnWriteArrayList<Arrow>(Arrow.class);
 
 	public GameObject fishingTarget;
 	public GameObject equipped = null;
@@ -294,9 +295,10 @@ public class GameObject
 	public transient ActionListener onReadListener;
 
 	public DeathListener deathListener = null;
-	public ArrayList<Square> squaresToHighlight = new ArrayList<Square>(Square.class);
+	public CopyOnWriteArrayList<Square> squaresToHighlight = new CopyOnWriteArrayList<Square>(Square.class);
 
-	public ArrayList<GameObject> gameObjectsToHighlight = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> gameObjectsToHighlight = new CopyOnWriteArrayList<GameObject>(
+			GameObject.class);
 
 	public Effect[] touchEffects;
 	public Effect[] consumeEffects;
@@ -842,7 +844,7 @@ public class GameObject
 
 	protected boolean died = false;
 
-	public ArrayList<Object> linkedObjects = new ArrayList<Object>(Object.class);
+	public CopyOnWriteArrayList<Object> linkedObjects = new CopyOnWriteArrayList<Object>(Object.class);
 
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 
@@ -903,8 +905,8 @@ public class GameObject
 		return false;
 	}
 
-	public ArrayList<Square> getAllSquaresAtDistance(int distance) {
-		ArrayList<Square> squares = new ArrayList<Square>(Square.class);
+	public CopyOnWriteArrayList<Square> getAllSquaresAtDistance(int distance) {
+		CopyOnWriteArrayList<Square> squares = new CopyOnWriteArrayList<Square>(Square.class);
 		if (distance == 0) {
 			squares.add(this.squareGameObjectIsOn);
 			return squares;
@@ -955,12 +957,13 @@ public class GameObject
 		return squares;
 	}
 
-	public ArrayList<Square> getAllSquaresWithinDistance(int minDistance, int maxDistance) {
+	public CopyOnWriteArrayList<Square> getAllSquaresWithinDistance(int minDistance, int maxDistance) {
 		return getAllSquaresWithinDistance(minDistance, maxDistance, this.squareGameObjectIsOn);
 	}
 
-	public static ArrayList<Square> getAllSquaresWithinDistance(int minDistance, int maxDistance, Square squareFrom) {
-		ArrayList<Square> squares = new ArrayList<Square>(Square.class);
+	public static CopyOnWriteArrayList<Square> getAllSquaresWithinDistance(int minDistance, int maxDistance,
+			Square squareFrom) {
+		CopyOnWriteArrayList<Square> squares = new CopyOnWriteArrayList<Square>(Square.class);
 
 		for (int distance = minDistance; distance <= maxDistance; distance++) {
 
@@ -1016,12 +1019,12 @@ public class GameObject
 		return squares;
 	}
 
-	public ArrayList<Point> getAllCoordinatesAtDistanceFromSquare(int distance) {
+	public CopyOnWriteArrayList<Point> getAllCoordinatesAtDistanceFromSquare(int distance) {
 		return getAllCoordinatesAtDistanceFromSquare(distance, this.squareGameObjectIsOn);
 	}
 
-	public ArrayList<Point> getAllCoordinatesAtDistanceFromSquare(int distance, Square square) {
-		ArrayList<Point> coordinates = new ArrayList<Point>(Point.class);
+	public CopyOnWriteArrayList<Point> getAllCoordinatesAtDistanceFromSquare(int distance, Square square) {
+		CopyOnWriteArrayList<Point> coordinates = new CopyOnWriteArrayList<Point>(Point.class);
 		if (distance == 0) {
 			coordinates.add(new Point(square.xInGrid, square.yInGrid));
 			return coordinates;
@@ -1100,8 +1103,8 @@ public class GameObject
 		return gameObject;
 	}
 
-	public ArrayList<Weapon> getWeaponsInInventory() {
-		ArrayList<Weapon> weapons = new ArrayList<Weapon>(Weapon.class);
+	public CopyOnWriteArrayList<Weapon> getWeaponsInInventory() {
+		CopyOnWriteArrayList<Weapon> weapons = new CopyOnWriteArrayList<Weapon>(Weapon.class);
 		for (GameObject gameObject : inventory.getGameObjects()) {
 			if (gameObject instanceof Weapon) {
 				weapons.add((Weapon) gameObject);
@@ -1255,8 +1258,8 @@ public class GameObject
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 
 		// if (this.remainingHealth <= 0)
 		// return actions;
@@ -1704,9 +1707,9 @@ public class GameObject
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
 
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 
 		if (this.inventoryThatHoldsThisObject == null) {
 			return actions;
@@ -1784,8 +1787,8 @@ public class GameObject
 		return actions;
 	}
 
-	public ArrayList<Action> getAllActionsPerformedOnThisInOtherInventory(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInOtherInventory(Actor performer) {
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 		if (!(this.inventoryThatHoldsThisObject.parent instanceof Actor)) {
 			actions.add(new ActionTakeItemsSelectedInInventory(performer, Inventory.target, this));
 			actions.add(new ActionEquip(performer, this));
@@ -1879,7 +1882,7 @@ public class GameObject
 
 		if (activeEffectsOnGameObject.size() > 0) {
 
-			ArrayList<Color> colors = new ArrayList<Color>(Color.class);
+			CopyOnWriteArrayList<Color> colors = new CopyOnWriteArrayList<Color>(Color.class);
 			colors.add(baseColor);
 			for (Effect effect : activeEffectsOnGameObject) {
 				colors.add(effect.getColor());
@@ -1957,8 +1960,8 @@ public class GameObject
 		if (activeEffectsOnGameObject.size() == 0)
 			return;
 
-		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>(Effect.class);
-		for (Effect effect : (ArrayList<Effect>) this.activeEffectsOnGameObject.clone()) {
+		CopyOnWriteArrayList<Effect> effectsToRemove = new CopyOnWriteArrayList<Effect>(Effect.class);
+		for (Effect effect : (CopyOnWriteArrayList<Effect>) this.activeEffectsOnGameObject) {
 
 			effect.activate();
 			if (effect.turnsRemaining == 0)
@@ -2030,7 +2033,7 @@ public class GameObject
 
 	}
 
-	public ArrayList<Effect> getActiveEffectsOnGameObject() {
+	public CopyOnWriteArrayList<Effect> getActiveEffectsOnGameObject() {
 		return activeEffectsOnGameObject;
 	}
 
@@ -2336,9 +2339,9 @@ public class GameObject
 		return null;
 	}
 
-	public ArrayList<Action> getAllActionsForEquippedItem(Actor performer, Square square) {
+	public CopyOnWriteArrayList<Action> getAllActionsForEquippedItem(Actor performer, Square square) {
 
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 
 		if (isFloorObject) {
 			return actions;
@@ -2463,8 +2466,8 @@ public class GameObject
 	}
 
 	@Override
-	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
-		ArrayList<Object> result = new ArrayList<Object>(Object.class);
+	public CopyOnWriteArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
+		CopyOnWriteArrayList<Object> result = new CopyOnWriteArrayList<Object>(Object.class);
 		result.add(name + " " + highLevelStats.get(statType).value);
 		if (enhancement != null && enhancement.highLevelStats.get(statType).value != 0) {
 			result.add(TextUtils.NewLine.NEW_LINE);
@@ -2725,8 +2728,9 @@ public class GameObject
 
 	}
 
-	public ArrayList<GameObject> getSurroundingGameObjects() {
-		ArrayList<GameObject> surroundingGameObjects = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> getSurroundingGameObjects() {
+		CopyOnWriteArrayList<GameObject> surroundingGameObjects = new CopyOnWriteArrayList<GameObject>(
+				GameObject.class);
 
 		Square squareToLeft = this.lastSquare.getSquareToLeftOf();
 		if (squareToLeft != null) {
@@ -2775,7 +2779,7 @@ public class GameObject
 
 	}
 
-	public boolean hasActiveEffectOfType(Class<EffectBurn> type) {
+	public boolean hasActiveEffectOfType(Class<?> type) {
 		for (Effect effect : this.activeEffectsOnGameObject) {
 			if (effect.getClass().isAssignableFrom(type)) {
 				return true;

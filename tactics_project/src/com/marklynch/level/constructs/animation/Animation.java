@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.animation;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
@@ -74,7 +74,7 @@ public abstract class Animation {
 	public OnCompletionListener onCompletionListener;
 
 	public int keyFrameIndex = 0;
-	public ArrayList<KeyFrame> keyFrames = new ArrayList<KeyFrame>();
+	public CopyOnWriteArrayList<KeyFrame> keyFrames = new CopyOnWriteArrayList<KeyFrame>();
 	public Square[] targetSquares;
 	public Square targetSquare;
 	public GameObject projectileObject;

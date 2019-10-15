@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.mainmenu;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
@@ -52,11 +52,11 @@ public class MainMenu implements Draggable, Scrollable {
 	int pixelToZoomOnX;
 	int pixelToZoomOnY;
 
-	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> buttons = new CopyOnWriteArrayList<LevelButton>();
 
-	public ArrayList<Link> logLinks = new ArrayList<Link>();
-	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
-	public ArrayList<Link> objectiveLinks = new ArrayList<Link>();
+	public CopyOnWriteArrayList<Link> logLinks = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> conversationLinks = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> objectiveLinks = new CopyOnWriteArrayList<Link>();
 
 	public static Texture textureMainMenu;
 

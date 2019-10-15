@@ -17,7 +17,7 @@ public class Conversation {
 	static float x2 = width;
 	static float y2 = Game.windowHeight - bottomMargin;
 
-	// ArrayList<ConversationPart> conversationParts;
+	// CopyOnWriteArrayList<ConversationPart> conversationParts;
 	public ConversationPart openingConversationPart;
 	public ConversationPart currentConversationPart;
 	public GameObject originalConversationTarget;

@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.journal;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -14,7 +14,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 
 @SuppressWarnings("serial")
-public class AreaList extends ArrayList<Quest> {
+public class AreaList extends CopyOnWriteArrayList<Quest> {
 	public static Area town;
 	public static Area townForest;
 	public static Area innerTownForest;

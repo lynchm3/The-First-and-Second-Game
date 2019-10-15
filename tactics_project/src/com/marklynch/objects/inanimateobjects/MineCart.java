@@ -9,11 +9,11 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.utils.UpdatableGameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class MineCart extends GameObject implements UpdatableGameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	public Direction direction;
 
 	public MineCart() {
@@ -48,7 +48,7 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 
 		this.killOldPrimaryAnimation();
 
-		ArrayList<SquareAndDirection> squaresForAnimation = new ArrayList<SquareAndDirection>(SquareAndDirection.class);
+		CopyOnWriteArrayList<SquareAndDirection> squaresForAnimation = new CopyOnWriteArrayList<SquareAndDirection>(SquareAndDirection.class);
 
 		SquareAndDirection currentSquareAndDirection = new SquareAndDirection();
 		currentSquareAndDirection.direction = this.direction;
@@ -71,8 +71,8 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 			}
 
 			this.direction = squaresForAnimation.get(squaresForAnimation.size() - 1).direction;
-			for (final GameObject gameObject : (ArrayList<GameObject>) this.squareGameObjectIsOn.inventory.gameObjects
-					.clone()) {
+			for (final GameObject gameObject : (CopyOnWriteArrayList<GameObject>) this.squareGameObjectIsOn.inventory.gameObjects
+					) {
 
 				if (gameObject != this && (gameObject.isFloorObject || !gameObject.moveable))
 					continue;
@@ -101,8 +101,8 @@ public class MineCart extends GameObject implements UpdatableGameObject {
 //							}
 
 							public void pushShitInTheWay() {
-								for (GameObject gameObject : (ArrayList<GameObject>) this.targetSquares[keyFrameIndex].inventory.gameObjects
-										.clone()) {
+								for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) this.targetSquares[keyFrameIndex].inventory.gameObjects
+										) {
 
 									if (gameObject.moveable == false)
 										continue;

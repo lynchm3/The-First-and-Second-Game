@@ -4,7 +4,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.RockGolem;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class AIRoutineForRockGolem extends AIRoutine {
 
@@ -85,7 +85,7 @@ public class AIRoutineForRockGolem extends AIRoutine {
 	}
 
 	public void addAllToAttackersList() {
-		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(0, this.actor.sight);
+		CopyOnWriteArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(0, this.actor.sight);
 		for (Square square : squares) {
 			if (this.actor.canSeeSquare(square)) {
 				Actor actorOnSquare = (Actor) square.inventory.getGameObjectOfClass(Actor.class);

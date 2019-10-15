@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -105,7 +105,7 @@ public class ActionDigging extends Action {
 			Game.level.logOnScreen(
 					new ActivityLog(new Object[] { performer, " dug up ", targetGameObject, " with ", shovel }));
 
-		for (GameObject buriedGamObject : (ArrayList<GameObject>) targetGameObject.inventory.gameObjects.clone()) {
+		for (GameObject buriedGamObject : (CopyOnWriteArrayList<GameObject>) targetGameObject.inventory.gameObjects) {
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 				Level.addSecondaryAnimation(new AnimationTake(buriedGamObject, performer,
@@ -125,7 +125,7 @@ public class ActionDigging extends Action {
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
 			} else {
-				trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+				trespassingCheck(performer, performer.squareGameObjectIsOn);
 			}
 		}
 

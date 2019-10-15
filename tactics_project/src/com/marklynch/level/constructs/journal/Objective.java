@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.journal;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -16,7 +16,7 @@ public class Objective {// implements DestructionListener {
 	public Square square;
 	public boolean showMarker = true;
 	public float width;
-	public ArrayList<Link> links;
+	public CopyOnWriteArrayList<Link> links;
 	public Texture texture;
 	// public boolean objectiveDestroyed = false;
 	public boolean objectiveDestroyedAndWitnessed = false;

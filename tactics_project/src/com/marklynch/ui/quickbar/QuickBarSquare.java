@@ -56,7 +56,7 @@ public class QuickBarSquare extends LevelButton implements Draggable, Scrollable
 			QuadUtils.drawQuad(Color.WHITE, x1 + 8, y1 + 4, x1 + 20, y1 + 24);
 			TextUtils.printTextWithImages(x1 + 8, y1 + 4, Integer.MAX_VALUE, false, null, Color.BLACK, 1f, hotkey);
 		}
-		// (float posX, float posY, float maxWidth, boolean wrap, ArrayList<Link> links,
+		// (float posX, float posY, float maxWidth, boolean wrap, CopyOnWriteArrayList<Link> links,
 		// Color defaultColor, Object... contents)
 	}
 

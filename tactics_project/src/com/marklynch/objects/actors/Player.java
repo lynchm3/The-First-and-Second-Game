@@ -29,7 +29,7 @@ import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.popups.Notification;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
@@ -38,7 +38,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class Player extends Human {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public static AIPath playerPathToMouse = null;
 	public static AIPath playerPathToMove = null;
@@ -49,8 +49,8 @@ public class Player extends Human {
 	public static float xp;
 	public static float xpThisLevel;
 	public static float xpPerLevel = 55;
-	public transient ArrayList<Square> squaresVisibleToPlayer = new ArrayList<Square>(Square.class);
-	public transient ArrayList<Square> squaresPlayerCanCastTo = new ArrayList<Square>(Square.class);
+	public transient CopyOnWriteArrayList<Square> squaresVisibleToPlayer = new CopyOnWriteArrayList<Square>(Square.class);
+	public transient CopyOnWriteArrayList<Square> squaresPlayerCanCastTo = new CopyOnWriteArrayList<Square>(Square.class);
 
 	public transient long lastUpdateRealtime = 0;
 
@@ -335,7 +335,7 @@ public class Player extends Human {
 		double y1 = square.yInGrid;
 
 		// for (int i = sight; i > 0; i--) {
-		ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistanceFromSquare(sight, square);
+		CopyOnWriteArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistanceFromSquare(sight, square);
 		for (Point point : furthestVisiblePoints) {
 			markVisibleSquaresInLineTo(x1 + 0.5d, y1 + 0.5d, point.getX() + 0.5d, point.getY() + 0.5d);
 		}
@@ -343,7 +343,7 @@ public class Player extends Human {
 
 		// Awkward corner squares (the inner corner ones that u cant tecnically
 		// see)
-		ArrayList<Square> awkwardSquaresToMakeVisible = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Square> awkwardSquaresToMakeVisible = new CopyOnWriteArrayList<Square>(Square.class);
 		for (Square potentiallyVIsibleSquare : this.getAllSquaresWithinDistance(0, sight, square)) {
 
 			if (potentiallyVIsibleSquare.visibleToPlayer)

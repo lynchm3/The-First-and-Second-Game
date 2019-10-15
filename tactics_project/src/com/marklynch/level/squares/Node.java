@@ -1,13 +1,13 @@
 package com.marklynch.level.squares;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 
 import com.marklynch.Game;
 import com.marklynch.data.Idable;
 import com.marklynch.level.Level;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Utils.Point;
 
 public class Node implements Comparable<Node>, Idable {
@@ -28,10 +28,10 @@ public class Node implements Comparable<Node>, Idable {
 	public final int xInGrid;
 	public final int yInGrid;
 
-	public ArrayList<Node> neighbors = new ArrayList<Node>(Node.class);
+	public CopyOnWriteArrayList<Node> neighbors = new CopyOnWriteArrayList<Node>(Node.class);
 
-	public HashMap<Node, Integer> costToNeighbors;
-	private ArrayList<Square> squares = new ArrayList<Square>(Square.class);
+	public ConcurrentHashMap<Node, Integer> costToNeighbors;
+	private CopyOnWriteArrayList<Square> squares = new CopyOnWriteArrayList<Square>(Square.class);
 	// end path finding
 
 	public Node(String name, Square square) {
@@ -64,7 +64,7 @@ public class Node implements Comparable<Node>, Idable {
 
 	}
 
-//	public Node(String name, Square square, ArrayList<Square> squares) {
+//	public Node(String name, Square square, CopyOnWriteArrayList<Square> squares) {
 //
 //		this.id = Level.generateNewId(this);
 //		this.name = name;
@@ -105,7 +105,7 @@ public class Node implements Comparable<Node>, Idable {
 	public List getAllNeighbourNodesThatCanBeMovedTo(Actor actor, Square goalSquare) {
 		Game.getNeighborsThatCanBeMovedTo++;
 		Game.getAllNeighbourSquaresThatCanBeMovedTo++;
-		ArrayList<Node> squares = new ArrayList<Node>(Node.class);
+		CopyOnWriteArrayList<Node> squares = new CopyOnWriteArrayList<Node>(Node.class);
 
 		for (Node node : neighbors) {
 			if (node.includableInPath(actor, goalSquare)) {
@@ -138,7 +138,7 @@ public class Node implements Comparable<Node>, Idable {
 		}
 	}
 
-	public void setSquares(ArrayList<Square> squares) {
+	public void setSquares(CopyOnWriteArrayList<Square> squares) {
 		for (Square square : squares) {
 			addSquare(square);
 		}
@@ -155,7 +155,7 @@ public class Node implements Comparable<Node>, Idable {
 		return id;
 	}
 
-	public ArrayList<Square> getSquares() {
+	public CopyOnWriteArrayList<Square> getSquares() {
 		return squares;
 	}
 

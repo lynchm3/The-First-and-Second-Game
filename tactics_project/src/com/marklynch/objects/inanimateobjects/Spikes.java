@@ -7,12 +7,12 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.SwitchListener;
 import com.marklynch.objects.utils.UpdatableGameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Texture;
 
 public class Spikes extends GameObject implements SwitchListener, UpdatableGameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	public boolean spikesOut = true;
 	public Texture spikesOutImage1;
 	public Texture spikesOutImage2;
@@ -63,7 +63,7 @@ public class Spikes extends GameObject implements SwitchListener, UpdatableGameO
 		if (!spikesOut)
 			return;
 
-		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
+		for (final GameObject gameObject : (CopyOnWriteArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects) {
 
 			if (gameObject == this || gameObject.isFloorObject || gameObject.attackable == false)
 				continue;
@@ -83,8 +83,8 @@ public class Spikes extends GameObject implements SwitchListener, UpdatableGameO
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 		actions.add(new ActionMove(performer, squareGameObjectIsOn, true, true));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;

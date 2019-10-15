@@ -8,7 +8,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Searchable;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class ActionSearch extends Action {
 
@@ -39,7 +39,7 @@ public class ActionSearch extends Action {
 		if (Game.level.shouldLog(targetGameObject, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " searched ", targetGameObject }));
 
-		ArrayList<GameObject> gameObjectsToLoot = searchable.search();
+		CopyOnWriteArrayList<GameObject> gameObjectsToLoot = searchable.search();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 
 			if (Game.level.shouldLog(gameObjectToLoot, performer))
@@ -64,7 +64,7 @@ public class ActionSearch extends Action {
 
 		if (!legal) {
 
-			ArrayList<GameObject> stolenObjects = new ArrayList<GameObject>(GameObject.class);
+			CopyOnWriteArrayList<GameObject> stolenObjects = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 			for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 				if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer) {
 					stolenObjects.add(gameObjectToLoot);

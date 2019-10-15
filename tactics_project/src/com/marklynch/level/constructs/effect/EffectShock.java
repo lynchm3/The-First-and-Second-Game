@@ -9,7 +9,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
@@ -18,7 +18,7 @@ public class EffectShock extends Effect {
 
 	public static Texture electricityTexture = getGlobalImage("electricity.png", false);
 
-	ArrayList<Electricity> electricities = new ArrayList<Electricity>(Electricity.class);
+	CopyOnWriteArrayList<Electricity> electricities = new CopyOnWriteArrayList<Electricity>(Electricity.class);
 
 	public EffectShock() {
 	}
@@ -58,7 +58,7 @@ public class EffectShock extends Effect {
 		// If in world (not in inventory)
 		Square squareTargetIsOn = target.squareGameObjectIsOn;
 		if (squareTargetIsOn != null) {
-			ArrayList<Square> adjacentSquares = target.getAllSquaresWithinDistance(0, 1);
+			CopyOnWriteArrayList<Square> adjacentSquares = target.getAllSquaresWithinDistance(0, 1);
 			for (Square adjacentSquare : adjacentSquares) {
 				if (adjacentSquare.inventory.containsGameObjectWithTemplateId(Templates.WATER.templateId)) {
 					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {

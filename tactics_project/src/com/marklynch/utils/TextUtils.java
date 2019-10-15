@@ -1,6 +1,6 @@
 package com.marklynch.utils;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Arrays;
 
 import org.lwjgl.util.Point;
@@ -36,14 +36,14 @@ public class TextUtils {
 	public final static String splitRegex = "(?<=[\\p{Punct}\\p{Space}|\\p{Space}\\p{Punct}|\\p{Punct}|\\p{Space}])";
 
 	public static float[] getDimensions(float maxWidth, Object... contents) {
-		return getDimensions(new ArrayList<Object>(Arrays.asList(contents)), maxWidth);
+		return getDimensions(new CopyOnWriteArrayList<Object>(Arrays.asList(contents)), maxWidth);
 	}
 
 	public static float[] getDimensions(Object[] contents, float maxWidth) {
-		return getDimensions(new ArrayList<Object>(Arrays.asList(contents)), maxWidth);
+		return getDimensions(new CopyOnWriteArrayList<Object>(Arrays.asList(contents)), maxWidth);
 	}
 
-	public static float[] getDimensions(ArrayList<Object> contents, float maxWidth) {
+	public static float[] getDimensions(CopyOnWriteArrayList<Object> contents, float maxWidth) {
 
 		float[] dimensions = new float[2];
 		float offsetX = 0;
@@ -450,17 +450,17 @@ public class TextUtils {
 
 	}
 
-	public static ArrayList<Link> getLinks(boolean thisVariableDoesNothing, Object... contents) {
-		return getLinks(new ArrayList<Object>(Arrays.asList(contents)));
+	public static CopyOnWriteArrayList<Link> getLinks(boolean thisVariableDoesNothing, Object... contents) {
+		return getLinks(new CopyOnWriteArrayList<Object>(Arrays.asList(contents)));
 	}
 
-	public static ArrayList<Link> getLinks(Object[] contents) {
-		return getLinks(new ArrayList<Object>(Arrays.asList(contents)));
+	public static CopyOnWriteArrayList<Link> getLinks(Object[] contents) {
+		return getLinks(new CopyOnWriteArrayList<Object>(Arrays.asList(contents)));
 	}
 
-	public static ArrayList<Link> getLinks(ArrayList<Object> contents) {
+	public static CopyOnWriteArrayList<Link> getLinks(CopyOnWriteArrayList<Object> contents) {
 
-		ArrayList<Link> links = new ArrayList<Link>();
+		CopyOnWriteArrayList<Link> links = new CopyOnWriteArrayList<Link>();
 		for (Object content : contents) {
 			if (content instanceof MapMarker) {
 				GameObject gameObject = (GameObject) content;
@@ -510,9 +510,9 @@ public class TextUtils {
 
 	}
 
-	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, ArrayList<Link> links,
+	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, CopyOnWriteArrayList<Link> links,
 			Color defaultColor, float imageAlpha, Object... contents) {
-		printTextWithImages(new ArrayList<Object>(Arrays.asList(contents)), posX, posY, maxWidth, wrap, defaultColor,
+		printTextWithImages(new CopyOnWriteArrayList<Object>(Arrays.asList(contents)), posX, posY, maxWidth, wrap, defaultColor,
 				imageAlpha, links);
 	}
 
@@ -520,8 +520,8 @@ public class TextUtils {
 		public static final NewLine NEW_LINE = new NewLine();
 	}
 
-	public static void printTextWithImages(ArrayList<Object> contents, float posX, float posY, float maxWidth,
-			boolean wrap, Color defaultColor, float imageAlpha, ArrayList<Link> links) {
+	public static void printTextWithImages(CopyOnWriteArrayList<Object> contents, float posX, float posY, float maxWidth,
+			boolean wrap, Color defaultColor, float imageAlpha, CopyOnWriteArrayList<Link> links) {
 
 		if (contents == null)
 			return;

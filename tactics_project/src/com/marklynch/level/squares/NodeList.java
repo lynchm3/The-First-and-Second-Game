@@ -5,7 +5,7 @@ import java.util.Arrays;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.area.town.AreaTown;
 import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
@@ -13,7 +13,7 @@ import com.marklynch.utils.Utils.Point;
 
 public class NodeList {
 
-	public static ArrayList<Node> nodes = new ArrayList<Node>(Node.class);
+	public static CopyOnWriteArrayList<Node> nodes = new CopyOnWriteArrayList<Node>(Node.class);
 	// Town
 	public static Node townShopInner; // 11,4
 	public static Node townShopOuter; // 5,4
@@ -123,9 +123,9 @@ public class NodeList {
 				new Point(47, 34), new Point(49, 36));
 		nodes.add(wallHouseFireplace);
 
-		ArrayList<Square> wallHouseFalseWallSquares = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Square> wallHouseFalseWallSquares = new CopyOnWriteArrayList<Square>(Square.class);
 		wallHouseFalseWallSquares.addAll(
-				new ArrayList<Square>(Square.class, Arrays.asList(QuestBetweenTheWalls.pathBetweenTheWalls.squares)));
+				new CopyOnWriteArrayList<Square>(Square.class, Arrays.asList(QuestBetweenTheWalls.pathBetweenTheWalls.squares)));
 		wallHouseFalseWallSquares.addAll(QuestBetweenTheWalls.hiddenRoom.squares);
 		wallHouseFalseWall = new Node("Walls House Secret", squares[AreaTown.posX + 52][AreaTown.posY + 32]); // 52,27
 		wallHouseFalseWall.setSquares(wallHouseFalseWallSquares);

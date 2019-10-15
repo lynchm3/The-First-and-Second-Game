@@ -1,7 +1,7 @@
 package com.marklynch.editor;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
@@ -21,14 +21,14 @@ import com.marklynch.utils.Texture;
 
 public class AttributeSelectionWindow<T> {
 
-	ArrayList<T> objects;
-	ArrayList<T> selectedObjects = new ArrayList<T>();
-	public ArrayList<SelectionWindowButton> buttons = new ArrayList<SelectionWindowButton>();
+	CopyOnWriteArrayList<T> objects;
+	CopyOnWriteArrayList<T> selectedObjects = new CopyOnWriteArrayList<T>();
+	public CopyOnWriteArrayList<SelectionWindowButton> buttons = new CopyOnWriteArrayList<SelectionWindowButton>();
 	public boolean multi = false;
 	public Editor editor;
 	public String title;
 
-	public AttributeSelectionWindow(final ArrayList<T> objects, boolean multi, final Editor editor,
+	public AttributeSelectionWindow(final CopyOnWriteArrayList<T> objects, boolean multi, final Editor editor,
 			final Object ownerOfAttribute, String title) {
 		this.multi = multi;
 		this.objects = objects;
@@ -55,9 +55,9 @@ public class AttributeSelectionWindow<T> {
 						Field field = objectClass.getField(editor.attributeToEditName);
 						Class type;
 
-						ArrayList arrayList = null;
-						if (field.getType().isAssignableFrom(ArrayList.class)) {
-							arrayList = (ArrayList) field.get(editor.objectToEdit);
+						CopyOnWriteArrayList arrayList = null;
+						if (field.getType().isAssignableFrom(CopyOnWriteArrayList.class)) {
+							arrayList = (CopyOnWriteArrayList) field.get(editor.objectToEdit);
 							type = arrayList.get(editor.attributeToEditIndex).getClass();
 						} else {
 							type = field.getType();

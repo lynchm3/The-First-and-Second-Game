@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.power;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.util.Point;
 
@@ -34,7 +34,7 @@ public class PowerUnlock extends Power {
 	@Override
 	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
 		source.setPrimaryAnimation(new AnimationPush(source, targetSquare, source.getPrimaryAnimation(), null));
-		ArrayList<GameObject> openables = targetSquare.inventory.getGameObjectsOfClass(Openable.class);
+		CopyOnWriteArrayList<GameObject> openables = targetSquare.inventory.getGameObjectsOfClass(Openable.class);
 		for (GameObject openable : openables) {
 			if (((Openable) openable).isLocked()) {
 				((Openable) openable).unlock();
@@ -45,7 +45,7 @@ public class PowerUnlock extends Power {
 	@Override
 	public void log(GameObject performer, Square targetSquare) {
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " used ", name }));
-		ArrayList<GameObject> openables = targetSquare.inventory.getGameObjectsOfClass(Openable.class);
+		CopyOnWriteArrayList<GameObject> openables = targetSquare.inventory.getGameObjectsOfClass(Openable.class);
 		for (GameObject openable : openables) {
 			if (((Openable) openable).isLocked()) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unlocked ", openable }));
@@ -55,7 +55,7 @@ public class PowerUnlock extends Power {
 
 	@Override
 	public boolean check(GameObject source, Square targetSquare) {
-		ArrayList<GameObject> openables = targetSquare.inventory.getGameObjectsOfClass(Openable.class);
+		CopyOnWriteArrayList<GameObject> openables = targetSquare.inventory.getGameObjectsOfClass(Openable.class);
 		for (GameObject openable : openables) {
 			if (((Openable) openable).isLocked()) {
 				return true;
@@ -76,8 +76,8 @@ public class PowerUnlock extends Power {
 	}
 
 	// @Override
-	// public ArrayList<Square> getAffectedSquares(Square target) {
-	// // ArrayList<Square> squares = new ArrayList<Square>();
+	// public CopyOnWriteArrayList<Square> getAffectedSquares(Square target) {
+	// // CopyOnWriteArrayList<Square> squares = new CopyOnWriteArrayList<Square>();
 	// return Actor.getAllSquaresWithinDistance(0, target);
 	//
 	// // for (int i = -5; i <= 5; i++) {

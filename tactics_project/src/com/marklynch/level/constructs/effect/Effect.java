@@ -7,7 +7,7 @@ import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.Stats;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.utils.DamageDealer;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
@@ -108,8 +108,8 @@ public abstract class Effect implements DamageDealer {
 	}
 
 	@Override
-	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
-		ArrayList<Object> result = new ArrayList<Object>(Object.class);
+	public CopyOnWriteArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
+		CopyOnWriteArrayList<Object> result = new CopyOnWriteArrayList<Object>(Object.class);
 		result.add(effectName + " " + highLevelStats.get(statType).value);
 		return result;
 	}

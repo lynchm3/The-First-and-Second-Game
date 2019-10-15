@@ -9,7 +9,7 @@ import com.marklynch.level.constructs.animation.primary.AnimationFallFromTheSky;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class SeesawPart extends PressurePlate {
 
@@ -71,7 +71,7 @@ public class SeesawPart extends PressurePlate {
 		if (up)
 			return;
 
-		for (final GameObject gameObject : (ArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects.clone()) {
+		for (final GameObject gameObject : (CopyOnWriteArrayList<GameObject>) squareGameObjectIsOn.inventory.gameObjects) {
 			if (gameObject.isFloorObject == false) {
 				gameObject.setPrimaryAnimation(new AnimationFall(gameObject, 1f, 0f, 400, null));
 

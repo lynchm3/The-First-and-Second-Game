@@ -9,12 +9,12 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.UpdatableGameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class SmallHidingPlace extends Searchable implements UpdatableGameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
-	public ArrayList<Actor> actorsHidingHere = new ArrayList<Actor>(Actor.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<Actor> actorsHidingHere = new CopyOnWriteArrayList<Actor>(Actor.class);
 	public GroupOfActors groupOfBuns;
 
 	public SmallHidingPlace() {
@@ -50,8 +50,8 @@ public class SmallHidingPlace extends Searchable implements UpdatableGameObject 
 	}
 
 	@Override
-	public ArrayList<GameObject> search() {
-		return (ArrayList<GameObject>) inventory.gameObjects.clone();
+	public CopyOnWriteArrayList<GameObject> search() {
+		return (CopyOnWriteArrayList<GameObject>) inventory.gameObjects;
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class SmallHidingPlace extends Searchable implements UpdatableGameObject 
 		if (destroyed) {
 
 			if (actorsHidingHere.size() > 0) {
-				ArrayList<Actor> actorsToRemove = (ArrayList<Actor>) actorsHidingHere.clone();
+				CopyOnWriteArrayList<Actor> actorsToRemove = (CopyOnWriteArrayList<Actor>) actorsHidingHere;
 
 				for (Actor gameObjectHidingHere : actorsToRemove) {
 					if (attacker instanceof GameObject) {
@@ -125,7 +125,7 @@ public class SmallHidingPlace extends Searchable implements UpdatableGameObject 
 				actorsHidingHere.clear();
 			} else {
 				if (attacker != null) {
-					ArrayList<Square> adjacentSquares = this.getAllSquaresWithinDistance(0, 1);
+					CopyOnWriteArrayList<Square> adjacentSquares = this.getAllSquaresWithinDistance(0, 1);
 					for (Square adjacentSquare : adjacentSquares) {
 						SmallHidingPlace hidingPlace = (SmallHidingPlace) adjacentSquare.inventory
 								.getGameObjectOfClass(SmallHidingPlace.class);

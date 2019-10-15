@@ -3,7 +3,7 @@ package com.marklynch.utils;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.opengl.GL11;
 
@@ -29,7 +29,7 @@ public class CircleUtils {
 	}
 
 	public static void drawCircleWithinBounds(Color color, double radius, double centerX, double centerY,
-			ArrayList<Square> squares) {
+			CopyOnWriteArrayList<Square> squares) {
 
 		glActiveTexture(GL_TEXTURE0);
 		Game.level.gameCursor.imageTexture2.bind();
@@ -38,7 +38,7 @@ public class CircleUtils {
 		GL11.glLineWidth(10f);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4f(color.r, color.g, color.b, color.a);
-		ArrayList<Point> pointsInCurrentCurve = new ArrayList<Point>();
+		CopyOnWriteArrayList<Point> pointsInCurrentCurve = new CopyOnWriteArrayList<Point>();
 		for (int i = 0; i < 361; i++) {
 			double degInRad = Math.toRadians(i);
 			double xToDrawNow = Math.cos(degInRad) * radius + centerX;

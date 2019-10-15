@@ -5,43 +5,43 @@ import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.armor.BodyArmor;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
 public class Human extends Actor {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public static Texture hair1 = ResourceUtils.getGlobalImage("hair_1.png", true);
 	public static Texture hair2 = ResourceUtils.getGlobalImage("hair_2.png", true);
-	public static ArrayList<Texture> hairTextures;
+	public static CopyOnWriteArrayList<Texture> hairTextures;
 
 	public static Color hairColor1 = Color.BLACK;
 	public static Color hairColor2 = Color.WHITE;
-	public static ArrayList<Color> hairColors;
+	public static CopyOnWriteArrayList<Color> hairColors;
 
-	public static ArrayList<Texture> helmetTextures;
+	public static CopyOnWriteArrayList<Texture> helmetTextures;
 	public static Texture helmet1 = ResourceUtils.getGlobalImage("helmet_1.png", true);
 	public static Texture helmet2 = ResourceUtils.getGlobalImage("helmet_2.png", true);
 	public static Color helmetColor1 = Color.BLACK;
 	public static Color helmetColor2 = Color.WHITE;
-	public static ArrayList<Color> helmetColors;
+	public static CopyOnWriteArrayList<Color> helmetColors;
 
-	public static ArrayList<BodyArmor> bodyArmors;
+	public static CopyOnWriteArrayList<BodyArmor> bodyArmors;
 	public static Color bodyArmorColor1 = new Color(170, 193, 201);
 	public static Color bodyArmorColor2 = Color.WHITE;
 	public static Color bodyArmorColor3 = Color.RED;
 	public static Color bodyArmorColor4 = Color.GREEN;
 	public static Color bodyArmorColor5 = Color.BLUE;
 
-	public static ArrayList<Texture> legArmorTextures;
+	public static CopyOnWriteArrayList<Texture> legArmorTextures;
 	public static Texture legArmor1 = ResourceUtils.getGlobalImage("leg_armor_1.png", true);
 	public static Texture legArmor2 = ResourceUtils.getGlobalImage("leg_armor_2.png", true);
 	public static Color legArmorColor1 = Color.BLACK;
 	public static Color legArmorColor2 = Color.WHITE;
-	public static ArrayList<Color> legArmorColors;
+	public static CopyOnWriteArrayList<Color> legArmorColors;
 
 	public Human() {
 		torsoImageTexture = ResourceUtils.getGlobalImage("hero_upper.png", true);
@@ -58,34 +58,34 @@ public class Human extends Actor {
 	public static void loadStaticImages() {
 
 		// Hair
-		hairTextures = new ArrayList<Texture>(Texture.class);
+		hairTextures = new CopyOnWriteArrayList<Texture>(Texture.class);
 		hairTextures.add(hair1);
 		hairTextures.add(hair2);
 
-		hairColors = new ArrayList<Color>(Color.class);
+		hairColors = new CopyOnWriteArrayList<Color>(Color.class);
 		hairColors.add(hairColor1);
 		hairColors.add(hairColor2);
 
 		// Helmet
 
-		helmetTextures = new ArrayList<Texture>(Texture.class);
+		helmetTextures = new CopyOnWriteArrayList<Texture>(Texture.class);
 		helmetTextures.add(helmet1);
 		helmetTextures.add(helmet2);
 
-		helmetColors = new ArrayList<Color>(Color.class);
+		helmetColors = new CopyOnWriteArrayList<Color>(Color.class);
 		helmetColors.add(helmetColor1);
 		helmetColors.add(helmetColor2);
 
 		// Body Armor
-		bodyArmors = new ArrayList<BodyArmor>(BodyArmor.class);
+		bodyArmors = new CopyOnWriteArrayList<BodyArmor>(BodyArmor.class);
 
 		// Leg Armor
 
-		legArmorTextures = new ArrayList<Texture>(Texture.class);
+		legArmorTextures = new CopyOnWriteArrayList<Texture>(Texture.class);
 		legArmorTextures.add(legArmor1);
 		legArmorTextures.add(legArmor2);
 
-		legArmorColors = new ArrayList<Color>(Color.class);
+		legArmorColors = new CopyOnWriteArrayList<Color>(Color.class);
 		legArmorColors.add(legArmorColor1);
 		legArmorColors.add(legArmorColor2);
 

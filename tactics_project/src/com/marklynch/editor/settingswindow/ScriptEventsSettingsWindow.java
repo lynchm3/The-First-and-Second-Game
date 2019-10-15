@@ -1,6 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
@@ -49,7 +49,7 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				ArrayList<Class> classes = new ArrayList<Class>();
+				CopyOnWriteArrayList<Class> classes = new CopyOnWriteArrayList<Class>();
 				classes.add(ScriptEventEndLevel.class);
 				classes.add(ScriptEventGroup.class);
 				classes.add(ScriptEventInlineSpeech.class);

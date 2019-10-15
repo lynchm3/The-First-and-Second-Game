@@ -1,7 +1,7 @@
 package com.marklynch.level.constructs.inventory;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.marklynch.Game;
 import com.marklynch.actions.Action;
@@ -32,7 +32,7 @@ import com.marklynch.ui.TextBoxHolder;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
@@ -75,12 +75,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public static boolean sortBackwards = false;
 	public int squareGridWidthInSquares = 5;
-	public transient ArrayList<InventorySquare> inventorySquares = new ArrayList<InventorySquare>(
+	public transient CopyOnWriteArrayList<InventorySquare> inventorySquares = new CopyOnWriteArrayList<InventorySquare>(
 			InventorySquare.class);
-	public ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(GameObject.class);
-	public ArrayList<GameObject> floorObjects = new ArrayList<GameObject>(GameObject.class);
-	public ArrayList<GameObject> nonFloorObjects = new ArrayList<GameObject>(GameObject.class);
-	public ArrayList<GameObject> filteredGameObjects = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> gameObjects = new CopyOnWriteArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> floorObjects = new CopyOnWriteArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> nonFloorObjects = new CopyOnWriteArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> filteredGameObjects = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public transient boolean isOpen = false;
 	public transient float squaresX = 0;
@@ -171,9 +171,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	// Quick sell button
 	public static LevelButton buttonQuickSell;
 
-	public static ArrayList<Button> buttons;
-	public static ArrayList<Button> buttonsSort;
-	public static ArrayList<Button> buttonsFilter;
+	public static CopyOnWriteArrayList<Button> buttons;
+	public static CopyOnWriteArrayList<Button> buttonsSort;
+	public static CopyOnWriteArrayList<Button> buttonsFilter;
 
 	public InventoryParent parent;
 	public static GroundDisplay groundDisplay;
@@ -225,9 +225,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			Level.activeTextBox = null;
 		}
 		// Game.level.player.inventory.textBoxSearch.clearText();
-		buttons = new ArrayList<Button>(Button.class);
-		buttonsSort = new ArrayList<Button>(Button.class);
-		buttonsFilter = new ArrayList<Button>(Button.class);
+		buttons = new CopyOnWriteArrayList<Button>(Button.class);
+		buttonsSort = new CopyOnWriteArrayList<Button>(Button.class);
+		buttonsFilter = new CopyOnWriteArrayList<Button>(Button.class);
 
 		buttonSortAlphabetically = new LevelButton(sortButtonX, 100f, sortButtonWidth, 30f, "end_turn_button.png",
 				"end_turn_button.png", stringSortAlphabetically, true, true, inventoryAreaColor, Color.WHITE,
@@ -357,7 +357,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			@Override
 			public void click() {
 
-				ArrayList<Action> actionsToPerform = new ArrayList<Action>(Action.class);
+				CopyOnWriteArrayList<Action> actionsToPerform = new CopyOnWriteArrayList<Action>(Action.class);
 				if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
 					for (GameObject gameObject : otherInventory.gameObjects) {
 						Action action = new ActionTakeItems(Game.level.player,
@@ -505,11 +505,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		if (Game.level.openInventories.contains(this))
 			Game.level.openInventories.remove(this);
-		this.inventorySquares = new ArrayList<InventorySquare>(InventorySquare.class);
+		this.inventorySquares = new CopyOnWriteArrayList<InventorySquare>(InventorySquare.class);
 		this.groundDisplay = null;
 		if (otherInventory != null && otherInventory != this) {
 			otherInventory.isOpen = false;
-			this.otherInventory.inventorySquares = new ArrayList<InventorySquare>(InventorySquare.class);
+			this.otherInventory.inventorySquares = new CopyOnWriteArrayList<InventorySquare>(InventorySquare.class);
 			this.otherInventory = null;
 		}
 		Level.activeTextBox = null;
@@ -857,14 +857,14 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return gameObjects.size();
 	}
 
-	public ArrayList<GameObject> getGameObjects() {
+	public CopyOnWriteArrayList<GameObject> getGameObjects() {
 		return gameObjects;
 	}
 
-	public HashMap<Integer, ArrayList<GameObject>> legalStacks = new HashMap<Integer, ArrayList<GameObject>>();
-	public HashMap<Integer, ArrayList<GameObject>> illegalStacks = new HashMap<Integer, ArrayList<GameObject>>();
-	public HashMap<Integer, ArrayList<GameObject>> equippedStacks = new HashMap<Integer, ArrayList<GameObject>>();
-	public ArrayList<ArrayList<GameObject>> allStacks = new ArrayList<ArrayList<GameObject>>(null);
+	public ConcurrentHashMap<Integer, CopyOnWriteArrayList<GameObject>> legalStacks = new ConcurrentHashMap<Integer, CopyOnWriteArrayList<GameObject>>();
+	public ConcurrentHashMap<Integer, CopyOnWriteArrayList<GameObject>> illegalStacks = new ConcurrentHashMap<Integer, CopyOnWriteArrayList<GameObject>>();
+	public ConcurrentHashMap<Integer, CopyOnWriteArrayList<GameObject>> equippedStacks = new ConcurrentHashMap<Integer, CopyOnWriteArrayList<GameObject>>();
+	public CopyOnWriteArrayList<CopyOnWriteArrayList<GameObject>> allStacks = new CopyOnWriteArrayList<CopyOnWriteArrayList<GameObject>>(null);
 
 	private Object[] LOOT_ALL = new Object[] { new StringWithColor("[SPACE] LOOT ALL", Color.WHITE) };
 	private Object[] STEAL_ALL = new Object[] { new StringWithColor("[SPACE] STEAL ALL", Color.RED) };
@@ -876,7 +876,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		equippedStacks.clear();
 		allStacks.clear();
 
-		ArrayList<GameObject> toUse = gameObjects;
+		CopyOnWriteArrayList<GameObject> toUse = gameObjects;
 		if (parent instanceof GameObject)
 			toUse = filteredGameObjects;
 
@@ -892,7 +892,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				if (equippedStacks.containsKey(gameObject.templateId)) {
 					equippedStacks.get(gameObject.templateId).add(gameObject);
 				} else {
-					ArrayList<GameObject> newStack = new ArrayList<GameObject>(GameObject.class);
+					CopyOnWriteArrayList<GameObject> newStack = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 					newStack.add(gameObject);
 					equippedStacks.put(gameObject.templateId, newStack);
 					allStacks.add(newStack);
@@ -901,7 +901,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				if (legalStacks.containsKey(gameObject.templateId)) {
 					legalStacks.get(gameObject.templateId).add(gameObject);
 				} else {
-					ArrayList<GameObject> newStack = new ArrayList<GameObject>(GameObject.class);
+					CopyOnWriteArrayList<GameObject> newStack = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 					newStack.add(gameObject);
 					legalStacks.put(gameObject.templateId, newStack);
 					allStacks.add(newStack);
@@ -911,7 +911,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				if (illegalStacks.containsKey(gameObject.templateId)) {
 					illegalStacks.get(gameObject.templateId).add(gameObject);
 				} else {
-					ArrayList<GameObject> newStack = new ArrayList<GameObject>(GameObject.class);
+					CopyOnWriteArrayList<GameObject> newStack = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 					newStack.add(gameObject);
 					illegalStacks.put(gameObject.templateId, newStack);
 					allStacks.add(newStack);
@@ -927,7 +927,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		inventorySquares.clear();
 
-		for (ArrayList<GameObject> stack : allStacks) {
+		for (CopyOnWriteArrayList<GameObject> stack : allStacks) {
 			matchStackToSquare(stack);
 		}
 
@@ -945,7 +945,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	}
 
-	public void matchStackToSquare(ArrayList<GameObject> stack) {
+	public void matchStackToSquare(CopyOnWriteArrayList<GameObject> stack) {
 
 		if (this.parent == Game.level.player && stack.get(0) instanceof Gold)
 			return;
@@ -1091,7 +1091,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void removeGameObjecstWithTemplateId(int id) {
-		ArrayList<GameObject> toRemove = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<GameObject> toRemove = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.templateId == id) {
 				toRemove.add(gameObject);
@@ -1103,7 +1103,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void removeGameObjecsOfType(Class clazz) {
-		ArrayList<GameObject> toRemove = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<GameObject> toRemove = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		for (GameObject gameObject : gameObjects) {
 			if (clazz.isInstance(gameObject)) {
 				toRemove.add(gameObject);
@@ -1161,7 +1161,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public boolean hasGameObjectsThatCanContainOtherObjects() {
-		// TODO Auto-generated method stubArrayList<GameObject>
+		// TODO Auto-generated method stubCopyOnWriteArrayList<GameObject>
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.canContainOtherObjects)
 				return true;
@@ -1178,8 +1178,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return null;
 	}
 
-	public ArrayList<GameObject> getGameObjectsOfClass(Class clazz) {
-		ArrayList<GameObject> gameObjectsToReturn = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> getGameObjectsOfClass(Class clazz) {
+		CopyOnWriteArrayList<GameObject> gameObjectsToReturn = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		for (GameObject gameObject : this.gameObjects) {
 			if (clazz.isInstance(gameObject)) {
 				gameObjectsToReturn.add(gameObject);
@@ -1188,8 +1188,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return gameObjectsToReturn;
 	}
 
-	public ArrayList<GameObject> getGameObjectsThatCanContainOtherObjects() {
-		ArrayList<GameObject> gameObjectsThatCanContainOtherObjects = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> getGameObjectsThatCanContainOtherObjects() {
+		CopyOnWriteArrayList<GameObject> gameObjectsThatCanContainOtherObjects = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.canContainOtherObjects)
 				gameObjectsThatCanContainOtherObjects.add(gameObject);
@@ -1722,7 +1722,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		// General rules for actors
-		ArrayList<String> weaponsSeenInInventory = new ArrayList<String>(String.class);
+		CopyOnWriteArrayList<String> weaponsSeenInInventory = new CopyOnWriteArrayList<String>(String.class);
 		Actor actor = null;
 		if (parent instanceof Actor)
 			actor = (Actor) parent;
@@ -1848,7 +1848,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public boolean checkIfPlayersArmorObsolete(Armor armor) {
 
-		ArrayList<GameObject> armorsOFSameTypeInInventory = Game.level.player.inventory
+		CopyOnWriteArrayList<GameObject> armorsOFSameTypeInInventory = Game.level.player.inventory
 				.getGameObjectsOfClass(armor.getClass());
 
 		for (GameObject armorOFSameTypeInInventory : armorsOFSameTypeInInventory) {

@@ -37,7 +37,7 @@ public class ActionRing extends Action {
 			Game.level.undoList.clear();
 		}
 
-		trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+		trespassingCheck(performer, performer.squareGameObjectIsOn);
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endPlayerTurn();

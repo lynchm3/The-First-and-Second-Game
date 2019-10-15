@@ -8,11 +8,11 @@ import com.marklynch.objects.armor.BodyArmor;
 import com.marklynch.objects.armor.LegArmor;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Guard extends Human {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public Shift shift;
 	public Square[] patrolSquares;

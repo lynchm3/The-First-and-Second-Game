@@ -1,6 +1,6 @@
 package com.marklynch.ui;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.utils.Color;
@@ -12,7 +12,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class ActivityLogger implements Draggable, Scrollable {
 
-	public transient ArrayList<ActivityLog> logs = new ArrayList<ActivityLog>();
+	public transient CopyOnWriteArrayList<ActivityLog> logs = new CopyOnWriteArrayList<ActivityLog>();
 
 	public float totalHeight = 0;
 	public final static float width = 300;

@@ -90,7 +90,7 @@ public class ActionFishingCompleted extends Action {
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
 		} else {
-			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+			trespassingCheck(performer, performer.squareGameObjectIsOn);
 		}
 
 		if (performer.faction == Game.level.factions.player) {
@@ -118,7 +118,7 @@ public class ActionFishingCompleted extends Action {
 	public boolean checkRange() {
 		return true;
 
-		// ArrayList<GameObject> fishingRods =
+		// CopyOnWriteArrayList<GameObject> fishingRods =
 		// performer.inventory.getGameObjectsOfClass(FishingRod.class);
 		//
 		// for (GameObject fishingRod : fishingRods) {

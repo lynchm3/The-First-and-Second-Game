@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.animation.secondary;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.objects.inanimateobjects.GameObject;
@@ -25,7 +25,7 @@ public class AnimationTake extends SecondaryAnimation {
 
 	public float speed = 1f;
 
-	ArrayList<Line> trailLines = new ArrayList<Line>();
+	CopyOnWriteArrayList<Line> trailLines = new CopyOnWriteArrayList<Line>();
 
 	boolean reachedDestination = false;
 

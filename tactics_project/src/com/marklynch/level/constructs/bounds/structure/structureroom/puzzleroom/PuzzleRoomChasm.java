@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.bounds.structure.structureroom.StructureRo
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomChasm extends StructureRoom {
 	int posX;
@@ -16,7 +16,7 @@ public class PuzzleRoomChasm extends StructureRoom {
 	Square voidSquare;
 
 	public PuzzleRoomChasm(int posX, int posY) {
-		super("Chasm Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Chasm Room", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
@@ -25,7 +25,7 @@ public class PuzzleRoomChasm extends StructureRoom {
 
 		// Ledges
 		// 69,0
-		ArrayList<Square> ledges = new ArrayList<Square>(Square.class);// { Level.squares[posX + 69][posY + 0] };
+		CopyOnWriteArrayList<Square> ledges = new CopyOnWriteArrayList<Square>(Square.class);// { Level.squares[posX + 69][posY + 0] };
 
 		// Top
 		ledges.add(Level.squares[posX + 0][posY + 0]);

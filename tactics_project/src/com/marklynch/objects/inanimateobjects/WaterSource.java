@@ -3,11 +3,11 @@ package com.marklynch.objects.inanimateobjects;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class WaterSource extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	public Liquid liquid;
 
 	public WaterSource() {
@@ -33,8 +33,8 @@ public class WaterSource extends GameObject {
 		super.setInstances(gameObject);
 	}
 
-	public ArrayList<GameObject> search() {
-		return (ArrayList<GameObject>) inventory.gameObjects.clone();
+	public CopyOnWriteArrayList<GameObject> search() {
+		return (CopyOnWriteArrayList<GameObject>) inventory.gameObjects;
 	}
 
 	@Override

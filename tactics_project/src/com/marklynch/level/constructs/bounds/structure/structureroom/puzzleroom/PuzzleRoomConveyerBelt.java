@@ -10,7 +10,7 @@ import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.inanimateobjects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomConveyerBelt extends StructureRoom implements SwitchListener {
 
@@ -19,14 +19,14 @@ public class PuzzleRoomConveyerBelt extends StructureRoom implements SwitchListe
 	final static int totalWidthInSquares = 14;
 	final static int totalHeightInSquares = 8;
 
-	ArrayList<Square> extendedBridgeSquares = new ArrayList<Square>(Square.class);
+	CopyOnWriteArrayList<Square> extendedBridgeSquares = new CopyOnWriteArrayList<Square>(Square.class);
 
 	Square voidSquare;
 
-	ArrayList<ConveyerBelt> conveyerBelts = new ArrayList<ConveyerBelt>(ConveyerBelt.class);
+	CopyOnWriteArrayList<ConveyerBelt> conveyerBelts = new CopyOnWriteArrayList<ConveyerBelt>(ConveyerBelt.class);
 
 	public PuzzleRoomConveyerBelt(int posX, int posY) {
-		super("Bridge Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Bridge Room", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;

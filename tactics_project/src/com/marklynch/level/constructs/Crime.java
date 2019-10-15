@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.actions.Action;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Crime {
 
@@ -31,7 +31,7 @@ public class Crime {
 	public boolean reported;
 	public GameObject stolenItems[];
 	public TYPE type;
-	public ArrayList<GameObject> crimeListeners = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> crimeListeners = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public Crime(Actor performer, Actor visctim, TYPE type, GameObject... stolenItems) {
 		super();
@@ -42,7 +42,7 @@ public class Crime {
 		this.type = type;
 	}
 
-	public Crime(Action action, Actor performer, Actor visctim, TYPE type, ArrayList<GameObject> stolenItems) {
+	public Crime(Action action, Actor performer, Actor visctim, TYPE type, CopyOnWriteArrayList<GameObject> stolenItems) {
 		this(performer, visctim, type, stolenItems.toArray(new GameObject[stolenItems.size()]));
 	}
 

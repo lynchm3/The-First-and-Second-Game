@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Arrays;
 
 import com.marklynch.Game;
@@ -20,7 +20,7 @@ public class ActionSellItems extends VariableQtyAction {
 	GameObject[] objects;
 	Actor receiver;
 
-	public ActionSellItems(Actor performer, Actor receiver, ArrayList<GameObject> objects) {
+	public ActionSellItems(Actor performer, Actor receiver, CopyOnWriteArrayList<GameObject> objects) {
 		this(performer, receiver, objects.toArray(new GameObject[objects.size()]), false);
 	}
 
@@ -70,7 +70,7 @@ public class ActionSellItems extends VariableQtyAction {
 				receiver.addWitnessedCrime(crime);
 				if (Game.level.openInventories.size() > 0)
 					Game.level.openCloseInventory();
-				com.marklynch.utils.ArrayList<GameObject> stolenObjects = new com.marklynch.utils.ArrayList<GameObject>(
+				com.marklynch.utils.CopyOnWriteArrayList<GameObject> stolenObjects = new com.marklynch.utils.CopyOnWriteArrayList<GameObject>(
 						GameObject.class);
 				stolenObjects.add(object);
 				new ActionTalk(this.receiver, performer,

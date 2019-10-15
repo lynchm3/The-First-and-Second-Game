@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
@@ -8,7 +8,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.CircleUtils;
 import com.marklynch.utils.Color;
 
@@ -16,7 +16,7 @@ public class Sound {
 	public GameObject sourcePerformer;
 	public GameObject sourceObject;
 	public Square sourceSquare;
-	public ArrayList<Square> destinationSquares = new ArrayList<Square>(Square.class);
+	public CopyOnWriteArrayList<Square> destinationSquares = new CopyOnWriteArrayList<Square>(Square.class);
 	public float loudness;
 	public boolean legal;
 	public Class actionType;
@@ -31,7 +31,7 @@ public class Sound {
 		this.legal = legal;
 		this.actionType = action;
 
-		// destinationSquares = new ArrayList<Square>();
+		// destinationSquares = new CopyOnWriteArrayList<Square>();
 		createDestinationSounds();
 
 	}
@@ -94,37 +94,37 @@ public class Sound {
 		// ye..
 	}
 
-	HashMap<Square, AIPath> squareToPath = new HashMap<Square, AIPath>();
+	ConcurrentHashMap<Square, AIPath> squareToPath = new ConcurrentHashMap<Square, AIPath>();
 	int highestPathCostSeen;
 
 	public void createDestinationSounds() {
 
 		highestPathCostSeen = 0;
 		squareToPath.clear();
-		destinationSquares = new ArrayList<Square>(Square.class);
+		destinationSquares = new CopyOnWriteArrayList<Square>(Square.class);
 		// destinationSquares.clear();
 
 		Square currentSquare = this.sourceSquare;
 		this.destinationSquares.add(currentSquare);
 
-		ArrayList<Square> startPath = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Square> startPath = new CopyOnWriteArrayList<Square>(Square.class);
 		startPath.add(currentSquare);
-		squareToPath.put(currentSquare, new AIPath((ArrayList<Square>) startPath.clone(), 0, false));
+		squareToPath.put(currentSquare, new AIPath((CopyOnWriteArrayList<Square>) startPath, 0, false));
 
 		for (int i = 0; i <= highestPathCostSeen; i++) {
 			// get all paths with that cost
-			ArrayList<AIPath> pathsWithCurrentCost = new ArrayList<AIPath>(AIPath.class);
-			ArrayList<AIPath> pathsArrayList = new ArrayList<AIPath>(AIPath.class);
+			CopyOnWriteArrayList<AIPath> pathsWithCurrentCost = new CopyOnWriteArrayList<AIPath>(AIPath.class);
+			CopyOnWriteArrayList<AIPath> pathsCopyOnWriteArrayList = new CopyOnWriteArrayList<AIPath>(AIPath.class);
 			for (AIPath path : squareToPath.values()) {
-				pathsArrayList.add(path);
+				pathsCopyOnWriteArrayList.add(path);
 			}
-			for (int j = 0; j < pathsArrayList.size(); j++) {
-				if (pathsArrayList.get(j).travelCost == i)
-					pathsWithCurrentCost.add(pathsArrayList.get(j));
+			for (int j = 0; j < pathsCopyOnWriteArrayList.size(); j++) {
+				if (pathsCopyOnWriteArrayList.get(j).travelCost == i)
+					pathsWithCurrentCost.add(pathsCopyOnWriteArrayList.get(j));
 			}
 
 			for (int j = 0; j < pathsWithCurrentCost.size(); j++) {
-				ArrayList<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
+				CopyOnWriteArrayList<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
 				createDestinationSounds2(Direction.UP, squaresInThisPath, i);
 				createDestinationSounds2(Direction.RIGHT, squaresInThisPath, i);
 				createDestinationSounds2(Direction.DOWN, squaresInThisPath, i);
@@ -133,7 +133,7 @@ public class Sound {
 		}
 	}
 
-	public void createDestinationSounds2(Direction direction, ArrayList<Square> squaresInThisPath, int pathCost) {
+	public void createDestinationSounds2(Direction direction, CopyOnWriteArrayList<Square> squaresInThisPath, int pathCost) {
 
 		if (pathCost > loudness)
 			return;
@@ -164,7 +164,7 @@ public class Sound {
 		}
 
 		if (newSquare != null && !squaresInThisPath.contains(newSquare) && !squareToPath.containsKey(newSquare)) {
-			ArrayList<Square> newPathSquares = (ArrayList<Square>) squaresInThisPath.clone();
+			CopyOnWriteArrayList<Square> newPathSquares = (CopyOnWriteArrayList<Square>) squaresInThisPath;
 			newPathSquares.add(newSquare);
 			int newDistance = (int) (pathCost + newSquare.inventory.getSoundDampening());
 			if (newDistance > highestPathCostSeen)

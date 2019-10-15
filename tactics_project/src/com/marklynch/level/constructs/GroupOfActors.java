@@ -1,7 +1,7 @@
 package com.marklynch.level.constructs;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.data.Idable;
@@ -10,29 +10,29 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.GameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class GroupOfActors implements Idable {
 	public Long id;
 
 	public String name;
-	protected transient ArrayList<Actor> members = new ArrayList<Actor>(Actor.class);
+	protected transient CopyOnWriteArrayList<Actor> members = new CopyOnWriteArrayList<Actor>(Actor.class);
 	public transient Actor leader;
-	protected transient ArrayList<GameObject> attackers = new ArrayList<GameObject>(GameObject.class);
+	protected transient CopyOnWriteArrayList<GameObject> attackers = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	public transient Quest quest;
-	public HashMap<Actor, Square> targetSquaresMap = new HashMap<Actor, Square>();
-	public ArrayList<Square> targetSquares = new ArrayList<Square>(Square.class);
+	public ConcurrentHashMap<Actor, Square> targetSquaresMap = new ConcurrentHashMap<Actor, Square>();
+	public CopyOnWriteArrayList<Square> targetSquares = new CopyOnWriteArrayList<Square>(Square.class);
 
 	public GroupOfActors(String name, Actor... members) {
 		super();
 		id = Level.generateNewId(this);
 		this.name = name;
-		this.members = new ArrayList<Actor>(Actor.class, Arrays.asList(members));
+		this.members = new CopyOnWriteArrayList<Actor>(Actor.class, Arrays.asList(members));
 		this.leader = this.members.get(0);
 		for (Actor member : members) {
 			member.groupOfActors = this;
 		}
-		attackers = new ArrayList<GameObject>(GameObject.class);
+		attackers = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	}
 
 	public void addMember(Actor actor) {
@@ -63,7 +63,7 @@ public class GroupOfActors implements Idable {
 	public boolean update(Actor actor) {
 
 		// Manage attackers list
-		ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<GameObject> attackersToRemoveFromList = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		for (GameObject attacker : attackers) {
 			if (attacker.remainingHealth <= 0) {
 				attackersToRemoveFromList.add(attacker);
@@ -86,9 +86,9 @@ public class GroupOfActors implements Idable {
 			if (currentTarget == leader.squareGameObjectIsOn
 					|| actor.straightLineDistanceTo(leader.squareGameObjectIsOn) > maxDistanceFromLeader) {
 
-				ArrayList<Square> possibleSquares = new ArrayList<Square>(Square.class);
+				CopyOnWriteArrayList<Square> possibleSquares = new CopyOnWriteArrayList<Square>(Square.class);
 				for (int i = 1; i <= maxDistanceFromLeader; i++) {
-					ArrayList<Square> squaresISquareAway = leader.getAllSquaresAtDistance(i);
+					CopyOnWriteArrayList<Square> squaresISquareAway = leader.getAllSquaresAtDistance(i);
 					for (Square square : squaresISquareAway) {
 						if (square.inventory.canShareSquare
 								&& square.structureSquareIsIn == leader.squareGameObjectIsOn.structureSquareIsIn
@@ -152,7 +152,7 @@ public class GroupOfActors implements Idable {
 		return attackers.size() > 0;
 	}
 
-	public ArrayList<GameObject> getAttackers() {
+	public CopyOnWriteArrayList<GameObject> getAttackers() {
 		return attackers;
 	}
 
@@ -160,7 +160,7 @@ public class GroupOfActors implements Idable {
 		return leader;
 	}
 
-	public ArrayList<Actor> getMembers() {
+	public CopyOnWriteArrayList<Actor> getMembers() {
 		return members;
 	}
 

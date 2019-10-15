@@ -1,6 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
@@ -194,7 +194,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 		buttons.add(objectsFilterButton);
 		buttons.add(weaponsFilterButton);
 
-		final ArrayList<GameObject> objects = new ArrayList<GameObject>();
+		final CopyOnWriteArrayList<GameObject> objects = new CopyOnWriteArrayList<GameObject>();
 		if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.ALL) {
 //			objects.addAll(Game.level.inanimateObjectsOnGround);
 			for (Faction faction : Game.level.factions) {

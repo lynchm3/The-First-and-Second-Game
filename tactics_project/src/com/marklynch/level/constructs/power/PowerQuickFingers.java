@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.power;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.util.Point;
 
@@ -40,7 +40,7 @@ public class PowerQuickFingers extends Power {
 	@Override
 	public void cast(GameObject source, GameObject targetGameObject, Square targetSquare, Action action) {
 
-		ArrayList<GameObject> gameObjectsToTake = new ArrayList<GameObject>();
+		CopyOnWriteArrayList<GameObject> gameObjectsToTake = new CopyOnWriteArrayList<GameObject>();
 		for (Square squareToPickupFrom : source.getAllSquaresWithinDistance(0, 1)) {
 
 			if (squareToPickupFrom.inventory.containsGameObjectOfType(PressurePlate.class)

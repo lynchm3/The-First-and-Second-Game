@@ -1,6 +1,6 @@
 package com.marklynch.ui.popups;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -34,7 +34,7 @@ public class Notification {
 	public boolean flash = false;
 	public int flashCounter = 0;
 
-	public ArrayList<Link> links;
+	public CopyOnWriteArrayList<Link> links;
 
 	public static final float toastTimeMS = 500f;
 	public static final float disapearTime = 500f;

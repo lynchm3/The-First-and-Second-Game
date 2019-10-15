@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.objects.actors.Actor;
 
@@ -9,6 +9,6 @@ public interface ActionableInWorld {
 
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer);
 
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer);
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer);
 
 }

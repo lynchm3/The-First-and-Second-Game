@@ -1,12 +1,12 @@
 package com.marklynch.level.constructs.faction;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 
 @SuppressWarnings("serial")
-public class FactionList extends ArrayList<Faction> {
+public class FactionList extends CopyOnWriteArrayList<Faction> {
 	public static Faction player;
 	public static Faction townsPeople;
 	public static Faction wolves;

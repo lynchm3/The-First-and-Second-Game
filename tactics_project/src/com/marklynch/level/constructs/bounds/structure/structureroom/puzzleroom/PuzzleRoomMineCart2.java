@@ -12,7 +12,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Rail;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomMineCart2 extends StructureRoom {
 	int posX;
@@ -21,7 +21,7 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 	final static int totalHeightInSquares = 20;
 
 	public PuzzleRoomMineCart2(int posX, int posY) {
-		super("Minecart Room 2", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Minecart Room 2", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;
@@ -150,7 +150,7 @@ public class PuzzleRoomMineCart2 extends StructureRoom {
 				AreaList.town, new int[] {}, new HOBBY[] {});
 
 		// Queue
-		ArrayList<Square> queueSquares = new ArrayList<Square>(Square.class);
+		CopyOnWriteArrayList<Square> queueSquares = new CopyOnWriteArrayList<Square>(Square.class);
 		queueSquares.add(Level.squares[posX + 5][posY + 6]);
 		queueSquares.add(Level.squares[posX + 5][posY + 7]);
 		queueSquares.add(Level.squares[posX + 5][posY + 8]);

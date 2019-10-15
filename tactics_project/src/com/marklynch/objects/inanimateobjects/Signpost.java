@@ -7,7 +7,7 @@ import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Actor.Direction;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
@@ -18,21 +18,21 @@ import com.marklynch.utils.Utils.Quad;
 
 public class Signpost extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public Place[] places;
 
-	public ArrayList<Place> upPlaces = new ArrayList<Place>(Place.class);
-	public ArrayList<Place> downPlaces = new ArrayList<Place>(Place.class);
-	public ArrayList<Place> leftPlaces = new ArrayList<Place>(Place.class);
-	public ArrayList<Place> rightPlaces = new ArrayList<Place>(Place.class);
+	public CopyOnWriteArrayList<Place> upPlaces = new CopyOnWriteArrayList<Place>(Place.class);
+	public CopyOnWriteArrayList<Place> downPlaces = new CopyOnWriteArrayList<Place>(Place.class);
+	public CopyOnWriteArrayList<Place> leftPlaces = new CopyOnWriteArrayList<Place>(Place.class);
+	public CopyOnWriteArrayList<Place> rightPlaces = new CopyOnWriteArrayList<Place>(Place.class);
 
 	public static Texture upPoint = ResourceUtils.getGlobalImage("signpost_up_point.png", false);
 	public static Texture downPoint = ResourceUtils.getGlobalImage("signpost_down_point.png", false);
 	public static Texture leftPoint = ResourceUtils.getGlobalImage("signpost_left_point.png", false);
 	public static Texture rightPoint = ResourceUtils.getGlobalImage("signpost_right_point.png", false);
 
-	public static ArrayList<Quad> quads = new ArrayList<Quad>(Quad.class);
+	public static CopyOnWriteArrayList<Quad> quads = new CopyOnWriteArrayList<Quad>(Quad.class);
 
 	float squareWidth;
 	float squareHeight;
@@ -297,7 +297,7 @@ public class Signpost extends GameObject {
 
 	public Object[] generateText() {
 
-		ArrayList<Object> arrayListOfText = new ArrayList<Object>(Object.class);
+		CopyOnWriteArrayList<Object> arrayListOfText = new CopyOnWriteArrayList<Object>(Object.class);
 
 		// North
 		if (upPlaces.size() > 0) {

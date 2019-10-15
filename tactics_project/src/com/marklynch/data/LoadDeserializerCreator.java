@@ -46,7 +46,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.MeatChunk;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.utils.SwitchListener;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 
@@ -55,7 +55,7 @@ public class LoadDeserializerCreator {
 	public static Gson createLoadDeserializerGson() {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.registerTypeAdapter(ArrayList.class, deserializerForArrayList);
+		gsonBuilder.registerTypeAdapter(CopyOnWriteArrayList.class, deserializerForCopyOnWriteArrayList);
 		gsonBuilder.registerTypeAdapter(Texture.class, deserializerForTexture);
 		gsonBuilder.registerTypeAdapter(Faction.class, deserializerForIdable);
 		gsonBuilder.registerTypeAdapter(GroupOfActors.class, deserializerForIdable);
@@ -81,7 +81,7 @@ public class LoadDeserializerCreator {
 		// gsonBuilder.registerTypeAdapter(Stat.class, deserializerForStat);
 
 		// Add deserializers for all GamObjects, Effects and aiRoutines
-		ArrayList<Class<?>> gameObjectClasses = new ArrayList<Class<?>>(Class.class);
+		CopyOnWriteArrayList<Class<?>> gameObjectClasses = new CopyOnWriteArrayList<Class<?>>(Class.class);
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.actors"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.inanimateobjects"));
 		gameObjectClasses.addAll(PackageUtils.getClasses("com.marklynch.objects.tools"));
@@ -95,35 +95,35 @@ public class LoadDeserializerCreator {
 		System.out.println("Deserializer - gameObjectClasses = " + gameObjectClasses);
 
 		// Effects
-		ArrayList<Class> effectClasses = new ArrayList<Class>(Class.class);
+		CopyOnWriteArrayList<Class> effectClasses = new CopyOnWriteArrayList<Class>(Class.class);
 		effectClasses.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.effect"));
 		for (Class<?> clazz : effectClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForEffect);
 		}
 
 		// AI Routines
-		ArrayList<Class> aiRoutineClasses = new ArrayList<Class>(Class.class);
+		CopyOnWriteArrayList<Class> aiRoutineClasses = new CopyOnWriteArrayList<Class>(Class.class);
 		aiRoutineClasses.addAll(PackageUtils.getClasses("com.marklynch.ai.routines"));
 		for (Class<?> clazz : aiRoutineClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForAIRoutine);
 		}
 
 		// // Power
-		ArrayList<Class> powerClasses = new ArrayList<Class>(Class.class);
+		CopyOnWriteArrayList<Class> powerClasses = new CopyOnWriteArrayList<Class>(Class.class);
 		powerClasses.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.power"));
 		for (Class<?> clazz : powerClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForPower);
 		}
 
 		// Quests
-		ArrayList<Class> questClasses = new ArrayList<Class>(Class.class);
+		CopyOnWriteArrayList<Class> questClasses = new CopyOnWriteArrayList<Class>(Class.class);
 		questClasses.addAll(PackageUtils.getClasses("com.marklynch.level.quest"));
 		for (Class<?> clazz : questClasses) {
 			gsonBuilder.registerTypeAdapter(clazz, deserializerForIdable);
 		}
 
 		// Structure Room
-		ArrayList<Class> structureRoomClasses = new ArrayList<Class>(Class.class);
+		CopyOnWriteArrayList<Class> structureRoomClasses = new CopyOnWriteArrayList<Class>(Class.class);
 		structureRoomClasses
 				.addAll(PackageUtils.getClasses("com.marklynch.level.constructs.bounds.structure.structureroom"));
 		for (Class<?> clazz : structureRoomClasses) {
@@ -136,9 +136,9 @@ public class LoadDeserializerCreator {
 	}
 
 	// change serialization for specific types
-	public static JsonDeserializer<ArrayList> deserializerForArrayList = new JsonDeserializer<ArrayList>() {
+	public static JsonDeserializer<CopyOnWriteArrayList> deserializerForCopyOnWriteArrayList = new JsonDeserializer<CopyOnWriteArrayList>() {
 		@Override
-		public ArrayList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+		public CopyOnWriteArrayList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
 
 			JsonObject jsonObject = json.getAsJsonObject();
@@ -149,7 +149,7 @@ public class LoadDeserializerCreator {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-			ArrayList arrayList = new ArrayList<>(c);
+			CopyOnWriteArrayList arrayList = new CopyOnWriteArrayList<>(c);
 
 			JsonArray jsonArray = jsonObject.getAsJsonArray("objects");
 			for (JsonElement jsonElement : jsonArray) {
@@ -393,7 +393,7 @@ public class LoadDeserializerCreator {
 			}
 
 			JsonObject jsonObject = json.getAsJsonObject();
-			Type typeToken = new TypeToken<ArrayList<GameObject>>() {
+			Type typeToken = new TypeToken<CopyOnWriteArrayList<GameObject>>() {
 			}.getType();
 
 			inventory.gameObjects = Load.loadDeserializerGson.fromJson(jsonObject.get("gameObjects"), typeToken);

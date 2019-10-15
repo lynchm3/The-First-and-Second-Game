@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
@@ -16,7 +16,7 @@ public class ActionDropItems extends VariableQtyAction {
 	public static final String ACTION_NAME = "Drop";
 	GameObject[] objects;
 
-	public ActionDropItems(GameObject performer, Square square, ArrayList<GameObject> objects) {
+	public ActionDropItems(GameObject performer, Square square, CopyOnWriteArrayList<GameObject> objects) {
 		this(performer, square, objects.toArray(new GameObject[objects.size()]), false);
 	}
 
@@ -118,7 +118,7 @@ public class ActionDropItems extends VariableQtyAction {
 		// Game.level.endTurn();
 
 		if (gameObjectPerformer instanceof Actor)
-			trespassingCheck(this, (Actor) gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn);
+			trespassingCheck((Actor) gameObjectPerformer, gameObjectPerformer.squareGameObjectIsOn);
 	}
 
 	@Override

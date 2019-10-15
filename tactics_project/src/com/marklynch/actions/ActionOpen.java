@@ -50,7 +50,7 @@ public class ActionOpen extends Action {
 				Game.level.undoList.clear();
 			}
 
-			trespassingCheck(this, actor, actor.squareGameObjectIsOn);
+			trespassingCheck(actor, actor.squareGameObjectIsOn);
 
 			if (Game.level.player.peekSquare != null) {
 				new ActionStopPeeking(Game.level.player).perform();

@@ -1,12 +1,12 @@
 package com.marklynch.ui.button;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
 
-public class TooltipGroup extends ArrayList<Tooltip> {
+public class TooltipGroup extends CopyOnWriteArrayList<Tooltip> {
 
 	/**
 	 * 
@@ -77,7 +77,7 @@ public class TooltipGroup extends ArrayList<Tooltip> {
 
 	}
 
-	public void setTooltipText(ArrayList<Object> tooltipText) {
+	public void setTooltipText(CopyOnWriteArrayList<Object> tooltipText) {
 		if (tooltipText != null && this.size() > 0) {
 			this.remove(0);
 			this.add(new Tooltip(false, Tooltip.WHITE, tooltipText));

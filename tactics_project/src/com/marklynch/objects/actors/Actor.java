@@ -1,9 +1,9 @@
 package com.marklynch.objects.actors;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
@@ -68,8 +68,8 @@ import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
-import com.marklynch.utils.ArrayList;
 import com.marklynch.utils.Color;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
@@ -80,7 +80,8 @@ import com.marklynch.utils.TextureUtils;
 import com.marklynch.utils.Utils.Point;
 
 public class Actor extends GameObject {
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(
+			GameObject.class);
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "travelDistance", "inventory",
 			"showInventory", "fitsInInventory", "canContainOtherObjects" };
@@ -123,10 +124,10 @@ public class Actor extends GameObject {
 
 	protected transient int highestPathCostSeen = 0;
 
-	public HashMap<GameObject, Investigation> investigationsMap = new HashMap<GameObject, Investigation>();
+	public ConcurrentHashMap<GameObject, Investigation> investigationsMap = new ConcurrentHashMap<GameObject, Investigation>();
 
-	public ArrayList<Crime> crimesPerformedThisTurn = new ArrayList<Crime>(Crime.class);
-	public ArrayList<Crime> crimesPerformedInLifetime = new ArrayList<Crime>(Crime.class);
+	public CopyOnWriteArrayList<Crime> crimesPerformedThisTurn = new CopyOnWriteArrayList<Crime>(Crime.class);
+	public CopyOnWriteArrayList<Crime> crimesPerformedInLifetime = new CopyOnWriteArrayList<Crime>(Crime.class);
 
 	public Texture standingTexture = null;
 	public Texture stepLeftTexture = null;
@@ -174,26 +175,26 @@ public class Actor extends GameObject {
 	public int timePerStep = 100;
 	public int thisStepTime = timePerStep;
 
-	public ArrayList<Crime> crimesWitnessedUnresolved = new ArrayList<Crime>(Crime.class);
-	public ArrayList<Actor> knownCriminals = new ArrayList<Actor>(Actor.class);
-	public Map<Actor, ArrayList<Crime>> mapActorToCrimesWitnessed = new HashMap<Actor, ArrayList<Crime>>();
-	public Map<Actor, Integer> accumulatedCrimeSeverityWitnessed = new HashMap<Actor, Integer>();
-	public Map<Actor, Integer> accumulatedCrimeSeverityUnresolved = new HashMap<Actor, Integer>();
+	public CopyOnWriteArrayList<Crime> crimesWitnessedUnresolved = new CopyOnWriteArrayList<Crime>(Crime.class);
+	public CopyOnWriteArrayList<Actor> knownCriminals = new CopyOnWriteArrayList<Actor>(Actor.class);
+	public Map<Actor, CopyOnWriteArrayList<Crime>> mapActorToCrimesWitnessed = new ConcurrentHashMap<Actor, CopyOnWriteArrayList<Crime>>();
+	public Map<Actor, Integer> accumulatedCrimeSeverityWitnessed = new ConcurrentHashMap<Actor, Integer>();
+	public Map<Actor, Integer> accumulatedCrimeSeverityUnresolved = new ConcurrentHashMap<Actor, Integer>();
 	public int highestAccumulatedUnresolvedCrimeSeverity = 0;
 	public Actor criminalWithHighestAccumulatedUnresolvedCrimeSeverity = null;
 
 	public AILine aiLine;
 
-	public ArrayList<Door> doors = new ArrayList<Door>(Door.class);
+	public CopyOnWriteArrayList<Door> doors = new CopyOnWriteArrayList<Door>(Door.class);
 	public boolean followersShouldFollow = false;
 
 	public boolean sleeping = false;
 
-	public ArrayList<Power> powers = new ArrayList<Power>(Power.class);
+	public CopyOnWriteArrayList<Power> powers = new CopyOnWriteArrayList<Power>(Power.class);
 
 	public Area area;
 
-	public ArrayList<GameObject> gameObjectsInInventoryThatBelongToAnother = new ArrayList<GameObject>(
+	public CopyOnWriteArrayList<GameObject> gameObjectsInInventoryThatBelongToAnother = new CopyOnWriteArrayList<GameObject>(
 			GameObject.class);
 
 	public int[] requiredEquipmentTemplateIds = new int[0];
@@ -241,7 +242,7 @@ public class Actor extends GameObject {
 		if (bed != null)
 			bed.owner = this;
 
-		ArrayList<Weapon> weapons = getWeaponsInInventory();
+		CopyOnWriteArrayList<Weapon> weapons = getWeaponsInInventory();
 		if (weapons.size() > 0 && weapons.get(0) != null) {
 			equipped = weapons.get(0);
 		}
@@ -394,7 +395,7 @@ public class Actor extends GameObject {
 				maxPathSize);
 
 		if (aStarNodesPath != null) {
-			ArrayList<Square> squarePath = new ArrayList<Square>(Square.class);
+			CopyOnWriteArrayList<Square> squarePath = new CopyOnWriteArrayList<Square>(Square.class);
 
 			for (Square aStarNode : aStarNodesPath) {
 				squarePath.add(aStarNode);
@@ -1751,7 +1752,8 @@ public class Actor extends GameObject {
 				clearActions();
 
 			// Remove dead attackers from attackers list
-			ArrayList<GameObject> gameObjectsToRemoveFromList = new ArrayList<GameObject>(GameObject.class);
+			CopyOnWriteArrayList<GameObject> gameObjectsToRemoveFromList = new CopyOnWriteArrayList<GameObject>(
+					GameObject.class);
 			for (GameObject gameObject : attackers) {
 				if (gameObject.remainingHealth <= 0) {
 					gameObjectsToRemoveFromList.add(gameObject);
@@ -1879,9 +1881,9 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+	public CopyOnWriteArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 
-		ArrayList<Action> actions = new ArrayList<Action>(Action.class);
+		CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>(Action.class);
 
 		// if (this.remainingHealth <= 0)
 		// return actions;
@@ -1943,7 +1945,7 @@ public class Actor extends GameObject {
 		return false;
 	}
 
-	public ArrayList<GameObject> getAttackers() {
+	public CopyOnWriteArrayList<GameObject> getAttackers() {
 		return attackers;
 	}
 
@@ -2111,7 +2113,7 @@ public class Actor extends GameObject {
 
 	public void removeHidingPlacesFromAttackersList() {
 
-		ArrayList<GameObject> hidingPlacesToRemove = new ArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<GameObject> hidingPlacesToRemove = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		for (GameObject attacker : this.getAttackers()) {
 			if (attacker instanceof HidingPlace) {
 				hidingPlacesToRemove.add(attacker);
@@ -2191,20 +2193,20 @@ public class Actor extends GameObject {
 
 	public boolean sellItemsMarkedToSell(Actor buyer) {
 
-		HashMap<Integer, ArrayList<GameObject>> gameObjectStacks = new HashMap<Integer, ArrayList<GameObject>>();
-		for (GameObject gameObject : (ArrayList<GameObject>) inventory.gameObjects.clone()) {
+		ConcurrentHashMap<Integer, CopyOnWriteArrayList<GameObject>> gameObjectStacks = new ConcurrentHashMap<Integer, CopyOnWriteArrayList<GameObject>>();
+		for (GameObject gameObject : inventory.gameObjects) {
 			if (gameObject.toSell == true) {
 				if (gameObjectStacks.containsKey(gameObject.templateId)) {
 					gameObjectStacks.get(gameObject.templateId).add(gameObject);
 				} else {
-					ArrayList<GameObject> newStack = new ArrayList<GameObject>(GameObject.class);
+					CopyOnWriteArrayList<GameObject> newStack = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 					newStack.add(gameObject);
 					gameObjectStacks.put(gameObject.templateId, newStack);
 				}
 			}
 		}
 
-		for (ArrayList<GameObject> stack : gameObjectStacks.values()) {
+		for (CopyOnWriteArrayList<GameObject> stack : gameObjectStacks.values()) {
 			ActionSellItems actionSellItems = new ActionSellItems(this, buyer, stack);
 
 			int maxCanAfford = Math.floorDiv(buyer.getCarriedGoldValue(), stack.get(0).value);
@@ -2217,15 +2219,18 @@ public class Actor extends GameObject {
 		return true;
 	}
 
-	// public ArrayList<Crime> crimesWitnessed = new ArrayList<Crime>();
-	// public ArrayList<Actor> knownCriminals = new ArrayList<Actor>();
-	// public Map<Actor, ArrayList<Crime>> mapActorToCrimesWitnessed = new
-	// HashMap<Actor, ArrayList<Crime>>();
+	// public CopyOnWriteArrayList<Crime> crimesWitnessed = new
+	// CopyOnWriteArrayList<Crime>();
+	// public CopyOnWriteArrayList<Actor> knownCriminals = new
+	// CopyOnWriteArrayList<Actor>();
+	// public Map<Actor, CopyOnWriteArrayList<Crime>> mapActorToCrimesWitnessed =
+	// new
+	// ConcurrentHashMap<Actor, CopyOnWriteArrayList<Crime>>();
 	// public Map<Actor, Integer> accumulatedCrimeSeverityWitnessed = new
-	// HashMap<Actor, Integer>();
+	// ConcurrentHashMap<Actor, Integer>();
 
 	public void manageWitnessedCrimes() {
-		ArrayList<Crime> crimesToRemove = new ArrayList<Crime>(Crime.class);
+		CopyOnWriteArrayList<Crime> crimesToRemove = new CopyOnWriteArrayList<Crime>(Crime.class);
 		for (Crime crime : crimesWitnessedUnresolved) {
 			if (crime.isResolved())
 				crimesToRemove.add(crime);
@@ -2267,7 +2272,7 @@ public class Actor extends GameObject {
 		if (mapActorToCrimesWitnessed.containsKey(criminal)) {
 			mapActorToCrimesWitnessed.get(criminal).add(crime);
 		} else {
-			ArrayList<Crime> newCrimeList = new ArrayList<Crime>(Crime.class);
+			CopyOnWriteArrayList<Crime> newCrimeList = new CopyOnWriteArrayList<Crime>(Crime.class);
 			newCrimeList.add(crime);
 			mapActorToCrimesWitnessed.put(crime.performer, newCrimeList);
 		}
@@ -2370,8 +2375,8 @@ public class Actor extends GameObject {
 
 	public void createSearchLocationsBasedOnSound(Sound sound) {
 
-		ArrayList<Class<?>> classesArrayList = new ArrayList<Class<?>>(Class.class);
-		classesArrayList.addAll(Arrays.asList(soundClassesToReactTo));
+		CopyOnWriteArrayList<Class<?>> classesCopyOnWriteArrayList = new CopyOnWriteArrayList<Class<?>>(Class.class);
+		classesCopyOnWriteArrayList.addAll(Arrays.asList(soundClassesToReactTo));
 
 		if (this.canSeeGameObject(sound.sourcePerformer))
 			return;
@@ -2495,8 +2500,8 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public ArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
-		ArrayList<Object> result = new ArrayList<Object>(Object.class);
+	public CopyOnWriteArrayList<Object> getEffectiveHighLevelStatTooltip(HIGH_LEVEL_STATS statType) {
+		CopyOnWriteArrayList<Object> result = new CopyOnWriteArrayList<Object>(Object.class);
 
 		result.add("Inherent " + highLevelStats.get(statType).value);
 		if (equipped != null && equipped.highLevelStats.get(statType).value != 0) {

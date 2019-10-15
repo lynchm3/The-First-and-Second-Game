@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.gson.Gson;
 import com.marklynch.level.Level;
@@ -18,13 +18,13 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Player;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Wall;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Load {
 
-	public static HashMap<Class<?>, ResultSet> resultSetsWithJustIds = new HashMap<Class<?>, ResultSet>();
-	public static HashMap<Class<?>, ResultSet> resultSets = new HashMap<Class<?>, ResultSet>();
-	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
+	public static ConcurrentHashMap<Class<?>, ResultSet> resultSetsWithJustIds = new ConcurrentHashMap<Class<?>, ResultSet>();
+	public static ConcurrentHashMap<Class<?>, ResultSet> resultSets = new ConcurrentHashMap<Class<?>, ResultSet>();
+	public static ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Field>> fieldsForEachClass = new ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Field>>();
 
 	public static Gson loadDeserializerGson;
 
@@ -137,10 +137,10 @@ public class Load {
 			if (objectToLoad == null) {
 				objectToLoad = clazz.getDeclaredConstructor().newInstance();
 				Level.ids.put(objectToLoadId, objectToLoad);
-				ArrayList<Object> instances = null;
+				CopyOnWriteArrayList<Object> instances = null;
 				try {
 					// System.out.println("class = " + clazz);
-					instances = (ArrayList<Object>) clazz.getField("instances").get(null);
+					instances = (CopyOnWriteArrayList<Object>) clazz.getField("instances").get(null);
 					if (instances != null)
 						instances.add(objectToLoad);
 				} catch (NoSuchFieldException e) {
@@ -163,7 +163,7 @@ public class Load {
 		if (resultSet == null)
 			return;
 
-		ArrayList<Field> fields = fieldsForEachClass.get(clazz);
+		CopyOnWriteArrayList<Field> fields = fieldsForEachClass.get(clazz);
 
 		while (resultSet.next()) {
 
@@ -245,7 +245,7 @@ public class Load {
 	public static void clearEverything() {
 
 		// Clear current data in mem data
-		ArrayList<Long> toRemove = new ArrayList<Long>(Long.class);
+		CopyOnWriteArrayList<Long> toRemove = new CopyOnWriteArrayList<Long>(Long.class);
 		for (Long id : Level.ids.keySet()) {
 			if (Level.ids.get(id) instanceof Square) {
 
@@ -274,7 +274,7 @@ public class Load {
 
 			} else {
 				try {
-					ArrayList<Object> instances = (ArrayList<Object>) clazz.getField("instances").get(null);
+					CopyOnWriteArrayList<Object> instances = (CopyOnWriteArrayList<Object>) clazz.getField("instances").get(null);
 					if (instances != null)
 						instances.clear();
 				} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException

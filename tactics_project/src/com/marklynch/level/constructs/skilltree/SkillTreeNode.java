@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.skilltree;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.input.Mouse;
 
@@ -35,11 +35,11 @@ public class SkillTreeNode extends LevelButton {
 	private boolean activated = false;
 	public String name;
 	public String description;
-	public ArrayList<RequirementToMeet> requirementsToMeet = new ArrayList<RequirementToMeet>();
-	public ArrayList<SkillTreeNode> linkedSkillTreeNodes = new ArrayList<SkillTreeNode>();
-	public ArrayList<SkillTreeNodePower> powerButtons = new ArrayList<SkillTreeNodePower>();
-	public ArrayList<SkillTreeNodeStat> statButtons = new ArrayList<SkillTreeNodeStat>();
-	public ArrayList<Stat> statsUnlocked = new ArrayList<Stat>();
+	public CopyOnWriteArrayList<RequirementToMeet> requirementsToMeet = new CopyOnWriteArrayList<RequirementToMeet>();
+	public CopyOnWriteArrayList<SkillTreeNode> linkedSkillTreeNodes = new CopyOnWriteArrayList<SkillTreeNode>();
+	public CopyOnWriteArrayList<SkillTreeNodePower> powerButtons = new CopyOnWriteArrayList<SkillTreeNodePower>();
+	public CopyOnWriteArrayList<SkillTreeNodeStat> statButtons = new CopyOnWriteArrayList<SkillTreeNodeStat>();
+	public CopyOnWriteArrayList<Stat> statsUnlocked = new CopyOnWriteArrayList<Stat>();
 	public float xInPixels, yInPixels, circleX1, circleY1, circleX2, circleY2, textX, textY;
 
 	float powerOffsetX = 16;
@@ -47,7 +47,7 @@ public class SkillTreeNode extends LevelButton {
 	float statOffsetX = 16;
 	float statOffsetY = -16 - SkillTreeNodeStat.statWidth;
 
-	public ArrayList<Power> powersUnlocked = new ArrayList<Power>();;
+	public CopyOnWriteArrayList<Power> powersUnlocked = new CopyOnWriteArrayList<Power>();;
 	public static float circleRadius = 48;
 	public static float circleCircumference = circleRadius * 2;
 	// public float dragX = 0, dragY = 0;
@@ -73,7 +73,7 @@ public class SkillTreeNode extends LevelButton {
 	public void updateTooltip() {
 		tooltips.clear();
 
-		ArrayList<Object> tooltipItems = new ArrayList<Object>();
+		CopyOnWriteArrayList<Object> tooltipItems = new CopyOnWriteArrayList<Object>();
 
 		tooltipItems.add(this.name);
 		tooltipItems.add(TextUtils.NewLine.NEW_LINE);
@@ -391,7 +391,7 @@ public class SkillTreeNode extends LevelButton {
 
 			tooltips.clear();
 
-			ArrayList<Object> tooltipItems = new ArrayList<Object>();
+			CopyOnWriteArrayList<Object> tooltipItems = new CopyOnWriteArrayList<Object>();
 
 			tooltipItems.add(power);
 			if (activated && !power.passive) {

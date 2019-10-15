@@ -7,7 +7,7 @@ import com.marklynch.objects.inanimateobjects.MapMarker;
 import com.marklynch.ui.TextBox;
 import com.marklynch.ui.TextBoxHolder;
 import com.marklynch.ui.button.Link;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
@@ -67,12 +67,12 @@ public class FullScreenTextBox implements TextBoxHolder {
 				mapMarker.baseName = textBox.getText();
 				if (mapMarker.baseName.length() == 0) {
 					mapMarker.name = "Marker";
-					mapMarker.links = new ArrayList<Link>(Link.class);
+					mapMarker.links = new CopyOnWriteArrayList<Link>(Link.class);
 					mapMarker.links.addAll(TextUtils.getLinks(true, this));
 					;
 				} else {
 					mapMarker.name = mapMarker.baseName;
-					mapMarker.links = new ArrayList<Link>(Link.class);
+					mapMarker.links = new CopyOnWriteArrayList<Link>(Link.class);
 					mapMarker.links.addAll(TextUtils.getLinks(true, this));
 				}
 				Level.activeTextBox = null;

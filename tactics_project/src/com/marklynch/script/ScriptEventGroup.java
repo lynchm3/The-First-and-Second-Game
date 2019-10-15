@@ -1,6 +1,6 @@
 package com.marklynch.script;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.script.trigger.ScriptTrigger;
 
@@ -8,14 +8,14 @@ public class ScriptEventGroup extends ScriptEvent {
 
 	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "scriptEvents" };
 
-	ArrayList<ScriptEvent> scriptEvents;
+	CopyOnWriteArrayList<ScriptEvent> scriptEvents;
 	int scriptEventIndex = 0;
 
 	public ScriptEventGroup() {
 		name = "ScriptEventGroup";
 	}
 
-	public ScriptEventGroup(boolean blockUserInput, ScriptTrigger scriptTrigger, ArrayList<ScriptEvent> scriptEvents) {
+	public ScriptEventGroup(boolean blockUserInput, ScriptTrigger scriptTrigger, CopyOnWriteArrayList<ScriptEvent> scriptEvents) {
 		super(blockUserInput, scriptTrigger);
 		this.scriptEvents = scriptEvents;
 	}

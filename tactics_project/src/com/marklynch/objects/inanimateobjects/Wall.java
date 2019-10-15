@@ -7,7 +7,7 @@ import com.marklynch.actions.Action;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.TextureUtils;
 
@@ -15,7 +15,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class Wall extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public boolean fullWall = true;
 	public boolean fullRightWall;

@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
@@ -40,7 +40,7 @@ public class ActionFishingStart extends Action {
 		targetGameObject.beingFishedBy = performer;
 
 		FishingRod fishingRod = null;
-		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
+		CopyOnWriteArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
 		for (GameObject f : fishingRods) {
 			if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) <= ((FishingRod) f).fishingRange) {
 				fishingRod = (FishingRod) f;
@@ -80,7 +80,7 @@ public class ActionFishingStart extends Action {
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
 		} else {
-			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+			trespassingCheck(performer, performer.squareGameObjectIsOn);
 		}
 
 		if (performer.faction == Game.level.factions.player) {
@@ -112,7 +112,7 @@ public class ActionFishingStart extends Action {
 	@Override
 	public boolean checkRange() {
 
-		ArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
+		CopyOnWriteArrayList<GameObject> fishingRods = performer.inventory.getGameObjectsOfClass(FishingRod.class);
 
 		for (GameObject fishingRod : fishingRods) {
 			if (performer

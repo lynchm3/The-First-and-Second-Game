@@ -11,11 +11,11 @@ import com.marklynch.objects.inanimateobjects.Liquid;
 import com.marklynch.objects.inanimateobjects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Jar extends Tool {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 	public float volume;
 	public GameObject contents;
 
@@ -102,8 +102,8 @@ public class Jar extends Tool {
 			if (this.contents instanceof Liquid) {
 				Liquid liquid = (Liquid) this.contents;
 				squareFoGlassAndLiquid.liquidSpread(liquid);
-				for (GameObject gameObject : (ArrayList<GameObject>) squareFoGlassAndLiquid.inventory.getGameObjects()
-						.clone()) {
+				for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) squareFoGlassAndLiquid.inventory.getGameObjects()
+						) {
 					if (gameObject != this) {
 						// new ActionDouse(shooter, gameObject).perform();
 						for (Effect effect : liquid.touchEffects) {

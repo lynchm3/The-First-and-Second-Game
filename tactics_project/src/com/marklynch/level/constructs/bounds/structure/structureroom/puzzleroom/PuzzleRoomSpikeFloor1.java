@@ -6,7 +6,7 @@ import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.inanimateobjects.Spikes;
 import com.marklynch.objects.inanimateobjects.Switch;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class PuzzleRoomSpikeFloor1 extends StructureRoom {
 	int posX;
@@ -15,7 +15,7 @@ public class PuzzleRoomSpikeFloor1 extends StructureRoom {
 	final static int totalHeightInSquares = 6;
 
 	public PuzzleRoomSpikeFloor1(int posX, int posY) {
-		super("Cave In Room", posX, posY, false, false, new ArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
+		super("Cave In Room", posX, posY, false, false, new CopyOnWriteArrayList<Actor>(Actor.class), 1, false, new RoomPart[] {
 				new RoomPart(posX, posY, posX + totalWidthInSquares - 1, posY + totalHeightInSquares - 1) });
 
 		this.posX = posX;

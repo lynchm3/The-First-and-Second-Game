@@ -5,7 +5,7 @@ import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glClearColor;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
@@ -53,7 +53,7 @@ public class ShadowLight {
 	static FrameBuffer shadowMapFBO;
 	static ShaderProgram shadowMapShader;
 	static ShaderProgram shadowRenderShader;
-	static ArrayList<Light> lights = new ArrayList<Light>();
+	static CopyOnWriteArrayList<Light> lights = new CopyOnWriteArrayList<Light>();
 	static boolean softShadows = true;
 
 	// BLUR

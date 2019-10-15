@@ -4,7 +4,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.openal.Audio;
@@ -15,11 +15,11 @@ import mdesl.test.Util;
 
 public class ResourceUtils {
 
-	private static HashMap<String, Texture> globalImages = new HashMap<String, Texture>();
-	private static HashMap<String, Texture> levelImages = new HashMap<String, Texture>();
-	private static HashMap<String, TrueTypeFont> globalFonts = new HashMap<String, TrueTypeFont>();
-	private static HashMap<String, TrueTypeFont> levelFonts = new HashMap<String, TrueTypeFont>();
-	private static HashMap<String, Audio> globalSounds = new HashMap<String, Audio>();
+	private static ConcurrentHashMap<String, Texture> globalImages = new ConcurrentHashMap<String, Texture>();
+	private static ConcurrentHashMap<String, Texture> levelImages = new ConcurrentHashMap<String, Texture>();
+	private static ConcurrentHashMap<String, TrueTypeFont> globalFonts = new ConcurrentHashMap<String, TrueTypeFont>();
+	private static ConcurrentHashMap<String, TrueTypeFont> levelFonts = new ConcurrentHashMap<String, TrueTypeFont>();
+	private static ConcurrentHashMap<String, Audio> globalSounds = new ConcurrentHashMap<String, Audio>();
 
 	public static Texture getGlobalImage(String path, boolean generatePixels) {
 

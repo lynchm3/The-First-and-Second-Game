@@ -1,6 +1,6 @@
 package com.marklynch.actions;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -165,7 +165,7 @@ public class ActionTeleport extends Action {
 				}
 			}
 		} else if (performer != null) {
-			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+			trespassingCheck(performer, performer.squareGameObjectIsOn);
 		}
 
 		if (targetGameObject == Level.player && !squareToTeleportTo.onScreen()) {
@@ -181,7 +181,7 @@ public class ActionTeleport extends Action {
 			Game.level.endPlayerTurn();
 
 		if (performer != null)
-			trespassingCheck(this, performer, targetGameObject.squareGameObjectIsOn);
+			trespassingCheck(performer, targetGameObject.squareGameObjectIsOn);
 
 		Level.teleportee = null;
 	}
@@ -241,7 +241,7 @@ public class ActionTeleport extends Action {
 	public Sound createSound() {
 
 		// Sound of glass
-		ArrayList<GameObject> stampables = squareToTeleportTo.inventory.getGameObjectsOfClass(Stampable.class);
+		CopyOnWriteArrayList<GameObject> stampables = squareToTeleportTo.inventory.getGameObjectsOfClass(Stampable.class);
 		if (!(targetGameObject instanceof Blind) && stampables.size() > 0) {
 			for (GameObject stampable : stampables) {
 				return new Sound(targetGameObject, stampable, squareToTeleportTo, 10, legal, this.getClass());

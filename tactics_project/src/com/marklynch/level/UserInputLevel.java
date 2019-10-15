@@ -7,7 +7,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -117,7 +117,7 @@ public class UserInputLevel {
 	public static float mouseXTransformed = 0;
 	public static float mouseYTransformed = 0;
 
-	public static ArrayList<Square> nodeHighlights = new ArrayList<Square>();
+	public static CopyOnWriteArrayList<Square> nodeHighlights = new CopyOnWriteArrayList<Square>();
 
 	public static void userInput(int delta2) {
 		if (Game.ticksSinceDisplayInactive < 10)

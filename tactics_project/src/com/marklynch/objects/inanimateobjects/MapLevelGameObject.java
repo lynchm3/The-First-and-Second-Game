@@ -3,7 +3,7 @@ package com.marklynch.objects.inanimateobjects;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -11,7 +11,7 @@ import com.marklynch.utils.Utils;
 
 public class MapLevelGameObject extends GameObject {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	@Override
 	public void setInstances(GameObject gameObject) {

@@ -1,9 +1,9 @@
 package com.marklynch.level.constructs;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.gson.annotations.Expose;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Stat {
 
@@ -17,19 +17,19 @@ public class Stat {
 	};
 
 	@Expose(serialize = false)
-	public final static ArrayList<HIGH_LEVEL_STATS> GENERAL_STATS = new ArrayList<HIGH_LEVEL_STATS>(
+	public final static CopyOnWriteArrayList<HIGH_LEVEL_STATS> GENERAL_STATS = new CopyOnWriteArrayList<HIGH_LEVEL_STATS>(
 			HIGH_LEVEL_STATS.class);
 
 	@Expose(serialize = false)
-	public final static ArrayList<HIGH_LEVEL_STATS> OFFENSIVE_STATS = new ArrayList<HIGH_LEVEL_STATS>(
+	public final static CopyOnWriteArrayList<HIGH_LEVEL_STATS> OFFENSIVE_STATS = new CopyOnWriteArrayList<HIGH_LEVEL_STATS>(
 			HIGH_LEVEL_STATS.class);
 
 	@Expose(serialize = false)
-	public final static ArrayList<HIGH_LEVEL_STATS> DEFENSIVE_STATS = new ArrayList<HIGH_LEVEL_STATS>(
+	public final static CopyOnWriteArrayList<HIGH_LEVEL_STATS> DEFENSIVE_STATS = new CopyOnWriteArrayList<HIGH_LEVEL_STATS>(
 			HIGH_LEVEL_STATS.class);
 
 	@Expose(serialize = false)
-	public static HashMap<HIGH_LEVEL_STATS, HIGH_LEVEL_STATS> offensiveStatToDefensiveStatMap;
+	public static ConcurrentHashMap<HIGH_LEVEL_STATS, HIGH_LEVEL_STATS> offensiveStatToDefensiveStatMap;
 
 	// public static enum HIGH_LEVEL_STATS {
 	//
@@ -83,7 +83,7 @@ public class Stat {
 		DEFENSIVE_STATS.add(HIGH_LEVEL_STATS.BLEED_RES);
 		DEFENSIVE_STATS.add(HIGH_LEVEL_STATS.HEALING_RES);
 
-		offensiveStatToDefensiveStatMap = new HashMap<HIGH_LEVEL_STATS, HIGH_LEVEL_STATS>();
+		offensiveStatToDefensiveStatMap = new ConcurrentHashMap<HIGH_LEVEL_STATS, HIGH_LEVEL_STATS>();
 		offensiveStatToDefensiveStatMap.put(HIGH_LEVEL_STATS.SLASH_DAMAGE, HIGH_LEVEL_STATS.SLASH_RES);
 		offensiveStatToDefensiveStatMap.put(HIGH_LEVEL_STATS.BLUNT_DAMAGE, HIGH_LEVEL_STATS.BLUNT_RES);
 		offensiveStatToDefensiveStatMap.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, HIGH_LEVEL_STATS.PIERCE_RES);
@@ -106,7 +106,7 @@ public class Stat {
 	}
 
 	// public static String
-	// getStringForSavingHIGH_LEVEL_STATS(HashMap<HIGH_LEVEL_STATS, Stat>
+	// getStringForSavingHIGH_LEVEL_STATS(ConcurrentHashMap<HIGH_LEVEL_STATS, Stat>
 	// highLevelStats) {
 	// String result = "";
 	// for (HIGH_LEVEL_STATS highLevelStat : Stat.HIGH_LEVEL_STATS.values()) {

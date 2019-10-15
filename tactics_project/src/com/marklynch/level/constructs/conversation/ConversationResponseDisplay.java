@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.conversation;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.actions.ActionInitiateTrade;
@@ -17,8 +17,8 @@ import com.marklynch.utils.Color;
 
 public class ConversationResponseDisplay {
 
-	public ArrayList<LevelButton> responseButtons = new ArrayList<LevelButton>();
-	public static ArrayList<LevelButton> standardButtons = new ArrayList<LevelButton>();
+	public CopyOnWriteArrayList<LevelButton> responseButtons = new CopyOnWriteArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> standardButtons = new CopyOnWriteArrayList<LevelButton>();
 	public static LevelButton buttonTrade;
 	public final static String stringTrade = "TRADE [A]";
 	final static float tradeButtonWidth = Game.smallFont.getWidth(stringTrade);

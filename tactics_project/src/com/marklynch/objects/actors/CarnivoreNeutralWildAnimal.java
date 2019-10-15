@@ -1,6 +1,6 @@
 package com.marklynch.objects.actors;
 
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 import com.marklynch.ai.routines.AIRoutineForCarnivoreNeutralWildAnimal;
 import com.marklynch.level.constructs.Faction;
@@ -10,7 +10,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 
 public class CarnivoreNeutralWildAnimal extends WildAnimal {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public CarnivoreNeutralWildAnimal() {
 		super();

@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.gameover;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ui.Draggable;
@@ -24,11 +24,11 @@ public class GameOver implements Draggable, Scrollable {
 
 	transient static int bottomBorderHeight;
 
-	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> buttons = new CopyOnWriteArrayList<LevelButton>();
 
-	public ArrayList<Link> logLinks = new ArrayList<Link>();
-	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
-	public ArrayList<Link> objectiveLinks = new ArrayList<Link>();
+	public CopyOnWriteArrayList<Link> logLinks = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> conversationLinks = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> objectiveLinks = new CopyOnWriteArrayList<Link>();
 
 	static LevelButton buttonClose;
 

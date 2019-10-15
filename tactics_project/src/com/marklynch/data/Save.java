@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.gson.Gson;
 import com.marklynch.level.Level;
@@ -90,7 +90,7 @@ import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.tools.Tool;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Save {
 
@@ -161,9 +161,9 @@ public class Save {
 			// UpdatesWhenSquareContentsChange.class
 	};
 
-	public static HashMap<Class<?>, ArrayList<Field>> fieldsForEachClass = new HashMap<Class<?>, ArrayList<Field>>();
+	public static ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Field>> fieldsForEachClass = new ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Field>>();
 	public static Gson saveSerializerGson;
-	static ArrayList<PreparedStatement> preparedStatements = new ArrayList<PreparedStatement>(PreparedStatement.class);
+	static CopyOnWriteArrayList<PreparedStatement> preparedStatements = new CopyOnWriteArrayList<PreparedStatement>(PreparedStatement.class);
 	static Connection conn;
 	static long saveStartTime;
 	static long saveEndTime1;
@@ -244,9 +244,9 @@ public class Save {
 
 		// public long id;
 		// public String name;
-		// public HashMap<Faction, Integer> relationships = new HashMap<Faction,
+		// public ConcurrentHashMap<Faction, Integer> relationships = new ConcurrentHashMap<Faction,
 		// Integer>();
-		// public ArrayList<Actor> actors = new ArrayList<Actor>();
+		// public CopyOnWriteArrayList<Actor> actors = new CopyOnWriteArrayList<Actor>();
 		// public Texture imageTexture = null;
 
 		try {
@@ -289,7 +289,7 @@ public class Save {
 	}
 
 	public static PreparedStatement createPreparedStatementForInserts(Class clazz) {
-		ArrayList<Field> fields = null;
+		CopyOnWriteArrayList<Field> fields = null;
 		String insertQueryTemplate = null;
 		Object object1 = null;
 		Field field1 = null;
@@ -317,7 +317,7 @@ public class Save {
 
 			PreparedStatement preparedStatement = conn.prepareStatement(insertQueryTemplate);
 
-			for (Object object : (ArrayList<?>) clazz.getField("instances").get(null)) {// GameObject.instances
+			for (Object object : (CopyOnWriteArrayList<?>) clazz.getField("instances").get(null)) {// GameObject.instances
 
 				object1 = object;
 				int count = 1;
@@ -409,7 +409,7 @@ public class Save {
 
 	static void createTable(Class<?> clazz) {
 
-		ArrayList<Field> fields = null;
+		CopyOnWriteArrayList<Field> fields = null;
 		Statement statement = null;
 		String createTableQuery = null;
 		try {
@@ -450,17 +450,17 @@ public class Save {
 
 	}
 
-	static ArrayList<Field> getFields(Class<?> clazz) {
+	static CopyOnWriteArrayList<Field> getFields(Class<?> clazz) {
 
 		try {
-			ArrayList<Field> fields = new ArrayList<Field>(Field.class);
+			CopyOnWriteArrayList<Field> fields = new CopyOnWriteArrayList<Field>(Field.class);
 			fields.addAll(Arrays.asList(clazz.getFields()));
 
-			ArrayList<Field> declaredFields = new ArrayList<Field>(Field.class);
+			CopyOnWriteArrayList<Field> declaredFields = new CopyOnWriteArrayList<Field>(Field.class);
 			declaredFields.addAll(Arrays.asList(clazz.getDeclaredFields()));
 
 			// Remove transient and static fields, don't want to save them
-			for (Field field : (ArrayList<Field>) fields.clone()) {
+			for (Field field : (CopyOnWriteArrayList<Field>) fields) {
 				if (
 				//
 				Modifier.isTransient(field.getModifiers())

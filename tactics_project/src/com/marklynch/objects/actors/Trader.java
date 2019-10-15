@@ -15,11 +15,11 @@ import com.marklynch.objects.armor.Weapon;
 import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.Gold;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class Trader extends Human implements Comparator<GameObject> {
 
-	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>(GameObject.class);
+	public static final CopyOnWriteArrayList<GameObject> instances = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 
 	public StructureRoom shopRoom;
 	// public StructureRoom shop;
@@ -56,10 +56,10 @@ public class Trader extends Human implements Comparator<GameObject> {
 		if (shopSign == null)
 			return null;
 
-		ArrayList<GameObject> temp = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
+		CopyOnWriteArrayList<GameObject> temp = (CopyOnWriteArrayList<GameObject>) this.inventory.getGameObjects();
 		temp.remove(equipped);
 		temp.remove(broom);
-		for (GameObject gameObject : (ArrayList<GameObject>) temp.clone()) {
+		for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) temp) {
 			if (gameObject instanceof Gold)
 				temp.remove(gameObject);
 		}

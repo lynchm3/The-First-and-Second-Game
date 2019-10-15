@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs.journal;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Comparator;
 
 import com.marklynch.Game;
@@ -38,8 +38,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	public boolean showing = false;
 
 	public static Quest questToDisplayInJournal = null;
-	public static ArrayList<Quest> questsToTrack = new ArrayList<Quest>();
-	public static ArrayList<MapMarker> markersToTrack = new ArrayList<MapMarker>();
+	public static CopyOnWriteArrayList<Quest> questsToTrack = new CopyOnWriteArrayList<Quest>();
+	public static CopyOnWriteArrayList<MapMarker> markersToTrack = new CopyOnWriteArrayList<MapMarker>();
 
 	int listX;
 	int listY;
@@ -57,21 +57,21 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	transient static int bottomBorderHeight;
 
-	public static ArrayList<LevelButton> tabButtons = new ArrayList<LevelButton>();
-	public static ArrayList<LevelButton> questButtons = new ArrayList<LevelButton>();
-	public static ArrayList<LevelButton> markerButtons = new ArrayList<LevelButton>();
-	public static ArrayList<LevelButton> buttonsToMakeQuestAcive = new ArrayList<LevelButton>();
-	public static ArrayList<LevelButton> buttonsToDisplayQuest = new ArrayList<LevelButton>();
-	public static ArrayList<LevelButton> buttonsToTrackObjectives = new ArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> tabButtons = new CopyOnWriteArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> questButtons = new CopyOnWriteArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> markerButtons = new CopyOnWriteArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> buttonsToMakeQuestAcive = new CopyOnWriteArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> buttonsToDisplayQuest = new CopyOnWriteArrayList<LevelButton>();
+	public static CopyOnWriteArrayList<LevelButton> buttonsToTrackObjectives = new CopyOnWriteArrayList<LevelButton>();
 
-	public ArrayList<Link> logLinks = new ArrayList<Link>();
-	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
-	public ArrayList<Link> objectiveLinksTopRight = new ArrayList<Link>();
-	public ArrayList<Link> questLinksTopRight = new ArrayList<Link>();
-	public ArrayList<Link> markerLinksTopRight = new ArrayList<Link>();
-	public ArrayList<Link> markerLinksInJournal = new ArrayList<Link>();
+	public CopyOnWriteArrayList<Link> logLinks = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> conversationLinks = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> objectiveLinksTopRight = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> questLinksTopRight = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> markerLinksTopRight = new CopyOnWriteArrayList<Link>();
+	public CopyOnWriteArrayList<Link> markerLinksInJournal = new CopyOnWriteArrayList<Link>();
 
-	// public static ArrayList<Link> links;
+	// public static CopyOnWriteArrayList<Link> links;
 	// Close button
 	static LevelButton buttonLog;
 	static String log = "QUESTS";

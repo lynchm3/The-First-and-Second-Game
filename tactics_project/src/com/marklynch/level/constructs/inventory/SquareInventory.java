@@ -11,7 +11,7 @@ import com.marklynch.objects.inanimateobjects.GameObject;
 import com.marklynch.objects.inanimateobjects.WaterBody;
 import com.marklynch.objects.inanimateobjects.Window;
 import com.marklynch.objects.utils.UpdatableGameObject;
-import com.marklynch.utils.ArrayList;
+import com.marklynch.utils.CopyOnWriteArrayList;
 
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
 
@@ -135,7 +135,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		door = (Door) getGameObjectOfClass(Door.class);
 		waterBody = (WaterBody) getGameObjectOfClass(WaterBody.class);
 
-		for (GameObject gameObject : (ArrayList<GameObject>) gameObjects.clone()) {
+		for (GameObject gameObject : (CopyOnWriteArrayList<GameObject>) gameObjects) {
 			gameObject.squareContentsChanged();
 		}
 
@@ -159,8 +159,8 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		return false;
 	}
 
-	public ArrayList<GameObject> getGameObjectsThatFitInInventory() {
-		ArrayList<GameObject> gameObjectsThatFitInInventory = new ArrayList<GameObject>(GameObject.class);
+	public CopyOnWriteArrayList<GameObject> getGameObjectsThatFitInInventory() {
+		CopyOnWriteArrayList<GameObject> gameObjectsThatFitInInventory = new CopyOnWriteArrayList<GameObject>(GameObject.class);
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.fitsInInventory)
 				gameObjectsThatFitInInventory.add(gameObject);
