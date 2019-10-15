@@ -88,6 +88,7 @@ import com.marklynch.level.constructs.conversation.Conversation;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleed;
 import com.marklynch.level.constructs.effect.EffectBurn;
+import com.marklynch.level.constructs.effect.EffectEnsnare;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.constructs.enchantment.Enhancement;
@@ -1904,7 +1905,7 @@ public class GameObject
 
 		boolean fullyResisted = true;
 
-		if (effectToAdd instanceof EffectWet) {
+		if (effectToAdd instanceof EffectWet || effectToAdd instanceof EffectEnsnare) {
 			fullyResisted = false;
 		} else {
 			for (HIGH_LEVEL_STATS offensiveStat : Stat.OFFENSIVE_STATS) {
@@ -1926,6 +1927,9 @@ public class GameObject
 		}
 
 		if (effectToAdd instanceof EffectBleed && !(this instanceof Actor))
+			return;
+
+		if (effectToAdd instanceof EffectEnsnare && this instanceof Liquid)
 			return;
 
 		addEffectSafetyOff(effectToAdd);

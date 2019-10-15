@@ -5,6 +5,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.primary.AnimationWalk;
+import com.marklynch.level.constructs.effect.EffectEnsnare;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actors.Actor;
 import com.marklynch.objects.actors.Blind;
@@ -170,6 +171,11 @@ public class ActionMove extends Action {
 		// performer.swapCooldown--;
 		// return false;
 		// }
+
+		if (performer.hasActiveEffectOfType(EffectEnsnare.class)) {
+			disabledReason = "Ensnared";
+			return false;
+		}
 
 		if (!performer.canSeeSquare(targetSquare)) {
 			return true;

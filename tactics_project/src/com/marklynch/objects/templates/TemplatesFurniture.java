@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Stat;
 import com.marklynch.level.constructs.Stat.HIGH_LEVEL_STATS;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.effect.EffectEnsnare;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.objects.inanimateobjects.AttackableSwitch;
 import com.marklynch.objects.inanimateobjects.Bed;
@@ -334,11 +335,12 @@ public class TemplatesFurniture {
 		Templates.SPIDER_WEB.anchorX = 0;
 		Templates.SPIDER_WEB.anchorY = 0;
 		Templates.SPIDER_WEB.templateId = GameObject.generateNewTemplateId();
-//		Templates.SPIDER_WEB.effectsFromInteracting = new Effect[] { new EffectEnsnare(3) };
+		Templates.SPIDER_WEB.touchEffects = new Effect[] { new EffectEnsnare(3) };
 		Templates.SPIDER_WEB.isFloorObject = true;
 		Templates.SPIDER_WEB.drawShadow = false;
 		Templates.SPIDER_WEB.moveable = false;
 		Templates.SPIDER_WEB.fitsInInventory = false;
+		Templates.SPIDER_WEB.canShareSquare = true;
 
 		Templates.SHELF = new GameObject();
 		Templates.SHELF.name = "Shelf";
