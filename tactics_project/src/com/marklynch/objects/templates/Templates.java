@@ -405,10 +405,9 @@ public class Templates {
 
 	// TRAPS
 	public static BrokenGlass BROKEN_LAMP;
-
 	public static BrokenGlass BROKEN_GLASS;
-
 	public static Searchable DROP_HOLE;
+	public static Searchable SPIDER_WEB;
 
 	// NATURE
 	public static Tree TREE;

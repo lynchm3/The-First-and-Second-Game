@@ -218,6 +218,9 @@ public class GameObject
 	// Quest
 	public transient Quest quest;
 
+	// Should be ignored by AI
+	public boolean aiShouldIgnore = true;
+
 	// Owner
 	public transient Actor owner;
 
@@ -1961,7 +1964,7 @@ public class GameObject
 			return;
 
 		CopyOnWriteArrayList<Effect> effectsToRemove = new CopyOnWriteArrayList<Effect>(Effect.class);
-		for (Effect effect : (CopyOnWriteArrayList<Effect>) this.activeEffectsOnGameObject) {
+		for (Effect effect : this.activeEffectsOnGameObject) {
 
 			effect.activate();
 			if (effect.turnsRemaining == 0)

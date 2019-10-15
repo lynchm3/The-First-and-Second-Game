@@ -1,10 +1,10 @@
 package com.marklynch.ai.utils;
 
 import java.lang.reflect.Field;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.actions.ActionAttack;
@@ -40,7 +40,8 @@ public class AIRoutineUtils {
 		int attempts = 0;
 		int maxAttempts = 5;
 		Square randomSquare = null;
-		CopyOnWriteArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(minDistance, maxDistance);
+		CopyOnWriteArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(minDistance,
+				maxDistance);
 
 		Collections.shuffle(squaresInRange);
 
@@ -342,6 +343,9 @@ public class AIRoutineUtils {
 		if (gameObject.value < minimumValue)
 			return false;
 
+		if (gameObject.aiShouldIgnore)
+			return false;
+
 		if (ignoreQuestObjects && gameObject.quest != null)
 			return false;
 
@@ -461,7 +465,8 @@ public class AIRoutineUtils {
 
 	// public boolean moveTowardsNearestEnemyToAttack() {
 	//
-	// // CopyOnWriteArrayList<Integer> idealWeaponDistances = new CopyOnWriteArrayList<Integer>();
+	// // CopyOnWriteArrayList<Integer> idealWeaponDistances = new
+	// CopyOnWriteArrayList<Integer>();
 	// // idealWeaponDistances.add(2);
 	//
 	// // TODO this needs to be calculated based on

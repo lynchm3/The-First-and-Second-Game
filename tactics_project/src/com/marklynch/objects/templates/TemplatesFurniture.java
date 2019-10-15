@@ -325,6 +325,21 @@ public class TemplatesFurniture {
 		Templates.DROP_HOLE.moveable = false;
 		Templates.DROP_HOLE.fitsInInventory = false;
 
+		Templates.SPIDER_WEB = new Searchable();
+		Templates.SPIDER_WEB.name = "Spider Web";
+		Templates.SPIDER_WEB.setImageAndExtrapolateSize("spider_web.png");
+		Templates.SPIDER_WEB.totalHealth = Templates.SPIDER_WEB.remainingHealth = 20;
+		Templates.SPIDER_WEB.weight = 1f;
+		Templates.SPIDER_WEB.value = 1;
+		Templates.SPIDER_WEB.anchorX = 0;
+		Templates.SPIDER_WEB.anchorY = 0;
+		Templates.SPIDER_WEB.templateId = GameObject.generateNewTemplateId();
+//		Templates.SPIDER_WEB.effectsFromInteracting = new Effect[] { new EffectEnsnare(3) };
+		Templates.SPIDER_WEB.isFloorObject = true;
+		Templates.SPIDER_WEB.drawShadow = false;
+		Templates.SPIDER_WEB.moveable = false;
+		Templates.SPIDER_WEB.fitsInInventory = false;
+
 		Templates.SHELF = new GameObject();
 		Templates.SHELF.name = "Shelf";
 		Templates.SHELF.setImageAndExtrapolateSize("shelf.png");
