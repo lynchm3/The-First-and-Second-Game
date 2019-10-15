@@ -2,8 +2,8 @@ package com.marklynch.level.constructs.characterscreen;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -62,13 +62,17 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static String POISON_SHORT = "PSN ";
 	public static String BLEED_SHORT = "BLD ";
 	public static String HEALING_SHORT = "HEAL";
-	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons =
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton>
+	// highLevelStatButtons =
 	// new ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton>();
-	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNames
+	// = new
 	// ConcurrentHashMap<HIGH_LEVEL_STATS, String>();
-	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNamesShort = new
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, String>
+	// highLevelStatNamesShort = new
 	// ConcurrentHashMap<HIGH_LEVEL_STATS, String>();
-	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, Texture> highLevelStatImages = new
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, Texture>
+	// highLevelStatImages = new
 	// ConcurrentHashMap<HIGH_LEVEL_STATS, Texture>();
 
 	// Resistances
@@ -81,11 +85,14 @@ public class CharacterScreen implements Draggable, Scrollable {
 	public static String POISON_RESISTANCE = "POSION RESISTANCE";
 	public static String BLEED_RESISTANCE = "BLEEDING RESISTANCE";
 	public static String HEALING_RESISTANCE = "HEALING RESISTANCE";
-	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton> highLevelStatButtons =
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton>
+	// highLevelStatButtons =
 	// new ConcurrentHashMap<HIGH_LEVEL_STATS, LevelButton>();
-	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNames = new
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, String> highLevelStatNames
+	// = new
 	// ConcurrentHashMap<HIGH_LEVEL_STATS, String>();
-	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, Texture> highLevelStatImages = new
+	// public static ConcurrentHashMap<HIGH_LEVEL_STATS, Texture>
+	// highLevelStatImages = new
 	// ConcurrentHashMap<HIGH_LEVEL_STATS, Texture>();
 
 	public static LevelButton healthButton;
@@ -191,20 +198,20 @@ public class CharacterScreen implements Draggable, Scrollable {
 		highLevelStatImages.put(HIGH_LEVEL_STATS.PIERCE_DAMAGE, getGlobalImage("action_pierce.png", false));
 		highLevelStatImages.put(HIGH_LEVEL_STATS.FIRE_DAMAGE, getGlobalImage("action_burn.png", false));
 		highLevelStatImages.put(HIGH_LEVEL_STATS.WATER_DAMAGE, getGlobalImage("action_douse.png", false));
-		highLevelStatImages.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, getGlobalImage("action_electrical.png", false));
+		highLevelStatImages.put(HIGH_LEVEL_STATS.ELECTRICAL_DAMAGE, getGlobalImage("action_electric.png", false));
 		highLevelStatImages.put(HIGH_LEVEL_STATS.POISON_DAMAGE, getGlobalImage("action_poison.png", false));
-		highLevelStatImages.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, getGlobalImage("action_bleed.png", false));
-		highLevelStatImages.put(HIGH_LEVEL_STATS.HEALING, getGlobalImage("action_healing.png", false));
+		highLevelStatImages.put(HIGH_LEVEL_STATS.BLEED_DAMAGE, getGlobalImage("action_electric.png", false));
+		highLevelStatImages.put(HIGH_LEVEL_STATS.HEALING, getGlobalImage("action_electric.png", false));
 
 		highLevelStatImages.put(HIGH_LEVEL_STATS.SLASH_RES, getGlobalImage("action_slash.png", false));
 		highLevelStatImages.put(HIGH_LEVEL_STATS.BLUNT_RES, getGlobalImage("action_blunt.png", false));
 		highLevelStatImages.put(HIGH_LEVEL_STATS.PIERCE_RES, getGlobalImage("action_pierce.png", false));
 		highLevelStatImages.put(HIGH_LEVEL_STATS.FIRE_RES, getGlobalImage("action_burn.png", false));
 		highLevelStatImages.put(HIGH_LEVEL_STATS.WATER_RES, getGlobalImage("action_douse.png", false));
-		highLevelStatImages.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, getGlobalImage("action_electrical.png", false));
+		highLevelStatImages.put(HIGH_LEVEL_STATS.ELECTRICAL_RES, getGlobalImage("action_electric.png", false));
 		highLevelStatImages.put(HIGH_LEVEL_STATS.POISON_RES, getGlobalImage("action_poison.png", false));
-		highLevelStatImages.put(HIGH_LEVEL_STATS.BLEED_RES, getGlobalImage("action_bleed.png", false));
-		highLevelStatImages.put(HIGH_LEVEL_STATS.HEALING_RES, getGlobalImage("action_healing.png", false));
+		highLevelStatImages.put(HIGH_LEVEL_STATS.BLEED_RES, getGlobalImage("action_electric.png", false));
+		highLevelStatImages.put(HIGH_LEVEL_STATS.HEALING_RES, getGlobalImage("action_electric.png", false));
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
 			LevelButton button = new LevelButton(0, 0, Game.smallFont.getWidth(highLevelStatNames.get(statType)), 30,
@@ -310,16 +317,16 @@ public class CharacterScreen implements Draggable, Scrollable {
 
 		// BASIC STATS
 		TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE, 1f, HEALTH);
-		TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
-				1f, Level.player.remainingHealth + "/" + Level.player.totalHealth);
+		TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE, 1f,
+				Level.player.remainingHealth + "/" + Level.player.totalHealth);
 		healthButton.width = Game.smallFont.getWidth(Level.player.remainingHealth + "/" + Level.player.totalHealth);
 		drawStatY += statsLineHeight;
 
 		for (HIGH_LEVEL_STATS statType : HIGH_LEVEL_STATS.values()) {
-			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					1f, highLevelStatNamesToUse.get(statType));
-			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE,
-					1f, "" + Level.player.getEffectiveHighLevelStat(statType));
+			TextUtils.printTextWithImages(statLabelsX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE, 1f,
+					highLevelStatNamesToUse.get(statType));
+			TextUtils.printTextWithImages(statValuesX, drawStatY, Integer.MAX_VALUE, false, null, Color.WHITE, 1f,
+					"" + Level.player.getEffectiveHighLevelStat(statType));
 			highLevelStatButtons.get(statType).width = Game.smallFont
 					.getWidth("" + Level.player.getEffectiveHighLevelStat(statType));
 			drawStatY += statsLineHeight;

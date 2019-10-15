@@ -18,7 +18,8 @@ public class GroupOfActors implements Idable {
 	public String name;
 	protected transient CopyOnWriteArrayList<Actor> members = new CopyOnWriteArrayList<Actor>(Actor.class);
 	public transient Actor leader;
-	protected transient CopyOnWriteArrayList<GameObject> attackers = new CopyOnWriteArrayList<GameObject>(GameObject.class);
+	protected transient CopyOnWriteArrayList<GameObject> attackers = new CopyOnWriteArrayList<GameObject>(
+			GameObject.class);
 	public transient Quest quest;
 	public ConcurrentHashMap<Actor, Square> targetSquaresMap = new ConcurrentHashMap<Actor, Square>();
 	public CopyOnWriteArrayList<Square> targetSquares = new CopyOnWriteArrayList<Square>(Square.class);
@@ -63,7 +64,8 @@ public class GroupOfActors implements Idable {
 	public boolean update(Actor actor) {
 
 		// Manage attackers list
-		CopyOnWriteArrayList<GameObject> attackersToRemoveFromList = new CopyOnWriteArrayList<GameObject>(GameObject.class);
+		CopyOnWriteArrayList<GameObject> attackersToRemoveFromList = new CopyOnWriteArrayList<GameObject>(
+				GameObject.class);
 		for (GameObject attacker : attackers) {
 			if (attacker.remainingHealth <= 0) {
 				attackersToRemoveFromList.add(attacker);
@@ -120,7 +122,7 @@ public class GroupOfActors implements Idable {
 				if (targetSquare != null)
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 				if (actor.squareGameObjectIsOn == targetSquare)
-					targetSquaresMap.put(actor, null);
+					targetSquaresMap.remove(actor);
 
 			}
 			// AIRoutineUtils.moveTowardsSquareToBeAdjacent(leader);
